@@ -73,7 +73,7 @@ by [Minorthreat0987](http://minorthreat0987.deviantart.com/) and
 
 ## Tilesets from The Public Pokemon Tileset
 
-The Public Pokemon Tileset is licensed under CC-BY-3.0
+[The Public Pokemon Tileset](ttp://thatssowitty.deviantart.com/art/The-Public-Pokemon-Tileset-281342410) is licensed under
 [CC-BY-3.0](http://creativecommons.org/licenses/by/3.0/)
 
 This tileset consists of tiles from various artists:

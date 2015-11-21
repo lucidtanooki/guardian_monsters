@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="32" height="32" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="tuxemon" tilewidth="16" tileheight="16">
+  <image source="../spritesheets/tuxemon.png" width="1024" height="1024"/>
+ </tileset>
+ <tileset firstgid="4097" name="pokepublic" tilewidth="16" tileheight="16">
+  <image source="../spritesheets/thatssowitty_1.png" width="1024" height="1024"/>
+ </tileset>
+ <layer name="ground" width="32" height="32">
+  <data encoding="base64" compression="zlib">
+   eJzt0zEOACAIBEEslKfx/x+JHRWNiWLcS6bf5qyJGAAAG7obgRZoAn6wvqcFOgDgFdlut50wAYLqHFE=
+  </data>
+ </layer>
+ <layer name="walls" width="32" height="32">
+  <data encoding="base64" compression="zlib">
+   eJztl0EKwkAMRQd3urPbutW76EG8iAeot3KpR7IgwfJp+n8yVUT6IQxT+E2ek06w25Vy7aNLrqas/97Ho2I1Zf3Zuv+Nf92Wsmn5ivWft69Qfbi3Oo79s1PLV6zf8qs+3CMHC4/fwpPXL8jBwuNn+b1++TY/vgc5mGr58XfEczGp/azmN5/Hj1L7meXfN6UcmrdP5Wca41ek8k95h/VHcg/fkeEf5sfzjKqWH88zKvb9s/xq33ti99+n89f2P9YUFfKz+8bjxb06x5Gf3TfeHECpc3yq/yNzEHVZxfxjHJE5mM2/8P8uvyLPd5uBX1HWh/65+aP+ufiX/385/xM3WqX4
+  </data>
+ </layer>
+ <layer name="objects" width="32" height="32">
+  <data encoding="base64" compression="zlib">
+   eJztzTERADAIBLAfO1YO/pWhoRPHNTGQBAAA2OgM/zX8389/eNVfjwBh
+  </data>
+ </layer>
+ <layer name="tops" width="32" height="32">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjAJU0CnFwNAlhZumNTgJtOOUFG56qICnggwMzwQH2hWjYBQMbkCt8oaQObjMI7W8IdccapVfg7UcPME00C4YBaNgFBALiC0vCZWj5Oojtrwc6u3AwQoA0uRNlg==
+  </data>
+ </layer>
+ <objectgroup name="colliderWalls" width="32" height="32">
+  <object x="0" y="0" width="256" height="96"/>
+  <object x="288" y="0" width="224" height="96"/>
+  <object x="192" y="96" width="64" height="64"/>
+  <object x="96" y="160" width="160" height="32"/>
+  <object x="224" y="192" width="32" height="64"/>
+  <object x="304" y="192" width="80" height="16"/>
+  <object x="384" y="176" width="32" height="16"/>
+  <object x="416" y="96" width="32" height="96"/>
+  <object x="288" y="304" width="32" height="16"/>
+  <object x="32" y="304" width="128" height="32"/>
+  <object x="320" y="304" width="160" height="32"/>
+  <object x="320" y="336" width="16" height="96"/>
+  <object x="224" y="320" width="32" height="160"/>
+  <object x="288" y="480" width="224" height="32"/>
+  <object x="0" y="480" width="256" height="32"/>
+  <object x="480" y="96" width="32" height="384"/>
+  <object x="0" y="96" width="32" height="384"/>
+ </objectgroup>
+</map>

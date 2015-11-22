@@ -11,6 +11,7 @@ import org.limbusdev.monsterworld.MonsterWorld;
 import org.limbusdev.monsterworld.ecs.components.CharacterSpriteComponent;
 import org.limbusdev.monsterworld.ecs.components.DynamicBodyComponent;
 import org.limbusdev.monsterworld.ecs.components.InputComponent;
+import org.limbusdev.monsterworld.ecs.components.PositionComponent;
 import org.limbusdev.monsterworld.ecs.systems.CharacterSpriteSystem;
 import org.limbusdev.monsterworld.ecs.systems.InputSystem;
 import org.limbusdev.monsterworld.ecs.systems.OutdoorGameArea;
@@ -29,7 +30,7 @@ public class EntityComponentSystem {
     private MediaManager media;
     private OutdoorGameArea gameArea;
 
-    private Entity mainHero;
+    private Entity hero;
     private DynamicBodyComponent heroBody;
     /* ........................................................................... CONSTRUCTOR .. */
     public EntityComponentSystem(
@@ -44,12 +45,13 @@ public class EntityComponentSystem {
     }
     /* ............................................................................... METHODS .. */
     public void setUpHero() {
-        this.mainHero = new Entity();
-        mainHero.add(new CharacterSpriteComponent(media.getTextureAtlasType(TextureAtlasType.HERO)));
+        this.hero = new Entity();
+        hero.add(new CharacterSpriteComponent(media.getTextureAtlasType(TextureAtlasType.HERO)));
         this.heroBody = new DynamicBodyComponent(world, new Vector2(16,1));
-        mainHero.add(heroBody);
-        mainHero.add(new InputComponent());
-        engine.addEntity(mainHero);
+        hero.add(heroBody);
+        hero.add(new InputComponent());
+        hero.add(new PositionComponent(16,1));
+        engine.addEntity(hero);
     }
 
     public void setUpEntitySystems(OutdoorGameArea gameArea, Viewport viewport) {

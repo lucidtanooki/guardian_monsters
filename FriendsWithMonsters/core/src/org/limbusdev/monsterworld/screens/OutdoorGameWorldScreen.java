@@ -20,6 +20,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import org.limbusdev.monsterworld.MonsterWorld;
 import org.limbusdev.monsterworld.ecs.EntityComponentSystem;
 import org.limbusdev.monsterworld.ecs.systems.OutdoorGameArea;
+import org.limbusdev.monsterworld.managers.MediaManager;
 import org.limbusdev.monsterworld.utils.GlobalSettings;
 import org.limbusdev.monsterworld.utils.UnitConverter;
 
@@ -58,7 +59,7 @@ public class OutdoorGameWorldScreen implements Screen {
         this.world = new World(new Vector2(0,0), true);
         setUpRendering();
         setUpBox2D();
-        this.gameArea = new OutdoorGameArea(world, mapID);
+        this.gameArea = new OutdoorGameArea(world, mapID, game.media);
         this.ECS = new EntityComponentSystem(game, world, viewport, gameArea);
     }
 
@@ -71,6 +72,7 @@ public class OutdoorGameWorldScreen implements Screen {
     public void show() {
         this.batch = new SpriteBatch();
         Gdx.input.setInputProcessor(ECS.getInputProcessor());
+        gameArea.playMusic();
     }
 
     /**
@@ -132,7 +134,7 @@ public class OutdoorGameWorldScreen implements Screen {
      */
     @Override
     public void hide() {
-
+        gameArea.stopMusic();
     }
 
     /**
@@ -142,6 +144,7 @@ public class OutdoorGameWorldScreen implements Screen {
     public void dispose() {
         this.batch.dispose();
         this.font.dispose();
+        this.gameArea.dispose();
     }
 
     /* ............................................................................... METHODS .. */

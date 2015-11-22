@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="32" height="32" tilewidth="16" tileheight="16">
+ <properties>
+  <property name="musicIndex" value="1"/>
+  <property name="musicType" value="town"/>
+ </properties>
  <tileset firstgid="1" name="tuxemon" tilewidth="16" tileheight="16">
   <image source="../spritesheets/tuxemon.png" width="1024" height="1024"/>
  </tileset>
@@ -19,17 +23,17 @@
  </layer>
  <layer name="walls" width="32" height="32">
   <data encoding="base64" compression="zlib">
-   eJztl0luE0EUhp/sbEwG21EkEidRsoEjgGIzD0J2piVcgOEEIJkVECFlbC4BEihcwNkipIxmBxdglw1T2PK1nJIf7aK6yrIAIX7p01Pb1fXXX9VdpRZxqzkh8m7Cv+bGRU6Mp9eIts8C2vvWKtQ8qhmvb3vf6iuT3zUHmazI4XCLuyMi90Y6+7lZFLkFfdn2b8+5flH89bVeV9ccLGXa7R+W3DzNSKrykyKFyc78NtVLLf/Nk53/bZU6yZL/9HD6GN4zDx+KP+d3+R9a/JNqqHH4Ki1/49jfrG88x/XjubapzzO/UVr+2P8N/jcyredwS621TfH6m/z1xLNhU1p+rXgePhba3OY9uJN4F4y/9jVrknxWffK7/GPFY9AYf02jZH9WQ/PH63BdYdNbj/evofxD8mttz4jswC7swT4cQBM+TYl8hi/wFb7B0ZS9n5D8WrkyeyP0wwAMwhDkYYa1KUMFzsF5uFCw99Nt/io+NZiFOZiHBVgsh/Vjy2/2fZeW8VmBVViDddiASPkfjYp8H3X3Y8tv9v3Xjn1sG58d2IU92IcDaCr/M2MiZ8fc/iarLe8rNaaXifXJVbgH+mEABmEI8pV2m/t4P0jxN1ltZ7bLv4pPDWZhDuZhARYr4tRF9vBLsKnm9lTAfm20jM8KrMIarMMGRCn+/7IuT4tcgatwbfr3+z/C8zE8gaU/4P9f3Sv0/Omloi7On16q2cX520v9LfmjRA1V8v6QavuG9r1f5wj5Rtf1ByGp7zQ=
+   eJztl9tOE0Ecxv9pualAD4TEWCBwo69gaPEMMS0ULvUFPDyBJvVKJSaUw/ISmGjwBcotIaHQ1jt9Ae964/Ha36ZMOm7H2ZmmUWP4kl/+2XZ2vvlmdmeyIna1p0XeT7vX1JTIhan4GtB216O9ay1B2aGq8bq2d62uUvltc5BIinQmujyaFHk82d/PvZzIfRhJ9n7b4/p17vfX+rra5mA90Wv/LG/nVUJilZkRyc705zepmu/671/s/+8g30+S/Fcm4sfwgXn4mPs1v82/Y/CPqq6Nw1Vx+etn/mp9wzmuns21SSOO+ZXi8of+h/jfTXSfwwNtrU0K11/lr0aeDZPi8usK5+FTtscD3oOHkXdB+eu+ak2iz6pLfpt/qHAMOspfp543P6u++cN1WNIw6cjh/atr/j75dR3PizTgBE6hCS1ow+dZkS/wFb7Bd/gxa+7HJ7+uVIG9EUZhDMYhDRmYZ20KUIQFuAbXs+Z+Bs1fwqcMy7ACFViFtYJfP6b8at+3aQOfGmzCFmzDDgSe/qb8at9/Z9nHjvFpwAmcQhNa0I74X71k91dZTXnfamN6E1mfVJF7YBTGYBzSkCn22jzB+2mMv8pqOrNt/iV8yrAMK1CBVVgrilU32MNvwr42t5c99mulDXxqsAlbsA07EMT4/8+6NSdyG+7A4tyf93+O5wt4Cet/wf9cg8v3/BmmggHOn2GqPcD5O0z9K/mDSPVV9H6favqGdr1fz+Hzja7Xn4Hy7Mg=
   </data>
  </layer>
  <layer name="objects" width="32" height="32">
   <data encoding="base64" compression="zlib">
-   eJxjYBgF1AQrxFDZ2PjIYqSCpSIMDM+gOE2UsFuobT/I3qVQu59DMTpQBcqrieDmkwLWiJOuJxXkPhHcfFLAGzLspybQkRhY+0cBbUCVFANDtdTA2r17gOzfNYB2DwWAXK4/J7PcQgf1AgwMDQKk66OW/fuBdh8gw35qgf8guwUHzv5RQBpgU2BgYFcYQPsVgfYrDpz9HAoMDJwKA2e/B9BuzwG0fxSMglFAewAAeeIhLA==
+   eJxjYBgF1AQrxFDZ2PjIYqSCpSIMDM+gOE2UsFuobT/I3qVQu59DMTpQBcqrieDmkwLWiJOuJxXkPhHcfFLAGzLspybQkRhY+0cBbUCVFANDtdTA2r17gOzfNYB2DwWAXK4/J7PcohYYaPtHwcgEbAoMDOwKA2i/ItB+xYGzn0OBgYFTYeDs9wDa7TmA9o+CUTAKaA8AIQQdTg==
   </data>
  </layer>
  <layer name="tops" width="32" height="32">
   <data encoding="base64" compression="zlib">
-   eJztl0lOwzAYRn+GDXODqraqKrU7WHCAdgVb5nOAYMF4h5RpCYfohqk9QxjvAIIVwxV4CFVAiBW3cRymJz05iex8TiL/kb28yBl6ijZuqmS4+eDWBmHPXht+cyQtMpr+Oj7riOScz9duMiK3GfX5b+XeCe+zT58DjX5Natn252OCoO+rQuf5W2UsZ/6eUfDKrA08xwu8xCu8LtvJ76mI9GIf9uMADuJQxU7+JDlTOI0zOItzOI8rRZFVXMN13MDNotl8l5wqbuE27uAu7uEhWUd4jCd4inXD+XFis+4HYeqfV2fNNnzrdjwlMpHSG7+c4Dt4ZbHwfrxQUPfz80CtfsQnfI5Qt9vN12Hpw7u9i6Fe/0U6SiKd2IXdpSRn8k+rJFlvXUt7DBVewnX2uxB136Xav4W1Tfz7rqjjdVsVUcf/JF4AQ5BywA==
+   eJztl7lOw0AURR9Lwx6jKJsiJR0U1JBUpGX/DhAUrC20DlsJH5GGAEkJrVn/AQQVtFDCQSiCGA928MZ2pKOJ7Rnfsa150RgpkRM0FK3fFMnQU9ZtENg9e6n31b6oSH/04/i4JpLQ6s9dxUSuY+rj38qtZt9nhz67DvrVKMW/Ph8vsPq+Kpw8f6MMJLy/pxuMHGsDT/EMz/ECL3PB5LflRdqxAzuxC7uxJx9M/gg5oziG4ziBkziF8xmRBVzEJVzGlYy3+To5RVzHDdzELdzGPbLKuI8HeIgVj/P9JMi6b4VX/3kV1mzVtG6HIyKFiLPxcy7n8ED2oyl/lew1h/kz6bff02l1PzN31Op7HEyKDCXrrx2Rfexz/mc8vWRTn2ffvdsbH+r1X6QpK9KMLdiaDXMm/zRKmPVWD2iPocIIMfs74Xbfpdq/2bU1zPsut+Odtircjv9JPAP3nHdP
   </data>
  </layer>
  <objectgroup name="colliderWalls" width="32" height="32">
@@ -37,7 +41,7 @@
   <object x="0" y="48" width="128" height="32"/>
   <object x="128" y="48" width="160" height="16"/>
   <object x="192" y="64" width="80" height="16"/>
-  <object x="288" y="48" width="16" height="48"/>
+  <object x="299" y="48" width="3" height="48"/>
   <object x="336" y="48" width="176" height="16"/>
   <object x="304" y="80" width="16" height="16"/>
   <object x="304" y="112" width="16" height="16"/>
@@ -49,13 +53,13 @@
   <object x="48" y="240" width="32" height="32"/>
   <object x="80" y="256" width="16" height="48"/>
   <object x="128" y="272" width="16" height="32"/>
-  <object x="112" y="80" width="16" height="64"/>
+  <object x="112" y="80" width="3" height="64"/>
   <object x="128" y="112" width="32" height="32"/>
-  <object x="144" y="144" width="16" height="48"/>
-  <object x="160" y="176" width="48" height="16"/>
-  <object x="288" y="112" width="16" height="80"/>
-  <object x="304" y="192" width="96" height="32"/>
-  <object x="336" y="272" width="16" height="16"/>
+  <object x="144" y="144" width="3" height="48"/>
+  <object x="144" y="176" width="64" height="16"/>
+  <object x="299" y="112" width="3" height="80"/>
+  <object x="312" y="192" width="88" height="32"/>
+  <object x="336" y="272" width="6" height="16"/>
   <object x="416" y="256" width="16" height="48"/>
   <object x="432" y="288" width="32" height="16"/>
   <object x="272" y="336" width="48" height="32"/>
@@ -64,8 +68,22 @@
   <object x="80" y="496" width="160" height="16"/>
   <object x="272" y="480" width="240" height="32"/>
   <object x="496" y="400" width="16" height="80"/>
-  <object x="192" y="192" width="112" height="64"/>
-  <object x="192" y="256" width="48" height="32"/>
-  <object x="256" y="256" width="48" height="32"/>
+  <object x="195" y="192" width="106" height="64"/>
+  <object x="195" y="256" width="45" height="32"/>
+  <object x="256" y="256" width="45" height="32"/>
+  <object x="32" y="128" width="48" height="16"/>
+  <object x="16" y="144" width="64" height="64"/>
+  <object x="112" y="128" width="16" height="16"/>
+  <object x="224" y="288" width="16" height="32"/>
+  <object x="256" y="288" width="16" height="32"/>
+  <object x="240" y="256" width="16" height="16"/>
+ </objectgroup>
+ <objectgroup name="livingEntities" width="32" height="32">
+  <object name="person" x="96" y="224" width="16" height="16">
+   <properties>
+    <property name="moving" value="yes"/>
+    <property name="startDir" value="s"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

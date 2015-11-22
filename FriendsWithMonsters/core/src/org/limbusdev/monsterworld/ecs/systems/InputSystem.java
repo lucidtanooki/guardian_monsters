@@ -30,15 +30,12 @@ public class InputSystem extends EntitySystem implements InputProcessor {
     private ComponentMapper<InputComponent> im
             = ComponentMapper.getFor(InputComponent.class);
 
-    private float ax, ay;
     private Vector2 directionVector;
-    private Vector2 normDirectionVector;
 
     private Viewport viewport;
     /* ........................................................................... CONSTRUCTOR .. */
     public InputSystem(Viewport viewport) {
         this.directionVector = new Vector2();
-        this.normDirectionVector = new Vector2();
         this.viewport = viewport;
         Gdx.input.setInputProcessor(this);
     }
@@ -69,6 +66,9 @@ public class InputSystem extends EntitySystem implements InputProcessor {
     }
 
     public void move(Vector3 touchPos, DynamicBodyComponent body, InputComponent input) {
+        touchPos.x = Gdx.input.getX();
+        touchPos.y = Gdx.input.getY();
+        viewport.unproject(touchPos);
 
         // calculate characters main moving direction for sprite choosing
         if(Math.abs(touchPos.x - body.dynamicBody.getPosition().x)
@@ -80,30 +80,13 @@ public class InputSystem extends EntitySystem implements InputProcessor {
             else input.skyDir = SkyDirection.S;
         }
 
-        // split up velocity vector in x and y component
-        ax = (-1)*(body.dynamicBody.getPosition().x-touchPos.x);
-        ay = (-1)*(body.dynamicBody.getPosition().y-touchPos.y);
-
-        directionVector.x = ax;
-        directionVector.y = ay;
-
-        // normalize velocity vector
-        normDirectionVector.x = (ax / Vector3.len(ax, ay, 0) * 5);
-        normDirectionVector.y = (ay / Vector3.len(ax, ay, 0) * 5);
-
-        // limit maximum velocity
-        if (directionVector.len() > 4) {
-            directionVector.x = normDirectionVector.x;
-            directionVector.y = normDirectionVector.y;
+        switch(input.skyDir) {
+            case N: directionVector.set(0,3);break;
+            case W: directionVector.set(-3,0);break;
+            case E: directionVector.set(3,0);break;
+            default:directionVector.set(0, -3);break;
         }
 
-        // set velocity to zero, if below the given value
-        if(directionVector.len() < 1) {
-            directionVector.x = 0;
-            directionVector.y = 0;
-            input.moving = false;
-        } else input.moving = true;
-        body.direction = normDirectionVector;
         body.dynamicBody.setLinearVelocity(directionVector);
     }
 
@@ -144,7 +127,7 @@ public class InputSystem extends EntitySystem implements InputProcessor {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        return touchDragged(screenX,screenY,pointer);
+        return touchDragged(Gdx.input.getX(), Gdx.input.getY(),pointer);
     }
 
     @Override

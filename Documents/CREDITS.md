@@ -1,6 +1,11 @@
 
+# Music
+
+* [City Loop](http://opengameart.org/content/city-loop) by [Homingstar](http://opengameart.org/users/homingstar)
 
 # Graphics
+
+* [Character Templates](http://playerred-1.deviantart.com/art/Pokemon-Character-bases-New-174895108) by [PlayerRed-1](http://playerred-1.deviantart.com/)
 
 ## Tilesets from the Tuxemon Project
 

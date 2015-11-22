@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.ArrayMap;
 
 import org.limbusdev.monsterworld.graphics.EntitySprite;
+import org.limbusdev.monsterworld.utils.UnitConverter;
 
 /**
  * Created by georg on 22.11.15.
@@ -22,15 +23,17 @@ public class CharacterSpriteComponent implements Component {
     public CharacterSpriteComponent (TextureAtlas textureAtlas) {
         // load animation textures
         animationImgs = new ArrayMap<String,Animation>();
-        animationImgs.put("n", new Animation(.2f, textureAtlas.findRegions("n")));
-        animationImgs.put("e", new Animation(.2f, textureAtlas.findRegions("e")));
-        animationImgs.put("s", new Animation(.2f, textureAtlas.findRegions("s")));
-        animationImgs.put("w", new Animation(.2f, textureAtlas.findRegions("w")));
+        animationImgs.put("n", new Animation(.1f, textureAtlas.findRegions("n")));
+        animationImgs.put("e", new Animation(.1f, textureAtlas.findRegions("e")));
+        animationImgs.put("s", new Animation(.1f, textureAtlas.findRegions("s")));
+        animationImgs.put("w", new Animation(.1f, textureAtlas.findRegions("w")));
 
         recentAnim    = animationImgs.get("s");
         recentIdleImg = animationImgs.get("s").getKeyFrames()[0];
         this.sprite = new EntitySprite(recentIdleImg);
-        this.sprite.setSize(0.7f, 1.9f);
+        this.sprite.setSize(
+                UnitConverter.pixelsToMeters(sprite.getRegionWidth()),
+                UnitConverter.pixelsToMeters(sprite.getRegionHeight()));
     }
     /* ............................................................................... METHODS .. */
     

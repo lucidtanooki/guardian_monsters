@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="32" height="32" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="tuxemon" tilewidth="16" tileheight="16">
+  <image source="../spritesheets/tuxemon.png" width="1024" height="1024"/>
+ </tileset>
+ <tileset firstgid="4097" name="pokepublic" tilewidth="16" tileheight="16">
+  <image source="../spritesheets/thatssowitty_1.png" width="1024" height="1024"/>
+ </tileset>
+ <tileset firstgid="8193" name="limbusdev" tilewidth="16" tileheight="16">
+  <image source="../spritesheets/limbusdev_spritesheet.png" width="1024" height="1024"/>
+ </tileset>
+ <tileset firstgid="12289" name="pokebublic2" tilewidth="16" tileheight="16">
+  <image source="../spritesheets/thatssowitty_2.png" width="1024" height="1024"/>
+ </tileset>
+ <layer name="ground" width="32" height="32">
+  <data encoding="base64" compression="zlib">
+   eJztlO0KgjAUhk+Oir7xBryLLiAt/Fm3FFLRt7dUURF9eUmdQZGMqUvXVuCPB5TN88xzxusWANwcLiNkzDBR6N8jB4ajQn/RACgxlA09s5iid67JTTmhu0UAZgafLGdb4LfLECtOrQq6q08CXL8b73dKjaR3+8g1xC3hX2gvzpJmcWHcIn6ZvPx9ZKDRvw7Ngfo7FoBjqfOz/R+i21Pgr+O9bTA0iTp/FLlfjj/tPZblT1tHld+2+AQmZrwZvS5KUp2tZkhbL3YMDtJFesxz3N64ep/uV+H3NCM7N34t//7ZL5I/35rRRiA7fFN/j3T6aY92Gf0PtWB13Q==
+  </data>
+ </layer>
+ <layer name="walls" width="32" height="32">
+  <data encoding="base64" compression="zlib">
+   eJztl0luE0EUhp/sbEwG21EkEidRsoEjgGIzD0J2piVcgOEEIJkVECFlbC4BEihcwNkipIxmBxdglw1T2PK1nJIf7aK6yrIAIX7p01Pb1fXXX9VdpRZxqzkh8m7Cv+bGRU6Mp9eIts8C2vvWKtQ8qhmvb3vf6iuT3zUHmazI4XCLuyMi90Y6+7lZFLkFfdn2b8+5flH89bVeV9ccLGXa7R+W3DzNSKrykyKFyc78NtVLLf/Nk53/bZU6yZL/9HD6GN4zDx+KP+d3+R9a/JNqqHH4Ki1/49jfrG88x/XjubapzzO/UVr+2P8N/jcyredwS621TfH6m/z1xLNhU1p+rXgePhba3OY9uJN4F4y/9jVrknxWffK7/GPFY9AYf02jZH9WQ/PH63BdYdNbj/evofxD8mttz4jswC7swT4cQBM+TYl8hi/wFb7B0ZS9n5D8WrkyeyP0wwAMwhDkYYa1KUMFzsF5uFCw99Nt/io+NZiFOZiHBVgsh/Vjy2/2fZeW8VmBVViDddiASPkfjYp8H3X3Y8tv9v3Xjn1sG58d2IU92IcDaCr/M2MiZ8fc/iarLe8rNaaXifXJVbgH+mEABmEI8pV2m/t4P0jxN1ltZ7bLv4pPDWZhDuZhARYr4tRF9vBLsKnm9lTAfm20jM8KrMIarMMGRCn+/7IuT4tcgatwbfr3+z/C8zE8gaU/4P9f3Sv0/Omloi7On16q2cX520v9LfmjRA1V8v6QavuG9r1f5wj5Rtf1ByGp7zQ=
+  </data>
+ </layer>
+ <layer name="objects" width="32" height="32">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgF1AQrxFDZ2PjIYqSCpSIMDM+gOE2UsFuobT/I3qVQu59DMTpQBcqrieDmkwLWiJOuJxXkPhHcfFLAGzLspybQkRhY+0cBbUCVFANDtdTA2r17gOzfNYB2DwWAXK4/J7PcQgf1AgwMDQKk66OW/fuBdh8gw35qgf8guwUHzv5RQBpgU2BgYFcYQPsVgfYrDpz9HAoMDJwKA2e/B9BuzwG0fxSMglFAewAAeeIhLA==
+  </data>
+ </layer>
+ <layer name="tops" width="32" height="32">
+  <data encoding="base64" compression="zlib">
+   eJztl0lOwzAYRn+GDXODqraqKrU7WHCAdgVb5nOAYMF4h5RpCYfohqk9QxjvAIIVwxV4CFVAiBW3cRymJz05iex8TiL/kb28yBl6ijZuqmS4+eDWBmHPXht+cyQtMpr+Oj7riOScz9duMiK3GfX5b+XeCe+zT58DjX5Natn252OCoO+rQuf5W2UsZ/6eUfDKrA08xwu8xCu8LtvJ76mI9GIf9uMADuJQxU7+JDlTOI0zOItzOI8rRZFVXMN13MDNotl8l5wqbuE27uAu7uEhWUd4jCd4inXD+XFis+4HYeqfV2fNNnzrdjwlMpHSG7+c4Dt4ZbHwfrxQUPfz80CtfsQnfI5Qt9vN12Hpw7u9i6Fe/0U6SiKd2IXdpSRn8k+rJFlvXUt7DBVewnX2uxB136Xav4W1Tfz7rqjjdVsVUcf/JF4AQ5BywA==
+  </data>
+ </layer>
+ <objectgroup name="colliderWalls" width="32" height="32">
+  <object x="0" y="0" width="512" height="48"/>
+  <object x="0" y="48" width="128" height="32"/>
+  <object x="128" y="48" width="160" height="16"/>
+  <object x="192" y="64" width="80" height="16"/>
+  <object x="288" y="48" width="16" height="48"/>
+  <object x="336" y="48" width="176" height="16"/>
+  <object x="304" y="80" width="16" height="16"/>
+  <object x="304" y="112" width="16" height="16"/>
+  <object x="432" y="64" width="32" height="16"/>
+  <object x="448" y="80" width="32" height="16"/>
+  <object x="480" y="64" width="32" height="224"/>
+  <object x="496" y="288" width="16" height="16"/>
+  <object x="0" y="80" width="16" height="224"/>
+  <object x="48" y="240" width="32" height="32"/>
+  <object x="80" y="256" width="16" height="48"/>
+  <object x="128" y="272" width="16" height="32"/>
+  <object x="112" y="80" width="16" height="64"/>
+  <object x="128" y="112" width="32" height="32"/>
+  <object x="144" y="144" width="16" height="48"/>
+  <object x="160" y="176" width="48" height="16"/>
+  <object x="288" y="112" width="16" height="80"/>
+  <object x="304" y="192" width="96" height="32"/>
+  <object x="336" y="272" width="16" height="16"/>
+  <object x="416" y="256" width="16" height="48"/>
+  <object x="432" y="288" width="32" height="16"/>
+  <object x="272" y="336" width="48" height="32"/>
+  <object x="0" y="400" width="16" height="112"/>
+  <object x="16" y="480" width="64" height="32"/>
+  <object x="80" y="496" width="160" height="16"/>
+  <object x="272" y="480" width="240" height="32"/>
+  <object x="496" y="400" width="16" height="80"/>
+  <object x="192" y="192" width="112" height="64"/>
+  <object x="192" y="256" width="48" height="32"/>
+  <object x="256" y="256" width="48" height="32"/>
+ </objectgroup>
+</map>

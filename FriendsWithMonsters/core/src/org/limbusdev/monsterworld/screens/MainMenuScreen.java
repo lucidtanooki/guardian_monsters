@@ -1,7 +1,6 @@
 package org.limbusdev.monsterworld.screens;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -9,6 +8,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 import org.limbusdev.monsterworld.MonsterWorld;
+import org.limbusdev.monsterworld.utils.GlobalSettings;
 
 /**
  * Created by georg on 21.11.15.
@@ -26,7 +26,7 @@ public class MainMenuScreen implements Screen {
         this.game = game;
 
         camera = new OrthographicCamera();
-        viewport = new FitViewport(200, 120, camera);
+        viewport = new FitViewport(GlobalSettings.RESOLUTION_X, GlobalSettings.RESOLUTION_Y, camera);
         viewport.apply();
         camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0);
     }
@@ -52,12 +52,17 @@ public class MainMenuScreen implements Screen {
         // Update camera
         camera.update();
 
+        // If screen is touched
+        if(Gdx.input.justTouched()) {
+            setUpGame();
+        }
+
     }
 
     @Override
     public void resize(int width, int height) {
-        viewport.update(width,height);
-        camera.position.set(camera.viewportWidth/2,camera.viewportHeight/2,0);
+        viewport.update(width, height);
+        camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0);
     }
 
     @Override
@@ -78,6 +83,10 @@ public class MainMenuScreen implements Screen {
     @Override
     public void dispose() {
         // TODO
+    }
+
+    public void setUpGame() {
+        game.setScreen(new OutdoorGameWorldScreen(game, 3));
     }
     
     /* ..................................................................... GETTERS & SETTERS .. */

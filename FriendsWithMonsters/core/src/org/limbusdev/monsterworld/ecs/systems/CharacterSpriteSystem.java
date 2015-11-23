@@ -47,7 +47,7 @@ public class CharacterSpriteSystem extends EntitySystem {
 
             sprite.recentIdleImg = sprite.recentAnim.getKeyFrames()[0];
 
-            if(input.moving) sprite.sprite.setRegion(sprite.recentIdleImg);
+            if(!input.moving) sprite.sprite.setRegion(sprite.recentIdleImg);
             else sprite.sprite.setRegion(sprite.recentAnim.getKeyFrame(elapsedTime, true));
 
         }

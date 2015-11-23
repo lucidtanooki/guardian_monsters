@@ -30,12 +30,9 @@ public class InputSystem extends EntitySystem implements InputProcessor {
     private ComponentMapper<PositionComponent> pom
             = ComponentMapper.getFor(PositionComponent.class);
 
-    private Vector2 directionVector;
-
     private Viewport viewport;
     /* ........................................................................... CONSTRUCTOR .. */
     public InputSystem(Viewport viewport) {
-        this.directionVector = new Vector2();
         this.viewport = viewport;
         Gdx.input.setInputProcessor(this);
     }
@@ -50,7 +47,6 @@ public class InputSystem extends EntitySystem implements InputProcessor {
         for (Entity entity : entities) {
             InputComponent input = im.get(entity);
             PositionComponent position = pom.get(entity);
-
             makeOneStep(position, input, deltaTime);
         }
     }
@@ -102,6 +98,11 @@ public class InputSystem extends EntitySystem implements InputProcessor {
                 case W: if(position.x == position.nextX) input.moving = false;break;
                 default: if(position.y == position.nextY) input.moving = false;break;
             }
+
+            // Go on if finger is still on screen
+            if(!input.moving)
+                if(Gdx.input.isTouched())
+                    input.startMoving = true;
         }
     }
 

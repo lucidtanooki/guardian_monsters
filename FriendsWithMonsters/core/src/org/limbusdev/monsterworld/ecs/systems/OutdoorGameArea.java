@@ -9,14 +9,15 @@ import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 
 import org.limbusdev.monsterworld.ecs.components.PositionComponent;
 import org.limbusdev.monsterworld.enums.MusicType;
+import org.limbusdev.monsterworld.geometry.WarpPoint;
 import org.limbusdev.monsterworld.managers.MediaManager;
 import org.limbusdev.monsterworld.rendering.OrthogonalTiledMapAndEntityRenderer;
-import org.limbusdev.monsterworld.utils.GlobalSettings;
 
 /**
  * Contains logic and information about one game world area like a forest or a path. One
@@ -31,12 +32,16 @@ public class OutdoorGameArea {
     private MediaManager media;
     private Music bgMusic;
     private Array<Rectangle> colliders;
+    private Array<WarpPoint> warpPoints;
+    public PositionComponent startPosition;
 
     /* ........................................................................... CONSTRUCTOR .. */
-    public OutdoorGameArea(int areaID, MediaManager media) {
+    public OutdoorGameArea(int areaID, MediaManager media, int startPosID) {
         this.media = media;
+        this.startPosition = new PositionComponent(0,0,0,0);
         this.colliders = new Array<Rectangle>();
-        setUpTiledMap(areaID);
+        this.warpPoints = new Array<WarpPoint>();
+        setUpTiledMap(areaID, startPosID);
         this.mapRenderer = new OrthogonalTiledMapAndEntityRenderer(tiledMap, this);
     }
     /* ............................................................................... METHODS .. */
@@ -57,7 +62,7 @@ public class OutdoorGameArea {
         shape.end();
     }
 
-    public void setUpTiledMap(int areaID) {
+    public void setUpTiledMap(int areaID, int startFieldID) {
 
         tiledMap = new TmxMapLoader().load("tilemaps/" + areaID + ".tmx");
         // create static bodies from colliders
@@ -66,6 +71,25 @@ public class OutdoorGameArea {
             r = ((RectangleMapObject) mo).getRectangle();
             colliders.add(r);
         }
+
+
+        for(MapObject mo : tiledMap.getLayers().get("sensors").getObjects()) {
+            if(mo.getName().equals("warpField"))
+                warpPoints.add(new WarpPoint(
+                        Integer.parseInt(mo.getProperties().get("targetWarpPointID", String.class)),
+                        ((RectangleMapObject) mo).getRectangle(),
+                        Integer.parseInt(mo.getProperties().get("targetID", String.class)))
+                );
+            if(mo.getName().equals("startField")) {
+                if(Integer.parseInt(mo.getProperties().get("fieldID", String.class))
+                        == startFieldID) {
+                    Rectangle field = ((RectangleMapObject)mo).getRectangle();
+                    startPosition.x = MathUtils.round(field.x);
+                    startPosition.y = MathUtils.round(field.y);
+                }
+            }
+        }
+
 
         // Set background music
         String musicType = tiledMap.getProperties().get("musicType", String.class);
@@ -96,5 +120,9 @@ public class OutdoorGameArea {
 
     public Array<Rectangle> getColliders() {
         return colliders;
+    }
+
+    public Array<WarpPoint> getWarpPoints() {
+        return warpPoints;
     }
 }

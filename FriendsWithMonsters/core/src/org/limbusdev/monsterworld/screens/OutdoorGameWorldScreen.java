@@ -45,10 +45,10 @@ public class OutdoorGameWorldScreen implements Screen {
 
 
     /* ........................................................................... CONSTRUCTOR .. */
-    public OutdoorGameWorldScreen(final MonsterWorld game, int mapID) {
+    public OutdoorGameWorldScreen(final MonsterWorld game, int mapID, int startPosID) {
         this.game = game;
         setUpRendering();
-        this.gameArea = new OutdoorGameArea(mapID, game.media);
+        this.gameArea = new OutdoorGameArea(mapID, game.media, startPosID);
         this.ECS = new EntityComponentSystem(game, viewport, gameArea);
     }
 
@@ -83,7 +83,7 @@ public class OutdoorGameWorldScreen implements Screen {
         // Tiled Map
         gameArea.render(camera);
         ECS.render(batch, shpRend);
-        gameArea.renderDebugging(shpRend);
+        if(GlobalSettings.DEBUGGING_ON)gameArea.renderDebugging(shpRend);
 
         // ............................................................................... RENDERING
 

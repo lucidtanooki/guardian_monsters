@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="32" height="32" tilewidth="16" tileheight="16">
+ <properties>
+  <property name="musicIndex" value="1"/>
+  <property name="musicType" value="town"/>
+ </properties>
  <tileset firstgid="1" name="tuxemon" tilewidth="16" tileheight="16">
   <image source="../spritesheets/tuxemon.png" width="1024" height="1024"/>
  </tileset>
@@ -44,5 +48,29 @@
   <object x="0" y="480" width="256" height="32"/>
   <object x="480" y="96" width="32" height="384"/>
   <object x="0" y="96" width="32" height="384"/>
+ </objectgroup>
+ <objectgroup name="sensors" width="32" height="32">
+  <object name="startField" x="256" y="16" width="16" height="16">
+   <properties>
+    <property name="fieldID" value="1"/>
+   </properties>
+  </object>
+  <object name="startField" x="272" y="16" width="16" height="16">
+   <properties>
+    <property name="fieldID" value="2"/>
+   </properties>
+  </object>
+  <object name="warpField" x="256" y="0" width="16" height="16">
+   <properties>
+    <property name="targetID" value="3"/>
+    <property name="targetWarpPointID" value="1"/>
+   </properties>
+  </object>
+  <object name="warpField" x="272" y="0" width="16" height="16">
+   <properties>
+    <property name="targetID" value="3"/>
+    <property name="targetWarpPointID" value="2"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

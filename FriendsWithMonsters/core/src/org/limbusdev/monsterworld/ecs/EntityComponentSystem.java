@@ -6,23 +6,22 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 import org.limbusdev.monsterworld.MonsterWorld;
-import org.limbusdev.monsterworld.ecs.components.CharacterSpriteComponent;
-import org.limbusdev.monsterworld.ecs.components.InputComponent;
+import org.limbusdev.monsterworld.ecs.components.ComponentRetreiver;
 import org.limbusdev.monsterworld.ecs.components.PositionComponent;
+import org.limbusdev.monsterworld.ecs.entities.HeroEntity;
 import org.limbusdev.monsterworld.ecs.systems.CharacterSpriteSystem;
 import org.limbusdev.monsterworld.ecs.systems.DebuggingSystem;
 import org.limbusdev.monsterworld.ecs.systems.InputSystem;
+import org.limbusdev.monsterworld.ecs.systems.MovementSystem;
 import org.limbusdev.monsterworld.ecs.systems.OutdoorGameArea;
 import org.limbusdev.monsterworld.ecs.systems.PositionSynchroSystem;
 import org.limbusdev.monsterworld.ecs.systems.SpriteSystem;
-import org.limbusdev.monsterworld.enums.TextureAtlasType;
 import org.limbusdev.monsterworld.managers.MediaManager;
+import org.limbusdev.monsterworld.screens.OutdoorGameWorldScreen;
 import org.limbusdev.monsterworld.utils.GlobalSettings;
-import org.limbusdev.monsterworld.utils.UnitConverter;
 
 /**
  * Created by georg on 21.11.15.
@@ -31,32 +30,26 @@ public class EntityComponentSystem {
     /* ............................................................................ ATTRIBUTES .. */
     private Engine engine;
     private MediaManager media;
-    private OutdoorGameArea gameArea;
-
-    private Entity hero;
+    private EntityFactory entityFactory;
     private PositionComponent heroPosition;
+    private MonsterWorld game;
+    private OutdoorGameArea gameArea;
     /* ........................................................................... CONSTRUCTOR .. */
     public EntityComponentSystem(
             MonsterWorld game, Viewport viewport, OutdoorGameArea gameArea
     ) {
         this.media = game.media;
-        this.engine = new Engine();
+        this.game = game;
         this.gameArea = gameArea;
+        this.engine = new Engine();
+        this.entityFactory = new EntityFactory(engine, media);
         setUpHero();
         setUpEntitySystems(gameArea, viewport);
     }
     /* ............................................................................... METHODS .. */
     public void setUpHero() {
-        this.hero = new Entity();
-        hero.add(new CharacterSpriteComponent(media.getTextureAtlasType(TextureAtlasType.HERO)));
-        hero.add(new InputComponent());
-        heroPosition = new PositionComponent(
-                UnitConverter.tilesToPixels(16),
-                UnitConverter.tilesToPixels(1),
-                UnitConverter.tilesToPixels(1),
-                UnitConverter.tilesToPixels(1));
-        hero.add(heroPosition);
-        engine.addEntity(hero);
+        Entity hero = entityFactory.createHero(gameArea.startPosition);
+        this.heroPosition = ComponentRetreiver.getPositionComponent(hero);
     }
 
     public void setUpEntitySystems(OutdoorGameArea gameArea, Viewport viewport) {
@@ -80,10 +73,21 @@ public class EntityComponentSystem {
         characterSpriteSystem.addedToEngine(engine);
         engine.addSystem(characterSpriteSystem);
 
+        // Movement System
+        MovementSystem movementSystem = new MovementSystem(this, gameArea.getWarpPoints());
+        movementSystem.addedToEngine(engine);
+        engine.addSystem(movementSystem);
+
         // Debugging
         DebuggingSystem debuggingSystem = new DebuggingSystem();
         debuggingSystem.addedToEngine(engine);
         engine.addSystem(debuggingSystem);
+    }
+
+    public void deleteGameAreasEntities() {
+        for(Entity e : engine.getEntities())
+            if(!(e instanceof HeroEntity))
+                engine.removeEntity(e);
     }
 
     public void update(float delta) {
@@ -92,6 +96,10 @@ public class EntityComponentSystem {
 
     public void render(Batch batch, ShapeRenderer shape) {
         if(GlobalSettings.DEBUGGING_ON) engine.getSystem(DebuggingSystem.class).render(shape);
+    }
+
+    public void changeGameArea(int mapID, int startFieldID) {
+        game.setScreen(new OutdoorGameWorldScreen(game, mapID, startFieldID));
     }
     /* ..................................................................... GETTERS & SETTERS .. */
     public InputProcessor getInputProcessor() {

@@ -86,10 +86,31 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="sensoren" width="32" height="32">
+ <objectgroup name="sensors" width="32" height="32">
   <object name="sensor" x="0" y="304" width="16" height="96"/>
   <object name="sensor" x="496" y="304" width="16" height="96"/>
-  <object name="sensor" x="240" y="496" width="32" height="16"/>
+  <object name="warpField" x="240" y="496" width="16" height="16">
+   <properties>
+    <property name="targetID" value="2"/>
+    <property name="targetWarpPointID" value="1"/>
+   </properties>
+  </object>
   <object name="sensor" x="240" y="272" width="16" height="16"/>
+  <object name="startField" x="240" y="480" width="16" height="16">
+   <properties>
+    <property name="fieldID" value="1"/>
+   </properties>
+  </object>
+  <object name="startField" x="256" y="480" width="16" height="16">
+   <properties>
+    <property name="fieldID" value="2"/>
+   </properties>
+  </object>
+  <object name="warpField" x="256" y="496" width="16" height="16">
+   <properties>
+    <property name="targetID" value="2"/>
+    <property name="targetWarpPointID" value="2"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

@@ -86,7 +86,7 @@ public class MainMenuScreen implements Screen {
     }
 
     public void setUpGame() {
-        game.setScreen(new OutdoorGameWorldScreen(game, 3));
+        game.setScreen(new OutdoorGameWorldScreen(game, 3, 1));
     }
     
     /* ..................................................................... GETTERS & SETTERS .. */

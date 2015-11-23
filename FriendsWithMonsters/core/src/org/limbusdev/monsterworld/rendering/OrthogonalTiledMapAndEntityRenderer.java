@@ -21,8 +21,8 @@ public class OrthogonalTiledMapAndEntityRenderer extends OrthogonalTiledMapRende
     private Array<EntitySprite> sprites;
     /* ........................................................................... CONSTRUCTOR .. */
     public OrthogonalTiledMapAndEntityRenderer(
-            TiledMap map, float pixelsPerMeter, OutdoorGameArea gameArea) {
-        super(map, 1/pixelsPerMeter);
+            TiledMap map, OutdoorGameArea gameArea) {
+        super(map, 1);
         this.gameArea = gameArea;
         this.sprites = new Array<EntitySprite>();
     }

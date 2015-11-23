@@ -9,7 +9,6 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 
 import org.limbusdev.monsterworld.MonsterWorld;
 import org.limbusdev.monsterworld.ecs.components.CharacterSpriteComponent;
-import org.limbusdev.monsterworld.ecs.components.DynamicBodyComponent;
 import org.limbusdev.monsterworld.ecs.components.InputComponent;
 import org.limbusdev.monsterworld.ecs.components.PositionComponent;
 import org.limbusdev.monsterworld.ecs.systems.CharacterSpriteSystem;
@@ -19,6 +18,7 @@ import org.limbusdev.monsterworld.ecs.systems.PositionSynchroSystem;
 import org.limbusdev.monsterworld.ecs.systems.SpriteSystem;
 import org.limbusdev.monsterworld.enums.TextureAtlasType;
 import org.limbusdev.monsterworld.managers.MediaManager;
+import org.limbusdev.monsterworld.utils.UnitConverter;
 
 /**
  * Created by georg on 21.11.15.
@@ -26,18 +26,16 @@ import org.limbusdev.monsterworld.managers.MediaManager;
 public class EntityComponentSystem {
     /* ............................................................................ ATTRIBUTES .. */
     private Engine engine;
-    private World world;
     private MediaManager media;
     private OutdoorGameArea gameArea;
 
     private Entity hero;
-    private DynamicBodyComponent heroBody;
+    private PositionComponent heroPosition;
     /* ........................................................................... CONSTRUCTOR .. */
     public EntityComponentSystem(
-            MonsterWorld game, World world, Viewport viewport, OutdoorGameArea gameArea
+            MonsterWorld game, Viewport viewport, OutdoorGameArea gameArea
     ) {
         this.media = game.media;
-        this.world = world;
         this.engine = new Engine();
         this.gameArea = gameArea;
         setUpHero();
@@ -47,10 +45,13 @@ public class EntityComponentSystem {
     public void setUpHero() {
         this.hero = new Entity();
         hero.add(new CharacterSpriteComponent(media.getTextureAtlasType(TextureAtlasType.HERO)));
-        this.heroBody = new DynamicBodyComponent(world, new Vector2(16,1));
-        hero.add(heroBody);
         hero.add(new InputComponent());
-        hero.add(new PositionComponent(16,1));
+        heroPosition = new PositionComponent(
+                UnitConverter.metersToPixels(16),
+                UnitConverter.metersToPixels(1),
+                UnitConverter.metersToPixels(1),
+                UnitConverter.metersToPixels(1));
+        hero.add(heroPosition);
         engine.addEntity(hero);
     }
 
@@ -85,6 +86,6 @@ public class EntityComponentSystem {
     }
 
     public Vector2 getHeroPosition() {
-        return this.heroBody.dynamicBody.getPosition();
+        return new Vector2(heroPosition.x, heroPosition.y);
     }
 }

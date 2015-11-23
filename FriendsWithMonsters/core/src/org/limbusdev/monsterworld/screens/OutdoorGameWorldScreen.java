@@ -20,11 +20,9 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import org.limbusdev.monsterworld.MonsterWorld;
 import org.limbusdev.monsterworld.ecs.EntityComponentSystem;
 import org.limbusdev.monsterworld.ecs.systems.OutdoorGameArea;
-import org.limbusdev.monsterworld.managers.MediaManager;
 import org.limbusdev.monsterworld.utils.GlobalSettings;
 import org.limbusdev.monsterworld.utils.UnitConverter;
 
-import javax.print.attribute.standard.OutputDeviceAssigned;
 
 import box2dLight.RayHandler;
 
@@ -36,31 +34,22 @@ public class OutdoorGameWorldScreen implements Screen {
     private final MonsterWorld  game;
 
     // Renderers and Cameras
-    private Box2DDebugRenderer  debugRenderer;
     public  OrthographicCamera  camera;
     private Viewport            viewport;
     private SpriteBatch         batch;
     private ShapeRenderer       shpRend;
     private BitmapFont          font;
 
-    private float               elapsedTime = 0;
-
     private OutdoorGameArea gameArea;
     private EntityComponentSystem ECS;
-
-    // Physics
-    private World world;
 
 
     /* ........................................................................... CONSTRUCTOR .. */
     public OutdoorGameWorldScreen(final MonsterWorld game, int mapID) {
-        Box2D.init();
         this.game = game;
-        this.world = new World(new Vector2(0,0), true);
         setUpRendering();
-        setUpBox2D();
-        this.gameArea = new OutdoorGameArea(world, mapID, game.media);
-        this.ECS = new EntityComponentSystem(game, world, viewport, gameArea);
+        this.gameArea = new OutdoorGameArea(mapID, game.media);
+        this.ECS = new EntityComponentSystem(game, viewport, gameArea);
     }
 
     /* ........................................................................ LIBGDX METHODS .. */
@@ -94,13 +83,9 @@ public class OutdoorGameWorldScreen implements Screen {
         // Tiled Map
         gameArea.render(camera);
 
-        // Box2D Debugging
-//        if(GlobalSettings.DEBUGGING_ACTIVE) debugRenderer.render(world, camera.combined);
-
         // ............................................................................... RENDERING
 
         ECS.update(delta);
-        world.step(1 / 45f, 6, 2);    // time step at which world is updated
     }
 
     /**
@@ -153,8 +138,9 @@ public class OutdoorGameWorldScreen implements Screen {
         // Rendering ...............................................................................
         camera   = new OrthographicCamera();    // set up the camera and viewport
         viewport = new FitViewport(
-                UnitConverter.pixelsToMeters(GlobalSettings.RESOLUTION_X),
-                UnitConverter.pixelsToMeters(GlobalSettings.RESOLUTION_Y), camera);
+                UnitConverter.pixelsToMeters(GlobalSettings.RESOLUTION_X)/GlobalSettings.zoom,
+                UnitConverter.pixelsToMeters(GlobalSettings.RESOLUTION_Y)/GlobalSettings.zoom,
+                camera);
         viewport.apply();
         camera.position.set(camera.viewportWidth/2, camera.viewportHeight/2, 0); // center camera
 
@@ -164,20 +150,12 @@ public class OutdoorGameWorldScreen implements Screen {
         font.setColor(Color.WHITE);
     }
 
-    private void setUpBox2D() {
-        // Set up World and Box2D-Renderer .........................................................
-        this.debugRenderer = new Box2DDebugRenderer();  // set up Box2D-Debugger, for drawing bodies
-    }
-
     private void updateCamera() {
         // project to camera
         camera.position.set(ECS.getHeroPosition().x, ECS.getHeroPosition().y, 0);
         batch.  setProjectionMatrix(camera.combined);
         shpRend.setProjectionMatrix(camera.combined);
         camera.update();
-
-        // Animation time calculation
-        elapsedTime += Gdx.graphics.getDeltaTime(); // add time between frames
     }
     /* ..................................................................... GETTERS & SETTERS .. */
 }

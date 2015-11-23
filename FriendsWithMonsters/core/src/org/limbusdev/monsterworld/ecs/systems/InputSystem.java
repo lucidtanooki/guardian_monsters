@@ -7,15 +7,16 @@ import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.utils.TimeUtils;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-import org.limbusdev.monsterworld.ecs.components.DynamicBodyComponent;
 import org.limbusdev.monsterworld.ecs.components.InputComponent;
+import org.limbusdev.monsterworld.ecs.components.PositionComponent;
 import org.limbusdev.monsterworld.enums.SkyDirection;
+import org.limbusdev.monsterworld.utils.GlobalSettings;
 
 /**
  * Created by georg on 22.11.15.
@@ -23,12 +24,11 @@ import org.limbusdev.monsterworld.enums.SkyDirection;
 public class InputSystem extends EntitySystem implements InputProcessor {
     /* ............................................................................ ATTRIBUTES .. */
     private ImmutableArray<Entity> entities;
-    private float elapsedTime = 0;
 
-    private ComponentMapper<DynamicBodyComponent> pm
-            = ComponentMapper.getFor(DynamicBodyComponent.class);
     private ComponentMapper<InputComponent> im
             = ComponentMapper.getFor(InputComponent.class);
+    private ComponentMapper<PositionComponent> pom
+            = ComponentMapper.getFor(PositionComponent.class);
 
     private Vector2 directionVector;
 
@@ -42,82 +42,77 @@ public class InputSystem extends EntitySystem implements InputProcessor {
     /* ............................................................................... METHODS .. */
     public void addedToEngine(Engine engine) {
         entities = engine.getEntitiesFor(Family.all(
-                DynamicBodyComponent.class,
-                InputComponent.class).get());
+                InputComponent.class,
+                PositionComponent.class).get());
     }
 
     public void update(float deltaTime) {
-        elapsedTime += deltaTime;
         for (Entity entity : entities) {
-            DynamicBodyComponent body = pm.get(entity);
             InputComponent input = im.get(entity);
+            PositionComponent position = pom.get(entity);
 
-            if(input.moving) move(input.touchPos, body, input);
-                /* Keyboard Input */
-//                switch(input.direction) {
-//                    case NORTH: body.dynamicBody.setLinearVelocity(0,5);break;
-//                    case SOUTH: body.dynamicBody.setLinearVelocity(0,-5);break;
-//                    case EAST: body.dynamicBody.setLinearVelocity(5,0);break;
-//                    case WEST: body.dynamicBody.setLinearVelocity(-5,0);break;
-//                    default: body.dynamicBody.setLinearVelocity(0,0);break;
-//                }
-            else body.dynamicBody.setLinearVelocity(0,0);
+            makeOneStep(position, input, deltaTime);
         }
     }
 
-    public void move(Vector3 touchPos, DynamicBodyComponent body, InputComponent input) {
-        touchPos.x = Gdx.input.getX();
-        touchPos.y = Gdx.input.getY();
-        viewport.unproject(touchPos);
+    public void makeOneStep(PositionComponent position, InputComponent input, float deltaTime) {
+        if(input.startMoving) {
+            input.moving = true;
+            input.startMoving = false;
 
-        // calculate characters main moving direction for sprite choosing
-        if(Math.abs(touchPos.x - body.dynamicBody.getPosition().x)
-                > Math.abs(touchPos.y - body.dynamicBody.getPosition().y)) {
-            if(touchPos.x > body.dynamicBody.getPosition().x) input.skyDir = SkyDirection.E;
-            else input.skyDir = SkyDirection.W;
-        } else {
-            if(touchPos.y > body.dynamicBody.getPosition().y) input.skyDir = SkyDirection.N;
-            else input.skyDir = SkyDirection.S;
+            // Define direction
+            input.touchPos.x = Gdx.input.getX();
+            input.touchPos.y = Gdx.input.getY();
+            viewport.unproject(input.touchPos);
+
+            // calculate characters main moving direction for sprite choosing
+            if(new Rectangle(position.x, position.y, 1, 1).contains(input.touchPos.x, input
+                    .touchPos.y)) return;
+
+            if(Math.abs(input.touchPos.x - position.x+.5)
+                    > Math.abs(input.touchPos.y - position.y+.5)) {
+                if(input.touchPos.x > position.x+.5) input.skyDir = SkyDirection.E;
+                else input.skyDir = SkyDirection.W;
+            } else {
+                if(input.touchPos.y > position.y+.5) input.skyDir = SkyDirection.N;
+                else input.skyDir = SkyDirection.S;
+            }
+
+            switch(input.skyDir) {
+                case N: position.nextX=position.x;position.nextY = position.y + 16;break;
+                case W: position.nextX=position.x - 16;position.nextY = position.y;break;
+                case E: position.nextX=position.x + 16;position.nextY = position.y;break;
+                default:position.nextX=position.x;position.nextY = position.y - 16;break;
+            }
+            position.lastPixelStep = TimeUtils.millis();
         }
 
-        switch(input.skyDir) {
-            case N: directionVector.set(0,3);break;
-            case W: directionVector.set(-3,0);break;
-            case E: directionVector.set(3,0);break;
-            default:directionVector.set(0, -3);break;
-        }
+        if(input.moving && TimeUtils.timeSinceMillis(position.lastPixelStep) > GlobalSettings.ONE_STEPDURATION_MS) {
+            switch(input.skyDir) {
+                case N: position.y += 1;break;
+                case W: position.x -= 1;break;
+                case E: position.x += 1;break;
+                default:position.y -= 1;break;
+            }
+            position.lastPixelStep = TimeUtils.millis();
 
-        body.dynamicBody.setLinearVelocity(directionVector);
+            switch (input.skyDir) {
+                case N: if(position.y == position.nextY) input.moving = false;break;
+                case E: if(position.x == position.nextX) input.moving = false;break;
+                case W: if(position.x == position.nextX) input.moving = false;break;
+                default: if(position.y == position.nextY) input.moving = false;break;
+            }
+        }
     }
 
     @Override
     public boolean keyDown(int keycode) {
-        for (Entity entity : entities) {
-            InputComponent input = im.get(entity);
-            switch(keycode) {
-                case Input.Keys.UP:     input.skyDir = SkyDirection.N;break;
-                case Input.Keys.LEFT:   input.skyDir = SkyDirection.W;break;
-                case Input.Keys.RIGHT:  input.skyDir = SkyDirection.E;break;
-                case Input.Keys.DOWN:   input.skyDir = SkyDirection.S;break;
-                case Input.Keys.A:
-                    System.out.println("Attacking!");
-                    break;
-                default:break;
-            }
-            if(keycode != Input.Keys.A) input.moving = true;
-        }
-        return true;
+        return false;
     }
 
     @Override
     public boolean keyUp(int keycode) {
-        for (Entity entity : entities) {
-            InputComponent input = im.get(entity);
-            if (keycode == Input.Keys.A) {
-                // TODO
-            }
-        }
-        return true;
+        return false;
     }
 
     @Override
@@ -127,14 +122,15 @@ public class InputSystem extends EntitySystem implements InputProcessor {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        return touchDragged(Gdx.input.getX(), Gdx.input.getY(),pointer);
+        touchDragged(screenX, screenY, pointer);
+        return true;
     }
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
         for (Entity entity : entities) {
             InputComponent input = im.get(entity);
-            input.moving = false;
+            input.startMoving = false;
         }
         return true;
     }
@@ -143,10 +139,9 @@ public class InputSystem extends EntitySystem implements InputProcessor {
     public boolean touchDragged(int screenX, int screenY, int pointer) {
         for (Entity entity : entities) {
             InputComponent input = im.get(entity);
-            input.touchPos.x = screenX;
-            input.touchPos.y = screenY;
-            viewport.unproject(input.touchPos);
-            input.moving = true;
+            if(!input.moving) {
+                input.startMoving = true;
+            }
         }
         return true;
     }

@@ -86,4 +86,10 @@
    </properties>
   </object>
  </objectgroup>
+ <objectgroup name="sensoren" width="32" height="32">
+  <object name="sensor" x="0" y="304" width="16" height="96"/>
+  <object name="sensor" x="496" y="304" width="16" height="96"/>
+  <object name="sensor" x="240" y="496" width="32" height="16"/>
+  <object name="sensor" x="240" y="272" width="16" height="16"/>
+ </objectgroup>
 </map>

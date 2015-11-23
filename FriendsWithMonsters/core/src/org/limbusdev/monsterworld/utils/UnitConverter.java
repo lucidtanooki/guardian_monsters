@@ -9,11 +9,11 @@ public class UnitConverter {
     /* ........................................................................... CONSTRUCTOR .. */
     
     /* ............................................................................... METHODS .. */
-    public static float pixelsToMeters(float pixels) {
+    public static int pixelsToMeters(int pixels) {
         return pixels/ GlobalSettings.PIXELS_PER_METER;
     }
 
-    public static float metersToPixels(float meters) {
+    public static int metersToPixels(int meters) {
         return meters*GlobalSettings.PIXELS_PER_METER;
     }
     /* ..................................................................... GETTERS & SETTERS .. */

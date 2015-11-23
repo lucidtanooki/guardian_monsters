@@ -14,11 +14,15 @@ public class InputComponent implements Component {
     public SkyDirection skyDir;
     public boolean moving;
     public Vector3 touchPos;
+    public long startedMoving;
+    public boolean startMoving;
     /* ........................................................................... CONSTRUCTOR .. */
     public InputComponent() {
         skyDir = SkyDirection.S;
         moving = false;
         this.touchPos = new Vector3(0,0,0);
+        this.startedMoving = 0;
+        this.startMoving = false;
     }
     /* ............................................................................... METHODS .. */
     

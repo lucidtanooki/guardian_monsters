@@ -9,7 +9,6 @@ import com.badlogic.ashley.utils.ImmutableArray;
 
 import org.limbusdev.monsterworld.ecs.components.CharacterSpriteComponent;
 import org.limbusdev.monsterworld.ecs.components.InputComponent;
-import org.limbusdev.monsterworld.ecs.components.PositionComponent;
 
 /**
  * Created by georg on 22.11.15.

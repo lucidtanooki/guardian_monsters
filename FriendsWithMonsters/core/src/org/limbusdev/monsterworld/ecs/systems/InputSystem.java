@@ -31,9 +31,11 @@ public class InputSystem extends EntitySystem implements InputProcessor {
             = ComponentMapper.getFor(PositionComponent.class);
 
     private Viewport viewport;
+    private OutdoorGameArea gameArea;
     /* ........................................................................... CONSTRUCTOR .. */
-    public InputSystem(Viewport viewport) {
+    public InputSystem(Viewport viewport, OutdoorGameArea gameArea) {
         this.viewport = viewport;
+        this.gameArea = gameArea;
         Gdx.input.setInputProcessor(this);
     }
     /* ............................................................................... METHODS .. */
@@ -53,24 +55,24 @@ public class InputSystem extends EntitySystem implements InputProcessor {
 
     public void makeOneStep(PositionComponent position, InputComponent input, float deltaTime) {
         if(input.startMoving) {
-            input.moving = true;
-            input.startMoving = false;
-
             // Define direction
             input.touchPos.x = Gdx.input.getX();
             input.touchPos.y = Gdx.input.getY();
             viewport.unproject(input.touchPos);
 
             // calculate characters main moving direction for sprite choosing
-            if(new Rectangle(position.x, position.y, 1, 1).contains(input.touchPos.x, input
-                    .touchPos.y)) return;
+            if(new Rectangle(position.x, position.y, position.width, position.height)
+                    .contains(input.touchPos.x, input.touchPos.y)) return;
 
-            if(Math.abs(input.touchPos.x - position.x+.5)
-                    > Math.abs(input.touchPos.y - position.y+.5)) {
-                if(input.touchPos.x > position.x+.5) input.skyDir = SkyDirection.E;
+            // Define direction of movement
+            if(Math.abs(input.touchPos.x - (position.x+GlobalSettings.TILE_SIZE/2))
+                    > Math.abs(input.touchPos.y - (position.y+GlobalSettings.TILE_SIZE/2))) {
+                if(input.touchPos.x > position.x+GlobalSettings.TILE_SIZE/2)
+                    input.skyDir = SkyDirection.E;
                 else input.skyDir = SkyDirection.W;
             } else {
-                if(input.touchPos.y > position.y+.5) input.skyDir = SkyDirection.N;
+                if(input.touchPos.y > position.y+GlobalSettings.TILE_SIZE/2)
+                    input.skyDir = SkyDirection.N;
                 else input.skyDir = SkyDirection.S;
             }
 
@@ -80,7 +82,17 @@ public class InputSystem extends EntitySystem implements InputProcessor {
                 case E: position.nextX=position.x + 16;position.nextY = position.y;break;
                 default:position.nextX=position.x;position.nextY = position.y - 16;break;
             }
+
+            Vector2 nextPos = new Vector2(0,0);
+            for(Rectangle r : gameArea.getColliders()) {
+                nextPos.x = position.nextX + GlobalSettings.TILE_SIZE / 2;
+                nextPos.y = position.nextY + GlobalSettings.TILE_SIZE / 2;
+                if (r.contains(nextPos)) return;
+            }
+
             position.lastPixelStep = TimeUtils.millis();
+            input.moving = true;
+            input.startMoving = false;
         }
 
         if(input.moving && TimeUtils.timeSinceMillis(position.lastPixelStep) > GlobalSettings.ONE_STEPDURATION_MS) {

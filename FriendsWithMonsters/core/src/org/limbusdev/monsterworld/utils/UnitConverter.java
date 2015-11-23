@@ -16,5 +16,13 @@ public class UnitConverter {
     public static int metersToPixels(int meters) {
         return meters*GlobalSettings.PIXELS_PER_METER;
     }
+
+    public static int tilesToPixels(int tiles) {
+        return tiles*GlobalSettings.TILE_SIZE;
+    }
+
+    public static int pixelsToTiles(int tiles) {
+        return GlobalSettings.TILE_SIZE/tiles;
+    }
     /* ..................................................................... GETTERS & SETTERS .. */
 }

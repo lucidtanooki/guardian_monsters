@@ -82,6 +82,8 @@ public class OutdoorGameWorldScreen implements Screen {
         // ............................................................................... RENDERING
         // Tiled Map
         gameArea.render(camera);
+        ECS.render(batch, shpRend);
+        gameArea.renderDebugging(shpRend);
 
         // ............................................................................... RENDERING
 

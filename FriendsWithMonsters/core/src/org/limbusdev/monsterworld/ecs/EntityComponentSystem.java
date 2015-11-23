@@ -3,6 +3,8 @@ package org.limbusdev.monsterworld.ecs;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -12,12 +14,14 @@ import org.limbusdev.monsterworld.ecs.components.CharacterSpriteComponent;
 import org.limbusdev.monsterworld.ecs.components.InputComponent;
 import org.limbusdev.monsterworld.ecs.components.PositionComponent;
 import org.limbusdev.monsterworld.ecs.systems.CharacterSpriteSystem;
+import org.limbusdev.monsterworld.ecs.systems.DebuggingSystem;
 import org.limbusdev.monsterworld.ecs.systems.InputSystem;
 import org.limbusdev.monsterworld.ecs.systems.OutdoorGameArea;
 import org.limbusdev.monsterworld.ecs.systems.PositionSynchroSystem;
 import org.limbusdev.monsterworld.ecs.systems.SpriteSystem;
 import org.limbusdev.monsterworld.enums.TextureAtlasType;
 import org.limbusdev.monsterworld.managers.MediaManager;
+import org.limbusdev.monsterworld.utils.GlobalSettings;
 import org.limbusdev.monsterworld.utils.UnitConverter;
 
 /**
@@ -47,10 +51,10 @@ public class EntityComponentSystem {
         hero.add(new CharacterSpriteComponent(media.getTextureAtlasType(TextureAtlasType.HERO)));
         hero.add(new InputComponent());
         heroPosition = new PositionComponent(
-                UnitConverter.metersToPixels(16),
-                UnitConverter.metersToPixels(1),
-                UnitConverter.metersToPixels(1),
-                UnitConverter.metersToPixels(1));
+                UnitConverter.tilesToPixels(16),
+                UnitConverter.tilesToPixels(1),
+                UnitConverter.tilesToPixels(1),
+                UnitConverter.tilesToPixels(1));
         hero.add(heroPosition);
         engine.addEntity(hero);
     }
@@ -62,7 +66,7 @@ public class EntityComponentSystem {
         engine.addSystem(spriteSystem);
 
         // Input System
-        InputSystem inputSystem = new InputSystem(viewport);
+        InputSystem inputSystem = new InputSystem(viewport, gameArea);
         inputSystem.addedToEngine(engine);
         engine.addSystem(inputSystem);
 
@@ -75,10 +79,19 @@ public class EntityComponentSystem {
         CharacterSpriteSystem characterSpriteSystem = new CharacterSpriteSystem();
         characterSpriteSystem.addedToEngine(engine);
         engine.addSystem(characterSpriteSystem);
+
+        // Debugging
+        DebuggingSystem debuggingSystem = new DebuggingSystem();
+        debuggingSystem.addedToEngine(engine);
+        engine.addSystem(debuggingSystem);
     }
 
     public void update(float delta) {
         engine.update(delta);
+    }
+
+    public void render(Batch batch, ShapeRenderer shape) {
+        if(GlobalSettings.DEBUGGING_ON) engine.getSystem(DebuggingSystem.class).render(shape);
     }
     /* ..................................................................... GETTERS & SETTERS .. */
     public InputProcessor getInputProcessor() {

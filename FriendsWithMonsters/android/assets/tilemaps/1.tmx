@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="32" height="32" tilewidth="16" tileheight="16">
+ <properties>
+  <property name="musicIndex" value="1"/>
+  <property name="musicType" value="town"/>
+ </properties>
  <tileset firstgid="1" name="tuxemon" tilewidth="16" tileheight="16">
   <image source="../spritesheets/tuxemon.png" width="1024" height="1024"/>
  </tileset>
@@ -13,7 +17,7 @@
  </layer>
  <layer name="walls" width="32" height="32">
   <data encoding="base64" compression="zlib">
-   eJztl8sKwjAQRQdBRVddt9qu9Q987vWvXGipCvW3fID+is+1A3Y2oUnTTGo2vXCZLpreOTRDSNoDOKBTw0oyXX9F3xiVZLretG+RvxMAdIPiWhX/Ar+9DIqrjF+3f7HmqYluCW5L9gn1odu/WMtKxv8vyfhtao3eZIasxtmza35xDqrgV0mcAx3+XQiwD+32oeIXZ+yM2RfL+Sp+7ozpSPf/J/1q8l3tf5Kr/U+q+X+5qnOsrO4RwAP9RL/Qb/Qnyn+X+GnGBj7A0OfljzyAMXqCnqJn6LmX/y7xrxq8TFMRf+wo39W+I7maO5KKP8GzZmv5vBGl4j9i9qni/Pr/2+G3dX/icri6/3Ert39u/QI33wM3
+   eJztl00KAjEMhYOgokeY6uz1JnorFzqMCuO1/AE9kgEbkGA7tU2bzTwIbzadl482lHYLgAtWF+mk2PVPrFeCk2LXx/bN+WcGYG76PRf/Bv+9Nf3u4g/tn/svjbEmrKaOc0J9hPbP/V+5+EvJxS+pPdbBFlhv7Lc2P5+DHPw+8TkI4T/VAOdatg8fP5+xO2Y/hPN9/KkzFqLQ/W+XefK1zj9J6/yTBv5Pru8eyynipxlbVQDrqlw+8e9G5TK/RfyNUr7WuSNpzR3Jx9/iXXMUvm+4fPxXzL5lzh/2X4Zf6v2UyqH1/kv11P5T/Q1uU/r0
   </data>
  </layer>
  <layer name="objects" width="32" height="32">
@@ -23,7 +27,7 @@
  </layer>
  <layer name="tops" width="32" height="32">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFwx14yg60C0YBJeA0MP7ODGAccssxMPDI0c++TikGhi4pBO0NtNuHjvafBNp5SgpBj2QwWnaMAmJBoTwDQxEQFwNxCRCXAnGZPP3s3wi0axMQbwbiLUC8FYi3EWn/S0kGhleStHUfNtDBRH87Bzs4CSxzTg1gucMJrGu46FjfoANPoN1eA2j/KCAeoLdViKWpBdDbKsTSlLqfWv4g1/2jbTPqAACBpkWK
+   eJxjYBgFwx14yg60C0YBJeA0MP7ODGAccssxMPDI0c++TikGhi4pBO0NtNuHjvafBNp5SgpBj2QwWnaMAmJBofxAu4B88FKSgeGVJP3t7WCiv52DHZwEljmnBrDc4QTWNVx0rG/QgSfQbq8BtH8UEA/Q2yrE0tQC6G0VYmlK3U8tf5Dr/tG2GXUAACyEPbw=
   </data>
  </layer>
  <objectgroup name="colliderWalls" width="32" height="32">
@@ -41,7 +45,6 @@
   <object x="0" y="480" width="512" height="32"/>
   <object x="112" y="288" width="80" height="64"/>
   <object x="0" y="352" width="192" height="128"/>
-  <object x="304" y="288" width="96" height="32"/>
   <object x="144" y="160" width="32" height="32"/>
   <object x="80" y="176" width="64" height="32"/>
   <object x="144" y="192" width="32" height="16"/>
@@ -49,5 +52,29 @@
   <object x="80" y="224" width="16" height="16"/>
   <object x="336" y="64" height="48"/>
   <object x="432" y="64" height="48"/>
+ </objectgroup>
+ <objectgroup name="sensors" width="32" height="32">
+  <object name="warpField" x="256" y="0" width="16" height="16">
+   <properties>
+    <property name="targetID" value="2"/>
+    <property name="targetWarpPointID" value="3"/>
+   </properties>
+  </object>
+  <object name="warpField" x="272" y="0" width="16" height="16">
+   <properties>
+    <property name="targetID" value="2"/>
+    <property name="targetWarpPointID" value="4"/>
+   </properties>
+  </object>
+  <object name="startField" x="256" y="16" width="16" height="16">
+   <properties>
+    <property name="fieldID" value="1"/>
+   </properties>
+  </object>
+  <object name="startField" x="272" y="16" width="16" height="16">
+   <properties>
+    <property name="fieldID" value="1"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

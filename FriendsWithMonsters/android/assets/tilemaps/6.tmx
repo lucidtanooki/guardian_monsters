@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="8" height="5" tilewidth="16" tileheight="16">
+ <properties>
+  <property name="musicIndex" value="1"/>
+  <property name="musicType" value="town"/>
+ </properties>
+ <tileset firstgid="1" name="indoor" tilewidth="16" tileheight="16">
+  <image source="../spritesheets/tuxemon.png" width="1024" height="1024"/>
+ </tileset>
+ <tileset firstgid="4097" name="pokepublic" tilewidth="16" tileheight="16">
+  <image source="../spritesheets/thatssowitty_1.png" width="1024" height="1024"/>
+ </tileset>
+ <tileset firstgid="8193" name="pokebublic2" tilewidth="16" tileheight="16">
+  <image source="../spritesheets/thatssowitty_2.png" width="1024" height="1024"/>
+ </tileset>
+ <layer name="ground" width="8" height="5">
+  <data encoding="base64" compression="zlib">
+   eJxjkmVgYBrEGACJVwTZ
+  </data>
+ </layer>
+ <layer name="walls" width="8" height="5">
+  <data encoding="base64" compression="zlib">
+   eJy7JMDAcIkCTGsAACxJDiE=
+  </data>
+ </layer>
+ <layer name="objects" width="8" height="5">
+  <data encoding="base64" compression="zlib">
+   eJxjYKAcBDIxMAQBcTAQh4BooNhERgjGBS4yQvBqGQaGtUC8RgYiziGCqg4AW+MG4g==
+  </data>
+ </layer>
+ <layer name="tops" width="8" height="5">
+  <data encoding="base64" compression="zlib">
+   eJxjYCAMBJkYGISAWBiIRUA0UCyQEYIJgWwZCJ0jQ4RFWAAArvICGQ==
+  </data>
+ </layer>
+ <objectgroup name="colliderWalls" width="8" height="5">
+  <object x="0" y="0" width="128" height="32"/>
+  <object x="0" y="64" width="48" height="16"/>
+  <object x="96" y="32" width="32" height="16"/>
+ </objectgroup>
+ <objectgroup name="sensors" width="8" height="5">
+  <object name="warpField" x="64" y="64" width="16" height="16">
+   <properties>
+    <property name="targetID" value="3"/>
+    <property name="targetWarpPointID" value="4"/>
+   </properties>
+  </object>
+  <object name="startField" x="64" y="48" width="16" height="16">
+   <properties>
+    <property name="fieldID" value="1"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

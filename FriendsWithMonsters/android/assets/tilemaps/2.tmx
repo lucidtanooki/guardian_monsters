@@ -17,7 +17,7 @@
  </layer>
  <layer name="walls" width="32" height="32">
   <data encoding="base64" compression="zlib">
-   eJztl0EKwkAMRQd3urPbutW76EG8iAeot3KpR7IgwfJp+n8yVUT6IQxT+E2ek06w25Vy7aNLrqas/97Ho2I1Zf3Zuv+Nf92Wsmn5ivWft69Qfbi3Oo79s1PLV6zf8qs+3CMHC4/fwpPXL8jBwuNn+b1++TY/vgc5mGr58XfEczGp/azmN5/Hj1L7meXfN6UcmrdP5Wca41ek8k95h/VHcg/fkeEf5sfzjKqWH88zKvb9s/xq33ti99+n89f2P9YUFfKz+8bjxb06x5Gf3TfeHECpc3yq/yNzEHVZxfxjHJE5mM2/8P8uvyLPd5uBX1HWh/65+aP+ufiX/385/xM3WqX4
+   eJztl0EKwkAMRQd3urPbutW76EG8iAeot3KpR7IgwfJp+n8yVUT9EIYp/CbPSSfYbUo599ElV1PWf+3jVrGasv5s3d/Gv2xLWbV8xfqP60eoPtxbHfv+2aHlK9Zv+VUf7pGDhcdv4cnrF+Rg4fGz/F6/vJsf34McTLX8+DviuZjUflbzm8/jR6n9zPJvm1J2zdOn8jON8StS+ae8w/ojuYfvyPAP8+N5RlXLj+cZFfv+WX617z2x++/V+Wv7H2uKCvnZfePx4l6d48jP7htvDqDUOT7V/5E5iDotYv4xjsgczOb/838uvyLPd5mBX1HWh/65+aP+T+H/1f9/d7afmu4=
   </data>
  </layer>
  <layer name="objects" width="32" height="32">
@@ -27,7 +27,7 @@
  </layer>
  <layer name="tops" width="32" height="32">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjAJU0CnFwNAlhZumNTgJtOOUFG56qICnggwMzwQH2hWjYBQMbkCt8oaQObjMI7W8IdccapVfg7UcPME00C4YBaNgFBALiC0vCZWj5Oojtrwc6u3AwQoA0uRNlg==
+   eJzt1LERgCAMheF3bkCbjXEyYQ+ZQ1uLXEIODzzf16QipPoBIqKnLMAu+nxbuf+oos+vOBPQ0uwriNY2qjfWHm1fb2+ie0b1a9UOHtvsC4jIy9tLq6PRd95eWh2Nvvu7C+boWEA=
   </data>
  </layer>
  <objectgroup name="colliderWalls" width="32" height="32">
@@ -69,6 +69,28 @@
   <object name="warpField" x="272" y="0" width="16" height="16">
    <properties>
     <property name="targetID" value="3"/>
+    <property name="targetWarpPointID" value="2"/>
+   </properties>
+  </object>
+  <object name="startField" x="256" y="480" width="16" height="16">
+   <properties>
+    <property name="fieldID" value="3"/>
+   </properties>
+  </object>
+  <object name="warpField" x="256" y="496" width="16" height="16">
+   <properties>
+    <property name="targetID" value="1"/>
+    <property name="targetWarpPointID" value="1"/>
+   </properties>
+  </object>
+  <object name="startField" x="272" y="480" width="16" height="16">
+   <properties>
+    <property name="fieldID" value="4"/>
+   </properties>
+  </object>
+  <object name="warpField" x="272" y="496" width="16" height="16">
+   <properties>
+    <property name="targetID" value="1"/>
     <property name="targetWarpPointID" value="2"/>
    </properties>
   </object>

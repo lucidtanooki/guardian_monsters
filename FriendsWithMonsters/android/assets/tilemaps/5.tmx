@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="8" height="8" tilewidth="16" tileheight="16">
+ <properties>
+  <property name="musicIndex" value="1"/>
+  <property name="musicType" value="town"/>
+ </properties>
+ <tileset firstgid="1" name="indoor" tilewidth="16" tileheight="16">
+  <image source="../spritesheets/tuxemon.png" width="1024" height="1024"/>
+ </tileset>
+ <tileset firstgid="4097" name="pokepublic" tilewidth="16" tileheight="16">
+  <image source="../spritesheets/thatssowitty_1.png" width="1024" height="1024"/>
+ </tileset>
+ <tileset firstgid="8193" name="pokebublic2" tilewidth="16" tileheight="16">
+  <image source="../spritesheets/thatssowitty_2.png" width="1024" height="1024"/>
+ </tileset>
+ <layer name="ground" width="8" height="8">
+  <data encoding="base64" compression="zlib">
+   eJxjYMAPmiSGNwYA/PIhsQ==
+  </data>
+ </layer>
+ <layer name="walls" width="8" height="8">
+  <data encoding="base64" compression="zlib">
+   eJyzlmNgsMaDqwlgEAhiYmAIZmIYNMAF6BZ3PO5pQZIDACUfCU8=
+  </data>
+ </layer>
+ <layer name="objects" width="8" height="8">
+  <data encoding="base64" compression="zlib">
+   eJxjYCAMhJkgGAYigTgKiKOxqBVkZmCYCaRnAfFsqNglRiIswQEmEtB7EYv8VKBbpzFhisPAVaDcNag8AGMLCDA=
+  </data>
+ </layer>
+ <layer name="tops" width="8" height="8">
+  <data encoding="base64" compression="zlib">
+   eJxjYCAMBIFYCMq+yESEBhJAICN1zSMVAADzOQFJ
+  </data>
+ </layer>
+ <objectgroup name="colliderWalls" width="8" height="8" visible="0">
+  <object x="0" y="0" width="128" height="32"/>
+  <object x="64" y="32" width="16" height="16"/>
+  <object x="0" y="80" width="16" height="16"/>
+  <object x="80" y="112" width="16" height="16"/>
+  <object x="80" y="96" width="32" height="16"/>
+ </objectgroup>
+ <objectgroup name="sensors" width="8" height="8" visible="0">
+  <object name="warpField" x="96" y="112" width="16" height="16">
+   <properties>
+    <property name="targetID" value="4"/>
+    <property name="targetWarpPointID" value="2"/>
+   </properties>
+  </object>
+  <object name="startField" x="112" y="112" width="16" height="16">
+   <properties>
+    <property name="fieldID" value="1"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

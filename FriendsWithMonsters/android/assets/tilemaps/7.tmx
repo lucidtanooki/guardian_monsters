@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="32" height="32" tilewidth="16" tileheight="16">
+ <properties>
+  <property name="musicIndex" value="1"/>
+  <property name="musicType" value="town"/>
+ </properties>
+ <tileset firstgid="1" name="tuxemon" tilewidth="16" tileheight="16">
+  <image source="../spritesheets/tuxemon.png" width="1024" height="1024"/>
+ </tileset>
+ <tileset firstgid="4097" name="pokepublic" tilewidth="16" tileheight="16">
+  <image source="../spritesheets/thatssowitty_1.png" width="1024" height="1024"/>
+ </tileset>
+ <tileset firstgid="8193" name="limbusdev" tilewidth="16" tileheight="16">
+  <image source="../spritesheets/limbusdev_spritesheet.png" width="1024" height="1024"/>
+ </tileset>
+ <tileset firstgid="12289" name="pokebublic2" tilewidth="16" tileheight="16">
+  <image source="../spritesheets/thatssowitty_2.png" width="1024" height="1024"/>
+ </tileset>
+ <tileset firstgid="16385" name="magiscarf" tilewidth="16" tileheight="16">
+  <image source="../spritesheets/magiscarf_transparent.png" width="992" height="1264"/>
+ </tileset>
+ <layer name="ground" width="32" height="32">
+  <data encoding="base64" compression="zlib">
+   eJx768nA8JaGOMINP6al3fS2H5vZ1LJf1BVCc7uS509a+3/U/oGNf1qnP3LCYSTaT2q6HLV/aNhPTP4bzv4frvY3yZGHncjQ0yxHPfvJwecFIe5GxocGGDObDix2woOdgdgFiF3R2PjU4jOPVPX0sL95gPFA5/9R+4nDo/Xf8LQfAGe9tAs=
+  </data>
+ </layer>
+ <layer name="walls" width="32" height="32">
+  <data encoding="base64" compression="zlib">
+   eJztlU1qwkAAhd/Wn+IdRD3HmGiM2pVg3VYvIha1tgs3/qwEvUk9gLaInqG9Rl+IwUHSGJowszAPPkLCm/kyYZIAalKzXeRzlbkH/0AAL0Kf/4PurUZ/UBJ/4tflT9ku75r83tq/BfAj9PkLZaBISmV1bs8/Io/SmhcCWAo1fs+tes/Lkfd/2wCeDH3+Gd1zcghxD10T6JnRe7I/f/bm2F/dYE02MfYcnhU/+ygxW0ClFV8vSZK8tP+H1t/sqsCefJKv6v96U9s9dqzLNyDs+5fmmAzJkgcrWs/zO/+CsURQbI6pkwZpBvjD9Bz/tfuWf8wxr2RC3s7z9n3m9+tdZ8HrSx9U5UjXyYd7zy93RIWK
+  </data>
+ </layer>
+ <layer name="objects" width="32" height="32">
+  <data encoding="base64" compression="zlib">
+   eJzt1V0KgkAUBeC7gFrA1F7UBzGth34WVD1EQUi1IvW91pSdgSQZg7qTzgjNgYMwIN8d74NE3eYUdwy07GeCKEcLwbeWsK7PrmI9/w63lPaIb99qVho3z76JB9dHA6av3lP6Ortfw92g2xb8M7rg7h9ujhZMX7VS3f3DLaU95r2nzqDre3B9NNDw656u/2vkN5ijF0u+Guc3z0REdDQ0l+qbtN/5E8P7cL5dvw/Zh0SH0PYULi7ms4tez6om08f/7z/4g4RomNjzp7BnFv0qn/wHPSs/3g==
+  </data>
+ </layer>
+ <layer name="tops" width="32" height="32">
+  <data encoding="base64" compression="zlib">
+   eJzt1ltKAmEchvH3xuqibktbQllt4VPHaOpKEXQJarWIskvpBLaEjquom1pCh9sRWoZPYDQIFR34/iLfC7+b4YNnGJhhpMlZxklTmMaM898v0YxQxrpBf4/mPjo4MOjnaC7iFncG/TrNhkH3fT3aZ0b92Viai23ab9ukvfVJf8lJy8hjBatYc77uTGrSaqGNbexg12P/nNYFLnGFa9x47Ce0+qneq/t4V61m9a4+FqQnPOOl4L8/X5QWkEWu6L9fSzXrBv1TmsnwufcM+j/dfUV6qPzt3EYkxdHv+pkq/zTV/zsXFpakvnuH5a8d4Rgn6A6vdUeMnvtOWFjYeGwAl7hItw==
+  </data>
+ </layer>
+ <objectgroup name="colliderWalls" width="32" height="32">
+  <object x="496" y="256" width="16" height="32"/>
+  <object x="464" y="256" width="32" height="16"/>
+  <object x="0" y="288" width="480" height="16"/>
+  <object x="448" y="256" width="16" height="32"/>
+  <object x="464" y="416" width="48" height="16"/>
+  <object x="0" y="400" width="480" height="16"/>
+  <object x="400" y="304" width="32" height="16"/>
+  <object x="288" y="320" width="32" height="16"/>
+  <object x="128" y="320" width="32" height="16"/>
+ </objectgroup>
+ <objectgroup name="livingEntities" width="32" height="32"/>
+ <objectgroup name="sensors" width="32" height="32">
+  <object name="sensor" x="0" y="304" width="16" height="96"/>
+  <object name="startField" x="240" y="288" width="16" height="16">
+   <properties>
+    <property name="fieldID" value="3"/>
+   </properties>
+  </object>
+  <object name="warpField" x="496" y="288" width="16" height="16">
+   <properties>
+    <property name="targetID" value="3"/>
+    <property name="targetWarpPointID" value="5"/>
+   </properties>
+  </object>
+  <object name="startField" x="240" y="288" width="16" height="16">
+   <properties>
+    <property name="fieldID" value="3"/>
+   </properties>
+  </object>
+  <object name="startField" x="480" y="320" width="16" height="16">
+   <properties>
+    <property name="fieldID" value="1"/>
+   </properties>
+  </object>
+  <object name="warpField" x="496" y="304" width="16" height="16">
+   <properties>
+    <property name="targetID" value="3"/>
+    <property name="targetWarpPointID" value="5"/>
+   </properties>
+  </object>
+  <object name="warpField" x="496" y="320" width="16" height="16">
+   <properties>
+    <property name="targetID" value="3"/>
+    <property name="targetWarpPointID" value="5"/>
+   </properties>
+  </object>
+  <object name="warpField" x="496" y="336" width="16" height="16">
+   <properties>
+    <property name="targetID" value="3"/>
+    <property name="targetWarpPointID" value="5"/>
+   </properties>
+  </object>
+  <object name="warpField" x="496" y="352" width="16" height="16">
+   <properties>
+    <property name="targetID" value="3"/>
+    <property name="targetWarpPointID" value="5"/>
+   </properties>
+  </object>
+  <object name="warpField" x="496" y="368" width="16" height="16">
+   <properties>
+    <property name="targetID" value="3"/>
+    <property name="targetWarpPointID" value="5"/>
+   </properties>
+  </object>
+  <object name="warpField" x="496" y="384" width="16" height="16">
+   <properties>
+    <property name="targetID" value="3"/>
+    <property name="targetWarpPointID" value="5"/>
+   </properties>
+  </object>
+  <object name="warpField" x="496" y="400" width="16" height="16">
+   <properties>
+    <property name="targetID" value="3"/>
+    <property name="targetWarpPointID" value="5"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

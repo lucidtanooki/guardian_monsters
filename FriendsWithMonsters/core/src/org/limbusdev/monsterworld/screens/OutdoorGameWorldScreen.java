@@ -153,7 +153,7 @@ public class OutdoorGameWorldScreen implements Screen {
     }
 
     private void updateCamera() {
-        // project to camera
+        // project to cameraa
         camera.position.set(ECS.getHeroPosition().x, ECS.getHeroPosition().y, 0);
         batch.  setProjectionMatrix(camera.combined);
         shpRend.setProjectionMatrix(camera.combined);

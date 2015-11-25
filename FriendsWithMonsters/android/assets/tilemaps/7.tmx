@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="32" height="32" tilewidth="16" tileheight="16">
+<map version="1.0" orientation="orthogonal" width="64" height="32" tilewidth="16" tileheight="16">
  <properties>
   <property name="musicIndex" value="1"/>
   <property name="musicType" value="town"/>
@@ -19,98 +19,138 @@
  <tileset firstgid="16385" name="magiscarf" tilewidth="16" tileheight="16">
   <image source="../spritesheets/magiscarf_transparent.png" width="992" height="1264"/>
  </tileset>
- <layer name="ground" width="32" height="32">
+ <layer name="ground" width="64" height="32">
   <data encoding="base64" compression="zlib">
-   eJx768nA8JaGOMINP6al3fS2H5vZ1LJf1BVCc7uS509a+3/U/oGNf1qnP3LCYSTaT2q6HLV/aNhPTP4bzv4frvY3yZGHncjQ0yxHPfvJwecFIe5GxocGGDObDix2woOdgdgFiF3R2PjU4jOPVPX0sL95gPFA5/9R+4nDo/Xf8LQfAGe9tAs=
+   eJzt18ENgyAUBmATj548eGULF8Bi0g2cp2zWBeoi3aEmvYmtCC3/E/7DHzwI4XtPQpzGqpo887yeL742+s9fg629/tqPqkdn3mNj0vRZci2k+pE1QLvRNfi0j1z8e+d/y5qTP+Q7oL88/96ZoJ/+Uuwp/f92+Nx/CD+6v0g/2kY/xn9T+OiAOVa5Fq2OZ27x/pA8WtdyLzx1X3a04AxLLkvM6vnbu0fXRhvRfhsYHTFXUnj/00+/fL/E/z90b+mnP9b/AkfL/QY=
   </data>
  </layer>
- <layer name="walls" width="32" height="32">
+ <layer name="groundShadow" width="64" height="32">
   <data encoding="base64" compression="zlib">
-   eJztlU1qwkAAhd/Wn+IdRD3HmGiM2pVg3VYvIha1tgs3/qwEvUk9gLaInqG9Rl+IwUHSGJowszAPPkLCm/kyYZIAalKzXeRzlbkH/0AAL0Kf/4PurUZ/UBJ/4tflT9ku75r83tq/BfAj9PkLZaBISmV1bs8/Io/SmhcCWAo1fs+tes/Lkfd/2wCeDH3+Gd1zcghxD10T6JnRe7I/f/bm2F/dYE02MfYcnhU/+ygxW0ClFV8vSZK8tP+H1t/sqsCefJKv6v96U9s9dqzLNyDs+5fmmAzJkgcrWs/zO/+CsURQbI6pkwZpBvjD9Bz/tfuWf8wxr2RC3s7z9n3m9+tdZ8HrSx9U5UjXyYd7zy93RIWK
+   eJzt0MEJwCAMBVAPHaEr1f1H8lqtBArSIH0PcpAEkm8pAAAAAAAA/3Scz/esol5Gjfes/I/d8q+Unett/i9ct7012Jk1B/QaXMUP1Q==
   </data>
  </layer>
- <layer name="objects" width="32" height="32">
+ <layer name="walls" width="64" height="32">
   <data encoding="base64" compression="zlib">
-   eJzt1V0KgkAUBeC7gFrA1F7UBzGth34WVD1EQUi1IvW91pSdgSQZg7qTzgjNgYMwIN8d74NE3eYUdwy07GeCKEcLwbeWsK7PrmI9/w63lPaIb99qVho3z76JB9dHA6av3lP6Ortfw92g2xb8M7rg7h9ujhZMX7VS3f3DLaU95r2nzqDre3B9NNDw656u/2vkN5ijF0u+Guc3z0REdDQ0l+qbtN/5E8P7cL5dvw/Zh0SH0PYULi7ms4tez6om08f/7z/4g4RomNjzp7BnFv0qn/wHPSs/3g==
+   eJztl0lPFEEYhr/r4IpHEC4yxJWbxuVSMyM4oAeZxP2CHlzwaqKejEbR8QKJgpqY6MEF8GaiHvUKomj0L7B4UX+C75fuL11TdE03E9uZwn6TJ91dXemup5ZehjcSjYBZ8AUMW45dz4Gih37MifKWY9dj84/y/t/Hf6qFaLqlPm1ebq4rohsq/Fyt459pJWpqTbjhfynvFdEHFX6u1vHvhXuf7y99Mbc+SYtkYvPfqTzEW45NdqmgL9i/3Bb0A+83eqL8q8Huu/0tO+u4Epv/nCKaBwtgUXllx/NEJ8BJcApc8st5q4+9OQ8aOTb/TTmiDpAFneCiIhqD8wPwEDzS/HkOyHww3Ru9D2z+pVxlvQlFNAleqaBM5r6E++NYM+ZJc+N7czJFj7tV/M118EOFrwEO77sy7zky9uInZRzxN9eBbQ1w5DnAcenZr/tJ2H9tIcDMz8Pe1vR3Kex+CxzS5v+owhirpet/cz/RFrAVbAPb+71yl/3FXX/+SUYM/7PwPQfOgwtgcAX4c/Tn/xGs56N5b/8j/GfAJ78fnsH3OXgBXoLxFeh/D+73wdd8bdeq5n8az5AzYB79uWBhMZdcvTj+knWFpfPflgH01eNCNE/AU9CB+lkLnfnk6sVp40CN454mOoUS0f5S49ZLkyZNGkm5Hf+F7dH1+J1xs8eD3/+yrzPTje8o8BnMdofXqVc9ef8z+vtvCu7TEf6Ztnjff024zyqwGqzpsV+vHvXEnf8FhjTG8f0zASbBHnjtBftUUC7nXsfwL+LevaAPHKzS3nrUC3NnfqmAy+AKuKoqy5nfmrPNfwj3vg3ugLLfjmsh7fkX9cyMonwshB25gDfwegveqcpypkv7Tnbx/+cbXL+HkN2w/Gvpa8H1mOMch66Y/0wu5A/HLoax
   </data>
  </layer>
- <layer name="tops" width="32" height="32">
+ <layer name="objects" width="64" height="32">
   <data encoding="base64" compression="zlib">
-   eJzt1ltKAmEchvH3xuqibktbQllt4VPHaOpKEXQJarWIskvpBLaEjquom1pCh9sRWoZPYDQIFR34/iLfC7+b4YNnGJhhpMlZxklTmMaM898v0YxQxrpBf4/mPjo4MOjnaC7iFncG/TrNhkH3fT3aZ0b92Viai23ab9ukvfVJf8lJy8hjBatYc77uTGrSaqGNbexg12P/nNYFLnGFa9x47Ce0+qneq/t4V61m9a4+FqQnPOOl4L8/X5QWkEWu6L9fSzXrBv1TmsnwufcM+j/dfUV6qPzt3EYkxdHv+pkq/zTV/zsXFpakvnuH5a8d4Rgn6A6vdUeMnvtOWFjYeGwAl7hItw==
+   eJztlU1qAkEQRusACbhwM/EualA0GlCTAyVZRRDRnEhdj14j11C/ggwMFXW6Z6q1nekHtWm6i3rVf0RmzF8MJ3rGQqnuqvvHyPN+hR6sIqI1YhPZr31Dfdu/SGrV8mfiVP6to37s4X1g9ye7dey+S9XD51WOaRM76EUT3i1E29Jf7jP7a+59Flr34wPen4gvBf8lYnJnPVjBe43YWPpL17mD+29C0X9iD+8Duzfs16Z7oO3/WzObV9S/Ce8Wop3Dn1lY+tefzfJey78ofAbGiB8H+5/EJW7tL9G8/8H/sv8ode584ZR/1COa5ajznP9I3DmfkP553Rnp77N3gvTvK9Xq41k/RVH/WQdvWuf/uG/v3Dmy/E3/f0lZ/APl57tLNO3euopAIBAoB/f6/2sR/N3k1Sb4u8nru//DgOhxUF3/IdxfK+yfkOV/BLp5biQ=
   </data>
  </layer>
- <objectgroup name="colliderWalls" width="32" height="32">
-  <object x="496" y="256" width="16" height="32"/>
-  <object x="464" y="256" width="32" height="16"/>
-  <object x="0" y="288" width="480" height="16"/>
-  <object x="448" y="256" width="16" height="32"/>
-  <object x="464" y="416" width="48" height="16"/>
-  <object x="0" y="400" width="480" height="16"/>
-  <object x="400" y="304" width="32" height="16"/>
-  <object x="288" y="320" width="32" height="16"/>
-  <object x="128" y="320" width="32" height="16"/>
+ <layer name="wallShadow" width="64" height="32">
+  <data encoding="base64" compression="zlib">
+   eJztz8EJwCAQRUEhlrAtaf8lSU5CToKCGGdg2et/KQEAAAAAANwrR78ndq8Zk6P/9+rE7tP7Z9q/ymH9K9uBf2jhWgK2
+  </data>
+ </layer>
+ <layer name="tops" width="64" height="32">
+  <data encoding="base64" compression="zlib">
+   eJztmMlOwlAUhv+NOEQXbhRwWLh03Lk+DBpRY8CY6Bs4P4TKBhdOCT6C8/AMulFcuXR2o4lxeAf/xhBQCm1NC23TL/kSSM693J9yehoAD7dQJYCPVtMaqexZKkFEgCgdoINi/v6pILAaNH9fs1gSYJmu0KSYv3+G2a9snD8gQJCe0XPRt6aLdd20h/bSPp3rYm3qryvJpABTYmzNLOvn6DxdoIv0IQQ80if6HDL5kBaSFmBbjK3ZZf0e3acH9JAGw0ALbaVt4cI1drz29TGgIfb/9X/7QA92ya4wzOwjRfJ3Suk+n5HCPtDqgeZGwN9oYgALUcun9HmWHSnsg7890C+/97TTtddCLZ/S56WYUul7NZzwPbwI8Cq592+Sm5UK1+GcR3HgmJ7Q03jZj1o2is3Kd2b+oJ/0y4X5b3gvu6V39N5Bs90smvgbb6Z+GtDR46MRYCxi/bnKxURe5kmd9ziFF5f8VrbCuSxpA/k7DNTaHSuzXCSAy4S96oainNNR7T3MoGoc8I3bt87DI58Mn1+vHPAMaxW17UBdu3adW+afQn6WGLMPa+RPtf7MjLUB/e7xM/aLeBDSX7fOmg0DdZs6NDr/Msw/zTXJwd86gew5nXZuD49y8OqQ//Cswsg9PauHe/gGozWwzg==
+  </data>
+ </layer>
+ <layer name="ground2" width="64" height="32">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20ON6AAAAAAAAAAgHcDIAAAAQ==
+  </data>
+ </layer>
+ <layer name="walls2" width="64" height="32">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20ON6AAAAAAAAAAgHcDIAAAAQ==
+  </data>
+ </layer>
+ <layer name="tops2" width="64" height="32">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20ON6AAAAAAAAAAgHcDIAAAAQ==
+  </data>
+ </layer>
+ <objectgroup name="colliderWalls" width="64" height="32">
+  <object x="1008" y="256" width="16" height="32"/>
+  <object x="976" y="256" width="32" height="16"/>
+  <object x="160" y="288" width="816" height="16"/>
+  <object x="960" y="256" width="16" height="32"/>
+  <object x="976" y="416" width="48" height="16"/>
+  <object x="160" y="400" width="832" height="16"/>
+  <object x="912" y="304" width="32" height="16"/>
+  <object x="800" y="320" width="32" height="16"/>
+  <object x="640" y="320" width="32" height="16"/>
+  <object x="0" y="256" width="48" height="16"/>
+  <object x="0" y="208" width="16" height="48"/>
+  <object x="16" y="208" width="48" height="16"/>
+  <object x="64" y="208" width="16" height="64"/>
+  <object x="80" y="224" width="16" height="32"/>
+  <object x="96" y="240" width="32" height="32"/>
+  <object x="128" y="256" width="48" height="16"/>
+  <object x="160" y="272" width="16" height="16"/>
+  <object x="160" y="160" width="16" height="96"/>
+  <object x="144" y="96" width="16" height="80"/>
+  <object x="160" y="96" width="16" height="16"/>
+  <object x="160" y="112" width="32" height="16"/>
+  <object x="176" y="128" width="16" height="32"/>
+  <object x="192" y="144" width="32" height="16"/>
+  <object x="208" y="160" width="16" height="128"/>
+  <object x="208" y="416" width="16" height="80"/>
+  <object x="208" y="496" width="16" height="16"/>
+  <object x="0" y="496" width="208" height="16"/>
+  <object x="160" y="416" width="16" height="16"/>
+  <object x="80" y="432" width="96" height="48"/>
+  <object x="0" y="432" width="64" height="48"/>
+  <object x="0" y="480" width="16" height="16"/>
+  <object x="0" y="400" width="32" height="32"/>
+  <object x="144" y="416" width="16" height="16"/>
+  <object x="0" y="272" width="16" height="32"/>
  </objectgroup>
- <objectgroup name="livingEntities" width="32" height="32"/>
- <objectgroup name="sensors" width="32" height="32">
+ <objectgroup name="livingEntities" width="64" height="32"/>
+ <objectgroup name="sensors" width="64" height="32">
   <object name="sensor" x="0" y="304" width="16" height="96"/>
-  <object name="startField" x="240" y="288" width="16" height="16">
-   <properties>
-    <property name="fieldID" value="3"/>
-   </properties>
-  </object>
-  <object name="warpField" x="496" y="288" width="16" height="16">
+  <object name="warpField" x="1008" y="288" width="16" height="16">
    <properties>
     <property name="targetID" value="3"/>
     <property name="targetWarpPointID" value="5"/>
    </properties>
   </object>
-  <object name="startField" x="240" y="288" width="16" height="16">
-   <properties>
-    <property name="fieldID" value="3"/>
-   </properties>
-  </object>
-  <object name="startField" x="480" y="320" width="16" height="16">
+  <object name="startField" x="992" y="320" width="16" height="16">
    <properties>
     <property name="fieldID" value="1"/>
    </properties>
   </object>
-  <object name="warpField" x="496" y="304" width="16" height="16">
+  <object name="warpField" x="1008" y="304" width="16" height="16">
    <properties>
     <property name="targetID" value="3"/>
     <property name="targetWarpPointID" value="5"/>
    </properties>
   </object>
-  <object name="warpField" x="496" y="320" width="16" height="16">
+  <object name="warpField" x="1008" y="320" width="16" height="16">
    <properties>
     <property name="targetID" value="3"/>
     <property name="targetWarpPointID" value="5"/>
    </properties>
   </object>
-  <object name="warpField" x="496" y="336" width="16" height="16">
+  <object name="warpField" x="1008" y="336" width="16" height="16">
    <properties>
     <property name="targetID" value="3"/>
     <property name="targetWarpPointID" value="5"/>
    </properties>
   </object>
-  <object name="warpField" x="496" y="352" width="16" height="16">
+  <object name="warpField" x="1008" y="352" width="16" height="16">
    <properties>
     <property name="targetID" value="3"/>
     <property name="targetWarpPointID" value="5"/>
    </properties>
   </object>
-  <object name="warpField" x="496" y="368" width="16" height="16">
+  <object name="warpField" x="1008" y="368" width="16" height="16">
    <properties>
     <property name="targetID" value="3"/>
     <property name="targetWarpPointID" value="5"/>
    </properties>
   </object>
-  <object name="warpField" x="496" y="384" width="16" height="16">
+  <object name="warpField" x="1008" y="384" width="16" height="16">
    <properties>
     <property name="targetID" value="3"/>
     <property name="targetWarpPointID" value="5"/>
    </properties>
   </object>
-  <object name="warpField" x="496" y="400" width="16" height="16">
+  <object name="warpField" x="1008" y="400" width="16" height="16">
    <properties>
     <property name="targetID" value="3"/>
     <property name="targetWarpPointID" value="5"/>

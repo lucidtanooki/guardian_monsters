@@ -18,6 +18,7 @@ import org.limbusdev.monsterworld.enums.MusicType;
 import org.limbusdev.monsterworld.geometry.WarpPoint;
 import org.limbusdev.monsterworld.managers.MediaManager;
 import org.limbusdev.monsterworld.rendering.OrthogonalTiledMapAndEntityRenderer;
+import org.limbusdev.monsterworld.utils.GlobalSettings;
 
 /**
  * Contains logic and information about one game world area like a forest or a path. One
@@ -90,6 +91,8 @@ public class OutdoorGameArea {
             }
         }
 
+        createBorderColliders(tiledMap);
+
 
         // Set background music
         String musicType = tiledMap.getProperties().get("musicType", String.class);
@@ -99,6 +102,34 @@ public class OutdoorGameArea {
                     Integer.parseInt(tiledMap.getProperties().get("musicIndex", String.class))-1);
         bgMusic.setLooping(true);
 
+    }
+
+    public void createBorderColliders(TiledMap tiledMap) {
+        // Create Colliders around the level
+        int mapWidth = tiledMap.getProperties().get("width", Integer.class);
+        int mapHeight = tiledMap.getProperties().get("height", Integer.class);
+        for(int i=0; i<mapWidth+2; i++) {
+            for(int j=0; j<2; j++)
+                colliders.add(new Rectangle(
+                                (-1 + i)* GlobalSettings.TILE_SIZE,
+                                (-1 + j*(mapHeight+1))* GlobalSettings.TILE_SIZE,
+                                GlobalSettings.TILE_SIZE,
+                                GlobalSettings.TILE_SIZE)
+                );
+        }
+
+        for(int i=0; i<mapHeight; i++) {
+            for(int j=0; j<2; j++) {
+                colliders.add(
+                        new Rectangle(
+                                (-1 + j*(mapWidth+1))*GlobalSettings.TILE_SIZE,
+                                i*GlobalSettings.TILE_SIZE,
+                                GlobalSettings.TILE_SIZE,
+                                GlobalSettings.TILE_SIZE
+                        )
+                );
+            }
+        }
     }
     /* ..................................................................... GETTERS & SETTERS .. */
 

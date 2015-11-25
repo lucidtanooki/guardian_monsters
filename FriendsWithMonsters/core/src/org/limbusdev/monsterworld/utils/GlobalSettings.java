@@ -12,7 +12,7 @@ public class GlobalSettings {
     public static final int RESOLUTION_Y = 480;
     public static final int ONE_STEPDURATION_MS = 5;
     public static final int zoom = 2;
-    public static final boolean DEBUGGING_ON = false;
+    public static final boolean DEBUGGING_ON = true;
     /* ........................................................................... CONSTRUCTOR .. */
     
     /* ............................................................................... METHODS .. */

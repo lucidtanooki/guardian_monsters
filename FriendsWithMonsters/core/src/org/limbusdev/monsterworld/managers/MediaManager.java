@@ -2,6 +2,7 @@ package org.limbusdev.monsterworld.managers;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.utils.Array;
 
@@ -18,7 +19,7 @@ public class MediaManager {
     private AssetManager assets;
 
     // file names
-    private String mainMenuBGImgFile = "";
+    private String mainMenuBGImgFile = "spritesheets/logo.png";
     private String heroSpritesheetFile = "spritesheets/hero.pack";
     private Array<String> bgMusicTown;
     
@@ -26,6 +27,7 @@ public class MediaManager {
     public MediaManager() {
         this.assets = new AssetManager();
         assets.load(this.heroSpritesheetFile, TextureAtlas.class);
+        assets.load(this.mainMenuBGImgFile, Texture.class);
 
         // Music
         bgMusicTown = new Array<String>();
@@ -51,6 +53,10 @@ public class MediaManager {
                 break;
         }
         return atlas;
+    }
+
+    public Texture getMainMenuBGImg() {
+        return assets.get(mainMenuBGImgFile);
     }
 
     public Music getBGMusic(MusicType type, int index) {

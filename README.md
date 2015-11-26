@@ -1,3 +1,5 @@
+![alt text](./Artwork/logo.png "Logo")
+
 # Welcome
 
 # Credits
@@ -14,7 +16,8 @@ Here you can get a first glimpse of what will be created here.
 ![alt text](./Documents/Screenshots/preview2.png "Second Preview")
 
 # Downloads
-here you can Download the [Test-Build for Desktop](.Builds/Testing/Desktop/FirendsWithMonsters-0.0.0.1).
+here you can Download the [Test-Build for Desktop](.Builds/Testing/Desktop/FriendsWithMonsters-0.0.0.3.jar)
+and the [Test-Build for Android](.Builds/Testing/Android/FriendsWithMonsters-0.0.0.3.apk).
 All you need is Java 8. Launch it with 
 
 ```

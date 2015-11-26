@@ -3,6 +3,7 @@ package org.limbusdev.monsterworld.ecs;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 
+import org.limbusdev.monsterworld.ecs.components.CameraComponent;
 import org.limbusdev.monsterworld.ecs.components.CharacterSpriteComponent;
 import org.limbusdev.monsterworld.ecs.components.InputComponent;
 import org.limbusdev.monsterworld.ecs.components.PositionComponent;
@@ -39,6 +40,7 @@ public class EntityFactory {
                 UnitConverter.tilesToPixels(1),
                 UnitConverter.tilesToPixels(1));
         hero.add(position);
+        hero.add(new CameraComponent());
         engine.addEntity(hero);
 
         return hero;

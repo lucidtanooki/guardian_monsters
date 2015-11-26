@@ -19,6 +19,7 @@ public class OrthogonalTiledMapAndEntityRenderer extends OrthogonalTiledMapRende
     /* ............................................................................ ATTRIBUTES .. */
     private OutdoorGameArea gameArea;
     private Array<EntitySprite> sprites;
+
     /* ........................................................................... CONSTRUCTOR .. */
     public OrthogonalTiledMapAndEntityRenderer(
             TiledMap map, OutdoorGameArea gameArea) {
@@ -35,7 +36,7 @@ public class OrthogonalTiledMapAndEntityRenderer extends OrthogonalTiledMapRende
             if(layer instanceof TiledMapTileLayer) {
                 renderTileLayer((TiledMapTileLayer) layer);
                 currentLayer++;
-                if(currentLayer == GlobalSettings.DRAW_ENTITIES_AFTER_LAYER) {
+                if(layer.getName().equals("objects1")) {
                     // Draw entity sprites if visible
                     for(EntitySprite es : sprites)
                         if(es.visible)

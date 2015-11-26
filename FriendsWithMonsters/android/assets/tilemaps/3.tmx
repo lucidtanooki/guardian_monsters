@@ -16,27 +16,27 @@
  <tileset firstgid="12289" name="pokebublic2" tilewidth="16" tileheight="16">
   <image source="../spritesheets/thatssowitty_2.png" width="1024" height="1024"/>
  </tileset>
- <layer name="ground" width="32" height="32">
+ <layer name="ground1" width="32" height="32">
   <data encoding="base64" compression="zlib">
    eJztlO0KgjAUhk+Oir7xBryLLiAt/Fm3FFLRt7dUURF9eUmdQZGMqUvXVuCPB5TN88xzxusWANwcLiNkzDBR6N8jB4ajQn/RACgxlA09s5iid67JTTmhu0UAZgafLGdb4LfLECtOrQq6q08CXL8b73dKjaR3+8g1xC3hX2gvzpJmcWHcIn6ZvPx9ZKDRvw7Ngfo7FoBjqfOz/R+i21Pgr+O9bTA0iTp/FLlfjj/tPZblT1tHld+2+AQmZrwZvS5KUp2tZkhbL3YMDtJFesxz3N64ep/uV+H3NCM7N34t//7ZL5I/35rRRiA7fFN/j3T6aY92Gf0PtWB13Q==
   </data>
  </layer>
- <layer name="walls" width="32" height="32">
+ <layer name="walls1" width="32" height="32">
   <data encoding="base64" compression="zlib">
    eJztl9tOE0Ecxv9pualAD4TEWCBwo69gaPEMMS0ULvUFPDyBJvVKJSaUw/ISmGjwBcotIaHQ1jt9Ae964/Ha36ZMOm7H2ZmmUWP4kl/+2XZ2vvlmdmeyIna1p0XeT7vX1JTIhan4GtB216O9ay1B2aGq8bq2d62uUvltc5BIinQmujyaFHk82d/PvZzIfRhJ9n7b4/p17vfX+rra5mA90Wv/LG/nVUJilZkRyc705zepmu/671/s/+8g30+S/Fcm4sfwgXn4mPs1v82/Y/CPqq6Nw1Vx+etn/mp9wzmuns21SSOO+ZXi8of+h/jfTXSfwwNtrU0K11/lr0aeDZPi8usK5+FTtscD3oOHkXdB+eu+ak2iz6pLfpt/qHAMOspfp543P6u++cN1WNIw6cjh/atr/j75dR3PizTgBE6hCS1ow+dZkS/wFb7Bd/gxa+7HJ7+uVIG9EUZhDMYhDRmYZ20KUIQFuAbXs+Z+Bs1fwqcMy7ACFViFtYJfP6b8at+3aQOfGmzCFmzDDgSe/qb8at9/Z9nHjvFpwAmcQhNa0I74X71k91dZTXnfamN6E1mfVJF7YBTGYBzSkCn22jzB+2mMv8pqOrNt/iV8yrAMK1CBVVgrilU32MNvwr42t5c99mulDXxqsAlbsA07EMT4/8+6NSdyG+7A4tyf93+O5wt4Cet/wf9cg8v3/BmmggHOn2GqPcD5O0z9K/mDSPVV9H6favqGdr1fz+Hzja7Xn4Hy7Mg=
   </data>
  </layer>
- <layer name="objects" width="32" height="32">
+ <layer name="objects1" width="32" height="32">
   <data encoding="base64" compression="zlib">
    eJxjYBgF1AQrxFDZ2PjIYqSCpSIMDM+gOE2UsFuobT/I3qVQu59DMTpQBcqrieDmkwLWiJOuJxXkPhHcfFLAGzLspybQkRhY+0cBbUCVFANDtdTA2r17gOzfNYB2DwWAXK4/J7PcohYYaPuHMqiQHGgXDF3ApsDAwK4wgPYrAu1XHDj7ORQYGDgVBs5+D6DdngNoPwyM5qFRMApoBwDNYR5w
   </data>
  </layer>
- <layer name="tops" width="32" height="32">
+ <layer name="tops1" width="32" height="32">
   <data encoding="base64" compression="zlib">
    eJzll7lOw0AURR9Lwx6jKJsiJR0U1OBU0LJ/BwgK1hZah62Ej0jDFkpozfoPIKighXRwEIpijEc2eAmEIx2Nbc34jm3Ns8bMiJyjqWjDpkiGkXFuo8Dt2Uu9H/bFRfrjX8cnNZGU9vnabULkLqE+b1QeNPc+u/TZ89CvSin58/kEgdP3VeHl+b/LQCr4e/rB1FkbeIGXeIXXeKNHk99WEGnHDuzELuzGnkI0+aPkjOE4TuAkTuE0LuREFnEJl3EFV3PB5hvkFHEDN3ELt3EH98k6wEM8wmMsB5wfJlHWfSeC+ueVWbMntnU7HBMZiXkbP+9zDs9kv9jy18he95g/m60dz2TV/ew8UqufcDAtMoQVyxxOyT4LOd+Onq4dv75nU5/nLO/2PoR6/R9pyos0Ywu25us5k8ajEvL/363eWtdQ0BgR7TFUmHXM/k343Xep9m9ubRX7vsvveK+tCr/j/xJvOL16EQ==
   </data>
  </layer>
- <objectgroup name="colliderWalls" width="32" height="32">
+ <objectgroup name="colliderWalls1" width="32" height="32">
   <object x="0" y="0" width="512" height="48"/>
   <object x="0" y="48" width="128" height="32"/>
   <object x="128" y="48" width="160" height="16"/>

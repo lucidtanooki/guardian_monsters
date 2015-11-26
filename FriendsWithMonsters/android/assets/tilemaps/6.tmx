@@ -13,27 +13,27 @@
  <tileset firstgid="8193" name="pokebublic2" tilewidth="16" tileheight="16">
   <image source="../spritesheets/thatssowitty_2.png" width="1024" height="1024"/>
  </tileset>
- <layer name="ground" width="8" height="5">
+ <layer name="ground1" width="8" height="5">
   <data encoding="base64" compression="zlib">
    eJxjkmVgYBrEGACJVwTZ
   </data>
  </layer>
- <layer name="walls" width="8" height="5">
+ <layer name="walls1" width="8" height="5">
   <data encoding="base64" compression="zlib">
    eJy7JMDAcIkCTGsAACxJDiE=
   </data>
  </layer>
- <layer name="objects" width="8" height="5">
+ <layer name="objects1" width="8" height="5">
   <data encoding="base64" compression="zlib">
    eJxjYKAcBDIxMAQBcTAQh4BooNhERgjGBS4yQvBqGQaGtUC8RgYiziGCqg4AW+MG4g==
   </data>
  </layer>
- <layer name="tops" width="8" height="5">
+ <layer name="tops1" width="8" height="5">
   <data encoding="base64" compression="zlib">
    eJxjYCAMBJkYGISAWBiIRUA0UCyQEYIJgWwZCJ0jQ4RFWAAArvICGQ==
   </data>
  </layer>
- <objectgroup name="colliderWalls" width="8" height="5">
+ <objectgroup name="colliderWalls1" width="8" height="5">
   <object x="0" y="0" width="128" height="32"/>
   <object x="0" y="64" width="48" height="16"/>
   <object x="96" y="32" width="32" height="16"/>

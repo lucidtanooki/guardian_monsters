@@ -10,27 +10,27 @@
  <tileset firstgid="4097" name="pokepublic" tilewidth="16" tileheight="16">
   <image source="../spritesheets/thatssowitty_1.png" width="1024" height="1024"/>
  </tileset>
- <layer name="ground" width="32" height="32">
+ <layer name="ground1" width="32" height="32">
   <data encoding="base64" compression="zlib">
    eJzt0zEOACAIBEEslKfx/x+JHRWNiWLcS6bf5qyJGAAAG7obgRZoAn6wvqcFOgDgFdlut50wAYLqHFE=
   </data>
  </layer>
- <layer name="walls" width="32" height="32">
+ <layer name="walls1" width="32" height="32">
   <data encoding="base64" compression="zlib">
    eJztl0EKwkAMRQd3urPbutW76EG8iAeot3KpR7IgwfJp+n8yVUT9EIYp/CbPSSfYbUo599ElV1PWf+3jVrGasv5s3d/Gv2xLWbV8xfqP60eoPtxbHfv+2aHlK9Zv+VUf7pGDhcdv4cnrF+Rg4fGz/F6/vJsf34McTLX8+DviuZjUflbzm8/jR6n9zPJvm1J2zdOn8jON8StS+ae8w/ojuYfvyPAP8+N5RlXLj+cZFfv+WX617z2x++/V+Wv7H2uKCvnZfePx4l6d48jP7htvDqDUOT7V/5E5iDotYv4xjsgczOb/838uvyLPd5mBX1HWh/65+aP+T+H/1f9/d7afmu4=
   </data>
  </layer>
- <layer name="objects" width="32" height="32">
+ <layer name="objects1" width="32" height="32">
   <data encoding="base64" compression="zlib">
    eJztzTERADAIBLAfO1YO/pWhoRPHNTGQBAAA2OgM/zX8389/eNVfjwBh
   </data>
  </layer>
- <layer name="tops" width="32" height="32">
+ <layer name="tops1" width="32" height="32">
   <data encoding="base64" compression="zlib">
    eJzt1LERgCAMheF3bkCbjXEyYQ+ZQ1uLXEIODzzf16QipPoBIqKnLMAu+nxbuf+oos+vOBPQ0uwriNY2qjfWHm1fb2+ie0b1a9UOHtvsC4jIy9tLq6PRd95eWh2Nvvu7C+boWEA=
   </data>
  </layer>
- <objectgroup name="colliderWalls" width="32" height="32">
+ <objectgroup name="colliderWalls1" width="32" height="32">
   <object x="0" y="0" width="256" height="96"/>
   <object x="288" y="0" width="224" height="96"/>
   <object x="192" y="96" width="64" height="64"/>

@@ -3,6 +3,7 @@ package org.limbusdev.monsterworld.ecs;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
@@ -12,6 +13,7 @@ import org.limbusdev.monsterworld.MonsterWorld;
 import org.limbusdev.monsterworld.ecs.components.ComponentRetreiver;
 import org.limbusdev.monsterworld.ecs.components.PositionComponent;
 import org.limbusdev.monsterworld.ecs.entities.HeroEntity;
+import org.limbusdev.monsterworld.ecs.systems.CameraSystem;
 import org.limbusdev.monsterworld.ecs.systems.CharacterSpriteSystem;
 import org.limbusdev.monsterworld.ecs.systems.DebuggingSystem;
 import org.limbusdev.monsterworld.ecs.systems.InputSystem;
@@ -77,6 +79,12 @@ public class EntityComponentSystem {
         MovementSystem movementSystem = new MovementSystem(this, gameArea.getWarpPoints());
         movementSystem.addedToEngine(engine);
         engine.addSystem(movementSystem);
+
+        // Camera System
+        CameraSystem cameraSystem = new CameraSystem((OrthographicCamera)viewport.getCamera(),
+                gameArea.getTiledMap());
+        cameraSystem.addedToEngine(engine);
+        engine.addSystem(cameraSystem);
 
         // Debugging
         DebuggingSystem debuggingSystem = new DebuggingSystem();

@@ -38,17 +38,12 @@ public class PositionSynchroSystem extends EntitySystem {
 
     public void update(float deltaTime) {
         for (Entity entity : entities) {
-//            DynamicBodyComponent body = bm.get(entity);
             PositionComponent position = pm.get(entity);
 
             // Synchronize CharacterSprite with DynamicBody
             if(entity.getComponent(CharacterSpriteComponent.class) != null) {
                 CharacterSpriteComponent sprite = sm.get(entity);
                 sprite.sprite.setPosition(position.x, position.y);
-//                sprite.sprite.setPosition(
-//                        body.dynamicBody.getPosition().x - sprite.sprite.getWidth()/2,
-//                        body.dynamicBody.getPosition().y - body.fixture.getShape().getRadius()
-//                );
             }
         }
     }

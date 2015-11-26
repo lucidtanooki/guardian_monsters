@@ -13,27 +13,27 @@
  <tileset firstgid="8193" name="pokebublic2" tilewidth="16" tileheight="16">
   <image source="../spritesheets/thatssowitty_2.png" width="1024" height="1024"/>
  </tileset>
- <layer name="ground" width="16" height="16">
+ <layer name="ground1" width="16" height="16">
   <data encoding="base64" compression="zlib">
    eJxjYKAMNEmM4lE8iocqBgDSIZBh
   </data>
  </layer>
- <layer name="walls" width="16" height="16">
+ <layer name="walls1" width="16" height="16">
   <data encoding="base64" compression="zlib">
-   eJyzlmNgsCYD1wLxUxkGhmo58vBeIKYE/KVQv608ZfoHC0APVysKw6WKQv20BL+wpCNSgP0ISXO4/IlNHACvShqJ
+   eJyzlmNgsCYD1wIxCFTLkYf3ArEoIwMKmA7EMxgwAaMAAwMTEmYG4r9A/aGMWBRjAY5A9U5I2BmIbeWJ0wsCjUD1TUi4WYB4vbQG6OFqJUeZeVUU6qcl+IUlHZEC7IlUjytt/KUwbEhJc5QAXP7EJg4A4FUgTQ==
   </data>
  </layer>
- <layer name="objects" width="16" height="16">
+ <layer name="objects1" width="16" height="16">
   <data encoding="base64" compression="zlib">
-   eJxjYCAfRDJRoBkIZuLQv0aagSGYCP03ibRfkBloF5CeBcSzofxRAAGBwDAMAuJgIA4B4osUxim9w/YSIwPDFSB9DcomBkxkhGCYfhEgFiNSLwhcZITgoQBOCDMwHBfGLQ8AJ4kP5w==
+   eJxjYBh8YI00A0MwEl+QmYEhBEiHAnEYlD8KIECQiYFBCIiFgViEiXT9gUA9QUAcDMQhQHyRDDMkgVga5h4S40YciCOBOBrKJgSmobFBemYC8Wwi9V8D4omMEHwNSVyMkTj3gsBFRggeCuCEMAPDcWHc8gAIzQ6x
   </data>
  </layer>
- <layer name="tops" width="16" height="16">
+ <layer name="tops1" width="16" height="16">
   <data encoding="base64" compression="zlib">
-   eJxjYCAflMrhlhOmwFx0cJGJgSESSEcBcTSUP1yAtRwq/iVLmn5BYFgIAbEwEItAw2UPnnghBvyhUL89Dv275DD9CwJTgHgaEfphIJARgnGBvxS631aeMv2Ugv840gAucUoAANKbEI8=
+   eJxjYKAeCAfiCChbGEn8IhMDgwiQFgViMSh/FECAtRwq/iVLuZl75CjT/4dC/fY49O+Sw/QvKfpBIBCEGaEYh5q/FLp/oMF/HGkAlzglAAAFqw6m
   </data>
  </layer>
- <objectgroup name="colliderWalls" width="16" height="16">
+ <objectgroup name="colliderWalls1" width="16" height="16" visible="0">
   <object x="176" y="240" width="16" height="16"/>
   <object x="176" y="160" width="16" height="48"/>
   <object x="192" y="160" width="64" height="16"/>
@@ -45,16 +45,15 @@
   <object x="64" y="128" width="32" height="16"/>
   <object x="80" y="144" width="16" height="48"/>
   <object x="80" y="240" width="16" height="16"/>
-  <object x="144" y="48" width="16" height="16"/>
-  <object x="208" y="48" width="16" height="16"/>
-  <object x="160" y="48" width="48" height="16"/>
+  <object x="144" y="32" width="16" height="16"/>
+  <object x="208" y="32" width="16" height="16"/>
   <object x="96" y="32" width="16" height="16"/>
   <object x="80" y="32" width="16" height="16"/>
   <object x="0" y="0" width="240" height="32"/>
   <object x="224" y="32" width="16" height="16"/>
   <object x="16" y="160" width="32" height="16"/>
  </objectgroup>
- <objectgroup name="sensors" width="16" height="16">
+ <objectgroup name="sensors" width="16" height="16" visible="0">
   <object name="warpField" x="128" y="240" width="16" height="16">
    <properties>
     <property name="targetID" value="3"/>

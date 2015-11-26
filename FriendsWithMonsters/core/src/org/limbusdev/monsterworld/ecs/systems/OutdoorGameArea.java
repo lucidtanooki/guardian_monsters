@@ -68,7 +68,7 @@ public class OutdoorGameArea {
         tiledMap = new TmxMapLoader().load("tilemaps/" + areaID + ".tmx");
         // create static bodies from colliders
         Rectangle r;
-        for(MapObject mo : tiledMap.getLayers().get("colliderWalls").getObjects()) {
+        for(MapObject mo : tiledMap.getLayers().get("colliderWalls1").getObjects()) {
             r = ((RectangleMapObject) mo).getRectangle();
             colliders.add(r);
         }
@@ -104,6 +104,10 @@ public class OutdoorGameArea {
 
     }
 
+    /**
+     * Creates a wall of colliders right around the active map so character can't just walk out
+     * @param tiledMap
+     */
     public void createBorderColliders(TiledMap tiledMap) {
         // Create Colliders around the level
         int mapWidth = tiledMap.getProperties().get("width", Integer.class);
@@ -155,5 +159,9 @@ public class OutdoorGameArea {
 
     public Array<WarpPoint> getWarpPoints() {
         return warpPoints;
+    }
+
+    public TiledMap getTiledMap() {
+        return tiledMap;
     }
 }

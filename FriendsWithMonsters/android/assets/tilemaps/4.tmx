@@ -25,12 +25,12 @@
  </layer>
  <layer name="objects1" width="16" height="16">
   <data encoding="base64" compression="zlib">
-   eJxjYBh8YI00A0MwEl+QmYEhBEiHAnEYlD8KIECQiYFBCIiFgViEiXT9gUA9QUAcDMQhQHyRDDMkgVga5h4S40YciCOBOBrKJgSmobFBemYC8Wwi9V8D4omMEHwNSVyMkTj3gsBFRggeCuCEMAPDcWHc8gAIzQ6x
+   eJxjYKAeCAfiCChbGE1OBIhFgViMCHPWSDMwBCPxBZkZGEKAdCgQh0H5owACBJkYGISAWBiIRZhI1x8I1BMExMFAHALEF8kwQxKIpWHuITFuxIE4EoijoWxCYBoaG6RnJhDPJlL/NSCeyAjB15DExRiJcy8IXGSE4KEATgAz4nH0zIgEALaCD7I=
   </data>
  </layer>
  <layer name="tops1" width="16" height="16">
   <data encoding="base64" compression="zlib">
-   eJxjYKAeCAfiCChbGEn8IhMDgwiQFgViMSh/FECAtRwq/iVLuZl75CjT/4dC/fY49O+Sw/QvKfpBIBCEGaEYh5q/FLp/oMF/HGkAlzglAAAFqw6m
+   eJxjYKA9uMiEnz+SgbUcKv4lS7mZe+Qo0/+HQv32OPTvksP0Lyn6QSAQhBmhGIeavxS6f6DBfxxpAJc4JQAAV+cNpQ==
   </data>
  </layer>
  <objectgroup name="colliderWalls1" width="16" height="16" visible="0">
@@ -80,6 +80,15 @@
   <object name="startField" x="240" y="16" width="16" height="16">
    <properties>
     <property name="fieldID" value="2"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="livingEntities" width="16" height="16">
+  <object name="person" x="16" y="64" width="16" height="16">
+   <properties>
+    <property name="moving" value="true"/>
+    <property name="path" value="E,E,E,E,E,W,W,W,W,W"/>
+    <property name="startDir" value="S"/>
    </properties>
   </object>
  </objectgroup>

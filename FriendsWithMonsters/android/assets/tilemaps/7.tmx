@@ -26,7 +26,7 @@
  </layer>
  <layer name="walls0" width="64" height="32">
   <data encoding="base64" compression="zlib">
-   eJztl71OwzAQgG8tE2VsYWTjZwIxXpfyo+7wIKzARKWwlAUeBEZ4AVhAoq/QFcob4JNtxVg2Ceml5Kg/6VQnZ1n+7hxLHa0CXKt4UfGqYhR5ls7+gQ6fIm/7LJ2Yf5H3ovf/qQPw3Jn/fqtwhgDnGM5V7X+rC7DUrXPXfDwgwCOGc1X7f6jcj4y/rcVkuS6D+oj572C52MW8FuSfreV1oHHTifmXZQ91DcjZDSnM6k+c4vfe++egyXD40xmw34Lv3vQacPhb6BwctwFO2s33JlrK+4rZX8q5J8jb1oADew8Qi3D3+5C/JMj9UsWAsf+SsO6c3780uO9/aST/5J/8edZK/jzrzJPkn/yTP89akv05aiDZfxbuUf9K9af/QUMv3hHgw8QU9Vz3nZv7NPmY/7CfjzMzvuj/PM8SmheiaF4Wyd+o97eB2OgBbJrY6um57js3t23yEvv/plzHgVhf+f1ad8i+vT/D73OZsOfkP/AFhIKvDA==
+   eJztlztOw0AQhqcNFaFMoKSDUIEox014iB4OQkEDVEQyTWjgICDRwAWgAQmuQMvjBszIXtle7WLjjBOPsp/0K7Z3tdpvZm0p42WAK8oL5ZUy9txrZ2c3iU2Zt7nXjs+/zHve+//UA3juTX+/dThFgDN0j9Xtf6cPsNBvctdyPCDAI7rH6vZ/j9z3U39Ti4/Fpgyaw+e/idWyhVkt2D9eyerA123H51+VbUxqwM75aGFSf+YYi723z0GbkfDnM2DeBdu97TWQ8DfwOTjsAhx12+/NdMj7Uthfy7ln2NvUQALzHWDm4dtvw/6aYPcLyoFg/zVh3CXff21If/+1EfyDf/CXWSv4y6wzTYJ/8A/+Mmtp9peogWb/SbjD5FerP/8PGln5RICvNN+UEyw+y4/9YLKWz380zK7j9Pp8+Pc8g2uei7J5sWf8mp7fOLIWAaynGVDusfgsP7YRJWtp7P8bub47srr0/7VuUXx7M8Puc5UMolnvWo5fK3ywug==
   </data>
  </layer>
  <layer name="objects0" width="64" height="32">
@@ -46,7 +46,7 @@
  </layer>
  <layer name="ground1" width="64" height="32">
   <data encoding="base64" compression="zlib">
-   eJzt1skJgDAARFHBCtJAurABNyzBekxnNqAlGW8uKEYPUecPfPAQAi8nk0Rrbb1Obfjx48ePH//V/jT8+PFrvkHTaPvn4cePH/8Tf2e/mbN7V27DG018y50Gs7f04qWZdvmLK3ylr9p8n50NvTu2Mbbficc/gJ5/OXX/dirOo6n7mdYmrpR5rg==
+   eJzt1skJgDAARFHBCtJAurABN1KC9ZjObEBLMt7UgLgcos4f+OAhBF5OZpnWunab2vDjx48fP/6z/Wn48ePXfAPntP3L8OPHj/+Jv7ffzNvYVdrrTSa95U6jiS2DeHmhXfniqlAdanbfR2ev3p3amNrvxeMfQM+/nrqfMaa7GXCkeHI=
   </data>
  </layer>
  <layer name="walls1" width="64" height="32">
@@ -56,7 +56,7 @@
  </layer>
  <layer name="objects1" width="64" height="32">
   <data encoding="base64" compression="zlib">
-   eJzt1j0OgmAQhOE5gCYWNuhdQANR0TuplSbEMwG95/Aa4HytlT/ASnaeZFucNyFBQOR/lBFQ8ero+2fcd93tGVrD7ja0L6yX2IjZnfBWTvuP7D7xzk77S3ZXvNppf8PuNrQvrZfYiNmd8FYD9c/Xw/zO2D1m1gtEuhFtgGLE/xF/4bk92DpuDz7tL1LglvazxcJrv7fvv/f336NLBlwz6xUiIiIi0qdJDkxz6xV29mw/OO5/1xNZ0xng
+   eJztlk0OgjAQhecAmrhwU70LYCAqeid1hQnxTMBCV57Da4CvO2Mw/mHHMvMls2pS3pfXhhIpyv9QGKISU5nP9zgvu8vjmhrejXWfcCfhIYB3iImE+m/gvcXshPoX8C4xlVD/Gt6NdZ9yJ+EhgHeIiRz5j2duvuM7lxF3AkXpBjMnyj1+I36DZHfLQrC75V3/PCY6xL/JwsG9v/3/ZynRPuXJ45q2/o9wPwnxb6Pv/WcJ/JLH69p/v/t/hvav/Uvu/xY9C3oWFMV3BrjDQ8H3eAX3tWD/V7kCMeUsgg==
   </data>
  </layer>
  <layer name="tops1" width="64" height="32">
@@ -64,17 +64,17 @@
    eJztlbdOw1AUhv+FUAQrPRkYqRvziZMgHBAChBTegP4QlIWFJoVHoJdngIUyMdJZgoQo78BvIeQIEmKjODe27id9g6Vz7fNLPvcAmqBQIUCIVtIqUduLCmICxGmC9onaXlQwL8ACXaRLorQVJTQJ0ExP6Kk4O9PBuk7aRbtpj8Nz5UhKgHFxd2aK9dN0hs7SOXofBR7oI32KFrlJD0kLsCnuzmyzfofu0j26T5sNoIW20rBR5CY9otYE6sz/n/85B34jyewDefK3y99zPim/58CvM5CLXPmsOf9mS37Pwc8Z6BX4llz5rDn/i3GfzL0TMgI8i/38IvautLgybA+GgUN6RI+HS95qyci3K1+Z+Y2+048A5r/mXXZDb+mdz++1/1DPf7yBNtImBzM+GAOGYt73VSrGsjKnXNxxmYD8KxuGnSXtIn9bgPaBl1nORoDzkfKq648DZrzwO4pBxSgQGi3fOo0mm4swcBlW3YU6qiNATaRwXVD2n0V2FpPZkwXyL7d+7YyVhHN3+I3dPO5FndetsmbNRd26A93uvwvmnwjQ/tdoNBqN5hOpuZio
   </data>
  </layer>
- <layer name="ground2" width="64" height="32" visible="0">
+ <layer name="ground2" width="64" height="32">
   <data encoding="base64" compression="zlib">
    eJztwQENAAAAwqD3T20ON6AAAAAAAAAAgHcDIAAAAQ==
   </data>
  </layer>
- <layer name="walls2" width="64" height="32" visible="0">
+ <layer name="walls2" width="64" height="32">
   <data encoding="base64" compression="zlib">
    eJztwQENAAAAwqD3T20ON6AAAAAAAAAAgHcDIAAAAQ==
   </data>
  </layer>
- <layer name="tops2" width="64" height="32" visible="0">
+ <layer name="tops2" width="64" height="32">
   <data encoding="base64" compression="zlib">
    eJztwQENAAAAwqD3T20ON6AAAAAAAAAAgHcDIAAAAQ==
   </data>
@@ -125,8 +125,18 @@
   <object x="0" y="400" width="32" height="32"/>
   <object x="144" y="416" width="16" height="16"/>
   <object x="0" y="272" width="16" height="32"/>
+  <object x="16" y="272" width="32" height="128"/>
+  <object x="64" y="400" width="32" height="32"/>
  </objectgroup>
- <objectgroup name="livingEntities" width="64" height="32"/>
+ <objectgroup name="livingEntities" width="64" height="32">
+  <object name="person" x="400" y="304" width="16" height="16">
+   <properties>
+    <property name="moving" value="true"/>
+    <property name="path" value="E,E,E,E,E,E,E,E,E,E,W,W,W,W,W,W,W,W,W,W"/>
+    <property name="startDir" value="S"/>
+   </properties>
+  </object>
+ </objectgroup>
  <objectgroup name="sensors" width="64" height="32">
   <object name="sensor" x="0" y="304" width="16" height="96"/>
   <object name="warpField" x="1008" y="288" width="16" height="16">

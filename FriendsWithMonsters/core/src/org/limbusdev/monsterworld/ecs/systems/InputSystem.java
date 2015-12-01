@@ -9,13 +9,16 @@ import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+import org.limbusdev.monsterworld.ecs.components.ColliderComponent;
+import org.limbusdev.monsterworld.ecs.components.ComponentRetreiver;
 import org.limbusdev.monsterworld.ecs.components.InputComponent;
 import org.limbusdev.monsterworld.ecs.components.PositionComponent;
 import org.limbusdev.monsterworld.enums.SkyDirection;
+import org.limbusdev.monsterworld.geometry.IntRectangle;
+import org.limbusdev.monsterworld.geometry.IntVector2;
 import org.limbusdev.monsterworld.utils.GlobalSettings;
 
 /**
@@ -42,18 +45,21 @@ public class InputSystem extends EntitySystem implements InputProcessor {
     public void addedToEngine(Engine engine) {
         entities = engine.getEntitiesFor(Family.all(
                 InputComponent.class,
-                PositionComponent.class).get());
+                PositionComponent.class,
+                ColliderComponent.class).get());
     }
 
     public void update(float deltaTime) {
         for (Entity entity : entities) {
             InputComponent input = im.get(entity);
             PositionComponent position = pom.get(entity);
-            makeOneStep(position, input, deltaTime);
+            ColliderComponent collider = ComponentRetreiver.getColliderComponent(entity);
+            makeOneStep(position, input, collider);
         }
     }
 
-    public void makeOneStep(PositionComponent position, InputComponent input, float deltaTime) {
+    public void makeOneStep(PositionComponent position, InputComponent input, ColliderComponent
+            collider) {
         if(input.startMoving) {
             // Define direction
             input.touchPos.x = Gdx.input.getX();
@@ -83,13 +89,23 @@ public class InputSystem extends EntitySystem implements InputProcessor {
                 default:position.nextX=position.x;position.nextY = position.y - 16;break;
             }
 
-            Vector2 nextPos = new Vector2(0,0);
-            for(Rectangle r : gameArea.getColliders()) {
+            /**
+             * Check whether movement is possible or blocked by a collider
+             */
+            IntVector2 nextPos = new IntVector2(0,0);
+            for(IntRectangle r : gameArea.getColliders()) {
                 nextPos.x = position.nextX + GlobalSettings.TILE_SIZE / 2;
                 nextPos.y = position.nextY + GlobalSettings.TILE_SIZE / 2;
                 if (r.contains(nextPos)) return;
             }
+            for(IntRectangle r : gameArea.getMovingColliders()) {
+                nextPos.x = position.nextX + GlobalSettings.TILE_SIZE / 2;
+                nextPos.y = position.nextY + GlobalSettings.TILE_SIZE / 2;
+                if (!collider.equals(r) && r.contains(nextPos)) return;
+            }
 
+            collider.collider.x = position.nextX;
+            collider.collider.y = position.nextY;
             position.lastPixelStep = TimeUtils.millis();
             input.moving = true;
             input.startMoving = false;

@@ -19,11 +19,14 @@ import org.limbusdev.monsterworld.ecs.systems.DebuggingSystem;
 import org.limbusdev.monsterworld.ecs.systems.InputSystem;
 import org.limbusdev.monsterworld.ecs.systems.MovementSystem;
 import org.limbusdev.monsterworld.ecs.systems.OutdoorGameArea;
+import org.limbusdev.monsterworld.ecs.systems.PathSystem;
 import org.limbusdev.monsterworld.ecs.systems.PositionSynchroSystem;
 import org.limbusdev.monsterworld.ecs.systems.SpriteSystem;
+import org.limbusdev.monsterworld.geometry.MapPersonInformation;
 import org.limbusdev.monsterworld.managers.MediaManager;
 import org.limbusdev.monsterworld.screens.OutdoorGameWorldScreen;
 import org.limbusdev.monsterworld.utils.GlobalSettings;
+import org.limbusdev.monsterworld.utils.UnitConverter;
 
 /**
  * Created by georg on 21.11.15.
@@ -44,14 +47,20 @@ public class EntityComponentSystem {
         this.game = game;
         this.gameArea = gameArea;
         this.engine = new Engine();
-        this.entityFactory = new EntityFactory(engine, media);
+        this.entityFactory = new EntityFactory(engine, media, gameArea);
         setUpHero();
+        setUpPeople();
         setUpEntitySystems(gameArea, viewport);
     }
     /* ............................................................................... METHODS .. */
     public void setUpHero() {
         Entity hero = entityFactory.createHero(gameArea.startPosition);
         this.heroPosition = ComponentRetreiver.getPositionComponent(hero);
+    }
+
+    public void setUpPeople() {
+        for(MapPersonInformation mpi : gameArea.getMapPeople())
+            this.entityFactory.createPerson(mpi);
     }
 
     public void setUpEntitySystems(OutdoorGameArea gameArea, Viewport viewport) {
@@ -85,6 +94,11 @@ public class EntityComponentSystem {
                 gameArea.getTiledMap());
         cameraSystem.addedToEngine(engine);
         engine.addSystem(cameraSystem);
+
+        // Path System
+        PathSystem pathSystem = new PathSystem(gameArea);
+        pathSystem.addedToEngine(engine);
+        engine.addSystem(pathSystem);
 
         // Debugging
         DebuggingSystem debuggingSystem = new DebuggingSystem();

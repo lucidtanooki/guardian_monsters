@@ -20,8 +20,6 @@ public class PositionSynchroSystem extends EntitySystem {
 
     private ComponentMapper<CharacterSpriteComponent> sm
             = ComponentMapper.getFor(CharacterSpriteComponent.class);
-    private ComponentMapper<InputComponent> im
-            = ComponentMapper.getFor(InputComponent.class);
     private ComponentMapper<PositionComponent> pm
             = ComponentMapper.getFor(PositionComponent.class);
 
@@ -30,9 +28,8 @@ public class PositionSynchroSystem extends EntitySystem {
     /* ............................................................................... METHODS .. */
     public void addedToEngine(Engine engine) {
         entities = engine.getEntitiesFor(Family.all(
-                PositionComponent.class).one(
-                CharacterSpriteComponent.class,
-                InputComponent.class
+                PositionComponent.class,
+                CharacterSpriteComponent.class
         ).get());
     }
 

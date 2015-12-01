@@ -15,6 +15,9 @@ import com.badlogic.gdx.utils.Array;
 
 import org.limbusdev.monsterworld.ecs.components.PositionComponent;
 import org.limbusdev.monsterworld.enums.MusicType;
+import org.limbusdev.monsterworld.geometry.IntRectangle;
+import org.limbusdev.monsterworld.geometry.IntVector2;
+import org.limbusdev.monsterworld.geometry.MapPersonInformation;
 import org.limbusdev.monsterworld.geometry.WarpPoint;
 import org.limbusdev.monsterworld.managers.MediaManager;
 import org.limbusdev.monsterworld.rendering.OrthogonalTiledMapAndEntityRenderer;
@@ -32,16 +35,20 @@ public class OutdoorGameArea {
     private OrthogonalTiledMapAndEntityRenderer mapRenderer;
     private MediaManager media;
     private Music bgMusic;
-    private Array<Rectangle> colliders;
+    private Array<IntRectangle> colliders;
+    private Array<IntRectangle> movingColliders;
     private Array<WarpPoint> warpPoints;
+    private Array<MapPersonInformation> mapPeople;
     public PositionComponent startPosition;
 
     /* ........................................................................... CONSTRUCTOR .. */
     public OutdoorGameArea(int areaID, MediaManager media, int startPosID) {
         this.media = media;
         this.startPosition = new PositionComponent(0,0,0,0);
-        this.colliders = new Array<Rectangle>();
+        this.colliders = new Array<IntRectangle>();
+        this.movingColliders = new Array<IntRectangle>();
         this.warpPoints = new Array<WarpPoint>();
+        this.mapPeople = new Array<MapPersonInformation>();
         setUpTiledMap(areaID, startPosID);
         this.mapRenderer = new OrthogonalTiledMapAndEntityRenderer(tiledMap, this);
     }
@@ -56,7 +63,7 @@ public class OutdoorGameArea {
         shape.begin(ShapeRenderer.ShapeType.Line);
         shape.setColor(Color.WHITE);
 
-        for(Rectangle r : this.colliders) {
+        for(IntRectangle r : this.colliders) {
             shape.rect(r.x, r.y, r.width, r.height);
         }
 
@@ -70,10 +77,20 @@ public class OutdoorGameArea {
         Rectangle r;
         for(MapObject mo : tiledMap.getLayers().get("colliderWalls1").getObjects()) {
             r = ((RectangleMapObject) mo).getRectangle();
-            colliders.add(r);
+            colliders.add(new IntRectangle(MathUtils.round(r.x), MathUtils.round(r.y), MathUtils
+                    .round(r.width), MathUtils.round(r.height)));
         }
 
+        // get information about people on map
+        for(MapObject mo : tiledMap.getLayers().get("livingEntities").getObjects()) {
+            r = ((RectangleMapObject) mo).getRectangle();
+            mapPeople.add(new MapPersonInformation(
+                    mo.getProperties().get("path", String.class),
+                    new IntVector2(MathUtils.round(r.x), MathUtils.round(r.y)),
+                    Boolean.valueOf(mo.getProperties().get("moving", String.class))));
+        }
 
+        // get information about sensors
         for(MapObject mo : tiledMap.getLayers().get("sensors").getObjects()) {
             if(mo.getName().equals("warpField"))
                 warpPoints.add(new WarpPoint(
@@ -114,7 +131,7 @@ public class OutdoorGameArea {
         int mapHeight = tiledMap.getProperties().get("height", Integer.class);
         for(int i=0; i<mapWidth+2; i++) {
             for(int j=0; j<2; j++)
-                colliders.add(new Rectangle(
+                colliders.add(new IntRectangle(
                                 (-1 + i)* GlobalSettings.TILE_SIZE,
                                 (-1 + j*(mapHeight+1))* GlobalSettings.TILE_SIZE,
                                 GlobalSettings.TILE_SIZE,
@@ -125,7 +142,7 @@ public class OutdoorGameArea {
         for(int i=0; i<mapHeight; i++) {
             for(int j=0; j<2; j++) {
                 colliders.add(
-                        new Rectangle(
+                        new IntRectangle(
                                 (-1 + j*(mapWidth+1))*GlobalSettings.TILE_SIZE,
                                 i*GlobalSettings.TILE_SIZE,
                                 GlobalSettings.TILE_SIZE,
@@ -153,7 +170,7 @@ public class OutdoorGameArea {
         this.bgMusic.stop();
     }
 
-    public Array<Rectangle> getColliders() {
+    public Array<IntRectangle> getColliders() {
         return colliders;
     }
 
@@ -163,5 +180,21 @@ public class OutdoorGameArea {
 
     public TiledMap getTiledMap() {
         return tiledMap;
+    }
+
+    public void addMovingCollider(IntRectangle collider) {
+        this.movingColliders.add(collider);
+    }
+
+    public void removeMovingCollider(IntRectangle collider) {
+        this.movingColliders.removeValue(collider, false);
+    }
+
+    public Array<IntRectangle> getMovingColliders() {
+        return movingColliders;
+    }
+
+    public Array<MapPersonInformation> getMapPeople() {
+        return mapPeople;
     }
 }

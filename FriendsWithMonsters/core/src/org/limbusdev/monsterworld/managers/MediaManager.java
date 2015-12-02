@@ -32,6 +32,7 @@ public class MediaManager {
         // Music
         bgMusicTown = new Array<String>();
         bgMusicTown.add("music/town_loop_1.wav");
+        bgMusicTown.add("music/town_loop_2.ogg");
         for(String s : bgMusicTown) assets.load(s, Music.class);
         assets.finishLoading();
     }

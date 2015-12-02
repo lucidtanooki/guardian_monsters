@@ -18,6 +18,7 @@ public class PathComponent implements Component {
     public boolean moving = false;
     public int currentDir = 0;
     public int stopCounter=0;
+    public boolean staticEntity;
     /* ........................................................................... CONSTRUCTOR .. */
 
     /**
@@ -38,8 +39,9 @@ public class PathComponent implements Component {
      *
      * @param path
      */
-    public PathComponent(Array<SkyDirection> path) {
+    public PathComponent(Array<SkyDirection> path, boolean staticEntity) {
         this.path = path;
+        this.staticEntity = staticEntity;
     }
     /* ............................................................................... METHODS .. */
 
@@ -49,7 +51,7 @@ public class PathComponent implements Component {
      */
     public void next() {
         currentDir++;
-        if(currentDir == path.size) currentDir = 0;
+        if(currentDir >= path.size) currentDir = 0;
     }
 
     /**

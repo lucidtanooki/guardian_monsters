@@ -46,7 +46,10 @@ public class CharacterSpriteSystem extends EntitySystem {
             if(ComponentRetriever.pathCompMap.has(entity)) {
                 direction = ComponentRetriever.getPathComponent(entity).path.get
                         (ComponentRetriever.getPathComponent(entity).currentDir);
-                moving = ComponentRetriever.pathCompMap.get(entity).moving;
+                if(!ComponentRetriever.pathCompMap.get(entity).staticEntity)
+                    moving = ComponentRetriever.pathCompMap.get(entity).moving ;
+                else
+                    moving = ComponentRetriever.pathCompMap.get(entity).staticEntity;
             }
 
             switch(direction) {

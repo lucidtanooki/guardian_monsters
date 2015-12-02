@@ -48,7 +48,7 @@ public class PathSystem extends EntitySystem {
 
     public void makeOneStep(PositionComponent position, PathComponent path, ColliderComponent
             collider) {
-        if(path.startMoving) {
+        if(path.startMoving && !path.staticEntity) {
             // Define direction of movement
             switch(path.path.get(path.currentDir)) {
                 case N: position.nextX=position.x;position.nextY = position.y + GlobalSettings.TILE_SIZE;
@@ -78,8 +78,8 @@ public class PathSystem extends EntitySystem {
         }
 
         // If moving, check whether next pixel step should take place
-        if(path.moving && TimeUtils.timeSinceMillis(position.lastPixelStep) > GlobalSettings
-                .ONE_STEP_DURATION_PERSON) {
+        if(!path.staticEntity && path.moving && TimeUtils.timeSinceMillis(position.lastPixelStep) >
+                GlobalSettings.ONE_STEP_DURATION_PERSON) {
             switch(path.path.get(path.currentDir)) {
                 case N: position.y += 1;break;
                 case W: position.x -= 1;break;

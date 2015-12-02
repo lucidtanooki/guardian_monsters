@@ -8,11 +8,13 @@ public class MapPersonInformation {
     public String path;
     public IntVector2 startPosition;
     public boolean moves= false;
+    public String conversation;
     /* ........................................................................... CONSTRUCTOR .. */
-    public MapPersonInformation(String path, IntVector2 startPosition, boolean moves) {
+    public MapPersonInformation(String path, IntVector2 startPosition, boolean moves, String conv) {
         this.path = path;
         this.startPosition = startPosition;
         this.moves = moves;
+        this.conversation = conv;
     }
     /* ............................................................................... METHODS .. */
     

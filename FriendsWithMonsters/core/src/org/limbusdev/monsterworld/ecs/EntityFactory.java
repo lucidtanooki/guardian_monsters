@@ -11,6 +11,7 @@ import org.limbusdev.monsterworld.ecs.components.ConversationComponent;
 import org.limbusdev.monsterworld.ecs.components.InputComponent;
 import org.limbusdev.monsterworld.ecs.components.PathComponent;
 import org.limbusdev.monsterworld.ecs.components.PositionComponent;
+import org.limbusdev.monsterworld.ecs.components.SpriteComponent;
 import org.limbusdev.monsterworld.ecs.entities.HeroEntity;
 import org.limbusdev.monsterworld.ecs.systems.OutdoorGameArea;
 import org.limbusdev.monsterworld.enums.SkyDirection;
@@ -72,7 +73,7 @@ public class EntityFactory {
 
         return createPerson(new PositionComponent(personInformation.startPosition.x,
                 personInformation.startPosition.y, GlobalSettings.TILE_SIZE, GlobalSettings
-                .TILE_SIZE), path, personInformation.moves);
+                .TILE_SIZE), path, personInformation.moves, personInformation.conversation);
     }
 
     /**
@@ -81,10 +82,12 @@ public class EntityFactory {
      * @return
      */
     public Entity createPerson(PositionComponent startField, Array<SkyDirection> path, boolean
-            moves) {
+            moves, String conv) {
         Entity person = new Entity();
+        PathComponent pathComp = new PathComponent(path, moves);
+        pathComp.moving = moves;
+        person.add(pathComp);
         person.add(new CharacterSpriteComponent(media.getTextureAtlasType(TextureAtlasType.HERO)));
-        if(moves) person.add(new PathComponent(path));
         PositionComponent position = new PositionComponent(
                 startField.x,
                 startField.y,
@@ -95,7 +98,7 @@ public class EntityFactory {
                 .width, position.height);
         area.addMovingCollider(collider.collider);
         person.add(collider);
-        person.add(new ConversationComponent("Hello. How are you doing?"));
+        person.add(new ConversationComponent(conv));
         engine.addEntity(person);
 
         return person;

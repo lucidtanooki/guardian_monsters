@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="32" height="32" tilewidth="16" tileheight="16">
  <properties>
-  <property name="musicIndex" value="1"/>
+  <property name="musicIndex" value="2"/>
   <property name="musicType" value="town"/>
  </properties>
  <tileset firstgid="1" name="tuxemon" tilewidth="16" tileheight="16">
@@ -89,9 +89,17 @@
  <objectgroup name="livingEntities" width="32" height="32">
   <object name="person" x="96" y="224" width="16" height="16">
    <properties>
-    <property name="moving" value="true"/>
     <property name="path" value="WSTOP,ESTOP,SSTOP,S,S,S,SSTOP,ESTOP,WSTOP,N,N,N"/>
     <property name="startDir" value="S"/>
+    <property name="static" value="false"/>
+    <property name="text" value="Hello. How are you doing? I'm waiting for my girlfriend."/>
+   </properties>
+  </object>
+  <object name="person" x="80" y="160" width="16" height="16">
+   <properties>
+    <property name="path" value="WSTOP"/>
+    <property name="static" value="true"/>
+    <property name="text" value="I like standing here and watching how the wind moves the water."/>
    </properties>
   </object>
  </objectgroup>

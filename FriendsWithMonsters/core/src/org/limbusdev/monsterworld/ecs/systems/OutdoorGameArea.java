@@ -1,6 +1,5 @@
 package org.limbusdev.monsterworld.ecs.systems;
 
-import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -87,7 +86,8 @@ public class OutdoorGameArea {
             mapPeople.add(new MapPersonInformation(
                     mo.getProperties().get("path", String.class),
                     new IntVector2(MathUtils.round(r.x), MathUtils.round(r.y)),
-                    Boolean.valueOf(mo.getProperties().get("moving", String.class))));
+                    Boolean.valueOf(mo.getProperties().get("static", String.class)),
+                    mo.getProperties().get("text", String.class)));
         }
 
         // get information about sensors

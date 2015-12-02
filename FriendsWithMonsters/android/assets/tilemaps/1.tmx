@@ -12,22 +12,27 @@
  </tileset>
  <layer name="ground1" width="32" height="32">
   <data encoding="base64" compression="zlib">
-   eJzt0k0KgCAQhuFJqRb93Kq8XHWxrDOliCAxRYROYLN4Nga+SJ8qABRjEZUAUJ3UQNcfsNaP+qHxoy5jjL01CYAZsQiavjadDbFzP2oH+8dWS9THGndy76/mrJOORr6n7of3YxtM2bdv76U7ny42mLLf8P7J+37rT/l95OIAXH9dRA==
+   eJzt0ksOQDAUheGDYOAxtCO6uTKzKo81qYho5BIRbZO6g29SiZ/0iAAQjH0oBpCcpLDXr6nWj/q6xlGXMRf66uD6W9h7MgRaQhfa6Y+qMxFm7n/aoe54lVvqU407vvcHdVZEm5F4brqvv5/aoMn++u9ltJ3Liw2a7Ge8f+v9fetP7fvwxQIA8V5t
   </data>
  </layer>
  <layer name="walls1" width="32" height="32">
   <data encoding="base64" compression="zlib">
-   eJztl00KAjEMhYOgokeY6uz1JnorFzqMCuO1/AE9kgEbkGA7tU2bzTwIbzadl482lHYLgAtWF+mk2PVPrFeCk2LXx/bN+WcGYG76PRf/Bv+9Nf3u4g/tn/svjbEmrKaOc0J9hPbP/V+5+EvJxS+pPdbBFlhv7Lc2P5+DHPw+8TkI4T/VAOdatg8fP5+xO2Y/hPN9/KkzFqLQ/W+XefK1zj9J6/yTBv5Pru8eyynipxlbVQDrqlw+8e9G5TK/RfyNUr7WuSNpzR3Jx9/iXXMUvm+4fPxXzL5lzh/2X4Zf6v2UyqH1/kv11P5T/Q1uU/r0
+   eJztl81qwkAQxwcPBfsABoz13r5JPatH8VV6EtuCPbQexdfxA/Rge9Q+irPgwHY6mWz3y0v/MAwJSf7zy85kyawD8IYx88wk3/t3GPuATPK937duzt8sAW7L+pyK/xGf3SvrcxW/a/08SxoVADfwM8aF3CdUh2v9PEtaFL/PLQu5T/g6xpDmX8UfU0f0Ol3CyOTvjPya+Byk4NfE58CF/6UL8NqNW4fGz2dsg97bGv9+C2CA8WGFOR625Os1fpcZ43pn3hTzCn/X9Z/e/c3/0wrNP3b/H5g3xVcgv6/s77PUv6nn3+4dqX9T85u+Ie6m0EPkq+1jodLmlvjpPd23AR7aaeqQRPxPjXyetoh/ciX/3PsOV+59l0vjn2LPPkfe77g0/hV6rxP7/69/HP5Y/0+hHNf6/wvNofWH5jPbfR1J
   </data>
  </layer>
  <layer name="objects1" width="32" height="32">
   <data encoding="base64" compression="zlib">
-   eJxjYBjaIE0QgkftH1j7kTE66JRFqKWX/QJAzIFFLbXtRqfx2TGQ8TQKRgG54JEYA8NjMfrZt0IMglVE6Wcnuv2jYBSMAtqAkVgPEmojDSf7sbXJRu0fHPbD5EfBKAABACDaJEg=
+   eJxjYBjaIE0QgkftH1j7kTE66JRFqKWX/QJAzIFFLS7wVAA7JmQ3Oo3PDmrbT00w0u2nFRgMfqDUDY/EGBgeixGn9jIwr18B4quy5Nu/QgyCVURJ0wcCwnIMDCJALCpHul5k+8kFwUB7Q4A4lAL7yQWgcnYwpLfBDgYyjAa6XBvJ9g9kvUKojTSc7MfWJhu1f3DYD5MfBaMABADmWE2U
   </data>
  </layer>
  <layer name="tops1" width="32" height="32">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFwx14yg60C0YBJeA0MP7ODGAccssxMPDI0c++TikGhi4pBO0NtNuHjvafBNp5SgpBj2QwWnaMAmJBofxAu4B88FKSgeGVJP3t7WCiv52DHZwEljmnBrDc4QTWNVx0rG/QgSfQbq8BtH8UEA/Q2yrE0tQC6G0VYmlK3U8tf5Dr/tG2GXUAACyEPbw=
+   eJxjYBgFwx14yg60C0YBJeA0MP7ODGAccssxMPDI0c++TikGhi4pBO0NtNuHjvafBNp5SgpBEwtCxBgYQpFwmBjt3IgNTEGzbxoV7Cel7MBlP73S7xUk+0Fp5xqUT6/0ixxWyGmH3ukXHXTK0MeeQnkEGyUs6GQ/JeClJAPDK0n629vBRH87Bzs4CUw7pwawvuME5lWuAcyvnkC7vQbQ/lFAPEBvqxBLUwugt1WIpSl1P7X8Qa77SW2bjQLsAAAUR0wM
+  </data>
+ </layer>
+ <layer name="tops2" width="32" height="32">
+  <data encoding="base64" compression="zlib">
+   eJztzUENACAQA8H+QQHJnSFQhjUQBQL4NyE7BkYCAOAvs3n/FdIO319Squn7+72H8QcAAG8Hh84DnA==
   </data>
  </layer>
  <objectgroup name="colliderWalls1" width="32" height="32">
@@ -50,8 +55,16 @@
   <object x="144" y="192" width="32" height="16"/>
   <object x="80" y="208" width="64" height="16"/>
   <object x="80" y="224" width="16" height="16"/>
-  <object x="336" y="64" height="48"/>
-  <object x="432" y="64" height="48"/>
+  <object x="336" y="64" width="16" height="48"/>
+  <object x="416" y="64" width="16" height="48"/>
+  <object x="368" y="272" width="32" height="32"/>
+  <object x="400" y="240" width="32" height="32"/>
+  <object x="352" y="240" width="32" height="32"/>
+  <object x="352" y="272" width="16" height="16"/>
+  <object x="400" y="272" width="16" height="16"/>
+  <object x="288" y="176" width="48" height="64"/>
+  <object x="352" y="176" width="48" height="64"/>
+  <object x="336" y="176" width="16" height="48"/>
  </objectgroup>
  <objectgroup name="sensors" width="32" height="32">
   <object name="warpField" x="256" y="0" width="16" height="16">
@@ -73,7 +86,16 @@
   </object>
   <object name="startField" x="272" y="16" width="16" height="16">
    <properties>
-    <property name="fieldID" value="1"/>
+    <property name="fieldID" value="2"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="livingEntities" width="32" height="32">
+  <object name="person" x="64" y="336" width="16" height="16">
+   <properties>
+    <property name="path" value="SSTOP"/>
+    <property name="static" value="true"/>
+    <property name="text" value="One day I will get a boat and sail around this beautiful planet."/>
    </properties>
   </object>
  </objectgroup>

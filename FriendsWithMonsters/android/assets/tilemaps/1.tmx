@@ -89,6 +89,17 @@
     <property name="fieldID" value="2"/>
    </properties>
   </object>
+  <object name="startField" x="336" y="240" width="16" height="16">
+   <properties>
+    <property name="fieldID" value="3"/>
+   </properties>
+  </object>
+  <object name="warpField" x="336" y="224" width="16" height="16">
+   <properties>
+    <property name="targetID" value="9"/>
+    <property name="targetWarpPointID" value="2"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup name="livingEntities" width="32" height="32">
   <object name="person" x="64" y="336" width="16" height="16">

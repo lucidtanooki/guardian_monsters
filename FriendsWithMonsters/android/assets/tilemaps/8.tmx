@@ -69,7 +69,7 @@
   <object name="person" x="0" y="96" width="16" height="16">
    <properties>
     <property name="moving" value="false"/>
-    <property name="path" value=""/>
+    <property name="path" value="WSTOP"/>
     <property name="startDir" value="S"/>
    </properties>
   </object>

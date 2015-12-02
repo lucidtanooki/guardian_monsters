@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="8" height="8" tilewidth="16" tileheight="16">
+ <properties>
+  <property name="musicIndex" value="1"/>
+  <property name="musicType" value="town"/>
+ </properties>
+ <tileset firstgid="1" name="indoor" tilewidth="16" tileheight="16">
+  <image source="../spritesheets/tuxemon.png" width="1024" height="1024"/>
+ </tileset>
+ <tileset firstgid="4097" name="pokepublic" tilewidth="16" tileheight="16">
+  <image source="../spritesheets/thatssowitty_1.png" width="1024" height="1024"/>
+ </tileset>
+ <tileset firstgid="8193" name="pokebublic2" tilewidth="16" tileheight="16">
+  <image source="../spritesheets/thatssowitty_2.png" width="1024" height="1024"/>
+ </tileset>
+ <layer name="ground0" width="8" height="8">
+  <data encoding="base64" compression="zlib">
+   eJxjYBjZAAABAAAB
+  </data>
+ </layer>
+ <layer name="ground1" width="8" height="8">
+  <data encoding="base64" compression="zlib">
+   eJxjYMAPJgkObwwA3vkjqQ==
+  </data>
+ </layer>
+ <layer name="walls1" width="8" height="8">
+  <data encoding="base64" compression="zlib">
+   eJxjYMAPJgozMASJYMeTgXLCIrj1CooMvPxEIL4EdOdlYYT4RWGI2GSgHAAFdgoL
+  </data>
+ </layer>
+ <layer name="objects1" width="8" height="8">
+  <data encoding="base64" compression="zlib">
+   eJxjYKAPyBRmYMgSJk6toiRhNUpEqEEHJ4D2H0dzAwDaMgMk
+  </data>
+ </layer>
+ <layer name="tops1" width="8" height="8">
+  <data encoding="base64" compression="zlib">
+   eJxjYKAO0BRmYNASppJhdAQAVt4Aeg==
+  </data>
+ </layer>
+ <objectgroup name="colliderWalls1" width="8" height="8">
+  <object x="0" y="16" width="128" height="16"/>
+  <object x="32" y="48" width="32" height="16"/>
+  <object x="80" y="64" width="16" height="16"/>
+  <object x="96" y="80" width="16" height="16"/>
+  <object x="0" y="32" width="16" height="96"/>
+  <object x="112" y="32" width="16" height="96"/>
+  <object x="16" y="112" width="32" height="16"/>
+  <object x="80" y="112" width="32" height="16"/>
+ </objectgroup>
+ <objectgroup name="sensors" width="8" height="8">
+  <object name="warpField" x="48" y="112" width="16" height="16">
+   <properties>
+    <property name="targetID" value="1"/>
+    <property name="targetWarpPointID" value="3"/>
+   </properties>
+  </object>
+  <object name="startField" x="64" y="64" width="16" height="16">
+   <properties>
+    <property name="fieldID" value="1"/>
+   </properties>
+  </object>
+  <object name="warpField" x="64" y="112" width="16" height="16">
+   <properties>
+    <property name="targetID" value="1"/>
+    <property name="targetWarpPointID" value="3"/>
+   </properties>
+  </object>
+  <object name="startField" x="48" y="96" width="16" height="16">
+   <properties>
+    <property name="fieldID" value="2"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="livingEntities" width="8" height="8"/>
+</map>

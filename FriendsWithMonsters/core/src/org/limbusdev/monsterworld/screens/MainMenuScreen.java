@@ -108,7 +108,7 @@ public class MainMenuScreen implements Screen {
     }
 
     public void setUpGame() {
-        game.setScreen(new OutdoorGameWorldScreen(game, 3, 1));
+        game.setScreen(new OutdoorGameWorldScreen(game, 9, 1));
     }
 
     public void setUpUI() {

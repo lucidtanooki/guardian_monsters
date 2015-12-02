@@ -8,17 +8,21 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 import org.limbusdev.monsterworld.ecs.components.ColliderComponent;
-import org.limbusdev.monsterworld.ecs.components.ComponentRetreiver;
+import org.limbusdev.monsterworld.ecs.components.ComponentRetriever;
+import org.limbusdev.monsterworld.ecs.components.ConversationComponent;
 import org.limbusdev.monsterworld.ecs.components.InputComponent;
 import org.limbusdev.monsterworld.ecs.components.PositionComponent;
 import org.limbusdev.monsterworld.enums.SkyDirection;
 import org.limbusdev.monsterworld.geometry.IntRectangle;
 import org.limbusdev.monsterworld.geometry.IntVector2;
+import org.limbusdev.monsterworld.screens.HUD;
 import org.limbusdev.monsterworld.utils.GlobalSettings;
 
 /**
@@ -27,19 +31,16 @@ import org.limbusdev.monsterworld.utils.GlobalSettings;
 public class InputSystem extends EntitySystem implements InputProcessor {
     /* ............................................................................ ATTRIBUTES .. */
     private ImmutableArray<Entity> entities;
-
-    private ComponentMapper<InputComponent> im
-            = ComponentMapper.getFor(InputComponent.class);
-    private ComponentMapper<PositionComponent> pom
-            = ComponentMapper.getFor(PositionComponent.class);
+    private ImmutableArray<Entity> speakingEntities;
 
     private Viewport viewport;
     private OutdoorGameArea gameArea;
+    private HUD hud;
     /* ........................................................................... CONSTRUCTOR .. */
-    public InputSystem(Viewport viewport, OutdoorGameArea gameArea) {
+    public InputSystem(Viewport viewport, OutdoorGameArea gameArea, HUD hud) {
         this.viewport = viewport;
         this.gameArea = gameArea;
-        Gdx.input.setInputProcessor(this);
+        this.hud = hud;
     }
     /* ............................................................................... METHODS .. */
     public void addedToEngine(Engine engine) {
@@ -47,13 +48,14 @@ public class InputSystem extends EntitySystem implements InputProcessor {
                 InputComponent.class,
                 PositionComponent.class,
                 ColliderComponent.class).get());
+        speakingEntities = engine.getEntitiesFor(Family.all(ConversationComponent.class).get());
     }
 
     public void update(float deltaTime) {
         for (Entity entity : entities) {
-            InputComponent input = im.get(entity);
-            PositionComponent position = pom.get(entity);
-            ColliderComponent collider = ComponentRetreiver.getColliderComponent(entity);
+            InputComponent input = ComponentRetriever.getInputComponent(entity);
+            PositionComponent position = ComponentRetriever.getPositionComponent(entity);
+            ColliderComponent collider = ComponentRetriever.getColliderComponent(entity);
             makeOneStep(position, input, collider);
         }
     }
@@ -151,14 +153,29 @@ public class InputSystem extends EntitySystem implements InputProcessor {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        touchDragged(screenX, screenY, pointer);
+        Vector2 touchPos = new Vector2(screenX, screenY);
+        viewport.unproject(touchPos);
+        boolean touchedSpeaker = false;
+        String conversation = "";
+
+        for(Entity e : speakingEntities) {
+            if(ComponentRetriever.getColliderComponent(e).collider.contains(
+                    new IntVector2(MathUtils.round(touchPos.x),
+                    MathUtils.round(touchPos.y)))) {
+                touchedSpeaker = true;
+                conversation = ComponentRetriever.convCompMap.get(e).text;
+            }
+        }
+
+        if(!touchedSpeaker) touchDragged(screenX, screenY, pointer);
+        else hud.openConversation(conversation);
         return true;
     }
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
         for (Entity entity : entities) {
-            InputComponent input = im.get(entity);
+            InputComponent input = ComponentRetriever.getInputComponent(entity);
             input.startMoving = false;
         }
         return true;
@@ -167,7 +184,7 @@ public class InputSystem extends EntitySystem implements InputProcessor {
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
         for (Entity entity : entities) {
-            InputComponent input = im.get(entity);
+            InputComponent input = ComponentRetriever.getInputComponent(entity);
             if(!input.moving) {
                 input.startMoving = true;
             }

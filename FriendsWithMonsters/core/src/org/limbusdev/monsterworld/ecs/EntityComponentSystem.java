@@ -10,7 +10,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 import org.limbusdev.monsterworld.MonsterWorld;
-import org.limbusdev.monsterworld.ecs.components.ComponentRetreiver;
+import org.limbusdev.monsterworld.ecs.components.ComponentRetriever;
 import org.limbusdev.monsterworld.ecs.components.PositionComponent;
 import org.limbusdev.monsterworld.ecs.entities.HeroEntity;
 import org.limbusdev.monsterworld.ecs.systems.CameraSystem;
@@ -24,9 +24,9 @@ import org.limbusdev.monsterworld.ecs.systems.PositionSynchroSystem;
 import org.limbusdev.monsterworld.ecs.systems.SpriteSystem;
 import org.limbusdev.monsterworld.geometry.MapPersonInformation;
 import org.limbusdev.monsterworld.managers.MediaManager;
+import org.limbusdev.monsterworld.screens.HUD;
 import org.limbusdev.monsterworld.screens.OutdoorGameWorldScreen;
 import org.limbusdev.monsterworld.utils.GlobalSettings;
-import org.limbusdev.monsterworld.utils.UnitConverter;
 
 /**
  * Created by georg on 21.11.15.
@@ -41,7 +41,7 @@ public class EntityComponentSystem {
     private OutdoorGameArea gameArea;
     /* ........................................................................... CONSTRUCTOR .. */
     public EntityComponentSystem(
-            MonsterWorld game, Viewport viewport, OutdoorGameArea gameArea
+            MonsterWorld game, Viewport viewport, OutdoorGameArea gameArea, HUD hud
     ) {
         this.media = game.media;
         this.game = game;
@@ -50,12 +50,12 @@ public class EntityComponentSystem {
         this.entityFactory = new EntityFactory(engine, media, gameArea);
         setUpHero();
         setUpPeople();
-        setUpEntitySystems(gameArea, viewport);
+        setUpEntitySystems(gameArea, viewport, hud);
     }
     /* ............................................................................... METHODS .. */
     public void setUpHero() {
         Entity hero = entityFactory.createHero(gameArea.startPosition);
-        this.heroPosition = ComponentRetreiver.getPositionComponent(hero);
+        this.heroPosition = ComponentRetriever.getPositionComponent(hero);
     }
 
     public void setUpPeople() {
@@ -63,14 +63,14 @@ public class EntityComponentSystem {
             this.entityFactory.createPerson(mpi);
     }
 
-    public void setUpEntitySystems(OutdoorGameArea gameArea, Viewport viewport) {
+    public void setUpEntitySystems(OutdoorGameArea gameArea, Viewport viewport, HUD hud) {
         // Sprite System
         SpriteSystem spriteSystem = new SpriteSystem(gameArea.getMapRenderer());
         spriteSystem.addedToEngine(engine);
         engine.addSystem(spriteSystem);
 
         // Input System
-        InputSystem inputSystem = new InputSystem(viewport, gameArea);
+        InputSystem inputSystem = new InputSystem(viewport, gameArea, hud);
         inputSystem.addedToEngine(engine);
         engine.addSystem(inputSystem);
 

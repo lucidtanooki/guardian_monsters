@@ -7,9 +7,12 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.ArrayMap;
 
 import org.limbusdev.monsterworld.graphics.EntitySprite;
-import org.limbusdev.monsterworld.utils.UnitConverter;
 
 /**
+ * Special {@link Component} which holds an {@link EntitySprite} for a visible actor. This component
+ * also holds {@link Animation}s which are used by the {@link org.limbusdev.monsterworld.ecs.systems.CharacterSpriteSystem}
+ * to animate and update an entity's sprite.
+ *
  * Created by georg on 22.11.15.
  */
 public class CharacterSpriteComponent implements Component {

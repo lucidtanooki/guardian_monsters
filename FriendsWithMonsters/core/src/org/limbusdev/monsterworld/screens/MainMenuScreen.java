@@ -6,6 +6,11 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
@@ -25,6 +30,10 @@ public class MainMenuScreen implements Screen {
 
     private Texture bGImg;
     private float elapsedTime=0;
+
+    // Scene2D.ui
+    private Skin skin;
+    private Stage stage;
     
     /* ........................................................................... CONSTRUCTOR .. */
     public MainMenuScreen(final MonsterWorld game) {
@@ -35,6 +44,8 @@ public class MainMenuScreen implements Screen {
         viewport.apply();
         camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0);
         bGImg = game.media.getMainMenuBGImg();
+
+        setUpUI();
     }
     
     /* ............................................................................... METHODS .. */
@@ -53,23 +64,20 @@ public class MainMenuScreen implements Screen {
 
         // Start collecting textures for OpenGL
         game.batch.begin();
-        game.font.draw(game.batch, "Tap to start", GlobalSettings.RESOLUTION_X/2-50, GlobalSettings
-                .RESOLUTION_Y/8);
-        game.batch.draw(
-                bGImg,
+
+        // Logo
+        game.batch.draw(bGImg,
                 GlobalSettings.RESOLUTION_X/2 - bGImg.getWidth()/2,
                 GlobalSettings.RESOLUTION_Y/2 - bGImg.getHeight()/2
                         + MathUtils.sin(elapsedTime)*7);
 
         game.batch.end();
 
+        // UI
+        stage.draw();
+
         // Update camera
         camera.update();
-
-        // If screen is touched
-        if(Gdx.input.justTouched()) {
-            setUpGame();
-        }
 
     }
 
@@ -101,6 +109,30 @@ public class MainMenuScreen implements Screen {
 
     public void setUpGame() {
         game.setScreen(new OutdoorGameWorldScreen(game, 3, 1));
+    }
+
+    public void setUpUI() {
+        // Scene2D
+        this.stage = new Stage();
+        Gdx.input.setInputProcessor(stage);
+        this.skin = new Skin(Gdx.files.internal("scene2d/uiskin.json"));
+
+        // Buttons .................................................................................
+        final TextButton button = new TextButton("Start Game", skin, "default");
+        button.setWidth(128f);
+        button.setHeight(32f);
+        button.setPosition(Gdx.graphics.getWidth() / 2 - 64f, 64f);
+
+        button.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                setUpGame();
+            }
+        });
+
+        // Buttons ............................................................................. END
+
+        stage.addActor(button);
     }
     
     /* ..................................................................... GETTERS & SETTERS .. */

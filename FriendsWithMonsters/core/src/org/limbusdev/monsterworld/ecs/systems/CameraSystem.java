@@ -64,12 +64,6 @@ public class CameraSystem extends EntitySystem {
                         mapOutline.width - camera.viewportWidth/2);
                 camera.position.y = MathUtils.clamp(position.y, 0 + camera.viewportHeight/2,
                         mapOutline.height - camera.viewportHeight/2);
-//                if (!(position.x < mapOutline.width / 2 - camera.viewportWidth / 2
-//                        || position.x > mapOutline.width / 2 + camera.viewportWidth / 2))
-//                    camera.position.x = position.x;
-//                if (!(position.y < mapOutline.height / 2 - camera.viewportHeight / 2
-//                        || position.y > mapOutline.height / 2 + camera.viewportHeight / 2))
-//                    camera.position.y = position.y;
             } else {
                 camera.position.set(position.x, position.y, 0);
             }

@@ -90,7 +90,7 @@
   <object name="person" x="96" y="224" width="16" height="16">
    <properties>
     <property name="moving" value="true"/>
-    <property name="path" value="S,S,S,N,N,N"/>
+    <property name="path" value="WSTOP,ESTOP,SSTOP,S,S,S,SSTOP,ESTOP,WSTOP,N,N,N"/>
     <property name="startDir" value="S"/>
    </properties>
   </object>

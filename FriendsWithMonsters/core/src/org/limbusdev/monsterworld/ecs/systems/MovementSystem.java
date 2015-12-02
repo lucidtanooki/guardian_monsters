@@ -10,7 +10,7 @@ import com.badlogic.gdx.utils.Array;
 
 import org.limbusdev.monsterworld.ecs.EntityComponentSystem;
 import org.limbusdev.monsterworld.ecs.components.CharacterSpriteComponent;
-import org.limbusdev.monsterworld.ecs.components.ComponentRetreiver;
+import org.limbusdev.monsterworld.ecs.components.ComponentRetriever;
 import org.limbusdev.monsterworld.ecs.components.InputComponent;
 import org.limbusdev.monsterworld.ecs.components.PositionComponent;
 import org.limbusdev.monsterworld.ecs.entities.HeroEntity;
@@ -41,7 +41,7 @@ public class MovementSystem extends EntitySystem {
     public void update(float deltaTime) {
         for(Entity e : entities) {
             if(e instanceof HeroEntity) {
-                PositionComponent position = ComponentRetreiver.getPositionComponent(e);
+                PositionComponent position = ComponentRetriever.getPositionComponent(e);
                 Rectangle heroArea = new Rectangle(position.x, position.y, position.width,
                         position.height);
                 for(WarpPoint w : warpPoints) {

@@ -8,7 +8,7 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
 
 import org.limbusdev.monsterworld.ecs.components.CharacterSpriteComponent;
-import org.limbusdev.monsterworld.ecs.components.ComponentRetreiver;
+import org.limbusdev.monsterworld.ecs.components.ComponentRetriever;
 import org.limbusdev.monsterworld.ecs.components.InputComponent;
 import org.limbusdev.monsterworld.ecs.components.PathComponent;
 import org.limbusdev.monsterworld.enums.SkyDirection;
@@ -39,26 +39,35 @@ public class CharacterSpriteSystem extends EntitySystem {
             CharacterSpriteComponent sprite = cm.get(entity);
             SkyDirection direction = SkyDirection.S;
             boolean moving = false;
-            if(ComponentRetreiver.inpCompMap.has(entity)) {
-                direction = ComponentRetreiver.getInputComponent(entity).skyDir;
-                moving = ComponentRetreiver.inpCompMap.get(entity).moving;
+            if(ComponentRetriever.inpCompMap.has(entity)) {
+                direction = ComponentRetriever.getInputComponent(entity).skyDir;
+                moving = ComponentRetriever.inpCompMap.get(entity).moving;
             }
-            if(ComponentRetreiver.pathCompMap.has(entity)) {
-                direction = ComponentRetreiver.getPathComponent(entity).path.get
-                        (ComponentRetreiver.getPathComponent(entity).currentDir);
-                moving = ComponentRetreiver.pathCompMap.get(entity).moving;
+            if(ComponentRetriever.pathCompMap.has(entity)) {
+                direction = ComponentRetriever.getPathComponent(entity).path.get
+                        (ComponentRetriever.getPathComponent(entity).currentDir);
+                moving = ComponentRetriever.pathCompMap.get(entity).moving;
             }
 
             switch(direction) {
+                case NSTOP:;
                 case N: sprite.recentAnim = sprite.animationImgs.get("n");break;
+                case ESTOP:;
                 case E: sprite.recentAnim = sprite.animationImgs.get("e");break;
+                case WSTOP:;
                 case W: sprite.recentAnim = sprite.animationImgs.get("w");break;
                 default: sprite.recentAnim = sprite.animationImgs.get("s");break;
             }
 
             sprite.recentIdleImg = sprite.recentAnim.getKeyFrames()[0];
 
-            if(!moving) sprite.sprite.setRegion(sprite.recentIdleImg);
+            // set correct texture according to state
+            if(!moving
+                || direction.equals(SkyDirection.NSTOP)
+                || direction.equals(SkyDirection.SSTOP)
+                    || direction.equals(SkyDirection.ESTOP)
+                    || direction.equals(SkyDirection.WSTOP))
+                sprite.sprite.setRegion(sprite.recentIdleImg);
             else sprite.sprite.setRegion(sprite.recentAnim.getKeyFrame(elapsedTime, true));
 
         }

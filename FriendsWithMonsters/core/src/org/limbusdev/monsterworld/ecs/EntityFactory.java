@@ -7,6 +7,7 @@ import com.badlogic.gdx.utils.Array;
 import org.limbusdev.monsterworld.ecs.components.CameraComponent;
 import org.limbusdev.monsterworld.ecs.components.CharacterSpriteComponent;
 import org.limbusdev.monsterworld.ecs.components.ColliderComponent;
+import org.limbusdev.monsterworld.ecs.components.ConversationComponent;
 import org.limbusdev.monsterworld.ecs.components.InputComponent;
 import org.limbusdev.monsterworld.ecs.components.PathComponent;
 import org.limbusdev.monsterworld.ecs.components.PositionComponent;
@@ -94,6 +95,7 @@ public class EntityFactory {
                 .width, position.height);
         area.addMovingCollider(collider.collider);
         person.add(collider);
+        person.add(new ConversationComponent("Hello. How are you doing?"));
         engine.addEntity(person);
 
         return person;

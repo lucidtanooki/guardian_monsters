@@ -4,6 +4,9 @@ import com.badlogic.ashley.core.Component;
 import com.badlogic.gdx.math.Vector2;
 
 /**
+ * Simple {@link Component} which holds the {@link com.badlogic.ashley.core.Entity}'s x and y
+ * coordinates, it's width and height and the next potential position to move to. The time when
+ * the entity last moved is stored as well.
  * Created by georg on 22.11.15.
  */
 public class PositionComponent implements Component {

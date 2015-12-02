@@ -46,7 +46,7 @@
  </layer>
  <layer name="ground1" width="64" height="32">
   <data encoding="base64" compression="zlib">
-   eJzt1skJgDAARFHBCtJAurABN1KC9ZjObEBLMt7UgLgcos4f+OAhBF5OZpnWunab2vDjx48fP/6z/Wn48ePXfAPntP3L8OPHj/+Jv7ffzNvYVdrrTSa95U6jiS2DeHmhXfniqlAdanbfR2ev3p3amNrvxeMfQM+/nrqfMaa7GXCkeHI=
+   eJzt1s8NQDAAxeEmJrBAt7BA/YlDBzANCWtxsQAjqRuaNMqh9L2X/BIHkXw9NITAWlOdQxv99NNPP/303y2m0U8//e5aLUSn4zuDusb277vjH419AvbHfAfQT/9bfy//2SBtl5L+rWl4y5OW1LbM4CUZdurD5abCVF6eXe/6fju0MbR/AI//AHj+49D9HMfhbgPZhHn5
   </data>
  </layer>
  <layer name="walls1" width="64" height="32">
@@ -127,12 +127,14 @@
   <object x="0" y="272" width="16" height="32"/>
   <object x="16" y="272" width="32" height="128"/>
   <object x="64" y="400" width="32" height="32"/>
+  <object x="320" y="320" width="32" height="16"/>
+  <object x="480" y="320" width="32" height="16"/>
  </objectgroup>
  <objectgroup name="livingEntities" width="64" height="32">
   <object name="person" x="400" y="304" width="16" height="16">
    <properties>
     <property name="moving" value="true"/>
-    <property name="path" value="E,E,E,E,E,E,E,E,E,E,W,W,W,W,W,W,W,W,W,W"/>
+    <property name="path" value="E,E,E,E,E,E,E,E,E,E,SSTOP,W,W,W,W,W,W,W,W,W,W"/>
     <property name="startDir" value="S"/>
    </properties>
   </object>
@@ -196,6 +198,17 @@
    <properties>
     <property name="layerDown" value="s"/>
     <property name="layerUp" value="n"/>
+   </properties>
+  </object>
+  <object name="warpField" x="80" y="256" width="16" height="16">
+   <properties>
+    <property name="targetID" value="8"/>
+    <property name="targetWarpPointID" value="1"/>
+   </properties>
+  </object>
+  <object name="startField" x="80" y="272" width="16" height="16">
+   <properties>
+    <property name="fieldID" value="2"/>
    </properties>
   </object>
  </objectgroup>

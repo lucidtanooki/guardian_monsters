@@ -3,6 +3,7 @@ package org.limbusdev.monsterworld.screens;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -10,10 +11,6 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Box2D;
-import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
-import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
@@ -42,6 +39,8 @@ public class OutdoorGameWorldScreen implements Screen {
 
     private OutdoorGameArea gameArea;
     private EntityComponentSystem ECS;
+    private HUD hud;
+    private InputMultiplexer inputMultiplexer;
 
 
     /* ........................................................................... CONSTRUCTOR .. */
@@ -49,7 +48,10 @@ public class OutdoorGameWorldScreen implements Screen {
         this.game = game;
         setUpRendering();
         this.gameArea = new OutdoorGameArea(mapID, game.media, startPosID);
-        this.ECS = new EntityComponentSystem(game, viewport, gameArea);
+        this.hud = new HUD();
+        this.ECS = new EntityComponentSystem(game, viewport, gameArea, hud);
+        this.inputMultiplexer = new InputMultiplexer();
+        setUpInputProcessor();
     }
 
     /* ........................................................................ LIBGDX METHODS .. */
@@ -60,7 +62,7 @@ public class OutdoorGameWorldScreen implements Screen {
     @Override
     public void show() {
         this.batch = new SpriteBatch();
-        Gdx.input.setInputProcessor(ECS.getInputProcessor());
+        setUpInputProcessor();
         gameArea.playMusic();
     }
 
@@ -84,6 +86,8 @@ public class OutdoorGameWorldScreen implements Screen {
         gameArea.render(camera);
         ECS.render(batch, shpRend);
         if(GlobalSettings.DEBUGGING_ON)gameArea.renderDebugging(shpRend);
+
+        hud.draw();
 
         // ............................................................................... RENDERING
 
@@ -158,6 +162,12 @@ public class OutdoorGameWorldScreen implements Screen {
         batch.  setProjectionMatrix(camera.combined);
         shpRend.setProjectionMatrix(camera.combined);
         camera.update();
+    }
+
+    public void setUpInputProcessor() {
+        this.inputMultiplexer.addProcessor(hud.getInputProcessor());
+        this.inputMultiplexer.addProcessor(ECS.getInputProcessor());
+        Gdx.input.setInputProcessor(inputMultiplexer);
     }
     /* ..................................................................... GETTERS & SETTERS .. */
 }

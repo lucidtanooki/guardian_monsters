@@ -15,7 +15,9 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 import org.limbusdev.monsterworld.MonsterWorld;
+import org.limbusdev.monsterworld.utils.GameState;
 import org.limbusdev.monsterworld.utils.GlobalSettings;
+import org.limbusdev.monsterworld.managers.SaveGameManager;
 
 /**
  * Created by georg on 21.11.15.
@@ -108,21 +110,29 @@ public class MainMenuScreen implements Screen {
     }
 
     public void setUpGame() {
-        game.setScreen(new OutdoorGameWorldScreen(game, 9, 1));
+        if(SaveGameManager.doesSaveGameExist()) {
+            GameState state = SaveGameManager.loadSaveGame();
+            game.setScreen(new OutdoorGameWorldScreen(game, state.map, 1, true));
+        } else
+            game.setScreen(new OutdoorGameWorldScreen(game, 9, 1, false));
     }
 
 
     public void setUpUI() {
         // Scene2D
-        this.stage = new Stage();
+        FitViewport fit = new FitViewport(
+                GlobalSettings.RESOLUTION_X, GlobalSettings.RESOLUTION_Y);
+        this.stage = new Stage(fit);
         Gdx.input.setInputProcessor(stage);
         this.skin = new Skin(Gdx.files.internal("scene2d/uiskin.json"));
 
         // Buttons .................................................................................
-        final TextButton button = new TextButton("Start Game", skin, "default");
-        button.setWidth(128f);
+        String startButton = "Start Game";
+        if(SaveGameManager.doesSaveGameExist()) startButton = "Load Saved Game";
+        final TextButton button = new TextButton(startButton, skin, "default");
+        button.setWidth(160f);
         button.setHeight(32f);
-        button.setPosition(GlobalSettings.RESOLUTION_X / 2 - 64f, 64f);
+        button.setPosition(GlobalSettings.RESOLUTION_X / 2 - 80f, 64f);
 
         button.addListener(new ClickListener() {
             @Override

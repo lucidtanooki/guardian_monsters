@@ -11,6 +11,7 @@ import org.limbusdev.monsterworld.ecs.components.ConversationComponent;
 import org.limbusdev.monsterworld.ecs.components.InputComponent;
 import org.limbusdev.monsterworld.ecs.components.PathComponent;
 import org.limbusdev.monsterworld.ecs.components.PositionComponent;
+import org.limbusdev.monsterworld.ecs.components.SaveGameComponent;
 import org.limbusdev.monsterworld.ecs.components.SpriteComponent;
 import org.limbusdev.monsterworld.ecs.components.TitleComponent;
 import org.limbusdev.monsterworld.ecs.entities.HeroEntity;
@@ -20,6 +21,8 @@ import org.limbusdev.monsterworld.enums.TextureAtlasType;
 import org.limbusdev.monsterworld.geometry.MapObjectInformation;
 import org.limbusdev.monsterworld.geometry.MapPersonInformation;
 import org.limbusdev.monsterworld.managers.MediaManager;
+import org.limbusdev.monsterworld.managers.SaveGameManager;
+import org.limbusdev.monsterworld.utils.GameState;
 import org.limbusdev.monsterworld.utils.GlobalSettings;
 import org.limbusdev.monsterworld.utils.UnitConverter;
 
@@ -45,7 +48,7 @@ public class EntityFactory {
      * Creates a hero {@link Entity} and adds it to the {@link Engine}.
      * @return
      */
-    public Entity createHero(PositionComponent startField) {
+    public Entity createHero(PositionComponent startField, boolean restoreSave) {
         Entity hero = new HeroEntity();
         hero.add(new CharacterSpriteComponent(media.getTextureAtlasType(TextureAtlasType.HERO)));
         hero.add(new InputComponent());
@@ -60,6 +63,12 @@ public class EntityFactory {
                 .width, position.height);
         area.addMovingCollider(collider.collider);
         hero.add(collider);
+        GameState gameState = SaveGameManager.loadSaveGame();
+        hero.add(new SaveGameComponent(gameState));
+        if(restoreSave) {
+            position.x = gameState.x;
+            position.y = gameState.y;
+        }
         engine.addEntity(hero);
 
         return hero;

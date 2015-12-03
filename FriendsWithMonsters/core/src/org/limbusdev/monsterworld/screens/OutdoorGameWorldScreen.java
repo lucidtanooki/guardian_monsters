@@ -17,6 +17,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import org.limbusdev.monsterworld.MonsterWorld;
 import org.limbusdev.monsterworld.ecs.EntityComponentSystem;
 import org.limbusdev.monsterworld.ecs.systems.OutdoorGameArea;
+import org.limbusdev.monsterworld.managers.SaveGameManager;
 import org.limbusdev.monsterworld.utils.GlobalSettings;
 import org.limbusdev.monsterworld.utils.UnitConverter;
 
@@ -44,12 +45,17 @@ public class OutdoorGameWorldScreen implements Screen {
 
 
     /* ........................................................................... CONSTRUCTOR .. */
-    public OutdoorGameWorldScreen(final MonsterWorld game, int mapID, int startPosID) {
+    public OutdoorGameWorldScreen(final MonsterWorld game, int mapID, int startPosID, boolean
+            fromSave) {
         this.game = game;
         setUpRendering();
         this.gameArea = new OutdoorGameArea(mapID, game.media, startPosID);
-        this.hud = new HUD(new BattleScreen(game.media, this, game), game);
-        this.ECS = new EntityComponentSystem(game, viewport, gameArea, hud);
+        SaveGameManager saveGameManager = new SaveGameManager(this.gameArea);
+        this.hud = new HUD(
+                new BattleScreen(game.media, this, game),
+                game,
+                saveGameManager);
+        this.ECS = new EntityComponentSystem(game, viewport, gameArea, hud, fromSave);
         this.inputMultiplexer = new InputMultiplexer();
         setUpInputProcessor();
     }

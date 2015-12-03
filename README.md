@@ -11,6 +11,7 @@ mtPaint and powered by Java and libGDX.
 
 # Screenshots
 Here you can get a first glimpse of what will be created here.
+For more screenshots see the [Galery](https://bitbucket.org/gemlion/monsterworld/wiki/Galery).
 
 ![alt text](./Documents/Screenshots/preview1.png "First Preview")
 ![alt text](./Documents/Screenshots/preview2.png "Second Preview")

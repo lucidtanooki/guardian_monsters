@@ -212,4 +212,30 @@
    </properties>
   </object>
  </objectgroup>
+ <objectgroup name="objects" width="64" height="32">
+  <object name="sign" x="912" y="304" width="16" height="16">
+   <properties>
+    <property name="text" value="Since 1027 the Timsey Canal Bridge connects Caracoa Island to the land."/>
+    <property name="title" value="Timsey Canal Bridge"/>
+   </properties>
+  </object>
+  <object name="sign" x="928" y="304" width="16" height="16">
+   <properties>
+    <property name="text" value="Since 1027 the Timsey Canal Bridge connects Caracoa Island to the land."/>
+    <property name="title" value="Timsey Canal Bridge"/>
+   </properties>
+  </object>
+  <object name="sign" x="928" y="288" width="16" height="16">
+   <properties>
+    <property name="text" value="Since 1027 the Timsey Canal Bridge connects Caracoa Island to the land."/>
+    <property name="title" value="Timsey Canal Bridge"/>
+   </properties>
+  </object>
+  <object name="sign" x="912" y="288" width="16" height="16">
+   <properties>
+    <property name="text" value="Since 1027 the Timsey Canal Bridge connects Caracoa Island to the land."/>
+    <property name="title" value="Timsey Canal Bridge"/>
+   </properties>
+  </object>
+ </objectgroup>
 </map>

@@ -1,6 +1,5 @@
 package org.limbusdev.monsterworld.ecs.systems;
 
-import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
@@ -19,6 +18,7 @@ import org.limbusdev.monsterworld.ecs.components.ComponentRetriever;
 import org.limbusdev.monsterworld.ecs.components.ConversationComponent;
 import org.limbusdev.monsterworld.ecs.components.InputComponent;
 import org.limbusdev.monsterworld.ecs.components.PositionComponent;
+import org.limbusdev.monsterworld.ecs.components.TitleComponent;
 import org.limbusdev.monsterworld.enums.SkyDirection;
 import org.limbusdev.monsterworld.geometry.IntRectangle;
 import org.limbusdev.monsterworld.geometry.IntVector2;
@@ -32,6 +32,7 @@ public class InputSystem extends EntitySystem implements InputProcessor {
     /* ............................................................................ ATTRIBUTES .. */
     private ImmutableArray<Entity> entities;
     private ImmutableArray<Entity> speakingEntities;
+    private ImmutableArray<Entity> signEntities;
 
     private Viewport viewport;
     private OutdoorGameArea gameArea;
@@ -48,7 +49,12 @@ public class InputSystem extends EntitySystem implements InputProcessor {
                 InputComponent.class,
                 PositionComponent.class,
                 ColliderComponent.class).get());
-        speakingEntities = engine.getEntitiesFor(Family.all(ConversationComponent.class).get());
+        speakingEntities = engine.getEntitiesFor(Family.all(ConversationComponent.class)
+                .exclude(TitleComponent.class).get());
+        signEntities = engine.getEntitiesFor(Family.all(
+                TitleComponent.class,
+                ConversationComponent.class
+        ).get());
     }
 
     public void update(float deltaTime) {
@@ -130,9 +136,18 @@ public class InputSystem extends EntitySystem implements InputProcessor {
             }
 
             // Go on if finger is still on screen
-            if(!input.moving)
-                if(Gdx.input.isTouched())
+            if(!input.moving) {
+                for(IntRectangle i : gameArea.getMonsterAreas()) {
+                    if (i.contains(new IntVector2(position.x + GlobalSettings.TILE_SIZE / 2,
+                            position.y + GlobalSettings.TILE_SIZE / 2))
+                            && MathUtils.randomBoolean(0.05f)) {
+                        System.out.print("Monster appeared!\n");
+                        hud.game.setScreen(hud.battleScreen);
+                    }
+                }
+                if (Gdx.input.isTouched())
                     input.startMoving = true;
+            }
         }
     }
 
@@ -155,20 +170,32 @@ public class InputSystem extends EntitySystem implements InputProcessor {
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         Vector2 touchPos = new Vector2(screenX, screenY);
         viewport.unproject(touchPos);
-        boolean touchedSpeaker = false;
-        String conversation = "";
+        boolean touchedSpeaker, touchedSign;
+        touchedSign = touchedSpeaker = false;
 
         for(Entity e : speakingEntities) {
             if(ComponentRetriever.getColliderComponent(e).collider.contains(
                     new IntVector2(MathUtils.round(touchPos.x),
                     MathUtils.round(touchPos.y)))) {
+                System.out.print("Touched speaker\n");
                 touchedSpeaker = true;
-                conversation = ComponentRetriever.convCompMap.get(e).text;
+                hud.openConversation(ComponentRetriever.convCompMap.get(e).text);
             }
         }
 
-        if(!touchedSpeaker) touchDragged(screenX, screenY, pointer);
-        else hud.openConversation(conversation);
+        for(Entity e : signEntities) {
+            if(ComponentRetriever.getColliderComponent(e).collider.contains(
+                    new IntVector2(MathUtils.round(touchPos.x),
+                            MathUtils.round(touchPos.y)))) {
+                System.out.print("Touched sign\n");
+                touchedSign = true;
+                hud.openSign(
+                        ComponentRetriever.titleCompMap.get(e).text,
+                        ComponentRetriever.convCompMap.get(e).text);
+            }
+        }
+
+        if(!touchedSpeaker && !touchedSign) touchDragged(screenX, screenY, pointer);
         return true;
     }
 

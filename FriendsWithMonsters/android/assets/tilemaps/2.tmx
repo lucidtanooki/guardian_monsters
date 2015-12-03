@@ -104,4 +104,5 @@
    </properties>
   </object>
  </objectgroup>
+ <objectgroup name="objects" width="32" height="32"/>
 </map>

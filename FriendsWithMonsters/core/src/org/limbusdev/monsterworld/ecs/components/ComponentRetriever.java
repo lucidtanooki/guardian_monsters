@@ -23,6 +23,8 @@ public abstract class ComponentRetriever {
             ComponentMapper.getFor(InputComponent.class);
     public static ComponentMapper<ConversationComponent> convCompMap =
             ComponentMapper.getFor(ConversationComponent.class);
+    public static ComponentMapper<TitleComponent> titleCompMap =
+            ComponentMapper.getFor(TitleComponent.class);
     /* ........................................................................... CONSTRUCTOR .. */
     
     /* ............................................................................... METHODS .. */

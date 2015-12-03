@@ -22,6 +22,7 @@ import org.limbusdev.monsterworld.ecs.systems.OutdoorGameArea;
 import org.limbusdev.monsterworld.ecs.systems.PathSystem;
 import org.limbusdev.monsterworld.ecs.systems.PositionSynchroSystem;
 import org.limbusdev.monsterworld.ecs.systems.SpriteSystem;
+import org.limbusdev.monsterworld.geometry.MapObjectInformation;
 import org.limbusdev.monsterworld.geometry.MapPersonInformation;
 import org.limbusdev.monsterworld.managers.MediaManager;
 import org.limbusdev.monsterworld.screens.HUD;
@@ -50,6 +51,7 @@ public class EntityComponentSystem {
         this.entityFactory = new EntityFactory(engine, media, gameArea);
         setUpHero();
         setUpPeople();
+        setUpSigns();
         setUpEntitySystems(gameArea, viewport, hud);
     }
     /* ............................................................................... METHODS .. */
@@ -61,6 +63,11 @@ public class EntityComponentSystem {
     public void setUpPeople() {
         for(MapPersonInformation mpi : gameArea.getMapPeople())
             this.entityFactory.createPerson(mpi);
+    }
+
+    public void setUpSigns() {
+        for(MapObjectInformation moi : gameArea.getMapSigns())
+            this.entityFactory.createSign(moi);
     }
 
     public void setUpEntitySystems(OutdoorGameArea gameArea, Viewport viewport, HUD hud) {

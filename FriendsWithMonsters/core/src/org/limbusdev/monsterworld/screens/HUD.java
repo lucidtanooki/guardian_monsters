@@ -13,6 +13,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.sun.javafx.scene.control.GlobalMenuAdapter;
 
+import org.limbusdev.monsterworld.MonsterWorld;
 import org.limbusdev.monsterworld.utils.GlobalSettings;
 import org.limbusdev.monsterworld.utils.UnitConverter;
 
@@ -24,12 +25,17 @@ public class HUD {
     private Skin skin;
     public Stage stage;
 
-    private final TextButton menuButton;
+    private final TextButton menuButton, battleButton;
     private final Label conversationLabel;
+    private final Label titleLabel;
     private final TextButton conversationExitButton;
+    public final BattleScreen battleScreen;
+    public final MonsterWorld game;
     
     /* ........................................................................... CONSTRUCTOR .. */
-    public HUD() {
+    public HUD(final BattleScreen battleScreen, final MonsterWorld game) {
+        this.battleScreen = battleScreen;
+        this.game = game;
         // Scene2D
         FitViewport fit = new FitViewport(
                 GlobalSettings.RESOLUTION_X, GlobalSettings.RESOLUTION_Y);
@@ -40,16 +46,35 @@ public class HUD {
         // Buttons .................................................................................
         menuButton = new TextButton("MENU", skin, "default");
         menuButton.setWidth(64f);
-        menuButton.setHeight(64f);
-        menuButton.setPosition(GlobalSettings.RESOLUTION_X-64f,GlobalSettings.RESOLUTION_Y-64f);
+        menuButton.setHeight(32f);
+        menuButton.setPosition(GlobalSettings.RESOLUTION_X - 72f, GlobalSettings.RESOLUTION_Y -
+                64f);
 
         menuButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                menuButton.setText("OPEN");
-                conversationLabel.setVisible(!conversationLabel.isVisible());
+                System.out.print("opening menu\n");
             }
         });
+
+        battleButton = new TextButton("Battle", skin, "default");
+        battleButton.setWidth(64f);
+        battleButton.setHeight(32f);
+        battleButton.setPosition(GlobalSettings.RESOLUTION_X - 72f,
+                GlobalSettings.RESOLUTION_Y - 98f);
+
+        battleButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                game.setScreen(battleScreen);
+            }
+        });
+
+        titleLabel = new Label("Title", skin, "default");
+        titleLabel.setHeight(32);
+        titleLabel.setWidth(256);
+        titleLabel.setVisible(false);
+        titleLabel.setPosition(GlobalSettings.RESOLUTION_X / 2 - 300f, 104);
 
         conversationLabel = new Label("Test label", skin, "default");
         conversationLabel.setHeight(96);
@@ -66,6 +91,7 @@ public class HUD {
         conversationExitButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                titleLabel.setVisible(false);
                 conversationLabel.setVisible(false);
                 conversationExitButton.setVisible(false);
             }
@@ -73,6 +99,8 @@ public class HUD {
         // Buttons ............................................................................. END
 
         stage.addActor(menuButton);
+        stage.addActor(battleButton);
+        stage.addActor(titleLabel);
         stage.addActor(conversationLabel);
         stage.addActor(conversationExitButton);
     }
@@ -89,6 +117,13 @@ public class HUD {
     public void openConversation(String text) {
         this.conversationLabel.setText(text);
         this.conversationLabel.setVisible(true);
+        this.conversationExitButton.setVisible(true);
+    }
+
+    public void openSign(String title, String text) {
+        openConversation(text);
+        this.titleLabel.setText(title);
+        this.titleLabel.setVisible(true);
         this.conversationExitButton.setVisible(true);
     }
 }

@@ -48,7 +48,7 @@ public class OutdoorGameWorldScreen implements Screen {
         this.game = game;
         setUpRendering();
         this.gameArea = new OutdoorGameArea(mapID, game.media, startPosID);
-        this.hud = new HUD();
+        this.hud = new HUD(new BattleScreen(game.media, this, game), game);
         this.ECS = new EntityComponentSystem(game, viewport, gameArea, hud);
         this.inputMultiplexer = new InputMultiplexer();
         setUpInputProcessor();

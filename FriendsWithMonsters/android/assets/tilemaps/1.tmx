@@ -22,7 +22,7 @@
  </layer>
  <layer name="objects1" width="32" height="32">
   <data encoding="base64" compression="zlib">
-   eJxjYBjaIE0QgkftH1j7kTE66JRFqKWX/QJAzIFFLS7wVAA7JmQ3Oo3PDmrbT00w0u2nFRgMfqDUDY/EGBgeixGn9jIwr18B4quy5Nu/QgyCVURJ0wcCwnIMDCJALCpHul5k+8kFwUB7Q4A4lAL7yQWgcnYwpLfBDgYyjAa6XBvJ9g9kvUKojTSc7MfWJhu1f3DYD5MfBaMABADmWE2U
+   eJxjYBjaIE0QgkftH1j7pzDhdkunLEItrexHxiAgAMQcWNTiAk8FsGNCdqPT+Oygtv3UBCPdflqBweAHSt3wSIyB4bEYcWovA/P6FSC+Kku+/SvEIFhFlDR9ICAsx8AgAsSicqTrRbafXBAMtDcEiEMpsJ9cACpnB0N6G+xgIMNooMu1kWz/QNYr2Noow9V+bG2yUfsHh/0w+VEwCkAAAI/NTbM=
   </data>
  </layer>
  <layer name="tops1" width="32" height="32">
@@ -101,6 +101,61 @@
     <property name="targetWarpPointID" value="2"/>
    </properties>
   </object>
+  <object name="monsterArea" x="32" y="96" width="96" height="64">
+   <properties>
+    <property name="propability" value="0.05"/>
+   </properties>
+  </object>
+  <object name="monsterArea" x="256" y="32" width="32" height="64">
+   <properties>
+    <property name="propability" value="0.05"/>
+   </properties>
+  </object>
+  <object name="monsterArea" x="240" y="96" width="16" height="16">
+   <properties>
+    <property name="propability" value="0.05"/>
+   </properties>
+  </object>
+  <object name="monsterArea" x="272" y="96" width="16" height="16">
+   <properties>
+    <property name="propability" value="0.05"/>
+   </properties>
+  </object>
+  <object name="monsterArea" x="288" y="64" width="16" height="32">
+   <properties>
+    <property name="propability" value="0.05"/>
+   </properties>
+  </object>
+  <object name="monsterArea" x="304" y="64" width="32" height="48">
+   <properties>
+    <property name="propability" value="0.05"/>
+   </properties>
+  </object>
+  <object name="monsterArea" x="464" y="272" width="16" height="16">
+   <properties>
+    <property name="propability" value="0.05"/>
+   </properties>
+  </object>
+  <object name="monsterArea" x="448" y="288" width="32" height="48">
+   <properties>
+    <property name="propability" value="0.05"/>
+   </properties>
+  </object>
+  <object name="monsterArea" x="432" y="336" width="48" height="16">
+   <properties>
+    <property name="propability" value="0.05"/>
+   </properties>
+  </object>
+  <object name="monsterArea" x="416" y="352" width="64" height="32">
+   <properties>
+    <property name="propability" value="0.05"/>
+   </properties>
+  </object>
+  <object name="monsterArea" x="336" y="384" width="144" height="64">
+   <properties>
+    <property name="propability" value="0.05"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup name="livingEntities" width="32" height="32">
   <object name="person" x="64" y="336" width="16" height="16">
@@ -108,6 +163,38 @@
     <property name="path" value="SSTOP"/>
     <property name="static" value="true"/>
     <property name="text" value="One day I will get a boat and sail around this beautiful planet."/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="objects" width="32" height="32">
+  <object name="sign" x="48" y="304" width="16" height="16">
+   <properties>
+    <property name="text" value="Please be careful when swimming here."/>
+    <property name="title" value="Lake Southern Woods"/>
+   </properties>
+  </object>
+  <object name="sign" x="32" y="304" width="16" height="16">
+   <properties>
+    <property name="text" value="Please be careful when swimming here."/>
+    <property name="title" value="Lake Southern Woods"/>
+   </properties>
+  </object>
+  <object name="sign" x="288" y="64" width="16" height="16">
+   <properties>
+    <property name="text" value="Path to Timsey Village"/>
+    <property name="title" value="The southern woods"/>
+   </properties>
+  </object>
+  <object name="sign" x="32" y="288" width="16" height="16">
+   <properties>
+    <property name="text" value="Please be careful when swimming here."/>
+    <property name="title" value="Lake Southern Woods"/>
+   </properties>
+  </object>
+  <object name="sign" x="48" y="288" width="16" height="16">
+   <properties>
+    <property name="text" value="Please be careful when swimming here."/>
+    <property name="title" value="Lake Southern Woods"/>
    </properties>
   </object>
  </objectgroup>

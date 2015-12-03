@@ -1,5 +1,8 @@
 package org.limbusdev.monsterworld.geometry;
 
+import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Rectangle;
+
 /**
  * Created by georg on 25.11.15.
  */
@@ -17,6 +20,15 @@ public class IntRectangle {
         this.y = y;
         this.width = width;
         this.height = height;
+    }
+
+    public IntRectangle(Rectangle r) {
+        this.ID = IDcount;
+        IntRectangle.IDcount++;
+        this.x = MathUtils.round(r.x);
+        this.y = MathUtils.round(r.y);
+        this.width = MathUtils.round(r.width);
+        this.height = MathUtils.round(r.height);
     }
     /* ............................................................................... METHODS .. */
     public boolean contains(IntVector2 point) {

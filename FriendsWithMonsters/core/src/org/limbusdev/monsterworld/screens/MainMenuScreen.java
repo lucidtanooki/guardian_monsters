@@ -111,6 +111,7 @@ public class MainMenuScreen implements Screen {
         game.setScreen(new OutdoorGameWorldScreen(game, 9, 1));
     }
 
+
     public void setUpUI() {
         // Scene2D
         this.stage = new Stage();
@@ -121,7 +122,7 @@ public class MainMenuScreen implements Screen {
         final TextButton button = new TextButton("Start Game", skin, "default");
         button.setWidth(128f);
         button.setHeight(32f);
-        button.setPosition(Gdx.graphics.getWidth() / 2 - 64f, 64f);
+        button.setPosition(GlobalSettings.RESOLUTION_X / 2 - 64f, 64f);
 
         button.addListener(new ClickListener() {
             @Override

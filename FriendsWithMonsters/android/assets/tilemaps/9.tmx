@@ -73,4 +73,5 @@
   </object>
  </objectgroup>
  <objectgroup name="livingEntities" width="8" height="8"/>
+ <objectgroup name="objects" width="8" height="8"/>
 </map>

@@ -36,7 +36,7 @@
  <objectgroup name="colliderWalls1" width="8" height="5">
   <object x="0" y="0" width="128" height="32"/>
   <object x="0" y="64" width="48" height="16"/>
-  <object x="96" y="32" width="32" height="16"/>
+  <object x="80" y="32" width="48" height="16"/>
  </objectgroup>
  <objectgroup name="sensors" width="8" height="5">
   <object name="warpField" x="64" y="64" width="16" height="16">
@@ -57,6 +57,20 @@
     <property name="moving" value="false"/>
     <property name="path" value=""/>
     <property name="startDir" value="S"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="objects" width="8" height="5">
+  <object name="sign" x="80" y="32" width="16" height="16">
+   <properties>
+    <property name="text" value="It's a very old movie on a black and white TV."/>
+    <property name="title" value="Old TV"/>
+   </properties>
+  </object>
+  <object name="sign" x="80" y="16" width="16" height="16">
+   <properties>
+    <property name="text" value="It's a very old movie on a black and white TV."/>
+    <property name="title" value="Old TV"/>
    </properties>
   </object>
  </objectgroup>

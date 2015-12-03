@@ -31,12 +31,12 @@
  </layer>
  <layer name="objects1" width="32" height="32">
   <data encoding="base64" compression="zlib">
-   eJxjYBgF1AQrxFDZ2PjIYqSCpSIMDM+gOE2UsFuobT/I3qVQu59DMTpQBcqrieDmkwLWiJOuJxXkPhHcfFLAGzLspybQkRhY+0cBbUCVFANDtdTA2r17gOzfNYB2DwWAXK4/J7PcohYYaPuHMqiQHGgX4AZtngwM7Z4DZ/8RoN1H8djPpsDAwK5AO/sJ+Z9NEWi/Iu3sJ+R/DgUGBk4F2tlPyP8eQLs9aWg/If/DwGDOQ6NgFAx1AADNmCme
+   eJxjYBgF1AQrxFDZ2PjIYqSCpSIMDM+gOE2UsFuobT/I3qVQu59DMTpQBcqrieDmkwLWiJOuJxXkPhHcfFLAGzLsJxUoAt32BIf7dCRob78KmWEznMATYfraVyXFwFAtheAvxJMGaGX3binCamkBdqHZ/ZiOfh8KALlcfz7A4TLQ9tMDTGEiTf1kItVXSJLuFnqBNk8GhnbPgbP/CNDuo3jsZ1NgYGBXoJ39hPzPpgi0X5F29hPyP4cCAwOnAu3sJ+R/D6DdnjS0n5D/YWAw56GBBm0uwDh0GWhXjIKhDAAoHTJW
   </data>
  </layer>
  <layer name="tops1" width="32" height="32">
   <data encoding="base64" compression="zlib">
-   eJzll7lOw0AURR9Lwx6jKJsiJR0U1OBU0LJ/BwgK1hZah62Ej0jDFkpozfoPIKighXRwEIpijEc2eAmEIx2Nbc34jm3Ns8bMiJyjqWjDpkiGkXFuo8Dt2Uu9H/bFRfrjX8cnNZGU9vnabULkLqE+b1QeNPc+u/TZ89CvSin58/kEgdP3VeHl+b/LQCr4e/rB1FkbeIGXeIXXeKNHk99WEGnHDuzELuzGnkI0+aPkjOE4TuAkTuE0LuREFnEJl3EFV3PB5hvkFHEDN3ELt3EH98k6wEM8wmMsB5wfJlHWfSeC+ueVWbMntnU7HBMZiXkbP+9zDs9kv9jy18he95g/m60dz2TV/ew8UqufcDAtMoQVyxxOyT4LOd+Onq4dv75nU5/nLO/2PoR6/R9pyos0Ywu25us5k8ajEvL/363eWtdQ0BgR7TFUmHXM/k343Xep9m9ubRX7vsvveK+tCr/j/xJvOL16EQ==
+   eJzllzlPAkEYhj+Pxps1hCsk0GlhrVBpQeHt79Bo4dlqu3iV+iNovLDUdj3/g0YrbZVOH2MIuDLZ1Z1dIj7Jk1nIDO+3kPmWsRIiF2gpRr/Jk2Emao9B4HTvhd5P+8Ii/eHv66OGSMz4+t5dROQ+on7dqDwaznP2mLPvYl6ZQvT39eig1u+rws39/5SBmP7P9IKVYW/gJV7hNd7gbSaY/LasSDt2YCd2YTf2ZIPJHyNnHCdwEqdwGmdwMSWyhMu4gqu4ltKbb5KTx03cwm3cwV08IOsQj/AYT7CoOd9Pguz7tdD1zCuyZ09t+3Y4JDIScrd+wWMNL2S/2vLXyd5wmT+XrFzPJtXz7DzRq59xMC4yhKWqGs7IPvc5304mXrl++8imP89XfbcPPvTr/0hTWqQZW7A1Xc9KGo+Sz89/p35bvYd0YwZ0xlBhecwezfF/IKenlnri9dylOr85jWXs5y6v692OKryu/0u8Az9Seyo=
   </data>
  </layer>
  <objectgroup name="colliderWalls1" width="32" height="32">
@@ -85,6 +85,7 @@
   <object x="128" y="400" width="16" height="16"/>
   <object x="368" y="288" width="16" height="16"/>
   <object x="480" y="304" width="32" height="96"/>
+  <object x="240" y="432" width="32" height="16"/>
  </objectgroup>
  <objectgroup name="livingEntities" width="32" height="32">
   <object name="person" x="96" y="224" width="16" height="16">
@@ -193,6 +194,44 @@
    <properties>
     <property name="targetID" value="7"/>
     <property name="targetWarpPointID" value="1"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="objects" width="32" height="32">
+  <object name="sign" x="240" y="432" width="16" height="16">
+   <properties>
+    <property name="text" value="Welcome in our small town."/>
+    <property name="title" value="Timsey Village"/>
+   </properties>
+  </object>
+  <object name="sign" x="256" y="432" width="16" height="16">
+   <properties>
+    <property name="text" value="Welcome in our small town."/>
+    <property name="title" value="Timsey Village"/>
+   </properties>
+  </object>
+  <object name="sign" x="16" y="288" width="16" height="16">
+   <properties>
+    <property name="text" value="west: Timsey Canal Bridge 1km"/>
+    <property name="title" value="Timsey Village"/>
+   </properties>
+  </object>
+  <object name="sign" x="208" y="288" width="16" height="16">
+   <properties>
+    <property name="text" value="Please come in. Everyone is welcome."/>
+    <property name="title" value="Family Eckdon"/>
+   </properties>
+  </object>
+  <object name="sign" x="240" y="416" width="16" height="16">
+   <properties>
+    <property name="text" value="Welcome in our small town."/>
+    <property name="title" value="Timsey Village"/>
+   </properties>
+  </object>
+  <object name="sign" x="256" y="416" width="16" height="16">
+   <properties>
+    <property name="text" value="Welcome in our small town."/>
+    <property name="title" value="Timsey Village"/>
    </properties>
   </object>
  </objectgroup>

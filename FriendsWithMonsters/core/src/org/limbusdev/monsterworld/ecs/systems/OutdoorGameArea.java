@@ -42,6 +42,7 @@ public class OutdoorGameArea {
     private Array<MapObjectInformation> mapSigns;
     private Array<IntRectangle> monsterAreas;
     public PositionComponent startPosition;
+    public int areaID;
 
     /* ........................................................................... CONSTRUCTOR .. */
     public OutdoorGameArea(int areaID, MediaManager media, int startPosID) {
@@ -55,6 +56,7 @@ public class OutdoorGameArea {
         this.mapSigns = new Array<MapObjectInformation>();
         setUpTiledMap(areaID, startPosID);
         this.mapRenderer = new OrthogonalTiledMapAndEntityRenderer(tiledMap, this);
+        this.areaID = areaID;
     }
     /* ............................................................................... METHODS .. */
 

@@ -2,7 +2,6 @@ package org.limbusdev.monsterworld.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -10,12 +9,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
-import com.sun.javafx.scene.control.GlobalMenuAdapter;
 
 import org.limbusdev.monsterworld.MonsterWorld;
+import org.limbusdev.monsterworld.ecs.components.SaveGameComponent;
+import org.limbusdev.monsterworld.utils.GameState;
 import org.limbusdev.monsterworld.utils.GlobalSettings;
-import org.limbusdev.monsterworld.utils.UnitConverter;
+import org.limbusdev.monsterworld.managers.SaveGameManager;
 
 /**
  * Created by georg on 02.12.15.
@@ -25,15 +24,17 @@ public class HUD {
     private Skin skin;
     public Stage stage;
 
-    private final TextButton menuButton, battleButton;
+    private final TextButton menuButton, battleButton, saveButton;
     private final Label conversationLabel;
     private final Label titleLabel;
     private final TextButton conversationExitButton;
     public final BattleScreen battleScreen;
     public final MonsterWorld game;
+    public final SaveGameManager saveGameManager;
     
     /* ........................................................................... CONSTRUCTOR .. */
-    public HUD(final BattleScreen battleScreen, final MonsterWorld game) {
+    public HUD(final BattleScreen battleScreen, final MonsterWorld game, final SaveGameManager saveGameManager) {
+        this.saveGameManager = saveGameManager;
         this.battleScreen = battleScreen;
         this.game = game;
         // Scene2D
@@ -70,6 +71,19 @@ public class HUD {
             }
         });
 
+        saveButton = new TextButton("Save", skin, "default");
+        saveButton.setWidth(64f);
+        saveButton.setHeight(32f);
+        saveButton.setPosition(GlobalSettings.RESOLUTION_X - 72f,
+                GlobalSettings.RESOLUTION_Y - 132f);
+
+        saveButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                saveGameManager.saveGame();
+            }
+        });
+
         titleLabel = new Label("Title", skin, "default");
         titleLabel.setHeight(32);
         titleLabel.setWidth(256);
@@ -103,6 +117,7 @@ public class HUD {
         stage.addActor(titleLabel);
         stage.addActor(conversationLabel);
         stage.addActor(conversationExitButton);
+        stage.addActor(saveButton);
     }
     /* ............................................................................... METHODS .. */
     public void draw() {

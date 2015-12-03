@@ -25,6 +25,7 @@ import org.limbusdev.monsterworld.ecs.systems.SpriteSystem;
 import org.limbusdev.monsterworld.geometry.MapObjectInformation;
 import org.limbusdev.monsterworld.geometry.MapPersonInformation;
 import org.limbusdev.monsterworld.managers.MediaManager;
+import org.limbusdev.monsterworld.managers.SaveGameManager;
 import org.limbusdev.monsterworld.screens.HUD;
 import org.limbusdev.monsterworld.screens.OutdoorGameWorldScreen;
 import org.limbusdev.monsterworld.utils.GlobalSettings;
@@ -40,23 +41,25 @@ public class EntityComponentSystem {
     private PositionComponent heroPosition;
     private MonsterWorld game;
     private OutdoorGameArea gameArea;
+    public SaveGameManager saveGameManager;
     /* ........................................................................... CONSTRUCTOR .. */
     public EntityComponentSystem(
-            MonsterWorld game, Viewport viewport, OutdoorGameArea gameArea, HUD hud
+            MonsterWorld game, Viewport viewport, OutdoorGameArea gameArea, HUD hud, boolean
+            fromSave
     ) {
         this.media = game.media;
         this.game = game;
         this.gameArea = gameArea;
         this.engine = new Engine();
         this.entityFactory = new EntityFactory(engine, media, gameArea);
-        setUpHero();
+        setUpHero(fromSave);
         setUpPeople();
         setUpSigns();
         setUpEntitySystems(gameArea, viewport, hud);
     }
     /* ............................................................................... METHODS .. */
-    public void setUpHero() {
-        Entity hero = entityFactory.createHero(gameArea.startPosition);
+    public void setUpHero(boolean fromSave) {
+        Entity hero = entityFactory.createHero(gameArea.startPosition, fromSave);
         this.heroPosition = ComponentRetriever.getPositionComponent(hero);
     }
 
@@ -107,6 +110,11 @@ public class EntityComponentSystem {
         pathSystem.addedToEngine(engine);
         engine.addSystem(pathSystem);
 
+        // GameSaveManager
+        this.saveGameManager = hud.saveGameManager;
+        this.saveGameManager.addedToEngine(engine);
+        engine.addSystem(this.saveGameManager);
+
         // Debugging
         DebuggingSystem debuggingSystem = new DebuggingSystem();
         debuggingSystem.addedToEngine(engine);
@@ -128,7 +136,7 @@ public class EntityComponentSystem {
     }
 
     public void changeGameArea(int mapID, int startFieldID) {
-        game.setScreen(new OutdoorGameWorldScreen(game, mapID, startFieldID));
+        game.setScreen(new OutdoorGameWorldScreen(game, mapID, startFieldID, false));
     }
     /* ..................................................................... GETTERS & SETTERS .. */
     public InputProcessor getInputProcessor() {

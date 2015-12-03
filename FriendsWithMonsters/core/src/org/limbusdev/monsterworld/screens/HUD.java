@@ -2,12 +2,19 @@ package org.limbusdev.monsterworld.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
+import com.sun.javafx.scene.control.GlobalMenuAdapter;
+
+import org.limbusdev.monsterworld.utils.GlobalSettings;
+import org.limbusdev.monsterworld.utils.UnitConverter;
 
 /**
  * Created by georg on 02.12.15.
@@ -15,7 +22,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 public class HUD {
     /* ............................................................................ ATTRIBUTES .. */
     private Skin skin;
-    private Stage stage;
+    public Stage stage;
 
     private final TextButton menuButton;
     private final Label conversationLabel;
@@ -24,14 +31,17 @@ public class HUD {
     /* ........................................................................... CONSTRUCTOR .. */
     public HUD() {
         // Scene2D
-        this.stage = new Stage();
+        FitViewport fit = new FitViewport(
+                GlobalSettings.RESOLUTION_X, GlobalSettings.RESOLUTION_Y);
+
+        this.stage = new Stage(fit);
         this.skin = new Skin(Gdx.files.internal("scene2d/uiskin.json"));
 
         // Buttons .................................................................................
         menuButton = new TextButton("MENU", skin, "default");
         menuButton.setWidth(64f);
         menuButton.setHeight(64f);
-        menuButton.setPosition(Gdx.graphics.getWidth() - 64f, Gdx.graphics.getHeight() - 64f);
+        menuButton.setPosition(GlobalSettings.RESOLUTION_X-64f,GlobalSettings.RESOLUTION_Y-64f);
 
         menuButton.addListener(new ClickListener() {
             @Override
@@ -41,19 +51,17 @@ public class HUD {
             }
         });
 
-        conversationLabel = new Label("Hello, my name is Rufus. I live here." +
-                " Please visit me one day. I have many stories to tell!",
-                skin, "default");
-        conversationLabel.setHeight(72);
-        conversationLabel.setWidth(400);
+        conversationLabel = new Label("Test label", skin, "default");
+        conversationLabel.setHeight(96);
+        conversationLabel.setWidth(600);
         conversationLabel.setWrap(true);
-        conversationLabel.setPosition(Gdx.graphics.getWidth() / 2 - 200f, 8);
+        conversationLabel.setPosition(GlobalSettings.RESOLUTION_X / 2 - 300f, 8);
         conversationLabel.setVisible(false);
 
-        conversationExitButton = new TextButton("X", skin, "default");
+        conversationExitButton = new TextButton("+", skin, "default");
         conversationExitButton.setWidth(32f);
         conversationExitButton.setHeight(32f);
-        conversationExitButton.setPosition(564, 24);
+        conversationExitButton.setPosition(700, 72);
         conversationExitButton.setVisible(false);
         conversationExitButton.addListener(new ClickListener() {
             @Override

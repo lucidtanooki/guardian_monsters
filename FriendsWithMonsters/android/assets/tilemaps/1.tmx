@@ -65,6 +65,7 @@
   <object x="288" y="176" width="48" height="64"/>
   <object x="352" y="176" width="48" height="64"/>
   <object x="336" y="176" width="16" height="48"/>
+  <object x="304" y="240" width="16" height="16"/>
  </objectgroup>
  <objectgroup name="sensors" width="32" height="32">
   <object name="warpField" x="256" y="0" width="16" height="16">

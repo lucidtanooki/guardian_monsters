@@ -87,6 +87,7 @@ public class OutdoorGameWorldScreen implements Screen {
         ECS.render(batch, shpRend);
         if(GlobalSettings.DEBUGGING_ON)gameArea.renderDebugging(shpRend);
 
+        hud.stage.getViewport().apply();
         hud.draw();
 
         // ............................................................................... RENDERING
@@ -102,6 +103,7 @@ public class OutdoorGameWorldScreen implements Screen {
     @Override
     public void resize(int width, int height) {
         viewport.update(width,height);
+        hud.stage.getViewport().update(width, height, true);
     }
 
     /**
@@ -109,7 +111,7 @@ public class OutdoorGameWorldScreen implements Screen {
      */
     @Override
     public void pause() {
-
+        // TODO
     }
 
     /**
@@ -157,8 +159,7 @@ public class OutdoorGameWorldScreen implements Screen {
     }
 
     private void updateCamera() {
-        // project to cameraa
-//        camera.position.set(ECS.getHeroPosition().x, ECS.getHeroPosition().y, 0);
+        // project to camera
         batch.  setProjectionMatrix(camera.combined);
         shpRend.setProjectionMatrix(camera.combined);
         camera.update();

@@ -94,6 +94,71 @@
     <property name="targetWarpPointID" value="2"/>
    </properties>
   </object>
+  <object name="monsterArea" x="32" y="96" width="160" height="48">
+   <properties>
+    <property name="probability" value="0.05"/>
+   </properties>
+  </object>
+  <object name="monsterArea" x="32" y="144" width="32" height="16">
+   <properties>
+    <property name="probability" value="0.05"/>
+   </properties>
+  </object>
+  <object name="monsterArea" x="32" y="256" width="64" height="32">
+   <properties>
+    <property name="probability" value="0.05"/>
+   </properties>
+  </object>
+  <object name="monsterArea" x="256" y="64" width="32" height="32">
+   <properties>
+    <property name="probability" value="0.05"/>
+   </properties>
+  </object>
+  <object name="monsterArea" x="256" y="96" width="64" height="96">
+   <properties>
+    <property name="probability" value="0.05"/>
+   </properties>
+  </object>
+  <object name="monsterArea" x="256" y="192" width="48" height="16">
+   <properties>
+    <property name="probability" value="0.05"/>
+   </properties>
+  </object>
+  <object name="monsterArea" x="256" y="208" width="32" height="112">
+   <properties>
+    <property name="probability" value="0.05"/>
+   </properties>
+  </object>
+  <object name="monsterArea" x="176" y="208" width="48" height="48">
+   <properties>
+    <property name="probability" value="0.05"/>
+   </properties>
+  </object>
+  <object name="monsterArea" x="176" y="256" width="80" height="32">
+   <properties>
+    <property name="probability" value="0.05"/>
+   </properties>
+  </object>
+  <object name="monsterArea" x="448" y="128" width="32" height="96">
+   <properties>
+    <property name="probability" value="0.05"/>
+   </properties>
+  </object>
+  <object name="monsterArea" x="336" y="336" width="144" height="96">
+   <properties>
+    <property name="probability" value="0.05"/>
+   </properties>
+  </object>
+  <object name="monsterArea" x="80" y="336" width="144" height="80">
+   <properties>
+    <property name="probability" value="0.05"/>
+   </properties>
+  </object>
+  <object name="monsterArea" x="160" y="304" width="64" height="32">
+   <properties>
+    <property name="probability" value="0.05"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup name="livingEntities" width="32" height="32">
   <object name="person" x="32" y="160" width="16" height="16">

@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="32" height="20" tilewidth="16" tileheight="16">
+ <properties>
+  <property name="musicIndex" value="2"/>
+  <property name="musicType" value="town"/>
+ </properties>
+ <tileset firstgid="1" name="tuxemon" tilewidth="16" tileheight="16">
+  <image source="../spritesheets/tuxemon.png" width="1024" height="1024"/>
+ </tileset>
+ <tileset firstgid="4097" name="pokepublic" tilewidth="16" tileheight="16">
+  <image source="../spritesheets/thatssowitty_1.png" width="1024" height="1024"/>
+ </tileset>
+ <tileset firstgid="8193" name="thatssowitty_2" tilewidth="16" tileheight="16">
+  <image source="../../../../../../../../../../../../home/georg/Entwicklung/Java/libGDX/FriendsWithMonsters/FriendsWithMonsters/android/assets/spritesheets/thatssowitty_2.png" width="1024" height="1024"/>
+ </tileset>
+ <tileset firstgid="12289" name="magiscarf" tilewidth="16" tileheight="16">
+  <image source="../../../../../../../../../../../../home/georg/Entwicklung/Java/libGDX/FriendsWithMonsters/FriendsWithMonsters/android/assets/spritesheets/magiscarf_transparent.png" width="992" height="1264"/>
+ </tileset>
+ <layer name="ground1" width="32" height="20">
+  <data encoding="base64" compression="zlib">
+   eJztlE0OgjAQRocK7r1Au+oV3AMqiQvvhBW23kll75H8CCYk/VNJ0Zh08fJlmqZvpoupEqIqMB3Ys5HD2k1od/RH/z/7c05UOCj5cKcBrYeUTffXcJxXRBducuX2+V45fOgz3uFWyEQQLYSZof2uOXO4SmFmaD+TmAukIJNjXcOlhJmh/SVchRxyA7bPWj/r2Um338c7fh1bX3P4j3hTgRNopL9uZ/BP2S8Z3lxauDn6+tb++/RfeqL/t/4H9/Xyyw==
+  </data>
+ </layer>
+ <layer name="walls1" width="32" height="20">
+  <data encoding="base64" compression="zlib">
+   eJy9VstNw0AUfNdwISIHJJuYEwcoAKUD5AguuUAB0AMNIJSPwBeIKAE6cYgACegBqILZsC/7/OyVDTYZaTTWWtmZeVk7iSOiPpgGRLPA6fUWUQI+gy8Fyvd9yjjad8rXEq1tojWwFUJDp9qH18tysRb5j8EJOBA5Ynj3wRh790OnOgev1+mfgjMwkf52/otZWM9RkM+xnJfKVbW/7M7Xhjz/RRbrab7/YZfosOvWlnlVLp9qf9mdrw15/mPMYBK5z3+0fzIsstt7Q3AUZXP4VPufotNZkD+DPP9HcB7lP2/A91JwFrk8JqPhzgZ5YfwOeti3l83DkJ2qgvMw1rFnW3Fq9Qm8gPelx587SZxvFvv61nnPY+iJ5R34XvC8F70D6oL3vIHeWk49PlX8fT3L/F+hb5ZF3Q3kszdoaBZVOu3i7O8F2WcvachfdjK8sizr2NRZkJ0M55ZlHf/jLP7GY7xCf/kOYKQr8NdnQ1ND/h41AX02NLUf/x7VxX2H6KHj1LfOfpxD/h8w+Os8PrH3V8epb/0bzOq5xA==
+  </data>
+ </layer>
+ <layer name="objects1" width="32" height="20">
+  <data encoding="base64" compression="zlib">
+   eJxjYBj+QE2KOHUngepO4VF7UhYoL0sdN5EDOOUYGLjk6GvnCwEE2xNotxeZ9qsAw1WVyHgYCYDYNDlUwFDxz21BBoY7QHxXcGDslxZiYJABYlmhgbE/GmhvDBDH0tn+dGkGhgxp+tqJDJYD7V4xgPajg8GeX9IEIRidjwsPRvupGcak2I/NXk5g2uOiQ/oD2Y3Nfk+g3V5Y7AcARkUdYw==
+  </data>
+ </layer>
+ <layer name="tops1" width="32" height="20">
+  <data encoding="base64" compression="zlib">
+   eJxjYBg8oFOKgaFLamDsPi3LwHBGlnQ5agFuOQYGHjlEGHjKQjCyHC3d4w003weITwLtPiWFXQ7drQMF0N3zVBC/ek4LoJstiDf/hxhp4jAgacbAIIWEpc2ItxMZWIiTJg4D4UD7IqA4Goink2k/IX8SA2aSaTcIEPLnUAQvJRkYXkkOtCtGASFwEliunqJBWY+rDEK3jxNYrnHRsWyF2QdzhyeQ7YVkP7XCA1fdDrMP3d8we9HdR4iGgdXCDAxrhBE0rF5DF0d3B3q4oLuPEE0tgO4eGJ8QDfM7MsDlZxAAACV7RW8=
+  </data>
+ </layer>
+ <objectgroup name="colliderWalls1" width="32" height="20">
+  <object x="0" y="0" width="352" height="80"/>
+  <object x="0" y="80" width="32" height="64"/>
+  <object x="32" y="80" width="64" height="32"/>
+  <object x="96" y="80" width="32" height="16"/>
+  <object x="144" y="80" width="144" height="32"/>
+  <object x="208" y="112" width="32" height="16"/>
+  <object x="80" y="160" width="16" height="16"/>
+  <object x="80" y="128" width="16" height="16"/>
+  <object x="176" y="128" width="16" height="16"/>
+  <object x="64" y="272" width="32" height="32"/>
+  <object x="0" y="288" width="32" height="32"/>
+  <object x="32" y="304" width="304" height="16"/>
+  <object x="336" y="288" width="176" height="32"/>
+  <object x="368" y="272" width="16" height="16"/>
+  <object x="272" y="192" width="64" height="32"/>
+  <object x="368" y="192" width="32" height="32"/>
+  <object x="384" y="224" width="16" height="64"/>
+  <object x="400" y="256" width="112" height="32"/>
+  <object x="416" y="224" width="32" height="32"/>
+  <object x="480" y="224" width="16" height="16"/>
+  <object x="496" y="192" width="16" height="64"/>
+  <object x="480" y="160" width="32" height="32"/>
+  <object x="448" y="80" width="16" height="112"/>
+  <object x="416" y="176" width="32" height="16"/>
+  <object x="464" y="160" width="16" height="16"/>
+  <object x="272" y="112" width="16" height="80"/>
+  <object x="288" y="128" width="16" height="16"/>
+  <object x="304" y="112" width="64" height="64"/>
+  <object x="368" y="112" width="16" height="32"/>
+  <object x="384" y="96" width="48" height="16"/>
+  <object x="400" y="112" width="32" height="16"/>
+  <object x="416" y="80" width="32" height="16"/>
+  <object x="416" y="192" width="32" height="32"/>
+  <object x="128" y="128" width="16" height="16"/>
+ </objectgroup>
+ <objectgroup name="sensors" width="32" height="20">
+  <object name="startField" x="16" y="160" width="16" height="16">
+   <properties>
+    <property name="fieldID" value="1"/>
+   </properties>
+  </object>
+  <object name="warpField" x="0" y="144" width="16" height="16">
+   <properties>
+    <property name="targetID" value="3"/>
+    <property name="targetWarpPointID" value="6"/>
+   </properties>
+  </object>
+  <object name="monsterArea" x="96" y="256" width="32" height="32">
+   <properties>
+    <property name="probability" value="0.05"/>
+   </properties>
+  </object>
+  <object name="monsterArea" x="160" y="256" width="128" height="48">
+   <properties>
+    <property name="probability" value="0.05"/>
+   </properties>
+  </object>
+  <object name="warpField" x="0" y="160" width="16" height="16">
+   <properties>
+    <property name="targetID" value="3"/>
+    <property name="targetWarpPointID" value="6"/>
+   </properties>
+  </object>
+  <object name="warpField" x="0" y="176" width="16" height="16">
+   <properties>
+    <property name="targetID" value="3"/>
+    <property name="targetWarpPointID" value="6"/>
+   </properties>
+  </object>
+  <object name="warpField" x="0" y="192" width="16" height="16">
+   <properties>
+    <property name="targetID" value="3"/>
+    <property name="targetWarpPointID" value="6"/>
+   </properties>
+  </object>
+  <object name="warpField" x="0" y="208" width="16" height="16">
+   <properties>
+    <property name="targetID" value="3"/>
+    <property name="targetWarpPointID" value="6"/>
+   </properties>
+  </object>
+  <object name="warpField" x="0" y="224" width="16" height="16">
+   <properties>
+    <property name="targetID" value="3"/>
+    <property name="targetWarpPointID" value="6"/>
+   </properties>
+  </object>
+  <object name="warpField" x="0" y="240" width="16" height="16">
+   <properties>
+    <property name="targetID" value="3"/>
+    <property name="targetWarpPointID" value="6"/>
+   </properties>
+  </object>
+  <object name="warpField" x="0" y="256" width="16" height="16">
+   <properties>
+    <property name="targetID" value="3"/>
+    <property name="targetWarpPointID" value="6"/>
+   </properties>
+  </object>
+  <object name="warpField" x="0" y="272" width="16" height="16">
+   <properties>
+    <property name="targetID" value="3"/>
+    <property name="targetWarpPointID" value="6"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="livingEntities" width="32" height="20">
+  <object name="person" x="128" y="128" width="16" height="16">
+   <properties>
+    <property name="path" value="SSTOP, WSTOP, ESTOP"/>
+    <property name="static" value="false"/>
+    <property name="text" value="I've been hiking for 5 hours. When I came back my car was gone. Thank god that I live in Timsey."/>
+   </properties>
+  </object>
+  <object name="person" x="400" y="128" width="16" height="16">
+   <properties>
+    <property name="path" value="SSTOP"/>
+    <property name="static" value="true"/>
+    <property name="text" value="Just a few minutes ago this big rock fell down from the top of the mountain. No the entry to the tunnel is blocked."/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="objects" width="32" height="20"/>
+</map>

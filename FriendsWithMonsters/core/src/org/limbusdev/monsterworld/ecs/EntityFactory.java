@@ -12,10 +12,12 @@ import org.limbusdev.monsterworld.ecs.components.InputComponent;
 import org.limbusdev.monsterworld.ecs.components.PathComponent;
 import org.limbusdev.monsterworld.ecs.components.PositionComponent;
 import org.limbusdev.monsterworld.ecs.components.SpriteComponent;
+import org.limbusdev.monsterworld.ecs.components.TitleComponent;
 import org.limbusdev.monsterworld.ecs.entities.HeroEntity;
 import org.limbusdev.monsterworld.ecs.systems.OutdoorGameArea;
 import org.limbusdev.monsterworld.enums.SkyDirection;
 import org.limbusdev.monsterworld.enums.TextureAtlasType;
+import org.limbusdev.monsterworld.geometry.MapObjectInformation;
 import org.limbusdev.monsterworld.geometry.MapPersonInformation;
 import org.limbusdev.monsterworld.managers.MediaManager;
 import org.limbusdev.monsterworld.utils.GlobalSettings;
@@ -61,6 +63,16 @@ public class EntityFactory {
         engine.addEntity(hero);
 
         return hero;
+    }
+
+    public Entity createSign(MapObjectInformation mapInfo) {
+        Entity sign = new Entity();
+        sign.add(new ConversationComponent(mapInfo.content));
+        sign.add(new TitleComponent(mapInfo.title));
+        sign.add(new ColliderComponent(
+                mapInfo.x, mapInfo.y ,GlobalSettings.TILE_SIZE, GlobalSettings.TILE_SIZE));
+        engine.addEntity(sign);
+        return sign;
     }
 
     public Entity createPerson(MapPersonInformation personInformation) {

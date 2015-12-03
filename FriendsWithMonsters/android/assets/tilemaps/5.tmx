@@ -38,7 +38,7 @@
    eJxjYCANXGQiUQMBEMhIXfNIBQDVbQEm
   </data>
  </layer>
- <objectgroup name="colliderWalls1" width="8" height="8" visible="0">
+ <objectgroup name="colliderWalls1" width="8" height="8">
   <object x="0" y="0" width="128" height="32"/>
   <object x="64" y="32" width="16" height="16"/>
   <object x="0" y="80" width="16" height="16"/>
@@ -62,6 +62,14 @@
     <property name="moving" value="true"/>
     <property name="path" value="E,E,S,S,W,W,N,N"/>
     <property name="startDir" value="S"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="objects" width="8" height="8">
+  <object name="sign" x="16" y="16" width="16" height="16">
+   <properties>
+    <property name="text" value="It's running Linux with GNOME Desktop."/>
+    <property name="title" value="Modern PC"/>
    </properties>
   </object>
  </objectgroup>

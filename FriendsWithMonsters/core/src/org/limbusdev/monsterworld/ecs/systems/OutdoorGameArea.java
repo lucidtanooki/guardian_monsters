@@ -16,6 +16,7 @@ import org.limbusdev.monsterworld.ecs.components.PositionComponent;
 import org.limbusdev.monsterworld.enums.MusicType;
 import org.limbusdev.monsterworld.geometry.IntRectangle;
 import org.limbusdev.monsterworld.geometry.IntVector2;
+import org.limbusdev.monsterworld.geometry.MapObjectInformation;
 import org.limbusdev.monsterworld.geometry.MapPersonInformation;
 import org.limbusdev.monsterworld.geometry.WarpPoint;
 import org.limbusdev.monsterworld.managers.MediaManager;
@@ -38,6 +39,8 @@ public class OutdoorGameArea {
     private Array<IntRectangle> movingColliders;
     private Array<WarpPoint> warpPoints;
     private Array<MapPersonInformation> mapPeople;
+    private Array<MapObjectInformation> mapSigns;
+    private Array<IntRectangle> monsterAreas;
     public PositionComponent startPosition;
 
     /* ........................................................................... CONSTRUCTOR .. */
@@ -46,8 +49,10 @@ public class OutdoorGameArea {
         this.startPosition = new PositionComponent(0,0,0,0);
         this.colliders = new Array<IntRectangle>();
         this.movingColliders = new Array<IntRectangle>();
+        this.monsterAreas = new Array<IntRectangle>();
         this.warpPoints = new Array<WarpPoint>();
         this.mapPeople = new Array<MapPersonInformation>();
+        this.mapSigns = new Array<MapObjectInformation>();
         setUpTiledMap(areaID, startPosID);
         this.mapRenderer = new OrthogonalTiledMapAndEntityRenderer(tiledMap, this);
     }
@@ -90,6 +95,18 @@ public class OutdoorGameArea {
                     mo.getProperties().get("text", String.class)));
         }
 
+        // get information about signs on map
+        for(MapObject mo : tiledMap.getLayers().get("objects").getObjects()) {
+            if(mo.getName().equals("sign")) {
+                r = ((RectangleMapObject) mo).getRectangle();
+                mapSigns.add(new MapObjectInformation(
+                        mo.getProperties().get("title", String.class),
+                        mo.getProperties().get("text", String.class),
+                        MathUtils.round(mo.getProperties().get("x", Float.class)),
+                        MathUtils.round(mo.getProperties().get("y", Float.class))));
+            }
+        }
+
         // get information about sensors
         for(MapObject mo : tiledMap.getLayers().get("sensors").getObjects()) {
             if(mo.getName().equals("warpField"))
@@ -105,6 +122,11 @@ public class OutdoorGameArea {
                     startPosition.x = MathUtils.round(field.x);
                     startPosition.y = MathUtils.round(field.y);
                 }
+            }
+
+            if(mo.getName().equals("monsterArea")) {
+                r = ((RectangleMapObject) mo).getRectangle();
+                monsterAreas.add(new IntRectangle(r));
             }
         }
 
@@ -196,5 +218,13 @@ public class OutdoorGameArea {
 
     public Array<MapPersonInformation> getMapPeople() {
         return mapPeople;
+    }
+
+    public Array<MapObjectInformation> getMapSigns() {
+        return mapSigns;
+    }
+
+    public Array<IntRectangle> getMonsterAreas() {
+        return monsterAreas;
     }
 }

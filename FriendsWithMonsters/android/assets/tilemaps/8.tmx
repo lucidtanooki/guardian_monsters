@@ -74,4 +74,5 @@
    </properties>
   </object>
  </objectgroup>
+ <objectgroup name="objects" width="10" height="10"/>
 </map>

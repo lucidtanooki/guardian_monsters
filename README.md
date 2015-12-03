@@ -17,7 +17,7 @@ Here you can get a first glimpse of what will be created here.
 
 # Downloads
 here you can Download the [Test-Build for Desktop](./Builds/Testing/Desktop/FriendsWithMonsters-DEBUG-0.0.0.4.jar)
-and the [Test-Build for Android](./raw/Builds/Testing/Android/FriendsWithMonsters-DEBUG-0.0.0.5.apk).
+and the [Test-Build for Android](./Builds/Testing/Android/FriendsWithMonsters-DEBUG-0.0.0.5.apk).
 All you need is Java 8. Launch it with 
 
 ```

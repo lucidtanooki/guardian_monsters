@@ -32,6 +32,7 @@ public class BattleScreen implements Screen {
     private BitmapFont font;
     private BattleHUD hud;
     private Texture opponent1, opponent2;
+    private Texture background;
     private MediaManager media;
     private float elapsedTime=0;
     /* ........................................................................... CONSTRUCTOR .. */
@@ -42,6 +43,7 @@ public class BattleScreen implements Screen {
         setUpInputProcessor();
         this.opponent1 = media.getMonsterSprite(0);
         this.opponent2 = media.getMonsterSprite(1);
+        this.background = media.getBackgroundTexture(0);
     }
     /* ............................................................................... METHODS .. */
 
@@ -69,10 +71,11 @@ public class BattleScreen implements Screen {
 
         viewport.apply();
         batch.begin();
-        batch.draw(opponent1, 200 - opponent1.getWidth(), 175 + 2*MathUtils.sin(elapsedTime),
+        batch.draw(background, 0, 0);
+        batch.draw(opponent1, 200 - opponent1.getWidth(), 150 + 2*MathUtils.sin(elapsedTime),
                 opponent1.getWidth()*GlobalSettings.zoom,
                 opponent1.getHeight()*GlobalSettings.zoom);
-        batch.draw(opponent2, 800 - 200 - opponent2.getWidth(), 175 + 2*MathUtils.cos(elapsedTime),
+        batch.draw(opponent2, 800 - 200 - opponent2.getWidth(), 150 + 2*MathUtils.cos(elapsedTime),
                 opponent2.getWidth()*GlobalSettings.zoom,
                 opponent2.getHeight()*GlobalSettings.zoom);
         batch.end();

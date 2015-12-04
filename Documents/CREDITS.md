@@ -8,13 +8,6 @@
 
 * [Character Templates](http://playerred-1.deviantart.com/art/Pokemon-Character-bases-New-174895108) by [PlayerRed-1](http://playerred-1.deviantart.com/)
 
-* ["Fruitera"](http://forum.tuxemon.org/viewtopic.php?pid=124#p124) by [Rawng](http://forum.tuxemon.org/profile.php?id=23)
-is licensed under [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) based on
-["Fruit bat starter"](http://jozzer26.deviantart.com/art/Fruit-bat-starter-504344836) by
-[jozzer26](http://jozzer26.deviantart.com/)
-
-* ["Bigfin"](http://forum.tuxemon.org/viewtopic.php?id=43) by [Cavalcadeur](http://forum.tuxemon.org/profile.php?id=29) and [rsg167](http://forum.tuxemon.org/profile.php?id=19)
-is licensed under [CC-BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/)
 
 ## Tilesets from the Tuxemon Project
 

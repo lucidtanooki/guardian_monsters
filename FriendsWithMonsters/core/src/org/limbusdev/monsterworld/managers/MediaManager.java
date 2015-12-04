@@ -22,6 +22,7 @@ public class MediaManager {
     private String mainMenuBGImgFile = "spritesheets/logo.png";
     private String heroSpritesheetFile = "spritesheets/hero.pack";
     private Array<String> monsterFiles;
+    private Array<String> bgs;
     private Array<String> bgMusicTown;
     
     /* ........................................................................... CONSTRUCTOR .. */
@@ -38,9 +39,14 @@ public class MediaManager {
 
         // Monsters
         monsterFiles = new Array<String>();
-        monsterFiles.add("monsters/bigfin-front.png");
-        monsterFiles.add("monsters/fruitera-front.png");
+        monsterFiles.add("monsters/128/1.png");
+        monsterFiles.add("monsters/128/4.png");
+        monsterFiles.add("monsters/64/3.png");
         for(String s : monsterFiles) assets.load(s, Texture.class);
+
+        bgs = new Array<String>();
+        bgs.add("backgrounds/grass.png");
+        for(String s : bgs) assets.load(s, Texture.class);
 
         assets.finishLoading();
     }
@@ -78,5 +84,9 @@ public class MediaManager {
 
     public Texture getMonsterSprite(int index) {
         return assets.get(monsterFiles.get(index));
+    }
+
+    public Texture getBackgroundTexture(int index) {
+        return assets.get(bgs.get(index));
     }
 }

@@ -14,6 +14,7 @@ public class GlobalSettings {
     public static final int ONE_STEP_DURATION_PERSON = 20;
     public static final int zoom = 2;
     public static final boolean DEBUGGING_ON = false;
+    public static final int MONSTER_SPRITES = 16;
     /* ........................................................................... CONSTRUCTOR .. */
     
     /* ............................................................................... METHODS .. */

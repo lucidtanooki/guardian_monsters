@@ -8,6 +8,7 @@ import com.badlogic.gdx.utils.Array;
 
 import org.limbusdev.monsterworld.enums.MusicType;
 import org.limbusdev.monsterworld.enums.TextureAtlasType;
+import org.limbusdev.monsterworld.utils.GlobalSettings;
 
 import java.util.HashMap;
 
@@ -39,9 +40,9 @@ public class MediaManager {
 
         // Monsters
         monsterFiles = new Array<String>();
-        monsterFiles.add("monsters/128/1.png");
-        monsterFiles.add("monsters/128/4.png");
-        monsterFiles.add("monsters/64/3.png");
+        for(int i=1; i<=GlobalSettings.MONSTER_SPRITES; i++) {
+            monsterFiles.add("monsters/128/" + i + ".png");
+        }
         for(String s : monsterFiles) assets.load(s, Texture.class);
 
         bgs = new Array<String>();
@@ -83,7 +84,7 @@ public class MediaManager {
     }
 
     public Texture getMonsterSprite(int index) {
-        return assets.get(monsterFiles.get(index));
+        return assets.get(monsterFiles.get(index-1));
     }
 
     public Texture getBackgroundTexture(int index) {

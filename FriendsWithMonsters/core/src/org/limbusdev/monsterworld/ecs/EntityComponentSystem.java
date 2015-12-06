@@ -11,8 +11,10 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 
 import org.limbusdev.monsterworld.MonsterWorld;
 import org.limbusdev.monsterworld.ecs.components.ComponentRetriever;
+import org.limbusdev.monsterworld.ecs.components.MonsterComponents.MonsterStatusComponent;
 import org.limbusdev.monsterworld.ecs.components.PositionComponent;
 import org.limbusdev.monsterworld.ecs.entities.HeroEntity;
+import org.limbusdev.monsterworld.ecs.entities.MonsterEntity;
 import org.limbusdev.monsterworld.ecs.systems.CameraSystem;
 import org.limbusdev.monsterworld.ecs.systems.CharacterSpriteSystem;
 import org.limbusdev.monsterworld.ecs.systems.DebuggingSystem;
@@ -56,11 +58,19 @@ public class EntityComponentSystem {
         setUpPeople();
         setUpSigns();
         setUpEntitySystems(gameArea, viewport, hud);
+        setUpPartnerMonster();
     }
     /* ............................................................................... METHODS .. */
     public void setUpHero(boolean fromSave) {
         Entity hero = entityFactory.createHero(gameArea.startPosition, fromSave);
         this.heroPosition = ComponentRetriever.getPositionComponent(hero);
+    }
+
+    public void setUpPartnerMonster() {
+        Entity partnerMonster = new MonsterEntity();
+        partnerMonster.add(new MonsterStatusComponent());
+        this.engine.addEntity(partnerMonster);
+        // TODO add monster in BattleHUD
     }
 
     public void setUpPeople() {

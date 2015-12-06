@@ -41,8 +41,9 @@ public class BattleScreen implements Screen {
         this.hud = new BattleHUD(game, gameScreen);
         setUpRendering();
         setUpInputProcessor();
-        this.opponent1 = media.getMonsterSprite(0);
-        this.opponent2 = media.getMonsterSprite(1);
+        this.media = media;
+        this.opponent1 = media.getMonsterSprite(9);
+        this.opponent2 = media.getMonsterSprite(15);
         this.background = media.getBackgroundTexture(0);
     }
     /* ............................................................................... METHODS .. */
@@ -52,6 +53,7 @@ public class BattleScreen implements Screen {
      */
     @Override
     public void show() {
+        this.opponent2 = media.getMonsterSprite(MathUtils.random(1,GlobalSettings.MONSTER_SPRITES));
         this.batch = new SpriteBatch();
         setUpInputProcessor();
     }

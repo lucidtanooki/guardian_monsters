@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -31,7 +32,7 @@ public class BattleScreen implements Screen {
     private ShapeRenderer shpRend;
     private BitmapFont font;
     private BattleHUD hud;
-    private Texture opponent1, opponent2;
+    private TextureAtlas.AtlasRegion opponent1, opponent2;
     private Texture background;
     private MediaManager media;
     private float elapsedTime=0;
@@ -43,6 +44,7 @@ public class BattleScreen implements Screen {
         setUpInputProcessor();
         this.media = media;
         this.opponent1 = media.getMonsterSprite(9);
+        this.opponent1.flip(true,false);
         this.opponent2 = media.getMonsterSprite(15);
         this.background = media.getBackgroundTexture(0);
     }
@@ -74,12 +76,16 @@ public class BattleScreen implements Screen {
         viewport.apply();
         batch.begin();
         batch.draw(background, 0, 0);
-        batch.draw(opponent1, 200 - opponent1.getWidth(), 150 + 2*MathUtils.sin(elapsedTime),
-                opponent1.getWidth()*GlobalSettings.zoom,
-                opponent1.getHeight()*GlobalSettings.zoom);
-        batch.draw(opponent2, 800 - 200 - opponent2.getWidth(), 150 + 2*MathUtils.cos(elapsedTime),
-                opponent2.getWidth()*GlobalSettings.zoom,
-                opponent2.getHeight()*GlobalSettings.zoom);
+        batch.draw(
+                opponent1, 200 - opponent1.getRegionWidth(),
+                150 + 2*MathUtils.sin(elapsedTime),
+                opponent1.getRegionWidth()*GlobalSettings.zoom,
+                opponent1.getRegionHeight()*GlobalSettings.zoom);
+        batch.draw(
+                opponent2, 800 - 200 - opponent2.getRegionWidth(),
+                150 + 2*MathUtils.cos(elapsedTime),
+                opponent2.getRegionHeight()*GlobalSettings.zoom,
+                opponent2.getRegionHeight()*GlobalSettings.zoom);
         batch.end();
 
         // process Updates

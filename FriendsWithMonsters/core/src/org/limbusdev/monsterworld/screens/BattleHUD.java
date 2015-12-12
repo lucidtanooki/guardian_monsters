@@ -11,6 +11,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
 import org.limbusdev.monsterworld.MonsterWorld;
+import org.limbusdev.monsterworld.model.BattleFactory;
+import org.limbusdev.monsterworld.model.Monster;
 import org.limbusdev.monsterworld.utils.GlobalSettings;
 
 /**
@@ -28,14 +30,22 @@ public class BattleHUD {
     private final Label infoLabel;
     private final Label monster1Label;
     private final Label monster2Label;
+    private Monster monsterOpponent1, monsterOpponent2;
     private final ProgressBar HPopponent1, HPopponent2, MPopponent1, MPopponent2;
+    private BattleFactory battleFactory;
 
     private final OutdoorGameWorldScreen gameScreen;
     private final MonsterWorld game;
     /* ........................................................................... CONSTRUCTOR .. */
-    public BattleHUD(final MonsterWorld game, final OutdoorGameWorldScreen gameScreen) {
+    public BattleHUD(final MonsterWorld game, final OutdoorGameWorldScreen gameScreen,
+                     int monID1, int monID2) {
         this.game = game;
         this.gameScreen = gameScreen;
+
+        this.battleFactory = new BattleFactory();
+        this.monsterOpponent1 = battleFactory.createMonster(monID1);
+        this.monsterOpponent2 = battleFactory.createMonster(monID2);
+
         // Scene2D
         FitViewport fit = new FitViewport(
                 GlobalSettings.RESOLUTION_X, GlobalSettings.RESOLUTION_Y);
@@ -64,7 +74,7 @@ public class BattleHUD {
             }
         });
 
-        fleeButton = new TextButton("Flee", skin, "default");
+        fleeButton = new TextButton("Escape", skin, "default");
         fleeButton.setWidth(128f);
         fleeButton.setHeight(64f);
         fleeButton.setPosition(230, 8);
@@ -87,6 +97,9 @@ public class BattleHUD {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 System.out.println("Attack 1");
+                monsterOpponent2.HP -= monsterOpponent1.attacks.get(0).damage;
+                HPopponent2.setValue(100*monsterOpponent2.HP/monsterOpponent2.HPfull);
+                if(monsterOpponent2.HP == 0) game.setScreen(gameScreen);;
             }
         });
 
@@ -179,7 +192,7 @@ public class BattleHUD {
 
         // .................................................................................. LABELS
 
-        infoLabel = new Label("You came across a monster!", skin, "default");
+        infoLabel = new Label("A monster attacks you!", skin, "default");
         infoLabel.setHeight(64);
         infoLabel.setWidth(600);
         infoLabel.setWrap(true);
@@ -245,4 +258,7 @@ public class BattleHUD {
     }
     
     /* ..................................................................... GETTERS & SETTERS .. */
+    public void setOpponent2(int ID) {
+        monsterOpponent2 = battleFactory.createMonster(ID);
+    }
 }

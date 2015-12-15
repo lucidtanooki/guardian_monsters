@@ -1,5 +1,6 @@
 package org.limbusdev.monsterworld.ecs.systems;
 
+import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
@@ -19,6 +20,7 @@ import org.limbusdev.monsterworld.ecs.components.ConversationComponent;
 import org.limbusdev.monsterworld.ecs.components.InputComponent;
 import org.limbusdev.monsterworld.ecs.components.PositionComponent;
 import org.limbusdev.monsterworld.ecs.components.TitleComponent;
+import org.limbusdev.monsterworld.ecs.entities.HeroEntity;
 import org.limbusdev.monsterworld.enums.SkyDirection;
 import org.limbusdev.monsterworld.geometry.IntRectangle;
 import org.limbusdev.monsterworld.geometry.IntVector2;
@@ -37,11 +39,13 @@ public class InputSystem extends EntitySystem implements InputProcessor {
     private Viewport viewport;
     private OutdoorGameArea gameArea;
     private HUD hud;
+    private Entity hero;
     /* ........................................................................... CONSTRUCTOR .. */
-    public InputSystem(Viewport viewport, OutdoorGameArea gameArea, HUD hud) {
+    public InputSystem(Viewport viewport, OutdoorGameArea gameArea, HUD hud, Entity hero) {
         this.viewport = viewport;
         this.gameArea = gameArea;
         this.hud = hud;
+        this.hero = hero;
     }
     /* ............................................................................... METHODS .. */
     public void addedToEngine(Engine engine) {
@@ -62,7 +66,7 @@ public class InputSystem extends EntitySystem implements InputProcessor {
             InputComponent input = ComponentRetriever.getInputComponent(entity);
             PositionComponent position = ComponentRetriever.getPositionComponent(entity);
             ColliderComponent collider = ComponentRetriever.getColliderComponent(entity);
-            makeOneStep(position, input, collider);
+            if(!input.talking) makeOneStep(position, input, collider);
         }
     }
 
@@ -173,10 +177,17 @@ public class InputSystem extends EntitySystem implements InputProcessor {
         boolean touchedSpeaker, touchedSign;
         touchedSign = touchedSpeaker = false;
 
+        // Loop through entities with text and test weather they're near enough
         for(Entity e : speakingEntities) {
-            if(ComponentRetriever.getColliderComponent(e).collider.contains(
-                    new IntVector2(MathUtils.round(touchPos.x),
-                    MathUtils.round(touchPos.y)))) {
+            ColliderComponent coll = ComponentRetriever.getColliderComponent(e);
+            IntVector2 touchedAt = new IntVector2(MathUtils.round(touchPos.x),MathUtils.round(touchPos.y));
+            float dist = touchPos.dst(
+                    ComponentRetriever.collCompMap.get(hero).collider.x
+                            + GlobalSettings.TILE_SIZE/2,
+                    ComponentRetriever.collCompMap.get(hero).collider.y
+                            + GlobalSettings.TILE_SIZE/2
+            );
+            if(coll.collider.contains(touchedAt) && dist < GlobalSettings.TILE_SIZE*1.5) {
                 System.out.print("Touched speaker\n");
                 touchedSpeaker = true;
                 hud.openConversation(ComponentRetriever.convCompMap.get(e).text);
@@ -184,9 +195,15 @@ public class InputSystem extends EntitySystem implements InputProcessor {
         }
 
         for(Entity e : signEntities) {
-            if(ComponentRetriever.getColliderComponent(e).collider.contains(
-                    new IntVector2(MathUtils.round(touchPos.x),
-                            MathUtils.round(touchPos.y)))) {
+            ColliderComponent coll = ComponentRetriever.getColliderComponent(e);
+            IntVector2 touchedAt = new IntVector2(MathUtils.round(touchPos.x),MathUtils.round(touchPos.y));
+            float dist = touchPos.dst(
+                    ComponentRetriever.collCompMap.get(hero).collider.x
+                            + GlobalSettings.TILE_SIZE/2,
+                    ComponentRetriever.collCompMap.get(hero).collider.y
+                            + GlobalSettings.TILE_SIZE/2
+            );
+            if(coll.collider.contains(touchedAt) && dist < GlobalSettings.TILE_SIZE*1.5) {
                 System.out.print("Touched sign\n");
                 touchedSign = true;
                 hud.openSign(
@@ -196,6 +213,7 @@ public class InputSystem extends EntitySystem implements InputProcessor {
         }
 
         if(!touchedSpeaker && !touchedSign) touchDragged(screenX, screenY, pointer);
+        else ComponentRetriever.getInputComponent(hero).talking = true;
         return true;
     }
 

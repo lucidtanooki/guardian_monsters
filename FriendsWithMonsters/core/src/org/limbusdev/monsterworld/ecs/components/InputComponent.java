@@ -16,6 +16,7 @@ public class InputComponent implements Component {
     public Vector3 touchPos;
     public long startedMoving;
     public boolean startMoving;
+    public boolean talking;
     /* ........................................................................... CONSTRUCTOR .. */
     public InputComponent() {
         skyDir = SkyDirection.S;
@@ -23,6 +24,7 @@ public class InputComponent implements Component {
         this.touchPos = new Vector3(0,0,0);
         this.startedMoving = 0;
         this.startMoving = false;
+        this.talking = false;
     }
     /* ............................................................................... METHODS .. */
     

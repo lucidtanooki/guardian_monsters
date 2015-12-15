@@ -28,6 +28,7 @@ import org.limbusdev.monsterworld.geometry.MapObjectInformation;
 import org.limbusdev.monsterworld.geometry.MapPersonInformation;
 import org.limbusdev.monsterworld.managers.MediaManager;
 import org.limbusdev.monsterworld.managers.SaveGameManager;
+import org.limbusdev.monsterworld.screens.BattleScreen;
 import org.limbusdev.monsterworld.screens.HUD;
 import org.limbusdev.monsterworld.screens.OutdoorGameWorldScreen;
 import org.limbusdev.monsterworld.utils.GlobalSettings;
@@ -44,10 +45,12 @@ public class EntityComponentSystem {
     private MonsterWorld game;
     private OutdoorGameArea gameArea;
     public SaveGameManager saveGameManager;
+    public Entity hero;
+    public HUD hud;
     /* ........................................................................... CONSTRUCTOR .. */
     public EntityComponentSystem(
-            MonsterWorld game, Viewport viewport, OutdoorGameArea gameArea, HUD hud, boolean
-            fromSave
+            MonsterWorld game, Viewport viewport, OutdoorGameArea gameArea, boolean
+            fromSave, OutdoorGameWorldScreen gameScreen, SaveGameManager sgm
     ) {
         this.media = game.media;
         this.game = game;
@@ -55,6 +58,7 @@ public class EntityComponentSystem {
         this.engine = new Engine();
         this.entityFactory = new EntityFactory(engine, media, gameArea);
         setUpHero(fromSave);
+        this.hud = new HUD(new BattleScreen(game.media, gameScreen, game),game,sgm, hero);
         setUpPeople();
         setUpSigns();
         setUpEntitySystems(gameArea, viewport, hud);
@@ -64,6 +68,7 @@ public class EntityComponentSystem {
     public void setUpHero(boolean fromSave) {
         Entity hero = entityFactory.createHero(gameArea.startPosition, fromSave);
         this.heroPosition = ComponentRetriever.getPositionComponent(hero);
+        this.hero = hero;
     }
 
     public void setUpPartnerMonster() {
@@ -90,7 +95,7 @@ public class EntityComponentSystem {
         engine.addSystem(spriteSystem);
 
         // Input System
-        InputSystem inputSystem = new InputSystem(viewport, gameArea, hud);
+        InputSystem inputSystem = new InputSystem(viewport, gameArea, hud, hero);
         inputSystem.addedToEngine(engine);
         engine.addSystem(inputSystem);
 
@@ -147,6 +152,11 @@ public class EntityComponentSystem {
 
     public void changeGameArea(int mapID, int startFieldID) {
         game.setScreen(new OutdoorGameWorldScreen(game, mapID, startFieldID, false));
+    }
+
+    public void draw() {
+        hud.stage.getViewport().apply();
+        hud.draw();
     }
     /* ..................................................................... GETTERS & SETTERS .. */
     public InputProcessor getInputProcessor() {

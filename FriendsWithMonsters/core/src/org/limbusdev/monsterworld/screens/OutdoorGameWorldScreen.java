@@ -40,7 +40,6 @@ public class OutdoorGameWorldScreen implements Screen {
 
     private OutdoorGameArea gameArea;
     private EntityComponentSystem ECS;
-    private HUD hud;
     private InputMultiplexer inputMultiplexer;
 
 
@@ -51,11 +50,9 @@ public class OutdoorGameWorldScreen implements Screen {
         setUpRendering();
         this.gameArea = new OutdoorGameArea(mapID, game.media, startPosID);
         SaveGameManager saveGameManager = new SaveGameManager(this.gameArea);
-        this.hud = new HUD(
-                new BattleScreen(game.media, this, game),
-                game,
-                saveGameManager);
-        this.ECS = new EntityComponentSystem(game, viewport, gameArea, hud, fromSave);
+        this.ECS = new EntityComponentSystem(game, viewport, gameArea, fromSave, this, saveGameManager);
+
+
         this.inputMultiplexer = new InputMultiplexer();
         setUpInputProcessor();
     }
@@ -93,8 +90,7 @@ public class OutdoorGameWorldScreen implements Screen {
         ECS.render(batch, shpRend);
         if(GlobalSettings.DEBUGGING_ON)gameArea.renderDebugging(shpRend);
 
-        hud.stage.getViewport().apply();
-        hud.draw();
+        ECS.draw();
 
         // ............................................................................... RENDERING
 
@@ -109,7 +105,7 @@ public class OutdoorGameWorldScreen implements Screen {
     @Override
     public void resize(int width, int height) {
         viewport.update(width,height);
-        hud.stage.getViewport().update(width, height, true);
+        ECS.hud.stage.getViewport().update(width, height, true);
     }
 
     /**
@@ -172,7 +168,7 @@ public class OutdoorGameWorldScreen implements Screen {
     }
 
     public void setUpInputProcessor() {
-        this.inputMultiplexer.addProcessor(hud.getInputProcessor());
+        this.inputMultiplexer.addProcessor(ECS.hud.getInputProcessor());
         this.inputMultiplexer.addProcessor(ECS.getInputProcessor());
         Gdx.input.setInputProcessor(inputMultiplexer);
     }

@@ -1,5 +1,6 @@
 package org.limbusdev.monsterworld.screens;
 
+import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -11,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
 import org.limbusdev.monsterworld.MonsterWorld;
+import org.limbusdev.monsterworld.ecs.components.ComponentRetriever;
 import org.limbusdev.monsterworld.ecs.components.SaveGameComponent;
 import org.limbusdev.monsterworld.utils.GameState;
 import org.limbusdev.monsterworld.utils.GlobalSettings;
@@ -31,12 +33,16 @@ public class HUD {
     public final BattleScreen battleScreen;
     public final MonsterWorld game;
     public final SaveGameManager saveGameManager;
+    public final Entity hero;
     
     /* ........................................................................... CONSTRUCTOR .. */
-    public HUD(final BattleScreen battleScreen, final MonsterWorld game, final SaveGameManager saveGameManager) {
+    public HUD(final BattleScreen battleScreen, final MonsterWorld game,
+               final SaveGameManager saveGameManager, final Entity hero) {
         this.saveGameManager = saveGameManager;
         this.battleScreen = battleScreen;
         this.game = game;
+        this.hero = hero;
+
         // Scene2D
         FitViewport fit = new FitViewport(
                 GlobalSettings.RESOLUTION_X, GlobalSettings.RESOLUTION_Y);
@@ -108,6 +114,7 @@ public class HUD {
                 titleLabel.setVisible(false);
                 conversationLabel.setVisible(false);
                 conversationExitButton.setVisible(false);
+                ComponentRetriever.getInputComponent(hero).talking = false;
             }
         });
         // Buttons ............................................................................. END

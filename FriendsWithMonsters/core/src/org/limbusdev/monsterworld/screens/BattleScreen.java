@@ -58,6 +58,7 @@ public class BattleScreen implements Screen {
         int opp = MathUtils.random(1,GlobalSettings.MONSTER_SPRITES);
         this.opponent2 = media.getMonsterSprite(opp);
         this.batch = new SpriteBatch();
+        this.hud.init();
         setUpInputProcessor();
     }
 
@@ -93,6 +94,7 @@ public class BattleScreen implements Screen {
         updateCamera();
 
         hud.stage.getViewport().apply();
+        hud.update(delta);
         hud.draw();
     }
 

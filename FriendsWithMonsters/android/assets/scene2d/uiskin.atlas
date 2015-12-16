@@ -81,6 +81,15 @@ default-rect-down
   orig: 3, 3
   offset: 0, 0
   index: -1
+beige-round
+  rotate: false
+  xy: 125, 8
+  size: 12, 20
+  split: 5, 5, 5, 4
+  pad: 4, 4, 1, 1
+  orig: 12, 20
+  offset: 0, 0
+  index: -1
 default-round
   rotate: false
   xy: 112, 29
@@ -93,6 +102,60 @@ default-round
 default-round-down
   rotate: false
   xy: 99, 29
+  size: 12, 20
+  split: 5, 5, 5, 4
+  pad: 4, 4, 1, 1
+  orig: 12, 20
+  offset: 0, 0
+  index: -1
+red-round
+  rotate: false
+  xy: 112, 7
+  size: 12, 20
+  split: 5, 5, 5, 4
+  pad: 4, 4, 1, 1
+  orig: 12, 20
+  offset: 0, 0
+  index: -1
+red-round-down
+  rotate: false
+  xy: 99, 7
+  size: 12, 20
+  split: 5, 5, 5, 4
+  pad: 4, 4, 1, 1
+  orig: 12, 20
+  offset: 0, 0
+  index: -1
+green-round
+  rotate: false
+  xy: 60, 7
+  size: 12, 20
+  split: 5, 5, 5, 4
+  pad: 4, 4, 1, 1
+  orig: 12, 20
+  offset: 0, 0
+  index: -1
+green-round-down
+  rotate: false
+  xy: 46, 7
+  size: 12, 20
+  split: 5, 5, 5, 4
+  pad: 4, 4, 1, 1
+  orig: 12, 20
+  offset: 0, 0
+  index: -1
+blue-round
+  rotate: false
+  xy: 86, 7
+  size: 12, 20
+  split: 5, 5, 5, 4
+  pad: 4, 4, 1, 1
+  orig: 12, 20
+  offset: 0, 0
+  index: -1
+blue-round-down
+  rotate: false
+  xy: 73, 7
   size: 12, 20
   split: 5, 5, 5, 4
   pad: 4, 4, 1, 1
@@ -134,6 +197,22 @@ default-select-selection
 default-slider
   rotate: false
   xy: 29, 20
+  size: 8, 8
+  split: 2, 2, 2, 2
+  orig: 8, 8
+  offset: 0, 0
+  index: -1
+blue-slider
+  rotate: false
+  xy: 29, 0
+  size: 8, 8
+  split: 2, 2, 2, 2
+  orig: 8, 8
+  offset: 0, 0
+  index: -1
+green-slider
+  rotate: false
+  xy: 29, 9
   size: 8, 8
   split: 2, 2, 2, 2
   orig: 8, 8

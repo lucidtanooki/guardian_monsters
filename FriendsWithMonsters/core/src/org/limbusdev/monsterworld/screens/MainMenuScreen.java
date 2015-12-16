@@ -31,6 +31,7 @@ public class MainMenuScreen implements Screen {
     public Viewport viewport;
 
     private Texture bGImg;
+    private Texture bGImg2;
     private float elapsedTime=0;
 
     // Scene2D.ui
@@ -46,6 +47,7 @@ public class MainMenuScreen implements Screen {
         viewport.apply();
         camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0);
         bGImg = game.media.getMainMenuBGImg();
+        bGImg2 = game.media.getMainMenuBGImg2();
 
         setUpUI();
     }
@@ -67,6 +69,7 @@ public class MainMenuScreen implements Screen {
         // Start collecting textures for OpenGL
         game.batch.begin();
 
+        game.batch.draw(bGImg2,0,0);
         // Logo
         game.batch.draw(bGImg,
                 GlobalSettings.RESOLUTION_X/2 - bGImg.getWidth()/2,
@@ -125,7 +128,7 @@ public class MainMenuScreen implements Screen {
                 GlobalSettings.RESOLUTION_X, GlobalSettings.RESOLUTION_Y);
         this.stage = new Stage(fit);
         Gdx.input.setInputProcessor(stage);
-        this.skin = new Skin(Gdx.files.internal("scene2d/uiskin.json"));
+        this.skin = game.media.skin;
 
         // Buttons .................................................................................
         String startButton = "Start Game";

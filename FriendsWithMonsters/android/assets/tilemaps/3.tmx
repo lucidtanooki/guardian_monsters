@@ -85,6 +85,7 @@
   <object x="128" y="400" width="16" height="16"/>
   <object x="368" y="288" width="16" height="16"/>
   <object x="240" y="432" width="32" height="16"/>
+  <object x="208" y="288" width="16" height="16"/>
  </objectgroup>
  <objectgroup name="livingEntities" width="32" height="32">
   <object name="person" x="96" y="224" width="16" height="16">

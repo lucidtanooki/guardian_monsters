@@ -3,6 +3,8 @@ package org.limbusdev.monsterworld.screens;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -14,6 +16,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import org.limbusdev.monsterworld.MonsterWorld;
 import org.limbusdev.monsterworld.ecs.components.ComponentRetriever;
 import org.limbusdev.monsterworld.ecs.components.SaveGameComponent;
+import org.limbusdev.monsterworld.managers.MediaManager;
 import org.limbusdev.monsterworld.utils.GameState;
 import org.limbusdev.monsterworld.utils.GlobalSettings;
 import org.limbusdev.monsterworld.managers.SaveGameManager;
@@ -26,7 +29,7 @@ public class HUD {
     private Skin skin;
     public Stage stage;
 
-    private final TextButton menuButton, battleButton, saveButton;
+    private final TextButton menuButton, battleButton, saveButton, quitButton;
     private final Label conversationLabel;
     private final Label titleLabel;
     private final TextButton conversationExitButton;
@@ -37,21 +40,20 @@ public class HUD {
     
     /* ........................................................................... CONSTRUCTOR .. */
     public HUD(final BattleScreen battleScreen, final MonsterWorld game,
-               final SaveGameManager saveGameManager, final Entity hero) {
+               final SaveGameManager saveGameManager, final Entity hero, MediaManager media) {
         this.saveGameManager = saveGameManager;
         this.battleScreen = battleScreen;
         this.game = game;
         this.hero = hero;
 
         // Scene2D
-        FitViewport fit = new FitViewport(
-                GlobalSettings.RESOLUTION_X, GlobalSettings.RESOLUTION_Y);
+        FitViewport fit = new FitViewport(GlobalSettings.RESOLUTION_X, GlobalSettings.RESOLUTION_Y);
 
         this.stage = new Stage(fit);
-        this.skin = new Skin(Gdx.files.internal("scene2d/uiskin.json"));
+        this.skin = media.skin;
 
         // Buttons .................................................................................
-        menuButton = new TextButton("MENU", skin, "default");
+        menuButton = new TextButton("MENU", skin, "default-blue");
         menuButton.setWidth(64f);
         menuButton.setHeight(32f);
         menuButton.setPosition(GlobalSettings.RESOLUTION_X - 72f, GlobalSettings.RESOLUTION_Y -
@@ -77,7 +79,7 @@ public class HUD {
             }
         });
 
-        saveButton = new TextButton("Save", skin, "default");
+        saveButton = new TextButton("Save", skin, "default-green");
         saveButton.setWidth(64f);
         saveButton.setHeight(32f);
         saveButton.setPosition(GlobalSettings.RESOLUTION_X - 72f,
@@ -87,6 +89,19 @@ public class HUD {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 saveGameManager.saveGame();
+            }
+        });
+
+        quitButton = new TextButton("Quit", skin, "default-red");
+        quitButton.setWidth(64f);
+        quitButton.setHeight(32f);
+        quitButton.setPosition(GlobalSettings.RESOLUTION_X - 72f,
+                GlobalSettings.RESOLUTION_Y - 166f);
+
+        quitButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                Gdx.app.exit();
             }
         });
 
@@ -125,6 +140,7 @@ public class HUD {
         stage.addActor(conversationLabel);
         stage.addActor(conversationExitButton);
         stage.addActor(saveButton);
+        stage.addActor(quitButton);
     }
     /* ............................................................................... METHODS .. */
     public void draw() {

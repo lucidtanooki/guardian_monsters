@@ -1,6 +1,5 @@
 package org.limbusdev.monsterworld.ecs.systems;
 
-import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
@@ -20,7 +19,6 @@ import org.limbusdev.monsterworld.ecs.components.ConversationComponent;
 import org.limbusdev.monsterworld.ecs.components.InputComponent;
 import org.limbusdev.monsterworld.ecs.components.PositionComponent;
 import org.limbusdev.monsterworld.ecs.components.TitleComponent;
-import org.limbusdev.monsterworld.ecs.entities.HeroEntity;
 import org.limbusdev.monsterworld.enums.SkyDirection;
 import org.limbusdev.monsterworld.geometry.IntRectangle;
 import org.limbusdev.monsterworld.geometry.IntVector2;

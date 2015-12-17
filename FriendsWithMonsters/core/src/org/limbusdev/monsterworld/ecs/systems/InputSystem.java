@@ -18,10 +18,13 @@ import org.limbusdev.monsterworld.ecs.components.ComponentRetriever;
 import org.limbusdev.monsterworld.ecs.components.ConversationComponent;
 import org.limbusdev.monsterworld.ecs.components.InputComponent;
 import org.limbusdev.monsterworld.ecs.components.PositionComponent;
+import org.limbusdev.monsterworld.ecs.components.TeamComponent;
 import org.limbusdev.monsterworld.ecs.components.TitleComponent;
 import org.limbusdev.monsterworld.enums.SkyDirection;
 import org.limbusdev.monsterworld.geometry.IntRectangle;
 import org.limbusdev.monsterworld.geometry.IntVector2;
+import org.limbusdev.monsterworld.model.BattleFactory;
+import org.limbusdev.monsterworld.model.MonsterArea;
 import org.limbusdev.monsterworld.screens.HUD;
 import org.limbusdev.monsterworld.utils.GlobalSettings;
 
@@ -139,11 +142,14 @@ public class InputSystem extends EntitySystem implements InputProcessor {
 
             // Go on if finger is still on screen
             if(!input.moving) {
-                for(IntRectangle i : gameArea.getMonsterAreas()) {
-                    if (i.contains(new IntVector2(position.x + GlobalSettings.TILE_SIZE / 2,
+                for(MonsterArea ma : gameArea.getMonsterAreas()) {
+                    if (ma.contains(new IntVector2(position.x + GlobalSettings.TILE_SIZE / 2,
                             position.y + GlobalSettings.TILE_SIZE / 2))
-                            && MathUtils.randomBoolean(0.05f)) {
+                            && MathUtils.randomBoolean(ma.attackProbabilities.get(0))) {
                         System.out.print("Monster appeared!\n");
+                        /* ......................................................... START BATTLE */
+                        TeamComponent oppTeam = BattleFactory.getInstance().createOpponentTeam(ma);
+                        hud.battleScreen.init(ComponentRetriever.team.get(hero), oppTeam);
                         hud.game.setScreen(hud.battleScreen);
                     }
                 }

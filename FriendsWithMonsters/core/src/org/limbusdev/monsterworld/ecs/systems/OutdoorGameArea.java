@@ -20,6 +20,7 @@ import org.limbusdev.monsterworld.geometry.MapObjectInformation;
 import org.limbusdev.monsterworld.geometry.MapPersonInformation;
 import org.limbusdev.monsterworld.geometry.WarpPoint;
 import org.limbusdev.monsterworld.managers.MediaManager;
+import org.limbusdev.monsterworld.model.MonsterArea;
 import org.limbusdev.monsterworld.rendering.OrthogonalTiledMapAndEntityRenderer;
 import org.limbusdev.monsterworld.utils.GlobalSettings;
 
@@ -40,7 +41,7 @@ public class OutdoorGameArea {
     private Array<WarpPoint> warpPoints;
     private Array<MapPersonInformation> mapPeople;
     private Array<MapObjectInformation> mapSigns;
-    private Array<IntRectangle> monsterAreas;
+    private Array<MonsterArea> monsterAreas;
     public PositionComponent startPosition;
     public int areaID;
 
@@ -50,7 +51,7 @@ public class OutdoorGameArea {
         this.startPosition = new PositionComponent(0,0,0,0);
         this.colliders = new Array<IntRectangle>();
         this.movingColliders = new Array<IntRectangle>();
-        this.monsterAreas = new Array<IntRectangle>();
+        this.monsterAreas = new Array<MonsterArea>();
         this.warpPoints = new Array<WarpPoint>();
         this.mapPeople = new Array<MapPersonInformation>();
         this.mapSigns = new Array<MapObjectInformation>();
@@ -128,7 +129,16 @@ public class OutdoorGameArea {
 
             if(mo.getName().equals("monsterArea")) {
                 r = ((RectangleMapObject) mo).getRectangle();
-                monsterAreas.add(new IntRectangle(r));
+                IntRectangle mr = new IntRectangle(r);
+                Array<Float> ap = new Array<Float>();
+                ap.add(Float.parseFloat(mo.getProperties().get("probability", String.class)));
+                ap.add(Float.parseFloat(mo.getProperties().get("probability2", String.class)));
+                ap.add(Float.parseFloat(mo.getProperties().get("probability3", String.class)));
+                monsterAreas.add(new MonsterArea(
+                        mr.x, mr.y, mr.width, mr.height,
+                        mo.getProperties().get("monsters", String.class),
+                        ap
+                ));
             }
         }
 
@@ -226,7 +236,7 @@ public class OutdoorGameArea {
         return mapSigns;
     }
 
-    public Array<IntRectangle> getMonsterAreas() {
+    public Array<MonsterArea> getMonsterAreas() {
         return monsterAreas;
     }
 }

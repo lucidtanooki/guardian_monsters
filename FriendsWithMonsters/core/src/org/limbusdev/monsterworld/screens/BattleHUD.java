@@ -5,6 +5,8 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.List;
 import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
@@ -14,6 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -35,17 +38,19 @@ public class BattleHUD {
 
     private final TextButton fightButton, fleeButton, battleMenuButton;
     private final TextButton att1Button, att2Button, att3Button, att4Button, att5Button, att6Button;
+    private final Array<Button> oppMonButtons;
     private final Label infoLabel;
     private final Array<Label> monsterLabels;
     private final Array<ProgressBar> HPbars;
     private final Array<ProgressBar> MPbars;
     private final ScrollPane attacksPane;
-    private BattleFactory battleFactory;
+    private final Image indicator;
     private Array<Monster> team;
     private Array<Monster> opponentTeam;
 
     private final OutdoorGameWorldScreen gameScreen;
     private final MonsterWorld game;
+    private int chosenTarget=0;
     /* ........................................................................... CONSTRUCTOR .. */
     public BattleHUD(final MonsterWorld game, final OutdoorGameWorldScreen gameScreen) {
         this.game = game;
@@ -53,8 +58,8 @@ public class BattleHUD {
         this.monsterLabels = new Array<Label>();
         this.HPbars = new Array<ProgressBar>();
         this.MPbars = new Array<ProgressBar>();
+        this.oppMonButtons = new Array<Button>();
 
-        this.battleFactory = BattleFactory.getInstance();
         this.opponentTeam = new Array<Monster>();
         for(int i=0;i<3;i++) this.opponentTeam.add(null);
 
@@ -64,6 +69,12 @@ public class BattleHUD {
 
         this.stage = new Stage(fit);
         this.skin = game.media.skin;
+
+        // Images
+        indicator = new Image(skin.getDrawable("indicator"));
+        indicator.setVisible(true);
+        indicator.setPosition(800-128,300, Align.center);
+        stage.addActor(indicator);
 
         // Buttons .................................................................................
         fightButton = new TextButton("Fight", skin, "default-green");
@@ -258,9 +269,85 @@ public class BattleHUD {
         att6Button.setVisible(false);
         battleMenuButton.setVisible(false);
         infoLabel.setVisible(true);
-        for(Label l : monsterLabels) l.setVisible(true);
-        for(ProgressBar p : HPbars) p.setVisible(true);
-        for(ProgressBar p : MPbars) p.setVisible(true);
+
+        // Hero Team
+        switch(team.monsters.size) {
+            case 3:
+                monsterLabels.get(2).setVisible(true);
+                HPbars.get(2).setVisible(true);
+                MPbars.get(2).setVisible(true);
+            case 2:
+                monsterLabels.get(0).setVisible(true);
+                HPbars.get(0).setVisible(true);
+                MPbars.get(0).setVisible(true);
+            default:
+                monsterLabels.get(1).setVisible(true);
+                HPbars.get(1).setVisible(true);
+                MPbars.get(1).setVisible(true);
+                break;
+        }
+
+        // Opponent Team
+        final Button monsterChooser1,monsterChooser2,monsterChooser3;
+        switch(opponentTeam.monsters.size) {
+            case 3:
+                monsterChooser1 = new Button(skin, "transparent");
+                monsterChooser1.setPosition(800-120-128,212,Align.center);
+                monsterChooser1.setWidth(128);
+                monsterChooser1.setHeight(128);
+                monsterChooser1.addListener(new ClickListener() {
+                    @Override
+                    public void clicked(InputEvent event, float x, float y) {
+                        chosenTarget = 2;
+                        indicator.setPosition(800-120-64,340, Align.center);
+                    }
+                });
+                oppMonButtons.add(monsterChooser1);
+                monsterLabels.get(5).setVisible(true);
+                HPbars.get(5).setVisible(true);
+                MPbars.get(5).setVisible(true);
+            case 2:
+                monsterChooser2 = new Button(skin, "transparent");
+                monsterChooser2.setPosition(800-8-128,140, Align.center);
+                monsterChooser2.setWidth(128);
+                monsterChooser2.setHeight(128);
+                monsterChooser2.addListener(new ClickListener() {
+                    @Override
+                    public void clicked(InputEvent event, float x, float y) {
+                        chosenTarget = 0;
+                        indicator.setPosition(800-8-64,268, Align.center);
+                    }
+                });
+                oppMonButtons.add(monsterChooser2);
+                monsterLabels.get(3).setVisible(true);
+                HPbars.get(3).setVisible(true);
+                MPbars.get(3).setVisible(true);
+            default:
+                monsterChooser3 = new Button(skin, "transparent");
+                monsterChooser3.setPosition(800-64-128,176, Align.center);
+                monsterChooser3.setWidth(128);
+                monsterChooser3.setHeight(128);
+                monsterChooser3.addListener(new ClickListener() {
+                    @Override
+                    public void clicked(InputEvent event, float x, float y) {
+                        chosenTarget = 1;
+                        indicator.setPosition(800-128,304, Align.center);
+                    }
+                });
+                oppMonButtons.add(monsterChooser3);
+                monsterLabels.get(4).setVisible(true);
+                HPbars.get(4).setVisible(true);
+                MPbars.get(4).setVisible(true);
+                break;
+        }
+        for(Button b : oppMonButtons) stage.addActor(b);
+    }
+
+    public void hide() {
+        for(Label l : monsterLabels) l.setVisible(false);
+        for(ProgressBar p : HPbars) p.setVisible(false);
+        for(ProgressBar p : MPbars) p.setVisible(false);
+        oppMonButtons.clear();
     }
 
     public void draw() {
@@ -287,16 +374,15 @@ public class BattleHUD {
         monster1Label.setWidth(128);
         monster1Label.setHeight(28);
         monster1Label.setPosition(16, GlobalSettings.RESOLUTION_Y - 100);
-        monster1Label.setVisible(true);
         monsterLabels.add(monster1Label);
 
         hp = new ProgressBar(0, 100, 1, false, HPbarStyle);
         mp = new ProgressBar(0, 100, 1, false, MPbarStyle);
 
         hp.setPosition(140, GlobalSettings.RESOLUTION_Y - 90);
-        hp.setWidth(128); hp.setVisible(true); hp.setValue(100);
+        hp.setWidth(128); hp.setValue(100);
         mp.setPosition(140, GlobalSettings.RESOLUTION_Y - 100);
-        mp.setWidth(100); mp.setVisible(true); mp.setValue(100);
+        mp.setWidth(100); mp.setValue(100);
 
         hp.setAnimateInterpolation(Interpolation.linear);
         hp.setAnimateDuration(1f);
@@ -308,16 +394,15 @@ public class BattleHUD {
         monster2Label.setWidth(128);
         monster2Label.setHeight(28);
         monster2Label.setPosition(48, GlobalSettings.RESOLUTION_Y - 68);
-        monster2Label.setVisible(true);
         monsterLabels.add(monster2Label);
 
         hp = new ProgressBar(0, 100, 1, false, HPbarStyle);
         mp = new ProgressBar(0, 100, 1, false, MPbarStyle);
 
         hp.setPosition(172, GlobalSettings.RESOLUTION_Y - 58);
-        hp.setWidth(128); hp.setVisible(true); hp.setValue(100);
+        hp.setWidth(128); hp.setValue(100);
         mp.setPosition(172, GlobalSettings.RESOLUTION_Y - 68);
-        mp.setWidth(100); mp.setVisible(true); mp.setValue(100);
+        mp.setWidth(100); mp.setValue(100);
 
         hp.setAnimateInterpolation(Interpolation.linear);
         hp.setAnimateDuration(1f);
@@ -329,16 +414,15 @@ public class BattleHUD {
         monster3Label.setWidth(128);
         monster3Label.setHeight(28);
         monster3Label.setPosition(80, GlobalSettings.RESOLUTION_Y - 36);
-        monster3Label.setVisible(true);
         monsterLabels.add(monster3Label);
 
         hp = new ProgressBar(0, 100, 1, false, HPbarStyle);
         mp = new ProgressBar(0, 100, 1, false, MPbarStyle);
 
         hp.setPosition(204, GlobalSettings.RESOLUTION_Y - 26);
-        hp.setWidth(128); hp.setVisible(true); hp.setValue(100);
+        hp.setWidth(128); hp.setValue(100);
         mp.setPosition(204, GlobalSettings.RESOLUTION_Y - 36);
-        mp.setWidth(100); mp.setVisible(true); mp.setValue(100);
+        mp.setWidth(100); mp.setValue(100);
 
         hp.setAnimateInterpolation(Interpolation.linear);
         hp.setAnimateDuration(1f);
@@ -352,16 +436,15 @@ public class BattleHUD {
         monster4Label.setWidth(128);
         monster4Label.setHeight(28);
         monster4Label.setPosition(800 - 144, GlobalSettings.RESOLUTION_Y - 100);
-        monster4Label.setVisible(true);
         monsterLabels.add(monster4Label);
 
         hp = new ProgressBar(0, 100, 1, false, HPbarStyle);
         mp = new ProgressBar(0, 100, 1, false, MPbarStyle);
 
-        hp.setPosition(800-16-128-124, GlobalSettings.RESOLUTION_Y - 90);
-        hp.setWidth(128); hp.setVisible(true); hp.setValue(100);
-        mp.setPosition(800-16-128-96, GlobalSettings.RESOLUTION_Y - 100);
-        mp.setWidth(100); mp.setVisible(true); mp.setValue(100);
+        hp.setPosition(800 - 16 - 128 - 124, GlobalSettings.RESOLUTION_Y - 90);
+        hp.setWidth(128); hp.setValue(100);
+        mp.setPosition(800 - 16 - 128 - 96, GlobalSettings.RESOLUTION_Y - 100);
+        mp.setWidth(100); mp.setValue(100);
 
         hp.setAnimateInterpolation(Interpolation.linear);
         hp.setAnimateDuration(1f);
@@ -373,16 +456,15 @@ public class BattleHUD {
         monster5Label.setWidth(128);
         monster5Label.setHeight(28);
         monster5Label.setPosition(800 - 176, GlobalSettings.RESOLUTION_Y - 68);
-        monster5Label.setVisible(true);
         monsterLabels.add(monster5Label);
 
         hp = new ProgressBar(0, 100, 1, false, HPbarStyle);
         mp = new ProgressBar(0, 100, 1, false, MPbarStyle);
 
-        hp.setPosition(800-16-128-124-32, GlobalSettings.RESOLUTION_Y - 58);
-        hp.setWidth(128); hp.setVisible(true); hp.setValue(100);
-        mp.setPosition(800-16-128-96-32, GlobalSettings.RESOLUTION_Y - 68);
-        mp.setWidth(100); mp.setVisible(true); mp.setValue(100);
+        hp.setPosition(800 - 16 - 128 - 124 - 32, GlobalSettings.RESOLUTION_Y - 58);
+        hp.setWidth(128); hp.setValue(100);
+        mp.setPosition(800 - 16 - 128 - 96 - 32, GlobalSettings.RESOLUTION_Y - 68);
+        mp.setWidth(100); mp.setValue(100);
 
         hp.setAnimateInterpolation(Interpolation.linear);
         hp.setAnimateDuration(1f);
@@ -394,26 +476,26 @@ public class BattleHUD {
         monster6Label.setWidth(128);
         monster6Label.setHeight(28);
         monster6Label.setPosition(800 - 208, GlobalSettings.RESOLUTION_Y - 36);
-        monster6Label.setVisible(true);
         monsterLabels.add(monster6Label);
 
         hp = new ProgressBar(0, 100, 1, false, HPbarStyle);
         mp = new ProgressBar(0, 100, 1, false, MPbarStyle);
 
-        hp.setPosition(800-16-128-124-64, GlobalSettings.RESOLUTION_Y - 26);
-        hp.setWidth(128); hp.setVisible(true); hp.setValue(100);
-        mp.setPosition(800-16-128-96-64, GlobalSettings.RESOLUTION_Y - 36);
-        mp.setWidth(100); mp.setVisible(true); mp.setValue(100);
+        hp.setPosition(800 - 16 - 128 - 124 - 64, GlobalSettings.RESOLUTION_Y - 26);
+        hp.setWidth(128); hp.setValue(100);
+        mp.setPosition(800 - 16 - 128 - 96 - 64, GlobalSettings.RESOLUTION_Y - 36);
+        mp.setWidth(100); mp.setValue(100);
 
         hp.setAnimateInterpolation(Interpolation.linear);
         hp.setAnimateDuration(1f);
 
         HPbars.add(hp); MPbars.add(mp);
 
+        for(Label l : monsterLabels) l.setVisible(false);
+        for(ProgressBar p : HPbars) p.setVisible(false);
+        for(ProgressBar p : MPbars) p.setVisible(false);
+
     }
     
     /* ..................................................................... GETTERS & SETTERS .. */
-    public void setOpponent2(int ID) {
-        opponentTeam.set(0, battleFactory.createMonster(ID));
-    }
 }

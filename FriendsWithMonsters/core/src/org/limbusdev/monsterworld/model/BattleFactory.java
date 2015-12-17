@@ -10,10 +10,11 @@ import org.limbusdev.monsterworld.utils.GlobalSettings;
  */
 public class BattleFactory {
     /* ............................................................................ ATTRIBUTES .. */
-    private Array<Monster> monsters;
+    private static Array<Monster> monsters;
+    private static BattleFactory instance;
     /* ........................................................................... CONSTRUCTOR .. */
 
-    public BattleFactory() {
+    private BattleFactory() {
         this.monsters = new Array<Monster>();
         for(int i=0; i< GlobalSettings.MONSTER_SPRITES; i++) {
             Monster mon = new Monster();
@@ -25,6 +26,14 @@ public class BattleFactory {
     
     /* ..................................................................... GETTERS & SETTERS .. */
     public Monster createMonster(int ID) {
-        return monsters.get(ID);
+        Monster monster = new Monster();
+        monster.ID = ID;
+        this.monsters.add(monster);
+        return monster;
+    }
+
+    public static BattleFactory getInstance() {
+        if(instance == null) instance = new BattleFactory();
+        return instance;
     }
 }

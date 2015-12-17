@@ -20,6 +20,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.sun.crypto.provider.HmacPKCS12PBESHA1;
 
 import org.limbusdev.monsterworld.MonsterWorld;
+import org.limbusdev.monsterworld.ecs.components.TeamComponent;
 import org.limbusdev.monsterworld.model.BattleFactory;
 import org.limbusdev.monsterworld.model.Monster;
 import org.limbusdev.monsterworld.utils.GlobalSettings;
@@ -38,33 +39,24 @@ public class BattleHUD {
     private final Array<Label> monsterLabels;
     private final Array<ProgressBar> HPbars;
     private final Array<ProgressBar> MPbars;
-    private Monster monsterOpponent1, monsterOpponent2;
     private final ScrollPane attacksPane;
     private BattleFactory battleFactory;
-
-    // #################################################################################### MONSTERS
-    // Up to 3 Monsters on every side
-    // Opponents Team...............................................................................
-    private Monster heroMon1, heroMon2, heroMon3;
-    // Heros Team ..................................................................................
-    private Monster oppMon1, oppMon2, oppMon3;
-
-
+    private Array<Monster> team;
+    private Array<Monster> opponentTeam;
 
     private final OutdoorGameWorldScreen gameScreen;
     private final MonsterWorld game;
     /* ........................................................................... CONSTRUCTOR .. */
-    public BattleHUD(final MonsterWorld game, final OutdoorGameWorldScreen gameScreen,
-                     int monID1, int monID2) {
+    public BattleHUD(final MonsterWorld game, final OutdoorGameWorldScreen gameScreen) {
         this.game = game;
         this.gameScreen = gameScreen;
         this.monsterLabels = new Array<Label>();
         this.HPbars = new Array<ProgressBar>();
         this.MPbars = new Array<ProgressBar>();
 
-        this.battleFactory = new BattleFactory();
-        this.monsterOpponent1 = battleFactory.createMonster(monID1);
-        this.monsterOpponent2 = battleFactory.createMonster(monID2);
+        this.battleFactory = BattleFactory.getInstance();
+        this.opponentTeam = new Array<Monster>();
+        for(int i=0;i<3;i++) this.opponentTeam.add(null);
 
         // Scene2D
         FitViewport fit = new FitViewport(
@@ -119,10 +111,10 @@ public class BattleHUD {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 System.out.println("Attack 1");
-                monsterOpponent2.HP -= monsterOpponent1.attacks.get(0).damage;
-                if (monsterOpponent2.HP < 0) monsterOpponent2.HP = 0;
-                HPbars.get(3).setValue(100 * monsterOpponent2.HP / monsterOpponent2.HPfull);
-                if (monsterOpponent2.HP == 0) game.setScreen(gameScreen);
+                opponentTeam.get(0).HP -= team.get(0).attacks.get(0).damage;
+                if (opponentTeam.get(0).HP < 0) opponentTeam.get(0).HP = 0;
+                HPbars.get(3).setValue(100 * opponentTeam.get(0).HP / opponentTeam.get(0).HPfull);
+                if (opponentTeam.get(0).HP == 0) game.setScreen(gameScreen);
             }
         });
 
@@ -227,7 +219,7 @@ public class BattleHUD {
 
         List attackList = new List(skin, "default");
         attackList.setHeight(200);
-        attackList.setItems(monsterOpponent1.attacks);
+//        attackList.setItems(opponentTeam.get(1).attacks);
         this.attacksPane = new ScrollPane(attackList, skin, "default");
         attacksPane.setHeight(32);
         attacksPane.setPosition(0, 240);
@@ -253,7 +245,9 @@ public class BattleHUD {
 
     }
     /* ............................................................................... METHODS .. */
-    public void init() {
+    public void init(TeamComponent team, TeamComponent opponentTeam) {
+        this.team = team.monsters;
+        this.opponentTeam = opponentTeam.monsters;
         fightButton.setVisible(true);
         fleeButton.setVisible(true);
         att1Button.setVisible(false);
@@ -420,6 +414,6 @@ public class BattleHUD {
     
     /* ..................................................................... GETTERS & SETTERS .. */
     public void setOpponent2(int ID) {
-        monsterOpponent2 = battleFactory.createMonster(ID);
+        opponentTeam.set(0, battleFactory.createMonster(ID));
     }
 }

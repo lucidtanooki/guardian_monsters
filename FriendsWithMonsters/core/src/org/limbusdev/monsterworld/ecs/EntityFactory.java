@@ -75,6 +75,7 @@ public class EntityFactory {
         // Add Team
         TeamComponent team = new TeamComponent();
         team.monsters.add(BattleFactory.getInstance().createMonster(1));
+        hero.add(team);
 
         engine.addEntity(hero);
 

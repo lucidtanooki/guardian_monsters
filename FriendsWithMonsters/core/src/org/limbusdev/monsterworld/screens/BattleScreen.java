@@ -72,16 +72,16 @@ public class BattleScreen implements Screen {
 
         // Hero Team
         TextureRegion monsterSprite = media.getMonsterSprite(team.monsters.get(0).ID);
-        monsterSprite.flip(true, false);
+        if(!monsterSprite.isFlipX()) monsterSprite.flip(true, false);
         this.teamSprites.add(monsterSprite);
         if(team.monsters.size >= 2) {
             monsterSprite = media.getMonsterSprite(team.monsters.get(1).ID);
-            monsterSprite.flip(true, false);
+            if(!monsterSprite.isFlipX()) monsterSprite.flip(true, false);
             this.teamSprites.add(monsterSprite);
         }
         if(team.monsters.size == 3) {
             monsterSprite = media.getMonsterSprite(team.monsters.get(2).ID);
-            monsterSprite.flip(true, false);
+            if(!monsterSprite.isFlipX()) monsterSprite.flip(true, false);
             this.teamSprites.add(monsterSprite);
         }
 
@@ -121,34 +121,19 @@ public class BattleScreen implements Screen {
 
         // Hero Team
         if(teamSprites.size == 3)
-            batch.draw(
-                teamSprites.get(2), 120,
-                212 + 2*MathUtils.sin(elapsedTime),
-                    128,128);
-        batch.draw(
-                teamSprites.get(0), 64,
-                176 + 2 * MathUtils.cos(elapsedTime),
-                128,128);
+            batch.draw(teamSprites.get(2), 120,212 + 2*MathUtils.sin(elapsedTime),128,128);
+        batch.draw(teamSprites.get(0), 64,176 + 2 * MathUtils.cos(elapsedTime),128,128);
         if(teamSprites.size >= 2)
-            batch.draw(
-                    teamSprites.get(1), 8,
-                    140 + 2 * MathUtils.sin(elapsedTime),
-                    128,128);
+            batch.draw(teamSprites.get(1), 8,140 + 2 * MathUtils.sin(elapsedTime),128,128);
 
         // Opponent Team
         if(oppTeamSprites.size == 3)
-            batch.draw(
-                    oppTeamSprites.get(2), 800-120-256,
-                    212 + 2*MathUtils.cos(elapsedTime),
+            batch.draw(oppTeamSprites.get(2), 800-120-128,212 + 2*MathUtils.cos(elapsedTime),
                     128,128);
-        batch.draw(
-                oppTeamSprites.get(0), 800-64-256,
-                176 + 2*MathUtils.sin(elapsedTime),
+        batch.draw(oppTeamSprites.get(0), 800-64-128,176 + 2*MathUtils.sin(elapsedTime),
                 128,128);
         if(oppTeamSprites.size >= 2)
-            batch.draw(
-                    oppTeamSprites.get(1), 800-8-256,
-                    140 + 2*MathUtils.cos(elapsedTime),
+            batch.draw(oppTeamSprites.get(1), 800-8-128,140 + 2*MathUtils.cos(elapsedTime),
                     128,128);
 
         batch.end();
@@ -196,6 +181,7 @@ public class BattleScreen implements Screen {
         initialized = false;
         this.oppTeamSprites.clear();
         this.teamSprites.clear();
+        this.battleHUD.hide();
     }
 
     /**

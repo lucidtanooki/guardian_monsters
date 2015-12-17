@@ -27,6 +27,8 @@ public abstract class ComponentRetriever {
             ComponentMapper.getFor(TitleComponent.class);
     public static ComponentMapper<SaveGameComponent> savCompMap =
             ComponentMapper.getFor(SaveGameComponent.class);
+    public static ComponentMapper<TeamComponent> team =
+            ComponentMapper.getFor(TeamComponent.class);
     /* ........................................................................... CONSTRUCTOR .. */
     
     /* ............................................................................... METHODS .. */

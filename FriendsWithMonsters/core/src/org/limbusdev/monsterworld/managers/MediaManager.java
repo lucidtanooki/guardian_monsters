@@ -111,8 +111,7 @@ public class MediaManager {
     }
 
     public TextureAtlas.AtlasRegion getMonsterSprite(int index) {
-        return assets.get(
-                monsterSpriteSheetFile,
+        return assets.get(monsterSpriteSheetFile,
                 TextureAtlas.class).findRegion(Integer.toString(index), 1);
     }
 

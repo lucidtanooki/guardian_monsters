@@ -10,16 +10,16 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 import org.limbusdev.monsterworld.MonsterWorld;
 import org.limbusdev.monsterworld.ecs.components.TeamComponent;
 import org.limbusdev.monsterworld.managers.MediaManager;
-import org.limbusdev.monsterworld.model.BattleFactory;
 import org.limbusdev.monsterworld.utils.GlobalSettings;
 
 /**
@@ -33,21 +33,21 @@ public class BattleScreen implements Screen {
     private SpriteBatch batch;
     private ShapeRenderer shpRend;
     private BitmapFont font;
-    private BattleHUD hud;
-    private TextureAtlas.AtlasRegion opponent1, opponent2;
+    private BattleHUD battleHUD;
+    private Array<TextureRegion> teamSprites, oppTeamSprites;
     private Texture background;
     private MediaManager media;
     private float elapsedTime=0;
+    private boolean initialized=false;
     /* ........................................................................... CONSTRUCTOR .. */
 
     public BattleScreen(MediaManager media, OutdoorGameWorldScreen gameScreen, MonsterWorld game) {
-        this.hud = new BattleHUD(game, gameScreen);
+        this.battleHUD = new BattleHUD(game, gameScreen);
         setUpRendering();
         setUpInputProcessor();
         this.media = media;
-        this.opponent1 = media.getMonsterSprite(1);
-        this.opponent1.flip(true,false);
-        this.opponent2 = media.getMonsterSprite(2);
+        this.teamSprites = new Array<TextureRegion>();
+        this.oppTeamSprites = new Array<TextureRegion>();
         this.background = media.getBackgroundTexture(0);
     }
     /* ............................................................................... METHODS .. */
@@ -57,15 +57,49 @@ public class BattleScreen implements Screen {
      */
     @Override
     public void show() {
-        int opp = MathUtils.random(1,GlobalSettings.MONSTER_SPRITES);
-        this.opponent2 = media.getMonsterSprite(opp);
+        if(!initialized) System.err.println("BattleScreen must get initialized before drawn.");
         this.batch = new SpriteBatch();
-        TeamComponent teamComponent = new TeamComponent();
-        teamComponent.monsters.add(BattleFactory.getInstance().createMonster(1));
-        TeamComponent opponentTeamComponent = new TeamComponent();
-        opponentTeamComponent.monsters.add(BattleFactory.getInstance().createMonster(1));
-        this.hud.init(teamComponent, opponentTeamComponent);
         setUpInputProcessor();
+    }
+
+    /**
+     * BattleScreen must get initialized before being shown
+     * @param team
+     * @param opponentTeam
+     */
+    public void init (TeamComponent team, TeamComponent opponentTeam) {
+        this.initialized = true;
+
+        // Hero Team
+        TextureRegion monsterSprite = media.getMonsterSprite(team.monsters.get(0).ID);
+        monsterSprite.flip(true, false);
+        this.teamSprites.add(monsterSprite);
+        if(team.monsters.size >= 2) {
+            monsterSprite = media.getMonsterSprite(team.monsters.get(1).ID);
+            monsterSprite.flip(true, false);
+            this.teamSprites.add(monsterSprite);
+        }
+        if(team.monsters.size == 3) {
+            monsterSprite = media.getMonsterSprite(team.monsters.get(2).ID);
+            monsterSprite.flip(true, false);
+            this.teamSprites.add(monsterSprite);
+        }
+
+        // Opponent Team
+        monsterSprite = media.getMonsterSprite(opponentTeam.monsters.get(0).ID);
+        this.oppTeamSprites.add(monsterSprite);
+        System.out.println(oppTeamSprites.size);
+        if(opponentTeam.monsters.size >=2) {
+            monsterSprite = media.getMonsterSprite(opponentTeam.monsters.get(1).ID);
+            this.oppTeamSprites.add(monsterSprite);
+        }
+        System.out.println(oppTeamSprites.size);
+        if(opponentTeam.monsters.size == 3) {
+            monsterSprite = media.getMonsterSprite(opponentTeam.monsters.get(2).ID);
+            this.oppTeamSprites.add(monsterSprite);
+        }
+        System.out.println(oppTeamSprites.size);
+        this.battleHUD.init(team, opponentTeam);
     }
 
     /**
@@ -84,24 +118,47 @@ public class BattleScreen implements Screen {
         viewport.apply();
         batch.begin();
         batch.draw(background, 0, 0);
+
+        // Hero Team
+        if(teamSprites.size == 3)
+            batch.draw(
+                teamSprites.get(2), 120,
+                212 + 2*MathUtils.sin(elapsedTime),
+                    128,128);
         batch.draw(
-                opponent1, 200 - opponent1.getRegionWidth(),
-                150 + 2*MathUtils.sin(elapsedTime),
-                opponent1.getRegionWidth()*GlobalSettings.zoom,
-                opponent1.getRegionHeight()*GlobalSettings.zoom);
+                teamSprites.get(0), 64,
+                176 + 2 * MathUtils.cos(elapsedTime),
+                128,128);
+        if(teamSprites.size >= 2)
+            batch.draw(
+                    teamSprites.get(1), 8,
+                    140 + 2 * MathUtils.sin(elapsedTime),
+                    128,128);
+
+        // Opponent Team
+        if(oppTeamSprites.size == 3)
+            batch.draw(
+                    oppTeamSprites.get(2), 800-120-256,
+                    212 + 2*MathUtils.cos(elapsedTime),
+                    128,128);
         batch.draw(
-                opponent2, 800 - 200 - opponent2.getRegionWidth(),
-                150 + 2*MathUtils.cos(elapsedTime),
-                opponent2.getRegionHeight()*GlobalSettings.zoom,
-                opponent2.getRegionHeight()*GlobalSettings.zoom);
+                oppTeamSprites.get(0), 800-64-256,
+                176 + 2*MathUtils.sin(elapsedTime),
+                128,128);
+        if(oppTeamSprites.size >= 2)
+            batch.draw(
+                    oppTeamSprites.get(1), 800-8-256,
+                    140 + 2*MathUtils.cos(elapsedTime),
+                    128,128);
+
         batch.end();
 
         // process Updates
         updateCamera();
 
-        hud.stage.getViewport().apply();
-        hud.update(delta);
-        hud.draw();
+        battleHUD.stage.getViewport().apply();
+        battleHUD.update(delta);
+        battleHUD.draw();
     }
 
     /**
@@ -112,7 +169,7 @@ public class BattleScreen implements Screen {
     @Override
     public void resize(int width, int height) {
         viewport.update(width, height);
-        hud.stage.getViewport().update(width, height, true);
+        battleHUD.stage.getViewport().update(width, height, true);
     }
 
     /**
@@ -136,7 +193,9 @@ public class BattleScreen implements Screen {
      */
     @Override
     public void hide() {
-
+        initialized = false;
+        this.oppTeamSprites.clear();
+        this.teamSprites.clear();
     }
 
     /**
@@ -172,7 +231,7 @@ public class BattleScreen implements Screen {
     }
 
     public void setUpInputProcessor() {
-        Gdx.input.setInputProcessor(hud.stage);
+        Gdx.input.setInputProcessor(battleHUD.stage);
     }
     /* ..................................................................... GETTERS & SETTERS .. */
 }

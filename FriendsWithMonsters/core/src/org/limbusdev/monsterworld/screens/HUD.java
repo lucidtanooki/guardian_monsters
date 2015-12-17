@@ -16,7 +16,9 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import org.limbusdev.monsterworld.MonsterWorld;
 import org.limbusdev.monsterworld.ecs.components.ComponentRetriever;
 import org.limbusdev.monsterworld.ecs.components.SaveGameComponent;
+import org.limbusdev.monsterworld.ecs.components.TeamComponent;
 import org.limbusdev.monsterworld.managers.MediaManager;
+import org.limbusdev.monsterworld.model.BattleFactory;
 import org.limbusdev.monsterworld.utils.GameState;
 import org.limbusdev.monsterworld.utils.GlobalSettings;
 import org.limbusdev.monsterworld.managers.SaveGameManager;
@@ -75,6 +77,11 @@ public class HUD {
         battleButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                TeamComponent oppTeam = new TeamComponent();
+                oppTeam.monsters.add(BattleFactory.getInstance().createMonster(2));
+                oppTeam.monsters.add(BattleFactory.getInstance().createMonster(4));
+                oppTeam.monsters.add(BattleFactory.getInstance().createMonster(22));
+                battleScreen.init(ComponentRetriever.team.get(hero), oppTeam);
                 game.setScreen(battleScreen);
             }
         });

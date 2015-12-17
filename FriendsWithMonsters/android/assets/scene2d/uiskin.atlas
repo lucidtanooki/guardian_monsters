@@ -90,6 +90,15 @@ beige-round
   orig: 12, 20
   offset: 0, 0
   index: -1
+beige-round-r
+  rotate: false
+  xy: 138, 8
+  size: 12, 20
+  split: 5, 5, 5, 4
+  pad: 4, 4, 1, 1
+  orig: 12, 20
+  offset: 0, 0
+  index: -1
 default-round
   rotate: false
   xy: 112, 29

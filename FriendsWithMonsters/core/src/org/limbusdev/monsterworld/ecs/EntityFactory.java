@@ -13,6 +13,7 @@ import org.limbusdev.monsterworld.ecs.components.PathComponent;
 import org.limbusdev.monsterworld.ecs.components.PositionComponent;
 import org.limbusdev.monsterworld.ecs.components.SaveGameComponent;
 import org.limbusdev.monsterworld.ecs.components.SpriteComponent;
+import org.limbusdev.monsterworld.ecs.components.TeamComponent;
 import org.limbusdev.monsterworld.ecs.components.TitleComponent;
 import org.limbusdev.monsterworld.ecs.entities.HeroEntity;
 import org.limbusdev.monsterworld.ecs.systems.OutdoorGameArea;
@@ -22,6 +23,7 @@ import org.limbusdev.monsterworld.geometry.MapObjectInformation;
 import org.limbusdev.monsterworld.geometry.MapPersonInformation;
 import org.limbusdev.monsterworld.managers.MediaManager;
 import org.limbusdev.monsterworld.managers.SaveGameManager;
+import org.limbusdev.monsterworld.model.BattleFactory;
 import org.limbusdev.monsterworld.utils.GameState;
 import org.limbusdev.monsterworld.utils.GlobalSettings;
 import org.limbusdev.monsterworld.utils.UnitConverter;
@@ -69,6 +71,11 @@ public class EntityFactory {
             position.x = gameState.x;
             position.y = gameState.y;
         }
+
+        // Add Team
+        TeamComponent team = new TeamComponent();
+        team.monsters.add(BattleFactory.getInstance().createMonster(1));
+
         engine.addEntity(hero);
 
         return hero;

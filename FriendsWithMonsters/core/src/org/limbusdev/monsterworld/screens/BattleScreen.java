@@ -17,7 +17,9 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 import org.limbusdev.monsterworld.MonsterWorld;
+import org.limbusdev.monsterworld.ecs.components.TeamComponent;
 import org.limbusdev.monsterworld.managers.MediaManager;
+import org.limbusdev.monsterworld.model.BattleFactory;
 import org.limbusdev.monsterworld.utils.GlobalSettings;
 
 /**
@@ -39,7 +41,7 @@ public class BattleScreen implements Screen {
     /* ........................................................................... CONSTRUCTOR .. */
 
     public BattleScreen(MediaManager media, OutdoorGameWorldScreen gameScreen, MonsterWorld game) {
-        this.hud = new BattleHUD(game, gameScreen,1,2);
+        this.hud = new BattleHUD(game, gameScreen);
         setUpRendering();
         setUpInputProcessor();
         this.media = media;
@@ -58,7 +60,11 @@ public class BattleScreen implements Screen {
         int opp = MathUtils.random(1,GlobalSettings.MONSTER_SPRITES);
         this.opponent2 = media.getMonsterSprite(opp);
         this.batch = new SpriteBatch();
-        this.hud.init();
+        TeamComponent teamComponent = new TeamComponent();
+        teamComponent.monsters.add(BattleFactory.getInstance().createMonster(1));
+        TeamComponent opponentTeamComponent = new TeamComponent();
+        opponentTeamComponent.monsters.add(BattleFactory.getInstance().createMonster(1));
+        this.hud.init(teamComponent, opponentTeamComponent);
         setUpInputProcessor();
     }
 

@@ -103,56 +103,97 @@
   </object>
   <object name="monsterArea" x="32" y="96" width="96" height="64">
    <properties>
+    <property name="monsters" value="4;0.5;8;0.45;3;0.05"/>
+    <property name="probability2" value="0.01"/>
+    <property name="probability3" value="0.01"/>
     <property name="propability" value="0.05"/>
    </properties>
   </object>
-  <object name="monsterArea" x="256" y="32" width="32" height="64">
+  <object name="monsterArea" x="256" y="16" width="32" height="48">
    <properties>
+    <property name="monsters" value="4;0.5;8;0.45;3;0.05"/>
+    <property name="probability2" value="0.01"/>
+    <property name="probability3" value="0.01"/>
+    <property name="propability" value="0.05"/>
+   </properties>
+  </object>
+  <object name="monsterArea" x="256" y="64" width="80" height="32">
+   <properties>
+    <property name="monsters" value="4;0.5;8;0.45;3;0.05"/>
+    <property name="probability2" value="0.01"/>
+    <property name="probability3" value="0.01"/>
     <property name="propability" value="0.05"/>
    </properties>
   </object>
   <object name="monsterArea" x="240" y="96" width="16" height="16">
    <properties>
+    <property name="monsters" value="4;0.5;8;0.45;3;0.05"/>
+    <property name="probability2" value="0.01"/>
+    <property name="probability3" value="0.01"/>
     <property name="propability" value="0.05"/>
    </properties>
   </object>
   <object name="monsterArea" x="272" y="96" width="16" height="16">
    <properties>
+    <property name="monsters" value="4;0.5;8;0.45;3;0.05"/>
+    <property name="probability2" value="0.01"/>
+    <property name="probability3" value="0.01"/>
     <property name="propability" value="0.05"/>
    </properties>
   </object>
-  <object name="monsterArea" x="288" y="64" width="16" height="32">
+  <object name="monsterArea" x="304" y="96" width="32" height="16">
    <properties>
+    <property name="monsters" value="4;0.5;8;0.45;3;0.05"/>
+    <property name="probability2" value="0.01"/>
+    <property name="probability3" value="0.01"/>
     <property name="propability" value="0.05"/>
    </properties>
   </object>
-  <object name="monsterArea" x="304" y="64" width="32" height="48">
+  <object name="monsterArea" x="432" y="64" width="16" height="48">
    <properties>
+    <property name="monsters" value="4;0.5;8;0.45;3;0.05"/>
+    <property name="probability2" value="0.01"/>
+    <property name="probability3" value="0.01"/>
     <property name="propability" value="0.05"/>
    </properties>
   </object>
   <object name="monsterArea" x="464" y="272" width="16" height="16">
    <properties>
+    <property name="monsters" value="4;0.5;8;0.45;3;0.05"/>
+    <property name="probability2" value="0.01"/>
+    <property name="probability3" value="0.01"/>
     <property name="propability" value="0.05"/>
    </properties>
   </object>
   <object name="monsterArea" x="448" y="288" width="32" height="48">
    <properties>
+    <property name="monsters" value="4;0.5;8;0.45;3;0.05"/>
+    <property name="probability2" value="0.01"/>
+    <property name="probability3" value="0.01"/>
     <property name="propability" value="0.05"/>
    </properties>
   </object>
   <object name="monsterArea" x="432" y="336" width="48" height="16">
    <properties>
+    <property name="monsters" value="4;0.5;8;0.45;3;0.05"/>
+    <property name="probability2" value="0.01"/>
+    <property name="probability3" value="0.01"/>
     <property name="propability" value="0.05"/>
    </properties>
   </object>
   <object name="monsterArea" x="416" y="352" width="64" height="32">
    <properties>
+    <property name="monsters" value="4;0.5;8;0.45;3;0.05"/>
+    <property name="probability2" value="0.01"/>
+    <property name="probability3" value="0.01"/>
     <property name="propability" value="0.05"/>
    </properties>
   </object>
   <object name="monsterArea" x="336" y="384" width="144" height="64">
    <properties>
+    <property name="monsters" value="4;0.5;8;0.45;3;0.05"/>
+    <property name="probability2" value="0.01"/>
+    <property name="probability3" value="0.01"/>
     <property name="propability" value="0.05"/>
    </properties>
   </object>

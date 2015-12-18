@@ -86,12 +86,10 @@
   </object>
   <object name="monsterArea" x="96" y="256" width="32" height="32">
    <properties>
+    <property name="monsters" value="4;0.5;8;0.45;3;0.05"/>
     <property name="probability" value="0.05"/>
-   </properties>
-  </object>
-  <object name="monsterArea" x="160" y="256" width="128" height="48">
-   <properties>
-    <property name="probability" value="0.05"/>
+    <property name="probability2" value="0.2"/>
+    <property name="probability3" value="0.02"/>
    </properties>
   </object>
   <object name="warpField" x="0" y="160" width="16" height="16">
@@ -140,6 +138,30 @@
    <properties>
     <property name="targetID" value="3"/>
     <property name="targetWarpPointID" value="6"/>
+   </properties>
+  </object>
+  <object name="monsterArea" x="160" y="256" width="128" height="48">
+   <properties>
+    <property name="monsters" value="4;0.5;8;0.45;3;0.05"/>
+    <property name="probability" value="0.05"/>
+    <property name="probability2" value="0.2"/>
+    <property name="probability3" value="0.02"/>
+   </properties>
+  </object>
+  <object name="monsterArea" x="288" y="112" width="160" height="80">
+   <properties>
+    <property name="monsters" value="4;0.95;10;0.05"/>
+    <property name="probability" value="0.05"/>
+    <property name="probability2" value="0.2"/>
+    <property name="probability3" value="0.02"/>
+   </properties>
+  </object>
+  <object name="monsterArea" x="400" y="192" width="96" height="64">
+   <properties>
+    <property name="monsters" value="4;0.95;10;0.05"/>
+    <property name="probability" value="0.05"/>
+    <property name="probability2" value="0.2"/>
+    <property name="probability3" value="0.02"/>
    </properties>
   </object>
  </objectgroup>

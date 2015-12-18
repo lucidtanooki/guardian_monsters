@@ -3,6 +3,7 @@ package org.limbusdev.monsterworld.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Interpolation;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
@@ -47,6 +48,7 @@ public class BattleHUD {
     private final Image indicator;
     private Array<Monster> team;
     private Array<Monster> opponentTeam;
+    private float elapsedTime=0;
 
     private final OutdoorGameWorldScreen gameScreen;
     private final MonsterWorld game;
@@ -122,10 +124,30 @@ public class BattleHUD {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 System.out.println("Attack 1");
-                opponentTeam.get(0).HP -= team.get(0).attacks.get(0).damage;
-                if (opponentTeam.get(0).HP < 0) opponentTeam.get(0).HP = 0;
-                HPbars.get(3).setValue(100 * opponentTeam.get(0).HP / opponentTeam.get(0).HPfull);
-                if (opponentTeam.get(0).HP == 0) game.setScreen(gameScreen);
+                if(opponentTeam.get(chosenTarget).HP - team.get(0).attacks.get(0).damage < 0)
+                    opponentTeam.get(chosenTarget).HP = 0;
+                else
+                    opponentTeam.get(chosenTarget).HP -= team.get(0).attacks.get(0).damage;
+
+                HPbars.get(chosenTarget+3).setValue(
+                        100 * opponentTeam.get(chosenTarget).HP / opponentTeam.get(chosenTarget).HPfull);
+
+                boolean allKO = true;
+                switch(opponentTeam.size) {
+                    case 3: allKO=(opponentTeam.get(2).HP == 0);
+                        System.out.println("OppMon 3: " + opponentTeam.get(2).HP
+                                        + "/" + opponentTeam.get(2).HPfull + " KO: " + allKO);
+                    case 2: allKO=(allKO == true && opponentTeam.get(1).HP == 0);
+                        System.out.println("OppMon 2: " + opponentTeam.get(1).HP
+                                + "/" + opponentTeam.get(1).HPfull + " KO: " + allKO);
+                    default:allKO=(allKO == true && opponentTeam.get(0).HP == 0);
+                        System.out.println("OppMon 1: " + opponentTeam.get(0).HP
+                                + "/" + opponentTeam.get(0).HPfull + " KO: " + allKO);
+                        break;
+                }
+
+
+                if(allKO) game.setScreen(gameScreen);
             }
         });
 
@@ -292,34 +314,48 @@ public class BattleHUD {
         switch(opponentTeam.monsters.size) {
             case 3:
                 monsterChooser1 = new Button(skin, "transparent");
-                monsterChooser1.setPosition(800-120-128,212,Align.center);
+                monsterChooser1.setPosition(800 - 120 - 128, 212, Align.center);
                 monsterChooser1.setWidth(128);
                 monsterChooser1.setHeight(128);
                 monsterChooser1.addListener(new ClickListener() {
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
                         chosenTarget = 2;
-                        indicator.setPosition(800-120-64,340, Align.center);
+                        indicator.setPosition(800 - 120 - 64, 340, Align.center);
                     }
                 });
                 oppMonButtons.add(monsterChooser1);
                 monsterLabels.get(5).setVisible(true);
+                monsterLabels.get(5).addListener(new ClickListener() {
+                    @Override
+                    public void clicked(InputEvent event, float x, float y) {
+                        chosenTarget = 2;
+                        indicator.setPosition(800 - 120 - 64, 340, Align.center);
+                    }
+                });
                 HPbars.get(5).setVisible(true);
                 MPbars.get(5).setVisible(true);
             case 2:
                 monsterChooser2 = new Button(skin, "transparent");
-                monsterChooser2.setPosition(800-8-128,140, Align.center);
+                monsterChooser2.setPosition(800 - 8 - 128, 140, Align.center);
                 monsterChooser2.setWidth(128);
                 monsterChooser2.setHeight(128);
                 monsterChooser2.addListener(new ClickListener() {
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
                         chosenTarget = 0;
-                        indicator.setPosition(800-8-64,268, Align.center);
+                        indicator.setPosition(800 - 8 - 64, 268, Align.center);
                     }
                 });
                 oppMonButtons.add(monsterChooser2);
                 monsterLabels.get(3).setVisible(true);
+                monsterLabels.get(3).addListener(new ClickListener() {
+                    @Override
+                    public void clicked(InputEvent event, float x, float y) {
+                        chosenTarget = 0;
+                        indicator.setPosition(800 - 8 - 64, 268, Align.center);
+                    }
+                });
                 HPbars.get(3).setVisible(true);
                 MPbars.get(3).setVisible(true);
             default:
@@ -331,11 +367,18 @@ public class BattleHUD {
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
                         chosenTarget = 1;
-                        indicator.setPosition(800-128,304, Align.center);
+                        indicator.setPosition(800 - 128, 304, Align.center);
                     }
                 });
                 oppMonButtons.add(monsterChooser3);
                 monsterLabels.get(4).setVisible(true);
+                monsterLabels.get(4).addListener(new ClickListener() {
+                    @Override
+                    public void clicked(InputEvent event, float x, float y) {
+                        chosenTarget = 1;
+                        indicator.setPosition(800 - 128, 304, Align.center);
+                    }
+                });
                 HPbars.get(4).setVisible(true);
                 MPbars.get(4).setVisible(true);
                 break;
@@ -355,6 +398,7 @@ public class BattleHUD {
     }
 
     public void update(float delta) {
+        elapsedTime += delta;
         stage.act(delta);
     }
 

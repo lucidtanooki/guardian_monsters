@@ -25,8 +25,11 @@ import com.sun.crypto.provider.HmacPKCS12PBESHA1;
 
 import org.limbusdev.monsterworld.MonsterWorld;
 import org.limbusdev.monsterworld.ecs.components.TeamComponent;
+import org.limbusdev.monsterworld.geometry.IntVector2;
+import org.limbusdev.monsterworld.model.AttackAction;
 import org.limbusdev.monsterworld.model.BattleFactory;
 import org.limbusdev.monsterworld.model.Monster;
+import org.limbusdev.monsterworld.model.MonsterInformation;
 import org.limbusdev.monsterworld.utils.GlobalSettings;
 
 /**
@@ -34,49 +37,91 @@ import org.limbusdev.monsterworld.utils.GlobalSettings;
  */
 public class BattleHUD {
     /* ............................................................................ ATTRIBUTES .. */
+    static class IndPos {
+        private static IntVector2 OPPO_TOP = new IntVector2(616, 340);
+        private static IntVector2 OPPO_MID = new IntVector2(672, 304);
+        private static IntVector2 OPPO_BOT = new IntVector2(728, 268);
+        private static IntVector2 HERO_TOP = new IntVector2(184, 340);
+        private static IntVector2 HERO_MID = new IntVector2(128, 304);
+        private static IntVector2 HERO_BOT = new IntVector2(74, 268);
+    }
+
+    static class BatPos {
+        private static int HERO_MID = 0;    // Middle Position on the left
+        private static int HERO_TOP = 2;
+        private static int HERO_BOT = 1;
+        private static int OPPO_MID = 3;    // Middle Position on the right
+        private static int OPPO_TOP = 5;
+        private static int OPPO_BOT = 4;
+        private static int MID = 0;
+        private static int TOP = 2;
+        private static int BOT = 1;
+    }
+
     private Skin skin;
     public Stage stage;
+    private MonsterInformation monsterInformation;
 
     private final TextButton fightButton, fleeButton, battleMenuButton;
-    private final TextButton att1Button, att2Button, att3Button, att4Button, att5Button, att6Button;
+    private final TextButton att1Button;
     private final Array<Button> oppMonButtons;
     private final Label infoLabel;
     private final Array<Label> monsterLabels;
     private final Array<ProgressBar> HPbars;
     private final Array<ProgressBar> MPbars;
     private final ScrollPane attacksPane;
-    private final Image indicator;
+    private final Image indicatorOpp, indicatorHero;
     private Array<Monster> team;
     private Array<Monster> opponentTeam;
     private float elapsedTime=0;
+    private Array<AttackAction> battleQueue;
+    private Array<Long> waitingSince;
+    private Array<Boolean> monsterReady;
 
     private final OutdoorGameWorldScreen gameScreen;
     private final MonsterWorld game;
-    private int chosenTarget=0;
+    private int chosenTarget=BatPos.MID;
+    private int chosenTeamMonster=BatPos.MID;
+
+
+    // Time
+    private long lastActionTime = 0;
+    private boolean waiting = false;
     /* ........................................................................... CONSTRUCTOR .. */
     public BattleHUD(final MonsterWorld game, final OutdoorGameWorldScreen gameScreen) {
         this.game = game;
         this.gameScreen = gameScreen;
+        this.monsterInformation = MonsterInformation.getInstance();
         this.monsterLabels = new Array<Label>();
         this.HPbars = new Array<ProgressBar>();
         this.MPbars = new Array<ProgressBar>();
         this.oppMonButtons = new Array<Button>();
+        this.battleQueue = new Array<AttackAction>();
+        this.waitingSince = new Array<Long>();
+        for(int i=0;i<6;i++) waitingSince.add(new Long(0));
 
         this.opponentTeam = new Array<Monster>();
-        for(int i=0;i<3;i++) this.opponentTeam.add(null);
+
+        this.monsterReady = new Array<Boolean>();
+        for(int i=0;i<6;i++) monsterReady.add(new Boolean(true));
 
         // Scene2D
         FitViewport fit = new FitViewport(
                 GlobalSettings.RESOLUTION_X, GlobalSettings.RESOLUTION_Y);
 
         this.stage = new Stage(fit);
-        this.skin = game.media.skin;
+        this.skin = game.media.skin;for(int i=0;i<6;i++) waitingSince.add(new Long(0));
 
         // Images
-        indicator = new Image(skin.getDrawable("indicator"));
-        indicator.setVisible(true);
-        indicator.setPosition(800-128,300, Align.center);
-        stage.addActor(indicator);
+        indicatorOpp = new Image(skin.getDrawable("indicator"));
+        indicatorOpp.setVisible(true);
+        indicatorOpp.setPosition(IndPos.OPPO_MID.x, IndPos.OPPO_MID.y, Align.center);
+        stage.addActor(indicatorOpp);
+
+        indicatorHero = new Image(skin.getDrawable("indicator"));
+        indicatorHero.setVisible(true);
+        indicatorHero.setPosition(IndPos.HERO_MID.x, IndPos.HERO_MID.y, Align.center);
+        stage.addActor(indicatorHero);
 
         // Buttons .................................................................................
         fightButton = new TextButton("Fight", skin, "default-green");
@@ -91,11 +136,6 @@ public class BattleHUD {
                 fightButton.setVisible(false);
                 infoLabel.setVisible(false);
                 att1Button.setVisible(true);
-                att2Button.setVisible(true);
-                att3Button.setVisible(true);
-                att4Button.setVisible(true);
-                att5Button.setVisible(true);
-                att6Button.setVisible(true);
                 fleeButton.setVisible(false);
                 battleMenuButton.setVisible(true);
             }
@@ -123,18 +163,18 @@ public class BattleHUD {
         att1Button.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                System.out.println("Attack 1");
-                if(opponentTeam.get(chosenTarget).HP - team.get(0).attacks.get(0).damage < 0)
+                System.out.println("Attack 1 by Team Member " + chosenTeamMonster + " at " +
+                        chosenTarget);
+                if(opponentTeam.get(chosenTarget).HP - team.get(chosenTeamMonster).attacks.get(0).damage < 0)
                     opponentTeam.get(chosenTarget).HP = 0;
-                else
-                    opponentTeam.get(chosenTarget).HP -= team.get(0).attacks.get(0).damage;
+                else opponentTeam.get(chosenTarget).HP -= team.get(chosenTeamMonster).attacks.get(0).damage;
 
                 HPbars.get(chosenTarget+3).setValue(
                         100 * opponentTeam.get(chosenTarget).HP / opponentTeam.get(chosenTarget).HPfull);
 
                 boolean allKO = true;
                 switch(opponentTeam.size) {
-                    case 3: allKO=(opponentTeam.get(2).HP == 0);
+                    case 3: allKO=(opponentTeam.get(BatPos.TOP).HP == 0);
                         System.out.println("OppMon 3: " + opponentTeam.get(2).HP
                                         + "/" + opponentTeam.get(2).HPfull + " KO: " + allKO);
                     case 2: allKO=(allKO == true && opponentTeam.get(1).HP == 0);
@@ -151,71 +191,6 @@ public class BattleHUD {
             }
         });
 
-        att2Button = new TextButton("Att2", skin, "default");
-        att2Button.setWidth(128f);
-        att2Button.setHeight(64f);
-        att2Button.setPosition(230, 8);
-        att2Button.setVisible(false);
-
-        att2Button.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                System.out.println("Attack 2");
-            }
-        });
-
-        att3Button = new TextButton("Att3", skin, "default");
-        att3Button.setWidth(128f);
-        att3Button.setHeight(64f);
-        att3Button.setPosition(360, 8);
-        att3Button.setVisible(false);
-
-        att3Button.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                System.out.println("Attack 3");
-            }
-        });
-
-        att4Button = new TextButton("Att4", skin, "default");
-        att4Button.setWidth(128f);
-        att4Button.setHeight(64f);
-        att4Button.setPosition(100, 74);
-        att4Button.setVisible(false);
-
-        att4Button.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                System.out.println("Attack 4");
-            }
-        });
-
-        att5Button = new TextButton("Att5", skin, "default");
-        att5Button.setWidth(128f);
-        att5Button.setHeight(64f);
-        att5Button.setPosition(230, 74);
-        att5Button.setVisible(false);
-
-        att5Button.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                System.out.println("Attack 5");
-            }
-        });
-
-        att6Button = new TextButton("Att6", skin, "default");
-        att6Button.setWidth(128f);
-        att6Button.setHeight(64f);
-        att6Button.setPosition(360, 74);
-        att6Button.setVisible(false);
-
-        att6Button.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                System.out.println("Attack 6");
-            }
-        });
-
         battleMenuButton = new TextButton("Back", skin, "default");
         battleMenuButton.setWidth(128f);
         battleMenuButton.setHeight(64f);
@@ -226,11 +201,6 @@ public class BattleHUD {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 att1Button.setVisible(false);
-                att2Button.setVisible(false);
-                att3Button.setVisible(false);
-                att4Button.setVisible(false);
-                att5Button.setVisible(false);
-                att6Button.setVisible(false);
                 battleMenuButton.setVisible(false);
                 fleeButton.setVisible(true);
                 fightButton.setVisible(true);
@@ -266,11 +236,6 @@ public class BattleHUD {
         stage.addActor(infoLabel);
         for(Label l : monsterLabels) stage.addActor(l);
         stage.addActor(att1Button);
-        stage.addActor(att2Button);
-        stage.addActor(att3Button);
-        stage.addActor(att4Button);
-        stage.addActor(att5Button);
-        stage.addActor(att6Button);
         stage.addActor(battleMenuButton);
 //        stage.addActor(attacksPane);
 //        stage.addActor(attackList);
@@ -284,28 +249,53 @@ public class BattleHUD {
         fightButton.setVisible(true);
         fleeButton.setVisible(true);
         att1Button.setVisible(false);
-        att2Button.setVisible(false);
-        att3Button.setVisible(false);
-        att4Button.setVisible(false);
-        att5Button.setVisible(false);
-        att6Button.setVisible(false);
         battleMenuButton.setVisible(false);
         infoLabel.setVisible(true);
 
         // Hero Team
         switch(team.monsters.size) {
             case 3:
-                monsterLabels.get(2).setVisible(true);
-                HPbars.get(2).setVisible(true);
-                MPbars.get(2).setVisible(true);
+                monsterLabels.get(BatPos.HERO_TOP).setText(
+                        monsterInformation.monsterNames.get(team.monsters.get(2).ID-1));
+                monsterLabels.get(BatPos.HERO_TOP).setVisible(true);
+                monsterLabels.get(BatPos.HERO_TOP).addListener(new ClickListener() {
+                    @Override
+                    public void clicked(InputEvent event, float x, float y) {
+                        chosenTeamMonster = BatPos.TOP;
+                        indicatorHero.setPosition(IndPos.HERO_TOP.x, IndPos.HERO_TOP.y, Align
+                                .center);
+                    }
+                });
+                HPbars.get(BatPos.TOP).setVisible(true);
+                MPbars.get(BatPos.TOP).setVisible(true);
             case 2:
-                monsterLabels.get(0).setVisible(true);
-                HPbars.get(0).setVisible(true);
-                MPbars.get(0).setVisible(true);
+                monsterLabels.get(BatPos.HERO_BOT).setText(
+                        monsterInformation.monsterNames.get(team.monsters.get(1).ID-1));
+                monsterLabels.get(BatPos.BOT).setVisible(true);
+                monsterLabels.get(BatPos.HERO_BOT).addListener(new ClickListener() {
+                    @Override
+                    public void clicked(InputEvent event, float x, float y) {
+                        chosenTeamMonster = BatPos.BOT;
+                        indicatorHero.setPosition(IndPos.HERO_BOT.x, IndPos.HERO_BOT.y, Align
+                                .center);
+                    }
+                });
+                HPbars.get(BatPos.BOT).setVisible(true);
+                MPbars.get(BatPos.BOT).setVisible(true);
             default:
-                monsterLabels.get(1).setVisible(true);
-                HPbars.get(1).setVisible(true);
-                MPbars.get(1).setVisible(true);
+                monsterLabels.get(BatPos.HERO_MID).setText(
+                        monsterInformation.monsterNames.get(team.monsters.get(0).ID-1));
+                monsterLabels.get(BatPos.HERO_MID).setVisible(true);
+                monsterLabels.get(BatPos.HERO_MID).addListener(new ClickListener() {
+                    @Override
+                    public void clicked(InputEvent event, float x, float y) {
+                        chosenTeamMonster = BatPos.MID;
+                        indicatorHero.setPosition(IndPos.HERO_MID.x, IndPos.HERO_MID.y, Align
+                                .center);
+                    }
+                });
+                HPbars.get(BatPos.MID).setVisible(true);
+                MPbars.get(BatPos.MID).setVisible(true);
                 break;
         }
 
@@ -313,74 +303,47 @@ public class BattleHUD {
         final Button monsterChooser1,monsterChooser2,monsterChooser3;
         switch(opponentTeam.monsters.size) {
             case 3:
-                monsterChooser1 = new Button(skin, "transparent");
-                monsterChooser1.setPosition(800 - 120 - 128, 212, Align.center);
-                monsterChooser1.setWidth(128);
-                monsterChooser1.setHeight(128);
-                monsterChooser1.addListener(new ClickListener() {
+                monsterLabels.get(BatPos.OPPO_TOP).setText(
+                        monsterInformation.monsterNames.get(opponentTeam.monsters.get(2).ID-1));
+                monsterLabels.get(BatPos.OPPO_TOP).setVisible(true);
+                monsterLabels.get(BatPos.OPPO_TOP).addListener(new ClickListener() {
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
-                        chosenTarget = 2;
-                        indicator.setPosition(800 - 120 - 64, 340, Align.center);
+                        chosenTarget = BatPos.TOP;
+                        indicatorOpp.setPosition(IndPos.OPPO_TOP.x, IndPos.OPPO_TOP.y, Align
+                                .center);
                     }
                 });
-                oppMonButtons.add(monsterChooser1);
-                monsterLabels.get(5).setVisible(true);
-                monsterLabels.get(5).addListener(new ClickListener() {
-                    @Override
-                    public void clicked(InputEvent event, float x, float y) {
-                        chosenTarget = 2;
-                        indicator.setPosition(800 - 120 - 64, 340, Align.center);
-                    }
-                });
-                HPbars.get(5).setVisible(true);
-                MPbars.get(5).setVisible(true);
+                HPbars.get(BatPos.OPPO_TOP).setVisible(true);
+                MPbars.get(BatPos.OPPO_TOP).setVisible(true);
             case 2:
-                monsterChooser2 = new Button(skin, "transparent");
-                monsterChooser2.setPosition(800 - 8 - 128, 140, Align.center);
-                monsterChooser2.setWidth(128);
-                monsterChooser2.setHeight(128);
-                monsterChooser2.addListener(new ClickListener() {
+                monsterLabels.get(BatPos.OPPO_BOT).setText(
+                        monsterInformation.monsterNames.get(opponentTeam.monsters.get(1).ID-1));
+                monsterLabels.get(BatPos.OPPO_BOT).setVisible(true);
+                monsterLabels.get(BatPos.OPPO_BOT).addListener(new ClickListener() {
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
-                        chosenTarget = 0;
-                        indicator.setPosition(800 - 8 - 64, 268, Align.center);
+                        chosenTarget = BatPos.BOT;
+                        indicatorOpp.setPosition(IndPos.OPPO_BOT.x, IndPos.OPPO_BOT.y, Align
+                                .center);
                     }
                 });
-                oppMonButtons.add(monsterChooser2);
-                monsterLabels.get(3).setVisible(true);
-                monsterLabels.get(3).addListener(new ClickListener() {
-                    @Override
-                    public void clicked(InputEvent event, float x, float y) {
-                        chosenTarget = 0;
-                        indicator.setPosition(800 - 8 - 64, 268, Align.center);
-                    }
-                });
-                HPbars.get(3).setVisible(true);
-                MPbars.get(3).setVisible(true);
+                HPbars.get(BatPos.OPPO_BOT).setVisible(true);
+                MPbars.get(BatPos.OPPO_BOT).setVisible(true);
             default:
-                monsterChooser3 = new Button(skin, "transparent");
-                monsterChooser3.setPosition(800-64-128,176, Align.center);
-                monsterChooser3.setWidth(128);
-                monsterChooser3.setHeight(128);
-                monsterChooser3.addListener(new ClickListener() {
+                monsterLabels.get(BatPos.OPPO_MID).setText(
+                        monsterInformation.monsterNames.get(opponentTeam.monsters.get(0).ID-1));
+                monsterLabels.get(BatPos.OPPO_MID).setVisible(true);
+                monsterLabels.get(BatPos.OPPO_MID).addListener(new ClickListener() {
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
-                        chosenTarget = 1;
-                        indicator.setPosition(800 - 128, 304, Align.center);
+                        chosenTarget = BatPos.MID;
+                        indicatorOpp.setPosition(IndPos.OPPO_MID.x, IndPos.OPPO_MID.y, Align
+                                .center);
                     }
                 });
-                oppMonButtons.add(monsterChooser3);
-                monsterLabels.get(4).setVisible(true);
-                monsterLabels.get(4).addListener(new ClickListener() {
-                    @Override
-                    public void clicked(InputEvent event, float x, float y) {
-                        chosenTarget = 1;
-                        indicator.setPosition(800 - 128, 304, Align.center);
-                    }
-                });
-                HPbars.get(4).setVisible(true);
-                MPbars.get(4).setVisible(true);
+                HPbars.get(BatPos.OPPO_MID).setVisible(true);
+                MPbars.get(BatPos.OPPO_MID).setVisible(true);
                 break;
         }
         for(Button b : oppMonButtons) stage.addActor(b);
@@ -391,6 +354,8 @@ public class BattleHUD {
         for(ProgressBar p : HPbars) p.setVisible(false);
         for(ProgressBar p : MPbars) p.setVisible(false);
         oppMonButtons.clear();
+        this.chosenTarget = BatPos.MID;
+        this.chosenTeamMonster = BatPos.MID;
     }
 
     public void draw() {
@@ -413,6 +378,26 @@ public class BattleHUD {
         ProgressBar mp, hp;
 
         // Hero Team ###############################################################################
+        // Monster 2 ...............................................................................
+        Label monster2Label = new Label("Me", skin, "beige");
+        monster2Label.setWidth(128);
+        monster2Label.setHeight(28);
+        monster2Label.setPosition(48, GlobalSettings.RESOLUTION_Y - 68);
+        monsterLabels.add(monster2Label);
+
+        hp = new ProgressBar(0, 100, 1, false, HPbarStyle);
+        mp = new ProgressBar(0, 100, 1, false, MPbarStyle);
+
+        hp.setPosition(172, GlobalSettings.RESOLUTION_Y - 58);
+        hp.setWidth(128); hp.setValue(100);
+        mp.setPosition(172, GlobalSettings.RESOLUTION_Y - 68);
+        mp.setWidth(100); mp.setValue(100);
+
+        hp.setAnimateInterpolation(Interpolation.linear);
+        hp.setAnimateDuration(1f);
+
+        HPbars.add(hp); MPbars.add(mp);
+
         // Monster 1 ...............................................................................
         Label monster1Label = new Label("Me", skin, "beige");
         monster1Label.setWidth(128);
@@ -433,25 +418,6 @@ public class BattleHUD {
 
         HPbars.add(hp); MPbars.add(mp);
 
-        // Monster 2 ...............................................................................
-        Label monster2Label = new Label("Me", skin, "beige");
-        monster2Label.setWidth(128);
-        monster2Label.setHeight(28);
-        monster2Label.setPosition(48, GlobalSettings.RESOLUTION_Y - 68);
-        monsterLabels.add(monster2Label);
-
-        hp = new ProgressBar(0, 100, 1, false, HPbarStyle);
-        mp = new ProgressBar(0, 100, 1, false, MPbarStyle);
-
-        hp.setPosition(172, GlobalSettings.RESOLUTION_Y - 58);
-        hp.setWidth(128); hp.setValue(100);
-        mp.setPosition(172, GlobalSettings.RESOLUTION_Y - 68);
-        mp.setWidth(100); mp.setValue(100);
-
-        hp.setAnimateInterpolation(Interpolation.linear);
-        hp.setAnimateDuration(1f);
-
-        HPbars.add(hp); MPbars.add(mp);
 
         // Monster 3 ...............................................................................
         Label monster3Label = new Label("Me", skin, "beige");
@@ -475,26 +441,6 @@ public class BattleHUD {
 
 
         // Opponent Team ###########################################################################
-        // Monster 4 ...............................................................................
-        Label monster4Label = new Label("Enemy", skin, "beige-r");
-        monster4Label.setWidth(128);
-        monster4Label.setHeight(28);
-        monster4Label.setPosition(800 - 144, GlobalSettings.RESOLUTION_Y - 100);
-        monsterLabels.add(monster4Label);
-
-        hp = new ProgressBar(0, 100, 1, false, HPbarStyle);
-        mp = new ProgressBar(0, 100, 1, false, MPbarStyle);
-
-        hp.setPosition(800 - 16 - 128 - 124, GlobalSettings.RESOLUTION_Y - 90);
-        hp.setWidth(128); hp.setValue(100);
-        mp.setPosition(800 - 16 - 128 - 96, GlobalSettings.RESOLUTION_Y - 100);
-        mp.setWidth(100); mp.setValue(100);
-
-        hp.setAnimateInterpolation(Interpolation.linear);
-        hp.setAnimateDuration(1f);
-
-        HPbars.add(hp); MPbars.add(mp);
-
         // Monster 5 ...............................................................................
         Label monster5Label = new Label("Enemy", skin, "beige-r");
         monster5Label.setWidth(128);
@@ -515,6 +461,28 @@ public class BattleHUD {
 
         HPbars.add(hp); MPbars.add(mp);
 
+
+        // Monster 4 ...............................................................................
+        Label monster4Label = new Label("Enemy", skin, "beige-r");
+        monster4Label.setWidth(128);
+        monster4Label.setHeight(28);
+        monster4Label.setPosition(800 - 144, GlobalSettings.RESOLUTION_Y - 100);
+        monsterLabels.add(monster4Label);
+
+        hp = new ProgressBar(0, 100, 1, false, HPbarStyle);
+        mp = new ProgressBar(0, 100, 1, false, MPbarStyle);
+
+        hp.setPosition(800 - 16 - 128 - 124, GlobalSettings.RESOLUTION_Y - 90);
+        hp.setWidth(128); hp.setValue(100);
+        mp.setPosition(800 - 16 - 128 - 96, GlobalSettings.RESOLUTION_Y - 100);
+        mp.setWidth(100); mp.setValue(100);
+
+        hp.setAnimateInterpolation(Interpolation.linear);
+        hp.setAnimateDuration(1f);
+
+        HPbars.add(hp); MPbars.add(mp);
+
+        
         // Monster 6 ...............................................................................
         Label monster6Label = new Label("Enemy", skin, "beige-r");
         monster6Label.setWidth(128);

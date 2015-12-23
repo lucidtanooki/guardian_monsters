@@ -44,6 +44,7 @@ com.badlogic.gdx.scenes.scene2d.ui.ProgressBar$ProgressBarStyle: {
 	blue-horizontal: { background: blue-slider  },
 	red-horizontal: { background: red-slider  },
 	green-horizontal: { background: green-slider  },
+	yellow-horizontal-exp: { background: yellow-slider-hor  },
 	HP-horizontal: {background: HP-bar},
 	default-vertical: { background: default-slider},
 	red-vertical: { background: red-slider-vert  }

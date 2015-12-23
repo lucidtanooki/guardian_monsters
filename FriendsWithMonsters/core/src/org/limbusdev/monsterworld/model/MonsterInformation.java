@@ -28,7 +28,7 @@ public class MonsterInformation {
         monsterNames.set(10, "Flyear");
         monsterNames.set(11, "Tuxedo");
         monsterNames.set(12, "Eggolomia");
-        monsterNames.set(13, "Big eyed Katago");
+        monsterNames.set(13, "Big eyed Ka");
         monsterNames.set(14, "Cath");
         monsterNames.set(15, "Dogh");
     }

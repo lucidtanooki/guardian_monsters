@@ -379,6 +379,13 @@ yellow-slider
   orig: 32,32
   offset: 0,0
   index: -1
+yellow-slider-hor
+  rotate: false
+  xy: 86,0
+  size: 3,2
+  orig: 3,2
+  offset: 0,0
+  index: -1
 hud-bg
   rotate: false
   xy: 59,129
@@ -391,6 +398,13 @@ hud-bg2
   xy: 1,197
   size: 16,28
   orig: 16,28
+  offset: 0,0
+  index: -1
+hud-bg3
+  rotate: false
+  xy: 34,168
+  size: 200,22
+  orig: 200,22
   offset: 0,0
   index: -1
 red-slider-vert

@@ -99,6 +99,15 @@ beige-round-r
   orig: 12, 20
   offset: 0, 0
   index: -1
+name-sign-l
+  rotate: false
+  xy: 166,8
+  size: 12, 20
+  split: 6,2,2,6
+  pad: 4, 4, 1, 1
+  orig: 12, 20
+  offset: 0, 0
+  index: -1
 indicator
   rotate: false
   xy: 151,8
@@ -228,6 +237,14 @@ blue-slider
   orig: 8, 8
   offset: 0, 0
   index: -1
+red-slider
+  rotate: false
+  xy: 38, 0
+  size: 8, 8
+  split: 2, 2, 2, 2
+  orig: 8, 8
+  offset: 0, 0
+  index: -1
 green-slider
   rotate: false
   xy: 29, 9
@@ -294,4 +311,93 @@ white
   size: 3, 3
   orig: 3, 3
   offset: 0, 0
+  index: -1
+HP-bar
+  rotate: false
+  xy: 49,156
+  size: 23,17
+  orig: 23,17
+  offset: 0,0
+  index: -1
+HP-slider
+  rotate: false
+  xy: 83,156
+  size: 10, 11
+  split: 2, 4, 2, 2
+  orig: 10,11
+  offset: 0, 0
+  index: -1
+HP-slider-inv
+  rotate: false
+  xy: 94,156
+  size: 10, 11
+  split: 4, 2, 2, 2
+  orig: 10,11
+  offset: 0, 0
+  index: -1
+MP-slider
+  rotate: false
+  xy: 75,156
+  size: 5,5
+  split: 1, 2, 1, 1
+  orig: 5,5
+  offset: 0,0
+  index: -1
+MP-slider-inv
+  rotate: false
+  xy: 75,162
+  size: 5,5
+  split: 2, 1, 1, 1
+  orig: 5,5
+  offset: 0,0
+  index: -1
+invis
+  rotate: false
+  xy: 53,0
+  size: 8,8
+  orig: 8,8
+  offset: 0,0
+  index: -1
+ring
+  rotate: false
+  xy: 1,129
+  size: 32,32
+  orig: 32,32
+  offset: 0,0
+  index: -1
+ring-bg
+  rotate: false
+  xy: 34,133
+  size: 24,24
+  orig: 24,24
+  offset: 0,0
+  index: -1
+yellow-slider
+  rotate: false
+  xy: 1,162
+  size: 32,32
+  orig: 32,32
+  offset: 0,0
+  index: -1
+hud-bg
+  rotate: false
+  xy: 59,129
+  size: 78,22
+  orig: 78,22
+  offset: 0,0
+  index: -1
+hud-bg2
+  rotate: false
+  xy: 1,197
+  size: 16,28
+  orig: 16,28
+  offset: 0,0
+  index: -1
+red-slider-vert
+  rotate: false
+  xy: 47,0
+  size: 5,5
+  split: 1,1,1,2
+  orig: 5,5
+  offset: 0,0
   index: -1

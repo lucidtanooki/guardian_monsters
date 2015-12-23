@@ -42,8 +42,11 @@ com.badlogic.gdx.scenes.scene2d.ui.Window$WindowStyle: {
 com.badlogic.gdx.scenes.scene2d.ui.ProgressBar$ProgressBarStyle: {
 	default-horizontal: { background: default-slider  },
 	blue-horizontal: { background: blue-slider  },
+	red-horizontal: { background: red-slider  },
 	green-horizontal: { background: green-slider  },
-	default-vertical: { background: default-slider}
+	HP-horizontal: {background: HP-bar},
+	default-vertical: { background: default-slider},
+	red-vertical: { background: red-slider-vert  }
 },
 com.badlogic.gdx.scenes.scene2d.ui.Slider$SliderStyle: {
 	default-horizontal: { background: default-slider, knob: default-slider-knob },
@@ -52,6 +55,8 @@ com.badlogic.gdx.scenes.scene2d.ui.Slider$SliderStyle: {
 com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
 	default: { font: default-font, fontColor: grey, background: default-round },
 	beige: { font: default-font, fontColor: grey, background: beige-round },
+	name-sign-l: { font: default-font, fontColor: grey, background: name-sign-l },
+	trans: { font: default-font, fontColor: white, background: invis },
 	beige-r: { font: default-font, fontColor: grey, background: beige-round-r }
 },
 com.badlogic.gdx.scenes.scene2d.ui.TextField$TextFieldStyle: {

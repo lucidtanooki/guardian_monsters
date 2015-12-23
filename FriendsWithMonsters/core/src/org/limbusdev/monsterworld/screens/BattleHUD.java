@@ -33,10 +33,14 @@ import org.limbusdev.monsterworld.model.Monster;
 import org.limbusdev.monsterworld.model.MonsterInformation;
 import org.limbusdev.monsterworld.utils.GlobalSettings;
 
+import java.util.Observable;
+import java.util.Observer;
+
 /**
  * Created by georg on 03.12.15.
  */
 public class BattleHUD {
+
     /* ............................................................................ ATTRIBUTES .. */
     final static class IndPos {
         private static IntVector2 OPPO_TOP = new IntVector2(616, 340);
@@ -67,14 +71,12 @@ public class BattleHUD {
     private final TextButton att1Button;
     private final Array<Button> oppMonButtons;
     private final Label infoLabel;
-    private final Array<Label> monsterLabels;
-    private final Array<Label> monsterLvls;
+    private final Array<Label> monsterLabels, monsterLvls;
     private final Array<Image> uiRings, uiRingBgs, uiHudBgs, uiNameSigns;
     private final Array<ProgressBar> HPbars, MPbars, RecovBars, ExpBars;
     private final ScrollPane attacksPane;
     private final Image indicatorOpp, indicatorHero;
-    private Array<Monster> team;
-    private Array<Monster> opponentTeam;
+    private Array<Monster> team, opponentTeam;
     private float elapsedTime=0;
     private Array<AttackAction> battleQueue;
     private Array<Long> waitingSince;
@@ -271,7 +273,7 @@ public class BattleHUD {
         for(Image i : uiRings) stage.addActor(i);
         for(Label l : monsterLvls) stage.addActor(l);
 
-
+        reset();
     }
     /* ............................................................................... METHODS .. */
 
@@ -288,6 +290,8 @@ public class BattleHUD {
         monsterLabels.get(position).setText(
                 monsterInformation.monsterNames.get(monster.ID - 1));
         monsterLabels.get(position).setVisible(true);
+        ExpBars.get(position).setValue(monster.getExpPerc());
+        HPbars.get(position).setValue(monster.HP/1.f/monster.HPfull*100);
         if(team)
             monsterLabels.get(position).addListener(new ClickListener() {
                 @Override
@@ -305,14 +309,7 @@ public class BattleHUD {
                         indicatorOpp.setPosition(indPos.x, indPos.y, Align.center);
                     }
                 });
-
-        monsterLvls.get(position).setText(
-                Integer.toString(monster.level));
-        monsterLvls.get(position).setVisible(true);
-        HPbars.get(position).setVisible(true);
-        MPbars.get(position).setVisible(true);
-        RecovBars.get(position).setVisible(true);
-        ExpBars.get(position).setVisible(true);
+        activateMonsterHUD(monster, position);
     }
 
     public void init(TeamComponent team, TeamComponent opponentTeam) {
@@ -357,14 +354,7 @@ public class BattleHUD {
     }
 
     public void hide() {
-        for(Label l : monsterLabels) l.setVisible(false);
-        for(ProgressBar p : HPbars) p.setVisible(false);
-        for(ProgressBar p : MPbars) p.setVisible(false);
-        for(ProgressBar p : RecovBars) p.setVisible(false);
-        for(ProgressBar p : ExpBars) p.setVisible(false);
-        oppMonButtons.clear();
-        this.chosenTarget = BatPos.MID;
-        this.chosenTeamMonster = BatPos.MID;
+        reset();
     }
 
     public void draw() {
@@ -388,6 +378,22 @@ public class BattleHUD {
                         .get
                         (i).recovTime) * 100f);
             }
+
+        switch(team.size) {
+            case 3:
+                monsterLvls.get(BatPos.HERO_TOP).setText(Integer.toString(team.get(BatPos
+                        .HERO_TOP).level));
+                ExpBars.get(BatPos.HERO_TOP).setValue(team.get(BatPos.HERO_TOP).getExpPerc());
+            case 2:
+                monsterLvls.get(BatPos.HERO_BOT).setText(Integer.toString(team.get(BatPos
+                        .HERO_BOT).level));
+                ExpBars.get(BatPos.HERO_BOT).setValue(team.get(BatPos.HERO_BOT).getExpPerc());
+            default:
+                monsterLvls.get(BatPos.HERO_MID).setText(Integer.toString(team.get(BatPos
+                        .HERO_MID).level));
+                ExpBars.get(BatPos.HERO_MID).setValue(team.get(BatPos.HERO_MID).getExpPerc());
+                break;
+        }
     }
 
     public void setUpUI() {
@@ -539,6 +545,36 @@ public class BattleHUD {
         }
 
     }
+
+    public void reset() {
+        for(Label l : monsterLabels) l.setVisible(false);
+        for(ProgressBar p : HPbars) p.setVisible(false);
+        for(ProgressBar p : MPbars) p.setVisible(false);
+        for(ProgressBar p : RecovBars) p.setVisible(false);
+        for(ProgressBar p : ExpBars) p.setVisible(false);
+        for(Image i : uiNameSigns) i.setVisible(false);
+        for(Image i : uiHudBgs) i.setVisible(false);
+        for(Image i : uiRingBgs) i.setVisible(false);
+        for(Image i : uiRings) i.setVisible(false);
+        for(Label l : monsterLvls) l.setVisible(false);
+        oppMonButtons.clear();
+        this.chosenTarget = BatPos.MID;
+        this.chosenTeamMonster = BatPos.MID;
+    }
+
+    public void activateMonsterHUD(Monster monster, final int position) {
+        monsterLvls.get(position).setText(Integer.toString(monster.level));
+        monsterLvls.get(position).setVisible(true);
+        HPbars.get(position).setVisible(true);
+        MPbars.get(position).setVisible(true);
+        RecovBars.get(position).setVisible(true);
+        ExpBars.get(position).setVisible(true);
+        uiRingBgs.get(position).setVisible(true);
+        uiHudBgs.get(position).setVisible(true);
+        uiNameSigns.get(position).setVisible(true);
+        uiRings.get(position).setVisible(true);
+    }
+
 
     /* ..................................................................... GETTERS & SETTERS .. */
 }

@@ -63,12 +63,18 @@ public class MediaManager {
         param.magFilter = Texture.TextureFilter.Nearest;
         param.minFilter = Texture.TextureFilter.Linear;
         BitmapFont font18 = gen.generateFont(param);
+        param.color = Color.WHITE;
+        param.size = 18;
+        param.magFilter = Texture.TextureFilter.Nearest;
+        param.minFilter = Texture.TextureFilter.Linear;
+        BitmapFont font18w = gen.generateFont(param);
         gen.dispose();
 
         this.skin = new Skin();
 
         skin.addRegions(new TextureAtlas(Gdx.files.internal("scene2d/uiskin.atlas")));
         skin.add("default-font", font18);
+        skin.add("white", font18w);
 
         skin.load(Gdx.files.internal("scene2d/uiskin.json"));
 

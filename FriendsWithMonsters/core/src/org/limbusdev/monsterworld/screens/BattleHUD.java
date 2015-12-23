@@ -69,10 +69,8 @@ public class BattleHUD {
     private final Label infoLabel;
     private final Array<Label> monsterLabels;
     private final Array<Label> monsterLvls;
-    private final Array<Image> uiRings, uiRingBgs, uiHudBgs;
-    private final Array<ProgressBar> HPbars;
-    private final Array<ProgressBar> MPbars;
-    private final Array<ProgressBar> RecovBars;
+    private final Array<Image> uiRings, uiRingBgs, uiHudBgs, uiNameSigns;
+    private final Array<ProgressBar> HPbars, MPbars, RecovBars, ExpBars;
     private final ScrollPane attacksPane;
     private final Image indicatorOpp, indicatorHero;
     private Array<Monster> team;
@@ -104,7 +102,9 @@ public class BattleHUD {
         this.uiRings = new Array<Image>();
         this.uiRingBgs = new Array<Image>();
         this.uiHudBgs = new Array<Image>();
+        this.uiNameSigns = new Array<Image>();
         this.RecovBars = new Array<ProgressBar>();
+        this.ExpBars = new Array<ProgressBar>();
         this.oppMonButtons = new Array<Button>();
         this.battleQueue = new Array<AttackAction>();
         this.waitingSince = new Array<Long>();
@@ -253,10 +253,12 @@ public class BattleHUD {
 
         // Buttons ............................................................................. END
 
+        for(Image i : uiNameSigns) stage.addActor(i);
         for(Label l : monsterLabels) stage.addActor(l);
         for(Image i : uiHudBgs) stage.addActor(i);
         for(ProgressBar p : HPbars) stage.addActor(p);
         for(ProgressBar p : MPbars) stage.addActor(p);
+        for(ProgressBar p : ExpBars) stage.addActor(p);
         for(ProgressBar p : RecovBars) stage.addActor(p);
         stage.addActor(fightButton);
         stage.addActor(fleeButton);
@@ -272,25 +274,45 @@ public class BattleHUD {
 
     }
     /* ............................................................................... METHODS .. */
-    public void initHUD(Monster monster, int position, final int teamPos, final IntVector2 indPos) {
+
+    /**
+     * Initializes the graphical representation of a monster on the screen
+     * @param monster   the given monster
+     * @param position  the position on the battle field
+     * @param teamPos   the position in the respective team
+     * @param indPos    the indicator position
+     * @param team      whether hero (true) or opponent (false)
+     */
+    public void initHUD(Monster monster, final int position, final int teamPos, final IntVector2
+            indPos, boolean team) {
         monsterLabels.get(position).setText(
                 monsterInformation.monsterNames.get(monster.ID - 1));
         monsterLabels.get(position).setVisible(true);
-        monsterLabels.get(position).addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                chosenTeamMonster = teamPos;
-                indicatorHero.setPosition(indPos.x, indPos.y, Align
-                        .center);
-                activateButton(chosenTeamMonster);
-            }
-        });
+        if(team)
+            monsterLabels.get(position).addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    chosenTeamMonster = teamPos;
+                    indicatorHero.setPosition(indPos.x, indPos.y, Align.center);
+                    activateButton(chosenTeamMonster);
+                }
+            });
+        else
+            monsterLabels.get(position).addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                        chosenTarget = position-3;
+                        indicatorOpp.setPosition(indPos.x, indPos.y, Align.center);
+                    }
+                });
+
         monsterLvls.get(position).setText(
                 Integer.toString(monster.level));
         monsterLvls.get(position).setVisible(true);
         HPbars.get(position).setVisible(true);
         MPbars.get(position).setVisible(true);
         RecovBars.get(position).setVisible(true);
+        ExpBars.get(position).setVisible(true);
     }
 
     public void init(TeamComponent team, TeamComponent opponentTeam) {
@@ -308,11 +330,11 @@ public class BattleHUD {
         // Hero Team
         switch(team.monsters.size) {
             case 3:
-                initHUD(team.monsters.get(2), BatPos.HERO_TOP, BatPos.TOP, IndPos.HERO_TOP);
+                initHUD(team.monsters.get(2), BatPos.HERO_TOP, BatPos.TOP, IndPos.HERO_TOP, true);
             case 2:
-                initHUD(team.monsters.get(1), BatPos.HERO_BOT, BatPos.BOT, IndPos.HERO_BOT);
+                initHUD(team.monsters.get(1), BatPos.HERO_BOT, BatPos.BOT, IndPos.HERO_BOT, true);
             default:
-                initHUD(team.monsters.get(0), BatPos.HERO_MID, BatPos.MID, IndPos.HERO_MID);
+                initHUD(team.monsters.get(0), BatPos.HERO_MID, BatPos.MID, IndPos.HERO_MID, true);
                 break;
         }
 
@@ -320,50 +342,14 @@ public class BattleHUD {
         final Button monsterChooser1,monsterChooser2,monsterChooser3;
         switch(opponentTeam.monsters.size) {
             case 3:
-                monsterLabels.get(BatPos.OPPO_TOP).setText(
-                        monsterInformation.monsterNames.get(opponentTeam.monsters.get(2).ID-1));
-                monsterLabels.get(BatPos.OPPO_TOP).setVisible(true);
-                monsterLabels.get(BatPos.OPPO_TOP).addListener(new ClickListener() {
-                    @Override
-                    public void clicked(InputEvent event, float x, float y) {
-                        chosenTarget = BatPos.TOP;
-                        indicatorOpp.setPosition(IndPos.OPPO_TOP.x, IndPos.OPPO_TOP.y, Align
-                                .center);
-                    }
-                });
-                HPbars.get(BatPos.OPPO_TOP).setVisible(true);
-                MPbars.get(BatPos.OPPO_TOP).setVisible(true);
-                RecovBars.get(BatPos.OPPO_TOP).setVisible(true);
+                initHUD(opponentTeam.monsters.get(2), BatPos.OPPO_TOP, BatPos.TOP, IndPos
+                        .OPPO_TOP, false);
             case 2:
-                monsterLabels.get(BatPos.OPPO_BOT).setText(
-                        monsterInformation.monsterNames.get(opponentTeam.monsters.get(1).ID-1));
-                monsterLabels.get(BatPos.OPPO_BOT).setVisible(true);
-                monsterLabels.get(BatPos.OPPO_BOT).addListener(new ClickListener() {
-                    @Override
-                    public void clicked(InputEvent event, float x, float y) {
-                        chosenTarget = BatPos.BOT;
-                        indicatorOpp.setPosition(IndPos.OPPO_BOT.x, IndPos.OPPO_BOT.y, Align
-                                .center);
-                    }
-                });
-                HPbars.get(BatPos.OPPO_BOT).setVisible(true);
-                MPbars.get(BatPos.OPPO_BOT).setVisible(true);
-                RecovBars.get(BatPos.OPPO_BOT).setVisible(true);
+                initHUD(opponentTeam.monsters.get(1), BatPos.OPPO_BOT, BatPos.BOT, IndPos
+                        .OPPO_BOT, false);
             default:
-                monsterLabels.get(BatPos.OPPO_MID).setText(
-                        monsterInformation.monsterNames.get(opponentTeam.monsters.get(0).ID-1));
-                monsterLabels.get(BatPos.OPPO_MID).setVisible(true);
-                monsterLabels.get(BatPos.OPPO_MID).addListener(new ClickListener() {
-                    @Override
-                    public void clicked(InputEvent event, float x, float y) {
-                        chosenTarget = BatPos.MID;
-                        indicatorOpp.setPosition(IndPos.OPPO_MID.x, IndPos.OPPO_MID.y, Align
-                                .center);
-                    }
-                });
-                HPbars.get(BatPos.OPPO_MID).setVisible(true);
-                MPbars.get(BatPos.OPPO_MID).setVisible(true);
-                RecovBars.get(BatPos.OPPO_MID).setVisible(true);
+                initHUD(opponentTeam.monsters.get(0), BatPos.OPPO_MID, BatPos.MID, IndPos
+                        .OPPO_MID, false);
                 break;
         }
         for(Button b : oppMonButtons) stage.addActor(b);
@@ -375,6 +361,7 @@ public class BattleHUD {
         for(ProgressBar p : HPbars) p.setVisible(false);
         for(ProgressBar p : MPbars) p.setVisible(false);
         for(ProgressBar p : RecovBars) p.setVisible(false);
+        for(ProgressBar p : ExpBars) p.setVisible(false);
         oppMonButtons.clear();
         this.chosenTarget = BatPos.MID;
         this.chosenTeamMonster = BatPos.MID;
@@ -404,23 +391,11 @@ public class BattleHUD {
     }
 
     public void setUpUI() {
-        ProgressBar.ProgressBarStyle HPbarStyle = new ProgressBar.ProgressBarStyle();
-        HPbarStyle.background = skin.getDrawable("invis");
-        Drawable HPbar = skin.getDrawable("HP-slider");
-        HPbarStyle.knobBefore= HPbar;
-        ProgressBar.ProgressBarStyle MPbarStyle = new ProgressBar.ProgressBarStyle();
-        MPbarStyle.background = skin.getDrawable("invis");
-        MPbarStyle.knobBefore= skin.getDrawable("MP-slider");
-        ProgressBar.ProgressBarStyle RecovBarStyle = new ProgressBar.ProgressBarStyle();
-        RecovBarStyle.background = skin.getDrawable("invis");
-        RecovBarStyle.knobBefore= skin.getDrawable("red-slider-vert");
-
-        ProgressBar mp, hp, rp;
 
         // Hero Team ###############################################################################
-        addMonsterHUD(48,480-67);
-        addMonsterHUD(16,480-100);
-        addMonsterHUD(80,480-36);
+        addMonsterHUD(58,480-67);
+        addMonsterHUD(26,480-100);
+        addMonsterHUD(90,480-36);
 
         // Opponent Team ###########################################################################
         addMonsterHUD(800-256-16-32,480-67);
@@ -432,6 +407,7 @@ public class BattleHUD {
         for(ProgressBar p : HPbars) p.setVisible(false);
         for(ProgressBar p : MPbars) p.setVisible(false);
         for(ProgressBar p : RecovBars) p.setVisible(false);
+        for(ProgressBar p : ExpBars) p.setVisible(false);
         for(Label p : monsterLvls) p.setVisible(false);
 
     }
@@ -452,6 +428,9 @@ public class BattleHUD {
         ProgressBar.ProgressBarStyle RecovBarStyle = new ProgressBar.ProgressBarStyle();
         RecovBarStyle.background = skin.getDrawable("invis");
         RecovBarStyle.knobBefore = skin.getDrawable("red-slider-vert");
+        ProgressBar.ProgressBarStyle ExpBarStyle = new ProgressBar.ProgressBarStyle();
+        ExpBarStyle.background = skin.getDrawable("invis");
+        ExpBarStyle.knobBefore = skin.getDrawable("yellow-slider-hor");
 
         Image hudEl;
         hudEl = new Image();
@@ -475,19 +454,31 @@ public class BattleHUD {
         hudEl.setHeight(32);
         hudEl.setWidth(32);
         uiRings.add(hudEl);
+        hudEl = new Image();
+        hudEl.setDrawable(skin, "hud-bg3");
+        hudEl.setPosition(x-14, y+5);
+        hudEl.setWidth(200);
+        hudEl.setHeight(22);
+        uiNameSigns.add(hudEl);
 
 
-        ProgressBar mp, hp, rp;
+        ProgressBar mp, hp, rp, ep;
 
-        Label monsterLabel = new Label("Me", skin, "name-sign-l");
+        Label.LabelStyle ls = new Label.LabelStyle();
+        ls.background = skin.getDrawable("invis");
+        ls.font = skin.getFont("default-font");
+        ls.fontColor = Color.WHITE;
+
+        Label monsterLabel = new Label("Me", ls);
         monsterLabel.setWidth(128);
         monsterLabel.setHeight(26);
-        monsterLabel.setPosition(x, y); // 48, 480-67
+        monsterLabel.setPosition(x, y + 2); // 48, 480-67
         monsterLabels.add(monsterLabel);
 
         hp = new ProgressBar(0, 100, 1, false, HPbarStyle);
         mp = new ProgressBar(0, 100, 1, false, MPbarStyle);
         rp = new ProgressBar(0, 100, 1, true, RecovBarStyle);
+        ep = new ProgressBar(0, 100, 1, false, ExpBarStyle);
 
         hp.setPosition(x + 124, y + 14);
         hp.setWidth(128);
@@ -495,24 +486,26 @@ public class BattleHUD {
         mp.setPosition(x + 124, y + 6);
         mp.setWidth(100);
         mp.setValue(100);
-        rp.setPosition(x + 100, y + 1);
-        rp.setHeight(24);
+        rp.setPosition(x + 100, y + 5);
+        rp.setHeight(22);
         mp.setValue(100);
+        ep.setPosition(x-9, y);
+        ep.setWidth(120);
+        ep.setValue(100);
 
         hp.setAnimateInterpolation(Interpolation.linear);
         hp.setAnimateDuration(1f);
         rp.setAnimateInterpolation(Interpolation.linear);
         rp.setAnimateDuration(.1f);
+        ep.setAnimateInterpolation(Interpolation.linear);
+        ep.setAnimateDuration(.1f);
 
         HPbars.add(hp);
         MPbars.add(mp);
         RecovBars.add(rp);
+        ExpBars.add(ep);
 
-        Label.LabelStyle ls = new Label.LabelStyle();
-        ls.background = skin.getDrawable("invis");
         ls.font = skin.getFont("white");
-        ls.fontColor = Color.WHITE;
-
         Label lvl = new Label("0", ls);
         lvl.setPosition(x + 125, y + 13, Align.center);
         monsterLvls.add(lvl);

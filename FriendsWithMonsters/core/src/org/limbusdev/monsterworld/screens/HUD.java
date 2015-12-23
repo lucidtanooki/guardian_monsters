@@ -78,9 +78,9 @@ public class HUD {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 TeamComponent oppTeam = new TeamComponent();
-                oppTeam.monsters.add(BattleFactory.getInstance().createMonster(2));
+                oppTeam.monsters.add(BattleFactory.getInstance().createMonster(7));
                 oppTeam.monsters.add(BattleFactory.getInstance().createMonster(4));
-                oppTeam.monsters.add(BattleFactory.getInstance().createMonster(22));
+                oppTeam.monsters.add(BattleFactory.getInstance().createMonster(11));
                 battleScreen.init(ComponentRetriever.team.get(hero), oppTeam);
                 game.setScreen(battleScreen);
             }

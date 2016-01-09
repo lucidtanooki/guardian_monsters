@@ -145,6 +145,9 @@ public class MainMenuScreen implements Screen {
             }
         });
 
+        String creditsButton = "Credits";
+
+
         // Buttons ............................................................................. END
 
         stage.addActor(button);

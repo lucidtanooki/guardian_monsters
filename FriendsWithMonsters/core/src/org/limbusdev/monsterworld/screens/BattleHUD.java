@@ -1,40 +1,37 @@
 package org.limbusdev.monsterworld.screens;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Interpolation;
-import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.List;
 import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.sun.crypto.provider.HmacPKCS12PBESHA1;
 
 import org.limbusdev.monsterworld.MonsterWorld;
 import org.limbusdev.monsterworld.ecs.components.TeamComponent;
 import org.limbusdev.monsterworld.geometry.IntVector2;
 import org.limbusdev.monsterworld.model.AttackAction;
-import org.limbusdev.monsterworld.model.BattleFactory;
 import org.limbusdev.monsterworld.model.Monster;
 import org.limbusdev.monsterworld.model.MonsterInformation;
 import org.limbusdev.monsterworld.utils.GlobalSettings;
 
-import java.util.Observable;
-import java.util.Observer;
 
 /**
  * Created by georg on 03.12.15.
@@ -42,6 +39,10 @@ import java.util.Observer;
 public class BattleHUD {
 
     /* ............................................................................ ATTRIBUTES .. */
+
+    /**
+     * Possible Indicator positions
+     */
     final static class IndPos {
         private static IntVector2 OPPO_TOP = new IntVector2(616, 340);
         private static IntVector2 OPPO_MID = new IntVector2(672, 304);
@@ -51,6 +52,9 @@ public class BattleHUD {
         private static IntVector2 HERO_BOT = new IntVector2(74, 268);
     }
 
+    /**
+     * Positions on the Battle Field
+     */
     final static class BatPos {
         private static int HERO_MID = 0;    // Middle Position on the left
         private static int HERO_TOP = 2;
@@ -61,19 +65,23 @@ public class BattleHUD {
         private static int MID = 0;
         private static int TOP = 2;
         private static int BOT = 1;
+        private static int[] positions = {0,2,1};
     }
 
     private Skin skin;
-    public Stage stage;
+    public  Stage stage;
     private MonsterInformation monsterInformation;
 
-    private final TextButton fightButton, fleeButton, battleMenuButton;
+    private final Group battleActionMenu, topLevelMenu;
+    private final ImageButton fightButton, fleeButton, battleMenuButton, bagButton, backButton;
+    private final Image bg;
     private final TextButton att1Button;
     private final Array<Button> oppMonButtons;
     private final Label infoLabel;
     private final Array<Label> monsterLabels, monsterLvls;
     private final Array<Image> uiRings, uiRingBgs, uiHudBgs, uiNameSigns;
     private final Array<ProgressBar> HPbars, MPbars, RecovBars, ExpBars;
+    private final ArrayMap<String,ImageButton> battleButtons;
     private final ScrollPane attacksPane;
     private final Image indicatorOpp, indicatorHero;
     private Array<Monster> team, opponentTeam;
@@ -88,6 +96,8 @@ public class BattleHUD {
     private int chosenTarget=BatPos.MID;
     private int chosenTeamMonster=BatPos.MID;
 
+    private int indicatorOppPos=0;
+    private int indicatorHeroPos=0;
 
     // Time
     private long lastActionTime = 0;
@@ -97,6 +107,7 @@ public class BattleHUD {
         this.game = game;
         this.gameScreen = gameScreen;
         this.monsterInformation = MonsterInformation.getInstance();
+        this.battleButtons = new ArrayMap<String, ImageButton>();
         this.monsterLabels = new Array<Label>();
         this.monsterLvls = new Array<Label>();
         this.HPbars = new Array<ProgressBar>();
@@ -124,127 +135,40 @@ public class BattleHUD {
         this.stage = new Stage(fit);
         this.skin = game.media.skin;for(int i=0;i<6;i++) waitingSince.add(new Long(0));
 
-        // Images
+        this.bg = new Image(game.media.getBattleUITextureAtlas().findRegion("bg"));
+        bg.setPosition(0, 0);
+        bg.setWidth(800);
+        bg.setHeight(140);
+        stage.addActor(bg);
+
+        // Top Level Menu
+        this.topLevelMenu = new Group();
+        fightButton = new ImageButton(skin.getDrawable("textfield"));
+        fleeButton = new ImageButton(skin.getDrawable("textfield"));
+        bagButton = new ImageButton(skin.getDrawable("textfield"));
+        backButton = new ImageButton(skin.getDrawable("textfield"));
+        setUpTopLevelMenu();
+
+        // Battle Action Menu
+        infoLabel = new Label("A monster attacks you!", skin, "default");
+        this.battleActionMenu = new Group();
+        att1Button = new TextButton("Att1", skin, "default");
+        battleMenuButton = new ImageButton(skin.getDrawable("textfield"));
+        setUpBattleActionMenu();
+
+
+        // Battle HUD Status Bars
         indicatorOpp = new Image(skin.getDrawable("indicator"));
+        indicatorHero = new Image(skin.getDrawable("indicator"));
+
         indicatorOpp.setVisible(true);
         indicatorOpp.setPosition(IndPos.OPPO_MID.x, IndPos.OPPO_MID.y, Align.center);
-        stage.addActor(indicatorOpp);
 
-        indicatorHero = new Image(skin.getDrawable("indicator"));
         indicatorHero.setVisible(true);
         indicatorHero.setPosition(IndPos.HERO_MID.x, IndPos.HERO_MID.y, Align.center);
-        stage.addActor(indicatorHero);
-
-        // Buttons .................................................................................
-        fightButton = new TextButton("Fight", skin, "default-green");
-        fightButton.setWidth(128f);
-        fightButton.setHeight(64f);
-        fightButton.setPosition(700 - 260, 8);
-        fightButton.getStyle().fontColor = Color.RED;
-
-        fightButton.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                fightButton.setVisible(false);
-                infoLabel.setVisible(false);
-                att1Button.setVisible(true);
-                fleeButton.setVisible(false);
-                battleMenuButton.setVisible(true);
-            }
-        });
-
-        fleeButton = new TextButton("Escape", skin, "default-red");
-        fleeButton.setWidth(128f);
-        fleeButton.setHeight(64f);
-        fleeButton.setPosition(700 - 128, 8);
-
-        fleeButton.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                game.setScreen(gameScreen);
-            }
-        });
-
-
-        att1Button = new TextButton("Att1", skin, "default");
-        att1Button.setWidth(128f);
-        att1Button.setHeight(64f);
-        att1Button.setPosition(100, 8);
-        att1Button.setVisible(false);
-
-        att1Button.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                System.out.println("Attack 1 by Team Member " + chosenTeamMonster + " at " +
-                        chosenTarget);
-
-                /* Calculate Damage */
-                if(opponentTeam.get(chosenTarget).HP
-                        - team.get(chosenTeamMonster).attacks.get(0).damage < 0)
-                    opponentTeam.get(chosenTarget).HP = 0;
-                else opponentTeam.get(chosenTarget).HP
-                        -= team.get(chosenTeamMonster).attacks.get(0).damage;
-
-                /* Make attacker wait */
-                waitingSince.set(chosenTeamMonster, TimeUtils.millis());
-                monsterReady.set(chosenTeamMonster, false);
-                att1Button.setVisible(false);
-
-                /* Update Health Bar */
-                HPbars.get(chosenTarget+3).setValue(100 * opponentTeam.get(chosenTarget).HP
-                        / opponentTeam.get(chosenTarget).HPfull);
-
-                // Handle Attack
-                handleAttack(team.get(chosenTeamMonster), opponentTeam.get(chosenTarget));
-
-                /* Check if all enemies are KO */
-                boolean allKO = true;
-                switch(opponentTeam.size) {
-                    case 3: allKO=(opponentTeam.get(BatPos.TOP).HP == 0);
-                        System.out.println("OppMon 3: " + opponentTeam.get(2).HP
-                                        + "/" + opponentTeam.get(2).HPfull + " KO: " + allKO);
-                    case 2: allKO=(allKO == true && opponentTeam.get(1).HP == 0);
-                        System.out.println("OppMon 2: " + opponentTeam.get(1).HP
-                                + "/" + opponentTeam.get(1).HPfull + " KO: " + allKO);
-                    default:allKO=(allKO == true && opponentTeam.get(0).HP == 0);
-                        System.out.println("OppMon 1: " + opponentTeam.get(0).HP
-                                + "/" + opponentTeam.get(0).HPfull + " KO: " + allKO);
-                        break;
-                }
-
-
-                if(allKO) game.setScreen(gameScreen);
-            }
-        });
-
-        battleMenuButton = new TextButton("Back", skin, "default");
-        battleMenuButton.setWidth(128f);
-        battleMenuButton.setHeight(64f);
-        battleMenuButton.setPosition(700 - 128, 74);
-        battleMenuButton.setVisible(false);
-
-        battleMenuButton.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                att1Button.setVisible(false);
-                battleMenuButton.setVisible(false);
-                fleeButton.setVisible(true);
-                fightButton.setVisible(true);
-
-            }
-        });
 
         setUpUI();
 
-
-        // .................................................................................. LABELS
-
-        infoLabel = new Label("A monster attacks you!", skin, "default");
-        infoLabel.setHeight(64);
-        infoLabel.setWidth(600);
-        infoLabel.setWrap(true);
-        infoLabel.setPosition(GlobalSettings.RESOLUTION_X / 2 - 300f, 74);
-        infoLabel.setVisible(true);
 
         List attackList = new List(skin, "default");
         attackList.setHeight(200);
@@ -262,11 +186,8 @@ public class BattleHUD {
         for(ProgressBar p : MPbars) stage.addActor(p);
         for(ProgressBar p : ExpBars) stage.addActor(p);
         for(ProgressBar p : RecovBars) stage.addActor(p);
-        stage.addActor(fightButton);
-        stage.addActor(fleeButton);
-        stage.addActor(infoLabel);
-        stage.addActor(att1Button);
-        stage.addActor(battleMenuButton);
+        stage.addActor(indicatorOpp);
+        stage.addActor(indicatorHero);
 //        stage.addActor(attacksPane);
 //        stage.addActor(attackList);
         for(Image i : uiRingBgs) stage.addActor(i);
@@ -310,6 +231,8 @@ public class BattleHUD {
                     }
                 });
         activateMonsterHUD(monster, position);
+        chosenTarget=1;chosenTeamMonster=1;
+        stage.addAction(Actions.fadeIn(1f));
     }
 
     public void init(TeamComponent team, TeamComponent opponentTeam) {
@@ -351,6 +274,8 @@ public class BattleHUD {
         }
         for(Button b : oppMonButtons) stage.addActor(b);
         for(ProgressBar b : RecovBars) b.setValue(100);
+
+        chosenTarget=1;chosenTeamMonster=1;
     }
 
     public void hide() {
@@ -575,6 +500,442 @@ public class BattleHUD {
         uiRings.get(position).setVisible(true);
     }
 
+    /**
+     * Setting up the main menu in battle mode
+     *  Fight
+     *  Escape
+     */
+    private void setUpTopLevelMenu() {
+        // Tables
+        this.topLevelMenu.setWidth(GlobalSettings.RESOLUTION_X);
+        this.topLevelMenu.setHeight(GlobalSettings.RESOLUTION_Y / 4);
+
+        fightButton.setWidth(140f);
+        fightButton.setHeight(112f);
+        fightButton.setPosition(400, 0, Align.bottom);
+
+        fightButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                topLevelMenu.addAction(
+                        Actions.sequence(Actions.alpha(0, .3f), Actions.visible(false)));
+                battleActionMenu.addAction(
+                        Actions.sequence(Actions.visible(true),Actions.alpha(1, .5f)));
+            }
+        });
+
+        fleeButton.setWidth(148f);
+        fleeButton.setHeight(112f);
+        fleeButton.setPosition(527, 0, Align.bottom);
+
+        fleeButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                stage.addAction(Actions.sequence(Actions.fadeOut(1), Actions.run(new Runnable() {
+                    @Override
+                    public void run() {
+                        game.setScreen(gameScreen);
+                    }
+                })));
+            }
+        });
+
+        bagButton.setWidth(140f);
+        bagButton.setHeight(112f);
+        bagButton.setPosition(276, 0, Align.bottom);
+
+        bagButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                // TODO
+                ;
+            }
+        });
+
+        topLevelMenu.addActor(fightButton);
+        topLevelMenu.addActor(fleeButton);
+        topLevelMenu.addActor(bagButton);
+
+        stage.addActor(topLevelMenu);
+
+        ImageButton.ImageButtonStyle ibs = new ImageButton.ImageButtonStyle();
+        ibs.down = new TextureRegionDrawable(game.media.getBattleUITextureAtlas().findRegion
+                ("b_fight_down"));
+        ibs.up = new TextureRegionDrawable(game.media.getBattleUITextureAtlas().findRegion
+                ("b_fight"));
+        fightButton.setStyle(ibs);
+
+        ibs = new ImageButton.ImageButtonStyle();
+        ibs = new ImageButton.ImageButtonStyle();
+        ibs.down = new TextureRegionDrawable(game.media.getBattleUITextureAtlas().findRegion
+                ("b_flee_down"));
+        ibs.up = new TextureRegionDrawable(game.media.getBattleUITextureAtlas().findRegion
+                ("b_flee"));
+        fleeButton.setStyle(ibs);
+
+        ibs = new ImageButton.ImageButtonStyle();
+        ibs.down = new TextureRegionDrawable(game.media.getBattleUITextureAtlas().findRegion
+                ("b_bag_down"));
+        ibs.up = new TextureRegionDrawable(game.media.getBattleUITextureAtlas().findRegion
+                ("b_bag"));
+        bagButton.setStyle(ibs);
+
+    }
+
+    private void setUpBattleActionMenu() {
+        this.battleActionMenu.setWidth(GlobalSettings.RESOLUTION_X);
+        this.battleActionMenu.setHeight(GlobalSettings.RESOLUTION_Y / 4);
+        this.battleActionMenu.setVisible(false);
+
+        // Buttons .................................................................................
+        infoLabel.setHeight(64);
+        infoLabel.setWidth(542);
+        infoLabel.setWrap(true);
+        infoLabel.setPosition(400, 72, Align.bottom);
+        infoLabel.setVisible(true);
+        Label.LabelStyle labs = new Label.LabelStyle();
+        labs.background = new TextureRegionDrawable(game.media.getBattleUITextureAtlas()
+                .findRegion("b12.up"));
+        labs.font = skin.getFont("default-font");
+        infoLabel.setStyle(labs);
+
+        ImageButton.ImageButtonStyle ibs = new ImageButton.ImageButtonStyle();
+        ibs.down = new TextureRegionDrawable(game.media.getBattleUITextureAtlas().findRegion
+                ("b6down"));
+        ibs.up = new TextureRegionDrawable(game.media.getBattleUITextureAtlas().findRegion
+                ("b6up"));
+        backButton.setStyle(ibs);
+
+        backButton.setWidth(60f);
+        backButton.setHeight(72f);
+        backButton.setPosition(680, 0, Align.bottomLeft);
+
+        backButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                battleActionMenu.addAction(
+                        Actions.sequence(Actions.alpha(0, .3f), Actions.visible(false)));
+                topLevelMenu.addAction(
+                        Actions.sequence(Actions.visible(true),Actions.alpha(1, .5f)));
+            }
+        });
+
+        battleActionMenu.addActor(backButton);
+
+
+        att1Button.setWidth(128f);
+        att1Button.setHeight(64f);
+        att1Button.setPosition(100, 8);
+        att1Button.setVisible(false);
+
+        att1Button.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                System.out.println("Attack 1 by Team Member " + chosenTeamMonster + " at " +
+                        chosenTarget);
+
+                /* Calculate Damage */
+                if (opponentTeam.get(chosenTarget).HP
+                        - team.get(chosenTeamMonster).attacks.get(0).damage < 0)
+                    opponentTeam.get(chosenTarget).HP = 0;
+                else opponentTeam.get(chosenTarget).HP
+                        -= team.get(chosenTeamMonster).attacks.get(0).damage;
+
+                /* Make attacker wait */
+                waitingSince.set(chosenTeamMonster, TimeUtils.millis());
+                monsterReady.set(chosenTeamMonster, false);
+                att1Button.setVisible(false);
+
+                /* Update Health Bar */
+                HPbars.get(chosenTarget + 3).setValue(100 * opponentTeam.get(chosenTarget).HP
+                        / opponentTeam.get(chosenTarget).HPfull);
+
+                // Handle Attack
+                handleAttack(team.get(chosenTeamMonster), opponentTeam.get(chosenTarget));
+
+                /* Check if all enemies are KO */
+                boolean allKO = true;
+                switch (opponentTeam.size) {
+                    case 3:
+                        allKO = (opponentTeam.get(BatPos.TOP).HP == 0);
+                        System.out.println("OppMon 3: " + opponentTeam.get(2).HP
+                                + "/" + opponentTeam.get(2).HPfull + " KO: " + allKO);
+                    case 2:
+                        allKO = (allKO == true && opponentTeam.get(1).HP == 0);
+                        System.out.println("OppMon 2: " + opponentTeam.get(1).HP
+                                + "/" + opponentTeam.get(1).HPfull + " KO: " + allKO);
+                    default:
+                        allKO = (allKO == true && opponentTeam.get(0).HP == 0);
+                        System.out.println("OppMon 1: " + opponentTeam.get(0).HP
+                                + "/" + opponentTeam.get(0).HPfull + " KO: " + allKO);
+                        break;
+                }
+
+
+                if (allKO) game.setScreen(gameScreen);
+            }
+        });
+
+        battleMenuButton.setWidth(128f);
+        battleMenuButton.setHeight(64f);
+        battleMenuButton.setPosition(700 - 128, 74);
+
+        battleMenuButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                topLevelMenu.addAction(
+                        Actions.sequence(Actions.alpha(0, .5f), Actions.visible(false)));
+                battleActionMenu.addAction(
+                        Actions.sequence(Actions.visible(true), Actions.alpha(1, .5f)));
+            }
+        });
+
+        battleActionMenu.addActor(battleMenuButton);
+        battleActionMenu.addActor(att1Button);
+        battleActionMenu.addActor(infoLabel);
+        stage.addActor(battleActionMenu);
+
+        // Create indicator buttons
+        ibs = new ImageButton.ImageButtonStyle();
+        ibs.down = new TextureRegionDrawable(game.media.getBattleUITextureAtlas().findRegion
+                ("b1down"));
+        ibs.up = new TextureRegionDrawable(game.media.getBattleUITextureAtlas().findRegion
+                ("b1up"));
+        ImageButton ib = new ImageButton(ibs);
+        ib.setWidth(52);ib.setHeight(64);
+        ib.setPosition(0, 64);
+        ib.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                indicatorHeroPos++;
+                switch (team.size) {
+                    case 3:
+                        if (indicatorHeroPos > 2) indicatorHeroPos = 0;
+                        break;
+                    case 2:
+                        if (indicatorHeroPos > 1) indicatorHeroPos = 0;
+                        break;
+                    default:
+                        if (indicatorHeroPos > 0) indicatorHeroPos = 0;
+                        break;
+                }
+                chosenTeamMonster = BatPos.positions[indicatorHeroPos];
+                changeIndicatorPosition(true, chosenTeamMonster);
+                System.out.println(chosenTeamMonster);
+            }
+        });
+        battleButtons.put("indHeroUp", ib);
+
+        ibs = new ImageButton.ImageButtonStyle();
+        ibs.down = new TextureRegionDrawable(game.media.getBattleUITextureAtlas().findRegion
+                ("b2down"));
+        ibs.up = new TextureRegionDrawable(game.media.getBattleUITextureAtlas().findRegion
+                ("b2up"));
+        ib = new ImageButton(ibs);
+        ib.setWidth(52);ib.setHeight(64);
+        ib.setPosition(0, 0);
+        ib.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                indicatorHeroPos--;
+                if (indicatorHeroPos < 0) {
+                    switch (team.size) {
+                        case 3:
+                            indicatorHeroPos = 2;
+                            break;
+                        case 2:
+                            indicatorHeroPos = 1;
+                            break;
+                        default:
+                            indicatorHeroPos = 0;
+                            break;
+                    }
+                }
+                chosenTeamMonster = BatPos.positions[indicatorHeroPos];
+                changeIndicatorPosition(true, chosenTeamMonster);
+                System.out.println(chosenTeamMonster);
+            }
+        });
+        battleButtons.put("indHeroDown", ib);
+
+        // Opponent Indicator
+        ibs = new ImageButton.ImageButtonStyle();
+        ibs.down = new TextureRegionDrawable(game.media.getBattleUITextureAtlas().findRegion
+                ("b3down"));
+        ibs.up = new TextureRegionDrawable(game.media.getBattleUITextureAtlas().findRegion
+                ("b3up"));
+        ib = new ImageButton(ibs);
+        ib.setWidth(52);ib.setHeight(64);
+        ib.setPosition(748, 64);
+        ib.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                indicatorOppPos++;
+                switch (opponentTeam.size) {
+                    case 3:
+                        if (indicatorOppPos > 2) indicatorOppPos = 0;
+                        break;
+                    case 2:
+                        if (indicatorOppPos > 1) indicatorOppPos = 0;
+                        break;
+                    default:
+                        if (indicatorOppPos > 0) indicatorOppPos = 0;
+                        break;
+                }
+                chosenTarget = BatPos.positions[indicatorOppPos];
+                changeIndicatorPosition(false, chosenTarget);
+                System.out.println(chosenTarget);
+            }
+        });
+        battleButtons.put("indOppUp", ib);
+
+        ibs = new ImageButton.ImageButtonStyle();
+        ibs.down = new TextureRegionDrawable(game.media.getBattleUITextureAtlas().findRegion
+                ("b4down"));
+        ibs.up = new TextureRegionDrawable(game.media.getBattleUITextureAtlas().findRegion
+                ("b4up"));
+        ib = new ImageButton(ibs);
+        ib.setWidth(52);ib.setHeight(64);
+        ib.setPosition(748, 0);
+        ib.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                indicatorOppPos--;
+                if (indicatorOppPos < 0) {
+                    switch (opponentTeam.size) {
+                        case 3:
+                            indicatorOppPos = 2;
+                            break;
+                        case 2:
+                            indicatorOppPos = 1;
+                            break;
+                        default:
+                            indicatorOppPos = 0;
+                            break;
+                    }
+                }
+                chosenTarget = BatPos.positions[indicatorOppPos];
+                changeIndicatorPosition(false, chosenTarget);
+                System.out.println(chosenTarget);
+            }
+        });
+        battleButtons.put("indOppDown", ib);
+
+        // Left Button
+        ibs = new ImageButton.ImageButtonStyle();
+        ibs.down = new TextureRegionDrawable(game.media.getBattleUITextureAtlas().findRegion
+                ("b7down"));
+        ibs.up = new TextureRegionDrawable(game.media.getBattleUITextureAtlas().findRegion
+                ("b7up"));
+        ib = new ImageButton(ibs);
+        ib.setWidth(152);ib.setHeight(70);
+        ib.setPosition(105, 0);
+        ib.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                // TODO
+                System.out.println("Button 7");
+            }
+        });
+        battleButtons.put("button7", ib);
+
+        // Right Button
+        ibs = new ImageButton.ImageButtonStyle();
+        ibs.down = new TextureRegionDrawable(game.media.getBattleUITextureAtlas().findRegion
+                ("b8down"));
+        ibs.up = new TextureRegionDrawable(game.media.getBattleUITextureAtlas().findRegion
+                ("b8up"));
+        ib = new ImageButton(ibs);
+        ib.setWidth(152);ib.setHeight(70);
+        ib.setPosition(543, 0);
+        ib.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                // TODO
+                System.out.println("Button 8");
+            }
+        });
+        battleButtons.put("button8", ib);
+
+        // Bottom Button
+        ibs = new ImageButton.ImageButtonStyle();
+        ibs.down = new TextureRegionDrawable(game.media.getBattleUITextureAtlas().findRegion
+                ("b9down"));
+        ibs.up = new TextureRegionDrawable(game.media.getBattleUITextureAtlas().findRegion
+                ("b9up"));
+        ib = new ImageButton(ibs);
+        ib.setWidth(364);ib.setHeight(32);
+        ib.setPosition(400, 0,Align.bottom);
+        ib.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                // TODO
+                System.out.println("Button 9");
+            }
+        });
+        battleButtons.put("button9", ib);
+
+        // Bottom Button
+        ibs = new ImageButton.ImageButtonStyle();
+        ibs.down = new TextureRegionDrawable(game.media.getBattleUITextureAtlas().findRegion
+                ("b10down"));
+        ibs.up = new TextureRegionDrawable(game.media.getBattleUITextureAtlas().findRegion
+                ("b10up"));
+        ib = new ImageButton(ibs);
+        ib.setWidth(284);ib.setHeight(36);
+        ib.setPosition(400, 34, Align.bottom);
+        ib.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                // TODO
+                System.out.println("Button 10");
+            }
+        });
+        battleButtons.put("button10", ib);
+
+        // Button 5
+        ibs = new ImageButton.ImageButtonStyle();
+        ibs.down = new TextureRegionDrawable(game.media.getBattleUITextureAtlas().findRegion
+                ("b5down"));
+        ibs.up = new TextureRegionDrawable(game.media.getBattleUITextureAtlas().findRegion
+                ("b5up"));
+        ib = new ImageButton(ibs);
+        ib.setWidth(60);ib.setHeight(72);
+        ib.setPosition(60, 0);
+        ib.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                // TODO
+                System.out.println("Button 5");
+            }
+        });
+        battleButtons.put("button5", ib);
+
+        for(String s : battleButtons.keys()) battleActionMenu.addActor(battleButtons.get(s));
+    }
+
+    public void changeIndicatorPosition(boolean herosTeam, int pos) {
+        if(herosTeam) {
+            switch(pos) {
+                case 2: indicatorHero.setPosition(IndPos.HERO_TOP.x, IndPos.HERO_TOP.y, Align.center);break;
+                case 1: indicatorHero.setPosition(IndPos.HERO_BOT.x, IndPos.HERO_BOT.y, Align.center);break;
+                default: indicatorHero.setPosition(IndPos.HERO_MID.x, IndPos.HERO_MID.y, Align.center);break;
+            }
+            activateButton(pos);
+        } else {
+            switch(pos) {
+                case 2:
+                    indicatorOpp.setPosition(IndPos.OPPO_TOP.x, IndPos.OPPO_TOP.y, Align.center);
+                    break;
+                case 1:
+                    indicatorOpp.setPosition(IndPos.OPPO_BOT.x, IndPos.OPPO_BOT.y, Align.center);
+                    break;
+                default:
+                    indicatorOpp.setPosition(IndPos.OPPO_MID.x, IndPos.OPPO_MID.y, Align.center);
+                    break;
+            }
+        }
+    }
 
     /* ..................................................................... GETTERS & SETTERS .. */
 }

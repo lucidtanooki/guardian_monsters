@@ -41,104 +41,65 @@ import org.limbusdev.monsterworld.utils.GlobalSettings;
 public class BattleHUD {
 
     /* ............................................................................ ATTRIBUTES .. */
+    private final OutdoorGameWorldScreen gameScreen;
+    private final MonsterWorld game;
 
-    /**
-     * Possible Indicator positions
-     */
-    final static class IndPos {
-        private static IntVector2 OPPO_TOP = new IntVector2(616, 340);
-        private static IntVector2 OPPO_MID = new IntVector2(672, 304);
-        private static IntVector2 OPPO_BOT = new IntVector2(728, 268);
-        private static IntVector2 HERO_TOP = new IntVector2(184, 340);
-        private static IntVector2 HERO_MID = new IntVector2(128, 304);
-        private static IntVector2 HERO_BOT = new IntVector2(74, 268);
-    }
-
-    /**
-     * Positions on the Battle Field
-     */
-    final static class BatPos {
-        private static int HERO_MID = 0;    // Middle Position on the left
-        private static int HERO_TOP = 2;
-        private static int HERO_BOT = 1;
-        private static int OPPO_MID = 3;    // Middle Position on the right
-        private static int OPPO_TOP = 5;
-        private static int OPPO_BOT = 4;
-        private static int MID = 0;
-        private static int TOP = 2;
-        private static int BOT = 1;
-        private static int[] positions = {0,2,1};
-    }
-
-    private Skin skin;
     public  Stage stage;
+    private Skin skin;
     private MonsterInformation monsterInformation;
 
+    // Groups
     private final Group battleActionMenu, topLevelMenu;
+    private VerticalGroup attacksGroup; // Group of attack buttons
+
+    // Buttons
     private final ImageButton fightButton, fleeButton, battleMenuButton, bagButton, backButton;
-    private final Image bg;
-    private final Array<Button> oppMonButtons;
+    private Array<Button> oppMonButtons;
+    private ArrayMap<String,Button> battleButtons;
+
+    // Labels
     private final Label infoLabel;
-    private final Array<Label> monsterLabels, monsterLvls;
-    private final Array<Image> uiRings, uiRingBgs, uiHudBgs, uiNameSigns;
-    private final Array<ProgressBar> HPbars, MPbars, RecovBars, ExpBars;
-    private final ArrayMap<String,Button> battleButtons;
+    private Array<Label> monsterLabels, monsterLvls;
+
+    // Images
+    private ArrayMap<String,Array<Image>> monScreenElems;
     private final Image indicatorOpp, indicatorHero;
+    private Image bg;
+    private final Image attBgImg;
+
+    // ProgressBars
+    private ArrayMap<String,Array<ProgressBar>> progressBars;
+
+    // Scroll Panes
+    private final ScrollPane attacksPane;
+
+
+    // Not Scene2D related
     private Array<Monster> team, opponentTeam;
-    private float elapsedTime=0;
     private Array<AttackAction> battleQueue;
     private Array<Long> waitingSince;
     private Array<Boolean> monsterReady;
+    private float elapsedTime=0;
     private boolean battleOver=false;
 
-    // Attack Scroll Pane
-    private final ScrollPane attacksPane;
-    private VerticalGroup attacksGroup;
-    private final Image attBgImg;
-
-    private final OutdoorGameWorldScreen gameScreen;
-    private final MonsterWorld game;
     private int chosenTarget=BatPos.MID;
     private int chosenTeamMonster=BatPos.MID;
 
     private int indicatorOppPos=0;
     private int indicatorHeroPos=0;
 
-    // Time
-    private long lastActionTime = 0;
-    private boolean waiting = false;
     /* ........................................................................... CONSTRUCTOR .. */
     public BattleHUD(final MonsterWorld game, final OutdoorGameWorldScreen gameScreen) {
         this.game = game;
         this.gameScreen = gameScreen;
         this.monsterInformation = MonsterInformation.getInstance();
-        this.battleButtons = new ArrayMap<String, Button>();
-        this.monsterLabels = new Array<Label>();
-        this.monsterLvls = new Array<Label>();
-        this.HPbars = new Array<ProgressBar>();
-        this.MPbars = new Array<ProgressBar>();
-        this.uiRings = new Array<Image>();
-        this.uiRingBgs = new Array<Image>();
-        this.uiHudBgs = new Array<Image>();
-        this.uiNameSigns = new Array<Image>();
-        this.RecovBars = new Array<ProgressBar>();
-        this.ExpBars = new Array<ProgressBar>();
-        this.oppMonButtons = new Array<Button>();
-        this.battleQueue = new Array<AttackAction>();
-        this.waitingSince = new Array<Long>();
-        for(int i=0;i<6;i++) waitingSince.add(new Long(0));
 
-        this.opponentTeam = new Array<Monster>();
-
-        this.monsterReady = new Array<Boolean>();
-        for(int i=0;i<6;i++) monsterReady.add(new Boolean(true));
+        initializeAttributes();
 
         // Scene2D
-        FitViewport fit = new FitViewport(
-                GlobalSettings.RESOLUTION_X, GlobalSettings.RESOLUTION_Y);
-
+        FitViewport fit = new FitViewport(GlobalSettings.RESOLUTION_X, GlobalSettings.RESOLUTION_Y);
         this.stage = new Stage(fit);
-        this.skin = game.media.skin;for(int i=0;i<6;i++) waitingSince.add(new Long(0));
+        this.skin = game.media.skin;
 
         this.bg = new Image(game.media.getBattleUITextureAtlas().findRegion("bg"));
         bg.setPosition(0, 0);
@@ -182,24 +143,22 @@ public class BattleHUD {
 
         setUpUI();
 
+        for(String key : progressBars.keys())
+            for(ProgressBar p : progressBars.get(key)) stage.addActor(p);
+        for(String key : monScreenElems.keys())
+            for(Image i : monScreenElems.get(key))
+                stage.addActor(i);
+        for(Label l : monsterLabels) stage.addActor(l);
+
+        stage.addActor(indicatorOpp);
+        stage.addActor(indicatorHero);
+        for(Label l : monsterLvls) stage.addActor(l);
+
 
         List attackList = new List(skin, "default");
         attackList.setHeight(200);
 
         // Buttons ............................................................................. END
-
-        for(Image i : uiNameSigns) stage.addActor(i);
-        for(Label l : monsterLabels) stage.addActor(l);
-        for(Image i : uiHudBgs) stage.addActor(i);
-        for(ProgressBar p : HPbars) stage.addActor(p);
-        for(ProgressBar p : MPbars) stage.addActor(p);
-        for(ProgressBar p : ExpBars) stage.addActor(p);
-        for(ProgressBar p : RecovBars) stage.addActor(p);
-        stage.addActor(indicatorOpp);
-        stage.addActor(indicatorHero);
-        for(Image i : uiRingBgs) stage.addActor(i);
-        for(Image i : uiRings) stage.addActor(i);
-        for(Label l : monsterLvls) stage.addActor(l);
 
         reset();
     }
@@ -218,8 +177,8 @@ public class BattleHUD {
         monsterLabels.get(position).setText(
                 monsterInformation.monsterNames.get(monster.ID - 1));
         monsterLabels.get(position).setVisible(true);
-        ExpBars.get(position).setValue(monster.getExpPerc());
-        HPbars.get(position).setValue(monster.HP/1.f/monster.HPfull*100);
+        progressBars.get("EXP").get(position).setValue(monster.getExpPerc());
+        progressBars.get("HP").get(position).setValue(monster.HP/1.f/monster.HPfull*100);
         if(team)
             monsterLabels.get(position).addListener(new ClickListener() {
                 @Override
@@ -279,7 +238,7 @@ public class BattleHUD {
                 break;
         }
         for(Button b : oppMonButtons) stage.addActor(b);
-        for(ProgressBar b : RecovBars) b.setValue(100);
+        for(ProgressBar b : progressBars.get("Recov")) b.setValue(100);
 
         chosenTarget=1;chosenTeamMonster=1;
     }
@@ -305,7 +264,7 @@ public class BattleHUD {
                 }
 
                 // Update Waiting Bar
-                RecovBars.get(i).setValue(TimeUtils.timeSinceMillis(waitingSince.get(i))/(1f*team
+                progressBars.get("Recov").get(i).setValue(TimeUtils.timeSinceMillis(waitingSince.get(i))/(1f*team
                         .get
                         (i).recovTime) * 100f);
             }
@@ -314,19 +273,29 @@ public class BattleHUD {
             case 3:
                 monsterLvls.get(BatPos.HERO_TOP).setText(Integer.toString(team.get(BatPos
                         .HERO_TOP).level));
-                ExpBars.get(BatPos.HERO_TOP).setValue(team.get(BatPos.HERO_TOP).getExpPerc());
+                progressBars.get("EXP").get(BatPos.HERO_TOP).setValue(team.get(BatPos.HERO_TOP)
+                        .getExpPerc());
             case 2:
                 monsterLvls.get(BatPos.HERO_BOT).setText(Integer.toString(team.get(BatPos
                         .HERO_BOT).level));
-                ExpBars.get(BatPos.HERO_BOT).setValue(team.get(BatPos.HERO_BOT).getExpPerc());
+                progressBars.get("EXP").get(BatPos.HERO_BOT).setValue(team.get(BatPos.HERO_BOT)
+                        .getExpPerc());
             default:
                 monsterLvls.get(BatPos.HERO_MID).setText(Integer.toString(team.get(BatPos
                         .HERO_MID).level));
-                ExpBars.get(BatPos.HERO_MID).setValue(team.get(BatPos.HERO_MID).getExpPerc());
+                progressBars.get("EXP").get(BatPos.HERO_MID).setValue(team.get(BatPos.HERO_MID)
+                        .getExpPerc());
                 break;
         }
     }
 
+    /**
+     * Setting up HUD elements:
+     *  team and opponent information screens
+     *  labels
+     *  levels
+     *  progressbars like HP, MP and so on
+     */
     public void setUpUI() {
 
         // Hero Team ###############################################################################
@@ -341,10 +310,8 @@ public class BattleHUD {
 
 
         for(Label l : monsterLabels) l.setVisible(false);
-        for(ProgressBar p : HPbars) p.setVisible(false);
-        for(ProgressBar p : MPbars) p.setVisible(false);
-        for(ProgressBar p : RecovBars) p.setVisible(false);
-        for(ProgressBar p : ExpBars) p.setVisible(false);
+        for(String key : progressBars.keys())
+            for(ProgressBar p : progressBars.get(key)) p.setVisible(false);
         for(Label p : monsterLvls) p.setVisible(false);
 
     }
@@ -377,27 +344,27 @@ public class BattleHUD {
         hudEl.setVisible(true);
         hudEl.setHeight(22);
         hudEl.setWidth(78);
-        uiHudBgs.add(hudEl);
+        monScreenElems.get("hudBgs").add(hudEl);
         hudEl = new Image();
         hudEl.setDrawable(skin, "ring-bg");
         hudEl.setPosition(x + 112, y + 1, Align.center);
         hudEl.setVisible(true);
         hudEl.setHeight(24);
         hudEl.setWidth(24);
-        uiRingBgs.add(hudEl);
+        monScreenElems.get("ringBgs").add(hudEl);
         hudEl = new Image();
         hudEl.setDrawable(skin, "ring");
         hudEl.setPosition(x + 108, y - 3, Align.center);
         hudEl.setVisible(true);
         hudEl.setHeight(32);
         hudEl.setWidth(32);
-        uiRings.add(hudEl);
+        monScreenElems.get("rings").add(hudEl);
         hudEl = new Image();
         hudEl.setDrawable(skin, "hud-bg3");
         hudEl.setPosition(x-14, y+5);
         hudEl.setWidth(200);
         hudEl.setHeight(22);
-        uiNameSigns.add(hudEl);
+        monScreenElems.get("nameSigns").add(hudEl);
 
 
         ProgressBar mp, hp, rp, ep;
@@ -438,10 +405,10 @@ public class BattleHUD {
         ep.setAnimateInterpolation(Interpolation.linear);
         ep.setAnimateDuration(.1f);
 
-        HPbars.add(hp);
-        MPbars.add(mp);
-        RecovBars.add(rp);
-        ExpBars.add(ep);
+        progressBars.get("HP").add(hp);
+        progressBars.get("MP").add(mp);
+        progressBars.get("Recov").add(rp);
+        progressBars.get("EXP").add(ep);
 
         ls.font = skin.getFont("white");
         Label lvl = new Label("0", ls);
@@ -480,31 +447,30 @@ public class BattleHUD {
 
     public void reset() {
         for(Label l : monsterLabels) l.setVisible(false);
-        for(ProgressBar p : HPbars) p.setVisible(false);
-        for(ProgressBar p : MPbars) p.setVisible(false);
-        for(ProgressBar p : RecovBars) p.setVisible(false);
-        for(ProgressBar p : ExpBars) p.setVisible(false);
-        for(Image i : uiNameSigns) i.setVisible(false);
-        for(Image i : uiHudBgs) i.setVisible(false);
-        for(Image i : uiRingBgs) i.setVisible(false);
-        for(Image i : uiRings) i.setVisible(false);
+
+        for(String key : progressBars.keys())
+            for(ProgressBar p : progressBars.get(key)) p.setVisible(false);
+        for(String key : monScreenElems.keys())
+            for(Image i : monScreenElems.get(key))
+                i.setVisible(false);
         for(Label l : monsterLvls) l.setVisible(false);
         oppMonButtons.clear();
         this.chosenTarget = BatPos.MID;
         this.chosenTeamMonster = BatPos.MID;
     }
 
+    /**
+     * Initializes the HUD for the given battle field position
+     * @param monster
+     * @param position
+     */
     public void activateMonsterHUD(Monster monster, final int position) {
         monsterLvls.get(position).setText(Integer.toString(monster.level));
         monsterLvls.get(position).setVisible(true);
-        HPbars.get(position).setVisible(true);
-        MPbars.get(position).setVisible(true);
-        RecovBars.get(position).setVisible(true);
-        ExpBars.get(position).setVisible(true);
-        uiRingBgs.get(position).setVisible(true);
-        uiHudBgs.get(position).setVisible(true);
-        uiNameSigns.get(position).setVisible(true);
-        uiRings.get(position).setVisible(true);
+        for(String key : progressBars.keys())
+            progressBars.get(key).get(position).setVisible(true);
+        for(String key : monScreenElems.keys())
+            monScreenElems.get(key).get(position).setVisible(true);
     }
 
     /**
@@ -939,7 +905,8 @@ public class BattleHUD {
                     monsterReady.set(chosenTeamMonster, false);
 
                 /* Update Health Bar */
-                    HPbars.get(chosenTarget + 3).setValue(100 * opponentTeam.get(chosenTarget).HP
+                    progressBars.get("HP").get(chosenTarget + 3).setValue(100 * opponentTeam.get
+                            (chosenTarget).HP
                             / opponentTeam.get(chosenTarget).HPfull);
 
                     // Handle Attack
@@ -982,5 +949,69 @@ public class BattleHUD {
         attacksGroup.addActor(new TextButton("6", tbs));
     }
 
+    /**
+     * Initializes Attributes and especially Arrays and Maps
+     */
+    public void initializeAttributes() {
+        this.progressBars = new ArrayMap<String, Array<ProgressBar>>();
+        progressBars.put("HP", new Array<ProgressBar>());
+        progressBars.put("MP", new Array<ProgressBar>());
+        progressBars.put("Recov", new Array<ProgressBar>());
+        progressBars.put("EXP", new Array<ProgressBar>());
+
+        this.monScreenElems = new ArrayMap<String, Array<Image>>();
+        this.monScreenElems.put("nameSigns", new Array<Image>());
+        this.monScreenElems.put("hudBgs", new Array<Image>());
+        this.monScreenElems.put("rings", new Array<Image>());
+        this.monScreenElems.put("ringBgs", new Array<Image>());
+
+        this.battleButtons = new ArrayMap<String, Button>();
+        this.monsterLabels = new Array<Label>();
+        this.monsterLvls = new Array<Label>();
+
+        this.oppMonButtons = new Array<Button>();
+        this.battleQueue = new Array<AttackAction>();
+        this.waitingSince = new Array<Long>();
+        for(int i=0;i<6;i++) waitingSince.add(new Long(0));
+
+
+        this.opponentTeam = new Array<Monster>();
+
+        this.monsterReady = new Array<Boolean>();
+        for(int i=0;i<6;i++) monsterReady.add(new Boolean(true));
+    }
+
     /* ..................................................................... GETTERS & SETTERS .. */
+
+    /* ......................................................................... INNER CLASSES .. */
+    /**
+     * Possible Indicator coordinates
+     */
+    final static class IndPos {
+        private static IntVector2 OPPO_TOP = new IntVector2(616, 340);
+        private static IntVector2 OPPO_MID = new IntVector2(672, 304);
+        private static IntVector2 OPPO_BOT = new IntVector2(728, 268);
+        private static IntVector2 HERO_TOP = new IntVector2(184, 340);
+        private static IntVector2 HERO_MID = new IntVector2(128, 304);
+        private static IntVector2 HERO_BOT = new IntVector2(74, 268);
+    }
+
+    /**
+     * Positions on the Battle Field
+     */
+    final static class BatPos {
+        private static int HERO_MID = 0;    // Middle Position on the left
+        private static int HERO_TOP = 2;
+        private static int HERO_BOT = 1;
+        private static int OPPO_MID = 3;    // Middle Position on the right
+        private static int OPPO_TOP = 5;
+        private static int OPPO_BOT = 4;
+        private static int MID = 0;
+        private static int TOP = 2;
+        private static int BOT = 1;
+        private static int[] positions = {0,2,1};
+        private static int convertFromCounterToPosition(int counter) {
+            return positions[counter];
+        }
+    }
 }

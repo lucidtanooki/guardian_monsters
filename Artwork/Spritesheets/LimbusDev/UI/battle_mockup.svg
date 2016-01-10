@@ -37,16 +37,16 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.5"
-     inkscape:cx="229.37787"
-     inkscape:cy="-385.75565"
+     inkscape:zoom="0.70710678"
+     inkscape:cx="-458.39747"
+     inkscape:cy="136.77987"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
      inkscape:window-width="1366"
      inkscape:window-height="744"
      inkscape:window-x="0"
-     inkscape:window-y="24"
+     inkscape:window-y="131"
      inkscape:window-maximized="1">
     <inkscape:grid
        type="xygrid"
@@ -64,7 +64,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -675,5 +675,11 @@
        inkscape:export-filename="/home/georg/Entwicklung/Java/libGDX/FriendsWithMonsters/Artwork/Spritesheets/LimbusDev/UI/b12.down.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
+    <path
+       style="color:#000000;fill:#2e3436;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:4;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       d="m -693.59502,929.33989 504,0 c 2.216,0 3.36933,1.87564 4,4 l 38,128.00001 c 0.63067,2.1243 -1.784,4 -4,4 l -580,0 c -2.216,0 -4.63067,-1.8757 -4,-4 l 38,-128.00001 c 0.63067,-2.12436 1.784,-4 4,-4 z"
+       id="rect3085"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="sssssssss" />
   </g>
 </svg>

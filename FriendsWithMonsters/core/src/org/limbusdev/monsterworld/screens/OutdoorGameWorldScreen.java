@@ -67,6 +67,7 @@ public class OutdoorGameWorldScreen implements Screen {
         this.batch = new SpriteBatch();
         setUpInputProcessor();
         gameArea.playMusic();
+        ECS.hud.show();
     }
 
     /**
@@ -130,6 +131,7 @@ public class OutdoorGameWorldScreen implements Screen {
     @Override
     public void hide() {
         gameArea.stopMusic();
+        ECS.hud.hide();
     }
 
     /**

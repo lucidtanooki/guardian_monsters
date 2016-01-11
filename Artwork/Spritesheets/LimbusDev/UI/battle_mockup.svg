@@ -38,15 +38,15 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.70710678"
-     inkscape:cx="-458.39747"
-     inkscape:cy="136.77987"
+     inkscape:cx="477.47831"
+     inkscape:cy="741.17572"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
      inkscape:window-width="1366"
      inkscape:window-height="744"
      inkscape:window-x="0"
-     inkscape:window-y="131"
+     inkscape:window-y="24"
      inkscape:window-maximized="1">
     <inkscape:grid
        type="xygrid"
@@ -681,5 +681,24 @@
        id="rect3085"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="sssssssss" />
+    <rect
+       style="color:#000000;fill:#eeeeec;fill-opacity:0.75294118;fill-rule:nonzero;stroke:none;stroke-width:4;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect3086"
+       width="400"
+       height="30"
+       x="72"
+       y="-320"
+       transform="translate(0,572.36218)"
+       ry="2"
+       rx="2" />
+    <rect
+       rx="2"
+       ry="2"
+       y="248.36218"
+       x="72"
+       height="30"
+       width="400"
+       id="rect3860"
+       style="color:#000000;fill:#eeeeec;fill-opacity:0.75294118;fill-rule:nonzero;stroke:none;stroke-width:4;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
   </g>
 </svg>

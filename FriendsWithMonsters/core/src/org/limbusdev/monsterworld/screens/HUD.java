@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -39,6 +41,7 @@ public class HUD {
     public final MonsterWorld game;
     public final SaveGameManager saveGameManager;
     public final Entity hero;
+    public Image blackCourtain;
     
     /* ........................................................................... CONSTRUCTOR .. */
     public HUD(final BattleScreen battleScreen, final MonsterWorld game,
@@ -141,6 +144,13 @@ public class HUD {
         });
         // Buttons ............................................................................. END
 
+        // Images ............................................................................ START
+        this.blackCourtain = new Image(game.media.getBattleUITextureAtlas().findRegion("black"));
+        this.blackCourtain.setWidth(GlobalSettings.RESOLUTION_X);
+        this.blackCourtain.setHeight(GlobalSettings.RESOLUTION_Y);
+        this.blackCourtain.setPosition(0,0);
+        // Images .............................................................................. END
+
         stage.addActor(menuButton);
         stage.addActor(battleButton);
         stage.addActor(titleLabel);
@@ -148,10 +158,15 @@ public class HUD {
         stage.addActor(conversationExitButton);
         stage.addActor(saveButton);
         stage.addActor(quitButton);
+        stage.addActor(blackCourtain);
     }
     /* ............................................................................... METHODS .. */
     public void draw() {
         this.stage.draw();
+    }
+
+    public void update(float delta) {
+        stage.act(delta);
     }
     
     /* ..................................................................... GETTERS & SETTERS .. */
@@ -170,5 +185,13 @@ public class HUD {
         this.titleLabel.setText(title);
         this.titleLabel.setVisible(true);
         this.conversationExitButton.setVisible(true);
+    }
+
+    public void show() {
+        blackCourtain.addAction(Actions.sequence(Actions.fadeOut(1), Actions.visible(false)));
+    }
+
+    public void hide() {
+        blackCourtain.addAction(Actions.sequence(Actions.visible(true),Actions.fadeIn(1)));
     }
 }

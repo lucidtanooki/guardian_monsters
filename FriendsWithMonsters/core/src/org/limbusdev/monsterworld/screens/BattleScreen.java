@@ -12,7 +12,6 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -34,10 +33,8 @@ public class BattleScreen implements Screen {
     private ShapeRenderer shpRend;
     private BitmapFont font;
     private BattleHUD battleHUD;
-    private Array<TextureRegion> teamSprites, oppTeamSprites;
     private Texture background;
     private MediaManager media;
-    private float elapsedTime=0;
     private boolean initialized=false;
     /* ........................................................................... CONSTRUCTOR .. */
 
@@ -46,8 +43,6 @@ public class BattleScreen implements Screen {
         setUpRendering();
         setUpInputProcessor();
         this.media = media;
-        this.teamSprites = new Array<TextureRegion>();
-        this.oppTeamSprites = new Array<TextureRegion>();
         this.background = media.getBackgroundTexture(0);
     }
     /* ............................................................................... METHODS .. */
@@ -70,35 +65,6 @@ public class BattleScreen implements Screen {
     public void init (TeamComponent team, TeamComponent opponentTeam) {
         this.initialized = true;
 
-        // Hero Team
-        TextureRegion monsterSprite = media.getMonsterSprite(team.monsters.get(0).ID);
-        if(!monsterSprite.isFlipX()) monsterSprite.flip(true, false);
-        this.teamSprites.add(monsterSprite);
-        if(team.monsters.size >= 2) {
-            monsterSprite = media.getMonsterSprite(team.monsters.get(1).ID);
-            if(!monsterSprite.isFlipX()) monsterSprite.flip(true, false);
-            this.teamSprites.add(monsterSprite);
-        }
-        if(team.monsters.size == 3) {
-            monsterSprite = media.getMonsterSprite(team.monsters.get(2).ID);
-            if(!monsterSprite.isFlipX()) monsterSprite.flip(true, false);
-            this.teamSprites.add(monsterSprite);
-        }
-
-        // Opponent Team
-        monsterSprite = media.getMonsterSprite(opponentTeam.monsters.get(0).ID);
-        this.oppTeamSprites.add(monsterSprite);
-        System.out.println(oppTeamSprites.size);
-        if(opponentTeam.monsters.size >=2) {
-            monsterSprite = media.getMonsterSprite(opponentTeam.monsters.get(1).ID);
-            this.oppTeamSprites.add(monsterSprite);
-        }
-        System.out.println(oppTeamSprites.size);
-        if(opponentTeam.monsters.size == 3) {
-            monsterSprite = media.getMonsterSprite(opponentTeam.monsters.get(2).ID);
-            this.oppTeamSprites.add(monsterSprite);
-        }
-        System.out.println(oppTeamSprites.size);
         this.battleHUD.init(team, opponentTeam);
     }
 
@@ -109,7 +75,7 @@ public class BattleScreen implements Screen {
      */
     @Override
     public void render(float delta) {
-        elapsedTime += 4*delta;
+
         // Clear screen
         Gdx.gl.glClearColor(.3f, .3f, .3f, 1);
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
@@ -118,23 +84,6 @@ public class BattleScreen implements Screen {
         viewport.apply();
         batch.begin();
         batch.draw(background, 0, 0);
-
-        // Hero Team
-        if(teamSprites.size == 3)
-            batch.draw(teamSprites.get(2), 120,212 + 2*MathUtils.sin(elapsedTime),128,128);
-        batch.draw(teamSprites.get(0), 64,176 + 2 * MathUtils.cos(elapsedTime),128,128);
-        if(teamSprites.size >= 2)
-            batch.draw(teamSprites.get(1), 8,140 + 2 * MathUtils.sin(elapsedTime),128,128);
-
-        // Opponent Team
-        if(oppTeamSprites.size == 3)
-            batch.draw(oppTeamSprites.get(2), 800-120-128,212 + 2*MathUtils.cos(elapsedTime),
-                    128,128);
-        batch.draw(oppTeamSprites.get(0), 800-64-128,176 + 2*MathUtils.sin(elapsedTime),
-                128,128);
-        if(oppTeamSprites.size >= 2)
-            batch.draw(oppTeamSprites.get(1), 800-8-128,140 + 2*MathUtils.cos(elapsedTime),
-                    128,128);
 
         batch.end();
 
@@ -179,8 +128,6 @@ public class BattleScreen implements Screen {
     @Override
     public void hide() {
         initialized = false;
-        this.oppTeamSprites.clear();
-        this.teamSprites.clear();
         this.battleHUD.hide();
     }
 

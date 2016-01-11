@@ -32,6 +32,7 @@ import org.limbusdev.monsterworld.model.AttackAction;
 import org.limbusdev.monsterworld.model.BattlePositionQueue;
 import org.limbusdev.monsterworld.model.Monster;
 import org.limbusdev.monsterworld.model.MonsterInformation;
+import org.limbusdev.monsterworld.utils.DebugOutput;
 import org.limbusdev.monsterworld.utils.GlobalSettings;
 
 
@@ -151,11 +152,24 @@ public class BattleHUD {
      * @param opponentTeam
      */
     public void init(TeamComponent team, TeamComponent opponentTeam) {
-        this.team = new Array<Monster>();
+
+        this.heroPosQueue = new BattlePositionQueue(team.monsters.size);
+        this.opponentPosQueue = new BattlePositionQueue(opponentTeam.monsters.size);
+
+        this.team = team.monsters;
+
+        changeIndicatorPosition(true, BatPos.MID);
+        changeIndicatorPosition(false, BatPos.MID);
 
         // Choose fit monsters for battle
-        for(Monster m : team.monsters)
-            if(m.HP > 0)  this.team.add(m);
+        int i=0;
+        for(Monster m : team.monsters) {
+            if (m.HP <= 0) {
+                this.monsterKO.set(i, true);
+                kickOutMonster(i);
+            }
+            i++;
+        }
 
         this.opponentTeam = opponentTeam.monsters;
         for(String key : topLevelMenuButtons.keys()) topLevelMenuButtons.get(key).setVisible(true);
@@ -179,12 +193,7 @@ public class BattleHUD {
 
         for(ProgressBar b : progressBars.get("Recov")) b.setValue(100);
 
-        this.heroPosQueue = new BattlePositionQueue(this.team.size);
-        this.opponentPosQueue = new BattlePositionQueue(this.opponentTeam.size);
-
         chosenTarget=0;chosenTeamMonster=0;
-        changeIndicatorPosition(true, BatPos.MID);
-        changeIndicatorPosition(false, BatPos.MID);
 
         initMonsterImages();
 
@@ -591,6 +600,8 @@ public class BattleHUD {
             for(Image i : monScreenElems.get(key))
                 i.setVisible(false);
         for(Label l : monsterLvls) l.setVisible(false);
+
+        for(Integer key : monsterImgs.keys()) monsterImgs.get(key).setVisible(false);
 
         this.chosenTarget = BatPos.MID;
         this.chosenTeamMonster = BatPos.MID;
@@ -1005,8 +1016,17 @@ public class BattleHUD {
             tb.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    System.out.println("Attack 1 by Team Member " + chosenTeamMonster + " at " +
-                            chosenTarget);
+
+                    // ----------------------------------------------------------------------- DEBUG
+                    DebugOutput.printAttack(
+                            team.get(chosenTeamMonster),
+                            chosenTeamMonster,
+                            opponentTeam.get(chosenTarget),
+                            chosenTarget,
+                            team.get(chosenTeamMonster).attacks.get(0),
+                            opponentTeam.get(chosenTarget).HP
+                                    - team.get(chosenTeamMonster).attacks.get(0).damage);
+                    // ----------------------------------------------------------------------- DEBUG
 
                 /* Calculate Damage */
                     if (opponentTeam.get(chosenTarget).HP
@@ -1048,10 +1068,10 @@ public class BattleHUD {
 
                     if (allKO) game.setScreen(gameScreen);
 
-                    attackScrollPaneBg.addAction(Actions.sequence(Actions.fadeOut(.3f), Actions.visible
-                            (false)));
-                    attacksPane.addAction(Actions.sequence(Actions.fadeOut(.3f), Actions.visible
-                            (false)));
+                    attackScrollPaneBg.addAction(
+                            Actions.sequence(Actions.fadeOut(.3f), Actions.visible(false)));
+                    attacksPane.addAction(Actions.sequence(Actions.fadeOut(.3f),
+                            Actions.visible(false)));
                 }
             });
         }
@@ -1104,6 +1124,11 @@ public class BattleHUD {
         for(int i=0;i<6;i++) monsterKO.add(new Boolean(false));
     }
 
+    /**
+     * Removes the monster with the given position on the battle field by setting it KO and
+     * fading out the monster sprite and monsters status UI
+     * @param pos   position on which the beaten monster was
+     */
     public void kickOutMonster(int pos) {
         monsterImgs.get(pos).addAction(
                 Actions.sequence(Actions.alpha(0, 2), Actions.visible(false)));
@@ -1119,8 +1144,17 @@ public class BattleHUD {
                 Actions.sequence(Actions.alpha(0, 2), Actions.visible(false)));
         monsterKO.set(pos, true);
         System.out.println("Killed: " + pos);
-        if(pos<3)System.out.println("KILL QUEUE: " + heroPosQueue.remove(pos));
-        if(pos>2)System.out.println("KILL QUEUE: " + opponentPosQueue.remove(pos-3));
+        if(pos<3) {
+            int p = heroPosQueue.remove(pos);
+            System.out.println("KILL QUEUE: " + p);
+            changeIndicatorPosition(true, p);
+        }
+        if(pos>2) {
+            int p =  opponentPosQueue.remove(pos-3);
+            System.out.println("KILL QUEUE: " + p);
+            changeIndicatorPosition(false, p);
+        }
+
     }
 
 

@@ -28,6 +28,7 @@ public class BattlePositionQueue {
         if(!positions.contains(new Integer(BatPos.convertFromCounterToPosition(pos)), false))
             return BatPos.convertFromCounterToPosition(positions.get(pointer));
         positions.removeValue(new Integer(BatPos.convertFromCounterToPosition(pos)), false);
+        if(positions.size<=0) return -1;
         pointer %= positions.size;
         return BatPos.convertFromCounterToPosition(positions.get(pointer));
     }

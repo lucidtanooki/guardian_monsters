@@ -5,84 +5,84 @@ filter: Linear,Linear
 repeat: none
 bg
   rotate: false
-  xy: 1, 831
+  xy: 1, 837
   size: 800, 140
   orig: 800, 140
   offset: 0, 0
   index: -1
 attPane
   rotate: false
-  xy: 1, 693
+  xy: 1, 699
   size: 588, 136
   orig: 588, 136
   offset: 0, 0
   index: -1
-b12.up
+b12.down
   rotate: false
-  xy: 1, 627
+  xy: 1, 633
   size: 542, 64
   orig: 542, 64
   offset: 0, 0
   index: -1
-b12.down
+b12.up
   rotate: false
-  xy: 1, 563
-  size: 542, 62
-  orig: 542, 62
+  xy: 1, 567
+  size: 542, 64
+  orig: 542, 64
   offset: 0, 0
   index: -1
 b13down
   rotate: false
-  xy: 1, 527
+  xy: 1, 531
   size: 400, 34
   orig: 400, 34
   offset: 0, 0
   index: -1
 b13up
   rotate: false
-  xy: 1, 491
+  xy: 1, 495
   size: 400, 34
   orig: 400, 34
   offset: 0, 0
   index: -1
-b9up
+b9down
   rotate: false
-  xy: 1, 455
+  xy: 1, 459
   size: 364, 34
   orig: 364, 34
   offset: 0, 0
   index: -1
-b9down
+b9up
   rotate: false
-  xy: 1, 421
-  size: 364, 32
-  orig: 364, 32
-  offset: 0, 0
-  index: -1
-b10up
-  rotate: false
-  xy: 1, 381
-  size: 284, 38
-  orig: 284, 38
+  xy: 1, 423
+  size: 364, 34
+  orig: 364, 34
   offset: 0, 0
   index: -1
 b10down
   rotate: false
+  xy: 1, 383
+  size: 284, 38
+  orig: 284, 38
+  offset: 0, 0
+  index: -1
+b10up
+  rotate: false
   xy: 1, 343
-  size: 284, 36
-  orig: 284, 36
+  size: 284, 38
+  orig: 284, 38
   offset: 0, 0
   index: -1
 b_bag
   rotate: false
-  xy: 803, 859
+  xy: 803, 865
   size: 148, 112
   orig: 148, 112
   offset: 0, 0
   index: -1
 b_bag_down
   rotate: false
-  xy: 591, 717
+  xy: 591, 723
   size: 148, 112
   orig: 148, 112
   offset: 0, 0
@@ -115,115 +115,122 @@ b_fight_down
   orig: 140, 112
   offset: 0, 0
   index: -1
-b7up
+b7down
   rotate: false
   xy: 151, 155
   size: 152, 72
   orig: 152, 72
   offset: 0, 0
   index: -1
-b7down
+b7up
   rotate: false
-  xy: 403, 491
-  size: 152, 70
-  orig: 152, 70
+  xy: 403, 493
+  size: 152, 72
+  orig: 152, 72
   offset: 0, 0
   index: -1
 b8down
-  rotate: false
-  xy: 367, 419
-  size: 152, 70
-  orig: 152, 70
-  offset: 0, 0
-  index: -1
-b8up
   rotate: false
   xy: 151, 81
   size: 152, 72
   orig: 152, 72
   offset: 0, 0
   index: -1
-b5up
+b8up
   rotate: false
-  xy: 953, 897
-  size: 60, 74
-  orig: 60, 74
+  xy: 143, 7
+  size: 152, 72
+  orig: 152, 72
   offset: 0, 0
   index: -1
 b5down
   rotate: false
-  xy: 741, 757
+  xy: 953, 903
+  size: 60, 74
+  orig: 60, 74
+  offset: 0, 0
+  index: -1
+b5up
+  rotate: false
+  xy: 741, 761
+  size: 60, 74
+  orig: 60, 74
+  offset: 0, 0
+  index: -1
+b6down
+  rotate: false
+  xy: 803, 791
   size: 60, 72
   orig: 60, 72
   offset: 0, 0
   index: -1
 b6up
   rotate: false
-  xy: 803, 785
+  xy: 287, 349
   size: 60, 72
   orig: 60, 72
   offset: 0, 0
   index: -1
-b6down
+b1down
   rotate: false
-  xy: 287, 349
-  size: 60, 70
-  orig: 60, 70
-  offset: 0, 0
-  index: -1
-b1up
-  rotate: false
-  xy: 865, 793
+  xy: 865, 799
   size: 52, 64
   orig: 52, 64
   offset: 0, 0
   index: -1
-b2up
+b1up
   rotate: false
   xy: 293, 283
   size: 52, 64
   orig: 52, 64
   offset: 0, 0
   index: -1
-b3up
-  rotate: false
-  xy: 545, 627
-  size: 52, 64
-  orig: 52, 64
-  offset: 0, 0
-  index: -1
-b1down
-  rotate: false
-  xy: 545, 563
-  size: 52, 62
-  orig: 52, 62
-  offset: 0, 0
-  index: -1
-b4up
-  rotate: false
-  xy: 143, 15
-  size: 52, 64
-  orig: 52, 64
-  offset: 0, 0
-  index: -1
 b2down
   rotate: false
-  xy: 197, 17
-  size: 52, 62
-  orig: 52, 62
+  xy: 545, 633
+  size: 52, 64
+  orig: 52, 64
+  offset: 0, 0
+  index: -1
+b2up
+  rotate: false
+  xy: 545, 567
+  size: 52, 64
+  orig: 52, 64
   offset: 0, 0
   index: -1
 b3down
   rotate: false
-  xy: 251, 17
-  size: 52, 62
-  orig: 52, 62
+  xy: 557, 501
+  size: 52, 64
+  orig: 52, 64
+  offset: 0, 0
+  index: -1
+b3up
+  rotate: false
+  xy: 919, 799
+  size: 52, 64
+  orig: 52, 64
   offset: 0, 0
   index: -1
 b4down
   rotate: false
-  xy: 557, 499
-  size: 52, 62
-  orig: 52, 62
+  xy: 599, 657
+  size: 52, 64
+  orig: 52, 64
+  offset: 0, 0
+  index: -1
+b4up
+  rotate: false
+  xy: 599, 591
+  size: 52, 64
+  orig: 52, 64
+  offset: 0, 0
+  index: -1
+black
+  rotate: false
+  xy: 1015, 969
+  size: 8, 8
+  orig: 8, 8
   offset: 0, 0
   index: -1

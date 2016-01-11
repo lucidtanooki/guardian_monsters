@@ -1,7 +1,7 @@
 
 monsters.png
 format: RGBA8888
-filter: Nearest,Nearest
+filter: Linear,Nearest
 repeat: none
 100
   rotate: false
@@ -87,156 +87,177 @@ repeat: none
   orig: 128, 128
   offset: 0, 0
   index: 1
-17
+16
   rotate: false
   xy: 261, 521
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
-  index: 1
-19
+  index: 2
+17
   rotate: false
   xy: 391, 651
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 1
-1
+19
   rotate: false
   xy: 521, 781
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 1
-20
+1
   rotate: false
   xy: 1, 131
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 1
-21
+20
   rotate: false
   xy: 131, 261
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 1
-2
+21
   rotate: false
   xy: 261, 391
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 1
-2
+23
   rotate: false
   xy: 391, 521
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
-  index: 2
-3
+  index: 1
+24
   rotate: false
   xy: 521, 651
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 1
-4
+2
   rotate: false
   xy: 651, 781
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 1
-4
+2
   rotate: false
   xy: 1, 1
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 2
-5
+3
   rotate: false
   xy: 131, 131
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 1
-5
+4
   rotate: false
   xy: 261, 261
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
-  index: 2
-6
+  index: 1
+4
   rotate: false
   xy: 391, 391
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
-  index: 1
-7
+  index: 2
+5
   rotate: false
   xy: 521, 521
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 1
-7
+5
   rotate: false
   xy: 651, 651
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 2
-8
+6
   rotate: false
   xy: 781, 781
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 1
-8
+7
   rotate: false
   xy: 131, 1
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
-  index: 2
-99
+  index: 1
+7
   rotate: false
   xy: 261, 131
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
-  index: 1
-9
+  index: 2
+8
   rotate: false
   xy: 391, 261
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 1
-18
+8
   rotate: false
   xy: 521, 391
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 2
+99
+  rotate: false
+  xy: 651, 521
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 1
+9
+  rotate: false
+  xy: 781, 651
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 1
+18
+  rotate: false
+  xy: 261, 1
   size: 126, 128
   orig: 126, 128
   offset: 0, 0
   index: 1
 22
   rotate: false
-  xy: 651, 521
+  xy: 391, 131
   size: 124, 128
   orig: 124, 128
   offset: 0, 0
   index: 1
 19
   rotate: false
-  xy: 781, 651
+  xy: 521, 261
   size: 113, 128
   orig: 113, 128
   offset: 0, 0

@@ -1,0 +1,19 @@
+
+logos.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+libgdx
+  rotate: false
+  xy: 1, 2
+  size: 256, 43
+  orig: 256, 43
+  offset: 0, 0
+  index: -1
+limbusdev
+  rotate: false
+  xy: 259, 1
+  size: 254, 44
+  orig: 254, 44
+  offset: 0, 0
+  index: -1

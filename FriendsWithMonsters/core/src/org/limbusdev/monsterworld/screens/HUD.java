@@ -111,7 +111,15 @@ public class HUD {
         quitButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                Gdx.app.exit();
+                blackCourtain.addAction(Actions.sequence(
+                        Actions.alpha(0),Actions.visible(true),Actions.fadeIn(2),
+                        Actions.run(new Runnable() {
+                            @Override
+                            public void run() {
+                                Gdx.app.exit();
+                            }
+                        })
+                ));
             }
         });
 

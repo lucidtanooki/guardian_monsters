@@ -1,0 +1,40 @@
+
+UI.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+b192down
+  rotate: false
+  xy: 1, 11
+  size: 192, 48
+  orig: 192, 48
+  offset: 0, 0
+  index: -1
+b192up
+  rotate: false
+  xy: 195, 11
+  size: 192, 48
+  orig: 192, 48
+  offset: 0, 0
+  index: -1
+b1down
+  rotate: false
+  xy: 389, 11
+  size: 128, 48
+  orig: 128, 48
+  offset: 0, 0
+  index: -1
+b1up
+  rotate: false
+  xy: 519, 11
+  size: 128, 48
+  orig: 128, 48
+  offset: 0, 0
+  index: -1
+black
+  rotate: false
+  xy: 1, 1
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: -1

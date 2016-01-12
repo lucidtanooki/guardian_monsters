@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="1024"
+   height="1024"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.4 r9939"
+   sodipodi:docname="UI.svg">
+  <defs
+     id="defs4" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="2.8"
+     inkscape:cx="217.89769"
+     inkscape:cy="949.4078"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="true"
+     inkscape:window-width="1366"
+     inkscape:window-height="744"
+     inkscape:window-x="0"
+     inkscape:window-y="24"
+     inkscape:window-maximized="1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid2985"
+       empspacing="4"
+       visible="true"
+       enabled="true"
+       snapvisiblegridlinesonly="true" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Ebene 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-28.362183)">
+    <rect
+       style="color:#000000;fill:#000000;fill-opacity:0.75294119;fill-rule:nonzero;stroke:none;stroke-width:4;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect3006"
+       width="128"
+       height="46"
+       x="0"
+       y="2"
+       transform="translate(0,28.362183)"
+       ry="8"
+       rx="8"
+       inkscape:export-filename="/home/georg/Entwicklung/Java/libGDX/FriendsWithMonsters/Artwork/Spritesheets/LimbusDev/UI/b1down.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       rx="8"
+       ry="8"
+       y="28.362183"
+       x="0"
+       height="46"
+       width="128"
+       id="rect3780"
+       style="color:#000000;fill:#000000;fill-opacity:0.75294118;fill-rule:nonzero;stroke:none;stroke-width:4;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       inkscape:export-filename="/home/georg/Entwicklung/Java/libGDX/FriendsWithMonsters/Artwork/Spritesheets/LimbusDev/UI/b1down.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       style="color:#000000;fill:#eeeeec;fill-opacity:0.75294117999999999;fill-rule:nonzero;stroke:none;stroke-width:4;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect3782"
+       width="120"
+       height="38"
+       x="4"
+       y="4"
+       transform="translate(0,28.362183)"
+       rx="6"
+       ry="6"
+       inkscape:export-filename="/home/georg/Entwicklung/Java/libGDX/FriendsWithMonsters/Artwork/Spritesheets/LimbusDev/UI/b1down.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       ry="6"
+       rx="6"
+       y="28.362183"
+       x="4"
+       height="38"
+       width="120"
+       id="rect3784"
+       style="color:#000000;fill:#eeeeec;fill-opacity:0.75294118;fill-rule:nonzero;stroke:none;stroke-width:4;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       inkscape:export-filename="/home/georg/Entwicklung/Java/libGDX/FriendsWithMonsters/Artwork/Spritesheets/LimbusDev/UI/b1down.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       rx="8"
+       ry="8"
+       y="78.362183"
+       x="0"
+       height="46"
+       width="128"
+       id="rect3786"
+       style="color:#000000;fill:#000000;fill-opacity:0.75294118;fill-rule:nonzero;stroke:none;stroke-width:4;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       inkscape:export-filename="/home/georg/Entwicklung/Java/libGDX/FriendsWithMonsters/Artwork/Spritesheets/LimbusDev/UI/b1down.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       style="color:#000000;fill:#000000;fill-opacity:0.75294118;fill-rule:nonzero;stroke:none;stroke-width:4;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect3788"
+       width="128"
+       height="46"
+       x="0"
+       y="76.362183"
+       ry="8"
+       rx="8"
+       inkscape:export-filename="/home/georg/Entwicklung/Java/libGDX/FriendsWithMonsters/Artwork/Spritesheets/LimbusDev/UI/b1down.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       ry="6"
+       rx="6"
+       y="80.362183"
+       x="4"
+       height="38"
+       width="120"
+       id="rect3790"
+       style="color:#000000;fill:#eeeeec;fill-opacity:0.75294118;fill-rule:nonzero;stroke:none;stroke-width:4;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       inkscape:export-filename="/home/georg/Entwicklung/Java/libGDX/FriendsWithMonsters/Artwork/Spritesheets/LimbusDev/UI/b1down.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       style="color:#000000;fill:#eeeeec;fill-opacity:0.75294118;fill-rule:nonzero;stroke:none;stroke-width:4;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect3792"
+       width="120"
+       height="38"
+       x="4"
+       y="78.362183"
+       rx="6"
+       ry="6"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       inkscape:export-filename="/home/georg/Entwicklung/Java/libGDX/FriendsWithMonsters/Artwork/Spritesheets/LimbusDev/UI/b1down.png" />
+    <path
+       style="color:#000000;fill:#000000;fill-opacity:0.75294118;fill-rule:nonzero;stroke:none;stroke-width:4;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       d="m 136,30.362183 176,0 c 4.432,0 8,3.568 8,8 l 0,30 c 0,4.432 -3.568,8 -8,8 l -176,0 c -4.432,0 -8,-3.568 -8,-8 l 0,-30 c 0,-4.432 3.568,-8 8,-8 z"
+       id="rect3794"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="sssssssss" />
+    <path
+       style="color:#000000;fill:#000000;fill-opacity:0.75294118;fill-rule:nonzero;stroke:none;stroke-width:4;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       d="m 136,28.362183 176,0 c 4.432,0 8,3.568 8,8 l 0,30 c 0,4.432 -3.568,8 -8,8 l -176,0 c -4.432,0 -8,-3.568 -8,-8 l 0,-30 c 0,-4.432 3.568,-8 8,-8 z"
+       id="rect3796"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="sssssssss" />
+    <path
+       style="color:#000000;fill:#eeeeec;fill-opacity:0.75294118;fill-rule:nonzero;stroke:none;stroke-width:4;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       d="m 138,32.362183 172,0 c 3.324,0 6,2.676 6,6 l 0,26 c 0,3.324 -2.676,6 -6,6 l -172,0 c -3.324,0 -6,-2.676 -6,-6 l 0,-26 c 0,-3.324 2.676,-6 6,-6 z"
+       id="rect3798"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="sssssssss" />
+    <path
+       style="color:#000000;fill:#eeeeec;fill-opacity:0.75294118;fill-rule:nonzero;stroke:none;stroke-width:4;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       d="m 138,28.362183 172,0 c 3.324,0 6,2.676 6,6 l 0,26 c 0,3.324 -2.676,6 -6,6 l -172,0 c -3.324,0 -6,-2.676 -6,-6 l 0,-26 c 0,-3.324 2.676,-6 6,-6 z"
+       id="rect3800"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="sssssssss" />
+    <path
+       sodipodi:nodetypes="sssssssss"
+       inkscape:connector-curvature="0"
+       id="path3818"
+       d="m 136,78.362183 176,0 c 4.432,0 8,3.568 8,8 l 0,29.999997 c 0,4.432 -3.568,8 -8,8 l -176,0 c -4.432,0 -8,-3.568 -8,-8 l 0,-29.999997 c 0,-4.432 3.568,-8 8,-8 z"
+       style="color:#000000;fill:#000000;fill-opacity:0.75294118;fill-rule:nonzero;stroke:none;stroke-width:4;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+    <path
+       sodipodi:nodetypes="sssssssss"
+       inkscape:connector-curvature="0"
+       id="path3820"
+       d="m 136,76.362183 176,0 c 4.432,0 8,3.568 8,8 l 0,29.999997 c 0,4.432 -3.568,8 -8,8 l -176,0 c -4.432,0 -8,-3.568 -8,-8 l 0,-29.999997 c 0,-4.432 3.568,-8 8,-8 z"
+       style="color:#000000;fill:#000000;fill-opacity:0.75294118;fill-rule:nonzero;stroke:none;stroke-width:4;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+    <path
+       sodipodi:nodetypes="sssssssss"
+       inkscape:connector-curvature="0"
+       id="path3822"
+       d="m 138,80.362183 172,0 c 3.324,0 6,2.676 6,6 l 0,25.999997 c 0,3.324 -2.676,6 -6,6 l -172,0 c -3.324,0 -6,-2.676 -6,-6 l 0,-25.999997 c 0,-3.324 2.676,-6 6,-6 z"
+       style="color:#000000;fill:#eeeeec;fill-opacity:0.75294118;fill-rule:nonzero;stroke:none;stroke-width:4;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+    <path
+       sodipodi:nodetypes="sssssssss"
+       inkscape:connector-curvature="0"
+       id="path3824"
+       d="m 138,78.362183 172,0 c 3.324,0 6,2.676 6,6 l 0,25.999997 c 0,3.324 -2.676,6 -6,6 l -172,0 c -3.324,0 -6,-2.676 -6,-6 l 0,-25.999997 c 0,-3.324 2.676,-6 6,-6 z"
+       style="color:#000000;fill:#eeeeec;fill-opacity:0.75294118;fill-rule:nonzero;stroke:none;stroke-width:4;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+  </g>
+</svg>

@@ -30,6 +30,8 @@ public class MediaManager {
     private String heroSpritesheetFile = "spritesheets/hero.pack";
     private String monsterSpriteSheetFile = "spritesheets/monsters.pack";
     private String battleUISpriteSheetFile = "spritesheets/battleUI.pack";
+    private String UISpriteSheetFile = "spritesheets/UI.pack";
+    private String logosSpriteSheetFile = "spritesheets/logos.pack";
     private Array<String> bgs;
     private Array<String> bgMusicTown;
     public  Skin skin;
@@ -39,6 +41,8 @@ public class MediaManager {
         this.assets = new AssetManager();
         assets.load(this.heroSpritesheetFile, TextureAtlas.class);
         assets.load(this.battleUISpriteSheetFile, TextureAtlas.class);
+        assets.load(this.UISpriteSheetFile, TextureAtlas.class);
+        assets.load(this.logosSpriteSheetFile, TextureAtlas.class);
         assets.load(this.mainMenuBGImgFile, Texture.class);
         assets.load(this.mainMenuBGImgFile2, Texture.class);
 
@@ -129,6 +133,14 @@ public class MediaManager {
 
     public TextureAtlas getBattleUITextureAtlas() {
         return assets.get(battleUISpriteSheetFile, TextureAtlas.class);
+    }
+
+    public TextureAtlas getUITextureAtlas() {
+        return assets.get(UISpriteSheetFile, TextureAtlas.class);
+    }
+
+    public TextureAtlas getLogosTextureAtlas() {
+        return assets.get(logosSpriteSheetFile, TextureAtlas.class);
     }
 
 

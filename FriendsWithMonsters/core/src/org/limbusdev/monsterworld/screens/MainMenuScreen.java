@@ -250,8 +250,8 @@ public class MainMenuScreen implements Screen {
                 creditsScreen.addAction(Actions.sequence(
                         Actions.moveTo(0, GlobalSettings.RESOLUTION_Y),
                         Actions.alpha(0), Actions.visible(true), Actions.fadeIn(2),
-                        Actions.moveBy(0, 1500, 30),
-                        Actions.fadeOut(2)
+                        Actions.moveBy(0, 3040, 30),
+                        Actions.fadeOut(2),Actions.visible(false)
                 ));
             }
         });
@@ -266,7 +266,7 @@ public class MainMenuScreen implements Screen {
     public void setUpCredits() {
         this.creditsScreen = new Group();
         Image bg = new Image(uiTA.findRegion("black"));
-        bg.setWidth(GlobalSettings.RESOLUTION_X);bg.setHeight(2500);
+        bg.setWidth(GlobalSettings.RESOLUTION_X);bg.setHeight(4000);
         bg.setPosition(0, GlobalSettings.RESOLUTION_Y, Align.topLeft);
         bg.addAction(Actions.alpha(.75f));
         creditsScreen.addActor(bg);
@@ -275,21 +275,109 @@ public class MainMenuScreen implements Screen {
         limbusLogo.setPosition(GlobalSettings.RESOLUTION_X / 2, -520, Align.center);
         Image libgdxLogo = new Image(game.media.getLogosTextureAtlas().findRegion("libgdx"));
         libgdxLogo.setWidth(256);libgdxLogo.setHeight(43);
-        libgdxLogo.setPosition(GlobalSettings.RESOLUTION_X / 2, -1400, Align.center);
+        libgdxLogo.setPosition(GlobalSettings.RESOLUTION_X / 2, -3000, Align.center);
 
         String creditText = "Developed by\n\n" +
                 "Georg Eckert, LimbusDev 2016\n\n\n\n" +
                 "Artwork\n\n" +
                 "Monsters by\n" +
-                "Moritz, Maria-Christin & Georg Eckert\n\n" +
-                "Powered by\n\n" +
-                "libgdx";
+                "Moritz, Maria-Christin & Georg Eckert\n\n\n" +
+                "Character Templates by PlayerRed-1\n" +
+                "\n\n\n" +
+                "Tilesets\n\n\n" +
+                "Tilesets from the Tuxemon Project\n" +
+                "\n" +
+                "Tuxemon Tileset by Buch is licensed under CC BY 3.0\n" +
+                "\n" +
+                "Mike Bramson\n" +
+                "\n" +
+                "William Edwards\n" +
+                "\n" +
+                "\"Player Sprite\" by Mike Bramson is licensed under CC BY-SA 4.0\n" +
+                "\n" +
+                "\"Electronics Tileset\" by Mike Bramson is licensed under CC BY-SA 4.0\n" +
+                "\n" +
+                "\"Floors and Walls Tileset\" by Mike Bramson is licensed under CC BY-SA 4.0\n" +
+                "\n" +
+                "\"Furniture Tileset\" by Mike Bramson is licensed under CC BY-SA 4.0\n" +
+                "\n" +
+                "\"Kitchen Tileset\" by Mike Bramson is licensed under CC BY-SA 4.0\n" +
+                "\n" +
+                "\"Plants Tileset\" by Mike Bramson is licensed under CC BY-SA 4.0\n" +
+                "\n" +
+                "\"Stairs Tileset\" by Mike Bramson is licensed under CC BY-SA 4.0\n" +
+                "\n" +
+                "\"Bamboon\" by Mike Bramson is licensed under CC BY-SA 4.0\n" +
+                "\n" +
+                "\"Kyrodian Legends Overworld Tileset\" by Midi is licensed under CC BY 3.0\n" +
+                "\n" +
+                "\"Sign\" by ItsBobberson is licensed under Public Domain\n" +
+                "\n" +
+                "\"Sign White\" by ItsBobberson is licensed under Public Domain\n" +
+                "\n" +
+                "\"Wood Sign\" by ItsBobberson is licensed under Public Domain\n" +
+                "\n" +
+                "\"Sand n Water\" by luke83 is licensed under CC BY 3.0 based on \"Kyrodian Legends Overworld Tileset\" by Midi\n" +
+                "\n" +
+                "\"Trainer Sprite Spree\" by Oniwanbashu is licensed under CC BY-NC-SA 3.0\n" +
+                "\n" +
+                "\"Calis Overworld Template\" by Minorthreat0987 and Calis Projects is licensed under CC BY-NC 3.0\n" +
+                "\n" +
+                "Tilesets from The Public Pokemon Tileset\n" +
+                "\n" +
+                "The Public Pokemon Tileset is licensed under CC-BY-3.0\n" +
+                "\n" +
+                "This tileset consists of tiles from various artists:\n" +
+                "\n" +
+                "Kyle Dove\n" +
+                "\n" +
+                "Speedialga\n" +
+                "\n" +
+                "Spacemotion\n" +
+                "\n" +
+                "Alucus\n" +
+                "\n" +
+                "Pokemon Diamond\n" +
+                "\n" +
+                "Kizemaru Kurunosuke\n" +
+                "\n" +
+                "Epicday\n" +
+                "\n" +
+                "Thurpok\n" +
+                "\n" +
+                "UltimoSpriter\n" +
+                "\n" +
+                "iametrine\n" +
+                "\n" +
+                "minorthreat0987\n" +
+                "\n" +
+                "TyranitarDark\n" +
+                "\n" +
+                "Heavy-Metal-Lover\n" +
+                "\n" +
+                "KKKaito\n" +
+                "\n" +
+                "WesleyFG\n" +
+                "\n" +
+                "BoOmbxBiG\n" +
+                "\n" +
+                "EternalTakai\n" +
+                "\n" +
+                "Hek-El-Grande\n" +
+                "\n" +
+                "ThatsSoWitty\n" +
+                "\n\n\n" +
+                "Music\n\n" +
+                "\n" +
+                "City Loop by Homingstar (CC-BY-SA-3.0)\n\n" +
+                "CalmBGM by syncopika (CC-BY-3.0)\n\n\n\n" +
+                "Powered by\n\n";
         Label.LabelStyle labs = new Label.LabelStyle();
         labs.font = skin.getFont("white");
         Label text = new Label(creditText, labs);
         text.setAlignment(Align.top,Align.top);
-        text.setPosition(200,-2600);
-        text.setWidth(400);text.setHeight(2000);
+        text.setPosition(200,-3600);
+        text.setWidth(400);text.setHeight(3000);
         text.setWrap(true);
 
         // Sorting

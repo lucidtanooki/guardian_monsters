@@ -17,8 +17,8 @@ For more screenshots see the [Galery](https://bitbucket.org/gemlion/monsterworld
 ![alt text](./Documents/Screenshots/preview2.png "Second Preview")
 
 # Downloads
-here you can Download the [Test-Build for Desktop](./Builds/Testing/Desktop/FriendsWithMonsters-DEBUG-0.0.0.4.jar)
-and the [Test-Build for Android](./Builds/Testing/Android/FriendsWithMonsters-DEBUG-0.0.0.5.apk).
+here you can Download the [Test-Build for Desktop](./Builds/Testing/Desktop/FriendsWithMonsters-ALPHA-0.0.1.0.jar)
+and the [Test-Build for Android](./Builds/Testing/Android/FriendsWithMonsters-ALPHA-0.0.1.0.apk).
 All you need is Java 8. Launch it with 
 
 ```

@@ -53,15 +53,15 @@ public class BattleHUD {
 
     // Groups
     private Array<Group> statusUIElements;
-    private Group battleActionMenu, topLevelMenu, monsterStatusUI;
-    private VerticalGroup attacksGroup; // Group of attack buttons
+    private Group battleActionMenu, topLevelMenu, monsterStatusUI, attackPaneGroup, gameOverUI;
+    private VerticalGroup attackVGroup; // Group of attack buttons
 
     // Buttons
     private ArrayMap<String,Button> battleButtons;
     private ArrayMap<String,ImageButton> topLevelMenuButtons;
 
     // Labels
-    private Label infoLabel;
+    private Label infoLabel, gameOverLabel;
     private Array<Label> monsterLabels, monsterLvls;
 
     // Images
@@ -74,7 +74,7 @@ public class BattleHUD {
     private ArrayMap<String,Array<ProgressBar>> progressBars;
 
     // Scroll Panes
-    private ScrollPane attacksPane;
+    private ScrollPane attackScroll;
 
 
     // Not Scene2D related
@@ -107,6 +107,9 @@ public class BattleHUD {
         setUpBattleActionMenu();
 
         setUpMonsterImages();
+
+        setUpGameOverUI();
+
         addElementsToStage();
 
         reset();
@@ -114,22 +117,41 @@ public class BattleHUD {
     /* ............................................................................... METHODS .. */
 
     /**
-     * Initializes the graphical representation of a monster on the screen
-     * @param monster   the given monster
-     * @param position  the position on the battle field
+     * Resets the UI into a state where it can be initialized for a new battle
      */
-    public void initHUD(Monster monster, final int position) {
+    public void reset() {
+        // Reset Status UIs
+        for(Group g : statusUIElements) g.addAction(Actions.sequence(
+                Actions.alpha(1), Actions.visible(false)));
 
-        // Set Monster Information in UI and set Signs visible
-        monsterLabels.get(position).setText(monsterInformation.monsterNames.get(monster.ID - 1));
+        for(Integer key : monsterImgs.keys()) monsterImgs.get(key).addAction(Actions.sequence(
+                Actions.alpha(1), Actions.visible(false)
+        ));
 
-        progressBars.get("EXP").get(position).setValue(monster.getExpPerc());
-        progressBars.get("HP").get(position).setValue(monster.HP / 1.f / monster.HPfull * 100);
+        this.chosenTarget = BatPos.MID;
+        this.chosenTeamMonster = BatPos.MID;
 
-        activateMonsterHUD(monster, position);
-        chosenTarget=0;chosenTeamMonster=0;
+        battleActionMenu.setVisible(false);
+        topLevelMenu.setVisible(false);
+        monsterStatusUI.setVisible(true);
 
-        stage.addAction(Actions.fadeIn(1f));
+        attackPaneGroup.setVisible(false);
+        blackCourtain.setVisible(true);
+
+        waitingSince.clear();
+        monsterReady.clear();
+        monsterKO.clear();
+        for(int i=0;i<6;i++) {
+            waitingSince.add(new Long(0));
+            monsterReady.add(true);
+            monsterKO.add(false);
+        }
+
+        for (String key : progressBars.keys())
+            for(ProgressBar b : progressBars.get(key)) b.setValue(100);
+
+        indicatorHeroPos=0;
+        allKO = false;
     }
 
     /**
@@ -138,15 +160,13 @@ public class BattleHUD {
      * @param opponentTeam
      */
     public void init(TeamComponent team, TeamComponent opponentTeam) {
+        reset();
 
-        // Initialize Active Teams
-        this.allKO = false;
-
-        // Initializes Battle Queues
+        // Initializes Battle Queues ...............................................................
         this.heroPosQueue = new BattlePositionQueue(team.monsters.size);
         this.opponentPosQueue = new BattlePositionQueue(opponentTeam.monsters.size);
 
-        //Initialize Teams
+        //Initialize Teams .........................................................................
         // Hero Team
         this.team = team.monsters;
         changeIndicatorPosition(true, BatPos.MID);
@@ -166,31 +186,68 @@ public class BattleHUD {
         this.opponentTeam = opponentTeam.monsters;
 
         // Show Buttons
-        for(String key : topLevelMenuButtons.keys()) topLevelMenuButtons.get(key).setVisible(true);
-        infoLabel.setVisible(true);
+        topLevelMenu.setVisible(true);
 
+
+        // Initialize Status UIs ...................................................................
         // Hero Team
         switch(team.monsters.size) {
-            case 3:initHUD(team.monsters.get(2), BatPos.HERO_TOP);
-            case 2:initHUD(team.monsters.get(1), BatPos.HERO_BOT);
-            default:initHUD(team.monsters.get(0), BatPos.HERO_MID);
-                break;
+            case 3:initStatusUI(team.monsters.get(2), BatPos.HERO_TOP);
+            case 2:initStatusUI(team.monsters.get(1), BatPos.HERO_BOT);
+            default:initStatusUI(team.monsters.get(0), BatPos.HERO_MID);break;
         }
 
         // Opponent Team
         switch(opponentTeam.monsters.size) {
-            case 3: initHUD(opponentTeam.monsters.get(2), BatPos.OPPO_TOP);
-            case 2: initHUD(opponentTeam.monsters.get(1), BatPos.OPPO_BOT);
-            default:initHUD(opponentTeam.monsters.get(0), BatPos.OPPO_MID);
-                break;
+            case 3: initStatusUI(opponentTeam.monsters.get(2), BatPos.OPPO_TOP);
+            case 2: initStatusUI(opponentTeam.monsters.get(1), BatPos.OPPO_BOT);
+            default:initStatusUI(opponentTeam.monsters.get(0), BatPos.OPPO_MID);break;
         }
 
-        for(ProgressBar b : progressBars.get("Recov")) b.setValue(100);
-
-        chosenTarget=0;chosenTeamMonster=0;
-
-        initMonsterImages();
+//        initMonsterImages();
         show();
+    }
+
+    /**
+     * Initializes the graphical representation of a monster on the screen
+     * @param monster   the given monster
+     * @param position  the position on the battle field
+     */
+    public void initStatusUI(Monster monster, final int position) {
+
+        // Set Monster Information in UI and set Signs visible
+        monsterLabels.get(position).setText(monsterInformation.monsterNames.get(monster.ID - 1));
+
+        progressBars.get("EXP").get(position).setValue(monster.getExpPerc());
+        progressBars.get("HP").get(position).setValue(monster.HP / 1.f / monster.HPfull * 100);
+
+        activateMonsterHUD(monster, position);
+
+        stage.addAction(Actions.fadeIn(1f));
+    }
+
+    /**
+     * Initializes the HUD for the given battle field position
+     * @param monster
+     * @param position
+     */
+    public void activateMonsterHUD(Monster monster, final int position) {
+        statusUIElements.get(position).addAction(Actions.sequence(
+                Actions.alpha(1), Actions.visible(true)
+        ));
+
+        monsterLvls.get(position).setText(Integer.toString(monster.level));
+
+        initMonsterImage(monster, position);
+    }
+
+    private void initMonsterImage(Monster monster, int position) {
+        Image monImg; TextureRegion monReg;
+        monImg = monsterImgs.get(position);
+        monReg = game.media.getMonsterSprite(monster.ID);
+        if(position < 3) if(!monReg.isFlipX()) monReg.flip(true, false);
+        monImg.setDrawable(new TextureRegionDrawable(monReg));
+        monImg.addAction(Actions.sequence(Actions.alpha(1), Actions.visible(true)));
     }
 
     /**
@@ -273,6 +330,8 @@ public class BattleHUD {
         stage.addActor(monsterStatusUI);
         for(Group g : statusUIElements) stage.addActor(g);
 
+        stage.addActor(gameOverUI);
+
         stage.addActor(blackCourtain);
     }
 
@@ -291,7 +350,6 @@ public class BattleHUD {
 
         this.monsterStatusUI = new Group();
         this.statusUIElements = new Array<Group>();
-        for(int i=0;i<6;i++) statusUIElements.add(new Group());
 
         // Battle UI Black transparent Background
         this.battleUIbg = new Image(game.media.getBattleUITextureAtlas().findRegion("bg"));
@@ -327,6 +385,47 @@ public class BattleHUD {
         monsterStatusUI.addActor(indicatorOpp);
         monsterStatusUI.addActor(indicatorHero);
 
+    }
+
+    private void setUpGameOverUI() {
+        Image i = new Image(game.media.getBattleUITextureAtlas().findRegion("b12.down"));
+        i.setWidth(542);
+        i.setHeight(64);
+        i.setPosition(GlobalSettings.RESOLUTION_X / 2, 72, Align.bottom);
+        gameOverUI.addActor(i);
+
+        Label.LabelStyle labs = new Label.LabelStyle();
+        labs.font = skin.getFont("default-font");
+        gameOverLabel = new Label("Game Over", labs);
+        gameOverLabel.setHeight(64);
+        gameOverLabel.setWidth(500);
+        gameOverLabel.setWrap(true);
+        gameOverLabel.setPosition(400, 70, Align.bottom);
+        gameOverUI.addActor(gameOverLabel);
+
+        // Change Screen
+        TextButton.TextButtonStyle ibs = new TextButton.TextButtonStyle();
+        ibs.down = new TextureRegionDrawable(game.media.getUITextureAtlas().findRegion("b1down"));
+        ibs.up = new TextureRegionDrawable(game.media.getUITextureAtlas().findRegion("b1up"));
+        ibs.font = skin.getFont("default-font");
+        ibs.pressedOffsetY = -1;
+        final TextButton exitButton = new TextButton("OK",ibs);
+        exitButton.setWidth(128);exitButton.setHeight(48);
+        exitButton.setPosition(GlobalSettings.RESOLUTION_X / 2, 32, Align.center);
+        exitButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                // Exit Battle Screen
+                game.setScreen(gameScreen);
+                exitButton.remove();
+                infoLabel.remove();
+                battleActionMenu.addActor(infoLabel);
+                battleMenuImgs.get("infoLabelBg").remove();
+                battleActionMenu.addActor(battleMenuImgs.get("infoLabelBg"));
+            }
+        });
+        gameOverUI.addActor(exitButton);
+        gameOverUI.setVisible(false);
     }
 
     private void setUpMonsterImages() {
@@ -381,55 +480,6 @@ public class BattleHUD {
         monsterImgs.put(BatPos.OPPO_BOT, monImg);
     }
 
-    private void initMonsterImages() {
-        Image monImg; TextureRegion monReg;
-        // Hero Team
-        switch(team.size) {
-            case 3:
-                monImg = monsterImgs.get(BatPos.HERO_TOP);
-                monReg = game.media.getMonsterSprite(team.get(2).ID);
-                if(!monReg.isFlipX()) monReg.flip(true,false);
-                monImg.setDrawable(new TextureRegionDrawable(monReg));
-                monImg.setVisible(true);
-            case 2:
-                monImg = monsterImgs.get(BatPos.HERO_BOT);
-                monReg = game.media.getMonsterSprite(team.get(1).ID);
-                if(!monReg.isFlipX()) monReg.flip(true,false);
-                monImg.setDrawable(new TextureRegionDrawable(monReg));
-                monImg.setVisible(true);
-            default:
-                monImg = monsterImgs.get(BatPos.HERO_MID);
-                monReg = game.media.getMonsterSprite(team.get(0).ID);
-                if(!monReg.isFlipX()) monReg.flip(true,false);
-                monImg.setDrawable(new TextureRegionDrawable(monReg));
-                monImg.setVisible(true);
-                break;
-        }
-
-        // Opponent Team
-        switch(opponentTeam.size) {
-            case 3:
-                monImg = monsterImgs.get(BatPos.OPPO_TOP);
-                monReg = game.media.getMonsterSprite(opponentTeam.get(2).ID);
-                if(monReg.isFlipX()) monReg.flip(true,false);
-                monImg.setDrawable(new TextureRegionDrawable(monReg));
-                monImg.setVisible(true);
-            case 2:
-                monImg = monsterImgs.get(BatPos.OPPO_BOT);
-                monReg = game.media.getMonsterSprite(opponentTeam.get(1).ID);
-                if(monReg.isFlipX()) monReg.flip(true,false);
-                monImg.setDrawable(new TextureRegionDrawable(monReg));
-                monImg.setVisible(true);
-            default:
-                monImg = monsterImgs.get(BatPos.OPPO_MID);
-                monReg = game.media.getMonsterSprite(opponentTeam.get(0).ID);
-                if(monReg.isFlipX()) monReg.flip(true,false);
-                monImg.setDrawable(new TextureRegionDrawable(monReg));
-                monImg.setVisible(true);
-                break;
-        }
-    }
-
     /**
      * Make attack button visible as soon as a monster gets ready again
      * @param attackerPos
@@ -464,35 +514,11 @@ public class BattleHUD {
         ));
 
         // Activate Label
-        stage.addActor(battleMenuImgs.get("infoLabelBg"));
-        stage.addActor(infoLabel);
+        gameOverUI.setVisible(true);
 
         // Set message
-        if(heroLost) infoLabel.setText("Game Over");
-        else infoLabel.setText("You won!");
-
-        // Change Screen
-        TextButton.TextButtonStyle ibs = new TextButton.TextButtonStyle();
-        ibs.down = new TextureRegionDrawable(game.media.getUITextureAtlas().findRegion("b1down"));
-        ibs.up = new TextureRegionDrawable(game.media.getUITextureAtlas().findRegion("b1up"));
-        ibs.font = skin.getFont("default-font");
-        ibs.pressedOffsetY = -1;
-        final TextButton exitButton = new TextButton("OK",ibs);
-        exitButton.setWidth(128);exitButton.setHeight(48);
-        exitButton.setPosition(GlobalSettings.RESOLUTION_X / 2, 32, Align.center);
-        exitButton.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                // Exit Battle Screen
-                game.setScreen(gameScreen);
-                exitButton.remove();
-                infoLabel.remove();
-                battleActionMenu.addActor(infoLabel);
-                battleMenuImgs.get("infoLabelBg").remove();
-                battleActionMenu.addActor(battleMenuImgs.get("infoLabelBg"));
-            }
-        });
-        stage.addActor(exitButton);
+        if(heroLost) gameOverLabel.setText("Game Over");
+        else gameOverLabel.setText("You won!");
     }
 
 
@@ -522,60 +548,6 @@ public class BattleHUD {
             }
         }
 
-    }
-
-
-    /**
-     * Resets the UI into a state where it can be initialized for a new battle
-     */
-    public void reset() {
-        // Reset Status UIs
-        for(Group g : statusUIElements) g.setVisible(false);
-
-        for(Integer key : monsterImgs.keys()) monsterImgs.get(key).setVisible(false);
-
-        this.chosenTarget = BatPos.MID;
-        this.chosenTeamMonster = BatPos.MID;
-
-        battleActionMenu.setVisible(false);
-        topLevelMenu.setVisible(false);
-        monsterStatusUI.setVisible(true);
-
-        attacksGroup.setVisible(false);
-        blackCourtain.setVisible(true);
-
-        waitingSince.clear();
-        monsterReady.clear();
-        monsterKO.clear();
-        for(int i=0;i<6;i++) {
-            waitingSince.add(new Long(0));
-            monsterReady.add(true);
-            monsterKO.add(false);
-        }
-
-        indicatorHeroPos=0;
-        allKO = false;
-    }
-
-    /**
-     * Initializes the HUD for the given battle field position
-     * @param monster
-     * @param position
-     */
-    public void activateMonsterHUD(Monster monster, final int position) {
-        monsterLabels.get(position).addAction(
-                Actions.sequence(Actions.alpha(1), Actions.visible(true)));
-        monsterLvls.get(position).setText(Integer.toString(monster.level));
-        monsterLvls.get(position).addAction(
-                Actions.sequence(Actions.alpha(1), Actions.visible(true)));
-        for(String key : progressBars.keys())
-            progressBars.get(key).get(position).addAction(
-                    Actions.sequence(Actions.alpha(1), Actions.visible(true)));
-        for(String key : monScreenElems.keys())
-            monScreenElems.get(key).get(position).addAction(
-                    Actions.sequence(Actions.alpha(1), Actions.visible(true)));
-        monsterImgs.get(position).addAction(
-                Actions.sequence(Actions.alpha(1), Actions.visible(true)));
     }
 
     /**
@@ -672,7 +644,6 @@ public class BattleHUD {
      */
     private void setUpBattleActionMenu() {
 
-        infoLabel = new Label("A monster attacks you!", skin, "default");
         this.battleActionMenu = new Group();
         this.battleActionMenu.setWidth(GlobalSettings.RESOLUTION_X);
         this.battleActionMenu.setHeight(GlobalSettings.RESOLUTION_Y / 4);
@@ -684,30 +655,32 @@ public class BattleHUD {
         attackScrollPaneBg.setPosition(400, 0, Align.bottom);
         attackScrollPaneBg.setWidth(588);
         attackScrollPaneBg.setHeight(136);
-        attackScrollPaneBg.setVisible(false);
+        attackScrollPaneBg.setVisible(true);
+        attackPaneGroup.addActor(attackScrollPaneBg);
 
         // Attack Pane .............................................................................
-        this.attacksGroup = new VerticalGroup();
-        this.attacksPane = new ScrollPane(attacksGroup);
-        attacksPane.setHeight(32);
-        attacksPane.setPosition(0, 240);
-        attacksPane.setHeight(136);attacksPane.setWidth(500);
-        attacksPane.setPosition(400, 0, Align.bottom);
-        attacksPane.setVisible(false);
+        this.attackVGroup = new VerticalGroup();
+        this.attackScroll = new ScrollPane(attackVGroup);
+        attackScroll.setHeight(32);
+        attackScroll.setPosition(0, 240);
+        attackScroll.setHeight(136);
+        attackScroll.setWidth(500);
+        attackScroll.setPosition(400, 0, Align.bottom);
+        attackPaneGroup.addActor(attackScroll);
 
         Image i = new Image(game.media.getBattleUITextureAtlas().findRegion("b12.down"));
         i.setWidth(542);
         i.setHeight(64);
         i.setPosition(GlobalSettings.RESOLUTION_X / 2, 72, Align.bottom);
         this.battleMenuImgs.put("infoLabelBg", i);
-        infoLabel.setHeight(64);
 
+        Label.LabelStyle labs = new Label.LabelStyle();
+        labs.font = skin.getFont("default-font");
+        infoLabel = new Label("A monster attacks you!", labs);
+        infoLabel.setHeight(64);
         infoLabel.setWidth(500);
         infoLabel.setWrap(true);
         infoLabel.setPosition(400, 70, Align.bottom);
-        Label.LabelStyle labs = new Label.LabelStyle();
-        labs.font = skin.getFont("default-font");
-        infoLabel.setStyle(labs);
 
 
         // Buttons .................................................................................
@@ -886,9 +859,8 @@ public class BattleHUD {
                 if(battleButtons.get("attack").isDisabled()) return;
                 System.out.println("Button: attack");
                 battleButtons.get("attack").setDisabled(true);
-                battleButtons.get("attack").addAction(Actions.sequence(Actions.alpha(0.5f,.2f)));
-                attackScrollPaneBg.addAction(Actions.sequence(Actions.visible(true),Actions.fadeIn(.3f)));
-                attacksPane.addAction(Actions.sequence(Actions.visible(true),Actions.fadeIn(.3f)));
+                battleButtons.get("attack").addAction(Actions.sequence(Actions.alpha(0.5f, .2f)));
+                attackPaneGroup.addAction(Actions.sequence(Actions.visible(true),Actions.fadeIn(.3f)));
                 setUpAttacksPane();
             }
         });
@@ -917,8 +889,7 @@ public class BattleHUD {
         for(String s : battleButtons.keys()) battleActionMenu.addActor(battleButtons.get(s));
 
         battleActionMenu.addActor(infoLabel);
-        battleActionMenu.addActor(attackScrollPaneBg);
-        battleActionMenu.addActor(attacksPane);
+        battleActionMenu.addActor(attackPaneGroup);
     }
 
     /**
@@ -991,6 +962,9 @@ public class BattleHUD {
         for(int i=0;i<6;i++) monsterReady.add(new Boolean(true));
         this.monsterKO = new Array<Boolean>();
         for(int i=0;i<6;i++) monsterKO.add(new Boolean(false));
+
+        this.attackPaneGroup = new Group();
+        this.gameOverUI = new Group();
     }
 
 
@@ -1109,9 +1083,9 @@ public class BattleHUD {
 
     public void setUpAttacksPane() {
 
-        this.attacksGroup.clear();
-        attacksGroup.setWidth(500);
-        this.attacksGroup.space(4);
+        this.attackVGroup.clear();
+        attackVGroup.setWidth(500);
+        this.attackVGroup.space(4);
 
         TextButton.TextButtonStyle tbs = new TextButton.TextButtonStyle();
         tbs.fontColor = Color.BLACK;
@@ -1124,7 +1098,7 @@ public class BattleHUD {
             TextButton tb = new TextButton(a.name, tbs);
             tb.setWidth(128);
             tb.setHeight(23);
-            attacksGroup.addActor(tb);
+            attackVGroup.addActor(tb);
             tb.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
@@ -1176,20 +1150,17 @@ public class BattleHUD {
                                     + "/" + opponentTeam.get(0).HPfull + " KO: " + allKO);
                             break;
                     }
-
-                    attackScrollPaneBg.addAction(
-                            Actions.sequence(Actions.fadeOut(.3f), Actions.visible(false)));
-                    attacksPane.addAction(Actions.sequence(Actions.fadeOut(.3f),
+                    attackPaneGroup.addAction(Actions.sequence(Actions.fadeOut(.3f),
                             Actions.visible(false)));
                 }
             });
         }
-        attacksGroup.addActor(new TextButton("1", tbs));
-        attacksGroup.addActor(new TextButton("2", tbs));
-        attacksGroup.addActor(new TextButton("3", tbs));
-        attacksGroup.addActor(new TextButton("4", tbs));
-        attacksGroup.addActor(new TextButton("5", tbs));
-        attacksGroup.addActor(new TextButton("6", tbs));
+        attackVGroup.addActor(new TextButton("1", tbs));
+        attackVGroup.addActor(new TextButton("2", tbs));
+        attackVGroup.addActor(new TextButton("3", tbs));
+        attackVGroup.addActor(new TextButton("4", tbs));
+        attackVGroup.addActor(new TextButton("5", tbs));
+        attackVGroup.addActor(new TextButton("6", tbs));
     }
 
 
@@ -1202,15 +1173,7 @@ public class BattleHUD {
     public void kickOutMonster(int pos) {
         monsterImgs.get(pos).addAction(
                 Actions.sequence(Actions.alpha(0, 2), Actions.visible(false)));
-        for(String key : progressBars.keys())
-            progressBars.get(key).get(pos).addAction(
-                    Actions.sequence(Actions.alpha(0, 2), Actions.visible(false)));
-        for(String key : monScreenElems.keys())
-            monScreenElems.get(key).get(pos).addAction(
-                    Actions.sequence(Actions.alpha(0, 2), Actions.visible(false)));
-        monsterLabels.get(pos).addAction(
-                Actions.sequence(Actions.alpha(0, 2), Actions.visible(false)));
-        monsterLvls.get(pos).addAction(
+        statusUIElements.get(pos).addAction(
                 Actions.sequence(Actions.alpha(0, 2), Actions.visible(false)));
         monsterKO.set(pos, true);
         System.out.println("Killed: " + pos);

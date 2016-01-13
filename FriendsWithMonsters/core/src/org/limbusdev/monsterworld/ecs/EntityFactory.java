@@ -52,7 +52,9 @@ public class EntityFactory {
      */
     public Entity createHero(PositionComponent startField, boolean restoreSave) {
         Entity hero = new HeroEntity();
-        hero.add(new CharacterSpriteComponent(media.getTextureAtlasType(TextureAtlasType.HERO)));
+        CharacterSpriteComponent csc = new CharacterSpriteComponent(media.getTextureAtlasType
+                (TextureAtlasType.HERO));
+        hero.add(csc);
         hero.add(new InputComponent());
         PositionComponent position = new PositionComponent(
                 startField.x,

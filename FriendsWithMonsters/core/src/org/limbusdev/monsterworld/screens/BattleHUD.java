@@ -143,6 +143,7 @@ public class BattleHUD {
 
         indicatorHeroPos=0;
         allKO = false;
+        allHeroKO = false;
 
         // Clear Actions
         for(Group g : statusUIElements) g.clearActions();
@@ -1331,22 +1332,22 @@ public class BattleHUD {
                 if(m.HP > 0) AIopponentPositions.add(j);
                 j++;
             }
-            System.out.println(AIopponentPositions.size);
+            System.out.println(AIopponentPositions);
         }
 
         public void act() {
             if(AIpaused) return;
 
             // Remove KO monsters
-            Iterator<Integer> it1 = AIteamPositions.iterator();
-            while(it1.hasNext()) {
-                if(AIteam.get(it1.next()).HP == 0) it1.remove();
-            }
+            for(int i=0; i<AIteam.size; i++)
+                if(AIteam.get(i).HP == 0)
+                    AIteamPositions.removeValue(i,true);
 
-            Iterator<Integer> it2 = AIopponentPositions.iterator();
-            while(it2.hasNext()) {
-                if(AIoppTeam.get(it2.next()).HP == 0) it2.remove();
-            }
+            for(int i=0; i<AIoppTeam.size; i++)
+                if(AIoppTeam.get(i).HP == 0) {
+                    AIopponentPositions.removeValue(i, true);
+                    System.out.println(AIopponentPositions);
+                }
 
 
 
@@ -1355,38 +1356,7 @@ public class BattleHUD {
                 if(monsterReady.get(j+3) && AIteam.get(j).HP > 0) {
                     // Choose Target
                     AIchosenMember = j;
-                    if(AIopponentPositions.size > 0)
-                        AIchosenTarget = MathUtils.random(0,AIopponentPositions
-                                .size-1);
-                    System.out.println("#####################");
-                    System.out.println(AIoppTeam);
-                    System.out.println(AIchosenTarget);
-                    System.out.println(AIteam);
-                    System.out.println(AIchosenMember);
-                    System.out.println("#####################");
-                    AIoppTeam.get(AIchosenTarget).HP -= AIteam.get(AIchosenMember).attacks.get(
-                            MathUtils.random(AIteam.get(AIchosenMember).attacks.size-1)
-                    ).damage;
-
-                    if(AIoppTeam.get(AIchosenTarget).HP<0) AIoppTeam.get(AIchosenTarget).HP=0;
-
-                    System.out.println("Monster No. " + AIchosenMember + " is ready. Attacking "
-                            + AIchosenTarget);
-
-
-                    /* Make attacker wait */
-                    waitingSince.set(AIchosenMember+3, TimeUtils.millis());
-                    monsterReady.set(AIchosenMember+3, false);
-
-                    /* Update Health Bar */
-                    progressBars.get("HP").get(AIchosenTarget).setValue(100 * AIoppTeam.get
-                            (AIchosenTarget).HP
-                            / AIoppTeam.get(AIchosenTarget).HPfull);
-
-                    // Handle Attack
-                    handleAttack(AIteam.get(AIchosenMember), AIoppTeam.get(AIchosenTarget));
-
-                    checkEnemiesDeath();
+                    attack();
                 }
         }
 
@@ -1414,6 +1384,41 @@ public class BattleHUD {
             }
 
             if(allHeroKO) handleEndOfBattle();
+        }
+
+        public void attack() {
+            if(AIopponentPositions.size > 0)
+                AIchosenTarget =AIopponentPositions.get(MathUtils.random(0,AIopponentPositions
+                        .size-1));
+            System.out.println("#####################");
+            System.out.println(AIoppTeam);
+            System.out.println(AIchosenTarget);
+            System.out.println(AIteam);
+            System.out.println(AIchosenMember);
+            System.out.println("#####################");
+            AIoppTeam.get(AIchosenTarget).HP -= AIteam.get(AIchosenMember).attacks.get(
+                    MathUtils.random(AIteam.get(AIchosenMember).attacks.size-1)
+            ).damage;
+
+            if(AIoppTeam.get(AIchosenTarget).HP<0) AIoppTeam.get(AIchosenTarget).HP=0;
+
+            System.out.println("Monster No. " + AIchosenMember + " is ready. Attacking "
+                    + AIchosenTarget);
+
+
+                    /* Make attacker wait */
+            waitingSince.set(AIchosenMember+3, TimeUtils.millis());
+            monsterReady.set(AIchosenMember+3, false);
+
+                    /* Update Health Bar */
+            progressBars.get("HP").get(AIchosenTarget).setValue(100 * AIoppTeam.get
+                    (AIchosenTarget).HP
+                    / AIoppTeam.get(AIchosenTarget).HPfull);
+
+            // Handle Attack
+            handleAttack(AIteam.get(AIchosenMember), AIoppTeam.get(AIchosenTarget));
+
+            checkEnemiesDeath();
         }
     }
 

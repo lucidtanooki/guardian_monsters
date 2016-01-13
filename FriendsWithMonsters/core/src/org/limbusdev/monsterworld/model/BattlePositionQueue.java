@@ -25,8 +25,15 @@ public class BattlePositionQueue {
      * @return pointer to the active position
      */
     public int remove(int pos) {
-        if(!positions.contains(new Integer(BatPos.convertFromCounterToPosition(pos)), false))
-            return BatPos.convertFromCounterToPosition(positions.get(pointer));
+        if(!positions.contains(new Integer(BatPos.convertFromCounterToPosition(pos)), false)) {
+            try {
+                return BatPos.convertFromCounterToPosition(positions.get(pointer));
+            } catch (Exception e) {
+                e.printStackTrace();
+                return -1;
+            }
+        }
+
         positions.removeValue(new Integer(BatPos.convertFromCounterToPosition(pos)), false);
         if(positions.size<=0) return -1;
         pointer %= positions.size;

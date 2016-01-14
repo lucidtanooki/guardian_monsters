@@ -6,112 +6,112 @@ repeat: none
 e
   rotate: false
   xy: 1, 1
-  size: 19, 32
-  orig: 19, 32
+  size: 17, 32
+  orig: 17, 32
   offset: 0, 0
   index: 1
 e
   rotate: false
   xy: 1, 1
-  size: 19, 32
-  orig: 19, 32
+  size: 17, 32
+  orig: 17, 32
   offset: 0, 0
   index: 3
 e
   rotate: false
-  xy: 22, 1
-  size: 19, 32
-  orig: 19, 32
+  xy: 20, 1
+  size: 17, 32
+  orig: 17, 32
   offset: 0, 0
   index: 2
 e
   rotate: false
-  xy: 43, 1
-  size: 19, 32
-  orig: 19, 32
+  xy: 39, 1
+  size: 17, 32
+  orig: 17, 32
   offset: 0, 0
   index: 4
 n
   rotate: false
-  xy: 64, 1
-  size: 19, 32
-  orig: 19, 32
+  xy: 58, 1
+  size: 17, 32
+  orig: 17, 32
   offset: 0, 0
   index: 1
 n
   rotate: false
-  xy: 64, 1
-  size: 19, 32
-  orig: 19, 32
+  xy: 58, 1
+  size: 17, 32
+  orig: 17, 32
   offset: 0, 0
   index: 3
 n
   rotate: false
-  xy: 85, 1
-  size: 19, 32
-  orig: 19, 32
+  xy: 77, 1
+  size: 17, 32
+  orig: 17, 32
   offset: 0, 0
   index: 2
 n
   rotate: false
-  xy: 106, 1
-  size: 19, 32
-  orig: 19, 32
+  xy: 96, 1
+  size: 17, 32
+  orig: 17, 32
   offset: 0, 0
   index: 4
 s
   rotate: false
-  xy: 127, 1
-  size: 19, 32
-  orig: 19, 32
+  xy: 115, 1
+  size: 17, 32
+  orig: 17, 32
   offset: 0, 0
   index: 1
 s
   rotate: false
-  xy: 127, 1
-  size: 19, 32
-  orig: 19, 32
+  xy: 115, 1
+  size: 17, 32
+  orig: 17, 32
   offset: 0, 0
   index: 3
 s
   rotate: false
-  xy: 148, 1
-  size: 19, 32
-  orig: 19, 32
+  xy: 134, 1
+  size: 17, 32
+  orig: 17, 32
   offset: 0, 0
   index: 2
 s
   rotate: false
-  xy: 169, 1
-  size: 19, 32
-  orig: 19, 32
+  xy: 153, 1
+  size: 17, 32
+  orig: 17, 32
   offset: 0, 0
   index: 4
 w
   rotate: false
-  xy: 190, 1
-  size: 19, 32
-  orig: 19, 32
+  xy: 172, 1
+  size: 17, 32
+  orig: 17, 32
   offset: 0, 0
   index: 1
 w
   rotate: false
-  xy: 190, 1
-  size: 19, 32
-  orig: 19, 32
+  xy: 172, 1
+  size: 17, 32
+  orig: 17, 32
   offset: 0, 0
   index: 3
 w
   rotate: false
-  xy: 211, 1
-  size: 19, 32
-  orig: 19, 32
+  xy: 191, 1
+  size: 17, 32
+  orig: 17, 32
   offset: 0, 0
   index: 2
 w
   rotate: false
-  xy: 232, 1
-  size: 19, 32
-  orig: 19, 32
+  xy: 210, 1
+  size: 17, 32
+  orig: 17, 32
   offset: 0, 0
   index: 4

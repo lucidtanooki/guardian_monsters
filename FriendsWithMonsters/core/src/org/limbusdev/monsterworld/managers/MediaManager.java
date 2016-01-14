@@ -3,6 +3,7 @@ package org.limbusdev.monsterworld.managers;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -12,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Array;
 
 import org.limbusdev.monsterworld.enums.MusicType;
+import org.limbusdev.monsterworld.enums.SFXType;
 import org.limbusdev.monsterworld.enums.TextureAtlasType;
 import org.limbusdev.monsterworld.utils.GlobalSettings;
 
@@ -32,8 +34,11 @@ public class MediaManager {
     private String battleUISpriteSheetFile = "spritesheets/battleUI.pack";
     private String UISpriteSheetFile = "spritesheets/UI.pack";
     private String logosSpriteSheetFile = "spritesheets/logos.pack";
+    private String SFXdir = "sfx/hits/";
+    private Array<String> sfxHits;
     private Array<String> bgs;
     private Array<String> bgMusicTown;
+    private Array<String> battleMusic;
     public  Skin skin;
     
     /* ........................................................................... CONSTRUCTOR .. */
@@ -51,6 +56,15 @@ public class MediaManager {
         bgMusicTown.add("music/town_loop_1.wav");
         bgMusicTown.add("music/town_loop_2.ogg");
         for(String s : bgMusicTown) assets.load(s, Music.class);
+
+        battleMusic = new Array<String>();
+        battleMusic.add("music/battle_1.mp3");
+        for(String s : battleMusic) assets.load(s, Music.class);
+
+        // SFX
+        sfxHits = new Array<String>();
+        for(int i=1;i<=18;i++) sfxHits.add(SFXdir + i + ".ogg");
+        for(String s : sfxHits) assets.load(s, Sound.class);
 
         // Monsters
         assets.load(monsterSpriteSheetFile, TextureAtlas.class);
@@ -118,6 +132,7 @@ public class MediaManager {
         Music music = null;
         switch(type) {
             case TOWN: music = assets.get(bgMusicTown.get(index));break;
+            case BATTLE: music = assets.get(battleMusic.get(index));break;
         }
         return music;
     }
@@ -141,6 +156,15 @@ public class MediaManager {
 
     public TextureAtlas getLogosTextureAtlas() {
         return assets.get(logosSpriteSheetFile, TextureAtlas.class);
+    }
+
+    public Sound getSFX(SFXType sfxType, int index) {
+        Sound sound = null;
+        switch(sfxType) {
+            case HIT: sound = assets.get(sfxHits.get(index));
+        }
+
+        return sound;
     }
 
 

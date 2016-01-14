@@ -4,6 +4,7 @@ import com.badlogic.ashley.core.Component;
 import com.badlogic.gdx.utils.Array;
 
 import org.limbusdev.monsterworld.enums.AttackType;
+import org.limbusdev.monsterworld.enums.SFXType;
 import org.limbusdev.monsterworld.model.Attack;
 
 /**
@@ -29,7 +30,7 @@ public class MonsterStatusComponent implements Component {
         this.MP = 5;
 
         this.attacks = new Array<Attack>();
-        attacks.add(new Attack(AttackType.PHYSICAL, 5, "Kick"));
+        attacks.add(new Attack(AttackType.PHYSICAL, 5, "Kick", SFXType.HIT, 0));
     }
     /* ............................................................................... METHODS .. */
     

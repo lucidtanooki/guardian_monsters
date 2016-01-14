@@ -2,8 +2,10 @@ package org.limbusdev.monsterworld.model;
 
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.TimeUtils;
 
 import org.limbusdev.monsterworld.enums.AttackType;
+import org.limbusdev.monsterworld.enums.SFXType;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -13,6 +15,11 @@ import java.util.Observer;
  */
 public class Monster extends Observable {
     /* ............................................................................ ATTRIBUTES .. */
+    public Array<Attack> attacks;
+    public Array<Observer> observers;
+
+
+    // -------------------------------------------------------------------------------------- STATUS
     public int ID;
     public int level;
     public int exp;
@@ -22,10 +29,20 @@ public class Monster extends Observable {
     public int MPfull, MP;
     public long recovTime;      // Time until monster can attack again
 
-    public Array<Attack> attacks;
-    public Array<Observer> observers;
+
+    // ------------------------------------------------------------------------------- BATTLE STATUS
+    public boolean ready;
+    public boolean KO;
+    public long    waitingSince;
+
+    public Attack nextAttack;
+    public int    nextTarget;
+
+
     /* ........................................................................... CONSTRUCTOR .. */
+
     public Monster() {
+        // STATUS
         this.ID = 1;
         this.level = 1;
         this.exp = 0;
@@ -35,8 +52,15 @@ public class Monster extends Observable {
         this.MP = MPfull = 5;
         this.recovTime = 5000;
 
+        // BATTLE
+        this.ready = false;
+        this.KO = false;
+        this.waitingSince = 0;
+        this.nextTarget = 0;
+
+        // INIT
         this.attacks = new Array<Attack>();
-        attacks.add(new Attack(AttackType.PHYSICAL, 5, "Kick"));
+        attacks.add(new Attack(AttackType.PHYSICAL, 5, "Kick", SFXType.HIT, 0));
         this.observers = new Array<Observer>();
     }
     /* ............................................................................... METHODS .. */
@@ -63,6 +87,39 @@ public class Monster extends Observable {
 
     public int expAvailableInThisLevel() {
         return level*100;
+    }
+
+    /**
+     * Call this method when this monster is added to a battle action waiting queue
+     * @param targetPosition
+     * @param attackIndex
+     */
+    public void prepareForAttack(int targetPosition, int attackIndex) {
+        this.nextTarget = targetPosition;
+        this.nextAttack = attacks.get(attackIndex);
+    }
+
+    /**
+     * Call this method as soon as soon as this monster gets drawn from the queue
+     */
+    public void attack() {
+        this.ready = false;
+        this.waitingSince = TimeUtils.millis();
+    }
+
+    /**
+     * Call regularly to check whether the monster has recovered
+     */
+    public void update() {
+        if(TimeUtils.timeSinceMillis(waitingSince) > recovTime) ready = true;
+    }
+
+    /**
+     * Call this method when a battle starts
+     */
+    public void initBattle() {
+        this.ready = false;
+        this.waitingSince = TimeUtils.millis();
     }
 
     /* ..................................................................... GETTERS & SETTERS .. */

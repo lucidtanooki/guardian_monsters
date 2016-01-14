@@ -4,6 +4,7 @@ import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -18,6 +19,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 
 import org.limbusdev.monsterworld.MonsterWorld;
 import org.limbusdev.monsterworld.ecs.components.TeamComponent;
+import org.limbusdev.monsterworld.enums.MusicType;
 import org.limbusdev.monsterworld.managers.MediaManager;
 import org.limbusdev.monsterworld.utils.GlobalSettings;
 
@@ -36,6 +38,7 @@ public class BattleScreen implements Screen {
     private Texture background;
     private MediaManager media;
     private boolean initialized=false;
+    private Music bgMusic;
     /* ........................................................................... CONSTRUCTOR .. */
 
     public BattleScreen(MediaManager media, OutdoorGameWorldScreen gameScreen, MonsterWorld game) {
@@ -44,6 +47,8 @@ public class BattleScreen implements Screen {
         setUpInputProcessor();
         this.media = media;
         this.background = media.getBackgroundTexture(0);
+        this.bgMusic = media.getBGMusic(MusicType.BATTLE, 0);
+        this.bgMusic.setLooping(true);
     }
     /* ............................................................................... METHODS .. */
 
@@ -54,6 +59,7 @@ public class BattleScreen implements Screen {
     public void show() {
         if(!initialized) System.err.println("BattleScreen must get initialized before drawn.");
         this.batch = new SpriteBatch();
+        bgMusic.play();
         setUpInputProcessor();
     }
 
@@ -128,6 +134,7 @@ public class BattleScreen implements Screen {
     @Override
     public void hide() {
         initialized = false;
+        this.bgMusic.stop();
         this.battleHUD.hide();
     }
 

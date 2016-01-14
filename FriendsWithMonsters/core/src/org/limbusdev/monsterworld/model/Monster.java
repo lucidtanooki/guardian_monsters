@@ -33,7 +33,10 @@ public class Monster extends Observable {
     // ------------------------------------------------------------------------------- BATTLE STATUS
     public boolean ready;
     public boolean KO;
+    public boolean attackingRightNow;   // whether monster is involved in battle right now
+    public boolean waitingInQueue;
     public long    waitingSince;
+    public long    attackStarted;       // Time when attack started
 
     public Attack nextAttack;
     public int    nextTarget;
@@ -55,7 +58,10 @@ public class Monster extends Observable {
         // BATTLE
         this.ready = false;
         this.KO = false;
+        this.attackingRightNow = false;
+        this.waitingInQueue = false;
         this.waitingSince = 0;
+        this.attackStarted = 0;
         this.nextTarget = 0;
 
         // INIT
@@ -97,21 +103,31 @@ public class Monster extends Observable {
     public void prepareForAttack(int targetPosition, int attackIndex) {
         this.nextTarget = targetPosition;
         this.nextAttack = attacks.get(attackIndex);
+        this.ready = false;
+        this.waitingInQueue = true;
     }
 
     /**
-     * Call this method as soon as soon as this monster gets drawn from the queue
+     * Call this method as soon as this monster gets removed from the queue
      */
-    public void attack() {
-        this.ready = false;
+    public void finishAttack() {
         this.waitingSince = TimeUtils.millis();
+        waitingInQueue = false;
+    }
+
+    /**
+     * Call this method when monster reaches first slot in Queue
+     */
+    public void startAttack() {
+        this.attackStarted = TimeUtils.millis();
+        this.attackingRightNow = true;
     }
 
     /**
      * Call regularly to check whether the monster has recovered
      */
     public void update() {
-        if(TimeUtils.timeSinceMillis(waitingSince) > recovTime) ready = true;
+        if(!waitingInQueue && TimeUtils.timeSinceMillis(waitingSince) > recovTime) ready = true;
     }
 
     /**
@@ -129,5 +145,9 @@ public class Monster extends Observable {
      */
     public int getExpPerc() {
         return MathUtils.round(exp/1.f/expAvailableInThisLevel()*100);
+    }
+
+    public int getNextAttackDuration() {
+        return 1000;
     }
 }

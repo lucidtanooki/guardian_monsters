@@ -217,7 +217,9 @@
  <objectgroup name="livingEntities" width="32" height="32">
   <object name="person" x="32" y="160" width="16" height="16">
    <properties>
+    <property name="male" value="true"/>
     <property name="path" value="ESTOP"/>
+    <property name="spriteIndex" value="1"/>
     <property name="static" value="true"/>
     <property name="text" value="Watch out when strolling through the woods on your own. There are strong and dangerous creatures out here."/>
    </properties>

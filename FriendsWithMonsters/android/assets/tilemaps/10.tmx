@@ -168,14 +168,18 @@
  <objectgroup name="livingEntities" width="32" height="20">
   <object name="person" x="128" y="128" width="16" height="16">
    <properties>
+    <property name="male" value="true"/>
     <property name="path" value="SSTOP, WSTOP, ESTOP"/>
+    <property name="spriteIndex" value="2"/>
     <property name="static" value="false"/>
     <property name="text" value="I've been hiking for 5 hours. When I came back my car was gone. Thank god that I live in Timsey."/>
    </properties>
   </object>
   <object name="person" x="400" y="128" width="16" height="16">
    <properties>
+    <property name="male" value="true"/>
     <property name="path" value="SSTOP"/>
+    <property name="spriteIndex" value="0"/>
     <property name="static" value="true"/>
     <property name="text" value="Just a few minutes ago this big rock fell down from the top of the mountain. No the entry to the tunnel is blocked."/>
    </properties>

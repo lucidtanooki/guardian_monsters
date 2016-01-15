@@ -88,10 +88,12 @@
   <object x="240" y="432" width="32" height="16"/>
   <object x="192" y="288" width="16" height="16"/>
  </objectgroup>
- <objectgroup name="livingEntities" width="32" height="32" visible="0">
+ <objectgroup name="livingEntities" width="32" height="32">
   <object name="person" x="96" y="224" width="16" height="16">
    <properties>
+    <property name="male" value="true"/>
     <property name="path" value="WSTOP,ESTOP,SSTOP,S,S,S,SSTOP,ESTOP,WSTOP,N,N,N"/>
+    <property name="spriteIndex" value="0"/>
     <property name="startDir" value="S"/>
     <property name="static" value="false"/>
     <property name="text" value="Hello. How are you doing? I'm waiting for my girlfriend."/>
@@ -99,7 +101,9 @@
   </object>
   <object name="person" x="80" y="160" width="16" height="16">
    <properties>
+    <property name="male" value="true"/>
     <property name="path" value="WSTOP"/>
+    <property name="spriteIndex" value="2"/>
     <property name="static" value="true"/>
     <property name="text" value="I like standing here and watching how the wind moves the water."/>
    </properties>

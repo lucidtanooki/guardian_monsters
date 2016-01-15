@@ -133,8 +133,10 @@
  <objectgroup name="livingEntities" width="64" height="32">
   <object name="person" x="400" y="304" width="16" height="16">
    <properties>
+    <property name="male" value="true"/>
     <property name="moving" value="true"/>
     <property name="path" value="E,E,E,E,E,E,E,E,E,E,SSTOP,W,W,W,W,W,W,W,W,W,W"/>
+    <property name="spriteIndex" value="2"/>
     <property name="startDir" value="S"/>
    </properties>
   </object>

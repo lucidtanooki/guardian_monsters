@@ -19,7 +19,7 @@ public class Attack {
     public Attack(AttackType attackType, int damage, String name, SFXType sfxType, int sfxIndex) {
         this.attackType = attackType;
         this.damage = damage;
-        if(GlobalSettings.DEBUGGING_ON) this.damage = 100; // TODO
+        if(GlobalSettings.DEBUGGING_ON) this.damage = 10; // TODO
         this.name = name;
         this.sfxIndex = sfxIndex;
         this.sfxType = sfxType;

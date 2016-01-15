@@ -17,6 +17,8 @@ public class Monster extends Observable {
     /* ............................................................................ ATTRIBUTES .. */
     public Array<Attack> attacks;
     public Array<Observer> observers;
+    public static int INSTANCECOUNTER=0;
+    public int INSTANCEID;
 
 
     // -------------------------------------------------------------------------------------- STATUS
@@ -37,6 +39,7 @@ public class Monster extends Observable {
     public boolean waitingInQueue;
     public long    waitingSince;
     public long    attackStarted;       // Time when attack started
+    public int     battleFieldPosition;
 
     public Attack nextAttack;
     public int    nextTarget;
@@ -45,6 +48,8 @@ public class Monster extends Observable {
     /* ........................................................................... CONSTRUCTOR .. */
 
     public Monster() {
+        this.INSTANCEID=INSTANCECOUNTER;
+        INSTANCECOUNTER++;
         // STATUS
         this.ID = 1;
         this.level = 1;
@@ -53,7 +58,7 @@ public class Monster extends Observable {
         this.HP = HPfull = 30;
         this.magicStrength = 5;
         this.MP = MPfull = 5;
-        this.recovTime = 5000;
+        this.recovTime = 3000;
 
         // BATTLE
         this.ready = false;
@@ -63,6 +68,7 @@ public class Monster extends Observable {
         this.waitingSince = 0;
         this.attackStarted = 0;
         this.nextTarget = 0;
+        this.battleFieldPosition = 0;
 
         // INIT
         this.attacks = new Array<Attack>();
@@ -113,6 +119,7 @@ public class Monster extends Observable {
     public void finishAttack() {
         this.waitingSince = TimeUtils.millis();
         waitingInQueue = false;
+        attackingRightNow = false;
     }
 
     /**
@@ -133,9 +140,18 @@ public class Monster extends Observable {
     /**
      * Call this method when a battle starts
      */
-    public void initBattle() {
+    public void initBattle(int position) {
         this.ready = false;
         this.waitingSince = TimeUtils.millis();
+        this.battleFieldPosition = position;
+        waitingInQueue = false;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if(!(o instanceof  Monster)) return false;
+        if(((Monster)o).INSTANCEID == this.INSTANCEID) return true;
+        else return false;
     }
 
     /* ..................................................................... GETTERS & SETTERS .. */

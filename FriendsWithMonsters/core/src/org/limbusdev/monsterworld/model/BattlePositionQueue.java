@@ -10,12 +10,14 @@ public class BattlePositionQueue {
     private Array<Integer> positions;
     private int pointer;
     private int size;
+    private boolean leftSide;
     /* ........................................................................... CONSTRUCTOR .. */
-    public BattlePositionQueue(int size) {
+    public BattlePositionQueue(int size, boolean leftSide) {
         this.size = size;
         positions = new Array<Integer>();
         for(int i=0;i<size;i++) positions.add(i);
         pointer = 0;
+        this.leftSide = leftSide;
     }
     /* ............................................................................... METHODS .. */
 
@@ -25,6 +27,7 @@ public class BattlePositionQueue {
      * @return pointer to the active position
      */
     public int remove(int pos) {
+        if(!leftSide)pos -=3;
         if(!positions.contains(new Integer(BatPos.convertFromCounterToPosition(pos)), false)) {
             try {
                 return BatPos.convertFromCounterToPosition(positions.get(pointer));
@@ -35,25 +38,42 @@ public class BattlePositionQueue {
         }
 
         positions.removeValue(new Integer(BatPos.convertFromCounterToPosition(pos)), false);
+
+        int returnValue;
+
         if(positions.size<=0) return -1;
         pointer %= positions.size;
-        if(size==2) return BatPos.convertFromCounterToPosition2(positions.get(pointer));
-        else return BatPos.convertFromCounterToPosition(positions.get(pointer));
+        if(size==2) returnValue = BatPos.convertFromCounterToPosition2(positions.get(pointer));
+        else returnValue = BatPos.convertFromCounterToPosition(positions.get(pointer));
+
+        if(!leftSide) return returnValue +3;
+        else return returnValue;
     }
 
     public int getNext() {
         pointer++;
         pointer %= positions.size;
 
-        if(size==2) return BatPos.convertFromCounterToPosition2(positions.get(pointer));
-        else return BatPos.convertFromCounterToPosition(positions.get(pointer));
+        int returnValue;
+
+        if(size==2) returnValue = BatPos.convertFromCounterToPosition2(positions.get(pointer));
+        else returnValue = BatPos.convertFromCounterToPosition(positions.get(pointer));
+
+        if(!leftSide) return returnValue +3;
+        else return returnValue;
     }
 
     public int getPrevious() {
         pointer--;
         if(pointer < 0) pointer = positions.size-1;
-        if(size==2) return BatPos.convertFromCounterToPosition2(positions.get(pointer));
-        else return BatPos.convertFromCounterToPosition(positions.get(pointer));
+
+        int returnValue;
+
+        if(size==2) returnValue = BatPos.convertFromCounterToPosition2(positions.get(pointer));
+        else returnValue = BatPos.convertFromCounterToPosition(positions.get(pointer));
+
+        if(!leftSide) return returnValue +3;
+        else return returnValue;
     }
     /* ..................................................................... GETTERS & SETTERS .. */
 

@@ -303,8 +303,8 @@ public class BattleHUDBackup {
         reset();
 
         // Initializes Battle Queues ...............................................................
-        this.heroPosQueue = new BattlePositionQueue(team.monsters.size);
-        this.opponentPosQueue = new BattlePositionQueue(opponentTeam.monsters.size);
+        this.heroPosQueue = new BattlePositionQueue(team.monsters.size, true);
+        this.opponentPosQueue = new BattlePositionQueue(opponentTeam.monsters.size, false);
 
         //Initialize Teams .........................................................................
         // Hero Team
@@ -329,8 +329,8 @@ public class BattleHUDBackup {
         this.aiPlayer.havePause(true);
 
         // Initialize Monsters for Battle
-        for(Monster m : this.team)         m.initBattle();
-        for(Monster m : this.opponentTeam) m.initBattle();
+        for(Monster m : this.team)         m.initBattle(1);
+        for(Monster m : this.opponentTeam) m.initBattle(1);
 
 
         // Initialize Status UIs ...................................................................
@@ -1023,8 +1023,8 @@ public class BattleHUDBackup {
         this.monsterInformation = MonsterInformation.getInstance();
         this.allKO = false;
 
-        this.heroPosQueue = new BattlePositionQueue(3);
-        this.opponentPosQueue = new BattlePositionQueue(3);
+        this.heroPosQueue = new BattlePositionQueue(3, true);
+        this.opponentPosQueue = new BattlePositionQueue(3, false);
 
         this.monsterImgs = new ArrayMap<Integer,Image>();
 

@@ -53,7 +53,7 @@ public class MediaManager {
         assets.load(this.mainMenuBGImgFile2, Texture.class);
 
         this.maleSprites = new Array<String>();
-        for(int i=1;i<3;i++)this.maleSprites.add("spritesheets/person" + i + "m.pack");
+        for(int i=1;i<=3;i++)this.maleSprites.add("spritesheets/person" + i + "m.pack");
         for(String s : maleSprites) assets.load(s, TextureAtlas.class);
         this.femaleSprites = new Array<String>();
 
@@ -129,13 +129,13 @@ public class MediaManager {
 
     /**
      * Texture Atlas for a person
-     * @param sex   true=male, false=female
+     * @param male  true=male, false=female
      * @param index
      * @return
      */
-    public TextureAtlas getPersonTextureAtlas(boolean sex, int index) {
+    public TextureAtlas getPersonTextureAtlas(boolean male, int index) {
         TextureAtlas atlas;
-        if(sex) {
+        if(male) {
             atlas = assets.get(maleSprites.get(index),TextureAtlas.class);
         } else {
             atlas = assets.get(femaleSprites.get(index),TextureAtlas.class);

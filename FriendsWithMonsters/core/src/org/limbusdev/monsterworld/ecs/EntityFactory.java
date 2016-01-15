@@ -52,8 +52,8 @@ public class EntityFactory {
      */
     public Entity createHero(PositionComponent startField, boolean restoreSave) {
         Entity hero = new HeroEntity();
-        CharacterSpriteComponent csc = new CharacterSpriteComponent(media.getTextureAtlasType
-                (TextureAtlasType.HERO));
+        CharacterSpriteComponent csc = new CharacterSpriteComponent(
+                media.getTextureAtlasType(TextureAtlasType.HERO));
         hero.add(csc);
         hero.add(new InputComponent());
         PositionComponent position = new PositionComponent(
@@ -106,21 +106,25 @@ public class EntityFactory {
 
         return createPerson(new PositionComponent(personInformation.startPosition.x,
                 personInformation.startPosition.y, GlobalSettings.TILE_SIZE, GlobalSettings
-                .TILE_SIZE), path, personInformation.moves, personInformation.conversation);
+                .TILE_SIZE), path, personInformation.moves, personInformation.conversation,
+                personInformation.male, personInformation.spriteIndex);
     }
 
     /**
      * Creates a walking person entity
      * @param startField
+     * @param path
+     * @param moves
+     * @param conv
      * @return
      */
-    public Entity createPerson(PositionComponent startField, Array<SkyDirection> path, boolean
-            moves, String conv) {
+    private Entity createPerson(PositionComponent startField, Array<SkyDirection> path, boolean
+            moves, String conv, boolean male, int spriteIndex) {
         Entity person = new Entity();
         PathComponent pathComp = new PathComponent(path, moves);
         pathComp.moving = moves;
         person.add(pathComp);
-        person.add(new CharacterSpriteComponent(media.getPersonTextureAtlas(true,1)));
+        person.add(new CharacterSpriteComponent(media.getPersonTextureAtlas(male,spriteIndex)));
         PositionComponent position = new PositionComponent(
                 startField.x,
                 startField.y,

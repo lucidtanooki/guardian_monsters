@@ -202,7 +202,9 @@
  <objectgroup name="livingEntities" width="32" height="32">
   <object name="person" x="64" y="336" width="16" height="16">
    <properties>
+    <property name="male" value="true"/>
     <property name="path" value="SSTOP"/>
+    <property name="spriteIndex" value="2"/>
     <property name="static" value="true"/>
     <property name="text" value="One day I will get a boat and sail around this beautiful planet."/>
    </properties>

@@ -95,7 +95,9 @@ public class OutdoorGameArea {
                     mo.getProperties().get("path", String.class),
                     new IntVector2(MathUtils.round(r.x), MathUtils.round(r.y)),
                     Boolean.valueOf(mo.getProperties().get("static", String.class)),
-                    mo.getProperties().get("text", String.class)));
+                    mo.getProperties().get("text", String.class),
+                    Boolean.valueOf(mo.getProperties().get("male", String.class)),
+                    Integer.valueOf(mo.getProperties().get("spriteIndex", String.class))));
         }
 
         // get information about signs on map

@@ -39,6 +39,7 @@ public class MediaManager {
     private Array<String> bgs;
     private Array<String> bgMusicTown;
     private Array<String> battleMusic;
+    private Array<String> maleSprites, femaleSprites;
     public  Skin skin;
     
     /* ........................................................................... CONSTRUCTOR .. */
@@ -50,6 +51,11 @@ public class MediaManager {
         assets.load(this.logosSpriteSheetFile, TextureAtlas.class);
         assets.load(this.mainMenuBGImgFile, Texture.class);
         assets.load(this.mainMenuBGImgFile2, Texture.class);
+
+        this.maleSprites = new Array<String>();
+        for(int i=1;i<3;i++)this.maleSprites.add("spritesheets/person" + i + "m.pack");
+        for(String s : maleSprites) assets.load(s, TextureAtlas.class);
+        this.femaleSprites = new Array<String>();
 
         // Music
         bgMusicTown = new Array<String>();
@@ -117,6 +123,22 @@ public class MediaManager {
                 atlas = null;
                 System.err.println("TextureAtlasType " + type + " not found.");
                 break;
+        }
+        return atlas;
+    }
+
+    /**
+     * Texture Atlas for a person
+     * @param sex   true=male, false=female
+     * @param index
+     * @return
+     */
+    public TextureAtlas getPersonTextureAtlas(boolean sex, int index) {
+        TextureAtlas atlas;
+        if(sex) {
+            atlas = assets.get(maleSprites.get(index),TextureAtlas.class);
+        } else {
+            atlas = assets.get(femaleSprites.get(index),TextureAtlas.class);
         }
         return atlas;
     }

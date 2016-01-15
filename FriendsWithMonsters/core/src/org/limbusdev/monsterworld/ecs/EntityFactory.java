@@ -120,7 +120,7 @@ public class EntityFactory {
         PathComponent pathComp = new PathComponent(path, moves);
         pathComp.moving = moves;
         person.add(pathComp);
-        person.add(new CharacterSpriteComponent(media.getTextureAtlasType(TextureAtlasType.HERO)));
+        person.add(new CharacterSpriteComponent(media.getPersonTextureAtlas(true,1)));
         PositionComponent position = new PositionComponent(
                 startField.x,
                 startField.y,

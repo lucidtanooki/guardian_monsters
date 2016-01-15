@@ -139,24 +139,10 @@ public class BattleHUD {
         // .............................................................................. RECOVERING
         // Activate monsters if they have recovered
         for(int i=0; i<6; i++) {
-            if(i<3 && team.get(i).ready && i == chosenTeamMonster) {
+            if (i < 3 && team.get(i).ready && i == chosenTeamMonster) {
                 battleMenuButtons.get("attack").setDisabled(false);
                 battleMenuButtons.get("attack").addAction(
                         Actions.sequence(Actions.alpha(1, .2f)));
-            }
-
-            if (i < 3 && !team.get(i).ready) {
-                    // Update Waiting Bar
-                    progressBars.get("Recov").get(i).setValue(TimeUtils.timeSinceMillis(
-                            team.get(i).waitingSince) / (1f * team.get(i).recovTime) * 100f);
-            } else {
-                if(i >= 3 && !opponentTeam.get(i-3).ready) {
-                    // Update Waiting Bar
-                    progressBars.get("Recov").get(i).setValue(TimeUtils.timeSinceMillis(
-                            opponentTeam.get(i-3).waitingSince) / (1f * opponentTeam.get(i - 3)
-                            .recovTime) *
-                            100f);
-                }
             }
         }
 
@@ -190,6 +176,19 @@ public class BattleHUD {
     public void updateMonsters() {
         for(Monster m : this.team)         m.update();
         for(Monster m : this.opponentTeam) m.update();
+        updateRecovBars(team);
+        updateRecovBars(opponentTeam);
+    }
+
+    private void updateRecovBars(Array<Monster> team) {
+        for(Monster m : team) {
+            if(!m.ready) {
+                // Update Waiting Bar
+                progressBars.get("Recov").get(m.battleFieldPosition).setValue(
+                        TimeUtils.timeSinceMillis(m.waitingSince)
+                                / (1f * m.recovTime) * 100f);
+            }
+        }
     }
 
     public void updateAttackerQueue() {

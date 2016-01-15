@@ -19,6 +19,9 @@
  <tileset firstgid="16385" name="magiscarf" tilewidth="16" tileheight="16">
   <image source="../spritesheets/magiscarf_transparent.png" width="992" height="1264"/>
  </tileset>
+ <tileset firstgid="21283" name="limbusdev_world" tilewidth="16" tileheight="16">
+  <image source="../spritesheets/limbusdev_world.png" width="1024" height="1024"/>
+ </tileset>
  <layer name="ground1" width="32" height="32">
   <data encoding="base64" compression="zlib">
    eJztlO0KgjAUhk+Oir7xBryLLiAt/Fm3FFLRt7dUURF9eUmdQZGMqUvXVuCPB5TN88xzxusWANwcLiNkzDBR6N8jB4ajQn/RACgxlA09s5iid67JTTmhu0UAZgafLGdb4LfLECtOrQq6q08CXL8b73dKjaR3+8g1xC3hX2gvzpJmcWHcIn6ZvPx9ZKDRvw7Ngfo7FoBjqfOz/R+i21Pgr+O9bTA0iTp/FLlfjj/tPZblT1tHld+2+AQmZrwZvS5KUp2tZkhbL3YMDtJFesxz3N64ep/uV+H3NCM7N34t//7ZL5I/35rRRiA7fFN/j3T6aY92Gf0PtWB13Q==
@@ -26,20 +29,20 @@
  </layer>
  <layer name="walls1" width="32" height="32">
   <data encoding="base64" compression="zlib">
-   eJztl9tOE0Ecxv9pualAD4TEWCBwo69gaPEMMS0ULvUFPDyBJvVKJSaUw/ISmGjwBcotIaHQ1jt9Ae964/Ha36ZMOm7H2ZmmUWP4kl/+2XZ2vvlmdmeyIna1p0XeT7vX1JTIhan4GtB216O9ay1B2aGq8bq2d62uUvltc5BIinQmujyaFHk82d/PvZzIfRhJ9n7b4/p17vfX+rra5mA90Wv/LG/nVUJilZkRyc705zepmu/671/s/+8g30+S/Fcm4sfwgXn4mPs1v82/Y/CPqq6Nw1Vx+etn/mp9wzmuns21SSOO+ZXi8of+h/jfTXSfwwNtrU0K11/lr0aeDZPi8usK5+FTtscD3oOHkXdB+eu+ak2iz6pLfpt/qHAMOspfp543P6u++cN1WNIw6cjh/atr/j75dR3PizTgBE6hCS1ow+dZkS/wFb7Bd/gxa+7HJ7+uVIG9EUZhDMYhDRmYZ20KUIQFuAbXs+Z+Bs1fwqcMy7ACFViFtYJfP6b8at+3aQOfGmzCFmzDDgSe/qb8at9/Z9nHjvFpwAmcQhNa0I74X71k91dZTXnfamN6E1mfVJF7YBTGYBzSkCn22jzB+2mMv8pqOrNt/iV8yrAMK1CBVVgrilU32MNvwr42t5c99mulDXxqsAlbsA07EMT4/8+6NSdyG+7A4tyf93+O5wt4Cet/wf9cg8v3/BmmggHOn2GqPcD5O0z9K/mDSPVV9H6favqGdr1fz+Hzja7Xn4Hy7Mg=
+   eJztl8tOE1Ecxv9p2eCNlpAQCwQ2+gqG1gveYrioKyJ75aIPAEldqcQEUMZ3UFAIvEDZGhLwUnf6AuzYeF37m5ST/js9nTmnNEqiX/LL6UzPzHe+c82IxKvcK/Kp171s7xE51pNcBtR94VHftRyGEYfStNe1vmvpKpM/rg9SaZH9zgrTXSIzXfXvuZMVmYC2dPXeCter2cbXelzj+mA+Va3/MBfP05QkqqNPJNNXn9+mYq7iv9Fd/99Wrp40+c92JrfhM/3wJVubP85/3+IfVUm1w1VJ+UsH/mZ8wz4uHvS1TW2O+Y2S8of+b/G/karMwy011jaF42/yFyNzw6ak/FphP+xlqkyyDqYia8H4a18zJtG56pI/zj9U2AaD9teUcva56ps/HIfrCpu2HdZfSfn75NfaGRTZhXfwHj7ARyjD136Rb/AdfsBP+NVvf49Pfq32PHsjHIcTcBJOQQcMMjZ5KMB5uAAXM/b3NJt/GJ8RGIUxuAm34Hbe7z22/Gbfj9MCPouwBM/gOSxD4Olvy2/2/c0Ga/buuMg9mIQpmIYZuA8Pxmvrnjsd72+y2vKuqzatqd8v8XgFK7AKr+ENrMG68p/Fey7B32S1ndmN/A+jS+zhQ7Ch+vaMx35ttFBg/Au195a5Dgr2+v+CLg+IXIGrcG3gz/s/wvMxPIH5v+D/X83L9/xppYImzp9WqtzE+dtKHZX8QaT0VfR5n9L2De36vM7h842uy9/Ru+rm
   </data>
  </layer>
  <layer name="objects1" width="32" height="32">
   <data encoding="base64" compression="zlib">
-   eJxjYBgF1AQrxFDZ2PjIYqSCpSIMDM+gOE2UsFuobT/I3qVQu59DMTpQBcqrieDmkwLWiJOuJxXkPhHcfFLAGzLsJxUoAt32BIf7dCRob78KmWEznMATYfraVyXFwFAtheAvxJMGaGX3binCamkBdqHZ/ZiOfh8KALlcfz7A4TLQ9tMDTGEiTf1kItVXSJLullEAAWwKDAzsCgNovyLQfsWBs59DgYGBU2Hg7PcA2u05gPbDwGgewg3aXBgY2l0G2hWjYCgDACfmJyg=
+   eJxjYBgF1AQrxFDZ2PjIYqSCpSIMDM+gOE2UsFuobT/I3qVQu59DMTpQBcqrieDmkwLWiJOuJxXkPhHcfFLAGzLsJxUoAt32BIf7dCRob78KmWEznMATYfraVyXFwFAtheAvxJMGaGX3binCamkBdqHZ/ZiOfh8KALlcfz7A4TLQ9tMDTGEiXu1kEtRWSJLullEAAWwKDAzsCgNovyLQfsWBs59DgYGBU2Hg7PcA2u05gPbDwGgewg3aXBgY2l0G2hWjYCgDACo6Jyg=
   </data>
  </layer>
  <layer name="tops1" width="32" height="32">
   <data encoding="base64" compression="zlib">
-   eJzllzlPAkEYhj+Pxps1hCsk0GlhrVBpQeHt79Bo4dlqu3iV+iNovLDUdj3/g0YrbZVOH2MIuDLZ1Z1dIj7Jk1nIDO+3kPmWsRIiF2gpRr/Jk2Emao9B4HTvhd5P+8Ii/eHv66OGSMz4+t5dROQ+on7dqDwaznP2mLPvYl6ZQvT39eig1u+rws39/5SBmP7P9IKVYW/gJV7hNd7gbSaY/LasSDt2YCd2YTf2ZIPJHyNnHCdwEqdwGmdwMSWyhMu4gqu4ltKbb5KTx03cwm3cwV08IOsQj/AYT7CoOd9Pguz7tdD1zCuyZ09t+3Y4JDIScrd+wWMNL2S/2vLXyd5wmT+XrFzPJtXz7DzRq59xMC4yhKWqGs7IPvc5304mXrl++8imP89XfbcPPvTr/0hTWqQZW7A1Xc9KGo+Sz89/p35bvYd0YwZ0xlBhecwezfF/IKenlnri9dylOr85jWXs5y6v692OKryu/0u8Az9Seyo=
+   eJzl17lOAlEYhuHf5QLAGARCIgmyaKzVTgsKrcErUDajhWurLd6A9uzGxg1LbfEyZFGJtmqnrzEGRMYZnQEifsmTGcg5fGeYzMAU7CJXKChsW51dOuL25tt2RO3YDwfeeQdFfINf5w+ZRazmz+9dW0SKFuXX3ZqKWX3MHmP2NYz7yOHQ79djRJqdX6VoOf6fZtxa23cFREbghgfegPF932WBvkWEEEYE0TauIUFXEimkkUEWuTatoUhPCWVUcINb3KGK1WGRNaxjA5vYGjau3xXk/MMND7zwYRRjOKLrGCc4xRnyBvYv0LGIEMKIIIoYloL6P1/tvp+gI4kU0sggixwODOhX+80r0lFCGRXc4BZ3qNb157lmz62f506bRGZM2taxorAG1zznH2544IUPoxibr417pPupoX+b7h2N/UuO2n7MoTyuMffcqx8wYROZxHPdGi7ovmxxf2OmbLX9l7du7s/Ldd9tuQX36/+YHqdIL/rQ7+zkSrovz1b1MXqi9j+7/hoyOvE2PWMopaCze9YvMuc3Zi2djN7nLqXnN7XtRxqfu/TO17pVit75fymvGTeflw==
   </data>
  </layer>
- <objectgroup name="colliderWalls1" width="32" height="32">
+ <objectgroup name="colliderWalls1" width="32" height="32" visible="0">
   <object x="0" y="0" width="512" height="48"/>
   <object x="0" y="48" width="128" height="32"/>
   <object x="128" y="48" width="160" height="16"/>
@@ -68,16 +71,14 @@
   <object x="32" y="128" width="48" height="16"/>
   <object x="16" y="144" width="64" height="64"/>
   <object x="112" y="128" width="16" height="16"/>
-  <object x="224" y="288" width="16" height="32"/>
-  <object x="256" y="288" width="16" height="32"/>
-  <object x="240" y="256" width="16" height="16"/>
+  <object x="208" y="256" width="16" height="16"/>
   <object x="144" y="144" width="16" height="32"/>
   <object x="112" y="80" width="16" height="48"/>
   <object x="288" y="48" width="16" height="48"/>
   <object x="288" y="112" width="16" height="80"/>
-  <object x="192" y="192" width="112" height="64"/>
-  <object x="192" y="256" width="48" height="32"/>
-  <object x="256" y="256" width="48" height="32"/>
+  <object x="176" y="192" width="128" height="64"/>
+  <object x="176" y="256" width="16" height="32"/>
+  <object x="224" y="256" width="80" height="32"/>
   <object x="336" y="272" width="16" height="16"/>
   <object x="304" y="192" width="64" height="32"/>
   <object x="368" y="192" width="16" height="16"/>
@@ -85,9 +86,9 @@
   <object x="128" y="400" width="16" height="16"/>
   <object x="368" y="288" width="16" height="16"/>
   <object x="240" y="432" width="32" height="16"/>
-  <object x="208" y="288" width="16" height="16"/>
+  <object x="192" y="288" width="16" height="16"/>
  </objectgroup>
- <objectgroup name="livingEntities" width="32" height="32">
+ <objectgroup name="livingEntities" width="32" height="32" visible="0">
   <object name="person" x="96" y="224" width="16" height="16">
    <properties>
     <property name="path" value="WSTOP,ESTOP,SSTOP,S,S,S,SSTOP,ESTOP,WSTOP,N,N,N"/>
@@ -127,12 +128,12 @@
     <property name="targetWarpPointID" value="2"/>
    </properties>
   </object>
-  <object name="startField" x="240" y="288" width="16" height="16">
+  <object name="startField" x="208" y="288" width="16" height="16">
    <properties>
     <property name="fieldID" value="3"/>
    </properties>
   </object>
-  <object name="warpField" x="240" y="272" width="16" height="16">
+  <object name="warpField" x="208" y="272" width="16" height="16">
    <properties>
     <property name="targetID" value="4"/>
     <property name="targetWarpPointID" value="1"/>
@@ -142,11 +143,6 @@
    <properties>
     <property name="targetID" value="6"/>
     <property name="targetWarpPointID" value="1"/>
-   </properties>
-  </object>
-  <object name="startField" x="240" y="288" width="16" height="16">
-   <properties>
-    <property name="fieldID" value="3"/>
    </properties>
   </object>
   <object name="startField" x="368" y="224" width="16" height="16">
@@ -256,7 +252,7 @@
     <property name="title" value="Timsey Village"/>
    </properties>
   </object>
-  <object name="sign" x="208" y="288" width="16" height="16">
+  <object name="sign" x="192" y="288" width="16" height="16">
    <properties>
     <property name="text" value="Please come in. Everyone is welcome."/>
     <property name="title" value="Family Eckdon"/>

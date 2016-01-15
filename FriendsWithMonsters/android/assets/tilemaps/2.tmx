@@ -17,7 +17,7 @@
  </layer>
  <layer name="walls1" width="32" height="32">
   <data encoding="base64" compression="zlib">
-   eJztl0EKwkAMRQd3urPbutW76EG8iAeot3KpR7IgwfJp+n8yVUT9EIYp/CbPSSfYbUo599ElV1PWf+3jVrGasv5s3d/Gv2xLWbV8xfqP60eoPtxbHfv+2aHlK9Zv+VUf7pGDhcdv4cnrF+Rg4fGz/F6/vJsf34McTLX8+DviuZjUflbzm8/jR6n9zPJvm1J2zdOn8jON8StS+ae8w/ojuYfvyPAP8+N5RlXLj+cZFfv+WX617z2x++/V+Wv7H2uKCvnZfePx4l6d48jP7htvDqDUOT7V/5E5iDotYv4xjsgczOb/838uvyLPd5mBX1HWh/65+aP+T+H/1f9/d7afmu4=
+   eJztl0EKwkAMRQd3urPbcat30YN4EQ/Q3sqlHskBCQ6fZvKTVinqhzCM8Js8J53QfpfSUKIPrqKo/1biPmEVRf3Rur+Nf51T2mR7xfrP22ewPtxLHcfy2ynbK9Yv+Vkf7pHDCo1fQpPWL8hhhcZv5df65dP8+BzksDSVH/9HPBcR289sfvFp/Ci2n638+y6lQ/fysfyWxvgZsfwtb12/J3f9jAh/nR/P0yvxR/nxPL0Sv6ePW/dCVJ73+B35o/2PNUXzCr9132i8uGfnOPa/dd9ocwDFzvHW+++Zg6jLyucf4/DMwWj+P/9y+RlpvusM/IyiPvTPze/1L4X/V7//HkCDlaQ=
   </data>
  </layer>
  <layer name="objects1" width="32" height="32">
@@ -27,7 +27,7 @@
  </layer>
  <layer name="tops1" width="32" height="32">
   <data encoding="base64" compression="zlib">
-   eJzt1LERgCAMheF3bkCbjXEyYQ+ZQ1uLXEIODzzf16QipPoBIqKnLMAu+nxbuf+oos+vOBPQ0uwriNY2qjfWHm1fb2+ie0b1a9UOHtvsC4jIy9tLq6PRd95eWh2Nvvu7C+boWEA=
+   eJzt1DEOgCAMheEXb8DaG+vJ1HvIOXBxkKRpJRAgvm/pROn0A0REb6sAm+izteP+4xR9zuIKQAy9ryAaS96RWr2x9jwz78jX3mh3WXtq9WvUDu5L7wuIyMvbS6vLpe+8vbQ6Wvru7xL/mltO
   </data>
  </layer>
  <objectgroup name="colliderWalls1" width="32" height="32">
@@ -46,8 +46,9 @@
   <object x="224" y="320" width="32" height="160"/>
   <object x="288" y="480" width="224" height="32"/>
   <object x="0" y="480" width="256" height="32"/>
-  <object x="480" y="96" width="32" height="384"/>
   <object x="0" y="96" width="32" height="384"/>
+  <object x="480" y="96" width="32" height="160"/>
+  <object x="480" y="288" width="32" height="192"/>
  </objectgroup>
  <objectgroup name="sensors" width="32" height="32">
   <object name="startField" x="256" y="16" width="16" height="16">
@@ -188,6 +189,28 @@
     <property name="probability" value="0.05"/>
     <property name="probability2" value="0.02"/>
     <property name="probability3" value="0.01"/>
+   </properties>
+  </object>
+  <object name="startField" x="480" y="256" width="16" height="16">
+   <properties>
+    <property name="fieldID" value="5"/>
+   </properties>
+  </object>
+  <object name="warpField" x="496" y="256" width="16" height="16">
+   <properties>
+    <property name="targetID" value="11"/>
+    <property name="targetWarpPointID" value="1"/>
+   </properties>
+  </object>
+  <object name="startField" x="480" y="272" width="16" height="16">
+   <properties>
+    <property name="fieldID" value="5"/>
+   </properties>
+  </object>
+  <object name="warpField" x="496" y="272" width="16" height="16">
+   <properties>
+    <property name="targetID" value="11"/>
+    <property name="targetWarpPointID" value="1"/>
    </properties>
   </object>
  </objectgroup>

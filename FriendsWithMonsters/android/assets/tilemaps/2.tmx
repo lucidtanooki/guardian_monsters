@@ -10,14 +10,17 @@
  <tileset firstgid="4097" name="pokepublic" tilewidth="16" tileheight="16">
   <image source="../spritesheets/thatssowitty_1.png" width="1024" height="1024"/>
  </tileset>
+ <tileset firstgid="8193" name="limbusdev_world" tilewidth="16" tileheight="16">
+  <image source="../spritesheets/limbusdev_world.png" width="1024" height="1024"/>
+ </tileset>
  <layer name="ground1" width="32" height="32">
   <data encoding="base64" compression="zlib">
-   eJzt0yEWABAQQMEVcLS9/43QdIVnwvRffpaIBIADdWqbfkET/GC91y/oAOANA2NhHkk=
+   eJzt06ERACAMALFWFLZh/wEYDIvlEAgi4t/8HBETAC5URrRNz/dN8IPyGwAHFuB/wcE=
   </data>
  </layer>
  <layer name="walls1" width="32" height="32">
   <data encoding="base64" compression="zlib">
-   eJztl0EKwkAMRQd3urPbcat30YN4EQ/Q3sqlHskBCQ6fZvKTVinqhzCM8Js8J53QfpfSUKIPrqKo/1biPmEVRf3Rur+Nf51T2mR7xfrP22ewPtxLHcfy2ynbK9Yv+Vkf7pHDCo1fQpPWL8hhhcZv5df65dP8+BzksDSVH/9HPBcR289sfvFp/Ci2n638+y6lQ/fysfyWxvgZsfwtb12/J3f9jAh/nR/P0yvxR/nxPL0Sv6ePW/dCVJ73+B35o/2PNUXzCr9132i8uGfnOPa/dd9ocwDFzvHW+++Zg6jLyucf4/DMwWj+P/9y+RlpvusM/IyiPvTPze/1L4X/V7//HkCDlaQ=
+   eJztl29OAjEQxauwaPymd1AXdz0EIKvxIN4DdBevpfsHj+VrdLLNSOlMQ4APTvLL0DTT19dMS3adGdOBtSB/gdmtMQ9gDgpA0SrWcfNZbswol+Vz8ArNN1CCytEvsVYFVsqs2e8x+08U67j5ERTC/ARqaDagBR14ufxhrljH5o87Yz7BCr+rXJbfrf8U/kEJqrTXLwP1AzB0xic4+9Os3wetE2L2q233UKR/531RQ6vJ+jHp0j6k+j7/IX3yT7Fv/1zH5z8Usf65DvfPY4Kzmtp+x1wDWtCBGpoNaEGn0J9Aa5r5/fNYQHtp+xZzQ5CAERiMMQYJGI3D+tdXxtyABWqXCv+hoHOReHdD6n9brYXORaPtrhHj39Wn/tDqU1A/xPqn/ojVp37w3f+QvrTvQ+F7//alH9v/fE+xuuSf+om/O5vumavHx/y94pnmef9TP/F3h98zfn958PeKZ5rfdv8l/0O+e3Nxr6vf5ENS7/Mv1f/3f7z+JeGre96Bf0nE1vH6XfvX1h/KP32D0T5iM0Xs9x/5iM0Usd9/3xrMa+Q=
   </data>
  </layer>
  <layer name="objects1" width="32" height="32">
@@ -27,7 +30,7 @@
  </layer>
  <layer name="tops1" width="32" height="32">
   <data encoding="base64" compression="zlib">
-   eJzt1DEOgCAMheEXb8DaG+vJ1HvIOXBxkKRpJRAgvm/pROn0A0REb6sAm+izteP+4xR9zuIKQAy9ryAaS96RWr2x9jwz78jX3mh3WXtq9WvUDu5L7wuIyMvbS6vLpe+8vbQ6Wvru7xL/mltO
+   eJztlVkOgkAQRFsR/jkF6yVcwHO5gOfSRD+8h57DSkwnpBOcVmBQMy+p1AdKwcx0QfR7zCIiPxr7Kf6DY0Z0ysy/KxKiMuk/Z5ITTXPz/ytk15AXY/8hHwpifb42p40zsi8d3v9TvBTvC/lQkNrL5f1aInMFFVBpMZ/3a4fMPVRBdSOf12UseF1M3EKie9h/Pq/LWGh7YyhM88x9Jd0W3FfSbcF9JV0Lz9e7cyb7Sjpfn0OLxn35PMne0c4ZI/tKOl/fQNvGffk8yd5pm7O28y/7Snpfc9v1ezYU1y98JofD8RruY61LCnRhCa2VLuE+1rqkwj1r6KB0x5MHYWhacQ==
   </data>
  </layer>
  <objectgroup name="colliderWalls1" width="32" height="32">

@@ -10,29 +10,32 @@
  <tileset firstgid="4097" name="pokepublic" tilewidth="16" tileheight="16">
   <image source="../spritesheets/thatssowitty_1.png" width="1024" height="1024"/>
  </tileset>
+ <tileset firstgid="8193" name="limbusdev_world" tilewidth="16" tileheight="16">
+  <image source="../spritesheets/limbusdev_world.png" width="1024" height="1024"/>
+ </tileset>
  <layer name="ground1" width="32" height="32">
   <data encoding="base64" compression="zlib">
-   eJzt0ksOQDAUheGDYOAxtCO6uTKzKo81qYho5BIRbZO6g29SiZ/0iAAQjH0oBpCcpLDXr6nWj/q6xlGXMRf66uD6W9h7MgRaQhfa6Y+qMxFm7n/aoe54lVvqU407vvcHdVZEm5F4brqvv5/aoMn++u9ltJ3Liw2a7Ge8f+v9fetP7fvwxQIA8V5t
+   eJzt1LcNgDAQhWFaYBffDEiINBgibEVDWoojdDwhEc6FueJr/cvykyPyvEgppZR6ITZnf+q7ImHphUy4X7KcBUDBKgv9mbczEmDc6qP37Yy9PnrjVYjaAn3YuOJ4v+bzm0OLNiB9fz5/OsANCva3u9PeXv8fuEHBvk+6f9v9xtxE3/b7B4YP+wvAHQ4J
   </data>
  </layer>
  <layer name="walls1" width="32" height="32">
   <data encoding="base64" compression="zlib">
-   eJztl81qwkAQxwcPBfsABoz13r5JPatH8VV6EtuCPbQexdfxA/Rge9Q+irPgwHY6mWz3y0v/MAwJSf7zy85kyawD8IYx88wk3/t3GPuATPK937duzt8sAW7L+pyK/xGf3SvrcxW/a/08SxoVADfwM8aF3CdUh2v9PEtaFL/PLQu5T/g6xpDmX8UfU0f0Ol3CyOTvjPya+Byk4NfE58CF/6UL8NqNW4fGz2dsg97bGv9+C2CA8WGFOR625Os1fpcZ43pn3hTzCn/X9Z/e/c3/0wrNP3b/H5g3xVcgv6/s77PUv6nn3+4dqX9T85u+Ie6m0EPkq+1jodLmlvjpPd23AR7aaeqQRPxPjXyetoh/ciX/3PsOV+59l0vjn2LPPkfe77g0/hV6rxP7/69/HP5Y/0+hHNf6/wvNofWH5jPbfR1J
+   eJzFVwtygjAQjVJs6xW8AYJ3AGvrtaCjci21VI/lMnF1Z03SmA99M28eH8PbN9kQOc2F+AWeHPQMRHSO43fAraO2xD/NhZgAXy2UjnfJrcq/gudWudRP4BdwrTjv2HibenX6lt/9N3Dc5FK3wB2wVZynLP8+E+KQyfqwTltdE3+KfSHEmDEpHvukz1+Dd5PJ+rBOW201/mXxeG1Z3PtElT8kTP66/CFRg1fD+E3y0/6Jkd8EXA/oGyO/Cbge0Ncm/xHu/wSu0ZS/vL5LUBPok5e5+jm358H8HhQ8Knqxhyl/fX2XoNpgtJD8YEwWz+d3Qe9dAivCpcH/mfm3AfemNagQu//fZ0JMZ/JY1b+h83NQT1X/ou8Iro//6G0XoKdu3WL+En5TRfBH6Nbtbf7hftPXCus01azVGMD80wE9KTD/5J/8h953OIbedzlM+WPsdxym/Db7nS9Czf/Ksc5Q879x9Mf/oL7oPL/hfOH67YbqM9YnN6rP959P7agXtk4SWg==
   </data>
  </layer>
  <layer name="objects1" width="32" height="32">
   <data encoding="base64" compression="zlib">
-   eJxjYBjaIE0QgkftH1j7pzDhdkunLEItrexHxiAgAMQcWNTiAk8FsGNCdqPT+Oygtv3UBCPdflqBweAHSt3wSIyB4bEYcWovA/P6FSC+Kku+/SvEIFhFlDR9ICAsx8AgAsSicqTrRbafXBAMtDcEiEMpsJ9cACpnB0N6G+xgIMNooMu1kWz/QNYr2Noow9V+bG2yUfsHh/0w+VEwCkAAAI/NTbM=
+   eJxjYBjawEkfgkftH1j7D+kQdgst3AmzExmjg4M6hO3HZg4h98LkkWly/U+O/cSAFl3i1NHKfmLBQNtPKzAY/ECpGx6JMTA8FiNO7WVZBoYrQHxVlnz7V4hBMCzfkgKE5RgYRIBYVI50vcj2kwuCgfaGAHEoBfZTAgZDehss4LAWdnF6hRGzNna7ke3nIrJ8phYY6HJ1IO0fyHploOs1etqPqy4ftX/g7YfJj4JRAAIAJbw7LQ==
   </data>
  </layer>
  <layer name="tops1" width="32" height="32">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFwx14yg60C0YBJeA0MP7ODGAccssxMPDI0c++TikGhi4pBO0NtNuHjvafBNp5SgpBEwtCxBgYQpFwmBjt3IgNTEGzbxoV7Cel7MBlP73S7xUk+0Fp5xqUT6/0ixxWyGmH3ukXHXTK0MeeQnkEGyUs6GQ/JeClJAPDK0n629vBRH87Bzs4CUw7pwawvuME5lWuAcyvnkC7vQbQ/lFAPEBvqxBLUwugt1WIpSl1P7X8Qa77SW2bjQLsAAAUR0wM
+   eJxjYBgFo2AUDGbArMXAwKI1cPY7A+12oaP9B7UZGA5pI+hmoN0tdLSfUYeBgUkHQQ8VcFAXlX9YF7s6egFmPSg9AOkX2U56p19kO0FuoHf6BQGYnfT0d6E8djcMZnAKmr+PAOmjA5DXTw2h8oVeYKTVd+hgKOSbUQABoDaKGxC7k0hTC4DaKG1A89q1SaNhgFR3Y6MpAaS6Gxs9CsgHAOVMOkM=
   </data>
  </layer>
  <layer name="tops2" width="32" height="32">
   <data encoding="base64" compression="zlib">
-   eJztzUENACAQA8H+QQHJnSFQhjUQBQL4NyE7BkYCAOAvs3n/FdIO319Squn7+72H8QcAAG8Hh84DnA==
+   eJztzTENACAMALAloGY2wBkIBwGcJHtaA40AAH5qGdGz7h/3noX/uvcu/AGAtwNvbAKS
   </data>
  </layer>
  <objectgroup name="colliderWalls1" width="32" height="32">
@@ -41,7 +44,7 @@
   <object x="0" y="320" width="16" height="32"/>
   <object x="32" y="304" width="32" height="16"/>
   <object x="288" y="0" width="224" height="64"/>
-  <object x="400" y="64" width="16" height="16"/>
+  <object x="352" y="64" width="64" height="16"/>
   <object x="336" y="112" width="48" height="16"/>
   <object x="400" y="112" width="32" height="16"/>
   <object x="448" y="64" width="64" height="96"/>
@@ -53,7 +56,7 @@
   <object x="144" y="160" width="32" height="32"/>
   <object x="80" y="176" width="64" height="32"/>
   <object x="144" y="192" width="32" height="16"/>
-  <object x="80" y="208" width="64" height="16"/>
+  <object x="80" y="208" width="48" height="16"/>
   <object x="80" y="224" width="16" height="16"/>
   <object x="336" y="64" width="16" height="48"/>
   <object x="416" y="64" width="16" height="48"/>
@@ -65,10 +68,10 @@
   <object x="288" y="176" width="48" height="64"/>
   <object x="352" y="176" width="48" height="64"/>
   <object x="336" y="176" width="16" height="48"/>
-  <object x="304" y="240" width="16" height="16"/>
   <object x="288" y="64" width="16" height="16"/>
+  <object x="400" y="80" width="16" height="16"/>
  </objectgroup>
- <objectgroup name="sensors" width="32" height="32">
+ <objectgroup name="sensors" width="32" height="32" visible="0">
   <object name="warpField" x="256" y="0" width="16" height="16">
    <properties>
     <property name="targetID" value="2"/>
@@ -199,7 +202,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="livingEntities" width="32" height="32">
+ <objectgroup name="livingEntities" width="32" height="32" visible="0">
   <object name="person" x="64" y="336" width="16" height="16">
    <properties>
     <property name="male" value="true"/>
@@ -210,7 +213,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="objects" width="32" height="32">
+ <objectgroup name="objects" width="32" height="32" visible="0">
   <object name="sign" x="48" y="304" width="16" height="16">
    <properties>
     <property name="text" value="Please be careful when swimming here."/>

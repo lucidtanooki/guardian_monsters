@@ -177,7 +177,7 @@ public class BattleHUD {
         for(Monster m : this.team)         m.update();
         for(Monster m : this.opponentTeam) m.update();
         updateRecovBars(team);
-        updateRecovBars(opponentTeam);
+        updateRecovBars(opponentTeam    );
     }
 
     private void updateRecovBars(Array<Monster> team) {

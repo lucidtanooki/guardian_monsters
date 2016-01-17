@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="40" height="32" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="limbusdev_world" tilewidth="16" tileheight="16">
+  <image source="../../../../../../../../../../../../home/georg/Entwicklung/Java/libGDX/FriendsWithMonsters/FriendsWithMonsters/android/assets/spritesheets/limbusdev_world.png" width="1024" height="1024"/>
+ </tileset>
+ <layer name="ground1" width="40" height="32">
+  <data encoding="base64" compression="zlib">
+   eJztwwEJAAAMA6AleP9AC7YeR8FeUlVVVVX15QFp0ho9
+  </data>
+ </layer>
+ <layer name="walls1" width="40" height="32">
+  <data encoding="base64" compression="zlib">
+   eJzt00EOglAMRdEOPgsQQdRdCyjgrkQUcDXcDTBqzA/k3eSM26SpmVJKqb13C2YlKtS444EGLTo8Q7z9Xszu8caAD74YMWHGL+J+h8QsxREZcpxQ4IwLrkm8/dbS3X396+66i6+t/qNS+n1f+n2llPK1ALAsPh0=
+  </data>
+ </layer>
+ <layer name="tops1" width="40" height="32">
+  <data encoding="base64" compression="zlib">
+   eJzt1ckJwzAQRmGB1IDjpS+vqStrX1nsevxuPskENCJjmAfffeBHtnOW9VuFd+6EEhVqNP7fV2213NKhx4ARk6L7LtxyxQ13PPBUdN+LW9744IsZi9ezexG4AyUq1GiCnt1bbunQY8CICeeQZ3epXWK7pya1S2z31KTe497uKeXaRapcu0iVaxcNafkmx9LyTY511H+xluztW5ZlWdZxWwGjdzex
+  </data>
+ </layer>
+ <objectgroup name="colliderWalls1" width="40" height="32">
+  <object x="144" y="240" width="48" height="48"/>
+  <object x="112" y="240" width="32" height="16"/>
+  <object x="128" y="256" width="16" height="16"/>
+  <object x="192" y="240" width="32" height="16"/>
+  <object x="192" y="256" width="16" height="16"/>
+  <object x="336" y="144" width="48" height="48"/>
+  <object x="304" y="144" width="32" height="16"/>
+  <object x="320" y="160" width="16" height="16"/>
+  <object x="384" y="144" width="32" height="16"/>
+  <object x="384" y="160" width="16" height="16"/>
+  <object x="432" y="192" width="48" height="48"/>
+  <object x="480" y="192" width="32" height="16"/>
+  <object x="400" y="192" width="32" height="16"/>
+  <object x="416" y="208" width="16" height="16"/>
+  <object x="480" y="208" width="16" height="16"/>
+  <object x="384" y="336" width="48" height="48"/>
+  <object x="432" y="336" width="32" height="16"/>
+  <object x="432" y="352" width="16" height="16"/>
+  <object x="352" y="336" width="32" height="16"/>
+  <object x="368" y="352" width="16" height="16"/>
+ </objectgroup>
+</map>

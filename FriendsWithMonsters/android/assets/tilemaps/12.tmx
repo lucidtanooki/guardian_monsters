@@ -12,12 +12,12 @@
  </tileset>
  <layer name="ground1" width="40" height="20">
   <data encoding="base64" compression="zlib">
-   eJztldEKgCAMRfM1M79LSPr/v8mHBhZzGzZBzIeDcO+E8+AwmGUJk6FZE2cBe5/YTE2X59x98POE+07M1HR5Lrk/ip82rfxcYivMljosb+XnkYzrsFzL7zDPvYpIxnVYHpX8WgLOsVM/Cqnf+11r7UeeuQ9+ve8HzMEflL91K+yw/G//x/Sj3z3npw21Z1JcB34Xtr3FMg==
+   eJzt0cENACAMw8CKKQuTQScDpiFjGCkPS/5ftoiuhkrgT7VUQX+roy70KY72tS/xKY72tS/xKY72tS/xKY6/+j7gbtpc
   </data>
  </layer>
  <layer name="walls1" width="40" height="20">
   <data encoding="base64" compression="zlib">
-   eJzVVdsOwiAMrX8A88t000T9I90efPL2Re7yYOIH2WWQEQIFtrmwk5wAp6XrCKUA8SNHFmI0kbKF0jdWoeRXIxsxmkjZQukbqyHOk68BMgawQ+5Zr99wfhfrK++oz1UfaWuRsj62DumjrnUtFB/eUZ+b/Hxi2WKH4MvcPpSf734K79X4GHPjTNjyAbaLRbfdewrtnhK6mqoUXWq1w2bSVY369xjQ5qzX/NJQYk00gtUC6sP0hsYKmavtrrtsNv3f0HuQeuZUfzLpmwRgi0yRWTJNfq6eNqbfzQ3fvnZAvyPyNPCtob4zRW99YIwn8rXgtzA2/AA2RnS+
+   eJxjYBjcYC7j4MZ3BznGBgSFGRhCBBgYQoE4TAAhPh3IngHlTxSEYHQ2shqYHAgECyDMRgcwNch8dDFSwUVBCEZnY1NHjFm4zCYFXBEgrAafOmL14wMnccT5YAaz8bi5B48+XHJzSEz3+ABIz21oXrqDZO5ttHyGSw6bOLJY1CCPr1mMmHl+qIFTQD+cheLTgzy8QQBbGYoLzMXjH1xyWUjirygMD5BbX1M5f+TSIY7Q6yDkMMdXP2ETDxRiYAgC4mAgDhGijvsI1WmU1Hf0BsTWa5FAdVFAHE1mWYPPHmrUrTOBZswC4tlDqCy8xYgdZ9GxHMTlBhAGAMqAj9I=
   </data>
  </layer>
  <layer name="objects1" width="40" height="20">
@@ -27,11 +27,11 @@
  </layer>
  <layer name="tops1" width="40" height="20">
   <data encoding="base64" compression="zlib">
-   eJzVVUsOgjAQ7d5fFdSgN1CP4o+NsnZnPIufROKdXLrgPk4DjWPtlFIR4kteQvqmw2PodJqMsWUOk5K1xHJ/C9hm+QhK1gKLGIEO+/Q3M+TbcsYinj6H3ZQBelZjpIbx6H36wzEhf+XT+ZsY/OlQdf1M/mJu5yHmek23XtTf1OBPh6rrp8MaGBHcOGgh4U+cTR9q3AcOuJ0/sUfgCDwBzxkv2VqeRq1LXA3vtu3fXwP3PIZtf9QF6e8A3Gfc1eroHdT5k2dOQpSe6oGhg4av7NjBn+pV9BjVA3katS5Rxv2iy4Hnm/wOSlP3qf66sLcH9MT9gvJ84+8brYr6FdHUuUj5CyBuBBxzN3+m+Ws7m03+VPzD/50DVxo2UJxHxAjeHDTfMvcCeCeI69oxxLmwSO4nZW1wLA==
+   eJzVVUtqAkEQnfYE7fiB+Bk1JBBceBdXuvGzC7mP4EIFFwkhm9wlixDIATyH1fQ0Fm11TTvT/h48ZqhXVfOmv20RRbMM7gJrO8/6BNgBZqHP5OTRcJyr7xL+lkS+6TGSUTSW+n1Y1lSaebdzjIbxEx/7wzlDeehH+auX3P4oXHr8OH8L6edhIWmNip/q74+ZXwqXHj8KLRjTN5ULzy+hmaSxV8FrVLyN5gj7U2uzCmNcA9alnz9Vo7CBvDVwm3IldMzQpVFxjPcA+/fcwHsew3d/XAvGXwU8/QrN6g36s2HWnEGP2QMvGRoVf0Tf/Ci4f5XXb2at9zM0Kj4IfL5QPfD9Zv7Dpdl19vlXhtoYWFHnC+pTxF8RLfT5XNSffS+6/D1AXgPYlPn8cfev793M+bNxD/M7Ac4JtlDdkyNH8TOH9uzZewr8dxCPa5fJy8NTeu8BvV+F7Q==
   </data>
  </layer>
- <objectgroup name="objects" width="40" height="20"/>
- <objectgroup name="colliderWalls1" width="40" height="20">
+ <objectgroup name="objects" width="40" height="20" visible="0"/>
+ <objectgroup name="colliderWalls1" width="40" height="20" visible="0">
   <object x="0" y="0" width="640" height="48"/>
   <object x="0" y="48" width="16" height="272"/>
   <object x="16" y="304" width="96" height="16"/>
@@ -87,7 +87,7 @@
   <object x="400" y="256" width="16" height="16"/>
   <object x="448" y="224" width="16" height="16"/>
  </objectgroup>
- <objectgroup name="sensors" width="40" height="20">
+ <objectgroup name="sensors" width="40" height="20" visible="0">
   <object name="warpField" x="112" y="304" width="16" height="16">
    <properties>
     <property name="targetID" value="11"/>
@@ -123,7 +123,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="livingEntities" width="40" height="20">
+ <objectgroup name="livingEntities" width="40" height="20" visible="0">
   <object name="person" x="48" y="144" width="16" height="16">
    <properties>
     <property name="male" value="true"/>

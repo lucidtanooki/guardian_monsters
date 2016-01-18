@@ -5,17 +5,22 @@
  </tileset>
  <layer name="ground1" width="40" height="32">
   <data encoding="base64" compression="zlib">
-   eJztwwEJAAAMA6AleP9AC7YeR8FeUlVVVVX15QFp0ho9
+   eJzt1M0JgDAMhuFM0G5VXUsP6lpKUceyIAEprVQJ/YHv8N48PCQ1VhFZhBBCCDWf0USdq9flLaEm55pdC3yivlr2zr5V3R5uU3XMlX2xpH0pezHenAbXocOdwr6U987fsEvaIOUr8bbgk/H596KW27FH/sNnY8SHm/zNl+sm//XF7nLOe/jmKz2nVn17JXvM3QXmv/uK
   </data>
  </layer>
  <layer name="walls1" width="40" height="32">
   <data encoding="base64" compression="zlib">
-   eJzt00EOglAMRdEOPgsQQdRdCyjgrkQUcDXcDTBqzA/k3eSM26SpmVJKqb13C2YlKtS444EGLTo8Q7z9Xszu8caAD74YMWHGL+J+h8QsxREZcpxQ4IwLrkm8/dbS3X396+66i6+t/qNS+n1f+n2llPK1ALAsPh0=
+   eJztmMlOwzAQhh1oKCLOgX15m4JYXqtFtFzZl7cpUoEr+/I0/D5ENa5jxrHH6oFf+jSN7MajfzxJ5KwQYgYMF4S4R3wo+OIjqDRyzLtDLpmWV3U9J4VoS744L8f55Y55Zl7qugP2MLYv+eKBlt+uY952MelfF7/7GBtIvnis5XfkmNez+JeViBqzYKjdL7VM/zrl7/Gd0v6/VDL96yKfnsZhTX6pPDX949ZIPb881jH94143V88vj3X+8o9aR33dk5YQp+AMnIMLcAmuwDW4Abct2n1D/KvL/QlrP4MX8ArewDv4AJ/gC3xr+bm859h/i7kQS2AZrIBVsAbWwQbYBFv5eL6r5lT/fPe1TU3qTvXPd1/b5Ft3pVj9S5Fv3ZUo/sXsR19R/GtSl1ii+NekLrHk8o/SsxzvYf2eLv9i9GyoON4fMcX9/RLa+9zPv9Dej/X9Uief3retlfL90USpv5999e9fmHT/+lPo38A4F5o2VedEMc+kTLnOqKgx5pmUKdcZFTX+AAnr4EY=
   </data>
  </layer>
  <layer name="tops1" width="40" height="32">
   <data encoding="base64" compression="zlib">
-   eJzt1ckJwzAQRmGB1IDjpS+vqStrX1nsevxuPskENCJjmAfffeBHtnOW9VuFd+6EEhVqNP7fV2213NKhx4ARk6L7LtxyxQ13PPBUdN+LW9744IsZi9ezexG4AyUq1GiCnt1bbunQY8CICeeQZ3epXWK7pya1S2z31KTe497uKeXaRapcu0iVaxcNafkmx9LyTY511H+xluztW5ZlWdZxWwGjdzex
+   eJztl8uOgjAUhk8CYyKsGNQ3At2i4jwRzGydGX0hL/u56PP4E23SaaDm0E7sol/ypQnW9tTfA4HI05ANifKhu/tWmFM/oD553yQgeoYpHMExnATXzw6YczSsbxcR7SPed+R9C9Qyhwu4hCVc3ep7wroDZW1u5kFMFMa8+uR916jlHX7AT7iB21t9GebkSn02Mr93RnnfL9TyDX/gLzzBc3DNvcKcOvqbu43M751R7NuQhPj/wRSO4BhOwu7c2zLnwjljgVrmcAGXsIQr+BK2596WOYdEOqPajxy6cpd/+z4U0hnVfuTQlbspa+mMaj9y0OXeB9GzXbk8GtGz/5WLKaJnbediCxv3Jd2z2BTT+1KD7llsiul9qUH3LHYBV3tf4GrvC1ztfY/H41HJ8V45jfnjTPM+mvVYT4wqNa69xvzxTVNf1WM9MXrscAHkr2vb
+  </data>
+ </layer>
+ <layer name="tops2" width="40" height="32">
+  <data encoding="base64" compression="zlib">
+   eJztzsENABAMQNEmdXI1EhsYicF1ARKnVvw3wRN5h2aRlL0Xe9VuLfBv2G0G/gG4V9R7cNaD/wAAAADgBws24wI+
   </data>
  </layer>
  <objectgroup name="colliderWalls1" width="40" height="32">
@@ -39,5 +44,26 @@
   <object x="432" y="352" width="16" height="16"/>
   <object x="352" y="336" width="32" height="16"/>
   <object x="368" y="352" width="16" height="16"/>
+  <object x="368" y="480" width="272" height="32"/>
+  <object x="0" y="480" width="272" height="32"/>
+  <object x="608" y="0" width="32" height="480"/>
+  <object x="0" y="0" width="32" height="480"/>
+  <object x="32" y="0" width="416" height="64"/>
+  <object x="480" y="0" width="128" height="64"/>
+  <object x="32" y="64" width="80" height="48"/>
+  <object x="112" y="64" width="16" height="16"/>
+  <object x="96" y="144" width="16" height="16"/>
+  <object x="192" y="96" width="16" height="16"/>
+  <object x="256" y="144" width="32" height="16"/>
+  <object x="256" y="128" width="32" height="16"/>
+  <object x="208" y="160" width="16" height="16"/>
+  <object x="80" y="288" width="32" height="32"/>
+  <object x="208" y="320" width="16" height="16"/>
+  <object x="224" y="288" width="16" height="16"/>
+  <object x="96" y="368" width="16" height="16"/>
+  <object x="416" y="112" width="32" height="32"/>
+  <object x="496" y="160" width="32" height="32"/>
+  <object x="560" y="288" width="16" height="16"/>
+  <object x="528" y="368" width="16" height="16"/>
  </objectgroup>
 </map>

@@ -4,14 +4,8 @@
   <property name="musicIndex" value="1"/>
   <property name="musicType" value="town"/>
  </properties>
- <tileset firstgid="1" name="indoor" tilewidth="16" tileheight="16">
-  <image source="../spritesheets/tuxemon.png" width="1024" height="1024"/>
- </tileset>
- <tileset firstgid="4097" name="pokepublic" tilewidth="16" tileheight="16">
-  <image source="../spritesheets/thatssowitty_1.png" width="1024" height="1024"/>
- </tileset>
- <tileset firstgid="8193" name="pokebublic2" tilewidth="16" tileheight="16">
-  <image source="../spritesheets/thatssowitty_2.png" width="1024" height="1024"/>
+ <tileset firstgid="1" name="limbusdev_world" tilewidth="16" tileheight="16">
+  <image source="../../../../../../../../../../../../home/georg/Entwicklung/Java/libGDX/FriendsWithMonsters/FriendsWithMonsters/android/assets/spritesheets/limbusdev_world.png" width="1024" height="1024"/>
  </tileset>
  <layer name="ground0" width="8" height="8">
   <data encoding="base64" compression="zlib">
@@ -20,29 +14,27 @@
  </layer>
  <layer name="ground1" width="8" height="8">
   <data encoding="base64" compression="zlib">
-   eJxjYMAPJgkObwwA3vkjqQ==
+   eJxjYMAP9IHYAA+dD8QFeOjBrB8kDwBOuRCl
   </data>
  </layer>
  <layer name="walls1" width="8" height="8">
   <data encoding="base64" compression="zlib">
-   eJxjYMAPJgozMASJYMeTgXLCIrj1CooMvPxEIL4EdOdlYYT4RWGI2GSgHAAFdgoL
+   eJxjYMAPOPkYGJxwYC4gZubDrZcRSd4RSDvz4ZYnpJ9ceU8k+WgmCIYBL6AcAG8CBLk=
   </data>
  </layer>
  <layer name="objects1" width="8" height="8">
   <data encoding="base64" compression="zlib">
-   eJxjYKAPyBRmYMgSJk6toiRhNUpEqEEHJ4D2H0dzAwDaMgMk
+   eJxjYBjZAAABAAAB
   </data>
  </layer>
  <layer name="tops1" width="8" height="8">
   <data encoding="base64" compression="zlib">
-   eJxjYKAO0BRmYNASppJhdAQAVt4Aeg==
+   eJxjYKAOOMjLwHCYl0qGURkcQnMbyK2HoHwAYVUE2w==
   </data>
  </layer>
  <objectgroup name="colliderWalls1" width="8" height="8">
   <object x="0" y="16" width="128" height="16"/>
   <object x="32" y="48" width="32" height="16"/>
-  <object x="80" y="64" width="16" height="16"/>
-  <object x="96" y="80" width="16" height="16"/>
   <object x="0" y="32" width="16" height="96"/>
   <object x="112" y="32" width="16" height="96"/>
   <object x="16" y="112" width="32" height="16"/>

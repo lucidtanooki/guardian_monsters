@@ -4,53 +4,44 @@
   <property name="musicIndex" value="1"/>
   <property name="musicType" value="town"/>
  </properties>
- <tileset firstgid="1" name="indoor" tilewidth="16" tileheight="16">
-  <image source="../spritesheets/tuxemon.png" width="1024" height="1024"/>
- </tileset>
- <tileset firstgid="4097" name="pokepublic" tilewidth="16" tileheight="16">
-  <image source="../spritesheets/thatssowitty_1.png" width="1024" height="1024"/>
- </tileset>
- <tileset firstgid="8193" name="pokebublic2" tilewidth="16" tileheight="16">
-  <image source="../spritesheets/thatssowitty_2.png" width="1024" height="1024"/>
+ <tileset firstgid="1" name="limbusdev_world" tilewidth="16" tileheight="16">
+  <image source="../../../../../../../../../../../../home/georg/Entwicklung/Java/libGDX/FriendsWithMonsters/FriendsWithMonsters/android/assets/spritesheets/limbusdev_world.png" width="1024" height="1024"/>
  </tileset>
  <layer name="ground1" width="16" height="16">
   <data encoding="base64" compression="zlib">
-   eJxjYKAMNEmM4lE8iocqBgDSIZBh
+   eJxjYKAM3KIhVkBiy5OpPwqKydEfDcTxUBxDY78OVSzOhIkpNYOe9mPTT4oZQ10/AKhoqd4=
   </data>
  </layer>
  <layer name="walls1" width="16" height="16">
   <data encoding="base64" compression="zlib">
-   eJyzlmNgsCYD1wIxCFTLkYf3ArEoIwMKmA7EMxgwAaMAAwMTEmYG4r9A/aGMWBRjAY5A9U5I2BmIbeWJ0wsCjUD1TUi4WYB4vbQG6OFqJUeZeVUU6qcl+IUlHZEC7IlUjytt/KUwbEhJc5QAXP7EJg4A4FUgTQ==
+   eJxjYKAMzGWkDN+lEI8CysBcLGGojSNcV2MRxxYn2UTqx2Y3PvCayPhfRKI4OniEQx0u8cEMopkgGBcAAI+UJ20=
   </data>
  </layer>
  <layer name="objects1" width="16" height="16">
   <data encoding="base64" compression="zlib">
-   eJxjYKAeCAfiCChbGE1OBIhFgViMCHPWSDMwBCPxBZkZGEKAdCgQh0H5owACBJkYGISAWBiIRZhI1x8I1BMExMFAHALEF8kwQxKIpWHuITFuxIE4EoijoWxCYBoaG6RnJhDPJlL/NSCeyAjB15DExRiJcy8IXGSE4KEATgAz4nH0zIgEALaCD7I=
+   eJxjYKAOqOJnYKgG4hp+VPF6IL+BH1N9Cy8qfxdQzW4g3oOmdj+Qf4AI/b+Aan4D8R80tf9BfAHC+kfB0AF1/BAMA9+B7B1AvJMfwiYE9vFDMLL+H0D8k0j9//gheDgAAL8aGSo=
   </data>
  </layer>
  <layer name="tops1" width="16" height="16">
   <data encoding="base64" compression="zlib">
-   eJxjYKA9uMiEnz+SgbUcKv4lS7mZe+Qo0/+HQv32OPTvksP0Lyn6QSAQhBmhGIeavxS6f6DBfxxpAJc4JQAAV+cNpQ==
+   eJyTZWRgiCcTywGxPBCTA6KZGBgUKNAfQ6F+EBgO+p8DcSYaViLSTJj9c9FwFg79imj2LMPhfi0c+leh2YPs/wp+BoZKfgh7CQ796OKDIfwHWn8sECfgwTCATS4OiAHyAht1
   </data>
  </layer>
  <objectgroup name="colliderWalls1" width="16" height="16">
-  <object x="176" y="240" width="16" height="16"/>
+  <object x="0" y="0" width="224" height="48"/>
+  <object x="224" y="0" width="32" height="16"/>
+  <object x="240" y="16" width="16" height="240"/>
+  <object x="0" y="48" width="16" height="208"/>
+  <object x="16" y="240" width="112" height="16"/>
+  <object x="160" y="240" width="80" height="16"/>
+  <object x="16" y="144" width="80" height="16"/>
+  <object x="80" y="160" width="16" height="48"/>
   <object x="176" y="160" width="16" height="48"/>
-  <object x="192" y="160" width="64" height="16"/>
+  <object x="192" y="160" width="48" height="16"/>
   <object x="208" y="176" width="32" height="16"/>
-  <object x="16" y="176" width="32" height="16"/>
-  <object x="64" y="144" width="16" height="16"/>
-  <object x="0" y="112" width="80" height="16"/>
-  <object x="80" y="128" width="16" height="16"/>
-  <object x="80" y="144" width="16" height="48"/>
-  <object x="80" y="240" width="16" height="16"/>
-  <object x="144" y="32" width="16" height="16"/>
-  <object x="208" y="32" width="16" height="16"/>
-  <object x="96" y="32" width="16" height="16"/>
-  <object x="80" y="32" width="16" height="16"/>
-  <object x="0" y="0" width="240" height="32"/>
-  <object x="224" y="32" width="16" height="16"/>
-  <object x="16" y="160" width="32" height="16"/>
+  <object x="32" y="176" width="32" height="32"/>
+  <object x="128" y="48" width="32" height="16"/>
+  <object x="32" y="48" width="48" height="16"/>
  </objectgroup>
  <objectgroup name="sensors" width="16" height="16">
   <object name="warpField" x="128" y="240" width="16" height="16">
@@ -70,20 +61,20 @@
     <property name="fieldID" value="1"/>
    </properties>
   </object>
-  <object name="warpField" x="240" y="0" width="16" height="16">
+  <object name="warpField" x="224" y="16" width="16" height="16">
    <properties>
     <property name="targetID" value="5"/>
     <property name="targetWarpPointID" value="1"/>
    </properties>
   </object>
-  <object name="startField" x="240" y="16" width="16" height="16">
+  <object name="startField" x="224" y="32" width="16" height="16">
    <properties>
     <property name="fieldID" value="2"/>
    </properties>
   </object>
  </objectgroup>
  <objectgroup name="livingEntities" width="16" height="16">
-  <object name="person" x="16" y="64" width="16" height="16">
+  <object name="person" x="48" y="80" width="16" height="16">
    <properties>
     <property name="male" value="true"/>
     <property name="moving" value="true"/>
@@ -94,46 +85,64 @@
   </object>
  </objectgroup>
  <objectgroup name="objects" width="16" height="16">
-  <object name="sign" x="96" y="32" width="16" height="16">
+  <object name="sign" x="128" y="48" width="16" height="16">
    <properties>
-    <property name="text" value="A boring TV show about people who love their cats is on."/>
-    <property name="title" value="LED TV"/>
-   </properties>
-  </object>
-  <object name="sign" x="48" y="112" width="16" height="16">
-   <properties>
-    <property name="text" value="It smells very good. What might be in there?"/>
+    <property name="text" value="The fire is warm and feels good."/>
     <property name="title" value="Oven"/>
    </properties>
   </object>
-  <object name="sign" x="16" y="112" width="16" height="16">
+  <object name="sign" x="144" y="48" width="16" height="16">
    <properties>
-    <property name="text" value="There is lots of dirty china in the sink."/>
-    <property name="title" value="Sink"/>
-   </properties>
-  </object>
-  <object name="sign" x="16" y="112" width="16" height="16">
-   <properties>
-    <property name="text" value="There is lots of dirty china in the sink."/>
-    <property name="title" value="Sink"/>
-   </properties>
-  </object>
-  <object name="sign" x="96" y="16" width="16" height="16">
-   <properties>
-    <property name="text" value="A boring TV show about people who love their cats is on."/>
-    <property name="title" value="LED TV"/>
-   </properties>
-  </object>
-  <object name="sign" x="48" y="128" width="16" height="16">
-   <properties>
-    <property name="text" value="It smells very good. What might be in there?"/>
+    <property name="text" value="The fire is warm and feels good."/>
     <property name="title" value="Oven"/>
    </properties>
   </object>
-  <object name="sign" x="16" y="128" width="16" height="16">
+  <object name="sign" x="144" y="32" width="16" height="16">
    <properties>
-    <property name="text" value="It smells very good. What might be in there?"/>
+    <property name="text" value="The fire is warm and feels good."/>
     <property name="title" value="Oven"/>
+   </properties>
+  </object>
+  <object name="sign" x="128" y="32" width="16" height="16">
+   <properties>
+    <property name="text" value="The fire is warm and feels good."/>
+    <property name="title" value="Oven"/>
+   </properties>
+  </object>
+  <object name="sign" x="32" y="48" width="16" height="16">
+   <properties>
+    <property name="text" value="Many interesting books about the old world."/>
+    <property name="title" value="Shelf"/>
+   </properties>
+  </object>
+  <object name="sign" x="48" y="48" width="16" height="16">
+   <properties>
+    <property name="text" value="Many interesting books about the old world."/>
+    <property name="title" value="Shelf"/>
+   </properties>
+  </object>
+  <object name="sign" x="64" y="48" width="16" height="16">
+   <properties>
+    <property name="text" value="Many interesting books about the old world."/>
+    <property name="title" value="Shelf"/>
+   </properties>
+  </object>
+  <object name="sign" x="64" y="32" width="16" height="16">
+   <properties>
+    <property name="text" value="Many interesting books about the old world."/>
+    <property name="title" value="Shelf"/>
+   </properties>
+  </object>
+  <object name="sign" x="48" y="32" width="16" height="16">
+   <properties>
+    <property name="text" value="Many interesting books about the old world."/>
+    <property name="title" value="Shelf"/>
+   </properties>
+  </object>
+  <object name="sign" x="32" y="32" width="16" height="16">
+   <properties>
+    <property name="text" value="Many interesting books about the old world."/>
+    <property name="title" value="Shelf"/>
    </properties>
   </object>
  </objectgroup>

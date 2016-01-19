@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="50" height="40" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="limbusdev_world" tilewidth="16" tileheight="16">
+  <image source="../../../../../../../../../../../../home/georg/Entwicklung/Java/libGDX/FriendsWithMonsters/FriendsWithMonsters/android/assets/spritesheets/limbusdev_world.png" width="1024" height="1024"/>
+ </tileset>
+ <layer name="ground1" width="50" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztllkKwjAQhudNfWmf9RJ1u4PHqdsFFBEv4XIVpahHEMHlKE6phRBTVBKdiU7h4y8hTfN1ypAkAEj+hCMAzJGLAxaQrUflsUQipG6ZKwYeMdK1TA4ev1KPFtJWsoE0lYwNc/Tk4DFAhkr2kL6SkWGOnhw89G+r1iJPH+uh1iJPH+sBhn7EvR4n5KqRXno/AijuV+kzZ2IPE2DYT7X02joUHkXUyo9jhwr9vlx4mMa4Ix6C8JxJSL8HG7a4//HdY4S599hnGmYeM48dxIMfn/Cg6BsuPSj7hut6UP2n4iEe4iEe1OuJB6/13n3vGu87oT2bgNbDNd/2SM9EO4fk5ys5P/Pg3z1uPFjttw==
+  </data>
+ </layer>
+ <layer name="walls1" width="50" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztl1ly2kAQhuUlBDzmHSFEzuI4hwADzlm85wgYROUsechyBNa75J+amUIeWpZmkaWk/Fd91ZSkkbrp7lkeWRA8gUfNfgNH50FwDEatIBh7ZAK+4L0n4NTCPhD+/gK/CfsHXGDMZ9DHd33qDu+8B5fnIh5T+5PwV48rnY8bjLkF1zKObtON+7Z4z9fWy3hMrWk+lPqpOBJD36/YYRyfHPNrmg8llY8e7LYpbFFmbP9bz4etXPPhqrrkw1W+4qg6H0qudVV1PpT+lXzMG+jvhrAJWEibFUfnLAhC0AUR6KVsfHb4/rfKx7oh2IAt2EmrpNfVAL4OwRUYgXHKTog4bPNhqvAj/lsQgR6IQR8Mpf/fif9lCX83GjsiBi7bfHBRa1yWlvBzBdZgw9ccsGvtx8XEWBXHtkActvkY4Ltjgzjy1vgJMbbDhO89to8jzqgJ23xMtf1I4hjHghg7hd+JxsJzPpbNl/sR9bsDG0rfIn5N1kzeXmX3Sl2V3R+UeL0N+V4QjGTtUTVTRCZx+J6veL09gxmYy3qjaqaIVH+k8d0fWeL1tgJrsJG1R9VMEfH+mKV6Y1ZCf2Spg1oP+XwKIrkmxJZ7Dl5Xa40y+0OddfNU9Ll0HCvpP6+pMSu3P9RZN09Fn1Pi/cHjCGG7IGJv1x8+NZBxDJk4C4/AJMMH23z8MPhfKR3h/HSc4qR9+MwU30vAMxNn4TlYlJgPm/640Py+JOIwUVX94TuOqvrjpi3O5reSuxrkow6q4/qR9xx1v8r1I2vOy3sfdd8mH65zbhl674+9XOq+6LW8+1Xvr167doq5+AMxH/vqjzrqvT/qJR/5cOlfX33uIx+m/WtzLe/+/9wffwFCGAKv
+  </data>
+ </layer>
+ <layer name="tops1" width="50" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt1WtOAjEUhuFKAqPR/6goEl2JbmIAQbysRDfBHY2uRKNrULka3YgvoRMNaQWcDi3ilzxBxyLnDKdTISanvzrFohkyMPz/bKW0ZrsCs/HjQmSRQx7HOJcKKOIEJZzGbVerT5naKqiihjpupQaaaOEaNw738UxtL3hFGx28S1300McAbw73kUwIsYktbCOFfWkHu0hjD5mE7Wr18aktixzyOMa5VEARJyjh1OE+ytRWQRU11HErNdBEC9e4sdDH2bfnTuBCMd/P1PaCV7TRwbvURQ99DPAWUR9JzrJNpMbsIj12zg3v752mjq34yDZS2PdG0vy8J2Ui3OM+tWYVfRQVZ/Xw/n5Ynm+fszeLnEJF0UdT0cfw/h54X+/LK87zQkzNVIL5UUU3Vy7G19T101zVvJE6Gmii5c237vGUNX0Mr+vmqu2NdNBFD33LfeiSVPSXktfGn1fTpBFTizq6eVu06OZtUXK/LsTDurl1trKyIURsw9y6ILb2xzLHpVkLsz9mnbUoE2Z/HPL7kSN9hMklPVz9gT5ciunzY9K6qJ4Nps+PSetcejb8J7qEmftpr/3m82ZNmLmf9tpvPs+VPFLr0wLV+x+zCbN/Xd/npq/N8vdlSvCdzus1TA0/JfhO5/UapoZPoOChIw==
+  </data>
+ </layer>
+ <layer name="tops2" width="50" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt00dqw1AURuE3sZ0dOG6yd6VediVZfVfqZSk5gcwSMMkg5pl74JtoIP6LkFK/z9woZcGGAxcefAQIEW3+8OJ/LmZjgjtSZMhRoESFWoM7Gja26NBjwIgJMxasGtyx3yr1jgOOOOGMCwxccds+e+XjTDZasOHAhQcfAUJEGtwRszHBHSky5ChQokKtwR0NG1t06DFgxIQZC1YN7tjv+D9wwBEnnHGBgStuu2evfJzJRgs2HLjw4CNAiEiDO2I2JrgjRYYcBUpUqDW4o2Fjiw49BoyYMGPBqsEdn8Vv3595PzzTsfzrDkPDe17tG0iSJEmSJEmSJEmSJEmS9Pp9AH7BPkU=
+  </data>
+ </layer>
+</map>

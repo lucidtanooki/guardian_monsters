@@ -4,36 +4,27 @@
   <property name="musicIndex" value="1"/>
   <property name="musicType" value="town"/>
  </properties>
- <tileset firstgid="1" name="indoor" tilewidth="16" tileheight="16">
-  <image source="../spritesheets/tuxemon.png" width="1024" height="1024"/>
- </tileset>
- <tileset firstgid="4097" name="pokepublic" tilewidth="16" tileheight="16">
-  <image source="../spritesheets/thatssowitty_1.png" width="1024" height="1024"/>
- </tileset>
- <tileset firstgid="8193" name="pokebublic2" tilewidth="16" tileheight="16">
-  <image source="../spritesheets/thatssowitty_2.png" width="1024" height="1024"/>
- </tileset>
- <tileset firstgid="12289" name="magiscarf" tilewidth="16" tileheight="16">
-  <image source="../spritesheets/magiscarf_transparent.png" width="992" height="1264"/>
+ <tileset firstgid="1" name="limbusdev_world" tilewidth="16" tileheight="16">
+  <image source="../../../../../../../../../../../../home/georg/Entwicklung/Java/libGDX/FriendsWithMonsters/FriendsWithMonsters/android/assets/spritesheets/limbusdev_world.png" width="1024" height="1024"/>
  </tileset>
  <layer name="ground1" width="10" height="10">
   <data encoding="base64" compression="zlib">
-   eJwzMGNgMARiAyrReUCcT0Ua2fwCMuwtwGMeNfxBrnno7oLRAPr1NGo=
+   eJzTZ2BgMABifQJ0PhAXEEETMmfUPPw0AImRHw8=
   </data>
  </layer>
  <layer name="walls1" width="10" height="10">
   <data encoding="base64" compression="zlib">
-   eJx7b8DA8B6Iiw0hNDJGFtM1hOCNhgg2NjFqA5i5CUYQvg4aH0TTwt6BAgCjkRKA
+   eJyzZGBgsAViSwJ0JRDXEkFTG8DMroDyy6Fi6HxagGgmCKYnAAB+/wul
   </data>
  </layer>
  <layer name="objects1" width="10" height="10">
   <data encoding="base64" compression="zlib">
-   eJxjYCAOFFgyMBRa4lcTyMjAsA6oZj0BdRMZibPzIpHqiAW9xgwMO0wZGA6YMDAcNIGwcQGQ3D+gmv8E1JELTggzMBwXxhQHALJCD1A=
+   eJxjYKAeqOMnTt0+ItX9I1IdKeA70MwdQLyTH8LGp+4HEP8koI5cEM0EwegAAKbBCtg=
   </data>
  </layer>
  <layer name="tops1" width="10" height="10" opacity="0.97">
   <data encoding="base64" compression="zlib">
-   eJxjYEAFRQYMRAFc6jYaQPATQwh/AxofRIP476FYyQgi/g6ND6LfE+kWf2Pi1A0FAAAA+hAA
+   eJxjYEAFDkwMRAFc6uqZIDgPKl+Oxs+F8m2BbEsgtoDqM8fCtyXOKXBQwc/AUMlPoqZBBgDd2wcq
   </data>
  </layer>
  <objectgroup name="colliderWalls1" width="10" height="10">

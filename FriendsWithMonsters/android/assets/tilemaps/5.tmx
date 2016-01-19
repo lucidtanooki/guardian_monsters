@@ -1,49 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="8" height="8" tilewidth="16" tileheight="16">
+<map version="1.0" orientation="orthogonal" width="10" height="10" tilewidth="16" tileheight="16">
  <properties>
   <property name="musicIndex" value="1"/>
   <property name="musicType" value="town"/>
  </properties>
- <tileset firstgid="1" name="indoor" tilewidth="16" tileheight="16">
-  <image source="../spritesheets/tuxemon.png" width="1024" height="1024"/>
+ <tileset firstgid="1" name="limbusdev_world" tilewidth="16" tileheight="16">
+  <image source="../../../../../../../../../../../../home/georg/Entwicklung/Java/libGDX/FriendsWithMonsters/FriendsWithMonsters/android/assets/spritesheets/limbusdev_world.png" width="1024" height="1024"/>
  </tileset>
- <tileset firstgid="4097" name="pokepublic" tilewidth="16" tileheight="16">
-  <image source="../spritesheets/thatssowitty_1.png" width="1024" height="1024"/>
- </tileset>
- <tileset firstgid="8193" name="pokebublic2" tilewidth="16" tileheight="16">
-  <image source="../spritesheets/thatssowitty_2.png" width="1024" height="1024"/>
- </tileset>
- <layer name="ground0" width="8" height="8">
+ <layer name="ground1" width="10" height="10">
   <data encoding="base64" compression="zlib">
-   eJxjYCAMmiQgeDgCAAcnATU=
+   eJyLYGJgiATiKCCOwMOeAcQzgXgWAfYNIL4JxLcIsPHZNZLtBQAywzoD
   </data>
  </layer>
- <layer name="ground1" width="8" height="8">
+ <layer name="walls1" width="10" height="10">
   <data encoding="base64" compression="zlib">
-   eJxjYMAPmiQYGKrlIBjEHm4YAPsyIa8=
+   eJxjYCAOzGUkDt8lEo9EkMCIH4MAAL7iEeE=
   </data>
  </layer>
- <layer name="walls1" width="8" height="8">
+ <layer name="objects1" width="10" height="10">
   <data encoding="base64" compression="zlib">
-   eJyzlmNgsMaDq4FYmAmCq+UwMQgEAeWCmRjggFWAgYENiNkFGLACV6C4GxC745BvBYq3AXE7DnlqAgCRXQo4
+   eJxjYCAe1PMzMDTwo4pVAfnVQFyDJL4fyD6Apm4XkL8biPcgif8HsQVQ1f0Civ0G4j9o+ikB34Fm/SXDvH1Y9LTwYor9o6JbAdqPD3A=
   </data>
  </layer>
- <layer name="objects1" width="8" height="8">
+ <layer name="tops1" width="10" height="10">
   <data encoding="base64" compression="zlib">
-   eJxjYCAMBIFYCIkvAsSiQCyGTS0zA0MIkA4F4jCo2CVGIizBASYS0HuRTLNFoPoA8ZADwg==
+   eJyTZWRgiCeA5YBYHogJAYUBULeXn3Tz6vjp5z6Yulgi1MUB1QAAfEsHXA==
   </data>
  </layer>
- <layer name="tops1" width="8" height="8">
-  <data encoding="base64" compression="zlib">
-   eJxjYCANXGQiUQMBEMhIXfNIBQDVbQEm
-  </data>
- </layer>
- <objectgroup name="colliderWalls1" width="8" height="8">
-  <object x="0" y="0" width="128" height="32"/>
-  <object x="64" y="32" width="16" height="16"/>
-  <object x="0" y="80" width="16" height="16"/>
+ <objectgroup name="colliderWalls1" width="10" height="10">
+  <object x="0" y="0" width="160" height="48"/>
+  <object x="16" y="48" width="32" height="16"/>
+  <object x="96" y="48" width="48" height="16"/>
+  <object x="128" y="80" width="16" height="16"/>
+  <object x="16" y="112" width="16" height="16"/>
+  <object x="0" y="48" width="16" height="112"/>
+  <object x="144" y="48" width="16" height="112"/>
  </objectgroup>
- <objectgroup name="sensors" width="8" height="8">
+ <objectgroup name="sensors" width="10" height="10">
   <object name="warpField" x="96" y="112" width="16" height="16">
    <properties>
     <property name="targetID" value="4"/>
@@ -56,8 +49,8 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="livingEntities" width="8" height="8">
-  <object name="person" x="80" y="32" width="16" height="16">
+ <objectgroup name="livingEntities" width="10" height="10">
+  <object name="person" x="48" y="80" width="16" height="16">
    <properties>
     <property name="male" value="true"/>
     <property name="moving" value="true"/>
@@ -67,11 +60,29 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="objects" width="8" height="8">
-  <object name="sign" x="16" y="16" width="16" height="16">
+ <objectgroup name="objects" width="10" height="10">
+  <object name="sign" x="16" y="48" width="16" height="16">
    <properties>
-    <property name="text" value="It's running Linux with GNOME Desktop."/>
-    <property name="title" value="Modern PC"/>
+    <property name="text" value="Very warm."/>
+    <property name="title" value="Oven"/>
+   </properties>
+  </object>
+  <object name="sign" x="32" y="48" width="16" height="16">
+   <properties>
+    <property name="text" value="Very warm."/>
+    <property name="title" value="Oven"/>
+   </properties>
+  </object>
+  <object name="sign" x="32" y="32" width="16" height="16">
+   <properties>
+    <property name="text" value="Very warm."/>
+    <property name="title" value="Oven"/>
+   </properties>
+  </object>
+  <object name="sign" x="16" y="32" width="16" height="16">
+   <properties>
+    <property name="text" value="Very warm."/>
+    <property name="title" value="Oven"/>
    </properties>
   </object>
  </objectgroup>

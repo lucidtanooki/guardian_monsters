@@ -14,12 +14,12 @@
  </layer>
  <layer name="walls1" width="16" height="16">
   <data encoding="base64" compression="zlib">
-   eJxjYKAMzGWkDN+lEI8CysBcLGGojSNcV2MRxxYn2UTqx2Y3PvCayPhfRKI4OniEQx0u8cEMopkgGBcAAI+UJ20=
+   eJxjYKAMzGWkDN+lEBMC//mBhACFnhzGYC6WMNTGEa6rsYhji5NsIvVjsxsfeE1k/C8iURwdPMKhDpf4YAbRTBCMCwAADTEoiw==
   </data>
  </layer>
  <layer name="objects1" width="16" height="16">
   <data encoding="base64" compression="zlib">
-   eJxjYKAOqOJnYKgG4hp+VPF6IL+BH1N9Cy8qfxdQzW4g3oOmdj+Qf4AI/b+Aan4D8R80tf9BfAHC+kfB0AF1/BAMA9+B7B1AvJMfwiYE9vFDMLL+H0D8k0j9//gheDgAAL8aGSo=
+   eJxjYKAOqOJnYKgG4hp+VPF6IL+BH1N9Cy8qfxdQzW4g3oOmdj+Qf4AI/b+Aan4D8R80tf/4GBj+8xHWPwqGDqjjh2AY+A5k7wDinfwQNiGwjx+CkfX/AOKfROr/xw/BwwEAAMu2GiU=
   </data>
  </layer>
  <layer name="tops1" width="16" height="16">
@@ -27,7 +27,7 @@
    eJyTZWRgiCcTywGxPBCTA6KZGBgUKNAfQ6F+EBgO+p8DcSYaViLSTJj9c9FwFg79imj2LMPhfi0c+leh2YPs/wp+BoZKfgh7CQ796OKDIfwHWn8sECfgwTCATS4OiAHyAht1
   </data>
  </layer>
- <objectgroup name="colliderWalls1" width="16" height="16">
+ <objectgroup name="colliderWalls1" width="16" height="16" visible="0">
   <object x="0" y="0" width="224" height="48"/>
   <object x="224" y="0" width="32" height="16"/>
   <object x="240" y="16" width="16" height="240"/>
@@ -43,7 +43,7 @@
   <object x="128" y="48" width="32" height="16"/>
   <object x="32" y="48" width="48" height="16"/>
  </objectgroup>
- <objectgroup name="sensors" width="16" height="16">
+ <objectgroup name="sensors" width="16" height="16" visible="0">
   <object name="warpField" x="128" y="240" width="16" height="16">
    <properties>
     <property name="targetID" value="3"/>
@@ -73,7 +73,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="livingEntities" width="16" height="16">
+ <objectgroup name="livingEntities" width="16" height="16" visible="0">
   <object name="person" x="48" y="80" width="16" height="16">
    <properties>
     <property name="male" value="true"/>
@@ -84,7 +84,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="objects" width="16" height="16">
+ <objectgroup name="objects" width="16" height="16" visible="0">
   <object name="sign" x="128" y="48" width="16" height="16">
    <properties>
     <property name="text" value="The fire is warm and feels good."/>

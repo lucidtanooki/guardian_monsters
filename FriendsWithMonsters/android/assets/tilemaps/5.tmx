@@ -14,12 +14,12 @@
  </layer>
  <layer name="walls1" width="10" height="10">
   <data encoding="base64" compression="zlib">
-   eJxjYCAOzGUkDt8lEo9EkMCIH4MAAL7iEeE=
+   eJxjYCAOzGUkDt8lEoPAf34gIUCkA4YBSGDEj0EAAPLqEv8=
   </data>
  </layer>
  <layer name="objects1" width="10" height="10">
   <data encoding="base64" compression="zlib">
-   eJxjYCAe1PMzMDTwo4pVAfnVQFyDJL4fyD6Apm4XkL8biPcgif8HsQVQ1f0Civ0G4j9o+ikB34Fm/SXDvH1Y9LTwYor9o6JbAdqPD3A=
+   eJxjYCAe1PMzMDTwo4pVAfnVQFyDJL4fyD6Apm4XkL8biPcgif/jY2D4z4eq7hdQ/jcQ/0HTTwn4DjTrLxnm7cOip4UXU+wfFd0KAOVJEGs=
   </data>
  </layer>
  <layer name="tops1" width="10" height="10">

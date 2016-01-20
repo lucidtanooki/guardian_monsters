@@ -14,12 +14,12 @@
  </layer>
  <layer name="walls1" width="10" height="8">
   <data encoding="base64" compression="zlib">
-   eJwzZmBgMAFiayhtDKVt0PjGRKorBuISIK6G0jB+DRp/uAAAjlAIvQ==
+   eJwzZmBgMAFiayhtDKVt0PjGRKorBuISIK6G0jB+DRofGfznBxICDEMSAABgCAnb
   </data>
  </layer>
  <layer name="objects1" width="10" height="8">
   <data encoding="base64" compression="zlib">
-   eJxjYCAd1PMzMDTwQ9hVQLoaiGv4MdXtB4odgIrvAtK7gXgPkro6KPs/iBaAsH8B2b+B+A+Sun1oZksDcQIQy6DZ9w9NXTQQxwNxDAH/fAfq+8sPoUkFANUNEh8=
+   eJxjYCAd1PMzMDTwQ9hVQLoaiGv4MdXtB4odgIrvAtK7gXgPkro6KPsfHwPDfz4I+xdQ7DcQ/0FStw/NbGkgTgBiGTT7/qGpiwbieCCOIeCf70B9f/khNKkAAIl/Exo=
   </data>
  </layer>
  <layer name="tops1" width="10" height="8">
@@ -27,7 +27,7 @@
    eJwzZmJgKCWATYDYFIgJAbNBqG4vP3nmFQNxGRQbQfUYIomBcAkQAwAiqAs0
   </data>
  </layer>
- <objectgroup name="colliderWalls1" width="10" height="8">
+ <objectgroup name="colliderWalls1" width="10" height="8" visible="0">
   <object x="112" y="64" width="16" height="16"/>
   <object x="16" y="64" width="16" height="16"/>
   <object x="48" y="48" width="32" height="16"/>
@@ -39,7 +39,7 @@
   <object x="144" y="32" width="16" height="96"/>
   <object x="96" y="96" width="16" height="16"/>
  </objectgroup>
- <objectgroup name="sensors" width="10" height="8">
+ <objectgroup name="sensors" width="10" height="8" visible="0">
   <object name="warpField" x="64" y="112" width="16" height="16">
    <properties>
     <property name="targetID" value="3"/>
@@ -52,7 +52,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="livingEntities" width="10" height="8">
+ <objectgroup name="livingEntities" width="10" height="8" visible="0">
   <object name="person" x="112" y="64" width="16" height="16">
    <properties>
     <property name="male" value="true"/>
@@ -63,7 +63,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="objects" width="10" height="8">
+ <objectgroup name="objects" width="10" height="8" visible="0">
   <object name="sign" x="48" y="48" width="16" height="16">
    <properties>
     <property name="text" value="It's a very old movie on a black and white TV."/>

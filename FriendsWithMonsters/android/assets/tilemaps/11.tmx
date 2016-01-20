@@ -4,33 +4,27 @@
   <property name="musicIndex" value="2"/>
   <property name="musicType" value="town"/>
  </properties>
- <tileset firstgid="1" name="tuxemon" tilewidth="16" tileheight="16">
-  <image source="../spritesheets/tuxemon.png" width="1024" height="1024"/>
- </tileset>
- <tileset firstgid="4097" name="thatssowitty_1" tilewidth="16" tileheight="16">
-  <image source="../spritesheets/thatssowitty_1.png" width="1024" height="1024"/>
- </tileset>
- <tileset firstgid="8193" name="limbusdev_world" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="limbusdev_world" tilewidth="16" tileheight="16">
   <image source="../spritesheets/limbusdev_world.png" width="1024" height="1024"/>
  </tileset>
  <layer name="ground1" width="40" height="20">
   <data encoding="base64" compression="zlib">
-   eJztk00KgCAQRqdxZS3yVK67VrXpWtWijpRhgZk/FKgRLh4Doszjc4YXADyTyfyaFgG6gx7T++hujABMKKlJGkc1IxXVLaXjiHcPF7Edn/qdjqaZHHZAZC8qA3nWFNfKjzt7XbVzE1T0Kj2sL7K0zU2IXaMeR1Nf17/MAeaDerLUXU37FdLviaeNBeXbioTfK31uXb4xvd7sWUqvzPfYAMKPC50=
+   eJztk1EKgCAQBfcEeqvqWkVY1yrCOlaCCSKrYqAbsR+DX/LG5+4hAA6GYX5NJwH6h0HS+4RuuzlnadkEjaPfkY/vRumoTN6CELpROZb6OcdWM6lNxplhQv4612Vsbmq8S2ccsVyV6H+t0LvrOeYZumL7VdOvxDPGKOzdi2BuU74tvd7sGaUX8z1uKrRs4Q==
   </data>
  </layer>
  <layer name="walls1" width="40" height="20">
   <data encoding="base64" compression="zlib">
-   eJzNVllOwzAQNWLnDz76mZBG4h4spU0Pwj1KKZTlUoilZTkG3INnZaZBQ71iRJ709BzLo7zMZGxXmVJDsEqsseD47VypnbzRa8zdZOk0FhxfwdMwb/QFc69ZOmWcFEr19+3sYc2pXlc08bIeZ7t+9MGoqHUMvQAnHnoJXoFTipX1Tenvnt7xAH0Enzz0GZyBc4qV9Y3xYcJKV6l1cBVco7GLG+AmuNUlf5b6huAWsXeiHw7xjjmxFzgekD/Zt9/9HezVa1hteEPsu/DXL5v8+eSO86d1UFL+RN+mqOtHR6nPzs/8HYHH4Iyel83J/P12H7VhpP+jsuYE43NwrP8vel42x+unor5tBde3rbCdl7I/QvollS+5P7cF7Efuz4y/7BsfLHwZ7kX/lU+TD6ku/zK/sWe0Bu+XGkYfUh3+F/GB9x7Xd5h8mPJq9E8aeu8xeXP5iK2v9zqHunx8AYazzUQ=
+   eJzNVotuwjAMdNrBprbSvqndGPxWy9j4rW7j8Vm7CEddLbI4JQhOOl1qxbJzOLSmJMpAU0GrdDoVLr8viL6KQWvEmiqdToXLN8431haxrkqnDq+GaEn/c4E9b3afGfKlf82zjhq05qRr6Du4UegH+AluOVf6l7K/nmt8Q3/AnUL34AE8cm7Iv0tgMqIZmIMPvA5xDj6CT1nYvxjscLZ9MY7VqHFkLiLXq2zsX217E/31PN+94h7OkDsvx7FlPvin8c75Z3WVj/1rwa5M87v6/GvAF/DAz+diPv+ugdbOUX7iBusOXNv54udzMbd/K+bvXnFN/1JA3t+/kPcj5r5cCvm/d28+St+kf7eeS59/rq9b+Sn7kOrrMzQPU9/REqG6vj5D59F+V4TOkdq/2O8eX3/aurH+ufd26Bzac/rq/gLK3K9H
   </data>
  </layer>
  <layer name="objects1" width="40" height="20">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjAJMcFiJeLUHSVA7UsBgDL/JTAg2szLx+hhJUDsKRsEoGAWjYBQQAgAXnwRw
+   eJxjYBgFo2AUjAJMcJiJeLUHSVA7UsBgDL9DPAg2MzPx+hhJUDsKRsEoGAWjYBQQAgAbqQPp
   </data>
  </layer>
  <layer name="tops1" width="40" height="20">
   <data encoding="base64" compression="zlib">
-   eJztlEkKwkAQRcsxThs32UUUcxFnQS/l7EH0IGZ0Oofn8LtoSFqTjtDthB8eBc2H+nRXNZF87ZpEFrCBA7R6PC48HvDBvqkgEKeUSZQGGZAFhXo8OXjyQLt5TfX5WujRBp0GUTdBvx48fTAAQ8n5TgbR2QifTdBjimwz1HmCfgt4lmAF1pLzlWtEldr9uYV8Nno5Cfq58HjAV/C2I2QbP8inUpdquP6KNjrRVn93ir+COuBvOBpi36vE5yli90rc/vH78cp9eZQnqE+7TyaWS5Rfdf8o8bmYP6rK1rP3wvxRVUZOlf+lrDlQPe+iORBV1fMumgNR/XZdATviTKo=
+   eJztklsOgkAMRauACrsSBd0WKui25OmyPHzMB+NjMI4RDTc5KZk06aGpyHuJfJHY776dHZEcCihhLs+p6KmhgYvzppCWFLdM85u4IlNwwIWFPMejZwbztte161fhVmt+S2aEsJqIrHvMi+iJYQNby35ewL8H3beEGTvc9tRDj3kpPRkc4WTZL8ItDm7fc/wKZpU95lX01NBYdmuT4pbd8Rsz5h+y5LbDAd237pPwvRuQn8lnaPtUUV7f2qdpL7qX6n9UbefVvaj+R3Wod6Bi6w4+/Z+mOzDVT9+76Q5M9ddzBatGN0k=
   </data>
  </layer>
  <objectgroup name="colliderWalls1" width="40" height="20">
@@ -39,7 +33,6 @@
   <object x="80" y="112" width="16" height="16"/>
   <object x="112" y="112" width="16" height="16"/>
   <object x="256" y="96" width="32" height="32"/>
-  <object x="304" y="128" width="32" height="16"/>
   <object x="320" y="144" width="16" height="16"/>
   <object x="80" y="192" width="16" height="16"/>
   <object x="112" y="192" width="16" height="16"/>
@@ -57,7 +50,6 @@
   <object x="96" y="256" width="128" height="64"/>
   <object x="224" y="272" width="32" height="48"/>
   <object x="256" y="304" width="352" height="16"/>
-  <object x="496" y="256" width="32" height="16"/>
   <object x="576" y="192" width="32" height="112"/>
   <object x="544" y="240" width="32" height="64"/>
   <object x="512" y="288" width="32" height="16"/>

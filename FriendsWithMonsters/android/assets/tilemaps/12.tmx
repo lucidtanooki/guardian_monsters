@@ -7,9 +7,6 @@
  <tileset firstgid="1" name="limbusdev_world" tilewidth="16" tileheight="16">
   <image source="../spritesheets/limbusdev_world.png" width="1024" height="1024"/>
  </tileset>
- <tileset firstgid="4097" name="tuxemon" tilewidth="16" tileheight="16">
-  <image source="../spritesheets/tuxemon.png" width="1024" height="1024"/>
- </tileset>
  <layer name="ground1" width="40" height="20">
   <data encoding="base64" compression="zlib">
    eJzt0DERAEAIxMCzBM7+/RfgghQpMum3kvRW0L/tg3/to59+BCf99CP+2kc//QhO+ulH/ADuRv6x
@@ -17,7 +14,7 @@
  </layer>
  <layer name="walls1" width="40" height="20">
   <data encoding="base64" compression="zlib">
-   eJxjYBjcYC7j4MZ3BznGBUIEGBhCBegXj6OAPqBqoB1ABpiNJ5324NGHS24OHvPIAbeheekOI6bYXQJy2MSRxaKo7FZqg1mD3H3EgHIgrgXiSiCuGGC3UBvMxRM/uOSykMRfUSF+X1M5f+QOgzQ3CkbBYAC3GLHjLDrmMVxuAGEAP59peQ==
+   eJxjYBjcYC7j4MZ3BzkeBSMLVA20A8gAs/Gk0x48+nDJzaFyur8NzUt3GDHF7hKQwyaOLBY1yPPorEHuPmJAORDXAnElEFcMsFuoDebiiR9ccllI4q+oEL+vqZw/codBmhsFo2AwgFuM2HEWHfMYLjeAMAD8BGiw
   </data>
  </layer>
  <layer name="objects1" width="40" height="20">

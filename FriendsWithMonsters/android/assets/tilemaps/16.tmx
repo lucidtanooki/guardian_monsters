@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="50" height="30" tilewidth="16" tileheight="16">
+ <properties>
+  <property name="musicIndex" value="1"/>
+  <property name="musicType" value="town"/>
+ </properties>
+ <tileset firstgid="1" name="limbusdev_world" tilewidth="16" tileheight="16">
+  <image source="../spritesheets/limbusdev_world.png" width="1024" height="1024"/>
+ </tileset>
+ <layer name="ground1" width="50" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztwzENAAAMA6AqmKr611QReyGhl1RVVVVVVX0dTsXgiA==
+  </data>
+ </layer>
+ <layer name="walls1" width="50" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztlsEJgDAMRbNAhpJOpjnpZjqVvQQlaOhFTMJ/kEtbSl8/JSUCAAAAAACgLisTLU5Jr8bX+onf9/qTNnCurB42I0nq4WV0JPeImoNS2WN/GJv72BbYxXsLdi5yJlLEw+uD1jGyx0gfVODxPfDIS9Q/yR3NJeudn3P7GoI=
+  </data>
+ </layer>
+ <layer name="objects1" width="50" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzt00ENACAMBEEM4BppCEMCvzbXzCjYS9O1AAAA6tzdXVAjZWdK58+UHZNNuVHyjhPcDp2S/556D2KdBkk=
+  </data>
+ </layer>
+ <layer name="tops1" width="50" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzt1jEKACEMBMCodf7/Jn8lV1whaCkizMD2KRY2EQAAAJxQMqLm7St43dehpkcAbPSct+L/P1bhvAE86gGa
+  </data>
+ </layer>
+ <objectgroup name="colliderWalls1" width="50" height="30">
+  <object x="64" y="464" width="144" height="16"/>
+  <object x="160" y="288" width="48" height="48"/>
+  <object x="176" y="336" width="32" height="128"/>
+  <object x="160" y="432" width="16" height="16"/>
+  <object x="144" y="272" width="16" height="16"/>
+  <object x="96" y="256" width="64" height="16"/>
+  <object x="144" y="224" width="16" height="32"/>
+  <object x="80" y="256" width="16" height="80"/>
+  <object x="112" y="336" width="16" height="48"/>
+  <object x="64" y="368" width="48" height="16"/>
+  <object x="96" y="336" width="16" height="32"/>
+  <object x="0" y="368" width="48" height="16"/>
+  <object x="0" y="224" width="16" height="144"/>
+  <object x="16" y="224" width="128" height="16"/>
+  <object x="16" y="256" width="16" height="16"/>
+  <object x="16" y="288" width="16" height="32"/>
+  <object x="0" y="384" width="16" height="96"/>
+  <object x="16" y="464" width="32" height="16"/>
+ </objectgroup>
+ <objectgroup name="sensors" width="50" height="30">
+  <object name="warpField" x="48" y="464" width="16" height="16">
+   <properties>
+    <property name="targetID" value="10"/>
+    <property name="targetWarpPointID" value="9"/>
+   </properties>
+  </object>
+  <object name="startField" x="48" y="448" width="16" height="16">
+   <properties>
+    <property name="fieldID" value="1"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="livingEntities" width="50" height="30"/>
+ <objectgroup name="objects" width="50" height="30"/>
+</map>

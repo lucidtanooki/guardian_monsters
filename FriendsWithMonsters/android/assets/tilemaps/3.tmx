@@ -9,7 +9,7 @@
  </tileset>
  <layer name="ground1" width="32" height="32">
   <data encoding="base64" compression="zlib">
-   eJw7wsfAcGQUj+JRPIpH8aDBzvwMDK78A2d/M9Du1lH7R+2n0Bxy0zG17CfXHHrZ78KPHbMCMTMOOVIwIXOODDA2ZGBgMGIYOLoQiIsGkB7p/qd2uTHYyr+hbD8x5Q+t4ugwEWVHK9/Ah9FQtx8AwIXn1A==
+   eJw7wsfAcGQUj+JRPIpH8aDBzvwMDK78A2d/M9Du1lH7R+2n0Bxy0zG17CfXHHrZ78KPHbMCMTMOOVIwIXOODDDu5mFg6OEZOLqegYGhgWHgaHsgdhhA+jQwDM7wDBxN7XJjsJV/Q9l+YsofWsXRYSLKjla+gQ+joW4/AH8yBOM=
   </data>
  </layer>
  <layer name="walls1" width="32" height="32">

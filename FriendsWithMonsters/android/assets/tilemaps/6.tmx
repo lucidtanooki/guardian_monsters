@@ -5,7 +5,7 @@
   <property name="musicType" value="town"/>
  </properties>
  <tileset firstgid="1" name="limbusdev_world" tilewidth="16" tileheight="16">
-  <image source="../../../../../../../../../../../../home/georg/Entwicklung/Java/libGDX/FriendsWithMonsters/FriendsWithMonsters/android/assets/spritesheets/limbusdev_world.png" width="1024" height="1024"/>
+  <image source="../spritesheets/limbusdev_world.png" width="1024" height="1024"/>
  </tileset>
  <layer name="ground1" width="10" height="8">
   <data encoding="base64" compression="zlib">

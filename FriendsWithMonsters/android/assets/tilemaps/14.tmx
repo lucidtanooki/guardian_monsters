@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="50" height="40" tilewidth="16" tileheight="16">
  <tileset firstgid="1" name="limbusdev_world" tilewidth="16" tileheight="16">
-  <image source="../../../../../../../../../../../../home/georg/Entwicklung/Java/libGDX/FriendsWithMonsters/FriendsWithMonsters/android/assets/spritesheets/limbusdev_world.png" width="1024" height="1024"/>
+  <image source="../spritesheets/limbusdev_world.png" width="1024" height="1024"/>
  </tileset>
  <layer name="ground1" width="50" height="40">
   <data encoding="base64" compression="zlib">

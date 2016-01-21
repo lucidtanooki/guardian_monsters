@@ -43,7 +43,7 @@
   <object x="128" y="48" width="32" height="16"/>
   <object x="32" y="48" width="48" height="16"/>
  </objectgroup>
- <objectgroup name="sensors" width="16" height="16" visible="0">
+ <objectgroup name="sensors" width="16" height="16">
   <object name="warpField" x="128" y="240" width="16" height="16">
    <properties>
     <property name="targetID" value="3"/>

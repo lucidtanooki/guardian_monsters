@@ -119,6 +119,8 @@
   <object x="656" y="384" width="48" height="16"/>
   <object x="160" y="256" width="32" height="32"/>
   <object x="80" y="464" width="112" height="16"/>
+  <object x="0" y="480" width="64" height="32"/>
+  <object x="80" y="480" width="112" height="32"/>
  </objectgroup>
  <objectgroup name="livingEntities" width="64" height="32">
   <object name="person" x="400" y="304" width="16" height="16">
@@ -207,6 +209,17 @@
    <properties>
     <property name="targetID" value="3"/>
     <property name="targetWarpPointID" value="5"/>
+   </properties>
+  </object>
+  <object name="startField" x="64" y="480" width="16" height="16">
+   <properties>
+    <property name="fieldID" value="3"/>
+   </properties>
+  </object>
+  <object name="warpField" x="64" y="496" width="16" height="16">
+   <properties>
+    <property name="targetID" value="17"/>
+    <property name="targetWarpPointID" value="1"/>
    </properties>
   </object>
  </objectgroup>

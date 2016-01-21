@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="50" height="30" tilewidth="16" tileheight="16">
+ <properties>
+  <property name="musicIndex" value="1"/>
+  <property name="musicType" value="town"/>
+ </properties>
  <tileset firstgid="1" name="limbusdev_world" tilewidth="16" tileheight="16">
   <image source="../spritesheets/limbusdev_world.png" width="1024" height="1024"/>
  </tileset>
@@ -15,17 +19,17 @@
  </layer>
  <layer name="walls1" width="50" height="30">
   <data encoding="base64" compression="zlib">
-   eJztllluwjAQhocgCGGLxNID9CZt1UU8QuBAlbo8s92nD+0B2M7SvvW3TESKEjsTm5JU/aVPRiS25/cyGSK1vDbRtYYyqDSJqsBltLXmYZ40/YVUz1Rx37Q1Rkn6uMVYd+Ce0T5E5k/TX0j17DgmrkSfJ4z1DF4Y7Wtk/jT9hVTPbPg4p0ox86tiGjaIRiAAXZ9o0tD3+Q1xfUwR9wzMwQIsC+pjhbjXYCP2BfsR+Po+XK1qcq83aLdgBzou/gM90AcXrpmPJNn0Ic5u10PMoO/JsztE3CMQgDGYZPCR5vuhys3ROzVuHO5U4vuIfQQCMBY+wNSV+z9HuwDLDD44a93xf+5/z0++U0maIu4ZmIMFWHr6eW34eK8TfdTl77j9j96pLdhpfKw8ufYbtFuwA5dlvY/H1k+Oz4jORwVxVfexDX31/p9KJcOznxeF5+rc+d9URfORlPuK5iMu973hTg8K5iPMI2E9IYjmXI4PUTesa7JuEPWDqBtsSKyp0+avaejDY+akuLrBRKV9/I6hD26/uLrBROfywa0zdLoy/F5l9ZFUu9tU18G5ddK9G/rI4/c6i488iuMjPJe2VW+Zj8HxYWvOU4z578Oe/oqPgYUxP5HLvxj53MacedE3W7h0CA==
+   eJztllluwjAURU0QCWGKxNAFdCdt1UF8QmBBlTp8hyT76Ue7AEiylvav1wpRA0rsvNgUqHqlIyMc2+96fIyJZQ8Yu5bQBK0eYyawCGW79zNOlfZcojpR3DcDiVGW+rhFX3fgnlA+5Mav0p5LVLcfE1W8zRP6egYvhPI1N36V9lyiOh0+jqlGwfiimGZdxubABSOHsWVX3kaHPJOxFfBBAEJzt57qw0PcK+CDAIS/5GONuDcgAjFIFH2sEfcGRHxdsB6uI29DjrmdrnWEMgYJGFr4D4zBBFxYaj7KpNMH37sjGzGDiZ3u3RningMXLMCyho8q74fobs6fqUX350yVfo/Y58AFC+4DeFa6/j7KAIQ1fFDmeujsrv/YKT9TZfIQ9wr4IAChLR9Xh4/3DmMfnfR30frnz1QMEomPtZ3OfYQyBgm4bMp9PPZ32d8jMh8txGVuY5s54vU/lBqKe/9UlO2rY7/Hqjo3H2V337n5KLr73nCmp2fmI7tHsnyCk79zKT543rBpp3kDzx943qBDfE6NAX1OMx828U4qyhtU1NjGbyj6oLYryhtUdCwf1DxDpivF96quj7LcXadGBvatUe3bzMcpvtd1fJyiKD6yfalbnb56HxQfusY8RJ//PvTpr/iYaujzE3f5F+E+1zHmqegbw1F7TA==
   </data>
  </layer>
  <layer name="objects1" width="50" height="30">
   <data encoding="base64" compression="zlib">
-   eJxjYKAcOPNRwZBRMAqoAFh4GRhYeSk3x4mfcjMGAxj1B/2BEDD9ifAgsCgQf4O6fyj5Q4wHlS+E5I/BCEBuE+ZBDXsQnobmjyAy/QGKO1yYmgDkNiEeTPFDaGKTsKghBtDDDyAA8kcQmW6EAR48+unhBxggN6xhwAdJfwta/USs+9HjfxSMglEwCigFI71cwdZuALXZjlChH0FPgKvdMNQANdoNgwVQ2m6gFRiItE0LO4daHsUFhpI/yHHrUPLfKBgFtAIAk1Mgng==
+   eJztljsOgzAMhjO0m2ml9HGgdu3EmXoChh4I9UydiyWiQoAKYudhyZ/kgQic/3dMZGPo3A8MSRSFgV1lzL6i57kd6TlKQH2kx3b9d4ZfXLr49PopPt4Mfb2FK4yf7cBHiaC2E4xrj/HyfNSBPvDsloIT1GZhut72a64Pmpl31pDCA4I+6kCNDvjzfQoPjsar/VYeAx9PL8da/f755yDn3oqi8OH+5ZZ4R0tnbm7AmU3aXbc0N0iDY24oBercEIscemLsWVpdQ5HkI0SrJH+KEosvPwYmVQ==
   </data>
  </layer>
  <layer name="tops1" width="50" height="30">
   <data encoding="base64" compression="zlib">
-   eJztlkluwkAQRVuRcAI4G4K5ERzA0za5DBwAD/fJQBZZejpPHmBLAXUMbRospP7Sky0hV9Wn3OUS4ny5IyE88CGAcKTw8AVaD4SIIIYE0sGF8ag7ghgSSG/kI6PuHAooobrQR0bdORRQQnXkwyW+Bz4EELbk+7KF2NiSHI/kgAJKqGBiCfECU3BgZh0+8/6s5mMyJh5MwYHZ+PB3Wf9VvO1yPJEDpuDADFzq9sCHAEKrPUYXzYdCLIb7e1n/Vc+US90e+BBACGvqjiCGBNIr+FjiYVX7kPVf9UytqTuCGBJIISNODgWUUF3BxwYP37UPWf9Pnamuen3QE6fRgLqsujZZ/0+dqXMVMxN8e3/dSrePOR4WtQ9Z/3XlK+3D65tmH0s8rFrelS4+mv++wannqurs06kuPgrJd2WrvvYJ3WqbfR/07FPxe9iXdM4+2d5wK+mafbtYkr3hHiXbG+5Rsr1Bh7Y76z2d1WM19Rvpk+5d51b6uzME/3x7jYx06qeH96yPnEZGRkZd9Qvag3Du
+   eJztlltugkAYRidNpF7oixV3pAvg9tpuRhcgl/30Yh/6iMB6elRIqpmig1OIyZzkBBLDzP85zPALcT3uWAgPfQwwHCs8fAObgRARxphgOrhxPOqOMMYE045yZNS9wxwLLG/MkVH3DnMssDzL4TK+hz4GGDbM92kLsbUlczwyB+ZYYIlTS4hnnKGDc+v0mbcntRzTCePhDB2cT05/l62/SrbDHEPmwBk6OEeXuj30McDQah6jDYuREMvR8V62/qp7yqVuD30MMBzqr1nGigzrKods/VX31Ia6I4wxwbSjHFsyfFU5ZOt/aU+15eVBzzg1A+qyqto21B1hjAmm1uU9dS0xZ4JvH697dOdYkGFZ5cioe4c5Flha+uYr7NPrq+YcKzKsG96VNjnq/77Wqc5V1bNPJ21y5JLvyp6++gndNJ1976zZh+L3sC90nn2yvqErdJ19h7EkfcM90lffoJv/6hv2Pes97dVz6voN+tDd63TF754h+OPbazDo5LuH96yPOQ0Gg6EtP3Lqaao=
   </data>
  </layer>
  <layer name="shadow2" width="50" height="30">
@@ -33,7 +37,7 @@
    eJztzzEKACAMBEHJQ/X/v5DUtkJImCmvul0LqLCj+sEf2XHi3bqZ0pGmdAAAAAB0cwEprwNk
   </data>
  </layer>
- <objectgroup name="colliderWalls1" width="50" height="30" visible="0">
+ <objectgroup name="colliderWalls1" width="50" height="30">
   <object x="288" y="0" width="224" height="48"/>
   <object x="480" y="48" width="32" height="16"/>
   <object x="544" y="0" width="256" height="48"/>
@@ -107,7 +111,100 @@
   <object x="752" y="448" width="32" height="32"/>
   <object x="512" y="288" width="32" height="48"/>
   <object x="544" y="272" width="48" height="64"/>
+  <object x="208" y="112" width="16" height="16"/>
+  <object x="32" y="208" width="16" height="16"/>
+  <object x="336" y="192" width="16" height="16"/>
+  <object x="224" y="352" width="16" height="16"/>
+  <object x="608" y="176" width="16" height="16"/>
+  <object x="688" y="144" width="16" height="16"/>
+  <object x="720" y="272" width="16" height="16"/>
  </objectgroup>
  <objectgroup name="objects" width="50" height="30"/>
- <objectgroup name="livingEntities" width="50" height="30"/>
+ <objectgroup name="livingEntities" width="50" height="30">
+  <object name="person" x="256" y="304" width="16" height="16">
+   <properties>
+    <property name="male" value="true"/>
+    <property name="moving" value="false"/>
+    <property name="path" value="SSTOP,WSTOP,SSTOP,SSTOP,ESTOP,SSTOP,WSTOP,WSTOP"/>
+    <property name="spriteIndex" value="2"/>
+    <property name="startDir" value="S"/>
+    <property name="text" value="I am waiting for the fishing boats. A storm is coming. Fishers will die staying out there."/>
+   </properties>
+  </object>
+  <object name="person" x="320" y="192" width="16" height="16">
+   <properties>
+    <property name="male" value="true"/>
+    <property name="moving" value="false"/>
+    <property name="path" value="SSTOP,SSTOP,SSTOP,SSTOP,ESTOP,ESTOP"/>
+    <property name="spriteIndex" value="2"/>
+    <property name="startDir" value="S"/>
+    <property name="text" value="Pirates came here a few weekes ago. They took my wife and my daughter. I don't know what to do."/>
+   </properties>
+  </object>
+  <object name="person" x="608" y="416" width="16" height="16">
+   <properties>
+    <property name="male" value="true"/>
+    <property name="moving" value="false"/>
+    <property name="path" value="SSTOP"/>
+    <property name="spriteIndex" value="0"/>
+    <property name="startDir" value="S"/>
+    <property name="text" value="May those pirates burn in hell for what they did to us. We have to go out there and find them!"/>
+   </properties>
+  </object>
+  <object name="person" x="624" y="176" width="16" height="16">
+   <properties>
+    <property name="male" value="true"/>
+    <property name="moving" value="false"/>
+    <property name="path" value="SSTOP"/>
+    <property name="spriteIndex" value="1"/>
+    <property name="startDir" value="S"/>
+    <property name="text" value="I hope they will find them!"/>
+   </properties>
+  </object>
+  <object name="person" x="496" y="336" width="16" height="16">
+   <properties>
+    <property name="male" value="true"/>
+    <property name="moving" value="true"/>
+    <property name="path" value="E,E,E,E,E,E,N,N,N,N,N,W,W,W,W,S,W,W,S,S,S,S"/>
+    <property name="spriteIndex" value="1"/>
+    <property name="startDir" value="S"/>
+    <property name="text" value="I can't stand still. We have to rescue them!"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="sensors" width="50" height="30">
+  <object name="startField" x="512" y="16" width="16" height="16">
+   <properties>
+    <property name="fieldID" value="1"/>
+   </properties>
+  </object>
+  <object name="warpField" x="512" y="0" width="16" height="16">
+   <properties>
+    <property name="targetID" value="17"/>
+    <property name="targetWarpPointID" value="2"/>
+   </properties>
+  </object>
+  <object name="startField" x="528" y="16" width="16" height="16">
+   <properties>
+    <property name="fieldID" value="2"/>
+   </properties>
+  </object>
+  <object name="warpField" x="528" y="0" width="16" height="16">
+   <properties>
+    <property name="targetID" value="17"/>
+    <property name="targetWarpPointID" value="3"/>
+   </properties>
+  </object>
+  <object name="startField" x="416" y="176" width="16" height="16">
+   <properties>
+    <property name="fieldID" value="3"/>
+   </properties>
+  </object>
+  <object name="warpField" x="416" y="160" width="16" height="16">
+   <properties>
+    <property name="targetID" value="18"/>
+    <property name="targetWarpPointID" value="1"/>
+   </properties>
+  </object>
+ </objectgroup>
 </map>

@@ -3,12 +3,9 @@ package org.limbusdev.monsterworld.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Interpolation;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -22,7 +19,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
 
 import org.limbusdev.monsterworld.MonsterWorld;
 import org.limbusdev.monsterworld.utils.GameState;
@@ -116,7 +112,7 @@ public class MainMenuScreen implements Screen {
     }
 
     public void setUpGame() {
-        if(SaveGameManager.doesSaveGameExist()) {
+        if(SaveGameManager.doesGameSaveExist()) {
             GameState state = SaveGameManager.loadSaveGame();
             game.setScreen(new OutdoorGameWorldScreen(game, state.map, 1, true));
         } else
@@ -202,7 +198,7 @@ public class MainMenuScreen implements Screen {
         this.buttons = new ArrayMap<String, TextButton>();
 
         String startButton = "Start New Game";
-        if(SaveGameManager.doesSaveGameExist()) startButton = "Load Saved Game";
+        if(SaveGameManager.doesGameSaveExist()) startButton = "Load Saved Game";
 
         TextButton.TextButtonStyle tbs = new TextButton.TextButtonStyle();
         tbs.font = skin.getFont("default-font");

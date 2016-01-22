@@ -9,30 +9,29 @@
  </tileset>
  <layer name="ground1" width="50" height="30">
   <data encoding="base64" compression="zlib">
-   eJzt0DkRACAQBMFTgCr8+yGjUEBCcTwddL6ztURUAAC2aZG/4aeOsXMme+OKv1/puIWOs+g4iw4AftYBfdztlA==
+   eJzt1skRwCAIAEArsKqkeEvKLw0gN4rHg09mlKwBzFdK+W4cFW/Fg1r/VDikebT5PRw9A+SJdFj38nZw9oNiFwfXtqKD07OQg3qOvX8j6r8xz2ymowFrenlnOrD1nu9o6ZkVHNR8xmpBc06zHL3cWR3Qc6mDcx+PrkWNQ3N3aOthtCOiriV3s6Y/MjmgPbk9lckhyWtx9ObAKIfn96AckjPQzjiJozD/qzI7qFmR0WHptRMdnjmjZ19UXMdZjpmxq+MHqWMZ0A==
   </data>
  </layer>
  <layer name="walls1" width="50" height="30">
   <data encoding="base64" compression="zlib">
-   eJztlksOhCAQROEA3sffzXQ3l1JPpq6k45CMBBGTMRakXlIrXfRLYYtShBBCCCHknywXWb9BJxePRitVBVLro8f82qRhZMaYTiwpebgdSSeWlDxC30PqHoPJaNJrz0MAYj1Qe7DEepSmhxa0C8Hn0en9DE3Ou8idfIq4fSsge/zuWJn9bN8KyB537hz0eB56YJGLh/uvsPcPX1DvJMIGvwJptg==
+   eJztmFtOw0AMRZMFdD+BsDP6B4sqrCzlCyJhYV1d23dmQssHlkaq8rDn+DnpNP2LIpev9Vas9xva6rW9Cc98FPfXeZoeYD3NfbZabbfoznTtDI9kzwvhqWyZP15PP/5gupmMclT+2oLfka4VOJS1+2oRcuKWHGoeeYkY8HoWW7OLNWz12crxPB/Ta5T4MA7cI7uecUR1ZmJ8I70zs9/CwXzkY459j/kP887yQOEb4ViKeLJ3TBg3xsz0R/no1znJ2YrD7inzrqfGI14W0ygevr/gvECOa7F6e1UlWV77vaJte2+UQz3DVHXhOVZg8HtVOdjZBfMe36mYlFxcZl5b29THoeRMxKHk9S6tvesoDowR+ov99oL27Tm1d0Ucl+/7KkcWoxGOLId9/1pITnuGEQ7LjXMQG7/PqKYy/0Q92nKhmh8qB/N9pruVoxKc270cbP4zjnWOa6qqj6oP+D0oHNHZD/fNONRYMlHiFfWrl5Ou9y9z+B6yz+/s7HcPDpy1LX03EsaRzX6T7LxYfRdmvf0oDjYP1P8fem2aHMnxG+fgyiazPcqhnDNG1zmI75Ec9xTkwFmRfV9EvrmHIMcn3d1jtw==
   </data>
  </layer>
  <layer name="objects1" width="50" height="30">
   <data encoding="base64" compression="zlib">
-   eJzt0zEOABAQBVGFllM7moMpdCIhCjIy7wSz2fwQJEmSJBHF/LrgTE2vC+6g3EnpXPnljhnq1ke//Ih8RwG376LshdKpjrx73dcAVksGkQ==
+   eJztldENgCAMRDHxV+dxQIdiAAfz1xgCpcD1mvR9E9q7HiWlQMpzWHewFq/69tO6gzmgdDDPmXmWN9C3Xh96ztd0MGcj8EG2biAogtxfGqQ7jF2HFcx/Zw3Pfw6755q3MnMerfrSWmgdjJn8Zm0kd0z7c7XPkvv/ZzTeMuZFykgeWrpZ9mOpj2vD99EC6RfLbDzj+d0HeF59iRNY
   </data>
  </layer>
  <layer name="tops1" width="50" height="30">
   <data encoding="base64" compression="zlib">
-   eJztz6ENACAQBEEaoP+aKOkdFoF5QXIkM8m5MzsGAABwqmM/05FFR4a67Fc6sujIoiOLjrfW7P1TO7pSOzajejsz
+   eJztzkENAAAIBKArYP9MtvJrA+cGCUgAAAAAAPio63rANmXSANc=
   </data>
  </layer>
- <objectgroup name="colliderWalls1" width="50" height="30" visible="0">
+ <objectgroup name="colliderWalls1" width="50" height="30">
   <object x="64" y="464" width="144" height="16"/>
   <object x="160" y="288" width="48" height="48"/>
   <object x="176" y="336" width="32" height="128"/>
   <object x="160" y="432" width="16" height="16"/>
-  <object x="144" y="272" width="16" height="16"/>
   <object x="96" y="256" width="64" height="16"/>
   <object x="144" y="224" width="16" height="32"/>
   <object x="80" y="256" width="16" height="80"/>
@@ -46,6 +45,68 @@
   <object x="16" y="288" width="16" height="32"/>
   <object x="0" y="384" width="16" height="96"/>
   <object x="16" y="464" width="32" height="16"/>
+  <object x="0" y="144" width="160" height="80"/>
+  <object x="0" y="0" width="32" height="144"/>
+  <object x="32" y="0" width="352" height="48"/>
+  <object x="384" y="0" width="160" height="32"/>
+  <object x="224" y="48" width="176" height="48"/>
+  <object x="384" y="32" width="16" height="16"/>
+  <object x="496" y="32" width="16" height="16"/>
+  <object x="48" y="80" width="16" height="16"/>
+  <object x="144" y="64" width="32" height="80"/>
+  <object x="128" y="128" width="16" height="16"/>
+  <object x="192" y="64" width="32" height="32"/>
+  <object x="176" y="112" width="96" height="32"/>
+  <object x="160" y="144" width="112" height="16"/>
+  <object x="208" y="160" width="64" height="16"/>
+  <object x="272" y="128" width="32" height="48"/>
+  <object x="368" y="96" width="32" height="16"/>
+  <object x="400" y="80" width="80" height="32"/>
+  <object x="480" y="96" width="16" height="32"/>
+  <object x="448" y="112" width="32" height="16"/>
+  <object x="512" y="96" width="32" height="32"/>
+  <object x="528" y="32" width="16" height="64"/>
+  <object x="528" y="128" width="16" height="32"/>
+  <object x="352" y="144" width="48" height="16"/>
+  <object x="352" y="160" width="192" height="16"/>
+  <object x="368" y="176" width="176" height="16"/>
+  <object x="480" y="192" width="80" height="32"/>
+  <object x="480" y="224" width="64" height="16"/>
+  <object x="192" y="208" width="176" height="32"/>
+  <object x="192" y="240" width="64" height="48"/>
+  <object x="336" y="240" width="32" height="64"/>
+  <object x="352" y="304" width="16" height="32"/>
+  <object x="208" y="288" width="48" height="96"/>
+  <object x="304" y="288" width="16" height="96"/>
+  <object x="320" y="320" width="16" height="64"/>
+  <object x="208" y="384" width="128" height="32"/>
+  <object x="208" y="416" width="48" height="16"/>
+  <object x="256" y="304" width="16" height="16"/>
+  <object x="288" y="368" width="16" height="16"/>
+  <object x="208" y="432" width="544" height="48"/>
+  <object x="640" y="368" width="112" height="64"/>
+  <object x="704" y="336" width="48" height="32"/>
+  <object x="688" y="320" width="64" height="16"/>
+  <object x="672" y="272" width="80" height="48"/>
+  <object x="688" y="256" width="64" height="16"/>
+  <object x="704" y="192" width="48" height="64"/>
+  <object x="672" y="96" width="80" height="96"/>
+  <object x="400" y="240" width="48" height="16"/>
+  <object x="576" y="192" width="32" height="64"/>
+  <object x="400" y="256" width="208" height="32"/>
+  <object x="544" y="288" width="64" height="16"/>
+  <object x="448" y="288" width="16" height="16"/>
+  <object x="624" y="336" width="16" height="16"/>
+  <object x="624" y="0" width="32" height="304"/>
+  <object x="544" y="144" width="80" height="32"/>
+  <object x="400" y="288" width="48" height="32"/>
+  <object x="400" y="320" width="176" height="80"/>
+  <object x="656" y="0" width="144" height="48"/>
+  <object x="656" y="48" width="16" height="16"/>
+  <object x="736" y="48" width="64" height="16"/>
+  <object x="768" y="64" width="32" height="96"/>
+  <object x="784" y="160" width="16" height="320"/>
+  <object x="864" y="256" width="32" height="64"/>
  </objectgroup>
  <objectgroup name="sensors" width="50" height="30">
   <object name="warpField" x="48" y="464" width="16" height="16">
@@ -57,6 +118,94 @@
   <object name="startField" x="48" y="448" width="16" height="16">
    <properties>
     <property name="fieldID" value="1"/>
+   </properties>
+  </object>
+  <object name="monsterArea" x="16" y="384" width="160" height="80">
+   <properties>
+    <property name="monsters" value="10;0.3;11;0.7"/>
+    <property name="probability" value="0.05"/>
+    <property name="probability2" value="0.03"/>
+    <property name="probability3" value="0.005"/>
+   </properties>
+  </object>
+  <object name="monsterArea" x="96" y="272" width="80" height="112">
+   <properties>
+    <property name="monsters" value="10;0.3;11;0.7"/>
+    <property name="probability" value="0.05"/>
+    <property name="probability2" value="0.03"/>
+    <property name="probability3" value="0.005"/>
+   </properties>
+  </object>
+  <object name="monsterArea" x="96" y="160" width="160" height="224">
+   <properties>
+    <property name="monsters" value="10;0.3;11;0.7"/>
+    <property name="probability" value="0.05"/>
+    <property name="probability2" value="0.03"/>
+    <property name="probability3" value="0.005"/>
+   </properties>
+  </object>
+  <object name="monsterArea" x="176" y="96" width="272" height="64">
+   <properties>
+    <property name="monsters" value="10;0.3;11;0.7"/>
+    <property name="probability" value="0.05"/>
+    <property name="probability2" value="0.03"/>
+    <property name="probability3" value="0.005"/>
+   </properties>
+  </object>
+  <object name="monsterArea" x="448" y="128" width="80" height="32">
+   <properties>
+    <property name="monsters" value="10;0.3;11;0.7"/>
+    <property name="probability" value="0.05"/>
+    <property name="probability2" value="0.03"/>
+    <property name="probability3" value="0.005"/>
+   </properties>
+  </object>
+  <object name="monsterArea" x="256" y="160" width="224" height="80">
+   <properties>
+    <property name="monsters" value="10;0.3;11;0.7"/>
+    <property name="probability" value="0.05"/>
+    <property name="probability2" value="0.03"/>
+    <property name="probability3" value="0.005"/>
+   </properties>
+  </object>
+  <object name="monsterArea" x="544" y="224" width="32" height="16">
+   <properties>
+    <property name="monsters" value="10;0.3;11;0.7"/>
+    <property name="probability" value="0.05"/>
+    <property name="probability2" value="0.03"/>
+    <property name="probability3" value="0.005"/>
+   </properties>
+  </object>
+  <object name="monsterArea" x="368" y="240" width="416" height="192">
+   <properties>
+    <property name="monsters" value="10;0.3;11;0.7"/>
+    <property name="probability" value="0.05"/>
+    <property name="probability2" value="0.03"/>
+    <property name="probability3" value="0.005"/>
+   </properties>
+  </object>
+  <object name="monsterArea" x="304" y="336" width="64" height="96">
+   <properties>
+    <property name="monsters" value="10;0.3;11;0.7"/>
+    <property name="probability" value="0.05"/>
+    <property name="probability2" value="0.03"/>
+    <property name="probability3" value="0.005"/>
+   </properties>
+  </object>
+  <object name="monsterArea" x="256" y="416" width="48" height="16">
+   <properties>
+    <property name="monsters" value="10;0.3;11;0.7"/>
+    <property name="probability" value="0.05"/>
+    <property name="probability2" value="0.03"/>
+    <property name="probability3" value="0.005"/>
+   </properties>
+  </object>
+  <object name="monsterArea" x="656" y="48" width="128" height="192">
+   <properties>
+    <property name="monsters" value="10;0.3;11;0.7"/>
+    <property name="probability" value="0.05"/>
+    <property name="probability2" value="0.03"/>
+    <property name="probability3" value="0.005"/>
    </properties>
   </object>
  </objectgroup>

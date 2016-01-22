@@ -86,11 +86,17 @@ public class Monster extends Observable {
         boolean ans = false;
         System.out.println("Got " + exp + " EXP");
         this.exp += exp;
+
+        // Increase Level
         if(this.exp >= expAvailableInThisLevel()) {
             this.exp -= expAvailableInThisLevel();
             level++;
             System.out.println("Reached Level " + level);
             ans = true;
+            this.physStrength+=1;
+            this.HPfull+=2;
+            this.MPfull+=1;
+            this.magicStrength+=1;
         }
         System.out.println("EXP: " + this.exp);
 

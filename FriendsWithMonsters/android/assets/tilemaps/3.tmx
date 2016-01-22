@@ -27,7 +27,7 @@
    eJzt1AmOgjAYhuFWFnG5FOt4LVa9FirIseYlSrSOS1FGMsn8yRMqFj62v0Kcy4V3GpuGEJYhPlpdvo+A7BDRB/NjJEiRkZ2jYLy+M9+Y85zmw+WX2GKHPdkVasYHNDfm+2QHGvm61ymlEBMYME3eP2zGUzjy5/yUc2Ya59W9TpcMDz4ChIjwhZXsdy+vXGfM/SbYXtzrgfGafRuz3728UmWbjZ153lczPqA57evupf1pXR3vssODjwAhIqyuJ94pybwJjIv5NuMpHOuqPxEKtT9j5iRIkSFHgY1m/rNS+hO5UPuzJGeLHfaoUKMZKF/pT1RC7U9p8/xgwIQFG449TL7Sn7Ck2p8uOR58BAgRYTVQ/rP+jMlJkCJDjgIbzfxywfNd3P8/JiNBigw5irY/sbmxPvXNkEue71Ldd7nelPK4NuywR4VaHteIRjP/Vsajulxv5IRjYcCEBRtTOBP9c/Yp3bXzvx5XOKNXZuPl52QXI+ZXZNcj5lt8w/aI33FIdjRifk52cSPf69a2J2vvb5RLdtKtbT3XxSEqfvN97Lne6sPX/BvVvof2O+i27x6vu+0qPn0H3fbd43W39+rd4/9SfQPAKWzv
   </data>
  </layer>
- <objectgroup name="colliderWalls1" width="32" height="32" visible="0">
+ <objectgroup name="colliderWalls1" width="32" height="32">
   <object x="480" y="48" width="32" height="240"/>
   <object x="496" y="288" width="16" height="16"/>
   <object x="0" y="48" width="16" height="256"/>
@@ -60,6 +60,14 @@
   <object x="160" y="160" width="16" height="64"/>
   <object x="304" y="272" width="80" height="16"/>
   <object x="416" y="160" width="16" height="128"/>
+  <object x="240" y="80" width="32" height="32"/>
+  <object x="432" y="64" width="16" height="32"/>
+  <object x="400" y="96" width="32" height="32"/>
+  <object x="128" y="272" width="32" height="32"/>
+  <object x="32" y="416" width="32" height="32"/>
+  <object x="416" y="384" width="32" height="32"/>
+  <object x="448" y="240" width="32" height="32"/>
+  <object x="192" y="128" width="32" height="32"/>
  </objectgroup>
  <objectgroup name="livingEntities" width="32" height="32">
   <object name="person" x="96" y="224" width="16" height="16">
@@ -75,9 +83,9 @@
   <object name="person" x="80" y="160" width="16" height="16">
    <properties>
     <property name="male" value="true"/>
-    <property name="moving" value="false"/>
     <property name="path" value="WSTOP"/>
     <property name="spriteIndex" value="2"/>
+    <property name="static" value="true"/>
     <property name="text" value="I like standing here and watching how the wind moves the water."/>
    </properties>
   </object>

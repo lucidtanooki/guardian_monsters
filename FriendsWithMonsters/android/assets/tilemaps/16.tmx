@@ -9,25 +9,25 @@
  </tileset>
  <layer name="ground1" width="50" height="30">
   <data encoding="base64" compression="zlib">
-   eJztwzENAAAMA6AqmKr611QReyGhl1RVVVVVVX0dTsXgiA==
+   eJzt0DkRACAQBMFTgCr8+yGjUEBCcTwddL6ztURUAAC2aZG/4aeOsXMme+OKv1/puIWOs+g4iw4AftYBfdztlA==
   </data>
  </layer>
  <layer name="walls1" width="50" height="30">
   <data encoding="base64" compression="zlib">
-   eJztlsEJgDAMRbNAhpJOpjnpZjqVvQQlaOhFTMJ/kEtbSl8/JSUCAAAAAACgLisTLU5Jr8bX+onf9/qTNnCurB42I0nq4WV0JPeImoNS2WN/GJv72BbYxXsLdi5yJlLEw+uD1jGyx0gfVODxPfDIS9Q/yR3NJeudn3P7GoI=
+   eJztlksOhCAQROEA3sffzXQ3l1JPpq6k45CMBBGTMRakXlIrXfRLYYtShBBCCCHknywXWb9BJxePRitVBVLro8f82qRhZMaYTiwpebgdSSeWlDxC30PqHoPJaNJrz0MAYj1Qe7DEepSmhxa0C8Hn0en9DE3Ou8idfIq4fSsge/zuWJn9bN8KyB537hz0eB56YJGLh/uvsPcPX1DvJMIGvwJptg==
   </data>
  </layer>
  <layer name="objects1" width="50" height="30">
   <data encoding="base64" compression="zlib">
-   eJzt00ENACAMBEEM4BppCEMCvzbXzCjYS9O1AAAA6tzdXVAjZWdK58+UHZNNuVHyjhPcDp2S/556D2KdBkk=
+   eJzt0zEOABAQBVGFllM7moMpdCIhCjIy7wSz2fwQJEmSJBHF/LrgTE2vC+6g3EnpXPnljhnq1ke//Ih8RwG376LshdKpjrx73dcAVksGkQ==
   </data>
  </layer>
  <layer name="tops1" width="50" height="30">
   <data encoding="base64" compression="zlib">
-   eJzt1jEKACEMBMCodf7/Jn8lV1whaCkizMD2KRY2EQAAAJxQMqLm7St43dehpkcAbPSct+L/P1bhvAE86gGa
+   eJztz6ENACAQBEEaoP+aKOkdFoF5QXIkM8m5MzsGAABwqmM/05FFR4a67Fc6sujIoiOLjrfW7P1TO7pSOzajejsz
   </data>
  </layer>
- <objectgroup name="colliderWalls1" width="50" height="30">
+ <objectgroup name="colliderWalls1" width="50" height="30" visible="0">
   <object x="64" y="464" width="144" height="16"/>
   <object x="160" y="288" width="48" height="48"/>
   <object x="176" y="336" width="32" height="128"/>

@@ -37,16 +37,16 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.70710678"
-     inkscape:cx="477.47831"
-     inkscape:cy="741.17572"
+     inkscape:zoom="8"
+     inkscape:cx="237.2206"
+     inkscape:cy="1090.9003"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
      inkscape:window-width="1366"
      inkscape:window-height="744"
      inkscape:window-x="0"
-     inkscape:window-y="24"
+     inkscape:window-y="131"
      inkscape:window-maximized="1">
     <inkscape:grid
        type="xygrid"
@@ -64,7 +64,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -384,55 +384,17 @@
        transform="translate(0,572.36218)"
        id="rect3856" />
     <path
-       style="color:#000000;fill:#888a85;fill-opacity:0.75294117999999999;fill-rule:nonzero;stroke:none;stroke-width:4;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-       d="M 127.78125,412 106,485 c -0.47539,1.59256 1.338,3 3,3 l 104.9375,0 8.125,-32.5 c 0.59296,-2.3718 1.5717,-4.6358 3.1875,-6.4375 C 226.8658,447.2608 229.22739,446 232,446 l 22.09375,0 3.875,-34 z"
+       style="color:#000000;fill:#888a85;fill-opacity:0.75294118;fill-rule:nonzero;stroke:none;stroke-width:4;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       d="M 127.78125,412 107.5,480 l 149.9375,0 8,-68 z"
+       transform="translate(0,572.36218)"
        id="rect3889"
        inkscape:connector-curvature="0"
-       sodipodi:nodetypes="ccscsssccc"
-       transform="translate(0,572.36218)" />
-    <path
-       style="color:#000000;fill:#eeeeec;fill-opacity:0.75294117999999999;fill-rule:nonzero;stroke:none;stroke-width:4;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-       d="M 232 450 C 230.34061 450 229.22622 450.59535 228.21875 451.71875 C 227.21128 452.84215 226.41946 454.5721 225.9375 456.5 L 218.0625 488 L 400 488 L 581.9375 488 L 574.0625 456.5 C 573.58054 454.5721 572.78872 452.84215 571.78125 451.71875 C 570.77378 450.59535 569.65939 450 568 450 L 400 450 L 232 450 z "
-       transform="translate(0,572.36218)"
-       id="rect3899" />
-    <path
-       style="color:#000000;fill:#beff7f;fill-opacity:0.75294119;fill-rule:nonzero;stroke:none;stroke-width:4;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-       d="M 262.03125 412 L 262 412.21875 L 258.125 446 L 400 446 L 541.875 446 L 538 412.21875 L 537.96875 412 L 400 412 L 262.03125 412 z "
-       transform="translate(0,572.36218)"
-       id="rect3908" />
-    <path
-       sodipodi:nodetypes="ccscsssccc"
-       inkscape:connector-curvature="0"
-       id="path3931"
-       d="m 672.11046,984.36218 21.78125,73.00002 c 0.47539,1.5925 -1.338,3 -3,3 l -104.9375,0 -8.125,-32.5 c -0.59296,-2.3718 -1.5717,-4.6358 -3.1875,-6.4375 -1.6158,-1.8017 -3.97739,-3.0625 -6.75,-3.0625 l -22.09375,0 -3.875,-34.00002 z"
-       style="color:#000000;fill:#888a85;fill-opacity:0.75294118;fill-rule:nonzero;stroke:none;stroke-width:4;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
-    <path
-       id="path3933"
-       d="m 262.03125,980.36218 -0.0312,0.21875 -3.875,33.78127 141.875,0 141.875,0 -3.875,-33.78127 -0.0312,-0.21875 -137.96875,0 -137.96875,0 z"
-       style="color:#000000;fill:#beff7f;fill-opacity:0.75294118;fill-rule:nonzero;stroke:none;stroke-width:4;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-       inkscape:connector-curvature="0" />
+       sodipodi:nodetypes="ccccc" />
     <path
        id="path3935"
        d="m 149,916.36218 c -1.662,0 -2.52461,1.40744 -3,3 l -17,57 271,0 271,0 -17,-57 c -0.47539,-1.59256 -1.338,-3 -3,-3 l -251,0 -251,0 z"
        style="color:#000000;fill:#ffffff;fill-opacity:0.75294118;fill-rule:nonzero;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        inkscape:connector-curvature="0" />
-    <path
-       id="path3937"
-       d="m 232,1018.3622 c -1.65939,0 -2.77378,0.5953 -3.78125,1.7187 -1.00747,1.1234 -1.79929,2.8534 -2.28125,4.7813 l -7.875,31.5 181.9375,0 181.9375,0 -7.875,-31.5 c -0.48196,-1.9279 -1.27378,-3.6579 -2.28125,-4.7813 -1.00747,-1.1234 -2.12186,-1.7187 -3.78125,-1.7187 l -168,0 -168,0 z"
-       style="color:#000000;fill:#eeeeec;fill-opacity:0.75294118;fill-rule:nonzero;stroke:none;stroke-width:4;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-       inkscape:connector-curvature="0" />
-    <path
-       sodipodi:nodetypes="ccscsssccc"
-       inkscape:connector-curvature="0"
-       id="path3939"
-       d="M 127.78125,980.36218 106,1053.3622 c -0.47539,1.5925 1.338,3 3,3 l 104.9375,0 8.125,-32.5 c 0.59296,-2.3718 1.5717,-4.6358 3.1875,-6.4375 1.6158,-1.8017 3.97739,-3.0625 6.75,-3.0625 l 22.09375,0 3.875,-34.00002 z"
-       style="color:#000000;fill:#888a85;fill-opacity:0.75294118;fill-rule:nonzero;stroke:none;stroke-width:4;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
-    <path
-       style="color:#000000;fill:#888a85;fill-opacity:0.75294118;fill-rule:nonzero;stroke:none;stroke-width:4;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-       d="m 672.11046,980.36218 21.78125,73.00002 c 0.47539,1.5925 -1.338,3 -3,3 l -104.9375,0 -8.125,-32.5 c -0.59296,-2.3718 -1.5717,-4.6358 -3.1875,-6.4375 -1.6158,-1.8017 -3.97739,-3.0625 -6.75,-3.0625 l -22.09375,0 -3.875,-34.00002 z"
-       id="path3941"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="ccscsssccc" />
     <path
        sodipodi:nodetypes="ccssssc"
        inkscape:connector-curvature="0"
@@ -685,20 +647,142 @@
        style="color:#000000;fill:#eeeeec;fill-opacity:0.75294118;fill-rule:nonzero;stroke:none;stroke-width:4;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        id="rect3086"
        width="400"
-       height="30"
+       height="60"
        x="72"
        y="-320"
        transform="translate(0,572.36218)"
        ry="2"
        rx="2" />
+    <path
+       id="path3873"
+       transform="translate(0,572.36218)"
+       d="m 534.5625,412 8,68 149.84375,0 -20.28125,-68 z"
+       style="color:#000000;fill:#888a85;fill-opacity:0.75294118;fill-rule:nonzero;stroke:none;stroke-width:4;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc" />
+    <path
+       style="color:#000000;fill:#8ae234;fill-opacity:0.75294117999999999;fill-rule:nonzero;stroke:none;stroke-width:4;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       d="m 269.46875,412 -7.96875,68 277,0 -7.96875,-68 z"
+       transform="translate(0,572.36218)"
+       id="path3875"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc" />
+    <path
+       sodipodi:nodetypes="ccccc"
+       inkscape:connector-curvature="0"
+       id="path3877"
+       d="M 127.78125,980.36218 107.5,1048.3622 l 149.9375,0 8,-68.00002 z"
+       style="color:#000000;fill:#888a85;fill-opacity:0.75294118;fill-rule:nonzero;stroke:none;stroke-width:4;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+    <path
+       sodipodi:nodetypes="ccccc"
+       inkscape:connector-curvature="0"
+       id="path3879"
+       d="m 269.46875,980.36218 -7.96875,68.00002 277,0 -7.96875,-68.00002 z"
+       style="color:#000000;fill:#8ae234;fill-opacity:0.75294118;fill-rule:nonzero;stroke:none;stroke-width:4;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+    <path
+       sodipodi:nodetypes="ccccc"
+       inkscape:connector-curvature="0"
+       style="color:#000000;fill:#888a85;fill-opacity:0.75294118;fill-rule:nonzero;stroke:none;stroke-width:4;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       d="m 534.5625,980.36218 8,68.00002 149.84375,0 -20.28125,-68.00002 z"
+       id="path3881" />
+    <path
+       sodipodi:nodetypes="ccccc"
+       inkscape:connector-curvature="0"
+       id="path3883"
+       d="m -540.53125,800.36218 -7.96875,68.00002 277,0 -7.96875,-68.00002 z"
+       style="color:#000000;fill:#8ae234;fill-opacity:0.75294118;fill-rule:nonzero;stroke:none;stroke-width:4;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       inkscape:export-filename="/home/georg/Entwicklung/Java/libGDX/FriendsWithMonsters/Artwork/Spritesheets/LimbusDev/UIbattle/b_attack_down.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="color:#000000;fill:none;fill-opacity:0.75294117999999999;fill-rule:nonzero;stroke:none;stroke-width:4;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       d="m -540.53125,796.36218 -7.96875,68.00002 277,0 -7.96875,-68.00002 z"
+       id="path3885"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       inkscape:export-filename="/home/georg/Entwicklung/Java/libGDX/FriendsWithMonsters/Artwork/Spritesheets/LimbusDev/UIbattle/b_attack_down.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/georg/Entwicklung/Java/libGDX/FriendsWithMonsters/Artwork/Spritesheets/LimbusDev/UIbattle/b_attack_down.png"
+       sodipodi:nodetypes="ccccc"
+       inkscape:connector-curvature="0"
+       id="path3887"
+       d="m -540.53125,798.36218 -7.96875,68.00002 277,0 -7.96875,-68.00002 z"
+       style="color:#000000;fill:#8ae234;fill-opacity:0.75294118;fill-rule:nonzero;stroke:none;stroke-width:4;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+    <path
+       sodipodi:nodetypes="ccccc"
+       inkscape:connector-curvature="0"
+       id="path3889"
+       d="m -424.21875,632.36218 -20.28125,68 149.9375,0 8,-68 z"
+       style="color:#000000;fill:#888a85;fill-opacity:0.75294118;fill-rule:nonzero;stroke:none;stroke-width:4;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       inkscape:export-filename="/home/georg/Entwicklung/Java/libGDX/FriendsWithMonsters/Artwork/Spritesheets/LimbusDev/UIbattle/b7down.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="color:#000000;fill:none;fill-opacity:0.75294117999999999;fill-rule:nonzero;stroke:none;stroke-width:4;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       d="M -424.21875,628.36218 -444.5,696.3622 l 149.9375,0 8,-68.00002 z"
+       id="path3891"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       inkscape:export-filename="/home/georg/Entwicklung/Java/libGDX/FriendsWithMonsters/Artwork/Spritesheets/LimbusDev/UIbattle/b7down.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/georg/Entwicklung/Java/libGDX/FriendsWithMonsters/Artwork/Spritesheets/LimbusDev/UIbattle/b7up.png"
+       sodipodi:nodetypes="ccccc"
+       inkscape:connector-curvature="0"
+       id="path3893"
+       d="M -424.21875,630.36218 -444.5,698.3622 l 149.9375,0 8,-68.00002 z"
+       style="color:#000000;fill:#888a85;fill-opacity:0.75294118;fill-rule:nonzero;stroke:none;stroke-width:4;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
     <rect
        rx="2"
        ry="2"
        y="248.36218"
        x="72"
-       height="30"
+       height="60"
        width="400"
-       id="rect3860"
+       id="rect3895"
+       style="color:#000000;fill:#eeeeec;fill-opacity:0.75294118;fill-rule:nonzero;stroke:none;stroke-width:4;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+    <rect
+       rx="2"
+       ry="2"
+       y="-89.637817"
+       x="76"
+       height="60"
+       width="400"
+       id="rect3897"
+       style="color:#000000;fill:#eeeeec;fill-opacity:0.75294118;fill-rule:nonzero;stroke:none;stroke-width:4;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       inkscape:export-filename="/home/georg/Entwicklung/Java/libGDX/FriendsWithMonsters/Artwork/Spritesheets/LimbusDev/UIbattle/b13down.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       style="color:#000000;fill:none;fill-opacity:0.75294117999999999;fill-rule:nonzero;stroke:none;stroke-width:4;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect3899"
+       width="400"
+       height="60"
+       x="76"
+       y="-93.637817"
+       ry="2"
+       rx="2"
+       inkscape:export-filename="/home/georg/Entwicklung/Java/libGDX/FriendsWithMonsters/Artwork/Spritesheets/LimbusDev/UIbattle/b13down.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/georg/Entwicklung/Java/libGDX/FriendsWithMonsters/Artwork/Spritesheets/LimbusDev/UIbattle/b13up.png"
+       rx="2"
+       ry="2"
+       y="-91.637817"
+       x="76"
+       height="60"
+       width="400"
+       id="rect3901"
        style="color:#000000;fill:#eeeeec;fill-opacity:0.75294118;fill-rule:nonzero;stroke:none;stroke-width:4;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
   </g>
 </svg>

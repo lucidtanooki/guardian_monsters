@@ -79,6 +79,9 @@ public class EntityFactory {
         team.monsters.add(BattleFactory.getInstance().createMonster(1));
         team.monsters.add(BattleFactory.getInstance().createMonster(14));
         team.monsters.add(BattleFactory.getInstance().createMonster(5));
+        if(restoreSave) {
+            team.monsters = gameState.team;
+        }
         hero.add(team);
 
         engine.addEntity(hero);

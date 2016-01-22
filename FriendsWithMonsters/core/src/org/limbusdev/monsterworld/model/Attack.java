@@ -24,6 +24,10 @@ public class Attack {
         this.sfxIndex = sfxIndex;
         this.sfxType = sfxType;
     }
+
+    public Attack() {
+        // FOR JSON ONLY
+    }
     /* ............................................................................... METHODS .. */
     
     /* ..................................................................... GETTERS & SETTERS .. */

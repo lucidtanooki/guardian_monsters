@@ -139,7 +139,13 @@ public class BattleHUD {
         // .............................................................................. RECOVERING
         // Activate monsters if they have recovered
         for(int i=0; i<6; i++) {
-            if (i < 3 && team.get(i).ready && i == chosenTeamMonster) {
+            if (i < 3 && (
+                    team.get(i).ready
+                    && !team.get(i).waitingInQueue
+                    && !team.get(i).attackingRightNow
+                    && battleMenuButtons.get("attack").isDisabled())
+                    && i == chosenTeamMonster) {
+                System.out.println("Setting Attack Button active");
                 battleMenuButtons.get("attack").setDisabled(false);
                 battleMenuButtons.get("attack").addAction(
                         Actions.sequence(Actions.alpha(1, .2f)));
@@ -177,7 +183,7 @@ public class BattleHUD {
         for(Monster m : this.team)         m.update();
         for(Monster m : this.opponentTeam) m.update();
         updateRecovBars(team);
-        updateRecovBars(opponentTeam    );
+        updateRecovBars(opponentTeam);
     }
 
     private void updateRecovBars(Array<Monster> team) {
@@ -389,13 +395,15 @@ public class BattleHUD {
      * @param attackerPos
      */
     private void activateButton(int attackerPos) {
-        if(team.get(attackerPos).ready == true) {
-            battleMenuButtons.get("attack").setDisabled(false);
-            battleMenuButtons.get("attack").addAction(Actions.sequence(Actions.alpha(1,.2f)));
-        }
-        else {
+        if(!team.get(attackerPos).ready ||
+                team.get(attackerPos).waitingInQueue ||
+                team.get(attackerPos).attackingRightNow) {
             battleMenuButtons.get("attack").setDisabled(true);
             battleMenuButtons.get("attack").addAction(Actions.sequence(Actions.alpha(0.5f, .2f)));
+        }
+        else {
+            battleMenuButtons.get("attack").setDisabled(false);
+            battleMenuButtons.get("attack").addAction(Actions.sequence(Actions.alpha(1,.2f)));
         }
         setUpAttacksPane();
     }
@@ -927,8 +935,8 @@ public class BattleHUD {
         ibs.up = new TextureRegionDrawable(game.media.getBattleUITextureAtlas().findRegion
                 ("b7up"));
         ib = new ImageButton(ibs);
-        ib.setWidth(152);ib.setHeight(70);
-        ib.setPosition(105, 0);
+        ib.setWidth(158);ib.setHeight(72);
+        ib.setPosition(108, 0);
         ib.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -946,8 +954,8 @@ public class BattleHUD {
         ibs.up = new TextureRegionDrawable(game.media.getBattleUITextureAtlas().findRegion
                 ("b8up"));
         ib = new ImageButton(ibs);
-        ib.setWidth(152);ib.setHeight(70);
-        ib.setPosition(543, 0);
+        ib.setWidth(158);ib.setHeight(72);
+        ib.setPosition(534, 0);
         ib.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -958,42 +966,21 @@ public class BattleHUD {
         battleMenuButtons.put("button8", ib);
 
 
-        // Bottom Button ...........................................................................
-        ibs = new ImageButton.ImageButtonStyle();
-        ibs.down = new TextureRegionDrawable(game.media.getBattleUITextureAtlas().findRegion
-                ("b9down"));
-        ibs.up = new TextureRegionDrawable(game.media.getBattleUITextureAtlas().findRegion
-                ("b9up"));
-        ib = new ImageButton(ibs);
-        ib.setWidth(364);ib.setHeight(32);
-        ib.setPosition(400, 0,Align.bottom);
-        ib.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                // TODO
-                System.out.println("Button 9");
-            }
-        });
-        battleMenuButtons.put("button9", ib);
-
-
         // Attack Button ...........................................................................
         TextButton.TextButtonStyle tbs = new TextButton.TextButtonStyle();
         tbs.down = new TextureRegionDrawable(game.media.getBattleUITextureAtlas().findRegion
-                ("b10down"));
+                ("b_attack_down"));
         tbs.up = new TextureRegionDrawable(game.media.getBattleUITextureAtlas().findRegion
-                ("b10up"));
+                ("b_attack"));
         tbs.font = skin.getFont("default-font");
         TextButton tb = new TextButton("Attack", tbs);
-        tb.setWidth(284);ib.setHeight(36);
-        tb.setPosition(400, 34, Align.bottom);
+        tb.setWidth(277);ib.setHeight(72);
+        tb.setPosition(400, 0, Align.bottom);
         tb.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 if(battleMenuButtons.get("attack").isDisabled()) return;
                 System.out.println("Button: attack");
-                battleMenuButtons.get("attack").setDisabled(true);
-                battleMenuButtons.get("attack").addAction(Actions.sequence(Actions.alpha(0.5f, .2f)));
                 attackPaneGroup.addAction(Actions.sequence(Actions.visible(true),Actions.fadeIn(.3f)));
                 setUpAttacksPane();
             }
@@ -1164,6 +1151,8 @@ public class BattleHUD {
             tb.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
+                    battleMenuButtons.get("attack").setDisabled(true);
+                    battleMenuButtons.get("attack").addAction(Actions.alpha(0.5f));
                     // Hide Attack Menu
                     attackPaneGroup.setVisible(false);
                     // Add Monster to the Queue
@@ -1339,6 +1328,8 @@ public class BattleHUD {
         private Array<Integer> AIteamPositions,AIopponentPositions;
         private boolean AIpaused;
         private boolean thinking;
+        private long thinkingSince;
+        private long thinkingDuration;
 
         public AIPlayer(Array<Monster> team, Array<Monster> oppTeam) {
             this.AIteam = team;
@@ -1347,6 +1338,8 @@ public class BattleHUD {
             AIchosenTarget = 0;
             AIpaused = false;
             thinking = false;
+            thinkingSince = TimeUtils.millis();
+            thinkingDuration = 0;
 
             // Remember Team Positions
             AIteamPositions = new Array<Integer>();
@@ -1381,13 +1374,27 @@ public class BattleHUD {
                 }
 
 
+            if(!thinking) {
                 // Check if monster is ready
                 for (int j = 0; j < AIteam.size; j++)
                     if (AIteam.get(j).ready && AIteam.get(j).HP > 0) {
                         // Choose Target
                         AIchosenMember = j;
-                        attack();
+                        think();
+                    }
             }
+
+            if(thinking && TimeUtils.timeSinceMillis(thinkingSince) > thinkingDuration) {
+                attack();
+                this.thinking = false;
+            }
+
+        }
+
+        public void think() {
+            this.thinking = true;
+            this.thinkingSince = TimeUtils.millis();
+            this.thinkingDuration = MathUtils.random(1000,3000);
         }
 
         public void havePause(boolean paused) {

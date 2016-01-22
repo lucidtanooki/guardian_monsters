@@ -24,7 +24,7 @@
  </layer>
  <layer name="objects1" width="26" height="40">
   <data encoding="base64" compression="zlib">
-   eJxjYBi84Agv/fVSYmcLBXoJASd+BIYBStxKij2jAD/AFw/UThO0TGODEVArPeIyA9n8UXvwmzfQ9lAD4DKHXvZQG9DTHnrYhS1d0aJOGmh78MlTag+x7qCFPaSqo5X+wWoPvQGt0jW97BnofEore3Dxh6o9xJZvg92ewQ5o0eejxC4AJTw31A==
+   eJztl00KgCAQRiXapndq0ckiOlgHC2lhmA42fw3hAxf9zPfGmo3O2eWYeGs3L+tcK7V75h0b+siZQ1qRxV+9tuyJ4olER76HTgKamdpMYOHOs05pHik5UH73wHlfezio5Wh5uNH0aLhKc8X9byx4oOdUT2sfEp6370nVW/VoIzXXWp4hPNcfPPdrKB9zVsB4sJS+W+4t3bfqsQ7lfCrhOgGWUTI0
   </data>
  </layer>
  <layer name="tops1" width="26" height="40">
@@ -32,7 +32,7 @@
    eJztllsKwjAQRccntOmutNV9aaLbUtB1OaUFxzZDIrlUxZyflKTk0OmQXKIndUHUFDRiURIty9e5WUU0r8bvxmDZ4TyeDTu25Xj+HXaGaG+65xs77h7PgR3HRM+JHefes+K91on7xVCzo5nAY9nhAp4Lf/vV4Jy+HmtJ6TMfiB6TyH6TIHpMIvutRasXGnS9NND1SiHX9jOgzxQN9JmSyWhomQqNlqnQaJkKTUymQpwXMZkKcV7EZKop+bU7LvSvUXdcvhu+j8Z0OXs4ytxdB9ZjcKbL2cNR5m4bWP83HpTIKYc=
   </data>
  </layer>
- <objectgroup name="colliderWalls1" width="26" height="40">
+ <objectgroup name="colliderWalls1" width="26" height="40" visible="0">
   <object x="0" y="0" width="32" height="640"/>
   <object x="32" y="32" width="16" height="16"/>
   <object x="32" y="48" width="48" height="16"/>

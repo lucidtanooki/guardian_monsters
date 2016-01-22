@@ -14,7 +14,7 @@
  </layer>
  <layer name="walls1" width="32" height="32">
   <data encoding="base64" compression="zlib">
-   eJztl1tOwzAQRR2Tpoj4gy0lQMtTYksJkPCU2FJ5/rIk7nyM5BhHnoY6QaJXOrpVVWdy63bGaXKlWtBY/gISo5QGCV7rXO4FKAW+2kMd8IHXn3nXqW4BSiO/HnsFaoHz/WaoMTddp7oVqI38euxScf4FaixN16lubHH+BrVa0/UxxPmJoXrF2reB6zm/dvYsszxz3nO1g7WpYM999+nLn2hcz8Mc7OpwnT757tOXv0CNEhyAQ3AEFmAJjnV/liHy5a9QowZX4BrcgAa04Fb3Zxmivv0fS5v4/f9GMfKfpEp9gQtwCs7AObhMf342Rv471NmfKfUEvwcP4BE8e+r/xf3nmRdTXMOXvwrMHkl/CIlr8LwuA9+/3W8k/UEqntehmb2pfrPVVv9Z73TWn2jWkWZ01vf8j7n/jtF7XdEM4P4b6r0xRDNgqvMHyc4/hTg/z+LVwPOIu34d9z1DS9fbOdZ5Rrf9G0/udOE=
+   eJztl9tOhDAQhktlFyNc+Eqg7npMfCXQBY+Jr8R62Fsfyb8Xk5Ta2mlZ9ML9ky9DyA4/k3ZnSpsL0YFWi2uQFEJIkOBa5vxYgooR+wP4gA9cb/JhVL4lqAr+8yjWoGFEet85PLJiGJVvDZqC/zyKXFH9C3gsi2FUvlOL6m/h1RXD+Bui+hWxekXuW2Q+1S+NNZtrcW7cM7WH3JSx5rb3tNWfSDzPQgb2pd/HJdt72uov4VGBI3AMTsACLMGpdNcSI1v9NTwacANuwQq0oAN30l1LjFzr79LatQmYMvND97/Mxvmb+aH1c/zPUiE+wRU4BxfgElyn3/ND668Y/vfwOZwJ8Yz4AB7BE3ix+Ov191ibjUai/ba33IsRp36aeVOI/MnDtv61Z/Zw+oPPnzxoXlee/af3G19/+Gkdzf1D89o3s7fVb3ba6T/rXZ31t3BuiNVMnfUt/2Pqv1P2XpfUDKD+6+u9U0jNgDHn77HS6/8LUf00i/uA84guMz8k2r6hufl6HSHf6Hr8Am79f1M=
   </data>
  </layer>
  <layer name="objects1" width="32" height="32">
@@ -27,7 +27,7 @@
    eJzt1AmOgjAYhuFWFnG5FOt4LVa9FirIseYlSrSOS1FGMsn8yRMqFj62v0Kcy4V3GpuGEJYhPlpdvo+A7BDRB/NjJEiRkZ2jYLy+M9+Y85zmw+WX2GKHPdkVasYHNDfm+2QHGvm61ymlEBMYME3eP2zGUzjy5/yUc2Ya59W9TpcMDz4ChIjwhZXsdy+vXGfM/SbYXtzrgfGafRuz3728UmWbjZ153lczPqA57evupf1pXR3vssODjwAhIqyuJ94pybwJjIv5NuMpHOuqPxEKtT9j5iRIkSFHgY1m/rNS+hO5UPuzJGeLHfaoUKMZKF/pT1RC7U9p8/xgwIQFG449TL7Sn7Ck2p8uOR58BAgRYTVQ/rP+jMlJkCJDjgIbzfxywfNd3P8/JiNBigw5irY/sbmxPvXNkEue71Ldd7nelPK4NuywR4VaHteIRjP/Vsajulxv5IRjYcCEBRtTOBP9c/Yp3bXzvx5XOKNXZuPl52QXI+ZXZNcj5lt8w/aI33FIdjRifk52cSPf69a2J2vvb5RLdtKtbT3XxSEqfvN97Lne6sPX/BvVvof2O+i27x6vu+0qPn0H3fbd43W39+rd4/9SfQPAKWzv
   </data>
  </layer>
- <objectgroup name="colliderWalls1" width="32" height="32">
+ <objectgroup name="colliderWalls1" width="32" height="32" visible="0">
   <object x="480" y="48" width="32" height="240"/>
   <object x="496" y="288" width="16" height="16"/>
   <object x="0" y="48" width="16" height="256"/>
@@ -55,6 +55,11 @@
   <object x="48" y="128" width="32" height="32"/>
   <object x="96" y="128" width="80" height="32"/>
   <object x="80" y="144" width="16" height="16"/>
+  <object x="16" y="224" width="80" height="16"/>
+  <object x="128" y="224" width="48" height="16"/>
+  <object x="160" y="160" width="16" height="64"/>
+  <object x="304" y="272" width="80" height="16"/>
+  <object x="416" y="160" width="16" height="128"/>
  </objectgroup>
  <objectgroup name="livingEntities" width="32" height="32">
   <object name="person" x="96" y="224" width="16" height="16">

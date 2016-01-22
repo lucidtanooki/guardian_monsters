@@ -24,7 +24,7 @@
  </layer>
  <layer name="objects1" width="50" height="30">
   <data encoding="base64" compression="zlib">
-   eJztljsOgzAMhjO0m2ml9HGgdu3EmXoChh4I9UydiyWiQoAKYudhyZ/kgQic/3dMZGPo3A8MSRSFgV1lzL6i57kd6TlKQH2kx3b9d4ZfXLr49PopPt4Mfb2FK4yf7cBHiaC2E4xrj/HyfNSBPvDsloIT1GZhut72a64Pmpl31pDCA4I+6kCNDvjzfQoPjsar/VYeAx9PL8da/f755yDn3oqi8OH+5ZZ4R0tnbm7AmU3aXbc0N0iDY24oBercEIscemLsWVpdQ5HkI0SrJH+KEosvPwYmVQ==
+   eJztls0OwiAMxznMG9OEqQ+kV097Jp9gBx9o2TN5dk1G3BBwfNOkv6SHsa30XwqUsXDuxwhOCCcayrmWpmXs0Ib7uZ3M76YI/nNh04EJTDrEXB9n/rXLbO8l/n86bPs6d91d+fZZrHTUCMTW8W3uwV6Kjt5TB6ydyWICsQn+Oz4uY7IOBs03e8ihAQAdvWeMEm75P4cGyaDk3pXHSsdT8bE3fnX9S4Dp7isF9Wb+UO7yIffyGHhGY0fXN0DPhu2sM/UN2IjRN4QS6xwK7RtSUSKeFHO6+Kz5bqmtPmz4xIpJH0Gk4gPuvCeS
   </data>
  </layer>
  <layer name="tops1" width="50" height="30">
@@ -118,56 +118,59 @@
   <object x="608" y="176" width="16" height="16"/>
   <object x="688" y="144" width="16" height="16"/>
   <object x="720" y="272" width="16" height="16"/>
+  <object x="80" y="64" width="16" height="16"/>
+  <object x="464" y="368" width="16" height="16"/>
+  <object x="688" y="400" width="16" height="16"/>
  </objectgroup>
  <objectgroup name="objects" width="50" height="30"/>
  <objectgroup name="livingEntities" width="50" height="30">
   <object name="person" x="256" y="304" width="16" height="16">
    <properties>
     <property name="male" value="true"/>
-    <property name="moving" value="false"/>
     <property name="path" value="SSTOP,WSTOP,SSTOP,SSTOP,ESTOP,SSTOP,WSTOP,WSTOP"/>
     <property name="spriteIndex" value="2"/>
     <property name="startDir" value="S"/>
+    <property name="static" value="true"/>
     <property name="text" value="I am waiting for the fishing boats. A storm is coming. Fishers will die staying out there."/>
    </properties>
   </object>
   <object name="person" x="320" y="192" width="16" height="16">
    <properties>
     <property name="male" value="true"/>
-    <property name="moving" value="false"/>
     <property name="path" value="SSTOP,SSTOP,SSTOP,SSTOP,ESTOP,ESTOP"/>
     <property name="spriteIndex" value="2"/>
     <property name="startDir" value="S"/>
+    <property name="static" value="true"/>
     <property name="text" value="Pirates came here a few weekes ago. They took my wife and my daughter. I don't know what to do."/>
    </properties>
   </object>
   <object name="person" x="608" y="416" width="16" height="16">
    <properties>
     <property name="male" value="true"/>
-    <property name="moving" value="false"/>
     <property name="path" value="SSTOP"/>
     <property name="spriteIndex" value="0"/>
     <property name="startDir" value="S"/>
+    <property name="static" value="true"/>
     <property name="text" value="May those pirates burn in hell for what they did to us. We have to go out there and find them!"/>
    </properties>
   </object>
   <object name="person" x="624" y="176" width="16" height="16">
    <properties>
     <property name="male" value="true"/>
-    <property name="moving" value="false"/>
     <property name="path" value="SSTOP"/>
     <property name="spriteIndex" value="1"/>
     <property name="startDir" value="S"/>
+    <property name="static" value="true"/>
     <property name="text" value="I hope they will find them!"/>
    </properties>
   </object>
   <object name="person" x="496" y="336" width="16" height="16">
    <properties>
     <property name="male" value="true"/>
-    <property name="moving" value="true"/>
     <property name="path" value="E,E,E,E,E,E,N,N,N,N,N,W,W,W,W,S,W,W,S,S,S,S"/>
     <property name="spriteIndex" value="1"/>
     <property name="startDir" value="S"/>
+    <property name="static" value="false"/>
     <property name="text" value="I can't stand still. We have to rescue them!"/>
    </properties>
   </object>

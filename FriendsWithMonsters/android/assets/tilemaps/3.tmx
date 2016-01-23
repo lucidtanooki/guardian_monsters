@@ -17,6 +17,11 @@
    eJztl9tOhDAQhktlFyNc+Eqg7npMfCXQBY+Jr8R62Fsfyb8Xk5Ta2mlZ9ML9ky9DyA4/k3ZnSpsL0YFWi2uQFEJIkOBa5vxYgooR+wP4gA9cb/JhVL4lqAr+8yjWoGFEet85PLJiGJVvDZqC/zyKXFH9C3gsi2FUvlOL6m/h1RXD+Bui+hWxekXuW2Q+1S+NNZtrcW7cM7WH3JSx5rb3tNWfSDzPQgb2pd/HJdt72uov4VGBI3AMTsACLMGpdNcSI1v9NTwacANuwQq0oAN30l1LjFzr79LatQmYMvND97/Mxvmb+aH1c/zPUiE+wRU4BxfgElyn3/ND668Y/vfwOZwJ8Yz4AB7BE3ix+Ov191ibjUai/ba33IsRp36aeVOI/MnDtv61Z/Zw+oPPnzxoXlee/af3G19/+Gkdzf1D89o3s7fVb3ba6T/rXZ31t3BuiNVMnfUt/2Pqv1P2XpfUDKD+6+u9U0jNgDHn77HS6/8LUf00i/uA84guMz8k2r6hufl6HSHf6Hr8Am79f1M=
   </data>
  </layer>
+ <layer name="shadow1" width="32" height="32">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20PBxQAAADwbhAAAAE=
+  </data>
+ </layer>
  <layer name="objects1" width="32" height="32">
   <data encoding="base64" compression="zlib">
    eJzt1bENgCAQheHHRRqBoWQzXMNpvMmgx4bCA837EhpC8l+uAVjPHQAN8/ouAhJtWrr3d0drZ6O+POy5tPZp1Cei/7ikP0Qr04G/buQtEdFbtgT4NHsK+rIKrYoJFA==
@@ -54,7 +59,6 @@
   <object x="48" y="80" width="128" height="48"/>
   <object x="48" y="128" width="32" height="32"/>
   <object x="96" y="128" width="80" height="32"/>
-  <object x="80" y="144" width="16" height="16"/>
   <object x="16" y="224" width="80" height="16"/>
   <object x="128" y="224" width="48" height="16"/>
   <object x="160" y="160" width="16" height="64"/>
@@ -77,16 +81,16 @@
     <property name="spriteIndex" value="0"/>
     <property name="startDir" value="S"/>
     <property name="static" value="false"/>
-    <property name="text" value="Hello. How are you doing? I'm waiting for my girlfriend."/>
+    <property name="text" value="Hello. How are you doing? I'm waiting for my wife. I am very concerned."/>
    </properties>
   </object>
-  <object name="person" x="80" y="160" width="16" height="16">
+  <object name="person" x="112" y="160" width="16" height="16">
    <properties>
     <property name="male" value="true"/>
-    <property name="path" value="WSTOP"/>
+    <property name="path" value="SSTOP"/>
     <property name="spriteIndex" value="2"/>
     <property name="static" value="true"/>
-    <property name="text" value="I like standing here and watching how the wind moves the water."/>
+    <property name="text" value="Something is coming upon us. It is still not clear enough to tell."/>
    </properties>
   </object>
  </objectgroup>
@@ -215,6 +219,17 @@
   <object name="startField" x="480" y="320" width="16" height="16">
    <properties>
     <property name="fieldID" value="6"/>
+   </properties>
+  </object>
+  <object name="warpField" x="80" y="144" width="16" height="16">
+   <properties>
+    <property name="targetID" value="19"/>
+    <property name="targetWarpPointID" value="1"/>
+   </properties>
+  </object>
+  <object name="startField" x="80" y="160" width="16" height="16">
+   <properties>
+    <property name="fieldID" value="9"/>
    </properties>
   </object>
  </objectgroup>

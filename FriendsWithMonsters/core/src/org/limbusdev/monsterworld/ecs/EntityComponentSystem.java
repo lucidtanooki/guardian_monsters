@@ -145,6 +145,7 @@ public class EntityComponentSystem {
     public void update(float delta) {
         engine.update(delta);
         hud.update(delta);
+        gameArea.update(delta);
     }
 
     public void render(Batch batch, ShapeRenderer shape) {

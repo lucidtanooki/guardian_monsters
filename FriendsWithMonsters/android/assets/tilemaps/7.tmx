@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="64" height="32" tilewidth="16" tileheight="16">
  <properties>
-  <property name="musicIndex" value="1"/>
+  <property name="musicIndex" value="2"/>
   <property name="musicType" value="town"/>
  </properties>
  <tileset firstgid="1" name="limbusdev_world" tilewidth="16" tileheight="16">
@@ -24,7 +24,7 @@
  </layer>
  <layer name="shadow0" width="64" height="32">
   <data encoding="base64" compression="zlib">
-   eJzt0EEKwCAMBEDxm/173+JBCt4sGhFxBnKSZE1SAgAAAAAAPk8+q+y/bv/eTSJu1utvM3Z5c63R99n5ERkz/vxt5fyIDOAeBT3xNhk=
+   eJztz1EKABAQBUC5pvvfw4eUlGjF10wpG7uPlAAAAAAAgK7ktsZ9r1d3V+enWZH+m9zTua//P+f96IvM3eW8eAcARFT1rAqK
   </data>
  </layer>
  <layer name="tops0" width="64" height="32">
@@ -44,7 +44,7 @@
  </layer>
  <layer name="shadow1" width="64" height="32">
   <data encoding="base64" compression="zlib">
-   eJzt1EEKgCAQhWGxe3QxN907yEUXKSE3RZqOpuD/gauaaZ6YSgEAAAAAAIxn160nqC+UcSmcX9qv9Dy1egJ3vd4lvc71l5z/35415lqp3H633HM/9yacwWbmd1rnl2b37EufeQrXxZ7HfKl37xj9XKWyh8TORe65SamXfgPAuNbB7o8D2MIURQ==
+   eJzt1E0KgCAQhmGpe3SxNt07yEUXKSE3gr+jKfg+0Kpmms9MpQAAAAAAAOZzL70naC+U8aicX9qv9jytegKuUc+SUef6S8n/r9+a/btymfXuueZ27ks4gy7Mb/TOL81uaU+fbQ3Xxe7HpNS7z9T67ili+6J03+TUS98BYF7nZOfHAyLWEy4=
   </data>
  </layer>
  <layer name="objects1" width="64" height="32">
@@ -54,7 +54,7 @@
  </layer>
  <layer name="tops1" width="64" height="32">
   <data encoding="base64" compression="zlib">
-   eJztmMtOwkAUhg9oSaCV7uTm7VVAYa8mXpbqk3iBrYmocas+CUSQuFQR0JX6Iv4GmjZDp03btNUZ/uRLk2mmnL+0pyc/kZyqpolq6biriE91eG9I7L8D712J/SsZolQm7iriUTdL9DihjHtQAS2VqK3GXVl0qsNzAxyDE5DQiJJa3FVFozn4nQdPNn4PFKJDDkdK9LWGoXV43wCZhelztymiOw73qehrDUOn8H7G6X2f8PjF4VsQ/04q4BkvghJYAstgBayCNUGe/5nMHiirjB4oq5x6IE+9bDi1/AVt4Vu47YDouoDHJhhgBh6CEXgHH+p4/RKc69M0GdjzdvJyjaD77ejbXNfwn8NMmAcFUAQlzfQvouxmYNH0AI8dCXyGqT7nXRLl/XfLA6/w/j9j34tHbpjfuo54P8urPvbCKqw88A0zw2AyNwxxHHmcIYLud5OR/7jlgX7n5UXc75w+niHyOBY4z3RY+91k5D9ueaDfeXkH9e6CTfxvezjue6w/6H43teCpDaqg5uDPz7z8H5TAfJdUzTxQNpXhvSJR7vsray8zcm9r/s2uiZaNW3uZkXtb8292TbRsXNReNpN3/QCYFq49
+   eJztmMtOwkAUhg8oJFCkS27eXgUU9upCE1fqk3iBrYmocas+CUTQuFQR0MREfRH/BJo2006nF9vqlD/5QujktOeHdjj8RPFUPUPUyETdRXRqwnsrxv578N6Psf9UliidjbqLaNTPE91PqeIzqIGOQtRVou4sPDXhuQUOwRFI5IiSuai7Ckdz8DsPHi387qWI9jkcpMLvNQitwfs6yC6Y167TRDccbtPh9xqEjuH9hLP3fcLjF4dvSfzbqYR7vAwqYBEsgWWwAlYluf9n0vfAuErbA+Mquz2Qp4d8ML38BW3it3DLBtl1Bo9tMMQMPAJj8Abelcnxc3CqmmkzsOtWcnMOv/VWDCzOq/kvYCYsghIog0pO9y+jrGZg2XQHj70Y+AxSA86zJMvzL8oDL/D8P6Hu2SVXzLUuQ65neVEnXlgFlQe+YmYYTueGEV7HLmcIv/UiafmPKA/kzcu7SfN7loI6mSGKqvW6CCf1vB5E0vIfUR7Im5ed+N9G3xv43nY8+ndS79V/B566oA4aNv5587IT/6J1EU7qvfpPYL5LKnoe6FcfgmuK1v2e3+01qvBe+6Xc9794N+5lWu5tzL/ZY7Jl48a9TMu9jfk3e0y2bNzLf/+Z5NQPIJXRjQ==
   </data>
  </layer>
  <layer name="ground2" width="64" height="32">
@@ -64,15 +64,15 @@
  </layer>
  <layer name="walls2" width="64" height="32">
   <data encoding="base64" compression="zlib">
-   eJztzqEBAAAIA6DZ/f9eo91igQtIAAAAYFV/DwAAAAC4GAf7AA4=
+   eJztzjEKwCAQRUHtA9sFvFgg97+IpSTaiAQJzHQL++GlBAAAAE0+dhcAAPzDGc+7xPjvq/1u16v3nuxf3QMAvQoWggJC
   </data>
  </layer>
  <layer name="tops2" width="64" height="32">
   <data encoding="base64" compression="zlib">
-   eJzt1rEJgEAQBMAHjUy+KbUyK7A0tSA/MJVHEJVzJtl0Nzi4lAD+ZehSGru3WwAAX9aUX6EN/C/MuZ594P3LsXM9ya3kFHg/FfntAjeKtAWeEOlmIm0BAOCSHYtjCWI=
+   eJzt1jEKgDAQRNEFrVIkl1Ir8VSewKOpBzKFjaCkEVfH/5olsMVMEVgzAPiXNph1wTsFAAB4syrfCrXwvTCl8myE+897z+VirnmOwv1RkLwD3EipC/AEpT+j1MXZEI/vPp7vqWcAAADfsQGTxwrO
   </data>
  </layer>
- <objectgroup name="colliderWalls1" width="64" height="32">
+ <objectgroup name="colliderWalls1" width="64" height="32" visible="0">
   <object x="976" y="80" width="48" height="16"/>
   <object x="992" y="96" width="32" height="32"/>
   <object x="976" y="144" width="32" height="32"/>
@@ -122,7 +122,7 @@
   <object x="0" y="480" width="64" height="32"/>
   <object x="80" y="480" width="112" height="32"/>
  </objectgroup>
- <objectgroup name="livingEntities" width="64" height="32">
+ <objectgroup name="livingEntities" width="64" height="32" visible="0">
   <object name="person" x="400" y="304" width="16" height="16">
    <properties>
     <property name="male" value="true"/>
@@ -246,6 +246,4844 @@
    <properties>
     <property name="text" value="Please take another way."/>
     <property name="title" value="Under Constrution"/>
+   </properties>
+  </object>
+  <object name="sign" x="912" y="288" width="16" height="16">
+   <properties>
+    <property name="text" value="Since 1027 the Timsey Canal Bridge connects Caracoa Island to the land."/>
+    <property name="title" value="Timsey Canal Bridge"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="animations" width="64" height="32" visible="0">
+  <object name="animation" x="352" y="0" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="368" y="0" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="384" y="0" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="400" y="0" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="416" y="0" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="480" y="0" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="432" y="0" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="464" y="0" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="496" y="0" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="448" y="0" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="560" y="0" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="512" y="0" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="544" y="0" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="576" y="0" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="528" y="0" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="640" y="0" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="592" y="0" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="624" y="0" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="656" y="0" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="608" y="0" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="720" y="0" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="672" y="0" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="704" y="0" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="736" y="0" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="688" y="0" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="400" y="16" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="352" y="16" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="384" y="16" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="416" y="16" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="368" y="16" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="752" y="0" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="768" y="0" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="688" y="16" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="656" y="16" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="496" y="16" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="640" y="16" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="624" y="16" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="576" y="16" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="672" y="16" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="720" y="16" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="704" y="16" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="560" y="16" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="592" y="16" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="448" y="16" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="480" y="16" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="528" y="16" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="512" y="16" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="608" y="16" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="736" y="16" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="432" y="16" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="752" y="16" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="768" y="16" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="544" y="16" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="464" y="16" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="736" y="32" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="672" y="48" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="416" y="48" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="656" y="32" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="368" y="48" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="592" y="32" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="432" y="48" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="736" y="48" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="512" y="32" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="448" y="48" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="416" y="32" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="480" y="48" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="592" y="48" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="576" y="32" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="464" y="32" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="464" y="48" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="352" y="48" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="544" y="32" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="544" y="48" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="608" y="48" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="480" y="32" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="560" y="48" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="752" y="32" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="688" y="48" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="720" y="48" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="624" y="48" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="752" y="48" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="496" y="32" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="688" y="32" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="448" y="32" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="720" y="32" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="640" y="32" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="368" y="32" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="704" y="32" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="496" y="48" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="528" y="32" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="352" y="32" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="624" y="32" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="384" y="48" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="672" y="32" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="608" y="32" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="560" y="32" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="384" y="32" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="432" y="32" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="576" y="48" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="768" y="48" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="512" y="48" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="704" y="48" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="400" y="48" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="640" y="48" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="528" y="48" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="400" y="32" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="656" y="48" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="768" y="32" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="608" y="112" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="624" y="80" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="752" y="96" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="496" y="80" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="688" y="80" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="512" y="80" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="688" y="64" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="608" y="64" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="416" y="80" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="640" y="64" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="544" y="64" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="480" y="112" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="400" y="80" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="464" y="64" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="400" y="112" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="624" y="112" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="480" y="64" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="704" y="64" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="432" y="80" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="752" y="80" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="656" y="80" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="752" y="112" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="624" y="96" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="576" y="80" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="528" y="64" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="736" y="80" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="416" y="64" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="496" y="64" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="384" y="96" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="352" y="80" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="560" y="96" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="672" y="80" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="592" y="96" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="720" y="64" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="592" y="64" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="560" y="64" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="512" y="112" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="368" y="80" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="608" y="80" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="544" y="80" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="720" y="112" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="352" y="96" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="352" y="64" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="576" y="112" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="416" y="96" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="688" y="96" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="704" y="112" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="576" y="96" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="640" y="80" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="496" y="112" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="592" y="80" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="736" y="112" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="384" y="80" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="688" y="112" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="528" y="80" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="576" y="64" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="368" y="112" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="432" y="96" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="400" y="64" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="384" y="112" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="624" y="64" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="432" y="64" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="544" y="96" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="768" y="64" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="544" y="112" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="704" y="80" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="768" y="80" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="464" y="80" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="448" y="96" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="512" y="96" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="368" y="96" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="656" y="96" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="528" y="96" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="432" y="112" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="560" y="112" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="464" y="96" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="640" y="96" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="448" y="80" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="480" y="96" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="704" y="96" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="352" y="112" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="448" y="64" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="416" y="112" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="512" y="64" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="480" y="80" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="400" y="96" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="528" y="112" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="608" y="96" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="720" y="80" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="752" y="64" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="384" y="64" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="496" y="96" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="592" y="112" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="768" y="112" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="656" y="112" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="736" y="96" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="656" y="64" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="448" y="112" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="640" y="112" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="672" y="64" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="720" y="96" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="464" y="112" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="672" y="96" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="768" y="96" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="736" y="64" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="368" y="64" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="672" y="112" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="560" y="80" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="528" y="208" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="768" y="144" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="608" y="128" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="368" y="208" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="464" y="224" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="512" y="144" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="656" y="176" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="736" y="144" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="704" y="160" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="672" y="144" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="480" y="144" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="480" y="128" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="592" y="240" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="368" y="128" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="512" y="176" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="448" y="192" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="384" y="192" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="544" y="192" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="608" y="192" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="544" y="224" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="704" y="176" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="528" y="160" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="448" y="144" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="768" y="128" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="640" y="192" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="512" y="192" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="576" y="128" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="512" y="128" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="752" y="144" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="496" y="128" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="560" y="208" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="672" y="224" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="544" y="176" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="464" y="176" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="624" y="144" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="624" y="224" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="688" y="176" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="464" y="240" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="688" y="144" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="656" y="144" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="688" y="224" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="464" y="128" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="592" y="224" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="528" y="240" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="368" y="144" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="544" y="160" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="576" y="144" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="624" y="240" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="416" y="224" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="752" y="240" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="432" y="224" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="544" y="208" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="480" y="208" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="384" y="240" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="608" y="240" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="432" y="160" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="736" y="224" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="560" y="240" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="352" y="240" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="592" y="160" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="560" y="160" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="448" y="208" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="384" y="128" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="480" y="240" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="448" y="176" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="400" y="240" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="768" y="176" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="560" y="192" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="448" y="128" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="416" y="144" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="704" y="128" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="704" y="144" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="496" y="240" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="704" y="224" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="640" y="128" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="400" y="192" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="624" y="192" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="432" y="128" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="608" y="208" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="656" y="208" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="416" y="128" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="624" y="128" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="592" y="128" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="640" y="144" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="416" y="192" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="496" y="208" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="368" y="176" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="608" y="144" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="736" y="128" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="448" y="224" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="400" y="128" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="528" y="192" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="672" y="208" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="368" y="160" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="672" y="176" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="656" y="160" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="768" y="208" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="640" y="224" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="576" y="240" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="384" y="224" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="496" y="176" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="752" y="208" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="608" y="160" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="544" y="144" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="576" y="208" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="736" y="240" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="656" y="192" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="400" y="160" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="528" y="144" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="352" y="224" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="352" y="192" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="464" y="192" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="592" y="208" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="496" y="192" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="400" y="144" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="496" y="224" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="688" y="128" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="720" y="192" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="720" y="240" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="512" y="240" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="624" y="208" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="352" y="176" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="720" y="224" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="608" y="176" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="592" y="176" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="352" y="160" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="352" y="144" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="544" y="240" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="704" y="192" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="400" y="208" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="752" y="176" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="720" y="160" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="752" y="128" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="528" y="128" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="496" y="160" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="432" y="176" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="400" y="224" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="656" y="224" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="768" y="192" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="768" y="224" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="416" y="240" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="640" y="208" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="688" y="240" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="592" y="192" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="672" y="128" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="576" y="176" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="560" y="176" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="624" y="176" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="736" y="208" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="576" y="224" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="608" y="224" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="384" y="176" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="688" y="192" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="560" y="224" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="352" y="128" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="720" y="144" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="704" y="208" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="672" y="160" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="384" y="144" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="544" y="128" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="768" y="240" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="752" y="224" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="384" y="208" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="640" y="240" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="672" y="240" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="528" y="176" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="496" y="144" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="736" y="176" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="464" y="144" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="368" y="240" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="368" y="224" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="640" y="160" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="384" y="160" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="400" y="176" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="352" y="208" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="528" y="224" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="672" y="192" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="576" y="160" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="768" y="160" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="688" y="160" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="512" y="224" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="656" y="240" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="432" y="144" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="688" y="208" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="736" y="192" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="480" y="192" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="480" y="176" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="480" y="160" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="592" y="144" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="416" y="208" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="704" y="240" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="720" y="128" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="656" y="128" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="624" y="160" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="432" y="208" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="576" y="192" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="512" y="208" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="416" y="160" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="480" y="224" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="432" y="192" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="464" y="208" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="720" y="208" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="416" y="176" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="448" y="240" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="512" y="160" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="560" y="128" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="720" y="176" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="368" y="192" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="560" y="144" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="448" y="160" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="752" y="192" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="640" y="176" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="432" y="240" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="752" y="160" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="464" y="160" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="736" y="160" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="592" y="256" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="448" y="256" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="352" y="256" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="416" y="256" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="464" y="256" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="768" y="256" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="736" y="256" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="560" y="256" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="640" y="256" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="720" y="256" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="400" y="256" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="480" y="256" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="704" y="256" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="576" y="256" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="544" y="256" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="384" y="256" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="672" y="256" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="512" y="256" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="528" y="256" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="624" y="256" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="656" y="256" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="688" y="256" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="608" y="256" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="752" y="256" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="368" y="256" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="496" y="256" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="432" y="256" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="304" y="0" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="304" y="32" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="304" y="16" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="336" y="0" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="320" y="32" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="320" y="16" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="320" y="0" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="336" y="16" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="336" y="32" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="256" y="0" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="256" y="32" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="256" y="16" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="288" y="0" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="272" y="32" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="272" y="16" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="272" y="0" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="288" y="16" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="288" y="32" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="208" y="0" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="224" y="16" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="240" y="0" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="240" y="16" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="208" y="16" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="224" y="0" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="192" y="0" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="320" y="48" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="336" y="64" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="336" y="48" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="832" y="0" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="800" y="0" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="784" y="0" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="816" y="0" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="864" y="0" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="848" y="0" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="784" y="128" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="784" y="144" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="848" y="144" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="800" y="144" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="816" y="144" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="832" y="144" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="864" y="144" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="864" y="160" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="832" y="160" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="784" y="160" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="848" y="160" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="816" y="160" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="800" y="160" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="864" y="176" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="832" y="176" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="784" y="176" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="848" y="176" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="816" y="176" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="800" y="176" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="864" y="192" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="832" y="192" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="784" y="192" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="848" y="192" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="816" y="192" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="800" y="192" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="784" y="240" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="816" y="224" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="864" y="256" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="848" y="208" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="864" y="240" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="848" y="256" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="848" y="240" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="816" y="240" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="848" y="224" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="832" y="224" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="816" y="208" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="784" y="208" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="832" y="208" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="800" y="256" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="784" y="224" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="800" y="224" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="832" y="240" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="800" y="240" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="816" y="256" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="864" y="208" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="800" y="208" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="784" y="256" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="864" y="224" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="832" y="256" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="320" y="256" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="336" y="256" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="512" y="384" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="512" y="368" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="528" y="384" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="496" y="368" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="496" y="384" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="496" y="400" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="528" y="368" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="528" y="400" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="512" y="400" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="544" y="368" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="576" y="368" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="560" y="400" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="576" y="400" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="544" y="400" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="560" y="368" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="576" y="384" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="544" y="384" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="560" y="384" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="592" y="368" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="624" y="368" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="608" y="400" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="624" y="400" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="592" y="400" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="608" y="368" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="624" y="384" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="592" y="384" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="608" y="384" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="448" y="368" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="480" y="368" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="464" y="400" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="480" y="400" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="448" y="400" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="464" y="368" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="480" y="384" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="448" y="384" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="464" y="384" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="640" y="368" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="640" y="384" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="640" y="400" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="416" y="384" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="432" y="368" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="432" y="384" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="368" y="384" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="432" y="400" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="416" y="368" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="416" y="400" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="352" y="400" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="400" y="400" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="384" y="368" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="352" y="368" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="384" y="384" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="352" y="384" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="400" y="384" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="368" y="400" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="368" y="368" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="400" y="368" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="384" y="400" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="304" y="400" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="272" y="368" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="288" y="368" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="320" y="400" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="288" y="400" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="336" y="400" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="320" y="384" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="320" y="368" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="272" y="400" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="336" y="368" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="288" y="384" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="336" y="384" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="272" y="384" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="304" y="368" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="304" y="384" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="720" y="400" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="672" y="384" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="736" y="400" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="720" y="368" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="688" y="368" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="736" y="384" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="688" y="384" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="688" y="400" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="704" y="400" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="800" y="384" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="752" y="384" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="672" y="368" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="704" y="384" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="672" y="400" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="800" y="400" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="656" y="400" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="784" y="400" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="704" y="368" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="784" y="368" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="720" y="384" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="656" y="384" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="768" y="384" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="784" y="384" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="736" y="368" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="752" y="368" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="656" y="368" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="800" y="368" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="768" y="368" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="768" y="400" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="752" y="400" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="864" y="400" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="832" y="368" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="864" y="368" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="848" y="368" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="864" y="384" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="832" y="384" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="848" y="384" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="816" y="400" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="832" y="400" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="848" y="400" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="816" y="384" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="816" y="368" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="384" y="448" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="656" y="432" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="336" y="416" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="608" y="448" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="352" y="448" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="608" y="432" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="848" y="432" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="720" y="432" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="496" y="432" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="384" y="416" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="512" y="416" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="416" y="432" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="736" y="432" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="624" y="416" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="528" y="432" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="544" y="432" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="528" y="448" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="832" y="448" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="272" y="416" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="320" y="448" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="400" y="448" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="400" y="416" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="448" y="416" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="416" y="416" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="736" y="416" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="480" y="448" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="800" y="432" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="352" y="432" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="864" y="416" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="640" y="416" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="496" y="416" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="816" y="448" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="368" y="432" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="784" y="416" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="816" y="432" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="752" y="448" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="816" y="416" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="688" y="432" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="592" y="416" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="288" y="448" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="768" y="432" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="768" y="448" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="368" y="448" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="608" y="416" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="832" y="432" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="864" y="432" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="512" y="432" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="784" y="432" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="624" y="448" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="720" y="416" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="704" y="416" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="592" y="448" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="288" y="432" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="752" y="416" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="272" y="448" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="800" y="448" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="672" y="448" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="336" y="432" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="304" y="448" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="304" y="416" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="576" y="416" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="704" y="448" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="560" y="432" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="848" y="416" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="352" y="416" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="400" y="432" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="688" y="448" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="480" y="432" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="448" y="448" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="832" y="416" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="288" y="416" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="784" y="448" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="656" y="448" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="432" y="432" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="304" y="432" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="800" y="416" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="672" y="432" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="544" y="448" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="592" y="432" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="560" y="448" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="464" y="448" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="752" y="432" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="272" y="432" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="368" y="416" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="416" y="448" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="320" y="432" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="512" y="448" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="624" y="432" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="432" y="448" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="544" y="416" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="720" y="448" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="848" y="448" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="656" y="416" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="528" y="416" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="480" y="416" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="336" y="448" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="384" y="432" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="640" y="448" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="496" y="448" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="464" y="432" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="672" y="416" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="560" y="416" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="320" y="416" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="736" y="448" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="464" y="416" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="448" y="432" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="432" y="416" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="640" y="432" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="768" y="416" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="576" y="448" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="688" y="416" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="864" y="448" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="704" y="432" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="576" y="432" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="464" y="480" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="304" y="496" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="432" y="480" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="656" y="464" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="672" y="496" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="288" y="496" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="528" y="464" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="336" y="480" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="704" y="496" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="864" y="480" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="352" y="480" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="608" y="496" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="704" y="464" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="480" y="480" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="736" y="464" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="560" y="480" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="656" y="480" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="704" y="480" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="432" y="496" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="544" y="464" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="576" y="480" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="720" y="496" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="448" y="480" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="864" y="496" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="736" y="480" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="416" y="464" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="576" y="496" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="624" y="480" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="512" y="480" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="352" y="464" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="304" y="480" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="800" y="464" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="608" y="464" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="416" y="496" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="608" y="480" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="672" y="480" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="832" y="480" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="304" y="464" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="784" y="496" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="800" y="480" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="640" y="464" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="592" y="480" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="272" y="496" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="752" y="496" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="560" y="496" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="496" y="480" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="480" y="464" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="544" y="480" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="848" y="464" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="544" y="496" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="352" y="496" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="848" y="480" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="400" y="480" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="512" y="464" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="688" y="464" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="432" y="464" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="640" y="480" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="688" y="480" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="592" y="496" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="464" y="464" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="592" y="464" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="816" y="480" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="864" y="464" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="384" y="464" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="816" y="464" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="320" y="480" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="640" y="496" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="656" y="496" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="400" y="464" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="848" y="496" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="736" y="496" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="768" y="496" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="832" y="464" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="752" y="464" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="800" y="496" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="496" y="496" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="480" y="496" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="272" y="480" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="272" y="464" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="832" y="496" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="384" y="480" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="368" y="464" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="560" y="464" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="784" y="480" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="768" y="480" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="320" y="464" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="624" y="496" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="336" y="464" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="416" y="480" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="448" y="464" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="368" y="480" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="672" y="464" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="576" y="464" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="288" y="480" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="784" y="464" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="624" y="464" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="688" y="496" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="400" y="496" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="464" y="496" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="528" y="496" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="816" y="496" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="720" y="480" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="768" y="464" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="512" y="496" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="720" y="464" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="496" y="464" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="448" y="496" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="528" y="480" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="320" y="496" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="336" y="496" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="752" y="480" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="384" y="496" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="368" y="496" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="288" y="464" width="16" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object name="animation" x="176" y="0" width="16" height="16">
+   <properties>
+    <property name="index" value="11"/>
+   </properties>
+  </object>
+  <object name="animation" x="336" y="96" width="16" height="16">
+   <properties>
+    <property name="index" value="11"/>
+   </properties>
+  </object>
+  <object name="animation" x="336" y="112" width="16" height="16">
+   <properties>
+    <property name="index" value="11"/>
+   </properties>
+  </object>
+  <object name="animation" x="336" y="128" width="16" height="16">
+   <properties>
+    <property name="index" value="11"/>
+   </properties>
+  </object>
+  <object name="animation" x="336" y="160" width="16" height="16">
+   <properties>
+    <property name="index" value="11"/>
+   </properties>
+  </object>
+  <object name="animation" x="336" y="176" width="16" height="16">
+   <properties>
+    <property name="index" value="11"/>
+   </properties>
+  </object>
+  <object name="animation" x="336" y="144" width="16" height="16">
+   <properties>
+    <property name="index" value="11"/>
+   </properties>
+  </object>
+  <object name="animation" x="336" y="208" width="16" height="16">
+   <properties>
+    <property name="index" value="11"/>
+   </properties>
+  </object>
+  <object name="animation" x="336" y="224" width="16" height="16">
+   <properties>
+    <property name="index" value="11"/>
+   </properties>
+  </object>
+  <object name="animation" x="336" y="192" width="16" height="16">
+   <properties>
+    <property name="index" value="11"/>
+   </properties>
+  </object>
+  <object name="animation" x="256" y="384" width="16" height="16">
+   <properties>
+    <property name="index" value="11"/>
+   </properties>
+  </object>
+  <object name="animation" x="256" y="368" width="16" height="16">
+   <properties>
+    <property name="index" value="11"/>
+   </properties>
+  </object>
+  <object name="animation" x="256" y="400" width="16" height="16">
+   <properties>
+    <property name="index" value="11"/>
+   </properties>
+  </object>
+  <object name="animation" x="256" y="432" width="16" height="16">
+   <properties>
+    <property name="index" value="11"/>
+   </properties>
+  </object>
+  <object name="animation" x="256" y="416" width="16" height="16">
+   <properties>
+    <property name="index" value="11"/>
+   </properties>
+  </object>
+  <object name="animation" x="256" y="448" width="16" height="16">
+   <properties>
+    <property name="index" value="11"/>
+   </properties>
+  </object>
+  <object name="animation" x="256" y="480" width="16" height="16">
+   <properties>
+    <property name="index" value="11"/>
+   </properties>
+  </object>
+  <object name="animation" x="256" y="464" width="16" height="16">
+   <properties>
+    <property name="index" value="11"/>
+   </properties>
+  </object>
+  <object name="animation" x="256" y="496" width="16" height="16">
+   <properties>
+    <property name="index" value="11"/>
+   </properties>
+  </object>
+  <object name="animation" x="192" y="16" width="16" height="16">
+   <properties>
+    <property name="index" value="6"/>
+   </properties>
+  </object>
+  <object name="animation" x="240" y="32" width="16" height="16">
+   <properties>
+    <property name="index" value="6"/>
+   </properties>
+  </object>
+  <object name="animation" x="304" y="48" width="16" height="16">
+   <properties>
+    <property name="index" value="6"/>
+   </properties>
+  </object>
+  <object name="animation" x="320" y="64" width="16" height="16">
+   <properties>
+    <property name="index" value="6"/>
+   </properties>
+  </object>
+  <object name="animation" x="336" y="80" width="16" height="16">
+   <properties>
+    <property name="index" value="6"/>
+   </properties>
+  </object>
+  <object name="animation" x="288" y="48" width="16" height="16">
+   <properties>
+    <property name="index" value="5"/>
+   </properties>
+  </object>
+  <object name="animation" x="272" y="48" width="16" height="16">
+   <properties>
+    <property name="index" value="5"/>
+   </properties>
+  </object>
+  <object name="animation" x="256" y="48" width="16" height="16">
+   <properties>
+    <property name="index" value="5"/>
+   </properties>
+  </object>
+  <object name="animation" x="224" y="32" width="16" height="16">
+   <properties>
+    <property name="index" value="5"/>
+   </properties>
+  </object>
+  <object name="animation" x="208" y="32" width="16" height="16">
+   <properties>
+    <property name="index" value="5"/>
+   </properties>
+  </object>
+  <object name="animation" x="176" y="16" width="16" height="16">
+   <properties>
+    <property name="index" value="4"/>
+   </properties>
+  </object>
+  <object name="animation" x="192" y="32" width="16" height="16">
+   <properties>
+    <property name="index" value="4"/>
+   </properties>
+  </object>
+  <object name="animation" x="304" y="64" width="16" height="16">
+   <properties>
+    <property name="index" value="4"/>
+   </properties>
+  </object>
+  <object name="animation" x="320" y="80" width="16" height="16">
+   <properties>
+    <property name="index" value="4"/>
+   </properties>
+  </object>
+  <object name="animation" x="336" y="240" width="16" height="16">
+   <properties>
+    <property name="index" value="9"/>
+   </properties>
+  </object>
+  <object name="animation" x="304" y="256" width="16" height="16">
+   <properties>
+    <property name="index" value="9"/>
+   </properties>
+  </object>
+  <object name="animation" x="304" y="240" width="16" height="16">
+   <properties>
+    <property name="index" value="2"/>
+   </properties>
+  </object>
+  <object name="animation" x="272" y="256" width="16" height="16">
+   <properties>
+    <property name="index" value="2"/>
+   </properties>
+  </object>
+  <object name="animation" x="288" y="256" width="16" height="16">
+   <properties>
+    <property name="index" value="8"/>
+   </properties>
+  </object>
+  <object name="animation" x="320" y="240" width="16" height="16">
+   <properties>
+    <property name="index" value="8"/>
+   </properties>
+  </object>
+  <object name="animation" x="880" y="496" width="16" height="16">
+   <properties>
+    <property name="index" value="12"/>
+   </properties>
+  </object>
+  <object name="animation" x="880" y="480" width="16" height="16">
+   <properties>
+    <property name="index" value="12"/>
+   </properties>
+  </object>
+  <object name="animation" x="880" y="464" width="16" height="16">
+   <properties>
+    <property name="index" value="12"/>
+   </properties>
+  </object>
+  <object name="animation" x="880" y="448" width="16" height="16">
+   <properties>
+    <property name="index" value="12"/>
+   </properties>
+  </object>
+  <object name="animation" x="880" y="432" width="16" height="16">
+   <properties>
+    <property name="index" value="12"/>
+   </properties>
+  </object>
+  <object name="animation" x="880" y="400" width="16" height="16">
+   <properties>
+    <property name="index" value="12"/>
+   </properties>
+  </object>
+  <object name="animation" x="880" y="416" width="16" height="16">
+   <properties>
+    <property name="index" value="12"/>
+   </properties>
+  </object>
+  <object name="animation" x="880" y="384" width="16" height="16">
+   <properties>
+    <property name="index" value="12"/>
+   </properties>
+  </object>
+  <object name="animation" x="880" y="368" width="16" height="16">
+   <properties>
+    <property name="index" value="12"/>
+   </properties>
+  </object>
+  <object name="animation" x="880" y="256" width="16" height="16">
+   <properties>
+    <property name="index" value="12"/>
+   </properties>
+  </object>
+  <object name="animation" x="880" y="224" width="16" height="16">
+   <properties>
+    <property name="index" value="12"/>
+   </properties>
+  </object>
+  <object name="animation" x="880" y="160" width="16" height="16">
+   <properties>
+    <property name="index" value="12"/>
+   </properties>
+  </object>
+  <object name="animation" x="880" y="176" width="16" height="16">
+   <properties>
+    <property name="index" value="12"/>
+   </properties>
+  </object>
+  <object name="animation" x="880" y="240" width="16" height="16">
+   <properties>
+    <property name="index" value="12"/>
+   </properties>
+  </object>
+  <object name="animation" x="880" y="192" width="16" height="16">
+   <properties>
+    <property name="index" value="12"/>
+   </properties>
+  </object>
+  <object name="animation" x="880" y="208" width="16" height="16">
+   <properties>
+    <property name="index" value="12"/>
+   </properties>
+  </object>
+  <object name="animation" x="880" y="144" width="16" height="16">
+   <properties>
+    <property name="index" value="12"/>
+   </properties>
+  </object>
+  <object name="animation" x="880" y="128" width="16" height="16">
+   <properties>
+    <property name="index" value="12"/>
+   </properties>
+  </object>
+  <object name="animation" x="784" y="96" width="16" height="16">
+   <properties>
+    <property name="index" value="12"/>
+   </properties>
+  </object>
+  <object name="animation" x="784" y="80" width="16" height="16">
+   <properties>
+    <property name="index" value="12"/>
+   </properties>
+  </object>
+  <object name="animation" x="784" y="64" width="16" height="16">
+   <properties>
+    <property name="index" value="12"/>
+   </properties>
+  </object>
+  <object name="animation" x="784" y="48" width="16" height="16">
+   <properties>
+    <property name="index" value="12"/>
+   </properties>
+  </object>
+  <object name="animation" x="784" y="32" width="16" height="16">
+   <properties>
+    <property name="index" value="12"/>
+   </properties>
+  </object>
+  <object name="animation" x="880" y="16" width="16" height="16">
+   <properties>
+    <property name="index" value="12"/>
+   </properties>
+  </object>
+  <object name="animation" x="880" y="0" width="16" height="16">
+   <properties>
+    <property name="index" value="12"/>
+   </properties>
+  </object>
+  <object name="animation" x="816" y="16" width="16" height="16">
+   <properties>
+    <property name="index" value="5"/>
+   </properties>
+  </object>
+  <object name="animation" x="800" y="16" width="16" height="16">
+   <properties>
+    <property name="index" value="5"/>
+   </properties>
+  </object>
+  <object name="animation" x="832" y="16" width="16" height="16">
+   <properties>
+    <property name="index" value="5"/>
+   </properties>
+  </object>
+  <object name="animation" x="848" y="16" width="16" height="16">
+   <properties>
+    <property name="index" value="5"/>
+   </properties>
+  </object>
+  <object name="animation" x="816" y="128" width="16" height="16">
+   <properties>
+    <property name="index" value="8"/>
+   </properties>
+  </object>
+  <object name="animation" x="832" y="128" width="16" height="16">
+   <properties>
+    <property name="index" value="8"/>
+   </properties>
+  </object>
+  <object name="animation" x="848" y="128" width="16" height="16">
+   <properties>
+    <property name="index" value="8"/>
+   </properties>
+  </object>
+  <object name="animation" x="864" y="16" width="16" height="16">
+   <properties>
+    <property name="index" value="6"/>
+   </properties>
+  </object>
+  <object name="animation" x="784" y="112" width="16" height="16">
+   <properties>
+    <property name="index" value="10"/>
+   </properties>
+  </object>
+  <object name="animation" x="800" y="128" width="16" height="16">
+   <properties>
+    <property name="index" value="10"/>
+   </properties>
+  </object>
+  <object name="animation" x="864" y="128" width="16" height="16">
+   <properties>
+    <property name="index" value="9"/>
+   </properties>
+  </object>
+  <object name="animation" x="864" y="32" width="16" height="16">
+   <properties>
+    <property name="index" value="4"/>
+   </properties>
+  </object>
+  <object name="animation" x="880" y="32" width="16" height="16">
+   <properties>
+    <property name="index" value="3"/>
+   </properties>
+  </object>
+  <object name="animation" x="800" y="112" width="16" height="16">
+   <properties>
+    <property name="index" value="1"/>
+   </properties>
+  </object>
+  <object name="animation" x="880" y="112" width="16" height="16">
+   <properties>
+    <property name="index" value="1"/>
+   </properties>
+  </object>
+  <object name="animation" x="864" y="112" width="16" height="16">
+   <properties>
+    <property name="index" value="2"/>
    </properties>
   </object>
  </objectgroup>

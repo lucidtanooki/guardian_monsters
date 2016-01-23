@@ -14,6 +14,7 @@ import com.badlogic.gdx.utils.Array;
 
 import org.limbusdev.monsterworld.ecs.components.PositionComponent;
 import org.limbusdev.monsterworld.enums.MusicType;
+import org.limbusdev.monsterworld.geometry.IdentifiableRectangle;
 import org.limbusdev.monsterworld.geometry.IntRectangle;
 import org.limbusdev.monsterworld.geometry.IntVector2;
 import org.limbusdev.monsterworld.geometry.MapObjectInformation;
@@ -56,14 +57,20 @@ public class OutdoorGameArea {
         this.mapPeople = new Array<MapPersonInformation>();
         this.mapSigns = new Array<MapObjectInformation>();
         setUpTiledMap(areaID, startPosID);
-        this.mapRenderer = new OrthogonalTiledMapAndEntityRenderer(tiledMap, this);
+        this.mapRenderer = new OrthogonalTiledMapAndEntityRenderer(tiledMap, media);
         this.areaID = areaID;
+        this.mapRenderer.setUpAnimations(tiledMap.getLayers().get("animations"));
+        this.mapRenderer.setUpAnimatedObjects(tiledMap.getLayers().get("animatedObjects"));
     }
     /* ............................................................................... METHODS .. */
 
     public void render(OrthographicCamera camera) {
         mapRenderer.setView(camera);
         mapRenderer.render();
+    }
+
+    public void update(float delta) {
+        // TODO
     }
 
     public void renderDebugging(ShapeRenderer shape) {
@@ -103,7 +110,6 @@ public class OutdoorGameArea {
         // get information about signs on map
         for(MapObject mo : tiledMap.getLayers().get("objects").getObjects()) {
             if(mo.getName().equals("sign")) {
-                r = ((RectangleMapObject) mo).getRectangle();
                 mapSigns.add(new MapObjectInformation(
                         mo.getProperties().get("title", String.class),
                         mo.getProperties().get("text", String.class),

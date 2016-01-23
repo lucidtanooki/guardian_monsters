@@ -19,7 +19,7 @@
  </layer>
  <layer name="objects1" width="10" height="8">
   <data encoding="base64" compression="zlib">
-   eJxjYCAd1PMzMDTwQ9hVQLoaiGv4MdXtB4odgIrvAtK7gXgPkro6KPsfHwPDfz4I+xdQ7DcQ/0FStw/NbGkgTgBiGTT7/qGpiwbieCCOIeCf70B9f/khNKkAAIl/Exo=
+   eJxjYCAd1PMzMDTwQ9hVQLoaiGv4MdXtB4odgIrvAtK7gXgPkro6LHp+AcV+A/EfJLl9aOqkgTgBiGXQ9P5DUxcNxPFAHEPAP9+B+v7yQ2hSAQADZBEB
   </data>
  </layer>
  <layer name="tops1" width="10" height="8">
@@ -52,14 +52,15 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="livingEntities" width="10" height="8" visible="0">
+ <objectgroup name="livingEntities" width="10" height="8">
   <object name="person" x="112" y="64" width="16" height="16">
    <properties>
     <property name="male" value="true"/>
     <property name="moving" value="false"/>
     <property name="path" value="SSTOP"/>
-    <property name="spriteIndex" value="0"/>
+    <property name="spriteIndex" value="1"/>
     <property name="startDir" value="S"/>
+    <property name="static" value="true"/>
    </properties>
   </object>
  </objectgroup>
@@ -86,6 +87,14 @@
    <properties>
     <property name="text" value="It's a very old movie on a black and white TV."/>
     <property name="title" value="Old TV"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="animations" width="10" height="8"/>
+ <objectgroup name="animatedObjects" width="10" height="8">
+  <object name="animation" x="48" y="48" width="16" height="16">
+   <properties>
+    <property name="index" value="13"/>
    </properties>
   </object>
  </objectgroup>

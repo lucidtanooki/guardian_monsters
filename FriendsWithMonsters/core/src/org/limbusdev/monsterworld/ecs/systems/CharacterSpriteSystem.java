@@ -1,6 +1,5 @@
 package org.limbusdev.monsterworld.ecs.systems;
 
-import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
@@ -8,12 +7,14 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
 
 import org.limbusdev.monsterworld.ecs.components.CharacterSpriteComponent;
-import org.limbusdev.monsterworld.ecs.components.ComponentRetriever;
+import org.limbusdev.monsterworld.ecs.components.Components;
 import org.limbusdev.monsterworld.ecs.components.InputComponent;
 import org.limbusdev.monsterworld.ecs.components.PathComponent;
 import org.limbusdev.monsterworld.enums.SkyDirection;
 
 /**
+ * Updates the entities sprites, setting the correct @link Animation} frame,
+ * {@link SkyDirection} and so on according to the given {@link Entity}'s {@link InputComponent}
  * Created by georg on 22.11.15.
  */
 public class CharacterSpriteSystem extends EntitySystem {
@@ -21,8 +22,6 @@ public class CharacterSpriteSystem extends EntitySystem {
     private ImmutableArray<Entity> entities;
     private float elapsedTime=0;
 
-    private ComponentMapper<CharacterSpriteComponent> cm
-            = ComponentMapper.getFor(CharacterSpriteComponent.class);
     /* ........................................................................... CONSTRUCTOR .. */
     public CharacterSpriteSystem() {}
     /* ............................................................................... METHODS .. */
@@ -34,24 +33,34 @@ public class CharacterSpriteSystem extends EntitySystem {
     }
 
     public void update(float deltaTime) {
+        // Calculation elapsedTime for animation
         elapsedTime += deltaTime;
+
+        // Update every single CharacterSpriteComponent
         for (Entity entity : entities) {
-            CharacterSpriteComponent sprite = cm.get(entity);
+            CharacterSpriteComponent sprite = Components.characterSprite.get(entity);
             SkyDirection direction = SkyDirection.S;
             boolean moving = false;
-            if(ComponentRetriever.inpCompMap.has(entity)) {
-                direction = ComponentRetriever.getInputComponent(entity).skyDir;
-                moving = ComponentRetriever.inpCompMap.get(entity).moving;
-            }
-            if(ComponentRetriever.pathCompMap.has(entity)) {
-                direction = ComponentRetriever.getPathComponent(entity).path.get
-                        (ComponentRetriever.getPathComponent(entity).currentDir);
-                if(!ComponentRetriever.pathCompMap.get(entity).staticEntity)
-                    moving = ComponentRetriever.pathCompMap.get(entity).moving ;
-                else
-                    moving = ComponentRetriever.pathCompMap.get(entity).staticEntity;
+
+            // If entity has InputComponent
+            if(Components.input.has(entity)) {
+                direction = Components.getInputComponent(entity).skyDir;
+                moving = Components.input.get(entity).moving;
             }
 
+            // If entitiy has PathComponent
+            if(Components.path.has(entity)) {
+                direction = Components.getPathComponent(entity)
+                        .path.get(Components.getPathComponent(entity).currentDir);
+
+                // Get from path whether to move or not
+                if(!Components.path.get(entity).staticEntity)
+                    moving = Components.path.get(entity).moving ;
+                else
+                    moving = Components.path.get(entity).staticEntity;
+            }
+
+            // Set animation according to input direction
             switch(direction) {
                 case NSTOP:;
                 case N: sprite.recentAnim = sprite.animationImgs.get("n");break;
@@ -62,16 +71,19 @@ public class CharacterSpriteSystem extends EntitySystem {
                 default: sprite.recentAnim = sprite.animationImgs.get("s");break;
             }
 
+            // Set the first animation frame as recent image when standing still
             sprite.recentIdleImg = sprite.recentAnim.getKeyFrames()[0];
 
             // set correct texture according to state
             if(!moving
                 || direction.equals(SkyDirection.NSTOP)
                 || direction.equals(SkyDirection.SSTOP)
-                    || direction.equals(SkyDirection.ESTOP)
-                    || direction.equals(SkyDirection.WSTOP))
-                sprite.sprite.setRegion(sprite.recentIdleImg);
-            else sprite.sprite.setRegion(sprite.recentAnim.getKeyFrame(elapsedTime, true));
+                || direction.equals(SkyDirection.ESTOP)
+                || direction.equals(SkyDirection.WSTOP))
+
+                sprite.sprite.setRegion(sprite.recentIdleImg);  // idle image
+            else
+                sprite.sprite.setRegion(sprite.recentAnim.getKeyFrame(elapsedTime, true));
 
         }
     }

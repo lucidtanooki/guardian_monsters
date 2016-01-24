@@ -10,8 +10,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 import org.limbusdev.monsterworld.MonsterWorld;
-import org.limbusdev.monsterworld.ecs.components.ComponentRetriever;
-import org.limbusdev.monsterworld.ecs.components.MonsterComponents.MonsterStatusComponent;
+import org.limbusdev.monsterworld.ecs.components.Components;
 import org.limbusdev.monsterworld.ecs.components.PositionComponent;
 import org.limbusdev.monsterworld.ecs.entities.HeroEntity;
 import org.limbusdev.monsterworld.ecs.entities.MonsterEntity;
@@ -48,10 +47,22 @@ public class EntityComponentSystem {
     public Entity hero;
     public HUD hud;
     /* ........................................................................... CONSTRUCTOR .. */
+
+    /**
+     * Base Game Engine Component. The Entity-Component-System (ECS) updates every {@link Entity}
+     * every single Update Cycle according to the present changes in the game world.
+     * @param game          game instance
+     * @param viewport      screen size
+     * @param gameArea      active game level/map
+     * @param fromSave      whether to init a new game or restore game state from save game
+     * @param gameScreen    screen
+     * @param sgm           the SaveGameManager
+     */
     public EntityComponentSystem(
             MonsterWorld game, Viewport viewport, OutdoorGameArea gameArea, boolean
             fromSave, OutdoorGameWorldScreen gameScreen, SaveGameManager sgm
     ) {
+
         this.media = game.media;
         this.game = game;
         this.gameArea = gameArea;
@@ -62,31 +73,36 @@ public class EntityComponentSystem {
         setUpPeople();
         setUpSigns();
         setUpEntitySystems(gameArea, viewport, hud);
-        setUpPartnerMonster();
     }
+
     /* ............................................................................... METHODS .. */
+
+    /**
+     * Creates the hero instance
+     * @param fromSave  whether to create hero or reconstruct from game save
+     */
     public void setUpHero(boolean fromSave) {
         Entity hero = entityFactory.createHero(gameArea.startPosition, fromSave);
-        this.heroPosition = ComponentRetriever.getPositionComponent(hero);
+        this.heroPosition = Components.getPositionComponent(hero);
         this.hero = hero;
     }
 
-    public void setUpPartnerMonster() {
-        Entity partnerMonster = new MonsterEntity();
-        partnerMonster.add(new MonsterStatusComponent());
-        this.engine.addEntity(partnerMonster);
-        // TODO add monster in BattleHUD
-    }
-
+    /**
+     * Bring people on active map to live
+     */
     public void setUpPeople() {
         for(MapPersonInformation mpi : gameArea.getMapPeople())
             this.entityFactory.createPerson(mpi);
     }
 
+    /**
+     * Set up objects with description on the map
+     */
     public void setUpSigns() {
         for(MapObjectInformation moi : gameArea.getMapSigns())
             this.entityFactory.createSign(moi);
     }
+
 
     public void setUpEntitySystems(OutdoorGameArea gameArea, Viewport viewport, HUD hud) {
         // Sprite System
@@ -142,20 +158,37 @@ public class EntityComponentSystem {
                 engine.removeEntity(e);
     }
 
+    /**
+     * Update game world every single game render iteration
+     * @param delta time since last update
+     */
     public void update(float delta) {
         engine.update(delta);
         hud.update(delta);
         gameArea.update(delta);
     }
 
+    /**
+     * Render ECS stuff like debugger and so on
+     * @param batch
+     * @param shape
+     */
     public void render(Batch batch, ShapeRenderer shape) {
         if(GlobalSettings.DEBUGGING_ON) engine.getSystem(DebuggingSystem.class).render(shape);
     }
 
+    /**
+     * Change to another game area/map
+     * @param mapID         map to load
+     * @param startFieldID  start point on new map
+     */
     public void changeGameArea(int mapID, int startFieldID) {
         game.setScreen(new OutdoorGameWorldScreen(game, mapID, startFieldID, false));
     }
 
+    /**
+     * Render Heads Up Display
+     */
     public void draw() {
         hud.stage.getViewport().apply();
         hud.draw();
@@ -165,7 +198,4 @@ public class EntityComponentSystem {
         return engine.getSystem(InputSystem.class);
     }
 
-    public Vector2 getHeroPosition() {
-        return new Vector2(heroPosition.x, heroPosition.y);
-    }
 }

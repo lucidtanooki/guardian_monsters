@@ -21,7 +21,7 @@ import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
 import org.limbusdev.monsterworld.MonsterWorld;
-import org.limbusdev.monsterworld.ecs.components.ComponentRetriever;
+import org.limbusdev.monsterworld.ecs.components.Components;
 import org.limbusdev.monsterworld.ecs.components.TeamComponent;
 import org.limbusdev.monsterworld.managers.MediaManager;
 import org.limbusdev.monsterworld.model.BattleFactory;
@@ -156,7 +156,7 @@ public class HUD {
                 oppTeam.monsters.add(BattleFactory.getInstance().createMonster(7));
                 oppTeam.monsters.add(BattleFactory.getInstance().createMonster(4));
                 oppTeam.monsters.add(BattleFactory.getInstance().createMonster(11));
-                battleScreen.init(ComponentRetriever.team.get(hero), oppTeam);
+                battleScreen.init(Components.team.get(hero), oppTeam);
                 game.setScreen(battleScreen);
             }
         });
@@ -249,7 +249,7 @@ public class HUD {
                 titleLabel.setVisible(false);
                 conversationLabel.setVisible(false);
                 conversationExitButton.setVisible(false);
-                ComponentRetriever.getInputComponent(hero).talking = false;
+                Components.getInputComponent(hero).talking = false;
             }
         });
 

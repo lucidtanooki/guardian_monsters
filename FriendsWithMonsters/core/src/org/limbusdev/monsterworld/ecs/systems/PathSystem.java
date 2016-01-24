@@ -8,7 +8,7 @@ import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.utils.TimeUtils;
 
 import org.limbusdev.monsterworld.ecs.components.ColliderComponent;
-import org.limbusdev.monsterworld.ecs.components.ComponentRetriever;
+import org.limbusdev.monsterworld.ecs.components.Components;
 import org.limbusdev.monsterworld.ecs.components.InputComponent;
 import org.limbusdev.monsterworld.ecs.components.PathComponent;
 import org.limbusdev.monsterworld.ecs.components.PositionComponent;
@@ -17,6 +17,7 @@ import org.limbusdev.monsterworld.geometry.IntVector2;
 import org.limbusdev.monsterworld.utils.GlobalSettings;
 
 /**
+ * Moves around entities with a {@link PathComponent} like persons, animals and so on
  * Created by georg on 30.11.15.
  */
 public class PathSystem extends EntitySystem {
@@ -39,9 +40,9 @@ public class PathSystem extends EntitySystem {
 
     public void update(float deltaTime) {
         for (Entity entity : entities) {
-            PositionComponent position = ComponentRetriever.getPositionComponent(entity);
-            ColliderComponent collider = ComponentRetriever.getColliderComponent(entity);
-            PathComponent path = ComponentRetriever.getPathComponent(entity);
+            PositionComponent position = Components.getPositionComponent(entity);
+            ColliderComponent collider = Components.getColliderComponent(entity);
+            PathComponent path = Components.getPathComponent(entity);
             makeOneStep(position, path, collider);
         }
     }

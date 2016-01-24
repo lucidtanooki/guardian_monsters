@@ -1,6 +1,5 @@
 package org.limbusdev.monsterworld.ecs.systems;
 
-import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
@@ -11,25 +10,24 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.MathUtils;
 
 import org.limbusdev.monsterworld.ecs.components.CameraComponent;
+import org.limbusdev.monsterworld.ecs.components.Components;
 import org.limbusdev.monsterworld.ecs.components.PositionComponent;
 import org.limbusdev.monsterworld.geometry.IntRectangle;
 import org.limbusdev.monsterworld.utils.GlobalSettings;
 
 /**
+ * The camera system updates the cameras position according to the hero's position by keeping it
+ * inside the lmaps bounds, unless a map is smaller than the {@link com.badlogic.gdx.graphics
+ * .Camera}
+ * field of view
  * Created by georg on 25.11.15.
  */
 public class CameraSystem extends EntitySystem {
     /* ............................................................................ ATTRIBUTES .. */
     private OrthographicCamera camera;
-    private TiledMap tiledMap;
-    private IntRectangle mapOutline;
+    private IntRectangle mapOutline;    // Bounds of map to be rendered
 
     private ImmutableArray<Entity> entities;
-
-    private ComponentMapper<CameraComponent> cm
-            = ComponentMapper.getFor(CameraComponent.class);
-    private ComponentMapper<PositionComponent> pm
-            = ComponentMapper.getFor(PositionComponent.class);
     /* ........................................................................... CONSTRUCTOR .. */
 
     /**
@@ -37,7 +35,8 @@ public class CameraSystem extends EntitySystem {
      */
     public CameraSystem(OrthographicCamera camera, TiledMap tiledMap) {
         this.camera = camera;
-        this.tiledMap = tiledMap;
+
+        // Get the maps bounds
         this.mapOutline = new IntRectangle(
                 0,
                 0,
@@ -55,16 +54,25 @@ public class CameraSystem extends EntitySystem {
     }
 
     public void update(float deltaTime) {
-        for (Entity entity : entities) {
-            PositionComponent position = pm.get(entity);
 
-            if (mapOutline.width >= camera.viewportWidth && mapOutline.height >= camera
-                    .viewportHeight) {
-                camera.position.x = MathUtils.clamp(position.x, 0 + camera.viewportWidth/2,
+        // Move all cameras of entities with a {@link CameraComponent} (hero only)
+        for (Entity entity : entities) {
+            PositionComponent position = Components.getPositionComponent(entity);
+
+            if (mapOutline.width >= camera.viewportWidth &&
+                    mapOutline.height >= camera.viewportHeight) {
+                // If map is bigger than camera field
+                camera.position.x = MathUtils.clamp(
+                        position.x,
+                        0 + camera.viewportWidth/2,
                         mapOutline.width - camera.viewportWidth/2);
-                camera.position.y = MathUtils.clamp(position.y, 0 + camera.viewportHeight/2,
+
+                camera.position.y = MathUtils.clamp(
+                        position.y,
+                        0 + camera.viewportHeight/2,
                         mapOutline.height - camera.viewportHeight/2);
             } else {
+                // If camera field is bigger than map dimension
                 camera.position.set(position.x, position.y, 0);
             }
         }

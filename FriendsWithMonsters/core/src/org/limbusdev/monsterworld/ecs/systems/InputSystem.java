@@ -14,7 +14,7 @@ import com.badlogic.gdx.utils.TimeUtils;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 import org.limbusdev.monsterworld.ecs.components.ColliderComponent;
-import org.limbusdev.monsterworld.ecs.components.ComponentRetriever;
+import org.limbusdev.monsterworld.ecs.components.Components;
 import org.limbusdev.monsterworld.ecs.components.ConversationComponent;
 import org.limbusdev.monsterworld.ecs.components.InputComponent;
 import org.limbusdev.monsterworld.ecs.components.PositionComponent;
@@ -29,6 +29,9 @@ import org.limbusdev.monsterworld.screens.HUD;
 import org.limbusdev.monsterworld.utils.GlobalSettings;
 
 /**
+ * The InputSystem extends {@link EntitySystem} and implements an{@link InputProcessor}. It enters
+ * all catched input into the hero's InputComponent so it can be processed by other systems later.
+ * Additionally it moves the hero step by step.
  * Created by georg on 22.11.15.
  */
 public class InputSystem extends EntitySystem implements InputProcessor {
@@ -50,12 +53,18 @@ public class InputSystem extends EntitySystem implements InputProcessor {
     }
     /* ............................................................................... METHODS .. */
     public void addedToEngine(Engine engine) {
+        // Hero
         entities = engine.getEntitiesFor(Family.all(
                 InputComponent.class,
                 PositionComponent.class,
                 ColliderComponent.class).get());
-        speakingEntities = engine.getEntitiesFor(Family.all(ConversationComponent.class)
+
+        // Speaking: Signs, People and so on
+        speakingEntities = engine.getEntitiesFor(Family
+                .all(ConversationComponent.class)
                 .exclude(TitleComponent.class).get());
+
+        // Signs
         signEntities = engine.getEntitiesFor(Family.all(
                 TitleComponent.class,
                 ConversationComponent.class
@@ -64,15 +73,17 @@ public class InputSystem extends EntitySystem implements InputProcessor {
 
     public void update(float deltaTime) {
         for (Entity entity : entities) {
-            InputComponent input = ComponentRetriever.getInputComponent(entity);
-            PositionComponent position = ComponentRetriever.getPositionComponent(entity);
-            ColliderComponent collider = ComponentRetriever.getColliderComponent(entity);
+            InputComponent input = Components.getInputComponent(entity);
+            PositionComponent position = Components.getPositionComponent(entity);
+            ColliderComponent collider = Components.getColliderComponent(entity);
+
+            // Only move hero, when player is not speaking to an entity
             if(!input.talking) makeOneStep(position, input, collider);
         }
     }
 
-    public void makeOneStep(PositionComponent position, InputComponent input, ColliderComponent
-            collider) {
+    public void makeOneStep(PositionComponent position, InputComponent input,
+                            ColliderComponent collider) {
         if(input.startMoving) {
             // Define direction
             input.touchPos.x = Gdx.input.getX();
@@ -95,6 +106,7 @@ public class InputSystem extends EntitySystem implements InputProcessor {
                 else input.skyDir = SkyDirection.S;
             }
 
+            // Define potential next position according to the input direction
             switch(input.skyDir) {
                 case N: position.nextX=position.x;position.nextY = position.y + 16;break;
                 case W: position.nextX=position.x - 16;position.nextY = position.y;break;
@@ -102,9 +114,7 @@ public class InputSystem extends EntitySystem implements InputProcessor {
                 default:position.nextX=position.x;position.nextY = position.y - 16;break;
             }
 
-            /**
-             * Check whether movement is possible or blocked by a collider
-             */
+            //Check whether movement is possible or blocked by a collider
             IntVector2 nextPos = new IntVector2(0,0);
             for(IntRectangle r : gameArea.getColliders()) {
                 nextPos.x = position.nextX + GlobalSettings.TILE_SIZE / 2;
@@ -119,11 +129,12 @@ public class InputSystem extends EntitySystem implements InputProcessor {
 
             collider.collider.x = position.nextX;
             collider.collider.y = position.nextY;
-            position.lastPixelStep = TimeUtils.millis();
+            position.lastPixelStep = TimeUtils.millis();    // remember time of this step
             input.moving = true;
-            input.startMoving = false;
+            input.startMoving = false;  // because entity now started moving
         }
 
+        // If entity is already moving, and last step has completed (long enough ago)
         if(input.moving && TimeUtils.timeSinceMillis(position.lastPixelStep) > GlobalSettings.ONE_STEPDURATION_MS) {
             switch(input.skyDir) {
                 case N: position.y += 1;break;
@@ -140,19 +151,27 @@ public class InputSystem extends EntitySystem implements InputProcessor {
                 default: if(position.y == position.nextY) input.moving = false;break;
             }
 
-            // Go on if finger is still on screen
+
             if(!input.moving) {
+
+                // Check whether hero can get attacked by monsters
                 for(MonsterArea ma : gameArea.getMonsterAreas()) {
-                    if (ma.contains(new IntVector2(position.x + GlobalSettings.TILE_SIZE / 2,
+                    if (ma.contains(new IntVector2(
+                            position.x + GlobalSettings.TILE_SIZE / 2,
                             position.y + GlobalSettings.TILE_SIZE / 2))
                             && MathUtils.randomBoolean(ma.attackProbabilities.get(0))) {
+
                         System.out.print("Monster appeared!\n");
                         /* ......................................................... START BATTLE */
+                        input.inBattle = true;
                         TeamComponent oppTeam = BattleFactory.getInstance().createOpponentTeam(ma);
-                        hud.battleScreen.init(ComponentRetriever.team.get(hero), oppTeam);
+                        hud.battleScreen.init(Components.team.get(hero), oppTeam);
                         hud.game.setScreen(hud.battleScreen);
+                        /* ......................................................... START BATTLE */
+
                     }
                 }
+                // Go on if finger is still on screen
                 if (Gdx.input.isTouched())
                     input.startMoving = true;
             }
@@ -183,48 +202,48 @@ public class InputSystem extends EntitySystem implements InputProcessor {
 
         // Loop through entities with text and test weather they're near enough
         for(Entity e : speakingEntities) {
-            ColliderComponent coll = ComponentRetriever.getColliderComponent(e);
+            ColliderComponent coll = Components.getColliderComponent(e);
             IntVector2 touchedAt = new IntVector2(MathUtils.round(touchPos.x),MathUtils.round(touchPos.y));
             float dist = touchPos.dst(
-                    ComponentRetriever.collCompMap.get(hero).collider.x
+                    Components.collision.get(hero).collider.x
                             + GlobalSettings.TILE_SIZE/2,
-                    ComponentRetriever.collCompMap.get(hero).collider.y
+                    Components.collision.get(hero).collider.y
                             + GlobalSettings.TILE_SIZE/2
             );
             if(coll.collider.contains(touchedAt) && dist < GlobalSettings.TILE_SIZE*1.5) {
                 System.out.print("Touched speaker\n");
                 touchedSpeaker = true;
-                hud.openConversation(ComponentRetriever.convCompMap.get(e).text);
+                hud.openConversation(Components.conversation.get(e).text);
             }
         }
 
         for(Entity e : signEntities) {
-            ColliderComponent coll = ComponentRetriever.getColliderComponent(e);
+            ColliderComponent coll = Components.getColliderComponent(e);
             IntVector2 touchedAt = new IntVector2(MathUtils.round(touchPos.x),MathUtils.round(touchPos.y));
             float dist = touchPos.dst(
-                    ComponentRetriever.collCompMap.get(hero).collider.x
+                    Components.collision.get(hero).collider.x
                             + GlobalSettings.TILE_SIZE/2,
-                    ComponentRetriever.collCompMap.get(hero).collider.y
+                    Components.collision.get(hero).collider.y
                             + GlobalSettings.TILE_SIZE/2
             );
             if(coll.collider.contains(touchedAt) && dist < GlobalSettings.TILE_SIZE*1.5) {
                 System.out.print("Touched sign\n");
                 touchedSign = true;
                 hud.openSign(
-                        ComponentRetriever.titleCompMap.get(e).text,
-                        ComponentRetriever.convCompMap.get(e).text);
+                        Components.title.get(e).text,
+                        Components.conversation.get(e).text);
             }
         }
 
         if(!touchedSpeaker && !touchedSign) touchDragged(screenX, screenY, pointer);
-        else ComponentRetriever.getInputComponent(hero).talking = true;
+        else Components.getInputComponent(hero).talking = true;
         return true;
     }
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
         for (Entity entity : entities) {
-            InputComponent input = ComponentRetriever.getInputComponent(entity);
+            InputComponent input = Components.getInputComponent(entity);
             input.startMoving = false;
         }
         return true;
@@ -233,7 +252,7 @@ public class InputSystem extends EntitySystem implements InputProcessor {
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
         for (Entity entity : entities) {
-            InputComponent input = ComponentRetriever.getInputComponent(entity);
+            InputComponent input = Components.getInputComponent(entity);
             if(!input.moving) {
                 input.startMoving = true;
             }

@@ -12,7 +12,6 @@ import org.limbusdev.monsterworld.ecs.components.InputComponent;
 import org.limbusdev.monsterworld.ecs.components.PathComponent;
 import org.limbusdev.monsterworld.ecs.components.PositionComponent;
 import org.limbusdev.monsterworld.ecs.components.SaveGameComponent;
-import org.limbusdev.monsterworld.ecs.components.SpriteComponent;
 import org.limbusdev.monsterworld.ecs.components.TeamComponent;
 import org.limbusdev.monsterworld.ecs.components.TitleComponent;
 import org.limbusdev.monsterworld.ecs.entities.HeroEntity;
@@ -28,7 +27,6 @@ import org.limbusdev.monsterworld.utils.GameState;
 import org.limbusdev.monsterworld.utils.GlobalSettings;
 import org.limbusdev.monsterworld.utils.UnitConverter;
 
-import java.util.ArrayList;
 
 /**
  * Created by georg on 23.11.15.
@@ -52,9 +50,13 @@ public class EntityFactory {
      */
     public Entity createHero(PositionComponent startField, boolean restoreSave) {
         Entity hero = new HeroEntity();
+
+        // Add Sprite
         CharacterSpriteComponent csc = new CharacterSpriteComponent(
                 media.getTextureAtlasType(TextureAtlasType.HERO));
         hero.add(csc);
+
+        // Input
         hero.add(new InputComponent());
         PositionComponent position = new PositionComponent(
                 startField.x,
@@ -62,11 +64,17 @@ public class EntityFactory {
                 UnitConverter.tilesToPixels(1),
                 UnitConverter.tilesToPixels(1));
         hero.add(position);
+
+        // Camera Component
         hero.add(new CameraComponent());
+
+        // Collider
         ColliderComponent collider = new ColliderComponent(position.x, position.y, position
                 .width, position.height);
         area.addMovingCollider(collider.collider);
         hero.add(collider);
+
+        // Game State
         GameState gameState = SaveGameManager.loadSaveGame();
         hero.add(new SaveGameComponent(gameState));
         if(restoreSave) {
@@ -89,6 +97,12 @@ public class EntityFactory {
         return hero;
     }
 
+    /**
+     * Creates an entity with text content for objects which are readable by the player (signs,
+     * book shelves, and so on)
+     * @param mapInfo
+     * @return
+     */
     public Entity createSign(MapObjectInformation mapInfo) {
         Entity sign = new Entity();
         sign.add(new ConversationComponent(mapInfo.content));
@@ -100,6 +114,8 @@ public class EntityFactory {
     }
 
     public Entity createPerson(MapPersonInformation personInformation) {
+
+        // Set up path component
         Array<SkyDirection> path = new Array<SkyDirection>();
         if(!(personInformation.path == null || personInformation.path.isEmpty())) {
             String[] pathStr = personInformation.path.split("\\s*,\\s*");
@@ -107,6 +123,7 @@ public class EntityFactory {
                 path.add(SkyDirection.valueOf(s));
         }
 
+        // Use second Constructor
         return createPerson(new PositionComponent(personInformation.startPosition.x,
                 personInformation.startPosition.y, GlobalSettings.TILE_SIZE, GlobalSettings
                 .TILE_SIZE), path, personInformation.moves, personInformation.conversation,
@@ -123,10 +140,15 @@ public class EntityFactory {
      */
     private Entity createPerson(PositionComponent startField, Array<SkyDirection> path, boolean
             moves, String conv, boolean male, int spriteIndex) {
+
         Entity person = new Entity();
+
+        // Path
         PathComponent pathComp = new PathComponent(path, moves);
         pathComp.moving = moves;
         person.add(pathComp);
+
+        // Sprite
         person.add(new CharacterSpriteComponent(media.getPersonTextureAtlas(male,spriteIndex)));
         PositionComponent position = new PositionComponent(
                 startField.x,
@@ -134,10 +156,14 @@ public class EntityFactory {
                 UnitConverter.tilesToPixels(1),
                 UnitConverter.tilesToPixels(1));
         person.add(position);
+
+        // Collider
         ColliderComponent collider = new ColliderComponent(position.x, position.y, position
                 .width, position.height);
         area.addMovingCollider(collider.collider);
         person.add(collider);
+
+        // Conversation
         person.add(new ConversationComponent(conv));
         engine.addEntity(person);
 

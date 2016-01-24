@@ -11,24 +11,28 @@ import com.badlogic.ashley.core.Entity;
  *
  * Created by georg on 23.11.15.
  */
-public abstract class ComponentRetriever {
+public abstract class Components {
     /* ............................................................................ ATTRIBUTES .. */
-    public static ComponentMapper<PositionComponent> posCompMap =
+    public static ComponentMapper<PositionComponent> position =
             ComponentMapper.getFor(PositionComponent.class);
-    public static ComponentMapper<ColliderComponent> collCompMap =
+    public static ComponentMapper<ColliderComponent> collision =
             ComponentMapper.getFor(ColliderComponent.class);
-    public static ComponentMapper<PathComponent> pathCompMap =
+    public static ComponentMapper<PathComponent> path =
             ComponentMapper.getFor(PathComponent.class);
-    public static ComponentMapper<InputComponent> inpCompMap =
+    public static ComponentMapper<InputComponent> input =
             ComponentMapper.getFor(InputComponent.class);
-    public static ComponentMapper<ConversationComponent> convCompMap =
+    public static ComponentMapper<ConversationComponent> conversation =
             ComponentMapper.getFor(ConversationComponent.class);
-    public static ComponentMapper<TitleComponent> titleCompMap =
+    public static ComponentMapper<TitleComponent> title =
             ComponentMapper.getFor(TitleComponent.class);
-    public static ComponentMapper<SaveGameComponent> savCompMap =
+    public static ComponentMapper<SaveGameComponent> saveGame =
             ComponentMapper.getFor(SaveGameComponent.class);
     public static ComponentMapper<TeamComponent> team =
             ComponentMapper.getFor(TeamComponent.class);
+    public static ComponentMapper<CharacterSpriteComponent> characterSprite =
+            ComponentMapper.getFor(CharacterSpriteComponent.class);
+    public static ComponentMapper<SpriteComponent> sprite =
+            ComponentMapper.getFor(SpriteComponent.class);
     /* ........................................................................... CONSTRUCTOR .. */
     
     /* ............................................................................... METHODS .. */
@@ -41,7 +45,7 @@ public abstract class ComponentRetriever {
      */
     public static PositionComponent getPositionComponent(Entity entity) throws
             NullPointerException {
-        if(posCompMap.has(entity)) return posCompMap.get(entity);
+        if(position.has(entity)) return position.get(entity);
         else throw new NullPointerException("Given entity does not contain a PositionComponent.");
     }
 
@@ -53,7 +57,7 @@ public abstract class ComponentRetriever {
      */
     public static ColliderComponent getColliderComponent(Entity entity) throws
             NullPointerException {
-        if(collCompMap.has(entity)) return collCompMap.get(entity);
+        if(collision.has(entity)) return collision.get(entity);
         else throw new NullPointerException("Given entity does not contain a ColliderComponent.");
     }
 
@@ -65,7 +69,7 @@ public abstract class ComponentRetriever {
      */
     public static PathComponent getPathComponent(Entity entity) throws
             NullPointerException {
-        if(pathCompMap.has(entity)) return pathCompMap.get(entity);
+        if(path.has(entity)) return path.get(entity);
         else throw new NullPointerException("Given entity does not contain a PathComponent.");
     }
 
@@ -77,7 +81,7 @@ public abstract class ComponentRetriever {
      */
     public static InputComponent getInputComponent(Entity entity) throws
             NullPointerException {
-        if(inpCompMap.has(entity)) return inpCompMap.get(entity);
+        if(input.has(entity)) return input.get(entity);
         else throw new NullPointerException("Given entity does not contain a InputComponent.");
     }
     /* ..................................................................... GETTERS & SETTERS .. */

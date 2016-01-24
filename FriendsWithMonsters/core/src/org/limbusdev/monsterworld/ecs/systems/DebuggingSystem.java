@@ -1,6 +1,5 @@
 package org.limbusdev.monsterworld.ecs.systems;
 
-import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
@@ -9,17 +8,16 @@ import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
+import org.limbusdev.monsterworld.ecs.components.Components;
 import org.limbusdev.monsterworld.ecs.components.PositionComponent;
 
 /**
+ * Renders entities colider box
  * Created by georg on 23.11.15.
  */
 public class DebuggingSystem extends EntitySystem {
     /* ............................................................................ ATTRIBUTES .. */
     private ImmutableArray<Entity> entities;
-
-    private ComponentMapper<PositionComponent> pm
-            = ComponentMapper.getFor(PositionComponent.class);
     /* ........................................................................... CONSTRUCTOR .. */
     public DebuggingSystem() {}
     /* ............................................................................... METHODS .. */
@@ -32,12 +30,16 @@ public class DebuggingSystem extends EntitySystem {
         // TODO
     }
 
+    /**
+     * Render all components with a position component
+     * @param shpr
+     */
     public void render(ShapeRenderer shpr) {
         shpr.begin(ShapeRenderer.ShapeType.Line);
         shpr.setColor(Color.WHITE);
 
         for(Entity e : entities) {
-            PositionComponent p = pm.get(e);
+            PositionComponent p = Components.position.get(e);
             shpr.rect(p.x, p.y, p.width, p.height);
         }
 

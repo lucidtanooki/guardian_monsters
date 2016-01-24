@@ -1,7 +1,6 @@
 package org.limbusdev.monsterworld.ecs.components;
 
 import com.badlogic.ashley.core.Component;
-import com.badlogic.gdx.math.Vector2;
 
 /**
  * Simple {@link Component} which holds the {@link com.badlogic.ashley.core.Entity}'s x and y

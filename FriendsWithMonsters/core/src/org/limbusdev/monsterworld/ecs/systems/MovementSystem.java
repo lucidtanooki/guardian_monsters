@@ -10,7 +10,7 @@ import com.badlogic.gdx.utils.Array;
 
 import org.limbusdev.monsterworld.ecs.EntityComponentSystem;
 import org.limbusdev.monsterworld.ecs.components.CharacterSpriteComponent;
-import org.limbusdev.monsterworld.ecs.components.ComponentRetriever;
+import org.limbusdev.monsterworld.ecs.components.Components;
 import org.limbusdev.monsterworld.ecs.components.InputComponent;
 import org.limbusdev.monsterworld.ecs.components.PositionComponent;
 import org.limbusdev.monsterworld.ecs.entities.HeroEntity;
@@ -40,13 +40,15 @@ public class MovementSystem extends EntitySystem {
 
     public void update(float deltaTime) {
         for(Entity e : entities) {
+
+            // Handle Hero only
             if(e instanceof HeroEntity) {
-                PositionComponent position = ComponentRetriever.getPositionComponent(e);
-                Rectangle heroArea = new Rectangle(position.x, position.y, position.width,
-                        position.height);
+                PositionComponent pos = Components.getPositionComponent(e);
+                Rectangle heroArea = new Rectangle(pos.x, pos.y, pos.width, pos.height);
+
+                // Check whether hero enters warp area
                 for(WarpPoint w : warpPoints) {
                     if(heroArea.contains(w.x, w.y)) {
-                        // TODO change game area
                         System.out.println("Changing to Map " + w.targetID);
                         ecs.changeGameArea(w.targetID, w.targetWarpPointID);
                     }

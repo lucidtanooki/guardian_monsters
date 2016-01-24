@@ -5,21 +5,16 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 
-import org.limbusdev.monsterworld.ecs.components.ColliderComponent;
-import org.limbusdev.monsterworld.ecs.components.ComponentRetriever;
-import org.limbusdev.monsterworld.ecs.components.ConversationComponent;
-import org.limbusdev.monsterworld.ecs.components.InputComponent;
+import org.limbusdev.monsterworld.ecs.components.Components;
 import org.limbusdev.monsterworld.ecs.components.PositionComponent;
 import org.limbusdev.monsterworld.ecs.components.SaveGameComponent;
 import org.limbusdev.monsterworld.ecs.components.TeamComponent;
-import org.limbusdev.monsterworld.ecs.components.TitleComponent;
 import org.limbusdev.monsterworld.ecs.systems.OutdoorGameArea;
 import org.limbusdev.monsterworld.model.Monster;
 import org.limbusdev.monsterworld.utils.GameState;
@@ -46,15 +41,15 @@ public class SaveGameManager extends EntitySystem {
                 SaveGameComponent.class,
                 PositionComponent.class,
                 TeamComponent.class).get());
-        gameState = ComponentRetriever.savCompMap.get(savableEntities.first()).gameState;
+        gameState = Components.saveGame.get(savableEntities.first()).gameState;
         gameState.map = this.gameArea.areaID;
-        gameState.team = ComponentRetriever.team.get(savableEntities.first()).monsters;
+        gameState.team = Components.team.get(savableEntities.first()).monsters;
     }
 
     public void update(float deltaTime) {
         for (Entity entity : savableEntities) {
-            PositionComponent position = ComponentRetriever.getPositionComponent(entity);
-            SaveGameComponent saveGame = ComponentRetriever.savCompMap.get(entity);
+            PositionComponent position = Components.getPositionComponent(entity);
+            SaveGameComponent saveGame = Components.saveGame.get(entity);
             saveGame.gameState.x = position.x;
             saveGame.gameState.y = position.y;
         }

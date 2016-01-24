@@ -30,12 +30,11 @@ import org.limbusdev.monsterworld.ecs.components.TeamComponent;
 import org.limbusdev.monsterworld.enums.SFXType;
 import org.limbusdev.monsterworld.geometry.IntVector2;
 import org.limbusdev.monsterworld.model.Attack;
-import org.limbusdev.monsterworld.model.AttackAction;
 import org.limbusdev.monsterworld.model.BattlePositionQueue;
 import org.limbusdev.monsterworld.model.Monster;
 import org.limbusdev.monsterworld.model.MonsterInformation;
-import org.limbusdev.monsterworld.utils.DebugOutput;
 import org.limbusdev.monsterworld.utils.GlobalSettings;
+import org.limbusdev.monsterworld.utils.MonsterManager;
 
 
 /**
@@ -448,24 +447,24 @@ public class BattleHUD {
             // Defeated Monster was part of opponents team
             int exp = def.level * (def.HPfull + def.physStrength);
             exp /= team.size;
-            for (Monster m : team) if (m.HP > 0) m.getEXP(exp);
+            for (Monster m : team) if (m.HP > 0) MonsterManager.earnEXP(m,exp);
         }
     }
 
     /**
      * Changes the indicators position of the given team to the given position
-     * @param herosTeam
+     * @param heroesTeam
      * @param pos
      */
-    public void changeIndicatorPosition(boolean herosTeam, int pos) {
-        if(herosTeam) {
+    public void changeIndicatorPosition(boolean heroesTeam, int pos) {
+        if(heroesTeam) {
             switch(pos) {
                 case 2: indicatorHero.setPosition(IndPos.HERO_TOP.x, IndPos.HERO_TOP.y, Align.center);break;
                 case 1: indicatorHero.setPosition(IndPos.HERO_BOT.x, IndPos.HERO_BOT.y, Align.center);break;
                 default: indicatorHero.setPosition(IndPos.HERO_MID.x, IndPos.HERO_MID.y, Align.center);break;
             }
-            activateButton(pos);
             chosenTeamMonster=pos;
+            activateButton(pos);
         } else {
             switch(pos) {
                 case 5:
@@ -1143,8 +1142,8 @@ public class BattleHUD {
 
 
         // Create Attack Buttons
-        for(Attack a : team.get(indicatorHeroPos).attacks) {
-            TextButton tb = new TextButton(a.name, tbs);
+        for(Attack a : team.get(chosenTeamMonster).attacks) {
+            TextButton tb = new TextButton(a.name + "(" + a.damage + ")", tbs);
             tb.setWidth(128);
             tb.setHeight(23);
             attackVGroup.addActor(tb);
@@ -1160,12 +1159,6 @@ public class BattleHUD {
                 }
             });
         }
-        attackVGroup.addActor(new TextButton("1", tbs));
-        attackVGroup.addActor(new TextButton("2", tbs));
-        attackVGroup.addActor(new TextButton("3", tbs));
-        attackVGroup.addActor(new TextButton("4", tbs));
-        attackVGroup.addActor(new TextButton("5", tbs));
-        attackVGroup.addActor(new TextButton("6", tbs));
     }
 
 

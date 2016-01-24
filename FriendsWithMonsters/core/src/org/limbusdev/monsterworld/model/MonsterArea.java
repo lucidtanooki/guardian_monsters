@@ -14,12 +14,6 @@ public class MonsterArea extends IntRectangle {
     public Array<Float> attackProbabilities; // for 1, 2 or 3 monsters
     /* ........................................................................... CONSTRUCTOR .. */
 
-    public MonsterArea(int x, int y, int width, int height) {
-        super(x, y, width, height);
-        this.monsters = new Array<Integer>();
-        this.monsterProbabilities = new Array<Float>();
-        this.attackProbabilities = new Array<Float>();
-    }
 
     public MonsterArea(int x, int y, int width, int height, String monsterProperties, Array<Float>
             attProb) {

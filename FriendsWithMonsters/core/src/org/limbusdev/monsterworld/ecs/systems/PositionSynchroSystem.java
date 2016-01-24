@@ -8,10 +8,10 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
 
 import org.limbusdev.monsterworld.ecs.components.CharacterSpriteComponent;
-import org.limbusdev.monsterworld.ecs.components.InputComponent;
 import org.limbusdev.monsterworld.ecs.components.PositionComponent;
 
 /**
+ * Synchronizes Sprites of Entities with their Position
  * Created by georg on 22.11.15.
  */
 public class PositionSynchroSystem extends EntitySystem {
@@ -37,7 +37,7 @@ public class PositionSynchroSystem extends EntitySystem {
         for (Entity entity : entities) {
             PositionComponent position = pm.get(entity);
 
-            // Synchronize CharacterSprite with DynamicBody
+            // Synchronize CharacterSprite with PositionComponent
             if(entity.getComponent(CharacterSpriteComponent.class) != null) {
                 CharacterSpriteComponent sprite = sm.get(entity);
                 sprite.sprite.setPosition(position.x, position.y);

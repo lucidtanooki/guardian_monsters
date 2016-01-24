@@ -18,7 +18,8 @@ public class Monster extends Observable {
     public Array<Attack> attacks;
     public Array<Observer> observers;
     public static int INSTANCECOUNTER=0;
-    public int INSTANCEID;
+    public int INSTANCE_ID;
+    public int evolution;
 
 
     // -------------------------------------------------------------------------------------- STATUS
@@ -29,6 +30,10 @@ public class Monster extends Observable {
     public int HPfull, HP;
     public int magicStrength;
     public int MPfull, MP;
+
+    public int physDefFull, physDef;
+    public int magicDefFull, magicDef;
+
     public long recovTime;      // Time until monster can attack again
 
 
@@ -48,7 +53,7 @@ public class Monster extends Observable {
     /* ........................................................................... CONSTRUCTOR .. */
 
     public Monster() {
-        this.INSTANCEID=INSTANCECOUNTER;
+        this.INSTANCE_ID =INSTANCECOUNTER;
         INSTANCECOUNTER++;
         // STATUS
         this.ID = 1;
@@ -58,6 +63,8 @@ public class Monster extends Observable {
         this.HP = HPfull = 30;
         this.magicStrength = 5;
         this.MP = MPfull = 5;
+        this.physDefFull = physDef = 10;
+        this.magicDefFull = magicDef = 10;
         this.recovTime = 3000;
 
         // BATTLE
@@ -97,6 +104,8 @@ public class Monster extends Observable {
             this.HPfull+=2;
             this.MPfull+=1;
             this.magicStrength+=1;
+            this.physDefFull+=1;
+            this.magicDefFull+=1;
         }
         System.out.println("EXP: " + this.exp);
 
@@ -156,7 +165,7 @@ public class Monster extends Observable {
     @Override
     public boolean equals(Object o) {
         if(!(o instanceof  Monster)) return false;
-        if(((Monster)o).INSTANCEID == this.INSTANCEID) return true;
+        if(((Monster)o).INSTANCE_ID == this.INSTANCE_ID) return true;
         else return false;
     }
 

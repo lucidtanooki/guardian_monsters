@@ -134,23 +134,40 @@ public class BattleHUD {
         // ........................................................................... END OF BATTLE
         if (allKO) handleEndOfBattle();
 
+        reActivateMonsters();
+        updateExpBars();
+    }
 
-        // .............................................................................. RECOVERING
-        // Activate monsters if they have recovered
-        for(int i=0; i<6; i++) {
-            if (i < 3 && (
-                    team.get(i).ready
-                    && !team.get(i).waitingInQueue
-                    && !team.get(i).attackingRightNow
-                    && battleMenuButtons.get("attack").isDisabled())
-                    && i == chosenTeamMonster) {
-                System.out.println("Setting Attack Button active");
-                battleMenuButtons.get("attack").setDisabled(false);
-                battleMenuButtons.get("attack").addAction(
-                        Actions.sequence(Actions.alpha(1, .2f)));
+    /**
+     * Draw the HUD to the screen
+     */
+    public void draw() {
+        this.stage.draw();
+    }
+
+    public void updateMonsters() {
+        for(Monster m : this.team)         m.update();
+        for(Monster m : this.opponentTeam) m.update();
+        updateRecovBars(team);
+        updateRecovBars(opponentTeam);
+    }
+
+    /**
+     * Updates the recovering bars as visual feedback how long a monster has to wait
+     * @param team
+     */
+    private void updateRecovBars(Array<Monster> team) {
+        for(Monster m : team) {
+            if(!m.ready) {
+                // Update Waiting Bar
+                progressBars.get("Recov").get(m.battleFieldPosition).setValue(
+                        TimeUtils.timeSinceMillis(m.waitingSince)
+                                / (1f * m.recovTime) * 100f);
             }
         }
+    }
 
+    private void updateExpBars() {
         switch(team.size) {
             case 3:
                 monsterLvls.get(BatPos.HERO_TOP).setText(Integer.toString(team.get(BatPos
@@ -172,30 +189,29 @@ public class BattleHUD {
     }
 
     /**
-     * Draw the HUD to the screen
+     * Sets Attack button active as soon as monsters have recovered
      */
-    public void draw() {
-        this.stage.draw();
-    }
-
-    public void updateMonsters() {
-        for(Monster m : this.team)         m.update();
-        for(Monster m : this.opponentTeam) m.update();
-        updateRecovBars(team);
-        updateRecovBars(opponentTeam);
-    }
-
-    private void updateRecovBars(Array<Monster> team) {
-        for(Monster m : team) {
-            if(!m.ready) {
-                // Update Waiting Bar
-                progressBars.get("Recov").get(m.battleFieldPosition).setValue(
-                        TimeUtils.timeSinceMillis(m.waitingSince)
-                                / (1f * m.recovTime) * 100f);
+    private void reActivateMonsters() {
+        // .............................................................................. RECOVERING
+        // Activate monsters if they have recovered
+        for(int i=0; i<6; i++) {
+            if (i < 3 && (
+                    team.get(i).ready
+                            && !team.get(i).waitingInQueue
+                            && !team.get(i).attackingRightNow
+                            && battleMenuButtons.get("attack").isDisabled())
+                    && i == chosenTeamMonster) {
+                System.out.println("Setting Attack Button active");
+                battleMenuButtons.get("attack").setDisabled(false);
+                battleMenuButtons.get("attack").addAction(
+                        Actions.sequence(Actions.alpha(1, .2f)));
             }
         }
     }
 
+    /**
+     * Handles all monsters in the queue and starts/finishes their attacks
+     */
     public void updateAttackerQueue() {
         if(attackerQueue.size != 0) {
             Monster firstInQueue = attackerQueue.first();
@@ -409,11 +425,13 @@ public class BattleHUD {
 
 
     /**
-     * Check whether hero lost combat
+     * Handle End of Battle
      */
     public void handleEndOfBattle() {
+        // Stop AI
         aiPlayer.havePause(true);
 
+        // Check if Hero lost fight
         boolean heroLost = true;
         for(Monster m : team)
             if(m.HP > 0) heroLost = false;

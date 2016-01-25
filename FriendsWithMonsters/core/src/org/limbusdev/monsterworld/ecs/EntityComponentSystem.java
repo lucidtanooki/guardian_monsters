@@ -42,7 +42,7 @@ public class EntityComponentSystem {
     private EntityFactory entityFactory;
     private PositionComponent heroPosition;
     private MonsterWorld game;
-    private OutdoorGameArea gameArea;
+    public OutdoorGameArea gameArea;
     public SaveGameManager saveGameManager;
     public Entity hero;
     public HUD hud;
@@ -111,7 +111,7 @@ public class EntityComponentSystem {
         engine.addSystem(spriteSystem);
 
         // Input System
-        InputSystem inputSystem = new InputSystem(viewport, gameArea, hud, hero);
+        InputSystem inputSystem = new InputSystem(viewport, hud, hero);
         inputSystem.addedToEngine(engine);
         engine.addSystem(inputSystem);
 
@@ -126,7 +126,7 @@ public class EntityComponentSystem {
         engine.addSystem(characterSpriteSystem);
 
         // Movement System
-        MovementSystem movementSystem = new MovementSystem(this, gameArea.getWarpPoints());
+        MovementSystem movementSystem = new MovementSystem(this, gameArea.getWarpPoints(), viewport);
         movementSystem.addedToEngine(engine);
         engine.addSystem(movementSystem);
 

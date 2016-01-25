@@ -8,6 +8,7 @@ import org.limbusdev.monsterworld.ecs.components.CameraComponent;
 import org.limbusdev.monsterworld.ecs.components.CharacterSpriteComponent;
 import org.limbusdev.monsterworld.ecs.components.ColliderComponent;
 import org.limbusdev.monsterworld.ecs.components.ConversationComponent;
+import org.limbusdev.monsterworld.ecs.components.HeroComponent;
 import org.limbusdev.monsterworld.ecs.components.InputComponent;
 import org.limbusdev.monsterworld.ecs.components.PathComponent;
 import org.limbusdev.monsterworld.ecs.components.PositionComponent;
@@ -91,6 +92,9 @@ public class EntityFactory {
             team.monsters = gameState.team;
         }
         hero.add(team);
+
+        // Mark as Hero
+        hero.add(new HeroComponent());
 
         engine.addEntity(hero);
 

@@ -4,8 +4,6 @@ import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.core.Family;
-import com.badlogic.ashley.utils.ImmutableArray;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
@@ -13,15 +11,12 @@ import com.badlogic.gdx.utils.TimeUtils;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 import org.limbusdev.monsterworld.ecs.EntityComponentSystem;
-import org.limbusdev.monsterworld.ecs.components.CharacterSpriteComponent;
 import org.limbusdev.monsterworld.ecs.components.ColliderComponent;
 import org.limbusdev.monsterworld.ecs.components.Components;
 import org.limbusdev.monsterworld.ecs.components.HeroComponent;
 import org.limbusdev.monsterworld.ecs.components.InputComponent;
 import org.limbusdev.monsterworld.ecs.components.PositionComponent;
 import org.limbusdev.monsterworld.ecs.components.TeamComponent;
-import org.limbusdev.monsterworld.ecs.entities.HeroEntity;
-import org.limbusdev.monsterworld.enums.SkyDirection;
 import org.limbusdev.monsterworld.geometry.IntRectangle;
 import org.limbusdev.monsterworld.geometry.IntVector2;
 import org.limbusdev.monsterworld.geometry.WarpPoint;
@@ -89,7 +84,7 @@ public class MovementSystem extends EntitySystem {
      */
     public void makeOneStep(PositionComponent position, InputComponent input,
                             ColliderComponent collider) {
-        if(input.startMoving) {
+        if(input.startTileStep) {
 
             // Define potential next position according to the input direction
             switch(input.skyDir) {
@@ -116,7 +111,7 @@ public class MovementSystem extends EntitySystem {
             collider.collider.y = position.nextY;
             position.lastPixelStep = TimeUtils.millis();    // remember time of this step
             input.moving = true;
-            input.startMoving = false;  // because entity now started moving
+            input.startTileStep = false;  // because entity now started moving
         }
 
         // If entity is already moving, and last step has completed (long enough ago)
@@ -137,6 +132,7 @@ public class MovementSystem extends EntitySystem {
             }
 
 
+            // Movement completed
             if(!input.moving) {
 
                 // Check whether hero can get attacked by monsters

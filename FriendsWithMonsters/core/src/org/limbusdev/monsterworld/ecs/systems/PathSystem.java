@@ -23,9 +23,9 @@ import org.limbusdev.monsterworld.utils.GlobalSettings;
 public class PathSystem extends EntitySystem {
     /* ............................................................................ ATTRIBUTES .. */
     private ImmutableArray<Entity> entities;
-    private OutdoorGameArea gameArea;
+    private GameArea gameArea;
     /* ........................................................................... CONSTRUCTOR .. */
-    public PathSystem(OutdoorGameArea gameArea) {
+    public PathSystem(GameArea gameArea) {
         this.gameArea = gameArea;
     }
     /* ............................................................................... METHODS .. */

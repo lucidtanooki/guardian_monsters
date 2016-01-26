@@ -31,7 +31,7 @@ import org.limbusdev.monsterworld.utils.GlobalSettings;
  *
  * Created by georg on 21.11.15.
  */
-public class OutdoorGameArea {
+public class GameArea {
     /* ............................................................................ ATTRIBUTES .. */
     private TiledMap tiledMap;
     private OrthogonalTiledMapAndEntityRenderer mapRenderer;
@@ -47,7 +47,7 @@ public class OutdoorGameArea {
     public int areaID;
 
     /* ........................................................................... CONSTRUCTOR .. */
-    public OutdoorGameArea(int areaID, MediaManager media, int startPosID) {
+    public GameArea(int areaID, MediaManager media, int startPosID) {
         this.media = media;
         this.startPosition = new PositionComponent(0,0,0,0);
         this.colliders = new Array<IntRectangle>();

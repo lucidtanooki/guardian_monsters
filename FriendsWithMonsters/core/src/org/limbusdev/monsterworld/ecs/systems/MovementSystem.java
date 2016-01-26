@@ -141,13 +141,30 @@ public class MovementSystem extends EntitySystem {
             position.lastPixelStep = TimeUtils.millis();
 
             // Check if movement is complete
+            boolean movementComplete=false;
             switch (input.skyDir) {
-                case N: if(position.y == position.nextY) input.moving = false;break;
-                case E: if(position.x == position.nextX) input.moving = false;break;
-                case W: if(position.x == position.nextX) input.moving = false;break;
-                default: if(position.y == position.nextY) input.moving = false;break;
+                case N:
+                case S:
+                    movementComplete = (position.y == position.nextY);
+                    break;
+                case W:
+                case E:
+                    movementComplete = (position.x == position.nextX);
+                default:
+                    break;
             }
-
+            if(movementComplete) {
+                input.moving = false;
+                // Update Grid Position of Hero
+                switch(input.skyDir) {
+                    case N: position.onGrid.y+=1;break;
+                    case S: position.onGrid.y-=1;break;
+                    case E: position.onGrid.x+=1;break;
+                    case W: position.onGrid.x-=1;break;
+                    default: break;
+                }
+                System.out.println("Position on Grid: ("+position.onGrid.x+"|"+position.onGrid.y+")");
+            }
 
             // Movement completed
             if(!input.moving) {

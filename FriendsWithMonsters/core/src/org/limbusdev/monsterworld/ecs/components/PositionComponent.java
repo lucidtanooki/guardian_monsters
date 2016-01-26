@@ -2,6 +2,8 @@ package org.limbusdev.monsterworld.ecs.components;
 
 import com.badlogic.ashley.core.Component;
 
+import org.limbusdev.monsterworld.geometry.IntVector2;
+
 /**
  * Simple {@link Component} which holds the {@link com.badlogic.ashley.core.Entity}'s x and y
  * coordinates, it's width and height and the next potential position to move to. The time when
@@ -12,6 +14,7 @@ public class PositionComponent implements Component {
     /* ............................................................................ ATTRIBUTES .. */
     public int x,y,width,height, nextX, nextY;
     public long lastPixelStep; // ms
+    public IntVector2 onGrid;
     /* ........................................................................... CONSTRUCTOR .. */
     public PositionComponent(int x, int y, int width, int height) {
         this.x = x;
@@ -21,6 +24,7 @@ public class PositionComponent implements Component {
         this.nextX = 0;
         this.nextY = 0;
         this.lastPixelStep = 0;
+        this.onGrid = new IntVector2(0,0);
     }
     /* ............................................................................... METHODS .. */
     

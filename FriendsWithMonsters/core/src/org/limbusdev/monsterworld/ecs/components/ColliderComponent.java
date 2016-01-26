@@ -3,6 +3,7 @@ package org.limbusdev.monsterworld.ecs.components;
 import com.badlogic.ashley.core.Component;
 
 import org.limbusdev.monsterworld.geometry.IntRectangle;
+import org.limbusdev.monsterworld.geometry.IntVector2;
 
 /**
  * Simple {@link Component} to hold an {@link IntRectangle} to represent a moving {@link com

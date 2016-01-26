@@ -10,6 +10,13 @@ conversation
   orig: 500, 114
   offset: 0, 0
   index: -1
+stick_bg
+  rotate: false
+  xy: 503, 75
+  size: 180, 180
+  orig: 180, 180
+  offset: 0, 0
+  index: -1
 b192down
   rotate: false
   xy: 1, 91
@@ -19,9 +26,16 @@ b192down
   index: -1
 b192up
   rotate: false
-  xy: 503, 207
+  xy: 685, 207
   size: 192, 48
   orig: 192, 48
+  offset: 0, 0
+  index: -1
+bcorner64down
+  rotate: false
+  xy: 685, 109
+  size: 99, 96
+  orig: 99, 96
   offset: 0, 0
   index: -1
 title
@@ -31,16 +45,30 @@ title
   orig: 167, 28
   offset: 0, 0
   index: -1
+bcorner64up
+  rotate: false
+  xy: 786, 109
+  size: 99, 96
+  orig: 99, 96
+  offset: 0, 0
+  index: -1
 b1down
   rotate: false
-  xy: 195, 91
+  xy: 879, 207
   size: 128, 48
   orig: 128, 48
   offset: 0, 0
   index: -1
+stick
+  rotate: false
+  xy: 887, 109
+  size: 96, 96
+  orig: 96, 96
+  offset: 0, 0
+  index: -1
 b1up
   rotate: false
-  xy: 503, 157
+  xy: 195, 91
   size: 128, 48
   orig: 128, 48
   offset: 0, 0
@@ -59,44 +87,30 @@ exitConversationup
   orig: 44, 58
   offset: 0, 0
   index: -1
-bcorner64down
-  rotate: false
-  xy: 697, 159
-  size: 99, 96
-  orig: 99, 96
-  offset: 0, 0
-  index: -1
-bcorner64up
-  rotate: false
-  xy: 798, 159
-  size: 99, 96
-  orig: 99, 96
-  offset: 0, 0
-  index: -1
 bround64down
-  rotate: false
-  xy: 899, 189
-  size: 64, 66
-  orig: 64, 66
-  offset: 0, 0
-  index: -1
-bround64up
   rotate: false
   xy: 325, 73
   size: 64, 66
   orig: 64, 66
   offset: 0, 0
   index: -1
+bround64up
+  rotate: false
+  xy: 391, 73
+  size: 64, 66
+  orig: 64, 66
+  offset: 0, 0
+  index: -1
 black
   rotate: false
-  xy: 503, 147
+  xy: 685, 99
   size: 8, 8
   orig: 8, 8
   offset: 0, 0
   index: -1
 transparent
   rotate: false
-  xy: 93, 51
+  xy: 1009, 247
   size: 8, 8
   orig: 8, 8
   offset: 0, 0

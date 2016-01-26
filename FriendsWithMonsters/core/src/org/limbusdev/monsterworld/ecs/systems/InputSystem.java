@@ -18,10 +18,14 @@ import org.limbusdev.monsterworld.ecs.components.ConversationComponent;
 import org.limbusdev.monsterworld.ecs.components.HeroComponent;
 import org.limbusdev.monsterworld.ecs.components.PositionComponent;
 import org.limbusdev.monsterworld.ecs.components.TitleComponent;
+import org.limbusdev.monsterworld.ecs.entities.HeroEntity;
 import org.limbusdev.monsterworld.enums.SkyDirection;
 import org.limbusdev.monsterworld.geometry.IntVector2;
 import org.limbusdev.monsterworld.screens.HUD;
+import org.limbusdev.monsterworld.utils.EntityFamilies;
 import org.limbusdev.monsterworld.utils.GlobalSettings;
+
+import javax.xml.bind.annotation.XmlElementDecl;
 
 /**
  * The InputSystem extends {@link EntitySystem} and implements an{@link InputProcessor}. It enters
@@ -32,7 +36,6 @@ import org.limbusdev.monsterworld.utils.GlobalSettings;
 public class InputSystem extends EntitySystem implements InputProcessor {
     /* ............................................................................ ATTRIBUTES .. */
     private ImmutableArray<Entity> speakingEntities;
-    private ImmutableArray<Entity> signEntities;
 
     private Viewport viewport;
     private HUD hud;
@@ -52,18 +55,19 @@ public class InputSystem extends EntitySystem implements InputProcessor {
                 HeroComponent.class).get()).first();
 
         // Speaking: Signs, People and so on
-        speakingEntities = engine.getEntitiesFor(Family
-                .all(ConversationComponent.class)
-                .exclude(TitleComponent.class).get());
+        speakingEntities = engine.getEntitiesFor(EntityFamilies.living);
 
-        // Signs
-        signEntities = engine.getEntitiesFor(Family.all(
-                TitleComponent.class,
-                ConversationComponent.class
-        ).get());
     }
 
     public void update(float deltaTime) {
+
+        // Unblock talking entities if hero isn't talking anymore
+        for(Entity e : speakingEntities)
+                if(Components.path.get(e).talking)
+                    if(!Components.input.get(hero).talking)
+                        Components.path.get(e).talking = false;
+
+
         // If screen is touched continue movement
         if(Components.input.get(hero).touchDown) {
             Vector2 pos = new Vector2(Gdx.input.getX(), Gdx.input.getY());
@@ -136,6 +140,8 @@ public class InputSystem extends EntitySystem implements InputProcessor {
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         keyboard = false;
 
+        touchDragged(screenX, screenY, pointer);
+
         // Unproject touch position
         Vector2 touchPos = new Vector2(screenX, screenY);
         viewport.unproject(touchPos);
@@ -143,42 +149,49 @@ public class InputSystem extends EntitySystem implements InputProcessor {
         boolean touchedSpeaker, touchedSign;
         touchedSign = touchedSpeaker = false;
 
-        // Loop through entities with text and test weather they're near enough
-        for(Entity e : speakingEntities) {
-            ColliderComponent coll = Components.collision.get(e);
-            IntVector2 touchedAt = new IntVector2(MathUtils.round(touchPos.x),MathUtils.round(touchPos.y));
-            float dist = touchPos.dst(
-                    Components.collision.get(hero).collider.x
-                            + GlobalSettings.TILE_SIZE/2,
-                    Components.collision.get(hero).collider.y
-                            + GlobalSettings.TILE_SIZE/2
-            );
-            if(coll.collider.contains(touchedAt) && dist < GlobalSettings.TILE_SIZE*1.5) {
-                System.out.print("Touched speaker\n");
-                touchedSpeaker = true;
-                hud.openConversation(Components.conversation.get(e).text);
-            }
-        }
+        // Check touch distance to hero
+        PositionComponent heroPos = Components.position.get(hero);
+        float distHeroTouch = touchPos.dst(heroPos.getCenter().x, heroPos.getCenter().y);
 
-        for(Entity e : signEntities) {
-            ColliderComponent coll = Components.getColliderComponent(e);
-            IntVector2 touchedAt = new IntVector2(MathUtils.round(touchPos.x),MathUtils.round(touchPos.y));
-            float dist = touchPos.dst(
-                    Components.collision.get(hero).collider.x
-                            + GlobalSettings.TILE_SIZE/2,
-                    Components.collision.get(hero).collider.y
-                            + GlobalSettings.TILE_SIZE/2
-            );
-            if(coll.collider.contains(touchedAt) && dist < GlobalSettings.TILE_SIZE*1.5) {
-                System.out.print("Touched sign\n");
-                touchedSign = true;
-                hud.openSign(
-                        Components.title.get(e).text,
-                        Components.conversation.get(e).text);
+        // If touch ist near enough
+        if (distHeroTouch < GlobalSettings.TILE_SIZE * 1.5 &&
+                distHeroTouch > GlobalSettings.TILE_SIZE/2) {
+
+            Entity touchedEntity = checkForNearInteractiveObjects(
+                    Components.position.get(hero),
+                    decideMovementDirection(heroPos.x, heroPos.y, touchPos.x, touchPos.y));
+
+            // If there is an entity near enough
+            if (touchedEntity != null) {
+
+                // Living Entity
+                if (EntityFamilies.living.matches(touchedEntity)) {
+                    System.out.print("Touched speaker\n");
+                    touchedSpeaker = true;
+                    Components.path.get(touchedEntity).talking=true;
+                    SkyDirection talkDir;
+                    switch(Components.input.get(hero).skyDir) {
+                        case N: talkDir = SkyDirection.SSTOP;break;
+                        case S: talkDir = SkyDirection.NSTOP;break;
+                        case W: talkDir = SkyDirection.ESTOP;break;
+                        case E: talkDir = SkyDirection.WSTOP;break;
+                        default: talkDir = SkyDirection.SSTOP;
+                    }
+                    Components.path.get(touchedEntity).talkDir = talkDir;
+                    hud.openConversation(Components.conversation.get(touchedEntity).text);
+                }
+
+                // Sign Entity
+                if (EntityFamilies.signs.matches(touchedEntity)) {
+                    System.out.print("Touched sign\n");
+                    touchedSign = true;
+                    hud.openSign(
+                            Components.title.get(touchedEntity).text,
+                            Components.conversation.get(touchedEntity).text);
+                }
             }
         }
-        if(touchedSpeaker || touchedSign) Components.getInputComponent(hero).talking = true;
-        else touchDragged(screenX, screenY, pointer);
+        if (touchedSpeaker || touchedSign) Components.getInputComponent(hero).talking = true;
 
         return true;
     }
@@ -213,7 +226,35 @@ public class InputSystem extends EntitySystem implements InputProcessor {
      */
     public Entity checkForNearInteractiveObjects(PositionComponent pos, SkyDirection dir) {
 
-        return null;
+        Entity nearEntity=null;
+        IntVector2 checkGridCell = new IntVector2(pos.onGrid.x,pos.onGrid.y);
+
+        switch(dir) {
+            case N: checkGridCell.y+=1;break;
+            case S: checkGridCell.y-=1;break;
+            case E: checkGridCell.x+=1;break;
+            case W: checkGridCell.x-=1;break;
+            default: break;
+        }
+
+        if(GlobalSettings.DEBUGGING_ON)
+            System.out.println("Grid cell to be checked: ("+checkGridCell.x+"|"+checkGridCell.y+")");
+
+        for(Entity e : this.getEngine().getEntitiesFor(Family.all(PositionComponent.class).get())) {
+
+            if (Components.position.get(e) != null && !(e instanceof HeroEntity)) {
+                PositionComponent p = Components.position.get(e);
+
+                if(GlobalSettings.DEBUGGING_ON)
+                    System.out.println("Grid Cell of tested Entity: ("+p.onGrid.x+"|"+p.onGrid.y+")");
+
+                // Is there an entity?
+                if (p.onGrid.x == checkGridCell.x && p.onGrid.y == checkGridCell.y)
+                    nearEntity = e;
+            }
+        }
+
+        return nearEntity;
     }
 
     /**

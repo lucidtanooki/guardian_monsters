@@ -15,6 +15,7 @@ public class GlobalSettings {
     public static final int zoom = 2;
     public static final boolean DEBUGGING_ON = false;
     public static final int MONSTER_SPRITES = 22;
+    public static final boolean JoyStick = true;
     /* ........................................................................... CONSTRUCTOR .. */
     
     /* ............................................................................... METHODS .. */

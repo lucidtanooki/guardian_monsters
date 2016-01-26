@@ -8,8 +8,10 @@ import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 import org.limbusdev.monsterworld.ecs.components.ColliderComponent;
@@ -42,11 +44,13 @@ public class InputSystem extends EntitySystem implements InputProcessor {
     private Entity hero;
     private boolean keyboard;
     private SkyDirection lastDirKey;
+    private Circle joyStickArea, joyStick;
     /* ........................................................................... CONSTRUCTOR .. */
     public InputSystem(Viewport viewport, HUD hud) {
         this.viewport = viewport;
         this.hud = hud;
         keyboard = false;
+        this.joyStickArea = new Circle(98,98,90);
     }
     /* ............................................................................... METHODS .. */
     public void addedToEngine(Engine engine) {
@@ -70,19 +74,37 @@ public class InputSystem extends EntitySystem implements InputProcessor {
 
         // If screen is touched continue movement
         if(Components.input.get(hero).touchDown) {
-            Vector2 pos = new Vector2(Gdx.input.getX(), Gdx.input.getY());
-            viewport.unproject(pos);
-            PositionComponent heroPos = Components.position.get(hero);
+            Vector3 touchPos = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
 
-            if(!Components.input.get(hero).moving) {
-                // Touch
-                if(!keyboard) {
-                    Components.input.get(hero).skyDir
-                            = decideMovementDirection(heroPos.x, heroPos.y, pos.x, pos.y);
-                    Components.input.get(hero).startMoving = decideIfToMove(heroPos.x, heroPos.y, pos);
+            if(GlobalSettings.JoyStick) {
+                hud.stage.getCamera().unproject(touchPos);
+                // Use Display-Joystick
+                if(joyStickArea.contains(touchPos.x, touchPos.y)) {
+                    hud.updateJoyStick(touchPos.x, touchPos.y);
+                    if (!Components.input.get(hero).moving) {
+                        Components.input.get(hero).skyDir
+                                = decideMovementDirection(98, 98, touchPos.x, touchPos.y);
+                        Components.input.get(hero).startMoving = decideIfToMove(98, 98,
+                                new Vector2(touchPos.x, touchPos.y));
+                    }
                 } else {
-                    Components.input.get(hero).skyDir = lastDirKey;
-                    Components.input.get(hero).startMoving = true;
+                    // Reset JoyStick Position
+                    hud.resetJoyStick();
+                }
+            } else {
+                viewport.unproject(touchPos);
+                PositionComponent heroPos = Components.position.get(hero);
+                if (!Components.input.get(hero).moving) {
+                    // Touch
+                    if (!keyboard) {
+                        Components.input.get(hero).skyDir
+                                = decideMovementDirection(heroPos.x, heroPos.y, touchPos.x, touchPos.y);
+                        Components.input.get(hero).startMoving = decideIfToMove(heroPos.x, heroPos.y,
+                                new Vector2(touchPos.x, touchPos.y));
+                    } else {
+                        Components.input.get(hero).skyDir = lastDirKey;
+                        Components.input.get(hero).startMoving = true;
+                    }
                 }
             }
 
@@ -200,6 +222,7 @@ public class InputSystem extends EntitySystem implements InputProcessor {
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
         // Stop Hero Movement
         Components.input.get(hero).touchDown = false;
+        if(GlobalSettings.JoyStick) hud.resetJoyStick();
         return true;
     }
 

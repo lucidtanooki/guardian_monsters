@@ -8,6 +8,7 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
 
 import org.limbusdev.monsterworld.ecs.components.CharacterSpriteComponent;
+import org.limbusdev.monsterworld.ecs.components.Components;
 import org.limbusdev.monsterworld.ecs.components.PositionComponent;
 
 /**
@@ -17,11 +18,6 @@ import org.limbusdev.monsterworld.ecs.components.PositionComponent;
 public class PositionSynchroSystem extends EntitySystem {
     /* ............................................................................ ATTRIBUTES .. */
     private ImmutableArray<Entity> entities;
-
-    private ComponentMapper<CharacterSpriteComponent> sm
-            = ComponentMapper.getFor(CharacterSpriteComponent.class);
-    private ComponentMapper<PositionComponent> pm
-            = ComponentMapper.getFor(PositionComponent.class);
 
     /* ........................................................................... CONSTRUCTOR .. */
     public PositionSynchroSystem() {};
@@ -35,11 +31,11 @@ public class PositionSynchroSystem extends EntitySystem {
 
     public void update(float deltaTime) {
         for (Entity entity : entities) {
-            PositionComponent position = pm.get(entity);
+            PositionComponent position = Components.position.get(entity);
 
             // Synchronize CharacterSprite with PositionComponent
             if(entity.getComponent(CharacterSpriteComponent.class) != null) {
-                CharacterSpriteComponent sprite = sm.get(entity);
+                CharacterSpriteComponent sprite = Components.characterSprite.get(entity);
                 sprite.sprite.setPosition(position.x, position.y);
             }
         }

@@ -19,6 +19,7 @@ import org.limbusdev.monsterworld.ecs.entities.HeroEntity;
 import org.limbusdev.monsterworld.ecs.systems.GameArea;
 import org.limbusdev.monsterworld.enums.SkyDirection;
 import org.limbusdev.monsterworld.enums.TextureAtlasType;
+import org.limbusdev.monsterworld.geometry.IntVector2;
 import org.limbusdev.monsterworld.geometry.MapObjectInformation;
 import org.limbusdev.monsterworld.geometry.MapPersonInformation;
 import org.limbusdev.monsterworld.managers.MediaManager;
@@ -64,6 +65,11 @@ public class EntityFactory {
                 startField.y,
                 UnitConverter.tilesToPixels(1),
                 UnitConverter.tilesToPixels(1));
+
+        // Position
+        position.onGrid = new IntVector2(
+                position.x/GlobalSettings.TILE_SIZE,
+                position.y/GlobalSettings.TILE_SIZE);
         hero.add(position);
 
         // Camera Component
@@ -81,6 +87,7 @@ public class EntityFactory {
         if(restoreSave) {
             position.x = gameState.x;
             position.y = gameState.y;
+            position.onGrid = new IntVector2(gameState.gridx, gameState.gridy);
         }
 
         // Add Team

@@ -9,28 +9,20 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.TimeUtils;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 import org.limbusdev.monsterworld.ecs.components.ColliderComponent;
 import org.limbusdev.monsterworld.ecs.components.Components;
 import org.limbusdev.monsterworld.ecs.components.ConversationComponent;
 import org.limbusdev.monsterworld.ecs.components.HeroComponent;
-import org.limbusdev.monsterworld.ecs.components.InputComponent;
 import org.limbusdev.monsterworld.ecs.components.PositionComponent;
-import org.limbusdev.monsterworld.ecs.components.TeamComponent;
 import org.limbusdev.monsterworld.ecs.components.TitleComponent;
 import org.limbusdev.monsterworld.enums.SkyDirection;
-import org.limbusdev.monsterworld.geometry.IntRectangle;
 import org.limbusdev.monsterworld.geometry.IntVector2;
-import org.limbusdev.monsterworld.model.BattleFactory;
-import org.limbusdev.monsterworld.model.MonsterArea;
 import org.limbusdev.monsterworld.screens.HUD;
 import org.limbusdev.monsterworld.utils.GlobalSettings;
-
-import javax.xml.bind.annotation.XmlElementDecl;
 
 /**
  * The InputSystem extends {@link EntitySystem} and implements an{@link InputProcessor}. It enters
@@ -73,47 +65,65 @@ public class InputSystem extends EntitySystem implements InputProcessor {
 
     public void update(float deltaTime) {
         if(Components.input.get(hero).touchDown) {
-            // Set Hero Movement Direction
             Vector2 pos = new Vector2(Gdx.input.getX(), Gdx.input.getY());
             viewport.unproject(pos);
             PositionComponent heroPos = Components.position.get(hero);
 
-            if(!Components.input.get(hero).moving && !keyboard)
+            // Touch Input
+            if(!Components.input.get(hero).moving && !keyboard) {
                 Components.input.get(hero).skyDir
-                    = decideMovementDirection(heroPos.x, heroPos.y, pos.x, pos.y);
+                        = decideMovementDirection(heroPos.x, heroPos.y, pos.x, pos.y);
+                Components.input.get(hero).startTileStep = decideIfToMove(heroPos.x, heroPos.y, pos);
+            }
 
-            if(!Components.input.get(hero).moving)
-                if(decideIfToMove(heroPos.x, heroPos.y, pos))
-                    Components.input.get(hero).startMoving = true;
+            // Keyboard input
+            if(!Components.input.get(hero).moving && keyboard) {
+                Components.input.get(hero).startTileStep = true;
+            }
+
         }
     }
 
     @Override
     public boolean keyDown(int keycode) {
-        if(Input.Keys.UP == keycode || Input.Keys.DOWN == keycode || Input.Keys.LEFT == keycode
-            || Input.Keys.RIGHT == keycode) {
-            if(!Components.input.get(hero).moving) {
-                Components.input.get(hero).startMoving = true;
-                Components.input.get(hero).touchDown = true;
-                switch (keycode) {
-                    case Input.Keys.UP: Components.input.get(hero).skyDir = SkyDirection.N;break;
-                    case Input.Keys.DOWN: Components.input.get(hero).skyDir = SkyDirection.S;break;
-                    case Input.Keys.LEFT: Components.input.get(hero).skyDir = SkyDirection.W;break;
-                    case Input.Keys.RIGHT: Components.input.get(hero).skyDir = SkyDirection.E;break;
-                    default: break;
-                }
-                keyboard = true;
-            }
+        // If the pressed key is one of the arrow keys
+        SkyDirection typedDir = null;
+        switch (keycode) {
+            case Input.Keys.UP:
+                typedDir = SkyDirection.N;
+                break;
+            case Input.Keys.DOWN:
+                typedDir = SkyDirection.S;
+                break;
+            case Input.Keys.LEFT:
+                typedDir = SkyDirection.W;
+                break;
+            case Input.Keys.RIGHT:
+                typedDir = SkyDirection.E;
+                break;
+            default:
+                break;
         }
+        keyboard = true;
+
+        if (typedDir != null) {
+            Components.input.get(hero).startTileStep = true;
+            Components.input.get(hero).touchDown = true;
+        }
+
+        if (!Components.input.get(hero).moving) Components.input.get(hero).skyDir = typedDir;
         return false;
     }
 
     @Override
     public boolean keyUp(int keycode) {
-        if(!Gdx.input.isKeyPressed(Input.Keys.UP) && !Gdx.input.isKeyPressed(Input.Keys.DOWN)
-                && !Gdx.input.isKeyPressed(Input.Keys.LEFT) && !Gdx.input.isKeyPressed(Input.Keys
-                .RIGHT)) {
-            // No direction keys pressed
+        // If none of the arrow keys is pressed
+        if(!Gdx.input.isKeyPressed(Input.Keys.UP) &&
+                !Gdx.input.isKeyPressed(Input.Keys.DOWN) &&
+                !Gdx.input.isKeyPressed(Input.Keys.LEFT) &&
+                !Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+
+            Components.input.get(hero).startTileStep = false;
             Components.input.get(hero).touchDown = false;
             return true;
         }
@@ -176,7 +186,6 @@ public class InputSystem extends EntitySystem implements InputProcessor {
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
         // Stop Hero Movement
-        Components.input.get(hero).startMoving = false;
         Components.input.get(hero).touchDown = false;
         return true;
     }

@@ -15,7 +15,7 @@ import org.limbusdev.monsterworld.ecs.components.Components;
 import org.limbusdev.monsterworld.ecs.components.PositionComponent;
 import org.limbusdev.monsterworld.ecs.components.SaveGameComponent;
 import org.limbusdev.monsterworld.ecs.components.TeamComponent;
-import org.limbusdev.monsterworld.ecs.systems.OutdoorGameArea;
+import org.limbusdev.monsterworld.ecs.systems.GameArea;
 import org.limbusdev.monsterworld.model.Monster;
 import org.limbusdev.monsterworld.utils.GameState;
 
@@ -27,10 +27,10 @@ public class SaveGameManager extends EntitySystem {
     /* ............................................................................ ATTRIBUTES .. */
     private ImmutableArray<Entity> savableEntities;
     private GameState gameState;
-    private OutdoorGameArea gameArea;
+    private GameArea gameArea;
     /* ........................................................................... CONSTRUCTOR .. */
 
-    public SaveGameManager(OutdoorGameArea gameArea) {
+    public SaveGameManager(GameArea gameArea) {
         super();
         this.gameArea = gameArea;
     }

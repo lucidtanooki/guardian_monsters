@@ -16,7 +16,7 @@ import org.limbusdev.monsterworld.ecs.components.SaveGameComponent;
 import org.limbusdev.monsterworld.ecs.components.TeamComponent;
 import org.limbusdev.monsterworld.ecs.components.TitleComponent;
 import org.limbusdev.monsterworld.ecs.entities.HeroEntity;
-import org.limbusdev.monsterworld.ecs.systems.OutdoorGameArea;
+import org.limbusdev.monsterworld.ecs.systems.GameArea;
 import org.limbusdev.monsterworld.enums.SkyDirection;
 import org.limbusdev.monsterworld.enums.TextureAtlasType;
 import org.limbusdev.monsterworld.geometry.MapObjectInformation;
@@ -36,9 +36,9 @@ public class EntityFactory {
     /* ............................................................................ ATTRIBUTES .. */
     private Engine engine;
     private MediaManager media;
-    private OutdoorGameArea area;
+    private GameArea area;
     /* ........................................................................... CONSTRUCTOR .. */
-    public EntityFactory(Engine engine, MediaManager media, OutdoorGameArea area) {
+    public EntityFactory(Engine engine, MediaManager media, GameArea area) {
         this.engine = engine;
         this.media = media;
         this.area = area;

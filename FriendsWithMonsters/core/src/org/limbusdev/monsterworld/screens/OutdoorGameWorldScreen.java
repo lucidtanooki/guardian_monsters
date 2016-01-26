@@ -16,13 +16,10 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 
 import org.limbusdev.monsterworld.MonsterWorld;
 import org.limbusdev.monsterworld.ecs.EntityComponentSystem;
-import org.limbusdev.monsterworld.ecs.systems.OutdoorGameArea;
+import org.limbusdev.monsterworld.ecs.systems.GameArea;
 import org.limbusdev.monsterworld.managers.SaveGameManager;
 import org.limbusdev.monsterworld.utils.GlobalSettings;
 import org.limbusdev.monsterworld.utils.UnitConverter;
-
-
-import box2dLight.RayHandler;
 
 /**
  * Created by georg on 21.11.15.
@@ -38,7 +35,7 @@ public class OutdoorGameWorldScreen implements Screen {
     private ShapeRenderer       shpRend;
     private BitmapFont          font;
 
-    private OutdoorGameArea gameArea;
+    private GameArea gameArea;
     private EntityComponentSystem ECS;
     private InputMultiplexer inputMultiplexer;
 
@@ -48,7 +45,7 @@ public class OutdoorGameWorldScreen implements Screen {
             fromSave) {
         this.game = game;
         setUpRendering();
-        this.gameArea = new OutdoorGameArea(mapID, game.media, startPosID);
+        this.gameArea = new GameArea(mapID, game.media, startPosID);
         SaveGameManager saveGameManager = new SaveGameManager(this.gameArea);
         this.ECS = new EntityComponentSystem(game, viewport, gameArea, fromSave, this, saveGameManager);
 

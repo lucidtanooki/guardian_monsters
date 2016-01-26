@@ -6,20 +6,18 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 import org.limbusdev.monsterworld.MonsterWorld;
 import org.limbusdev.monsterworld.ecs.components.Components;
 import org.limbusdev.monsterworld.ecs.components.PositionComponent;
 import org.limbusdev.monsterworld.ecs.entities.HeroEntity;
-import org.limbusdev.monsterworld.ecs.entities.MonsterEntity;
 import org.limbusdev.monsterworld.ecs.systems.CameraSystem;
 import org.limbusdev.monsterworld.ecs.systems.CharacterSpriteSystem;
 import org.limbusdev.monsterworld.ecs.systems.DebuggingSystem;
 import org.limbusdev.monsterworld.ecs.systems.InputSystem;
 import org.limbusdev.monsterworld.ecs.systems.MovementSystem;
-import org.limbusdev.monsterworld.ecs.systems.OutdoorGameArea;
+import org.limbusdev.monsterworld.ecs.systems.GameArea;
 import org.limbusdev.monsterworld.ecs.systems.PathSystem;
 import org.limbusdev.monsterworld.ecs.systems.PositionSynchroSystem;
 import org.limbusdev.monsterworld.ecs.systems.SpriteSystem;
@@ -42,7 +40,7 @@ public class EntityComponentSystem {
     private EntityFactory entityFactory;
     private PositionComponent heroPosition;
     private MonsterWorld game;
-    public OutdoorGameArea gameArea;
+    public GameArea gameArea;
     public SaveGameManager saveGameManager;
     public Entity hero;
     public HUD hud;
@@ -59,7 +57,7 @@ public class EntityComponentSystem {
      * @param sgm           the SaveGameManager
      */
     public EntityComponentSystem(
-            MonsterWorld game, Viewport viewport, OutdoorGameArea gameArea, boolean
+            MonsterWorld game, Viewport viewport, GameArea gameArea, boolean
             fromSave, OutdoorGameWorldScreen gameScreen, SaveGameManager sgm
     ) {
 
@@ -104,7 +102,7 @@ public class EntityComponentSystem {
     }
 
 
-    public void setUpEntitySystems(OutdoorGameArea gameArea, Viewport viewport, HUD hud) {
+    public void setUpEntitySystems(GameArea gameArea, Viewport viewport, HUD hud) {
         // Sprite System
         SpriteSystem spriteSystem = new SpriteSystem(gameArea.getMapRenderer());
         spriteSystem.addedToEngine(engine);

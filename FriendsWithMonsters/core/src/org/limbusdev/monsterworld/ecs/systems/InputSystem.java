@@ -6,6 +6,7 @@ import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
@@ -16,6 +17,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import org.limbusdev.monsterworld.ecs.components.ColliderComponent;
 import org.limbusdev.monsterworld.ecs.components.Components;
 import org.limbusdev.monsterworld.ecs.components.ConversationComponent;
+import org.limbusdev.monsterworld.ecs.components.HeroComponent;
 import org.limbusdev.monsterworld.ecs.components.InputComponent;
 import org.limbusdev.monsterworld.ecs.components.PositionComponent;
 import org.limbusdev.monsterworld.ecs.components.TeamComponent;
@@ -28,6 +30,8 @@ import org.limbusdev.monsterworld.model.MonsterArea;
 import org.limbusdev.monsterworld.screens.HUD;
 import org.limbusdev.monsterworld.utils.GlobalSettings;
 
+import javax.xml.bind.annotation.XmlElementDecl;
+
 /**
  * The InputSystem extends {@link EntitySystem} and implements an{@link InputProcessor}. It enters
  * all catched input into the hero's InputComponent so it can be processed by other systems later.
@@ -36,26 +40,24 @@ import org.limbusdev.monsterworld.utils.GlobalSettings;
  */
 public class InputSystem extends EntitySystem implements InputProcessor {
     /* ............................................................................ ATTRIBUTES .. */
-    private ImmutableArray<Entity> entities;
     private ImmutableArray<Entity> speakingEntities;
     private ImmutableArray<Entity> signEntities;
 
     private Viewport viewport;
     private HUD hud;
     private Entity hero;
+    private boolean keyboard;
     /* ........................................................................... CONSTRUCTOR .. */
-    public InputSystem(Viewport viewport, HUD hud, Entity hero) {
+    public InputSystem(Viewport viewport, HUD hud) {
         this.viewport = viewport;
         this.hud = hud;
-        this.hero = hero;
+        keyboard = false;
     }
     /* ............................................................................... METHODS .. */
     public void addedToEngine(Engine engine) {
         // Hero
-        entities = engine.getEntitiesFor(Family.all(
-                InputComponent.class,
-                PositionComponent.class,
-                ColliderComponent.class).get());
+        hero = engine.getEntitiesFor(Family.all(
+                HeroComponent.class).get()).first();
 
         // Speaking: Signs, People and so on
         speakingEntities = engine.getEntitiesFor(Family
@@ -70,16 +72,52 @@ public class InputSystem extends EntitySystem implements InputProcessor {
     }
 
     public void update(float deltaTime) {
-        // TODO
+        if(Components.input.get(hero).touchDown) {
+            // Set Hero Movement Direction
+            Vector2 pos = new Vector2(Gdx.input.getX(), Gdx.input.getY());
+            viewport.unproject(pos);
+            PositionComponent heroPos = Components.position.get(hero);
+
+            if(!Components.input.get(hero).moving && !keyboard)
+                Components.input.get(hero).skyDir
+                    = decideMovementDirection(heroPos.x, heroPos.y, pos.x, pos.y);
+
+            if(!Components.input.get(hero).moving)
+                if(decideIfToMove(heroPos.x, heroPos.y, pos))
+                    Components.input.get(hero).startMoving = true;
+        }
     }
 
     @Override
     public boolean keyDown(int keycode) {
+        if(Input.Keys.UP == keycode || Input.Keys.DOWN == keycode || Input.Keys.LEFT == keycode
+            || Input.Keys.RIGHT == keycode) {
+            if(!Components.input.get(hero).moving) {
+                Components.input.get(hero).startMoving = true;
+                Components.input.get(hero).touchDown = true;
+                switch (keycode) {
+                    case Input.Keys.UP: Components.input.get(hero).skyDir = SkyDirection.N;break;
+                    case Input.Keys.DOWN: Components.input.get(hero).skyDir = SkyDirection.S;break;
+                    case Input.Keys.LEFT: Components.input.get(hero).skyDir = SkyDirection.W;break;
+                    case Input.Keys.RIGHT: Components.input.get(hero).skyDir = SkyDirection.E;break;
+                    default: break;
+                }
+                keyboard = true;
+            }
+        }
         return false;
     }
 
     @Override
     public boolean keyUp(int keycode) {
+        if(!Gdx.input.isKeyPressed(Input.Keys.UP) && !Gdx.input.isKeyPressed(Input.Keys.DOWN)
+                && !Gdx.input.isKeyPressed(Input.Keys.LEFT) && !Gdx.input.isKeyPressed(Input.Keys
+                .RIGHT)) {
+            // No direction keys pressed
+            Components.input.get(hero).touchDown = false;
+            return true;
+        }
+        keyboard = false;
         return false;
     }
 
@@ -97,7 +135,7 @@ public class InputSystem extends EntitySystem implements InputProcessor {
 
         // Loop through entities with text and test weather they're near enough
         for(Entity e : speakingEntities) {
-            ColliderComponent coll = Components.getColliderComponent(e);
+            ColliderComponent coll = Components.collision.get(e);
             IntVector2 touchedAt = new IntVector2(MathUtils.round(touchPos.x),MathUtils.round(touchPos.y));
             float dist = touchPos.dst(
                     Components.collision.get(hero).collider.x
@@ -137,21 +175,15 @@ public class InputSystem extends EntitySystem implements InputProcessor {
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        for (Entity entity : entities) {
-            InputComponent input = Components.getInputComponent(entity);
-            input.startMoving = false;
-        }
+        // Stop Hero Movement
+        Components.input.get(hero).startMoving = false;
+        Components.input.get(hero).touchDown = false;
         return true;
     }
 
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
-        for (Entity entity : entities) {
-            InputComponent input = Components.getInputComponent(entity);
-            if(!input.moving) {
-                input.startMoving = true;
-            }
-        }
+        Components.input.get(hero).touchDown = true;
         return true;
     }
 
@@ -163,6 +195,57 @@ public class InputSystem extends EntitySystem implements InputProcessor {
     @Override
     public boolean scrolled(int amount) {
         return false;
+    }
+
+    /**
+     * Returns the movement direction from given start and target position
+     * @param entX  Start Direction X
+     * @param entY  Start Direction Y
+     * @param targetX
+     * @param targetY
+     * @return Main Direction
+     */
+    public SkyDirection decideMovementDirection(int entX, int entY, float targetX, float targetY) {
+        SkyDirection dir;
+        int tileCenter = GlobalSettings.TILE_SIZE/2;
+
+        if(Math.abs(targetY - (entY + tileCenter)) > Math.abs(targetX - (entX+tileCenter))) {
+            // Vertical Movement
+            if(targetY > (entY+tileCenter)) {
+                // Hero moving north
+                dir = SkyDirection.N;
+            } else {
+                // Hero moving south
+                dir = SkyDirection.S;
+            }
+        } else {
+            // Horizontal Movement
+            if(targetX > (entX+tileCenter)) {
+                // Hero moving east
+                dir = SkyDirection.E;
+            } else {
+                // Hero moving west
+                dir = SkyDirection.W;
+            }
+        }
+
+        return dir;
+    }
+
+    /**
+     * Move only if touch appears far enough from hero
+     * @param entX
+     * @param entY
+     * @param target
+     * @return
+     */
+    public boolean decideIfToMove(int entX, int entY, Vector2 target) {
+        boolean move;
+        if(target.dst(entX+GlobalSettings.TILE_SIZE/2,entY+GlobalSettings.TILE_SIZE/2) >
+                2*GlobalSettings.TILE_SIZE) move = true;
+        else
+            move = false;
+        return move;
     }
     /* ..................................................................... GETTERS & SETTERS .. */
 }

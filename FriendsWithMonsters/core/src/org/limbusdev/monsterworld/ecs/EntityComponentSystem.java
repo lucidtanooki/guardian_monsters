@@ -111,7 +111,7 @@ public class EntityComponentSystem {
         engine.addSystem(spriteSystem);
 
         // Input System
-        InputSystem inputSystem = new InputSystem(viewport, hud, hero);
+        InputSystem inputSystem = new InputSystem(viewport, hud);
         inputSystem.addedToEngine(engine);
         engine.addSystem(inputSystem);
 

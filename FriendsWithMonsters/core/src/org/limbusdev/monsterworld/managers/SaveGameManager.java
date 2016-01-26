@@ -52,6 +52,8 @@ public class SaveGameManager extends EntitySystem {
             SaveGameComponent saveGame = Components.saveGame.get(entity);
             saveGame.gameState.x = position.x;
             saveGame.gameState.y = position.y;
+            saveGame.gameState.gridx = position.onGrid.x;
+            saveGame.gameState.gridy = position.onGrid.y;
         }
     }
 
@@ -83,9 +85,6 @@ public class SaveGameManager extends EntitySystem {
     public static GameState loadSaveGame() {
         GameState gameState = new GameState(0,0,0);
         Preferences prefs = Gdx.app.getPreferences("saveGame");
-        if(true) {
-            // TODO
-        }
 
         Json json = new Json();
         json.addClassTag("Monster", Monster.class);
@@ -98,6 +97,8 @@ public class SaveGameManager extends EntitySystem {
             gameState.map = gs.map;
             gameState.x = gs.x;
             gameState.y = gs.y;
+            gameState.gridx = gs.gridx;
+            gameState.gridy = gs.gridy;
         }
 
         return gameState;

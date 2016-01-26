@@ -8,7 +8,9 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
 
 import org.limbusdev.monsterworld.ecs.components.CharacterSpriteComponent;
+import org.limbusdev.monsterworld.ecs.components.ColliderComponent;
 import org.limbusdev.monsterworld.ecs.components.Components;
+import org.limbusdev.monsterworld.ecs.components.HeroComponent;
 import org.limbusdev.monsterworld.ecs.components.PositionComponent;
 
 /**

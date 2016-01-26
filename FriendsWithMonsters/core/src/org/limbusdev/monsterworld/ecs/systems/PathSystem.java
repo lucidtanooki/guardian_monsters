@@ -44,6 +44,7 @@ public class PathSystem extends EntitySystem {
             ColliderComponent collider = Components.getColliderComponent(entity);
             PathComponent path = Components.getPathComponent(entity);
             makeOneStep(position, path, collider);
+            position.updateGridPosition();
         }
     }
 
@@ -80,7 +81,7 @@ public class PathSystem extends EntitySystem {
 
         // If moving, check whether next pixel step should take place
         if(!path.staticEntity && path.moving && TimeUtils.timeSinceMillis(position.lastPixelStep) >
-                GlobalSettings.ONE_STEP_DURATION_PERSON) {
+                GlobalSettings.ONE_STEP_DURATION_PERSON && !path.talking) {
             switch(path.path.get(path.currentDir)) {
                 case N: position.y += 1;break;
                 case W: position.x -= 1;break;

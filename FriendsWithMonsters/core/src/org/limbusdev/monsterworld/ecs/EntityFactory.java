@@ -119,7 +119,9 @@ public class EntityFactory {
         sign.add(new ConversationComponent(mapInfo.content));
         sign.add(new TitleComponent(mapInfo.title));
         sign.add(new ColliderComponent(
-                mapInfo.x, mapInfo.y ,GlobalSettings.TILE_SIZE, GlobalSettings.TILE_SIZE));
+                mapInfo.x, mapInfo.y, GlobalSettings.TILE_SIZE, GlobalSettings.TILE_SIZE));
+        sign.add(new PositionComponent(mapInfo.x, mapInfo.y,
+                GlobalSettings.TILE_SIZE, GlobalSettings.TILE_SIZE));
         engine.addEntity(sign);
         return sign;
     }
@@ -161,6 +163,8 @@ public class EntityFactory {
 
         // Sprite
         person.add(new CharacterSpriteComponent(media.getPersonTextureAtlas(male,spriteIndex)));
+
+        // Position
         PositionComponent position = new PositionComponent(
                 startField.x,
                 startField.y,

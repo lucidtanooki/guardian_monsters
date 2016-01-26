@@ -3,6 +3,7 @@ package org.limbusdev.monsterworld.ecs.components;
 import com.badlogic.ashley.core.Component;
 
 import org.limbusdev.monsterworld.geometry.IntVector2;
+import org.limbusdev.monsterworld.utils.GlobalSettings;
 
 /**
  * Simple {@link Component} which holds the {@link com.badlogic.ashley.core.Entity}'s x and y
@@ -24,9 +25,19 @@ public class PositionComponent implements Component {
         this.nextX = 0;
         this.nextY = 0;
         this.lastPixelStep = 0;
-        this.onGrid = new IntVector2(0,0);
+        this.onGrid = new IntVector2(x/ GlobalSettings.TILE_SIZE,y/GlobalSettings.TILE_SIZE);
     }
     /* ............................................................................... METHODS .. */
     
     /* ..................................................................... GETTERS & SETTERS .. */
+    public IntVector2 getCenter() {
+        return new IntVector2(
+                onGrid.x*GlobalSettings.TILE_SIZE+GlobalSettings.TILE_SIZE/2,
+                onGrid.y*GlobalSettings.TILE_SIZE+GlobalSettings.TILE_SIZE/2);
+    }
+
+    public void updateGridPosition() {
+        this.onGrid.x = x/GlobalSettings.TILE_SIZE;
+        this.onGrid.y = y/GlobalSettings.TILE_SIZE;
+    }
 }

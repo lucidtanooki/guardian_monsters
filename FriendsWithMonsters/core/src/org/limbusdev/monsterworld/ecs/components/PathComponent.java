@@ -19,6 +19,8 @@ public class PathComponent implements Component {
     public int currentDir = 0;
     public int stopCounter=0;
     public boolean staticEntity;
+    public boolean talking = false;
+    public SkyDirection talkDir = SkyDirection.S;
     /* ........................................................................... CONSTRUCTOR .. */
 
     /**

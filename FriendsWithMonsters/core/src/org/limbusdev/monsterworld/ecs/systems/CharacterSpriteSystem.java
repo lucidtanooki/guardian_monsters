@@ -48,16 +48,16 @@ public class CharacterSpriteSystem extends EntitySystem {
                 moving = Components.input.get(entity).moving;
             }
 
+
             // If entitiy has PathComponent
             if(Components.path.has(entity)) {
-                direction = Components.getPathComponent(entity)
-                        .path.get(Components.getPathComponent(entity).currentDir);
+                PathComponent entPath = Components.path.get(entity);
+                if(entPath.talking) direction = entPath.talkDir;
+                else direction = entPath.path.get(entPath.currentDir);
 
                 // Get from path whether to move or not
-                if(!Components.path.get(entity).staticEntity)
-                    moving = Components.path.get(entity).moving ;
-                else
-                    moving = Components.path.get(entity).staticEntity;
+                if(!entPath.staticEntity) moving = entPath.moving ;
+                else moving = entPath.staticEntity;
             }
 
             // Set animation according to input direction

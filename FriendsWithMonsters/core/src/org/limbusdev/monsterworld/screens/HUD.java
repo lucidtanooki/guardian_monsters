@@ -39,14 +39,14 @@ public class HUD {
     private ArrayMap<String,Button> buttons;
     private Label convText;
     private Label titleLabel;
-    private ImageButton conversationExitButton;
+    private ImageButton conversationExitButton, joyStick;
     private Group menuButtons, conversationLabel;
     private TextureAtlas UItextures;
     public final BattleScreen battleScreen;
     public final MonsterWorld game;
     public final SaveGameManager saveGameManager;
     public final Entity hero;
-    public Image blackCourtain;
+    public Image blackCourtain, joyStickBG;
     
     /* ........................................................................... CONSTRUCTOR .. */
     public HUD(final BattleScreen battleScreen, final MonsterWorld game,
@@ -167,6 +167,11 @@ public class HUD {
         this.menuButtons.addAction(Actions.alpha(0));
         stage.addActor(menu);
         stage.addActor(menuButtons);
+
+        // JoyStick
+        this.joyStickBG = new Image(game.media.getUITextureAtlas().findRegion("stick_bg"));
+        joyStickBG.setPosition(8,8, Align.bottomLeft);
+        stage.addActor(joyStickBG);
     }
 
 

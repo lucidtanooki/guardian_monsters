@@ -18,6 +18,7 @@ public class InputComponent implements Component {
     public boolean startMoving;
     public boolean talking;
     public boolean inBattle;
+    public boolean touchDown;
     /* ........................................................................... CONSTRUCTOR .. */
     public InputComponent() {
         skyDir = SkyDirection.S;
@@ -27,6 +28,7 @@ public class InputComponent implements Component {
         this.startMoving = false;
         this.talking = false;
         this.inBattle = false;
+        this.touchDown = false;
     }
     /* ............................................................................... METHODS .. */
     

@@ -90,26 +90,6 @@ public class MovementSystem extends EntitySystem {
     public void makeOneStep(PositionComponent position, InputComponent input,
                             ColliderComponent collider) {
         if(input.startMoving) {
-            // Define direction
-            input.touchPos.x = Gdx.input.getX();
-            input.touchPos.y = Gdx.input.getY();
-            viewport.unproject(input.touchPos);
-
-            // calculate characters main moving direction for sprite choosing
-            if(new Rectangle(position.x, position.y, position.width, position.height)
-                    .contains(input.touchPos.x, input.touchPos.y)) return;
-
-            // Define direction of movement
-            if(Math.abs(input.touchPos.x - (position.x+ GlobalSettings.TILE_SIZE/2))
-                    > Math.abs(input.touchPos.y - (position.y+GlobalSettings.TILE_SIZE/2))) {
-                if(input.touchPos.x > position.x+GlobalSettings.TILE_SIZE/2)
-                    input.skyDir = SkyDirection.E;
-                else input.skyDir = SkyDirection.W;
-            } else {
-                if(input.touchPos.y > position.y+GlobalSettings.TILE_SIZE/2)
-                    input.skyDir = SkyDirection.N;
-                else input.skyDir = SkyDirection.S;
-            }
 
             // Define potential next position according to the input direction
             switch(input.skyDir) {
@@ -176,9 +156,6 @@ public class MovementSystem extends EntitySystem {
 
                     }
                 }
-                // Go on if finger is still on screen
-                if (Gdx.input.isTouched())
-                    input.startMoving = true;
             }
         }
     }

@@ -4,6 +4,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -39,14 +40,14 @@ public class HUD {
     private ArrayMap<String,Button> buttons;
     private Label convText;
     private Label titleLabel;
-    private ImageButton conversationExitButton, joyStick;
+    private ImageButton conversationExitButton;
     private Group menuButtons, conversationLabel;
     private TextureAtlas UItextures;
     public final BattleScreen battleScreen;
     public final MonsterWorld game;
     public final SaveGameManager saveGameManager;
     public final Entity hero;
-    public Image blackCourtain, joyStickBG;
+    public Image blackCourtain, joyStickBG, joyStick;
     
     /* ........................................................................... CONSTRUCTOR .. */
     public HUD(final BattleScreen battleScreen, final MonsterWorld game,
@@ -170,8 +171,12 @@ public class HUD {
 
         // JoyStick
         this.joyStickBG = new Image(game.media.getUITextureAtlas().findRegion("stick_bg"));
-        joyStickBG.setPosition(8,8, Align.bottomLeft);
+        joyStickBG.setPosition(8, 8, Align.bottomLeft);
         stage.addActor(joyStickBG);
+
+        this.joyStick = new Image(game.media.getUITextureAtlas().findRegion("stick"));
+        joyStick.setPosition(98,98, Align.center);
+        stage.addActor(joyStick);
     }
 
 
@@ -261,5 +266,12 @@ public class HUD {
         stage.addActor(titleLabel);
         stage.addActor(conversationLabel);
         stage.addActor(conversationExitButton);
+    }
+
+    public void updateJoyStick(float x, float y) {
+        this.joyStick.setPosition(x,y,Align.center);
+    }
+    public void resetJoyStick() {
+        joyStick.addAction(Actions.sequence(Actions.moveTo(98-96/2,98-96/2,.2f, Interpolation.pow2In)));
     }
 }

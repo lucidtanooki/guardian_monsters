@@ -43,6 +43,7 @@ public class GameArea {
     private Array<MapPersonInformation> mapPeople;
     private Array<MapObjectInformation> mapSigns;
     private Array<MonsterArea> monsterAreas;
+    public IntVector2 gridPosition;
     public PositionComponent startPosition;
     public int areaID;
 
@@ -61,6 +62,7 @@ public class GameArea {
         this.areaID = areaID;
         this.mapRenderer.setUpAnimations(tiledMap.getLayers().get("animations"));
         this.mapRenderer.setUpAnimatedObjects(tiledMap.getLayers().get("animatedObjects"));
+        this.gridPosition = new IntVector2(0,0);
     }
     /* ............................................................................... METHODS .. */
 

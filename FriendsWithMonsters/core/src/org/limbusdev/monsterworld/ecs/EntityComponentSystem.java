@@ -124,7 +124,7 @@ public class EntityComponentSystem {
         engine.addSystem(characterSpriteSystem);
 
         // Movement System
-        MovementSystem movementSystem = new MovementSystem(this, gameArea.getWarpPoints(), viewport);
+        MovementSystem movementSystem = new MovementSystem(this, gameArea.getWarpPoints());
         movementSystem.addedToEngine(engine);
         engine.addSystem(movementSystem);
 

@@ -32,12 +32,10 @@ public class MovementSystem extends EntitySystem {
     private Entity hero;
     private Array<WarpPoint> warpPoints;
     private EntityComponentSystem ecs;
-    private Viewport viewport;
     /* ........................................................................... CONSTRUCTOR .. */
-    public MovementSystem(EntityComponentSystem ecs, Array<WarpPoint> warpPoints, Viewport viewport) {
+    public MovementSystem(EntityComponentSystem ecs, Array<WarpPoint> warpPoints) {
         this.ecs = ecs;
         this.warpPoints = warpPoints;
-        this.viewport = viewport;
     }
     /* ............................................................................... METHODS .. */
     public void addedToEngine(Engine engine) {
@@ -84,14 +82,28 @@ public class MovementSystem extends EntitySystem {
      */
     public void makeOneStep(PositionComponent position, InputComponent input,
                             ColliderComponent collider) {
-        if(input.startTileStep) {
+
+        // Initialize Hero Movement
+        if(input.startMoving) {
 
             // Define potential next position according to the input direction
             switch(input.skyDir) {
-                case N: position.nextX=position.x;position.nextY = position.y + 16;break;
-                case W: position.nextX=position.x - 16;position.nextY = position.y;break;
-                case E: position.nextX=position.x + 16;position.nextY = position.y;break;
-                default:position.nextX=position.x;position.nextY = position.y - 16;break;
+                case N:
+                    position.nextX = position.x;
+                    position.nextY = position.y + GlobalSettings.TILE_SIZE;
+                    break;
+                case W:
+                    position.nextX = position.x - GlobalSettings.TILE_SIZE;
+                    position.nextY = position.y;
+                    break;
+                case E:
+                    position.nextX = position.x + GlobalSettings.TILE_SIZE;
+                    position.nextY = position.y;
+                    break;
+                default:
+                    position.nextX = position.x;
+                    position.nextY = position.y - GlobalSettings.TILE_SIZE;
+                    break;
             }
 
             //Check whether movement is possible or blocked by a collider
@@ -107,15 +119,19 @@ public class MovementSystem extends EntitySystem {
                 if (!collider.equals(r) && r.contains(nextPos)) return;
             }
 
+            // Update Collider Position
             collider.collider.x = position.nextX;
             collider.collider.y = position.nextY;
-            position.lastPixelStep = TimeUtils.millis();    // remember time of this step
+            position.lastPixelStep = TimeUtils.millis();    // remember time of this iteration
+
             input.moving = true;
-            input.startTileStep = false;  // because entity now started moving
+            input.startMoving = false;  // because entity now started moving
         }
+
 
         // If entity is already moving, and last step has completed (long enough ago)
         if(input.moving && TimeUtils.timeSinceMillis(position.lastPixelStep) > GlobalSettings.ONE_STEPDURATION_MS) {
+
             switch(input.skyDir) {
                 case N: position.y += 1;break;
                 case W: position.x -= 1;break;
@@ -124,6 +140,7 @@ public class MovementSystem extends EntitySystem {
             }
             position.lastPixelStep = TimeUtils.millis();
 
+            // Check if movement is complete
             switch (input.skyDir) {
                 case N: if(position.y == position.nextY) input.moving = false;break;
                 case E: if(position.x == position.nextX) input.moving = false;break;

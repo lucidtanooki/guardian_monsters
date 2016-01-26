@@ -10,7 +10,6 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 import org.limbusdev.monsterworld.ecs.components.ColliderComponent;
@@ -39,6 +38,7 @@ public class InputSystem extends EntitySystem implements InputProcessor {
     private HUD hud;
     private Entity hero;
     private boolean keyboard;
+    private SkyDirection lastDirKey;
     /* ........................................................................... CONSTRUCTOR .. */
     public InputSystem(Viewport viewport, HUD hud) {
         this.viewport = viewport;
@@ -64,21 +64,22 @@ public class InputSystem extends EntitySystem implements InputProcessor {
     }
 
     public void update(float deltaTime) {
+        // If screen is touched continue movement
         if(Components.input.get(hero).touchDown) {
             Vector2 pos = new Vector2(Gdx.input.getX(), Gdx.input.getY());
             viewport.unproject(pos);
             PositionComponent heroPos = Components.position.get(hero);
 
-            // Touch Input
-            if(!Components.input.get(hero).moving && !keyboard) {
-                Components.input.get(hero).skyDir
-                        = decideMovementDirection(heroPos.x, heroPos.y, pos.x, pos.y);
-                Components.input.get(hero).startTileStep = decideIfToMove(heroPos.x, heroPos.y, pos);
-            }
-
-            // Keyboard input
-            if(!Components.input.get(hero).moving && keyboard) {
-                Components.input.get(hero).startTileStep = true;
+            if(!Components.input.get(hero).moving) {
+                // Touch
+                if(!keyboard) {
+                    Components.input.get(hero).skyDir
+                            = decideMovementDirection(heroPos.x, heroPos.y, pos.x, pos.y);
+                    Components.input.get(hero).startMoving = decideIfToMove(heroPos.x, heroPos.y, pos);
+                } else {
+                    Components.input.get(hero).skyDir = lastDirKey;
+                    Components.input.get(hero).startMoving = true;
+                }
             }
 
         }
@@ -107,11 +108,9 @@ public class InputSystem extends EntitySystem implements InputProcessor {
         keyboard = true;
 
         if (typedDir != null) {
-            Components.input.get(hero).startTileStep = true;
             Components.input.get(hero).touchDown = true;
+            lastDirKey = typedDir;
         }
-
-        if (!Components.input.get(hero).moving) Components.input.get(hero).skyDir = typedDir;
         return false;
     }
 
@@ -122,12 +121,9 @@ public class InputSystem extends EntitySystem implements InputProcessor {
                 !Gdx.input.isKeyPressed(Input.Keys.DOWN) &&
                 !Gdx.input.isKeyPressed(Input.Keys.LEFT) &&
                 !Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-
-            Components.input.get(hero).startTileStep = false;
             Components.input.get(hero).touchDown = false;
             return true;
         }
-        keyboard = false;
         return false;
     }
 
@@ -138,8 +134,12 @@ public class InputSystem extends EntitySystem implements InputProcessor {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        keyboard = false;
+
+        // Unproject touch position
         Vector2 touchPos = new Vector2(screenX, screenY);
         viewport.unproject(touchPos);
+
         boolean touchedSpeaker, touchedSign;
         touchedSign = touchedSpeaker = false;
 
@@ -177,9 +177,9 @@ public class InputSystem extends EntitySystem implements InputProcessor {
                         Components.conversation.get(e).text);
             }
         }
+        if(touchedSpeaker || touchedSign) Components.getInputComponent(hero).talking = true;
+        else touchDragged(screenX, screenY, pointer);
 
-        if(!touchedSpeaker && !touchedSign) touchDragged(screenX, screenY, pointer);
-        else Components.getInputComponent(hero).talking = true;
         return true;
     }
 

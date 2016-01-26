@@ -13,8 +13,7 @@ public class InputComponent implements Component {
     public SkyDirection skyDir, nextInput;
     public boolean moving;
     public Vector3 touchPos;
-    public long startedTileStep;
-    public boolean startTileStep;
+    public boolean startMoving;
     public boolean talking;
     public boolean inBattle;
     public boolean touchDown;
@@ -23,8 +22,7 @@ public class InputComponent implements Component {
         skyDir = nextInput = SkyDirection.S;
         moving = false;
         this.touchPos = new Vector3(0,0,0);
-        this.startedTileStep = 0;
-        this.startTileStep = false;
+        this.startMoving = false;
         this.talking = false;
         this.inBattle = false;
         this.touchDown = false;

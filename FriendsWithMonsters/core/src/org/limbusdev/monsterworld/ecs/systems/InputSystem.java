@@ -207,6 +207,16 @@ public class InputSystem extends EntitySystem implements InputProcessor {
     }
 
     /**
+     * Checks the tiles right next (top, right, bottom, left) if there are entities the character
+     * can interact with
+     * @return
+     */
+    public Entity checkForNearInteractiveObjects(PositionComponent pos, SkyDirection dir) {
+
+        return null;
+    }
+
+    /**
      * Returns the movement direction from given start and target position
      * @param entX  Start Direction X
      * @param entY  Start Direction Y

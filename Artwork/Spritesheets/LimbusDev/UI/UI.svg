@@ -24,9 +24,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.98994949"
-     inkscape:cx="160.30665"
-     inkscape:cy="62.251101"
+     inkscape:zoom="1.979899"
+     inkscape:cx="-1.4413839"
+     inkscape:cy="873.5305"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -51,7 +51,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -280,12 +280,12 @@
          sodipodi:type="arc" />
     </g>
     <g
-       id="g3125"
-       transform="translate(-960,-862)"
-       inkscape:export-filename="/home/georg/Entwicklung/Java/libGDX/FriendsWithMonsters/Artwork/Spritesheets/LimbusDev/UI/bcorner64up.png"
-       inkscape:export-xdpi="139.21875"
-       inkscape:export-ydpi="139.21875">
+       id="g3052"
+       inkscape:export-filename="/home/georg/Entwicklung/Java/libGDX/FriendsWithMonsters/Artwork/Spritesheets/LimbusDev/UI/bcorner64down.png"
+       inkscape:export-xdpi="135"
+       inkscape:export-ydpi="135">
       <g
+         transform="translate(-960,-862)"
          id="g3013">
         <path
            sodipodi:type="arc"
@@ -329,8 +329,8 @@
            sodipodi:type="arc" />
       </g>
       <path
-         transform="translate(0,28.362183)"
-         d="m 1088,1024 c 0,34.2417 -28.6538,62 -64,62 -35.34622,0 -64,-27.7583 -64,-62 0,-34.24165 28.65378,-62 64,-62 35.3462,0 64,27.75835 64,62 z"
+         transform="translate(-960,-833.63782)"
+         d="m 1088,1024 a 64,62 0 1 1 -128,0 64,62 0 1 1 128,0 z"
          sodipodi:ry="62"
          sodipodi:rx="64"
          sodipodi:cy="1024"
@@ -346,11 +346,11 @@
          sodipodi:cy="1024"
          sodipodi:rx="64"
          sodipodi:ry="62"
-         d="m 1088,1024 c 0,34.2417 -28.6538,62 -64,62 -35.34622,0 -64,-27.7583 -64,-62 0,-34.24165 28.65378,-62 64,-62 35.3462,0 64,27.75835 64,62 z"
-         transform="translate(0,26.362183)" />
+         d="m 1088,1024 a 64,62 0 1 1 -128,0 64,62 0 1 1 128,0 z"
+         transform="translate(-960,-835.63782)" />
       <path
-         transform="translate(0,26.362183)"
-         d="m 1084,1024 c 0,32.0325 -26.8629,58 -60,58 -33.13708,0 -60,-25.9675 -60,-58 0,-32.03252 26.86292,-58 60,-58 33.1371,0 60,25.96748 60,58 z"
+         transform="translate(-960,-835.63782)"
+         d="m 1084,1024 a 60,58 0 1 1 -120,0 60,58 0 1 1 120,0 z"
          sodipodi:ry="58"
          sodipodi:rx="60"
          sodipodi:cy="1024"
@@ -366,8 +366,8 @@
          sodipodi:cy="1024"
          sodipodi:rx="60"
          sodipodi:ry="58"
-         d="m 1084,1024 c 0,32.0325 -26.8629,58 -60,58 -33.13708,0 -60,-25.9675 -60,-58 0,-32.03252 26.86292,-58 60,-58 33.1371,0 60,25.96748 60,58 z"
-         transform="translate(0,22.362183)" />
+         d="m 1084,1024 a 60,58 0 1 1 -120,0 60,58 0 1 1 120,0 z"
+         transform="translate(-960,-837.63782)" />
     </g>
     <g
        id="g3049"
@@ -429,11 +429,11 @@
          sodipodi:cy="992"
          sodipodi:rx="32"
          sodipodi:ry="32"
-         d="m 948,992 a 32,32 0 1 1 -64,0 32,32 0 1 1 64,0 z"
+         d="m 948,992 c 0,17.6731 -14.32689,32 -32,32 -17.67311,0 -32,-14.3269 -32,-32 0,-17.67311 14.32689,-32 32,-32 17.67311,0 32,14.32689 32,32 z"
          transform="translate(-492,-929.63782)" />
       <path
          transform="translate(-492,-931.63782)"
-         d="m 948,992 a 32,32 0 1 1 -64,0 32,32 0 1 1 64,0 z"
+         d="m 948,992 c 0,17.6731 -14.32689,32 -32,32 -17.67311,0 -32,-14.3269 -32,-32 0,-17.67311 14.32689,-32 32,-32 17.67311,0 32,14.32689 32,32 z"
          sodipodi:ry="32"
          sodipodi:rx="32"
          sodipodi:cy="992"
@@ -449,11 +449,11 @@
          sodipodi:cy="992"
          sodipodi:rx="28"
          sodipodi:ry="28"
-         d="m 944,992 a 28,28 0 1 1 -56,0 28,28 0 1 1 56,0 z"
+         d="m 944,992 c 0,15.464 -12.53603,28 -28,28 -15.46397,0 -28,-12.536 -28,-28 0,-15.46397 12.53603,-28 28,-28 15.46397,0 28,12.53603 28,28 z"
          transform="translate(-492,-931.63782)" />
       <path
          transform="translate(-492,-933.63782)"
-         d="m 944,992 a 28,28 0 1 1 -56,0 28,28 0 1 1 56,0 z"
+         d="m 944,992 c 0,15.464 -12.53603,28 -28,28 -15.46397,0 -28,-12.536 -28,-28 0,-15.46397 12.53603,-28 28,-28 15.46397,0 28,12.53603 28,28 z"
          sodipodi:ry="28"
          sodipodi:rx="28"
          sodipodi:cy="992"
@@ -468,8 +468,7 @@
        width="64"
        height="64"
        x="0"
-       y="96"
-       transform="translate(0,28.362183)"
+       y="188.36218"
        rx="0"
        ry="0" />
     <path

@@ -44,13 +44,13 @@ public class InputSystem extends EntitySystem implements InputProcessor {
     private Entity hero;
     private boolean keyboard;
     private SkyDirection lastDirKey;
-    private Circle joyStickArea, joyStick;
+    private Circle joyStickArea;
     /* ........................................................................... CONSTRUCTOR .. */
     public InputSystem(Viewport viewport, HUD hud) {
         this.viewport = viewport;
         this.hud = hud;
         keyboard = false;
-        this.joyStickArea = new Circle(98,98,90);
+        this.joyStickArea = new Circle(98,98,150);
     }
     /* ............................................................................... METHODS .. */
     public void addedToEngine(Engine engine) {

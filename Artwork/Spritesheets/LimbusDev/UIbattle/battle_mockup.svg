@@ -37,9 +37,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2"
-     inkscape:cx="-371.63824"
-     inkscape:cy="604.51265"
+     inkscape:zoom="0.70710678"
+     inkscape:cx="-130.44056"
+     inkscape:cy="399.84762"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -73,6 +73,14 @@
      inkscape:groupmode="layer"
      id="layer1"
      transform="translate(0,-572.36218)">
+    <path
+       style="color:#000000;fill:#000000;fill-opacity:0.50196078;fill-rule:nonzero;stroke:#ffffff;stroke-width:8;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:0.75294118;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       d="M -231.34375 -348.03125 C -260.29757 -348.03125 -283.78125 -324.57882 -283.78125 -295.625 C -283.78125 -266.67118 -260.29757 -243.1875 -231.34375 -243.1875 C -202.38993 -243.1875 -178.90625 -266.67118 -178.90625 -295.625 C -178.90625 -324.57882 -202.38993 -348.03125 -231.34375 -348.03125 z M -232 -312.15625 C -231.48876 -312.15625 -230.98549 -311.95424 -230.59375 -311.5625 L -216.4375 -297.40625 C -215.65403 -296.62278 -215.65403 -295.37722 -216.4375 -294.59375 L -230.59375 -280.4375 C -231.37722 -279.65403 -232.62278 -279.65403 -233.40625 -280.4375 L -247.5625 -294.59375 C -248.34597 -295.37722 -248.34597 -296.62278 -247.5625 -297.40625 L -233.40625 -311.5625 C -233.01451 -311.95424 -232.51124 -312.15625 -232 -312.15625 z "
+       transform="translate(0,572.36218)"
+       id="path3111"
+       inkscape:export-filename="/home/georg/Entwicklung/Java/libGDX/FriendsWithMonsters/Artwork/Spritesheets/LimbusDev/UI/button_a.png"
+       inkscape:export-xdpi="89.327057"
+       inkscape:export-ydpi="89.327057" />
     <rect
        y="394.36218"
        x="0"
@@ -792,13 +800,13 @@
        sodipodi:cy="376"
        sodipodi:rx="88"
        sodipodi:ry="88"
-       d="m 192,376 a 88,88 0 1 1 -176,0 88,88 0 1 1 176,0 z"
+       d="m 192,376 c 0,48.60106 -39.39894,88 -88,88 -48.601058,0 -88,-39.39894 -88,-88 0,-48.60106 39.398942,-88 88,-88 48.60106,0 88,39.39894 88,88 z"
        transform="translate(0,572.36218)" />
     <g
        id="g3878">
       <path
          transform="translate(0,564.36218)"
-         d="m 148,384 a 44,44 0 1 1 -88,0 44,44 0 1 1 88,0 z"
+         d="m 148,384 c 0,24.30053 -19.69947,44 -44,44 -24.300529,0 -44,-19.69947 -44,-44 0,-24.30053 19.699471,-44 44,-44 24.30053,0 44,19.69947 44,44 z"
          sodipodi:ry="44"
          sodipodi:rx="44"
          sodipodi:cy="384"
@@ -834,7 +842,7 @@
     </g>
     <path
        transform="translate(-506.34733,66.745299)"
-       d="m 192,376 a 88,88 0 1 1 -176,0 88,88 0 1 1 176,0 z"
+       d="m 192,376 c 0,48.60106 -39.39894,88 -88,88 -48.601058,0 -88,-39.39894 -88,-88 0,-48.60106 39.398942,-88 88,-88 48.60106,0 88,39.39894 88,88 z"
        sodipodi:ry="88"
        sodipodi:rx="88"
        sodipodi:cy="376"
@@ -886,6 +894,71 @@
          d="m 68,948.36218 12,12 0,-24 z"
          style="fill:#eeeeec;fill-opacity:0.75294118;stroke:none"
          inkscape:transform-center-x="30" />
+    </g>
+    <path
+       transform="matrix(0.58500856,0.58500856,-0.58500856,0.58500856,-67.544936,87.03073)"
+       d="m 148,384 a 44,44 0 1 1 -88,0 44,44 0 1 1 88,0 z"
+       sodipodi:ry="44"
+       sodipodi:rx="44"
+       sodipodi:cy="384"
+       sodipodi:cx="104"
+       id="path3895"
+       style="color:#000000;fill:#000000;fill-opacity:0.50196078;fill-rule:nonzero;stroke:#ffffff;stroke-width:9.6696949;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:0.75294118;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       sodipodi:type="arc"
+       inkscape:transform-center-y="33.54802"
+       inkscape:transform-center-x="32.301833"
+       inkscape:export-filename="/home/georg/Entwicklung/Java/libGDX/FriendsWithMonsters/Artwork/Spritesheets/LimbusDev/UI/button_b.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <g
+       id="g3930"
+       inkscape:export-filename="/home/georg/Entwicklung/Java/libGDX/FriendsWithMonsters/Artwork/Spritesheets/LimbusDev/UI/button_b.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <path
+         inkscape:transform-center-y="-12"
+         transform="translate(0,576.36218)"
+         d="m -228,-212 a 4,4 0 1 1 -8,0 4,4 0 1 1 8,0 z"
+         sodipodi:ry="4"
+         sodipodi:rx="4"
+         sodipodi:cy="-212"
+         sodipodi:cx="-232"
+         id="path3904"
+         style="color:#000000;fill:#eeeeec;fill-opacity:0.75294118;fill-rule:nonzero;stroke:none;stroke-width:4;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         sodipodi:type="arc" />
+      <path
+         inkscape:transform-center-x="-12"
+         sodipodi:type="arc"
+         style="color:#000000;fill:#eeeeec;fill-opacity:0.75294118;fill-rule:nonzero;stroke:none;stroke-width:4;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         id="path3906"
+         sodipodi:cx="-232"
+         sodipodi:cy="-212"
+         sodipodi:rx="4"
+         sodipodi:ry="4"
+         d="m -228,-212 a 4,4 0 1 1 -8,0 4,4 0 1 1 8,0 z"
+         transform="matrix(0,1,-1,0,-436,604.36218)" />
+      <path
+         inkscape:transform-center-y="12"
+         transform="matrix(-1,0,0,-1,-464,168.36218)"
+         d="m -228,-212 a 4,4 0 1 1 -8,0 4,4 0 1 1 8,0 z"
+         sodipodi:ry="4"
+         sodipodi:rx="4"
+         sodipodi:cy="-212"
+         sodipodi:cx="-232"
+         id="path3908"
+         style="color:#000000;fill:#eeeeec;fill-opacity:0.75294118;fill-rule:nonzero;stroke:none;stroke-width:4;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         sodipodi:type="arc" />
+      <path
+         inkscape:transform-center-x="12"
+         sodipodi:type="arc"
+         style="color:#000000;fill:#eeeeec;fill-opacity:0.75294118;fill-rule:nonzero;stroke:none;stroke-width:4;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         id="path3910"
+         sodipodi:cx="-232"
+         sodipodi:cy="-212"
+         sodipodi:rx="4"
+         sodipodi:ry="4"
+         d="m -228,-212 a 4,4 0 1 1 -8,0 4,4 0 1 1 8,0 z"
+         transform="matrix(0,-1,1,0,-28,140.36218)" />
     </g>
   </g>
 </svg>

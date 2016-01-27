@@ -85,11 +85,11 @@ public class HUD {
         tbs.font = skin.getFont("default-font");
         tbs.down = new TextureRegionDrawable(UItextures.findRegion("bcorner64down"));
         tbs.up   = new TextureRegionDrawable(UItextures.findRegion("bcorner64up"));
-        tbs.unpressedOffsetX = 10; tbs.unpressedOffsetY = -10;
-        tbs.pressedOffsetY = -11; tbs.pressedOffsetX = 10;
+        tbs.unpressedOffsetX = 18; tbs.unpressedOffsetY = 18;
+        tbs.pressedOffsetX = 18; tbs.pressedOffsetY = 16;
         TextButton menu = new TextButton("Menu", tbs);
-        menu.setWidth(99);menu.setHeight(96);
-        menu.setPosition(GlobalSettings.RESOLUTION_X, 0, Align.bottomRight);
+        menu.setWidth(64);menu.setHeight(64);
+        menu.setPosition(GlobalSettings.RESOLUTION_X, GlobalSettings.RESOLUTION_Y, Align.topRight);
         menu.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -115,7 +115,9 @@ public class HUD {
         tbs.pressedOffsetY = -1;
         TextButton save = new TextButton("Save", tbs);
         save.setWidth(64);save.setHeight(64);
-        save.setPosition(GlobalSettings.RESOLUTION_X - 96, 96, Align.center);
+        save.setPosition(
+                GlobalSettings.RESOLUTION_X - 96,
+                GlobalSettings.RESOLUTION_Y - 96, Align.center);
         save.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -128,7 +130,8 @@ public class HUD {
         // Quit Button
         TextButton quit = new TextButton("Quit", tbs);
         quit.setWidth(64);quit.setHeight(64);
-        quit.setPosition(GlobalSettings.RESOLUTION_X - 132, 35, Align.center);
+        quit.setPosition(GlobalSettings.RESOLUTION_X - 132,
+                GlobalSettings.RESOLUTION_Y - 35, Align.center);
         quit.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -149,7 +152,8 @@ public class HUD {
         // Battle Button
         TextButton battle = new TextButton("Battle", tbs);
         battle.setWidth(64);battle.setHeight(64);
-        battle.setPosition(GlobalSettings.RESOLUTION_X - 35, 132, Align.center);
+        battle.setPosition(GlobalSettings.RESOLUTION_X - 35,
+                GlobalSettings.RESOLUTION_Y - 132, Align.center);
         battle.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -161,8 +165,35 @@ public class HUD {
                 game.setScreen(battleScreen);
             }
         });
-
         this.menuButtons.addActor(battle);
+
+        // A Button
+        ImageButton A = new ImageButton(
+                new TextureRegionDrawable(game.media.getUITextureAtlas().findRegion("button_a")),
+                new TextureRegionDrawable(game.media.getUITextureAtlas().findRegion("button_adown")));
+        A.setWidth(112);battle.setHeight(112);
+        A.setPosition(GlobalSettings.RESOLUTION_X - 64, 140, Align.center);
+        A.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                System.out.println("Button A");
+            }
+        });
+        this.stage.addActor(A);
+
+        // B Button
+        ImageButton B = new ImageButton(
+                new TextureRegionDrawable(game.media.getUITextureAtlas().findRegion("button_b")),
+                new TextureRegionDrawable(game.media.getUITextureAtlas().findRegion("button_bdown")));
+        B.setWidth(80);battle.setHeight(80);
+        B.setPosition(GlobalSettings.RESOLUTION_X - 96, 48, Align.center);
+        B.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                System.out.println("Button B");
+            }
+        });
+        this.stage.addActor(B);
 
         this.menuButtons.setVisible(false);
         this.menuButtons.addAction(Actions.alpha(0));
@@ -218,30 +249,30 @@ public class HUD {
 
     private void setUpConversation() {
         Label.LabelStyle lbs = new Label.LabelStyle();
-        lbs.font=skin.getFont("default-font");
+        lbs.font=skin.getFont("white");
         lbs.background=new TextureRegionDrawable(UItextures.findRegion("title"));
         titleLabel = new Label("Title", lbs);
-        titleLabel.setHeight(28);
-        titleLabel.setWidth(166);
+        titleLabel.setHeight(35);
+        titleLabel.setWidth(284);
         titleLabel.setVisible(false);
-        titleLabel.setPosition(GlobalSettings.RESOLUTION_X / 2 - 200, 114);
+        titleLabel.setPosition(GlobalSettings.RESOLUTION_X / 2 - 275, 154);
 
         this.conversationLabel = new Group();
 
         Image convImg = new Image(UItextures.findRegion("conversation"));
-        convImg.setWidth(500); convImg.setHeight(114);
-        convImg.setPosition(GlobalSettings.RESOLUTION_X/2,0,Align.bottom);
+        convImg.setWidth(454); convImg.setHeight(108);
+        convImg.setPosition(GlobalSettings.RESOLUTION_X/2+2,98,Align.center);
 
         conversationLabel.addActor(convImg);
 
         lbs = new Label.LabelStyle();
-        lbs.font=skin.getFont("default-font");
+        lbs.font=skin.getFont("white");
         lbs.background=new TextureRegionDrawable(UItextures.findRegion("transparent"));
         convText = new Label("Test label", lbs);
-        convText.setHeight(112);
-        convText.setWidth(460);
+        convText.setHeight(108);
+        convText.setWidth(316);
         convText.setWrap(true);
-        convText.setPosition(GlobalSettings.RESOLUTION_X / 2, 4, Align.bottom);
+        convText.setPosition(GlobalSettings.RESOLUTION_X/2, 98, Align.center);
         conversationLabel.addActor(convText);
         conversationLabel.setVisible(false);
 

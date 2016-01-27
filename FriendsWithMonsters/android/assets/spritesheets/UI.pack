@@ -5,113 +5,141 @@ filter: Linear,Linear
 repeat: none
 conversation
   rotate: false
-  xy: 1, 141
-  size: 500, 114
-  orig: 500, 114
+  xy: 1, 147
+  size: 454, 108
+  orig: 454, 108
   offset: 0, 0
   index: -1
 stick_bg
   rotate: false
-  xy: 503, 75
+  xy: 457, 75
   size: 180, 180
   orig: 180, 180
   offset: 0, 0
   index: -1
-b192down
+button_a
   rotate: false
-  xy: 1, 91
-  size: 192, 48
-  orig: 192, 48
-  offset: 0, 0
-  index: -1
-b192up
-  rotate: false
-  xy: 685, 207
-  size: 192, 48
-  orig: 192, 48
-  offset: 0, 0
-  index: -1
-bcorner64down
-  rotate: false
-  xy: 685, 109
-  size: 99, 96
-  orig: 99, 96
-  offset: 0, 0
-  index: -1
-title
-  rotate: false
-  xy: 1, 61
-  size: 167, 28
-  orig: 167, 28
-  offset: 0, 0
-  index: -1
-bcorner64up
-  rotate: false
-  xy: 786, 109
-  size: 99, 96
-  orig: 99, 96
-  offset: 0, 0
-  index: -1
-b1down
-  rotate: false
-  xy: 879, 207
-  size: 128, 48
-  orig: 128, 48
-  offset: 0, 0
-  index: -1
-stick
-  rotate: false
-  xy: 887, 109
-  size: 96, 96
-  orig: 96, 96
-  offset: 0, 0
-  index: -1
-b1up
-  rotate: false
-  xy: 195, 91
-  size: 128, 48
-  orig: 128, 48
-  offset: 0, 0
-  index: -1
-exitConversationdown
-  rotate: false
-  xy: 1, 1
-  size: 44, 58
-  orig: 44, 58
-  offset: 0, 0
-  index: -1
-exitConversationup
-  rotate: false
-  xy: 47, 1
-  size: 44, 58
-  orig: 44, 58
-  offset: 0, 0
-  index: -1
-bround64down
-  rotate: false
-  xy: 325, 73
-  size: 64, 66
-  orig: 64, 66
-  offset: 0, 0
-  index: -1
-bround64up
-  rotate: false
-  xy: 391, 73
-  size: 64, 66
-  orig: 64, 66
+  xy: 1, 17
+  size: 128, 128
+  orig: 128, 128
   offset: 0, 0
   index: -1
 black
   rotate: false
-  xy: 685, 99
+  xy: 1, 7
   size: 8, 8
   orig: 8, 8
   offset: 0, 0
   index: -1
 transparent
   rotate: false
-  xy: 1009, 247
+  xy: 11, 7
   size: 8, 8
   orig: 8, 8
+  offset: 0, 0
+  index: -1
+button_adown
+  rotate: false
+  xy: 131, 17
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+b192down
+  rotate: false
+  xy: 261, 97
+  size: 192, 48
+  orig: 192, 48
+  offset: 0, 0
+  index: -1
+b192up
+  rotate: false
+  xy: 261, 47
+  size: 192, 48
+  orig: 192, 48
+  offset: 0, 0
+  index: -1
+title
+  rotate: false
+  xy: 261, 10
+  size: 284, 35
+  orig: 284, 35
+  offset: 0, 0
+  index: -1
+b1down
+  rotate: false
+  xy: 547, 25
+  size: 128, 48
+  orig: 128, 48
+  offset: 0, 0
+  index: -1
+bcorner64down
+  rotate: false
+  xy: 639, 159
+  size: 96, 96
+  orig: 96, 96
+  offset: 0, 0
+  index: -1
+b1up
+  rotate: false
+  xy: 639, 109
+  size: 128, 48
+  orig: 128, 48
+  offset: 0, 0
+  index: -1
+bcorner64up
+  rotate: false
+  xy: 737, 159
+  size: 96, 96
+  orig: 96, 96
+  offset: 0, 0
+  index: -1
+button_b
+  rotate: false
+  xy: 677, 11
+  size: 96, 96
+  orig: 96, 96
+  offset: 0, 0
+  index: -1
+button_bdown
+  rotate: false
+  xy: 775, 61
+  size: 96, 96
+  orig: 96, 96
+  offset: 0, 0
+  index: -1
+stick
+  rotate: false
+  xy: 835, 159
+  size: 96, 96
+  orig: 96, 96
+  offset: 0, 0
+  index: -1
+exitConversationdown
+  rotate: false
+  xy: 775, 1
+  size: 44, 58
+  orig: 44, 58
+  offset: 0, 0
+  index: -1
+exitConversationup
+  rotate: false
+  xy: 821, 1
+  size: 44, 58
+  orig: 44, 58
+  offset: 0, 0
+  index: -1
+bround64down
+  rotate: false
+  xy: 933, 189
+  size: 64, 66
+  orig: 64, 66
+  offset: 0, 0
+  index: -1
+bround64up
+  rotate: false
+  xy: 933, 121
+  size: 64, 66
+  orig: 64, 66
   offset: 0, 0
   index: -1

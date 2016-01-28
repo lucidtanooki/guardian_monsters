@@ -5,141 +5,169 @@ filter: Linear,Linear
 repeat: none
 conversation
   rotate: false
-  xy: 1, 147
+  xy: 1, 379
   size: 454, 108
   orig: 454, 108
   offset: 0, 0
   index: -1
 stick_bg
   rotate: false
-  xy: 457, 75
+  xy: 1, 197
   size: 180, 180
   orig: 180, 180
   offset: 0, 0
   index: -1
+title
+  rotate: false
+  xy: 457, 452
+  size: 284, 35
+  orig: 284, 35
+  offset: 0, 0
+  index: -1
 button_a
   rotate: false
-  xy: 1, 17
+  xy: 1, 67
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
-black
-  rotate: false
-  xy: 1, 7
-  size: 8, 8
-  orig: 8, 8
-  offset: 0, 0
-  index: -1
-transparent
-  rotate: false
-  xy: 11, 7
-  size: 8, 8
-  orig: 8, 8
-  offset: 0, 0
-  index: -1
 button_adown
   rotate: false
-  xy: 131, 17
+  xy: 183, 249
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 b192down
   rotate: false
-  xy: 261, 97
+  xy: 457, 402
   size: 192, 48
   orig: 192, 48
   offset: 0, 0
   index: -1
 b192up
   rotate: false
-  xy: 261, 47
+  xy: 743, 439
   size: 192, 48
   orig: 192, 48
   offset: 0, 0
   index: -1
-title
+buttonMenuDown
   rotate: false
-  xy: 261, 10
-  size: 284, 35
-  orig: 284, 35
+  xy: 313, 319
+  size: 154, 58
+  orig: 154, 58
+  offset: 0, 0
+  index: -1
+buttonMenuUp
+  rotate: false
+  xy: 313, 259
+  size: 154, 58
+  orig: 154, 58
   offset: 0, 0
   index: -1
 b1down
   rotate: false
-  xy: 547, 25
+  xy: 1, 17
+  size: 128, 48
+  orig: 128, 48
+  offset: 0, 0
+  index: -1
+b1up
+  rotate: false
+  xy: 183, 199
   size: 128, 48
   orig: 128, 48
   offset: 0, 0
   index: -1
 bcorner64down
   rotate: false
-  xy: 639, 159
+  xy: 469, 304
   size: 96, 96
   orig: 96, 96
-  offset: 0, 0
-  index: -1
-b1up
-  rotate: false
-  xy: 639, 109
-  size: 128, 48
-  orig: 128, 48
   offset: 0, 0
   index: -1
 bcorner64up
   rotate: false
-  xy: 737, 159
+  xy: 567, 304
   size: 96, 96
   orig: 96, 96
   offset: 0, 0
   index: -1
+buttonSideBarDown
+  rotate: false
+  xy: 313, 205
+  size: 111, 52
+  orig: 111, 52
+  offset: 0, 0
+  index: -1
+buttonSideBarUp
+  rotate: false
+  xy: 469, 250
+  size: 111, 52
+  orig: 111, 52
+  offset: 0, 0
+  index: -1
 button_b
   rotate: false
-  xy: 677, 11
+  xy: 131, 99
   size: 96, 96
   orig: 96, 96
   offset: 0, 0
   index: -1
 button_bdown
   rotate: false
-  xy: 775, 61
+  xy: 131, 1
   size: 96, 96
   orig: 96, 96
   offset: 0, 0
   index: -1
 stick
   rotate: false
-  xy: 835, 159
+  xy: 229, 101
   size: 96, 96
   orig: 96, 96
   offset: 0, 0
   index: -1
-exitConversationdown
-  rotate: false
-  xy: 775, 1
-  size: 44, 58
-  orig: 44, 58
-  offset: 0, 0
-  index: -1
-exitConversationup
-  rotate: false
-  xy: 821, 1
-  size: 44, 58
-  orig: 44, 58
-  offset: 0, 0
-  index: -1
 bround64down
   rotate: false
-  xy: 933, 189
+  xy: 229, 33
   size: 64, 66
   orig: 64, 66
   offset: 0, 0
   index: -1
 bround64up
   rotate: false
-  xy: 933, 121
+  xy: 327, 137
   size: 64, 66
   orig: 64, 66
+  offset: 0, 0
+  index: -1
+exitConversationdown
+  rotate: false
+  xy: 582, 244
+  size: 44, 58
+  orig: 44, 58
+  offset: 0, 0
+  index: -1
+exitConversationup
+  rotate: false
+  xy: 628, 244
+  size: 44, 58
+  orig: 44, 58
+  offset: 0, 0
+  index: -1
+black
+  rotate: false
+  xy: 937, 479
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: -1
+transparent
+  rotate: false
+  xy: 457, 392
+  size: 8, 8
+  orig: 8, 8
   offset: 0, 0
   index: -1

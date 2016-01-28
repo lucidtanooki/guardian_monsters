@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 import org.limbusdev.monsterworld.managers.MediaManager;
 import org.limbusdev.monsterworld.screens.MainMenuScreen;
+import org.limbusdev.monsterworld.screens.OutdoorGameWorldScreen;
+import org.limbusdev.monsterworld.utils.GlobalSettings;
 
 public class MonsterWorld extends Game {
 	/* ............................................................................ ATTRIBUTES .. */
@@ -22,8 +24,10 @@ public class MonsterWorld extends Game {
         font  = new BitmapFont();
         media = new MediaManager();
 
+        if(GlobalSettings.DEBUGGING_ON) this.setScreen(
+                new OutdoorGameWorldScreen(this, 9, 1, false));
         // switch to main menu screen
-        this.setScreen(new MainMenuScreen(this));
+        else this.setScreen(new MainMenuScreen(this));
 	}
 
 	@Override

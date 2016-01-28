@@ -61,6 +61,7 @@ public class MainMenuScreen implements Screen {
 
         stage.addActor(black);
         stage.addActor(introScreen);
+
     }
     
     /* ............................................................................... METHODS .. */

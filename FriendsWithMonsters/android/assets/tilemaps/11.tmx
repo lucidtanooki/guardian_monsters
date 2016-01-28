@@ -7,27 +7,35 @@
  <tileset firstgid="1" name="limbusdev_world" tilewidth="16" tileheight="16">
   <image source="../spritesheets/limbusdev_world.png" width="1024" height="1024"/>
  </tileset>
+ <tileset firstgid="4097" name="limbusdev_world2" tilewidth="16" tileheight="16">
+  <image source="../../../../../../../../../../../../home/georg/Entwicklung/Java/libGDX/FriendsWithMonsters/FriendsWithMonsters/android/assets/spritesheets/limbusdev_world2.png" width="1024" height="1024"/>
+ </tileset>
  <layer name="ground1" width="40" height="20">
   <data encoding="base64" compression="zlib">
    eJztk1EKgCAQBfcEeqvqWkVY1yrCOlaCCSKrYqAbsR+DX/LG5+4hAA6GYX5NJwH6h0HS+4RuuzlnadkEjaPfkY/vRumoTN6CELpROZb6OcdWM6lNxplhQv4612Vsbmq8S2ccsVyV6H+t0LvrOeYZumL7VdOvxDPGKOzdi2BuU74tvd7sGaUX8z1uKrRs4Q==
   </data>
  </layer>
+ <layer name="shadow1" width="40" height="20">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFowA7uCI40C7AD0ai+yYKUc+swe4+appFSzNBIBxobgQVzKaV+0DmXqVCfNPKfaNgFIyCUTAKRhYAAAoWCcM=
+  </data>
+ </layer>
  <layer name="walls1" width="40" height="20">
   <data encoding="base64" compression="zlib">
-   eJzNVotuwjAMdNrBprbSvqndGPxWy9j4rW7j8Vm7CEddLbI4JQhOOl1qxbJzOLSmJMpAU0GrdDoVLr8viL6KQWvEmiqdToXLN8431haxrkqnDq+GaEn/c4E9b3afGfKlf82zjhq05qRr6Du4UegH+AluOVf6l7K/nmt8Q3/AnUL34AE8cm7Iv0tgMqIZmIMPvA5xDj6CT1nYvxjscLZ9MY7VqHFkLiLXq2zsX217E/31PN+94h7OkDsvx7FlPvin8c75Z3WVj/1rwa5M87v6/GvAF/DAz+diPv+ugdbOUX7iBusOXNv54udzMbd/K+bvXnFN/1JA3t+/kPcj5r5cCvm/d28+St+kf7eeS59/rq9b+Sn7kOrrMzQPU9/REqG6vj5D59F+V4TOkdq/2O8eX3/aurH+ufd26Bzac/rq/gLK3K9H
+   eJzNVltugzAQXEOTVIDU7xwHmte1IE2ba9E2j2NlrKxFWMW1Da6SkUZjFm+8HtYBlRMloCqgRTwdCpPfZkTfWaclYlURT4fC5CvjG2uNWFPEU4OFIlrT31xizkrPU12+9K9686MPanXVLfQD3HnoJ/gF7jlX+hezvpbX+IH+ggcPPYIn8My5Lv/GQCVEEzAFX3js4hScga+J278QHLC3Y9aPlVjjzFwGjjdJ379S1ybqa7m/W49zOEHuNO/H1mnnn493xj+tm7TvXw02eZznavOvAt/BE1/fi9n8G4rFHL97w9W8u1frPkqv3GHcgFvdX3x9L2bm70X/PSvG+vffkOf3FvJ8hJyXsZD/e8/mo/RN+vfovrT5Z+p6lJ+yDqm2Ol39MPQdLeFa11anaz++3xWufcT2L/S7x1af77qh/pn3tmsfvvu0rXsB9MOxHQ==
   </data>
  </layer>
  <layer name="objects1" width="40" height="20">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjAJMcJiJeLUHSVA7UsBgDL9DPAg2MzPx+hhJUDsKRsEoGAWjYBQQAgAbqQPp
+   eJxjYBgFo2AUjAJMcJiJeLUHSVA7EsAbOdLDD6SH1uAQD4TWkWdgYGYmXh8jM0TPKBgFo2AUjIJRQA0AAInJBpM=
   </data>
  </layer>
  <layer name="tops1" width="40" height="20">
   <data encoding="base64" compression="zlib">
-   eJztklsOgkAMRauACrsSBd0WKui25OmyPHzMB+NjMI4RDTc5KZk06aGpyHuJfJHY776dHZEcCihhLs+p6KmhgYvzppCWFLdM85u4IlNwwIWFPMejZwbztte161fhVmt+S2aEsJqIrHvMi+iJYQNby35ewL8H3beEGTvc9tRDj3kpPRkc4WTZL8ItDm7fc/wKZpU95lX01NBYdmuT4pbd8Rsz5h+y5LbDAd237pPwvRuQn8lnaPtUUV7f2qdpL7qX6n9UbefVvaj+R3Wod6Bi6w4+/Z+mOzDVT9+76Q5M9ddzBatGN0k=
+   eJzVkgkOgjAQRQfBjRPocVxArwUKei1l0WP5jDRBXIqxhvqTlyF0knltRuS7BGORcHz/7+CKHCGDHIbynoKeEk5wdr8UqrKf3GqCW9rwczyRHrjgwUje06dnAMNrr2fGL6/8CtzKht+MGXNYOCLLFvMCekJYwdqwX9/n7v79WcSMGLcNddtiXkJPCjvYG/YLcAv9x/Mjfhmz8hbzCnpKOBlyq/sluKVP/LqO8rM13pTdq7GzzDfCKa6xmXZt1E1m7Pbcov1u+kR8xxb56Xxse08V5dXVe+repeml+l9V0/n0XVT/q2rrHqiY2oNf31O3B7r6633X7YGu/nsueq1AUg==
   </data>
  </layer>
- <objectgroup name="colliderWalls1" width="40" height="20">
+ <objectgroup name="colliderWalls1" width="40" height="20" visible="0">
   <object x="0" y="0" width="32" height="144"/>
   <object x="32" y="0" width="304" height="48"/>
   <object x="80" y="112" width="16" height="16"/>

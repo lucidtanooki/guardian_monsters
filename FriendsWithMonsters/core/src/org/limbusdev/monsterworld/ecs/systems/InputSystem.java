@@ -164,57 +164,6 @@ public class InputSystem extends EntitySystem implements InputProcessor {
 
         touchDragged(screenX, screenY, pointer);
 
-        // Unproject touch position
-        Vector2 touchPos = new Vector2(screenX, screenY);
-        viewport.unproject(touchPos);
-
-        boolean touchedSpeaker, touchedSign;
-        touchedSign = touchedSpeaker = false;
-
-        // Check touch distance to hero
-        PositionComponent heroPos = Components.position.get(hero);
-        float distHeroTouch = touchPos.dst(heroPos.getCenter().x, heroPos.getCenter().y);
-
-        // If touch ist near enough
-        if (distHeroTouch < GlobalSettings.TILE_SIZE * 1.5 &&
-                distHeroTouch > GlobalSettings.TILE_SIZE/2) {
-
-            Entity touchedEntity = checkForNearInteractiveObjects(
-                    Components.position.get(hero),
-                    decideMovementDirection(heroPos.x, heroPos.y, touchPos.x, touchPos.y));
-
-            // If there is an entity near enough
-            if (touchedEntity != null) {
-
-                // Living Entity
-                if (EntityFamilies.living.matches(touchedEntity)) {
-                    System.out.print("Touched speaker\n");
-                    touchedSpeaker = true;
-                    Components.path.get(touchedEntity).talking=true;
-                    SkyDirection talkDir;
-                    switch(Components.input.get(hero).skyDir) {
-                        case N: talkDir = SkyDirection.SSTOP;break;
-                        case S: talkDir = SkyDirection.NSTOP;break;
-                        case W: talkDir = SkyDirection.ESTOP;break;
-                        case E: talkDir = SkyDirection.WSTOP;break;
-                        default: talkDir = SkyDirection.SSTOP;
-                    }
-                    Components.path.get(touchedEntity).talkDir = talkDir;
-                    hud.openConversation(Components.conversation.get(touchedEntity).text);
-                }
-
-                // Sign Entity
-                if (EntityFamilies.signs.matches(touchedEntity)) {
-                    System.out.print("Touched sign\n");
-                    touchedSign = true;
-                    hud.openSign(
-                            Components.title.get(touchedEntity).text,
-                            Components.conversation.get(touchedEntity).text);
-                }
-            }
-        }
-        if (touchedSpeaker || touchedSign) Components.getInputComponent(hero).talking = true;
-
         return true;
     }
 

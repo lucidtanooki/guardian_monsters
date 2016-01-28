@@ -1,6 +1,8 @@
 package org.limbusdev.monsterworld.screens;
 
+import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
+import com.badlogic.ashley.core.Family;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -23,9 +25,15 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 
 import org.limbusdev.monsterworld.MonsterWorld;
 import org.limbusdev.monsterworld.ecs.components.Components;
+import org.limbusdev.monsterworld.ecs.components.PositionComponent;
 import org.limbusdev.monsterworld.ecs.components.TeamComponent;
+import org.limbusdev.monsterworld.ecs.entities.HeroEntity;
+import org.limbusdev.monsterworld.enums.HUDElements;
+import org.limbusdev.monsterworld.enums.SkyDirection;
+import org.limbusdev.monsterworld.geometry.IntVector2;
 import org.limbusdev.monsterworld.managers.MediaManager;
 import org.limbusdev.monsterworld.model.BattleFactory;
+import org.limbusdev.monsterworld.utils.EntityFamilies;
 import org.limbusdev.monsterworld.utils.GlobalSettings;
 import org.limbusdev.monsterworld.managers.SaveGameManager;
 
@@ -40,18 +48,22 @@ public class HUD {
     private ArrayMap<String,Button> buttons;
     private Label convText;
     private Label titleLabel;
-    private ImageButton conversationExitButton;
     private Group menuButtons, conversationLabel;
     private TextureAtlas UItextures;
     public final BattleScreen battleScreen;
     public final MonsterWorld game;
     public final SaveGameManager saveGameManager;
+    public Engine engine;
     public final Entity hero;
     public Image blackCourtain, joyStickBG, joyStick;
+    private HUDElements openHUDELement;
     
     /* ........................................................................... CONSTRUCTOR .. */
     public HUD(final BattleScreen battleScreen, final MonsterWorld game,
-               final SaveGameManager saveGameManager, final Entity hero, MediaManager media) {
+               final SaveGameManager saveGameManager, final Entity hero, MediaManager media,
+               Engine engine) {
+        this.openHUDELement = HUDElements.NONE;
+        this.engine = engine;
         this.saveGameManager = saveGameManager;
         this.battleScreen = battleScreen;
         this.game = game;
@@ -81,14 +93,16 @@ public class HUD {
     }
     /* ............................................................................... METHODS .. */
     private void setUpTopLevelButtons() {
+
+        // Menu Button
         TextButton.TextButtonStyle tbs = new TextButton.TextButtonStyle();
-        tbs.font = skin.getFont("default-font");
-        tbs.down = new TextureRegionDrawable(UItextures.findRegion("bcorner64down"));
-        tbs.up   = new TextureRegionDrawable(UItextures.findRegion("bcorner64up"));
-        tbs.unpressedOffsetX = 18; tbs.unpressedOffsetY = 18;
-        tbs.pressedOffsetX = 18; tbs.pressedOffsetY = 16;
+        tbs.font = skin.getFont("white");
+        tbs.down = new TextureRegionDrawable(UItextures.findRegion("buttonMenuDown"));
+        tbs.up   = new TextureRegionDrawable(UItextures.findRegion("buttonMenuUp"));
+        tbs.unpressedOffsetX = 10; tbs.unpressedOffsetY = 0;
+        tbs.pressedOffsetX = 10; tbs.pressedOffsetY = 1;
         TextButton menu = new TextButton("Menu", tbs);
-        menu.setWidth(64);menu.setHeight(64);
+        menu.setWidth(154);menu.setHeight(58);
         menu.setPosition(GlobalSettings.RESOLUTION_X, GlobalSettings.RESOLUTION_Y, Align.topRight);
         menu.addListener(new ClickListener() {
             @Override
@@ -109,29 +123,28 @@ public class HUD {
 
         // Save Button
         tbs = new TextButton.TextButtonStyle();
-        tbs.font = skin.getFont("default-font");
-        tbs.down = new TextureRegionDrawable(UItextures.findRegion("bround64down"));
-        tbs.up   = new TextureRegionDrawable(UItextures.findRegion("bround64up"));
+        tbs.font = skin.getFont("white");
+        tbs.down = new TextureRegionDrawable(UItextures.findRegion("buttonSideBarDown"));
+        tbs.up   = new TextureRegionDrawable(UItextures.findRegion("buttonSideBarUp"));
         tbs.pressedOffsetY = -1;
         TextButton save = new TextButton("Save", tbs);
-        save.setWidth(64);save.setHeight(64);
+        save.setWidth(111);save.setHeight(52);
         save.setPosition(
-                GlobalSettings.RESOLUTION_X - 96,
-                GlobalSettings.RESOLUTION_Y - 96, Align.center);
+                GlobalSettings.RESOLUTION_X,
+                GlobalSettings.RESOLUTION_Y - 62, Align.topRight);
         save.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 saveGameManager.saveGame();
             }
         });
-
         this.menuButtons.addActor(save);
 
         // Quit Button
         TextButton quit = new TextButton("Quit", tbs);
-        quit.setWidth(64);quit.setHeight(64);
-        quit.setPosition(GlobalSettings.RESOLUTION_X - 132,
-                GlobalSettings.RESOLUTION_Y - 35, Align.center);
+        quit.setWidth(111);quit.setHeight(52);
+        quit.setPosition(GlobalSettings.RESOLUTION_X,
+                GlobalSettings.RESOLUTION_Y - 118 , Align.topRight);
         quit.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -146,14 +159,13 @@ public class HUD {
                 ));
             }
         });
-
         this.menuButtons.addActor(quit);
 
         // Battle Button
         TextButton battle = new TextButton("Battle", tbs);
-        battle.setWidth(64);battle.setHeight(64);
-        battle.setPosition(GlobalSettings.RESOLUTION_X - 35,
-                GlobalSettings.RESOLUTION_Y - 132, Align.center);
+        battle.setWidth(111);battle.setHeight(52);
+        battle.setPosition(GlobalSettings.RESOLUTION_X,
+                GlobalSettings.RESOLUTION_Y - 174, Align.topRight);
         battle.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -171,12 +183,13 @@ public class HUD {
         ImageButton A = new ImageButton(
                 new TextureRegionDrawable(game.media.getUITextureAtlas().findRegion("button_a")),
                 new TextureRegionDrawable(game.media.getUITextureAtlas().findRegion("button_adown")));
-        A.setWidth(112);battle.setHeight(112);
+        A.setWidth(112);A.setHeight(112);
         A.setPosition(GlobalSettings.RESOLUTION_X - 64, 140, Align.center);
         A.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 System.out.println("Button A");
+                touchEntity();
             }
         });
         this.stage.addActor(A);
@@ -185,12 +198,17 @@ public class HUD {
         ImageButton B = new ImageButton(
                 new TextureRegionDrawable(game.media.getUITextureAtlas().findRegion("button_b")),
                 new TextureRegionDrawable(game.media.getUITextureAtlas().findRegion("button_bdown")));
-        B.setWidth(80);battle.setHeight(80);
+        B.setWidth(80);B.setHeight(80);
         B.setPosition(GlobalSettings.RESOLUTION_X - 96, 48, Align.center);
         B.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 System.out.println("Button B");
+                switch(openHUDELement) {
+                    case CONVERSATION:;
+                    case SIGN: closeConversation();break;
+                    default:break;
+                }
             }
         });
         this.stage.addActor(B);
@@ -229,14 +247,18 @@ public class HUD {
         this.menuButtons.setVisible(false);
         this.convText.setText(text);
         this.conversationLabel.setVisible(true);
-        this.conversationExitButton.setVisible(true);
+    }
+
+    public void closeConversation() {
+        titleLabel.setVisible(false);
+        conversationLabel.setVisible(false);
+        Components.getInputComponent(hero).talking = false;
     }
 
     public void openSign(String title, String text) {
         openConversation(text);
         this.titleLabel.setText(title);
         this.titleLabel.setVisible(true);
-        this.conversationExitButton.setVisible(true);
     }
 
     public void show() {
@@ -256,12 +278,13 @@ public class HUD {
         titleLabel.setWidth(284);
         titleLabel.setVisible(false);
         titleLabel.setPosition(GlobalSettings.RESOLUTION_X / 2 - 275, 154);
+        titleLabel.setAlignment(Align.center);
 
         this.conversationLabel = new Group();
 
         Image convImg = new Image(UItextures.findRegion("conversation"));
         convImg.setWidth(454); convImg.setHeight(108);
-        convImg.setPosition(GlobalSettings.RESOLUTION_X/2+2,98,Align.center);
+        convImg.setPosition(GlobalSettings.RESOLUTION_X / 2 + 2, 98, Align.center);
 
         conversationLabel.addActor(convImg);
 
@@ -272,37 +295,100 @@ public class HUD {
         convText.setHeight(108);
         convText.setWidth(316);
         convText.setWrap(true);
-        convText.setPosition(GlobalSettings.RESOLUTION_X/2, 98, Align.center);
+        convText.setPosition(GlobalSettings.RESOLUTION_X / 2, 98, Align.center);
         conversationLabel.addActor(convText);
         conversationLabel.setVisible(false);
 
-        ImageButton.ImageButtonStyle ibs = new ImageButton.ImageButtonStyle();
-        ibs.down=new TextureRegionDrawable(UItextures.findRegion("exitConversationdown"));
-        ibs.up=new TextureRegionDrawable(UItextures.findRegion("exitConversationup"));
-        conversationExitButton = new ImageButton(ibs);
-        conversationExitButton.setWidth(44f);
-        conversationExitButton.setHeight(58f);
-        conversationExitButton.setPosition(GlobalSettings.RESOLUTION_X/2+246, 0);
-        conversationExitButton.setVisible(false);
-        conversationExitButton.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                titleLabel.setVisible(false);
-                conversationLabel.setVisible(false);
-                conversationExitButton.setVisible(false);
-                Components.getInputComponent(hero).talking = false;
-            }
-        });
-
         stage.addActor(titleLabel);
         stage.addActor(conversationLabel);
-        stage.addActor(conversationExitButton);
     }
 
     public void updateJoyStick(float x, float y) {
         this.joyStick.setPosition(x,y,Align.center);
     }
     public void resetJoyStick() {
-        joyStick.addAction(Actions.sequence(Actions.moveTo(98-96/2,98-96/2,.2f, Interpolation.pow2In)));
+        joyStick.addAction(Actions.sequence(Actions.moveTo(98 - 96 / 2, 98 - 96 / 2, .2f, Interpolation.pow2In)));
+    }
+
+    public Entity checkForNearInteractiveObjects(Entity hero) {
+        PositionComponent pos = Components.position.get(hero);
+        SkyDirection dir = Components.input.get(hero).skyDir;
+
+        Entity nearEntity=null;
+        IntVector2 checkGridCell = new IntVector2(pos.onGrid.x,pos.onGrid.y);
+
+        switch(dir) {
+            case N: checkGridCell.y+=1;break;
+            case S: checkGridCell.y-=1;break;
+            case E: checkGridCell.x+=1;break;
+            case W: checkGridCell.x-=1;break;
+            default: break;
+        }
+
+        if(GlobalSettings.DEBUGGING_ON)
+            System.out.println("Grid cell to be checked: ("+checkGridCell.x+"|"+checkGridCell.y+")");
+
+        for(Entity e : engine.getEntitiesFor(Family.all(PositionComponent.class).get())) {
+
+            if (Components.position.get(e) != null && !(e instanceof HeroEntity)) {
+                PositionComponent p = Components.position.get(e);
+
+                if(GlobalSettings.DEBUGGING_ON)
+                    System.out.println("Grid Cell of tested Entity: ("+p.onGrid.x+"|"+p.onGrid.y+")");
+
+                // Is there an entity?
+                if (p.onGrid.x == checkGridCell.x && p.onGrid.y == checkGridCell.y)
+                    nearEntity = e;
+            }
+        }
+
+        return nearEntity;
+    }
+
+    public void touchEntity() {
+        Entity touchedEntity = checkForNearInteractiveObjects(hero);
+        boolean touchedSpeaker = false;
+        boolean touchedSign = false;
+
+        // If there is an entity near enough
+        if (touchedEntity != null) {
+
+            // Living Entity
+            if (EntityFamilies.living.matches(touchedEntity)) {
+                System.out.print("Touched speaker\n");
+                touchedSpeaker = true;
+                Components.path.get(touchedEntity).talking = true;
+                SkyDirection talkDir;
+                switch (Components.input.get(hero).skyDir) {
+                    case N:
+                        talkDir = SkyDirection.SSTOP;
+                        break;
+                    case S:
+                        talkDir = SkyDirection.NSTOP;
+                        break;
+                    case W:
+                        talkDir = SkyDirection.ESTOP;
+                        break;
+                    case E:
+                        talkDir = SkyDirection.WSTOP;
+                        break;
+                    default:
+                        talkDir = SkyDirection.SSTOP;
+                }
+                Components.path.get(touchedEntity).talkDir = talkDir;
+                openConversation(Components.conversation.get(touchedEntity).text);
+                openHUDELement = HUDElements.CONVERSATION;
+            }
+
+            // Sign Entity
+            if (EntityFamilies.signs.matches(touchedEntity)) {
+                System.out.print("Touched sign\n");
+                touchedSign = true;
+                openSign(Components.title.get(touchedEntity).text,
+                        Components.conversation.get(touchedEntity).text);
+                openHUDELement = HUDElements.SIGN;
+            }
+        }
+        if (touchedSpeaker || touchedSign) Components.getInputComponent(hero).talking = true;
     }
 }

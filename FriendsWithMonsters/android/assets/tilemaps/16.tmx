@@ -7,6 +7,9 @@
  <tileset firstgid="1" name="limbusdev_world" tilewidth="16" tileheight="16">
   <image source="../spritesheets/limbusdev_world.png" width="1024" height="1024"/>
  </tileset>
+ <tileset firstgid="4097" name="limbusdev_world2" tilewidth="16" tileheight="16">
+  <image source="../spritesheets/limbusdev_world2.png" width="1024" height="1024"/>
+ </tileset>
  <layer name="ground1" width="50" height="30">
   <data encoding="base64" compression="zlib">
    eJzt1skRwCAIAEArsKqkeEvKLw0gN4rHg09mlKwBzFdK+W4cFW/Fg1r/VDikebT5PRw9A+SJdFj38nZw9oNiFwfXtqKD07OQg3qOvX8j6r8xz2ymowFrenlnOrD1nu9o6ZkVHNR8xmpBc06zHL3cWR3Qc6mDcx+PrkWNQ3N3aOthtCOiriV3s6Y/MjmgPbk9lckhyWtx9ObAKIfn96AckjPQzjiJozD/qzI7qFmR0WHptRMdnjmjZ19UXMdZjpmxq+MHqWMZ0A==
@@ -22,12 +25,17 @@
    eJztldENgCAMRDHxV+dxQIdiAAfz1xgCpcD1mvR9E9q7HiWlQMpzWHewFq/69tO6gzmgdDDPmXmWN9C3Xh96ztd0MGcj8EG2biAogtxfGqQ7jF2HFcx/Zw3Pfw6755q3MnMerfrSWmgdjJn8Zm0kd0z7c7XPkvv/ZzTeMuZFykgeWrpZ9mOpj2vD99EC6RfLbDzj+d0HeF59iRNY
   </data>
  </layer>
+ <layer name="lights1" width="50" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztz8EJwCAQRcFtQwtIUllMaZYZFy85egvCDHwQ9vKMAAAAAABgZ0eJOMeu8nfJmux96ty3+R7vlrdN/pG9vc5l8wuqgwZJ
+  </data>
+ </layer>
  <layer name="tops1" width="50" height="30">
   <data encoding="base64" compression="zlib">
    eJztzkENAAAIBKArYP9MtvJrA+cGCUgAAAAAAPio63rANmXSANc=
   </data>
  </layer>
- <objectgroup name="colliderWalls1" width="50" height="30">
+ <objectgroup name="colliderWalls1" width="50" height="30" visible="0">
   <object x="64" y="464" width="144" height="16"/>
   <object x="160" y="288" width="48" height="48"/>
   <object x="176" y="336" width="32" height="128"/>
@@ -108,7 +116,7 @@
   <object x="784" y="160" width="16" height="320"/>
   <object x="864" y="256" width="32" height="64"/>
  </objectgroup>
- <objectgroup name="sensors" width="50" height="30">
+ <objectgroup name="sensors" width="50" height="30" visible="0">
   <object name="warpField" x="48" y="464" width="16" height="16">
    <properties>
     <property name="targetID" value="10"/>
@@ -208,7 +216,24 @@
     <property name="probability3" value="0.005"/>
    </properties>
   </object>
+  <object name="warpField" x="752" y="464" width="16" height="16">
+   <properties>
+    <property name="targetID" value="22"/>
+    <property name="targetWarpPointID" value="1"/>
+   </properties>
+  </object>
+  <object name="startField" x="752" y="448" width="16" height="16">
+   <properties>
+    <property name="fieldID" value="2"/>
+   </properties>
+  </object>
+  <object name="warpField" x="768" y="464" width="16" height="16">
+   <properties>
+    <property name="targetID" value="22"/>
+    <property name="targetWarpPointID" value="1"/>
+   </properties>
+  </object>
  </objectgroup>
- <objectgroup name="livingEntities" width="50" height="30"/>
- <objectgroup name="objects" width="50" height="30"/>
+ <objectgroup name="livingEntities" width="50" height="30" visible="0"/>
+ <objectgroup name="objects" width="50" height="30" visible="0"/>
 </map>

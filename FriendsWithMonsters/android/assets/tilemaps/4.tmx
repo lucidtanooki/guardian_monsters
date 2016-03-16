@@ -7,33 +7,41 @@
  <tileset firstgid="1" name="limbusdev_world" tilewidth="16" tileheight="16">
   <image source="../spritesheets/limbusdev_world.png" width="1024" height="1024"/>
  </tileset>
+ <tileset firstgid="4097" name="limbusdev_world2" tilewidth="16" tileheight="16">
+  <image source="../spritesheets/limbusdev_world2.png" width="1024" height="1024"/>
+ </tileset>
  <layer name="ground1" width="16" height="16">
   <data encoding="base64" compression="zlib">
-   eJxjYKAM3KIhVkBiy5OpPwqKydEfDcTxUBxDY78OVSzOhIkpNYOe9mPTT4oZQ10/AKhoqd4=
+   eJxjYKAM3KIhVkBiy5OpPwqKydEfDcTxUBxDY78OVSzOhImHun5SzBjq+gGG16kd
   </data>
  </layer>
  <layer name="walls1" width="16" height="16">
   <data encoding="base64" compression="zlib">
-   eJxjYKAMzGWkDN+lEBMC//mBhACFnhzGYC6WMNTGEa6rsYhji5NsIvVjsxsfeE1k/C8iURwdPMKhDpf4YAbRTBCMCwAADTEoiw==
+   eJxjYKAMzGWkDN+lEBMC//mBhACFnhzGYC6WMNTGEa6rsYhji5NsIvVjsxsfeE1k/C8iURwdPMKhDpf4UAYA91on0Q==
   </data>
  </layer>
  <layer name="objects1" width="16" height="16">
   <data encoding="base64" compression="zlib">
-   eJxjYKAOqOJnYKgG4hp+VPF6IL+BH1N9Cy8qfxdQzW4g3oOmdj+Qf4AI/b+Aan4D8R80tf/4GBj+8xHWPwqGDqjjh2AY+A5k7wDinfwQNiGwjx+CkfX/AOKfROr/xw/BwwEAAMu2GiU=
+   eJxjYKAOqOJnYKgG4hp+CH+VJISuB/Ib+BHqYOItvKj6dwHV7AbiPVC1K6Hq9gP5B5D0r8Sh/xdQzW8g/sOPKv6Pj4HhPx+me9H1j4KhA+r4IRgGvgPZO4B4Jz+ETQjs44dgZP0/gPgnkfr/8UPwcAAAYw8dLw==
+  </data>
+ </layer>
+ <layer name="lights1" width="16" height="16">
+  <data encoding="base64" compression="zlib">
+   eJxjYBieQEuSNHFKQBYZZmbSwB0jFQyX8NdEc5MakK8OxBqS+NXhAmlAdelAnIFHPQAkHAVV
   </data>
  </layer>
  <layer name="tops1" width="16" height="16">
   <data encoding="base64" compression="zlib">
-   eJyTZWRgiCcTywGxPBCTA6KZGBgUKNAfQ6F+EBgO+p8DcSYaViLSTJj9c9FwFg79imj2LMPhfi0c+leh2YPs/wp+BoZKfgh7CQ796OKDIfwHWn8sECfgwTCATS4OiAHyAht1
+   eJyTZWRgiCcTywGxPBCTA6KZGBgUKNAfQ6F+EBgO+p8DcSYaViLSTJj9c9FwFg79imj2LMPhfi0c+leh2YPs/wp+BoZKfgh7CQ796OKDIfwHWn8sECfgwLNFIOpmiWCXjwNiAA/qHHE=
   </data>
  </layer>
- <objectgroup name="colliderWalls1" width="16" height="16" visible="0">
+ <objectgroup name="colliderWalls1" width="16" height="16">
   <object x="0" y="0" width="224" height="48"/>
   <object x="224" y="0" width="32" height="16"/>
   <object x="240" y="16" width="16" height="240"/>
   <object x="0" y="48" width="16" height="208"/>
   <object x="16" y="240" width="112" height="16"/>
-  <object x="160" y="240" width="80" height="16"/>
+  <object x="144" y="240" width="96" height="16"/>
   <object x="16" y="144" width="80" height="16"/>
   <object x="80" y="160" width="16" height="48"/>
   <object x="176" y="160" width="16" height="48"/>
@@ -45,12 +53,6 @@
  </objectgroup>
  <objectgroup name="sensors" width="16" height="16">
   <object name="warpField" x="128" y="240" width="16" height="16">
-   <properties>
-    <property name="targetID" value="3"/>
-    <property name="targetWarpPointID" value="3"/>
-   </properties>
-  </object>
-  <object name="warpField" x="144" y="240" width="16" height="16">
    <properties>
     <property name="targetID" value="3"/>
     <property name="targetWarpPointID" value="3"/>

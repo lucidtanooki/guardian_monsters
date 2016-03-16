@@ -8,7 +8,7 @@
   <image source="../spritesheets/limbusdev_world.png" width="1024" height="1024"/>
  </tileset>
  <tileset firstgid="4097" name="limbusdev_world2" tilewidth="16" tileheight="16">
-  <image source="../../../../../../../../../../../../home/georg/Entwicklung/Java/libGDX/FriendsWithMonsters/FriendsWithMonsters/android/assets/spritesheets/limbusdev_world2.png" width="1024" height="1024"/>
+  <image source="../spritesheets/limbusdev_world2.png" width="1024" height="1024"/>
  </tileset>
  <layer name="ground1" width="32" height="32">
   <data encoding="base64" compression="zlib">

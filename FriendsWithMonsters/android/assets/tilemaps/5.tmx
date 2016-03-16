@@ -7,6 +7,9 @@
  <tileset firstgid="1" name="limbusdev_world" tilewidth="16" tileheight="16">
   <image source="../spritesheets/limbusdev_world.png" width="1024" height="1024"/>
  </tileset>
+ <tileset firstgid="4097" name="limbusdev_world2" tilewidth="16" tileheight="16">
+  <image source="../spritesheets/limbusdev_world2.png" width="1024" height="1024"/>
+ </tileset>
  <layer name="ground1" width="10" height="10">
   <data encoding="base64" compression="zlib">
    eJyLYGJgiATiKCCOwMOeAcQzgXgWAfYNIL4JxLcIsPHZNZLtBQAywzoD
@@ -19,7 +22,12 @@
  </layer>
  <layer name="objects1" width="10" height="10">
   <data encoding="base64" compression="zlib">
-   eJxjYCAe1PMzMDTwo4pVAfnVQFyDJL4fyD6Apm4XkL8biPcgif/jY2D4z4eq7hdQ/jcQ/0HTTwn4DjTrLxnm7cOip4UXU+wfFd0KAOVJEGs=
+   eJxjYCAe1PMzMDTwQ9irJCF0FZBfDcQ1/Ah1+4HsA1D+Sqi6XUD+biDeg6TuHx8Dw38+VDt+AeV/A/Effgaqge9As/6SYd4+LHpaeDHF/lHRrQDRnRHw
+  </data>
+ </layer>
+ <layer name="lights1" width="10" height="10">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgcQEtyoF1AHaBJoT8AVvYAhg==
   </data>
  </layer>
  <layer name="tops1" width="10" height="10">
@@ -27,7 +35,7 @@
    eJyTZWRgiCeA5YBYHogJAYUBULeXn3Tz6vjp5z6Yulgi1MUB1QAAfEsHXA==
   </data>
  </layer>
- <objectgroup name="colliderWalls1" width="10" height="10">
+ <objectgroup name="colliderWalls1" width="10" height="10" visible="0">
   <object x="0" y="0" width="160" height="48"/>
   <object x="16" y="48" width="32" height="16"/>
   <object x="96" y="48" width="48" height="16"/>
@@ -36,7 +44,7 @@
   <object x="0" y="48" width="16" height="112"/>
   <object x="144" y="48" width="16" height="112"/>
  </objectgroup>
- <objectgroup name="sensors" width="10" height="10">
+ <objectgroup name="sensors" width="10" height="10" visible="0">
   <object name="warpField" x="96" y="112" width="16" height="16">
    <properties>
     <property name="targetID" value="4"/>
@@ -49,7 +57,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="livingEntities" width="10" height="10">
+ <objectgroup name="livingEntities" width="10" height="10" visible="0">
   <object name="person" x="48" y="80" width="16" height="16">
    <properties>
     <property name="male" value="true"/>
@@ -60,7 +68,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="objects" width="10" height="10">
+ <objectgroup name="objects" width="10" height="10" visible="0">
   <object name="sign" x="16" y="48" width="16" height="16">
    <properties>
     <property name="text" value="Very warm."/>

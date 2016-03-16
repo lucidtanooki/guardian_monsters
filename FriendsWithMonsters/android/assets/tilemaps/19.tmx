@@ -7,6 +7,9 @@
  <tileset firstgid="1" name="limbusdev_world" tilewidth="16" tileheight="16">
   <image source="../spritesheets/limbusdev_world.png" width="1024" height="1024"/>
  </tileset>
+ <tileset firstgid="4097" name="limbusdev_world2" tilewidth="16" tileheight="16">
+  <image source="../spritesheets/limbusdev_world2.png" width="1024" height="1024"/>
+ </tileset>
  <layer name="ground1" width="10" height="8">
   <data encoding="base64" compression="zlib">
    eJwLY2JgCBvFZGMAaJ8bgQ==
@@ -19,7 +22,12 @@
  </layer>
  <layer name="objects1" width="10" height="8">
   <data encoding="base64" compression="zlib">
-   eJxjYCANHGKC0IeB9EEgruJnYKgG4hp+hJo6IJuJGcJmBtKMQLwLKLYbiPcgqduHxP4GZf8C0r+B+A+S3D8kNjngO1D/XwrNAIFYJkwxAFU3D1M=
+   eJxjYCANHGRiYFglycBwmAnCruJnYKgG4hp+hJo6IJuRmYFhJVAdMzOEvQsothuI9yCp24fE/gZl/wLSv4H4D5LcPyQ2OeA7UP9fCs0AgVgmTDEAzAgQ1g==
+  </data>
+ </layer>
+ <layer name="lights1" width="10" height="8">
+  <data encoding="base64" compression="zlib">
+   eJxjYBg6QEuSuuZpSuLnEwMARqEAyA==
   </data>
  </layer>
  <layer name="tops1" width="10" height="8">
@@ -27,7 +35,7 @@
    eJzjYWBg8COAeYGYj4Ew4B8AdXv5aWOvDxD7I2FuqBwXkpgvEAMABTEGPQ==
   </data>
  </layer>
- <objectgroup name="colliderWalls1" width="10" height="8">
+ <objectgroup name="colliderWalls1" width="10" height="8" visible="0">
   <object x="128" y="80" width="16" height="16"/>
   <object x="0" y="0" width="16" height="128"/>
   <object x="16" y="0" width="128" height="48"/>
@@ -36,8 +44,8 @@
   <object x="64" y="48" width="16" height="16"/>
   <object x="16" y="48" width="16" height="16"/>
  </objectgroup>
- <objectgroup name="objects" width="10" height="8"/>
- <objectgroup name="sensors" width="10" height="8">
+ <objectgroup name="objects" width="10" height="8" visible="0"/>
+ <objectgroup name="sensors" width="10" height="8" visible="0">
   <object name="warpField" x="80" y="112" width="16" height="16">
    <properties>
     <property name="targetID" value="3"/>
@@ -50,7 +58,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="livingEntities" width="10" height="8">
+ <objectgroup name="livingEntities" width="10" height="8" visible="0">
   <object name="person" x="112" y="80" width="16" height="16">
    <properties>
     <property name="male" value="true"/>

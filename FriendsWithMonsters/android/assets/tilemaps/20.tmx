@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="20" height="10" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="limbusdev" tilewidth="16" tileheight="16">
+  <image source="../spritesheets/limbusdev_world2.png" width="1024" height="1024"/>
+ </tileset>
+ <layer name="ground" width="20" height="10">
+  <data encoding="base64" compression="zlib">
+   eJy7w8HAcGcQ4ruD2Ly7SPRdLGKk0lKMQBqGqWDeXEYkM6lkHghHUtG8KCC+QyXzYGZRyzxkGgB2hq3v
+  </data>
+ </layer>
+ <layer name="walls" width="20" height="10">
+  <data encoding="base64" compression="zlib">
+   eJxjYKAuUGUd3FgNiFOpiEHmUROkUdm8UUAZAADJyQ8w
+  </data>
+ </layer>
+ <layer name="objects" width="20" height="10">
+  <data encoding="base64" compression="zlib">
+   eJxjYBi5YA0neTQ2kM1JHo0LrOYkj6YXGCn+BQDO3hUk
+  </data>
+ </layer>
+ <layer name="tops" width="20" height="10">
+  <data encoding="base64" compression="zlib">
+   eJyTYWJguEMlLAvEc4CYWmAu0KxoKpsHA9qc5NG4zKO2+6hlnjTUTGr5l9rxS23zYoD4LpVwLBADADwTKmk=
+  </data>
+ </layer>
+ <layer name="shadow1" width="20" height="10">
+  <data encoding="base64" compression="zlib">
+   eJybyMTAMHEUj+JRjBUDAGNMctk=
+  </data>
+ </layer>
+ <layer name="lights" width="20" height="10">
+  <data encoding="base64" compression="zlib">
+   eJxjYKAd0OEkj8YFcjjJo5HBGy7i3E4s0OBGsF9zkke/BLrpFRemedpc5NHPgfQLJH9S6md083SgbnzDSR6Nbh7cXC7yaE2ge7SQwo2aAAACZR91
+  </data>
+ </layer>
+</map>

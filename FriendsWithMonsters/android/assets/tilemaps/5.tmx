@@ -12,7 +12,7 @@
  </tileset>
  <layer name="ground1" width="10" height="10">
   <data encoding="base64" compression="zlib">
-   eJyLYGJgiATiKCCOwMOeAcQzgXgWAfYNIL4JxLcIsPHZNZLtBQAywzoD
+   eJyLYGJgiATiKCCOwMOeAcQzgXgWAfYdCQi+C8UyUgwMslKYNLXV0ZoG+ZEe9gAA1Ssj8A==
   </data>
  </layer>
  <layer name="walls1" width="10" height="10">
@@ -22,7 +22,12 @@
  </layer>
  <layer name="objects1" width="10" height="10">
   <data encoding="base64" compression="zlib">
-   eJxjYCAe1PMzMDTwQ9irJCF0FZBfDcQ1/Ah1+4HsA1D+Sqi6XUD+biDeg6TuHx8Dw38+VDt+AeV/A/Effgaqge9As/6SYd4+LHpaeDHF/lHRrQDRnRHw
+   eJxjYCAe1PMzMDTwQ9irJCF0FZBfDcQ1/Ah1+4HsA1D+Sqi6XUD+biDeg6TuHx8Dw38gvi+BEPsFlP8NxH+g6h5KIHCsJAmOhQIVeQYGVSBWkyes9glQzVMkdfugbgC5r4WXgeEekjuXyCH5A6pOCei+B0A1ymS4EwYAiKUbJw==
+  </data>
+ </layer>
+ <layer name="shadow1" width="10" height="10">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFxIBLgvSxBwBdtwDk
   </data>
  </layer>
  <layer name="lights1" width="10" height="10">
@@ -32,26 +37,28 @@
  </layer>
  <layer name="tops1" width="10" height="10">
   <data encoding="base64" compression="zlib">
-   eJyTZWRgiCeA5YBYHogJAYUBULeXn3Tz6vjp5z6Yulgi1MUB1QAAfEsHXA==
+   eJyTZWRgiCeA5YBYHogJAQU6qnsix8DwFIifyRE2L0WegSFVHqGujp/27kNXF0uEujigGgAIPwqg
   </data>
  </layer>
  <objectgroup name="colliderWalls1" width="10" height="10" visible="0">
   <object x="0" y="0" width="160" height="48"/>
   <object x="16" y="48" width="32" height="16"/>
   <object x="96" y="48" width="48" height="16"/>
-  <object x="128" y="80" width="16" height="16"/>
+  <object x="96" y="80" width="48" height="16"/>
   <object x="16" y="112" width="16" height="16"/>
   <object x="0" y="48" width="16" height="112"/>
   <object x="144" y="48" width="16" height="112"/>
+  <object x="112" y="96" width="32" height="16"/>
+  <object x="128" y="112" width="16" height="16"/>
  </objectgroup>
  <objectgroup name="sensors" width="10" height="10" visible="0">
-  <object name="warpField" x="96" y="112" width="16" height="16">
+  <object name="warpField" x="64" y="112" width="16" height="16">
    <properties>
     <property name="targetID" value="4"/>
     <property name="targetWarpPointID" value="2"/>
    </properties>
   </object>
-  <object name="startField" x="80" y="112" width="16" height="16">
+  <object name="startField" x="64" y="96" width="16" height="16">
    <properties>
     <property name="fieldID" value="1"/>
    </properties>

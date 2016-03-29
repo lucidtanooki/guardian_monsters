@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="32" height="28" tilewidth="16" tileheight="16">
  <tileset firstgid="1" name="limbusdev_world2" tilewidth="16" tileheight="16">
-  <image source="../../../../../../../../../../../../home/georg/Entwicklung/Java/libGDX/FriendsWithMonsters/FriendsWithMonsters/android/assets/spritesheets/limbusdev_world2.png" width="1024" height="1024"/>
+  <image source="../spritesheets/limbusdev_world2.png" width="1024" height="1024"/>
  </tileset>
  <tileset firstgid="4097" name="spritesheet_oriental" tilewidth="16" tileheight="16">
-  <image source="../../../../../../../../../../../../home/georg/Entwicklung/Java/libGDX/FriendsWithMonsters/FriendsWithMonsters/android/assets/spritesheets/spritesheet_oriental.png" width="1024" height="1024"/>
+  <image source="../spritesheets/spritesheet_oriental.png" width="1024" height="1024"/>
  </tileset>
  <layer name="Kachelebene 1" width="32" height="28">
   <data encoding="base64" compression="zlib">

@@ -3,212 +3,310 @@ animations.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-fire1
-  rotate: false
-  xy: 1, 109
-  size: 32, 16
-  orig: 32, 16
-  offset: 0, 0
-  index: 0
-fire1
-  rotate: false
-  xy: 1, 91
-  size: 32, 16
-  orig: 32, 16
-  offset: 0, 0
-  index: 1
-fire2
-  rotate: false
-  xy: 35, 109
-  size: 32, 16
-  orig: 32, 16
-  offset: 0, 0
-  index: 0
-fire2
-  rotate: false
-  xy: 1, 73
-  size: 32, 16
-  orig: 32, 16
-  offset: 0, 0
-  index: 1
-watere
-  rotate: false
-  xy: 35, 91
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 0
-watere
-  rotate: false
-  xy: 69, 109
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 1
-waterine
-  rotate: false
-  xy: 1, 55
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 0
-waterine
-  rotate: false
-  xy: 35, 73
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 1
-waterinw
-  rotate: false
-  xy: 53, 91
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 0
-waterinw
-  rotate: false
-  xy: 87, 109
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 1
-waterise
-  rotate: false
-  xy: 1, 37
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 0
-waterise
-  rotate: false
-  xy: 19, 55
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 1
-waterisw
-  rotate: false
-  xy: 53, 73
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 0
-waterisw
-  rotate: false
-  xy: 71, 91
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 1
-waterne
-  rotate: false
-  xy: 105, 109
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 0
-waterne
+light1
   rotate: false
   xy: 1, 19
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 1
-waternw
-  rotate: false
-  xy: 19, 37
-  size: 16, 16
-  orig: 16, 16
+  size: 32, 32
+  orig: 32, 32
   offset: 0, 0
   index: 0
-waternw
+light1
   rotate: false
-  xy: 37, 55
-  size: 16, 16
-  orig: 16, 16
+  xy: 35, 19
+  size: 32, 32
+  orig: 32, 32
   offset: 0, 0
   index: 1
-watern
+light1
   rotate: false
-  xy: 71, 73
-  size: 16, 16
-  orig: 16, 16
+  xy: 35, 19
+  size: 32, 32
+  orig: 32, 32
   offset: 0, 0
-  index: 0
-watern
+  index: 7
+light1
   rotate: false
-  xy: 89, 91
-  size: 16, 16
-  orig: 16, 16
+  xy: 69, 19
+  size: 32, 32
+  orig: 32, 32
   offset: 0, 0
-  index: 1
-waterse
+  index: 2
+light1
+  rotate: false
+  xy: 69, 19
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 6
+light1
+  rotate: false
+  xy: 103, 19
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 3
+light1
+  rotate: false
+  xy: 103, 19
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 5
+light1
+  rotate: false
+  xy: 137, 19
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 4
+fire1
   rotate: false
   xy: 1, 1
+  size: 32, 16
+  orig: 32, 16
+  offset: 0, 0
+  index: 0
+fire1
+  rotate: false
+  xy: 171, 35
+  size: 32, 16
+  orig: 32, 16
+  offset: 0, 0
+  index: 1
+fire2
+  rotate: false
+  xy: 35, 1
+  size: 32, 16
+  orig: 32, 16
+  offset: 0, 0
+  index: 0
+fire2
+  rotate: false
+  xy: 205, 35
+  size: 32, 16
+  orig: 32, 16
+  offset: 0, 0
+  index: 1
+waterisw
+  rotate: false
+  xy: 69, 1
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+lamp1
+  rotate: false
+  xy: 239, 35
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+lamp1
+  rotate: false
+  xy: 87, 1
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+lamp1
+  rotate: false
+  xy: 87, 1
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 5
+lamp1
+  rotate: false
+  xy: 257, 35
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+lamp1
+  rotate: false
+  xy: 257, 35
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 4
+lamp1
+  rotate: false
+  xy: 105, 1
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+watere
+  rotate: false
+  xy: 275, 35
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+watere
+  rotate: false
+  xy: 123, 1
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+waterine
+  rotate: false
+  xy: 293, 35
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+waterine
+  rotate: false
+  xy: 141, 1
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+waterinw
+  rotate: false
+  xy: 311, 35
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+waterinw
+  rotate: false
+  xy: 329, 35
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+waterise
+  rotate: false
+  xy: 347, 35
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+waterise
+  rotate: false
+  xy: 365, 35
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+waterisw
+  rotate: false
+  xy: 383, 35
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+waterne
+  rotate: false
+  xy: 401, 35
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+waterne
+  rotate: false
+  xy: 419, 35
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+waternw
+  rotate: false
+  xy: 437, 35
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+waternw
+  rotate: false
+  xy: 455, 35
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+watern
+  rotate: false
+  xy: 473, 35
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+watern
+  rotate: false
+  xy: 491, 35
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+waterse
+  rotate: false
+  xy: 171, 17
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 0
 waterse
   rotate: false
-  xy: 19, 19
+  xy: 189, 17
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 1
 watersw
   rotate: false
-  xy: 37, 37
+  xy: 207, 17
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 0
 watersw
   rotate: false
-  xy: 55, 55
+  xy: 225, 17
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 1
 waters
   rotate: false
-  xy: 89, 73
+  xy: 243, 17
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 0
 waters
   rotate: false
-  xy: 19, 1
+  xy: 261, 17
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 1
 waterw
   rotate: false
-  xy: 37, 19
+  xy: 279, 17
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 0
 waterw
   rotate: false
-  xy: 55, 37
+  xy: 297, 17
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 1
 water
   rotate: false
-  xy: 73, 55
+  xy: 315, 17
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 0
 water
   rotate: false
-  xy: 37, 1
+  xy: 333, 17
   size: 16, 16
   orig: 16, 16
   offset: 0, 0

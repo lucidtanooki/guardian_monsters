@@ -12,17 +12,17 @@
  </tileset>
  <layer name="ground1" width="12" height="12">
   <data encoding="base64" compression="zlib">
-   eJxjYCAd6AOxARE0DOQDcQER9Kj5g8N8dJAPxdgAABxCH+0=
+   eJxjYCAd6AOxARE0DOQDcQERNAjckWRguCs5uOk7EhB8Fx1TSf1QogGbvW2/
   </data>
  </layer>
  <layer name="walls1" width="12" height="12">
   <data encoding="base64" compression="zlib">
-   eJxjYCAdWAKxLRE0DFQCcS0RNL0AzM4KKL8cKobOpyeIZoLgoQYAWooLpQ==
+   eJxjYCAdZImhYkssYiAMA6vEUHElFrFVYtjteiCBn08qQLZvNdTOlTj4MCAjCbEXZjeIj+weEJZFEruH5sYYoNxDCVQci6Y+mgmCcYH7EqjqCQFK1JMCAHlfJWk=
   </data>
  </layer>
  <layer name="objects1" width="12" height="12">
   <data encoding="base64" compression="zlib">
-   eJxjYKAuWCVJmvqVUPV1/KTp20dAfbY8A0OOPIL/j4D61UC1a+Txq0EGr4Fq3+BQ/x1o1w4g3skPYRMCIDU/gPgnkeoHEwAAHHkQYg==
+   eJxjYKAuWCVJmvqVUPV1/KTp20dAfbY8A0OOPIL/j4D61UC1a6DqlYC0sjx+9a+B8m+gapKAdDKS+u9Au3YA8U5+CJsQAKn5AcQ/iVQ/mAAAsXQR6A==
   </data>
  </layer>
  <layer name="lights1" width="12" height="12">
@@ -32,7 +32,7 @@
  </layer>
  <layer name="tops1" width="12" height="12" opacity="0.97">
   <data encoding="base64" compression="zlib">
-   eJwzZmJgKEXD+VjEQNgEiE2BGB04YBEDATMy1BcAcT0U50HVlaPxc6F8faj5tkAxSyC2gJpjjoVvi8c9uACy+gp+BoZKfuLVk2r+YFFfDMRlaNgIaoYhmngJEAMAZ+kVWQ==
+   eJwzZmJgKEXD+VjEQNgEiE2BGB04YBEDATMy1BcAcT0U50HVlaPxc6F8faj5WWIQnC0Gkc/EwcflHmzgoTyq+gp+BoZKfvx6SDF/sKovBuIyNGwENcMQTbwEiAGwyhiP
   </data>
  </layer>
  <layer name="tops2" width="12" height="12">

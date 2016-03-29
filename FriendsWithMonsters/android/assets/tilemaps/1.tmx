@@ -7,9 +7,12 @@
  <tileset firstgid="1" name="limbusdev_world" tilewidth="16" tileheight="16">
   <image source="../spritesheets/limbusdev_world.png" width="1024" height="1024"/>
  </tileset>
+ <tileset firstgid="4097" name="limbusdev_world2" tilewidth="16" tileheight="16">
+  <image source="../../../../../../../../../../../../home/georg/Entwicklung/Java/libGDX/FriendsWithMonsters/FriendsWithMonsters/android/assets/spritesheets/limbusdev_world2.png" width="1024" height="1024"/>
+ </tileset>
  <layer name="ground1" width="32" height="32">
   <data encoding="base64" compression="zlib">
-   eJzt1DkKgDAQhWFbFTJnEsTtYOJyKxu3SzkunQ/BZVLEKb42PyGPROR5kVJKKfVCbM7+1HdFwtILmXC/ZDkLgIJVFvozb2ckwLjVR+/bGXt99MarELUF+rBxxfF+zec3hxZtQPr+fP50gBsU7G93p729/j9wg4J9n3T/tvuNuYm+7fcPDB/2FwQdjfo=
+   eJzt0sEKgzAMgOFAT1poFN9pcz7YWPWtvOj0sFdaph4GhkKZy6Hm8NFbftrGlABGKaWU+sGr2jtTPxUXBLgG1Pjf/p3mTwWAZ8zkIdBvqPPEvTqxPve/vZPr58hrhfpcIyT1vqe/bzedk+9/5k9uNQv3l7vj2r7RaYXfP/vaf659hv2T7mdFHFse2x8w3nhg/w0UgctW
   </data>
  </layer>
  <layer name="walls1" width="32" height="32">
@@ -32,7 +35,7 @@
    eJztzTENACAMALAlcM0WOAPhIICTZE9roBEAwE8tI3rW/ePes/Bf996FPwDwdgBWUgHS
   </data>
  </layer>
- <objectgroup name="colliderWalls1" width="32" height="32" visible="0">
+ <objectgroup name="colliderWalls1" width="32" height="32">
   <object x="0" y="0" width="256" height="96"/>
   <object x="0" y="96" width="32" height="224"/>
   <object x="0" y="320" width="16" height="32"/>
@@ -63,7 +66,7 @@
   <object x="400" y="80" width="16" height="16"/>
   <object x="112" y="208" width="16" height="16"/>
  </objectgroup>
- <objectgroup name="sensors" width="32" height="32" visible="0">
+ <objectgroup name="sensors" width="32" height="32">
   <object name="warpField" x="256" y="0" width="16" height="16">
    <properties>
     <property name="targetID" value="2"/>

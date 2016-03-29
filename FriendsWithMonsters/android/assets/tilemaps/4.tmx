@@ -12,17 +12,22 @@
  </tileset>
  <layer name="ground1" width="16" height="16">
   <data encoding="base64" compression="zlib">
-   eJxjYKAM3KIhVkBiy5OpPwqKydEfDcTxUBxDY78OVSzOhImHun5SzBjq+gGG16kd
+   eJxjYKAM3KIQ35FkYLgriZ2+IwHBd2EYh7rBqn8o0Pjihhj9ccBwiZfAThOjfx5Q3XwJVDpSAILJtZ8U/djsh9ED5X962g8AXX7P4A==
+  </data>
+ </layer>
+ <layer name="shadow1" width="16" height="16">
+  <data encoding="base64" compression="zlib">
+   eJxjYBi84J4Egn1fAre6mZIMDLOQ8GxJ7PpnosnDwE0g/xYSvg2VjwHSDyUgOBbIlpRiYJACYmkp4vQTC2DmSuEwfxTQH+BLbxOFIBifGD79xJhJqn50QKx+AO6fHxw=
   </data>
  </layer>
  <layer name="walls1" width="16" height="16">
   <data encoding="base64" compression="zlib">
-   eJxjYKAMzGWkDN+lEBMC//mBhACFnhzGYC6WMNTGEa6rsYhji5NsIvVjsxsfeE1k/C8iURwdPMKhDpf4UAYA91on0Q==
+   eJxjYKAMzGWkDN+lEBMC//mBhACFnhzGYC6WMCQ2bJHVEhM3q9HEsNkNAjKSDAyykpjir4mM/xig3lggXoQmj84nBB4x4ucPBwAAhRcrWw==
   </data>
  </layer>
  <layer name="objects1" width="16" height="16">
   <data encoding="base64" compression="zlib">
-   eJxjYKAOqOJnYKgG4hp+CH+VJISuB/Ib+BHqYOItvKj6dwHV7AbiPVC1K6Hq9gP5B5D0r8Sh/xdQzW8g/sOPKv6Pj4HhPx+me9H1j4KhA+r4IRgGvgPZO4B4Jz+ETQjs44dgZP0/gPgnkfr/8UPwcAAAYw8dLw==
+   eJxjYKAOqOJnYKgG4hp+CH+VJISuB/Ib+BHqYOItvKj6dwHV7AbiPVC1K6Hq9gP5B5D0r8Sh/xdQzW8g/sPPgBcslcPUv1gOvx5C4DGa/kdkmKcE1KMMxCoUumUggZI80A/ypOt7JA/BSUCcDMQJQJyIx5w6fgjGBRYA9S7Eo38fPwSTC/7xQzAMfAeydwDxTn4Im1QA0vMDiH+SqZ8SAABMzSVk
   </data>
  </layer>
  <layer name="lights1" width="16" height="16">
@@ -32,7 +37,12 @@
  </layer>
  <layer name="tops1" width="16" height="16">
   <data encoding="base64" compression="zlib">
-   eJyTZWRgiCcTywGxPBCTA6KZGBgUKNAfQ6F+EBgO+p8DcSYaViLSTJj9c9FwFg79imj2LMPhfi0c+leh2YPs/wp+BoZKfgh7CQ796OKDIfwHWn8sECfgwLNFIOpmiWCXjwNiAA/qHHE=
+   eJyTZWRgiCcTywGxPBCTA6KZGBgUyNCfKgehY5D0J8uR5wZc9icRaR457qe2/udAnIkDKxEwG2b/XBxYD02/Ipr5y3C4X0EeqBaIc9HkVqGZT8j/Sxjx86kZ/hX8DAyV/OTrf05GGqSG+2OBOAEHni0CUTdLBLt8HBADAPl7IZA=
+  </data>
+ </layer>
+ <layer name="objects2" width="16" height="16">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFMDBfbqBdMLBgkTwDw2J58vU/AOp9MIBhONLjjxwAAGUYBPs=
   </data>
  </layer>
  <objectgroup name="colliderWalls1" width="16" height="16">
@@ -42,12 +52,12 @@
   <object x="0" y="48" width="16" height="208"/>
   <object x="16" y="240" width="112" height="16"/>
   <object x="144" y="240" width="96" height="16"/>
-  <object x="16" y="144" width="80" height="16"/>
-  <object x="80" y="160" width="16" height="48"/>
+  <object x="16" y="144" width="112" height="16"/>
+  <object x="112" y="160" width="16" height="48"/>
   <object x="176" y="160" width="16" height="48"/>
   <object x="192" y="160" width="48" height="16"/>
   <object x="208" y="176" width="32" height="16"/>
-  <object x="32" y="176" width="32" height="32"/>
+  <object x="32" y="208" width="32" height="32"/>
   <object x="128" y="48" width="32" height="16"/>
   <object x="32" y="48" width="48" height="16"/>
  </objectgroup>
@@ -75,8 +85,8 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="livingEntities" width="16" height="16" visible="0">
-  <object name="person" x="48" y="80" width="16" height="16">
+ <objectgroup name="livingEntities" width="16" height="16">
+  <object name="person" x="112" y="80" width="16" height="16">
    <properties>
     <property name="male" value="true"/>
     <property name="moving" value="true"/>
@@ -86,7 +96,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="objects" width="16" height="16" visible="0">
+ <objectgroup name="objects" width="16" height="16">
   <object name="sign" x="128" y="48" width="16" height="16">
    <properties>
     <property name="text" value="The fire is warm and feels good."/>
@@ -145,6 +155,35 @@
    <properties>
     <property name="text" value="Many interesting books about the old world."/>
     <property name="title" value="Shelf"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="animations" width="16" height="16">
+  <object name="animation" x="208" y="208" width="16" height="16">
+   <properties>
+    <property name="index" value="15"/>
+   </properties>
+  </object>
+  <object name="animation" x="80" y="176" width="16" height="16">
+   <properties>
+    <property name="index" value="14"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="animatedObjects" width="16" height="16">
+  <object name="animation" x="128" y="48" width="16" height="16">
+   <properties>
+    <property name="index" value="13"/>
+   </properties>
+  </object>
+  <object name="animation" x="48" y="64" width="16" height="16">
+   <properties>
+    <property name="index" value="16"/>
+   </properties>
+  </object>
+  <object name="animation" x="48" y="176" width="16" height="16">
+   <properties>
+    <property name="index" value="16"/>
    </properties>
   </object>
  </objectgroup>

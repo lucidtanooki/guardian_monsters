@@ -12,7 +12,12 @@
  </tileset>
  <layer name="ground1" width="32" height="32">
   <data encoding="base64" compression="zlib">
-   eJztlkEKgzAURAfFXTA3qoL2XC2IKz1TLTQ7PVPbOUBFa7Vj2iweswj8Bz9hiEsBF/h5LhHQkWuk8d/pfRDE/+k/0JuRXOQP+EVhgaPV+Su66+AP/g/nLH3Ha/mXzvmWv7SvSUg8cvYOU3OcmMYArdHliV+CM3SZkVyYPXcwGF2u3Rt76z+f/XP6Z6s7us3ojjrV78h3/xOe7QIc
+   eJzt1U0KgCAQhuFBaas3qqA6WXitCvJc1XeAIrOfyZrFuxLmARX1hshLn69TRD0aFI8/wZ0R6X/6OdwClUy+lFaVJWosn9/CduKLf3JO7D2+yo+d85Rf2/UypDfWjrQ3x3PHdL+ldyf/H78f8v7cdUZjwNvhDP8epe4vi3olXA==
+  </data>
+ </layer>
+ <layer name="shadow1" width="32" height="32">
+  <data encoding="base64" compression="zlib">
+   eJztxUkNADAQw8DQ2E8PYj34k2hQNB+PZFkCAAAA/hklzcp9uR18cz34427wAHIehu0sQQ==
   </data>
  </layer>
  <layer name="walls1" width="32" height="32">
@@ -20,14 +25,9 @@
    eJztl9lOwzAQRR2TNoj4AYkvSoC2bBK/lFASVolfSln6yidxLTTCsex6SQMP9EpHE0Wd3IzszjhNzlgLGiWuQCIY4yDBNc/9YwFKj9gdwAd84Hqd96P0LUAp/J9HsQK1R6T3ncIjE/0ofStQC//nUfQV1T+Dx1z0o/QdW1R/A69W9ONviOqXxOoVuW+R+VQ/19ZsqsSpdk/XHnJTjzU3vaep/oTjeQYysM/dPjaZ3tNUfwGPEhyDE3AKZmAOFtxeS4xM9VfwqMENWIJb0IAW3HF7LTGyrb9NK9sm8JSeH7r/eTbMX88Prd/H/yxl7BNcgXNwAS7BdfqTvzj6jqH1lx7+9/A5nDD2jPgAHsETeEk3199hbdYKifLbznAvRrq/qX6aeWOI/MnDtP6VY/b49AeXP3nQvC4d+0/tN67+sGkd9f1D89o1s7fVb3ba6T/rXZ71t3BuiNVEnvUN/2Pqv2P2XpvkDKD+6+q9Y0jOgCHn76FS6/8LUf00i7uA84gqPT8kmr6hffPVOkK+0dX4BdVHf64=
   </data>
  </layer>
- <layer name="shadow1" width="32" height="32">
-  <data encoding="base64" compression="zlib">
-   eJztwQENAAAAwqD3T20PBxQAAADwbhAAAAE=
-  </data>
- </layer>
  <layer name="objects1" width="32" height="32">
   <data encoding="base64" compression="zlib">
-   eJztlkEKgCAQRX9SBGWLulHdrK7RaXJh16oIIUpFyzBoHgyKjPMGNw7wPaYSEGU8f8IBxu/dlQ0wN/uq9nltzhfF9axd3Z2jf6t9dElN2PxM88796h48/McedG6bf0PlPkF5TPG2/9yDD6H8d/m7nwjHyK5BEF9GePz1PrkEQfwb01wcYt5JKyCr4vldiO0n7CxorDT3
+   eJxjYBh84CA3A8Mh7oGzn5GHgYGJhzy9x4QYGI4LQWgYm12QgeG+PASjg0NcmGKOQLudiLQfZDayXcewYJAaXIAJSzg3Au1uIsF+ZDdgsxuf/SAAU0sJgNmDC9PafnQ3kAKoZT+5YKTbPwqoB2YzYWJ6gvtyCAzj0xPIyyMwjD8KBjc4REJdT4raUTAKRsHIBrjaxdRo77DwMjCw8g6c/cSAgbZ/FOAHAPc1O98=
   </data>
  </layer>
  <layer name="tops1" width="32" height="32">
@@ -35,7 +35,7 @@
    eJzt1OlugkAUhuEZWcTlX6+Itd4Wq94WKshl9SVKBIs6uJEmPckTpnTgY5AzQpzLhnMa65oQhiY+Wk2+C49sH8EH80NEiJGQnSJjvL4yX5vznuavy8+xxQ57sguUjA+oeua7ZHsK+arPKaUQE2jQdX5/mIynsOTv+TH3TBTuq/qcNhkOXHjwEeAbKzlsLY88Z8h6I2xbaz0wXnNuow9byyOV19nY6edzJeMDqtO5Zi31n8bF9TYnHLjw4CPA6nLilZLMm0BrzTcZT2EZF/0JX3T7M2ROhBgJUmTYKObfq05/IhXd/szJ2WKHPQqUqF6U3+lPFKLbn9Lk/UGDDgMmLPM1+Z3+hCG7/WmT48CFBx8BVq186+vx/Hv9GZITIUaCFBk2iuvPF7zfxfX/h2REiJEgRVb3JzY9+9PQDLnk/S6759r7TS6Pe8MOexQo5XGPqBTz+zJuVXu/kROuhQYdBkxMYU3U7zmkVPfO/7pd/oxemY2Xn5KdjZhfkF2OmG/wDZsjfsc+2cGI+SnZWU++0+xtd/bed5RNdtTsbQP3xVdU+OTvsed5iw8/8zuq/h3q76A5Pnu96rGp8PQdNMdnr1c9Xqtnr/9L9QPP1W0K
   </data>
  </layer>
- <objectgroup name="colliderWalls1" width="32" height="32">
+ <objectgroup name="colliderWalls1" width="32" height="32" visible="0">
   <object x="480" y="48" width="32" height="240"/>
   <object x="496" y="288" width="16" height="16"/>
   <object x="0" y="48" width="16" height="256"/>
@@ -76,8 +76,9 @@
   <object x="448" y="240" width="32" height="32"/>
   <object x="192" y="128" width="32" height="32"/>
   <object x="448" y="192" width="16" height="16"/>
+  <object x="416" y="32" width="32" height="16"/>
  </objectgroup>
- <objectgroup name="livingEntities" width="32" height="32">
+ <objectgroup name="livingEntities" width="32" height="32" visible="0">
   <object name="person" x="96" y="224" width="16" height="16">
    <properties>
     <property name="male" value="true"/>
@@ -98,7 +99,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="sensors" width="32" height="32">
+ <objectgroup name="sensors" width="32" height="32" visible="0">
   <object name="warpField" x="240" y="496" width="16" height="16">
    <properties>
     <property name="targetID" value="2"/>
@@ -237,7 +238,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="objects" width="32" height="32">
+ <objectgroup name="objects" width="32" height="32" visible="0">
   <object name="sign" x="240" y="432" width="16" height="16">
    <properties>
     <property name="text" value="Welcome in our small town."/>

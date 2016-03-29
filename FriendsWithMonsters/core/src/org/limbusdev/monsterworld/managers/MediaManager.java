@@ -143,6 +143,10 @@ public class MediaManager {
                 .findRegions("fire2"), Animation.PlayMode.LOOP));
         animatedTiles.add(new Animation(.5f, assets.get(animations, TextureAtlas.class)
                 .findRegions("fire1"), Animation.PlayMode.LOOP));
+        animatedTiles.add(new Animation(.5f, assets.get(animations, TextureAtlas.class)
+                .findRegions("lamp1"), Animation.PlayMode.LOOP));
+        animatedTiles.add(new Animation(.4f, assets.get(animations, TextureAtlas.class)
+                .findRegions("light1"), Animation.PlayMode.LOOP));
     }
     /* ............................................................................... METHODS .. */
 
@@ -242,6 +246,8 @@ public class MediaManager {
      * 12 - Water W
      * 13 - Fire 2
      * 14 - Fire 1
+     * 15 - Lamp 1
+     * 16 - Light 1
      * @param index
      * @return
      */

@@ -1,172 +1,235 @@
 
 UI.png
 format: RGBA8888
-filter: Linear,Linear
+filter: MipMapLinearLinear,MipMapLinearLinear
 repeat: none
 conversation
   rotate: false
-  xy: 1, 379
+  xy: 1, 399
   size: 454, 108
   orig: 454, 108
   offset: 0, 0
   index: -1
+dpad_idle
+  rotate: false
+  xy: 1, 141
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
 stick_bg
   rotate: false
-  xy: 1, 197
+  xy: 259, 217
   size: 180, 180
   orig: 180, 180
   offset: 0, 0
   index: -1
 title
   rotate: false
-  xy: 457, 452
+  xy: 457, 472
   size: 284, 35
   orig: 284, 35
   offset: 0, 0
   index: -1
 button_a
   rotate: false
-  xy: 1, 67
+  xy: 1, 11
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 button_adown
   rotate: false
-  xy: 183, 249
+  xy: 131, 11
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 b192down
   rotate: false
-  xy: 457, 402
+  xy: 457, 422
   size: 192, 48
   orig: 192, 48
   offset: 0, 0
   index: -1
 b192up
   rotate: false
-  xy: 743, 439
+  xy: 259, 167
   size: 192, 48
   orig: 192, 48
   offset: 0, 0
   index: -1
+dpad_down_down
+  rotate: false
+  xy: 261, 37
+  size: 106, 128
+  orig: 106, 128
+  offset: 0, 0
+  index: -1
+dpad_down_up
+  rotate: false
+  xy: 369, 37
+  size: 106, 128
+  orig: 106, 128
+  offset: 0, 0
+  index: -1
 buttonMenuDown
   rotate: false
-  xy: 313, 319
+  xy: 743, 449
   size: 154, 58
   orig: 154, 58
   offset: 0, 0
   index: -1
 buttonMenuUp
   rotate: false
-  xy: 313, 259
+  xy: 457, 362
   size: 154, 58
   orig: 154, 58
   offset: 0, 0
   index: -1
-b1down
+dpad_left_down
   rotate: false
-  xy: 1, 17
-  size: 128, 48
-  orig: 128, 48
+  xy: 441, 254
+  size: 128, 106
+  orig: 128, 106
   offset: 0, 0
   index: -1
-b1up
+dpad_top_down
   rotate: false
-  xy: 183, 199
-  size: 128, 48
-  orig: 128, 48
+  xy: 899, 379
+  size: 106, 128
+  orig: 106, 128
+  offset: 0, 0
+  index: -1
+dpad_left_up
+  rotate: false
+  xy: 571, 254
+  size: 128, 106
+  orig: 128, 106
+  offset: 0, 0
+  index: -1
+dpad_right_down
+  rotate: false
+  xy: 477, 146
+  size: 128, 106
+  orig: 128, 106
+  offset: 0, 0
+  index: -1
+dpad_right_up
+  rotate: false
+  xy: 477, 38
+  size: 128, 106
+  orig: 128, 106
+  offset: 0, 0
+  index: -1
+dpad_top_up
+  rotate: false
+  xy: 607, 124
+  size: 106, 128
+  orig: 106, 128
   offset: 0, 0
   index: -1
 bcorner64down
   rotate: false
-  xy: 469, 304
+  xy: 607, 26
   size: 96, 96
   orig: 96, 96
+  offset: 0, 0
+  index: -1
+exitConversationdown
+  rotate: false
+  xy: 613, 362
+  size: 44, 58
+  orig: 44, 58
   offset: 0, 0
   index: -1
 bcorner64up
   rotate: false
-  xy: 567, 304
+  xy: 705, 26
   size: 96, 96
   orig: 96, 96
   offset: 0, 0
   index: -1
-buttonSideBarDown
+b1down
   rotate: false
-  xy: 313, 205
-  size: 111, 52
-  orig: 111, 52
-  offset: 0, 0
-  index: -1
-buttonSideBarUp
-  rotate: false
-  xy: 469, 250
-  size: 111, 52
-  orig: 111, 52
+  xy: 715, 399
+  size: 128, 48
+  orig: 128, 48
   offset: 0, 0
   index: -1
 button_b
   rotate: false
-  xy: 131, 99
+  xy: 701, 301
   size: 96, 96
   orig: 96, 96
   offset: 0, 0
   index: -1
 button_bdown
   rotate: false
-  xy: 131, 1
+  xy: 799, 301
   size: 96, 96
   orig: 96, 96
   offset: 0, 0
   index: -1
 stick
   rotate: false
-  xy: 229, 101
+  xy: 897, 281
   size: 96, 96
   orig: 96, 96
   offset: 0, 0
   index: -1
+b1up
+  rotate: false
+  xy: 715, 251
+  size: 128, 48
+  orig: 128, 48
+  offset: 0, 0
+  index: -1
+buttonSideBarDown
+  rotate: false
+  xy: 715, 197
+  size: 111, 52
+  orig: 111, 52
+  offset: 0, 0
+  index: -1
+buttonSideBarUp
+  rotate: false
+  xy: 715, 143
+  size: 111, 52
+  orig: 111, 52
+  offset: 0, 0
+  index: -1
+exitConversationup
+  rotate: false
+  xy: 845, 241
+  size: 44, 58
+  orig: 44, 58
+  offset: 0, 0
+  index: -1
 bround64down
   rotate: false
-  xy: 229, 33
+  xy: 828, 173
   size: 64, 66
   orig: 64, 66
   offset: 0, 0
   index: -1
 bround64up
   rotate: false
-  xy: 327, 137
+  xy: 828, 105
   size: 64, 66
   orig: 64, 66
   offset: 0, 0
   index: -1
-exitConversationdown
-  rotate: false
-  xy: 582, 244
-  size: 44, 58
-  orig: 44, 58
-  offset: 0, 0
-  index: -1
-exitConversationup
-  rotate: false
-  xy: 628, 244
-  size: 44, 58
-  orig: 44, 58
-  offset: 0, 0
-  index: -1
 black
   rotate: false
-  xy: 937, 479
+  xy: 828, 241
   size: 8, 8
   orig: 8, 8
   offset: 0, 0
   index: -1
 transparent
   rotate: false
-  xy: 457, 392
+  xy: 1, 1
   size: 8, 8
   orig: 8, 8
   offset: 0, 0

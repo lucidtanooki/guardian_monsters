@@ -8,9 +8,9 @@ public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		System.setProperty("org.lwjgl.opengl.Display.allowSoftwareOpenGL", "true");
-		config.title = "MonsterWorld";
-		config.width = 800;
-		config.height = 480;
+		config.title = "Friends with Monsters";
+		config.width = 640;
+		config.height = 360;
 		new LwjglApplication(new MonsterWorld(), config);
 	}
 }

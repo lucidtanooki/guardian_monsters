@@ -20,6 +20,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
@@ -69,7 +70,6 @@ public class HUD {
         this.game = game;
         this.hero = hero;
         this.UItextures = game.media.getUITextureAtlas();
-
         this.buttons = new ArrayMap<String, Button>();
 
         // Scene2D
@@ -217,6 +217,66 @@ public class HUD {
         this.menuButtons.addAction(Actions.alpha(0));
         stage.addActor(menu);
         stage.addActor(menuButtons);
+
+        // DPAD UP
+        ImageButton dpadUp = new ImageButton(
+                new TextureRegionDrawable(game.media.getUITextureAtlas().findRegion("dpad_top_up")),
+                new TextureRegionDrawable(game.media.getUITextureAtlas().findRegion("dpad_top_down")));
+        dpadUp.setWidth(106);dpadUp.setHeight(128);
+        dpadUp.setPosition(155, 230, Align.center);
+        dpadUp.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                System.out.println("Button DPAD UP");
+                touchEntity();
+            }
+        });
+        this.stage.addActor(dpadUp);
+
+        // DPAD DOWN
+        ImageButton dpadDown = new ImageButton(
+                new TextureRegionDrawable(game.media.getUITextureAtlas().findRegion("dpad_down_up")),
+                new TextureRegionDrawable(game.media.getUITextureAtlas().findRegion("dpad_down_down")));
+        dpadDown.setWidth(106);dpadDown.setHeight(128);
+        dpadDown.setPosition(155, 80, Align.center);
+        dpadDown.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                System.out.println("Button DPAD DOWN");
+                touchEntity();
+            }
+        });
+        this.stage.addActor(dpadDown);
+
+        // DPAD LEFT
+        ImageButton dpadLeft = new ImageButton(
+                new TextureRegionDrawable(game.media.getUITextureAtlas().findRegion("dpad_left_up")),
+                new TextureRegionDrawable(game.media.getUITextureAtlas().findRegion("dpad_left_down")));
+        dpadLeft.setWidth(128);dpadLeft.setHeight(106);
+        dpadLeft.setPosition(80,155, Align.center);
+        dpadLeft.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                System.out.println("Button DPAD LEFT");
+                touchEntity();
+            }
+        });
+        this.stage.addActor(dpadLeft);
+
+        // DPAD RIGHT
+        ImageButton dpadRight = new ImageButton(
+                new TextureRegionDrawable(game.media.getUITextureAtlas().findRegion("dpad_right_up")),
+                new TextureRegionDrawable(game.media.getUITextureAtlas().findRegion("dpad_right_down")));
+        dpadRight.setWidth(128);dpadRight.setHeight(106);
+        dpadRight.setPosition(230,155, Align.center);
+        dpadRight.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                System.out.println("Button DPAD RIGHT");
+                touchEntity();
+            }
+        });
+        this.stage.addActor(dpadRight);
 
         // JoyStick
         this.joyStickBG = new Image(game.media.getUITextureAtlas().findRegion("stick_bg"));

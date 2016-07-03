@@ -11,9 +11,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
@@ -21,7 +19,7 @@ import org.limbusdev.monsterworld.FriendsWithMonsters;
 import org.limbusdev.monsterworld.ecs.components.TeamComponent;
 import org.limbusdev.monsterworld.enums.MusicType;
 import org.limbusdev.monsterworld.managers.MediaManager;
-import org.limbusdev.monsterworld.utils.GlobPref;
+import org.limbusdev.monsterworld.utils.GS;
 
 /**
  * Created by georg on 03.12.15.
@@ -151,8 +149,8 @@ public class BattleScreen implements Screen {
         // Rendering ...............................................................................
         camera   = new OrthographicCamera();    // set up the camera and viewport
         viewport = new FitViewport(
-                GlobPref.RES_X,
-                GlobPref.RES_Y,
+                GS.RES_X,
+                GS.RES_Y,
                 camera);
         viewport.apply();
         camera.position.set(camera.viewportWidth/2, camera.viewportHeight/2, 0); // center camera

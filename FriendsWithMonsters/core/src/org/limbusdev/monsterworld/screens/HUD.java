@@ -39,7 +39,7 @@ import org.limbusdev.monsterworld.geometry.IntVector2;
 import org.limbusdev.monsterworld.managers.MediaManager;
 import org.limbusdev.monsterworld.model.BattleFactory;
 import org.limbusdev.monsterworld.utils.EntityFamilies;
-import org.limbusdev.monsterworld.utils.GlobPref;
+import org.limbusdev.monsterworld.utils.GS;
 import org.limbusdev.monsterworld.managers.SaveGameManager;
 
 /**
@@ -88,7 +88,7 @@ public class HUD extends InputAdapter {
 
 
         // Scene2D
-        FitViewport fit = new FitViewport(GlobPref.RES_X, GlobPref.RES_Y);
+        FitViewport fit = new FitViewport(GS.RES_X, GS.RES_Y);
         this.stage = new Stage(fit);
         this.skin = media.skin;
 
@@ -99,8 +99,8 @@ public class HUD extends InputAdapter {
 
         // Images ............................................................................ START
         this.blackCourtain = new Image(game.media.getBattleUITextureAtlas().findRegion("black"));
-        this.blackCourtain.setWidth(GlobPref.RES_X);
-        this.blackCourtain.setHeight(GlobPref.RES_Y);
+        this.blackCourtain.setWidth(GS.RES_X);
+        this.blackCourtain.setHeight(GS.RES_Y);
         this.blackCourtain.setPosition(0, 0);
         // Images .............................................................................. END
 
@@ -125,9 +125,8 @@ public class HUD extends InputAdapter {
         tbs.pressedOffsetX = 10; tbs.pressedOffsetY = 1;
 
         // Menu Button
-        TextButton menu = new TextButton("Menu", tbs);
-        menu.setWidth(154);menu.setHeight(58);
-        menu.setPosition(GlobPref.RES_X, GlobPref.RES_Y, Align.topRight);
+        TextButton menu = new TextButton( "Menu", skin, "open-menu");
+        menu.setPosition(GS.RES_X, GS.RES_Y, Align.topRight);
         menu.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -146,16 +145,8 @@ public class HUD extends InputAdapter {
         this.menuButtons = new Group();
 
         // Save Button
-        tbs = new TextButton.TextButtonStyle();
-        tbs.font = skin.getFont("white");
-        tbs.down = new TextureRegionDrawable(UItextures.findRegion("buttonSideBarDown"));
-        tbs.up   = new TextureRegionDrawable(UItextures.findRegion("buttonSideBarUp"));
-        tbs.pressedOffsetY = -1;
-        TextButton save = new TextButton("Save", tbs);
-        save.setWidth(111);save.setHeight(52);
-        save.setPosition(
-                GlobPref.RES_X,
-                GlobPref.RES_Y - 62, Align.topRight);
+        TextButton save = new TextButton("Save", skin, "menu-entry");
+        save.setPosition(GS.RES_X, GS.RES_Y - 5*GS.ROW, Align.topRight);
         save.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -165,10 +156,8 @@ public class HUD extends InputAdapter {
         this.menuButtons.addActor(save);
 
         // Quit Button
-        TextButton quit = new TextButton("Quit", tbs);
-        quit.setWidth(111);quit.setHeight(52);
-        quit.setPosition(GlobPref.RES_X,
-                GlobPref.RES_Y - 118 , Align.topRight);
+        TextButton quit = new TextButton("Quit", skin, "menu-entry");
+        quit.setPosition(GS.RES_X, GS.RES_Y - 10*GS.ROW , Align.topRight);
         quit.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -186,10 +175,8 @@ public class HUD extends InputAdapter {
         this.menuButtons.addActor(quit);
 
         // Battle Button
-        TextButton battle = new TextButton("Battle", tbs);
-        battle.setWidth(111);battle.setHeight(52);
-        battle.setPosition(GlobPref.RES_X,
-                GlobPref.RES_Y - 174, Align.topRight);
+        TextButton battle = new TextButton("Battle", skin, "menu-entry");
+        battle.setPosition(GS.RES_X, GS.RES_Y - 15*GS.ROW, Align.topRight);
         battle.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -204,10 +191,8 @@ public class HUD extends InputAdapter {
         this.menuButtons.addActor(battle);
 
         // Team Button
-        TextButton teamButton = new TextButton("Team", tbs);
-        teamButton.setWidth(111);quit.setHeight(52);
-        teamButton.setPosition(GlobPref.RES_X,
-                GlobPref.RES_Y - 230 , Align.topRight);
+        TextButton teamButton = new TextButton("Team", skin, "menu-entry");
+        teamButton.setPosition(GS.RES_X, GS.RES_Y - 20*GS.ROW , Align.topRight);
         teamButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -219,16 +204,12 @@ public class HUD extends InputAdapter {
 
         // ................................................................................ CONTROLS
         // A Button
-        ImageButton A = new ImageButton(
-                new TextureRegionDrawable(game.media.getUITextureAtlas().findRegion("button_a")),
-                new TextureRegionDrawable(game.media.getUITextureAtlas().findRegion("button_adown")));
-        A.setSize(GlobPref.RES_X *.125f, GlobPref.RES_X *.125f);
-        A.setPosition(GlobPref.RES_X - GlobPref.RES_X *.0375f,
-                GlobPref.RES_X *.1125f, Align.bottomRight);
+        ImageButton A = new ImageButton(skin, "a");
+        A.setPosition(GS.RES_X - 3*GS.COL, 9*GS.ROW, Align.bottomRight);
         A.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                System.out.println("Button A");
+                System.out.println("Input: Button Action");
                 touchEntity();
             }
         });
@@ -236,16 +217,12 @@ public class HUD extends InputAdapter {
         this.stage.setDebugAll(true);
 
         // B Button
-        ImageButton B = new ImageButton(
-                new TextureRegionDrawable(game.media.getUITextureAtlas().findRegion("button_b")),
-                new TextureRegionDrawable(game.media.getUITextureAtlas().findRegion("button_bdown")));
-        B.setWidth(GlobPref.RES_X *.1f);B.setHeight(GlobPref.RES_X *.1f);
-        B.setPosition(GlobPref.RES_X - GlobPref.RES_X *.0125f,
-                GlobPref.RES_X *.0125f, Align.bottomRight);
+        ImageButton B = new ImageButton(skin, "b");
+        B.setPosition(GS.RES_X - GS.COL, GS.ROW, Align.bottomRight);
         B.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                System.out.println("Button B");
+                System.out.println("Input: Button Cancel");
                 switch(openHUDELement) {
                     case CONVERSATION:;
                     case SIGN: closeConversation();break;
@@ -397,7 +374,7 @@ public class HUD extends InputAdapter {
         convImg.setPosition(0,0,Align.bottomLeft);
         Image convImg2 = new Image(UItextures.findRegion("text_bg_R"));
         convImg2.setWidth(640); convImg2.setHeight(256);
-        convImg2.setPosition(GlobPref.RES_X,0,Align.bottomRight);
+        convImg2.setPosition(GS.RES_X,0,Align.bottomRight);
 
         conversationLabel.addActor(convImg);
         conversationLabel.addActor(convImg2);
@@ -409,7 +386,7 @@ public class HUD extends InputAdapter {
         convText.setHeight(108);
         convText.setWidth(316);
         convText.setWrap(true);
-        convText.setPosition(GlobPref.RES_X / 2, 98, Align.center);
+        convText.setPosition(GS.RES_X / 2, 98, Align.center);
         conversationLabel.addActor(convText);
         conversationLabel.setVisible(false);
 
@@ -417,7 +394,7 @@ public class HUD extends InputAdapter {
         titleLabel.setHeight(35);
         titleLabel.setWidth(284);
         titleLabel.setVisible(false);
-        titleLabel.setPosition(GlobPref.RES_X / 3.3f, GlobPref.RES_Y /4);
+        titleLabel.setPosition(GS.RES_X / 3.3f, GS.RES_Y /4);
         titleLabel.setAlignment(Align.center);
         conversationLabel.addActor(titleLabel);
         conversationLabel.setPosition(0,-256,Align.bottomLeft);
@@ -440,7 +417,7 @@ public class HUD extends InputAdapter {
             default: break;
         }
 
-        if(GlobPref.DEBUGGING_ON)
+        if(GS.DEBUGGING_ON)
             System.out.println("Grid cell to be checked: ("+checkGridCell.x+"|"+checkGridCell.y+")");
 
         for(Entity e : engine.getEntitiesFor(Family.all(PositionComponent.class).get())) {
@@ -448,7 +425,7 @@ public class HUD extends InputAdapter {
             if (Components.position.get(e) != null && !(e instanceof HeroEntity)) {
                 PositionComponent p = Components.position.get(e);
 
-                if(GlobPref.DEBUGGING_ON)
+                if(GS.DEBUGGING_ON)
                     System.out.println("Grid Cell of tested Entity: ("+p.onGrid.x+"|"+p.onGrid.y+")");
 
                 // Is there an entity?
@@ -511,12 +488,12 @@ public class HUD extends InputAdapter {
     private void setUpDpad() {
         // Initialize DPAD
         this.touchPos = new Vector2();
-        float borderDist = GlobPref.RES_X *0.0125f;
+        float borderDist = GS.RES_X *0.0125f;
         this.dPadArea = new Rectangle(
                 borderDist,
                 borderDist,
-                0.225f* GlobPref.RES_X +borderDist,
-                0.225f* GlobPref.RES_X +borderDist);
+                0.225f* GS.RES_X +borderDist,
+                0.225f* GS.RES_X +borderDist);
         this.dPadCenter = dPadArea.getCenter(new Vector2());
         this.dPadCenterDist = new Vector2();
 

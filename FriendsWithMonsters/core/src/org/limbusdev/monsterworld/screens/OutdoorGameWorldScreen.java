@@ -18,7 +18,7 @@ import org.limbusdev.monsterworld.FriendsWithMonsters;
 import org.limbusdev.monsterworld.ecs.EntityComponentSystem;
 import org.limbusdev.monsterworld.ecs.systems.GameArea;
 import org.limbusdev.monsterworld.managers.SaveGameManager;
-import org.limbusdev.monsterworld.utils.GlobPref;
+import org.limbusdev.monsterworld.utils.GS;
 import org.limbusdev.monsterworld.utils.UnitConverter;
 
 /**
@@ -86,7 +86,7 @@ public class OutdoorGameWorldScreen implements Screen {
         // Tiled Map
         gameArea.render(camera);
         ECS.render(batch, shpRend);
-        if(GlobPref.DEBUGGING_ON)gameArea.renderDebugging(shpRend);
+        if(GS.DEBUGGING_ON)gameArea.renderDebugging(shpRend);
 
         ECS.draw();
 
@@ -147,8 +147,8 @@ public class OutdoorGameWorldScreen implements Screen {
         // Rendering ...............................................................................
         camera   = new OrthographicCamera();    // set up the camera and viewport
         viewport = new FitViewport(
-                UnitConverter.pixelsToMeters(GlobPref.RES_X)/ GlobPref.zoom,
-                UnitConverter.pixelsToMeters(GlobPref.RES_Y)/ GlobPref.zoom,
+                UnitConverter.pixelsToMeters(GS.RES_X)/ GS.zoom,
+                UnitConverter.pixelsToMeters(GS.RES_Y)/ GS.zoom,
                 camera);
         viewport.apply();
         camera.position.set(camera.viewportWidth/2, camera.viewportHeight/2, 0); // center camera

@@ -10,19 +10,19 @@ public class UnitConverter {
     
     /* ............................................................................... METHODS .. */
     public static int pixelsToMeters(int pixels) {
-        return pixels/ GlobPref.PIXELS_PER_METER;
+        return pixels/ GS.PIXELS_PER_METER;
     }
 
     public static int metersToPixels(int meters) {
-        return meters* GlobPref.PIXELS_PER_METER;
+        return meters* GS.PIXELS_PER_METER;
     }
 
     public static int tilesToPixels(int tiles) {
-        return tiles* GlobPref.TILE_SIZE;
+        return tiles* GS.TILE_SIZE;
     }
 
     public static int pixelsToTiles(int tiles) {
-        return GlobPref.TILE_SIZE/tiles;
+        return GS.TILE_SIZE/tiles;
     }
     /* ..................................................................... GETTERS & SETTERS .. */
 }

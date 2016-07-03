@@ -1,29 +1,43 @@
 {
-com.badlogic.gdx.graphics.Color: {
-	green: { a: 1, b: 0, g: 1, r: 0 },
-	white: { a: 1, b: 1, g: 1, r: 1 },
-	red: { a: 1, b: 0, g: 0, r: 1 },
-	black: { a: 1, b: 0, g: 0, r: 0 },
-	grey: { a: 1, b: 0.2, g: 0.2, r: 0.2 },
-},
-com.badlogic.gdx.scenes.scene2d.ui.Skin$TintedDrawable: {
-	dialogDim: { name: white, color: { r: 0, g: 0, b: 0, a: 0.45 } },
-},
-com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle: {
-	default: { down: default-round-down, up: default-round },
-	toggle: { down: default-round-down, checked: default-round-down, up: default-round },
-	transparent: { }
-},
-com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
-	default: { down: default-round-down, up: default-round, font: default-font, fontColor: grey },
-	toggle: { down: default-round-down, up: default-round, checked: default-round-down, font: default-font, fontColor: white, downFontColor: red },
-	default-red: { down: red-round-down, up: red-round, font: default-font, fontColor: grey },
-	default-green: { down: green-round-down, up: green-round, font: default-font, fontColor: grey },
-	default-blue: { down: blue-round-down, up: blue-round, font: default-font, fontColor: grey }
-},
-com.badlogic.gdx.scenes.scene2d.ui.ScrollPane$ScrollPaneStyle: {
-	default: { vScroll: default-scroll, hScrollKnob: default-round-large, background: default-rect, hScroll: default-scroll, vScrollKnob: default-round-large }
-},
+  com.badlogic.gdx.graphics.Color: {
+	  green: { a: 1, b: 0, g: 1, r: 0 },
+	  white: { a: 1, b: 1, g: 1, r: 1 },
+	  red: { a: 1, b: 0, g: 0, r: 1 },
+	  black: { a: 1, b: 0, g: 0, r: 0 },
+	  grey: { a: 1, b: 0.2, g: 0.2, r: 0.2 },
+  },
+  
+  com.badlogic.gdx.scenes.scene2d.ui.Skin$TintedDrawable: {
+    dialogDim: { name: white, color: { r: 0, g: 0, b: 0, a: 0.45 } },
+  },
+  
+  com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle: {
+	  default: { down: default-round-down, up: default-round },
+	  toggle: { down: default-round-down, checked: default-round-down, up: default-round },
+	  transparent: { }
+  },
+  
+  com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle: {
+	  default:      {down: default-round-down,  up: default-round },
+	  a:            {down: button_adown,        up: button_a},
+	  b:            {down: button_bdown,        up: button_b},
+	  transparent:  { }
+  },
+  
+  com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
+	  default: { down: default-round-down, up: default-round, font: default-font, fontColor: grey },
+	  toggle: { down: default-round-down, up: default-round, checked: default-round-down, font: default-font, fontColor: white, downFontColor: red },
+	  default-red: { down: red-round-down, up: red-round, font: default-font, fontColor: grey },
+	  default-green: { down: green-round-down, up: green-round, font: default-font, fontColor: grey },
+	  default-blue: { down: blue-round-down, up: blue-round, font: default-font, fontColor: grey },
+	  open-menu: {down: buttonMenuDown, up: buttonMenuUp, font: white},
+	  menu-entry: {down: buttonSideBarDown, up: buttonSideBarUp, font: white}
+  },
+  
+  com.badlogic.gdx.scenes.scene2d.ui.ScrollPane$ScrollPaneStyle: {
+	  default: { vScroll: default-scroll, hScrollKnob: default-round-large, background: default-rect, hScroll: default-scroll, vScrollKnob: default-round-large }
+  },
+  
 com.badlogic.gdx.scenes.scene2d.ui.SelectBox$SelectBoxStyle: {
 	default: {
 		font: default-font, fontColor: white, background: default-select,

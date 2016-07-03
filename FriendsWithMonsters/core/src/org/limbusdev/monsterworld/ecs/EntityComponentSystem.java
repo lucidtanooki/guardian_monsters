@@ -28,7 +28,7 @@ import org.limbusdev.monsterworld.managers.SaveGameManager;
 import org.limbusdev.monsterworld.screens.BattleScreen;
 import org.limbusdev.monsterworld.screens.HUD;
 import org.limbusdev.monsterworld.screens.OutdoorGameWorldScreen;
-import org.limbusdev.monsterworld.utils.GlobPref;
+import org.limbusdev.monsterworld.utils.GS;
 
 /**
  * Created by georg on 21.11.15.
@@ -173,7 +173,7 @@ public class EntityComponentSystem {
      * @param shape
      */
     public void render(Batch batch, ShapeRenderer shape) {
-        if(GlobPref.DEBUGGING_ON) engine.getSystem(DebuggingSystem.class).render(shape);
+        if(GS.DEBUGGING_ON) engine.getSystem(DebuggingSystem.class).render(shape);
     }
 
     /**

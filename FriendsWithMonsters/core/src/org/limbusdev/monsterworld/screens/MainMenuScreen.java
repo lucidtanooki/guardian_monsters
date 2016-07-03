@@ -22,7 +22,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 
 import org.limbusdev.monsterworld.FriendsWithMonsters;
 import org.limbusdev.monsterworld.utils.GameState;
-import org.limbusdev.monsterworld.utils.GlobPref;
+import org.limbusdev.monsterworld.utils.GS;
 import org.limbusdev.monsterworld.managers.SaveGameManager;
 
 /**
@@ -49,8 +49,8 @@ public class MainMenuScreen implements Screen {
         this.uiTA = game.media.getUITextureAtlas();
 
         Image bg = new Image(uiTA.findRegion("black"));
-        bg.setWidth(GlobPref.RES_X);
-        bg.setHeight(GlobPref.RES_Y);
+        bg.setWidth(GS.RES_X);
+        bg.setHeight(GS.RES_Y);
         bg.setPosition(0,0);
         black = bg;
 
@@ -125,7 +125,7 @@ public class MainMenuScreen implements Screen {
 
         // Scene2D
         FitViewport fit = new FitViewport(
-                GlobPref.RES_X, GlobPref.RES_Y);
+                GS.RES_X, GS.RES_Y);
         this.stage = new Stage(fit);
         Gdx.input.setInputProcessor(stage);
         this.skin = game.media.skin;
@@ -133,8 +133,8 @@ public class MainMenuScreen implements Screen {
         this.logoScreen = new Group();
 
         Image bg = new Image(game.media.getMainMenuBGImg2());
-        bg.setWidth(GlobPref.RES_X);
-        bg.setHeight(GlobPref.RES_Y);
+        bg.setWidth(GS.RES_X);
+        bg.setHeight(GS.RES_Y);
         bg.setPosition(0, 0);
         stage.addActor(bg);
 
@@ -143,7 +143,7 @@ public class MainMenuScreen implements Screen {
         Image logo = new Image(game.media.getMainMenuBGImg());
         logo.setWidth(400);
         logo.setHeight(251);
-        logo.setPosition(GlobPref.RES_X / 2, GlobPref.RES_Y / 2, Align.center);
+        logo.setPosition(GS.RES_X / 2, GS.RES_Y / 2, Align.center);
         logo.addAction(Actions.forever(Actions.sequence(
                         Actions.moveBy(0,-7, 3, Interpolation.sine),
                         Actions.moveBy(0,7, 3, Interpolation.sine)
@@ -162,7 +162,7 @@ public class MainMenuScreen implements Screen {
         TextButton button = new TextButton("Touch to Start", tbs);
         button.setWidth(300);
         button.setHeight(75);
-        button.setPosition(GlobPref.RES_X / 2, 92f, Align.center);
+        button.setPosition(GS.RES_X / 2, 92f, Align.center);
 
         button.addListener(new ClickListener() {
             @Override
@@ -187,14 +187,14 @@ public class MainMenuScreen implements Screen {
 
         // .................................................................................. IMAGES
         Image bg = new Image(uiTA.findRegion("black"));
-        bg.setWidth(GlobPref.RES_X);bg.setHeight(GlobPref.RES_Y);
+        bg.setWidth(GS.RES_X);bg.setHeight(GS.RES_Y);
         bg.setPosition(0, 0);
         bg.addAction(Actions.alpha(.75f));
         startMenu.addActor(bg);
 
         Image mon = new Image(game.media.getMonsterSprite(100));
         mon.setWidth(256);mon.setHeight(256);
-        mon.setPosition(GlobPref.RES_X - 64, 64, Align.bottomRight);
+        mon.setPosition(GS.RES_X - 64, 64, Align.bottomRight);
         startMenu.addActor(mon);
 
         // ................................................................................. BUTTONS
@@ -213,7 +213,7 @@ public class MainMenuScreen implements Screen {
         TextButton button = new TextButton(startButton, tbs);
         button.setWidth(300);
         button.setHeight(75);
-        button.setPosition(32, GlobPref.RES_Y - 32, Align.topLeft);
+        button.setPosition(32, GS.RES_Y - 32, Align.topLeft);
 
         button.addListener(new ClickListener() {
             @Override
@@ -235,7 +235,7 @@ public class MainMenuScreen implements Screen {
         button = new TextButton("Credits", tbs);
         button.setWidth(300);
         button.setHeight(75);
-        button.setPosition(32, GlobPref.RES_Y - 128, Align.topLeft);
+        button.setPosition(32, GS.RES_Y - 128, Align.topLeft);
 
         button.addListener(new ClickListener() {
             @Override
@@ -247,7 +247,7 @@ public class MainMenuScreen implements Screen {
                 ));
                 stage.addActor(creditsScreen);
                 creditsScreen.addAction(Actions.sequence(
-                        Actions.moveTo(0, GlobPref.RES_Y),
+                        Actions.moveTo(0, GS.RES_Y),
                         Actions.alpha(0), Actions.visible(true), Actions.fadeIn(2),
                         Actions.moveBy(0, 2000, 12),
                         Actions.fadeOut(2),Actions.visible(false)
@@ -265,16 +265,16 @@ public class MainMenuScreen implements Screen {
     public void setUpCredits() {
         this.creditsScreen = new Group();
         Image bg = new Image(uiTA.findRegion("black"));
-        bg.setWidth(GlobPref.RES_X);bg.setHeight(4000);
-        bg.setPosition(0, GlobPref.RES_Y, Align.topLeft);
+        bg.setWidth(GS.RES_X);bg.setHeight(4000);
+        bg.setPosition(0, GS.RES_Y, Align.topLeft);
         bg.addAction(Actions.alpha(.75f));
         creditsScreen.addActor(bg);
         Image limbusLogo = new Image(game.media.getLogosTextureAtlas().findRegion("limbusdev"));
         limbusLogo.setWidth(254);limbusLogo.setHeight(44);
-        limbusLogo.setPosition(GlobPref.RES_X / 2, -900, Align.center);
+        limbusLogo.setPosition(GS.RES_X / 2, -900, Align.center);
         Image libgdxLogo = new Image(game.media.getLogosTextureAtlas().findRegion("libgdx"));
         libgdxLogo.setWidth(256);libgdxLogo.setHeight(43);
-        libgdxLogo.setPosition(GlobPref.RES_X / 2, -1900, Align.center);
+        libgdxLogo.setPosition(GS.RES_X / 2, -1900, Align.center);
 
         String creditText = "Developed by\n\n" +
                 "Georg Eckert, LimbusDev 2016\n\n\n\n" +
@@ -292,7 +292,7 @@ public class MainMenuScreen implements Screen {
         labs.font = skin.getFont("white");
         Label text = new Label(creditText, labs);
         text.setAlignment(Align.top,Align.top);
-        text.setPosition(GlobPref.RES_X /2, -2900, Align.left);
+        text.setPosition(GS.RES_X /2, -2900, Align.left);
         text.setWidth(0);text.setHeight(2300);
         text.setWrap(true);
 
@@ -306,12 +306,12 @@ public class MainMenuScreen implements Screen {
     public void setUpIntro() {
         this.introScreen = new Group();
         Image bg = new Image(uiTA.findRegion("black"));
-        bg.setWidth(GlobPref.RES_X);
-        bg.setHeight(GlobPref.RES_Y);
+        bg.setWidth(GS.RES_X);
+        bg.setHeight(GS.RES_Y);
         bg.setPosition(0,0);
         Image logo = new Image(game.media.getLogosTextureAtlas().findRegion("limbusdev"));
         logo.setWidth(264);logo.setHeight(44);
-        logo.setPosition(GlobPref.RES_X / 2, GlobPref.RES_Y / 2,Align.center);
+        logo.setPosition(GS.RES_X / 2, GS.RES_Y / 2,Align.center);
         introScreen.addActor(bg);
         introScreen.addActor(logo);
     }

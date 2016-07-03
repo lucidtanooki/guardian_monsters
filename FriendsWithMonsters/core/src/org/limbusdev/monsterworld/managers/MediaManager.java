@@ -40,9 +40,9 @@ public class MediaManager {
     private Array<String> battleMusic;
     private Array<String> maleSprites, femaleSprites;
     private Array<Animation> animatedTiles;
-    public  Skin skin;
+    public  Skin skin, battleSkin;
     
-    /* ........................................................................... CONSTRUCTOR .. */
+    /* ................,........................................................... CONSTRUCTOR .. */
     public MediaManager() {
         this.assets = new AssetManager();
         assets.load(this.heroSpritesheetFile, TextureAtlas.class);
@@ -98,12 +98,17 @@ public class MediaManager {
         gen.dispose();
 
         this.skin = new Skin();
-
         skin.addRegions(new TextureAtlas(Gdx.files.internal("scene2d/uiskin.atlas")));
+        skin.addRegions(new TextureAtlas(Gdx.files.internal("scene2d/UI.pack")));
         skin.add("default-font", font32);
         skin.add("white", font32w);
-
         skin.load(Gdx.files.internal("scene2d/uiskin.json"));
+
+        this.battleSkin = new Skin();
+        battleSkin.addRegions(new TextureAtlas(Gdx.files.internal("scene2d/battleUI.pack")));
+        battleSkin.add("default-font", font32);
+        battleSkin.add("white", font32w);
+        battleSkin.load(Gdx.files.internal("scene2d/battleuiskin.json"));
 
         // Animated Tiles
         animatedTiles = new Array<Animation>();

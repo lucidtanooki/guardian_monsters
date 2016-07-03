@@ -13,6 +13,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 
 import org.limbusdev.monsterworld.managers.MediaManager;
+import org.limbusdev.monsterworld.utils.GS;
 
 /**
  * Created by georg on 03.07.16.
@@ -24,26 +25,16 @@ public class MonsterStateWidget extends WidgetGroup {
     private ProgressBar epBar;
     private Label nameLabel;
     private Label levelLabel;
-    private Image hudBgImg;
+    private Image hudBgImg, hudRingImg;
 
-    public MonsterStateWidget(MediaManager media, Skin skin) {
-        ProgressBar.ProgressBarStyle HPbarStyle = new ProgressBar.ProgressBarStyle();
-        HPbarStyle.background = skin.getDrawable("invis");
-        HPbarStyle.knobBefore = skin.getDrawable("HP-slider");
-        ProgressBar.ProgressBarStyle MPbarStyle = new ProgressBar.ProgressBarStyle();
-        MPbarStyle.background = skin.getDrawable("invis");
-        MPbarStyle.knobBefore = skin.getDrawable("MP-slider");
-        ProgressBar.ProgressBarStyle RecovBarStyle = new ProgressBar.ProgressBarStyle();
-        RecovBarStyle.background = skin.getDrawable("invis");
-        RecovBarStyle.knobBefore = skin.getDrawable("red-slider-vert");
-        ProgressBar.ProgressBarStyle ExpBarStyle = new ProgressBar.ProgressBarStyle();
-        ExpBarStyle.background = skin.getDrawable("invis");
-        ExpBarStyle.knobBefore = skin.getDrawable("yellow-slider-hor");
-
-        hudBgImg = new Image(media.getUITextureAtlas().findRegion("monStateUIL"));
+    public MonsterStateWidget(Skin skin) {
+        hudBgImg = new Image(skin.getDrawable("monStateUIL"));
         hudBgImg.setPosition(0,0,Align.bottomLeft);
         hudBgImg.setHeight(56);
         hudBgImg.setWidth(416);
+        hudRingImg = new Image(skin.getDrawable("monStateWidgetRing"));
+        hudRingImg.setPosition(GS.COL*12,0,Align.bottomLeft);
+        hudRingImg.setSize(56,56);
 
         Label.LabelStyle ls = new Label.LabelStyle();
         ls.background = skin.getDrawable("invis");
@@ -55,13 +46,13 @@ public class MonsterStateWidget extends WidgetGroup {
         nameLabel.setHeight(48);
         nameLabel.setPosition(24,4);
 
-        hpBar = new ProgressBar(0, 100, 1, false, HPbarStyle);
-        mpBar = new ProgressBar(0, 100, 1, false, MPbarStyle);
-        rpBar = new ProgressBar(0, 100, 1, true, RecovBarStyle);
-        epBar = new ProgressBar(0, 100, 1, false, ExpBarStyle);
+        hpBar = new ProgressBar(0, 100, 1, false, skin, "hp");
+        mpBar = new ProgressBar(0, 100, 1, false, skin, "hp");
+        rpBar = new ProgressBar(0, 100, 1, true, skin, "hp");
+        epBar = new ProgressBar(0, 100, 1, false, skin, "hp");
 
-        hpBar.setPosition(124, 14);
-        hpBar.setWidth(128);
+        hpBar.setPosition(240,23,Align.bottomLeft);
+        hpBar.setSize(176,19);
         hpBar.setValue(100);
         mpBar.setPosition(124, 6);
         mpBar.setWidth(100);
@@ -90,6 +81,7 @@ public class MonsterStateWidget extends WidgetGroup {
         this.addActor(mpBar);
         this.addActor(rpBar);
         this.addActor(epBar);
+        this.addActor(hudRingImg);
         this.addActor(nameLabel);
         this.addActor(levelLabel);
     }

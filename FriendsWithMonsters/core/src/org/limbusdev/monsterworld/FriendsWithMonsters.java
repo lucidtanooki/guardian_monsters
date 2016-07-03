@@ -10,7 +10,7 @@ import org.limbusdev.monsterworld.managers.SaveGameManager;
 import org.limbusdev.monsterworld.screens.MainMenuScreen;
 import org.limbusdev.monsterworld.screens.OutdoorGameWorldScreen;
 import org.limbusdev.monsterworld.utils.GameState;
-import org.limbusdev.monsterworld.utils.GlobPref;
+import org.limbusdev.monsterworld.utils.GS;
 
 public class FriendsWithMonsters extends Game {
 	/* ............................................................................ ATTRIBUTES .. */
@@ -26,7 +26,7 @@ public class FriendsWithMonsters extends Game {
         font  = new BitmapFont();
         media = new MediaManager();
 
-        if(GlobPref.SKIP_START_MENU) {
+        if(GS.SKIP_START_MENU) {
             if(SaveGameManager.doesGameSaveExist()) {
                 GameState state = SaveGameManager.loadSaveGame();
                 this.setScreen(new OutdoorGameWorldScreen(this, state.map, 1, true));

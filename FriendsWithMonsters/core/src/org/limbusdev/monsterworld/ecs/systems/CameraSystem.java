@@ -13,7 +13,7 @@ import org.limbusdev.monsterworld.ecs.components.CameraComponent;
 import org.limbusdev.monsterworld.ecs.components.Components;
 import org.limbusdev.monsterworld.ecs.components.PositionComponent;
 import org.limbusdev.monsterworld.geometry.IntRectangle;
-import org.limbusdev.monsterworld.utils.GlobPref;
+import org.limbusdev.monsterworld.utils.GS;
 
 /**
  * The camera system updates the cameras position according to the hero's position by keeping it
@@ -40,8 +40,8 @@ public class CameraSystem extends EntitySystem {
         this.mapOutline = new IntRectangle(
                 0,
                 0,
-                tiledMap.getProperties().get("width", Integer.class)* GlobPref.TILE_SIZE,
-                tiledMap.getProperties().get("height", Integer.class)* GlobPref.TILE_SIZE
+                tiledMap.getProperties().get("width", Integer.class)* GS.TILE_SIZE,
+                tiledMap.getProperties().get("height", Integer.class)* GS.TILE_SIZE
         );
     }
 

@@ -22,7 +22,7 @@ import org.limbusdev.monsterworld.geometry.WarpPoint;
 import org.limbusdev.monsterworld.managers.MediaManager;
 import org.limbusdev.monsterworld.model.MonsterArea;
 import org.limbusdev.monsterworld.rendering.OrthogonalTiledMapAndEntityRenderer;
-import org.limbusdev.monsterworld.utils.GlobPref;
+import org.limbusdev.monsterworld.utils.GS;
 
 /**
  * Contains logic and information about one game world area like a forest or a path. One
@@ -175,10 +175,10 @@ public class GameArea {
         for(int i=0; i<mapWidth+2; i++) {
             for(int j=0; j<2; j++)
                 colliders.add(new IntRectangle(
-                                (-1 + i)* GlobPref.TILE_SIZE,
-                                (-1 + j*(mapHeight+1))* GlobPref.TILE_SIZE,
-                                GlobPref.TILE_SIZE,
-                                GlobPref.TILE_SIZE)
+                                (-1 + i)* GS.TILE_SIZE,
+                                (-1 + j*(mapHeight+1))* GS.TILE_SIZE,
+                                GS.TILE_SIZE,
+                                GS.TILE_SIZE)
                 );
         }
 
@@ -186,10 +186,10 @@ public class GameArea {
             for(int j=0; j<2; j++) {
                 colliders.add(
                         new IntRectangle(
-                                (-1 + j*(mapWidth+1))* GlobPref.TILE_SIZE,
-                                i* GlobPref.TILE_SIZE,
-                                GlobPref.TILE_SIZE,
-                                GlobPref.TILE_SIZE
+                                (-1 + j*(mapWidth+1))* GS.TILE_SIZE,
+                                i* GS.TILE_SIZE,
+                                GS.TILE_SIZE,
+                                GS.TILE_SIZE
                         )
                 );
             }

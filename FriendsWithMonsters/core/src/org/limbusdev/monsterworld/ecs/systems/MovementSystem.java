@@ -21,7 +21,7 @@ import org.limbusdev.monsterworld.geometry.IntVector2;
 import org.limbusdev.monsterworld.geometry.WarpPoint;
 import org.limbusdev.monsterworld.model.BattleFactory;
 import org.limbusdev.monsterworld.model.MonsterArea;
-import org.limbusdev.monsterworld.utils.GlobPref;
+import org.limbusdev.monsterworld.utils.GS;
 
 /**
  * Created by georg on 23.11.15.
@@ -90,32 +90,32 @@ public class MovementSystem extends EntitySystem {
             switch(input.skyDir) {
                 case N:
                     position.nextX = position.x;
-                    position.nextY = position.y + GlobPref.TILE_SIZE;
+                    position.nextY = position.y + GS.TILE_SIZE;
                     break;
                 case W:
-                    position.nextX = position.x - GlobPref.TILE_SIZE;
+                    position.nextX = position.x - GS.TILE_SIZE;
                     position.nextY = position.y;
                     break;
                 case E:
-                    position.nextX = position.x + GlobPref.TILE_SIZE;
+                    position.nextX = position.x + GS.TILE_SIZE;
                     position.nextY = position.y;
                     break;
                 default:
                     position.nextX = position.x;
-                    position.nextY = position.y - GlobPref.TILE_SIZE;
+                    position.nextY = position.y - GS.TILE_SIZE;
                     break;
             }
 
             // Check whether movement is possible or blocked by a collider
             IntVector2 nextPos = new IntVector2(0,0);
             for(IntRectangle r : ecs.gameArea.getColliders()) {
-                nextPos.x = position.nextX + GlobPref.TILE_SIZE / 2;
-                nextPos.y = position.nextY + GlobPref.TILE_SIZE / 2;
+                nextPos.x = position.nextX + GS.TILE_SIZE / 2;
+                nextPos.y = position.nextY + GS.TILE_SIZE / 2;
                 if (r.contains(nextPos)) return;
             }
             for(IntRectangle r : ecs.gameArea.getMovingColliders()) {
-                nextPos.x = position.nextX + GlobPref.TILE_SIZE / 2;
-                nextPos.y = position.nextY + GlobPref.TILE_SIZE / 2;
+                nextPos.x = position.nextX + GS.TILE_SIZE / 2;
+                nextPos.y = position.nextY + GS.TILE_SIZE / 2;
                 if (!collider.equals(r) && r.contains(nextPos)) return;
             }
 
@@ -130,7 +130,7 @@ public class MovementSystem extends EntitySystem {
 
 
         // If entity is already moving, and last incremental step has completed (long enough ago)
-        if(input.moving && TimeUtils.timeSinceMillis(position.lastPixelStep) > GlobPref.ONE_STEPDURATION_MS) {
+        if(input.moving && TimeUtils.timeSinceMillis(position.lastPixelStep) > GS.ONE_STEPDURATION_MS) {
 
             switch(input.skyDir) {
                 case N: position.y += 1;break;
@@ -177,8 +177,8 @@ public class MovementSystem extends EntitySystem {
                 // Check whether hero can get attacked by monsters
                 for(MonsterArea ma : ecs.gameArea.getMonsterAreas()) {
                     if (ma.contains(new IntVector2(
-                            position.x + GlobPref.TILE_SIZE / 2,
-                            position.y + GlobPref.TILE_SIZE / 2))
+                            position.x + GS.TILE_SIZE / 2,
+                            position.y + GS.TILE_SIZE / 2))
                             && MathUtils.randomBoolean(ma.attackProbabilities.get(0))) {
 
                         System.out.print("Monster appeared!\n");

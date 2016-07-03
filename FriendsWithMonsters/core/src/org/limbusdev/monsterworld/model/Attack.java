@@ -2,7 +2,7 @@ package org.limbusdev.monsterworld.model;
 
 import org.limbusdev.monsterworld.enums.AttackType;
 import org.limbusdev.monsterworld.enums.SFXType;
-import org.limbusdev.monsterworld.utils.GlobalSettings;
+import org.limbusdev.monsterworld.utils.GlobPref;
 
 /**
  * Created by georg on 06.12.15.
@@ -19,7 +19,7 @@ public class Attack {
     public Attack(AttackType attackType, int damage, String name, SFXType sfxType, int sfxIndex) {
         this.attackType = attackType;
         this.damage = damage;
-        if(GlobalSettings.DEBUGGING_ON) this.damage = 10; // TODO
+        if(GlobPref.DEBUGGING_ON) this.damage = 10; // TODO
         this.name = name;
         this.sfxIndex = sfxIndex;
         this.sfxType = sfxType;

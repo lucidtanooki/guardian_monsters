@@ -5,29 +5,19 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.math.Circle;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-import org.limbusdev.monsterworld.ecs.components.ColliderComponent;
 import org.limbusdev.monsterworld.ecs.components.Components;
-import org.limbusdev.monsterworld.ecs.components.ConversationComponent;
 import org.limbusdev.monsterworld.ecs.components.HeroComponent;
 import org.limbusdev.monsterworld.ecs.components.PositionComponent;
-import org.limbusdev.monsterworld.ecs.components.TitleComponent;
 import org.limbusdev.monsterworld.ecs.entities.HeroEntity;
 import org.limbusdev.monsterworld.enums.SkyDirection;
 import org.limbusdev.monsterworld.geometry.IntVector2;
 import org.limbusdev.monsterworld.screens.HUD;
 import org.limbusdev.monsterworld.utils.EntityFamilies;
-import org.limbusdev.monsterworld.utils.GlobalSettings;
-
-import javax.xml.bind.annotation.XmlElementDecl;
+import org.limbusdev.monsterworld.utils.GlobPref;
 
 /**
  * The InputSystem extends {@link EntitySystem} and implements an{@link InputProcessor}. It enters
@@ -44,13 +34,11 @@ public class InputSystem extends EntitySystem implements InputProcessor {
     private Entity hero;
     private boolean keyboard;
     private SkyDirection lastDirKey;
-    private Circle joyStickArea;
     /* ........................................................................... CONSTRUCTOR .. */
     public InputSystem(Viewport viewport, HUD hud) {
         this.viewport = viewport;
         this.hud = hud;
         keyboard = false;
-        this.joyStickArea = new Circle(98,98,150);
     }
     /* ............................................................................... METHODS .. */
     public void addedToEngine(Engine engine) {
@@ -64,55 +52,16 @@ public class InputSystem extends EntitySystem implements InputProcessor {
     }
 
     public void update(float deltaTime) {
-
         // Unblock talking entities if hero isn't talking anymore
         for(Entity e : speakingEntities)
                 if(Components.path.get(e).talking)
                     if(!Components.input.get(hero).talking)
                         Components.path.get(e).talking = false;
-
-
-        // If screen is touched continue movement
-        if(Components.input.get(hero).touchDown) {
-            Vector3 touchPos = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
-
-            if(GlobalSettings.JoyStick) {
-                hud.stage.getCamera().unproject(touchPos);
-                // Use Display-Joystick
-                if(joyStickArea.contains(touchPos.x, touchPos.y)) {
-                    hud.updateJoyStick(touchPos.x, touchPos.y);
-                    if (!Components.input.get(hero).moving) {
-                        Components.input.get(hero).skyDir
-                                = decideMovementDirection(98, 98, touchPos.x, touchPos.y);
-                        Components.input.get(hero).startMoving = decideIfToMove(98, 98,
-                                new Vector2(touchPos.x, touchPos.y));
-                    }
-                } else {
-                    // Reset JoyStick Position
-                    hud.resetJoyStick();
-                }
-            } else {
-                viewport.unproject(touchPos);
-                PositionComponent heroPos = Components.position.get(hero);
-                if (!Components.input.get(hero).moving) {
-                    // Touch
-                    if (!keyboard) {
-                        Components.input.get(hero).skyDir
-                                = decideMovementDirection(heroPos.x, heroPos.y, touchPos.x, touchPos.y);
-                        Components.input.get(hero).startMoving = decideIfToMove(heroPos.x, heroPos.y,
-                                new Vector2(touchPos.x, touchPos.y));
-                    } else {
-                        Components.input.get(hero).skyDir = lastDirKey;
-                        Components.input.get(hero).startMoving = true;
-                    }
-                }
-            }
-
-        }
     }
 
     @Override
     public boolean keyDown(int keycode) {
+        /*
         // If the pressed key is one of the arrow keys
         SkyDirection typedDir = null;
         switch (keycode) {
@@ -136,20 +85,20 @@ public class InputSystem extends EntitySystem implements InputProcessor {
         if (typedDir != null) {
             Components.input.get(hero).touchDown = true;
             lastDirKey = typedDir;
-        }
+        }*/
         return false;
     }
 
     @Override
     public boolean keyUp(int keycode) {
-        // If none of the arrow keys is pressed
+        /*// If none of the arrow keys is pressed
         if(!Gdx.input.isKeyPressed(Input.Keys.UP) &&
                 !Gdx.input.isKeyPressed(Input.Keys.DOWN) &&
                 !Gdx.input.isKeyPressed(Input.Keys.LEFT) &&
                 !Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
             Components.input.get(hero).touchDown = false;
             return true;
-        }
+        }*/
         return false;
     }
 
@@ -160,25 +109,17 @@ public class InputSystem extends EntitySystem implements InputProcessor {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        keyboard = false;
-
-        touchDragged(screenX, screenY, pointer);
-
-        return true;
+        return false;
     }
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        // Stop Hero Movement
-        Components.input.get(hero).touchDown = false;
-        if(GlobalSettings.JoyStick) hud.resetJoyStick();
-        return true;
+        return false;
     }
 
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
-        Components.input.get(hero).touchDown = true;
-        return true;
+        return false;
     }
 
     @Override
@@ -197,7 +138,6 @@ public class InputSystem extends EntitySystem implements InputProcessor {
      * @return
      */
     public Entity checkForNearInteractiveObjects(PositionComponent pos, SkyDirection dir) {
-
         Entity nearEntity=null;
         IntVector2 checkGridCell = new IntVector2(pos.onGrid.x,pos.onGrid.y);
 
@@ -209,7 +149,7 @@ public class InputSystem extends EntitySystem implements InputProcessor {
             default: break;
         }
 
-        if(GlobalSettings.DEBUGGING_ON)
+        if(GlobPref.DEBUGGING_ON)
             System.out.println("Grid cell to be checked: ("+checkGridCell.x+"|"+checkGridCell.y+")");
 
         for(Entity e : this.getEngine().getEntitiesFor(Family.all(PositionComponent.class).get())) {
@@ -217,7 +157,7 @@ public class InputSystem extends EntitySystem implements InputProcessor {
             if (Components.position.get(e) != null && !(e instanceof HeroEntity)) {
                 PositionComponent p = Components.position.get(e);
 
-                if(GlobalSettings.DEBUGGING_ON)
+                if(GlobPref.DEBUGGING_ON)
                     System.out.println("Grid Cell of tested Entity: ("+p.onGrid.x+"|"+p.onGrid.y+")");
 
                 // Is there an entity?
@@ -239,7 +179,7 @@ public class InputSystem extends EntitySystem implements InputProcessor {
      */
     public SkyDirection decideMovementDirection(int entX, int entY, float targetX, float targetY) {
         SkyDirection dir;
-        int tileCenter = GlobalSettings.TILE_SIZE/2;
+        int tileCenter = GlobPref.TILE_SIZE/2;
 
         if(Math.abs(targetY - (entY + tileCenter)) > Math.abs(targetX - (entX+tileCenter))) {
             // Vertical Movement
@@ -273,8 +213,8 @@ public class InputSystem extends EntitySystem implements InputProcessor {
      */
     public boolean decideIfToMove(int entX, int entY, Vector2 target) {
         boolean move;
-        if(target.dst(entX+GlobalSettings.TILE_SIZE/2,entY+GlobalSettings.TILE_SIZE/2) >
-                2*GlobalSettings.TILE_SIZE) move = true;
+        if(target.dst(entX+ GlobPref.TILE_SIZE/2,entY+ GlobPref.TILE_SIZE/2) >
+                2* GlobPref.TILE_SIZE) move = true;
         else
             move = false;
         return move;

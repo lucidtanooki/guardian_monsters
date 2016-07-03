@@ -21,7 +21,7 @@ import org.limbusdev.monsterworld.geometry.IntVector2;
 import org.limbusdev.monsterworld.geometry.WarpPoint;
 import org.limbusdev.monsterworld.model.BattleFactory;
 import org.limbusdev.monsterworld.model.MonsterArea;
-import org.limbusdev.monsterworld.utils.GlobalSettings;
+import org.limbusdev.monsterworld.utils.GlobPref;
 
 /**
  * Created by georg on 23.11.15.
@@ -45,7 +45,6 @@ public class MovementSystem extends EntitySystem {
         // Update Hero
         checkWarp();
         updateHero();
-
     }
 
     /**
@@ -66,11 +65,12 @@ public class MovementSystem extends EntitySystem {
 
     public void updateHero() {
         // Only move hero, when player is not speaking to an entity
-        if (!Components.input.get(hero).talking)
+        if (!Components.input.get(hero).talking) {
             makeOneStep(
                     Components.position.get(hero),
                     Components.input.get(hero),
                     Components.collision.get(hero));
+        }
     }
 
     /**
@@ -83,38 +83,39 @@ public class MovementSystem extends EntitySystem {
                             ColliderComponent collider) {
 
         // Initialize Hero Movement
-        if(input.startMoving) {
+        if(input.startMoving && TimeUtils.timeSinceMillis(input.firstTip) > 100 &&
+                input.touchDown) {
 
             // Define potential next position according to the input direction
             switch(input.skyDir) {
                 case N:
                     position.nextX = position.x;
-                    position.nextY = position.y + GlobalSettings.TILE_SIZE;
+                    position.nextY = position.y + GlobPref.TILE_SIZE;
                     break;
                 case W:
-                    position.nextX = position.x - GlobalSettings.TILE_SIZE;
+                    position.nextX = position.x - GlobPref.TILE_SIZE;
                     position.nextY = position.y;
                     break;
                 case E:
-                    position.nextX = position.x + GlobalSettings.TILE_SIZE;
+                    position.nextX = position.x + GlobPref.TILE_SIZE;
                     position.nextY = position.y;
                     break;
                 default:
                     position.nextX = position.x;
-                    position.nextY = position.y - GlobalSettings.TILE_SIZE;
+                    position.nextY = position.y - GlobPref.TILE_SIZE;
                     break;
             }
 
-            //Check whether movement is possible or blocked by a collider
+            // Check whether movement is possible or blocked by a collider
             IntVector2 nextPos = new IntVector2(0,0);
             for(IntRectangle r : ecs.gameArea.getColliders()) {
-                nextPos.x = position.nextX + GlobalSettings.TILE_SIZE / 2;
-                nextPos.y = position.nextY + GlobalSettings.TILE_SIZE / 2;
+                nextPos.x = position.nextX + GlobPref.TILE_SIZE / 2;
+                nextPos.y = position.nextY + GlobPref.TILE_SIZE / 2;
                 if (r.contains(nextPos)) return;
             }
             for(IntRectangle r : ecs.gameArea.getMovingColliders()) {
-                nextPos.x = position.nextX + GlobalSettings.TILE_SIZE / 2;
-                nextPos.y = position.nextY + GlobalSettings.TILE_SIZE / 2;
+                nextPos.x = position.nextX + GlobPref.TILE_SIZE / 2;
+                nextPos.y = position.nextY + GlobPref.TILE_SIZE / 2;
                 if (!collider.equals(r) && r.contains(nextPos)) return;
             }
 
@@ -123,13 +124,13 @@ public class MovementSystem extends EntitySystem {
             collider.collider.y = position.nextY;
             position.lastPixelStep = TimeUtils.millis();    // remember time of this iteration
 
-            input.moving = true;
+            input.moving = true;        // entity is moving right now
             input.startMoving = false;  // because entity now started moving
         }
 
 
-        // If entity is already moving, and last step has completed (long enough ago)
-        if(input.moving && TimeUtils.timeSinceMillis(position.lastPixelStep) > GlobalSettings.ONE_STEPDURATION_MS) {
+        // If entity is already moving, and last incremental step has completed (long enough ago)
+        if(input.moving && TimeUtils.timeSinceMillis(position.lastPixelStep) > GlobPref.ONE_STEPDURATION_MS) {
 
             switch(input.skyDir) {
                 case N: position.y += 1;break;
@@ -167,12 +168,17 @@ public class MovementSystem extends EntitySystem {
 
             // Movement completed
             if(!input.moving) {
+                // Continue movement when button is pressed
+                if(input.touchDown) {
+                    input.startMoving = true;
+                    input.skyDir = input.nextInput;
+                }
 
                 // Check whether hero can get attacked by monsters
                 for(MonsterArea ma : ecs.gameArea.getMonsterAreas()) {
                     if (ma.contains(new IntVector2(
-                            position.x + GlobalSettings.TILE_SIZE / 2,
-                            position.y + GlobalSettings.TILE_SIZE / 2))
+                            position.x + GlobPref.TILE_SIZE / 2,
+                            position.y + GlobPref.TILE_SIZE / 2))
                             && MathUtils.randomBoolean(ma.attackProbabilities.get(0))) {
 
                         System.out.print("Monster appeared!\n");
@@ -182,7 +188,8 @@ public class MovementSystem extends EntitySystem {
                         ecs.hud.battleScreen.init(Components.team.get(ecs.hero), oppTeam);
                         ecs.hud.game.setScreen(ecs.hud.battleScreen);
                         /* ......................................................... START BATTLE */
-
+                        // Stop when in a battle
+                        if(input.touchDown) input.startMoving = false;
                     }
                 }
             }

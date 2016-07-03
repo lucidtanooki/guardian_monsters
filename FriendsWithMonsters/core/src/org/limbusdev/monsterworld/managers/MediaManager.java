@@ -16,9 +16,6 @@ import com.badlogic.gdx.utils.Array;
 import org.limbusdev.monsterworld.enums.MusicType;
 import org.limbusdev.monsterworld.enums.SFXType;
 import org.limbusdev.monsterworld.enums.TextureAtlasType;
-import org.limbusdev.monsterworld.utils.GlobalSettings;
-
-import java.util.HashMap;
 
 /**
  * Created by georg on 21.11.15.
@@ -89,22 +86,22 @@ public class MediaManager {
         FreeTypeFontGenerator.FreeTypeFontParameter param = new FreeTypeFontGenerator
                 .FreeTypeFontParameter();
         param.color = Color.BLACK;
-        param.size = 18;
+        param.size = 32;
         param.magFilter = Texture.TextureFilter.Nearest;
         param.minFilter = Texture.TextureFilter.Linear;
-        BitmapFont font18 = gen.generateFont(param);
+        BitmapFont font32 = gen.generateFont(param);
         param.color = Color.WHITE;
-        param.size = 18;
+        param.size = 32;
         param.magFilter = Texture.TextureFilter.Nearest;
         param.minFilter = Texture.TextureFilter.Linear;
-        BitmapFont font18w = gen.generateFont(param);
+        BitmapFont font32w = gen.generateFont(param);
         gen.dispose();
 
         this.skin = new Skin();
 
         skin.addRegions(new TextureAtlas(Gdx.files.internal("scene2d/uiskin.atlas")));
-        skin.add("default-font", font18);
-        skin.add("white", font18w);
+        skin.add("default-font", font32);
+        skin.add("white", font32w);
 
         skin.load(Gdx.files.internal("scene2d/uiskin.json"));
 

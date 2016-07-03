@@ -26,7 +26,7 @@ import org.limbusdev.monsterworld.managers.MediaManager;
 import org.limbusdev.monsterworld.managers.SaveGameManager;
 import org.limbusdev.monsterworld.model.BattleFactory;
 import org.limbusdev.monsterworld.utils.GameState;
-import org.limbusdev.monsterworld.utils.GlobalSettings;
+import org.limbusdev.monsterworld.utils.GlobPref;
 import org.limbusdev.monsterworld.utils.UnitConverter;
 
 
@@ -68,8 +68,8 @@ public class EntityFactory {
 
         // Position
         position.onGrid = new IntVector2(
-                position.x/GlobalSettings.TILE_SIZE,
-                position.y/GlobalSettings.TILE_SIZE);
+                position.x/ GlobPref.TILE_SIZE,
+                position.y/ GlobPref.TILE_SIZE);
         hero.add(position);
 
         // Camera Component
@@ -119,9 +119,9 @@ public class EntityFactory {
         sign.add(new ConversationComponent(mapInfo.content));
         sign.add(new TitleComponent(mapInfo.title));
         sign.add(new ColliderComponent(
-                mapInfo.x, mapInfo.y, GlobalSettings.TILE_SIZE, GlobalSettings.TILE_SIZE));
+                mapInfo.x, mapInfo.y, GlobPref.TILE_SIZE, GlobPref.TILE_SIZE));
         sign.add(new PositionComponent(mapInfo.x, mapInfo.y,
-                GlobalSettings.TILE_SIZE, GlobalSettings.TILE_SIZE));
+                GlobPref.TILE_SIZE, GlobPref.TILE_SIZE));
         engine.addEntity(sign);
         return sign;
     }
@@ -138,7 +138,7 @@ public class EntityFactory {
 
         // Use second Constructor
         return createPerson(new PositionComponent(personInformation.startPosition.x,
-                personInformation.startPosition.y, GlobalSettings.TILE_SIZE, GlobalSettings
+                personInformation.startPosition.y, GlobPref.TILE_SIZE, GlobPref
                 .TILE_SIZE), path, personInformation.moves, personInformation.conversation,
                 personInformation.male, personInformation.spriteIndex);
     }

@@ -4,7 +4,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 
 import org.limbusdev.monsterworld.enums.Element;
-import org.limbusdev.monsterworld.utils.GlobalSettings;
+import org.limbusdev.monsterworld.utils.GlobPref;
 
 /**
  * Created by georg on 20.12.15.
@@ -17,7 +17,7 @@ public class MonsterInformation {
     /* ........................................................................... CONSTRUCTOR .. */
     private MonsterInformation() {
         this.monsterNames = new Array<String>();
-        for(int i=0;i< GlobalSettings.MONSTER_SPRITES;i++) monsterNames.add("");
+        for(int i = 0; i< GlobPref.MONSTER_SPRITES; i++) monsterNames.add("");
         monsterNames.set(0, "Kroki");
         monsterNames.set(1, "Dinvi");
         monsterNames.set(2, "Totowi");

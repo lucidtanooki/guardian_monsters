@@ -14,11 +14,11 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-import org.limbusdev.monsterworld.MonsterWorld;
+import org.limbusdev.monsterworld.FriendsWithMonsters;
 import org.limbusdev.monsterworld.ecs.EntityComponentSystem;
 import org.limbusdev.monsterworld.ecs.systems.GameArea;
 import org.limbusdev.monsterworld.managers.SaveGameManager;
-import org.limbusdev.monsterworld.utils.GlobalSettings;
+import org.limbusdev.monsterworld.utils.GlobPref;
 import org.limbusdev.monsterworld.utils.UnitConverter;
 
 /**
@@ -26,7 +26,7 @@ import org.limbusdev.monsterworld.utils.UnitConverter;
  */
 public class OutdoorGameWorldScreen implements Screen {
     /* ............................................................................ ATTRIBUTES .. */
-    private final MonsterWorld  game;
+    private final FriendsWithMonsters game;
 
     // Renderers and Cameras
     public  OrthographicCamera  camera;
@@ -41,7 +41,7 @@ public class OutdoorGameWorldScreen implements Screen {
 
 
     /* ........................................................................... CONSTRUCTOR .. */
-    public OutdoorGameWorldScreen(final MonsterWorld game, int mapID, int startPosID, boolean
+    public OutdoorGameWorldScreen(final FriendsWithMonsters game, int mapID, int startPosID, boolean
             fromSave) {
         this.game = game;
         setUpRendering();
@@ -86,7 +86,7 @@ public class OutdoorGameWorldScreen implements Screen {
         // Tiled Map
         gameArea.render(camera);
         ECS.render(batch, shpRend);
-        if(GlobalSettings.DEBUGGING_ON)gameArea.renderDebugging(shpRend);
+        if(GlobPref.DEBUGGING_ON)gameArea.renderDebugging(shpRend);
 
         ECS.draw();
 
@@ -147,8 +147,8 @@ public class OutdoorGameWorldScreen implements Screen {
         // Rendering ...............................................................................
         camera   = new OrthographicCamera();    // set up the camera and viewport
         viewport = new FitViewport(
-                UnitConverter.pixelsToMeters(GlobalSettings.RESOLUTION_X)/GlobalSettings.zoom,
-                UnitConverter.pixelsToMeters(GlobalSettings.RESOLUTION_Y)/GlobalSettings.zoom,
+                UnitConverter.pixelsToMeters(GlobPref.RES_X)/ GlobPref.zoom,
+                UnitConverter.pixelsToMeters(GlobPref.RES_Y)/ GlobPref.zoom,
                 camera);
         viewport.apply();
         camera.position.set(camera.viewportWidth/2, camera.viewportHeight/2, 0); // center camera

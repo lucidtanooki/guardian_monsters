@@ -3,7 +3,7 @@ package org.limbusdev.monsterworld.client;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.backends.gwt.GwtApplication;
 import com.badlogic.gdx.backends.gwt.GwtApplicationConfiguration;
-import org.limbusdev.monsterworld.MonsterWorld;
+import org.limbusdev.monsterworld.FriendsWithMonsters;
 
 public class HtmlLauncher extends GwtApplication {
 
@@ -14,6 +14,6 @@ public class HtmlLauncher extends GwtApplication {
 
         @Override
         public ApplicationListener getApplicationListener () {
-                return new MonsterWorld();
+                return new FriendsWithMonsters();
         }
 }

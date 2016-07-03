@@ -16,8 +16,8 @@ public class GameState {
     public GameState(int x, int y, int map) {
         this.x = x;
         this.y = y;
-        this.gridx = x/GlobalSettings.TILE_SIZE;
-        this.gridy = y/GlobalSettings.TILE_SIZE;
+        this.gridx = x/ GlobPref.TILE_SIZE;
+        this.gridy = y/ GlobPref.TILE_SIZE;
         this.map = map;
         this.team = new Array<Monster>();
     }

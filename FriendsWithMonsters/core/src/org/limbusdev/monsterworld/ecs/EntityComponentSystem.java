@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-import org.limbusdev.monsterworld.MonsterWorld;
+import org.limbusdev.monsterworld.FriendsWithMonsters;
 import org.limbusdev.monsterworld.ecs.components.Components;
 import org.limbusdev.monsterworld.ecs.components.PositionComponent;
 import org.limbusdev.monsterworld.ecs.entities.HeroEntity;
@@ -28,7 +28,7 @@ import org.limbusdev.monsterworld.managers.SaveGameManager;
 import org.limbusdev.monsterworld.screens.BattleScreen;
 import org.limbusdev.monsterworld.screens.HUD;
 import org.limbusdev.monsterworld.screens.OutdoorGameWorldScreen;
-import org.limbusdev.monsterworld.utils.GlobalSettings;
+import org.limbusdev.monsterworld.utils.GlobPref;
 
 /**
  * Created by georg on 21.11.15.
@@ -39,7 +39,7 @@ public class EntityComponentSystem {
     private MediaManager media;
     private EntityFactory entityFactory;
     private PositionComponent heroPosition;
-    private MonsterWorld game;
+    private FriendsWithMonsters game;
     public GameArea gameArea;
     public SaveGameManager saveGameManager;
     public Entity hero;
@@ -57,7 +57,7 @@ public class EntityComponentSystem {
      * @param sgm           the SaveGameManager
      */
     public EntityComponentSystem(
-            MonsterWorld game, Viewport viewport, GameArea gameArea, boolean
+            FriendsWithMonsters game, Viewport viewport, GameArea gameArea, boolean
             fromSave, OutdoorGameWorldScreen gameScreen, SaveGameManager sgm
     ) {
 
@@ -173,7 +173,7 @@ public class EntityComponentSystem {
      * @param shape
      */
     public void render(Batch batch, ShapeRenderer shape) {
-        if(GlobalSettings.DEBUGGING_ON) engine.getSystem(DebuggingSystem.class).render(shape);
+        if(GlobPref.DEBUGGING_ON) engine.getSystem(DebuggingSystem.class).render(shape);
     }
 
     /**
@@ -194,7 +194,7 @@ public class EntityComponentSystem {
     }
     /* ..................................................................... GETTERS & SETTERS .. */
     public InputProcessor getInputProcessor() {
-        return engine.getSystem(InputSystem.class);
+        return hud;
     }
 
 }

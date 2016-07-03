@@ -14,7 +14,6 @@ import com.badlogic.gdx.utils.Array;
 
 import org.limbusdev.monsterworld.ecs.components.PositionComponent;
 import org.limbusdev.monsterworld.enums.MusicType;
-import org.limbusdev.monsterworld.geometry.IdentifiableRectangle;
 import org.limbusdev.monsterworld.geometry.IntRectangle;
 import org.limbusdev.monsterworld.geometry.IntVector2;
 import org.limbusdev.monsterworld.geometry.MapObjectInformation;
@@ -23,7 +22,7 @@ import org.limbusdev.monsterworld.geometry.WarpPoint;
 import org.limbusdev.monsterworld.managers.MediaManager;
 import org.limbusdev.monsterworld.model.MonsterArea;
 import org.limbusdev.monsterworld.rendering.OrthogonalTiledMapAndEntityRenderer;
-import org.limbusdev.monsterworld.utils.GlobalSettings;
+import org.limbusdev.monsterworld.utils.GlobPref;
 
 /**
  * Contains logic and information about one game world area like a forest or a path. One
@@ -176,10 +175,10 @@ public class GameArea {
         for(int i=0; i<mapWidth+2; i++) {
             for(int j=0; j<2; j++)
                 colliders.add(new IntRectangle(
-                                (-1 + i)* GlobalSettings.TILE_SIZE,
-                                (-1 + j*(mapHeight+1))* GlobalSettings.TILE_SIZE,
-                                GlobalSettings.TILE_SIZE,
-                                GlobalSettings.TILE_SIZE)
+                                (-1 + i)* GlobPref.TILE_SIZE,
+                                (-1 + j*(mapHeight+1))* GlobPref.TILE_SIZE,
+                                GlobPref.TILE_SIZE,
+                                GlobPref.TILE_SIZE)
                 );
         }
 
@@ -187,10 +186,10 @@ public class GameArea {
             for(int j=0; j<2; j++) {
                 colliders.add(
                         new IntRectangle(
-                                (-1 + j*(mapWidth+1))*GlobalSettings.TILE_SIZE,
-                                i*GlobalSettings.TILE_SIZE,
-                                GlobalSettings.TILE_SIZE,
-                                GlobalSettings.TILE_SIZE
+                                (-1 + j*(mapWidth+1))* GlobPref.TILE_SIZE,
+                                i* GlobPref.TILE_SIZE,
+                                GlobPref.TILE_SIZE,
+                                GlobPref.TILE_SIZE
                         )
                 );
             }

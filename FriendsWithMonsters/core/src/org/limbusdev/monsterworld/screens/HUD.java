@@ -4,14 +4,17 @@ import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Interpolation;
+import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -21,11 +24,12 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.ArrayMap;
+import com.badlogic.gdx.utils.TimeUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
-import org.limbusdev.monsterworld.MonsterWorld;
+import org.limbusdev.monsterworld.FriendsWithMonsters;
 import org.limbusdev.monsterworld.ecs.components.Components;
+import org.limbusdev.monsterworld.ecs.components.InputComponent;
 import org.limbusdev.monsterworld.ecs.components.PositionComponent;
 import org.limbusdev.monsterworld.ecs.components.TeamComponent;
 import org.limbusdev.monsterworld.ecs.entities.HeroEntity;
@@ -35,80 +39,99 @@ import org.limbusdev.monsterworld.geometry.IntVector2;
 import org.limbusdev.monsterworld.managers.MediaManager;
 import org.limbusdev.monsterworld.model.BattleFactory;
 import org.limbusdev.monsterworld.utils.EntityFamilies;
-import org.limbusdev.monsterworld.utils.GlobalSettings;
+import org.limbusdev.monsterworld.utils.GlobPref;
 import org.limbusdev.monsterworld.managers.SaveGameManager;
 
 /**
- * Created by georg on 02.12.15.
+ * Copyright @ Georg Eckert
+ *
+ * This Class creates a HUD which is displayed on top of the level screen, when not in battle.
+ * It includes the main menu (save, quit, monsters, ...), controls (dpad, A, B) and text display.
  */
-public class HUD {
+public class HUD extends InputAdapter {
     /* ............................................................................ ATTRIBUTES .. */
     private Skin skin;
     public Stage stage;
 
-    private ArrayMap<String,Button> buttons;
+    public Vector2 touchPos;
+
     private Label convText;
     private Label titleLabel;
     private Group menuButtons, conversationLabel;
     private TextureAtlas UItextures;
     public final BattleScreen battleScreen;
-    public final MonsterWorld game;
+    public final FriendsWithMonsters game;
     public final SaveGameManager saveGameManager;
     public Engine engine;
     public final Entity hero;
-    public Image blackCourtain, joyStickBG, joyStick;
+    public Image blackCourtain;
     private HUDElements openHUDELement;
+
+    // Digital Pad
+    private Array<TextureRegion> dPadImgs;
+    private Image dpadImage;
+    private Rectangle dPadArea;
+    private Vector2 dPadCenter, dPadCenterDist;
     
     /* ........................................................................... CONSTRUCTOR .. */
-    public HUD(final BattleScreen battleScreen, final MonsterWorld game,
+    public HUD(final BattleScreen battleScreen, final FriendsWithMonsters game,
                final SaveGameManager saveGameManager, final Entity hero, MediaManager media,
                Engine engine) {
-        this.openHUDELement = HUDElements.NONE;
-        this.engine = engine;
-        this.saveGameManager = saveGameManager;
-        this.battleScreen = battleScreen;
+
         this.game = game;
+        this.engine = engine;
+        this.battleScreen = battleScreen;
+        this.saveGameManager = saveGameManager;
+        this.openHUDELement = HUDElements.NONE;
         this.hero = hero;
         this.UItextures = game.media.getUITextureAtlas();
-        this.buttons = new ArrayMap<String, Button>();
+
 
         // Scene2D
-        FitViewport fit = new FitViewport(GlobalSettings.RESOLUTION_X, GlobalSettings.RESOLUTION_Y);
-
+        FitViewport fit = new FitViewport(GlobPref.RES_X, GlobPref.RES_Y);
         this.stage = new Stage(fit);
         this.skin = media.skin;
 
         setUpConversation();
         setUpTopLevelButtons();
+        setUpDpad();
 
 
         // Images ............................................................................ START
         this.blackCourtain = new Image(game.media.getBattleUITextureAtlas().findRegion("black"));
-        this.blackCourtain.setWidth(GlobalSettings.RESOLUTION_X);
-        this.blackCourtain.setHeight(GlobalSettings.RESOLUTION_Y);
+        this.blackCourtain.setWidth(GlobPref.RES_X);
+        this.blackCourtain.setHeight(GlobPref.RES_Y);
         this.blackCourtain.setPosition(0, 0);
         // Images .............................................................................. END
 
         stage.addActor(blackCourtain);
     }
+
+
+
     /* ............................................................................... METHODS .. */
+
+    /**
+     * Creates main menu buttons and the dpad
+     */
     private void setUpTopLevelButtons() {
 
-        // Menu Button
+        // Button Style
         TextButton.TextButtonStyle tbs = new TextButton.TextButtonStyle();
         tbs.font = skin.getFont("white");
         tbs.down = new TextureRegionDrawable(UItextures.findRegion("buttonMenuDown"));
         tbs.up   = new TextureRegionDrawable(UItextures.findRegion("buttonMenuUp"));
         tbs.unpressedOffsetX = 10; tbs.unpressedOffsetY = 0;
         tbs.pressedOffsetX = 10; tbs.pressedOffsetY = 1;
+
+        // Menu Button
         TextButton menu = new TextButton("Menu", tbs);
         menu.setWidth(154);menu.setHeight(58);
-        menu.setPosition(GlobalSettings.RESOLUTION_X, GlobalSettings.RESOLUTION_Y, Align.topRight);
+        menu.setPosition(GlobPref.RES_X, GlobPref.RES_Y, Align.topRight);
         menu.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 if(conversationLabel.isVisible()) return;
-
                 if (menuButtons.isVisible()) menuButtons.addAction(Actions.sequence(
                         Actions.fadeOut(.3f), Actions.visible(false)));
                 else {
@@ -119,6 +142,7 @@ public class HUD {
             }
         });
 
+        // Group containing buttons: Save, Quit, Monsters
         this.menuButtons = new Group();
 
         // Save Button
@@ -130,8 +154,8 @@ public class HUD {
         TextButton save = new TextButton("Save", tbs);
         save.setWidth(111);save.setHeight(52);
         save.setPosition(
-                GlobalSettings.RESOLUTION_X,
-                GlobalSettings.RESOLUTION_Y - 62, Align.topRight);
+                GlobPref.RES_X,
+                GlobPref.RES_Y - 62, Align.topRight);
         save.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -143,8 +167,8 @@ public class HUD {
         // Quit Button
         TextButton quit = new TextButton("Quit", tbs);
         quit.setWidth(111);quit.setHeight(52);
-        quit.setPosition(GlobalSettings.RESOLUTION_X,
-                GlobalSettings.RESOLUTION_Y - 118 , Align.topRight);
+        quit.setPosition(GlobPref.RES_X,
+                GlobPref.RES_Y - 118 , Align.topRight);
         quit.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -164,8 +188,8 @@ public class HUD {
         // Battle Button
         TextButton battle = new TextButton("Battle", tbs);
         battle.setWidth(111);battle.setHeight(52);
-        battle.setPosition(GlobalSettings.RESOLUTION_X,
-                GlobalSettings.RESOLUTION_Y - 174, Align.topRight);
+        battle.setPosition(GlobPref.RES_X,
+                GlobPref.RES_Y - 174, Align.topRight);
         battle.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -179,12 +203,28 @@ public class HUD {
         });
         this.menuButtons.addActor(battle);
 
+        // Team Button
+        TextButton teamButton = new TextButton("Team", tbs);
+        teamButton.setWidth(111);quit.setHeight(52);
+        teamButton.setPosition(GlobPref.RES_X,
+                GlobPref.RES_Y - 230 , Align.topRight);
+        teamButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                // TODO
+            }
+        });
+        this.menuButtons.addActor(teamButton);
+
+
+        // ................................................................................ CONTROLS
         // A Button
         ImageButton A = new ImageButton(
                 new TextureRegionDrawable(game.media.getUITextureAtlas().findRegion("button_a")),
                 new TextureRegionDrawable(game.media.getUITextureAtlas().findRegion("button_adown")));
-        A.setWidth(112);A.setHeight(112);
-        A.setPosition(GlobalSettings.RESOLUTION_X - 64, 140, Align.center);
+        A.setSize(GlobPref.RES_X *.125f, GlobPref.RES_X *.125f);
+        A.setPosition(GlobPref.RES_X - GlobPref.RES_X *.0375f,
+                GlobPref.RES_X *.1125f, Align.bottomRight);
         A.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -193,13 +233,15 @@ public class HUD {
             }
         });
         this.stage.addActor(A);
+        this.stage.setDebugAll(true);
 
         // B Button
         ImageButton B = new ImageButton(
                 new TextureRegionDrawable(game.media.getUITextureAtlas().findRegion("button_b")),
                 new TextureRegionDrawable(game.media.getUITextureAtlas().findRegion("button_bdown")));
-        B.setWidth(80);B.setHeight(80);
-        B.setPosition(GlobalSettings.RESOLUTION_X - 96, 48, Align.center);
+        B.setWidth(GlobPref.RES_X *.1f);B.setHeight(GlobPref.RES_X *.1f);
+        B.setPosition(GlobPref.RES_X - GlobPref.RES_X *.0125f,
+                GlobPref.RES_X *.0125f, Align.bottomRight);
         B.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -217,75 +259,25 @@ public class HUD {
         this.menuButtons.addAction(Actions.alpha(0));
         stage.addActor(menu);
         stage.addActor(menuButtons);
+    }
 
-        // DPAD UP
-        ImageButton dpadUp = new ImageButton(
-                new TextureRegionDrawable(game.media.getUITextureAtlas().findRegion("dpad_top_up")),
-                new TextureRegionDrawable(game.media.getUITextureAtlas().findRegion("dpad_top_down")));
-        dpadUp.setWidth(106);dpadUp.setHeight(128);
-        dpadUp.setPosition(155, 230, Align.center);
-        dpadUp.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                System.out.println("Button DPAD UP");
-                touchEntity();
-            }
-        });
-        this.stage.addActor(dpadUp);
+    private boolean walk(SkyDirection dir, InputComponent input) {
+        if (!input.moving) {
+            System.out.println("Move");
+            input.startMoving = true;
+            input.skyDir = dir;
+            input.nextInput = dir;
+            input.touchDown = true;
+            return true;
+        } else {
+            input.nextInput = dir;
+            return false;
+        }
+    }
 
-        // DPAD DOWN
-        ImageButton dpadDown = new ImageButton(
-                new TextureRegionDrawable(game.media.getUITextureAtlas().findRegion("dpad_down_up")),
-                new TextureRegionDrawable(game.media.getUITextureAtlas().findRegion("dpad_down_down")));
-        dpadDown.setWidth(106);dpadDown.setHeight(128);
-        dpadDown.setPosition(155, 80, Align.center);
-        dpadDown.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                System.out.println("Button DPAD DOWN");
-                touchEntity();
-            }
-        });
-        this.stage.addActor(dpadDown);
-
-        // DPAD LEFT
-        ImageButton dpadLeft = new ImageButton(
-                new TextureRegionDrawable(game.media.getUITextureAtlas().findRegion("dpad_left_up")),
-                new TextureRegionDrawable(game.media.getUITextureAtlas().findRegion("dpad_left_down")));
-        dpadLeft.setWidth(128);dpadLeft.setHeight(106);
-        dpadLeft.setPosition(80,155, Align.center);
-        dpadLeft.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                System.out.println("Button DPAD LEFT");
-                touchEntity();
-            }
-        });
-        this.stage.addActor(dpadLeft);
-
-        // DPAD RIGHT
-        ImageButton dpadRight = new ImageButton(
-                new TextureRegionDrawable(game.media.getUITextureAtlas().findRegion("dpad_right_up")),
-                new TextureRegionDrawable(game.media.getUITextureAtlas().findRegion("dpad_right_down")));
-        dpadRight.setWidth(128);dpadRight.setHeight(106);
-        dpadRight.setPosition(230,155, Align.center);
-        dpadRight.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                System.out.println("Button DPAD RIGHT");
-                touchEntity();
-            }
-        });
-        this.stage.addActor(dpadRight);
-
-        // JoyStick
-        this.joyStickBG = new Image(game.media.getUITextureAtlas().findRegion("stick_bg"));
-        joyStickBG.setPosition(8, 8, Align.bottomLeft);
-        stage.addActor(joyStickBG);
-
-        this.joyStick = new Image(game.media.getUITextureAtlas().findRegion("stick"));
-        joyStick.setPosition(98,98, Align.center);
-        stage.addActor(joyStick);
+    private void stop(InputComponent input) {
+        System.out.println("Stop");
+        input.touchDown = false;
     }
 
 
@@ -294,10 +286,76 @@ public class HUD {
         this.stage.draw();
     }
 
+    /**
+     * Handles touch down events, especially for the digital steering pad
+     * @param screenX
+     * @param screenY
+     * @param pointer
+     * @param button
+     * @return
+     */
+    @Override
+    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        Components.input.get(hero).firstTip = TimeUtils.millis();
+        return touchDragged(screenX,screenY,pointer);
+    }
+
+    @Override
+    public boolean touchDragged(int screenX, int screenY, int pointer) {
+        touchPos.x = screenX;
+        touchPos.y = screenY;
+        touchPos = stage.getViewport().unproject(touchPos);
+        InputComponent input = Components.input.get(hero);
+        if(dPadArea.contains(touchPos)) {
+            input.touchDown = true;
+            // Touch within digital pad constraints
+            // decide direction
+            dPadCenterDist.x = Math.abs(dPadCenter.x - touchPos.x);
+            dPadCenterDist.y = Math.abs(dPadCenter.y - touchPos.y);
+            if(dPadCenterDist.x > dPadCenterDist.y) {
+                // Horizontal
+                if(touchPos.x < dPadCenter.x) {
+                    // Left
+                    walk(SkyDirection.W, input);
+                    dpadImage.setDrawable(new TextureRegionDrawable(dPadImgs.get(4)));
+                } else {
+                    // Right
+                    walk(SkyDirection.E, input);
+                    dpadImage.setDrawable(new TextureRegionDrawable(dPadImgs.get(2)));
+                }
+            } else {
+                // Vertical
+                if(touchPos.y < dPadCenter.y) {
+                    // Down
+                    walk(SkyDirection.S, input);
+                    dpadImage.setDrawable(new TextureRegionDrawable(dPadImgs.get(3)));
+                } else {
+                    // Up
+                    walk(SkyDirection.N, input);
+                    dpadImage.setDrawable(new TextureRegionDrawable(dPadImgs.get(1)));
+                }
+            }
+            if(!input.moving) input.startMoving = true;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+        stop(Components.input.get(hero));
+        dpadImage.setDrawable(new TextureRegionDrawable(dPadImgs.get(0)));
+        return true;
+    }
+
     public void update(float delta) {
         stage.act(delta);
     }
-    
+
+    // ............................................................................... INPUT ADAPTER
+
+
     /* ..................................................................... GETTERS & SETTERS .. */
     public InputProcessor getInputProcessor() {
         return this.stage;
@@ -307,11 +365,11 @@ public class HUD {
         this.menuButtons.setVisible(false);
         this.convText.setText(text);
         this.conversationLabel.setVisible(true);
+        conversationLabel.addAction(Actions.moveTo(0,0,.5f, Interpolation.exp10Out));
     }
 
     public void closeConversation() {
-        titleLabel.setVisible(false);
-        conversationLabel.setVisible(false);
+        conversationLabel.addAction(Actions.sequence(Actions.moveTo(0,-256,.5f, Interpolation.exp10In), Actions.visible(false)));
         Components.getInputComponent(hero).talking = false;
     }
 
@@ -331,22 +389,18 @@ public class HUD {
 
     private void setUpConversation() {
         Label.LabelStyle lbs = new Label.LabelStyle();
-        lbs.font=skin.getFont("white");
-        lbs.background=new TextureRegionDrawable(UItextures.findRegion("title"));
-        titleLabel = new Label("Title", lbs);
-        titleLabel.setHeight(35);
-        titleLabel.setWidth(284);
-        titleLabel.setVisible(false);
-        titleLabel.setPosition(GlobalSettings.RESOLUTION_X / 2 - 275, 154);
-        titleLabel.setAlignment(Align.center);
 
         this.conversationLabel = new Group();
 
-        Image convImg = new Image(UItextures.findRegion("conversation"));
-        convImg.setWidth(454); convImg.setHeight(108);
-        convImg.setPosition(GlobalSettings.RESOLUTION_X / 2 + 2, 98, Align.center);
+        Image convImg = new Image(UItextures.findRegion("text_bg_L"));
+        convImg.setWidth(640); convImg.setHeight(256);
+        convImg.setPosition(0,0,Align.bottomLeft);
+        Image convImg2 = new Image(UItextures.findRegion("text_bg_R"));
+        convImg2.setWidth(640); convImg2.setHeight(256);
+        convImg2.setPosition(GlobPref.RES_X,0,Align.bottomRight);
 
         conversationLabel.addActor(convImg);
+        conversationLabel.addActor(convImg2);
 
         lbs = new Label.LabelStyle();
         lbs.font=skin.getFont("white");
@@ -355,19 +409,20 @@ public class HUD {
         convText.setHeight(108);
         convText.setWidth(316);
         convText.setWrap(true);
-        convText.setPosition(GlobalSettings.RESOLUTION_X / 2, 98, Align.center);
+        convText.setPosition(GlobPref.RES_X / 2, 98, Align.center);
         conversationLabel.addActor(convText);
         conversationLabel.setVisible(false);
 
-        stage.addActor(titleLabel);
-        stage.addActor(conversationLabel);
-    }
+        titleLabel = new Label("", lbs);
+        titleLabel.setHeight(35);
+        titleLabel.setWidth(284);
+        titleLabel.setVisible(false);
+        titleLabel.setPosition(GlobPref.RES_X / 3.3f, GlobPref.RES_Y /4);
+        titleLabel.setAlignment(Align.center);
+        conversationLabel.addActor(titleLabel);
+        conversationLabel.setPosition(0,-256,Align.bottomLeft);
 
-    public void updateJoyStick(float x, float y) {
-        this.joyStick.setPosition(x,y,Align.center);
-    }
-    public void resetJoyStick() {
-        joyStick.addAction(Actions.sequence(Actions.moveTo(98 - 96 / 2, 98 - 96 / 2, .2f, Interpolation.pow2In)));
+        stage.addActor(conversationLabel);
     }
 
     public Entity checkForNearInteractiveObjects(Entity hero) {
@@ -385,7 +440,7 @@ public class HUD {
             default: break;
         }
 
-        if(GlobalSettings.DEBUGGING_ON)
+        if(GlobPref.DEBUGGING_ON)
             System.out.println("Grid cell to be checked: ("+checkGridCell.x+"|"+checkGridCell.y+")");
 
         for(Entity e : engine.getEntitiesFor(Family.all(PositionComponent.class).get())) {
@@ -393,7 +448,7 @@ public class HUD {
             if (Components.position.get(e) != null && !(e instanceof HeroEntity)) {
                 PositionComponent p = Components.position.get(e);
 
-                if(GlobalSettings.DEBUGGING_ON)
+                if(GlobPref.DEBUGGING_ON)
                     System.out.println("Grid Cell of tested Entity: ("+p.onGrid.x+"|"+p.onGrid.y+")");
 
                 // Is there an entity?
@@ -450,5 +505,31 @@ public class HUD {
             }
         }
         if (touchedSpeaker || touchedSign) Components.getInputComponent(hero).talking = true;
+    }
+
+    // ............................................................................. SET UP CONTROLS
+    private void setUpDpad() {
+        // Initialize DPAD
+        this.touchPos = new Vector2();
+        float borderDist = GlobPref.RES_X *0.0125f;
+        this.dPadArea = new Rectangle(
+                borderDist,
+                borderDist,
+                0.225f* GlobPref.RES_X +borderDist,
+                0.225f* GlobPref.RES_X +borderDist);
+        this.dPadCenter = dPadArea.getCenter(new Vector2());
+        this.dPadCenterDist = new Vector2();
+
+        this.dPadImgs = new Array<TextureRegion>();
+        this.dPadImgs.add(game.media.getUITextureAtlas().findRegion("dpad_idle"));
+        this.dPadImgs.add(game.media.getUITextureAtlas().findRegion("dpad_up"));
+        this.dPadImgs.add(game.media.getUITextureAtlas().findRegion("dpad_right"));
+        this.dPadImgs.add(game.media.getUITextureAtlas().findRegion("dpad_down"));
+        this.dPadImgs.add(game.media.getUITextureAtlas().findRegion("dpad_left"));
+        dpadImage = new Image(dPadImgs.first());
+        dpadImage.setSize(dPadArea.width, dPadArea.height);
+        dpadImage.setPosition(dPadCenter.x, dPadCenter.y, Align.center);
+
+        this.stage.addActor(dpadImage);
     }
 }

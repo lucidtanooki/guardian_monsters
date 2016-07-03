@@ -2,7 +2,7 @@ package org.limbusdev.monsterworld.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import org.limbusdev.monsterworld.MonsterWorld;
+import org.limbusdev.monsterworld.FriendsWithMonsters;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {
@@ -11,6 +11,6 @@ public class DesktopLauncher {
 		config.title = "Friends with Monsters";
 		config.width = 640;
 		config.height = 360;
-		new LwjglApplication(new MonsterWorld(), config);
+		new LwjglApplication(new FriendsWithMonsters(), config);
 	}
 }

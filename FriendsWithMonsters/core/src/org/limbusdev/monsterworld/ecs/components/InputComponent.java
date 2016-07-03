@@ -17,6 +17,7 @@ public class InputComponent implements Component {
     public boolean talking;
     public boolean inBattle;
     public boolean touchDown;
+    public long firstTip=0;
     /* ........................................................................... CONSTRUCTOR .. */
     public InputComponent() {
         skyDir = nextInput = SkyDirection.S;

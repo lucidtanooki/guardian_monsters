@@ -4,8 +4,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 
 import org.limbusdev.monsterworld.ecs.components.TeamComponent;
-import org.limbusdev.monsterworld.managers.MediaManager;
-import org.limbusdev.monsterworld.utils.GlobalSettings;
+import org.limbusdev.monsterworld.utils.GlobPref;
 
 /**
  * Created by georg on 12.12.15.
@@ -18,7 +17,7 @@ public class BattleFactory {
 
     private BattleFactory() {
         this.monsters = new Array<Monster>();
-        for(int i=0; i< GlobalSettings.MONSTER_SPRITES; i++) {
+        for(int i = 0; i< GlobPref.MONSTER_SPRITES; i++) {
             Monster mon = new Monster();
             mon.ID = i+1;
             monsters.add(new Monster());

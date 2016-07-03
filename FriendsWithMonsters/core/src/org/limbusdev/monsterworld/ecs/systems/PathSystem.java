@@ -14,7 +14,7 @@ import org.limbusdev.monsterworld.ecs.components.PathComponent;
 import org.limbusdev.monsterworld.ecs.components.PositionComponent;
 import org.limbusdev.monsterworld.geometry.IntRectangle;
 import org.limbusdev.monsterworld.geometry.IntVector2;
-import org.limbusdev.monsterworld.utils.GlobalSettings;
+import org.limbusdev.monsterworld.utils.GlobPref;
 
 /**
  * Moves around entities with a {@link PathComponent} like persons, animals and so on
@@ -53,13 +53,13 @@ public class PathSystem extends EntitySystem {
         if(path.startMoving && !path.staticEntity) {
             // Define direction of movement
             switch(path.path.get(path.currentDir)) {
-                case N: position.nextX=position.x;position.nextY = position.y + GlobalSettings.TILE_SIZE;
+                case N: position.nextX=position.x;position.nextY = position.y + GlobPref.TILE_SIZE;
                     break;
-                case W: position.nextX=position.x - GlobalSettings.TILE_SIZE;position.nextY = position.y;
+                case W: position.nextX=position.x - GlobPref.TILE_SIZE;position.nextY = position.y;
                     break;
-                case E: position.nextX=position.x + GlobalSettings.TILE_SIZE;position.nextY = position.y;
+                case E: position.nextX=position.x + GlobPref.TILE_SIZE;position.nextY = position.y;
                     break;
-                case S: position.nextX=position.x;position.nextY = position.y - GlobalSettings.TILE_SIZE;
+                case S: position.nextX=position.x;position.nextY = position.y - GlobPref.TILE_SIZE;
                     break;
                 default: position.nextY=position.x;position.nextY=position.y;break;
             }
@@ -67,8 +67,8 @@ public class PathSystem extends EntitySystem {
             /* Check whether movement is possible or blocked by a collider */
             IntVector2 nextPos = new IntVector2(0,0);
             for(IntRectangle r : gameArea.getMovingColliders()) {
-                nextPos.x = position.nextX + GlobalSettings.TILE_SIZE / 2;
-                nextPos.y = position.nextY + GlobalSettings.TILE_SIZE / 2;
+                nextPos.x = position.nextX + GlobPref.TILE_SIZE / 2;
+                nextPos.y = position.nextY + GlobPref.TILE_SIZE / 2;
                 if (!collider.collider.equals(r) && r.contains(nextPos)) return;
             }
 
@@ -81,7 +81,7 @@ public class PathSystem extends EntitySystem {
 
         // If moving, check whether next pixel step should take place
         if(!path.staticEntity && path.moving && TimeUtils.timeSinceMillis(position.lastPixelStep) >
-                GlobalSettings.ONE_STEP_DURATION_PERSON && !path.talking) {
+                GlobPref.ONE_STEP_DURATION_PERSON && !path.talking) {
             switch(path.path.get(path.currentDir)) {
                 case N: position.y += 1;break;
                 case W: position.x -= 1;break;

@@ -17,11 +17,11 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-import org.limbusdev.monsterworld.MonsterWorld;
+import org.limbusdev.monsterworld.FriendsWithMonsters;
 import org.limbusdev.monsterworld.ecs.components.TeamComponent;
 import org.limbusdev.monsterworld.enums.MusicType;
 import org.limbusdev.monsterworld.managers.MediaManager;
-import org.limbusdev.monsterworld.utils.GlobalSettings;
+import org.limbusdev.monsterworld.utils.GlobPref;
 
 /**
  * Created by georg on 03.12.15.
@@ -41,7 +41,7 @@ public class BattleScreen implements Screen {
     private Music bgMusic;
     /* ........................................................................... CONSTRUCTOR .. */
 
-    public BattleScreen(MediaManager media, OutdoorGameWorldScreen gameScreen, MonsterWorld game) {
+    public BattleScreen(MediaManager media, OutdoorGameWorldScreen gameScreen, FriendsWithMonsters game) {
         this.battleHUD = new BattleHUD(game, gameScreen);
         setUpRendering();
         setUpInputProcessor();
@@ -151,8 +151,8 @@ public class BattleScreen implements Screen {
         // Rendering ...............................................................................
         camera   = new OrthographicCamera();    // set up the camera and viewport
         viewport = new FitViewport(
-                GlobalSettings.RESOLUTION_X,
-                GlobalSettings.RESOLUTION_Y,
+                GlobPref.RES_X,
+                GlobPref.RES_Y,
                 camera);
         viewport.apply();
         camera.position.set(camera.viewportWidth/2, camera.viewportHeight/2, 0); // center camera

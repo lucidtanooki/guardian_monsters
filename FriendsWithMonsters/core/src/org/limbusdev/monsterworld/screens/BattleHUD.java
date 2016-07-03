@@ -25,7 +25,7 @@ import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
-import org.limbusdev.monsterworld.MonsterWorld;
+import org.limbusdev.monsterworld.FriendsWithMonsters;
 import org.limbusdev.monsterworld.ecs.components.TeamComponent;
 import org.limbusdev.monsterworld.enums.SFXType;
 import org.limbusdev.monsterworld.geometry.IntVector2;
@@ -33,7 +33,8 @@ import org.limbusdev.monsterworld.model.Attack;
 import org.limbusdev.monsterworld.model.BattlePositionQueue;
 import org.limbusdev.monsterworld.model.Monster;
 import org.limbusdev.monsterworld.model.MonsterInformation;
-import org.limbusdev.monsterworld.utils.GlobalSettings;
+import org.limbusdev.monsterworld.ui.MonsterStateWidget;
+import org.limbusdev.monsterworld.utils.GlobPref;
 import org.limbusdev.monsterworld.utils.MonsterManager;
 
 
@@ -46,7 +47,7 @@ public class BattleHUD {
 
     /* ............................................................................ ATTRIBUTES .. */
     private final OutdoorGameWorldScreen gameScreen;
-    private final MonsterWorld game;
+    private final FriendsWithMonsters game;
 
     private MonsterInformation monsterInformation;
 
@@ -96,7 +97,7 @@ public class BattleHUD {
     private AIPlayer aiPlayer;                      // Artificial Intelligence
 
     /* ........................................................................... CONSTRUCTOR .. */
-    public BattleHUD(final MonsterWorld game, final OutdoorGameWorldScreen gameScreen) {
+    public BattleHUD(final FriendsWithMonsters game, final OutdoorGameWorldScreen gameScreen) {
         this.game = game;
         this.gameScreen = gameScreen;
 
@@ -114,6 +115,10 @@ public class BattleHUD {
         setUpGameOverUI();
 
         addElementsToStage();
+
+        MonsterStateWidget statW = new MonsterStateWidget(game.media,skin);
+        statW.setPosition(400,400);
+        stage.addActor(statW);
 
         reset();
     }
@@ -568,10 +573,10 @@ public class BattleHUD {
      */
     public void setUpUI() {
         // Scene2D
-        FitViewport fit = new FitViewport(GlobalSettings.RESOLUTION_X, GlobalSettings.RESOLUTION_Y);
+        FitViewport fit = new FitViewport(GlobPref.RES_X, GlobPref.RES_Y);
         this.stage = new Stage(fit);
         this.skin = game.media.skin;
-        if(GlobalSettings.DEBUGGING_ON) stage.setDebugAll(true);
+        if(GlobPref.DEBUGGING_ON) stage.setDebugAll(true);
 
         this.monsterStatusUI = new Group();
         this.statusUIElements = new Array<Group>();
@@ -579,27 +584,25 @@ public class BattleHUD {
         // Battle UI Black transparent Background
         this.battleUIbg = new Image(game.media.getBattleUITextureAtlas().findRegion("bg"));
         battleUIbg.setPosition(0, 0);
-        battleUIbg.setWidth(GlobalSettings.RESOLUTION_X);
+        battleUIbg.setWidth(GlobPref.RES_X);
         battleUIbg.setHeight(140);
 
         // Black Courtain for fade-in and -out
         this.blackCourtain = new Image(game.media.getBattleUITextureAtlas().findRegion("black"));
-        this.blackCourtain.setWidth(GlobalSettings.RESOLUTION_X);
-        this.blackCourtain.setHeight(GlobalSettings.RESOLUTION_Y);
+        this.blackCourtain.setWidth(GlobPref.RES_X);
+        this.blackCourtain.setHeight(GlobPref.RES_Y);
         this.blackCourtain.setPosition(0, 0);
 
         // Hero Team ###############################################################################
-        statusUIElements.add(addMonsterHUD(58, GlobalSettings.RESOLUTION_Y - 67));
-        statusUIElements.add(addMonsterHUD(26, GlobalSettings.RESOLUTION_Y - 100));
-        statusUIElements.add(addMonsterHUD(90, GlobalSettings.RESOLUTION_Y - 36));
+        statusUIElements.add(addMonsterHUD(58, GlobPref.RES_Y - 67));
+        statusUIElements.add(addMonsterHUD(26, GlobPref.RES_Y - 100));
+        statusUIElements.add(addMonsterHUD(90, GlobPref.RES_Y - 36));
 
         // Opponent Team ###########################################################################
-        statusUIElements.add(addMonsterHUD(GlobalSettings.RESOLUTION_X - 256 - 16 - 32,
-                GlobalSettings.RESOLUTION_Y - 67));
-        statusUIElements.add(addMonsterHUD(GlobalSettings.RESOLUTION_X - 256 - 16, GlobalSettings
-                .RESOLUTION_Y - 100));
-        statusUIElements.add(addMonsterHUD(GlobalSettings.RESOLUTION_X - 256 - 16 - 64, GlobalSettings
-                .RESOLUTION_Y - 36));
+        statusUIElements.add(addMonsterHUD(GlobPref.RES_X - 256 - 16 - 32,
+                GlobPref.RES_Y - 67));
+        statusUIElements.add(addMonsterHUD(GlobPref.RES_X - 256 - 16, GlobPref.RES_Y- 100));
+        statusUIElements.add(addMonsterHUD(GlobPref.RES_X - 256 - 16 - 64, GlobPref.RES_Y - 36));
 
         // Battle HUD Monster Indicators
         indicatorOpp = new Image(skin.getDrawable("indicator"));
@@ -616,7 +619,7 @@ public class BattleHUD {
         Image i = new Image(game.media.getBattleUITextureAtlas().findRegion("b12.down"));
         i.setWidth(542);
         i.setHeight(64);
-        i.setPosition(GlobalSettings.RESOLUTION_X / 2, 72, Align.bottom);
+        i.setPosition(GlobPref.RES_X / 2, 72, Align.bottom);
         gameOverUI.addActor(i);
 
         Label.LabelStyle labs = new Label.LabelStyle();
@@ -636,7 +639,7 @@ public class BattleHUD {
         ibs.pressedOffsetY = -1;
         final TextButton exitButton = new TextButton("OK",ibs);
         exitButton.setWidth(128);exitButton.setHeight(48);
-        exitButton.setPosition(GlobalSettings.RESOLUTION_X / 2, 32, Align.center);
+        exitButton.setPosition(GlobPref.RES_X / 2, 32, Align.center);
         exitButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -684,7 +687,7 @@ public class BattleHUD {
         // Opponent Team
         monImg = new Image(game.media.getBattleUITextureAtlas().findRegion("black"));
         monImg.setWidth(128);
-        monImg.setHeight(128);monImg.setPosition(GlobalSettings.RESOLUTION_X-120-128,212);
+        monImg.setHeight(128);monImg.setPosition(GlobPref.RES_X-120-128,212);
         monImg.addAction(Actions.forever(Actions.sequence(
                 Actions.moveBy(0, 2, .5f), Actions.moveBy(0, -2, .5f))));
         monImg.setVisible(false);
@@ -692,7 +695,7 @@ public class BattleHUD {
 
         monImg = new Image(game.media.getBattleUITextureAtlas().findRegion("black"));
         monImg.setWidth(128);monImg.setHeight(128);
-        monImg.setPosition(GlobalSettings.RESOLUTION_X - 64 - 128, 176);
+        monImg.setPosition(GlobPref.RES_X - 64 - 128, 176);
         monImg.addAction(Actions.forever(Actions.sequence(
                 Actions.moveBy(0, -2, .5f), Actions.moveBy(0, 2, .5f))));
         monImg.setVisible(false);
@@ -700,7 +703,7 @@ public class BattleHUD {
 
         monImg = new Image(game.media.getBattleUITextureAtlas().findRegion("black"));
         monImg.setWidth(128);monImg.setHeight(128);
-        monImg.setPosition(GlobalSettings.RESOLUTION_X-8-128,140);
+        monImg.setPosition(GlobPref.RES_X-8-128,140);
         monImg.addAction(Actions.forever(Actions.sequence(
                 Actions.moveBy(0, 2, .5f), Actions.moveBy(0, -2, .5f))));
         monImg.setVisible(false);
@@ -715,8 +718,8 @@ public class BattleHUD {
     private void setUpTopLevelMenu() {
 
         this.topLevelMenu = new Group();
-        this.topLevelMenu.setWidth(GlobalSettings.RESOLUTION_X);
-        this.topLevelMenu.setHeight(GlobalSettings.RESOLUTION_Y / 4);
+        this.topLevelMenu.setWidth(GlobPref.RES_X);
+        this.topLevelMenu.setHeight(GlobPref.RES_Y / 4);
 
         // Fight Button
         ImageButton ib = new ImageButton(skin.getDrawable("textfield"));
@@ -803,8 +806,8 @@ public class BattleHUD {
     private void setUpBattleActionMenu() {
 
         this.battleActionMenu = new Group();
-        this.battleActionMenu.setWidth(GlobalSettings.RESOLUTION_X);
-        this.battleActionMenu.setHeight(GlobalSettings.RESOLUTION_Y / 4);
+        this.battleActionMenu.setWidth(GlobPref.RES_X);
+        this.battleActionMenu.setHeight(GlobPref.RES_Y / 4);
         this.battleActionMenu.setVisible(false);
 
         // Images ..................................................................................
@@ -829,7 +832,7 @@ public class BattleHUD {
         Image i = new Image(game.media.getBattleUITextureAtlas().findRegion("b12.down"));
         i.setWidth(542);
         i.setHeight(64);
-        i.setPosition(GlobalSettings.RESOLUTION_X / 2, 72, Align.bottom);
+        i.setPosition(GlobPref.RES_X / 2, 72, Align.bottom);
         this.battleMenuImgs.put("infoLabelBg", i);
 
         Label.LabelStyle labs = new Label.LabelStyle();
@@ -1313,7 +1316,7 @@ public class BattleHUD {
     public void lineUpForAttack(Monster m, int chosenTarget, int attack) {
         m.prepareForAttack(chosenTarget, attack);
 
-        if(GlobalSettings.DEBUGGING_ON) {
+        if(GlobPref.DEBUGGING_ON) {
             System.out.println("--- lineUpForAttack() ---");
             System.out.println("Preparing monster " + m.ID + "at pos " + m.battleFieldPosition);
             System.out.println(m.ready + "," + m.attacks.get(attack) + ", target:" + chosenTarget
@@ -1443,7 +1446,7 @@ public class BattleHUD {
             }
 
             // ............................................................................... DEBUG
-            if(GlobalSettings.DEBUGGING_ON) {
+            if(GlobPref.DEBUGGING_ON) {
                 System.out.println("#####################");
                 System.out.println(AIoppTeam);
                 System.out.println(AIchosenTarget);
@@ -1485,9 +1488,9 @@ public class BattleHUD {
     }
 
     final static class ImPos {
-        private static IntVector2 OPPO_TOP = new IntVector2(GlobalSettings.RESOLUTION_X-120-128,212);
-        private static IntVector2 OPPO_MID = new IntVector2(GlobalSettings.RESOLUTION_X - 64 - 128, 176);
-        private static IntVector2 OPPO_BOT = new IntVector2(GlobalSettings.RESOLUTION_X-8-128,140);
+        private static IntVector2 OPPO_TOP = new IntVector2(GlobPref.RES_X-120-128,212);
+        private static IntVector2 OPPO_MID = new IntVector2(GlobPref.RES_X - 64 - 128, 176);
+        private static IntVector2 OPPO_BOT = new IntVector2(GlobPref.RES_X-8-128,140);
         private static IntVector2 HERO_TOP = new IntVector2(120, 212);
         private static IntVector2 HERO_MID = new IntVector2(64,176);
         private static IntVector2 HERO_BOT = new IntVector2(8, 140);

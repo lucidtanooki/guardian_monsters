@@ -21,7 +21,7 @@ public class MonsterManager {
      * @return
      */
     public static Monster earnEXP(Monster m, int exp) {
-        boolean reachedNextLevel = m.getEXP(exp);
+        boolean reachedNextLevel = m.receiveEXP(exp);
         if(reachedNextLevel) {
             if (MonsterInformation.getInstance().statusInfos.get(m.ID)
                     .learnableAttacks.containsKey(m.level))

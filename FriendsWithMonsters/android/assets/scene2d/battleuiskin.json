@@ -29,8 +29,8 @@
 	
 	com.badlogic.gdx.scenes.scene2d.ui.ProgressBar$ProgressBarStyle: {
 	  hp: { background: invis, knobBefore: blue-bar-lr  },
-	  mp: { background: blue-bar-lr  },
+	  mp: { background: green-progress-bar },
 	  rp: { background: blue-bar-lr  },
-	  ep: { background: blue-bar-lr  },
+	  ep: { background: yellow-progress-bar  },
   }
 }

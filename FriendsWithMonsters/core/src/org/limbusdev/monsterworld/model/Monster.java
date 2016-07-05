@@ -16,7 +16,6 @@ import java.util.Observer;
 public class Monster extends Observable {
     /* ............................................................................ ATTRIBUTES .. */
     public Array<Attack> attacks;
-    public Array<Observer> observers;
     public static int INSTANCECOUNTER=0;
     public int INSTANCE_ID;
     public int evolution;
@@ -25,11 +24,11 @@ public class Monster extends Observable {
     // -------------------------------------------------------------------------------------- STATUS
     public int ID;
     public int level;
-    public int exp;
+    private int exp;
     public int physStrength;
-    public int HPfull, HP;
+    private int HPfull, HP;
     public int magicStrength;
-    public int MPfull, MP;
+    private int MPfull, MP;
 
     public int physDefFull, physDef;
     public int magicDefFull, magicDef;
@@ -53,6 +52,7 @@ public class Monster extends Observable {
     /* ........................................................................... CONSTRUCTOR .. */
 
     public Monster() {
+        super();
         this.INSTANCE_ID =INSTANCECOUNTER;
         INSTANCECOUNTER++;
         // STATUS
@@ -80,7 +80,6 @@ public class Monster extends Observable {
         // INIT
         this.attacks = new Array<Attack>();
         attacks.add(new Attack(AttackType.PHYSICAL, 5, "Kick", SFXType.HIT, 0));
-        this.observers = new Array<Observer>();
     }
     /* ............................................................................... METHODS .. */
 
@@ -89,7 +88,7 @@ public class Monster extends Observable {
      * @param exp
      * @return  true if reached next level
      */
-    public boolean getEXP(int exp) {
+    public boolean receiveEXP(int exp) {
         boolean ans = false;
         System.out.println("Got " + exp + " EXP");
         this.exp += exp;
@@ -108,6 +107,9 @@ public class Monster extends Observable {
             this.magicDefFull+=1;
         }
         System.out.println("EXP: " + this.exp);
+
+        this.setChanged();
+        this.notifyObservers();
 
         return ans;
     }
@@ -178,7 +180,57 @@ public class Monster extends Observable {
         return MathUtils.round(exp/1.f/expAvailableInThisLevel()*100);
     }
 
+    public int getHPPerc() {
+        return MathUtils.round(100f*HP/HPfull);
+    }
+
+    public int getMPPerc() {
+        return MathUtils.round(100f*MP/MPfull);
+    }
+
     public int getNextAttackDuration() {
         return 1000;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void increaseLevel(int level) {
+        ++this.level;
+        this.setChanged();
+        this.notifyObservers();
+    }
+
+    public int getExp() {
+        return exp;
+    }
+
+    public int getHPfull() {
+        return HPfull;
+    }
+
+    public int getHP() {
+        return HP;
+    }
+
+    public void setHP(int HP) {
+        this.HP = HP;
+        this.setChanged();
+        this.notifyObservers();
+    }
+
+    public int getMPfull() {
+        return MPfull;
+    }
+
+    public int getMP() {
+        return MP;
+    }
+
+    public void setMP(int MP) {
+        this.MP = MP;
+        this.setChanged();
+        this.notifyObservers();
     }
 }

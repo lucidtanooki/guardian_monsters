@@ -5,8 +5,12 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
+import org.limbusdev.monsterworld.ecs.components.Components;
+import org.limbusdev.monsterworld.ecs.components.TeamComponent;
 import org.limbusdev.monsterworld.managers.MediaManager;
 import org.limbusdev.monsterworld.managers.SaveGameManager;
+import org.limbusdev.monsterworld.model.BattleFactory;
+import org.limbusdev.monsterworld.screens.BattleScreen;
 import org.limbusdev.monsterworld.screens.MainMenuScreen;
 import org.limbusdev.monsterworld.screens.OutdoorGameWorldScreen;
 import org.limbusdev.monsterworld.utils.GameState;
@@ -26,14 +30,18 @@ public class FriendsWithMonsters extends Game {
         font  = new BitmapFont();
         media = new MediaManager();
 
-        if(GS.SKIP_START_MENU) {
-            if(SaveGameManager.doesGameSaveExist()) {
-                GameState state = SaveGameManager.loadSaveGame();
-                this.setScreen(new OutdoorGameWorldScreen(this, state.map, 1, true));
-            } else
-                this.setScreen(new OutdoorGameWorldScreen(this, 9, 1, false));
-        } // switch to main menu screen
-        else this.setScreen(new MainMenuScreen(this));
+        switch(GS.DEBUG_MODE) {
+            case WORLD:
+                setUpTestWorld();
+                break;
+            case BATTLE:
+                setUpTestBattle();
+                break;
+            default:
+                // Release
+                this.setScreen(new MainMenuScreen(this));
+                break;
+        }
 	}
 
 	@Override
@@ -47,5 +55,29 @@ public class FriendsWithMonsters extends Game {
         shp.dispose();
         font.dispose();
         media.dispose();
+    }
+
+    // ............................................................................ GAME MODE SETUPS
+    private void setUpTestBattle() {
+        TeamComponent herTeam = new TeamComponent();
+        herTeam.monsters.add(BattleFactory.getInstance().createMonster(1));
+        herTeam.monsters.add(BattleFactory.getInstance().createMonster(2));
+        herTeam.monsters.add(BattleFactory.getInstance().createMonster(3));
+        TeamComponent oppTeam = new TeamComponent();
+        oppTeam.monsters.add(BattleFactory.getInstance().createMonster(7));
+        oppTeam.monsters.add(BattleFactory.getInstance().createMonster(4));
+        oppTeam.monsters.add(BattleFactory.getInstance().createMonster(11));
+        BattleScreen battleScreen = new BattleScreen(
+                media, new OutdoorGameWorldScreen(this, 9, 1, false), this);
+        battleScreen.init(herTeam, oppTeam);
+        this.setScreen(battleScreen);
+    }
+
+    private void setUpTestWorld() {
+        if(SaveGameManager.doesGameSaveExist()) {
+            GameState state = SaveGameManager.loadSaveGame();
+            this.setScreen(new OutdoorGameWorldScreen(this, state.map, 1, true));
+        } else
+            this.setScreen(new OutdoorGameWorldScreen(this, 9, 1, false));
     }
 }

@@ -87,7 +87,7 @@ public class BattleScreen implements Screen {
 
         viewport.apply();
         batch.begin();
-        batch.draw(background, 0, 0);
+        batch.draw(background, 0, 0, GS.RES_X, GS.RES_Y);
 
         batch.end();
 

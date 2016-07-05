@@ -97,6 +97,16 @@
        y1="-684"
        x2="608"
        y2="-668" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4819"
+       id="linearGradient3217"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(212.41166,-47.000003)"
+       x1="576"
+       y1="-664"
+       x2="576"
+       y2="-660" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -105,11 +115,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2"
-     inkscape:cx="450.08925"
-     inkscape:cy="1282.3321"
+     inkscape:zoom="0.70710678"
+     inkscape:cx="911.99305"
+     inkscape:cy="563.48978"
      inkscape:document-units="px"
-     inkscape:current-layer="layer2"
+     inkscape:current-layer="layer1"
      showgrid="true"
      inkscape:window-width="1366"
      inkscape:window-height="744"
@@ -552,7 +562,7 @@
     <rect
        inkscape:export-ydpi="90"
        inkscape:export-xdpi="90"
-       inkscape:export-filename="/home/georg/Entwicklung/Java/libGDX/FriendsWithMonsters/Artwork/Spritesheets/LimbusDev/UI/monStateUIL.png"
+       inkscape:export-filename="/home/georg/Entwicklung/Java/libGDX/FriendsWithMonsters/Artwork/Spritesheets/LimbusDev/UI/monStateUIbg2.png"
        y="-752"
        x="288"
        height="56"
@@ -692,6 +702,22 @@
        inkscape:export-filename="/home/georg/Entwicklung/Java/libGDX/FriendsWithMonsters/Artwork/Spritesheets/LimbusDev/UIbattle/blue-bar-lr.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
+    <rect
+       style="fill:#cc0000;fill-opacity:1;stroke:none"
+       id="rect3221"
+       width="19"
+       height="11"
+       x="740"
+       y="-714"
+       inkscape:export-filename="/home/georg/Entwicklung/Java/libGDX/FriendsWithMonsters/Artwork/Spritesheets/LimbusDev/UIbattle/green-progress-bar.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       sodipodi:nodetypes="ssccssccs"
+       inkscape:connector-curvature="0"
+       id="path3215"
+       d="m 746.26906,-712 9.6386,0 c 1.108,0 1.59518,0.892 1.09234,2 l -1.3614,3 c -0.50264,1.108 -1.79966,2 -2.90766,2 l -9.6386,0 c -1.108,0 -1.59518,-0.892 -1.09234,-2 l 1.3614,-3 c 0.50264,-1.108 1.79966,-2 2.90766,-2 z"
+       style="fill:url(#linearGradient3217);fill-opacity:1;stroke:#254d00;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1" />
   </g>
   <g
      inkscape:label="Ebene 1"
@@ -1612,5 +1638,136 @@
        transform="translate(0,572.36218)"
        rx="2"
        ry="2" />
+    <rect
+       style="fill:none;stroke:none"
+       id="rect3225"
+       width="9"
+       height="7"
+       x="740"
+       y="-700"
+       transform="translate(0,572.36218)"
+       rx="0"
+       inkscape:export-filename="/home/georg/Entwicklung/Java/libGDX/FriendsWithMonsters/Artwork/Spritesheets/LimbusDev/UIbattle/yellow-progress-bar.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       style="fill:#c4a000;stroke:none"
+       id="rect3229"
+       width="7"
+       height="5"
+       x="741"
+       y="-699"
+       transform="translate(0,572.36218)"
+       ry="2"
+       rx="2" />
+    <rect
+       style="fill:#edd400;fill-opacity:1;stroke:none"
+       id="rect3231"
+       width="5"
+       height="3"
+       x="742"
+       y="-698"
+       transform="translate(0,572.36218)"
+       rx="1"
+       ry="1" />
+    <rect
+       style="fill:#5c3566;fill-opacity:1;stroke:none"
+       id="rect3235"
+       width="256"
+       height="256"
+       x="1104"
+       y="204.36218" />
+    <rect
+       style="fill:#729fcf;fill-opacity:1;stroke:none"
+       id="rect3239"
+       width="256"
+       height="256"
+       x="1008"
+       y="252.36218" />
+    <rect
+       y="300.36218"
+       x="912"
+       height="256"
+       width="256"
+       id="rect3237"
+       style="fill:#f57900;fill-opacity:1;stroke:none" />
+    <rect
+       style="fill:#73d216;fill-opacity:1;stroke:none"
+       id="rect3243"
+       width="48"
+       height="48"
+       x="1008"
+       y="-272"
+       transform="translate(0,572.36218)" />
+    <rect
+       style="fill:#73d216;fill-opacity:1;stroke:none"
+       id="rect3245"
+       width="48"
+       height="48"
+       x="1104"
+       y="252.36218" />
+    <rect
+       y="204.36218"
+       x="1200"
+       height="48"
+       width="48"
+       id="rect3247"
+       style="fill:#73d216;fill-opacity:1;stroke:none" />
+    <path
+       style="fill:#babdb6;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 1032,-224 -16,-32 16,-16 16,16 z"
+       id="path3249"
+       inkscape:connector-curvature="0"
+       transform="translate(0,572.36218)" />
+    <path
+       style="fill:#eeeeec;stroke:none"
+       d="m 1032,-272 0,20 16,-4 -16,32 -16,-32 z"
+       id="path3253"
+       inkscape:connector-curvature="0"
+       transform="translate(0,572.36218)"
+       sodipodi:nodetypes="cccccc" />
+    <path
+       style="fill:#babdb6;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 1016,-256 16,4 0,28 z"
+       id="path3255"
+       inkscape:connector-curvature="0"
+       transform="translate(0,572.36218)" />
+    <path
+       style="fill:#888a85;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 1032,-252 16,-4 -16,32 z"
+       id="path3257"
+       inkscape:connector-curvature="0"
+       transform="translate(0,572.36218)" />
+    <rect
+       y="276.36218"
+       x="840"
+       height="48"
+       width="48"
+       id="rect3259"
+       style="fill:#73d216;fill-opacity:1;stroke:none"
+       inkscape:export-filename="/home/georg/Entwicklung/Java/libGDX/FriendsWithMonsters/Artwork/Spritesheets/LimbusDev/UIbattle/indicator.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path3261"
+       d="m 864,324.36218 -16,-32 16,-16 16,16 z"
+       style="fill:#babdb6;stroke:none" />
+    <path
+       sodipodi:nodetypes="cccccc"
+       inkscape:connector-curvature="0"
+       id="path3263"
+       d="m 864,276.36218 0,20 16,-4 -16,32 -16,-32 z"
+       style="fill:#eeeeec;stroke:none" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path3265"
+       d="m 848,292.36218 16,4 0,28 z"
+       style="fill:#babdb6;stroke:none" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path3267"
+       d="m 864,296.36218 16,-4 -16,32 z"
+       style="fill:#888a85;stroke:none" />
   </g>
 </svg>

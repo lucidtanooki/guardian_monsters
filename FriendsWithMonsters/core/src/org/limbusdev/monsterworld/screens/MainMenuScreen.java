@@ -115,9 +115,9 @@ public class MainMenuScreen implements Screen {
     public void setUpGame() {
         if(SaveGameManager.doesGameSaveExist()) {
             GameState state = SaveGameManager.loadSaveGame();
-            game.setScreen(new OutdoorGameWorldScreen(game, state.map, 1, true));
+            game.pushScreen(new OutdoorGameWorldScreen(game, state.map, 1, true));
         } else
-            game.setScreen(new OutdoorGameWorldScreen(game, 9, 1, false));
+            game.pushScreen(new OutdoorGameWorldScreen(game, 9, 1, false));
     }
 
 

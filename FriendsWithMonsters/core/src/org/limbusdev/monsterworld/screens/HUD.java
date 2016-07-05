@@ -185,7 +185,7 @@ public class HUD extends InputAdapter {
                 oppTeam.monsters.add(BattleFactory.getInstance().createMonster(4));
                 oppTeam.monsters.add(BattleFactory.getInstance().createMonster(11));
                 battleScreen.init(Components.team.get(hero), oppTeam);
-                game.setScreen(battleScreen);
+                game.pushScreen(battleScreen);
             }
         });
         this.menuButtons.addActor(battle);

@@ -574,7 +574,7 @@ public class BattleHUD {
                         Actions.visible(true), Actions.alpha(1, .5f), Actions.run(new Runnable() {
                             @Override
                             public void run() {
-                                game.setScreen(gameScreen);
+                                game.popScreen();
                             }
                         })
                 ));
@@ -680,7 +680,7 @@ public class BattleHUD {
                         Actions.run(new Runnable() {
                             @Override
                             public void run() {
-                                game.setScreen(gameScreen);
+                                game.popScreen();
                             }
                         })));
             }

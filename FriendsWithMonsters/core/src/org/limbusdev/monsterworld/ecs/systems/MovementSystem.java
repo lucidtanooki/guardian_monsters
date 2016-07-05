@@ -7,6 +7,7 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.TimeUtils;
 
 import org.limbusdev.monsterworld.ecs.EntityComponentSystem;
@@ -20,6 +21,7 @@ import org.limbusdev.monsterworld.geometry.IntRectangle;
 import org.limbusdev.monsterworld.geometry.IntVector2;
 import org.limbusdev.monsterworld.geometry.WarpPoint;
 import org.limbusdev.monsterworld.model.BattleFactory;
+import org.limbusdev.monsterworld.model.Monster;
 import org.limbusdev.monsterworld.model.MonsterArea;
 import org.limbusdev.monsterworld.utils.GS;
 
@@ -30,11 +32,13 @@ public class MovementSystem extends EntitySystem {
     /* ............................................................................ ATTRIBUTES .. */
     private Entity hero;
     private Array<WarpPoint> warpPoints;
+    private Array<Rectangle> healFields;
     private EntityComponentSystem ecs;
     /* ........................................................................... CONSTRUCTOR .. */
-    public MovementSystem(EntityComponentSystem ecs, Array<WarpPoint> warpPoints) {
+    public MovementSystem(EntityComponentSystem ecs, Array<WarpPoint> warpPoints, Array<Rectangle> healFields) {
         this.ecs = ecs;
         this.warpPoints = warpPoints;
+        this.healFields = healFields;
     }
     /* ............................................................................... METHODS .. */
     public void addedToEngine(Engine engine) {
@@ -59,6 +63,24 @@ public class MovementSystem extends EntitySystem {
             if (heroArea.contains(w.x, w.y)) {
                 System.out.println("Changing to Map " + w.targetID);
                 ecs.changeGameArea(w.targetID, w.targetWarpPointID);
+            }
+        }
+    }
+
+    public void checkHeal() {
+        PositionComponent pos = Components.position.get(hero);
+        Rectangle heroArea = new Rectangle(pos.x, pos.y, pos.width, pos.height);
+
+        // Check whether hero enters warp area
+        for (Rectangle h : healFields) {
+            if (heroArea.contains(h.x+h.width/2,h.y+h.height/2)) {
+                // Heal Team
+                System.out.println("Entered Healing Area");
+                TeamComponent tc = Components.team.get(hero);
+                boolean teamHurt = false;
+                for(Monster m : tc.monsters)
+                    if(m.getHP() != m.getHPfull())
+                        m.setHP(m.getHPfull());
             }
         }
     }
@@ -154,6 +176,7 @@ public class MovementSystem extends EntitySystem {
                     break;
             }
             if(movementComplete) {
+                checkHeal();
                 input.moving = false;
                 // Update Grid Position of Hero
                 switch(input.skyDir) {
@@ -186,7 +209,7 @@ public class MovementSystem extends EntitySystem {
                         input.inBattle = true;
                         TeamComponent oppTeam = BattleFactory.getInstance().createOpponentTeam(ma);
                         ecs.hud.battleScreen.init(Components.team.get(ecs.hero), oppTeam);
-                        ecs.hud.game.setScreen(ecs.hud.battleScreen);
+                        ecs.hud.game.pushScreen(ecs.hud.battleScreen);
                         /* ......................................................... START BATTLE */
                         // Stop when in a battle
                         if(input.touchDown) input.startMoving = false;

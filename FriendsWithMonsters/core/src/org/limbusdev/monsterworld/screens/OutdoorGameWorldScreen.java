@@ -49,7 +49,6 @@ public class OutdoorGameWorldScreen implements Screen {
         SaveGameManager saveGameManager = new SaveGameManager(this.gameArea);
         this.ECS = new EntityComponentSystem(game, viewport, gameArea, fromSave, this, saveGameManager);
 
-
         this.inputMultiplexer = new InputMultiplexer();
         setUpInputProcessor();
     }

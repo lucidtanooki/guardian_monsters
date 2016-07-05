@@ -125,7 +125,7 @@ public class EntityComponentSystem {
         engine.addSystem(characterSpriteSystem);
 
         // Movement System
-        MovementSystem movementSystem = new MovementSystem(this, gameArea.getWarpPoints());
+        MovementSystem movementSystem = new MovementSystem(this, gameArea.getWarpPoints(), gameArea.getHealFields());
         movementSystem.addedToEngine(engine);
         engine.addSystem(movementSystem);
 
@@ -182,7 +182,7 @@ public class EntityComponentSystem {
      * @param startFieldID  start point on new map
      */
     public void changeGameArea(int mapID, int startFieldID) {
-        game.setScreen(new OutdoorGameWorldScreen(game, mapID, startFieldID, false));
+        game.pushScreen(new OutdoorGameWorldScreen(game, mapID, startFieldID, false));
     }
 
     /**

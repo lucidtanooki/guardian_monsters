@@ -2,6 +2,12 @@ package org.limbusdev.monsterworld.utils;
 
 import org.limbusdev.monsterworld.enums.DebugMode;
 
+/*
+ * Copyright (c) 2016 by Georg Eckert
+ *
+ * Licensed under GPL 3.0 https://www.gnu.org/licenses/gpl-3.0.en.html
+ */
+
 /**
  * Static container for Settings. Every parameter used in the game should be configured here
  * Created by georg on 21.11.15.
@@ -28,6 +34,6 @@ public class GS {
 
     // ................................................................................... DEBUGGING
     public final static boolean SKIP_START_MENU = true;
-    public final static DebugMode DEBUG_MODE = DebugMode.BATTLE;
+    public final static DebugMode DEBUG_MODE = DebugMode.RELEASE;
 
 }

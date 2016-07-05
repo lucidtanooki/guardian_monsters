@@ -7,6 +7,9 @@
  <tileset firstgid="1" name="limbusdev_world" tilewidth="16" tileheight="16">
   <image source="../spritesheets/limbusdev_world.png" width="1024" height="1024"/>
  </tileset>
+ <tileset firstgid="4097" name="limbusdev_world2" tilewidth="16" tileheight="16">
+  <image source="../spritesheets/limbusdev_world2.png" width="1024" height="1024"/>
+ </tileset>
  <layer name="ground1" width="32" height="32">
   <data encoding="base64" compression="zlib">
    eJztwwEJAAAMA6AleP9AC7YeR8FeUlVVVfX1AfIpSC4=
@@ -14,17 +17,17 @@
  </layer>
  <layer name="walls1" width="32" height="32">
   <data encoding="base64" compression="zlib">
-   eJztV41qwjAYzKat1XYPpc5u7K10a91rbf1xj+UFPAyBknyfxY6xg+Ms8cvlkq+BnnJjevAUoT/gdmHMM7gDS5DoBPO4uiiMSYs4zcB3eH6AFVg7/hXmqsGjUCXr/c35E8E8rr6AZaS+gg08W7ADe8d/J5jH6tfKmG/wiN91EaefNn+G/GAF1plz/oH6GTh3nh+w94/5dR2x2F687RrKLPx/ooFXm1+f6ct1xGIofwjMT9w7v+9z7/y+Tyj/Gnu1sf2OsRbswB5s4NmCHdgL/Nfw2gjOfw/vg+1bjM3BBEzB2RLPYAKmy3j/PWoPgvwhcF+00J4/wX3R4tb87A8t2A/a/OwPLdgP2vxjQZt/LEyV3+9/9pN/70jfM/++8pXjfv+zn/x7Z+g9G9o3/77yleO3vv9DdasnWb32/IfqYv3/8//N/G8T55fWj51fWj9Vfn6DcR1aJbTff8yhVUL7/XcGUvfLfQ==
+   eJzlV+1OwjAUrcLGYFNMeCJApvGtQDf8ocZX0n3gY3kauaG5uqz3jjAST3JyaEp7errbJt3FxtTgzkO/wOXImFtwBaYgoRLM4+ooMSZM/DQCH+H5BGZg7vhnmCsHt0KVrPec8weCeVy9A1NPvQcLeJZgBdaO/0owj9WPiTGf4Ba/88RPn23+CPnBDMwj5/u3jB+AQ6d9gb2/jA/r8MVy723XkEbt/ycU8CrjQ5t8aR2+aMrfBspPOHV+7nPq/NynLf8ce7Ww9Y6+EqzAGizgWYIVWAv85/BaCL7/Gt4bW7foG4IBGIKDMdpgAIZjf/81xm4E+dtA+6KF9vsTaF+06Jqf6kMLqgdtfqoPLagetPmPBW3+Y6Gv/Lz+qZ74vSM9Z/y+4kr9vP6pnvi903TOmvaN31dcqb/r+W8aN7mSjf8rx83sR1/2+j77Pb4pv6//Oed/ZXnf/ln+a5Z3Ksj/0HN+6Xjt/df13uw7P73BaB1aJWjff5RDqwTt++8bw5rOZg==
   </data>
  </layer>
  <layer name="objects1" width="32" height="32">
   <data encoding="base64" compression="zlib">
-   eJztlEEOwCAIBD1Zb/2T/39U9dimBmRF2mQn4eYyMYgpEULqqStrnv77uVHeygo/AupHifZ3cut7vFRZ5J95z1KPKD+Cp1+z55Z/5S/+ryPdOz/2bLff0zU7d+aZR/Io0X5CtFy6xUia
+   eJxjYBgFo2AUOPETh8nVP2o/qjpc+skF1LCfEkCp/ZSCgbYfBNiA5rJjwRxUsp+U9EzIjIGynxJAS/uJyefklCtDxf7BDgj5mw0tn9HbfkrBMSEGhnMiDAztQthxnwjx9pNTjyHbhe4ubObSyv5jQphyMHla2g8KX3TwSJJ+9qOHOyFzaWH/ObQw6BdGlceVRqhhPyzeQfFwiAe7+9qR8gi1AT5/YcuPo2B4AAA1JlrI
   </data>
  </layer>
  <layer name="tops1" width="32" height="32">
   <data encoding="base64" compression="zlib">
-   eJztlWsOgjAQhFcReYY7+QDP5QM8lyai8VROops0G5AiUNT0SybzA+2Uwg5Ev8fMI3K9sXfxH5wionPU/Ls0IMqC/nMmMdE0bv5/juwCcnw8f8iF5r5+vm5OHRdklx3u/1OcEPcLudA8NJfLz2uFzDWUQpnBfH5ee2QeoBwqlHw+l7HgcxkLPheVMiG6VuiW9J+v2xtD0TTP3FfSTcF9Jd0U3FfSdeH5ajtnsq+k8/UFtFTW5fdJ9k7bOZN9JZ2vb6Gdsi6/T7J3quZM3S9TvuZM9pX0uvXa0vV7NhT3L9yTxWJ5D/exrktSdGEGbTRdwn2s65IcaxbQUdMtTx7bZkqh
+   eJztlUkOgkAQRcsBQTEu5EQO4MbpSg7guTQRjQv1SP4EKulUMDSCEIeX/PwF2tXVTX2IPo+mSWSYVe/iO9jbRAc7/Xdum8hrF1+n1iWqd9P/76N2ADUs3D9kQC1Lv75unWccUTvM0f+rNDroFzKgVqe8unxfI9QcQy7klVif72uDmlvIhwKlPp9LVfC5VAWfi0rYIzol6Nwrvr5ubryLtHnmvJJeFpxX0suC80q6LjxfWedM5pV0fj6Ahsq6/D7J3Mk6ZzKvpPPzFbRW1uX3SeZO0pyp+2XCeM5kXkl/tl5W8n7P3sWlgD3d+5FPnciXTv41P4mZ6Hf+Y/1f4/tfxH3f+tXt5VfgPNZ1iYss9KCJpks4j3Vd4mPNANpp+p+IB0YFTyk=
   </data>
  </layer>
  <objectgroup name="colliderWalls1" width="32" height="32">
@@ -45,6 +48,18 @@
   <object x="0" y="96" width="32" height="384"/>
   <object x="480" y="96" width="32" height="160"/>
   <object x="480" y="288" width="32" height="192"/>
+  <object x="80" y="352" width="16" height="16"/>
+  <object x="112" y="352" width="16" height="16"/>
+  <object x="144" y="352" width="16" height="16"/>
+  <object x="160" y="336" width="16" height="16"/>
+  <object x="80" y="384" width="16" height="16"/>
+  <object x="32" y="384" width="16" height="16"/>
+  <object x="64" y="432" width="16" height="16"/>
+  <object x="80" y="416" width="16" height="16"/>
+  <object x="112" y="416" width="16" height="16"/>
+  <object x="144" y="416" width="16" height="16"/>
+  <object x="144" y="384" width="16" height="16"/>
+  <object x="80" y="432" width="16" height="16"/>
  </objectgroup>
  <objectgroup name="sensors" width="32" height="32">
   <object name="startField" x="256" y="16" width="16" height="16">
@@ -171,7 +186,7 @@
     <property name="probability3" value="0.01"/>
    </properties>
   </object>
-  <object name="monsterArea" x="80" y="336" width="144" height="80">
+  <object name="monsterArea" x="160" y="368" width="16" height="32">
    <properties>
     <property name="monsters" value="4;0.7;8;0.3"/>
     <property name="probability" value="0.05"/>
@@ -201,6 +216,63 @@
     <property name="targetWarpPointID" value="1"/>
    </properties>
   </object>
+  <object name="monsterArea" x="176" y="336" width="48" height="80">
+   <properties>
+    <property name="monsters" value="4;0.7;8;0.3"/>
+    <property name="probability" value="0.05"/>
+    <property name="probability2" value="0.02"/>
+    <property name="probability3" value="0.01"/>
+   </properties>
+  </object>
+  <object name="monsterArea" x="160" y="416" width="64" height="48">
+   <properties>
+    <property name="monsters" value="4;0.7;8;0.3"/>
+    <property name="probability" value="0.05"/>
+    <property name="probability2" value="0.02"/>
+    <property name="probability3" value="0.01"/>
+   </properties>
+  </object>
+  <object name="monsterArea" x="144" y="448" width="16" height="16">
+   <properties>
+    <property name="monsters" value="4;0.7;8;0.3"/>
+    <property name="probability" value="0.05"/>
+    <property name="probability2" value="0.02"/>
+    <property name="probability3" value="0.01"/>
+   </properties>
+  </object>
+  <object name="monsterArea" x="64" y="336" width="96" height="16">
+   <properties>
+    <property name="monsters" value="4;0.7;8;0.3"/>
+    <property name="probability" value="0.05"/>
+    <property name="probability2" value="0.02"/>
+    <property name="probability3" value="0.01"/>
+   </properties>
+  </object>
+  <object name="monsterArea" x="32" y="352" width="48" height="32">
+   <properties>
+    <property name="monsters" value="4;0.7;8;0.3"/>
+    <property name="probability" value="0.05"/>
+    <property name="probability2" value="0.02"/>
+    <property name="probability3" value="0.01"/>
+   </properties>
+  </object>
+  <object name="monsterArea" x="32" y="400" width="16" height="64">
+   <properties>
+    <property name="monsters" value="4;0.7;8;0.3"/>
+    <property name="probability" value="0.05"/>
+    <property name="probability2" value="0.02"/>
+    <property name="probability3" value="0.01"/>
+   </properties>
+  </object>
+  <object name="monsterArea" x="48" y="448" width="16" height="16">
+   <properties>
+    <property name="monsters" value="4;0.7;8;0.3"/>
+    <property name="probability" value="0.05"/>
+    <property name="probability2" value="0.02"/>
+    <property name="probability3" value="0.01"/>
+   </properties>
+  </object>
+  <object name="healing" x="112" y="384" width="16" height="16"/>
  </objectgroup>
  <objectgroup name="livingEntities" width="32" height="32">
   <object name="person" x="32" y="160" width="16" height="16">
@@ -213,5 +285,12 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="objects" width="32" height="32"/>
+ <objectgroup name="objects" width="32" height="32">
+  <object name="sign" x="80" y="432" width="16" height="16">
+   <properties>
+    <property name="text" value="This ancient place is being visited by people with health problems for hunders of years. A healing presence can be felt around here."/>
+    <property name="title" value="Healing Circle"/>
+   </properties>
+  </object>
+ </objectgroup>
 </map>

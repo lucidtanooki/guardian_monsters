@@ -39,6 +39,7 @@ public class GameArea {
     private Array<IntRectangle> colliders;
     private Array<IntRectangle> movingColliders;
     private Array<WarpPoint> warpPoints;
+    private Array<Rectangle> healFields;
     private Array<MapPersonInformation> mapPeople;
     private Array<MapObjectInformation> mapSigns;
     private Array<MonsterArea> monsterAreas;
@@ -56,6 +57,7 @@ public class GameArea {
         this.warpPoints = new Array<WarpPoint>();
         this.mapPeople = new Array<MapPersonInformation>();
         this.mapSigns = new Array<MapObjectInformation>();
+        this.healFields = new Array<Rectangle>();
         setUpTiledMap(areaID, startPosID);
         this.mapRenderer = new OrthogonalTiledMapAndEntityRenderer(tiledMap, media);
         this.areaID = areaID;
@@ -121,6 +123,12 @@ public class GameArea {
 
         // get information about sensors
         for(MapObject mo : tiledMap.getLayers().get("sensors").getObjects()) {
+            if(mo.getName().equals("healing")) {
+                healFields.add(new Rectangle(
+                        ((RectangleMapObject) mo).getRectangle().x,
+                        ((RectangleMapObject) mo).getRectangle().y,
+                        GS.COL,GS.ROW));
+            }
             if(mo.getName().equals("warpField"))
                 warpPoints.add(new WarpPoint(
                         Integer.parseInt(mo.getProperties().get("targetWarpPointID", String.class)),
@@ -219,6 +227,10 @@ public class GameArea {
 
     public Array<WarpPoint> getWarpPoints() {
         return warpPoints;
+    }
+
+    public Array<Rectangle> getHealFields() {
+        return healFields;
     }
 
     public TiledMap getTiledMap() {

@@ -47,7 +47,7 @@ public class FriendsWithMonsters extends Game {
                 break;
             default:
                 // Release
-                this.setScreen(new MainMenuScreen(this));
+                pushScreen(new MainMenuScreen(this));
                 break;
         }
 	}
@@ -99,13 +99,13 @@ public class FriendsWithMonsters extends Game {
     }
 
     public void pushScreen(Screen screen) {
-        stateMashine.add(getScreen());
+        stateMashine.add(screen);
         this.setScreen(screen);
     }
 
     public void popScreen() {
-        Screen oldScreen = getScreen();
-        setScreen(stateMashine.first());
+        Screen oldScreen = stateMashine.pop();
+        setScreen(stateMashine.peek());
         oldScreen.dispose();
     }
 }

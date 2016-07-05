@@ -40,7 +40,7 @@ public class MediaManager {
     private Array<String> battleMusic;
     private Array<String> maleSprites, femaleSprites;
     private Array<Animation> animatedTiles;
-    public  Skin skin, battleSkin;
+    public  Skin skin, battleSkin, inventorySkin;
     
     /* ................,........................................................... CONSTRUCTOR .. */
     public MediaManager() {
@@ -109,6 +109,12 @@ public class MediaManager {
         battleSkin.add("default-font", font32);
         battleSkin.add("white", font32w);
         battleSkin.load(Gdx.files.internal("scene2d/battleuiskin.json"));
+
+        this.inventorySkin = new Skin();
+        inventorySkin.addRegions(new TextureAtlas(Gdx.files.internal("scene2d/inventoryUI.pack")));
+        inventorySkin.add("default-font", font32);
+        inventorySkin.add("white", font32w);
+        inventorySkin.load(Gdx.files.internal("scene2d/inventoryUIskin.json"));
 
         // Animated Tiles
         animatedTiles = new Array<Animation>();

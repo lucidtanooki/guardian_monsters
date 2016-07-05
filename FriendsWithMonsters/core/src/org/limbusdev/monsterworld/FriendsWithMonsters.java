@@ -1,9 +1,11 @@
 package org.limbusdev.monsterworld;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.utils.Array;
 
 import org.limbusdev.monsterworld.ecs.components.Components;
 import org.limbusdev.monsterworld.ecs.components.TeamComponent;
@@ -11,6 +13,7 @@ import org.limbusdev.monsterworld.managers.MediaManager;
 import org.limbusdev.monsterworld.managers.SaveGameManager;
 import org.limbusdev.monsterworld.model.BattleFactory;
 import org.limbusdev.monsterworld.screens.BattleScreen;
+import org.limbusdev.monsterworld.screens.InventoryScreen;
 import org.limbusdev.monsterworld.screens.MainMenuScreen;
 import org.limbusdev.monsterworld.screens.OutdoorGameWorldScreen;
 import org.limbusdev.monsterworld.utils.GameState;
@@ -22,6 +25,7 @@ public class FriendsWithMonsters extends Game {
     public ShapeRenderer shp;
     public BitmapFont font;
 	public MediaManager media;
+    private Array<Screen> stateMashine;
 	
 	@Override
 	public void create () {
@@ -29,6 +33,7 @@ public class FriendsWithMonsters extends Game {
         shp   = new ShapeRenderer();
         font  = new BitmapFont();
         media = new MediaManager();
+        stateMashine = new Array<Screen>();
 
         switch(GS.DEBUG_MODE) {
             case WORLD:
@@ -36,6 +41,9 @@ public class FriendsWithMonsters extends Game {
                 break;
             case BATTLE:
                 setUpTestBattle();
+                break;
+            case INVENTORY:
+                setUpTestInventory();
                 break;
             default:
                 // Release
@@ -58,6 +66,15 @@ public class FriendsWithMonsters extends Game {
     }
 
     // ............................................................................ GAME MODE SETUPS
+    private void setUpTestInventory() {
+        TeamComponent herTeam = new TeamComponent();
+        herTeam.monsters.add(BattleFactory.getInstance().createMonster(1));
+        herTeam.monsters.add(BattleFactory.getInstance().createMonster(2));
+        herTeam.monsters.add(BattleFactory.getInstance().createMonster(3));
+        InventoryScreen ivs = new InventoryScreen(this,herTeam);
+        this.setScreen(ivs);
+    }
+
     private void setUpTestBattle() {
         TeamComponent herTeam = new TeamComponent();
         herTeam.monsters.add(BattleFactory.getInstance().createMonster(1));
@@ -79,5 +96,16 @@ public class FriendsWithMonsters extends Game {
             this.setScreen(new OutdoorGameWorldScreen(this, state.map, 1, true));
         } else
             this.setScreen(new OutdoorGameWorldScreen(this, 9, 1, false));
+    }
+
+    public void pushScreen(Screen screen) {
+        stateMashine.add(getScreen());
+        this.setScreen(screen);
+    }
+
+    public void popScreen() {
+        Screen oldScreen = getScreen();
+        setScreen(stateMashine.first());
+        oldScreen.dispose();
     }
 }

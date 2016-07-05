@@ -1,0 +1,87 @@
+
+inventoryUI.png
+format: RGBA8888
+filter: MipMapLinearNearest,MipMapLinearNearest
+repeat: none
+dataDisplayBg
+  rotate: false
+  xy: 1, 331
+  size: 512, 656
+  orig: 512, 656
+  offset: 0, 0
+  index: -1
+monDisplayBg
+  rotate: false
+  xy: 515, 331
+  size: 480, 656
+  orig: 480, 656
+  offset: 0, 0
+  index: -1
+infoLabel-heading
+  rotate: false
+  xy: 1, 265
+  size: 448, 64
+  orig: 448, 64
+  offset: 0, 0
+  index: -1
+infoLabel-entry
+  rotate: false
+  xy: 1, 207
+  size: 448, 56
+  orig: 448, 56
+  offset: 0, 0
+  index: -1
+monNameBg-pressed
+  rotate: false
+  xy: 451, 257
+  size: 288, 72
+  orig: 288, 72
+  offset: 0, 0
+  index: -1
+monNameBg
+  rotate: false
+  xy: 1, 133
+  size: 288, 72
+  orig: 288, 72
+  offset: 0, 0
+  index: -1
+toolBarButton-down
+  rotate: false
+  xy: 741, 265
+  size: 192, 64
+  orig: 192, 64
+  offset: 0, 0
+  index: -1
+toolBarButton-up
+  rotate: false
+  xy: 1, 67
+  size: 192, 64
+  orig: 192, 64
+  offset: 0, 0
+  index: -1
+toolBarButton-exit-down
+  rotate: false
+  xy: 291, 141
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+toolBarButton-exit-up
+  rotate: false
+  xy: 1, 1
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+
+inventoryUI2.png
+format: RGBA8888
+filter: MipMapLinearNearest,MipMapLinearNearest
+repeat: none
+selectDisplayBg
+  rotate: false
+  xy: 1, 1
+  size: 288, 656
+  orig: 288, 656
+  offset: 0, 0
+  index: -1

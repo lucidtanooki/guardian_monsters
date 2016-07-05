@@ -1,0 +1,26 @@
+{
+  com.badlogic.gdx.graphics.Color: {
+	  green: { a: 1, b: 0, g: 1, r: 0 },
+	  white: { a: 1, b: 1, g: 1, r: 1 },
+	  red: { a: 1, b: 0, g: 0, r: 1 },
+	  black: { a: 1, b: 0, g: 0, r: 0 },
+	  grey: { a: 1, b: 0.2, g: 0.2, r: 0.2 },
+  },
+  
+  com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
+    b-toolbar: {down: toolBarButton-down,    up: toolBarButton-up,    font: default-font},
+    b-monster: {checked: monNameBg-pressed, up: monNameBg, font: white},
+    b-data-head: {up: infoLabel-heading, font: white},
+    b-data-entry: {up: infoLabel-entry, font: default-font}
+	},
+	
+	com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle: {
+    b-toolbar-exit: {down: toolBarButton-exit-down,    up: toolBarButton-exit-up}
+	},
+	
+	com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
+    l-heading: {background: infoLabel-heading, font: white},
+    l-entry:   {background: infoLabel-entry,   font: default-font}
+	}
+	
+}

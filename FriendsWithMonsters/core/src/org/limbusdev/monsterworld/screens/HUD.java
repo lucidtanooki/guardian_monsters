@@ -196,7 +196,7 @@ public class HUD extends InputAdapter {
         teamButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                // TODO
+                game.pushScreen(new InventoryScreen(game, Components.team.get(hero)));
             }
         });
         this.menuButtons.addActor(teamButton);
@@ -214,7 +214,7 @@ public class HUD extends InputAdapter {
             }
         });
         this.stage.addActor(A);
-        this.stage.setDebugAll(true);
+        this.stage.setDebugAll(GS.DEBUGGING_ON);
 
         // B Button
         ImageButton B = new ImageButton(skin, "b");

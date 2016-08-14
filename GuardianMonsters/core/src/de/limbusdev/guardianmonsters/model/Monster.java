@@ -6,7 +6,6 @@ import com.badlogic.gdx.utils.TimeUtils;
 
 
 import java.util.Observable;
-import java.util.Observer;
 
 import de.limbusdev.guardianmonsters.enums.AttackType;
 import de.limbusdev.guardianmonsters.enums.SFXType;
@@ -30,20 +29,17 @@ public class Monster extends Observable {
     private int HPfull, HP;
     public int magicStrength;
     private int MPfull, MP;
+    private int SpeedFull, Speed;
 
     public int physDefFull, physDef;
     public int magicDefFull, magicDef;
-
-    public long recovTime;      // Time until monster can attack again
 
 
     // ------------------------------------------------------------------------------- BATTLE STATUS
     public boolean ready;
     public boolean KO;
     public boolean attackingRightNow;   // whether monster is involved in battle right now
-    public boolean waitingInQueue;
-    public long    waitingSince;
-    public long    attackStarted;       // Time when attack started
+    public boolean attackChosen;
     public int     battleFieldPosition;
 
     public Attack nextAttack;
@@ -66,15 +62,13 @@ public class Monster extends Observable {
         this.MP = MPfull = 5;
         this.physDefFull = physDef = 10;
         this.magicDefFull = magicDef = 10;
-        this.recovTime = 3000;
+        this.Speed = this.SpeedFull = 10;
 
         // BATTLE
         this.ready = false;
         this.KO = false;
         this.attackingRightNow = false;
-        this.waitingInQueue = false;
-        this.waitingSince = 0;
-        this.attackStarted = 0;
+        this.attackChosen = false;
         this.nextTarget = 0;
         this.battleFieldPosition = 0;
 
@@ -128,15 +122,14 @@ public class Monster extends Observable {
         this.nextTarget = targetPosition;
         this.nextAttack = attacks.get(attackIndex);
         this.ready = false;
-        this.waitingInQueue = true;
+        this.attackChosen = true;
     }
 
     /**
      * Call this method as soon as this monster gets removed from the queue
      */
     public void finishAttack() {
-        this.waitingSince = TimeUtils.millis();
-        waitingInQueue = false;
+        attackChosen = false;
         attackingRightNow = false;
     }
 
@@ -144,7 +137,6 @@ public class Monster extends Observable {
      * Call this method when monster reaches first slot in Queue
      */
     public void startAttack() {
-        this.attackStarted = TimeUtils.millis();
         this.attackingRightNow = true;
     }
 
@@ -152,7 +144,7 @@ public class Monster extends Observable {
      * Call regularly to check whether the monster has recovered
      */
     public void update() {
-        if(!waitingInQueue && TimeUtils.timeSinceMillis(waitingSince) > recovTime) ready = true;
+        // TODO
     }
 
     /**
@@ -160,9 +152,8 @@ public class Monster extends Observable {
      */
     public void initBattle(int position) {
         this.ready = false;
-        this.waitingSince = TimeUtils.millis();
         this.battleFieldPosition = position;
-        waitingInQueue = false;
+        attackChosen = false;
     }
 
     @Override

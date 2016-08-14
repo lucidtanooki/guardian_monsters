@@ -35,6 +35,6 @@ public class GS {
 
     // ................................................................................... DEBUGGING
     public final static boolean SKIP_START_MENU = true;
-    public final static DebugMode DEBUG_MODE = DebugMode.RELEASE;
+    public final static DebugMode DEBUG_MODE = DebugMode.BATTLE;
 
 }

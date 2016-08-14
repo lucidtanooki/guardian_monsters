@@ -119,10 +119,10 @@ public class BattleHUD {
         updateMonsters();
         updateAttackerQueue();
 
+
         // ........................................................................... END OF BATTLE
         if(allKO) handleEndOfBattle();
 
-        reActivateMonsters();
     }
 
     /**
@@ -139,46 +139,14 @@ public class BattleHUD {
 
 
     /**
-     * Sets Attack button active as soon as monsters have recovered
-     */
-    private void reActivateMonsters() {
-        // .............................................................................. RECOVERING
-        // Activate monsters if they have recovered
-        for(int i=0; i<6; i++) {
-            if (i < 3 && (
-                    team.get(i).ready
-                            && !team.get(i).waitingInQueue
-                            && !team.get(i).attackingRightNow
-                            && battleMenuButtons.get("attack").isDisabled())
-                    && i == chosenTeamMonster) {
-                System.out.println("Setting Attack Button active");
-                battleMenuButtons.get("attack").setDisabled(false);
-                battleMenuButtons.get("attack").addAction(
-                        Actions.sequence(Actions.alpha(1, .2f)));
-            }
-        }
-    }
-
-    /**
      * Handles all monsters in the queue and starts/finishes their attacks
      */
     public void updateAttackerQueue() {
-        if(attackerQueue.size != 0) {
-            Monster firstInQueue = attackerQueue.first();
-            // If first in queue is not attacking right now
-            if(firstInQueue.attackingRightNow) {
-                // If first in queue had enough time to finish attack
-                if(TimeUtils.timeSinceMillis(firstInQueue.attackStarted)
-                        > firstInQueue.getNextAttackDuration()) {
-                    // Remove him from the queue
-                    firstInQueue.finishAttack();
-                    attackerQueue.removeIndex(0);
-                }
-            }
-            // If it is waiting
-            else {
-                carryOutAttack(firstInQueue);
-            }
+        // check if all participators have chosen their actions
+        if(attackerQueue.size > 0) {
+            carryOutAttack(attackerQueue.pop());
+        } else {
+            newRound();
         }
     }
 
@@ -270,7 +238,6 @@ public class BattleHUD {
         this.oppTeam = opponentTeam.monsters;
 
         this.aiPlayer = new AIPlayer(this.oppTeam,this.team);
-        this.aiPlayer.havePause(true);
 
         // Initialize Monsters for Battle
         for(int j=0;j<this.team.size;j++) this.team.get(j).initBattle(j);
@@ -347,21 +314,27 @@ public class BattleHUD {
     }
 
     /**
-     * Make attack button visible as soon as a monster gets ready again
+     * Make attack button visible as soon as round is over
      * @param attackerPos
      */
     private void activateButton(int attackerPos) {
-        if(!team.get(attackerPos).ready ||
-                team.get(attackerPos).waitingInQueue ||
-                team.get(attackerPos).attackingRightNow) {
-            battleMenuButtons.get("attack").setDisabled(true);
-            battleMenuButtons.get("attack").addAction(Actions.sequence(Actions.alpha(0.5f, .2f)));
-        }
-        else {
+        // If monster not KO and attack hasn't been chosen yet
+        if(!team.get(attackerPos).KO && !team.get(attackerPos).attackChosen) {
             battleMenuButtons.get("attack").setDisabled(false);
-            battleMenuButtons.get("attack").addAction(Actions.sequence(Actions.alpha(1,.2f)));
+            battleMenuButtons.get("attack").addAction(Actions.sequence(Actions.alpha(1.0f, .2f)));
+        } else {
+            battleMenuButtons.get("attack").setDisabled(true);
+            battleMenuButtons.get("attack").addAction(Actions.sequence(Actions.alpha(0.5f,.2f)));
         }
         setUpAttacksPane();
+    }
+
+    /**
+     * Refresh battle UI for new round
+     */
+    private void newRound() {
+        for(Monster m : team) m.attackChosen = false;
+        for(Monster m : oppTeam) m.attackChosen = false;
     }
 
 
@@ -1047,7 +1020,7 @@ public class BattleHUD {
             System.out.println("--- lineUpForAttack() ---");
             System.out.println("Preparing monster " + m.ID + "at pos " + m.battleFieldPosition);
             System.out.println(m.ready + "," + m.attacks.get(attack) + ", target:" + chosenTarget
-                    + ", waitingInQueue: " + m.waitingInQueue);
+                    + ", waitingInQueue: " + m.attackChosen);
         }
 
         attackerQueue.add(m);
@@ -1191,7 +1164,7 @@ public class BattleHUD {
                 System.out.println("Target: " + m.nextTarget);
                 System.out.println("Ready: " + m.ready);
                 System.out.println("In Action: "+ m.attackingRightNow);
-                System.out.println("In Queue" + m.waitingInQueue);
+                System.out.println("In Queue" + m.attackChosen);
             }
             // ............................................................................... DEBUG
 

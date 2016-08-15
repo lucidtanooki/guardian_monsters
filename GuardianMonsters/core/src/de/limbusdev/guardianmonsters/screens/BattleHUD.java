@@ -21,7 +21,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
-import com.badlogic.gdx.utils.TimeUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
 import de.limbusdev.guardianmonsters.GuardianMonsters;
@@ -29,11 +28,12 @@ import de.limbusdev.guardianmonsters.ecs.components.TeamComponent;
 import de.limbusdev.guardianmonsters.enums.SFXType;
 import de.limbusdev.guardianmonsters.geometry.IntVector2;
 import de.limbusdev.guardianmonsters.model.Attack;
-import de.limbusdev.guardianmonsters.model.BattlePositionQueue;
 import de.limbusdev.guardianmonsters.model.Monster;
+import de.limbusdev.guardianmonsters.model.MonsterInBattle;
 import de.limbusdev.guardianmonsters.ui.MonsterStateWidget;
 import de.limbusdev.guardianmonsters.utils.GS;
 import de.limbusdev.guardianmonsters.utils.MonsterManager;
+import de.limbusdev.guardianmonsters.utils.MonsterSpeedComparator;
 
 
 /**
@@ -75,17 +75,13 @@ public class BattleHUD {
 
     // --------------------------------------------------------------------------------------- OTHER
     // Not Scene2D related
-    private Array<Monster> team, oppTeam;      // hold monsters of one team
-    private Array<Monster> attackerQueue;
+    private Array<MonsterInBattle> team, oppTeam;      // hold monsters of one team
+    private Array<MonsterInBattle> attackerQueue;
 
-    private int chosenTarget      =BatPos.OPPO_MID; // position of active target
-    private int chosenTeamMonster =BatPos.MID;      // position of active attacker
+    private int chosenTarget =BatPos.OPPO_MID; // position of active target
+    private int chosenMember =BatPos.MID;      // position of active attacker
     private boolean allKO, allHeroKO;               // whether a whole team is KO
-    private boolean lockedInBattle=false;           // true, when all combators have made their choice
-    private int fitMonsters=0;
-    private boolean attackAnimationRunnning = false;
-
-    private BattlePositionQueue heroPosQueue, opponentPosQueue;
+    private boolean attackAnimationRunning = false;
 
     private AIPlayer aiPlayer;                      // Artificial Intelligence
 
@@ -133,35 +129,24 @@ public class BattleHUD {
      * Update Method for state: BATTLEACTION
      */
     public void updateBattleAction(float delta) {
+        // Start one attack after the other
         updateAttackerQueue();
     }
 
     public void updateChoosing(float delta) {
+        // Let AI-Player act
         aiPlayer.act();
-        updateMonsters();
         countFitMonsters();
         // ........................................................................... END OF BATTLE
         if(allKO) handleEndOfBattle();
     }
 
     /**
-     * Draw the HUD to the screen
-     */
-    public void draw() {
-        this.stage.draw();
-    }
-
-    public void updateMonsters() {
-        for(Monster m : this.team)    m.update();
-        for(Monster m : this.oppTeam) m.update();
-    }
-
-
-    /**
      * Handles all monsters in the queue and starts/finishes their attacks
+     * ron only from updateBattleAction()
      */
     public void updateAttackerQueue() {
-            if (attackerQueue.size > 0 && !attackAnimationRunnning) {
+            if (attackerQueue.size > 0 && !attackAnimationRunning) {
                 carryOutAttack(attackerQueue.pop());
             } else if(attackerQueue.size == 0) {
                 newRound();
@@ -180,7 +165,7 @@ public class BattleHUD {
     public void reset() {
         // Attributes
         this.chosenTarget = BatPos.OPPO_MID;
-        this.chosenTeamMonster = BatPos.MID;
+        this.chosenMember = BatPos.MID;
 
         allKO = false;
         allHeroKO = false;
@@ -199,30 +184,7 @@ public class BattleHUD {
         resetUIElementVisibility();
     }
 
-    private void resetUIElementVisibility() {
-        // Visibility
-        // Reset Status UIs
-        for(MonsterStateWidget w : monsterStateWidgets) {
-            w.addAction(Actions.alpha(1));
-            w.setVisible(false);
-        }
 
-        for(Integer key : monsterImgs.keys()) {
-            monsterImgs.get(key).addAction(Actions.alpha(1));
-            monsterImgs.get(key).setVisible(false);
-        }
-
-        battleActionMenu.addAction(Actions.alpha(1));
-        battleActionMenu.setVisible(false);
-        topLevelMenu.addAction(Actions.alpha(1));
-        topLevelMenu.setVisible(true);
-        monsterStatusUI.addAction(Actions.alpha(1));
-        monsterStatusUI.setVisible(true);
-
-        attackPaneGroup.setVisible(false);
-        blackCourtain.setVisible(true);
-        gameOverUI.setVisible(false);
-    }
 
     /**
      * Initializes the battle screen with the given teams
@@ -232,34 +194,31 @@ public class BattleHUD {
     public void init(TeamComponent team, TeamComponent opponentTeam) {
         reset();
 
-        // Initializes Battle Queues ...............................................................
-        this.heroPosQueue = new BattlePositionQueue(team.monsters.size, true);
-        this.opponentPosQueue = new BattlePositionQueue(opponentTeam.monsters.size, false);
-
         //Initialize Teams .........................................................................
         // Hero Team
-        this.team = team.monsters;
+
+        this.team = new Array<MonsterInBattle>();
+        int i = 0;
+        for(Monster m : team.monsters) {
+            if(m.getHP() > 0) {
+                this.team.add(new MonsterInBattle(m, i));
+                i++;
+            }
+        }
         changeIndicatorPosition(true, BatPos.MID);
 
-        // Choose fit monsters for battle
-        int i=0;
-        for(Monster m : team.monsters) {
-            if (m.getHP() <= 0) {
-                m.KO = true;
-                kickOutMonster(i);
-            }
-            i++;
-        }
-
         // Opponent Team
+        this.oppTeam = new Array<MonsterInBattle>();
+        int j = 0;
+        for(Monster m : opponentTeam.monsters) {
+            if(m.getHP() > 0) {
+                this.oppTeam.add(new MonsterInBattle(m, j+3));
+                j++;
+            }
+        }
         changeIndicatorPosition(false, BatPos.OPPO_MID);
-        this.oppTeam = opponentTeam.monsters;
 
         this.aiPlayer = new AIPlayer(this.oppTeam,this.team);
-
-        // Initialize Monsters for Battle
-        for(int j=0;j<this.team.size;j++) this.team.get(j).initBattle(j);
-        for(int j = 0; j<this.oppTeam.size; j++) this.oppTeam.get(j).initBattle(j+3);
 
 
         // Initialize Status UIs ...................................................................
@@ -280,42 +239,7 @@ public class BattleHUD {
         show();
     }
 
-    /**
-     * Initializes the graphical representation of a monsters status on the screen
-     * @param monster   the given monster
-     * @param position  the position on the battle field
-     */
-    public void initStatusUI(Monster monster, final int position) {
 
-        // Set Monster Information in UI and set Signs visible
-        monsterStateWidgets.get(position).init(monster);
-
-        setMonsterStatusUIvisible(monster, position);
-
-        stage.addAction(Actions.fadeIn(1f));
-    }
-
-    /**
-     * Initializes the HUD for the given battle field position
-     * @param monster
-     * @param position
-     */
-    public void setMonsterStatusUIvisible(Monster monster, final int position) {
-        monsterStateWidgets.get(position).addAction(Actions.sequence(
-                Actions.alpha(1), Actions.visible(true)
-        ));
-
-        initMonsterImage(monster, position);
-    }
-
-    private void initMonsterImage(Monster monster, int position) {
-        Image monImg; TextureRegion monReg;
-        monImg = monsterImgs.get(position);
-        monReg = game.media.getMonsterSprite(monster.ID);
-        if(position < 3) if(!monReg.isFlipX()) monReg.flip(true, false);
-        monImg.setDrawable(new TextureRegionDrawable(monReg));
-        monImg.addAction(Actions.sequence(Actions.alpha(1), Actions.visible(true)));
-    }
 
     // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     // .............................................................................. LIBGDX METHODS
@@ -331,29 +255,17 @@ public class BattleHUD {
         blackCourtain.addAction(Actions.sequence(Actions.fadeOut(1), Actions.visible(false)));
     }
 
-    /**
-     * Make attack button visible as soon as round is over
-     * @param attackerPos
-     */
-    private void activateButton(int attackerPos) {
-        // If monster not KO and attack hasn't been chosen yet
-        if(!team.get(attackerPos).KO && !team.get(attackerPos).attackChosen) {
-            battleMenuButtons.get("attack").setDisabled(false);
-            battleMenuButtons.get("attack").addAction(Actions.sequence(Actions.alpha(1.0f, .2f)));
-        } else {
-            battleMenuButtons.get("attack").setDisabled(true);
-            battleMenuButtons.get("attack").addAction(Actions.sequence(Actions.alpha(0.5f,.2f)));
-        }
-        setUpAttacksPane();
-    }
+
 
     /**
      * Refresh battle UI for new round
      */
     private void newRound() {
-        for(Monster m : team) m.attackChosen = false;
-        for(Monster m : oppTeam) m.attackChosen = false;
+        for(MonsterInBattle m : team) m.attackChosen = false;
+        for(MonsterInBattle m : oppTeam) m.attackChosen = false;
         state = BattleState.CHOOSING;
+        attackerQueue.clear();
+        aiPlayer.havePause(false);
     }
 
 
@@ -366,8 +278,8 @@ public class BattleHUD {
 
         // Check if Hero lost fight
         boolean heroLost = true;
-        for(Monster m : team)
-            if(m.getHP() > 0) heroLost = false;
+        for(MonsterInBattle m : team)
+            if(m.monster.getHP() > 0) heroLost = false;
 
         // Hide UI Elements
         battleActionMenu.addAction(Actions.sequence(
@@ -389,16 +301,16 @@ public class BattleHUD {
     /**
      * Handle the event of a monster being killed
      */
-    private void handleAttack(Monster att, Monster def) {
+    private void handleAttack(MonsterInBattle att, MonsterInBattle def) {
         // Remove killed monsters
-        if(def.getHP() == 0) kickOutMonster(def.battleFieldPosition);
+        if(def.monster.getHP() == 0) kickOutMonster(def.battleFieldPosition);
 
         // Spread EXP
-        if(def.battleFieldPosition > 2 && def.getHP() == 0) {
+        if(def.battleFieldPosition > 2 && def.monster.getHP() == 0) {
             // Defeated Monster was part of opponents team
-            int exp = def.level * (def.getHPfull() + def.physStrength);
+            int exp = def.monster.level * (def.monster.getHPfull() + def.monster.physStrength);
             exp /= team.size;
-            for (Monster m : team) if (m.getHP() > 0) MonsterManager.earnEXP(m,exp);
+            for (MonsterInBattle m : team) if (m.monster.getHP() > 0) MonsterManager.earnEXP(m.monster,exp);
         }
     }
 
@@ -414,7 +326,7 @@ public class BattleHUD {
                 case 1:  indicatorHero.setPosition(IndPos.HERO_BOT.x, IndPos.HERO_BOT.y, Align.center);break;
                 default: indicatorHero.setPosition(IndPos.HERO_MID.x, IndPos.HERO_MID.y, Align.center);break;
             }
-            chosenTeamMonster=pos;
+            chosenMember =pos;
             activateButton(pos);
         } else {
             switch(pos) {
@@ -440,22 +352,17 @@ public class BattleHUD {
     public void initializeAttributes() {
         this.allKO = false;
 
-        this.heroPosQueue = new BattlePositionQueue(3, true);
-        this.opponentPosQueue = new BattlePositionQueue(3, false);
-
         this.monsterImgs = new ArrayMap<Integer,Image>();
-
         this.monsterStateWidgets = new Array<MonsterStateWidget>();
-
         this.battleMenuImgs = new ArrayMap<String, Image>();
 
         this.battleMenuButtons = new ArrayMap<String, Button>();
         this.topLevelMenuButtons = new ArrayMap<String, ImageButton>();
 
-        this.attackerQueue = new Array<Monster>();
+        this.attackerQueue = new Array<MonsterInBattle>();
 
-        this.team = new Array<Monster>();
-        this.oppTeam = new Array<Monster>();
+        this.team = new Array<MonsterInBattle>();
+        this.oppTeam = new Array<MonsterInBattle>();
 
         this.attackPaneGroup = new Group();
         this.gameOverUI = new Group();
@@ -758,9 +665,9 @@ public class BattleHUD {
         ib.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                chosenTeamMonster = heroPosQueue.getNext();
-                changeIndicatorPosition(true, chosenTeamMonster);
-                System.out.println("HEROQUEUE: " + chosenTeamMonster);
+                chosenMember = (chosenMember-1)%(team.size-1);
+                changeIndicatorPosition(true, team.get(chosenMember).battleFieldPosition);
+                System.out.println("HEROQUEUE: " + chosenMember);
             }
         });
         battleMenuButtons.put("indHeroUp", ib);
@@ -771,9 +678,9 @@ public class BattleHUD {
         ib.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                chosenTeamMonster = heroPosQueue.getPrevious();
-                changeIndicatorPosition(true, chosenTeamMonster);
-                System.out.println("HEROQUEUE: " + chosenTeamMonster);
+                chosenMember = (chosenMember+1)%(team.size-1);
+                changeIndicatorPosition(true, team.get(chosenMember).battleFieldPosition);
+                System.out.println("HEROQUEUE: " + chosenMember);
             }
         });
         battleMenuButtons.put("indHeroDown", ib);
@@ -785,8 +692,8 @@ public class BattleHUD {
         ib.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                chosenTarget = opponentPosQueue.getNext();
-                changeIndicatorPosition(false, chosenTarget);
+                chosenTarget = (chosenTarget-1)%(oppTeam.size-1);
+                changeIndicatorPosition(false, oppTeam.get(chosenTarget).battleFieldPosition);
                 System.out.println("OPPOQUEUE: " + chosenTarget);
             }
         });
@@ -798,8 +705,8 @@ public class BattleHUD {
         ib.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                chosenTarget = opponentPosQueue.getPrevious();
-                changeIndicatorPosition(false, chosenTarget);
+                chosenTarget = (chosenTarget+1)%(oppTeam.size-1);
+                changeIndicatorPosition(false, oppTeam.get(chosenTarget).battleFieldPosition);
                 System.out.println("OPPOQUEUE: " + chosenTarget);
             }
         });
@@ -867,6 +774,8 @@ public class BattleHUD {
     }
 
 
+
+
     // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     /* .................................................................... CREATE UI ELEMENTS .. */
 
@@ -886,7 +795,7 @@ public class BattleHUD {
 
 
         // Create Attack Buttons
-        for(Attack a : team.get(chosenTeamMonster).attacks) {
+        for(Attack a : team.get(chosenMember).monster.attacks) {
             TextButton tb = new TextButton(a.name + "(" + a.damage + ")", tbs);
             tb.setWidth(128);
             tb.setHeight(23);
@@ -899,7 +808,7 @@ public class BattleHUD {
                     // Hide Attack Menu
                     attackPaneGroup.setVisible(false);
                     // Add Monster to the Queue
-                    lineUpForAttack(team.get(chosenTeamMonster), chosenTarget, 0);
+                    lineUpForAttack(team.get(chosenMember), chosenTarget, 0);
                 }
             });
         }
@@ -909,10 +818,10 @@ public class BattleHUD {
     // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     /* ......................................................................... BATTLE METHODS ..*/
 
-    public void carryOutAttack(Monster attacker) {
-        System.out.println(attacker.ID + " " + team.contains(attacker, false) + " " + attacker
+    public void carryOutAttack(MonsterInBattle attacker) {
+        System.out.println(attacker.monster.ID + " " + team.contains(attacker, false) + " " + attacker
                 .nextTarget);
-        Monster defender = (attacker.battleFieldPosition<3) ?
+        MonsterInBattle defender = (attacker.battleFieldPosition<3) ?
                 oppTeam.get(attacker.nextTarget-3) : team.get(attacker.nextTarget);
 
         attacker.startAttack();    // attackStarted = Time, attackingRightNow=true
@@ -921,8 +830,8 @@ public class BattleHUD {
         animateAttack(attacker.battleFieldPosition, attacker.nextTarget);
 
         /* Calculate Damage */
-        if (defender.getHP() - attacker.nextAttack.damage < 0) defender.setHP(0);
-        else defender.setHP(defender.getHP() - attacker.nextAttack.damage);
+        if (defender.monster.getHP() - attacker.nextAttack.damage < 0) defender.monster.setHP(0);
+        else defender.monster.setHP(defender.monster.getHP() - attacker.nextAttack.damage);
 
         // Handle Attack
         handleAttack(attacker, defender);
@@ -938,12 +847,17 @@ public class BattleHUD {
         }
     }
 
-    public boolean checkIfWholeTeamKO(Array<Monster> team) {
+    /**
+     * Checks whether the whole team is down and someone won
+     * @param team
+     * @return
+     */
+    public boolean checkIfWholeTeamKO(Array<MonsterInBattle> team) {
         boolean allKO = true;
         switch (team.size) {
-            case 3: allKO = (team.get(2).getHP() == 0);
-            case 2: allKO = (allKO == true && team.get(1).getHP() == 0);
-            default:allKO = (allKO == true && team.get(0).getHP() == 0);
+            case 3: allKO = (team.get(2).monster.getHP() == 0);
+            case 2: allKO = (allKO == true && team.get(1).monster.getHP() == 0);
+            default:allKO = (allKO == true && team.get(0).monster.getHP() == 0);
                 break;
         }
 
@@ -967,18 +881,83 @@ public class BattleHUD {
         if(pos<3) {
             // Hero Team
             team.get(pos).KO = true;
-            int p = heroPosQueue.remove(pos);
+            int p = team.size-1;
             System.out.println("KILL QUEUE: " + p);
-            if(p>=0)changeIndicatorPosition(true, p);
+            if(p>=0)changeIndicatorPosition(true, team.get(p).battleFieldPosition);
         }
         if(pos>2) {
             // Opponent Team
             oppTeam.get(pos-3).KO = true;
-            int p =  opponentPosQueue.remove(pos);
+            int p =  oppTeam.size-1;
             System.out.println("KILL QUEUE: " + p);
-            if(p>=0)changeIndicatorPosition(false, p);
+            if(p>=0)changeIndicatorPosition(false, oppTeam.get(p).battleFieldPosition);
         }
 
+    }
+
+
+
+    /**
+     * Put monster in line
+     * @param m
+     */
+    public void lineUpForAttack(MonsterInBattle m, int chosenTarget, int attack) {
+        m.prepareForAttack(chosenTarget, attack);
+
+        if(GS.DEBUGGING_ON) {
+            System.out.println("--- lineUpForAttack() ---");
+            System.out.println("Preparing monster " + m.monster.ID + "at pos " + m.battleFieldPosition);
+            System.out.println(m.ready + "," + m.monster.attacks.get(attack) + ", target:" + chosenTarget
+                    + ", waitingInQueue: " + m.attackChosen);
+        }
+
+        attackerQueue.add(m);
+
+        if(attackerQueue.size == countFitMonsters()) {
+            state = BattleState.BATTLEACTION;
+            attackerQueue.sort(new MonsterSpeedComparator());
+        }
+    }
+
+    /**
+     * Finds out how many monsters are fit and ready to fight
+     * @return number of fit monsters
+     */
+    public int countFitMonsters() {
+        int i = 0;
+        for(MonsterInBattle m : team)
+            if(m.monster.getHP() > 0)
+                i++;
+        for(MonsterInBattle m : oppTeam)
+            if(m.monster.getHP() > 0)
+                i++;
+        return i;
+    }
+
+    // .......................................................................................... UI
+    /**
+     * Draw the HUD to the screen
+     */
+    public void draw() {
+        this.stage.draw();
+    }
+
+    /**
+     * Make attack button visible as soon as round is over
+     * @param attackerPos
+     */
+    private void activateButton(int attackerPos) {
+        // If monster not KO and attack hasn't been chosen yet
+        System.out.println(attackerPos);
+        System.out.println(team.size);
+        if(!team.get(attackerPos).KO && !team.get(attackerPos).attackChosen) {
+            battleMenuButtons.get("attack").setDisabled(false);
+            battleMenuButtons.get("attack").addAction(Actions.sequence(Actions.alpha(1.0f, .2f)));
+        } else {
+            battleMenuButtons.get("attack").setDisabled(true);
+            battleMenuButtons.get("attack").addAction(Actions.sequence(Actions.alpha(0.5f,.2f)));
+        }
+        setUpAttacksPane();
     }
 
     /**
@@ -990,7 +969,7 @@ public class BattleHUD {
         Image attIm,defIm;
         IntVector2 startPos,endPos;
 
-        attackAnimationRunnning = true;
+        attackAnimationRunning = true;
 
         switch(attPos) {
             case 5:  startPos = ImPos.OPPO_TOP;break;
@@ -1025,7 +1004,7 @@ public class BattleHUD {
                 Actions.run(new Runnable() {
                     @Override
                     public void run() {
-                        attackAnimationRunnning=false;
+                        attackAnimationRunning=false;
                     }
                 })
         ));
@@ -1038,38 +1017,65 @@ public class BattleHUD {
     }
 
     /**
-     * Put monster in line
-     * @param m
+     * Initializes the graphical representation of a monsters status on the screen
+     * @param monster   the given monster
+     * @param position  the position on the battle field
      */
-    public void lineUpForAttack(Monster m, int chosenTarget, int attack) {
-        m.prepareForAttack(chosenTarget, attack);
+    public void initStatusUI(Monster monster, final int position) {
 
-        if(GS.DEBUGGING_ON) {
-            System.out.println("--- lineUpForAttack() ---");
-            System.out.println("Preparing monster " + m.ID + "at pos " + m.battleFieldPosition);
-            System.out.println(m.ready + "," + m.attacks.get(attack) + ", target:" + chosenTarget
-                    + ", waitingInQueue: " + m.attackChosen);
-        }
+        // Set Monster Information in UI and set Signs visible
+        monsterStateWidgets.get(position).init(monster);
 
-        attackerQueue.add(m);
+        setMonsterStatusUIvisible(monster, position);
 
-        if(attackerQueue.size == 3) state = BattleState.BATTLEACTION;
+        stage.addAction(Actions.fadeIn(1f));
     }
 
     /**
-     * Finds out how many monsters are fit and ready to fight
-     * @return number of fit monsters
+     * Initializes the HUD for the given battle field position
+     * @param monster
+     * @param position
      */
-    public int countFitMonsters() {
-        int i = 0;
-        for(Monster m : team)
-            if(m.getHP() > 0)
-                i++;
-        for(Monster m : oppTeam)
-            if(m.getHP() > 0)
-                i++;
-        fitMonsters = i;
-        return i;
+    public void setMonsterStatusUIvisible(Monster monster, final int position) {
+        monsterStateWidgets.get(position).addAction(Actions.sequence(
+                Actions.alpha(1), Actions.visible(true)
+        ));
+
+        initMonsterImage(monster, position);
+    }
+
+    private void initMonsterImage(Monster monster, int position) {
+        Image monImg; TextureRegion monReg;
+        monImg = monsterImgs.get(position);
+        monReg = game.media.getMonsterSprite(monster.ID);
+        if(position < 3) if(!monReg.isFlipX()) monReg.flip(true, false);
+        monImg.setDrawable(new TextureRegionDrawable(monReg));
+        monImg.addAction(Actions.sequence(Actions.alpha(1), Actions.visible(true)));
+    }
+
+    private void resetUIElementVisibility() {
+        // Visibility
+        // Reset Status UIs
+        for(MonsterStateWidget w : monsterStateWidgets) {
+            w.addAction(Actions.alpha(1));
+            w.setVisible(false);
+        }
+
+        for(Integer key : monsterImgs.keys()) {
+            monsterImgs.get(key).addAction(Actions.alpha(1));
+            monsterImgs.get(key).setVisible(false);
+        }
+
+        battleActionMenu.addAction(Actions.alpha(1));
+        battleActionMenu.setVisible(false);
+        topLevelMenu.addAction(Actions.alpha(1));
+        topLevelMenu.setVisible(true);
+        monsterStatusUI.addAction(Actions.alpha(1));
+        monsterStatusUI.setVisible(true);
+
+        attackPaneGroup.setVisible(false);
+        blackCourtain.setVisible(true);
+        gameOverUI.setVisible(false);
     }
 
 
@@ -1083,7 +1089,7 @@ public class BattleHUD {
     /* ......................................................................... INNER CLASSES .. */
 
     private class AIPlayer {
-        private Array<Monster> AIteam, AIoppTeam;
+        private Array<MonsterInBattle> AIteam, AIoppTeam;
         private int AIchosenMember, AIchosenTarget;
         private Array<Integer> AIteamPositions,AIopponentPositions;
         private boolean AIpaused;
@@ -1091,29 +1097,26 @@ public class BattleHUD {
         private long thinkingSince;
         private long thinkingDuration;
 
-        public AIPlayer(Array<Monster> team, Array<Monster> oppTeam) {
+        public AIPlayer(Array<MonsterInBattle> team, Array<MonsterInBattle> oppTeam) {
             this.AIteam = team;
             this.AIoppTeam = oppTeam;
             AIchosenMember = 0;
             AIchosenTarget = 0;
             AIpaused = false;
-            thinking = false;
-            thinkingSince = TimeUtils.millis();
-            thinkingDuration = 0;
 
             // Remember Team Positions
             AIteamPositions = new Array<Integer>();
             int i=0;
-            for(Monster m : this.AIteam) {
-                if(m.getHP() > 0) AIteamPositions.add(i);
+            for(MonsterInBattle m : this.AIteam) {
+                if(m.monster.getHP() > 0) AIteamPositions.add(i);
                 i++;
             }
 
             // Remember Opponent Positions
             AIopponentPositions = new Array<Integer>();
             int j=0;
-            for(Monster m : AIoppTeam) {
-                if(m.getHP() > 0) AIopponentPositions.add(j);
+            for(MonsterInBattle m : AIoppTeam) {
+                if(m.monster.getHP() > 0) AIopponentPositions.add(j);
                 j++;
             }
         }
@@ -1123,38 +1126,24 @@ public class BattleHUD {
 
             // Remove KO monsters
             for(int i=0; i<AIteam.size; i++)
-                if(AIteam.get(i).getHP() == 0) {
+                if(AIteam.get(i).monster.getHP() == 0) {
                     AIteam.get(i).KO = true;
                     AIteamPositions.removeValue(i, true);
                 }
 
             for(int i=0; i<AIoppTeam.size; i++)
-                if(AIoppTeam.get(i).getHP() == 0) {
+                if(AIoppTeam.get(i).monster.getHP() == 0) {
                     AIopponentPositions.removeValue(i, true);
                 }
 
-
-            if(!thinking) {
-                // Check if monster is ready
-                for (int j = 0; j < AIteam.size; j++)
-                    if (AIteam.get(j).ready && AIteam.get(j).getHP() > 0) {
-                        // Choose Target
-                        AIchosenMember = j;
-                        think();
-                    }
-            }
-
-            if(thinking && TimeUtils.timeSinceMillis(thinkingSince) > thinkingDuration) {
+            // Choose targets and attacks
+            for(int i=0; i<team.size; i++) {
+                AIchosenMember = i;
                 attack();
-                this.thinking = false;
             }
 
-        }
+            havePause(true);
 
-        public void think() {
-            this.thinking = true;
-            this.thinkingSince = TimeUtils.millis();
-            this.thinkingDuration = MathUtils.random(1000,3000);
         }
 
         public void havePause(boolean paused) {
@@ -1166,17 +1155,17 @@ public class BattleHUD {
             allHeroKO = true;
             switch (AIoppTeam.size) {
                 case 3:
-                    allHeroKO = (AIoppTeam.get(2).getHP() == 0);
-                    System.out.println("HeroMon 3: " + AIoppTeam.get(2).getHP()
-                            + "/" + AIoppTeam.get(2).getHPfull() + " KO: " + allHeroKO);
+                    allHeroKO = (AIoppTeam.get(2).monster.getHP() == 0);
+                    System.out.println("HeroMon 3: " + AIoppTeam.get(2).monster.getHP()
+                            + "/" + AIoppTeam.get(2).monster.getHPfull() + " KO: " + allHeroKO);
                 case 2:
-                    allHeroKO = (allHeroKO == true && AIoppTeam.get(1).getHP() == 0);
-                    System.out.println("HeroMon 2: " + AIoppTeam.get(1).getHP()
-                            + "/" + AIoppTeam.get(1).getHPfull() + " KO: " + allHeroKO);
+                    allHeroKO = (allHeroKO == true && AIoppTeam.get(1).monster.getHP() == 0);
+                    System.out.println("HeroMon 2: " + AIoppTeam.get(1).monster.getHP()
+                            + "/" + AIoppTeam.get(1).monster.getHPfull() + " KO: " + allHeroKO);
                 default:
-                    allHeroKO = (allHeroKO == true && AIoppTeam.get(0).getHP() == 0);
-                    System.out.println("HeroMon 1: " + AIoppTeam.get(0).getHP()
-                            + "/" + AIoppTeam.get(0).getHPfull() + " KO: " + allHeroKO);
+                    allHeroKO = (allHeroKO == true && AIoppTeam.get(0).monster.getHP() == 0);
+                    System.out.println("HeroMon 1: " + AIoppTeam.get(0).monster.getHP()
+                            + "/" + AIoppTeam.get(0).monster.getHPfull() + " KO: " + allHeroKO);
                     break;
             }
 
@@ -1204,8 +1193,8 @@ public class BattleHUD {
             // PRINT QUEUE
             System.out.println("QUEUE -------------------------------");
             System.out.println("Size: " + attackerQueue.size);
-            for(Monster m : attackerQueue) {
-                System.out.println("Monster: " + m.ID);
+            for(MonsterInBattle m : attackerQueue) {
+                System.out.println("Monster: " + m.monster.ID);
                 System.out.println("Position: " + m.battleFieldPosition);
                 System.out.println("Target: " + m.nextTarget);
                 System.out.println("Ready: " + m.ready);
@@ -1215,7 +1204,7 @@ public class BattleHUD {
             // ............................................................................... DEBUG
 
             lineUpForAttack(AIteam.get(AIchosenMember), AIchosenTarget,
-                    MathUtils.random(AIteam.get(AIchosenMember).attacks.size - 1));
+                    MathUtils.random(AIteam.get(AIchosenMember).monster.attacks.size - 1));
 
             checkEnemiesDeath();
         }

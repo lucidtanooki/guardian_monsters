@@ -40,7 +40,7 @@ public class BattleScreen implements Screen {
     /* ........................................................................... CONSTRUCTOR .. */
 
     public BattleScreen(MediaManager media, OutdoorGameWorldScreen gameScreen, GuardianMonsters game) {
-        this.battleHUD = new BattleHUD(game, gameScreen);
+        this.battleHUD = new BattleHUD(game);
         setUpRendering();
         setUpInputProcessor();
         this.media = media;

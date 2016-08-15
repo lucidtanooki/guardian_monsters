@@ -20,6 +20,8 @@
 	  b-mouse-l:    {down: b-mouse-l-down,        up: b-mouse-l-up},
 	  b-mouse-r:    {down: b-mouse-r-down,        up: b-mouse-r-up},
 	  b-long:       {down: b-long-down,           up: b-long-up},
+          choice-l:     {down: choice-l-down,         up: choice-l-up},
+          choice-r:     {down: choice-r-down,         up: choice-r-up},
 	  transparent:  { }
   },
   

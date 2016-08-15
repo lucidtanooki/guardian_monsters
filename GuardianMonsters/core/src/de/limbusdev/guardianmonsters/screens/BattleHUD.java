@@ -81,10 +81,17 @@ public class BattleHUD {
     private int chosenTarget      =BatPos.OPPO_MID; // position of active target
     private int chosenTeamMonster =BatPos.MID;      // position of active attacker
     private boolean allKO, allHeroKO;               // whether a whole team is KO
+    private boolean lockedInBattle=false;           // true, when all combators have made their choice
+    private int fitMonsters=0;
+    private boolean attackAnimationRunnning = false;
 
     private BattlePositionQueue heroPosQueue, opponentPosQueue;
 
     private AIPlayer aiPlayer;                      // Artificial Intelligence
+
+    // -------------------------------------------------------------------------------------- STATES
+    // CHOOSING, BATTLEACTION
+    private BattleState state = BattleState.CHOOSING;
 
     /* ........................................................................... CONSTRUCTOR .. */
     public BattleHUD(final GuardianMonsters game, final OutdoorGameWorldScreen gameScreen) {
@@ -115,14 +122,26 @@ public class BattleHUD {
      */
     public void update(float delta) {
         stage.act(delta);
+
+        switch(state) {
+            case CHOOSING: updateChoosing(delta); break;
+            default:       updateBattleAction(delta); break;
+        }
+    }
+
+    /**
+     * Update Method for state: BATTLEACTION
+     */
+    public void updateBattleAction(float delta) {
+        updateAttackerQueue();
+    }
+
+    public void updateChoosing(float delta) {
         aiPlayer.act();
         updateMonsters();
-        updateAttackerQueue();
-
-
+        countFitMonsters();
         // ........................................................................... END OF BATTLE
         if(allKO) handleEndOfBattle();
-
     }
 
     /**
@@ -142,12 +161,11 @@ public class BattleHUD {
      * Handles all monsters in the queue and starts/finishes their attacks
      */
     public void updateAttackerQueue() {
-        // check if all participators have chosen their actions
-        if(attackerQueue.size > 0) {
-            carryOutAttack(attackerQueue.pop());
-        } else {
-            newRound();
-        }
+            if (attackerQueue.size > 0 && !attackAnimationRunnning) {
+                carryOutAttack(attackerQueue.pop());
+            } else if(attackerQueue.size == 0) {
+                newRound();
+            }
     }
 
 
@@ -335,6 +353,7 @@ public class BattleHUD {
     private void newRound() {
         for(Monster m : team) m.attackChosen = false;
         for(Monster m : oppTeam) m.attackChosen = false;
+        state = BattleState.CHOOSING;
     }
 
 
@@ -971,6 +990,8 @@ public class BattleHUD {
         Image attIm,defIm;
         IntVector2 startPos,endPos;
 
+        attackAnimationRunnning = true;
+
         switch(attPos) {
             case 5:  startPos = ImPos.OPPO_TOP;break;
             case 4:  startPos = ImPos.OPPO_BOT;break;
@@ -999,7 +1020,14 @@ public class BattleHUD {
                         game.media.getSFX(SFXType.HIT, 0).play();
                     }
                 }),
-                Actions.moveTo(startPos.x, startPos.y, .3f, Interpolation.pow2Out)
+                Actions.moveTo(startPos.x, startPos.y, .3f, Interpolation.pow2Out),
+                Actions.delay(.5f),
+                Actions.run(new Runnable() {
+                    @Override
+                    public void run() {
+                        attackAnimationRunnning=false;
+                    }
+                })
         ));
         defIm = monsterImgs.get(defPos);
         defIm.addAction(Actions.sequence(
@@ -1024,6 +1052,24 @@ public class BattleHUD {
         }
 
         attackerQueue.add(m);
+
+        if(attackerQueue.size == 3) state = BattleState.BATTLEACTION;
+    }
+
+    /**
+     * Finds out how many monsters are fit and ready to fight
+     * @return number of fit monsters
+     */
+    public int countFitMonsters() {
+        int i = 0;
+        for(Monster m : team)
+            if(m.getHP() > 0)
+                i++;
+        for(Monster m : oppTeam)
+            if(m.getHP() > 0)
+                i++;
+        fitMonsters = i;
+        return i;
     }
 
 
@@ -1216,5 +1262,9 @@ public class BattleHUD {
         private static int convertFromCounterToPosition(int counter) {
             return positions[counter];
         }
+    }
+
+    private enum BattleState {
+        CHOOSING, BATTLEACTION,
     }
 }

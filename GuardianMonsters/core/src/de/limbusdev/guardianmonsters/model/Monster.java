@@ -64,7 +64,9 @@ public class Monster extends Observable {
 
         // INIT
         this.attacks = new Array<Attack>();
-        attacks.add(new Attack(AttackType.PHYSICAL, 5, "Kick", SFXType.HIT, 0));
+        attacks.add(new Attack(AttackType.PHYSICAL, 5, "Scratch", SFXType.HIT, 0));
+        attacks.add(new Attack(AttackType.PHYSICAL, 10, "Kick", SFXType.CUT, 0));
+        attacks.add(new Attack(AttackType.PHYSICAL, 10, "Kick", SFXType.CUT, 0));
     }
     /* ............................................................................... METHODS .. */
 

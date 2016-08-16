@@ -1,6 +1,5 @@
 package de.limbusdev.guardianmonsters.screens;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.MathUtils;
@@ -8,14 +7,11 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
@@ -30,6 +26,9 @@ import de.limbusdev.guardianmonsters.geometry.IntVector2;
 import de.limbusdev.guardianmonsters.model.Attack;
 import de.limbusdev.guardianmonsters.model.Monster;
 import de.limbusdev.guardianmonsters.model.MonsterInBattle;
+import de.limbusdev.guardianmonsters.ui.AttackMenuWidget;
+import de.limbusdev.guardianmonsters.ui.BattleActionMenuWidget;
+import de.limbusdev.guardianmonsters.ui.BattleMainMenuWidget;
 import de.limbusdev.guardianmonsters.ui.MonsterStateWidget;
 import de.limbusdev.guardianmonsters.utils.GS;
 import de.limbusdev.guardianmonsters.utils.MonsterManager;
@@ -50,34 +49,28 @@ public class BattleHUD {
     private Skin skin, battleSkin;
 
     // Groups
-    private Group battleActionMenu, topLevelMenu, monsterStatusUI, attackPaneGroup, gameOverUI, indicatorButtons;
-    private VerticalGroup attackVGroup;                         // Group of attack buttons
-
-    // Buttons
-    private ArrayMap<String,Button>      battleMenuButtons;     // buttons of battle menu
-    private ArrayMap<String,ImageButton> topLevelMenuButtons;   // buttons of the top level menu
+    private Group monsterStatusUI, attackPaneGroup, gameOverUI, indicatorButtons;
+    private BattleMainMenuWidget   mainMenu;
+    private BattleActionMenuWidget actionMenu;
+    private AttackMenuWidget       attackMenu;
 
     // Labels
-    private Label infoLabel, gameOverLabel;
+    private Label gameOverLabel;
 
     // Images
     private Image indicatorOpp, indicatorHero, battleUIbg, attackScrollPaneBg, blackCourtain;
-    private ArrayMap<String, Image> battleMenuImgs;
     private ArrayMap<Integer,Image> monsterImgs;
 
     private Array<MonsterStateWidget> monsterStateWidgets;
 
-    // Scroll Panes
-    private ScrollPane attackScroll;
-
 
     // --------------------------------------------------------------------------------------- OTHER
     // Not Scene2D related
-    private Array<MonsterInBattle> team, oppTeam;      // hold monsters of one team
+    private Array<MonsterInBattle> team, oppTeam;   // hold monsters of one team
     private Array<MonsterInBattle> attackerQueue;
 
-    private int chosenTarget =3; // position of active target
-    private int chosenMember =0; // position of active attacker
+    private int chosenTarget =3;                    // position of active target
+    private int chosenMember =0;                    // position of active attacker
     private boolean allKO, allHeroKO;               // whether a whole team is KO
     private boolean attackAnimationRunning = false;
 
@@ -93,11 +86,7 @@ public class BattleHUD {
 
         initializeAttributes();
         setUpUI();
-
-        // Top Level Menu
         setUpTopLevelMenu();
-
-        // Battle Action Menu
         setUpMonsterImages();
         setUpBattleActionMenu();
         setUpGameOverUI();
@@ -151,7 +140,6 @@ public class BattleHUD {
             }
     }
 
-
     // #############################################################################################
     // ............................................................................ INITIALIZE ARENA
 
@@ -170,8 +158,8 @@ public class BattleHUD {
         for(MonsterStateWidget w : monsterStateWidgets) w.clearActions();
 
         for(Integer key : monsterImgs.keys()) monsterImgs.get(key).clearActions();
-        battleActionMenu.clearActions();
-        topLevelMenu.clearActions();
+        actionMenu.clearActions();
+        mainMenu.clearActions();
         monsterStatusUI.clearActions();
         attackPaneGroup.clearActions();
         blackCourtain.clearActions();
@@ -273,12 +261,8 @@ public class BattleHUD {
             if(m.monster.getHP() > 0) heroLost = false;
 
         // Hide UI Elements
-        battleActionMenu.addAction(Actions.sequence(
-                Actions.fadeOut(1), Actions.visible(false), Actions.alpha(1)
-        ));
-        topLevelMenu.addAction(Actions.sequence(
-                Actions.fadeOut(1), Actions.visible(false), Actions.alpha(1)
-        ));
+        actionMenu.addFadeOutAction(.5f);
+        mainMenu.addFadeOutWidgetAction(.5f);
 
         // Activate Label
         gameOverUI.setVisible(true);
@@ -338,10 +322,6 @@ public class BattleHUD {
 
         this.monsterImgs = new ArrayMap<Integer,Image>();
         this.monsterStateWidgets = new Array<MonsterStateWidget>();
-        this.battleMenuImgs = new ArrayMap<String, Image>();
-
-        this.battleMenuButtons = new ArrayMap<String, Button>();
-        this.topLevelMenuButtons = new ArrayMap<String, ImageButton>();
 
         this.attackerQueue = new Array<MonsterInBattle>();
 
@@ -357,7 +337,7 @@ public class BattleHUD {
 
     private void addElementsToStage() {
         stage.addActor(battleUIbg);
-        stage.addActor(topLevelMenu);
+        stage.addActor(mainMenu);
 
 
         for(Integer key : monsterImgs.keys())
@@ -368,7 +348,7 @@ public class BattleHUD {
         stage.addActor(gameOverUI);
 
         stage.addActor(blackCourtain);
-        stage.addActor(battleActionMenu);
+        stage.addActor(actionMenu);
     }
 
     /**
@@ -533,179 +513,101 @@ public class BattleHUD {
      *  Escape
      */
     private void setUpTopLevelMenu() {
+        mainMenu = new BattleMainMenuWidget(battleSkin);
 
-        this.topLevelMenu = new Group();
-        this.topLevelMenu.setWidth(GS.RES_X);
-        this.topLevelMenu.setHeight(GS.RES_Y / 4);
-
-        // Fight Button
-        ImageButton ib = new ImageButton(battleSkin, "battle-fight");
-        ib.setPosition(GS.RES_X/2, 0, Align.bottom);
-        ib.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                System.out.println("Input: Button Fight");
-                topLevelMenu.addAction(
-                        Actions.sequence(Actions.alpha(0, .3f), Actions.visible(false)));
-                battleActionMenu.addAction(
-                        Actions.sequence(Actions.visible(true), Actions.alpha(1, .5f)));
-                aiPlayer.havePause(false);
-                newRound();
+        mainMenu.addSwordButtonListener(
+            new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    System.out.println("Input: Button Fight");
+                    mainMenu.addFadeOutWidgetAction(0.3f);
+                    actionMenu.addFadeInAction(0.5f);
+                    aiPlayer.havePause(false);
+                    newRound();
+                }
             }
-        });
-        topLevelMenuButtons.put("fight", ib);
+        );
 
-        // Escape Button
-        ib = new ImageButton(battleSkin, "battle-flee");
-        ib.setPosition(GS.RES_X - GS.ROW*20, 0, Align.bottomRight);
-        ib.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                System.out.println("Input: Button Escape");
-                blackCourtain.addAction(Actions.sequence(Actions.visible(true),Actions.fadeIn(1),
+        mainMenu.addRunButtonListener(
+            new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    System.out.println("Input: Button Escape");
+                    blackCourtain.addAction(Actions.sequence(Actions.visible(true), Actions.fadeIn(1),
                         Actions.run(new Runnable() {
                             @Override
                             public void run() {
                                 game.popScreen();
                             }
                         })));
+                }
             }
-        });
-        topLevelMenuButtons.put("escape", ib);
+        );
 
-        // Bag Button
-        ib = new ImageButton(battleSkin, "battle-bag");
-        ib.setPosition(GS.ROW*20, 0, Align.bottomLeft);
-        ib.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                // TODO
-                System.out.println("Input: Button Bag");
+        mainMenu.addBagButtonListener(
+            new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    // TODO
+                    System.out.println("Input: Button Bag");
+                }
             }
-        });
-        topLevelMenuButtons.put("bag", ib);
-
-        // Add buttons to the group
-        for(String key : topLevelMenuButtons.keys())
-            topLevelMenu.addActor(topLevelMenuButtons.get(key));
+        );
     }
 
     /**
      * Settings up all elements for the battle action menu
      */
     private void setUpBattleActionMenu() {
+        actionMenu = new BattleActionMenuWidget(battleSkin);
 
-        this.battleActionMenu = new Group();
-        this.battleActionMenu.setSize(GS.RES_X,GS.RES_Y / 4);
-        this.battleActionMenu.setVisible(false);
-
-        // Images ..................................................................................
-        this.attackScrollPaneBg = new Image(battleSkin.getDrawable("attPane"));
-        attackScrollPaneBg.setPosition(GS.RES_X/2, 0, Align.bottom);
-        attackScrollPaneBg.setVisible(true);
-        attackPaneGroup.addActor(attackScrollPaneBg);
-
-        // Attack Pane .............................................................................
-        this.attackVGroup = new VerticalGroup();
-        this.attackScroll = new ScrollPane(attackVGroup);
-        attackScroll.setHeight(32);
-        attackScroll.setPosition(0, 240);
-        attackScroll.setHeight(136);
-        attackScroll.setWidth(500);
-        attackScroll.setPosition(400, 0, Align.bottom);
-        attackPaneGroup.addActor(attackScroll);
-
-        Image i = new Image(battleSkin.getDrawable("b-long-down"));
-        i.setPosition(GS.RES_X / 2, GS.ROW*7, Align.bottom);
-        this.battleMenuImgs.put("infoLabelBg", i);
-
-        Label.LabelStyle labs = new Label.LabelStyle();
-        labs.font = skin.getFont("default-font");
-        infoLabel = new Label("A monster attacks you!", labs);
-        infoLabel.setHeight(GS.ROW*6);
-        infoLabel.setWidth(GS.COL*40);
-        infoLabel.setWrap(true);
-        infoLabel.setPosition(GS.RES_X/2, GS.ROW*7, Align.bottom);
-
-
-        // Buttons .................................................................................
-        // Back to Menu Button
-        ImageButton ib = new ImageButton(battleSkin, "b-back");
-        ib.setPosition(GS.RES_X - GS.COL*5.5f, 0, Align.bottomRight);
-        ib.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                battleActionMenu.addAction(
-                        Actions.sequence(Actions.alpha(0, .3f), Actions.visible(false)));
-                topLevelMenu.addAction(
-                        Actions.sequence(Actions.visible(true), Actions.alpha(1, .5f)));
-                System.out.println("Button: back to top level menu");
-                aiPlayer.havePause(true);
+        actionMenu.backButton.addListener(
+            new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    actionMenu.addFadeOutAction(0.3f);
+                    mainMenu.addFadeInWidgetAction(0.3f);
+                    System.out.println("Button: back to top level menu");
+                    aiPlayer.havePause(true);
+                }
             }
-        });
-        battleActionMenu.addActor(ib);
+        );
 
-        // Left Button .............................................................................
-        ib = new ImageButton(battleSkin, "b-mouse-l");
-        ib.setPosition(GS.COL*10.5f, 0, Align.bottomLeft);
-        ib.addListener(new ClickListener() {
+        actionMenu.greyLButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 // TODO
                 System.out.println("Input: button mouse l");
             }
         });
-        battleMenuButtons.put("button7", ib);
 
-
-        // Right Button.............................................................................
-        ib = new ImageButton(battleSkin, "b-mouse-r");
-        ib.setPosition(GS.RES_X - GS.COL*10.5f, 0, Align.bottomRight);
-        ib.addListener(new ClickListener() {
+        actionMenu.greyRButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 // TODO
                 System.out.println("Input: button mouse r");
             }
         });
-        battleMenuButtons.put("button8", ib);
 
-
-        // Attack Button ...........................................................................
-        TextButton tb = new TextButton("Attack", battleSkin, "tb-attack");
-        tb.setPosition(GS.RES_X/2, 0, Align.bottom);
-        tb.addListener(new ClickListener() {
+        actionMenu.greenButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                if(battleMenuButtons.get("attack").isDisabled()) return;
+                if(actionMenu.greenButton.isDisabled()) return;
                 System.out.println("Button: attack");
                 attackPaneGroup.addAction(Actions.sequence(Actions.visible(true),Actions.fadeIn(.3f)));
                 setUpAttacksPane();
             }
         });
-        battleMenuButtons.put("attack", tb);
+        actionMenu.greenButton.setText("Attack");
 
-
-        // Button 5 ................................................................................
-        ib = new ImageButton(battleSkin, "b-next");
-        ib.setPosition(GS.COL*5.5f, 0, Align.bottomLeft);
-        ib.addListener(new ClickListener() {
+        actionMenu.blueButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 // TODO
                 System.out.println("Button 5");
             }
         });
-        battleMenuButtons.put("button5", ib);
-
-        for(String key : battleMenuImgs.keys()) battleActionMenu.addActor(battleMenuImgs.get(key));
-        for(String s : battleMenuButtons.keys()) battleActionMenu.addActor(battleMenuButtons.get(s));
-
-        battleActionMenu.addActor(infoLabel);
-        battleActionMenu.addActor(attackPaneGroup);
-        battleActionMenu.addActor(indicatorButtons);
     }
-
 
     /**
      * Left Side = Hero Monsters
@@ -746,10 +648,10 @@ public class BattleHUD {
         }
 
         switch(position) {
-            case 3: case 0:  row = 21;break;
-            case 4: case 1:  row = 14;break;
-            case 5: case 2:  row = 28;break;
-            default:         row = 14;break;
+            case 3: case 0:  row = 22;break;
+            case 4: case 1:  row = 17;break;
+            case 5: case 2:  row = 27;break;
+            default:         row = 17;break;
         }
 
         ImageButton ib = new ImageButton(battleSkin, texture);
@@ -766,44 +668,74 @@ public class BattleHUD {
     }
 
 
-
-
     // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     /* .................................................................... CREATE UI ELEMENTS .. */
-
-
     public void setUpAttacksPane() {
 
-        this.attackVGroup.clear();
-        attackVGroup.setWidth(500);
-        this.attackVGroup.space(4);
-
-        TextButton.TextButtonStyle tbs = new TextButton.TextButtonStyle();
-        tbs.fontColor = Color.BLACK;
-        tbs.font = skin.getFont("default-font");
-        tbs.pressedOffsetY = -1;
-        tbs.up = new TextureRegionDrawable(game.media.getBattleUITextureAtlas().findRegion("b13up"));
-        tbs.down = new TextureRegionDrawable(game.media.getBattleUITextureAtlas().findRegion("b13down"));
-
-
-        // Create Attack Buttons
-        for(Attack a : team.get(chosenMember).monster.attacks) {
-            TextButton tb = new TextButton(a.name + "(" + a.damage + ")", tbs);
-            tb.setWidth(128);
-            tb.setHeight(23);
-            attackVGroup.addActor(tb);
-            tb.addListener(new ClickListener() {
+        Array<Attack> attacks = team.get(chosenMember).monster.attacks;
+        attackMenu = new AttackMenuWidget(battleSkin);
+        attackMenu.init(attacks);
+        attackMenu.addListenerToAllButtons(
+            new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    battleMenuButtons.get("attack").setDisabled(true);
-                    battleMenuButtons.get("attack").addAction(Actions.alpha(0.5f));
-                    // Hide Attack Menu
-                    attackPaneGroup.setVisible(false);
-                    // Add Monster to the Queue
+                    actionMenu.greenButton.setDisabled(true);
+                    actionMenu.greenButton.addAction(Actions.alpha(0.5f));
+                    attackMenu.addFadeOutAction(.5f);
+                    attackMenu.remove();
+                }
+            }
+        );
+
+        if (attacks.size >= 1)
+            attackMenu.addListenerToButton(0, new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
                     lineUpForAttack(team.get(chosenMember), chosenTarget, 0);
                 }
             });
-        }
+
+        if(attacks.size >= 2)
+            attackMenu.addListenerToButton(1, new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    lineUpForAttack(team.get(chosenMember), chosenTarget, 1);
+                }
+            });
+
+        if(attacks.size >= 3)
+            attackMenu.addListenerToButton(2, new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    lineUpForAttack(team.get(chosenMember), chosenTarget, 2);
+                }
+            });
+
+        if(attacks.size >= 4)
+            attackMenu.addListenerToButton(3, new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    lineUpForAttack(team.get(chosenMember), chosenTarget, 3);
+                }
+            });
+
+        if(attacks.size >= 5)
+            attackMenu.addListenerToButton(4, new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    lineUpForAttack(team.get(chosenMember), chosenTarget, 4);
+                }
+            });
+
+        if(attacks.size >= 6)
+            attackMenu.addListenerToButton(5, new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    lineUpForAttack(team.get(chosenMember), chosenTarget, 5);
+                }
+            });
+
+        stage.addActor(attackMenu);
     }
 
 
@@ -883,8 +815,6 @@ public class BattleHUD {
 
     }
 
-
-
     /**
      * Put monster in line
      * @param m
@@ -940,13 +870,12 @@ public class BattleHUD {
     private void activateButton(int attackerPos) {
         // If monster not KO and attack hasn't been chosen yet
         if(!team.get(attackerPos).attackChosen) {
-            battleMenuButtons.get("attack").setDisabled(false);
-            battleMenuButtons.get("attack").addAction(Actions.sequence(Actions.alpha(1.0f, .2f)));
+            actionMenu.greenButton.setDisabled(false);
+            actionMenu.greenButton.addAction(Actions.sequence(Actions.alpha(1.0f, .2f)));
         } else {
-            battleMenuButtons.get("attack").setDisabled(true);
-            battleMenuButtons.get("attack").addAction(Actions.sequence(Actions.alpha(0.5f,.2f)));
+            actionMenu.greenButton.setDisabled(true);
+            actionMenu.greenButton.addAction(Actions.sequence(Actions.alpha(0.5f,.2f)));
         }
-        setUpAttacksPane();
     }
 
     /**
@@ -1064,16 +993,15 @@ public class BattleHUD {
             monsterImgs.get(key).setVisible(false);
         }
 
-        battleActionMenu.addAction(Actions.alpha(1));
-        battleActionMenu.setVisible(false);
-        topLevelMenu.addAction(Actions.alpha(1));
-        topLevelMenu.setVisible(true);
+        actionMenu.addFadeOutAction(.1f);
+        mainMenu.addFadeInWidgetAction(.1f);
         monsterStatusUI.addAction(Actions.alpha(1));
         monsterStatusUI.setVisible(true);
 
         attackPaneGroup.setVisible(false);
         blackCourtain.setVisible(true);
         gameOverUI.setVisible(false);
+        stage.act(1);
     }
 
 

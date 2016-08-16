@@ -26,7 +26,6 @@ public class GS {
     public static final int zoom = 3;
     public static final boolean DEBUGGING_ON = false;
     public static final int MONSTER_SPRITES = 22;
-    public static final boolean JoyStick = true;
     /* ........................................................................... CONSTRUCTOR .. */
     
     /* ............................................................................... METHODS .. */
@@ -35,6 +34,6 @@ public class GS {
 
     // ................................................................................... DEBUGGING
     public final static boolean SKIP_START_MENU = true;
-    public final static DebugMode DEBUG_MODE = DebugMode.RELEASE;
+    public final static DebugMode DEBUG_MODE = DebugMode.BATTLE;
 
 }

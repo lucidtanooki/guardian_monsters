@@ -1,10 +1,10 @@
 {
   com.badlogic.gdx.graphics.Color: {
-	  green: { a: 1, b: 0, g: 1, r: 0 },
-	  white: { a: 1, b: 1, g: 1, r: 1 },
-	  red: { a: 1, b: 0, g: 0, r: 1 },
-	  black: { a: 1, b: 0, g: 0, r: 0 },
-	  grey: { a: 1, b: 0.2, g: 0.2, r: 0.2 },
+	  green: { a: 1, b: 0,   g: 1,   r: 0 },
+	  white: { a: 1, b: 1,   g: 1,   r: 1 },
+	  red:   { a: 1, b: 0,   g: 0,   r: 1 },
+	  black: { a: 1, b: 0,   g: 0,   r: 0 },
+	  grey:  { a: 1, b: 0.2, g: 0.2, r: 0.2 },
   },
   
   com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle: {
@@ -20,16 +20,18 @@
 	  b-mouse-l:    {down: b-mouse-l-down,        up: b-mouse-l-up},
 	  b-mouse-r:    {down: b-mouse-r-down,        up: b-mouse-r-up},
 	  b-long:       {down: b-long-down,           up: b-long-up},
-          choice-l:     {down: choice-l-down,         up: choice-l-up},
-          choice-r:     {down: choice-r-down,         up: choice-r-up},
+      choice-l:     {down: choice-l-down,         up: choice-l-up},
+      choice-r:     {down: choice-r-down,         up: choice-r-up},
 	  transparent:  { }
   },
   
   com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
-    tb-attack: {down: b-attack-down,    up: b-attack-up,    font: default-font}
-	},
+    tb-attack: {down: b-attack-down,    up: b-attack-up,    font: default-font},
+    tb-att:    {down: b-att-down,       up: b-att-up,       font: default-font,
+                    pressedOffsetY: -2}
+  },
 	
-	com.badlogic.gdx.scenes.scene2d.ui.ProgressBar$ProgressBarStyle: {
+  com.badlogic.gdx.scenes.scene2d.ui.ProgressBar$ProgressBarStyle: {
 	  hp: { background: invis, knobBefore: blue-bar-lr  },
 	  mp: { background: green-progress-bar },
 	  rp: { background: blue-bar-lr  },

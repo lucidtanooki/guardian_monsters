@@ -48,7 +48,7 @@ public class MonsterIndicatorWidget extends WidgetGroup implements ObservableWid
         availableChoicesHero = new Array<Boolean>();
         availableChoicesOpponent = new Array<Boolean>();
 
-        this.setBounds(0,0,GS.RES_X,GS.RES_Y);
+        this.setBounds(0,0,0,0);
 
         ImageButton ind = new ImageButton(skin, "choice-l");
         ind.setPosition(0, GS.ROW*22, Align.bottomLeft);
@@ -86,7 +86,7 @@ public class MonsterIndicatorWidget extends WidgetGroup implements ObservableWid
         ind.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                setIndicatorPosition(false,0+3);
+                setIndicatorPosition(false,0);
             }
         });
 
@@ -96,7 +96,7 @@ public class MonsterIndicatorWidget extends WidgetGroup implements ObservableWid
         ind.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                setIndicatorPosition(false,1+3);
+                setIndicatorPosition(false,1);
             }
         });
 
@@ -106,7 +106,7 @@ public class MonsterIndicatorWidget extends WidgetGroup implements ObservableWid
         ind.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                setIndicatorPosition(false,2+3);
+                setIndicatorPosition(false,2);
             }
         });
 
@@ -147,7 +147,7 @@ public class MonsterIndicatorWidget extends WidgetGroup implements ObservableWid
         }
 
         setIndicatorPosition(true,0);
-        setIndicatorPosition(false,0+3);
+        setIndicatorPosition(false,0);
         addActor(indicatorHero);
         addActor(indicatorOpponent);
     }
@@ -163,11 +163,11 @@ public class MonsterIndicatorWidget extends WidgetGroup implements ObservableWid
             chosenMember = pos;
         } else {
             switch(pos) {
-                case 5:indicatorOpponent.setPosition(IndPos.OPPO_TOP.x, IndPos.OPPO_TOP.y, Align.center);break;
-                case 4:indicatorOpponent.setPosition(IndPos.OPPO_BOT.x, IndPos.OPPO_BOT.y, Align.center);break;
+                case 2:indicatorOpponent.setPosition(IndPos.OPPO_TOP.x, IndPos.OPPO_TOP.y, Align.center);break;
+                case 1:indicatorOpponent.setPosition(IndPos.OPPO_BOT.x, IndPos.OPPO_BOT.y, Align.center);break;
                 default:indicatorOpponent.setPosition(IndPos.OPPO_MID.x, IndPos.OPPO_MID.y, Align.center);break;
             }
-            setIndicatorButtonChecked(pos-3,heroesTeam);
+            setIndicatorButtonChecked(pos,heroesTeam);
             chosenOpponent = pos;
         }
         notifyWidgetObservers();

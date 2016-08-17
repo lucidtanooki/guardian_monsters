@@ -12,14 +12,16 @@ public class MonsterInBattle {
     public boolean KO;
     public boolean attackingRightNow;   // whether monster is involved in battle right now
     public boolean attackChosen;
+    public final boolean battleFieldSide;
     public int     battleFieldPosition;
 
     public Attack nextAttack;
     public int    nextTarget;
 
-    public MonsterInBattle(Monster mon, int pos) {
+    public MonsterInBattle(Monster mon, int pos, boolean side) {
         monster = mon;
         battleFieldPosition = pos;
+        battleFieldSide = side;
 
         // BATTLE
         this.ready = false;

@@ -77,6 +77,16 @@ public class BattleActionMenuWidget extends WidgetGroup {
         addActor(greyRButton);
     }
 
+    public void setGreenButtonDisabled(boolean disable) {
+        if(disable) {
+            greenButton.setDisabled(true);
+            greenButton.addAction(Actions.alpha(0.5f));
+        } else {
+            greenButton.setDisabled(false);
+            greenButton.addAction(Actions.alpha(1f));
+        }
+    }
+
 
     public void addFadeOutAction(float duration) {
         addAction(Actions.sequence(Actions.alpha(0, duration), Actions.visible(false)));

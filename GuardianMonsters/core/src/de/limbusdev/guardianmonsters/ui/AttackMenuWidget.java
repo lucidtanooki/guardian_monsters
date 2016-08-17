@@ -1,10 +1,7 @@
 package de.limbusdev.guardianmonsters.ui;
 
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
@@ -27,6 +24,8 @@ public class AttackMenuWidget extends WidgetGroup {
     // Buttons
     private Array<TextButton> attackButtons;
 
+    private Array<WidgetObserver> observers;
+
     private Image bgImg;
 
 
@@ -35,6 +34,10 @@ public class AttackMenuWidget extends WidgetGroup {
      * @param skin battle action UI skin
      */
     public AttackMenuWidget(Skin skin) {
+        super();
+
+        observers = new Array<WidgetObserver>();
+
         this.setBounds(0,0,GS.RES_X,GS.RES_Y/4);
 
         bgImg = new Image(skin.getDrawable("attPane"));

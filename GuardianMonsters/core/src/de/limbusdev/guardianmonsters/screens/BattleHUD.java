@@ -20,14 +20,15 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 
 import de.limbusdev.guardianmonsters.GuardianMonsters;
 import de.limbusdev.guardianmonsters.ecs.components.TeamComponent;
-import de.limbusdev.guardianmonsters.enums.SFXType;
 import de.limbusdev.guardianmonsters.geometry.IntVector2;
 import de.limbusdev.guardianmonsters.model.Attack;
 import de.limbusdev.guardianmonsters.model.Monster;
 import de.limbusdev.guardianmonsters.model.MonsterInBattle;
 import de.limbusdev.guardianmonsters.ui.AttackMenuWidget;
 import de.limbusdev.guardianmonsters.ui.BattleActionMenuWidget;
+import de.limbusdev.guardianmonsters.ui.BattleAnimationWidget;
 import de.limbusdev.guardianmonsters.ui.BattleMainMenuWidget;
+import de.limbusdev.guardianmonsters.ui.BattleStatusOverviewWidget;
 import de.limbusdev.guardianmonsters.ui.MonsterIndicatorWidget;
 import de.limbusdev.guardianmonsters.ui.MonsterStateWidget;
 import de.limbusdev.guardianmonsters.ui.ObservableWidget;
@@ -56,15 +57,14 @@ public class BattleHUD implements WidgetObserver {
     private BattleActionMenuWidget actionMenu;
     private AttackMenuWidget       attackMenu;
     private MonsterIndicatorWidget indicatorMenu;
+    private BattleAnimationWidget  animationWidget;
+    private BattleStatusOverviewWidget statusWidget;
 
     // Labels
     private Label gameOverLabel;
 
     // Images
     private Image battleUIbg, blackCourtain;
-    private ArrayMap<Integer,Image> monsterImgs;
-
-    private Array<MonsterStateWidget> monsterStateWidgets;
 
 
     // --------------------------------------------------------------------------------------- OTHER
@@ -73,7 +73,6 @@ public class BattleHUD implements WidgetObserver {
     private Array<MonsterInBattle> attackerQueue;
 
     private boolean allKO, allHeroKO;               // whether a whole team is KO
-    private boolean attackAnimationRunning = false;
 
     private AIPlayer aiPlayer;                      // Artificial Intelligence
 
@@ -88,7 +87,7 @@ public class BattleHUD implements WidgetObserver {
         initializeAttributes();
         setUpUI();
         setUpTopLevelMenu();
-        setUpMonsterImages();
+        setUpBattleAnimation();
         setUpBattleActionMenu();
         setUpGameOverUI();
         addElementsToStage();
@@ -133,7 +132,7 @@ public class BattleHUD implements WidgetObserver {
      * ron only from updateBattleAction()
      */
     public void updateAttackerQueue() {
-            if (attackerQueue.size > 0 && !attackAnimationRunning) {
+            if (attackerQueue.size > 0 && !animationWidget.attackAnimationRunning) {
                 MonsterInBattle m = attackerQueue.pop();
                 if(m.monster.getHP() > 0) carryOutAttack(m);
             } else if(attackerQueue.size == 0) {
@@ -151,10 +150,6 @@ public class BattleHUD implements WidgetObserver {
         allKO = false;
         allHeroKO = false;
 
-        // Clear Actions
-        for(MonsterStateWidget w : monsterStateWidgets) w.clearActions();
-
-        for(Integer key : monsterImgs.keys()) monsterImgs.get(key).clearActions();
         actionMenu.clearActions();
         mainMenu.clearActions();
         monsterStatusUI.clearActions();
@@ -179,7 +174,7 @@ public class BattleHUD implements WidgetObserver {
         int i = 0;
         for(Monster m : team.monsters) {
             if(m.getHP() > 0) {
-                this.team.add(new MonsterInBattle(m, i));
+                this.team.add(new MonsterInBattle(m, i, true));
                 i++;
             }
         }
@@ -189,28 +184,14 @@ public class BattleHUD implements WidgetObserver {
         int j = 0;
         for(Monster m : opponentTeam.monsters) {
             if(m.getHP() > 0) {
-                this.oppTeam.add(new MonsterInBattle(m, j+3));
+                this.oppTeam.add(new MonsterInBattle(m, j, false));
                 j++;
             }
         }
 
         this.aiPlayer = new AIPlayer();
 
-
-        // Initialize Status UIs ...................................................................
-        // Hero Team
-        switch(team.monsters.size) {
-            case 3: initStatusUI(team.monsters.get(2), BatPos.HERO_TOP);
-            case 2: initStatusUI(team.monsters.get(1), BatPos.HERO_BOT);
-            default:initStatusUI(team.monsters.get(0), BatPos.HERO_MID);break;
-        }
-
-        // Opponent Team
-        switch(opponentTeam.monsters.size) {
-            case 3: initStatusUI(opponentTeam.monsters.get(2), BatPos.OPPO_TOP);
-            case 2: initStatusUI(opponentTeam.monsters.get(1), BatPos.OPPO_BOT);
-            default:initStatusUI(opponentTeam.monsters.get(0), BatPos.OPPO_MID);break;
-        }
+        animationWidget.init(this.team, this.oppTeam);
 
         show();
     }
@@ -289,37 +270,25 @@ public class BattleHUD implements WidgetObserver {
      */
     public void initializeAttributes() {
         this.allKO = false;
-
-        this.monsterImgs = new ArrayMap<Integer,Image>();
-        this.monsterStateWidgets = new Array<MonsterStateWidget>();
-
         this.attackerQueue = new Array<MonsterInBattle>();
-
         this.team = new Array<MonsterInBattle>();
         this.oppTeam = new Array<MonsterInBattle>();
-
         this.gameOverUI = new Group();
-
         this.aiPlayer = new AIPlayer();
     }
 
+    /**
+     * Here the order of elements on stage gets defined
+     */
     private void addElementsToStage() {
         stage.addActor(battleUIbg);
-
-
-        for(Integer key : monsterImgs.keys())
-            stage.addActor(monsterImgs.get(key));
-
+        stage.addActor(animationWidget);
         stage.addActor(indicatorMenu);
         stage.addActor(mainMenu);
-
-
-
         stage.addActor(monsterStatusUI);
         stage.addActor(gameOverUI);
         stage.addActor(blackCourtain);
         stage.addActor(actionMenu);
-
     }
 
     /**
@@ -344,31 +313,6 @@ public class BattleHUD implements WidgetObserver {
         this.blackCourtain = new Image(game.media.getBattleUITextureAtlas().findRegion("black"));
         this.blackCourtain.setSize(GS.RES_X,GS.RES_Y);
         this.blackCourtain.setPosition(0, 0);
-
-        // Hero Team ###############################################################################
-        MonsterStateWidget msw = new MonsterStateWidget(battleSkin);
-        msw.setPosition(IndPos.statWPos1.x,IndPos.statWPos1.y);
-        monsterStateWidgets.add(msw);
-        msw = new MonsterStateWidget(battleSkin);
-        msw.setPosition(IndPos.statWPos2.x,IndPos.statWPos2.y);
-        monsterStateWidgets.add(msw);
-        msw = new MonsterStateWidget(battleSkin);
-        msw.setPosition(IndPos.statWPos3.x,IndPos.statWPos3.y);
-        monsterStateWidgets.add(msw);
-
-        // Opponent Team ###########################################################################
-        msw = new MonsterStateWidget(battleSkin);
-        msw.setPosition(GS.RES_X-IndPos.statWPos1.x,IndPos.statWPos1.y,Align.bottomRight);
-        monsterStateWidgets.add(msw);
-        msw = new MonsterStateWidget(battleSkin);
-        msw.setPosition(GS.RES_X-IndPos.statWPos2.x,IndPos.statWPos2.y,Align.bottomRight);
-        monsterStateWidgets.add(msw);
-        msw = new MonsterStateWidget(battleSkin);
-        msw.setPosition(GS.RES_X-IndPos.statWPos3.x,IndPos.statWPos3.y,Align.bottomRight);
-        monsterStateWidgets.add(msw);
-
-        for(MonsterStateWidget w : monsterStateWidgets) monsterStatusUI.addActor(w);
-
     }
 
     private void setUpGameOverUI() {
@@ -415,60 +359,7 @@ public class BattleHUD implements WidgetObserver {
     /**
      * Adds images to the stage for displaying monster sprites
      */
-    private void setUpMonsterImages() {
-        Image monImg;
 
-        // Hero Team
-        monImg = new Image(game.media.getBattleUITextureAtlas().findRegion("black"));
-        monImg.setSize(256,256);
-        monImg.setPosition(ImPos.HERO_TOP.x,ImPos.HERO_TOP.y,Align.bottomLeft);
-        monImg.addAction(Actions.forever(Actions.sequence(
-                Actions.moveBy(0, 2, .5f), Actions.moveBy(0, -2, .5f))));
-        monImg.setVisible(false);
-        monsterImgs.put(BatPos.HERO_TOP, monImg);
-
-        monImg = new Image(game.media.getBattleUITextureAtlas().findRegion("black"));
-        monImg.setSize(256,256);
-        monImg.setPosition(ImPos.HERO_MID.x,ImPos.HERO_MID.y,Align.bottomLeft);
-        monImg.addAction(Actions.forever(Actions.sequence(
-                Actions.moveBy(0, -2, .5f), Actions.moveBy(0, 2, .5f))));
-        monImg.setVisible(false);
-        monsterImgs.put(BatPos.HERO_MID, monImg);
-
-        monImg = new Image(game.media.getBattleUITextureAtlas().findRegion("black"));
-        monImg.setSize(256,256);
-        monImg.setPosition(ImPos.HERO_BOT.x,ImPos.HERO_BOT.y,Align.bottomLeft);
-        monImg.addAction(Actions.forever(Actions.sequence(
-                Actions.moveBy(0, 2, .5f), Actions.moveBy(0, -2, .5f))));
-        monImg.setVisible(false);
-        monsterImgs.put(BatPos.HERO_BOT, monImg);
-
-
-        // Opponent Team
-        monImg = new Image(game.media.getBattleUITextureAtlas().findRegion("black"));
-        monImg.setSize(256,256);
-        monImg.setPosition(GS.RES_X-ImPos.HERO_TOP.x,ImPos.HERO_TOP.y,Align.bottomRight);
-        monImg.addAction(Actions.forever(Actions.sequence(
-                Actions.moveBy(0, 2, .5f), Actions.moveBy(0, -2, .5f))));
-        monImg.setVisible(false);
-        monsterImgs.put(BatPos.OPPO_TOP, monImg);
-
-        monImg = new Image(game.media.getBattleUITextureAtlas().findRegion("black"));
-        monImg.setSize(256,256);
-        monImg.setPosition(GS.RES_X-ImPos.HERO_MID.x,ImPos.HERO_MID.y,Align.bottomRight);
-        monImg.addAction(Actions.forever(Actions.sequence(
-                Actions.moveBy(0, -2, .5f), Actions.moveBy(0, 2, .5f))));
-        monImg.setVisible(false);
-        monsterImgs.put(BatPos.OPPO_MID, monImg);
-
-        monImg = new Image(game.media.getBattleUITextureAtlas().findRegion("black"));
-        monImg.setSize(256,256);
-        monImg.setPosition(GS.RES_X-ImPos.HERO_BOT.x,ImPos.HERO_BOT.y,Align.bottomRight);
-        monImg.addAction(Actions.forever(Actions.sequence(
-                Actions.moveBy(0, 2, .5f), Actions.moveBy(0, -2, .5f))));
-        monImg.setVisible(false);
-        monsterImgs.put(BatPos.OPPO_BOT, monImg);
-    }
 
     /**
      * Setting up the main menu in battle mode
@@ -516,6 +407,11 @@ public class BattleHUD implements WidgetObserver {
                 }
             }
         );
+    }
+
+    private void setUpBattleAnimation() {
+        animationWidget = new BattleAnimationWidget(game.media);
+        animationWidget.addWidgetObserver(this);
     }
 
     /**
@@ -652,12 +548,12 @@ public class BattleHUD implements WidgetObserver {
 
     public void carryOutAttack(MonsterInBattle attacker) {
         MonsterInBattle defender = (attacker.battleFieldPosition<3) ?
-                oppTeam.get(attacker.nextTarget-3) : team.get(attacker.nextTarget);
+                oppTeam.get(attacker.nextTarget) : team.get(attacker.nextTarget);
 
         attacker.startAttack();    // attackStarted = Time, attackingRightNow=true
 
         // Animate Attack
-        animateAttack(attacker.battleFieldPosition, attacker.nextTarget);
+        animationWidget.animateAttack(attacker.battleFieldPosition, attacker.nextTarget, attacker.battleFieldSide);
 
         /* Calculate Damage */
         if (defender.monster.getHP() - attacker.nextAttack.damage < 0) defender.monster.setHP(0);
@@ -690,26 +586,18 @@ public class BattleHUD implements WidgetObserver {
      * @param m
      */
     private void kickOutMonster(MonsterInBattle m) {
-        monsterImgs.get(m.battleFieldPosition).addAction(
-                Actions.sequence(Actions.alpha(0, 2), Actions.visible(false)));
-        monsterStateWidgets.get(m.battleFieldPosition).addAction(
-                Actions.sequence(Actions.alpha(0, 2), Actions.visible(false)));
+        animationWidget.animateMonsterKO(m.battleFieldPosition,m.battleFieldSide);
+        statusWidget.fadeStatusWidget(m.battleFieldPosition, m.battleFieldSide);
 
         System.out.println("Killed: " + m.battleFieldPosition);
 
         // Change the indicator position to an active fighter
-        if(m.battleFieldPosition<3) {
-            // Hero Team
-            // TODO indicators
-            team.removeValue(m, true);
-        }
-        if(m.battleFieldPosition>2) {
-            // Opponent Team
-            // TODO indicators
-            if(m.battleFieldPosition == oppTeam.get(indicatorMenu.chosenOpponent-3).battleFieldPosition)
-            oppTeam.removeValue(m, true);
-        }
+        if(m.battleFieldSide)
+            team.removeValue(m, true);      // Hero Team
+        else
+            oppTeam.removeValue(m, true);   // Opponent Team
 
+        indicatorMenu.deactivateChoice(m.battleFieldSide,m.battleFieldPosition);
     }
 
     /**
@@ -759,120 +647,14 @@ public class BattleHUD implements WidgetObserver {
         this.stage.draw();
     }
 
-    /**
-     * Animate an attack of the given monster
-     * @param attPos    position of attacker
-     * @param defPos    position of defender
-     */
-    private void animateAttack(final int attPos, int defPos) {
-        Image attIm,defIm;
-        IntVector2 startPos,endPos;
-        int attAlign, defAlign;
-
-        if(attPos < 3) {
-            attAlign = Align.bottomLeft;
-            defAlign = Align.bottomRight;
-        } else {
-            attAlign = Align.bottomRight;
-            defAlign = Align.bottomLeft;
-        }
-
-        attackAnimationRunning = true;
-
-        switch(attPos) {
-            case 5:  startPos = ImPos.OPPO_TOP;break;
-            case 4:  startPos = ImPos.OPPO_BOT;break;
-            case 3:  startPos = ImPos.OPPO_MID;break;
-            case 2:  startPos = ImPos.HERO_TOP;break;
-            case 1:  startPos = ImPos.HERO_BOT;break;
-            default: startPos = ImPos.HERO_MID;break;
-        }
-
-        switch(defPos) {
-            case 5:  endPos = ImPos.OPPO_TOP;break;
-            case 4:  endPos = ImPos.OPPO_BOT;break;
-            case 3:  endPos = ImPos.OPPO_MID;break;
-            case 2:  endPos = ImPos.HERO_TOP;break;
-            case 1:  endPos = ImPos.HERO_BOT;break;
-            default: endPos = ImPos.HERO_MID;break;
-        }
-
-
-        attIm = monsterImgs.get(attPos);
-        attIm.addAction(Actions.sequence(
-                Actions.moveToAligned(endPos.x, endPos.y, defAlign, .6f, Interpolation.pow2In),
-                Actions.run(new Runnable() {
-                    @Override
-                    public void run() {
-                        game.media.getSFX(SFXType.HIT, 0).play();
-                    }
-                }),
-                Actions.moveToAligned(startPos.x, startPos.y, attAlign, .3f, Interpolation.pow2Out),
-                Actions.delay(.5f),
-                Actions.run(new Runnable() {
-                    @Override
-                    public void run() {
-                        attackAnimationRunning=false;
-                    }
-                })
-        ));
-        defIm = monsterImgs.get(defPos);
-        defIm.addAction(Actions.sequence(
-                Actions.delay(.6f), Actions.moveBy(0, 15, .1f, Interpolation.bounceIn),
-                Actions.moveBy(0, -15, .1f, Interpolation.bounceIn)
-        ));
-
-    }
-
-    /**
-     * Initializes the graphical representation of a monsters status on the screen
-     * @param monster   the given monster
-     * @param position  the position on the battle field
-     */
-    public void initStatusUI(Monster monster, final int position) {
-
-        // Set Monster Information in UI and set Signs visible
-        monsterStateWidgets.get(position).init(monster);
-
-        setMonsterStatusUIvisible(monster, position);
-
+    public void initStatusUI() {
         stage.addAction(Actions.fadeIn(1f));
     }
 
-    /**
-     * Initializes the HUD for the given battle field position
-     * @param monster
-     * @param position
-     */
-    public void setMonsterStatusUIvisible(Monster monster, final int position) {
-        monsterStateWidgets.get(position).addAction(Actions.sequence(
-                Actions.alpha(1), Actions.visible(true)
-        ));
-
-        initMonsterImage(monster, position);
-    }
-
-    private void initMonsterImage(Monster monster, int position) {
-        Image monImg; TextureRegion monReg;
-        monImg = monsterImgs.get(position);
-        monReg = game.media.getMonsterSprite(monster.ID);
-        if(position < 3) if(!monReg.isFlipX()) monReg.flip(true, false);
-        monImg.setDrawable(new TextureRegionDrawable(monReg));
-        monImg.addAction(Actions.sequence(Actions.alpha(1), Actions.visible(true)));
-    }
 
     private void resetUIElementVisibility() {
         // Visibility
         // Reset Status UIs
-        for(MonsterStateWidget w : monsterStateWidgets) {
-            w.addAction(Actions.alpha(1));
-            w.setVisible(false);
-        }
-
-        for(Integer key : monsterImgs.keys()) {
-            monsterImgs.get(key).addAction(Actions.alpha(1));
-            monsterImgs.get(key).setVisible(false);
-        }
 
         actionMenu.addFadeOutAction(.1f);
         mainMenu.addFadeInWidgetAction(.1f);
@@ -887,6 +669,8 @@ public class BattleHUD implements WidgetObserver {
     @Override
     public void getNotified(ObservableWidget ow) {
         System.out.println("Got notified by " + ow.getClass());
+
+        // Monster Indicator Widget
         if(ow instanceof MonsterIndicatorWidget) {
             MonsterIndicatorWidget miw = (MonsterIndicatorWidget) ow;
             // Indicator Position changed
@@ -895,6 +679,7 @@ public class BattleHUD implements WidgetObserver {
             else
                 actionMenu.setGreenButtonDisabled(true);
         }
+
     }
 
 
@@ -939,47 +724,17 @@ public class BattleHUD implements WidgetObserver {
         }
     }
 
-    /**
-     * Possible Indicator coordinates
-     */
-    private final static class IndPos {
-        private static final IntVector2 HERO_TOP  = new IntVector2(GS.COL*19, GS.ROW*34);
-        private static final IntVector2 HERO_MID  = new IntVector2(GS.COL*13, GS.ROW*31);
-        private static final IntVector2 HERO_BOT  = new IntVector2(GS.COL*7, GS.ROW*28);
-        private static final IntVector2 OPPO_TOP  = new IntVector2(GS.RES_X-HERO_TOP.x, HERO_TOP.y);
-        private static final IntVector2 OPPO_MID  = new IntVector2(GS.RES_X-HERO_MID.x, HERO_MID.y);
-        private static final IntVector2 OPPO_BOT  = new IntVector2(GS.RES_X-HERO_BOT.x, HERO_BOT.y);
-        private static final IntVector2 statWPos1 = new IntVector2(GS.COL*5,GS.RES_Y-GS.ROW*7);
-        private static final IntVector2 statWPos2 = new IntVector2(GS.COL*2,GS.RES_Y-GS.ROW*10);
-        private static final IntVector2 statWPos3 = new IntVector2(GS.COL*8,GS.RES_Y-GS.ROW*4);
-    }
 
-    private final static class ImPos {
-        private static final IntVector2 HERO_MID = new IntVector2(GS.COL*7,GS.ROW*18);
-        private static final IntVector2 HERO_BOT = new IntVector2(GS.COL*1,GS.ROW*15);
-        private static final IntVector2 HERO_TOP = new IntVector2(GS.COL*13,GS.ROW*21);
-        private static final IntVector2 OPPO_MID = new IntVector2(GS.RES_X-GS.COL*7,GS.ROW*18);
-        private static final IntVector2 OPPO_BOT = new IntVector2(GS.RES_X-GS.COL*1,GS.ROW*15);
-        private static final IntVector2 OPPO_TOP = new IntVector2(GS.RES_X-GS.COL*13,GS.ROW*21);
-    }
+
 
     /**
      * Positions on the Battle Field
      */
     private final static class BatPos {
-        private static int HERO_MID = 0;    // Middle Position on the left
-        private static int HERO_TOP = 2;
-        private static int HERO_BOT = 1;
-        private static int OPPO_MID = 3;    // Middle Position on the right
-        private static int OPPO_TOP = 5;
-        private static int OPPO_BOT = 4;
         private static int MID = 0;
         private static int TOP = 2;
         private static int BOT = 1;
-        private static int[] positions = {0,2,1};
-        private static int convertFromCounterToPosition(int counter) {
-            return positions[counter];
-        }
+        private static int[] positions = {0, 2, 1};
     }
 
     private enum BattleState {

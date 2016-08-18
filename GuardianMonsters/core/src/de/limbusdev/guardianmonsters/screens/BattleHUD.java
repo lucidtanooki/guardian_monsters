@@ -1,26 +1,17 @@
 package de.limbusdev.guardianmonsters.screens;
 
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
 import de.limbusdev.guardianmonsters.GuardianMonsters;
 import de.limbusdev.guardianmonsters.ecs.components.TeamComponent;
-import de.limbusdev.guardianmonsters.geometry.IntVector2;
 import de.limbusdev.guardianmonsters.model.Attack;
 import de.limbusdev.guardianmonsters.model.Monster;
 import de.limbusdev.guardianmonsters.model.MonsterInBattle;
@@ -28,9 +19,9 @@ import de.limbusdev.guardianmonsters.ui.AttackMenuWidget;
 import de.limbusdev.guardianmonsters.ui.BattleActionMenuWidget;
 import de.limbusdev.guardianmonsters.ui.BattleAnimationWidget;
 import de.limbusdev.guardianmonsters.ui.BattleMainMenuWidget;
+import de.limbusdev.guardianmonsters.ui.EndOfBattleWidget;
 import de.limbusdev.guardianmonsters.ui.BattleStatusOverviewWidget;
 import de.limbusdev.guardianmonsters.ui.MonsterIndicatorWidget;
-import de.limbusdev.guardianmonsters.ui.MonsterStateWidget;
 import de.limbusdev.guardianmonsters.ui.ObservableWidget;
 import de.limbusdev.guardianmonsters.ui.WidgetObserver;
 import de.limbusdev.guardianmonsters.utils.GS;
@@ -52,19 +43,17 @@ public class BattleHUD implements WidgetObserver {
     private Skin skin, battleSkin;
 
     // Groups
-    private Group monsterStatusUI, gameOverUI;
     private BattleMainMenuWidget   mainMenu;
     private BattleActionMenuWidget actionMenu;
     private AttackMenuWidget       attackMenu;
     private MonsterIndicatorWidget indicatorMenu;
     private BattleAnimationWidget  animationWidget;
     private BattleStatusOverviewWidget statusWidget;
+    private EndOfBattleWidget      endOfBattleWidget;
 
-    // Labels
-    private Label gameOverLabel;
 
     // Images
-    private Image battleUIbg, blackCourtain;
+    private Image battleUIbg, blackCurtain;
 
 
     // --------------------------------------------------------------------------------------- OTHER
@@ -72,13 +61,12 @@ public class BattleHUD implements WidgetObserver {
     private Array<MonsterInBattle> team, oppTeam;   // hold monsters of one team
     private Array<MonsterInBattle> attackerQueue;
 
-    private boolean allKO, allHeroKO;               // whether a whole team is KO
-
+    private boolean allKO;                          // whether a whole team is KO
     private AIPlayer aiPlayer;                      // Artificial Intelligence
 
     // -------------------------------------------------------------------------------------- STATES
-    // CHOOSING, BATTLEACTION
-    private BattleState state = BattleState.CHOOSING;
+    // CHOOSING, BATTLE-ACTION
+    private BattleState state = BattleState.MAINMENU;
 
     /* ........................................................................... CONSTRUCTOR .. */
     public BattleHUD(final GuardianMonsters game) {
@@ -87,13 +75,13 @@ public class BattleHUD implements WidgetObserver {
         initializeAttributes();
         setUpUI();
         setUpTopLevelMenu();
-        setUpBattleAnimation();
         setUpBattleActionMenu();
-        setUpGameOverUI();
+        setUpEndOfBattleUI();
         addElementsToStage();
-
+        attackMenu = new AttackMenuWidget(battleSkin);
         reset();
     }
+
     /* ............................................................................... METHODS .. */
 
     // ################################################################################### GAME LOOP
@@ -104,27 +92,17 @@ public class BattleHUD implements WidgetObserver {
      */
     public void update(float delta) {
         stage.act(delta);
-
-        switch(state) {
-            case CHOOSING: updateChoosing(delta); break;
-            default:       updateBattleAction(delta); break;
-        }
     }
 
     /**
      * Update Method for state: BATTLEACTION
      */
     public void updateBattleAction(float delta) {
-        // Start one attack after the other
-        updateAttackerQueue();
+        // TODO
     }
 
     public void updateChoosing(float delta) {
-        // Let AI-Player act
-        aiPlayer.act();
-        countFitMonsters();
-        // ........................................................................... END OF BATTLE
-        if(allKO) handleEndOfBattle();
+        // TODO
     }
 
     /**
@@ -132,12 +110,12 @@ public class BattleHUD implements WidgetObserver {
      * ron only from updateBattleAction()
      */
     public void updateAttackerQueue() {
-            if (attackerQueue.size > 0 && !animationWidget.attackAnimationRunning) {
-                MonsterInBattle m = attackerQueue.pop();
-                if(m.monster.getHP() > 0) carryOutAttack(m);
-            } else if(attackerQueue.size == 0) {
-                newRound();
-            }
+        if (attackerQueue.size > 0 && !animationWidget.attackAnimationRunning) {
+            MonsterInBattle m = attackerQueue.pop();
+            if (m.monster.getHP() > 0) carryOutAttack(m);
+        } else if (attackerQueue.size == 0) {
+            newRound();
+        }
     }
 
     // #############################################################################################
@@ -148,15 +126,9 @@ public class BattleHUD implements WidgetObserver {
      */
     public void reset() {
         allKO = false;
-        allHeroKO = false;
-
         actionMenu.clearActions();
         mainMenu.clearActions();
-        monsterStatusUI.clearActions();
-        blackCourtain.clearActions();
-        gameOverUI.clearActions();
-
-        resetUIElementVisibility();
+        blackCurtain.clearActions();
     }
 
     /**
@@ -167,9 +139,7 @@ public class BattleHUD implements WidgetObserver {
     public void init(TeamComponent team, TeamComponent opponentTeam) {
         reset();
 
-        //Initialize Teams .........................................................................
         // Hero Team
-
         this.team = new Array<MonsterInBattle>();
         int i = 0;
         for(Monster m : team.monsters) {
@@ -191,7 +161,9 @@ public class BattleHUD implements WidgetObserver {
 
         this.aiPlayer = new AIPlayer();
 
+        statusWidget.init(this.team, this.oppTeam);
         animationWidget.init(this.team, this.oppTeam);
+        indicatorMenu.init(this.team, this.oppTeam);
 
         show();
     }
@@ -208,19 +180,20 @@ public class BattleHUD implements WidgetObserver {
     }
 
     public void show() {
-        blackCourtain.addAction(Actions.sequence(Actions.fadeOut(1), Actions.visible(false)));
+        blackCurtain.addAction(Actions.sequence(Actions.fadeOut(1), Actions.visible(false)));
+        changeToWidgetSet(BattleState.MAINMENU);
     }
 
     /**
      * Refresh battle UI for new round
      */
     private void newRound() {
+        changeToWidgetSet(BattleState.ACTIONMENU);
         indicatorMenu.init(team,oppTeam);
-        state = BattleState.CHOOSING;
         for(MonsterInBattle m : team) m.attackChosen = false;
         for(MonsterInBattle m : oppTeam) m.attackChosen = false;
         attackerQueue.clear();
-        aiPlayer.havePause(false);
+        aiPlayer.havePause(true);
     }
 
     /**
@@ -237,14 +210,13 @@ public class BattleHUD implements WidgetObserver {
 
         // Hide UI Elements
         actionMenu.addFadeOutAction(.5f);
-        mainMenu.addFadeOutWidgetAction(.5f);
-
-        // Activate Label
-        gameOverUI.setVisible(true);
+        mainMenu.addFadeOutAction(.3f);
 
         // Set message
-        if(heroLost) gameOverLabel.setText("Game Over");
-        else gameOverLabel.setText("You won!");
+        if(heroLost) endOfBattleWidget.messageLabel.setText("Game Over");
+        else endOfBattleWidget.messageLabel.setText("You won!");
+
+        changeToWidgetSet(BattleState.ENDOFBATTLE);
     }
 
     /**
@@ -263,6 +235,8 @@ public class BattleHUD implements WidgetObserver {
         }
     }
 
+
+
     // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     // ....................................................................................... SETUP
     /**
@@ -273,22 +247,7 @@ public class BattleHUD implements WidgetObserver {
         this.attackerQueue = new Array<MonsterInBattle>();
         this.team = new Array<MonsterInBattle>();
         this.oppTeam = new Array<MonsterInBattle>();
-        this.gameOverUI = new Group();
         this.aiPlayer = new AIPlayer();
-    }
-
-    /**
-     * Here the order of elements on stage gets defined
-     */
-    private void addElementsToStage() {
-        stage.addActor(battleUIbg);
-        stage.addActor(animationWidget);
-        stage.addActor(indicatorMenu);
-        stage.addActor(mainMenu);
-        stage.addActor(monsterStatusUI);
-        stage.addActor(gameOverUI);
-        stage.addActor(blackCourtain);
-        stage.addActor(actionMenu);
     }
 
     /**
@@ -302,64 +261,21 @@ public class BattleHUD implements WidgetObserver {
         this.battleSkin = game.media.battleSkin;
         stage.setDebugAll(GS.DEBUGGING_ON);
 
-        this.monsterStatusUI = new Group();
-
         // Battle UI Black transparent Background
-        this.battleUIbg = new Image(game.media.getBattleUITextureAtlas().findRegion("bg"));
+        this.battleUIbg = new Image(battleSkin.getDrawable("bg"));
         battleUIbg.setPosition(0, 0);
         battleUIbg.setSize(GS.RES_X, GS.ROW*14);
 
-        // Black Courtain for fade-in and -out
-        this.blackCourtain = new Image(game.media.getBattleUITextureAtlas().findRegion("black"));
-        this.blackCourtain.setSize(GS.RES_X,GS.RES_Y);
-        this.blackCourtain.setPosition(0, 0);
+        // Black Curtain for fade-in and -out
+        this.blackCurtain = new Image(battleSkin.getDrawable("black"));
+        this.blackCurtain.setSize(GS.RES_X,GS.RES_Y);
+        this.blackCurtain.setPosition(0, 0);
+
+        // Widgets
+        statusWidget = new BattleStatusOverviewWidget(battleSkin);
+        animationWidget = new BattleAnimationWidget(game.media);
+        animationWidget.addWidgetObserver(this);
     }
-
-    private void setUpGameOverUI() {
-        Image i = new Image(battleSkin.getDrawable("b-long-down"));
-        i.setPosition(GS.RES_X / 2, GS.ROW*7, Align.bottom);
-        gameOverUI.addActor(i);
-
-        Label.LabelStyle labs = new Label.LabelStyle();
-        labs.font = skin.getFont("default-font");
-        gameOverLabel = new Label("Game Over", labs);
-        gameOverLabel.setHeight(64);
-        gameOverLabel.setWidth(500);
-        gameOverLabel.setWrap(true);
-        gameOverLabel.setPosition(400, 70, Align.bottom);
-        gameOverUI.addActor(gameOverLabel);
-
-        // Change Screen
-        TextButton.TextButtonStyle ibs = new TextButton.TextButtonStyle();
-        ibs.down = new TextureRegionDrawable(game.media.getUITextureAtlas().findRegion("b1down"));
-        ibs.up = new TextureRegionDrawable(game.media.getUITextureAtlas().findRegion("b1up"));
-        ibs.font = skin.getFont("default-font");
-        ibs.pressedOffsetY = -1;
-        final TextButton exitButton = new TextButton("OK",ibs);
-        exitButton.setWidth(128);exitButton.setHeight(48);
-        exitButton.setPosition(GS.RES_X / 2, 32, Align.center);
-        exitButton.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                // Exit Battle Screen
-                blackCourtain.addAction(Actions.sequence(
-                        Actions.visible(true), Actions.alpha(1, .5f), Actions.run(new Runnable() {
-                            @Override
-                            public void run() {
-                                game.popScreen();
-                            }
-                        })
-                ));
-            }
-        });
-        gameOverUI.addActor(exitButton);
-        gameOverUI.setVisible(false);
-    }
-
-    /**
-     * Adds images to the stage for displaying monster sprites
-     */
-
 
     /**
      * Setting up the main menu in battle mode
@@ -373,11 +289,7 @@ public class BattleHUD implements WidgetObserver {
             new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    System.out.println("Input: Button Fight");
-                    mainMenu.addFadeOutWidgetAction(0.3f);
-                    actionMenu.addFadeInAction(0.5f);
-                    aiPlayer.havePause(false);
-                    newRound();
+                    onTopLevelButtonFight();
                 }
             }
         );
@@ -386,14 +298,7 @@ public class BattleHUD implements WidgetObserver {
             new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    System.out.println("Input: Button Escape");
-                    blackCourtain.addAction(Actions.sequence(Actions.visible(true), Actions.fadeIn(1),
-                        Actions.run(new Runnable() {
-                            @Override
-                            public void run() {
-                                game.popScreen();
-                            }
-                        })));
+                    onTopLevelButtonRun();
                 }
             }
         );
@@ -402,16 +307,10 @@ public class BattleHUD implements WidgetObserver {
             new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    // TODO
-                    System.out.println("Input: Button Bag");
+                    onTopLevelButtonBag();
                 }
             }
         );
-    }
-
-    private void setUpBattleAnimation() {
-        animationWidget = new BattleAnimationWidget(game.media);
-        animationWidget.addWidgetObserver(this);
     }
 
     /**
@@ -424,9 +323,7 @@ public class BattleHUD implements WidgetObserver {
             new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    actionMenu.addFadeOutAction(0.3f);
-                    mainMenu.addFadeInWidgetAction(0.3f);
-                    System.out.println("Button: back to top level menu");
+                    changeToWidgetSet(BattleState.MAINMENU);
                     aiPlayer.havePause(true);
                 }
             }
@@ -452,8 +349,7 @@ public class BattleHUD implements WidgetObserver {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 if(actionMenu.greenButton.isDisabled()) return;
-                System.out.println("Button: attack");
-                setUpAttacksPane();
+                changeToWidgetSet(BattleState.ATTACKMENU);
             }
         });
         actionMenu.greenButton.setText("Attack");
@@ -470,76 +366,31 @@ public class BattleHUD implements WidgetObserver {
         indicatorMenu.addWidgetObserver(this);
     }
 
+    /**
+     * Here the order of elements on stage gets defined
+     */
+    private void addElementsToStage() {
+        stage.addActor(battleUIbg);
+        stage.addActor(animationWidget);
+        stage.addActor(blackCurtain);
+    }
 
-
-    // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    /* .................................................................... CREATE UI ELEMENTS .. */
     public void setUpAttacksPane() {
-
         Array<Attack> attacks = team.get(indicatorMenu.chosenMember).monster.attacks;
-        attackMenu = new AttackMenuWidget(battleSkin);
         attackMenu.init(attacks);
-        attackMenu.addListenerToAllButtons(
+        attackMenu.addWidgetObserver(this);
+    }
+
+    private void setUpEndOfBattleUI() {
+        endOfBattleWidget = new EndOfBattleWidget(battleSkin);
+        endOfBattleWidget.backButton.addListener(
             new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    actionMenu.setGreenButtonDisabled(true);
-                    attackMenu.addFadeOutAction(.5f);
-                    attackMenu.remove();
-                    indicatorMenu.deactivateChoice(true,indicatorMenu.chosenMember);
+                    game.popScreen();
                 }
             }
         );
-
-        if (attacks.size >= 1)
-            attackMenu.addListenerToButton(0, new ClickListener() {
-                @Override
-                public void clicked(InputEvent event, float x, float y) {
-                    lineUpForAttack(team.get(indicatorMenu.chosenMember), indicatorMenu.chosenOpponent, 0);
-                }
-            });
-
-        if(attacks.size >= 2)
-            attackMenu.addListenerToButton(1, new ClickListener() {
-                @Override
-                public void clicked(InputEvent event, float x, float y) {
-                    lineUpForAttack(team.get(indicatorMenu.chosenMember), indicatorMenu.chosenOpponent, 1);
-                }
-            });
-
-        if(attacks.size >= 3)
-            attackMenu.addListenerToButton(2, new ClickListener() {
-                @Override
-                public void clicked(InputEvent event, float x, float y) {
-                    lineUpForAttack(team.get(indicatorMenu.chosenMember), indicatorMenu.chosenOpponent, 2);
-                }
-            });
-
-        if(attacks.size >= 4)
-            attackMenu.addListenerToButton(3, new ClickListener() {
-                @Override
-                public void clicked(InputEvent event, float x, float y) {
-                    lineUpForAttack(team.get(indicatorMenu.chosenMember), indicatorMenu.chosenOpponent, 3);
-                }
-            });
-
-        if(attacks.size >= 5)
-            attackMenu.addListenerToButton(4, new ClickListener() {
-                @Override
-                public void clicked(InputEvent event, float x, float y) {
-                    lineUpForAttack(team.get(indicatorMenu.chosenMember), indicatorMenu.chosenOpponent, 4);
-                }
-            });
-
-        if(attacks.size >= 6)
-            attackMenu.addListenerToButton(5, new ClickListener() {
-                @Override
-                public void clicked(InputEvent event, float x, float y) {
-                    lineUpForAttack(team.get(indicatorMenu.chosenMember), indicatorMenu.chosenOpponent, 5);
-                }
-            });
-
-        stage.addActor(attackMenu);
     }
 
 
@@ -616,11 +467,13 @@ public class BattleHUD implements WidgetObserver {
 
         attackerQueue.add(m);
 
+        // if Player has chosen attacks
+        boolean allChosen = true;
+        for(MonsterInBattle mib : team) allChosen = allChosen & mib.attackChosen;
         if(attackerQueue.size == countFitMonsters()) {
-            state = BattleState.BATTLEACTION;
+            aiPlayer.chooseAtttacks();
+            changeToWidgetSet(BattleState.ANIMATION);
             attackerQueue.sort(new MonsterSpeedComparator());
-        } else {
-            indicatorMenu.addFadeInAction(.3f);
         }
     }
 
@@ -647,28 +500,8 @@ public class BattleHUD implements WidgetObserver {
         this.stage.draw();
     }
 
-    public void initStatusUI() {
-        stage.addAction(Actions.fadeIn(1f));
-    }
-
-
-    private void resetUIElementVisibility() {
-        // Visibility
-        // Reset Status UIs
-
-        actionMenu.addFadeOutAction(.1f);
-        mainMenu.addFadeInWidgetAction(.1f);
-        monsterStatusUI.addAction(Actions.alpha(1));
-        monsterStatusUI.setVisible(true);
-
-        blackCourtain.setVisible(true);
-        gameOverUI.setVisible(false);
-        stage.act(1);
-    }
-
     @Override
     public void getNotified(ObservableWidget ow) {
-        System.out.println("Got notified by " + ow.getClass());
 
         // Monster Indicator Widget
         if(ow instanceof MonsterIndicatorWidget) {
@@ -680,6 +513,75 @@ public class BattleHUD implements WidgetObserver {
                 actionMenu.setGreenButtonDisabled(true);
         }
 
+        // Attack Menu Widget
+        if(ow instanceof AttackMenuWidget) {
+            AttackMenuWidget amw = (AttackMenuWidget) ow;
+            onAttackMenuButton(amw.chosenAttack);
+        }
+    }
+
+    /**
+     * Fades out current widget and changes to another one, fading it in
+     * @param state
+     */
+    private void changeToWidgetSet(BattleState state) {
+        mainMenu.remove();
+        attackMenu.remove();
+        statusWidget.remove();
+        attackMenu.remove();
+        indicatorMenu.remove();
+        actionMenu.remove();
+
+        switch(state) {
+            case ACTIONMENU:
+                stage.addActor(actionMenu);
+                stage.addActor(indicatorMenu);
+                stage.addActor(statusWidget);
+                break;
+            case ATTACKMENU:
+                setUpAttacksPane();
+                stage.addActor(indicatorMenu);
+                stage.addActor(statusWidget);
+                stage.addActor(attackMenu);
+                break;
+            case ANIMATION:
+                break;
+            default:
+                stage.addActor(mainMenu);
+                break;
+        }
+        this.state = state;
+    }
+
+    // ................................................................................... CALLBACKS
+    private void onTopLevelButtonFight() {
+        System.out.println("Input: Button Fight");
+        changeToWidgetSet(BattleState.MAINMENU);
+        aiPlayer.havePause(false);
+        newRound();
+    }
+
+    private void onTopLevelButtonRun() {
+        System.out.println("Input: Button Escape");
+        blackCurtain.addAction(Actions.sequence(Actions.visible(true), Actions.fadeIn(1),
+            Actions.run(new Runnable() {
+                @Override
+                public void run() {
+                    game.popScreen();
+                }
+            })));
+    }
+
+    private void onTopLevelButtonBag() {
+        // TODO
+        System.out.println("Input: Button Bag");
+    }
+
+    private void onAttackMenuButton(int nr) {
+        actionMenu.setGreenButtonDisabled(true);
+        changeToWidgetSet(BattleState.ACTIONMENU);
+        indicatorMenu.deactivateChoice(true,indicatorMenu.chosenMember);
+        lineUpForAttack(team.get(indicatorMenu.chosenMember), indicatorMenu.chosenOpponent, nr);
     }
 
 
@@ -699,13 +601,11 @@ public class BattleHUD implements WidgetObserver {
             AIpaused = true;
         }
 
-        public void act() {
-            if(AIpaused) return;
+        public void chooseAtttacks() {
             // Choose targets and attacks
             for(int i=0; i<oppTeam.size; i++) {
                 attack(oppTeam.get(i));
             }
-            havePause(true);
         }
 
         public void havePause(boolean paused) {
@@ -724,9 +624,6 @@ public class BattleHUD implements WidgetObserver {
         }
     }
 
-
-
-
     /**
      * Positions on the Battle Field
      */
@@ -738,6 +635,6 @@ public class BattleHUD implements WidgetObserver {
     }
 
     private enum BattleState {
-        CHOOSING, BATTLEACTION,
+        MAINMENU, ACTIONMENU, ATTACKMENU, ENDOFBATTLE, ANIMATION,
     }
 }

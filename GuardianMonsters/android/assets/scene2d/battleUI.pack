@@ -1,172 +1,172 @@
 
 battleUI.png
 format: RGBA8888
-filter: Linear,Linear
+filter: MipMapLinearNearest,MipMapLinearNearest
 repeat: none
 attPane
   rotate: false
-  xy: 2, 798
+  xy: 1, 796
   size: 960, 224
   orig: 960, 224
   offset: 0, 0
   index: -1
+eob-pane
+  rotate: false
+  xy: 1, 679
+  size: 936, 115
+  orig: 936, 115
+  offset: 0, 0
+  index: -1
 b-long-down
   rotate: false
-  xy: 2, 682
+  xy: 1, 565
   size: 896, 112
   orig: 896, 112
   offset: 0, 0
   index: -1
 b-long-up
   rotate: false
-  xy: 2, 566
+  xy: 1, 451
   size: 896, 112
   orig: 896, 112
   offset: 0, 0
   index: -1
 bg
   rotate: false
-  xy: 2, 422
+  xy: 1, 309
   size: 800, 140
   orig: 800, 140
   offset: 0, 0
   index: -1
 b-attack-down
   rotate: false
-  xy: 2, 302
+  xy: 1, 191
   size: 448, 116
   orig: 448, 116
   offset: 0, 0
   index: -1
 b-attack-up
   rotate: false
-  xy: 2, 182
+  xy: 1, 73
   size: 448, 116
   orig: 448, 116
   offset: 0, 0
   index: -1
 monStateUIbg2
   rotate: false
-  xy: 2, 122
-  size: 416, 56
-  orig: 416, 56
-  offset: 0, 0
-  index: -1
-monStateUIL
-  rotate: false
-  xy: 2, 62
-  size: 416, 56
-  orig: 416, 56
-  offset: 0, 0
-  index: -1
-monStateUIname
-  rotate: false
-  xy: 2, 2
+  xy: 1, 15
   size: 416, 56
   orig: 416, 56
   offset: 0, 0
   index: -1
 b-bag-down
   rotate: false
-  xy: 454, 194
+  xy: 451, 83
   size: 240, 224
   orig: 240, 224
   offset: 0, 0
   index: -1
 b-bag
   rotate: false
-  xy: 698, 194
+  xy: 693, 83
   size: 240, 224
   orig: 240, 224
   offset: 0, 0
   index: -1
-b13down
+monStateUIL
   rotate: false
-  xy: 454, 126
-  size: 400, 64
-  orig: 400, 64
+  xy: 451, 25
+  size: 416, 56
+  orig: 416, 56
   offset: 0, 0
   index: -1
-b-mouse-l-down
+b-next-down
   rotate: false
-  xy: 422, 2
-  size: 256, 120
-  orig: 256, 120
+  xy: 803, 329
+  size: 104, 120
+  orig: 104, 120
   offset: 0, 0
   index: -1
-b-mouse-l-up
+b-back-down
   rotate: false
-  xy: 682, 2
-  size: 256, 120
-  orig: 256, 120
+  xy: 899, 557
+  size: 104, 120
+  orig: 104, 120
+  offset: 0, 0
+  index: -1
+scroll-down-l-down
+  rotate: false
+  xy: 935, 443
+  size: 88, 112
+  orig: 88, 112
+  offset: 0, 0
+  index: -1
+scroll-down-l-up
+  rotate: false
+  xy: 935, 329
+  size: 88, 112
+  orig: 88, 112
+  offset: 0, 0
+  index: -1
+scroll-down-r-down
+  rotate: false
+  xy: 935, 215
+  size: 88, 112
+  orig: 88, 112
+  offset: 0, 0
+  index: -1
+scroll-down-r-up
+  rotate: false
+  xy: 935, 101
+  size: 88, 112
+  orig: 88, 112
   offset: 0, 0
   index: -1
 choice-l-down
   rotate: false
-  xy: 966, 942
+  xy: 963, 940
   size: 56, 80
   orig: 56, 80
   offset: 0, 0
   index: -1
 choice-l-up
   rotate: false
-  xy: 966, 858
+  xy: 963, 858
   size: 56, 80
   orig: 56, 80
-  offset: 0, 0
-  index: -1
-b-next-down
-  rotate: false
-  xy: 806, 442
-  size: 104, 120
-  orig: 104, 120
   offset: 0, 0
   index: -1
 choice-r-down
   rotate: false
-  xy: 966, 774
+  xy: 963, 776
   size: 56, 80
   orig: 56, 80
-  offset: 0, 0
-  index: -1
-b-back-down
-  rotate: false
-  xy: 902, 650
-  size: 104, 120
-  orig: 104, 120
   offset: 0, 0
   index: -1
 choice-r-up
   rotate: false
-  xy: 902, 566
+  xy: 869, 1
   size: 56, 80
   orig: 56, 80
   offset: 0, 0
   index: -1
-b-back-up
-  rotate: false
-  xy: 914, 442
-  size: 104, 120
-  orig: 104, 120
-  offset: 0, 0
-  index: -1
 monStateWidgetRing
   rotate: false
-  xy: 858, 134
+  xy: 939, 718
   size: 56, 56
   orig: 56, 56
   offset: 0, 0
   index: -1
 indicator
   rotate: false
-  xy: 962, 598
+  xy: 935, 51
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
 blue-bar-lr
   rotate: false
-  xy: 902, 774
+  xy: 419, 51
   size: 21, 20
   split: 5, 12, 6, 5
   orig: 21, 20
@@ -174,14 +174,14 @@ blue-bar-lr
   index: -1
 invis
   rotate: false
-  xy: 806, 422
+  xy: 899, 539
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 green-progress-bar
   rotate: false
-  xy: 422, 167
+  xy: 803, 316
   size: 19, 11
   split: 7, 6, 3, 3
   orig: 19, 11
@@ -189,14 +189,14 @@ green-progress-bar
   index: -1
 black
   rotate: false
-  xy: 918, 182
+  xy: 1, 5
   size: 8, 8
   orig: 8, 8
   offset: 0, 0
   index: -1
 yellow-progress-bar
   rotate: false
-  xy: 1010, 763
+  xy: 939, 709
   size: 9, 7
   split: 3, 3, 3, 3
   orig: 9, 7
@@ -205,158 +205,179 @@ yellow-progress-bar
 
 battleUI2.png
 format: RGBA8888
-filter: Linear,Linear
+filter: MipMapLinearNearest,MipMapLinearNearest
 repeat: none
+monStateUIname
+  rotate: false
+  xy: 1, 963
+  size: 416, 56
+  orig: 416, 56
+  offset: 0, 0
+  index: -1
 b-flee-down
   rotate: false
-  xy: 2, 706
+  xy: 1, 737
   size: 240, 224
   orig: 240, 224
   offset: 0, 0
   index: -1
 b-flee
   rotate: false
-  xy: 2, 478
+  xy: 1, 511
   size: 240, 224
   orig: 240, 224
   offset: 0, 0
   index: -1
-b13up
+b13down
   rotate: false
-  xy: 246, 866
+  xy: 419, 955
   size: 400, 64
   orig: 400, 64
   offset: 0, 0
   index: -1
-b-fight-down
+b-eob-back-down
   rotate: false
-  xy: 2, 250
-  size: 224, 224
-  orig: 224, 224
+  xy: 1, 289
+  size: 228, 220
+  orig: 228, 220
   offset: 0, 0
   index: -1
-b-fight
+b-eob-back
   rotate: false
-  xy: 246, 638
-  size: 224, 224
-  orig: 224, 224
+  xy: 1, 67
+  size: 228, 220
+  orig: 228, 220
+  offset: 0, 0
+  index: -1
+b13up
+  rotate: false
+  xy: 1, 1
+  size: 400, 64
+  orig: 400, 64
   offset: 0, 0
   index: -1
 b9down
   rotate: false
-  xy: 650, 896
+  xy: 403, 919
   size: 364, 34
   orig: 364, 34
   offset: 0, 0
   index: -1
 b9up
   rotate: false
-  xy: 650, 858
+  xy: 403, 883
   size: 364, 34
   orig: 364, 34
   offset: 0, 0
   index: -1
+b-fight-down
+  rotate: false
+  xy: 243, 657
+  size: 224, 224
+  orig: 224, 224
+  offset: 0, 0
+  index: -1
+b-fight
+  rotate: false
+  xy: 469, 657
+  size: 224, 224
+  orig: 224, 224
+  offset: 0, 0
+  index: -1
+b-mouse-l-down
+  rotate: false
+  xy: 243, 535
+  size: 256, 120
+  orig: 256, 120
+  offset: 0, 0
+  index: -1
+b-mouse-l-up
+  rotate: false
+  xy: 501, 535
+  size: 256, 120
+  orig: 256, 120
+  offset: 0, 0
+  index: -1
+b10down
+  rotate: false
+  xy: 243, 495
+  size: 284, 38
+  orig: 284, 38
+  offset: 0, 0
+  index: -1
 b-mouse-r-down
   rotate: false
-  xy: 2, 126
+  xy: 231, 373
   size: 256, 120
   orig: 256, 120
   offset: 0, 0
   index: -1
 b-mouse-r-up
   rotate: false
-  xy: 2, 2
+  xy: 231, 251
   size: 256, 120
   orig: 256, 120
   offset: 0, 0
   index: -1
 b-att-down
   rotate: false
-  xy: 246, 534
+  xy: 231, 149
   size: 264, 100
   orig: 264, 100
-  offset: 0, 0
-  index: -1
-b-att-up
-  rotate: false
-  xy: 246, 430
-  size: 264, 100
-  orig: 264, 100
-  offset: 0, 0
-  index: -1
-b10down
-  rotate: false
-  xy: 230, 388
-  size: 284, 38
-  orig: 284, 38
   offset: 0, 0
   index: -1
 b10up
   rotate: false
-  xy: 230, 346
+  xy: 231, 109
   size: 284, 38
   orig: 284, 38
   offset: 0, 0
   index: -1
-b-next-up
+b-att-up
   rotate: false
-  xy: 474, 742
+  xy: 529, 433
+  size: 264, 100
+  orig: 264, 100
+  offset: 0, 0
+  index: -1
+b-back-up
+  rotate: false
+  xy: 695, 761
   size: 104, 120
   orig: 104, 120
   offset: 0, 0
   index: -1
-scroll-down-l-down
+b-next-up
   rotate: false
-  xy: 582, 742
-  size: 88, 112
-  orig: 88, 112
-  offset: 0, 0
-  index: -1
-scroll-down-l-up
-  rotate: false
-  xy: 674, 742
-  size: 88, 112
-  orig: 88, 112
-  offset: 0, 0
-  index: -1
-scroll-down-r-down
-  rotate: false
-  xy: 766, 742
-  size: 88, 112
-  orig: 88, 112
-  offset: 0, 0
-  index: -1
-scroll-down-r-up
-  rotate: false
-  xy: 858, 742
-  size: 88, 112
-  orig: 88, 112
+  xy: 489, 311
+  size: 104, 120
+  orig: 104, 120
   offset: 0, 0
   index: -1
 scroll-up-l-down
   rotate: false
-  xy: 262, 230
+  xy: 595, 319
   size: 88, 112
   orig: 88, 112
   offset: 0, 0
   index: -1
 scroll-up-l-up
   rotate: false
-  xy: 262, 114
+  xy: 685, 319
   size: 88, 112
   orig: 88, 112
   offset: 0, 0
   index: -1
 scroll-up-r-down
   rotate: false
-  xy: 354, 230
+  xy: 821, 907
   size: 88, 112
   orig: 88, 112
   offset: 0, 0
   index: -1
 scroll-up-r-up
   rotate: false
-  xy: 354, 114
+  xy: 911, 907
   size: 88, 112
   orig: 88, 112
   offset: 0, 0

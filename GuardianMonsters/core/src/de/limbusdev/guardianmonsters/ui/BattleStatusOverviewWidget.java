@@ -2,6 +2,7 @@ package de.limbusdev.guardianmonsters.ui;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Interpolation;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -21,13 +22,13 @@ import de.limbusdev.guardianmonsters.utils.GS;
  * HINT: Don't forget calling the init() method
  * Created by georg on 03.07.16.
  */
-public class BattleStatusOverviewWidget extends WidgetGroup {
+public class BattleStatusOverviewWidget extends WidgetGroup implements BattleWidget {
 
     private Array<MonsterStateWidget> monsterStateWidgetsLeft, monsterStateWidgetsRight;
 
     public BattleStatusOverviewWidget(Skin skin) {
         super();
-
+        this.setBounds(0,0,0,0);
         this.monsterStateWidgetsLeft = new Array<MonsterStateWidget>();
         this.monsterStateWidgetsRight = new Array<MonsterStateWidget>();
 
@@ -60,40 +61,28 @@ public class BattleStatusOverviewWidget extends WidgetGroup {
 
     /**
      *
-     * @param hero heros monsters
+     * @param hero hero's monsters
      * @param oppo opponents monsters
      */
     public void init(Array<MonsterInBattle> hero, Array<MonsterInBattle> oppo) {
-        clear();
 
         // Clear Actions
         for(MonsterStateWidget w : monsterStateWidgetsLeft) w.clearActions();
         for(MonsterStateWidget w : monsterStateWidgetsRight) w.clearActions();
 
-
-        for(MonsterStateWidget w : monsterStateWidgetsLeft) {
-            w.addAction(Actions.alpha(1));
-            w.setVisible(false);
-        }
-        for(MonsterStateWidget w : monsterStateWidgetsRight) {
-            w.addAction(Actions.alpha(1));
-            w.setVisible(false);
-        }
-
-
         // Initialize Status UIs ...................................................................
         // Hero Team
         switch(hero.size) {
             case 3:  monsterStateWidgetsLeft.get(2).init(hero.get(2).monster);
-            case 2:  monsterStateWidgetsLeft.get(2).init(hero.get(2).monster);
-            default: monsterStateWidgetsLeft.get(2).init(hero.get(2).monster);break;
+            case 2:  monsterStateWidgetsLeft.get(1).init(hero.get(2).monster);
+            default: monsterStateWidgetsLeft.get(0).init(hero.get(2).monster);break;
         }
 
         // Opponent Team
         switch(oppo.size) {
             case 3:  monsterStateWidgetsRight.get(2).init(oppo.get(2).monster);
-            case 2:  monsterStateWidgetsRight.get(2).init(oppo.get(2).monster);
-            default: monsterStateWidgetsRight.get(2).init(oppo.get(2).monster);break;
+            case 2:  monsterStateWidgetsRight.get(1).init(oppo.get(2).monster);
+            default: monsterStateWidgetsRight.get(0).init(oppo.get(2).monster);break;
         }
     }
 
@@ -105,7 +94,6 @@ public class BattleStatusOverviewWidget extends WidgetGroup {
             monsterStateWidgetsLeft.get(pos).addAction(
                 Actions.sequence(Actions.alpha(0, 2), Actions.visible(false)));
         }
-
     }
 
 
@@ -116,6 +104,32 @@ public class BattleStatusOverviewWidget extends WidgetGroup {
         private static final IntVector2 statWPos1 = new IntVector2(GS.COL*5,GS.RES_Y-GS.ROW*7);
         private static final IntVector2 statWPos2 = new IntVector2(GS.COL*2,GS.RES_Y-GS.ROW*10);
         private static final IntVector2 statWPos3 = new IntVector2(GS.COL*8,GS.RES_Y-GS.ROW*4);
+    }
+
+    @Override
+    public void addFadeOutAction(float duration) {
+        addAction(Actions.sequence(Actions.alpha(0, duration), Actions.visible(false)));
+    }
+
+    @Override
+    public void addFadeInAction(float duration) {
+        addAction(Actions.sequence(Actions.visible(true), Actions.alpha(1, duration)));
+    }
+
+    @Override
+    public void addFadeOutAndRemoveAction(float duration) {
+        addAction(Actions.sequence(Actions.alpha(0, duration), Actions.visible(false), Actions.run(new Runnable() {
+            @Override
+            public void run() {
+                remove();
+            }
+        })));
+    }
+
+    @Override
+    public void addFadeInAndAddToStageAction(float duration, Stage newParent) {
+        newParent.addActor(this);
+        addAction(Actions.sequence(Actions.visible(true), Actions.alpha(1, duration)));
     }
 
 }

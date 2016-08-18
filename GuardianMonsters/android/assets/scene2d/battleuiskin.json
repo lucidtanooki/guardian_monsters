@@ -22,6 +22,7 @@
 	  b-long:       {down: b-long-down,           up: b-long-up},
       choice-l:     {down: choice-l-down,         up: choice-l-up, checked: choice-l-down},
       choice-r:     {down: choice-r-down,         up: choice-r-up, checked: choice-r-down},
+      b-back-eob:   {down: b-eob-back-down,       up: b-eob-back},
 	  transparent:  { }
   },
   

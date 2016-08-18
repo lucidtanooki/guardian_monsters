@@ -2,11 +2,13 @@ package de.limbusdev.guardianmonsters.ui;
 
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
+
 import de.limbusdev.guardianmonsters.utils.GS;
 
 /**
@@ -14,53 +16,43 @@ import de.limbusdev.guardianmonsters.utils.GS;
  * HINT: Don't forget calling the init() method
  * Created by georg on 03.07.16.
  */
-public class BattleMainMenuWidget extends WidgetGroup implements BattleWidget {
+public class EndOfBattleWidget extends WidgetGroup implements BattleWidget {
 
-    // Buttons
-    private ImageButton swordButton;
-    private ImageButton bagButton;
-    private ImageButton runButton;
-
+    private Image labelBGImg;
+    private Image bgImg;
+    public  Label messageLabel;
+    public ImageButton backButton;
 
     /**
      *
-     * @param skin battle UI skin
+     * @param skin battle action UI skin
      */
-    public BattleMainMenuWidget(Skin skin) {
-        this.setBounds(0,0,GS.RES_X,GS.RES_Y/4);
+    public EndOfBattleWidget(Skin skin) {
+        this.setBounds(0,0,0,0);
 
-        // Fight Button
-        swordButton = new ImageButton(skin, "battle-fight");
-        swordButton.setPosition(GS.RES_X/2, 0, Align.bottom);
+        labelBGImg = new Image(skin.getDrawable("b-long-up"));
+        labelBGImg.setPosition(GS.RES_X / 2, GS.ROW*7, Align.bottom);
+        bgImg      = new Image(skin.getDrawable("eob-pane"));
+        bgImg.setPosition(GS.RES_X / 2, 0, Align.bottom);
 
-        // Escape Button
-        runButton = new ImageButton(skin, "battle-flee");
-        runButton.setPosition(GS.RES_X - GS.ROW*20, 0, Align.bottomRight);
+        addActor(labelBGImg);
+        addActor(bgImg);
 
-        // Bag Button
-        bagButton = new ImageButton(skin, "battle-bag");
-        bagButton.setPosition(GS.ROW*20, 0, Align.bottomLeft);
+        Label.LabelStyle labs = new Label.LabelStyle();
+        labs.font = skin.getFont("default-font");
+        messageLabel = new Label("Game Over", labs);
+        messageLabel.setHeight(64);
+        messageLabel.setWidth(500);
+        messageLabel.setWrap(true);
+        messageLabel.setPosition(GS.RES_X / 2, GS.ROW*8, Align.bottom);
+        addActor(messageLabel);
 
-        this.addActor(swordButton);
-        this.addActor(runButton);
-        this.addActor(bagButton);
+        // Change Screen
+        backButton = new ImageButton(skin, "b-back-eob");
+        backButton.setPosition(GS.RES_X, 0, Align.bottomRight);
+        addActor(backButton);
     }
 
-    /**
-     * Adds a click listener to the sword button
-     * @param cl
-     */
-    public void addSwordButtonListener(ClickListener cl) {
-        swordButton.addListener(cl);
-    }
-
-    public void addRunButtonListener(ClickListener cl) {
-        runButton.addListener(cl);
-    }
-
-    public void addBagButtonListener(ClickListener cl) {
-        bagButton.addListener(cl);
-    }
 
     @Override
     public void addFadeOutAction(float duration) {

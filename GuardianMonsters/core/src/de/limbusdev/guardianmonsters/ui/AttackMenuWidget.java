@@ -1,5 +1,7 @@
 package de.limbusdev.guardianmonsters.ui;
 
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -19,7 +21,7 @@ import de.limbusdev.guardianmonsters.utils.GS;
  * HINT: Don't forget calling the init() method
  * Created by georg on 03.07.16.
  */
-public class AttackMenuWidget extends WidgetGroup {
+public class AttackMenuWidget extends WidgetGroup implements ObservableWidget, BattleWidget {
 
     // Buttons
     private Array<TextButton> attackButtons;
@@ -27,6 +29,8 @@ public class AttackMenuWidget extends WidgetGroup {
     private Array<WidgetObserver> observers;
 
     private Image bgImg;
+
+    public int chosenAttack=0;
 
 
     /**
@@ -47,10 +51,20 @@ public class AttackMenuWidget extends WidgetGroup {
         attackButtons = new Array<TextButton>();
 
 
-        for(int i=0; i<6; i++) {
-                TextButton attButt = new TextButton("attack " + i, skin, "tb-att");
-                attButt.setSize(264, 100);
-                attackButtons.add(attButt);
+        for (int i = 0; i < 6; i++) {
+            final int j = i;
+            TextButton attButt = new TextButton("attack " + i, skin, "tb-att");
+            attButt.setSize(264, 100);
+            attackButtons.add(attButt);
+            attButt.addListener(
+                new ClickListener() {
+                    @Override
+                    public void clicked(InputEvent event, float x, float y) {
+                        chosenAttack = j;
+                        notifyWidgetObservers();
+                    }
+                }
+            );
         }
 
 
@@ -78,20 +92,40 @@ public class AttackMenuWidget extends WidgetGroup {
         }
     }
 
-    public void addListenerToAllButtons(ClickListener cl) {
-        for(TextButton b : attackButtons) b.addListener(cl);
-    }
-
-    public void addListenerToButton(int i, ClickListener cl) {
-        attackButtons.get(i).addListener(cl);
-    }
-
-
+    @Override
     public void addFadeOutAction(float duration) {
         addAction(Actions.sequence(Actions.alpha(0, duration), Actions.visible(false)));
     }
 
+    @Override
     public void addFadeInAction(float duration) {
         addAction(Actions.sequence(Actions.visible(true), Actions.alpha(1, duration)));
+    }
+
+    @Override
+    public void addFadeOutAndRemoveAction(float duration) {
+        addAction(Actions.sequence(Actions.alpha(0, duration), Actions.visible(false), Actions.run(new Runnable() {
+            @Override
+            public void run() {
+                remove();
+            }
+        })));
+    }
+
+    @Override
+    public void addFadeInAndAddToStageAction(float duration, Stage newParent) {
+        newParent.addActor(this);
+        addAction(Actions.sequence(Actions.visible(true), Actions.alpha(1, duration)));
+    }
+
+
+    @Override
+    public void addWidgetObserver(WidgetObserver wo) {
+        observers.add(wo);
+    }
+
+    @Override
+    public void notifyWidgetObservers() {
+        for(WidgetObserver wo : observers) wo.getNotified(this);
     }
 }

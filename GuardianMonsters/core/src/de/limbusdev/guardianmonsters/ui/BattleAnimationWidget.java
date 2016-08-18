@@ -2,6 +2,7 @@ package de.limbusdev.guardianmonsters.ui;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Interpolation;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
@@ -20,7 +21,7 @@ import de.limbusdev.guardianmonsters.utils.GS;
  * HINT: Don't forget calling the init() method
  * Created by georg on 03.07.16.
  */
-public class BattleAnimationWidget extends WidgetGroup implements ObservableWidget {
+public class BattleAnimationWidget extends WidgetGroup implements ObservableWidget, BattleWidget {
 
     private Array<WidgetObserver> observers;
 
@@ -217,5 +218,31 @@ public class BattleAnimationWidget extends WidgetGroup implements ObservableWidg
         private static final IntVector2 OPPO_MID = new IntVector2(GS.RES_X-GS.COL*7,GS.ROW*18);
         private static final IntVector2 OPPO_BOT = new IntVector2(GS.RES_X-GS.COL*1,GS.ROW*15);
         private static final IntVector2 OPPO_TOP = new IntVector2(GS.RES_X-GS.COL*13,GS.ROW*21);
+    }
+
+    @Override
+    public void addFadeOutAction(float duration) {
+        addAction(Actions.sequence(Actions.alpha(0, duration), Actions.visible(false)));
+    }
+
+    @Override
+    public void addFadeInAction(float duration) {
+        addAction(Actions.sequence(Actions.visible(true), Actions.alpha(1, duration)));
+    }
+
+    @Override
+    public void addFadeOutAndRemoveAction(float duration) {
+        addAction(Actions.sequence(Actions.alpha(0, duration), Actions.visible(false), Actions.run(new Runnable() {
+            @Override
+            public void run() {
+                remove();
+            }
+        })));
+    }
+
+    @Override
+    public void addFadeInAndAddToStageAction(float duration, Stage newParent) {
+        newParent.addActor(this);
+        addAction(Actions.sequence(Actions.visible(true), Actions.alpha(1, duration)));
     }
 }

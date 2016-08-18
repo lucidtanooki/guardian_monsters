@@ -1,5 +1,6 @@
 package de.limbusdev.guardianmonsters.ui;
 
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
@@ -16,7 +17,7 @@ import de.limbusdev.guardianmonsters.utils.GS;
  * HINT: Don't forget calling the init() method
  * Created by georg on 03.07.16.
  */
-public class BattleActionMenuWidget extends WidgetGroup {
+public class BattleActionMenuWidget extends WidgetGroup implements BattleWidget {
 
     // Buttons
     public ImageButton backButton;
@@ -88,11 +89,29 @@ public class BattleActionMenuWidget extends WidgetGroup {
     }
 
 
+    @Override
     public void addFadeOutAction(float duration) {
         addAction(Actions.sequence(Actions.alpha(0, duration), Actions.visible(false)));
     }
 
+    @Override
     public void addFadeInAction(float duration) {
+        addAction(Actions.sequence(Actions.visible(true), Actions.alpha(1, duration)));
+    }
+
+    @Override
+    public void addFadeOutAndRemoveAction(float duration) {
+        addAction(Actions.sequence(Actions.alpha(0, duration), Actions.visible(false), Actions.run(new Runnable() {
+            @Override
+            public void run() {
+                remove();
+            }
+        })));
+    }
+
+    @Override
+    public void addFadeInAndAddToStageAction(float duration, Stage newParent) {
+        newParent.addActor(this);
         addAction(Actions.sequence(Actions.visible(true), Actions.alpha(1, duration)));
     }
 }

@@ -1,12 +1,9 @@
 package de.limbusdev.guardianmonsters.ui;
 
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
@@ -21,7 +18,7 @@ import de.limbusdev.guardianmonsters.utils.GS;
  * HINT: Don't forget calling the init() method
  * Created by georg on 03.07.16.
  */
-public class AttackMenuWidget extends WidgetGroup implements ObservableWidget, BattleWidget {
+public class AttackMenuWidget extends BattleWidget implements ObservableWidget {
 
     // Buttons
     private Array<TextButton> attackButtons;
@@ -90,32 +87,6 @@ public class AttackMenuWidget extends WidgetGroup implements ObservableWidget, B
             attackButtons.get(i).setText(att.name + " (" + att.damage + ")");
             i++;
         }
-    }
-
-    @Override
-    public void addFadeOutAction(float duration) {
-        addAction(Actions.sequence(Actions.alpha(0, duration), Actions.visible(false)));
-    }
-
-    @Override
-    public void addFadeInAction(float duration) {
-        addAction(Actions.sequence(Actions.visible(true), Actions.alpha(1, duration)));
-    }
-
-    @Override
-    public void addFadeOutAndRemoveAction(float duration) {
-        addAction(Actions.sequence(Actions.alpha(0, duration), Actions.visible(false), Actions.run(new Runnable() {
-            @Override
-            public void run() {
-                remove();
-            }
-        })));
-    }
-
-    @Override
-    public void addFadeInAndAddToStageAction(float duration, Stage newParent) {
-        newParent.addActor(this);
-        addAction(Actions.sequence(Actions.visible(true), Actions.alpha(1, duration)));
     }
 
 

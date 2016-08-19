@@ -1,12 +1,9 @@
 package de.limbusdev.guardianmonsters.ui;
 
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
@@ -20,7 +17,7 @@ import de.limbusdev.guardianmonsters.utils.GS;
  * HINT: Don't forget calling the init() method
  * Created by georg on 03.07.16.
  */
-public class MonsterIndicatorWidget extends WidgetGroup implements ObservableWidget, BattleWidget {
+public class MonsterIndicatorWidget extends BattleWidget implements ObservableWidget {
 
     private Array<WidgetObserver> observers;
 
@@ -229,31 +226,5 @@ public class MonsterIndicatorWidget extends WidgetGroup implements ObservableWid
                     setIndicatorPosition(side,i);
         }
         notifyWidgetObservers();
-    }
-
-    @Override
-    public void addFadeOutAction(float duration) {
-        addAction(Actions.sequence(Actions.alpha(0, duration), Actions.visible(false)));
-    }
-
-    @Override
-    public void addFadeInAction(float duration) {
-        addAction(Actions.sequence(Actions.visible(true), Actions.alpha(1, duration)));
-    }
-
-    @Override
-    public void addFadeOutAndRemoveAction(float duration) {
-        addAction(Actions.sequence(Actions.alpha(0, duration), Actions.visible(false), Actions.run(new Runnable() {
-            @Override
-            public void run() {
-                remove();
-            }
-        })));
-    }
-
-    @Override
-    public void addFadeInAndAddToStageAction(float duration, Stage newParent) {
-        newParent.addActor(this);
-        addAction(Actions.sequence(Actions.visible(true), Actions.alpha(1, duration)));
     }
 }

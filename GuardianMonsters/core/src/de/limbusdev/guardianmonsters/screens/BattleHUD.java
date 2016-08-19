@@ -534,7 +534,7 @@ public class BattleHUD implements WidgetObserver {
 
         switch(state) {
             case ACTIONMENU:
-                stage.addActor(actionMenu);
+                actionMenu.addToStageAndFadeIn(stage);
                 stage.addActor(indicatorMenu);
                 stage.addActor(statusWidget);
                 break;

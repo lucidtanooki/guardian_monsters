@@ -1,19 +1,11 @@
 package de.limbusdev.guardianmonsters.ui;
 
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Interpolation;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.ArrayMap;
 
-import de.limbusdev.guardianmonsters.enums.SFXType;
 import de.limbusdev.guardianmonsters.geometry.IntVector2;
-import de.limbusdev.guardianmonsters.managers.MediaManager;
 import de.limbusdev.guardianmonsters.model.MonsterInBattle;
 import de.limbusdev.guardianmonsters.utils.GS;
 
@@ -22,7 +14,7 @@ import de.limbusdev.guardianmonsters.utils.GS;
  * HINT: Don't forget calling the init() method
  * Created by georg on 03.07.16.
  */
-public class BattleStatusOverviewWidget extends WidgetGroup implements BattleWidget {
+public class BattleStatusOverviewWidget extends BattleWidget {
 
     private Array<MonsterStateWidget> monsterStateWidgetsLeft, monsterStateWidgetsRight;
 
@@ -106,30 +98,5 @@ public class BattleStatusOverviewWidget extends WidgetGroup implements BattleWid
         private static final IntVector2 statWPos3 = new IntVector2(GS.COL*8,GS.RES_Y-GS.ROW*4);
     }
 
-    @Override
-    public void addFadeOutAction(float duration) {
-        addAction(Actions.sequence(Actions.alpha(0, duration), Actions.visible(false)));
-    }
-
-    @Override
-    public void addFadeInAction(float duration) {
-        addAction(Actions.sequence(Actions.visible(true), Actions.alpha(1, duration)));
-    }
-
-    @Override
-    public void addFadeOutAndRemoveAction(float duration) {
-        addAction(Actions.sequence(Actions.alpha(0, duration), Actions.visible(false), Actions.run(new Runnable() {
-            @Override
-            public void run() {
-                remove();
-            }
-        })));
-    }
-
-    @Override
-    public void addFadeInAndAddToStageAction(float duration, Stage newParent) {
-        newParent.addActor(this);
-        addAction(Actions.sequence(Actions.visible(true), Actions.alpha(1, duration)));
-    }
 
 }

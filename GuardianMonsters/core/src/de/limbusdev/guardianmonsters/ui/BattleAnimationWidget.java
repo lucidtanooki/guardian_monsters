@@ -1,5 +1,6 @@
 package de.limbusdev.guardianmonsters.ui;
 
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
@@ -118,7 +119,7 @@ public class BattleAnimationWidget extends BattleWidget implements ObservableWid
      */
     public void animateAttack(final int attPos, int defPos, boolean side) {
         Image attIm,defIm;
-        IntVector2 startPos,endPos;
+        final IntVector2 startPos,endPos;
         int attAlign, defAlign;
 
         if(side) {
@@ -175,6 +176,21 @@ public class BattleAnimationWidget extends BattleWidget implements ObservableWid
         attIm.addAction(Actions.sequence(
             Actions.delay(.5f),
             Actions.moveToAligned(endPos.x, endPos.y, defAlign, .6f, Interpolation.pow2In),
+            Actions.run(new Runnable() {
+                @Override
+                public void run() {
+                    Animation anim = media.getAttackAnimation("kick");
+                    SelfRemovingAnimation sra = new SelfRemovingAnimation(anim);
+                    if(endPos.x < GS.RES_X/2) {
+                        sra.setPosition(endPos.x+64, endPos.y+64,Align.center);
+                        sra.setScale(2,2);
+                    } else {
+                        sra.setPosition(endPos.x-64, endPos.y+64,Align.center);
+                        sra.setScale(-2,2);
+                    }
+                    addActor(sra);
+                }
+            }),
             Actions.run(new Runnable() {
                 @Override
                 public void run() {

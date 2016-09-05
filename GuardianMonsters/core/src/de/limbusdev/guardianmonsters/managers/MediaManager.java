@@ -35,6 +35,7 @@ public class MediaManager {
     private String logosSpriteSheetFile = "spritesheets/logos.pack";
     private String animations = "spritesheets/animations.pack";
     private String SFXdir = "sfx/hits/";
+    private String battleAnimations = "spritesheets/battleAnimations.pack";
     private Array<String> sfxHits;
     private Array<String> bgs;
     private Array<String> bgMusicTown;
@@ -50,6 +51,7 @@ public class MediaManager {
         assets.load(this.battleUISpriteSheetFile, TextureAtlas.class);
         assets.load(this.UISpriteSheetFile, TextureAtlas.class);
         assets.load(this.animations, TextureAtlas.class);
+        assets.load(this.battleAnimations, TextureAtlas.class);
         assets.load(this.logosSpriteSheetFile, TextureAtlas.class);
         assets.load(this.mainMenuBGImgFile, Texture.class);
         assets.load(this.mainMenuBGImgFile2, Texture.class);
@@ -237,6 +239,12 @@ public class MediaManager {
         }
 
         return sound;
+    }
+
+    public Animation getAttackAnimation(String attack) {
+        TextureAtlas atlas = assets.get("spritesheets/battleAnimations.pack", TextureAtlas.class);
+        Animation anim = new Animation(1f/12f, atlas.findRegions(attack), Animation.PlayMode.NORMAL);
+        return anim;
     }
 
     /**

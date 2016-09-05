@@ -238,14 +238,6 @@ public class BattleHUD implements WidgetObserver {
     private void handleAttack(MonsterInBattle att, MonsterInBattle def) {
         // Remove killed monsters
         if(def.monster.getHP() == 0) kickOutMonster(def);
-
-        // Spread EXP
-        if(def.battleFieldPosition > 2 && def.monster.getHP() == 0) {
-            // Defeated Monster was part of opponents team
-            int exp = def.monster.level * (def.monster.getHPfull() + def.monster.physStrength);
-            exp /= team.size;
-            for (Integer i : team.keys()) if (team.get(i).monster.getHP() > 0) MonsterManager.earnEXP(team.get(i).monster,exp);
-        }
     }
 
 
@@ -491,6 +483,16 @@ public class BattleHUD implements WidgetObserver {
         else
             oppTeam.removeValue(m, true);   // Opponent Team
 
+        // Spread EXP
+        if(!m.battleFieldSide) {
+            // Defeated Monster was part of opponents team
+            int exp = m.monster.level * (m.monster.getHPfull() + m.monster.physStrength);
+            exp /= team.size;
+            for(Integer i : team.keys())
+                if(team.get(i).monster.getHP() > 0)
+                    MonsterManager.earnEXP(team.get(i).monster,exp);
+        }
+
     }
 
     /**
@@ -581,6 +583,7 @@ public class BattleHUD implements WidgetObserver {
      */
     private void changeToWidgetSet(BattleState state) {
 
+        endOfBattleWidget.remove();
         mainMenu.fadeOutAndRemove();
         if(this.state != BattleState.ATTACKMENU) attackMenu.fadeOutAndRemove();
         else attackMenu.remove();

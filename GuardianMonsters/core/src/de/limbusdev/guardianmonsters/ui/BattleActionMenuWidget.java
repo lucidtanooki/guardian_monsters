@@ -93,6 +93,15 @@ public class BattleActionMenuWidget extends BattleWidget {
         setGreenButtonDisabled(false);
     }
 
+    @Override
+    public boolean fadeOutAndRemove() {
+        infoBGImg.remove();
+        infoLabel.remove();
+        addActor(infoBGImg);
+        addActor(infoLabel);
+        return super.fadeOutAndRemove();
+    }
+
     public void fadeOutExceptInfoLabel(Stage stage) {
         super.fadeOutAndRemove();
         stage.addActor(infoBGImg);

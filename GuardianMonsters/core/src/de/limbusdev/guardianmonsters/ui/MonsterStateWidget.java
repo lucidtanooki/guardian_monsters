@@ -35,9 +35,11 @@ public class MonsterStateWidget extends WidgetGroup implements Observer {
         hudBgImg.setPosition(0,0,Align.bottomLeft);
         hudBgImg.setHeight(56);
         hudBgImg.setWidth(416);
+
         hudRingImg = new Image(skin.getDrawable("monStateWidgetRing"));
         hudRingImg.setPosition(GS.COL*12,0,Align.bottomLeft);
         hudRingImg.setSize(56,56);
+
         hudNameImg = new Image(skin.getDrawable("monStateUIname"));
         hudNameImg.setPosition(0,0,Align.bottomLeft);
 
@@ -57,14 +59,13 @@ public class MonsterStateWidget extends WidgetGroup implements Observer {
 
         hpBar.setPosition(240,23,Align.bottomLeft);
         hpBar.setSize(176,19);
-        hpBar.setValue(100);
+        hpBar.setValue(0);
         mpBar.setPosition(240, 13, Align.bottomLeft);
         mpBar.setSize(150,11);
-        mpBar.setValue(100);
-        mpBar.setValue(100);
-        epBar.setPosition(4,4,Align.bottomLeft);
-        epBar.setWidth(200);
-        epBar.setValue(100);
+        mpBar.setValue(0);
+        epBar.setPosition(4,6,Align.bottomLeft);
+        epBar.setSize(200,4);
+        epBar.setValue(0);
 
         hpBar.setAnimateInterpolation(Interpolation.linear);
         hpBar.setAnimateDuration(1f);
@@ -76,11 +77,11 @@ public class MonsterStateWidget extends WidgetGroup implements Observer {
         levelLabel.setPosition(222, 27, Align.center);
 
         // Sorting
+        this.addActor(epBar);
         this.addActor(hudBgImg);
         this.addActor(hudNameImg);
         this.addActor(hpBar);
         this.addActor(mpBar);
-        this.addActor(epBar);
         this.addActor(hudRingImg);
         this.addActor(nameLabel);
         this.addActor(levelLabel);

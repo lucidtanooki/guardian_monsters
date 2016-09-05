@@ -60,22 +60,42 @@ public class BattleStatusOverviewWidget extends BattleWidget {
     public void init(ArrayMap<Integer,MonsterInBattle> hero, ArrayMap<Integer,MonsterInBattle> oppo) {
 
         // Clear Actions
-        for(MonsterStateWidget w : monsterStateWidgetsLeft) w.clearActions();
-        for(MonsterStateWidget w : monsterStateWidgetsRight) w.clearActions();
+        for(MonsterStateWidget w : monsterStateWidgetsLeft) {
+            w.clearActions();
+            w.remove();
+        }
+        for(MonsterStateWidget w : monsterStateWidgetsRight) {
+            w.clearActions();
+            w.remove();
+        }
 
         // Initialize Status UIs ...................................................................
         // Hero Team
         switch(hero.size) {
-            case 3:  monsterStateWidgetsLeft.get(2).init(hero.get(2).monster);
-            case 2:  monsterStateWidgetsLeft.get(1).init(hero.get(1).monster);
-            default: monsterStateWidgetsLeft.get(0).init(hero.get(0).monster);break;
+            case 3:
+                monsterStateWidgetsLeft.get(2).init(hero.get(2).monster);
+                addActor(monsterStateWidgetsLeft.get(2));
+            case 2:
+                monsterStateWidgetsLeft.get(1).init(hero.get(1).monster);
+                addActor(monsterStateWidgetsLeft.get(1));
+            default:
+                monsterStateWidgetsLeft.get(0).init(hero.get(0).monster);
+                addActor(monsterStateWidgetsLeft.get(0));
+                break;
         }
 
         // Opponent Team
         switch(oppo.size) {
-            case 3:  monsterStateWidgetsRight.get(2).init(oppo.get(2).monster);
-            case 2:  monsterStateWidgetsRight.get(1).init(oppo.get(1).monster);
-            default: monsterStateWidgetsRight.get(0).init(oppo.get(0).monster);break;
+            case 3:
+                monsterStateWidgetsRight.get(2).init(oppo.get(2).monster);
+                addActor(monsterStateWidgetsRight.get(2));
+            case 2:
+                monsterStateWidgetsRight.get(1).init(oppo.get(1).monster);
+                addActor(monsterStateWidgetsRight.get(1));
+            default:
+                monsterStateWidgetsRight.get(0).init(oppo.get(0).monster);
+                addActor(monsterStateWidgetsRight.get(0));
+                break;
         }
     }
 

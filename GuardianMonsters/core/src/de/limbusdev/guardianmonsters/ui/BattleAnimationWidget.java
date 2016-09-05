@@ -43,20 +43,30 @@ public class BattleAnimationWidget extends BattleWidget implements ObservableWid
      * @param hero heros monsters
      * @param oppo opponents monsters
      */
-    public void init(Array<MonsterInBattle> hero, Array<MonsterInBattle> oppo) {
+    public void init(ArrayMap<Integer,MonsterInBattle> hero, ArrayMap<Integer,MonsterInBattle> oppo) {
         clear();
 
         monsterImgsLeft.clear();
         monsterImgsRight.clear();
-        for(MonsterInBattle m : hero)
-            setUpMonsterSprite(m.monster.ID, m.battleFieldPosition, m.battleFieldSide);
-        for(MonsterInBattle m : oppo)
-            setUpMonsterSprite(m.monster.ID, m.battleFieldPosition, m.battleFieldSide);
 
-        for(Integer key : monsterImgsLeft.keys())
-            addActor(monsterImgsLeft.get(key));
-        for(Integer key : monsterImgsRight.keys())
-            addActor(monsterImgsRight.get(key));
+        for(Integer key : hero.keys()) {
+            MonsterInBattle m = hero.get(key);
+            setUpMonsterSprite(m.monster.ID, m.battleFieldPosition, m.battleFieldSide);
+        }
+
+        for(Integer key : oppo.keys()) {
+            MonsterInBattle m = oppo.get(key);
+            setUpMonsterSprite(m.monster.ID, m.battleFieldPosition, m.battleFieldSide);
+        }
+
+        // Correct Image Sorting
+        if(hero.containsKey(2) && !hero.get(2).KO) addActor(monsterImgsLeft.get(2));
+        if(hero.containsKey(0) && !hero.get(0).KO) addActor(monsterImgsLeft.get(0));
+        if(hero.containsKey(1) && !hero.get(1).KO) addActor(monsterImgsLeft.get(1));
+
+        if(oppo.containsKey(2) && !oppo.get(2).KO) addActor(monsterImgsRight.get(2));
+        if(oppo.containsKey(0) && !oppo.get(0).KO) addActor(monsterImgsRight.get(0));
+        if(oppo.containsKey(1) && !oppo.get(1).KO) addActor(monsterImgsRight.get(1));
     }
 
     /**
@@ -163,6 +173,7 @@ public class BattleAnimationWidget extends BattleWidget implements ObservableWid
         if(side) attIm = monsterImgsLeft.get(attPos);
         else attIm = monsterImgsRight.get(attPos);
         attIm.addAction(Actions.sequence(
+            Actions.delay(.5f),
             Actions.moveToAligned(endPos.x, endPos.y, defAlign, .6f, Interpolation.pow2In),
             Actions.run(new Runnable() {
                 @Override
@@ -170,19 +181,19 @@ public class BattleAnimationWidget extends BattleWidget implements ObservableWid
                     media.getSFX(SFXType.HIT, 0).play();
                 }
             }),
-            Actions.moveToAligned(startPos.x, startPos.y, attAlign, .3f, Interpolation.pow2Out),
-            Actions.delay(.5f),
             Actions.run(new Runnable() {
                 @Override
                 public void run() {
                     attackAnimationRunning=false;
                     notifyWidgetObservers();
                 }
-            })
+            }),
+            Actions.moveToAligned(startPos.x, startPos.y, attAlign, .3f, Interpolation.pow2Out)
         ));
         if(side) defIm = monsterImgsRight.get(defPos);
         else defIm = monsterImgsLeft.get(defPos);
         defIm.addAction(Actions.sequence(
+            Actions.delay(.5f),
             Actions.delay(.6f), Actions.moveBy(0, 15, .1f, Interpolation.bounceIn),
             Actions.moveBy(0, -15, .1f, Interpolation.bounceIn)
         ));

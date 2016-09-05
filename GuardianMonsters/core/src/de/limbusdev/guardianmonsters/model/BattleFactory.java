@@ -18,18 +18,18 @@ public class BattleFactory {
 
     private BattleFactory() {
         this.monsters = new Array<Monster>();
-        for(int i = 0; i< GS.MONSTER_SPRITES; i++) {
-            Monster mon = new Monster();
+        for(int i = 1; i< 10; i++) {
+            System.out.println("Creating Monster Nr. " + i);
+            Monster mon = new Monster(i);
             mon.ID = i+1;
-            monsters.add(new Monster());
+            monsters.add(mon);
         }
     }
     /* ............................................................................... METHODS .. */
     
     /* ..................................................................... GETTERS & SETTERS .. */
     public Monster createMonster(int ID) {
-        Monster monster = new Monster();
-        monster.ID = ID;
+        Monster monster = new Monster(ID);
         this.monsters.add(monster);
         return monster;
     }

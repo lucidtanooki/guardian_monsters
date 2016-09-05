@@ -2,6 +2,7 @@ package de.limbusdev.guardianmonsters.ui;
 
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -16,12 +17,15 @@ import de.limbusdev.guardianmonsters.utils.GS;
 /**
  * Widget for displaying monster status in battle: HP, MP, EXP, Name, Level
  * HINT: Don't forget calling the init() method
+ *
+ * If the return value is negative, user touched the back button
  * Created by georg on 03.07.16.
  */
 public class AttackMenuWidget extends BattleWidget implements ObservableWidget {
 
     // Buttons
     private Array<TextButton> attackButtons;
+    private ImageButton backButton;
 
     private Array<WidgetObserver> observers;
 
@@ -76,6 +80,19 @@ public class AttackMenuWidget extends BattleWidget implements ObservableWidget {
         attackButtons.get(3).setPosition(72+168,12,Align.bottomLeft);
         attackButtons.get(4).setPosition(72+168+268,12,Align.bottomLeft);
         attackButtons.get(5).setPosition(72+168+268+268,12,Align.bottomLeft);
+
+        backButton = new ImageButton(skin, "b-back-eob");
+        backButton.addListener(
+            new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    chosenAttack = -1;
+                    notifyWidgetObservers();
+                }
+            }
+        );
+        backButton.setPosition(GS.RES_X,0,Align.bottomRight);
+        addActor(backButton);
     }
 
     public void init(Array<Attack> attacks) {
@@ -92,7 +109,7 @@ public class AttackMenuWidget extends BattleWidget implements ObservableWidget {
 
     @Override
     public void addWidgetObserver(WidgetObserver wo) {
-        observers.add(wo);
+        if(!observers.contains(wo, true)) observers.add(wo);
     }
 
     @Override

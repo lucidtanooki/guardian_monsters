@@ -2,8 +2,10 @@ package de.limbusdev.guardianmonsters.model;
 
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.ObjectMap;
 
 
+import java.util.Map;
 import java.util.Observable;
 
 import de.limbusdev.guardianmonsters.enums.AttackType;
@@ -46,12 +48,12 @@ public class Monster extends Observable {
 
     /* ........................................................................... CONSTRUCTOR .. */
 
-    public Monster() {
+    public Monster(int ID) {
         super();
         this.INSTANCE_ID =INSTANCECOUNTER;
         INSTANCECOUNTER++;
         // STATUS
-        this.ID = 1;
+        this.ID = ID;
         this.level = 1;
         this.exp = 0;
         this.physStrength = 10;
@@ -64,8 +66,12 @@ public class Monster extends Observable {
 
         // INIT
         this.attacks = new Array<Attack>();
+
+        for(ObjectMap.Entry<Integer,Attack> e : MonsterInformation.getInstance().statusInfos.get(ID).learnableAttacks)
+            attacks.add(e.value);
+
+
         attacks.add(new Attack(AttackType.PHYSICAL, 5, "Scratch", SFXType.HIT, 0));
-        attacks.add(new Attack(AttackType.PHYSICAL, 10, "Kick", SFXType.CUT, 0));
         attacks.add(new Attack(AttackType.PHYSICAL, 10, "Kick", SFXType.CUT, 0));
     }
     /* ............................................................................... METHODS .. */

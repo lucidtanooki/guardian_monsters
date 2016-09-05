@@ -4,6 +4,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.ArrayMap;
 
 import de.limbusdev.guardianmonsters.geometry.IntVector2;
 import de.limbusdev.guardianmonsters.model.MonsterInBattle;
@@ -56,7 +57,7 @@ public class BattleStatusOverviewWidget extends BattleWidget {
      * @param hero hero's monsters
      * @param oppo opponents monsters
      */
-    public void init(Array<MonsterInBattle> hero, Array<MonsterInBattle> oppo) {
+    public void init(ArrayMap<Integer,MonsterInBattle> hero, ArrayMap<Integer,MonsterInBattle> oppo) {
 
         // Clear Actions
         for(MonsterStateWidget w : monsterStateWidgetsLeft) w.clearActions();
@@ -66,15 +67,15 @@ public class BattleStatusOverviewWidget extends BattleWidget {
         // Hero Team
         switch(hero.size) {
             case 3:  monsterStateWidgetsLeft.get(2).init(hero.get(2).monster);
-            case 2:  monsterStateWidgetsLeft.get(1).init(hero.get(2).monster);
-            default: monsterStateWidgetsLeft.get(0).init(hero.get(2).monster);break;
+            case 2:  monsterStateWidgetsLeft.get(1).init(hero.get(1).monster);
+            default: monsterStateWidgetsLeft.get(0).init(hero.get(0).monster);break;
         }
 
         // Opponent Team
         switch(oppo.size) {
             case 3:  monsterStateWidgetsRight.get(2).init(oppo.get(2).monster);
-            case 2:  monsterStateWidgetsRight.get(1).init(oppo.get(2).monster);
-            default: monsterStateWidgetsRight.get(0).init(oppo.get(2).monster);break;
+            case 2:  monsterStateWidgetsRight.get(1).init(oppo.get(1).monster);
+            default: monsterStateWidgetsRight.get(0).init(oppo.get(0).monster);break;
         }
     }
 
@@ -83,7 +84,7 @@ public class BattleStatusOverviewWidget extends BattleWidget {
             monsterStateWidgetsLeft.get(pos).addAction(
                 Actions.sequence(Actions.alpha(0, 2), Actions.visible(false)));
         } else {
-            monsterStateWidgetsLeft.get(pos).addAction(
+            monsterStateWidgetsRight.get(pos).addAction(
                 Actions.sequence(Actions.alpha(0, 2), Actions.visible(false)));
         }
     }

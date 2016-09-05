@@ -1,5 +1,6 @@
 package de.limbusdev.guardianmonsters.ui;
 
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
@@ -86,5 +87,25 @@ public class BattleActionMenuWidget extends BattleWidget {
             greenButton.setDisabled(false);
             greenButton.addAction(Actions.alpha(1f));
         }
+    }
+
+    public void reset() {
+        setGreenButtonDisabled(false);
+    }
+
+    public void fadeOutExceptInfoLabel(Stage stage) {
+        super.fadeOutAndRemove();
+        stage.addActor(infoBGImg);
+        stage.addActor(infoLabel);
+    }
+
+    @Override
+    public void addToStageAndFadeIn(Stage newParent) {
+        infoLabel.setText("Please prepare your attack.");
+        infoBGImg.remove();
+        infoLabel.remove();
+        addActor(infoBGImg);
+        addActor(infoLabel);
+        super.addToStageAndFadeIn(newParent);
     }
 }

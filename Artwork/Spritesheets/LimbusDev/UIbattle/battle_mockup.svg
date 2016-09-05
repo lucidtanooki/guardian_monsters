@@ -115,9 +115,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2"
-     inkscape:cx="3219.3716"
-     inkscape:cy="1143.0523"
+     inkscape:zoom="8"
+     inkscape:cx="16.737442"
+     inkscape:cy="1301.676"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -1823,27 +1823,24 @@
     <rect
        style="opacity:1;fill:#a40000;fill-opacity:1;stroke:none;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="rect4404"
-       width="56"
-       height="80"
-       x="-40"
-       y="-291.63782"
+       width="67.199997"
+       height="63.999996"
+       x="-35.199997"
+       y="-283.63782"
        rx="0"
        ry="0"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
-    <rect
-       ry="7.9999976"
-       rx="8"
-       y="-287.63782"
-       x="-74"
-       height="72.000031"
-       width="88"
+    <path
+       style="opacity:0.5;fill:#000000;fill-opacity:1;stroke:#ffffff;stroke-width:3.11110806;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       d="m -55.111083,-279.63779 55.99994651,0 26.44441949,27.99997 -26.44441949,28 -55.99994651,0 c -3.447108,0 -6.222216,-2.77511 -6.222216,-6.22221 l 0,-43.55554 c 0,-3.44711 2.775108,-6.22222 6.222216,-6.22222 z"
        id="rect4405"
-       style="opacity:0.5;fill:#000000;fill-opacity:1;stroke:#ffffff;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="scccssss" />
     <path
        inkscape:connector-curvature="0"
        id="path4411"
-       d="m 4,-251.6378 -25.60001,-25.6 0,51.19999 z"
+       d="m 13.644399,-251.6378 -17.4221977,-17.42219 0,34.84437 z"
        style="opacity:0.5;fill:#ffffff;stroke:none" />
     <rect
        style="opacity:1;fill:#729fcf;fill-opacity:1;stroke:none;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"

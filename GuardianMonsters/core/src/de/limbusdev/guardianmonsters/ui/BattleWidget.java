@@ -43,23 +43,19 @@ public abstract class BattleWidget extends WidgetGroup {
 
     public void addToStageAndFadeIn(Stage newParent) {
         clearActions();
-        addAction(Actions.alpha(0));
-        act(1);
         addToStage(newParent);
-        addAction(Actions.sequence(Actions.alpha(1,.3f)));
+        addAction(Actions.sequence(Actions.alpha(0),Actions.fadeIn(.5f)));
     }
 
-    @Override
-    public boolean remove () {
+    public boolean fadeOutAndRemove () {
         if (getParent() != null) {
-            addAction(Actions.sequence(Actions.alpha(0, .3f), Actions.run(runnableRemove),
-                Actions.alpha(1), Actions.run(runnableAct)));
+            addAction(Actions.sequence(Actions.alpha(1), Actions.alpha(0, .3f), Actions.run(runnableRemove)));
             return true;
         }
         else return false;
     }
 
-    private void addToStage(Stage stage) {
+    public void addToStage(Stage stage) {
         if(getParent() == null) stage.addActor(this);
     }
     private boolean superRemove() {

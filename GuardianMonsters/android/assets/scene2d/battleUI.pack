@@ -1,187 +1,180 @@
 
 battleUI.png
 format: RGBA8888
-filter: MipMapLinearNearest,MipMapLinearNearest
+filter: MipMapLinearLinear,MipMapLinearLinear
 repeat: none
 attPane
   rotate: false
-  xy: 1, 796
+  xy: 1, 795
   size: 960, 224
   orig: 960, 224
   offset: 0, 0
   index: -1
 eob-pane
   rotate: false
-  xy: 1, 679
+  xy: 1, 678
   size: 936, 115
   orig: 936, 115
   offset: 0, 0
   index: -1
 b-long-down
   rotate: false
-  xy: 1, 565
+  xy: 1, 564
   size: 896, 112
   orig: 896, 112
   offset: 0, 0
   index: -1
 b-long-up
   rotate: false
-  xy: 1, 451
+  xy: 1, 450
   size: 896, 112
   orig: 896, 112
   offset: 0, 0
   index: -1
 bg
   rotate: false
-  xy: 1, 309
+  xy: 1, 308
   size: 800, 140
   orig: 800, 140
   offset: 0, 0
   index: -1
 b-attack-down
   rotate: false
-  xy: 1, 191
+  xy: 1, 190
   size: 448, 116
   orig: 448, 116
   offset: 0, 0
   index: -1
 b-attack-up
   rotate: false
-  xy: 1, 73
+  xy: 1, 72
   size: 448, 116
   orig: 448, 116
   offset: 0, 0
   index: -1
 monStateUIbg2
   rotate: false
-  xy: 1, 15
+  xy: 1, 14
   size: 416, 56
   orig: 416, 56
   offset: 0, 0
   index: -1
 b-bag-down
   rotate: false
-  xy: 451, 83
+  xy: 451, 82
   size: 240, 224
   orig: 240, 224
   offset: 0, 0
   index: -1
 b-bag
   rotate: false
-  xy: 693, 83
+  xy: 693, 82
   size: 240, 224
   orig: 240, 224
   offset: 0, 0
   index: -1
 monStateUIL
   rotate: false
-  xy: 451, 25
+  xy: 451, 24
   size: 416, 56
   orig: 416, 56
   offset: 0, 0
   index: -1
 b-next-down
   rotate: false
-  xy: 803, 329
+  xy: 803, 328
   size: 104, 120
   orig: 104, 120
   offset: 0, 0
   index: -1
 b-back-down
   rotate: false
-  xy: 899, 557
+  xy: 899, 556
   size: 104, 120
   orig: 104, 120
   offset: 0, 0
   index: -1
 scroll-down-l-down
   rotate: false
-  xy: 935, 443
+  xy: 935, 442
   size: 88, 112
   orig: 88, 112
   offset: 0, 0
   index: -1
 scroll-down-l-up
   rotate: false
-  xy: 935, 329
+  xy: 935, 328
   size: 88, 112
   orig: 88, 112
   offset: 0, 0
   index: -1
 scroll-down-r-down
   rotate: false
-  xy: 935, 215
+  xy: 935, 214
   size: 88, 112
   orig: 88, 112
   offset: 0, 0
   index: -1
 scroll-down-r-up
   rotate: false
-  xy: 935, 101
+  xy: 935, 100
   size: 88, 112
   orig: 88, 112
   offset: 0, 0
   index: -1
 choice-l-down
   rotate: false
-  xy: 963, 940
-  size: 56, 80
-  orig: 56, 80
+  xy: 869, 16
+  size: 67, 64
+  orig: 67, 64
   offset: 0, 0
   index: -1
 choice-l-up
   rotate: false
-  xy: 963, 858
-  size: 56, 80
-  orig: 56, 80
-  offset: 0, 0
-  index: -1
-choice-r-down
-  rotate: false
-  xy: 963, 776
-  size: 56, 80
-  orig: 56, 80
-  offset: 0, 0
-  index: -1
-choice-r-up
-  rotate: false
-  xy: 869, 1
-  size: 56, 80
-  orig: 56, 80
+  xy: 938, 34
+  size: 67, 64
+  orig: 67, 64
   offset: 0, 0
   index: -1
 monStateWidgetRing
   rotate: false
-  xy: 939, 718
+  xy: 963, 963
   size: 56, 56
   orig: 56, 56
   offset: 0, 0
   index: -1
 indicator
   rotate: false
-  xy: 935, 51
+  xy: 963, 913
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
+choice-r-down
+  rotate: false
+  xy: 939, 729
+  size: 67, 64
+  orig: 67, 64
+  offset: 0, 0
+  index: -1
+invis
+  rotate: false
+  xy: 1007, 82
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
 blue-bar-lr
   rotate: false
-  xy: 419, 51
+  xy: 419, 50
   size: 21, 20
   split: 5, 12, 6, 5
   orig: 21, 20
   offset: 0, 0
   index: -1
-invis
-  rotate: false
-  xy: 899, 539
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: -1
 green-progress-bar
   rotate: false
-  xy: 803, 316
+  xy: 1, 1
   size: 19, 11
   split: 7, 6, 3, 3
   orig: 19, 11
@@ -189,14 +182,14 @@ green-progress-bar
   index: -1
 black
   rotate: false
-  xy: 1, 5
+  xy: 899, 546
   size: 8, 8
   orig: 8, 8
   offset: 0, 0
   index: -1
 yellow-progress-bar
   rotate: false
-  xy: 939, 709
+  xy: 909, 547
   size: 9, 7
   split: 3, 3, 3, 3
   orig: 9, 7
@@ -205,7 +198,7 @@ yellow-progress-bar
 
 battleUI2.png
 format: RGBA8888
-filter: MipMapLinearNearest,MipMapLinearNearest
+filter: MipMapLinearLinear,MipMapLinearLinear
 repeat: none
 monStateUIname
   rotate: false
@@ -380,5 +373,12 @@ scroll-up-r-up
   xy: 911, 907
   size: 88, 112
   orig: 88, 112
+  offset: 0, 0
+  index: -1
+choice-r-up
+  rotate: false
+  xy: 243, 897
+  size: 67, 64
+  orig: 67, 64
   offset: 0, 0
   index: -1

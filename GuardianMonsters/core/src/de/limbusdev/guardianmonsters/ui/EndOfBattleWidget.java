@@ -37,7 +37,7 @@ public class EndOfBattleWidget extends BattleWidget {
 
         Label.LabelStyle labs = new Label.LabelStyle();
         labs.font = skin.getFont("default-font");
-        messageLabel = new Label("Game Over", labs);
+        messageLabel = new Label("---", labs);
         messageLabel.setHeight(64);
         messageLabel.setWidth(500);
         messageLabel.setWrap(true);
@@ -48,6 +48,19 @@ public class EndOfBattleWidget extends BattleWidget {
         backButton = new ImageButton(skin, "b-back-eob");
         backButton.setPosition(GS.RES_X, 0, Align.bottomRight);
         addActor(backButton);
+    }
+
+    /**
+     * true = hero won
+     * false = opponent won
+     * @param won
+     */
+    public void init(boolean won) {
+        if(won) {
+            messageLabel.setText("You won!");
+        } else {
+            messageLabel.setText("Game Over!");
+        }
     }
 
 

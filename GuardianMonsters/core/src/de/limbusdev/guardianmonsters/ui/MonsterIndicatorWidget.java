@@ -1,14 +1,13 @@
 package de.limbusdev.guardianmonsters.ui;
 
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.ArrayMap;
 
-import de.limbusdev.guardianmonsters.geometry.IntVector2;
 import de.limbusdev.guardianmonsters.model.MonsterInBattle;
 import de.limbusdev.guardianmonsters.utils.GS;
 
@@ -23,7 +22,6 @@ public class MonsterIndicatorWidget extends BattleWidget implements ObservableWi
 
     // Buttons
     public Array<ImageButton> indicatorButtonsHero, indicatorButtonsOpponent;
-    private Image indicatorHero, indicatorOpponent;
 
     public int chosenMember, chosenOpponent;
 
@@ -104,11 +102,6 @@ public class MonsterIndicatorWidget extends BattleWidget implements ObservableWi
             }
         });
 
-        // Battle HUD Monster Indicators
-        indicatorOpponent = new Image(skin.getDrawable("indicator"));
-        indicatorHero = new Image(skin.getDrawable("indicator"));
-
-
     }
 
     private void initializeAttributes() {
@@ -126,49 +119,52 @@ public class MonsterIndicatorWidget extends BattleWidget implements ObservableWi
      * @param hero heros monsters
      * @param oppo opponents monsters
      */
-    public void init(Array<MonsterInBattle> hero, Array<MonsterInBattle> oppo) {
+    public void init(ArrayMap<Integer,MonsterInBattle> hero, ArrayMap<Integer,MonsterInBattle> oppo) {
         clear();
         initializeAttributes();
 
-        int i=0;
-        for(MonsterInBattle m : hero) {
-            addActor(indicatorButtonsHero.get(i));
-            indicatorButtonsHero.get(i).setVisible(true);
-            availableChoicesHero.set(i,true);
-            i++;
+        for(Integer key : hero.keys()) {
+            MonsterInBattle m = hero.get(key);
+            indicatorButtonsHero.get(m.battleFieldPosition).setVisible(true);
+            addActor(indicatorButtonsHero.get(m.battleFieldPosition));
+            availableChoicesHero.set(m.battleFieldPosition,true);
         }
-        i=0;
-        for(MonsterInBattle m : oppo) {
-            addActor(indicatorButtonsOpponent.get(i));
-            indicatorButtonsOpponent.get(i).setVisible(true);
-            availableChoicesOpponent.set(i,true);
-            i++;
+        for(Integer key : oppo.keys()) {
+            MonsterInBattle m = oppo.get(key);
+            indicatorButtonsOpponent.get(m.battleFieldPosition).setVisible(true);
+            addActor(indicatorButtonsOpponent.get(m.battleFieldPosition));
+            availableChoicesOpponent.set(m.battleFieldPosition,true);
         }
 
-        setIndicatorPosition(true,0);
-        setIndicatorPosition(false,0);
-        addActor(indicatorHero);
-        addActor(indicatorOpponent);
+        int indicatorStartPosHero = 0;
+        int indicatorStartPosOppo = 0;
+
+        for(Integer key : hero.keys()) {
+            MonsterInBattle m = hero.get(key);
+            if(!m.KO) {
+                indicatorStartPosHero = key;
+                break;
+            }
+        }
+
+        for(Integer key : oppo.keys()) {
+            MonsterInBattle m = oppo.get(key);
+            if(!m.KO) {
+                indicatorStartPosOppo = key;
+                break;
+            }
+        }
+
+        setIndicatorPosition(true,  hero.get(indicatorStartPosHero).battleFieldPosition);
+        setIndicatorPosition(false, oppo.get(indicatorStartPosOppo).battleFieldPosition);
     }
 
     private void setIndicatorPosition(boolean heroesTeam, int pos) {
-        if(heroesTeam) {
-            switch(pos) {
-                case 2:  indicatorHero.setPosition(IndPos.HERO_TOP.x, IndPos.HERO_TOP.y, Align.center);break;
-                case 1:  indicatorHero.setPosition(IndPos.HERO_BOT.x, IndPos.HERO_BOT.y, Align.center);break;
-                default: indicatorHero.setPosition(IndPos.HERO_MID.x, IndPos.HERO_MID.y, Align.center);break;
-            }
-            setIndicatorButtonChecked(pos,heroesTeam);
-            chosenMember = pos;
-        } else {
-            switch(pos) {
-                case 2:indicatorOpponent.setPosition(IndPos.OPPO_TOP.x, IndPos.OPPO_TOP.y, Align.center);break;
-                case 1:indicatorOpponent.setPosition(IndPos.OPPO_BOT.x, IndPos.OPPO_BOT.y, Align.center);break;
-                default:indicatorOpponent.setPosition(IndPos.OPPO_MID.x, IndPos.OPPO_MID.y, Align.center);break;
-            }
-            setIndicatorButtonChecked(pos,heroesTeam);
-            chosenOpponent = pos;
-        }
+        System.out.println("Choosing monster: " + (heroesTeam ? "left" : "right") + " " + pos);
+        if(heroesTeam) chosenMember = pos;
+        else chosenOpponent = pos;
+
+        setIndicatorButtonChecked(pos,heroesTeam);
         notifyWidgetObservers();
     }
 
@@ -182,8 +178,12 @@ public class MonsterIndicatorWidget extends BattleWidget implements ObservableWi
         if(side) buttons = indicatorButtonsHero;
         else buttons = indicatorButtonsOpponent;
 
-        for(ImageButton b : buttons) b.setChecked(false);
+        for(ImageButton b : buttons) {
+            b.setProgrammaticChangeEvents(true);
+            b.setChecked(false);
+        }
         buttons.get(pos).setChecked(true);
+
     }
 
     @Override
@@ -194,16 +194,6 @@ public class MonsterIndicatorWidget extends BattleWidget implements ObservableWi
     @Override
     public void notifyWidgetObservers() {
         for(WidgetObserver wo : observers) wo.getNotified(this);
-    }
-
-
-    private final static class IndPos {
-        private static final IntVector2 HERO_TOP  = new IntVector2(GS.COL*19, GS.ROW*34);
-        private static final IntVector2 HERO_MID  = new IntVector2(GS.COL*13, GS.ROW*31);
-        private static final IntVector2 HERO_BOT  = new IntVector2(GS.COL*7, GS.ROW*28);
-        private static final IntVector2 OPPO_TOP  = new IntVector2(GS.RES_X-HERO_TOP.x, HERO_TOP.y);
-        private static final IntVector2 OPPO_MID  = new IntVector2(GS.RES_X-HERO_MID.x, HERO_MID.y);
-        private static final IntVector2 OPPO_BOT  = new IntVector2(GS.RES_X-HERO_BOT.x, HERO_BOT.y);
     }
 
     /**

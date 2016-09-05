@@ -8,9 +8,8 @@ public class MonsterInBattle {
 
 
     // ------------------------------------------------------------------------------- BATTLE STATUS
-    public boolean ready;
+    public boolean attackStarted;
     public boolean KO;
-    public boolean attackingRightNow;   // whether monster is involved in battle right now
     public boolean attackChosen;
     public final boolean battleFieldSide;
     public int     battleFieldPosition;
@@ -24,9 +23,8 @@ public class MonsterInBattle {
         battleFieldSide = side;
 
         // BATTLE
-        this.ready = false;
+        this.attackStarted = false;
         this.KO = false;
-        this.attackingRightNow = false;
         this.attackChosen = false;
         this.nextTarget = 0;
         this.battleFieldPosition = pos;
@@ -41,24 +39,15 @@ public class MonsterInBattle {
     public void prepareForAttack(int targetPosition, int attackIndex) {
         this.nextTarget = targetPosition;
         this.nextAttack = monster.attacks.get(attackIndex);
-        this.ready = false;
+        this.attackStarted = false;
         this.attackChosen = true;
     }
 
-    /**
-     * Call this method as soon as this monster gets removed from the queue
-     */
-    public void finishAttack() {
+    public void newRound() {
+        if(monster.getHP() == 0) KO = true;
         attackChosen = false;
-        attackingRightNow = false;
     }
 
-    /**
-     * Call this method when monster reaches first slot in Queue
-     */
-    public void startAttack() {
-        this.attackingRightNow = true;
-    }
 
     public void update() {
         monster.update();

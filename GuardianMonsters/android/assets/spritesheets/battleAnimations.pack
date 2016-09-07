@@ -3,31 +3,234 @@ battleAnimations.png
 format: RGBA8888
 filter: MipMapNearestNearest,MipMapNearestLinear
 repeat: none
-kick
+Balllightning
   rotate: false
-  xy: 1, 1
-  size: 64, 64
-  orig: 64, 64
+  xy: 1, 781
+  size: 128, 128
+  orig: 128, 128
   offset: 0, 0
   index: 0
-kick
+Balllightning
   rotate: false
-  xy: 67, 1
-  size: 64, 64
-  orig: 64, 64
+  xy: 1, 651
+  size: 128, 128
+  orig: 128, 128
   offset: 0, 0
   index: 1
-kick
+Balllightning
   rotate: false
-  xy: 133, 1
-  size: 64, 64
-  orig: 64, 64
+  xy: 131, 781
+  size: 128, 128
+  orig: 128, 128
   offset: 0, 0
   index: 2
-kick
+Balllightning
   rotate: false
-  xy: 199, 1
-  size: 64, 64
-  orig: 64, 64
+  xy: 1, 521
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 3
+Darkspunk
+  rotate: false
+  xy: 131, 651
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 0
+Darkspunk
+  rotate: false
+  xy: 261, 781
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 1
+Darkspunk
+  rotate: false
+  xy: 1, 391
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 2
+Darkspunk
+  rotate: false
+  xy: 131, 521
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 3
+Embers
+  rotate: false
+  xy: 261, 651
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 0
+Embers
+  rotate: false
+  xy: 391, 781
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 1
+Embers
+  rotate: false
+  xy: 391, 781
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 5
+Embers
+  rotate: false
+  xy: 1, 261
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 2
+Embers
+  rotate: false
+  xy: 1, 261
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 4
+Embers
+  rotate: false
+  xy: 131, 391
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 3
+Fire
+  rotate: false
+  xy: 261, 521
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 0
+Fire
+  rotate: false
+  xy: 391, 651
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 1
+Fire
+  rotate: false
+  xy: 521, 781
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 2
+Fire
+  rotate: false
+  xy: 1, 131
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 3
+Kick
+  rotate: false
+  xy: 131, 261
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 0
+Kick
+  rotate: false
+  xy: 261, 391
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 1
+Kick
+  rotate: false
+  xy: 391, 521
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 2
+Kick
+  rotate: false
+  xy: 521, 651
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 3
+Leafgust
+  rotate: false
+  xy: 651, 781
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 0
+Leafgust
+  rotate: false
+  xy: 1, 1
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 1
+Leafgust
+  rotate: false
+  xy: 131, 131
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 2
+Sprinkle
+  rotate: false
+  xy: 261, 261
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 0
+Sprinkle
+  rotate: false
+  xy: 391, 391
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 1
+Sprinkle
+  rotate: false
+  xy: 521, 521
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 2
+Sprinkle
+  rotate: false
+  xy: 651, 651
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 3
+Thought
+  rotate: false
+  xy: 781, 781
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 0
+Thought
+  rotate: false
+  xy: 131, 1
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 1
+Thought
+  rotate: false
+  xy: 261, 131
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 2
+Thought
+  rotate: false
+  xy: 391, 261
+  size: 128, 128
+  orig: 128, 128
   offset: 0, 0
   index: 3

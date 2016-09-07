@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Observable;
 
 import de.limbusdev.guardianmonsters.enums.AttackType;
+import de.limbusdev.guardianmonsters.enums.Element;
 import de.limbusdev.guardianmonsters.enums.SFXType;
 
 /**
@@ -20,6 +21,7 @@ public class Monster extends Observable {
     public static int INSTANCECOUNTER=0;
     public int INSTANCE_ID;
     public int evolution;
+    public Array<Element> elements;
 
 
     // -------------------------------------------------------------------------------------- STATUS
@@ -67,12 +69,13 @@ public class Monster extends Observable {
         // INIT
         this.attacks = new Array<Attack>();
 
-        for(ObjectMap.Entry<Integer,Attack> e : MonsterInformation.getInstance().statusInfos.get(ID).learnableAttacks)
-            attacks.add(e.value);
+        for(ObjectMap.Entry<Integer,Attack> e : MonsterInformation.getInstance().statusInfos.get(ID).learnableAttacks) {
+            if(e.key <= level)
+                attacks.add(e.value);
+        }
 
+        this.elements = MonsterInformation.getInstance().statusInfos.get(ID).elements;
 
-        attacks.add(new Attack(AttackType.PHYSICAL, 5, "Scratch", SFXType.HIT, 0));
-        attacks.add(new Attack(AttackType.PHYSICAL, 10, "Kick", SFXType.CUT, 0));
     }
     /* ............................................................................... METHODS .. */
 

@@ -1,7 +1,13 @@
 package de.limbusdev.guardianmonsters.utils;
 
 
+import com.badlogic.gdx.math.MathUtils;
+
+import de.limbusdev.guardianmonsters.model.Attack;
+import de.limbusdev.guardianmonsters.model.AttackCalculationReport;
+import de.limbusdev.guardianmonsters.model.ElemEff;
 import de.limbusdev.guardianmonsters.model.Monster;
+import de.limbusdev.guardianmonsters.model.MonsterInBattle;
 import de.limbusdev.guardianmonsters.model.MonsterInformation;
 
 /**
@@ -33,6 +39,30 @@ public class MonsterManager {
         }
 
         return m;
+    }
+
+    /**
+     * Calculates and applies attacks, the report attributes are for information only
+     * @param att
+     * @param def
+     * @return
+     */
+    public static AttackCalculationReport calcAttack(Monster att, Monster def, Attack attack) {
+        AttackCalculationReport report = new AttackCalculationReport(att, def, 0);
+        float effectiveness = ElemEff.singelton().getElemEff(attack.element, def.elements);
+        float damage = effectiveness * attack.damage;
+
+        /* Calculate Damage */
+        if (def.getHP() - damage < 0) {
+            def.setHP(0);
+        } else {
+            def.setHP(def.getHP() - MathUtils.round(damage));
+        }
+
+        report.damage = MathUtils.round(damage);
+        System.out.println(attack.name + " causes " + damage + " damage on " + MonsterInformation.getInstance().monsterNames.get(def.ID - 1));
+
+        return report;
     }
 
     /* ..................................................................... GETTERS & SETTERS .. */

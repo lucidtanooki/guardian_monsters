@@ -78,7 +78,7 @@ public class GuardianMonsters extends Game {
     private void setUpTestBattle() {
         TeamComponent herTeam = new TeamComponent();
         herTeam.monsters.add(BattleFactory.getInstance().createMonster(1));
-        herTeam.monsters.add(BattleFactory.getInstance().createMonster(2));
+        herTeam.monsters.add(BattleFactory.getInstance().createMonster(17));
         herTeam.monsters.add(BattleFactory.getInstance().createMonster(3));
         TeamComponent oppTeam = new TeamComponent();
         oppTeam.monsters.add(BattleFactory.getInstance().createMonster(7));

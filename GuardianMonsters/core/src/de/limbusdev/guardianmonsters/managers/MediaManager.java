@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.ArrayMap;
 
 import de.limbusdev.guardianmonsters.enums.MusicType;
 import de.limbusdev.guardianmonsters.enums.SFXType;
@@ -34,9 +35,9 @@ public class MediaManager {
     private String UISpriteSheetFile = "spritesheets/UI.pack";
     private String logosSpriteSheetFile = "spritesheets/logos.pack";
     private String animations = "spritesheets/animations.pack";
-    private String SFXdir = "sfx/hits/";
+    private String SFXdir = "sfx/";
     private String battleAnimations = "spritesheets/battleAnimations.pack";
-    private Array<String> sfxHits;
+    private ArrayMap<SFXType,Array<String>> battleSFX;
     private Array<String> bgs;
     private Array<String> bgMusicTown;
     private Array<String> battleMusic;
@@ -72,9 +73,19 @@ public class MediaManager {
         for(String s : battleMusic) assets.load(s, Music.class);
 
         // SFX
-        sfxHits = new Array<String>();
-        for(int i=1;i<=18;i++) sfxHits.add(SFXdir + i + ".ogg");
+        battleSFX = new ArrayMap<SFXType,Array<String>>();
+
+        Array<String> sfxHits = new Array<String>();
+        for(int i=1;i<=18;i++) sfxHits.add(SFXdir + "hits/" + i + ".ogg");
         for(String s : sfxHits) assets.load(s, Sound.class);
+        battleSFX.put(SFXType.HIT, sfxHits);
+
+        Array<String> sfxWater = new Array<String>();
+        for(int i=1;i<=1;i++) sfxWater.add(SFXdir + "water/" + i + ".ogg");
+        for(String s : sfxWater) assets.load(s, Sound.class);
+        battleSFX.put(SFXType.WATER, sfxWater);
+
+
 
         // Monsters
         assets.load(monsterSpriteSheetFile, TextureAtlas.class);
@@ -233,9 +244,14 @@ public class MediaManager {
     }
 
     public Sound getSFX(SFXType sfxType, int index) {
-        Sound sound = null;
+        Sound sound;
         switch(sfxType) {
-            case HIT: sound = assets.get(sfxHits.get(index));
+            case WATER:
+                sound = assets.get(battleSFX.get(SFXType.WATER).get(index));
+                break;
+            default:
+                sound = assets.get(battleSFX.get(SFXType.HIT).get(index));
+                break;
         }
 
         return sound;
@@ -243,7 +259,12 @@ public class MediaManager {
 
     public Animation getAttackAnimation(String attack) {
         TextureAtlas atlas = assets.get("spritesheets/battleAnimations.pack", TextureAtlas.class);
-        Animation anim = new Animation(1f/12f, atlas.findRegions(attack), Animation.PlayMode.NORMAL);
+        Animation anim;
+        if(atlas.findRegions(attack).size == 0) {
+            anim = new Animation(1f / 12f, atlas.findRegions("Kick"), Animation.PlayMode.NORMAL);
+        } else {
+            anim = new Animation(1f / 12f, atlas.findRegions(attack), Animation.PlayMode.NORMAL);
+        }
         return anim;
     }
 

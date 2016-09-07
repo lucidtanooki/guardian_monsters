@@ -1,6 +1,7 @@
 package de.limbusdev.guardianmonsters.ui;
 
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -12,6 +13,7 @@ import com.badlogic.gdx.utils.Array;
 import java.util.Iterator;
 
 import de.limbusdev.guardianmonsters.model.Attack;
+import de.limbusdev.guardianmonsters.model.Monster;
 import de.limbusdev.guardianmonsters.utils.GS;
 
 /**
@@ -95,7 +97,9 @@ public class AttackMenuWidget extends BattleWidget implements ObservableWidget {
         addActor(backButton);
     }
 
-    public void init(Array<Attack> attacks) {
+    public void init(Monster monster) {
+        Array<Attack> attacks = monster.attacks;
+        for(Button b : attackButtons) b.setVisible(false);
         int i = 0;
         Iterator<Attack> attIt = attacks.iterator();
         while(attIt.hasNext() && i<6) {

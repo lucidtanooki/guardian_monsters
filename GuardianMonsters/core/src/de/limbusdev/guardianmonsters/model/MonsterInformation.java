@@ -35,84 +35,149 @@ public class MonsterInformation {
         monsterNames.set(13, "Big eyed Ka");
         monsterNames.set(14, "Cath");
         monsterNames.set(15, "Dogh");
+        monsterNames.set(16, "Firoxotl");
 
         this.statusInfos = new ArrayMap<Integer,MonsterStatusInformation>();
 
-        // KROKI
+        // 001 KROKI
         ArrayMap<Integer,Attack> attacks = new ArrayMap<Integer, Attack>();
+        attacks.put(1, AttackInfo.sprinkle);
         attacks.put(5, AttackInfo.tripit);
         attacks.put(10, AttackInfo.water);
         attacks.put(20, AttackInfo.watera);
+        Array<Element> elements = new Array<Element>();
+        elements.add(Element.WATER);
         statusInfos.put(1, new MonsterStatusInformation(
-                1, "Kroki", attacks, Element.WATER, true, 2, 18));
+                1, "Kroki", attacks, true, 2, 18, elements));
 
-        // DINVI
+        // 002 DINVI
         attacks = new ArrayMap<Integer, Attack>();
         attacks.put(5,AttackInfo.tripit);
         attacks.put(10,AttackInfo.earth);
         attacks.put(20,AttackInfo.eartha);
+        elements = new Array<Element>();
+        elements.add(Element.EARTH);
         statusInfos.put(2, new MonsterStatusInformation(
-                2, "Dinvi", attacks, Element.EARTH, true, 2, 18));
+                2, "Dinvi", attacks, true, 2, 18, elements));
 
-        // TOTOWI
+        // 003 TOTOWI
         attacks = new ArrayMap<Integer, Attack>();
-        attacks.put(5,AttackInfo.tripit);
+        attacks.put(1,AttackInfo.tripit);
         attacks.put(10,AttackInfo.facefold);
+        elements = new Array<Element>();
+        elements.add(Element.FOREST);
         statusInfos.put(3, new MonsterStatusInformation(
-                3, "Totowi", attacks, Element.EARTH, false, 0, 0));
+                3, "Totowi", attacks, false, 0, 0, elements));
 
-        // TARANYA
+        // 004 TARANYA
         attacks = new ArrayMap<Integer, Attack>();
+        attacks.put(1,AttackInfo.tooth);
+        elements = new Array<Element>();
+        elements.add(Element.ARTHROPODA);
         statusInfos.put(4, new MonsterStatusInformation(
-                4, "Taranya", attacks, Element.EARTH, false, 0, 0));
+                4, "Taranya", attacks, false, 0, 0, elements));
 
+        // 005 Sheelfish
         attacks = new ArrayMap<Integer, Attack>();
+        attacks.put(1,AttackInfo.sprinkle);
+        elements = new Array<Element>();
+        elements.add(Element.WATER);
         statusInfos.put(5, new MonsterStatusInformation(
-                5, "Sheelfish", attacks, Element.WATER, false, 0, 0));
+                5, "Sheelfish", attacks, false, 0, 0, elements));
 
+        // 006 Baleera
         attacks = new ArrayMap<Integer, Attack>();
+        attacks.put(5,AttackInfo.kick);
+        elements = new Array<Element>();
+        elements.add(Element.EARTH);
         statusInfos.put(6, new MonsterStatusInformation(
-                6, "Baleera", attacks, Element.EARTH, false, 0, 0));
+                6, "Baleera", attacks, false, 0, 0, elements));
 
+        // 007 Caterparan
         attacks = new ArrayMap<Integer, Attack>();
+        attacks.put(1,AttackInfo.tooth);
+        elements = new Array<Element>();
+        elements.add(Element.ARTHROPODA);
         statusInfos.put(7, new MonsterStatusInformation(
-                7, "Caterparan", attacks, Element.EARTH, false, 0, 0));
+                7, "Caterparan", attacks, false, 0, 0, elements));
 
+        // 008 Toff
         attacks = new ArrayMap<Integer, Attack>();
+        attacks.put(1,AttackInfo.leafgust);
+        elements = new Array<Element>();
+        elements.add(Element.FOREST);
         statusInfos.put(8, new MonsterStatusInformation(
-                8, "Toff", attacks, Element.EARTH, false, 0, 0));
+                8, "Toff", attacks, false, 0, 0, elements));
 
+        // 009 Fingercrab
         attacks = new ArrayMap<Integer, Attack>();
+        attacks.put(1,AttackInfo.sprinkle);
+        elements = new Array<Element>();
+        elements.add(Element.WATER);
+        elements.add(Element.ARTHROPODA);
         statusInfos.put(9, new MonsterStatusInformation(
-                9, "Fingercrab", attacks, Element.WATER, false, 0, 0));
+                9, "Fingercrab", attacks, false, 0, 0, elements));
 
         attacks = new ArrayMap<Integer, Attack>();
+        attacks.put(1,AttackInfo.kick);
+        elements = new Array<Element>();
+        elements.add(Element.EARTH);
         statusInfos.put(10, new MonsterStatusInformation(
-                10, "Springby", attacks, Element.EARTH, false, 0, 0));
+                10, "Springby", attacks, false, 0, 0, elements));
 
         attacks = new ArrayMap<Integer, Attack>();
+        attacks.put(1,AttackInfo.kick);
+        elements = new Array<Element>();
+        elements.add(Element.AIR);
+        elements.add(Element.SPIRIT);
         statusInfos.put(11, new MonsterStatusInformation(
-                11, "Flyear", attacks, Element.AIR, false, 0, 0));
+                11, "Flyear", attacks, false, 0, 0, elements));
 
         attacks = new ArrayMap<Integer, Attack>();
+        attacks.put(1,AttackInfo.sprinkle);
+        elements = new Array<Element>();
+        elements.add(Element.WATER);
         statusInfos.put(12, new MonsterStatusInformation(
-                12, "Tuxedo", attacks, Element.WATER, false, 0, 0));
+                12, "Tuxeduck", attacks, false, 0, 0, elements));
 
         attacks = new ArrayMap<Integer, Attack>();
+        attacks.put(1,AttackInfo.sprinkle);
+        elements = new Array<Element>();
+        elements.add(Element.AIR);
         statusInfos.put(13, new MonsterStatusInformation(
-                13, "Eggolomia", attacks, Element.AIR, false, 0, 0));
+                13, "Eggolomia", attacks, false, 0, 0, elements));
 
         attacks = new ArrayMap<Integer, Attack>();
+        attacks.put(1,AttackInfo.kick);
+        attacks.put(5,AttackInfo.darkspunk);
+        elements = new Array<Element>();
+        elements.add(Element.DEMON);
         statusInfos.put(14, new MonsterStatusInformation(
-                14, "Big Eyed Ka", attacks, Element.AIR, false, 0, 0));
+                14, "Big Eyed Ka", attacks, false, 0, 0, elements));
 
         attacks = new ArrayMap<Integer, Attack>();
+        attacks.put(1,AttackInfo.tooth);
+        elements = new Array<Element>();
+        elements.add(Element.EARTH);
         statusInfos.put(15, new MonsterStatusInformation(
-                15, "Cath", attacks, Element.EARTH, false, 0, 0));
+                15, "Cath", attacks, false, 0, 0, elements));
 
         attacks = new ArrayMap<Integer, Attack>();
+        attacks.put(1,AttackInfo.tooth);
+        elements = new Array<Element>();
+        elements.add(Element.EARTH);
         statusInfos.put(16, new MonsterStatusInformation(
-                16, "Dogh", attacks, Element.EARTH, false, 0, 0));
+                16, "Dogh", attacks, false, 0, 0, elements));
+
+        attacks = new ArrayMap<Integer, Attack>();
+        attacks.put(1,AttackInfo.embers);
+        attacks.put(10,AttackInfo.fire);
+        attacks.put(20,AttackInfo.fira);
+        elements = new Array<Element>();
+        elements.add(Element.FIRE);
+        elements.add(Element.DRAGON);
+        statusInfos.put(17, new MonsterStatusInformation(
+            17, "Firoxotl", attacks, false, 0, 0, elements));
     }
     /* ............................................................................... METHODS .. */
     

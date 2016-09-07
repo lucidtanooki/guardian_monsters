@@ -1,5 +1,6 @@
 package de.limbusdev.guardianmonsters.model;
 
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 
 import de.limbusdev.guardianmonsters.enums.Element;
@@ -13,10 +14,10 @@ public class MonsterStatusInformation {
     public int ID;
     public String name;
     public ArrayMap<Integer,Attack> learnableAttacks;
-    public Element element;
     public boolean canEvolve;
     public int evolvingAtLevel;
     public int evolution;
+    public Array<Element> elements;
 
     /* ........................................................................... CONSTRUCTOR .. */
 
@@ -25,22 +26,21 @@ public class MonsterStatusInformation {
      * @param ID                ID
      * @param name              name
      * @param learnableAttacks  all attacks with the level where they get learned
-     * @param element           main element
      * @param canEvolve         whether monster can reach another evolution state
      * @param evolution         next evolution level (2 for 2_2)
+     * @param elements          monsters elements
      */
     public MonsterStatusInformation(
-            int ID, String name, ArrayMap<Integer, Attack> learnableAttacks,
-            Element element, boolean canEvolve, int evolution,
-            int evolvingAtLevel) {
+        int ID, String name, ArrayMap<Integer, Attack> learnableAttacks,
+        boolean canEvolve, int evolution, int evolvingAtLevel, Array<Element> elements) {
 
         this.ID = ID;
         this.name = name;
         this.learnableAttacks = learnableAttacks;
-        this.element = element;
         this.canEvolve = canEvolve;
         this.evolution = evolution;
         this.evolvingAtLevel = evolvingAtLevel;
+        this.elements = elements;
     }
     /* ............................................................................... METHODS .. */
     

@@ -12,6 +12,7 @@ import com.badlogic.gdx.utils.ArrayMap;
 import de.limbusdev.guardianmonsters.enums.SFXType;
 import de.limbusdev.guardianmonsters.geometry.IntVector2;
 import de.limbusdev.guardianmonsters.managers.MediaManager;
+import de.limbusdev.guardianmonsters.model.Attack;
 import de.limbusdev.guardianmonsters.model.MonsterInBattle;
 import de.limbusdev.guardianmonsters.utils.GS;
 
@@ -117,7 +118,7 @@ public class BattleAnimationWidget extends BattleWidget implements ObservableWid
      * @param attPos    position of attacker
      * @param defPos    position of defender
      */
-    public void animateAttack(final int attPos, int defPos, boolean side) {
+    public void animateAttack(final int attPos, int defPos, boolean side, final Attack attack) {
         Image attIm,defIm;
         final IntVector2 startPos,endPos;
         int attAlign, defAlign;
@@ -179,13 +180,13 @@ public class BattleAnimationWidget extends BattleWidget implements ObservableWid
             Actions.run(new Runnable() {
                 @Override
                 public void run() {
-                    Animation anim = media.getAttackAnimation("kick");
+                    Animation anim = media.getAttackAnimation(attack.name);
                     SelfRemovingAnimation sra = new SelfRemovingAnimation(anim);
                     if(endPos.x < GS.RES_X/2) {
-                        sra.setPosition(endPos.x+64, endPos.y+64,Align.center);
+                        sra.setPosition(endPos.x, endPos.y,Align.bottomLeft);
                         sra.setScale(2,2);
                     } else {
-                        sra.setPosition(endPos.x-64, endPos.y+64,Align.center);
+                        sra.setPosition(endPos.x+128, endPos.y,Align.bottomRight);
                         sra.setScale(-2,2);
                     }
                     addActor(sra);
@@ -194,7 +195,7 @@ public class BattleAnimationWidget extends BattleWidget implements ObservableWid
             Actions.run(new Runnable() {
                 @Override
                 public void run() {
-                    media.getSFX(SFXType.HIT, 0).play();
+                    media.getSFX(attack.sfxType, 0).play();
                 }
             }),
             Actions.run(new Runnable() {

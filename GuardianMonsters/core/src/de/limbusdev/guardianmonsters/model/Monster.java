@@ -4,13 +4,9 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ObjectMap;
 
-
-import java.util.Map;
 import java.util.Observable;
 
-import de.limbusdev.guardianmonsters.enums.AttackType;
 import de.limbusdev.guardianmonsters.enums.Element;
-import de.limbusdev.guardianmonsters.enums.SFXType;
 
 /**
  * Created by georg on 12.12.15.
@@ -58,9 +54,9 @@ public class Monster extends Observable {
         this.ID = ID;
         this.level = 1;
         this.exp = 0;
-        this.physStrength = 10;
+        this.physStrength = 8;
         this.HP = HPfull = 30;
-        this.magicStrength = 5;
+        this.magicStrength = 8;
         this.MP = MPfull = 5;
         this.physDefFull = physDef = 10;
         this.magicDefFull = magicDef = 10;

@@ -16,7 +16,7 @@ public class AttackInfo {
     public static Attack kick = new Attack(
             AttackType.PHYSICAL, Element.NONE, 5, "Kick", SFXType.HIT, 0);
     public static Attack tooth = new Attack(
-            AttackType.PHYSICAL, Element.NONE, 10, "Tooth", SFXType.HIT, 0);
+            AttackType.PHYSICAL, Element.NONE, 5, "Tooth", SFXType.HIT, 0);
     public static Attack punch = new Attack(
             AttackType.PHYSICAL, Element.NONE, 15, "Punch", SFXType.HIT, 0);
     public static Attack facefold = new Attack(

@@ -3,6 +3,7 @@ package de.limbusdev.guardianmonsters.utils;
 
 import com.badlogic.gdx.math.MathUtils;
 
+import de.limbusdev.guardianmonsters.enums.AttackType;
 import de.limbusdev.guardianmonsters.model.Attack;
 import de.limbusdev.guardianmonsters.model.AttackCalculationReport;
 import de.limbusdev.guardianmonsters.model.ElemEff;
@@ -50,7 +51,16 @@ public class MonsterManager {
     public static AttackCalculationReport calcAttack(Monster att, Monster def, Attack attack) {
         AttackCalculationReport report = new AttackCalculationReport(att, def, 0);
         float effectiveness = ElemEff.singelton().getElemEff(attack.element, def.elements);
-        float damage = effectiveness * attack.damage;
+
+        float defenseRatio;
+
+        if(attack.attackType == AttackType.PHYSICAL) {
+            defenseRatio = (att.physStrength*1f) / (def.physDef*1f);
+        } else {
+            defenseRatio = (att.magicStrength*1f) / (def.magicDef*1f);
+        }
+
+        float damage = (effectiveness * attack.damage)*defenseRatio;
 
         /* Calculate Damage */
         if (def.getHP() - damage < 0) {

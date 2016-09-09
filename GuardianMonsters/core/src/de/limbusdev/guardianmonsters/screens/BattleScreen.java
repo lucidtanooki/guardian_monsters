@@ -32,7 +32,7 @@ public class BattleScreen implements Screen {
     private SpriteBatch batch;
     private ShapeRenderer shpRend;
     private BitmapFont font;
-    private BattleHUD battleHUD;
+    private de.limbusdev.guardianmonsters.ui.BattleHUD battleHUD;
     private Texture background;
     private MediaManager media;
     private boolean initialized=false;
@@ -40,7 +40,7 @@ public class BattleScreen implements Screen {
     /* ........................................................................... CONSTRUCTOR .. */
 
     public BattleScreen(MediaManager media, OutdoorGameWorldScreen gameScreen, GuardianMonsters game) {
-        this.battleHUD = new BattleHUD(game);
+        this.battleHUD = new de.limbusdev.guardianmonsters.ui.BattleHUD(game);
         setUpRendering();
         setUpInputProcessor();
         this.media = media;
@@ -94,7 +94,7 @@ public class BattleScreen implements Screen {
         // process Updates
         updateCamera();
 
-        battleHUD.stage.getViewport().apply();
+        battleHUD.getStage().getViewport().apply();
         battleHUD.update(delta);
         battleHUD.draw();
     }
@@ -107,7 +107,7 @@ public class BattleScreen implements Screen {
     @Override
     public void resize(int width, int height) {
         viewport.update(width, height);
-        battleHUD.stage.getViewport().update(width, height, true);
+        battleHUD.resize(width, height);
     }
 
     /**
@@ -169,7 +169,7 @@ public class BattleScreen implements Screen {
     }
 
     public void setUpInputProcessor() {
-        Gdx.input.setInputProcessor(battleHUD.stage);
+        Gdx.input.setInputProcessor(battleHUD.getStage());
     }
     /* ..................................................................... GETTERS & SETTERS .. */
 }

@@ -1,5 +1,6 @@
 package de.limbusdev.guardianmonsters.ui;
 
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -7,8 +8,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 
+import de.limbusdev.guardianmonsters.enums.ButtonIDs;
 import de.limbusdev.guardianmonsters.utils.GS;
 
 /**
@@ -35,7 +38,8 @@ public class BattleActionMenuWidget extends BattleWidget {
      *
      * @param skin battle action UI skin
      */
-    public BattleActionMenuWidget(Skin skin) {
+    public BattleActionMenuWidget(final AHUD hud, Skin skin) {
+        super(hud);
         this.setBounds(0,0,GS.RES_X,GS.RES_Y/4);
 
         infoBGImg = new Image(skin.getDrawable("b-long-down"));
@@ -77,6 +81,45 @@ public class BattleActionMenuWidget extends BattleWidget {
         addActor(greenButton);
         addActor(greyLButton);
         addActor(greyRButton);
+
+
+        backButton.addListener(
+            new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    hud.onButtonClicked(ButtonIDs.ACTION_BACK);
+                }
+            }
+        );
+
+        greyLButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                hud.onButtonClicked(ButtonIDs.ACTION_GREY_L);
+            }
+        });
+
+        greyRButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                hud.onButtonClicked(ButtonIDs.ACTION_GREY_R);
+            }
+        });
+
+       greenButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                hud.onButtonClicked(ButtonIDs.ACTION_ATTACK);
+            }
+        });
+
+
+        blueButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                hud.onButtonClicked(ButtonIDs.ACTION_BLUE);
+            }
+        });
     }
 
     public void setGreenButtonDisabled(boolean disable) {

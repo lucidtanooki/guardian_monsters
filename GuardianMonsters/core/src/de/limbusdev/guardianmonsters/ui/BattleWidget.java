@@ -5,16 +5,19 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 
 /**
+ * For all children of a BattleWidget, callbacks have to be added. When adding a widget to the
+ * @link{AHUD}, the method onButtonClicked() can be used, in that case you can enter the button ID
+ * into the Enumeration @link{ButtonIDs}
  * Created by georg on 18.08.16.
  */
 public abstract class BattleWidget extends WidgetGroup {
 
     private Runnable runnableRemove;
-    private Runnable runnableAct;
-    private Runnable runnableAdd;
+    private AHUD hud;
 
-    public BattleWidget () {
+    public BattleWidget (final AHUD hud) {
         super();
+        this.hud = hud;
 
         // Callbacks
         runnableRemove = new Runnable() {
@@ -24,12 +27,6 @@ public abstract class BattleWidget extends WidgetGroup {
             }
         };
 
-        runnableAct = new Runnable() {
-            @Override
-            public void run() {
-                act(1);
-            }
-        };
     }
 
     public void addFadeOutAction(float duration) {
@@ -61,4 +58,5 @@ public abstract class BattleWidget extends WidgetGroup {
     private boolean superRemove() {
         return super.remove();
     }
+
 }

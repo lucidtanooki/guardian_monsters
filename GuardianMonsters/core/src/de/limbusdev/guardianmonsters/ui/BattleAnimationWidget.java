@@ -9,7 +9,6 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 
-import de.limbusdev.guardianmonsters.enums.SFXType;
 import de.limbusdev.guardianmonsters.geometry.IntVector2;
 import de.limbusdev.guardianmonsters.managers.MediaManager;
 import de.limbusdev.guardianmonsters.model.Attack;
@@ -30,8 +29,8 @@ public class BattleAnimationWidget extends BattleWidget implements ObservableWid
 
     public boolean attackAnimationRunning;
 
-    public BattleAnimationWidget(MediaManager media) {
-        super();
+    public BattleAnimationWidget(final AHUD hud, MediaManager media) {
+        super(hud);
 
         observers = new Array<WidgetObserver>();
         this.monsterImgsLeft = new ArrayMap<Integer,Image>();

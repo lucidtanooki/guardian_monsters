@@ -32,8 +32,8 @@ public class MonsterIndicatorWidget extends BattleWidget implements ObservableWi
      *
      * @param skin battle action UI skin
      */
-    public MonsterIndicatorWidget(Skin skin) {
-        super();
+    public MonsterIndicatorWidget(final AHUD hud, Skin skin) {
+        super(hud);
 
         initializeAttributes();
         observers = new Array<WidgetObserver>();

@@ -40,8 +40,8 @@ public class AttackMenuWidget extends BattleWidget implements ObservableWidget {
      *
      * @param skin battle action UI skin
      */
-    public AttackMenuWidget(Skin skin) {
-        super();
+    public AttackMenuWidget(final AHUD hud, Skin skin) {
+        super(hud);
 
         observers = new Array<WidgetObserver>();
 

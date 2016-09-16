@@ -26,24 +26,24 @@ public class BattleStatusOverviewWidget extends BattleWidget {
         this.monsterStateWidgetsRight = new Array<MonsterStateWidget>();
 
         // Hero Team ###############################################################################
-        MonsterStateWidget msw = new MonsterStateWidget(skin);
+        MonsterStateWidget msw = new MonsterStateWidget(skin, true);
         msw.setPosition(IndPos.statWPos1.x,IndPos.statWPos1.y);
         monsterStateWidgetsLeft.add(msw);
-        msw = new MonsterStateWidget(skin);
+        msw = new MonsterStateWidget(skin, true);
         msw.setPosition(IndPos.statWPos2.x,IndPos.statWPos2.y);
         monsterStateWidgetsLeft.add(msw);
-        msw = new MonsterStateWidget(skin);
+        msw = new MonsterStateWidget(skin, true);
         msw.setPosition(IndPos.statWPos3.x,IndPos.statWPos3.y);
         monsterStateWidgetsLeft.add(msw);
 
         // Opponent Team ###########################################################################
-        msw = new MonsterStateWidget(skin);
+        msw = new MonsterStateWidget(skin, false);
         msw.setPosition(GS.RES_X-IndPos.statWPos1.x,IndPos.statWPos1.y,Align.bottomRight);
         monsterStateWidgetsRight.add(msw);
-        msw = new MonsterStateWidget(skin);
+        msw = new MonsterStateWidget(skin, false);
         msw.setPosition(GS.RES_X-IndPos.statWPos2.x,IndPos.statWPos2.y,Align.bottomRight);
         monsterStateWidgetsRight.add(msw);
-        msw = new MonsterStateWidget(skin);
+        msw = new MonsterStateWidget(skin, false);
         msw.setPosition(GS.RES_X-IndPos.statWPos3.x,IndPos.statWPos3.y,Align.bottomRight);
         monsterStateWidgetsRight.add(msw);
 

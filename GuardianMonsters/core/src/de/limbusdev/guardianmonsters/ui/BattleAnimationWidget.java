@@ -3,12 +3,16 @@ package de.limbusdev.guardianmonsters.ui;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Interpolation;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 
+import de.limbusdev.guardianmonsters.enums.ButtonIDs;
 import de.limbusdev.guardianmonsters.geometry.IntVector2;
 import de.limbusdev.guardianmonsters.managers.MediaManager;
 import de.limbusdev.guardianmonsters.model.Attack;
@@ -28,6 +32,7 @@ public class BattleAnimationWidget extends BattleWidget implements ObservableWid
     private MediaManager media;
 
     public boolean attackAnimationRunning;
+    private ImageButton nextButton;
 
     public BattleAnimationWidget(final AHUD hud, MediaManager media) {
         super(hud);
@@ -37,6 +42,21 @@ public class BattleAnimationWidget extends BattleWidget implements ObservableWid
         this.monsterImgsRight = new ArrayMap<Integer,Image>();
         this.setBounds(0,0,0,0);
         this.media = media;
+
+
+        // Next Button
+        nextButton = new ImageButton(media.battleSkin, "b-back-eob");
+        nextButton.setPosition(GS.RES_X, 0, Align.bottomRight);
+
+        nextButton.addListener(
+            new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    hud.onButtonClicked(ButtonIDs.ACTION_NEXT);
+                    nextButton.remove();
+                }
+            }
+        );
     }
 
     /**
@@ -222,6 +242,10 @@ public class BattleAnimationWidget extends BattleWidget implements ObservableWid
         else monImgs = monsterImgsRight;
 
         monImgs.get(pos).addAction(Actions.sequence(Actions.alpha(0, 2), Actions.visible(false)));
+    }
+
+    public void nextAnimation() {
+        addActor(nextButton);
     }
 
 

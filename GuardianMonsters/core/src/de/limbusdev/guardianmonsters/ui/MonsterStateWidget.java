@@ -30,7 +30,12 @@ public class MonsterStateWidget extends WidgetGroup implements Observer {
     private Label levelLabel;
     private Image hudBgImg, hudRingImg, hudNameImg;
 
-    public MonsterStateWidget(Skin skin) {
+    /**
+     *
+     * @param skin  skin containing needed graphics
+     * @param showExp  whether exp bar shall be shown
+     */
+    public MonsterStateWidget(Skin skin, boolean showExp) {
         hudBgImg = new Image(skin.getDrawable("monStateUIbg2"));
         hudBgImg.setPosition(0,0,Align.bottomLeft);
         hudBgImg.setHeight(56);
@@ -77,7 +82,7 @@ public class MonsterStateWidget extends WidgetGroup implements Observer {
         levelLabel.setPosition(222, 27, Align.center);
 
         // Sorting
-        this.addActor(epBar);
+        if(showExp) this.addActor(epBar);
         this.addActor(hudBgImg);
         this.addActor(hudNameImg);
         this.addActor(hpBar);

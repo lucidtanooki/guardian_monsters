@@ -5,5 +5,5 @@ package de.limbusdev.guardianmonsters.enums;
  */
 public enum ButtonIDs {
     TOP_LEVEL_BAG, TOP_LEVEL_SWORD, TOP_LEVEL_RUN, EOB_BACK, ACTION_BACK, ACTION_ATTACK,
-    ACTION_BLUE, ACTION_GREY_L, ACTION_GREY_R,
+    ACTION_BLUE, ACTION_GREY_L, ACTION_GREY_R, ACTION_NEXT,
 }

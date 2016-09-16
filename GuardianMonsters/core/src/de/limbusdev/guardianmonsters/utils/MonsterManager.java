@@ -49,7 +49,7 @@ public class MonsterManager {
      * @return
      */
     public static AttackCalculationReport calcAttack(Monster att, Monster def, Attack attack) {
-        AttackCalculationReport report = new AttackCalculationReport(att, def, 0);
+        AttackCalculationReport report = new AttackCalculationReport(att, def, 0, 0, attack);
         float effectiveness = ElemEff.singelton().getElemEff(attack.element, def.elements);
 
         float defenseRatio;
@@ -70,6 +70,7 @@ public class MonsterManager {
         }
 
         report.damage = MathUtils.round(damage);
+        report.effectiveness = effectiveness;
         System.out.println(attack.name + " causes " + damage + " damage on " + MonsterInformation.getInstance().monsterNames.get(def.ID - 1));
 
         return report;

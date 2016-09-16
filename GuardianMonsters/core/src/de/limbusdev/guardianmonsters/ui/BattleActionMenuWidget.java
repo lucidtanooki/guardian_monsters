@@ -106,13 +106,12 @@ public class BattleActionMenuWidget extends BattleWidget {
             }
         });
 
-       greenButton.addListener(new ClickListener() {
+        greenButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 hud.onButtonClicked(ButtonIDs.ACTION_ATTACK);
             }
         });
-
 
         blueButton.addListener(new ClickListener() {
             @Override
@@ -131,6 +130,8 @@ public class BattleActionMenuWidget extends BattleWidget {
             greenButton.addAction(Actions.alpha(1f));
         }
     }
+
+
 
     public void reset() {
         setGreenButtonDisabled(false);

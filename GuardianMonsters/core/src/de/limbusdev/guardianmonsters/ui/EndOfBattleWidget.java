@@ -21,7 +21,7 @@ public class EndOfBattleWidget extends BattleWidget {
     private Image labelBGImg;
     private Image bgImg;
     public  Label messageLabel;
-    public ImageButton backButton;
+    public  ImageButton backButton;
 
     /**
      *

@@ -13,6 +13,7 @@ import com.badlogic.gdx.utils.Align;
 
 import de.limbusdev.guardianmonsters.enums.ButtonIDs;
 import de.limbusdev.guardianmonsters.utils.GS;
+import de.limbusdev.guardianmonsters.utils.L18N;
 
 /**
  * Widget for displaying monster status in battle: HP, MP, EXP, Name, Level
@@ -154,7 +155,7 @@ public class BattleActionMenuWidget extends BattleWidget {
 
     @Override
     public void addToStageAndFadeIn(Stage newParent) {
-        infoLabel.setText("Please prepare your attack.");
+        infoLabel.setText(L18N.get().l18n().get("batt_prepare"));
         infoBGImg.remove();
         infoLabel.remove();
         addActor(infoBGImg);

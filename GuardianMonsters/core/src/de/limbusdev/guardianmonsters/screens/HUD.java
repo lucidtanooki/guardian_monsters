@@ -41,6 +41,7 @@ import de.limbusdev.guardianmonsters.managers.SaveGameManager;
 import de.limbusdev.guardianmonsters.model.BattleFactory;
 import de.limbusdev.guardianmonsters.utils.EntityFamilies;
 import de.limbusdev.guardianmonsters.utils.GS;
+import de.limbusdev.guardianmonsters.utils.L18N;
 
 
 /**
@@ -126,7 +127,7 @@ public class HUD extends InputAdapter {
         tbs.pressedOffsetX = 10; tbs.pressedOffsetY = 1;
 
         // Menu Button
-        TextButton menu = new TextButton( "Menu", skin, "open-menu");
+        TextButton menu = new TextButton(L18N.get().l18n().get("hud_menu"), skin, "open-menu");
         menu.setPosition(GS.RES_X, GS.RES_Y, Align.topRight);
         menu.addListener(new ClickListener() {
             @Override
@@ -146,7 +147,7 @@ public class HUD extends InputAdapter {
         this.menuButtons = new Group();
 
         // Save Button
-        TextButton save = new TextButton("Save", skin, "menu-entry");
+        TextButton save = new TextButton(L18N.get().l18n().get("hud_save"), skin, "menu-entry");
         save.setPosition(GS.RES_X, GS.RES_Y - 5*GS.ROW, Align.topRight);
         save.addListener(new ClickListener() {
             @Override
@@ -157,7 +158,7 @@ public class HUD extends InputAdapter {
         this.menuButtons.addActor(save);
 
         // Quit Button
-        TextButton quit = new TextButton("Quit", skin, "menu-entry");
+        TextButton quit = new TextButton(L18N.get().l18n().get("hud_quit"), skin, "menu-entry");
         quit.setPosition(GS.RES_X, GS.RES_Y - 10*GS.ROW , Align.topRight);
         quit.addListener(new ClickListener() {
             @Override
@@ -176,7 +177,7 @@ public class HUD extends InputAdapter {
         this.menuButtons.addActor(quit);
 
         // Battle Button
-        TextButton battle = new TextButton("Battle", skin, "menu-entry");
+        TextButton battle = new TextButton(L18N.get().l18n().get("hud_battle"), skin, "menu-entry");
         battle.setPosition(GS.RES_X, GS.RES_Y - 15*GS.ROW, Align.topRight);
         battle.addListener(new ClickListener() {
             @Override
@@ -192,7 +193,7 @@ public class HUD extends InputAdapter {
         this.menuButtons.addActor(battle);
 
         // Team Button
-        TextButton teamButton = new TextButton("Team", skin, "menu-entry");
+        TextButton teamButton = new TextButton(L18N.get().l18n().get("hud_team"), skin, "menu-entry");
         teamButton.setPosition(GS.RES_X, GS.RES_Y - 20*GS.ROW , Align.topRight);
         teamButton.addListener(new ClickListener() {
             @Override
@@ -341,7 +342,7 @@ public class HUD extends InputAdapter {
 
     public void openConversation(String text) {
         this.menuButtons.setVisible(false);
-        this.convText.setText(text);
+        this.convText.setText(L18N.get().l18n().get(text));
         this.conversationLabel.setVisible(true);
         conversationLabel.addAction(Actions.moveTo(0,0,.5f, Interpolation.exp10Out));
     }
@@ -353,7 +354,7 @@ public class HUD extends InputAdapter {
 
     public void openSign(String title, String text) {
         openConversation(text);
-        this.titleLabel.setText(title);
+        this.titleLabel.setText(L18N.get().l18n().get(title));
         this.titleLabel.setVisible(true);
     }
 

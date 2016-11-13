@@ -32,7 +32,7 @@ public class MonsterInformation {
         monsterNames.set(10, "mon_flyear");
         monsterNames.set(11, "mon_tuxeduck");
         monsterNames.set(12, "mon_eggolomia");
-        monsterNames.set(13, "mon_big eyed Ka");
+        monsterNames.set(13, "mon_big_eyed_ka");
         monsterNames.set(14, "mon_cath");
         monsterNames.set(15, "mon_dogh");
         monsterNames.set(16, "mon_firoxotl");

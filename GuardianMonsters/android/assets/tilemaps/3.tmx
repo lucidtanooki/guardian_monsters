@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="32" height="32" tilewidth="16" tileheight="16">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="16" tileheight="16" nextobjectid="77">
  <properties>
   <property name="musicIndex" value="2"/>
   <property name="musicType" value="town"/>
  </properties>
- <tileset firstgid="1" name="limbusdev_world" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="limbusdev_world" tilewidth="16" tileheight="16" tilecount="4096">
   <image source="../spritesheets/limbusdev_world.png" width="1024" height="1024"/>
  </tileset>
- <tileset firstgid="4097" name="limbusdev_world2" tilewidth="16" tileheight="16">
+ <tileset firstgid="4097" name="limbusdev_world2" tilewidth="16" tileheight="16" tilecount="4096">
   <image source="../spritesheets/limbusdev_world2.png" width="1024" height="1024"/>
  </tileset>
  <layer name="ground1" width="32" height="32">
@@ -35,244 +35,244 @@
    eJzt1OlugkAUhuEZWcTlX6+Itd4Wq94WKshl9SVKBIs6uJEmPckTpnTgY5AzQpzLhnMa65oQhiY+Wk2+C49sH8EH80NEiJGQnSJjvL4yX5vznuavy8+xxQ57sguUjA+oeua7ZHsK+arPKaUQE2jQdX5/mIynsOTv+TH3TBTuq/qcNhkOXHjwEeAbKzlsLY88Z8h6I2xbaz0wXnNuow9byyOV19nY6edzJeMDqtO5Zi31n8bF9TYnHLjw4CPA6nLilZLMm0BrzTcZT2EZF/0JX3T7M2ROhBgJUmTYKObfq05/IhXd/szJ2WKHPQqUqF6U3+lPFKLbn9Lk/UGDDgMmLPM1+Z3+hCG7/WmT48CFBx8BVq186+vx/Hv9GZITIUaCFBk2iuvPF7zfxfX/h2REiJEgRVb3JzY9+9PQDLnk/S6759r7TS6Pe8MOexQo5XGPqBTz+zJuVXu/kROuhQYdBkxMYU3U7zmkVPfO/7pd/oxemY2Xn5KdjZhfkF2OmG/wDZsjfsc+2cGI+SnZWU++0+xtd/bed5RNdtTsbQP3xVdU+OTvsed5iw8/8zuq/h3q76A5Pnu96rGp8PQdNMdnr1c9Xqtnr/9L9QPP1W0K
   </data>
  </layer>
- <objectgroup name="colliderWalls1" width="32" height="32" visible="0">
-  <object x="480" y="48" width="32" height="240"/>
-  <object x="496" y="288" width="16" height="16"/>
-  <object x="0" y="48" width="16" height="256"/>
-  <object x="48" y="240" width="32" height="32"/>
-  <object x="0" y="400" width="16" height="112"/>
-  <object x="16" y="480" width="64" height="32"/>
-  <object x="80" y="496" width="160" height="16"/>
-  <object x="272" y="480" width="240" height="32"/>
-  <object x="496" y="400" width="16" height="80"/>
-  <object x="208" y="256" width="16" height="16"/>
-  <object x="176" y="192" width="128" height="64"/>
-  <object x="176" y="256" width="16" height="32"/>
-  <object x="224" y="256" width="80" height="32"/>
-  <object x="304" y="176" width="64" height="48"/>
-  <object x="368" y="192" width="16" height="16"/>
-  <object x="384" y="176" width="32" height="48"/>
-  <object x="240" y="432" width="32" height="16"/>
-  <object x="192" y="288" width="16" height="16"/>
-  <object x="368" y="176" width="16" height="16"/>
-  <object x="0" y="0" width="320" height="48"/>
-  <object x="16" y="48" width="96" height="32"/>
-  <object x="320" y="0" width="192" height="32"/>
-  <object x="480" y="32" width="32" height="16"/>
-  <object x="48" y="80" width="128" height="48"/>
-  <object x="48" y="128" width="32" height="32"/>
-  <object x="96" y="128" width="80" height="32"/>
-  <object x="16" y="224" width="80" height="16"/>
-  <object x="128" y="224" width="48" height="16"/>
-  <object x="160" y="160" width="16" height="64"/>
-  <object x="304" y="272" width="80" height="16"/>
-  <object x="416" y="160" width="16" height="128"/>
-  <object x="240" y="80" width="32" height="32"/>
-  <object x="432" y="64" width="16" height="32"/>
-  <object x="400" y="96" width="32" height="32"/>
-  <object x="128" y="272" width="32" height="32"/>
-  <object x="32" y="416" width="32" height="32"/>
-  <object x="416" y="384" width="32" height="32"/>
-  <object x="448" y="240" width="32" height="32"/>
-  <object x="192" y="128" width="32" height="32"/>
-  <object x="448" y="192" width="16" height="16"/>
-  <object x="416" y="32" width="32" height="16"/>
+ <objectgroup name="colliderWalls1" visible="0">
+  <object id="1" x="480" y="48" width="32" height="240"/>
+  <object id="2" x="496" y="288" width="16" height="16"/>
+  <object id="3" x="0" y="48" width="16" height="256"/>
+  <object id="4" x="48" y="240" width="32" height="32"/>
+  <object id="5" x="0" y="400" width="16" height="112"/>
+  <object id="6" x="16" y="480" width="64" height="32"/>
+  <object id="7" x="80" y="496" width="160" height="16"/>
+  <object id="8" x="272" y="480" width="240" height="32"/>
+  <object id="9" x="496" y="400" width="16" height="80"/>
+  <object id="10" x="208" y="256" width="16" height="16"/>
+  <object id="11" x="176" y="192" width="128" height="64"/>
+  <object id="12" x="176" y="256" width="16" height="32"/>
+  <object id="13" x="224" y="256" width="80" height="32"/>
+  <object id="14" x="304" y="176" width="64" height="48"/>
+  <object id="15" x="368" y="192" width="16" height="16"/>
+  <object id="16" x="384" y="176" width="32" height="48"/>
+  <object id="17" x="240" y="432" width="32" height="16"/>
+  <object id="18" x="192" y="288" width="16" height="16"/>
+  <object id="19" x="368" y="176" width="16" height="16"/>
+  <object id="20" x="0" y="0" width="320" height="48"/>
+  <object id="21" x="16" y="48" width="96" height="32"/>
+  <object id="22" x="320" y="0" width="192" height="32"/>
+  <object id="23" x="480" y="32" width="32" height="16"/>
+  <object id="24" x="48" y="80" width="128" height="48"/>
+  <object id="25" x="48" y="128" width="32" height="32"/>
+  <object id="26" x="96" y="128" width="80" height="32"/>
+  <object id="27" x="16" y="224" width="80" height="16"/>
+  <object id="28" x="128" y="224" width="48" height="16"/>
+  <object id="29" x="160" y="160" width="16" height="64"/>
+  <object id="30" x="304" y="272" width="80" height="16"/>
+  <object id="31" x="416" y="160" width="16" height="128"/>
+  <object id="32" x="240" y="80" width="32" height="32"/>
+  <object id="33" x="432" y="64" width="16" height="32"/>
+  <object id="34" x="400" y="96" width="32" height="32"/>
+  <object id="35" x="128" y="272" width="32" height="32"/>
+  <object id="36" x="32" y="416" width="32" height="32"/>
+  <object id="37" x="416" y="384" width="32" height="32"/>
+  <object id="38" x="448" y="240" width="32" height="32"/>
+  <object id="39" x="192" y="128" width="32" height="32"/>
+  <object id="40" x="448" y="192" width="16" height="16"/>
+  <object id="41" x="416" y="32" width="32" height="16"/>
  </objectgroup>
- <objectgroup name="livingEntities" width="32" height="32" visible="0">
-  <object name="person" x="96" y="224" width="16" height="16">
+ <objectgroup name="livingEntities">
+  <object id="42" name="person" x="96" y="224" width="16" height="16">
    <properties>
     <property name="male" value="true"/>
     <property name="path" value="WSTOP,ESTOP,SSTOP,S,S,S,SSTOP,ESTOP,WSTOP,N,N,N"/>
     <property name="spriteIndex" value="0"/>
     <property name="startDir" value="S"/>
     <property name="static" value="false"/>
-    <property name="text" value="Hello. How are you doing? I'm waiting for my wife. I am very concerned."/>
+    <property name="text" value="person_3_1"/>
    </properties>
   </object>
-  <object name="person" x="112" y="160" width="16" height="16">
+  <object id="43" name="person" x="112" y="160" width="16" height="16">
    <properties>
     <property name="male" value="true"/>
     <property name="path" value="SSTOP"/>
     <property name="spriteIndex" value="2"/>
     <property name="static" value="true"/>
-    <property name="text" value="Something is coming upon us. It is still not clear enough to tell."/>
+    <property name="text" value="person_3_2"/>
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="sensors" width="32" height="32" visible="0">
-  <object name="warpField" x="240" y="496" width="16" height="16">
+ <objectgroup name="sensors" visible="0">
+  <object id="44" name="warpField" x="240" y="496" width="16" height="16">
    <properties>
     <property name="targetID" value="2"/>
     <property name="targetWarpPointID" value="1"/>
    </properties>
   </object>
-  <object name="startField" x="240" y="480" width="16" height="16">
+  <object id="45" name="startField" x="240" y="480" width="16" height="16">
    <properties>
     <property name="fieldID" value="1"/>
    </properties>
   </object>
-  <object name="startField" x="256" y="480" width="16" height="16">
+  <object id="46" name="startField" x="256" y="480" width="16" height="16">
    <properties>
     <property name="fieldID" value="2"/>
    </properties>
   </object>
-  <object name="warpField" x="256" y="496" width="16" height="16">
+  <object id="47" name="warpField" x="256" y="496" width="16" height="16">
    <properties>
     <property name="targetID" value="2"/>
     <property name="targetWarpPointID" value="2"/>
    </properties>
   </object>
-  <object name="startField" x="208" y="288" width="16" height="16">
+  <object id="48" name="startField" x="208" y="288" width="16" height="16">
    <properties>
     <property name="fieldID" value="3"/>
    </properties>
   </object>
-  <object name="warpField" x="208" y="272" width="16" height="16">
+  <object id="49" name="warpField" x="208" y="272" width="16" height="16">
    <properties>
     <property name="targetID" value="4"/>
     <property name="targetWarpPointID" value="1"/>
    </properties>
   </object>
-  <object name="warpField" x="368" y="208" width="16" height="16">
+  <object id="50" name="warpField" x="368" y="208" width="16" height="16">
    <properties>
     <property name="targetID" value="6"/>
     <property name="targetWarpPointID" value="1"/>
    </properties>
   </object>
-  <object name="startField" x="368" y="224" width="16" height="16">
+  <object id="51" name="startField" x="368" y="224" width="16" height="16">
    <properties>
     <property name="fieldID" value="4"/>
    </properties>
   </object>
-  <object name="warpField" x="0" y="304" width="16" height="16">
+  <object id="52" name="warpField" x="0" y="304" width="16" height="16">
    <properties>
     <property name="targetID" value="7"/>
     <property name="targetWarpPointID" value="1"/>
    </properties>
   </object>
-  <object name="startField" x="16" y="320" width="16" height="16">
+  <object id="53" name="startField" x="16" y="320" width="16" height="16">
    <properties>
     <property name="fieldID" value="5"/>
    </properties>
   </object>
-  <object name="warpField" x="0" y="320" width="16" height="16">
+  <object id="54" name="warpField" x="0" y="320" width="16" height="16">
    <properties>
     <property name="targetID" value="7"/>
     <property name="targetWarpPointID" value="1"/>
    </properties>
   </object>
-  <object name="warpField" x="0" y="336" width="16" height="16">
+  <object id="55" name="warpField" x="0" y="336" width="16" height="16">
    <properties>
     <property name="targetID" value="7"/>
     <property name="targetWarpPointID" value="1"/>
    </properties>
   </object>
-  <object name="warpField" x="0" y="352" width="16" height="16">
+  <object id="56" name="warpField" x="0" y="352" width="16" height="16">
    <properties>
     <property name="targetID" value="7"/>
     <property name="targetWarpPointID" value="1"/>
    </properties>
   </object>
-  <object name="warpField" x="0" y="368" width="16" height="16">
+  <object id="57" name="warpField" x="0" y="368" width="16" height="16">
    <properties>
     <property name="targetID" value="7"/>
     <property name="targetWarpPointID" value="1"/>
    </properties>
   </object>
-  <object name="warpField" x="0" y="384" width="16" height="16">
+  <object id="58" name="warpField" x="0" y="384" width="16" height="16">
    <properties>
     <property name="targetID" value="7"/>
     <property name="targetWarpPointID" value="1"/>
    </properties>
   </object>
-  <object name="warpField" x="496" y="304" width="16" height="16">
+  <object id="59" name="warpField" x="496" y="304" width="16" height="16">
    <properties>
     <property name="targetID" value="10"/>
     <property name="targetWarpPointID" value="1"/>
    </properties>
   </object>
-  <object name="warpField" x="496" y="320" width="16" height="16">
+  <object id="60" name="warpField" x="496" y="320" width="16" height="16">
    <properties>
     <property name="targetID" value="10"/>
     <property name="targetWarpPointID" value="1"/>
    </properties>
   </object>
-  <object name="warpField" x="496" y="336" width="16" height="16">
+  <object id="61" name="warpField" x="496" y="336" width="16" height="16">
    <properties>
     <property name="targetID" value="10"/>
     <property name="targetWarpPointID" value="1"/>
    </properties>
   </object>
-  <object name="warpField" x="496" y="352" width="16" height="16">
+  <object id="62" name="warpField" x="496" y="352" width="16" height="16">
    <properties>
     <property name="targetID" value="10"/>
     <property name="targetWarpPointID" value="1"/>
    </properties>
   </object>
-  <object name="warpField" x="496" y="368" width="16" height="16">
+  <object id="63" name="warpField" x="496" y="368" width="16" height="16">
    <properties>
     <property name="targetID" value="10"/>
     <property name="targetWarpPointID" value="1"/>
    </properties>
   </object>
-  <object name="warpField" x="496" y="384" width="16" height="16">
+  <object id="64" name="warpField" x="496" y="384" width="16" height="16">
    <properties>
     <property name="targetID" value="10"/>
     <property name="targetWarpPointID" value="1"/>
    </properties>
   </object>
-  <object name="startField" x="480" y="320" width="16" height="16">
+  <object id="65" name="startField" x="480" y="320" width="16" height="16">
    <properties>
     <property name="fieldID" value="6"/>
    </properties>
   </object>
-  <object name="warpField" x="80" y="144" width="16" height="16">
+  <object id="66" name="warpField" x="80" y="144" width="16" height="16">
    <properties>
     <property name="targetID" value="19"/>
     <property name="targetWarpPointID" value="1"/>
    </properties>
   </object>
-  <object name="startField" x="80" y="160" width="16" height="16">
+  <object id="67" name="startField" x="80" y="160" width="16" height="16">
    <properties>
     <property name="fieldID" value="9"/>
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="objects" width="32" height="32" visible="0">
-  <object name="sign" x="240" y="432" width="16" height="16">
+ <objectgroup name="objects">
+  <object id="68" name="sign" x="240" y="432" width="16" height="16">
    <properties>
-    <property name="text" value="Welcome in our small town."/>
-    <property name="title" value="Timsey Village"/>
+    <property name="text" value="sign_3_1_text"/>
+    <property name="title" value="sign_3_1_title"/>
    </properties>
   </object>
-  <object name="sign" x="256" y="432" width="16" height="16">
+  <object id="70" name="sign" x="16" y="288" width="16" height="16">
    <properties>
-    <property name="text" value="Welcome in our small town."/>
-    <property name="title" value="Timsey Village"/>
+    <property name="text" value="sign_3_3_text"/>
+    <property name="title" value="sign_3_3_title"/>
    </properties>
   </object>
-  <object name="sign" x="16" y="288" width="16" height="16">
+  <object id="71" name="sign" x="192" y="288" width="16" height="16">
    <properties>
-    <property name="text" value="west: Timsey Canal Bridge 1km"/>
-    <property name="title" value="Timsey Village"/>
+    <property name="text" value="sign_3_2_text"/>
+    <property name="title" value="sign_3_2_title"/>
    </properties>
   </object>
-  <object name="sign" x="192" y="288" width="16" height="16">
+  <object id="74" name="sign" x="256" y="432" width="16" height="16">
    <properties>
-    <property name="text" value="Please come in. Everyone is welcome."/>
-    <property name="title" value="Family Eckdon"/>
+    <property name="text" value="sign_3_1_text"/>
+    <property name="title" value="sign_3_1_title"/>
    </properties>
   </object>
-  <object name="sign" x="240" y="416" width="16" height="16">
+  <object id="75" name="sign" x="256" y="416" width="16" height="16">
    <properties>
-    <property name="text" value="Welcome in our small town."/>
-    <property name="title" value="Timsey Village"/>
+    <property name="text" value="sign_3_1_text"/>
+    <property name="title" value="sign_3_1_title"/>
    </properties>
   </object>
-  <object name="sign" x="256" y="416" width="16" height="16">
+  <object id="76" name="sign" x="240" y="416" width="16" height="16">
    <properties>
-    <property name="text" value="Welcome in our small town."/>
-    <property name="title" value="Timsey Village"/>
+    <property name="text" value="sign_3_1_text"/>
+    <property name="title" value="sign_3_1_title"/>
    </properties>
   </object>
  </objectgroup>

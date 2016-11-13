@@ -25,6 +25,7 @@ import de.limbusdev.guardianmonsters.GuardianMonsters;
 import de.limbusdev.guardianmonsters.managers.SaveGameManager;
 import de.limbusdev.guardianmonsters.utils.GS;
 import de.limbusdev.guardianmonsters.utils.GameState;
+import de.limbusdev.guardianmonsters.utils.L18N;
 
 
 /**
@@ -165,7 +166,7 @@ public class MainMenuScreen implements Screen {
         tbs.up   = new TextureRegionDrawable(game.media.getUITextureAtlas().findRegion("b192up"));
 
         // Start Button
-        TextButton button = new TextButton("Touch to Start", tbs);
+        TextButton button = new TextButton(L18N.get().l18n().get("main_menu_touch_start"), tbs);
         button.setWidth(300);
         button.setHeight(75);
         button.setPosition(GS.RES_X / 2, 92f, Align.center);
@@ -206,8 +207,8 @@ public class MainMenuScreen implements Screen {
         // ................................................................................. BUTTONS
         this.buttons = new ArrayMap<String, TextButton>();
 
-        String startButton = "Start New Game";
-        if(SaveGameManager.doesGameSaveExist()) startButton = "Load Saved Game";
+        String startButton = L18N.get().l18n().get("main_menu_start_new");
+        if(SaveGameManager.doesGameSaveExist()) startButton = L18N.get().l18n().get("main_menu_load_saved");
 
         TextButton.TextButtonStyle tbs = new TextButton.TextButtonStyle();
         tbs.font = skin.getFont("default-font");
@@ -238,7 +239,7 @@ public class MainMenuScreen implements Screen {
 
 
         // .......................................................................... CREDITS BUTTON
-        button = new TextButton("Credits", tbs);
+        button = new TextButton(L18N.get().l18n().get("main_menu_credits"), tbs);
         button.setWidth(300);
         button.setHeight(75);
         button.setPosition(32, GS.RES_Y - 128, Align.topLeft);

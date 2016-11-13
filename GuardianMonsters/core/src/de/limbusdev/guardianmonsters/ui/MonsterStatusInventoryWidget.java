@@ -40,9 +40,9 @@ public class MonsterStatusInventoryWidget extends Table{
     private MediaManager media;
     private TextButton infoHead, mpLabel, hpLabel, expLabel;
 
-    public MonsterStatusInventoryWidget (Skin skin, MediaManager media) {
+    public MonsterStatusInventoryWidget (Skin skin) {
         super();
-        this.media = media;
+        this.media = MediaManager.get();
         this.skin = skin;
         this.setFillParent(true);
         this.monsterButtons = new Array<TextButton>();

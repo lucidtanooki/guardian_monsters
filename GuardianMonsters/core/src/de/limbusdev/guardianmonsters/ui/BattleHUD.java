@@ -9,6 +9,8 @@ import java.text.MessageFormat;
 import de.limbusdev.guardianmonsters.GuardianMonsters;
 import de.limbusdev.guardianmonsters.ecs.components.TeamComponent;
 import de.limbusdev.guardianmonsters.enums.ButtonIDs;
+import de.limbusdev.guardianmonsters.managers.MediaManager;
+import de.limbusdev.guardianmonsters.managers.ScreenManager;
 import de.limbusdev.guardianmonsters.model.AttackCalculationReport;
 import de.limbusdev.guardianmonsters.model.Monster;
 import de.limbusdev.guardianmonsters.model.MonsterInBattle;
@@ -51,8 +53,8 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
     private BattleState state;
 
     // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ CONSTRUCTOR
-    public BattleHUD(final GuardianMonsters game) {
-        super(game, game.media.battleSkin);
+    public BattleHUD() {
+        super(MediaManager.get().getBattleSkin());
         initializeAttributes();
         setUpUI();
     }
@@ -210,7 +212,7 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
         // Widgets
         statusWidget      = new BattleStatusOverviewWidget(this, skin);
 
-        animationWidget   = new BattleAnimationWidget(this, game.media);
+        animationWidget   = new BattleAnimationWidget(this);
         animationWidget   .addWidgetObserver(this);
 
         mainMenu          = new BattleMainMenuWidget(this, skin);
@@ -529,8 +531,8 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
     }
 
     protected void onEndOfBattleBack() {
-        if(checkIfWholeTeamKO(heroTeam)) game.create();
-        else game.popScreen();
+        if(checkIfWholeTeamKO(heroTeam)) ScreenManager.get().getGame().create();
+        else ScreenManager.get().popScreen();
     }
 
 

@@ -38,6 +38,7 @@ import de.limbusdev.guardianmonsters.enums.SkyDirection;
 import de.limbusdev.guardianmonsters.geometry.IntVector2;
 import de.limbusdev.guardianmonsters.managers.MediaManager;
 import de.limbusdev.guardianmonsters.managers.SaveGameManager;
+import de.limbusdev.guardianmonsters.managers.ScreenManager;
 import de.limbusdev.guardianmonsters.model.BattleFactory;
 import de.limbusdev.guardianmonsters.utils.EntityFamilies;
 import de.limbusdev.guardianmonsters.utils.GS;
@@ -62,7 +63,6 @@ public class HUD extends InputAdapter {
     private Group menuButtons, conversationLabel;
     private TextureAtlas UItextures;
     public final BattleScreen battleScreen;
-    public final GuardianMonsters game;
     public final SaveGameManager saveGameManager;
     public Engine engine;
     public final Entity hero;
@@ -76,23 +76,20 @@ public class HUD extends InputAdapter {
     private Vector2 dPadCenter, dPadCenterDist;
     
     /* ........................................................................... CONSTRUCTOR .. */
-    public HUD(final BattleScreen battleScreen, final GuardianMonsters game,
-               final SaveGameManager saveGameManager, final Entity hero, MediaManager media,
-               Engine engine) {
+    public HUD(final BattleScreen battleScreen, final SaveGameManager saveGameManager, final Entity hero, Engine engine) {
 
-        this.game = game;
         this.engine = engine;
         this.battleScreen = battleScreen;
         this.saveGameManager = saveGameManager;
         this.openHUDELement = HUDElements.NONE;
         this.hero = hero;
-        this.UItextures = game.media.getUITextureAtlas();
+        this.UItextures = MediaManager.get().getUITextureAtlas();
 
 
         // Scene2D
         FitViewport fit = new FitViewport(GS.RES_X, GS.RES_Y);
         this.stage = new Stage(fit);
-        this.skin = media.skin;
+        this.skin = MediaManager.get().getSkin();
 
         setUpConversation();
         setUpTopLevelButtons();
@@ -100,7 +97,7 @@ public class HUD extends InputAdapter {
 
 
         // Images ............................................................................ START
-        this.blackCourtain = new Image(game.media.getBattleUITextureAtlas().findRegion("black"));
+        this.blackCourtain = new Image(MediaManager.get().getBattleUITextureAtlas().findRegion("black"));
         this.blackCourtain.setWidth(GS.RES_X);
         this.blackCourtain.setHeight(GS.RES_Y);
         this.blackCourtain.setPosition(0, 0);
@@ -187,7 +184,7 @@ public class HUD extends InputAdapter {
                 oppTeam.monsters.add(BattleFactory.getInstance().createMonster(4));
                 oppTeam.monsters.add(BattleFactory.getInstance().createMonster(11));
                 battleScreen.init(Components.team.get(hero), oppTeam);
-                game.pushScreen(battleScreen);
+                ScreenManager.get().pushScreen(battleScreen);
             }
         });
         this.menuButtons.addActor(battle);
@@ -198,7 +195,7 @@ public class HUD extends InputAdapter {
         teamButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                game.pushScreen(new InventoryScreen(game, Components.team.get(hero)));
+                ScreenManager.get().pushScreen(new InventoryScreen(Components.team.get(hero)));
             }
         });
         this.menuButtons.addActor(teamButton);
@@ -500,11 +497,11 @@ public class HUD extends InputAdapter {
         this.dPadCenterDist = new Vector2();
 
         this.dPadImgs = new Array<TextureRegion>();
-        this.dPadImgs.add(game.media.getUITextureAtlas().findRegion("dpad_idle"));
-        this.dPadImgs.add(game.media.getUITextureAtlas().findRegion("dpad_up"));
-        this.dPadImgs.add(game.media.getUITextureAtlas().findRegion("dpad_right"));
-        this.dPadImgs.add(game.media.getUITextureAtlas().findRegion("dpad_down"));
-        this.dPadImgs.add(game.media.getUITextureAtlas().findRegion("dpad_left"));
+        this.dPadImgs.add(MediaManager.get().getUITextureAtlas().findRegion("dpad_idle"));
+        this.dPadImgs.add(MediaManager.get().getUITextureAtlas().findRegion("dpad_up"));
+        this.dPadImgs.add(MediaManager.get().getUITextureAtlas().findRegion("dpad_right"));
+        this.dPadImgs.add(MediaManager.get().getUITextureAtlas().findRegion("dpad_down"));
+        this.dPadImgs.add(MediaManager.get().getUITextureAtlas().findRegion("dpad_left"));
         dpadImage = new Image(dPadImgs.first());
         dpadImage.setSize(dPadArea.width, dPadArea.height);
         dpadImage.setPosition(dPadCenter.x, dPadCenter.y, Align.center);

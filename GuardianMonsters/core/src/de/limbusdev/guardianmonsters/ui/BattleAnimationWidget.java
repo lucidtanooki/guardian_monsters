@@ -34,18 +34,18 @@ public class BattleAnimationWidget extends BattleWidget implements ObservableWid
     public boolean attackAnimationRunning;
     private ImageButton nextButton;
 
-    public BattleAnimationWidget(final AHUD hud, MediaManager media) {
+    public BattleAnimationWidget(final AHUD hud) {
         super(hud);
 
         observers = new Array<WidgetObserver>();
         this.monsterImgsLeft = new ArrayMap<Integer,Image>();
         this.monsterImgsRight = new ArrayMap<Integer,Image>();
         this.setBounds(0,0,0,0);
-        this.media = media;
+        this.media = MediaManager.get();
 
 
         // Next Button
-        nextButton = new ImageButton(media.battleSkin, "b-back-eob");
+        nextButton = new ImageButton(MediaManager.get().getBattleSkin(), "b-back-eob");
         nextButton.setPosition(GS.RES_X, 0, Align.bottomRight);
 
         nextButton.addListener(

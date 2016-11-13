@@ -34,25 +34,21 @@ public class BattleScreen implements Screen {
     private BitmapFont font;
     private de.limbusdev.guardianmonsters.ui.BattleHUD battleHUD;
     private Texture background;
-    private MediaManager media;
     private boolean initialized=false;
     private Music bgMusic;
     /* ........................................................................... CONSTRUCTOR .. */
 
-    public BattleScreen(MediaManager media, OutdoorGameWorldScreen gameScreen, GuardianMonsters game) {
-        this.battleHUD = new de.limbusdev.guardianmonsters.ui.BattleHUD(game);
+    public BattleScreen() {
+        this.battleHUD = new de.limbusdev.guardianmonsters.ui.BattleHUD();
         setUpRendering();
         setUpInputProcessor();
-        this.media = media;
-        this.background = media.getBackgroundTexture(0);
-        this.bgMusic = media.getBGMusic(MusicType.BATTLE, 0);
+        this.background = MediaManager.get().getBackgroundTexture(0);
+        this.bgMusic = MediaManager.get().getBGMusic(MusicType.BATTLE, 0);
         this.bgMusic.setLooping(true);
     }
     /* ............................................................................... METHODS .. */
 
-    /**
-     * Called when this screen becomes the current screen for a {@link Game}.
-     */
+
     @Override
     public void show() {
         if(!initialized) System.err.println("BattleScreen must get initialized before drawn.");

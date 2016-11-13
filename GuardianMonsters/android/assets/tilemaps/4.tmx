@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="16" height="16" tilewidth="16" tileheight="16">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="16" height="16" tilewidth="16" tileheight="16" nextobjectid="43">
  <properties>
-  <property name="musicIndex" value="1"/>
+  <property name="musicIndex" value="2"/>
   <property name="musicType" value="town"/>
  </properties>
- <tileset firstgid="1" name="limbusdev_world" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="limbusdev_world" tilewidth="16" tileheight="16" tilecount="4096">
   <image source="../spritesheets/limbusdev_world.png" width="1024" height="1024"/>
  </tileset>
- <tileset firstgid="4097" name="limbusdev_world2" tilewidth="16" tileheight="16">
+ <tileset firstgid="4097" name="limbusdev_world2" tilewidth="16" tileheight="16" tilecount="4096">
   <image source="../spritesheets/limbusdev_world2.png" width="1024" height="1024"/>
  </tileset>
  <layer name="ground1" width="16" height="16">
@@ -45,143 +45,144 @@
    eJxjYBgFMDBfbqBdMLBgkTwDw2J58vU/AOp9MIBhONLjjxwAAGUYBPs=
   </data>
  </layer>
- <objectgroup name="colliderWalls1" width="16" height="16">
-  <object x="0" y="0" width="224" height="48"/>
-  <object x="224" y="0" width="32" height="16"/>
-  <object x="240" y="16" width="16" height="240"/>
-  <object x="0" y="48" width="16" height="208"/>
-  <object x="16" y="240" width="112" height="16"/>
-  <object x="144" y="240" width="96" height="16"/>
-  <object x="16" y="144" width="112" height="16"/>
-  <object x="112" y="160" width="16" height="48"/>
-  <object x="176" y="160" width="16" height="48"/>
-  <object x="192" y="160" width="48" height="16"/>
-  <object x="208" y="176" width="32" height="16"/>
-  <object x="32" y="208" width="32" height="32"/>
-  <object x="128" y="48" width="32" height="16"/>
-  <object x="32" y="48" width="48" height="16"/>
+ <objectgroup name="colliderWalls1" visible="0">
+  <object id="1" x="0" y="0" width="224" height="48"/>
+  <object id="2" x="224" y="0" width="32" height="16"/>
+  <object id="3" x="240" y="16" width="16" height="240"/>
+  <object id="4" x="0" y="48" width="16" height="208"/>
+  <object id="5" x="16" y="240" width="112" height="16"/>
+  <object id="6" x="144" y="240" width="96" height="16"/>
+  <object id="7" x="16" y="144" width="112" height="16"/>
+  <object id="8" x="112" y="160" width="16" height="48"/>
+  <object id="9" x="176" y="160" width="16" height="48"/>
+  <object id="10" x="192" y="160" width="48" height="16"/>
+  <object id="11" x="208" y="176" width="32" height="16"/>
+  <object id="12" x="32" y="208" width="32" height="32"/>
+  <object id="13" x="128" y="48" width="32" height="16"/>
+  <object id="14" x="32" y="48" width="48" height="16"/>
  </objectgroup>
- <objectgroup name="sensors" width="16" height="16">
-  <object name="warpField" x="128" y="240" width="16" height="16">
+ <objectgroup name="sensors" visible="0">
+  <object id="15" name="warpField" x="128" y="240" width="16" height="16">
    <properties>
     <property name="targetID" value="3"/>
     <property name="targetWarpPointID" value="3"/>
    </properties>
   </object>
-  <object name="startField" x="128" y="224" width="16" height="16">
+  <object id="16" name="startField" x="128" y="224" width="16" height="16">
    <properties>
     <property name="fieldID" value="1"/>
    </properties>
   </object>
-  <object name="warpField" x="224" y="16" width="16" height="16">
+  <object id="17" name="warpField" x="224" y="16" width="16" height="16">
    <properties>
     <property name="targetID" value="5"/>
     <property name="targetWarpPointID" value="1"/>
    </properties>
   </object>
-  <object name="startField" x="224" y="32" width="16" height="16">
+  <object id="18" name="startField" x="224" y="32" width="16" height="16">
    <properties>
     <property name="fieldID" value="2"/>
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="livingEntities" width="16" height="16">
-  <object name="person" x="112" y="80" width="16" height="16">
+ <objectgroup name="livingEntities">
+  <object id="19" name="person" x="112" y="80" width="16" height="16">
    <properties>
     <property name="male" value="true"/>
     <property name="moving" value="true"/>
     <property name="path" value="E,E,E,E,E,W,W,W,W,W"/>
     <property name="spriteIndex" value="1"/>
     <property name="startDir" value="S"/>
+    <property name="text" value="person_4_1"/>
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="objects" width="16" height="16">
-  <object name="sign" x="128" y="48" width="16" height="16">
+ <objectgroup name="objects">
+  <object id="20" name="sign" x="128" y="48" width="16" height="16">
    <properties>
-    <property name="text" value="The fire is warm and feels good."/>
-    <property name="title" value="Oven"/>
+    <property name="text" value="sign_4_1_text"/>
+    <property name="title" value="sign_4_1_title"/>
    </properties>
   </object>
-  <object name="sign" x="144" y="48" width="16" height="16">
+  <object id="24" name="sign" x="32" y="48" width="16" height="16">
    <properties>
-    <property name="text" value="The fire is warm and feels good."/>
-    <property name="title" value="Oven"/>
+    <property name="text" value="sign_4_2_text"/>
+    <property name="title" value="sign_4_2_title"/>
    </properties>
   </object>
-  <object name="sign" x="144" y="32" width="16" height="16">
+  <object id="35" name="sign" x="144" y="48" width="16" height="16">
    <properties>
-    <property name="text" value="The fire is warm and feels good."/>
-    <property name="title" value="Oven"/>
+    <property name="text" value="sign_4_1_text"/>
+    <property name="title" value="sign_4_1_title"/>
    </properties>
   </object>
-  <object name="sign" x="128" y="32" width="16" height="16">
+  <object id="36" name="sign" x="144" y="32" width="16" height="16">
    <properties>
-    <property name="text" value="The fire is warm and feels good."/>
-    <property name="title" value="Oven"/>
+    <property name="text" value="sign_4_1_text"/>
+    <property name="title" value="sign_4_1_title"/>
    </properties>
   </object>
-  <object name="sign" x="32" y="48" width="16" height="16">
+  <object id="37" name="sign" x="128" y="32" width="16" height="16">
    <properties>
-    <property name="text" value="Many interesting books about the old world."/>
-    <property name="title" value="Shelf"/>
+    <property name="text" value="sign_4_1_text"/>
+    <property name="title" value="sign_4_1_title"/>
    </properties>
   </object>
-  <object name="sign" x="48" y="48" width="16" height="16">
+  <object id="38" name="sign" x="48" y="48" width="16" height="16">
    <properties>
-    <property name="text" value="Many interesting books about the old world."/>
-    <property name="title" value="Shelf"/>
+    <property name="text" value="sign_4_2_text"/>
+    <property name="title" value="sign_4_2_title"/>
    </properties>
   </object>
-  <object name="sign" x="64" y="48" width="16" height="16">
+  <object id="39" name="sign" x="64" y="48" width="16" height="16">
    <properties>
-    <property name="text" value="Many interesting books about the old world."/>
-    <property name="title" value="Shelf"/>
+    <property name="text" value="sign_4_2_text"/>
+    <property name="title" value="sign_4_2_title"/>
    </properties>
   </object>
-  <object name="sign" x="64" y="32" width="16" height="16">
+  <object id="40" name="sign" x="64" y="32" width="16" height="16">
    <properties>
-    <property name="text" value="Many interesting books about the old world."/>
-    <property name="title" value="Shelf"/>
+    <property name="text" value="sign_4_2_text"/>
+    <property name="title" value="sign_4_2_title"/>
    </properties>
   </object>
-  <object name="sign" x="48" y="32" width="16" height="16">
+  <object id="41" name="sign" x="32" y="32" width="16" height="16">
    <properties>
-    <property name="text" value="Many interesting books about the old world."/>
-    <property name="title" value="Shelf"/>
+    <property name="text" value="sign_4_2_text"/>
+    <property name="title" value="sign_4_2_title"/>
    </properties>
   </object>
-  <object name="sign" x="32" y="32" width="16" height="16">
+  <object id="42" name="sign" x="48" y="32" width="16" height="16">
    <properties>
-    <property name="text" value="Many interesting books about the old world."/>
-    <property name="title" value="Shelf"/>
+    <property name="text" value="sign_4_2_text"/>
+    <property name="title" value="sign_4_2_title"/>
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="animations" width="16" height="16">
-  <object name="animation" x="208" y="208" width="16" height="16">
+ <objectgroup name="animations" visible="0">
+  <object id="30" name="animation" x="208" y="208" width="16" height="16">
    <properties>
     <property name="index" value="15"/>
    </properties>
   </object>
-  <object name="animation" x="80" y="176" width="16" height="16">
+  <object id="31" name="animation" x="80" y="176" width="16" height="16">
    <properties>
     <property name="index" value="14"/>
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="animatedObjects" width="16" height="16">
-  <object name="animation" x="128" y="48" width="16" height="16">
+ <objectgroup name="animatedObjects" visible="0">
+  <object id="32" name="animation" x="128" y="48" width="16" height="16">
    <properties>
     <property name="index" value="13"/>
    </properties>
   </object>
-  <object name="animation" x="48" y="64" width="16" height="16">
+  <object id="33" name="animation" x="48" y="64" width="16" height="16">
    <properties>
     <property name="index" value="16"/>
    </properties>
   </object>
-  <object name="animation" x="48" y="176" width="16" height="16">
+  <object id="34" name="animation" x="48" y="176" width="16" height="16">
    <properties>
     <property name="index" value="16"/>
    </properties>

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="8" height="8" tilewidth="16" tileheight="16">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="8" height="8" tilewidth="16" tileheight="16" nextobjectid="11">
  <properties>
-  <property name="musicIndex" value="1"/>
+  <property name="musicIndex" value="2"/>
   <property name="musicType" value="town"/>
  </properties>
- <tileset firstgid="1" name="limbusdev_world" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="limbusdev_world" tilewidth="16" tileheight="16" tilecount="4096">
   <image source="../spritesheets/limbusdev_world.png" width="1024" height="1024"/>
  </tileset>
- <tileset firstgid="4097" name="limbusdev_world2" tilewidth="16" tileheight="16">
+ <tileset firstgid="4097" name="limbusdev_world2" tilewidth="16" tileheight="16" tilecount="4096">
   <image source="../spritesheets/limbusdev_world2.png" width="1024" height="1024"/>
  </tileset>
  <layer name="ground0" width="8" height="8">
@@ -40,33 +40,33 @@
    eJxjYKAOOMjLwHCYl0qG0REAACdFAZ8=
   </data>
  </layer>
- <objectgroup name="colliderWalls1" width="8" height="8">
-  <object x="0" y="16" width="128" height="16"/>
-  <object x="32" y="48" width="32" height="16"/>
-  <object x="0" y="32" width="16" height="96"/>
-  <object x="112" y="32" width="16" height="96"/>
-  <object x="16" y="112" width="32" height="16"/>
-  <object x="64" y="112" width="48" height="16"/>
-  <object x="96" y="96" width="16" height="16"/>
+ <objectgroup name="colliderWalls1">
+  <object id="1" x="0" y="16" width="128" height="16"/>
+  <object id="2" x="32" y="48" width="32" height="16"/>
+  <object id="3" x="0" y="32" width="16" height="96"/>
+  <object id="4" x="112" y="32" width="16" height="96"/>
+  <object id="5" x="16" y="112" width="32" height="16"/>
+  <object id="6" x="64" y="112" width="48" height="16"/>
+  <object id="7" x="96" y="96" width="16" height="16"/>
  </objectgroup>
- <objectgroup name="sensors" width="8" height="8">
-  <object name="warpField" x="48" y="112" width="16" height="16">
+ <objectgroup name="sensors">
+  <object id="8" name="warpField" x="48" y="112" width="16" height="16">
    <properties>
     <property name="targetID" value="1"/>
     <property name="targetWarpPointID" value="3"/>
    </properties>
   </object>
-  <object name="startField" x="64" y="64" width="16" height="16">
+  <object id="9" name="startField" x="64" y="64" width="16" height="16">
    <properties>
     <property name="fieldID" value="1"/>
    </properties>
   </object>
-  <object name="startField" x="48" y="96" width="16" height="16">
+  <object id="10" name="startField" x="48" y="96" width="16" height="16">
    <properties>
     <property name="fieldID" value="2"/>
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="livingEntities" width="8" height="8" visible="0"/>
- <objectgroup name="objects" width="8" height="8" visible="0"/>
+ <objectgroup name="livingEntities" visible="0"/>
+ <objectgroup name="objects" visible="0"/>
 </map>

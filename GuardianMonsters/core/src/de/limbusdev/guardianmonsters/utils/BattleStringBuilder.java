@@ -1,8 +1,5 @@
 package de.limbusdev.guardianmonsters.utils;
 
-
-import java.text.MessageFormat;
-
 import de.limbusdev.guardianmonsters.model.AttackCalculationReport;
 import de.limbusdev.guardianmonsters.model.Monster;
 import de.limbusdev.guardianmonsters.model.MonsterInBattle;

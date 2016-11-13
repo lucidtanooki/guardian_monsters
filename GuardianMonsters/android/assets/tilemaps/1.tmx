@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="32" height="32" tilewidth="16" tileheight="16">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="16" tileheight="16" nextobjectid="202">
  <properties>
   <property name="musicIndex" value="2"/>
   <property name="musicType" value="town"/>
  </properties>
- <tileset firstgid="1" name="limbusdev_world" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="limbusdev_world" tilewidth="16" tileheight="16" tilecount="4096">
   <image source="../spritesheets/limbusdev_world.png" width="1024" height="1024"/>
  </tileset>
- <tileset firstgid="4097" name="limbusdev_world2" tilewidth="16" tileheight="16">
+ <tileset firstgid="4097" name="limbusdev_world2" tilewidth="16" tileheight="16" tilecount="4096">
   <image source="../spritesheets/limbusdev_world2.png" width="1024" height="1024"/>
  </tileset>
  <layer name="ground1" width="32" height="32">
@@ -35,72 +35,72 @@
    eJztzTENACAMALAlcM0WOAPhIICTZE9roBEAwE8tI3rW/ePes/Bf996FPwDwdgBWUgHS
   </data>
  </layer>
- <objectgroup name="colliderWalls1" width="32" height="32">
-  <object x="0" y="0" width="256" height="96"/>
-  <object x="0" y="96" width="32" height="224"/>
-  <object x="0" y="320" width="16" height="32"/>
-  <object x="32" y="304" width="32" height="16"/>
-  <object x="288" y="0" width="224" height="64"/>
-  <object x="352" y="64" width="64" height="16"/>
-  <object x="336" y="112" width="48" height="16"/>
-  <object x="400" y="112" width="32" height="16"/>
-  <object x="448" y="64" width="64" height="96"/>
-  <object x="480" y="160" width="32" height="288"/>
-  <object x="256" y="448" width="256" height="32"/>
-  <object x="0" y="480" width="512" height="32"/>
-  <object x="112" y="288" width="80" height="64"/>
-  <object x="0" y="352" width="192" height="128"/>
-  <object x="144" y="160" width="32" height="32"/>
-  <object x="80" y="176" width="64" height="32"/>
-  <object x="144" y="192" width="32" height="16"/>
-  <object x="336" y="64" width="16" height="48"/>
-  <object x="416" y="64" width="16" height="48"/>
-  <object x="368" y="272" width="32" height="32"/>
-  <object x="400" y="240" width="32" height="32"/>
-  <object x="352" y="240" width="32" height="32"/>
-  <object x="352" y="272" width="16" height="16"/>
-  <object x="288" y="192" width="48" height="48"/>
-  <object x="352" y="192" width="48" height="48"/>
-  <object x="336" y="192" width="16" height="32"/>
-  <object x="288" y="64" width="16" height="16"/>
-  <object x="400" y="80" width="16" height="16"/>
-  <object x="112" y="208" width="16" height="16"/>
+ <objectgroup name="colliderWalls1" visible="0">
+  <object id="1" x="0" y="0" width="256" height="96"/>
+  <object id="2" x="0" y="96" width="32" height="224"/>
+  <object id="3" x="0" y="320" width="16" height="32"/>
+  <object id="4" x="32" y="304" width="32" height="16"/>
+  <object id="5" x="288" y="0" width="224" height="64"/>
+  <object id="6" x="352" y="64" width="64" height="16"/>
+  <object id="7" x="336" y="112" width="48" height="16"/>
+  <object id="8" x="400" y="112" width="32" height="16"/>
+  <object id="9" x="448" y="64" width="64" height="96"/>
+  <object id="10" x="480" y="160" width="32" height="288"/>
+  <object id="11" x="256" y="448" width="256" height="32"/>
+  <object id="12" x="0" y="480" width="512" height="32"/>
+  <object id="13" x="112" y="288" width="80" height="64"/>
+  <object id="14" x="0" y="352" width="192" height="128"/>
+  <object id="15" x="144" y="160" width="32" height="32"/>
+  <object id="16" x="80" y="176" width="64" height="32"/>
+  <object id="17" x="144" y="192" width="32" height="16"/>
+  <object id="18" x="336" y="64" width="16" height="48"/>
+  <object id="19" x="416" y="64" width="16" height="48"/>
+  <object id="20" x="368" y="272" width="32" height="32"/>
+  <object id="21" x="400" y="240" width="32" height="32"/>
+  <object id="22" x="352" y="240" width="32" height="32"/>
+  <object id="23" x="352" y="272" width="16" height="16"/>
+  <object id="24" x="288" y="192" width="48" height="48"/>
+  <object id="25" x="352" y="192" width="48" height="48"/>
+  <object id="26" x="336" y="192" width="16" height="32"/>
+  <object id="27" x="288" y="64" width="16" height="16"/>
+  <object id="28" x="400" y="80" width="16" height="16"/>
+  <object id="29" x="112" y="208" width="16" height="16"/>
  </objectgroup>
- <objectgroup name="sensors" width="32" height="32">
-  <object name="warpField" x="256" y="0" width="16" height="16">
+ <objectgroup name="sensors" visible="0">
+  <object id="30" name="warpField" x="256" y="0" width="16" height="16">
    <properties>
     <property name="targetID" value="2"/>
     <property name="targetWarpPointID" value="3"/>
    </properties>
   </object>
-  <object name="warpField" x="272" y="0" width="16" height="16">
+  <object id="31" name="warpField" x="272" y="0" width="16" height="16">
    <properties>
     <property name="targetID" value="2"/>
     <property name="targetWarpPointID" value="4"/>
    </properties>
   </object>
-  <object name="startField" x="256" y="16" width="16" height="16">
+  <object id="32" name="startField" x="256" y="16" width="16" height="16">
    <properties>
     <property name="fieldID" value="1"/>
    </properties>
   </object>
-  <object name="startField" x="272" y="16" width="16" height="16">
+  <object id="33" name="startField" x="272" y="16" width="16" height="16">
    <properties>
     <property name="fieldID" value="2"/>
    </properties>
   </object>
-  <object name="startField" x="336" y="240" width="16" height="16">
+  <object id="34" name="startField" x="336" y="240" width="16" height="16">
    <properties>
     <property name="fieldID" value="3"/>
    </properties>
   </object>
-  <object name="warpField" x="336" y="224" width="16" height="16">
+  <object id="35" name="warpField" x="336" y="224" width="16" height="16">
    <properties>
     <property name="targetID" value="9"/>
     <property name="targetWarpPointID" value="2"/>
    </properties>
   </object>
-  <object name="monsterArea" x="32" y="96" width="96" height="64">
+  <object id="36" name="monsterArea" x="32" y="96" width="96" height="64">
    <properties>
     <property name="monsters" value="4;0.5;8;0.45;3;0.05"/>
     <property name="probability" value="0.05"/>
@@ -108,7 +108,7 @@
     <property name="probability3" value="0.01"/>
    </properties>
   </object>
-  <object name="monsterArea" x="256" y="16" width="32" height="48">
+  <object id="37" name="monsterArea" x="256" y="16" width="32" height="48">
    <properties>
     <property name="monsters" value="4;0.5;8;0.45;3;0.05"/>
     <property name="probability" value="0.05"/>
@@ -116,7 +116,7 @@
     <property name="probability3" value="0.01"/>
    </properties>
   </object>
-  <object name="monsterArea" x="256" y="64" width="80" height="32">
+  <object id="38" name="monsterArea" x="256" y="64" width="80" height="32">
    <properties>
     <property name="monsters" value="4;0.5;8;0.45;3;0.05"/>
     <property name="probability" value="0.05"/>
@@ -124,7 +124,7 @@
     <property name="probability3" value="0.01"/>
    </properties>
   </object>
-  <object name="monsterArea" x="240" y="96" width="16" height="16">
+  <object id="39" name="monsterArea" x="240" y="96" width="16" height="16">
    <properties>
     <property name="monsters" value="4;0.5;8;0.45;3;0.05"/>
     <property name="probability" value="0.05"/>
@@ -132,7 +132,7 @@
     <property name="probability3" value="0.01"/>
    </properties>
   </object>
-  <object name="monsterArea" x="272" y="96" width="16" height="16">
+  <object id="40" name="monsterArea" x="272" y="96" width="16" height="16">
    <properties>
     <property name="monsters" value="4;0.5;8;0.45;3;0.05"/>
     <property name="probability" value="0.05"/>
@@ -140,7 +140,7 @@
     <property name="probability3" value="0.01"/>
    </properties>
   </object>
-  <object name="monsterArea" x="304" y="96" width="32" height="16">
+  <object id="41" name="monsterArea" x="304" y="96" width="32" height="16">
    <properties>
     <property name="monsters" value="4;0.5;8;0.45;3;0.05"/>
     <property name="probability" value="0.05"/>
@@ -148,7 +148,7 @@
     <property name="probability3" value="0.01"/>
    </properties>
   </object>
-  <object name="monsterArea" x="432" y="64" width="16" height="48">
+  <object id="42" name="monsterArea" x="432" y="64" width="16" height="48">
    <properties>
     <property name="monsters" value="4;0.5;8;0.45;3;0.05"/>
     <property name="probability" value="0.05"/>
@@ -156,7 +156,7 @@
     <property name="probability3" value="0.01"/>
    </properties>
   </object>
-  <object name="monsterArea" x="464" y="272" width="16" height="16">
+  <object id="43" name="monsterArea" x="464" y="272" width="16" height="16">
    <properties>
     <property name="monsters" value="4;0.5;8;0.45;3;0.05"/>
     <property name="probability" value="0.05"/>
@@ -164,7 +164,7 @@
     <property name="probability3" value="0.01"/>
    </properties>
   </object>
-  <object name="monsterArea" x="448" y="288" width="32" height="48">
+  <object id="44" name="monsterArea" x="448" y="288" width="32" height="48">
    <properties>
     <property name="monsters" value="4;0.5;8;0.45;3;0.05"/>
     <property name="probability" value="0.05"/>
@@ -172,7 +172,7 @@
     <property name="probability3" value="0.01"/>
    </properties>
   </object>
-  <object name="monsterArea" x="432" y="336" width="48" height="16">
+  <object id="45" name="monsterArea" x="432" y="336" width="48" height="16">
    <properties>
     <property name="monsters" value="4;0.5;8;0.45;3;0.05"/>
     <property name="probability" value="0.05"/>
@@ -180,7 +180,7 @@
     <property name="probability3" value="0.01"/>
    </properties>
   </object>
-  <object name="monsterArea" x="416" y="352" width="64" height="32">
+  <object id="46" name="monsterArea" x="416" y="352" width="64" height="32">
    <properties>
     <property name="monsters" value="4;0.5;8;0.45;3;0.05"/>
     <property name="probability" value="0.05"/>
@@ -188,7 +188,7 @@
     <property name="probability3" value="0.01"/>
    </properties>
   </object>
-  <object name="monsterArea" x="336" y="384" width="144" height="64">
+  <object id="47" name="monsterArea" x="336" y="384" width="144" height="64">
    <properties>
     <property name="monsters" value="4;0.5;8;0.45;3;0.05"/>
     <property name="probability" value="0.05"/>
@@ -196,7 +196,7 @@
     <property name="probability3" value="0.01"/>
    </properties>
   </object>
-  <object name="monsterArea" x="400" y="176" width="16" height="32">
+  <object id="48" name="monsterArea" x="400" y="176" width="16" height="32">
    <properties>
     <property name="monsters" value="4;0.5;8;0.45;3;0.05"/>
     <property name="probability" value="0.05"/>
@@ -204,7 +204,7 @@
     <property name="probability3" value="0.01"/>
    </properties>
   </object>
-  <object name="monsterArea" x="384" y="160" width="16" height="16">
+  <object id="49" name="monsterArea" x="384" y="160" width="16" height="16">
    <properties>
     <property name="monsters" value="4;0.5;8;0.45;3;0.05"/>
     <property name="probability" value="0.05"/>
@@ -212,7 +212,7 @@
     <property name="probability3" value="0.01"/>
    </properties>
   </object>
-  <object name="monsterArea" x="320" y="240" width="16" height="16">
+  <object id="50" name="monsterArea" x="320" y="240" width="16" height="16">
    <properties>
     <property name="monsters" value="4;0.5;8;0.45;3;0.05"/>
     <property name="probability" value="0.05"/>
@@ -221,756 +221,756 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="livingEntities" width="32" height="32" visible="0">
-  <object name="person" x="64" y="336" width="16" height="16">
+ <objectgroup name="livingEntities">
+  <object id="51" name="person" x="64" y="336" width="16" height="16">
    <properties>
     <property name="male" value="true"/>
     <property name="path" value="SSTOP"/>
     <property name="spriteIndex" value="2"/>
     <property name="static" value="true"/>
-    <property name="text" value="One day I will get a boat and sail around this beautiful planet."/>
+    <property name="text" value="person_1"/>
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="objects" width="32" height="32" visible="0">
-  <object name="sign" x="48" y="304" width="16" height="16">
+ <objectgroup name="objects">
+  <object id="53" name="sign" x="32" y="304" width="16" height="16">
    <properties>
-    <property name="text" value="Please be careful when swimming here."/>
-    <property name="title" value="Lake Southern Woods"/>
+    <property name="text" value="sign_1_text"/>
+    <property name="title" value="sign_1_title"/>
    </properties>
   </object>
-  <object name="sign" x="32" y="304" width="16" height="16">
+  <object id="54" name="sign" x="288" y="64" width="16" height="16">
    <properties>
-    <property name="text" value="Please be careful when swimming here."/>
-    <property name="title" value="Lake Southern Woods"/>
+    <property name="text" value="sign_2_text"/>
+    <property name="title" value="sign_2_title"/>
    </properties>
   </object>
-  <object name="sign" x="288" y="64" width="16" height="16">
+  <object id="199" name="sign" x="48" y="304" width="16" height="16">
    <properties>
-    <property name="text" value="Path to Timsey Village"/>
-    <property name="title" value="The southern woods"/>
+    <property name="text" value="sign_1_text"/>
+    <property name="title" value="sign_1_title"/>
    </properties>
   </object>
-  <object name="sign" x="32" y="288" width="16" height="16">
+  <object id="200" name="sign" x="48" y="288" width="16" height="16">
    <properties>
-    <property name="text" value="Please be careful when swimming here."/>
-    <property name="title" value="Lake Southern Woods"/>
+    <property name="text" value="sign_1_text"/>
+    <property name="title" value="sign_1_title"/>
    </properties>
   </object>
-  <object name="sign" x="48" y="288" width="16" height="16">
+  <object id="201" name="sign" x="32" y="288" width="16" height="16">
    <properties>
-    <property name="text" value="Please be careful when swimming here."/>
-    <property name="title" value="Lake Southern Woods"/>
+    <property name="text" value="sign_1_text"/>
+    <property name="title" value="sign_1_title"/>
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="animations" width="32" height="32">
-  <object name="animation" x="176" y="288" width="16" height="16">
+ <objectgroup name="animations" visible="0">
+  <object id="57" name="animation" x="176" y="288" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="160" y="288" width="16" height="16">
+  <object id="58" name="animation" x="160" y="288" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="144" y="288" width="16" height="16">
+  <object id="59" name="animation" x="144" y="288" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="128" y="288" width="16" height="16">
+  <object id="60" name="animation" x="128" y="288" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="112" y="288" width="16" height="16">
+  <object id="61" name="animation" x="112" y="288" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="128" y="304" width="16" height="16">
+  <object id="62" name="animation" x="128" y="304" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="144" y="304" width="16" height="16">
+  <object id="63" name="animation" x="144" y="304" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="176" y="304" width="16" height="16">
+  <object id="64" name="animation" x="176" y="304" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="112" y="304" width="16" height="16">
+  <object id="65" name="animation" x="112" y="304" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="160" y="304" width="16" height="16">
+  <object id="66" name="animation" x="160" y="304" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="128" y="320" width="16" height="16">
+  <object id="67" name="animation" x="128" y="320" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="144" y="320" width="16" height="16">
+  <object id="68" name="animation" x="144" y="320" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="176" y="320" width="16" height="16">
+  <object id="69" name="animation" x="176" y="320" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="112" y="320" width="16" height="16">
+  <object id="70" name="animation" x="112" y="320" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="160" y="320" width="16" height="16">
+  <object id="71" name="animation" x="160" y="320" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="128" y="336" width="16" height="16">
+  <object id="72" name="animation" x="128" y="336" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="144" y="336" width="16" height="16">
+  <object id="73" name="animation" x="144" y="336" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="176" y="336" width="16" height="16">
+  <object id="74" name="animation" x="176" y="336" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="112" y="336" width="16" height="16">
+  <object id="75" name="animation" x="112" y="336" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="160" y="336" width="16" height="16">
+  <object id="76" name="animation" x="160" y="336" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="176" y="352" width="16" height="16">
+  <object id="77" name="animation" x="176" y="352" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="112" y="352" width="16" height="16">
+  <object id="78" name="animation" x="112" y="352" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="128" y="352" width="16" height="16">
+  <object id="79" name="animation" x="128" y="352" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="112" y="368" width="16" height="16">
+  <object id="80" name="animation" x="112" y="368" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="128" y="368" width="16" height="16">
+  <object id="81" name="animation" x="128" y="368" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="144" y="368" width="16" height="16">
+  <object id="82" name="animation" x="144" y="368" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="160" y="400" width="16" height="16">
+  <object id="83" name="animation" x="160" y="400" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="176" y="400" width="16" height="16">
+  <object id="84" name="animation" x="176" y="400" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="144" y="400" width="16" height="16">
+  <object id="85" name="animation" x="144" y="400" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="144" y="384" width="16" height="16">
+  <object id="86" name="animation" x="144" y="384" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="176" y="368" width="16" height="16">
+  <object id="87" name="animation" x="176" y="368" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="144" y="352" width="16" height="16">
+  <object id="88" name="animation" x="144" y="352" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="128" y="400" width="16" height="16">
+  <object id="89" name="animation" x="128" y="400" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="160" y="384" width="16" height="16">
+  <object id="90" name="animation" x="160" y="384" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="128" y="384" width="16" height="16">
+  <object id="91" name="animation" x="128" y="384" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="176" y="384" width="16" height="16">
+  <object id="92" name="animation" x="176" y="384" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="160" y="368" width="16" height="16">
+  <object id="93" name="animation" x="160" y="368" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="160" y="352" width="16" height="16">
+  <object id="94" name="animation" x="160" y="352" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="144" y="416" width="16" height="16">
+  <object id="95" name="animation" x="144" y="416" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="176" y="416" width="16" height="16">
+  <object id="96" name="animation" x="176" y="416" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="128" y="432" width="16" height="16">
+  <object id="97" name="animation" x="128" y="432" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="112" y="432" width="16" height="16">
+  <object id="98" name="animation" x="112" y="432" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="144" y="432" width="16" height="16">
+  <object id="99" name="animation" x="144" y="432" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="160" y="416" width="16" height="16">
+  <object id="100" name="animation" x="160" y="416" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="160" y="432" width="16" height="16">
+  <object id="101" name="animation" x="160" y="432" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="176" y="432" width="16" height="16">
+  <object id="102" name="animation" x="176" y="432" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="128" y="416" width="16" height="16">
+  <object id="103" name="animation" x="128" y="416" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="128" y="448" width="16" height="16">
+  <object id="104" name="animation" x="128" y="448" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="176" y="448" width="16" height="16">
+  <object id="105" name="animation" x="176" y="448" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="112" y="464" width="16" height="16">
+  <object id="106" name="animation" x="112" y="464" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="112" y="448" width="16" height="16">
+  <object id="107" name="animation" x="112" y="448" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="144" y="464" width="16" height="16">
+  <object id="108" name="animation" x="144" y="464" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="160" y="464" width="16" height="16">
+  <object id="109" name="animation" x="160" y="464" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="128" y="464" width="16" height="16">
+  <object id="110" name="animation" x="128" y="464" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="144" y="448" width="16" height="16">
+  <object id="111" name="animation" x="144" y="448" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="176" y="464" width="16" height="16">
+  <object id="112" name="animation" x="176" y="464" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="160" y="448" width="16" height="16">
+  <object id="113" name="animation" x="160" y="448" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="96" y="368" width="16" height="16">
+  <object id="114" name="animation" x="96" y="368" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="32" y="352" width="16" height="16">
+  <object id="115" name="animation" x="32" y="352" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="32" y="416" width="16" height="16">
+  <object id="116" name="animation" x="32" y="416" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="96" y="352" width="16" height="16">
+  <object id="117" name="animation" x="96" y="352" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="80" y="368" width="16" height="16">
+  <object id="118" name="animation" x="80" y="368" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="64" y="448" width="16" height="16">
+  <object id="119" name="animation" x="64" y="448" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="80" y="464" width="16" height="16">
+  <object id="120" name="animation" x="80" y="464" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="64" y="464" width="16" height="16">
+  <object id="121" name="animation" x="64" y="464" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="80" y="352" width="16" height="16">
+  <object id="122" name="animation" x="80" y="352" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="48" y="448" width="16" height="16">
+  <object id="123" name="animation" x="48" y="448" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="32" y="400" width="16" height="16">
+  <object id="124" name="animation" x="32" y="400" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="32" y="448" width="16" height="16">
+  <object id="125" name="animation" x="32" y="448" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="32" y="368" width="16" height="16">
+  <object id="126" name="animation" x="32" y="368" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="80" y="448" width="16" height="16">
+  <object id="127" name="animation" x="80" y="448" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="32" y="384" width="16" height="16">
+  <object id="128" name="animation" x="32" y="384" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="96" y="464" width="16" height="16">
+  <object id="129" name="animation" x="96" y="464" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="32" y="432" width="16" height="16">
+  <object id="130" name="animation" x="32" y="432" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="64" y="368" width="16" height="16">
+  <object id="131" name="animation" x="64" y="368" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="96" y="448" width="16" height="16">
+  <object id="132" name="animation" x="96" y="448" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="64" y="352" width="16" height="16">
+  <object id="133" name="animation" x="64" y="352" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="32" y="464" width="16" height="16">
+  <object id="134" name="animation" x="32" y="464" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="48" y="464" width="16" height="16">
+  <object id="135" name="animation" x="48" y="464" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="48" y="400" width="16" height="16">
+  <object id="136" name="animation" x="48" y="400" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="48" y="368" width="16" height="16">
+  <object id="137" name="animation" x="48" y="368" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="48" y="352" width="16" height="16">
+  <object id="138" name="animation" x="48" y="352" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="48" y="384" width="16" height="16">
+  <object id="139" name="animation" x="48" y="384" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="0" y="352" width="16" height="16">
+  <object id="140" name="animation" x="0" y="352" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="0" y="464" width="16" height="16">
+  <object id="141" name="animation" x="0" y="464" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="16" y="448" width="16" height="16">
+  <object id="142" name="animation" x="16" y="448" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="0" y="368" width="16" height="16">
+  <object id="143" name="animation" x="0" y="368" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="16" y="352" width="16" height="16">
+  <object id="144" name="animation" x="16" y="352" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="0" y="432" width="16" height="16">
+  <object id="145" name="animation" x="0" y="432" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="0" y="448" width="16" height="16">
+  <object id="146" name="animation" x="0" y="448" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="16" y="416" width="16" height="16">
+  <object id="147" name="animation" x="16" y="416" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="16" y="464" width="16" height="16">
+  <object id="148" name="animation" x="16" y="464" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="16" y="384" width="16" height="16">
+  <object id="149" name="animation" x="16" y="384" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="16" y="432" width="16" height="16">
+  <object id="150" name="animation" x="16" y="432" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="0" y="384" width="16" height="16">
+  <object id="151" name="animation" x="0" y="384" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="0" y="400" width="16" height="16">
+  <object id="152" name="animation" x="0" y="400" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="0" y="416" width="16" height="16">
+  <object id="153" name="animation" x="0" y="416" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="16" y="400" width="16" height="16">
+  <object id="154" name="animation" x="16" y="400" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="16" y="368" width="16" height="16">
+  <object id="155" name="animation" x="16" y="368" width="16" height="16">
    <properties>
     <property name="index" value="0"/>
    </properties>
   </object>
-  <object name="animation" x="192" y="272" width="16" height="16">
+  <object id="156" name="animation" x="192" y="272" width="16" height="16">
    <properties>
     <property name="index" value="1"/>
    </properties>
   </object>
-  <object name="animation" x="96" y="272" width="16" height="16">
+  <object id="157" name="animation" x="96" y="272" width="16" height="16">
    <properties>
     <property name="index" value="2"/>
    </properties>
   </object>
-  <object name="animation" x="96" y="336" width="16" height="16">
+  <object id="158" name="animation" x="96" y="336" width="16" height="16">
    <properties>
     <property name="index" value="9"/>
    </properties>
   </object>
-  <object name="animation" x="96" y="288" width="16" height="16">
+  <object id="159" name="animation" x="96" y="288" width="16" height="16">
    <properties>
     <property name="index" value="11"/>
    </properties>
   </object>
-  <object name="animation" x="96" y="416" width="16" height="16">
+  <object id="160" name="animation" x="96" y="416" width="16" height="16">
    <properties>
     <property name="index" value="2"/>
    </properties>
   </object>
-  <object name="animation" x="112" y="416" width="16" height="16">
+  <object id="161" name="animation" x="112" y="416" width="16" height="16">
    <properties>
     <property name="index" value="9"/>
    </properties>
   </object>
-  <object name="animation" x="192" y="288" width="16" height="16">
+  <object id="162" name="animation" x="192" y="288" width="16" height="16">
    <properties>
     <property name="index" value="12"/>
    </properties>
   </object>
-  <object name="animation" x="112" y="384" width="16" height="16">
+  <object id="163" name="animation" x="112" y="384" width="16" height="16">
    <properties>
     <property name="index" value="6"/>
    </properties>
   </object>
-  <object name="animation" x="64" y="384" width="16" height="16">
+  <object id="164" name="animation" x="64" y="384" width="16" height="16">
    <properties>
     <property name="index" value="7"/>
    </properties>
   </object>
-  <object name="animation" x="80" y="384" width="16" height="16">
+  <object id="165" name="animation" x="80" y="384" width="16" height="16">
    <properties>
     <property name="index" value="5"/>
    </properties>
   </object>
-  <object name="animation" x="96" y="384" width="16" height="16">
+  <object id="166" name="animation" x="96" y="384" width="16" height="16">
    <properties>
     <property name="index" value="5"/>
    </properties>
   </object>
-  <object name="animation" x="48" y="416" width="16" height="16">
+  <object id="167" name="animation" x="48" y="416" width="16" height="16">
    <properties>
     <property name="index" value="7"/>
    </properties>
   </object>
-  <object name="animation" x="96" y="432" width="16" height="16">
+  <object id="168" name="animation" x="96" y="432" width="16" height="16">
    <properties>
     <property name="index" value="9"/>
    </properties>
   </object>
-  <object name="animation" x="48" y="432" width="16" height="16">
+  <object id="169" name="animation" x="48" y="432" width="16" height="16">
    <properties>
     <property name="index" value="10"/>
    </properties>
   </object>
-  <object name="animation" x="96" y="304" width="16" height="16">
+  <object id="170" name="animation" x="96" y="304" width="16" height="16">
    <properties>
     <property name="index" value="11"/>
    </properties>
   </object>
-  <object name="animation" x="96" y="320" width="16" height="16">
+  <object id="171" name="animation" x="96" y="320" width="16" height="16">
    <properties>
     <property name="index" value="11"/>
    </properties>
   </object>
-  <object name="animation" x="192" y="304" width="16" height="16">
+  <object id="172" name="animation" x="192" y="304" width="16" height="16">
    <properties>
     <property name="index" value="12"/>
    </properties>
   </object>
-  <object name="animation" x="192" y="320" width="16" height="16">
+  <object id="173" name="animation" x="192" y="320" width="16" height="16">
    <properties>
     <property name="index" value="12"/>
    </properties>
   </object>
-  <object name="animation" x="192" y="336" width="16" height="16">
+  <object id="174" name="animation" x="192" y="336" width="16" height="16">
    <properties>
     <property name="index" value="12"/>
    </properties>
   </object>
-  <object name="animation" x="192" y="352" width="16" height="16">
+  <object id="175" name="animation" x="192" y="352" width="16" height="16">
    <properties>
     <property name="index" value="12"/>
    </properties>
   </object>
-  <object name="animation" x="192" y="432" width="16" height="16">
+  <object id="176" name="animation" x="192" y="432" width="16" height="16">
    <properties>
     <property name="index" value="12"/>
    </properties>
   </object>
-  <object name="animation" x="192" y="416" width="16" height="16">
+  <object id="177" name="animation" x="192" y="416" width="16" height="16">
    <properties>
     <property name="index" value="12"/>
    </properties>
   </object>
-  <object name="animation" x="192" y="400" width="16" height="16">
+  <object id="178" name="animation" x="192" y="400" width="16" height="16">
    <properties>
     <property name="index" value="12"/>
    </properties>
   </object>
-  <object name="animation" x="192" y="368" width="16" height="16">
+  <object id="179" name="animation" x="192" y="368" width="16" height="16">
    <properties>
     <property name="index" value="12"/>
    </properties>
   </object>
-  <object name="animation" x="192" y="384" width="16" height="16">
+  <object id="180" name="animation" x="192" y="384" width="16" height="16">
    <properties>
     <property name="index" value="12"/>
    </properties>
   </object>
-  <object name="animation" x="192" y="464" width="16" height="16">
+  <object id="181" name="animation" x="192" y="464" width="16" height="16">
    <properties>
     <property name="index" value="12"/>
    </properties>
   </object>
-  <object name="animation" x="192" y="448" width="16" height="16">
+  <object id="182" name="animation" x="192" y="448" width="16" height="16">
    <properties>
     <property name="index" value="12"/>
    </properties>
   </object>
-  <object name="animation" x="112" y="400" width="16" height="16">
+  <object id="183" name="animation" x="112" y="400" width="16" height="16">
    <properties>
     <property name="index" value="11"/>
    </properties>
   </object>
-  <object name="animation" x="64" y="400" width="16" height="16">
+  <object id="184" name="animation" x="64" y="400" width="16" height="16">
    <properties>
     <property name="index" value="12"/>
    </properties>
   </object>
-  <object name="animation" x="64" y="416" width="16" height="16">
+  <object id="185" name="animation" x="64" y="416" width="16" height="16">
    <properties>
     <property name="index" value="3"/>
    </properties>
   </object>
-  <object name="animation" x="176" y="272" width="16" height="16">
+  <object id="186" name="animation" x="176" y="272" width="16" height="16">
    <properties>
     <property name="index" value="8"/>
    </properties>
   </object>
-  <object name="animation" x="160" y="272" width="16" height="16">
+  <object id="187" name="animation" x="160" y="272" width="16" height="16">
    <properties>
     <property name="index" value="8"/>
    </properties>
   </object>
-  <object name="animation" x="144" y="272" width="16" height="16">
+  <object id="188" name="animation" x="144" y="272" width="16" height="16">
    <properties>
     <property name="index" value="8"/>
    </properties>
   </object>
-  <object name="animation" x="128" y="272" width="16" height="16">
+  <object id="189" name="animation" x="128" y="272" width="16" height="16">
    <properties>
     <property name="index" value="8"/>
    </properties>
   </object>
-  <object name="animation" x="112" y="272" width="16" height="16">
+  <object id="190" name="animation" x="112" y="272" width="16" height="16">
    <properties>
     <property name="index" value="8"/>
    </properties>
   </object>
-  <object name="animation" x="48" y="336" width="16" height="16">
+  <object id="191" name="animation" x="48" y="336" width="16" height="16">
    <properties>
     <property name="index" value="8"/>
    </properties>
   </object>
-  <object name="animation" x="32" y="336" width="16" height="16">
+  <object id="192" name="animation" x="32" y="336" width="16" height="16">
    <properties>
     <property name="index" value="8"/>
    </properties>
   </object>
-  <object name="animation" x="16" y="336" width="16" height="16">
+  <object id="193" name="animation" x="16" y="336" width="16" height="16">
    <properties>
     <property name="index" value="8"/>
    </properties>
   </object>
-  <object name="animation" x="80" y="336" width="16" height="16">
+  <object id="194" name="animation" x="80" y="336" width="16" height="16">
    <properties>
     <property name="index" value="8"/>
    </properties>
   </object>
-  <object name="animation" x="64" y="336" width="16" height="16">
+  <object id="195" name="animation" x="64" y="336" width="16" height="16">
    <properties>
     <property name="index" value="8"/>
    </properties>
   </object>
-  <object name="animation" x="0" y="336" width="16" height="16">
+  <object id="196" name="animation" x="0" y="336" width="16" height="16">
    <properties>
     <property name="index" value="8"/>
    </properties>
   </object>
-  <object name="animation" x="64" y="432" width="16" height="16">
+  <object id="197" name="animation" x="64" y="432" width="16" height="16">
    <properties>
     <property name="index" value="8"/>
    </properties>
   </object>
-  <object name="animation" x="80" y="432" width="16" height="16">
+  <object id="198" name="animation" x="80" y="432" width="16" height="16">
    <properties>
     <property name="index" value="8"/>
    </properties>

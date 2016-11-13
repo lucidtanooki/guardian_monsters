@@ -20,9 +20,11 @@ import de.limbusdev.guardianmonsters.enums.TextureAtlasType;
 
 
 /**
- * Created by georg on 21.11.15.
+ * The MediaManager give access to all media resources
+ * MediaManager implements the Design Pattern Singleton
+ * Created by Georg Eckert on 21.11.15.
  */
-public class MediaManager {
+public class MediaManager extends AssetManager {
     /* ............................................................................ ATTRIBUTES .. */
     private AssetManager assets;
 
@@ -43,10 +45,28 @@ public class MediaManager {
     private Array<String> battleMusic;
     private Array<String> maleSprites, femaleSprites;
     private Array<Animation> animatedTiles;
-    public  Skin skin, battleSkin, inventorySkin;
+    private Skin skin, battleSkin, inventorySkin;
+
+    // Singleton
+    private static MediaManager instance;
     
     /* ................,........................................................... CONSTRUCTOR .. */
-    public MediaManager() {
+
+    /**
+     * Singleton get instance method
+     * @return MediaManager Singleton
+     */
+    public static MediaManager get() {
+        if(instance == null) {
+            instance = new MediaManager();
+        }
+        return instance;
+    }
+
+    /**
+     * private Constructor of
+     */
+    private MediaManager() {
         this.assets = new AssetManager();
         assets.load(this.heroSpritesheetFile, TextureAtlas.class);
         assets.load(this.battleUISpriteSheetFile, TextureAtlas.class);
@@ -173,7 +193,7 @@ public class MediaManager {
     /* ............................................................................... METHODS .. */
 
     public void dispose() {
-        this.assets.dispose();
+        assets.dispose();
     }
     
     /* ..................................................................... GETTERS & SETTERS .. */
@@ -294,4 +314,15 @@ public class MediaManager {
     }
 
 
+    public Skin getBattleSkin() {
+        return battleSkin;
+    }
+
+    public Skin getInventorySkin() {
+        return inventorySkin;
+    }
+
+    public Skin getSkin() {
+        return skin;
+    }
 }

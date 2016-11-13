@@ -6,6 +6,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 
 import de.limbusdev.guardianmonsters.GuardianMonsters;
 import de.limbusdev.guardianmonsters.enums.ButtonIDs;
+import de.limbusdev.guardianmonsters.managers.ScreenManager;
 import de.limbusdev.guardianmonsters.utils.GS;
 
 /**
@@ -16,10 +17,8 @@ public abstract class AHUD {
 
     protected Stage stage;
     protected Skin skin;
-    protected GuardianMonsters game;
 
-    public AHUD(GuardianMonsters game, Skin skin) {
-        this.game = game;
+    public AHUD(Skin skin) {
         FitViewport fit = new FitViewport(GS.RES_X, GS.RES_Y);
         stage = new Stage(fit);
         this.skin = skin;
@@ -39,7 +38,7 @@ public abstract class AHUD {
     public abstract void show();
 
     public void goToPreviousScreen() {
-        game.popScreen();
+        ScreenManager.get().popScreen();
     }
 
     public void resize(int width, int height) {

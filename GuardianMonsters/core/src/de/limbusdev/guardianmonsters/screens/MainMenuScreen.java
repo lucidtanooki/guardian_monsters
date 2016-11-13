@@ -22,7 +22,9 @@ import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
 import de.limbusdev.guardianmonsters.GuardianMonsters;
+import de.limbusdev.guardianmonsters.managers.MediaManager;
 import de.limbusdev.guardianmonsters.managers.SaveGameManager;
+import de.limbusdev.guardianmonsters.managers.ScreenManager;
 import de.limbusdev.guardianmonsters.utils.GS;
 import de.limbusdev.guardianmonsters.utils.GameState;
 import de.limbusdev.guardianmonsters.utils.L18N;
@@ -34,7 +36,6 @@ import de.limbusdev.guardianmonsters.utils.L18N;
 public class MainMenuScreen implements Screen {
 
     /* ............................................................................ ATTRIBUTES .. */
-    public final GuardianMonsters game;
 
     // Scene2D.ui
     private Skin skin;
@@ -47,9 +48,8 @@ public class MainMenuScreen implements Screen {
     private TextureAtlas uiTA;
     
     /* ........................................................................... CONSTRUCTOR .. */
-    public MainMenuScreen(final GuardianMonsters game) {
-        this.game = game;
-        this.uiTA = game.media.getUITextureAtlas();
+    public MainMenuScreen() {
+        this.uiTA = MediaManager.get().getUITextureAtlas();
 
         Image bg = new Image(uiTA.findRegion("black"));
         bg.setWidth(GS.RES_X);
@@ -118,9 +118,9 @@ public class MainMenuScreen implements Screen {
     public void setUpGame() {
         if(SaveGameManager.doesGameSaveExist()) {
             GameState state = SaveGameManager.loadSaveGame();
-            game.pushScreen(new OutdoorGameWorldScreen(game, state.map, 1, true));
+            ScreenManager.get().pushScreen(new OutdoorGameWorldScreen(state.map, 1, true));
         } else
-            game.pushScreen(new OutdoorGameWorldScreen(game, 9, 1, false));
+            ScreenManager.get().pushScreen(new OutdoorGameWorldScreen(9, 1, false));
     }
 
 
@@ -131,11 +131,11 @@ public class MainMenuScreen implements Screen {
                 GS.RES_X, GS.RES_Y);
         this.stage = new Stage(fit);
         Gdx.input.setInputProcessor(stage);
-        this.skin = game.media.skin;
+        this.skin = MediaManager.get().getSkin();
 
         this.logoScreen = new Group();
 
-        Image bg = new Image(game.media.getMainMenuBGImg2());
+        Image bg = new Image(MediaManager.get().getMainMenuBGImg2());
         bg.setWidth(1024);
         bg.setHeight(1024);
         bg.setPosition(900,300,Align.center);
@@ -145,9 +145,9 @@ public class MainMenuScreen implements Screen {
         bg.addAction(Actions.parallel(Actions.alpha(1,30),Actions.forever(Actions.rotateBy(.3f))));
         stage.addActor(bg);
 
-        Texture logoTex = game.media.getMainMenuBGImg();
+        Texture logoTex = MediaManager.get().getMainMenuBGImg();
         logoTex.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        Image logo = new Image(game.media.getMainMenuBGImg());
+        Image logo = new Image(MediaManager.get().getMainMenuBGImg());
         logo.setWidth(1024);
         logo.setHeight(256);
         logo.setPosition(GS.RES_X / 2, GS.RES_Y / 2, Align.center);
@@ -162,8 +162,8 @@ public class MainMenuScreen implements Screen {
         TextButton.TextButtonStyle tbs = new TextButton.TextButtonStyle();
         tbs.font = skin.getFont("default-font");
         tbs.unpressedOffsetY = +1;
-        tbs.down = new TextureRegionDrawable(game.media.getUITextureAtlas().findRegion("b192down"));
-        tbs.up   = new TextureRegionDrawable(game.media.getUITextureAtlas().findRegion("b192up"));
+        tbs.down = new TextureRegionDrawable(MediaManager.get().getUITextureAtlas().findRegion("b192down"));
+        tbs.up   = new TextureRegionDrawable(MediaManager.get().getUITextureAtlas().findRegion("b192up"));
 
         // Start Button
         TextButton button = new TextButton(L18N.get().l18n().get("main_menu_touch_start"), tbs);
@@ -199,7 +199,7 @@ public class MainMenuScreen implements Screen {
         bg.addAction(Actions.alpha(.75f));
         startMenu.addActor(bg);
 
-        Image mon = new Image(game.media.getMonsterSprite(100));
+        Image mon = new Image(MediaManager.get().getMonsterSprite(100));
         mon.setWidth(256);mon.setHeight(256);
         mon.setPosition(GS.RES_X - 64, 64, Align.bottomRight);
         startMenu.addActor(mon);
@@ -213,8 +213,8 @@ public class MainMenuScreen implements Screen {
         TextButton.TextButtonStyle tbs = new TextButton.TextButtonStyle();
         tbs.font = skin.getFont("default-font");
         tbs.unpressedOffsetY = +1;
-        tbs.down = new TextureRegionDrawable(game.media.getUITextureAtlas().findRegion("b192down"));
-        tbs.up   = new TextureRegionDrawable(game.media.getUITextureAtlas().findRegion("b192up"));
+        tbs.down = new TextureRegionDrawable(MediaManager.get().getUITextureAtlas().findRegion("b192down"));
+        tbs.up   = new TextureRegionDrawable(MediaManager.get().getUITextureAtlas().findRegion("b192up"));
 
         // ............................................................................ START BUTTON
         TextButton button = new TextButton(startButton, tbs);
@@ -276,10 +276,10 @@ public class MainMenuScreen implements Screen {
         bg.setPosition(0, GS.RES_Y, Align.topLeft);
         bg.addAction(Actions.alpha(.75f));
         creditsScreen.addActor(bg);
-        Image limbusLogo = new Image(game.media.getLogosTextureAtlas().findRegion("limbusdev"));
+        Image limbusLogo = new Image(MediaManager.get().getLogosTextureAtlas().findRegion("limbusdev"));
         limbusLogo.setWidth(254);limbusLogo.setHeight(44);
         limbusLogo.setPosition(GS.RES_X / 2, -900, Align.center);
-        Image libgdxLogo = new Image(game.media.getLogosTextureAtlas().findRegion("libgdx"));
+        Image libgdxLogo = new Image(MediaManager.get().getLogosTextureAtlas().findRegion("libgdx"));
         libgdxLogo.setWidth(256);libgdxLogo.setHeight(43);
         libgdxLogo.setPosition(GS.RES_X / 2, -1900, Align.center);
 
@@ -316,7 +316,7 @@ public class MainMenuScreen implements Screen {
         bg.setWidth(GS.RES_X);
         bg.setHeight(GS.RES_Y);
         bg.setPosition(0,0);
-        Image logo = new Image(game.media.getLogosTextureAtlas().findRegion("limbusdev"));
+        Image logo = new Image(MediaManager.get().getLogosTextureAtlas().findRegion("limbusdev"));
         logo.setWidth(264);logo.setHeight(44);
         logo.setPosition(GS.RES_X / 2, GS.RES_Y / 2,Align.center);
         introScreen.addActor(bg);

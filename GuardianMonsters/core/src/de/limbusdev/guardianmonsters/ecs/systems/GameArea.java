@@ -48,8 +48,8 @@ public class GameArea {
     public int areaID;
 
     /* ........................................................................... CONSTRUCTOR .. */
-    public GameArea(int areaID, MediaManager media, int startPosID) {
-        this.media = media;
+    public GameArea(int areaID, int startPosID) {
+        this.media = MediaManager.get();
         this.startPosition = new PositionComponent(0,0,0,0);
         this.colliders = new Array<IntRectangle>();
         this.movingColliders = new Array<IntRectangle>();

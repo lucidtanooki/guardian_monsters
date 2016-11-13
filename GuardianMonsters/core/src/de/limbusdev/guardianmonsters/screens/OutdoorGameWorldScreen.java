@@ -27,7 +27,6 @@ import de.limbusdev.guardianmonsters.utils.UnitConverter;
  */
 public class OutdoorGameWorldScreen implements Screen {
     /* ............................................................................ ATTRIBUTES .. */
-    private final GuardianMonsters game;
 
     // Renderers and Cameras
     public  OrthographicCamera  camera;
@@ -42,13 +41,12 @@ public class OutdoorGameWorldScreen implements Screen {
 
 
     /* ........................................................................... CONSTRUCTOR .. */
-    public OutdoorGameWorldScreen(final GuardianMonsters game, int mapID, int startPosID, boolean
+    public OutdoorGameWorldScreen(int mapID, int startPosID, boolean
             fromSave) {
-        this.game = game;
         setUpRendering();
-        this.gameArea = new GameArea(mapID, game.media, startPosID);
+        this.gameArea = new GameArea(mapID, startPosID);
         SaveGameManager saveGameManager = new SaveGameManager(this.gameArea);
-        this.ECS = new EntityComponentSystem(game, viewport, gameArea, fromSave, this, saveGameManager);
+        this.ECS = new EntityComponentSystem(viewport, gameArea, fromSave, this, saveGameManager);
 
         this.inputMultiplexer = new InputMultiplexer();
         setUpInputProcessor();

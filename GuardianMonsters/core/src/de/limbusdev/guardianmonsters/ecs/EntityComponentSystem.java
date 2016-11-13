@@ -25,6 +25,7 @@ import de.limbusdev.guardianmonsters.geometry.MapObjectInformation;
 import de.limbusdev.guardianmonsters.geometry.MapPersonInformation;
 import de.limbusdev.guardianmonsters.managers.MediaManager;
 import de.limbusdev.guardianmonsters.managers.SaveGameManager;
+import de.limbusdev.guardianmonsters.managers.ScreenManager;
 import de.limbusdev.guardianmonsters.screens.BattleScreen;
 import de.limbusdev.guardianmonsters.screens.HUD;
 import de.limbusdev.guardianmonsters.screens.OutdoorGameWorldScreen;
@@ -40,7 +41,6 @@ public class EntityComponentSystem {
     private MediaManager media;
     private EntityFactory entityFactory;
     private PositionComponent heroPosition;
-    private GuardianMonsters game;
     public GameArea gameArea;
     public SaveGameManager saveGameManager;
     public Entity hero;
@@ -50,26 +50,22 @@ public class EntityComponentSystem {
     /**
      * Base Game Engine Component. The Entity-Component-System (ECS) updates every {@link Entity}
      * every single Update Cycle according to the present changes in the game world.
-     * @param game          game instance
      * @param viewport      screen size
      * @param gameArea      active game level/map
      * @param fromSave      whether to init a new game or restore game state from save game
      * @param gameScreen    screen
      * @param sgm           the SaveGameManager
      */
-    public EntityComponentSystem(
-            GuardianMonsters game, Viewport viewport, GameArea gameArea, boolean
+    public EntityComponentSystem(Viewport viewport, GameArea gameArea, boolean
             fromSave, OutdoorGameWorldScreen gameScreen, SaveGameManager sgm
     ) {
 
-        this.media = game.media;
-        this.game = game;
+        this.media = MediaManager.get();
         this.gameArea = gameArea;
         this.engine = new Engine();
         this.entityFactory = new EntityFactory(engine, media, gameArea);
         setUpHero(fromSave);
-        this.hud = new HUD(new BattleScreen(game.media, gameScreen, game),game,sgm, hero, media,
-                engine);
+        this.hud = new HUD(new BattleScreen(),sgm, hero, engine);
         setUpPeople();
         setUpSigns();
         setUpEntitySystems(gameArea, viewport, hud);
@@ -183,7 +179,7 @@ public class EntityComponentSystem {
      * @param startFieldID  start point on new map
      */
     public void changeGameArea(int mapID, int startFieldID) {
-        game.pushScreen(new OutdoorGameWorldScreen(game, mapID, startFieldID, false));
+        ScreenManager.get().pushScreen(new OutdoorGameWorldScreen(mapID, startFieldID, false));
     }
 
     /**

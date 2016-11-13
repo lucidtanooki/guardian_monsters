@@ -18,8 +18,8 @@ public abstract class ABattleHUD extends AHUD {
     // Images
     private Image battleUIbg, blackCurtain;
 
-    public ABattleHUD(GuardianMonsters game, Skin skin) {
-        super(game, skin);
+    public ABattleHUD(Skin skin) {
+        super(skin);
         widgets = new ArrayMap<String,BattleWidget>();
 
         // Battle UI Black transparent Background

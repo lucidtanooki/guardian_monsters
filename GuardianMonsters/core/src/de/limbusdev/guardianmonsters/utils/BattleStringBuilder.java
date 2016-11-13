@@ -29,17 +29,21 @@ public class BattleStringBuilder {
 
         String eff;
         if(report.effectiveness > 1.1) {
-            eff = "suffered severe damage:";
+            eff = L18N.get().l18n().get("suff_severe");
         } else if (report.effectiveness < .9 && report.effectiveness > 0.1) {
-            eff = "suffered lower damage:";
+            eff = L18N.get().l18n().get("suff_less");
         } else if(report.effectiveness < 0) {
-            eff = "got healed:";
+            eff = L18N.get().l18n().get("suff_healed");
         } else {
-            eff = "suffered";
+            eff = L18N.get().l18n().get("suff_normal");
         }
 
-        String message = MessageFormat.format("{0} attacks {1} with {2}.\n{1} {4} {3}.",
-            attName, defName, report.attack.name, report.damage, eff);
+        String message = L18N.get().l18n().format(
+            "batt_message",
+            L18N.get().l18n().get(attName),
+            L18N.get().l18n().get(defName),
+            L18N.get().l18n().get(report.attack.name),
+            report.damage, eff);
 
         return message;
     }

@@ -16,6 +16,7 @@ import java.util.Observer;
 import de.limbusdev.guardianmonsters.model.Monster;
 import de.limbusdev.guardianmonsters.model.MonsterInformation;
 import de.limbusdev.guardianmonsters.utils.GS;
+import de.limbusdev.guardianmonsters.utils.L18N;
 
 /**
  * Widget for displaying monster status in battle: HP, MP, EXP, Name, Level
@@ -101,7 +102,7 @@ public class MonsterStateWidget extends WidgetGroup implements Observer {
      */
     public void init(Monster mon) {
         update(mon, "");
-        nameLabel.setText(MonsterInformation.getInstance().monsterNames.get(mon.ID-1));
+        nameLabel.setText(L18N.get().l18n().get((MonsterInformation.getInstance().monsterNames.get(mon.ID-1))));
         mon.addObserver(this);
     }
 

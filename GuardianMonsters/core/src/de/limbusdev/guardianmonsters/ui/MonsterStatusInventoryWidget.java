@@ -20,6 +20,7 @@ import de.limbusdev.guardianmonsters.managers.MediaManager;
 import de.limbusdev.guardianmonsters.model.Monster;
 import de.limbusdev.guardianmonsters.model.MonsterInformation;
 import de.limbusdev.guardianmonsters.utils.GS;
+import de.limbusdev.guardianmonsters.utils.L18N;
 
 
 /*
@@ -66,7 +67,7 @@ public class MonsterStatusInventoryWidget extends Table{
         dataGroup.setFillParent(true);
         dataGroup.pad(GS.COL*2);
         dataGroup.align(Align.topLeft);
-        infoHead = new TextButton("Monster Data Sheet", skin, "b-data-head");
+        infoHead = new TextButton(L18N.get().l18n().get("stat_inv_data_sheet"), skin, "b-data-head");
         infoHead.getLabel().setAlignment(Align.left);
         infoHead.pad(GS.COL);
         dataGroup.addActor(infoHead);

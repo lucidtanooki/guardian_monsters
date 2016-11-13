@@ -16,6 +16,7 @@ import de.limbusdev.guardianmonsters.model.MonsterInformation;
 import de.limbusdev.guardianmonsters.screens.BattleScreen;
 import de.limbusdev.guardianmonsters.utils.BattleStringBuilder;
 import de.limbusdev.guardianmonsters.utils.GS;
+import de.limbusdev.guardianmonsters.utils.L18N;
 import de.limbusdev.guardianmonsters.utils.MonsterManager;
 import de.limbusdev.guardianmonsters.utils.MonsterSpeedComparator;
 
@@ -192,8 +193,8 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
         mainMenu.addFadeOutAction(.3f);
 
         // Set message
-        if(heroLost) endOfBattleWidget.messageLabel.setText("Game Over");
-        else         endOfBattleWidget.messageLabel.setText("You won!");
+        if(heroLost) endOfBattleWidget.messageLabel.setText(L18N.get().l18n().get("batt_game_over"));
+        else         endOfBattleWidget.messageLabel.setText(L18N.get().l18n().get("batt_you_won"));
 
         changeToWidgetSet(BattleState.ENDOFBATTLE);
     }
@@ -215,7 +216,7 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
         mainMenu          = new BattleMainMenuWidget(this, skin);
 
         actionMenu        = new BattleActionMenuWidget(this, skin);
-        actionMenu        .greenButton.setText("Attack");
+        actionMenu        .greenButton.setText(L18N.get().l18n().get("batt_attack"));
 
         indicatorMenu     = new MonsterIndicatorWidget(this, skin);
         indicatorMenu     .addWidgetObserver(this);
@@ -300,7 +301,7 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
     private void kickOutMonster(MonsterInBattle m) {
         animationWidget.animateMonsterKO(m.battleFieldPosition,m.battleFieldSide);
         statusWidget.fadeStatusWidget(m.battleFieldPosition, m.battleFieldSide);
-        actionMenu.infoLabel.setText(MonsterInformation.getInstance().monsterNames.get(m.monster.ID-1) + " defeated.");
+        actionMenu.infoLabel.setText(MonsterInformation.getInstance().monsterNames.get(m.monster.ID-1) + " " + L18N.get().l18n().get("batt_defeated") + ".");
 
         System.out.println("Killed: " + m.battleFieldPosition);
 

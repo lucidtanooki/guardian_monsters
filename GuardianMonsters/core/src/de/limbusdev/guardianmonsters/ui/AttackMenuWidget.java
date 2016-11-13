@@ -15,6 +15,7 @@ import java.util.Iterator;
 import de.limbusdev.guardianmonsters.model.Attack;
 import de.limbusdev.guardianmonsters.model.Monster;
 import de.limbusdev.guardianmonsters.utils.GS;
+import de.limbusdev.guardianmonsters.utils.L18N;
 
 /**
  * Widget for displaying monster status in battle: HP, MP, EXP, Name, Level
@@ -105,7 +106,7 @@ public class AttackMenuWidget extends BattleWidget implements ObservableWidget {
         while(attIt.hasNext() && i<6) {
             Attack att = attIt.next();
             attackButtons.get(i).setVisible(true);
-            attackButtons.get(i).setText(att.name + " (" + att.damage + ")");
+            attackButtons.get(i).setText(L18N.get().l18n().get(att.name) + " (" + att.damage + ")");
             i++;
         }
     }

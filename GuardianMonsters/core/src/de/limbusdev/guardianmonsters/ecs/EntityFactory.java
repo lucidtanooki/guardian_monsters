@@ -22,8 +22,9 @@ import de.limbusdev.guardianmonsters.enums.TextureAtlasType;
 import de.limbusdev.guardianmonsters.geometry.IntVector2;
 import de.limbusdev.guardianmonsters.geometry.MapObjectInformation;
 import de.limbusdev.guardianmonsters.geometry.MapPersonInformation;
-import de.limbusdev.guardianmonsters.managers.MediaManager;
-import de.limbusdev.guardianmonsters.managers.SaveGameManager;
+import de.limbusdev.guardianmonsters.fwmengine.managers.Media;
+import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager;
+import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.model.BattleFactory;
 import de.limbusdev.guardianmonsters.utils.GS;
 import de.limbusdev.guardianmonsters.utils.GameState;
@@ -36,13 +37,13 @@ import de.limbusdev.guardianmonsters.utils.UnitConverter;
 public class EntityFactory {
     /* ............................................................................ ATTRIBUTES .. */
     private Engine engine;
-    private MediaManager media;
+    private Media media;
     private GameArea area;
     /* ........................................................................... CONSTRUCTOR .. */
-    public EntityFactory(Engine engine, MediaManager media, GameArea area) {
+    public EntityFactory(Engine engine, GameArea area) {
         this.engine = engine;
-        this.media = media;
         this.area = area;
+        media = Services.getMedia();
     }
     /* ............................................................................... METHODS .. */
 

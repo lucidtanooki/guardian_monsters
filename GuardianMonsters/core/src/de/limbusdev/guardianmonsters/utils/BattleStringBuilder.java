@@ -1,5 +1,6 @@
 package de.limbusdev.guardianmonsters.utils;
 
+import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.model.AttackCalculationReport;
 import de.limbusdev.guardianmonsters.model.Monster;
 import de.limbusdev.guardianmonsters.model.MonsterInBattle;
@@ -26,20 +27,20 @@ public class BattleStringBuilder {
 
         String eff;
         if(report.effectiveness > 1.1) {
-            eff = L18N.get().l18n().get("suff_severe");
+            eff = Services.getL18N().l18n().get("suff_severe");
         } else if (report.effectiveness < .9 && report.effectiveness > 0.1) {
-            eff = L18N.get().l18n().get("suff_less");
+            eff = Services.getL18N().l18n().get("suff_less");
         } else if(report.effectiveness < 0) {
-            eff = L18N.get().l18n().get("suff_healed");
+            eff = Services.getL18N().l18n().get("suff_healed");
         } else {
-            eff = L18N.get().l18n().get("suff_normal");
+            eff = Services.getL18N().l18n().get("suff_normal");
         }
 
-        String message = L18N.get().l18n().format(
+        String message = Services.getL18N().l18n().format(
             "batt_message",
-            L18N.get().l18n().get(attName),
-            L18N.get().l18n().get(defName),
-            L18N.get().l18n().get(report.attack.name),
+            Services.getL18N().l18n().get(attName),
+            Services.getL18N().l18n().get(defName),
+            Services.getL18N().l18n().get(report.attack.name),
             report.damage, eff);
 
         return message;

@@ -4,13 +4,9 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 
-import java.text.MessageFormat;
-
-import de.limbusdev.guardianmonsters.GuardianMonsters;
 import de.limbusdev.guardianmonsters.ecs.components.TeamComponent;
 import de.limbusdev.guardianmonsters.enums.ButtonIDs;
-import de.limbusdev.guardianmonsters.managers.MediaManager;
-import de.limbusdev.guardianmonsters.managers.ScreenManager;
+import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.model.AttackCalculationReport;
 import de.limbusdev.guardianmonsters.model.Monster;
 import de.limbusdev.guardianmonsters.model.MonsterInBattle;
@@ -18,7 +14,6 @@ import de.limbusdev.guardianmonsters.model.MonsterInformation;
 import de.limbusdev.guardianmonsters.screens.BattleScreen;
 import de.limbusdev.guardianmonsters.utils.BattleStringBuilder;
 import de.limbusdev.guardianmonsters.utils.GS;
-import de.limbusdev.guardianmonsters.utils.L18N;
 import de.limbusdev.guardianmonsters.utils.MonsterManager;
 import de.limbusdev.guardianmonsters.utils.MonsterSpeedComparator;
 
@@ -54,7 +49,7 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
 
     // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ CONSTRUCTOR
     public BattleHUD() {
-        super(MediaManager.get().getBattleSkin());
+        super(Services.getMedia().getBattleSkin());
         initializeAttributes();
         setUpUI();
     }
@@ -195,8 +190,8 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
         mainMenu.addFadeOutAction(.3f);
 
         // Set message
-        if(heroLost) endOfBattleWidget.messageLabel.setText(L18N.get().l18n().get("batt_game_over"));
-        else         endOfBattleWidget.messageLabel.setText(L18N.get().l18n().get("batt_you_won"));
+        if(heroLost) endOfBattleWidget.messageLabel.setText(Services.getL18N().l18n().get("batt_game_over"));
+        else         endOfBattleWidget.messageLabel.setText(Services.getL18N().l18n().get("batt_you_won"));
 
         changeToWidgetSet(BattleState.ENDOFBATTLE);
     }
@@ -218,7 +213,7 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
         mainMenu          = new BattleMainMenuWidget(this, skin);
 
         actionMenu        = new BattleActionMenuWidget(this, skin);
-        actionMenu        .greenButton.setText(L18N.get().l18n().get("batt_attack"));
+        actionMenu        .greenButton.setText(Services.getL18N().l18n().get("batt_attack"));
 
         indicatorMenu     = new MonsterIndicatorWidget(this, skin);
         indicatorMenu     .addWidgetObserver(this);
@@ -303,7 +298,7 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
     private void kickOutMonster(MonsterInBattle m) {
         animationWidget.animateMonsterKO(m.battleFieldPosition,m.battleFieldSide);
         statusWidget.fadeStatusWidget(m.battleFieldPosition, m.battleFieldSide);
-        actionMenu.infoLabel.setText(MonsterInformation.getInstance().monsterNames.get(m.monster.ID-1) + " " + L18N.get().l18n().get("batt_defeated") + ".");
+        actionMenu.infoLabel.setText(MonsterInformation.getInstance().monsterNames.get(m.monster.ID-1) + " " + Services.getL18N().l18n().get("batt_defeated") + ".");
 
         System.out.println("Killed: " + m.battleFieldPosition);
 
@@ -531,8 +526,8 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
     }
 
     protected void onEndOfBattleBack() {
-        if(checkIfWholeTeamKO(heroTeam)) ScreenManager.get().getGame().create();
-        else ScreenManager.get().popScreen();
+        if(checkIfWholeTeamKO(heroTeam)) Services.getScreenManager().getGame().create();
+        else Services.getScreenManager().popScreen();
     }
 
 

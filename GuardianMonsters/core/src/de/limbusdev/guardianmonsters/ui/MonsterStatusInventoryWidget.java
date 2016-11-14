@@ -16,11 +16,11 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 
 import de.limbusdev.guardianmonsters.ecs.components.TeamComponent;
-import de.limbusdev.guardianmonsters.managers.MediaManager;
+import de.limbusdev.guardianmonsters.fwmengine.managers.Media;
+import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.model.Monster;
 import de.limbusdev.guardianmonsters.model.MonsterInformation;
 import de.limbusdev.guardianmonsters.utils.GS;
-import de.limbusdev.guardianmonsters.utils.L18N;
 
 
 /*
@@ -37,12 +37,12 @@ public class MonsterStatusInventoryWidget extends Table{
     private Array<TextButton> monsterButtons;
     private Array<Monster> team;
     private Skin skin;
-    private MediaManager media;
+    private Media media;
     private TextButton infoHead, mpLabel, hpLabel, expLabel;
 
     public MonsterStatusInventoryWidget (Skin skin) {
         super();
-        this.media = MediaManager.get();
+        this.media = Services.getMedia();
         this.skin = skin;
         this.setFillParent(true);
         this.monsterButtons = new Array<TextButton>();
@@ -67,7 +67,7 @@ public class MonsterStatusInventoryWidget extends Table{
         dataGroup.setFillParent(true);
         dataGroup.pad(GS.COL*2);
         dataGroup.align(Align.topLeft);
-        infoHead = new TextButton(L18N.get().l18n().get("stat_inv_data_sheet"), skin, "b-data-head");
+        infoHead = new TextButton(Services.getL18N().l18n().get("stat_inv_data_sheet"), skin, "b-data-head");
         infoHead.getLabel().setAlignment(Align.left);
         infoHead.pad(GS.COL);
         dataGroup.addActor(infoHead);

@@ -25,19 +25,13 @@ public interface Media {
      */
     public TextureAtlas getPersonTextureAtlas(boolean male, int index);
 
-    public Texture getMainMenuBGImg();
-
-    public Texture getMainMenuBGImg2();
+    public Texture getTexture(String path);
 
     public TextureAtlas.AtlasRegion getMonsterSprite(int index);
 
     public Texture getBackgroundTexture(int index);
 
-    public TextureAtlas getBattleUITextureAtlas();
-
-    public TextureAtlas getUITextureAtlas();
-
-    public TextureAtlas getLogosTextureAtlas();
+    public TextureAtlas getTextureAtlas(String path);
 
     public Animation getAttackAnimation(String attack);
 
@@ -64,10 +58,4 @@ public interface Media {
      */
     public Animation getTileAnimation(int index);
 
-
-    public Skin getBattleSkin();
-
-    public Skin getInventorySkin();
-
-    public Skin getSkin();
 }

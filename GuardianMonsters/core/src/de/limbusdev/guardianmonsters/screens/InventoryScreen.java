@@ -34,7 +34,7 @@ public class InventoryScreen implements Screen {
     public InventoryScreen(TeamComponent team) {
         FitViewport fit = new FitViewport(GS.RES_X, GS.RES_Y);
         this.stage = new Stage(fit);
-        this.skin = Services.getMedia().getInventorySkin();
+        this.skin = Services.getUI().getInventorySkin();
         this.views = new Array<Table>();
         MonsterStatusInventoryWidget msiw = new MonsterStatusInventoryWidget(skin);
         msiw.init(team);

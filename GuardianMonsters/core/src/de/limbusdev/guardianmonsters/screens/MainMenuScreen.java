@@ -20,6 +20,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
+import de.limbusdev.guardianmonsters.data.TextureAssets;
 import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.utils.GS;
@@ -40,12 +41,10 @@ public class MainMenuScreen implements Screen {
 
     private ArrayMap<String,TextButton> buttons;
     private Group startMenu, logoScreen, creditsScreen, introScreen;
-
-    private TextureAtlas uiTA;
     
     /* ........................................................................... CONSTRUCTOR .. */
     public MainMenuScreen() {
-        this.uiTA = Services.getMedia().getUITextureAtlas();
+        TextureAtlas uiTA = Services.getMedia().getTextureAtlas(TextureAssets.UISpriteSheetFile);
 
         Image bg = new Image(uiTA.findRegion("black"));
         bg.setWidth(GS.RES_X);
@@ -53,10 +52,10 @@ public class MainMenuScreen implements Screen {
         bg.setPosition(0,0);
         black = bg;
 
-        setUpIntro();
-        setUpUI();
-        setUpStartMenu();
-        setUpCredits();
+        setUpIntro(uiTA);
+        setUpUI(uiTA);
+        setUpStartMenu(uiTA);
+        setUpCredits(uiTA);
 
         stage.addActor(black);
         stage.addActor(introScreen);
@@ -120,18 +119,18 @@ public class MainMenuScreen implements Screen {
     }
 
 
-    public void setUpUI() {
+    public void setUpUI(TextureAtlas uiTA) {
 
         // Scene2D
         FitViewport fit = new FitViewport(
                 GS.RES_X, GS.RES_Y);
         this.stage = new Stage(fit);
         Gdx.input.setInputProcessor(stage);
-        this.skin = Services.getMedia().getSkin();
+        this.skin = Services.getUI().getDefaultSkin();
 
         this.logoScreen = new Group();
 
-        Image bg = new Image(Services.getMedia().getMainMenuBGImg2());
+        Image bg = new Image(Services.getMedia().getTexture(TextureAssets.mainMenuBGImgFile2));
         bg.setWidth(1024);
         bg.setHeight(1024);
         bg.setPosition(900,300,Align.center);
@@ -141,9 +140,7 @@ public class MainMenuScreen implements Screen {
         bg.addAction(Actions.parallel(Actions.alpha(1,30),Actions.forever(Actions.rotateBy(.3f))));
         stage.addActor(bg);
 
-        Texture logoTex = Services.getMedia().getMainMenuBGImg();
-        logoTex.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        Image logo = new Image(Services.getMedia().getMainMenuBGImg());
+        Image logo = new Image(Services.getMedia().getTexture(TextureAssets.mainMenuBGImgFile));
         logo.setWidth(1024);
         logo.setHeight(256);
         logo.setPosition(GS.RES_X / 2, GS.RES_Y / 2, Align.center);
@@ -158,8 +155,8 @@ public class MainMenuScreen implements Screen {
         TextButton.TextButtonStyle tbs = new TextButton.TextButtonStyle();
         tbs.font = skin.getFont("default-font");
         tbs.unpressedOffsetY = +1;
-        tbs.down = new TextureRegionDrawable(Services.getMedia().getUITextureAtlas().findRegion("b192down"));
-        tbs.up   = new TextureRegionDrawable(Services.getMedia().getUITextureAtlas().findRegion("b192up"));
+        tbs.down = new TextureRegionDrawable(uiTA.findRegion("b192down"));
+        tbs.up   = new TextureRegionDrawable(uiTA.findRegion("b192up"));
 
         // Start Button
         TextButton button = new TextButton(Services.getL18N().l18n().get("main_menu_touch_start"), tbs);
@@ -185,7 +182,7 @@ public class MainMenuScreen implements Screen {
         stage.addActor(logoScreen);
     }
 
-    public void setUpStartMenu() {
+    public void setUpStartMenu(TextureAtlas uiTA) {
         this.startMenu = new Group();
 
         // .................................................................................. IMAGES
@@ -209,8 +206,8 @@ public class MainMenuScreen implements Screen {
         TextButton.TextButtonStyle tbs = new TextButton.TextButtonStyle();
         tbs.font = skin.getFont("default-font");
         tbs.unpressedOffsetY = +1;
-        tbs.down = new TextureRegionDrawable(Services.getMedia().getUITextureAtlas().findRegion("b192down"));
-        tbs.up   = new TextureRegionDrawable(Services.getMedia().getUITextureAtlas().findRegion("b192up"));
+        tbs.down = new TextureRegionDrawable(uiTA.findRegion("b192down"));
+        tbs.up   = new TextureRegionDrawable(uiTA.findRegion("b192up"));
 
         // ............................................................................ START BUTTON
         TextButton button = new TextButton(startButton, tbs);
@@ -265,17 +262,18 @@ public class MainMenuScreen implements Screen {
         stage.addActor(startMenu);
     }
 
-    public void setUpCredits() {
+    public void setUpCredits(TextureAtlas uiTA) {
+        TextureAtlas logos = Services.getMedia().getTextureAtlas(TextureAssets.logosSpriteSheetFile);
         this.creditsScreen = new Group();
         Image bg = new Image(uiTA.findRegion("black"));
         bg.setWidth(GS.RES_X);bg.setHeight(4000);
         bg.setPosition(0, GS.RES_Y, Align.topLeft);
         bg.addAction(Actions.alpha(.75f));
         creditsScreen.addActor(bg);
-        Image limbusLogo = new Image(Services.getMedia().getLogosTextureAtlas().findRegion("limbusdev"));
+        Image limbusLogo = new Image(logos.findRegion("limbusdev"));
         limbusLogo.setWidth(254);limbusLogo.setHeight(44);
         limbusLogo.setPosition(GS.RES_X / 2, -900, Align.center);
-        Image libgdxLogo = new Image(Services.getMedia().getLogosTextureAtlas().findRegion("libgdx"));
+        Image libgdxLogo = new Image(logos.findRegion("libgdx"));
         libgdxLogo.setWidth(256);libgdxLogo.setHeight(43);
         libgdxLogo.setPosition(GS.RES_X / 2, -1900, Align.center);
 
@@ -306,13 +304,14 @@ public class MainMenuScreen implements Screen {
         creditsScreen.setVisible(false);
     }
 
-    public void setUpIntro() {
+    public void setUpIntro(TextureAtlas uiTA) {
+        TextureAtlas logos = Services.getMedia().getTextureAtlas(TextureAssets.logosSpriteSheetFile);
         this.introScreen = new Group();
         Image bg = new Image(uiTA.findRegion("black"));
         bg.setWidth(GS.RES_X);
         bg.setHeight(GS.RES_Y);
         bg.setPosition(0,0);
-        Image logo = new Image(Services.getMedia().getLogosTextureAtlas().findRegion("limbusdev"));
+        Image logo = new Image(logos.findRegion("limbusdev"));
         logo.setWidth(264);logo.setHeight(44);
         logo.setPosition(GS.RES_X / 2, GS.RES_Y / 2,Align.center);
         introScreen.addActor(bg);

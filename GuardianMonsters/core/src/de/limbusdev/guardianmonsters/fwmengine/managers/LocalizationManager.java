@@ -1,4 +1,4 @@
-package de.limbusdev.guardianmonsters.utils;
+package de.limbusdev.guardianmonsters.fwmengine.managers;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
@@ -11,20 +11,17 @@ import com.badlogic.gdx.utils.I18NBundle;
 import java.util.Locale;
 
 /**
- * Singleton
- * Created by georg on 05.10.15.
+ * Created by georg on 14.11.16.
  */
-public class L18N {
 
+public class LocalizationManager implements L18N {
     private static I18NBundle l18n;
-
-    private static L18N instance;
 
     private BitmapFont font;
 
-    public static final String FONT_PATH_RUSSIAN = "fonts/multi.fnt";
+    private static final String FONT_PATH_RUSSIAN = "fonts/multi.fnt";
 
-    private L18N() {
+    public LocalizationManager() {
         System.out.println("Language: " + Locale.getDefault().getLanguage());
         FileHandle baseFileHandle = Gdx.files.internal("l18n/guardianmonsters");
         l18n = I18NBundle.createBundle(baseFileHandle);
@@ -44,11 +41,6 @@ public class L18N {
             this.font = generator.generateFont(parameter); // font size 16 pixels
             generator.dispose(); // don't forget to dispose to avoid memory leaks!
         }
-    }
-
-    public static L18N get() {
-        if(instance == null) instance = new L18N();
-        return instance;
     }
 
     public I18NBundle l18n() {

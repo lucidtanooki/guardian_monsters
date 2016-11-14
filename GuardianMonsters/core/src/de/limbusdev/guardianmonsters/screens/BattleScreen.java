@@ -15,10 +15,10 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-import de.limbusdev.guardianmonsters.GuardianMonsters;
+import de.limbusdev.guardianmonsters.data.AudioAssets;
 import de.limbusdev.guardianmonsters.ecs.components.TeamComponent;
 import de.limbusdev.guardianmonsters.enums.MusicType;
-import de.limbusdev.guardianmonsters.managers.MediaManager;
+import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.utils.GS;
 
 /**
@@ -35,16 +35,13 @@ public class BattleScreen implements Screen {
     private de.limbusdev.guardianmonsters.ui.BattleHUD battleHUD;
     private Texture background;
     private boolean initialized=false;
-    private Music bgMusic;
     /* ........................................................................... CONSTRUCTOR .. */
 
     public BattleScreen() {
         this.battleHUD = new de.limbusdev.guardianmonsters.ui.BattleHUD();
         setUpRendering();
         setUpInputProcessor();
-        this.background = MediaManager.get().getBackgroundTexture(0);
-        this.bgMusic = MediaManager.get().getBGMusic(MusicType.BATTLE, 0);
-        this.bgMusic.setLooping(true);
+        this.background = Services.getMedia().getBackgroundTexture(0);
     }
     /* ............................................................................... METHODS .. */
 
@@ -53,7 +50,7 @@ public class BattleScreen implements Screen {
     public void show() {
         if(!initialized) System.err.println("BattleScreen must get initialized before drawn.");
         this.batch = new SpriteBatch();
-        bgMusic.play();
+        Services.getAudio().playLoopMusic(AudioAssets.get().getBattleMusic(0));
         setUpInputProcessor();
     }
 
@@ -128,7 +125,7 @@ public class BattleScreen implements Screen {
     @Override
     public void hide() {
         initialized = false;
-        this.bgMusic.stop();
+        Services.getAudio().stopMusic(AudioAssets.get().getBattleMusic(0));
         this.battleHUD.hide();
     }
 

@@ -1,9 +1,7 @@
-package de.limbusdev.guardianmonsters.managers;
+package de.limbusdev.guardianmonsters.fwmengine.managers;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -12,10 +10,6 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.ArrayMap;
-
-import de.limbusdev.guardianmonsters.enums.MusicType;
-import de.limbusdev.guardianmonsters.enums.SFXType;
 import de.limbusdev.guardianmonsters.enums.TextureAtlasType;
 
 
@@ -24,7 +18,7 @@ import de.limbusdev.guardianmonsters.enums.TextureAtlasType;
  * MediaManager implements the Design Pattern Singleton
  * Created by Georg Eckert on 21.11.15.
  */
-public class MediaManager extends AssetManager {
+public class MediaManager implements Media {
     /* ............................................................................ ATTRIBUTES .. */
     private AssetManager assets;
 
@@ -37,36 +31,16 @@ public class MediaManager extends AssetManager {
     private String UISpriteSheetFile = "spritesheets/UI.pack";
     private String logosSpriteSheetFile = "spritesheets/logos.pack";
     private String animations = "spritesheets/animations.pack";
-    private String SFXdir = "sfx/";
     private String battleAnimations = "spritesheets/battleAnimations.pack";
-    private ArrayMap<SFXType,Array<String>> battleSFX;
     private Array<String> bgs;
-    private Array<String> bgMusicTown;
-    private Array<String> battleMusic;
     private Array<String> maleSprites, femaleSprites;
     private Array<Animation> animatedTiles;
     private Skin skin, battleSkin, inventorySkin;
 
-    // Singleton
-    private static MediaManager instance;
     
     /* ................,........................................................... CONSTRUCTOR .. */
 
-    /**
-     * Singleton get instance method
-     * @return MediaManager Singleton
-     */
-    public static MediaManager get() {
-        if(instance == null) {
-            instance = new MediaManager();
-        }
-        return instance;
-    }
-
-    /**
-     * private Constructor of
-     */
-    private MediaManager() {
+    public MediaManager() {
         this.assets = new AssetManager();
         assets.load(this.heroSpritesheetFile, TextureAtlas.class);
         assets.load(this.battleUISpriteSheetFile, TextureAtlas.class);
@@ -81,31 +55,6 @@ public class MediaManager extends AssetManager {
         for(int i=1;i<=3;i++)this.maleSprites.add("spritesheets/person" + i + "m.pack");
         for(String s : maleSprites) assets.load(s, TextureAtlas.class);
         this.femaleSprites = new Array<String>();
-
-        // Music
-        bgMusicTown = new Array<String>();
-        bgMusicTown.add("music/town_loop_1.wav");
-        bgMusicTown.add("music/town_loop_2.ogg");
-        for(String s : bgMusicTown) assets.load(s, Music.class);
-
-        battleMusic = new Array<String>();
-        battleMusic.add("music/battle_1.mp3");
-        for(String s : battleMusic) assets.load(s, Music.class);
-
-        // SFX
-        battleSFX = new ArrayMap<SFXType,Array<String>>();
-
-        Array<String> sfxHits = new Array<String>();
-        for(int i=1;i<=18;i++) sfxHits.add(SFXdir + "hits/" + i + ".ogg");
-        for(String s : sfxHits) assets.load(s, Sound.class);
-        battleSFX.put(SFXType.HIT, sfxHits);
-
-        Array<String> sfxWater = new Array<String>();
-        for(int i=1;i<=1;i++) sfxWater.add(SFXdir + "water/" + i + ".ogg");
-        for(String s : sfxWater) assets.load(s, Sound.class);
-        battleSFX.put(SFXType.WATER, sfxWater);
-
-
 
         // Monsters
         assets.load(monsterSpriteSheetFile, TextureAtlas.class);
@@ -233,15 +182,6 @@ public class MediaManager extends AssetManager {
         return assets.get(mainMenuBGImgFile2);
     }
 
-    public Music getBGMusic(MusicType type, int index) {
-        Music music = null;
-        switch(type) {
-            case TOWN: music = assets.get(bgMusicTown.get(index));break;
-            case BATTLE: music = assets.get(battleMusic.get(index));break;
-        }
-        return music;
-    }
-
     public TextureAtlas.AtlasRegion getMonsterSprite(int index) {
         return assets.get(monsterSpriteSheetFile,
                 TextureAtlas.class).findRegion(Integer.toString(index), 1);
@@ -261,20 +201,6 @@ public class MediaManager extends AssetManager {
 
     public TextureAtlas getLogosTextureAtlas() {
         return assets.get(logosSpriteSheetFile, TextureAtlas.class);
-    }
-
-    public Sound getSFX(SFXType sfxType, int index) {
-        Sound sound;
-        switch(sfxType) {
-            case WATER:
-                sound = assets.get(battleSFX.get(SFXType.WATER).get(index));
-                break;
-            default:
-                sound = assets.get(battleSFX.get(SFXType.HIT).get(index));
-                break;
-        }
-
-        return sound;
     }
 
     public Animation getAttackAnimation(String attack) {

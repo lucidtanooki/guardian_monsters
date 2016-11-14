@@ -27,7 +27,6 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
-import de.limbusdev.guardianmonsters.GuardianMonsters;
 import de.limbusdev.guardianmonsters.ecs.components.Components;
 import de.limbusdev.guardianmonsters.ecs.components.InputComponent;
 import de.limbusdev.guardianmonsters.ecs.components.PositionComponent;
@@ -36,13 +35,11 @@ import de.limbusdev.guardianmonsters.ecs.entities.HeroEntity;
 import de.limbusdev.guardianmonsters.enums.HUDElements;
 import de.limbusdev.guardianmonsters.enums.SkyDirection;
 import de.limbusdev.guardianmonsters.geometry.IntVector2;
-import de.limbusdev.guardianmonsters.managers.MediaManager;
-import de.limbusdev.guardianmonsters.managers.SaveGameManager;
-import de.limbusdev.guardianmonsters.managers.ScreenManager;
+import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager;
+import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.model.BattleFactory;
 import de.limbusdev.guardianmonsters.utils.EntityFamilies;
 import de.limbusdev.guardianmonsters.utils.GS;
-import de.limbusdev.guardianmonsters.utils.L18N;
 
 
 /**
@@ -83,13 +80,13 @@ public class HUD extends InputAdapter {
         this.saveGameManager = saveGameManager;
         this.openHUDELement = HUDElements.NONE;
         this.hero = hero;
-        this.UItextures = MediaManager.get().getUITextureAtlas();
+        this.UItextures = Services.getMedia().getUITextureAtlas();
 
 
         // Scene2D
         FitViewport fit = new FitViewport(GS.RES_X, GS.RES_Y);
         this.stage = new Stage(fit);
-        this.skin = MediaManager.get().getSkin();
+        this.skin = Services.getMedia().getSkin();
 
         setUpConversation();
         setUpTopLevelButtons();
@@ -97,7 +94,7 @@ public class HUD extends InputAdapter {
 
 
         // Images ............................................................................ START
-        this.blackCourtain = new Image(MediaManager.get().getBattleUITextureAtlas().findRegion("black"));
+        this.blackCourtain = new Image(Services.getMedia().getBattleUITextureAtlas().findRegion("black"));
         this.blackCourtain.setWidth(GS.RES_X);
         this.blackCourtain.setHeight(GS.RES_Y);
         this.blackCourtain.setPosition(0, 0);
@@ -124,7 +121,7 @@ public class HUD extends InputAdapter {
         tbs.pressedOffsetX = 10; tbs.pressedOffsetY = 1;
 
         // Menu Button
-        TextButton menu = new TextButton(L18N.get().l18n().get("hud_menu"), skin, "open-menu");
+        TextButton menu = new TextButton(Services.getL18N().l18n().get("hud_menu"), skin, "open-menu");
         menu.setPosition(GS.RES_X, GS.RES_Y, Align.topRight);
         menu.addListener(new ClickListener() {
             @Override
@@ -144,7 +141,7 @@ public class HUD extends InputAdapter {
         this.menuButtons = new Group();
 
         // Save Button
-        TextButton save = new TextButton(L18N.get().l18n().get("hud_save"), skin, "menu-entry");
+        TextButton save = new TextButton(Services.getL18N().l18n().get("hud_save"), skin, "menu-entry");
         save.setPosition(GS.RES_X, GS.RES_Y - 5*GS.ROW, Align.topRight);
         save.addListener(new ClickListener() {
             @Override
@@ -155,7 +152,7 @@ public class HUD extends InputAdapter {
         this.menuButtons.addActor(save);
 
         // Quit Button
-        TextButton quit = new TextButton(L18N.get().l18n().get("hud_quit"), skin, "menu-entry");
+        TextButton quit = new TextButton(Services.getL18N().l18n().get("hud_quit"), skin, "menu-entry");
         quit.setPosition(GS.RES_X, GS.RES_Y - 10*GS.ROW , Align.topRight);
         quit.addListener(new ClickListener() {
             @Override
@@ -174,7 +171,7 @@ public class HUD extends InputAdapter {
         this.menuButtons.addActor(quit);
 
         // Battle Button
-        TextButton battle = new TextButton(L18N.get().l18n().get("hud_battle"), skin, "menu-entry");
+        TextButton battle = new TextButton(Services.getL18N().l18n().get("hud_battle"), skin, "menu-entry");
         battle.setPosition(GS.RES_X, GS.RES_Y - 15*GS.ROW, Align.topRight);
         battle.addListener(new ClickListener() {
             @Override
@@ -184,18 +181,18 @@ public class HUD extends InputAdapter {
                 oppTeam.monsters.add(BattleFactory.getInstance().createMonster(4));
                 oppTeam.monsters.add(BattleFactory.getInstance().createMonster(11));
                 battleScreen.init(Components.team.get(hero), oppTeam);
-                ScreenManager.get().pushScreen(battleScreen);
+                Services.getScreenManager().pushScreen(battleScreen);
             }
         });
         this.menuButtons.addActor(battle);
 
         // Team Button
-        TextButton teamButton = new TextButton(L18N.get().l18n().get("hud_team"), skin, "menu-entry");
+        TextButton teamButton = new TextButton(Services.getL18N().l18n().get("hud_team"), skin, "menu-entry");
         teamButton.setPosition(GS.RES_X, GS.RES_Y - 20*GS.ROW , Align.topRight);
         teamButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                ScreenManager.get().pushScreen(new InventoryScreen(Components.team.get(hero)));
+                Services.getScreenManager().pushScreen(new InventoryScreen(Components.team.get(hero)));
             }
         });
         this.menuButtons.addActor(teamButton);
@@ -339,7 +336,7 @@ public class HUD extends InputAdapter {
 
     public void openConversation(String text) {
         this.menuButtons.setVisible(false);
-        this.convText.setText(L18N.get().l18n().get(text));
+        this.convText.setText(Services.getL18N().l18n().get(text));
         this.conversationLabel.setVisible(true);
         conversationLabel.addAction(Actions.moveTo(0,0,.5f, Interpolation.exp10Out));
     }
@@ -351,7 +348,7 @@ public class HUD extends InputAdapter {
 
     public void openSign(String title, String text) {
         openConversation(text);
-        this.titleLabel.setText(L18N.get().l18n().get(title));
+        this.titleLabel.setText(Services.getL18N().l18n().get(title));
         this.titleLabel.setVisible(true);
     }
 
@@ -497,11 +494,11 @@ public class HUD extends InputAdapter {
         this.dPadCenterDist = new Vector2();
 
         this.dPadImgs = new Array<TextureRegion>();
-        this.dPadImgs.add(MediaManager.get().getUITextureAtlas().findRegion("dpad_idle"));
-        this.dPadImgs.add(MediaManager.get().getUITextureAtlas().findRegion("dpad_up"));
-        this.dPadImgs.add(MediaManager.get().getUITextureAtlas().findRegion("dpad_right"));
-        this.dPadImgs.add(MediaManager.get().getUITextureAtlas().findRegion("dpad_down"));
-        this.dPadImgs.add(MediaManager.get().getUITextureAtlas().findRegion("dpad_left"));
+        this.dPadImgs.add(Services.getMedia().getUITextureAtlas().findRegion("dpad_idle"));
+        this.dPadImgs.add(Services.getMedia().getUITextureAtlas().findRegion("dpad_up"));
+        this.dPadImgs.add(Services.getMedia().getUITextureAtlas().findRegion("dpad_right"));
+        this.dPadImgs.add(Services.getMedia().getUITextureAtlas().findRegion("dpad_down"));
+        this.dPadImgs.add(Services.getMedia().getUITextureAtlas().findRegion("dpad_left"));
         dpadImage = new Image(dPadImgs.first());
         dpadImage.setSize(dPadArea.width, dPadArea.height);
         dpadImage.setPosition(dPadCenter.x, dPadCenter.y, Align.center);

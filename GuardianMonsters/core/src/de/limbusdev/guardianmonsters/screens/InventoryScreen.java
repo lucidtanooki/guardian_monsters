@@ -14,10 +14,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
-import de.limbusdev.guardianmonsters.GuardianMonsters;
 import de.limbusdev.guardianmonsters.ecs.components.TeamComponent;
-import de.limbusdev.guardianmonsters.managers.MediaManager;
-import de.limbusdev.guardianmonsters.managers.ScreenManager;
+import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.ui.MonsterStatusInventoryWidget;
 import de.limbusdev.guardianmonsters.utils.GS;
 
@@ -36,7 +34,7 @@ public class InventoryScreen implements Screen {
     public InventoryScreen(TeamComponent team) {
         FitViewport fit = new FitViewport(GS.RES_X, GS.RES_Y);
         this.stage = new Stage(fit);
-        this.skin = MediaManager.get().getInventorySkin();
+        this.skin = Services.getMedia().getInventorySkin();
         this.views = new Array<Table>();
         MonsterStatusInventoryWidget msiw = new MonsterStatusInventoryWidget(skin);
         msiw.init(team);
@@ -59,7 +57,7 @@ public class InventoryScreen implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 // Exit Inventory
-                ScreenManager.get().popScreen();
+                Services.getScreenManager().popScreen();
             }
         });
         toolBar.addActor(ib.right());

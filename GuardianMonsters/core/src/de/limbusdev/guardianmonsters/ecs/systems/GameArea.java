@@ -12,6 +12,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 
+import de.limbusdev.guardianmonsters.data.AudioAssets;
 import de.limbusdev.guardianmonsters.ecs.components.PositionComponent;
 import de.limbusdev.guardianmonsters.enums.MusicType;
 import de.limbusdev.guardianmonsters.geometry.IntRectangle;
@@ -19,7 +20,8 @@ import de.limbusdev.guardianmonsters.geometry.IntVector2;
 import de.limbusdev.guardianmonsters.geometry.MapObjectInformation;
 import de.limbusdev.guardianmonsters.geometry.MapPersonInformation;
 import de.limbusdev.guardianmonsters.geometry.WarpPoint;
-import de.limbusdev.guardianmonsters.managers.MediaManager;
+import de.limbusdev.guardianmonsters.fwmengine.managers.Media;
+import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.model.MonsterArea;
 import de.limbusdev.guardianmonsters.rendering.OrthogonalTiledMapAndEntityRenderer;
 import de.limbusdev.guardianmonsters.utils.GS;
@@ -34,8 +36,8 @@ public class GameArea {
     /* ............................................................................ ATTRIBUTES .. */
     private TiledMap tiledMap;
     private OrthogonalTiledMapAndEntityRenderer mapRenderer;
-    private MediaManager media;
-    private Music bgMusic;
+    private Media media;
+    private String bgMusic;
     private Array<IntRectangle> colliders;
     private Array<IntRectangle> movingColliders;
     private Array<WarpPoint> warpPoints;
@@ -49,7 +51,7 @@ public class GameArea {
 
     /* ........................................................................... CONSTRUCTOR .. */
     public GameArea(int areaID, int startPosID) {
-        this.media = MediaManager.get();
+        this.media = Services.getMedia();
         this.startPosition = new PositionComponent(0,0,0,0);
         this.colliders = new Array<IntRectangle>();
         this.movingColliders = new Array<IntRectangle>();
@@ -59,7 +61,7 @@ public class GameArea {
         this.mapSigns = new Array<MapObjectInformation>();
         this.healFields = new Array<Rectangle>();
         setUpTiledMap(areaID, startPosID);
-        this.mapRenderer = new OrthogonalTiledMapAndEntityRenderer(tiledMap, media);
+        this.mapRenderer = new OrthogonalTiledMapAndEntityRenderer(tiledMap);
         this.areaID = areaID;
         this.mapRenderer.setUpAnimations(tiledMap.getLayers().get("animations"));
         this.mapRenderer.setUpAnimatedObjects(tiledMap.getLayers().get("animatedObjects"));
@@ -164,11 +166,10 @@ public class GameArea {
 
         // Set background music
         String musicType = tiledMap.getProperties().get("musicType", String.class);
-        if(musicType.equals("town"))
-            bgMusic = media.getBGMusic(
-                    MusicType.TOWN,
-                    Integer.parseInt(tiledMap.getProperties().get("musicIndex", String.class))-1);
-        bgMusic.setLooping(true);
+        int musicIndex = Integer.parseInt(tiledMap.getProperties().get("musicIndex", String.class))-1;
+        if(musicType.equals("town")) {
+            bgMusic = AudioAssets.get().getBgMusicTown(musicIndex);
+        }
 
     }
 
@@ -210,15 +211,15 @@ public class GameArea {
     }
 
     public void dispose() {
-        bgMusic.dispose();
+
     }
 
     public void playMusic() {
-        this.bgMusic.play();
+        Services.getAudio().playLoopMusic(bgMusic);
     }
 
     public void stopMusic() {
-        this.bgMusic.stop();
+        Services.getAudio().stopMusic(bgMusic);
     }
 
     public Array<IntRectangle> getColliders() {

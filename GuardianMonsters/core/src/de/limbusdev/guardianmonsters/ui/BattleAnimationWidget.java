@@ -12,9 +12,11 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 
+import de.limbusdev.guardianmonsters.data.AudioAssets;
 import de.limbusdev.guardianmonsters.enums.ButtonIDs;
 import de.limbusdev.guardianmonsters.geometry.IntVector2;
-import de.limbusdev.guardianmonsters.managers.MediaManager;
+import de.limbusdev.guardianmonsters.fwmengine.managers.Media;
+import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.model.Attack;
 import de.limbusdev.guardianmonsters.model.MonsterInBattle;
 import de.limbusdev.guardianmonsters.utils.GS;
@@ -29,7 +31,7 @@ public class BattleAnimationWidget extends BattleWidget implements ObservableWid
     private Array<WidgetObserver> observers;
 
     private ArrayMap<Integer,Image> monsterImgsLeft, monsterImgsRight;
-    private MediaManager media;
+    private Media media;
 
     public boolean attackAnimationRunning;
     private ImageButton nextButton;
@@ -41,11 +43,11 @@ public class BattleAnimationWidget extends BattleWidget implements ObservableWid
         this.monsterImgsLeft = new ArrayMap<Integer,Image>();
         this.monsterImgsRight = new ArrayMap<Integer,Image>();
         this.setBounds(0,0,0,0);
-        this.media = MediaManager.get();
+        this.media = Services.getMedia();
 
 
         // Next Button
-        nextButton = new ImageButton(MediaManager.get().getBattleSkin(), "b-back-eob");
+        nextButton = new ImageButton(media.getBattleSkin(), "b-back-eob");
         nextButton.setPosition(GS.RES_X, 0, Align.bottomRight);
 
         nextButton.addListener(
@@ -214,7 +216,7 @@ public class BattleAnimationWidget extends BattleWidget implements ObservableWid
             Actions.run(new Runnable() {
                 @Override
                 public void run() {
-                    media.getSFX(attack.sfxType, 0).play();
+                    Services.getAudio().playSound(AudioAssets.get().getBattleSFX(attack.sfxType,0));
                 }
             }),
             Actions.run(new Runnable() {

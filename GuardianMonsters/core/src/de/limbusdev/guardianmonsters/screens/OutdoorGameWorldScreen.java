@@ -14,10 +14,9 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-import de.limbusdev.guardianmonsters.GuardianMonsters;
 import de.limbusdev.guardianmonsters.ecs.EntityComponentSystem;
 import de.limbusdev.guardianmonsters.ecs.systems.GameArea;
-import de.limbusdev.guardianmonsters.managers.SaveGameManager;
+import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager;
 import de.limbusdev.guardianmonsters.utils.GS;
 import de.limbusdev.guardianmonsters.utils.UnitConverter;
 

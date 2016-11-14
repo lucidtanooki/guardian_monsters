@@ -7,7 +7,6 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.TimeUtils;
 
 import de.limbusdev.guardianmonsters.ecs.EntityComponentSystem;
@@ -20,7 +19,7 @@ import de.limbusdev.guardianmonsters.ecs.components.TeamComponent;
 import de.limbusdev.guardianmonsters.geometry.IntRectangle;
 import de.limbusdev.guardianmonsters.geometry.IntVector2;
 import de.limbusdev.guardianmonsters.geometry.WarpPoint;
-import de.limbusdev.guardianmonsters.managers.ScreenManager;
+import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.model.BattleFactory;
 import de.limbusdev.guardianmonsters.model.Monster;
 import de.limbusdev.guardianmonsters.model.MonsterArea;
@@ -211,7 +210,7 @@ public class MovementSystem extends EntitySystem {
                         input.inBattle = true;
                         TeamComponent oppTeam = BattleFactory.getInstance().createOpponentTeam(ma);
                         ecs.hud.battleScreen.init(Components.team.get(ecs.hero), oppTeam);
-                        ScreenManager.get().pushScreen(ecs.hud.battleScreen);
+                        Services.getScreenManager().pushScreen(ecs.hud.battleScreen);
                         /* ......................................................... START BATTLE */
                         // Stop when in a battle
                         if(input.touchDown) input.startMoving = false;

@@ -14,7 +14,8 @@ import com.badlogic.gdx.utils.ArrayMap;
 
 import de.limbusdev.guardianmonsters.geometry.IdentifiableRectangle;
 import de.limbusdev.guardianmonsters.graphics.EntitySprite;
-import de.limbusdev.guardianmonsters.managers.MediaManager;
+import de.limbusdev.guardianmonsters.fwmengine.managers.Media;
+import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 
 
 /**
@@ -27,19 +28,19 @@ public class OrthogonalTiledMapAndEntityRenderer extends OrthogonalTiledMapRende
     private ArrayMap<Integer,TextureRegion> animationTextures;
     private Array<IdentifiableRectangle> animatedObjectsTiles;
     private ArrayMap<Integer,TextureRegion> animatedObjectsTextures;
-    private MediaManager media;
+    private Media media;
     private float elapsedTime;
 
     /* ........................................................................... CONSTRUCTOR .. */
     public OrthogonalTiledMapAndEntityRenderer(
-            TiledMap map, MediaManager media) {
+            TiledMap map) {
         super(map, 1);
         this.sprites = new Array<EntitySprite>();
         this.animatedTiles = new Array<IdentifiableRectangle>();
         this.animationTextures = new ArrayMap<Integer,TextureRegion>();
         this.animatedObjectsTiles = new Array<IdentifiableRectangle>();
         this.animatedObjectsTextures = new ArrayMap<Integer, TextureRegion>();
-        this.media = media;
+        this.media = Services.getMedia();
         this.elapsedTime = 0;
     }
     /* ............................................................................... METHODS .. */

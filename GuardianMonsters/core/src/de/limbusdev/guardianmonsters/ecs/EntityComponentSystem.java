@@ -8,7 +8,6 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-import de.limbusdev.guardianmonsters.GuardianMonsters;
 import de.limbusdev.guardianmonsters.ecs.components.Components;
 import de.limbusdev.guardianmonsters.ecs.components.PositionComponent;
 import de.limbusdev.guardianmonsters.ecs.entities.HeroEntity;
@@ -23,9 +22,9 @@ import de.limbusdev.guardianmonsters.ecs.systems.PositionSynchroSystem;
 import de.limbusdev.guardianmonsters.ecs.systems.SpriteSystem;
 import de.limbusdev.guardianmonsters.geometry.MapObjectInformation;
 import de.limbusdev.guardianmonsters.geometry.MapPersonInformation;
-import de.limbusdev.guardianmonsters.managers.MediaManager;
-import de.limbusdev.guardianmonsters.managers.SaveGameManager;
-import de.limbusdev.guardianmonsters.managers.ScreenManager;
+import de.limbusdev.guardianmonsters.fwmengine.managers.Media;
+import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager;
+import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.screens.BattleScreen;
 import de.limbusdev.guardianmonsters.screens.HUD;
 import de.limbusdev.guardianmonsters.screens.OutdoorGameWorldScreen;
@@ -38,7 +37,7 @@ import de.limbusdev.guardianmonsters.utils.GS;
 public class EntityComponentSystem {
     /* ............................................................................ ATTRIBUTES .. */
     private Engine engine;
-    private MediaManager media;
+    private Media media;
     private EntityFactory entityFactory;
     private PositionComponent heroPosition;
     public GameArea gameArea;
@@ -60,10 +59,10 @@ public class EntityComponentSystem {
             fromSave, OutdoorGameWorldScreen gameScreen, SaveGameManager sgm
     ) {
 
-        this.media = MediaManager.get();
+        media = Services.getMedia();
         this.gameArea = gameArea;
         this.engine = new Engine();
-        this.entityFactory = new EntityFactory(engine, media, gameArea);
+        this.entityFactory = new EntityFactory(engine, gameArea);
         setUpHero(fromSave);
         this.hud = new HUD(new BattleScreen(),sgm, hero, engine);
         setUpPeople();
@@ -179,7 +178,8 @@ public class EntityComponentSystem {
      * @param startFieldID  start point on new map
      */
     public void changeGameArea(int mapID, int startFieldID) {
-        ScreenManager.get().pushScreen(new OutdoorGameWorldScreen(mapID, startFieldID, false));
+        Services.getScreenManager().pushScreen(
+            new OutdoorGameWorldScreen(mapID, startFieldID, false));
     }
 
     /**

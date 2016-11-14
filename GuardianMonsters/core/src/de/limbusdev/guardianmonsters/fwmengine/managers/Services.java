@@ -14,6 +14,7 @@ public class Services {
     private static ScreenManager screens;
     private static L18N l18n;
     private static Settings settings;
+    private static UI ui;
 
     public static void provide(Media service) {
         media = service;
@@ -77,6 +78,19 @@ public class Services {
             return new NullSettings();
         } else {
             return settings;
+        }
+    }
+
+    public static void provide(UI service) {
+        ui = service;
+    }
+
+    public static UI getUI() {
+        if(ui == null) {
+            System.err.println("SERVICES: No UI service injected yet with Services.provide(UI service). Returning NullSettings.");
+            return new NullUI();
+        } else {
+            return ui;
         }
     }
 }

@@ -47,7 +47,7 @@ public class BattleAnimationWidget extends BattleWidget implements ObservableWid
 
 
         // Next Button
-        nextButton = new ImageButton(media.getBattleSkin(), "b-back-eob");
+        nextButton = new ImageButton(Services.getUI().getBattleSkin(), "b-back-eob");
         nextButton.setPosition(GS.RES_X, 0, Align.bottomRight);
 
         nextButton.addListener(

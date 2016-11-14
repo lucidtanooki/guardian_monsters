@@ -49,7 +49,7 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
 
     // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ CONSTRUCTOR
     public BattleHUD() {
-        super(Services.getMedia().getBattleSkin());
+        super(Services.getUI().getBattleSkin());
         initializeAttributes();
         setUpUI();
     }

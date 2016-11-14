@@ -3,7 +3,6 @@ package de.limbusdev.guardianmonsters.fwmengine.managers;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 import de.limbusdev.guardianmonsters.enums.TextureAtlasType;
 
@@ -24,11 +23,8 @@ public class NullMedia implements Media {
         return null;
     }
 
-    public Texture getMainMenuBGImg() {
-        return null;
-    }
-
-    public Texture getMainMenuBGImg2() {
+    @Override
+    public Texture getTexture(String path) {
         return null;
     }
 
@@ -40,15 +36,8 @@ public class NullMedia implements Media {
         return null;
     }
 
-    public TextureAtlas getBattleUITextureAtlas() {
-        return null;
-    }
-
-    public TextureAtlas getUITextureAtlas() {
-        return null;
-    }
-
-    public TextureAtlas getLogosTextureAtlas() {
+    @Override
+    public TextureAtlas getTextureAtlas(String path) {
         return null;
     }
 
@@ -60,15 +49,5 @@ public class NullMedia implements Media {
         return null;
     }
 
-    public Skin getBattleSkin() {
-        return null;
-    }
 
-    public Skin getInventorySkin() {
-        return null;
-    }
-
-    public Skin getSkin() {
-        return null;
-    }
 }

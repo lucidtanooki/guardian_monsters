@@ -4,9 +4,10 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.utils.Array;
 
 import de.limbusdev.guardianmonsters.data.AudioAssets;
+import de.limbusdev.guardianmonsters.data.SkinAssets;
+import de.limbusdev.guardianmonsters.data.TextureAssets;
 import de.limbusdev.guardianmonsters.ecs.components.TeamComponent;
 import de.limbusdev.guardianmonsters.fwmengine.managers.AudioManager;
 import de.limbusdev.guardianmonsters.fwmengine.managers.ConcreteScreenManager;
@@ -15,6 +16,7 @@ import de.limbusdev.guardianmonsters.fwmengine.managers.MediaManager;
 import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.fwmengine.managers.SettingsService;
+import de.limbusdev.guardianmonsters.fwmengine.managers.UIManager;
 import de.limbusdev.guardianmonsters.model.BattleFactory;
 import de.limbusdev.guardianmonsters.screens.BattleScreen;
 import de.limbusdev.guardianmonsters.screens.InventoryScreen;
@@ -28,22 +30,14 @@ public class GuardianMonsters extends Game{
 	/* ............................................................................ ATTRIBUTES .. */
 	public SpriteBatch batch;
     public ShapeRenderer shp;
-    public BitmapFont font;
 	
 	@Override
 	public void create () {
-        // Service Locator: Dependency Injection
-        System.out.println("GuardianMonsters: injecting dependencies ...");
-        Services.provide(new MediaManager());
-        Services.provide(new AudioManager(AudioAssets.get().getAllSfxPaths(),AudioAssets.get().getAllMusicPaths()));
-        Services.provide(new ConcreteScreenManager(this));
-        Services.provide(new LocalizationManager());
-        Services.provide(new SettingsService());
 
+        injectDependencies();
 
         batch = new SpriteBatch();
         shp   = new ShapeRenderer();
-        font  = new BitmapFont();
 
         switch(GS.DEBUG_MODE) {
             case WORLD:
@@ -71,8 +65,30 @@ public class GuardianMonsters extends Game{
     public void dispose() {
         batch.dispose();
         shp.dispose();
-        font.dispose();
         Services.getMedia().dispose();
+    }
+
+    /**
+     * Initializes the Service Locator
+     */
+    private void injectDependencies() {
+        // Service Locator: Dependency Injection
+        System.out.println("GuardianMonsters: injecting dependencies ...");
+        Services.provide(new MediaManager(
+            TextureAssets.getAllTexturePackPaths(),
+            TextureAssets.getAllTexturePaths(),
+            TextureAssets.monsterSpriteSheetFile,
+            TextureAssets.heroSpritesheetFile,
+            TextureAssets.animations
+        ));
+        Services.provide(new AudioManager(
+            AudioAssets.get().getAllSfxPaths(),
+            AudioAssets.get().getAllMusicPaths()
+        ));
+        Services.provide(new ConcreteScreenManager(this));
+        Services.provide(new LocalizationManager());
+        Services.provide(new SettingsService());
+        Services.provide(new UIManager(SkinAssets.defaultFont));
     }
 
     // ............................................................................ GAME MODE SETUPS

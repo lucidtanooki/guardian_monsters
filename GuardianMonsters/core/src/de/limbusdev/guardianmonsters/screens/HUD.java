@@ -27,6 +27,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
+import de.limbusdev.guardianmonsters.data.TextureAssets;
 import de.limbusdev.guardianmonsters.ecs.components.Components;
 import de.limbusdev.guardianmonsters.ecs.components.InputComponent;
 import de.limbusdev.guardianmonsters.ecs.components.PositionComponent;
@@ -58,7 +59,6 @@ public class HUD extends InputAdapter {
     private Label convText;
     private Label titleLabel;
     private Group menuButtons, conversationLabel;
-    private TextureAtlas UItextures;
     public final BattleScreen battleScreen;
     public final SaveGameManager saveGameManager;
     public Engine engine;
@@ -80,21 +80,21 @@ public class HUD extends InputAdapter {
         this.saveGameManager = saveGameManager;
         this.openHUDELement = HUDElements.NONE;
         this.hero = hero;
-        this.UItextures = Services.getMedia().getUITextureAtlas();
+        TextureAtlas UItextures = Services.getMedia().getTextureAtlas(TextureAssets.UISpriteSheetFile);
 
 
         // Scene2D
         FitViewport fit = new FitViewport(GS.RES_X, GS.RES_Y);
         this.stage = new Stage(fit);
-        this.skin = Services.getMedia().getSkin();
+        this.skin = Services.getUI().getDefaultSkin();
 
-        setUpConversation();
-        setUpTopLevelButtons();
-        setUpDpad();
+        setUpConversation(UItextures);
+        setUpTopLevelButtons(UItextures);
+        setUpDpad(UItextures);
 
 
         // Images ............................................................................ START
-        this.blackCourtain = new Image(Services.getMedia().getBattleUITextureAtlas().findRegion("black"));
+        this.blackCourtain = new Image(UItextures.findRegion("black"));
         this.blackCourtain.setWidth(GS.RES_X);
         this.blackCourtain.setHeight(GS.RES_Y);
         this.blackCourtain.setPosition(0, 0);
@@ -110,7 +110,7 @@ public class HUD extends InputAdapter {
     /**
      * Creates main menu buttons and the dpad
      */
-    private void setUpTopLevelButtons() {
+    private void setUpTopLevelButtons(TextureAtlas UItextures) {
 
         // Button Style
         TextButton.TextButtonStyle tbs = new TextButton.TextButtonStyle();
@@ -360,7 +360,7 @@ public class HUD extends InputAdapter {
         blackCourtain.addAction(Actions.sequence(Actions.visible(true),Actions.fadeIn(1)));
     }
 
-    private void setUpConversation() {
+    private void setUpConversation(TextureAtlas UItextures) {
         Label.LabelStyle lbs = new Label.LabelStyle();
 
         this.conversationLabel = new Group();
@@ -481,7 +481,7 @@ public class HUD extends InputAdapter {
     }
 
     // ............................................................................. SET UP CONTROLS
-    private void setUpDpad() {
+    private void setUpDpad(TextureAtlas UItextures) {
         // Initialize DPAD
         this.touchPos = new Vector2();
         float borderDist = GS.RES_X *0.0125f;
@@ -494,11 +494,11 @@ public class HUD extends InputAdapter {
         this.dPadCenterDist = new Vector2();
 
         this.dPadImgs = new Array<TextureRegion>();
-        this.dPadImgs.add(Services.getMedia().getUITextureAtlas().findRegion("dpad_idle"));
-        this.dPadImgs.add(Services.getMedia().getUITextureAtlas().findRegion("dpad_up"));
-        this.dPadImgs.add(Services.getMedia().getUITextureAtlas().findRegion("dpad_right"));
-        this.dPadImgs.add(Services.getMedia().getUITextureAtlas().findRegion("dpad_down"));
-        this.dPadImgs.add(Services.getMedia().getUITextureAtlas().findRegion("dpad_left"));
+        this.dPadImgs.add(UItextures.findRegion("dpad_idle"));
+        this.dPadImgs.add(UItextures.findRegion("dpad_up"));
+        this.dPadImgs.add(UItextures.findRegion("dpad_right"));
+        this.dPadImgs.add(UItextures.findRegion("dpad_down"));
+        this.dPadImgs.add(UItextures.findRegion("dpad_left"));
         dpadImage = new Image(dPadImgs.first());
         dpadImage.setSize(dPadArea.width, dPadArea.height);
         dpadImage.setPosition(dPadCenter.x, dPadCenter.y, Align.center);

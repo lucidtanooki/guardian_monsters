@@ -1,14 +1,9 @@
 package de.limbusdev.guardianmonsters.fwmengine.managers;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Array;
 import de.limbusdev.guardianmonsters.enums.TextureAtlasType;
 
@@ -23,81 +18,48 @@ public class MediaManager implements Media {
     private AssetManager assets;
 
     // file names
-    private String mainMenuBGImgFile = "spritesheets/GM_logo.png";
-    private String mainMenuBGImgFile2 = "spritesheets/main_logo_bg.png";
-    private String heroSpritesheetFile = "spritesheets/hero.pack";
-    private String monsterSpriteSheetFile = "spritesheets/monsters.pack";
-    private String battleUISpriteSheetFile = "spritesheets/battleUI.pack";
-    private String UISpriteSheetFile = "spritesheets/UI.pack";
-    private String logosSpriteSheetFile = "spritesheets/logos.pack";
-    private String animations = "spritesheets/animations.pack";
-    private String battleAnimations = "spritesheets/battleAnimations.pack";
+    private String animations;
+    private String monsterSpriteSheetFile;
+    private String heroSpritesheetFile;
+
     private Array<String> bgs;
     private Array<String> maleSprites, femaleSprites;
     private Array<Animation> animatedTiles;
-    private Skin skin, battleSkin, inventorySkin;
 
     
     /* ................,........................................................... CONSTRUCTOR .. */
 
-    public MediaManager() {
+    public MediaManager(
+        Array<String> texturePackPaths,
+        Array<String> texturePaths,
+        String monsterSpriteSheetPath,
+        String heroSpriteSheetPath,
+        String animationsSpriteSheetPath
+    ){
+
         this.assets = new AssetManager();
-        assets.load(this.heroSpritesheetFile, TextureAtlas.class);
-        assets.load(this.battleUISpriteSheetFile, TextureAtlas.class);
-        assets.load(this.UISpriteSheetFile, TextureAtlas.class);
-        assets.load(this.animations, TextureAtlas.class);
-        assets.load(this.battleAnimations, TextureAtlas.class);
-        assets.load(this.logosSpriteSheetFile, TextureAtlas.class);
-        assets.load(this.mainMenuBGImgFile, Texture.class);
-        assets.load(this.mainMenuBGImgFile2, Texture.class);
+
+        for(String s : texturePackPaths) {
+            assets.load(s, TextureAtlas.class);
+        }
+        for(String s : texturePaths) {
+            assets.load(s, Texture.class);
+        }
+
+        this.monsterSpriteSheetFile = monsterSpriteSheetPath;
+        this.heroSpritesheetFile = heroSpriteSheetPath;
+        this.animations = animationsSpriteSheetPath;
 
         this.maleSprites = new Array<String>();
         for(int i=1;i<=3;i++)this.maleSprites.add("spritesheets/person" + i + "m.pack");
         for(String s : maleSprites) assets.load(s, TextureAtlas.class);
         this.femaleSprites = new Array<String>();
 
-        // Monsters
-        assets.load(monsterSpriteSheetFile, TextureAtlas.class);
 
         bgs = new Array<String>();
         bgs.add("backgrounds/grass.png");
         for(String s : bgs) assets.load(s, Texture.class);
 
-        // Fonts ............................................................................. FONTS
-        FreeTypeFontGenerator gen = new FreeTypeFontGenerator(Gdx.files.internal
-                ("fonts/PixelOperator-Bold.ttf"));
-        FreeTypeFontGenerator.FreeTypeFontParameter param = new FreeTypeFontGenerator
-                .FreeTypeFontParameter();
-        param.color = Color.BLACK;
-        param.size = 32;
-        param.magFilter = Texture.TextureFilter.Nearest;
-        param.minFilter = Texture.TextureFilter.Linear;
-        BitmapFont font32 = gen.generateFont(param);
-        param.color = Color.WHITE;
-        param.size = 32;
-        param.magFilter = Texture.TextureFilter.Nearest;
-        param.minFilter = Texture.TextureFilter.Linear;
-        BitmapFont font32w = gen.generateFont(param);
-        gen.dispose();
-
-        this.skin = new Skin();
-        skin.addRegions(new TextureAtlas(Gdx.files.internal("scene2d/uiskin.atlas")));
-        skin.addRegions(new TextureAtlas(Gdx.files.internal("scene2d/UI.pack")));
-        skin.add("default-font", font32);
-        skin.add("white", font32w);
-        skin.load(Gdx.files.internal("scene2d/uiskin.json"));
-
-        this.battleSkin = new Skin();
-        battleSkin.addRegions(new TextureAtlas(Gdx.files.internal("scene2d/battleUI.pack")));
-        battleSkin.add("default-font", font32);
-        battleSkin.add("white", font32w);
-        battleSkin.load(Gdx.files.internal("scene2d/battleuiskin.json"));
-
-        this.inventorySkin = new Skin();
-        inventorySkin.addRegions(new TextureAtlas(Gdx.files.internal("scene2d/inventoryUI.pack")));
-        inventorySkin.add("default-font", font32);
-        inventorySkin.add("white", font32w);
-        inventorySkin.load(Gdx.files.internal("scene2d/inventoryUIskin.json"));
 
         // Animated Tiles
         animatedTiles = new Array<Animation>();
@@ -175,11 +137,8 @@ public class MediaManager implements Media {
         return atlas;
     }
 
-    public Texture getMainMenuBGImg() {
-        return assets.get(mainMenuBGImgFile);
-    }
-    public Texture getMainMenuBGImg2() {
-        return assets.get(mainMenuBGImgFile2);
+    public Texture getTexture(String path) {
+        return assets.get(path);
     }
 
     public TextureAtlas.AtlasRegion getMonsterSprite(int index) {
@@ -191,16 +150,8 @@ public class MediaManager implements Media {
         return assets.get(bgs.get(index));
     }
 
-    public TextureAtlas getBattleUITextureAtlas() {
-        return assets.get(battleUISpriteSheetFile, TextureAtlas.class);
-    }
-
-    public TextureAtlas getUITextureAtlas() {
-        return assets.get(UISpriteSheetFile, TextureAtlas.class);
-    }
-
-    public TextureAtlas getLogosTextureAtlas() {
-        return assets.get(logosSpriteSheetFile, TextureAtlas.class);
+    public TextureAtlas getTextureAtlas(String path) {
+        return assets.get(path, TextureAtlas.class);
     }
 
     public Animation getAttackAnimation(String attack) {
@@ -239,16 +190,4 @@ public class MediaManager implements Media {
         return animatedTiles.get(index);
     }
 
-
-    public Skin getBattleSkin() {
-        return battleSkin;
-    }
-
-    public Skin getInventorySkin() {
-        return inventorySkin;
-    }
-
-    public Skin getSkin() {
-        return skin;
-    }
 }

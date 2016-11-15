@@ -141,8 +141,8 @@ public class MainMenuScreen implements Screen {
         stage.addActor(bg);
 
         Image logo = new Image(Services.getMedia().getTexture(TextureAssets.mainMenuBGImgFile));
-        logo.setWidth(1024);
-        logo.setHeight(256);
+        logo.setWidth(1080);
+        logo.setHeight(270);
         logo.setPosition(GS.RES_X / 2, GS.RES_Y / 2, Align.center);
         logo.addAction(Actions.forever(Actions.sequence(
                         Actions.moveBy(0,-7, 3, Interpolation.sine),
@@ -311,8 +311,8 @@ public class MainMenuScreen implements Screen {
         bg.setWidth(GS.RES_X);
         bg.setHeight(GS.RES_Y);
         bg.setPosition(0,0);
-        Image logo = new Image(logos.findRegion("limbusdev"));
-        logo.setWidth(264);logo.setHeight(44);
+        Image logo = new Image(logos.findRegion("limbusdevIntro"));
+        logo.setWidth(534);logo.setHeight(336);
         logo.setPosition(GS.RES_X / 2, GS.RES_Y / 2,Align.center);
         introScreen.addActor(bg);
         introScreen.addActor(logo);

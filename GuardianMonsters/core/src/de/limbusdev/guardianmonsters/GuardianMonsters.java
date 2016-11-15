@@ -1,58 +1,37 @@
 package de.limbusdev.guardianmonsters;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 import de.limbusdev.guardianmonsters.data.AudioAssets;
 import de.limbusdev.guardianmonsters.data.SkinAssets;
 import de.limbusdev.guardianmonsters.data.TextureAssets;
-import de.limbusdev.guardianmonsters.ecs.components.TeamComponent;
 import de.limbusdev.guardianmonsters.fwmengine.managers.AudioManager;
 import de.limbusdev.guardianmonsters.fwmengine.managers.ConcreteScreenManager;
 import de.limbusdev.guardianmonsters.fwmengine.managers.LocalizationManager;
 import de.limbusdev.guardianmonsters.fwmengine.managers.MediaManager;
-import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.fwmengine.managers.SettingsService;
 import de.limbusdev.guardianmonsters.fwmengine.managers.UIManager;
-import de.limbusdev.guardianmonsters.model.BattleFactory;
-import de.limbusdev.guardianmonsters.screens.BattleScreen;
-import de.limbusdev.guardianmonsters.screens.InventoryScreen;
-import de.limbusdev.guardianmonsters.screens.MainMenuScreen;
-import de.limbusdev.guardianmonsters.screens.OutdoorGameWorldScreen;
+import de.limbusdev.guardianmonsters.fwmengine.menus.ui.MainMenuScreen;
 import de.limbusdev.guardianmonsters.utils.GS;
-import de.limbusdev.guardianmonsters.utils.GameState;
+import de.limbusdev.guardianmonsters.utils.GameStateDebugger;
 
 
 public class GuardianMonsters extends Game{
 	/* ............................................................................ ATTRIBUTES .. */
-	public SpriteBatch batch;
-    public ShapeRenderer shp;
 	
 	@Override
 	public void create () {
 
+        // Inject Dependencies: MediaManager, AudioManager, ScreenManager, SaveGameManager, ...
         injectDependencies();
 
-        batch = new SpriteBatch();
-        shp   = new ShapeRenderer();
-
-        switch(GS.DEBUG_MODE) {
-            case WORLD:
-                setUpTestWorld();
-                break;
-            case BATTLE:
-                setUpTestBattle();
-                break;
-            case INVENTORY:
-                setUpTestInventory();
-                break;
-            default:
-                // Release
-                Services.getScreenManager().pushScreen(new MainMenuScreen());
-                break;
+        if(!GS.DEBUGGING_ON) {
+            // Start normal game from Main Menu
+            Services.getScreenManager().pushScreen(new MainMenuScreen());
+        } else {
+            // Start Debugging
+            (new GameStateDebugger(this)).startDebugging();
         }
 	}
 
@@ -63,11 +42,14 @@ public class GuardianMonsters extends Game{
 
     @Override
     public void dispose() {
-        batch.dispose();
-        shp.dispose();
         Services.getMedia().dispose();
+        Services.getAudio().dispose();
     }
 
+
+
+
+    // ............................................................................. SERVICE LOCATOR
     /**
      * Initializes the Service Locator
      */
@@ -91,35 +73,4 @@ public class GuardianMonsters extends Game{
         Services.provide(new UIManager(SkinAssets.defaultFont));
     }
 
-    // ............................................................................ GAME MODE SETUPS
-    private void setUpTestInventory() {
-        TeamComponent herTeam = new TeamComponent();
-        herTeam.monsters.add(BattleFactory.getInstance().createMonster(1));
-        herTeam.monsters.add(BattleFactory.getInstance().createMonster(2));
-        herTeam.monsters.add(BattleFactory.getInstance().createMonster(3));
-        InventoryScreen ivs = new InventoryScreen(herTeam);
-        setScreen(ivs);
-    }
-
-    private void setUpTestBattle() {
-        TeamComponent herTeam = new TeamComponent();
-        herTeam.monsters.add(BattleFactory.getInstance().createMonster(1));
-        herTeam.monsters.add(BattleFactory.getInstance().createMonster(17));
-        herTeam.monsters.add(BattleFactory.getInstance().createMonster(3));
-        TeamComponent oppTeam = new TeamComponent();
-        oppTeam.monsters.add(BattleFactory.getInstance().createMonster(7));
-        oppTeam.monsters.add(BattleFactory.getInstance().createMonster(4));
-        oppTeam.monsters.add(BattleFactory.getInstance().createMonster(11));
-        BattleScreen battleScreen = new BattleScreen();
-        battleScreen.init(herTeam, oppTeam);
-        setScreen(battleScreen);
-    }
-
-    private void setUpTestWorld() {
-        if(SaveGameManager.doesGameSaveExist()) {
-            GameState state = SaveGameManager.loadSaveGame();
-            setScreen(new OutdoorGameWorldScreen(state.map, 1, true));
-        } else
-            setScreen(new OutdoorGameWorldScreen(9, 1, false));
-    }
 }

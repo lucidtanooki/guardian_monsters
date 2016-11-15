@@ -4,6 +4,8 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
 
 /**
+ * ScreenManager following the Game State Stack Pattern
+ * https://gamedevelopment.tutsplus.com/articles/how-to-build-a-jrpg-a-primer-for-game-developers--gamedev-6676
  * Created by georg on 14.11.16.
  */
 

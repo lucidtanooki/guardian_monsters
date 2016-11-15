@@ -11,11 +11,11 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 
-import de.limbusdev.guardianmonsters.ecs.components.Components;
-import de.limbusdev.guardianmonsters.ecs.components.PositionComponent;
-import de.limbusdev.guardianmonsters.ecs.components.SaveGameComponent;
-import de.limbusdev.guardianmonsters.ecs.components.TeamComponent;
-import de.limbusdev.guardianmonsters.ecs.systems.GameArea;
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Components;
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PositionComponent;
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.SaveGameComponent;
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TeamComponent;
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.GameArea;
 import de.limbusdev.guardianmonsters.model.Monster;
 import de.limbusdev.guardianmonsters.utils.GameState;
 

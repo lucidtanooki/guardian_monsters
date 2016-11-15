@@ -24,4 +24,9 @@ public class NullAudio implements Audio {
     public void stopMusic(String path) {
 
     }
+
+    @Override
+    public void dispose() {
+
+    }
 }

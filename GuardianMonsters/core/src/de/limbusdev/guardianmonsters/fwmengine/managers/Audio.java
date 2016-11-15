@@ -10,4 +10,5 @@ public interface Audio {
     public void playMusic(String path);
     public void playLoopMusic(String path);
     public void stopMusic(String path);
+    public void dispose();
 }

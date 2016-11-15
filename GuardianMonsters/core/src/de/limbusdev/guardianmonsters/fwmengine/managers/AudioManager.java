@@ -59,6 +59,12 @@ public class AudioManager implements Audio {
 
     @Override
     public void stopMusic(String path) {
+        Music music = assets.get(path,Music.class);
+        music.stop();
+    }
 
+    @Override
+    public void dispose() {
+        assets.dispose();
     }
 }

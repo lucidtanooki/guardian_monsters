@@ -150,11 +150,16 @@ public class MainMenuScreen implements Screen {
                 )));
         logoScreen.addActor(logo);
 
+        Label creatorLabel = new Label("by Georg Eckert", Services.getUI().getDefaultSkin(),"trans-white");
+        creatorLabel.setPosition(GS.RES_X/2,GS.ROW*14);
+        creatorLabel.setAlignment(Align.center,Align.center);
+        stage.addActor(creatorLabel);
+
 
         // Buttons ......................................................................... BUTTONS
         TextButton.TextButtonStyle tbs = new TextButton.TextButtonStyle();
         tbs.font = skin.getFont("default-font");
-        tbs.unpressedOffsetY = +1;
+        tbs.unpressedOffsetY = +2;
         tbs.down = new TextureRegionDrawable(uiTA.findRegion("b192down"));
         tbs.up   = new TextureRegionDrawable(uiTA.findRegion("b192up"));
 

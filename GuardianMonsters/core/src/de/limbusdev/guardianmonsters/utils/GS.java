@@ -24,7 +24,7 @@ public class GS {
     public static final int ONE_STEPDURATION_MS = 5;
     public static final int ONE_STEP_DURATION_PERSON = 20;
     public static final int zoom = 3;
-    public static final boolean DEBUGGING_ON = false;
+    public static final boolean DEBUGGING_ON = true;
     public static final int MONSTER_SPRITES = 22;
     /* ........................................................................... CONSTRUCTOR .. */
     
@@ -34,6 +34,6 @@ public class GS {
 
     // ................................................................................... DEBUGGING
     public final static boolean SKIP_START_MENU = true;
-    public final static DebugMode DEBUG_MODE = DebugMode.RELEASE;
+    public final static DebugMode DEBUG_MODE = DebugMode.WORLD_UI;
 
 }

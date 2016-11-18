@@ -51,6 +51,10 @@ public class GameStateDebugger {
             game.setScreen(new OutdoorGameWorldScreen(9, 1, false));
     }
 
+    private void setUpTestWorldUI() {
+        game.setScreen(new OutdoorGameWorldScreen(1, 1, false));
+    }
+
     public void startDebugging() {
         switch(GS.DEBUG_MODE) {
             case BATTLE:
@@ -58,6 +62,9 @@ public class GameStateDebugger {
                 break;
             case INVENTORY:
                 setUpTestInventory();
+                break;
+            case WORLD_UI:
+                setUpTestWorldUI();
                 break;
             default:
                 setUpTestWorld();

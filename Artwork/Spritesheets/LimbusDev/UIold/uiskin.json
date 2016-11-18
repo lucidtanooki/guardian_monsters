@@ -30,8 +30,8 @@
 	  default-red: { down: red-round-down, up: red-round, font: default-font, fontColor: grey },
 	  default-green: { down: green-round-down, up: green-round, font: default-font, fontColor: grey },
 	  default-blue: { down: blue-round-down, up: blue-round, font: default-font, fontColor: grey },
-	  open-menu: {down: buttonMenuDown, up: buttonMenuUp, font: default-font, unpressedOffsetY: 3},
-	  menu-entry: {down: buttonSideBarDown, up: buttonSideBarUp, font: default-font, unpressedOffsetY: 3}
+	  open-menu: {down: buttonMenuDown, up: buttonMenuUp, font: white},
+	  menu-entry: {down: buttonSideBarDown, up: buttonSideBarUp, font: white}
   },
   
   com.badlogic.gdx.scenes.scene2d.ui.ScrollPane$ScrollPaneStyle: {
@@ -73,8 +73,7 @@ com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
 	name-sign-l: { font: default-font, fontColor: grey, background: name-sign-l },
 	trans: { font: default-font, fontColor: white, background: invis },
 	beige-r: { font: default-font, fontColor: grey, background: beige-round-r },
-    trans-white: {font: white, background: invis},
-    speech-sign: {font: default-font, fontColor: black, background: dialog_bg }
+    trans-white: {font: white, background: invis}
 },
 com.badlogic.gdx.scenes.scene2d.ui.TextField$TextFieldStyle: {
 	default: { selection: selection, background: textfield, font: default-font, fontColor: white, cursor: cursor }

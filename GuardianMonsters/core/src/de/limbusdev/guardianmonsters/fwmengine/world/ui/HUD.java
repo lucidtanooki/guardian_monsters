@@ -114,26 +114,19 @@ public class HUD extends InputAdapter {
      */
     private void setUpTopLevelButtons(TextureAtlas UItextures) {
 
-        // Button Style
-        TextButton.TextButtonStyle tbs = new TextButton.TextButtonStyle();
-        tbs.font = skin.getFont("white");
-        tbs.down = new TextureRegionDrawable(UItextures.findRegion("buttonMenuDown"));
-        tbs.up   = new TextureRegionDrawable(UItextures.findRegion("buttonMenuUp"));
-        tbs.unpressedOffsetX = 10; tbs.unpressedOffsetY = 0;
-        tbs.pressedOffsetX = 10; tbs.pressedOffsetY = 1;
-
         // Menu Button
         TextButton menu = new TextButton(Services.getL18N().l18n().get("hud_menu"), skin, "open-menu");
-        menu.setPosition(GS.RES_X, GS.RES_Y, Align.topRight);
+        menu.setPosition(GS.RES_X, GS.RES_Y+12, Align.topRight);
         menu.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 if(conversationLabel.isVisible()) return;
-                if (menuButtons.isVisible()) menuButtons.addAction(Actions.sequence(
-                        Actions.fadeOut(.3f), Actions.visible(false)));
-                else {
+                if (menuButtons.isVisible()) {
                     menuButtons.addAction(Actions.sequence(
-                            Actions.visible(true), Actions.fadeIn(.5f)
+                        Actions.moveBy(144,0,.5f,Interpolation.pow2In), Actions.visible(false)));
+                } else {
+                    menuButtons.addAction(Actions.sequence(
+                            Actions.visible(true), Actions.moveBy(-144,0,.5f,Interpolation.pow2In)
                     ));
                 }
             }
@@ -144,7 +137,7 @@ public class HUD extends InputAdapter {
 
         // Save Button
         TextButton save = new TextButton(Services.getL18N().l18n().get("hud_save"), skin, "menu-entry");
-        save.setPosition(GS.RES_X, GS.RES_Y - 5*GS.ROW, Align.topRight);
+        save.setPosition(0, 0, Align.bottomLeft);
         save.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -155,7 +148,7 @@ public class HUD extends InputAdapter {
 
         // Quit Button
         TextButton quit = new TextButton(Services.getL18N().l18n().get("hud_quit"), skin, "menu-entry");
-        quit.setPosition(GS.RES_X, GS.RES_Y - 10*GS.ROW , Align.topRight);
+        quit.setPosition(0, -4.5f*GS.ROW , Align.bottomLeft);
         quit.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -174,7 +167,7 @@ public class HUD extends InputAdapter {
 
         // Battle Button
         TextButton battle = new TextButton(Services.getL18N().l18n().get("hud_battle"), skin, "menu-entry");
-        battle.setPosition(GS.RES_X, GS.RES_Y - 15*GS.ROW, Align.topRight);
+        battle.setPosition(0, -9f*GS.ROW, Align.bottomLeft);
         battle.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -190,7 +183,7 @@ public class HUD extends InputAdapter {
 
         // Team Button
         TextButton teamButton = new TextButton(Services.getL18N().l18n().get("hud_team"), skin, "menu-entry");
-        teamButton.setPosition(GS.RES_X, GS.RES_Y - 20*GS.ROW , Align.topRight);
+        teamButton.setPosition(0, -13.5f*GS.ROW , Align.bottomLeft);
         teamButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -231,7 +224,7 @@ public class HUD extends InputAdapter {
         this.stage.addActor(B);
 
         this.menuButtons.setVisible(false);
-        this.menuButtons.addAction(Actions.alpha(0));
+        this.menuButtons.setPosition(GS.RES_X,GS.RES_Y-GS.ROW*9,Align.bottomLeft);
         stage.addActor(menu);
         stage.addActor(menuButtons);
     }
@@ -367,32 +360,37 @@ public class HUD extends InputAdapter {
 
         this.conversationLabel = new Group();
 
-        Image convImg = new Image(UItextures.findRegion("text_bg_L"));
-        convImg.setWidth(640); convImg.setHeight(256);
-        convImg.setPosition(0,0,Align.bottomLeft);
-        Image convImg2 = new Image(UItextures.findRegion("text_bg_R"));
-        convImg2.setWidth(640); convImg2.setHeight(256);
-        convImg2.setPosition(GS.RES_X,0,Align.bottomRight);
+        Image convImg = new Image(UItextures.findRegion("dialog_bg2"));
+        convImg.setWidth(576); convImg.setHeight(144);
+        convImg.setPosition(GS.RES_X/2,0,Align.bottom);
 
-        conversationLabel.addActor(convImg);
+        Image convImg2 = new Image(UItextures.findRegion("dialog_name_bg2"));
+        convImg2.setWidth(267); convImg2.setHeight(54);
+        convImg2.setPosition(GS.RES_X/2-267,132,Align.bottomLeft);
+
         conversationLabel.addActor(convImg2);
+        conversationLabel.addActor(convImg);
 
         lbs = new Label.LabelStyle();
-        lbs.font=skin.getFont("white");
+        lbs.font=skin.getFont("default-font");
         lbs.background=new TextureRegionDrawable(UItextures.findRegion("transparent"));
         convText = new Label("Test label", lbs);
-        convText.setHeight(108);
-        convText.setWidth(316);
+        convText.setHeight(130);
+        convText.setWidth(540);
         convText.setWrap(true);
-        convText.setPosition(GS.RES_X / 2, 98, Align.center);
+        convText.setAlignment(Align.topLeft,Align.center);
+        convText.setPosition(GS.RES_X / 2 - 270, 0);
         conversationLabel.addActor(convText);
         conversationLabel.setVisible(false);
 
+        lbs = new Label.LabelStyle();
+        lbs.font = skin.getFont("default-font");
+        lbs.background = new TextureRegionDrawable(UItextures.findRegion("transparent"));
         titleLabel = new Label("", lbs);
-        titleLabel.setHeight(35);
-        titleLabel.setWidth(284);
+        titleLabel.setHeight(48);
+        titleLabel.setWidth(256);
         titleLabel.setVisible(false);
-        titleLabel.setPosition(GS.RES_X / 3.3f, GS.RES_Y /4);
+        titleLabel.setPosition(GS.RES_X / 2 -267/2,140,Align.bottom);
         titleLabel.setAlignment(Align.center);
         conversationLabel.addActor(titleLabel);
         conversationLabel.setPosition(0,-256,Align.bottomLeft);

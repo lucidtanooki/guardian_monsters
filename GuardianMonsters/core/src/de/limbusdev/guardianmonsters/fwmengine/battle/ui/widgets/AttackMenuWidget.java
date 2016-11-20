@@ -51,65 +51,96 @@ public class AttackMenuWidget extends BattleWidget implements ObservableWidget {
 
         bgImg = new Image(skin.getDrawable("attPane"));
         bgImg.setPosition(GS.RES_X/2, 0, Align.bottom);
-        addActor(bgImg);
+        //addActor(bgImg);
 
         attackButtons = new Array<TextButton>();
 
 
-        for (int i = 0; i < 6; i++) {
-            final int j = i;
-            TextButton attButt = new TextButton("attack " + i, skin, "tb-att");
-            attButt.setSize(264, 100);
-            attackButtons.add(attButt);
-            attButt.addListener(
-                new ClickListener() {
-                    @Override
-                    public void clicked(InputEvent event, float x, float y) {
-                        chosenAttack = j;
-                        notifyWidgetObservers();
-                    }
-                }
-            );
-        }
+        // Attack Buttons
+        TextButton tb = new TextButton("Attack 1", skin, "tb-attack-none");
+        tb.setSize(82*GS.zoom,32*GS.zoom);
+        tb.setPosition(GS.RES_X/2,32*GS.zoom+1*GS.zoom,Align.center);
+        addActor(tb);
+        attackButtons.add(tb);
+
+        tb = new TextButton("Attack 3", skin, "tb-attack-none");
+        tb.setSize(82*GS.zoom,32*GS.zoom);
+        tb.setPosition(GS.RES_X/2+71*GS.zoom,16*GS.zoom+1*GS.zoom,Align.center);
+        addActor(tb);
+        attackButtons.add(tb);
+
+        tb = new TextButton("Attack 5", skin, "tb-attack-none");
+        tb.setSize(82*GS.zoom,32*GS.zoom);
+        tb.setPosition(GS.RES_X/2+71*GS.zoom,(32+16)*GS.zoom+1*GS.zoom,Align.center);
+        addActor(tb);
+        attackButtons.add(tb);
+
+        tb = new TextButton("Attack 2", skin, "tb-attack-none");
+        tb.setSize(82*GS.zoom,32*GS.zoom);
+        tb.setPosition(GS.RES_X/2-71*GS.zoom,16*GS.zoom+1*GS.zoom,Align.center);
+        addActor(tb);
+        attackButtons.add(tb);
+
+        tb = new TextButton("Attack 4", skin, "tb-attack-none");
+        tb.setSize(82*GS.zoom,32*GS.zoom);
+        tb.setPosition(GS.RES_X/2-71*GS.zoom,(32+16)*GS.zoom+1*GS.zoom,Align.center);
+        addActor(tb);
+        attackButtons.add(tb);
+
+        tb = new TextButton("Attack 6", skin, "tb-attack-none");
+        tb.setSize(82*GS.zoom,32*GS.zoom);
+        tb.setPosition(GS.RES_X/2-(71+71)*GS.zoom,32*GS.zoom+1*GS.zoom,Align.center);
+        addActor(tb);
+        attackButtons.add(tb);
+
+        tb = new TextButton("Attack 7", skin, "tb-attack-none");
+        tb.setSize(82*GS.zoom,32*GS.zoom);
+        tb.setPosition(GS.RES_X/2+(71+71)*GS.zoom,32*GS.zoom+1*GS.zoom,Align.center);
+        addActor(tb);
+        attackButtons.add(tb);
 
 
-        for(TextButton t : attackButtons) {
-            addActor(t);
-            t.setVisible(false);
-        }
+//        for (int i = 0; i < 6; i++) {
+//            final int j = i;
+//            TextButton attButt = new TextButton("attack " + i, skin, "tb-att");
+//            attButt.setSize(264, 100);
+//            attackButtons.add(attButt);
+//            attButt.addListener(
+//                new ClickListener() {
+//                    @Override
+//                    public void clicked(InputEvent event, float x, float y) {
+//                        chosenAttack = j;
+//                        notifyWidgetObservers();
+//                    }
+//                }
+//            );
+//        }
 
-        attackButtons.get(0).setPosition(72+168,112,Align.bottomLeft);
-        attackButtons.get(1).setPosition(72+168+268,112,Align.bottomLeft);
-        attackButtons.get(2).setPosition(72+168+268+268,112,Align.bottomLeft);
-        attackButtons.get(3).setPosition(72+168,12,Align.bottomLeft);
-        attackButtons.get(4).setPosition(72+168+268,12,Align.bottomLeft);
-        attackButtons.get(5).setPosition(72+168+268+268,12,Align.bottomLeft);
 
-        backButton = new ImageButton(skin, "b-back-eob");
-        backButton.addListener(
-            new ClickListener() {
-                @Override
-                public void clicked(InputEvent event, float x, float y) {
-                    chosenAttack = -1;
-                    notifyWidgetObservers();
-                }
-            }
-        );
-        backButton.setPosition(GS.RES_X,0,Align.bottomRight);
-        addActor(backButton);
+//        for(TextButton t : attackButtons) {
+//            addActor(t);
+//            t.setVisible(false);
+//        }
+
+//        attackButtons.get(0).setPosition(72+168,112,Align.bottomLeft);
+//        attackButtons.get(1).setPosition(72+168+268,112,Align.bottomLeft);
+//        attackButtons.get(2).setPosition(72+168+268+268,112,Align.bottomLeft);
+//        attackButtons.get(3).setPosition(72+168,12,Align.bottomLeft);
+//        attackButtons.get(4).setPosition(72+168+268,12,Align.bottomLeft);
+//        attackButtons.get(5).setPosition(72+168+268+268,12,Align.bottomLeft);
     }
 
     public void init(Monster monster) {
         Array<Attack> attacks = monster.attacks;
-        for(Button b : attackButtons) b.setVisible(false);
+//        for(Button b : attackButtons) b.setVisible(false);
         int i = 0;
         Iterator<Attack> attIt = attacks.iterator();
-        while(attIt.hasNext() && i<6) {
-            Attack att = attIt.next();
-            attackButtons.get(i).setVisible(true);
-            attackButtons.get(i).setText(Services.getL18N().l18n().get(att.name) + " (" + att.damage + ")");
-            i++;
-        }
+//        while(attIt.hasNext() && i<6) {
+//            Attack att = attIt.next();
+//            attackButtons.get(i).setVisible(true);
+//            attackButtons.get(i).setText(Services.getL18N().l18n().get(att.name) + " (" + att.damage + ")");
+//            i++;
+//        }
     }
 
 

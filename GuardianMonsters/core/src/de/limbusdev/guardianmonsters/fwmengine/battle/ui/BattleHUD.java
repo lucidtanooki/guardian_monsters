@@ -1,9 +1,16 @@
 package de.limbusdev.guardianmonsters.fwmengine.battle.ui;
 
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 
+import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.AttackMenuWidget;
+import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleActionMenuWidget;
+import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleAnimationWidget;
+import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleQueueWidget;
+import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.MonsterIndicatorWidget;
+import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.WidgetObserver;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TeamComponent;
 import de.limbusdev.guardianmonsters.enums.ButtonIDs;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
@@ -25,19 +32,20 @@ import de.limbusdev.guardianmonsters.fwmengine.battle.model.MonsterSpeedComparat
  *
  * Created by georg on 03.12.15.
  */
-public class BattleHUD extends de.limbusdev.guardianmonsters.fwmengine.battle.ui.ABattleHUD implements de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.WidgetObserver {
+public class BattleHUD extends ABattleHUD implements WidgetObserver {
 
     // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ ATTRIBUTES
 
     // ....................................................................... scene2d
     // Groups
-    private BattleMainMenuWidget mainMenu;
-    private de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleActionMenuWidget actionMenu;
-    private de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.AttackMenuWidget attackMenu;
-    private de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.MonsterIndicatorWidget indicatorMenu;
-    private de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleAnimationWidget animationWidget;
-    private BattleStatusOverviewWidget statusWidget;
-    private EndOfBattleWidget endOfBattleWidget;
+    private BattleMainMenuWidget        mainMenu;
+    private BattleActionMenuWidget      actionMenu;
+    private AttackMenuWidget            attackMenu;
+    private MonsterIndicatorWidget      indicatorMenu;
+    private BattleAnimationWidget       animationWidget;
+    private BattleStatusOverviewWidget  statusWidget;
+    private EndOfBattleWidget           endOfBattleWidget;
+    private BattleQueueWidget           battleQueueWidget;
 
 
     // ......................................................................... other
@@ -140,7 +148,7 @@ public class BattleHUD extends de.limbusdev.guardianmonsters.fwmengine.battle.ui
 
         statusWidget.init(this.heroTeam, this.oppoTeam);
         animationWidget.init(this.heroTeam, this.oppoTeam);
-        indicatorMenu.init(this.heroTeam, this.oppoTeam);
+        indicatorMenu.init(this.oppoTeam);
 
         show();
     }
@@ -166,7 +174,7 @@ public class BattleHUD extends de.limbusdev.guardianmonsters.fwmengine.battle.ui
      */
     private void newRound() {
         changeToWidgetSet(BattleState.ACTIONMENU);
-        indicatorMenu.init(heroTeam, oppoTeam);
+        indicatorMenu.init(oppoTeam);
         actionMenu.reset();
         for(Integer i : heroTeam.keys()) heroTeam.get(i).newRound();
         for(Integer i : oppoTeam.keys()) oppoTeam.get(i).newRound();
@@ -210,21 +218,27 @@ public class BattleHUD extends de.limbusdev.guardianmonsters.fwmengine.battle.ui
         // Widgets
         statusWidget      = new BattleStatusOverviewWidget(this, skin);
 
-        animationWidget   = new de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleAnimationWidget(this);
+        animationWidget   = new BattleAnimationWidget(this);
         animationWidget   .addWidgetObserver(this);
 
         mainMenu          = new BattleMainMenuWidget(this, skin);
 
-        actionMenu        = new de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleActionMenuWidget(this, skin);
-        actionMenu        .greenButton.setText(Services.getL18N().l18n().get("batt_attack"));
+        actionMenu        = new BattleActionMenuWidget(this, skin);
+//        actionMenu        .greenButton.setText(Services.getL18N().l18n().get("batt_attack"));
 
-        indicatorMenu     = new de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.MonsterIndicatorWidget(this, skin);
+        indicatorMenu     = new MonsterIndicatorWidget(this, skin, Align.bottomRight);
+        indicatorMenu.setPosition(GS.RES_X-1*GS.zoom,82*GS.zoom,Align.bottomLeft);
+        indicatorMenu.setScale(GS.zoom);
         indicatorMenu     .addWidgetObserver(this);
 
         endOfBattleWidget = new EndOfBattleWidget(this, skin);
 
-        attackMenu        = new de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.AttackMenuWidget(this, skin);
+        attackMenu        = new AttackMenuWidget(this, skin);
         attackMenu        .addWidgetObserver(this);
+
+        battleQueueWidget = new BattleQueueWidget(this, skin, Align.bottomLeft);
+        battleQueueWidget.setScale(GS.zoom);
+        battleQueueWidget.setPosition(GS.zoom,70*GS.zoom, Align.bottomLeft);
     }
 
 
@@ -391,6 +405,12 @@ public class BattleHUD extends de.limbusdev.guardianmonsters.fwmengine.battle.ui
             case ACTIONMENU:
                 actionMenu.addToStageAndFadeIn(stage);
                 statusWidget.addToStage(stage);
+                attackMenu.addToStageAndFadeIn(stage);
+                battleQueueWidget.addToStageAndFadeIn(stage);
+                Array monsters = new Array();
+                monsters.addAll(heroTeam.values().toArray());
+                monsters.addAll(oppoTeam.values().toArray());
+                battleQueueWidget.init(monsters);
                 if(this.state == BattleState.ATTACKMENU) {
                     indicatorMenu.addToStage(stage);
                 } else {
@@ -399,7 +419,7 @@ public class BattleHUD extends de.limbusdev.guardianmonsters.fwmengine.battle.ui
                 break;
 
             case ATTACKMENU:
-                attackMenu.init(heroTeam.get(indicatorMenu.chosenMember).monster);
+                attackMenu.init(heroTeam.get(indicatorMenu.chosen).monster);
                 stage.addActor(indicatorMenu);
                 stage.addActor(statusWidget);
                 if(!(this.state == BattleState.ATTACKMENU)) attackMenu.addToStageAndFadeIn(stage);
@@ -410,6 +430,7 @@ public class BattleHUD extends de.limbusdev.guardianmonsters.fwmengine.battle.ui
                 actionMenu.addToStage(stage);
                 actionMenu.fadeOutExceptInfoLabel(stage);
                 statusWidget.addToStage(stage);
+                battleQueueWidget.addToStage(stage);
                 break;
 
             case ENDOFBATTLE:
@@ -457,7 +478,7 @@ public class BattleHUD extends de.limbusdev.guardianmonsters.fwmengine.battle.ui
     // Listener Notifications
     private void onIndicatorMenuUpdate(de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.MonsterIndicatorWidget miw) {
         // Indicator Position changed
-        if(!heroTeam.get(miw.chosenMember).attackChosen) {
+        if(!heroTeam.get(miw.chosen).attackChosen) {
             actionMenu.setGreenButtonDisabled(false);
         } else {
             actionMenu.setGreenButtonDisabled(true);
@@ -496,8 +517,8 @@ public class BattleHUD extends de.limbusdev.guardianmonsters.fwmengine.battle.ui
         changeToWidgetSet(BattleState.ACTIONMENU);
         if(nr >= 0) {
             actionMenu.setGreenButtonDisabled(true);
-            lineUpForAttack(heroTeam.get(indicatorMenu.chosenMember), indicatorMenu.chosenOpponent, nr);
-            indicatorMenu.deactivateChoice(true, indicatorMenu.chosenMember);
+            lineUpForAttack(heroTeam.get(indicatorMenu.chosen), indicatorMenu.chosen, nr);
+            indicatorMenu.deactivateChoice(indicatorMenu.chosen);
         }
     }
 

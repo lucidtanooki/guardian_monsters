@@ -28,13 +28,13 @@ public class BattleStatusOverviewWidget extends BattleWidget {
 
         // Hero Team ###############################################################################
         MonsterStateWidget msw = new MonsterStateWidget(skin, true);
-        msw.setPosition(IndPos.statWPos1.x,IndPos.statWPos1.y);
+        msw.setPosition(IndPos.statWPos1.x+32*GS.zoom,IndPos.statWPos1.y);
         monsterStateWidgetsLeft.add(msw);
         msw = new MonsterStateWidget(skin, true);
-        msw.setPosition(IndPos.statWPos2.x,IndPos.statWPos2.y);
+        msw.setPosition(IndPos.statWPos2.x+32*GS.zoom,IndPos.statWPos2.y);
         monsterStateWidgetsLeft.add(msw);
         msw = new MonsterStateWidget(skin, true);
-        msw.setPosition(IndPos.statWPos3.x,IndPos.statWPos3.y);
+        msw.setPosition(IndPos.statWPos3.x+32*GS.zoom,IndPos.statWPos3.y);
         monsterStateWidgetsLeft.add(msw);
 
         // Opponent Team ###########################################################################

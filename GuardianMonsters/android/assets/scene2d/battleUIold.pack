@@ -1,0 +1,384 @@
+
+battleUI.png
+format: RGBA8888
+filter: MipMapLinearLinear,MipMapLinearLinear
+repeat: none
+attPane
+  rotate: false
+  xy: 1, 795
+  size: 960, 224
+  orig: 960, 224
+  offset: 0, 0
+  index: -1
+eob-pane
+  rotate: false
+  xy: 1, 678
+  size: 936, 115
+  orig: 936, 115
+  offset: 0, 0
+  index: -1
+b-long-down
+  rotate: false
+  xy: 1, 564
+  size: 896, 112
+  orig: 896, 112
+  offset: 0, 0
+  index: -1
+b-long-up
+  rotate: false
+  xy: 1, 450
+  size: 896, 112
+  orig: 896, 112
+  offset: 0, 0
+  index: -1
+bg
+  rotate: false
+  xy: 1, 308
+  size: 800, 140
+  orig: 800, 140
+  offset: 0, 0
+  index: -1
+b-attack-down
+  rotate: false
+  xy: 1, 190
+  size: 448, 116
+  orig: 448, 116
+  offset: 0, 0
+  index: -1
+b-attack-up
+  rotate: false
+  xy: 1, 72
+  size: 448, 116
+  orig: 448, 116
+  offset: 0, 0
+  index: -1
+monStateUIbg2
+  rotate: false
+  xy: 1, 14
+  size: 416, 56
+  orig: 416, 56
+  offset: 0, 0
+  index: -1
+b-bag-down
+  rotate: false
+  xy: 451, 82
+  size: 240, 224
+  orig: 240, 224
+  offset: 0, 0
+  index: -1
+b-bag
+  rotate: false
+  xy: 693, 82
+  size: 240, 224
+  orig: 240, 224
+  offset: 0, 0
+  index: -1
+monStateUIL
+  rotate: false
+  xy: 451, 24
+  size: 416, 56
+  orig: 416, 56
+  offset: 0, 0
+  index: -1
+b-next-down
+  rotate: false
+  xy: 803, 328
+  size: 104, 120
+  orig: 104, 120
+  offset: 0, 0
+  index: -1
+b-back-down
+  rotate: false
+  xy: 899, 556
+  size: 104, 120
+  orig: 104, 120
+  offset: 0, 0
+  index: -1
+scroll-down-l-down
+  rotate: false
+  xy: 935, 442
+  size: 88, 112
+  orig: 88, 112
+  offset: 0, 0
+  index: -1
+scroll-down-l-up
+  rotate: false
+  xy: 935, 328
+  size: 88, 112
+  orig: 88, 112
+  offset: 0, 0
+  index: -1
+scroll-down-r-down
+  rotate: false
+  xy: 935, 214
+  size: 88, 112
+  orig: 88, 112
+  offset: 0, 0
+  index: -1
+scroll-down-r-up
+  rotate: false
+  xy: 935, 100
+  size: 88, 112
+  orig: 88, 112
+  offset: 0, 0
+  index: -1
+choice-l-down
+  rotate: false
+  xy: 869, 16
+  size: 67, 64
+  orig: 67, 64
+  offset: 0, 0
+  index: -1
+choice-l-up
+  rotate: false
+  xy: 938, 34
+  size: 67, 64
+  orig: 67, 64
+  offset: 0, 0
+  index: -1
+monStateWidgetRing
+  rotate: false
+  xy: 963, 963
+  size: 56, 56
+  orig: 56, 56
+  offset: 0, 0
+  index: -1
+indicator
+  rotate: false
+  xy: 963, 913
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+choice-r-down
+  rotate: false
+  xy: 939, 729
+  size: 67, 64
+  orig: 67, 64
+  offset: 0, 0
+  index: -1
+invis
+  rotate: false
+  xy: 1007, 82
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+blue-bar-lr
+  rotate: false
+  xy: 419, 50
+  size: 21, 20
+  split: 5, 12, 6, 5
+  orig: 21, 20
+  offset: 0, 0
+  index: -1
+green-progress-bar
+  rotate: false
+  xy: 1, 1
+  size: 19, 11
+  split: 7, 6, 3, 3
+  orig: 19, 11
+  offset: 0, 0
+  index: -1
+black
+  rotate: false
+  xy: 899, 546
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: -1
+yellow-progress-bar
+  rotate: false
+  xy: 909, 547
+  size: 9, 7
+  split: 3, 3, 3, 3
+  orig: 9, 7
+  offset: 0, 0
+  index: -1
+
+battleUI2.png
+format: RGBA8888
+filter: MipMapLinearLinear,MipMapLinearLinear
+repeat: none
+monStateUIname
+  rotate: false
+  xy: 1, 963
+  size: 416, 56
+  orig: 416, 56
+  offset: 0, 0
+  index: -1
+b-flee-down
+  rotate: false
+  xy: 1, 737
+  size: 240, 224
+  orig: 240, 224
+  offset: 0, 0
+  index: -1
+b-flee
+  rotate: false
+  xy: 1, 511
+  size: 240, 224
+  orig: 240, 224
+  offset: 0, 0
+  index: -1
+b13down
+  rotate: false
+  xy: 419, 955
+  size: 400, 64
+  orig: 400, 64
+  offset: 0, 0
+  index: -1
+b-eob-back-down
+  rotate: false
+  xy: 1, 289
+  size: 228, 220
+  orig: 228, 220
+  offset: 0, 0
+  index: -1
+b-eob-back
+  rotate: false
+  xy: 1, 67
+  size: 228, 220
+  orig: 228, 220
+  offset: 0, 0
+  index: -1
+b13up
+  rotate: false
+  xy: 1, 1
+  size: 400, 64
+  orig: 400, 64
+  offset: 0, 0
+  index: -1
+b9down
+  rotate: false
+  xy: 403, 919
+  size: 364, 34
+  orig: 364, 34
+  offset: 0, 0
+  index: -1
+b9up
+  rotate: false
+  xy: 403, 883
+  size: 364, 34
+  orig: 364, 34
+  offset: 0, 0
+  index: -1
+b-fight-down
+  rotate: false
+  xy: 243, 657
+  size: 224, 224
+  orig: 224, 224
+  offset: 0, 0
+  index: -1
+b-fight
+  rotate: false
+  xy: 469, 657
+  size: 224, 224
+  orig: 224, 224
+  offset: 0, 0
+  index: -1
+b-mouse-l-down
+  rotate: false
+  xy: 243, 535
+  size: 256, 120
+  orig: 256, 120
+  offset: 0, 0
+  index: -1
+b-mouse-l-up
+  rotate: false
+  xy: 501, 535
+  size: 256, 120
+  orig: 256, 120
+  offset: 0, 0
+  index: -1
+b10down
+  rotate: false
+  xy: 243, 495
+  size: 284, 38
+  orig: 284, 38
+  offset: 0, 0
+  index: -1
+b-mouse-r-down
+  rotate: false
+  xy: 231, 373
+  size: 256, 120
+  orig: 256, 120
+  offset: 0, 0
+  index: -1
+b-mouse-r-up
+  rotate: false
+  xy: 231, 251
+  size: 256, 120
+  orig: 256, 120
+  offset: 0, 0
+  index: -1
+b-att-down
+  rotate: false
+  xy: 231, 149
+  size: 264, 100
+  orig: 264, 100
+  offset: 0, 0
+  index: -1
+b10up
+  rotate: false
+  xy: 231, 109
+  size: 284, 38
+  orig: 284, 38
+  offset: 0, 0
+  index: -1
+b-att-up
+  rotate: false
+  xy: 529, 433
+  size: 264, 100
+  orig: 264, 100
+  offset: 0, 0
+  index: -1
+b-back-up
+  rotate: false
+  xy: 695, 761
+  size: 104, 120
+  orig: 104, 120
+  offset: 0, 0
+  index: -1
+b-next-up
+  rotate: false
+  xy: 489, 311
+  size: 104, 120
+  orig: 104, 120
+  offset: 0, 0
+  index: -1
+scroll-up-l-down
+  rotate: false
+  xy: 595, 319
+  size: 88, 112
+  orig: 88, 112
+  offset: 0, 0
+  index: -1
+scroll-up-l-up
+  rotate: false
+  xy: 685, 319
+  size: 88, 112
+  orig: 88, 112
+  offset: 0, 0
+  index: -1
+scroll-up-r-down
+  rotate: false
+  xy: 821, 907
+  size: 88, 112
+  orig: 88, 112
+  offset: 0, 0
+  index: -1
+scroll-up-r-up
+  rotate: false
+  xy: 911, 907
+  size: 88, 112
+  orig: 88, 112
+  offset: 0, 0
+  index: -1
+choice-r-up
+  rotate: false
+  xy: 243, 897
+  size: 67, 64
+  orig: 67, 64
+  offset: 0, 0
+  index: -1

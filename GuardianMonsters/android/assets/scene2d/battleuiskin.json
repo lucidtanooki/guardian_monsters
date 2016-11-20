@@ -23,13 +23,29 @@
       choice-l:     {down: choice-l-down,         up: choice-l-up, checked: choice-l-down},
       choice-r:     {down: choice-r-down,         up: choice-r-up, checked: choice-r-down},
       b-back-eob:   {down: b-eob-back-down,       up: b-eob-back},
-	  transparent:  { }
+      b-attack-monsters:{down: b-attack-monsters-down,  up: b-attack-monsters-up},
+      b-attack-back:    {down: b-attack-back-down,      up: b-attack-back-up},
+      b-attack-bag:     {down: b-attack-bag-down,       up: b-attack-bag-up},
+      b-attack-extra:   {down: b-attack-ld-down,        up: b-attack-ld-up},
+	  transparent:  {}
   },
   
   com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
-    tb-attack: {down: b-attack-down,    up: b-attack-up,    font: default-font},
-    tb-att:    {down: b-att-down,       up: b-att-up,       font: default-font,
-                    pressedOffsetY: -2}
+    tb-attack:              {down: b-attack-down,       up: b-attack-up,        font: default-font},
+    tb-att:                 {down: b-att-down,          up: b-att-up,           font: default-font, pressedOffsetY: -2},
+    tb-attack-none:         {down: b-attack-none-down,  up: b-attack-none-up,   font: default-font, pressedOffsetY: -2},
+    tb-attack-earth:        {down: b-attack-earth-down,  up: b-attack-earth-up,   font: default-font, pressedOffsetY: -2},
+    tb-attack-fire:         {down: b-attack-fire-down,  up: b-attack-fire-up,   font: default-font, pressedOffsetY: -2},
+    tb-attack-water:        {down: b-attack-water-down,  up: b-attack-water-up,   font: default-font, pressedOffsetY: -2},
+    tb-attack-air:          {down: b-attack-air-down,  up: b-attack-air-up,   font: default-font, pressedOffsetY: -2},
+    tb-attack-forest:       {down: b-attack-forest-down,  up: b-attack-forest-up,   font: default-font, pressedOffsetY: -2},
+    tb-attack-demon:        {down: b-attack-demon-down,  up: b-attack-demon-up,   font: default-font, pressedOffsetY: -2},
+    tb-attack-dragon:       {down: b-attack-dragon-down,  up: b-attack-dragon-up,   font: default-font, pressedOffsetY: -2},
+    tb-attack-frost:        {down: b-attack-frost-down,  up: b-attack-frost-up,   font: default-font, pressedOffsetY: -2},
+    tb-attack-spirit:       {down: b-attack-spirit-down,  up: b-attack-spirit-up,   font: default-font, pressedOffsetY: -2},
+    tb-attack-mountain:     {down: b-attack-mountain-down,  up: b-attack-mountain-up,   font: default-font, pressedOffsetY: -2},
+    tb-attack-arthropoda:   {down: b-attack-arthropoda-down,  up: b-attack-arthropoda-up,   font: default-font, pressedOffsetY: -2},
+    tb-attack-lightning:    {down: b-attack-lightning-down,  up: b-attack-lightning-up,   font: default-font, pressedOffsetY: -2},
   },
 	
   com.badlogic.gdx.scenes.scene2d.ui.ProgressBar$ProgressBarStyle: {

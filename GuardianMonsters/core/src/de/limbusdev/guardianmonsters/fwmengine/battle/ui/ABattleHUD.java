@@ -24,7 +24,7 @@ public abstract class ABattleHUD extends AHUD {
         // Battle UI Black transparent Background
         this.battleUIbg = new Image(skin.getDrawable("bg"));
         battleUIbg.setPosition(0, 0);
-        battleUIbg.setSize(GS.RES_X, GS.ROW*14);
+        battleUIbg.setSize(GS.RES_X, GS.ROW*12.5f);
 
         // Black Curtain for fade-in and -out
         this.blackCurtain = new Image(skin.getDrawable("black"));

@@ -17,6 +17,7 @@ public class TextureAssets {
     public static final String logosSpriteSheetFile = "spritesheets/logos.pack";
     public static final String animations = "spritesheets/animations.pack";
     public static final String battleAnimations = "spritesheets/battleAnimations.pack";
+    public static final String battleMonsterPreviews = "scene2d/preview.pack";
 
     public static Array<String> getAllTexturePackPaths() {
 
@@ -29,6 +30,7 @@ public class TextureAssets {
         paths.add(UISpriteSheetFile);
         paths.add(logosSpriteSheetFile);
         paths.add(animations);
+        paths.add(battleMonsterPreviews);
 
         return paths;
     }

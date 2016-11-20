@@ -4,7 +4,6 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 
@@ -22,162 +21,108 @@ public class MonsterIndicatorWidget extends BattleWidget implements ObservableWi
     private Array<WidgetObserver> observers;
 
     // Buttons
-    public Array<ImageButton> indicatorButtonsHero, indicatorButtonsOpponent;
+    public Array<ImageButton> indicatorButtons;
 
-    public int chosenMember, chosenOpponent;
+    public int chosen;
 
-    private Array<Boolean> availableChoicesHero, availableChoicesOpponent;
+    private Array<Boolean> availableChoices;
 
 
     /**
      *
      * @param skin battle action UI skin
      */
-    public MonsterIndicatorWidget(final AHUD hud, Skin skin) {
+    public MonsterIndicatorWidget(final AHUD hud, Skin skin, int align) {
         super(hud);
 
         initializeAttributes();
         observers = new Array<WidgetObserver>();
-        indicatorButtonsHero = new Array<ImageButton>();
-        indicatorButtonsOpponent = new Array<ImageButton>();
+        indicatorButtons = new Array<ImageButton>();
 
         this.setBounds(0,0,0,0);
 
-        ImageButton ind = new ImageButton(skin, "choice-l");
-        ind.setPosition(0, GS.ROW*22, Align.bottomLeft);
-        indicatorButtonsHero.add(ind);
-        ind.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                setIndicatorPosition(true,0);
-            }
-        });
 
-        ind = new ImageButton(skin, "choice-l");
-        ind.setPosition(0, GS.ROW*17, Align.bottomLeft);
-        indicatorButtonsHero.add(ind);
+        ImageButton ind = new ImageButton(skin, "choice-r");
+        ind.setPosition(0, 32, align);
+        ind.setScale(GS.zoom);
+        indicatorButtons.add(ind);
         ind.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                setIndicatorPosition(true,1);
-            }
-        });
-
-        ind = new ImageButton(skin, "choice-l");
-        ind.setPosition(0, GS.ROW*27, Align.bottomLeft);
-        indicatorButtonsHero.add(ind);
-        ind.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                setIndicatorPosition(true,2);
+                setIndicatorPosition(0);
             }
         });
 
         ind = new ImageButton(skin, "choice-r");
-        ind.setPosition(GS.RES_X, GS.ROW*22, Align.bottomRight);
-        indicatorButtonsOpponent.add(ind);
+        ind.setPosition(0, 0,align);
+        indicatorButtons.add(ind);
         ind.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                setIndicatorPosition(false,0);
+                setIndicatorPosition(1);
             }
         });
 
         ind = new ImageButton(skin, "choice-r");
-        ind.setPosition(GS.RES_X, GS.ROW*17, Align.bottomRight);
-        indicatorButtonsOpponent.add(ind);
+        ind.setPosition(0, 64, align);
+        indicatorButtons.add(ind);
         ind.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                setIndicatorPosition(false,1);
-            }
-        });
-
-        ind = new ImageButton(skin, "choice-r");
-        ind.setPosition(GS.RES_X, GS.ROW*27, Align.bottomRight);
-        indicatorButtonsOpponent.add(ind);
-        ind.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                setIndicatorPosition(false,2);
+                setIndicatorPosition(2);
             }
         });
 
     }
 
     private void initializeAttributes() {
-        chosenMember = chosenOpponent = 0;
-        availableChoicesHero = new Array<Boolean>();
-        availableChoicesOpponent = new Array<Boolean>();
+        chosen = 0;
+        availableChoices = new Array<Boolean>();
         for(int i=0; i<3; i++) {
-            availableChoicesHero.add(false);
-            availableChoicesOpponent.add(false);
+            availableChoices.add(false);
         }
     }
 
-    /**
-     *
-     * @param hero heros monsters
-     * @param oppo opponents monsters
-     */
-    public void init(ArrayMap<Integer,MonsterInBattle> hero, ArrayMap<Integer,MonsterInBattle> oppo) {
+    public void init(ArrayMap<Integer,MonsterInBattle> team) {
         clear();
         initializeAttributes();
 
-        for(Integer key : hero.keys()) {
-            MonsterInBattle m = hero.get(key);
-            indicatorButtonsHero.get(m.battleFieldPosition).setVisible(true);
-            addActor(indicatorButtonsHero.get(m.battleFieldPosition));
-            availableChoicesHero.set(m.battleFieldPosition,true);
-        }
-        for(Integer key : oppo.keys()) {
-            MonsterInBattle m = oppo.get(key);
-            indicatorButtonsOpponent.get(m.battleFieldPosition).setVisible(true);
-            addActor(indicatorButtonsOpponent.get(m.battleFieldPosition));
-            availableChoicesOpponent.set(m.battleFieldPosition,true);
+        for(Integer key : team.keys()) {
+            MonsterInBattle m = team.get(key);
+            indicatorButtons.get(m.battleFieldPosition).setVisible(true);
+            addActor(indicatorButtons.get(m.battleFieldPosition));
+            availableChoices.set(m.battleFieldPosition,true);
         }
 
-        int indicatorStartPosHero = 0;
-        int indicatorStartPosOppo = 0;
+        int indicatorStartPos = 0;
 
-        for(Integer key : hero.keys()) {
-            MonsterInBattle m = hero.get(key);
+
+        for(Integer key : team.keys()) {
+            MonsterInBattle m = team.get(key);
             if(!m.KO) {
-                indicatorStartPosHero = key;
+                indicatorStartPos = key;
                 break;
             }
         }
 
-        for(Integer key : oppo.keys()) {
-            MonsterInBattle m = oppo.get(key);
-            if(!m.KO) {
-                indicatorStartPosOppo = key;
-                break;
-            }
-        }
-
-        setIndicatorPosition(true,  hero.get(indicatorStartPosHero).battleFieldPosition);
-        setIndicatorPosition(false, oppo.get(indicatorStartPosOppo).battleFieldPosition);
+        setIndicatorPosition(team.get(indicatorStartPos).battleFieldPosition);
     }
 
-    private void setIndicatorPosition(boolean heroesTeam, int pos) {
-        System.out.println("Choosing monster: " + (heroesTeam ? "left" : "right") + " " + pos);
-        if(heroesTeam) chosenMember = pos;
-        else chosenOpponent = pos;
+    private void setIndicatorPosition(int pos) {
+        System.out.println("Choosing monster: " + pos);
+        chosen = pos;
+        setIndicatorButtonChecked(pos);
 
-        setIndicatorButtonChecked(pos,heroesTeam);
         notifyWidgetObservers();
     }
 
     /**
      *
      * @param pos
-     * @param side true=hero, false=opponent
      */
-    private void setIndicatorButtonChecked(int pos, boolean side) {
+    private void setIndicatorButtonChecked(int pos) {
         Array<ImageButton> buttons;
-        if(side) buttons = indicatorButtonsHero;
-        else buttons = indicatorButtonsOpponent;
+        buttons = indicatorButtons;
 
         for(ImageButton b : buttons) {
             b.setProgrammaticChangeEvents(true);
@@ -198,24 +143,14 @@ public class MonsterIndicatorWidget extends BattleWidget implements ObservableWi
     }
 
     /**
-     *
-     * @param side true=hero, false=opponent
      * @param pos
      */
-    public void deactivateChoice(boolean side, int pos) {
-        if(side) {
-            indicatorButtonsHero.get(pos).setVisible(false);
-            availableChoicesHero.set(pos,false);
+    public void deactivateChoice(int pos) {
+            indicatorButtons.get(pos).setVisible(false);
+            availableChoices.set(pos,false);
             for(int i=0; i<3; i++)
-                if(availableChoicesHero.get(i))
-                    setIndicatorPosition(side,i);
-        } else {
-            indicatorButtonsOpponent.get(pos).setVisible(false);
-            availableChoicesOpponent.set(pos,false);
-            for(int i=0; i<3; i++)
-                if(availableChoicesOpponent.get(i))
-                    setIndicatorPosition(side,i);
-        }
+                if(availableChoices.get(i))
+                    setIndicatorPosition(i);
         notifyWidgetObservers();
     }
 }

@@ -29,6 +29,9 @@ public class BattleActionMenuWidget extends BattleWidget {
     public TextButton  greenButton;
     public ImageButton greyLButton;
     public ImageButton greyRButton;
+    public ImageButton monsterButton;
+    public ImageButton bagButton;
+    public ImageButton extraButton;
 
     private Image infoBGImg;
     public Label infoLabel;
@@ -44,8 +47,9 @@ public class BattleActionMenuWidget extends BattleWidget {
         super(hud);
         this.setBounds(0,0,GS.RES_X,GS.RES_Y/4);
 
-        infoBGImg = new Image(skin.getDrawable("b-long-down"));
-        infoBGImg.setPosition(GS.RES_X / 2, GS.ROW*7, Align.bottom);
+        infoBGImg = new Image(skin.getDrawable("label"));
+        infoBGImg.setSize(372*GS.zoom,62*GS.zoom);
+        infoBGImg.setPosition(GS.RES_X / 2, GS.zoom *1, Align.bottom);
 
         Label.LabelStyle labs = new Label.LabelStyle();
         labs.font = skin.getFont("default-font");
@@ -55,34 +59,58 @@ public class BattleActionMenuWidget extends BattleWidget {
         infoLabel.setWrap(true);
         infoLabel.setPosition(GS.RES_X/2, GS.ROW*7, Align.bottom);
 
-        // Back to Menu Button
-        backButton= new ImageButton(skin, "b-back");
-        backButton.setPosition(GS.RES_X - GS.COL*5.5f, 0, Align.bottomRight);
+//        // Back to Menu Button
+//        backButton= new ImageButton(skin, "b-back");
+//        backButton.setPosition(GS.RES_X - GS.COL*5.5f, 0, Align.bottomRight);
+//
+//        // Left Button
+//        greyLButton = new ImageButton(skin, "b-mouse-l");
+//        greyLButton.setPosition(GS.COL*10.5f, 0, Align.bottomLeft);
+//
+//        // Right Button
+//        greyRButton = new ImageButton(skin, "b-mouse-r");
+//        greyRButton.setPosition(GS.RES_X - GS.COL*10.5f, 0, Align.bottomRight);
+//
+//        // Green Button
+//        greenButton= new TextButton("greenButton", skin, "tb-attack");
+//        greenButton.setPosition(GS.RES_X/2, 0, Align.bottom);
+//
+//        // Blue Button
+//        blueButton = new ImageButton(skin, "b-next");
+//        blueButton.setPosition(GS.COL*5.5f, 0, Align.bottomLeft);
 
-        // Left Button
-        greyLButton = new ImageButton(skin, "b-mouse-l");
-        greyLButton.setPosition(GS.COL*10.5f, 0, Align.bottomLeft);
+        // Monster Button
+        monsterButton = new ImageButton(skin, "b-attack-monsters");
+        monsterButton.setSize(105*GS.zoom,32*GS.zoom);
+        monsterButton.setPosition(6*GS.zoom, 64*GS.zoom+1*GS.zoom, Align.topLeft);
 
-        // Right Button
-        greyRButton = new ImageButton(skin, "b-mouse-r");
-        greyRButton.setPosition(GS.RES_X - GS.COL*10.5f, 0, Align.bottomRight);
+        // Extra Button
+        extraButton = new ImageButton(skin, "b-attack-extra");
+        extraButton.setSize(105*GS.zoom,32*GS.zoom);
+        extraButton.setPosition(6*GS.zoom, 1*GS.zoom, Align.bottomLeft);
 
-        // Green Button
-        greenButton= new TextButton("greenButton", skin, "tb-attack");
-        greenButton.setPosition(GS.RES_X/2, 0, Align.bottom);
+        // Back Button
+        backButton = new ImageButton(skin, "b-attack-back");
+        backButton.setSize(105*GS.zoom,32*GS.zoom);
+        backButton.setPosition(GS.RES_X-6*GS.zoom, 1*GS.zoom, Align.bottomRight);
 
-        // Blue Button
-        blueButton = new ImageButton(skin, "b-next");
-        blueButton.setPosition(GS.COL*5.5f, 0, Align.bottomLeft);
+        // Bag Button
+        bagButton = new ImageButton(skin, "b-attack-bag");
+        bagButton.setSize(105*GS.zoom,32*GS.zoom);
+        bagButton.setPosition(GS.RES_X-6*GS.zoom, 64*GS.zoom+1*GS.zoom, Align.topRight);
 
         // Add to parent
-        addActor(infoBGImg);
-        addActor(infoLabel);
+        //addActor(infoBGImg);
+        //addActor(infoLabel);
         addActor(backButton);
-        addActor(blueButton);
-        addActor(greenButton);
-        addActor(greyLButton);
-        addActor(greyRButton);
+//        addActor(blueButton);
+//        addActor(greenButton);
+//        addActor(greyLButton);
+//        addActor(greyRButton);
+        addActor(monsterButton);
+        addActor(bagButton);
+        addActor(extraButton);
+
 
 
         backButton.addListener(
@@ -94,49 +122,49 @@ public class BattleActionMenuWidget extends BattleWidget {
             }
         );
 
-        greyLButton.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                hud.onButtonClicked(ButtonIDs.ACTION_GREY_L);
-            }
-        });
-
-        greyRButton.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                hud.onButtonClicked(ButtonIDs.ACTION_GREY_R);
-            }
-        });
-
-        greenButton.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                hud.onButtonClicked(ButtonIDs.ACTION_ATTACK);
-            }
-        });
-
-        blueButton.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                hud.onButtonClicked(ButtonIDs.ACTION_BLUE);
-            }
-        });
+//        greyLButton.addListener(new ClickListener() {
+//            @Override
+//            public void clicked(InputEvent event, float x, float y) {
+//                hud.onButtonClicked(ButtonIDs.ACTION_GREY_L);
+//            }
+//        });
+//
+//        greyRButton.addListener(new ClickListener() {
+//            @Override
+//            public void clicked(InputEvent event, float x, float y) {
+//                hud.onButtonClicked(ButtonIDs.ACTION_GREY_R);
+//            }
+//        });
+//
+//        greenButton.addListener(new ClickListener() {
+//            @Override
+//            public void clicked(InputEvent event, float x, float y) {
+//                hud.onButtonClicked(ButtonIDs.ACTION_ATTACK);
+//            }
+//        });
+//
+//        blueButton.addListener(new ClickListener() {
+//            @Override
+//            public void clicked(InputEvent event, float x, float y) {
+//                hud.onButtonClicked(ButtonIDs.ACTION_BLUE);
+//            }
+//        });
     }
 
     public void setGreenButtonDisabled(boolean disable) {
-        if(disable) {
-            greenButton.setDisabled(true);
-            greenButton.addAction(Actions.alpha(0.5f));
-        } else {
-            greenButton.setDisabled(false);
-            greenButton.addAction(Actions.alpha(1f));
-        }
+//        if(disable) {
+//            greenButton.setDisabled(true);
+//            greenButton.addAction(Actions.alpha(0.5f));
+//        } else {
+//            greenButton.setDisabled(false);
+//            greenButton.addAction(Actions.alpha(1f));
+//        }
     }
 
 
 
     public void reset() {
-        setGreenButtonDisabled(false);
+//        setGreenButtonDisabled(false);
     }
 
     @Override
@@ -159,8 +187,8 @@ public class BattleActionMenuWidget extends BattleWidget {
         infoLabel.setText(Services.getL18N().l18n().get("batt_prepare"));
         infoBGImg.remove();
         infoLabel.remove();
-        addActor(infoBGImg);
-        addActor(infoLabel);
+        //addActor(infoBGImg);
+        //addActor(infoLabel);
         super.addToStageAndFadeIn(newParent);
     }
 }

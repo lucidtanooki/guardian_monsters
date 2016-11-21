@@ -54,13 +54,14 @@ public class Monster extends Observable {
         this.ID = ID;
         this.level = 1;
         this.exp = 0;
-        this.physStrength = 8;
-        this.HP = HPfull = 30;
-        this.magicStrength = 8;
-        this.MP = MPfull = 5;
-        this.physDefFull = physDef = 10;
-        this.magicDefFull = magicDef = 10;
-        this.Speed = this.SpeedFull = 10;
+        BaseStat base = MonsterInformation.getInstance().statusInfos.get(ID).baseStat;
+        this.physStrength = base.basePhysStrength;
+        this.HP = HPfull = base.baseHP;
+        this.magicStrength = base.baseMagStrength;
+        this.MP = MPfull = base.baseMP;
+        this.physDefFull = physDef = base.basePhysDefense;
+        this.magicDefFull = magicDef = base.baseMagDefense;
+        this.Speed = this.SpeedFull = base.baseSpeed;
 
         // INIT
         this.attacks = new Array<Attack>();

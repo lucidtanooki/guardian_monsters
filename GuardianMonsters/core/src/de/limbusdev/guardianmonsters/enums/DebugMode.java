@@ -7,5 +7,5 @@ package de.limbusdev.guardianmonsters.enums;
  */
 
 public enum DebugMode {
-    RELEASE, WORLD, BATTLE, INVENTORY, WORLD_UI,
+    RELEASE, WORLD, BATTLE, INVENTORY, WORLD_UI, BATTLE_SYSTEM,
 }

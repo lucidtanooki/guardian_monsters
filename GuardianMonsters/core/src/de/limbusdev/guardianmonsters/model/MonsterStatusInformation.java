@@ -18,6 +18,7 @@ public class MonsterStatusInformation {
     public int evolvingAtLevel;
     public int evolution;
     public Array<Element> elements;
+    public BaseStat baseStat;
 
     /* ........................................................................... CONSTRUCTOR .. */
 
@@ -32,7 +33,8 @@ public class MonsterStatusInformation {
      */
     public MonsterStatusInformation(
         int ID, String name, ArrayMap<Integer, Attack> learnableAttacks,
-        boolean canEvolve, int evolution, int evolvingAtLevel, Array<Element> elements) {
+        boolean canEvolve, int evolution, int evolvingAtLevel, Array<Element> elements,
+        BaseStat baseStat) {
 
         this.ID = ID;
         this.name = name;
@@ -41,6 +43,7 @@ public class MonsterStatusInformation {
         this.evolution = evolution;
         this.evolvingAtLevel = evolvingAtLevel;
         this.elements = elements;
+        this.baseStat = baseStat;
     }
     /* ............................................................................... METHODS .. */
     

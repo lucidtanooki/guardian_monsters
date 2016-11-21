@@ -2,8 +2,11 @@ package de.limbusdev.guardianmonsters.fwmengine.battle.control;
 
 
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.utils.I18NBundle;
 
 import de.limbusdev.guardianmonsters.enums.AttackType;
+import de.limbusdev.guardianmonsters.fwmengine.managers.L18N;
+import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.model.Attack;
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.AttackCalculationReport;
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.ElemEff;
@@ -48,6 +51,7 @@ public class MonsterManager {
      * @return
      */
     public static AttackCalculationReport calcAttack(Monster att, Monster def, Attack attack) {
+        System.out.println("\n--- new attack ---");
         AttackCalculationReport report = new AttackCalculationReport(att, def, 0, 0, attack);
         float effectiveness = ElemEff.singelton().getElemEff(attack.element, def.elements);
 
@@ -70,7 +74,13 @@ public class MonsterManager {
 
         report.damage = MathUtils.round(damage);
         report.effectiveness = effectiveness;
-        System.out.println(attack.name + " causes " + damage + " damage on " + MonsterInformation.getInstance().monsterNames.get(def.ID - 1));
+
+        I18NBundle l18n = Services.getL18N().l18n();
+        System.out.println(
+            l18n.get(MonsterInformation.getInstance().monsterNames.get(att.ID - 1)) + ": "
+             + l18n.get(attack.name)
+                + " causes " + damage + " damage on "
+                + l18n.get(MonsterInformation.getInstance().monsterNames.get(def.ID - 1)));
 
         return report;
     }

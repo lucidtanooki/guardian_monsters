@@ -358,7 +358,7 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
             if (allChosen) {
                 aiPlayer.chooseAttacks();
                 changeToWidgetSet(BattleState.ANIMATION);
-                animationQueue.sort(new MonsterSpeedComparator());
+                //animationQueue.sort(new MonsterSpeedComparator());
                 updateQueues();
             }
         }
@@ -370,17 +370,17 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
     @Override
     public void getNotified(ObservableWidget ow) {
 
-        if(ow instanceof de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.MonsterIndicatorWidget) {
-            onIndicatorMenuUpdate((de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.MonsterIndicatorWidget)ow);
+        if(ow instanceof MonsterIndicatorWidget) {
+            onIndicatorMenuUpdate((MonsterIndicatorWidget)ow);
         }
 
-        if(ow instanceof de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.AttackMenuWidget) {
-            de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.AttackMenuWidget amw = (de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.AttackMenuWidget) ow;
+        if(ow instanceof AttackMenuWidget) {
+            AttackMenuWidget amw = (AttackMenuWidget) ow;
             onAttackMenuButton(amw.chosenAttack);
         }
 
-        if(ow instanceof de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleAnimationWidget) {
-            onBattleAnimationUpdate((de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleAnimationWidget) ow);
+        if(ow instanceof BattleAnimationWidget) {
+            onBattleAnimationUpdate((BattleAnimationWidget) ow);
         }
     }
 

@@ -28,7 +28,7 @@ public class EndOfBattleWidget extends BattleWidget {
      *
      * @param skin battle action UI skin
      */
-    public EndOfBattleWidget(final BattleHUD hud, Skin skin) {
+    public EndOfBattleWidget(final BattleHUD hud, Skin skin, CallbackHandler callbackHandler) {
         super(hud);
         this.setBounds(0,0,0,0);
 
@@ -54,14 +54,7 @@ public class EndOfBattleWidget extends BattleWidget {
         backButton.setPosition(GS.RES_X, 0, Align.bottomRight);
         addActor(backButton);
 
-        backButton.addListener(
-            new ClickListener() {
-                @Override
-                public void clicked(InputEvent event, float x, float y) {
-                    hud.onButtonClicked(ButtonIDs.EOB_BACK);
-                }
-            }
-        );
+        setCallbackHandler(callbackHandler);
     }
 
     /**
@@ -75,6 +68,23 @@ public class EndOfBattleWidget extends BattleWidget {
         } else {
             messageLabel.setText("Game Over!");
         }
+    }
+
+    public void setCallbackHandler(final CallbackHandler callbackHandler) {
+        backButton.addListener(
+            new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    callbackHandler.onBackButton();
+                }
+            }
+        );
+    }
+
+
+    // INNER INTERFACE
+    public interface CallbackHandler {
+        public void onBackButton();
     }
 
 

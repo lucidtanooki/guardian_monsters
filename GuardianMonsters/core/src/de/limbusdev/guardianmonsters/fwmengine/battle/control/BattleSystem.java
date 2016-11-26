@@ -4,34 +4,54 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 
 import java.util.Iterator;
-import java.util.Observable;
 
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.AttackCalculationReport;
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.MonsterSpeedComparator;
-import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
+import de.limbusdev.guardianmonsters.model.Attack;
 import de.limbusdev.guardianmonsters.model.Monster;
-import de.limbusdev.guardianmonsters.model.MonsterInformation;
+import de.limbusdev.guardianmonsters.utils.DebugOutput;
 
 /**
  * Created by georg on 21.11.16.
  */
 
-public class BattleSystem extends Observable {
+public class BattleSystem {
+
+    public static final int REMOVED_MONSTER=0;
+    public static final int CHANGED_POSITION=1;
+    public static final int NEXT_MONSTER=2;
+
     private Array<Monster> herosTeam;
     private Array<Monster> opponentsTeam;
 
     private AIPlayer aiPlayer;
 
     private Array<Monster> currentRound;
+    private Array<Monster> nextRound;
 
+    private CallbackHandler callbackHandler;
+
+    private Monster chosenTarget;
+    private int chosenAttack;
 
     // Status values for GUI
 
 
-    public BattleSystem(Array<Monster> hero, Array<Monster> opponent) {
+    public BattleSystem(Array<Monster> hero, Array<Monster> opponent, CallbackHandler callbackHandler) {
+
+        this.callbackHandler = callbackHandler;
+
         herosTeam = hero;
         opponentsTeam = opponent;
         aiPlayer = new AIPlayer();
+
+        // Use two queues, to see the coming round in the widget
+        currentRound = new Array<Monster>();
+        nextRound = new Array<Monster>();
+
+        nextRound.addAll(hero);
+        nextRound.addAll(opponent);
+
         newRound();
     }
 
@@ -51,14 +71,16 @@ public class BattleSystem extends Observable {
         // Calculate Attack
         AttackCalculationReport rep = MonsterManager.calcAttack(
             getActiveMonster(), target, getActiveMonster().attacks.get(attack));
+        callbackHandler.onAttack(getActiveMonster(), target, getActiveMonster().attacks.get(attack));
 
-        // Remove active monster
-        currentRound.pop();
+        // Remove active monster from current round and add it to next round
+        nextRound.add(currentRound.pop());
+        callbackHandler.onNextTurn();
 
         checkKO();
 
         // Sort in case current speed values have changed
-        resortCurrentQueue();
+        reSortQueues();
 
         if (currentRound.size == 0) {
             newRound();
@@ -70,36 +92,27 @@ public class BattleSystem extends Observable {
         }
     }
 
+    public void attack(int attack) {
+        attack(chosenTarget,attack);
+    }
+
+    public void attack() {
+        attack(chosenTarget, chosenAttack);
+    }
+
     /**
      * Initializes a new round, adding all monsters of a team to the queue and sorting the queue by speed
      */
     private void newRound() {
-        currentRound = new Array<Monster>();
 
-        // Get fit monsters from both teams
-        for (Monster m : herosTeam) {
-            if (m.getHP() > 0) {
-                currentRound.add(m);
-            }
-        }
-
-        for (Monster m : opponentsTeam) {
-            if (m.getHP() > 0) {
-                currentRound.add(m);
-            }
-        }
+        currentRound = nextRound;
+        nextRound = new Array<Monster>();
 
         // Sort monsters by speed
-        resortCurrentQueue();
+        reSortQueues();
 
-        System.out.println("\n=== NEW ROUND ===" +
-            "\n\nQueue: ");
-        for (int i = 0; i < currentRound.size; i++) {
-            Monster m = currentRound.get(i);
-            String name = Services.getL18N().l18n().get(MonsterInformation.getInstance().monsterNames.get(m.ID - 1));
-            System.out.print(name + "\t\t(" + m.getSpeed() + "),");
-            System.out.println("\tKP: " + m.getHP() + "\tMP: " + m.getMP());
-        }
+        System.out.println("\n=== NEW ROUND ===");
+        DebugOutput.printRound(currentRound);
     }
 
     private void checkKO() {
@@ -108,6 +121,16 @@ public class BattleSystem extends Observable {
             Monster m = it.next();
             if (m.getHP() == 0) {
                 it.remove();
+                callbackHandler.onMonsterKilled(m);
+            }
+        }
+
+        it = nextRound.iterator();
+        while (it.hasNext()) {
+            Monster m = it.next();
+            if (m.getHP() == 0) {
+                it.remove();
+                callbackHandler.onMonsterKilled(m);
             }
         }
     }
@@ -115,8 +138,25 @@ public class BattleSystem extends Observable {
     /**
      * Sorts all left monsters of the round by speed
      */
-    private void resortCurrentQueue() {
+    private void reSortQueues() {
         currentRound.sort(new MonsterSpeedComparator());
+        nextRound.sort(new MonsterSpeedComparator());
+        callbackHandler.onQueueUpdated();
+    }
+
+    public Array<Monster> getMonsterQueue() {
+        Array<Monster> queue = new Array<Monster>();
+        queue.addAll(currentRound);
+        queue.addAll(nextRound);
+        return queue;
+    }
+
+    public void setChosenTarget(Monster target) {
+        this.chosenTarget = target;
+    }
+
+    public void setChosenAttack(int attack) {
+        this.chosenAttack = attack;
     }
 
     // INNER CLASS
@@ -140,5 +180,14 @@ public class BattleSystem extends Observable {
             Monster target = targets.get(MathUtils.random(0,targets.size-1));
             attack(target,att);
         }
+    }
+
+
+    // INNER INTERFACE
+    public interface CallbackHandler {
+        public void onNextTurn();
+        public void onMonsterKilled(Monster m);
+        public void onQueueUpdated();
+        public void onAttack(Monster attacker, Monster target, Attack attack);
     }
 }

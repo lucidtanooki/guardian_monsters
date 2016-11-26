@@ -3,15 +3,13 @@ package de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 
+
 import de.limbusdev.guardianmonsters.data.TextureAssets;
-import de.limbusdev.guardianmonsters.fwmengine.battle.model.MonsterInBattle;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.AHUD;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.model.Monster;
-import de.limbusdev.guardianmonsters.utils.GS;
 
 /**
  * Created by georg on 20.11.16.
@@ -38,17 +36,17 @@ public class BattleQueueWidget extends BattleWidget {
 
     }
 
-    public void init(Array<MonsterInBattle> monsters) {
+    public void init(Array<Monster> monsters) {
 
         int i=0;
 
-        for(MonsterInBattle m : monsters) {
+        for(Monster m : monsters) {
             Image previewBackground = new Image(Services.getUI().getBattleSkin().getDrawable("monster-preview"));
             Group monPreview = new Group();
-            System.out.println(m.monster.ID + "_" + m.monster.evolution+1);
+            System.out.println(m.ID + "_" + m.evolution+1);
             Image preview = new Image(Services.getMedia().getTextureAtlas(TextureAssets.battleMonsterPreviews).findRegion(
-                Integer.toString(m.monster.ID),
-                m.monster.evolution+1));
+                Integer.toString(m.ID),
+                m.evolution+1));
             preview.setPosition(4,6,align);
             monPreview.addActor(previewBackground);
             monPreview.addActor(preview);
@@ -60,4 +58,5 @@ public class BattleQueueWidget extends BattleWidget {
             i++;
         }
     }
+
 }

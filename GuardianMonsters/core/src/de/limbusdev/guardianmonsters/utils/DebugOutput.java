@@ -1,6 +1,9 @@
 package de.limbusdev.guardianmonsters.utils;
 
 
+import com.badlogic.gdx.utils.Array;
+
+import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.model.Attack;
 import de.limbusdev.guardianmonsters.model.Monster;
 import de.limbusdev.guardianmonsters.model.MonsterInformation;
@@ -26,5 +29,16 @@ public class DebugOutput {
                 "Attack: " + attack.name + "\n" +
                 "Damage: " + damage);
     }
+
+    public static void printRound(Array<Monster> queue) {
+        System.out.println("\nQueue: ");
+        for (int i = 0; i < queue.size; i++) {
+            Monster m = queue.get(i);
+            String name = Services.getL18N().l18n().get(MonsterInformation.getInstance().monsterNames.get(m.ID - 1));
+            System.out.print(name + "\t\t(" + m.getSpeed() + "),");
+            System.out.println("\tKP: " + m.getHP() + "\tMP: " + m.getMP());
+        }
+    }
+
     /* ..................................................................... GETTERS & SETTERS .. */
 }

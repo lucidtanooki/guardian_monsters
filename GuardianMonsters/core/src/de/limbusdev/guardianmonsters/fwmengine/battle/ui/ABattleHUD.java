@@ -5,6 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.ArrayMap;
 
+import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleWidget;
 import de.limbusdev.guardianmonsters.utils.GS;
 
 /**
@@ -51,16 +52,16 @@ public abstract class ABattleHUD extends AHUD {
      * @param key
      * @param bw
      */
-    public void registerBattleWidget(String key, de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleWidget bw) {
+    public void registerBattleWidget(String key, BattleWidget bw) {
         widgets.put(key,bw);
         if(!bw.hasParent()) stage.addActor(bw);
     }
 
-    public de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleWidget getBattleWidget(String key) {
+    public BattleWidget getBattleWidget(String key) {
         return widgets.get(key);
     }
 
-    public <T extends de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleWidget> T getBattleWidget(String key, Class<T> type) {
+    public <T extends BattleWidget> T getBattleWidget(String key, Class<T> type) {
         return (T) getBattleWidget(key);
     }
 

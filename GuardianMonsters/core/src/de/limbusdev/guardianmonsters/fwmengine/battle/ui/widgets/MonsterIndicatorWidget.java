@@ -9,6 +9,7 @@ import com.badlogic.gdx.utils.ArrayMap;
 
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.MonsterInBattle;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.AHUD;
+import de.limbusdev.guardianmonsters.model.Monster;
 import de.limbusdev.guardianmonsters.utils.GS;
 
 /**
@@ -83,29 +84,29 @@ public class MonsterIndicatorWidget extends BattleWidget implements ObservableWi
         }
     }
 
-    public void init(ArrayMap<Integer,MonsterInBattle> team) {
+    public void init(ArrayMap<Integer,Monster> team) {
         clear();
         initializeAttributes();
 
         for(Integer key : team.keys()) {
-            MonsterInBattle m = team.get(key);
-            indicatorButtons.get(m.battleFieldPosition).setVisible(true);
-            addActor(indicatorButtons.get(m.battleFieldPosition));
-            availableChoices.set(m.battleFieldPosition,true);
+            Monster m = team.get(key);
+            indicatorButtons.get(key).setVisible(true);
+            addActor(indicatorButtons.get(key));
+            availableChoices.set(key,true);
         }
 
         int indicatorStartPos = 0;
 
 
         for(Integer key : team.keys()) {
-            MonsterInBattle m = team.get(key);
-            if(!m.KO) {
+            Monster m = team.get(key);
+            if(m.getHP() > 0) {
                 indicatorStartPos = key;
                 break;
             }
         }
 
-        setIndicatorPosition(team.get(indicatorStartPos).battleFieldPosition);
+        setIndicatorPosition(indicatorStartPos);
     }
 
     private void setIndicatorPosition(int pos) {

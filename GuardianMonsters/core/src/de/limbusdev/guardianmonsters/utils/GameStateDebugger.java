@@ -11,6 +11,7 @@ import de.limbusdev.guardianmonsters.fwmengine.battle.model.BattleFactory;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.BattleScreen;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.InventoryScreen;
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.OutdoorGameWorldScreen;
+import de.limbusdev.guardianmonsters.model.Attack;
 import de.limbusdev.guardianmonsters.model.Monster;
 
 /**
@@ -69,7 +70,27 @@ public class GameStateDebugger {
         oppTeam.monsters.add(BattleFactory.getInstance().createMonster(4));
         oppTeam.monsters.add(BattleFactory.getInstance().createMonster(11));
 
-        BattleSystem bs = new BattleSystem(heroTeam.monsters,oppTeam.monsters);
+        BattleSystem bs = new BattleSystem(heroTeam.monsters, oppTeam.monsters, new BattleSystem.CallbackHandler() {
+            @Override
+            public void onNextTurn() {
+                // TODO
+            }
+
+            @Override
+            public void onMonsterKilled(Monster m) {
+                // TODO
+            }
+
+            @Override
+            public void onQueueUpdated() {
+                // TODO
+            }
+
+            @Override
+            public void onAttack(Monster attacker, Monster target, Attack attack) {
+                // TODO
+            }
+        });
 
         boolean enemyFit = true;
         while(enemyFit) {

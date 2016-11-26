@@ -19,7 +19,7 @@ import de.limbusdev.guardianmonsters.geometry.IntVector2;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Media;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.model.Attack;
-import de.limbusdev.guardianmonsters.fwmengine.battle.model.MonsterInBattle;
+import de.limbusdev.guardianmonsters.model.Monster;
 import de.limbusdev.guardianmonsters.utils.GS;
 
 /**
@@ -67,30 +67,30 @@ public class BattleAnimationWidget extends BattleWidget implements ObservableWid
      * @param hero heros monsters
      * @param oppo opponents monsters
      */
-    public void init(ArrayMap<Integer,MonsterInBattle> hero, ArrayMap<Integer,MonsterInBattle> oppo) {
+    public void init(ArrayMap<Integer,Monster> hero, ArrayMap<Integer,Monster> oppo) {
         clear();
 
         monsterImgsLeft.clear();
         monsterImgsRight.clear();
 
         for(Integer key : hero.keys()) {
-            MonsterInBattle m = hero.get(key);
-            setUpMonsterSprite(m.monster.ID, m.battleFieldPosition, m.battleFieldSide);
+            Monster m = hero.get(key);
+            setUpMonsterSprite(m.ID, key, true);
         }
 
         for(Integer key : oppo.keys()) {
-            MonsterInBattle m = oppo.get(key);
-            setUpMonsterSprite(m.monster.ID, m.battleFieldPosition, m.battleFieldSide);
+            Monster m = oppo.get(key);
+            setUpMonsterSprite(m.ID, key, false);
         }
 
         // Correct Image Sorting
-        if(hero.containsKey(2) && !hero.get(2).KO) addActor(monsterImgsLeft.get(2));
-        if(hero.containsKey(0) && !hero.get(0).KO) addActor(monsterImgsLeft.get(0));
-        if(hero.containsKey(1) && !hero.get(1).KO) addActor(monsterImgsLeft.get(1));
+        if(hero.containsKey(2) && hero.get(2).getHP() > 0) addActor(monsterImgsLeft.get(2));
+        if(hero.containsKey(0) && hero.get(0).getHP() > 0) addActor(monsterImgsLeft.get(0));
+        if(hero.containsKey(1) && hero.get(1).getHP() > 0) addActor(monsterImgsLeft.get(1));
 
-        if(oppo.containsKey(2) && !oppo.get(2).KO) addActor(monsterImgsRight.get(2));
-        if(oppo.containsKey(0) && !oppo.get(0).KO) addActor(monsterImgsRight.get(0));
-        if(oppo.containsKey(1) && !oppo.get(1).KO) addActor(monsterImgsRight.get(1));
+        if(oppo.containsKey(2) && oppo.get(2).getHP() > 0) addActor(monsterImgsRight.get(2));
+        if(oppo.containsKey(0) && oppo.get(0).getHP() > 0) addActor(monsterImgsRight.get(0));
+        if(oppo.containsKey(1) && oppo.get(1).getHP() > 0) addActor(monsterImgsRight.get(1));
     }
 
     /**
@@ -139,6 +139,7 @@ public class BattleAnimationWidget extends BattleWidget implements ObservableWid
      * Animate an attack of the given monster
      * @param attPos    position of attacker
      * @param defPos    position of defender
+     * @param side      side of attacker
      */
     public void animateAttack(final int attPos, int defPos, boolean side, final Attack attack) {
         Image attIm,defIm;

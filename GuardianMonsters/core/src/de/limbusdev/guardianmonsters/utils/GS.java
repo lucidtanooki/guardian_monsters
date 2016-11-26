@@ -33,6 +33,6 @@ public class GS {
 
     // ................................................................................... DEBUGGING
     public static final boolean DEBUGGING_ON = true;
-    public final static DebugMode DEBUG_MODE = DebugMode.BATTLE_SYSTEM;
+    public final static DebugMode DEBUG_MODE = DebugMode.BATTLE;
 
 }

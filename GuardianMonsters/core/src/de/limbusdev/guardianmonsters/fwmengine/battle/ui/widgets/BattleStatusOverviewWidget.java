@@ -8,7 +8,7 @@ import com.badlogic.gdx.utils.ArrayMap;
 
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.AHUD;
 import de.limbusdev.guardianmonsters.geometry.IntVector2;
-import de.limbusdev.guardianmonsters.fwmengine.battle.model.MonsterInBattle;
+import de.limbusdev.guardianmonsters.model.Monster;
 import de.limbusdev.guardianmonsters.utils.GS;
 
 /**
@@ -58,7 +58,7 @@ public class BattleStatusOverviewWidget extends BattleWidget {
      * @param hero hero's monsters
      * @param oppo opponents monsters
      */
-    public void init(ArrayMap<Integer,MonsterInBattle> hero, ArrayMap<Integer,MonsterInBattle> oppo) {
+    public void init(ArrayMap<Integer,Monster> hero, ArrayMap<Integer,Monster> oppo) {
 
         // Clear Actions
         for(MonsterStateWidget w : monsterStateWidgetsLeft) {
@@ -74,13 +74,13 @@ public class BattleStatusOverviewWidget extends BattleWidget {
         // Hero Team
         switch(hero.size) {
             case 3:
-                monsterStateWidgetsLeft.get(2).init(hero.get(2).monster);
+                monsterStateWidgetsLeft.get(2).init(hero.get(2));
                 addActor(monsterStateWidgetsLeft.get(2));
             case 2:
-                monsterStateWidgetsLeft.get(1).init(hero.get(1).monster);
+                monsterStateWidgetsLeft.get(1).init(hero.get(1));
                 addActor(monsterStateWidgetsLeft.get(1));
             default:
-                monsterStateWidgetsLeft.get(0).init(hero.get(0).monster);
+                monsterStateWidgetsLeft.get(0).init(hero.get(0));
                 addActor(monsterStateWidgetsLeft.get(0));
                 break;
         }
@@ -88,13 +88,13 @@ public class BattleStatusOverviewWidget extends BattleWidget {
         // Opponent Team
         switch(oppo.size) {
             case 3:
-                monsterStateWidgetsRight.get(2).init(oppo.get(2).monster);
+                monsterStateWidgetsRight.get(2).init(oppo.get(2));
                 addActor(monsterStateWidgetsRight.get(2));
             case 2:
-                monsterStateWidgetsRight.get(1).init(oppo.get(1).monster);
+                monsterStateWidgetsRight.get(1).init(oppo.get(1));
                 addActor(monsterStateWidgetsRight.get(1));
             default:
-                monsterStateWidgetsRight.get(0).init(oppo.get(0).monster);
+                monsterStateWidgetsRight.get(0).init(oppo.get(0));
                 addActor(monsterStateWidgetsRight.get(0));
                 break;
         }

@@ -21,7 +21,7 @@ public abstract class BattleWidget extends WidgetGroup {
         super();
         this.hud = hud;
 
-        // Callbacks
+        // CallbackHandler
         runnableRemove = new Runnable() {
             @Override
             public void run() {

@@ -52,7 +52,6 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
     private BattleMainMenuWidget        mainMenu;
     private BattleActionMenuWidget      actionMenu;
     private AttackMenuWidget            attackMenu;
-    private MonsterIndicatorWidget      indicatorMenu;
     private BattleAnimationWidget       animationWidget;
     private BattleStatusOverviewWidget  statusWidget;
     private EndOfBattleWidget           endOfBattleWidget;
@@ -69,6 +68,7 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
     private BattleSystem.CallbackHandler            battleSystemCallbacks;
     private SevenButtonsWidget.CallbackHandler      targetMenuCallbacks;
     private BattleStateSwitcher                     battleStateSwitcher;
+    private InfoLabelWidget.CallbackHandler         battleStartLabelCallbacks;
 
 
     // ....................................................................................... other
@@ -154,7 +154,6 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
 
         statusWidget.init(heroTeamSlots, opponentTeamSlots);
         animationWidget.init(heroTeamSlots, opponentTeamSlots);
-        indicatorMenu.init(opponentTeamSlots);
         targetMenuWidget.init(heroTeam.monsters,opponentTeam.monsters);
 
         show();
@@ -173,7 +172,7 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
     @Override
     public void show() {
         super.show();
-        changeToWidgetSet(BattleState.MAINMENU);
+        battleStateSwitcher.toBattleStart();
     }
 
     /**
@@ -220,11 +219,6 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
         endOfBattleWidget = new EndOfBattleWidget(      this, skin, endOfBattleCallbacks);
         attackMenu        = new AttackMenuWidget(       this, skin, attackMenuCallbacks);
         targetMenuWidget  = new TargetMenuWidget(       this, skin, targetMenuCallbacks);
-
-        indicatorMenu     = new MonsterIndicatorWidget(this, skin, Align.bottomRight);
-        indicatorMenu.setPosition(GS.RES_X-1*GS.zoom,82*GS.zoom,Align.bottomLeft);
-        indicatorMenu.setScale(GS.zoom);
-        indicatorMenu     .addWidgetObserver(this);
 
         battleQueueWidget = new BattleQueueWidget(this, skin, Align.bottomLeft);
         battleQueueWidget.setScale(GS.zoom);
@@ -343,6 +337,13 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
     private void setUpCallbacks() {
 
         battleStateSwitcher = new BattleStateSwitcher();
+
+        battleStartLabelCallbacks = new InfoLabelWidget.CallbackHandler() {
+            @Override
+            public void onBackButton() {
+                changeToWidgetSet(BattleState.MAINMENU);
+            }
+        };
 
         battleActionCallbacks = new BattleActionMenuWidget.CallbackHandler() {
             @Override
@@ -501,6 +502,7 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
         }
 
         public void toActionMenu() {
+            hideEverything();
             actionMenu.addToStageAndFadeIn(stage);
             statusWidget.addToStage(stage);
             attackMenu.addToStageAndFadeIn(stage);
@@ -509,50 +511,53 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
             monsters.addAll(heroTeam.monsters);
             monsters.addAll(opponentTeam.monsters);
             battleQueueWidget.init(monsters);
-            if(this.state == BattleState.ATTACKMENU) {
-                indicatorMenu.addToStage(stage);
-            } else {
-                indicatorMenu.addToStageAndFadeIn(stage);
-            }
         }
 
         public void toAttackMenu() {
+            hideEverything();
             attackMenu.init(battleSystem.getActiveMonster());
-            stage.addActor(indicatorMenu);
             stage.addActor(statusWidget);
             if(!(this.state == BattleState.ATTACKMENU)) attackMenu.addToStageAndFadeIn(stage);
             else attackMenu.addToStage(stage);
         }
 
         public void toEndOfBattle() {
+            hideEverything();
             //endOfBattleWidget.init(!checkIfWholeTeamKO(heroTeam));
             endOfBattleWidget.addToStageAndFadeIn(stage);
             statusWidget.addToStage(stage);
         }
 
         public void toAnimation() {
+            hideEverything();
             actionMenu.addToStage(stage);
             statusWidget.addToStage(stage);
             battleQueueWidget.addToStage(stage);
         }
 
         public void toTargetChoice() {
+            hideEverything();
             targetMenuWidget.addToStageAndFadeIn(stage);
             statusWidget.addToStage(stage);
         }
 
         public void toMainMenu() {
+            hideEverything();
             mainMenu.addToStageAndFadeIn(stage);
             if(!(this.state == BattleState.ACTIONMENU)) statusWidget.addToStageAndFadeIn(stage);
             else statusWidget.addToStage(stage);
         }
 
         public void toBattleStart() {
+            hideEverything();
+            infoLabelWidget.setCallbackHandler(battleStartLabelCallbacks);
             infoLabelWidget.addToStageAndFadeIn(stage);
-            // TODO set battle start message and go to main menu
+            infoLabelWidget.setWholeText(Services.getL18N().l18n().get("battle_start"));
+            infoLabelWidget.animateTextAppearance();
         }
 
         public void hideEverything() {
+            infoLabelWidget.fadeOutAndRemove();
             animationWidget.remove();
             animationWidget.addToStage(stage);
             endOfBattleWidget.remove();
@@ -560,13 +565,6 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
             if(this.state != BattleState.ATTACKMENU) attackMenu.fadeOutAndRemove();
             else attackMenu.remove();
             statusWidget.remove();
-
-            if(this.state == BattleState.ACTIONMENU || this.state == BattleState.ATTACKMENU) {
-                indicatorMenu.remove();
-            } else {
-                indicatorMenu.fadeOutAndRemove();
-            }
-
             actionMenu.fadeOutAndRemove();
         }
     }

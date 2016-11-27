@@ -86,6 +86,7 @@ public class BattleSystem {
             newRound();
         }
 
+        // TODO get this out of here, attack must be called without triggering the next turn
         // Check, if next monster is from AI
         if (opponentsTeam.contains(getActiveMonster(), true)) {
             aiPlayer.turn();

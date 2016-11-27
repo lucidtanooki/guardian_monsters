@@ -47,7 +47,7 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
     // Logic
     private BattleSystem battleSystem;
 
-    // ....................................................................... scene2d
+    // ..................................................................................... scene2d
     // Groups
     private BattleMainMenuWidget        mainMenu;
     private BattleActionMenuWidget      actionMenu;
@@ -70,7 +70,7 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
     private SevenButtonsWidget.CallbackHandler      targetMenuCallbacks;
 
 
-    // ......................................................................... other
+    // ....................................................................................... other
 
     private TeamComponent heroTeam, opponentTeam;
 
@@ -161,7 +161,7 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
 
 
     // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    // .............................................................................. LIBGDX METHODS
+    // .............................................................................. LibGDX METHODS
     /**
      * Action that should take place when the screen gets hidden
      */
@@ -191,8 +191,11 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
         mainMenu.addFadeOutAction(.3f);
 
         // Set message
-        if(heroLost) endOfBattleWidget.messageLabel.setText(Services.getL18N().l18n().get("batt_game_over"));
-        else         endOfBattleWidget.messageLabel.setText(Services.getL18N().l18n().get("batt_you_won"));
+        if(heroLost) {
+            endOfBattleWidget.messageLabel.setText(Services.getL18N().l18n().get("batt_game_over"));
+        } else {
+            endOfBattleWidget.messageLabel.setText(Services.getL18N().l18n().get("batt_you_won"));
+        }
 
         changeToWidgetSet(BattleState.ENDOFBATTLE);
     }
@@ -310,8 +313,13 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
         if(this.state != BattleState.ATTACKMENU) attackMenu.fadeOutAndRemove();
         else attackMenu.remove();
         statusWidget.remove();
-        if(this.state == BattleState.ACTIONMENU || this.state == BattleState.ATTACKMENU) indicatorMenu.remove();
-        else indicatorMenu.fadeOutAndRemove();
+
+        if(this.state == BattleState.ACTIONMENU || this.state == BattleState.ATTACKMENU) {
+            indicatorMenu.remove();
+        } else {
+            indicatorMenu.fadeOutAndRemove();
+        }
+
         actionMenu.fadeOutAndRemove();
 
         switch(state) {

@@ -32,8 +32,8 @@ public class GS {
     /* ..................................................................... GETTERS & SETTERS .. */
 
     // ................................................................................... DEBUGGING
-    public static final boolean DEBUGGING_ON = false;
-    public final static DebugMode DEBUG_MODE = DebugMode.RELEASE;
+    public static final boolean DEBUGGING_ON = true;
+    public final static DebugMode DEBUG_MODE = DebugMode.BATTLE;
 
 
 }

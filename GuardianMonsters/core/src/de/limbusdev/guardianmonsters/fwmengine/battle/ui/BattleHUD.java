@@ -68,6 +68,7 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
     private SevenButtonsWidget.CallbackHandler      attackMenuCallbacks;
     private BattleSystem.CallbackHandler            battleSystemCallbacks;
     private SevenButtonsWidget.CallbackHandler      targetMenuCallbacks;
+    private BattleStateSwitcher                     battleStateSwitcher;
 
 
     // ....................................................................................... other
@@ -306,68 +307,31 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
      */
     private void changeToWidgetSet(BattleState state) {
 
-        animationWidget.remove();
-        animationWidget.addToStage(stage);
-        endOfBattleWidget.remove();
-        mainMenu.fadeOutAndRemove();
-        if(this.state != BattleState.ATTACKMENU) attackMenu.fadeOutAndRemove();
-        else attackMenu.remove();
-        statusWidget.remove();
-
-        if(this.state == BattleState.ACTIONMENU || this.state == BattleState.ATTACKMENU) {
-            indicatorMenu.remove();
-        } else {
-            indicatorMenu.fadeOutAndRemove();
-        }
-
-        actionMenu.fadeOutAndRemove();
+        battleStateSwitcher.hideEverything();
 
         switch(state) {
             case ACTIONMENU:
-                actionMenu.addToStageAndFadeIn(stage);
-                statusWidget.addToStage(stage);
-                attackMenu.addToStageAndFadeIn(stage);
-                battleQueueWidget.addToStageAndFadeIn(stage);
-                Array monsters = new Array();
-                monsters.addAll(heroTeam.monsters);
-                monsters.addAll(opponentTeam.monsters);
-                battleQueueWidget.init(monsters);
-                if(this.state == BattleState.ATTACKMENU) {
-                    indicatorMenu.addToStage(stage);
-                } else {
-                    indicatorMenu.addToStageAndFadeIn(stage);
-                }
+                battleStateSwitcher.toActionMenu();
                 break;
 
             case ATTACKMENU:
-                attackMenu.init(battleSystem.getActiveMonster());
-                stage.addActor(indicatorMenu);
-                stage.addActor(statusWidget);
-                if(!(this.state == BattleState.ATTACKMENU)) attackMenu.addToStageAndFadeIn(stage);
-                else attackMenu.addToStage(stage);
+                battleStateSwitcher.toAttackMenu();
                 break;
 
             case ANIMATION:
-                actionMenu.addToStage(stage);
-                statusWidget.addToStage(stage);
-                battleQueueWidget.addToStage(stage);
+                battleStateSwitcher.toAnimation();
                 break;
 
             case ENDOFBATTLE:
-                //endOfBattleWidget.init(!checkIfWholeTeamKO(heroTeam));
-                endOfBattleWidget.addToStageAndFadeIn(stage);
-                statusWidget.addToStage(stage);
+                battleStateSwitcher.toEndOfBattle();
                 break;
 
             case TARGET_CHOICE:
-                targetMenuWidget.addToStageAndFadeIn(stage);
-                statusWidget.addToStage(stage);
+                battleStateSwitcher.toTargetChoice();
                 break;
 
             default:
-                mainMenu.addToStageAndFadeIn(stage);
-                if(!(this.state == BattleState.ACTIONMENU)) statusWidget.addToStageAndFadeIn(stage);
-                else statusWidget.addToStage(stage);
+                battleStateSwitcher.toMainMenu();
                 break;
         }
         this.state = state;
@@ -377,6 +341,9 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
     // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ CALLBACKS
 
     private void setUpCallbacks() {
+
+        battleStateSwitcher = new BattleStateSwitcher();
+
         battleActionCallbacks = new BattleActionMenuWidget.CallbackHandler() {
             @Override
             public void onMonsterButton() {
@@ -521,7 +488,87 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
 
 
     private enum BattleState {
-        MAINMENU, ACTIONMENU, ATTACKMENU, ENDOFBATTLE, ANIMATION, TARGET_CHOICE,
+        MAINMENU, ACTIONMENU, ATTACKMENU, ENDOFBATTLE, ANIMATION, TARGET_CHOICE, BATTLE_START,
+    }
+
+    // Inner Classes
+    private class BattleStateSwitcher {
+
+        public BattleState state;
+
+        public BattleStateSwitcher() {
+            state = BattleState.BATTLE_START;
+        }
+
+        public void toActionMenu() {
+            actionMenu.addToStageAndFadeIn(stage);
+            statusWidget.addToStage(stage);
+            attackMenu.addToStageAndFadeIn(stage);
+            battleQueueWidget.addToStageAndFadeIn(stage);
+            Array monsters = new Array();
+            monsters.addAll(heroTeam.monsters);
+            monsters.addAll(opponentTeam.monsters);
+            battleQueueWidget.init(monsters);
+            if(this.state == BattleState.ATTACKMENU) {
+                indicatorMenu.addToStage(stage);
+            } else {
+                indicatorMenu.addToStageAndFadeIn(stage);
+            }
+        }
+
+        public void toAttackMenu() {
+            attackMenu.init(battleSystem.getActiveMonster());
+            stage.addActor(indicatorMenu);
+            stage.addActor(statusWidget);
+            if(!(this.state == BattleState.ATTACKMENU)) attackMenu.addToStageAndFadeIn(stage);
+            else attackMenu.addToStage(stage);
+        }
+
+        public void toEndOfBattle() {
+            //endOfBattleWidget.init(!checkIfWholeTeamKO(heroTeam));
+            endOfBattleWidget.addToStageAndFadeIn(stage);
+            statusWidget.addToStage(stage);
+        }
+
+        public void toAnimation() {
+            actionMenu.addToStage(stage);
+            statusWidget.addToStage(stage);
+            battleQueueWidget.addToStage(stage);
+        }
+
+        public void toTargetChoice() {
+            targetMenuWidget.addToStageAndFadeIn(stage);
+            statusWidget.addToStage(stage);
+        }
+
+        public void toMainMenu() {
+            mainMenu.addToStageAndFadeIn(stage);
+            if(!(this.state == BattleState.ACTIONMENU)) statusWidget.addToStageAndFadeIn(stage);
+            else statusWidget.addToStage(stage);
+        }
+
+        public void toBattleStart() {
+            infoLabelWidget.addToStageAndFadeIn(stage);
+            // TODO set battle start message and go to main menu
+        }
+
+        public void hideEverything() {
+            animationWidget.remove();
+            animationWidget.addToStage(stage);
+            endOfBattleWidget.remove();
+            mainMenu.fadeOutAndRemove();
+            if(this.state != BattleState.ATTACKMENU) attackMenu.fadeOutAndRemove();
+            else attackMenu.remove();
+            statusWidget.remove();
+
+            if(this.state == BattleState.ACTIONMENU || this.state == BattleState.ATTACKMENU) {
+                indicatorMenu.remove();
+            } else {
+                indicatorMenu.fadeOutAndRemove();
+            }
+
+            actionMenu.fadeOutAndRemove();
+        }
     }
 
 }

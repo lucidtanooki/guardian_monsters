@@ -17,6 +17,8 @@ import de.limbusdev.guardianmonsters.utils.DebugOutput;
 
 public class BattleSystem {
 
+    public static String TAG = BattleSystem.class.getSimpleName();
+
     public static final int REMOVED_MONSTER=0;
     public static final int CHANGED_POSITION=1;
     public static final int NEXT_MONSTER=2;
@@ -33,6 +35,9 @@ public class BattleSystem {
 
     private Monster chosenTarget;
     private int chosenAttack;
+    private boolean choiceComplete;
+    private boolean targetChosen;
+    private boolean attackChosen;
 
     // Status values for GUI
 
@@ -40,6 +45,10 @@ public class BattleSystem {
     public BattleSystem(Array<Monster> hero, Array<Monster> opponent, CallbackHandler callbackHandler) {
 
         this.callbackHandler = callbackHandler;
+
+        choiceComplete = false;
+        targetChosen = false;
+        attackChosen = false;
 
         herosTeam = hero;
         opponentsTeam = opponent;
@@ -68,29 +77,25 @@ public class BattleSystem {
      * @param attack
      */
     public void attack(Monster target, int attack) {
+
+        // Throw exception if target or attack are unset
+        if(!choiceComplete) {
+            throw new IllegalStateException(TAG + " you forgot to set the " + (targetChosen ? "attack" : "target"));
+        }
+
         // Calculate Attack
         AttackCalculationReport rep = MonsterManager.calcAttack(
             getActiveMonster(), target, getActiveMonster().attacks.get(attack));
         callbackHandler.onAttack(getActiveMonster(), target, getActiveMonster().attacks.get(attack));
 
         // Remove active monster from current round and add it to next round
-        nextRound.add(currentRound.pop());
+        nextMonster();
         callbackHandler.onNextTurn();
 
         checkKO();
 
         // Sort in case current speed values have changed
         reSortQueues();
-
-        if (currentRound.size == 0) {
-            newRound();
-        }
-
-        // TODO get this out of here, attack must be called without triggering the next turn
-        // Check, if next monster is from AI
-        if (opponentsTeam.contains(getActiveMonster(), true)) {
-            aiPlayer.turn();
-        }
     }
 
     public void attack(int attack) {
@@ -99,6 +104,27 @@ public class BattleSystem {
 
     public void attack() {
         attack(chosenTarget, chosenAttack);
+    }
+
+    public void nextMonster() {
+        nextRound.add(currentRound.pop());
+        chosenAttack = 0;
+        chosenTarget = null;
+        choiceComplete = false;
+        targetChosen = false;
+        attackChosen = false;
+
+        if (currentRound.size == 0) {
+            newRound();
+        }
+
+        if(opponentsTeam.contains(getActiveMonster(),false)) {
+            // It's AI's turn
+            letAItakeTurn();
+        } else {
+            // It's player's turn
+            callbackHandler.onPlayersTurn();
+        }
     }
 
     /**
@@ -137,6 +163,18 @@ public class BattleSystem {
     }
 
     /**
+     * The Computer Player takes his turn and chooses his attack and the target to be attacked.
+     * This is possible only, when the first monster in queue is of AI's team.
+     */
+    public void letAItakeTurn() {
+        if(!opponentsTeam.contains(getActiveMonster(),false)) {
+            throw new IllegalStateException(TAG + " AI can't take turn. The first monster in queue" +
+                "is not in it's team.");
+        }
+        aiPlayer.turn();
+    }
+
+    /**
      * Sorts all left monsters of the round by speed
      */
     private void reSortQueues() {
@@ -154,10 +192,14 @@ public class BattleSystem {
 
     public void setChosenTarget(Monster target) {
         this.chosenTarget = target;
+        targetChosen = true;
+        choiceComplete = targetChosen && attackChosen;
     }
 
     public void setChosenAttack(int attack) {
         this.chosenAttack = attack;
+        attackChosen = true;
+        choiceComplete = targetChosen && attackChosen;
     }
 
     // INNER CLASS
@@ -178,8 +220,9 @@ public class BattleSystem {
                     targets.add(h);
                 }
             }
-            Monster target = targets.get(MathUtils.random(0,targets.size-1));
-            attack(target,att);
+            setChosenTarget(targets.get(MathUtils.random(0,targets.size-1)));
+            setChosenAttack(att);
+            attack();
         }
     }
 
@@ -190,5 +233,6 @@ public class BattleSystem {
         public void onMonsterKilled(Monster m);
         public void onQueueUpdated();
         public void onAttack(Monster attacker, Monster target, Attack attack);
+        public void onPlayersTurn();
     }
 }

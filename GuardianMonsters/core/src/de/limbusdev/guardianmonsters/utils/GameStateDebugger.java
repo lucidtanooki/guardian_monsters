@@ -90,6 +90,11 @@ public class GameStateDebugger {
             public void onAttack(Monster attacker, Monster target, Attack attack) {
                 // TODO
             }
+
+            @Override
+            public void onPlayersTurn() {
+                // TODO
+            }
         });
 
         boolean enemyFit = true;

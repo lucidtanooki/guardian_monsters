@@ -1,6 +1,9 @@
 package de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets;
 
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 
@@ -59,6 +62,32 @@ public abstract class BattleWidget extends WidgetGroup {
     }
     private boolean superRemove() {
         return super.remove();
+    }
+
+    public void enable() {
+        setColor(Color.WHITE);
+        setTouchable(Touchable.enabled);
+        for(Actor a : getChildren()) {
+            enable(a);
+        }
+    }
+
+    public void disable() {
+        setColor(Color.GRAY);
+        setTouchable(Touchable.disabled);
+        for(Actor a : getChildren()) {
+            disable(a);
+        }
+    }
+
+    public void enable(Actor child) {
+        child.setColor(Color.WHITE);
+        child.setTouchable(Touchable.enabled);
+    }
+
+    public void disable(Actor child) {
+        child.setColor(Color.GRAY);
+        child.setTouchable(Touchable.disabled);
     }
 
 }

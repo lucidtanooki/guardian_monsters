@@ -5,6 +5,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 
 import de.limbusdev.guardianmonsters.fwmengine.battle.control.BattleSystem;
+import de.limbusdev.guardianmonsters.fwmengine.battle.control.MonsterManager;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.AttackMenuWidget;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleActionMenuWidget;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleAnimationWidget;
@@ -61,6 +62,8 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
     private BattleStateSwitcher                     battleStateSwitcher;
     private BattleActionMenuWidget.CallbackHandler  battleStartLabelCallbacks;
     private BattleActionMenuWidget.CallbackHandler  backToActionMenuCallbacks;
+    private BattleActionMenuWidget.CallbackHandler  escapeSuccessCallbacks;
+    private BattleActionMenuWidget.CallbackHandler  escapeFailCallbacks;
 
 
     // ....................................................................................... other
@@ -378,7 +381,11 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
             @Override
             public void onRunButton() {
                 System.out.println("Input: Run Button");
-                goToPreviousScreen();
+                if(MonsterManager.tryToRun(heroTeam.monsters,opponentTeam.monsters)) {
+                    battleStateSwitcher.toEscapeSuccessInfo();
+                } else {
+                    battleStateSwitcher.toEscapeFailInfo();
+                }
             }
 
             @Override
@@ -442,6 +449,11 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
             }
 
             @Override
+            public void onPlayersTurn() {
+                battleStateSwitcher.toActionMenu();
+            }
+
+            @Override
             public void onMonsterKilled(Monster m) {
                 int pos;
                 boolean side;
@@ -501,6 +513,50 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
             @Override
             public void onBackButton() {
                 battleStateSwitcher.toActionMenu();
+            }
+
+            @Override
+            public void onExtraButton() {
+                // not needed
+            }
+        };
+
+        escapeSuccessCallbacks = new BattleActionMenuWidget.CallbackHandler() {
+            @Override
+            public void onMonsterButton() {
+                // not needed
+            }
+
+            @Override
+            public void onBagButton() {
+                // not needed
+            }
+
+            @Override
+            public void onBackButton() {
+                goToPreviousScreen();
+            }
+
+            @Override
+            public void onExtraButton() {
+                // not needed
+            }
+        };
+
+        escapeFailCallbacks = new BattleActionMenuWidget.CallbackHandler() {
+            @Override
+            public void onMonsterButton() {
+                // not needed
+            }
+
+            @Override
+            public void onBagButton() {
+                // not needed
+            }
+
+            @Override
+            public void onBackButton() {
+                battleSystem.nextMonster();
             }
 
             @Override
@@ -631,6 +687,32 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
             statusWidget.addToStage(stage);
 
             state = BattleState.MAINMENU;
+        }
+
+        public void toInfoLabel() {
+            reset();
+            infoLabelWidget.addToStage(stage);
+            animationWidget.addToStage(stage);
+            actionMenu.addToStage(stage);
+            statusWidget.addToStage(stage);
+
+            actionMenu.disableAllButBackButton();
+        }
+
+        public void toEscapeSuccessInfo() {
+            toInfoLabel();
+            String wholeText = Services.getL18N().l18n().get("escape_success");
+            infoLabelWidget.setWholeText(wholeText);
+            infoLabelWidget.animateTextAppearance();
+            actionMenu.setCallbackHandler(escapeSuccessCallbacks);
+        }
+
+        public void toEscapeFailInfo() {
+            toInfoLabel();
+            String wholeText = Services.getL18N().l18n().get("escape_fail");
+            infoLabelWidget.setWholeText(wholeText);
+            infoLabelWidget.animateTextAppearance();
+            actionMenu.setCallbackHandler(escapeFailCallbacks);
         }
 
         public void reset() {

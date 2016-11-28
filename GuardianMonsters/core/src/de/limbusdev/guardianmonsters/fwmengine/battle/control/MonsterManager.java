@@ -2,6 +2,7 @@ package de.limbusdev.guardianmonsters.fwmengine.battle.control;
 
 
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.I18NBundle;
 
 import de.limbusdev.guardianmonsters.enums.AttackType;
@@ -83,6 +84,29 @@ public class MonsterManager {
                 + l18n.get(MonsterInformation.getInstance().monsterNames.get(def.ID - 1)));
 
         return report;
+    }
+
+    public static boolean tryToRun(Array<Monster> escapingTeam, Array<Monster> attackingTeam) {
+        float meanEscapingTeamLevel = 0;
+        float meanAttackingTeamLevel = 0;
+
+        for(Monster m : escapingTeam) {
+            if(m.getHP() > 0) {
+                meanEscapingTeamLevel += m.getLevel();
+            }
+        }
+        meanEscapingTeamLevel /= escapingTeam.size;
+
+        for(Monster m : attackingTeam) {
+            meanAttackingTeamLevel += m.getLevel();
+        }
+        meanAttackingTeamLevel /= escapingTeam.size;
+
+        if(meanAttackingTeamLevel > meanEscapingTeamLevel) {
+            return MathUtils.randomBoolean(.2f);
+        } else {
+            return MathUtils.randomBoolean(.9f);
+        }
     }
 
     /* ..................................................................... GETTERS & SETTERS .. */

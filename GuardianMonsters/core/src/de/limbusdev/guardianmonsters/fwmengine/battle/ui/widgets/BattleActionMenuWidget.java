@@ -25,7 +25,7 @@ public class BattleActionMenuWidget extends BattleWidget {
     public BattleActionMenuWidget(final AHUD hud, Skin skin, final CallbackHandler callbackHandler) {
         super(hud);
 
-        this.setBounds(0,0,GS.RES_X,GS.RES_Y/4);
+        //this.setBounds(0,0,GS.RES_X,GS.RES_Y/4);
 
         // Monster Button
         monsterButton = new ImageButton(skin, "b-attack-monsters");
@@ -105,6 +105,12 @@ public class BattleActionMenuWidget extends BattleWidget {
         );
     }
 
+    public void disableAllButBackButton() {
+        enable();
+        disable(bagButton);
+        disable(monsterButton);
+        disable(extraButton);
+    }
 
     // INNER INTERFACE
     public interface CallbackHandler {

@@ -1,12 +1,8 @@
 package de.limbusdev.guardianmonsters.fwmengine.battle.ui;
 
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
-
-import java.util.Observable;
-import java.util.Observer;
 
 import de.limbusdev.guardianmonsters.fwmengine.battle.control.BattleSystem;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.AttackMenuWidget;
@@ -14,14 +10,12 @@ import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleActionMen
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleAnimationWidget;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleQueueWidget;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.InfoLabelWidget;
-import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.MonsterIndicatorWidget;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.SevenButtonsWidget;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.TargetMenuWidget;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.WidgetObserver;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TeamComponent;
 import de.limbusdev.guardianmonsters.enums.ButtonIDs;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
-import de.limbusdev.guardianmonsters.fwmengine.battle.model.AttackCalculationReport;
 import de.limbusdev.guardianmonsters.model.Attack;
 import de.limbusdev.guardianmonsters.model.Monster;
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.MonsterInBattle;
@@ -30,10 +24,7 @@ import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleMainMenuW
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleStatusOverviewWidget;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.EndOfBattleWidget;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.ObservableWidget;
-import de.limbusdev.guardianmonsters.fwmengine.battle.control.BattleStringBuilder;
 import de.limbusdev.guardianmonsters.utils.GS;
-import de.limbusdev.guardianmonsters.fwmengine.battle.control.MonsterManager;
-import de.limbusdev.guardianmonsters.fwmengine.battle.model.MonsterSpeedComparator;
 
 /**
  * BattleHUD manages all actions and UI elements in the {@link BattleScreen}
@@ -62,13 +53,14 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
     // CallbackHandlers
     private BattleActionMenuWidget.CallbackHandler  battleActionCallbacks;
     private BattleMainMenuWidget.CallbackHandler    mainMenuCallbacks;
-    private InfoLabelWidget.CallbackHandler         infoLabelCallbacks;
+    private BattleActionMenuWidget.CallbackHandler  infoLabelCallbacks;
     private EndOfBattleWidget.CallbackHandler       endOfBattleCallbacks;
     private SevenButtonsWidget.CallbackHandler      attackMenuCallbacks;
     private BattleSystem.CallbackHandler            battleSystemCallbacks;
     private SevenButtonsWidget.CallbackHandler      targetMenuCallbacks;
     private BattleStateSwitcher                     battleStateSwitcher;
-    private InfoLabelWidget.CallbackHandler         battleStartLabelCallbacks;
+    private BattleActionMenuWidget.CallbackHandler  battleStartLabelCallbacks;
+    private BattleActionMenuWidget.CallbackHandler  backToActionMenuCallbacks;
 
 
     // ....................................................................................... other
@@ -224,7 +216,7 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
         battleQueueWidget.setScale(GS.zoom);
         battleQueueWidget.setPosition(GS.zoom,70*GS.zoom, Align.bottomLeft);
 
-        infoLabelWidget = new InfoLabelWidget(this,skin, infoLabelCallbacks);
+        infoLabelWidget = new InfoLabelWidget(this,skin);
     }
 
 
@@ -301,7 +293,7 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
      */
     private void changeToWidgetSet(BattleState state) {
 
-        battleStateSwitcher.hideEverything();
+        battleStateSwitcher.reset();
 
         switch(state) {
             case ACTIONMENU:
@@ -338,10 +330,25 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
 
         battleStateSwitcher = new BattleStateSwitcher();
 
-        battleStartLabelCallbacks = new InfoLabelWidget.CallbackHandler() {
+        battleStartLabelCallbacks = new BattleActionMenuWidget.CallbackHandler() {
+            @Override
+            public void onMonsterButton() {
+                // not needed
+            }
+
+            @Override
+            public void onBagButton() {
+                // not needed
+            }
+
             @Override
             public void onBackButton() {
                 changeToWidgetSet(BattleState.MAINMENU);
+            }
+
+            @Override
+            public void onExtraButton() {
+                // not needed
             }
         };
 
@@ -381,10 +388,25 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
             }
         };
 
-        infoLabelCallbacks = new InfoLabelWidget.CallbackHandler() {
+        infoLabelCallbacks = new BattleActionMenuWidget.CallbackHandler() {
+            @Override
+            public void onMonsterButton() {
+                // not needed
+            }
+
+            @Override
+            public void onBagButton() {
+                // not needed
+            }
+
             @Override
             public void onBackButton() {
                 changeToWidgetSet(BattleState.ACTIONMENU);
+            }
+
+            @Override
+            public void onExtraButton() {
+                // not needed
             }
         };
 
@@ -464,6 +486,28 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
                 battleSystem.attack();
             }
         };
+
+        backToActionMenuCallbacks = new BattleActionMenuWidget.CallbackHandler() {
+            @Override
+            public void onMonsterButton() {
+                // not needed
+            }
+
+            @Override
+            public void onBagButton() {
+                // not needed
+            }
+
+            @Override
+            public void onBackButton() {
+                battleStateSwitcher.toActionMenu();
+            }
+
+            @Override
+            public void onExtraButton() {
+                // not needed
+            }
+        };
     }
 
     @Deprecated
@@ -497,75 +541,111 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
 
         public BattleState state;
 
-        public BattleStateSwitcher() {
+        public void toBattleStart() {
+            reset();
+
+            // Add Widgets
+            infoLabelWidget.addToStageAndFadeIn(stage);
+            animationWidget.addToStageAndFadeIn(stage);
+            actionMenu.addToStageAndFadeIn(stage);
+            statusWidget.addToStageAndFadeIn(stage);
+
+            // Set Widget State
+            actionMenu.disableAllButBackButton();
+
+            // Set Callbacks
+            actionMenu.setCallbackHandler(battleStartLabelCallbacks);
+            infoLabelWidget.setWholeText(Services.getL18N().l18n().get("battle_start"));
+            infoLabelWidget.animateTextAppearance();
+
             state = BattleState.BATTLE_START;
         }
 
         public void toActionMenu() {
-            hideEverything();
-            actionMenu.addToStageAndFadeIn(stage);
+            reset();
+
+            // Add Widgets
+            animationWidget.addToStage(stage);
             statusWidget.addToStage(stage);
-            attackMenu.addToStageAndFadeIn(stage);
-            battleQueueWidget.addToStageAndFadeIn(stage);
+            attackMenu.addToStage(stage);
+            battleQueueWidget.addToStage(stage);
+            actionMenu.addToStage(stage);
+
+            // Setup Widgets
+            actionMenu.setCallbackHandler(battleActionCallbacks);
+            attackMenu.init(battleSystem.getActiveMonster());
             Array monsters = new Array();
             monsters.addAll(heroTeam.monsters);
             monsters.addAll(opponentTeam.monsters);
             battleQueueWidget.init(monsters);
+
+            state = BattleState.ACTIONMENU;
         }
 
         public void toAttackMenu() {
-            hideEverything();
-            attackMenu.init(battleSystem.getActiveMonster());
-            stage.addActor(statusWidget);
-            if(!(this.state == BattleState.ATTACKMENU)) attackMenu.addToStageAndFadeIn(stage);
-            else attackMenu.addToStage(stage);
+            toActionMenu();
+
+            state = BattleState.ACTIONMENU;
         }
 
         public void toEndOfBattle() {
-            hideEverything();
+            reset();
             //endOfBattleWidget.init(!checkIfWholeTeamKO(heroTeam));
             endOfBattleWidget.addToStageAndFadeIn(stage);
             statusWidget.addToStage(stage);
+
+            state = BattleState.ENDOFBATTLE;
         }
 
         public void toAnimation() {
-            hideEverything();
+            reset();
             actionMenu.addToStage(stage);
             statusWidget.addToStage(stage);
             battleQueueWidget.addToStage(stage);
+            infoLabelWidget.addToStage(stage);
+
+            actionMenu.disableAllButBackButton();
+
+            state = BattleState.ANIMATION;
         }
 
         public void toTargetChoice() {
-            hideEverything();
-            targetMenuWidget.addToStageAndFadeIn(stage);
+            reset();
+            animationWidget.addToStage(stage);
+            actionMenu.disableAllButBackButton();
+            actionMenu.addToStage(stage);
+            actionMenu.setCallbackHandler(backToActionMenuCallbacks);
+            targetMenuWidget.addToStage(stage);
             statusWidget.addToStage(stage);
+            battleQueueWidget.addToStage(stage);
+
+            state = BattleState.TARGET_CHOICE;
         }
 
         public void toMainMenu() {
-            hideEverything();
-            mainMenu.addToStageAndFadeIn(stage);
-            if(!(this.state == BattleState.ACTIONMENU)) statusWidget.addToStageAndFadeIn(stage);
-            else statusWidget.addToStage(stage);
-        }
-
-        public void toBattleStart() {
-            hideEverything();
-            infoLabelWidget.setCallbackHandler(battleStartLabelCallbacks);
-            infoLabelWidget.addToStageAndFadeIn(stage);
-            infoLabelWidget.setWholeText(Services.getL18N().l18n().get("battle_start"));
-            infoLabelWidget.animateTextAppearance();
-        }
-
-        public void hideEverything() {
-            infoLabelWidget.fadeOutAndRemove();
-            animationWidget.remove();
+            reset();
             animationWidget.addToStage(stage);
+            actionMenu.disable();
+            actionMenu.addToStage(stage);
+            mainMenu.addToStageAndFadeIn(stage);
+            statusWidget.addToStage(stage);
+
+            state = BattleState.MAINMENU;
+        }
+
+        public void reset() {
+            // Remove all Widgets
+            infoLabelWidget.remove();
+            animationWidget.remove();
             endOfBattleWidget.remove();
-            mainMenu.fadeOutAndRemove();
-            if(this.state != BattleState.ATTACKMENU) attackMenu.fadeOutAndRemove();
-            else attackMenu.remove();
+            mainMenu.remove();
+            targetMenuWidget.remove();
+            attackMenu.remove();
             statusWidget.remove();
-            actionMenu.fadeOutAndRemove();
+            actionMenu.remove();
+            battleQueueWidget.remove();
+
+            actionMenu.enable();
         }
     }
 

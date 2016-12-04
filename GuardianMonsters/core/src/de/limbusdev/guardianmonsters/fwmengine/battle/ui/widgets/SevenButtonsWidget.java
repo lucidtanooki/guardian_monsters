@@ -22,6 +22,7 @@ public class SevenButtonsWidget extends BattleWidget {
 
     // Buttons
     private ArrayMap<Integer,TextButton> buttons;
+    private CallbackHandler callbackHandler;
 
     public SevenButtonsWidget (final AHUD hud, Skin skin, CallbackHandler callbackHandler,
                                int[] buttonOrder) {
@@ -70,7 +71,8 @@ public class SevenButtonsWidget extends BattleWidget {
         tb.setPosition(GS.RES_X/2+(71+71)*GS.zoom,32*GS.zoom+1*GS.zoom,Align.center);
         buttons.put(buttonOrder[6],tb);
 
-        setCallbackHandler(callbackHandler);
+        this.callbackHandler = callbackHandler;
+        initCallbackHandler();
 
         for(TextButton b : buttons.values()) {
             addActor(b);
@@ -78,10 +80,11 @@ public class SevenButtonsWidget extends BattleWidget {
 
     }
 
-    public void setCallbackHandler(final CallbackHandler callbackHandler) {
+    private void initCallbackHandler() {
         for (int i = 0; i < 7; i++) {
             final int j = i;
             final TextButton attButt = buttons.get(i);
+            attButt.clearListeners();
             attButt.addListener(
                 new ClickListener() {
                     @Override
@@ -95,6 +98,10 @@ public class SevenButtonsWidget extends BattleWidget {
                 }
             );
         }
+    }
+
+    public void setCallbackHandler(CallbackHandler callbackHandler) {
+        this.callbackHandler = callbackHandler;
     }
 
     protected void enableButton(int index) {

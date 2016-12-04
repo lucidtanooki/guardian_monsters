@@ -23,8 +23,8 @@ public class BattleSystem {
     public static final int CHANGED_POSITION=1;
     public static final int NEXT_MONSTER=2;
 
-    private Array<Monster> herosTeam;
-    private Array<Monster> opponentsTeam;
+    private Array<Monster> leftTeam;
+    private Array<Monster> rightTeam;
 
     private AIPlayer aiPlayer;
 
@@ -39,10 +39,12 @@ public class BattleSystem {
     private boolean targetChosen;
     private boolean attackChosen;
 
+    private AttackCalculationReport latestAttackReport;
+
     // Status values for GUI
 
 
-    public BattleSystem(Array<Monster> hero, Array<Monster> opponent, CallbackHandler callbackHandler) {
+    public BattleSystem(Array<Monster> left, Array<Monster> right, CallbackHandler callbackHandler) {
 
         this.callbackHandler = callbackHandler;
 
@@ -50,16 +52,16 @@ public class BattleSystem {
         targetChosen = false;
         attackChosen = false;
 
-        herosTeam = hero;
-        opponentsTeam = opponent;
+        leftTeam = left;
+        rightTeam = right;
         aiPlayer = new AIPlayer();
 
         // Use two queues, to see the coming round in the widget
         currentRound = new Array<Monster>();
         nextRound = new Array<Monster>();
 
-        nextRound.addAll(hero);
-        nextRound.addAll(opponent);
+        nextRound.addAll(left);
+        nextRound.addAll(right);
 
         newRound();
     }
@@ -84,18 +86,21 @@ public class BattleSystem {
         }
 
         // Calculate Attack
-        AttackCalculationReport rep = MonsterManager.calcAttack(
+        latestAttackReport = MonsterManager.calcAttack(
             getActiveMonster(), target, getActiveMonster().attacks.get(attack));
-        callbackHandler.onAttack(getActiveMonster(), target, getActiveMonster().attacks.get(attack));
+        callbackHandler.onAttack(getActiveMonster(), target, getActiveMonster().attacks.get(attack), latestAttackReport);
 
         // Remove active monster from current round and add it to next round
         nextMonster();
-        callbackHandler.onNextTurn();
 
         checkKO();
 
         // Sort in case current speed values have changed
         reSortQueues();
+    }
+
+    public void applyAttack() {
+        MonsterManager.apply(latestAttackReport);
     }
 
     public void attack(int attack) {
@@ -117,13 +122,17 @@ public class BattleSystem {
         if (currentRound.size == 0) {
             newRound();
         }
+    }
 
-        if(opponentsTeam.contains(getActiveMonster(),false)) {
+    public boolean continueBattle() {
+        if(rightTeam.contains(getActiveMonster(),false)) {
             // It's AI's turn
             letAItakeTurn();
+            return false;
         } else {
             // It's player's turn
             callbackHandler.onPlayersTurn();
+            return true;
         }
     }
 
@@ -167,8 +176,9 @@ public class BattleSystem {
      * This is possible only, when the first monster in queue is of AI's team.
      */
     public void letAItakeTurn() {
-        if(!opponentsTeam.contains(getActiveMonster(),false)) {
-            throw new IllegalStateException(TAG + " AI can't take turn. The first monster in queue" +
+        if(!rightTeam.contains(getActiveMonster(),false)) {
+            throw new IllegalStateException(TAG +
+                " AI can't take turn. The first monster in queue" +
                 "is not in it's team.");
         }
         aiPlayer.turn();
@@ -215,7 +225,7 @@ public class BattleSystem {
             Monster m = getActiveMonster();
             int att = MathUtils.random(0,m.attacks.size-1);
             Array<Monster> targets = new Array<Monster>();
-            for(Monster h : herosTeam) {
+            for(Monster h : leftTeam) {
                 if(h.getHP() > 0) {
                     targets.add(h);
                 }
@@ -232,7 +242,7 @@ public class BattleSystem {
         public void onNextTurn();
         public void onMonsterKilled(Monster m);
         public void onQueueUpdated();
-        public void onAttack(Monster attacker, Monster target, Attack attack);
+        public void onAttack(Monster attacker, Monster target, Attack attack, AttackCalculationReport rep);
         public void onPlayersTurn();
     }
 }

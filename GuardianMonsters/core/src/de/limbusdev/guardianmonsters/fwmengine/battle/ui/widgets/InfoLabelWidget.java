@@ -43,7 +43,7 @@ public class InfoLabelWidget extends BattleWidget {
     public void animateTextAppearance() {
         currentText = "";
         addAction(Actions.repeat(
-            wholeText.length()-1,
+            wholeText.length(),
             Actions.sequence(
                 Actions.run(new Runnable() {
                 @Override
@@ -59,6 +59,7 @@ public class InfoLabelWidget extends BattleWidget {
 
     public void setWholeText(String wholeText) {
         this.wholeText = wholeText;
+        clearActions();
     }
 
 }

@@ -146,6 +146,7 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
 
         // initialize independent battle system
         battleSystem = new BattleSystem(heroTeam.monsters,opponentTeam.monsters, battleSystemCallbacks);
+        battleQueueWidget.update(battleSystem.getCurrentRound(),battleSystem.getNextRound());
 
         // initialize attack menu with active monster
         attackMenu.init(battleSystem.getActiveMonster());
@@ -439,7 +440,7 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
 
             @Override
             public void onQueueUpdated() {
-                // TODO
+                battleQueueWidget.update(battleSystem.getCurrentRound(),battleSystem.getNextRound());
             }
 
             @Override
@@ -612,10 +613,6 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
             // Setup Widgets
             actionMenu.setCallbackHandler(battleActionCallbacks);
             attackMenu.init(battleSystem.getActiveMonster());
-            Array monsters = new Array();
-            monsters.addAll(leftTeam.monsters);
-            monsters.addAll(rightTeam.monsters);
-            battleQueueWidget.init(monsters);
 
             state = BattleState.ACTIONMENU;
         }
@@ -637,9 +634,8 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
 
         public void toAnimation() {
             reset();
-            battleQueueWidget.addToStage(stage);
-
             toInfoLabel();
+            battleQueueWidget.addToStage(stage);
             actionMenu.setCallbackHandler(infoLabelCallbacks);
 
             state = BattleState.ANIMATION;

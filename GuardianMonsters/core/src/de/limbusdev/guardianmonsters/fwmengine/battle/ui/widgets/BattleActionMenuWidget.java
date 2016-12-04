@@ -18,14 +18,16 @@ public class BattleActionMenuWidget extends BattleWidget {
     public ImageButton bagButton;
     public ImageButton extraButton;
 
+    private CallbackHandler callbackHandler;
+
     /**
      *
      * @param skin battle action UI skin
      */
-    public BattleActionMenuWidget(final AHUD hud, Skin skin, final CallbackHandler callbackHandler) {
+    public BattleActionMenuWidget(final AHUD hud, Skin skin, CallbackHandler callbackHandler) {
         super(hud);
 
-        //this.setBounds(0,0,GS.RES_X,GS.RES_Y/4);
+        this.callbackHandler = callbackHandler;
 
         // Monster Button
         monsterButton = new ImageButton(skin, "b-attack-monsters");
@@ -53,7 +55,7 @@ public class BattleActionMenuWidget extends BattleWidget {
         addActor(bagButton);
         addActor(extraButton);
 
-        setCallbackHandler(callbackHandler);
+        initCallbackHandler();
     }
 
 
@@ -67,7 +69,7 @@ public class BattleActionMenuWidget extends BattleWidget {
         super.addToStageAndFadeIn(newParent);
     }
 
-    public void setCallbackHandler(final CallbackHandler callbackHandler) {
+    private void initCallbackHandler() {
         backButton.addListener(
             new ClickListener() {
                 @Override
@@ -103,6 +105,10 @@ public class BattleActionMenuWidget extends BattleWidget {
                 }
             }
         );
+    }
+
+    public void setCallbackHandler(CallbackHandler callbackHandler) {
+        this.callbackHandler = callbackHandler;
     }
 
     public void disableAllButBackButton() {

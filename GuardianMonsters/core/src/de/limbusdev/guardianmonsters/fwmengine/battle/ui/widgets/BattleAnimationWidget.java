@@ -35,9 +35,10 @@ public class BattleAnimationWidget extends BattleWidget implements ObservableWid
     private Media media;
 
     public boolean attackAnimationRunning;
-    private ImageButton nextButton;
 
-    public BattleAnimationWidget(final AHUD hud) {
+    private CallbackHandler callbackHandler;
+
+    public BattleAnimationWidget(final AHUD hud, CallbackHandler callbackHandler) {
         super(hud);
 
         observers = new Array<WidgetObserver>();
@@ -46,20 +47,8 @@ public class BattleAnimationWidget extends BattleWidget implements ObservableWid
         this.setBounds(0,0,0,0);
         this.media = Services.getMedia();
 
+        this.callbackHandler = callbackHandler;
 
-        // Next Button
-        nextButton = new ImageButton(Services.getUI().getBattleSkin(), "b-back-eob");
-        nextButton.setPosition(GS.RES_X, 0, Align.bottomRight);
-
-        nextButton.addListener(
-            new ClickListener() {
-                @Override
-                public void clicked(InputEvent event, float x, float y) {
-                    hud.onButtonClicked(ButtonIDs.ACTION_NEXT);
-                    nextButton.remove();
-                }
-            }
-        );
     }
 
     /**
@@ -221,6 +210,14 @@ public class BattleAnimationWidget extends BattleWidget implements ObservableWid
                     Services.getAudio().playSound(AudioAssets.get().getBattleSFX(attack.sfxType,0));
                 }
             }),
+            Actions.run(
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        callbackHandler.onHitAnimationComplete();
+                    }
+                }
+            ),
             Actions.run(new Runnable() {
                 @Override
                 public void run() {
@@ -248,11 +245,6 @@ public class BattleAnimationWidget extends BattleWidget implements ObservableWid
         monImgs.get(pos).addAction(Actions.sequence(Actions.alpha(0, 2), Actions.visible(false)));
     }
 
-    public void nextAnimation() {
-        addActor(nextButton);
-    }
-
-
     @Override
     public void addWidgetObserver(WidgetObserver wo) {
         observers.add(wo);
@@ -271,6 +263,10 @@ public class BattleAnimationWidget extends BattleWidget implements ObservableWid
         private static final IntVector2 OPPO_MID = new IntVector2(GS.RES_X-GS.COL*7,GS.ROW*18);
         private static final IntVector2 OPPO_BOT = new IntVector2(GS.RES_X-GS.COL*1,GS.ROW*15);
         private static final IntVector2 OPPO_TOP = new IntVector2(GS.RES_X-GS.COL*13,GS.ROW*21);
+    }
+
+    public interface CallbackHandler {
+        public void onHitAnimationComplete();
     }
 
 }

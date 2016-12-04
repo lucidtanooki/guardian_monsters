@@ -4,8 +4,10 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 
+import de.limbusdev.guardianmonsters.fwmengine.battle.control.BattleStringBuilder;
 import de.limbusdev.guardianmonsters.fwmengine.battle.control.BattleSystem;
 import de.limbusdev.guardianmonsters.fwmengine.battle.control.MonsterManager;
+import de.limbusdev.guardianmonsters.fwmengine.battle.model.AttackCalculationReport;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.AttackMenuWidget;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleActionMenuWidget;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleAnimationWidget;
@@ -64,13 +66,14 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
     private BattleActionMenuWidget.CallbackHandler  backToActionMenuCallbacks;
     private BattleActionMenuWidget.CallbackHandler  escapeSuccessCallbacks;
     private BattleActionMenuWidget.CallbackHandler  escapeFailCallbacks;
+    private BattleAnimationWidget.CallbackHandler   battleAnimationCallbacks;
 
 
     // ....................................................................................... other
 
-    private TeamComponent heroTeam, opponentTeam;
+    private TeamComponent leftTeam, rightTeam;
 
-    private ArrayMap<Integer, Monster> heroTeamSlots, opponentTeamSlots;
+    private ArrayMap<Integer, Monster> leftTeamSlots, rightTeamSlots;
 
     private BattleState state;
 
@@ -119,27 +122,27 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
         reset();
 
         // Give each monster a position on the battle field
-        heroTeamSlots = new ArrayMap<Integer, Monster>();
+        leftTeamSlots = new ArrayMap<Integer, Monster>();
         int i = 0;
         for(Monster m : heroTeam.monsters) {
             if(m.getHP() > 0) {
-                heroTeamSlots.put(i,m);
+                leftTeamSlots.put(i,m);
                 i++;
             }
         }
 
         i=0;
-        opponentTeamSlots = new ArrayMap<Integer, Monster>();
+        rightTeamSlots = new ArrayMap<Integer, Monster>();
         for(Monster m : opponentTeam.monsters) {
             if(m.getHP() > 0) {
-                opponentTeamSlots.put(i,m);
+                rightTeamSlots.put(i,m);
                 i++;
             }
         }
 
         // Keep monster teams
-        this.heroTeam = heroTeam;
-        this.opponentTeam = opponentTeam;
+        this.leftTeam = heroTeam;
+        this.rightTeam = opponentTeam;
 
         // initialize independent battle system
         battleSystem = new BattleSystem(heroTeam.monsters,opponentTeam.monsters, battleSystemCallbacks);
@@ -147,8 +150,8 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
         // initialize attack menu with active monster
         attackMenu.init(battleSystem.getActiveMonster());
 
-        statusWidget.init(heroTeamSlots, opponentTeamSlots);
-        animationWidget.init(heroTeamSlots, opponentTeamSlots);
+        statusWidget.init(leftTeamSlots, rightTeamSlots);
+        animationWidget.init(leftTeamSlots, rightTeamSlots);
         targetMenuWidget.init(heroTeam.monsters,opponentTeam.monsters);
 
         show();
@@ -177,8 +180,8 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
         // Stop AI
         // Check if Hero lost fight
         boolean heroLost = true;
-//        for(Integer i : heroTeam.keys())
-//            if(!(heroTeam.get(i).monster.getHP() == 0))
+//        for(Integer i : leftTeam.keys())
+//            if(!(leftTeam.get(i).monster.getHP() == 0))
 //                heroLost = false;
 
         // Hide UI Elements
@@ -192,7 +195,7 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
             endOfBattleWidget.messageLabel.setText(Services.getL18N().l18n().get("batt_you_won"));
         }
 
-        changeToWidgetSet(BattleState.ENDOFBATTLE);
+        battleStateSwitcher.toEndOfBattle();
     }
 
 
@@ -206,7 +209,7 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
         // Widgets
         statusWidget      = new BattleStatusOverviewWidget(this, skin);
 
-        animationWidget   = new BattleAnimationWidget(this);
+        animationWidget   = new BattleAnimationWidget(this, battleAnimationCallbacks);
         animationWidget   .addWidgetObserver(this);
 
         mainMenu          = new BattleMainMenuWidget(   this, skin, mainMenuCallbacks);
@@ -241,18 +244,18 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
 //
 //        // Change the indicator position to an active fighter
 //        if(m.battleFieldSide)
-//            heroTeam.removeValue(m, true);      // Hero Team
+//            leftTeam.removeValue(m, true);      // Hero Team
 //        else
 //            oppoTeam.removeValue(m, true);   // Opponent Team
 //
 //        // Spread EXP
 //        if(!m.battleFieldSide) {
-//            // Defeated Monster was part of opponents heroTeam
+//            // Defeated Monster was part of opponents leftTeam
 //            int exp = m.monster.level * (m.monster.getHPfull() + m.monster.physStrength);
-//            exp /= heroTeam.size;
-//            for(Integer i : heroTeam.keys())
-//                if(heroTeam.get(i).monster.getHP() > 0)
-//                    MonsterManager.earnEXP(heroTeam.get(i).monster,exp);
+//            exp /= leftTeam.size;
+//            for(Integer i : leftTeam.keys())
+//                if(leftTeam.get(i).monster.getHP() > 0)
+//                    MonsterManager.earnEXP(leftTeam.get(i).monster,exp);
 //        }
 
     }
@@ -267,8 +270,8 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
 //        if(m.battleFieldSide) {
 //            // if Player has chosen attacks
 //            boolean allChosen = true;
-//            for (Integer i : heroTeam.keys()) {
-//                MonsterInBattle mib = heroTeam.get(i);
+//            for (Integer i : leftTeam.keys()) {
+//                MonsterInBattle mib = leftTeam.get(i);
 //                allChosen = allChosen & mib.attackChosen;
 //            }
 //            if (allChosen) {
@@ -285,45 +288,7 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
 
     @Override
     public void getNotified(ObservableWidget ow) {
-        if(ow instanceof BattleAnimationWidget) {
-            onBattleAnimationUpdate((BattleAnimationWidget) ow);
-        }
-    }
-
-    /**
-     * Fades out current widget and changes to another one, fading it in
-     * @param state
-     */
-    private void changeToWidgetSet(BattleState state) {
-
-        battleStateSwitcher.reset();
-
-        switch(state) {
-            case ACTIONMENU:
-                battleStateSwitcher.toActionMenu();
-                break;
-
-            case ATTACKMENU:
-                battleStateSwitcher.toAttackMenu();
-                break;
-
-            case ANIMATION:
-                battleStateSwitcher.toAnimation();
-                break;
-
-            case ENDOFBATTLE:
-                battleStateSwitcher.toEndOfBattle();
-                break;
-
-            case TARGET_CHOICE:
-                battleStateSwitcher.toTargetChoice();
-                break;
-
-            default:
-                battleStateSwitcher.toMainMenu();
-                break;
-        }
-        this.state = state;
+        // TODO
     }
 
 
@@ -346,7 +311,8 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
 
             @Override
             public void onBackButton() {
-                changeToWidgetSet(BattleState.MAINMENU);
+                System.out.println("BattleStartLabel: onBackButton()");
+                battleStateSwitcher.toMainMenu();
             }
 
             @Override
@@ -368,7 +334,8 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
 
             @Override
             public void onBackButton() {
-                changeToWidgetSet(BattleState.MAINMENU);
+                System.out.println("BattleActionButtons: onBackButton()");
+                battleStateSwitcher.toMainMenu();
             }
 
             @Override
@@ -381,7 +348,7 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
             @Override
             public void onRunButton() {
                 System.out.println("Input: Run Button");
-                if(MonsterManager.tryToRun(heroTeam.monsters,opponentTeam.monsters)) {
+                if(MonsterManager.tryToRun(leftTeam.monsters, rightTeam.monsters)) {
                     battleStateSwitcher.toEscapeSuccessInfo();
                 } else {
                     battleStateSwitcher.toEscapeFailInfo();
@@ -390,8 +357,9 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
 
             @Override
             public void onSwordButton() {
+                System.out.println("MainMenuButtons: onSwordButton()");
                 System.out.println("Input: Sword Button");
-                changeToWidgetSet(BattleState.ACTIONMENU);
+                battleSystem.continueBattle();
             }
         };
 
@@ -408,7 +376,8 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
 
             @Override
             public void onBackButton() {
-                changeToWidgetSet(BattleState.ACTIONMENU);
+                System.out.println("InfoLabelButtons: onBackButton()");
+                battleSystem.continueBattle();
             }
 
             @Override
@@ -421,7 +390,7 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
             @Override
             public void onBackButton() {
                 boolean teamOk = false;
-                for(Monster m : heroTeam.monsters) {
+                for(Monster m : leftTeam.monsters) {
                     if(m.getHP() > 0) {
                         teamOk = true || teamOk;
                     } else {
@@ -436,16 +405,17 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
         attackMenuCallbacks = new SevenButtonsWidget.CallbackHandler() {
             @Override
             public void onButtonNr(int nr) {
+                System.out.println("AttackMenuButtons: onButtonNr("+nr+")");
                 System.out.println("Input: User chose attack Nr. " + nr);
                 battleSystem.setChosenAttack(nr);
-                changeToWidgetSet(BattleState.TARGET_CHOICE);
+                battleStateSwitcher.toTargetChoice();
             }
         };
 
         battleSystemCallbacks = new BattleSystem.CallbackHandler() {
             @Override
             public void onNextTurn() {
-                changeToWidgetSet(BattleState.ACTIONMENU);
+                // TODO
             }
 
             @Override
@@ -457,12 +427,12 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
             public void onMonsterKilled(Monster m) {
                 int pos;
                 boolean side;
-                if(heroTeamSlots.containsValue(m,true)) {
+                if(leftTeamSlots.containsValue(m,true)) {
                     side = true;
-                    pos = heroTeamSlots.getKey(m,true);
+                    pos = leftTeamSlots.getKey(m,true);
                 } else {
                     side = false;
-                    pos = opponentTeamSlots.getKey(m,true);
+                    pos = rightTeamSlots.getKey(m,true);
                 }
                 animationWidget.animateMonsterKO(pos,side);
             }
@@ -473,17 +443,24 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
             }
 
             @Override
-            public void onAttack(Monster attacker, Monster target, Attack attack) {
+            public void onAttack(Monster attacker, Monster target, Attack attack, AttackCalculationReport rep) {
+
+                // Change widget set
+                battleStateSwitcher.toAnimation();
+                infoLabelWidget.setWholeText(BattleStringBuilder.givenDamage(attacker,target,rep));
+                infoLabelWidget.animateTextAppearance();
+
+                // Start attack animation
                 int attPos, defPos;
                 boolean side;
-                if(heroTeamSlots.containsValue(attacker,false)) {
+                if(leftTeamSlots.containsValue(attacker,false)) {
                     side = true;
-                    attPos = heroTeamSlots.getKey(attacker,false);
-                    defPos = opponentTeamSlots.getKey(target, false);
+                    attPos = leftTeamSlots.getKey(attacker,false);
+                    defPos = rightTeamSlots.getKey(target, false);
                 } else {
                     side = false;
-                    defPos = heroTeamSlots.getKey(target,false);
-                    attPos = opponentTeamSlots.getKey(attacker, false);
+                    defPos = leftTeamSlots.getKey(target,false);
+                    attPos = rightTeamSlots.getKey(attacker, false);
                 }
                 animationWidget.animateAttack(attPos, defPos, side, attack);
             }
@@ -492,9 +469,9 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
         targetMenuCallbacks = new SevenButtonsWidget.CallbackHandler() {
             @Override
             public void onButtonNr(int nr) {
+                System.out.println("TargetMenuButtons: onButtonNr("+nr+")");
                 Monster target = targetMenuWidget.getMonsterOfIndex(nr);
                 battleSystem.setChosenTarget(target);
-                changeToWidgetSet(BattleState.ANIMATION);
                 battleSystem.attack();
             }
         };
@@ -512,6 +489,7 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
 
             @Override
             public void onBackButton() {
+                System.out.println("BackToActionMenuButtons: onBackButton()");
                 battleStateSwitcher.toActionMenu();
             }
 
@@ -534,6 +512,7 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
 
             @Override
             public void onBackButton() {
+                System.out.println("EscapeSuccessButtons: onBackButton()");
                 goToPreviousScreen();
             }
 
@@ -556,12 +535,20 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
 
             @Override
             public void onBackButton() {
-                battleSystem.nextMonster();
+                System.out.println("EscapeFailButtons: onBackButton()");
+                battleSystem.continueBattle();
             }
 
             @Override
             public void onExtraButton() {
                 // not needed
+            }
+        };
+
+        battleAnimationCallbacks = new BattleAnimationWidget.CallbackHandler() {
+            @Override
+            public void onHitAnimationComplete() {
+                battleSystem.applyAttack();
             }
         };
     }
@@ -578,11 +565,6 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
      */
     @Override
     public void onButtonClicked(int id) {}
-
-    private void onBattleAnimationUpdate(BattleAnimationWidget baw) {
-        // Next choice
-    }
-
 
 
     // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ GETTERS & SETTERS
@@ -631,8 +613,8 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
             actionMenu.setCallbackHandler(battleActionCallbacks);
             attackMenu.init(battleSystem.getActiveMonster());
             Array monsters = new Array();
-            monsters.addAll(heroTeam.monsters);
-            monsters.addAll(opponentTeam.monsters);
+            monsters.addAll(leftTeam.monsters);
+            monsters.addAll(rightTeam.monsters);
             battleQueueWidget.init(monsters);
 
             state = BattleState.ACTIONMENU;
@@ -646,7 +628,7 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
 
         public void toEndOfBattle() {
             reset();
-            //endOfBattleWidget.init(!checkIfWholeTeamKO(heroTeam));
+            //endOfBattleWidget.init(!checkIfWholeTeamKO(leftTeam));
             endOfBattleWidget.addToStageAndFadeIn(stage);
             statusWidget.addToStage(stage);
 
@@ -655,12 +637,10 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
 
         public void toAnimation() {
             reset();
-            actionMenu.addToStage(stage);
-            statusWidget.addToStage(stage);
             battleQueueWidget.addToStage(stage);
-            infoLabelWidget.addToStage(stage);
 
-            actionMenu.disableAllButBackButton();
+            toInfoLabel();
+            actionMenu.setCallbackHandler(infoLabelCallbacks);
 
             state = BattleState.ANIMATION;
         }

@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 
 import de.limbusdev.guardianmonsters.fwmengine.battle.control.BattleSystem;
+import de.limbusdev.guardianmonsters.fwmengine.battle.model.AttackCalculationReport;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TeamComponent;
 import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager;
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.BattleFactory;
@@ -87,7 +88,7 @@ public class GameStateDebugger {
             }
 
             @Override
-            public void onAttack(Monster attacker, Monster target, Attack attack) {
+            public void onAttack(Monster attacker, Monster target, Attack attack, AttackCalculationReport rep) {
                 // TODO
             }
 

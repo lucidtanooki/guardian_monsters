@@ -46,7 +46,7 @@ public class MonsterManager {
     }
 
     /**
-     * Calculates and applies attacks, the report attributes are for information only
+     * Calculates attacks, the report attributes are for information only
      * @param att
      * @param def
      * @return
@@ -64,14 +64,8 @@ public class MonsterManager {
             defenseRatio = (att.magicStrength*1f) / (def.magicDef*1f);
         }
 
-        float damage = (effectiveness * attack.damage)*defenseRatio;
-
         /* Calculate Damage */
-        if (def.getHP() - damage < 0) {
-            def.setHP(0);
-        } else {
-            def.setHP(def.getHP() - MathUtils.round(damage));
-        }
+        float damage = (effectiveness * attack.damage)*defenseRatio;
 
         report.damage = MathUtils.round(damage);
         report.effectiveness = effectiveness;
@@ -84,6 +78,18 @@ public class MonsterManager {
                 + l18n.get(MonsterInformation.getInstance().monsterNames.get(def.ID - 1)));
 
         return report;
+    }
+
+    /**
+     * Applies the previously calculated attack
+     * @param rep
+     */
+    public static void apply(AttackCalculationReport rep) {
+        if (rep.defender.getHP() - rep.damage < 0) {
+            rep.defender.setHP(0);
+        } else {
+            rep.defender.setHP(rep.defender.getHP() - MathUtils.round(rep.damage));
+        }
     }
 
     public static boolean tryToRun(Array<Monster> escapingTeam, Array<Monster> attackingTeam) {

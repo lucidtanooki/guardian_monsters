@@ -25,7 +25,7 @@ public class InfoLabelWidget extends BattleWidget {
 
         infoBGImg = new Image(skin.getDrawable("label"));
         infoBGImg.setSize(372*GS.zoom,62*GS.zoom);
-        infoBGImg.setPosition(GS.RES_X / 2, GS.zoom *1, Align.bottom);
+        infoBGImg.setPosition(GS.RES_X / 2, GS.zoom *2, Align.bottom);
 
         Label.LabelStyle labs = new Label.LabelStyle();
         labs.font = skin.getFont("default-font");

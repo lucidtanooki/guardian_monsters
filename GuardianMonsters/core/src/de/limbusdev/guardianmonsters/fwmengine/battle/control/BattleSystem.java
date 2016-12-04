@@ -122,6 +122,8 @@ public class BattleSystem {
         if (currentRound.size == 0) {
             newRound();
         }
+
+        callbackHandler.onQueueUpdated();
     }
 
     public boolean continueBattle() {
@@ -188,16 +190,27 @@ public class BattleSystem {
      * Sorts all left monsters of the round by speed
      */
     private void reSortQueues() {
+        System.out.println("-- Current Round --");
         currentRound.sort(new MonsterSpeedComparator());
+        DebugOutput.printRound(currentRound);
+
+        System.out.println("-- Next Round --");
         nextRound.sort(new MonsterSpeedComparator());
-        callbackHandler.onQueueUpdated();
+        DebugOutput.printRound(nextRound);
+
+        try {
+            callbackHandler.onQueueUpdated();
+        } catch(Exception e) {
+            // TODO
+        }
     }
 
-    public Array<Monster> getMonsterQueue() {
-        Array<Monster> queue = new Array<Monster>();
-        queue.addAll(currentRound);
-        queue.addAll(nextRound);
-        return queue;
+    public Array<Monster> getCurrentRound() {
+        return currentRound;
+    }
+
+    public Array<Monster> getNextRound() {
+        return nextRound;
     }
 
     public void setChosenTarget(Monster target) {

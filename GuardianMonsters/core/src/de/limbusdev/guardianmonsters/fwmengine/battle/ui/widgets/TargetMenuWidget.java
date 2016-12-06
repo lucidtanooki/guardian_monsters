@@ -6,6 +6,7 @@ import com.badlogic.gdx.utils.ArrayMap;
 
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Stack;
 
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.AHUD;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
@@ -17,6 +18,9 @@ import de.limbusdev.guardianmonsters.model.MonsterInformation;
  */
 
 public class TargetMenuWidget extends SevenButtonsWidget implements Observer {
+
+    public static final boolean LEFT = true;
+    public static final boolean RIGHT = false;
 
     private ArrayMap<Integer,Monster> leftTeam, rightTeam;
 
@@ -64,6 +68,23 @@ public class TargetMenuWidget extends SevenButtonsWidget implements Observer {
             return leftTeam.get(index);
         } else {
             return rightTeam.get(index);
+        }
+    }
+
+    public void disableSide(boolean side) {
+        int from, to;
+        if(LEFT) {
+            // Disable all Buttons for the left team
+            from = 0;
+            to = 2;
+        } else {
+            // Disable all Buttons for the right team
+            from = 4;
+            to = 6;
+        }
+
+        for(int i = from; i<=to; i++) {
+            disableButton(i);
         }
     }
 

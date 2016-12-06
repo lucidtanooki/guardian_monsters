@@ -94,9 +94,6 @@ public class BattleSystem {
         nextMonster();
 
         checkKO();
-
-        // Sort in case current speed values have changed
-        reSortQueues();
     }
 
     public void applyAttack() {
@@ -112,7 +109,7 @@ public class BattleSystem {
     }
 
     public void nextMonster() {
-        nextRound.add(currentRound.pop());
+        nextRound.insert(0,currentRound.pop());
         chosenAttack = 0;
         chosenTarget = null;
         choiceComplete = false;
@@ -147,7 +144,7 @@ public class BattleSystem {
         nextRound = new Array<Monster>();
 
         // Sort monsters by speed
-        reSortQueues();
+        sortQueue(currentRound);
 
         System.out.println("\n=== NEW ROUND ===");
         DebugOutput.printRound(currentRound);
@@ -189,14 +186,9 @@ public class BattleSystem {
     /**
      * Sorts all left monsters of the round by speed
      */
-    private void reSortQueues() {
-        System.out.println("-- Current Round --");
-        currentRound.sort(new MonsterSpeedComparator());
-        DebugOutput.printRound(currentRound);
-
-        System.out.println("-- Next Round --");
-        nextRound.sort(new MonsterSpeedComparator());
-        DebugOutput.printRound(nextRound);
+    private void sortQueue(Array<Monster> queue) {
+        queue.sort(new MonsterSpeedComparator());
+        DebugOutput.printRound(queue);
 
         try {
             callbackHandler.onQueueUpdated();

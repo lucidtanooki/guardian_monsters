@@ -257,9 +257,9 @@ public class BattleAnimationWidget extends BattleWidget implements ObservableWid
 
 
     private final static class ImPos {
-        private static final IntVector2 HERO_MID = new IntVector2(GS.COL*7,GS.ROW*18);
-        private static final IntVector2 HERO_BOT = new IntVector2(GS.COL*1,GS.ROW*15);
-        private static final IntVector2 HERO_TOP = new IntVector2(GS.COL*13,GS.ROW*21);
+        private static final IntVector2 HERO_MID = new IntVector2(GS.COL*13,GS.ROW*18);
+        private static final IntVector2 HERO_BOT = new IntVector2(GS.COL*7,GS.ROW*15);
+        private static final IntVector2 HERO_TOP = new IntVector2(GS.COL*19,GS.ROW*21);
         private static final IntVector2 OPPO_MID = new IntVector2(GS.RES_X-GS.COL*7,GS.ROW*18);
         private static final IntVector2 OPPO_BOT = new IntVector2(GS.RES_X-GS.COL*1,GS.ROW*15);
         private static final IntVector2 OPPO_TOP = new IntVector2(GS.RES_X-GS.COL*13,GS.ROW*21);

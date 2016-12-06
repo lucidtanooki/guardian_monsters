@@ -154,6 +154,7 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
         statusWidget.init(leftTeamSlots, rightTeamSlots);
         animationWidget.init(leftTeamSlots, rightTeamSlots);
         targetMenuWidget.init(heroTeam.monsters,opponentTeam.monsters);
+        targetMenuWidget.disableSide(TargetMenuWidget.LEFT);
 
         show();
     }

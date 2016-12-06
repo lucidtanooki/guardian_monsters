@@ -84,13 +84,12 @@ public class SevenButtonsWidget extends BattleWidget {
         for (int i = 0; i < 7; i++) {
             final int j = i;
             final TextButton attButt = buttons.get(i);
-            attButt.clearListeners();
             attButt.addListener(
                 new ClickListener() {
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
                         super.clicked(event,x,y);
-                        System.out.println("AttackMenuWidget: Clicked attack " + j);
+                        System.out.println("SevenButtonsWidget: Clicked button " + j);
                         if(!attButt.isDisabled()) {
                             callbackHandler.onButtonNr(j);
                         }
@@ -106,11 +105,13 @@ public class SevenButtonsWidget extends BattleWidget {
 
     protected void enableButton(int index) {
         buttons.get(index).setColor(Color.WHITE);
+        buttons.get(index).setDisabled(false);
         buttons.get(index).setTouchable(Touchable.enabled);
     }
 
     protected void disableButton(int index) {
         buttons.get(index).setColor(Color.GRAY);
+        buttons.get(index).setDisabled(true);
         buttons.get(index).setTouchable(Touchable.disabled);
     }
 

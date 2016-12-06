@@ -1,6 +1,7 @@
 package de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets;
 
 import com.badlogic.gdx.Net;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -41,14 +42,10 @@ public class BattleQueueWidget extends BattleWidget {
         bgIndicator.setPosition(-4,0,align);
         addActor(bgIndicator);
 
-        int i=0;
+        int pos=0;
 
-        Array<Monster> tmpCurrent = new Array<Monster>();
-        tmpCurrent.addAll(current);
-        tmpCurrent.sort(new MonsterSpeedComparator());
-        tmpCurrent.reverse();
-
-        for(Monster m : tmpCurrent) {
+        for(int i = current.size-1; i>=0; i--) {
+            Monster m = current.get(i);
             Image previewBackground = new Image(Services.getUI().getBattleSkin().getDrawable("monster-preview"));
             Group monPreview = new Group();
             System.out.println(m.ID + "_" + m.evolution+1);
@@ -59,20 +56,17 @@ public class BattleQueueWidget extends BattleWidget {
             monPreview.addActor(previewBackground);
             monPreview.addActor(preview);
 
-            monPreview.setPosition(startx,starty+i*previewYoffset+queueOffset,align);
+            monPreview.setPosition(startx,starty+pos*previewYoffset+queueOffset,align);
 
             addActor(monPreview);
 
-            i++;
+            pos++;
         }
 
-        Array<Monster> tmpNext = new Array<Monster>();
-        tmpNext.addAll(next);
-        tmpNext.sort(new MonsterSpeedComparator());
-        tmpNext.reverse();
-
-        for(Monster m : tmpNext) {
+        for(int i = next.size-1; i>=0; i--) {
+            Monster m = next.get(i);
             Image previewBackground = new Image(Services.getUI().getBattleSkin().getDrawable("monster-preview"));
+            previewBackground.setColor(Color.GRAY);
             Group monPreview = new Group();
             System.out.println(m.ID + "_" + m.evolution+1);
             Image preview = new Image(Services.getMedia().getTextureAtlas(TextureAssets.battleMonsterPreviews).findRegion(
@@ -82,11 +76,11 @@ public class BattleQueueWidget extends BattleWidget {
             monPreview.addActor(previewBackground);
             monPreview.addActor(preview);
 
-            monPreview.setPosition(startx,starty+i*previewYoffset+queueOffset,align);
+            monPreview.setPosition(startx,starty+pos*previewYoffset+queueOffset,align);
 
             addActor(monPreview);
 
-            i++;
+            pos++;
         }
     }
 }

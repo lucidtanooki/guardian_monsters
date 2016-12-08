@@ -10,6 +10,7 @@ import com.badlogic.gdx.utils.Align;
 
 import de.limbusdev.guardianmonsters.enums.ButtonIDs;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.BattleHUD;
+import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.utils.GS;
 
 /**
@@ -64,9 +65,9 @@ public class EndOfBattleWidget extends BattleWidget {
      */
     public void init(boolean won) {
         if(won) {
-            messageLabel.setText("You won!");
+            messageLabel.setText(Services.getL18N().l18n().get("batt_game_over"));
         } else {
-            messageLabel.setText("Game Over!");
+            messageLabel.setText(Services.getL18N().l18n().get("batt_you_won"));
         }
     }
 

@@ -6,7 +6,6 @@ import com.badlogic.gdx.utils.ArrayMap;
 
 import java.util.Observable;
 import java.util.Observer;
-import java.util.Stack;
 
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.AHUD;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
@@ -48,6 +47,7 @@ public class TargetMenuWidget extends SevenButtonsWidget implements Observer {
                     MonsterInformation.getInstance().monsterNames.get(m.ID-1)));
                 enableButton(i);
                 i++;
+                m.addObserver(this);
             }
         }
 
@@ -59,6 +59,7 @@ public class TargetMenuWidget extends SevenButtonsWidget implements Observer {
                     MonsterInformation.getInstance().monsterNames.get(m.ID-1)));
                 enableButton(i);
                 i++;
+                m.addObserver(this);
             }
         }
     }
@@ -73,7 +74,7 @@ public class TargetMenuWidget extends SevenButtonsWidget implements Observer {
 
     public void disableSide(boolean side) {
         int from, to;
-        if(LEFT) {
+        if(side == LEFT) {
             // Disable all Buttons for the left team
             from = 0;
             to = 2;
@@ -98,7 +99,7 @@ public class TargetMenuWidget extends SevenButtonsWidget implements Observer {
                 if(leftTeam.containsValue(observedMonster,false)) {
                     index = leftTeam.indexOfValue(observedMonster,false);
                 } else {
-                    index = rightTeam.indexOfValue(observedMonster,false);
+                    index = rightTeam.indexOfValue(observedMonster,false)+4;
                 }
                 disableButton(index);
             }

@@ -73,11 +73,6 @@ public class GameStateDebugger {
 
         BattleSystem bs = new BattleSystem(heroTeam.monsters, oppTeam.monsters, new BattleSystem.CallbackHandler() {
             @Override
-            public void onNextTurn() {
-                // TODO
-            }
-
-            @Override
             public void onMonsterKilled(Monster m) {
                 // TODO
             }
@@ -94,6 +89,11 @@ public class GameStateDebugger {
 
             @Override
             public void onPlayersTurn() {
+                // TODO
+            }
+
+            @Override
+            public void onBattleEnds(boolean winnerSide) {
                 // TODO
             }
         });

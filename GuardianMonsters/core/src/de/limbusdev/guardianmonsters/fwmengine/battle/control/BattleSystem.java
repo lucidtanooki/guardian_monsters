@@ -19,9 +19,8 @@ public class BattleSystem {
 
     public static String TAG = BattleSystem.class.getSimpleName();
 
-    public static final int REMOVED_MONSTER=0;
-    public static final int CHANGED_POSITION=1;
-    public static final int NEXT_MONSTER=2;
+    public static final boolean LEFT = true;
+    public static final boolean RIGHT = false;
 
     private Array<Monster> leftTeam;
     private Array<Monster> rightTeam;
@@ -89,15 +88,12 @@ public class BattleSystem {
         latestAttackReport = MonsterManager.calcAttack(
             getActiveMonster(), target, getActiveMonster().attacks.get(attack));
         callbackHandler.onAttack(getActiveMonster(), target, getActiveMonster().attacks.get(attack), latestAttackReport);
-
-        // Remove active monster from current round and add it to next round
-        nextMonster();
-
-        checkKO();
     }
 
     public void applyAttack() {
         MonsterManager.apply(latestAttackReport);
+        nextMonster();
+        checkKO();
     }
 
     public void attack(int attack) {
@@ -123,16 +119,31 @@ public class BattleSystem {
         callbackHandler.onQueueUpdated();
     }
 
-    public boolean continueBattle() {
-        if(rightTeam.contains(getActiveMonster(),false)) {
-            // It's AI's turn
-            letAItakeTurn();
-            return false;
+    public void continueBattle() {
+
+        // Check if one team is KO
+        if(isTeamKO(leftTeam) || isTeamKO(rightTeam)) {
+            callbackHandler.onBattleEnds(isTeamKO(rightTeam));
         } else {
-            // It's player's turn
-            callbackHandler.onPlayersTurn();
-            return true;
+
+            if (rightTeam.contains(getActiveMonster(), false)) {
+                // It's AI's turn
+                letAItakeTurn();
+            } else {
+                // It's player's turn
+                callbackHandler.onPlayersTurn();
+            }
         }
+    }
+
+    private boolean isTeamKO(Array<Monster> team) {
+        boolean isKO = true;
+
+        for(Monster m : team) {
+            isKO = isKO && m.getHP() == 0;
+        }
+
+        return isKO;
     }
 
     /**
@@ -244,10 +255,10 @@ public class BattleSystem {
 
     // INNER INTERFACE
     public interface CallbackHandler {
-        public void onNextTurn();
-        public void onMonsterKilled(Monster m);
-        public void onQueueUpdated();
-        public void onAttack(Monster attacker, Monster target, Attack attack, AttackCalculationReport rep);
-        public void onPlayersTurn();
+        void onMonsterKilled(Monster m);
+        void onQueueUpdated();
+        void onAttack(Monster attacker, Monster target, Attack attack, AttackCalculationReport rep);
+        void onPlayersTurn();
+        void onBattleEnds(boolean winnerSide);
     }
 }

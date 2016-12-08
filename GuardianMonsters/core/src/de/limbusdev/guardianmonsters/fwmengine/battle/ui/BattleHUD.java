@@ -48,7 +48,6 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
     private AttackMenuWidget            attackMenu;
     private BattleAnimationWidget       animationWidget;
     private BattleStatusOverviewWidget  statusWidget;
-    private EndOfBattleWidget           endOfBattleWidget;
     private BattleQueueWidget           battleQueueWidget;
     private InfoLabelWidget             infoLabelWidget;
     private TargetMenuWidget            targetMenuWidget;
@@ -57,7 +56,7 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
     private BattleActionMenuWidget.CallbackHandler  battleActionCallbacks;
     private BattleMainMenuWidget.CallbackHandler    mainMenuCallbacks;
     private BattleActionMenuWidget.CallbackHandler  infoLabelCallbacks;
-    private EndOfBattleWidget.CallbackHandler       endOfBattleCallbacks;
+    private BattleActionMenuWidget.CallbackHandler  endOfBattleCallbacks;
     private SevenButtonsWidget.CallbackHandler      attackMenuCallbacks;
     private BattleSystem.CallbackHandler            battleSystemCallbacks;
     private SevenButtonsWidget.CallbackHandler      targetMenuCallbacks;
@@ -175,31 +174,6 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
         battleStateSwitcher.toBattleStart();
     }
 
-    /**
-     * Handle End of Battle
-     */
-    public void handleEndOfBattle() {
-        // Stop AI
-        // Check if Hero lost fight
-        boolean heroLost = true;
-//        for(Integer i : leftTeam.keys())
-//            if(!(leftTeam.get(i).monster.getHP() == 0))
-//                heroLost = false;
-
-        // Hide UI Elements
-        actionMenu.addFadeOutAction(.5f);
-        mainMenu.addFadeOutAction(.3f);
-
-        // Set message
-        if(heroLost) {
-            endOfBattleWidget.messageLabel.setText(Services.getL18N().l18n().get("batt_game_over"));
-        } else {
-            endOfBattleWidget.messageLabel.setText(Services.getL18N().l18n().get("batt_you_won"));
-        }
-
-        battleStateSwitcher.toEndOfBattle();
-    }
-
 
     // ........................................................................ setup
 
@@ -216,7 +190,6 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
 
         mainMenu          = new BattleMainMenuWidget(   this, skin, mainMenuCallbacks);
         actionMenu        = new BattleActionMenuWidget( this, skin, battleActionCallbacks);
-        endOfBattleWidget = new EndOfBattleWidget(      this, skin, endOfBattleCallbacks);
         attackMenu        = new AttackMenuWidget(       this, skin, attackMenuCallbacks);
         targetMenuWidget  = new TargetMenuWidget(       this, skin, targetMenuCallbacks);
 
@@ -388,7 +361,17 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
             }
         };
 
-        endOfBattleCallbacks = new EndOfBattleWidget.CallbackHandler() {
+        endOfBattleCallbacks = new BattleActionMenuWidget.CallbackHandler() {
+            @Override
+            public void onMonsterButton() {
+                // TODO
+            }
+
+            @Override
+            public void onBagButton() {
+                // TODO
+            }
+
             @Override
             public void onBackButton() {
                 boolean teamOk = false;
@@ -401,6 +384,11 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
                 }
                 if(teamOk) Services.getScreenManager().getGame().create();
                 else Services.getScreenManager().popScreen();
+            }
+
+            @Override
+            public void onExtraButton() {
+                // TODO
             }
         };
 
@@ -415,9 +403,10 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
         };
 
         battleSystemCallbacks = new BattleSystem.CallbackHandler() {
+
             @Override
-            public void onNextTurn() {
-                // TODO
+            public void onBattleEnds(boolean winnerSide) {
+                battleStateSwitcher.toEndOfBattle(winnerSide);
             }
 
             @Override
@@ -551,6 +540,7 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
             @Override
             public void onHitAnimationComplete() {
                 battleSystem.applyAttack();
+                actionMenu.enable(actionMenu.backButton);
             }
         };
     }
@@ -624,10 +614,15 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
             state = BattleState.ACTIONMENU;
         }
 
-        public void toEndOfBattle() {
+        public void toEndOfBattle(boolean winnerSide) {
             reset();
-            //endOfBattleWidget.init(!checkIfWholeTeamKO(leftTeam));
-            endOfBattleWidget.addToStageAndFadeIn(stage);
+            toInfoLabel();
+            String textKey = winnerSide ? "batt_you_won":"batt_game_over";
+            String wholeText = Services.getL18N().l18n().get(textKey);
+            infoLabelWidget.setWholeText(wholeText);
+            infoLabelWidget.animateTextAppearance();
+            actionMenu.setCallbackHandler(endOfBattleCallbacks);
+
             statusWidget.addToStage(stage);
 
             state = BattleState.ENDOFBATTLE;
@@ -636,6 +631,7 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
         public void toAnimation() {
             reset();
             toInfoLabel();
+            actionMenu.disableAllChildButtons();
             battleQueueWidget.addToStage(stage);
             actionMenu.setCallbackHandler(infoLabelCallbacks);
 
@@ -696,7 +692,6 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
             // Remove all Widgets
             infoLabelWidget.remove();
             animationWidget.remove();
-            endOfBattleWidget.remove();
             mainMenu.remove();
             targetMenuWidget.remove();
             attackMenu.remove();

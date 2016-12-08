@@ -118,6 +118,14 @@ public class BattleActionMenuWidget extends BattleWidget {
         disable(extraButton);
     }
 
+    public void disableAllChildButtons() {
+        enable();
+        disable(bagButton);
+        disable(monsterButton);
+        disable(extraButton);
+        disable(backButton);
+    }
+
     // INNER INTERFACE
     public interface CallbackHandler {
         public void onMonsterButton();

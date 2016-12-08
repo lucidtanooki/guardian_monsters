@@ -23,11 +23,13 @@ public class SevenButtonsWidget extends BattleWidget {
     // Buttons
     private ArrayMap<Integer,TextButton> buttons;
     private CallbackHandler callbackHandler;
+    protected Skin skin;
 
     public SevenButtonsWidget (final AHUD hud, Skin skin, CallbackHandler callbackHandler,
                                int[] buttonOrder) {
 
         super(hud);
+        this.skin = skin;
 
         if(buttonOrder.length < 7) {
             throw new IllegalArgumentException("buttonOrder must contain 7 values");
@@ -117,6 +119,11 @@ public class SevenButtonsWidget extends BattleWidget {
 
     public void setButtonText(int index, String text) {
         buttons.get(index).setText(text);
+    }
+
+    public void setButtonStyle(int index, Skin skin, String style) {
+        Button.ButtonStyle bs = skin.get(style, TextButton.TextButtonStyle.class);
+        buttons.get(index).setStyle(bs);
     }
 
     protected ArrayMap<Integer,TextButton> getButtons() {

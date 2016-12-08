@@ -35,7 +35,7 @@ public class DebugOutput {
         for (int i = 0; i < queue.size; i++) {
             Monster m = queue.get(i);
             String name = Services.getL18N().l18n().get(MonsterInformation.getInstance().monsterNames.get(m.ID - 1));
-            System.out.print(name + "\t\t(" + m.getSpeed() + "),");
+            System.out.print("[" + i + "] " + name + "\t\t(" + m.getSpeed() + "),");
             System.out.println("\tKP: " + m.getHP() + "\tMP: " + m.getMP());
         }
     }

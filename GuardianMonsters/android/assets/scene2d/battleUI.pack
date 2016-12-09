@@ -199,6 +199,14 @@ b-attack-fire-down
   orig: 82, 32
   offset: 0, 0
   index: -1
+green-progress-bar
+  rotate: false
+  xy: 429, 63
+  size: 20, 11
+  split: 7, 7, 3, 3
+  orig: 20, 11
+  offset: 0, 0
+  index: -1
 blue-bar-lr
   rotate: false
   xy: 899, 474
@@ -212,14 +220,6 @@ invis
   xy: 1007, 899
   size: 16, 16
   orig: 16, 16
-  offset: 0, 0
-  index: -1
-green-progress-bar
-  rotate: false
-  xy: 429, 63
-  size: 19, 11
-  split: 7, 6, 3, 3
-  orig: 19, 11
   offset: 0, 0
   index: -1
 yellow-progress-bar

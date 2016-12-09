@@ -12,6 +12,8 @@ import de.limbusdev.guardianmonsters.enums.SFXType;
 
 public class AudioAssets {
 
+    private static final String TAG = AudioAssets.class.getSimpleName();
+
     private String SFXdir = "sfx/";
     private ArrayMap<SFXType,Array<String>> battleSFX;
     private Array<String> bgMusicTown;
@@ -60,7 +62,13 @@ public class AudioAssets {
     }
 
     public String getBattleSFX(SFXType type, int index) {
-        return battleSFX.get(type).get(index);
+        try {
+            return battleSFX.get(type).get(index);
+        } catch (Exception e) {
+            System.err.println(TAG + " couldn't find SFX of type " + type.toString() + " index " + index);
+            e.printStackTrace();
+            return battleSFX.get(SFXType.HIT).get(0);
+        }
     }
 
     public Array<String> getBgMusicTown() {

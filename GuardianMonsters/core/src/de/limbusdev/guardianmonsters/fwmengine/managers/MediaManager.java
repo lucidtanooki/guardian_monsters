@@ -158,7 +158,7 @@ public class MediaManager implements Media {
         TextureAtlas atlas = assets.get("spritesheets/battleAnimations.pack", TextureAtlas.class);
         Animation anim;
         if(atlas.findRegions(attack).size == 0) {
-            anim = new Animation(1f / 12f, atlas.findRegions("Kick"), Animation.PlayMode.NORMAL);
+            anim = new Animation(1f / 12f, atlas.findRegions("att_kick"), Animation.PlayMode.NORMAL);
         } else {
             anim = new Animation(1f / 12f, atlas.findRegions(attack), Animation.PlayMode.NORMAL);
         }

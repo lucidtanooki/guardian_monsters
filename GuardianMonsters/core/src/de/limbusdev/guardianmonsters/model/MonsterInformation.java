@@ -187,7 +187,7 @@ public class MonsterInformation {
 
         attacks = new ArrayMap<Integer, Attack>();
         attacks.put(1,AttackInfo.embers);
-        attacks.put(10,AttackInfo.fire);
+        attacks.put(1,AttackInfo.fire);
         attacks.put(20,AttackInfo.fira);
         elements = new Array<Element>();
         elements.add(Element.FIRE);

@@ -1,6 +1,7 @@
 package de.limbusdev.guardianmonsters.model;
 
 
+import de.limbusdev.guardianmonsters.enums.AnimationType;
 import de.limbusdev.guardianmonsters.enums.AttackType;
 import de.limbusdev.guardianmonsters.enums.Element;
 import de.limbusdev.guardianmonsters.enums.SFXType;
@@ -17,15 +18,18 @@ public class Attack {
     public String name;
     public SFXType sfxType;
     public int sfxIndex;
+    public AnimationType animationType;
     /* ........................................................................... CONSTRUCTOR .. */
 
-    public Attack(AttackType attackType, Element element, int damage, String name, SFXType sfxType, int sfxIndex) {
+    public Attack(AttackType attackType, Element element, int damage, String name, SFXType sfxType,
+                  int sfxIndex, AnimationType animType) {
         this.element = element;
         this.attackType = attackType;
         this.damage = damage;
         this.name = name;
         this.sfxIndex = sfxIndex;
         this.sfxType = sfxType;
+        this.animationType = animType;
     }
 
     public Attack() {

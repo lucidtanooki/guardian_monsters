@@ -382,7 +382,7 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
                         teamOk = false || teamOk;
                     }
                 }
-                if(teamOk) Services.getScreenManager().getGame().create();
+                if(!teamOk) Services.getScreenManager().getGame().create();
                 else Services.getScreenManager().popScreen();
             }
 
@@ -617,7 +617,7 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
         public void toEndOfBattle(boolean winnerSide) {
             reset();
             toInfoLabel();
-            String textKey = winnerSide ? "batt_you_won":"batt_game_over";
+            String textKey = !winnerSide ? "batt_you_won":"batt_game_over";
             String wholeText = Services.getL18N().l18n().get(textKey);
             infoLabelWidget.setWholeText(wholeText);
             infoLabelWidget.animateTextAppearance();

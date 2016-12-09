@@ -123,7 +123,7 @@ public class BattleSystem {
 
         // Check if one team is KO
         if(isTeamKO(leftTeam) || isTeamKO(rightTeam)) {
-            callbackHandler.onBattleEnds(isTeamKO(rightTeam));
+            callbackHandler.onBattleEnds(isTeamKO(leftTeam));
         } else {
 
             if (rightTeam.contains(getActiveMonster(), false)) {

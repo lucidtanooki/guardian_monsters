@@ -129,6 +129,10 @@ public class BattleAnimationWidget extends BattleWidget implements ObservableWid
     }
 
 
+    public void animateSelfDefense() {
+        callbackHandler.onHitAnimationComplete();
+    }
+
     /**
      * Animate an attack of the given monster
      * @param attPos    position of attacker

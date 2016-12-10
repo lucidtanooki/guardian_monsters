@@ -22,7 +22,6 @@ public class BattleStatusOverviewWidget extends BattleWidget {
 
     public BattleStatusOverviewWidget(final AHUD hud, Skin skin) {
         super(hud);
-        this.setBounds(0,0,0,0);
         this.monsterStateWidgetsLeft = new Array<MonsterStateWidget>();
         this.monsterStateWidgetsRight = new Array<MonsterStateWidget>();
 

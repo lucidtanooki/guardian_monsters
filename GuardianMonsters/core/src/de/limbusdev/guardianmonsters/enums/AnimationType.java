@@ -5,5 +5,5 @@ package de.limbusdev.guardianmonsters.enums;
  */
 
 public enum AnimationType {
-    CONTACT, CONTACTLESS, MOVING_HOR, MOVING_VERT,
+    NONE, CONTACT, CONTACTLESS, MOVING_HOR, MOVING_VERT,
 }

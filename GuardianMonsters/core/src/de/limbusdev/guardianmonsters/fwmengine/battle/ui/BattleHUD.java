@@ -315,7 +315,7 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
 
             @Override
             public void onExtraButton() {
-                System.out.println("Show Extra Menu");
+                battleSystem.defend();
             }
         };
 
@@ -454,6 +454,14 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
                     attPos = rightTeamSlots.getKey(attacker, false);
                 }
                 animationWidget.animateAttack(attPos, defPos, side, attack);
+            }
+
+            @Override
+            public void onDefense(Monster defensiveMonster) {
+                battleStateSwitcher.toAnimation();
+                infoLabelWidget.setWholeText(BattleStringBuilder.selfDefense(defensiveMonster));
+                infoLabelWidget.animateTextAppearance();
+                animationWidget.animateSelfDefense();
             }
         };
 

@@ -73,6 +73,11 @@ public class GameStateDebugger {
 
         BattleSystem bs = new BattleSystem(heroTeam.monsters, oppTeam.monsters, new BattleSystem.CallbackHandler() {
             @Override
+            public void onDefense(Monster defensiveMonster) {
+
+            }
+
+            @Override
             public void onMonsterKilled(Monster m) {
                 // TODO
             }

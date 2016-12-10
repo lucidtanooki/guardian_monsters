@@ -46,6 +46,12 @@ public class BattleStringBuilder {
         return message;
     }
 
+    public static String selfDefense(Monster defensiveMonster) {
+        String defName = MonsterInformation.getInstance().monsterNames.get(defensiveMonster.ID-1);
+        String message = Services.getL18N().l18n().get(defName) + " " + Services.getL18N().l18n().get("suff_defense");
+        return message;
+    }
+
     public static void printEnqueuedMonster(MonsterInBattle m, int chosenTarget, int attack) {
         System.out.println("\n----- Monster Indicator Widget -----");
         System.out.println("Team: " + (m.battleFieldSide ? "Hero" : "Opponent"));

@@ -104,6 +104,14 @@ public class BattleSystem {
         attack(chosenTarget, chosenAttack);
     }
 
+    /**
+     * The monster decides to not attack and instead raised it's defense values for one round
+     */
+    public void defend() {
+        latestAttackReport = MonsterManager.calcDefense(getActiveMonster());
+        callbackHandler.onDefense(getActiveMonster());
+    }
+
     public void nextMonster() {
         nextRound.insert(0,currentRound.pop());
         chosenAttack = 0;
@@ -258,6 +266,7 @@ public class BattleSystem {
         void onMonsterKilled(Monster m);
         void onQueueUpdated();
         void onAttack(Monster attacker, Monster target, Attack attack, AttackCalculationReport rep);
+        void onDefense(Monster defensiveMonster);
         void onPlayersTurn();
         void onBattleEnds(boolean winnerSide);
     }

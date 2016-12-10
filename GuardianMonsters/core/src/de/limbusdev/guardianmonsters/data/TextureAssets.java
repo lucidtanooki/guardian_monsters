@@ -12,8 +12,8 @@ public class TextureAssets {
     public static final String mainMenuBGImgFile2 = "spritesheets/main_logo_bg.png";
     public static final String heroSpritesheetFile = "spritesheets/hero.pack";
     public static final String monsterSpriteSheetFile = "spritesheets/monsters.pack";
-    public static final String battleUISpriteSheetFile = "spritesheets/battleUI.pack";
-    public static final String UISpriteSheetFile = "spritesheets/UI.pack";
+    public static final String battleUISpriteSheetFile = "scene2d/battleUI.pack";
+    public static final String UISpriteSheetFile = "scene2d/UI.pack";
     public static final String logosSpriteSheetFile = "spritesheets/logos.pack";
     public static final String animations = "spritesheets/animations.pack";
     public static final String battleAnimations = "spritesheets/battleAnimations.pack";

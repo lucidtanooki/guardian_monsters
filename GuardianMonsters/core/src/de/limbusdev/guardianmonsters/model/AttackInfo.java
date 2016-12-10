@@ -14,6 +14,9 @@ public class AttackInfo {
     /* ............................................................................ ATTRIBUTES .. */
 
     // None
+    public static Attack selfDefense = new Attack(
+            AttackType.PHYSICAL, Element.NONE, 0, "att_selfdef", SFXType.HIT, 0, AnimationType.NONE);
+
     public static Attack kick = new Attack(
             AttackType.PHYSICAL, Element.NONE, 5, "att_kick", SFXType.HIT, 0, AnimationType.CONTACT);
     public static Attack tooth = new Attack(

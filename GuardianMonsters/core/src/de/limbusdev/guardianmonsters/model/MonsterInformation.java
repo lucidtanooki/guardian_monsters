@@ -41,6 +41,7 @@ public class MonsterInformation {
 
         // 001 KROKI
         ArrayMap<Integer,Attack> attacks = new ArrayMap<Integer, Attack>();
+        attacks.put(1, AttackInfo.tooth);
         attacks.put(1, AttackInfo.sprinkle);
         attacks.put(5, AttackInfo.tripit);
         attacks.put(10, AttackInfo.water);
@@ -53,6 +54,7 @@ public class MonsterInformation {
 
         // 002 DINVI
         attacks = new ArrayMap<Integer, Attack>();
+        attacks.put(1, AttackInfo.tooth);
         attacks.put(5,AttackInfo.tripit);
         attacks.put(10,AttackInfo.earth);
         attacks.put(20,AttackInfo.eartha);
@@ -83,6 +85,7 @@ public class MonsterInformation {
 
         // 005 Sheelfish
         attacks = new ArrayMap<Integer, Attack>();
+        attacks.put(1, AttackInfo.tooth);
         attacks.put(1,AttackInfo.sprinkle);
         elements = new Array<Element>();
         elements.add(Element.WATER);
@@ -110,6 +113,7 @@ public class MonsterInformation {
 
         // 008 Toff
         attacks = new ArrayMap<Integer, Attack>();
+        attacks.put(1, AttackInfo.kick);
         attacks.put(1,AttackInfo.leafgust);
         elements = new Array<Element>();
         elements.add(Element.FOREST);
@@ -119,6 +123,7 @@ public class MonsterInformation {
 
         // 009 Fingercrab
         attacks = new ArrayMap<Integer, Attack>();
+        attacks.put(1, AttackInfo.tooth);
         attacks.put(1,AttackInfo.sprinkle);
         elements = new Array<Element>();
         elements.add(Element.WATER);
@@ -145,6 +150,7 @@ public class MonsterInformation {
                 11, "mon_flyear", attacks, false, 0, 0, elements, base));
 
         attacks = new ArrayMap<Integer, Attack>();
+        attacks.put(1, AttackInfo.tooth);
         attacks.put(1,AttackInfo.sprinkle);
         elements = new Array<Element>();
         elements.add(Element.WATER);
@@ -153,6 +159,7 @@ public class MonsterInformation {
                 12, "mon_tuxeduck", attacks, false, 0, 0, elements, base));
 
         attacks = new ArrayMap<Integer, Attack>();
+        attacks.put(1, AttackInfo.kick);
         attacks.put(1,AttackInfo.sprinkle);
         elements = new Array<Element>();
         elements.add(Element.AIR);
@@ -186,8 +193,9 @@ public class MonsterInformation {
                 16, "mon_dogh", attacks, false, 0, 0, elements, base));
 
         attacks = new ArrayMap<Integer, Attack>();
+        attacks.put(1, AttackInfo.tooth);
         attacks.put(1,AttackInfo.embers);
-        attacks.put(1,AttackInfo.fire);
+        attacks.put(5,AttackInfo.fire);
         attacks.put(20,AttackInfo.fira);
         elements = new Array<Element>();
         elements.add(Element.FIRE);

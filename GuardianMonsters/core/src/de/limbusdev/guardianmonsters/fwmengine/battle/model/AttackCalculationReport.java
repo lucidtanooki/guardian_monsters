@@ -1,6 +1,7 @@
 package de.limbusdev.guardianmonsters.fwmengine.battle.model;
 
 import de.limbusdev.guardianmonsters.model.Attack;
+import de.limbusdev.guardianmonsters.model.AttackInfo;
 import de.limbusdev.guardianmonsters.model.Monster;
 
 /**
@@ -21,5 +22,17 @@ public class AttackCalculationReport {
         this.damage = damage;
         this.effectiveness = effectiveness;
         this.attack = attack;
+    }
+
+    /**
+     * Report for defending monster
+     * @param defensiveMonster
+     */
+    public AttackCalculationReport(Monster defensiveMonster) {
+        this.attacker = defensiveMonster;
+        this.defender = null;
+        this.damage = 0;
+        this.effectiveness = 0;
+        this.attack = AttackInfo.selfDefense;
     }
 }

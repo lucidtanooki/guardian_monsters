@@ -46,6 +46,20 @@ public class MonsterManager {
     }
 
     /**
+     * Call this, when a monster decides not to attack and instead defends itself
+     * @param defensiveMonster
+     * @return
+     */
+    public static AttackCalculationReport calcDefense(Monster defensiveMonster) {
+        System.out.println("Monster defends itself");
+        AttackCalculationReport report = new AttackCalculationReport(defensiveMonster);
+        defensiveMonster.setPhysDef(MathUtils.round(defensiveMonster.physDef*1.05f));
+        defensiveMonster.setMagicDef(MathUtils.round(defensiveMonster.magicDef*1.05f));
+
+        return report;
+    }
+
+    /**
      * Calculates attacks, the report attributes are for information only
      * @param att
      * @param def
@@ -85,6 +99,10 @@ public class MonsterManager {
      * @param rep
      */
     public static void apply(AttackCalculationReport rep) {
+        if(rep.defender == null) {
+            System.out.println("Only self defending");
+            return;
+        }
         if (rep.defender.getHP() - rep.damage < 0) {
             rep.defender.setHP(0);
         } else {

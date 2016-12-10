@@ -182,4 +182,12 @@ public class Monster extends Observable {
         this.setChanged();
         this.notifyObservers();
     }
+
+    public void setPhysDef(int physDef) {
+        this.physDef = physDef;
+    }
+
+    public void setMagicDef(int magicDef) {
+        this.magicDef = magicDef;
+    }
 }

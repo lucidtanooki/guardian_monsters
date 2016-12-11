@@ -86,10 +86,10 @@ public class MonsterManager {
 
         I18NBundle l18n = Services.getL18N().l18n();
         System.out.println(
-            l18n.get(MonsterInformation.getInstance().monsterNames.get(att.ID - 1)) + ": "
+            l18n.get(MonsterInformation.getInstance().monsterNames.get(att.ID)) + ": "
              + l18n.get(attack.name)
                 + " causes " + damage + " damage on "
-                + l18n.get(MonsterInformation.getInstance().monsterNames.get(def.ID - 1)));
+                + l18n.get(MonsterInformation.getInstance().monsterNames.get(def.ID)));
 
         return report;
     }

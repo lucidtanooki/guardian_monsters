@@ -2,6 +2,7 @@ package de.limbusdev.guardianmonsters.fwmengine.battle.model;
 
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.ArrayMap;
 
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TeamComponent;
 import de.limbusdev.guardianmonsters.model.Monster;
@@ -13,25 +14,25 @@ import de.limbusdev.guardianmonsters.fwmengine.world.model.MonsterArea;
  */
 public class BattleFactory {
     /* ............................................................................ ATTRIBUTES .. */
-    private static Array<Monster> monsters;
+    private static ArrayMap<Integer,Monster> monsters;
     private static BattleFactory instance;
     /* ........................................................................... CONSTRUCTOR .. */
 
     private BattleFactory() {
-        this.monsters = new Array<Monster>();
-        for(int i = 1; i< 10; i++) {
+        this.monsters = new ArrayMap<Integer, Monster>();
+        for(int i = 1; i<= 14; i++) {
             System.out.println("Creating Monster Nr. " + i);
-            Monster mon = new Monster(i);
-            mon.ID = i+1;
-            monsters.add(mon);
+            createMonster(i);
         }
+        createMonster(27);
+        createMonster(28);
     }
     /* ............................................................................... METHODS .. */
     
     /* ..................................................................... GETTERS & SETTERS .. */
     public Monster createMonster(int ID) {
         Monster monster = new Monster(ID);
-        this.monsters.add(monster);
+        this.monsters.put(ID,monster);
         return monster;
     }
 

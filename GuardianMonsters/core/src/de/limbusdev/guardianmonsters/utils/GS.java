@@ -24,7 +24,7 @@ public class GS {
     public static final int ONE_STEPDURATION_MS = 5;
     public static final int ONE_STEP_DURATION_PERSON = 20;
     public static final int zoom = 3;
-    public static final int MONSTER_SPRITES = 22;
+    public static final int MONSTER_SPRITES = 100;
     /* ........................................................................... CONSTRUCTOR .. */
     
     /* ............................................................................... METHODS .. */

@@ -38,11 +38,11 @@ public class GameStateDebugger {
     private void setUpTestBattle() {
         TeamComponent heroTeam = new TeamComponent();
         heroTeam.monsters.add(BattleFactory.getInstance().createMonster(1));
-        heroTeam.monsters.add(BattleFactory.getInstance().createMonster(17));
-        heroTeam.monsters.add(BattleFactory.getInstance().createMonster(3));
+        heroTeam.monsters.add(BattleFactory.getInstance().createMonster(4));
+        heroTeam.monsters.add(BattleFactory.getInstance().createMonster(7));
         TeamComponent oppTeam = new TeamComponent();
-        oppTeam.monsters.add(BattleFactory.getInstance().createMonster(7));
-        oppTeam.monsters.add(BattleFactory.getInstance().createMonster(4));
+        oppTeam.monsters.add(BattleFactory.getInstance().createMonster(2));
+        oppTeam.monsters.add(BattleFactory.getInstance().createMonster(9));
         oppTeam.monsters.add(BattleFactory.getInstance().createMonster(11));
         BattleScreen battleScreen = new BattleScreen();
         battleScreen.init(heroTeam, oppTeam);

@@ -143,7 +143,7 @@ public class MediaManager implements Media {
 
     public TextureAtlas.AtlasRegion getMonsterSprite(int index) {
         return assets.get(monsterSpriteSheetFile,
-                TextureAtlas.class).findRegion(Integer.toString(index), 1);
+                TextureAtlas.class).findRegion(Integer.toString(index));
     }
 
     public Texture getBackgroundTexture(int index) {

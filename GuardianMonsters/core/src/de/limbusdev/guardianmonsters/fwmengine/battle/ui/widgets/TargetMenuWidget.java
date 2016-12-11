@@ -44,7 +44,7 @@ public class TargetMenuWidget extends SevenButtonsWidget implements Observer {
             if(m.getHP() > 0) {
                 this.leftTeam.put(i,m);
                 setButtonText(i, Services.getL18N().l18n().get(
-                    MonsterInformation.getInstance().monsterNames.get(m.ID-1)));
+                    MonsterInformation.getInstance().monsterNames.get(m.ID)));
                 enableButton(i);
                 i++;
                 m.addObserver(this);
@@ -56,7 +56,7 @@ public class TargetMenuWidget extends SevenButtonsWidget implements Observer {
             if(m.getHP() > 0) {
                 this.rightTeam.put(i,m);
                 setButtonText(i, Services.getL18N().l18n().get(
-                    MonsterInformation.getInstance().monsterNames.get(m.ID-1)));
+                    MonsterInformation.getInstance().monsterNames.get(m.ID)));
                 enableButton(i);
                 i++;
                 m.addObserver(this);

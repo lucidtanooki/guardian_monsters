@@ -103,11 +103,7 @@ public class MonsterManager {
             System.out.println("Only self defending");
             return;
         }
-        if (rep.defender.getHP() - rep.damage < 0) {
-            rep.defender.setHP(0);
-        } else {
-            rep.defender.setHP(rep.defender.getHP() - MathUtils.round(rep.damage));
-        }
+        rep.defender.setHP(rep.defender.getHP() - MathUtils.round(rep.damage));
     }
 
     public static boolean tryToRun(Array<Monster> escapingTeam, Array<Monster> attackingTeam) {

@@ -3,6 +3,8 @@ package de.limbusdev.guardianmonsters.fwmengine.managers;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.scenes.scene2d.Action;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.utils.Array;
 
 /**
@@ -66,5 +68,26 @@ public class AudioManager implements Audio {
     @Override
     public void dispose() {
         assets.dispose();
+    }
+
+    @Override
+    public Action getMuteAudioAction() {
+        final Music muteable = assets.get(currentlyPlayingBGMusic, Music.class);
+        Action muteAction = Actions.sequence(
+            Actions.delay(.01f),
+            Actions.repeat(100,Actions.run(new Runnable() {
+            private int vol = 100;
+            @Override
+            public void run() {
+                if(vol > 0) {
+                    --vol;
+                    muteable.setVolume(vol/100f);
+                } else {
+                    muteable.stop();
+                    muteable.setVolume(1);
+                }
+            }
+        })));
+        return muteAction;
     }
 }

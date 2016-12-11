@@ -58,6 +58,9 @@ public class ElemEff {
         }
         System.out.println(": " + effectiveness);
 
+        // Healing effects are half as effective as hurting attacks
+        if(effectiveness < 0) effectiveness = effectiveness/2f;
+
         return effectiveness;
     }
 

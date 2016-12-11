@@ -164,7 +164,13 @@ public class Monster extends Observable {
     }
 
     public void setHP(int HP) {
-        this.HP = HP;
+        if(HP < 0) {
+            this.HP = 0;
+        } else if(HP > this.HPfull) {
+            this.HP = HPfull;
+        } else {
+            this.HP = HP;
+        }
         this.setChanged();
         this.notifyObservers();
     }

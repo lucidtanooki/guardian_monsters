@@ -60,6 +60,7 @@ public class GuardianMonsters extends Game{
             TextureAssets.getAllTexturePackPaths(),
             TextureAssets.getAllTexturePaths(),
             TextureAssets.monsterSpriteSheetFile,
+            TextureAssets.monsterMiniSpriteSheetFile,
             TextureAssets.heroSpritesheetFile,
             TextureAssets.animations
         ));

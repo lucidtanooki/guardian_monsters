@@ -54,6 +54,7 @@ public class AudioManager implements Audio {
     @Override
     public void playLoopMusic(String path) {
         Music music = assets.get(path,Music.class);
+        music.setVolume(1);
         music.setLooping(true);
 
         playMusic(path);
@@ -72,9 +73,11 @@ public class AudioManager implements Audio {
 
     @Override
     public Action getMuteAudioAction() {
+        // TODO sometimes the next battle is muted, because there was no time at the end of
+        // the last battle to finish this action
         final Music muteable = assets.get(currentlyPlayingBGMusic, Music.class);
         Action muteAction = Actions.sequence(
-            Actions.delay(.01f),
+            Actions.delay(.005f),
             Actions.repeat(100,Actions.run(new Runnable() {
             private int vol = 100;
             @Override

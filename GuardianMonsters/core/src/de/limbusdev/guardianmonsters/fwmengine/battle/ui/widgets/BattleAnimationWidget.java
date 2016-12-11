@@ -178,7 +178,7 @@ public class BattleAnimationWidget extends BattleWidget implements ObservableWid
         if(side) attIm = monsterImgsLeft.get(attPos);
         else attIm = monsterImgsRight.get(attPos);
 
-        attIm.addAction(getAnimationSequence(attack,startPos,endPos, defPos));
+        attIm.addAction(getAnimationSequence(attack,startPos,endPos, defPos, side, defSide));
     }
 
 
@@ -189,8 +189,9 @@ public class BattleAnimationWidget extends BattleWidget implements ObservableWid
      * @param target    position of the attacks target
      * @return
      */
-    private Action getAnimationSequence(final Attack attack, final IntVector2 origin, final IntVector2 target, final int targetPos) {
-        final boolean direction = origin.x > target.x;
+    private Action getAnimationSequence(final Attack attack, final IntVector2 origin, final IntVector2 target, final int targetPos,
+                                        boolean side, final boolean defSide) {
+        final boolean direction = defSide;
         Action action;
 
         // Short delay before attack starts
@@ -231,7 +232,7 @@ public class BattleAnimationWidget extends BattleWidget implements ObservableWid
         Action animateImpactAction = Actions.run(new Runnable() {
             @Override
             public void run() {
-                animateAttackImpact(!direction, targetPos);
+                animateAttackImpact(targetPos, defSide);
             }
         });
 
@@ -259,10 +260,10 @@ public class BattleAnimationWidget extends BattleWidget implements ObservableWid
      * @param side
      * @param defPos
      */
-    private void animateAttackImpact(boolean side, int defPos) {
+    private void animateAttackImpact(int defPos, boolean side) {
         Image defIm;
-        if(side) defIm = monsterImgsRight.get(defPos);
-        else defIm = monsterImgsLeft.get(defPos);
+        if(side) defIm = monsterImgsLeft.get(defPos);
+        else defIm = monsterImgsRight.get(defPos);
         defIm.addAction(Actions.sequence(
             Actions.moveBy(0, 15, .1f, Interpolation.bounceIn),
             Actions.moveBy(0, -15, .1f, Interpolation.bounceIn)

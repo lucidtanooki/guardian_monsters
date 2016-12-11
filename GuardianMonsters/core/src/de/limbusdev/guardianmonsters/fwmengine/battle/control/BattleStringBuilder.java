@@ -22,8 +22,8 @@ public class BattleStringBuilder {
     }
 
     public static String givenDamage(Monster attacker, Monster victim, AttackCalculationReport report) {
-        String attName = MonsterInformation.getInstance().monsterNames.get(attacker.ID-1);
-        String defName = MonsterInformation.getInstance().monsterNames.get(victim.ID-1);
+        String attName = MonsterInformation.getInstance().monsterNames.get(attacker.ID);
+        String defName = MonsterInformation.getInstance().monsterNames.get(victim.ID);
 
         String eff;
         if(report.effectiveness > 1.1) {
@@ -47,7 +47,7 @@ public class BattleStringBuilder {
     }
 
     public static String selfDefense(Monster defensiveMonster) {
-        String defName = MonsterInformation.getInstance().monsterNames.get(defensiveMonster.ID-1);
+        String defName = MonsterInformation.getInstance().monsterNames.get(defensiveMonster.ID);
         String message = Services.getL18N().l18n().get(defName) + " " + Services.getL18N().l18n().get("suff_defense");
         return message;
     }

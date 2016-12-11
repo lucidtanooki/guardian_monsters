@@ -3,6 +3,7 @@ package de.limbusdev.guardianmonsters.fwmengine.managers;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import de.limbusdev.guardianmonsters.enums.TextureAtlasType;
 
@@ -32,7 +33,12 @@ public class NullMedia implements Media {
         return null;
     }
 
-    public Texture getBackgroundTexture(int index) {
+    @Override
+    public TextureAtlas.AtlasRegion getMonsterMiniSprite(int index) {
+        return null;
+    }
+
+    public TextureRegion getBackgroundTexture(int index) {
         return null;
     }
 

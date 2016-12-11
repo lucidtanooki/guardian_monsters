@@ -35,11 +35,11 @@ public class AttackMenuWidget extends SevenButtonsWidget {
         for(int i=0; i<attacks.size && i < 7; i++) {
             Attack att = attacks.get(i);
             setButtonStyle(i,skin, SkinAssets.attackButtonStyle(att.element));
-            String mpCostString = (att.MPcost > 0) ? Integer.toString(att.MPcost) : "";
+            String mpCostString = (att.MPcost > 0) ? (" " + Integer.toString(att.MPcost)) : "";
             setButtonText(i,Services.getL18N().l18n().get(att.name) + mpCostString);
 
             // Disable Attack, when monster does not have enough MP for it
-            if(att.MPcost > monster.getMP()) enableButton(i);
+            if(att.MPcost <= monster.getMP()) enableButton(i);
         }
     }
 }

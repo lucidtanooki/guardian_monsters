@@ -2,6 +2,7 @@ package de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Interpolation;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
@@ -75,6 +76,8 @@ public class MonsterStateWidget extends WidgetGroup implements Observer {
 
         hpBar.setAnimateInterpolation(Interpolation.linear);
         hpBar.setAnimateDuration(1f);
+        mpBar.setAnimateInterpolation(Interpolation.linear);
+        mpBar.setAnimateDuration(.5f);
         epBar.setAnimateInterpolation(Interpolation.linear);
         epBar.setAnimateDuration(.1f);
 
@@ -118,6 +121,9 @@ public class MonsterStateWidget extends WidgetGroup implements Observer {
         this.mpBar.setValue(obsMon.getMPPerc());
         this.epBar.setValue(obsMon.getExpPerc());
         this.levelLabel.setText(Integer.toString(obsMon.level));
+        if(obsMon.getHP() == 0) {
+            addAction(Actions.sequence(Actions.alpha(0, 2), Actions.visible(false)));
+        }
         System.out.println("Received Update");
     }
 

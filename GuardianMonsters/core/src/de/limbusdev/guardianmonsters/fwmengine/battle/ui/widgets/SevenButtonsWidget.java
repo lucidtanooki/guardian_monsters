@@ -1,6 +1,7 @@
 package de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
@@ -132,6 +133,31 @@ public class SevenButtonsWidget extends BattleWidget {
 
     protected TextButton getButton(int index) {
         return buttons.get(index);
+    }
+
+    protected void replaceButton(final TextButton button, final int index) {
+        Button removedButton = buttons.get(index);
+        buttons.removeKey(index);
+        button.setPosition(removedButton.getX(), removedButton.getY(), Align.bottomLeft);
+        button.setScale(removedButton.getScaleX(),removedButton.getScaleY());
+        button.setSize(removedButton.getWidth(),removedButton.getHeight());
+        removedButton.remove();
+
+        buttons.put(index,button);
+        button.addListener(
+            new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    super.clicked(event,x,y);
+                    System.out.println("SevenButtonsWidget: Clicked button " + index);
+                    if(button.isDisabled()) {
+                        callbackHandler.onButtonNr(index);
+                    }
+                }
+            }
+        );
+
+        addActor(button);
     }
 
 

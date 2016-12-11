@@ -2,6 +2,7 @@ package de.limbusdev.guardianmonsters.fwmengine.battle.ui;
 
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
@@ -15,7 +16,9 @@ import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.AttackMenuWidge
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleActionMenuWidget;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleAnimationWidget;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleQueueWidget;
+import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.ButtonWithImage;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.InfoLabelWidget;
+import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.MonsterMenuWidget;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.SevenButtonsWidget;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.TargetMenuWidget;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.WidgetObserver;
@@ -57,6 +60,7 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
     private BattleQueueWidget           battleQueueWidget;
     private InfoLabelWidget             infoLabelWidget;
     private TargetMenuWidget            targetMenuWidget;
+    private MonsterMenuWidget           monsterMenuWidget;
 
     // CallbackHandlers
     private BattleActionMenuWidget.CallbackHandler  battleActionCallbacks;
@@ -72,6 +76,7 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
     private BattleActionMenuWidget.CallbackHandler  escapeSuccessCallbacks;
     private BattleActionMenuWidget.CallbackHandler  escapeFailCallbacks;
     private BattleAnimationWidget.CallbackHandler   battleAnimationCallbacks;
+    private SevenButtonsWidget.CallbackHandler      monsterMenuCallbacks;
 
 
     // ....................................................................................... other
@@ -80,12 +85,10 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
 
     private ArrayMap<Integer, Monster> leftTeamSlots, rightTeamSlots;
 
-    private BattleState state;
 
     // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ CONSTRUCTOR
     public BattleHUD() {
         super(Services.getUI().getBattleSkin());
-        initializeAttributes();
         setUpCallbacks();
         setUpUI();
     }
@@ -103,10 +106,6 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
 
     // .............................................................. initialize arena
 
-    private void initializeAttributes() {
-        this.state = BattleState.MAINMENU;
-    }
-
     /**
      * Resets the UI into a state where it can be initialized for a new battle
      */
@@ -115,7 +114,6 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
         super.reset();
         actionMenu.clearActions();
         mainMenu.clearActions();
-        initializeAttributes();
     }
 
     /**
@@ -197,6 +195,7 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
         actionMenu        = new BattleActionMenuWidget( this, skin, battleActionCallbacks);
         attackMenu        = new AttackMenuWidget(       this, skin, attackMenuCallbacks);
         targetMenuWidget  = new TargetMenuWidget(       this, skin, targetMenuCallbacks);
+        monsterMenuWidget = new MonsterMenuWidget(      this, skin, monsterMenuCallbacks);
 
         battleQueueWidget = new BattleQueueWidget(this, skin, Align.bottomLeft);
         battleQueueWidget.setScale(GS.zoom);
@@ -281,7 +280,7 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
         battleStartLabelCallbacks = new BattleActionMenuWidget.CallbackHandler() {
             @Override
             public void onMonsterButton() {
-                // not needed
+                // Not needed
             }
 
             @Override
@@ -305,6 +304,8 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
             @Override
             public void onMonsterButton() {
                 System.out.println("Show Monster Menu");
+                monsterMenuWidget.init(leftTeam.monsters);
+                battleStateSwitcher.toTeamMenu();
             }
 
             @Override
@@ -557,6 +558,14 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
                 actionMenu.enable(actionMenu.backButton);
             }
         };
+
+        monsterMenuCallbacks = new SevenButtonsWidget.CallbackHandler() {
+            @Override
+            public void onButtonNr(int nr) {
+                System.out.println("Teammember " + nr);
+                // TODO change monster in battle and everywhere
+            }
+        };
     }
 
     @Deprecated
@@ -641,7 +650,9 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
 
             state = BattleState.ENDOFBATTLE;
 
-            stage.addAction(Services.getAudio().getMuteAudioAction());
+            Action muteMusicAction = Services.getAudio().getMuteAudioAction();
+
+            stage.addAction(muteMusicAction);
         }
 
         public void toAnimation() {
@@ -661,6 +672,19 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
             actionMenu.addToStage(stage);
             actionMenu.setCallbackHandler(backToActionMenuCallbacks);
             targetMenuWidget.addToStage(stage);
+            statusWidget.addToStage(stage);
+            battleQueueWidget.addToStage(stage);
+
+            state = BattleState.TARGET_CHOICE;
+        }
+
+        public void toTeamMenu() {
+            reset();
+            animationWidget.addToStage(stage);
+            actionMenu.disableAllButBackButton();
+            actionMenu.addToStage(stage);
+            actionMenu.setCallbackHandler(backToActionMenuCallbacks);
+            monsterMenuWidget.addToStage(stage);
             statusWidget.addToStage(stage);
             battleQueueWidget.addToStage(stage);
 
@@ -706,6 +730,7 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
 
         public void reset() {
             // Remove all Widgets
+            monsterMenuWidget.remove();
             infoLabelWidget.remove();
             animationWidget.remove();
             mainMenu.remove();

@@ -1,5 +1,6 @@
 package de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Align;
@@ -63,10 +64,14 @@ public class BattleStatusOverviewWidget extends BattleWidget {
         for(MonsterStateWidget w : monsterStateWidgetsLeft) {
             w.clearActions();
             w.remove();
+            w.setVisible(true);
+            w.setColor(Color.WHITE);
         }
         for(MonsterStateWidget w : monsterStateWidgetsRight) {
             w.clearActions();
             w.remove();
+            w.setVisible(true);
+            w.setColor(Color.WHITE);
         }
 
         // Initialize Status UIs ...................................................................

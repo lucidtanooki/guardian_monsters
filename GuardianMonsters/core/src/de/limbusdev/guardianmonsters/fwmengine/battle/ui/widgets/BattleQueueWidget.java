@@ -2,6 +2,7 @@ package de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets;
 
 import com.badlogic.gdx.Net;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -68,10 +69,16 @@ public class BattleQueueWidget extends BattleWidget {
                 previewBackground.setColor(Color.GRAY);
             }
             Group monPreview = new Group();
-            Image preview = new Image(Services.getMedia().getTextureAtlas(
-                TextureAssets.battleMonsterPreviews).findRegion(
-                Integer.toString(m.ID),
-                m.evolution+1));
+
+            TextureAtlas previewAtlas = Services.getMedia()
+                .getTextureAtlas(TextureAssets.battleMonsterPreviews);
+
+            TextureAtlas.AtlasRegion sprite = previewAtlas.findRegion(Integer.toString(m.ID));
+            if(sprite == null) {
+                sprite = previewAtlas.findRegion("0");
+            }
+
+            Image preview = new Image(sprite);
             preview.setPosition(4,6,align);
             monPreview.addActor(previewBackground);
             monPreview.addActor(preview);

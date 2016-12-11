@@ -3,6 +3,7 @@ package de.limbusdev.guardianmonsters.fwmengine.managers;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 import de.limbusdev.guardianmonsters.enums.TextureAtlasType;
@@ -29,7 +30,9 @@ public interface Media {
 
     public TextureAtlas.AtlasRegion getMonsterSprite(int index);
 
-    public Texture getBackgroundTexture(int index);
+    public TextureAtlas.AtlasRegion getMonsterMiniSprite(int index);
+
+    public TextureRegion getBackgroundTexture(int index);
 
     public TextureAtlas getTextureAtlas(String path);
 

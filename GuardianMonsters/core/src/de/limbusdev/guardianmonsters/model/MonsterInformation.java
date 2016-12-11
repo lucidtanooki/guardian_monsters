@@ -39,11 +39,11 @@ public class MonsterInformation {
         monsterNames.set(13, "mon_eggolomia");
         monsterNames.set(14, "mon_hootlock");
 
-        /*monsterNames.set(15, "mon_sailcoon");
+        //monsterNames.set(15, "mon_sailcoon");
         monsterNames.set(16, "mon_cootiger");
 
-        monsterNames.set(17, "mon_woggie");
-        monsterNames.set(18, "mon_wogteeth");*/
+//        monsterNames.set(17, "mon_woggie");
+//        monsterNames.set(18, "mon_wogteeth");
 
         monsterNames.set(27, "mon_toff");
         monsterNames.set(28, "mon_bonfico");
@@ -79,7 +79,7 @@ public class MonsterInformation {
         attacks.put(20, AttackInfo.eartha);
         Array<Element> elements = new Array<Element>();
         elements.add(Element.EARTH);
-        BaseStat base = new BaseStat(1,30,5,9,11,8,10,10);
+        BaseStat base = new BaseStat(1,30,5,9,11,8,10,13);
         statusInfos.put(1, new MonsterStatusInformation(
             1, "mon_buuni", attacks, true, 2, 18, elements, base));
 
@@ -236,6 +236,16 @@ public class MonsterInformation {
         base = new BaseStat(14,30,5,9,11,8,10,10);
         statusInfos.put(14, new MonsterStatusInformation(
             14, "mon_hootlock", attacks, false, 0, 0, elements, base));
+
+        // 016 COOTIGER
+        attacks = new ArrayMap<Integer, Attack>();
+        attacks.put(1, AttackInfo.tooth);
+        attacks.put(10, AttackInfo.leafgust);
+        elements = new Array<Element>();
+        elements.add(Element.EARTH);
+        base = new BaseStat(16,30,5,9,11,8,10,10);
+        statusInfos.put(16, new MonsterStatusInformation(
+            16, "mon_cootiger", attacks, false, 0, 0, elements, base));
 
         // 027 TOFF
         attacks = new ArrayMap<Integer, Attack>();

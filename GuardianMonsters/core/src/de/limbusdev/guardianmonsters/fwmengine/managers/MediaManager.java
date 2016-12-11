@@ -4,6 +4,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import de.limbusdev.guardianmonsters.enums.TextureAtlasType;
 
@@ -20,6 +21,7 @@ public class MediaManager implements Media {
     // file names
     private String animations;
     private String monsterSpriteSheetFile;
+    private String monsterMiniSpriteSheetFile;
     private String heroSpritesheetFile;
 
     private Array<String> bgs;
@@ -33,6 +35,7 @@ public class MediaManager implements Media {
         Array<String> texturePackPaths,
         Array<String> texturePaths,
         String monsterSpriteSheetPath,
+        String monsterMiniSpriteSheetPath,
         String heroSpriteSheetPath,
         String animationsSpriteSheetPath
     ){
@@ -46,6 +49,7 @@ public class MediaManager implements Media {
             assets.load(s, Texture.class);
         }
 
+        this.monsterMiniSpriteSheetFile = monsterMiniSpriteSheetPath;
         this.monsterSpriteSheetFile = monsterSpriteSheetPath;
         this.heroSpritesheetFile = heroSpriteSheetPath;
         this.animations = animationsSpriteSheetPath;
@@ -57,8 +61,9 @@ public class MediaManager implements Media {
 
 
         bgs = new Array<String>();
-        bgs.add("backgrounds/grass.png");
-        for(String s : bgs) assets.load(s, Texture.class);
+        bgs.add("grass");
+        bgs.add("cave");
+        bgs.add("forest");
 
 
         // Animated Tiles
@@ -142,12 +147,27 @@ public class MediaManager implements Media {
     }
 
     public TextureAtlas.AtlasRegion getMonsterSprite(int index) {
-        return assets.get(monsterSpriteSheetFile,
-                TextureAtlas.class).findRegion(Integer.toString(index));
+        TextureAtlas monsterSprites = assets.get(monsterSpriteSheetFile, TextureAtlas.class);
+        TextureAtlas.AtlasRegion sprite = monsterSprites.findRegion(Integer.toString(index));
+        if(sprite == null) {
+            sprite = monsterSprites.findRegion("0");
+        }
+
+        return sprite;
     }
 
-    public Texture getBackgroundTexture(int index) {
-        return assets.get(bgs.get(index));
+    public TextureAtlas.AtlasRegion getMonsterMiniSprite(int index) {
+        TextureAtlas monsterSprites = assets.get(monsterMiniSpriteSheetFile, TextureAtlas.class);
+        TextureAtlas.AtlasRegion sprite = monsterSprites.findRegion(Integer.toString(index));
+        if(sprite == null) {
+            sprite = monsterSprites.findRegion("0");
+        }
+
+        return sprite;
+    }
+
+    public TextureRegion getBackgroundTexture(int index) {
+        return assets.get("spritesheets/battleBacks.pack", TextureAtlas.class).findRegion(bgs.get(index));
     }
 
     public TextureAtlas getTextureAtlas(String path) {

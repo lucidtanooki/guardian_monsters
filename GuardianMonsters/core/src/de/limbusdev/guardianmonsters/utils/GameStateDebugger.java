@@ -41,9 +41,9 @@ public class GameStateDebugger {
         heroTeam.monsters.add(BattleFactory.getInstance().createMonster(4));
         heroTeam.monsters.add(BattleFactory.getInstance().createMonster(7));
         TeamComponent oppTeam = new TeamComponent();
-        oppTeam.monsters.add(BattleFactory.getInstance().createMonster(2));
-        oppTeam.monsters.add(BattleFactory.getInstance().createMonster(9));
-        oppTeam.monsters.add(BattleFactory.getInstance().createMonster(11));
+        oppTeam.monsters.add(BattleFactory.getInstance().createMonster(5));
+        oppTeam.monsters.add(BattleFactory.getInstance().createMonster(10));
+        oppTeam.monsters.add(BattleFactory.getInstance().createMonster(16));
         BattleScreen battleScreen = new BattleScreen();
         battleScreen.init(heroTeam, oppTeam);
         game.setScreen(battleScreen);
@@ -64,12 +64,12 @@ public class GameStateDebugger {
     private void TestBattleSystem() {
         TeamComponent heroTeam = new TeamComponent();
         heroTeam.monsters.add(BattleFactory.getInstance().createMonster(1));
-        heroTeam.monsters.add(BattleFactory.getInstance().createMonster(17));
-        heroTeam.monsters.add(BattleFactory.getInstance().createMonster(3));
+        heroTeam.monsters.add(BattleFactory.getInstance().createMonster(4));
+        heroTeam.monsters.add(BattleFactory.getInstance().createMonster(7));
         TeamComponent oppTeam = new TeamComponent();
-        oppTeam.monsters.add(BattleFactory.getInstance().createMonster(7));
-        oppTeam.monsters.add(BattleFactory.getInstance().createMonster(4));
-        oppTeam.monsters.add(BattleFactory.getInstance().createMonster(11));
+        oppTeam.monsters.add(BattleFactory.getInstance().createMonster(10));
+        oppTeam.monsters.add(BattleFactory.getInstance().createMonster(5));
+        oppTeam.monsters.add(BattleFactory.getInstance().createMonster(14));
 
         BattleSystem bs = new BattleSystem(heroTeam.monsters, oppTeam.monsters, new BattleSystem.CallbackHandler() {
             @Override

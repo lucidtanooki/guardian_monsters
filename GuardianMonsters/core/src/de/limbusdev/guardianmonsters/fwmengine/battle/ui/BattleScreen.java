@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -31,7 +32,7 @@ public class BattleScreen implements Screen {
     private ShapeRenderer shpRend;
     private BitmapFont font;
     private BattleHUD battleHUD;
-    private Texture background;
+    private TextureRegion background;
     private boolean initialized=false;
     /* ........................................................................... CONSTRUCTOR .. */
 

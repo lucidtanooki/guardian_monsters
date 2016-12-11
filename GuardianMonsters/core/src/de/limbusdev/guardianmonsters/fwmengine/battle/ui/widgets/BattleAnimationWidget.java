@@ -138,13 +138,15 @@ public class BattleAnimationWidget extends BattleWidget implements ObservableWid
      * @param attPos    position of attacker
      * @param defPos    position of defender
      * @param side      side of attacker
+     * @param defSide   side of target
      */
-    public void animateAttack(final int attPos, final int defPos, boolean side, final Attack attack) {
+    public void animateAttack(final int attPos, final int defPos, boolean side, boolean defSide, final Attack attack) {
         Image attIm;
         final IntVector2 startPos,endPos;
 
         attackAnimationRunning = true;
 
+        // Get Position of attacking monster
         if(side)
             switch(attPos) {
                 case 2:  startPos = ImPos.HERO_TOP;break;
@@ -153,18 +155,13 @@ public class BattleAnimationWidget extends BattleWidget implements ObservableWid
             }
         else
             switch(attPos) {
-                case 2:
-                    startPos = ImPos.OPPO_TOP;
-                    break;
-                case 1:
-                    startPos = ImPos.OPPO_BOT;
-                    break;
-                default:
-                    startPos = ImPos.OPPO_MID;
-                    break;
+                case 2: startPos = ImPos.OPPO_TOP; break;
+                case 1: startPos = ImPos.OPPO_BOT; break;
+                default:startPos = ImPos.OPPO_MID; break;
             }
 
-        if(side)
+        // Get position of target monster
+        if(!defSide)
             switch(defPos) {
                 case 2:  endPos = ImPos.OPPO_TOP;break;
                 case 1:  endPos = ImPos.OPPO_BOT;break;
@@ -172,15 +169,9 @@ public class BattleAnimationWidget extends BattleWidget implements ObservableWid
             }
         else
             switch(defPos) {
-                case 2:
-                    endPos= ImPos.HERO_TOP;
-                    break;
-                case 1:
-                    endPos = ImPos.HERO_BOT;
-                    break;
-                default:
-                    endPos = ImPos.HERO_MID;
-                    break;
+                case 2: endPos= ImPos.HERO_TOP; break;
+                case 1: endPos = ImPos.HERO_BOT;break;
+                default:endPos = ImPos.HERO_MID;break;
             }
 
 

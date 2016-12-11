@@ -1,9 +1,12 @@
 package de.limbusdev.guardianmonsters.fwmengine.battle.ui;
 
+import com.badlogic.gdx.scenes.scene2d.Action;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 
+import de.limbusdev.guardianmonsters.data.AudioAssets;
 import de.limbusdev.guardianmonsters.fwmengine.battle.control.BattleStringBuilder;
 import de.limbusdev.guardianmonsters.fwmengine.battle.control.BattleSystem;
 import de.limbusdev.guardianmonsters.fwmengine.battle.control.MonsterManager;
@@ -37,6 +40,9 @@ import de.limbusdev.guardianmonsters.utils.GS;
 public class BattleHUD extends ABattleHUD implements WidgetObserver {
 
     // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ ATTRIBUTES
+
+    // Statics
+    private final static boolean LEFT = true, RIGHT = false;
 
     // Logic
     private BattleSystem battleSystem;
@@ -153,7 +159,6 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
         statusWidget.init(leftTeamSlots, rightTeamSlots);
         animationWidget.init(leftTeamSlots, rightTeamSlots);
         targetMenuWidget.init(heroTeam.monsters,opponentTeam.monsters);
-        targetMenuWidget.disableSide(TargetMenuWidget.LEFT);
 
         show();
     }
@@ -443,17 +448,18 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
 
                 // Start attack animation
                 int attPos, defPos;
-                boolean side;
-                if(leftTeamSlots.containsValue(attacker,false)) {
-                    side = true;
-                    attPos = leftTeamSlots.getKey(attacker,false);
-                    defPos = rightTeamSlots.getKey(target, false);
-                } else {
-                    side = false;
-                    defPos = leftTeamSlots.getKey(target,false);
-                    attPos = rightTeamSlots.getKey(attacker, false);
-                }
-                animationWidget.animateAttack(attPos, defPos, side, attack);
+                boolean activeSide;
+                boolean passiveSide;
+
+                activeSide =  leftTeamSlots.containsValue(attacker,false) ? LEFT : RIGHT;
+                passiveSide = leftTeamSlots.containsValue(target,  false) ? LEFT : RIGHT;
+
+                attPos = activeSide ?
+                    leftTeamSlots.getKey(attacker,false) : rightTeamSlots.getKey(attacker,false);
+                defPos = passiveSide ?
+                    leftTeamSlots.getKey(target, false) : rightTeamSlots.getKey(target, false);
+
+                animationWidget.animateAttack(attPos, defPos, activeSide, passiveSide, attack);
             }
 
             @Override
@@ -634,6 +640,8 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
             statusWidget.addToStage(stage);
 
             state = BattleState.ENDOFBATTLE;
+
+            stage.addAction(Services.getAudio().getMuteAudioAction());
         }
 
         public void toAnimation() {

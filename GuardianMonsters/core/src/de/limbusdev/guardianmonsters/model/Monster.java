@@ -175,6 +175,17 @@ public class Monster extends Observable {
         this.notifyObservers();
     }
 
+    public void consumeMP(int cost) {
+        if(cost > MP) {
+            System.err.println("This attack consumed more MP that the monster had.");
+            MP = 0;
+        } else if(MP + cost > MPfull) {
+            MP = MPfull;
+        } else {
+            MP -= cost;
+        }
+    }
+
     public int getMPfull() {
         return MPfull;
     }

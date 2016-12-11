@@ -104,6 +104,7 @@ public class MonsterManager {
             return;
         }
         rep.defender.setHP(rep.defender.getHP() - MathUtils.round(rep.damage));
+        rep.attacker.consumeMP(rep.attack.MPcost);
     }
 
     public static boolean tryToRun(Array<Monster> escapingTeam, Array<Monster> attackingTeam) {

@@ -18,7 +18,7 @@ public class AttackInfo {
             AttackType.PHYSICAL, Element.NONE, 0, "att_selfdef", SFXType.HIT, 0, AnimationType.NONE);
 
     public static Attack kick = new Attack(
-            AttackType.PHYSICAL, Element.NONE, 5, "att_kick", SFXType.HIT, 0, AnimationType.CONTACT);
+            AttackType.PHYSICAL, Element.NONE, 5, "att_kick", SFXType.HIT, 0, AnimationType.CONTACT, 2);
     public static Attack tooth = new Attack(
             AttackType.PHYSICAL, Element.NONE, 5, "att_tooth", SFXType.HIT, 0, AnimationType.CONTACT);
     public static Attack punch = new Attack(

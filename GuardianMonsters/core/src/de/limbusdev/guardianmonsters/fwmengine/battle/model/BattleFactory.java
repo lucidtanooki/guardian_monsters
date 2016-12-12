@@ -54,8 +54,10 @@ public class BattleFactory {
             else numMonsters = 3;
         }
 
-        for(int j=0; j<numMonsters; j++) team.monsters.add(BattleFactory.getInstance().createMonster(
+        for(int j=0; j<numMonsters; j++) {
+            team.monsters.put(j,BattleFactory.getInstance().createMonster(
                 decideWichMonster(ma.monsters, ma.monsterProbabilities)));
+        }
         return team;
     }
 

@@ -28,22 +28,24 @@ public class GameStateDebugger {
 
     private void setUpTestInventory() {
         TeamComponent herTeam = new TeamComponent();
-        herTeam.monsters.add(BattleFactory.getInstance().createMonster(1));
-        herTeam.monsters.add(BattleFactory.getInstance().createMonster(2));
-        herTeam.monsters.add(BattleFactory.getInstance().createMonster(3));
+        herTeam.monsters.put(0,BattleFactory.getInstance().createMonster(1));
+        herTeam.monsters.put(1,BattleFactory.getInstance().createMonster(2));
+        herTeam.monsters.put(2,BattleFactory.getInstance().createMonster(3));
         InventoryScreen ivs = new InventoryScreen(herTeam);
         game.setScreen(ivs);
     }
 
     private void setUpTestBattle() {
         TeamComponent heroTeam = new TeamComponent();
-        heroTeam.monsters.add(BattleFactory.getInstance().createMonster(1));
-        heroTeam.monsters.add(BattleFactory.getInstance().createMonster(4));
-        heroTeam.monsters.add(BattleFactory.getInstance().createMonster(7));
+        heroTeam.monsters.put(0,BattleFactory.getInstance().createMonster(1));
+        heroTeam.monsters.put(1,BattleFactory.getInstance().createMonster(4));
+        heroTeam.monsters.put(2,BattleFactory.getInstance().createMonster(7));
+        heroTeam.monsters.put(3,BattleFactory.getInstance().createMonster(8));
+        heroTeam.monsters.put(4,BattleFactory.getInstance().createMonster(9));
         TeamComponent oppTeam = new TeamComponent();
-        oppTeam.monsters.add(BattleFactory.getInstance().createMonster(5));
-        oppTeam.monsters.add(BattleFactory.getInstance().createMonster(10));
-        oppTeam.monsters.add(BattleFactory.getInstance().createMonster(16));
+        oppTeam.monsters.put(0,BattleFactory.getInstance().createMonster(5));
+        oppTeam.monsters.put(1,BattleFactory.getInstance().createMonster(10));
+        oppTeam.monsters.put(2,BattleFactory.getInstance().createMonster(16));
         BattleScreen battleScreen = new BattleScreen();
         battleScreen.init(heroTeam, oppTeam);
         game.setScreen(battleScreen);
@@ -63,13 +65,13 @@ public class GameStateDebugger {
 
     private void TestBattleSystem() {
         TeamComponent heroTeam = new TeamComponent();
-        heroTeam.monsters.add(BattleFactory.getInstance().createMonster(1));
-        heroTeam.monsters.add(BattleFactory.getInstance().createMonster(4));
-        heroTeam.monsters.add(BattleFactory.getInstance().createMonster(7));
+        heroTeam.monsters.put(0,BattleFactory.getInstance().createMonster(1));
+        heroTeam.monsters.put(1,BattleFactory.getInstance().createMonster(4));
+        heroTeam.monsters.put(2,BattleFactory.getInstance().createMonster(7));
         TeamComponent oppTeam = new TeamComponent();
-        oppTeam.monsters.add(BattleFactory.getInstance().createMonster(10));
-        oppTeam.monsters.add(BattleFactory.getInstance().createMonster(5));
-        oppTeam.monsters.add(BattleFactory.getInstance().createMonster(14));
+        oppTeam.monsters.put(0,BattleFactory.getInstance().createMonster(10));
+        oppTeam.monsters.put(1,BattleFactory.getInstance().createMonster(5));
+        oppTeam.monsters.put(2,BattleFactory.getInstance().createMonster(14));
 
         BattleSystem bs = new BattleSystem(heroTeam.monsters, oppTeam.monsters, new BattleSystem.CallbackHandler() {
             @Override
@@ -109,7 +111,7 @@ public class GameStateDebugger {
             Monster m = bs.getActiveMonster();
             int att = MathUtils.random(0,m.attacks.size-1);
             Array<Monster> targets = new Array<Monster>();
-            for(Monster h : oppTeam.monsters) {
+            for(Monster h : oppTeam.monsters.values()) {
                 if(h.getHP() > 0) {
                     targets.add(h);
                 }

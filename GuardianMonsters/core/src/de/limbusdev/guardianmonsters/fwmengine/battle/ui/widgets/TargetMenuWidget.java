@@ -7,6 +7,7 @@ import com.badlogic.gdx.utils.ArrayMap;
 import java.util.Observable;
 import java.util.Observer;
 
+import de.limbusdev.guardianmonsters.fwmengine.battle.control.BattleSystem;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.AHUD;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.model.Monster;
@@ -29,7 +30,7 @@ public class TargetMenuWidget extends SevenButtonsWidget implements Observer {
         super(hud, skin, callbackHandler, order);
     }
 
-    public void init(Array<Monster> leftTeam, Array<Monster> rightTeam) {
+    public void init(BattleSystem battleSystem) {
         this.leftTeam = new ArrayMap<Integer, Monster>();
         this.rightTeam = new ArrayMap<Integer, Monster>();
 
@@ -39,28 +40,24 @@ public class TargetMenuWidget extends SevenButtonsWidget implements Observer {
         }
 
 
-        int i = 0;
-        for(Monster m : leftTeam) {
-            if(m.getHP() > 0) {
-                this.leftTeam.put(i,m);
-                setButtonText(i, Services.getL18N().l18n().get(
-                    MonsterInformation.getInstance().monsterNames.get(m.ID)));
-                enableButton(i);
-                i++;
-                m.addObserver(this);
-            }
+        addMonstersToMenu(battleSystem.getLeftInBattle(), LEFT);
+        addMonstersToMenu(battleSystem.getRightInBattle(), RIGHT);
+    }
+
+    private void addMonstersToMenu(ArrayMap<Integer,Monster> team, boolean side) {
+        int offset = side ? 0 : 4;
+        if(side == LEFT) {
+            leftTeam = team;
+        } else {
+            rightTeam = team;
         }
 
-        i = 4;
-        for(Monster m : rightTeam) {
-            if(m.getHP() > 0) {
-                this.rightTeam.put(i,m);
-                setButtonText(i, Services.getL18N().l18n().get(
-                    MonsterInformation.getInstance().monsterNames.get(m.ID)));
-                enableButton(i);
-                i++;
-                m.addObserver(this);
-            }
+        for(int key : team.keys()) {
+            Monster m = team.get(key);
+            setButtonText(key + offset, Services.getL18N().l18n().get(
+                MonsterInformation.getInstance().monsterNames.get(m.ID)));
+            enableButton(key + offset);
+            m.addObserver(this);
         }
     }
 
@@ -68,7 +65,7 @@ public class TargetMenuWidget extends SevenButtonsWidget implements Observer {
         if(index <=2) {
             return leftTeam.get(index);
         } else {
-            return rightTeam.get(index);
+            return rightTeam.get(index-4);
         }
     }
 

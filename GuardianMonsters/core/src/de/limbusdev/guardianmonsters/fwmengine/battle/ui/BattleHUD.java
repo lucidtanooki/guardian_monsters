@@ -83,8 +83,6 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
 
     private TeamComponent leftTeam, rightTeam;
 
-    private ArrayMap<Integer, Monster> leftTeamSlots, rightTeamSlots;
-
 
     // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ CONSTRUCTOR
     public BattleHUD() {
@@ -124,25 +122,6 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
     public void init(TeamComponent heroTeam, TeamComponent opponentTeam) {
         reset();
 
-        // Give each monster a position on the battle field
-        leftTeamSlots = new ArrayMap<Integer, Monster>();
-        int i = 0;
-        for(Monster m : heroTeam.monsters) {
-            if(m.getHP() > 0) {
-                leftTeamSlots.put(i,m);
-                i++;
-            }
-        }
-
-        i=0;
-        rightTeamSlots = new ArrayMap<Integer, Monster>();
-        for(Monster m : opponentTeam.monsters) {
-            if(m.getHP() > 0) {
-                rightTeamSlots.put(i,m);
-                i++;
-            }
-        }
-
         // Keep monster teams
         this.leftTeam = heroTeam;
         this.rightTeam = opponentTeam;
@@ -154,9 +133,9 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
         // initialize attack menu with active monster
         attackMenu.init(battleSystem.getActiveMonster());
 
-        statusWidget.init(leftTeamSlots, rightTeamSlots);
-        animationWidget.init(leftTeamSlots, rightTeamSlots);
-        targetMenuWidget.init(heroTeam.monsters,opponentTeam.monsters);
+        statusWidget.init(battleSystem);
+        animationWidget.init(battleSystem);
+        targetMenuWidget.init(battleSystem);
 
         show();
     }
@@ -304,7 +283,7 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
             @Override
             public void onMonsterButton() {
                 System.out.println("Show Monster Menu");
-                monsterMenuWidget.init(leftTeam.monsters);
+                monsterMenuWidget.init(battleSystem, LEFT);
                 battleStateSwitcher.toTeamMenu();
             }
 
@@ -381,7 +360,7 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
             @Override
             public void onBackButton() {
                 boolean teamOk = false;
-                for(Monster m : leftTeam.monsters) {
+                for(Monster m : leftTeam.monsters.values()) {
                     if(m.getHP() > 0) {
                         teamOk = true || teamOk;
                     } else {
@@ -422,15 +401,12 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
 
             @Override
             public void onMonsterKilled(Monster m) {
-                int pos;
-                boolean side;
-                if(leftTeamSlots.containsValue(m,true)) {
-                    side = true;
-                    pos = leftTeamSlots.getKey(m,true);
-                } else {
-                    side = false;
-                    pos = rightTeamSlots.getKey(m,true);
-                }
+
+                boolean side = battleSystem.getLeftInBattle().containsValue(m,false);
+                int pos = side ?
+                    battleSystem.getLeftInBattle().getKey(m,false)
+                    : battleSystem.getRightInBattle().getKey(m,false);
+
                 animationWidget.animateMonsterKO(pos,side);
             }
 
@@ -452,13 +428,11 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
                 boolean activeSide;
                 boolean passiveSide;
 
-                activeSide =  leftTeamSlots.containsValue(attacker,false) ? LEFT : RIGHT;
-                passiveSide = leftTeamSlots.containsValue(target,  false) ? LEFT : RIGHT;
+                activeSide =  battleSystem.getBattleFieldSideFor(attacker);
+                passiveSide = battleSystem.getBattleFieldSideFor(target);
 
-                attPos = activeSide ?
-                    leftTeamSlots.getKey(attacker,false) : rightTeamSlots.getKey(attacker,false);
-                defPos = passiveSide ?
-                    leftTeamSlots.getKey(target, false) : rightTeamSlots.getKey(target, false);
+                attPos = battleSystem.getBattleFieldPositionFor(attacker);
+                defPos = battleSystem.getBattleFieldPositionFor(target);
 
                 animationWidget.animateAttack(attPos, defPos, activeSide, passiveSide, attack);
             }
@@ -563,7 +537,7 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
             @Override
             public void onButtonNr(int nr) {
                 System.out.println("Teammember " + nr);
-                // TODO change monster in battle and everywhere
+                battleSystem.replaceActiveMonster(leftTeam.monsters.get(nr));
             }
         };
     }

@@ -88,9 +88,9 @@ public class EntityFactory {
 
         // Add Team
         de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TeamComponent team = new de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TeamComponent();
-        team.monsters.add(BattleFactory.getInstance().createMonster(1));
-        team.monsters.add(BattleFactory.getInstance().createMonster(14));
-        team.monsters.add(BattleFactory.getInstance().createMonster(5));
+        team.monsters.put(0,BattleFactory.getInstance().createMonster(1));
+        team.monsters.put(1,BattleFactory.getInstance().createMonster(14));
+        team.monsters.put(2,BattleFactory.getInstance().createMonster(5));
         if(restoreSave) {
             team.monsters = gameState.team;
         }

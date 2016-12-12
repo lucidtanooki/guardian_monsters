@@ -1,7 +1,9 @@
 package de.limbusdev.guardianmonsters.utils;
 
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.ArrayMap;
 
+import de.limbusdev.guardianmonsters.geometry.IntVector2;
 import de.limbusdev.guardianmonsters.model.Monster;
 
 
@@ -11,7 +13,7 @@ import de.limbusdev.guardianmonsters.model.Monster;
 public class GameState {
     /* ............................................................................ ATTRIBUTES .. */
     public int x,y,gridx,gridy,map;
-    public Array<Monster> team;
+    public ArrayMap<Integer,Monster> team;
     /* ........................................................................... CONSTRUCTOR .. */
 
     public GameState(int x, int y, int map) {
@@ -20,12 +22,12 @@ public class GameState {
         this.gridx = x/ GS.TILE_SIZE;
         this.gridy = y/ GS.TILE_SIZE;
         this.map = map;
-        this.team = new Array<Monster>();
+        this.team = new ArrayMap<Integer, Monster>();
     }
 
     public GameState() {
         // ONLY FOR JSON CREATION
-        this.team = new Array<Monster>();
+        this.team = new ArrayMap<Integer, Monster>();
     }
     /* ............................................................................... METHODS .. */
     

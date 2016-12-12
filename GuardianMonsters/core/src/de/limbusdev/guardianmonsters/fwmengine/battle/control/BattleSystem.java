@@ -2,8 +2,10 @@ package de.limbusdev.guardianmonsters.fwmengine.battle.control;
 
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.ArrayMap;
 
 import java.util.Iterator;
+import java.util.Observable;
 
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.AttackCalculationReport;
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.MonsterSpeedComparator;
@@ -15,15 +17,18 @@ import de.limbusdev.guardianmonsters.utils.DebugOutput;
  * Created by georg on 21.11.16.
  */
 
-public class BattleSystem {
+public class BattleSystem extends Observable {
 
     public static String TAG = BattleSystem.class.getSimpleName();
 
     public static final boolean LEFT = true;
     public static final boolean RIGHT = false;
 
-    private Array<Monster> leftTeam;
-    private Array<Monster> rightTeam;
+    private ArrayMap<Integer,Monster> leftTeam;
+    private ArrayMap<Integer,Monster> rightTeam;
+
+    private ArrayMap<Integer,Monster> leftInBattle;
+    private ArrayMap<Integer,Monster> rightInBattle;
 
     private AIPlayer aiPlayer;
 
@@ -43,7 +48,7 @@ public class BattleSystem {
     // Status values for GUI
 
 
-    public BattleSystem(Array<Monster> left, Array<Monster> right, CallbackHandler callbackHandler) {
+    public BattleSystem(ArrayMap<Integer,Monster> left, ArrayMap<Integer,Monster> right, CallbackHandler callbackHandler) {
 
         this.callbackHandler = callbackHandler;
 
@@ -58,11 +63,42 @@ public class BattleSystem {
         // Use two queues, to see the coming round in the widget
         currentRound = new Array<Monster>();
         nextRound = new Array<Monster>();
+        leftInBattle = new ArrayMap<Integer,Monster>();
+        rightInBattle = new ArrayMap<Integer,Monster>();
 
-        nextRound.addAll(left);
-        nextRound.addAll(right);
+        addFitMonstersToBattleField(leftTeam,LEFT);
+        addFitMonstersToBattleField(rightTeam,RIGHT);
 
         newRound();
+    }
+
+    /**
+     * Looks for monsters with HP > 0 and adds the first 3 to the battle
+     * @param team
+     * @param side
+     */
+    private void addFitMonstersToBattleField(ArrayMap<Integer,Monster> team, boolean side) {
+        int teamSize = team.size > 3 ? 3 : team.size;
+        int counter = 0;
+        int actualTeamSize = 0;
+
+        ArrayMap<Integer,Monster> inBattle;
+        if(side == LEFT) {
+            inBattle = leftInBattle;
+        } else {
+            inBattle = rightInBattle;
+        }
+
+        while(actualTeamSize < teamSize && counter < team.size) {
+            Monster m = team.get(counter);
+            if(m.getHP() > 0) {
+                // Add monster to team
+                nextRound.add(m);
+                inBattle.put(actualTeamSize,m);
+                actualTeamSize++;
+            }
+            counter++;
+        }
     }
 
 
@@ -134,7 +170,7 @@ public class BattleSystem {
             callbackHandler.onBattleEnds(isTeamKO(leftTeam));
         } else {
 
-            if (rightTeam.contains(getActiveMonster(), false)) {
+            if (rightTeam.containsValue(getActiveMonster(), false)) {
                 // It's AI's turn
                 letAItakeTurn();
             } else {
@@ -144,10 +180,10 @@ public class BattleSystem {
         }
     }
 
-    private boolean isTeamKO(Array<Monster> team) {
+    private boolean isTeamKO(ArrayMap<Integer,Monster> team) {
         boolean isKO = true;
 
-        for(Monster m : team) {
+        for(Monster m : team.values()) {
             isKO = isKO && m.getHP() == 0;
         }
 
@@ -194,7 +230,7 @@ public class BattleSystem {
      * This is possible only, when the first monster in queue is of AI's team.
      */
     public void letAItakeTurn() {
-        if(!rightTeam.contains(getActiveMonster(),false)) {
+        if(!rightTeam.containsValue(getActiveMonster(),false)) {
             throw new IllegalStateException(TAG +
                 " AI can't take turn. The first monster in queue" +
                 "is not in it's team.");
@@ -214,6 +250,33 @@ public class BattleSystem {
         } catch(Exception e) {
             // TODO
         }
+    }
+
+    /**
+     * Swaps two monsters
+     * @param newMonster
+     */
+    public void replaceActiveMonster(Monster newMonster) {
+
+        Monster replaced = currentRound.pop();
+        boolean side;
+
+        ArrayMap<Integer,Monster> inBattle;
+        if(leftInBattle.containsValue(replaced,false)) {
+            inBattle = leftInBattle;
+            side = true;
+        } else {
+            inBattle = rightInBattle;
+            side = false;
+        }
+
+        inBattle.put(inBattle.getKey(replaced,false),newMonster);
+
+        currentRound.add(newMonster);
+        nextMonster();
+
+        setChanged();
+        notifyObservers(side);
     }
 
     public Array<Monster> getCurrentRound() {
@@ -248,18 +311,52 @@ public class BattleSystem {
             System.out.println("\n### AI's turn ###");
             Monster m = getActiveMonster();
             int att = MathUtils.random(0,m.attacks.size-1);
-            Array<Monster> targets = new Array<Monster>();
-            for(Monster h : leftTeam) {
-                if(h.getHP() > 0) {
-                    targets.add(h);
-                }
-            }
-            setChosenTarget(targets.get(MathUtils.random(0,targets.size-1)));
+            setChosenTarget(leftInBattle.get(MathUtils.random(0,leftInBattle.size-1)));
             setChosenAttack(att);
             attack();
         }
     }
 
+    public ArrayMap<Integer,Monster> getLeftTeam() {
+        return leftTeam;
+    }
+
+    public ArrayMap<Integer,Monster> getRightTeam() {
+        return rightTeam;
+    }
+
+    public ArrayMap<Integer,Monster> getLeftInBattle() {
+        return leftInBattle;
+    }
+
+    public ArrayMap<Integer,Monster> getRightInBattle() {
+        return rightInBattle;
+    }
+
+    /**
+     *
+     * @param m
+     * @return  true == LEFT, false == RIGHT
+     */
+    public boolean getBattleFieldSideFor(Monster m) {
+        if(leftInBattle.containsValue(m,false)) {
+            return LEFT;
+        } else {
+            if(rightInBattle.containsValue(m,false)) {
+                return RIGHT;
+            } else {
+                throw new IllegalArgumentException("Monster " + m.INSTANCE_ID + " is not in battle right now.");
+            }
+        }
+    }
+
+    public int getBattleFieldPositionFor(Monster m) {
+        if(getBattleFieldSideFor(m) == LEFT) {
+            return leftInBattle.getKey(m,false);
+        } else {
+            return rightInBattle.getKey(m,false);
+        }
+    }
 
     // INNER INTERFACE
     public interface CallbackHandler {

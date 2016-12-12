@@ -165,25 +165,9 @@ public class HUD extends InputAdapter {
         });
         this.menuButtons.addActor(quit);
 
-        // Battle Button
-        TextButton battle = new TextButton(Services.getL18N().l18n().get("hud_battle"), skin, "menu-entry");
-        battle.setPosition(0, -9f*GS.ROW, Align.bottomLeft);
-        battle.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                TeamComponent oppTeam = new TeamComponent();
-                oppTeam.monsters.add(BattleFactory.getInstance().createMonster(7));
-                oppTeam.monsters.add(BattleFactory.getInstance().createMonster(4));
-                oppTeam.monsters.add(BattleFactory.getInstance().createMonster(11));
-                battleScreen.init(Components.team.get(hero), oppTeam);
-                Services.getScreenManager().pushScreen(battleScreen);
-            }
-        });
-        this.menuButtons.addActor(battle);
-
         // Team Button
         TextButton teamButton = new TextButton(Services.getL18N().l18n().get("hud_team"), skin, "menu-entry");
-        teamButton.setPosition(0, -13.5f*GS.ROW , Align.bottomLeft);
+        teamButton.setPosition(0, -9f*GS.ROW , Align.bottomLeft);
         teamButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {

@@ -13,9 +13,13 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 
+import java.util.Observable;
+import java.util.Observer;
+
 import de.limbusdev.guardianmonsters.data.AudioAssets;
 import de.limbusdev.guardianmonsters.enums.AnimationType;
 import de.limbusdev.guardianmonsters.enums.ButtonIDs;
+import de.limbusdev.guardianmonsters.fwmengine.battle.control.BattleSystem;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.AHUD;
 import de.limbusdev.guardianmonsters.geometry.IntVector2;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Media;
@@ -29,12 +33,13 @@ import de.limbusdev.guardianmonsters.utils.GS;
  * HINT: Don't forget calling the init() method
  * Created by georg on 03.07.16.
  */
-public class BattleAnimationWidget extends BattleWidget implements ObservableWidget {
+public class BattleAnimationWidget extends BattleWidget implements ObservableWidget, Observer {
 
     private static boolean LEFT = true;
     private static boolean RIGHT = false;
 
     private Array<WidgetObserver> observers;
+    private ArrayMap<Integer,Boolean> leftPositionsOccupied, rightPositionsOccupied;
 
     private ArrayMap<Integer,Image> monsterImgsLeft, monsterImgsRight;
     private Media media;
@@ -46,6 +51,9 @@ public class BattleAnimationWidget extends BattleWidget implements ObservableWid
     public BattleAnimationWidget(final AHUD hud, CallbackHandler callbackHandler) {
         super(hud);
 
+        leftPositionsOccupied = new ArrayMap<Integer, Boolean>();
+        rightPositionsOccupied = new ArrayMap<Integer, Boolean>();
+
         observers = new Array<WidgetObserver>();
         this.monsterImgsLeft = new ArrayMap<Integer,Image>();
         this.monsterImgsRight = new ArrayMap<Integer,Image>();
@@ -56,35 +64,48 @@ public class BattleAnimationWidget extends BattleWidget implements ObservableWid
 
     }
 
-    /**
-     *
-     * @param hero heros monsters
-     * @param oppo opponents monsters
-     */
-    public void init(ArrayMap<Integer,Monster> hero, ArrayMap<Integer,Monster> oppo) {
+
+    public void init(BattleSystem battleSystem) {
         clear();
+        addMonsterAnimationsForTeam(battleSystem.getLeftInBattle(),true);
+        addMonsterAnimationsForTeam(battleSystem.getRightInBattle(),false);
+    }
 
-        monsterImgsLeft.clear();
-        monsterImgsRight.clear();
+    private void addMonsterAnimationsForTeam(ArrayMap<Integer,Monster> team, boolean side) {
 
-        for(Integer key : hero.keys()) {
-            Monster m = hero.get(key);
-            setUpMonsterSprite(m.ID, key, true);
+        ArrayMap<Integer,Image> imgs;
+        ArrayMap<Integer,Boolean> positions;
+
+        if(side == LEFT) {
+            imgs = monsterImgsLeft;
+            positions = leftPositionsOccupied;
+        } else {
+            imgs = monsterImgsRight;
+            positions = rightPositionsOccupied;
         }
 
-        for(Integer key : oppo.keys()) {
-            Monster m = oppo.get(key);
-            setUpMonsterSprite(m.ID, key, false);
+        positions.clear();
+        imgs.clear();
+
+        // Not more than 3 monsters can join a fight
+        int teamSize = team.size > 3 ? 3 : team.size;
+        int counter = 0;
+        int actualTeamSize = 0;
+        while(actualTeamSize < teamSize && counter < team.size) {
+            Monster m = team.get(counter);
+            if(m.getHP() > 0) {
+                // Add monster to team
+                setUpMonsterSprite(m.ID,actualTeamSize, side);
+                positions.put(actualTeamSize,true);
+                actualTeamSize++;
+            }
+            counter++;
         }
 
-        // Correct Image Sorting
-        if(hero.containsKey(2) && hero.get(2).getHP() > 0) addActor(monsterImgsLeft.get(2));
-        if(hero.containsKey(0) && hero.get(0).getHP() > 0) addActor(monsterImgsLeft.get(0));
-        if(hero.containsKey(1) && hero.get(1).getHP() > 0) addActor(monsterImgsLeft.get(1));
-
-        if(oppo.containsKey(2) && oppo.get(2).getHP() > 0) addActor(monsterImgsRight.get(2));
-        if(oppo.containsKey(0) && oppo.get(0).getHP() > 0) addActor(monsterImgsRight.get(0));
-        if(oppo.containsKey(1) && oppo.get(1).getHP() > 0) addActor(monsterImgsRight.get(1));
+        // Correct Image Depth Sorting
+        if(positions.containsKey(2)) addActor(imgs.get(2));
+        if(positions.containsKey(1)) addActor(imgs.get(1));
+        if(positions.containsKey(0)) addActor(imgs.get(0));
     }
 
     /**
@@ -325,6 +346,19 @@ public class BattleAnimationWidget extends BattleWidget implements ObservableWid
     @Override
     public void notifyWidgetObservers() {
         for(WidgetObserver wo : observers) wo.getNotified(this);
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        if(o instanceof BattleSystem && arg != null) {
+            boolean side = (Boolean) arg;
+            BattleSystem bs = (BattleSystem) o;
+            if(side == LEFT) {
+                init(bs);
+            } else {
+
+            }
+        }
     }
 
 

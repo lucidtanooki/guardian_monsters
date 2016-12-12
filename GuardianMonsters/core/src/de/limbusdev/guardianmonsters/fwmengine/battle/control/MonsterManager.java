@@ -3,6 +3,7 @@ package de.limbusdev.guardianmonsters.fwmengine.battle.control;
 
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.I18NBundle;
 
 import de.limbusdev.guardianmonsters.enums.AttackType;
@@ -107,18 +108,18 @@ public class MonsterManager {
         rep.attacker.consumeMP(rep.attack.MPcost);
     }
 
-    public static boolean tryToRun(Array<Monster> escapingTeam, Array<Monster> attackingTeam) {
+    public static boolean tryToRun(ArrayMap<Integer,Monster> escapingTeam, ArrayMap<Integer,Monster> attackingTeam) {
         float meanEscapingTeamLevel = 0;
         float meanAttackingTeamLevel = 0;
 
-        for(Monster m : escapingTeam) {
+        for(Monster m : escapingTeam.values()) {
             if(m.getHP() > 0) {
                 meanEscapingTeamLevel += m.getLevel();
             }
         }
         meanEscapingTeamLevel /= escapingTeam.size;
 
-        for(Monster m : attackingTeam) {
+        for(Monster m : attackingTeam.values()) {
             meanAttackingTeamLevel += m.getLevel();
         }
         meanAttackingTeamLevel /= escapingTeam.size;

@@ -7,6 +7,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 
+import de.limbusdev.guardianmonsters.fwmengine.battle.control.BattleSystem;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.AHUD;
 import de.limbusdev.guardianmonsters.geometry.IntVector2;
 import de.limbusdev.guardianmonsters.model.Monster;
@@ -53,55 +54,28 @@ public class BattleStatusOverviewWidget extends BattleWidget {
 
     }
 
-    /**
-     *
-     * @param hero hero's monsters
-     * @param oppo opponents monsters
-     */
-    public void init(ArrayMap<Integer,Monster> hero, ArrayMap<Integer,Monster> oppo) {
+    private void addStatusWidgetsForTeam(ArrayMap<Integer,Monster> team, boolean side) {
+        Array<MonsterStateWidget> stateWidgets = side ?
+            monsterStateWidgetsLeft : monsterStateWidgetsRight;
 
         // Clear Actions
-        for(MonsterStateWidget w : monsterStateWidgetsLeft) {
-            w.clearActions();
-            w.remove();
-            w.setVisible(true);
-            w.setColor(Color.WHITE);
-        }
-        for(MonsterStateWidget w : monsterStateWidgetsRight) {
+        for(MonsterStateWidget w : stateWidgets) {
             w.clearActions();
             w.remove();
             w.setVisible(true);
             w.setColor(Color.WHITE);
         }
 
-        // Initialize Status UIs ...................................................................
-        // Hero Team
-        switch(hero.size) {
-            case 3:
-                monsterStateWidgetsLeft.get(2).init(hero.get(2));
-                addActor(monsterStateWidgetsLeft.get(2));
-            case 2:
-                monsterStateWidgetsLeft.get(1).init(hero.get(1));
-                addActor(monsterStateWidgetsLeft.get(1));
-            default:
-                monsterStateWidgetsLeft.get(0).init(hero.get(0));
-                addActor(monsterStateWidgetsLeft.get(0));
-                break;
+        // Initialize UI
+        for(int key : team.keys()) {
+            stateWidgets.get(key).init(team.get(key));
+            addActor(stateWidgets.get(key));
         }
+    }
 
-        // Opponent Team
-        switch(oppo.size) {
-            case 3:
-                monsterStateWidgetsRight.get(2).init(oppo.get(2));
-                addActor(monsterStateWidgetsRight.get(2));
-            case 2:
-                monsterStateWidgetsRight.get(1).init(oppo.get(1));
-                addActor(monsterStateWidgetsRight.get(1));
-            default:
-                monsterStateWidgetsRight.get(0).init(oppo.get(0));
-                addActor(monsterStateWidgetsRight.get(0));
-                break;
-        }
+    public void init(BattleSystem battleSystem) {
+        addStatusWidgetsForTeam(battleSystem.getLeftInBattle(),true);
+        addStatusWidgetsForTeam(battleSystem.getRightInBattle(),false);
     }
 
     public void fadeStatusWidget(int pos, boolean side) {

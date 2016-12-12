@@ -75,7 +75,7 @@ public class MovementSystem extends EntitySystem {
                 System.out.println("Entered Healing Area");
                 de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TeamComponent tc = de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Components.team.get(hero);
                 boolean teamHurt = false;
-                for(Monster m : tc.monsters)
+                for(Monster m : tc.monsters.values())
                     if(m.getHP() != m.getHPfull())
                         m.setHP(m.getHPfull());
             }

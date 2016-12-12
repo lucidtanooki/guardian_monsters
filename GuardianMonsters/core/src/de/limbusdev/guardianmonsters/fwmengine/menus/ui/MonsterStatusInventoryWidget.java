@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.ArrayMap;
 
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TeamComponent;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Media;
@@ -35,7 +36,7 @@ public class MonsterStatusInventoryWidget extends Table{
     private Image monsterImgBg, selectDisplayImg, dataImgBg;
     private Image monsterImg;
     private Array<TextButton> monsterButtons;
-    private Array<Monster> team;
+    private ArrayMap<Integer,Monster> team;
     private Skin skin;
     private Media media;
     private TextButton infoHead, mpLabel, hpLabel, expLabel;
@@ -124,7 +125,8 @@ public class MonsterStatusInventoryWidget extends Table{
 
     public void init(TeamComponent team) {
         this.team = team.monsters;
-        for(Monster m : team.monsters) {
+        for(int key : this.team.keys()) {
+            Monster m = this.team.get(key);
             final TextButton tb = new TextButton(
                     MonsterInformation.getInstance().monsterNames.get(m.ID-1), skin, "b-monster");
             tb.addListener(new ClickListener() {

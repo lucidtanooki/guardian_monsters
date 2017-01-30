@@ -1,0 +1,476 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="64" height="32" tilewidth="16" tileheight="16" nextobjectid="333">
+ <properties>
+  <property name="musicIndex" value="2"/>
+  <property name="musicType" value="town"/>
+ </properties>
+ <tileset firstgid="1" name="limbusdev_world2" tilewidth="16" tileheight="16" tilecount="4096">
+  <image source="../spritesheets/limbusdev_world2.png" width="1024" height="1024"/>
+ </tileset>
+ <layer name="ground1" width="64" height="32">
+  <data encoding="base64" compression="zlib">
+   eJztmFEOgyAMQHF4MvFkcyfTHWyS2Kxr6CzSKMF+vCwi075SqtF3zvkKGJxzo/s9Dht0HB+3gvmbv/mbv/nf139Yf8PG2H396Xir/kGI+Z8XD9wrMPek81rxlzpK/ffmHfXXyj/mEa+FgF4U+5AXnutJPBBn6hr4OpF5Zdl4J/xTfRKPYWgc2rXIQT2x3z+i+yuxviVx5OZAwz+X6D0R98iTqYEccvfGmf6cN6YX1o6knmrzp2sTErGW+B/pixo1pxVf7MXS3qHlDzmYEFw+ZjKPg/s/9G2uR5XWotZzkeYDkO6tPQ+aB3gGl6x9ai9dhXRPQR6oN34nWBJey875GoAayukt4J3bw2um5nd98z/Hn3vHp+Ot+t/9W5f5m7/5m7/5X+v/AV2Czeo=
+  </data>
+ </layer>
+ <layer name="ground2" width="64" height="32">
+  <data encoding="base64" compression="zlib">
+   eJzt1LEJwDAMBEC19gZJJk+ybNyosMED2LmDhwfV+ggAAABWcpeIp+Utfc9b9l0dNeJsuWrf85YddjT7/3ELdjX7/3ELAAAA/uoDv3QNOA==
+  </data>
+ </layer>
+ <layer name="walls1" width="64" height="32">
+  <data encoding="base64" compression="zlib">
+   eJztmdlS2zAYhYUDJFc8BRekLRCWC16A5UGYaYHu5RWAPAjTnbD0IeBBMgxLs9KLXvZoYk+c37L0y5Zjl+HMfJPEFvp1dIzGGm1OCrEBNnP6rIA0Oshx7C4+t1L6X3c0lkNwlMNnEx5mvaGfOU/t86sXbXft529bk3q/BHvo625i/Ej/2yFfr/C9qZiDGy/a7jrBmKXPKzIH5anB9WfeKFTnJSFqk9F2aXkeqlUlv+OuVxPWkj4rU6P51/38d70hKkn/grRrTwvRAV3QA33wMD3axsReqN42xvJSsSbQ6zukj7/lKMpaIrpmbvn+TQry74fGu4A6i6AGlsAyWClH/zZunqiO0f8Xhf+467JflfcAKumTrpl1pv9AF/5z8Ab9vwXvwHvwAXwEn8A+qc2dJ1vpvKvmwJT/SWmQs47Av1QD/Z+CM3AOLsAvUtNmnmwk+12rDHgoD6DfJeEapvxV/hvgFJwR/y302wYd0AU90Pdr/yG+OPOURLJfE2GZ8m/BW4/QBh3Q9X/3ff/zmNsFsAhqYAksgxWwWhnWtJknG8X1q6vh4v/fVtx5ctWvrkaa9f8xKI/8k+gIz2zdwfpA9b/kfwnvVxn5L2r+t1hXT/CO3gC/S+b2SVTE/INnvYpxtOC9DV4o3vVcqIj5B8/6DsaxK8cCXmfov2j5B/qGcXwHP8BP8HkG7/wzbmsUMf9xqsj5j0NP+fPy5+7Xue1cylRTd5+bP3e/ntW+XidTTd19Tv7c/XpW+3qdTDVN97n5c/frWe3rdTLV1N3n5M/dr2e1r9fJVNN0n5M/d79uu69vinRnHZyapvtx+d8+wrMOFfcT6vyTnicU+awjrr7qzJSeJ2SFi7OOtPVVZ6B5yPasw4U2iPd/NHkA+g==
+  </data>
+ </layer>
+ <layer name="objects1" width="64" height="32">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUDCR4w0cfPZSCt0y0MVeHnz56qAEMmQfG3sEAQPFfSKL/+1ho45aBAhtpEP9ORJi5DJjflyPleWL0kAt0OLGzkflujLSzf6BBDid2NjY+PkBsGJETl7SMfxhIA6a3dBz1jCvUb48IlMOE5AcbQA5X9DxHDiDG/9SOf5Cd5IS76zDO08QCeuQrWoDnfAj8EBj3D4D0A35UOY8h6jdiAMyP6tC0DwsDmBxI3J2I9D1U438UUAcM1fgH5fUH0HSPXhYg54XhCuD+RPM/LFweDLF2yCgYvGC0nUQcgPX9ial3iQHUMmcgACjNDOf2Fy4w1PxMbN4mZVxrtLwYBaMAAobKXAetwFCa6xgFwx8AACbjOXY=
+  </data>
+ </layer>
+ <layer name="tops1" width="64" height="32">
+  <data encoding="base64" compression="zlib">
+   eJztmUtOwzAURZ1PSUbdBWLUCYIFgFToRoARE9QuAEZdCL8QkCgq6hgkPhtBqO2UDphxK2LhlDhxHTtxIEe6spNa8bt+bpr0EVIugU3IFaPAQstRaMXHhnaxsbac73bdUXfNMTxMGI3hccLR1IqPnSr0n7buVIfwPYCOnOyxoqKswsta5OcU7Rl0HukCurR/j5uz7HwhMyel7/70N+Btk6NW5F9l/il78HTA+Hpj4ny3+ONkaLjx4w5z3IW3Hkds/qtM2+V/luZfZ/5NoYu16XFUZv73m9j3zexxMy/fPEP4vOdoYGDeb7247pj+SGItPuBzxtEiNynXH+bMgyyffnK/TGTW6RjnTzLWMOm6oyj3tJ82h8k8IOZHibjZ73/ee0GZWNi7tiH7VzdJe30L3rcV+/cNvH/Pkd3rfwW614P5ewUUQteG5koHOvZ6TfURfeatqampMR1Tn7908h89Vx3R9/Vl3+tV1Dqy5jTxPxmKKbWOJETqH1WrdYjWP4qmyFqHCC+4Rz87etvXnL8DT4pjWmTFJcRz9bV+Ss1FhIbCWJLYwfldV1/b4cwrSlthLCxf+anvyg==
+  </data>
+ </layer>
+ <layer name="tops2" width="64" height="32">
+  <data encoding="base64" compression="zlib">
+   eJztmdlOwzAQRS1RlvIf8FagEPgjeAOawm91oS38VcvSwDMnD6gmuOMJsYUAX+lIlaPOvZNN8sQYvbINY07hbOPrsfGmMXebNYr9Qs1axtzDQ+vz+iN9P8EzvHjOwXiH87QTPltZ9769IoZHQd+v8Gb1f7BlzCEcQReO4WTL/f9HMj3BM7wEzPdR97W9IrSHS5f0eQXX0IMc+nADt5VzcECmQziCLhzDSftrzT3O7X5Lv27XtfuXPJqoaz37A3ocwgjGcAcTmMLM6v+SDFdwDT3IoQ83cFvJd06PF44+XevVunb/kkcT5Vb/c3pclNefZ74HOfRhyVph9T/AfwgjGJfPJkxgCrMG2ap1T3dXhPKQ1NnGn35H1jtvwu8pZNurtTn+i/I68Tz2IIc+LFkrGmSr1rUVykP0p8+F432/ZK2w1jtcjyFZRlbGCb+nkO1+399V11YID9F/zXu+VGYdm5Nh4ci4ZK1o8I5eVzekRwh1hPsva3BvSnVDeSQlJSUlJf1Haecasfb1TTybzmS0c41Y+3oxm8ezzkzGJe1cQ7uvDymfZ52ZjEvauUadfX0o+TzrzGTWSTvXiLWvF7N5PLXZJWnnGrH29WI2j6c2uyTtXCPWvl7M5vHUZpeknWvE2teL2Tye2uyStHONWPt6ST5PbfakpJ9W3W8df011vnUkJcXQO1GR5Tw=
+  </data>
+ </layer>
+ <objectgroup name="colliderWalls1">
+  <object id="203" x="64" y="144" width="96" height="32"/>
+  <object id="205" x="176" y="144" width="48" height="32"/>
+  <object id="206" x="64" y="96" width="160" height="48"/>
+  <object id="207" x="160" y="144" width="16" height="16"/>
+  <object id="208" x="240" y="160" width="32" height="16"/>
+  <object id="209" x="288" y="160" width="80" height="16"/>
+  <object id="210" x="240" y="144" width="128" height="16"/>
+  <object id="211" x="240" y="96" width="128" height="48"/>
+  <object id="213" x="400" y="176" width="32" height="16"/>
+  <object id="214" x="448" y="176" width="80" height="16"/>
+  <object id="216" x="400" y="96" width="128" height="80"/>
+  <object id="217" x="384" y="160" width="16" height="32"/>
+  <object id="218" x="384" y="96" width="16" height="16"/>
+  <object id="219" x="112" y="176" width="32" height="16"/>
+  <object id="220" x="64" y="176" width="16" height="16"/>
+  <object id="221" x="64" y="208" width="16" height="16"/>
+  <object id="222" x="64" y="240" width="16" height="16"/>
+  <object id="223" x="64" y="272" width="16" height="16"/>
+  <object id="224" x="224" y="400" width="16" height="16"/>
+  <object id="225" x="368" y="352" width="16" height="16"/>
+  <object id="227" x="384" y="384" width="16" height="16"/>
+  <object id="228" x="432" y="368" width="16" height="16"/>
+  <object id="229" x="240" y="352" width="128" height="96"/>
+  <object id="230" x="256" y="336" width="96" height="16"/>
+  <object id="231" x="272" y="320" width="64" height="16"/>
+  <object id="232" x="288" y="304" width="32" height="16"/>
+  <object id="233" x="80" y="352" width="128" height="96"/>
+  <object id="234" x="96" y="336" width="96" height="16"/>
+  <object id="235" x="112" y="320" width="64" height="16"/>
+  <object id="236" x="128" y="304" width="32" height="16"/>
+  <object id="237" x="528" y="256" width="32" height="32"/>
+  <object id="238" x="624" y="288" width="32" height="16"/>
+  <object id="239" x="560" y="256" width="64" height="32"/>
+  <object id="240" x="576" y="288" width="32" height="16"/>
+  <object id="241" x="560" y="240" width="64" height="16"/>
+  <object id="242" x="608" y="208" width="32" height="32"/>
+  <object id="243" x="528" y="112" width="16" height="16"/>
+  <object id="244" x="528" y="144" width="16" height="16"/>
+  <object id="245" x="528" y="176" width="16" height="16"/>
+  <object id="246" x="736" y="112" width="16" height="16"/>
+  <object id="247" x="736" y="144" width="16" height="16"/>
+  <object id="248" x="736" y="176" width="16" height="16"/>
+  <object id="249" x="672" y="112" width="32" height="16"/>
+  <object id="250" x="752" y="176" width="32" height="16"/>
+  <object id="251" x="800" y="176" width="128" height="16"/>
+  <object id="252" x="752" y="96" width="176" height="80"/>
+  <object id="253" x="944" y="208" width="16" height="16"/>
+  <object id="255" x="704" y="352" width="256" height="96"/>
+  <object id="256" x="720" y="336" width="96" height="16"/>
+  <object id="257" x="848" y="336" width="96" height="16"/>
+  <object id="258" x="736" y="320" width="64" height="16"/>
+  <object id="259" x="752" y="304" width="32" height="16"/>
+  <object id="260" x="864" y="320" width="64" height="16"/>
+  <object id="261" x="880" y="304" width="32" height="16"/>
+  <object id="262" x="48" y="0" width="480" height="96"/>
+  <object id="263" x="768" y="0" width="192" height="96"/>
+  <object id="264" x="528" y="48" width="16" height="48"/>
+  <object id="265" x="736" y="48" width="32" height="48"/>
+  <object id="266" x="576" y="48" width="32" height="64"/>
+  <object id="267" x="672" y="48" width="32" height="64"/>
+  <object id="269" x="960" y="64" width="64" height="384"/>
+  <object id="270" x="704" y="448" width="320" height="64"/>
+  <object id="271" x="672" y="464" width="32" height="48"/>
+  <object id="272" x="656" y="464" width="16" height="32"/>
+  <object id="273" x="592" y="464" width="32" height="48"/>
+  <object id="274" x="496" y="464" width="32" height="48"/>
+  <object id="275" x="592" y="448" width="32" height="16"/>
+  <object id="276" x="496" y="448" width="32" height="16"/>
+  <object id="277" x="432" y="448" width="32" height="48"/>
+  <object id="278" x="48" y="448" width="384" height="64"/>
+  <object id="279" x="0" y="0" width="48" height="432"/>
+  <object id="280" x="0" y="432" width="48" height="80"/>
+  <object id="302" x="800" y="208" width="96" height="32"/>
+  <object id="303" x="912" y="208" width="32" height="32"/>
+  <object id="304" x="800" y="272" width="144" height="32"/>
+ </objectgroup>
+ <objectgroup name="sensors">
+  <object id="32" name="startField" x="432" y="192" width="16" height="16">
+   <properties>
+    <property name="fieldID" value="1"/>
+   </properties>
+  </object>
+  <object id="35" name="warpField" x="432" y="176" width="16" height="16">
+   <properties>
+    <property name="targetID" value="9"/>
+    <property name="targetWarpPointID" value="2"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="livingEntities">
+  <object id="51" name="person" x="208" y="176" width="16" height="16">
+   <properties>
+    <property name="male" value="true"/>
+    <property name="path" value="SSTOP"/>
+    <property name="spriteIndex" value="2"/>
+    <property name="static" value="true"/>
+    <property name="text" value="person_1"/>
+   </properties>
+  </object>
+  <object id="202" name="person" x="352" y="224" width="16" height="16">
+   <properties>
+    <property name="male" value="true"/>
+    <property name="path" value="SSTOP,E,E,E,E,ESTOP,NSTOP,NSTOP,WSTOP,SSTOP,S,S,S,ESTOP,SSTOP,W,W,W,W,SSTOP,WSTOP,SSTOP,SSTOP,SSTOP,SSTOP,WSTOP,NSTOP,N,N,N"/>
+    <property name="spriteIndex" value="2"/>
+    <property name="static" value="false"/>
+    <property name="text" value="person_1"/>
+   </properties>
+  </object>
+  <object id="291" name="person" x="208" y="416" width="16" height="16">
+   <properties>
+    <property name="male" value="true"/>
+    <property name="path" value="SSTOP,ESTOP,NSTOP,N,N,N,N,N,ESTOP,NSTOP,WSTOP,NSTOP,ESTOP,E,SSTOP,WSTOP,S,S,W,S,S,S,SSTOP,ESTOP,NSTOP"/>
+    <property name="spriteIndex" value="2"/>
+    <property name="static" value="false"/>
+    <property name="text" value="person_1"/>
+   </properties>
+  </object>
+  <object id="292" name="person" x="544" y="288" width="16" height="16">
+   <properties>
+    <property name="male" value="true"/>
+    <property name="path" value="SSTOP"/>
+    <property name="spriteIndex" value="1"/>
+    <property name="static" value="true"/>
+    <property name="text" value="person_1"/>
+   </properties>
+  </object>
+  <object id="293" name="person" x="592" y="112" width="16" height="16">
+   <properties>
+    <property name="male" value="true"/>
+    <property name="path" value="SSTOP"/>
+    <property name="spriteIndex" value="2"/>
+    <property name="static" value="true"/>
+    <property name="text" value="person_1"/>
+   </properties>
+  </object>
+  <object id="294" name="person" x="480" y="320" width="16" height="16">
+   <properties>
+    <property name="male" value="true"/>
+    <property name="path" value="SSTOP,ESTOP,NSTOP,ESTOP,E,E,E,E,E,SSTOP,S,SSTOP,ESTOP,E,E,E,E,N,N,E,E,ESTOP,N,N,N,N,N,N,ESTOP,SSTOP,S,S,S,S,S,S,SSTOP,SSTOP,W,W,S,S,W,W,W,W,WSTOP,NSTOP,WSTOP,N,W,W,W,W,W,WSTOP,SSTOP"/>
+    <property name="spriteIndex" value="2"/>
+    <property name="static" value="false"/>
+    <property name="text" value="person_1"/>
+   </properties>
+  </object>
+  <object id="295" name="person" x="720" y="272" width="16" height="16">
+   <properties>
+    <property name="male" value="true"/>
+    <property name="path" value="SSTOP,E,E,E,E,ESTOP,NSTOP,NSTOP,WSTOP,SSTOP,S,S,S,ESTOP,SSTOP,W,W,W,W,SSTOP,WSTOP,SSTOP,SSTOP,SSTOP,SSTOP,WSTOP,NSTOP,N,N,N"/>
+    <property name="spriteIndex" value="2"/>
+    <property name="static" value="false"/>
+    <property name="text" value="person_1"/>
+   </properties>
+  </object>
+  <object id="296" name="person" x="864" y="192" width="16" height="16">
+   <properties>
+    <property name="male" value="true"/>
+    <property name="path" value="SSTOP"/>
+    <property name="spriteIndex" value="1"/>
+    <property name="static" value="true"/>
+    <property name="text" value="person_25_2"/>
+   </properties>
+  </object>
+  <object id="297" name="person" x="912" y="192" width="16" height="16">
+   <properties>
+    <property name="male" value="true"/>
+    <property name="path" value="SSTOP"/>
+    <property name="spriteIndex" value="2"/>
+    <property name="static" value="true"/>
+    <property name="text" value="person_25_3"/>
+   </properties>
+  </object>
+  <object id="298" name="person" x="816" y="192" width="16" height="16">
+   <properties>
+    <property name="male" value="true"/>
+    <property name="path" value="SSTOP"/>
+    <property name="spriteIndex" value="1"/>
+    <property name="static" value="true"/>
+    <property name="text" value="person_25_1"/>
+   </properties>
+  </object>
+  <object id="299" name="person" x="816" y="304" width="16" height="16">
+   <properties>
+    <property name="male" value="true"/>
+    <property name="path" value="NSTOP"/>
+    <property name="spriteIndex" value="2"/>
+    <property name="static" value="true"/>
+    <property name="text" value="person_25_6"/>
+   </properties>
+  </object>
+  <object id="300" name="person" x="848" y="304" width="16" height="16">
+   <properties>
+    <property name="male" value="true"/>
+    <property name="path" value="NSTOP"/>
+    <property name="spriteIndex" value="2"/>
+    <property name="static" value="true"/>
+    <property name="text" value="person_25_5"/>
+   </properties>
+  </object>
+  <object id="301" name="person" x="928" y="304" width="16" height="16">
+   <properties>
+    <property name="male" value="true"/>
+    <property name="path" value="NSTOP"/>
+    <property name="spriteIndex" value="1"/>
+    <property name="static" value="true"/>
+    <property name="text" value="person_25_4"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="objects">
+  <object id="53" name="sign" x="112" y="176" width="16" height="16">
+   <properties>
+    <property name="text" value="sign_1_text"/>
+    <property name="title" value="sign_1_title"/>
+   </properties>
+  </object>
+  <object id="199" name="sign" x="128" y="176" width="16" height="16">
+   <properties>
+    <property name="text" value="sign_1_text"/>
+    <property name="title" value="sign_1_title"/>
+   </properties>
+  </object>
+  <object id="200" name="sign" x="128" y="160" width="16" height="16">
+   <properties>
+    <property name="text" value="sign_1_text"/>
+    <property name="title" value="sign_1_title"/>
+   </properties>
+  </object>
+  <object id="201" name="sign" x="112" y="160" width="16" height="16">
+   <properties>
+    <property name="text" value="sign_1_text"/>
+    <property name="title" value="sign_1_title"/>
+   </properties>
+  </object>
+  <object id="306" name="sign" x="624" y="288" width="16" height="16">
+   <properties>
+    <property name="text" value="sign_25_1_text"/>
+    <property name="title" value="sign_25_1_title"/>
+   </properties>
+  </object>
+  <object id="307" name="sign" x="640" y="288" width="16" height="16">
+   <properties>
+    <property name="text" value="sign_25_1_text"/>
+    <property name="title" value="sign_25_1_title"/>
+   </properties>
+  </object>
+  <object id="308" name="sign" x="800" y="224" width="16" height="16">
+   <properties>
+    <property name="text" value="object_25_1_text"/>
+    <property name="title" value="object_25_1_title"/>
+   </properties>
+  </object>
+  <object id="309" name="sign" x="800" y="208" width="16" height="16">
+   <properties>
+    <property name="text" value="object_25_1_text"/>
+    <property name="title" value="object_25_1_title"/>
+   </properties>
+  </object>
+  <object id="310" name="sign" x="816" y="224" width="16" height="16">
+   <properties>
+    <property name="text" value="object_25_1_text"/>
+    <property name="title" value="object_25_1_title"/>
+   </properties>
+  </object>
+  <object id="311" name="sign" x="832" y="224" width="16" height="16">
+   <properties>
+    <property name="text" value="object_25_2_text"/>
+    <property name="title" value="object_25_1_title"/>
+   </properties>
+  </object>
+  <object id="312" name="sign" x="848" y="224" width="16" height="16">
+   <properties>
+    <property name="text" value="object_25_4_text"/>
+    <property name="title" value="object_25_3_title"/>
+   </properties>
+  </object>
+  <object id="316" name="sign" x="912" y="208" width="16" height="16">
+   <properties>
+    <property name="text" value="object_25_1_text"/>
+    <property name="title" value="object_25_1_title"/>
+   </properties>
+  </object>
+  <object id="317" name="sign" x="912" y="224" width="16" height="16">
+   <properties>
+    <property name="text" value="object_25_1_text"/>
+    <property name="title" value="object_25_1_title"/>
+   </properties>
+  </object>
+  <object id="318" name="sign" x="928" y="224" width="16" height="16">
+   <properties>
+    <property name="text" value="object_25_1_text"/>
+    <property name="title" value="object_25_1_title"/>
+   </properties>
+  </object>
+  <object id="319" name="sign" x="848" y="272" width="16" height="16">
+   <properties>
+    <property name="text" value="object_25_1_text"/>
+    <property name="title" value="object_25_1_title"/>
+   </properties>
+  </object>
+  <object id="320" name="sign" x="864" y="272" width="16" height="16">
+   <properties>
+    <property name="text" value="object_25_1_text"/>
+    <property name="title" value="object_25_1_title"/>
+   </properties>
+  </object>
+  <object id="321" name="sign" x="880" y="272" width="16" height="16">
+   <properties>
+    <property name="text" value="object_25_1_text"/>
+    <property name="title" value="object_25_1_title"/>
+   </properties>
+  </object>
+  <object id="322" name="sign" x="864" y="224" width="16" height="16">
+   <properties>
+    <property name="text" value="object_25_5_text"/>
+    <property name="title" value="object_25_3_title"/>
+   </properties>
+  </object>
+  <object id="323" name="sign" x="880" y="224" width="16" height="16">
+   <properties>
+    <property name="text" value="object_25_3_text"/>
+    <property name="title" value="object_25_3_title"/>
+   </properties>
+  </object>
+  <object id="324" name="sign" x="880" y="208" width="16" height="16">
+   <properties>
+    <property name="text" value="object_25_1_text"/>
+    <property name="title" value="object_25_3_title"/>
+   </properties>
+  </object>
+  <object id="325" name="sign" x="928" y="272" width="16" height="16">
+   <properties>
+    <property name="text" value="object_25_3_text"/>
+    <property name="title" value="object_25_3_title"/>
+   </properties>
+  </object>
+  <object id="326" name="sign" x="912" y="272" width="16" height="16">
+   <properties>
+    <property name="text" value="object_25_5_text"/>
+    <property name="title" value="object_25_3_title"/>
+   </properties>
+  </object>
+  <object id="327" name="sign" x="896" y="272" width="16" height="16">
+   <properties>
+    <property name="text" value="object_25_4_text"/>
+    <property name="title" value="object_25_3_title"/>
+   </properties>
+  </object>
+  <object id="328" name="sign" x="832" y="272" width="16" height="16">
+   <properties>
+    <property name="text" value="object_25_4_text"/>
+    <property name="title" value="object_25_3_title"/>
+   </properties>
+  </object>
+  <object id="329" name="sign" x="816" y="272" width="16" height="16">
+   <properties>
+    <property name="text" value="object_25_4_text"/>
+    <property name="title" value="object_25_3_title"/>
+   </properties>
+  </object>
+  <object id="330" name="sign" x="800" y="272" width="16" height="16">
+   <properties>
+    <property name="text" value="object_25_4_text"/>
+    <property name="title" value="object_25_3_title"/>
+   </properties>
+  </object>
+  <object id="331" name="sign" x="800" y="288" width="16" height="16">
+   <properties>
+    <property name="text" value="object_25_4_text"/>
+    <property name="title" value="object_25_3_title"/>
+   </properties>
+  </object>
+  <object id="332" name="sign" x="832" y="288" width="16" height="16">
+   <properties>
+    <property name="text" value="object_25_4_text"/>
+    <property name="title" value="object_25_3_title"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="animations">
+  <object id="182" name="animation" x="400" y="304" width="16" height="16">
+   <properties>
+    <property name="index" value="17"/>
+   </properties>
+  </object>
+  <object id="281" name="animation" x="224" y="368" width="16" height="16">
+   <properties>
+    <property name="index" value="17"/>
+   </properties>
+  </object>
+  <object id="282" name="animation" x="384" y="320" width="16" height="16">
+   <properties>
+    <property name="index" value="17"/>
+   </properties>
+  </object>
+  <object id="283" name="animation" x="384" y="128" width="16" height="16">
+   <properties>
+    <property name="index" value="17"/>
+   </properties>
+  </object>
+  <object id="284" name="animation" x="624" y="240" width="16" height="16">
+   <properties>
+    <property name="index" value="17"/>
+   </properties>
+  </object>
+  <object id="285" name="animation" x="640" y="256" width="16" height="16">
+   <properties>
+    <property name="index" value="17"/>
+   </properties>
+  </object>
+  <object id="286" name="animation" x="736" y="160" width="16" height="16">
+   <properties>
+    <property name="index" value="17"/>
+   </properties>
+  </object>
+  <object id="287" name="animation" x="928" y="192" width="16" height="16">
+   <properties>
+    <property name="index" value="17"/>
+   </properties>
+  </object>
+  <object id="288" name="animation" x="928" y="256" width="16" height="16">
+   <properties>
+    <property name="index" value="17"/>
+   </properties>
+  </object>
+  <object id="289" name="animation" x="944" y="272" width="16" height="16">
+   <properties>
+    <property name="index" value="17"/>
+   </properties>
+  </object>
+  <object id="290" name="animation" x="672" y="384" width="16" height="16">
+   <properties>
+    <property name="index" value="17"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

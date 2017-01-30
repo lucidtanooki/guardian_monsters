@@ -56,7 +56,7 @@ public class GameStateDebugger {
             GameState state = SaveGameManager.loadSaveGame();
             game.setScreen(new OutdoorGameWorldScreen(state.map, 1, true));
         } else
-            game.setScreen(new OutdoorGameWorldScreen(9, 1, false));
+            game.setScreen(new OutdoorGameWorldScreen(25, 1, false));
     }
 
     private void setUpTestWorldUI() {

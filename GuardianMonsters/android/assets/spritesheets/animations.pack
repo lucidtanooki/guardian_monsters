@@ -1,7 +1,7 @@
 
 animations.png
 format: RGBA8888
-filter: Nearest,Nearest
+filter: MipMapLinearNearest,MipMapLinearNearest
 repeat: none
 light1
   rotate: false
@@ -9,10 +9,10 @@ light1
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 0
+  index: 7
 light1
   rotate: false
-  xy: 35, 19
+  xy: 1, 19
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
@@ -23,17 +23,24 @@ light1
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 7
+  index: 3
+light1
+  rotate: false
+  xy: 35, 19
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 5
 light1
   rotate: false
   xy: 69, 19
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 2
+  index: 0
 light1
   rotate: false
-  xy: 69, 19
+  xy: 103, 19
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
@@ -44,14 +51,7 @@ light1
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
-  index: 3
-light1
-  rotate: false
-  xy: 103, 19
-  size: 32, 32
-  orig: 32, 32
-  offset: 0, 0
-  index: 5
+  index: 2
 light1
   rotate: false
   xy: 137, 19
@@ -59,13 +59,13 @@ light1
   orig: 32, 32
   offset: 0, 0
   index: 4
-fire1
+fire2
   rotate: false
   xy: 1, 1
   size: 32, 16
   orig: 32, 16
   offset: 0, 0
-  index: 0
+  index: 1
 fire1
   rotate: false
   xy: 171, 35
@@ -80,51 +80,65 @@ fire2
   orig: 32, 16
   offset: 0, 0
   index: 0
-fire2
+fire1
   rotate: false
   xy: 205, 35
   size: 32, 16
   orig: 32, 16
   offset: 0, 0
-  index: 1
-waterisw
+  index: 0
+watere
   rotate: false
   xy: 69, 1
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 0
-lamp1
+flower1
+  rotate: false
+  xy: 239, 35
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 5
+flower1
   rotate: false
   xy: 239, 35
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 0
-lamp1
+flower1
+  rotate: false
+  xy: 239, 35
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+flower1
+  rotate: false
+  xy: 239, 35
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 4
+waterine
   rotate: false
   xy: 87, 1
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 1
-lamp1
-  rotate: false
-  xy: 87, 1
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 5
-lamp1
+watern
   rotate: false
   xy: 257, 35
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
-  index: 2
+  index: 1
 lamp1
   rotate: false
-  xy: 257, 35
+  xy: 105, 1
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
@@ -135,63 +149,70 @@ lamp1
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
-  index: 3
-watere
+  index: 2
+waterine
   rotate: false
   xy: 275, 35
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 0
-watere
+waterise
   rotate: false
   xy: 123, 1
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 1
-waterine
+waterw
   rotate: false
   xy: 293, 35
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 0
-waterine
+waterw
   rotate: false
   xy: 141, 1
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 1
-waterinw
+lamp1
   rotate: false
   xy: 311, 35
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
-  index: 0
+  index: 5
+lamp1
+  rotate: false
+  xy: 311, 35
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
 waterinw
   rotate: false
   xy: 329, 35
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
-  index: 1
-waterise
+  index: 0
+flower1
   rotate: false
   xy: 347, 35
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
-  index: 0
+  index: 3
 waterise
   rotate: false
   xy: 365, 35
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
-  index: 1
+  index: 0
 waterisw
   rotate: false
   xy: 383, 35
@@ -199,63 +220,63 @@ waterisw
   orig: 16, 16
   offset: 0, 0
   index: 1
-waterne
+flower1
   rotate: false
   xy: 401, 35
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
-  index: 0
+  index: 1
 waterne
   rotate: false
   xy: 419, 35
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
-  index: 1
-waternw
+  index: 0
+watere
   rotate: false
   xy: 437, 35
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
-  index: 0
-waternw
+  index: 1
+waters
   rotate: false
   xy: 455, 35
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
-  index: 1
-watern
+  index: 0
+water
   rotate: false
   xy: 473, 35
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
-  index: 0
-watern
+  index: 1
+waterse
   rotate: false
   xy: 491, 35
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
-  index: 1
-waterse
+  index: 0
+watersw
   rotate: false
   xy: 171, 17
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 0
-waterse
+water
   rotate: false
   xy: 189, 17
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
-  index: 1
-watersw
+  index: 0
+waternw
   rotate: false
   xy: 207, 17
   size: 16, 16
@@ -269,44 +290,65 @@ watersw
   orig: 16, 16
   offset: 0, 0
   index: 1
-waters
+waternw
   rotate: false
   xy: 243, 17
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
-  index: 0
-waters
+  index: 1
+lamp1
   rotate: false
   xy: 261, 17
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
-  index: 1
-waterw
+  index: 0
+waterisw
   rotate: false
   xy: 279, 17
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 0
-waterw
+lamp1
   rotate: false
   xy: 297, 17
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
-  index: 1
-water
+  index: 3
+waters
   rotate: false
   xy: 315, 17
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
-  index: 0
-water
+  index: 1
+waterinw
   rotate: false
   xy: 333, 17
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+watern
+  rotate: false
+  xy: 351, 17
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+waterse
+  rotate: false
+  xy: 369, 17
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+waterne
+  rotate: false
+  xy: 387, 17
   size: 16, 16
   orig: 16, 16
   offset: 0, 0

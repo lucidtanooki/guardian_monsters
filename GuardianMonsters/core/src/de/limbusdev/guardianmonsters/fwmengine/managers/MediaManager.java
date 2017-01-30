@@ -105,6 +105,8 @@ public class MediaManager implements Media {
                 .findRegions("lamp1"), Animation.PlayMode.LOOP));
         animatedTiles.add(new Animation(.4f, assets.get(animations, TextureAtlas.class)
                 .findRegions("light1"), Animation.PlayMode.LOOP));
+        animatedTiles.add(new Animation(.4f, assets.get(animations, TextureAtlas.class)
+            .findRegions("flower1"), Animation.PlayMode.LOOP));
     }
     /* ............................................................................... METHODS .. */
 

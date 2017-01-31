@@ -12,6 +12,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 
 import de.limbusdev.guardianmonsters.data.AudioAssets;
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PositionComponent;
 import de.limbusdev.guardianmonsters.geometry.IntRectangle;
 import de.limbusdev.guardianmonsters.geometry.IntVector2;
 import de.limbusdev.guardianmonsters.fwmengine.world.model.MapObjectInformation;
@@ -43,13 +44,13 @@ public class GameArea {
     private Array<MapObjectInformation> mapSigns;
     private Array<MonsterArea> monsterAreas;
     public IntVector2 gridPosition;
-    public de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PositionComponent startPosition;
+    public PositionComponent startPosition;
     public int areaID;
 
     /* ........................................................................... CONSTRUCTOR .. */
     public GameArea(int areaID, int startPosID) {
         this.media = Services.getMedia();
-        this.startPosition = new de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PositionComponent(0,0,0,0);
+        this.startPosition = new PositionComponent(0,0,0,0);
         this.colliders = new Array<IntRectangle>();
         this.movingColliders = new Array<IntRectangle>();
         this.monsterAreas = new Array<MonsterArea>();

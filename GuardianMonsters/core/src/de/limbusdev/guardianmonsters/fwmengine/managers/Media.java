@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 import de.limbusdev.guardianmonsters.enums.TextureAtlasType;
+import de.limbusdev.guardianmonsters.fwmengine.world.ui.AnimatedSprite;
 
 /**
  * Created by georg on 14.11.16.
@@ -60,5 +61,7 @@ public interface Media {
      * @return
      */
     public Animation getTileAnimation(int index);
+
+    public Animation getObjectAnimation(String id);
 
 }

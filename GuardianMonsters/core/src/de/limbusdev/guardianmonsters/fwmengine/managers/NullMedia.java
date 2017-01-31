@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import de.limbusdev.guardianmonsters.enums.TextureAtlasType;
+import de.limbusdev.guardianmonsters.fwmengine.world.ui.AnimatedSprite;
 
 /**
  * NullMedia, gets returned from Service Locator, when no Media Service has been injected yet.
@@ -55,5 +56,6 @@ public class NullMedia implements Media {
         return null;
     }
 
+    public Animation getObjectAnimation(String id) {return null;}
 
 }

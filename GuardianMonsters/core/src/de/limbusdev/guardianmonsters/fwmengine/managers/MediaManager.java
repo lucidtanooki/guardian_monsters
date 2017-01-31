@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import de.limbusdev.guardianmonsters.enums.TextureAtlasType;
+import de.limbusdev.guardianmonsters.fwmengine.world.ui.AnimatedSprite;
 
 
 /**
@@ -210,6 +211,12 @@ public class MediaManager implements Media {
      */
     public Animation getTileAnimation(int index) {
         return animatedTiles.get(index);
+    }
+
+    public Animation getObjectAnimation(String id) {
+        Animation anim = new Animation(1f, assets.get(animations, TextureAtlas.class)
+            .findRegions(id), Animation.PlayMode.LOOP);
+        return anim;
     }
 
 }

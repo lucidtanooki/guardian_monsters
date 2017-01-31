@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="64" height="32" tilewidth="16" tileheight="16" nextobjectid="333">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="64" height="32" tilewidth="16" tileheight="16" nextobjectid="350">
  <properties>
   <property name="musicIndex" value="2"/>
   <property name="musicType" value="town"/>
@@ -17,19 +17,29 @@
    eJzt1LEJwDAMBEC19gZJJk+ybNyosMED2LmDhwfV+ggAAABWcpeIp+Utfc9b9l0dNeJsuWrf85YddjT7/3ELdjX7/3ELAAAA/uoDv3QNOA==
   </data>
  </layer>
+ <layer name="shadows1" width="64" height="32">
+  <data encoding="base64" compression="zlib">
+   eJzt10kKgDAQRUH1/huvJngfyVoQhU8mq9bB7idBcFkA4J19y5wZ1Wj96V2S/TXek/76z5u5P+nv/cDdsbbegJbKN/t0BwDoRE//dV8lduq5v8x8mqs/MyN5LqlGPzCPC6EXF3w=
+  </data>
+ </layer>
  <layer name="walls1" width="64" height="32">
   <data encoding="base64" compression="zlib">
-   eJztmdlS2zAYhYUDJFc8BRekLRCWC16A5UGYaYHu5RWAPAjTnbD0IeBBMgxLs9KLXvZoYk+c37L0y5Zjl+HMfJPEFvp1dIzGGm1OCrEBNnP6rIA0Oshx7C4+t1L6X3c0lkNwlMNnEx5mvaGfOU/t86sXbXft529bk3q/BHvo625i/Ej/2yFfr/C9qZiDGy/a7jrBmKXPKzIH5anB9WfeKFTnJSFqk9F2aXkeqlUlv+OuVxPWkj4rU6P51/38d70hKkn/grRrTwvRAV3QA33wMD3axsReqN42xvJSsSbQ6zukj7/lKMpaIrpmbvn+TQry74fGu4A6i6AGlsAyWClH/zZunqiO0f8Xhf+467JflfcAKumTrpl1pv9AF/5z8Ab9vwXvwHvwAXwEn8A+qc2dJ1vpvKvmwJT/SWmQs47Av1QD/Z+CM3AOLsAvUtNmnmwk+12rDHgoD6DfJeEapvxV/hvgFJwR/y302wYd0AU90Pdr/yG+OPOURLJfE2GZ8m/BW4/QBh3Q9X/3ff/zmNsFsAhqYAksgxWwWhnWtJknG8X1q6vh4v/fVtx5ctWvrkaa9f8xKI/8k+gIz2zdwfpA9b/kfwnvVxn5L2r+t1hXT/CO3gC/S+b2SVTE/INnvYpxtOC9DV4o3vVcqIj5B8/6DsaxK8cCXmfov2j5B/qGcXwHP8BP8HkG7/wzbmsUMf9xqsj5j0NP+fPy5+7Xue1cylRTd5+bP3e/ntW+XidTTd19Tv7c/XpW+3qdTDVN97n5c/frWe3rdTLV1N3n5M/dr2e1r9fJVNN0n5M/d79uu69vinRnHZyapvtx+d8+wrMOFfcT6vyTnicU+awjrr7qzJSeJ2SFi7OOtPVVZ6B5yPasw4U2iPd/NHkA+g==
+   eJztmVtO20AUhgdzSV5gFX2AokK4PLCBAruglZB6QaU3tgBkF7QSAl64dhFhIRGirciNPvDYfxRHcY7HM2fsGewgfumTE3s4x//8jsVo1saEWAVrOR3LIIt2c7x3F8f1jP5fO7qXPbCfw7EODy+Cvp/pQO3zJIiPuwnzt+1JvdfAFmr9GXl8pP/NiK/3+FxXzMFtEB93k+Kepc9rMgel8e75l8EgVJejQlTG4uOyMhvpNUO+J52fSdlL+iyPD+ZfDfP/GPRRSfoXZFxjQogmaIE26ID7icExJrYi/TZxL+8U7wR6/gOp8VCKo+wl4u/M9dC/Sb38O5H7nUOfeVABC2ARLJXif5s0T1SHqH+s8J90XtZVee9BJX3Sd2aV6b+nq/A5+IT62+Az+AK+gm/gO9ghvbnzZCudd9UcmPI/He3mrKPnX+oM9c/BBbgEV+AX6WkzTzaSdVfKXe5LXehnSbSHKX+V/zNwDi6I/zvUbYAmaIE26IS9/xFfnHlKI1nXRFSm/O/grU1ogCZohd87of9XmNs5MA8qYAEsgiWwXO73tJknGyXV1fVw8fu3FXeeXNXV9cjy/n8KyiP/NNrHM1t18H6gGpb8a/B+7cn/MOTvS0XMP/qsb0wK8Qa8nfTTq4j5R5/1A/j+AX569F+0/JN0NIX/+afc1ixi/o+pYcrfh57z5+XPXa9zx7mUqafuOjd/7nrd17peJ1NP3XVO/tz1uq91vU6mnqbr3Py563Vf63qdTD111zn5c9frvtb1Opl6mq5z8ueu123X9XWRba+D09N0PSn/309wr0PF3xF1/mn3E4q815HUX7VnSvcTfOFiryNrf9UeaB6y3etwoVXi/T9Z1fpT
   </data>
  </layer>
  <layer name="objects1" width="64" height="32">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUDCR4w0cfPZSCt0y0MVeHnz56qAEMmQfG3sEAQPFfSKL/+1ho45aBAhtpEP9ORJi5DJjflyPleWL0kAt0OLGzkflujLSzf6BBDid2NjY+PkBsGJETl7SMfxhIA6a3dBz1jCvUb48IlMOE5AcbQA5X9DxHDiDG/9SOf5Cd5IS76zDO08QCeuQrWoDnfAj8EBj3D4D0A35UOY8h6jdiAMyP6tC0DwsDmBxI3J2I9D1U438UUAcM1fgH5fUH0HSPXhYg54XhCuD+RPM/LFweDLF2yCgYvGC0nUQcgPX9ial3iQHUMmcgACjNDOf2Fy4w1PxMbN4mZVxrtLwYBaMAAobKXAetwFCa6xgFwx8AACbjOXY=
+   eJztmEsOgjAQQOtnwwZPIbhg4xVMUE+iGzdexGPo2huBGzd6B9s4TQgpMAyUUp2XNPSTfubXlgrBMAzTzHvqegXuWc9cr8Adyv7nlvJf5nbW4oq7BftvEGNeQyFuYbs+VJLAnC+WtxN787vmFJjzpnIdWB1RbGnT/pqD9LdjaG5LQbbHon6MpvYurCrW1oWiXssxRwEjf9/2V3NS9J7+cExjGSKubBBJP13K9JQpB9tn8FX1sUx7T2XDEIPsMfh+XvD/COp3CP/21f5MP/hqfxXrGfh9eS/ILZ7BY0HLqXSg9wKVtF6yP9ABMwx8T8Kh//0x5y6GvsZxgfKZX75/VeGbzNjYbvOuxfsFw3x5Ed5TKH3GSkK4h1L6MAyGD6+TLa8=
+  </data>
+ </layer>
+ <layer name="shadows2" width="64" height="32">
+  <data encoding="base64" compression="zlib">
+   eJztmdEKgCAMRctf7KXfivq0+p/oQZAgvaurm7EDPZRj27EotGFwHHssoX3NFax59cbu757vKb+kbuxT4iXJy6SGf4xH54Dtv49Yvosp5M9L13Og/Wr5S+bpLUx/NNb9sVzuj9d9C9sfeQ8dP/Zngs7TF5D7peVvBffX7kAXa/5z436s+bf4LqRY829Nz/5bYZ23AWuWXv2j29NaNx3PgYwja2npvgODJWBHKQdahxXHpFST9fyz46zg/jpxVnB/nTgraPn3Nk9fqbXX3wupV+6b/Vf/mv86HBknDLVOQA==
   </data>
  </layer>
  <layer name="tops1" width="64" height="32">
   <data encoding="base64" compression="zlib">
-   eJztmUtOwzAURZ1PSUbdBWLUCYIFgFToRoARE9QuAEZdCL8QkCgq6hgkPhtBqO2UDphxK2LhlDhxHTtxIEe6spNa8bt+bpr0EVIugU3IFaPAQstRaMXHhnaxsbac73bdUXfNMTxMGI3hccLR1IqPnSr0n7buVIfwPYCOnOyxoqKswsta5OcU7Rl0HukCurR/j5uz7HwhMyel7/70N+Btk6NW5F9l/il78HTA+Hpj4ny3+ONkaLjx4w5z3IW3Hkds/qtM2+V/luZfZ/5NoYu16XFUZv73m9j3zexxMy/fPEP4vOdoYGDeb7247pj+SGItPuBzxtEiNynXH+bMgyyffnK/TGTW6RjnTzLWMOm6oyj3tJ82h8k8IOZHibjZ73/ee0GZWNi7tiH7VzdJe30L3rcV+/cNvH/Pkd3rfwW614P5ewUUQteG5koHOvZ6TfURfeatqampMR1Tn7908h89Vx3R9/Vl3+tV1Dqy5jTxPxmKKbWOJETqH1WrdYjWP4qmyFqHCC+4Rz87etvXnL8DT4pjWmTFJcRz9bV+Ss1FhIbCWJLYwfldV1/b4cwrSlthLCxf+anvyg==
+   eJztmb1OwzAUhe3EJVnaVwAkECxdEDwASIW+CDCxoPYBYOJB+CsREkVFnUHi50UQarvSgY2DSFSnxImbOIlD80lHdlIrvse+TZNeQvKlYxByw6lD0QrkUP9Yx8g21rr5226Y6q45gIchpwE8DgUaUf/YkUL/Yevu6Qi+u9CxGT1WVh6r8LIGrUPn0AV06eoKuoZWjMk4j1nnc+hf72ds0t+Ety2B6q5/lfvvsQ9Ph5yvdy7ODyoeF4cK8x83ueMWvLUF4ve/yDSY+LMw/2nuvy60sDZtgfLc/4Ma8r4WPW5sJZunB58PAnU13Pc7y697rt+PsRaf8DkWaJrbkOv3Eu5DXL7s4H6exFmnE5w/jVjDoOv23b33+mFz6MwjYn6KETf//U96L8gTitw1NMnftAnK9W1431Hs39bw/v1D3Fz/L8xTrgfB5/pilZAlaLmab0wl+SP7zFtSUlKiO7o+f6XJPHouOrLv67O+16uodUTNqeN/Mh661DqCkKl/FK3WIVv/yJosax0yvOIe/WKm274l/B14VhzTNAuMEIul19ohNRcZKgpjCWIX5/dYem1TMK8sDYWx8HwD9J7uOw==
   </data>
  </layer>
  <layer name="tops2" width="64" height="32">
@@ -70,9 +80,6 @@
   <object id="236" x="128" y="304" width="32" height="16"/>
   <object id="237" x="528" y="256" width="32" height="32"/>
   <object id="238" x="624" y="288" width="32" height="16"/>
-  <object id="239" x="560" y="256" width="64" height="32"/>
-  <object id="240" x="576" y="288" width="32" height="16"/>
-  <object id="241" x="560" y="240" width="64" height="16"/>
   <object id="242" x="608" y="208" width="32" height="32"/>
   <object id="243" x="528" y="112" width="16" height="16"/>
   <object id="244" x="528" y="144" width="16" height="16"/>
@@ -113,6 +120,9 @@
   <object id="302" x="800" y="208" width="96" height="32"/>
   <object id="303" x="912" y="208" width="32" height="32"/>
   <object id="304" x="800" y="272" width="144" height="32"/>
+  <object id="333" x="576" y="256" width="48" height="32"/>
+  <object id="348" x="400" y="192" width="16" height="16"/>
+  <object id="349" x="320" y="176" width="16" height="16"/>
  </objectgroup>
  <objectgroup name="sensors">
   <object id="32" name="startField" x="432" y="192" width="16" height="16">
@@ -246,7 +256,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="objects">
+ <objectgroup name="objects" visible="0">
   <object id="53" name="sign" x="112" y="176" width="16" height="16">
    <properties>
     <property name="text" value="sign_1_text"/>
@@ -470,6 +480,78 @@
   <object id="290" name="animation" x="672" y="384" width="16" height="16">
    <properties>
     <property name="index" value="17"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="animatedObjects">
+  <object id="334" name="animation" x="448" y="352" width="16" height="16">
+   <properties>
+    <property name="index" value="flower2"/>
+   </properties>
+  </object>
+  <object id="335" name="animation" x="688" y="336" width="16" height="16">
+   <properties>
+    <property name="index" value="flower2"/>
+   </properties>
+  </object>
+  <object id="336" name="animation" x="672" y="352" width="16" height="16">
+   <properties>
+    <property name="index" value="flower2"/>
+   </properties>
+  </object>
+  <object id="337" name="animation" x="928" y="272" width="16" height="16">
+   <properties>
+    <property name="index" value="flower2"/>
+   </properties>
+  </object>
+  <object id="338" name="animation" x="528" y="160" width="16" height="16">
+   <properties>
+    <property name="index" value="flower2"/>
+   </properties>
+  </object>
+  <object id="339" name="animation" x="224" y="176" width="16" height="16">
+   <properties>
+    <property name="index" value="flower2"/>
+   </properties>
+  </object>
+  <object id="340" name="animation" x="64" y="224" width="16" height="16">
+   <properties>
+    <property name="index" value="flower2"/>
+   </properties>
+  </object>
+  <object id="341" name="animation" x="80" y="304" width="16" height="16">
+   <properties>
+    <property name="index" value="flower2"/>
+   </properties>
+  </object>
+  <object id="342" name="animation" x="528" y="64" width="16" height="16">
+   <properties>
+    <property name="index" value="flag1"/>
+   </properties>
+  </object>
+  <object id="343" name="animation" x="736" y="64" width="16" height="16">
+   <properties>
+    <property name="index" value="flag1"/>
+   </properties>
+  </object>
+  <object id="344" name="animation" x="864" y="208" width="16" height="16">
+   <properties>
+    <property name="index" value="pan1"/>
+   </properties>
+  </object>
+  <object id="345" name="animation" x="880" y="224" width="16" height="16">
+   <properties>
+    <property name="index" value="pan1"/>
+   </properties>
+  </object>
+  <object id="346" name="animation" x="320" y="176" width="16" height="16">
+   <properties>
+    <property name="index" value="tree1"/>
+   </properties>
+  </object>
+  <object id="347" name="animation" x="400" y="192" width="16" height="16">
+   <properties>
+    <property name="index" value="tree1"/>
    </properties>
   </object>
  </objectgroup>

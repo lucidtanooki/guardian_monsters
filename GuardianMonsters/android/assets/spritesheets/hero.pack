@@ -1,117 +1,117 @@
 
 hero.png
 format: RGBA8888
-filter: Nearest,Nearest
+filter: MipMapLinearNearest,MipMapLinearNearest
 repeat: none
 e
   rotate: false
   xy: 1, 1
-  size: 17, 32
-  orig: 17, 32
+  size: 16, 32
+  orig: 16, 32
   offset: 0, 0
   index: 1
 e
   rotate: false
   xy: 1, 1
-  size: 17, 32
-  orig: 17, 32
+  size: 16, 32
+  orig: 16, 32
   offset: 0, 0
   index: 3
+w
+  rotate: false
+  xy: 19, 1
+  size: 16, 32
+  orig: 16, 32
+  offset: 0, 0
+  index: 1
+w
+  rotate: false
+  xy: 19, 1
+  size: 16, 32
+  orig: 16, 32
+  offset: 0, 0
+  index: 3
+s
+  rotate: false
+  xy: 37, 1
+  size: 16, 32
+  orig: 16, 32
+  offset: 0, 0
+  index: 3
+s
+  rotate: false
+  xy: 37, 1
+  size: 16, 32
+  orig: 16, 32
+  offset: 0, 0
+  index: 1
 e
   rotate: false
-  xy: 20, 1
-  size: 17, 32
-  orig: 17, 32
+  xy: 55, 1
+  size: 16, 32
+  orig: 16, 32
   offset: 0, 0
-  index: 2
+  index: 4
 e
   rotate: false
-  xy: 39, 1
-  size: 17, 32
-  orig: 17, 32
-  offset: 0, 0
-  index: 4
-n
-  rotate: false
-  xy: 58, 1
-  size: 17, 32
-  orig: 17, 32
-  offset: 0, 0
-  index: 1
-n
-  rotate: false
-  xy: 58, 1
-  size: 17, 32
-  orig: 17, 32
-  offset: 0, 0
-  index: 3
-n
-  rotate: false
-  xy: 77, 1
-  size: 17, 32
-  orig: 17, 32
-  offset: 0, 0
-  index: 2
-n
-  rotate: false
-  xy: 96, 1
-  size: 17, 32
-  orig: 17, 32
-  offset: 0, 0
-  index: 4
-s
-  rotate: false
-  xy: 115, 1
-  size: 17, 32
-  orig: 17, 32
-  offset: 0, 0
-  index: 1
-s
-  rotate: false
-  xy: 115, 1
-  size: 17, 32
-  orig: 17, 32
-  offset: 0, 0
-  index: 3
-s
-  rotate: false
-  xy: 134, 1
-  size: 17, 32
-  orig: 17, 32
+  xy: 73, 1
+  size: 16, 32
+  orig: 16, 32
   offset: 0, 0
   index: 2
 s
   rotate: false
-  xy: 153, 1
-  size: 17, 32
-  orig: 17, 32
+  xy: 91, 1
+  size: 16, 32
+  orig: 16, 32
   offset: 0, 0
   index: 4
-w
+s
   rotate: false
-  xy: 172, 1
-  size: 17, 32
-  orig: 17, 32
+  xy: 109, 1
+  size: 16, 32
+  orig: 16, 32
+  offset: 0, 0
+  index: 2
+n
+  rotate: false
+  xy: 127, 1
+  size: 16, 32
+  orig: 16, 32
+  offset: 0, 0
+  index: 4
+n
+  rotate: false
+  xy: 145, 1
+  size: 16, 32
+  orig: 16, 32
   offset: 0, 0
   index: 1
-w
+n
   rotate: false
-  xy: 172, 1
-  size: 17, 32
-  orig: 17, 32
+  xy: 145, 1
+  size: 16, 32
+  orig: 16, 32
   offset: 0, 0
   index: 3
 w
   rotate: false
-  xy: 191, 1
-  size: 17, 32
-  orig: 17, 32
+  xy: 163, 1
+  size: 16, 32
+  orig: 16, 32
+  offset: 0, 0
+  index: 4
+n
+  rotate: false
+  xy: 181, 1
+  size: 16, 32
+  orig: 16, 32
   offset: 0, 0
   index: 2
 w
   rotate: false
-  xy: 210, 1
-  size: 17, 32
-  orig: 17, 32
+  xy: 199, 1
+  size: 16, 32
+  orig: 16, 32
   offset: 0, 0
-  index: 4
+  index: 2

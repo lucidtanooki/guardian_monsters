@@ -196,7 +196,7 @@
    <properties>
     <property name="male" value="true"/>
     <property name="path" value="SSTOP,E,E,E,E,ESTOP,NSTOP,NSTOP,WSTOP,SSTOP,S,S,S,ESTOP,SSTOP,W,W,W,W,SSTOP,WSTOP,SSTOP,SSTOP,SSTOP,SSTOP,WSTOP,NSTOP,N,N,N"/>
-    <property name="spriteIndex" value="2"/>
+    <property name="spriteIndex" value="4"/>
     <property name="static" value="false"/>
     <property name="text" value="person_1"/>
    </properties>
@@ -205,7 +205,7 @@
    <properties>
     <property name="male" value="true"/>
     <property name="path" value="SSTOP"/>
-    <property name="spriteIndex" value="1"/>
+    <property name="spriteIndex" value="3"/>
     <property name="static" value="true"/>
     <property name="text" value="person_25_2"/>
    </properties>

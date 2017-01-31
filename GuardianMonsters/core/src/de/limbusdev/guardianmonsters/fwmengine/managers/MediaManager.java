@@ -56,7 +56,7 @@ public class MediaManager implements Media {
         this.animations = animationsSpriteSheetPath;
 
         this.maleSprites = new Array<String>();
-        for(int i=1;i<=3;i++)this.maleSprites.add("spritesheets/person" + i + "m.pack");
+        for(int i=1;i<=5;i++)this.maleSprites.add("spritesheets/person" + i + "m.pack");
         for(String s : maleSprites) assets.load(s, TextureAtlas.class);
         this.femaleSprites = new Array<String>();
 

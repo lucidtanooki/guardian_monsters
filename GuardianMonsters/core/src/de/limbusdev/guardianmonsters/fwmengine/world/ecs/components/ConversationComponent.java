@@ -8,9 +8,15 @@ import com.badlogic.ashley.core.Component;
 public class ConversationComponent implements Component {
     /* ............................................................................ ATTRIBUTES .. */
     public String text;
+    public String name;
     /* ........................................................................... CONSTRUCTOR .. */
     public ConversationComponent(String text) {
+        this(text, "");
+    }
+
+    public ConversationComponent(String text, String name) {
         this.text = text;
+        this.name = name;
     }
     
     /* ............................................................................... METHODS .. */

@@ -313,9 +313,15 @@ public class HUD extends InputAdapter {
         return this.stage;
     }
 
-    public void openConversation(String text) {
+    public void openConversation(String text, String name) {
         this.menuButtons.setVisible(false);
         this.convText.setText(Services.getL18N().l18n().get(text));
+        String nm = "";
+        if(!name.isEmpty()) {
+            nm = Services.getL18N().l18n().get(name);
+        }
+        this.titleLabel.setText(nm);
+        this.titleLabel.setVisible(true);
         this.conversationLabel.setVisible(true);
         conversationLabel.addAction(Actions.moveTo(0,0,.5f, Interpolation.exp10Out));
     }
@@ -326,9 +332,8 @@ public class HUD extends InputAdapter {
     }
 
     public void openSign(String title, String text) {
-        openConversation(text);
-        this.titleLabel.setText(Services.getL18N().l18n().get(title));
-        this.titleLabel.setVisible(true);
+        openConversation(text,title);
+
     }
 
     public void show() {
@@ -362,7 +367,7 @@ public class HUD extends InputAdapter {
         convText.setHeight(130);
         convText.setWidth(540);
         convText.setWrap(true);
-        convText.setAlignment(Align.topLeft,Align.center);
+        convText.setAlignment(Align.topLeft,Align.topLeft);
         convText.setPosition(GS.RES_X / 2 - 270, 0);
         conversationLabel.addActor(convText);
         conversationLabel.setVisible(false);
@@ -448,7 +453,10 @@ public class HUD extends InputAdapter {
                         talkDir = SkyDirection.SSTOP;
                 }
                 Components.path.get(touchedEntity).talkDir = talkDir;
-                openConversation(Components.conversation.get(touchedEntity).text);
+                openConversation(
+                    Components.conversation.get(touchedEntity).text,
+                    Components.conversation.get(touchedEntity).name
+                );
                 openHUDELement = HUDElements.CONVERSATION;
             }
 

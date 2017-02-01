@@ -7,7 +7,10 @@ import com.badlogic.gdx.utils.Array;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.CameraComponent;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.CharacterSpriteComponent;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.ColliderComponent;
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.ConversationComponent;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.InputComponent;
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PathComponent;
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PositionComponent;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.SaveGameComponent;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TitleComponent;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.entities.HeroEntity;
@@ -112,11 +115,11 @@ public class EntityFactory {
      */
     public Entity createSign(MapObjectInformation mapInfo) {
         Entity sign = new Entity();
-        sign.add(new de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.ConversationComponent(mapInfo.content));
+        sign.add(new ConversationComponent(mapInfo.content));
         sign.add(new TitleComponent(mapInfo.title));
         sign.add(new ColliderComponent(
                 mapInfo.x, mapInfo.y, GS.TILE_SIZE, GS.TILE_SIZE));
-        sign.add(new de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PositionComponent(mapInfo.x, mapInfo.y,
+        sign.add(new PositionComponent(mapInfo.x, mapInfo.y,
                 GS.TILE_SIZE, GS.TILE_SIZE));
         engine.addEntity(sign);
         return sign;
@@ -133,9 +136,10 @@ public class EntityFactory {
         }
 
         // Use second Constructor
-        return createPerson(new de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PositionComponent(personInformation.startPosition.x,
+        return createPerson(new PositionComponent(personInformation.startPosition.x,
                 personInformation.startPosition.y, GS.TILE_SIZE, GS
                 .TILE_SIZE), path, personInformation.moves, personInformation.conversation,
+                personInformation.name,
                 personInformation.male, personInformation.spriteIndex);
     }
 
@@ -147,13 +151,13 @@ public class EntityFactory {
      * @param conv
      * @return
      */
-    private Entity createPerson(de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PositionComponent startField, Array<SkyDirection> path, boolean
-            moves, String conv, boolean male, int spriteIndex) {
+    private Entity createPerson(PositionComponent startField, Array<SkyDirection> path, boolean
+            moves, String conv, String name, boolean male, int spriteIndex) {
 
         Entity person = new Entity();
 
         // Path
-        de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PathComponent pathComp = new de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PathComponent(path, moves);
+        PathComponent pathComp = new PathComponent(path, moves);
         pathComp.moving = moves;
         person.add(pathComp);
 
@@ -161,7 +165,7 @@ public class EntityFactory {
         person.add(new CharacterSpriteComponent(media.getPersonTextureAtlas(male,spriteIndex)));
 
         // Position
-        de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PositionComponent position = new de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PositionComponent(
+        PositionComponent position = new PositionComponent(
                 startField.x,
                 startField.y,
                 UnitConverter.tilesToPixels(1),
@@ -175,7 +179,7 @@ public class EntityFactory {
         person.add(collider);
 
         // Conversation
-        person.add(new de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.ConversationComponent(conv));
+        person.add(new ConversationComponent(conv,name));
         engine.addEntity(person);
 
         return person;

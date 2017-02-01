@@ -34,7 +34,6 @@ public class GameArea {
     /* ............................................................................ ATTRIBUTES .. */
     private TiledMap tiledMap;
     private OrthogonalTiledMapAndEntityRenderer mapRenderer;
-    private Media media;
     private String bgMusic;
     private Array<IntRectangle> colliders;
     private Array<IntRectangle> movingColliders;
@@ -49,7 +48,6 @@ public class GameArea {
 
     /* ........................................................................... CONSTRUCTOR .. */
     public GameArea(int areaID, int startPosID) {
-        this.media = Services.getMedia();
         this.startPosition = new PositionComponent(0,0,0,0);
         this.colliders = new Array<IntRectangle>();
         this.movingColliders = new Array<IntRectangle>();
@@ -62,7 +60,11 @@ public class GameArea {
         this.mapRenderer = new OrthogonalTiledMapAndEntityRenderer(tiledMap);
         this.areaID = areaID;
         this.mapRenderer.setUpAnimations(tiledMap.getLayers().get("animations"));
-        this.mapRenderer.setUpAnimatedObjects(tiledMap.getLayers().get("animatedObjects"));
+
+        for(int i=0; i<3; i++) {
+            this.mapRenderer.setUpAnimatedObjects(tiledMap.getLayers().get("animatedObjects" + i));
+        }
+
         this.gridPosition = new IntVector2(0,0);
     }
     /* ............................................................................... METHODS .. */
@@ -106,6 +108,7 @@ public class GameArea {
                     new IntVector2(MathUtils.round(r.x), MathUtils.round(r.y)),
                     Boolean.valueOf(mo.getProperties().get("static", String.class)),
                     mo.getProperties().get("text", String.class),
+                    mo.getProperties().get("name", String.class),
                     Boolean.valueOf(mo.getProperties().get("male", String.class)),
                     Integer.valueOf(mo.getProperties().get("spriteIndex", String.class))));
         }

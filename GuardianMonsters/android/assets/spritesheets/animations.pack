@@ -5,532 +5,735 @@ filter: MipMapLinearNearest,MipMapLinearNearest
 repeat: none
 light1
   rotate: false
-  xy: 1, 91
-  size: 32, 32
-  orig: 32, 32
+  xy: 1, 5
+  size: 48, 48
+  orig: 48, 48
   offset: 0, 0
   index: 7
 light1
   rotate: false
-  xy: 1, 91
-  size: 32, 32
-  orig: 32, 32
+  xy: 1, 5
+  size: 48, 48
+  orig: 48, 48
   offset: 0, 0
   index: 1
 light1
   rotate: false
-  xy: 1, 57
-  size: 32, 32
-  orig: 32, 32
+  xy: 51, 5
+  size: 48, 48
+  orig: 48, 48
   offset: 0, 0
   index: 3
 light1
   rotate: false
-  xy: 1, 57
-  size: 32, 32
-  orig: 32, 32
+  xy: 51, 5
+  size: 48, 48
+  orig: 48, 48
   offset: 0, 0
   index: 5
 light1
   rotate: false
-  xy: 35, 91
-  size: 32, 32
-  orig: 32, 32
+  xy: 101, 5
+  size: 48, 48
+  orig: 48, 48
   offset: 0, 0
   index: 0
 light1
   rotate: false
-  xy: 1, 23
-  size: 32, 32
-  orig: 32, 32
+  xy: 151, 5
+  size: 48, 48
+  orig: 48, 48
   offset: 0, 0
   index: 6
 light1
   rotate: false
-  xy: 1, 23
-  size: 32, 32
-  orig: 32, 32
+  xy: 151, 5
+  size: 48, 48
+  orig: 48, 48
   offset: 0, 0
   index: 2
 light1
   rotate: false
-  xy: 35, 57
-  size: 32, 32
-  orig: 32, 32
+  xy: 201, 5
+  size: 48, 48
+  orig: 48, 48
   offset: 0, 0
   index: 4
-fire2
+monster8
   rotate: false
-  xy: 69, 107
-  size: 32, 16
-  orig: 32, 16
-  offset: 0, 0
-  index: 1
-door1
-  rotate: false
-  xy: 35, 23
-  size: 16, 32
-  orig: 16, 32
-  offset: 0, 0
-  index: 0
-tree1
-  rotate: false
-  xy: 69, 73
+  xy: 251, 21
   size: 16, 32
   orig: 16, 32
   offset: 0, 0
   index: 5
+fire2
+  rotate: false
+  xy: 269, 37
+  size: 32, 16
+  orig: 32, 16
+  offset: 0, 0
+  index: 1
 fire1
   rotate: false
-  xy: 1, 5
+  xy: 303, 37
   size: 32, 16
   orig: 32, 16
   offset: 0, 0
   index: 1
 fire2
   rotate: false
-  xy: 103, 107
+  xy: 337, 37
   size: 32, 16
   orig: 32, 16
   offset: 0, 0
   index: 0
+fire1
+  rotate: false
+  xy: 371, 37
+  size: 32, 16
+  orig: 32, 16
+  offset: 0, 0
+  index: 0
+door1
+  rotate: false
+  xy: 405, 21
+  size: 16, 32
+  orig: 16, 32
+  offset: 0, 0
+  index: 0
 tree1
   rotate: false
-  xy: 87, 73
+  xy: 423, 21
+  size: 16, 32
+  orig: 16, 32
+  offset: 0, 0
+  index: 5
+tree1
+  rotate: false
+  xy: 441, 21
   size: 16, 32
   orig: 16, 32
   offset: 0, 0
   index: 3
 door1
   rotate: false
-  xy: 105, 73
-  size: 16, 32
-  orig: 16, 32
-  offset: 0, 0
-  index: 4
-fire1
-  rotate: false
-  xy: 137, 107
-  size: 32, 16
-  orig: 32, 16
-  offset: 0, 0
-  index: 0
-tree1
-  rotate: false
-  xy: 123, 73
+  xy: 459, 21
   size: 16, 32
   orig: 16, 32
   offset: 0, 0
   index: 4
 tree1
   rotate: false
-  xy: 123, 73
+  xy: 477, 21
+  size: 16, 32
+  orig: 16, 32
+  offset: 0, 0
+  index: 4
+tree1
+  rotate: false
+  xy: 477, 21
   size: 16, 32
   orig: 16, 32
   offset: 0, 0
   index: 8
 tree1
   rotate: false
-  xy: 123, 73
+  xy: 477, 21
   size: 16, 32
   orig: 16, 32
   offset: 0, 0
   index: 0
-door1
+monster8
   rotate: false
-  xy: 141, 73
-  size: 16, 32
-  orig: 16, 32
-  offset: 0, 0
-  index: 3
-flag1
-  rotate: false
-  xy: 53, 23
-  size: 16, 32
-  orig: 16, 32
-  offset: 0, 0
-  index: 3
-flag1
-  rotate: false
-  xy: 53, 23
+  xy: 495, 21
   size: 16, 32
   orig: 16, 32
   offset: 0, 0
   index: 4
-flag1
+monster8
   rotate: false
-  xy: 53, 23
-  size: 16, 32
-  orig: 16, 32
-  offset: 0, 0
-  index: 0
-flag1
-  rotate: false
-  xy: 53, 23
-  size: 16, 32
-  orig: 16, 32
-  offset: 0, 0
-  index: 1
-tree1
-  rotate: false
-  xy: 159, 73
-  size: 16, 32
-  orig: 16, 32
-  offset: 0, 0
-  index: 7
-flower2
-  rotate: false
-  xy: 171, 107
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 3
-flower2
-  rotate: false
-  xy: 171, 107
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 1
-door1
-  rotate: false
-  xy: 177, 73
-  size: 16, 32
-  orig: 16, 32
-  offset: 0, 0
-  index: 1
-watere
-  rotate: false
-  xy: 189, 107
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 0
-tree1
-  rotate: false
-  xy: 195, 73
+  xy: 495, 21
   size: 16, 32
   orig: 16, 32
   offset: 0, 0
   index: 6
-flower1
+monster8
   rotate: false
-  xy: 207, 107
+  xy: 495, 21
+  size: 16, 32
+  orig: 16, 32
+  offset: 0, 0
+  index: 0
+door1
+  rotate: false
+  xy: 513, 21
+  size: 16, 32
+  orig: 16, 32
+  offset: 0, 0
+  index: 3
+flag1
+  rotate: false
+  xy: 531, 21
+  size: 16, 32
+  orig: 16, 32
+  offset: 0, 0
+  index: 3
+flag1
+  rotate: false
+  xy: 531, 21
+  size: 16, 32
+  orig: 16, 32
+  offset: 0, 0
+  index: 4
+flag1
+  rotate: false
+  xy: 531, 21
+  size: 16, 32
+  orig: 16, 32
+  offset: 0, 0
+  index: 0
+flag1
+  rotate: false
+  xy: 531, 21
+  size: 16, 32
+  orig: 16, 32
+  offset: 0, 0
+  index: 1
+tree1
+  rotate: false
+  xy: 549, 21
+  size: 16, 32
+  orig: 16, 32
+  offset: 0, 0
+  index: 7
+door1
+  rotate: false
+  xy: 567, 21
+  size: 16, 32
+  orig: 16, 32
+  offset: 0, 0
+  index: 1
+tree1
+  rotate: false
+  xy: 585, 21
+  size: 16, 32
+  orig: 16, 32
+  offset: 0, 0
+  index: 6
+monster8
+  rotate: false
+  xy: 603, 21
+  size: 16, 32
+  orig: 16, 32
+  offset: 0, 0
+  index: 2
+door1
+  rotate: false
+  xy: 621, 21
+  size: 16, 32
+  orig: 16, 32
+  offset: 0, 0
+  index: 2
+tree1
+  rotate: false
+  xy: 639, 21
+  size: 16, 32
+  orig: 16, 32
+  offset: 0, 0
+  index: 2
+flag1
+  rotate: false
+  xy: 657, 21
+  size: 16, 32
+  orig: 16, 32
+  offset: 0, 0
+  index: 5
+tree1
+  rotate: false
+  xy: 675, 21
+  size: 16, 32
+  orig: 16, 32
+  offset: 0, 0
+  index: 1
+monster8
+  rotate: false
+  xy: 693, 21
+  size: 16, 32
+  orig: 16, 32
+  offset: 0, 0
+  index: 1
+monster8
+  rotate: false
+  xy: 693, 21
+  size: 16, 32
+  orig: 16, 32
+  offset: 0, 0
+  index: 3
+flower2
+  rotate: false
+  xy: 711, 37
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
-  index: 5
-flower1
+  index: 3
+flower2
   rotate: false
-  xy: 207, 107
+  xy: 711, 37
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+watere
+  rotate: false
+  xy: 729, 37
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 0
 flower1
   rotate: false
-  xy: 207, 107
+  xy: 747, 37
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 5
+flower1
+  rotate: false
+  xy: 747, 37
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+flower1
+  rotate: false
+  xy: 747, 37
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 2
 flower1
   rotate: false
-  xy: 207, 107
+  xy: 747, 37
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 4
-door1
-  rotate: false
-  xy: 213, 73
-  size: 16, 32
-  orig: 16, 32
-  offset: 0, 0
-  index: 2
 waterine
   rotate: false
-  xy: 225, 107
+  xy: 765, 37
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 1
-tree1
-  rotate: false
-  xy: 231, 73
-  size: 16, 32
-  orig: 16, 32
-  offset: 0, 0
-  index: 2
 watern
   rotate: false
-  xy: 35, 5
+  xy: 783, 37
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 1
+monster7
+  rotate: false
+  xy: 801, 37
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+monster7
+  rotate: false
+  xy: 801, 37
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
 lamp1
   rotate: false
-  xy: 53, 5
+  xy: 819, 37
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 4
 lamp1
   rotate: false
-  xy: 53, 5
+  xy: 819, 37
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 2
-flag1
-  rotate: false
-  xy: 71, 39
-  size: 16, 32
-  orig: 16, 32
-  offset: 0, 0
-  index: 5
-tree1
-  rotate: false
-  xy: 71, 5
-  size: 16, 32
-  orig: 16, 32
-  offset: 0, 0
-  index: 1
 waterine
   rotate: false
-  xy: 89, 55
+  xy: 837, 37
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 0
 waterise
   rotate: false
-  xy: 89, 37
+  xy: 855, 37
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 1
 waterw
   rotate: false
-  xy: 107, 55
+  xy: 873, 37
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 0
 waterw
   rotate: false
-  xy: 89, 19
+  xy: 891, 37
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+monster7
+  rotate: false
+  xy: 909, 37
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 6
+monster7
+  rotate: false
+  xy: 909, 37
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 4
+monster7
+  rotate: false
+  xy: 909, 37
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+monster0
+  rotate: false
+  xy: 927, 37
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+monster15
+  rotate: false
+  xy: 945, 37
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 1
 lamp1
   rotate: false
-  xy: 107, 37
+  xy: 963, 37
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 5
 lamp1
   rotate: false
-  xy: 107, 37
+  xy: 963, 37
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 1
+monster4
+  rotate: false
+  xy: 981, 37
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 4
+monster4
+  rotate: false
+  xy: 981, 37
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 6
+monster4
+  rotate: false
+  xy: 981, 37
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
 waterinw
   rotate: false
-  xy: 125, 55
+  xy: 999, 37
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 0
 flower1
   rotate: false
-  xy: 107, 19
+  xy: 251, 3
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 3
 waterise
   rotate: false
-  xy: 125, 37
+  xy: 269, 19
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 0
 waterisw
   rotate: false
-  xy: 143, 55
+  xy: 287, 19
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+monster0
+  rotate: false
+  xy: 305, 19
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 1
 flower1
   rotate: false
-  xy: 125, 19
+  xy: 323, 19
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 1
 waterne
   rotate: false
-  xy: 143, 37
+  xy: 341, 19
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 0
 watere
   rotate: false
-  xy: 161, 55
+  xy: 359, 19
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 1
+monster4
+  rotate: false
+  xy: 377, 19
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 5
+monster7
+  rotate: false
+  xy: 711, 19
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+monster4
+  rotate: false
+  xy: 729, 19
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
 pan1
   rotate: false
-  xy: 143, 19
+  xy: 747, 19
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 1
+monster7
+  rotate: false
+  xy: 765, 19
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 5
+monster0
+  rotate: false
+  xy: 783, 19
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+monster0
+  rotate: false
+  xy: 783, 19
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 4
+monster0
+  rotate: false
+  xy: 783, 19
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
 waters
   rotate: false
-  xy: 161, 37
+  xy: 801, 19
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 0
 pan1
   rotate: false
-  xy: 179, 55
+  xy: 819, 19
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 0
 flower2
   rotate: false
-  xy: 161, 19
+  xy: 837, 19
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 0
+monster15
+  rotate: false
+  xy: 855, 19
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+monster15
+  rotate: false
+  xy: 855, 19
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
 water
   rotate: false
-  xy: 179, 37
+  xy: 873, 19
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 1
 waterse
   rotate: false
-  xy: 197, 55
+  xy: 891, 19
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 0
 watersw
   rotate: false
-  xy: 179, 19
+  xy: 909, 19
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 0
 water
   rotate: false
-  xy: 197, 37
+  xy: 927, 19
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 0
 waternw
   rotate: false
-  xy: 215, 55
+  xy: 945, 19
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 0
 watersw
   rotate: false
-  xy: 197, 19
+  xy: 963, 19
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+monster4
+  rotate: false
+  xy: 981, 19
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+monster4
+  rotate: false
+  xy: 981, 19
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 1
 waternw
   rotate: false
-  xy: 215, 37
+  xy: 999, 19
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 1
 pan1
   rotate: false
-  xy: 215, 19
+  xy: 269, 1
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 2
 lamp1
   rotate: false
-  xy: 233, 55
+  xy: 287, 1
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 0
 waterisw
   rotate: false
-  xy: 233, 37
+  xy: 305, 1
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 0
 lamp1
   rotate: false
-  xy: 233, 19
+  xy: 323, 1
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 3
 waters
   rotate: false
-  xy: 89, 1
+  xy: 341, 1
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 1
 waterinw
   rotate: false
-  xy: 107, 1
+  xy: 359, 1
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 1
 flower2
   rotate: false
-  xy: 125, 1
+  xy: 377, 1
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 2
 watern
   rotate: false
-  xy: 143, 1
+  xy: 395, 3
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 0
 waterse
   rotate: false
-  xy: 161, 1
+  xy: 413, 3
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 1
 waterne
   rotate: false
-  xy: 179, 1
+  xy: 431, 3
   size: 16, 16
   orig: 16, 16
   offset: 0, 0

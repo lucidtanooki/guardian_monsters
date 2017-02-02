@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="64" height="32" tilewidth="16" tileheight="16" nextobjectid="380">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="64" height="32" tilewidth="16" tileheight="16" nextobjectid="382">
  <properties>
   <property name="musicIndex" value="2"/>
   <property name="musicType" value="town"/>
@@ -231,7 +231,7 @@
   <object id="375" x="48" y="464" width="384" height="48"/>
   <object id="378" x="560" y="288" width="16" height="16"/>
  </objectgroup>
- <objectgroup name="sensors" visible="0">
+ <objectgroup name="sensors">
   <object id="32" name="startField" x="432" y="192" width="16" height="16">
    <properties>
     <property name="fieldID" value="1"/>
@@ -243,8 +243,19 @@
     <property name="targetWarpPointID" value="1"/>
    </properties>
   </object>
+  <object id="380" name="startField" x="160" y="176" width="16" height="16">
+   <properties>
+    <property name="fieldID" value="3"/>
+   </properties>
+  </object>
+  <object id="381" name="warpField" x="160" y="160" width="16" height="16">
+   <properties>
+    <property name="targetID" value="253"/>
+    <property name="targetWarpPointID" value="1"/>
+   </properties>
+  </object>
  </objectgroup>
- <objectgroup name="livingEntities" visible="0">
+ <objectgroup name="livingEntities">
   <object id="51" name="person" x="208" y="176" width="16" height="16">
    <properties>
     <property name="male" value="true"/>

@@ -353,13 +353,6 @@ lamp1
   orig: 16, 16
   offset: 0, 0
   index: 4
-lamp1
-  rotate: false
-  xy: 819, 37
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 2
 waterine
   rotate: false
   xy: 837, 37
@@ -430,13 +423,6 @@ lamp1
   orig: 16, 16
   offset: 0, 0
   index: 5
-lamp1
-  rotate: false
-  xy: 963, 37
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 1
 monster4
   rotate: false
   xy: 981, 37
@@ -584,14 +570,14 @@ pan1
   orig: 16, 16
   offset: 0, 0
   index: 0
-flower2
+lamp1
   rotate: false
   xy: 837, 19
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
-  index: 0
-monster15
+  index: 1
+flower2
   rotate: false
   xy: 855, 19
   size: 16, 16
@@ -600,140 +586,154 @@ monster15
   index: 0
 monster15
   rotate: false
-  xy: 855, 19
+  xy: 873, 19
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+monster15
+  rotate: false
+  xy: 873, 19
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 2
 water
   rotate: false
-  xy: 873, 19
+  xy: 891, 19
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 1
 waterse
-  rotate: false
-  xy: 891, 19
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 0
-watersw
   rotate: false
   xy: 909, 19
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 0
-water
+lamp1
   rotate: false
   xy: 927, 19
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
-  index: 0
-waternw
+  index: 2
+watersw
   rotate: false
   xy: 945, 19
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 0
-watersw
+water
   rotate: false
   xy: 963, 19
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
-  index: 1
-monster4
-  rotate: false
-  xy: 981, 19
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 3
-monster4
-  rotate: false
-  xy: 981, 19
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 1
+  index: 0
 waternw
+  rotate: false
+  xy: 981, 19
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+watersw
   rotate: false
   xy: 999, 19
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 1
-pan1
+monster4
   rotate: false
   xy: 269, 1
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
-  index: 2
-lamp1
+  index: 3
+monster4
+  rotate: false
+  xy: 269, 1
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+waternw
   rotate: false
   xy: 287, 1
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
-  index: 0
-waterisw
+  index: 1
+pan1
   rotate: false
   xy: 305, 1
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
-  index: 0
+  index: 2
 lamp1
   rotate: false
   xy: 323, 1
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
+  index: 0
+waterisw
+  rotate: false
+  xy: 341, 1
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+lamp1
+  rotate: false
+  xy: 359, 1
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
   index: 3
 waters
   rotate: false
-  xy: 341, 1
+  xy: 377, 1
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 1
 waterinw
   rotate: false
-  xy: 359, 1
+  xy: 395, 3
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 1
 flower2
   rotate: false
-  xy: 377, 1
+  xy: 413, 3
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 2
 watern
   rotate: false
-  xy: 395, 3
+  xy: 431, 3
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 0
 waterse
   rotate: false
-  xy: 413, 3
+  xy: 449, 3
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 1
 waterne
   rotate: false
-  xy: 431, 3
+  xy: 467, 3
   size: 16, 16
   orig: 16, 16
   offset: 0, 0

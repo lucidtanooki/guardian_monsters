@@ -32,7 +32,7 @@ public class GS {
     /* ..................................................................... GETTERS & SETTERS .. */
 
     // ................................................................................... DEBUGGING
-    public static final boolean DEBUGGING_ON = true;
+    public static final boolean DEBUGGING_ON = false;
     public final static DebugMode DEBUG_MODE = DebugMode.WORLD;
 
 

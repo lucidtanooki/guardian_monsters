@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="16" height="16" tilewidth="16" tileheight="16" nextobjectid="73">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="16" height="16" tilewidth="16" tileheight="16" nextobjectid="79">
  <properties>
   <property name="musicIndex" value="2"/>
   <property name="musicType" value="town"/>
@@ -30,7 +30,7 @@
    eJxjYKAOqOJnYKgG4hp+CH+VJISuB/Ib+BHqYOItvKj6dwHV7AbiPVC1K6Hq9gP5B5D0r8Sh/xdQzW8g/sPPgBcslcPUv1gOvx5C4DGa/kdkmKcE1KMMxCoUumUgwQN5oB/kSdf3SB6Ck4A4GYgTgDgRjzl1/BCMCywA6l2IR/8+fggmF/zjh2AY+A5k7wDinfwQNqkApOcHEP8kUz8lAACQdCYi
   </data>
  </layer>
- <objectgroup name="animatedObjects1" visible="0">
+ <objectgroup name="animatedObjects1">
   <object id="43" name="animatedObject" x="64" y="144" width="16" height="16">
    <properties>
     <property name="index" value="pan1"/>
@@ -42,13 +42,24 @@
     <property name="index" value="fire2"/>
    </properties>
   </object>
-  <object id="54" name="animatedObject" x="80" y="176" width="16" height="16">
+  <object id="54" name="animatedObject" x="80" y="172" width="16" height="16">
    <properties>
     <property name="frameDuration" value="0.2"/>
     <property name="index" value="fire2"/>
    </properties>
   </object>
+  <object id="77" name="animatedObject" x="48" y="208" width="16" height="16">
+   <properties>
+    <property name="frameDuration" value="0.2"/>
+    <property name="index" value="lamp2"/>
+   </properties>
+  </object>
  </objectgroup>
+ <layer name="objects2" width="16" height="16">
+  <data encoding="base64" compression="zlib">
+   eJxjYBjeYI0cA8NauYF2xcgCCvIMDIry5OtPAOpNpED/AqDehRToH0kAAOuyBJM=
+  </data>
+ </layer>
  <objectgroup name="people"/>
  <layer name="lights1" width="16" height="16">
   <data encoding="base64" compression="zlib">
@@ -60,9 +71,9 @@
    eJyTZWRgiCcTywGxPBCTA6KZGBgUKNAfg6Q/WY48M3DZn0SkeZS4n1r6nwNxJg6sRMBsmP1zcWA9NP2KaOYvw+F+BXmgWiDORdcvhmo+If/PFmVgmAfEMSB9QHqOKHb34wNyQD3yQKwgiimHrL+Cn4Ghkh+/Wfj0PycjDZIa/4ux+D8WiBNw4NkiEHWzRCD8KDFU+TggBgAZ6SPq
   </data>
  </layer>
- <layer name="objects2" width="16" height="16">
+ <layer name="objects3" width="16" height="16">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFMDBfbqBdMLBgkTwDw2L5gXYF+WCkxx85AAAGPAL+
+   eJxjYBgFowACFskzMCyWH2hXjAJ6AgD0tAGE
   </data>
  </layer>
  <objectgroup name="colliderWalls1" visible="0">
@@ -114,7 +125,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="livingEntities">
+ <objectgroup name="livingEntities" visible="0">
   <object id="19" name="person" x="112" y="80" width="16" height="16">
    <properties>
     <property name="male" value="true"/>
@@ -200,7 +211,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="animatedObjects2">
+ <objectgroup name="animatedObjects2" visible="0">
   <object id="71" name="animatedObject" x="32" y="48" width="48" height="48">
    <properties>
     <property name="frameDuration" value="0.2"/>
@@ -208,6 +219,33 @@
    </properties>
   </object>
   <object id="72" name="animatedObject" x="32" y="160" width="48" height="48">
+   <properties>
+    <property name="frameDuration" value="0.2"/>
+    <property name="index" value="light1"/>
+   </properties>
+  </object>
+  <object id="73" name="animatedObject" x="48" y="176" width="16" height="16">
+   <properties>
+    <property name="index" value="lamp1"/>
+   </properties>
+  </object>
+  <object id="74" name="animatedObject" x="48" y="64" width="16" height="16">
+   <properties>
+    <property name="index" value="lamp1"/>
+   </properties>
+  </object>
+  <object id="75" name="animatedObject" x="176" y="80" width="16" height="16">
+   <properties>
+    <property name="index" value="lamp1"/>
+   </properties>
+  </object>
+  <object id="76" name="animatedObject" x="160" y="64" width="48" height="48">
+   <properties>
+    <property name="frameDuration" value="0.2"/>
+    <property name="index" value="light1"/>
+   </properties>
+  </object>
+  <object id="78" name="animatedObject" x="32" y="192" width="48" height="48">
    <properties>
     <property name="frameDuration" value="0.2"/>
     <property name="index" value="light1"/>

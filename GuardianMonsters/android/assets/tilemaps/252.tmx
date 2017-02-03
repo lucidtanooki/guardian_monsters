@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="10" height="10" tilewidth="16" tileheight="16" nextobjectid="33">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="10" height="10" tilewidth="16" tileheight="16" nextobjectid="44">
  <properties>
   <property name="musicIndex" value="2"/>
   <property name="musicType" value="town"/>
@@ -26,12 +26,23 @@
   </data>
  </layer>
  <objectgroup name="animatedObjects1">
-  <object id="32" x="16" y="48" width="16" height="16">
+  <object id="32" name="animatedObject" x="16" y="48" width="16" height="16">
    <properties>
+    <property name="frameDuration" value="0.2"/>
     <property name="index" value="fire2"/>
    </properties>
   </object>
+  <object id="39" name="animatedObject" x="112" y="64" width="48" height="48">
+   <properties>
+    <property name="index" value="light1"/>
+   </properties>
+  </object>
  </objectgroup>
+ <layer name="objects2" width="10" height="10">
+  <data encoding="base64" compression="zlib">
+   eJxjYBg4sEaOgWGt3AA6YBACALLbAZY=
+  </data>
+ </layer>
  <objectgroup name="people"/>
  <layer name="shadow1" width="10" height="10">
   <data encoding="base64" compression="zlib">
@@ -48,6 +59,24 @@
    eJyTZWRgiCeA5YBYHogJAQU6qnsix8DwFIifyRE2L0WegSFVHlNdljzt3IeuLpYIdXFANQABdwqc
   </data>
  </layer>
+ <objectgroup name="animatedObjects2">
+  <object id="33" name="animatedObject" x="64" y="80" width="16" height="16">
+   <properties>
+    <property name="index" value="lamp1"/>
+   </properties>
+  </object>
+  <object id="34" name="animatedObject" x="48" y="64" width="48" height="48">
+   <properties>
+    <property name="index" value="light1"/>
+   </properties>
+  </object>
+  <object id="41" name="animatedObject" x="128" y="80" width="16" height="16">
+   <properties>
+    <property name="frameDuration" value="0.2"/>
+    <property name="index" value="lamp2"/>
+   </properties>
+  </object>
+ </objectgroup>
  <objectgroup name="colliderWalls1" visible="0">
   <object id="1" x="0" y="0" width="160" height="48"/>
   <object id="2" x="16" y="48" width="32" height="16"/>
@@ -72,8 +101,8 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="livingEntities"/>
- <objectgroup name="objects">
+ <objectgroup name="livingEntities" visible="0"/>
+ <objectgroup name="objects" visible="0">
   <object id="13" name="sign" x="16" y="48" width="16" height="16">
    <properties>
     <property name="text" value="sign_4_1_text"/>

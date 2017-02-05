@@ -245,7 +245,7 @@
   </object>
   <object id="380" name="startField" x="160" y="176" width="16" height="16">
    <properties>
-    <property name="fieldID" value="3"/>
+    <property name="fieldID" value="5"/>
    </properties>
   </object>
   <object id="381" name="warpField" x="160" y="160" width="16" height="16">

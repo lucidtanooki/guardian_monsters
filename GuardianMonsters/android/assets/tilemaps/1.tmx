@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="16" tileheight="16" nextobjectid="202">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="16" tileheight="16" nextobjectid="210">
  <properties>
   <property name="musicIndex" value="2"/>
   <property name="musicType" value="town"/>
@@ -25,6 +25,51 @@
    eJxjYBjawIkfgkftH1j7D/EQdgst3AmzExmjg4M8hO3HZg4h98LkkWly/U+O/cSAFl7i1NHKfmLBQNtPKzAY/DDQbiDXfli+JRXwkKmPWsBnAO0f6LgeTOAwF3ZxeoURMzd2u5Ht5yKyfKYWGOhydSDtH8h6ZaDrNXraj6suH7V/4O2HyY+CUQACAGFpJPM=
   </data>
  </layer>
+ <objectgroup name="animatedObjects1">
+  <object id="202" name="animatedObject" x="224" y="208" width="16" height="16">
+   <properties>
+    <property name="frameDuration" value="0.25"/>
+    <property name="index" value="flower1"/>
+   </properties>
+  </object>
+  <object id="203" name="animatedObject" x="304" y="320" width="16" height="16">
+   <properties>
+    <property name="frameDuration" value="0.25"/>
+    <property name="index" value="flower1"/>
+   </properties>
+  </object>
+  <object id="205" name="animatedObject" x="256" y="368" width="16" height="16">
+   <properties>
+    <property name="frameDuration" value="0.25"/>
+    <property name="index" value="flower1"/>
+   </properties>
+  </object>
+  <object id="206" name="animatedObject" x="80" y="240" width="16" height="16">
+   <properties>
+    <property name="frameDuration" value="0.25"/>
+    <property name="index" value="flower1"/>
+   </properties>
+  </object>
+  <object id="207" name="animatedObject" x="352" y="80" width="16" height="16">
+   <properties>
+    <property name="frameDuration" value="0.25"/>
+    <property name="index" value="flower1"/>
+   </properties>
+  </object>
+  <object id="208" name="animatedObject" x="400" y="96" width="16" height="16">
+   <properties>
+    <property name="frameDuration" value="0.25"/>
+    <property name="index" value="flower1"/>
+   </properties>
+  </object>
+  <object id="209" name="animatedObject" x="448" y="176" width="16" height="16">
+   <properties>
+    <property name="frameDuration" value="0.25"/>
+    <property name="index" value="flower1"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="people"/>
  <layer name="tops1" width="32" height="32">
   <data encoding="base64" compression="zlib">
    eJztllsKgCAQRafHV1abKmphRa2r10+raqQiC3+sGJPmgFwE8V5hRgVgGObLBBFAGNnzz9A7J/TvBEAvDq3Quyb092IAPz7UFbrkPB8S/ToqgnRTC/WrelLXr+opM1DXr2T3pD63LsOXmbf+HlEnC70+O3S/UPG39+6KC33DrMg/SoGjNNS3kH+UBvdrhZnumObW6RNMc+uUuc8CFd4skw==

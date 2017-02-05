@@ -432,7 +432,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="objects" visible="0">
+ <objectgroup name="objects">
   <object id="53" name="sign" x="112" y="176" width="16" height="16">
    <properties>
     <property name="text" value="sign_25_2_text"/>

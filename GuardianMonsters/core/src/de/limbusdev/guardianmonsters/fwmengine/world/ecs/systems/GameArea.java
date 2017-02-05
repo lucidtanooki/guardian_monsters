@@ -59,11 +59,6 @@ public class GameArea {
         setUpTiledMap(areaID, startPosID);
         this.mapRenderer = new OrthogonalTiledMapAndEntityRenderer(tiledMap);
         this.areaID = areaID;
-        this.mapRenderer.setUpAnimations(tiledMap.getLayers().get("animations"));
-
-        for(int i=0; i<3; i++) {
-            this.mapRenderer.setUpAnimatedObjects(tiledMap.getLayers().get("animatedObjects" + i));
-        }
 
         this.gridPosition = new IntVector2(0,0);
     }

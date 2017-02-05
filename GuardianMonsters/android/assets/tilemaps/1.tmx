@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="16" tileheight="16" nextobjectid="210">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="16" tileheight="16" nextobjectid="224">
  <properties>
   <property name="musicIndex" value="2"/>
   <property name="musicType" value="town"/>
@@ -15,6 +15,138 @@
    eJzt0sEKgzAMgOFAT1poFN9pcz7YWPWtvOj0sFdaph4GhkKZy6Hm8NFbftrGlABGKaWU+sGr2jtTPxUXBLgG1Pjf/p3mTwWAZ8zkIdBvqPPEvTqxPve/vZPr58hrhfpcIyT1vqe/bzedk+9/5k9uNQv3l7vj2r7RaYXfP/vaf659hv2T7mdFHFse2x8w3nhg/w0UgctW
   </data>
  </layer>
+ <objectgroup name="animatedTiles1">
+  <object id="156" type="animatedTile" x="192" y="272" width="16" height="16">
+   <properties>
+    <property name="index" value="1"/>
+   </properties>
+  </object>
+  <object id="157" type="animatedTile" x="96" y="272" width="16" height="16">
+   <properties>
+    <property name="index" value="2"/>
+   </properties>
+  </object>
+  <object id="158" type="animatedTile" x="96" y="336" width="16" height="16">
+   <properties>
+    <property name="index" value="9"/>
+   </properties>
+  </object>
+  <object id="159" type="animatedTile" x="96" y="288" width="16" height="48">
+   <properties>
+    <property name="index" value="11"/>
+   </properties>
+  </object>
+  <object id="160" type="animatedTile" x="96" y="416" width="16" height="16">
+   <properties>
+    <property name="index" value="2"/>
+   </properties>
+  </object>
+  <object id="161" type="animatedTile" x="112" y="416" width="16" height="16">
+   <properties>
+    <property name="index" value="9"/>
+   </properties>
+  </object>
+  <object id="162" type="animatedTile" x="192" y="288" width="16" height="192">
+   <properties>
+    <property name="index" value="12"/>
+   </properties>
+  </object>
+  <object id="163" type="animatedTile" x="112" y="384" width="16" height="16">
+   <properties>
+    <property name="index" value="6"/>
+   </properties>
+  </object>
+  <object id="164" type="animatedTile" x="64" y="384" width="16" height="16">
+   <properties>
+    <property name="index" value="7"/>
+   </properties>
+  </object>
+  <object id="165" type="animatedTile" x="80" y="384" width="32" height="16">
+   <properties>
+    <property name="index" value="5"/>
+   </properties>
+  </object>
+  <object id="167" type="animatedTile" x="48" y="416" width="16" height="16">
+   <properties>
+    <property name="index" value="7"/>
+   </properties>
+  </object>
+  <object id="168" type="animatedTile" x="96" y="432" width="16" height="16">
+   <properties>
+    <property name="index" value="9"/>
+   </properties>
+  </object>
+  <object id="169" type="animatedTile" x="48" y="432" width="16" height="16">
+   <properties>
+    <property name="index" value="10"/>
+   </properties>
+  </object>
+  <object id="183" type="animatedTile" x="112" y="400" width="16" height="16">
+   <properties>
+    <property name="index" value="11"/>
+   </properties>
+  </object>
+  <object id="184" type="animatedTile" x="64" y="400" width="16" height="16">
+   <properties>
+    <property name="index" value="12"/>
+   </properties>
+  </object>
+  <object id="185" type="animatedTile" x="64" y="416" width="16" height="16">
+   <properties>
+    <property name="index" value="3"/>
+   </properties>
+  </object>
+  <object id="197" type="animatedTile" x="64" y="432" width="32" height="16">
+   <properties>
+    <property name="index" value="8"/>
+   </properties>
+  </object>
+  <object id="210" type="animatedTile" x="112" y="272" width="80" height="16">
+   <properties>
+    <property name="index" value="8"/>
+   </properties>
+  </object>
+  <object id="213" type="animatedTile" x="112" y="288" width="80" height="96">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object id="215" type="animatedTile" x="0" y="336" width="96" height="16">
+   <properties>
+    <property name="index" value="8"/>
+   </properties>
+  </object>
+  <object id="216" type="animatedTile" x="0" y="352" width="112" height="32">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object id="218" type="animatedTile" x="0" y="384" width="64" height="32">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object id="220" type="animatedTile" x="0" y="416" width="48" height="64">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object id="221" type="animatedTile" x="128" y="384" width="64" height="48">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object id="222" type="animatedTile" x="112" y="432" width="80" height="16">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+  <object id="223" type="animatedTile" x="48" y="448" width="144" height="32">
+   <properties>
+    <property name="index" value="0"/>
+   </properties>
+  </object>
+ </objectgroup>
  <layer name="walls1" width="32" height="32">
   <data encoding="base64" compression="zlib">
    eJzFVwtygjAUjFKsg+CdwNp6LeioXMsPtcdyGXyaiS9pzIfuzM7KJ+zbyQuRy0KIH/DioL8goXMcvwd3jtpK/mkuxAx8t1B5vEtuLv8az63yQT/BL3DDHHfKeJt6dTrPH/5b/G7yQXfgHmyZ41TJf8iEOGZDfVSnrW4kfxmHQoipwqR47pM+fw3vJhvqozpttdX4l8XzuVXx6BMuf0iY/HX5Q6KGV6PwW8ov90+M/CbQeiDfGPlNoPVAvjb5T7h+DlyjKX95e5eQJuiTtwX/nPvzML9HhiemF3uY8te3dwmpDSbLgR8Kk+Xr+V3Qe5dgJXFl8H9l/m2gess1cBiz/7n+DZ3f5Mn1L/lOcH76R2+7gDx165byl7iniuBP0K3b+/zjetPXinWaatZqDFD+bERPGZR/9k/+Y+87Ksbed1WY8sfY71SY8tvsd74INf9rxzpDzf/W0Z/+g/qi8/yG84Xrtxupz1if3KQ+338+tZNeAfuQ3oI=
@@ -25,7 +157,7 @@
    eJxjYBjawIkfgkftH1j7D/EQdgst3AmzExmjg4M8hO3HZg4h98LkkWly/U+O/cSAFl7i1NHKfmLBQNtPKzAY/DDQbiDXfli+JRXwkKmPWsBnAO0f6LgeTOAwF3ZxeoURMzd2u5Ht5yKyfKYWGOhydSDtH8h6ZaDrNXraj6suH7V/4O2HyY+CUQACAGFpJPM=
   </data>
  </layer>
- <objectgroup name="animatedObjects1">
+ <objectgroup name="animatedObjects1" visible="0">
   <object id="202" name="animatedObject" x="224" y="208" width="16" height="16">
    <properties>
     <property name="frameDuration" value="0.25"/>
@@ -69,13 +201,13 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="people"/>
- <layer name="tops1" width="32" height="32">
+ <objectgroup name="people" visible="0"/>
+ <layer name="tops1" width="32" height="32" visible="0">
   <data encoding="base64" compression="zlib">
    eJztllsKgCAQRafHV1abKmphRa2r10+raqQiC3+sGJPmgFwE8V5hRgVgGObLBBFAGNnzz9A7J/TvBEAvDq3Quyb092IAPz7UFbrkPB8S/ToqgnRTC/WrelLXr+opM1DXr2T3pD63LsOXmbf+HlEnC70+O3S/UPG39+6KC33DrMg/SoGjNNS3kH+UBvdrhZnumObW6RNMc+uUuc8CFd4skw==
   </data>
  </layer>
- <layer name="tops2" width="32" height="32">
+ <layer name="tops2" width="32" height="32" visible="0">
   <data encoding="base64" compression="zlib">
    eJztzTENACAMALAlcM0WOAPhIICTZE9roBEAwE8tI3rW/ePes/Bf996FPwDwdgBWUgHS
   </data>
@@ -266,7 +398,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="livingEntities">
+ <objectgroup name="livingEntities" visible="0">
   <object id="51" name="person" x="64" y="336" width="16" height="16">
    <properties>
     <property name="male" value="true"/>
@@ -277,7 +409,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="objects">
+ <objectgroup name="objects" visible="0">
   <object id="53" name="sign" x="32" y="304" width="16" height="16">
    <properties>
     <property name="text" value="sign_1_text"/>
@@ -306,718 +438,6 @@
    <properties>
     <property name="text" value="sign_1_text"/>
     <property name="title" value="sign_1_title"/>
-   </properties>
-  </object>
- </objectgroup>
- <objectgroup name="animations" visible="0">
-  <object id="57" name="animation" x="176" y="288" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="58" name="animation" x="160" y="288" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="59" name="animation" x="144" y="288" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="60" name="animation" x="128" y="288" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="61" name="animation" x="112" y="288" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="62" name="animation" x="128" y="304" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="63" name="animation" x="144" y="304" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="64" name="animation" x="176" y="304" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="65" name="animation" x="112" y="304" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="66" name="animation" x="160" y="304" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="67" name="animation" x="128" y="320" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="68" name="animation" x="144" y="320" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="69" name="animation" x="176" y="320" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="70" name="animation" x="112" y="320" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="71" name="animation" x="160" y="320" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="72" name="animation" x="128" y="336" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="73" name="animation" x="144" y="336" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="74" name="animation" x="176" y="336" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="75" name="animation" x="112" y="336" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="76" name="animation" x="160" y="336" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="77" name="animation" x="176" y="352" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="78" name="animation" x="112" y="352" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="79" name="animation" x="128" y="352" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="80" name="animation" x="112" y="368" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="81" name="animation" x="128" y="368" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="82" name="animation" x="144" y="368" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="83" name="animation" x="160" y="400" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="84" name="animation" x="176" y="400" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="85" name="animation" x="144" y="400" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="86" name="animation" x="144" y="384" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="87" name="animation" x="176" y="368" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="88" name="animation" x="144" y="352" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="89" name="animation" x="128" y="400" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="90" name="animation" x="160" y="384" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="91" name="animation" x="128" y="384" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="92" name="animation" x="176" y="384" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="93" name="animation" x="160" y="368" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="94" name="animation" x="160" y="352" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="95" name="animation" x="144" y="416" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="96" name="animation" x="176" y="416" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="97" name="animation" x="128" y="432" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="98" name="animation" x="112" y="432" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="99" name="animation" x="144" y="432" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="100" name="animation" x="160" y="416" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="101" name="animation" x="160" y="432" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="102" name="animation" x="176" y="432" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="103" name="animation" x="128" y="416" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="104" name="animation" x="128" y="448" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="105" name="animation" x="176" y="448" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="106" name="animation" x="112" y="464" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="107" name="animation" x="112" y="448" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="108" name="animation" x="144" y="464" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="109" name="animation" x="160" y="464" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="110" name="animation" x="128" y="464" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="111" name="animation" x="144" y="448" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="112" name="animation" x="176" y="464" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="113" name="animation" x="160" y="448" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="114" name="animation" x="96" y="368" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="115" name="animation" x="32" y="352" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="116" name="animation" x="32" y="416" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="117" name="animation" x="96" y="352" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="118" name="animation" x="80" y="368" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="119" name="animation" x="64" y="448" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="120" name="animation" x="80" y="464" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="121" name="animation" x="64" y="464" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="122" name="animation" x="80" y="352" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="123" name="animation" x="48" y="448" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="124" name="animation" x="32" y="400" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="125" name="animation" x="32" y="448" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="126" name="animation" x="32" y="368" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="127" name="animation" x="80" y="448" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="128" name="animation" x="32" y="384" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="129" name="animation" x="96" y="464" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="130" name="animation" x="32" y="432" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="131" name="animation" x="64" y="368" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="132" name="animation" x="96" y="448" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="133" name="animation" x="64" y="352" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="134" name="animation" x="32" y="464" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="135" name="animation" x="48" y="464" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="136" name="animation" x="48" y="400" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="137" name="animation" x="48" y="368" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="138" name="animation" x="48" y="352" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="139" name="animation" x="48" y="384" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="140" name="animation" x="0" y="352" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="141" name="animation" x="0" y="464" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="142" name="animation" x="16" y="448" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="143" name="animation" x="0" y="368" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="144" name="animation" x="16" y="352" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="145" name="animation" x="0" y="432" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="146" name="animation" x="0" y="448" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="147" name="animation" x="16" y="416" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="148" name="animation" x="16" y="464" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="149" name="animation" x="16" y="384" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="150" name="animation" x="16" y="432" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="151" name="animation" x="0" y="384" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="152" name="animation" x="0" y="400" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="153" name="animation" x="0" y="416" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="154" name="animation" x="16" y="400" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="155" name="animation" x="16" y="368" width="16" height="16">
-   <properties>
-    <property name="index" value="0"/>
-   </properties>
-  </object>
-  <object id="156" name="animation" x="192" y="272" width="16" height="16">
-   <properties>
-    <property name="index" value="1"/>
-   </properties>
-  </object>
-  <object id="157" name="animation" x="96" y="272" width="16" height="16">
-   <properties>
-    <property name="index" value="2"/>
-   </properties>
-  </object>
-  <object id="158" name="animation" x="96" y="336" width="16" height="16">
-   <properties>
-    <property name="index" value="9"/>
-   </properties>
-  </object>
-  <object id="159" name="animation" x="96" y="288" width="16" height="16">
-   <properties>
-    <property name="index" value="11"/>
-   </properties>
-  </object>
-  <object id="160" name="animation" x="96" y="416" width="16" height="16">
-   <properties>
-    <property name="index" value="2"/>
-   </properties>
-  </object>
-  <object id="161" name="animation" x="112" y="416" width="16" height="16">
-   <properties>
-    <property name="index" value="9"/>
-   </properties>
-  </object>
-  <object id="162" name="animation" x="192" y="288" width="16" height="16">
-   <properties>
-    <property name="index" value="12"/>
-   </properties>
-  </object>
-  <object id="163" name="animation" x="112" y="384" width="16" height="16">
-   <properties>
-    <property name="index" value="6"/>
-   </properties>
-  </object>
-  <object id="164" name="animation" x="64" y="384" width="16" height="16">
-   <properties>
-    <property name="index" value="7"/>
-   </properties>
-  </object>
-  <object id="165" name="animation" x="80" y="384" width="16" height="16">
-   <properties>
-    <property name="index" value="5"/>
-   </properties>
-  </object>
-  <object id="166" name="animation" x="96" y="384" width="16" height="16">
-   <properties>
-    <property name="index" value="5"/>
-   </properties>
-  </object>
-  <object id="167" name="animation" x="48" y="416" width="16" height="16">
-   <properties>
-    <property name="index" value="7"/>
-   </properties>
-  </object>
-  <object id="168" name="animation" x="96" y="432" width="16" height="16">
-   <properties>
-    <property name="index" value="9"/>
-   </properties>
-  </object>
-  <object id="169" name="animation" x="48" y="432" width="16" height="16">
-   <properties>
-    <property name="index" value="10"/>
-   </properties>
-  </object>
-  <object id="170" name="animation" x="96" y="304" width="16" height="16">
-   <properties>
-    <property name="index" value="11"/>
-   </properties>
-  </object>
-  <object id="171" name="animation" x="96" y="320" width="16" height="16">
-   <properties>
-    <property name="index" value="11"/>
-   </properties>
-  </object>
-  <object id="172" name="animation" x="192" y="304" width="16" height="16">
-   <properties>
-    <property name="index" value="12"/>
-   </properties>
-  </object>
-  <object id="173" name="animation" x="192" y="320" width="16" height="16">
-   <properties>
-    <property name="index" value="12"/>
-   </properties>
-  </object>
-  <object id="174" name="animation" x="192" y="336" width="16" height="16">
-   <properties>
-    <property name="index" value="12"/>
-   </properties>
-  </object>
-  <object id="175" name="animation" x="192" y="352" width="16" height="16">
-   <properties>
-    <property name="index" value="12"/>
-   </properties>
-  </object>
-  <object id="176" name="animation" x="192" y="432" width="16" height="16">
-   <properties>
-    <property name="index" value="12"/>
-   </properties>
-  </object>
-  <object id="177" name="animation" x="192" y="416" width="16" height="16">
-   <properties>
-    <property name="index" value="12"/>
-   </properties>
-  </object>
-  <object id="178" name="animation" x="192" y="400" width="16" height="16">
-   <properties>
-    <property name="index" value="12"/>
-   </properties>
-  </object>
-  <object id="179" name="animation" x="192" y="368" width="16" height="16">
-   <properties>
-    <property name="index" value="12"/>
-   </properties>
-  </object>
-  <object id="180" name="animation" x="192" y="384" width="16" height="16">
-   <properties>
-    <property name="index" value="12"/>
-   </properties>
-  </object>
-  <object id="181" name="animation" x="192" y="464" width="16" height="16">
-   <properties>
-    <property name="index" value="12"/>
-   </properties>
-  </object>
-  <object id="182" name="animation" x="192" y="448" width="16" height="16">
-   <properties>
-    <property name="index" value="12"/>
-   </properties>
-  </object>
-  <object id="183" name="animation" x="112" y="400" width="16" height="16">
-   <properties>
-    <property name="index" value="11"/>
-   </properties>
-  </object>
-  <object id="184" name="animation" x="64" y="400" width="16" height="16">
-   <properties>
-    <property name="index" value="12"/>
-   </properties>
-  </object>
-  <object id="185" name="animation" x="64" y="416" width="16" height="16">
-   <properties>
-    <property name="index" value="3"/>
-   </properties>
-  </object>
-  <object id="186" name="animation" x="176" y="272" width="16" height="16">
-   <properties>
-    <property name="index" value="8"/>
-   </properties>
-  </object>
-  <object id="187" name="animation" x="160" y="272" width="16" height="16">
-   <properties>
-    <property name="index" value="8"/>
-   </properties>
-  </object>
-  <object id="188" name="animation" x="144" y="272" width="16" height="16">
-   <properties>
-    <property name="index" value="8"/>
-   </properties>
-  </object>
-  <object id="189" name="animation" x="128" y="272" width="16" height="16">
-   <properties>
-    <property name="index" value="8"/>
-   </properties>
-  </object>
-  <object id="190" name="animation" x="112" y="272" width="16" height="16">
-   <properties>
-    <property name="index" value="8"/>
-   </properties>
-  </object>
-  <object id="191" name="animation" x="48" y="336" width="16" height="16">
-   <properties>
-    <property name="index" value="8"/>
-   </properties>
-  </object>
-  <object id="192" name="animation" x="32" y="336" width="16" height="16">
-   <properties>
-    <property name="index" value="8"/>
-   </properties>
-  </object>
-  <object id="193" name="animation" x="16" y="336" width="16" height="16">
-   <properties>
-    <property name="index" value="8"/>
-   </properties>
-  </object>
-  <object id="194" name="animation" x="80" y="336" width="16" height="16">
-   <properties>
-    <property name="index" value="8"/>
-   </properties>
-  </object>
-  <object id="195" name="animation" x="64" y="336" width="16" height="16">
-   <properties>
-    <property name="index" value="8"/>
-   </properties>
-  </object>
-  <object id="196" name="animation" x="0" y="336" width="16" height="16">
-   <properties>
-    <property name="index" value="8"/>
-   </properties>
-  </object>
-  <object id="197" name="animation" x="64" y="432" width="16" height="16">
-   <properties>
-    <property name="index" value="8"/>
-   </properties>
-  </object>
-  <object id="198" name="animation" x="80" y="432" width="16" height="16">
-   <properties>
-    <property name="index" value="8"/>
    </properties>
   </object>
  </objectgroup>

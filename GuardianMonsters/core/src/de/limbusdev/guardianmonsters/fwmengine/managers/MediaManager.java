@@ -100,16 +100,6 @@ public class MediaManager implements Media {
                 .findRegions("watere"), Animation.PlayMode.LOOP));
         animatedTiles.add(new Animation(1f, assets.get(animations, TextureAtlas.class)
                 .findRegions("waterw"), Animation.PlayMode.LOOP));
-        animatedTiles.add(new Animation(.5f, assets.get(animations, TextureAtlas.class)
-                .findRegions("fire2"), Animation.PlayMode.LOOP));
-        animatedTiles.add(new Animation(.5f, assets.get(animations, TextureAtlas.class)
-                .findRegions("fire1"), Animation.PlayMode.LOOP));
-        animatedTiles.add(new Animation(.5f, assets.get(animations, TextureAtlas.class)
-                .findRegions("lamp1"), Animation.PlayMode.LOOP));
-        animatedTiles.add(new Animation(.4f, assets.get(animations, TextureAtlas.class)
-                .findRegions("light1"), Animation.PlayMode.LOOP));
-        animatedTiles.add(new Animation(.4f, assets.get(animations, TextureAtlas.class)
-            .findRegions("flower1"), Animation.PlayMode.LOOP));
     }
     /* ............................................................................... METHODS .. */
 
@@ -204,10 +194,6 @@ public class MediaManager implements Media {
      * 10 - Water SW
      * 11 - Water E
      * 12 - Water W
-     * 13 - Fire 2
-     * 14 - Fire 1
-     * 15 - Lamp 1
-     * 16 - Light 1
      * @param index
      * @return
      */

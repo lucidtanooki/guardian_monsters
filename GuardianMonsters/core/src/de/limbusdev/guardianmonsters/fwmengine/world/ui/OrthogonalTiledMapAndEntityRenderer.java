@@ -22,7 +22,11 @@ import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 
 
 /**
- * Created by georg on 21.11.15.
+ * Renderer for *.tmx files. This renderer renders map files of the FWM-Engine.
+ *
+ * Map Structure: Documents/TiledMapStructure.md
+ *
+ * Copyright 2017 by Georg Eckert
  */
 public class OrthogonalTiledMapAndEntityRenderer extends OrthogonalTiledMapRenderer {
     /* ............................................................................ ATTRIBUTES .. */
@@ -64,7 +68,6 @@ public class OrthogonalTiledMapAndEntityRenderer extends OrthogonalTiledMapRende
 
 
         beginRender();
-        int currentLayer = 0;
         for(MapLayer layer : map.getLayers()) {
             if(layer instanceof TiledMapTileLayer) {
                 renderTileLayer((TiledMapTileLayer) layer);

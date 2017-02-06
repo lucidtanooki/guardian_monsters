@@ -9,6 +9,9 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Components;
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.HeroComponent;
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PositionComponent;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.entities.HeroEntity;
 import de.limbusdev.guardianmonsters.enums.SkyDirection;
 import de.limbusdev.guardianmonsters.geometry.IntVector2;
@@ -41,8 +44,7 @@ public class InputSystem extends EntitySystem implements InputProcessor {
     /* ............................................................................... METHODS .. */
     public void addedToEngine(Engine engine) {
         // Hero
-        hero = engine.getEntitiesFor(Family.all(
-                de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.HeroComponent.class).get()).first();
+        hero = engine.getEntitiesFor(Family.all(HeroComponent.class).get()).first();
 
         // Speaking: Signs, People and so on
         speakingEntities = engine.getEntitiesFor(EntityFamilies.living);
@@ -51,10 +53,13 @@ public class InputSystem extends EntitySystem implements InputProcessor {
 
     public void update(float deltaTime) {
         // Unblock talking entities if hero isn't talking anymore
-        for(Entity e : speakingEntities)
-                if(de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Components.path.get(e).talking)
-                    if(!de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Components.input.get(hero).talking)
-                        de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Components.path.get(e).talking = false;
+        for(Entity e : speakingEntities) {
+            if (Components.path.get(e).talking) {
+                if (!Components.input.get(hero).talking) {
+                    Components.path.get(e).talking = false;
+                }
+            }
+        }
     }
 
     @Override
@@ -135,7 +140,7 @@ public class InputSystem extends EntitySystem implements InputProcessor {
      * can interact with
      * @return
      */
-    public Entity checkForNearInteractiveObjects(de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PositionComponent pos, SkyDirection dir) {
+    public Entity checkForNearInteractiveObjects(PositionComponent pos, SkyDirection dir) {
         Entity nearEntity=null;
         IntVector2 checkGridCell = new IntVector2(pos.onGrid.x,pos.onGrid.y);
 
@@ -150,10 +155,10 @@ public class InputSystem extends EntitySystem implements InputProcessor {
         if(GS.DEBUGGING_ON)
             System.out.println("Grid cell to be checked: ("+checkGridCell.x+"|"+checkGridCell.y+")");
 
-        for(Entity e : this.getEngine().getEntitiesFor(Family.all(de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PositionComponent.class).get())) {
+        for(Entity e : this.getEngine().getEntitiesFor(Family.all(PositionComponent.class).get())) {
 
-            if (de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Components.position.get(e) != null && !(e instanceof HeroEntity)) {
-                de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PositionComponent p = de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Components.position.get(e);
+            if (Components.position.get(e) != null && !(e instanceof HeroEntity)) {
+                PositionComponent p = Components.position.get(e);
 
                 if(GS.DEBUGGING_ON)
                     System.out.println("Grid Cell of tested Entity: ("+p.onGrid.x+"|"+p.onGrid.y+")");

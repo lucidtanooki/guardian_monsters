@@ -8,6 +8,9 @@ import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Components;
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PositionComponent;
+
 
 /**
  * Renders entities colider box
@@ -20,8 +23,7 @@ public class DebuggingSystem extends EntitySystem {
     public DebuggingSystem() {}
     /* ............................................................................... METHODS .. */
     public void addedToEngine(Engine engine) {
-        entities = engine.getEntitiesFor(Family.all(
-                de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PositionComponent.class).get());
+        entities = engine.getEntitiesFor(Family.all(PositionComponent.class).get());
     }
 
     public void update(float deltaTime) {
@@ -37,7 +39,7 @@ public class DebuggingSystem extends EntitySystem {
         shpr.setColor(Color.WHITE);
 
         for(Entity e : entities) {
-            de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PositionComponent p = de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Components.position.get(e);
+            PositionComponent p = Components.position.get(e);
             shpr.rect(p.x, p.y, p.width, p.height);
         }
 

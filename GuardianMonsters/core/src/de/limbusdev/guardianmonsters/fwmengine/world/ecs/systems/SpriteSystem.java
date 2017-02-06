@@ -7,6 +7,8 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
 
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.CharacterSpriteComponent;
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Components;
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.SpriteComponent;
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.EntitySprite;
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.OrthogonalTiledMapAndEntityRenderer;
 
@@ -26,13 +28,13 @@ public class SpriteSystem extends EntitySystem {
     public void addedToEngine(Engine engine) {
         // Get all entities with either Sprite-, Weapon- or CharacterSprite Components
         visibleEntities = engine.getEntitiesFor(Family.one(
-                de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.SpriteComponent.class,
+                SpriteComponent.class,
                 CharacterSpriteComponent.class
         ).get());
         for(Entity e : visibleEntities) {
             EntitySprite es = null;
-            if(de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Components.characterSprite.has(e)) es = de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Components.characterSprite.get(e).sprite;
-            if(de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Components.sprite.has(e)) es = de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Components.sprite.get(e).sprite;
+            if(Components.characterSprite.has(e)) es = Components.characterSprite.get(e).sprite;
+            if(Components.sprite.has(e)) es = Components.sprite.get(e).sprite;
             mapRenderer.addEntitySprite(es);
         }
     }

@@ -202,12 +202,12 @@
   </object>
  </objectgroup>
  <objectgroup name="people" visible="0"/>
- <layer name="tops1" width="32" height="32" visible="0">
+ <layer name="tops1" width="32" height="32">
   <data encoding="base64" compression="zlib">
    eJztllsKgCAQRafHV1abKmphRa2r10+raqQiC3+sGJPmgFwE8V5hRgVgGObLBBFAGNnzz9A7J/TvBEAvDq3Quyb092IAPz7UFbrkPB8S/ToqgnRTC/WrelLXr+opM1DXr2T3pD63LsOXmbf+HlEnC70+O3S/UPG39+6KC33DrMg/SoGjNNS3kH+UBvdrhZnumObW6RNMc+uUuc8CFd4skw==
   </data>
  </layer>
- <layer name="tops2" width="32" height="32" visible="0">
+ <layer name="tops2" width="32" height="32">
   <data encoding="base64" compression="zlib">
    eJztzTENACAMALAlcM0WOAPhIICTZE9roBEAwE8tI3rW/ePes/Bf996FPwDwdgBWUgHS
   </data>

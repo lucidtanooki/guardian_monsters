@@ -8,6 +8,18 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Components;
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PositionComponent;
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.entities.HeroEntity;
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.CameraSystem;
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.CharacterSpriteSystem;
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.DebuggingSystem;
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.GameArea;
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.InputSystem;
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.MovementSystem;
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.PathSystem;
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.PositionSynchroSystem;
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.SpriteSystem;
 import de.limbusdev.guardianmonsters.fwmengine.world.model.MapObjectInformation;
 import de.limbusdev.guardianmonsters.fwmengine.world.model.MapPersonInformation;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Media;
@@ -27,8 +39,8 @@ public class EntityComponentSystem {
     private Engine engine;
     private Media media;
     private EntityFactory entityFactory;
-    private de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PositionComponent heroPosition;
-    public de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.GameArea gameArea;
+    private PositionComponent heroPosition;
+    public GameArea gameArea;
     public SaveGameManager saveGameManager;
     public Entity hero;
     public HUD hud;
@@ -43,7 +55,7 @@ public class EntityComponentSystem {
      * @param gameScreen    screen
      * @param sgm           the SaveGameManager
      */
-    public EntityComponentSystem(Viewport viewport, de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.GameArea gameArea, boolean
+    public EntityComponentSystem(Viewport viewport, GameArea gameArea, boolean
             fromSave, OutdoorGameWorldScreen gameScreen, SaveGameManager sgm
     ) {
 
@@ -66,7 +78,7 @@ public class EntityComponentSystem {
      */
     public void setUpHero(boolean fromSave) {
         Entity hero = entityFactory.createHero(gameArea.startPosition, fromSave);
-        this.heroPosition = de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Components.getPositionComponent(hero);
+        this.heroPosition = Components.getPositionComponent(hero);
         this.hero = hero;
     }
 
@@ -87,40 +99,39 @@ public class EntityComponentSystem {
     }
 
 
-    public void setUpEntitySystems(de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.GameArea gameArea, Viewport viewport, HUD hud) {
+    public void setUpEntitySystems(GameArea gameArea, Viewport viewport, HUD hud) {
         // Sprite System
-        de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.SpriteSystem spriteSystem = new de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.SpriteSystem(gameArea.getMapRenderer());
+        SpriteSystem spriteSystem = new SpriteSystem(gameArea.getMapRenderer());
         spriteSystem.addedToEngine(engine);
         engine.addSystem(spriteSystem);
 
         // Input System
-        de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.InputSystem inputSystem = new de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.InputSystem(viewport, hud);
+        InputSystem inputSystem = new InputSystem(viewport, hud);
         inputSystem.addedToEngine(engine);
         engine.addSystem(inputSystem);
 
         // Position Synchronization
-        de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.PositionSynchroSystem positionSynchroSystem = new de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.PositionSynchroSystem();
+        PositionSynchroSystem positionSynchroSystem = new PositionSynchroSystem();
         positionSynchroSystem.addedToEngine(engine);
         engine.addSystem(positionSynchroSystem);
 
         // Character Sprite System
-        de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.CharacterSpriteSystem characterSpriteSystem = new de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.CharacterSpriteSystem();
+        CharacterSpriteSystem characterSpriteSystem = new CharacterSpriteSystem();
         characterSpriteSystem.addedToEngine(engine);
         engine.addSystem(characterSpriteSystem);
 
         // Movement System
-        de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.MovementSystem movementSystem = new de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.MovementSystem(this, gameArea.getWarpPoints(), gameArea.getHealFields());
+        MovementSystem movementSystem = new MovementSystem(this, gameArea.getWarpPoints(), gameArea.getHealFields());
         movementSystem.addedToEngine(engine);
         engine.addSystem(movementSystem);
 
         // Camera System
-        de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.CameraSystem cameraSystem = new de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.CameraSystem((OrthographicCamera)viewport.getCamera(),
-                gameArea.getTiledMap());
+        CameraSystem cameraSystem = new CameraSystem((OrthographicCamera)viewport.getCamera(), gameArea.getTiledMap());
         cameraSystem.addedToEngine(engine);
         engine.addSystem(cameraSystem);
 
         // Path System
-        de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.PathSystem pathSystem = new de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.PathSystem(gameArea);
+        PathSystem pathSystem = new PathSystem(gameArea);
         pathSystem.addedToEngine(engine);
         engine.addSystem(pathSystem);
 
@@ -130,14 +141,14 @@ public class EntityComponentSystem {
         engine.addSystem(this.saveGameManager);
 
         // Debugging
-        de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.DebuggingSystem debuggingSystem = new de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.DebuggingSystem();
+        DebuggingSystem debuggingSystem = new DebuggingSystem();
         debuggingSystem.addedToEngine(engine);
         engine.addSystem(debuggingSystem);
     }
 
     public void deleteGameAreasEntities() {
         for(Entity e : engine.getEntities())
-            if(!(e instanceof de.limbusdev.guardianmonsters.fwmengine.world.ecs.entities.HeroEntity))
+            if(!(e instanceof HeroEntity))
                 engine.removeEntity(e);
     }
 
@@ -157,7 +168,7 @@ public class EntityComponentSystem {
      * @param shape
      */
     public void render(Batch batch, ShapeRenderer shape) {
-        if(GS.DEBUGGING_ON) engine.getSystem(de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.DebuggingSystem.class).render(shape);
+        if(GS.DEBUGGING_ON) engine.getSystem(DebuggingSystem.class).render(shape);
     }
 
     /**

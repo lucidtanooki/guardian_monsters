@@ -6,6 +6,10 @@ import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
 
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.CharacterSpriteComponent;
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Components;
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PositionComponent;
+
 
 /**
  * Synchronizes Sprites of Entities with their Position
@@ -20,18 +24,18 @@ public class PositionSynchroSystem extends EntitySystem {
     /* ............................................................................... METHODS .. */
     public void addedToEngine(Engine engine) {
         entities = engine.getEntitiesFor(Family.all(
-                de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PositionComponent.class,
-                de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.CharacterSpriteComponent.class
+                PositionComponent.class,
+                CharacterSpriteComponent.class
         ).get());
     }
 
     public void update(float deltaTime) {
         for (Entity entity : entities) {
-            de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PositionComponent position = de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Components.position.get(entity);
+            PositionComponent position = Components.position.get(entity);
 
             // Synchronize CharacterSprite with PositionComponent
-            if(entity.getComponent(de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.CharacterSpriteComponent.class) != null) {
-                de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.CharacterSpriteComponent sprite = de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Components.characterSprite.get(entity);
+            if(entity.getComponent(CharacterSpriteComponent.class) != null) {
+                CharacterSpriteComponent sprite = Components.characterSprite.get(entity);
                 sprite.sprite.setPosition(position.x, position.y);
             }
         }

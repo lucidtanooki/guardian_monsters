@@ -11,7 +11,11 @@ import com.badlogic.gdx.utils.TimeUtils;
 
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.EntityComponentSystem;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.ColliderComponent;
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Components;
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.HeroComponent;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.InputComponent;
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PositionComponent;
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TeamComponent;
 import de.limbusdev.guardianmonsters.geometry.IntRectangle;
 import de.limbusdev.guardianmonsters.geometry.IntVector2;
 import de.limbusdev.guardianmonsters.fwmengine.world.model.WarpPoint;
@@ -39,7 +43,7 @@ public class MovementSystem extends EntitySystem {
     }
     /* ............................................................................... METHODS .. */
     public void addedToEngine(Engine engine) {
-        hero = engine.getEntitiesFor(Family.all(de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.HeroComponent.class).get()).first();
+        hero = engine.getEntitiesFor(Family.all(HeroComponent.class).get()).first();
     }
 
     public void update(float deltaTime) {
@@ -52,7 +56,7 @@ public class MovementSystem extends EntitySystem {
      * Check whether hero enters warp area
      */
     public void checkWarp() {
-        de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PositionComponent pos = de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Components.position.get(hero);
+        PositionComponent pos = Components.position.get(hero);
         Rectangle heroArea = new Rectangle(pos.x, pos.y, pos.width, pos.height);
 
         // Check whether hero enters warp area
@@ -65,7 +69,7 @@ public class MovementSystem extends EntitySystem {
     }
 
     public void checkHeal() {
-        de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PositionComponent pos = de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Components.position.get(hero);
+        PositionComponent pos = Components.position.get(hero);
         Rectangle heroArea = new Rectangle(pos.x, pos.y, pos.width, pos.height);
 
         // Check whether hero enters warp area
@@ -73,7 +77,7 @@ public class MovementSystem extends EntitySystem {
             if (heroArea.contains(h.x+h.width/2,h.y+h.height/2)) {
                 // Heal Team
                 System.out.println("Entered Healing Area");
-                de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TeamComponent tc = de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Components.team.get(hero);
+                TeamComponent tc = Components.team.get(hero);
                 boolean teamHurt = false;
                 for(Monster m : tc.monsters.values())
                     if(m.getHP() != m.getHPfull())
@@ -84,11 +88,11 @@ public class MovementSystem extends EntitySystem {
 
     public void updateHero() {
         // Only move hero, when player is not speaking to an entity
-        if (!de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Components.input.get(hero).talking) {
+        if (!Components.input.get(hero).talking) {
             makeOneStep(
-                    de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Components.position.get(hero),
-                    de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Components.input.get(hero),
-                    de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Components.collision.get(hero));
+                    Components.position.get(hero),
+                    Components.input.get(hero),
+                    Components.collision.get(hero));
         }
     }
 
@@ -98,7 +102,7 @@ public class MovementSystem extends EntitySystem {
      * @param input
      * @param collider
      */
-    public void makeOneStep(de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PositionComponent position, InputComponent input,
+    public void makeOneStep(PositionComponent position, InputComponent input,
                             ColliderComponent collider) {
 
         // Initialize Hero Movement
@@ -204,8 +208,8 @@ public class MovementSystem extends EntitySystem {
                         System.out.print("Monster appeared!\n");
                         /* ......................................................... START BATTLE */
                         input.inBattle = true;
-                        de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TeamComponent oppTeam = BattleFactory.getInstance().createOpponentTeam(ma);
-                        ecs.hud.battleScreen.init(de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Components.team.get(ecs.hero), oppTeam);
+                        TeamComponent oppTeam = BattleFactory.getInstance().createOpponentTeam(ma);
+                        ecs.hud.battleScreen.init(Components.team.get(ecs.hero), oppTeam);
                         Services.getScreenManager().pushScreen(ecs.hud.battleScreen);
                         /* ......................................................... START BATTLE */
                         // Stop when in a battle

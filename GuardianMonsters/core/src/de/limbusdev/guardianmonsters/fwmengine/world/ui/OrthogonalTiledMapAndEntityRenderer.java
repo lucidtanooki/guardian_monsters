@@ -8,6 +8,8 @@ import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.Sort;
@@ -70,12 +72,15 @@ public class OrthogonalTiledMapAndEntityRenderer extends OrthogonalTiledMapRende
         sortSpritesByDepth();
 
         beginRender();
+
         for(MapLayer layer : map.getLayers()) {
             if(layer instanceof TiledMapTileLayer) {
+
                 // Render graphical layer
                 renderTileLayer((TiledMapTileLayer) layer);
 
             } else {
+
                 // Handle object layer
                 for (MapObject object : layer.getObjects()) {
                     renderObject(object);
@@ -89,6 +94,7 @@ public class OrthogonalTiledMapAndEntityRenderer extends OrthogonalTiledMapRende
                         }
                     }
                 }
+
             }
         }
 
@@ -101,8 +107,8 @@ public class OrthogonalTiledMapAndEntityRenderer extends OrthogonalTiledMapRende
 
     @Override
     public void renderObject(MapObject object) {
-        String objName = object.getName();
 
+        String objName = object.getName();
         // Don't render objects with empty name
         if(objName != null && objName.equals("animatedObject")) {
             renderAnimatedObject(object);
@@ -119,10 +125,16 @@ public class OrthogonalTiledMapAndEntityRenderer extends OrthogonalTiledMapRende
         sprites.add(es);
     }
 
+    /**
+     * Handles layers containing "animatedTiles" in their name and loads the needed animations
+     * @param mapLayer  animatedTiles[number] layer
+     */
     public void setUpTileAnimations(MapLayer mapLayer) {
         try {
+            System.out.println("Setting up tile animation for layer: " + mapLayer.getName());
             for (MapObject mo : mapLayer.getObjects()) {
-                int id = mo.getProperties().get("index", Integer.class);
+                String index = mo.getProperties().get("index", String.class);
+                int id = Integer.parseInt(index);
                 if(!tileAnimations.containsKey(id)) {
                     Animation a = media.getTileAnimation(id);
                     if(mo.getProperties().containsKey("frameDuration")){
@@ -134,11 +146,17 @@ public class OrthogonalTiledMapAndEntityRenderer extends OrthogonalTiledMapRende
             }
         } catch (Exception e) {
             System.err.println("No Animated Tiles Layer available");
+            e.printStackTrace();
         }
     }
 
+    /**
+     * Handles layers containing "animatedObjects" in their name and loads the needed animations
+     * @param mapLayer  animatedObjects[number] layer
+     */
     public void setUpObjectAnimations(MapLayer mapLayer) {
         try {
+            System.out.println("Setting up object animation for layer: " + mapLayer.getName());
             for (MapObject mo : mapLayer.getObjects()) {
                 String id = mo.getProperties().get("index", String.class);
                 if(!objectAnimations.containsKey(id)) {
@@ -155,20 +173,48 @@ public class OrthogonalTiledMapAndEntityRenderer extends OrthogonalTiledMapRende
         }
     }
 
+
+    // .............................................................................. RENDER METHODS
     private void renderAnimatedTile(MapObject o) {
         RectangleMapObject r = (RectangleMapObject) o;
-        this.batch.draw(
-            tileAnimations.get(o.getProperties().get("index", Integer.class)).getKeyFrame(elapsedTime),
-            r.getRectangle().getX(),
-            r.getRectangle().getY());
+        int index = Integer.parseInt(o.getProperties().get("index", String.class));
+        Animation a = tileAnimations.get(index);
+
+        // Render multiple tiles
+        int cols, rows;
+        int objWidth, objHeight;
+        objWidth = MathUtils.round(r.getRectangle().getWidth());
+        objHeight = MathUtils.round(r.getRectangle().getHeight());
+        cols = objWidth/16;
+        rows = objHeight/16;
+
+        for(int i=0; i<rows; i++) {
+            for(int j=0; j<cols; j++) {
+                float x = r.getRectangle().getX() + j*16;
+                float y = r.getRectangle().getY() + i*16;
+                renderAnimation(a,x,y);
+            }
+        }
     }
 
     private void renderAnimatedObject(MapObject o) {
         RectangleMapObject r = (RectangleMapObject) o;
-        this.batch.draw(
-            objectAnimations.get(o.getProperties().get("index", String.class)).getKeyFrame(elapsedTime),
-            r.getRectangle().getX(),
-            r.getRectangle().getY());
+        Animation a = objectAnimations.get(o.getProperties().get("index", String.class));
+        renderAnimation(a,r.getRectangle().getX(), r.getRectangle().getY());
+    }
+
+    /**
+     * Draws the given animation at the position given by the rectangles corner
+     * @param anim
+     * @param x
+     * @param y
+     */
+    private void renderAnimation(Animation anim, float x, float y) {
+        try {
+            this.batch.draw(anim.getKeyFrame(elapsedTime), x, y);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**

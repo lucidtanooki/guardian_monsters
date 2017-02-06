@@ -7,10 +7,14 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
 
 import de.limbusdev.guardianmonsters.enums.SkyDirection;
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.CharacterSpriteComponent;
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Components;
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.InputComponent;
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PathComponent;
 
 /**
  * Updates the entities sprites, setting the correct @link Animation} frame,
- * {@link SkyDirection} and so on according to the given {@link Entity}'s {@link de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.InputComponent}
+ * {@link SkyDirection} and so on according to the given {@link Entity}'s {@link InputComponent}
  * Created by georg on 22.11.15.
  */
 public class CharacterSpriteSystem extends EntitySystem {
@@ -23,9 +27,9 @@ public class CharacterSpriteSystem extends EntitySystem {
     /* ............................................................................... METHODS .. */
     public void addedToEngine(Engine engine) {
         entities = engine.getEntitiesFor(Family.all(
-                de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.CharacterSpriteComponent.class).one(
-                de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.InputComponent.class,
-                de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PathComponent.class).get());
+                CharacterSpriteComponent.class).one(
+                InputComponent.class,
+                PathComponent.class).get());
     }
 
     public void update(float deltaTime) {
@@ -34,20 +38,20 @@ public class CharacterSpriteSystem extends EntitySystem {
 
         // Update every single CharacterSpriteComponent
         for (Entity entity : entities) {
-            de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.CharacterSpriteComponent sprite = de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Components.characterSprite.get(entity);
+            CharacterSpriteComponent sprite = Components.characterSprite.get(entity);
             SkyDirection direction = SkyDirection.S;
             boolean moving = false;
 
             // If entity has InputComponent
-            if(de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Components.input.has(entity)) {
-                direction = de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Components.getInputComponent(entity).skyDir;
-                moving = de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Components.input.get(entity).moving;
+            if(Components.input.has(entity)) {
+                direction = Components.getInputComponent(entity).skyDir;
+                moving = Components.input.get(entity).moving;
             }
 
 
             // If entitiy has PathComponent
-            if(de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Components.path.has(entity)) {
-                de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PathComponent entPath = de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Components.path.get(entity);
+            if(Components.path.has(entity)) {
+                PathComponent entPath = Components.path.get(entity);
                 if(entPath.talking) direction = entPath.talkDir;
                 else direction = entPath.path.get(entPath.currentDir);
 

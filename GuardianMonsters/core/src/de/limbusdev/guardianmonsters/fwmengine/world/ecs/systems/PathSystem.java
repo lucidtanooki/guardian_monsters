@@ -8,14 +8,17 @@ import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.utils.TimeUtils;
 
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.ColliderComponent;
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Components;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.InputComponent;
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PathComponent;
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PositionComponent;
 import de.limbusdev.guardianmonsters.geometry.IntRectangle;
 import de.limbusdev.guardianmonsters.geometry.IntVector2;
 import de.limbusdev.guardianmonsters.utils.GS;
 
 
 /**
- * Moves around entities with a {@link de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PathComponent} like persons, animals and so on
+ * Moves around entities with a {@link PathComponent} like persons, animals and so on
  * Created by georg on 30.11.15.
  */
 public class PathSystem extends EntitySystem {
@@ -29,24 +32,24 @@ public class PathSystem extends EntitySystem {
     /* ............................................................................... METHODS .. */
     public void addedToEngine(Engine engine) {
         entities = engine.getEntitiesFor(Family.all(
-                de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PositionComponent.class,
+                PositionComponent.class,
                 ColliderComponent.class,
-                de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PathComponent.class).exclude(
+                PathComponent.class).exclude(
                 InputComponent.class
         ).get());
     }
 
     public void update(float deltaTime) {
         for (Entity entity : entities) {
-            de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PositionComponent position = de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Components.getPositionComponent(entity);
-            ColliderComponent collider = de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Components.getColliderComponent(entity);
-            de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PathComponent path = de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Components.getPathComponent(entity);
+            PositionComponent position = Components.getPositionComponent(entity);
+            ColliderComponent collider = Components.getColliderComponent(entity);
+            PathComponent path = Components.getPathComponent(entity);
             makeOneStep(position, path, collider);
             position.updateGridPosition();
         }
     }
 
-    public void makeOneStep(de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PositionComponent position, de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PathComponent path, ColliderComponent
+    public void makeOneStep(PositionComponent position, PathComponent path, ColliderComponent
             collider) {
         if(path.startMoving && !path.staticEntity) {
             // Define direction of movement

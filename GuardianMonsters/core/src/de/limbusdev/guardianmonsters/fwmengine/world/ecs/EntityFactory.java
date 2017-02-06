@@ -8,10 +8,12 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.CameraCompon
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.CharacterSpriteComponent;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.ColliderComponent;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.ConversationComponent;
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.HeroComponent;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.InputComponent;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PathComponent;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PositionComponent;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.SaveGameComponent;
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TeamComponent;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TitleComponent;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.entities.HeroEntity;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.GameArea;
@@ -49,7 +51,7 @@ public class EntityFactory {
      * Creates a hero {@link Entity} and adds it to the {@link Engine}.
      * @return
      */
-    public Entity createHero(de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PositionComponent startField, boolean restoreSave) {
+    public Entity createHero(PositionComponent startField, boolean restoreSave) {
         Entity hero = new HeroEntity();
 
         // Add Sprite
@@ -59,7 +61,7 @@ public class EntityFactory {
 
         // Input
         hero.add(new InputComponent());
-        de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PositionComponent position = new de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PositionComponent(
+        PositionComponent position = new PositionComponent(
                 startField.x,
                 startField.y,
                 UnitConverter.tilesToPixels(1),
@@ -90,7 +92,7 @@ public class EntityFactory {
         }
 
         // Add Team
-        de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TeamComponent team = new de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TeamComponent();
+        TeamComponent team = new TeamComponent();
         team.monsters.put(0,BattleFactory.getInstance().createMonster(1));
         team.monsters.put(1,BattleFactory.getInstance().createMonster(14));
         team.monsters.put(2,BattleFactory.getInstance().createMonster(5));
@@ -100,7 +102,7 @@ public class EntityFactory {
         hero.add(team);
 
         // Mark as Hero
-        hero.add(new de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.HeroComponent());
+        hero.add(new HeroComponent());
 
         engine.addEntity(hero);
 

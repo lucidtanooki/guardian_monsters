@@ -9,6 +9,9 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.MathUtils;
 
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.CameraComponent;
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Components;
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PositionComponent;
 import de.limbusdev.guardianmonsters.geometry.IntRectangle;
 import de.limbusdev.guardianmonsters.utils.GS;
 
@@ -45,8 +48,8 @@ public class CameraSystem extends EntitySystem {
     /* ............................................................................... METHODS .. */
     public void addedToEngine(Engine engine) {
         entities = engine.getEntitiesFor(Family.all(
-                de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PositionComponent.class,
-                de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.CameraComponent.class
+                PositionComponent.class,
+                CameraComponent.class
         ).get());
     }
 
@@ -54,7 +57,7 @@ public class CameraSystem extends EntitySystem {
 
         // Move all cameras of entities with a {@link CameraComponent} (hero only)
         for (Entity entity : entities) {
-            de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PositionComponent position = de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Components.getPositionComponent(entity);
+            PositionComponent position = Components.getPositionComponent(entity);
 
             if (mapOutline.width >= camera.viewportWidth &&
                     mapOutline.height >= camera.viewportHeight) {

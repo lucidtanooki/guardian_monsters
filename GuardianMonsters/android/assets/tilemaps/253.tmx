@@ -242,7 +242,7 @@
   <object id="28" x="368" y="128" width="16" height="80"/>
  </objectgroup>
  <objectgroup name="livingEntities" visible="0">
-  <object id="29" name="person" x="352" y="160" width="16" height="16">
+  <object id="29" name="person" type="person" x="352" y="160" width="16" height="16">
    <properties>
     <property name="male" value="true"/>
     <property name="name" value="person_253_1_name"/>
@@ -253,7 +253,7 @@
     <property name="trigger" value="sequence_253_1"/>
    </properties>
   </object>
-  <object id="80" name="person" x="256" y="112" width="16" height="16">
+  <object id="80" name="person" type="person" x="256" y="112" width="16" height="16">
    <properties>
     <property name="male" value="false"/>
     <property name="path" value="ESTOP"/>
@@ -262,7 +262,7 @@
     <property name="text" value="person_253_4_text"/>
    </properties>
   </object>
-  <object id="81" name="person" x="256" y="96" width="16" height="16">
+  <object id="81" name="person" type="person" x="256" y="96" width="16" height="16">
    <properties>
     <property name="male" value="true"/>
     <property name="path" value="ESTOP"/>
@@ -271,7 +271,7 @@
     <property name="text" value="person_253_5_text"/>
    </properties>
   </object>
-  <object id="82" name="person" x="256" y="176" width="16" height="16">
+  <object id="82" name="person" type="person" x="256" y="176" width="16" height="16">
    <properties>
     <property name="male" value="true"/>
     <property name="path" value="ESTOP"/>
@@ -280,7 +280,7 @@
     <property name="text" value="person_253_3_text"/>
    </properties>
   </object>
-  <object id="83" name="person" x="256" y="192" width="16" height="16">
+  <object id="83" name="person" type="person" x="256" y="192" width="16" height="16">
    <properties>
     <property name="male" value="true"/>
     <property name="path" value="ESTOP"/>
@@ -289,7 +289,7 @@
     <property name="text" value="person_253_2_text"/>
    </properties>
   </object>
-  <object id="84" name="person" x="224" y="96" width="16" height="16">
+  <object id="84" name="person" type="person" x="224" y="96" width="16" height="16">
    <properties>
     <property name="male" value="true"/>
     <property name="path" value="ESTOP"/>
@@ -298,7 +298,7 @@
     <property name="text" value="person_253_6_text"/>
    </properties>
   </object>
-  <object id="85" name="person" x="224" y="192" width="16" height="16">
+  <object id="85" name="person" type="person" x="224" y="192" width="16" height="16">
    <properties>
     <property name="male" value="true"/>
     <property name="path" value="ESTOP"/>
@@ -307,7 +307,7 @@
     <property name="text" value="person_253_7_text"/>
    </properties>
   </object>
-  <object id="86" name="person" x="176" y="96" width="16" height="16">
+  <object id="86" name="person" type="person" x="176" y="96" width="16" height="16">
    <properties>
     <property name="male" value="true"/>
     <property name="path" value="ESTOP"/>
@@ -316,7 +316,7 @@
     <property name="text" value="person_253_9_text"/>
    </properties>
   </object>
-  <object id="87" name="person" x="176" y="112" width="16" height="16">
+  <object id="87" name="person" type="person" x="176" y="112" width="16" height="16">
    <properties>
     <property name="male" value="true"/>
     <property name="path" value="ESTOP"/>
@@ -325,7 +325,7 @@
     <property name="text" value="person_253_8_text"/>
    </properties>
   </object>
-  <object id="88" name="person" x="144" y="176" width="16" height="16">
+  <object id="88" name="person" type="person" x="144" y="176" width="16" height="16">
    <properties>
     <property name="male" value="true"/>
     <property name="name" value="person_253_1_name"/>
@@ -335,7 +335,7 @@
     <property name="text" value="person_253_1_text"/>
    </properties>
   </object>
-  <object id="89" name="person" x="144" y="96" width="16" height="16">
+  <object id="89" name="person" type="person" x="144" y="96" width="16" height="16">
    <properties>
     <property name="male" value="true"/>
     <property name="name" value="person_253_1_name"/>
@@ -345,7 +345,7 @@
     <property name="text" value="person_253_1_text"/>
    </properties>
   </object>
-  <object id="90" name="person" x="144" y="112" width="16" height="16">
+  <object id="90" name="person" type="person" x="144" y="112" width="16" height="16">
    <properties>
     <property name="male" value="true"/>
     <property name="name" value="person_253_1_name"/>
@@ -355,7 +355,7 @@
     <property name="text" value="person_253_1_text"/>
    </properties>
   </object>
-  <object id="91" name="person" x="112" y="192" width="16" height="16">
+  <object id="91" name="person" type="person" x="112" y="192" width="16" height="16">
    <properties>
     <property name="male" value="true"/>
     <property name="name" value="person_253_1_name"/>
@@ -365,7 +365,7 @@
     <property name="text" value="person_253_1_text"/>
    </properties>
   </object>
-  <object id="92" name="person" x="80" y="112" width="16" height="16">
+  <object id="92" name="person" type="person" x="80" y="112" width="16" height="16">
    <properties>
     <property name="male" value="true"/>
     <property name="name" value="person_253_1_name"/>

@@ -27,7 +27,7 @@ import de.limbusdev.guardianmonsters.utils.GS;
 
 
 /**
- * Created by georg on 23.11.15.
+ * Copyright (c) Georg Eckert 2017
  */
 public class MovementSystem extends EntitySystem {
     /* ............................................................................ ATTRIBUTES .. */
@@ -35,6 +35,7 @@ public class MovementSystem extends EntitySystem {
     private Array<WarpPoint> warpPoints;
     private Array<Rectangle> healFields;
     private EntityComponentSystem ecs;
+
     /* ........................................................................... CONSTRUCTOR .. */
     public MovementSystem(EntityComponentSystem ecs, Array<WarpPoint> warpPoints, Array<Rectangle> healFields) {
         this.ecs = ecs;

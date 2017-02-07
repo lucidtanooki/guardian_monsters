@@ -215,7 +215,6 @@ public class HUD extends InputAdapter {
 
     private boolean walk(SkyDirection dir, InputComponent input) {
         if (!input.moving) {
-            System.out.println("Move");
             input.startMoving = true;
             input.skyDir = dir;
             input.nextInput = dir;

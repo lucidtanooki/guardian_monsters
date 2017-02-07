@@ -15,7 +15,7 @@
    eJzt0sEKgzAMgOFAT1poFN9pcz7YWPWtvOj0sFdaph4GhkKZy6Hm8NFbftrGlABGKaWU+sGr2jtTPxUXBLgG1Pjf/p3mTwWAZ8zkIdBvqPPEvTqxPve/vZPr58hrhfpcIyT1vqe/bzedk+9/5k9uNQv3l7vj2r7RaYXfP/vaf659hv2T7mdFHFse2x8w3nhg/w0UgctW
   </data>
  </layer>
- <objectgroup name="animatedTiles1">
+ <objectgroup name="animatedTiles1" visible="0">
   <object id="156" type="animatedTile" x="192" y="272" width="16" height="16">
    <properties>
     <property name="index" value="1"/>
@@ -399,7 +399,7 @@
   </object>
  </objectgroup>
  <objectgroup name="livingEntities" visible="0">
-  <object id="51" name="person" x="64" y="336" width="16" height="16">
+  <object id="51" name="person" type="person" x="64" y="336" width="16" height="16">
    <properties>
     <property name="male" value="true"/>
     <property name="path" value="SSTOP"/>
@@ -409,32 +409,32 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="objects" visible="0">
-  <object id="53" name="sign" x="32" y="304" width="16" height="16">
+ <objectgroup name="objects">
+  <object id="53" name="sign" type="objectDescription" x="32" y="304" width="16" height="16">
    <properties>
     <property name="text" value="sign_1_text"/>
     <property name="title" value="sign_1_title"/>
    </properties>
   </object>
-  <object id="54" name="sign" x="288" y="64" width="16" height="16">
+  <object id="54" name="sign" type="objectDescription" x="288" y="64" width="16" height="16">
    <properties>
     <property name="text" value="sign_2_text"/>
     <property name="title" value="sign_2_title"/>
    </properties>
   </object>
-  <object id="199" name="sign" x="48" y="304" width="16" height="16">
+  <object id="199" name="sign" type="objectDescription" x="48" y="304" width="16" height="16">
    <properties>
     <property name="text" value="sign_1_text"/>
     <property name="title" value="sign_1_title"/>
    </properties>
   </object>
-  <object id="200" name="sign" x="48" y="288" width="16" height="16">
+  <object id="200" name="sign" type="objectDescription" x="48" y="288" width="16" height="16">
    <properties>
     <property name="text" value="sign_1_text"/>
     <property name="title" value="sign_1_title"/>
    </properties>
   </object>
-  <object id="201" name="sign" x="32" y="288" width="16" height="16">
+  <object id="201" name="sign" type="objectDescription" x="32" y="288" width="16" height="16">
    <properties>
     <property name="text" value="sign_1_text"/>
     <property name="title" value="sign_1_title"/>

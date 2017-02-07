@@ -6,8 +6,10 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.ArrayMap;
+
+import de.limbusdev.guardianmonsters.enums.SkyDirection;
 import de.limbusdev.guardianmonsters.enums.TextureAtlasType;
-import de.limbusdev.guardianmonsters.fwmengine.world.ui.AnimatedSprite;
 
 
 /**
@@ -135,6 +137,41 @@ public class MediaManager implements Media {
             atlas = assets.get(femaleSprites.get(index),TextureAtlas.class);
         }
         return atlas;
+    }
+
+    @Override
+    public ArrayMap<SkyDirection, Animation> getPersonAnimationSet(boolean gender, int index) {
+        TextureAtlas textureAtlas = getPersonTextureAtlas(gender, index);
+        return getPersonAnimationSet(textureAtlas);
+    }
+
+    @Override
+    public ArrayMap<SkyDirection, Animation> getPersonAnimationSet(String name) {
+
+        TextureAtlas textureAtlas;
+        if(name.equals("hero")) {
+            textureAtlas = getTextureAtlasType(TextureAtlasType.HERO);
+        } else {
+            textureAtlas = getPersonTextureAtlas(true,1);
+        }
+
+        return getPersonAnimationSet(textureAtlas);
+    }
+
+    @Override
+    public ArrayMap<SkyDirection, Animation> getPersonAnimationSet(TextureAtlas textureAtlas) {
+        ArrayMap<SkyDirection, Animation> animations = new ArrayMap<SkyDirection,Animation>();
+
+        animations.put(SkyDirection.N, new Animation(.15f, textureAtlas.findRegions("n"), Animation.PlayMode.LOOP));
+        animations.put(SkyDirection.E, new Animation(.15f, textureAtlas.findRegions("e"), Animation.PlayMode.LOOP));
+        animations.put(SkyDirection.S, new Animation(.15f, textureAtlas.findRegions("s"), Animation.PlayMode.LOOP));
+        animations.put(SkyDirection.W, new Animation(.15f, textureAtlas.findRegions("w"), Animation.PlayMode.LOOP));
+        animations.put(SkyDirection.NSTOP, new Animation(.15f, textureAtlas.findRegions("n").get(0)));
+        animations.put(SkyDirection.ESTOP, new Animation(.15f, textureAtlas.findRegions("e").get(0)));
+        animations.put(SkyDirection.SSTOP, new Animation(.15f, textureAtlas.findRegions("s").get(0)));
+        animations.put(SkyDirection.WSTOP, new Animation(.15f, textureAtlas.findRegions("w").get(0)));
+
+        return animations;
     }
 
     public Texture getTexture(String path) {

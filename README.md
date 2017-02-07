@@ -1,4 +1,4 @@
-![alt text](./Artwork/logo.png "Logo")
+![alt text](./Artwork/Spritesheets/LimbusDev/GM_logo_hires.png "Logo")
 
 # Welcome
 
@@ -13,7 +13,7 @@ mtPaint and powered by Java and libGDX.
 Here you can get a first glimpse of what will be created here.
 For more screenshots see the [Galery](https://bitbucket.org/gemlion/monsterworld/wiki/Galery).
 
-![alt text](./Wiki/screenie16.png "First Preview")
+![alt text](./Documents/Screenshots/Pixelart_everywhere.png "First Preview")
 
 # Downloads
 here you can Download the [Test-Build for Desktop](./Builds/Testing/Desktop/FriendsWithMonsters-ALPHA-0.0.3.0.jar)

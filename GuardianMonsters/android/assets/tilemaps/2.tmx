@@ -331,7 +331,7 @@
   <object id="60" name="healing" x="112" y="384" width="16" height="16"/>
  </objectgroup>
  <objectgroup name="livingEntities" visible="0">
-  <object id="61" name="person" x="32" y="160" width="16" height="16">
+  <object id="61" name="person" type="person" x="32" y="160" width="16" height="16">
    <properties>
     <property name="male" value="true"/>
     <property name="path" value="ESTOP"/>
@@ -340,7 +340,7 @@
     <property name="text" value="person_02_1"/>
    </properties>
   </object>
-  <object id="69" name="person" x="304" y="320" width="16" height="16">
+  <object id="69" name="person" type="person" x="304" y="320" width="16" height="16">
    <properties>
     <property name="male" value="true"/>
     <property name="path" value="SSTOP"/>
@@ -351,7 +351,7 @@
   </object>
  </objectgroup>
  <objectgroup name="objects" visible="0">
-  <object id="62" name="sign" x="80" y="432" width="16" height="16">
+  <object id="62" name="sign" type="objectDescription" x="80" y="432" width="16" height="16">
    <properties>
     <property name="text" value="sign_02_1_text"/>
     <property name="title" value="sign_02_1_title"/>

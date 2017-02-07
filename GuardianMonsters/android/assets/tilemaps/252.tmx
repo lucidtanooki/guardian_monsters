@@ -103,31 +103,31 @@
  </objectgroup>
  <objectgroup name="livingEntities" visible="0"/>
  <objectgroup name="objects" visible="0">
-  <object id="13" name="sign" x="16" y="48" width="16" height="16">
+  <object id="13" name="sign" type="objectDescription" x="16" y="48" width="16" height="16">
    <properties>
     <property name="text" value="sign_4_1_text"/>
     <property name="title" value="sign_4_1_title"/>
    </properties>
   </object>
-  <object id="20" name="sign" x="96" y="48" width="16" height="16">
+  <object id="20" name="sign" type="objectDescription" x="96" y="48" width="16" height="16">
    <properties>
     <property name="text" value="shelf_252_1_text"/>
     <property name="title" value="shelf_252_1_title"/>
    </properties>
   </object>
-  <object id="26" name="sign" x="32" y="48" width="16" height="16">
+  <object id="26" name="sign" type="objectDescription" x="32" y="48" width="16" height="16">
    <properties>
     <property name="text" value="sign_4_1_text"/>
     <property name="title" value="sign_4_1_title"/>
    </properties>
   </object>
-  <object id="30" name="sign" x="112" y="48" width="16" height="16">
+  <object id="30" name="sign" type="objectDescription" x="112" y="48" width="16" height="16">
    <properties>
     <property name="text" value="shelf_252_1_text"/>
     <property name="title" value="shelf_252_1_title"/>
    </properties>
   </object>
-  <object id="31" name="sign" x="128" y="48" width="16" height="16">
+  <object id="31" name="sign" type="objectDescription" x="128" y="48" width="16" height="16">
    <properties>
     <property name="text" value="shelf_252_1_text"/>
     <property name="title" value="shelf_252_1_title"/>

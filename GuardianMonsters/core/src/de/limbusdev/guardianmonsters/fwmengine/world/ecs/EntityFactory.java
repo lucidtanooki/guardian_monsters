@@ -19,6 +19,7 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ecs.entities.HeroEntity;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.GameArea;
 import de.limbusdev.guardianmonsters.enums.SkyDirection;
 import de.limbusdev.guardianmonsters.enums.TextureAtlasType;
+import de.limbusdev.guardianmonsters.fwmengine.world.ui.AnimatedPersonSprite;
 import de.limbusdev.guardianmonsters.geometry.IntVector2;
 import de.limbusdev.guardianmonsters.fwmengine.world.model.MapObjectInformation;
 import de.limbusdev.guardianmonsters.fwmengine.world.model.MapPersonInformation;
@@ -37,13 +38,11 @@ import de.limbusdev.guardianmonsters.utils.UnitConverter;
 public class EntityFactory {
     /* ............................................................................ ATTRIBUTES .. */
     private Engine engine;
-    private Media media;
     private GameArea area;
     /* ........................................................................... CONSTRUCTOR .. */
     public EntityFactory(Engine engine, GameArea area) {
         this.engine = engine;
         this.area = area;
-        media = Services.getMedia();
     }
     /* ............................................................................... METHODS .. */
 
@@ -55,8 +54,7 @@ public class EntityFactory {
         Entity hero = new HeroEntity();
 
         // Add Sprite
-        CharacterSpriteComponent csc = new CharacterSpriteComponent(
-                media.getTextureAtlasType(TextureAtlasType.HERO));
+        CharacterSpriteComponent csc = new CharacterSpriteComponent(new AnimatedPersonSprite("hero"));
         hero.add(csc);
 
         // Input
@@ -164,7 +162,7 @@ public class EntityFactory {
         person.add(pathComp);
 
         // Sprite
-        person.add(new CharacterSpriteComponent(media.getPersonTextureAtlas(male,spriteIndex)));
+        person.add(new CharacterSpriteComponent(new AnimatedPersonSprite(male,spriteIndex)));
 
         // Position
         PositionComponent position = new PositionComponent(

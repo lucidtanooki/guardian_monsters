@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.ArrayMap;
 
+import de.limbusdev.guardianmonsters.fwmengine.world.ui.AnimatedPersonSprite;
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.EntitySprite;
 
 
@@ -18,22 +19,10 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ui.EntitySprite;
  */
 public class CharacterSpriteComponent implements Component {
     /* ............................................................................ ATTRIBUTES .. */
-    public ArrayMap<String,Animation>   animationImgs; // characters animations (N,S,W,E)
-    public TextureRegion                recentIdleImg;  // alive idle image
-    public Animation                    recentAnim;     // alive animation
-    public EntitySprite sprite;         // characters sprite
+    public AnimatedPersonSprite sprite;
     /* ........................................................................... CONSTRUCTOR .. */
-    public CharacterSpriteComponent (TextureAtlas textureAtlas) {
-        // load animation textures
-        animationImgs = new ArrayMap<String,Animation>();
-        animationImgs.put("n", new Animation(.15f, textureAtlas.findRegions("n")));
-        animationImgs.put("e", new Animation(.15f, textureAtlas.findRegions("e")));
-        animationImgs.put("s", new Animation(.15f, textureAtlas.findRegions("s")));
-        animationImgs.put("w", new Animation(.15f, textureAtlas.findRegions("w")));
-
-        recentAnim    = animationImgs.get("s");
-        recentIdleImg = animationImgs.get("s").getKeyFrames()[0];
-        this.sprite = new EntitySprite(recentIdleImg);
+    public CharacterSpriteComponent (AnimatedPersonSprite sprite) {
+        this.sprite = sprite;
     }
     /* ............................................................................... METHODS .. */
     

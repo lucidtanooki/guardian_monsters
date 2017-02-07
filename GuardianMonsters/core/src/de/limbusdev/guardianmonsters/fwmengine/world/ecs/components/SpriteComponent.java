@@ -2,6 +2,7 @@ package de.limbusdev.guardianmonsters.fwmengine.world.ecs.components;
 
 import com.badlogic.ashley.core.Component;
 
+import de.limbusdev.guardianmonsters.fwmengine.world.ui.AnimatedPersonSprite;
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.EntitySprite;
 
 /**
@@ -11,10 +12,10 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ui.EntitySprite;
  */
 public class SpriteComponent implements Component{
     /* ............................................................................ ATTRIBUTES .. */
-    public EntitySprite sprite;
+    public AnimatedPersonSprite sprite;
     /* ........................................................................... CONSTRUCTOR .. */
-    public SpriteComponent () {
-        this.sprite = new EntitySprite(null);
+    public SpriteComponent (boolean male, int index) {
+        this.sprite = new AnimatedPersonSprite(male, index);
         this.sprite.setSize(1, 1);
     }
     /* ............................................................................... METHODS .. */

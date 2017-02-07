@@ -20,7 +20,6 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PathComponen
 public class CharacterSpriteSystem extends EntitySystem {
     /* ............................................................................ ATTRIBUTES .. */
     private ImmutableArray<Entity> entities;
-    private float elapsedTime=0;
 
     /* ........................................................................... CONSTRUCTOR .. */
     public CharacterSpriteSystem() {}
@@ -33,23 +32,29 @@ public class CharacterSpriteSystem extends EntitySystem {
     }
 
     public void update(float deltaTime) {
-        // Calculation elapsedTime for animation
-        elapsedTime += deltaTime;
 
         // Update every single CharacterSpriteComponent
         for (Entity entity : entities) {
             CharacterSpriteComponent sprite = Components.characterSprite.get(entity);
-            SkyDirection direction = SkyDirection.S;
-            boolean moving = false;
+            SkyDirection direction = SkyDirection.SSTOP;
+            boolean moving;
 
             // If entity has InputComponent
             if(Components.input.has(entity)) {
                 direction = Components.getInputComponent(entity).skyDir;
                 moving = Components.input.get(entity).moving;
+                if(!moving) {
+                    switch(direction) {
+                        case N: direction = SkyDirection.NSTOP;break;
+                        case S: direction = SkyDirection.SSTOP;break;
+                        case E: direction = SkyDirection.ESTOP;break;
+                        case W: direction = SkyDirection.WSTOP;break;
+                    }
+                }
             }
 
 
-            // If entitiy has PathComponent
+            // If entity has PathComponent
             if(Components.path.has(entity)) {
                 PathComponent entPath = Components.path.get(entity);
                 if(entPath.talking) direction = entPath.talkDir;
@@ -61,29 +66,7 @@ public class CharacterSpriteSystem extends EntitySystem {
             }
 
             // Set animation according to input direction
-            switch(direction) {
-                case NSTOP:;
-                case N: sprite.recentAnim = sprite.animationImgs.get("n");break;
-                case ESTOP:;
-                case E: sprite.recentAnim = sprite.animationImgs.get("e");break;
-                case WSTOP:;
-                case W: sprite.recentAnim = sprite.animationImgs.get("w");break;
-                default: sprite.recentAnim = sprite.animationImgs.get("s");break;
-            }
-
-            // Set the first animation frame as recent image when standing still
-            sprite.recentIdleImg = sprite.recentAnim.getKeyFrames()[0];
-
-            // set correct texture according to state
-            if(!moving
-                || direction.equals(SkyDirection.NSTOP)
-                || direction.equals(SkyDirection.SSTOP)
-                || direction.equals(SkyDirection.ESTOP)
-                || direction.equals(SkyDirection.WSTOP))
-
-                sprite.sprite.setRegion(sprite.recentIdleImg);  // idle image
-            else
-                sprite.sprite.setRegion(sprite.recentAnim.getKeyFrame(elapsedTime, true));
+            sprite.sprite.changeState(direction);
 
         }
     }

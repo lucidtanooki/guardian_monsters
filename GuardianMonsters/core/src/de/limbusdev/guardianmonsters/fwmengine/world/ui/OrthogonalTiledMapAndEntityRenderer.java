@@ -27,7 +27,7 @@ import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
  */
 public class OrthogonalTiledMapAndEntityRenderer extends OrthogonalTiledMapRenderer {
     /* ............................................................................ ATTRIBUTES .. */
-    private Array<EntitySprite> sprites;
+    private Array<AnimatedPersonSprite> sprites;
     private ArrayMap<String,Animation> objectAnimations;
     private ArrayMap<Integer,Animation> tileAnimations;
     private Media media;
@@ -43,7 +43,7 @@ public class OrthogonalTiledMapAndEntityRenderer extends OrthogonalTiledMapRende
      */
     public OrthogonalTiledMapAndEntityRenderer(TiledMap map) {
         super(map, 1);
-        this.sprites = new Array<EntitySprite>();
+        this.sprites = new Array<AnimatedPersonSprite>();
 
         this.objectAnimations = new ArrayMap<String,Animation>();
         this.tileAnimations = new ArrayMap<Integer, Animation>();
@@ -88,8 +88,9 @@ public class OrthogonalTiledMapAndEntityRenderer extends OrthogonalTiledMapRende
 
                 if(layer.getName().equals("people")) {
                     // Draw entity sprites if visible
-                    for(EntitySprite es : sprites) {
+                    for(AnimatedPersonSprite es : sprites) {
                         if (es.visible) {
+                            es.update(elapsedTime);
                             es.draw(this.batch);
                         }
                     }
@@ -121,8 +122,8 @@ public class OrthogonalTiledMapAndEntityRenderer extends OrthogonalTiledMapRende
     }
 
     /* ..................................................................... GETTERS & SETTERS .. */
-    public void addEntitySprite(EntitySprite es) {
-        sprites.add(es);
+    public void addEntitySprite(AnimatedPersonSprite as) {
+        sprites.add(as);
     }
 
     /**

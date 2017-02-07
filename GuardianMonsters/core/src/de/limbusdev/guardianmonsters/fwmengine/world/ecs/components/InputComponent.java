@@ -21,7 +21,7 @@ public class InputComponent implements Component {
     public long firstTip=0;
     /* ........................................................................... CONSTRUCTOR .. */
     public InputComponent() {
-        skyDir = nextInput = SkyDirection.S;
+        skyDir = nextInput = SkyDirection.SSTOP;
         moving = false;
         this.touchPos = new Vector3(0,0,0);
         this.startMoving = false;

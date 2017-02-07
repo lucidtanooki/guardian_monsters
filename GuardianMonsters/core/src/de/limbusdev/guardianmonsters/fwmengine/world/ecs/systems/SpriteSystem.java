@@ -9,7 +9,7 @@ import com.badlogic.ashley.utils.ImmutableArray;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.CharacterSpriteComponent;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Components;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.SpriteComponent;
-import de.limbusdev.guardianmonsters.fwmengine.world.ui.EntitySprite;
+import de.limbusdev.guardianmonsters.fwmengine.world.ui.AnimatedPersonSprite;
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.OrthogonalTiledMapAndEntityRenderer;
 
 
@@ -32,10 +32,11 @@ public class SpriteSystem extends EntitySystem {
                 CharacterSpriteComponent.class
         ).get());
         for(Entity e : visibleEntities) {
-            EntitySprite es = null;
-            if(Components.characterSprite.has(e)) es = Components.characterSprite.get(e).sprite;
-            if(Components.sprite.has(e)) es = Components.sprite.get(e).sprite;
-            mapRenderer.addEntitySprite(es);
+            AnimatedPersonSprite es;
+            if(Components.characterSprite.has(e)) {
+                es = Components.characterSprite.get(e).sprite;
+                mapRenderer.addEntitySprite(es);
+            }
         }
     }
     /* ..................................................................... GETTERS & SETTERS .. */

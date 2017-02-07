@@ -4,9 +4,10 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.utils.ArrayMap;
 
+import de.limbusdev.guardianmonsters.enums.SkyDirection;
 import de.limbusdev.guardianmonsters.enums.TextureAtlasType;
-import de.limbusdev.guardianmonsters.fwmengine.world.ui.AnimatedSprite;
 
 /**
  * NullMedia, gets returned from Service Locator, when no Media Service has been injected yet.
@@ -22,6 +23,21 @@ public class NullMedia implements Media {
     }
 
     public TextureAtlas getPersonTextureAtlas(boolean male, int index) {
+        return null;
+    }
+
+    @Override
+    public ArrayMap<SkyDirection, Animation> getPersonAnimationSet(boolean gender, int index) {
+        return null;
+    }
+
+    @Override
+    public ArrayMap<SkyDirection, Animation> getPersonAnimationSet(String name) {
+        return null;
+    }
+
+    @Override
+    public ArrayMap<SkyDirection, Animation> getPersonAnimationSet(TextureAtlas atlas) {
         return null;
     }
 

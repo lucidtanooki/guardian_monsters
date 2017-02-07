@@ -31,7 +31,7 @@ import de.limbusdev.guardianmonsters.utils.GS;
  * Created by georg on 21.11.15.
  */
 public class GameArea {
-    /* ............................................................................ ATTRIBUTES .. */
+    //................................................................................... ATTRIBUTES
     private TiledMap tiledMap;
     private OrthogonalTiledMapAndEntityRenderer mapRenderer;
     private String bgMusic;
@@ -46,7 +46,7 @@ public class GameArea {
     public PositionComponent startPosition;
     public int areaID;
 
-    /* ........................................................................... CONSTRUCTOR .. */
+    //.................................................................................. CONSTRUCTOR
     public GameArea(int areaID, int startPosID) {
         this.startPosition = new PositionComponent(0,0,0,0);
         this.colliders = new Array<IntRectangle>();
@@ -56,13 +56,14 @@ public class GameArea {
         this.mapPeople = new Array<MapPersonInformation>();
         this.mapSigns = new Array<MapObjectInformation>();
         this.healFields = new Array<Rectangle>();
-        setUpTiledMap(areaID, startPosID);
+
+        this.tiledMap = setUpTiledMap(areaID, startPosID);
         this.mapRenderer = new OrthogonalTiledMapAndEntityRenderer(tiledMap);
         this.areaID = areaID;
 
         this.gridPosition = new IntVector2(0,0);
     }
-    /* ............................................................................... METHODS .. */
+    //...................................................................................... METHODS
 
     public void render(OrthographicCamera camera) {
         mapRenderer.setView(camera);
@@ -84,9 +85,10 @@ public class GameArea {
         shape.end();
     }
 
-    public void setUpTiledMap(int areaID, int startFieldID) {
+    public TiledMap setUpTiledMap(int areaID, int startFieldID) {
 
-        tiledMap = new TmxMapLoader().load("tilemaps/" + areaID + ".tmx");
+        TiledMap tiledMap = new TmxMapLoader().load("tilemaps/" + areaID + ".tmx");
+
         // create static bodies from colliders
         Rectangle r;
         for(MapObject mo : tiledMap.getLayers().get("colliderWalls1").getObjects()) {
@@ -97,25 +99,13 @@ public class GameArea {
 
         // get information about people on map
         for(MapObject mo : tiledMap.getLayers().get("livingEntities").getObjects()) {
-            r = ((RectangleMapObject) mo).getRectangle();
-            mapPeople.add(new MapPersonInformation(
-                    mo.getProperties().get("path", String.class),
-                    new IntVector2(MathUtils.round(r.x), MathUtils.round(r.y)),
-                    Boolean.valueOf(mo.getProperties().get("static", String.class)),
-                    mo.getProperties().get("text", String.class),
-                    mo.getProperties().get("name", String.class),
-                    Boolean.valueOf(mo.getProperties().get("male", String.class)),
-                    Integer.valueOf(mo.getProperties().get("spriteIndex", String.class))));
+            mapPeople.add(new MapPersonInformation(mo));
         }
 
         // get information about signs on map
         for(MapObject mo : tiledMap.getLayers().get("objects").getObjects()) {
             if(mo.getName().equals("sign")) {
-                mapSigns.add(new MapObjectInformation(
-                        mo.getProperties().get("title", String.class),
-                        mo.getProperties().get("text", String.class),
-                        MathUtils.round(mo.getProperties().get("x", Float.class)),
-                        MathUtils.round(mo.getProperties().get("y", Float.class))));
+                mapSigns.add(new MapObjectInformation(mo));
             }
         }
 
@@ -166,6 +156,8 @@ public class GameArea {
         if(musicType.equals("town")) {
             bgMusic = AudioAssets.get().getBgMusicTown(musicIndex);
         }
+
+        return tiledMap;
 
     }
 

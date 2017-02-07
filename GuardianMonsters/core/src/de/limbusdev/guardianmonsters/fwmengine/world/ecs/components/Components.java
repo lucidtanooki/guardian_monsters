@@ -15,24 +15,24 @@ public abstract class Components {
     /* ............................................................................ ATTRIBUTES .. */
     public static ComponentMapper<PositionComponent> position =
             ComponentMapper.getFor(PositionComponent.class);
-    public static ComponentMapper<de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.ColliderComponent> collision =
-            ComponentMapper.getFor(de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.ColliderComponent.class);
-    public static ComponentMapper<de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PathComponent> path =
-            ComponentMapper.getFor(de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PathComponent.class);
-    public static ComponentMapper<de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.InputComponent> input =
-            ComponentMapper.getFor(de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.InputComponent.class);
+    public static ComponentMapper<ColliderComponent> collision =
+            ComponentMapper.getFor(ColliderComponent.class);
+    public static ComponentMapper<PathComponent> path =
+            ComponentMapper.getFor(PathComponent.class);
+    public static ComponentMapper<InputComponent> input =
+            ComponentMapper.getFor(InputComponent.class);
     public static ComponentMapper<ConversationComponent> conversation =
             ComponentMapper.getFor(ConversationComponent.class);
     public static ComponentMapper<TitleComponent> title =
             ComponentMapper.getFor(TitleComponent.class);
-    public static ComponentMapper<de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.SaveGameComponent> saveGame =
-            ComponentMapper.getFor(de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.SaveGameComponent.class);
-    public static ComponentMapper<de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TeamComponent> team =
-            ComponentMapper.getFor(de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TeamComponent.class);
-    public static ComponentMapper<de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.CharacterSpriteComponent> characterSprite =
-            ComponentMapper.getFor(de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.CharacterSpriteComponent.class);
-    public static ComponentMapper<de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.SpriteComponent> sprite =
-            ComponentMapper.getFor(de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.SpriteComponent.class);
+    public static ComponentMapper<SaveGameComponent> saveGame =
+            ComponentMapper.getFor(SaveGameComponent.class);
+    public static ComponentMapper<TeamComponent> team =
+            ComponentMapper.getFor(TeamComponent.class);
+    public static ComponentMapper<CharacterSpriteComponent> characterSprite =
+            ComponentMapper.getFor(CharacterSpriteComponent.class);
+    public static ComponentMapper<SpriteComponent> sprite =
+            ComponentMapper.getFor(SpriteComponent.class);
     /* ........................................................................... CONSTRUCTOR .. */
     
     /* ............................................................................... METHODS .. */
@@ -50,36 +50,36 @@ public abstract class Components {
     }
 
     /**
-     * Retrieve {@link de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.ColliderComponent} from an {@link Entity} if it has one.
+     * Retrieve {@link ColliderComponent} from an {@link Entity} if it has one.
      * @param entity    which the wanted component belongs to
      * @return          the wanted component
      * @throws NullPointerException if the given entity does not contain such a component
      */
-    public static de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.ColliderComponent getColliderComponent(Entity entity) throws
+    public static ColliderComponent getColliderComponent(Entity entity) throws
             NullPointerException {
         if(collision.has(entity)) return collision.get(entity);
         else throw new NullPointerException("Given entity does not contain a ColliderComponent.");
     }
 
     /**
-     * Retrieve {@link de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PathComponent} from an {@link Entity} if it has one.
+     * Retrieve {@link PathComponent} from an {@link Entity} if it has one.
      * @param entity    which the wanted component belongs to
      * @return          the wanted component
      * @throws NullPointerException if the given entity does not contain such a component
      */
-    public static de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PathComponent getPathComponent(Entity entity) throws
+    public static PathComponent getPathComponent(Entity entity) throws
             NullPointerException {
         if(path.has(entity)) return path.get(entity);
         else throw new NullPointerException("Given entity does not contain a PathComponent.");
     }
 
     /**
-     * Retrieve {@link de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.InputComponent} from an {@link Entity} if it has one.
+     * Retrieve {@link InputComponent} from an {@link Entity} if it has one.
      * @param entity    which the wanted component belongs to
      * @return          the wanted component
      * @throws NullPointerException if the given entity does not contain such a component
      */
-    public static de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.InputComponent getInputComponent(Entity entity) throws
+    public static InputComponent getInputComponent(Entity entity) throws
             NullPointerException {
         if(input.has(entity)) return input.get(entity);
         else throw new NullPointerException("Given entity does not contain a InputComponent.");

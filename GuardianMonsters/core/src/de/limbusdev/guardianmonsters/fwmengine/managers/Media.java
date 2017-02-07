@@ -4,10 +4,10 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.utils.ArrayMap;
 
+import de.limbusdev.guardianmonsters.enums.SkyDirection;
 import de.limbusdev.guardianmonsters.enums.TextureAtlasType;
-import de.limbusdev.guardianmonsters.fwmengine.world.ui.AnimatedSprite;
 
 /**
  * Created by georg on 14.11.16.
@@ -26,6 +26,12 @@ public interface Media {
      * @return
      */
     public TextureAtlas getPersonTextureAtlas(boolean male, int index);
+
+    public ArrayMap<SkyDirection, Animation> getPersonAnimationSet(boolean gender, int index);
+
+    public ArrayMap<SkyDirection, Animation> getPersonAnimationSet(String name);
+
+    public ArrayMap<SkyDirection, Animation> getPersonAnimationSet(TextureAtlas atlas);
 
     public Texture getTexture(String path);
 

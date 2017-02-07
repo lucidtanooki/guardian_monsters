@@ -1,5 +1,10 @@
 package de.limbusdev.guardianmonsters.fwmengine.world.model;
 
+import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
+import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Rectangle;
+
 import de.limbusdev.guardianmonsters.geometry.IntVector2;
 
 /**
@@ -15,8 +20,31 @@ public class MapPersonInformation {
     public boolean male=false;
     public int spriteIndex=0;
     /* ........................................................................... CONSTRUCTOR .. */
+
+    public MapPersonInformation(MapObject mo) {
+        if(!mo.getProperties().containsKey("type") || !mo.getProperties().get("type").equals("person")) {
+            throw new IllegalArgumentException("Given MapObject is not of type \"person\"");
+        }
+
+        construct(
+            mo.getProperties().get("path", String.class),
+            new IntVector2(
+                MathUtils.round((((RectangleMapObject)mo).getRectangle().getX())),
+                    MathUtils.round((((RectangleMapObject)mo).getRectangle().getY()))),
+            Boolean.valueOf(mo.getProperties().get("static", String.class)),
+            mo.getProperties().get("text", String.class),
+            mo.getProperties().get("name", String.class),
+            Boolean.parseBoolean(mo.getProperties().get("male", String.class)),
+            Integer.parseInt(mo.getProperties().get("spriteIndex", String.class)));
+    }
+
     public MapPersonInformation(String path, IntVector2 startPosition, boolean moves,
                                 String conv, String name, boolean male, int spriteIndex) {
+        construct(path, startPosition, moves, conv, name, male, spriteIndex);
+    }
+
+    private void construct(String path, IntVector2 startPosition, boolean moves,
+                           String conv, String name, boolean male, int spriteIndex) {
         this.path = path;
         this.startPosition = startPosition;
         this.moves = moves;

@@ -125,8 +125,8 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="livingEntities" visible="0">
-  <object id="19" name="person" x="112" y="80" width="16" height="16">
+ <objectgroup name="livingEntities">
+  <object id="19" name="dad" type="person" x="112" y="80" width="16" height="16">
    <properties>
     <property name="male" value="true"/>
     <property name="moving" value="true"/>
@@ -137,7 +137,7 @@
     <property name="text" value="person_251_1"/>
    </properties>
   </object>
-  <object id="45" name="person" x="192" y="48" width="16" height="16">
+  <object id="45" name="mum" type="person" x="192" y="48" width="16" height="16">
    <properties>
     <property name="male" value="false"/>
     <property name="moving" value="false"/>
@@ -150,61 +150,61 @@
   </object>
  </objectgroup>
  <objectgroup name="objects" visible="0">
-  <object id="20" name="sign" x="128" y="48" width="16" height="16">
+  <object id="20" name="sign" type="objectDescription" x="128" y="48" width="16" height="16">
    <properties>
     <property name="text" value="sign_4_1_text"/>
     <property name="title" value="sign_4_1_title"/>
    </properties>
   </object>
-  <object id="24" name="sign" x="32" y="48" width="16" height="16">
+  <object id="24" name="sign" type="objectDescription" x="32" y="48" width="16" height="16">
    <properties>
     <property name="text" value="sign_4_2_text"/>
     <property name="title" value="sign_4_2_title"/>
    </properties>
   </object>
-  <object id="35" name="sign" x="144" y="48" width="16" height="16">
+  <object id="35" name="sign" type="objectDescription" x="144" y="48" width="16" height="16">
    <properties>
     <property name="text" value="sign_4_1_text"/>
     <property name="title" value="sign_4_1_title"/>
    </properties>
   </object>
-  <object id="36" name="sign" x="144" y="32" width="16" height="16">
+  <object id="36" name="sign" type="objectDescription" x="144" y="32" width="16" height="16">
    <properties>
     <property name="text" value="sign_4_1_text"/>
     <property name="title" value="sign_4_1_title"/>
    </properties>
   </object>
-  <object id="37" name="sign" x="128" y="32" width="16" height="16">
+  <object id="37" name="sign" type="objectDescription" x="128" y="32" width="16" height="16">
    <properties>
     <property name="text" value="sign_4_1_text"/>
     <property name="title" value="sign_4_1_title"/>
    </properties>
   </object>
-  <object id="38" name="sign" x="48" y="48" width="16" height="16">
+  <object id="38" name="sign" type="objectDescription" x="48" y="48" width="16" height="16">
    <properties>
     <property name="text" value="sign_4_2_text"/>
     <property name="title" value="sign_4_2_title"/>
    </properties>
   </object>
-  <object id="39" name="sign" x="64" y="48" width="16" height="16">
+  <object id="39" name="sign" type="objectDescription" x="64" y="48" width="16" height="16">
    <properties>
     <property name="text" value="sign_4_2_text"/>
     <property name="title" value="sign_4_2_title"/>
    </properties>
   </object>
-  <object id="40" name="sign" x="64" y="32" width="16" height="16">
+  <object id="40" name="sign" type="objectDescription" x="64" y="32" width="16" height="16">
    <properties>
     <property name="text" value="sign_4_2_text"/>
     <property name="title" value="sign_4_2_title"/>
    </properties>
   </object>
-  <object id="41" name="sign" x="32" y="32" width="16" height="16">
+  <object id="41" name="sign" type="objectDescription" x="32" y="32" width="16" height="16">
    <properties>
     <property name="text" value="sign_4_2_text"/>
     <property name="title" value="sign_4_2_title"/>
    </properties>
   </object>
-  <object id="42" name="sign" x="48" y="32" width="16" height="16">
+  <object id="42" name="sign" type="objectDescription" x="48" y="32" width="16" height="16">
    <properties>
     <property name="text" value="sign_4_2_text"/>
     <property name="title" value="sign_4_2_title"/>

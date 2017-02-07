@@ -17,8 +17,9 @@ public class PositionComponent implements Component {
     public int x,y,width,height, nextX, nextY;
     public long lastPixelStep; // ms
     public IntVector2 onGrid;
+    public int layer;
     /* ........................................................................... CONSTRUCTOR .. */
-    public PositionComponent(int x, int y, int width, int height) {
+    public PositionComponent(int x, int y, int width, int height, int layer) {
         this.x = x;
         this.y = y;
         this.width = width;
@@ -27,6 +28,7 @@ public class PositionComponent implements Component {
         this.nextY = 0;
         this.lastPixelStep = 0;
         this.onGrid = new IntVector2(x/ GS.TILE_SIZE,y/ GS.TILE_SIZE);
+        this.layer = layer;
     }
     /* ............................................................................... METHODS .. */
     

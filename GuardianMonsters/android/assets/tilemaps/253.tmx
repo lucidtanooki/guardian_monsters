@@ -23,7 +23,141 @@
   </data>
  </layer>
  <objectgroup name="animatedObjects1"/>
- <objectgroup name="people"/>
+ <objectgroup name="people1" visible="0">
+  <object id="29" name="person" type="person" x="352" y="160" width="16" height="16">
+   <properties>
+    <property name="male" value="true"/>
+    <property name="name" value="person_253_1_name"/>
+    <property name="path" value="WSTOP,WSTOP,WSTOP,NSTOP,N,W,WSTOP,SSTOP,SSTOP,S,S,SSTOP,ESTOP,ESTOP,ESTOP,E,S,N,N,ESTOP,ESTOP,ESTOP"/>
+    <property name="spriteIndex" value="8"/>
+    <property name="static" value="false"/>
+    <property name="text" value="person_253_1_text"/>
+    <property name="trigger" value="sequence_253_1"/>
+   </properties>
+  </object>
+  <object id="80" name="person" type="person" x="256" y="112" width="16" height="16">
+   <properties>
+    <property name="male" value="false"/>
+    <property name="path" value="ESTOP"/>
+    <property name="spriteIndex" value="0"/>
+    <property name="static" value="true"/>
+    <property name="text" value="person_253_4_text"/>
+   </properties>
+  </object>
+  <object id="81" name="person" type="person" x="256" y="96" width="16" height="16">
+   <properties>
+    <property name="male" value="true"/>
+    <property name="path" value="ESTOP"/>
+    <property name="spriteIndex" value="6"/>
+    <property name="static" value="true"/>
+    <property name="text" value="person_253_5_text"/>
+   </properties>
+  </object>
+  <object id="82" name="person" type="person" x="256" y="176" width="16" height="16">
+   <properties>
+    <property name="male" value="true"/>
+    <property name="path" value="ESTOP"/>
+    <property name="spriteIndex" value="6"/>
+    <property name="static" value="true"/>
+    <property name="text" value="person_253_3_text"/>
+   </properties>
+  </object>
+  <object id="83" name="person" type="person" x="256" y="192" width="16" height="16">
+   <properties>
+    <property name="male" value="true"/>
+    <property name="path" value="ESTOP"/>
+    <property name="spriteIndex" value="1"/>
+    <property name="static" value="true"/>
+    <property name="text" value="person_253_2_text"/>
+   </properties>
+  </object>
+  <object id="84" name="person" type="person" x="224" y="96" width="16" height="16">
+   <properties>
+    <property name="male" value="true"/>
+    <property name="path" value="ESTOP"/>
+    <property name="spriteIndex" value="3"/>
+    <property name="static" value="true"/>
+    <property name="text" value="person_253_6_text"/>
+   </properties>
+  </object>
+  <object id="85" name="person" type="person" x="224" y="192" width="16" height="16">
+   <properties>
+    <property name="male" value="true"/>
+    <property name="path" value="ESTOP"/>
+    <property name="spriteIndex" value="7"/>
+    <property name="static" value="true"/>
+    <property name="text" value="person_253_7_text"/>
+   </properties>
+  </object>
+  <object id="86" name="person" type="person" x="176" y="96" width="16" height="16">
+   <properties>
+    <property name="male" value="true"/>
+    <property name="path" value="ESTOP"/>
+    <property name="spriteIndex" value="5"/>
+    <property name="static" value="true"/>
+    <property name="text" value="person_253_9_text"/>
+   </properties>
+  </object>
+  <object id="87" name="person" type="person" x="176" y="112" width="16" height="16">
+   <properties>
+    <property name="male" value="true"/>
+    <property name="path" value="ESTOP"/>
+    <property name="spriteIndex" value="7"/>
+    <property name="static" value="true"/>
+    <property name="text" value="person_253_8_text"/>
+   </properties>
+  </object>
+  <object id="88" name="person" type="person" x="144" y="176" width="16" height="16">
+   <properties>
+    <property name="male" value="true"/>
+    <property name="name" value="person_253_1_name"/>
+    <property name="path" value="ESTOP"/>
+    <property name="spriteIndex" value="7"/>
+    <property name="static" value="true"/>
+    <property name="text" value="person_253_1_text"/>
+   </properties>
+  </object>
+  <object id="89" name="person" type="person" x="144" y="96" width="16" height="16">
+   <properties>
+    <property name="male" value="true"/>
+    <property name="name" value="person_253_1_name"/>
+    <property name="path" value="ESTOP"/>
+    <property name="spriteIndex" value="2"/>
+    <property name="static" value="true"/>
+    <property name="text" value="person_253_1_text"/>
+   </properties>
+  </object>
+  <object id="90" name="person" type="person" x="144" y="112" width="16" height="16">
+   <properties>
+    <property name="male" value="true"/>
+    <property name="name" value="person_253_1_name"/>
+    <property name="path" value="ESTOP"/>
+    <property name="spriteIndex" value="1"/>
+    <property name="static" value="true"/>
+    <property name="text" value="person_253_1_text"/>
+   </properties>
+  </object>
+  <object id="91" name="person" type="person" x="112" y="192" width="16" height="16">
+   <properties>
+    <property name="male" value="true"/>
+    <property name="name" value="person_253_1_name"/>
+    <property name="path" value="ESTOP"/>
+    <property name="spriteIndex" value="4"/>
+    <property name="static" value="true"/>
+    <property name="text" value="person_253_1_text"/>
+   </properties>
+  </object>
+  <object id="92" name="person" type="person" x="80" y="112" width="16" height="16">
+   <properties>
+    <property name="male" value="true"/>
+    <property name="name" value="person_253_1_name"/>
+    <property name="path" value="ESTOP"/>
+    <property name="spriteIndex" value="6"/>
+    <property name="static" value="true"/>
+    <property name="text" value="person_253_1_text"/>
+   </properties>
+  </object>
+ </objectgroup>
  <layer name="shadows1" width="25" height="15">
   <data encoding="base64" compression="zlib">
    eJybyMTAMHEUj+JRPIpH8bDCALGm11Y=
@@ -241,142 +375,7 @@
   <object id="27" x="256" y="160" width="16" height="64"/>
   <object id="28" x="368" y="128" width="16" height="80"/>
  </objectgroup>
- <objectgroup name="livingEntities" visible="0">
-  <object id="29" name="person" type="person" x="352" y="160" width="16" height="16">
-   <properties>
-    <property name="male" value="true"/>
-    <property name="name" value="person_253_1_name"/>
-    <property name="path" value="WSTOP,WSTOP,WSTOP,NSTOP,N,W,WSTOP,SSTOP,SSTOP,S,S,SSTOP,ESTOP,ESTOP,ESTOP,E,S,N,N,ESTOP,ESTOP,ESTOP"/>
-    <property name="spriteIndex" value="8"/>
-    <property name="static" value="false"/>
-    <property name="text" value="person_253_1_text"/>
-    <property name="trigger" value="sequence_253_1"/>
-   </properties>
-  </object>
-  <object id="80" name="person" type="person" x="256" y="112" width="16" height="16">
-   <properties>
-    <property name="male" value="false"/>
-    <property name="path" value="ESTOP"/>
-    <property name="spriteIndex" value="0"/>
-    <property name="static" value="true"/>
-    <property name="text" value="person_253_4_text"/>
-   </properties>
-  </object>
-  <object id="81" name="person" type="person" x="256" y="96" width="16" height="16">
-   <properties>
-    <property name="male" value="true"/>
-    <property name="path" value="ESTOP"/>
-    <property name="spriteIndex" value="6"/>
-    <property name="static" value="true"/>
-    <property name="text" value="person_253_5_text"/>
-   </properties>
-  </object>
-  <object id="82" name="person" type="person" x="256" y="176" width="16" height="16">
-   <properties>
-    <property name="male" value="true"/>
-    <property name="path" value="ESTOP"/>
-    <property name="spriteIndex" value="6"/>
-    <property name="static" value="true"/>
-    <property name="text" value="person_253_3_text"/>
-   </properties>
-  </object>
-  <object id="83" name="person" type="person" x="256" y="192" width="16" height="16">
-   <properties>
-    <property name="male" value="true"/>
-    <property name="path" value="ESTOP"/>
-    <property name="spriteIndex" value="1"/>
-    <property name="static" value="true"/>
-    <property name="text" value="person_253_2_text"/>
-   </properties>
-  </object>
-  <object id="84" name="person" type="person" x="224" y="96" width="16" height="16">
-   <properties>
-    <property name="male" value="true"/>
-    <property name="path" value="ESTOP"/>
-    <property name="spriteIndex" value="3"/>
-    <property name="static" value="true"/>
-    <property name="text" value="person_253_6_text"/>
-   </properties>
-  </object>
-  <object id="85" name="person" type="person" x="224" y="192" width="16" height="16">
-   <properties>
-    <property name="male" value="true"/>
-    <property name="path" value="ESTOP"/>
-    <property name="spriteIndex" value="7"/>
-    <property name="static" value="true"/>
-    <property name="text" value="person_253_7_text"/>
-   </properties>
-  </object>
-  <object id="86" name="person" type="person" x="176" y="96" width="16" height="16">
-   <properties>
-    <property name="male" value="true"/>
-    <property name="path" value="ESTOP"/>
-    <property name="spriteIndex" value="5"/>
-    <property name="static" value="true"/>
-    <property name="text" value="person_253_9_text"/>
-   </properties>
-  </object>
-  <object id="87" name="person" type="person" x="176" y="112" width="16" height="16">
-   <properties>
-    <property name="male" value="true"/>
-    <property name="path" value="ESTOP"/>
-    <property name="spriteIndex" value="7"/>
-    <property name="static" value="true"/>
-    <property name="text" value="person_253_8_text"/>
-   </properties>
-  </object>
-  <object id="88" name="person" type="person" x="144" y="176" width="16" height="16">
-   <properties>
-    <property name="male" value="true"/>
-    <property name="name" value="person_253_1_name"/>
-    <property name="path" value="ESTOP"/>
-    <property name="spriteIndex" value="7"/>
-    <property name="static" value="true"/>
-    <property name="text" value="person_253_1_text"/>
-   </properties>
-  </object>
-  <object id="89" name="person" type="person" x="144" y="96" width="16" height="16">
-   <properties>
-    <property name="male" value="true"/>
-    <property name="name" value="person_253_1_name"/>
-    <property name="path" value="ESTOP"/>
-    <property name="spriteIndex" value="2"/>
-    <property name="static" value="true"/>
-    <property name="text" value="person_253_1_text"/>
-   </properties>
-  </object>
-  <object id="90" name="person" type="person" x="144" y="112" width="16" height="16">
-   <properties>
-    <property name="male" value="true"/>
-    <property name="name" value="person_253_1_name"/>
-    <property name="path" value="ESTOP"/>
-    <property name="spriteIndex" value="1"/>
-    <property name="static" value="true"/>
-    <property name="text" value="person_253_1_text"/>
-   </properties>
-  </object>
-  <object id="91" name="person" type="person" x="112" y="192" width="16" height="16">
-   <properties>
-    <property name="male" value="true"/>
-    <property name="name" value="person_253_1_name"/>
-    <property name="path" value="ESTOP"/>
-    <property name="spriteIndex" value="4"/>
-    <property name="static" value="true"/>
-    <property name="text" value="person_253_1_text"/>
-   </properties>
-  </object>
-  <object id="92" name="person" type="person" x="80" y="112" width="16" height="16">
-   <properties>
-    <property name="male" value="true"/>
-    <property name="name" value="person_253_1_name"/>
-    <property name="path" value="ESTOP"/>
-    <property name="spriteIndex" value="6"/>
-    <property name="static" value="true"/>
-    <property name="text" value="person_253_1_text"/>
-   </properties>
-  </object>
- </objectgroup>
- <objectgroup name="sensors" visible="0">
+ <objectgroup name="triggers1" visible="0">
   <object id="30" name="warpField" x="192" y="224" width="16" height="16">
    <properties>
     <property name="targetID" value="25"/>
@@ -400,5 +399,5 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="objects"/>
+ <objectgroup name="descriptions1"/>
 </map>

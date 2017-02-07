@@ -127,193 +127,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="people" visible="0"/>
- <layer name="shadows2" width="64" height="32">
-  <data encoding="base64" compression="zlib">
-   eJztmdEKgCAMRctf7KXfivq0+p/oQZAgvaurm7EDPZRj27EotGFwHHssoX3NFax59cbu757vKb+kbuxT4iXJy6SGf4xH54Dtv49Yvosp5M9L13Og/Wr5S+bpLUx/NNb9sVzuj9d9C9sfeQ8dP/Zngs7TF5D7peVvBffX7kAXa/5z436s+bf4LqRY829Nz/5bYZ23AWuWXv2j29NaNx3PgYwja2npvgODJWBHKQdahxXHpFST9fyz46zg/jpxVnB/nTgraPn3Nk9fqbXX3wupV+6b/Vf/mv86HBknDLVOQA==
-  </data>
- </layer>
- <layer name="tops1" width="64" height="32">
-  <data encoding="base64" compression="zlib">
-   eJztmctOwkAUhqcXbDfwCmqi0Q0bow+gCcqLqCs3Bh5AVz6IN2xMxGBYa+LlRYwBtrBw52/shCl22mE6Ywfpl/yZKUw6558zLS2HkHxp2YTcMGpZaDkKrOjYwP7bWKvOT7vhqDtnDx76jHrw2OdoYEXHDhT6T1p3qiP4bkPHTvpYUVFW4WUNWofOoQvoMtQVdA2t2ONxlGnnC6zf3s/ccX8T3rY4qob+Veafsg9Ph4yvdybOD4s/ToaSGz2uM8cNeGtyxOZ/lqm5/O+S/OvMvyk0sDZNjvLM/0EF+76SPm7kZZunA58PHLUNzPudF9U90+9KrMUQPkccTXKbcP5OxjzI8unH9/NEZp1O8PlpyhrGnbcb5p72k+YQQeSa08EjYn6SiJu9/rPeC/LEwt61Ddm/uonb69vwvqPYv2/g/fsb2b3+X5invR4Hu9cXy4QsQcvlfGMqyB/RZ96CgoIC0zH1+Usn8+h51hF9X5/2vV5FrSNtThP/k6GYUuuIQ6T+MWu1DtH6B4WXC1WiyNY6VMbA8op79Iujt33L+DvwrDimSRZcQjxXX+sn1FxEKCmMJY5dfL7n6mvrnHlFqSmMheULGuMUYg==
-  </data>
- </layer>
- <layer name="tops2" width="64" height="32">
-  <data encoding="base64" compression="zlib">
-   eJztmdlOwzAQRS1RlvIf8FagEPgjeAOawm91oS38VcvSwDMnD6gmuOMJsYUAX+lIlaPOvZNN8sQYvbINY07hbOPrsfGmMXebNYr9Qs1axtzDQ+vz+iN9P8EzvHjOwXiH87QTPltZ9769IoZHQd+v8Gb1f7BlzCEcQReO4WTL/f9HMj3BM7wEzPdR97W9IrSHS5f0eQXX0IMc+nADt5VzcECmQziCLhzDSftrzT3O7X5Lv27XtfuXPJqoaz37A3ocwgjGcAcTmMLM6v+SDFdwDT3IoQ83cFvJd06PF44+XevVunb/kkcT5Vb/c3pclNefZ74HOfRhyVph9T/AfwgjGJfPJkxgCrMG2ap1T3dXhPKQ1NnGn35H1jtvwu8pZNurtTn+i/I68Tz2IIc+LFkrGmSr1rUVykP0p8+F432/ZK2w1jtcjyFZRlbGCb+nkO1+399V11YID9F/zXu+VGYdm5Nh4ci4ZK1o8I5eVzekRwh1hPsva3BvSnVDeSQlJSUlJf1Haecasfb1TTybzmS0c41Y+3oxm8ezzkzGJe1cQ7uvDymfZ52ZjEvauUadfX0o+TzrzGTWSTvXiLWvF7N5PLXZJWnnGrH29WI2j6c2uyTtXCPWvl7M5vHUZpeknWvE2teL2Tye2uyStHONWPt6ST5PbfakpJ9W3W8df011vnUkJcXQO1GR5Tw=
-  </data>
- </layer>
- <objectgroup name="colliderWalls1" visible="0">
-  <object id="203" x="64" y="144" width="96" height="32"/>
-  <object id="205" x="176" y="144" width="48" height="32"/>
-  <object id="206" x="64" y="96" width="160" height="48"/>
-  <object id="207" x="160" y="144" width="16" height="16"/>
-  <object id="208" x="240" y="160" width="32" height="16"/>
-  <object id="209" x="288" y="160" width="80" height="16"/>
-  <object id="210" x="240" y="144" width="128" height="16"/>
-  <object id="211" x="240" y="96" width="128" height="48"/>
-  <object id="213" x="400" y="176" width="32" height="16"/>
-  <object id="214" x="448" y="176" width="80" height="16"/>
-  <object id="216" x="400" y="96" width="128" height="80"/>
-  <object id="217" x="384" y="160" width="16" height="32"/>
-  <object id="218" x="384" y="96" width="16" height="16"/>
-  <object id="219" x="112" y="176" width="32" height="16"/>
-  <object id="220" x="64" y="176" width="16" height="16"/>
-  <object id="221" x="64" y="208" width="16" height="16"/>
-  <object id="222" x="64" y="240" width="16" height="16"/>
-  <object id="223" x="64" y="272" width="16" height="16"/>
-  <object id="224" x="224" y="400" width="16" height="16"/>
-  <object id="225" x="368" y="352" width="16" height="16"/>
-  <object id="227" x="384" y="384" width="16" height="16"/>
-  <object id="228" x="432" y="368" width="16" height="16"/>
-  <object id="230" x="256" y="336" width="96" height="16"/>
-  <object id="231" x="272" y="320" width="64" height="16"/>
-  <object id="232" x="288" y="304" width="32" height="16"/>
-  <object id="234" x="96" y="336" width="96" height="16"/>
-  <object id="235" x="112" y="320" width="64" height="16"/>
-  <object id="236" x="128" y="304" width="32" height="16"/>
-  <object id="237" x="528" y="256" width="32" height="32"/>
-  <object id="238" x="624" y="288" width="32" height="16"/>
-  <object id="242" x="608" y="208" width="32" height="32"/>
-  <object id="243" x="528" y="112" width="16" height="16"/>
-  <object id="244" x="528" y="144" width="16" height="16"/>
-  <object id="245" x="528" y="176" width="16" height="16"/>
-  <object id="246" x="736" y="112" width="16" height="16"/>
-  <object id="247" x="736" y="144" width="16" height="16"/>
-  <object id="248" x="736" y="176" width="16" height="16"/>
-  <object id="249" x="672" y="112" width="32" height="16"/>
-  <object id="250" x="752" y="176" width="32" height="16"/>
-  <object id="251" x="800" y="176" width="128" height="16"/>
-  <object id="252" x="752" y="96" width="176" height="80"/>
-  <object id="253" x="944" y="208" width="16" height="16"/>
-  <object id="256" x="720" y="336" width="96" height="16"/>
-  <object id="257" x="848" y="336" width="96" height="16"/>
-  <object id="258" x="736" y="320" width="64" height="16"/>
-  <object id="259" x="752" y="304" width="32" height="16"/>
-  <object id="260" x="864" y="320" width="64" height="16"/>
-  <object id="261" x="880" y="304" width="32" height="16"/>
-  <object id="262" x="48" y="0" width="480" height="96"/>
-  <object id="263" x="768" y="0" width="192" height="96"/>
-  <object id="264" x="528" y="48" width="16" height="48"/>
-  <object id="265" x="736" y="48" width="32" height="48"/>
-  <object id="266" x="576" y="48" width="32" height="64"/>
-  <object id="267" x="672" y="48" width="32" height="64"/>
-  <object id="269" x="960" y="64" width="64" height="384"/>
-  <object id="271" x="672" y="464" width="32" height="48"/>
-  <object id="272" x="656" y="464" width="16" height="32"/>
-  <object id="273" x="592" y="464" width="32" height="48"/>
-  <object id="274" x="496" y="464" width="32" height="48"/>
-  <object id="275" x="592" y="448" width="32" height="16"/>
-  <object id="276" x="496" y="448" width="32" height="16"/>
-  <object id="277" x="432" y="448" width="32" height="48"/>
-  <object id="279" x="0" y="0" width="48" height="432"/>
-  <object id="280" x="0" y="432" width="48" height="80"/>
-  <object id="302" x="800" y="208" width="96" height="32"/>
-  <object id="303" x="912" y="208" width="32" height="32"/>
-  <object id="304" x="800" y="272" width="144" height="32"/>
-  <object id="333" x="576" y="256" width="48" height="32"/>
-  <object id="348" x="400" y="192" width="16" height="16"/>
-  <object id="349" x="320" y="176" width="16" height="16"/>
-  <object id="351" x="192" y="176" width="16" height="16"/>
-  <object id="360" x="704" y="352" width="256" height="80"/>
-  <object id="361" x="880" y="432" width="80" height="16"/>
-  <object id="362" x="832" y="432" width="32" height="16"/>
-  <object id="363" x="752" y="432" width="80" height="16"/>
-  <object id="364" x="704" y="432" width="32" height="16"/>
-  <object id="365" x="80" y="352" width="128" height="80"/>
-  <object id="366" x="240" y="352" width="128" height="80"/>
-  <object id="367" x="80" y="432" width="32" height="16"/>
-  <object id="368" x="128" y="432" width="80" height="16"/>
-  <object id="369" x="240" y="432" width="32" height="16"/>
-  <object id="370" x="288" y="432" width="80" height="16"/>
-  <object id="373" x="704" y="464" width="320" height="48"/>
-  <object id="374" x="960" y="448" width="64" height="16"/>
-  <object id="375" x="48" y="464" width="384" height="48"/>
-  <object id="378" x="560" y="288" width="16" height="16"/>
- </objectgroup>
- <objectgroup name="sensors">
-  <object id="32" name="startField" x="432" y="192" width="16" height="16">
-   <properties>
-    <property name="fieldID" value="1"/>
-   </properties>
-  </object>
-  <object id="35" name="warpField" x="432" y="176" width="16" height="16">
-   <properties>
-    <property name="targetID" value="251"/>
-    <property name="targetWarpPointID" value="1"/>
-   </properties>
-  </object>
-  <object id="380" name="startField" x="160" y="176" width="16" height="16">
-   <properties>
-    <property name="fieldID" value="5"/>
-   </properties>
-  </object>
-  <object id="381" name="warpField" x="160" y="160" width="16" height="16">
-   <properties>
-    <property name="targetID" value="253"/>
-    <property name="targetWarpPointID" value="1"/>
-   </properties>
-  </object>
-  <object id="383" name="warpField" x="528" y="496" width="16" height="16">
-   <properties>
-    <property name="targetID" value="2"/>
-    <property name="targetWarpPointID" value="1"/>
-   </properties>
-  </object>
-  <object id="384" name="warpField" x="544" y="496" width="16" height="16">
-   <properties>
-    <property name="targetID" value="2"/>
-    <property name="targetWarpPointID" value="1"/>
-   </properties>
-  </object>
-  <object id="385" name="warpField" x="560" y="496" width="16" height="16">
-   <properties>
-    <property name="targetID" value="2"/>
-    <property name="targetWarpPointID" value="2"/>
-   </properties>
-  </object>
-  <object id="386" name="warpField" x="576" y="496" width="16" height="16">
-   <properties>
-    <property name="targetID" value="2"/>
-    <property name="targetWarpPointID" value="2"/>
-   </properties>
-  </object>
-  <object id="387" name="warpField" x="624" y="496" width="16" height="16">
-   <properties>
-    <property name="targetID" value="2"/>
-    <property name="targetWarpPointID" value="2"/>
-   </properties>
-  </object>
-  <object id="388" name="warpField" x="640" y="496" width="16" height="16">
-   <properties>
-    <property name="targetID" value="2"/>
-    <property name="targetWarpPointID" value="2"/>
-   </properties>
-  </object>
-  <object id="389" name="warpField" x="464" y="496" width="16" height="16">
-   <properties>
-    <property name="targetID" value="2"/>
-    <property name="targetWarpPointID" value="1"/>
-   </properties>
-  </object>
-  <object id="390" name="warpField" x="480" y="496" width="16" height="16">
-   <properties>
-    <property name="targetID" value="2"/>
-    <property name="targetWarpPointID" value="1"/>
-   </properties>
-  </object>
-  <object id="391" name="startField" x="544" y="480" width="16" height="16">
-   <properties>
-    <property name="fieldID" value="3"/>
-   </properties>
-  </object>
-  <object id="392" name="startField" x="560" y="480" width="16" height="16">
-   <properties>
-    <property name="fieldID" value="4"/>
-   </properties>
-  </object>
- </objectgroup>
- <objectgroup name="livingEntities">
+ <objectgroup name="people1">
   <object id="51" name="person" type="person" x="208" y="176" width="16" height="16">
    <properties>
     <property name="male" value="true"/>
@@ -432,7 +246,192 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="objects">
+ <layer name="shadows2" width="64" height="32">
+  <data encoding="base64" compression="zlib">
+   eJztmdEKgCAMRctf7KXfivq0+p/oQZAgvaurm7EDPZRj27EotGFwHHssoX3NFax59cbu757vKb+kbuxT4iXJy6SGf4xH54Dtv49Yvosp5M9L13Og/Wr5S+bpLUx/NNb9sVzuj9d9C9sfeQ8dP/Zngs7TF5D7peVvBffX7kAXa/5z436s+bf4LqRY829Nz/5bYZ23AWuWXv2j29NaNx3PgYwja2npvgODJWBHKQdahxXHpFST9fyz46zg/jpxVnB/nTgraPn3Nk9fqbXX3wupV+6b/Vf/mv86HBknDLVOQA==
+  </data>
+ </layer>
+ <layer name="tops1" width="64" height="32">
+  <data encoding="base64" compression="zlib">
+   eJztmctOwkAUhqcXbDfwCmqi0Q0bow+gCcqLqCs3Bh5AVz6IN2xMxGBYa+LlRYwBtrBw52/shCl22mE6Ywfpl/yZKUw6558zLS2HkHxp2YTcMGpZaDkKrOjYwP7bWKvOT7vhqDtnDx76jHrw2OdoYEXHDhT6T1p3qiP4bkPHTvpYUVFW4WUNWofOoQvoMtQVdA2t2ONxlGnnC6zf3s/ccX8T3rY4qob+Veafsg9Ph4yvdybOD4s/ToaSGz2uM8cNeGtyxOZ/lqm5/O+S/OvMvyk0sDZNjvLM/0EF+76SPm7kZZunA58PHLUNzPudF9U90+9KrMUQPkccTXKbcP5OxjzI8unH9/NEZp1O8PlpyhrGnbcb5p72k+YQQeSa08EjYn6SiJu9/rPeC/LEwt61Ddm/uonb69vwvqPYv2/g/fsb2b3+X5invR4Hu9cXy4QsQcvlfGMqyB/RZ96CgoIC0zH1+Usn8+h51hF9X5/2vV5FrSNtThP/k6GYUuuIQ6T+MWu1DtH6B4WXC1WiyNY6VMbA8op79Iujt33L+DvwrDimSRZcQjxXX+sn1FxEKCmMJY5dfL7n6mvrnHlFqSmMheULGuMUYg==
+  </data>
+ </layer>
+ <layer name="tops2" width="64" height="32">
+  <data encoding="base64" compression="zlib">
+   eJztmdlOwzAQRS1RlvIf8FagEPgjeAOawm91oS38VcvSwDMnD6gmuOMJsYUAX+lIlaPOvZNN8sQYvbINY07hbOPrsfGmMXebNYr9Qs1axtzDQ+vz+iN9P8EzvHjOwXiH87QTPltZ9769IoZHQd+v8Gb1f7BlzCEcQReO4WTL/f9HMj3BM7wEzPdR97W9IrSHS5f0eQXX0IMc+nADt5VzcECmQziCLhzDSftrzT3O7X5Lv27XtfuXPJqoaz37A3ocwgjGcAcTmMLM6v+SDFdwDT3IoQ83cFvJd06PF44+XevVunb/kkcT5Vb/c3pclNefZ74HOfRhyVph9T/AfwgjGJfPJkxgCrMG2ap1T3dXhPKQ1NnGn35H1jtvwu8pZNurtTn+i/I68Tz2IIc+LFkrGmSr1rUVykP0p8+F432/ZK2w1jtcjyFZRlbGCb+nkO1+399V11YID9F/zXu+VGYdm5Nh4ci4ZK1o8I5eVzekRwh1hPsva3BvSnVDeSQlJSUlJf1Haecasfb1TTybzmS0c41Y+3oxm8ezzkzGJe1cQ7uvDymfZ52ZjEvauUadfX0o+TzrzGTWSTvXiLWvF7N5PLXZJWnnGrH29WI2j6c2uyTtXCPWvl7M5vHUZpeknWvE2teL2Tye2uyStHONWPt6ST5PbfakpJ9W3W8df011vnUkJcXQO1GR5Tw=
+  </data>
+ </layer>
+ <objectgroup name="colliderWalls1" visible="0">
+  <object id="203" x="64" y="144" width="96" height="32"/>
+  <object id="205" x="176" y="144" width="48" height="32"/>
+  <object id="206" x="64" y="96" width="160" height="48"/>
+  <object id="207" x="160" y="144" width="16" height="16"/>
+  <object id="208" x="240" y="160" width="32" height="16"/>
+  <object id="209" x="288" y="160" width="80" height="16"/>
+  <object id="210" x="240" y="144" width="128" height="16"/>
+  <object id="211" x="240" y="96" width="128" height="48"/>
+  <object id="213" x="400" y="176" width="32" height="16"/>
+  <object id="214" x="448" y="176" width="80" height="16"/>
+  <object id="216" x="400" y="96" width="128" height="80"/>
+  <object id="217" x="384" y="160" width="16" height="32"/>
+  <object id="218" x="384" y="96" width="16" height="16"/>
+  <object id="219" x="112" y="176" width="32" height="16"/>
+  <object id="220" x="64" y="176" width="16" height="16"/>
+  <object id="221" x="64" y="208" width="16" height="16"/>
+  <object id="222" x="64" y="240" width="16" height="16"/>
+  <object id="223" x="64" y="272" width="16" height="16"/>
+  <object id="224" x="224" y="400" width="16" height="16"/>
+  <object id="225" x="368" y="352" width="16" height="16"/>
+  <object id="227" x="384" y="384" width="16" height="16"/>
+  <object id="228" x="432" y="368" width="16" height="16"/>
+  <object id="230" x="256" y="336" width="96" height="16"/>
+  <object id="231" x="272" y="320" width="64" height="16"/>
+  <object id="232" x="288" y="304" width="32" height="16"/>
+  <object id="234" x="96" y="336" width="96" height="16"/>
+  <object id="235" x="112" y="320" width="64" height="16"/>
+  <object id="236" x="128" y="304" width="32" height="16"/>
+  <object id="237" x="528" y="256" width="32" height="32"/>
+  <object id="238" x="624" y="288" width="32" height="16"/>
+  <object id="242" x="608" y="208" width="32" height="32"/>
+  <object id="243" x="528" y="112" width="16" height="16"/>
+  <object id="244" x="528" y="144" width="16" height="16"/>
+  <object id="245" x="528" y="176" width="16" height="16"/>
+  <object id="246" x="736" y="112" width="16" height="16"/>
+  <object id="247" x="736" y="144" width="16" height="16"/>
+  <object id="248" x="736" y="176" width="16" height="16"/>
+  <object id="249" x="672" y="112" width="32" height="16"/>
+  <object id="250" x="752" y="176" width="32" height="16"/>
+  <object id="251" x="800" y="176" width="128" height="16"/>
+  <object id="252" x="752" y="96" width="176" height="80"/>
+  <object id="253" x="944" y="208" width="16" height="16"/>
+  <object id="256" x="720" y="336" width="96" height="16"/>
+  <object id="257" x="848" y="336" width="96" height="16"/>
+  <object id="258" x="736" y="320" width="64" height="16"/>
+  <object id="259" x="752" y="304" width="32" height="16"/>
+  <object id="260" x="864" y="320" width="64" height="16"/>
+  <object id="261" x="880" y="304" width="32" height="16"/>
+  <object id="262" x="48" y="0" width="480" height="96"/>
+  <object id="263" x="768" y="0" width="192" height="96"/>
+  <object id="264" x="528" y="48" width="16" height="48"/>
+  <object id="265" x="736" y="48" width="32" height="48"/>
+  <object id="266" x="576" y="48" width="32" height="64"/>
+  <object id="267" x="672" y="48" width="32" height="64"/>
+  <object id="269" x="960" y="64" width="64" height="384"/>
+  <object id="271" x="672" y="464" width="32" height="48"/>
+  <object id="272" x="656" y="464" width="16" height="32"/>
+  <object id="273" x="592" y="464" width="32" height="48"/>
+  <object id="274" x="496" y="464" width="32" height="48"/>
+  <object id="275" x="592" y="448" width="32" height="16"/>
+  <object id="276" x="496" y="448" width="32" height="16"/>
+  <object id="277" x="432" y="448" width="32" height="48"/>
+  <object id="279" x="0" y="0" width="48" height="432"/>
+  <object id="280" x="0" y="432" width="48" height="80"/>
+  <object id="302" x="800" y="208" width="96" height="32"/>
+  <object id="303" x="912" y="208" width="32" height="32"/>
+  <object id="304" x="800" y="272" width="144" height="32"/>
+  <object id="333" x="576" y="256" width="48" height="32"/>
+  <object id="348" x="400" y="192" width="16" height="16"/>
+  <object id="349" x="320" y="176" width="16" height="16"/>
+  <object id="351" x="192" y="176" width="16" height="16"/>
+  <object id="360" x="704" y="352" width="256" height="80"/>
+  <object id="361" x="880" y="432" width="80" height="16"/>
+  <object id="362" x="832" y="432" width="32" height="16"/>
+  <object id="363" x="752" y="432" width="80" height="16"/>
+  <object id="364" x="704" y="432" width="32" height="16"/>
+  <object id="365" x="80" y="352" width="128" height="80"/>
+  <object id="366" x="240" y="352" width="128" height="80"/>
+  <object id="367" x="80" y="432" width="32" height="16"/>
+  <object id="368" x="128" y="432" width="80" height="16"/>
+  <object id="369" x="240" y="432" width="32" height="16"/>
+  <object id="370" x="288" y="432" width="80" height="16"/>
+  <object id="373" x="704" y="464" width="320" height="48"/>
+  <object id="374" x="960" y="448" width="64" height="16"/>
+  <object id="375" x="48" y="464" width="384" height="48"/>
+  <object id="378" x="560" y="288" width="16" height="16"/>
+ </objectgroup>
+ <objectgroup name="triggers1">
+  <object id="32" name="startField" x="432" y="192" width="16" height="16">
+   <properties>
+    <property name="fieldID" value="1"/>
+   </properties>
+  </object>
+  <object id="35" name="warpField" x="432" y="176" width="16" height="16">
+   <properties>
+    <property name="targetID" value="251"/>
+    <property name="targetWarpPointID" value="1"/>
+   </properties>
+  </object>
+  <object id="380" name="startField" x="160" y="176" width="16" height="16">
+   <properties>
+    <property name="fieldID" value="5"/>
+   </properties>
+  </object>
+  <object id="381" name="warpField" x="160" y="160" width="16" height="16">
+   <properties>
+    <property name="targetID" value="253"/>
+    <property name="targetWarpPointID" value="1"/>
+   </properties>
+  </object>
+  <object id="383" name="warpField" x="528" y="496" width="16" height="16">
+   <properties>
+    <property name="targetID" value="2"/>
+    <property name="targetWarpPointID" value="1"/>
+   </properties>
+  </object>
+  <object id="384" name="warpField" x="544" y="496" width="16" height="16">
+   <properties>
+    <property name="targetID" value="2"/>
+    <property name="targetWarpPointID" value="1"/>
+   </properties>
+  </object>
+  <object id="385" name="warpField" x="560" y="496" width="16" height="16">
+   <properties>
+    <property name="targetID" value="2"/>
+    <property name="targetWarpPointID" value="2"/>
+   </properties>
+  </object>
+  <object id="386" name="warpField" x="576" y="496" width="16" height="16">
+   <properties>
+    <property name="targetID" value="2"/>
+    <property name="targetWarpPointID" value="2"/>
+   </properties>
+  </object>
+  <object id="387" name="warpField" x="624" y="496" width="16" height="16">
+   <properties>
+    <property name="targetID" value="2"/>
+    <property name="targetWarpPointID" value="2"/>
+   </properties>
+  </object>
+  <object id="388" name="warpField" x="640" y="496" width="16" height="16">
+   <properties>
+    <property name="targetID" value="2"/>
+    <property name="targetWarpPointID" value="2"/>
+   </properties>
+  </object>
+  <object id="389" name="warpField" x="464" y="496" width="16" height="16">
+   <properties>
+    <property name="targetID" value="2"/>
+    <property name="targetWarpPointID" value="1"/>
+   </properties>
+  </object>
+  <object id="390" name="warpField" x="480" y="496" width="16" height="16">
+   <properties>
+    <property name="targetID" value="2"/>
+    <property name="targetWarpPointID" value="1"/>
+   </properties>
+  </object>
+  <object id="391" name="startField" x="544" y="480" width="16" height="16">
+   <properties>
+    <property name="fieldID" value="3"/>
+   </properties>
+  </object>
+  <object id="392" name="startField" x="560" y="480" width="16" height="16">
+   <properties>
+    <property name="fieldID" value="4"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="descriptions1">
   <object id="53" name="sign" type="objectDescription" x="112" y="176" width="16" height="16">
    <properties>
     <property name="text" value="sign_25_2_text"/>

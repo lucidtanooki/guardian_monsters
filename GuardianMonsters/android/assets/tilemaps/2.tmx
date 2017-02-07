@@ -87,7 +87,26 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="people" visible="0"/>
+ <objectgroup name="people1" visible="0">
+  <object id="61" name="person" type="person" x="32" y="160" width="16" height="16">
+   <properties>
+    <property name="male" value="true"/>
+    <property name="path" value="ESTOP"/>
+    <property name="spriteIndex" value="1"/>
+    <property name="static" value="true"/>
+    <property name="text" value="person_02_1"/>
+   </properties>
+  </object>
+  <object id="69" name="person" type="person" x="304" y="320" width="16" height="16">
+   <properties>
+    <property name="male" value="true"/>
+    <property name="path" value="SSTOP"/>
+    <property name="spriteIndex" value="4"/>
+    <property name="static" value="true"/>
+    <property name="text" value="person_02_2"/>
+   </properties>
+  </object>
+ </objectgroup>
  <layer name="tops1" width="32" height="32">
   <data encoding="base64" compression="zlib">
    eJztldtqwmAQhLfaeMYLfSK1SW/a6iupTfpcCkbphfaROpAM/CxKNiYmiH4wDBLd/Q/ZUaRevLbIa9vmRH9+cj2bvsi2n/09vysSdMvv8zIQaQyyfx+idwQ1O7h/yINaHXt/a59L7NA7LrD/a2n2sF/Ig1q96vryvmbo+Qb5UFBhf97XGj2/oRCKnP48l7rgudQFz8UlHorsz+gwLL+/NTduRdY8M6+0VwXzSntVMK+0W+F85Z0znVfa+XwCTZ26fJ907uSdM51X2vl8Ca2cunyfdO6cmzN3vSRO50znlfZL9fJS9P/sVvyWsKa/UeIf48QX4+I174lPtd+vB9v/Mb3/ebrv06i+tTwKzGOra3xkYQC9G13DPLa6JkTNCPox+pOEf+y1T6g=
@@ -125,7 +144,7 @@
   <object id="29" x="80" y="432" width="16" height="16"/>
   <object id="66" x="416" y="192" width="32" height="16"/>
  </objectgroup>
- <objectgroup name="sensors">
+ <objectgroup name="triggers1">
   <object id="30" name="startField" x="256" y="16" width="16" height="16">
    <properties>
     <property name="fieldID" value="1"/>
@@ -330,27 +349,7 @@
   </object>
   <object id="60" name="healing" x="112" y="384" width="16" height="16"/>
  </objectgroup>
- <objectgroup name="livingEntities" visible="0">
-  <object id="61" name="person" type="person" x="32" y="160" width="16" height="16">
-   <properties>
-    <property name="male" value="true"/>
-    <property name="path" value="ESTOP"/>
-    <property name="spriteIndex" value="1"/>
-    <property name="static" value="true"/>
-    <property name="text" value="person_02_1"/>
-   </properties>
-  </object>
-  <object id="69" name="person" type="person" x="304" y="320" width="16" height="16">
-   <properties>
-    <property name="male" value="true"/>
-    <property name="path" value="SSTOP"/>
-    <property name="spriteIndex" value="4"/>
-    <property name="static" value="true"/>
-    <property name="text" value="person_02_2"/>
-   </properties>
-  </object>
- </objectgroup>
- <objectgroup name="objects" visible="0">
+ <objectgroup name="descriptions1" visible="0">
   <object id="62" name="sign" type="objectDescription" x="80" y="432" width="16" height="16">
    <properties>
     <property name="text" value="sign_02_1_text"/>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="16" height="16" tilewidth="16" tileheight="16" nextobjectid="79">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="16" height="16" tilewidth="16" tileheight="16" nextobjectid="80">
  <properties>
   <property name="musicIndex" value="2"/>
   <property name="musicType" value="town"/>
@@ -30,7 +30,7 @@
    eJxjYKAOqOJnYKgG4hp+CH+VJISuB/Ib+BHqYOItvKj6dwHV7AbiPVC1K6Hq9gP5B5D0r8Sh/xdQzW8g/sPPgBcslcPUv1gOvx5C4DGa/kdkmKcE1KMMxCoUumUgwQN5oB/kSdf3SB6Ck4A4GYgTgDgRjzl1/BCMCywA6l2IR/8+fggmF/zjh2AY+A5k7wDinfwQNqkApOcHEP8kUz8lAACQdCYi
   </data>
  </layer>
- <objectgroup name="animatedObjects1">
+ <objectgroup name="animatedObjects1" visible="0">
   <object id="43" name="animatedObject" x="64" y="144" width="16" height="16">
    <properties>
     <property name="index" value="pan1"/>
@@ -55,12 +55,35 @@
    </properties>
   </object>
  </objectgroup>
+ <objectgroup name="people1" visible="0">
+  <object id="19" name="dad" type="person" x="112" y="80" width="16" height="16">
+   <properties>
+    <property name="male" value="true"/>
+    <property name="moving" value="true"/>
+    <property name="name" value="person_251_1_name"/>
+    <property name="path" value="E,E,E,E,E,W,W,W,W,W"/>
+    <property name="spriteIndex" value="6"/>
+    <property name="startDir" value="S"/>
+    <property name="text" value="person_251_1"/>
+   </properties>
+  </object>
+  <object id="45" name="mum" type="person" x="192" y="48" width="16" height="16">
+   <properties>
+    <property name="male" value="false"/>
+    <property name="moving" value="false"/>
+    <property name="name" value="person_251_2_name"/>
+    <property name="path" value="SSTOP"/>
+    <property name="spriteIndex" value="1"/>
+    <property name="startDir" value="S"/>
+    <property name="text" value="person_251_2"/>
+   </properties>
+  </object>
+ </objectgroup>
  <layer name="objects2" width="16" height="16">
   <data encoding="base64" compression="zlib">
    eJxjYBjeYI0cA8NauYF2xcgCCvIMDIry5OtPAOpNpED/AqDehRToH0kAAOuyBJM=
   </data>
  </layer>
- <objectgroup name="people"/>
  <layer name="lights1" width="16" height="16">
   <data encoding="base64" compression="zlib">
    eJxjYBieQEuSNHFKQBYZZmbSwB0jFQyX8NdEc5MakK8OxBqS+NXhAmlAdelAnIFHPQAkHAVV
@@ -91,8 +114,6 @@
   <object id="14" x="32" y="48" width="48" height="16"/>
   <object id="46" x="192" y="48" width="16" height="16"/>
   <object id="47" x="80" y="80" width="16" height="16"/>
-  <object id="48" x="16" y="80" width="16" height="16"/>
-  <object id="49" x="16" y="48" width="16" height="16"/>
   <object id="50" x="32" y="96" width="48" height="16"/>
   <object id="51" x="208" y="192" width="32" height="16"/>
   <object id="52" x="16" y="160" width="32" height="16"/>
@@ -100,8 +121,9 @@
   <object id="65" x="128" y="192" width="16" height="16"/>
   <object id="66" x="160" y="192" width="16" height="16"/>
   <object id="67" x="176" y="240" width="16" height="16"/>
+  <object id="79" x="16" y="48" width="16" height="48"/>
  </objectgroup>
- <objectgroup name="sensors" visible="0">
+ <objectgroup name="triggers1">
   <object id="15" name="warpField" x="128" y="240" width="16" height="16">
    <properties>
     <property name="targetID" value="25"/>
@@ -125,31 +147,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="livingEntities">
-  <object id="19" name="dad" type="person" x="112" y="80" width="16" height="16">
-   <properties>
-    <property name="male" value="true"/>
-    <property name="moving" value="true"/>
-    <property name="name" value="person_251_1_name"/>
-    <property name="path" value="E,E,E,E,E,W,W,W,W,W"/>
-    <property name="spriteIndex" value="6"/>
-    <property name="startDir" value="S"/>
-    <property name="text" value="person_251_1"/>
-   </properties>
-  </object>
-  <object id="45" name="mum" type="person" x="192" y="48" width="16" height="16">
-   <properties>
-    <property name="male" value="false"/>
-    <property name="moving" value="false"/>
-    <property name="name" value="person_251_2_name"/>
-    <property name="path" value="SSTOP"/>
-    <property name="spriteIndex" value="1"/>
-    <property name="startDir" value="S"/>
-    <property name="text" value="person_251_2"/>
-   </properties>
-  </object>
- </objectgroup>
- <objectgroup name="objects" visible="0">
+ <objectgroup name="descriptions1" visible="0">
   <object id="20" name="sign" type="objectDescription" x="128" y="48" width="16" height="16">
    <properties>
     <property name="text" value="sign_4_1_text"/>

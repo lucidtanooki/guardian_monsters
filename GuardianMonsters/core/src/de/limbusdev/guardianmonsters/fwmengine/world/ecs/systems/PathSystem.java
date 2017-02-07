@@ -67,7 +67,7 @@ public class PathSystem extends EntitySystem {
 
             /* Check whether movement is possible or blocked by a collider */
             IntVector2 nextPos = new IntVector2(0,0);
-            for(IntRectangle r : gameArea.getMovingColliders()) {
+            for(IntRectangle r : gameArea.getMovingColliders().get(position.layer)) {
                 nextPos.x = position.nextX + GS.TILE_SIZE / 2;
                 nextPos.y = position.nextY + GS.TILE_SIZE / 2;
                 if (!collider.collider.equals(r) && r.contains(nextPos)) return;

@@ -86,7 +86,7 @@ public class OrthogonalTiledMapAndEntityRenderer extends OrthogonalTiledMapRende
                     renderObject(object);
                 }
 
-                if(layer.getName().equals("people")) {
+                if(layer.getName().contains("people")) {
                     // Draw entity sprites if visible
                     for(AnimatedPersonSprite es : sprites) {
                         if (es.visible) {

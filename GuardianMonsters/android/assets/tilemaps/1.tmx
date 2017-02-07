@@ -201,7 +201,17 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="people" visible="0"/>
+ <objectgroup name="people1" visible="0">
+  <object id="51" name="person" type="person" x="64" y="336" width="16" height="16">
+   <properties>
+    <property name="male" value="true"/>
+    <property name="path" value="SSTOP"/>
+    <property name="spriteIndex" value="2"/>
+    <property name="static" value="true"/>
+    <property name="text" value="person_1"/>
+   </properties>
+  </object>
+ </objectgroup>
  <layer name="tops1" width="32" height="32">
   <data encoding="base64" compression="zlib">
    eJztllsKgCAQRafHV1abKmphRa2r10+raqQiC3+sGJPmgFwE8V5hRgVgGObLBBFAGNnzz9A7J/TvBEAvDq3Quyb092IAPz7UFbrkPB8S/ToqgnRTC/WrelLXr+opM1DXr2T3pD63LsOXmbf+HlEnC70+O3S/UPG39+6KC33DrMg/SoGjNNS3kH+UBvdrhZnumObW6RNMc+uUuc8CFd4skw==
@@ -243,7 +253,7 @@
   <object id="28" x="400" y="80" width="16" height="16"/>
   <object id="29" x="112" y="208" width="16" height="16"/>
  </objectgroup>
- <objectgroup name="sensors" visible="0">
+ <objectgroup name="triggers1" visible="0">
   <object id="30" name="warpField" x="256" y="0" width="16" height="16">
    <properties>
     <property name="targetID" value="2"/>
@@ -398,18 +408,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="livingEntities" visible="0">
-  <object id="51" name="person" type="person" x="64" y="336" width="16" height="16">
-   <properties>
-    <property name="male" value="true"/>
-    <property name="path" value="SSTOP"/>
-    <property name="spriteIndex" value="2"/>
-    <property name="static" value="true"/>
-    <property name="text" value="person_1"/>
-   </properties>
-  </object>
- </objectgroup>
- <objectgroup name="objects">
+ <objectgroup name="descriptions1">
   <object id="53" name="sign" type="objectDescription" x="32" y="304" width="16" height="16">
    <properties>
     <property name="text" value="sign_1_text"/>

@@ -43,7 +43,7 @@
    eJxjYBg4sEaOgWGt3AA6YBACALLbAZY=
   </data>
  </layer>
- <objectgroup name="people"/>
+ <objectgroup name="people1" visible="0"/>
  <layer name="shadow1" width="10" height="10">
   <data encoding="base64" compression="zlib">
    eJxjYBgFlILbTNQzCwBDKgDe
@@ -88,7 +88,7 @@
   <object id="9" x="128" y="112" width="16" height="16"/>
   <object id="29" x="48" y="112" width="16" height="32"/>
  </objectgroup>
- <objectgroup name="sensors" visible="0">
+ <objectgroup name="triggers1" visible="0">
   <object id="10" name="warpField" x="16" y="128" width="16" height="16">
    <properties>
     <property name="targetID" value="251"/>
@@ -101,8 +101,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="livingEntities" visible="0"/>
- <objectgroup name="objects" visible="0">
+ <objectgroup name="descriptions1" visible="0">
   <object id="13" name="sign" type="objectDescription" x="16" y="48" width="16" height="16">
    <properties>
     <property name="text" value="sign_4_1_text"/>

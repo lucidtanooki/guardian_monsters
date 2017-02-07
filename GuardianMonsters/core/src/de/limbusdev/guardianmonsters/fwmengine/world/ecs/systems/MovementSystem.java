@@ -7,6 +7,7 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.TimeUtils;
 
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.EntityComponentSystem;
@@ -32,12 +33,12 @@ import de.limbusdev.guardianmonsters.utils.GS;
 public class MovementSystem extends EntitySystem {
     /* ............................................................................ ATTRIBUTES .. */
     private Entity hero;
-    private Array<WarpPoint> warpPoints;
-    private Array<Rectangle> healFields;
+    private ArrayMap<Integer,Array<WarpPoint>> warpPoints;
+    private ArrayMap<Integer,Array<Rectangle>> healFields;
     private EntityComponentSystem ecs;
 
     /* ........................................................................... CONSTRUCTOR .. */
-    public MovementSystem(EntityComponentSystem ecs, Array<WarpPoint> warpPoints, Array<Rectangle> healFields) {
+    public MovementSystem(EntityComponentSystem ecs, ArrayMap<Integer,Array<WarpPoint>> warpPoints, ArrayMap<Integer,Array<Rectangle>> healFields) {
         this.ecs = ecs;
         this.warpPoints = warpPoints;
         this.healFields = healFields;
@@ -61,7 +62,7 @@ public class MovementSystem extends EntitySystem {
         Rectangle heroArea = new Rectangle(pos.x, pos.y, pos.width, pos.height);
 
         // Check whether hero enters warp area
-        for (WarpPoint w : warpPoints) {
+        for (WarpPoint w : warpPoints.get(pos.layer)) {
             if (heroArea.contains(w.x, w.y)) {
                 System.out.println("Changing to Map " + w.targetID);
                 ecs.changeGameArea(w.targetID, w.targetWarpPointID);
@@ -74,7 +75,7 @@ public class MovementSystem extends EntitySystem {
         Rectangle heroArea = new Rectangle(pos.x, pos.y, pos.width, pos.height);
 
         // Check whether hero enters warp area
-        for (Rectangle h : healFields) {
+        for (Rectangle h : healFields.get(pos.layer)) {
             if (heroArea.contains(h.x+h.width/2,h.y+h.height/2)) {
                 // Heal Team
                 System.out.println("Entered Healing Area");
@@ -132,12 +133,12 @@ public class MovementSystem extends EntitySystem {
 
             // Check whether movement is possible or blocked by a collider
             IntVector2 nextPos = new IntVector2(0,0);
-            for(IntRectangle r : ecs.gameArea.getColliders()) {
+            for(IntRectangle r : ecs.gameArea.getColliders().get(position.layer)) {
                 nextPos.x = position.nextX + GS.TILE_SIZE / 2;
                 nextPos.y = position.nextY + GS.TILE_SIZE / 2;
                 if (r.contains(nextPos)) return;
             }
-            for(IntRectangle r : ecs.gameArea.getMovingColliders()) {
+            for(IntRectangle r : ecs.gameArea.getMovingColliders().get(position.layer)) {
                 nextPos.x = position.nextX + GS.TILE_SIZE / 2;
                 nextPos.y = position.nextY + GS.TILE_SIZE / 2;
                 if (!collider.equals(r) && r.contains(nextPos)) return;
@@ -200,7 +201,7 @@ public class MovementSystem extends EntitySystem {
                 }
 
                 // Check whether hero can get attacked by monsters
-                for(MonsterArea ma : ecs.gameArea.getMonsterAreas()) {
+                for(MonsterArea ma : ecs.gameArea.getMonsterAreas().get(position.layer)) {
                     if (ma.contains(new IntVector2(
                             position.x + GS.TILE_SIZE / 2,
                             position.y + GS.TILE_SIZE / 2))

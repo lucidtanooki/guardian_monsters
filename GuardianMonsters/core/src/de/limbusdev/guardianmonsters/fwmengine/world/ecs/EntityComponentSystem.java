@@ -20,7 +20,7 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.MovementSystem;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.PathSystem;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.PositionSynchroSystem;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.SpriteSystem;
-import de.limbusdev.guardianmonsters.fwmengine.world.model.MapObjectInformation;
+import de.limbusdev.guardianmonsters.fwmengine.world.model.MapDescriptionInfo;
 import de.limbusdev.guardianmonsters.fwmengine.world.model.MapPersonInformation;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Media;
 import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager;
@@ -83,19 +83,25 @@ public class EntityComponentSystem {
     }
 
     /**
-     * Bring people on active map to live
+     * Bring people on active map to life
      */
     public void setUpPeople() {
-        for(MapPersonInformation mpi : gameArea.getMapPeople())
-            this.entityFactory.createPerson(mpi);
+        for(int key : gameArea.getMapPeople().keys()) {
+            for(MapPersonInformation mpi : gameArea.getMapPeople().get(key)) {
+                entityFactory.createPerson(mpi,key);
+            }
+        }
     }
 
     /**
      * Set up objects with description on the map
      */
     public void setUpSigns() {
-        for(MapObjectInformation moi : gameArea.getMapSigns())
-            this.entityFactory.createSign(moi);
+        for(int key : gameArea.getDescriptions().keys()) {
+            for(MapDescriptionInfo mdi : gameArea.getDescriptions().get(key)) {
+                entityFactory.createSign(mdi,key);
+            }
+        }
     }
 
 

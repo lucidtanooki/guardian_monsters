@@ -18,14 +18,11 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TitleCompone
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.entities.HeroEntity;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.GameArea;
 import de.limbusdev.guardianmonsters.enums.SkyDirection;
-import de.limbusdev.guardianmonsters.enums.TextureAtlasType;
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.AnimatedPersonSprite;
 import de.limbusdev.guardianmonsters.geometry.IntVector2;
-import de.limbusdev.guardianmonsters.fwmengine.world.model.MapObjectInformation;
+import de.limbusdev.guardianmonsters.fwmengine.world.model.MapDescriptionInfo;
 import de.limbusdev.guardianmonsters.fwmengine.world.model.MapPersonInformation;
-import de.limbusdev.guardianmonsters.fwmengine.managers.Media;
 import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager;
-import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.BattleFactory;
 import de.limbusdev.guardianmonsters.utils.GS;
 import de.limbusdev.guardianmonsters.utils.GameState;
@@ -60,10 +57,11 @@ public class EntityFactory {
         // Input
         hero.add(new InputComponent());
         PositionComponent position = new PositionComponent(
-                startField.x,
-                startField.y,
-                UnitConverter.tilesToPixels(1),
-                UnitConverter.tilesToPixels(1));
+            startField.x,
+            startField.y,
+            UnitConverter.tilesToPixels(1),
+            UnitConverter.tilesToPixels(1),
+            startField.layer);
 
         // Position
         position.onGrid = new IntVector2(
@@ -77,7 +75,7 @@ public class EntityFactory {
         // Collider
         ColliderComponent collider = new ColliderComponent(position.x, position.y, position
                 .width, position.height);
-        area.addMovingCollider(collider.collider);
+        area.addMovingCollider(collider.collider, startField.layer);
         hero.add(collider);
 
         // Game State
@@ -113,19 +111,19 @@ public class EntityFactory {
      * @param mapInfo
      * @return
      */
-    public Entity createSign(MapObjectInformation mapInfo) {
+    public Entity createSign(MapDescriptionInfo mapInfo, int layer) {
         Entity sign = new Entity();
         sign.add(new ConversationComponent(mapInfo.content));
         sign.add(new TitleComponent(mapInfo.title));
         sign.add(new ColliderComponent(
                 mapInfo.x, mapInfo.y, GS.TILE_SIZE, GS.TILE_SIZE));
         sign.add(new PositionComponent(mapInfo.x, mapInfo.y,
-                GS.TILE_SIZE, GS.TILE_SIZE));
+                GS.TILE_SIZE, GS.TILE_SIZE,layer));
         engine.addEntity(sign);
         return sign;
     }
 
-    public Entity createPerson(MapPersonInformation personInformation) {
+    public Entity createPerson(MapPersonInformation personInformation, int layer) {
 
         // Set up path component
         Array<SkyDirection> path = new Array<SkyDirection>();
@@ -138,9 +136,10 @@ public class EntityFactory {
         // Use second Constructor
         return createPerson(new PositionComponent(personInformation.startPosition.x,
                 personInformation.startPosition.y, GS.TILE_SIZE, GS
-                .TILE_SIZE), path, personInformation.moves, personInformation.conversation,
+                .TILE_SIZE, layer), path, personInformation.moves, personInformation.conversation,
                 personInformation.name,
-                personInformation.male, personInformation.spriteIndex);
+                personInformation.male, personInformation.spriteIndex
+        );
     }
 
     /**
@@ -169,13 +168,14 @@ public class EntityFactory {
                 startField.x,
                 startField.y,
                 UnitConverter.tilesToPixels(1),
-                UnitConverter.tilesToPixels(1));
+                UnitConverter.tilesToPixels(1),
+                startField.layer);
         person.add(position);
 
         // Collider
         ColliderComponent collider = new ColliderComponent(position.x, position.y, position
                 .width, position.height);
-        area.addMovingCollider(collider.collider);
+        area.addMovingCollider(collider.collider, startField.layer);
         person.add(collider);
 
         // Conversation

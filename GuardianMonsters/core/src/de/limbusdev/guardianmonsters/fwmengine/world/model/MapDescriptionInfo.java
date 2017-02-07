@@ -9,14 +9,14 @@ import com.badlogic.gdx.math.MathUtils;
  *
  * Created by georg on 03.12.15.
  */
-public class MapObjectInformation implements Component {
+public class MapDescriptionInfo implements Component {
     /* ............................................................................ ATTRIBUTES .. */
     public String title;
     public String content;
     public int x,y;
     /* ........................................................................... CONSTRUCTOR .. */
 
-    public MapObjectInformation(MapObject mo) {
+    public MapDescriptionInfo(MapObject mo) {
         if(!mo.getProperties().containsKey("type") || !mo.getProperties().get("type").equals("objectDescription")) {
             throw new IllegalArgumentException("Given MapObject is not of type \"descriptionObject\"");
         }
@@ -29,7 +29,7 @@ public class MapObjectInformation implements Component {
 
     }
 
-    public MapObjectInformation(String title, String content, int x, int y) {
+    public MapDescriptionInfo(String title, String content, int x, int y) {
         construct(title, content, x, y);
     }
 

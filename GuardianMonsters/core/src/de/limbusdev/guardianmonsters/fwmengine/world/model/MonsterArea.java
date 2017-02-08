@@ -2,13 +2,13 @@ package de.limbusdev.guardianmonsters.fwmengine.world.model;
 
 import com.badlogic.gdx.utils.Array;
 
-import de.limbusdev.guardianmonsters.geometry.IntRectangle;
+import de.limbusdev.guardianmonsters.geometry.IntRect;
 
 
 /**
  * Created by georg on 17.12.15.
  */
-public class MonsterArea extends IntRectangle {
+public class MonsterArea extends IntRect {
     /* ............................................................................ ATTRIBUTES .. */
     public Array<Integer> monsters;
     public Array<Float> monsterProbabilities;
@@ -19,10 +19,12 @@ public class MonsterArea extends IntRectangle {
     public MonsterArea(int x, int y, int width, int height, String monsterProperties, Array<Float>
             attProb) {
         super(x, y, width, height);
-        this.monsters = new Array<Integer>();
-        this.monsterProbabilities = new Array<Float>();
+        this.monsters = new Array<>();
+        this.monsterProbabilities = new Array<>();
         this.attackProbabilities = attProb;
+
         String[] atts = monsterProperties.split(";");
+
         for(int i=0; i<atts.length; i+=2) {
             monsters.add(Integer.parseInt(atts[i]));
             monsterProbabilities.add(Float.parseFloat(atts[i+1]));

@@ -9,7 +9,7 @@ import com.badlogic.gdx.utils.ArrayMap;
 
 import de.limbusdev.guardianmonsters.fwmengine.battle.control.BattleSystem;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.AHUD;
-import de.limbusdev.guardianmonsters.geometry.IntVector2;
+import de.limbusdev.guardianmonsters.geometry.IntVec2;
 import de.limbusdev.guardianmonsters.model.Monster;
 import de.limbusdev.guardianmonsters.utils.GS;
 
@@ -93,9 +93,9 @@ public class BattleStatusOverviewWidget extends BattleWidget {
      * Possible Indicator coordinates
      */
     private final static class IndPos {
-        private static final IntVector2 statWPos1 = new IntVector2(GS.COL*5,GS.RES_Y-GS.ROW*7);
-        private static final IntVector2 statWPos2 = new IntVector2(GS.COL*2,GS.RES_Y-GS.ROW*10);
-        private static final IntVector2 statWPos3 = new IntVector2(GS.COL*8,GS.RES_Y-GS.ROW*4);
+        private static final IntVec2 statWPos1 = new IntVec2(GS.COL*5,GS.RES_Y-GS.ROW*7);
+        private static final IntVec2 statWPos2 = new IntVec2(GS.COL*2,GS.RES_Y-GS.ROW*10);
+        private static final IntVec2 statWPos3 = new IntVec2(GS.COL*8,GS.RES_Y-GS.ROW*4);
     }
 
 

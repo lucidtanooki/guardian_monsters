@@ -13,47 +13,43 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 
-import org.w3c.dom.css.Rect;
-
 import de.limbusdev.guardianmonsters.data.AudioAssets;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PositionComponent;
-import de.limbusdev.guardianmonsters.geometry.IntRectangle;
-import de.limbusdev.guardianmonsters.geometry.IntVector2;
+import de.limbusdev.guardianmonsters.geometry.IntRect;
+import de.limbusdev.guardianmonsters.geometry.IntVec2;
 import de.limbusdev.guardianmonsters.fwmengine.world.model.MapDescriptionInfo;
 import de.limbusdev.guardianmonsters.fwmengine.world.model.MapPersonInformation;
 import de.limbusdev.guardianmonsters.fwmengine.world.model.WarpPoint;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.fwmengine.world.model.MonsterArea;
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.OrthogonalTiledMapAndEntityRenderer;
-import de.limbusdev.guardianmonsters.model.Attack;
 import de.limbusdev.guardianmonsters.utils.GS;
 
 /**
  * Contains logic and information about one game world area like a forest or a path. One
  * OutDoorGameArea per Tiled Map.
- *
- * Created by georg on 21.11.15.
+ * <p>
+ * Created by Georg Eckert on 21.11.15.
  */
 public class GameArea {
+    public IntVec2 gridPosition;
+    public PositionComponent startPosition;
+    public int areaID;
     //................................................................................... ATTRIBUTES
     private TiledMap tiledMap;
     private OrthogonalTiledMapAndEntityRenderer mapRenderer;
     private String bgMusic;
-
-    private ArrayMap<Integer,Array<IntRectangle>> colliders;
-    private ArrayMap<Integer,Array<IntRectangle>> movingColliders;
-    private ArrayMap<Integer,Array<WarpPoint>> warpPoints;
-    private ArrayMap<Integer,Array<Rectangle>> healFields;
-    private ArrayMap<Integer,Array<MapPersonInformation>> mapPeople;
-    private ArrayMap<Integer,Array<MapDescriptionInfo>> descriptions;
-    private ArrayMap<Integer,Array<MonsterArea>> monsterAreas;
-    public IntVector2 gridPosition;
-    public PositionComponent startPosition;
-    public int areaID;
+    private ArrayMap<Integer, Array<IntRect>> colliders;
+    private ArrayMap<Integer, Array<IntRect>> movingColliders;
+    private ArrayMap<Integer, Array<WarpPoint>> warpPoints;
+    private ArrayMap<Integer, Array<Rectangle>> healFields;
+    private ArrayMap<Integer, Array<MapPersonInformation>> mapPeople;
+    private ArrayMap<Integer, Array<MapDescriptionInfo>> descriptions;
+    private ArrayMap<Integer, Array<MonsterArea>> monsterAreas;
 
     //.................................................................................. CONSTRUCTOR
     public GameArea(int areaID, int startPosID) {
-        this.startPosition = new PositionComponent(0,0,0,0,0);
+        this.startPosition = new PositionComponent(0, 0, 0, 0, 0);
 
         initializeArrays();
 
@@ -61,7 +57,7 @@ public class GameArea {
         this.mapRenderer = new OrthogonalTiledMapAndEntityRenderer(tiledMap);
         this.areaID = areaID;
 
-        this.gridPosition = new IntVector2(0,0);
+        this.gridPosition = new IntVec2(0, 0);
     }
     //...................................................................................... METHODS
 
@@ -74,12 +70,16 @@ public class GameArea {
         // TODO
     }
 
+    /**
+     * Renders all colliders as white shapes
+     * @param shape
+     */
     public void renderDebugging(ShapeRenderer shape) {
         shape.begin(ShapeRenderer.ShapeType.Line);
         shape.setColor(Color.WHITE);
 
-        for(Array<IntRectangle> a : colliders.values()) {
-            for (IntRectangle r : a) {
+        for (Array<IntRect> a : colliders.values()) {
+            for (IntRect r : a) {
                 shape.rect(r.x, r.y, r.width, r.height);
             }
         }
@@ -91,20 +91,20 @@ public class GameArea {
 
         TiledMap tiledMap = new TmxMapLoader().load("tilemaps/" + areaID + ".tmx");
 
-        for(MapLayer layer : tiledMap.getLayers()) {
-            if(layer.getName().contains("people")) {
+        for (MapLayer layer : tiledMap.getLayers()) {
+            if (layer.getName().contains("people")) {
                 createPeople(layer);
             }
 
-            if(layer.getName().contains("colliderWalls")) {
+            if (layer.getName().contains("colliderWalls")) {
                 createColliders(layer);
             }
 
-            if(layer.getName().contains("descriptions")) {
+            if (layer.getName().contains("descriptions")) {
                 createDescriptions(layer);
             }
 
-            if(layer.getName().contains("triggers")) {
+            if (layer.getName().contains("triggers")) {
                 createTriggers(layer, startFieldID);
             }
         }
@@ -114,8 +114,8 @@ public class GameArea {
 
         // Set background music
         String musicType = tiledMap.getProperties().get("musicType", String.class);
-        int musicIndex = Integer.parseInt(tiledMap.getProperties().get("musicIndex", String.class))-1;
-        if(musicType.equals("town")) {
+        int musicIndex = Integer.parseInt(tiledMap.getProperties().get("musicIndex", String.class)) - 1;
+        if (musicType.equals("town")) {
             bgMusic = AudioAssets.get().getBgMusicTown(musicIndex);
         }
 
@@ -127,15 +127,19 @@ public class GameArea {
     // ......................................................................... MAP OBJECT CREATION
 
     private void createTriggers(MapLayer layer, int startFieldID) {
-        int layerIndex = layer.getName().toCharArray()[layer.getName().length()-1];
-        Array<Rectangle> healingTriggers = new Array<Rectangle>();
-        healFields.put(layerIndex,healingTriggers);
-        Array<WarpPoint> warpTriggers = new Array<WarpPoint>();
+
+        int layerIndex = layer.getName().toCharArray()[layer.getName().length() - 1];
+
+        Array<Rectangle> healingTriggers = new Array<>();
+        healFields.put(layerIndex, healingTriggers);
+
+        Array<WarpPoint> warpTriggers = new Array<>();
         warpPoints.put(layerIndex, warpTriggers);
-        Array<MonsterArea> battleTriggers = new Array<MonsterArea>();
+
+        Array<MonsterArea> battleTriggers = new Array<>();
         monsterAreas.put(layerIndex, battleTriggers);
 
-        for(MapObject mo : layer.getObjects()) {
+        for (MapObject mo : layer.getObjects()) {
             if (mo.getName().equals("healing")) {
                 healingTriggers.add(new Rectangle(
                     ((RectangleMapObject) mo).getRectangle().x,
@@ -149,8 +153,7 @@ public class GameArea {
                     Integer.parseInt(mo.getProperties().get("targetID", String.class)))
                 );
             if (mo.getName().equals("startField")) {
-                if (Integer.parseInt(mo.getProperties().get("fieldID", String.class))
-                    == startFieldID) {
+                if (Integer.parseInt(mo.getProperties().get("fieldID", String.class)) == startFieldID) {
                     Rectangle field = ((RectangleMapObject) mo).getRectangle();
                     startPosition.x = MathUtils.round(field.x);
                     startPosition.y = MathUtils.round(field.y);
@@ -160,8 +163,8 @@ public class GameArea {
 
             if (mo.getName().equals("monsterArea")) {
                 Rectangle r = ((RectangleMapObject) mo).getRectangle();
-                IntRectangle mr = new IntRectangle(r);
-                Array<Float> ap = new Array<Float>();
+                IntRect mr = new IntRect(r);
+                Array<Float> ap = new Array<>();
                 ap.add(Float.parseFloat(mo.getProperties().get("probability", String.class)));
                 ap.add(Float.parseFloat(mo.getProperties().get("probability2", String.class)));
                 ap.add(Float.parseFloat(mo.getProperties().get("probability3", String.class)));
@@ -175,13 +178,13 @@ public class GameArea {
     }
 
     private void createDescriptions(MapLayer layer) {
-        Array<MapDescriptionInfo> descriptionLayer = new Array<MapDescriptionInfo>();
-        int layerIndex = layer.getName().toCharArray()[layer.getName().length()-1];
-        descriptions.put(layerIndex,descriptionLayer);
+        Array<MapDescriptionInfo> descriptionLayer = new Array<>();
+        int layerIndex = layer.getName().toCharArray()[layer.getName().length() - 1];
+        descriptions.put(layerIndex, descriptionLayer);
 
         // get information about signs on map
-        for(MapObject mo : layer.getObjects()) {
-            if(mo.getName().equals("sign")) {
+        for (MapObject mo : layer.getObjects()) {
+            if (mo.getName().equals("sign")) {
                 descriptionLayer.add(new MapDescriptionInfo(mo));
             }
         }
@@ -189,15 +192,16 @@ public class GameArea {
 
     /**
      * Only for Layers containing "people" in their name
+     *
      * @param layer
      */
     private void createPeople(MapLayer layer) {
-        Array<MapPersonInformation> peopleLayer = new Array<MapPersonInformation>();
-        int layerIndex = layer.getName().toCharArray()[layer.getName().length()-1];
+        Array<MapPersonInformation> peopleLayer = new Array<>();
+        int layerIndex = layer.getName().toCharArray()[layer.getName().length() - 1];
         mapPeople.put(layerIndex, peopleLayer);
 
         // get information about people on map
-        for(MapObject mo : layer.getObjects()) {
+        for (MapObject mo : layer.getObjects()) {
             peopleLayer.add(new MapPersonInformation(mo));
         }
     }
@@ -205,23 +209,24 @@ public class GameArea {
     /**
      * Only for layers containing "colliderWalls" in their name
      * Creates rectangle objects for every collider in the given layer
+     *
      * @param layer
      */
     private void createColliders(MapLayer layer) {
-        Array<IntRectangle> colliderLayer = new Array<IntRectangle>();
-        int layerIndex = layer.getName().toCharArray()[layer.getName().length()-1];
+        Array<IntRect> colliderLayer = new Array<>();
+        int layerIndex = layer.getName().toCharArray()[layer.getName().length() - 1];
         colliders.put(layerIndex, colliderLayer);
 
         Rectangle r;
-        for(MapObject mo : layer.getObjects()) {
+        for (MapObject mo : layer.getObjects()) {
             r = ((RectangleMapObject) mo).getRectangle();
-            colliderLayer.add(new IntRectangle(
-                MathUtils.round(r.x), MathUtils.round(r.y), MathUtils.round(r.width), MathUtils.round(r.height)));
+            colliderLayer.add(new IntRect(r.x, r.y, r.width, r.height));
         }
     }
 
     /**
      * Creates a wall of colliders right around the active map so character can't just walk out
+     *
      * @param tiledMap
      */
     public void createBorderColliders(TiledMap tiledMap) {
@@ -229,19 +234,19 @@ public class GameArea {
         int mapWidth = tiledMap.getProperties().get("width", Integer.class);
         int mapHeight = tiledMap.getProperties().get("height", Integer.class);
 
-        for(int i : colliders.keys()) {
-            Array<IntRectangle> layerColliders = colliders.get(i);
-            layerColliders.add(new IntRectangle(
-                -1*GS.TILE_SIZE, -1*GS.TILE_SIZE, (mapWidth+2)*GS.TILE_SIZE, GS.TILE_SIZE
+        for (int i : colliders.keys()) {
+            Array<IntRect> layerColliders = colliders.get(i);
+            layerColliders.add(new IntRect(
+                -1 * GS.TILE_SIZE, -1 * GS.TILE_SIZE, (mapWidth + 2) * GS.TILE_SIZE, GS.TILE_SIZE
             ));
-            layerColliders.add(new IntRectangle(
-                -1*GS.TILE_SIZE, mapHeight*GS.TILE_SIZE, (mapWidth+2)*GS.TILE_SIZE, GS.TILE_SIZE
+            layerColliders.add(new IntRect(
+                -1 * GS.TILE_SIZE, mapHeight * GS.TILE_SIZE, (mapWidth + 2) * GS.TILE_SIZE, GS.TILE_SIZE
             ));
-            layerColliders.add(new IntRectangle(
-                -1*GS.TILE_SIZE, 0, GS.TILE_SIZE, mapHeight*GS.TILE_SIZE
+            layerColliders.add(new IntRect(
+                -1 * GS.TILE_SIZE, 0, GS.TILE_SIZE, mapHeight * GS.TILE_SIZE
             ));
-            layerColliders.add(new IntRectangle(
-                mapWidth*GS.TILE_SIZE, 0, GS.TILE_SIZE, mapHeight*GS.TILE_SIZE
+            layerColliders.add(new IntRect(
+                mapWidth * GS.TILE_SIZE, 0, GS.TILE_SIZE, mapHeight * GS.TILE_SIZE
             ));
         }
 
@@ -254,7 +259,7 @@ public class GameArea {
     }
 
     public void dispose() {
-
+        // TODO
     }
 
     public void playMusic() {
@@ -265,7 +270,7 @@ public class GameArea {
         Services.getAudio().stopMusic(bgMusic);
     }
 
-    public ArrayMap<Integer, Array<IntRectangle>> getColliders() {
+    public ArrayMap<Integer, Array<IntRect>> getColliders() {
         return colliders;
     }
 
@@ -281,20 +286,20 @@ public class GameArea {
         return tiledMap;
     }
 
-    public void addMovingCollider(IntRectangle collider, int layer) {
-        if(!movingColliders.containsKey(layer)) {
-            movingColliders.put(layer, new Array<IntRectangle>());
+    public void addMovingCollider(IntRect collider, int layer) {
+        if (!movingColliders.containsKey(layer)) {
+            movingColliders.put(layer, new Array<IntRect>());
         }
         movingColliders.get(layer).add(collider);
     }
 
-    public void removeMovingCollider(IntRectangle collider, int layer) {
-        if(movingColliders.containsKey(layer)) {
+    public void removeMovingCollider(IntRect collider, int layer) {
+        if (movingColliders.containsKey(layer)) {
             movingColliders.get(layer).removeValue(collider, false);
         }
     }
 
-    public ArrayMap<Integer, Array<IntRectangle>> getMovingColliders() {
+    public ArrayMap<Integer, Array<IntRect>> getMovingColliders() {
         return movingColliders;
     }
 
@@ -302,7 +307,7 @@ public class GameArea {
         return mapPeople;
     }
 
-    public ArrayMap<Integer,Array<MapDescriptionInfo>> getDescriptions() {
+    public ArrayMap<Integer, Array<MapDescriptionInfo>> getDescriptions() {
         return descriptions;
     }
 
@@ -311,12 +316,12 @@ public class GameArea {
     }
 
     private void initializeArrays() {
-        this.colliders = new ArrayMap<Integer, Array<IntRectangle>>();
-        this.movingColliders = new ArrayMap<Integer, Array<IntRectangle>>();
-        this.monsterAreas = new ArrayMap<Integer, Array<MonsterArea>>();
-        this.warpPoints = new ArrayMap<Integer, Array<WarpPoint>>();
-        this.mapPeople = new ArrayMap<Integer, Array<MapPersonInformation>>();
-        this.descriptions = new ArrayMap<Integer, Array<MapDescriptionInfo>>();
-        this.healFields = new ArrayMap<Integer, Array<Rectangle>>();
+        this.colliders = new ArrayMap<>();
+        this.movingColliders = new ArrayMap<>();
+        this.monsterAreas = new ArrayMap<>();
+        this.warpPoints = new ArrayMap<>();
+        this.mapPeople = new ArrayMap<>();
+        this.descriptions = new ArrayMap<>();
+        this.healFields = new ArrayMap<>();
     }
 }

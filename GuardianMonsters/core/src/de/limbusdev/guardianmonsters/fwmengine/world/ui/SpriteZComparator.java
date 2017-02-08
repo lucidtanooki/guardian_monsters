@@ -5,19 +5,24 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import java.util.Comparator;
 
 /**
- * Created by georg on 31.01.17.
+ * Created by Georg Eckert on 31.01.17.
  */
 
 public class SpriteZComparator implements Comparator<Sprite> {
-    @Override
-    public int compare(Sprite o1, Sprite o2) {
 
-        if(o1.getY() > o2.getY()) {
-            return -1;
-        } else if (o1.getY() < o2.getY()) {
-            return 1;
+    public static final int SMALLER = -1;
+    public static final int BIGGER = 1;
+    public static final int EQUAL = 0;
+
+    @Override
+    public int compare(Sprite sprite1, Sprite sprite2) {
+
+        if(sprite1.getY() > sprite2.getY()) {
+            return SMALLER;
+        } else if (sprite1.getY() < sprite2.getY()) {
+            return BIGGER;
         }else {
-            return 0;
+            return EQUAL;
         }
     }
 }

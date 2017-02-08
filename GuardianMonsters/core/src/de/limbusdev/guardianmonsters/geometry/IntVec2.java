@@ -1,18 +1,18 @@
 package de.limbusdev.guardianmonsters.geometry;
 
 /**
- * Created by georg on 23.01.16.
+ * Created by georg on 25.11.15.
  */
-public class IdentifiableRectangle {
+public class IntVec2 {
     /* ............................................................................ ATTRIBUTES .. */
     public int x,y;
-    public int ID;
     /* ........................................................................... CONSTRUCTOR .. */
-    public IdentifiableRectangle(int x, int y, int ID) {
+
+    public IntVec2(int x, int y) {
         this.x = x;
         this.y = y;
-        this.ID = ID;
     }
+    
     /* ............................................................................... METHODS .. */
     
     /* ..................................................................... GETTERS & SETTERS .. */

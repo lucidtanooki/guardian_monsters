@@ -2,7 +2,8 @@ package de.limbusdev.guardianmonsters.fwmengine.world.ecs.components;
 
 import com.badlogic.ashley.core.Component;
 
-import de.limbusdev.guardianmonsters.geometry.IntVector2;
+import de.limbusdev.guardianmonsters.geometry.IntRect;
+import de.limbusdev.guardianmonsters.geometry.IntVec2;
 import de.limbusdev.guardianmonsters.utils.GS;
 
 
@@ -12,29 +13,26 @@ import de.limbusdev.guardianmonsters.utils.GS;
  * the entity last moved is stored as well.
  * Created by georg on 22.11.15.
  */
-public class PositionComponent implements Component {
+public class PositionComponent extends IntRect implements Component {
     /* ............................................................................ ATTRIBUTES .. */
-    public int x,y,width,height, nextX, nextY;
+    public int nextX, nextY;
     public long lastPixelStep; // ms
-    public IntVector2 onGrid;
+    public IntVec2 onGrid;
     public int layer;
     /* ........................................................................... CONSTRUCTOR .. */
     public PositionComponent(int x, int y, int width, int height, int layer) {
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
+        super(x,y,width,height);
         this.nextX = 0;
         this.nextY = 0;
         this.lastPixelStep = 0;
-        this.onGrid = new IntVector2(x/ GS.TILE_SIZE,y/ GS.TILE_SIZE);
+        this.onGrid = new IntVec2(x/ GS.TILE_SIZE,y/ GS.TILE_SIZE);
         this.layer = layer;
     }
     /* ............................................................................... METHODS .. */
     
     /* ..................................................................... GETTERS & SETTERS .. */
-    public IntVector2 getCenter() {
-        return new IntVector2(
+    public IntVec2 getCenter() {
+        return new IntVec2(
                 onGrid.x* GS.TILE_SIZE+ GS.TILE_SIZE/2,
                 onGrid.y* GS.TILE_SIZE+ GS.TILE_SIZE/2);
     }

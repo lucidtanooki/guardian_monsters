@@ -4,11 +4,8 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.Action;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
@@ -17,11 +14,9 @@ import java.util.Observable;
 import java.util.Observer;
 
 import de.limbusdev.guardianmonsters.data.AudioAssets;
-import de.limbusdev.guardianmonsters.enums.AnimationType;
-import de.limbusdev.guardianmonsters.enums.ButtonIDs;
 import de.limbusdev.guardianmonsters.fwmengine.battle.control.BattleSystem;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.AHUD;
-import de.limbusdev.guardianmonsters.geometry.IntVector2;
+import de.limbusdev.guardianmonsters.geometry.IntVec2;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Media;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.model.Attack;
@@ -124,7 +119,7 @@ public class BattleAnimationWidget extends BattleWidget implements ObservableWid
         monImg = new Image(monReg);
         monImg.setSize(256,256);
 
-        IntVector2 position2d;
+        IntVec2 position2d;
         int align;
         if(side) {
             // Hero Side
@@ -163,7 +158,7 @@ public class BattleAnimationWidget extends BattleWidget implements ObservableWid
      */
     public void animateAttack(final int attPos, final int defPos, boolean side, boolean defSide, final Attack attack) {
         Image attIm;
-        final IntVector2 startPos,endPos;
+        final IntVec2 startPos,endPos;
 
         attackAnimationRunning = true;
 
@@ -210,7 +205,7 @@ public class BattleAnimationWidget extends BattleWidget implements ObservableWid
      * @param target    position of the attacks target
      * @return
      */
-    private Action getAnimationSequence(final Attack attack, final IntVector2 origin, final IntVector2 target, final int targetPos,
+    private Action getAnimationSequence(final Attack attack, final IntVec2 origin, final IntVec2 target, final int targetPos,
                                         boolean side, final boolean defSide) {
         final boolean direction = defSide;
         Action action;
@@ -303,7 +298,7 @@ public class BattleAnimationWidget extends BattleWidget implements ObservableWid
      * Takes an attack and starts the animation
      * @param attack
      */
-    private void animateAttackOfType(Attack attack, IntVector2 origin, IntVector2 target) {
+    private void animateAttackOfType(Attack attack, IntVec2 origin, IntVec2 target) {
 
         boolean direction = origin.x > target.x;
 
@@ -363,12 +358,12 @@ public class BattleAnimationWidget extends BattleWidget implements ObservableWid
 
 
     private final static class ImPos {
-        private static final IntVector2 HERO_MID = new IntVector2(GS.COL*13+128,GS.ROW*18+128);
-        private static final IntVector2 HERO_BOT = new IntVector2(GS.COL*7+128,GS.ROW*15+128);
-        private static final IntVector2 HERO_TOP = new IntVector2(GS.COL*19+128,GS.ROW*21+128);
-        private static final IntVector2 OPPO_MID = new IntVector2(GS.RES_X-GS.COL*7-128,GS.ROW*18+128);
-        private static final IntVector2 OPPO_BOT = new IntVector2(GS.RES_X-GS.COL*1-128,GS.ROW*15+128);
-        private static final IntVector2 OPPO_TOP = new IntVector2(GS.RES_X-GS.COL*13-128,GS.ROW*21+128);
+        private static final IntVec2 HERO_MID = new IntVec2(GS.COL*13+128,GS.ROW*18+128);
+        private static final IntVec2 HERO_BOT = new IntVec2(GS.COL*7+128,GS.ROW*15+128);
+        private static final IntVec2 HERO_TOP = new IntVec2(GS.COL*19+128,GS.ROW*21+128);
+        private static final IntVec2 OPPO_MID = new IntVec2(GS.RES_X-GS.COL*7-128,GS.ROW*18+128);
+        private static final IntVec2 OPPO_BOT = new IntVec2(GS.RES_X-GS.COL*1-128,GS.ROW*15+128);
+        private static final IntVec2 OPPO_TOP = new IntVec2(GS.RES_X-GS.COL*13-128,GS.ROW*21+128);
     }
 
     public interface CallbackHandler {

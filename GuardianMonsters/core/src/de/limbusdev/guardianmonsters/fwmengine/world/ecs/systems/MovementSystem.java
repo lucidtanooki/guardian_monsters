@@ -17,8 +17,8 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.HeroComponen
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.InputComponent;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PositionComponent;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TeamComponent;
-import de.limbusdev.guardianmonsters.geometry.IntRectangle;
-import de.limbusdev.guardianmonsters.geometry.IntVector2;
+import de.limbusdev.guardianmonsters.geometry.IntRect;
+import de.limbusdev.guardianmonsters.geometry.IntVec2;
 import de.limbusdev.guardianmonsters.fwmengine.world.model.WarpPoint;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.BattleFactory;
@@ -38,7 +38,12 @@ public class MovementSystem extends EntitySystem {
     private EntityComponentSystem ecs;
 
     /* ........................................................................... CONSTRUCTOR .. */
-    public MovementSystem(EntityComponentSystem ecs, ArrayMap<Integer,Array<WarpPoint>> warpPoints, ArrayMap<Integer,Array<Rectangle>> healFields) {
+
+    public MovementSystem(
+        EntityComponentSystem ecs,
+        ArrayMap<Integer,Array<WarpPoint>> warpPoints,
+        ArrayMap<Integer,Array<Rectangle>> healFields)
+    {
         this.ecs = ecs;
         this.warpPoints = warpPoints;
         this.healFields = healFields;
@@ -132,13 +137,13 @@ public class MovementSystem extends EntitySystem {
             }
 
             // Check whether movement is possible or blocked by a collider
-            IntVector2 nextPos = new IntVector2(0,0);
-            for(IntRectangle r : ecs.gameArea.getColliders().get(position.layer)) {
+            IntVec2 nextPos = new IntVec2(0,0);
+            for(IntRect r : ecs.gameArea.getColliders().get(position.layer)) {
                 nextPos.x = position.nextX + GS.TILE_SIZE / 2;
                 nextPos.y = position.nextY + GS.TILE_SIZE / 2;
                 if (r.contains(nextPos)) return;
             }
-            for(IntRectangle r : ecs.gameArea.getMovingColliders().get(position.layer)) {
+            for(IntRect r : ecs.gameArea.getMovingColliders().get(position.layer)) {
                 nextPos.x = position.nextX + GS.TILE_SIZE / 2;
                 nextPos.y = position.nextY + GS.TILE_SIZE / 2;
                 if (!collider.equals(r) && r.contains(nextPos)) return;
@@ -202,18 +207,20 @@ public class MovementSystem extends EntitySystem {
 
                 // Check whether hero can get attacked by monsters
                 for(MonsterArea ma : ecs.gameArea.getMonsterAreas().get(position.layer)) {
-                    if (ma.contains(new IntVector2(
+                    if (ma.contains(new IntVec2(
                             position.x + GS.TILE_SIZE / 2,
                             position.y + GS.TILE_SIZE / 2))
                             && MathUtils.randomBoolean(ma.attackProbabilities.get(0))) {
 
                         System.out.print("Monster appeared!\n");
-                        /* ......................................................... START BATTLE */
+
+                        //............................................................. START BATTLE
                         input.inBattle = true;
                         TeamComponent oppTeam = BattleFactory.getInstance().createOpponentTeam(ma);
                         ecs.hud.battleScreen.init(Components.team.get(ecs.hero), oppTeam);
                         Services.getScreenManager().pushScreen(ecs.hud.battleScreen);
-                        /* ......................................................... START BATTLE */
+                        //............................................................. START BATTLE
+
                         // Stop when in a battle
                         if(input.touchDown) input.startMoving = false;
                     }
@@ -221,5 +228,5 @@ public class MovementSystem extends EntitySystem {
             }
         }
     }
-    /* ..................................................................... GETTERS & SETTERS .. */
+    //............................................................................ GETTERS & SETTERS
 }

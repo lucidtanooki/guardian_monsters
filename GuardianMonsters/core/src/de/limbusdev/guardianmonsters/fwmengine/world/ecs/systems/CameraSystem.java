@@ -12,7 +12,7 @@ import com.badlogic.gdx.math.MathUtils;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.CameraComponent;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Components;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PositionComponent;
-import de.limbusdev.guardianmonsters.geometry.IntRectangle;
+import de.limbusdev.guardianmonsters.geometry.IntRect;
 import de.limbusdev.guardianmonsters.utils.GS;
 
 /**
@@ -25,7 +25,7 @@ import de.limbusdev.guardianmonsters.utils.GS;
 public class CameraSystem extends EntitySystem {
     /* ............................................................................ ATTRIBUTES .. */
     private OrthographicCamera camera;
-    private IntRectangle mapOutline;    // Bounds of map to be rendered
+    private IntRect mapOutline;    // Bounds of map to be rendered
 
     private ImmutableArray<Entity> entities;
     /* ........................................................................... CONSTRUCTOR .. */
@@ -37,7 +37,7 @@ public class CameraSystem extends EntitySystem {
         this.camera = camera;
 
         // Get the maps bounds
-        this.mapOutline = new IntRectangle(
+        this.mapOutline = new IntRect(
                 0,
                 0,
                 tiledMap.getProperties().get("width", Integer.class)* GS.TILE_SIZE,

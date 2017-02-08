@@ -2,7 +2,7 @@ package de.limbusdev.guardianmonsters.fwmengine.world.ecs.components;
 
 import com.badlogic.ashley.core.Component;
 
-import de.limbusdev.guardianmonsters.geometry.IntVector2;
+import de.limbusdev.guardianmonsters.geometry.IntVec2;
 
 
 /**
@@ -12,7 +12,7 @@ import de.limbusdev.guardianmonsters.geometry.IntVector2;
  */
 public class CameraComponent implements Component{
     /* ............................................................................ ATTRIBUTES .. */
-    public IntVector2 position = new IntVector2(0,0);
+    public IntVec2 position = new IntVec2(0,0);
     /* ........................................................................... CONSTRUCTOR .. */
     
     /* ............................................................................... METHODS .. */

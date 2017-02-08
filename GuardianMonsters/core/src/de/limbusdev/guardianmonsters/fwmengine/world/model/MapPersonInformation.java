@@ -3,9 +3,8 @@ package de.limbusdev.guardianmonsters.fwmengine.world.model;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.math.Rectangle;
 
-import de.limbusdev.guardianmonsters.geometry.IntVector2;
+import de.limbusdev.guardianmonsters.geometry.IntVec2;
 
 /**
  * Created by georg on 01.12.15.
@@ -13,7 +12,7 @@ import de.limbusdev.guardianmonsters.geometry.IntVector2;
 public class MapPersonInformation {
     /* ............................................................................ ATTRIBUTES .. */
     public String path;
-    public IntVector2 startPosition;
+    public IntVec2 startPosition;
     public boolean moves= false;
     public String name;
     public String conversation;
@@ -28,7 +27,7 @@ public class MapPersonInformation {
 
         construct(
             mo.getProperties().get("path", String.class),
-            new IntVector2(
+            new IntVec2(
                 MathUtils.round((((RectangleMapObject)mo).getRectangle().getX())),
                     MathUtils.round((((RectangleMapObject)mo).getRectangle().getY()))),
             Boolean.valueOf(mo.getProperties().get("static", String.class)),
@@ -38,12 +37,12 @@ public class MapPersonInformation {
             Integer.parseInt(mo.getProperties().get("spriteIndex", String.class)));
     }
 
-    public MapPersonInformation(String path, IntVector2 startPosition, boolean moves,
+    public MapPersonInformation(String path, IntVec2 startPosition, boolean moves,
                                 String conv, String name, boolean male, int spriteIndex) {
         construct(path, startPosition, moves, conv, name, male, spriteIndex);
     }
 
-    private void construct(String path, IntVector2 startPosition, boolean moves,
+    private void construct(String path, IntVec2 startPosition, boolean moves,
                            String conv, String name, boolean male, int spriteIndex) {
         this.path = path;
         this.startPosition = startPosition;

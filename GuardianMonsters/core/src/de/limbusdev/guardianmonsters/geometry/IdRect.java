@@ -1,18 +1,20 @@
 package de.limbusdev.guardianmonsters.geometry;
 
 /**
- * Created by georg on 25.11.15.
+ * Identifiable Rectangle
+ *
+ * Created by Georg Eckert on 23.01.16.
  */
-public class IntVector2 {
+public class IdRect {
     /* ............................................................................ ATTRIBUTES .. */
     public int x,y;
+    public int ID;
     /* ........................................................................... CONSTRUCTOR .. */
-
-    public IntVector2(int x, int y) {
+    public IdRect(int x, int y, int ID) {
         this.x = x;
         this.y = y;
+        this.ID = ID;
     }
-    
     /* ............................................................................... METHODS .. */
     
     /* ..................................................................... GETTERS & SETTERS .. */

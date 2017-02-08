@@ -12,8 +12,8 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Components;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.InputComponent;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PathComponent;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PositionComponent;
-import de.limbusdev.guardianmonsters.geometry.IntRectangle;
-import de.limbusdev.guardianmonsters.geometry.IntVector2;
+import de.limbusdev.guardianmonsters.geometry.IntRect;
+import de.limbusdev.guardianmonsters.geometry.IntVec2;
 import de.limbusdev.guardianmonsters.utils.GS;
 
 
@@ -66,8 +66,8 @@ public class PathSystem extends EntitySystem {
             }
 
             /* Check whether movement is possible or blocked by a collider */
-            IntVector2 nextPos = new IntVector2(0,0);
-            for(IntRectangle r : gameArea.getMovingColliders().get(position.layer)) {
+            IntVec2 nextPos = new IntVec2(0,0);
+            for(IntRect r : gameArea.getMovingColliders().get(position.layer)) {
                 nextPos.x = position.nextX + GS.TILE_SIZE / 2;
                 nextPos.y = position.nextY + GS.TILE_SIZE / 2;
                 if (!collider.collider.equals(r) && r.contains(nextPos)) return;

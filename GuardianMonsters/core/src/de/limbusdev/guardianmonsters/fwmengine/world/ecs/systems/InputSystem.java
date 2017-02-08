@@ -14,7 +14,7 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.HeroComponen
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PositionComponent;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.entities.HeroEntity;
 import de.limbusdev.guardianmonsters.enums.SkyDirection;
-import de.limbusdev.guardianmonsters.geometry.IntVector2;
+import de.limbusdev.guardianmonsters.geometry.IntVec2;
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.HUD;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.entities.EntityFamilies;
 import de.limbusdev.guardianmonsters.utils.GS;
@@ -142,7 +142,7 @@ public class InputSystem extends EntitySystem implements InputProcessor {
      */
     public Entity checkForNearInteractiveObjects(PositionComponent pos, SkyDirection dir) {
         Entity nearEntity=null;
-        IntVector2 checkGridCell = new IntVector2(pos.onGrid.x,pos.onGrid.y);
+        IntVec2 checkGridCell = new IntVec2(pos.onGrid.x,pos.onGrid.y);
 
         switch(dir) {
             case N: checkGridCell.y+=1;break;

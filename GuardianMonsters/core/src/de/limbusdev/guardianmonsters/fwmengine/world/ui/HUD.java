@@ -31,16 +31,14 @@ import de.limbusdev.guardianmonsters.data.TextureAssets;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Components;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.InputComponent;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PositionComponent;
-import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TeamComponent;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.entities.HeroEntity;
 import de.limbusdev.guardianmonsters.enums.HUDElements;
 import de.limbusdev.guardianmonsters.enums.SkyDirection;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.BattleScreen;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.InventoryScreen;
-import de.limbusdev.guardianmonsters.geometry.IntVector2;
+import de.limbusdev.guardianmonsters.geometry.IntVec2;
 import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
-import de.limbusdev.guardianmonsters.fwmengine.battle.model.BattleFactory;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.entities.EntityFamilies;
 import de.limbusdev.guardianmonsters.utils.GS;
 
@@ -391,7 +389,7 @@ public class HUD extends InputAdapter {
         SkyDirection dir = Components.input.get(hero).skyDir;
 
         Entity nearEntity=null;
-        IntVector2 checkGridCell = new IntVector2(pos.onGrid.x,pos.onGrid.y);
+        IntVec2 checkGridCell = new IntVec2(pos.onGrid.x,pos.onGrid.y);
 
         switch(dir) {
             case N: checkGridCell.y+=1;break;

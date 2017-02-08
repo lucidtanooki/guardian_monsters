@@ -19,7 +19,7 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ecs.entities.HeroEntity;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.GameArea;
 import de.limbusdev.guardianmonsters.enums.SkyDirection;
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.AnimatedPersonSprite;
-import de.limbusdev.guardianmonsters.geometry.IntVector2;
+import de.limbusdev.guardianmonsters.geometry.IntVec2;
 import de.limbusdev.guardianmonsters.fwmengine.world.model.MapDescriptionInfo;
 import de.limbusdev.guardianmonsters.fwmengine.world.model.MapPersonInformation;
 import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager;
@@ -64,7 +64,7 @@ public class EntityFactory {
             startField.layer);
 
         // Position
-        position.onGrid = new IntVector2(
+        position.onGrid = new IntVec2(
                 position.x/ GS.TILE_SIZE,
                 position.y/ GS.TILE_SIZE);
         hero.add(position);
@@ -84,7 +84,7 @@ public class EntityFactory {
         if(restoreSave) {
             position.x = gameState.x;
             position.y = gameState.y;
-            position.onGrid = new IntVector2(gameState.gridx, gameState.gridy);
+            position.onGrid = new IntVec2(gameState.gridx, gameState.gridy);
         }
 
         // Add Team

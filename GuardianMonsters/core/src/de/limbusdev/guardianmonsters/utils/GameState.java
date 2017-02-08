@@ -1,9 +1,7 @@
 package de.limbusdev.guardianmonsters.utils;
 
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 
-import de.limbusdev.guardianmonsters.geometry.IntVector2;
 import de.limbusdev.guardianmonsters.model.Monster;
 
 

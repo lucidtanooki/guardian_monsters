@@ -25,7 +25,7 @@ public class WeatherAnimator {
         media = Services.getMedia();
         this.weatherOn = map.getProperties().containsKey("weather");
 
-        weatherTiles = new Array<Vector2>();
+        weatherTiles = new Array<>();
         width = map.getProperties().get("width", Integer.class);
         height = map.getProperties().get("height", Integer.class);
         for(int i=-1; i<width*16/640+1; i++) {

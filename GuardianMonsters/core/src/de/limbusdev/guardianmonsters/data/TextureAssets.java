@@ -20,7 +20,11 @@ public class TextureAssets {
     public static final String battleAnimations = "spritesheets/battleAnimations.pack";
     public static final String battleMonsterPreviews = "scene2d/preview.pack";
     public static final String battleBackgrounds = "spritesheets/battleBacks.pack";
-    public static final String weatherTexture1 = "spritesheets/weather_clouds.png";
+    public static final String[] weatherTextures = {
+        "spritesheets/weather_clouds.png",
+        "spritesheets/weather_fog.png",
+        "spritesheets/weather_woods.png"
+    };
 
     public static Array<String> getAllTexturePackPaths() {
 
@@ -47,7 +51,10 @@ public class TextureAssets {
 
         paths.add(mainMenuBGImgFile);
         paths.add(mainMenuBGImgFile2);
-        paths.add(weatherTexture1);
+
+        for(String s : weatherTextures) {
+            paths.add(s);
+        }
 
         return paths;
     }

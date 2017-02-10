@@ -23,7 +23,8 @@ public class TextureAssets {
     public static final String[] weatherTextures = {
         "spritesheets/weather_clouds.png",
         "spritesheets/weather_fog.png",
-        "spritesheets/weather_woods.png"
+        "spritesheets/weather_woods.png",
+        "spritesheets/weather_fog2.png"
     };
 
     public static Array<String> getAllTexturePackPaths() {

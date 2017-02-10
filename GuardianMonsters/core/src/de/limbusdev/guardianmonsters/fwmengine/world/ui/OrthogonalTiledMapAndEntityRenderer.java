@@ -100,7 +100,7 @@ public class OrthogonalTiledMapAndEntityRenderer extends OrthogonalTiledMapRende
         }
 
         // Render Weather Effects
-        weatherAnimator.render(batch);
+        weatherAnimator.render(batch, elapsedTime);
 
 
         endRender();

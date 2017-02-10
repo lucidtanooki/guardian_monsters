@@ -3,6 +3,7 @@
  <properties>
   <property name="musicIndex" value="2"/>
   <property name="musicType" value="town"/>
+  <property name="weather" value="rain"/>
  </properties>
  <tileset firstgid="1" name="limbusdev_world" tilewidth="16" tileheight="16" tilecount="4096">
   <image source="../spritesheets/limbusdev_world.png" width="1024" height="1024"/>

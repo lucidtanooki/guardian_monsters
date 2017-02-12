@@ -7,7 +7,6 @@ import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
@@ -15,6 +14,7 @@ import com.badlogic.gdx.utils.ArrayMap;
 
 import de.limbusdev.guardianmonsters.data.AudioAssets;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PositionComponent;
+import de.limbusdev.guardianmonsters.fwmengine.world.ui.TmxDayTimeMapLoader;
 import de.limbusdev.guardianmonsters.geometry.IntRect;
 import de.limbusdev.guardianmonsters.geometry.IntVec2;
 import de.limbusdev.guardianmonsters.fwmengine.world.model.MapDescriptionInfo;
@@ -89,7 +89,7 @@ public class GameArea {
 
     public TiledMap setUpTiledMap(int areaID, int startFieldID) {
 
-        TiledMap tiledMap = new TmxMapLoader().load("tilemaps/" + areaID + ".tmx");
+        TiledMap tiledMap = new TmxDayTimeMapLoader().load("tilemaps/" + areaID + ".tmx");
 
         for (MapLayer layer : tiledMap.getLayers()) {
             if (layer.getName().contains("people")) {

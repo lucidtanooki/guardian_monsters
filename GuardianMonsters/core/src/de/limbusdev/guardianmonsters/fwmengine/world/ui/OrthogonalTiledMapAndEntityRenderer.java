@@ -7,6 +7,7 @@ import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.maps.tiled.TiledMapTileSet;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
@@ -43,10 +44,11 @@ public class OrthogonalTiledMapAndEntityRenderer extends OrthogonalTiledMapRende
      */
     public OrthogonalTiledMapAndEntityRenderer(TiledMap map) {
         super(map, 1);
-        this.sprites = new Array<AnimatedPersonSprite>();
 
-        this.objectAnimations = new ArrayMap<String,Animation>();
-        this.tileAnimations = new ArrayMap<Integer, Animation>();
+        this.sprites = new Array<>();
+
+        this.objectAnimations = new ArrayMap<>();
+        this.tileAnimations = new ArrayMap<>();
 
         this.media = Services.getMedia();
         this.elapsedTime = 0;

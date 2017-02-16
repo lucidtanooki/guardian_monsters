@@ -1,10 +1,12 @@
 package de.limbusdev.guardianmonsters.fwmengine.menus.ui;
 
 import com.badlogic.gdx.math.Interpolation;
+import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.HorizontalGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -30,127 +32,101 @@ import de.limbusdev.guardianmonsters.utils.GS;
  * Licensed under GPL 3.0 https://www.gnu.org/licenses/gpl-3.0.en.html
  */
 
-public class MonsterStatusInventoryWidget extends Table{
-    private HorizontalGroup hbox;
-    private VerticalGroup vBoxMonsters;
-    private Image monsterImgBg, selectDisplayImg, dataImgBg;
-    private Image monsterImg;
-    private Array<TextButton> monsterButtons;
-    private ArrayMap<Integer,Monster> team;
-    private Skin skin;
-    private Media media;
-    private TextButton infoHead, mpLabel, hpLabel, expLabel;
+public class MonsterStatusInventoryWidget extends Group {
+    private Label name;
+    private Label pStr, pDef, mStr, mDef, speed, exp, hp, mp;
 
     public MonsterStatusInventoryWidget (Skin skin) {
         super();
-        this.media = Services.getMedia();
-        this.skin = skin;
-        this.setFillParent(true);
-        this.monsterButtons = new Array<TextButton>();
 
-        hbox = new HorizontalGroup();
-        this.add(hbox);
-        Stack selectStack = new Stack();
-        vBoxMonsters = new VerticalGroup();
-        vBoxMonsters.padTop(GS.ROW*2);
-        vBoxMonsters.align(Align.left);
-        hbox.addActor(selectStack);
+        setSize(140,GS.HEIGHT-36);
+        Image monsterStatsBg = new Image(skin.getDrawable("menu-col-bg"));
+        monsterStatsBg.setPosition(2,2,Align.bottomLeft);
+        addActor(monsterStatsBg);
 
-        selectDisplayImg = new Image(skin.getDrawable("selectDisplayBg"));
-        selectStack.add(selectDisplayImg);
-        selectStack.add(vBoxMonsters);
+        name = new Label("Monster Name", skin, "default");
+        name.setPosition(8,200-8,Align.topLeft);
+        addActor(name);
 
-        // Middle Pane
-        Stack dataDisplayStack = new Stack();
-        dataImgBg = new Image(skin.getDrawable("dataDisplayBg"));
-        dataDisplayStack.add(dataImgBg);
-        VerticalGroup dataGroup = new VerticalGroup();
-        dataGroup.setFillParent(true);
-        dataGroup.pad(GS.COL*2);
-        dataGroup.align(Align.topLeft);
-        infoHead = new TextButton(Services.getL18N().l18n().get("stat_inv_data_sheet"), skin, "b-data-head");
-        infoHead.getLabel().setAlignment(Align.left);
-        infoHead.pad(GS.COL);
-        dataGroup.addActor(infoHead);
+        Label key = new Label("HP", skin, "default");
+        key.setPosition(8,200-8-18,Align.topLeft);
+        addActor(key);
 
-        hpLabel = new TextButton("HP", skin, "b-data-entry");
-        hpLabel.getLabel().setAlignment(Align.left);
-        hpLabel.pad(GS.COL);
-        dataGroup.addActor(hpLabel);
+        key = new Label("MP", skin, "default");
+        key.setPosition(8,200-8-18*2,Align.topLeft);
+        addActor(key);
 
-        mpLabel = new TextButton("MP", skin, "b-data-entry");
-        mpLabel.getLabel().setAlignment(Align.left);
-        mpLabel.pad(GS.COL);
-        dataGroup.addActor(mpLabel);
+        key = new Label("EXP", skin, "default");
+        key.setPosition(8,200-8-18*3,Align.topLeft);
+        addActor(key);
 
-        expLabel = new TextButton("EXP", skin, "b-data-entry");
-        expLabel.getLabel().setAlignment(Align.left);
-        expLabel.pad(GS.COL);
-        dataGroup.addActor(expLabel);
+        key = new Label("PStr", skin, "default");
+        key.setPosition(8,200-8-18*4,Align.topLeft);
+        addActor(key);
 
-        dataDisplayStack.add(dataGroup);
-        hbox.addActor(dataDisplayStack);
+        key = new Label("PDef", skin, "default");
+        key.setPosition(8,200-8-18*5,Align.topLeft);
+        addActor(key);
 
-        monsterImgBg = new Image(skin.getDrawable("monDisplayBg"));
+        key = new Label("MStr", skin, "default");
+        key.setPosition(8,200-8-18*6,Align.topLeft);
+        addActor(key);
 
-        Stack monImgStack = new Stack();
-        monImgStack.add(monsterImgBg);
-        monsterImg = new Image();
-        monsterImg.setSize(480,480);
-        monsterImg.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                monsterImg.addAction(Actions.sequence(
-                        Actions.scaleTo(1f,.9f,.3f, Interpolation.sine),
-                        Actions.scaleTo(1,1.1f,.2f, Interpolation.sine),
-                        Actions.scaleTo(1,1,.1f, Interpolation.sine)));
-            }
-        });
+        key = new Label("MDef", skin, "default");
+        key.setPosition(8,200-8-18*7,Align.topLeft);
+        addActor(key);
 
-        monsterImg.addAction(
-                Actions.sequence(
-                        Actions.sizeTo(480,480),
-                        Actions.forever(Actions.sequence(
-                            Actions.moveBy(0,20,3, Interpolation.sine),
-                            Actions.moveBy(0,-20,3, Interpolation.sine)
-        ))));
-        monImgStack.add(monsterImg);
-        hbox.addActor(monImgStack);
+        key = new Label("Speed", skin, "default");
+        key.setPosition(8,200-8-18*8,Align.topLeft);
+        addActor(key);
 
+        hp = new Label("0", skin, "default");
+        hp.setPosition(8+64,200-8-18,Align.topLeft);
+        addActor(hp);
 
-        this.setDebug(GS.DEBUGGING_ON);
+        mp = new Label("0", skin, "default");
+        mp.setPosition(8+64,200-8-18*2,Align.topLeft);
+        addActor(mp);
+
+        exp = new Label("0", skin, "default");
+        exp.setPosition(8+64,200-8-18*3,Align.topLeft);
+        addActor(exp);
+
+        pStr = new Label("0", skin, "default");
+        pStr.setPosition(8+64,200-8-18*4,Align.topLeft);
+        addActor(pStr);
+
+        pDef = new Label("0", skin, "default");
+        pDef.setPosition(8+64,200-8-18*5,Align.topLeft);
+        addActor(pDef);
+
+        mStr = new Label("0", skin, "default");
+        mStr.setPosition(8+64,200-8-18*6,Align.topLeft);
+        addActor(mStr);
+
+        mDef = new Label("0", skin, "default");
+        mDef.setPosition(8+64,200-8-18*7,Align.topLeft);
+        addActor(mDef);
+
+        speed = new Label("0", skin, "default");
+        speed.setPosition(8+64,200-8-18*8,Align.topLeft);
+        addActor(speed);
+
 
 
     }
 
-    public void init(TeamComponent team) {
-        this.team = team.monsters;
-        for(int key : this.team.keys()) {
-            Monster m = this.team.get(key);
-            final TextButton tb = new TextButton(
-                    MonsterInformation.getInstance().monsterNames.get(m.ID-1), skin, "b-monster");
-            tb.addListener(new ClickListener() {
-                @Override
-                public void clicked(InputEvent event, float x, float y) {
-                    setActiveMonster(monsterButtons.indexOf(tb,true));
-                }
-            });
-            monsterButtons.add(tb);
-        }
 
-        for(TextButton tb : monsterButtons) vBoxMonsters.addActor(tb);
+    public void init(Monster m) {
+        name.setText(Services.getL18N().l18n().get(MonsterInformation.getInstance().monsterNames.get(m.ID)));
+        hp.setText(m.getHP() + "/" + m.getHPfull());
+        mp.setText(m.getMP() + "/" + m.getMPfull());
+        exp.setText(m.getExp() + "/" + m.expAvailableInThisLevel());
+        pStr.setText(Integer.toString(m.pStrFull));
+        pDef.setText(Integer.toString(m.pDefFull));
+        mStr.setText(Integer.toString(m.mStrFull));
+        mDef.setText(Integer.toString(m.mDefFull));
+        speed.setText(Integer.toString(m.getSpeedFull()));
 
-        setActiveMonster(0);
-        this.invalidate();
-    }
-
-    private void setActiveMonster(int i) {
-        this.invalidate();
-        for(TextButton tb : monsterButtons) tb.setChecked(false);
-        monsterButtons.get(i).setChecked(true);
-        monsterImg.setDrawable(new TextureRegionDrawable(media.getMonsterSprite(team.get(i).ID)));
-        hpLabel.setText("HP    " + team.get(i).getHP() + "/" + team.get(i).getHPfull());
-        mpLabel.setText("MP    " + team.get(i).getMP() + "/" + team.get(i).getMPfull());
-        expLabel.setText("EXP   " + team.get(i).getExp() + "/" + team.get(i).expAvailableInThisLevel());
     }
 }

@@ -24,9 +24,9 @@ public class Monster extends Observable {
     public int ID;
     public int level;
     private int exp;
-    public int physStrength;
+    public int pStr, pStrFull;
     private int HPfull, HP;
-    public int magicStrength;
+    public int mStr, mStrFull;
     private int MPfull, MP;
     private int SpeedFull;
 
@@ -40,8 +40,8 @@ public class Monster extends Observable {
 
     private int Speed;
 
-    public int physDefFull, physDef;
-    public int magicDefFull, magicDef;
+    public int pDefFull, pDef;
+    public int mDefFull, mDef;
 
 
     /* ........................................................................... CONSTRUCTOR .. */
@@ -55,12 +55,12 @@ public class Monster extends Observable {
         this.level = 1;
         this.exp = 0;
         BaseStat base = MonsterInformation.getInstance().statusInfos.get(ID).baseStat;
-        this.physStrength = base.basePhysStrength;
+        this.pStr = pStrFull = base.basePhysStrength;
         this.HP = HPfull = base.baseHP;
-        this.magicStrength = base.baseMagStrength;
+        this.mStr = mStrFull = base.baseMagStrength;
         this.MP = MPfull = base.baseMP;
-        this.physDefFull = physDef = base.basePhysDefense;
-        this.magicDefFull = magicDef = base.baseMagDefense;
+        this.pDefFull = pDef = base.basePhysDefense;
+        this.mDefFull = mDef = base.baseMagDefense;
         this.Speed = this.SpeedFull = base.baseSpeed;
 
         // INIT
@@ -92,12 +92,12 @@ public class Monster extends Observable {
             level++;
             System.out.println("Reached Level " + level);
             ans = true;
-            this.physStrength+=1;
+            this.pStr +=1;
             this.HPfull+=2;
             this.MPfull+=1;
-            this.magicStrength+=1;
-            this.physDefFull+=1;
-            this.magicDefFull+=1;
+            this.mStr +=1;
+            this.pDefFull +=1;
+            this.mDefFull +=1;
         }
         System.out.println("EXP: " + this.exp);
 
@@ -203,11 +203,11 @@ public class Monster extends Observable {
         this.notifyObservers();
     }
 
-    public void setPhysDef(int physDef) {
-        this.physDef = physDef;
+    public void setpDef(int pDef) {
+        this.pDef = pDef;
     }
 
-    public void setMagicDef(int magicDef) {
-        this.magicDef = magicDef;
+    public void setmDef(int mDef) {
+        this.mDef = mDef;
     }
 }

@@ -8,19 +8,23 @@
   },
   
   com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
-    b-toolbar: {down: toolBarButton-down,    up: toolBarButton-up,    font: default-font},
+    b-toolbar: {down: toolBarButton-down, up: toolBarButton-up, font: default-font},
     b-monster: {checked: monNameBg-pressed, up: monNameBg, font: white},
     b-data-head: {up: infoLabel-heading, font: white},
     b-data-entry: {up: infoLabel-entry, font: default-font}
 	},
 	
 	com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle: {
-    b-toolbar-exit: {down: toolBarButton-exit-down,    up: toolBarButton-exit-up}
+    b-toolbar-exit:     {down: toolBarButton-exit-down,       up: toolBarButton-exit-up},
+    b-toolbar-team:     {down: toolBarButton-team-down,       up: toolBarButton-team-up},
+    b-toolbar-equip:    {down: toolBarButton-equip-down,      up: toolBarButton-equip-up},
+    b-toolbar-items:    {down: toolBarButton-items-down,      up: toolBarButton-items-up},
+    b-toolbar-ability:  {down: toolBarButton-ability-down,    up: toolBarButton-ability-up},
 	},
 	
 	com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
+    default:   {font: default-font},
     l-heading: {background: infoLabel-heading, font: white},
     l-entry:   {background: infoLabel-entry,   font: default-font}
-	}
-	
+  }	
 }

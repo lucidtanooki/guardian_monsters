@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.utils.ArrayMap;
 
 
 /**
@@ -15,10 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 public class UIManager implements UI {
 
-    public static final int FONT_COLOR_WHITE=0;
-    public static final int FONT_COLOR_BLACK=1;
-
-    private BitmapFont font32white, font32;
+    private ArrayMap<Integer,ArrayMap<Color,BitmapFont>> fonts;
     private Skin defaultSkin, battleSkin, inventorySkin;
 
     public UIManager(
@@ -30,16 +28,25 @@ public class UIManager implements UI {
             Gdx.files.internal(fontPath));
         FreeTypeFontGenerator.FreeTypeFontParameter param
             = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        param.color = Color.BLACK;
-        param.size = 32;
+
         param.magFilter = Texture.TextureFilter.Nearest;
         param.minFilter = Texture.TextureFilter.Linear;
-        font32 = gen.generateFont(param);
-        param.color = Color.WHITE;
-        param.size = 32;
-        param.magFilter = Texture.TextureFilter.Nearest;
-        param.minFilter = Texture.TextureFilter.Linear;
-        font32white = gen.generateFont(param);
+
+        fonts = new ArrayMap<>();
+        int[] sizes = {12,16,32};
+        Color[] colors = {Color.BLACK, Color.WHITE};
+
+        for(int size : sizes) {
+            ArrayMap<Color,BitmapFont> coloredFonts = new ArrayMap<>();
+            param.size = size;
+            for(Color c : colors) {
+                param.color = c;
+                BitmapFont f = gen.generateFont(param);
+                coloredFonts.put(c,f);
+            }
+            fonts.put(size,coloredFonts);
+        }
+
         gen.dispose();
 
 
@@ -47,32 +54,27 @@ public class UIManager implements UI {
         defaultSkin = new Skin();
         defaultSkin.addRegions(new TextureAtlas(Gdx.files.internal("scene2d/uiskin.atlas")));
         defaultSkin.addRegions(new TextureAtlas(Gdx.files.internal("scene2d/UI.pack")));
-        defaultSkin.add("default-font", font32);
-        defaultSkin.add("white", font32white);
+        defaultSkin.add("default-font", fonts.get(32).get(Color.BLACK));
+        defaultSkin.add("white", fonts.get(32).get(Color.WHITE));
         defaultSkin.load(Gdx.files.internal("scene2d/uiskin.json"));
 
         battleSkin = new Skin();
         battleSkin.addRegions(new TextureAtlas(Gdx.files.internal("scene2d/battleUI.pack")));
-        battleSkin.add("default-font", font32);
-        battleSkin.add("white", font32white);
+        battleSkin.add("default-font", fonts.get(32).get(Color.BLACK));
+        battleSkin.add("white", fonts.get(32).get(Color.WHITE));
         battleSkin.load(Gdx.files.internal("scene2d/battleuiskin.json"));
 
         inventorySkin = new Skin();
         inventorySkin.addRegions(new TextureAtlas(Gdx.files.internal("scene2d/inventoryUI.pack")));
-        inventorySkin.add("default-font", font32);
-        inventorySkin.add("white", font32white);
+        inventorySkin.add("default-font", fonts.get(16).get(Color.BLACK));
+        inventorySkin.add("white", fonts.get(16).get(Color.WHITE));
         inventorySkin.load(Gdx.files.internal("scene2d/inventoryUIskin.json"));
 
     }
 
     @Override
     public BitmapFont getFont(int color) {
-        switch (color) {
-            case FONT_COLOR_WHITE:
-                return font32white;
-            default:
-                return font32;
-        }
+        return fonts.get(32).get(Color.BLACK);
     }
 
     @Override

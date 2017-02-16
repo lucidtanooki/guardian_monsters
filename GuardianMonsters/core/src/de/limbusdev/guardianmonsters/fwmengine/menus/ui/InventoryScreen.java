@@ -3,19 +3,25 @@ package de.limbusdev.guardianmonsters.fwmengine.menus.ui;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.HorizontalGroup;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TeamComponent;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
+import de.limbusdev.guardianmonsters.model.Monster;
 import de.limbusdev.guardianmonsters.utils.GS;
 
 /**
@@ -25,50 +31,96 @@ import de.limbusdev.guardianmonsters.utils.GS;
 public class InventoryScreen implements Screen {
 
     private Stage stage;
-    private Table layout;
     private Skin skin;
-    private HorizontalGroup toolBar;
-    private Array<Table> views;
+    private Group toolBar;
+    private ArrayMap<String,Group> views;
+    private ArrayMap<Integer,Monster> team;
 
     public InventoryScreen(TeamComponent team) {
-        FitViewport fit = new FitViewport(GS.RES_X, GS.RES_Y);
+        this.team = team.monsters;
+
+        FitViewport fit = new FitViewport(GS.WIDTH, GS.HEIGHT);
         this.stage = new Stage(fit);
         this.skin = Services.getUI().getInventorySkin();
-        this.views = new Array<Table>();
-        MonsterStatusInventoryWidget msiw = new MonsterStatusInventoryWidget(skin);
-        msiw.init(team);
-        msiw.bottom().left();
-        views.add(msiw);
 
-        layout = new Table();
-        layout.setFillParent(true);
-        layout.top().left();
-        toolBar = new HorizontalGroup();
-        layout.add(toolBar);
-        TextButton tb = new TextButton("Status", skin, "b-toolbar");
-        toolBar.addActor(tb);
-        tb = new TextButton("Items", skin, "b-toolbar");
-        toolBar.addActor(tb);
-        tb = new TextButton("Encylo", skin, "b-toolbar");
-        toolBar.addActor(tb);
-        ImageButton ib = new ImageButton(skin, "b-toolbar-exit");
-        ib.addListener(new ClickListener() {
+        views = new ArrayMap<>();
+
+        assembleToolbar();
+
+        views.put("team", new TeamSubMenu(skin, team.monsters));
+
+        stage.addActor(views.get("team"));
+    }
+
+    // ..................................................................................... TOOLBAR
+    private void assembleToolbar() {
+        toolBar = new Group();
+        toolBar.setPosition(0,GS.HEIGHT-36,Align.bottomLeft);
+
+        // ...................................................................................... BG
+        Image bg = new Image(skin.getDrawable("toolBar-bg"));
+        bg.setWidth(GS.WIDTH);
+        bg.setPosition(0,0,Align.bottomLeft);
+        toolBar.addActor(bg);
+
+        // .................................................................................... TEAM
+        ImageButton team = new ImageButton(skin, "b-toolbar-team");
+        team.setPosition(2,4, Align.bottomLeft);
+        team.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                // TODO
+            }
+        });
+        toolBar.addActor(team);
+
+        // ................................................................................... ITEMS
+        ImageButton items = new ImageButton(skin, "b-toolbar-items");
+        items.setPosition((64+4)*1+2,4, Align.bottomLeft);
+        items.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                // TODO
+            }
+        });
+        toolBar.addActor(items);
+
+        // ................................................................................... EQUIP
+        ImageButton equip = new ImageButton(skin, "b-toolbar-equip");
+        equip.setPosition((64+4)*2+2,4, Align.bottomLeft);
+        equip.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                // TODO
+            }
+        });
+        toolBar.addActor(equip);
+
+        // ................................................................................. ABILITY
+        ImageButton ability = new ImageButton(skin, "b-toolbar-ability");
+        ability.setPosition((64+4)*3+2,4, Align.bottomLeft);
+        ability.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                // TODO
+            }
+        });
+        toolBar.addActor(ability);
+
+        // .................................................................................... EXIT
+        ImageButton exit = new ImageButton(skin, "b-toolbar-exit");
+        exit.setPosition(428-2,4, Align.bottomRight);
+        exit.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 // Exit Inventory
                 Services.getScreenManager().popScreen();
             }
         });
-        toolBar.addActor(ib.right());
+        toolBar.addActor(exit);
 
-        layout.row();
 
-        layout.add(views.first());
-
-        layout.validate();
-
-        stage.addActor(layout);
-        layout.setDebug(GS.DEBUGGING_ON);
+        stage.addActor(toolBar);
     }
 
     @Override

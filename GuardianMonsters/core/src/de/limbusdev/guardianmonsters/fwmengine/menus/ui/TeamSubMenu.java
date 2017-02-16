@@ -2,7 +2,6 @@ package de.limbusdev.guardianmonsters.fwmengine.menus.ui;
 
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
@@ -18,9 +17,14 @@ import de.limbusdev.guardianmonsters.utils.GS;
 
 public class TeamSubMenu extends AInventorySubMenu {
 
-    public TeamSubMenu(Skin skin, ArrayMap<Integer, Monster> team) {
+    private StatusPentagonWidget statPent;
+    private MonsterStatusInventoryWidget monsterStats;
+    private Image monsterImg;
+
+    public TeamSubMenu(Skin skin, final ArrayMap<Integer, Monster> team) {
         super(skin);
 
+        // ................................................................................ MONSTERS
         Group monsterChoice = new Group();
         monsterChoice.setSize(140, GS.HEIGHT-36);
         monsterChoice.setPosition(0,0, Align.bottomLeft);
@@ -28,45 +32,24 @@ public class TeamSubMenu extends AInventorySubMenu {
         monsterChoiceBg.setPosition(2,2,Align.bottomLeft);
         monsterChoice.addActor(monsterChoiceBg);
 
+        TeamCircleWidget.ClickHandler handler = new TeamCircleWidget.ClickHandler() {
+            @Override
+            public void onTeamMemberButton(int position) {
+                monsterStats.init(team.get(position));
+                monsterImg.setDrawable(new TextureRegionDrawable(Services.getMedia().getMonsterSprite(team.get(position).ID)));
+                statPent.init(team.get(position));
+            }
+        };
+
+        TeamCircleWidget circle = new TeamCircleWidget(skin, team, handler);
+        circle.setPosition(1,32,Align.bottomLeft);
+        monsterChoice.addActor(circle);
+
         // .................................................................................. VALUES
-        Group monsterStats = new Group();
-        monsterStats.setSize(140,GS.HEIGHT-36);
+        monsterStats = new MonsterStatusInventoryWidget(skin);
         monsterStats.setPosition(140+2,0,Align.bottomLeft);
-        Image monsterStatsBg = new Image(skin.getDrawable("menu-col-bg"));
-        monsterStatsBg.setPosition(2,2,Align.bottomLeft);
-        monsterStats.addActor(monsterStatsBg);
+        monsterStats.init(team.get(0));
 
-        Label key = new Label("Monster Name", skin, "default");
-        key.setPosition(8,200-8,Align.topLeft);
-        monsterStats.addActor(key);
-
-        key = new Label("HP", skin, "default");
-        key.setPosition(8,200-8-18,Align.topLeft);
-        monsterStats.addActor(key);
-
-        key = new Label("MP", skin, "default");
-        key.setPosition(8,200-8-18*2,Align.topLeft);
-        monsterStats.addActor(key);
-
-        key = new Label("P.Str.", skin, "default");
-        key.setPosition(8,200-8-18*3,Align.topLeft);
-        monsterStats.addActor(key);
-
-        key = new Label("P.Def.", skin, "default");
-        key.setPosition(8,200-8-18*4,Align.topLeft);
-        monsterStats.addActor(key);
-
-        key = new Label("M.Str.", skin, "default");
-        key.setPosition(8,200-8-18*5,Align.topLeft);
-        monsterStats.addActor(key);
-
-        key = new Label("M.Def.", skin, "default");
-        key.setPosition(8,200-8-18*6,Align.topLeft);
-        monsterStats.addActor(key);
-
-        key = new Label("Speed", skin, "default");
-        key.setPosition(8,200-8-18*7,Align.topLeft);
-        monsterStats.addActor(key);
 
 
         // .................................................................................. SPRITE
@@ -76,17 +59,21 @@ public class TeamSubMenu extends AInventorySubMenu {
         Image monsterViewBg = new Image(skin.getDrawable("menu-col-bg"));
         monsterViewBg.setPosition(2,2,Align.bottomLeft);
         monsterView.addActor(monsterViewBg);
-        Image monsterImg = new Image();
+        monsterImg = new Image();
         monsterImg.setSize(128,128);
         monsterImg.setPosition(6,200-4,Align.topLeft);
-        monsterImg.setDrawable(new TextureRegionDrawable(Services.getMedia().getMonsterSprite(team.get(1).ID)));
+        monsterImg.setDrawable(new TextureRegionDrawable(Services.getMedia().getMonsterSprite(team.get(0).ID)));
         monsterView.addActor(monsterImg);
 
-        Image statPentagram = new Image();
-        statPentagram.setSize(64,64);
-        statPentagram.setPosition(38+2,8,Align.bottomLeft);
-        statPentagram.setDrawable(skin.getDrawable("statPentagram"));
-        monsterView.addActor(statPentagram);
+        statPent = new StatusPentagonWidget();
+        statPent.setSize(64,64);
+        statPent.setPosition(38+2,8,Align.bottomLeft);
+        monsterView.addActor(statPent);
+        Image statPentagon = new Image();
+        statPentagon.setSize(64,64);
+        statPentagon.setPosition(38+2,8,Align.bottomLeft);
+        statPentagon.setDrawable(skin.getDrawable("statPentagram"));
+        monsterView.addActor(statPentagon);
 
 
         addActor(monsterChoice);

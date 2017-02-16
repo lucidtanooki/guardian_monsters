@@ -2,12 +2,10 @@ package de.limbusdev.guardianmonsters.fwmengine.battle.control;
 
 
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.I18NBundle;
 
 import de.limbusdev.guardianmonsters.enums.AttackType;
-import de.limbusdev.guardianmonsters.fwmengine.managers.L18N;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.model.Attack;
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.AttackCalculationReport;
@@ -54,8 +52,8 @@ public class MonsterManager {
     public static AttackCalculationReport calcDefense(Monster defensiveMonster) {
         System.out.println("Monster defends itself");
         AttackCalculationReport report = new AttackCalculationReport(defensiveMonster);
-        defensiveMonster.setPhysDef(MathUtils.round(defensiveMonster.physDef*1.05f));
-        defensiveMonster.setMagicDef(MathUtils.round(defensiveMonster.magicDef*1.05f));
+        defensiveMonster.setpDef(MathUtils.round(defensiveMonster.pDef *1.05f));
+        defensiveMonster.setmDef(MathUtils.round(defensiveMonster.mDef *1.05f));
 
         return report;
     }
@@ -74,9 +72,9 @@ public class MonsterManager {
         float defenseRatio;
 
         if(attack.attackType == AttackType.PHYSICAL) {
-            defenseRatio = (att.physStrength*1f) / (def.physDef*1f);
+            defenseRatio = (att.pStr *1f) / (def.pDef *1f);
         } else {
-            defenseRatio = (att.magicStrength*1f) / (def.magicDef*1f);
+            defenseRatio = (att.mStr *1f) / (def.mDef *1f);
         }
 
         /* Calculate Damage */

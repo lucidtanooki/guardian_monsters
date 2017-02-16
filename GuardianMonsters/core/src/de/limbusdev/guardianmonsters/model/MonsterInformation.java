@@ -96,14 +96,14 @@ public class MonsterInformation {
             2, "mon_labuuni", attacks, true, 3, 40, elements, base));
 
         // 003 BOXBUUNI
-        attacks = new ArrayMap<Integer, Attack>();
+        attacks = new ArrayMap<>();
         attacks.put(1, AttackInfo.tooth);
         attacks.put(5, AttackInfo.kick);
         attacks.put(10, AttackInfo.earth);
         attacks.put(20, AttackInfo.eartha);
-        elements = new Array<Element>();
+        elements = new Array<>();
         elements.add(Element.EARTH);
-        base = new BaseStat(3,35,15,12,13,10,12,12);
+        base = new BaseStat(3,399,666,800,777,405,100,600);
         statusInfos.put(3, new MonsterStatusInformation(
             3, "mon_boxbuuni", attacks, false, 0, 0, elements, base));
 

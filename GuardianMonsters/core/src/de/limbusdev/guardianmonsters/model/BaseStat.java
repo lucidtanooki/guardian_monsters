@@ -15,7 +15,7 @@ public class BaseStat {
     public int baseSpeed;
 
     public BaseStat(int ID) {
-        this(ID,30,5,8,10,8,10,10);
+        this(ID,99, 20, 49, 49, 26, 26, 49);
     }
 
     public BaseStat(int ID, int baseHP, int baseMP, int basePhysStrength, int basePhysDefense, int baseMagStrength, int baseMagDefense, int baseSpeed) {

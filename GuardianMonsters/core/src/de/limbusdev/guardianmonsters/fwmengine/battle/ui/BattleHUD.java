@@ -209,7 +209,7 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
 //        // Spread EXP
 //        if(!m.battleFieldSide) {
 //            // Defeated Monster was part of opponents leftTeam
-//            int exp = m.monster.level * (m.monster.getHPfull() + m.monster.physStrength);
+//            int exp = m.monster.level * (m.monster.getHPfull() + m.monster.pStr);
 //            exp /= leftTeam.size;
 //            for(Integer i : leftTeam.keys())
 //                if(leftTeam.get(i).monster.getHP() > 0)

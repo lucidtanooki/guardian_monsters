@@ -16,7 +16,7 @@ public class TeamComponent implements Component {
     public ArrayMap<Integer,Monster> monsters;
 
     public TeamComponent() {
-        this.monsters = new ArrayMap<Integer,Monster>();
+        this.monsters = new ArrayMap<>();
     }
     /* ........................................................................... CONSTRUCTOR .. */
     

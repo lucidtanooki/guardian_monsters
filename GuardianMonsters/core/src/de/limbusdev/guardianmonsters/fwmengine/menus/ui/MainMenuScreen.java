@@ -283,17 +283,19 @@ public class MainMenuScreen implements Screen {
         libgdxLogo.setPosition(GS.RES_X / 2, -1900, Align.center);
 
         String creditText = "Developed by\n\n" +
-                "Georg Eckert, LimbusDev 2016\n\n\n\n" +
-                "Artwork\n\n" +
-                "Monsters by\n" +
-                "Moritz, Maria-Christin & Georg Eckert\n\n\n" +
-                "Character Templates by PlayerRed-1\n" +
-                "\n\n\n" +
-                "Music\n\n" +
-                "\n" +
-                "City Loop by Homingstar (CC-BY-SA-3.0)\n\n" +
-                "CalmBGM by syncopika (CC-BY-3.0)\n\n\n\n" +
-                "Powered by\n\n";
+            "Georg Eckert, LimbusDev 2016\n\n\n\n" +
+            "Artwork\n\n" +
+            "Monsters by\n" +
+            "Moritz, Maria-Christin & Georg Eckert\n\n\n" +
+            "Character Templates by PlayerRed-1\n" +
+            "\n\n\n" +
+            "Music\n\n" +
+            "\n" +
+            "City Loop by Homingstar (CC-BY-SA-3.0)\n\n" +
+            "CalmBGM by syncopika (CC-BY-3.0)\n\n" +
+            "XXXXXX written and produced by Ove Melaa (Omsofware@hotmail.com)\n\n" +
+            "\n\n" +
+            "Powered by\n\n";
         Label.LabelStyle labs = new Label.LabelStyle();
         labs.font = skin.getFont("white");
         Label text = new Label(creditText, labs);

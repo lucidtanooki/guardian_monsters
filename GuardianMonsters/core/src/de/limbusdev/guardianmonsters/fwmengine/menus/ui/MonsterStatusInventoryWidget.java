@@ -34,7 +34,7 @@ import de.limbusdev.guardianmonsters.utils.GS;
 
 public class MonsterStatusInventoryWidget extends Group {
     private Label name;
-    private Label pStr, pDef, mStr, mDef, speed, exp, hp, mp;
+    private ArrayMap<String,Label> valueLabels;
 
     public MonsterStatusInventoryWidget (Skin skin) {
         super();
@@ -44,89 +44,48 @@ public class MonsterStatusInventoryWidget extends Group {
         monsterStatsBg.setPosition(2,2,Align.bottomLeft);
         addActor(monsterStatsBg);
 
+        Image nameBg = new Image(skin.getDrawable("name-bg"));
+        nameBg.setPosition(4,200-4,Align.topLeft);
+        addActor(nameBg);
+
+        int offX = 16;
+        int offY = 200-12;
+        int gap = 18;
+
         name = new Label("Monster Name", skin, "default");
-        name.setPosition(8,200-8,Align.topLeft);
+        name.setPosition(offX ,200-10,Align.topLeft);
         addActor(name);
 
-        Label key = new Label("HP", skin, "default");
-        key.setPosition(8,200-8-18,Align.topLeft);
-        addActor(key);
+        valueLabels = new ArrayMap<>();
+        Label key, value;
+        String[] labels = {"HP", "MP", "EXP", "PStr", "PDef", "MStr", "MDef", "Speed"};
+        for(int i=0; i<labels.length; i++) {
+            Image valueBg = new Image(skin.getDrawable("key-bg"));
+            valueBg.setPosition(offX-2,offY-gap*(i+1)+2,Align.topLeft);
+            addActor(valueBg);
 
-        key = new Label("MP", skin, "default");
-        key.setPosition(8,200-8-18*2,Align.topLeft);
-        addActor(key);
+            key = new Label(labels[i], skin, "default");
+            key.setPosition(offX, offY-gap*(i+1), Align.topLeft);
+            addActor(key);
 
-        key = new Label("EXP", skin, "default");
-        key.setPosition(8,200-8-18*3,Align.topLeft);
-        addActor(key);
-
-        key = new Label("PStr", skin, "default");
-        key.setPosition(8,200-8-18*4,Align.topLeft);
-        addActor(key);
-
-        key = new Label("PDef", skin, "default");
-        key.setPosition(8,200-8-18*5,Align.topLeft);
-        addActor(key);
-
-        key = new Label("MStr", skin, "default");
-        key.setPosition(8,200-8-18*6,Align.topLeft);
-        addActor(key);
-
-        key = new Label("MDef", skin, "default");
-        key.setPosition(8,200-8-18*7,Align.topLeft);
-        addActor(key);
-
-        key = new Label("Speed", skin, "default");
-        key.setPosition(8,200-8-18*8,Align.topLeft);
-        addActor(key);
-
-        hp = new Label("0", skin, "default");
-        hp.setPosition(8+64,200-8-18,Align.topLeft);
-        addActor(hp);
-
-        mp = new Label("0", skin, "default");
-        mp.setPosition(8+64,200-8-18*2,Align.topLeft);
-        addActor(mp);
-
-        exp = new Label("0", skin, "default");
-        exp.setPosition(8+64,200-8-18*3,Align.topLeft);
-        addActor(exp);
-
-        pStr = new Label("0", skin, "default");
-        pStr.setPosition(8+64,200-8-18*4,Align.topLeft);
-        addActor(pStr);
-
-        pDef = new Label("0", skin, "default");
-        pDef.setPosition(8+64,200-8-18*5,Align.topLeft);
-        addActor(pDef);
-
-        mStr = new Label("0", skin, "default");
-        mStr.setPosition(8+64,200-8-18*6,Align.topLeft);
-        addActor(mStr);
-
-        mDef = new Label("0", skin, "default");
-        mDef.setPosition(8+64,200-8-18*7,Align.topLeft);
-        addActor(mDef);
-
-        speed = new Label("0", skin, "default");
-        speed.setPosition(8+64,200-8-18*8,Align.topLeft);
-        addActor(speed);
-
-
+            value = new Label("0", skin, "default");
+            value.setPosition(offX+64, offY-gap*(i+1), Align.topLeft);
+            addActor(value);
+            valueLabels.put(labels[i], value);
+        }
 
     }
 
 
     public void init(Monster m) {
         name.setText(Services.getL18N().l18n().get(MonsterInformation.getInstance().monsterNames.get(m.ID)));
-        hp.setText(m.getHP() + "/" + m.getHPfull());
-        mp.setText(m.getMP() + "/" + m.getMPfull());
-        exp.setText(m.getExp() + "/" + m.expAvailableInThisLevel());
-        pStr.setText(Integer.toString(m.pStrFull));
-        pDef.setText(Integer.toString(m.pDefFull));
-        mStr.setText(Integer.toString(m.mStrFull));
-        mDef.setText(Integer.toString(m.mDefFull));
-        speed.setText(Integer.toString(m.getSpeedFull()));
-
+        valueLabels.get("HP").setText(m.getHP() + "/" + m.getHPfull());
+        valueLabels.get("MP").setText(m.getMP() + "/" + m.getMPfull());
+        valueLabels.get("EXP").setText(m.getExp() + "/" + m.expAvailableInThisLevel());
+        valueLabels.get("PStr").setText(Integer.toString(m.pStrFull));
+        valueLabels.get("PDef").setText(Integer.toString(m.pDefFull));
+        valueLabels.get("MStr").setText(Integer.toString(m.mStrFull));
+        valueLabels.get("MDef").setText(Integer.toString(m.mDefFull));
+        valueLabels.get("Speed").setText(Integer.toString(m.getSpeedFull()));
     }
 }

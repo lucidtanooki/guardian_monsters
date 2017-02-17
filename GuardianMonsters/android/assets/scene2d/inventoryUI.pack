@@ -5,156 +5,305 @@ filter: MipMapLinearNearest,MipMapLinearNearest
 repeat: none
 dataDisplayBg
   rotate: false
-  xy: 1, 341
+  xy: 1, 367
   size: 512, 656
   orig: 512, 656
   offset: 0, 0
   index: -1
 monDisplayBg
   rotate: false
-  xy: 515, 341
+  xy: 515, 367
   size: 480, 656
   orig: 480, 656
   offset: 0, 0
   index: -1
 infoLabel-heading
   rotate: false
-  xy: 1, 275
+  xy: 1, 301
   size: 448, 64
   orig: 448, 64
   offset: 0, 0
   index: -1
 infoLabel-entry
   rotate: false
-  xy: 1, 217
+  xy: 1, 243
   size: 448, 56
   orig: 448, 56
   offset: 0, 0
   index: -1
 monNameBg-pressed
   rotate: false
-  xy: 451, 267
+  xy: 451, 293
   size: 288, 72
   orig: 288, 72
   offset: 0, 0
   index: -1
 monNameBg
   rotate: false
-  xy: 1, 143
+  xy: 1, 169
   size: 288, 72
   orig: 288, 72
   offset: 0, 0
   index: -1
 teamCircle
   rotate: false
-  xy: 1, 1
-  size: 140, 140
-  orig: 140, 140
+  xy: 1, 19
+  size: 140, 148
+  orig: 140, 148
   offset: 0, 0
   index: -1
 menu-col-bg
   rotate: false
-  xy: 741, 139
+  xy: 741, 165
   size: 140, 200
   orig: 140, 200
   offset: 0, 0
   index: -1
+menu-col-bg-80
+  rotate: false
+  xy: 883, 165
+  size: 80, 200
+  orig: 80, 200
+  offset: 0, 0
+  index: -1
+list-bg
+  rotate: false
+  xy: 451, 267
+  size: 140, 24
+  orig: 140, 24
+  offset: 0, 0
+  index: -1
+list-bg-selected
+  rotate: false
+  xy: 291, 217
+  size: 140, 24
+  orig: 140, 24
+  offset: 0, 0
+  index: -1
+name-bg
+  rotate: false
+  xy: 143, 143
+  size: 128, 24
+  orig: 128, 24
+  offset: 0, 0
+  index: -1
 statPentagram
   rotate: false
-  xy: 883, 275
+  xy: 143, 77
   size: 66, 64
   orig: 66, 64
   offset: 0, 0
   index: -1
 toolBarButton-up
   rotate: false
-  xy: 451, 233
+  xy: 291, 183
   size: 64, 32
   orig: 64, 32
   offset: 0, 0
   index: -1
 toolBarButton-down
   rotate: false
-  xy: 291, 183
+  xy: 143, 43
   size: 64, 32
   orig: 64, 32
   offset: 0, 0
   index: -1
 toolBarButton-ability-up
   rotate: false
-  xy: 143, 109
+  xy: 357, 183
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: -1
+toolBarButtonSide-key-down
+  rotate: false
+  xy: 211, 109
   size: 64, 32
   orig: 64, 32
   offset: 0, 0
   index: -1
 toolBarButton-team-down
   rotate: false
-  xy: 883, 241
+  xy: 211, 75
   size: 64, 32
   orig: 64, 32
   offset: 0, 0
   index: -1
 toolBarButton-equip-up
   rotate: false
-  xy: 517, 233
+  xy: 209, 41
   size: 64, 32
   orig: 64, 32
   offset: 0, 0
   index: -1
 toolBarButton-equip-down
   rotate: false
-  xy: 291, 149
+  xy: 593, 259
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: -1
+toolBarButtonSide-other-down
+  rotate: false
+  xy: 659, 259
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: -1
+toolBarButtonSide-other-up
+  rotate: false
+  xy: 143, 9
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: -1
+teamCircle-chosen
+  rotate: false
+  xy: 209, 1
+  size: 38, 38
+  orig: 38, 38
+  offset: 0, 0
+  index: -1
+toolBarButtonSide-up
+  rotate: false
+  xy: 451, 233
   size: 64, 32
   orig: 64, 32
   offset: 0, 0
   index: -1
 toolBarButton-ability-down
   rotate: false
-  xy: 357, 183
+  xy: 517, 233
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: -1
+toolBarButtonSide-medicine-up
+  rotate: false
+  xy: 583, 225
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: -1
+toolBarButtonSide-down
+  rotate: false
+  xy: 649, 225
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: -1
+toolBarButtonSide-key-up
+  rotate: false
+  xy: 291, 149
   size: 64, 32
   orig: 64, 32
   offset: 0, 0
   index: -1
 toolBarButton-items-up
   rotate: false
-  xy: 143, 75
+  xy: 357, 149
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: -1
+toolBarButtonSide-medicine-down
+  rotate: false
+  xy: 277, 115
   size: 64, 32
   orig: 64, 32
   offset: 0, 0
   index: -1
 toolBarButton-team-up
   rotate: false
-  xy: 209, 109
+  xy: 277, 81
   size: 64, 32
   orig: 64, 32
   offset: 0, 0
   index: -1
+toolBarButtonSide-equip-down
+  rotate: false
+  xy: 343, 115
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: -1
+toolBarButtonSide-equip-up
+  rotate: false
+  xy: 343, 81
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: -1
+key-bg
+  rotate: false
+  xy: 277, 59
+  size: 64, 20
+  orig: 64, 20
+  offset: 0, 0
+  index: -1
 toolBarButton-items-down
   rotate: false
-  xy: 883, 207
+  xy: 343, 47
   size: 64, 32
   orig: 64, 32
   offset: 0, 0
   index: -1
 toolBar-bg
   rotate: false
-  xy: 951, 303
+  xy: 965, 329
   size: 32, 36
   orig: 32, 36
   offset: 0, 0
   index: -1
 toolBarButton-exit-down
   rotate: false
-  xy: 583, 233
+  xy: 965, 295
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 toolBarButton-exit-up
   rotate: false
-  xy: 357, 149
+  xy: 965, 261
   size: 32, 32
   orig: 32, 32
+  offset: 0, 0
+  index: -1
+scrollbar-knob
+  rotate: false
+  xy: 423, 207
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: -1
+scrollbar-knob
+  rotate: false
+  xy: 423, 207
+  size: 8, 8
+  split: 2, 2, 2, 4
+  orig: 8, 8
+  offset: 0, 0
+  index: -1
+scrollbar-bg
+  rotate: false
+  xy: 725, 283
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: -1
+list-selection
+  rotate: false
+  xy: 1, 9
+  size: 8, 8
+  split: 2, 2, 2, 2
+  orig: 8, 8
+  offset: 0, 0
+  index: -1
+transparent
+  rotate: false
+  xy: 1, 6
+  size: 1, 1
+  orig: 1, 1
   offset: 0, 0
   index: -1
 

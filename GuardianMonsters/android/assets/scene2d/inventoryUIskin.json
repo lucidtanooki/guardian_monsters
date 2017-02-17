@@ -16,15 +16,33 @@
 	
 	com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle: {
     b-toolbar-exit:     {down: toolBarButton-exit-down,       up: toolBarButton-exit-up},
-    b-toolbar-team:     {down: toolBarButton-team-down,       up: toolBarButton-team-up},
-    b-toolbar-equip:    {down: toolBarButton-equip-down,      up: toolBarButton-equip-up},
-    b-toolbar-items:    {down: toolBarButton-items-down,      up: toolBarButton-items-up},
-    b-toolbar-ability:  {down: toolBarButton-ability-down,    up: toolBarButton-ability-up},
+    b-toolbar-team:     {down: toolBarButton-team-down,       up: toolBarButton-team-up,    checked: toolBarButton-team-down},
+    b-toolbar-equip:    {down: toolBarButton-equip-down,      up: toolBarButton-equip-up,   checked: toolBarButton-equip-down},
+    b-toolbar-items:    {down: toolBarButton-items-down,      up: toolBarButton-items-up,   checked: toolBarButton-items-down},
+    b-toolbar-ability:  {down: toolBarButton-ability-down,    up: toolBarButton-ability-up, checked: toolBarButton-ability-down},
+    
+    b-toolbar-side-equip:     {down: toolBarButtonSide-equip-down,        up: toolBarButtonSide-equip-up,     checked: toolBarButtonSide-equip-down},
+    b-toolbar-side-medicine:  {down: toolBarButtonSide-medicine-down,     up: toolBarButtonSide-medicine-up,  checked: toolBarButtonSide-medicine-down},
+    b-toolbar-side-other:     {down: toolBarButtonSide-other-down,        up: toolBarButtonSide-other-up,     checked: toolBarButtonSide-other-down},
+    b-toolbar-side-key:       {down: toolBarButtonSide-key-down,          up: toolBarButtonSide-key-up,       checked: toolBarButtonSide-key-down},
+
 	},
 	
 	com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
     default:   {font: default-font},
+    list-item: {font: default-font},
     l-heading: {background: infoLabel-heading, font: white},
     l-entry:   {background: infoLabel-entry,   font: default-font}
   }	
+
+  com.badlogic.gdx.scenes.scene2d.ui.List$ListStyle: {
+    default:   {font: default-font, selection: list-selection},
+
+  }
+
+  com.badlogic.gdx.scenes.scene2d.ui.ScrollPane$ScrollPaneStyle: {
+    default:   {vScrollKnob: scrollbar-knob, hScrollKnob: scrollbar-knob},
+
+  }	
+
 }

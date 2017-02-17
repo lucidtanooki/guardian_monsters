@@ -3,6 +3,7 @@ package de.limbusdev.guardianmonsters.fwmengine.menus.ui;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -48,77 +49,49 @@ public class InventoryScreen implements Screen {
         assembleToolbar();
 
         views.put("team", new TeamSubMenu(skin, team.monsters));
+        views.put("items", new ItemsSubMenu(skin));
 
         stage.addActor(views.get("team"));
     }
 
     // ..................................................................................... TOOLBAR
     private void assembleToolbar() {
-        toolBar = new Group();
+        MainToolBar.CallbackHandler callbacks = new MainToolBar.CallbackHandler() {
+
+            private void removeSubMenus() {
+                for(Actor a : views.values()) a.remove();
+            }
+
+            @Override
+            public void onTeamButton() {
+                removeSubMenus();
+                stage.addActor(views.get("team"));
+            }
+
+            @Override
+            public void onItemsButton() {
+                removeSubMenus();
+                stage.addActor(views.get("items"));
+            }
+
+            @Override
+            public void onEquipButton() {
+                removeSubMenus();
+            }
+
+            @Override
+            public void onAbilityButton() {
+                removeSubMenus();
+            }
+
+            @Override
+            public void onExitButton() {
+                removeSubMenus();
+            }
+        };
+
+        MainToolBar toolBar = new MainToolBar(skin, callbacks);
         toolBar.setPosition(0,GS.HEIGHT-36,Align.bottomLeft);
-
-        // ...................................................................................... BG
-        Image bg = new Image(skin.getDrawable("toolBar-bg"));
-        bg.setWidth(GS.WIDTH);
-        bg.setPosition(0,0,Align.bottomLeft);
-        toolBar.addActor(bg);
-
-        // .................................................................................... TEAM
-        ImageButton team = new ImageButton(skin, "b-toolbar-team");
-        team.setPosition(2,4, Align.bottomLeft);
-        team.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                // TODO
-            }
-        });
-        toolBar.addActor(team);
-
-        // ................................................................................... ITEMS
-        ImageButton items = new ImageButton(skin, "b-toolbar-items");
-        items.setPosition((64+4)*1+2,4, Align.bottomLeft);
-        items.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                // TODO
-            }
-        });
-        toolBar.addActor(items);
-
-        // ................................................................................... EQUIP
-        ImageButton equip = new ImageButton(skin, "b-toolbar-equip");
-        equip.setPosition((64+4)*2+2,4, Align.bottomLeft);
-        equip.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                // TODO
-            }
-        });
-        toolBar.addActor(equip);
-
-        // ................................................................................. ABILITY
-        ImageButton ability = new ImageButton(skin, "b-toolbar-ability");
-        ability.setPosition((64+4)*3+2,4, Align.bottomLeft);
-        ability.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                // TODO
-            }
-        });
-        toolBar.addActor(ability);
-
-        // .................................................................................... EXIT
-        ImageButton exit = new ImageButton(skin, "b-toolbar-exit");
-        exit.setPosition(428-2,4, Align.bottomRight);
-        exit.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                // Exit Inventory
-                Services.getScreenManager().popScreen();
-            }
-        });
-        toolBar.addActor(exit);
-
 
         stage.addActor(toolBar);
     }

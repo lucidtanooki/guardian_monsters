@@ -126,7 +126,7 @@ public class EntityFactory {
     public Entity createPerson(MapPersonInformation personInformation, int layer) {
 
         // Set up path component
-        Array<SkyDirection> path = new Array<SkyDirection>();
+        Array<SkyDirection> path = new Array<>();
         if(!(personInformation.path == null || personInformation.path.isEmpty())) {
             String[] pathStr = personInformation.path.split("\\s*,\\s*");
             for (String s : pathStr)

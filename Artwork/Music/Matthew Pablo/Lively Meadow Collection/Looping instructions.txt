@@ -1,0 +1,11 @@
+Thanks for downloading!
+
+Here are some basic programing 
+notes for "Lively Meadow"
+
+LOOP A should only play ONCE and go right into LOOP B
+LOOP B will now loop forever.
+
+You can just use Loop B if you want.
+
+LOOP A will not loop within itself.

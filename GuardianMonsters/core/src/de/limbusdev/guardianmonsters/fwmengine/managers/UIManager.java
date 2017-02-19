@@ -68,6 +68,7 @@ public class UIManager implements UI {
         inventorySkin.addRegions(new TextureAtlas(Gdx.files.internal("scene2d/inventoryUI.pack")));
         inventorySkin.add("default-font", fonts.get(16).get(Color.BLACK));
         inventorySkin.add("white", fonts.get(16).get(Color.WHITE));
+        inventorySkin.add("font16w", fonts.get(16).get(Color.WHITE));
         inventorySkin.load(Gdx.files.internal("scene2d/inventoryUIskin.json"));
 
     }

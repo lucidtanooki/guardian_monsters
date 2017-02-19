@@ -1,284 +1,459 @@
 
 inventoryUI.png
 format: RGBA8888
-filter: MipMapLinearNearest,MipMapLinearNearest
+filter: MipMapNearestNearest,MipMapNearestLinear
 repeat: none
-dataDisplayBg
-  rotate: false
-  xy: 1, 367
-  size: 512, 656
-  orig: 512, 656
-  offset: 0, 0
-  index: -1
-monDisplayBg
-  rotate: false
-  xy: 515, 367
-  size: 480, 656
-  orig: 480, 656
-  offset: 0, 0
-  index: -1
-infoLabel-heading
-  rotate: false
-  xy: 1, 301
-  size: 448, 64
-  orig: 448, 64
-  offset: 0, 0
-  index: -1
-infoLabel-entry
-  rotate: false
-  xy: 1, 243
-  size: 448, 56
-  orig: 448, 56
-  offset: 0, 0
-  index: -1
-monNameBg-pressed
-  rotate: false
-  xy: 451, 293
-  size: 288, 72
-  orig: 288, 72
-  offset: 0, 0
-  index: -1
-monNameBg
-  rotate: false
-  xy: 1, 169
-  size: 288, 72
-  orig: 288, 72
-  offset: 0, 0
-  index: -1
-teamCircle
-  rotate: false
-  xy: 1, 19
-  size: 140, 148
-  orig: 140, 148
-  offset: 0, 0
-  index: -1
 menu-col-bg
   rotate: false
-  xy: 741, 165
+  xy: 1, 52
   size: 140, 200
   orig: 140, 200
   offset: 0, 0
   index: -1
+teamCircle
+  rotate: false
+  xy: 143, 104
+  size: 140, 148
+  orig: 140, 148
+  offset: 0, 0
+  index: -1
 menu-col-bg-80
   rotate: false
-  xy: 883, 165
+  xy: 285, 52
   size: 80, 200
   orig: 80, 200
   offset: 0, 0
   index: -1
 list-bg
   rotate: false
-  xy: 451, 267
+  xy: 143, 78
   size: 140, 24
   orig: 140, 24
   offset: 0, 0
   index: -1
 list-bg-selected
   rotate: false
-  xy: 291, 217
+  xy: 143, 52
   size: 140, 24
   orig: 140, 24
   offset: 0, 0
   index: -1
 name-bg
   rotate: false
-  xy: 143, 143
+  xy: 1, 26
   size: 128, 24
   orig: 128, 24
   offset: 0, 0
   index: -1
 statPentagram
   rotate: false
-  xy: 143, 77
+  xy: 367, 188
   size: 66, 64
   orig: 66, 64
   offset: 0, 0
   index: -1
 toolBarButton-up
   rotate: false
-  xy: 291, 183
+  xy: 367, 154
   size: 64, 32
   orig: 64, 32
   offset: 0, 0
   index: -1
 toolBarButton-down
   rotate: false
-  xy: 143, 43
+  xy: 435, 220
   size: 64, 32
   orig: 64, 32
   offset: 0, 0
   index: -1
 toolBarButton-ability-up
   rotate: false
-  xy: 357, 183
+  xy: 367, 120
   size: 64, 32
   orig: 64, 32
   offset: 0, 0
   index: -1
 toolBarButtonSide-key-down
   rotate: false
-  xy: 211, 109
+  xy: 501, 220
   size: 64, 32
   orig: 64, 32
   offset: 0, 0
   index: -1
 toolBarButton-team-down
   rotate: false
-  xy: 211, 75
+  xy: 367, 86
   size: 64, 32
   orig: 64, 32
   offset: 0, 0
   index: -1
 toolBarButton-equip-up
   rotate: false
-  xy: 209, 41
+  xy: 567, 220
   size: 64, 32
   orig: 64, 32
   offset: 0, 0
   index: -1
 toolBarButton-equip-down
   rotate: false
-  xy: 593, 259
+  xy: 367, 52
   size: 64, 32
   orig: 64, 32
   offset: 0, 0
   index: -1
 toolBarButtonSide-other-down
   rotate: false
-  xy: 659, 259
+  xy: 633, 220
   size: 64, 32
   orig: 64, 32
   offset: 0, 0
   index: -1
 toolBarButtonSide-other-up
   rotate: false
-  xy: 143, 9
+  xy: 699, 220
   size: 64, 32
   orig: 64, 32
   offset: 0, 0
   index: -1
-teamCircle-chosen
-  rotate: false
-  xy: 209, 1
-  size: 38, 38
-  orig: 38, 38
-  offset: 0, 0
-  index: -1
 toolBarButtonSide-up
   rotate: false
-  xy: 451, 233
+  xy: 765, 220
   size: 64, 32
   orig: 64, 32
   offset: 0, 0
   index: -1
 toolBarButton-ability-down
   rotate: false
-  xy: 517, 233
+  xy: 831, 220
   size: 64, 32
   orig: 64, 32
   offset: 0, 0
   index: -1
 toolBarButtonSide-medicine-up
   rotate: false
-  xy: 583, 225
+  xy: 897, 220
   size: 64, 32
   orig: 64, 32
   offset: 0, 0
   index: -1
 toolBarButtonSide-down
   rotate: false
-  xy: 649, 225
+  xy: 435, 186
   size: 64, 32
   orig: 64, 32
   offset: 0, 0
   index: -1
 toolBarButtonSide-key-up
   rotate: false
-  xy: 291, 149
+  xy: 501, 186
   size: 64, 32
   orig: 64, 32
   offset: 0, 0
   index: -1
 toolBarButton-items-up
   rotate: false
-  xy: 357, 149
+  xy: 567, 186
   size: 64, 32
   orig: 64, 32
   offset: 0, 0
   index: -1
 toolBarButtonSide-medicine-down
   rotate: false
-  xy: 277, 115
+  xy: 633, 186
   size: 64, 32
   orig: 64, 32
   offset: 0, 0
   index: -1
 toolBarButton-team-up
   rotate: false
-  xy: 277, 81
+  xy: 699, 186
   size: 64, 32
   orig: 64, 32
   offset: 0, 0
   index: -1
 toolBarButtonSide-equip-down
   rotate: false
-  xy: 343, 115
+  xy: 765, 186
   size: 64, 32
   orig: 64, 32
   offset: 0, 0
   index: -1
 toolBarButtonSide-equip-up
   rotate: false
-  xy: 343, 81
+  xy: 831, 186
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: -1
+toolBarButton-items-down
+  rotate: false
+  xy: 897, 186
   size: 64, 32
   orig: 64, 32
   offset: 0, 0
   index: -1
 key-bg
   rotate: false
-  xy: 277, 59
+  xy: 1, 4
   size: 64, 20
   orig: 64, 20
   offset: 0, 0
   index: -1
-toolBarButton-items-down
+teamCircle-chosen
   rotate: false
-  xy: 343, 47
-  size: 64, 32
-  orig: 64, 32
+  xy: 963, 214
+  size: 38, 38
+  orig: 38, 38
   offset: 0, 0
   index: -1
 toolBar-bg
   rotate: false
-  xy: 965, 329
+  xy: 433, 148
   size: 32, 36
   orig: 32, 36
   offset: 0, 0
   index: -1
+guardian-crystal-forest
+  rotate: false
+  xy: 433, 114
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+guardian-crystal-air
+  rotate: false
+  xy: 467, 152
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+potion-cyan
+  rotate: false
+  xy: 433, 80
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+guardian-crystal-arthropoda
+  rotate: false
+  xy: 467, 118
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+label-bg-burgund
+  rotate: false
+  xy: 501, 152
+  size: 32, 32
+  split: 12, 12, 15, 15
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+potion-purple
+  rotate: false
+  xy: 467, 84
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+guardian-crystal-dragon
+  rotate: false
+  xy: 501, 118
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+guardian-crystal-demon
+  rotate: false
+  xy: 535, 152
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+label-bg-sandstone
+  rotate: false
+  xy: 501, 84
+  size: 32, 32
+  split: 4, 4, 4, 7
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+guardian-crystal-mountain
+  rotate: false
+  xy: 535, 118
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+guardian-crystal-flash
+  rotate: false
+  xy: 569, 152
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+antivenom
+  rotate: false
+  xy: 535, 84
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+potion-black
+  rotate: false
+  xy: 569, 118
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+potion-green
+  rotate: false
+  xy: 603, 152
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+label-bg-sandstone-down
+  rotate: false
+  xy: 569, 84
+  size: 32, 32
+  split: 4, 4, 5, 7
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+label-bg-paper
+  rotate: false
+  xy: 603, 118
+  size: 32, 32
+  split: 14, 15, 19, 11
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+guardian-crystal-fire
+  rotate: false
+  xy: 637, 152
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+potion-gold
+  rotate: false
+  xy: 603, 84
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+potion-blue
+  rotate: false
+  xy: 637, 118
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+guardian-crystal-water
+  rotate: false
+  xy: 671, 152
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
 toolBarButton-exit-down
   rotate: false
-  xy: 965, 295
+  xy: 637, 84
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+guardian-crystal-ice
+  rotate: false
+  xy: 671, 118
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+potion-red
+  rotate: false
+  xy: 705, 152
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 toolBarButton-exit-up
   rotate: false
-  xy: 965, 261
+  xy: 671, 84
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+label-bg-burgund-down
+  rotate: false
+  xy: 705, 118
+  size: 32, 32
+  split: 12, 12, 15, 15
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+label-bg-royal
+  rotate: false
+  xy: 739, 152
+  size: 32, 32
+  split: 12, 12, 15, 15
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+label-bg-woods
+  rotate: false
+  xy: 705, 84
+  size: 32, 32
+  split: 12, 12, 15, 15
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+guardian-crystal-spirit
+  rotate: false
+  xy: 739, 118
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+guardian-crystal-earth
+  rotate: false
+  xy: 773, 152
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+tent
+  rotate: false
+  xy: 739, 84
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+potion-pink
+  rotate: false
+  xy: 773, 118
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+angel-tear
+  rotate: false
+  xy: 807, 152
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 scrollbar-knob
   rotate: false
-  xy: 423, 207
+  xy: 131, 42
   size: 8, 8
   orig: 8, 8
   offset: 0, 0
   index: -1
 scrollbar-knob
   rotate: false
-  xy: 423, 207
+  xy: 131, 42
   size: 8, 8
   split: 2, 2, 2, 4
   orig: 8, 8
@@ -286,14 +461,14 @@ scrollbar-knob
   index: -1
 scrollbar-bg
   rotate: false
-  xy: 725, 283
+  xy: 67, 16
   size: 8, 8
   orig: 8, 8
   offset: 0, 0
   index: -1
 list-selection
   rotate: false
-  xy: 1, 9
+  xy: 963, 204
   size: 8, 8
   split: 2, 2, 2, 2
   orig: 8, 8
@@ -301,20 +476,8 @@ list-selection
   index: -1
 transparent
   rotate: false
-  xy: 1, 6
+  xy: 1, 1
   size: 1, 1
   orig: 1, 1
-  offset: 0, 0
-  index: -1
-
-inventoryUI2.png
-format: RGBA8888
-filter: MipMapLinearNearest,MipMapLinearNearest
-repeat: none
-selectDisplayBg
-  rotate: false
-  xy: 1, 1
-  size: 288, 656
-  orig: 288, 656
   offset: 0, 0
   index: -1

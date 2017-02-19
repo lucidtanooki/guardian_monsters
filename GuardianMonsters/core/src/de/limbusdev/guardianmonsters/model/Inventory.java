@@ -3,11 +3,13 @@ package de.limbusdev.guardianmonsters.model;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 
+import java.util.Observable;
+
 /**
  * Created by georg on 17.02.17.
  */
 
-public class Inventory {
+public class Inventory extends Observable {
     private ArrayMap<Item, Integer> items;
 
     public Inventory() {
@@ -24,6 +26,8 @@ public class Inventory {
         } else {
             items.put(item,1);
         }
+        setChanged();
+        notifyObservers(item);
     }
 
     public Item takeItemFromInventory(Item item) {
@@ -32,6 +36,8 @@ public class Inventory {
             if(items.get(item) < 1) {
                 items.removeKey(item);
             }
+            setChanged();
+            notifyObservers(item);
             return item;
         } else {
             return null;

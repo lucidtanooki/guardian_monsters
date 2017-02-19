@@ -6,13 +6,6 @@
 	  black: { a: 1, b: 0, g: 0, r: 0 },
 	  grey: { a: 1, b: 0.2, g: 0.2, r: 0.2 },
   },
-  
-  com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
-    b-toolbar: {down: toolBarButton-down, up: toolBarButton-up, font: default-font},
-    b-monster: {checked: monNameBg-pressed, up: monNameBg, font: white},
-    b-data-head: {up: infoLabel-heading, font: white},
-    b-data-entry: {up: infoLabel-entry, font: default-font}
-	},
 	
 	com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle: {
     b-toolbar-exit:     {down: toolBarButton-exit-down,       up: toolBarButton-exit-up},
@@ -27,12 +20,17 @@
     b-toolbar-side-key:       {down: toolBarButtonSide-key-down,          up: toolBarButtonSide-key-up,       checked: toolBarButtonSide-key-down},
 
 	},
+
+
+  com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
+    item-button-sandstone:  {font: default-font,  down: label-bg-sandstone-down, up: label-bg-sandstone, checked: label-bg-sandstone-down, pressedOffsetY: -1, checkedOffsetY: -1},
+    item-button-burgund:    {font: font16w,       down: label-bg-burgund-down,   up: label-bg-burgund,   checked: label-bg-burgund-down},  
+  },
 	
 	com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
-    default:   {font: default-font},
-    list-item: {font: default-font},
-    l-heading: {background: infoLabel-heading, font: white},
-    l-entry:   {background: infoLabel-entry,   font: default-font}
+    default:    {font: default-font},
+    burgund:    {font: font16w, background: label-bg-burgund},
+    list-item:  {font: default-font, background: label-bg-sandstone},
   }	
 
   com.badlogic.gdx.scenes.scene2d.ui.List$ListStyle: {

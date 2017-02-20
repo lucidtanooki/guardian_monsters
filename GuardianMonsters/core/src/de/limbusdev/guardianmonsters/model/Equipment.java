@@ -65,7 +65,7 @@ public class Equipment extends Item {
         return addsMP;
     }
 
-    public EQUIPMENT_TYPE getType() {
+    public EQUIPMENT_TYPE getWeaponType() {
         return type;
     }
 

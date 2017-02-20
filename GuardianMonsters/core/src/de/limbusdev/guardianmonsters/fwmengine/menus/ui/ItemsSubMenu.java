@@ -1,19 +1,17 @@
 package de.limbusdev.guardianmonsters.fwmengine.menus.ui;
 
 import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.ButtonGroup;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.List;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.ObjectMap;
 
-import de.limbusdev.guardianmonsters.model.Equipment;
 import de.limbusdev.guardianmonsters.model.Inventory;
 import de.limbusdev.guardianmonsters.model.Item;
 import de.limbusdev.guardianmonsters.model.ItemInfo;
@@ -26,6 +24,7 @@ public class ItemsSubMenu extends AInventorySubMenu {
 
     private Inventory inventory;
     private Table itemTable;
+    private ItemDetailViewWidget detailView;
 
     public ItemsSubMenu(Skin skin) {
         super(skin);
@@ -62,7 +61,7 @@ public class ItemsSubMenu extends AInventorySubMenu {
         itemTable = new Table();
 
         ScrollPane scrollPane = new ScrollPane(itemTable, getSkin());
-        init();
+
 
         scrollPane.setSize(192,200);
         scrollPane.setPosition(2,2);
@@ -71,6 +70,7 @@ public class ItemsSubMenu extends AInventorySubMenu {
         itemListView.addActor(scrollPane);
         addActor(itemListView);
 
+        init();
     }
 
     public void init(Inventory inventory) {
@@ -82,8 +82,8 @@ public class ItemsSubMenu extends AInventorySubMenu {
         btnGroup.setMaxCheckCount(1);
 
         int counter = 0;
-        for(Item i : inventory.getItems().keys()) {
-            ItemInventoryButton item = new ItemInventoryButton(i, getSkin(), "item-button-sandstone");
+        for(final Item i : inventory.getItems().keys()) {
+            final ItemInventoryButton item = new ItemInventoryButton(i, getSkin(), "item-button-sandstone");
             inventory.addObserver(item);
             if(counter == 0) item.setChecked(true);
             counter++;
@@ -91,6 +91,12 @@ public class ItemsSubMenu extends AInventorySubMenu {
             buttons.add(item);
             btnGroup.add(item);
             itemTable.row().spaceBottom(1);
+            item.addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    showItemDetailView(i);
+                }
+            });
         }
     }
 
@@ -107,5 +113,20 @@ public class ItemsSubMenu extends AInventorySubMenu {
         inventory.putItemInInventory(ItemInfo.getInst().getItem("sword-barb-steel"));
 
         this.init(inventory);
+    }
+
+    private void showItemDetailView(Item item)  {
+        if(detailView != null) detailView.remove();
+        switch(item.getType()) {
+            case EQUIPMENT:
+                detailView = new WeaponDetailViewWidget(getSkin());
+                break;
+            default:
+                detailView = new ItemDetailViewWidget(getSkin());
+                break;
+        }
+        detailView.setPosition(264,2, Align.bottomLeft);
+        detailView.init(item);
+        addActor(detailView);
     }
 }

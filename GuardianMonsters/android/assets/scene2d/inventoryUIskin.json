@@ -19,6 +19,9 @@
     b-toolbar-side-other:     {down: toolBarButtonSide-other-down,        up: toolBarButtonSide-other-up,     checked: toolBarButtonSide-other-down},
     b-toolbar-side-key:       {down: toolBarButtonSide-key-down,          up: toolBarButtonSide-key-up,       checked: toolBarButtonSide-key-down},
 
+    button-delete:  {down: button-delete-down, up: button-delete-up},
+    button-use:     {down: button-use-down,    up: button-use-up},
+
 	},
 
 
@@ -30,6 +33,9 @@
 	com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
     default:    {font: default-font},
     burgund:    {font: font16w, background: label-bg-burgund},
+    paper:      {font: font16,  background: label-bg-paper},
+    paper-dark-area:      {font: font16,  background: darker-paper-area},
+    paper-border:{font: font16,  background: paper-border},
     list-item:  {font: default-font, background: label-bg-sandstone},
   }	
 

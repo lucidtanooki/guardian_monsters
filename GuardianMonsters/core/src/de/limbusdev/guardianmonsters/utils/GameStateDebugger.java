@@ -13,6 +13,9 @@ import de.limbusdev.guardianmonsters.fwmengine.battle.ui.BattleScreen;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.InventoryScreen;
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.OutdoorGameWorldScreen;
 import de.limbusdev.guardianmonsters.model.Attack;
+import de.limbusdev.guardianmonsters.model.Inventory;
+import de.limbusdev.guardianmonsters.model.Item;
+import de.limbusdev.guardianmonsters.model.ItemInfo;
 import de.limbusdev.guardianmonsters.model.Monster;
 
 /**
@@ -31,7 +34,28 @@ public class GameStateDebugger {
         herTeam.monsters.put(0,BattleFactory.getInstance().createMonster(4));
         herTeam.monsters.put(1,BattleFactory.getInstance().createMonster(7));
         herTeam.monsters.put(2,BattleFactory.getInstance().createMonster(8));
-        InventoryScreen ivs = new InventoryScreen(herTeam);
+
+        Inventory inventory = new Inventory();
+
+        inventory.putItemInInventory(ItemInfo.getInst().getItem("sword-barb-steel"));
+        inventory.putItemInInventory(ItemInfo.getInst().getItem("bread"));
+        inventory.putItemInInventory(ItemInfo.getInst().getItem("bread"));
+        inventory.putItemInInventory(ItemInfo.getInst().getItem("bread"));
+        inventory.putItemInInventory(ItemInfo.getInst().getItem("bread"));
+        inventory.putItemInInventory(ItemInfo.getInst().getItem("potion-blue"));
+        inventory.putItemInInventory(ItemInfo.getInst().getItem("potion-blue"));
+        inventory.putItemInInventory(ItemInfo.getInst().getItem("potion-blue"));
+        inventory.putItemInInventory(ItemInfo.getInst().getItem("potion-red"));
+        inventory.putItemInInventory(ItemInfo.getInst().getItem("medicine-blue"));
+        inventory.putItemInInventory(ItemInfo.getInst().getItem("angel-tear"));
+        inventory.putItemInInventory(ItemInfo.getInst().getItem("sword-wood"));
+        inventory.putItemInInventory(ItemInfo.getInst().getItem("claws-rusty"));
+        inventory.putItemInInventory(ItemInfo.getInst().getItem("sword-silver"));
+        inventory.putItemInInventory(ItemInfo.getInst().getItem("sword-knightly-steel"));
+
+
+        inventory.sortItemsByID();
+        InventoryScreen ivs = new InventoryScreen(herTeam, inventory);
         game.setScreen(ivs);
     }
 

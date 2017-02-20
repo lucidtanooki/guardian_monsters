@@ -1,8 +1,8 @@
 package de.limbusdev.guardianmonsters.model;
 
-import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.ArrayMap;
+import com.badlogic.gdx.utils.OrderedMap;
 
+import java.util.Comparator;
 import java.util.Observable;
 
 /**
@@ -10,13 +10,13 @@ import java.util.Observable;
  */
 
 public class Inventory extends Observable {
-    private ArrayMap<Item, Integer> items;
+    private OrderedMap<Item, Integer> items;
 
     public Inventory() {
-        this.items = new ArrayMap<>();
+        this.items = new OrderedMap<>();
     }
 
-    public ArrayMap<Item, Integer> getItems() {
+    public OrderedMap<Item, Integer> getItems() {
         return items;
     }
 
@@ -34,13 +34,29 @@ public class Inventory extends Observable {
         if(items.containsKey(item)) {
             items.put(item,items.get(item)-1);
             if(items.get(item) < 1) {
-                items.removeKey(item);
+                items.remove(item);
             }
             setChanged();
             notifyObservers(item);
             return item;
         } else {
             return null;
+        }
+    }
+
+    public void sortItemsByID() {
+        items.orderedKeys().sort(new IDComparator());
+        setChanged();
+        notifyObservers();
+    }
+
+    private class IDComparator implements Comparator<Item> {
+
+        @Override
+        public int compare(Item o1, Item o2) {
+            if(o1.ID < o2.ID) return -1;
+            if(o1.ID > o2.ID) return 1;
+            return 0;
         }
     }
 }

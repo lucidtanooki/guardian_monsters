@@ -12,21 +12,24 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 
+import java.util.Observable;
+import java.util.Observer;
+
 import de.limbusdev.guardianmonsters.model.Inventory;
 import de.limbusdev.guardianmonsters.model.Item;
-import de.limbusdev.guardianmonsters.model.ItemInfo;
 
 /**
- * Created by georg on 17.02.17.
+ * Created by Georg Eckert on 17.02.17.
  */
 
-public class ItemsSubMenu extends AInventorySubMenu {
+public class ItemsSubMenu extends AInventorySubMenu implements Observer {
 
     private Inventory inventory;
     private Table itemTable;
     private ItemDetailViewWidget detailView;
+    private int lastChosenItem=0;
 
-    public ItemsSubMenu(Skin skin) {
+    public ItemsSubMenu(Skin skin, Inventory inventory) {
         super(skin);
 
         ItemCategoryToolbar.CallbackHandler callbacks = new ItemCategoryToolbar.CallbackHandler() {
@@ -59,6 +62,7 @@ public class ItemsSubMenu extends AInventorySubMenu {
         Group itemListView = new Group();
 
         itemTable = new Table();
+        itemTable.align(Align.topLeft);
 
         ScrollPane scrollPane = new ScrollPane(itemTable, getSkin());
 
@@ -70,20 +74,22 @@ public class ItemsSubMenu extends AInventorySubMenu {
         itemListView.addActor(scrollPane);
         addActor(itemListView);
 
-        init();
+        init(inventory);
     }
 
-    public void init(Inventory inventory) {
+    private void init(Inventory inventory) {
+        itemTable.clearChildren();
         this.inventory = inventory;
+        inventory.addObserver(this);
 
         Array<Button> buttons = new Array<>();
-        ButtonGroup<TextButton> btnGroup = new ButtonGroup<>();
+        final ButtonGroup<TextButton> btnGroup = new ButtonGroup<>();
         btnGroup.setMinCheckCount(1);
         btnGroup.setMaxCheckCount(1);
 
         int counter = 0;
         for(final Item i : inventory.getItems().keys()) {
-            final ItemInventoryButton item = new ItemInventoryButton(i, getSkin(), "item-button-sandstone");
+            final ItemInventoryButton item = new ItemInventoryButton(i, getSkin(), "item-button-sandstone", inventory);
             inventory.addObserver(item);
             if(counter == 0) item.setChecked(true);
             counter++;
@@ -91,42 +97,44 @@ public class ItemsSubMenu extends AInventorySubMenu {
             buttons.add(item);
             btnGroup.add(item);
             itemTable.row().spaceBottom(1);
+
             item.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
                     showItemDetailView(i);
+                    lastChosenItem = btnGroup.getCheckedIndex();
                 }
             });
         }
-    }
 
-    public void init() {
-        Inventory inventory = new Inventory();
-        inventory.putItemInInventory(new Item.Bread());
-        inventory.putItemInInventory(new Item.AngelTear());
-        inventory.putItemInInventory(new Item.MedicineBlue());
-        inventory.putItemInInventory(new Item.MedicineBlue());
-        inventory.putItemInInventory(ItemInfo.getInst().getItem("sword-wood"));
-        inventory.putItemInInventory(ItemInfo.getInst().getItem("claws-rusty"));
-        inventory.putItemInInventory(ItemInfo.getInst().getItem("sword-silver"));
-        inventory.putItemInInventory(ItemInfo.getInst().getItem("sword-knightly-steel"));
-        inventory.putItemInInventory(ItemInfo.getInst().getItem("sword-barb-steel"));
-
-        this.init(inventory);
+        if(lastChosenItem > btnGroup.getButtons().size-1) {
+            lastChosenItem = btnGroup.getButtons().size-1;
+        }
+        btnGroup.setChecked(btnGroup.getButtons().get(lastChosenItem).getText().toString());
     }
 
     private void showItemDetailView(Item item)  {
         if(detailView != null) detailView.remove();
         switch(item.getType()) {
             case EQUIPMENT:
-                detailView = new WeaponDetailViewWidget(getSkin());
+                detailView = new WeaponDetailViewWidget(getSkin(), inventory);
                 break;
             default:
-                detailView = new ItemDetailViewWidget(getSkin());
+                detailView = new ItemDetailViewWidget(getSkin(), inventory);
                 break;
         }
         detailView.setPosition(264,2, Align.bottomLeft);
         detailView.init(item);
         addActor(detailView);
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        if(o instanceof Inventory && arg instanceof Item) {
+            // If item got deleted completely
+            if(!inventory.getItems().containsKey((Item)arg)) {
+                init(inventory);
+            }
+        }
     }
 }

@@ -1,10 +1,14 @@
 package de.limbusdev.guardianmonsters.model;
 
+import com.badlogic.gdx.math.MathUtils;
+
 /**
  * Created by georg on 17.02.17.
  */
 
 public abstract class Item {
+    private static int idCounter=0;
+    public final int ID;
     private String name;
     private TYPE type;
 
@@ -15,6 +19,8 @@ public abstract class Item {
     public Item(String name, TYPE type) {
         this.name = name;
         this.type = type;
+        this.ID = idCounter;
+        idCounter++;
     }
 
     public String getName() {
@@ -44,15 +50,18 @@ public abstract class Item {
     }
 
 
-    public static class Bread extends Item {
+    public static class HPCure extends Item {
 
-        public Bread() {
-            super("bread", TYPE.PHYSICAL_HEAL);
+        private int value;
+
+        public HPCure(String name, int value) {
+            super(name, TYPE.PHYSICAL_HEAL);
+            this.value = value;
         }
 
         @Override
         public void apply(Monster m) {
-            m.healHP(10);
+            m.healHP(value);
         }
 
         @Override
@@ -61,15 +70,18 @@ public abstract class Item {
         }
     }
 
-    public static class AngelTear extends Item {
+    public static class Reviver extends Item {
 
-        public AngelTear() {
-            super("angel-tear", TYPE.REVIVE);
+        private float fraction;
+
+        public Reviver(String name, float fraction) {
+            super(name, TYPE.REVIVE);
+            this.fraction = fraction;
         }
 
         @Override
         public void apply(Monster m) {
-            m.healHP(m.getHPfull()/2);
+            m.healHP(MathUtils.round(m.getHPfull()*fraction));
         }
 
         @Override
@@ -78,15 +90,18 @@ public abstract class Item {
         }
     }
 
-    public static class MedicineBlue extends Item {
+    public static class MPCure extends Item {
 
-        public MedicineBlue() {
-            super("medicine-blue", TYPE.MAGIC_HEAL);
+        private int value;
+
+        public MPCure(String name, int value) {
+            super(name, TYPE.MAGIC_HEAL);
+            this.value = value;
         }
 
         @Override
         public void apply(Monster m) {
-            m.healMP(10);
+            m.healMP(value);
         }
 
         @Override

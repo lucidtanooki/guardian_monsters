@@ -34,7 +34,7 @@ public class GS {
     /* ..................................................................... GETTERS & SETTERS .. */
 
     // ................................................................................... DEBUGGING
-    public static final boolean DEBUGGING_ON = false;
+    public static final boolean DEBUGGING_ON = true;
     public final static DebugMode DEBUG_MODE = DebugMode.INVENTORY;
     public final static int startMap = 251;
 

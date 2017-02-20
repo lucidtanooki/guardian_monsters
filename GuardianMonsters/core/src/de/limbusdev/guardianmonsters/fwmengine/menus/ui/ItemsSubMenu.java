@@ -13,8 +13,10 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ObjectMap;
 
+import de.limbusdev.guardianmonsters.model.Equipment;
 import de.limbusdev.guardianmonsters.model.Inventory;
 import de.limbusdev.guardianmonsters.model.Item;
+import de.limbusdev.guardianmonsters.model.ItemInfo;
 
 /**
  * Created by georg on 17.02.17.
@@ -62,7 +64,7 @@ public class ItemsSubMenu extends AInventorySubMenu {
         ScrollPane scrollPane = new ScrollPane(itemTable, getSkin());
         init();
 
-        scrollPane.setSize(192,196);
+        scrollPane.setSize(192,200);
         scrollPane.setPosition(2,2);
         scrollPane.setScrollBarPositions(false,true);
         itemListView.setPosition(68,0, Align.bottomLeft);
@@ -94,13 +96,15 @@ public class ItemsSubMenu extends AInventorySubMenu {
 
     public void init() {
         Inventory inventory = new Inventory();
-        inventory.putItemInInventory(new Item("tent"));
-        inventory.putItemInInventory(new Item("potion-black"));
-        inventory.putItemInInventory(new Item("potion-red"));
-        inventory.putItemInInventory(new Item("potion-green"));
-        inventory.putItemInInventory(new Item("potion-blue"));
-        inventory.putItemInInventory(new Item("guardian-crystal-water"));
-        inventory.putItemInInventory(new Item("antivenom"));
+        inventory.putItemInInventory(new Item.Bread());
+        inventory.putItemInInventory(new Item.AngelTear());
+        inventory.putItemInInventory(new Item.MedicineBlue());
+        inventory.putItemInInventory(new Item.MedicineBlue());
+        inventory.putItemInInventory(ItemInfo.getInst().getItem("sword-wood"));
+        inventory.putItemInInventory(ItemInfo.getInst().getItem("claws-rusty"));
+        inventory.putItemInInventory(ItemInfo.getInst().getItem("sword-silver"));
+        inventory.putItemInInventory(ItemInfo.getInst().getItem("sword-knightly-steel"));
+        inventory.putItemInInventory(ItemInfo.getInst().getItem("sword-barb-steel"));
 
         this.init(inventory);
     }

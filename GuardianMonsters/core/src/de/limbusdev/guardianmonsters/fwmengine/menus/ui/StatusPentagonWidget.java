@@ -5,6 +5,10 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.utils.Align;
 
 import de.limbusdev.guardianmonsters.geometry.IntVec2;
 import de.limbusdev.guardianmonsters.model.Monster;
@@ -17,19 +21,26 @@ import de.limbusdev.guardianmonsters.model.Monster;
  * Created by Georg Eckert on 16.02.17.
  */
 
-public class StatusPentagonWidget extends Actor {
+public class StatusPentagonWidget extends Group {
 
     private ShapeRenderer shpRend;
     private float[] points;
     private IntVec2 center;
     private Color color = Color.valueOf("eb8931ff");
     private boolean initialized;
+    private Image statPentagon;
 
-    public StatusPentagonWidget() {
+    public StatusPentagonWidget(Skin skin) {
+        setSize(100,80);
         shpRend = new ShapeRenderer();
-        center = new IntVec2(32,30);
+        center = new IntVec2(50,34);
         initialized = false;
 
+        statPentagon = new Image();
+        statPentagon.setSize(100,80);
+        statPentagon.setPosition(0, 0, Align.bottomLeft);
+        statPentagon.setDrawable(skin.getDrawable("statPentagram-symbols"));
+        addActor(statPentagon);
     }
 
     public void init(Monster monster) {
@@ -59,6 +70,7 @@ public class StatusPentagonWidget extends Actor {
         initialized = true;
     }
 
+    @Override
     public void draw(Batch batch, float parentAlpha) {
         if(!initialized) return;
 
@@ -83,6 +95,7 @@ public class StatusPentagonWidget extends Actor {
         shpRend.end();
 
         batch.begin();
+        super.draw(batch,parentAlpha);
     }
 
 }

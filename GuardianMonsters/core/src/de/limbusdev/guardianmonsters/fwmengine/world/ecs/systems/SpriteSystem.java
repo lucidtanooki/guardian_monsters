@@ -26,7 +26,7 @@ public class SpriteSystem extends EntitySystem {
     }
     /* ............................................................................... METHODS .. */
     public void addedToEngine(Engine engine) {
-        // Get all entities with either Sprite-, Weapon- or CharacterSprite Components
+        // Get all entities with either Sprite-, Equipment- or CharacterSprite Components
         visibleEntities = engine.getEntitiesFor(Family.one(
                 SpriteComponent.class,
                 CharacterSpriteComponent.class

@@ -124,6 +124,16 @@ public class Monster extends Observable {
         else return false;
     }
 
+    public void healHP(int value) {
+        this.HP += value;
+        if(this.HP > this.HPfull) this.HP = this.HPfull;
+    }
+
+    public void healMP(int value) {
+        this.MP += value;
+        if(this.MP > this.MPfull) this.MP = this.MPfull;
+    }
+
     /* ..................................................................... GETTERS & SETTERS .. */
 
     /**

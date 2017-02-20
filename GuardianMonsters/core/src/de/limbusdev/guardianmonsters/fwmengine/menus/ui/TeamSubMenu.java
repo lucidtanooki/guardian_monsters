@@ -61,20 +61,14 @@ public class TeamSubMenu extends AInventorySubMenu {
         monsterView.addActor(monsterViewBg);
         monsterImg = new Image();
         monsterImg.setSize(128,128);
-        monsterImg.setPosition(6,200-4,Align.topLeft);
+        monsterImg.setPosition(6,202,Align.topLeft);
         monsterImg.setDrawable(new TextureRegionDrawable(Services.getMedia().getMonsterSprite(team.get(0).ID)));
         monsterView.addActor(monsterImg);
 
-        statPent = new StatusPentagonWidget();
-        statPent.setSize(64,64);
-        statPent.setPosition(38+2,8,Align.bottomLeft);
+        statPent = new StatusPentagonWidget(skin);
+        statPent.init(team.get(0));
+        statPent.setPosition(20+2,4,Align.bottomLeft);
         monsterView.addActor(statPent);
-        Image statPentagon = new Image();
-        statPentagon.setSize(64,64);
-        statPentagon.setPosition(38+2,8,Align.bottomLeft);
-        statPentagon.setDrawable(skin.getDrawable("statPentagram"));
-        monsterView.addActor(statPentagon);
-
 
         addActor(monsterChoice);
         addActor(monsterStats);

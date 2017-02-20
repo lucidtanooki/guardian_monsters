@@ -17,7 +17,7 @@ public class MonsterInformation {
     private static MonsterInformation instance;
     /* ........................................................................... CONSTRUCTOR .. */
     private MonsterInformation() {
-        this.monsterNames = new Array<String>();
+        this.monsterNames = new Array<>();
         for(int i = 0; i< GS.MONSTER_SPRITES; i++) monsterNames.add("");
 
         monsterNames.set(1, "mon_buuni");

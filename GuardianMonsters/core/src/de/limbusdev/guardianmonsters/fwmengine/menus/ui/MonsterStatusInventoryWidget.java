@@ -57,14 +57,16 @@ public class MonsterStatusInventoryWidget extends Group {
         addActor(name);
 
         valueLabels = new ArrayMap<>();
-        Label key, value;
-        String[] labels = {"HP", "MP", "EXP", "PStr", "PDef", "MStr", "MDef", "Speed"};
+        Label value;
+        String[] labels = {"hp", "mp", "exp", "pstr", "pdef", "mstr", "mdef", "speed"};
+        Image key;
         for(int i=0; i<labels.length; i++) {
             Image valueBg = new Image(skin.getDrawable("key-bg"));
             valueBg.setPosition(offX-2,offY-gap*(i+1)+2,Align.topLeft);
             addActor(valueBg);
 
-            key = new Label(labels[i], skin, "default");
+            key = new Image(skin.getDrawable("stats-symbol-" + labels[i]));
+            key.setSize(16,16);
             key.setPosition(offX, offY-gap*(i+1), Align.topLeft);
             addActor(key);
 
@@ -79,13 +81,13 @@ public class MonsterStatusInventoryWidget extends Group {
 
     public void init(Monster m) {
         name.setText(Services.getL18N().l18n().get(MonsterInformation.getInstance().monsterNames.get(m.ID)));
-        valueLabels.get("HP").setText(m.getHP() + "/" + m.getHPfull());
-        valueLabels.get("MP").setText(m.getMP() + "/" + m.getMPfull());
-        valueLabels.get("EXP").setText(m.getExp() + "/" + m.expAvailableInThisLevel());
-        valueLabels.get("PStr").setText(Integer.toString(m.pStrFull));
-        valueLabels.get("PDef").setText(Integer.toString(m.pDefFull));
-        valueLabels.get("MStr").setText(Integer.toString(m.mStrFull));
-        valueLabels.get("MDef").setText(Integer.toString(m.mDefFull));
-        valueLabels.get("Speed").setText(Integer.toString(m.getSpeedFull()));
+        valueLabels.get("hp").setText(m.getHP() + "/" + m.getHPfull());
+        valueLabels.get("mp").setText(m.getMP() + "/" + m.getMPfull());
+        valueLabels.get("exp").setText(m.getExp() + "/" + m.expAvailableInThisLevel());
+        valueLabels.get("pstr").setText(Integer.toString(m.pStrFull));
+        valueLabels.get("pdef").setText(Integer.toString(m.pDefFull));
+        valueLabels.get("mstr").setText(Integer.toString(m.mStrFull));
+        valueLabels.get("mdef").setText(Integer.toString(m.mDefFull));
+        valueLabels.get("speed").setText(Integer.toString(m.getSpeedFull()));
     }
 }

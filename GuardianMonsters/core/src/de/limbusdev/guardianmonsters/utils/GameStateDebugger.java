@@ -28,9 +28,9 @@ public class GameStateDebugger {
 
     private void setUpTestInventory() {
         TeamComponent herTeam = new TeamComponent();
-        herTeam.monsters.put(0,BattleFactory.getInstance().createMonster(1));
-        herTeam.monsters.put(1,BattleFactory.getInstance().createMonster(2));
-        herTeam.monsters.put(2,BattleFactory.getInstance().createMonster(3));
+        herTeam.monsters.put(0,BattleFactory.getInstance().createMonster(4));
+        herTeam.monsters.put(1,BattleFactory.getInstance().createMonster(7));
+        herTeam.monsters.put(2,BattleFactory.getInstance().createMonster(8));
         InventoryScreen ivs = new InventoryScreen(herTeam);
         game.setScreen(ivs);
     }

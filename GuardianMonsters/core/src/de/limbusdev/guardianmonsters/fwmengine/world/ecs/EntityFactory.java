@@ -10,6 +10,7 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.ColliderComp
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.ConversationComponent;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.HeroComponent;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.InputComponent;
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.InventoryComponent;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PathComponent;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PositionComponent;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.SaveGameComponent;
@@ -24,6 +25,7 @@ import de.limbusdev.guardianmonsters.fwmengine.world.model.MapDescriptionInfo;
 import de.limbusdev.guardianmonsters.fwmengine.world.model.MapPersonInformation;
 import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager;
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.BattleFactory;
+import de.limbusdev.guardianmonsters.model.Inventory;
 import de.limbusdev.guardianmonsters.utils.GS;
 import de.limbusdev.guardianmonsters.utils.GameState;
 import de.limbusdev.guardianmonsters.utils.UnitConverter;
@@ -96,6 +98,10 @@ public class EntityFactory {
             team.monsters = gameState.team;
         }
         hero.add(team);
+
+        // Inventory
+        InventoryComponent inventory = new InventoryComponent(new Inventory());
+        hero.add(inventory);
 
         // Mark as Hero
         hero.add(new HeroComponent());

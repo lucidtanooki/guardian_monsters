@@ -7,6 +7,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ArrayMap;
 
 import de.limbusdev.guardianmonsters.model.Equipment;
+import de.limbusdev.guardianmonsters.model.Inventory;
 import de.limbusdev.guardianmonsters.model.Item;
 
 /**
@@ -17,8 +18,8 @@ public class WeaponDetailViewWidget extends ItemDetailViewWidget {
 
     private ArrayMap<String,Label> valueLabels;
 
-    public WeaponDetailViewWidget(Skin skin) {
-        super(skin);
+    public WeaponDetailViewWidget(Skin skin, Inventory inventory) {
+        super(skin, inventory);
 
         int offX = 4;
         int offY = 74;
@@ -41,7 +42,7 @@ public class WeaponDetailViewWidget extends ItemDetailViewWidget {
             key.setPosition(offX, offY-gap*(i+1-reset), Align.topLeft);
             addActor(key);
 
-            value = new Label("0", skin, "default");
+            value = new Label("-", skin, "default");
             value.setPosition(offX+17, offY-gap*(i+1-reset), Align.topLeft);
             addActor(value);
             valueLabels.put(labels[i], value);
@@ -53,33 +54,48 @@ public class WeaponDetailViewWidget extends ItemDetailViewWidget {
         super.init(item);
 
         Equipment eq = (Equipment) item;
+        String sign;
 
         int value = eq.getAddsHP();
-        String sign = value >= 0 ? "+" : "-";
-        valueLabels.get("hp").setText(sign + Integer.toString(value) + "%");
+        if(value != 0) {
+            sign = value >= 0 ? "+" : "-";
+            valueLabels.get("hp").setText(sign + Integer.toString(value) + "%");
+        }
 
         value = eq.getAddsMP();
-        sign = value >= 0 ? "+" : "-";
-        valueLabels.get("mp").setText(sign + Integer.toString(value) + "%");
+        if(value != 0) {
+            sign = value >= 0 ? "+" : "-";
+            valueLabels.get("mp").setText(sign + Integer.toString(value) + "%");
+        }
 
         value = eq.getAddsPStr();
-        sign = value >= 0 ? "+" : "-";
-        valueLabels.get("pstr").setText(sign + Integer.toString(value));
+        if(value != 0) {
+            sign = value >= 0 ? "+" : "-";
+            valueLabels.get("pstr").setText(sign + Integer.toString(value));
+        }
 
         value = eq.getAddsPDef();
-        sign = value >= 0 ? "+" : "-";
-        valueLabels.get("pdef").setText(sign + Integer.toString(value));
+        if(value != 0) {
+            sign = value >= 0 ? "+" : "-";
+            valueLabels.get("pdef").setText(sign + Integer.toString(value));
+        }
 
         value = eq.getAddsMStr();
-        sign = value >= 0 ? "+" : "-";
-        valueLabels.get("mstr").setText(sign + Integer.toString(value));
+        if(value != 0) {
+            sign = value >= 0 ? "+" : "-";
+            valueLabels.get("mstr").setText(sign + Integer.toString(value));
+        }
 
         value = eq.getAddsMDef();
-        sign = value >= 0 ? "+" : "-";
-        valueLabels.get("mdef").setText(sign + Integer.toString(value));
+        if(value != 0) {
+            sign = value >= 0 ? "+" : "-";
+            valueLabels.get("mdef").setText(sign + Integer.toString(value));
+        }
 
         value = eq.getAddsSpeed();
-        sign = value >= 0 ? "+" : "-";
-        valueLabels.get("speed").setText(sign + Integer.toString(value));
+        if(value != 0) {
+            sign = value >= 0 ? "+" : "-";
+            valueLabels.get("speed").setText(sign + Integer.toString(value));
+        }
     }
 }

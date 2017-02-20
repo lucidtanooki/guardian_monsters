@@ -169,7 +169,8 @@ public class HUD extends InputAdapter {
         teamButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                Services.getScreenManager().pushScreen(new InventoryScreen(Components.team.get(hero)));
+                Services.getScreenManager().pushScreen(new InventoryScreen(
+                    Components.team.get(hero), Components.inventory.get(hero).inventory));
             }
         });
         this.menuButtons.addActor(teamButton);

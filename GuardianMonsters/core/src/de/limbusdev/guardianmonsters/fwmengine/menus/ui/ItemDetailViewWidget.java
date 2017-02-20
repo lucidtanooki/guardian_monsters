@@ -1,14 +1,17 @@
 package de.limbusdev.guardianmonsters.fwmengine.menus.ui;
 
 import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.I18NBundle;
 
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
+import de.limbusdev.guardianmonsters.model.Inventory;
 import de.limbusdev.guardianmonsters.model.Item;
 
 /**
@@ -20,11 +23,18 @@ public class ItemDetailViewWidget extends Group {
     private Label itemName, itemDescription;
     private Image itemImg;
     private Skin skin;
+    private ReassuranceWidget reassuranceWidget;
+    private Inventory inventory;
+    private Item item;
 
-    public ItemDetailViewWidget(Skin skin) {
+    public ItemDetailViewWidget(Skin skin, Inventory inventory) {
         super();
 
         this.skin = skin;
+        this.inventory = inventory;
+
+        reassuranceWidget = new ReassuranceWidget(skin);
+        reassuranceWidget.setPosition(-264,0,Align.bottomLeft);
 
         Label bgLabel = new Label("", skin, "paper");
         bgLabel.setSize(162,200);
@@ -55,6 +65,12 @@ public class ItemDetailViewWidget extends Group {
 
         ImageButton delete = new ImageButton(skin, "button-delete");
         delete.setPosition(24,160,Align.bottomLeft);
+        delete.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                addActor(reassuranceWidget);
+            }
+        });
         addActor(delete);
 
         ImageButton use = new ImageButton(skin, "button-use");
@@ -64,11 +80,26 @@ public class ItemDetailViewWidget extends Group {
 
     }
 
-    public void init(Item item) {
+    public void init(Item itemToShow) {
+        this.item = itemToShow;
+
         I18NBundle locale = Services.getL18N().l18n();
         itemName.setText(locale.get(item.getName()));
         itemDescription.setText(locale.get(item.getName()+"-description"));
         itemImg.setDrawable(skin, item.getName());
+
+        reassuranceWidget.question.setText(locale.format("reassurance-throwaway", locale.get(item.getName())));
+        reassuranceWidget.buttonYes.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                inventory.takeItemFromInventory(item);
+                if(inventory.getItems().containsKey(item)) {
+                    reassuranceWidget.remove();
+                } else {
+                    remove();
+                }
+            }
+        });
     }
 
     public Skin getSkin() {

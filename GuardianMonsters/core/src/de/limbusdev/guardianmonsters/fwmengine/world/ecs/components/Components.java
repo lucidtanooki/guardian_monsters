@@ -33,6 +33,8 @@ public abstract class Components {
             ComponentMapper.getFor(CharacterSpriteComponent.class);
     public static ComponentMapper<SpriteComponent> sprite =
             ComponentMapper.getFor(SpriteComponent.class);
+    public static ComponentMapper<InventoryComponent> inventory =
+        ComponentMapper.getFor(InventoryComponent.class);
     /* ........................................................................... CONSTRUCTOR .. */
     
     /* ............................................................................... METHODS .. */

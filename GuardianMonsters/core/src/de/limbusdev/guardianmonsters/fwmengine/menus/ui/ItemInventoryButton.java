@@ -21,19 +21,23 @@ public class ItemInventoryButton extends TextButton implements Observer {
 
     private Item item;
     private Label counter;
+    private Inventory inventory;
 
-    public ItemInventoryButton(Item item, Skin skin) {
+    public ItemInventoryButton(Item item, Skin skin, Inventory inventory) {
         super(Services.getL18N().l18n().get(item.getName()), skin);
+        this.inventory = inventory;
         augmentButton(item);
     }
 
-    public ItemInventoryButton(Item item, Skin skin, String styleName) {
+    public ItemInventoryButton(Item item, Skin skin, String styleName, Inventory inventory) {
         super(Services.getL18N().l18n().get(item.getName()), skin, styleName);
+        this.inventory = inventory;
         augmentButton(item);
     }
 
-    public ItemInventoryButton(Item item, TextButtonStyle style) {
+    public ItemInventoryButton(Item item, TextButtonStyle style, Inventory inventory) {
         super(Services.getL18N().l18n().get(item.getName()), style);
+        this.inventory = inventory;
         augmentButton(item);
     }
 
@@ -43,7 +47,7 @@ public class ItemInventoryButton extends TextButton implements Observer {
         this.item = item;
 
         getLabel().setAlignment(Align.left);
-        counter = new Label("1", getSkin());
+        counter = new Label(inventory.getItems().get(item).toString(), getSkin());
         counter.getStyle().font = getStyle().font;
         counter.setAlignment(Align.center);
         add(counter).width(32);
@@ -64,7 +68,11 @@ public class ItemInventoryButton extends TextButton implements Observer {
             Inventory invt = (Inventory) o;
             Item updatedItem = (Item) arg;
             if(updatedItem.equals(this.item)) {
-                counter.setText(invt.getItems().get(updatedItem).toString());
+                if(invt.getItems().containsKey(this.item)) {
+                    counter.setText(invt.getItems().get(updatedItem).toString());
+                } else {
+                    remove();
+                }
             }
         }
     }

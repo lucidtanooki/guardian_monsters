@@ -21,6 +21,10 @@ public abstract class Item {
         return name;
     }
 
+    public TYPE getType() {
+        return type;
+    }
+
     public abstract void apply(Monster m);
 
     public abstract boolean applicable(Monster m);

@@ -47,10 +47,12 @@ public class InventoryScreen implements Screen {
 
         views = new ArrayMap<>();
 
+        tileBackground();
         assembleToolbar();
 
         views.put("team", new TeamSubMenu(skin, team));
         views.put("items", new ItemsSubMenu(skin, inventory, team.monsters));
+        views.put("ability", new AbilityMapSubMenu(skin));
 
         stage.addActor(views.get("team"));
     }
@@ -83,6 +85,7 @@ public class InventoryScreen implements Screen {
             @Override
             public void onAbilityButton() {
                 removeSubMenus();
+                stage.addActor(views.get("ability"));
             }
 
             @Override
@@ -95,6 +98,17 @@ public class InventoryScreen implements Screen {
         toolBar.setPosition(0,GS.HEIGHT-36,Align.bottomLeft);
 
         stage.addActor(toolBar);
+    }
+
+    private void tileBackground() {
+        // fill background
+        for(int x=0; x<27; x++) {
+            for(int y=0; y<13; y++) {
+                Image bgTile = new Image(skin.getDrawable("bg-pattern-3"));
+                bgTile.setPosition(x*16, y*16-4, Align.bottomLeft);
+                stage.addActor(bgTile);
+            }
+        }
     }
 
     @Override

@@ -2,6 +2,7 @@ package de.limbusdev.guardianmonsters.fwmengine.battle.ui;
 
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.actions.RunnableAction;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
@@ -22,6 +23,7 @@ import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.MonsterMenuWidg
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.SevenButtonsWidget;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.TargetMenuWidget;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.WidgetObserver;
+import de.limbusdev.guardianmonsters.fwmengine.managers.Audio;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TeamComponent;
 import de.limbusdev.guardianmonsters.enums.ButtonIDs;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
@@ -624,9 +626,26 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
 
             state = BattleState.ENDOFBATTLE;
 
-            Action muteMusicAction = Services.getAudio().getMuteAudioAction();
+            Runnable runnable = new Runnable() {
+                @Override
+                public void run() {
+                    Services.getAudio().playMusic(AudioAssets.victoryFanfareMusic);
+                }
+            };
+            Runnable runnable2 = new Runnable() {
+                @Override
+                public void run() {
+                    Services.getAudio().playMusic(AudioAssets.victorySongMusic);
+                }
+            };
+            Action endOfBattleMusicSequence = Actions.sequence(
+                Services.getAudio().getMuteAudioAction(),
+                Actions.run(runnable),
+                Actions.delay(5),
+                Actions.run(runnable2)
+            );
 
-            stage.addAction(muteMusicAction);
+            stage.addAction(endOfBattleMusicSequence);
         }
 
         public void toAnimation() {

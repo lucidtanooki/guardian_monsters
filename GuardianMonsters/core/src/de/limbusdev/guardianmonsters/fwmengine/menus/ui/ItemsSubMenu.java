@@ -87,30 +87,34 @@ public class ItemsSubMenu extends AInventorySubMenu implements Observer {
         btnGroup.setMinCheckCount(1);
         btnGroup.setMaxCheckCount(1);
 
-        int counter = 0;
-        for(final Item i : inventory.getItems().keys()) {
-            final ItemInventoryButton item = new ItemInventoryButton(i, getSkin(), "item-button-sandstone", inventory);
-            inventory.addObserver(item);
-            if(counter == 0) item.setChecked(true);
-            counter++;
-            itemTable.add(item).width(192).height(40);
-            buttons.add(item);
-            btnGroup.add(item);
-            itemTable.row().spaceBottom(1);
+        // Only proceed of there are any items
+        if(inventory.getItems().size > 0) {
+            int counter = 0;
+            for (final Item i : inventory.getItems().keys()) {
+                final ItemInventoryButton item = new ItemInventoryButton(i, getSkin(), "item-button-sandstone", inventory);
+                inventory.addObserver(item);
+                if (counter == 0) item.setChecked(true);
+                counter++;
+                itemTable.add(item).width(192).height(40);
+                buttons.add(item);
+                btnGroup.add(item);
+                itemTable.row().spaceBottom(1);
 
-            item.addListener(new ClickListener() {
-                @Override
-                public void clicked(InputEvent event, float x, float y) {
-                    showItemDetailView(i);
-                    lastChosenItem = btnGroup.getCheckedIndex();
-                }
-            });
-        }
+                item.addListener(new ClickListener() {
+                    @Override
+                    public void clicked(InputEvent event, float x, float y) {
+                        showItemDetailView(i);
+                        lastChosenItem = btnGroup.getCheckedIndex();
+                    }
+                });
+            }
 
-        if(lastChosenItem > btnGroup.getButtons().size-1) {
-            lastChosenItem = btnGroup.getButtons().size-1;
+            if (lastChosenItem > btnGroup.getButtons().size - 1) {
+                lastChosenItem = btnGroup.getButtons().size - 1;
+            }
+
+            btnGroup.setChecked(btnGroup.getButtons().get(lastChosenItem).getText().toString());
         }
-        btnGroup.setChecked(btnGroup.getButtons().get(lastChosenItem).getText().toString());
     }
 
     private void showItemDetailView(Item item)  {

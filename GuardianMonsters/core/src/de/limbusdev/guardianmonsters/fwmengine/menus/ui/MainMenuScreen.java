@@ -257,6 +257,7 @@ public class MainMenuScreen implements Screen {
                         Actions.moveBy(0, 2000, 15),
                         Actions.fadeOut(2),Actions.visible(false)
                 ));
+                // TODO fading out has some problems
             }
         });
         buttons.put("credits", button);

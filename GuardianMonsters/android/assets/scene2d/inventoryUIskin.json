@@ -19,8 +19,10 @@
     b-toolbar-side-other:     {down: toolBarButtonSide-other-down,        up: toolBarButtonSide-other-up,     checked: toolBarButtonSide-other-down},
     b-toolbar-side-key:       {down: toolBarButtonSide-key-down,          up: toolBarButtonSide-key-up,       checked: toolBarButtonSide-key-down},
 
-    button-delete:  {down: button-delete-down, up: button-delete-up},
-    button-use:     {down: button-use-down,    up: button-use-up},
+    button-delete:    {down: button-delete-down, up: button-delete-up},
+    button-use:       {down: button-use-down,    up: button-use-up},
+    button-switch:    {down: button-switch-down,    up: button-switch-up},
+    button-check:     {down: button-check-down,    up: button-check-up, checked: button-check-down},
 
 	},
 

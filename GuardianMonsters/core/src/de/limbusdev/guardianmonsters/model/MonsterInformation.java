@@ -103,7 +103,7 @@ public class MonsterInformation {
         attacks.put(20, AttackInfo.eartha);
         elements = new Array<>();
         elements.add(Element.EARTH);
-        base = new BaseStat(3,399,666,800,777,405,100,600);
+        base = new BaseStat(3,50,30,24,26,20,24,24);
         statusInfos.put(3, new MonsterStatusInformation(
             3, "mon_boxbuuni", attacks, false, 0, 0, elements, base));
 

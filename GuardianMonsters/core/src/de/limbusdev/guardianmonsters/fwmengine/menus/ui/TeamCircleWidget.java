@@ -28,12 +28,16 @@ import static com.badlogic.gdx.controllers.ControlType.button;
 public class TeamCircleWidget extends Group {
 
     private Array<IntVec2> positions;
-    private final ClickHandler handler;
+    private ClickHandler handler;
     private ButtonGroup<ImageButton> memberButtons;
+    private int currentPosition=0, oldPosition=0;
+    private Skin skin;
+    private Group buttons;
 
     public TeamCircleWidget(Skin skin, ArrayMap<Integer,Monster> team, ClickHandler clHandler) {
         super();
 
+        this.skin = skin;
         this.handler = clHandler;
 
         positions = new Array<>();
@@ -50,7 +54,16 @@ public class TeamCircleWidget extends Group {
         bgImg.setPosition(0,0, Align.bottomLeft);
         addActor(bgImg);
 
+        buttons = new Group();
+        addActor(buttons);
+
+        init(team);
+
+    }
+
+    public void init(ArrayMap<Integer,Monster> team) {
         memberButtons = new ButtonGroup<>();
+        buttons.clearChildren();
 
         for(final int key : team.keys()) {
             Monster m = team.get(key);
@@ -70,18 +83,35 @@ public class TeamCircleWidget extends Group {
             button.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
+                    oldPosition = currentPosition;
+                    currentPosition = key;
                     handler.onTeamMemberButton(key);
+                    System.out.println("Current Position set to " + key);
                 }
             });
 
             memberButtons.add(button);
-            addActor(button);
+            buttons.addActor(button);
+            if(key == currentPosition) {
+                button.setChecked(true);
+            }
         }
         memberButtons.setMaxCheckCount(1);
+    }
 
+    public int getCurrentPosition() {
+        return currentPosition;
+    }
+
+    public int getOldPosition() {
+        return oldPosition;
+    }
+
+    public void setHandler(ClickHandler handler) {
+        this.handler = handler;
     }
 
     public interface ClickHandler {
-        public void onTeamMemberButton(int position);
+        void onTeamMemberButton(int position);
     }
 }

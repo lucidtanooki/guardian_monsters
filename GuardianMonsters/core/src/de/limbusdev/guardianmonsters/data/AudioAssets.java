@@ -18,6 +18,8 @@ public class AudioAssets {
     private ArrayMap<SFXType,Array<String>> battleSFX;
     private Array<String> bgMusicTown;
     private Array<String> battleMusic;
+    public static final String victoryFanfareMusic = "music/victory_fanfare.ogg";
+    public static final String victorySongMusic = "music/victory_song.ogg";
 
     private static AudioAssets instance;
 
@@ -43,7 +45,7 @@ public class AudioAssets {
         bgMusicTown.add("music/town_loop_2.ogg");
 
         battleMusic = new Array<String>();
-        battleMusic.add("music/battle_1.mp3");
+        battleMusic.add("music/battle_1.ogg");
 
         // SFX
         battleSFX = new ArrayMap<SFXType,Array<String>>();
@@ -99,6 +101,8 @@ public class AudioAssets {
         Array<String> musicPaths = new Array<String>();
         musicPaths.addAll(battleMusic);
         musicPaths.addAll(bgMusicTown);
+        musicPaths.add(victoryFanfareMusic);
+        musicPaths.add(victorySongMusic);
         return musicPaths;
     }
 }

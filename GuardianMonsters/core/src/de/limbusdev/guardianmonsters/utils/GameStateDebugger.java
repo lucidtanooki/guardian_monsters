@@ -38,6 +38,7 @@ public class GameStateDebugger {
         Inventory inventory = new Inventory();
 
         inventory.putItemInInventory(ItemInfo.getInst().getItem("sword-barb-steel"));
+        inventory.putItemInInventory(ItemInfo.getInst().getItem("sword-excalibur"));
         inventory.putItemInInventory(ItemInfo.getInst().getItem("bread"));
         inventory.putItemInInventory(ItemInfo.getInst().getItem("bread"));
         inventory.putItemInInventory(ItemInfo.getInst().getItem("bread"));

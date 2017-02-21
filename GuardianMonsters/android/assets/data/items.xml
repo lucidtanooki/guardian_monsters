@@ -1,0 +1,123 @@
+<items>
+  <!-- HP Curing Items -->
+  <HPCure>
+    <name>bread</name>
+    <value>10</value>
+  </HPCure>
+  
+  <HPCure>
+    <name>potion-blue</name>
+    <value>50</value>
+  </HPCure>
+  
+  <HPCure>
+    <name>potion-red</name>
+    <value>100</value>
+  </HPCure>
+  
+  <!-- MP Curing Items -->
+  <MPCure>
+    <name>medicine-blue</name>
+    <value>10</value>
+  </MPCure>
+  
+  <!-- Status Curing Items -->
+  <Reviver>
+    <name>angel-tear</name>
+    <fraction>0.5</fraction>
+  </Reviver>
+  
+  <!-- Equipment -->
+  <Equipment>
+    <name>sword-wood</name>
+    <equipment-type>weapon</equipment-type>
+    <addsPStr>1</addsPStr>
+  </Equipment>
+  
+  <Equipment>
+    <name>sword-rusty</name>
+    <equipment-type>weapon</equipment-type>
+    <addsPStr>2</addsPStr>
+  </Equipment>
+  
+  <Equipment>
+    <name>sword-iron</name>
+    <equipment-type>weapon</equipment-type>
+    <addsPStr>3</addsPStr>
+  </Equipment>
+
+  <Equipment>
+    <name>sword-steel</name>
+    <equipment-type>weapon</equipment-type>
+    <addsPStr>4</addsPStr>
+  </Equipment>
+
+  <Equipment>
+    <name>sword-silver</name>
+    <equipment-type>weapon</equipment-type>
+    <addsPStr>4</addsPStr>
+    <addsSpeed>1</addsSpeed>
+  </Equipment>
+
+  <Equipment>
+    <name>sword-titanium</name>
+    <equipment-type>weapon</equipment-type>
+    <addsPStr>5</addsPStr>
+    <addsSpeed>2</addsSpeed>
+  </Equipment>
+
+  <Equipment>
+    <name>sword-knightly-steel</name>
+    <equipment-type>weapon</equipment-type>
+    <addsPStr>5</addsPStr>
+    <addsPDef>1</addsPDef>
+  </Equipment>
+
+  <Equipment>
+    <name>sword-broad-steel</name>
+    <equipment-type>weapon</equipment-type>
+    <addsPStr>6</addsPStr>
+    <addsSpeed>-1</addsSpeed>
+  </Equipment>
+
+  <Equipment>
+    <name>sword-barb-steel</name>
+    <equipment-type>weapon</equipment-type>
+    <addsPStr>6</addsPStr>
+    <addsMDef>1</addsMDef>
+    <addsSpeed>3</addsSpeed>
+  </Equipment>
+
+  <Equipment>
+    <name>sword-gap-steel</name>
+    <equipment-type>weapon</equipment-type>
+    <addsPStr>5</addsPStr>
+    <addsSpeed>3</addsSpeed>
+  </Equipment>
+  
+  <Equipment>
+    <name>claws-wood</name>
+    <equipment-type>weapon</equipment-type>
+    <addsPStr>1</addsPStr>
+  </Equipment>
+  
+  <Equipment>
+    <name>claws-rusty</name>
+    <equipment-type>weapon</equipment-type>
+    <addsPStr>2</addsPStr>
+  </Equipment>
+
+  <Equipment>
+    <name>sword-excalibur</name>
+    <equipment-type>weapon</equipment-type>
+    <addsHP>25</addsHP>
+    <addsMP>20</addsMP>
+    <addsEXP>2</addsEXP>
+    <addsSpeed>10</addsSpeed>
+    <addsPStr>100</addsPStr>
+    <addsPDef>20</addsPDef>
+    <addsMStr>20</addsMStr>
+    <addsMDef>20</addsMDef>
+  </Equipment>
+  
+</items>

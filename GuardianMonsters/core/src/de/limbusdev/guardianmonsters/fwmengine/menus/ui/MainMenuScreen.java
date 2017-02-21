@@ -254,7 +254,7 @@ public class MainMenuScreen implements Screen {
                 creditsScreen.addAction(Actions.sequence(
                         Actions.moveTo(0, GS.RES_Y),
                         Actions.alpha(0), Actions.visible(true), Actions.fadeIn(2),
-                        Actions.moveBy(0, 2000, 12),
+                        Actions.moveBy(0, 2000, 15),
                         Actions.fadeOut(2),Actions.visible(false)
                 ));
             }
@@ -289,8 +289,13 @@ public class MainMenuScreen implements Screen {
             "Moritz, Maria-Christin & Georg Eckert\n\n\n" +
             "Character Templates by PlayerRed-1\n" +
             "\n\n\n" +
-            "Music\n\n" +
-            "\n" +
+            "~ Music ~\n\n" +
+            "Music by Matthew Pablo\n" +
+            "http://www.matthewpablo.com\n\n" +
+            "The Last Encounter (Battle Theme)\n" +
+            "Liveley Meadow (Victory Fanfare & Song)" +
+            "\n\n\n\n" +
+            "Music by other Artists" +
             "City Loop by Homingstar (CC-BY-SA-3.0)\n\n" +
             "CalmBGM by syncopika (CC-BY-3.0)\n\n" +
             "XXXXXX written and produced by Ove Melaa (Omsofware@hotmail.com)\n\n" +

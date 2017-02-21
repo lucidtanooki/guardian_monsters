@@ -14,9 +14,11 @@ public class TeamComponent implements Component {
     // Only 3 monsters may accompany the hero, they can be switched with other monsters at
     // Summoning Points
     public ArrayMap<Integer,Monster> monsters;
+    public int activeInCombat;
 
     public TeamComponent() {
         this.monsters = new ArrayMap<>();
+        activeInCombat = 1;
     }
     /* ........................................................................... CONSTRUCTOR .. */
     

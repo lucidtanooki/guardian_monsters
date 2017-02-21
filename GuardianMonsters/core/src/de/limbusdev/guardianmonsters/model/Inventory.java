@@ -6,7 +6,7 @@ import java.util.Comparator;
 import java.util.Observable;
 
 /**
- * Created by georg on 17.02.17.
+ * Created by Georg Eckert on 17.02.17.
  */
 
 public class Inventory extends Observable {
@@ -41,6 +41,14 @@ public class Inventory extends Observable {
             return item;
         } else {
             return null;
+        }
+    }
+
+    public Integer getItemAmount(Item item) {
+        if(items.containsKey(item)) {
+            return items.get(item);
+        } else {
+            return 0;
         }
     }
 

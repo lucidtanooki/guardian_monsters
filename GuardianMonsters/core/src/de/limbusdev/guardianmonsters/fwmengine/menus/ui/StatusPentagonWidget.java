@@ -33,7 +33,7 @@ public class StatusPentagonWidget extends Group {
     public StatusPentagonWidget(Skin skin) {
         setSize(100,80);
         shpRend = new ShapeRenderer();
-        center = new IntVec2(50,34);
+        center = new IntVec2(50,32);
         initialized = false;
 
         statPentagon = new Image();

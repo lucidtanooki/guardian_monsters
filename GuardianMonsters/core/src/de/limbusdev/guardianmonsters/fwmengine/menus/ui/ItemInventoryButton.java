@@ -42,6 +42,10 @@ public class ItemInventoryButton extends TextButton implements Observer {
     }
 
 
+    /**
+     * Adds preview image and counter to the button
+     * @param item
+     */
     private void augmentButton(Item item) {
 
         this.item = item;
@@ -64,12 +68,15 @@ public class ItemInventoryButton extends TextButton implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        if(o instanceof Inventory && arg instanceof Item) {
-            Inventory invt = (Inventory) o;
+        // if the received update is from Inventory and the given object is an Item
+        if (o instanceof Inventory && arg instanceof Item) {
             Item updatedItem = (Item) arg;
-            if(updatedItem.equals(this.item)) {
-                if(invt.getItems().containsKey(this.item)) {
-                    counter.setText(invt.getItems().get(updatedItem).toString());
+
+            if (updatedItem.equals(this.item)) {
+                Integer amount = inventory.getItemAmount(item);
+
+                if (amount > 0) {
+                    counter.setText(amount.toString());
                 } else {
                     remove();
                 }

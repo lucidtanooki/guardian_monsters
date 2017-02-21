@@ -1,13 +1,17 @@
 package de.limbusdev.guardianmonsters.fwmengine.menus.ui;
 
 import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
-import com.badlogic.gdx.utils.ArrayMap;
 
+import de.limbusdev.guardianmonsters.fwmengine.managers.Media;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TeamComponent;
 import de.limbusdev.guardianmonsters.model.Monster;
 import de.limbusdev.guardianmonsters.utils.GS;
 
@@ -20,39 +24,90 @@ public class TeamSubMenu extends AInventorySubMenu {
     private StatusPentagonWidget statPent;
     private MonsterStatusInventoryWidget monsterStats;
     private Image monsterImg;
+    private Image blackOverlay;
+    private TeamCircleWidget circleWidget;
+    private TeamCircleWidget.ClickHandler choiceHandler, swapHandler;
+    private TeamComponent team;
+    private ImageButton joinsBattleButton;
+    private Group monsterChoice;
 
-    public TeamSubMenu(Skin skin, final ArrayMap<Integer, Monster> team) {
+    public TeamSubMenu(Skin skin, TeamComponent guardians) {
         super(skin);
+        Media media = Services.getMedia();
+        this.team = guardians;
 
-        // ................................................................................ MONSTERS
-        Group monsterChoice = new Group();
+        monsterChoice = new Group();
         monsterChoice.setSize(140, GS.HEIGHT-36);
         monsterChoice.setPosition(0,0, Align.bottomLeft);
         Image monsterChoiceBg = new Image(skin.getDrawable("menu-col-bg"));
         monsterChoiceBg.setPosition(2,2,Align.bottomLeft);
         monsterChoice.addActor(monsterChoiceBg);
 
-        TeamCircleWidget.ClickHandler handler = new TeamCircleWidget.ClickHandler() {
+        choiceHandler = new TeamCircleWidget.ClickHandler() {
             @Override
             public void onTeamMemberButton(int position) {
-                monsterStats.init(team.get(position));
-                monsterImg.setDrawable(new TextureRegionDrawable(Services.getMedia().getMonsterSprite(team.get(position).ID)));
-                statPent.init(team.get(position));
+                showGuardianInformation(position);
             }
         };
 
-        TeamCircleWidget circle = new TeamCircleWidget(skin, team, handler);
-        circle.setPosition(1,32,Align.bottomLeft);
-        monsterChoice.addActor(circle);
+        swapHandler = new TeamCircleWidget.ClickHandler() {
+            @Override
+            public void onTeamMemberButton(int position) {
+                System.out.println("Clicked " + position);
+                int oldPos = circleWidget.getOldPosition();
+                if(position != oldPos) {
+                    Monster currentMonster = team.monsters.get(oldPos);
+                    Monster monsterToSwapWith = team.monsters.get(position);
 
-        // .................................................................................. VALUES
+                    team.monsters.put(oldPos, monsterToSwapWith);
+                    team.monsters.put(position, currentMonster);
+
+                    circleWidget.init(team.monsters);
+                    showGuardianInformation(position);
+                }
+                circleWidget.setHandler(choiceHandler);
+                blackOverlay.remove();
+            }
+        };
+
+        circleWidget = new TeamCircleWidget(skin, team.monsters, choiceHandler);
+        circleWidget.setPosition(1,40,Align.bottomLeft);
+        monsterChoice.addActor(circleWidget);
+
+        blackOverlay = new Image(skin.getDrawable("black-a80"));
+        blackOverlay.setSize(GS.WIDTH, GS.HEIGHT);
+        ImageButton swapButton = new ImageButton(skin, "button-switch");
+        swapButton.setPosition(8,8,Align.bottomLeft);
+        swapButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                circleWidget.remove();
+                circleWidget.setHandler(swapHandler);
+                addActor(blackOverlay);
+                addActor(circleWidget);
+            }
+        });
+        monsterChoice.addActor(swapButton);
+
+        joinsBattleButton = new ImageButton(skin, "button-check");
+        joinsBattleButton.setPosition(140-8,8,Align.bottomRight);
+        joinsBattleButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                if(joinsBattleButton.isChecked())
+                    team.activeInCombat+=1;
+                else
+                    team.activeInCombat-=1;
+
+                System.out.println("Now active in combat: " + team.activeInCombat);
+            }
+        });
+
         monsterStats = new MonsterStatusInventoryWidget(skin);
         monsterStats.setPosition(140+2,0,Align.bottomLeft);
-        monsterStats.init(team.get(0));
+        monsterStats.init(team.monsters.get(0));
 
 
-
-        // .................................................................................. SPRITE
         Group monsterView = new Group();
         monsterView.setSize(140,GS.HEIGHT-36);
         monsterView.setPosition((140+2)*2,0,Align.bottomLeft);
@@ -62,11 +117,9 @@ public class TeamSubMenu extends AInventorySubMenu {
         monsterImg = new Image();
         monsterImg.setSize(128,128);
         monsterImg.setPosition(6,202,Align.topLeft);
-        monsterImg.setDrawable(new TextureRegionDrawable(Services.getMedia().getMonsterSprite(team.get(0).ID)));
         monsterView.addActor(monsterImg);
 
         statPent = new StatusPentagonWidget(skin);
-        statPent.init(team.get(0));
         statPent.setPosition(20+2,4,Align.bottomLeft);
         monsterView.addActor(statPent);
 
@@ -74,6 +127,27 @@ public class TeamSubMenu extends AInventorySubMenu {
         addActor(monsterStats);
         addActor(monsterView);
 
+        showGuardianInformation(0);
+
         setDebug(GS.DEBUGGING_ON, true);
+    }
+
+    private void showGuardianInformation(int teamPosition) {
+        monsterStats.init(team.monsters.get(teamPosition));
+        monsterImg.setDrawable(new TextureRegionDrawable(Services.getMedia().getMonsterSprite(team.monsters.get(teamPosition).ID)));
+        statPent.init(team.monsters.get(teamPosition));
+        joinsBattleButton.remove();
+        joinsBattleButton.setChecked(false);
+
+        if(teamPosition <= team.activeInCombat && teamPosition <3) {
+            joinsBattleButton.setDisabled(false);
+            monsterChoice.addActor(joinsBattleButton);
+            if(teamPosition < team.activeInCombat) {
+                joinsBattleButton.setChecked(true);
+            }
+            if(teamPosition == 0) {
+                joinsBattleButton.setDisabled(true);
+            }
+        }
     }
 }

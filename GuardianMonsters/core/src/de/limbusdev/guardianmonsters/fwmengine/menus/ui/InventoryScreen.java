@@ -50,7 +50,7 @@ public class InventoryScreen implements Screen {
         assembleToolbar();
 
         views.put("team", new TeamSubMenu(skin, team));
-        views.put("items", new ItemsSubMenu(skin, inventory));
+        views.put("items", new ItemsSubMenu(skin, inventory, team.monsters));
 
         stage.addActor(views.get("team"));
     }

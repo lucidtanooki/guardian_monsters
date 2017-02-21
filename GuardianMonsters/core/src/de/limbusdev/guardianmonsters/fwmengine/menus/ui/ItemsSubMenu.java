@@ -11,12 +11,14 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.ArrayMap;
 
 import java.util.Observable;
 import java.util.Observer;
 
 import de.limbusdev.guardianmonsters.model.Inventory;
 import de.limbusdev.guardianmonsters.model.Item;
+import de.limbusdev.guardianmonsters.model.Monster;
 
 /**
  * Created by Georg Eckert on 17.02.17.
@@ -28,9 +30,11 @@ public class ItemsSubMenu extends AInventorySubMenu implements Observer {
     private Table itemTable;
     private ItemDetailViewWidget detailView;
     private int lastChosenItem=0;
+    private ArrayMap<Integer, Monster> team;
 
-    public ItemsSubMenu(Skin skin, Inventory inventory) {
+    public ItemsSubMenu(Skin skin, Inventory inventory, ArrayMap<Integer, Monster> team) {
         super(skin);
+        this.team = team;
 
         ItemCategoryToolbar.CallbackHandler callbacks = new ItemCategoryToolbar.CallbackHandler() {
             @Override
@@ -121,10 +125,10 @@ public class ItemsSubMenu extends AInventorySubMenu implements Observer {
         if(detailView != null) detailView.remove();
         switch(item.getType()) {
             case EQUIPMENT:
-                detailView = new WeaponDetailViewWidget(getSkin(), inventory);
+                detailView = new WeaponDetailViewWidget(getSkin(), inventory, team);
                 break;
             default:
-                detailView = new ItemDetailViewWidget(getSkin(), inventory);
+                detailView = new ItemDetailViewWidget(getSkin(), inventory, team);
                 break;
         }
         detailView.setPosition(264,2, Align.bottomLeft);

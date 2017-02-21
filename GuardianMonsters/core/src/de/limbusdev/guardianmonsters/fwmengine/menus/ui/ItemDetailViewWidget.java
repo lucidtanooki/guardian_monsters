@@ -8,11 +8,14 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.I18NBundle;
 
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.model.Inventory;
 import de.limbusdev.guardianmonsters.model.Item;
+import de.limbusdev.guardianmonsters.model.Monster;
+import de.limbusdev.guardianmonsters.utils.GS;
 
 /**
  * Created by georg on 20.02.17.
@@ -25,13 +28,16 @@ public class ItemDetailViewWidget extends Group {
     private Skin skin;
     private ReassuranceWidget reassuranceWidget;
     private Inventory inventory;
+    private ArrayMap<Integer, Monster> team;
     private Item item;
 
-    public ItemDetailViewWidget(Skin skin, Inventory inventory) {
+
+    public ItemDetailViewWidget(Skin skin, Inventory inventory, ArrayMap<Integer,Monster> monsters)  {
         super();
 
         this.skin = skin;
         this.inventory = inventory;
+        this.team = monsters;
 
         reassuranceWidget = new ReassuranceWidget(skin);
         reassuranceWidget.setPosition(-264,0,Align.bottomLeft);
@@ -73,8 +79,24 @@ public class ItemDetailViewWidget extends Group {
         });
         addActor(delete);
 
+        final QuickOverviewGuardianList.CallbackHandler handler = new QuickOverviewGuardianList.CallbackHandler() {
+            @Override
+            public void onButton(int i) {
+                item.apply(team.get(i));
+            }
+        };
+
         ImageButton use = new ImageButton(skin, "button-use");
         use.setPosition(106,160,Align.bottomLeft);
+        use.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                QuickOverviewGuardianList monsterList = new QuickOverviewGuardianList(getSkin(), team, handler);
+                monsterList.setPosition(-262,0,Align.topLeft);
+                addActor(monsterList);
+            }
+        });
+        addActor(delete);
         addActor(use);
 
 

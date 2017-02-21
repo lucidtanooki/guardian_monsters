@@ -16,6 +16,11 @@ public class MonsterInformation {
     public ArrayMap<Integer,MonsterStatusInformation> statusInfos;
     private static MonsterInformation instance;
     /* ........................................................................... CONSTRUCTOR .. */
+
+    public String getNameById(int id) {
+        return monsterNames.get(id);
+    }
+
     private MonsterInformation() {
         this.monsterNames = new Array<>();
         for(int i = 0; i< GS.MONSTER_SPRITES; i++) monsterNames.add("");

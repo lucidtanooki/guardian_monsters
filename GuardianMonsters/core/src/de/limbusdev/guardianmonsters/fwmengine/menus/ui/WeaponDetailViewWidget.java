@@ -9,6 +9,7 @@ import com.badlogic.gdx.utils.ArrayMap;
 import de.limbusdev.guardianmonsters.model.Equipment;
 import de.limbusdev.guardianmonsters.model.Inventory;
 import de.limbusdev.guardianmonsters.model.Item;
+import de.limbusdev.guardianmonsters.model.Monster;
 
 /**
  * Created by georg on 20.02.17.
@@ -18,8 +19,8 @@ public class WeaponDetailViewWidget extends ItemDetailViewWidget {
 
     private ArrayMap<String,Label> valueLabels;
 
-    public WeaponDetailViewWidget(Skin skin, Inventory inventory) {
-        super(skin, inventory);
+    public WeaponDetailViewWidget(Skin skin, Inventory inventory, ArrayMap<Integer, Monster> team) {
+        super(skin, inventory, team);
 
         int offX = 4;
         int offY = 74;

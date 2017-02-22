@@ -22,7 +22,7 @@ public class GS {
     public static final int MONSTER_SPRITES = 100;
 
     // ................................................................................... DEBUGGING
-    public static final boolean DEBUGGING_ON = false;
+    public static final boolean DEBUGGING_ON = true;
     public final static DebugMode DEBUG_MODE = DebugMode.INVENTORY;
     public final static int startMap = 251;
 

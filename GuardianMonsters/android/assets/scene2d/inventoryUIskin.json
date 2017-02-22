@@ -23,6 +23,7 @@
     button-use:       {down: button-use-down,     up: button-use-up},
     button-switch:    {down: button-switch-down,  up: button-switch-up},
     button-check:     {down: button-check-down,   up: button-check-up, checked: button-check-down},
+    button-check-locked:     {down: button-check-down-locked,   up: button-check-up, checked: button-check-down},
     button-back:      {down: button-back-down,    up: button-back-up},
 
 	},

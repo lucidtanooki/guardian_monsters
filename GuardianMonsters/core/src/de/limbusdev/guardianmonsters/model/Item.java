@@ -11,15 +11,21 @@ public abstract class Item {
     public final int ID;
     private String name;
     private TYPE type;
+    private CATEGORY category;
 
-    public enum TYPE {
-        MAGIC_HEAL, PHYSICAL_HEAL, STATUS_HEAL, EQUIPMENT, MAGIC_BUFF, PHYSICAL_BUFF, REVIVE,
+    public enum CATEGORY {
+        ALL, MEDICINE, EQUIPMENT, KEY,
     }
 
-    public Item(String name, TYPE type) {
+    public enum TYPE {
+        ALL, MAGIC_HEAL, PHYSICAL_HEAL, STATUS_HEAL, EQUIPMENT, MAGIC_BUFF, PHYSICAL_BUFF, REVIVE,
+    }
+
+    public Item(String name, TYPE type, CATEGORY category) {
         this.name = name;
         this.type = type;
         this.ID = idCounter;
+        this.category = category;
         idCounter++;
     }
 
@@ -29,6 +35,10 @@ public abstract class Item {
 
     public TYPE getType() {
         return type;
+    }
+
+    public CATEGORY getCategory() {
+        return category;
     }
 
     public abstract void apply(Monster m);
@@ -55,7 +65,7 @@ public abstract class Item {
         private int value;
 
         public HPCure(String name, int value) {
-            super(name, TYPE.PHYSICAL_HEAL);
+            super(name, TYPE.PHYSICAL_HEAL, CATEGORY.MEDICINE);
             this.value = value;
         }
 
@@ -66,7 +76,7 @@ public abstract class Item {
 
         @Override
         public boolean applicable(Monster m) {
-            return m.getHP() < m.getHPfull();
+            return (m.getHP() < m.getHPfull() && m.getHP() > 0);
         }
     }
 
@@ -75,7 +85,7 @@ public abstract class Item {
         private float fraction;
 
         public Reviver(String name, float fraction) {
-            super(name, TYPE.REVIVE);
+            super(name, TYPE.REVIVE, CATEGORY.MEDICINE);
             this.fraction = fraction;
         }
 
@@ -95,7 +105,7 @@ public abstract class Item {
         private int value;
 
         public MPCure(String name, int value) {
-            super(name, TYPE.MAGIC_HEAL);
+            super(name, TYPE.MAGIC_HEAL, CATEGORY.MEDICINE);
             this.value = value;
         }
 

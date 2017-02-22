@@ -2,6 +2,7 @@ package de.limbusdev.guardianmonsters.fwmengine.menus.ui;
 
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
@@ -11,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ArrayMap;
 
+import de.limbusdev.guardianmonsters.model.Item;
 import de.limbusdev.guardianmonsters.model.Monster;
 import de.limbusdev.guardianmonsters.utils.GS;
 
@@ -26,7 +28,7 @@ public class QuickOverviewGuardianList extends Group {
     private CallbackHandler handler;
     private Image blackLayer;
 
-    public QuickOverviewGuardianList(Skin skin, ArrayMap<Integer, Monster> team, CallbackHandler cBhandler) {
+    public QuickOverviewGuardianList(Skin skin, ArrayMap<Integer, Monster> team, CallbackHandler cBhandler, Item item) {
 
         this.handler = cBhandler;
         blackLayer = new Image(skin.getDrawable("black-a80"));
@@ -58,6 +60,10 @@ public class QuickOverviewGuardianList extends Group {
             final int index = i;
             Monster m = team.get(i);
             GuardianOverviewButton guardianButton = new GuardianOverviewButton(m, skin, "button-sandstone");
+            if(!item.applicable(m)) {
+                guardianButton.setTouchable(Touchable.disabled);
+                guardianButton.setColor(.6f,.6f,.6f,1f);
+            }
             monsterTable.add(guardianButton).width(192).height(64);
             monsterTable.row().spaceBottom(1);
 
@@ -65,6 +71,7 @@ public class QuickOverviewGuardianList extends Group {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
                     handler.onButton(index);
+                    remove();
                 }
             });
         }

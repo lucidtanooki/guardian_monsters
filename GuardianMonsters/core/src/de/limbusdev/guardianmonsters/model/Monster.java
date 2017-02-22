@@ -7,6 +7,7 @@ import com.badlogic.gdx.utils.ObjectMap;
 import java.util.Observable;
 
 import de.limbusdev.guardianmonsters.enums.Element;
+import de.limbusdev.guardianmonsters.utils.GS;
 
 /**
  * Created by georg on 12.12.15.
@@ -56,7 +57,7 @@ public class Monster extends Observable {
         this.exp = 0;
         BaseStat base = MonsterInformation.getInstance().statusInfos.get(ID).baseStat;
         this.pStr = pStrFull = base.basePhysStrength;
-        this.HP = HPfull = base.baseHP;
+        this.HPfull = this.HP = base.baseHP;
         this.mStr = mStrFull = base.baseMagStrength;
         this.MP = MPfull = base.baseMP;
         this.pDefFull = pDef = base.basePhysDefense;
@@ -64,7 +65,7 @@ public class Monster extends Observable {
         this.Speed = this.SpeedFull = base.baseSpeed;
 
         // INIT
-        this.attacks = new Array<Attack>();
+        this.attacks = new Array<>();
 
         for(ObjectMap.Entry<Integer,Attack> e : MonsterInformation.getInstance().statusInfos.get(ID).learnableAttacks) {
             if(e.key <= level)

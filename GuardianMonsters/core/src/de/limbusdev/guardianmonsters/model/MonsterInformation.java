@@ -134,7 +134,7 @@ public class MonsterInformation {
         attacks.put(20, AttackInfo.watera);
         elements = new Array<Element>();
         elements.add(Element.WATER);
-        base = new BaseStat(5,30,5,9,11,8,10,10);
+        base = new BaseStat(5,60,5,9,11,8,10,10);
         statusInfos.put(5, new MonsterStatusInformation(
             5, "mon_krokami", attacks, true, 6, 39, elements, base));
 
@@ -147,7 +147,7 @@ public class MonsterInformation {
         attacks.put(20, AttackInfo.watera);
         elements = new Array<Element>();
         elements.add(Element.WATER);
-        base = new BaseStat(6,30,5,9,11,8,10,10);
+        base = new BaseStat(6,90,5,9,11,8,10,10);
         statusInfos.put(6, new MonsterStatusInformation(
             6, "mon_krakatau", attacks, false, 0, 0, elements, base));
 

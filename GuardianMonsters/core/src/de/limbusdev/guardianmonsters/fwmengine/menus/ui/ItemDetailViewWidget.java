@@ -32,7 +32,7 @@ public class ItemDetailViewWidget extends Group {
     private Item item;
 
 
-    public ItemDetailViewWidget(Skin skin, Inventory inventory, ArrayMap<Integer,Monster> monsters)  {
+    public ItemDetailViewWidget(Skin skin, final Inventory inventory, ArrayMap<Integer,Monster> monsters)  {
         super();
 
         this.skin = skin;
@@ -82,6 +82,7 @@ public class ItemDetailViewWidget extends Group {
         final QuickOverviewGuardianList.CallbackHandler handler = new QuickOverviewGuardianList.CallbackHandler() {
             @Override
             public void onButton(int i) {
+                inventory.takeItemFromInventory(item);
                 item.apply(team.get(i));
             }
         };
@@ -91,7 +92,7 @@ public class ItemDetailViewWidget extends Group {
         use.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                QuickOverviewGuardianList monsterList = new QuickOverviewGuardianList(getSkin(), team, handler);
+                QuickOverviewGuardianList monsterList = new QuickOverviewGuardianList(getSkin(), team, handler, item);
                 monsterList.setPosition(-262,0,Align.topLeft);
                 addActor(monsterList);
             }

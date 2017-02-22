@@ -2,6 +2,8 @@ package de.limbusdev.guardianmonsters.fwmengine.menus.ui;
 
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -30,6 +32,7 @@ public class TeamSubMenu extends AInventorySubMenu {
     private TeamComponent team;
     private ImageButton joinsBattleButton;
     private Group monsterChoice;
+    private ImageButton.ImageButtonStyle lockedButtonStyle, normalButtonStyle;
 
     public TeamSubMenu(Skin skin, TeamComponent guardians) {
         super(skin);
@@ -102,6 +105,9 @@ public class TeamSubMenu extends AInventorySubMenu {
                 System.out.println("Now active in combat: " + team.activeInCombat);
             }
         });
+        normalButtonStyle = joinsBattleButton.getStyle();
+        lockedButtonStyle = new ImageButton.ImageButtonStyle();
+        lockedButtonStyle.checked = skin.getDrawable("button-check-down-locked");
 
         monsterStats = new MonsterStatusInventoryWidget(skin);
         monsterStats.setPosition(140+2,0,Align.bottomLeft);
@@ -138,15 +144,21 @@ public class TeamSubMenu extends AInventorySubMenu {
         statPent.init(team.monsters.get(teamPosition));
         joinsBattleButton.remove();
         joinsBattleButton.setChecked(false);
+        joinsBattleButton.setStyle(normalButtonStyle);
 
+        // If the shown position belongs to the range given by activeInCombat & within 0-2
         if(teamPosition <= team.activeInCombat && teamPosition <3) {
-            joinsBattleButton.setDisabled(false);
+            joinsBattleButton.setTouchable(Touchable.enabled);
             monsterChoice.addActor(joinsBattleButton);
+
+            // if shown monster is in the range of active monsters
             if(teamPosition < team.activeInCombat) {
                 joinsBattleButton.setChecked(true);
             }
-            if(teamPosition == 0) {
-                joinsBattleButton.setDisabled(true);
+            // the shown monster is at position 0 or not the last active monster
+            if(teamPosition == 0 || teamPosition < team.activeInCombat -1) {
+                joinsBattleButton.setTouchable(Touchable.disabled);
+                joinsBattleButton.setStyle(lockedButtonStyle);
             }
         }
     }

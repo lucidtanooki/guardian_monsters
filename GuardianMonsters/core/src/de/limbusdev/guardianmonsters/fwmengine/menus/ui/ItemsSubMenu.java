@@ -24,37 +24,37 @@ import de.limbusdev.guardianmonsters.model.Monster;
  * Created by Georg Eckert on 17.02.17.
  */
 
-public class ItemsSubMenu extends AInventorySubMenu implements Observer {
+public class ItemsSubMenu extends AInventorySubMenu {
 
     private Inventory inventory;
-    private Table itemTable;
     private ItemDetailViewWidget detailView;
-    private int lastChosenItem=0;
     private ArrayMap<Integer, Monster> team;
+    private ItemListWidget itemListWidget;
 
     public ItemsSubMenu(Skin skin, Inventory inventory, ArrayMap<Integer, Monster> team) {
         super(skin);
         this.team = team;
+        this.inventory = inventory;
 
         ItemCategoryToolbar.CallbackHandler callbacks = new ItemCategoryToolbar.CallbackHandler() {
             @Override
             public void onMedicineButton() {
-                // TODO
+                itemListWidget.applyFilter(Item.CATEGORY.MEDICINE);
             }
 
             @Override
             public void onOtherItemsButton() {
-                // TODO
+                itemListWidget.applyFilter(Item.CATEGORY.ALL);
             }
 
             @Override
             public void onEquipItemsButton() {
-                // TODO
+                itemListWidget.applyFilter(Item.CATEGORY.EQUIPMENT);
             }
 
             @Override
             public void onKeyItemsButton() {
-                // TODO
+                itemListWidget.applyFilter(Item.CATEGORY.KEY);
             }
         };
 
@@ -63,63 +63,19 @@ public class ItemsSubMenu extends AInventorySubMenu implements Observer {
 
 
         // ......................................................................... SCROLLABLE LIST
-        Group itemListView = new Group();
+        ItemListWidget.CallbackHandler ilch = new ItemListWidget.CallbackHandler() {
+            @Override
+            public void onChoosingItem(Item item) {
+                showItemDetailView(item);
+            }
+        };
+        itemListWidget = new ItemListWidget(skin, inventory, ilch, Item.CATEGORY.MEDICINE);
+        itemListWidget.setPosition(68,0,Align.bottomLeft);
 
-        itemTable = new Table();
-        itemTable.align(Align.topLeft);
-
-        ScrollPane scrollPane = new ScrollPane(itemTable, getSkin());
-
-
-        scrollPane.setSize(192,200);
-        scrollPane.setPosition(2,2);
-        scrollPane.setScrollBarPositions(false,true);
-        itemListView.setPosition(68,0, Align.bottomLeft);
-        itemListView.addActor(scrollPane);
-        addActor(itemListView);
-
-        init(inventory);
+        addActor(itemListWidget);
     }
 
-    private void init(Inventory inventory) {
-        itemTable.clearChildren();
-        this.inventory = inventory;
-        inventory.addObserver(this);
 
-        Array<Button> buttons = new Array<>();
-        final ButtonGroup<TextButton> btnGroup = new ButtonGroup<>();
-        btnGroup.setMinCheckCount(1);
-        btnGroup.setMaxCheckCount(1);
-
-        // Only proceed of there are any items
-        if(inventory.getItems().size > 0) {
-            int counter = 0;
-            for (final Item i : inventory.getItems().keys()) {
-                final ItemInventoryButton item = new ItemInventoryButton(i, getSkin(), "item-button-sandstone", inventory);
-                inventory.addObserver(item);
-                if (counter == 0) item.setChecked(true);
-                counter++;
-                itemTable.add(item).width(192).height(40);
-                buttons.add(item);
-                btnGroup.add(item);
-                itemTable.row().spaceBottom(1);
-
-                item.addListener(new ClickListener() {
-                    @Override
-                    public void clicked(InputEvent event, float x, float y) {
-                        showItemDetailView(i);
-                        lastChosenItem = btnGroup.getCheckedIndex();
-                    }
-                });
-            }
-
-            if (lastChosenItem > btnGroup.getButtons().size - 1) {
-                lastChosenItem = btnGroup.getButtons().size - 1;
-            }
-
-            btnGroup.setChecked(btnGroup.getButtons().get(lastChosenItem).getText().toString());
-        }
-    }
 
     private void showItemDetailView(Item item)  {
         if(detailView != null) detailView.remove();
@@ -136,13 +92,4 @@ public class ItemsSubMenu extends AInventorySubMenu implements Observer {
         addActor(detailView);
     }
 
-    @Override
-    public void update(Observable o, Object arg) {
-        if(o instanceof Inventory && arg instanceof Item) {
-            // If item got deleted completely
-            if(!inventory.getItems().containsKey((Item)arg)) {
-                init(inventory);
-            }
-        }
-    }
 }

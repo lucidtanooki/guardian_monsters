@@ -1,6 +1,8 @@
 package de.limbusdev.guardianmonsters.fwmengine.menus.ui;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -18,6 +20,8 @@ import de.limbusdev.guardianmonsters.model.MonsterInformation;
 
 public class GuardianOverviewButton extends TextButton {
 
+    private Table subTable;
+
 
     public GuardianOverviewButton(Monster monster, Skin skin) {
         super(Services.getL18N().l18n().get(MonsterInformation.getInstance().getNameById(monster.ID)), skin);
@@ -34,6 +38,22 @@ public class GuardianOverviewButton extends TextButton {
         augmentButton(monster);
     }
 
+    @Override
+    public void setColor(float r, float g, float b, float a) {
+        setColor(new Color(r,g,b,a));
+    }
+
+    @Override
+    public void setColor(Color color) {
+        super.setColor(color);
+        for(Actor a : getChildren()) {
+            a.setColor(color);
+        }
+        subTable.setColor(color);
+        for(Actor a : subTable.getChildren()) {
+            a.setColor(color);
+        }
+    }
 
     private void augmentButton(Monster monster) {
 
@@ -44,7 +64,7 @@ public class GuardianOverviewButton extends TextButton {
 
         row();
 
-        Table subTable = new Table();
+        subTable = new Table();
         subTable.add(new Image(getSkin().getDrawable("stats-symbol-hp")));
         subTable.add(new Label(Integer.toString(monster.getHP()) + " / " + Integer.toString(monster.getHPfull()), getSkin(), "default")).width(56);
         subTable.add(new Image(getSkin().getDrawable("stats-symbol-mp")));

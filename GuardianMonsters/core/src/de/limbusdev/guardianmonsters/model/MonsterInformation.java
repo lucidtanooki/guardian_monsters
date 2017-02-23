@@ -158,7 +158,7 @@ public class MonsterInformation {
         attacks.put(10, AttackInfo.fire);
         attacks.put(20, AttackInfo.fira);
         elements = new Array<Element>();
-        elements.add(Element.FIRE);
+        elements.add(Element.FLAME);
         base = new BaseStat(7,30,5,9,11,8,10,10);
         statusInfos.put(7, new MonsterStatusInformation(
             7, "mon_dinvi", attacks, true, 8, 19, elements, base));
@@ -170,7 +170,7 @@ public class MonsterInformation {
         attacks.put(10, AttackInfo.fire);
         attacks.put(20, AttackInfo.fira);
         elements = new Array<Element>();
-        elements.add(Element.FIRE);
+        elements.add(Element.FLAME);
         base = new BaseStat(8,30,5,9,11,8,10,10);
         statusInfos.put(8, new MonsterStatusInformation(
             8, "mon_dinvari", attacks, true, 9, 40, elements, base));
@@ -182,7 +182,7 @@ public class MonsterInformation {
         attacks.put(10, AttackInfo.fire);
         attacks.put(20, AttackInfo.fira);
         elements = new Array<Element>();
-        elements.add(Element.FIRE);
+        elements.add(Element.FLAME);
         base = new BaseStat(9,30,5,9,11,8,10,10);
         statusInfos.put(9, new MonsterStatusInformation(
             9, "mon_dinvarex", attacks, false, 0, 0, elements, base));

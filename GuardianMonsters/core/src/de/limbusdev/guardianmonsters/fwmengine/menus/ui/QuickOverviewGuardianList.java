@@ -27,10 +27,13 @@ public class QuickOverviewGuardianList extends Group {
 
     private CallbackHandler handler;
     private Image blackLayer;
+    private Item item;
 
     public QuickOverviewGuardianList(Skin skin, ArrayMap<Integer, Monster> team, CallbackHandler cBhandler, Item item) {
 
         this.handler = cBhandler;
+        this.item = item;
+
         blackLayer = new Image(skin.getDrawable("black-a80"));
         blackLayer.setSize(GS.WIDTH, GS.HEIGHT);
         blackLayer.setPosition(0,0,Align.bottomLeft);
@@ -59,26 +62,23 @@ public class QuickOverviewGuardianList extends Group {
         for (int i = 0; i<team.size; i++) {
             final int index = i;
             Monster m = team.get(i);
-            GuardianOverviewButton guardianButton = new GuardianOverviewButton(m, skin, "button-sandstone");
-            if(!item.applicable(m)) {
-                guardianButton.setTouchable(Touchable.disabled);
-                guardianButton.setColor(.6f,.6f,.6f,1f);
-            }
+            GuardianOverviewButton guardianButton = new GuardianOverviewButton(m, skin, "button-sandstone", item);
+
             monsterTable.add(guardianButton).width(192).height(64);
             monsterTable.row().spaceBottom(1);
 
             guardianButton.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    handler.onButton(index);
-                    remove();
+                    boolean moreItems = handler.onButton(index);
+                    if(!moreItems) remove();
                 }
             });
         }
     }
 
     public interface CallbackHandler {
-        void onButton(int i);
+        boolean onButton(int i);
     }
 
 }

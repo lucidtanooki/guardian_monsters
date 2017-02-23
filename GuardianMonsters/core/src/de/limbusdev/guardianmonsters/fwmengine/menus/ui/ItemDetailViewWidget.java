@@ -81,9 +81,12 @@ public class ItemDetailViewWidget extends Group {
 
         final QuickOverviewGuardianList.CallbackHandler handler = new QuickOverviewGuardianList.CallbackHandler() {
             @Override
-            public void onButton(int i) {
+            public boolean onButton(int i) {
                 inventory.takeItemFromInventory(item);
                 item.apply(team.get(i));
+                boolean empty = !(inventory.getItemAmount(item) > 0);
+                if(empty) remove();
+                return !empty;
             }
         };
 

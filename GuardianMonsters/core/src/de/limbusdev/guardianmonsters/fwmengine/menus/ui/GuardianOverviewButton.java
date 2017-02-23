@@ -3,6 +3,7 @@ package de.limbusdev.guardianmonsters.fwmengine.menus.ui;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -10,7 +11,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.Align;
 
+
+import java.util.Observable;
+import java.util.Observer;
+
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
+import de.limbusdev.guardianmonsters.model.Item;
 import de.limbusdev.guardianmonsters.model.Monster;
 import de.limbusdev.guardianmonsters.model.MonsterInformation;
 
@@ -18,24 +24,26 @@ import de.limbusdev.guardianmonsters.model.MonsterInformation;
  * Created by georg on 21.02.17.
  */
 
-public class GuardianOverviewButton extends TextButton {
+public class GuardianOverviewButton extends TextButton implements Observer{
 
     private Table subTable;
+    private Item item;
+    private Monster monster;
 
 
-    public GuardianOverviewButton(Monster monster, Skin skin) {
+    public GuardianOverviewButton(Monster monster, Skin skin, Item item) {
         super(Services.getL18N().l18n().get(MonsterInformation.getInstance().getNameById(monster.ID)), skin);
-        augmentButton(monster);
+        construct(monster, item);
     }
 
-    public GuardianOverviewButton(Monster monster, Skin skin, String styleName) {
+    public GuardianOverviewButton(Monster monster, Skin skin, String styleName, Item item) {
         super(Services.getL18N().l18n().get(MonsterInformation.getInstance().getNameById(monster.ID)), skin, styleName);
-        augmentButton(monster);
+        construct(monster, item);
     }
 
-    public GuardianOverviewButton(Monster monster, TextButtonStyle style) {
+    public GuardianOverviewButton(Monster monster, TextButtonStyle style, Item item) {
         super(Services.getL18N().l18n().get(MonsterInformation.getInstance().getNameById(monster.ID)), style);
-        augmentButton(monster);
+        construct(monster, item);
     }
 
     @Override
@@ -55,7 +63,10 @@ public class GuardianOverviewButton extends TextButton {
         }
     }
 
-    private void augmentButton(Monster monster) {
+    private void construct(Monster monster, Item item) {
+        this.item = item;
+        this.monster = monster;
+        monster.addObserver(this);
 
         getLabel().setAlignment(Align.topLeft);
         TextureRegion region = Services.getMedia().getMonsterMiniSprite(monster.ID);
@@ -64,6 +75,17 @@ public class GuardianOverviewButton extends TextButton {
 
         row();
 
+        augmentButton(monster, item);
+    }
+
+    private void augmentButton(Monster monster, Item item) {
+
+        if(subTable != null) {
+            removeActor(subTable);
+            getCells().removeIndex(getCells().size-1);
+            row();
+        }
+
         subTable = new Table();
         subTable.add(new Image(getSkin().getDrawable("stats-symbol-hp")));
         subTable.add(new Label(Integer.toString(monster.getHP()) + " / " + Integer.toString(monster.getHPfull()), getSkin(), "default")).width(56);
@@ -71,5 +93,18 @@ public class GuardianOverviewButton extends TextButton {
         subTable.add(new Label(Integer.toString(monster.getMP()) + " / " + Integer.toString(monster.getMPfull()), getSkin(), "default")).width(56);
 
         add(subTable).align(Align.left);
+        layout();
+
+        if(!item.applicable(monster)) {
+            setTouchable(Touchable.disabled);
+            setColor(.6f,.6f,.6f,1f);
+        }
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        if(o instanceof Monster) {
+            augmentButton(monster,item);
+        }
     }
 }

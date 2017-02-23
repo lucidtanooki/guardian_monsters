@@ -57,7 +57,8 @@ public class Monster extends Observable {
         this.exp = 0;
         BaseStat base = MonsterInformation.getInstance().statusInfos.get(ID).baseStat;
         this.pStr = pStrFull = base.basePhysStrength;
-        this.HPfull = this.HP = base.baseHP;
+        this.HPfull = base.baseHP;
+        this.HP = base.baseHP/2;
         this.mStr = mStrFull = base.baseMagStrength;
         this.MP = MPfull = base.baseMP;
         this.pDefFull = pDef = base.basePhysDefense;
@@ -128,11 +129,15 @@ public class Monster extends Observable {
     public void healHP(int value) {
         this.HP += value;
         if(this.HP > this.HPfull) this.HP = this.HPfull;
+        setChanged();
+        notifyObservers();
     }
 
     public void healMP(int value) {
         this.MP += value;
         if(this.MP > this.MPfull) this.MP = this.MPfull;
+        setChanged();
+        notifyObservers();
     }
 
     /* ..................................................................... GETTERS & SETTERS .. */

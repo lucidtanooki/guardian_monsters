@@ -30,13 +30,13 @@ public class AttackInfo {
 
     // Fire
     public static Attack embers = new Attack(
-            AttackType.MAGICAL, Element.FIRE, 5, "att_embers", SFXType.HIT, 0, AnimationType.CONTACTLESS, 1);
+            AttackType.MAGICAL, Element.FLAME, 5, "att_embers", SFXType.HIT, 0, AnimationType.CONTACTLESS, 1);
     public static Attack fire = new Attack(
-            AttackType.MAGICAL, Element.FIRE, 10, "att_fire", SFXType.HIT, 0, AnimationType.MOVING_HOR);
+            AttackType.MAGICAL, Element.FLAME, 10, "att_fire", SFXType.HIT, 0, AnimationType.MOVING_HOR);
     public static Attack fira = new Attack(
-            AttackType.MAGICAL, Element.FIRE, 20, "att_fira", SFXType.HIT, 0, AnimationType.MOVING_HOR);
+            AttackType.MAGICAL, Element.FLAME, 20, "att_fira", SFXType.HIT, 0, AnimationType.MOVING_HOR);
     public static Attack fiza = new Attack(
-            AttackType.MAGICAL, Element.FIRE, 40, "att_fiza", SFXType.HIT, 0, AnimationType.MOVING_HOR);
+            AttackType.MAGICAL, Element.FLAME, 40, "att_fiza", SFXType.HIT, 0, AnimationType.MOVING_HOR);
 
     // Frost
     public static Attack ice = new Attack(

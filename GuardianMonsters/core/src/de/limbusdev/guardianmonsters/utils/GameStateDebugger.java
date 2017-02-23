@@ -57,6 +57,7 @@ public class GameStateDebugger {
         inventory.putItemInInventory(ItemInfo.getInst().getItem("relict-earth"));
         inventory.putItemInInventory(ItemInfo.getInst().getItem("relict-demon"));
         inventory.putItemInInventory(ItemInfo.getInst().getItem("relict-lightning"));
+        inventory.putItemInInventory(ItemInfo.getInst().getItem("relict-water"));
 
 
         inventory.sortItemsByID();

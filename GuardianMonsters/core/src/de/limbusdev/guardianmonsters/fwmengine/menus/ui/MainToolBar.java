@@ -68,9 +68,20 @@ public class MainToolBar extends Group {
         });
         addActor(equip);
 
+        // ..................................................................................... KEY
+        ImageButton key = new ImageButton(skin, "b-toolbar-key");
+        key.setPosition((64+4)*3+2,4, Align.bottomLeft);
+        key.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                callbacks.onKeyButton();
+            }
+        });
+        addActor(key);
+
         // ................................................................................. ABILITY
         ImageButton ability = new ImageButton(skin, "b-toolbar-ability");
-        ability.setPosition((64+4)*3+2,4, Align.bottomLeft);
+        ability.setPosition((64+4)*4+2,4, Align.bottomLeft);
         ability.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -91,7 +102,7 @@ public class MainToolBar extends Group {
         });
         addActor(exit);
 
-        buttonGroup = new ButtonGroup<>(team,items,equip,ability);
+        buttonGroup = new ButtonGroup<>(team,items,equip,ability,key);
         buttonGroup.setMaxCheckCount(1);
         buttonGroup.setMinCheckCount(1);
 
@@ -102,6 +113,7 @@ public class MainToolBar extends Group {
         void onItemsButton();
         void onEquipButton();
         void onAbilityButton();
+        void onKeyButton();
         void onExitButton();
     }
 }

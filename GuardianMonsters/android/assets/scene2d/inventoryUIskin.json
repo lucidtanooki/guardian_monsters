@@ -13,6 +13,7 @@
     b-toolbar-equip:    {down: toolBarButton-equip-down,      up: toolBarButton-equip-up,   checked: toolBarButton-equip-down},
     b-toolbar-items:    {down: toolBarButton-items-down,      up: toolBarButton-items-up,   checked: toolBarButton-items-down},
     b-toolbar-ability:  {down: toolBarButton-ability-down,    up: toolBarButton-ability-up, checked: toolBarButton-ability-down},
+    b-toolbar-key:      {down: toolBarButton-key-down,        up: toolBarButton-key-up,     checked: toolBarButton-key-down},
     
     b-toolbar-side-equip:     {down: toolBarButtonSide-equip-down,        up: toolBarButtonSide-equip-up,     checked: toolBarButtonSide-equip-down},
     b-toolbar-side-medicine:  {down: toolBarButtonSide-medicine-down,     up: toolBarButtonSide-medicine-up,  checked: toolBarButtonSide-medicine-down},

@@ -5,477 +5,583 @@ filter: MipMapNearestNearest,MipMapNearestLinear
 repeat: none
 menu-col-bg
   rotate: false
-  xy: 1, 309
+  xy: 1, 311
   size: 140, 200
   orig: 140, 200
   offset: 0, 0
   index: -1
 teamCircle
   rotate: false
-  xy: 1, 159
+  xy: 1, 161
   size: 140, 148
   orig: 140, 148
   offset: 0, 0
   index: -1
 menu-col-bg-80
   rotate: false
-  xy: 143, 309
+  xy: 143, 311
   size: 80, 200
   orig: 80, 200
   offset: 0, 0
   index: -1
+element-relics-bg
+  rotate: false
+  xy: 1, 19
+  size: 140, 140
+  orig: 140, 140
+  offset: 0, 0
+  index: -1
 statPentagram-symbols
   rotate: false
-  xy: 1, 77
+  xy: 225, 431
   size: 100, 80
   orig: 100, 80
   offset: 0, 0
   index: -1
 list-bg
   rotate: false
-  xy: 225, 485
+  xy: 327, 487
   size: 140, 24
   orig: 140, 24
   offset: 0, 0
   index: -1
 list-bg-selected
   rotate: false
-  xy: 225, 459
+  xy: 327, 461
   size: 140, 24
   orig: 140, 24
   offset: 0, 0
   index: -1
 name-bg
   rotate: false
-  xy: 367, 485
+  xy: 469, 487
   size: 128, 24
   orig: 128, 24
   offset: 0, 0
   index: -1
 statPentagram
   rotate: false
-  xy: 143, 243
+  xy: 143, 245
   size: 66, 64
   orig: 66, 64
   offset: 0, 0
   index: -1
-relict-water
+toolBarButton-key-up
   rotate: false
-  xy: 1, 11
-  size: 32, 64
-  orig: 32, 64
-  offset: 0, 0
-  index: -1
-relict-spirit
-  rotate: false
-  xy: 103, 93
-  size: 32, 64
-  orig: 32, 64
+  xy: 225, 397
+  size: 64, 32
+  orig: 64, 32
   offset: 0, 0
   index: -1
 toolBarButton-up
   rotate: false
-  xy: 225, 425
+  xy: 143, 211
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: -1
+relict-flame-big
+  rotate: false
+  xy: 225, 363
   size: 64, 32
   orig: 64, 32
   offset: 0, 0
   index: -1
 toolBarButton-down
   rotate: false
-  xy: 143, 209
+  xy: 143, 177
   size: 64, 32
   orig: 64, 32
   offset: 0, 0
   index: -1
 toolBarButton-ability-up
   rotate: false
-  xy: 35, 43
+  xy: 225, 329
   size: 64, 32
   orig: 64, 32
   offset: 0, 0
   index: -1
 toolBarButtonSide-key-down
   rotate: false
-  xy: 225, 391
+  xy: 143, 143
   size: 64, 32
   orig: 64, 32
-  offset: 0, 0
-  index: -1
-relict-forest
-  rotate: false
-  xy: 291, 393
-  size: 32, 64
-  orig: 32, 64
   offset: 0, 0
   index: -1
 toolBarButton-team-down
   rotate: false
-  xy: 143, 175
+  xy: 143, 109
   size: 64, 32
   orig: 64, 32
+  offset: 0, 0
+  index: -1
+relict-spirit-big
+  rotate: false
+  xy: 291, 365
+  size: 32, 64
+  orig: 32, 64
   offset: 0, 0
   index: -1
 toolBarButton-equip-up
   rotate: false
-  xy: 225, 357
+  xy: 143, 75
   size: 64, 32
   orig: 64, 32
+  offset: 0, 0
+  index: -1
+toolBarButton-key-down
+  rotate: false
+  xy: 143, 41
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: -1
+teamCircle-chosen
+  rotate: false
+  xy: 143, 1
+  size: 38, 38
+  orig: 38, 38
   offset: 0, 0
   index: -1
 toolBarButton-equip-down
   rotate: false
-  xy: 225, 323
+  xy: 327, 427
   size: 64, 32
   orig: 64, 32
   offset: 0, 0
   index: -1
-relict-air
+relict-frost-big
   rotate: false
-  xy: 291, 327
-  size: 32, 64
-  orig: 32, 64
-  offset: 0, 0
-  index: -1
-relict-lindworm
-  rotate: false
-  xy: 325, 393
-  size: 32, 64
-  orig: 32, 64
-  offset: 0, 0
-  index: -1
-relict-darkness
-  rotate: false
-  xy: 325, 327
-  size: 32, 64
-  orig: 32, 64
-  offset: 0, 0
-  index: -1
-relict-fire
-  rotate: false
-  xy: 35, 9
-  size: 64, 32
-  orig: 64, 32
-  offset: 0, 0
-  index: -1
-relict-earth
-  rotate: false
-  xy: 367, 451
+  xy: 393, 427
   size: 64, 32
   orig: 64, 32
   offset: 0, 0
   index: -1
 toolBarButtonSide-other-down
   rotate: false
-  xy: 433, 451
+  xy: 325, 393
   size: 64, 32
   orig: 64, 32
   offset: 0, 0
   index: -1
 toolBarButtonSide-other-up
   rotate: false
-  xy: 359, 417
+  xy: 391, 393
   size: 64, 32
   orig: 64, 32
   offset: 0, 0
   index: -1
 toolBarButtonSide-up
   rotate: false
-  xy: 359, 383
+  xy: 325, 359
   size: 64, 32
   orig: 64, 32
   offset: 0, 0
   index: -1
 toolBarButton-ability-down
   rotate: false
-  xy: 425, 417
+  xy: 391, 359
   size: 64, 32
   orig: 64, 32
   offset: 0, 0
   index: -1
 toolBarButtonSide-medicine-up
   rotate: false
-  xy: 359, 349
+  xy: 469, 453
   size: 64, 32
   orig: 64, 32
   offset: 0, 0
   index: -1
 toolBarButtonSide-down
   rotate: false
-  xy: 425, 383
-  size: 64, 32
-  orig: 64, 32
-  offset: 0, 0
-  index: -1
-toolBarButtonSide-key-up
-  rotate: false
-  xy: 425, 349
-  size: 64, 32
-  orig: 64, 32
-  offset: 0, 0
-  index: -1
-toolBarButton-items-up
-  rotate: false
-  xy: 359, 315
-  size: 64, 32
-  orig: 64, 32
-  offset: 0, 0
-  index: -1
-relict-ice
-  rotate: false
-  xy: 425, 315
+  xy: 535, 453
   size: 64, 32
   orig: 64, 32
   offset: 0, 0
   index: -1
 key-bg
   rotate: false
-  xy: 497, 489
+  xy: 599, 491
   size: 64, 20
   orig: 64, 20
   offset: 0, 0
   index: -1
+toolBarButtonSide-key-up
+  rotate: false
+  xy: 601, 457
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: -1
+toolBarButton-items-up
+  rotate: false
+  xy: 225, 295
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: -1
+relict-demon-big
+  rotate: false
+  xy: 291, 299
+  size: 32, 64
+  orig: 32, 64
+  offset: 0, 0
+  index: -1
+relict-earth-big
+  rotate: false
+  xy: 325, 325
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: -1
 toolBarButtonSide-medicine-down
   rotate: false
-  xy: 499, 455
+  xy: 391, 325
   size: 64, 32
   orig: 64, 32
   offset: 0, 0
   index: -1
 toolBarButton-team-up
   rotate: false
-  xy: 143, 141
+  xy: 325, 291
   size: 64, 32
   orig: 64, 32
   offset: 0, 0
   index: -1
 toolBarButtonSide-equip-down
   rotate: false
-  xy: 137, 107
+  xy: 391, 291
   size: 64, 32
   orig: 64, 32
   offset: 0, 0
   index: -1
 toolBarButtonSide-equip-up
   rotate: false
-  xy: 225, 289
+  xy: 211, 261
   size: 64, 32
   orig: 64, 32
   offset: 0, 0
   index: -1
 toolBarButton-items-down
   rotate: false
-  xy: 291, 293
+  xy: 459, 419
   size: 64, 32
   orig: 64, 32
   offset: 0, 0
   index: -1
+relict-forest-big
+  rotate: false
+  xy: 457, 353
+  size: 32, 64
+  orig: 32, 64
+  offset: 0, 0
+  index: -1
+relict-water-big
+  rotate: false
+  xy: 491, 353
+  size: 32, 64
+  orig: 32, 64
+  offset: 0, 0
+  index: -1
+relict-lindworm-big
+  rotate: false
+  xy: 525, 387
+  size: 32, 64
+  orig: 32, 64
+  offset: 0, 0
+  index: -1
+relict-air-big
+  rotate: false
+  xy: 559, 387
+  size: 32, 64
+  orig: 32, 64
+  offset: 0, 0
+  index: -1
 ability-connection-diag-ul-dr
   rotate: false
-  xy: 211, 247
+  xy: 457, 311
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
   index: -1
 ability-connection-diag-ur-dl
   rotate: false
-  xy: 253, 247
+  xy: 525, 345
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
   index: -1
-teamCircle-chosen
-  rotate: false
-  xy: 295, 253
-  size: 38, 38
-  orig: 38, 38
-  offset: 0, 0
-  index: -1
 toolBar-bg
   rotate: false
-  xy: 335, 255
+  xy: 183, 3
   size: 32, 36
   orig: 32, 36
   offset: 0, 0
   index: -1
 guardian-crystal-forest
   rotate: false
-  xy: 103, 59
+  xy: 567, 353
   size: 32, 32
   orig: 32, 32
+  offset: 0, 0
+  index: -1
+darker-paper-area
+  rotate: false
+  xy: 1, 1
+  size: 16, 16
+  split: 3, 3, 3, 3
+  orig: 16, 16
   offset: 0, 0
   index: -1
 button-check-up
   rotate: false
-  xy: 137, 73
+  xy: 457, 277
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
+stats-symbol-pstr
+  rotate: false
+  xy: 19, 1
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+stats-symbol-mdef
+  rotate: false
+  xy: 37, 1
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+ability-circle-active
+  rotate: false
+  xy: 55, 1
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+stats-symbol-exp
+  rotate: false
+  xy: 73, 1
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+stats-symbol-pdef
+  rotate: false
+  xy: 91, 1
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+stats-symbol-hp
+  rotate: false
+  xy: 109, 1
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
 diamond-darkness
   rotate: false
-  xy: 101, 25
+  xy: 211, 227
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+relict-water
+  rotate: false
+  xy: 209, 193
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 diamond-steel
   rotate: false
-  xy: 171, 73
+  xy: 209, 159
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+relict-spirit
+  rotate: false
+  xy: 209, 125
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 book
   rotate: false
-  xy: 137, 39
+  xy: 209, 91
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 sword-gap-steel
   rotate: false
-  xy: 171, 39
+  xy: 209, 57
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+relict-arthropoda-big
+  rotate: false
+  xy: 245, 227
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+relict-arthropoda
+  rotate: false
+  xy: 245, 227
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 sword-steel
   rotate: false
-  xy: 565, 477
+  xy: 243, 193
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 guardian-crystal-air
   rotate: false
-  xy: 599, 477
+  xy: 243, 159
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 potion-cyan
   rotate: false
-  xy: 633, 477
+  xy: 243, 125
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+relict-forest
+  rotate: false
+  xy: 243, 91
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 sword-silver
   rotate: false
-  xy: 667, 477
+  xy: 243, 57
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 diamond-meadow
   rotate: false
-  xy: 701, 477
+  xy: 217, 23
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 guardian-crystal-arthropoda
   rotate: false
-  xy: 735, 477
+  xy: 251, 23
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 cure-blind
   rotate: false
-  xy: 769, 477
+  xy: 277, 261
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 button-check-down-locked
   rotate: false
-  xy: 803, 477
+  xy: 279, 227
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 label-bg-burgund
   rotate: false
-  xy: 837, 477
+  xy: 277, 193
   size: 32, 32
   split: 12, 12, 15, 15
   orig: 32, 32
   offset: 0, 0
   index: -1
-relict-flash
+relict-frost
   rotate: false
-  xy: 871, 477
+  xy: 277, 159
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 cheese
   rotate: false
-  xy: 905, 477
+  xy: 277, 125
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 button-switch-up
   rotate: false
-  xy: 939, 477
+  xy: 277, 91
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 sword-iron
   rotate: false
-  xy: 973, 477
+  xy: 277, 57
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 button-use-down
   rotate: false
-  xy: 565, 443
+  xy: 285, 23
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 potion-purple
   rotate: false
-  xy: 599, 443
+  xy: 667, 479
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 medicine-blue
   rotate: false
-  xy: 633, 443
+  xy: 701, 479
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 guardian-crystal-dragon
   rotate: false
-  xy: 667, 443
+  xy: 735, 479
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 guardian-crystal-demon
   rotate: false
-  xy: 701, 443
+  xy: 769, 479
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 beer
   rotate: false
-  xy: 735, 443
+  xy: 803, 479
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 label-bg-sandstone
   rotate: false
-  xy: 769, 443
+  xy: 837, 479
   size: 32, 32
   split: 4, 4, 4, 7
   orig: 32, 32
@@ -483,148 +589,182 @@ label-bg-sandstone
   index: -1
 claws-rusty
   rotate: false
-  xy: 803, 443
+  xy: 871, 479
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 guardian-crystal-mountain
   rotate: false
-  xy: 837, 443
+  xy: 905, 479
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 sword-excalibur
   rotate: false
-  xy: 871, 443
+  xy: 939, 479
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 sword-wood
   rotate: false
-  xy: 905, 443
+  xy: 973, 479
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+relict-flame
+  rotate: false
+  xy: 667, 445
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 balsam
   rotate: false
-  xy: 939, 443
+  xy: 701, 445
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 meat
   rotate: false
-  xy: 973, 443
+  xy: 735, 445
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
-darker-paper-area
+relict-earth
   rotate: false
-  xy: 1007, 493
-  size: 16, 16
-  split: 3, 3, 3, 3
-  orig: 16, 16
+  xy: 769, 445
+  size: 32, 32
+  orig: 32, 32
   offset: 0, 0
   index: -1
-stats-symbol-pstr
+relict-lightning-big
   rotate: false
-  xy: 1007, 475
-  size: 16, 16
-  orig: 16, 16
+  xy: 803, 445
+  size: 32, 32
+  orig: 32, 32
   offset: 0, 0
   index: -1
-stats-symbol-mdef
+relict-lightning
   rotate: false
-  xy: 1007, 457
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: -1
-ability-circle-active
-  rotate: false
-  xy: 1007, 439
-  size: 16, 16
-  orig: 16, 16
+  xy: 803, 445
+  size: 32, 32
+  orig: 32, 32
   offset: 0, 0
   index: -1
 guardian-crystal-flash
   rotate: false
-  xy: 369, 281
+  xy: 837, 445
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 potion-black
   rotate: false
-  xy: 403, 281
+  xy: 871, 445
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 bread
   rotate: false
-  xy: 437, 281
+  xy: 905, 445
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 medicine-green
   rotate: false
-  xy: 369, 247
+  xy: 939, 445
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 button-switch-down
   rotate: false
-  xy: 403, 247
+  xy: 973, 445
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
+ability-circle-inactive
+  rotate: false
+  xy: 1007, 495
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+bg-pattern-3
+  rotate: false
+  xy: 1007, 477
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+bg-pattern-2
+  rotate: false
+  xy: 1007, 459
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+bg-pattern-1
+  rotate: false
+  xy: 1007, 441
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
 cure-venom
   rotate: false
-  xy: 437, 247
+  xy: 499, 311
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 potion-green
   rotate: false
-  xy: 471, 281
+  xy: 491, 277
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 sword-barb-steel
   rotate: false
-  xy: 471, 247
+  xy: 533, 311
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 button-check-down
   rotate: false
-  xy: 135, 5
+  xy: 567, 319
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 relict-mountain
   rotate: false
-  xy: 169, 5
+  xy: 525, 277
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+relict-mountain-big
+  rotate: false
+  xy: 525, 277
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 label-bg-sandstone-down
   rotate: false
-  xy: 335, 221
+  xy: 593, 419
   size: 32, 32
   split: 4, 4, 5, 7
   orig: 32, 32
@@ -632,7 +772,7 @@ label-bg-sandstone-down
   index: -1
 label-bg-paper
   rotate: false
-  xy: 369, 213
+  xy: 627, 423
   size: 32, 32
   split: 14, 15, 19, 11
   orig: 32, 32
@@ -640,148 +780,162 @@ label-bg-paper
   index: -1
 ability-connection-vert
   rotate: false
-  xy: 403, 213
+  xy: 661, 411
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 guardian-crystal-fire
   rotate: false
-  xy: 437, 213
+  xy: 695, 411
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 potion-gold
   rotate: false
-  xy: 471, 213
+  xy: 729, 411
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 ability-connection-hor
   rotate: false
-  xy: 203, 107
+  xy: 763, 411
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 button-back-up
   rotate: false
-  xy: 205, 73
+  xy: 797, 411
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 potion-blue
   rotate: false
-  xy: 205, 39
+  xy: 831, 411
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 button-use-up
   rotate: false
-  xy: 203, 5
+  xy: 865, 411
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 button-delete-up
   rotate: false
-  xy: 491, 417
+  xy: 899, 411
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 cure-confusion
   rotate: false
-  xy: 491, 383
+  xy: 933, 411
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 guardian-crystal-water
   rotate: false
-  xy: 491, 349
+  xy: 967, 411
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 toolBarButton-exit-down
   rotate: false
-  xy: 491, 315
+  xy: 627, 389
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 guardian-crystal-ice
   rotate: false
-  xy: 525, 421
+  xy: 661, 377
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 sword-titanium
   rotate: false
-  xy: 525, 387
+  xy: 695, 377
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 potion-red
   rotate: false
-  xy: 525, 353
+  xy: 729, 377
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 toolBarButton-exit-up
   rotate: false
-  xy: 525, 319
+  xy: 763, 377
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 sword-knightly-steel
   rotate: false
-  xy: 559, 409
+  xy: 797, 377
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 label-bg-burgund-down
   rotate: false
-  xy: 559, 375
+  xy: 831, 377
   size: 32, 32
   split: 12, 12, 15, 15
   orig: 32, 32
   offset: 0, 0
   index: -1
+relict-air
+  rotate: false
+  xy: 865, 377
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+relict-demon
+  rotate: false
+  xy: 899, 377
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
 button-back-down
   rotate: false
-  xy: 593, 409
+  xy: 933, 377
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 elixier
   rotate: false
-  xy: 559, 341
+  xy: 967, 377
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 diamond-flames
   rotate: false
-  xy: 593, 375
+  xy: 567, 285
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 label-bg-royal
   rotate: false
-  xy: 627, 409
+  xy: 601, 355
   size: 32, 32
   split: 12, 12, 15, 15
   orig: 32, 32
@@ -789,7 +943,7 @@ label-bg-royal
   index: -1
 label-bg-woods
   rotate: false
-  xy: 593, 341
+  xy: 601, 321
   size: 32, 32
   split: 12, 12, 15, 15
   orig: 32, 32
@@ -797,168 +951,119 @@ label-bg-woods
   index: -1
 guardian-crystal-spirit
   rotate: false
-  xy: 627, 375
+  xy: 601, 287
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 milk
   rotate: false
-  xy: 661, 409
+  xy: 635, 343
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 chocolate
   rotate: false
-  xy: 627, 341
-  size: 32, 32
-  orig: 32, 32
-  offset: 0, 0
-  index: -1
-relict-arthropoda
-  rotate: false
-  xy: 661, 375
+  xy: 635, 309
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 guardian-crystal-earth
   rotate: false
-  xy: 695, 409
+  xy: 669, 343
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 tent
   rotate: false
-  xy: 661, 341
+  xy: 669, 309
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 claws-wood
   rotate: false
-  xy: 695, 375
+  xy: 703, 343
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 sword-broad-steel
   rotate: false
-  xy: 729, 409
+  xy: 703, 309
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 diamond-sea
   rotate: false
-  xy: 695, 341
+  xy: 737, 343
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 sword-rusty
   rotate: false
-  xy: 729, 375
+  xy: 737, 309
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+relict-lindworm
+  rotate: false
+  xy: 771, 343
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 button-delete-down
   rotate: false
-  xy: 763, 409
+  xy: 771, 309
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 potion-pink
   rotate: false
-  xy: 729, 341
+  xy: 805, 343
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 angel-tear
   rotate: false
-  xy: 763, 375
+  xy: 805, 309
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 cure-mute
   rotate: false
-  xy: 797, 409
+  xy: 839, 343
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 medicine-red
   rotate: false
-  xy: 763, 341
+  xy: 839, 309
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
-stats-symbol-exp
-  rotate: false
-  xy: 505, 297
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: -1
-stats-symbol-pdef
-  rotate: false
-  xy: 559, 323
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: -1
-stats-symbol-hp
-  rotate: false
-  xy: 797, 391
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: -1
-ability-circle-inactive
-  rotate: false
-  xy: 831, 425
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: -1
-bg-pattern-3
-  rotate: false
-  xy: 505, 279
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: -1
-bg-pattern-2
-  rotate: false
-  xy: 577, 323
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: -1
-bg-pattern-1
-  rotate: false
-  xy: 797, 373
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: -1
 stats-symbol-mstr
   rotate: false
-  xy: 849, 425
+  xy: 217, 5
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 paper-border
   rotate: false
-  xy: 505, 261
+  xy: 593, 401
   size: 16, 16
   split: 7, 7, 7, 7
   orig: 16, 16
@@ -966,28 +1071,28 @@ paper-border
   index: -1
 stats-symbol-speed
   rotate: false
-  xy: 595, 323
+  xy: 635, 291
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 stats-symbol-mp
   rotate: false
-  xy: 797, 355
+  xy: 873, 359
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 scrollbar-knob
   rotate: false
-  xy: 1, 1
+  xy: 211, 301
   size: 8, 8
   orig: 8, 8
   offset: 0, 0
   index: -1
 scrollbar-knob
   rotate: false
-  xy: 1, 1
+  xy: 211, 301
   size: 8, 8
   split: 2, 2, 2, 4
   orig: 8, 8
@@ -995,14 +1100,14 @@ scrollbar-knob
   index: -1
 scrollbar-bg
   rotate: false
-  xy: 211, 299
+  xy: 127, 9
   size: 8, 8
   orig: 8, 8
   offset: 0, 0
   index: -1
 list-selection
   rotate: false
-  xy: 211, 289
+  xy: 635, 379
   size: 8, 8
   split: 2, 2, 2, 2
   orig: 8, 8
@@ -1010,14 +1115,14 @@ list-selection
   index: -1
 black-a80
   rotate: false
-  xy: 359, 456
+  xy: 459, 458
   size: 1, 1
   orig: 1, 1
   offset: 0, 0
   index: -1
 transparent
   rotate: false
-  xy: 137, 156
+  xy: 209, 54
   size: 1, 1
   orig: 1, 1
   offset: 0, 0

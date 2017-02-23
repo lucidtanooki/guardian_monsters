@@ -119,4 +119,21 @@ public abstract class Item {
             return m.getMP() < m.getMPfull();
         }
     }
+
+    public static class Key extends Item {
+
+        public Key(String name) {
+            super(name, TYPE.ALL, CATEGORY.KEY);
+        }
+
+        @Override
+        public void apply(Monster m) {
+            // Do nothing
+        }
+
+        @Override
+        public boolean applicable(Monster m) {
+            return false;
+        }
+    }
 }

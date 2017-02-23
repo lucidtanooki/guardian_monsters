@@ -15,7 +15,6 @@ import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.model.Inventory;
 import de.limbusdev.guardianmonsters.model.Item;
 import de.limbusdev.guardianmonsters.model.Monster;
-import de.limbusdev.guardianmonsters.utils.GS;
 
 /**
  * Created by georg on 20.02.17.
@@ -23,13 +22,14 @@ import de.limbusdev.guardianmonsters.utils.GS;
 
 public class ItemDetailViewWidget extends Group {
 
-    private Label itemName, itemDescription;
+    private Label itemName, itemDescription, itemArea;
     private Image itemImg;
     private Skin skin;
     private ReassuranceWidget reassuranceWidget;
     private Inventory inventory;
     private ArrayMap<Integer, Monster> team;
     private Item item;
+    private ImageButton delete, use;
 
 
     public ItemDetailViewWidget(Skin skin, final Inventory inventory, ArrayMap<Integer,Monster> monsters)  {
@@ -47,7 +47,7 @@ public class ItemDetailViewWidget extends Group {
         bgLabel.setPosition(0,0,Align.bottomLeft);
         addActor(bgLabel);
 
-        Label itemArea = new Label("", skin, "paper-dark-area");
+        itemArea = new Label("", skin, "paper-dark-area");
         itemArea.setSize(40,40);
         itemArea.setPosition(61,156,Align.bottomLeft);
         addActor(itemArea);
@@ -69,7 +69,7 @@ public class ItemDetailViewWidget extends Group {
         itemDescription.setAlignment(Align.topLeft);
         addActor(itemDescription);
 
-        ImageButton delete = new ImageButton(skin, "button-delete");
+        delete = new ImageButton(skin, "button-delete");
         delete.setPosition(24,160,Align.bottomLeft);
         delete.addListener(new ClickListener() {
             @Override
@@ -87,7 +87,7 @@ public class ItemDetailViewWidget extends Group {
             }
         };
 
-        ImageButton use = new ImageButton(skin, "button-use");
+        use = new ImageButton(skin, "button-use");
         use.setPosition(106,160,Align.bottomLeft);
         use.addListener(new ClickListener() {
             @Override
@@ -125,7 +125,19 @@ public class ItemDetailViewWidget extends Group {
         });
     }
 
+    public Label getItemArea() {
+        return itemArea;
+    }
+
     public Skin getSkin() {
         return skin;
+    }
+
+    public ImageButton getDelete() {
+        return delete;
+    }
+
+    public ImageButton getUse() {
+        return use;
     }
 }

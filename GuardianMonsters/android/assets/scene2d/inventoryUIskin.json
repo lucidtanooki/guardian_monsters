@@ -40,6 +40,8 @@
 	
 	com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
     default:    {font: default-font},
+    green:      {font: font16g},
+    red:        {font: font16r},
     burgund:    {font: font16w, background: label-bg-burgund},
     paper:      {font: font16,  background: label-bg-paper},
     paper-dark-area:      {font: font16,  background: darker-paper-area},

@@ -7,7 +7,6 @@ import com.badlogic.gdx.utils.ObjectMap;
 import java.util.Observable;
 
 import de.limbusdev.guardianmonsters.enums.Element;
-import de.limbusdev.guardianmonsters.utils.GS;
 
 /**
  * Created by georg on 12.12.15.
@@ -19,6 +18,10 @@ public class Monster extends Observable {
     public int INSTANCE_ID;
     public int evolution;
     public Array<Element> elements;
+    public Equipment weapon;
+    public Equipment helmet;
+    public Equipment armor;
+    public Equipment shoes;
 
 
     // -------------------------------------------------------------------------------------- STATUS
@@ -43,7 +46,6 @@ public class Monster extends Observable {
 
     public int pDefFull, pDef;
     public int mDefFull, mDef;
-
 
     /* ........................................................................... CONSTRUCTOR .. */
 
@@ -175,6 +177,74 @@ public class Monster extends Observable {
         return HPfull;
     }
 
+    public int getExtendedHPfull() {
+        int hp=getHPfull();
+        int hpAddFactor=0;
+        if(weapon != null)  hpAddFactor += weapon.getAddsHP();
+        if(armor != null)   hpAddFactor += armor.getAddsHP();
+        if(helmet != null)  hpAddFactor += helmet.getAddsHP();
+        if(shoes != null)   hpAddFactor += shoes.getAddsHP();
+        hp *= (100f+hpAddFactor)/100f;
+        return hp;
+    }
+
+    public int getExtendedMPfull() {
+        int mp=getMPfull();
+        int mpAddFactor=0;
+        if(weapon != null)  mpAddFactor += weapon.getAddsMP();
+        if(armor != null)   mpAddFactor += armor.getAddsMP();
+        if(helmet != null)  mpAddFactor += helmet.getAddsMP();
+        if(shoes != null)   mpAddFactor += shoes.getAddsMP();
+        mp *= (100f+mpAddFactor)/100f;
+        return mp;
+    }
+
+    public EquipmentPotential getEquipmentPotential(Equipment eq) {
+        EquipmentPotential pot;
+
+        Equipment currentEquipment;
+        switch(eq.getEquipmentType()) {
+            case HELMET:
+                currentEquipment = helmet;
+                break;
+            case ARMOR:
+                currentEquipment = armor;
+                break;
+            case SHOES:
+                currentEquipment = shoes;
+                break;
+            default:
+                currentEquipment = weapon;
+                break;
+        }
+
+        if(currentEquipment == null) {
+            pot = new EquipmentPotential(
+                eq.getAddsHP(),
+                eq.getAddsMP(),
+                eq.getAddsSpeed(),
+                eq.getAddsEXP(),
+                eq.getAddsPStr(),
+                eq.getAddsPDef(),
+                eq.getAddsMStr(),
+                eq.getAddsMDef()
+            );
+        } else {
+            pot = new EquipmentPotential(
+                eq.getAddsHP()      - currentEquipment.getAddsHP(),
+                eq.getAddsMP()      - currentEquipment.getAddsMP(),
+                eq.getAddsSpeed()   - currentEquipment.getAddsSpeed(),
+                eq.getAddsEXP()     - currentEquipment.getAddsEXP(),
+                eq.getAddsPStr()    - currentEquipment.getAddsPStr(),
+                eq.getAddsPDef()    - currentEquipment.getAddsPDef(),
+                eq.getAddsMStr()    - currentEquipment.getAddsMDef(),
+                eq.getAddsMDef()    - currentEquipment.getAddsMDef()
+            );
+        }
+
+        return pot;
+    }
+
     public int getHP() {
         return HP;
     }
@@ -225,5 +295,47 @@ public class Monster extends Observable {
 
     public void setmDef(int mDef) {
         this.mDef = mDef;
+    }
+
+    public class EquipmentPotential {
+        public int hp, mp, speed, exp, pstr, pdef, mstr, mdef;
+
+        public EquipmentPotential(int hp, int mp, int speed, int exp, int pstr, int pdef, int mstr, int mdef) {
+            this.hp = hp;
+            this.mp = mp;
+            this.speed = speed;
+            this.exp = exp;
+            this.pstr = pstr;
+            this.pdef = pdef;
+            this.mstr = mstr;
+            this.mdef = mdef;
+        }
+    }
+
+    /**
+     * Returns a replaced equipment, if there is any
+     * @return replaced equipment
+     */
+    public Item equip(Equipment equipment) {
+        Equipment replacedEq;
+        switch(equipment.getEquipmentType()) {
+            case ARMOR:
+                replacedEq = armor;
+                armor = equipment;
+                break;
+            case HELMET:
+                replacedEq = helmet;
+                helmet = equipment;
+                break;
+            case SHOES:
+                replacedEq = shoes;
+                shoes = equipment;
+                break;
+            default:
+                replacedEq = weapon;
+                weapon = equipment;
+                break;
+        }
+        return replacedEq;
     }
 }

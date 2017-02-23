@@ -112,13 +112,14 @@ public class ItemInfo {
         return new Equipment(
             e.get("name", "claws-wood"),
             type,
-            e.getInt("addsPStr", 0),
-            e.getInt("addsPDef", 0),
-            e.getInt("addsMStr", 0),
-            e.getInt("addsMDef", 0),
-            e.getInt("addsSpeed", 0),
-            e.getInt("addsHP", 0),
-            e.getInt("addsMP", 0)
+            e.getInt("addsPStr",    0),
+            e.getInt("addsPDef",    0),
+            e.getInt("addsMStr",    0),
+            e.getInt("addsMDef",    0),
+            e.getInt("addsSpeed",   0),
+            e.getInt("addsHP",      0),
+            e.getInt("addsMP",      0),
+            e.getInt("addsEXP",     0)
             );
     }
 

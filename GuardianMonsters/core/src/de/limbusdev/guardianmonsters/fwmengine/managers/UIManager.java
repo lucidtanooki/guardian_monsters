@@ -18,6 +18,8 @@ public class UIManager implements UI {
 
     private ArrayMap<Integer,ArrayMap<Color,BitmapFont>> fonts;
     private Skin defaultSkin, battleSkin, inventorySkin;
+    private final static Color DGREEN = Color.valueOf("3e8948");
+    private final static Color DRED = Color.valueOf("9e2835");
 
     public UIManager(
         String fontPath
@@ -34,7 +36,7 @@ public class UIManager implements UI {
 
         fonts = new ArrayMap<>();
         int[] sizes = {12,16,32};
-        Color[] colors = {Color.BLACK, Color.WHITE};
+        Color[] colors = {Color.BLACK, Color.WHITE, DGREEN, DRED};
 
         for(int size : sizes) {
             ArrayMap<Color,BitmapFont> coloredFonts = new ArrayMap<>();
@@ -70,6 +72,8 @@ public class UIManager implements UI {
         inventorySkin.add("white", fonts.get(16).get(Color.WHITE));
         inventorySkin.add("font16", fonts.get(16).get(Color.BLACK));
         inventorySkin.add("font16w", fonts.get(16).get(Color.WHITE));
+        inventorySkin.add("font16g", fonts.get(16).get(DGREEN));
+        inventorySkin.add("font16r", fonts.get(16).get(DRED));
         inventorySkin.load(Gdx.files.internal("scene2d/inventoryUIskin.json"));
 
     }

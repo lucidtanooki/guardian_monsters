@@ -16,6 +16,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
+import de.limbusdev.guardianmonsters.model.Equipment;
 import de.limbusdev.guardianmonsters.model.Item;
 import de.limbusdev.guardianmonsters.model.Monster;
 import de.limbusdev.guardianmonsters.model.MonsterInformation;
@@ -75,10 +76,73 @@ public class GuardianOverviewButton extends TextButton implements Observer{
 
         row();
 
-        augmentButton(monster, item);
+        switch(item.getCategory()) {
+            case EQUIPMENT:
+                augmentButtonEquipment(monster, (Equipment) item);
+                break;
+            default:
+                augmentButtonMedicine(monster, item);
+                break;
+        }
     }
 
-    private void augmentButton(Monster monster, Item item) {
+    private void augmentButtonEquipment(Monster monster, Equipment equipment) {
+        if(subTable != null) {
+            removeActor(subTable);
+            getCells().removeIndex(getCells().size-1);
+            row();
+        }
+
+        Monster.EquipmentPotential pot = monster.getEquipmentPotential(equipment);
+
+        String fontStyle;
+        subTable = new Table();
+
+        subTable.add(new Image(getSkin().getDrawable("stats-symbol-hp"))).width(16).height(16);
+        fontStyle = (pot.hp > 0 ? "green" : (pot.hp == 0 ? "default" : "red"));
+        subTable.add(new Label((pot.hp > 0 ? "+" : "")  + Integer.toString(pot.hp), getSkin(), fontStyle)).width(32);
+
+        subTable.add(new Image(getSkin().getDrawable("stats-symbol-mp"))).width(16).height(16);
+        fontStyle = (pot.mp > 0 ? "green" : (pot.mp == 0 ? "default" : "red"));
+        subTable.add(new Label((pot.mp > 0 ? "+" : "")  + Integer.toString(pot.mp), getSkin(), fontStyle)).width(32);
+
+        subTable.add(new Image(getSkin().getDrawable("stats-symbol-speed"))).width(16).height(16);
+        fontStyle = (pot.speed > 0 ? "green" : (pot.speed == 0 ? "default" : "red"));
+        subTable.add(new Label((pot.speed > 0 ? "+" : "")  + Integer.toString(pot.speed), getSkin(), fontStyle)).width(32);
+
+        subTable.add(new Image(getSkin().getDrawable("stats-symbol-exp"))).width(16).height(16);
+        fontStyle = (pot.exp > 0 ? "green" : (pot.exp == 0 ? "default" : "red"));
+        subTable.add(new Label((pot.exp > 0 ? "+" : "")  + Integer.toString(pot.exp), getSkin(), fontStyle)).width(32);
+
+        subTable.row();
+
+        subTable.add(new Image(getSkin().getDrawable("stats-symbol-pstr"))).width(16).height(16);
+        fontStyle = (pot.pstr > 0 ? "green" : (pot.pstr == 0 ? "default" : "red"));
+        subTable.add(new Label((pot.pstr > 0 ? "+" : "")  + Integer.toString(pot.pstr), getSkin(), fontStyle)).width(32);
+
+        subTable.add(new Image(getSkin().getDrawable("stats-symbol-pdef"))).width(16).height(16);
+        fontStyle = (pot.pdef > 0 ? "green" : (pot.pdef == 0 ? "default" : "red"));
+        subTable.add(new Label((pot.pdef > 0 ? "+" : "")  + Integer.toString(pot.pdef), getSkin(), fontStyle)).width(32);
+
+        subTable.add(new Image(getSkin().getDrawable("stats-symbol-mstr"))).width(16).height(16);
+        fontStyle = (pot.mstr > 0 ? "green" : (pot.mstr == 0 ? "default" : "red"));
+        subTable.add(new Label((pot.mstr > 0 ? "+" : "")  + Integer.toString(pot.mstr), getSkin(), fontStyle)).width(32);
+
+        subTable.add(new Image(getSkin().getDrawable("stats-symbol-mdef"))).width(16).height(16);
+        fontStyle = (pot.mdef > 0 ? "green" : (pot.mdef == 0 ? "default" : "red"));
+        subTable.add(new Label((pot.mdef > 0 ? "+" : "")  + Integer.toString(pot.mdef), getSkin(), fontStyle)).width(32);
+
+
+        add(subTable).align(Align.left);
+        layout();
+
+        if(!item.applicable(monster)) {
+            setTouchable(Touchable.disabled);
+            setColor(.6f,.6f,.6f,1f);
+        }
+    }
+
+    private void augmentButtonMedicine(Monster monster, Item item) {
 
         if(subTable != null) {
             removeActor(subTable);
@@ -104,7 +168,14 @@ public class GuardianOverviewButton extends TextButton implements Observer{
     @Override
     public void update(Observable o, Object arg) {
         if(o instanceof Monster) {
-            augmentButton(monster,item);
+            switch(item.getCategory()) {
+                case EQUIPMENT:
+                    augmentButtonEquipment(monster, (Equipment) item);
+                    break;
+                default:
+                    augmentButtonMedicine(monster, item);
+                    break;
+            }
         }
     }
 }

@@ -12,6 +12,7 @@ import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.I18NBundle;
 
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
+import de.limbusdev.guardianmonsters.model.Equipment;
 import de.limbusdev.guardianmonsters.model.Inventory;
 import de.limbusdev.guardianmonsters.model.Item;
 import de.limbusdev.guardianmonsters.model.Monster;
@@ -83,7 +84,14 @@ public class ItemDetailViewWidget extends Group {
             @Override
             public boolean onButton(int i) {
                 inventory.takeItemFromInventory(item);
-                item.apply(team.get(i));
+
+                if(item instanceof Equipment) {
+                    Item replaced = team.get(i).equip((Equipment)item);
+                    if(replaced != null) inventory.putItemInInventory(replaced);
+                } else {
+                    item.apply(team.get(i));
+                }
+
                 boolean empty = !(inventory.getItemAmount(item) > 0);
                 if(empty) remove();
                 return !empty;

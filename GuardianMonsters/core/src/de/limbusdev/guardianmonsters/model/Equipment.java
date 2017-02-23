@@ -13,17 +13,17 @@ public class Equipment extends Item {
 
     @Override
     public boolean applicable(Monster m) {
-        return false;
+        return true;
     }
 
     public enum EQUIPMENT_TYPE {
         WEAPON, HELMET, ARMOR, SHOES,
     }
 
-    private int addsPStr, addsPDef, addsMStr, addsMDef, addsSpeed, addsHP, addsMP;
+    private int addsPStr, addsPDef, addsMStr, addsMDef, addsSpeed, addsHP, addsMP, addsEXP;
     private EQUIPMENT_TYPE type;
 
-    public Equipment(String name, EQUIPMENT_TYPE type, int addsPStr, int addsPDef, int addsMStr, int addsMDef, int addsSpeed, int addsHP, int addsMP) {
+    public Equipment(String name, EQUIPMENT_TYPE type, int addsPStr, int addsPDef, int addsMStr, int addsMDef, int addsSpeed, int addsHP, int addsMP, int addsExp) {
         super(name, TYPE.EQUIPMENT, CATEGORY.EQUIPMENT);
         this.addsPStr = addsPStr;
         this.addsPDef = addsPDef;
@@ -33,6 +33,7 @@ public class Equipment extends Item {
         this.addsHP = addsHP;
         this.addsMP = addsMP;
         this.type = type;
+        this.addsEXP = addsExp;
     }
 
 
@@ -65,7 +66,11 @@ public class Equipment extends Item {
         return addsMP;
     }
 
-    public EQUIPMENT_TYPE getWeaponType() {
+    public int getAddsEXP() {
+        return addsEXP;
+    }
+
+    public EQUIPMENT_TYPE getEquipmentType() {
         return type;
     }
 

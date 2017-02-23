@@ -58,6 +58,9 @@ public class ItemInfo {
                 case "Equipment":
                     item = parseWeaponItem(e);
                     break;
+                case "Key":
+                    item = parseKeyItem(e);
+                    break;
                 default:
                     item = new Item.HPCure("Water", 0);
                     break;
@@ -80,6 +83,10 @@ public class ItemInfo {
 
     private Item parseStatusCuringItem(XmlReader.Element e) {
         return new Item.Reviver(e.get("name", "Water"), e.getFloat("fraction", 0f));
+    }
+
+    private Item parseKeyItem(XmlReader.Element e) {
+        return new Item.Key(e.get("name", "Water"));
     }
 
     private Item parseWeaponItem(XmlReader.Element e) {

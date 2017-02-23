@@ -54,6 +54,9 @@ public class GameStateDebugger {
         inventory.putItemInInventory(ItemInfo.getInst().getItem("claws-rusty"));
         inventory.putItemInInventory(ItemInfo.getInst().getItem("sword-silver"));
         inventory.putItemInInventory(ItemInfo.getInst().getItem("sword-knightly-steel"));
+        inventory.putItemInInventory(ItemInfo.getInst().getItem("relict-earth"));
+        inventory.putItemInInventory(ItemInfo.getInst().getItem("relict-demon"));
+        inventory.putItemInInventory(ItemInfo.getInst().getItem("relict-lightning"));
 
 
         inventory.sortItemsByID();

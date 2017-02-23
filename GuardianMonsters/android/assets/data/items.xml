@@ -1,4 +1,43 @@
 <items>
+  <!-- KEY Items -->
+  <Key>
+    <name>relict-earth</name>
+  </Key>
+  <Key>
+    <name>relict-water</name>
+  </Key>
+  <Key>
+    <name>relict-flame</name>
+  </Key>
+  <Key>
+    <name>relict-air</name>
+  </Key>
+  <Key>
+    <name>relict-forest</name>
+  </Key>
+  <Key>
+    <name>relict-frost</name>
+  </Key>
+  <Key>
+    <name>relict-arthropoda</name>
+  </Key>
+  <Key>
+    <name>relict-lightning</name>
+  </Key>
+  <Key>
+    <name>relict-mountain</name>
+  </Key>
+  <Key>
+    <name>relict-spirit</name>
+  </Key>
+  <Key>
+    <name>relict-demon</name>
+  </Key>
+  <Key>
+    <name>relict-lindworm</name>
+  </Key>
+
+
   <!-- HP Curing Items -->
   <HPCure>
     <name>bread</name>

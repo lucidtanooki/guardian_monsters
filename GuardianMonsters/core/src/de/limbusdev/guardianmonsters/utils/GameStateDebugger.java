@@ -13,6 +13,7 @@ import de.limbusdev.guardianmonsters.fwmengine.battle.ui.BattleScreen;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.InventoryScreen;
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.OutdoorGameWorldScreen;
 import de.limbusdev.guardianmonsters.model.Attack;
+import de.limbusdev.guardianmonsters.model.AttackInfo;
 import de.limbusdev.guardianmonsters.model.Inventory;
 import de.limbusdev.guardianmonsters.model.Item;
 import de.limbusdev.guardianmonsters.model.ItemInfo;
@@ -58,7 +59,9 @@ public class GameStateDebugger {
         inventory.putItemInInventory(ItemInfo.getInst().getItem("relict-demon"));
         inventory.putItemInInventory(ItemInfo.getInst().getItem("relict-lightning"));
         inventory.putItemInInventory(ItemInfo.getInst().getItem("relict-water"));
-
+        inventory.putItemInInventory(ItemInfo.getInst().getItem("helmet-iron"));
+        inventory.putItemInInventory(ItemInfo.getInst().getItem("shield-iron"));
+        inventory.putItemInInventory(ItemInfo.getInst().getItem("shoes-leather"));
 
         inventory.sortItemsByID();
         InventoryScreen ivs = new InventoryScreen(herTeam, inventory);
@@ -151,6 +154,10 @@ public class GameStateDebugger {
         }
     }
 
+    public void testAttackParsing() {
+        AttackInfo ai = AttackInfo.getInst();
+    }
+
     public void startDebugging() {
         switch(GS.DEBUG_MODE) {
             case BATTLE:
@@ -164,6 +171,9 @@ public class GameStateDebugger {
                 break;
             case BATTLE_SYSTEM:
                 TestBattleSystem();
+                break;
+            case ATTACK_PARSING:
+                testAttackParsing();
                 break;
             default:
                 setUpTestWorld();

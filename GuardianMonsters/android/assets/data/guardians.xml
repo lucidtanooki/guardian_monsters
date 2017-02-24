@@ -1,0 +1,43 @@
+<guardians>
+    <guardian id="1" nameID="gm001_fordin">
+        <evolutionID>2</evolutionID>
+        <evolutionLvl>20</evolutionLvl>
+        <elements>
+            <element>earth</element>
+        </elements>
+        <attacks>
+            <attack element="any"   id="1" abilityPos="0" /> <!-- Self Defense, Attack 1 in Category ANY -->
+            <attack element="any"   id="2" abilityPos="0" /> <!-- Bite -->
+            <attack element="earth" id="1" abilityPos="5" /> <!-- Earth, available on Ability Board, Field 5 -->
+        </attacks>
+        <basestats hp="99" mp="19" speed="1" pstr="1" pdef="1" mstr="1" mdef="1" />
+    </guardian>
+
+    <guardian id="2" nameID="gm002_stegofor">
+        <evolutionID>3</evolutionID>
+        <evolutionLvl>40</evolutionLvl>
+        <elements>
+            <element>earth</element>
+            <element>forest</element>
+        </elements>
+        <attacks>
+            <attack element="any"   id="1" abilityPos="0" /> <!-- Self Defense, Attack 1 in Category ANY -->
+            <attack element="any"   id="2" abilityPos="0" /> <!-- Bite -->
+            <attack element="earth" id="1" abilityPos="5" /> <!-- Earth, available on Ability Board, Field 5 -->
+        </attacks>
+        <basestats hp="198" mp="38" speed="2" pstr="2" pdef="2" mstr="2" mdef="2" />
+    </guardian>
+
+    <guardian id="3" nameID="gm003_brachifor">
+        <elements>
+            <element>earth</element>
+            <element>forest</element>
+        </elements>
+        <attacks>
+            <attack element="any"   id="1" abilityPos="0" /> <!-- Self Defense, Attack 1 in Category ANY -->
+            <attack element="any"   id="2" abilityPos="0" /> <!-- Bite -->
+            <attack element="earth" id="1" abilityPos="5" /> <!-- Earth, available on Ability Board, Field 5 -->
+        </attacks>
+        <basestats hp="396" mp="76" speed="4" pstr="4" pdef="4" mstr="4" mdef="4" />
+    </guardian>
+</guardians>

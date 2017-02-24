@@ -46,14 +46,8 @@ public class ItemInfo {
 
         try {
             switch (e.getName()) {
-                case "HPCure":
-                    item = parseHPCuringItem(e);
-                    break;
-                case "MPCure":
-                    item = parseMPCuringItem(e);
-                    break;
-                case "Reviver":
-                    item = parseStatusCuringItem(e);
+                case "medicine":
+                    item = parseMedicine(e);
                     break;
                 case "Equipment":
                     item = parseWeaponItem(e);
@@ -62,27 +56,40 @@ public class ItemInfo {
                     item = parseKeyItem(e);
                     break;
                 default:
-                    item = new Item.HPCure("Water", 0);
+                    item = new Item.Medicine("Water", 0, Item.TYPE.HP_CURE);
                     break;
             }
         } catch (Exception ex) {
             ex.printStackTrace();
-            item = new Item.HPCure("Water", 0);
+            item = new Item.Medicine("Water", 0, Item.TYPE.HP_CURE);
         }
 
         return item;
     }
 
+    private Item parseMedicine(XmlReader.Element element) {
+        switch(element.get("type")) {
+            case "HPcure":
+                return parseHPCuringItem(element);
+            case "MPcure":
+                return parseMPCuringItem(element);
+            case "revive":
+                return parseRevivingItem(element);
+            default:
+                return new Item.Medicine("Water", 0, Item.TYPE.HP_CURE);
+        }
+    }
+
     private Item parseHPCuringItem(XmlReader.Element e) {
-        return new Item.HPCure(e.get("name", "Water"), e.getInt("value", 0));
+        return new Item.Medicine(e.get("name", "Water"), e.getInt("value", 0), Item.TYPE.HP_CURE);
     }
 
     private Item parseMPCuringItem(XmlReader.Element e) {
-        return new Item.MPCure(e.get("name", "Water"), e.getInt("value", 0));
+        return new Item.Medicine(e.get("name", "Water"), e.getInt("value", 0), Item.TYPE.MP_CURE);
     }
 
-    private Item parseStatusCuringItem(XmlReader.Element e) {
-        return new Item.Reviver(e.get("name", "Water"), e.getFloat("fraction", 0f));
+    private Item parseRevivingItem(XmlReader.Element e) {
+        return new Item.Medicine(e.get("name", "Water"), e.getInt("fraction", 0), Item.TYPE.REVIVE);
     }
 
     private Item parseKeyItem(XmlReader.Element e) {

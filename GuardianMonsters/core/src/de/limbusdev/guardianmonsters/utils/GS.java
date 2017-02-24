@@ -23,7 +23,7 @@ public class GS {
 
     // ................................................................................... DEBUGGING
     public static final boolean DEBUGGING_ON = true;
-    public final static DebugMode DEBUG_MODE = DebugMode.INVENTORY;
+    public final static DebugMode DEBUG_MODE = DebugMode.ATTACK_PARSING;
     public final static int startMap = 251;
 
 

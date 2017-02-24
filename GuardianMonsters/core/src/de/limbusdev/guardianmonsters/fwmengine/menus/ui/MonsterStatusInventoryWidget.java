@@ -18,6 +18,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 
+import de.limbusdev.guardianmonsters.enums.Element;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TeamComponent;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Media;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
@@ -35,9 +36,13 @@ import de.limbusdev.guardianmonsters.utils.GS;
 public class MonsterStatusInventoryWidget extends Group {
     private Label name;
     private ArrayMap<String,Label> valueLabels;
+    private HorizontalGroup elementGroup;
+    private Group equipmentGroup;
+    private Skin skin;
 
     public MonsterStatusInventoryWidget (Skin skin) {
         super();
+        this.skin = skin;
 
         setSize(140,GS.HEIGHT-36);
         Image monsterStatsBg = new Image(skin.getDrawable("menu-col-bg"));
@@ -49,11 +54,11 @@ public class MonsterStatusInventoryWidget extends Group {
         addActor(nameBg);
 
         int offX = 16;
-        int offY = 200-12;
+        int offY = 200-8;
         int gap = 18;
 
         name = new Label("Monster Name", skin, "default");
-        name.setPosition(offX ,200-10,Align.topLeft);
+        name.setPosition(offX ,200-6,Align.topLeft);
         addActor(name);
 
         valueLabels = new ArrayMap<>();
@@ -71,10 +76,24 @@ public class MonsterStatusInventoryWidget extends Group {
             addActor(key);
 
             value = new Label("0", skin, "default");
-            value.setPosition(offX+64, offY-gap*(i+1), Align.topLeft);
+            value.setPosition(offX+20, offY-gap*(i+1), Align.topLeft);
             addActor(value);
             valueLabels.put(labels[i], value);
         }
+
+        for(int bg=0; bg<4; bg++) {
+            Label bgl = new Label("", skin, "paper-dark-area");
+            bgl.setSize(36,36);
+            bgl.setPosition(100,offY-14-bg*38, Align.topLeft);
+            addActor(bgl);
+        }
+
+        elementGroup = new HorizontalGroup();
+        elementGroup.setSize(140,20);
+        elementGroup.setPosition(6,6,Align.bottomLeft);
+        addActor(elementGroup);
+        equipmentGroup = new Group();
+        addActor(equipmentGroup);
 
     }
 
@@ -89,5 +108,40 @@ public class MonsterStatusInventoryWidget extends Group {
         valueLabels.get("mstr").setText(Integer.toString(m.mStrFull));
         valueLabels.get("mdef").setText(Integer.toString(m.mDefFull));
         valueLabels.get("speed").setText(Integer.toString(m.getSpeedFull()));
+
+        elementGroup.clear();
+        for(Element e : m.elements) {
+            String elem = e.toString().toLowerCase();
+            String elemName = Services.getL18N().l18n().get("element_" + elem);
+            elemName = elemName.length() < 7 ? elemName : elemName.substring(0,6);
+            Label l = new Label(elemName, skin, "elem-" + elem);
+            elementGroup.addActor(l);
+        }
+
+        equipmentGroup.clear();
+        if(m.helmet != null) {
+            Image img = new Image(skin.getDrawable(m.helmet.getName()));
+            img.setSize(32,32);
+            img.setPosition(102,178-2,Align.topLeft);
+            equipmentGroup.addActor(img);
+        }
+        if(m.weapon != null) {
+            Image img = new Image(skin.getDrawable(m.weapon.getName()));
+            img.setSize(32,32);
+            img.setPosition(102,178-2-38,Align.topLeft);
+            equipmentGroup.addActor(img);
+        }
+        if(m.armor != null) {
+            Image img = new Image(skin.getDrawable(m.armor.getName()));
+            img.setSize(32,32);
+            img.setPosition(102,178-2-38*2,Align.topLeft);
+            equipmentGroup.addActor(img);
+        }
+        if(m.shoes != null) {
+            Image img = new Image(skin.getDrawable(m.shoes.getName()));
+            img.setSize(32,32);
+            img.setPosition(102,178-2-38*3,Align.topLeft);
+            equipmentGroup.addActor(img);
+        }
     }
 }

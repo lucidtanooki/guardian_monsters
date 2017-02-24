@@ -112,7 +112,7 @@ public class OrthogonalTiledMapAndEntityRenderer extends OrthogonalTiledMapRende
     public void renderObject(MapObject object) {
 
         String objName = object.getName();
-        // Don't render objects with empty name
+        // Don't render objects with empty nameID
         if(objName != null && objName.equals("animatedObject")) {
             renderAnimatedObject(object);
         }
@@ -129,7 +129,7 @@ public class OrthogonalTiledMapAndEntityRenderer extends OrthogonalTiledMapRende
     }
 
     /**
-     * Handles layers containing "animatedTiles" in their name and loads the needed animations
+     * Handles layers containing "animatedTiles" in their nameID and loads the needed animations
      * @param mapLayer  animatedTiles[number] layer
      */
     public void setUpTileAnimations(MapLayer mapLayer) {
@@ -154,7 +154,7 @@ public class OrthogonalTiledMapAndEntityRenderer extends OrthogonalTiledMapRende
     }
 
     /**
-     * Handles layers containing "animatedObjects" in their name and loads the needed animations
+     * Handles layers containing "animatedObjects" in their nameID and loads the needed animations
      * @param mapLayer  animatedObjects[number] layer
      */
     public void setUpObjectAnimations(MapLayer mapLayer) {

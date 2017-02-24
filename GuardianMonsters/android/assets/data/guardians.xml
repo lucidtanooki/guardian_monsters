@@ -6,8 +6,8 @@
             <element>earth</element>
         </elements>
         <attacks>
-            <attack element="any"   id="1" abilityPos="0" /> <!-- Self Defense, Attack 1 in Category ANY -->
-            <attack element="any"   id="2" abilityPos="0" /> <!-- Bite -->
+            <attack element="none"   id="1" abilityPos="0" /> <!-- Self Defense, Attack 1 in Category ANY -->
+            <attack element="none"   id="2" abilityPos="1" /> <!-- Bite -->
             <attack element="earth" id="1" abilityPos="5" /> <!-- Earth, available on Ability Board, Field 5 -->
         </attacks>
         <basestats hp="99" mp="19" speed="1" pstr="1" pdef="1" mstr="1" mdef="1" />
@@ -21,8 +21,8 @@
             <element>forest</element>
         </elements>
         <attacks>
-            <attack element="any"   id="1" abilityPos="0" /> <!-- Self Defense, Attack 1 in Category ANY -->
-            <attack element="any"   id="2" abilityPos="0" /> <!-- Bite -->
+            <attack element="none"   id="1" abilityPos="0" /> <!-- Self Defense, Attack 1 in Category ANY -->
+            <attack element="none"   id="2" abilityPos="1" /> <!-- Bite -->
             <attack element="earth" id="1" abilityPos="5" /> <!-- Earth, available on Ability Board, Field 5 -->
         </attacks>
         <basestats hp="198" mp="38" speed="2" pstr="2" pdef="2" mstr="2" mdef="2" />
@@ -34,9 +34,93 @@
             <element>forest</element>
         </elements>
         <attacks>
-            <attack element="any"   id="1" abilityPos="0" /> <!-- Self Defense, Attack 1 in Category ANY -->
-            <attack element="any"   id="2" abilityPos="0" /> <!-- Bite -->
+            <attack element="none"   id="1" abilityPos="0" /> <!-- Self Defense, Attack 1 in Category ANY -->
+            <attack element="none"   id="2" abilityPos="1" /> <!-- Bite -->
             <attack element="earth" id="1" abilityPos="5" /> <!-- Earth, available on Ability Board, Field 5 -->
+        </attacks>
+        <basestats hp="396" mp="76" speed="4" pstr="4" pdef="4" mstr="4" mdef="4" />
+    </guardian>
+
+    <guardian id="4" nameID="gm004_kroki">
+        <evolutionID>5</evolutionID>
+        <evolutionLvl>20</evolutionLvl>
+        <elements>
+            <element>water</element>
+        </elements>
+        <attacks>
+            <attack element="none"   id="1" abilityPos="0" /> <!-- Self Defense, Attack 1 in Category ANY -->
+            <attack element="none"   id="2" abilityPos="1" /> <!-- Bite -->
+            <attack element="water" id="1" abilityPos="5" />
+        </attacks>
+        <basestats hp="99" mp="19" speed="1" pstr="1" pdef="1" mstr="1" mdef="1" />
+    </guardian>
+
+    <guardian id="5" nameID="gm005_krokivip">
+        <evolutionID>6</evolutionID>
+        <evolutionLvl>40</evolutionLvl>
+        <elements>
+            <element>water</element>
+            <element>lindworm</element>
+        </elements>
+        <attacks>
+            <attack element="none"   id="1" abilityPos="0" /> <!-- Self Defense, Attack 1 in Category ANY -->
+            <attack element="none"   id="2" abilityPos="1" /> <!-- Bite -->
+            <attack element="water"   id="1" abilityPos="5" />
+        </attacks>
+        <basestats hp="198" mp="38" speed="2" pstr="2" pdef="2" mstr="2" mdef="2" />
+    </guardian>
+
+    <guardian id="6" nameID="gm006_leviadile">
+        <elements>
+            <element>water</element>
+            <element>lindworm</element>
+        </elements>
+        <attacks>
+            <attack element="none"   id="1" abilityPos="0" /> <!-- Self Defense, Attack 1 in Category ANY -->
+            <attack element="none"   id="2" abilityPos="1" /> <!-- Bite -->
+            <attack element="water" id="1" abilityPos="5" />
+        </attacks>
+        <basestats hp="396" mp="76" speed="4" pstr="4" pdef="4" mstr="4" mdef="4" />
+    </guardian>
+
+    <guardian id="7" nameID="gm007_devidin">
+        <evolutionID>8</evolutionID>
+        <evolutionLvl>20</evolutionLvl>
+        <elements>
+            <element>fire</element>
+        </elements>
+        <attacks>
+            <attack element="none"   id="1" abilityPos="0" /> <!-- Self Defense, Attack 1 in Category ANY -->
+            <attack element="none"   id="2" abilityPos="1" /> <!-- Bite -->
+            <attack element="fire" id="1" abilityPos="5" />
+        </attacks>
+        <basestats hp="99" mp="19" speed="1" pstr="1" pdef="1" mstr="1" mdef="1" />
+    </guardian>
+
+    <guardian id="8" nameID="gm008_devidra">
+        <evolutionID>9</evolutionID>
+        <evolutionLvl>40</evolutionLvl>
+        <elements>
+            <element>fire</element>
+            <element>lindworm</element>
+        </elements>
+        <attacks>
+            <attack element="none"   id="1" abilityPos="0" /> <!-- Self Defense, Attack 1 in Category ANY -->
+            <attack element="none"   id="2" abilityPos="1" /> <!-- Bite -->
+            <attack element="fire"   id="1" abilityPos="5" />
+        </attacks>
+        <basestats hp="198" mp="38" speed="2" pstr="2" pdef="2" mstr="2" mdef="2" />
+    </guardian>
+
+    <guardian id="9" nameID="gm009_deviraptor">
+        <elements>
+            <element>fire</element>
+            <element>lindworm</element>
+        </elements>
+        <attacks>
+            <attack element="none"   id="1" abilityPos="0" /> <!-- Self Defense, Attack 1 in Category ANY -->
+            <attack element="none"   id="2" abilityPos="1" /> <!-- Bite -->
+            <attack element="fire" id="1" abilityPos="5" />
         </attacks>
         <basestats hp="396" mp="76" speed="4" pstr="4" pdef="4" mstr="4" mdef="4" />
     </guardian>

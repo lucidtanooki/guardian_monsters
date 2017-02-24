@@ -12,7 +12,7 @@ import de.limbusdev.guardianmonsters.enums.Element;
 public class MonsterStatusInformation {
     /* ............................................................................ ATTRIBUTES .. */
     public int ID;
-    public String name;
+    public String nameID;
     public ArrayMap<Integer,Attack> learnableAttacks;
     public boolean canEvolve;
     public int evolvingAtLevel;
@@ -25,19 +25,19 @@ public class MonsterStatusInformation {
     /**
      *
      * @param ID                ID
-     * @param name              name
+     * @param nameID            nameID
      * @param learnableAttacks  all attacks with the level where they get learned
      * @param canEvolve         whether monster can reach another evolution state
      * @param evolution         next evolution level (2 for 2_2)
      * @param elements          monsters elements
      */
     public MonsterStatusInformation(
-        int ID, String name, ArrayMap<Integer, Attack> learnableAttacks,
+        int ID, String nameID, ArrayMap<Integer, Attack> learnableAttacks,
         boolean canEvolve, int evolution, int evolvingAtLevel, Array<Element> elements,
         BaseStat baseStat) {
 
         this.ID = ID;
-        this.name = name;
+        this.nameID = nameID;
         this.learnableAttacks = learnableAttacks;
         this.canEvolve = canEvolve;
         this.evolution = evolution;

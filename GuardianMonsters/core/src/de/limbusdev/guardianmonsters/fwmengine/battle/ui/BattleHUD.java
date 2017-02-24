@@ -2,11 +2,7 @@ package de.limbusdev.guardianmonsters.fwmengine.battle.ui;
 
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.badlogic.gdx.scenes.scene2d.actions.RunnableAction;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
-import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.ArrayMap;
 
 import de.limbusdev.guardianmonsters.data.AudioAssets;
 import de.limbusdev.guardianmonsters.fwmengine.battle.control.BattleStringBuilder;
@@ -17,23 +13,20 @@ import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.AttackMenuWidge
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleActionMenuWidget;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleAnimationWidget;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleQueueWidget;
-import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.ButtonWithImage;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.InfoLabelWidget;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.MonsterMenuWidget;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.SevenButtonsWidget;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.TargetMenuWidget;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.WidgetObserver;
-import de.limbusdev.guardianmonsters.fwmengine.managers.Audio;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TeamComponent;
 import de.limbusdev.guardianmonsters.enums.ButtonIDs;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.model.Attack;
 import de.limbusdev.guardianmonsters.model.Monster;
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.MonsterInBattle;
-import de.limbusdev.guardianmonsters.model.MonsterInformation;
+import de.limbusdev.guardianmonsters.model.MonsterInfo;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleMainMenuWidget;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleStatusOverviewWidget;
-import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.EndOfBattleWidget;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.ObservableWidget;
 import de.limbusdev.guardianmonsters.utils.GS;
 
@@ -198,7 +191,7 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
     private void kickOutMonster(MonsterInBattle m) {
         animationWidget.animateMonsterKO(m.battleFieldPosition,m.battleFieldSide);
         statusWidget.fadeStatusWidget(m.battleFieldPosition, m.battleFieldSide);
-        infoLabelWidget.infoLabel.setText(MonsterInformation.getInstance().monsterNames.get(m.monster.ID-1) + " " + Services.getL18N().l18n().get("batt_defeated") + ".");
+        infoLabelWidget.infoLabel.setText(MonsterInfo.getInstance().getNameById(m.monster.ID) + " " + Services.getL18N().l18n().get("batt_defeated") + ".");
 
 //        System.out.println("Killed: " + m.battleFieldPosition);
 //

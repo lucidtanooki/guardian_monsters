@@ -11,7 +11,7 @@ import de.limbusdev.guardianmonsters.model.Attack;
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.AttackCalculationReport;
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.ElemEff;
 import de.limbusdev.guardianmonsters.model.Monster;
-import de.limbusdev.guardianmonsters.model.MonsterInformation;
+import de.limbusdev.guardianmonsters.model.MonsterInfo;
 
 /**
  * Handles events of monsters like level up, earning EXP, changing status and so on
@@ -33,12 +33,12 @@ public class MonsterManager {
     public static Monster earnEXP(Monster m, int exp) {
         boolean reachedNextLevel = m.receiveEXP(exp);
         if(reachedNextLevel) {
-            if (MonsterInformation.getInstance().statusInfos.get(m.ID)
+            if (MonsterInfo.getInstance().getStatusInfos().get(m.ID)
                     .learnableAttacks.containsKey(m.level))
-                m.attacks.add(MonsterInformation.getInstance().statusInfos.get(m.ID)
+                m.attacks.add(MonsterInfo.getInstance().getStatusInfos().get(m.ID)
                         .learnableAttacks.get(m.level));
-            if(m.level >= MonsterInformation.getInstance().statusInfos.get(m.ID).evolvingAtLevel)
-                m.evolution = MonsterInformation.getInstance().statusInfos.get(m.ID).evolution;
+            if(m.level >= MonsterInfo.getInstance().getStatusInfos().get(m.ID).evolvingAtLevel)
+                m.evolution = MonsterInfo.getInstance().getStatusInfos().get(m.ID).evolution;
         }
 
         return m;
@@ -85,10 +85,10 @@ public class MonsterManager {
 
         I18NBundle l18n = Services.getL18N().l18n();
         System.out.println(
-            l18n.get(MonsterInformation.getInstance().monsterNames.get(att.ID)) + ": "
+            l18n.get(MonsterInfo.getInstance().getNameById(att.ID)) + ": "
              + l18n.get(attack.name)
                 + " causes " + damage + " damage on "
-                + l18n.get(MonsterInformation.getInstance().monsterNames.get(def.ID)));
+                + l18n.get(MonsterInfo.getInstance().getNameById(def.ID)));
 
         return report;
     }

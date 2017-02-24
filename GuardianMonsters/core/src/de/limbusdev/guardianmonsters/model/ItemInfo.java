@@ -81,19 +81,19 @@ public class ItemInfo {
     }
 
     private Item parseHPCuringItem(XmlReader.Element e) {
-        return new Item.Medicine(e.get("name", "Water"), e.getInt("value", 0), Item.TYPE.HP_CURE);
+        return new Item.Medicine(e.get("nameID", "Water"), e.getInt("value", 0), Item.TYPE.HP_CURE);
     }
 
     private Item parseMPCuringItem(XmlReader.Element e) {
-        return new Item.Medicine(e.get("name", "Water"), e.getInt("value", 0), Item.TYPE.MP_CURE);
+        return new Item.Medicine(e.get("nameID", "Water"), e.getInt("value", 0), Item.TYPE.MP_CURE);
     }
 
     private Item parseRevivingItem(XmlReader.Element e) {
-        return new Item.Medicine(e.get("name", "Water"), e.getInt("fraction", 0), Item.TYPE.REVIVE);
+        return new Item.Medicine(e.get("nameID", "Water"), e.getInt("fraction", 0), Item.TYPE.REVIVE);
     }
 
     private Item parseKeyItem(XmlReader.Element e) {
-        return new Item.Key(e.get("name", "Water"));
+        return new Item.Key(e.get("nameID", "Water"));
     }
 
     private Item parseWeaponItem(XmlReader.Element e) {
@@ -117,7 +117,7 @@ public class ItemInfo {
                 break;
         }
         return new Equipment(
-            e.get("name", "claws-wood"),
+            e.get("nameID", "claws-wood"),
             type,
             e.getInt("addsPStr",    0),
             e.getInt("addsPDef",    0),

@@ -1,131 +1,131 @@
 <items>
 <!-- KEY Items -->
     <Key>
-        <name>relict-earth</name>
+        <nameID>relict-earth</nameID>
     </Key>
     <Key>
-        <name>relict-water</name>
+        <nameID>relict-water</nameID>
     </Key>
     <Key>
-        <name>relict-flame</name>
+        <nameID>relict-flame</nameID>
     </Key>
     <Key>
-        <name>relict-air</name>
+        <nameID>relict-air</nameID>
     </Key>
     <Key>
-        <name>relict-forest</name>
+        <nameID>relict-forest</nameID>
     </Key>
     <Key>
-        <name>relict-frost</name>
+        <nameID>relict-frost</nameID>
     </Key>
     <Key>
-        <name>relict-arthropoda</name>
+        <nameID>relict-arthropoda</nameID>
     </Key>
     <Key>
-        <name>relict-lightning</name>
+        <nameID>relict-lightning</nameID>
     </Key>
     <Key>
-        <name>relict-mountain</name>
+        <nameID>relict-mountain</nameID>
     </Key>
     <Key>
-        <name>relict-spirit</name>
+        <nameID>relict-spirit</nameID>
     </Key>
     <Key>
-        <name>relict-demon</name>
+        <nameID>relict-demon</nameID>
     </Key>
     <Key>
-        <name>relict-lindworm</name>
+        <nameID>relict-lindworm</nameID>
     </Key>
 
 
     <!-- HP Curing Items -->
     <medicine>
-        <name>bread</name>
+        <nameID>bread</nameID>
         <value>10</value>
         <type>HPcure</type>
     </medicine>
 
     <medicine>
-        <name>potion-blue</name>
+        <nameID>potion-blue</nameID>
         <value>50</value>
         <type>HPcure</type>
     </medicine>
 
     <medicine>
-        <name>potion-red</name>
+        <nameID>potion-red</nameID>
         <value>100</value>
         <type>HPcure</type>
     </medicine>
 
     <!-- MP Curing Items -->
     <medicine>
-        <name>medicine-blue</name>
+        <nameID>medicine-blue</nameID>
         <value>10</value>
         <type>MPcure</type>
     </medicine>
 
     <!-- Status Curing Items -->
     <medicine>
-        <name>angel-tear</name>
+        <nameID>angel-tear</nameID>
         <value>50</value>
         <type>revive</type>
     </medicine>
 
     <!-- Equipment -->
     <Equipment>
-        <name>sword-wood</name>
+        <nameID>sword-wood</nameID>
         <equipment-type>weapon</equipment-type>
         <addsPStr>1</addsPStr>
     </Equipment>
 
     <Equipment>
-        <name>sword-rusty</name>
+        <nameID>sword-rusty</nameID>
         <equipment-type>weapon</equipment-type>
         <addsPStr>2</addsPStr>
     </Equipment>
 
     <Equipment>
-        <name>sword-iron</name>
+        <nameID>sword-iron</nameID>
         <equipment-type>weapon</equipment-type>
         <addsPStr>3</addsPStr>
     </Equipment>
 
     <Equipment>
-        <name>sword-steel</name>
+        <nameID>sword-steel</nameID>
         <equipment-type>weapon</equipment-type>
         <addsPStr>4</addsPStr>
     </Equipment>
 
     <Equipment>
-        <name>sword-silver</name>
+        <nameID>sword-silver</nameID>
         <equipment-type>weapon</equipment-type>
         <addsSpeed>1</addsSpeed>
         <addsPStr>4</addsPStr>
     </Equipment>
 
     <Equipment>
-        <name>sword-titanium</name>
+        <nameID>sword-titanium</nameID>
         <equipment-type>weapon</equipment-type>
         <addsSpeed>2</addsSpeed>
         <addsPStr>5</addsPStr>
     </Equipment>
 
     <Equipment>
-        <name>sword-knightly-steel</name>
+        <nameID>sword-knightly-steel</nameID>
         <equipment-type>weapon</equipment-type>
         <addsPStr>5</addsPStr>
         <addsPDef>1</addsPDef>
     </Equipment>
 
     <Equipment>
-        <name>sword-broad-steel</name>
+        <nameID>sword-broad-steel</nameID>
         <equipment-type>weapon</equipment-type>
         <addsPStr>6</addsPStr>
         <addsSpeed>-1</addsSpeed>
     </Equipment>
 
     <Equipment>
-        <name>sword-barb-steel</name>
+        <nameID>sword-barb-steel</nameID>
         <equipment-type>weapon</equipment-type>
         <addsPStr>6</addsPStr>
         <addsMDef>1</addsMDef>
@@ -133,26 +133,26 @@
     </Equipment>
 
     <Equipment>
-        <name>sword-gap-steel</name>
+        <nameID>sword-gap-steel</nameID>
         <equipment-type>weapon</equipment-type>
         <addsPStr>5</addsPStr>
         <addsSpeed>3</addsSpeed>
     </Equipment>
 
     <Equipment>
-        <name>claws-wood</name>
+        <nameID>claws-wood</nameID>
         <equipment-type>weapon</equipment-type>
         <addsPStr>1</addsPStr>
     </Equipment>
 
     <Equipment>
-        <name>claws-rusty</name>
+        <nameID>claws-rusty</nameID>
         <equipment-type>weapon</equipment-type>
         <addsPStr>2</addsPStr>
     </Equipment>
 
     <Equipment>
-        <name>sword-excalibur</name>
+        <nameID>sword-excalibur</nameID>
         <equipment-type>weapon</equipment-type>
         <addsHP>25</addsHP>
         <addsMP>20</addsMP>
@@ -165,19 +165,19 @@
     </Equipment>
 
     <Equipment>
-        <name>helmet-iron</name>
+        <nameID>helmet-iron</nameID>
         <equipment-type>helmet</equipment-type>
         <addsPDef>2</addsPDef>
     </Equipment>
 
     <Equipment>
-        <name>shield-iron</name>
+        <nameID>shield-iron</nameID>
         <equipment-type>armor</equipment-type>
         <addsPDef>2</addsPDef>
     </Equipment>
 
     <Equipment>
-        <name>shoes-leather</name>
+        <nameID>shoes-leather</nameID>
         <equipment-type>shoes</equipment-type>
         <addsPDef>1</addsPDef>
         <addsSpeed>1</addsSpeed>

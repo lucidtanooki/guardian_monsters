@@ -32,7 +32,7 @@ public class MapPersonInformation {
                     MathUtils.round((((RectangleMapObject)mo).getRectangle().getY()))),
             Boolean.valueOf(mo.getProperties().get("static", String.class)),
             mo.getProperties().get("text", String.class),
-            mo.getProperties().get("name", String.class),
+            mo.getProperties().get("nameID", String.class),
             Boolean.parseBoolean(mo.getProperties().get("male", String.class)),
             Integer.parseInt(mo.getProperties().get("spriteIndex", String.class)));
     }

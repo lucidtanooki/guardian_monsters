@@ -12,13 +12,13 @@
         android:label="@string/app_name"
         android:theme="@style/GdxTheme" >
         <activity
-            android:name="de.limbusdev.guardianmonsters.AndroidLauncher"
+            android:nameID="de.limbusdev.guardianmonsters.AndroidLauncher"
             android:label="@string/app_name" 
             android:screenOrientation="landscape"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:nameID="android.intent.action.MAIN" />
+                <category android:nameID="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>

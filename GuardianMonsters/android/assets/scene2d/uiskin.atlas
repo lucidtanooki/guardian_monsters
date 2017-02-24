@@ -99,7 +99,7 @@ beige-round-r
   orig: 12, 20
   offset: 0, 0
   index: -1
-name-sign-l
+nameID-sign-l
   rotate: false
   xy: 166,8
   size: 12, 20

@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="40" height="32" tilewidth="16" tileheight="16">
- <tileset firstgid="1" name="limbusdev_world" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" nameID="limbusdev_world" tilewidth="16" tileheight="16">
   <image source="../spritesheets/limbusdev_world.png" width="1024" height="1024"/>
  </tileset>
- <layer name="ground1" width="40" height="32">
+ <layer nameID="ground1" width="40" height="32">
   <data encoding="base64" compression="zlib">
    eJzt1M0JgDAMhuFM0G5VXUsP6lpKUceyIAEprVQJ/YHv8N48PCQ1VhFZhBBCCDWf0USdq9flLaEm55pdC3yivlr2zr5V3R5uU3XMlX2xpH0pezHenAbXocOdwr6U987fsEvaIOUr8bbgk/H596KW27FH/sNnY8SHm/zNl+sm//XF7nLOe/jmKz2nVn17JXvM3QXmv/uK
   </data>
  </layer>
- <layer name="walls1" width="40" height="32">
+ <layer nameID="walls1" width="40" height="32">
   <data encoding="base64" compression="zlib">
    eJztmMlOwzAQhh1oKCLOgX15m4JYXqtFtFzZl7cpUoEr+/I0/D5ENa5jxrHH6oFf+jSN7MajfzxJ5KwQYgYMF4S4R3wo+OIjqDRyzLtDLpmWV3U9J4VoS744L8f55Y55Zl7qugP2MLYv+eKBlt+uY952MelfF7/7GBtIvnis5XfkmNez+JeViBqzYKjdL7VM/zrl7/Gd0v6/VDL96yKfnsZhTX6pPDX949ZIPb881jH94143V88vj3X+8o9aR33dk5YQp+AMnIMLcAmuwDW4Abct2n1D/KvL/QlrP4MX8ArewDv4AJ/gC3xr+bm859h/i7kQS2AZrIBVsAbWwQbYBFv5eL6r5lT/fPe1TU3qTvXPd1/b5Ft3pVj9S5Fv3ZUo/sXsR19R/GtSl1ii+NekLrHk8o/SsxzvYf2eLv9i9GyoON4fMcX9/RLa+9zPv9Dej/X9Uief3retlfL90USpv5999e9fmHT/+lPo38A4F5o2VedEMc+kTLnOqKgx5pmUKdcZFTX+AAnr4EY=
   </data>
  </layer>
- <layer name="tops1" width="40" height="32">
+ <layer nameID="tops1" width="40" height="32">
   <data encoding="base64" compression="zlib">
    eJztl8uOgjAUhk8CYyKsGNQ3At2i4jwRzGydGX0hL/u56PP4E23SaaDm0E7sol/ypQnW9tTfA4HI05ANifKhu/tWmFM/oD553yQgeoYpHMExnATXzw6YczSsbxcR7SPed+R9C9Qyhwu4hCVc3ep7wroDZW1u5kFMFMa8+uR916jlHX7AT7iB21t9GebkSn02Mr93RnnfL9TyDX/gLzzBc3DNvcKcOvqbu43M751R7NuQhPj/wRSO4BhOwu7c2zLnwjljgVrmcAGXsIQr+BK2596WOYdEOqPajxy6cpd/+z4U0hnVfuTQlbspa+mMaj9y0OXeB9GzXbk8GtGz/5WLKaJnbediCxv3Jd2z2BTT+1KD7llsiul9qUH3LHYBV3tf4GrvC1ztfY/H41HJ8V45jfnjTPM+mvVYT4wqNa69xvzxTVNf1WM9MXrscAHkr2vb
   </data>
  </layer>
- <layer name="tops2" width="40" height="32">
+ <layer nameID="tops2" width="40" height="32">
   <data encoding="base64" compression="zlib">
    eJztzsENABAMQNEmdXI1EhsYicF1ARKnVvw3wRN5h2aRlL0Xe9VuLfBv2G0G/gG4V9R7cNaD/wAAAADgBws24wI+
   </data>
  </layer>
- <objectgroup name="colliderWalls1" width="40" height="32">
+ <objectgroup nameID="colliderWalls1" width="40" height="32">
   <object x="144" y="240" width="48" height="48"/>
   <object x="112" y="240" width="32" height="16"/>
   <object x="128" y="256" width="16" height="16"/>

@@ -1,7 +1,6 @@
 package de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 
 import java.util.Observable;
@@ -11,7 +10,7 @@ import de.limbusdev.guardianmonsters.fwmengine.battle.control.BattleSystem;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.AHUD;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.model.Monster;
-import de.limbusdev.guardianmonsters.model.MonsterInformation;
+import de.limbusdev.guardianmonsters.model.MonsterInfo;
 
 /**
  * Created by georg on 26.11.16.
@@ -55,7 +54,7 @@ public class TargetMenuWidget extends SevenButtonsWidget implements Observer {
         for(int key : team.keys()) {
             Monster m = team.get(key);
             setButtonText(key + offset, Services.getL18N().l18n().get(
-                MonsterInformation.getInstance().monsterNames.get(m.ID)));
+                MonsterInfo.getInstance().getNameById(m.ID)));
             enableButton(key + offset);
             m.addObserver(this);
         }

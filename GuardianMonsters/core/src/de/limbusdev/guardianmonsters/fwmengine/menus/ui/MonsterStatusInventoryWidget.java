@@ -1,29 +1,17 @@
 package de.limbusdev.guardianmonsters.fwmengine.menus.ui;
 
-import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.Group;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.HorizontalGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Stack;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 
 import de.limbusdev.guardianmonsters.enums.Element;
-import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TeamComponent;
-import de.limbusdev.guardianmonsters.fwmengine.managers.Media;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.model.Monster;
-import de.limbusdev.guardianmonsters.model.MonsterInformation;
+import de.limbusdev.guardianmonsters.model.MonsterInfo;
 import de.limbusdev.guardianmonsters.utils.GS;
 
 
@@ -49,7 +37,7 @@ public class MonsterStatusInventoryWidget extends Group {
         monsterStatsBg.setPosition(2,2,Align.bottomLeft);
         addActor(monsterStatsBg);
 
-        Image nameBg = new Image(skin.getDrawable("name-bg"));
+        Image nameBg = new Image(skin.getDrawable("nameID-bg"));
         nameBg.setPosition(4,200-4,Align.topLeft);
         addActor(nameBg);
 
@@ -99,7 +87,7 @@ public class MonsterStatusInventoryWidget extends Group {
 
 
     public void init(Monster m) {
-        name.setText(Services.getL18N().l18n().get(MonsterInformation.getInstance().monsterNames.get(m.ID)));
+        name.setText(Services.getL18N().l18n().get(MonsterInfo.getInstance().getNameById(m.ID)));
         valueLabels.get("hp").setText(m.getHP() + "/" + m.getHPfull());
         valueLabels.get("mp").setText(m.getMP() + "/" + m.getMPfull());
         valueLabels.get("exp").setText(m.getExp() + "/" + m.expAvailableInThisLevel());

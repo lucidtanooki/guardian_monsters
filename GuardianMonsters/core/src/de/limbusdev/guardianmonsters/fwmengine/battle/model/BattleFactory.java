@@ -20,12 +20,10 @@ public class BattleFactory {
 
     private BattleFactory() {
         this.monsters = new ArrayMap<Integer, Monster>();
-        for(int i = 1; i<= 14; i++) {
+        for(int i = 1; i<= 9; i++) {
             System.out.println("Creating Monster Nr. " + i);
             createMonster(i);
         }
-        createMonster(27);
-        createMonster(28);
     }
     /* ............................................................................... METHODS .. */
     

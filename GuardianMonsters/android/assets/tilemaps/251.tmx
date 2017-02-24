@@ -1,105 +1,105 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="16" height="16" tilewidth="16" tileheight="16" nextobjectid="80">
  <properties>
-  <property name="musicIndex" value="2"/>
-  <property name="musicType" value="town"/>
+  <property nameID="musicIndex" value="2"/>
+  <property nameID="musicType" value="town"/>
  </properties>
- <tileset firstgid="1" name="limbusdev_world" tilewidth="16" tileheight="16" tilecount="4096">
+ <tileset firstgid="1" nameID="limbusdev_world" tilewidth="16" tileheight="16" tilecount="4096">
   <image source="../spritesheets/limbusdev_world.png" width="1024" height="1024"/>
  </tileset>
- <tileset firstgid="4097" name="limbusdev_world2" tilewidth="16" tileheight="16" tilecount="4096">
+ <tileset firstgid="4097" nameID="limbusdev_world2" tilewidth="16" tileheight="16" tilecount="4096">
   <image source="../spritesheets/limbusdev_world2.png" width="1024" height="1024"/>
  </tileset>
- <layer name="ground1" width="16" height="16">
+ <layer nameID="ground1" width="16" height="16">
   <data encoding="base64" compression="zlib">
    eJxjYKAM3KIQ35FkYLgriZ2+IwHBd2FYEoHx6cOnnxh91NI/FGh8cUOM/jhguMRLYKeJ0T8PqG6+BCodKQDB5NpPin5s9sPogfI/Pe0HAGDOz+E=
   </data>
  </layer>
- <layer name="shadow1" width="16" height="16">
+ <layer nameID="shadow1" width="16" height="16">
   <data encoding="base64" compression="zlib">
    eJxjYBi84J4Egn0fyo4RxVQ3U5KBYRYSni2JXf9MNHkYuAnk30LCt6HyMUD6oQQExwLZklIMDFJALC1FnH5iAcxcKRzmDxWALW6GKrgvgVtuohAE4xPDp58YM0nVjw6I1Q8AJWYf/g==
   </data>
  </layer>
- <layer name="walls1" width="16" height="16">
+ <layer nameID="walls1" width="16" height="16">
   <data encoding="base64" compression="zlib">
    eJxjYKAMzGWkDN8lEafKofIJgf/8QEKAQk8OYzAXSxgSG7bIakFYSR5/3KxGE8NmNwjISDIwyEpiir/Gkh6wgRig3lgglhJFFZcWxa4eF4gCqo+D6kkA0tEk6h9sIF4MUwwAVO8p8g==
   </data>
  </layer>
- <layer name="objects1" width="16" height="16">
+ <layer nameID="objects1" width="16" height="16">
   <data encoding="base64" compression="zlib">
    eJxjYKAOqOJnYKgG4hp+CH+VJISuB/Ib+BHqYOItvKj6dwHV7AbiPVC1K6Hq9gP5B5D0r8Sh/xdQzW8g/sPPgBcslcPUv1gOvx5C4DGa/kdkmKcE1KMMxCoUumUgwQN5oB/kSdf3SB6Ck4A4GYgTgDgRjzl1/BCMCywA6l2IR/8+fggmF/zjh2AY+A5k7wDinfwQNqkApOcHEP8kUz8lAACQdCYi
   </data>
  </layer>
- <objectgroup name="animatedObjects1" visible="0">
-  <object id="43" name="animatedObject" x="64" y="144" width="16" height="16">
+ <objectgroup nameID="animatedObjects1" visible="0">
+  <object id="43" nameID="animatedObject" x="64" y="144" width="16" height="16">
    <properties>
-    <property name="index" value="pan1"/>
+    <property nameID="index" value="pan1"/>
    </properties>
   </object>
-  <object id="53" name="animatedObject" x="128" y="48" width="16" height="16">
+  <object id="53" nameID="animatedObject" x="128" y="48" width="16" height="16">
    <properties>
-    <property name="frameDuration" value="0.2"/>
-    <property name="index" value="fire2"/>
+    <property nameID="frameDuration" value="0.2"/>
+    <property nameID="index" value="fire2"/>
    </properties>
   </object>
-  <object id="54" name="animatedObject" x="80" y="172" width="16" height="16">
+  <object id="54" nameID="animatedObject" x="80" y="172" width="16" height="16">
    <properties>
-    <property name="frameDuration" value="0.2"/>
-    <property name="index" value="fire2"/>
+    <property nameID="frameDuration" value="0.2"/>
+    <property nameID="index" value="fire2"/>
    </properties>
   </object>
-  <object id="77" name="animatedObject" x="48" y="208" width="16" height="16">
+  <object id="77" nameID="animatedObject" x="48" y="208" width="16" height="16">
    <properties>
-    <property name="frameDuration" value="0.2"/>
-    <property name="index" value="lamp2"/>
-   </properties>
-  </object>
- </objectgroup>
- <objectgroup name="people1" visible="0">
-  <object id="19" name="dad" type="person" x="112" y="80" width="16" height="16">
-   <properties>
-    <property name="male" value="true"/>
-    <property name="moving" value="true"/>
-    <property name="name" value="person_251_1_name"/>
-    <property name="path" value="E,E,E,E,E,W,W,W,W,W"/>
-    <property name="spriteIndex" value="6"/>
-    <property name="startDir" value="S"/>
-    <property name="text" value="person_251_1"/>
-   </properties>
-  </object>
-  <object id="45" name="mum" type="person" x="192" y="48" width="16" height="16">
-   <properties>
-    <property name="male" value="false"/>
-    <property name="moving" value="false"/>
-    <property name="name" value="person_251_2_name"/>
-    <property name="path" value="SSTOP"/>
-    <property name="spriteIndex" value="1"/>
-    <property name="startDir" value="S"/>
-    <property name="text" value="person_251_2"/>
+    <property nameID="frameDuration" value="0.2"/>
+    <property nameID="index" value="lamp2"/>
    </properties>
   </object>
  </objectgroup>
- <layer name="objects2" width="16" height="16">
+ <objectgroup nameID="people1" visible="0">
+  <object id="19" nameID="dad" type="person" x="112" y="80" width="16" height="16">
+   <properties>
+    <property nameID="male" value="true"/>
+    <property nameID="moving" value="true"/>
+    <property nameID="nameID" value="person_251_1_name"/>
+    <property nameID="path" value="E,E,E,E,E,W,W,W,W,W"/>
+    <property nameID="spriteIndex" value="6"/>
+    <property nameID="startDir" value="S"/>
+    <property nameID="text" value="person_251_1"/>
+   </properties>
+  </object>
+  <object id="45" nameID="mum" type="person" x="192" y="48" width="16" height="16">
+   <properties>
+    <property nameID="male" value="false"/>
+    <property nameID="moving" value="false"/>
+    <property nameID="nameID" value="person_251_2_name"/>
+    <property nameID="path" value="SSTOP"/>
+    <property nameID="spriteIndex" value="1"/>
+    <property nameID="startDir" value="S"/>
+    <property nameID="text" value="person_251_2"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <layer nameID="objects2" width="16" height="16">
   <data encoding="base64" compression="zlib">
    eJxjYBjeYI0cA8NauYF2xcgCCvIMDIry5OtPAOpNpED/AqDehRToH0kAAOuyBJM=
   </data>
  </layer>
- <layer name="lights1" width="16" height="16">
+ <layer nameID="lights1" width="16" height="16">
   <data encoding="base64" compression="zlib">
    eJxjYBieQEuSNHFKQBYZZmbSwB0jFQyX8NdEc5MakK8OxBqS+NXhAmlAdelAnIFHPQAkHAVV
   </data>
  </layer>
- <layer name="tops1" width="16" height="16">
+ <layer nameID="tops1" width="16" height="16">
   <data encoding="base64" compression="zlib">
    eJyTZWRgiCcTywGxPBCTA6KZGBgUKNAfg6Q/WY48M3DZn0SkeZS4n1r6nwNxJg6sRMBsmP1zcWA9NP2KaOYvw+F+BXmgWiDORdcvhmo+If/PFmVgmAfEMSB9QHqOKHb34wNyQD3yQKwgiimHrL+Cn4Ghkh+/Wfj0PycjDZIa/4ux+D8WiBNw4NkiEHWzRCD8KDFU+TggBgAZ6SPq
   </data>
  </layer>
- <layer name="objects3" width="16" height="16">
+ <layer nameID="objects3" width="16" height="16">
   <data encoding="base64" compression="zlib">
    eJxjYBgFowACFskzMCyWH2hXjAJ6AgD0tAGE
   </data>
  </layer>
- <objectgroup name="colliderWalls1" visible="0">
+ <objectgroup nameID="colliderWalls1" visible="0">
   <object id="1" x="0" y="0" width="224" height="48"/>
   <object id="2" x="224" y="0" width="32" height="16"/>
   <object id="3" x="240" y="16" width="16" height="240"/>
@@ -123,130 +123,130 @@
   <object id="67" x="176" y="240" width="16" height="16"/>
   <object id="79" x="16" y="48" width="16" height="48"/>
  </objectgroup>
- <objectgroup name="triggers1">
-  <object id="15" name="warpField" x="128" y="240" width="16" height="16">
+ <objectgroup nameID="triggers1">
+  <object id="15" nameID="warpField" x="128" y="240" width="16" height="16">
    <properties>
-    <property name="targetID" value="25"/>
-    <property name="targetWarpPointID" value="1"/>
+    <property nameID="targetID" value="25"/>
+    <property nameID="targetWarpPointID" value="1"/>
    </properties>
   </object>
-  <object id="16" name="startField" x="128" y="224" width="16" height="16">
+  <object id="16" nameID="startField" x="128" y="224" width="16" height="16">
    <properties>
-    <property name="fieldID" value="1"/>
+    <property nameID="fieldID" value="1"/>
    </properties>
   </object>
-  <object id="17" name="warpField" x="224" y="16" width="16" height="16">
+  <object id="17" nameID="warpField" x="224" y="16" width="16" height="16">
    <properties>
-    <property name="targetID" value="252"/>
-    <property name="targetWarpPointID" value="1"/>
+    <property nameID="targetID" value="252"/>
+    <property nameID="targetWarpPointID" value="1"/>
    </properties>
   </object>
-  <object id="18" name="startField" x="224" y="32" width="16" height="16">
+  <object id="18" nameID="startField" x="224" y="32" width="16" height="16">
    <properties>
-    <property name="fieldID" value="2"/>
-   </properties>
-  </object>
- </objectgroup>
- <objectgroup name="descriptions1" visible="0">
-  <object id="20" name="sign" type="objectDescription" x="128" y="48" width="16" height="16">
-   <properties>
-    <property name="text" value="sign_4_1_text"/>
-    <property name="title" value="sign_4_1_title"/>
-   </properties>
-  </object>
-  <object id="24" name="sign" type="objectDescription" x="32" y="48" width="16" height="16">
-   <properties>
-    <property name="text" value="sign_4_2_text"/>
-    <property name="title" value="sign_4_2_title"/>
-   </properties>
-  </object>
-  <object id="35" name="sign" type="objectDescription" x="144" y="48" width="16" height="16">
-   <properties>
-    <property name="text" value="sign_4_1_text"/>
-    <property name="title" value="sign_4_1_title"/>
-   </properties>
-  </object>
-  <object id="36" name="sign" type="objectDescription" x="144" y="32" width="16" height="16">
-   <properties>
-    <property name="text" value="sign_4_1_text"/>
-    <property name="title" value="sign_4_1_title"/>
-   </properties>
-  </object>
-  <object id="37" name="sign" type="objectDescription" x="128" y="32" width="16" height="16">
-   <properties>
-    <property name="text" value="sign_4_1_text"/>
-    <property name="title" value="sign_4_1_title"/>
-   </properties>
-  </object>
-  <object id="38" name="sign" type="objectDescription" x="48" y="48" width="16" height="16">
-   <properties>
-    <property name="text" value="sign_4_2_text"/>
-    <property name="title" value="sign_4_2_title"/>
-   </properties>
-  </object>
-  <object id="39" name="sign" type="objectDescription" x="64" y="48" width="16" height="16">
-   <properties>
-    <property name="text" value="sign_4_2_text"/>
-    <property name="title" value="sign_4_2_title"/>
-   </properties>
-  </object>
-  <object id="40" name="sign" type="objectDescription" x="64" y="32" width="16" height="16">
-   <properties>
-    <property name="text" value="sign_4_2_text"/>
-    <property name="title" value="sign_4_2_title"/>
-   </properties>
-  </object>
-  <object id="41" name="sign" type="objectDescription" x="32" y="32" width="16" height="16">
-   <properties>
-    <property name="text" value="sign_4_2_text"/>
-    <property name="title" value="sign_4_2_title"/>
-   </properties>
-  </object>
-  <object id="42" name="sign" type="objectDescription" x="48" y="32" width="16" height="16">
-   <properties>
-    <property name="text" value="sign_4_2_text"/>
-    <property name="title" value="sign_4_2_title"/>
+    <property nameID="fieldID" value="2"/>
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="animatedObjects2" visible="0">
-  <object id="71" name="animatedObject" x="32" y="48" width="48" height="48">
+ <objectgroup nameID="descriptions1" visible="0">
+  <object id="20" nameID="sign" type="objectDescription" x="128" y="48" width="16" height="16">
    <properties>
-    <property name="frameDuration" value="0.2"/>
-    <property name="index" value="light1"/>
+    <property nameID="text" value="sign_4_1_text"/>
+    <property nameID="title" value="sign_4_1_title"/>
    </properties>
   </object>
-  <object id="72" name="animatedObject" x="32" y="160" width="48" height="48">
+  <object id="24" nameID="sign" type="objectDescription" x="32" y="48" width="16" height="16">
    <properties>
-    <property name="frameDuration" value="0.2"/>
-    <property name="index" value="light1"/>
+    <property nameID="text" value="sign_4_2_text"/>
+    <property nameID="title" value="sign_4_2_title"/>
    </properties>
   </object>
-  <object id="73" name="animatedObject" x="48" y="176" width="16" height="16">
+  <object id="35" nameID="sign" type="objectDescription" x="144" y="48" width="16" height="16">
    <properties>
-    <property name="index" value="lamp1"/>
+    <property nameID="text" value="sign_4_1_text"/>
+    <property nameID="title" value="sign_4_1_title"/>
    </properties>
   </object>
-  <object id="74" name="animatedObject" x="48" y="64" width="16" height="16">
+  <object id="36" nameID="sign" type="objectDescription" x="144" y="32" width="16" height="16">
    <properties>
-    <property name="index" value="lamp1"/>
+    <property nameID="text" value="sign_4_1_text"/>
+    <property nameID="title" value="sign_4_1_title"/>
    </properties>
   </object>
-  <object id="75" name="animatedObject" x="176" y="80" width="16" height="16">
+  <object id="37" nameID="sign" type="objectDescription" x="128" y="32" width="16" height="16">
    <properties>
-    <property name="index" value="lamp1"/>
+    <property nameID="text" value="sign_4_1_text"/>
+    <property nameID="title" value="sign_4_1_title"/>
    </properties>
   </object>
-  <object id="76" name="animatedObject" x="160" y="64" width="48" height="48">
+  <object id="38" nameID="sign" type="objectDescription" x="48" y="48" width="16" height="16">
    <properties>
-    <property name="frameDuration" value="0.2"/>
-    <property name="index" value="light1"/>
+    <property nameID="text" value="sign_4_2_text"/>
+    <property nameID="title" value="sign_4_2_title"/>
    </properties>
   </object>
-  <object id="78" name="animatedObject" x="32" y="192" width="48" height="48">
+  <object id="39" nameID="sign" type="objectDescription" x="64" y="48" width="16" height="16">
    <properties>
-    <property name="frameDuration" value="0.2"/>
-    <property name="index" value="light1"/>
+    <property nameID="text" value="sign_4_2_text"/>
+    <property nameID="title" value="sign_4_2_title"/>
+   </properties>
+  </object>
+  <object id="40" nameID="sign" type="objectDescription" x="64" y="32" width="16" height="16">
+   <properties>
+    <property nameID="text" value="sign_4_2_text"/>
+    <property nameID="title" value="sign_4_2_title"/>
+   </properties>
+  </object>
+  <object id="41" nameID="sign" type="objectDescription" x="32" y="32" width="16" height="16">
+   <properties>
+    <property nameID="text" value="sign_4_2_text"/>
+    <property nameID="title" value="sign_4_2_title"/>
+   </properties>
+  </object>
+  <object id="42" nameID="sign" type="objectDescription" x="48" y="32" width="16" height="16">
+   <properties>
+    <property nameID="text" value="sign_4_2_text"/>
+    <property nameID="title" value="sign_4_2_title"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup nameID="animatedObjects2" visible="0">
+  <object id="71" nameID="animatedObject" x="32" y="48" width="48" height="48">
+   <properties>
+    <property nameID="frameDuration" value="0.2"/>
+    <property nameID="index" value="light1"/>
+   </properties>
+  </object>
+  <object id="72" nameID="animatedObject" x="32" y="160" width="48" height="48">
+   <properties>
+    <property nameID="frameDuration" value="0.2"/>
+    <property nameID="index" value="light1"/>
+   </properties>
+  </object>
+  <object id="73" nameID="animatedObject" x="48" y="176" width="16" height="16">
+   <properties>
+    <property nameID="index" value="lamp1"/>
+   </properties>
+  </object>
+  <object id="74" nameID="animatedObject" x="48" y="64" width="16" height="16">
+   <properties>
+    <property nameID="index" value="lamp1"/>
+   </properties>
+  </object>
+  <object id="75" nameID="animatedObject" x="176" y="80" width="16" height="16">
+   <properties>
+    <property nameID="index" value="lamp1"/>
+   </properties>
+  </object>
+  <object id="76" nameID="animatedObject" x="160" y="64" width="48" height="48">
+   <properties>
+    <property nameID="frameDuration" value="0.2"/>
+    <property nameID="index" value="light1"/>
+   </properties>
+  </object>
+  <object id="78" nameID="animatedObject" x="32" y="192" width="48" height="48">
+   <properties>
+    <property nameID="frameDuration" value="0.2"/>
+    <property nameID="index" value="light1"/>
    </properties>
   </object>
  </objectgroup>

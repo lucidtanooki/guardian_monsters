@@ -52,7 +52,7 @@ list-bg-selected
   orig: 140, 24
   offset: 0, 0
   index: -1
-name-bg
+nameID-bg
   rotate: false
   xy: 469, 487
   size: 128, 24

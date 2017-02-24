@@ -1,43 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="32" height="20" tilewidth="16" tileheight="16">
  <properties>
-  <property name="musicIndex" value="2"/>
-  <property name="musicType" value="town"/>
+  <property nameID="musicIndex" value="2"/>
+  <property nameID="musicType" value="town"/>
  </properties>
- <tileset firstgid="1" name="limbusdev_world2" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" nameID="limbusdev_world2" tilewidth="16" tileheight="16">
   <image source="../spritesheets/limbusdev_world2.png" width="1024" height="1024"/>
  </tileset>
- <layer name="ground1" width="32" height="20">
+ <layer nameID="ground1" width="32" height="20">
   <data encoding="base64" compression="zlib">
    eJzFVNsOgjAMhaIvfBb4Zegbf0UWvssR19jMFns20IeTECg7l7bru6bpE5b2/fwP/IJ/phcQ/vl6vibmXxWczS/9I/weXVbWGijWjhE3+tRg8XvqUJCiQauT34ek/QL4RTXsIbR43lqtfMf90CC1DQf6LpnVUNH3Kf57T3gA58hsarwjPpDelvAvhOdQi3zOeZbYq+yP1idPJt9qrF5u3EHZQc4JzWoC66372NJiZSS9bPVeDR5+Dfl9kOcoNXv7giDfx727tHRu0V20vNSceYT2J0Hshf0=
   </data>
  </layer>
- <layer name="shadow0" width="32" height="20">
+ <layer nameID="shadow0" width="32" height="20">
   <data encoding="base64" compression="zlib">
    eJxjYKAumMhEZQNH7R+09mOza6TbT08w0PaPglEwCkbBKBi6AAA7nwW/
   </data>
  </layer>
- <layer name="walls1" width="32" height="20">
+ <layer nameID="walls1" width="32" height="20">
   <data encoding="base64" compression="zlib">
    eJztlP0KwiAUxd2YGn2904K2qLZ3KqhF9Vq16OuZutJEczrnHy6IDhyYwu7xd5WbRAhtwQV4B95jhA5tHdb3jmAXpZB5BpfgS5V/k5yBc4czueYnkEngHwrugfsEoYHkJ3brCc+ngbCNfxaJ9RwyF5LHxJyfKb1ivmN9Nvsuw/p5kureTcob8hnrA3/2a0jM7Lo9zh9QhEKqP8NVw8lZR0q/lkSwqtLlc/4YsieGfPVNyKwZMfeOqYlL5m+S+iZkVpuauJhs9+9bbfh96hv80+idm0b++GOoOTHU3Ugzv/DEv4Kaa0PdkzTz+dzvUhiLmc/n/l912WaX7xq22dVVjV/WC57RTPg=
   </data>
  </layer>
- <layer name="objects1" width="32" height="20">
+ <layer nameID="objects1" width="32" height="20">
   <data encoding="base64" compression="zlib">
    eJztktENgkAQRNdDFDXalFFEG7ERRX/oSkWj1uQQjrjgEu4gyIdO8gIksDNzC1FegUO0Bhvw7NOHroroBqZO+jzR14i9e8L9GVxADHZgD0JwAAuwBL4wv0oj+I0ZmT+X6xINwBB4rpzH1xna8I8Kc4t5TPt7wmzuf1fpnmxl0j/psBJmJ//HQ+W9A9fOv8n+swy891H7S+clqcn+y7SdyeclqW5/035VqtvfpF+o8nDN9fdN92/qLWVI1Mb+bfzbVJmn3/tujr/s1dWOYvWmixzcn+f4Ff8u9QJI/DPW
   </data>
  </layer>
- <layer name="shadow1" width="32" height="20">
+ <layer nameID="shadow1" width="32" height="20">
   <data encoding="base64" compression="zlib">
    eJxjYCAeTGTCjnGpozYYjPYHD4D9wXjsprX96HZOxuF/XG6jhZvQ3UAvu2H209M+dDCQdo+CUTAKRsEoGLoAADjYFjM=
   </data>
  </layer>
- <layer name="tops1" width="32" height="20">
+ <layer nameID="tops1" width="32" height="20">
   <data encoding="base64" compression="zlib">
    eJxjYCAMvFgZGPqAuIcVwfdhJUIjkeAEM375LqhdMPtPAekzVLSfg4WBwZGNgcGJDbv8KahdMDu5gOp4gLiHiXpuaASa14TDfpB93FA7QcALSPvgUIsO8PkLGRwEqjmEQx3IPm8S7EQG+PxFD4DPX6Ng+IKDwDLlEIFyhZaAEVimMLEMnP3DARBbdtHKDGqUXZSYQY2ya7T8ww+OAcuI48wDR7MBywh2loGjAc80Mos=
   </data>
  </layer>
- <objectgroup name="colliderWalls1" width="32" height="20">
+ <objectgroup nameID="colliderWalls1" width="32" height="20">
   <object x="0" y="0" width="64" height="48"/>
   <object x="32" y="80" width="32" height="32"/>
   <object x="96" y="64" width="32" height="16"/>
@@ -59,26 +59,26 @@
   <object x="384" y="256" width="32" height="32"/>
   <object x="0" y="48" width="32" height="192"/>
  </objectgroup>
- <objectgroup name="objects" width="32" height="20" visible="0">
-  <object name="sign" x="288" y="96" width="16" height="16">
+ <objectgroup nameID="objects" width="32" height="20" visible="0">
+  <object nameID="sign" x="288" y="96" width="16" height="16">
    <properties>
-    <property name="text" value="Don't enter the cave! Deadly threats indise."/>
-    <property name="title" value="Havren Cave"/>
+    <property nameID="text" value="Don't enter the cave! Deadly threats indise."/>
+    <property nameID="title" value="Havren Cave"/>
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="sensors" width="32" height="20">
-  <object name="warpField" x="0" y="240" width="16" height="80">
+ <objectgroup nameID="sensors" width="32" height="20">
+  <object nameID="warpField" x="0" y="240" width="16" height="80">
    <properties>
-    <property name="targetID" value="22"/>
-    <property name="targetWarpPointID" value="2"/>
+    <property nameID="targetID" value="22"/>
+    <property nameID="targetWarpPointID" value="2"/>
    </properties>
   </object>
-  <object name="startField" x="16" y="240" width="16" height="16">
+  <object nameID="startField" x="16" y="240" width="16" height="16">
    <properties>
-    <property name="fieldID" value="1"/>
+    <property nameID="fieldID" value="1"/>
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="livingEntities" width="32" height="20" visible="0"/>
+ <objectgroup nameID="livingEntities" width="32" height="20" visible="0"/>
 </map>

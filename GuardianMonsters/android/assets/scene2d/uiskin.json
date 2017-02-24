@@ -70,7 +70,6 @@ com.badlogic.gdx.scenes.scene2d.ui.Slider$SliderStyle: {
 com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
 	default: { font: default-font, fontColor: grey, background: default-round },
 	beige: { font: default-font, fontColor: grey, background: beige-round },
-	name-sign-l: { font: default-font, fontColor: grey, background: name-sign-l },
 	trans: { font: default-font, fontColor: white, background: invis },
 	beige-r: { font: default-font, fontColor: grey, background: beige-round-r },
     trans-white: {font: white, background: invis},

@@ -1,267 +1,267 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="64" height="32" tilewidth="16" tileheight="16" nextobjectid="393">
  <properties>
-  <property name="musicIndex" value="2"/>
-  <property name="musicType" value="town"/>
-  <property name="weather" value="rain"/>
+  <property nameID="musicIndex" value="2"/>
+  <property nameID="musicType" value="town"/>
+  <property nameID="weather" value="rain"/>
  </properties>
- <tileset firstgid="1" name="limbusdev_world2" tilewidth="16" tileheight="16" tilecount="4096">
+ <tileset firstgid="1" nameID="limbusdev_world2" tilewidth="16" tileheight="16" tilecount="4096">
   <image source="../spritesheets/limbusdev_world2.png" width="1024" height="1024"/>
  </tileset>
- <layer name="ground1" width="64" height="32">
+ <layer nameID="ground1" width="64" height="32">
   <data encoding="base64" compression="zlib">
    eJztmFEOgyAMQHF4MvFkcyfTHWyS2Kxr6CzSKMF+vCwi075SqtF3zvkKGJxzo/s9Dht0HB+3gvmbv/mbv/nf139Yf8PG2H396Xir/kGI+Z8XD9wrMPek81rxlzpK/ffmHfXXyj/mEa+FgF4U+5AXnutJPBBn6hr4OpF5Zdl4J/xTfRKPYWgc2rXIQT2x3z+i+yuxviVx5OZAwz+X6D0R98iTqYEccvfGmf6cN6YX1o6knmrzp2sTErGW+B/pixo1pxVf7MXS3qHlDzmYEFw+ZjKPg/s/9G2uR5XWotZzkeYDkO6tPQ+aB3gGl6x9ai9dhXRPQR6oN34nWBJey875GoAayukt4J3bw2um5nd98z/Hn3vHp+Ot+t/9W5f5m7/5m7/5X+v/AV2Czeo=
   </data>
  </layer>
- <layer name="ground2" width="64" height="32">
+ <layer nameID="ground2" width="64" height="32">
   <data encoding="base64" compression="zlib">
    eJzt1LEJwDAMBEC19gZJJk+ybNyosMED2LmDhwfV+ggAAABWcpeIp+Utfc9b9l0dNeJsuWrf85YddjT7/3ELdjX7/3ELAAAA/uoDv3QNOA==
   </data>
  </layer>
- <layer name="shadows1" width="64" height="32">
+ <layer nameID="shadows1" width="64" height="32">
   <data encoding="base64" compression="zlib">
    eJzt10kKgDAQRUH1/huvJngfyVoQhU8mq9bB7idBcFkA4J19y5wZ1Wj96V2S/TXek/76z5u5P+nv/cDdsbbegJbKN/t0BwDoRE//dV8lduq5v8x8mqs/MyN5LqlGPzCPC6EXF3w=
   </data>
  </layer>
- <layer name="walls1" width="64" height="32">
+ <layer nameID="walls1" width="64" height="32">
   <data encoding="base64" compression="zlib">
    eJztmVtO20AUhicmkLzAKvpQWjUEwkM3wGUXtBJSS6Peu4WW7IJWqtq+lOsiYCERKiByow997D+KozjH45kz9gx2EL/0yYk9nON/fsdiNBtlIdbBRk7HKsiizzneu4vjZkb/a47u5QvYzeHYhocHwdjPw0Dt81cQH3ce5m/bk3o/BU3UuizdPtL/dsTXS3xuK+bgTxAfd57inqXPMzIHldnh+UfBJFRHM0LUy/FxWXkc6bVIviedX0zZS/qszk7m3wrzfxWMUUn6F2RcZ06ILuiBPhiAm7nJMSaakX7buJcXincCPb9DavyrxFH2EvF35mbo36RR/oPI/dbQZwnUwTJYAY1K/G+T5onqO+r/VPhPOi/rqryPoJI+6TuzxfQ/0nH4HLxG/TfgLXgH3oMP4CP4RHpz58lWOu+qOTDl/3tmmLOOkX+pfdQ/AIfgCByDE9LTZp5sJOs+rQ65qQyhnyXRHqb8Vf73wQE4JP6vUbcDuqAH+mAQ9v5LfHHmKY1kXRNRmfK/hrc+oQO6oBd+H4T+n2Bua2AJ1MEyWAENsFod97SZJxsl1dX1cPH7txV3nlzV1fXI8v6/C8oj/zTaxTPbcvB+oJqW/E/h/cyT/2nI35eKmH/0Wd+aF+IZeD7vp1cR848+63vw/RV88+i/aPkn6ccC/udfcFuziPnfpqYpfx+6z5+XP3e9zh3nUqaeuuvc/LnrdV/rep1MPXXXOflz1+u+1vU6mXqarnPz567Xfa3rdTL11F3n5M9dr/ta1+tk6mm6zsmfu163Xde3Rba9Dk5P0/Wk/C9KqeKwkvSfZa/Dha5K6vzT7icUea8jqb9qz5TuJ/jCxV5H1v6qPdA8ZLvX4ULrxPt/M4fUsA==
   </data>
  </layer>
- <layer name="objects1" width="64" height="32">
+ <layer nameID="objects1" width="64" height="32">
   <data encoding="base64" compression="zlib">
    eJztmD0OgjAUgOvPwoKnEBxYvIIJ6kmMg4sX8Ri6uHgjcHHRO9jG10gIwuuTWorvSxraQn/eX1sqBMMwTDOPoesZuGc+cj0Ddyj77w3lP4ztzMUVFwv2XyD6PIZCnEKzNlSSoDpfLC8H9sZ3zS6ozleV68DqiGJLm/Y/g4yb8J0vv0tBtuukvq+m998wC5u/MaWo13LMUcDIvyWMUWd/NSZF72mPYxqLzbiySSR9aCrTTaYcbJ/BU9XHMq09lQ1DDLLH4Pt5wf8jqF8h/NtX+zPt4Kv9Vaxn4PfltSC3uAd3BS2n0oFeC1TSesn+QAfMb+BzEg7974/ZdzG01Y8LlM/0+fz1Cd9kxsa2yb0WrxcM8+JOuOugtOkqCeEcSmnDMBieAYovig==
   </data>
  </layer>
- <objectgroup name="animatedObjects1">
-  <object id="334" name="animatedObject" x="448" y="352" width="16" height="16">
+ <objectgroup nameID="animatedObjects1">
+  <object id="334" nameID="animatedObject" x="448" y="352" width="16" height="16">
    <properties>
-    <property name="index" value="flower2"/>
+    <property nameID="index" value="flower2"/>
    </properties>
   </object>
-  <object id="335" name="animatedObject" x="688" y="336" width="16" height="16">
+  <object id="335" nameID="animatedObject" x="688" y="336" width="16" height="16">
    <properties>
-    <property name="index" value="flower2"/>
+    <property nameID="index" value="flower2"/>
    </properties>
   </object>
-  <object id="336" name="animatedObject" x="672" y="352" width="16" height="16">
+  <object id="336" nameID="animatedObject" x="672" y="352" width="16" height="16">
    <properties>
-    <property name="index" value="flower2"/>
+    <property nameID="index" value="flower2"/>
    </properties>
   </object>
-  <object id="337" name="animatedObject" x="928" y="272" width="16" height="16">
+  <object id="337" nameID="animatedObject" x="928" y="272" width="16" height="16">
    <properties>
-    <property name="index" value="pan1"/>
+    <property nameID="index" value="pan1"/>
    </properties>
   </object>
-  <object id="338" name="animatedObject" x="528" y="160" width="16" height="16">
+  <object id="338" nameID="animatedObject" x="528" y="160" width="16" height="16">
    <properties>
-    <property name="index" value="flower2"/>
+    <property nameID="index" value="flower2"/>
    </properties>
   </object>
-  <object id="339" name="animatedObject" x="224" y="176" width="16" height="16">
+  <object id="339" nameID="animatedObject" x="224" y="176" width="16" height="16">
    <properties>
-    <property name="index" value="flower2"/>
+    <property nameID="index" value="flower2"/>
    </properties>
   </object>
-  <object id="340" name="animatedObject" x="64" y="224" width="16" height="16">
+  <object id="340" nameID="animatedObject" x="64" y="224" width="16" height="16">
    <properties>
-    <property name="index" value="flower2"/>
+    <property nameID="index" value="flower2"/>
    </properties>
   </object>
-  <object id="341" name="animatedObject" x="80" y="304" width="16" height="16">
+  <object id="341" nameID="animatedObject" x="80" y="304" width="16" height="16">
    <properties>
-    <property name="index" value="flower2"/>
+    <property nameID="index" value="flower2"/>
    </properties>
   </object>
-  <object id="342" name="animatedObject" x="528" y="96" width="16" height="16">
+  <object id="342" nameID="animatedObject" x="528" y="96" width="16" height="16">
    <properties>
-    <property name="index" value="flag1"/>
+    <property nameID="index" value="flag1"/>
    </properties>
   </object>
-  <object id="343" name="animatedObject" x="736" y="64" width="16" height="16">
+  <object id="343" nameID="animatedObject" x="736" y="64" width="16" height="16">
    <properties>
-    <property name="index" value="flag1"/>
+    <property nameID="index" value="flag1"/>
    </properties>
   </object>
-  <object id="344" name="animatedObject" x="864" y="208" width="16" height="16">
+  <object id="344" nameID="animatedObject" x="864" y="208" width="16" height="16">
    <properties>
-    <property name="index" value="pan1"/>
+    <property nameID="index" value="pan1"/>
    </properties>
   </object>
-  <object id="345" name="animatedObject" x="880" y="224" width="16" height="16">
+  <object id="345" nameID="animatedObject" x="880" y="224" width="16" height="16">
    <properties>
-    <property name="index" value="pan1"/>
+    <property nameID="index" value="pan1"/>
    </properties>
   </object>
-  <object id="346" name="animatedObject" x="320" y="176" width="16" height="16">
+  <object id="346" nameID="animatedObject" x="320" y="176" width="16" height="16">
    <properties>
-    <property name="index" value="tree1"/>
+    <property nameID="index" value="tree1"/>
    </properties>
   </object>
-  <object id="347" name="animatedObject" x="400" y="192" width="16" height="16">
+  <object id="347" nameID="animatedObject" x="400" y="192" width="16" height="16">
    <properties>
-    <property name="index" value="tree1"/>
+    <property nameID="index" value="tree1"/>
    </properties>
   </object>
-  <object id="350" name="animatedObject" x="192" y="176" width="16" height="16">
+  <object id="350" nameID="animatedObject" x="192" y="176" width="16" height="16">
    <properties>
-    <property name="frameDuration" value="0.09"/>
-    <property name="index" value="monster4"/>
+    <property nameID="frameDuration" value="0.09"/>
+    <property nameID="index" value="monster4"/>
    </properties>
   </object>
-  <object id="353" name="animatedObject" x="304" y="176" width="16" height="16">
+  <object id="353" nameID="animatedObject" x="304" y="176" width="16" height="16">
    <properties>
-    <property name="index" value="flower2"/>
+    <property nameID="index" value="flower2"/>
    </properties>
   </object>
-  <object id="354" name="animatedObject" x="336" y="176" width="16" height="16">
+  <object id="354" nameID="animatedObject" x="336" y="176" width="16" height="16">
    <properties>
-    <property name="index" value="flower2"/>
+    <property nameID="index" value="flower2"/>
    </properties>
   </object>
-  <object id="377" name="animatedObject" x="560" y="288" width="16" height="16">
+  <object id="377" nameID="animatedObject" x="560" y="288" width="16" height="16">
    <properties>
-    <property name="frameDuration" value="0.09"/>
-    <property name="index" value="monster15"/>
-   </properties>
-  </object>
- </objectgroup>
- <objectgroup name="people1">
-  <object id="51" name="person" type="person" x="208" y="176" width="16" height="16">
-   <properties>
-    <property name="male" value="true"/>
-    <property name="path" value="SSTOP"/>
-    <property name="spriteIndex" value="3"/>
-    <property name="static" value="true"/>
-    <property name="text" value="person_25_7"/>
-   </properties>
-  </object>
-  <object id="202" name="person" type="person" x="352" y="224" width="16" height="16">
-   <properties>
-    <property name="male" value="true"/>
-    <property name="path" value="SSTOP,E,E,E,E,ESTOP,NSTOP,NSTOP,WSTOP,SSTOP,S,S,S,ESTOP,SSTOP,W,W,W,W,SSTOP,WSTOP,SSTOP,SSTOP,SSTOP,SSTOP,WSTOP,NSTOP,N,N,N"/>
-    <property name="spriteIndex" value="2"/>
-    <property name="static" value="false"/>
-    <property name="text" value="person_1"/>
-   </properties>
-  </object>
-  <object id="291" name="person" type="person" x="208" y="416" width="16" height="16">
-   <properties>
-    <property name="male" value="true"/>
-    <property name="path" value="SSTOP,ESTOP,NSTOP,N,N,N,N,N,ESTOP,NSTOP,WSTOP,NSTOP,ESTOP,E,SSTOP,WSTOP,S,S,W,S,S,S,SSTOP,ESTOP,NSTOP"/>
-    <property name="spriteIndex" value="2"/>
-    <property name="static" value="false"/>
-    <property name="text" value="person_1"/>
-   </properties>
-  </object>
-  <object id="292" name="person" type="person" x="544" y="288" width="16" height="16">
-   <properties>
-    <property name="male" value="true"/>
-    <property name="path" value="SSTOP"/>
-    <property name="spriteIndex" value="1"/>
-    <property name="static" value="true"/>
-    <property name="text" value="person_1"/>
-   </properties>
-  </object>
-  <object id="293" name="person" type="person" x="592" y="112" width="16" height="16">
-   <properties>
-    <property name="male" value="true"/>
-    <property name="path" value="SSTOP"/>
-    <property name="spriteIndex" value="2"/>
-    <property name="static" value="true"/>
-    <property name="text" value="person_1"/>
-   </properties>
-  </object>
-  <object id="294" name="person" type="person" x="480" y="320" width="16" height="16">
-   <properties>
-    <property name="male" value="true"/>
-    <property name="path" value="SSTOP,ESTOP,NSTOP,ESTOP,E,E,E,E,E,SSTOP,S,SSTOP,ESTOP,E,E,E,E,N,N,E,E,ESTOP,N,N,N,N,N,N,ESTOP,SSTOP,S,S,S,S,S,S,SSTOP,SSTOP,W,W,S,S,W,W,W,W,WSTOP,NSTOP,WSTOP,N,W,W,W,W,W,WSTOP,SSTOP"/>
-    <property name="spriteIndex" value="2"/>
-    <property name="static" value="false"/>
-    <property name="text" value="person_1"/>
-   </properties>
-  </object>
-  <object id="295" name="person" type="person" x="720" y="272" width="16" height="16">
-   <properties>
-    <property name="male" value="true"/>
-    <property name="path" value="SSTOP,E,E,E,E,ESTOP,NSTOP,NSTOP,WSTOP,SSTOP,S,S,S,ESTOP,SSTOP,W,W,W,W,SSTOP,WSTOP,SSTOP,SSTOP,SSTOP,SSTOP,WSTOP,NSTOP,N,N,N"/>
-    <property name="spriteIndex" value="4"/>
-    <property name="static" value="false"/>
-    <property name="text" value="person_1"/>
-   </properties>
-  </object>
-  <object id="296" name="person" type="person" x="864" y="192" width="16" height="16">
-   <properties>
-    <property name="male" value="true"/>
-    <property name="path" value="SSTOP"/>
-    <property name="spriteIndex" value="3"/>
-    <property name="static" value="true"/>
-    <property name="text" value="person_25_2"/>
-   </properties>
-  </object>
-  <object id="297" name="person" type="person" x="912" y="192" width="16" height="16">
-   <properties>
-    <property name="male" value="true"/>
-    <property name="path" value="SSTOP"/>
-    <property name="spriteIndex" value="2"/>
-    <property name="static" value="true"/>
-    <property name="text" value="person_25_3"/>
-   </properties>
-  </object>
-  <object id="298" name="person" type="person" x="816" y="192" width="16" height="16">
-   <properties>
-    <property name="male" value="true"/>
-    <property name="path" value="SSTOP"/>
-    <property name="spriteIndex" value="1"/>
-    <property name="static" value="true"/>
-    <property name="text" value="person_25_1"/>
-   </properties>
-  </object>
-  <object id="299" name="person" type="person" x="816" y="304" width="16" height="16">
-   <properties>
-    <property name="male" value="true"/>
-    <property name="path" value="NSTOP"/>
-    <property name="spriteIndex" value="2"/>
-    <property name="static" value="true"/>
-    <property name="text" value="person_25_6"/>
-   </properties>
-  </object>
-  <object id="300" name="person" type="person" x="848" y="304" width="16" height="16">
-   <properties>
-    <property name="male" value="true"/>
-    <property name="path" value="NSTOP"/>
-    <property name="spriteIndex" value="2"/>
-    <property name="static" value="true"/>
-    <property name="text" value="person_25_5"/>
-   </properties>
-  </object>
-  <object id="301" name="person" type="person" x="928" y="304" width="16" height="16">
-   <properties>
-    <property name="male" value="true"/>
-    <property name="path" value="NSTOP"/>
-    <property name="spriteIndex" value="1"/>
-    <property name="static" value="true"/>
-    <property name="text" value="person_25_4"/>
+    <property nameID="frameDuration" value="0.09"/>
+    <property nameID="index" value="monster15"/>
    </properties>
   </object>
  </objectgroup>
- <layer name="shadows2" width="64" height="32">
+ <objectgroup nameID="people1">
+  <object id="51" nameID="person" type="person" x="208" y="176" width="16" height="16">
+   <properties>
+    <property nameID="male" value="true"/>
+    <property nameID="path" value="SSTOP"/>
+    <property nameID="spriteIndex" value="3"/>
+    <property nameID="static" value="true"/>
+    <property nameID="text" value="person_25_7"/>
+   </properties>
+  </object>
+  <object id="202" nameID="person" type="person" x="352" y="224" width="16" height="16">
+   <properties>
+    <property nameID="male" value="true"/>
+    <property nameID="path" value="SSTOP,E,E,E,E,ESTOP,NSTOP,NSTOP,WSTOP,SSTOP,S,S,S,ESTOP,SSTOP,W,W,W,W,SSTOP,WSTOP,SSTOP,SSTOP,SSTOP,SSTOP,WSTOP,NSTOP,N,N,N"/>
+    <property nameID="spriteIndex" value="2"/>
+    <property nameID="static" value="false"/>
+    <property nameID="text" value="person_1"/>
+   </properties>
+  </object>
+  <object id="291" nameID="person" type="person" x="208" y="416" width="16" height="16">
+   <properties>
+    <property nameID="male" value="true"/>
+    <property nameID="path" value="SSTOP,ESTOP,NSTOP,N,N,N,N,N,ESTOP,NSTOP,WSTOP,NSTOP,ESTOP,E,SSTOP,WSTOP,S,S,W,S,S,S,SSTOP,ESTOP,NSTOP"/>
+    <property nameID="spriteIndex" value="2"/>
+    <property nameID="static" value="false"/>
+    <property nameID="text" value="person_1"/>
+   </properties>
+  </object>
+  <object id="292" nameID="person" type="person" x="544" y="288" width="16" height="16">
+   <properties>
+    <property nameID="male" value="true"/>
+    <property nameID="path" value="SSTOP"/>
+    <property nameID="spriteIndex" value="1"/>
+    <property nameID="static" value="true"/>
+    <property nameID="text" value="person_1"/>
+   </properties>
+  </object>
+  <object id="293" nameID="person" type="person" x="592" y="112" width="16" height="16">
+   <properties>
+    <property nameID="male" value="true"/>
+    <property nameID="path" value="SSTOP"/>
+    <property nameID="spriteIndex" value="2"/>
+    <property nameID="static" value="true"/>
+    <property nameID="text" value="person_1"/>
+   </properties>
+  </object>
+  <object id="294" nameID="person" type="person" x="480" y="320" width="16" height="16">
+   <properties>
+    <property nameID="male" value="true"/>
+    <property nameID="path" value="SSTOP,ESTOP,NSTOP,ESTOP,E,E,E,E,E,SSTOP,S,SSTOP,ESTOP,E,E,E,E,N,N,E,E,ESTOP,N,N,N,N,N,N,ESTOP,SSTOP,S,S,S,S,S,S,SSTOP,SSTOP,W,W,S,S,W,W,W,W,WSTOP,NSTOP,WSTOP,N,W,W,W,W,W,WSTOP,SSTOP"/>
+    <property nameID="spriteIndex" value="2"/>
+    <property nameID="static" value="false"/>
+    <property nameID="text" value="person_1"/>
+   </properties>
+  </object>
+  <object id="295" nameID="person" type="person" x="720" y="272" width="16" height="16">
+   <properties>
+    <property nameID="male" value="true"/>
+    <property nameID="path" value="SSTOP,E,E,E,E,ESTOP,NSTOP,NSTOP,WSTOP,SSTOP,S,S,S,ESTOP,SSTOP,W,W,W,W,SSTOP,WSTOP,SSTOP,SSTOP,SSTOP,SSTOP,WSTOP,NSTOP,N,N,N"/>
+    <property nameID="spriteIndex" value="4"/>
+    <property nameID="static" value="false"/>
+    <property nameID="text" value="person_1"/>
+   </properties>
+  </object>
+  <object id="296" nameID="person" type="person" x="864" y="192" width="16" height="16">
+   <properties>
+    <property nameID="male" value="true"/>
+    <property nameID="path" value="SSTOP"/>
+    <property nameID="spriteIndex" value="3"/>
+    <property nameID="static" value="true"/>
+    <property nameID="text" value="person_25_2"/>
+   </properties>
+  </object>
+  <object id="297" nameID="person" type="person" x="912" y="192" width="16" height="16">
+   <properties>
+    <property nameID="male" value="true"/>
+    <property nameID="path" value="SSTOP"/>
+    <property nameID="spriteIndex" value="2"/>
+    <property nameID="static" value="true"/>
+    <property nameID="text" value="person_25_3"/>
+   </properties>
+  </object>
+  <object id="298" nameID="person" type="person" x="816" y="192" width="16" height="16">
+   <properties>
+    <property nameID="male" value="true"/>
+    <property nameID="path" value="SSTOP"/>
+    <property nameID="spriteIndex" value="1"/>
+    <property nameID="static" value="true"/>
+    <property nameID="text" value="person_25_1"/>
+   </properties>
+  </object>
+  <object id="299" nameID="person" type="person" x="816" y="304" width="16" height="16">
+   <properties>
+    <property nameID="male" value="true"/>
+    <property nameID="path" value="NSTOP"/>
+    <property nameID="spriteIndex" value="2"/>
+    <property nameID="static" value="true"/>
+    <property nameID="text" value="person_25_6"/>
+   </properties>
+  </object>
+  <object id="300" nameID="person" type="person" x="848" y="304" width="16" height="16">
+   <properties>
+    <property nameID="male" value="true"/>
+    <property nameID="path" value="NSTOP"/>
+    <property nameID="spriteIndex" value="2"/>
+    <property nameID="static" value="true"/>
+    <property nameID="text" value="person_25_5"/>
+   </properties>
+  </object>
+  <object id="301" nameID="person" type="person" x="928" y="304" width="16" height="16">
+   <properties>
+    <property nameID="male" value="true"/>
+    <property nameID="path" value="NSTOP"/>
+    <property nameID="spriteIndex" value="1"/>
+    <property nameID="static" value="true"/>
+    <property nameID="text" value="person_25_4"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <layer nameID="shadows2" width="64" height="32">
   <data encoding="base64" compression="zlib">
    eJztmdEKgCAMRctf7KXfivq0+p/oQZAgvaurm7EDPZRj27EotGFwHHssoX3NFax59cbu757vKb+kbuxT4iXJy6SGf4xH54Dtv49Yvosp5M9L13Og/Wr5S+bpLUx/NNb9sVzuj9d9C9sfeQ8dP/Zngs7TF5D7peVvBffX7kAXa/5z436s+bf4LqRY829Nz/5bYZ23AWuWXv2j29NaNx3PgYwja2npvgODJWBHKQdahxXHpFST9fyz46zg/jpxVnB/nTgraPn3Nk9fqbXX3wupV+6b/Vf/mv86HBknDLVOQA==
   </data>
  </layer>
- <layer name="tops1" width="64" height="32">
+ <layer nameID="tops1" width="64" height="32">
   <data encoding="base64" compression="zlib">
    eJztmctOwkAUhqcXbDfwCmqi0Q0bow+gCcqLqCs3Bh5AVz6IN2xMxGBYa+LlRYwBtrBw52/shCl22mE6Ywfpl/yZKUw6558zLS2HkHxp2YTcMGpZaDkKrOjYwP7bWKvOT7vhqDtnDx76jHrw2OdoYEXHDhT6T1p3qiP4bkPHTvpYUVFW4WUNWofOoQvoMtQVdA2t2ONxlGnnC6zf3s/ccX8T3rY4qob+Veafsg9Ph4yvdybOD4s/ToaSGz2uM8cNeGtyxOZ/lqm5/O+S/OvMvyk0sDZNjvLM/0EF+76SPm7kZZunA58PHLUNzPudF9U90+9KrMUQPkccTXKbcP5OxjzI8unH9/NEZp1O8PlpyhrGnbcb5p72k+YQQeSa08EjYn6SiJu9/rPeC/LEwt61Ddm/uonb69vwvqPYv2/g/fsb2b3+X5invR4Hu9cXy4QsQcvlfGMqyB/RZ96CgoIC0zH1+Usn8+h51hF9X5/2vV5FrSNtThP/k6GYUuuIQ6T+MWu1DtH6B4WXC1WiyNY6VMbA8op79Iujt33L+DvwrDimSRZcQjxXX+sn1FxEKCmMJY5dfL7n6mvrnHlFqSmMheULGuMUYg==
   </data>
  </layer>
- <layer name="tops2" width="64" height="32">
+ <layer nameID="tops2" width="64" height="32">
   <data encoding="base64" compression="zlib">
    eJztmdlOwzAQRS1RlvIf8FagEPgjeAOawm91oS38VcvSwDMnD6gmuOMJsYUAX+lIlaPOvZNN8sQYvbINY07hbOPrsfGmMXebNYr9Qs1axtzDQ+vz+iN9P8EzvHjOwXiH87QTPltZ9769IoZHQd+v8Gb1f7BlzCEcQReO4WTL/f9HMj3BM7wEzPdR97W9IrSHS5f0eQXX0IMc+nADt5VzcECmQziCLhzDSftrzT3O7X5Lv27XtfuXPJqoaz37A3ocwgjGcAcTmMLM6v+SDFdwDT3IoQ83cFvJd06PF44+XevVunb/kkcT5Vb/c3pclNefZ74HOfRhyVph9T/AfwgjGJfPJkxgCrMG2ap1T3dXhPKQ1NnGn35H1jtvwu8pZNurtTn+i/I68Tz2IIc+LFkrGmSr1rUVykP0p8+F432/ZK2w1jtcjyFZRlbGCb+nkO1+399V11YID9F/zXu+VGYdm5Nh4ci4ZK1o8I5eVzekRwh1hPsva3BvSnVDeSQlJSUlJf1Haecasfb1TTybzmS0c41Y+3oxm8ezzkzGJe1cQ7uvDymfZ52ZjEvauUadfX0o+TzrzGTWSTvXiLWvF7N5PLXZJWnnGrH29WI2j6c2uyTtXCPWvl7M5vHUZpeknWvE2teL2Tye2uyStHONWPt6ST5PbfakpJ9W3W8df011vnUkJcXQO1GR5Tw=
   </data>
  </layer>
- <objectgroup name="colliderWalls1" visible="0">
+ <objectgroup nameID="colliderWalls1" visible="0">
   <object id="203" x="64" y="144" width="96" height="32"/>
   <object id="205" x="176" y="144" width="48" height="32"/>
   <object id="206" x="64" y="96" width="160" height="48"/>
@@ -349,263 +349,263 @@
   <object id="375" x="48" y="464" width="384" height="48"/>
   <object id="378" x="560" y="288" width="16" height="16"/>
  </objectgroup>
- <objectgroup name="triggers1">
-  <object id="32" name="startField" x="432" y="192" width="16" height="16">
+ <objectgroup nameID="triggers1">
+  <object id="32" nameID="startField" x="432" y="192" width="16" height="16">
    <properties>
-    <property name="fieldID" value="1"/>
+    <property nameID="fieldID" value="1"/>
    </properties>
   </object>
-  <object id="35" name="warpField" x="432" y="176" width="16" height="16">
+  <object id="35" nameID="warpField" x="432" y="176" width="16" height="16">
    <properties>
-    <property name="targetID" value="251"/>
-    <property name="targetWarpPointID" value="1"/>
+    <property nameID="targetID" value="251"/>
+    <property nameID="targetWarpPointID" value="1"/>
    </properties>
   </object>
-  <object id="380" name="startField" x="160" y="176" width="16" height="16">
+  <object id="380" nameID="startField" x="160" y="176" width="16" height="16">
    <properties>
-    <property name="fieldID" value="5"/>
+    <property nameID="fieldID" value="5"/>
    </properties>
   </object>
-  <object id="381" name="warpField" x="160" y="160" width="16" height="16">
+  <object id="381" nameID="warpField" x="160" y="160" width="16" height="16">
    <properties>
-    <property name="targetID" value="253"/>
-    <property name="targetWarpPointID" value="1"/>
+    <property nameID="targetID" value="253"/>
+    <property nameID="targetWarpPointID" value="1"/>
    </properties>
   </object>
-  <object id="383" name="warpField" x="528" y="496" width="16" height="16">
+  <object id="383" nameID="warpField" x="528" y="496" width="16" height="16">
    <properties>
-    <property name="targetID" value="2"/>
-    <property name="targetWarpPointID" value="1"/>
+    <property nameID="targetID" value="2"/>
+    <property nameID="targetWarpPointID" value="1"/>
    </properties>
   </object>
-  <object id="384" name="warpField" x="544" y="496" width="16" height="16">
+  <object id="384" nameID="warpField" x="544" y="496" width="16" height="16">
    <properties>
-    <property name="targetID" value="2"/>
-    <property name="targetWarpPointID" value="1"/>
+    <property nameID="targetID" value="2"/>
+    <property nameID="targetWarpPointID" value="1"/>
    </properties>
   </object>
-  <object id="385" name="warpField" x="560" y="496" width="16" height="16">
+  <object id="385" nameID="warpField" x="560" y="496" width="16" height="16">
    <properties>
-    <property name="targetID" value="2"/>
-    <property name="targetWarpPointID" value="2"/>
+    <property nameID="targetID" value="2"/>
+    <property nameID="targetWarpPointID" value="2"/>
    </properties>
   </object>
-  <object id="386" name="warpField" x="576" y="496" width="16" height="16">
+  <object id="386" nameID="warpField" x="576" y="496" width="16" height="16">
    <properties>
-    <property name="targetID" value="2"/>
-    <property name="targetWarpPointID" value="2"/>
+    <property nameID="targetID" value="2"/>
+    <property nameID="targetWarpPointID" value="2"/>
    </properties>
   </object>
-  <object id="387" name="warpField" x="624" y="496" width="16" height="16">
+  <object id="387" nameID="warpField" x="624" y="496" width="16" height="16">
    <properties>
-    <property name="targetID" value="2"/>
-    <property name="targetWarpPointID" value="2"/>
+    <property nameID="targetID" value="2"/>
+    <property nameID="targetWarpPointID" value="2"/>
    </properties>
   </object>
-  <object id="388" name="warpField" x="640" y="496" width="16" height="16">
+  <object id="388" nameID="warpField" x="640" y="496" width="16" height="16">
    <properties>
-    <property name="targetID" value="2"/>
-    <property name="targetWarpPointID" value="2"/>
+    <property nameID="targetID" value="2"/>
+    <property nameID="targetWarpPointID" value="2"/>
    </properties>
   </object>
-  <object id="389" name="warpField" x="464" y="496" width="16" height="16">
+  <object id="389" nameID="warpField" x="464" y="496" width="16" height="16">
    <properties>
-    <property name="targetID" value="2"/>
-    <property name="targetWarpPointID" value="1"/>
+    <property nameID="targetID" value="2"/>
+    <property nameID="targetWarpPointID" value="1"/>
    </properties>
   </object>
-  <object id="390" name="warpField" x="480" y="496" width="16" height="16">
+  <object id="390" nameID="warpField" x="480" y="496" width="16" height="16">
    <properties>
-    <property name="targetID" value="2"/>
-    <property name="targetWarpPointID" value="1"/>
+    <property nameID="targetID" value="2"/>
+    <property nameID="targetWarpPointID" value="1"/>
    </properties>
   </object>
-  <object id="391" name="startField" x="544" y="480" width="16" height="16">
+  <object id="391" nameID="startField" x="544" y="480" width="16" height="16">
    <properties>
-    <property name="fieldID" value="3"/>
+    <property nameID="fieldID" value="3"/>
    </properties>
   </object>
-  <object id="392" name="startField" x="560" y="480" width="16" height="16">
+  <object id="392" nameID="startField" x="560" y="480" width="16" height="16">
    <properties>
-    <property name="fieldID" value="4"/>
-   </properties>
-  </object>
- </objectgroup>
- <objectgroup name="descriptions1">
-  <object id="53" name="sign" type="objectDescription" x="112" y="176" width="16" height="16">
-   <properties>
-    <property name="text" value="sign_25_2_text"/>
-    <property name="title" value="sign_25_2_title"/>
-   </properties>
-  </object>
-  <object id="199" name="sign" type="objectDescription" x="128" y="176" width="16" height="16">
-   <properties>
-    <property name="text" value="sign_25_2_text"/>
-    <property name="title" value="sign_25_2_title"/>
-   </properties>
-  </object>
-  <object id="306" name="sign" type="objectDescription" x="624" y="288" width="16" height="16">
-   <properties>
-    <property name="text" value="sign_25_1_text"/>
-    <property name="title" value="sign_25_1_title"/>
-   </properties>
-  </object>
-  <object id="307" name="sign" type="objectDescription" x="640" y="288" width="16" height="16">
-   <properties>
-    <property name="text" value="sign_25_1_text"/>
-    <property name="title" value="sign_25_1_title"/>
-   </properties>
-  </object>
-  <object id="308" name="sign" type="objectDescription" x="800" y="224" width="16" height="16">
-   <properties>
-    <property name="text" value="object_25_1_text"/>
-    <property name="title" value="object_25_1_title"/>
-   </properties>
-  </object>
-  <object id="309" name="sign" type="objectDescription" x="800" y="208" width="16" height="16">
-   <properties>
-    <property name="text" value="object_25_1_text"/>
-    <property name="title" value="object_25_1_title"/>
-   </properties>
-  </object>
-  <object id="310" name="sign" type="objectDescription" x="816" y="224" width="16" height="16">
-   <properties>
-    <property name="text" value="object_25_1_text"/>
-    <property name="title" value="object_25_1_title"/>
-   </properties>
-  </object>
-  <object id="311" name="sign" type="objectDescription" x="832" y="224" width="16" height="16">
-   <properties>
-    <property name="text" value="object_25_2_text"/>
-    <property name="title" value="object_25_1_title"/>
-   </properties>
-  </object>
-  <object id="312" name="sign" type="objectDescription" x="848" y="224" width="16" height="16">
-   <properties>
-    <property name="text" value="object_25_4_text"/>
-    <property name="title" value="object_25_3_title"/>
-   </properties>
-  </object>
-  <object id="316" name="sign" type="objectDescription" x="912" y="208" width="16" height="16">
-   <properties>
-    <property name="text" value="object_25_1_text"/>
-    <property name="title" value="object_25_1_title"/>
-   </properties>
-  </object>
-  <object id="317" name="sign" type="objectDescription" x="912" y="224" width="16" height="16">
-   <properties>
-    <property name="text" value="object_25_1_text"/>
-    <property name="title" value="object_25_1_title"/>
-   </properties>
-  </object>
-  <object id="318" name="sign" type="objectDescription" x="928" y="224" width="16" height="16">
-   <properties>
-    <property name="text" value="object_25_1_text"/>
-    <property name="title" value="object_25_1_title"/>
-   </properties>
-  </object>
-  <object id="319" name="sign" type="objectDescription" x="848" y="272" width="16" height="16">
-   <properties>
-    <property name="text" value="object_25_1_text"/>
-    <property name="title" value="object_25_1_title"/>
-   </properties>
-  </object>
-  <object id="320" name="sign" type="objectDescription" x="864" y="272" width="16" height="16">
-   <properties>
-    <property name="text" value="object_25_1_text"/>
-    <property name="title" value="object_25_1_title"/>
-   </properties>
-  </object>
-  <object id="321" name="sign" type="objectDescription" x="880" y="272" width="16" height="16">
-   <properties>
-    <property name="text" value="object_25_1_text"/>
-    <property name="title" value="object_25_1_title"/>
-   </properties>
-  </object>
-  <object id="322" name="sign" type="objectDescription" x="864" y="224" width="16" height="16">
-   <properties>
-    <property name="text" value="object_25_5_text"/>
-    <property name="title" value="object_25_3_title"/>
-   </properties>
-  </object>
-  <object id="323" name="sign" type="objectDescription" x="880" y="224" width="16" height="16">
-   <properties>
-    <property name="text" value="object_25_3_text"/>
-    <property name="title" value="object_25_3_title"/>
-   </properties>
-  </object>
-  <object id="324" name="sign" type="objectDescription" x="880" y="208" width="16" height="16">
-   <properties>
-    <property name="text" value="object_25_1_text"/>
-    <property name="title" value="object_25_3_title"/>
-   </properties>
-  </object>
-  <object id="325" name="sign" type="objectDescription" x="928" y="272" width="16" height="16">
-   <properties>
-    <property name="text" value="object_25_3_text"/>
-    <property name="title" value="object_25_3_title"/>
-   </properties>
-  </object>
-  <object id="326" name="sign" type="objectDescription" x="912" y="272" width="16" height="16">
-   <properties>
-    <property name="text" value="object_25_5_text"/>
-    <property name="title" value="object_25_3_title"/>
-   </properties>
-  </object>
-  <object id="327" name="sign" type="objectDescription" x="896" y="272" width="16" height="16">
-   <properties>
-    <property name="text" value="object_25_4_text"/>
-    <property name="title" value="object_25_3_title"/>
-   </properties>
-  </object>
-  <object id="328" name="sign" type="objectDescription" x="832" y="272" width="16" height="16">
-   <properties>
-    <property name="text" value="object_25_4_text"/>
-    <property name="title" value="object_25_3_title"/>
-   </properties>
-  </object>
-  <object id="329" name="sign" type="objectDescription" x="816" y="272" width="16" height="16">
-   <properties>
-    <property name="text" value="object_25_4_text"/>
-    <property name="title" value="object_25_3_title"/>
-   </properties>
-  </object>
-  <object id="330" name="sign" type="objectDescription" x="800" y="272" width="16" height="16">
-   <properties>
-    <property name="text" value="object_25_4_text"/>
-    <property name="title" value="object_25_3_title"/>
-   </properties>
-  </object>
-  <object id="331" name="sign" type="objectDescription" x="800" y="288" width="16" height="16">
-   <properties>
-    <property name="text" value="object_25_4_text"/>
-    <property name="title" value="object_25_3_title"/>
-   </properties>
-  </object>
-  <object id="332" name="sign" type="objectDescription" x="832" y="288" width="16" height="16">
-   <properties>
-    <property name="text" value="object_25_4_text"/>
-    <property name="title" value="object_25_3_title"/>
-   </properties>
-  </object>
-  <object id="352" name="sign" type="objectDescription" x="192" y="176" width="16" height="16">
-   <properties>
-    <property name="text" value="object_25_6_text"/>
-    <property name="title" value="object_25_6_title"/>
-   </properties>
-  </object>
-  <object id="376" name="sign" type="objectDescription" x="528" y="176" width="16" height="16">
-   <properties>
-    <property name="text" value="sign_25_3_text"/>
-    <property name="title" value="sign_25_3_title"/>
-   </properties>
-  </object>
-  <object id="379" name="sign" type="objectDescription" x="560" y="288" width="16" height="16">
-   <properties>
-    <property name="text" value="guardian_25_1_text"/>
-    <property name="title" value="guardian_25_1_title"/>
+    <property nameID="fieldID" value="4"/>
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="animatedObjects2"/>
+ <objectgroup nameID="descriptions1">
+  <object id="53" nameID="sign" type="objectDescription" x="112" y="176" width="16" height="16">
+   <properties>
+    <property nameID="text" value="sign_25_2_text"/>
+    <property nameID="title" value="sign_25_2_title"/>
+   </properties>
+  </object>
+  <object id="199" nameID="sign" type="objectDescription" x="128" y="176" width="16" height="16">
+   <properties>
+    <property nameID="text" value="sign_25_2_text"/>
+    <property nameID="title" value="sign_25_2_title"/>
+   </properties>
+  </object>
+  <object id="306" nameID="sign" type="objectDescription" x="624" y="288" width="16" height="16">
+   <properties>
+    <property nameID="text" value="sign_25_1_text"/>
+    <property nameID="title" value="sign_25_1_title"/>
+   </properties>
+  </object>
+  <object id="307" nameID="sign" type="objectDescription" x="640" y="288" width="16" height="16">
+   <properties>
+    <property nameID="text" value="sign_25_1_text"/>
+    <property nameID="title" value="sign_25_1_title"/>
+   </properties>
+  </object>
+  <object id="308" nameID="sign" type="objectDescription" x="800" y="224" width="16" height="16">
+   <properties>
+    <property nameID="text" value="object_25_1_text"/>
+    <property nameID="title" value="object_25_1_title"/>
+   </properties>
+  </object>
+  <object id="309" nameID="sign" type="objectDescription" x="800" y="208" width="16" height="16">
+   <properties>
+    <property nameID="text" value="object_25_1_text"/>
+    <property nameID="title" value="object_25_1_title"/>
+   </properties>
+  </object>
+  <object id="310" nameID="sign" type="objectDescription" x="816" y="224" width="16" height="16">
+   <properties>
+    <property nameID="text" value="object_25_1_text"/>
+    <property nameID="title" value="object_25_1_title"/>
+   </properties>
+  </object>
+  <object id="311" nameID="sign" type="objectDescription" x="832" y="224" width="16" height="16">
+   <properties>
+    <property nameID="text" value="object_25_2_text"/>
+    <property nameID="title" value="object_25_1_title"/>
+   </properties>
+  </object>
+  <object id="312" nameID="sign" type="objectDescription" x="848" y="224" width="16" height="16">
+   <properties>
+    <property nameID="text" value="object_25_4_text"/>
+    <property nameID="title" value="object_25_3_title"/>
+   </properties>
+  </object>
+  <object id="316" nameID="sign" type="objectDescription" x="912" y="208" width="16" height="16">
+   <properties>
+    <property nameID="text" value="object_25_1_text"/>
+    <property nameID="title" value="object_25_1_title"/>
+   </properties>
+  </object>
+  <object id="317" nameID="sign" type="objectDescription" x="912" y="224" width="16" height="16">
+   <properties>
+    <property nameID="text" value="object_25_1_text"/>
+    <property nameID="title" value="object_25_1_title"/>
+   </properties>
+  </object>
+  <object id="318" nameID="sign" type="objectDescription" x="928" y="224" width="16" height="16">
+   <properties>
+    <property nameID="text" value="object_25_1_text"/>
+    <property nameID="title" value="object_25_1_title"/>
+   </properties>
+  </object>
+  <object id="319" nameID="sign" type="objectDescription" x="848" y="272" width="16" height="16">
+   <properties>
+    <property nameID="text" value="object_25_1_text"/>
+    <property nameID="title" value="object_25_1_title"/>
+   </properties>
+  </object>
+  <object id="320" nameID="sign" type="objectDescription" x="864" y="272" width="16" height="16">
+   <properties>
+    <property nameID="text" value="object_25_1_text"/>
+    <property nameID="title" value="object_25_1_title"/>
+   </properties>
+  </object>
+  <object id="321" nameID="sign" type="objectDescription" x="880" y="272" width="16" height="16">
+   <properties>
+    <property nameID="text" value="object_25_1_text"/>
+    <property nameID="title" value="object_25_1_title"/>
+   </properties>
+  </object>
+  <object id="322" nameID="sign" type="objectDescription" x="864" y="224" width="16" height="16">
+   <properties>
+    <property nameID="text" value="object_25_5_text"/>
+    <property nameID="title" value="object_25_3_title"/>
+   </properties>
+  </object>
+  <object id="323" nameID="sign" type="objectDescription" x="880" y="224" width="16" height="16">
+   <properties>
+    <property nameID="text" value="object_25_3_text"/>
+    <property nameID="title" value="object_25_3_title"/>
+   </properties>
+  </object>
+  <object id="324" nameID="sign" type="objectDescription" x="880" y="208" width="16" height="16">
+   <properties>
+    <property nameID="text" value="object_25_1_text"/>
+    <property nameID="title" value="object_25_3_title"/>
+   </properties>
+  </object>
+  <object id="325" nameID="sign" type="objectDescription" x="928" y="272" width="16" height="16">
+   <properties>
+    <property nameID="text" value="object_25_3_text"/>
+    <property nameID="title" value="object_25_3_title"/>
+   </properties>
+  </object>
+  <object id="326" nameID="sign" type="objectDescription" x="912" y="272" width="16" height="16">
+   <properties>
+    <property nameID="text" value="object_25_5_text"/>
+    <property nameID="title" value="object_25_3_title"/>
+   </properties>
+  </object>
+  <object id="327" nameID="sign" type="objectDescription" x="896" y="272" width="16" height="16">
+   <properties>
+    <property nameID="text" value="object_25_4_text"/>
+    <property nameID="title" value="object_25_3_title"/>
+   </properties>
+  </object>
+  <object id="328" nameID="sign" type="objectDescription" x="832" y="272" width="16" height="16">
+   <properties>
+    <property nameID="text" value="object_25_4_text"/>
+    <property nameID="title" value="object_25_3_title"/>
+   </properties>
+  </object>
+  <object id="329" nameID="sign" type="objectDescription" x="816" y="272" width="16" height="16">
+   <properties>
+    <property nameID="text" value="object_25_4_text"/>
+    <property nameID="title" value="object_25_3_title"/>
+   </properties>
+  </object>
+  <object id="330" nameID="sign" type="objectDescription" x="800" y="272" width="16" height="16">
+   <properties>
+    <property nameID="text" value="object_25_4_text"/>
+    <property nameID="title" value="object_25_3_title"/>
+   </properties>
+  </object>
+  <object id="331" nameID="sign" type="objectDescription" x="800" y="288" width="16" height="16">
+   <properties>
+    <property nameID="text" value="object_25_4_text"/>
+    <property nameID="title" value="object_25_3_title"/>
+   </properties>
+  </object>
+  <object id="332" nameID="sign" type="objectDescription" x="832" y="288" width="16" height="16">
+   <properties>
+    <property nameID="text" value="object_25_4_text"/>
+    <property nameID="title" value="object_25_3_title"/>
+   </properties>
+  </object>
+  <object id="352" nameID="sign" type="objectDescription" x="192" y="176" width="16" height="16">
+   <properties>
+    <property nameID="text" value="object_25_6_text"/>
+    <property nameID="title" value="object_25_6_title"/>
+   </properties>
+  </object>
+  <object id="376" nameID="sign" type="objectDescription" x="528" y="176" width="16" height="16">
+   <properties>
+    <property nameID="text" value="sign_25_3_text"/>
+    <property nameID="title" value="sign_25_3_title"/>
+   </properties>
+  </object>
+  <object id="379" nameID="sign" type="objectDescription" x="560" y="288" width="16" height="16">
+   <properties>
+    <property nameID="text" value="guardian_25_1_text"/>
+    <property nameID="title" value="guardian_25_1_title"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup nameID="animatedObjects2"/>
 </map>

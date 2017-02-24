@@ -18,6 +18,8 @@ import de.limbusdev.guardianmonsters.model.Inventory;
 import de.limbusdev.guardianmonsters.model.Item;
 import de.limbusdev.guardianmonsters.model.ItemInfo;
 import de.limbusdev.guardianmonsters.model.Monster;
+import de.limbusdev.guardianmonsters.model.MonsterInfo;
+import de.limbusdev.guardianmonsters.model.MonsterStatusInformation;
 
 /**
  * Created by georg on 15.11.16.
@@ -32,10 +34,9 @@ public class GameStateDebugger {
 
     private void setUpTestInventory() {
         TeamComponent herTeam = new TeamComponent();
-        herTeam.monsters.put(0,BattleFactory.getInstance().createMonster(4));
-        herTeam.monsters.put(1,BattleFactory.getInstance().createMonster(6));
-        herTeam.monsters.put(2,BattleFactory.getInstance().createMonster(7));
-        herTeam.monsters.put(3,BattleFactory.getInstance().createMonster(8));
+        herTeam.monsters.put(0,BattleFactory.getInstance().createMonster(1));
+        herTeam.monsters.put(1,BattleFactory.getInstance().createMonster(2));
+        herTeam.monsters.put(2,BattleFactory.getInstance().createMonster(3));
 
         Inventory inventory = new Inventory();
 
@@ -71,14 +72,12 @@ public class GameStateDebugger {
     private void setUpTestBattle() {
         TeamComponent heroTeam = new TeamComponent();
         heroTeam.monsters.put(0,BattleFactory.getInstance().createMonster(1));
-        heroTeam.monsters.put(1,BattleFactory.getInstance().createMonster(4));
-        heroTeam.monsters.put(2,BattleFactory.getInstance().createMonster(7));
-        heroTeam.monsters.put(3,BattleFactory.getInstance().createMonster(8));
-        heroTeam.monsters.put(4,BattleFactory.getInstance().createMonster(9));
+        heroTeam.monsters.put(1,BattleFactory.getInstance().createMonster(2));
+        heroTeam.monsters.put(2,BattleFactory.getInstance().createMonster(3));
         TeamComponent oppTeam = new TeamComponent();
-        oppTeam.monsters.put(0,BattleFactory.getInstance().createMonster(5));
-        oppTeam.monsters.put(1,BattleFactory.getInstance().createMonster(10));
-        oppTeam.monsters.put(2,BattleFactory.getInstance().createMonster(16));
+        oppTeam.monsters.put(0,BattleFactory.getInstance().createMonster(4));
+        oppTeam.monsters.put(1,BattleFactory.getInstance().createMonster(5));
+        oppTeam.monsters.put(2,BattleFactory.getInstance().createMonster(6));
         BattleScreen battleScreen = new BattleScreen();
         battleScreen.init(heroTeam, oppTeam);
         game.setScreen(battleScreen);
@@ -99,12 +98,12 @@ public class GameStateDebugger {
     private void TestBattleSystem() {
         TeamComponent heroTeam = new TeamComponent();
         heroTeam.monsters.put(0,BattleFactory.getInstance().createMonster(1));
-        heroTeam.monsters.put(1,BattleFactory.getInstance().createMonster(4));
-        heroTeam.monsters.put(2,BattleFactory.getInstance().createMonster(7));
+        heroTeam.monsters.put(1,BattleFactory.getInstance().createMonster(2));
+        heroTeam.monsters.put(2,BattleFactory.getInstance().createMonster(3));
         TeamComponent oppTeam = new TeamComponent();
-        oppTeam.monsters.put(0,BattleFactory.getInstance().createMonster(10));
+        oppTeam.monsters.put(0,BattleFactory.getInstance().createMonster(4));
         oppTeam.monsters.put(1,BattleFactory.getInstance().createMonster(5));
-        oppTeam.monsters.put(2,BattleFactory.getInstance().createMonster(14));
+        oppTeam.monsters.put(2,BattleFactory.getInstance().createMonster(6));
 
         BattleSystem bs = new BattleSystem(heroTeam.monsters, oppTeam.monsters, new BattleSystem.CallbackHandler() {
             @Override
@@ -158,6 +157,11 @@ public class GameStateDebugger {
         AttackInfo ai = AttackInfo.getInst();
     }
 
+    public void testMonsterParsing() {
+        MonsterInfo mi = MonsterInfo.getInstance();
+        System.out.println("Tested");
+    }
+
     public void startDebugging() {
         switch(GS.DEBUG_MODE) {
             case BATTLE:
@@ -174,6 +178,9 @@ public class GameStateDebugger {
                 break;
             case ATTACK_PARSING:
                 testAttackParsing();
+                break;
+            case MONSTER_PARSING:
+                testMonsterParsing();
                 break;
             default:
                 setUpTestWorld();

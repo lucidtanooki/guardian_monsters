@@ -1,46 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="12" height="12" tilewidth="16" tileheight="16">
  <properties>
-  <property name="musicIndex" value="1"/>
-  <property name="musicType" value="town"/>
+  <property nameID="musicIndex" value="1"/>
+  <property nameID="musicType" value="town"/>
  </properties>
- <tileset firstgid="1" name="limbusdev_world" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" nameID="limbusdev_world" tilewidth="16" tileheight="16">
   <image source="../spritesheets/limbusdev_world.png" width="1024" height="1024"/>
  </tileset>
- <tileset firstgid="4097" name="limbusdev_world2" tilewidth="16" tileheight="16">
+ <tileset firstgid="4097" nameID="limbusdev_world2" tilewidth="16" tileheight="16">
   <image source="../spritesheets/limbusdev_world2.png" width="1024" height="1024"/>
  </tileset>
- <layer name="ground1" width="12" height="12">
+ <layer nameID="ground1" width="12" height="12">
   <data encoding="base64" compression="zlib">
    eJxjYCAd6AOxARE0DOQDcQERNAjckWRguCs5uOk7EhB8Fx1TSf1QogGbvW2/
   </data>
  </layer>
- <layer name="walls1" width="12" height="12">
+ <layer nameID="walls1" width="12" height="12">
   <data encoding="base64" compression="zlib">
    eJxjYCAdZImhYkssYiAMA6vEUHElFrFVYtjteiCBn08qQLZvNdTOlTj4MCAjCbEXZjeIj+weEJZFEruH5sYYoNxDCVQci6Y+mgmCcYH7EqjqCQFK1JMCAHlfJWk=
   </data>
  </layer>
- <layer name="objects1" width="12" height="12">
+ <layer nameID="objects1" width="12" height="12">
   <data encoding="base64" compression="zlib">
    eJxjYKAuWCVJmvqVUPV1/KTp20dAfbY8A0OOPIL/j4D61UC1a6DqlYC0sjx+9a+B8m+gapKAdDKS+u9Au3YA8U5+CJsQAKn5AcQ/iVQ/mAAAsXQR6A==
   </data>
  </layer>
- <layer name="lights1" width="12" height="12">
+ <layer nameID="lights1" width="12" height="12">
   <data encoding="base64" compression="zlib">
    eJxjYBhaQEtyoF0AAa/kGBheyw20K0gDmtCwUwPS6kCsIYkqjgukAeXTgTgDizoABnQFGQ==
   </data>
  </layer>
- <layer name="tops1" width="12" height="12" opacity="0.97">
+ <layer nameID="tops1" width="12" height="12" opacity="0.97">
   <data encoding="base64" compression="zlib">
    eJwzZmJgKEXD+VjEQNgEiE2BGB04YBEDATMy1BcAcT0U50HVlaPxc6F8faj5WWIQnC0Gkc/EwcflHmzgoTyq+gp+BoZKfvx6SDF/sKovBuIyNGwENcMQTbwEiAGwyhiP
   </data>
  </layer>
- <layer name="tops2" width="12" height="12">
+ <layer nameID="tops2" width="12" height="12">
   <data encoding="base64" compression="zlib">
    eJxjYBieIFuegSFHfqBdMfwBAIVtARY=
   </data>
  </layer>
- <objectgroup name="colliderWalls1" width="12" height="12" visible="0">
+ <objectgroup nameID="colliderWalls1" width="12" height="12" visible="0">
   <object x="16" y="80" width="48" height="16"/>
   <object x="32" y="112" width="32" height="32"/>
   <object x="160" y="96" width="16" height="16"/>
@@ -54,29 +54,29 @@
   <object x="112" y="176" width="80" height="16"/>
   <object x="176" y="16" width="16" height="160"/>
  </objectgroup>
- <objectgroup name="sensors" width="12" height="12" visible="0">
-  <object name="startField" x="96" y="160" width="16" height="16">
+ <objectgroup nameID="sensors" width="12" height="12" visible="0">
+  <object nameID="startField" x="96" y="160" width="16" height="16">
    <properties>
-    <property name="fieldID" value="1"/>
+    <property nameID="fieldID" value="1"/>
    </properties>
   </object>
-  <object name="warpField" x="96" y="176" width="16" height="16">
+  <object nameID="warpField" x="96" y="176" width="16" height="16">
    <properties>
-    <property name="targetID" value="7"/>
-    <property name="targetWarpPointID" value="2"/>
-   </properties>
-  </object>
- </objectgroup>
- <objectgroup name="livingEntities" width="12" height="12" visible="0">
-  <object name="person" x="16" y="112" width="16" height="16">
-   <properties>
-    <property name="male" value="true"/>
-    <property name="moving" value="false"/>
-    <property name="path" value="WSTOP"/>
-    <property name="spriteIndex" value="1"/>
-    <property name="startDir" value="S"/>
+    <property nameID="targetID" value="7"/>
+    <property nameID="targetWarpPointID" value="2"/>
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="objects" width="12" height="12" visible="0"/>
+ <objectgroup nameID="livingEntities" width="12" height="12" visible="0">
+  <object nameID="person" x="16" y="112" width="16" height="16">
+   <properties>
+    <property nameID="male" value="true"/>
+    <property nameID="moving" value="false"/>
+    <property nameID="path" value="WSTOP"/>
+    <property nameID="spriteIndex" value="1"/>
+    <property nameID="startDir" value="S"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup nameID="objects" width="12" height="12" visible="0"/>
 </map>

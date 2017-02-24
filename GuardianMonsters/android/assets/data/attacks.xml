@@ -1,41 +1,41 @@
 <attacks>
     <!-- ................................................................................... ANY -->
-    <attack id="1" element="none" nameID="attAny1_selfdef">
+    <attack id="1" element="none" nameID="attNone1_selfdef">
         <damage>0</damage>
         <sfx type="none" index="0" />
         <animation>none</animation>
         <category>physical</category>
     </attack>
 
-    <attack id="2" element="none" nameID="attAny1_kick">
+    <attack id="2" element="none" nameID="attNone2_kick">
         <damage>5</damage>
         <sfx type="hit" index="0" />
         <animation>contact</animation>
         <category>physical</category>
     </attack>
 
-    <attack id="3" element="none" nameID="attAny3_tooth">
+    <attack id="3" element="none" nameID="attNone3_tooth">
         <damage>5</damage>
         <sfx type="hit" index="0" />
         <animation>contact</animation>
         <category>physical</category>
     </attack>
 
-    <attack id="4" element="none" nameID="attAny4_punch">
+    <attack id="4" element="none" nameID="attNone4_punch">
         <damage>10</damage>
         <sfx type="hit" index="0" />
         <animation>contact</animation>
         <category>physical</category>
     </attack>
 
-    <attack id="5" element="none" nameID="attAny5_slap">
+    <attack id="5" element="none" nameID="attNone5_slap">
         <damage>15</damage>
         <sfx type="hit" index="0" />
         <animation>contact</animation>
         <category>physical</category>
     </attack>
 
-    <attack id="6" element="none" nameID="attAny6_triphazard">
+    <attack id="6" element="none" nameID="attNone6_triphazard">
         <damage>20</damage>
         <sfx type="hit" index="0" />
         <animation>contact</animation>

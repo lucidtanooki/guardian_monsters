@@ -191,7 +191,7 @@ public class GameArea {
     }
 
     /**
-     * Only for Layers containing "people" in their name
+     * Only for Layers containing "people" in their nameID
      *
      * @param layer
      */
@@ -207,7 +207,7 @@ public class GameArea {
     }
 
     /**
-     * Only for layers containing "colliderWalls" in their name
+     * Only for layers containing "colliderWalls" in their nameID
      * Creates rectangle objects for every collider in the given layer
      *
      * @param layer

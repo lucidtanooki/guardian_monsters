@@ -1,52 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="32" height="20" tilewidth="16" tileheight="16">
- <tileset firstgid="1" name="limbusdev_world2" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" nameID="limbusdev_world2" tilewidth="16" tileheight="16">
   <image source="../spritesheets/limbusdev_world2.png" width="1024" height="1024"/>
  </tileset>
- <tileset firstgid="4097" name="limbusdev_oriental" tilewidth="16" tileheight="16">
+ <tileset firstgid="4097" nameID="limbusdev_oriental" tilewidth="16" tileheight="16">
   <image source="../spritesheets/limbusdev_oriental.png" width="1024" height="1024"/>
  </tileset>
- <layer name="ground1" width="32" height="20">
+ <layer nameID="ground1" width="32" height="20">
   <data encoding="base64" compression="zlib">
    eJw7xsjAcGwUE40nC2Li4Wz/JEEIxmYvOoappYX96HgiEkaXo4f9+PCo/eSla1qmY0Lm45KHpX1iaVzmEGM/obxFrP24MLnxTw3/j+JRPIoHHwYAlOvffg==
   </data>
  </layer>
- <layer name="walls0" width="32" height="20">
+ <layer nameID="walls0" width="32" height="20">
   <data encoding="base64" compression="zlib">
    eJxjYBh64JwgA8N5IL4gODD28wkxMPADsYDQwNjvB7TXH4gDBsj+kQ4mCiLwcALI/qLEb+jmEGsWsjpkfQIk0NjsJMV+bDgAiEMFiKNxmSE8gGklCGh3MAH7+4Dy/VgwOQCbORPItB+XOC48AY84OYAc+0fBKBgqAAAPrDz1
   </data>
  </layer>
- <layer name="shadow1" width="32" height="20">
+ <layer nameID="shadow1" width="32" height="20">
   <data encoding="base64" compression="zlib">
    eJxjYBgFo4AyMJFpYO0OprP9IDthmN52D1WAHGbEqCFGPSn2kGs/uQCXXwaz/dQCuOyhV37BZQ+98upomTAKhgoAAAP3HY8=
   </data>
  </layer>
- <layer name="walls1" width="32" height="20">
+ <layer nameID="walls1" width="32" height="20">
   <data encoding="base64" compression="zlib">
    eJxjYBha4IogA8MUJHxZkDh9XqwMDN5A7MNKmf0iQqh8YSFMNe1MmGJdQHu7gbgHh/1nmBkYzgLxOWZUcXT/YrOfmPA4BbT3NBCfwWE/DwsDAy8Q87GgiqPbFwLkTxVE4GAiwgMEuNgYGLiBmIcNu7wP0F5fIPYjYP9VoJ2hAgh8Dc2/uOz3AtrrDcQ+OOzHBdDtJwRw2U8uQLY/HOjXKCCOBuIIKI4E4hikMKDE/omCmJie5mDThx7fhPA1LGYQY78QUI0wVK0YGk0qQNcPMxsfCALlJaiaMCR6ugCEPZNIerYAqn50s0kF16Hm3iSSvi1Anj0DBXCVu/QCuMpdbHUILQCucpdcgM3dgzWMiQHUiAdqhzE1AQBa8kwn
   </data>
  </layer>
- <layer name="shadow2" width="32" height="20">
+ <layer nameID="shadow2" width="32" height="20">
   <data encoding="base64" compression="zlib">
    eJxjYBgFo2AUjIJRAAITmVDpUTAKRsEoGK4AALFPASc=
   </data>
  </layer>
- <layer name="objects1" width="32" height="20">
+ <layer nameID="objects1" width="32" height="20">
   <data encoding="base64" compression="zlib">
    eJxjYBgFo2AUkAoCBAfaBcMPSApg4oE0BwTEgfEsAcSSQCwFxNJofHQ5GSqni3CgeRFAHAnEUUAcjcZHl4sZTZejYBSMAiIBAHthCYo=
   </data>
  </layer>
- <layer name="shadow3" width="32" height="20">
+ <layer nameID="shadow3" width="32" height="20">
   <data encoding="base64" compression="zlib">
    eJxjYBgFo2AUjIKBBxOZMDG1zKOmmwhhaoKBtn8UjIJRMHwBABrEE4c=
   </data>
  </layer>
- <layer name="tops1" width="32" height="20">
+ <layer nameID="tops1" width="32" height="20">
   <data encoding="base64" compression="zlib">
    eJztkuEKgjAUhS/9z+ZmZdEzVVCU1TsFESLRO1kU9TwdaZCOOxQxRuGBj/PjbucMvUS/p9QnuoCr76bfk0Q9IKSb/il6Z2DuqP8bCgRRnyGvriKSDIEqnuNyBkaWqSHmK4bCGezbGIRglPOJsYdcTljS72EuGeqIy1ElWXvMY4Yldiz2q7OQfM6xpD/F/AESZDxz7ln+uQ2l3vcOnU/ODX6v+S3XuBeBDdhqjyyezXe6O6MJJfrdp4p+Fs11t2rV6r/1AjtsNL0=
   </data>
  </layer>
- <layer name="tops2" width="32" height="20">
+ <layer nameID="tops2" width="32" height="20">
   <data encoding="base64" compression="zlib">
    eJxjYBgFo2DwgIuCDAyXBCkzYyITBJNjlqAQA4OQEHXsp4ZZlNg/UGAw2D9YwGByyygYBaNgFCADAKvsCdc=
   </data>

@@ -18,10 +18,11 @@ public class Monster extends Observable {
     public int INSTANCE_ID;
     public int evolution;
     public Array<Element> elements;
-    public Equipment weapon;
-    public Equipment helmet;
-    public Equipment armor;
-    public Equipment shoes;
+    public Equipment    weapon;
+    public Equipment    helmet;
+    public Equipment    armor;
+    public Equipment    shoes;
+    public String       nickname;
 
 
     // -------------------------------------------------------------------------------------- STATUS
@@ -57,7 +58,7 @@ public class Monster extends Observable {
         this.ID = ID;
         this.level = 1;
         this.exp = 0;
-        BaseStat base = MonsterInformation.getInstance().statusInfos.get(ID).baseStat;
+        BaseStat base = MonsterInfo.getInstance().getStatusInfos().get(ID).baseStat;
         this.pStr = pStrFull = base.basePhysStrength;
         this.HPfull = base.baseHP;
         this.HP = base.baseHP/2;
@@ -66,16 +67,17 @@ public class Monster extends Observable {
         this.pDefFull = pDef = base.basePhysDefense;
         this.mDefFull = mDef = base.baseMagDefense;
         this.Speed = this.SpeedFull = base.baseSpeed;
+        this.nickname = "";
 
         // INIT
         this.attacks = new Array<>();
 
-        for(ObjectMap.Entry<Integer,Attack> e : MonsterInformation.getInstance().statusInfos.get(ID).learnableAttacks) {
+        for(ObjectMap.Entry<Integer,Attack> e : MonsterInfo.getInstance().getStatusInfos().get(ID).learnableAttacks) {
             if(e.key <= level)
                 attacks.add(e.value);
         }
 
-        this.elements = MonsterInformation.getInstance().statusInfos.get(ID).elements;
+        this.elements = MonsterInfo.getInstance().getStatusInfos().get(ID).elements;
 
     }
     /* ............................................................................... METHODS .. */

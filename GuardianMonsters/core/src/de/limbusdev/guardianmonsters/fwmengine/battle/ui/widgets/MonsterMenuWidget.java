@@ -3,14 +3,13 @@ package de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 
 import de.limbusdev.guardianmonsters.fwmengine.battle.control.BattleSystem;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.AHUD;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.model.Monster;
-import de.limbusdev.guardianmonsters.model.MonsterInformation;
+import de.limbusdev.guardianmonsters.model.MonsterInfo;
 
 /**
  * Created by georg on 11.12.16.
@@ -40,7 +39,7 @@ public class MonsterMenuWidget extends SevenButtonsWidget {
             if(key > 6) break;
             Monster m = team.get(key);
             ButtonWithImage bwi = new ButtonWithImage(
-                Services.getL18N().l18n().get(MonsterInformation.getInstance().monsterNames.get(m.ID)),
+                Services.getL18N().l18n().get(MonsterInfo.getInstance().getNameById(m.ID)),
                 skin,
                 "tb-attack-air");
 

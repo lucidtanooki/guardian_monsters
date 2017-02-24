@@ -1,41 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="10" height="8" tilewidth="16" tileheight="16">
  <properties>
-  <property name="musicIndex" value="1"/>
-  <property name="musicType" value="town"/>
+  <property nameID="musicIndex" value="1"/>
+  <property nameID="musicType" value="town"/>
  </properties>
- <tileset firstgid="1" name="limbusdev_world" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" nameID="limbusdev_world" tilewidth="16" tileheight="16">
   <image source="../spritesheets/limbusdev_world.png" width="1024" height="1024"/>
  </tileset>
- <tileset firstgid="4097" name="limbusdev_world2" tilewidth="16" tileheight="16">
+ <tileset firstgid="4097" nameID="limbusdev_world2" tilewidth="16" tileheight="16">
   <image source="../spritesheets/limbusdev_world2.png" width="1024" height="1024"/>
  </tileset>
- <layer name="ground1" width="10" height="8">
+ <layer nameID="ground1" width="10" height="8">
   <data encoding="base64" compression="zlib">
    eJwzZGBgMAJiQwJ0IRAXEUETMgdG35GgLi6kgZnEYAA8dTdz
   </data>
  </layer>
- <layer name="lights1" width="10" height="8">
+ <layer nameID="lights1" width="10" height="8">
   <data encoding="base64" compression="zlib">
    eJxjYBg4ICPJwPBAAjuWlUSouwfka0liN+O+BKo6XACbOjWgmepArCGJXR0MpAHl04E4A4sbADZkDoY=
   </data>
  </layer>
- <layer name="walls1" width="10" height="8">
+ <layer nameID="walls1" width="10" height="8">
   <data encoding="base64" compression="zlib">
    eJwzZmBgMAFiayhtDKVt0PhyUgwM8lKE6TggjieCHi4AAMp4CP8=
   </data>
  </layer>
- <layer name="objects1" width="10" height="8">
+ <layer nameID="objects1" width="10" height="8">
   <data encoding="base64" compression="zlib">
    eJxjYCANrJJkYMiWZ2DIkYfwq/gZGKqBuIYfVd1KoLrVQDVroOp2AeV3A/EeJHV1UPZroJo3UHW/gGK/gfgPkrp9aGZLA3ECEMugue0fmrpoII4H4hgCfvoO1PeXH0KTCgD1shSL
   </data>
  </layer>
- <layer name="tops1" width="10" height="8">
+ <layer nameID="tops1" width="10" height="8">
   <data encoding="base64" compression="zlib">
    eJwzZmJgKCWATYDYFIgJAbNBqG4vP3nmFQNxGRQbQfUYIomBcAkQAwAiqAs0
   </data>
  </layer>
- <objectgroup name="colliderWalls1" width="10" height="8" visible="0">
+ <objectgroup nameID="colliderWalls1" width="10" height="8" visible="0">
   <object x="112" y="64" width="16" height="16"/>
   <object x="16" y="64" width="16" height="16"/>
   <object x="48" y="48" width="32" height="16"/>
@@ -47,62 +47,62 @@
   <object x="144" y="32" width="16" height="96"/>
   <object x="96" y="96" width="16" height="16"/>
  </objectgroup>
- <objectgroup name="sensors" width="10" height="8" visible="0">
-  <object name="warpField" x="64" y="112" width="16" height="16">
+ <objectgroup nameID="sensors" width="10" height="8" visible="0">
+  <object nameID="warpField" x="64" y="112" width="16" height="16">
    <properties>
-    <property name="targetID" value="3"/>
-    <property name="targetWarpPointID" value="4"/>
+    <property nameID="targetID" value="3"/>
+    <property nameID="targetWarpPointID" value="4"/>
    </properties>
   </object>
-  <object name="startField" x="64" y="96" width="16" height="16">
+  <object nameID="startField" x="64" y="96" width="16" height="16">
    <properties>
-    <property name="fieldID" value="1"/>
-   </properties>
-  </object>
- </objectgroup>
- <objectgroup name="livingEntities" width="10" height="8">
-  <object name="person" x="112" y="64" width="16" height="16">
-   <properties>
-    <property name="male" value="true"/>
-    <property name="moving" value="false"/>
-    <property name="path" value="SSTOP"/>
-    <property name="spriteIndex" value="1"/>
-    <property name="startDir" value="S"/>
-    <property name="static" value="true"/>
+    <property nameID="fieldID" value="1"/>
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="objects" width="10" height="8" visible="0">
-  <object name="sign" x="48" y="48" width="16" height="16">
+ <objectgroup nameID="livingEntities" width="10" height="8">
+  <object nameID="person" x="112" y="64" width="16" height="16">
    <properties>
-    <property name="text" value="It's a very old movie on a black and white TV."/>
-    <property name="title" value="Old TV"/>
-   </properties>
-  </object>
-  <object name="sign" x="48" y="32" width="16" height="16">
-   <properties>
-    <property name="text" value="It's a very old movie on a black and white TV."/>
-    <property name="title" value="Old TV"/>
-   </properties>
-  </object>
-  <object name="sign" x="64" y="48" width="16" height="16">
-   <properties>
-    <property name="text" value="It's a very old movie on a black and white TV."/>
-    <property name="title" value="Old TV"/>
-   </properties>
-  </object>
-  <object name="sign" x="64" y="32" width="16" height="16">
-   <properties>
-    <property name="text" value="It's a very old movie on a black and white TV."/>
-    <property name="title" value="Old TV"/>
+    <property nameID="male" value="true"/>
+    <property nameID="moving" value="false"/>
+    <property nameID="path" value="SSTOP"/>
+    <property nameID="spriteIndex" value="1"/>
+    <property nameID="startDir" value="S"/>
+    <property nameID="static" value="true"/>
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="animations" width="10" height="8"/>
- <objectgroup name="animatedObjects" width="10" height="8">
-  <object name="animation" x="48" y="48" width="16" height="16">
+ <objectgroup nameID="objects" width="10" height="8" visible="0">
+  <object nameID="sign" x="48" y="48" width="16" height="16">
    <properties>
-    <property name="index" value="13"/>
+    <property nameID="text" value="It's a very old movie on a black and white TV."/>
+    <property nameID="title" value="Old TV"/>
+   </properties>
+  </object>
+  <object nameID="sign" x="48" y="32" width="16" height="16">
+   <properties>
+    <property nameID="text" value="It's a very old movie on a black and white TV."/>
+    <property nameID="title" value="Old TV"/>
+   </properties>
+  </object>
+  <object nameID="sign" x="64" y="48" width="16" height="16">
+   <properties>
+    <property nameID="text" value="It's a very old movie on a black and white TV."/>
+    <property nameID="title" value="Old TV"/>
+   </properties>
+  </object>
+  <object nameID="sign" x="64" y="32" width="16" height="16">
+   <properties>
+    <property nameID="text" value="It's a very old movie on a black and white TV."/>
+    <property nameID="title" value="Old TV"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup nameID="animations" width="10" height="8"/>
+ <objectgroup nameID="animatedObjects" width="10" height="8">
+  <object nameID="animation" x="48" y="48" width="16" height="16">
+   <properties>
+    <property nameID="index" value="13"/>
    </properties>
   </object>
  </objectgroup>

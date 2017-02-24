@@ -24,7 +24,7 @@ public class Equipment extends Item {
     private EQUIPMENT_TYPE type;
 
     public Equipment(String name, EQUIPMENT_TYPE type, int addsPStr, int addsPDef, int addsMStr, int addsMDef, int addsSpeed, int addsHP, int addsMP, int addsExp) {
-        super(name, TYPE.EQUIPMENT, CATEGORY.EQUIPMENT);
+        super(name, CATEGORY.EQUIPMENT);
         this.addsPStr = addsPStr;
         this.addsPDef = addsPDef;
         this.addsMStr = addsMStr;

@@ -12,6 +12,7 @@ import de.limbusdev.guardianmonsters.utils.GS;
  */
 public class Attack {
     /* ............................................................................ ATTRIBUTES .. */
+    public final int ID;
     public AttackType attackType;
     public Element element;
     public int damage;
@@ -32,9 +33,9 @@ public class Attack {
      * @param sfxIndex
      * @param animType
      */
-    public Attack(AttackType attackType, Element element, int damage, String name, SFXType sfxType,
+    public Attack(int ID, AttackType attackType, Element element, int damage, String name, SFXType sfxType,
                   int sfxIndex, AnimationType animType) {
-        this(attackType,element,damage,name,sfxType,sfxIndex,animType,0);
+        this(ID,attackType,element,damage,name,sfxType,sfxIndex,animType,0);
     }
 
 
@@ -49,8 +50,9 @@ public class Attack {
      * @param animType
      * @param MPcost
      */
-    public Attack(AttackType attackType, Element element, int damage, String name, SFXType sfxType,
+    public Attack(int ID, AttackType attackType, Element element, int damage, String name, SFXType sfxType,
                   int sfxIndex, AnimationType animType, int MPcost) {
+        this.ID = ID;
         this.element = element;
         this.attackType = attackType;
         this.damage = damage;
@@ -61,9 +63,6 @@ public class Attack {
         this.MPcost = MPcost;
     }
 
-    public Attack() {
-        // FOR JSON ONLY
-    }
     /* ............................................................................... METHODS .. */
     
     /* ..................................................................... GETTERS & SETTERS .. */

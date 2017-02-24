@@ -10,20 +10,16 @@ public abstract class Item {
     private static int idCounter=0;
     public final int ID;
     private String name;
-    private TYPE type;
     private CATEGORY category;
 
     public enum CATEGORY {
         ALL, MEDICINE, EQUIPMENT, KEY,
     }
 
-    public enum TYPE {
-        ALL, MAGIC_HEAL, PHYSICAL_HEAL, STATUS_HEAL, EQUIPMENT, MAGIC_BUFF, PHYSICAL_BUFF, REVIVE,
-    }
 
-    public Item(String name, TYPE type, CATEGORY category) {
+
+    public Item(String name, CATEGORY category) {
         this.name = name;
-        this.type = type;
         this.ID = idCounter;
         this.category = category;
         idCounter++;
@@ -33,9 +29,6 @@ public abstract class Item {
         return name;
     }
 
-    public TYPE getType() {
-        return type;
-    }
 
     public CATEGORY getCategory() {
         return category;
@@ -60,70 +53,58 @@ public abstract class Item {
     }
 
 
-    public static class HPCure extends Item {
-
-        private int value;
-
-        public HPCure(String name, int value) {
-            super(name, TYPE.PHYSICAL_HEAL, CATEGORY.MEDICINE);
-            this.value = value;
-        }
-
-        @Override
-        public void apply(Monster m) {
-            m.healHP(value);
-        }
-
-        @Override
-        public boolean applicable(Monster m) {
-            return (m.getHP() < m.getHPfull() && m.getHP() > 0);
-        }
+    // .................................................................................... MEDICINE
+    public enum TYPE {
+        REVIVE, HP_CURE, MP_CURE, STATUS_CURE,
     }
 
-    public static class Reviver extends Item {
-
-        private float fraction;
-
-        public Reviver(String name, float fraction) {
-            super(name, TYPE.REVIVE, CATEGORY.MEDICINE);
-            this.fraction = fraction;
-        }
-
-        @Override
-        public void apply(Monster m) {
-            m.healHP(MathUtils.round(m.getHPfull()*fraction));
-        }
-
-        @Override
-        public boolean applicable(Monster m) {
-            return m.getHP() == 0;
-        }
-    }
-
-    public static class MPCure extends Item {
+    public static class Medicine extends Item {
 
         private int value;
+        private TYPE type;
 
-        public MPCure(String name, int value) {
-            super(name, TYPE.MAGIC_HEAL, CATEGORY.MEDICINE);
+        public Medicine(String name, int value, TYPE type) {
+            super(name, CATEGORY.MEDICINE);
             this.value = value;
+            this.type = type;
         }
 
         @Override
         public void apply(Monster m) {
-            m.healMP(value);
+            switch(type) {
+                case REVIVE:
+                    m.healHP(MathUtils.round(m.getHPfull()*value/100f));
+                    break;
+                case HP_CURE:
+                    m.healHP(value);
+                    break;
+                case MP_CURE:
+                    m.healMP(value);
+                    break;
+                default:
+                    break;
+            }
         }
 
         @Override
         public boolean applicable(Monster m) {
-            return m.getMP() < m.getMPfull();
+            switch(type) {
+                case REVIVE:
+                    return m.getHP() == 0;
+                case HP_CURE:
+                    return (m.getHP() < m.getHPfull() && m.getHP() > 0);
+                case MP_CURE:
+                    return m.getMP() < m.getMPfull();
+                default:
+                    return false;
+            }
         }
     }
 
     public static class Key extends Item {
 
         public Key(String name) {
-            super(name, TYPE.ALL, CATEGORY.KEY);
+            super(name, CATEGORY.KEY);
         }
 
         @Override

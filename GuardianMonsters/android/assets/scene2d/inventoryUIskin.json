@@ -47,6 +47,19 @@
     paper-dark-area:      {font: font16,  background: darker-paper-area},
     paper-border:{font: font16,  background: paper-border},
     list-item:  {font: default-font, background: label-bg-sandstone},
+
+    elem-earth:       {font: font16w, background: button-element-earth},
+    elem-water:       {font: font16w, background: button-element-water},
+    elem-flame:       {font: font16w, background: button-element-flame},
+    elem-air:         {font: font16,  background: button-element-air},
+    elem-lightning:   {font: font16,  background: button-element-lightning},
+    elem-arthropoda:  {font: font16,  background: button-element-arthropoda},
+    elem-forest:      {font: font16w, background: button-element-forest},
+    elem-mountain:    {font: font16,  background: button-element-mountain},
+    elem-frost:       {font: font16w, background: button-element-frost},
+    elem-spirit:      {font: font16,  background: button-element-spirit},
+    elem-demon:       {font: font16w, background: button-element-demon},
+    elem-lindworm:    {font: font16w, background: button-element-lindworm},
   }	
 
   com.badlogic.gdx.scenes.scene2d.ui.List$ListStyle: {

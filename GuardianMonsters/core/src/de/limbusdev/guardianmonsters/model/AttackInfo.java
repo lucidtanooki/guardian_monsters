@@ -1,6 +1,14 @@
 package de.limbusdev.guardianmonsters.model;
 
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.utils.ArrayMap;
+import com.badlogic.gdx.utils.XmlReader;
+
+import java.io.IOException;
+
 import de.limbusdev.guardianmonsters.enums.AnimationType;
 import de.limbusdev.guardianmonsters.enums.AttackType;
 import de.limbusdev.guardianmonsters.enums.Element;
@@ -11,70 +19,69 @@ import de.limbusdev.guardianmonsters.enums.SFXType;
  * Created by georg on 24.01.16.
  */
 public class AttackInfo {
+
+    private static AttackInfo instance;
+    private ArrayMap<Element, ArrayMap<Integer, Attack>> attacks;
+
+    private AttackInfo() {
+        attacks = new ArrayMap<>();
+
+        FileHandle handle = Gdx.files.internal("data/attacks.xml");
+        XmlReader xmlReader = new XmlReader();
+        XmlReader.Element element;
+        try {
+            element = xmlReader.parse(handle);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return;
+        }
+
+        for (int i = 0; i < element.getChildCount(); i++) {
+            Attack att = parseAttack(element.getChild(i));
+            if(!attacks.containsKey(att.element)) {
+                attacks.put(att.element, new ArrayMap<Integer, Attack>());
+            }
+            attacks.get(att.element).put(att.ID, att);
+        }
+    }
+
+    public static AttackInfo getInst() {
+        if(instance == null) {
+            instance = new AttackInfo();
+        }
+        return instance;
+    }
+
     /* ............................................................................ ATTRIBUTES .. */
 
-    // None
-    public static Attack selfDefense = new Attack(
-            AttackType.PHYSICAL, Element.NONE, 0, "att_selfdef", SFXType.HIT, 0, AnimationType.NONE);
+    private Attack parseAttack(XmlReader.Element element) {
+        Element e = Element.valueOf(element.getAttribute("element", "none").toUpperCase());
+        AttackType a = AttackType.valueOf(element.get("category", "physical").toUpperCase());
+        int id = element.getIntAttribute("id", 0);
+        int damage = element.getInt("damage", 0);
+        String nameID = element.getAttribute("nameID");
+        SFXType sfxType = SFXType.valueOf(element.getChildByName("sfx").getAttribute("type").toUpperCase());
+        int sfxIndex = element.getChildByName("sfx").getIntAttribute("index", 0);
+        AnimationType animType = AnimationType.valueOf(element.get("animation", "none").toUpperCase());
 
-    public static Attack kick = new Attack(
-            AttackType.PHYSICAL, Element.NONE, 5, "att_kick", SFXType.HIT, 0, AnimationType.CONTACT);
-    public static Attack tooth = new Attack(
-            AttackType.PHYSICAL, Element.NONE, 5, "att_tooth", SFXType.HIT, 0, AnimationType.CONTACT);
-    public static Attack punch = new Attack(
-            AttackType.PHYSICAL, Element.NONE, 15, "att_punch", SFXType.HIT, 0, AnimationType.CONTACT);
-    public static Attack facefold = new Attack(
-            AttackType.PHYSICAL, Element.NONE, 20, "att_slap", SFXType.HIT, 0, AnimationType.CONTACT);
-    public static Attack tripit = new Attack(
-            AttackType.PHYSICAL, Element.NONE, 10, "att_triphazard", SFXType.HIT, 0, AnimationType.CONTACT);
+        Attack att;
+        if(element.getChildByName("mpcost") == null) {
+            att = new Attack(id, a, e, damage, nameID, sfxType, sfxIndex, animType);
+        } else {
+            int mpcost = element.getInt("mpcost", 0);
+            att = new Attack(id, a, e, damage, nameID, sfxType, sfxIndex, animType, mpcost);
+        }
+        return att;
+    }
 
-    // Fire
-    public static Attack embers = new Attack(
-            AttackType.MAGICAL, Element.FLAME, 5, "att_embers", SFXType.HIT, 0, AnimationType.CONTACTLESS, 1);
-    public static Attack fire = new Attack(
-            AttackType.MAGICAL, Element.FLAME, 10, "att_fire", SFXType.HIT, 0, AnimationType.MOVING_HOR);
-    public static Attack fira = new Attack(
-            AttackType.MAGICAL, Element.FLAME, 20, "att_fira", SFXType.HIT, 0, AnimationType.MOVING_HOR);
-    public static Attack fiza = new Attack(
-            AttackType.MAGICAL, Element.FLAME, 40, "att_fiza", SFXType.HIT, 0, AnimationType.MOVING_HOR);
+    /**
+     * Returns attack of the given element and index
+     * @param e
+     * @param index
+     * @return
+     */
+    public Attack getAttack(Element e, int index) {
+        return attacks.get(e).get(index);
+    }
 
-    // Frost
-    public static Attack ice = new Attack(
-            AttackType.MAGICAL, Element.FROST, 10, "att_ice", SFXType.HIT, 0, AnimationType.MOVING_VERT);
-    public static Attack ica = new Attack(
-            AttackType.MAGICAL, Element.FROST, 20, "att_ica", SFXType.HIT, 0, AnimationType.MOVING_VERT);
-    public static Attack iza = new Attack(
-            AttackType.MAGICAL, Element.FROST, 40, "att_iza", SFXType.HIT, 0, AnimationType.MOVING_VERT);
-
-    // Earth
-    public static Attack earth = new Attack(
-            AttackType.MAGICAL, Element.EARTH, 10, "att_earth", SFXType.HIT, 0, AnimationType.MOVING_VERT);
-    public static Attack eartha = new Attack(
-            AttackType.MAGICAL, Element.EARTH, 20, "att_eartha", SFXType.HIT, 0, AnimationType.MOVING_VERT);
-    public static Attack earza = new Attack(
-            AttackType.MAGICAL, Element.EARTH, 40, "att_earza", SFXType.HIT, 0, AnimationType.MOVING_VERT);
-
-    // Water
-    public static Attack sprinkle = new Attack(
-            AttackType.PHYSICAL, Element.WATER, 5, "att_sprinkle", SFXType.WATER, 0, AnimationType.CONTACT);
-    public static Attack water = new Attack(
-            AttackType.MAGICAL, Element.WATER, 10, "att_water", SFXType.WATER, 0, AnimationType.MOVING_HOR);
-    public static Attack watera = new Attack(
-            AttackType.MAGICAL, Element.WATER, 20, "att_watera", SFXType.WATER, 0, AnimationType.MOVING_HOR);
-    public static Attack wateza = new Attack(
-            AttackType.MAGICAL, Element.WATER, 40, "att_wateza", SFXType.WATER, 0, AnimationType.MOVING_HOR);
-
-    // Forest
-    public static Attack leafgust = new Attack(
-        AttackType.PHYSICAL, Element.FOREST, 5, "att_leafgust", SFXType.AIR, 0, AnimationType.CONTACTLESS);
-
-    // Demon
-    public static Attack darkspunk = new Attack(
-        AttackType.MAGICAL, Element.DEMON, 5, "att_darkspunk", SFXType.HIT, 0, AnimationType.MOVING_HOR);
-
-    /* ........................................................................... CONSTRUCTOR .. */
-    
-    /* ............................................................................... METHODS .. */
-    
-    /* ..................................................................... GETTERS & SETTERS .. */
 }

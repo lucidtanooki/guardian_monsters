@@ -69,6 +69,7 @@ public class InventoryScreen implements Screen {
             @Override
             public void onTeamButton() {
                 removeSubMenus();
+                ((TeamSubMenu)views.get("team")).refresh();
                 stage.addActor(views.get("team"));
             }
 

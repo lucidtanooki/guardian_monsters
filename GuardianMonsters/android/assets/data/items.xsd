@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xs:element name="items">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Key">
+          <xs:complexType>
+          <xs:sequence>
+            <xs:element name="name" type="xs:string"></xs:element>
+          </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        
+        <xs:element name="Equipment">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="name"           type="xs:string"></xs:element>
+              <xs:element name="equipment-type" type="xs:string"></xs:element>
+              <xs:element name="addsHP"         type="xs:integer" default="0" minOccurs="0" maxOccurs="1"></xs:element>
+              <xs:element name="addsMP"         type="xs:integer" default="0" minOccurs="0" maxOccurs="1"></xs:element>
+              <xs:element name="addsSpeed"      type="xs:integer" default="0" minOccurs="0" maxOccurs="1"></xs:element>
+              <xs:element name="addsEXP"        type="xs:integer" default="0" minOccurs="0" maxOccurs="1"></xs:element>
+              <xs:element name="addsPStr"       type="xs:integer" default="0" minOccurs="0" maxOccurs="1"></xs:element>
+              <xs:element name="addsPDef"       type="xs:integer" default="0" minOccurs="0" maxOccurs="1"></xs:element>
+              <xs:element name="addsMStr"       type="xs:integer" default="0" minOccurs="0" maxOccurs="1"></xs:element>
+              <xs:element name="addsMDef"       type="xs:integer" default="0" minOccurs="0" maxOccurs="1"></xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        
+        <xs:element name="medicine">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="name" type="xs:string"></xs:element>
+              <xs:element name="value" type="xs:integer" default="0"></xs:element>
+              <xs:element name="type" type="xs:string"></xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

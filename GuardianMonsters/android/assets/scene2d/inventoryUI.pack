@@ -340,45 +340,49 @@ button-check-up
   orig: 32, 32
   offset: 0, 0
   index: -1
-stats-symbol-pstr
+button-element-lightning
   rotate: false
   xy: 19, 1
   size: 16, 16
+  split: 4, 4, 4, 6
   orig: 16, 16
   offset: 0, 0
   index: -1
-stats-symbol-mdef
+stats-symbol-pstr
   rotate: false
   xy: 37, 1
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
-ability-circle-active
+stats-symbol-mdef
   rotate: false
   xy: 55, 1
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
-stats-symbol-exp
+button-element-water
   rotate: false
   xy: 73, 1
   size: 16, 16
+  split: 4, 4, 4, 6
   orig: 16, 16
   offset: 0, 0
   index: -1
-stats-symbol-pdef
+button-element-lindworm
   rotate: false
   xy: 91, 1
   size: 16, 16
+  split: 4, 4, 4, 6
   orig: 16, 16
   offset: 0, 0
   index: -1
-stats-symbol-hp
+button-element-flame
   rotate: false
   xy: 109, 1
   size: 16, 16
+  split: 4, 4, 4, 6
   orig: 16, 16
   offset: 0, 0
   index: -1
@@ -417,93 +421,107 @@ book
   orig: 32, 32
   offset: 0, 0
   index: -1
-sword-gap-steel
+helmet-iron
   rotate: false
   xy: 209, 57
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
+sword-gap-steel
+  rotate: false
+  xy: 245, 227
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
 relict-arthropoda-big
-  rotate: false
-  xy: 245, 227
-  size: 32, 32
-  orig: 32, 32
-  offset: 0, 0
-  index: -1
-relict-arthropoda
-  rotate: false
-  xy: 245, 227
-  size: 32, 32
-  orig: 32, 32
-  offset: 0, 0
-  index: -1
-sword-steel
   rotate: false
   xy: 243, 193
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
-guardian-crystal-air
+relict-arthropoda
+  rotate: false
+  xy: 243, 193
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+sword-steel
   rotate: false
   xy: 243, 159
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
-potion-cyan
+guardian-crystal-air
   rotate: false
   xy: 243, 125
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
-relict-forest
+potion-cyan
   rotate: false
   xy: 243, 91
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
-sword-silver
+shield-iron
   rotate: false
   xy: 243, 57
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
-diamond-meadow
+relict-forest
   rotate: false
   xy: 217, 23
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
-guardian-crystal-arthropoda
+sword-silver
   rotate: false
   xy: 251, 23
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
-cure-blind
+diamond-meadow
   rotate: false
   xy: 277, 261
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
-button-check-down-locked
+guardian-crystal-arthropoda
   rotate: false
   xy: 279, 227
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
-label-bg-burgund
+cure-blind
   rotate: false
   xy: 277, 193
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+button-check-down-locked
+  rotate: false
+  xy: 277, 159
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+label-bg-burgund
+  rotate: false
+  xy: 277, 125
   size: 32, 32
   split: 12, 12, 15, 15
   orig: 32, 32
@@ -511,77 +529,77 @@ label-bg-burgund
   index: -1
 relict-frost
   rotate: false
-  xy: 277, 159
+  xy: 277, 91
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 cheese
   rotate: false
-  xy: 277, 125
+  xy: 277, 57
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 button-switch-up
   rotate: false
-  xy: 277, 91
+  xy: 285, 23
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 sword-iron
   rotate: false
-  xy: 277, 57
+  xy: 667, 479
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 button-use-down
   rotate: false
-  xy: 285, 23
+  xy: 701, 479
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 potion-purple
   rotate: false
-  xy: 667, 479
+  xy: 735, 479
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 medicine-blue
   rotate: false
-  xy: 701, 479
+  xy: 769, 479
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 guardian-crystal-dragon
   rotate: false
-  xy: 735, 479
+  xy: 803, 479
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 guardian-crystal-demon
   rotate: false
-  xy: 769, 479
+  xy: 837, 479
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 beer
   rotate: false
-  xy: 803, 479
+  xy: 871, 479
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 label-bg-sandstone
   rotate: false
-  xy: 837, 479
+  xy: 905, 479
   size: 32, 32
   split: 4, 4, 4, 7
   orig: 32, 32
@@ -589,182 +607,184 @@ label-bg-sandstone
   index: -1
 claws-rusty
   rotate: false
-  xy: 871, 479
+  xy: 939, 479
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 guardian-crystal-mountain
   rotate: false
-  xy: 905, 479
+  xy: 973, 479
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 sword-excalibur
   rotate: false
-  xy: 939, 479
+  xy: 667, 445
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 sword-wood
   rotate: false
-  xy: 973, 479
+  xy: 701, 445
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 relict-flame
   rotate: false
-  xy: 667, 445
+  xy: 735, 445
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 balsam
   rotate: false
-  xy: 701, 445
+  xy: 769, 445
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 meat
   rotate: false
-  xy: 735, 445
+  xy: 803, 445
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 relict-earth
   rotate: false
-  xy: 769, 445
+  xy: 837, 445
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 relict-lightning-big
   rotate: false
-  xy: 803, 445
+  xy: 871, 445
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 relict-lightning
   rotate: false
-  xy: 803, 445
+  xy: 871, 445
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 guardian-crystal-flash
   rotate: false
-  xy: 837, 445
+  xy: 905, 445
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 potion-black
   rotate: false
-  xy: 871, 445
+  xy: 939, 445
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 bread
   rotate: false
-  xy: 905, 445
-  size: 32, 32
-  orig: 32, 32
-  offset: 0, 0
-  index: -1
-medicine-green
-  rotate: false
-  xy: 939, 445
-  size: 32, 32
-  orig: 32, 32
-  offset: 0, 0
-  index: -1
-button-switch-down
-  rotate: false
   xy: 973, 445
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
-ability-circle-inactive
+button-element-demon
   rotate: false
   xy: 1007, 495
   size: 16, 16
+  split: 4, 4, 4, 6
   orig: 16, 16
   offset: 0, 0
   index: -1
-bg-pattern-3
+button-element-mountain
   rotate: false
   xy: 1007, 477
   size: 16, 16
+  split: 4, 4, 4, 6
   orig: 16, 16
   offset: 0, 0
   index: -1
-bg-pattern-2
+ability-circle-active
   rotate: false
   xy: 1007, 459
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
-bg-pattern-1
+stats-symbol-exp
   rotate: false
   xy: 1007, 441
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
-cure-venom
+medicine-green
   rotate: false
   xy: 499, 311
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
-potion-green
+button-switch-down
   rotate: false
   xy: 491, 277
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
-sword-barb-steel
+cure-venom
   rotate: false
   xy: 533, 311
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
-button-check-down
+potion-green
   rotate: false
   xy: 567, 319
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
-relict-mountain
+sword-barb-steel
   rotate: false
   xy: 525, 277
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+button-check-down
+  rotate: false
+  xy: 593, 419
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+relict-mountain
+  rotate: false
+  xy: 627, 423
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 relict-mountain-big
   rotate: false
-  xy: 525, 277
+  xy: 627, 423
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 label-bg-sandstone-down
   rotate: false
-  xy: 593, 419
+  xy: 661, 411
   size: 32, 32
   split: 4, 4, 5, 7
   orig: 32, 32
@@ -772,7 +792,7 @@ label-bg-sandstone-down
   index: -1
 label-bg-paper
   rotate: false
-  xy: 627, 423
+  xy: 695, 411
   size: 32, 32
   split: 14, 15, 19, 11
   orig: 32, 32
@@ -780,119 +800,119 @@ label-bg-paper
   index: -1
 ability-connection-vert
   rotate: false
-  xy: 661, 411
+  xy: 729, 411
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 guardian-crystal-fire
   rotate: false
-  xy: 695, 411
+  xy: 763, 411
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 potion-gold
   rotate: false
-  xy: 729, 411
+  xy: 797, 411
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 ability-connection-hor
   rotate: false
-  xy: 763, 411
+  xy: 831, 411
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 button-back-up
   rotate: false
-  xy: 797, 411
+  xy: 865, 411
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 potion-blue
   rotate: false
-  xy: 831, 411
+  xy: 899, 411
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 button-use-up
   rotate: false
-  xy: 865, 411
+  xy: 933, 411
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 button-delete-up
   rotate: false
-  xy: 899, 411
+  xy: 967, 411
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 cure-confusion
   rotate: false
-  xy: 933, 411
+  xy: 627, 389
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 guardian-crystal-water
   rotate: false
-  xy: 967, 411
+  xy: 661, 377
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 toolBarButton-exit-down
   rotate: false
-  xy: 627, 389
+  xy: 695, 377
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 guardian-crystal-ice
   rotate: false
-  xy: 661, 377
+  xy: 729, 377
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 sword-titanium
   rotate: false
-  xy: 695, 377
+  xy: 763, 377
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 potion-red
   rotate: false
-  xy: 729, 377
+  xy: 797, 377
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 toolBarButton-exit-up
   rotate: false
-  xy: 763, 377
+  xy: 831, 377
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 sword-knightly-steel
   rotate: false
-  xy: 797, 377
+  xy: 865, 377
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 label-bg-burgund-down
   rotate: false
-  xy: 831, 377
+  xy: 899, 377
   size: 32, 32
   split: 12, 12, 15, 15
   orig: 32, 32
@@ -900,42 +920,42 @@ label-bg-burgund-down
   index: -1
 relict-air
   rotate: false
-  xy: 865, 377
+  xy: 933, 377
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 relict-demon
   rotate: false
-  xy: 899, 377
+  xy: 967, 377
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 button-back-down
   rotate: false
-  xy: 933, 377
+  xy: 567, 285
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 elixier
   rotate: false
-  xy: 967, 377
+  xy: 601, 355
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 diamond-flames
   rotate: false
-  xy: 567, 285
+  xy: 601, 321
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 label-bg-royal
   rotate: false
-  xy: 601, 355
+  xy: 601, 287
   size: 32, 32
   split: 12, 12, 15, 15
   orig: 32, 32
@@ -943,7 +963,7 @@ label-bg-royal
   index: -1
 label-bg-woods
   rotate: false
-  xy: 601, 321
+  xy: 635, 343
   size: 32, 32
   split: 12, 12, 15, 15
   orig: 32, 32
@@ -951,134 +971,231 @@ label-bg-woods
   index: -1
 guardian-crystal-spirit
   rotate: false
-  xy: 601, 287
+  xy: 635, 309
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 milk
   rotate: false
-  xy: 635, 343
+  xy: 669, 343
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 chocolate
   rotate: false
-  xy: 635, 309
+  xy: 669, 309
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 guardian-crystal-earth
   rotate: false
-  xy: 669, 343
+  xy: 703, 343
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 tent
   rotate: false
-  xy: 669, 309
+  xy: 703, 309
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 claws-wood
   rotate: false
-  xy: 703, 343
+  xy: 737, 343
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 sword-broad-steel
   rotate: false
-  xy: 703, 309
+  xy: 737, 309
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 diamond-sea
   rotate: false
-  xy: 737, 343
+  xy: 771, 343
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 sword-rusty
   rotate: false
-  xy: 737, 309
+  xy: 771, 309
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 relict-lindworm
   rotate: false
-  xy: 771, 343
+  xy: 805, 343
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 button-delete-down
   rotate: false
-  xy: 771, 309
+  xy: 805, 309
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 potion-pink
   rotate: false
-  xy: 805, 343
+  xy: 839, 343
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 angel-tear
   rotate: false
-  xy: 805, 309
+  xy: 839, 309
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 cure-mute
   rotate: false
-  xy: 839, 343
+  xy: 873, 343
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+shoes-leather
+  rotate: false
+  xy: 873, 309
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 medicine-red
   rotate: false
-  xy: 839, 309
+  xy: 907, 343
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
-stats-symbol-mstr
+stats-symbol-pdef
   rotate: false
   xy: 217, 5
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
-paper-border
+button-element-frost
   rotate: false
   xy: 593, 401
+  size: 16, 16
+  split: 4, 4, 4, 6
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+button-element-spirit
+  rotate: false
+  xy: 635, 291
+  size: 16, 16
+  split: 4, 4, 4, 6
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+button-element-arthropoda
+  rotate: false
+  xy: 907, 325
+  size: 16, 16
+  split: 4, 4, 4, 6
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+button-element-forest
+  rotate: false
+  xy: 941, 359
+  size: 16, 16
+  split: 4, 4, 4, 6
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+stats-symbol-hp
+  rotate: false
+  xy: 235, 5
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+ability-circle-inactive
+  rotate: false
+  xy: 653, 291
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+bg-pattern-3
+  rotate: false
+  xy: 959, 359
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+button-element-air
+  rotate: false
+  xy: 253, 5
+  size: 16, 16
+  split: 4, 4, 5, 6
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+bg-pattern-2
+  rotate: false
+  xy: 671, 291
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+bg-pattern-1
+  rotate: false
+  xy: 977, 359
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+stats-symbol-mstr
+  rotate: false
+  xy: 271, 5
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+paper-border
+  rotate: false
+  xy: 689, 291
   size: 16, 16
   split: 7, 7, 7, 7
   orig: 16, 16
   offset: 0, 0
   index: -1
+button-element-earth
+  rotate: false
+  xy: 289, 5
+  size: 16, 16
+  split: 4, 4, 4, 6
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
 stats-symbol-speed
   rotate: false
-  xy: 635, 291
+  xy: 707, 291
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 stats-symbol-mp
   rotate: false
-  xy: 873, 359
+  xy: 725, 291
   size: 16, 16
   orig: 16, 16
   offset: 0, 0

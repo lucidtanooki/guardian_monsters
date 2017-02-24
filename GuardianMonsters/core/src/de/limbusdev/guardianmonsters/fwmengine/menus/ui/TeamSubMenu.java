@@ -162,4 +162,8 @@ public class TeamSubMenu extends AInventorySubMenu {
             }
         }
     }
+
+    public void refresh() {
+        showGuardianInformation(circleWidget.getCurrentPosition());
+    }
 }

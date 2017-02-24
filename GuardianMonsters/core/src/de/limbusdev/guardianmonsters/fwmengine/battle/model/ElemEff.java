@@ -36,7 +36,7 @@ public class ElemEff {
             case EARTH: table = earth; break;
             case WATER: table = water; break;
             case AIR: table = air; break;
-            case FLAME: table = flame; break;
+            case FIRE: table = flame; break;
             case FOREST: table = forest; break;
             case FROST: table = frost; break;
             case SPIRIT: table = spirit; break;
@@ -72,7 +72,7 @@ public class ElemEff {
         earth.put(Element.NONE,         0f);
         earth.put(Element.EARTH,        0f);
         earth.put(Element.WATER,        0f);
-        earth.put(Element.FLAME,         .5f);
+        earth.put(Element.FIRE,         .5f);
         earth.put(Element.AIR,          .5f);
         earth.put(Element.FOREST,       -.5f);
         earth.put(Element.FROST,        0f);
@@ -88,7 +88,7 @@ public class ElemEff {
         water.put(Element.NONE, 0f);
         water.put(Element.EARTH, 0f);
         water.put(Element.WATER, -1.5f);
-        water.put(Element.FLAME, 1f);
+        water.put(Element.FIRE, 1f);
         water.put(Element.AIR, 0f);
         water.put(Element.FOREST, -1.5f);
         water.put(Element.FROST, 0f);
@@ -104,7 +104,7 @@ public class ElemEff {
         air.put(Element.NONE, 0f);
         air.put(Element.EARTH, -.5f);
         air.put(Element.WATER, 0f);
-        air.put(Element.FLAME, -1.5f);
+        air.put(Element.FIRE, -1.5f);
         air.put(Element.AIR, 0f);
         air.put(Element.FOREST, .5f);
         air.put(Element.FROST, -.5f);
@@ -120,7 +120,7 @@ public class ElemEff {
         flame.put(Element.NONE, 0f);
         flame.put(Element.EARTH, -.5f);
         flame.put(Element.WATER, -.5f);
-        flame.put(Element.FLAME, 0f);
+        flame.put(Element.FIRE, 0f);
         flame.put(Element.AIR, 0f);
         flame.put(Element.FOREST, .5f);
         flame.put(Element.FROST, 0f);
@@ -136,7 +136,7 @@ public class ElemEff {
         forest.put(Element.NONE, 0f);
         forest.put(Element.EARTH, .5f);
         forest.put(Element.WATER, .5f);
-        forest.put(Element.FLAME, -.5f);
+        forest.put(Element.FIRE, -.5f);
         forest.put(Element.AIR, 0f);
         forest.put(Element.FOREST, 0f);
         forest.put(Element.FROST, -.5f);
@@ -152,7 +152,7 @@ public class ElemEff {
         frost.put(Element.NONE, 0f);
         frost.put(Element.EARTH, -.5f);
         frost.put(Element.WATER, -1.5f);
-        frost.put(Element.FLAME, -5f);
+        frost.put(Element.FIRE, -5f);
         frost.put(Element.AIR, 0f);
         frost.put(Element.FOREST, .5f);
         frost.put(Element.FROST, -1.5f);
@@ -168,7 +168,7 @@ public class ElemEff {
         spirit.put(Element.NONE,        0f);
         spirit.put(Element.EARTH,       0f);
         spirit.put(Element.WATER,       0f);
-        spirit.put(Element.FLAME,        -.5f);
+        spirit.put(Element.FIRE,        -.5f);
         spirit.put(Element.AIR,         0f);
         spirit.put(Element.FOREST,      -1.5f);
         spirit.put(Element.FROST,       .5f);
@@ -184,7 +184,7 @@ public class ElemEff {
         demon.put(Element.NONE,        0f);
         demon.put(Element.EARTH,       .5f);
         demon.put(Element.WATER,       0f);
-        demon.put(Element.FLAME,        0f);
+        demon.put(Element.FIRE,        0f);
         demon.put(Element.AIR,         .5f);
         demon.put(Element.FOREST,      0f);
         demon.put(Element.FROST,       0f);
@@ -200,7 +200,7 @@ public class ElemEff {
         arthropoda.put(Element.NONE,        0f);
         arthropoda.put(Element.EARTH,       0f);
         arthropoda.put(Element.WATER,       0f);
-        arthropoda.put(Element.FLAME,        0f);
+        arthropoda.put(Element.FIRE,        0f);
         arthropoda.put(Element.AIR,         0f);
         arthropoda.put(Element.FOREST,      0f);
         arthropoda.put(Element.FROST,       0f);
@@ -216,7 +216,7 @@ public class ElemEff {
         mountain.put(Element.NONE,        0f);
         mountain.put(Element.EARTH,       0f);
         mountain.put(Element.WATER,       0f);
-        mountain.put(Element.FLAME,        -.5f);
+        mountain.put(Element.FIRE,        -.5f);
         mountain.put(Element.AIR,         0f);
         mountain.put(Element.FOREST,      1f);
         mountain.put(Element.FROST,       -.5f);
@@ -232,7 +232,7 @@ public class ElemEff {
         lightning.put(Element.NONE,        0f);
         lightning.put(Element.EARTH,       -1f);
         lightning.put(Element.WATER,       .5f);
-        lightning.put(Element.FLAME,        0f);
+        lightning.put(Element.FIRE,        0f);
         lightning.put(Element.AIR,         .5f);
         lightning.put(Element.FOREST,      .5f);
         lightning.put(Element.FROST,       0f);
@@ -248,7 +248,7 @@ public class ElemEff {
         lindworm.put(Element.NONE,        0f);
         lindworm.put(Element.EARTH,       .5f);
         lindworm.put(Element.WATER,       0f);
-        lindworm.put(Element.FLAME,        -.5f);
+        lindworm.put(Element.FIRE,        -.5f);
         lindworm.put(Element.AIR,         -.5f);
         lindworm.put(Element.FOREST,      .5f);
         lindworm.put(Element.FROST,       -.5f);
@@ -264,7 +264,7 @@ public class ElemEff {
         none.put(Element.NONE,        0f);
         none.put(Element.EARTH,       0f);
         none.put(Element.WATER,       0f);
-        none.put(Element.FLAME,        0f);
+        none.put(Element.FIRE,        0f);
         none.put(Element.AIR,         0f);
         none.put(Element.FOREST,      0f);
         none.put(Element.FROST,       0f);

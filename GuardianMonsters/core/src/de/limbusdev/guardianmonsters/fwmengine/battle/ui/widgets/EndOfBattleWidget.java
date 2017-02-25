@@ -7,7 +7,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.I18NBundle;
 
+import de.limbusdev.guardianmonsters.data.BundleAssets;
 import de.limbusdev.guardianmonsters.enums.ButtonIDs;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.BattleHUD;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
@@ -64,11 +66,9 @@ public class EndOfBattleWidget extends BattleWidget {
      * @param won
      */
     public void init(boolean won) {
-        if(won) {
-            messageLabel.setText(Services.getL18N().l18n().get("batt_game_over"));
-        } else {
-            messageLabel.setText(Services.getL18N().l18n().get("batt_you_won"));
-        }
+        I18NBundle i18n = Services.getL18N().l18n(BundleAssets.BATTLE);
+        String message = won ? "batt_game_over" : "batt_you_won";
+        messageLabel.setText(i18n.get(message));
     }
 
     public void setCallbackHandler(final CallbackHandler callbackHandler) {
@@ -85,7 +85,7 @@ public class EndOfBattleWidget extends BattleWidget {
 
     // INNER INTERFACE
     public interface CallbackHandler {
-        public void onBackButton();
+        void onBackButton();
     }
 
 

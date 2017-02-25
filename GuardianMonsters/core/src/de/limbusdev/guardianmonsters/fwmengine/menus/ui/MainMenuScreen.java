@@ -19,6 +19,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
+import de.limbusdev.guardianmonsters.data.BundleAssets;
 import de.limbusdev.guardianmonsters.data.TextureAssets;
 import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
@@ -164,7 +165,7 @@ public class MainMenuScreen implements Screen {
         tbs.up   = new TextureRegionDrawable(uiTA.findRegion("b192up"));
 
         // Start Button
-        TextButton button = new TextButton(Services.getL18N().l18n().get("main_menu_touch_start"), tbs);
+        TextButton button = new TextButton(Services.getL18N().l18n(BundleAssets.GENERAL).get("main_menu_touch_start"), tbs);
         button.setWidth(300);
         button.setHeight(75);
         button.setPosition(GS.RES_X / 2, 92f, Align.center);
@@ -205,8 +206,8 @@ public class MainMenuScreen implements Screen {
         // ................................................................................. BUTTONS
         this.buttons = new ArrayMap<String, TextButton>();
 
-        String startButton = Services.getL18N().l18n().get("main_menu_start_new");
-        if(SaveGameManager.doesGameSaveExist()) startButton = Services.getL18N().l18n().get("main_menu_load_saved");
+        String startButton = Services.getL18N().l18n(BundleAssets.GENERAL).get("main_menu_start_new");
+        if(SaveGameManager.doesGameSaveExist()) startButton = Services.getL18N().l18n(BundleAssets.GENERAL).get("main_menu_load_saved");
 
         TextButton.TextButtonStyle tbs = new TextButton.TextButtonStyle();
         tbs.font = skin.getFont("default-font");
@@ -237,7 +238,7 @@ public class MainMenuScreen implements Screen {
 
 
         // .......................................................................... CREDITS BUTTON
-        button = new TextButton(Services.getL18N().l18n().get("main_menu_credits"), tbs);
+        button = new TextButton(Services.getL18N().l18n(BundleAssets.GENERAL).get("main_menu_credits"), tbs);
         button.setWidth(300);
         button.setHeight(75);
         button.setPosition(32, GS.RES_Y - 128, Align.topLeft);

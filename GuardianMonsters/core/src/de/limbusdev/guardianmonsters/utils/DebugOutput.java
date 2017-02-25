@@ -3,6 +3,7 @@ package de.limbusdev.guardianmonsters.utils;
 
 import com.badlogic.gdx.utils.Array;
 
+import de.limbusdev.guardianmonsters.data.BundleAssets;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.model.Attack;
 import de.limbusdev.guardianmonsters.model.Monster;
@@ -34,7 +35,7 @@ public class DebugOutput {
         System.out.println("\nQueue: ");
         for (int i = 0; i < queue.size; i++) {
             Monster m = queue.get(i);
-            String name = Services.getL18N().l18n().get(MonsterInfo.getInstance().getNameById(m.ID));
+            String name = Services.getL18N().l18n(BundleAssets.MONSTERS).get(MonsterInfo.getInstance().getNameById(m.ID));
             System.out.print("[" + i + "] " + name + "\t\t(" + m.getSpeed() + "),");
             System.out.println("\tKP: " + m.getHP() + "\tMP: " + m.getMP());
         }

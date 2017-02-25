@@ -16,7 +16,9 @@ import java.util.Locale;
  */
 public interface L18N {
 
-    public I18NBundle l18n();
+    public I18NBundle l18n(int type);
+
+    public I18NBundle l18nMap(int mapID);
 
     public BitmapFont getFont();
 }

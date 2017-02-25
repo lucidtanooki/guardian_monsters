@@ -9,7 +9,12 @@ import com.badlogic.gdx.utils.I18NBundle;
 
 public class NullL18N implements L18N {
     @Override
-    public I18NBundle l18n() {
+    public I18NBundle l18n(int type) {
+        return null;
+    }
+
+    @Override
+    public I18NBundle l18nMap(int mapID) {
         return null;
     }
 

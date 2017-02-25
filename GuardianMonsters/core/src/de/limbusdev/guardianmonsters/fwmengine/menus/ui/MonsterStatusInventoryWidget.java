@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ArrayMap;
 
+import de.limbusdev.guardianmonsters.data.BundleAssets;
 import de.limbusdev.guardianmonsters.enums.Element;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.model.Monster;
@@ -87,7 +88,7 @@ public class MonsterStatusInventoryWidget extends Group {
 
 
     public void init(Monster m) {
-        name.setText(Services.getL18N().l18n().get(MonsterInfo.getInstance().getNameById(m.ID)));
+        name.setText(Services.getL18N().l18n(BundleAssets.MONSTERS).get(MonsterInfo.getInstance().getNameById(m.ID)));
         valueLabels.get("hp").setText(m.getHP() + "/" + m.getHPfull());
         valueLabels.get("mp").setText(m.getMP() + "/" + m.getMPfull());
         valueLabels.get("exp").setText(m.getExp() + "/" + m.expAvailableInThisLevel());
@@ -100,7 +101,7 @@ public class MonsterStatusInventoryWidget extends Group {
         elementGroup.clear();
         for(Element e : m.elements) {
             String elem = e.toString().toLowerCase();
-            String elemName = Services.getL18N().l18n().get("element_" + elem);
+            String elemName = Services.getL18N().l18n(BundleAssets.ELEMENTS).get("element_" + elem);
             elemName = elemName.length() < 7 ? elemName : elemName.substring(0,6);
             Label l = new Label(elemName, skin, "elem-" + elem);
             elementGroup.addActor(l);

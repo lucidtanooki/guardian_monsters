@@ -3,6 +3,7 @@ package de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Array;
 
+import de.limbusdev.guardianmonsters.data.BundleAssets;
 import de.limbusdev.guardianmonsters.data.SkinAssets;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.AHUD;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
@@ -36,7 +37,7 @@ public class AttackMenuWidget extends SevenButtonsWidget {
             Attack att = attacks.get(i);
             setButtonStyle(i,skin, SkinAssets.attackButtonStyle(att.element));
             String mpCostString = (att.MPcost > 0) ? (" " + Integer.toString(att.MPcost)) : "";
-            setButtonText(i,Services.getL18N().l18n().get(att.name) + mpCostString);
+            setButtonText(i,Services.getL18N().l18n(BundleAssets.ATTACKS).get(att.name) + mpCostString);
 
             // Disable Attack, when monster does not have enough MP for it
             if(att.MPcost <= monster.getMP()) enableButton(i);

@@ -5,6 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.ArrayMap;
 
+import de.limbusdev.guardianmonsters.data.BundleAssets;
 import de.limbusdev.guardianmonsters.fwmengine.battle.control.BattleSystem;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.AHUD;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
@@ -39,7 +40,7 @@ public class MonsterMenuWidget extends SevenButtonsWidget {
             if(key > 6) break;
             Monster m = team.get(key);
             ButtonWithImage bwi = new ButtonWithImage(
-                Services.getL18N().l18n().get(MonsterInfo.getInstance().getNameById(m.ID)),
+                Services.getL18N().l18n(BundleAssets.MONSTERS).get(MonsterInfo.getInstance().getNameById(m.ID)),
                 skin,
                 "tb-attack-air");
 

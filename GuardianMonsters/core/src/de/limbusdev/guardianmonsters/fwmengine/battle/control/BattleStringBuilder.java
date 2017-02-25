@@ -1,5 +1,6 @@
 package de.limbusdev.guardianmonsters.fwmengine.battle.control;
 
+import de.limbusdev.guardianmonsters.data.BundleAssets;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.AttackCalculationReport;
 import de.limbusdev.guardianmonsters.model.Monster;
@@ -27,28 +28,28 @@ public class BattleStringBuilder {
 
         String eff;
         if(report.effectiveness > 1.1) {
-            eff = Services.getL18N().l18n().get("suff_severe");
+            eff = Services.getL18N().l18n(BundleAssets.BATTLE).get("suff_severe");
         } else if (report.effectiveness < .9 && report.effectiveness > 0.1) {
-            eff = Services.getL18N().l18n().get("suff_less");
+            eff = Services.getL18N().l18n(BundleAssets.BATTLE).get("suff_less");
         } else if(report.effectiveness < 0) {
-            eff = Services.getL18N().l18n().get("suff_healed");
+            eff = Services.getL18N().l18n(BundleAssets.BATTLE).get("suff_healed");
         } else {
-            eff = Services.getL18N().l18n().get("suff_normal");
+            eff = Services.getL18N().l18n(BundleAssets.BATTLE).get("suff_normal");
         }
 
-        String message = Services.getL18N().l18n().format(
+        String message = Services.getL18N().l18n(BundleAssets.BATTLE).format(
             "batt_message",
-            Services.getL18N().l18n().get(attName),
-            Services.getL18N().l18n().get(defName),
-            Services.getL18N().l18n().get(report.attack.name),
+            Services.getL18N().l18n(BundleAssets.MONSTERS).get(attName),
+            Services.getL18N().l18n(BundleAssets.MONSTERS).get(defName),
+            Services.getL18N().l18n(BundleAssets.ATTACKS).get(report.attack.name),
             report.damage, eff);
 
         return message;
     }
 
     public static String selfDefense(Monster defensiveMonster) {
-        String defName = MonsterInfo.getInstance().getNameById(defensiveMonster.ID);
-        String message = Services.getL18N().l18n().get(defName) + " " + Services.getL18N().l18n().get("suff_defense");
+        String defName = Services.getL18N().l18n(BundleAssets.MONSTERS).get(MonsterInfo.getInstance().getNameById(defensiveMonster.ID));
+        String message = defName + " " + Services.getL18N().l18n(BundleAssets.BATTLE).get("suff_defense");
         return message;
     }
 

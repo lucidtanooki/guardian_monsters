@@ -14,6 +14,7 @@ import com.badlogic.gdx.utils.Align;
 import java.util.Observable;
 import java.util.Observer;
 
+import de.limbusdev.guardianmonsters.data.BundleAssets;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.model.Monster;
 import de.limbusdev.guardianmonsters.model.MonsterInfo;
@@ -105,7 +106,7 @@ public class MonsterStateWidget extends WidgetGroup implements Observer {
      */
     public void init(Monster mon) {
         update(mon, "");
-        nameLabel.setText(Services.getL18N().l18n().get((MonsterInfo.getInstance().getNameById(mon.ID))));
+        nameLabel.setText(Services.getL18N().l18n(BundleAssets.MONSTERS).get((MonsterInfo.getInstance().getNameById(mon.ID))));
         mon.addObserver(this);
     }
 

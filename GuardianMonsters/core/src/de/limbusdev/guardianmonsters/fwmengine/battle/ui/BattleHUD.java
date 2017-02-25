@@ -5,6 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.utils.Align;
 
 import de.limbusdev.guardianmonsters.data.AudioAssets;
+import de.limbusdev.guardianmonsters.data.BundleAssets;
 import de.limbusdev.guardianmonsters.fwmengine.battle.control.BattleStringBuilder;
 import de.limbusdev.guardianmonsters.fwmengine.battle.control.BattleSystem;
 import de.limbusdev.guardianmonsters.fwmengine.battle.control.MonsterManager;
@@ -191,7 +192,7 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
     private void kickOutMonster(MonsterInBattle m) {
         animationWidget.animateMonsterKO(m.battleFieldPosition,m.battleFieldSide);
         statusWidget.fadeStatusWidget(m.battleFieldPosition, m.battleFieldSide);
-        infoLabelWidget.infoLabel.setText(MonsterInfo.getInstance().getNameById(m.monster.ID) + " " + Services.getL18N().l18n().get("batt_defeated") + ".");
+        infoLabelWidget.infoLabel.setText(MonsterInfo.getInstance().getNameById(m.monster.ID) + " " + Services.getL18N().l18n(BundleAssets.BATTLE).get("batt_defeated") + ".");
 
 //        System.out.println("Killed: " + m.battleFieldPosition);
 //
@@ -577,7 +578,7 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
 
             // Set Callbacks
             actionMenu.setCallbackHandler(battleStartLabelCallbacks);
-            infoLabelWidget.setWholeText(Services.getL18N().l18n().get("battle_start"));
+            infoLabelWidget.setWholeText(Services.getL18N().l18n(BundleAssets.BATTLE).get("battle_start"));
             infoLabelWidget.animateTextAppearance();
 
             state = BattleState.BATTLE_START;
@@ -610,7 +611,7 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
             reset();
             toInfoLabel();
             String textKey = !winnerSide ? "batt_you_won":"batt_game_over";
-            String wholeText = Services.getL18N().l18n().get(textKey);
+            String wholeText = Services.getL18N().l18n(BundleAssets.BATTLE).get(textKey);
             infoLabelWidget.setWholeText(wholeText);
             infoLabelWidget.animateTextAppearance();
             actionMenu.setCallbackHandler(endOfBattleCallbacks);
@@ -700,7 +701,7 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
 
         public void toEscapeSuccessInfo() {
             toInfoLabel();
-            String wholeText = Services.getL18N().l18n().get("escape_success");
+            String wholeText = Services.getL18N().l18n(BundleAssets.BATTLE).get("escape_success");
             infoLabelWidget.setWholeText(wholeText);
             infoLabelWidget.animateTextAppearance();
             actionMenu.setCallbackHandler(escapeSuccessCallbacks);
@@ -708,7 +709,7 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
 
         public void toEscapeFailInfo() {
             toInfoLabel();
-            String wholeText = Services.getL18N().l18n().get("escape_fail");
+            String wholeText = Services.getL18N().l18n(BundleAssets.BATTLE).get("escape_fail");
             infoLabelWidget.setWholeText(wholeText);
             infoLabelWidget.animateTextAppearance();
             actionMenu.setCallbackHandler(escapeFailCallbacks);

@@ -11,6 +11,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.I18NBundle;
 
+import de.limbusdev.guardianmonsters.data.BundleAssets;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.model.Equipment;
 import de.limbusdev.guardianmonsters.model.Inventory;
@@ -117,7 +118,7 @@ public class ItemDetailViewWidget extends Group {
     public void init(Item itemToShow) {
         this.item = itemToShow;
 
-        I18NBundle locale = Services.getL18N().l18n();
+        I18NBundle locale = Services.getL18N().l18n(BundleAssets.INVENTORY);
         itemName.setText(locale.get(item.getName()));
         itemDescription.setText(locale.get(item.getName()+"-description"));
         itemImg.setDrawable(skin, item.getName());

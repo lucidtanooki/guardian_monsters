@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.I18NBundle;
 
+import de.limbusdev.guardianmonsters.data.BundleAssets;
 import de.limbusdev.guardianmonsters.enums.AttackType;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.model.Attack;
@@ -83,12 +84,11 @@ public class MonsterManager {
         report.damage = MathUtils.round(damage);
         report.effectiveness = effectiveness;
 
-        I18NBundle l18n = Services.getL18N().l18n();
-        System.out.println(
-            l18n.get(MonsterInfo.getInstance().getNameById(att.ID)) + ": "
-             + l18n.get(attack.name)
-                + " causes " + damage + " damage on "
-                + l18n.get(MonsterInfo.getInstance().getNameById(def.ID)));
+        // Print Battle Debug Message
+        String attackerName = Services.getL18N().l18n(BundleAssets.MONSTERS).get(MonsterInfo.getInstance().getNameById(att.ID));
+        String attackName   = Services.getL18N().l18n(BundleAssets.ATTACKS).get(attack.name);
+        String victimName   = Services.getL18N().l18n(BundleAssets.MONSTERS).get(MonsterInfo.getInstance().getNameById(def.ID));
+        System.out.println(attackerName + ": " + attackName + " causes " + damage + " damage on " + victimName);
 
         return report;
     }

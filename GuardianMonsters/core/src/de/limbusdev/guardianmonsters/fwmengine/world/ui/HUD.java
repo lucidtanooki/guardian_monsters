@@ -27,6 +27,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
+import de.limbusdev.guardianmonsters.data.BundleAssets;
 import de.limbusdev.guardianmonsters.data.TextureAssets;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Components;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.InputComponent;
@@ -36,6 +37,7 @@ import de.limbusdev.guardianmonsters.enums.HUDElements;
 import de.limbusdev.guardianmonsters.enums.SkyDirection;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.BattleScreen;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.InventoryScreen;
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.GameArea;
 import de.limbusdev.guardianmonsters.geometry.IntVec2;
 import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
@@ -65,6 +67,7 @@ public class HUD extends InputAdapter {
     public final Entity hero;
     public Image blackCourtain;
     private HUDElements openHUDELement;
+    private GameArea gameArea;
 
     // Digital Pad
     private Array<TextureRegion> dPadImgs;
@@ -73,8 +76,9 @@ public class HUD extends InputAdapter {
     private Vector2 dPadCenter, dPadCenterDist;
     
     /* ........................................................................... CONSTRUCTOR .. */
-    public HUD(final BattleScreen battleScreen, final SaveGameManager saveGameManager, final Entity hero, Engine engine) {
+    public HUD(final BattleScreen battleScreen, final SaveGameManager saveGameManager, final Entity hero, Engine engine, GameArea gameArea) {
 
+        this.gameArea = gameArea;
         this.engine = engine;
         this.battleScreen = battleScreen;
         this.saveGameManager = saveGameManager;
@@ -113,7 +117,7 @@ public class HUD extends InputAdapter {
     private void setUpTopLevelButtons(TextureAtlas UItextures) {
 
         // Menu Button
-        TextButton menu = new TextButton(Services.getL18N().l18n().get("hud_menu"), skin, "open-menu");
+        TextButton menu = new TextButton(Services.getL18N().l18n(BundleAssets.GENERAL).get("hud_menu"), skin, "open-menu");
         menu.setPosition(GS.RES_X, GS.RES_Y+12, Align.topRight);
         menu.addListener(new ClickListener() {
             @Override
@@ -134,7 +138,7 @@ public class HUD extends InputAdapter {
         this.menuButtons = new Group();
 
         // Save Button
-        TextButton save = new TextButton(Services.getL18N().l18n().get("hud_save"), skin, "menu-entry");
+        TextButton save = new TextButton(Services.getL18N().l18n(BundleAssets.GENERAL).get("hud_save"), skin, "menu-entry");
         save.setPosition(0, 0, Align.bottomLeft);
         save.addListener(new ClickListener() {
             @Override
@@ -145,7 +149,7 @@ public class HUD extends InputAdapter {
         this.menuButtons.addActor(save);
 
         // Quit Button
-        TextButton quit = new TextButton(Services.getL18N().l18n().get("hud_quit"), skin, "menu-entry");
+        TextButton quit = new TextButton(Services.getL18N().l18n(BundleAssets.GENERAL).get("hud_quit"), skin, "menu-entry");
         quit.setPosition(0, -4.5f*GS.ROW , Align.bottomLeft);
         quit.addListener(new ClickListener() {
             @Override
@@ -164,7 +168,7 @@ public class HUD extends InputAdapter {
         this.menuButtons.addActor(quit);
 
         // Team Button
-        TextButton teamButton = new TextButton(Services.getL18N().l18n().get("hud_team"), skin, "menu-entry");
+        TextButton teamButton = new TextButton(Services.getL18N().l18n(BundleAssets.GENERAL).get("hud_team"), skin, "menu-entry");
         teamButton.setPosition(0, -9f*GS.ROW , Align.bottomLeft);
         teamButton.addListener(new ClickListener() {
             @Override
@@ -311,12 +315,12 @@ public class HUD extends InputAdapter {
         return this.stage;
     }
 
-    public void openConversation(String text, String name) {
+    public void openConversation(String text, String name, int mapID) {
         this.menuButtons.setVisible(false);
-        this.convText.setText(Services.getL18N().l18n().get(text));
+        this.convText.setText(Services.getL18N().l18nMap(mapID).get(text));
         String nm = "";
         if(!name.isEmpty()) {
-            nm = Services.getL18N().l18n().get(name);
+            nm = Services.getL18N().l18nMap(mapID).get(name);
         }
         this.titleLabel.setText(nm);
         this.titleLabel.setVisible(true);
@@ -329,8 +333,8 @@ public class HUD extends InputAdapter {
         Components.getInputComponent(hero).talking = false;
     }
 
-    public void openSign(String title, String text) {
-        openConversation(text,title);
+    public void openSign(String title, String text, int mapID) {
+        openConversation(text,title, mapID);
 
     }
 
@@ -453,7 +457,8 @@ public class HUD extends InputAdapter {
                 Components.path.get(touchedEntity).talkDir = talkDir;
                 openConversation(
                     Components.conversation.get(touchedEntity).text,
-                    Components.conversation.get(touchedEntity).name
+                    Components.conversation.get(touchedEntity).name,
+                    gameArea.getAreaID()
                 );
                 openHUDELement = HUDElements.CONVERSATION;
             }
@@ -462,8 +467,11 @@ public class HUD extends InputAdapter {
             if (EntityFamilies.signs.matches(touchedEntity)) {
                 System.out.print("Touched sign\n");
                 touchedSign = true;
-                openSign(Components.title.get(touchedEntity).text,
-                        Components.conversation.get(touchedEntity).text);
+                openSign(
+                    Components.title.get(touchedEntity).text,
+                    Components.conversation.get(touchedEntity).text,
+                    gameArea.getAreaID()
+                );
                 openHUDELement = HUDElements.SIGN;
             }
         }

@@ -9,6 +9,7 @@ import com.badlogic.gdx.utils.Align;
 import java.util.Observable;
 import java.util.Observer;
 
+import de.limbusdev.guardianmonsters.data.BundleAssets;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.model.Inventory;
 import de.limbusdev.guardianmonsters.model.Item;
@@ -24,19 +25,19 @@ public class ItemInventoryButton extends TextButton implements Observer {
     private Inventory inventory;
 
     public ItemInventoryButton(Item item, Skin skin, Inventory inventory) {
-        super(Services.getL18N().l18n().get(item.getName()), skin);
+        super(Services.getL18N().l18n(BundleAssets.INVENTORY).get(item.getName()), skin);
         this.inventory = inventory;
         augmentButton(item);
     }
 
     public ItemInventoryButton(Item item, Skin skin, String styleName, Inventory inventory) {
-        super(Services.getL18N().l18n().get(item.getName()), skin, styleName);
+        super(Services.getL18N().l18n(BundleAssets.INVENTORY).get(item.getName()), skin, styleName);
         this.inventory = inventory;
         augmentButton(item);
     }
 
     public ItemInventoryButton(Item item, TextButtonStyle style, Inventory inventory) {
-        super(Services.getL18N().l18n().get(item.getName()), style);
+        super(Services.getL18N().l18n(BundleAssets.INVENTORY).get(item.getName()), style);
         this.inventory = inventory;
         augmentButton(item);
     }

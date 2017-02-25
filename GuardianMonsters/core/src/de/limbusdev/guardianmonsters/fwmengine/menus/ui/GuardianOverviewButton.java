@@ -15,6 +15,7 @@ import com.badlogic.gdx.utils.Align;
 import java.util.Observable;
 import java.util.Observer;
 
+import de.limbusdev.guardianmonsters.data.BundleAssets;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.model.Equipment;
 import de.limbusdev.guardianmonsters.model.Item;
@@ -33,17 +34,17 @@ public class GuardianOverviewButton extends TextButton implements Observer{
 
 
     public GuardianOverviewButton(Monster monster, Skin skin, Item item) {
-        super(Services.getL18N().l18n().get(MonsterInfo.getInstance().getNameById(monster.ID)), skin);
+        super(Services.getL18N().l18n(BundleAssets.MONSTERS).get(MonsterInfo.getInstance().getNameById(monster.ID)), skin);
         construct(monster, item);
     }
 
     public GuardianOverviewButton(Monster monster, Skin skin, String styleName, Item item) {
-        super(Services.getL18N().l18n().get(MonsterInfo.getInstance().getNameById(monster.ID)), skin, styleName);
+        super(Services.getL18N().l18n(BundleAssets.MONSTERS).get(MonsterInfo.getInstance().getNameById(monster.ID)), skin, styleName);
         construct(monster, item);
     }
 
     public GuardianOverviewButton(Monster monster, TextButtonStyle style, Item item) {
-        super(Services.getL18N().l18n().get(MonsterInfo.getInstance().getNameById(monster.ID)), style);
+        super(Services.getL18N().l18n(BundleAssets.MONSTERS).get(MonsterInfo.getInstance().getNameById(monster.ID)), style);
         construct(monster, item);
     }
 
@@ -95,42 +96,18 @@ public class GuardianOverviewButton extends TextButton implements Observer{
 
         Monster.EquipmentPotential pot = monster.getEquipmentPotential(equipment);
 
+        String props[]  = {"hp", "mp", "speed", "exp", "pstr", "pdef", "mstr", "mdef"};
+        int potValues[] = {pot.hp, pot.mp, pot.speed, pot.exp, pot.pstr, pot.pdef, pot.mstr, pot.mdef};
+
         String fontStyle;
         subTable = new Table();
 
-        subTable.add(new Image(getSkin().getDrawable("stats-symbol-hp"))).width(16).height(16);
-        fontStyle = (pot.hp > 0 ? "green" : (pot.hp == 0 ? "default" : "red"));
-        subTable.add(new Label((pot.hp > 0 ? "+" : "")  + Integer.toString(pot.hp), getSkin(), fontStyle)).width(32);
-
-        subTable.add(new Image(getSkin().getDrawable("stats-symbol-mp"))).width(16).height(16);
-        fontStyle = (pot.mp > 0 ? "green" : (pot.mp == 0 ? "default" : "red"));
-        subTable.add(new Label((pot.mp > 0 ? "+" : "")  + Integer.toString(pot.mp), getSkin(), fontStyle)).width(32);
-
-        subTable.add(new Image(getSkin().getDrawable("stats-symbol-speed"))).width(16).height(16);
-        fontStyle = (pot.speed > 0 ? "green" : (pot.speed == 0 ? "default" : "red"));
-        subTable.add(new Label((pot.speed > 0 ? "+" : "")  + Integer.toString(pot.speed), getSkin(), fontStyle)).width(32);
-
-        subTable.add(new Image(getSkin().getDrawable("stats-symbol-exp"))).width(16).height(16);
-        fontStyle = (pot.exp > 0 ? "green" : (pot.exp == 0 ? "default" : "red"));
-        subTable.add(new Label((pot.exp > 0 ? "+" : "")  + Integer.toString(pot.exp), getSkin(), fontStyle)).width(32);
-
-        subTable.row();
-
-        subTable.add(new Image(getSkin().getDrawable("stats-symbol-pstr"))).width(16).height(16);
-        fontStyle = (pot.pstr > 0 ? "green" : (pot.pstr == 0 ? "default" : "red"));
-        subTable.add(new Label((pot.pstr > 0 ? "+" : "")  + Integer.toString(pot.pstr), getSkin(), fontStyle)).width(32);
-
-        subTable.add(new Image(getSkin().getDrawable("stats-symbol-pdef"))).width(16).height(16);
-        fontStyle = (pot.pdef > 0 ? "green" : (pot.pdef == 0 ? "default" : "red"));
-        subTable.add(new Label((pot.pdef > 0 ? "+" : "")  + Integer.toString(pot.pdef), getSkin(), fontStyle)).width(32);
-
-        subTable.add(new Image(getSkin().getDrawable("stats-symbol-mstr"))).width(16).height(16);
-        fontStyle = (pot.mstr > 0 ? "green" : (pot.mstr == 0 ? "default" : "red"));
-        subTable.add(new Label((pot.mstr > 0 ? "+" : "")  + Integer.toString(pot.mstr), getSkin(), fontStyle)).width(32);
-
-        subTable.add(new Image(getSkin().getDrawable("stats-symbol-mdef"))).width(16).height(16);
-        fontStyle = (pot.mdef > 0 ? "green" : (pot.mdef == 0 ? "default" : "red"));
-        subTable.add(new Label((pot.mdef > 0 ? "+" : "")  + Integer.toString(pot.mdef), getSkin(), fontStyle)).width(32);
+        for(int i=0; i<props.length; i++) {
+            subTable.add(new Image(getSkin().getDrawable("stats-symbol-" + props[i]))).width(16).height(16);
+            fontStyle = (potValues[i] > 0 ? "green" : (pot.hp == potValues[i] ? "default" : "red"));
+            subTable.add(new Label((potValues[i] > 0 ? "+" : "")  + Integer.toString(potValues[i]), getSkin(), fontStyle)).width(32);
+            if(i  == 3) subTable.row();
+        }
 
 
         add(subTable).align(Align.left);

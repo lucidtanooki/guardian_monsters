@@ -324,4 +324,8 @@ public class GameArea {
         this.descriptions = new ArrayMap<>();
         this.healFields = new ArrayMap<>();
     }
+
+    public int getAreaID() {
+        return areaID;
+    }
 }

@@ -6,25 +6,38 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.I18NBundle;
 
 import java.util.Locale;
+
+import de.limbusdev.guardianmonsters.data.BundleAssets;
 
 /**
  * Created by georg on 14.11.16.
  */
 
 public class LocalizationManager implements L18N {
-    private static I18NBundle l18n;
+
+    private ArrayMap<Integer,I18NBundle> l18n;
+    private ArrayMap<Integer,I18NBundle> l18nMap;
 
     private BitmapFont font;
 
     private static final String FONT_PATH_RUSSIAN = "fonts/multi.fnt";
 
     public LocalizationManager() {
+        l18n = new ArrayMap<>();
+        l18nMap = new ArrayMap<>();
+
         System.out.println("Language: " + Locale.getDefault().getLanguage());
-        FileHandle baseFileHandle = Gdx.files.internal("l18n/guardianmonsters");
-        l18n = I18NBundle.createBundle(baseFileHandle);
+
+        l18n.put(BundleAssets.MONSTERS,     I18NBundle.createBundle(Gdx.files.internal(BundleAssets.MONSTERS_BUNDLE)));
+        l18n.put(BundleAssets.BATTLE,       I18NBundle.createBundle(Gdx.files.internal(BundleAssets.BATTLE_BUNDLE)));
+        l18n.put(BundleAssets.INVENTORY,    I18NBundle.createBundle(Gdx.files.internal(BundleAssets.INVENTORY_BUNDLE)));
+        l18n.put(BundleAssets.ATTACKS,      I18NBundle.createBundle(Gdx.files.internal(BundleAssets.ATTACKS_BUNDLE)));
+        l18n.put(BundleAssets.ELEMENTS,     I18NBundle.createBundle(Gdx.files.internal(BundleAssets.ELEMENTS_BUNDLE)));
+        l18n.put(BundleAssets.GENERAL,      I18NBundle.createBundle(Gdx.files.internal(BundleAssets.GENERAL_BUNDLE)));
 
         if(Locale.getDefault().getLanguage().equals("ru")) {
             font = new BitmapFont(Gdx.files.internal(FONT_PATH_RUSSIAN));
@@ -43,8 +56,14 @@ public class LocalizationManager implements L18N {
         }
     }
 
-    public I18NBundle l18n() {
-        return l18n;
+    @Override
+    public I18NBundle l18n(int type) {
+        return l18n.get(type);
+    }
+
+    @Override
+    public I18NBundle l18nMap(int mapID) {
+        return l18nMap.get(mapID);
     }
 
     public BitmapFont getFont() {

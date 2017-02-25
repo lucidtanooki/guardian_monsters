@@ -64,7 +64,7 @@ public class EntityComponentSystem {
         this.engine = new Engine();
         this.entityFactory = new EntityFactory(engine, gameArea);
         setUpHero(fromSave);
-        this.hud = new HUD(new BattleScreen(),sgm, hero, engine);
+        this.hud = new HUD(new BattleScreen(), sgm, hero, engine, gameArea);
         setUpPeople();
         setUpSigns();
         setUpEntitySystems(gameArea, viewport, hud);

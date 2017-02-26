@@ -94,7 +94,15 @@ public class MonsterInfo {
             statEl.getIntAttribute("speed", 1)
         );
 
-        status = new MonsterStatusInformation(ID, nameID, attacks, canEvolve, evolutionID, evolutionLvl, elements, stat);
+        XmlReader.Element equipComp = element.getChildByName("equipment-compatibility");
+        Equipment.HeadEquipment head = Equipment.HeadEquipment.valueOf(equipComp.getAttribute("head", "helmet").toUpperCase());
+        Equipment.BodyEquipment body = Equipment.BodyEquipment.valueOf(equipComp.getAttribute("body", "shield").toUpperCase());
+        Equipment.HandEquipment hand = Equipment.HandEquipment.valueOf(equipComp.getAttribute("hands", "sword").toUpperCase());
+        Equipment.FootEquipment feet = Equipment.FootEquipment.valueOf(equipComp.getAttribute("feet", "claws").toUpperCase());
+
+        status = new MonsterStatusInformation(
+            ID, nameID, attacks, canEvolve, evolutionID, evolutionLvl, elements, stat,
+            head, body, hand, feet);
 
         return status;
     }

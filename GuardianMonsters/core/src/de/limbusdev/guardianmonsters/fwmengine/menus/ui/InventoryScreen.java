@@ -52,7 +52,7 @@ public class InventoryScreen implements Screen {
 
         views.put("team", new TeamSubMenu(skin, team));
         views.put("items", new ItemsSubMenu(skin, inventory, team.monsters));
-        views.put("ability", new AbilityMapSubMenu(skin));
+        views.put("ability", new AbilityMapSubMenu(skin, team.monsters));
         views.put("key", new KeyItemsSubMenu(skin, inventory));
 
         stage.addActor(views.get("team"));
@@ -77,11 +77,6 @@ public class InventoryScreen implements Screen {
             public void onItemsButton() {
                 removeSubMenus();
                 stage.addActor(views.get("items"));
-            }
-
-            @Override
-            public void onEquipButton() {
-                removeSubMenus();
             }
 
             @Override

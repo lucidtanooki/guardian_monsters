@@ -74,59 +74,59 @@
     <!-- Equipment -->
     <Equipment>
         <nameID>sword-wood</nameID>
-        <equipment-type>weapon</equipment-type>
+        <body-part type="sword">hands</body-part>
         <addsPStr>1</addsPStr>
     </Equipment>
 
     <Equipment>
         <nameID>sword-rusty</nameID>
-        <equipment-type>weapon</equipment-type>
+        <body-part type="sword">hands</body-part>
         <addsPStr>2</addsPStr>
     </Equipment>
 
     <Equipment>
         <nameID>sword-iron</nameID>
-        <equipment-type>weapon</equipment-type>
+        <body-part type="sword">hands</body-part>
         <addsPStr>3</addsPStr>
     </Equipment>
 
     <Equipment>
         <nameID>sword-steel</nameID>
-        <equipment-type>weapon</equipment-type>
+        <body-part type="sword">hands</body-part>
         <addsPStr>4</addsPStr>
     </Equipment>
 
     <Equipment>
         <nameID>sword-silver</nameID>
-        <equipment-type>weapon</equipment-type>
+        <body-part type="sword">hands</body-part>
         <addsSpeed>1</addsSpeed>
         <addsPStr>4</addsPStr>
     </Equipment>
 
     <Equipment>
         <nameID>sword-titanium</nameID>
-        <equipment-type>weapon</equipment-type>
+        <body-part type="sword">hands</body-part>
         <addsSpeed>2</addsSpeed>
         <addsPStr>5</addsPStr>
     </Equipment>
 
     <Equipment>
         <nameID>sword-knightly-steel</nameID>
-        <equipment-type>weapon</equipment-type>
+        <body-part type="sword">hands</body-part>
         <addsPStr>5</addsPStr>
         <addsPDef>1</addsPDef>
     </Equipment>
 
     <Equipment>
         <nameID>sword-broad-steel</nameID>
-        <equipment-type>weapon</equipment-type>
+        <body-part type="sword">hands</body-part>
         <addsPStr>6</addsPStr>
         <addsSpeed>-1</addsSpeed>
     </Equipment>
 
     <Equipment>
         <nameID>sword-barb-steel</nameID>
-        <equipment-type>weapon</equipment-type>
+        <body-part type="sword">hands</body-part>
         <addsPStr>6</addsPStr>
         <addsMDef>1</addsMDef>
         <addsSpeed>3</addsSpeed>
@@ -134,26 +134,26 @@
 
     <Equipment>
         <nameID>sword-gap-steel</nameID>
-        <equipment-type>weapon</equipment-type>
+        <body-part type="sword">hands</body-part>
         <addsPStr>5</addsPStr>
         <addsSpeed>3</addsSpeed>
     </Equipment>
 
     <Equipment>
         <nameID>claws-wood</nameID>
-        <equipment-type>weapon</equipment-type>
+        <body-part type="claws">hands</body-part>
         <addsPStr>1</addsPStr>
     </Equipment>
 
     <Equipment>
         <nameID>claws-rusty</nameID>
-        <equipment-type>weapon</equipment-type>
+        <body-part type="claws">hands</body-part>
         <addsPStr>2</addsPStr>
     </Equipment>
 
     <Equipment>
         <nameID>sword-excalibur</nameID>
-        <equipment-type>weapon</equipment-type>
+        <body-part type="sword">hands</body-part>
         <addsHP>25</addsHP>
         <addsMP>20</addsMP>
         <addsEXP>2</addsEXP>
@@ -166,19 +166,19 @@
 
     <Equipment>
         <nameID>helmet-iron</nameID>
-        <equipment-type>helmet</equipment-type>
+        <body-part type="helmet">head</body-part>
         <addsPDef>2</addsPDef>
     </Equipment>
 
     <Equipment>
         <nameID>shield-iron</nameID>
-        <equipment-type>armor</equipment-type>
+        <body-part type="shield">body</body-part>
         <addsPDef>2</addsPDef>
     </Equipment>
 
     <Equipment>
         <nameID>shoes-leather</nameID>
-        <equipment-type>shoes</equipment-type>
+        <body-part type="shoes">feet</body-part>
         <addsPDef>1</addsPDef>
         <addsSpeed>1</addsSpeed>
     </Equipment>

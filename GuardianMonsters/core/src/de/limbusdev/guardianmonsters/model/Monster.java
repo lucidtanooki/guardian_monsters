@@ -4,7 +4,9 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ObjectMap;
 
+import java.util.HashSet;
 import java.util.Observable;
+import java.util.Set;
 
 import de.limbusdev.guardianmonsters.enums.Element;
 
@@ -18,11 +20,12 @@ public class Monster extends Observable {
     public int INSTANCE_ID;
     public int evolution;
     public Array<Element> elements;
-    public Equipment    weapon;
-    public Equipment    helmet;
-    public Equipment    armor;
-    public Equipment    shoes;
-    public String       nickname;
+    public Equipment hands;
+    public Equipment head;
+    public Equipment body;
+    public Equipment feet;
+    public String    nickname;
+    public Set<Integer> activatedAbilityNodes;
 
 
     // -------------------------------------------------------------------------------------- STATUS
@@ -68,7 +71,8 @@ public class Monster extends Observable {
         this.mDefFull = mDef = base.baseMagDefense;
         this.Speed = this.SpeedFull = base.baseSpeed;
         this.nickname = "";
-
+        activatedAbilityNodes = new HashSet<>();
+        activateAbilityNode(0);
         // INIT
         this.attacks = new Array<>();
 
@@ -182,10 +186,10 @@ public class Monster extends Observable {
     public int getExtendedHPfull() {
         int hp=getHPfull();
         int hpAddFactor=0;
-        if(weapon != null)  hpAddFactor += weapon.getAddsHP();
-        if(armor != null)   hpAddFactor += armor.getAddsHP();
-        if(helmet != null)  hpAddFactor += helmet.getAddsHP();
-        if(shoes != null)   hpAddFactor += shoes.getAddsHP();
+        if(hands != null)  hpAddFactor += hands.getAddsHP();
+        if(body != null)   hpAddFactor += body.getAddsHP();
+        if(head != null)  hpAddFactor += head.getAddsHP();
+        if(feet != null)   hpAddFactor += feet.getAddsHP();
         hp *= (100f+hpAddFactor)/100f;
         return hp;
     }
@@ -193,10 +197,10 @@ public class Monster extends Observable {
     public int getExtendedMPfull() {
         int mp=getMPfull();
         int mpAddFactor=0;
-        if(weapon != null)  mpAddFactor += weapon.getAddsMP();
-        if(armor != null)   mpAddFactor += armor.getAddsMP();
-        if(helmet != null)  mpAddFactor += helmet.getAddsMP();
-        if(shoes != null)   mpAddFactor += shoes.getAddsMP();
+        if(hands != null)  mpAddFactor += hands.getAddsMP();
+        if(body != null)   mpAddFactor += body.getAddsMP();
+        if(head != null)  mpAddFactor += head.getAddsMP();
+        if(feet != null)   mpAddFactor += feet.getAddsMP();
         mp *= (100f+mpAddFactor)/100f;
         return mp;
     }
@@ -206,17 +210,17 @@ public class Monster extends Observable {
 
         Equipment currentEquipment;
         switch(eq.getEquipmentType()) {
-            case HELMET:
-                currentEquipment = helmet;
+            case HEAD:
+                currentEquipment = head;
                 break;
-            case ARMOR:
-                currentEquipment = armor;
+            case BODY:
+                currentEquipment = body;
                 break;
-            case SHOES:
-                currentEquipment = shoes;
+            case FEET:
+                currentEquipment = feet;
                 break;
             default:
-                currentEquipment = weapon;
+                currentEquipment = hands;
                 break;
         }
 
@@ -321,23 +325,27 @@ public class Monster extends Observable {
     public Item equip(Equipment equipment) {
         Equipment replacedEq;
         switch(equipment.getEquipmentType()) {
-            case ARMOR:
-                replacedEq = armor;
-                armor = equipment;
+            case BODY:
+                replacedEq = body;
+                body = equipment;
                 break;
-            case HELMET:
-                replacedEq = helmet;
-                helmet = equipment;
+            case HEAD:
+                replacedEq = head;
+                head = equipment;
                 break;
-            case SHOES:
-                replacedEq = shoes;
-                shoes = equipment;
+            case FEET:
+                replacedEq = feet;
+                feet = equipment;
                 break;
             default:
-                replacedEq = weapon;
-                weapon = equipment;
+                replacedEq = hands;
+                hands = equipment;
                 break;
         }
         return replacedEq;
+    }
+
+    public void activateAbilityNode(int ID) {
+        activatedAbilityNodes.add(ID);
     }
 }

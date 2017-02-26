@@ -50,7 +50,7 @@ public class ItemInfo {
                     item = parseMedicine(e);
                     break;
                 case "Equipment":
-                    item = parseWeaponItem(e);
+                    item = parseEquipmentItem(e);
                     break;
                 case "Key":
                     item = parseKeyItem(e);
@@ -96,38 +96,42 @@ public class ItemInfo {
         return new Item.Key(e.get("nameID", "Water"));
     }
 
-    private Item parseWeaponItem(XmlReader.Element e) {
-        Equipment.EQUIPMENT_TYPE type;
-        String typeStr = e.get("equipment-type", "weapon");
-        switch(typeStr) {
-            case "weapon":
-                type = Equipment.EQUIPMENT_TYPE.WEAPON;
+    private Item parseEquipmentItem(XmlReader.Element e) {
+        Equipment.EQUIPMENT_TYPE bodyPart = Equipment.EQUIPMENT_TYPE.valueOf(e.get("body-part", "hands").toUpperCase());
+
+        String nameID = e.get("nameID", "claws-wood");
+        int pStr = e.getInt("addsPStr",    0);
+        int pDef = e.getInt("addsPDef",    0);
+        int mStr = e.getInt("addsMStr",    0);
+        int mDef = e.getInt("addsMDef",    0);
+        int speed = e.getInt("addsSpeed",   0);
+        int hp = e.getInt("addsHP",      0);
+        int mp = e.getInt("addsMP",      0);
+        int exp = e.getInt("addsEXP",     0);
+        String type = e.getChildByName("body-part").getAttribute("type").toUpperCase();
+
+        Equipment equip;
+        switch(bodyPart) {
+            case HEAD:
+                equip = new Equipment.Head(nameID, Equipment.HeadEquipment.valueOf(type), pStr,
+                    pDef, mStr, mDef, speed, hp, mp, exp);
                 break;
-            case "armor":
-                type = Equipment.EQUIPMENT_TYPE.ARMOR;
+            case BODY:
+                equip = new Equipment.Body(nameID, Equipment.BodyEquipment.valueOf(type), pStr,
+                    pDef, mStr, mDef, speed, hp, mp, exp);
                 break;
-            case "helmet":
-                type = Equipment.EQUIPMENT_TYPE.HELMET;
-                break;
-            case "shoes":
-                type = Equipment.EQUIPMENT_TYPE.SHOES;
+            case FEET:
+                equip = new Equipment.Feet(nameID, Equipment.FootEquipment.valueOf(type), pStr,
+                    pDef, mStr, mDef, speed, hp, mp, exp);
                 break;
             default:
-                type = Equipment.EQUIPMENT_TYPE.WEAPON;
+                // Hands
+                equip = new Equipment.Hands(nameID, Equipment.HandEquipment.valueOf(type), pStr,
+                    pDef, mStr, mDef, speed, hp, mp, exp);
                 break;
         }
-        return new Equipment(
-            e.get("nameID", "claws-wood"),
-            type,
-            e.getInt("addsPStr",    0),
-            e.getInt("addsPDef",    0),
-            e.getInt("addsMStr",    0),
-            e.getInt("addsMDef",    0),
-            e.getInt("addsSpeed",   0),
-            e.getInt("addsHP",      0),
-            e.getInt("addsMP",      0),
-            e.getInt("addsEXP",     0)
-            );
+
+        return equip;
     }
 
 

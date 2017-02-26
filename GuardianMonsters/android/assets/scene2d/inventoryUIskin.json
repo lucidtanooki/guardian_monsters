@@ -20,12 +20,19 @@
     b-toolbar-side-other:     {down: toolBarButtonSide-other-down,        up: toolBarButtonSide-other-up,     checked: toolBarButtonSide-other-down},
     b-toolbar-side-key:       {down: toolBarButtonSide-key-down,          up: toolBarButtonSide-key-up,       checked: toolBarButtonSide-key-down},
 
-    button-delete:    {down: button-delete-down,  up: button-delete-up},
-    button-use:       {down: button-use-down,     up: button-use-up},
-    button-switch:    {down: button-switch-down,  up: button-switch-up},
-    button-check:     {down: button-check-down,   up: button-check-up, checked: button-check-down},
-    button-check-locked:     {down: button-check-down-locked,   up: button-check-up, checked: button-check-down},
-    button-back:      {down: button-back-down,    up: button-back-up},
+    button-delete:        {down: button-delete-down,        up: button-delete-up},
+    button-use:           {down: button-use-down,           up: button-use-up},
+    button-switch:        {down: button-switch-down,        up: button-switch-up},
+    button-check:         {down: button-check-down,         up: button-check-up, checked: button-check-down},
+    button-check-locked:  {down: button-check-down-locked,  up: button-check-up, checked: button-check-down},
+    button-back:          {down: button-back-down,          up: button-back-up},
+
+    button-board-node-disabled:           {up: ability-circle-inactive,           down: ability-circle-inactive-chosen,           checked: ability-circle-inactive-chosen},
+    button-board-node-enabled:            {up: ability-circle-active,             down: ability-circle-active-chosen,             checked: ability-circle-active-chosen},
+    button-board-node-activated:          {up: ability-circle-activated,          down: ability-circle-activated-chosen,          checked: ability-circle-activated-chosen},
+    button-board-node-ability-disabled:   {up: ability-circle-ability-inactive,   down: ability-circle-ability-inactive-chosen,   checked: ability-circle-ability-inactive-chosen},
+    button-board-node-ability-enabled:    {up: ability-circle-ability-active,     down: ability-circle-ability-active-chosen,     checked: ability-circle-ability-active-chosen},
+    button-board-node-ability-activated:  {up: ability-circle-ability-activated,  down: ability-circle-ability-activated-chosen,  checked: ability-circle-ability-activated-chosen},
 
 	},
 

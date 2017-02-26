@@ -19,6 +19,10 @@ public class MonsterStatusInformation {
     public int evolution;
     public Array<Element> elements;
     public BaseStat baseStat;
+    private Equipment.HeadEquipment compatibleHeadEquip;
+    private Equipment.BodyEquipment compatibleBodyEquip;
+    private Equipment.HandEquipment compatibleHandEquip;
+    private Equipment.FootEquipment compatibleFootEquip;
 
     /* ........................................................................... CONSTRUCTOR .. */
 
@@ -34,7 +38,11 @@ public class MonsterStatusInformation {
     public MonsterStatusInformation(
         int ID, String nameID, ArrayMap<Integer, Attack> learnableAttacks,
         boolean canEvolve, int evolution, int evolvingAtLevel, Array<Element> elements,
-        BaseStat baseStat) {
+        BaseStat baseStat,
+        Equipment.HeadEquipment head,
+        Equipment.BodyEquipment body,
+        Equipment.HandEquipment hands,
+        Equipment.FootEquipment feet) {
 
         this.ID = ID;
         this.nameID = nameID;
@@ -44,8 +52,28 @@ public class MonsterStatusInformation {
         this.evolvingAtLevel = evolvingAtLevel;
         this.elements = elements;
         this.baseStat = baseStat;
+        this.compatibleHandEquip = hands;
+        this.compatibleBodyEquip = body;
+        this.compatibleHeadEquip = head;
+        this.compatibleFootEquip = feet;
     }
     /* ............................................................................... METHODS .. */
     
     /* ..................................................................... GETTERS & SETTERS .. */
+
+    public Equipment.HeadEquipment getCompatibleHeadEquip() {
+        return compatibleHeadEquip;
+    }
+
+    public Equipment.BodyEquipment getCompatibleBodyEquip() {
+        return compatibleBodyEquip;
+    }
+
+    public Equipment.HandEquipment getCompatibleHandEquip() {
+        return compatibleHandEquip;
+    }
+
+    public Equipment.FootEquipment getCompatibleFootEquip() {
+        return compatibleFootEquip;
+    }
 }

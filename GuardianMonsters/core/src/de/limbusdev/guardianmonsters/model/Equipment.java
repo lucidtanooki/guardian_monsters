@@ -4,20 +4,31 @@ package de.limbusdev.guardianmonsters.model;
  * Created by georg on 20.02.17.
  */
 
-public class Equipment extends Item {
+public abstract class Equipment extends Item {
+
+    public enum HandEquipment {
+        SWORD, PATA, BRACELET, CLAWS,
+    }
+
+    public enum HeadEquipment {
+        HELMET, BRIDLE, MASK, HEADBAND,
+    }
+
+    public enum BodyEquipment {
+        ARMOR, BARDING, SHIELD, BREASTPLATE,
+    }
+
+    public enum FootEquipment {
+        SHOES, SHINPROTECTION, HORSESHOE, KNEEPADS,
+    }
 
     @Override
     public void apply(Monster m) {
 
     }
 
-    @Override
-    public boolean applicable(Monster m) {
-        return true;
-    }
-
     public enum EQUIPMENT_TYPE {
-        WEAPON, HELMET, ARMOR, SHOES,
+        HANDS, HEAD, BODY, FEET,
     }
 
     private int addsPStr, addsPDef, addsMStr, addsMDef, addsSpeed, addsHP, addsMP, addsEXP;
@@ -73,5 +84,86 @@ public class Equipment extends Item {
     public EQUIPMENT_TYPE getEquipmentType() {
         return type;
     }
+
+    public static class Hands extends Equipment {
+
+        private HandEquipment type;
+
+        public Hands(String name, HandEquipment type, int addsPStr, int addsPDef, int addsMStr, int addsMDef, int addsSpeed, int addsHP, int addsMP, int addsExp) {
+            super(name, EQUIPMENT_TYPE.HANDS, addsPStr, addsPDef, addsMStr, addsMDef, addsSpeed, addsHP, addsMP, addsExp);
+            this.type = type;
+        }
+
+        public HandEquipment getType() {
+            return type;
+        }
+
+        @Override
+        public boolean applicable(Monster m) {
+            MonsterStatusInformation msi = MonsterInfo.getInstance().getStatusInfos().get(m.ID);
+            return msi.getCompatibleHandEquip().equals(type);
+        }
+    }
+
+    public static class Feet extends Equipment {
+
+        private FootEquipment type;
+
+        public Feet(String name, FootEquipment type, int addsPStr, int addsPDef, int addsMStr, int addsMDef, int addsSpeed, int addsHP, int addsMP, int addsExp) {
+            super(name, EQUIPMENT_TYPE.FEET, addsPStr, addsPDef, addsMStr, addsMDef, addsSpeed, addsHP, addsMP, addsExp);
+            this.type = type;
+        }
+
+        public FootEquipment getType() {
+            return type;
+        }
+
+        @Override
+        public boolean applicable(Monster m) {
+            MonsterStatusInformation msi = MonsterInfo.getInstance().getStatusInfos().get(m.ID);
+            return msi.getCompatibleFootEquip().equals(type);
+        }
+    }
+
+    public static class Head extends Equipment {
+
+        private HeadEquipment type;
+
+        public Head(String name, HeadEquipment type, int addsPStr, int addsPDef, int addsMStr, int addsMDef, int addsSpeed, int addsHP, int addsMP, int addsExp) {
+            super(name, EQUIPMENT_TYPE.HEAD, addsPStr, addsPDef, addsMStr, addsMDef, addsSpeed, addsHP, addsMP, addsExp);
+            this.type = type;
+        }
+
+        public HeadEquipment getType() {
+            return type;
+        }
+
+        @Override
+        public boolean applicable(Monster m) {
+            MonsterStatusInformation msi = MonsterInfo.getInstance().getStatusInfos().get(m.ID);
+            return msi.getCompatibleHeadEquip().equals(type);
+        }
+    }
+
+    public static class Body extends Equipment {
+
+        private BodyEquipment type;
+
+        public Body(String name, BodyEquipment type, int addsPStr, int addsPDef, int addsMStr, int addsMDef, int addsSpeed, int addsHP, int addsMP, int addsExp) {
+            super(name, EQUIPMENT_TYPE.BODY, addsPStr, addsPDef, addsMStr, addsMDef, addsSpeed, addsHP, addsMP, addsExp);
+            this.type = type;
+        }
+
+        public BodyEquipment getType() {
+            return type;
+        }
+
+        @Override
+        public boolean applicable(Monster m) {
+            MonsterStatusInformation msi = MonsterInfo.getInstance().getStatusInfos().get(m.ID);
+            return msi.getCompatibleBodyEquip().equals(type);
+        }
+    }
+
 
 }

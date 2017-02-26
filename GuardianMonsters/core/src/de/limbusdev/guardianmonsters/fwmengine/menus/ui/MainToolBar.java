@@ -57,20 +57,9 @@ public class MainToolBar extends Group {
         });
         addActor(items);
 
-        // ................................................................................... EQUIP
-        ImageButton equip = new ImageButton(skin, "b-toolbar-equip");
-        equip.setPosition((64+4)*2+2,4, Align.bottomLeft);
-        equip.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                callbacks.onEquipButton();
-            }
-        });
-        addActor(equip);
-
         // ..................................................................................... KEY
         ImageButton key = new ImageButton(skin, "b-toolbar-key");
-        key.setPosition((64+4)*3+2,4, Align.bottomLeft);
+        key.setPosition((64+4)*2+2,4, Align.bottomLeft);
         key.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -81,7 +70,7 @@ public class MainToolBar extends Group {
 
         // ................................................................................. ABILITY
         ImageButton ability = new ImageButton(skin, "b-toolbar-ability");
-        ability.setPosition((64+4)*4+2,4, Align.bottomLeft);
+        ability.setPosition((64+4)*3+2,4, Align.bottomLeft);
         ability.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -102,7 +91,7 @@ public class MainToolBar extends Group {
         });
         addActor(exit);
 
-        buttonGroup = new ButtonGroup<>(team,items,equip,ability,key);
+        buttonGroup = new ButtonGroup<>(team,items,ability,key);
         buttonGroup.setMaxCheckCount(1);
         buttonGroup.setMinCheckCount(1);
 
@@ -111,7 +100,6 @@ public class MainToolBar extends Group {
     public interface CallbackHandler {
         void onTeamButton();
         void onItemsButton();
-        void onEquipButton();
         void onAbilityButton();
         void onKeyButton();
         void onExitButton();

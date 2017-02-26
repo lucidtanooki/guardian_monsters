@@ -11,6 +11,7 @@
             <attack element="earth" id="1" abilityPos="5" /> <!-- Earth, available on Ability Board, Field 5 -->
         </attacks>
         <basestats hp="99" mp="19" speed="1" pstr="1" pdef="1" mstr="1" mdef="1" />
+        <equipment-compatibility head="bridle" hands="claws" body="barding" feet="shinprotection" />
     </guardian>
 
     <guardian id="2" nameID="gm002_stegofor">
@@ -26,6 +27,7 @@
             <attack element="earth" id="1" abilityPos="5" /> <!-- Earth, available on Ability Board, Field 5 -->
         </attacks>
         <basestats hp="198" mp="38" speed="2" pstr="2" pdef="2" mstr="2" mdef="2" />
+        <equipment-compatibility head="bridle" hands="claws" body="barding" feet="shinprotection" />
     </guardian>
 
     <guardian id="3" nameID="gm003_brachifor">
@@ -39,6 +41,7 @@
             <attack element="earth" id="1" abilityPos="5" /> <!-- Earth, available on Ability Board, Field 5 -->
         </attacks>
         <basestats hp="396" mp="76" speed="4" pstr="4" pdef="4" mstr="4" mdef="4" />
+        <equipment-compatibility head="bridle" hands="claws" body="barding" feet="shinprotection" />
     </guardian>
 
     <guardian id="4" nameID="gm004_kroki">
@@ -53,6 +56,7 @@
             <attack element="water" id="1" abilityPos="5" />
         </attacks>
         <basestats hp="99" mp="19" speed="1" pstr="1" pdef="1" mstr="1" mdef="1" />
+        <equipment-compatibility head="helmet" hands="claws" body="breastplate" feet="kneepads" />
     </guardian>
 
     <guardian id="5" nameID="gm005_krokivip">
@@ -68,6 +72,7 @@
             <attack element="water"   id="1" abilityPos="5" />
         </attacks>
         <basestats hp="198" mp="38" speed="2" pstr="2" pdef="2" mstr="2" mdef="2" />
+        <equipment-compatibility head="helmet" hands="claws" body="breastplate" feet="kneepads" />
     </guardian>
 
     <guardian id="6" nameID="gm006_leviadile">
@@ -81,6 +86,7 @@
             <attack element="water" id="1" abilityPos="5" />
         </attacks>
         <basestats hp="396" mp="76" speed="4" pstr="4" pdef="4" mstr="4" mdef="4" />
+        <equipment-compatibility head="helmet" hands="claws" body="breastplate" feet="kneepads" />
     </guardian>
 
     <guardian id="7" nameID="gm007_devidin">
@@ -95,6 +101,7 @@
             <attack element="fire" id="1" abilityPos="5" />
         </attacks>
         <basestats hp="99" mp="19" speed="1" pstr="1" pdef="1" mstr="1" mdef="1" />
+        <equipment-compatibility head="mask" hands="claws" body="barding" feet="shinprotection" />
     </guardian>
 
     <guardian id="8" nameID="gm008_devidra">
@@ -110,6 +117,7 @@
             <attack element="fire"   id="1" abilityPos="5" />
         </attacks>
         <basestats hp="198" mp="38" speed="2" pstr="2" pdef="2" mstr="2" mdef="2" />
+        <equipment-compatibility head="helmet" hands="sword" body="shield" feet="kneepads" />
     </guardian>
 
     <guardian id="9" nameID="gm009_deviraptor">
@@ -123,5 +131,6 @@
             <attack element="fire" id="1" abilityPos="5" />
         </attacks>
         <basestats hp="396" mp="76" speed="4" pstr="4" pdef="4" mstr="4" mdef="4" />
+        <equipment-compatibility head="mask" hands="sword" body="shield" feet="kneepads" />
     </guardian>
 </guardians>

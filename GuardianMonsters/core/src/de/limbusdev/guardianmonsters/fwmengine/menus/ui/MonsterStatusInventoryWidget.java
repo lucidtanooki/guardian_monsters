@@ -38,7 +38,7 @@ public class MonsterStatusInventoryWidget extends Group {
         monsterStatsBg.setPosition(2,2,Align.bottomLeft);
         addActor(monsterStatsBg);
 
-        Image nameBg = new Image(skin.getDrawable("nameID-bg"));
+        Image nameBg = new Image(skin.getDrawable("name-bg"));
         nameBg.setPosition(4,200-4,Align.topLeft);
         addActor(nameBg);
 
@@ -108,26 +108,26 @@ public class MonsterStatusInventoryWidget extends Group {
         }
 
         equipmentGroup.clear();
-        if(m.helmet != null) {
-            Image img = new Image(skin.getDrawable(m.helmet.getName()));
+        if(m.head != null) {
+            Image img = new Image(skin.getDrawable(m.head.getName()));
             img.setSize(32,32);
             img.setPosition(102,178-2,Align.topLeft);
             equipmentGroup.addActor(img);
         }
-        if(m.weapon != null) {
-            Image img = new Image(skin.getDrawable(m.weapon.getName()));
+        if(m.hands != null) {
+            Image img = new Image(skin.getDrawable(m.hands.getName()));
             img.setSize(32,32);
             img.setPosition(102,178-2-38,Align.topLeft);
             equipmentGroup.addActor(img);
         }
-        if(m.armor != null) {
-            Image img = new Image(skin.getDrawable(m.armor.getName()));
+        if(m.body != null) {
+            Image img = new Image(skin.getDrawable(m.body.getName()));
             img.setSize(32,32);
             img.setPosition(102,178-2-38*2,Align.topLeft);
             equipmentGroup.addActor(img);
         }
-        if(m.shoes != null) {
-            Image img = new Image(skin.getDrawable(m.shoes.getName()));
+        if(m.feet != null) {
+            Image img = new Image(skin.getDrawable(m.feet.getName()));
             img.setSize(32,32);
             img.setPosition(102,178-2-38*3,Align.topLeft);
             equipmentGroup.addActor(img);

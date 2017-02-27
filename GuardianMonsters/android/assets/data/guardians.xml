@@ -23,7 +23,7 @@
         </elements>
         <attacks>
             <attack element="none"   id="1" abilityPos="0" /> <!-- Self Defense, Attack 1 in Category ANY -->
-            <attack element="none"   id="2" abilityPos="1" /> <!-- Bite -->
+            <attack element="none"   id="2" abilityPos="2" /> <!-- Bite -->
             <attack element="earth" id="1" abilityPos="5" /> <!-- Earth, available on Ability Board, Field 5 -->
         </attacks>
         <basestats hp="198" mp="38" speed="2" pstr="2" pdef="2" mstr="2" mdef="2" />

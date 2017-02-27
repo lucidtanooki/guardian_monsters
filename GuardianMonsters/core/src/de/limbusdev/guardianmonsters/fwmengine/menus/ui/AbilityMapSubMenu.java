@@ -1,5 +1,6 @@
 package de.limbusdev.guardianmonsters.fwmengine.menus.ui;
 
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.ButtonGroup;
@@ -15,6 +16,7 @@ import com.badlogic.gdx.utils.ArrayMap;
 
 import de.limbusdev.guardianmonsters.data.BundleAssets;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
+import de.limbusdev.guardianmonsters.geometry.IntVec2;
 import de.limbusdev.guardianmonsters.model.AbilityGraph;
 import de.limbusdev.guardianmonsters.model.Monster;
 import de.limbusdev.guardianmonsters.model.MonsterInfo;
@@ -135,15 +137,16 @@ public class AbilityMapSubMenu extends AInventorySubMenu {
     }
 
     private void addConnection(Skin skin, AbilityGraph.Edge edge) {
-        Image bar = null;
+        Image bar;
         String imgName = edgeImgsDisabled[edge.orientation];
 
-        int align;
+        int align, lengthx, lengthy;
+        IntVec2 offset = new IntVec2(0,0);
         switch(edge.orientation) {
             case HORIZONTAL:    align = Align.left; break;
             case VERTICAL:      align = Align.bottom; break;
-            case UPLEFT:        align = Align.bottomRight; break;
-            default:            align = Align.bottomLeft; break;
+            case UPLEFT:        align = Align.bottomRight; offset = new IntVec2(2,-2); break;
+            default:            align = Align.bottomLeft; offset = new IntVec2(-2,-2); break;
         }
 
         // Sort from down left to up right
@@ -151,7 +154,7 @@ public class AbilityMapSubMenu extends AInventorySubMenu {
         if(edge.orientation == HORIZONTAL || edge.orientation == UPRIGHT) {
             if(edge.from.x < edge.to.x) {
                 from = edge.from;
-                to = edge.from;
+                to = edge.to;
             } else {
                 from = edge.to;
                 to = edge.from;
@@ -159,69 +162,24 @@ public class AbilityMapSubMenu extends AInventorySubMenu {
         } else {
             if(edge.from.y < edge.to.y) {
                 from = edge.from;
-                to = edge.from;
+                to = edge.to;
             } else {
                 from = edge.to;
                 to = edge.from;
             }
         }
+        lengthx = Math.abs(from.x - to.x);
+        lengthy = Math.abs(from.y - to.y);
 
-        if(edge.orientation == HORIZONTAL) {
-            int fx, tx;
-            fx = from.x < to.x ? from.x : to.x;
-            tx = from.x < to.x ? to.x : from.x;
-
-            for(int x = fx; x < tx; x++) {
-                bar = new Image(skin.getDrawable(imgName));
-                bar.setPosition(600/2+x*32, 300/2-16+from.y*32, Align.bottomLeft);
-                connections.addActor(bar);
-            }
-        }
-
-        if(edge.orientation == VERTICAL) {
-            int fy, ty;
-            fy = from.y < to.y ? from.y : to.y;
-            ty = from.y < to.y ? to.y : from.y;
-
-            for(int y = fy; y < ty; y++) {
-                bar = new Image(skin.getDrawable(imgName));
-                bar.setPosition(600/2+from.x*32-16, 300/2+y*32, Align.bottomLeft);
-                connections.addActor(bar);
-            }
-        }
-
-        if(edge.orientation == UPRIGHT) {
-            int fx, tx, fy, ty;
-            fx = from.x < to.x ? from.x : to.x;
-            tx = from.x < to.x ? to.x : from.x;
-            fy = from.y < to.y ? from.y : to.y;
-            ty = from.y < to.y ? to.y : from.y;
-
-            int x=fx;
-            for(int y = fy; y < ty; y++) {
-                bar = new Image(skin.getDrawable(imgName));
-                bar.setPosition(600/2+x*32-4, 300/2+y*32-4, Align.bottomLeft);
-                connections.addActor(bar);
-                x++;
-            }
-        }
-
-        if(edge.orientation == UPLEFT) {
-
-            int fx, tx, fy, ty;
-            fx = from.x < to.x ? from.x : to.x;
-            tx = from.x < to.x ? to.x : from.x;
-            fy = from.y > to.y ? from.y : to.y;
-            ty = from.y > to.y ? to.y : from.y;
-
-            int x = fx;
-            for(int y = fy; y > ty; y--) {
-                bar = new Image(skin.getDrawable(imgName));
-                bar.setPosition(600/2+x*32-4, 300/2+y*32-32-4, Align.bottomLeft);
-                connections.addActor(bar);
-                x++;
-            }
-        }
+        int x = 0;
+        int y = 0;
+        do {
+            bar = new Image(skin.getDrawable(imgName));
+            bar.setPosition((from.x+x*((edge.orientation == UPLEFT ? -1 : 1)))*32+300+offset.x,(from.y+y)*32+150+offset.y,align);
+            connections.addActor(bar);
+            if(lengthx != 0) x++;
+            if(lengthy != 0) y++;
+        } while (x < lengthx || y < lengthy);
 
         if(bar != null) {
             edgeImgs.put(edge,bar);
@@ -249,7 +207,7 @@ public class AbilityMapSubMenu extends AInventorySubMenu {
                 break;
         }
 
-        nodeButtons.get(ID).setStyle(ibs);
+        //nodeButtons.get(ID).setStyle(ibs);
     }
 
     private void enableNeighboringNodes(int ID) {
@@ -262,7 +220,7 @@ public class AbilityMapSubMenu extends AInventorySubMenu {
                 }
 
                 String imgName = edgeImgsDisabled[e.orientation] + "-active";
-                edgeImgs.get(e).setDrawable(getSkin().getDrawable(imgName));
+                //edgeImgs.get(e).setDrawable(getSkin().getDrawable(imgName));
             }
         }
     }

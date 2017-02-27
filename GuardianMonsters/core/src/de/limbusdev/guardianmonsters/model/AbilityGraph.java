@@ -11,10 +11,14 @@ import de.limbusdev.guardianmonsters.enums.SkyDirection;
 
 public class AbilityGraph {
 
-    public final static int HORIZONTAL = 0;
-    public final static int VERTICAL = 1;
-    public final static int UPLEFT = 2;
-    public final static int UPRIGHT = 3;
+    public enum Orientation {
+        HORIZONTAL, VERTICAL, UPLEFT, UPRIGHT,
+    }
+
+    public enum NodeType {
+        EMPTY, ABILITY, EQUIPMENT,
+    }
+
     private final static int X=0, Y=1;
     private Array<Integer> activatedNodes;
 
@@ -63,20 +67,28 @@ public class AbilityGraph {
     public class Edge {
         public Vertex from;
         public Vertex to;
-        public int orientation;
+        public Orientation orientation;
 
         public Edge(Vertex from, Vertex to) {
             this.from = from;
             this.to = to;
             if(from.x == to.x || from.y == to.y) {
-                orientation = (from.x == to.x) ? VERTICAL : HORIZONTAL;
+                orientation = (from.x == to.x) ? Orientation.VERTICAL : Orientation.HORIZONTAL;
             } else {
                 if((from.x < to.x && from.y < to.y) || (from.x > to.x && from.y > to.y)) {
-                    orientation = UPRIGHT;
+                    orientation = Orientation.UPRIGHT;
                 } else {
-                    orientation = UPLEFT;
+                    orientation = Orientation.UPLEFT;
                 }
             }
+        }
+
+        public int getXLength() {
+            return Math.abs(from.x - to.x);
+        }
+
+        public int getYLength() {
+            return Math.abs(from.y - to.y);
         }
 
         @Override

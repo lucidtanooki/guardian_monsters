@@ -38,6 +38,9 @@ public class GameStateDebugger {
         mon.activateAbilityNode(1);
         mon.activateAbilityNode(2);
         mon.activateAbilityNode(3);
+        mon.activateAbilityNode(4);
+        mon.activateAbilityNode(5);
+        mon.activateAbilityNode(6);
         herTeam.monsters.put(0,mon);
         herTeam.monsters.put(1,BattleFactory.getInstance().createMonster(2));
         herTeam.monsters.put(2,BattleFactory.getInstance().createMonster(3));

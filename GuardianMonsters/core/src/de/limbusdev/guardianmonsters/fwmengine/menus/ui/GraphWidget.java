@@ -1,38 +1,81 @@
 package de.limbusdev.guardianmonsters.fwmengine.menus.ui;
 
 import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.ui.ButtonGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 
+import java.util.Observable;
+import java.util.Observer;
+
 import de.limbusdev.guardianmonsters.geometry.IntVec2;
 import de.limbusdev.guardianmonsters.model.AbilityGraph;
+import de.limbusdev.guardianmonsters.model.Attack;
+import de.limbusdev.guardianmonsters.model.Equipment;
+import de.limbusdev.guardianmonsters.model.Monster;
+import de.limbusdev.guardianmonsters.model.MonsterInfo;
+import de.limbusdev.guardianmonsters.model.MonsterStatusInformation;
+import de.limbusdev.guardianmonsters.utils.GS;
 
 /**
  * Created by georg on 27.02.17.
  */
 
-public class GraphWidget extends Group {
+public class GraphWidget extends Group implements Observer {
 
     private AbilityGraph graph;
     private Skin skin;
 
+    private ButtonGroup nodeGroup;
     private ArrayMap<Integer,NodeWidget> nodeWidgets;
     private ArrayMap<AbilityGraph.Vertex,Array<EdgeWidget>> edgeWidgets;
+    private ArrayMap<AbilityGraph.NodeType,ArrayMap<NodeStatus,ImageButton.ImageButtonStyle>> styles;
+
+    private CallbackHandler callbacks;
+
+    private Monster currentMonster;
 
 
-    public GraphWidget(AbilityGraph graph, Skin skin) {
+    public GraphWidget(AbilityGraph graph, Skin skin, CallbackHandler callbacks) {
+        super();
         this.graph = graph;
         this.skin = skin;
+        this.callbacks = callbacks;
+        setupNodeStyles();
+
+        setSize(600,300);
 
         // Create EdgeWidgets from Graph Edges
         edgeWidgets = new ArrayMap<>();
+
+        // Create NodeWidgets from Graph Nodes
+        nodeGroup = new ButtonGroup();
+        nodeGroup.setMinCheckCount(1);
+        nodeGroup.setMaxCheckCount(1);
+        nodeWidgets = new ArrayMap<>();
+
+    }
+
+    public void init(Monster monster) {
+        clear();
+        currentMonster = monster;
+        monster.addObserver(this);
+
+        MonsterStatusInformation msi = MonsterInfo.getInstance().getStatusInfos().get(monster.ID);
+        ArrayMap<Integer,Equipment.EQUIPMENT_TYPE> equipments = msi.equipmentAbilityGraphIds;
+        ArrayMap<Integer,Attack> abilities = msi.attackAbilityGraphIds;
+
+        edgeWidgets.clear();
         for(AbilityGraph.Edge edge : graph.getEdges()) {
             EdgeWidget ew = new EdgeWidget(edge);
-            ew.setPosition(ew.pivot.x*32, ew.pivot.y*32);
+            ew.setPosition(ew.pivot.x*32+300, ew.pivot.y*32+150);
             addActor(ew);
 
             if(!edgeWidgets.containsKey(edge.from)) edgeWidgets.put(edge.from,new Array<EdgeWidget>());
@@ -41,54 +84,91 @@ public class GraphWidget extends Group {
             edgeWidgets.get(edge.to).add(ew);
         }
 
-        nodeWidgets = new ArrayMap<>();
+        nodeWidgets.clear();
+        nodeGroup.clear();
         for(AbilityGraph.Vertex v : graph.getVertices().values()) {
-            NodeWidget nw = new NodeWidget(skin,v, AbilityGraph.NodeType.EMPTY);
-            nw.setPosition(nw.node.x*32,nw.node.y*32);
+            NodeWidget nw;
+            final int nodeID = v.ID;
+            if(equipments.containsKey(v.ID) || abilities.containsKey(v.ID)) {
+                if(equipments.containsKey(v.ID)) {
+                    nw = new NodeWidget(skin, v, AbilityGraph.NodeType.EQUIPMENT);
+                } else {
+                    nw = new NodeWidget(skin, v, AbilityGraph.NodeType.ABILITY);
+                }
+            } else {
+                nw = new NodeWidget(skin, v, AbilityGraph.NodeType.EMPTY);
+            }
+            nw.addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    callbacks.onNodeClicked(nodeID);
+                }
+            });
+            nw.setPosition(nw.node.x*32+300,nw.node.y*32+150);
             nodeWidgets.put(v.ID,nw);
             addActor(nw);
+            nodeGroup.add(nw);
         }
-
-
+        nodeWidgets.get(0).setChecked(true);
+        refreshStatus(monster);
 
         enableEdgesAt(graph.getVertices().get(0));
+
     }
+
+    public void refreshStatus(Monster monster) {
+        for(int i : monster.activatedAbilityNodes) {
+            nodeWidgets.get(i).changeStatus(NodeStatus.ACTIVE);
+            enableEdgesAt(graph.getVertices().get(i));
+            enableNeighborNodes(graph.getVertices().get(i));
+        }
+    }
+
+
+
+    // ..................................................................................... METHODS
 
     public void enableEdgesAt(AbilityGraph.Vertex v) {
         for(EdgeWidget ew : edgeWidgets.get(v)) {
-            ew.changeStatus(NodeStatus.ACTIVATED);
+            ew.changeStatus(NodeStatus.ACTIVE);
+        }
+    }
+
+    public void enableNeighborNodes(AbilityGraph.Vertex v) {
+        for(AbilityGraph.Edge e : graph.getEdges()) {
+            if(e.from == v || e.to == v) {
+                AbilityGraph.Vertex nodeToBeEnabled = e.from == v ? e.to : e.from;
+                NodeWidget nw = nodeWidgets.get(nodeToBeEnabled.ID);
+                if(!(nw.status == NodeStatus.ACTIVE)) nw.changeStatus(NodeStatus.ENABLED);
+            }
+        }
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        if(o instanceof Monster) {
+            Monster m = (Monster)o;
+            if(m.equals(currentMonster)) {
+                refreshStatus(m);
+            }
         }
     }
 
     public class NodeWidget extends ImageButton {
         private AbilityGraph.Vertex node;
-        private ArrayMap<AbilityGraph.NodeType,ArrayMap<NodeStatus,ImageButtonStyle>> styles;
         private AbilityGraph.NodeType type;
+        public NodeStatus status;
 
         public NodeWidget(Skin skin, AbilityGraph.Vertex node, AbilityGraph.NodeType type) {
-            super(skin,"board-disabled");
+            super(skin,"board-" + type.toString().toLowerCase() + "-disabled");
             this.type = type;
-            // Set Node ImageButton Styles
-            styles = new ArrayMap<>();
-            styles.put(AbilityGraph.NodeType.EMPTY,new ArrayMap<NodeStatus, ImageButtonStyle>());
-            styles.put(AbilityGraph.NodeType.ABILITY,new ArrayMap<NodeStatus, ImageButtonStyle>());
-            styles.put(AbilityGraph.NodeType.EQUIPMENT,new ArrayMap<NodeStatus, ImageButtonStyle>());
-
-            styles.get(AbilityGraph.NodeType.EMPTY).put(NodeStatus.DISABLED,  skin.get("board-disabled",  ImageButton.ImageButtonStyle.class));
-            styles.get(AbilityGraph.NodeType.EMPTY).put(NodeStatus.ENABLED,   skin.get("board-enabled",   ImageButton.ImageButtonStyle.class));
-            styles.get(AbilityGraph.NodeType.EMPTY).put(NodeStatus.ACTIVATED, skin.get("board-activated", ImageButton.ImageButtonStyle.class));
-
-            styles.get(AbilityGraph.NodeType.ABILITY).put(NodeStatus.DISABLED,  skin.get("board-ability-disabled",  ImageButton.ImageButtonStyle.class));
-            styles.get(AbilityGraph.NodeType.ABILITY).put(NodeStatus.ENABLED,   skin.get("board-ability-enabled",   ImageButton.ImageButtonStyle.class));
-            styles.get(AbilityGraph.NodeType.ABILITY).put(NodeStatus.ACTIVATED, skin.get("board-ability-activated", ImageButton.ImageButtonStyle.class));
-
-            styles.get(AbilityGraph.NodeType.EQUIPMENT).put(NodeStatus.DISABLED,  skin.get("board-equip-disabled",  ImageButton.ImageButtonStyle.class));
-            styles.get(AbilityGraph.NodeType.EQUIPMENT).put(NodeStatus.ENABLED,   skin.get("board-equip-enabled",   ImageButton.ImageButtonStyle.class));
-            styles.get(AbilityGraph.NodeType.EQUIPMENT).put(NodeStatus.ACTIVATED, skin.get("board-equip-activated", ImageButton.ImageButtonStyle.class));
-
-
-            setStyle(styles.get(type).get(NodeStatus.DISABLED));
             this.node = node;
+            status = NodeStatus.DISABLED;
+        }
+
+        public void changeStatus(NodeStatus status) {
+            this.setStyle(styles.get(type).get(status));
+            this.status = status;
         }
 
         @Override
@@ -193,7 +273,25 @@ public class GraphWidget extends Group {
 
     }
 
+    private void setupNodeStyles() {
+        // Set Node ImageButton Styles
+        styles = new ArrayMap<>();
+        for(AbilityGraph.NodeType t : AbilityGraph.NodeType.values()) {
+            styles.put(t,new ArrayMap<NodeStatus, ImageButton.ImageButtonStyle>());
+            ArrayMap<NodeStatus, ImageButton.ImageButtonStyle> statusStyles = styles.get(t);
+
+            for(NodeStatus s : NodeStatus.values()) {
+                // Assembles Styles like    "board-" + "empty" +                    "-" + "disabled"
+                statusStyles.put(s,skin.get("board-" + t.toString().toLowerCase() + "-" + s.toString().toLowerCase(),ImageButton.ImageButtonStyle.class));
+            }
+        }
+    }
+
     public enum NodeStatus {
-        DISABLED, ENABLED, ACTIVATED,
+        DISABLED, ENABLED, ACTIVE,
+    }
+
+    public interface CallbackHandler {
+        void onNodeClicked(int nodeID);
     }
 }

@@ -1,87 +1,87 @@
 {
-  com.badlogic.gdx.graphics.Color: {
-	  green: { a: 1, b: 0, g: 1, r: 0 },
-	  white: { a: 1, b: 1, g: 1, r: 1 },
-	  red: { a: 1, b: 0, g: 0, r: 1 },
-	  black: { a: 1, b: 0, g: 0, r: 0 },
-	  grey: { a: 1, b: 0.2, g: 0.2, r: 0.2 },
+  "com.badlogic.gdx.graphics.Color": {
+	  "green":  { "a": 1, "b": 0,   "g": 1,   "r": 0 },
+	  "white":  { "a": 1, "b": 1,   "g": 1,   "r": 1 },
+	  "red":    { "a": 1, "b": 0,   "g": 0,   "r": 1 },
+	  "black":  { "a": 1, "b": 0,   "g": 0,   "r": 0 },
+	  "grey":   { "a": 1, "b": 0.2, "g": 0.2, "r": 0.2 }
   },
 	
-	com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle: {
-    b-toolbar-exit:     {down: toolBarButton-exit-down,       up: toolBarButton-exit-up},
-    b-toolbar-team:     {down: toolBarButton-team-down,       up: toolBarButton-team-up,    checked: toolBarButton-team-down},
-    b-toolbar-equip:    {down: toolBarButton-equip-down,      up: toolBarButton-equip-up,   checked: toolBarButton-equip-down},
-    b-toolbar-items:    {down: toolBarButton-items-down,      up: toolBarButton-items-up,   checked: toolBarButton-items-down},
-    b-toolbar-ability:  {down: toolBarButton-ability-down,    up: toolBarButton-ability-up, checked: toolBarButton-ability-down},
-    b-toolbar-key:      {down: toolBarButton-key-down,        up: toolBarButton-key-up,     checked: toolBarButton-key-down},
+	"com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle": {
+    "b-toolbar-exit":           { "down": "toolBarButton-exit-down",         "up": "toolBarButton-exit-up"},
+    "b-toolbar-team":           { "down": "toolBarButton-team-down",         "up": "toolBarButton-team-up",                 "checked": "toolBarButton-team-down"},
+    "b-toolbar-equip":          { "down": "toolBarButton-equip-down",        "up": "toolBarButton-equip-up",                "checked": "toolBarButton-equip-down"},
+    "b-toolbar-items":          { "down": "toolBarButton-items-down",        "up": "toolBarButton-items-up",                "checked": "toolBarButton-items-down"},
+    "b-toolbar-ability":        { "down": "toolBarButton-ability-down",      "up": "toolBarButton-ability-up",              "checked": "toolBarButton-ability-down"},
+    "b-toolbar-key":            { "down": "toolBarButton-key-down",          "up": "toolBarButton-key-up",                  "checked": "toolBarButton-key-down"},
     
-    b-toolbar-side-equip:     {down: toolBarButtonSide-equip-down,        up: toolBarButtonSide-equip-up,     checked: toolBarButtonSide-equip-down},
-    b-toolbar-side-medicine:  {down: toolBarButtonSide-medicine-down,     up: toolBarButtonSide-medicine-up,  checked: toolBarButtonSide-medicine-down},
-    b-toolbar-side-other:     {down: toolBarButtonSide-other-down,        up: toolBarButtonSide-other-up,     checked: toolBarButtonSide-other-down},
-    b-toolbar-side-key:       {down: toolBarButtonSide-key-down,          up: toolBarButtonSide-key-up,       checked: toolBarButtonSide-key-down},
+    "b-toolbar-side-equip":     { "down": "toolBarButtonSide-equip-down",    "up": "toolBarButtonSide-equip-up",            "checked": "toolBarButtonSide-equip-down"},
+    "b-toolbar-side-medicine":  { "down": "toolBarButtonSide-medicine-down", "up": "toolBarButtonSide-medicine-up",         "checked": "toolBarButtonSide-medicine-down"},
+    "b-toolbar-side-other":     { "down": "toolBarButtonSide-other-down",    "up": "toolBarButtonSide-other-up",            "checked": "toolBarButtonSide-other-down"},
+    "b-toolbar-side-key":       { "down": "toolBarButtonSide-key-down",      "up": "toolBarButtonSide-key-up",              "checked": "toolBarButtonSide-key-down"},
 
-    button-delete:        {down: button-delete-down,        up: button-delete-up},
-    button-use:           {down: button-use-down,           up: button-use-up},
-    button-switch:        {down: button-switch-down,        up: button-switch-up},
-    button-check:         {down: button-check-down,         up: button-check-up, checked: button-check-down},
-    button-check-locked:  {down: button-check-down-locked,  up: button-check-up, checked: button-check-down},
-    button-back:          {down: button-back-down,          up: button-back-up},
-    button-learn:         {down: button-learn-down,         up: button-learn-up},
+    "button-delete":            { "down": "button-delete-down",              "up": "button-delete-up"},
+    "button-use":               { "down": "button-use-down",                 "up": "button-use-up"},
+    "button-switch":            { "down": "button-switch-down",              "up": "button-switch-up"},
+    "button-check":             { "down": "button-check-down",               "up": "button-check-up",                       "checked": "button-check-down"},
+    "button-check-locked":      { "down": "button-check-down-locked",        "up": "button-check-up",                       "checked": "button-check-down"},
+    "button-back":              { "down": "button-back-down",                "up": "button-back-up"},
+    "button-learn":             { "down": "button-learn-down",               "up": "button-learn-up"},
 
-    board-disabled:           {up: ability-circle-inactive,           down: ability-circle-inactive-chosen,           checked: ability-circle-inactive-chosen},
-    board-enabled:            {up: ability-circle-active,             down: ability-circle-active-chosen,             checked: ability-circle-active-chosen},
-    board-activated:          {up: ability-circle-activated,          down: ability-circle-activated-chosen,          checked: ability-circle-activated-chosen},
+    "board-empty-disabled":     {"up": "board-node-empty-disabled",           "down": "board-node-empty-disabled-selected", "checked": "board-node-empty-disabled-selected"},
+    "board-empty-enabled":      {"up": "board-node-empty-enabled",            "down": "board-node-empty-enabled-selected",  "checked": "board-node-empty-enabled-selected"},
+    "board-empty-active":       {"up": "board-node-empty-active",             "down": "board-node-empty-active-selected",   "checked": "board-node-empty-active-selected"},
 
-    board-ability-disabled:   {up: board-ability-disabled,  down: board-ability-disabled-selected,  checked: board-ability-disabled-selected},
-    board-ability-enabled:    {up: board-ability-enabled,   down: board-ability-enabled-selected,   checked: board-ability-enabled-selected},
-    board-ability-activated:  {up: board-ability-activated, down: board-ability-activated-selected, checked: board-ability-activated-selected},
+    "board-ability-disabled":   {"up": "board-ability-disabled",              "down": "board-ability-disabled-selected",    "checked": "board-ability-disabled-selected"},
+    "board-ability-enabled":    {"up": "board-ability-enabled",               "down": "board-ability-enabled-selected",     "checked": "board-ability-enabled-selected"},
+    "board-ability-active":     {"up": "board-ability-active",                "down": "board-ability-active-selected",      "checked": "board-ability-active-selected"},
 
-    board-equip-disabled:   {up: board-equip-disabled,   down: board-equip-disabled-selected,   checked: board-equip-disabled-selected},
-    board-equip-enabled:    {up: board-equip-enabled,    down: board-equip-enabled-selected,    checked: board-equip-enabled-selected},
-    board-equip-activated:  {up: board-equip-activated,  down: board-equip-activated-selected,  checked: board-equip-activated-selected},
+    "board-equipment-disabled":     {"up": "board-equip-disabled",                "down": "board-equip-disabled-selected",      "checked": "board-equip-disabled-selected"},
+    "board-equipment-enabled":      {"up": "board-equip-enabled",                 "down": "board-equip-enabled-selected",       "checked": "board-equip-enabled-selected"},
+    "board-equipment-active":       {"up": "board-equip-active",                  "down": "board-equip-active-selected",        "checked": "board-equip-active-selected"}
 
 	},
 
 
-  com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
-    button-sandstone:  {font: default-font,  down: label-bg-sandstone-down, up: label-bg-sandstone, pressedOffsetY: -1},
+  "com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle": {
+    "button-sandstone":  {"font": "default-font",  "down": "label-bg-sandstone-down", "up": "label-bg-sandstone", "pressedOffsetY": -1},
 
 
-    item-button-sandstone:  {font: default-font,  down: label-bg-sandstone-down, up: label-bg-sandstone, checked: label-bg-sandstone-down, pressedOffsetY: -1, checkedOffsetY: -1},
-    item-button-burgund:    {font: font16w,       down: label-bg-burgund-down,   up: label-bg-burgund,   checked: label-bg-burgund-down},  
+    "item-button-sandstone":  {"font": "default-font",  "down": "label-bg-sandstone-down", "up": "label-bg-sandstone", "checked": "label-bg-sandstone-down", "pressedOffsetY": -1, "checkedOffsetY": -1},
+    "item-button-burgund":    {"font": "font16w",       "down": "label-bg-burgund-down",   "up": "label-bg-burgund",   "checked": "label-bg-burgund-down"}
   },
 	
-	com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
-    default:    {font: default-font},
-    green:      {font: font16g},
-    red:        {font: font16r},
-    burgund:    {font: font16w, background: label-bg-burgund},
-    paper:      {font: font16,  background: label-bg-paper},
-    paper-dark-area:      {font: font16,  background: darker-paper-area},
-    paper-border:{font: font16,  background: paper-border},
-    list-item:  {font: default-font, background: label-bg-sandstone},
+	"com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle": {
+    "default":    {"font": "default-font"},
+    "green":      {"font": "font16g"},
+    "red":        {"font": "font16r"},
+    "burgund":    {"font": "font16w", "background": "label-bg-burgund"},
+    "paper":      {"font": "font16",  "background": "label-bg-paper"},
+    "paper-dark-area":      {"font": "font16",  "background": "darker-paper-area"},
+    "paper-border":{"font": "font16",  "background": "paper-border"},
+    "list-item":  {"font": "default-font", "background": "label-bg-sandstone"},
 
-    elem-earth:       {font: font16w, background: button-element-earth},
-    elem-water:       {font: font16w, background: button-element-water},
-    elem-flame:       {font: font16w, background: button-element-flame},
-    elem-air:         {font: font16,  background: button-element-air},
-    elem-lightning:   {font: font16,  background: button-element-lightning},
-    elem-arthropoda:  {font: font16,  background: button-element-arthropoda},
-    elem-forest:      {font: font16w, background: button-element-forest},
-    elem-mountain:    {font: font16,  background: button-element-mountain},
-    elem-frost:       {font: font16w, background: button-element-frost},
-    elem-spirit:      {font: font16,  background: button-element-spirit},
-    elem-demon:       {font: font16w, background: button-element-demon},
-    elem-lindworm:    {font: font16w, background: button-element-lindworm},
-  }	
+    "elem-earth":       {"font": "font16w", "background": "button-element-earth"},
+    "elem-water":       {"font": "font16w", "background": "button-element-water"},
+    "elem-flame":       {"font": "font16w", "background": "button-element-flame"},
+    "elem-air":         {"font": "font16",  "background": "button-element-air"},
+    "elem-lightning":   {"font": "font16",  "background": "button-element-lightning"},
+    "elem-arthropoda":  {"font": "font16",  "background": "button-element-arthropoda"},
+    "elem-forest":      {"font": "font16w", "background": "button-element-forest"},
+    "elem-mountain":    {"font": "font16",  "background": "button-element-mountain"},
+    "elem-frost":       {"font": "font16w", "background": "button-element-frost"},
+    "elem-spirit":      {"font": "font16",  "background": "button-element-spirit"},
+    "elem-demon":       {"font": "font16w", "background": "button-element-demon"},
+    "elem-lindworm":    {"font": "font16w", "background": "button-element-lindworm"}
+  },
 
-  com.badlogic.gdx.scenes.scene2d.ui.List$ListStyle: {
-    default:   {font: default-font, selection: list-selection},
+  "com.badlogic.gdx.scenes.scene2d.ui.List$ListStyle": {
+    "default":   {"font": "default-font", "selection": "list-selection"}
 
-  }
+  },
 
-  com.badlogic.gdx.scenes.scene2d.ui.ScrollPane$ScrollPaneStyle: {
-    default:   {vScrollKnob: scrollbar-knob, hScrollKnob: scrollbar-knob},
+  "com.badlogic.gdx.scenes.scene2d.ui.ScrollPane$ScrollPaneStyle": {
+    "default":   {"vScrollKnob": "scrollbar-knob", "hScrollKnob": "scrollbar-knob"}
 
   }	
 

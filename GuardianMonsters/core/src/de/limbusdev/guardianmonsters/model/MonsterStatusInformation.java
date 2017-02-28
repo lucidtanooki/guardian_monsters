@@ -13,7 +13,8 @@ public class MonsterStatusInformation {
     /* ............................................................................ ATTRIBUTES .. */
     public int ID;
     public String nameID;
-    public ArrayMap<Integer,Attack> learnableAttacks;
+    public ArrayMap<Integer,Attack> attackAbilityGraphIds;
+    public ArrayMap<Integer, Equipment.EQUIPMENT_TYPE> equipmentAbilityGraphIds;
     public boolean canEvolve;
     public int evolvingAtLevel;
     public int evolution;
@@ -30,15 +31,16 @@ public class MonsterStatusInformation {
      *
      * @param ID                ID
      * @param nameID            nameID
-     * @param learnableAttacks  all attacks with the level where they get learned
+     * @param attackAbilityGraphIds  all attacks with the level where they get learned
      * @param canEvolve         whether monster can reach another evolution state
      * @param evolution         next evolution level (2 for 2_2)
      * @param elements          monsters elements
      */
     public MonsterStatusInformation(
-        int ID, String nameID, ArrayMap<Integer, Attack> learnableAttacks,
+        int ID, String nameID, ArrayMap<Integer, Attack> attackAbilityGraphIds,
         boolean canEvolve, int evolution, int evolvingAtLevel, Array<Element> elements,
         BaseStat baseStat,
+        ArrayMap<Integer, Equipment.EQUIPMENT_TYPE> equipmentAbilityGraphIds,
         Equipment.HeadEquipment head,
         Equipment.BodyEquipment body,
         Equipment.HandEquipment hands,
@@ -46,7 +48,8 @@ public class MonsterStatusInformation {
 
         this.ID = ID;
         this.nameID = nameID;
-        this.learnableAttacks = learnableAttacks;
+        this.attackAbilityGraphIds = attackAbilityGraphIds;
+        this.equipmentAbilityGraphIds = equipmentAbilityGraphIds;
         this.canEvolve = canEvolve;
         this.evolution = evolution;
         this.evolvingAtLevel = evolvingAtLevel;

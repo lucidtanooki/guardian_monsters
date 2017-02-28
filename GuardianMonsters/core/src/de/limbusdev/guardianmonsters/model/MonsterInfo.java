@@ -70,6 +70,13 @@ public class MonsterInfo {
             attacks.put(abilityPos, att);
         }
 
+        ArrayMap<Integer,Equipment.EQUIPMENT_TYPE> equipmentGraph = new ArrayMap<>();
+        XmlReader.Element equipGraphElem = element.getChildByName("ability-graph-equip");
+        equipmentGraph.put(equipGraphElem.getIntAttribute("body"), Equipment.EQUIPMENT_TYPE.BODY);
+        equipmentGraph.put(equipGraphElem.getIntAttribute("hands"), Equipment.EQUIPMENT_TYPE.HANDS);
+        equipmentGraph.put(equipGraphElem.getIntAttribute("head"), Equipment.EQUIPMENT_TYPE.HEAD);
+        equipmentGraph.put(equipGraphElem.getIntAttribute("feet"), Equipment.EQUIPMENT_TYPE.FEET);
+
         XmlReader.Element elemElement = element.getChildByName("elements");
         Array<Element> elements = new Array<>();
         for(int i = 0; i < elemElement.getChildCount(); i++) {
@@ -101,7 +108,7 @@ public class MonsterInfo {
         Equipment.FootEquipment feet = Equipment.FootEquipment.valueOf(equipComp.getAttribute("feet", "claws").toUpperCase());
 
         status = new MonsterStatusInformation(
-            ID, nameID, attacks, canEvolve, evolutionID, evolutionLvl, elements, stat,
+            ID, nameID, attacks, canEvolve, evolutionID, evolutionLvl, elements, stat, equipmentGraph,
             head, body, hand, feet);
 
         return status;

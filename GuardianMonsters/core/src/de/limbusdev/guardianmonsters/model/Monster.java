@@ -76,7 +76,7 @@ public class Monster extends Observable {
         // INIT
         this.attacks = new Array<>();
 
-        for(ObjectMap.Entry<Integer,Attack> e : MonsterInfo.getInstance().getStatusInfos().get(ID).learnableAttacks) {
+        for(ObjectMap.Entry<Integer,Attack> e : MonsterInfo.getInstance().getStatusInfos().get(ID).attackAbilityGraphIds) {
             if(e.key <= level)
                 attacks.add(e.value);
         }

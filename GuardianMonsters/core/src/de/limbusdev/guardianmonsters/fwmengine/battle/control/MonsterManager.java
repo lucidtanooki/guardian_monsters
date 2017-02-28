@@ -3,7 +3,6 @@ package de.limbusdev.guardianmonsters.fwmengine.battle.control;
 
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.ArrayMap;
-import com.badlogic.gdx.utils.I18NBundle;
 
 import de.limbusdev.guardianmonsters.data.BundleAssets;
 import de.limbusdev.guardianmonsters.enums.AttackType;
@@ -35,9 +34,9 @@ public class MonsterManager {
         boolean reachedNextLevel = m.receiveEXP(exp);
         if(reachedNextLevel) {
             if (MonsterInfo.getInstance().getStatusInfos().get(m.ID)
-                    .learnableAttacks.containsKey(m.level))
+                    .attackAbilityGraphIds.containsKey(m.level))
                 m.attacks.add(MonsterInfo.getInstance().getStatusInfos().get(m.ID)
-                        .learnableAttacks.get(m.level));
+                        .attackAbilityGraphIds.get(m.level));
             if(m.level >= MonsterInfo.getInstance().getStatusInfos().get(m.ID).evolvingAtLevel)
                 m.evolution = MonsterInfo.getInstance().getStatusInfos().get(m.ID).evolution;
         }

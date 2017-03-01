@@ -27,10 +27,11 @@ public class AbilityMapSubMenu extends AInventorySubMenu {
 
     private ArrayMap<Integer, Monster> team;
     private AbilityGraph graph;
-    private TeamCircleWidget circleWidget;
     private Label fieldDescription, remainingLevels;
     private Button learn;
     private GraphWidget graphWidget;
+    private Group abilityDescription;
+    private TeamMemberSwitcher switcher;
 
 
     public AbilityMapSubMenu(Skin skin, ArrayMap<Integer,Monster> teamMonsters) {
@@ -48,7 +49,7 @@ public class AbilityMapSubMenu extends AInventorySubMenu {
         GraphWidget.CallbackHandler callbacks = new GraphWidget.CallbackHandler() {
             @Override
             public void onNodeClicked(int nodeID) {
-                Monster monster = team.get(circleWidget.getCurrentPosition());
+                Monster monster = team.get(switcher.getCurrentlyChosen());
                 MonsterStatusInformation msi = MonsterInfo.getInstance().getStatusInfos().get(monster.ID);
                 fieldDescription.setText("Empty");
                 if(msi.attackAbilityGraphIds.containsKey(nodeID)) {
@@ -75,43 +76,43 @@ public class AbilityMapSubMenu extends AInventorySubMenu {
         scrollPane.setScrollPercentY(.5f);
         addActor(scrollPane);
 
-        TeamCircleWidget.ClickHandler clh = new TeamCircleWidget.ClickHandler() {
+        TeamMemberSwitcher.CallbackHandler handler = new TeamMemberSwitcher.CallbackHandler() {
             @Override
-            public void onTeamMemberButton(int position) {
+            public void onChanged(int position) {
                 graphWidget.init(team.get(position));
             }
         };
 
-        Group teamWidget = new Group();
-        teamWidget.setSize(143,200);
-        Label circleBg = new Label("", skin, "list-item");
-        circleBg.setSize(143,200);
-        circleBg.setPosition(0,0,Align.bottomLeft);
-        circleWidget = new TeamCircleWidget(skin, teamMonsters, clh);
-        circleWidget.setPosition(1,48,Align.bottomLeft);
-        teamWidget.addActor(circleBg);
-        teamWidget.addActor(circleWidget);
-        teamWidget.setPosition(2,2,Align.bottomLeft);
-        addActor(teamWidget);
+        switcher = new TeamMemberSwitcher(skin, team, handler);
+        switcher.setPosition(2,202,Align.topLeft);
+        addActor(switcher);
 
+        abilityDescription = new Group();
+        abilityDescription.setSize(200,64);
+        abilityDescription.setPosition(428-2,2,Align.bottomRight);
+        Label descBG = new Label("", skin, "list-item");
+        descBG.setSize(200,64);
+        descBG.setPosition(0,0,Align.bottomLeft);
+        abilityDescription.addActor(descBG);
         fieldDescription = new Label("Test", skin, "default");
         fieldDescription.setSize(120,32);
         fieldDescription.setPosition(3,7,Align.bottomLeft);
         fieldDescription.setAlignment(Align.topLeft,Align.topLeft);
-        teamWidget.addActor(fieldDescription);
+        abilityDescription.addActor(fieldDescription);
 
         learn = new ImageButton(skin, "button-learn");
-        learn.setPosition(140-33,7,Align.bottomLeft);
-        teamWidget.addActor(learn);
+        learn.setPosition(200-4,7,Align.bottomRight);
+        abilityDescription.addActor(learn);
 
         Image lvlImg = new Image(skin.getDrawable("stats-symbol-exp"));
         lvlImg.setSize(16,16);
         lvlImg.setPosition(4,44,Align.bottomLeft);
-        teamWidget.addActor(lvlImg);
+        abilityDescription.addActor(lvlImg);
 
         remainingLevels = new Label("0", skin, "default");
         remainingLevels.setPosition(21,44,Align.bottomLeft);
-        teamWidget.addActor(remainingLevels);
+        abilityDescription.addActor(remainingLevels);
+        addActor(abilityDescription);
 
     }
 }

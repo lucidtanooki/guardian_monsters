@@ -40,6 +40,8 @@
     "board-equipment-enabled":      {"up": "board-equip-enabled",                 "down": "board-equip-enabled-selected",       "checked": "board-equip-enabled-selected"},
     "board-equipment-active":       {"up": "board-equip-active",                  "down": "board-equip-active-selected",        "checked": "board-equip-active-selected"}
 
+      "button-next": {"up": "button-next-up", "down": "button-next-down"},
+      "button-previous": {"up": "button-previous-up", "down": "button-previous-down"}
 	},
 
 

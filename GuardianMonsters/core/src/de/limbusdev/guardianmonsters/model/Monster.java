@@ -2,17 +2,14 @@ package de.limbusdev.guardianmonsters.model;
 
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.ObjectMap;
 
-import java.util.HashSet;
 import java.util.Observable;
-import java.util.Set;
 
 import de.limbusdev.guardianmonsters.enums.Element;
 
 /**
- * Created by georg on 12.12.15.
+ * Created by Georg Eckert on 12.12.15.
  */
 public class Monster extends Observable {
     /* ............................................................................ ATTRIBUTES .. */
@@ -26,7 +23,6 @@ public class Monster extends Observable {
     public Equipment body;
     public Equipment feet;
     public String    nickname;
-    public ArrayMap<Integer,Boolean> abilityNodeStatus;
 
     // -------------------------------------------------------------------------------------- STATUS
     public int ID;
@@ -37,6 +33,7 @@ public class Monster extends Observable {
     public int mStr, mStrFull;
     private int MPfull, MP;
     private int SpeedFull;
+    private int abilityLevels;
 
     public int getSpeed() {
         return Speed;
@@ -45,6 +42,8 @@ public class Monster extends Observable {
     public int getSpeedFull() {
         return SpeedFull;
     }
+
+    public AbilityGraph abilityGraph;
 
     private int Speed;
 
@@ -71,9 +70,8 @@ public class Monster extends Observable {
         this.mDefFull = mDef = base.baseMagDefense;
         this.Speed = this.SpeedFull = base.baseSpeed;
         this.nickname = "";
-        abilityNodeStatus = new ArrayMap<>();
-        for(int i=0; i<100; i++) abilityNodeStatus.put(i,false);
-        activateAbilityNode(0);
+        this.abilityLevels = 3;
+
         // INIT
         this.attacks = new Array<>();
 
@@ -83,6 +81,8 @@ public class Monster extends Observable {
         }
 
         this.elements = MonsterInfo.getInstance().getStatusInfos().get(ID).elements;
+
+        abilityGraph = new AbilityGraph();
 
     }
     /* ............................................................................... METHODS .. */
@@ -109,6 +109,7 @@ public class Monster extends Observable {
             this.mStr +=1;
             this.pDefFull +=1;
             this.mDefFull +=1;
+            this.abilityLevels++;
         }
         System.out.println("EXP: " + this.exp);
 
@@ -346,7 +347,13 @@ public class Monster extends Observable {
         return replacedEq;
     }
 
-    public void activateAbilityNode(int ID) {
-        abilityNodeStatus.put(ID,true);
+    public int getAbilityLevels() {
+        return abilityLevels;
+    }
+
+    public void consumeAbilityLevel() {
+        this.abilityLevels--;
+        setChanged();
+        notifyObservers();
     }
 }

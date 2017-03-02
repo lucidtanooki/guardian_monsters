@@ -115,8 +115,8 @@ public class GraphWidget extends Group implements Observer {
     }
 
     public void refreshStatus(Monster monster) {
-        for(int i : monster.abilityNodeStatus.keys()) {
-            if(monster.abilityNodeStatus.get(i)) {
+        for(int i : monster.abilityGraph.nodeActive.keys()) {
+            if(monster.abilityGraph.nodeActive.get(i)) {
                 nodeWidgets.get(i).changeStatus(NodeStatus.ACTIVE);
                 enableEdgesAt(graph.getVertices().get(i));
                 enableNeighborNodes(graph.getVertices().get(i));

@@ -3,8 +3,6 @@ package de.limbusdev.guardianmonsters.model;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 
-import de.limbusdev.guardianmonsters.enums.SkyDirection;
-
 /**
  * Created by Georg Eckert on 21.02.17.
  */
@@ -20,7 +18,8 @@ public class AbilityGraph {
     }
 
     private final static int X=0, Y=1;
-    private Array<Integer> activatedNodes;
+    public ArrayMap<Integer,Boolean> nodeActive;
+    public ArrayMap<Integer,Boolean> nodeEnabled;
 
     int coords[][] = {
         {0,0,0}, {1,0,1}, {2,1,0}, {3,0,-1}, {4,-1,0}, {5,0,2}, {6,2,1}, {7,0,-2}, {8,-2,-1}, {9,-1,2},
@@ -111,7 +110,8 @@ public class AbilityGraph {
     public AbilityGraph() {
         vertices = new ArrayMap<>();
         edges = new Array<>();
-        activatedNodes = new Array<>();
+        nodeActive = new ArrayMap<>();
+        nodeEnabled = new ArrayMap<>();
 
         for(int i = 0; i < coords.length; i++) {
             int v[] = coords[i];
@@ -123,6 +123,9 @@ public class AbilityGraph {
             edges.add(new Edge(vertices.get(e[X]), vertices.get(e[Y])));
         }
 
+        for(int i=0; i<100; i++) nodeActive.put(i,false);
+        for(int i=0; i<100; i++) nodeEnabled.put(i,false);
+
     }
 
     public ArrayMap<Integer, Vertex> getVertices() {
@@ -133,12 +136,18 @@ public class AbilityGraph {
         return edges;
     }
 
-    public Array<Integer> getActivatedNodes() {
-        return activatedNodes;
-    }
 
     public void activateNode(int ID) {
-        if(!activatedNodes.contains(ID, false))
-            activatedNodes.add(ID);
+        nodeActive.put(ID,true);
+        enableNeighborNodes(ID);
+    }
+
+    public void enableNeighborNodes(int ID) {
+        for (AbilityGraph.Edge e : edges) {
+            if (e.from.ID == ID || e.to.ID == ID) {
+                int nodeToBeEnabled = e.from.ID == ID ? e.to.ID : e.from.ID;
+                nodeEnabled.put(nodeToBeEnabled, true);
+            }
+        }
     }
 }

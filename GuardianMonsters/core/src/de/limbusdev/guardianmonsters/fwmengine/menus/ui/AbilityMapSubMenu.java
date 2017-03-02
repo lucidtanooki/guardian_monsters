@@ -9,6 +9,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ArrayMap;
 
+import java.util.Observable;
+import java.util.Observer;
+
 import de.limbusdev.guardianmonsters.model.AbilityGraph;
 import de.limbusdev.guardianmonsters.model.Monster;
 import de.limbusdev.guardianmonsters.model.MonsterInfo;
@@ -20,7 +23,7 @@ import de.limbusdev.guardianmonsters.utils.GS;
  * Created by Georg Eckert on 21.02.17.
  */
 
-public class AbilityMapSubMenu extends AInventorySubMenu {
+public class AbilityMapSubMenu extends AInventorySubMenu implements Observer {
 
     private ArrayMap<Integer, Monster> team;
     private AbilityGraph graph;
@@ -34,6 +37,9 @@ public class AbilityMapSubMenu extends AInventorySubMenu {
     public AbilityMapSubMenu(Skin skin, ArrayMap<Integer,Monster> teamMonsters) {
         super(skin);
         this.team = teamMonsters;
+        for(Monster m : team.values()) {
+            m.addObserver(this);
+        }
 
         // Initial Setup
         Group container = new Group();
@@ -46,7 +52,19 @@ public class AbilityMapSubMenu extends AInventorySubMenu {
             public void onNodeClicked(int nodeID) {
                 Monster monster = team.get(switcher.getCurrentlyChosen());
                 MonsterStatusInformation msi = MonsterInfo.getInstance().getStatusInfos().get(monster.ID);
-                details.init(msi.attackAbilityGraphIds.get(nodeID), monster.abilityNodeStatus.get(nodeID));
+
+                if(msi.attackAbilityGraphIds.containsKey(nodeID) || msi.equipmentAbilityGraphIds.containsKey(nodeID)) {
+                    if(msi.attackAbilityGraphIds.containsKey(nodeID)) {
+                        details.init(msi.attackAbilityGraphIds.get(nodeID), monster.abilityGraph.nodeActive.get(nodeID),
+                            (monster.abilityGraph.nodeEnabled.get(nodeID) && monster.getAbilityLevels() > 0), nodeID);
+                    }
+                    if(msi.equipmentAbilityGraphIds.containsKey(nodeID)) {
+                        details.init(msi.equipmentAbilityGraphIds.get(nodeID), monster.abilityGraph.nodeActive.get(nodeID),
+                            (monster.abilityGraph.nodeEnabled.get(nodeID) && monster.getAbilityLevels() > 0), nodeID);
+                    }
+                } else {
+                    details.initEmpty(monster.abilityGraph.nodeActive.get(nodeID), (monster.abilityGraph.nodeEnabled.get(nodeID) && monster.getAbilityLevels() > 0), nodeID);
+                }
             }
         };
 
@@ -69,6 +87,7 @@ public class AbilityMapSubMenu extends AInventorySubMenu {
             @Override
             public void onChanged(int position) {
                 graphWidget.init(team.get(position));
+                refresh();
             }
         };
 
@@ -76,7 +95,15 @@ public class AbilityMapSubMenu extends AInventorySubMenu {
         switcher.setPosition(2,202,Align.topLeft);
         addActor(switcher);
 
-        details = new AbilityDetailWidget(skin);
+        AbilityDetailWidget.CallbackHandler learnCallbacks = new AbilityDetailWidget.CallbackHandler() {
+            @Override
+            public void onLearn(int nodeID) {
+                team.get(switcher.getCurrentlyChosen()).consumeAbilityLevel();
+                team.get(switcher.getCurrentlyChosen()).abilityGraph.activateNode(nodeID);
+            }
+        };
+
+        details = new AbilityDetailWidget(skin, learnCallbacks);
         details.setPosition(GS.WIDTH-2,2,Align.bottomRight);
         addActor(details);
 
@@ -90,15 +117,29 @@ public class AbilityMapSubMenu extends AInventorySubMenu {
         Image lvls = new Image(skin.getDrawable("stats-symbol-exp"));
         lvls.setSize(16,16);
         lvls.setPosition(4,5,Align.bottomLeft);
-        remainingLvls = new Label("0", skin, "default");
+        remainingLvls = new Label(Integer.toString(team.get(0).getAbilityLevels()), skin, "default");
         remainingLvls.setPosition(22,6,Align.bottomLeft);
         remLvlGrp.addActor(lvls);
         remLvlGrp.addActor(remainingLvls);
         addActor(remainingLvlsCont);
 
         if(MonsterInfo.getInstance().getStatusInfos().get(team.get(0).ID).attackAbilityGraphIds.containsKey(0)) {
-            details.init(MonsterInfo.getInstance().getStatusInfos().get(team.get(0).ID).attackAbilityGraphIds.get(0), team.get(0).abilityNodeStatus.get(0));
+            details.init(MonsterInfo.getInstance().getStatusInfos().get(team.get(0).ID).attackAbilityGraphIds.get(0),true, true,0);
         }
 
+    }
+
+    public void refresh() {
+        remainingLvls.setText(Integer.toString(team.get(switcher.getCurrentlyChosen()).getAbilityLevels()));
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        if(o instanceof Monster) {
+            Monster m = (Monster)o;
+            if(m.equals(team.get(switcher.getCurrentlyChosen()))) {
+                refresh();
+            }
+        }
     }
 }

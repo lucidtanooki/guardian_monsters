@@ -33,17 +33,17 @@ public class GameStateDebugger {
     private void setUpTestInventory() {
         TeamComponent herTeam = new TeamComponent();
         Monster mon = BattleFactory.getInstance().createMonster(1);
-        mon.activateAbilityNode(0);
-        mon.activateAbilityNode(1);
-        mon.activateAbilityNode(5);
-        mon.activateAbilityNode(9);
-        mon.activateAbilityNode(17);
-        mon.activateAbilityNode(21);
-        mon.activateAbilityNode(2);
-        mon.activateAbilityNode(3);
-        mon.activateAbilityNode(4);
-        mon.activateAbilityNode(3);
-        mon.activateAbilityNode(7);
+        mon.abilityGraph.activateNode(0);
+        mon.abilityGraph.activateNode(1);
+        mon.abilityGraph.activateNode(5);
+        mon.abilityGraph.activateNode(9);
+        mon.abilityGraph.activateNode(17);
+        mon.abilityGraph.activateNode(21);
+        mon.abilityGraph.activateNode(2);
+        mon.abilityGraph.activateNode(3);
+        mon.abilityGraph.activateNode(4);
+        mon.abilityGraph.activateNode(3);
+        mon.abilityGraph.activateNode(7);
         herTeam.monsters.put(0,mon);
         herTeam.monsters.put(1,BattleFactory.getInstance().createMonster(2));
         herTeam.monsters.put(2,BattleFactory.getInstance().createMonster(3));

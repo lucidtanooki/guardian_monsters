@@ -9,7 +9,7 @@ import java.util.Observable;
 
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.AttackCalculationReport;
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.MonsterSpeedComparator;
-import de.limbusdev.guardianmonsters.model.Attack;
+import de.limbusdev.guardianmonsters.model.Ability;
 import de.limbusdev.guardianmonsters.model.Monster;
 import de.limbusdev.guardianmonsters.utils.DebugOutput;
 
@@ -120,7 +120,7 @@ public class BattleSystem extends Observable {
             throw new IllegalStateException(TAG + " you forgot to set the " + (targetChosen ? "attack" : "target"));
         }
 
-        // Calculate Attack
+        // Calculate Ability
         latestAttackReport = MonsterManager.calcAttack(
             getActiveMonster(), target, getActiveMonster().attacks.get(attack));
         callbackHandler.onAttack(getActiveMonster(), target, getActiveMonster().attacks.get(attack), latestAttackReport);
@@ -362,7 +362,7 @@ public class BattleSystem extends Observable {
     public interface CallbackHandler {
         void onMonsterKilled(Monster m);
         void onQueueUpdated();
-        void onAttack(Monster attacker, Monster target, Attack attack, AttackCalculationReport rep);
+        void onAttack(Monster attacker, Monster target, Ability ability, AttackCalculationReport rep);
         void onDefense(Monster defensiveMonster);
         void onPlayersTurn();
         void onBattleEnds(boolean winnerSide);

@@ -60,12 +60,12 @@ public class MonsterInfo {
 
         AttackInfo attInf = AttackInfo.getInst();
         XmlReader.Element attElement = element.getChildByName("attacks");
-        ArrayMap<Integer,Attack> attacks = new ArrayMap<>();
+        ArrayMap<Integer,Ability> attacks = new ArrayMap<>();
         for(int i = 0; i < attElement.getChildCount(); i++) {
             XmlReader.Element a = attElement.getChild(i);
             int ID = a.getIntAttribute("id", 0);
             Element el = Element.valueOf(a.getAttribute("element").toUpperCase());
-            Attack att = attInf.getAttack(el, ID);
+            Ability att = attInf.getAttack(el, ID);
             int abilityPos = a.getIntAttribute("abilityPos", 0);
             attacks.put(abilityPos, att);
         }

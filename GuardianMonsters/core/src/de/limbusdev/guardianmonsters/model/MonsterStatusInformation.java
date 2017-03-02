@@ -13,7 +13,7 @@ public class MonsterStatusInformation {
     /* ............................................................................ ATTRIBUTES .. */
     public int ID;
     public String nameID;
-    public ArrayMap<Integer,Attack> attackAbilityGraphIds;
+    public ArrayMap<Integer,Ability> attackAbilityGraphIds;
     public ArrayMap<Integer, Equipment.EQUIPMENT_TYPE> equipmentAbilityGraphIds;
     public boolean canEvolve;
     public int evolvingAtLevel;
@@ -37,7 +37,7 @@ public class MonsterStatusInformation {
      * @param elements          monsters elements
      */
     public MonsterStatusInformation(
-        int ID, String nameID, ArrayMap<Integer, Attack> attackAbilityGraphIds,
+        int ID, String nameID, ArrayMap<Integer, Ability> attackAbilityGraphIds,
         boolean canEvolve, int evolution, int evolvingAtLevel, Array<Element> elements,
         BaseStat baseStat,
         ArrayMap<Integer, Equipment.EQUIPMENT_TYPE> equipmentAbilityGraphIds,

@@ -3,7 +3,6 @@ package de.limbusdev.guardianmonsters.model;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.XmlReader;
 
@@ -21,7 +20,7 @@ import de.limbusdev.guardianmonsters.enums.SFXType;
 public class AttackInfo {
 
     private static AttackInfo instance;
-    private ArrayMap<Element, ArrayMap<Integer, Attack>> attacks;
+    private ArrayMap<Element, ArrayMap<Integer, Ability>> attacks;
 
     private AttackInfo() {
         attacks = new ArrayMap<>();
@@ -37,9 +36,9 @@ public class AttackInfo {
         }
 
         for (int i = 0; i < element.getChildCount(); i++) {
-            Attack att = parseAttack(element.getChild(i));
+            Ability att = parseAttack(element.getChild(i));
             if(!attacks.containsKey(att.element)) {
-                attacks.put(att.element, new ArrayMap<Integer, Attack>());
+                attacks.put(att.element, new ArrayMap<Integer, Ability>());
             }
             attacks.get(att.element).put(att.ID, att);
         }
@@ -54,7 +53,7 @@ public class AttackInfo {
 
     /* ............................................................................ ATTRIBUTES .. */
 
-    private Attack parseAttack(XmlReader.Element element) {
+    private Ability parseAttack(XmlReader.Element element) {
         Element e = Element.valueOf(element.getAttribute("element", "none").toUpperCase());
         AttackType a = AttackType.valueOf(element.get("category", "physical").toUpperCase());
         int id = element.getIntAttribute("id", 0);
@@ -64,12 +63,12 @@ public class AttackInfo {
         int sfxIndex = element.getChildByName("sfx").getIntAttribute("index", 0);
         AnimationType animType = AnimationType.valueOf(element.get("animation", "none").toUpperCase());
 
-        Attack att;
+        Ability att;
         if(element.getChildByName("mpcost") == null) {
-            att = new Attack(id, a, e, damage, nameID, sfxType, sfxIndex, animType);
+            att = new Ability(id, a, e, damage, nameID, sfxType, sfxIndex, animType);
         } else {
             int mpcost = element.getInt("mpcost", 0);
-            att = new Attack(id, a, e, damage, nameID, sfxType, sfxIndex, animType, mpcost);
+            att = new Ability(id, a, e, damage, nameID, sfxType, sfxIndex, animType, mpcost);
         }
         return att;
     }
@@ -80,7 +79,7 @@ public class AttackInfo {
      * @param index
      * @return
      */
-    public Attack getAttack(Element e, int index) {
+    public Ability getAttack(Element e, int index) {
         return attacks.get(e).get(index);
     }
 

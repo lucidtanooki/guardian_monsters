@@ -1,7 +1,7 @@
 
 battleUI.png
 format: RGBA8888
-filter: MipMapLinearLinear,MipMapLinearLinear
+filter: MipMapNearestNearest,MipMapNearestLinear
 repeat: none
 bg
   rotate: false

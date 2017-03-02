@@ -7,7 +7,7 @@ import de.limbusdev.guardianmonsters.data.BundleAssets;
 import de.limbusdev.guardianmonsters.data.SkinAssets;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.AHUD;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
-import de.limbusdev.guardianmonsters.model.Attack;
+import de.limbusdev.guardianmonsters.model.Ability;
 import de.limbusdev.guardianmonsters.model.Monster;
 
 public class AttackMenuWidget extends SevenButtonsWidget {
@@ -25,7 +25,7 @@ public class AttackMenuWidget extends SevenButtonsWidget {
     public void init(Monster monster) {
 
         // get monsters attacks
-        Array<Attack> attacks = monster.attacks;
+        Array<Ability> attacks = monster.attacks;
 
         // Set all buttons inactive
         for(Integer i : getButtons().keys()) {
@@ -34,12 +34,12 @@ public class AttackMenuWidget extends SevenButtonsWidget {
 
         // for every attack, activate a button
         for(int i=0; i<attacks.size && i < 7; i++) {
-            Attack att = attacks.get(i);
+            Ability att = attacks.get(i);
             setButtonStyle(i,skin, SkinAssets.attackButtonStyle(att.element));
             String mpCostString = (att.MPcost > 0) ? (" " + Integer.toString(att.MPcost)) : "";
             setButtonText(i,Services.getL18N().l18n(BundleAssets.ATTACKS).get(att.name) + mpCostString);
 
-            // Disable Attack, when monster does not have enough MP for it
+            // Disable Ability, when monster does not have enough MP for it
             if(att.MPcost <= monster.getMP()) enableButton(i);
         }
     }

@@ -60,8 +60,8 @@ public class BattleStringBuilder {
         System.out.println("Chosen Opponent: " + chosenTarget);
         System.out.println("----- lineUpForAttack()        -----");
         System.out.println("Position: " + m.battleFieldPosition);
-        System.out.println("Attack: " + m.monster.attacks.get(attack).name + " | Target: " + chosenTarget
-            + " | Attack chosen: " + m.attackChosen);
+        System.out.println("Ability: " + m.monster.attacks.get(attack).name + " | Target: " + chosenTarget
+            + " | Ability chosen: " + m.attackChosen);
         System.out.println();
     }
     /* ..................................................................... GETTERS & SETTERS .. */

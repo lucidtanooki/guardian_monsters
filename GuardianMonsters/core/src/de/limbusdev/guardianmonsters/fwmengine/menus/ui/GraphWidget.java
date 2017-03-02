@@ -2,7 +2,6 @@ package de.limbusdev.guardianmonsters.fwmengine.menus.ui;
 
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.ButtonGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
@@ -17,12 +16,11 @@ import java.util.Observer;
 
 import de.limbusdev.guardianmonsters.geometry.IntVec2;
 import de.limbusdev.guardianmonsters.model.AbilityGraph;
-import de.limbusdev.guardianmonsters.model.Attack;
+import de.limbusdev.guardianmonsters.model.Ability;
 import de.limbusdev.guardianmonsters.model.Equipment;
 import de.limbusdev.guardianmonsters.model.Monster;
 import de.limbusdev.guardianmonsters.model.MonsterInfo;
 import de.limbusdev.guardianmonsters.model.MonsterStatusInformation;
-import de.limbusdev.guardianmonsters.utils.GS;
 
 /**
  * Created by georg on 27.02.17.
@@ -70,7 +68,7 @@ public class GraphWidget extends Group implements Observer {
 
         MonsterStatusInformation msi = MonsterInfo.getInstance().getStatusInfos().get(monster.ID);
         ArrayMap<Integer,Equipment.EQUIPMENT_TYPE> equipments = msi.equipmentAbilityGraphIds;
-        ArrayMap<Integer,Attack> abilities = msi.attackAbilityGraphIds;
+        ArrayMap<Integer,Ability> abilities = msi.attackAbilityGraphIds;
 
         edgeWidgets.clear();
         for(AbilityGraph.Edge edge : graph.getEdges()) {
@@ -117,10 +115,12 @@ public class GraphWidget extends Group implements Observer {
     }
 
     public void refreshStatus(Monster monster) {
-        for(int i : monster.activatedAbilityNodes) {
-            nodeWidgets.get(i).changeStatus(NodeStatus.ACTIVE);
-            enableEdgesAt(graph.getVertices().get(i));
-            enableNeighborNodes(graph.getVertices().get(i));
+        for(int i : monster.abilityNodeStatus.keys()) {
+            if(monster.abilityNodeStatus.get(i)) {
+                nodeWidgets.get(i).changeStatus(NodeStatus.ACTIVE);
+                enableEdgesAt(graph.getVertices().get(i));
+                enableNeighborNodes(graph.getVertices().get(i));
+            }
         }
     }
 

@@ -19,7 +19,7 @@ import de.limbusdev.guardianmonsters.fwmengine.battle.ui.AHUD;
 import de.limbusdev.guardianmonsters.geometry.IntVec2;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Media;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
-import de.limbusdev.guardianmonsters.model.Attack;
+import de.limbusdev.guardianmonsters.model.Ability;
 import de.limbusdev.guardianmonsters.model.Monster;
 import de.limbusdev.guardianmonsters.utils.GS;
 
@@ -150,13 +150,13 @@ public class BattleAnimationWidget extends BattleWidget implements ObservableWid
     }
 
     /**
-     * Animate an attack of the given monster
+     * Animate an ability of the given monster
      * @param attPos    position of attacker
      * @param defPos    position of defender
      * @param side      side of attacker
      * @param defSide   side of target
      */
-    public void animateAttack(final int attPos, final int defPos, boolean side, boolean defSide, final Attack attack) {
+    public void animateAttack(final int attPos, final int defPos, boolean side, boolean defSide, final Ability ability) {
         Image attIm;
         final IntVec2 startPos,endPos;
 
@@ -194,23 +194,23 @@ public class BattleAnimationWidget extends BattleWidget implements ObservableWid
         if(side) attIm = monsterImgsLeft.get(attPos);
         else attIm = monsterImgsRight.get(attPos);
 
-        attIm.addAction(getAnimationSequence(attack,startPos,endPos, defPos, side, defSide));
+        attIm.addAction(getAnimationSequence(ability,startPos,endPos, defPos, side, defSide));
     }
 
 
     /**
      * Assembles the animation action sequence
-     * @param attack
+     * @param ability
      * @param origin    position of the attacks origin
      * @param target    position of the attacks target
      * @return
      */
-    private Action getAnimationSequence(final Attack attack, final IntVec2 origin, final IntVec2 target, final int targetPos,
+    private Action getAnimationSequence(final Ability ability, final IntVec2 origin, final IntVec2 target, final int targetPos,
                                         boolean side, final boolean defSide) {
         final boolean direction = defSide;
         Action action;
 
-        // Short delay before attack starts
+        // Short delay before ability starts
         Action delayAction = Actions.delay(.5f);
         Action horMovingAttDelay = Actions.delay(1f);
 
@@ -220,11 +220,11 @@ public class BattleAnimationWidget extends BattleWidget implements ObservableWid
         // Moves actor back from target to origin
         Action moveToOriginAction = Actions.moveToAligned(origin.x, origin.y, Align.center, .4f, Interpolation.pow2In);
 
-        // Plays the attack animatiom
+        // Plays the ability animatiom
         Action attackAnimationAction = Actions.run(new Runnable() {
             @Override
             public void run() {
-                animateAttackOfType(attack, origin, target);
+                animateAttackOfType(ability, origin, target);
             }
         });
 
@@ -232,7 +232,7 @@ public class BattleAnimationWidget extends BattleWidget implements ObservableWid
         Action playSFXAction = Actions.run(new Runnable() {
             @Override
             public void run() {
-                Services.getAudio().playSound(AudioAssets.get().getBattleSFX(attack.sfxType,0));
+                Services.getAudio().playSound(AudioAssets.get().getBattleSFX(ability.sfxType,0));
             }
         });
 
@@ -244,7 +244,7 @@ public class BattleAnimationWidget extends BattleWidget implements ObservableWid
             }
         });
 
-        // Animates the impact of the attack on the target
+        // Animates the impact of the ability on the target
         Action animateImpactAction = Actions.run(new Runnable() {
             @Override
             public void run() {
@@ -252,7 +252,7 @@ public class BattleAnimationWidget extends BattleWidget implements ObservableWid
             }
         });
 
-        switch(attack.animationType) {
+        switch(ability.animationType) {
             case CONTACT:
                 action = Actions.sequence(delayAction,moveToTargetAction,attackAnimationAction,
                     playSFXAction,animateImpactAction,callbackAction,moveToOriginAction);
@@ -295,17 +295,17 @@ public class BattleAnimationWidget extends BattleWidget implements ObservableWid
     }
 
     /**
-     * Takes an attack and starts the animation
-     * @param attack
+     * Takes an ability and starts the animation
+     * @param ability
      */
-    private void animateAttackOfType(Attack attack, IntVec2 origin, IntVec2 target) {
+    private void animateAttackOfType(Ability ability, IntVec2 origin, IntVec2 target) {
 
         boolean direction = origin.x > target.x;
 
-        Animation anim = media.getAttackAnimation(attack.name);
+        Animation anim = media.getAttackAnimation(ability.name);
         SelfRemovingAnimation sra = new SelfRemovingAnimation(anim);
         anim.setFrameDuration(.1f);
-        // Attack direction
+        // Ability direction
         if(direction == LEFT) {
             sra.setSize(256,256);
         } else {
@@ -313,7 +313,7 @@ public class BattleAnimationWidget extends BattleWidget implements ObservableWid
         }
         sra.setAlign(Align.center);
 
-        switch(attack.animationType) {
+        switch(ability.animationType) {
             case MOVING_HOR:
                 anim.setFrameDuration(1f/anim.getKeyFrames().length);
                 sra.setPosition(origin.x, origin.y, Align.center);

@@ -2,6 +2,7 @@ package de.limbusdev.guardianmonsters.model;
 
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.ObjectMap;
 
 import java.util.HashSet;
@@ -15,7 +16,7 @@ import de.limbusdev.guardianmonsters.enums.Element;
  */
 public class Monster extends Observable {
     /* ............................................................................ ATTRIBUTES .. */
-    public Array<Attack> attacks;
+    public Array<Ability> attacks;
     public static int INSTANCECOUNTER=0;
     public int INSTANCE_ID;
     public int evolution;
@@ -25,8 +26,7 @@ public class Monster extends Observable {
     public Equipment body;
     public Equipment feet;
     public String    nickname;
-    public Set<Integer> activatedAbilityNodes;
-
+    public ArrayMap<Integer,Boolean> abilityNodeStatus;
 
     // -------------------------------------------------------------------------------------- STATUS
     public int ID;
@@ -71,12 +71,13 @@ public class Monster extends Observable {
         this.mDefFull = mDef = base.baseMagDefense;
         this.Speed = this.SpeedFull = base.baseSpeed;
         this.nickname = "";
-        activatedAbilityNodes = new HashSet<>();
+        abilityNodeStatus = new ArrayMap<>();
+        for(int i=0; i<100; i++) abilityNodeStatus.put(i,false);
         activateAbilityNode(0);
         // INIT
         this.attacks = new Array<>();
 
-        for(ObjectMap.Entry<Integer,Attack> e : MonsterInfo.getInstance().getStatusInfos().get(ID).attackAbilityGraphIds) {
+        for(ObjectMap.Entry<Integer,Ability> e : MonsterInfo.getInstance().getStatusInfos().get(ID).attackAbilityGraphIds) {
             if(e.key <= level)
                 attacks.add(e.value);
         }
@@ -346,6 +347,6 @@ public class Monster extends Observable {
     }
 
     public void activateAbilityNode(int ID) {
-        activatedAbilityNodes.add(ID);
+        abilityNodeStatus.put(ID,true);
     }
 }

@@ -32,7 +32,7 @@ public class SevenButtonsWidget extends BattleWidget {
 
         buttons = new ArrayMap<Integer, TextButton>();
 
-        // Attack Buttons
+        // Ability Buttons
         TextButton tb = new TextButton("", skin, "tb-attack-none");
         tb.setSize(82*GS.zoom,32*GS.zoom);
         tb.setPosition(GS.RES_X/2,32*GS.zoom+1*GS.zoom,Align.center);

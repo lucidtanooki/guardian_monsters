@@ -5,12 +5,11 @@ import de.limbusdev.guardianmonsters.enums.AnimationType;
 import de.limbusdev.guardianmonsters.enums.AttackType;
 import de.limbusdev.guardianmonsters.enums.Element;
 import de.limbusdev.guardianmonsters.enums.SFXType;
-import de.limbusdev.guardianmonsters.utils.GS;
 
 /**
  * Created by georg on 06.12.15.
  */
-public class Attack {
+public class Ability {
     /* ............................................................................ ATTRIBUTES .. */
     public final int ID;
     public AttackType attackType;
@@ -33,8 +32,8 @@ public class Attack {
      * @param sfxIndex
      * @param animType
      */
-    public Attack(int ID, AttackType attackType, Element element, int damage, String name, SFXType sfxType,
-                  int sfxIndex, AnimationType animType) {
+    public Ability(int ID, AttackType attackType, Element element, int damage, String name, SFXType sfxType,
+                   int sfxIndex, AnimationType animType) {
         this(ID,attackType,element,damage,name,sfxType,sfxIndex,animType,0);
     }
 
@@ -50,8 +49,8 @@ public class Attack {
      * @param animType
      * @param MPcost
      */
-    public Attack(int ID, AttackType attackType, Element element, int damage, String name, SFXType sfxType,
-                  int sfxIndex, AnimationType animType, int MPcost) {
+    public Ability(int ID, AttackType attackType, Element element, int damage, String name, SFXType sfxType,
+                   int sfxIndex, AnimationType animType, int MPcost) {
         this.ID = ID;
         this.element = element;
         this.attackType = attackType;

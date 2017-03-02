@@ -4,8 +4,7 @@ import de.limbusdev.guardianmonsters.enums.AnimationType;
 import de.limbusdev.guardianmonsters.enums.AttackType;
 import de.limbusdev.guardianmonsters.enums.Element;
 import de.limbusdev.guardianmonsters.enums.SFXType;
-import de.limbusdev.guardianmonsters.model.Attack;
-import de.limbusdev.guardianmonsters.model.AttackInfo;
+import de.limbusdev.guardianmonsters.model.Ability;
 import de.limbusdev.guardianmonsters.model.Monster;
 
 /**
@@ -15,17 +14,17 @@ import de.limbusdev.guardianmonsters.model.Monster;
 public class AttackCalculationReport {
     public Monster attacker;
     public Monster defender;
-    public Attack attack;
+    public Ability attack;
 
     public int damage;
     public float effectiveness;
 
-    public AttackCalculationReport(Monster att, Monster def, int damage, float effectiveness, Attack attack) {
+    public AttackCalculationReport(Monster att, Monster def, int damage, float effectiveness, Ability ability) {
         this.attacker = att;
         this.defender = def;
         this.damage = damage;
         this.effectiveness = effectiveness;
-        this.attack = attack;
+        this.attack = ability;
     }
 
     /**
@@ -37,6 +36,6 @@ public class AttackCalculationReport {
         this.defender = null;
         this.damage = 0;
         this.effectiveness = 0;
-        this.attack = new Attack(0, AttackType.PHYSICAL, Element.NONE, 0, "", SFXType.HIT, 0, AnimationType.NONE);
+        this.attack = new Ability(0, AttackType.PHYSICAL, Element.NONE, 0, "", SFXType.HIT, 0, AnimationType.NONE);
     }
 }

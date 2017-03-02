@@ -12,14 +12,12 @@ import de.limbusdev.guardianmonsters.fwmengine.battle.model.BattleFactory;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.BattleScreen;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.InventoryScreen;
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.OutdoorGameWorldScreen;
-import de.limbusdev.guardianmonsters.model.Attack;
+import de.limbusdev.guardianmonsters.model.Ability;
 import de.limbusdev.guardianmonsters.model.AttackInfo;
 import de.limbusdev.guardianmonsters.model.Inventory;
-import de.limbusdev.guardianmonsters.model.Item;
 import de.limbusdev.guardianmonsters.model.ItemInfo;
 import de.limbusdev.guardianmonsters.model.Monster;
 import de.limbusdev.guardianmonsters.model.MonsterInfo;
-import de.limbusdev.guardianmonsters.model.MonsterStatusInformation;
 
 /**
  * Created by georg on 15.11.16.
@@ -35,12 +33,17 @@ public class GameStateDebugger {
     private void setUpTestInventory() {
         TeamComponent herTeam = new TeamComponent();
         Monster mon = BattleFactory.getInstance().createMonster(1);
+        mon.activateAbilityNode(0);
         mon.activateAbilityNode(1);
+        mon.activateAbilityNode(5);
+        mon.activateAbilityNode(9);
+        mon.activateAbilityNode(17);
+        mon.activateAbilityNode(21);
         mon.activateAbilityNode(2);
         mon.activateAbilityNode(3);
         mon.activateAbilityNode(4);
-        mon.activateAbilityNode(5);
-        mon.activateAbilityNode(6);
+        mon.activateAbilityNode(3);
+        mon.activateAbilityNode(7);
         herTeam.monsters.put(0,mon);
         herTeam.monsters.put(1,BattleFactory.getInstance().createMonster(2));
         herTeam.monsters.put(2,BattleFactory.getInstance().createMonster(3));
@@ -129,7 +132,7 @@ public class GameStateDebugger {
             }
 
             @Override
-            public void onAttack(Monster attacker, Monster target, Attack attack, AttackCalculationReport rep) {
+            public void onAttack(Monster attacker, Monster target, Ability attack, AttackCalculationReport rep) {
                 // TODO
             }
 

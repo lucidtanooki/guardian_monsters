@@ -1,140 +1,140 @@
 <attacks>
     <!-- ................................................................................... ANY -->
-    <attack id="1" element="none" nameID="attNone1_selfdef">
+    <ability id="1" element="none" nameID="attNone1_selfdef">
         <damage>0</damage>
         <sfx type="none" index="0" />
         <animation>none</animation>
         <category>physical</category>
-    </attack>
+    </ability>
 
-    <attack id="2" element="none" nameID="attNone2_kick">
+    <ability id="2" element="none" nameID="attNone2_kick">
         <damage>5</damage>
         <sfx type="hit" index="0" />
         <animation>contact</animation>
         <category>physical</category>
-    </attack>
+    </ability>
 
-    <attack id="3" element="none" nameID="attNone3_tooth">
+    <ability id="3" element="none" nameID="attNone3_tooth">
         <damage>5</damage>
         <sfx type="hit" index="0" />
         <animation>contact</animation>
         <category>physical</category>
-    </attack>
+    </ability>
 
-    <attack id="4" element="none" nameID="attNone4_punch">
+    <ability id="4" element="none" nameID="attNone4_punch">
         <damage>10</damage>
         <sfx type="hit" index="0" />
         <animation>contact</animation>
         <category>physical</category>
-    </attack>
+    </ability>
 
-    <attack id="5" element="none" nameID="attNone5_slap">
+    <ability id="5" element="none" nameID="attNone5_slap">
         <damage>15</damage>
         <sfx type="hit" index="0" />
         <animation>contact</animation>
         <category>physical</category>
-    </attack>
+    </ability>
 
-    <attack id="6" element="none" nameID="attNone6_triphazard">
+    <ability id="6" element="none" nameID="attNone6_triphazard">
         <damage>20</damage>
         <sfx type="hit" index="0" />
         <animation>contact</animation>
         <category>physical</category>
-    </attack>
+    </ability>
 
 
     <!-- ................................................................................. FIRE -->
-    <attack id="1" element="fire" nameID="attFire1_embers">
+    <ability id="1" element="fire" nameID="attFire1_embers">
         <damage>5</damage>
         <sfx type="hit" index="0" />
         <animation>contactless</animation>
         <mpcost>1</mpcost>
         <category>magical</category>
-    </attack>
+    </ability>
 
-    <attack id="2" element="fire" nameID="attFire2_fire">
+    <ability id="2" element="fire" nameID="attFire2_fire">
         <damage>10</damage>
         <sfx type="hit" index="0" />
         <animation>moving_hor</animation>
         <mpcost>2</mpcost>
         <category>magical</category>
-    </attack>
+    </ability>
 
-    <attack id="3" element="fire" nameID="attFire3_flame">
+    <ability id="3" element="fire" nameID="attFire3_flame">
         <damage>20</damage>
         <sfx type="hit" index="0" />
         <animation>moving_hor</animation>
         <mpcost>3</mpcost>
         <category>magical</category>
-    </attack>
+    </ability>
 
-    <attack id="4" element="fire" nameID="attFire2_blaze">
+    <ability id="4" element="fire" nameID="attFire2_blaze">
         <damage>40</damage>
         <sfx type="hit" index="0" />
         <animation>moving_hor</animation>
         <mpcost>4</mpcost>
         <category>magical</category>
-    </attack>
+    </ability>
 
 
     <!-- ................................................................................. EARTH -->
-    <attack id="1" element="earth" nameID="attEarth1_dirt">
+    <ability id="1" element="earth" nameID="attEarth1_dirt">
         <damage>5</damage>
         <sfx type="hit" index="0" />
         <animation>moving_hor</animation>
         <category>physical</category>
-    </attack>
+    </ability>
 
-    <attack id="2" element="earth" nameID="attEarth2_mud">
+    <ability id="2" element="earth" nameID="attEarth2_mud">
         <damage>10</damage>
         <sfx type="hit" index="0" />
         <animation>moving_hor</animation>
         <category>physical</category>
-    </attack>
+    </ability>
 
-    <attack id="3" element="earth" nameID="attEarth3_stones">
+    <ability id="3" element="earth" nameID="attEarth3_stones">
         <damage>20</damage>
         <sfx type="hit" index="0" />
         <animation>moving_hor</animation>
         <category>physical</category>
-    </attack>
+    </ability>
 
-    <attack id="4" element="earth" nameID="attEarth4_landslide">
+    <ability id="4" element="earth" nameID="attEarth4_landslide">
         <damage>40</damage>
         <sfx type="hit" index="0" />
         <animation>moving_hor</animation>
         <category>physical</category>
-    </attack>
+    </ability>
 
 
     <!-- ................................................................................. WATER -->
-    <attack id="1" element="water" nameID="attWater1_sprinkle">
+    <ability id="1" element="water" nameID="attWater1_sprinkle">
         <damage>5</damage>
         <sfx type="hit" index="0" />
         <animation>moving_hor</animation>
         <category>physical</category>
-    </attack>
+    </ability>
 
-    <attack id="2" element="water" nameID="attWater2_shower">
+    <ability id="2" element="water" nameID="attWater2_shower">
         <damage>10</damage>
         <sfx type="hit" index="0" />
         <animation>moving_hor</animation>
         <category>physical</category>
-    </attack>
+    </ability>
 
-    <attack id="3" element="water" nameID="attWater3_splash">
+    <ability id="3" element="water" nameID="attWater3_splash">
         <damage>20</damage>
         <sfx type="hit" index="0" />
         <animation>moving_hor</animation>
         <category>physical</category>
-    </attack>
+    </ability>
 
-    <attack id="4" element="water" nameID="attWater4_waterjet">
+    <ability id="4" element="water" nameID="attWater4_waterjet">
         <damage>40</damage>
         <sfx type="hit" index="0" />
         <animation>moving_hor</animation>
         <category>physical</category>
-    </attack>
+    </ability>
 
 
 

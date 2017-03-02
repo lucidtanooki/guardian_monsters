@@ -6,13 +6,15 @@
             <element>earth</element>
         </elements>
         <attacks>
-            <attack element="none"   id="1" abilityPos="0" /> <!-- Self Defense, Attack 1 in Category ANY -->
-            <attack element="none"   id="2" abilityPos="1" /> <!-- Bite -->
-            <attack element="earth" id="1" abilityPos="5" /> <!-- Earth, available on Ability Board, Field 5 -->
+            <ability element="none"   id="2" abilityPos="0" />
+            <ability element="earth" id="1" abilityPos="9" />
+            <ability element="earth" id="2" abilityPos="13" />
+            <ability element="earth" id="3" abilityPos="11" />
+            <ability element="earth" id="4" abilityPos="15" />
         </attacks>
         <basestats hp="99" mp="19" speed="1" pstr="1" pdef="1" mstr="1" mdef="1" />
         <equipment-compatibility head="bridle" hands="claws" body="barding" feet="shinprotection" />
-        <ability-graph-equip body="6" hands="16" feet="22" head="64" />
+        <ability-graph-equip body="21" hands="23" feet="89" head="90" />
     </guardian>
 
     <guardian id="2" nameID="gm002_stegofor">
@@ -23,13 +25,13 @@
             <element>forest</element>
         </elements>
         <attacks>
-            <attack element="none"   id="1" abilityPos="0" /> <!-- Self Defense, Attack 1 in Category ANY -->
-            <attack element="none"   id="2" abilityPos="2" /> <!-- Bite -->
-            <attack element="earth" id="1" abilityPos="5" /> <!-- Earth, available on Ability Board, Field 5 -->
+            <ability element="none"   id="1" abilityPos="0" /> <!-- Self Defense, Ability 1 in Category ANY -->
+            <ability element="none"   id="2" abilityPos="2" /> <!-- Bite -->
+            <ability element="earth" id="1" abilityPos="5" /> <!-- Earth, available on Ability Board, Field 5 -->
         </attacks>
         <basestats hp="198" mp="38" speed="2" pstr="2" pdef="2" mstr="2" mdef="2" />
         <equipment-compatibility head="bridle" hands="claws" body="barding" feet="shinprotection" />
-        <ability-graph-equip body="6" hands="16" feet="22" head="64" />
+        <ability-graph-equip body="17" hands="19" feet="53" head="54" />
     </guardian>
 
     <guardian id="3" nameID="gm003_brachifor">
@@ -38,13 +40,13 @@
             <element>forest</element>
         </elements>
         <attacks>
-            <attack element="none"   id="1" abilityPos="0" /> <!-- Self Defense, Attack 1 in Category ANY -->
-            <attack element="none"   id="2" abilityPos="1" /> <!-- Bite -->
-            <attack element="earth" id="1" abilityPos="5" /> <!-- Earth, available on Ability Board, Field 5 -->
+            <ability element="none"   id="1" abilityPos="0" /> <!-- Self Defense, Ability 1 in Category ANY -->
+            <ability element="none"   id="2" abilityPos="1" /> <!-- Bite -->
+            <ability element="earth" id="1" abilityPos="5" /> <!-- Earth, available on Ability Board, Field 5 -->
         </attacks>
         <basestats hp="396" mp="76" speed="4" pstr="4" pdef="4" mstr="4" mdef="4" />
         <equipment-compatibility head="bridle" hands="claws" body="barding" feet="shinprotection" />
-        <ability-graph-equip body="6" hands="16" feet="22" head="64" />
+        <ability-graph-equip body="17" hands="19" feet="53" head="54" />
     </guardian>
 
     <guardian id="4" nameID="gm004_kroki">
@@ -54,13 +56,13 @@
             <element>water</element>
         </elements>
         <attacks>
-            <attack element="none"   id="1" abilityPos="0" /> <!-- Self Defense, Attack 1 in Category ANY -->
-            <attack element="none"   id="2" abilityPos="1" /> <!-- Bite -->
-            <attack element="water" id="1" abilityPos="5" />
+            <ability element="none"   id="1" abilityPos="0" /> <!-- Self Defense, Ability 1 in Category ANY -->
+            <ability element="none"   id="2" abilityPos="1" /> <!-- Bite -->
+            <ability element="water" id="1" abilityPos="5" />
         </attacks>
         <basestats hp="99" mp="19" speed="1" pstr="1" pdef="1" mstr="1" mdef="1" />
         <equipment-compatibility head="helmet" hands="claws" body="breastplate" feet="kneepads" />
-        <ability-graph-equip body="6" hands="16" feet="22" head="64" />
+        <ability-graph-equip body="17" hands="19" feet="53" head="54" />
     </guardian>
 
     <guardian id="5" nameID="gm005_krokivip">
@@ -71,13 +73,13 @@
             <element>lindworm</element>
         </elements>
         <attacks>
-            <attack element="none"   id="1" abilityPos="0" /> <!-- Self Defense, Attack 1 in Category ANY -->
-            <attack element="none"   id="2" abilityPos="1" /> <!-- Bite -->
-            <attack element="water"   id="1" abilityPos="5" />
+            <ability element="none"   id="1" abilityPos="0" /> <!-- Self Defense, Ability 1 in Category ANY -->
+            <ability element="none"   id="2" abilityPos="1" /> <!-- Bite -->
+            <ability element="water"   id="1" abilityPos="5" />
         </attacks>
         <basestats hp="198" mp="38" speed="2" pstr="2" pdef="2" mstr="2" mdef="2" />
         <equipment-compatibility head="helmet" hands="claws" body="breastplate" feet="kneepads" />
-        <ability-graph-equip body="6" hands="16" feet="22" head="64" />
+        <ability-graph-equip body="17" hands="19" feet="53" head="54" />
     </guardian>
 
     <guardian id="6" nameID="gm006_leviadile">
@@ -86,13 +88,13 @@
             <element>lindworm</element>
         </elements>
         <attacks>
-            <attack element="none"   id="1" abilityPos="0" /> <!-- Self Defense, Attack 1 in Category ANY -->
-            <attack element="none"   id="2" abilityPos="1" /> <!-- Bite -->
-            <attack element="water" id="1" abilityPos="5" />
+            <ability element="none"   id="1" abilityPos="0" /> <!-- Self Defense, Ability 1 in Category ANY -->
+            <ability element="none"   id="2" abilityPos="1" /> <!-- Bite -->
+            <ability element="water" id="1" abilityPos="5" />
         </attacks>
         <basestats hp="396" mp="76" speed="4" pstr="4" pdef="4" mstr="4" mdef="4" />
         <equipment-compatibility head="helmet" hands="claws" body="breastplate" feet="kneepads" />
-        <ability-graph-equip body="6" hands="16" feet="22" head="64" />
+        <ability-graph-equip body="17" hands="19" feet="53" head="54" />
     </guardian>
 
     <guardian id="7" nameID="gm007_devidin">
@@ -102,13 +104,13 @@
             <element>fire</element>
         </elements>
         <attacks>
-            <attack element="none"   id="1" abilityPos="0" /> <!-- Self Defense, Attack 1 in Category ANY -->
-            <attack element="none"   id="2" abilityPos="1" /> <!-- Bite -->
-            <attack element="fire" id="1" abilityPos="5" />
+            <ability element="none"   id="1" abilityPos="0" /> <!-- Self Defense, Ability 1 in Category ANY -->
+            <ability element="none"   id="2" abilityPos="1" /> <!-- Bite -->
+            <ability element="fire" id="1" abilityPos="5" />
         </attacks>
         <basestats hp="99" mp="19" speed="1" pstr="1" pdef="1" mstr="1" mdef="1" />
         <equipment-compatibility head="mask" hands="claws" body="barding" feet="shinprotection" />
-        <ability-graph-equip body="6" hands="16" feet="22" head="64" />
+        <ability-graph-equip body="17" hands="19" feet="53" head="54" />
     </guardian>
 
     <guardian id="8" nameID="gm008_devidra">
@@ -119,13 +121,13 @@
             <element>lindworm</element>
         </elements>
         <attacks>
-            <attack element="none"   id="1" abilityPos="0" /> <!-- Self Defense, Attack 1 in Category ANY -->
-            <attack element="none"   id="2" abilityPos="1" /> <!-- Bite -->
-            <attack element="fire"   id="1" abilityPos="5" />
+            <ability element="none"   id="1" abilityPos="0" /> <!-- Self Defense, Ability 1 in Category ANY -->
+            <ability element="none"   id="2" abilityPos="1" /> <!-- Bite -->
+            <ability element="fire"   id="1" abilityPos="5" />
         </attacks>
         <basestats hp="198" mp="38" speed="2" pstr="2" pdef="2" mstr="2" mdef="2" />
         <equipment-compatibility head="helmet" hands="sword" body="shield" feet="kneepads" />
-        <ability-graph-equip body="6" hands="16" feet="22" head="64" />
+        <ability-graph-equip body="17" hands="19" feet="53" head="54" />
     </guardian>
 
     <guardian id="9" nameID="gm009_deviraptor">
@@ -134,12 +136,12 @@
             <element>lindworm</element>
         </elements>
         <attacks>
-            <attack element="none"   id="1" abilityPos="0" /> <!-- Self Defense, Attack 1 in Category ANY -->
-            <attack element="none"   id="2" abilityPos="1" /> <!-- Bite -->
-            <attack element="fire" id="1" abilityPos="5" />
+            <ability element="none"   id="1" abilityPos="0" /> <!-- Self Defense, Ability 1 in Category ANY -->
+            <ability element="none"   id="2" abilityPos="1" /> <!-- Bite -->
+            <ability element="fire" id="1" abilityPos="5" />
         </attacks>
         <basestats hp="396" mp="76" speed="4" pstr="4" pdef="4" mstr="4" mdef="4" />
         <equipment-compatibility head="mask" hands="sword" body="shield" feet="kneepads" />
-        <ability-graph-equip body="6" hands="16" feet="22" head="64" />
+        <ability-graph-equip body="17" hands="19" feet="53" head="54" />
     </guardian>
 </guardians>

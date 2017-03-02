@@ -22,7 +22,7 @@ import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.WidgetObserver;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TeamComponent;
 import de.limbusdev.guardianmonsters.enums.ButtonIDs;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
-import de.limbusdev.guardianmonsters.model.Attack;
+import de.limbusdev.guardianmonsters.model.Ability;
 import de.limbusdev.guardianmonsters.model.Monster;
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.MonsterInBattle;
 import de.limbusdev.guardianmonsters.model.MonsterInfo;
@@ -412,14 +412,14 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
             }
 
             @Override
-            public void onAttack(Monster attacker, Monster target, Attack attack, AttackCalculationReport rep) {
+            public void onAttack(Monster attacker, Monster target, Ability ability, AttackCalculationReport rep) {
 
                 // Change widget set
                 battleStateSwitcher.toAnimation();
                 infoLabelWidget.setWholeText(BattleStringBuilder.givenDamage(attacker,target,rep));
                 infoLabelWidget.animateTextAppearance();
 
-                // Start attack animation
+                // Start ability animation
                 int attPos, defPos;
                 boolean activeSide;
                 boolean passiveSide;
@@ -430,7 +430,7 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
                 attPos = battleSystem.getBattleFieldPositionFor(attacker);
                 defPos = battleSystem.getBattleFieldPositionFor(target);
 
-                animationWidget.animateAttack(attPos, defPos, activeSide, passiveSide, attack);
+                animationWidget.animateAttack(attPos, defPos, activeSide, passiveSide, ability);
             }
 
             @Override

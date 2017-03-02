@@ -7,7 +7,7 @@ import com.badlogic.gdx.utils.ArrayMap;
 import de.limbusdev.guardianmonsters.data.BundleAssets;
 import de.limbusdev.guardianmonsters.enums.AttackType;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
-import de.limbusdev.guardianmonsters.model.Attack;
+import de.limbusdev.guardianmonsters.model.Ability;
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.AttackCalculationReport;
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.ElemEff;
 import de.limbusdev.guardianmonsters.model.Monster;
@@ -64,28 +64,28 @@ public class MonsterManager {
      * @param def
      * @return
      */
-    public static AttackCalculationReport calcAttack(Monster att, Monster def, Attack attack) {
-        System.out.println("\n--- new attack ---");
-        AttackCalculationReport report = new AttackCalculationReport(att, def, 0, 0, attack);
-        float effectiveness = ElemEff.singelton().getElemEff(attack.element, def.elements);
+    public static AttackCalculationReport calcAttack(Monster att, Monster def, Ability ability) {
+        System.out.println("\n--- new ability ---");
+        AttackCalculationReport report = new AttackCalculationReport(att, def, 0, 0, ability);
+        float effectiveness = ElemEff.singelton().getElemEff(ability.element, def.elements);
 
         float defenseRatio;
 
-        if(attack.attackType == AttackType.PHYSICAL) {
+        if(ability.attackType == AttackType.PHYSICAL) {
             defenseRatio = (att.pStr *1f) / (def.pDef *1f);
         } else {
             defenseRatio = (att.mStr *1f) / (def.mDef *1f);
         }
 
         /* Calculate Damage */
-        float damage = (effectiveness * attack.damage)*defenseRatio;
+        float damage = (effectiveness * ability.damage)*defenseRatio;
 
         report.damage = MathUtils.round(damage);
         report.effectiveness = effectiveness;
 
         // Print Battle Debug Message
         String attackerName = Services.getL18N().l18n(BundleAssets.MONSTERS).get(MonsterInfo.getInstance().getNameById(att.ID));
-        String attackName   = Services.getL18N().l18n(BundleAssets.ATTACKS).get(attack.name);
+        String attackName   = Services.getL18N().l18n(BundleAssets.ATTACKS).get(ability.name);
         String victimName   = Services.getL18N().l18n(BundleAssets.MONSTERS).get(MonsterInfo.getInstance().getNameById(def.ID));
         System.out.println(attackerName + ": " + attackName + " causes " + damage + " damage on " + victimName);
 

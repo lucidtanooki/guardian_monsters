@@ -1,6 +1,6 @@
 package de.limbusdev.guardianmonsters.fwmengine.battle.model;
 
-import de.limbusdev.guardianmonsters.model.Attack;
+import de.limbusdev.guardianmonsters.model.Ability;
 import de.limbusdev.guardianmonsters.model.Monster;
 
 /**
@@ -17,7 +17,7 @@ public class MonsterInBattle {
     public final boolean battleFieldSide;
     public int     battleFieldPosition;
 
-    public Attack nextAttack;
+    public Ability nextAttack;
     public int    nextTarget;
 
     public MonsterInBattle(Monster mon, int pos, boolean side) {

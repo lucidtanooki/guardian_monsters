@@ -5,7 +5,7 @@ import com.badlogic.gdx.utils.Array;
 
 import de.limbusdev.guardianmonsters.data.BundleAssets;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
-import de.limbusdev.guardianmonsters.model.Attack;
+import de.limbusdev.guardianmonsters.model.Ability;
 import de.limbusdev.guardianmonsters.model.Monster;
 import de.limbusdev.guardianmonsters.model.MonsterInfo;
 
@@ -20,14 +20,14 @@ public class DebugOutput {
     /* ............................................................................... METHODS .. */
     public static void printAttack(Monster attacker, int attPos,
                                    Monster defender, int defPos,
-                                   Attack attack, int damage) {
+                                   Ability ability, int damage) {
         System.out.println("Attacker: "
                 + MonsterInfo.getInstance().getNameById(attacker.ID) +
                 " at Position " + attPos + "\n" +
                 "Defender: " +
                 MonsterInfo.getInstance().getNameById(defender.ID) +
                 " at Position " + defPos + "\n" +
-                "Attack: " + attack.name + "\n" +
+                "Ability: " + ability.name + "\n" +
                 "Damage: " + damage);
     }
 

@@ -161,6 +161,7 @@ public class GraphWidget extends Group implements Observer {
             status = NodeStatus.DISABLED;
             switch(type) {
                 case ABILITY:
+                case METAMORPHOSIS:
                 case EQUIPMENT: offset = new IntVec2(-16,-16); break;
                 default: offset = new IntVec2(-8,-8); break;
             }
@@ -188,12 +189,6 @@ public class GraphWidget extends Group implements Observer {
 
         @Override
         public void setPosition(float x, float y) {
-            IntVec2 offset;
-            switch(type) {
-                case ABILITY:
-                case EQUIPMENT: offset = new IntVec2(-16,-16); break;
-                default: offset = new IntVec2(-8,-8); break;
-            }
             super.setPosition(x+offset.x, y+offset.y);
         }
     }

@@ -7,7 +7,9 @@ import de.limbusdev.guardianmonsters.enums.Element;
 
 
 /**
- * Created by georg on 24.01.16.
+ * Hols some general data about monsters of a specific Index
+ *
+ * Created by Georg Eckert on 24.01.16.
  */
 public class MonsterData {
     /* ............................................................................ ATTRIBUTES .. */
@@ -15,9 +17,8 @@ public class MonsterData {
     public String nameID;
     public ArrayMap<Integer,Ability> learnableAbilitiesByNode;
     public ArrayMap<Integer, Equipment.EQUIPMENT_TYPE> learnableEquipmentByNode;
-    public boolean canEvolve;
-    public int evolvingAtLevel;
-    public int evolution;
+    public Array<Integer> metamorphosisNodes;
+    public int metamorphesTo;
     public Array<Element> elements;
     public BaseStat baseStat;
     private Equipment.HeadEquipment compatibleHeadEquip;
@@ -27,20 +28,12 @@ public class MonsterData {
 
     /* ........................................................................... CONSTRUCTOR .. */
 
-    /**
-     *
-     * @param ID                ID
-     * @param nameID            nameID
-     * @param learnableAbilitiesByNode  all attacks with the level where they get learned
-     * @param canEvolve         whether monster can reach another evolution state
-     * @param evolution         next evolution level (2 for 2_2)
-     * @param elements          monsters elements
-     */
     public MonsterData(
-        int ID, String nameID, ArrayMap<Integer, Ability> learnableAbilitiesByNode,
-        boolean canEvolve, int evolution, int evolvingAtLevel, Array<Element> elements,
-        BaseStat baseStat,
+        int ID, String nameID, int metamorphesTo,
+        BaseStat baseStat, Array<Element> elements,
+        ArrayMap<Integer, Ability> learnableAbilitiesByNode,
         ArrayMap<Integer, Equipment.EQUIPMENT_TYPE> learnableEquipmentByNode,
+        Array<Integer> metamorphosisNodes,
         Equipment.HeadEquipment head,
         Equipment.BodyEquipment body,
         Equipment.HandEquipment hands,
@@ -50,9 +43,8 @@ public class MonsterData {
         this.nameID = nameID;
         this.learnableAbilitiesByNode = learnableAbilitiesByNode;
         this.learnableEquipmentByNode = learnableEquipmentByNode;
-        this.canEvolve = canEvolve;
-        this.evolution = evolution;
-        this.evolvingAtLevel = evolvingAtLevel;
+        this.metamorphosisNodes = metamorphosisNodes;
+        this.metamorphesTo = metamorphesTo;
         this.elements = elements;
         this.baseStat = baseStat;
         this.compatibleHandEquip = hands;

@@ -100,7 +100,7 @@ public abstract class Equipment extends Item {
 
         @Override
         public boolean applicable(Monster m) {
-            MonsterStatusInformation msi = MonsterInfo.getInstance().getStatusInfos().get(m.ID);
+            MonsterData msi = MonsterDB.singleton().getStatusInfos().get(m.ID);
             return msi.getCompatibleHandEquip().equals(type);
         }
     }
@@ -120,7 +120,7 @@ public abstract class Equipment extends Item {
 
         @Override
         public boolean applicable(Monster m) {
-            MonsterStatusInformation msi = MonsterInfo.getInstance().getStatusInfos().get(m.ID);
+            MonsterData msi = MonsterDB.singleton().getStatusInfos().get(m.ID);
             return msi.getCompatibleFootEquip().equals(type);
         }
     }
@@ -140,7 +140,7 @@ public abstract class Equipment extends Item {
 
         @Override
         public boolean applicable(Monster m) {
-            MonsterStatusInformation msi = MonsterInfo.getInstance().getStatusInfos().get(m.ID);
+            MonsterData msi = MonsterDB.singleton().getStatusInfos().get(m.ID);
             return msi.getCompatibleHeadEquip().equals(type);
         }
     }
@@ -160,7 +160,7 @@ public abstract class Equipment extends Item {
 
         @Override
         public boolean applicable(Monster m) {
-            MonsterStatusInformation msi = MonsterInfo.getInstance().getStatusInfos().get(m.ID);
+            MonsterData msi = MonsterDB.singleton().getStatusInfos().get(m.ID);
             return msi.getCompatibleBodyEquip().equals(type);
         }
     }

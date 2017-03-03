@@ -12,10 +12,8 @@ import com.badlogic.gdx.utils.ArrayMap;
 import java.util.Observable;
 import java.util.Observer;
 
-import de.limbusdev.guardianmonsters.model.AbilityGraph;
+import de.limbusdev.guardianmonsters.fwmengine.menus.ui.widgets.*;
 import de.limbusdev.guardianmonsters.model.Monster;
-import de.limbusdev.guardianmonsters.model.MonsterInfo;
-import de.limbusdev.guardianmonsters.model.MonsterStatusInformation;
 import de.limbusdev.guardianmonsters.utils.GS;
 
 
@@ -26,7 +24,6 @@ import de.limbusdev.guardianmonsters.utils.GS;
 public class AbilityMapSubMenu extends AInventorySubMenu implements Observer {
 
     private ArrayMap<Integer, Monster> team;
-    private AbilityGraph graph;
     private GraphWidget graphWidget;
     private AbilityDetailWidget details;
     private TeamMemberSwitcher switcher;
@@ -34,7 +31,7 @@ public class AbilityMapSubMenu extends AInventorySubMenu implements Observer {
     private Label remainingLvls;
 
 
-    public AbilityMapSubMenu(Skin skin, ArrayMap<Integer,Monster> teamMonsters) {
+    public AbilityMapSubMenu(Skin skin, final ArrayMap<Integer,Monster> teamMonsters) {
         super(skin);
         this.team = teamMonsters;
         for(Monster m : team.values()) {
@@ -45,30 +42,15 @@ public class AbilityMapSubMenu extends AInventorySubMenu implements Observer {
         Group container = new Group();
         container.setSize(1200,600);
 
-        graph = new AbilityGraph();
-
         GraphWidget.CallbackHandler callbacks = new GraphWidget.CallbackHandler() {
             @Override
             public void onNodeClicked(int nodeID) {
                 Monster monster = team.get(switcher.getCurrentlyChosen());
-                MonsterStatusInformation msi = MonsterInfo.getInstance().getStatusInfos().get(monster.ID);
-
-                if(msi.attackAbilityGraphIds.containsKey(nodeID) || msi.equipmentAbilityGraphIds.containsKey(nodeID)) {
-                    if(msi.attackAbilityGraphIds.containsKey(nodeID)) {
-                        details.init(msi.attackAbilityGraphIds.get(nodeID), monster.abilityGraph.nodeActive.get(nodeID),
-                            (monster.abilityGraph.nodeEnabled.get(nodeID) && monster.getAbilityLevels() > 0), nodeID);
-                    }
-                    if(msi.equipmentAbilityGraphIds.containsKey(nodeID)) {
-                        details.init(msi.equipmentAbilityGraphIds.get(nodeID), monster.abilityGraph.nodeActive.get(nodeID),
-                            (monster.abilityGraph.nodeEnabled.get(nodeID) && monster.getAbilityLevels() > 0), nodeID);
-                    }
-                } else {
-                    details.initEmpty(monster.abilityGraph.nodeActive.get(nodeID), (monster.abilityGraph.nodeEnabled.get(nodeID) && monster.getAbilityLevels() > 0), nodeID);
-                }
+                details.init(monster,nodeID);
             }
         };
 
-        graphWidget = new GraphWidget(graph, skin, callbacks);
+        graphWidget = new GraphWidget(skin, callbacks);
         graphWidget.setPosition(300,150,Align.bottomLeft);
         graphWidget.init(team.get(0));
 
@@ -98,8 +80,11 @@ public class AbilityMapSubMenu extends AInventorySubMenu implements Observer {
         AbilityDetailWidget.CallbackHandler learnCallbacks = new AbilityDetailWidget.CallbackHandler() {
             @Override
             public void onLearn(int nodeID) {
-                team.get(switcher.getCurrentlyChosen()).consumeAbilityLevel();
-                team.get(switcher.getCurrentlyChosen()).abilityGraph.activateNode(nodeID);
+                Monster m = team.get(switcher.getCurrentlyChosen());
+                m.consumeAbilityLevel();
+                m.abilityGraph.activateNode(nodeID);
+                graphWidget.refreshStatus(m);
+                details.init(m,nodeID);
             }
         };
 
@@ -123,15 +108,15 @@ public class AbilityMapSubMenu extends AInventorySubMenu implements Observer {
         remLvlGrp.addActor(remainingLvls);
         addActor(remainingLvlsCont);
 
-        if(MonsterInfo.getInstance().getStatusInfos().get(team.get(0).ID).attackAbilityGraphIds.containsKey(0)) {
-            details.init(MonsterInfo.getInstance().getStatusInfos().get(team.get(0).ID).attackAbilityGraphIds.get(0),true, true,0);
-        }
+        details.init(team.get(0), 0);
+
 
     }
 
     public void refresh() {
         remainingLvls.setText(Integer.toString(team.get(switcher.getCurrentlyChosen()).getAbilityLevels()));
     }
+
 
     @Override
     public void update(Observable o, Object arg) {

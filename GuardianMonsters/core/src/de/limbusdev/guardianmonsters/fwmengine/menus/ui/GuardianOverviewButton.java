@@ -20,7 +20,7 @@ import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.model.Equipment;
 import de.limbusdev.guardianmonsters.model.Item;
 import de.limbusdev.guardianmonsters.model.Monster;
-import de.limbusdev.guardianmonsters.model.MonsterInfo;
+import de.limbusdev.guardianmonsters.model.MonsterDB;
 
 /**
  * Created by georg on 21.02.17.
@@ -34,17 +34,17 @@ public class GuardianOverviewButton extends TextButton implements Observer{
 
 
     public GuardianOverviewButton(Monster monster, Skin skin, Item item) {
-        super(Services.getL18N().l18n(BundleAssets.MONSTERS).get(MonsterInfo.getInstance().getNameById(monster.ID)), skin);
+        super(Services.getL18N().l18n(BundleAssets.MONSTERS).get(MonsterDB.singleton().getNameById(monster.ID)), skin);
         construct(monster, item);
     }
 
     public GuardianOverviewButton(Monster monster, Skin skin, String styleName, Item item) {
-        super(Services.getL18N().l18n(BundleAssets.MONSTERS).get(MonsterInfo.getInstance().getNameById(monster.ID)), skin, styleName);
+        super(Services.getL18N().l18n(BundleAssets.MONSTERS).get(MonsterDB.singleton().getNameById(monster.ID)), skin, styleName);
         construct(monster, item);
     }
 
     public GuardianOverviewButton(Monster monster, TextButtonStyle style, Item item) {
-        super(Services.getL18N().l18n(BundleAssets.MONSTERS).get(MonsterInfo.getInstance().getNameById(monster.ID)), style);
+        super(Services.getL18N().l18n(BundleAssets.MONSTERS).get(MonsterDB.singleton().getNameById(monster.ID)), style);
         construct(monster, item);
     }
 

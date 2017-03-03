@@ -1,4 +1,4 @@
-package de.limbusdev.guardianmonsters.fwmengine.menus.ui;
+package de.limbusdev.guardianmonsters.fwmengine.menus.ui.widgets;
 
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -17,7 +17,9 @@ import de.limbusdev.guardianmonsters.data.BundleAssets;
 import de.limbusdev.guardianmonsters.enums.AttackType;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.model.Ability;
+import de.limbusdev.guardianmonsters.model.AbilityGraph;
 import de.limbusdev.guardianmonsters.model.Equipment;
+import de.limbusdev.guardianmonsters.model.Monster;
 
 
 /**
@@ -76,17 +78,58 @@ public class AbilityDetailWidget extends Container {
 
     }
 
-    public void init(Ability ability, boolean active, boolean enabled, int nodeID) {
+
+    // .............................................................................. INITIALIZATION
+
+    private void setActorVisibility(AbilityGraph.NodeType type, boolean learnable, boolean enoughFreeLevels) {
+        name.setVisible(false);
+        damage.setVisible(false);
+        abilityType.setVisible(false);
+        learn.setVisible(false);
+
+        switch(type) {
+            case EMPTY:
+                break;
+            case EQUIPMENT:
+                name.setVisible(true);
+            default:    // Ability
+                name.setVisible(true);
+                damage.setVisible(true);
+                abilityType.setVisible(true);
+                break;
+        }
+
+        learn.setVisible(learnable && enoughFreeLevels);
+    }
+
+    public void init(Monster monster, int nodeID) {
+        if(monster.abilityGraph.learnsSomethingAt(nodeID)) {
+            if(monster.abilityGraph.learnsAbilityAt(nodeID)) {
+                init(monster.abilityGraph.learnableAbilities.get(nodeID), nodeID, monster.abilityGraph, monster.getAbilityLevels() > 0);
+            }
+            if(monster.abilityGraph.learnsEquipmentAt(nodeID)) {
+                init(monster.abilityGraph.learnableEquipment.get(nodeID), nodeID, monster.abilityGraph, monster.getAbilityLevels() > 0);
+            }
+        } else {
+            initEmpty(nodeID,monster.abilityGraph, monster.getAbilityLevels() > 0);
+        }
+    }
+
+    /**
+     * Node Type: ABILITY
+     * @param ability
+     * @param nodeID
+     * @param graph
+     */
+    private void init(Ability ability, int nodeID, AbilityGraph graph, boolean enoughFreeLvls) {
         this.nodeID = nodeID;
 
-        damage.setVisible(true);
-        abilityType.setVisible(true);
+        setActorVisibility(AbilityGraph.NodeType.ABILITY, graph.isNodeLearnable(nodeID), enoughFreeLvls);
+
         if(ability == null) {
             name.setText("Empty");
             damage.setText("0");
-            learn.setVisible(false);
         } else {
-            learn.setVisible(!active && enabled);
             name.setText(Services.getL18N().l18n(BundleAssets.ATTACKS).get(ability.name));
             damage.setText(Integer.toString(ability.damage));
             Drawable drawable = ability.attackType == AttackType.PHYSICAL ? skin.getDrawable("stats-symbol-pstr") : skin.getDrawable("stats-symbol-mstr");
@@ -94,11 +137,13 @@ public class AbilityDetailWidget extends Container {
         }
     }
 
-    public void init(Equipment.EQUIPMENT_TYPE equipmentType, boolean active, boolean enabled, int nodeID) {
+    private void init(Equipment.EQUIPMENT_TYPE equipmentType, int nodeID, AbilityGraph graph, boolean enoughFreeLvls) {
         this.nodeID = nodeID;
 
         String equipment;
         I18NBundle bundle = Services.getL18N().l18n(BundleAssets.INVENTORY);
+
+        setActorVisibility(AbilityGraph.NodeType.EQUIPMENT, graph.isNodeLearnable(nodeID), enoughFreeLvls);
 
         switch(equipmentType) {
             case HANDS: equipment = bundle.get("equip-hands"); break;
@@ -108,17 +153,11 @@ public class AbilityDetailWidget extends Container {
         }
 
         name.setText(bundle.format("ability-carry-equipment", equipment));
-        damage.setVisible(false);
-        abilityType.setVisible(false);
-        learn.setVisible(!active && enabled);
     }
 
-    public void initEmpty(boolean active, boolean enabled, int nodeID) {
+    private void initEmpty(int nodeID, AbilityGraph graph, boolean enoughFreeLvls) {
         this.nodeID = nodeID;
 
-        name.setVisible(false);
-        damage.setVisible(false);
-        abilityType.setVisible(false);
-        learn.setVisible(!active && enabled);
+        setActorVisibility(AbilityGraph.NodeType.EMPTY, graph.isNodeLearnable(nodeID), enoughFreeLvls);
     }
 }

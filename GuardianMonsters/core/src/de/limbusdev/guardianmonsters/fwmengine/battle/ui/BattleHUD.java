@@ -25,7 +25,7 @@ import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.model.Ability;
 import de.limbusdev.guardianmonsters.model.Monster;
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.MonsterInBattle;
-import de.limbusdev.guardianmonsters.model.MonsterInfo;
+import de.limbusdev.guardianmonsters.model.MonsterDB;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleMainMenuWidget;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleStatusOverviewWidget;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.ObservableWidget;
@@ -192,7 +192,7 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
     private void kickOutMonster(MonsterInBattle m) {
         animationWidget.animateMonsterKO(m.battleFieldPosition,m.battleFieldSide);
         statusWidget.fadeStatusWidget(m.battleFieldPosition, m.battleFieldSide);
-        infoLabelWidget.infoLabel.setText(MonsterInfo.getInstance().getNameById(m.monster.ID) + " " + Services.getL18N().l18n(BundleAssets.BATTLE).get("batt_defeated") + ".");
+        infoLabelWidget.infoLabel.setText(MonsterDB.singleton().getNameById(m.monster.ID) + " " + Services.getL18N().l18n(BundleAssets.BATTLE).get("batt_defeated") + ".");
 
 //        System.out.println("Killed: " + m.battleFieldPosition);
 //

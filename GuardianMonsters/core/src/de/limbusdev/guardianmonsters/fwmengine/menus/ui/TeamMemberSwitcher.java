@@ -15,7 +15,7 @@ import de.limbusdev.guardianmonsters.data.BundleAssets;
 import de.limbusdev.guardianmonsters.data.TextureAssets;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.model.Monster;
-import de.limbusdev.guardianmonsters.model.MonsterInfo;
+import de.limbusdev.guardianmonsters.model.MonsterDB;
 
 /**
  * Created by Georg Eckert on 01.03.17.
@@ -94,7 +94,7 @@ public class TeamMemberSwitcher extends Group {
 
     public void init(Monster m) {
         name.setText(Services.getL18N().l18n(BundleAssets.MONSTERS)
-            .get(MonsterInfo.getInstance().getNameById(m.ID)));
+            .get(MonsterDB.singleton().getNameById(m.ID)));
 
         Image monsterBg = new Image(Services.getUI().getBattleSkin().getDrawable("monster-preview"));
         monsterBg.setPosition(32,58,Align.topLeft);

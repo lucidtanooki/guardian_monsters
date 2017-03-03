@@ -1,5 +1,6 @@
-package de.limbusdev.guardianmonsters.fwmengine.menus.ui;
+package de.limbusdev.guardianmonsters.fwmengine.menus.ui.widgets;
 
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.ButtonGroup;
@@ -19,8 +20,8 @@ import de.limbusdev.guardianmonsters.model.AbilityGraph;
 import de.limbusdev.guardianmonsters.model.Ability;
 import de.limbusdev.guardianmonsters.model.Equipment;
 import de.limbusdev.guardianmonsters.model.Monster;
-import de.limbusdev.guardianmonsters.model.MonsterInfo;
-import de.limbusdev.guardianmonsters.model.MonsterStatusInformation;
+import de.limbusdev.guardianmonsters.model.MonsterDB;
+import de.limbusdev.guardianmonsters.model.MonsterData;
 
 /**
  * Created by georg on 27.02.17.
@@ -40,10 +41,11 @@ public class GraphWidget extends Group implements Observer {
 
     private Monster currentMonster;
 
+    private AnimatedImage nodeActivationAnimation;
 
-    public GraphWidget(AbilityGraph graph, Skin skin, CallbackHandler callbacks) {
+
+    public GraphWidget(Skin skin, CallbackHandler callbacks) {
         super();
-        this.graph = graph;
         this.skin = skin;
         this.callbacks = callbacks;
         setupNodeStyles();
@@ -59,16 +61,17 @@ public class GraphWidget extends Group implements Observer {
         nodeGroup.setMaxCheckCount(1);
         nodeWidgets = new ArrayMap<>();
 
+        // Animation
+        Animation anim = new Animation(.12f,skin.getRegions("node-activation-animation"));
+        nodeActivationAnimation = new AnimatedImage(anim);
+        nodeActivationAnimation.setPlayMode(Animation.PlayMode.NORMAL);
     }
 
     public void init(Monster monster) {
         clear();
         currentMonster = monster;
+        this.graph = monster.abilityGraph;
         monster.addObserver(this);
-
-        MonsterStatusInformation msi = MonsterInfo.getInstance().getStatusInfos().get(monster.ID);
-        ArrayMap<Integer,Equipment.EQUIPMENT_TYPE> equipments = msi.equipmentAbilityGraphIds;
-        ArrayMap<Integer,Ability> abilities = msi.attackAbilityGraphIds;
 
         edgeWidgets.clear();
         for(AbilityGraph.Edge edge : graph.getEdges()) {
@@ -85,17 +88,8 @@ public class GraphWidget extends Group implements Observer {
         nodeWidgets.clear();
         nodeGroup.clear();
         for(AbilityGraph.Vertex v : graph.getVertices().values()) {
-            NodeWidget nw;
             final int nodeID = v.ID;
-            if(equipments.containsKey(v.ID) || abilities.containsKey(v.ID)) {
-                if(equipments.containsKey(v.ID)) {
-                    nw = new NodeWidget(skin, v, AbilityGraph.NodeType.EQUIPMENT);
-                } else {
-                    nw = new NodeWidget(skin, v, AbilityGraph.NodeType.ABILITY);
-                }
-            } else {
-                nw = new NodeWidget(skin, v, AbilityGraph.NodeType.EMPTY);
-            }
+            NodeWidget nw = new NodeWidget(skin, v, monster.abilityGraph.nodeTypeAt(nodeID));
             nw.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
@@ -158,27 +152,37 @@ public class GraphWidget extends Group implements Observer {
         private AbilityGraph.Vertex node;
         private AbilityGraph.NodeType type;
         public NodeStatus status;
+        private IntVec2 offset;
 
         public NodeWidget(Skin skin, AbilityGraph.Vertex node, AbilityGraph.NodeType type) {
             super(skin,"board-" + type.toString().toLowerCase() + "-disabled");
             this.type = type;
             this.node = node;
             status = NodeStatus.DISABLED;
+            switch(type) {
+                case ABILITY:
+                case EQUIPMENT: offset = new IntVec2(-16,-16); break;
+                default: offset = new IntVec2(-8,-8); break;
+            }
+        }
+
+        private void playActivationAnimation() {
+            if(offset != null) {
+                nodeActivationAnimation.setPosition(-32 - offset.x, -32 - offset.y, Align.bottomLeft);
+                this.addActor(nodeActivationAnimation);
+            }
         }
 
         public void changeStatus(NodeStatus status) {
+            if(NodeStatus.ACTIVE == status && status != this.status) {
+                playActivationAnimation();
+            }
             this.setStyle(styles.get(type).get(status));
             this.status = status;
         }
 
         @Override
         public void setPosition(float x, float y, int alignment) {
-            IntVec2 offset;
-            switch(type) {
-                case ABILITY:
-                case EQUIPMENT: offset = new IntVec2(-16,-16); break;
-                default: offset = new IntVec2(-8,-8); break;
-            }
             super.setPosition(x+offset.x, y+offset.y, alignment);
         }
 

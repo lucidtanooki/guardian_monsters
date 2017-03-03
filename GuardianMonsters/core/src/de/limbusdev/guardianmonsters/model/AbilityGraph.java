@@ -9,17 +9,12 @@ import com.badlogic.gdx.utils.ArrayMap;
 
 public class AbilityGraph {
 
-    public enum Orientation {
-        HORIZONTAL, VERTICAL, UPLEFT, UPRIGHT,
-    }
-
-    public enum NodeType {
-        EMPTY, ABILITY, EQUIPMENT,
-    }
-
     private final static int X=0, Y=1;
     public ArrayMap<Integer,Boolean> nodeActive;
     public ArrayMap<Integer,Boolean> nodeEnabled;
+    public ArrayMap<Integer,NodeType> typesOfNodes;
+    public ArrayMap<Integer,Ability> learnableAbilities;
+    public ArrayMap<Integer,Equipment.EQUIPMENT_TYPE> learnableEquipment;
 
     int coords[][] = {
         {0,0,0}, {1,0,1}, {2,1,0}, {3,0,-1}, {4,-1,0}, {5,0,2}, {6,2,1}, {7,0,-2}, {8,-2,-1}, {9,-1,2},
@@ -53,6 +48,54 @@ public class AbilityGraph {
         {54,66}, {66,82}, {82,98}, {66,90}, {66,74}, {74,96}, {96,100}
     };
 
+    public AbilityGraph() {
+        vertices = new ArrayMap<>();
+        edges = new Array<>();
+        nodeActive = new ArrayMap<>();
+        nodeEnabled = new ArrayMap<>();
+        typesOfNodes = new ArrayMap<>();
+        learnableAbilities = new ArrayMap<>();
+        learnableEquipment = new ArrayMap<>();
+
+        for(int i = 0; i < coords.length; i++) {
+            int v[] = coords[i];
+            vertices.put(i, new Vertex(v[X+1], v[Y+1], i));
+        }
+
+        for(int i = 0; i < conns.length; i++) {
+            int e[] = conns[i];
+            edges.add(new Edge(vertices.get(e[X]), vertices.get(e[Y])));
+        }
+
+        for(int i=0; i<=100; i++) nodeActive.put(i,false);
+        for(int i=0; i<=100; i++) nodeEnabled.put(i,false);
+
+    }
+
+    public void init(MonsterData data) {
+        for(int i=0; i<=100; i++) {
+            typesOfNodes.put(i,NodeType.EMPTY);
+        }
+        for(int key : data.learnableAbilitiesByNode.keys()) {
+            typesOfNodes.put(key,NodeType.ABILITY);
+        }
+        for(int key : data.learnableEquipmentByNode.keys()) {
+            typesOfNodes.put(key,NodeType.EQUIPMENT);
+        }
+        learnableAbilities.putAll(data.learnableAbilitiesByNode);
+        learnableEquipment.putAll(data.learnableEquipmentByNode);
+    }
+
+    // ................................................................................ ENUMERATIONS
+    public enum Orientation {
+        HORIZONTAL, VERTICAL, UPLEFT, UPRIGHT,
+    }
+
+    public enum NodeType {
+        EMPTY, ABILITY, EQUIPMENT, EVOLVE,
+    }
+
+    // ............................................................................... INNER CLASSES
     public class Vertex {
         public int x;
         public int y;
@@ -107,26 +150,7 @@ public class AbilityGraph {
     private ArrayMap<Integer, Vertex> vertices;
     private Array<Edge> edges;
 
-    public AbilityGraph() {
-        vertices = new ArrayMap<>();
-        edges = new Array<>();
-        nodeActive = new ArrayMap<>();
-        nodeEnabled = new ArrayMap<>();
 
-        for(int i = 0; i < coords.length; i++) {
-            int v[] = coords[i];
-            vertices.put(i, new Vertex(v[X+1], v[Y+1], i));
-        }
-
-        for(int i = 0; i < conns.length; i++) {
-            int e[] = conns[i];
-            edges.add(new Edge(vertices.get(e[X]), vertices.get(e[Y])));
-        }
-
-        for(int i=0; i<100; i++) nodeActive.put(i,false);
-        for(int i=0; i<100; i++) nodeEnabled.put(i,false);
-
-    }
 
     public ArrayMap<Integer, Vertex> getVertices() {
         return vertices;
@@ -139,6 +163,7 @@ public class AbilityGraph {
 
     public void activateNode(int ID) {
         nodeActive.put(ID,true);
+        nodeEnabled.put(ID,true);
         enableNeighborNodes(ID);
     }
 
@@ -149,5 +174,54 @@ public class AbilityGraph {
                 nodeEnabled.put(nodeToBeEnabled, true);
             }
         }
+    }
+
+    public boolean isNodeEnabled(int nodeID) {
+        return nodeEnabled.get(nodeID);
+    }
+
+    public boolean isNodeActive(int nodeID) {
+        return nodeActive.get(nodeID);
+    }
+
+    public boolean isNodeLearnable(int nodeID) {
+        return (isNodeEnabled(nodeID) && !isNodeActive(nodeID));
+    }
+
+    /**
+     * Wether this monster learns an attack or other ability at this node
+     * @param nodeID
+     * @return
+     */
+    public boolean learnsAbilityAt(int nodeID) {
+        return learnableAbilities.containsKey(nodeID);
+    }
+
+    /**
+     * Wether this monster learns to carry some kind of equipment at this node
+     * @param nodeID
+     * @return
+     */
+    public boolean learnsEquipmentAt(int nodeID) {
+        return learnableEquipment.containsKey(nodeID);
+    }
+
+    /**
+     * Wether this monster learns an ability or to carry equipment at this node
+     * @param nodeID
+     * @return
+     */
+    public boolean learnsSomethingAt(int nodeID) {
+        return (learnsAbilityAt(nodeID) || learnsEquipmentAt(nodeID));
+    }
+
+    public AbilityGraph.NodeType nodeTypeAt(int nodeID) {
+        if(learnsAbilityAt(nodeID)) {
+            return AbilityGraph.NodeType.ABILITY;
+        }
+        if(learnsEquipmentAt(nodeID)) {
+            return AbilityGraph.NodeType.EQUIPMENT;
+        }
+        return AbilityGraph.NodeType.EMPTY;
     }
 }

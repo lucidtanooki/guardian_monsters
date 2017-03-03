@@ -14,16 +14,16 @@ import de.limbusdev.guardianmonsters.enums.Element;
 /**
  * Created by georg on 20.12.15.
  */
-public class MonsterInfo {
+public class MonsterDB {
     /* ............................................................................ ATTRIBUTES .. */
-    private ArrayMap<Integer,MonsterStatusInformation> statusInfos;
-    private static MonsterInfo instance;
+    private ArrayMap<Integer,MonsterData> statusInfos;
+    private static MonsterDB instance;
 
 
     /* ........................................................................... CONSTRUCTOR .. */
 
-    public static MonsterInfo getInstance() {
-        if(instance == null) instance = new MonsterInfo();
+    public static MonsterDB singleton() {
+        if(instance == null) instance = new MonsterDB();
         return instance;
     }
 
@@ -31,7 +31,7 @@ public class MonsterInfo {
         return statusInfos.get(id).nameID;
     }
 
-    private MonsterInfo() {
+    private MonsterDB() {
         statusInfos = new ArrayMap<>();
 
         FileHandle handle = Gdx.files.internal("data/guardians.xml");
@@ -46,14 +46,14 @@ public class MonsterInfo {
         }
 
         for (int i = 0; i < rootElement.getChildCount(); i++) {
-            MonsterStatusInformation info = parseMonster(rootElement.getChild(i));
+            MonsterData info = parseMonster(rootElement.getChild(i));
             statusInfos.put(info.ID,info);
         }
 
     }
 
-    private MonsterStatusInformation parseMonster(XmlReader.Element element) {
-        MonsterStatusInformation status;
+    private MonsterData parseMonster(XmlReader.Element element) {
+        MonsterData status;
         boolean canEvolve = element.getChildByName("evolutionID") != null;
         int evolutionID = element.getInt("evolutionID", 0);
         int evolutionLvl = element.getInt("evolutionLvl", 0);
@@ -107,15 +107,19 @@ public class MonsterInfo {
         Equipment.HandEquipment hand = Equipment.HandEquipment.valueOf(equipComp.getAttribute("hands", "sword").toUpperCase());
         Equipment.FootEquipment feet = Equipment.FootEquipment.valueOf(equipComp.getAttribute("feet", "claws").toUpperCase());
 
-        status = new MonsterStatusInformation(
+        status = new MonsterData(
             ID, nameID, attacks, canEvolve, evolutionID, evolutionLvl, elements, stat, equipmentGraph,
             head, body, hand, feet);
 
         return status;
     }
 
-    public ArrayMap<Integer, MonsterStatusInformation> getStatusInfos() {
+    public ArrayMap<Integer, MonsterData> getStatusInfos() {
         return statusInfos;
+    }
+
+    public MonsterData getData(int monsterID) {
+        return statusInfos.get(monsterID);
     }
 
 

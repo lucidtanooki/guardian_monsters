@@ -17,7 +17,7 @@ import java.util.Observer;
 import de.limbusdev.guardianmonsters.data.BundleAssets;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.model.Monster;
-import de.limbusdev.guardianmonsters.model.MonsterInfo;
+import de.limbusdev.guardianmonsters.model.MonsterDB;
 import de.limbusdev.guardianmonsters.utils.GS;
 
 /**
@@ -106,7 +106,7 @@ public class MonsterStateWidget extends WidgetGroup implements Observer {
      */
     public void init(Monster mon) {
         update(mon, "");
-        nameLabel.setText(Services.getL18N().l18n(BundleAssets.MONSTERS).get((MonsterInfo.getInstance().getNameById(mon.ID))));
+        nameLabel.setText(Services.getL18N().l18n(BundleAssets.MONSTERS).get((MonsterDB.singleton().getNameById(mon.ID))));
         mon.addObserver(this);
     }
 

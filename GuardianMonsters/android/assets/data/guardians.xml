@@ -1,7 +1,10 @@
 <guardians>
     <guardian id="1" nameID="gm001_fordin">
-        <evolutionID>2</evolutionID>
-        <evolutionLvl>20</evolutionLvl>
+        <metamorphsTo>2</metamorphsTo>
+        <metamorphosisNodes>
+            <metamorphosisNode>91</metamorphosisNode>
+            <metamorphosisNode>92</metamorphosisNode>
+        </metamorphosisNodes>
         <elements>
             <element>earth</element>
         </elements>
@@ -18,8 +21,11 @@
     </guardian>
 
     <guardian id="2" nameID="gm002_stegofor">
-        <evolutionID>3</evolutionID>
-        <evolutionLvl>40</evolutionLvl>
+        <metamorphsTo>3</metamorphsTo>
+        <metamorphosisNodes>
+            <metamorphosisNode>91</metamorphosisNode>
+            <metamorphosisNode>92</metamorphosisNode>
+        </metamorphosisNodes>
         <elements>
             <element>earth</element>
             <element>forest</element>
@@ -50,8 +56,11 @@
     </guardian>
 
     <guardian id="4" nameID="gm004_kroki">
-        <evolutionID>5</evolutionID>
-        <evolutionLvl>20</evolutionLvl>
+        <metamorphsTo>5</metamorphsTo>
+        <metamorphosisNodes>
+            <metamorphosisNode>91</metamorphosisNode>
+            <metamorphosisNode>92</metamorphosisNode>
+        </metamorphosisNodes>
         <elements>
             <element>water</element>
         </elements>
@@ -66,8 +75,11 @@
     </guardian>
 
     <guardian id="5" nameID="gm005_krokivip">
-        <evolutionID>6</evolutionID>
-        <evolutionLvl>40</evolutionLvl>
+        <metamorphsTo>6</metamorphsTo>
+        <metamorphosisNodes>
+            <metamorphosisNode>91</metamorphosisNode>
+            <metamorphosisNode>92</metamorphosisNode>
+        </metamorphosisNodes>
         <elements>
             <element>water</element>
             <element>lindworm</element>
@@ -98,8 +110,11 @@
     </guardian>
 
     <guardian id="7" nameID="gm007_devidin">
-        <evolutionID>8</evolutionID>
-        <evolutionLvl>20</evolutionLvl>
+        <metamorphsTo>8</metamorphsTo>
+        <metamorphosisNodes>
+            <metamorphosisNode>91</metamorphosisNode>
+            <metamorphosisNode>92</metamorphosisNode>
+        </metamorphosisNodes>
         <elements>
             <element>fire</element>
         </elements>
@@ -114,8 +129,11 @@
     </guardian>
 
     <guardian id="8" nameID="gm008_devidra">
-        <evolutionID>9</evolutionID>
-        <evolutionLvl>40</evolutionLvl>
+        <metamorphsTo>9</metamorphsTo>
+        <metamorphosisNodes>
+            <metamorphosisNode>91</metamorphosisNode>
+            <metamorphosisNode>92</metamorphosisNode>
+        </metamorphosisNodes>
         <elements>
             <element>fire</element>
             <element>lindworm</element>

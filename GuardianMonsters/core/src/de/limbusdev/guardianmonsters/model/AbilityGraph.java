@@ -15,6 +15,7 @@ public class AbilityGraph {
     public ArrayMap<Integer,NodeType> typesOfNodes;
     public ArrayMap<Integer,Ability> learnableAbilities;
     public ArrayMap<Integer,Equipment.EQUIPMENT_TYPE> learnableEquipment;
+    public Array<Integer> metamorphosisNodes;
 
     int coords[][] = {
         {0,0,0}, {1,0,1}, {2,1,0}, {3,0,-1}, {4,-1,0}, {5,0,2}, {6,2,1}, {7,0,-2}, {8,-2,-1}, {9,-1,2},
@@ -56,6 +57,7 @@ public class AbilityGraph {
         typesOfNodes = new ArrayMap<>();
         learnableAbilities = new ArrayMap<>();
         learnableEquipment = new ArrayMap<>();
+        metamorphosisNodes = new Array<>();
 
         for(int i = 0; i < coords.length; i++) {
             int v[] = coords[i];
@@ -67,21 +69,24 @@ public class AbilityGraph {
             edges.add(new Edge(vertices.get(e[X]), vertices.get(e[Y])));
         }
 
-        for(int i=0; i<=100; i++) nodeActive.put(i,false);
-        for(int i=0; i<=100; i++) nodeEnabled.put(i,false);
-
     }
 
     public void init(MonsterData data) {
-        for(int i=0; i<=100; i++) {
-            typesOfNodes.put(i,NodeType.EMPTY);
-        }
+        for(int i=0; i<=100; i++) nodeActive.put(i,false);
+        for(int i=0; i<=100; i++) nodeEnabled.put(i,false);
+        for(int i=0; i<=100; i++) typesOfNodes.put(i,NodeType.EMPTY);
+
         for(int key : data.learnableAbilitiesByNode.keys()) {
             typesOfNodes.put(key,NodeType.ABILITY);
         }
         for(int key : data.learnableEquipmentByNode.keys()) {
             typesOfNodes.put(key,NodeType.EQUIPMENT);
         }
+        for(int key : data.metamorphosisNodes) {
+            typesOfNodes.put(key,NodeType.METAMORPHOSIS);
+        }
+
+        metamorphosisNodes.addAll(data.metamorphosisNodes);
         learnableAbilities.putAll(data.learnableAbilitiesByNode);
         learnableEquipment.putAll(data.learnableEquipmentByNode);
     }
@@ -92,7 +97,7 @@ public class AbilityGraph {
     }
 
     public enum NodeType {
-        EMPTY, ABILITY, EQUIPMENT, EVOLVE,
+        EMPTY, ABILITY, EQUIPMENT, METAMORPHOSIS,
     }
 
     // ............................................................................... INNER CLASSES
@@ -206,22 +211,29 @@ public class AbilityGraph {
         return learnableEquipment.containsKey(nodeID);
     }
 
+    public boolean metamorphsAt(int nodeID) {
+        return metamorphosisNodes.contains(nodeID, false);
+    }
+
     /**
      * Wether this monster learns an ability or to carry equipment at this node
      * @param nodeID
      * @return
      */
     public boolean learnsSomethingAt(int nodeID) {
-        return (learnsAbilityAt(nodeID) || learnsEquipmentAt(nodeID));
+        return (learnsAbilityAt(nodeID) || learnsEquipmentAt(nodeID) || metamorphsAt(nodeID));
     }
 
-    public AbilityGraph.NodeType nodeTypeAt(int nodeID) {
+    public NodeType nodeTypeAt(int nodeID) {
         if(learnsAbilityAt(nodeID)) {
-            return AbilityGraph.NodeType.ABILITY;
+            return NodeType.ABILITY;
         }
         if(learnsEquipmentAt(nodeID)) {
-            return AbilityGraph.NodeType.EQUIPMENT;
+            return NodeType.EQUIPMENT;
         }
-        return AbilityGraph.NodeType.EMPTY;
+        if(metamorphsAt(nodeID)) {
+            return NodeType.METAMORPHOSIS;
+        }
+        return NodeType.EMPTY;
     }
 }

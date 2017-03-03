@@ -11,11 +11,13 @@ import de.limbusdev.guardianmonsters.enums.Element;
  * Created by Georg Eckert on 12.12.15.
  */
 public class Monster extends Observable {
+    // ...................................................................................... STATIC
+    public static int INSTANCECOUNTER=0;
+
     /* ............................................................................ ATTRIBUTES .. */
     public Array<Ability> attacks;
-    public static int INSTANCECOUNTER=0;
+
     public int INSTANCE_ID;
-    public int evolution;
     public Array<Element> elements;
     public Equipment hands;
     public Equipment head;
@@ -69,7 +71,7 @@ public class Monster extends Observable {
         this.mDefFull = mDef = base.baseMagDefense;
         this.Speed = this.SpeedFull = base.baseSpeed;
         this.nickname = "";
-        this.abilityLevels = 3;
+        this.abilityLevels = 30 ;
 
         // INIT
         this.attacks = new Array<>();

@@ -12,7 +12,7 @@ import de.limbusdev.guardianmonsters.enums.Element;
 
 
 /**
- * Created by georg on 20.12.15.
+ * Created by Georg Eckert on 20.12.15.
  */
 public class MonsterDB {
     /* ............................................................................ ATTRIBUTES .. */
@@ -53,10 +53,16 @@ public class MonsterDB {
     }
 
     private MonsterData parseMonster(XmlReader.Element element) {
-        MonsterData status;
-        boolean canEvolve = element.getChildByName("evolutionID") != null;
-        int evolutionID = element.getInt("evolutionID", 0);
-        int evolutionLvl = element.getInt("evolutionLvl", 0);
+        MonsterData monData;
+        int metamorphsTo = element.getInt("metamorphesTo", 0);
+        Array<Integer> metamorphosisNodes = new Array<>();
+        XmlReader.Element metaElement = element.getChildByName("metamorphosisNodes");
+        if(metaElement != null) {
+            for(int i=0; i<metaElement.getChildCount(); i++) {
+                int metaNode = Integer.parseInt(metaElement.getChild(i).getText());
+                metamorphosisNodes.add(metaNode);
+            }
+        }
 
         AttackInfo attInf = AttackInfo.getInst();
         XmlReader.Element attElement = element.getChildByName("attacks");
@@ -107,11 +113,14 @@ public class MonsterDB {
         Equipment.HandEquipment hand = Equipment.HandEquipment.valueOf(equipComp.getAttribute("hands", "sword").toUpperCase());
         Equipment.FootEquipment feet = Equipment.FootEquipment.valueOf(equipComp.getAttribute("feet", "claws").toUpperCase());
 
-        status = new MonsterData(
-            ID, nameID, attacks, canEvolve, evolutionID, evolutionLvl, elements, stat, equipmentGraph,
-            head, body, hand, feet);
+        monData = new MonsterData(
+            ID, nameID, metamorphsTo,
+            stat, elements,
+            attacks, equipmentGraph, metamorphosisNodes,
+            head, body, hand, feet
+        );
 
-        return status;
+        return monData;
     }
 
     public ArrayMap<Integer, MonsterData> getStatusInfos() {

@@ -40,9 +40,9 @@
     "board-equipment-enabled":      {"up": "board-equip-enabled",                 "down": "board-equip-enabled-selected",       "checked": "board-equip-enabled-selected"},
     "board-equipment-active":       {"up": "board-equip-active",                  "down": "board-equip-active-selected",        "checked": "board-equip-active-selected"},
 
-      "board-evolve-disabled":     {"up": "board-evolve-disabled",                "down": "board-evolve-disabled-selected",      "checked": "board-evolve-disabled-selected"},
-      "board-evolve-enabled":      {"up": "board-evolve-enabled",                 "down": "board-evolve-enabled-selected",       "checked": "board-evolve-enabled-selected"},
-      "board-evolve-active":       {"up": "board-evolve-active",                  "down": "board-evolve-active-selected",        "checked": "board-evolve-active-selected"},
+      "board-metamorphosis-disabled":     {"up": "board-metamorphosis-disabled",                "down": "board-metamorphosis-disabled-selected",      "checked": "board-metamorphosis-disabled-selected"},
+      "board-metamorphosis-enabled":      {"up": "board-metamorphosis-enabled",                 "down": "board-metamorphosis-enabled-selected",       "checked": "board-metamorphosis-enabled-selected"},
+      "board-metamorphosis-active":       {"up": "board-metamorphosis-active",                  "down": "board-metamorphosis-active-selected",        "checked": "board-metamorphosis-active-selected"},
 
       "button-next": {"up": "button-next-up", "down": "button-next-down"},
       "button-previous": {"up": "button-previous-up", "down": "button-previous-down"}

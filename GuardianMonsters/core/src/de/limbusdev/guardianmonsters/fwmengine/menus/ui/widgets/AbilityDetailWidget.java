@@ -90,8 +90,10 @@ public class AbilityDetailWidget extends Container {
         switch(type) {
             case EMPTY:
                 break;
+            case METAMORPHOSIS:
             case EQUIPMENT:
                 name.setVisible(true);
+                break;
             default:    // Ability
                 name.setVisible(true);
                 damage.setVisible(true);
@@ -110,9 +112,20 @@ public class AbilityDetailWidget extends Container {
             if(monster.abilityGraph.learnsEquipmentAt(nodeID)) {
                 init(monster.abilityGraph.learnableEquipment.get(nodeID), nodeID, monster.abilityGraph, monster.getAbilityLevels() > 0);
             }
+            if(monster.abilityGraph.metamorphsAt(nodeID)) {
+                initMetamorphosis(nodeID, monster.abilityGraph, monster.getAbilityLevels() > 0);
+            }
         } else {
             initEmpty(nodeID,monster.abilityGraph, monster.getAbilityLevels() > 0);
         }
+    }
+
+    private void initMetamorphosis(int nodeID, AbilityGraph graph, boolean enoughFreeLvls) {
+        this.nodeID = nodeID;
+
+        setActorVisibility(AbilityGraph.NodeType.METAMORPHOSIS, graph.isNodeLearnable(nodeID), enoughFreeLvls);
+
+        name.setText(Services.getL18N().l18n(BundleAssets.GENERAL).get("metamorphosis"));
     }
 
     /**

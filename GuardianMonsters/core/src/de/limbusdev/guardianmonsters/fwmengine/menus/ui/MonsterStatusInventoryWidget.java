@@ -12,7 +12,7 @@ import de.limbusdev.guardianmonsters.data.BundleAssets;
 import de.limbusdev.guardianmonsters.enums.Element;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.model.Monster;
-import de.limbusdev.guardianmonsters.model.MonsterInfo;
+import de.limbusdev.guardianmonsters.model.MonsterDB;
 import de.limbusdev.guardianmonsters.utils.GS;
 
 
@@ -88,7 +88,7 @@ public class MonsterStatusInventoryWidget extends Group {
 
 
     public void init(Monster m) {
-        name.setText(Services.getL18N().l18n(BundleAssets.MONSTERS).get(MonsterInfo.getInstance().getNameById(m.ID)));
+        name.setText(Services.getL18N().l18n(BundleAssets.MONSTERS).get(MonsterDB.singleton().getNameById(m.ID)));
         valueLabels.get("hp").setText(m.getHP() + "/" + m.getHPfull());
         valueLabels.get("mp").setText(m.getMP() + "/" + m.getMPfull());
         valueLabels.get("exp").setText(m.getExp() + "/" + m.expAvailableInThisLevel());

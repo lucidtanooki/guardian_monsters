@@ -5,7 +5,7 @@ import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.AttackCalculationReport;
 import de.limbusdev.guardianmonsters.model.Monster;
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.MonsterInBattle;
-import de.limbusdev.guardianmonsters.model.MonsterInfo;
+import de.limbusdev.guardianmonsters.model.MonsterDB;
 
 /**
  * Created by georg on 12.01.16.
@@ -17,14 +17,14 @@ public class BattleStringBuilder {
     
     /* ............................................................................... METHODS .. */
     public static String receivedDamage(Monster victim, int damage) {
-        String text = MonsterInfo.getInstance().getNameById(victim.ID)
+        String text = MonsterDB.singleton().getNameById(victim.ID)
             + " lost " + damage + " HP";
         return text;
     }
 
     public static String givenDamage(Monster attacker, Monster victim, AttackCalculationReport report) {
-        String attName = MonsterInfo.getInstance().getNameById(attacker.ID);
-        String defName = MonsterInfo.getInstance().getNameById(victim.ID);
+        String attName = MonsterDB.singleton().getNameById(attacker.ID);
+        String defName = MonsterDB.singleton().getNameById(victim.ID);
 
         String eff;
         if(report.effectiveness > 1.1) {
@@ -48,7 +48,7 @@ public class BattleStringBuilder {
     }
 
     public static String selfDefense(Monster defensiveMonster) {
-        String defName = Services.getL18N().l18n(BundleAssets.MONSTERS).get(MonsterInfo.getInstance().getNameById(defensiveMonster.ID));
+        String defName = Services.getL18N().l18n(BundleAssets.MONSTERS).get(MonsterDB.singleton().getNameById(defensiveMonster.ID));
         String message = defName + " " + Services.getL18N().l18n(BundleAssets.BATTLE).get("suff_defense");
         return message;
     }

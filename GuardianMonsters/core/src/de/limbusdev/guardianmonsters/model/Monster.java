@@ -2,7 +2,6 @@ package de.limbusdev.guardianmonsters.model;
 
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.ObjectMap;
 
 import java.util.Observable;
 
@@ -60,7 +59,7 @@ public class Monster extends Observable {
         this.ID = ID;
         this.level = 1;
         this.exp = 0;
-        BaseStat base = MonsterInfo.getInstance().getStatusInfos().get(ID).baseStat;
+        BaseStat base = MonsterDB.singleton().getStatusInfos().get(ID).baseStat;
         this.pStr = pStrFull = base.basePhysStrength;
         this.HPfull = base.baseHP;
         this.HP = base.baseHP/2;
@@ -75,14 +74,14 @@ public class Monster extends Observable {
         // INIT
         this.attacks = new Array<>();
 
-        for(ObjectMap.Entry<Integer,Ability> e : MonsterInfo.getInstance().getStatusInfos().get(ID).attackAbilityGraphIds) {
-            if(e.key <= level)
-                attacks.add(e.value);
-        }
-
-        this.elements = MonsterInfo.getInstance().getStatusInfos().get(ID).elements;
+        this.elements = MonsterDB.singleton().getStatusInfos().get(ID).elements;
 
         abilityGraph = new AbilityGraph();
+        abilityGraph.init(MonsterDB.singleton().getData(ID));
+
+        for(int i = 0; i<level; i++) {
+            abilityGraph.activateNode(i);
+        }
 
     }
     /* ............................................................................... METHODS .. */

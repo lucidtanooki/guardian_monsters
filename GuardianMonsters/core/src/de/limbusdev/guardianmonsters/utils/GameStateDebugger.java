@@ -17,7 +17,7 @@ import de.limbusdev.guardianmonsters.model.AttackInfo;
 import de.limbusdev.guardianmonsters.model.Inventory;
 import de.limbusdev.guardianmonsters.model.ItemInfo;
 import de.limbusdev.guardianmonsters.model.Monster;
-import de.limbusdev.guardianmonsters.model.MonsterInfo;
+import de.limbusdev.guardianmonsters.model.MonsterDB;
 
 /**
  * Created by georg on 15.11.16.
@@ -168,7 +168,7 @@ public class GameStateDebugger {
     }
 
     public void testMonsterParsing() {
-        MonsterInfo mi = MonsterInfo.getInstance();
+        MonsterDB mi = MonsterDB.singleton();
         System.out.println("Tested");
     }
 

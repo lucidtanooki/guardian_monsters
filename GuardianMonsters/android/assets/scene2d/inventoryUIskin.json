@@ -6,7 +6,7 @@
 	  "black":  { "a": 1, "b": 0,   "g": 0,   "r": 0 },
 	  "grey":   { "a": 1, "b": 0.2, "g": 0.2, "r": 0.2 }
   },
-	
+
 	"com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle": {
     "b-toolbar-exit":           { "down": "toolBarButton-exit-down",         "up": "toolBarButton-exit-up"},
     "b-toolbar-team":           { "down": "toolBarButton-team-down",         "up": "toolBarButton-team-up",                 "checked": "toolBarButton-team-down"},
@@ -14,7 +14,7 @@
     "b-toolbar-items":          { "down": "toolBarButton-items-down",        "up": "toolBarButton-items-up",                "checked": "toolBarButton-items-down"},
     "b-toolbar-ability":        { "down": "toolBarButton-ability-down",      "up": "toolBarButton-ability-up",              "checked": "toolBarButton-ability-down"},
     "b-toolbar-key":            { "down": "toolBarButton-key-down",          "up": "toolBarButton-key-up",                  "checked": "toolBarButton-key-down"},
-    
+
     "b-toolbar-side-equip":     { "down": "toolBarButtonSide-equip-down",    "up": "toolBarButtonSide-equip-up",            "checked": "toolBarButtonSide-equip-down"},
     "b-toolbar-side-medicine":  { "down": "toolBarButtonSide-medicine-down", "up": "toolBarButtonSide-medicine-up",         "checked": "toolBarButtonSide-medicine-down"},
     "b-toolbar-side-other":     { "down": "toolBarButtonSide-other-down",    "up": "toolBarButtonSide-other-up",            "checked": "toolBarButtonSide-other-down"},
@@ -38,7 +38,11 @@
 
     "board-equipment-disabled":     {"up": "board-equip-disabled",                "down": "board-equip-disabled-selected",      "checked": "board-equip-disabled-selected"},
     "board-equipment-enabled":      {"up": "board-equip-enabled",                 "down": "board-equip-enabled-selected",       "checked": "board-equip-enabled-selected"},
-    "board-equipment-active":       {"up": "board-equip-active",                  "down": "board-equip-active-selected",        "checked": "board-equip-active-selected"}
+    "board-equipment-active":       {"up": "board-equip-active",                  "down": "board-equip-active-selected",        "checked": "board-equip-active-selected"},
+
+      "board-evolve-disabled":     {"up": "board-evolve-disabled",                "down": "board-evolve-disabled-selected",      "checked": "board-evolve-disabled-selected"},
+      "board-evolve-enabled":      {"up": "board-evolve-enabled",                 "down": "board-evolve-enabled-selected",       "checked": "board-evolve-enabled-selected"},
+      "board-evolve-active":       {"up": "board-evolve-active",                  "down": "board-evolve-active-selected",        "checked": "board-evolve-active-selected"},
 
       "button-next": {"up": "button-next-up", "down": "button-next-down"},
       "button-previous": {"up": "button-previous-up", "down": "button-previous-down"}
@@ -52,7 +56,7 @@
     "item-button-sandstone":  {"font": "default-font",  "down": "label-bg-sandstone-down", "up": "label-bg-sandstone", "checked": "label-bg-sandstone-down", "pressedOffsetY": -1, "checkedOffsetY": -1},
     "item-button-burgund":    {"font": "font16w",       "down": "label-bg-burgund-down",   "up": "label-bg-burgund",   "checked": "label-bg-burgund-down"}
   },
-	
+
 	"com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle": {
     "default":    {"font": "default-font"},
     "green":      {"font": "font16g"},
@@ -85,6 +89,6 @@
   "com.badlogic.gdx.scenes.scene2d.ui.ScrollPane$ScrollPaneStyle": {
     "default":   {"vScrollKnob": "scrollbar-knob", "hScrollKnob": "scrollbar-knob"}
 
-  }	
+  }
 
 }

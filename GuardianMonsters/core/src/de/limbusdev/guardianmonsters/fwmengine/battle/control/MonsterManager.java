@@ -11,7 +11,7 @@ import de.limbusdev.guardianmonsters.model.Ability;
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.AttackCalculationReport;
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.ElemEff;
 import de.limbusdev.guardianmonsters.model.Monster;
-import de.limbusdev.guardianmonsters.model.MonsterInfo;
+import de.limbusdev.guardianmonsters.model.MonsterDB;
 
 /**
  * Handles events of monsters like level up, earning EXP, changing status and so on
@@ -24,25 +24,6 @@ public class MonsterManager {
     
     /* ............................................................................... METHODS .. */
 
-    /**
-     * Earns a monster EXP, evolves it when necessary and learns it new attacks at specific levels
-     * @param m
-     * @param exp
-     * @return
-     */
-    public static Monster earnEXP(Monster m, int exp) {
-        boolean reachedNextLevel = m.receiveEXP(exp);
-        if(reachedNextLevel) {
-            if (MonsterInfo.getInstance().getStatusInfos().get(m.ID)
-                    .attackAbilityGraphIds.containsKey(m.level))
-                m.attacks.add(MonsterInfo.getInstance().getStatusInfos().get(m.ID)
-                        .attackAbilityGraphIds.get(m.level));
-            if(m.level >= MonsterInfo.getInstance().getStatusInfos().get(m.ID).evolvingAtLevel)
-                m.evolution = MonsterInfo.getInstance().getStatusInfos().get(m.ID).evolution;
-        }
-
-        return m;
-    }
 
     /**
      * Call this, when a monster decides not to attack and instead defends itself
@@ -84,9 +65,9 @@ public class MonsterManager {
         report.effectiveness = effectiveness;
 
         // Print Battle Debug Message
-        String attackerName = Services.getL18N().l18n(BundleAssets.MONSTERS).get(MonsterInfo.getInstance().getNameById(att.ID));
+        String attackerName = Services.getL18N().l18n(BundleAssets.MONSTERS).get(MonsterDB.singleton().getNameById(att.ID));
         String attackName   = Services.getL18N().l18n(BundleAssets.ATTACKS).get(ability.name);
-        String victimName   = Services.getL18N().l18n(BundleAssets.MONSTERS).get(MonsterInfo.getInstance().getNameById(def.ID));
+        String victimName   = Services.getL18N().l18n(BundleAssets.MONSTERS).get(MonsterDB.singleton().getNameById(def.ID));
         System.out.println(attackerName + ": " + attackName + " causes " + damage + " damage on " + victimName);
 
         return report;

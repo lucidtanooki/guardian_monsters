@@ -9,12 +9,12 @@ import de.limbusdev.guardianmonsters.enums.Element;
 /**
  * Created by georg on 24.01.16.
  */
-public class MonsterStatusInformation {
+public class MonsterData {
     /* ............................................................................ ATTRIBUTES .. */
     public int ID;
     public String nameID;
-    public ArrayMap<Integer,Ability> attackAbilityGraphIds;
-    public ArrayMap<Integer, Equipment.EQUIPMENT_TYPE> equipmentAbilityGraphIds;
+    public ArrayMap<Integer,Ability> learnableAbilitiesByNode;
+    public ArrayMap<Integer, Equipment.EQUIPMENT_TYPE> learnableEquipmentByNode;
     public boolean canEvolve;
     public int evolvingAtLevel;
     public int evolution;
@@ -31,16 +31,16 @@ public class MonsterStatusInformation {
      *
      * @param ID                ID
      * @param nameID            nameID
-     * @param attackAbilityGraphIds  all attacks with the level where they get learned
+     * @param learnableAbilitiesByNode  all attacks with the level where they get learned
      * @param canEvolve         whether monster can reach another evolution state
      * @param evolution         next evolution level (2 for 2_2)
      * @param elements          monsters elements
      */
-    public MonsterStatusInformation(
-        int ID, String nameID, ArrayMap<Integer, Ability> attackAbilityGraphIds,
+    public MonsterData(
+        int ID, String nameID, ArrayMap<Integer, Ability> learnableAbilitiesByNode,
         boolean canEvolve, int evolution, int evolvingAtLevel, Array<Element> elements,
         BaseStat baseStat,
-        ArrayMap<Integer, Equipment.EQUIPMENT_TYPE> equipmentAbilityGraphIds,
+        ArrayMap<Integer, Equipment.EQUIPMENT_TYPE> learnableEquipmentByNode,
         Equipment.HeadEquipment head,
         Equipment.BodyEquipment body,
         Equipment.HandEquipment hands,
@@ -48,8 +48,8 @@ public class MonsterStatusInformation {
 
         this.ID = ID;
         this.nameID = nameID;
-        this.attackAbilityGraphIds = attackAbilityGraphIds;
-        this.equipmentAbilityGraphIds = equipmentAbilityGraphIds;
+        this.learnableAbilitiesByNode = learnableAbilitiesByNode;
+        this.learnableEquipmentByNode = learnableEquipmentByNode;
         this.canEvolve = canEvolve;
         this.evolution = evolution;
         this.evolvingAtLevel = evolvingAtLevel;
@@ -79,4 +79,5 @@ public class MonsterStatusInformation {
     public Equipment.FootEquipment getCompatibleFootEquip() {
         return compatibleFootEquip;
     }
+
 }

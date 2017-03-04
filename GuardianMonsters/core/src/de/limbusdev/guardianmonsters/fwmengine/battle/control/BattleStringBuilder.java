@@ -4,7 +4,6 @@ import de.limbusdev.guardianmonsters.data.BundleAssets;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.AttackCalculationReport;
 import de.limbusdev.guardianmonsters.model.Monster;
-import de.limbusdev.guardianmonsters.fwmengine.battle.model.MonsterInBattle;
 import de.limbusdev.guardianmonsters.model.MonsterDB;
 
 /**
@@ -53,16 +52,5 @@ public class BattleStringBuilder {
         return message;
     }
 
-    public static void printEnqueuedMonster(MonsterInBattle m, int chosenTarget, int attack) {
-        System.out.println("\n----- Monster Indicator Widget -----");
-        System.out.println("Team: " + (m.battleFieldSide ? "Hero" : "Opponent"));
-        System.out.println("Chosen Member: " + m.battleFieldPosition);
-        System.out.println("Chosen Opponent: " + chosenTarget);
-        System.out.println("----- lineUpForAttack()        -----");
-        System.out.println("Position: " + m.battleFieldPosition);
-        System.out.println("Ability: " + m.monster.attacks.get(attack).name + " | Target: " + chosenTarget
-            + " | Ability chosen: " + m.attackChosen);
-        System.out.println();
-    }
     /* ..................................................................... GETTERS & SETTERS .. */
 }

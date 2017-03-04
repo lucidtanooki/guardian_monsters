@@ -14,8 +14,13 @@ public class AbilityGraph {
     public ArrayMap<Integer,Boolean> nodeEnabled;
     public ArrayMap<Integer,NodeType> typesOfNodes;
     public ArrayMap<Integer,Ability> learnableAbilities;
+    public ArrayMap<Integer,Ability> learntAbilities;
     public ArrayMap<Integer,Equipment.EQUIPMENT_TYPE> learnableEquipment;
+    public Array<Equipment.EQUIPMENT_TYPE> learntEquipment;
     public Array<Integer> metamorphosisNodes;
+
+    private ArrayMap<Integer, Node> nodes;
+    private Array<Edge> edges;
 
     int coords[][] = {
         {0,0,0}, {1,0,1}, {2,1,0}, {3,0,-1}, {4,-1,0}, {5,0,2}, {6,2,1}, {7,0,-2}, {8,-2,-1}, {9,-1,2},
@@ -50,23 +55,25 @@ public class AbilityGraph {
     };
 
     public AbilityGraph() {
-        vertices = new ArrayMap<>();
+        nodes = new ArrayMap<>();
         edges = new Array<>();
         nodeActive = new ArrayMap<>();
         nodeEnabled = new ArrayMap<>();
         typesOfNodes = new ArrayMap<>();
         learnableAbilities = new ArrayMap<>();
         learnableEquipment = new ArrayMap<>();
+        learntAbilities = new ArrayMap<>();
+        learntEquipment = new Array<>();
         metamorphosisNodes = new Array<>();
 
         for(int i = 0; i < coords.length; i++) {
             int v[] = coords[i];
-            vertices.put(i, new Vertex(v[X+1], v[Y+1], i));
+            nodes.put(i, new Node(v[X+1], v[Y+1], i));
         }
 
         for(int i = 0; i < conns.length; i++) {
             int e[] = conns[i];
-            edges.add(new Edge(vertices.get(e[X]), vertices.get(e[Y])));
+            edges.add(new Edge(nodes.get(e[X]), nodes.get(e[Y])));
         }
 
     }
@@ -101,12 +108,12 @@ public class AbilityGraph {
     }
 
     // ............................................................................... INNER CLASSES
-    public class Vertex {
+    public class Node {
         public int x;
         public int y;
         public int ID;
 
-        public Vertex(int x, int y, int ID) {
+        public Node(int x, int y, int ID) {
             this.y = y;
             this.x = x;
             this.ID = ID;
@@ -114,11 +121,11 @@ public class AbilityGraph {
     }
 
     public class Edge {
-        public Vertex from;
-        public Vertex to;
+        public Node from;
+        public Node to;
         public Orientation orientation;
 
-        public Edge(Vertex from, Vertex to) {
+        public Edge(Node from, Node to) {
             this.from = from;
             this.to = to;
             if(from.x == to.x || from.y == to.y) {
@@ -152,13 +159,10 @@ public class AbilityGraph {
         }
     }
 
-    private ArrayMap<Integer, Vertex> vertices;
-    private Array<Edge> edges;
 
 
-
-    public ArrayMap<Integer, Vertex> getVertices() {
-        return vertices;
+    public ArrayMap<Integer, Node> getNodes() {
+        return nodes;
     }
 
     public Array<Edge> getEdges() {
@@ -166,16 +170,24 @@ public class AbilityGraph {
     }
 
 
-    public void activateNode(int ID) {
-        nodeActive.put(ID,true);
-        nodeEnabled.put(ID,true);
-        enableNeighborNodes(ID);
+    public void activateNode(int nodeID) {
+        nodeActive.put(nodeID,true);
+        nodeEnabled.put(nodeID,true);
+        enableNeighborNodes(nodeID);
+
+        if(learnsAbilityAt(nodeID)) {
+            learntAbilities.put(learntAbilities.size,learnableAbilities.get(nodeID));
+        }
+
+        if(learnsEquipmentAt(nodeID)) {
+            learntEquipment.add(learnableEquipment.get(nodeID));
+        }
     }
 
-    public void enableNeighborNodes(int ID) {
+    public void enableNeighborNodes(int nodeID) {
         for (AbilityGraph.Edge e : edges) {
-            if (e.from.ID == ID || e.to.ID == ID) {
-                int nodeToBeEnabled = e.from.ID == ID ? e.to.ID : e.from.ID;
+            if (e.from.ID == nodeID || e.to.ID == nodeID) {
+                int nodeToBeEnabled = e.from.ID == nodeID ? e.to.ID : e.from.ID;
                 nodeEnabled.put(nodeToBeEnabled, true);
             }
         }

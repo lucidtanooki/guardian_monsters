@@ -17,11 +17,7 @@ import java.util.Observer;
 
 import de.limbusdev.guardianmonsters.geometry.IntVec2;
 import de.limbusdev.guardianmonsters.model.AbilityGraph;
-import de.limbusdev.guardianmonsters.model.Ability;
-import de.limbusdev.guardianmonsters.model.Equipment;
 import de.limbusdev.guardianmonsters.model.Monster;
-import de.limbusdev.guardianmonsters.model.MonsterDB;
-import de.limbusdev.guardianmonsters.model.MonsterData;
 
 /**
  * Created by georg on 27.02.17.
@@ -34,7 +30,7 @@ public class GraphWidget extends Group implements Observer {
 
     private ButtonGroup nodeGroup;
     private ArrayMap<Integer,NodeWidget> nodeWidgets;
-    private ArrayMap<AbilityGraph.Vertex,Array<EdgeWidget>> edgeWidgets;
+    private ArrayMap<AbilityGraph.Node,Array<EdgeWidget>> edgeWidgets;
     private ArrayMap<AbilityGraph.NodeType,ArrayMap<NodeStatus,ImageButton.ImageButtonStyle>> styles;
 
     private CallbackHandler callbacks;
@@ -87,7 +83,7 @@ public class GraphWidget extends Group implements Observer {
 
         nodeWidgets.clear();
         nodeGroup.clear();
-        for(AbilityGraph.Vertex v : graph.getVertices().values()) {
+        for(AbilityGraph.Node v : graph.getNodes().values()) {
             final int nodeID = v.ID;
             NodeWidget nw = new NodeWidget(skin, v, monster.abilityGraph.nodeTypeAt(nodeID));
             nw.addListener(new ClickListener() {
@@ -104,7 +100,7 @@ public class GraphWidget extends Group implements Observer {
         nodeWidgets.get(0).setChecked(true);
         refreshStatus(monster);
 
-        enableEdgesAt(graph.getVertices().get(0));
+        enableEdgesAt(graph.getNodes().get(0));
 
     }
 
@@ -112,8 +108,8 @@ public class GraphWidget extends Group implements Observer {
         for(int i : monster.abilityGraph.nodeActive.keys()) {
             if(monster.abilityGraph.nodeActive.get(i)) {
                 nodeWidgets.get(i).changeStatus(NodeStatus.ACTIVE);
-                enableEdgesAt(graph.getVertices().get(i));
-                enableNeighborNodes(graph.getVertices().get(i));
+                enableEdgesAt(graph.getNodes().get(i));
+                enableNeighborNodes(graph.getNodes().get(i));
             }
         }
     }
@@ -122,16 +118,16 @@ public class GraphWidget extends Group implements Observer {
 
     // ..................................................................................... METHODS
 
-    public void enableEdgesAt(AbilityGraph.Vertex v) {
+    public void enableEdgesAt(AbilityGraph.Node v) {
         for(EdgeWidget ew : edgeWidgets.get(v)) {
             ew.changeStatus(NodeStatus.ACTIVE);
         }
     }
 
-    public void enableNeighborNodes(AbilityGraph.Vertex v) {
+    public void enableNeighborNodes(AbilityGraph.Node v) {
         for(AbilityGraph.Edge e : graph.getEdges()) {
             if(e.from == v || e.to == v) {
-                AbilityGraph.Vertex nodeToBeEnabled = e.from == v ? e.to : e.from;
+                AbilityGraph.Node nodeToBeEnabled = e.from == v ? e.to : e.from;
                 NodeWidget nw = nodeWidgets.get(nodeToBeEnabled.ID);
                 if(!(nw.status == NodeStatus.ACTIVE)) nw.changeStatus(NodeStatus.ENABLED);
             }
@@ -149,12 +145,12 @@ public class GraphWidget extends Group implements Observer {
     }
 
     public class NodeWidget extends ImageButton {
-        private AbilityGraph.Vertex node;
+        private AbilityGraph.Node node;
         private AbilityGraph.NodeType type;
         public NodeStatus status;
         private IntVec2 offset;
 
-        public NodeWidget(Skin skin, AbilityGraph.Vertex node, AbilityGraph.NodeType type) {
+        public NodeWidget(Skin skin, AbilityGraph.Node node, AbilityGraph.NodeType type) {
             super(skin,"board-" + type.toString().toLowerCase() + "-disabled");
             this.type = type;
             this.node = node;
@@ -197,7 +193,7 @@ public class GraphWidget extends Group implements Observer {
         private ArrayMap<AbilityGraph.Orientation,String> edgeImgsDisabled;
         private AbilityGraph.Edge edge;
         private Array<Image> images;
-        public AbilityGraph.Vertex pivot;
+        public AbilityGraph.Node pivot;
 
         public EdgeWidget(AbilityGraph.Edge edge) {
             super();

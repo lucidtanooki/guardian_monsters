@@ -151,7 +151,7 @@ public class GameStateDebugger {
         while(enemyFit) {
             System.out.println("\n### Player's turn ###");
             Monster m = bs.getActiveMonster();
-            int att = MathUtils.random(0,m.attacks.size-1);
+            int att = MathUtils.random(0,m.abilityGraph.learntAbilities.size-1);
             Array<Monster> targets = new Array<Monster>();
             for(Monster h : oppTeam.monsters.values()) {
                 if(h.getHP() > 0) {

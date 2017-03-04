@@ -122,8 +122,8 @@ public class BattleSystem extends Observable {
 
         // Calculate Ability
         latestAttackReport = MonsterManager.calcAttack(
-            getActiveMonster(), target, getActiveMonster().attacks.get(attack));
-        callbackHandler.onAttack(getActiveMonster(), target, getActiveMonster().attacks.get(attack), latestAttackReport);
+            getActiveMonster(), target, getActiveMonster().abilityGraph.learntAbilities.get(attack));
+        callbackHandler.onAttack(getActiveMonster(), target, getActiveMonster().abilityGraph.learntAbilities.get(attack), latestAttackReport);
     }
 
     public void applyAttack() {
@@ -310,7 +310,7 @@ public class BattleSystem extends Observable {
         public void turn() {
             System.out.println("\n### AI's turn ###");
             Monster m = getActiveMonster();
-            int att = MathUtils.random(0,m.attacks.size-1);
+            int att = MathUtils.random(0,m.abilityGraph.learntAbilities.size-1);
             setChosenTarget(leftInBattle.get(MathUtils.random(0,leftInBattle.size-1)));
             setChosenAttack(att);
             attack();

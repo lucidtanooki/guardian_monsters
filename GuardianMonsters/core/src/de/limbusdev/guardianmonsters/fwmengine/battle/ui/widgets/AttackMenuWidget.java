@@ -25,7 +25,7 @@ public class AttackMenuWidget extends SevenButtonsWidget {
     public void init(Monster monster) {
 
         // get monsters attacks
-        Array<Ability> attacks = monster.attacks;
+        Array<Ability> attacks = monster.abilityGraph.learntAbilities.values().toArray();
 
         // Set all buttons inactive
         for(Integer i : getButtons().keys()) {

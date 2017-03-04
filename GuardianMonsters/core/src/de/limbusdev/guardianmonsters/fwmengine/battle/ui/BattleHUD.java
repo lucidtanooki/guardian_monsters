@@ -24,8 +24,6 @@ import de.limbusdev.guardianmonsters.enums.ButtonIDs;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.model.Ability;
 import de.limbusdev.guardianmonsters.model.Monster;
-import de.limbusdev.guardianmonsters.fwmengine.battle.model.MonsterInBattle;
-import de.limbusdev.guardianmonsters.model.MonsterDB;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleMainMenuWidget;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleStatusOverviewWidget;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.ObservableWidget;
@@ -178,64 +176,6 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
 
         infoLabelWidget = new InfoLabelWidget(this,skin);
     }
-
-
-
-    // ............................................................... battle methods
-
-
-    /**
-     * Removes the monster with the given position on the battle field by setting it KO and
-     * fading out the monster sprite and monsters status UI
-     * @param m
-     */
-    private void kickOutMonster(MonsterInBattle m) {
-        animationWidget.animateMonsterKO(m.battleFieldPosition,m.battleFieldSide);
-        statusWidget.fadeStatusWidget(m.battleFieldPosition, m.battleFieldSide);
-        infoLabelWidget.infoLabel.setText(MonsterDB.singleton().getNameById(m.monster.ID) + " " + Services.getL18N().l18n(BundleAssets.BATTLE).get("batt_defeated") + ".");
-
-//        System.out.println("Killed: " + m.battleFieldPosition);
-//
-//        // Change the indicator position to an active fighter
-//        if(m.battleFieldSide)
-//            leftTeam.removeValue(m, true);      // Hero Team
-//        else
-//            oppoTeam.removeValue(m, true);   // Opponent Team
-//
-//        // Spread EXP
-//        if(!m.battleFieldSide) {
-//            // Defeated Monster was part of opponents leftTeam
-//            int exp = m.monster.level * (m.monster.getHPfull() + m.monster.pStr);
-//            exp /= leftTeam.size;
-//            for(Integer i : leftTeam.keys())
-//                if(leftTeam.get(i).monster.getHP() > 0)
-//                    MonsterManager.earnEXP(leftTeam.get(i).monster,exp);
-//        }
-
-    }
-
-//    public void lineUpForAttack(MonsterInBattle m, int chosenTarget, int attack) {
-//        m.prepareForAttack(chosenTarget, attack);
-//
-//        if(GS.DEBUGGING_ON) BattleStringBuilder.printEnqueuedMonster(m,chosenTarget,attack);
-//
-//        animationQueue.add(m);
-//
-//        if(m.battleFieldSide) {
-//            // if Player has chosen attacks
-//            boolean allChosen = true;
-//            for (Integer i : leftTeam.keys()) {
-//                MonsterInBattle mib = leftTeam.get(i);
-//                allChosen = allChosen & mib.attackChosen;
-//            }
-//            if (allChosen) {
-//                aiPlayer.chooseAttacks();
-//                changeToWidgetSet(BattleState.ANIMATION);
-//                //animationQueue.sort(new MonsterSpeedComparator());
-//                updateQueues();
-//            }
-//        }
-//    }
 
 
     // ....................................................................... ui

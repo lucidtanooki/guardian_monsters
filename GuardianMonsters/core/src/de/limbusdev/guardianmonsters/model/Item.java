@@ -3,7 +3,7 @@ package de.limbusdev.guardianmonsters.model;
 import com.badlogic.gdx.math.MathUtils;
 
 /**
- * Created by georg on 17.02.17.
+ * Created by Georg Eckert on 17.02.17.
  */
 
 public abstract class Item {

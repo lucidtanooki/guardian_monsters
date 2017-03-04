@@ -14,8 +14,7 @@ public class Monster extends Observable {
     // ...................................................................................... STATIC
     public static int INSTANCECOUNTER=0;
 
-    /* ............................................................................ ATTRIBUTES .. */
-    public Array<Ability> attacks;
+    // .................................................................................. ATTRIBUTES
 
     public int INSTANCE_ID;
     public Array<Element> elements;
@@ -72,9 +71,6 @@ public class Monster extends Observable {
         this.Speed = this.SpeedFull = base.baseSpeed;
         this.nickname = "";
         this.abilityLevels = 30 ;
-
-        // INIT
-        this.attacks = new Array<>();
 
         this.elements = MonsterDB.singleton().getStatusInfos().get(ID).elements;
 

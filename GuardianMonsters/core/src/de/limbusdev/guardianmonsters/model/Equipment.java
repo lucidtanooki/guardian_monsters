@@ -101,7 +101,7 @@ public abstract class Equipment extends Item {
         @Override
         public boolean applicable(Monster m) {
             MonsterData msi = MonsterDB.singleton().getStatusInfos().get(m.ID);
-            return msi.getCompatibleHandEquip().equals(type);
+            return (msi.getCompatibleHandEquip().equals(type) && m.abilityGraph.learntEquipment.contains(EQUIPMENT_TYPE.HANDS, false));
         }
     }
 
@@ -121,7 +121,7 @@ public abstract class Equipment extends Item {
         @Override
         public boolean applicable(Monster m) {
             MonsterData msi = MonsterDB.singleton().getStatusInfos().get(m.ID);
-            return msi.getCompatibleFootEquip().equals(type);
+            return (msi.getCompatibleFootEquip().equals(type) && m.abilityGraph.learntEquipment.contains(EQUIPMENT_TYPE.FEET, false));
         }
     }
 
@@ -141,7 +141,7 @@ public abstract class Equipment extends Item {
         @Override
         public boolean applicable(Monster m) {
             MonsterData msi = MonsterDB.singleton().getStatusInfos().get(m.ID);
-            return msi.getCompatibleHeadEquip().equals(type);
+            return (msi.getCompatibleHeadEquip().equals(type) && m.abilityGraph.learntEquipment.contains(EQUIPMENT_TYPE.HEAD, false));
         }
     }
 
@@ -161,7 +161,7 @@ public abstract class Equipment extends Item {
         @Override
         public boolean applicable(Monster m) {
             MonsterData msi = MonsterDB.singleton().getStatusInfos().get(m.ID);
-            return msi.getCompatibleBodyEquip().equals(type);
+            return (msi.getCompatibleBodyEquip().equals(type)  && m.abilityGraph.learntEquipment.contains(EQUIPMENT_TYPE.BODY, false));
         }
     }
 

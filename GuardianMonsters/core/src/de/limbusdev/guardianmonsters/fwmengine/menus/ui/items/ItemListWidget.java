@@ -8,7 +8,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 
@@ -28,17 +27,17 @@ public class ItemListWidget extends Group implements Observer {
     private Inventory inventory;
     private Skin skin;
     private int lastChosenItem=0;
-    private CallbackHandler callbackHandler;
+    private ClickListener clickListener;
     private Item.CATEGORY currentFilter;
 
-    public interface CallbackHandler {
+    public interface ClickListener {
         void onChoosingItem(Item item);
     }
 
-    public ItemListWidget(Skin skin, Inventory inventory, CallbackHandler handler, Item.CATEGORY filter) {
+    public ItemListWidget(Skin skin, Inventory inventory, ClickListener handler, Item.CATEGORY filter) {
         this.inventory = inventory;
         this.skin = skin;
-        this.callbackHandler = handler;
+        this.clickListener = handler;
         this.currentFilter = filter;
 
         itemTable = new Table();
@@ -78,10 +77,10 @@ public class ItemListWidget extends Group implements Observer {
                     btnGroup.add(item);
                     itemTable.row().spaceBottom(1);
 
-                    item.addListener(new ClickListener() {
+                    item.addListener(new com.badlogic.gdx.scenes.scene2d.utils.ClickListener() {
                         @Override
                         public void clicked(InputEvent event, float x, float y) {
-                            callbackHandler.onChoosingItem(i);
+                            clickListener.onChoosingItem(i);
                             lastChosenItem = btnGroup.getCheckedIndex();
                         }
                     });

@@ -108,6 +108,10 @@ public class TeamMemberSwitcher extends Group {
     }
 
     public interface Controller {
+        /**
+         * Is called, when one of the switch buttons is clicked to choose a new team member position
+         * @param position
+         */
         void onChanged(int position);
     }
 

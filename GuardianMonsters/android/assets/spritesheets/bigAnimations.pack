@@ -1,0 +1,272 @@
+
+bigAnimations.png
+format: RGBA8888
+filter: MipMapNearestNearest,MipMapNearestLinear
+repeat: none
+mainMenuAnimation
+  rotate: false
+  xy: 1, 605
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: 19
+mainMenuAnimation
+  rotate: false
+  xy: 1, 303
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: 20
+mainMenuAnimation
+  rotate: false
+  xy: 303, 605
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: 9
+mainMenuAnimation
+  rotate: false
+  xy: 1, 1
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: 16
+mainMenuAnimation
+  rotate: false
+  xy: 303, 303
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: 7
+mainMenuAnimation
+  rotate: false
+  xy: 605, 605
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: 24
+mainMenuAnimation
+  rotate: false
+  xy: 303, 1
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: 31
+mainMenuAnimation
+  rotate: false
+  xy: 605, 303
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: 27
+mainMenuAnimation
+  rotate: false
+  xy: 605, 1
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: 11
+
+bigAnimations2.png
+format: RGBA8888
+filter: MipMapNearestNearest,MipMapNearestLinear
+repeat: none
+mainMenuAnimation
+  rotate: false
+  xy: 1, 605
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: 2
+mainMenuAnimation
+  rotate: false
+  xy: 1, 303
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: 0
+mainMenuAnimation
+  rotate: false
+  xy: 303, 605
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: 12
+mainMenuAnimation
+  rotate: false
+  xy: 1, 1
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: 26
+mainMenuAnimation
+  rotate: false
+  xy: 303, 303
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: 30
+mainMenuAnimation
+  rotate: false
+  xy: 605, 605
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: 32
+mainMenuAnimation
+  rotate: false
+  xy: 303, 1
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: 29
+mainMenuAnimation
+  rotate: false
+  xy: 605, 303
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: 25
+mainMenuAnimation
+  rotate: false
+  xy: 605, 1
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: 35
+
+bigAnimations3.png
+format: RGBA8888
+filter: MipMapNearestNearest,MipMapNearestLinear
+repeat: none
+mainMenuAnimation
+  rotate: false
+  xy: 1, 605
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: 13
+mainMenuAnimation
+  rotate: false
+  xy: 1, 303
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: 10
+mainMenuAnimation
+  rotate: false
+  xy: 303, 605
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: 14
+mainMenuAnimation
+  rotate: false
+  xy: 1, 1
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: 1
+mainMenuAnimation
+  rotate: false
+  xy: 303, 303
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: 21
+mainMenuAnimation
+  rotate: false
+  xy: 605, 605
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: 15
+mainMenuAnimation
+  rotate: false
+  xy: 303, 1
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: 34
+mainMenuAnimation
+  rotate: false
+  xy: 605, 303
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: 6
+mainMenuAnimation
+  rotate: false
+  xy: 605, 1
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: 3
+
+bigAnimations4.png
+format: RGBA8888
+filter: MipMapNearestNearest,MipMapNearestLinear
+repeat: none
+mainMenuAnimation
+  rotate: false
+  xy: 1, 605
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: 17
+mainMenuAnimation
+  rotate: false
+  xy: 1, 303
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: 8
+mainMenuAnimation
+  rotate: false
+  xy: 303, 605
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: 33
+mainMenuAnimation
+  rotate: false
+  xy: 1, 1
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: 18
+mainMenuAnimation
+  rotate: false
+  xy: 303, 303
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: 22
+mainMenuAnimation
+  rotate: false
+  xy: 605, 605
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: 23
+mainMenuAnimation
+  rotate: false
+  xy: 303, 1
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: 5
+mainMenuAnimation
+  rotate: false
+  xy: 605, 303
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: 4
+mainMenuAnimation
+  rotate: false
+  xy: 605, 1
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: 28

@@ -50,22 +50,22 @@
 
 
   "com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle": {
-    "button-sandstone":  {"font": "default-font",  "down": "label-bg-sandstone-down", "up": "label-bg-sandstone", "pressedOffsetY": -1},
+    "button-sandstone":  {"font": "font16",  "down": "label-bg-sandstone-down", "up": "label-bg-sandstone", "pressedOffsetY": -1},
 
 
-    "item-button-sandstone":  {"font": "default-font",  "down": "label-bg-sandstone-down", "up": "label-bg-sandstone", "checked": "label-bg-sandstone-down", "pressedOffsetY": -1, "checkedOffsetY": -1},
+    "item-button-sandstone":  {"font": "font16",  "down": "label-bg-sandstone-down", "up": "label-bg-sandstone", "checked": "label-bg-sandstone-down", "pressedOffsetY": -1, "checkedOffsetY": -1},
     "item-button-burgund":    {"font": "font16w",       "down": "label-bg-burgund-down",   "up": "label-bg-burgund",   "checked": "label-bg-burgund-down"}
   },
 
 	"com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle": {
-    "default":    {"font": "default-font"},
+    "default":    {"font": "font16"},
     "green":      {"font": "font16g"},
     "red":        {"font": "font16r"},
     "burgund":    {"font": "font16w", "background": "label-bg-burgund"},
     "paper":      {"font": "font16",  "background": "label-bg-paper"},
     "paper-dark-area":      {"font": "font16",  "background": "darker-paper-area"},
     "paper-border":{"font": "font16",  "background": "paper-border"},
-    "list-item":  {"font": "default-font", "background": "label-bg-sandstone"},
+    "list-item":  {"font": "font16", "background": "label-bg-sandstone"},
 
     "elem-earth":       {"font": "font16w", "background": "button-element-earth"},
     "elem-water":       {"font": "font16w", "background": "button-element-water"},
@@ -82,7 +82,7 @@
   },
 
   "com.badlogic.gdx.scenes.scene2d.ui.List$ListStyle": {
-    "default":   {"font": "default-font", "selection": "list-selection"}
+    "default":   {"font": "font16", "selection": "list-selection"}
 
   },
 

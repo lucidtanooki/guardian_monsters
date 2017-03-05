@@ -3,6 +3,7 @@ package de.limbusdev.guardianmonsters.fwmengine.menus.ui;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.Group;
@@ -23,6 +24,7 @@ import de.limbusdev.guardianmonsters.data.BundleAssets;
 import de.limbusdev.guardianmonsters.data.TextureAssets;
 import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
+import de.limbusdev.guardianmonsters.fwmengine.menus.ui.widgets.AnimatedImage;
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.OutdoorGameWorldScreen;
 import de.limbusdev.guardianmonsters.utils.GS;
 import de.limbusdev.guardianmonsters.utils.GameState;
@@ -36,7 +38,6 @@ public class MainMenuScreen implements Screen {
     /* ............................................................................ ATTRIBUTES .. */
 
     // Scene2D.ui
-    private Skin skin;
     private Stage stage;
     private Image black;
 
@@ -45,18 +46,18 @@ public class MainMenuScreen implements Screen {
     
     /* ........................................................................... CONSTRUCTOR .. */
     public MainMenuScreen() {
-        TextureAtlas uiTA = Services.getMedia().getTextureAtlas(TextureAssets.UISpriteSheetFile);
+        Skin skin = Services.getUI().getDefaultSkin();
 
-        Image bg = new Image(uiTA.findRegion("black"));
-        bg.setWidth(GS.RES_X);
-        bg.setHeight(GS.RES_Y);
+        Image bg = new Image(skin.getDrawable("black"));
+        bg.setWidth(GS.WIDTH);
+        bg.setHeight(GS.HEIGHT);
         bg.setPosition(0,0);
         black = bg;
 
-        setUpIntro(uiTA);
-        setUpUI(uiTA);
-        setUpStartMenu(uiTA);
-        setUpCredits(uiTA);
+        setUpIntro(skin);
+        setUpUI(skin);
+        setUpStartMenu(skin);
+        setUpCredits(skin);
 
         stage.addActor(black);
         stage.addActor(introScreen);
@@ -120,55 +121,38 @@ public class MainMenuScreen implements Screen {
     }
 
 
-    public void setUpUI(TextureAtlas uiTA) {
+    public void setUpUI(Skin skin) {
 
         // Scene2D
-        FitViewport fit = new FitViewport(
-                GS.RES_X, GS.RES_Y);
+        FitViewport fit = new FitViewport(GS.WIDTH, GS.HEIGHT);
         this.stage = new Stage(fit);
         Gdx.input.setInputProcessor(stage);
-        this.skin = Services.getUI().getDefaultSkin();
 
         this.logoScreen = new Group();
 
-        Image bg = new Image(Services.getMedia().getTexture(TextureAssets.mainMenuBGImgFile2));
-        bg.setWidth(1024);
-        bg.setHeight(1024);
-        bg.setPosition(900,300,Align.center);
-        bg.setOrigin(Align.center);
-        bg.addAction(Actions.alpha(0));
-        bg.act(1);
-        bg.addAction(Actions.parallel(Actions.alpha(1,30),Actions.forever(Actions.rotateBy(.3f))));
-        stage.addActor(bg);
+        Animation bgAnim = new Animation(.1f, Services.getMedia().getTextureAtlas(TextureAssets.bigAnimations).findRegions("mainMenuAnimation"));
+        bgAnim.setPlayMode(Animation.PlayMode.LOOP);
+        AnimatedImage bgAnimation = new AnimatedImage(bgAnim);
+        bgAnimation.setColor(1,1,1,.3f);
+        bgAnimation.setPosition(35,-30,Align.bottomLeft);
+        stage.addActor(bgAnimation);
 
         Image logo = new Image(Services.getMedia().getTexture(TextureAssets.mainMenuBGImgFile));
-        logo.setWidth(1080);
-        logo.setHeight(270);
-        logo.setPosition(GS.RES_X / 2, GS.RES_Y / 2, Align.center);
-        logo.addAction(Actions.forever(Actions.sequence(
-                        Actions.moveBy(0,-7, 3, Interpolation.sine),
-                        Actions.moveBy(0,7, 3, Interpolation.sine)
-                )));
+        logo.setPosition(GS.WIDTH / 2, GS.HEIGHT / 2, Align.center);
         logoScreen.addActor(logo);
 
         Label creatorLabel = new Label("by Georg Eckert", Services.getUI().getDefaultSkin(),"trans-white");
-        creatorLabel.setPosition(GS.RES_X/2,GS.ROW*14);
+        creatorLabel.setPosition(GS.WIDTH/2,GS.HEIGHT/4);
         creatorLabel.setAlignment(Align.center,Align.center);
         stage.addActor(creatorLabel);
 
 
         // Buttons ......................................................................... BUTTONS
-        TextButton.TextButtonStyle tbs = new TextButton.TextButtonStyle();
-        tbs.font = skin.getFont("default-font");
-        tbs.unpressedOffsetY = +2;
-        tbs.down = new TextureRegionDrawable(uiTA.findRegion("b192down"));
-        tbs.up   = new TextureRegionDrawable(uiTA.findRegion("b192up"));
-
         // Start Button
-        TextButton button = new TextButton(Services.getL18N().l18n(BundleAssets.GENERAL).get("main_menu_touch_start"), tbs);
-        button.setWidth(300);
-        button.setHeight(75);
-        button.setPosition(GS.RES_X / 2, 92f, Align.center);
+        TextButton button = new TextButton(Services.getL18N().l18n(BundleAssets.GENERAL).get("main_menu_touch_start"), skin, "button-192");
+        button.setWidth(192);
+        button.setHeight(48);
+        button.setPosition(GS.WIDTH/2 - 192/2, 16f, Align.bottomLeft);
 
         button.addListener(new ClickListener() {
             @Override
@@ -188,38 +172,33 @@ public class MainMenuScreen implements Screen {
         stage.addActor(logoScreen);
     }
 
-    public void setUpStartMenu(TextureAtlas uiTA) {
+    public void setUpStartMenu(Skin skin) {
         this.startMenu = new Group();
 
         // .................................................................................. IMAGES
-        Image bg = new Image(uiTA.findRegion("black"));
-        bg.setWidth(GS.RES_X);bg.setHeight(GS.RES_Y);
+        Image bg = new Image(skin.getDrawable("black"));
+        bg.setWidth(GS.WIDTH);bg.setHeight(GS.HEIGHT);
         bg.setPosition(0, 0);
         bg.addAction(Actions.alpha(.75f));
         startMenu.addActor(bg);
 
         Image mon = new Image(Services.getMedia().getMonsterSprite(100));
-        mon.setWidth(256);mon.setHeight(256);
-        mon.setPosition(GS.RES_X - 64, 64, Align.bottomRight);
+        mon.setPosition(GS.WIDTH - 8, 8, Align.bottomRight);
         startMenu.addActor(mon);
 
         // ................................................................................. BUTTONS
-        this.buttons = new ArrayMap<String, TextButton>();
+        this.buttons = new ArrayMap<>();
 
         String startButton = Services.getL18N().l18n(BundleAssets.GENERAL).get("main_menu_start_new");
-        if(SaveGameManager.doesGameSaveExist()) startButton = Services.getL18N().l18n(BundleAssets.GENERAL).get("main_menu_load_saved");
-
-        TextButton.TextButtonStyle tbs = new TextButton.TextButtonStyle();
-        tbs.font = skin.getFont("default-font");
-        tbs.unpressedOffsetY = +1;
-        tbs.down = new TextureRegionDrawable(uiTA.findRegion("b192down"));
-        tbs.up   = new TextureRegionDrawable(uiTA.findRegion("b192up"));
+        if(SaveGameManager.doesGameSaveExist()) {
+            startButton = Services.getL18N().l18n(BundleAssets.GENERAL).get("main_menu_load_saved");
+        }
 
         // ............................................................................ START BUTTON
-        TextButton button = new TextButton(startButton, tbs);
-        button.setWidth(300);
-        button.setHeight(75);
-        button.setPosition(32, GS.RES_Y - 32, Align.topLeft);
+        TextButton button = new TextButton(startButton, skin, "button-192");
+        button.setWidth(192);
+        button.setHeight(48);
+        button.setPosition(16,GS.HEIGHT-16,Align.topLeft);
 
         button.addListener(new ClickListener() {
             @Override
@@ -238,10 +217,10 @@ public class MainMenuScreen implements Screen {
 
 
         // .......................................................................... CREDITS BUTTON
-        button = new TextButton(Services.getL18N().l18n(BundleAssets.GENERAL).get("main_menu_credits"), tbs);
-        button.setWidth(300);
-        button.setHeight(75);
-        button.setPosition(32, GS.RES_Y - 128, Align.topLeft);
+        button = new TextButton(Services.getL18N().l18n(BundleAssets.GENERAL).get("main_menu_credits"), skin, "button-192");
+        button.setWidth(192);
+        button.setHeight(48);
+        button.setPosition(16,GS.HEIGHT-16-48,Align.topLeft);
 
         button.addListener(new ClickListener() {
             @Override
@@ -269,10 +248,10 @@ public class MainMenuScreen implements Screen {
         stage.addActor(startMenu);
     }
 
-    public void setUpCredits(TextureAtlas uiTA) {
+    public void setUpCredits(Skin skin) {
         TextureAtlas logos = Services.getMedia().getTextureAtlas(TextureAssets.logosSpriteSheetFile);
         this.creditsScreen = new Group();
-        Image bg = new Image(uiTA.findRegion("black"));
+        Image bg = new Image(skin.getDrawable("black"));
         bg.setWidth(GS.RES_X);bg.setHeight(4000);
         bg.setPosition(0, GS.RES_Y, Align.topLeft);
         bg.addAction(Actions.alpha(.75f));
@@ -318,16 +297,15 @@ public class MainMenuScreen implements Screen {
         creditsScreen.setVisible(false);
     }
 
-    public void setUpIntro(TextureAtlas uiTA) {
+    public void setUpIntro(Skin skin) {
         TextureAtlas logos = Services.getMedia().getTextureAtlas(TextureAssets.logosSpriteSheetFile);
         this.introScreen = new Group();
-        Image bg = new Image(uiTA.findRegion("black"));
-        bg.setWidth(GS.RES_X);
-        bg.setHeight(GS.RES_Y);
+        Image bg = new Image(skin.getDrawable("black"));
+        bg.setWidth(GS.WIDTH);
+        bg.setHeight(GS.HEIGHT);
         bg.setPosition(0,0);
         Image logo = new Image(logos.findRegion("limbusdevIntro"));
-        logo.setWidth(534);logo.setHeight(336);
-        logo.setPosition(GS.RES_X / 2, GS.RES_Y / 2,Align.center);
+        logo.setPosition(GS.WIDTH / 2, GS.HEIGHT/ 2,Align.center);
         introScreen.addActor(bg);
         introScreen.addActor(logo);
     }

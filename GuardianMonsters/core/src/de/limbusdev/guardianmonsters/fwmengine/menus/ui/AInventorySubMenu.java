@@ -7,17 +7,18 @@ import com.badlogic.gdx.utils.Align;
 import de.limbusdev.guardianmonsters.utils.GS;
 
 /**
- * Created by georg on 16.02.17.
+ * @author Georg Eckert 2017
  */
 
 public abstract class AInventorySubMenu extends Group {
     private Skin skin;
+    public static final int TOOLBAR_HEIGHT = 36;
 
     public AInventorySubMenu(Skin skin) {
         super();
         this.skin = skin;
         setDebug(GS.DEBUGGING_ON, true);
-        setSize(428,240-36);
+        setSize(GS.WIDTH,GS.HEIGHT-TOOLBAR_HEIGHT);
         setPosition(0,0, Align.bottomLeft);
     }
 

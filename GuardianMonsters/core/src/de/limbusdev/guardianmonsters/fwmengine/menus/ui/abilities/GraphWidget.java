@@ -288,6 +288,10 @@ public class GraphWidget extends Group implements Observer {
     }
 
     public interface Controller {
+        /**
+         * Defines what happens, when a node in the Graph is clicked
+         * @param nodeID    ID of the clicked graph node
+         */
         void onNodeClicked(int nodeID);
     }
 }

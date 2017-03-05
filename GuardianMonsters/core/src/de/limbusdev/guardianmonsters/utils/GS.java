@@ -4,7 +4,7 @@ import de.limbusdev.guardianmonsters.enums.DebugMode;
 
 /**
  * Static container for Settings. Every parameter used in the game should be configured here
- * Created by Georg Eckert on 21.11.15.
+ * @author Georg Eckert 2017
  */
 public class GS {
     /* ............................................................................ ATTRIBUTES .. */
@@ -19,10 +19,9 @@ public class GS {
     public static final int ONE_STEPDURATION_MS = 5;
     public static final int ONE_STEP_DURATION_PERSON = 20;
     public static final int zoom = 3;
-    public static final int MONSTER_SPRITES = 100;
 
     // ................................................................................... DEBUGGING
-    public static final boolean DEBUGGING_ON = true;
+    public static final boolean DEBUGGING_ON = false;
     public final static DebugMode DEBUG_MODE = DebugMode.INVENTORY;
     public final static int startMap = 251;
 

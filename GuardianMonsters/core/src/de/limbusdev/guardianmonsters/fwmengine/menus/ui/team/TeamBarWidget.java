@@ -15,7 +15,7 @@ import de.limbusdev.guardianmonsters.model.Monster;
 public class TeamBarWidget extends ATeamChoiceWidget {
 
 
-    public TeamBarWidget(Skin skin, ArrayMap<Integer, Monster> team, ClickHandler clHandler) {
+    public TeamBarWidget(Skin skin, ArrayMap<Integer, Monster> team, ClickListener clHandler) {
         super(skin, clHandler);
 
         setSize(260,44);

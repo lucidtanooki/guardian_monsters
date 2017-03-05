@@ -5,7 +5,6 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.ButtonGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 
 /**
@@ -15,9 +14,9 @@ import com.badlogic.gdx.utils.Align;
 public class ItemCategoryToolbar extends Group {
 
     private ButtonGroup<ImageButton> buttonGroup;
-    private ItemCategoryToolbar.CallbackHandler callbacks;
+    private ClickListener callbacks;
 
-    public ItemCategoryToolbar(Skin skin, final ItemCategoryToolbar.CallbackHandler handler) {
+    public ItemCategoryToolbar(Skin skin, final ClickListener handler) {
         super();
         this.callbacks = handler;
 
@@ -32,7 +31,7 @@ public class ItemCategoryToolbar extends Group {
         // ....................................................................................
         ImageButton medicine = new ImageButton(skin, "b-toolbar-side-medicine");
         medicine.setPosition(offX, offY, Align.topLeft);
-        medicine.addListener(new ClickListener() {
+        medicine.addListener(new com.badlogic.gdx.scenes.scene2d.utils.ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 callbacks.onMedicineButton();
@@ -44,7 +43,7 @@ public class ItemCategoryToolbar extends Group {
         // ....................................................................................
         ImageButton otherItems = new ImageButton(skin, "b-toolbar-side-other");
         otherItems.setPosition(offX, offY-gap*1, Align.topLeft);
-        otherItems.addListener(new ClickListener() {
+        otherItems.addListener(new com.badlogic.gdx.scenes.scene2d.utils.ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 callbacks.onOtherItemsButton();
@@ -55,7 +54,7 @@ public class ItemCategoryToolbar extends Group {
         // ....................................................................................
         ImageButton equip = new ImageButton(skin, "b-toolbar-side-equip");
         equip.setPosition(offX, offY-gap*2, Align.topLeft);
-        equip.addListener(new ClickListener() {
+        equip.addListener(new com.badlogic.gdx.scenes.scene2d.utils.ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 callbacks.onEquipItemsButton();
@@ -66,7 +65,7 @@ public class ItemCategoryToolbar extends Group {
         // ....................................................................................
         ImageButton keyItems = new ImageButton(skin, "b-toolbar-side-key");
         keyItems.setPosition(offX, offY-gap*3, Align.topLeft);
-        keyItems.addListener(new ClickListener() {
+        keyItems.addListener(new com.badlogic.gdx.scenes.scene2d.utils.ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 callbacks.onKeyItemsButton();
@@ -80,7 +79,7 @@ public class ItemCategoryToolbar extends Group {
 
     }
 
-    public interface CallbackHandler {
+    public interface ClickListener {
         void onMedicineButton();
         void onOtherItemsButton();
         void onEquipItemsButton();

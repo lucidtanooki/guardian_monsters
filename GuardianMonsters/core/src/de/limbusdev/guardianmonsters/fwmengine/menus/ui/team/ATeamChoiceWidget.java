@@ -6,7 +6,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.ButtonGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
@@ -23,13 +22,13 @@ import de.limbusdev.guardianmonsters.model.Monster;
 public abstract class ATeamChoiceWidget extends Group {
 
     protected Array<IntVec2> positions;
-    protected TeamCircleWidget.ClickHandler handler;
+    protected ClickListener handler;
     protected ButtonGroup<ImageButton> memberButtons;
     protected int currentPosition=0, oldPosition=0;
     protected Skin skin;
     protected Group buttons;
 
-    public ATeamChoiceWidget(Skin skin, TeamCircleWidget.ClickHandler clHandler) {
+    public ATeamChoiceWidget(Skin skin, ClickListener clHandler) {
         super();
         this.skin = skin;
         this.handler = clHandler;
@@ -57,7 +56,7 @@ public abstract class ATeamChoiceWidget extends Group {
             button.addActor(preview);
             IntVec2 pos = positions.get(key);
             button.setPosition(pos.x-3, pos.y-4, Align.bottomLeft);
-            button.addListener(new ClickListener() {
+            button.addListener(new com.badlogic.gdx.scenes.scene2d.utils.ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
                     oldPosition = currentPosition;
@@ -88,11 +87,11 @@ public abstract class ATeamChoiceWidget extends Group {
         return oldPosition;
     }
 
-    public void setHandler(TeamCircleWidget.ClickHandler handler) {
+    public void setHandler(ClickListener handler) {
         this.handler = handler;
     }
 
-    public interface ClickHandler {
+    public interface ClickListener {
         void onTeamMemberButton(int position);
     }
 

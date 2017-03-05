@@ -38,6 +38,10 @@ public class AbilityDetailWidget extends Container {
     public Controller callbacks;
 
     public interface Controller {
+        /**
+         * Is called, when the learn button of the detail widget is clicked.
+         * @param nodeID    ID of the currently chosen graph node
+         */
         void onLearn(int nodeID);
     }
 

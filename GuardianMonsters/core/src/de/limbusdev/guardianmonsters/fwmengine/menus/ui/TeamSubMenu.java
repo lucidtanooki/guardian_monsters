@@ -6,13 +6,12 @@ import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 
 import de.limbusdev.guardianmonsters.fwmengine.managers.Media;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
-import de.limbusdev.guardianmonsters.fwmengine.menus.ui.*;
+import de.limbusdev.guardianmonsters.fwmengine.menus.ui.team.ATeamChoiceWidget;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.team.MonsterStatusInventoryWidget;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.team.StatusPentagonWidget;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.team.TeamCircleWidget;
@@ -31,7 +30,7 @@ public class TeamSubMenu extends AInventorySubMenu {
     private Image monsterImg;
     private Image blackOverlay;
     private TeamCircleWidget circleWidget;
-    private TeamCircleWidget.ClickHandler choiceHandler, swapHandler;
+    private ATeamChoiceWidget.ClickListener choiceHandler, swapHandler;
     private TeamComponent team;
     private ImageButton joinsBattleButton;
     private Group monsterChoice;
@@ -49,14 +48,14 @@ public class TeamSubMenu extends AInventorySubMenu {
         monsterChoiceBg.setPosition(2,2,Align.bottomLeft);
         monsterChoice.addActor(monsterChoiceBg);
 
-        choiceHandler = new TeamCircleWidget.ClickHandler() {
+        choiceHandler = new ATeamChoiceWidget.ClickListener() {
             @Override
             public void onTeamMemberButton(int position) {
                 showGuardianInformation(position);
             }
         };
 
-        swapHandler = new TeamCircleWidget.ClickHandler() {
+        swapHandler = new ATeamChoiceWidget.ClickListener() {
             @Override
             public void onTeamMemberButton(int position) {
                 System.out.println("Clicked " + position);
@@ -84,7 +83,7 @@ public class TeamSubMenu extends AInventorySubMenu {
         blackOverlay.setSize(GS.WIDTH, GS.HEIGHT);
         ImageButton swapButton = new ImageButton(skin, "button-switch");
         swapButton.setPosition(8,8,Align.bottomLeft);
-        swapButton.addListener(new ClickListener() {
+        swapButton.addListener(new com.badlogic.gdx.scenes.scene2d.utils.ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 circleWidget.remove();
@@ -97,7 +96,7 @@ public class TeamSubMenu extends AInventorySubMenu {
 
         joinsBattleButton = new ImageButton(skin, "button-check");
         joinsBattleButton.setPosition(140-8,8,Align.bottomRight);
-        joinsBattleButton.addListener(new ClickListener() {
+        joinsBattleButton.addListener(new com.badlogic.gdx.scenes.scene2d.utils.ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 if(joinsBattleButton.isChecked())

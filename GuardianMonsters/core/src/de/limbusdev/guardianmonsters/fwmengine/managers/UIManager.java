@@ -1,6 +1,8 @@
 package de.limbusdev.guardianmonsters.fwmengine.managers;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.assets.loaders.SkinLoader;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -8,20 +10,24 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.ArrayMap;
+import com.badlogic.gdx.utils.ObjectMap;
+
+import de.limbusdev.guardianmonsters.data.SkinAssets;
 
 
 /**
- * Created by georg on 14.11.16.
+ * @author Georg Eckert 2017
  */
 
-public class UIManager implements UI {
+public class UIManager extends AssetManager implements UI  {
 
     private ArrayMap<Integer,ArrayMap<Color,BitmapFont>> fonts;
-    private Skin defaultSkin, battleSkin, inventorySkin;
     private final static Color DGREEN = Color.valueOf("3e8948");
     private final static Color DRED = Color.valueOf("9e2835");
 
     public UIManager(String fontPath) {
+
+        super();
 
         // Font
         FreeTypeFontGenerator gen = new FreeTypeFontGenerator(
@@ -51,29 +57,25 @@ public class UIManager implements UI {
 
 
         // Skins
-        defaultSkin = new Skin();
-        defaultSkin.addRegions(new TextureAtlas(Gdx.files.internal("scene2d/uiskin.atlas")));
-        defaultSkin.addRegions(new TextureAtlas(Gdx.files.internal("scene2d/UI.pack")));
-        defaultSkin.add("default-font", fonts.get(32).get(Color.BLACK));
-        defaultSkin.add("white", fonts.get(32).get(Color.WHITE));
-        defaultSkin.load(Gdx.files.internal("scene2d/uiskin.json"));
 
-        battleSkin = new Skin();
-        battleSkin.addRegions(new TextureAtlas(Gdx.files.internal("scene2d/battleUI.pack")));
-        battleSkin.add("default-font", fonts.get(32).get(Color.BLACK));
-        battleSkin.add("white", fonts.get(32).get(Color.WHITE));
-        battleSkin.load(Gdx.files.internal("scene2d/battleuiskin.json"));
+        ObjectMap<String, Object> skinResources = new ObjectMap<>();
+        skinResources.put("default-font", fonts.get(32).get(Color.BLACK));
+        skinResources.put("white", fonts.get(32).get(Color.WHITE));
+        skinResources.put("font16", fonts.get(16).get(Color.BLACK));
+        skinResources.put("font16w", fonts.get(16).get(Color.WHITE));
+        skinResources.put("font16g", fonts.get(16).get(DGREEN));
+        skinResources.put("font16r", fonts.get(16).get(DRED));
 
-        inventorySkin = new Skin();
-        inventorySkin.addRegions(new TextureAtlas(Gdx.files.internal("scene2d/inventoryUI.pack")));
-        inventorySkin.add("default-font", fonts.get(16).get(Color.BLACK));
-        inventorySkin.add("white", fonts.get(16).get(Color.WHITE));
-        inventorySkin.add("font16", fonts.get(16).get(Color.BLACK));
-        inventorySkin.add("font16w", fonts.get(16).get(Color.WHITE));
-        inventorySkin.add("font16g", fonts.get(16).get(DGREEN));
-        inventorySkin.add("font16r", fonts.get(16).get(DRED));
-        inventorySkin.load(Gdx.files.internal("scene2d/inventoryUIskin.json"));
+        String[] skinPaths = {
+            SkinAssets.defaultSkin,
+            SkinAssets.battleSkin,
+            SkinAssets.inventorySkin
+        };
 
+        for(String path : skinPaths) {
+            load(path + ".json", Skin.class, new SkinLoader.SkinParameter(path + ".atlas", skinResources));
+        }
+        finishLoading();
     }
 
     @Override
@@ -83,24 +85,21 @@ public class UIManager implements UI {
 
     @Override
     public Skin getDefaultSkin() {
-        return defaultSkin;
+        return get(SkinAssets.defaultSkin + ".json", Skin.class);
     }
 
     @Override
     public Skin getBattleSkin() {
-        return battleSkin;
+        return get(SkinAssets.battleSkin + ".json", Skin.class);
     }
 
     @Override
     public Skin getInventorySkin() {
-        return inventorySkin;
+        return get(SkinAssets.inventorySkin + ".json", Skin.class);
     }
 
     @Override
     public void dispose() {
-        this.defaultSkin.dispose();
-        this.battleSkin.dispose();
-        this.inventorySkin.dispose();
         for(ArrayMap<Color,BitmapFont> fm : fonts.values()) {
             for(BitmapFont bmf : fm.values()) {
                 bmf.dispose();

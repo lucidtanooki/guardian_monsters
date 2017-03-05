@@ -15,90 +15,75 @@ import java.util.Observer;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.abilities.AbilityDetailWidget;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.abilities.GraphWidget;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.team.TeamMemberSwitcher;
+import de.limbusdev.guardianmonsters.fwmengine.menus.ui.widgets.LogoWithCounter;
+import de.limbusdev.guardianmonsters.fwmengine.menus.ui.widgets.ScrollableWidget;
 import de.limbusdev.guardianmonsters.model.Monster;
 import de.limbusdev.guardianmonsters.utils.GS;
 
 
 /**
- * Created by Georg Eckert on 21.02.17.
+ * AblityMapSubMenu contains the AbilityGraph and makes it possible to further develop the active
+ * monster.
+ *
+ * @author Georg Eckert 2017
  */
 
-public class AbilityMapSubMenu extends AInventorySubMenu
-    implements Observer, GraphWidget.Controller, TeamMemberSwitcher.Controller, AbilityDetailWidget.Controller {
+public class AbilityMapSubMenu extends AInventorySubMenu implements Observer,
+    GraphWidget.Controller, TeamMemberSwitcher.Controller, AbilityDetailWidget.Controller {
 
     private ArrayMap<Integer, Monster> team;
     private GraphWidget graphWidget;
     private AbilityDetailWidget details;
     private TeamMemberSwitcher switcher;
-    private Label remainingLvls;
+    LogoWithCounter remainingLevels;
 
-
-    public AbilityMapSubMenu(Skin skin, ArrayMap<Integer,Monster> team) {
+    // ................................................................................. CONSTRUCTOR
+    public AbilityMapSubMenu(Skin skin, ArrayMap<Integer, Monster> team) {
         super(skin);
         this.team = team;
 
-        for(Monster m : this.team.values()) {
+        for (Monster m : this.team.values()) {
             m.addObserver(this);
         }
 
-        // Initial Setup
-        Group container = new Group();
-        container.setSize(1200,600);
-
         graphWidget = new GraphWidget(skin, this);
-        graphWidget.setPosition(300,150,Align.bottomLeft);
         graphWidget.init(this.team.get(0));
 
-        container.addActor(graphWidget);
-
-        ScrollPane scrollPane = new ScrollPane(container,skin);
-        scrollPane.setSize(GS.WIDTH,204);
-        scrollPane.setPosition(0,0,Align.bottomLeft);
-        scrollPane.setScrollBarPositions(true, true);
-        scrollPane.layout();
-        scrollPane.setScrollPercentX(.5f);
-        scrollPane.setScrollPercentY(.5f);
-        addActor(scrollPane);
+        ScrollableWidget scrollWidget = new ScrollableWidget(GS.WIDTH, GS.HEIGHT - 36, 1200, 600, graphWidget, skin);
+        scrollWidget.setPosition(0, 0, Align.bottomLeft);
+        addActor(scrollWidget);
 
         switcher = new TeamMemberSwitcher(skin, this.team, this);
-        switcher.setPosition(2,202,Align.topLeft);
+        switcher.setPosition(2, 202, Align.topLeft);
         addActor(switcher);
 
         details = new AbilityDetailWidget(skin, this);
-        details.setPosition(GS.WIDTH-2,2,Align.bottomRight);
+        details.setPosition(GS.WIDTH - 2, 2, Align.bottomRight);
         addActor(details);
 
-        Group remLvlGrp = new Group();
-        remLvlGrp.setSize(64,27);
-        remLvlGrp.setPosition(4,6,Align.bottomLeft);
-        Container remainingLvlsCont = new Container(remLvlGrp);
-        remainingLvlsCont.setSize(64,27);
-        remainingLvlsCont.setBackground(skin.getDrawable("label-bg-sandstone"));
-        remainingLvlsCont.setPosition(GS.WIDTH-2,68,Align.bottomRight);
-        Image lvls = new Image(skin.getDrawable("stats-symbol-exp"));
-        lvls.setSize(16,16);
-        lvls.setPosition(4,5,Align.bottomLeft);
-        remainingLvls = new Label(Integer.toString(this.team.get(0).getAbilityLevels()), skin, "default");
-        remainingLvls.setPosition(22,6,Align.bottomLeft);
-        remLvlGrp.addActor(lvls);
-        remLvlGrp.addActor(remainingLvls);
-        addActor(remainingLvlsCont);
+        remainingLevels = new LogoWithCounter(skin, "label-bg-sandstone", "stats-symbol-exp");
+        remainingLevels.setPosition(GS.WIDTH - 2, 67, Align.bottomRight);
+        addActor(remainingLevels);
+        remainingLevels.counter.setText(Integer.toString(this.team.get(0).getAbilityLevels()));
 
         details.init(this.team.get(0), 0);
 
-
     }
 
+    /**
+     * Takes the currently chosen monster and refreshes the display of remaining levels
+     */
     public void refresh() {
-        remainingLvls.setText(Integer.toString(team.get(switcher.getCurrentlyChosen()).getAbilityLevels()));
+        Monster activeMonster = team.get(switcher.getCurrentlyChosen());
+        remainingLevels.counter.setText(Integer.toString(activeMonster.getAbilityLevels()));
     }
 
 
     @Override
     public void update(Observable o, Object arg) {
-        if(o instanceof Monster) {
-            Monster m = (Monster)o;
-            if(m.equals(team.get(switcher.getCurrentlyChosen()))) {
+        if (o instanceof Monster) {
+            Monster m = (Monster) o;
+            if (m.equals(team.get(switcher.getCurrentlyChosen()))) {
                 refresh();
             }
         }
@@ -109,7 +94,7 @@ public class AbilityMapSubMenu extends AInventorySubMenu
     @Override
     public void onNodeClicked(int nodeID) {
         Monster monster = team.get(switcher.getCurrentlyChosen());
-        details.init(monster,nodeID);
+        details.init(monster, nodeID);
     }
 
     @Override
@@ -124,7 +109,7 @@ public class AbilityMapSubMenu extends AInventorySubMenu
         m.consumeAbilityLevel();
         m.abilityGraph.activateNode(nodeID);
         graphWidget.refreshStatus(m);
-        details.init(m,nodeID);
+        details.init(m, nodeID);
     }
 
 }

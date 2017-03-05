@@ -42,10 +42,10 @@ public class GuardianMonsters extends Game{
 
     @Override
     public void dispose() {
+        Services.getUI().dispose();
         Services.getMedia().dispose();
         Services.getAudio().dispose();
         Services.getL18N().dispose();
-        Services.getUI().dispose();
         Services.getScreenManager().dispose();
         super.dispose();
     }

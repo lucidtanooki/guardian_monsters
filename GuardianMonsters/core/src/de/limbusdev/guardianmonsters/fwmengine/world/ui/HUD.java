@@ -46,14 +46,12 @@ import de.limbusdev.guardianmonsters.utils.GS;
 
 
 /**
- * Copyright @ Georg Eckert
- *
+ * @author Georg Eckert 2017
  * This Class creates a HUD which is displayed on top of the level screen, when not in battle.
  * It includes the main menu (save, quit, monsters, ...), controls (dpad, A, B) and text display.
  */
 public class HUD extends InputAdapter {
     /* ............................................................................ ATTRIBUTES .. */
-    private Skin skin;
     public Stage stage;
 
     public Vector2 touchPos;
@@ -84,21 +82,19 @@ public class HUD extends InputAdapter {
         this.saveGameManager = saveGameManager;
         this.openHUDELement = HUDElements.NONE;
         this.hero = hero;
-        TextureAtlas UItextures = Services.getMedia().getTextureAtlas(TextureAssets.UISpriteSheetFile);
-
 
         // Scene2D
         FitViewport fit = new FitViewport(GS.RES_X, GS.RES_Y);
         this.stage = new Stage(fit);
-        this.skin = Services.getUI().getDefaultSkin();
+        Skin skin = Services.getUI().getDefaultSkin();
 
-        setUpConversation(UItextures);
-        setUpTopLevelButtons(UItextures);
-        setUpDpad(UItextures);
+        setUpConversation(skin);
+        setUpTopLevelButtons(skin);
+        setUpDpad(skin);
 
 
         // Images ............................................................................ START
-        this.blackCourtain = new Image(UItextures.findRegion("black"));
+        this.blackCourtain = new Image(skin.getDrawable("black"));
         this.blackCourtain.setWidth(GS.RES_X);
         this.blackCourtain.setHeight(GS.RES_Y);
         this.blackCourtain.setPosition(0, 0);
@@ -114,7 +110,7 @@ public class HUD extends InputAdapter {
     /**
      * Creates main menu buttons and the dpad
      */
-    private void setUpTopLevelButtons(TextureAtlas UItextures) {
+    private void setUpTopLevelButtons(Skin skin) {
 
         // Menu Button
         TextButton menu = new TextButton(Services.getL18N().l18n(BundleAssets.GENERAL).get("hud_menu"), skin, "open-menu");
@@ -346,16 +342,16 @@ public class HUD extends InputAdapter {
         blackCourtain.addAction(Actions.sequence(Actions.visible(true),Actions.fadeIn(1)));
     }
 
-    private void setUpConversation(TextureAtlas UItextures) {
+    private void setUpConversation(Skin skin) {
         Label.LabelStyle lbs = new Label.LabelStyle();
 
         this.conversationLabel = new Group();
 
-        Image convImg = new Image(UItextures.findRegion("dialog_bg2"));
+        Image convImg = new Image(skin.getDrawable("dialog_bg2"));
         convImg.setWidth(576); convImg.setHeight(144);
         convImg.setPosition(GS.RES_X/2,0,Align.bottom);
 
-        Image convImg2 = new Image(UItextures.findRegion("dialog_name_bg2"));
+        Image convImg2 = new Image(skin.getDrawable("dialog_name_bg2"));
         convImg2.setWidth(267); convImg2.setHeight(54);
         convImg2.setPosition(GS.RES_X/2-267,132,Align.bottomLeft);
 
@@ -364,7 +360,7 @@ public class HUD extends InputAdapter {
 
         lbs = new Label.LabelStyle();
         lbs.font=skin.getFont("default-font");
-        lbs.background=new TextureRegionDrawable(UItextures.findRegion("transparent"));
+        lbs.background=skin.getDrawable("transparent");
         convText = new Label("Test label", lbs);
         convText.setHeight(130);
         convText.setWidth(540);
@@ -376,7 +372,7 @@ public class HUD extends InputAdapter {
 
         lbs = new Label.LabelStyle();
         lbs.font = skin.getFont("default-font");
-        lbs.background = new TextureRegionDrawable(UItextures.findRegion("transparent"));
+        lbs.background = skin.getDrawable("transparent");
         titleLabel = new Label("", lbs);
         titleLabel.setHeight(48);
         titleLabel.setWidth(256);
@@ -479,7 +475,7 @@ public class HUD extends InputAdapter {
     }
 
     // ............................................................................. SET UP CONTROLS
-    private void setUpDpad(TextureAtlas UItextures) {
+    private void setUpDpad(Skin skin) {
         // Initialize DPAD
         this.touchPos = new Vector2();
         float borderDist = GS.RES_X *0.0125f;
@@ -491,12 +487,12 @@ public class HUD extends InputAdapter {
         this.dPadCenter = dPadArea.getCenter(new Vector2());
         this.dPadCenterDist = new Vector2();
 
-        this.dPadImgs = new Array<TextureRegion>();
-        this.dPadImgs.add(UItextures.findRegion("dpad_idle"));
-        this.dPadImgs.add(UItextures.findRegion("dpad_up"));
-        this.dPadImgs.add(UItextures.findRegion("dpad_right"));
-        this.dPadImgs.add(UItextures.findRegion("dpad_down"));
-        this.dPadImgs.add(UItextures.findRegion("dpad_left"));
+        this.dPadImgs = new Array<>();
+        this.dPadImgs.add(skin.getRegion("dpad_idle"));
+        this.dPadImgs.add(skin.getRegion("dpad_up"));
+        this.dPadImgs.add(skin.getRegion("dpad_right"));
+        this.dPadImgs.add(skin.getRegion("dpad_down"));
+        this.dPadImgs.add(skin.getRegion("dpad_left"));
         dpadImage = new Image(dPadImgs.first());
         dpadImage.setSize(dPadArea.width, dPadArea.height);
         dpadImage.setPosition(dPadCenter.x, dPadCenter.y, Align.center);

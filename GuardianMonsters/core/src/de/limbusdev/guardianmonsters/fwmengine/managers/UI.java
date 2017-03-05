@@ -9,12 +9,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 public interface UI {
 
-    public BitmapFont getFont(int color);
-
-    public Skin getDefaultSkin();
-
-    public Skin getBattleSkin();
-
-    public Skin getInventorySkin();
+    BitmapFont getFont(int color);
+    Skin getDefaultSkin();
+    Skin getBattleSkin();
+    Skin getInventorySkin();
+    void dispose();
 
 }

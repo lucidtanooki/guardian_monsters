@@ -22,4 +22,9 @@ public class NullL18N implements L18N {
     public BitmapFont getFont() {
         return null;
     }
+
+    @Override
+    public void dispose() {
+        // DO Nothing
+    }
 }

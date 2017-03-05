@@ -22,4 +22,6 @@ public interface ScreenManager {
     public void popScreen();
 
     public Game getGame();
+
+    void dispose();
 }

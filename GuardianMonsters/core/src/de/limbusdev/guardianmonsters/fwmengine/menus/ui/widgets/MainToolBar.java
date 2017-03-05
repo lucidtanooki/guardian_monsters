@@ -1,4 +1,4 @@
-package de.limbusdev.guardianmonsters.fwmengine.menus.ui;
+package de.limbusdev.guardianmonsters.fwmengine.menus.ui.widgets;
 
 
 import com.badlogic.gdx.scenes.scene2d.Group;
@@ -20,9 +20,9 @@ import de.limbusdev.guardianmonsters.utils.GS;
 public class MainToolBar extends Group {
 
     private ButtonGroup<ImageButton> buttonGroup;
-    private CallbackHandler callbacks;
+    private Controller callbacks;
 
-    public MainToolBar(Skin skin, final CallbackHandler handler) {
+    public MainToolBar(Skin skin, final Controller handler) {
         super();
         this.callbacks = handler;
 
@@ -97,7 +97,7 @@ public class MainToolBar extends Group {
 
     }
 
-    public interface CallbackHandler {
+    public interface Controller {
         void onTeamButton();
         void onItemsButton();
         void onAbilityButton();

@@ -58,4 +58,11 @@ public class ConcreteScreenManager implements ScreenManager {
         return game;
     }
 
+    @Override
+    public void dispose() {
+        for(Screen s : gameStateStack) {
+            s.dispose();
+        }
+    }
+
 }

@@ -21,9 +21,7 @@ public class UIManager implements UI {
     private final static Color DGREEN = Color.valueOf("3e8948");
     private final static Color DRED = Color.valueOf("9e2835");
 
-    public UIManager(
-        String fontPath
-    ) {
+    public UIManager(String fontPath) {
 
         // Font
         FreeTypeFontGenerator gen = new FreeTypeFontGenerator(
@@ -96,6 +94,18 @@ public class UIManager implements UI {
     @Override
     public Skin getInventorySkin() {
         return inventorySkin;
+    }
+
+    @Override
+    public void dispose() {
+        this.defaultSkin.dispose();
+        this.battleSkin.dispose();
+        this.inventorySkin.dispose();
+        for(ArrayMap<Color,BitmapFont> fm : fonts.values()) {
+            for(BitmapFont bmf : fm.values()) {
+                bmf.dispose();
+            }
+        }
     }
 
 

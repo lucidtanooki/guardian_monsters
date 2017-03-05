@@ -1,4 +1,4 @@
-package de.limbusdev.guardianmonsters.fwmengine.menus.ui.widgets;
+package de.limbusdev.guardianmonsters.fwmengine.menus.ui.abilities;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.scenes.scene2d.Group;
@@ -15,6 +15,7 @@ import com.badlogic.gdx.utils.ArrayMap;
 import java.util.Observable;
 import java.util.Observer;
 
+import de.limbusdev.guardianmonsters.fwmengine.menus.ui.widgets.AnimatedImage;
 import de.limbusdev.guardianmonsters.geometry.IntVec2;
 import de.limbusdev.guardianmonsters.model.AbilityGraph;
 import de.limbusdev.guardianmonsters.model.Monster;
@@ -33,14 +34,14 @@ public class GraphWidget extends Group implements Observer {
     private ArrayMap<AbilityGraph.Node,Array<EdgeWidget>> edgeWidgets;
     private ArrayMap<AbilityGraph.NodeType,ArrayMap<NodeStatus,ImageButton.ImageButtonStyle>> styles;
 
-    private CallbackHandler callbacks;
+    private Controller callbacks;
 
     private Monster currentMonster;
 
     private AnimatedImage nodeActivationAnimation;
 
 
-    public GraphWidget(Skin skin, CallbackHandler callbacks) {
+    public GraphWidget(Skin skin, Controller callbacks) {
         super();
         this.skin = skin;
         this.callbacks = callbacks;
@@ -286,7 +287,7 @@ public class GraphWidget extends Group implements Observer {
         DISABLED, ENABLED, ACTIVE,
     }
 
-    public interface CallbackHandler {
+    public interface Controller {
         void onNodeClicked(int nodeID);
     }
 }

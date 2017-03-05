@@ -5,42 +5,33 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.HorizontalGroup;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
+import de.limbusdev.guardianmonsters.fwmengine.menus.ui.items.KeyItemsSubMenu;
+import de.limbusdev.guardianmonsters.fwmengine.menus.ui.widgets.MainToolBar;
+import de.limbusdev.guardianmonsters.fwmengine.menus.ui.widgets.TiledImage;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TeamComponent;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.model.Inventory;
-import de.limbusdev.guardianmonsters.model.Monster;
 import de.limbusdev.guardianmonsters.utils.GS;
 
 /**
- * Inventory Screen, holds Team view, Character View, Item View, Encyclopedia
+ * Inventory Screen, holds Team view, Ability Board, Item View, Encyclopedia
  * Copyright Georg Eckert
  */
-public class InventoryScreen implements Screen {
+public class InventoryScreen implements Screen, MainToolBar.Controller {
+
+    private static final String BG_TILE = "bg-pattern-3";
 
     private Stage stage;
     private Skin skin;
-    private Group toolBar;
     private ArrayMap<String,Group> views;
-    private ArrayMap<Integer,Monster> team;
 
     public InventoryScreen(TeamComponent team, Inventory inventory) {
-        this.team = team.monsters;
-
         FitViewport fit = new FitViewport(GS.WIDTH, GS.HEIGHT);
         this.stage = new Stage(fit);
         this.skin = Services.getUI().getInventorySkin();
@@ -50,69 +41,25 @@ public class InventoryScreen implements Screen {
         tileBackground();
         assembleToolbar();
 
-        views.put("team", new TeamSubMenu(skin, team));
-        views.put("items", new ItemsSubMenu(skin, inventory, team.monsters));
-        views.put("ability", new AbilityMapSubMenu(skin, team.monsters));
-        views.put("key", new KeyItemsSubMenu(skin, inventory));
+        views.put("team",       new TeamSubMenu(skin, team));
+        views.put("items",      new ItemsSubMenu(skin, inventory, team.monsters));
+        views.put("ability",    new AbilityMapSubMenu(skin, team.monsters));
+        views.put("key",        new KeyItemsSubMenu(skin, inventory));
 
         stage.addActor(views.get("team"));
     }
 
-    // ..................................................................................... TOOLBAR
-    private void assembleToolbar() {
-        MainToolBar.CallbackHandler callbacks = new MainToolBar.CallbackHandler() {
 
-            private void removeSubMenus() {
-                for(Actor a : views.values()) a.remove();
-            }
-
-            @Override
-            public void onTeamButton() {
-                removeSubMenus();
-                ((TeamSubMenu)views.get("team")).refresh();
-                stage.addActor(views.get("team"));
-            }
-
-            @Override
-            public void onItemsButton() {
-                removeSubMenus();
-                stage.addActor(views.get("items"));
-            }
-
-            @Override
-            public void onAbilityButton() {
-                removeSubMenus();
-                stage.addActor(views.get("ability"));
-            }
-
-            @Override
-            public void onKeyButton() {
-                removeSubMenus();
-                stage.addActor(views.get("key"));
-            }
-
-            @Override
-            public void onExitButton() {
-                removeSubMenus();
-            }
-        };
-
-        MainToolBar toolBar = new MainToolBar(skin, callbacks);
-        toolBar.setPosition(0,GS.HEIGHT-36,Align.bottomLeft);
-
-        stage.addActor(toolBar);
-    }
-
+    /**
+     * Tiles the complete Background with a specific 16x16 image
+     */
     private void tileBackground() {
-        // fill background
-        for(int x=0; x<27; x++) {
-            for(int y=0; y<13; y++) {
-                Image bgTile = new Image(skin.getDrawable("bg-pattern-3"));
-                bgTile.setPosition(x*16, y*16-4, Align.bottomLeft);
-                stage.addActor(bgTile);
-            }
-        }
+        TiledImage bg = new TiledImage(skin.getDrawable(BG_TILE), 27, 13);
+        bg.setPosition(0, -4, Align.bottomLeft);
+        stage.addActor(bg);
     }
+
+    // .............................................................................. SCREEN METHODS
 
     @Override
     public void show() {
@@ -136,21 +83,66 @@ public class InventoryScreen implements Screen {
 
     @Override
     public void pause() {
-
+        // TODO
     }
 
     @Override
     public void resume() {
-
+        // TODO
     }
 
     @Override
     public void hide() {
-
+        // TODO
     }
 
     @Override
     public void dispose() {
         stage.dispose();
+    }
+
+
+    // ...................................................................... MAINTOOLBAR CONTROLLER
+
+    private void assembleToolbar() {
+
+        MainToolBar toolBar = new MainToolBar(skin, this);
+        toolBar.setPosition(0,GS.HEIGHT,Align.topLeft);
+
+        stage.addActor(toolBar);
+    }
+
+    private void removeSubMenus() {
+        for(Actor a : views.values()) a.remove();
+    }
+
+    @Override
+    public void onTeamButton() {
+        removeSubMenus();
+        ((TeamSubMenu)views.get("team")).refresh();
+        stage.addActor(views.get("team"));
+    }
+
+    @Override
+    public void onItemsButton() {
+        removeSubMenus();
+        stage.addActor(views.get("items"));
+    }
+
+    @Override
+    public void onAbilityButton() {
+        removeSubMenus();
+        stage.addActor(views.get("ability"));
+    }
+
+    @Override
+    public void onKeyButton() {
+        removeSubMenus();
+        stage.addActor(views.get("key"));
+    }
+
+    @Override
+    public void onExitButton() {
+        removeSubMenus();
     }
 }

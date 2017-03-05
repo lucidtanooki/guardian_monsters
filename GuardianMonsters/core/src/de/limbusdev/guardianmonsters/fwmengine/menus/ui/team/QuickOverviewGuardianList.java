@@ -1,8 +1,7 @@
-package de.limbusdev.guardianmonsters.fwmengine.menus.ui;
+package de.limbusdev.guardianmonsters.fwmengine.menus.ui.team;
 
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
@@ -12,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ArrayMap;
 
+import de.limbusdev.guardianmonsters.fwmengine.menus.ui.items.GuardianOverviewButton;
 import de.limbusdev.guardianmonsters.model.Item;
 import de.limbusdev.guardianmonsters.model.Monster;
 import de.limbusdev.guardianmonsters.utils.GS;
@@ -27,12 +27,10 @@ public class QuickOverviewGuardianList extends Group {
 
     private CallbackHandler handler;
     private Image blackLayer;
-    private Item item;
 
     public QuickOverviewGuardianList(Skin skin, ArrayMap<Integer, Monster> team, CallbackHandler cBhandler, Item item) {
 
         this.handler = cBhandler;
-        this.item = item;
 
         blackLayer = new Image(skin.getDrawable("black-a80"));
         blackLayer.setSize(GS.WIDTH, GS.HEIGHT);

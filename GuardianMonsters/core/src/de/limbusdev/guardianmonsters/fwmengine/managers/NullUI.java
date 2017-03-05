@@ -28,5 +28,10 @@ public class NullUI implements UI {
         return null;
     }
 
+    @Override
+    public void dispose() {
+        // Do Nothing
+    }
+
 
 }

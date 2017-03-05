@@ -26,7 +26,7 @@ import de.limbusdev.guardianmonsters.fwmengine.world.model.MapPersonInformation;
 import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager;
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.BattleFactory;
 import de.limbusdev.guardianmonsters.model.Inventory;
-import de.limbusdev.guardianmonsters.model.ItemInfo;
+import de.limbusdev.guardianmonsters.model.ItemDB;
 import de.limbusdev.guardianmonsters.utils.GS;
 import de.limbusdev.guardianmonsters.utils.GameState;
 import de.limbusdev.guardianmonsters.utils.UnitConverter;
@@ -102,16 +102,16 @@ public class EntityFactory {
 
         // Inventory
         Inventory inventory = new Inventory();
-        inventory.putItemInInventory(ItemInfo.getInst().getItem("bread"));
-        inventory.putItemInInventory(ItemInfo.getInst().getItem("bread"));
-        inventory.putItemInInventory(ItemInfo.getInst().getItem("bread"));
-        inventory.putItemInInventory(ItemInfo.getInst().getItem("bread"));
-        inventory.putItemInInventory(ItemInfo.getInst().getItem("potion-blue"));
-        inventory.putItemInInventory(ItemInfo.getInst().getItem("potion-blue"));
-        inventory.putItemInInventory(ItemInfo.getInst().getItem("potion-blue"));
-        inventory.putItemInInventory(ItemInfo.getInst().getItem("angel-tear"));
-        inventory.putItemInInventory(ItemInfo.getInst().getItem("sword-wood"));
-        inventory.putItemInInventory(ItemInfo.getInst().getItem("claws-wood"));
+        inventory.putItemInInventory(ItemDB.singleton().getItem("bread"));
+        inventory.putItemInInventory(ItemDB.singleton().getItem("bread"));
+        inventory.putItemInInventory(ItemDB.singleton().getItem("bread"));
+        inventory.putItemInInventory(ItemDB.singleton().getItem("bread"));
+        inventory.putItemInInventory(ItemDB.singleton().getItem("potion-blue"));
+        inventory.putItemInInventory(ItemDB.singleton().getItem("potion-blue"));
+        inventory.putItemInInventory(ItemDB.singleton().getItem("potion-blue"));
+        inventory.putItemInInventory(ItemDB.singleton().getItem("angel-tear"));
+        inventory.putItemInInventory(ItemDB.singleton().getItem("sword-wood"));
+        inventory.putItemInInventory(ItemDB.singleton().getItem("claws-wood"));
 
         InventoryComponent inventoryComp = new InventoryComponent(inventory);
         hero.add(inventoryComp);

@@ -15,9 +15,9 @@ import de.limbusdev.guardianmonsters.enums.TextureAtlasType;
 
 public interface Media {
 
-    public void dispose();
+    void dispose();
 
-    public TextureAtlas getTextureAtlasType(TextureAtlasType type);
+    TextureAtlas getTextureAtlasType(TextureAtlasType type);
 
     /**
      * Texture Atlas for a person
@@ -25,15 +25,15 @@ public interface Media {
      * @param index
      * @return
      */
-    public TextureAtlas getPersonTextureAtlas(boolean male, int index);
+    TextureAtlas getPersonTextureAtlas(boolean male, int index);
 
-    public ArrayMap<SkyDirection, Animation> getPersonAnimationSet(boolean gender, int index);
+    ArrayMap<SkyDirection, Animation> getPersonAnimationSet(boolean gender, int index);
 
-    public ArrayMap<SkyDirection, Animation> getPersonAnimationSet(String name);
+    ArrayMap<SkyDirection, Animation> getPersonAnimationSet(String name);
 
-    public ArrayMap<SkyDirection, Animation> getPersonAnimationSet(TextureAtlas atlas);
+    ArrayMap<SkyDirection, Animation> getPersonAnimationSet(TextureAtlas atlas);
 
-    public Texture getTexture(String path);
+    Texture getTexture(String path);
 
     public TextureAtlas.AtlasRegion getMonsterSprite(int index);
 

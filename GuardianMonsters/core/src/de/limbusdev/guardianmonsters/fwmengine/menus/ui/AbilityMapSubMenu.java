@@ -12,7 +12,9 @@ import com.badlogic.gdx.utils.ArrayMap;
 import java.util.Observable;
 import java.util.Observer;
 
-import de.limbusdev.guardianmonsters.fwmengine.menus.ui.widgets.*;
+import de.limbusdev.guardianmonsters.fwmengine.menus.ui.abilities.AbilityDetailWidget;
+import de.limbusdev.guardianmonsters.fwmengine.menus.ui.abilities.GraphWidget;
+import de.limbusdev.guardianmonsters.fwmengine.menus.ui.team.TeamMemberSwitcher;
 import de.limbusdev.guardianmonsters.model.Monster;
 import de.limbusdev.guardianmonsters.utils.GS;
 
@@ -21,20 +23,21 @@ import de.limbusdev.guardianmonsters.utils.GS;
  * Created by Georg Eckert on 21.02.17.
  */
 
-public class AbilityMapSubMenu extends AInventorySubMenu implements Observer {
+public class AbilityMapSubMenu extends AInventorySubMenu
+    implements Observer, GraphWidget.Controller, TeamMemberSwitcher.Controller, AbilityDetailWidget.Controller {
 
     private ArrayMap<Integer, Monster> team;
     private GraphWidget graphWidget;
     private AbilityDetailWidget details;
     private TeamMemberSwitcher switcher;
-
     private Label remainingLvls;
 
 
-    public AbilityMapSubMenu(Skin skin, final ArrayMap<Integer,Monster> teamMonsters) {
+    public AbilityMapSubMenu(Skin skin, ArrayMap<Integer,Monster> team) {
         super(skin);
-        this.team = teamMonsters;
-        for(Monster m : team.values()) {
+        this.team = team;
+
+        for(Monster m : this.team.values()) {
             m.addObserver(this);
         }
 
@@ -42,17 +45,9 @@ public class AbilityMapSubMenu extends AInventorySubMenu implements Observer {
         Group container = new Group();
         container.setSize(1200,600);
 
-        GraphWidget.CallbackHandler callbacks = new GraphWidget.CallbackHandler() {
-            @Override
-            public void onNodeClicked(int nodeID) {
-                Monster monster = team.get(switcher.getCurrentlyChosen());
-                details.init(monster,nodeID);
-            }
-        };
-
-        graphWidget = new GraphWidget(skin, callbacks);
+        graphWidget = new GraphWidget(skin, this);
         graphWidget.setPosition(300,150,Align.bottomLeft);
-        graphWidget.init(team.get(0));
+        graphWidget.init(this.team.get(0));
 
         container.addActor(graphWidget);
 
@@ -65,30 +60,11 @@ public class AbilityMapSubMenu extends AInventorySubMenu implements Observer {
         scrollPane.setScrollPercentY(.5f);
         addActor(scrollPane);
 
-        TeamMemberSwitcher.CallbackHandler handler = new TeamMemberSwitcher.CallbackHandler() {
-            @Override
-            public void onChanged(int position) {
-                graphWidget.init(team.get(position));
-                refresh();
-            }
-        };
-
-        switcher = new TeamMemberSwitcher(skin, team, handler);
+        switcher = new TeamMemberSwitcher(skin, this.team, this);
         switcher.setPosition(2,202,Align.topLeft);
         addActor(switcher);
 
-        AbilityDetailWidget.CallbackHandler learnCallbacks = new AbilityDetailWidget.CallbackHandler() {
-            @Override
-            public void onLearn(int nodeID) {
-                Monster m = team.get(switcher.getCurrentlyChosen());
-                m.consumeAbilityLevel();
-                m.abilityGraph.activateNode(nodeID);
-                graphWidget.refreshStatus(m);
-                details.init(m,nodeID);
-            }
-        };
-
-        details = new AbilityDetailWidget(skin, learnCallbacks);
+        details = new AbilityDetailWidget(skin, this);
         details.setPosition(GS.WIDTH-2,2,Align.bottomRight);
         addActor(details);
 
@@ -102,13 +78,13 @@ public class AbilityMapSubMenu extends AInventorySubMenu implements Observer {
         Image lvls = new Image(skin.getDrawable("stats-symbol-exp"));
         lvls.setSize(16,16);
         lvls.setPosition(4,5,Align.bottomLeft);
-        remainingLvls = new Label(Integer.toString(team.get(0).getAbilityLevels()), skin, "default");
+        remainingLvls = new Label(Integer.toString(this.team.get(0).getAbilityLevels()), skin, "default");
         remainingLvls.setPosition(22,6,Align.bottomLeft);
         remLvlGrp.addActor(lvls);
         remLvlGrp.addActor(remainingLvls);
         addActor(remainingLvlsCont);
 
-        details.init(team.get(0), 0);
+        details.init(this.team.get(0), 0);
 
 
     }
@@ -127,4 +103,28 @@ public class AbilityMapSubMenu extends AInventorySubMenu implements Observer {
             }
         }
     }
+
+
+    // ........................................................................... INTERFACE METHODS
+    @Override
+    public void onNodeClicked(int nodeID) {
+        Monster monster = team.get(switcher.getCurrentlyChosen());
+        details.init(monster,nodeID);
+    }
+
+    @Override
+    public void onChanged(int position) {
+        graphWidget.init(team.get(position));
+        refresh();
+    }
+
+    @Override
+    public void onLearn(int nodeID) {
+        Monster m = team.get(switcher.getCurrentlyChosen());
+        m.consumeAbilityLevel();
+        m.abilityGraph.activateNode(nodeID);
+        graphWidget.refreshStatus(m);
+        details.init(m,nodeID);
+    }
+
 }

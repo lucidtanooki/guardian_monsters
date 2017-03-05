@@ -1,4 +1,4 @@
-package de.limbusdev.guardianmonsters.fwmengine.menus.ui;
+package de.limbusdev.guardianmonsters.fwmengine.menus.ui.team;
 
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -23,15 +23,15 @@ import de.limbusdev.guardianmonsters.model.MonsterDB;
 
 public class TeamMemberSwitcher extends Group {
 
-    private CallbackHandler callbacks;
+    private Controller callbacks;
     private int currentlyChosen;
     private Image monsterImg;
     private Label name;
 
-    public TeamMemberSwitcher(Skin skin, final ArrayMap<Integer, Monster> team, final CallbackHandler callbackHandler) {
+    public TeamMemberSwitcher(Skin skin, final ArrayMap<Integer, Monster> team, final Controller controller) {
         super();
 
-        this.callbacks = callbackHandler;
+        this.callbacks = controller;
         this.currentlyChosen = 0;
 
         setSize(96,64);
@@ -107,7 +107,7 @@ public class TeamMemberSwitcher extends Group {
         addActor(monsterImg);
     }
 
-    public interface CallbackHandler {
+    public interface Controller {
         void onChanged(int position);
     }
 

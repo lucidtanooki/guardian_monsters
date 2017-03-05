@@ -1,46 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="10" height="10" tilewidth="16" tileheight="16" nextobjectid="29">
  <properties>
-  <property nameID="musicIndex" value="2"/>
-  <property nameID="musicType" value="town"/>
+  <property name="musicIndex" value="2"/>
+  <property name="musicType" value="town"/>
  </properties>
- <tileset firstgid="1" nameID="limbusdev_world" tilewidth="16" tileheight="16" tilecount="4096">
+ <tileset firstgid="1" name="limbusdev_world" tilewidth="16" tileheight="16" tilecount="4096">
   <image source="../spritesheets/limbusdev_world.png" width="1024" height="1024"/>
  </tileset>
- <tileset firstgid="4097" nameID="limbusdev_world2" tilewidth="16" tileheight="16" tilecount="4096">
+ <tileset firstgid="4097" name="limbusdev_world2" tilewidth="16" tileheight="16" tilecount="4096">
   <image source="../spritesheets/limbusdev_world2.png" width="1024" height="1024"/>
  </tileset>
- <layer nameID="ground1" width="10" height="10">
+ <layer name="ground1" width="10" height="10">
   <data encoding="base64" compression="zlib">
    eJyLYGJgiATiKCCOwMOeAcQzgXgWAfYdCQi+C8UyUgwMslKYNLXV0ZoG+ZEe9gAA1Ssj8A==
   </data>
  </layer>
- <layer nameID="walls1" width="10" height="10">
+ <layer name="walls1" width="10" height="10">
   <data encoding="base64" compression="zlib">
    eJxjYCAOzGUkDt8lEoPAf34gIUCkA4YBSGDEj0EAAPLqEv8=
   </data>
  </layer>
- <layer nameID="objects1" width="10" height="10">
+ <layer name="objects1" width="10" height="10">
   <data encoding="base64" compression="zlib">
    eJxjYCAe1PMzMDTwQ9irJCF0FZBfDcQ1/Ah1+4HsA1D+Sqi6XUD+biDeg6TuHx8Dw38gvi+BEPsFlP8NxH+g6h5KIHCsJAmOhQIVeQYGVSBWkyes9glQzVMkdfugbgC5r4WXgeEekjuXyCH5A6pOCei+B0A1ymS4EwYAiKUbJw==
   </data>
  </layer>
- <layer nameID="shadow1" width="10" height="10">
+ <layer name="shadow1" width="10" height="10">
   <data encoding="base64" compression="zlib">
    eJxjYBgFxIBLgvSxBwBdtwDk
   </data>
  </layer>
- <layer nameID="lights1" width="10" height="10">
+ <layer name="lights1" width="10" height="10">
   <data encoding="base64" compression="zlib">
    eJxjYBgcQEtyoF1AHaBJoT8AVvYAhg==
   </data>
  </layer>
- <layer nameID="tops1" width="10" height="10">
+ <layer name="tops1" width="10" height="10">
   <data encoding="base64" compression="zlib">
    eJyTZWRgiCeA5YBYHogJAQU6qnsix8DwFIifyRE2L0WegSFVHqGujp/27kNXF0uEujigGgAIPwqg
   </data>
  </layer>
- <objectgroup nameID="colliderWalls1" visible="0">
+ <objectgroup name="colliderWalls1" visible="0">
   <object id="1" x="0" y="0" width="160" height="48"/>
   <object id="2" x="16" y="48" width="32" height="16"/>
   <object id="3" x="96" y="48" width="48" height="16"/>
@@ -51,90 +51,90 @@
   <object id="8" x="112" y="96" width="32" height="16"/>
   <object id="9" x="128" y="112" width="16" height="16"/>
  </objectgroup>
- <objectgroup nameID="sensors" visible="0">
-  <object id="10" nameID="warpField" x="64" y="112" width="16" height="16">
+ <objectgroup name="sensors" visible="0">
+  <object id="10" name="warpField" x="64" y="112" width="16" height="16">
    <properties>
-    <property nameID="targetID" value="4"/>
-    <property nameID="targetWarpPointID" value="2"/>
+    <property name="targetID" value="4"/>
+    <property name="targetWarpPointID" value="2"/>
    </properties>
   </object>
-  <object id="11" nameID="startField" x="64" y="96" width="16" height="16">
+  <object id="11" name="startField" x="64" y="96" width="16" height="16">
    <properties>
-    <property nameID="fieldID" value="1"/>
-   </properties>
-  </object>
- </objectgroup>
- <objectgroup nameID="livingEntities">
-  <object id="12" nameID="person" x="48" y="80" width="16" height="16">
-   <properties>
-    <property nameID="male" value="true"/>
-    <property nameID="moving" value="true"/>
-    <property nameID="path" value="E,E,S,S,W,W,N,N"/>
-    <property nameID="spriteIndex" value="0"/>
-    <property nameID="startDir" value="S"/>
-    <property nameID="text" value="person_5_1"/>
+    <property name="fieldID" value="1"/>
    </properties>
   </object>
  </objectgroup>
- <objectgroup nameID="objects">
-  <object id="13" nameID="sign" x="16" y="48" width="16" height="16">
+ <objectgroup name="livingEntities">
+  <object id="12" name="person" x="48" y="80" width="16" height="16">
    <properties>
-    <property nameID="text" value="sign_4_1_text"/>
-    <property nameID="title" value="sign_4_1_title"/>
+    <property name="male" value="true"/>
+    <property name="moving" value="true"/>
+    <property name="path" value="E,E,S,S,W,W,N,N"/>
+    <property name="spriteIndex" value="0"/>
+    <property name="startDir" value="S"/>
+    <property name="text" value="person_5_1"/>
    </properties>
   </object>
-  <object id="20" nameID="sign" x="96" y="48" width="16" height="16">
+ </objectgroup>
+ <objectgroup name="objects">
+  <object id="13" name="sign" x="16" y="48" width="16" height="16">
    <properties>
-    <property nameID="text" value="sign_4_2_text"/>
-    <property nameID="title" value="sign_4_2_title"/>
+    <property name="text" value="sign_4_1_text"/>
+    <property name="title" value="sign_4_1_title"/>
    </properties>
   </object>
-  <object id="21" nameID="sign" x="112" y="48" width="16" height="16">
+  <object id="20" name="sign" x="96" y="48" width="16" height="16">
    <properties>
-    <property nameID="text" value="sign_4_2_text"/>
-    <property nameID="title" value="sign_4_2_title"/>
+    <property name="text" value="sign_4_2_text"/>
+    <property name="title" value="sign_4_2_title"/>
    </properties>
   </object>
-  <object id="22" nameID="sign" x="128" y="48" width="16" height="16">
+  <object id="21" name="sign" x="112" y="48" width="16" height="16">
    <properties>
-    <property nameID="text" value="sign_4_2_text"/>
-    <property nameID="title" value="sign_4_2_title"/>
+    <property name="text" value="sign_4_2_text"/>
+    <property name="title" value="sign_4_2_title"/>
    </properties>
   </object>
-  <object id="23" nameID="sign" x="128" y="32" width="16" height="16">
+  <object id="22" name="sign" x="128" y="48" width="16" height="16">
    <properties>
-    <property nameID="text" value="sign_4_2_text"/>
-    <property nameID="title" value="sign_4_2_title"/>
+    <property name="text" value="sign_4_2_text"/>
+    <property name="title" value="sign_4_2_title"/>
    </properties>
   </object>
-  <object id="24" nameID="sign" x="112" y="32" width="16" height="16">
+  <object id="23" name="sign" x="128" y="32" width="16" height="16">
    <properties>
-    <property nameID="text" value="sign_4_2_text"/>
-    <property nameID="title" value="sign_4_2_title"/>
+    <property name="text" value="sign_4_2_text"/>
+    <property name="title" value="sign_4_2_title"/>
    </properties>
   </object>
-  <object id="25" nameID="sign" x="96" y="32" width="16" height="16">
+  <object id="24" name="sign" x="112" y="32" width="16" height="16">
    <properties>
-    <property nameID="text" value="sign_4_2_text"/>
-    <property nameID="title" value="sign_4_2_title"/>
+    <property name="text" value="sign_4_2_text"/>
+    <property name="title" value="sign_4_2_title"/>
    </properties>
   </object>
-  <object id="26" nameID="sign" x="32" y="48" width="16" height="16">
+  <object id="25" name="sign" x="96" y="32" width="16" height="16">
    <properties>
-    <property nameID="text" value="sign_4_1_text"/>
-    <property nameID="title" value="sign_4_1_title"/>
+    <property name="text" value="sign_4_2_text"/>
+    <property name="title" value="sign_4_2_title"/>
    </properties>
   </object>
-  <object id="27" nameID="sign" x="32" y="32" width="16" height="16">
+  <object id="26" name="sign" x="32" y="48" width="16" height="16">
    <properties>
-    <property nameID="text" value="sign_4_1_text"/>
-    <property nameID="title" value="sign_4_1_title"/>
+    <property name="text" value="sign_4_1_text"/>
+    <property name="title" value="sign_4_1_title"/>
    </properties>
   </object>
-  <object id="28" nameID="sign" x="16" y="32" width="16" height="16">
+  <object id="27" name="sign" x="32" y="32" width="16" height="16">
    <properties>
-    <property nameID="text" value="sign_4_1_text"/>
-    <property nameID="title" value="sign_4_1_title"/>
+    <property name="text" value="sign_4_1_text"/>
+    <property name="title" value="sign_4_1_title"/>
+   </properties>
+  </object>
+  <object id="28" name="sign" x="16" y="32" width="16" height="16">
+   <properties>
+    <property name="text" value="sign_4_1_text"/>
+    <property name="title" value="sign_4_1_title"/>
    </properties>
   </object>
  </objectgroup>

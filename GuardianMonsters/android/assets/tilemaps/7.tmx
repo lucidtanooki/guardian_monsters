@@ -1,340 +1,340 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="64" height="32" tilewidth="16" tileheight="16" nextobjectid="1056">
  <properties>
-  <property nameID="musicIndex" value="2"/>
-  <property nameID="musicType" value="town"/>
+  <property name="musicIndex" value="2"/>
+  <property name="musicType" value="town"/>
  </properties>
- <tileset firstgid="1" nameID="limbusdev_world" tilewidth="16" tileheight="16" tilecount="4096">
+ <tileset firstgid="1" name="limbusdev_world" tilewidth="16" tileheight="16" tilecount="4096">
   <image source="../spritesheets/limbusdev_world.png" width="1024" height="1024"/>
  </tileset>
- <tileset firstgid="4097" nameID="limbusdev_world2" tilewidth="16" tileheight="16" tilecount="4096">
+ <tileset firstgid="4097" name="limbusdev_world2" tilewidth="16" tileheight="16" tilecount="4096">
   <image source="../spritesheets/limbusdev_world2.png" width="1024" height="1024"/>
  </tileset>
- <layer nameID="ground0" width="64" height="32">
+ <layer name="ground0" width="64" height="32">
   <data encoding="base64" compression="zlib">
    eJztlkEOgjAQRUnUhZrYQ6ELvJa4QI8FLIyX8lc7hKAhXdTpGP/ipUkXzLxPm2m3K4ough7cwc39EOi3jfSL8W/wzavBDBr0dJnw7DOhf4s655DBW53cGaCHE6gDQ58unb9kUH+qkzuLyX/2fXaB3qXzn8tDssiSQcJznuJ+qGdgwH+cgfqcQL0F1kM46yXWfUD2tMgxJ9fg6F4ZLMEKVGFP+1zkeif4DDYjtpnuhal3Ev3pT3/6K+Bnrsyef/KXt4bM3GH2WODL/qVVbyV/f9cri96K/mbuOv3pT3/605/+9Kc//elPf/rTf9bhARV9jcY=
   </data>
  </layer>
- <objectgroup nameID="animatedTiles1">
+ <objectgroup name="animatedTiles1">
   <object id="540" type="animatedTile" x="256" y="32" width="16" height="16">
    <properties>
-    <property nameID="index" value="0"/>
+    <property name="index" value="0"/>
    </properties>
   </object>
   <object id="957" type="animatedTile" x="176" y="0" width="16" height="16">
    <properties>
-    <property nameID="index" value="11"/>
+    <property name="index" value="11"/>
    </properties>
   </object>
   <object id="958" type="animatedTile" x="336" y="96" width="16" height="144">
    <properties>
-    <property nameID="index" value="11"/>
+    <property name="index" value="11"/>
    </properties>
   </object>
   <object id="976" type="animatedTile" x="192" y="16" width="16" height="16">
    <properties>
-    <property nameID="index" value="6"/>
+    <property name="index" value="6"/>
    </properties>
   </object>
   <object id="978" type="animatedTile" x="304" y="48" width="16" height="16">
    <properties>
-    <property nameID="index" value="6"/>
+    <property name="index" value="6"/>
    </properties>
   </object>
   <object id="979" type="animatedTile" x="320" y="64" width="16" height="16">
    <properties>
-    <property nameID="index" value="6"/>
+    <property name="index" value="6"/>
    </properties>
   </object>
   <object id="980" type="animatedTile" x="336" y="80" width="16" height="16">
    <properties>
-    <property nameID="index" value="6"/>
+    <property name="index" value="6"/>
    </properties>
   </object>
   <object id="982" type="animatedTile" x="272" y="48" width="32" height="16">
    <properties>
-    <property nameID="index" value="5"/>
+    <property name="index" value="5"/>
    </properties>
   </object>
   <object id="983" type="animatedTile" x="256" y="48" width="16" height="16">
    <properties>
-    <property nameID="index" value="5"/>
+    <property name="index" value="5"/>
    </properties>
   </object>
   <object id="985" type="animatedTile" x="208" y="32" width="48" height="16">
    <properties>
-    <property nameID="index" value="5"/>
+    <property name="index" value="5"/>
    </properties>
   </object>
   <object id="986" type="animatedTile" x="176" y="16" width="16" height="16">
    <properties>
-    <property nameID="index" value="4"/>
+    <property name="index" value="4"/>
    </properties>
   </object>
   <object id="987" type="animatedTile" x="192" y="32" width="16" height="16">
    <properties>
-    <property nameID="index" value="4"/>
+    <property name="index" value="4"/>
    </properties>
   </object>
   <object id="988" type="animatedTile" x="304" y="64" width="16" height="16">
    <properties>
-    <property nameID="index" value="4"/>
+    <property name="index" value="4"/>
    </properties>
   </object>
   <object id="989" type="animatedTile" x="320" y="80" width="16" height="16">
    <properties>
-    <property nameID="index" value="4"/>
+    <property name="index" value="4"/>
    </properties>
   </object>
   <object id="990" type="animatedTile" x="336" y="240" width="16" height="16">
    <properties>
-    <property nameID="index" value="9"/>
+    <property name="index" value="9"/>
    </properties>
   </object>
   <object id="991" type="animatedTile" x="304" y="256" width="16" height="16">
    <properties>
-    <property nameID="index" value="9"/>
+    <property name="index" value="9"/>
    </properties>
   </object>
   <object id="992" type="animatedTile" x="304" y="240" width="16" height="16">
    <properties>
-    <property nameID="index" value="2"/>
+    <property name="index" value="2"/>
    </properties>
   </object>
   <object id="993" type="animatedTile" x="272" y="256" width="16" height="16">
    <properties>
-    <property nameID="index" value="2"/>
+    <property name="index" value="2"/>
    </properties>
   </object>
   <object id="994" type="animatedTile" x="288" y="256" width="16" height="16">
    <properties>
-    <property nameID="index" value="8"/>
+    <property name="index" value="8"/>
    </properties>
   </object>
   <object id="995" type="animatedTile" x="320" y="240" width="16" height="16">
    <properties>
-    <property nameID="index" value="8"/>
+    <property name="index" value="8"/>
    </properties>
   </object>
   <object id="1013" type="animatedTile" x="880" y="128" width="16" height="384">
    <properties>
-    <property nameID="index" value="12"/>
+    <property name="index" value="12"/>
    </properties>
   </object>
   <object id="1018" type="animatedTile" x="784" y="32" width="16" height="80">
    <properties>
-    <property nameID="index" value="12"/>
+    <property name="index" value="12"/>
    </properties>
   </object>
   <object id="1019" type="animatedTile" x="880" y="16" width="16" height="16">
    <properties>
-    <property nameID="index" value="12"/>
+    <property name="index" value="12"/>
    </properties>
   </object>
   <object id="1020" type="animatedTile" x="880" y="0" width="16" height="16">
    <properties>
-    <property nameID="index" value="12"/>
+    <property name="index" value="12"/>
    </properties>
   </object>
   <object id="1021" type="animatedTile" x="816" y="16" width="48" height="16">
    <properties>
-    <property nameID="index" value="5"/>
+    <property name="index" value="5"/>
    </properties>
   </object>
   <object id="1022" type="animatedTile" x="800" y="16" width="16" height="16">
    <properties>
-    <property nameID="index" value="5"/>
+    <property name="index" value="5"/>
    </properties>
   </object>
   <object id="1025" type="animatedTile" x="816" y="128" width="48" height="16">
    <properties>
-    <property nameID="index" value="8"/>
+    <property name="index" value="8"/>
    </properties>
   </object>
   <object id="1028" type="animatedTile" x="864" y="16" width="16" height="16">
    <properties>
-    <property nameID="index" value="6"/>
+    <property name="index" value="6"/>
    </properties>
   </object>
   <object id="1029" type="animatedTile" x="784" y="112" width="16" height="16">
    <properties>
-    <property nameID="index" value="10"/>
+    <property name="index" value="10"/>
    </properties>
   </object>
   <object id="1030" type="animatedTile" x="800" y="128" width="16" height="16">
    <properties>
-    <property nameID="index" value="10"/>
+    <property name="index" value="10"/>
    </properties>
   </object>
   <object id="1031" type="animatedTile" x="864" y="128" width="16" height="16">
    <properties>
-    <property nameID="index" value="9"/>
+    <property name="index" value="9"/>
    </properties>
   </object>
   <object id="1032" type="animatedTile" x="864" y="32" width="16" height="16">
    <properties>
-    <property nameID="index" value="4"/>
+    <property name="index" value="4"/>
    </properties>
   </object>
   <object id="1033" type="animatedTile" x="880" y="32" width="16" height="16">
    <properties>
-    <property nameID="index" value="3"/>
+    <property name="index" value="3"/>
    </properties>
   </object>
   <object id="1034" type="animatedTile" x="800" y="112" width="16" height="16">
    <properties>
-    <property nameID="index" value="1"/>
+    <property name="index" value="1"/>
    </properties>
   </object>
   <object id="1035" type="animatedTile" x="880" y="112" width="16" height="16">
    <properties>
-    <property nameID="index" value="1"/>
+    <property name="index" value="1"/>
    </properties>
   </object>
   <object id="1036" type="animatedTile" x="864" y="112" width="16" height="16">
    <properties>
-    <property nameID="index" value="2"/>
+    <property name="index" value="2"/>
    </properties>
   </object>
   <object id="1039" type="animatedTile" x="352" y="0" width="432" height="512">
    <properties>
-    <property nameID="index" value="0"/>
+    <property name="index" value="0"/>
    </properties>
   </object>
   <object id="1040" type="animatedTile" x="784" y="144" width="96" height="368">
    <properties>
-    <property nameID="index" value="0"/>
+    <property name="index" value="0"/>
    </properties>
   </object>
   <object id="1042" type="animatedTile" x="256" y="288" width="16" height="224">
    <properties>
-    <property nameID="index" value="11"/>
+    <property name="index" value="11"/>
    </properties>
   </object>
   <object id="1044" type="animatedTile" x="272" y="288" width="80" height="224">
    <properties>
-    <property nameID="index" value="0"/>
+    <property name="index" value="0"/>
    </properties>
   </object>
   <object id="1045" type="animatedTile" x="208" y="0" width="144" height="32">
    <properties>
-    <property nameID="index" value="0"/>
+    <property name="index" value="0"/>
    </properties>
   </object>
   <object id="1046" type="animatedTile" x="192" y="0" width="16" height="16">
    <properties>
-    <property nameID="index" value="0"/>
+    <property name="index" value="0"/>
    </properties>
   </object>
   <object id="1047" type="animatedTile" x="272" y="32" width="80" height="16">
    <properties>
-    <property nameID="index" value="0"/>
+    <property name="index" value="0"/>
    </properties>
   </object>
   <object id="1048" type="animatedTile" x="320" y="48" width="32" height="16">
    <properties>
-    <property nameID="index" value="0"/>
+    <property name="index" value="0"/>
    </properties>
   </object>
   <object id="1049" type="animatedTile" x="336" y="64" width="16" height="16">
    <properties>
-    <property nameID="index" value="0"/>
+    <property name="index" value="0"/>
    </properties>
   </object>
   <object id="1050" type="animatedTile" x="320" y="256" width="32" height="16">
    <properties>
-    <property nameID="index" value="0"/>
+    <property name="index" value="0"/>
    </properties>
   </object>
   <object id="1051" type="animatedTile" x="288" y="272" width="64" height="16">
    <properties>
-    <property nameID="inddex" value="0"/>
+    <property name="inddex" value="0"/>
    </properties>
   </object>
   <object id="1052" type="animatedTile" x="784" y="0" width="96" height="16">
    <properties>
-    <property nameID="index" value="0"/>
+    <property name="index" value="0"/>
    </properties>
   </object>
   <object id="1053" type="animatedTile" x="272" y="272" width="16" height="16">
    <properties>
-    <property nameID="index" value="8"/>
+    <property name="index" value="8"/>
    </properties>
   </object>
   <object id="1054" type="animatedTile" x="256" y="272" width="16" height="16">
    <properties>
-    <property nameID="index" value="2"/>
+    <property name="index" value="2"/>
    </properties>
   </object>
   <object id="1055" type="animatedTile" x="784" y="128" width="16" height="16">
    <properties>
-    <property nameID="index" value="0"/>
+    <property name="index" value="0"/>
    </properties>
   </object>
  </objectgroup>
- <layer nameID="walls0" width="64" height="32">
+ <layer name="walls0" width="64" height="32">
   <data encoding="base64" compression="zlib">
    eJztmNFugjAUho9TUaRe6QsxhRn3VLqJu9hLuU1cpg+1vzFNiGm3gIRTSr/kpDfQ/h+lnIQ8Ijqhcs04FkQvE6JXlKuY3OX4jfqE+5fBPwmJ0rDZvH9xQN6PqNw9I+xxIPSj3P8+5hvczKnW2cE9s8i/h7wPotw9T7g+FfpxZZhLrXOEe26Rf4xMjyX997g+E/rxzTCXWmeIcxFY9G3YINNWmM9r3eskWCdF9VEDS56D7rzWTTS/jjs4Z6gFammJfxMo/yOc84n7PfIW5T/Eexb80yNdRPoXe20TZ84mpH+VXusK0r9Kr3UF6a96YBdR37+u4v25E/Di/bkT8OL9uRPw4v25E/Di/bkT8HKB/8+M6DzjTsJL198D78+dgJc2+cfT+udsk/8G/ltNVeEd3mvUc4v8i9z7v7pN+66j+L/6F6AOONc=
   </data>
  </layer>
- <layer nameID="objects0" width="64" height="32">
+ <layer name="objects0" width="64" height="32">
   <data encoding="base64" compression="zlib">
    eJztmDEOgzAQBC9QAz/IX4Dv5JOQj8UpIlFgZBJxE513pKtvBtkUNovPNNAGLN79S2e2pnl2vntzePfferMmTdv77s3h3T+m7inN/Af97/Za7v9eZ8T+5eDfkvsGkRhP3q1o/R+OzsGWqP2l5yBqfynqpw1Y1E8bsKifNmBRP23Aon7agEX9tAGL+mkDFvXTBizqpw1YauovfRP9lcf9+h3fcPZtvHZeXqQVQw==
   </data>
  </layer>
- <objectgroup nameID="people0"/>
- <layer nameID="shadow0" width="64" height="32">
+ <objectgroup name="people0"/>
+ <layer name="shadow0" width="64" height="32">
   <data encoding="base64" compression="zlib">
    eJztz1EKABAQBUC5pvvfw4eUlGjF10wpG7uPlAAAAAAAgK7ktsZ9r1d3V+enWZH+m9zTua//P+f96IvM3eW8eAcARFT1rAqK
   </data>
  </layer>
- <layer nameID="tops0" width="64" height="32">
+ <layer name="tops0" width="64" height="32">
   <data encoding="base64" compression="zlib">
    eJzt1DEKgDAMheFCnVrs0iPpKF5KV0+lk17KOCo6VMGK+T/oUAJN3tAYgz+xzpjC5Z4in0qy14rzd5K9V5w/1RzTzxJzT42vYN+ybzXv21GyT4rzWy//3+eeAgAAAMAb2rC/N+G6fqzd6XH2xlYfyud9AACADivTThTk
   </data>
  </layer>
- <layer nameID="ground1" width="64" height="32">
+ <layer name="ground1" width="64" height="32">
   <data encoding="base64" compression="zlib">
    eJzt0rENgCAQQFEGYCfdTHvdTIeShuQqKTSQ6HsJ+RUFd6QEAAAAwFNzOVNo7/ujreUsob3v39lySntuN87/C63vinP9Y0fvYXSP8gfO3O7oPb3Vqr4LAOBvLv8vbLo=
   </data>
  </layer>
- <layer nameID="walls1" width="64" height="32">
+ <layer name="walls1" width="64" height="32">
   <data encoding="base64" compression="zlib">
    eJztmOlOAjEUhSsiJsDMmOASH0eNGsE1xu2XzwJGiLuJcXscFzBx+yFqfBzPCDeU2qF3XAaZ8SRfSNreTs/ctkOuENHQiNVgMyVEEZRS7V5VcJL9l+G7Am4i6r8nLUQC9KbbvargJPsfh+8JMBlC/1dJIa6Tn9ubzj98F0EphP67cabjmnMt+0842Pt1YpY/uq3gPf2EZP+uytgjFXABLsEI9sIoYz+MhcR/D/ZIAnSBGMjDeyFC/l0lrUb+uQqDf7ojXf+Uf9JUXIgsyIFpMANmwRyYj4fDP92RuvxvweM22AG7YA/sgwNwGBL/JF3+TQqb/yief1I2wvmnO/C3879sC7ECFhG3it81O9h4kuqf7kBu/ul9+fV/gvWeggVwBs59rv+78STd/v9oh/dRhv8Bp/a+qo4/3sB6rDbHMNb+GnC8yjM4lt5BHp4K4AltVfCsvB+3fdHxT5U5H43zQhdvijHN96J8A6Ksf//tXkF7xfW/5NTOnmU3YwMHHKEvhd+0pl+WGs9Bljo/Zw0y7vl3vfj174q+fan+5va5+rNzX/w2mcSZ3zTG6/uX/QH/g/VnD3k829RvEifeNMbLf8His1GPvYf/24wQd5nGs/vs1v5b9ZvEiTeN8fLPla6uSvvgwan9P3p0Psdx+k3ixJvGkPe8klMS1QO9pKuryudg3pBbU79JnPhWY3TeXajuR/VAP1Lvgb8snffvkusg/16iurdc/1bbuLXxThTtf7n+rbZxa+OdqHdfsNTT
   </data>
  </layer>
- <layer nameID="objects1" width="64" height="32">
+ <layer name="objects1" width="64" height="32">
   <data encoding="base64" compression="zlib">
    eJztlrsNgCAQhil8FT4KGytnMc7jGA6h6ziCjbqNl9gYg4gvjNz/JTQchvu4wyAEAAAAAABPymQZXIE//GVnsJ63+Xzgz9vfIzefRpDI52UxwIv+Yv2z+N6+d79/gsKi3rfJRQcnEsKN9uNdaC4X8E9Ud6ah3krpH9UqeuxtzuSgc/+37x7V22ekPQeKTx/6P53DGf+/ceRUf1hHExy99bdrbKq9LvDn6a9796v83TwAMMEMFMgf5A==
   </data>
  </layer>
- <objectgroup nameID="people1"/>
- <layer nameID="shadow1" width="64" height="32">
+ <objectgroup name="people1"/>
+ <layer name="shadow1" width="64" height="32">
   <data encoding="base64" compression="zlib">
    eJzt1E0KgCAQhmGpe3SxNt07yEUXKSE3gr+jKfg+0Kpmms9MpQAAAAAAAOZzL70naC+U8aicX9qv9jytegKuUc+SUef6S8n/r9+a/btymfXuueZ27ks4gy7Mb/TOL81uaU+fbQ3Xxe7HpNS7z9T67ili+6J03+TUS98BYF7nZOfHAyLWEy4=
   </data>
  </layer>
- <layer nameID="tops1" width="64" height="32">
+ <layer name="tops1" width="64" height="32">
   <data encoding="base64" compression="zlib">
    eJztmMtOwkAUhg8oJFCkS27eXgUU9upCE1fqk3iBrYmocas+CUTQuFQR0MREfRH/BJo2006nF9vqlD/5QujktOeHdjj8RPFUPUPUyETdRXRqwnsrxv578N6Psf9UliidjbqLaNTPE91PqeIzqIGOQtRVou4sPDXhuQUOwRFI5IiSuai7Ckdz8DsPHi387qWI9jkcpMLvNQitwfs6yC6Y167TRDccbtPh9xqEjuH9hLP3fcLjF4dvSfzbqYR7vAwqYBEsgWWwAlYluf9n0vfAuErbA+Mquz2Qp4d8ML38BW3it3DLBtl1Bo9tMMQMPAJj8Abelcnxc3CqmmkzsOtWcnMOv/VWDCzOq/kvYCYsghIog0pO9y+jrGZg2XQHj70Y+AxSA86zJMvzL8oDL/D8P6Hu2SVXzLUuQ65neVEnXlgFlQe+YmYYTueGEV7HLmcIv/UiafmPKA/kzcu7SfN7loI6mSGKqvW6CCf1vB5E0vIfUR7Im5ed+N9G3xv43nY8+ndS79V/B566oA4aNv5587IT/6J1EU7qvfpPYL5LKnoe6FcfgmuK1v2e3+01qvBe+6Xc9794N+5lWu5tzL/ZY7Jl48a9TMu9jfk3e0y2bNzLf/+Z5NQPIJXRjQ==
   </data>
  </layer>
- <layer nameID="ground2" width="64" height="32">
+ <layer name="ground2" width="64" height="32">
   <data encoding="base64" compression="zlib">
    eJztwQENAAAAwqD3T20ON6AAAAAAAAAAgHcDIAAAAQ==
   </data>
  </layer>
- <layer nameID="walls2" width="64" height="32">
+ <layer name="walls2" width="64" height="32">
   <data encoding="base64" compression="zlib">
    eJztzjEKwCAQRUHtA9sFvFgg97+IpSTaiAQJzHQL++GlBAAAAE0+dhcAAPzDGc+7xPjvq/1u16v3nuxf3QMAvQoWggJC
   </data>
  </layer>
- <layer nameID="tops2" width="64" height="32">
+ <layer name="tops2" width="64" height="32">
   <data encoding="base64" compression="zlib">
    eJzt1jEKgDAQRNEFrVIkl1Ir8VSewKOpBzKFjaCkEVfH/5olsMVMEVgzAPiXNph1wTsFAAB4syrfCrXwvTCl8myE+897z+VirnmOwv1RkLwD3EipC/AEpT+j1MXZEI/vPp7vqWcAAADfsQGTxwrO
   </data>
  </layer>
- <objectgroup nameID="colliderWalls1">
+ <objectgroup name="colliderWalls1">
   <object id="1" x="976" y="80" width="48" height="16"/>
   <object id="2" x="992" y="96" width="32" height="32"/>
   <object id="3" x="976" y="144" width="32" height="32"/>
@@ -384,142 +384,142 @@
   <object id="47" x="0" y="480" width="64" height="32"/>
   <object id="48" x="80" y="480" width="112" height="32"/>
  </objectgroup>
- <objectgroup nameID="livingEntities">
-  <object id="49" nameID="person" type="person" x="400" y="304" width="16" height="16">
+ <objectgroup name="livingEntities">
+  <object id="49" name="person" type="person" x="400" y="304" width="16" height="16">
    <properties>
-    <property nameID="male" value="true"/>
-    <property nameID="moving" value="true"/>
-    <property nameID="path" value="E,E,E,E,E,E,E,E,E,E,SSTOP,W,W,W,W,W,W,W,W,W,W"/>
-    <property nameID="spriteIndex" value="2"/>
-    <property nameID="startDir" value="S"/>
+    <property name="male" value="true"/>
+    <property name="moving" value="true"/>
+    <property name="path" value="E,E,E,E,E,E,E,E,E,E,SSTOP,W,W,W,W,W,W,W,W,W,W"/>
+    <property name="spriteIndex" value="2"/>
+    <property name="startDir" value="S"/>
    </properties>
   </object>
  </objectgroup>
- <objectgroup nameID="sensors">
-  <object id="50" nameID="sensor" x="0" y="304" width="16" height="96"/>
-  <object id="51" nameID="warpField" x="1008" y="288" width="16" height="16">
+ <objectgroup name="sensors">
+  <object id="50" name="sensor" x="0" y="304" width="16" height="96"/>
+  <object id="51" name="warpField" x="1008" y="288" width="16" height="16">
    <properties>
-    <property nameID="targetID" value="3"/>
-    <property nameID="targetWarpPointID" value="5"/>
+    <property name="targetID" value="3"/>
+    <property name="targetWarpPointID" value="5"/>
    </properties>
   </object>
-  <object id="52" nameID="startField" x="992" y="320" width="16" height="16">
+  <object id="52" name="startField" x="992" y="320" width="16" height="16">
    <properties>
-    <property nameID="fieldID" value="1"/>
+    <property name="fieldID" value="1"/>
    </properties>
   </object>
-  <object id="53" nameID="warpField" x="1008" y="304" width="16" height="16">
+  <object id="53" name="warpField" x="1008" y="304" width="16" height="16">
    <properties>
-    <property nameID="targetID" value="3"/>
-    <property nameID="targetWarpPointID" value="5"/>
+    <property name="targetID" value="3"/>
+    <property name="targetWarpPointID" value="5"/>
    </properties>
   </object>
-  <object id="54" nameID="warpField" x="1008" y="320" width="16" height="16">
+  <object id="54" name="warpField" x="1008" y="320" width="16" height="16">
    <properties>
-    <property nameID="targetID" value="3"/>
-    <property nameID="targetWarpPointID" value="5"/>
+    <property name="targetID" value="3"/>
+    <property name="targetWarpPointID" value="5"/>
    </properties>
   </object>
-  <object id="55" nameID="warpField" x="1008" y="336" width="16" height="16">
+  <object id="55" name="warpField" x="1008" y="336" width="16" height="16">
    <properties>
-    <property nameID="targetID" value="3"/>
-    <property nameID="targetWarpPointID" value="5"/>
+    <property name="targetID" value="3"/>
+    <property name="targetWarpPointID" value="5"/>
    </properties>
   </object>
-  <object id="56" nameID="warpField" x="1008" y="352" width="16" height="16">
+  <object id="56" name="warpField" x="1008" y="352" width="16" height="16">
    <properties>
-    <property nameID="targetID" value="3"/>
-    <property nameID="targetWarpPointID" value="5"/>
+    <property name="targetID" value="3"/>
+    <property name="targetWarpPointID" value="5"/>
    </properties>
   </object>
-  <object id="57" nameID="warpField" x="1008" y="368" width="16" height="16">
+  <object id="57" name="warpField" x="1008" y="368" width="16" height="16">
    <properties>
-    <property nameID="targetID" value="3"/>
-    <property nameID="targetWarpPointID" value="5"/>
+    <property name="targetID" value="3"/>
+    <property name="targetWarpPointID" value="5"/>
    </properties>
   </object>
-  <object id="58" nameID="warpField" x="1008" y="384" width="16" height="16">
+  <object id="58" name="warpField" x="1008" y="384" width="16" height="16">
    <properties>
-    <property nameID="targetID" value="3"/>
-    <property nameID="targetWarpPointID" value="5"/>
+    <property name="targetID" value="3"/>
+    <property name="targetWarpPointID" value="5"/>
    </properties>
   </object>
-  <object id="59" nameID="warpField" x="1008" y="400" width="16" height="16">
+  <object id="59" name="warpField" x="1008" y="400" width="16" height="16">
    <properties>
-    <property nameID="targetID" value="3"/>
-    <property nameID="targetWarpPointID" value="5"/>
+    <property name="targetID" value="3"/>
+    <property name="targetWarpPointID" value="5"/>
    </properties>
   </object>
-  <object id="60" nameID="warpField" x="96" y="176" width="16" height="16">
+  <object id="60" name="warpField" x="96" y="176" width="16" height="16">
    <properties>
-    <property nameID="targetID" value="8"/>
-    <property nameID="targetWarpPointID" value="1"/>
+    <property name="targetID" value="8"/>
+    <property name="targetWarpPointID" value="1"/>
    </properties>
   </object>
-  <object id="61" nameID="startField" x="96" y="192" width="16" height="16">
+  <object id="61" name="startField" x="96" y="192" width="16" height="16">
    <properties>
-    <property nameID="fieldID" value="2"/>
+    <property name="fieldID" value="2"/>
    </properties>
   </object>
-  <object id="62" nameID="warpField" x="1008" y="272" width="16" height="16">
+  <object id="62" name="warpField" x="1008" y="272" width="16" height="16">
    <properties>
-    <property nameID="targetID" value="3"/>
-    <property nameID="targetWarpPointID" value="5"/>
+    <property name="targetID" value="3"/>
+    <property name="targetWarpPointID" value="5"/>
    </properties>
   </object>
-  <object id="63" nameID="warpField" x="1008" y="256" width="16" height="16">
+  <object id="63" name="warpField" x="1008" y="256" width="16" height="16">
    <properties>
-    <property nameID="targetID" value="3"/>
-    <property nameID="targetWarpPointID" value="5"/>
+    <property name="targetID" value="3"/>
+    <property name="targetWarpPointID" value="5"/>
    </properties>
   </object>
-  <object id="64" nameID="startField" x="64" y="480" width="16" height="16">
+  <object id="64" name="startField" x="64" y="480" width="16" height="16">
    <properties>
-    <property nameID="fieldID" value="3"/>
+    <property name="fieldID" value="3"/>
    </properties>
   </object>
-  <object id="65" nameID="warpField" x="64" y="496" width="16" height="16">
+  <object id="65" name="warpField" x="64" y="496" width="16" height="16">
    <properties>
-    <property nameID="targetID" value="17"/>
-    <property nameID="targetWarpPointID" value="1"/>
+    <property name="targetID" value="17"/>
+    <property name="targetWarpPointID" value="1"/>
    </properties>
   </object>
   <object id="1037" type="layerChange" x="224" y="464" width="16" height="16">
    <properties>
-    <property nameID="dirDown" value="S"/>
-    <property nameID="dirUp" value="N"/>
+    <property name="dirDown" value="S"/>
+    <property name="dirUp" value="N"/>
    </properties>
   </object>
  </objectgroup>
- <objectgroup nameID="objects">
-  <object id="66" nameID="sign" type="objectDescription" x="912" y="304" width="16" height="16">
+ <objectgroup name="objects">
+  <object id="66" name="sign" type="objectDescription" x="912" y="304" width="16" height="16">
    <properties>
-    <property nameID="text" value="Since 1027 the Timsey Canal Bridge connects Caracoa Island to the land."/>
-    <property nameID="title" value="Timsey Canal Bridge"/>
+    <property name="text" value="Since 1027 the Timsey Canal Bridge connects Caracoa Island to the land."/>
+    <property name="title" value="Timsey Canal Bridge"/>
    </properties>
   </object>
-  <object id="67" nameID="sign" type="objectDescription" x="928" y="304" width="16" height="16">
+  <object id="67" name="sign" type="objectDescription" x="928" y="304" width="16" height="16">
    <properties>
-    <property nameID="text" value="Since 1027 the Timsey Canal Bridge connects Caracoa Island to the land."/>
-    <property nameID="title" value="Timsey Canal Bridge"/>
+    <property name="text" value="Since 1027 the Timsey Canal Bridge connects Caracoa Island to the land."/>
+    <property name="title" value="Timsey Canal Bridge"/>
    </properties>
   </object>
-  <object id="68" nameID="sign" type="objectDescription" x="928" y="288" width="16" height="16">
+  <object id="68" name="sign" type="objectDescription" x="928" y="288" width="16" height="16">
    <properties>
-    <property nameID="text" value="Since 1027 the Timsey Canal Bridge connects Caracoa Island to the land."/>
-    <property nameID="title" value="Timsey Canal Bridge"/>
+    <property name="text" value="Since 1027 the Timsey Canal Bridge connects Caracoa Island to the land."/>
+    <property name="title" value="Timsey Canal Bridge"/>
    </properties>
   </object>
-  <object id="69" nameID="sign" type="objectDescription" x="16" y="320" width="16" height="16">
+  <object id="69" name="sign" type="objectDescription" x="16" y="320" width="16" height="16">
    <properties>
-    <property nameID="text" value="Please take another way."/>
-    <property nameID="title" value="Under Constrution"/>
+    <property name="text" value="Please take another way."/>
+    <property name="title" value="Under Constrution"/>
    </properties>
   </object>
-  <object id="70" nameID="sign" type="objectDescription" x="912" y="288" width="16" height="16">
+  <object id="70" name="sign" type="objectDescription" x="912" y="288" width="16" height="16">
    <properties>
-    <property nameID="text" value="Since 1027 the Timsey Canal Bridge connects Caracoa Island to the land."/>
-    <property nameID="title" value="Timsey Canal Bridge"/>
+    <property name="text" value="Since 1027 the Timsey Canal Bridge connects Caracoa Island to the land."/>
+    <property name="title" value="Timsey Canal Bridge"/>
    </properties>
   </object>
  </objectgroup>

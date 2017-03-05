@@ -1,41 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="10" height="8" tilewidth="16" tileheight="16">
  <properties>
-  <property nameID="musicIndex" value="2"/>
-  <property nameID="musicType" value="town"/>
+  <property name="musicIndex" value="2"/>
+  <property name="musicType" value="town"/>
  </properties>
- <tileset firstgid="1" nameID="limbusdev_world" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="limbusdev_world" tilewidth="16" tileheight="16">
   <image source="../spritesheets/limbusdev_world.png" width="1024" height="1024"/>
  </tileset>
- <tileset firstgid="4097" nameID="limbusdev_world2" tilewidth="16" tileheight="16">
+ <tileset firstgid="4097" name="limbusdev_world2" tilewidth="16" tileheight="16">
   <image source="../spritesheets/limbusdev_world2.png" width="1024" height="1024"/>
  </tileset>
- <layer nameID="ground1" width="10" height="8">
+ <layer name="ground1" width="10" height="8">
   <data encoding="base64" compression="zlib">
    eJwLY2JgCBvFZGMAaJ8bgQ==
   </data>
  </layer>
- <layer nameID="walls1" width="10" height="8">
+ <layer name="walls1" width="10" height="8">
   <data encoding="base64" compression="zlib">
    eJxjYCAeMBLAMMBGAA8nAAAzEAA5
   </data>
  </layer>
- <layer nameID="objects1" width="10" height="8">
+ <layer name="objects1" width="10" height="8">
   <data encoding="base64" compression="zlib">
    eJxjYCANHGRiYFglycBwmAnCruJnYKgG4hp+hJo6IJuRmYFhJVAdMzOEvQsothuI9yCp24fE/gZl/wLSv4H4D5LcPyQ2OeA7UP9fCs0AgVgmTDEAzAgQ1g==
   </data>
  </layer>
- <layer nameID="lights1" width="10" height="8">
+ <layer name="lights1" width="10" height="8">
   <data encoding="base64" compression="zlib">
    eJxjYBg6QEuSuuZpSuLnEwMARqEAyA==
   </data>
  </layer>
- <layer nameID="tops1" width="10" height="8">
+ <layer name="tops1" width="10" height="8">
   <data encoding="base64" compression="zlib">
    eJzjYWBg8COAeYGYj4Ew4B8AdXv5aWOvDxD7I2FuqBwXkpgvEAMABTEGPQ==
   </data>
  </layer>
- <objectgroup nameID="colliderWalls1" width="10" height="8" visible="0">
+ <objectgroup name="colliderWalls1" width="10" height="8" visible="0">
   <object x="128" y="80" width="16" height="16"/>
   <object x="0" y="0" width="16" height="128"/>
   <object x="16" y="0" width="128" height="48"/>
@@ -44,29 +44,29 @@
   <object x="64" y="48" width="16" height="16"/>
   <object x="16" y="48" width="16" height="16"/>
  </objectgroup>
- <objectgroup nameID="objects" width="10" height="8" visible="0"/>
- <objectgroup nameID="sensors" width="10" height="8" visible="0">
-  <object nameID="warpField" x="80" y="112" width="16" height="16">
+ <objectgroup name="objects" width="10" height="8" visible="0"/>
+ <objectgroup name="sensors" width="10" height="8" visible="0">
+  <object name="warpField" x="80" y="112" width="16" height="16">
    <properties>
-    <property nameID="targetID" value="3"/>
-    <property nameID="targetWarpPointID" value="9"/>
+    <property name="targetID" value="3"/>
+    <property name="targetWarpPointID" value="9"/>
    </properties>
   </object>
-  <object nameID="startField" x="80" y="96" width="16" height="16">
+  <object name="startField" x="80" y="96" width="16" height="16">
    <properties>
-    <property nameID="fieldID" value="1"/>
+    <property name="fieldID" value="1"/>
    </properties>
   </object>
  </objectgroup>
- <objectgroup nameID="livingEntities" width="10" height="8" visible="0">
-  <object nameID="person" x="112" y="80" width="16" height="16">
+ <objectgroup name="livingEntities" width="10" height="8" visible="0">
+  <object name="person" x="112" y="80" width="16" height="16">
    <properties>
-    <property nameID="male" value="true"/>
-    <property nameID="path" value="SSTOP"/>
-    <property nameID="spriteIndex" value="0"/>
-    <property nameID="startDir" value="S"/>
-    <property nameID="static" value="true"/>
-    <property nameID="text" value="What are you doing inside my house?"/>
+    <property name="male" value="true"/>
+    <property name="path" value="SSTOP"/>
+    <property name="spriteIndex" value="0"/>
+    <property name="startDir" value="S"/>
+    <property name="static" value="true"/>
+    <property name="text" value="What are you doing inside my house?"/>
    </properties>
   </object>
  </objectgroup>

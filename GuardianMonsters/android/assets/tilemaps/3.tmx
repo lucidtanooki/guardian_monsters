@@ -1,41 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="16" tileheight="16" nextobjectid="77">
  <properties>
-  <property nameID="musicIndex" value="2"/>
-  <property nameID="musicType" value="town"/>
+  <property name="musicIndex" value="2"/>
+  <property name="musicType" value="town"/>
  </properties>
- <tileset firstgid="1" nameID="limbusdev_world" tilewidth="16" tileheight="16" tilecount="4096">
+ <tileset firstgid="1" name="limbusdev_world" tilewidth="16" tileheight="16" tilecount="4096">
   <image source="../spritesheets/limbusdev_world.png" width="1024" height="1024"/>
  </tileset>
- <tileset firstgid="4097" nameID="limbusdev_world2" tilewidth="16" tileheight="16" tilecount="4096">
+ <tileset firstgid="4097" name="limbusdev_world2" tilewidth="16" tileheight="16" tilecount="4096">
   <image source="../spritesheets/limbusdev_world2.png" width="1024" height="1024"/>
  </tileset>
- <layer nameID="ground1" width="32" height="32">
+ <layer name="ground1" width="32" height="32">
   <data encoding="base64" compression="zlib">
    eJzt1U0KgCAQhuFBaas3qqA6WXitCvJc1XeAIrOfyZrFuxLmARX1hshLn69TRD0aFI8/wZ0R6X/6OdwClUy+lFaVJWosn9/CduKLf3JO7D2+yo+d85Rf2/UypDfWjrQ3x3PHdL+ldyf/H78f8v7cdUZjwNvhDP8epe4vi3olXA==
   </data>
  </layer>
- <layer nameID="shadow1" width="32" height="32">
+ <layer name="shadow1" width="32" height="32">
   <data encoding="base64" compression="zlib">
    eJztxUkNADAQw8DQ2E8PYj34k2hQNB+PZFkCAAAA/hklzcp9uR18cz34427wAHIehu0sQQ==
   </data>
  </layer>
- <layer nameID="walls1" width="32" height="32">
+ <layer name="walls1" width="32" height="32">
   <data encoding="base64" compression="zlib">
    eJztl9lOwzAQRR2TNoj4AYkvSoC2bBK/lFASVolfSln6yidxLTTCsex6SQMP9EpHE0Wd3IzszjhNzlgLGiWuQCIY4yDBNc/9YwFKj9gdwAd84Hqd96P0LUAp/J9HsQK1R6T3ncIjE/0ofStQC//nUfQV1T+Dx1z0o/QdW1R/A69W9ONviOqXxOoVuW+R+VQ/19ZsqsSpdk/XHnJTjzU3vaep/oTjeQYysM/dPjaZ3tNUfwGPEhyDE3AKZmAOFtxeS4xM9VfwqMENWIJb0IAW3HF7LTGyrb9NK9sm8JSeH7r/eTbMX88Prd/H/yxl7BNcgXNwAS7BdfqTvzj6jqH1lx7+9/A5nDD2jPgAHsETeEk3199hbdYKifLbznAvRrq/qX6aeWOI/MnDtP6VY/b49AeXP3nQvC4d+0/tN67+sGkd9f1D89o1s7fVb3ba6T/rXZ71t3BuiNVEnvUN/2Pqv2P2XpvkDKD+6+q9Y0jOgCHn76FS6/8LUf00i7uA84gqPT8kmr6hffPVOkK+0dX4BdVHf64=
   </data>
  </layer>
- <layer nameID="objects1" width="32" height="32">
+ <layer name="objects1" width="32" height="32">
   <data encoding="base64" compression="zlib">
    eJxjYBh84CA3A8Mh7oGzn5GHgYGJhzy9x4QYGI4LQWgYm12QgeG+PASjg0NcmGKOQLudiLQfZDayXcewYJAaXIAJSzg3Au1uIsF+ZDdgsxuf/SAAU0sJgNmDC9PafnQ3kAKoZT+5YKTbPwqoB2YzYWJ6gvtyCAzj0xPIyyMwjD8KBjc4REJdT4raUTAKRsHIBrjaxdRo77DwMjCw8g6c/cSAgbZ/FOAHAPc1O98=
   </data>
  </layer>
- <layer nameID="tops1" width="32" height="32">
+ <layer name="tops1" width="32" height="32">
   <data encoding="base64" compression="zlib">
    eJzt1OlugkAUhuEZWcTlX6+Itd4Wq94WKshl9SVKBIs6uJEmPckTpnTgY5AzQpzLhnMa65oQhiY+Wk2+C49sH8EH80NEiJGQnSJjvL4yX5vznuavy8+xxQ57sguUjA+oeua7ZHsK+arPKaUQE2jQdX5/mIynsOTv+TH3TBTuq/qcNhkOXHjwEeAbKzlsLY88Z8h6I2xbaz0wXnNuow9byyOV19nY6edzJeMDqtO5Zi31n8bF9TYnHLjw4CPA6nLilZLMm0BrzTcZT2EZF/0JX3T7M2ROhBgJUmTYKObfq05/IhXd/szJ2WKHPQqUqF6U3+lPFKLbn9Lk/UGDDgMmLPM1+Z3+hCG7/WmT48CFBx8BVq186+vx/Hv9GZITIUaCFBk2iuvPF7zfxfX/h2REiJEgRVb3JzY9+9PQDLnk/S6759r7TS6Pe8MOexQo5XGPqBTz+zJuVXu/kROuhQYdBkxMYU3U7zmkVPfO/7pd/oxemY2Xn5KdjZhfkF2OmG/wDZsjfsc+2cGI+SnZWU++0+xtd/bed5RNdtTsbQP3xVdU+OTvsed5iw8/8zuq/h3q76A5Pnu96rGp8PQdNMdnr1c9Xqtnr/9L9QPP1W0K
   </data>
  </layer>
- <objectgroup nameID="colliderWalls1" visible="0">
+ <objectgroup name="colliderWalls1" visible="0">
   <object id="1" x="480" y="48" width="32" height="240"/>
   <object id="2" x="496" y="288" width="16" height="16"/>
   <object id="3" x="0" y="48" width="16" height="256"/>
@@ -78,201 +78,201 @@
   <object id="40" x="448" y="192" width="16" height="16"/>
   <object id="41" x="416" y="32" width="32" height="16"/>
  </objectgroup>
- <objectgroup nameID="livingEntities">
-  <object id="42" nameID="person" x="96" y="224" width="16" height="16">
+ <objectgroup name="livingEntities">
+  <object id="42" name="person" x="96" y="224" width="16" height="16">
    <properties>
-    <property nameID="male" value="true"/>
-    <property nameID="path" value="WSTOP,ESTOP,SSTOP,S,S,S,SSTOP,ESTOP,WSTOP,N,N,N"/>
-    <property nameID="spriteIndex" value="0"/>
-    <property nameID="startDir" value="S"/>
-    <property nameID="static" value="false"/>
-    <property nameID="text" value="person_3_1"/>
+    <property name="male" value="true"/>
+    <property name="path" value="WSTOP,ESTOP,SSTOP,S,S,S,SSTOP,ESTOP,WSTOP,N,N,N"/>
+    <property name="spriteIndex" value="0"/>
+    <property name="startDir" value="S"/>
+    <property name="static" value="false"/>
+    <property name="text" value="person_3_1"/>
    </properties>
   </object>
-  <object id="43" nameID="person" x="112" y="160" width="16" height="16">
+  <object id="43" name="person" x="112" y="160" width="16" height="16">
    <properties>
-    <property nameID="male" value="true"/>
-    <property nameID="path" value="SSTOP"/>
-    <property nameID="spriteIndex" value="2"/>
-    <property nameID="static" value="true"/>
-    <property nameID="text" value="person_3_2"/>
-   </properties>
-  </object>
- </objectgroup>
- <objectgroup nameID="sensors" visible="0">
-  <object id="44" nameID="warpField" x="240" y="496" width="16" height="16">
-   <properties>
-    <property nameID="targetID" value="2"/>
-    <property nameID="targetWarpPointID" value="1"/>
-   </properties>
-  </object>
-  <object id="45" nameID="startField" x="240" y="480" width="16" height="16">
-   <properties>
-    <property nameID="fieldID" value="1"/>
-   </properties>
-  </object>
-  <object id="46" nameID="startField" x="256" y="480" width="16" height="16">
-   <properties>
-    <property nameID="fieldID" value="2"/>
-   </properties>
-  </object>
-  <object id="47" nameID="warpField" x="256" y="496" width="16" height="16">
-   <properties>
-    <property nameID="targetID" value="2"/>
-    <property nameID="targetWarpPointID" value="2"/>
-   </properties>
-  </object>
-  <object id="48" nameID="startField" x="208" y="288" width="16" height="16">
-   <properties>
-    <property nameID="fieldID" value="3"/>
-   </properties>
-  </object>
-  <object id="49" nameID="warpField" x="208" y="272" width="16" height="16">
-   <properties>
-    <property nameID="targetID" value="4"/>
-    <property nameID="targetWarpPointID" value="1"/>
-   </properties>
-  </object>
-  <object id="50" nameID="warpField" x="368" y="208" width="16" height="16">
-   <properties>
-    <property nameID="targetID" value="6"/>
-    <property nameID="targetWarpPointID" value="1"/>
-   </properties>
-  </object>
-  <object id="51" nameID="startField" x="368" y="224" width="16" height="16">
-   <properties>
-    <property nameID="fieldID" value="4"/>
-   </properties>
-  </object>
-  <object id="52" nameID="warpField" x="0" y="304" width="16" height="16">
-   <properties>
-    <property nameID="targetID" value="7"/>
-    <property nameID="targetWarpPointID" value="1"/>
-   </properties>
-  </object>
-  <object id="53" nameID="startField" x="16" y="320" width="16" height="16">
-   <properties>
-    <property nameID="fieldID" value="5"/>
-   </properties>
-  </object>
-  <object id="54" nameID="warpField" x="0" y="320" width="16" height="16">
-   <properties>
-    <property nameID="targetID" value="7"/>
-    <property nameID="targetWarpPointID" value="1"/>
-   </properties>
-  </object>
-  <object id="55" nameID="warpField" x="0" y="336" width="16" height="16">
-   <properties>
-    <property nameID="targetID" value="7"/>
-    <property nameID="targetWarpPointID" value="1"/>
-   </properties>
-  </object>
-  <object id="56" nameID="warpField" x="0" y="352" width="16" height="16">
-   <properties>
-    <property nameID="targetID" value="7"/>
-    <property nameID="targetWarpPointID" value="1"/>
-   </properties>
-  </object>
-  <object id="57" nameID="warpField" x="0" y="368" width="16" height="16">
-   <properties>
-    <property nameID="targetID" value="7"/>
-    <property nameID="targetWarpPointID" value="1"/>
-   </properties>
-  </object>
-  <object id="58" nameID="warpField" x="0" y="384" width="16" height="16">
-   <properties>
-    <property nameID="targetID" value="7"/>
-    <property nameID="targetWarpPointID" value="1"/>
-   </properties>
-  </object>
-  <object id="59" nameID="warpField" x="496" y="304" width="16" height="16">
-   <properties>
-    <property nameID="targetID" value="10"/>
-    <property nameID="targetWarpPointID" value="1"/>
-   </properties>
-  </object>
-  <object id="60" nameID="warpField" x="496" y="320" width="16" height="16">
-   <properties>
-    <property nameID="targetID" value="10"/>
-    <property nameID="targetWarpPointID" value="1"/>
-   </properties>
-  </object>
-  <object id="61" nameID="warpField" x="496" y="336" width="16" height="16">
-   <properties>
-    <property nameID="targetID" value="10"/>
-    <property nameID="targetWarpPointID" value="1"/>
-   </properties>
-  </object>
-  <object id="62" nameID="warpField" x="496" y="352" width="16" height="16">
-   <properties>
-    <property nameID="targetID" value="10"/>
-    <property nameID="targetWarpPointID" value="1"/>
-   </properties>
-  </object>
-  <object id="63" nameID="warpField" x="496" y="368" width="16" height="16">
-   <properties>
-    <property nameID="targetID" value="10"/>
-    <property nameID="targetWarpPointID" value="1"/>
-   </properties>
-  </object>
-  <object id="64" nameID="warpField" x="496" y="384" width="16" height="16">
-   <properties>
-    <property nameID="targetID" value="10"/>
-    <property nameID="targetWarpPointID" value="1"/>
-   </properties>
-  </object>
-  <object id="65" nameID="startField" x="480" y="320" width="16" height="16">
-   <properties>
-    <property nameID="fieldID" value="6"/>
-   </properties>
-  </object>
-  <object id="66" nameID="warpField" x="80" y="144" width="16" height="16">
-   <properties>
-    <property nameID="targetID" value="19"/>
-    <property nameID="targetWarpPointID" value="1"/>
-   </properties>
-  </object>
-  <object id="67" nameID="startField" x="80" y="160" width="16" height="16">
-   <properties>
-    <property nameID="fieldID" value="9"/>
+    <property name="male" value="true"/>
+    <property name="path" value="SSTOP"/>
+    <property name="spriteIndex" value="2"/>
+    <property name="static" value="true"/>
+    <property name="text" value="person_3_2"/>
    </properties>
   </object>
  </objectgroup>
- <objectgroup nameID="objects">
-  <object id="68" nameID="sign" x="240" y="432" width="16" height="16">
+ <objectgroup name="sensors" visible="0">
+  <object id="44" name="warpField" x="240" y="496" width="16" height="16">
    <properties>
-    <property nameID="text" value="sign_3_1_text"/>
-    <property nameID="title" value="sign_3_1_title"/>
+    <property name="targetID" value="2"/>
+    <property name="targetWarpPointID" value="1"/>
    </properties>
   </object>
-  <object id="70" nameID="sign" x="16" y="288" width="16" height="16">
+  <object id="45" name="startField" x="240" y="480" width="16" height="16">
    <properties>
-    <property nameID="text" value="sign_3_3_text"/>
-    <property nameID="title" value="sign_3_3_title"/>
+    <property name="fieldID" value="1"/>
    </properties>
   </object>
-  <object id="71" nameID="sign" x="192" y="288" width="16" height="16">
+  <object id="46" name="startField" x="256" y="480" width="16" height="16">
    <properties>
-    <property nameID="text" value="sign_3_2_text"/>
-    <property nameID="title" value="sign_3_2_title"/>
+    <property name="fieldID" value="2"/>
    </properties>
   </object>
-  <object id="74" nameID="sign" x="256" y="432" width="16" height="16">
+  <object id="47" name="warpField" x="256" y="496" width="16" height="16">
    <properties>
-    <property nameID="text" value="sign_3_1_text"/>
-    <property nameID="title" value="sign_3_1_title"/>
+    <property name="targetID" value="2"/>
+    <property name="targetWarpPointID" value="2"/>
    </properties>
   </object>
-  <object id="75" nameID="sign" x="256" y="416" width="16" height="16">
+  <object id="48" name="startField" x="208" y="288" width="16" height="16">
    <properties>
-    <property nameID="text" value="sign_3_1_text"/>
-    <property nameID="title" value="sign_3_1_title"/>
+    <property name="fieldID" value="3"/>
    </properties>
   </object>
-  <object id="76" nameID="sign" x="240" y="416" width="16" height="16">
+  <object id="49" name="warpField" x="208" y="272" width="16" height="16">
    <properties>
-    <property nameID="text" value="sign_3_1_text"/>
-    <property nameID="title" value="sign_3_1_title"/>
+    <property name="targetID" value="4"/>
+    <property name="targetWarpPointID" value="1"/>
+   </properties>
+  </object>
+  <object id="50" name="warpField" x="368" y="208" width="16" height="16">
+   <properties>
+    <property name="targetID" value="6"/>
+    <property name="targetWarpPointID" value="1"/>
+   </properties>
+  </object>
+  <object id="51" name="startField" x="368" y="224" width="16" height="16">
+   <properties>
+    <property name="fieldID" value="4"/>
+   </properties>
+  </object>
+  <object id="52" name="warpField" x="0" y="304" width="16" height="16">
+   <properties>
+    <property name="targetID" value="7"/>
+    <property name="targetWarpPointID" value="1"/>
+   </properties>
+  </object>
+  <object id="53" name="startField" x="16" y="320" width="16" height="16">
+   <properties>
+    <property name="fieldID" value="5"/>
+   </properties>
+  </object>
+  <object id="54" name="warpField" x="0" y="320" width="16" height="16">
+   <properties>
+    <property name="targetID" value="7"/>
+    <property name="targetWarpPointID" value="1"/>
+   </properties>
+  </object>
+  <object id="55" name="warpField" x="0" y="336" width="16" height="16">
+   <properties>
+    <property name="targetID" value="7"/>
+    <property name="targetWarpPointID" value="1"/>
+   </properties>
+  </object>
+  <object id="56" name="warpField" x="0" y="352" width="16" height="16">
+   <properties>
+    <property name="targetID" value="7"/>
+    <property name="targetWarpPointID" value="1"/>
+   </properties>
+  </object>
+  <object id="57" name="warpField" x="0" y="368" width="16" height="16">
+   <properties>
+    <property name="targetID" value="7"/>
+    <property name="targetWarpPointID" value="1"/>
+   </properties>
+  </object>
+  <object id="58" name="warpField" x="0" y="384" width="16" height="16">
+   <properties>
+    <property name="targetID" value="7"/>
+    <property name="targetWarpPointID" value="1"/>
+   </properties>
+  </object>
+  <object id="59" name="warpField" x="496" y="304" width="16" height="16">
+   <properties>
+    <property name="targetID" value="10"/>
+    <property name="targetWarpPointID" value="1"/>
+   </properties>
+  </object>
+  <object id="60" name="warpField" x="496" y="320" width="16" height="16">
+   <properties>
+    <property name="targetID" value="10"/>
+    <property name="targetWarpPointID" value="1"/>
+   </properties>
+  </object>
+  <object id="61" name="warpField" x="496" y="336" width="16" height="16">
+   <properties>
+    <property name="targetID" value="10"/>
+    <property name="targetWarpPointID" value="1"/>
+   </properties>
+  </object>
+  <object id="62" name="warpField" x="496" y="352" width="16" height="16">
+   <properties>
+    <property name="targetID" value="10"/>
+    <property name="targetWarpPointID" value="1"/>
+   </properties>
+  </object>
+  <object id="63" name="warpField" x="496" y="368" width="16" height="16">
+   <properties>
+    <property name="targetID" value="10"/>
+    <property name="targetWarpPointID" value="1"/>
+   </properties>
+  </object>
+  <object id="64" name="warpField" x="496" y="384" width="16" height="16">
+   <properties>
+    <property name="targetID" value="10"/>
+    <property name="targetWarpPointID" value="1"/>
+   </properties>
+  </object>
+  <object id="65" name="startField" x="480" y="320" width="16" height="16">
+   <properties>
+    <property name="fieldID" value="6"/>
+   </properties>
+  </object>
+  <object id="66" name="warpField" x="80" y="144" width="16" height="16">
+   <properties>
+    <property name="targetID" value="19"/>
+    <property name="targetWarpPointID" value="1"/>
+   </properties>
+  </object>
+  <object id="67" name="startField" x="80" y="160" width="16" height="16">
+   <properties>
+    <property name="fieldID" value="9"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="objects">
+  <object id="68" name="sign" x="240" y="432" width="16" height="16">
+   <properties>
+    <property name="text" value="sign_3_1_text"/>
+    <property name="title" value="sign_3_1_title"/>
+   </properties>
+  </object>
+  <object id="70" name="sign" x="16" y="288" width="16" height="16">
+   <properties>
+    <property name="text" value="sign_3_3_text"/>
+    <property name="title" value="sign_3_3_title"/>
+   </properties>
+  </object>
+  <object id="71" name="sign" x="192" y="288" width="16" height="16">
+   <properties>
+    <property name="text" value="sign_3_2_text"/>
+    <property name="title" value="sign_3_2_title"/>
+   </properties>
+  </object>
+  <object id="74" name="sign" x="256" y="432" width="16" height="16">
+   <properties>
+    <property name="text" value="sign_3_1_text"/>
+    <property name="title" value="sign_3_1_title"/>
+   </properties>
+  </object>
+  <object id="75" name="sign" x="256" y="416" width="16" height="16">
+   <properties>
+    <property name="text" value="sign_3_1_text"/>
+    <property name="title" value="sign_3_1_title"/>
+   </properties>
+  </object>
+  <object id="76" name="sign" x="240" y="416" width="16" height="16">
+   <properties>
+    <property name="text" value="sign_3_1_text"/>
+    <property name="title" value="sign_3_1_title"/>
    </properties>
   </object>
  </objectgroup>

@@ -1,47 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="8" height="8" tilewidth="16" tileheight="16" nextobjectid="11">
  <properties>
-  <property nameID="musicIndex" value="2"/>
-  <property nameID="musicType" value="town"/>
+  <property name="musicIndex" value="2"/>
+  <property name="musicType" value="town"/>
  </properties>
- <tileset firstgid="1" nameID="limbusdev_world" tilewidth="16" tileheight="16" tilecount="4096">
+ <tileset firstgid="1" name="limbusdev_world" tilewidth="16" tileheight="16" tilecount="4096">
   <image source="../spritesheets/limbusdev_world.png" width="1024" height="1024"/>
  </tileset>
- <tileset firstgid="4097" nameID="limbusdev_world2" tilewidth="16" tileheight="16" tilecount="4096">
+ <tileset firstgid="4097" name="limbusdev_world2" tilewidth="16" tileheight="16" tilecount="4096">
   <image source="../spritesheets/limbusdev_world2.png" width="1024" height="1024"/>
  </tileset>
- <layer nameID="ground0" width="8" height="8">
+ <layer name="ground0" width="8" height="8">
   <data encoding="base64" compression="zlib">
    eJxjYBjZAAABAAAB
   </data>
  </layer>
- <layer nameID="ground1" width="8" height="8">
+ <layer name="ground1" width="8" height="8">
   <data encoding="base64" compression="zlib">
    eJxjYMAPLggPbXyegDwAGtIxqA==
   </data>
  </layer>
- <layer nameID="walls1" width="8" height="8">
+ <layer name="walls1" width="8" height="8">
   <data encoding="base64" compression="zlib">
    eJxjYMAP+EUYGLhEsWMBoNxpEdx6TyLJO/IxMDjz4ZYnpJ9U+T4RiLw/EHcBcTdUXSeUD8IBQAwAal0OzQ==
   </data>
  </layer>
- <layer nameID="objects1" width="8" height="8">
+ <layer name="objects1" width="8" height="8">
   <data encoding="base64" compression="zlib">
    eJxjYBj84JwI7cwGAFIkAOM=
   </data>
  </layer>
- <objectgroup nameID="people1" visible="0"/>
- <layer nameID="lights1" width="8" height="8">
+ <objectgroup name="people1" visible="0"/>
+ <layer name="lights1" width="8" height="8">
   <data encoding="base64" compression="zlib">
    eJxjYBgeQE2SgUEdiDUkscunAcXTgTgDTR4ARVoCQQ==
   </data>
  </layer>
- <layer nameID="tops1" width="8" height="8">
+ <layer name="tops1" width="8" height="8">
   <data encoding="base64" compression="zlib">
    eJxjYKAOOMjLwHCYl0qG0REAACdFAZ8=
   </data>
  </layer>
- <objectgroup nameID="colliderWalls1">
+ <objectgroup name="colliderWalls1">
   <object id="1" x="0" y="16" width="128" height="16"/>
   <object id="2" x="32" y="48" width="32" height="16"/>
   <object id="3" x="0" y="32" width="16" height="96"/>
@@ -50,23 +50,23 @@
   <object id="6" x="64" y="112" width="48" height="16"/>
   <object id="7" x="96" y="96" width="16" height="16"/>
  </objectgroup>
- <objectgroup nameID="triggers1">
-  <object id="8" nameID="warpField" x="48" y="112" width="16" height="16">
+ <objectgroup name="triggers1">
+  <object id="8" name="warpField" x="48" y="112" width="16" height="16">
    <properties>
-    <property nameID="targetID" value="1"/>
-    <property nameID="targetWarpPointID" value="3"/>
+    <property name="targetID" value="1"/>
+    <property name="targetWarpPointID" value="3"/>
    </properties>
   </object>
-  <object id="9" nameID="startField" x="64" y="64" width="16" height="16">
+  <object id="9" name="startField" x="64" y="64" width="16" height="16">
    <properties>
-    <property nameID="fieldID" value="1"/>
+    <property name="fieldID" value="1"/>
    </properties>
   </object>
-  <object id="10" nameID="startField" x="48" y="96" width="16" height="16">
+  <object id="10" name="startField" x="48" y="96" width="16" height="16">
    <properties>
-    <property nameID="fieldID" value="2"/>
+    <property name="fieldID" value="2"/>
    </properties>
   </object>
  </objectgroup>
- <objectgroup nameID="descriptions1" visible="0"/>
+ <objectgroup name="descriptions1" visible="0"/>
 </map>

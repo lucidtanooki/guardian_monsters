@@ -1,119 +1,119 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="16" tileheight="16" nextobjectid="76">
  <properties>
-  <property nameID="musicIndex" value="2"/>
-  <property nameID="musicType" value="town"/>
-  <property nameID="weather" value="clouds"/>
+  <property name="musicIndex" value="2"/>
+  <property name="musicType" value="town"/>
+  <property name="weather" value="clouds"/>
  </properties>
- <tileset firstgid="1" nameID="limbusdev_world" tilewidth="16" tileheight="16" tilecount="4096">
+ <tileset firstgid="1" name="limbusdev_world" tilewidth="16" tileheight="16" tilecount="4096">
   <image source="../spritesheets/limbusdev_world.png" width="1024" height="1024"/>
  </tileset>
- <tileset firstgid="4097" nameID="limbusdev_world2" tilewidth="16" tileheight="16" tilecount="4096">
+ <tileset firstgid="4097" name="limbusdev_world2" tilewidth="16" tileheight="16" tilecount="4096">
   <image source="../spritesheets/limbusdev_world2.png" width="1024" height="1024"/>
  </tileset>
- <layer nameID="ground1" width="32" height="32">
+ <layer name="ground1" width="32" height="32">
   <data encoding="base64" compression="zlib">
    eJztwwEJAAAMA6AleP9AC7YeR8FeUlVVVfX1AfIpSC4=
   </data>
  </layer>
- <layer nameID="walls1" width="32" height="32">
+ <layer name="walls1" width="32" height="32">
   <data encoding="base64" compression="zlib">
    eJzlV+1OwjAUrcLGYFNMeCJApvGtQDf8ocZX0n3gY3kauaG5uqz3jjAST3JyaEp7errbJt3FxtTgzkO/wOXImFtwBaYgoRLM4+ooMSZM/DQCH+H5BGZg7vhnmCsHt0KVrPec8weCeVy9A1NPvQcLeJZgBdaO/0owj9WPiTGf4Ba/88RPn23+CPnBDMwj5/u3jB+AQ6d9gb2/jA/r8MVy723XkEbt/ycU8CrjQ5t8aR2+aMrfBspPOHV+7nPq/NynLf8ce7Ww9Y6+EqzAGizgWYIVWAv85/BaCL7/Gt4bW7foG4IBGIKDMdpgAIZjf/81xm4E+dtA+6KF9vsTaF+06Jqf6kMLqgdtfqoPLagetPmPBW3+Y6Gv/Lz+qZ74vSM9Z/y+4kr9vP6pnvi903TOmvaN31dcqb/r+W8aN7mSjf8rx83sR1/2+j77Pb4pv6//Oed/ZXnf/ln+a5Z3Ksj/0HN+6Xjt/df13uw7P73BaB1aJWjff5RDqwTt++8bw5rOZg==
   </data>
  </layer>
- <layer nameID="objects1" width="32" height="32">
+ <layer name="objects1" width="32" height="32">
   <data encoding="base64" compression="zlib">
    eJxjYBgFo2AUOPETh8nVP2o/qjpc+skF1LCfEkCp/ZSCgbYfBNiA5rJjwRxUsp+U9EzIjIGynxJAS/uJyefklCtDxf7BDgj5mw0tn9HbfkrBMSEGhnMiDAztQthxnwjx9pNTjyHbhe4ubObSyv5jQphyMHla2g8KX3TwSJJ+9qOHOyFzaWH/ObQw6BdGlceVRqhhPyzeQfFwiAe7+9qR8gi1AT5/YcuPo2B4AAA1JlrI
   </data>
  </layer>
- <objectgroup nameID="animatedObjects1" visible="0">
-  <object id="63" nameID="animatedObject" x="416" y="192" width="16" height="16">
+ <objectgroup name="animatedObjects1" visible="0">
+  <object id="63" name="animatedObject" x="416" y="192" width="16" height="16">
    <properties>
-    <property nameID="frameDuration" value="0.2"/>
-    <property nameID="index" value="tree1"/>
+    <property name="frameDuration" value="0.2"/>
+    <property name="index" value="tree1"/>
    </properties>
   </object>
-  <object id="64" nameID="animatedObject" x="432" y="192" width="16" height="16">
+  <object id="64" name="animatedObject" x="432" y="192" width="16" height="16">
    <properties>
-    <property nameID="frameDuration" value="0.2"/>
-    <property nameID="index" value="tree1"/>
+    <property name="frameDuration" value="0.2"/>
+    <property name="index" value="tree1"/>
    </properties>
   </object>
-  <object id="67" nameID="animatedObject" x="304" y="224" width="16" height="16">
+  <object id="67" name="animatedObject" x="304" y="224" width="16" height="16">
    <properties>
-    <property nameID="frameDuration" value="0.13"/>
-    <property nameID="index" value="flower1"/>
+    <property name="frameDuration" value="0.13"/>
+    <property name="index" value="flower1"/>
    </properties>
   </object>
-  <object id="68" nameID="animatedObject" x="288" y="320" width="16" height="16">
+  <object id="68" name="animatedObject" x="288" y="320" width="16" height="16">
    <properties>
-    <property nameID="frameDuration" value="0.13"/>
-    <property nameID="index" value="flower2"/>
+    <property name="frameDuration" value="0.13"/>
+    <property name="index" value="flower2"/>
    </properties>
   </object>
-  <object id="70" nameID="animatedObject" x="304" y="400" width="16" height="16">
+  <object id="70" name="animatedObject" x="304" y="400" width="16" height="16">
    <properties>
-    <property nameID="frameDuration" value="0.2"/>
-    <property nameID="index" value="flower1"/>
+    <property name="frameDuration" value="0.2"/>
+    <property name="index" value="flower1"/>
    </properties>
   </object>
-  <object id="71" nameID="animatedObject" x="384" y="288" width="16" height="16">
+  <object id="71" name="animatedObject" x="384" y="288" width="16" height="16">
    <properties>
-    <property nameID="frameDuration" value="0.2"/>
-    <property nameID="index" value="flower1"/>
+    <property name="frameDuration" value="0.2"/>
+    <property name="index" value="flower1"/>
    </properties>
   </object>
-  <object id="72" nameID="animatedObject" x="48" y="192" width="16" height="16">
+  <object id="72" name="animatedObject" x="48" y="192" width="16" height="16">
    <properties>
-    <property nameID="frameDuration" value="0.2"/>
-    <property nameID="index" value="flower1"/>
+    <property name="frameDuration" value="0.2"/>
+    <property name="index" value="flower1"/>
    </properties>
   </object>
-  <object id="73" nameID="animatedObject" x="128" y="240" width="16" height="16">
+  <object id="73" name="animatedObject" x="128" y="240" width="16" height="16">
    <properties>
-    <property nameID="frameDuration" value="0.2"/>
-    <property nameID="index" value="flower2"/>
+    <property name="frameDuration" value="0.2"/>
+    <property name="index" value="flower2"/>
    </properties>
   </object>
-  <object id="74" nameID="animatedObject" x="64" y="384" width="16" height="16">
+  <object id="74" name="animatedObject" x="64" y="384" width="16" height="16">
    <properties>
-    <property nameID="frameDuration" value="0.2"/>
-    <property nameID="index" value="flower2"/>
+    <property name="frameDuration" value="0.2"/>
+    <property name="index" value="flower2"/>
    </properties>
   </object>
-  <object id="75" nameID="animatedObject" x="464" y="96" width="16" height="16">
+  <object id="75" name="animatedObject" x="464" y="96" width="16" height="16">
    <properties>
-    <property nameID="frameDuration" value="0.2"/>
-    <property nameID="index" value="flower2"/>
-   </properties>
-  </object>
- </objectgroup>
- <objectgroup nameID="people1" visible="0">
-  <object id="61" nameID="person" type="person" x="32" y="160" width="16" height="16">
-   <properties>
-    <property nameID="male" value="true"/>
-    <property nameID="path" value="ESTOP"/>
-    <property nameID="spriteIndex" value="1"/>
-    <property nameID="static" value="true"/>
-    <property nameID="text" value="person_02_1"/>
-   </properties>
-  </object>
-  <object id="69" nameID="person" type="person" x="304" y="320" width="16" height="16">
-   <properties>
-    <property nameID="male" value="true"/>
-    <property nameID="path" value="SSTOP"/>
-    <property nameID="spriteIndex" value="4"/>
-    <property nameID="static" value="true"/>
-    <property nameID="text" value="person_02_2"/>
+    <property name="frameDuration" value="0.2"/>
+    <property name="index" value="flower2"/>
    </properties>
   </object>
  </objectgroup>
- <layer nameID="tops1" width="32" height="32">
+ <objectgroup name="people1" visible="0">
+  <object id="61" name="person" type="person" x="32" y="160" width="16" height="16">
+   <properties>
+    <property name="male" value="true"/>
+    <property name="path" value="ESTOP"/>
+    <property name="spriteIndex" value="1"/>
+    <property name="static" value="true"/>
+    <property name="text" value="person_02_1"/>
+   </properties>
+  </object>
+  <object id="69" name="person" type="person" x="304" y="320" width="16" height="16">
+   <properties>
+    <property name="male" value="true"/>
+    <property name="path" value="SSTOP"/>
+    <property name="spriteIndex" value="4"/>
+    <property name="static" value="true"/>
+    <property name="text" value="person_02_2"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <layer name="tops1" width="32" height="32">
   <data encoding="base64" compression="zlib">
    eJztldtqwmAQhLfaeMYLfSK1SW/a6iupTfpcCkbphfaROpAM/CxKNiYmiH4wDBLd/Q/ZUaRevLbIa9vmRH9+cj2bvsi2n/09vysSdMvv8zIQaQyyfx+idwQ1O7h/yINaHXt/a59L7NA7LrD/a2n2sF/Ig1q96vryvmbo+Qb5UFBhf97XGj2/oRCKnP48l7rgudQFz8UlHorsz+gwLL+/NTduRdY8M6+0VwXzSntVMK+0W+F85Z0znVfa+XwCTZ26fJ907uSdM51X2vl8Ca2cunyfdO6cmzN3vSRO50znlfZL9fJS9P/sVvyWsKa/UeIf48QX4+I174lPtd+vB9v/Mb3/ebrv06i+tTwKzGOra3xkYQC9G13DPLa6JkTNCPox+pOEf+y1T6g=
   </data>
  </layer>
- <objectgroup nameID="colliderWalls1" visible="0">
+ <objectgroup name="colliderWalls1" visible="0">
   <object id="1" x="0" y="0" width="256" height="96"/>
   <object id="2" x="288" y="0" width="224" height="96"/>
   <object id="3" x="192" y="96" width="64" height="64"/>
@@ -145,216 +145,216 @@
   <object id="29" x="80" y="432" width="16" height="16"/>
   <object id="66" x="416" y="192" width="32" height="16"/>
  </objectgroup>
- <objectgroup nameID="triggers1">
-  <object id="30" nameID="startField" x="256" y="16" width="16" height="16">
+ <objectgroup name="triggers1">
+  <object id="30" name="startField" x="256" y="16" width="16" height="16">
    <properties>
-    <property nameID="fieldID" value="1"/>
+    <property name="fieldID" value="1"/>
    </properties>
   </object>
-  <object id="31" nameID="startField" x="272" y="16" width="16" height="16">
+  <object id="31" name="startField" x="272" y="16" width="16" height="16">
    <properties>
-    <property nameID="fieldID" value="2"/>
+    <property name="fieldID" value="2"/>
    </properties>
   </object>
-  <object id="32" nameID="warpField" x="256" y="0" width="16" height="16">
+  <object id="32" name="warpField" x="256" y="0" width="16" height="16">
    <properties>
-    <property nameID="targetID" value="25"/>
-    <property nameID="targetWarpPointID" value="3"/>
+    <property name="targetID" value="25"/>
+    <property name="targetWarpPointID" value="3"/>
    </properties>
   </object>
-  <object id="33" nameID="warpField" x="272" y="0" width="16" height="16">
+  <object id="33" name="warpField" x="272" y="0" width="16" height="16">
    <properties>
-    <property nameID="targetID" value="25"/>
-    <property nameID="targetWarpPointID" value="4"/>
+    <property name="targetID" value="25"/>
+    <property name="targetWarpPointID" value="4"/>
    </properties>
   </object>
-  <object id="34" nameID="startField" x="256" y="480" width="16" height="16">
+  <object id="34" name="startField" x="256" y="480" width="16" height="16">
    <properties>
-    <property nameID="fieldID" value="3"/>
+    <property name="fieldID" value="3"/>
    </properties>
   </object>
-  <object id="35" nameID="warpField" x="256" y="496" width="16" height="16">
+  <object id="35" name="warpField" x="256" y="496" width="16" height="16">
    <properties>
-    <property nameID="targetID" value="1"/>
-    <property nameID="targetWarpPointID" value="1"/>
+    <property name="targetID" value="1"/>
+    <property name="targetWarpPointID" value="1"/>
    </properties>
   </object>
-  <object id="36" nameID="startField" x="272" y="480" width="16" height="16">
+  <object id="36" name="startField" x="272" y="480" width="16" height="16">
    <properties>
-    <property nameID="fieldID" value="4"/>
+    <property name="fieldID" value="4"/>
    </properties>
   </object>
-  <object id="37" nameID="warpField" x="272" y="496" width="16" height="16">
+  <object id="37" name="warpField" x="272" y="496" width="16" height="16">
    <properties>
-    <property nameID="targetID" value="1"/>
-    <property nameID="targetWarpPointID" value="2"/>
+    <property name="targetID" value="1"/>
+    <property name="targetWarpPointID" value="2"/>
    </properties>
   </object>
-  <object id="38" nameID="monsterArea" x="32" y="96" width="160" height="48">
+  <object id="38" name="monsterArea" x="32" y="96" width="160" height="48">
    <properties>
-    <property nameID="monsters" value="4;0.7;8;0.3"/>
-    <property nameID="probability" value="0.05"/>
-    <property nameID="probability2" value="0.02"/>
-    <property nameID="probability3" value="0.01"/>
+    <property name="monsters" value="4;0.7;8;0.3"/>
+    <property name="probability" value="0.05"/>
+    <property name="probability2" value="0.02"/>
+    <property name="probability3" value="0.01"/>
    </properties>
   </object>
-  <object id="39" nameID="monsterArea" x="32" y="144" width="32" height="16">
+  <object id="39" name="monsterArea" x="32" y="144" width="32" height="16">
    <properties>
-    <property nameID="monsters" value="4;0.7;8;0.3"/>
-    <property nameID="probability" value="0.05"/>
-    <property nameID="probability2" value="0.02"/>
-    <property nameID="probability3" value="0.01"/>
+    <property name="monsters" value="4;0.7;8;0.3"/>
+    <property name="probability" value="0.05"/>
+    <property name="probability2" value="0.02"/>
+    <property name="probability3" value="0.01"/>
    </properties>
   </object>
-  <object id="40" nameID="monsterArea" x="32" y="256" width="64" height="32">
+  <object id="40" name="monsterArea" x="32" y="256" width="64" height="32">
    <properties>
-    <property nameID="monsters" value="4;0.7;8;0.3"/>
-    <property nameID="probability" value="0.05"/>
-    <property nameID="probability2" value="0.2"/>
-    <property nameID="probability3" value="0.1"/>
+    <property name="monsters" value="4;0.7;8;0.3"/>
+    <property name="probability" value="0.05"/>
+    <property name="probability2" value="0.2"/>
+    <property name="probability3" value="0.1"/>
    </properties>
   </object>
-  <object id="41" nameID="monsterArea" x="176" y="208" width="48" height="80">
+  <object id="41" name="monsterArea" x="176" y="208" width="48" height="80">
    <properties>
-    <property nameID="monsters" value="4;0.7;8;0.3"/>
-    <property nameID="probability" value="0.05"/>
-    <property nameID="probability2" value="0.02"/>
-    <property nameID="probability3" value="0.01"/>
+    <property name="monsters" value="4;0.7;8;0.3"/>
+    <property name="probability" value="0.05"/>
+    <property name="probability2" value="0.02"/>
+    <property name="probability3" value="0.01"/>
    </properties>
   </object>
-  <object id="42" nameID="monsterArea" x="224" y="256" width="32" height="32">
+  <object id="42" name="monsterArea" x="224" y="256" width="32" height="32">
    <properties>
-    <property nameID="monsters" value="4;0.7;8;0.3"/>
-    <property nameID="probability" value="0.05"/>
-    <property nameID="probability2" value="0.02"/>
-    <property nameID="probability3" value="0.01"/>
+    <property name="monsters" value="4;0.7;8;0.3"/>
+    <property name="probability" value="0.05"/>
+    <property name="probability2" value="0.02"/>
+    <property name="probability3" value="0.01"/>
    </properties>
   </object>
-  <object id="43" nameID="monsterArea" x="288" y="96" width="128" height="96">
+  <object id="43" name="monsterArea" x="288" y="96" width="128" height="96">
    <properties>
-    <property nameID="monsters" value="4;0.7;8;0.3"/>
-    <property nameID="probability" value="0.05"/>
-    <property nameID="probability2" value="0.02"/>
-    <property nameID="probability3" value="0.01"/>
+    <property name="monsters" value="4;0.7;8;0.3"/>
+    <property name="probability" value="0.05"/>
+    <property name="probability2" value="0.02"/>
+    <property name="probability3" value="0.01"/>
    </properties>
   </object>
-  <object id="45" nameID="monsterArea" x="448" y="128" width="32" height="96">
+  <object id="45" name="monsterArea" x="448" y="128" width="32" height="96">
    <properties>
-    <property nameID="monsters" value="4;0.7;8;0.3"/>
-    <property nameID="probability" value="0.05"/>
-    <property nameID="probability2" value="0.02"/>
-    <property nameID="probability3" value="0.01"/>
+    <property name="monsters" value="4;0.7;8;0.3"/>
+    <property name="probability" value="0.05"/>
+    <property name="probability2" value="0.02"/>
+    <property name="probability3" value="0.01"/>
    </properties>
   </object>
-  <object id="46" nameID="monsterArea" x="336" y="336" width="144" height="96">
+  <object id="46" name="monsterArea" x="336" y="336" width="144" height="96">
    <properties>
-    <property nameID="monsters" value="4;0.7;8;0.3"/>
-    <property nameID="probability" value="0.05"/>
-    <property nameID="probability2" value="0.3"/>
-    <property nameID="probability3" value="0.1"/>
+    <property name="monsters" value="4;0.7;8;0.3"/>
+    <property name="probability" value="0.05"/>
+    <property name="probability2" value="0.3"/>
+    <property name="probability3" value="0.1"/>
    </properties>
   </object>
-  <object id="47" nameID="monsterArea" x="160" y="304" width="64" height="32">
+  <object id="47" name="monsterArea" x="160" y="304" width="64" height="32">
    <properties>
-    <property nameID="monsters" value="4;0.7;8;0.3"/>
-    <property nameID="probability" value="0.05"/>
-    <property nameID="probability2" value="0.02"/>
-    <property nameID="probability3" value="0.01"/>
+    <property name="monsters" value="4;0.7;8;0.3"/>
+    <property name="probability" value="0.05"/>
+    <property name="probability2" value="0.02"/>
+    <property name="probability3" value="0.01"/>
    </properties>
   </object>
-  <object id="48" nameID="monsterArea" x="160" y="368" width="16" height="32">
+  <object id="48" name="monsterArea" x="160" y="368" width="16" height="32">
    <properties>
-    <property nameID="monsters" value="4;0.7;8;0.3"/>
-    <property nameID="probability" value="0.05"/>
-    <property nameID="probability2" value="0.02"/>
-    <property nameID="probability3" value="0.01"/>
+    <property name="monsters" value="4;0.7;8;0.3"/>
+    <property name="probability" value="0.05"/>
+    <property name="probability2" value="0.02"/>
+    <property name="probability3" value="0.01"/>
    </properties>
   </object>
-  <object id="49" nameID="startField" x="480" y="256" width="16" height="16">
+  <object id="49" name="startField" x="480" y="256" width="16" height="16">
    <properties>
-    <property nameID="fieldID" value="5"/>
+    <property name="fieldID" value="5"/>
    </properties>
   </object>
-  <object id="50" nameID="warpField" x="496" y="256" width="16" height="16">
+  <object id="50" name="warpField" x="496" y="256" width="16" height="16">
    <properties>
-    <property nameID="targetID" value="11"/>
-    <property nameID="targetWarpPointID" value="1"/>
+    <property name="targetID" value="11"/>
+    <property name="targetWarpPointID" value="1"/>
    </properties>
   </object>
-  <object id="51" nameID="startField" x="480" y="272" width="16" height="16">
+  <object id="51" name="startField" x="480" y="272" width="16" height="16">
    <properties>
-    <property nameID="fieldID" value="5"/>
+    <property name="fieldID" value="5"/>
    </properties>
   </object>
-  <object id="52" nameID="warpField" x="496" y="272" width="16" height="16">
+  <object id="52" name="warpField" x="496" y="272" width="16" height="16">
    <properties>
-    <property nameID="targetID" value="11"/>
-    <property nameID="targetWarpPointID" value="1"/>
+    <property name="targetID" value="11"/>
+    <property name="targetWarpPointID" value="1"/>
    </properties>
   </object>
-  <object id="53" nameID="monsterArea" x="176" y="336" width="48" height="80">
+  <object id="53" name="monsterArea" x="176" y="336" width="48" height="80">
    <properties>
-    <property nameID="monsters" value="4;0.7;8;0.3"/>
-    <property nameID="probability" value="0.05"/>
-    <property nameID="probability2" value="0.02"/>
-    <property nameID="probability3" value="0.01"/>
+    <property name="monsters" value="4;0.7;8;0.3"/>
+    <property name="probability" value="0.05"/>
+    <property name="probability2" value="0.02"/>
+    <property name="probability3" value="0.01"/>
    </properties>
   </object>
-  <object id="54" nameID="monsterArea" x="160" y="416" width="64" height="48">
+  <object id="54" name="monsterArea" x="160" y="416" width="64" height="48">
    <properties>
-    <property nameID="monsters" value="4;0.7;8;0.3"/>
-    <property nameID="probability" value="0.05"/>
-    <property nameID="probability2" value="0.02"/>
-    <property nameID="probability3" value="0.01"/>
+    <property name="monsters" value="4;0.7;8;0.3"/>
+    <property name="probability" value="0.05"/>
+    <property name="probability2" value="0.02"/>
+    <property name="probability3" value="0.01"/>
    </properties>
   </object>
-  <object id="55" nameID="monsterArea" x="144" y="448" width="16" height="16">
+  <object id="55" name="monsterArea" x="144" y="448" width="16" height="16">
    <properties>
-    <property nameID="monsters" value="4;0.7;8;0.3"/>
-    <property nameID="probability" value="0.05"/>
-    <property nameID="probability2" value="0.02"/>
-    <property nameID="probability3" value="0.01"/>
+    <property name="monsters" value="4;0.7;8;0.3"/>
+    <property name="probability" value="0.05"/>
+    <property name="probability2" value="0.02"/>
+    <property name="probability3" value="0.01"/>
    </properties>
   </object>
-  <object id="56" nameID="monsterArea" x="64" y="336" width="96" height="16">
+  <object id="56" name="monsterArea" x="64" y="336" width="96" height="16">
    <properties>
-    <property nameID="monsters" value="4;0.7;8;0.3"/>
-    <property nameID="probability" value="0.05"/>
-    <property nameID="probability2" value="0.02"/>
-    <property nameID="probability3" value="0.01"/>
+    <property name="monsters" value="4;0.7;8;0.3"/>
+    <property name="probability" value="0.05"/>
+    <property name="probability2" value="0.02"/>
+    <property name="probability3" value="0.01"/>
    </properties>
   </object>
-  <object id="57" nameID="monsterArea" x="32" y="352" width="48" height="32">
+  <object id="57" name="monsterArea" x="32" y="352" width="48" height="32">
    <properties>
-    <property nameID="monsters" value="4;0.7;8;0.3"/>
-    <property nameID="probability" value="0.05"/>
-    <property nameID="probability2" value="0.02"/>
-    <property nameID="probability3" value="0.01"/>
+    <property name="monsters" value="4;0.7;8;0.3"/>
+    <property name="probability" value="0.05"/>
+    <property name="probability2" value="0.02"/>
+    <property name="probability3" value="0.01"/>
    </properties>
   </object>
-  <object id="58" nameID="monsterArea" x="32" y="400" width="16" height="64">
+  <object id="58" name="monsterArea" x="32" y="400" width="16" height="64">
    <properties>
-    <property nameID="monsters" value="4;0.7;8;0.3"/>
-    <property nameID="probability" value="0.05"/>
-    <property nameID="probability2" value="0.02"/>
-    <property nameID="probability3" value="0.01"/>
+    <property name="monsters" value="4;0.7;8;0.3"/>
+    <property name="probability" value="0.05"/>
+    <property name="probability2" value="0.02"/>
+    <property name="probability3" value="0.01"/>
    </properties>
   </object>
-  <object id="59" nameID="monsterArea" x="48" y="448" width="16" height="16">
+  <object id="59" name="monsterArea" x="48" y="448" width="16" height="16">
    <properties>
-    <property nameID="monsters" value="4;0.7;8;0.3"/>
-    <property nameID="probability" value="0.05"/>
-    <property nameID="probability2" value="0.02"/>
-    <property nameID="probability3" value="0.01"/>
+    <property name="monsters" value="4;0.7;8;0.3"/>
+    <property name="probability" value="0.05"/>
+    <property name="probability2" value="0.02"/>
+    <property name="probability3" value="0.01"/>
    </properties>
   </object>
-  <object id="60" nameID="healing" x="112" y="384" width="16" height="16"/>
+  <object id="60" name="healing" x="112" y="384" width="16" height="16"/>
  </objectgroup>
- <objectgroup nameID="descriptions1" visible="0">
-  <object id="62" nameID="sign" type="objectDescription" x="80" y="432" width="16" height="16">
+ <objectgroup name="descriptions1" visible="0">
+  <object id="62" name="sign" type="objectDescription" x="80" y="432" width="16" height="16">
    <properties>
-    <property nameID="text" value="sign_02_1_text"/>
-    <property nameID="title" value="sign_02_1_title"/>
+    <property name="text" value="sign_02_1_text"/>
+    <property name="title" value="sign_02_1_title"/>
    </properties>
   </object>
  </objectgroup>

@@ -1,33 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="32" height="20" tilewidth="16" tileheight="16">
  <properties>
-  <property nameID="musicIndex" value="2"/>
-  <property nameID="musicType" value="town"/>
+  <property name="musicIndex" value="2"/>
+  <property name="musicType" value="town"/>
  </properties>
- <tileset firstgid="1" nameID="limbusdev_world" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="limbusdev_world" tilewidth="16" tileheight="16">
   <image source="../spritesheets/limbusdev_world.png" width="1024" height="1024"/>
  </tileset>
- <layer nameID="ground1" width="32" height="20">
+ <layer name="ground1" width="32" height="20">
   <data encoding="base64" compression="zlib">
    eJw7wsfAcITK+CgQt/AjsAsfbkxtu0ftH7V/uNvvDDSTBQ9m5aet/c1o5hOyY9T+wWt/Nw8DQw8PhD7AQH/764F2NjBAaUby7ceH8dlvD7TXgQFKD4D9p4HhfoYHQjMQaf9hoJlHsOBWPtLtJyf9kRouA20/PjzS7QcAi8yWAQ==
   </data>
  </layer>
- <layer nameID="walls1" width="32" height="20">
+ <layer name="walls1" width="32" height="20">
   <data encoding="base64" compression="zlib">
    eJzFln0KwjAMxVsHfszindqByg6mnmx6LDMwGMqStTTtHjxSxrpf0r4/Np2NeYMnpfoBU9nLv+KaCvfunTEHV16PLo+PfV9h382V17vA9+AA7kkfOP/c9xP8KKwvgR8/o/PH96YlZNHZcT2bzi99YwfuFu4vhW/J3jgDKfNjv0MFPpdbLY2/8x4YPpfbHC1l7MScV8znclvKX3tXU3HGpaxY8k6v1EvOTL4SPzCWGFp34TfmS5IYW/N9Iz53N6EBX8pGC/6aav57pegLv8BVNg==
   </data>
  </layer>
- <layer nameID="objects1" width="32" height="20">
+ <layer name="objects1" width="32" height="20">
   <data encoding="base64" compression="zlib">
    eJxjYKA+OMJLA0NH3UBz4MSPiYlVR0jPULSf3oBS+w/x4ufT2v5RQBzg4aG/nSzAtMAKTQ8+VLbfkQ+V38ILwQMFBtr+4QDQywByy1z0tEFv+6kFKLGfnu0AkF3oGB8AANnKIU8=
   </data>
  </layer>
- <layer nameID="tops1" width="32" height="20">
+ <layer name="tops1" width="32" height="20">
   <data encoding="base64" compression="zlib">
    eJxjYBgFIODGPdAuGLzgIC8DwyEgPsxLvn5y9Y4CwgAWPzD6EIXxRQlw4YPggQIw+5kH0A3YwBEeBoajQOw4iNzFOIjcQiswEvw4lIE7N6TupQbtQUYd3g7U08ZNHbpjCLYhABqNHyw=
   </data>
  </layer>
- <objectgroup nameID="colliderWalls1" width="32" height="20" visible="0">
+ <objectgroup name="colliderWalls1" width="32" height="20" visible="0">
   <object x="0" y="0" width="336" height="64"/>
   <object x="0" y="64" width="48" height="96"/>
   <object x="384" y="0" width="48" height="128"/>
@@ -54,147 +54,147 @@
   <object x="144" y="80" width="48" height="32"/>
   <object x="400" y="288" width="16" height="16"/>
  </objectgroup>
- <objectgroup nameID="sensors" width="32" height="20">
-  <object nameID="startField" x="16" y="160" width="16" height="16">
+ <objectgroup name="sensors" width="32" height="20">
+  <object name="startField" x="16" y="160" width="16" height="16">
    <properties>
-    <property nameID="fieldID" value="1"/>
+    <property name="fieldID" value="1"/>
    </properties>
   </object>
-  <object nameID="monsterArea" x="96" y="256" width="32" height="32">
+  <object name="monsterArea" x="96" y="256" width="32" height="32">
    <properties>
-    <property nameID="monsters" value="4;0.5;8;0.45;3;0.05"/>
-    <property nameID="probability" value="0.05"/>
-    <property nameID="probability2" value="0.2"/>
-    <property nameID="probability3" value="0.02"/>
+    <property name="monsters" value="4;0.5;8;0.45;3;0.05"/>
+    <property name="probability" value="0.05"/>
+    <property name="probability2" value="0.2"/>
+    <property name="probability3" value="0.02"/>
    </properties>
   </object>
-  <object nameID="warpField" x="0" y="160" width="16" height="16">
+  <object name="warpField" x="0" y="160" width="16" height="16">
    <properties>
-    <property nameID="targetID" value="3"/>
-    <property nameID="targetWarpPointID" value="6"/>
+    <property name="targetID" value="3"/>
+    <property name="targetWarpPointID" value="6"/>
    </properties>
   </object>
-  <object nameID="warpField" x="0" y="176" width="16" height="16">
+  <object name="warpField" x="0" y="176" width="16" height="16">
    <properties>
-    <property nameID="targetID" value="3"/>
-    <property nameID="targetWarpPointID" value="6"/>
+    <property name="targetID" value="3"/>
+    <property name="targetWarpPointID" value="6"/>
    </properties>
   </object>
-  <object nameID="warpField" x="0" y="192" width="16" height="16">
+  <object name="warpField" x="0" y="192" width="16" height="16">
    <properties>
-    <property nameID="targetID" value="3"/>
-    <property nameID="targetWarpPointID" value="6"/>
+    <property name="targetID" value="3"/>
+    <property name="targetWarpPointID" value="6"/>
    </properties>
   </object>
-  <object nameID="warpField" x="0" y="208" width="16" height="16">
+  <object name="warpField" x="0" y="208" width="16" height="16">
    <properties>
-    <property nameID="targetID" value="3"/>
-    <property nameID="targetWarpPointID" value="6"/>
+    <property name="targetID" value="3"/>
+    <property name="targetWarpPointID" value="6"/>
    </properties>
   </object>
-  <object nameID="warpField" x="0" y="224" width="16" height="16">
+  <object name="warpField" x="0" y="224" width="16" height="16">
    <properties>
-    <property nameID="targetID" value="3"/>
-    <property nameID="targetWarpPointID" value="6"/>
+    <property name="targetID" value="3"/>
+    <property name="targetWarpPointID" value="6"/>
    </properties>
   </object>
-  <object nameID="warpField" x="0" y="240" width="16" height="16">
+  <object name="warpField" x="0" y="240" width="16" height="16">
    <properties>
-    <property nameID="targetID" value="3"/>
-    <property nameID="targetWarpPointID" value="6"/>
+    <property name="targetID" value="3"/>
+    <property name="targetWarpPointID" value="6"/>
    </properties>
   </object>
-  <object nameID="warpField" x="0" y="256" width="16" height="16">
+  <object name="warpField" x="0" y="256" width="16" height="16">
    <properties>
-    <property nameID="targetID" value="3"/>
-    <property nameID="targetWarpPointID" value="6"/>
+    <property name="targetID" value="3"/>
+    <property name="targetWarpPointID" value="6"/>
    </properties>
   </object>
-  <object nameID="warpField" x="0" y="272" width="16" height="16">
+  <object name="warpField" x="0" y="272" width="16" height="16">
    <properties>
-    <property nameID="targetID" value="3"/>
-    <property nameID="targetWarpPointID" value="6"/>
+    <property name="targetID" value="3"/>
+    <property name="targetWarpPointID" value="6"/>
    </properties>
   </object>
-  <object nameID="monsterArea" x="160" y="256" width="128" height="48">
+  <object name="monsterArea" x="160" y="256" width="128" height="48">
    <properties>
-    <property nameID="monsters" value="4;0.5;8;0.45;3;0.05"/>
-    <property nameID="probability" value="0.05"/>
-    <property nameID="probability2" value="0.2"/>
-    <property nameID="probability3" value="0.02"/>
+    <property name="monsters" value="4;0.5;8;0.45;3;0.05"/>
+    <property name="probability" value="0.05"/>
+    <property name="probability2" value="0.2"/>
+    <property name="probability3" value="0.02"/>
    </properties>
   </object>
-  <object nameID="monsterArea" x="288" y="128" width="160" height="64">
+  <object name="monsterArea" x="288" y="128" width="160" height="64">
    <properties>
-    <property nameID="monsters" value="4;0.95;10;0.05"/>
-    <property nameID="probability" value="0.05"/>
-    <property nameID="probability2" value="0.2"/>
-    <property nameID="probability3" value="0.02"/>
+    <property name="monsters" value="4;0.95;10;0.05"/>
+    <property name="probability" value="0.05"/>
+    <property name="probability2" value="0.2"/>
+    <property name="probability3" value="0.02"/>
    </properties>
   </object>
-  <object nameID="monsterArea" x="400" y="192" width="96" height="64">
+  <object name="monsterArea" x="400" y="192" width="96" height="64">
    <properties>
-    <property nameID="monsters" value="4;0.95;10;0.05"/>
-    <property nameID="probability" value="0.05"/>
-    <property nameID="probability2" value="0.2"/>
-    <property nameID="probability3" value="0.02"/>
+    <property name="monsters" value="4;0.95;10;0.05"/>
+    <property name="probability" value="0.05"/>
+    <property name="probability2" value="0.2"/>
+    <property name="probability3" value="0.02"/>
    </properties>
   </object>
-  <object nameID="monsterArea" x="48" y="64" width="80" height="32">
+  <object name="monsterArea" x="48" y="64" width="80" height="32">
    <properties>
-    <property nameID="monsters" value="4;0.5;8;0.45;3;0.05"/>
-    <property nameID="probability" value="0.05"/>
-    <property nameID="probability2" value="0.2"/>
-    <property nameID="probability3" value="0.02"/>
+    <property name="monsters" value="4;0.5;8;0.45;3;0.05"/>
+    <property name="probability" value="0.05"/>
+    <property name="probability2" value="0.2"/>
+    <property name="probability3" value="0.02"/>
    </properties>
   </object>
-  <object nameID="monsterArea" x="48" y="96" width="64" height="48">
+  <object name="monsterArea" x="48" y="96" width="64" height="48">
    <properties>
-    <property nameID="monsters" value="4;0.5;8;0.45;3;0.05"/>
-    <property nameID="probability" value="0.05"/>
-    <property nameID="probability2" value="0.2"/>
-    <property nameID="probability3" value="0.02"/>
+    <property name="monsters" value="4;0.5;8;0.45;3;0.05"/>
+    <property name="probability" value="0.05"/>
+    <property name="probability2" value="0.2"/>
+    <property name="probability3" value="0.02"/>
    </properties>
   </object>
-  <object nameID="monsterArea" x="208" y="64" width="128" height="32">
+  <object name="monsterArea" x="208" y="64" width="128" height="32">
    <properties>
-    <property nameID="monsters" value="4;0.5;8;0.45;3;0.05"/>
-    <property nameID="probability" value="0.05"/>
-    <property nameID="probability2" value="0.2"/>
-    <property nameID="probability3" value="0.02"/>
+    <property name="monsters" value="4;0.5;8;0.45;3;0.05"/>
+    <property name="probability" value="0.05"/>
+    <property name="probability2" value="0.2"/>
+    <property name="probability3" value="0.02"/>
    </properties>
   </object>
-  <object nameID="warpField" x="464" y="176" width="16" height="16">
+  <object name="warpField" x="464" y="176" width="16" height="16">
    <properties>
-    <property nameID="targetID" value="16"/>
-    <property nameID="targetWarpPointID" value="1"/>
+    <property name="targetID" value="16"/>
+    <property name="targetWarpPointID" value="1"/>
    </properties>
   </object>
-  <object nameID="startField" x="464" y="192" width="16" height="16">
+  <object name="startField" x="464" y="192" width="16" height="16">
    <properties>
-    <property nameID="fieldID" value="9"/>
-   </properties>
-  </object>
- </objectgroup>
- <objectgroup nameID="livingEntities" width="32" height="20" visible="0">
-  <object nameID="person" x="128" y="128" width="16" height="16">
-   <properties>
-    <property nameID="male" value="true"/>
-    <property nameID="path" value="SSTOP, WSTOP, ESTOP"/>
-    <property nameID="spriteIndex" value="2"/>
-    <property nameID="static" value="false"/>
-    <property nameID="text" value="I've been hiking for 5 hours. When I came back my car was gone. Thank god that I live in Timsey."/>
-   </properties>
-  </object>
-  <object nameID="person" x="400" y="128" width="16" height="16">
-   <properties>
-    <property nameID="male" value="true"/>
-    <property nameID="path" value="SSTOP"/>
-    <property nameID="spriteIndex" value="0"/>
-    <property nameID="static" value="true"/>
-    <property nameID="text" value="Just a few minutes ago this big rock fell down from the top of the mountain. No the entry to the tunnel is blocked."/>
+    <property name="fieldID" value="9"/>
    </properties>
   </object>
  </objectgroup>
- <objectgroup nameID="objects" width="32" height="20"/>
+ <objectgroup name="livingEntities" width="32" height="20" visible="0">
+  <object name="person" x="128" y="128" width="16" height="16">
+   <properties>
+    <property name="male" value="true"/>
+    <property name="path" value="SSTOP, WSTOP, ESTOP"/>
+    <property name="spriteIndex" value="2"/>
+    <property name="static" value="false"/>
+    <property name="text" value="I've been hiking for 5 hours. When I came back my car was gone. Thank god that I live in Timsey."/>
+   </properties>
+  </object>
+  <object name="person" x="400" y="128" width="16" height="16">
+   <properties>
+    <property name="male" value="true"/>
+    <property name="path" value="SSTOP"/>
+    <property name="spriteIndex" value="0"/>
+    <property name="static" value="true"/>
+    <property name="text" value="Just a few minutes ago this big rock fell down from the top of the mountain. No the entry to the tunnel is blocked."/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="objects" width="32" height="20"/>
 </map>

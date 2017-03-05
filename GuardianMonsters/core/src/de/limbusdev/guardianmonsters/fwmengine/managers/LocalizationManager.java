@@ -69,4 +69,9 @@ public class LocalizationManager implements L18N {
     public BitmapFont getFont() {
         return font;
     }
+
+    @Override
+    public void dispose() {
+        this.font.dispose();
+    }
 }

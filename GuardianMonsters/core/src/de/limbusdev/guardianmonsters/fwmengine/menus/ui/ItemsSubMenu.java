@@ -1,21 +1,13 @@
 package de.limbusdev.guardianmonsters.fwmengine.menus.ui;
 
-import com.badlogic.gdx.scenes.scene2d.Group;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
-import com.badlogic.gdx.scenes.scene2d.ui.ButtonGroup;
-import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 
-import java.util.Observable;
-import java.util.Observer;
-
+import de.limbusdev.guardianmonsters.fwmengine.menus.ui.*;
+import de.limbusdev.guardianmonsters.fwmengine.menus.ui.items.ItemCategoryToolbar;
+import de.limbusdev.guardianmonsters.fwmengine.menus.ui.items.KeyItemDetailViewWidget;
+import de.limbusdev.guardianmonsters.fwmengine.menus.ui.items.WeaponDetailViewWidget;
 import de.limbusdev.guardianmonsters.model.Inventory;
 import de.limbusdev.guardianmonsters.model.Item;
 import de.limbusdev.guardianmonsters.model.Monster;
@@ -27,9 +19,9 @@ import de.limbusdev.guardianmonsters.model.Monster;
 public class ItemsSubMenu extends AInventorySubMenu {
 
     private Inventory inventory;
-    private ItemDetailViewWidget detailView;
+    private de.limbusdev.guardianmonsters.fwmengine.menus.ui.items.ItemDetailViewWidget detailView;
     private ArrayMap<Integer, Monster> team;
-    private ItemListWidget itemListWidget;
+    private de.limbusdev.guardianmonsters.fwmengine.menus.ui.items.ItemListWidget itemListWidget;
 
     public ItemsSubMenu(Skin skin, Inventory inventory, ArrayMap<Integer, Monster> team) {
         super(skin);
@@ -63,13 +55,13 @@ public class ItemsSubMenu extends AInventorySubMenu {
 
 
         // ......................................................................... SCROLLABLE LIST
-        ItemListWidget.CallbackHandler ilch = new ItemListWidget.CallbackHandler() {
+        de.limbusdev.guardianmonsters.fwmengine.menus.ui.items.ItemListWidget.CallbackHandler ilch = new de.limbusdev.guardianmonsters.fwmengine.menus.ui.items.ItemListWidget.CallbackHandler() {
             @Override
             public void onChoosingItem(Item item) {
                 showItemDetailView(item);
             }
         };
-        itemListWidget = new ItemListWidget(skin, inventory, ilch, Item.CATEGORY.MEDICINE);
+        itemListWidget = new de.limbusdev.guardianmonsters.fwmengine.menus.ui.items.ItemListWidget(skin, inventory, ilch, Item.CATEGORY.MEDICINE);
         itemListWidget.setPosition(68,0,Align.bottomLeft);
 
         addActor(itemListWidget);
@@ -87,7 +79,7 @@ public class ItemsSubMenu extends AInventorySubMenu {
                 detailView = new KeyItemDetailViewWidget(getSkin(), inventory, team);
                 break;
             default:
-                detailView = new ItemDetailViewWidget(getSkin(), inventory, team);
+                detailView = new de.limbusdev.guardianmonsters.fwmengine.menus.ui.items.ItemDetailViewWidget(getSkin(), inventory, team);
                 break;
         }
         detailView.setPosition(264,2, Align.bottomLeft);

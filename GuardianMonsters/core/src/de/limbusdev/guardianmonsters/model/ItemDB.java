@@ -8,17 +8,17 @@ import com.badlogic.gdx.utils.XmlReader;
 import java.io.IOException;
 
 /**
- * ItemInfo provides information about all items. Items are created from data/items.xml
+ * ItemDB provides information about all items. Items are created from data/items.xml
  *
  * Created by Georg Eckerton 20.02.17.
  */
 
-public class ItemInfo {
+public class ItemDB {
 
-    private static ItemInfo instance;
+    private static ItemDB instance;
     private ArrayMap<String,Item> items;
 
-    private ItemInfo() {
+    private ItemDB() {
         items = new ArrayMap<>();
 
         FileHandle handle = Gdx.files.internal("data/items.xml");
@@ -138,9 +138,9 @@ public class ItemInfo {
 
 
     // ............................................................................. GETTER & SETTER
-    public static ItemInfo getInst() {
+    public static ItemDB singleton() {
         if(instance == null) {
-            instance = new ItemInfo();
+            instance = new ItemDB();
         }
         return instance;
     }

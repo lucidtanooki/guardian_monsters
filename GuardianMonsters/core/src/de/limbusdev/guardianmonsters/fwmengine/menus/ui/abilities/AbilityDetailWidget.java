@@ -1,4 +1,4 @@
-package de.limbusdev.guardianmonsters.fwmengine.menus.ui.widgets;
+package de.limbusdev.guardianmonsters.fwmengine.menus.ui.abilities;
 
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -35,13 +35,13 @@ public class AbilityDetailWidget extends Container {
     private ImageButton learn;
     private int nodeID;
 
-    public CallbackHandler callbacks;
+    public Controller callbacks;
 
-    public interface CallbackHandler {
+    public interface Controller {
         void onLearn(int nodeID);
     }
 
-    public AbilityDetailWidget(Skin skin, CallbackHandler handler) {
+    public AbilityDetailWidget(Skin skin, Controller handler) {
         super();
         this.skin = skin;
         this.callbacks = handler;

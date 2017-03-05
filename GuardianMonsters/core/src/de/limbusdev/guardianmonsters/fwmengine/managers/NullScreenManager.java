@@ -22,4 +22,9 @@ public class NullScreenManager implements ScreenManager {
     public Game getGame() {
         return null;
     }
+
+    @Override
+    public void dispose() {
+        // Do Nothing
+    }
 }

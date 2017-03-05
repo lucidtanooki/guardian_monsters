@@ -21,4 +21,6 @@ public interface L18N {
     public I18NBundle l18nMap(int mapID);
 
     public BitmapFont getFont();
+
+    void dispose();
 }

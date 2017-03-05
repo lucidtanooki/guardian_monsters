@@ -18,6 +18,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ArrayMap;
+import com.badlogic.gdx.utils.I18NBundle;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
 import de.limbusdev.guardianmonsters.data.BundleAssets;
@@ -31,7 +32,7 @@ import de.limbusdev.guardianmonsters.utils.GameState;
 
 
 /**
- * Created by georg on 21.11.15.
+ * @author Georg Eckert 2017
  */
 public class MainMenuScreen implements Screen {
 
@@ -130,7 +131,8 @@ public class MainMenuScreen implements Screen {
 
         this.logoScreen = new Group();
 
-        Animation bgAnim = new Animation(.1f, Services.getMedia().getTextureAtlas(TextureAssets.bigAnimations).findRegions("mainMenuAnimation"));
+        Animation bgAnim = new Animation(.1f, Services.getMedia()
+            .getTextureAtlas(TextureAssets.bigAnimations).findRegions("mainMenuAnimation"));
         bgAnim.setPlayMode(Animation.PlayMode.LOOP);
         AnimatedImage bgAnimation = new AnimatedImage(bgAnim);
         bgAnimation.setColor(1,1,1,.3f);
@@ -142,17 +144,17 @@ public class MainMenuScreen implements Screen {
         logoScreen.addActor(logo);
 
         Label creatorLabel = new Label("by Georg Eckert", Services.getUI().getDefaultSkin(),"trans-white");
-        creatorLabel.setPosition(GS.WIDTH/2,GS.HEIGHT/4);
+        creatorLabel.setPosition(GS.WIDTH/2,76,Align.bottomLeft);
         creatorLabel.setAlignment(Align.center,Align.center);
-        stage.addActor(creatorLabel);
+        logoScreen.addActor(creatorLabel);
 
+        I18NBundle i18n = Services.getL18N().l18n(BundleAssets.GENERAL);
 
         // Buttons ......................................................................... BUTTONS
         // Start Button
-        TextButton button = new TextButton(Services.getL18N().l18n(BundleAssets.GENERAL).get("main_menu_touch_start"), skin, "button-192");
-        button.setWidth(192);
-        button.setHeight(48);
-        button.setPosition(GS.WIDTH/2 - 192/2, 16f, Align.bottomLeft);
+        TextButton button = new TextButton(i18n.get("main_menu_touch_start"), skin, "button-96x32");
+        button.setSize(96,32);
+        button.setPosition(GS.WIDTH/2 - 96/2, 16f, Align.bottomLeft);
 
         button.addListener(new ClickListener() {
             @Override
@@ -189,15 +191,17 @@ public class MainMenuScreen implements Screen {
         // ................................................................................. BUTTONS
         this.buttons = new ArrayMap<>();
 
-        String startButton = Services.getL18N().l18n(BundleAssets.GENERAL).get("main_menu_start_new");
+        I18NBundle i18n = Services.getL18N().l18n(BundleAssets.GENERAL);
+        String startButton;
         if(SaveGameManager.doesGameSaveExist()) {
-            startButton = Services.getL18N().l18n(BundleAssets.GENERAL).get("main_menu_load_saved");
+            startButton = i18n.get("main_menu_load_saved");
+        } else {
+            startButton = i18n.get("main_menu_start_new");
         }
 
         // ............................................................................ START BUTTON
-        TextButton button = new TextButton(startButton, skin, "button-192");
-        button.setWidth(192);
-        button.setHeight(48);
+        TextButton button = new TextButton(startButton, skin, "button-96x32");
+        button.setSize(96,32);
         button.setPosition(16,GS.HEIGHT-16,Align.topLeft);
 
         button.addListener(new ClickListener() {
@@ -217,9 +221,8 @@ public class MainMenuScreen implements Screen {
 
 
         // .......................................................................... CREDITS BUTTON
-        button = new TextButton(Services.getL18N().l18n(BundleAssets.GENERAL).get("main_menu_credits"), skin, "button-192");
-        button.setWidth(192);
-        button.setHeight(48);
+        button = new TextButton(i18n.get("main_menu_credits"), skin, "button-96x32");
+        button.setSize(96,32);
         button.setPosition(16,GS.HEIGHT-16-48,Align.topLeft);
 
         button.addListener(new ClickListener() {

@@ -5,161 +5,175 @@ filter: MipMapNearestNearest,MipMapNearestLinear
 repeat: none
 dpad_down
   rotate: false
-  xy: 1, 735
+  xy: 1, 727
   size: 288, 288
   orig: 288, 288
   offset: 0, 0
   index: -1
 dpad_left
   rotate: false
-  xy: 1, 445
+  xy: 1, 437
   size: 288, 288
   orig: 288, 288
   offset: 0, 0
   index: -1
 dpad_up
   rotate: false
-  xy: 291, 735
+  xy: 291, 727
   size: 288, 288
   orig: 288, 288
   offset: 0, 0
   index: -1
 dpad_right
   rotate: false
-  xy: 1, 155
+  xy: 1, 147
   size: 288, 288
   orig: 288, 288
   offset: 0, 0
   index: -1
 dpad_idle
   rotate: false
-  xy: 291, 445
+  xy: 291, 437
   size: 288, 288
   orig: 288, 288
   offset: 0, 0
   index: -1
 buttonMenuUp
   rotate: false
-  xy: 581, 939
+  xy: 581, 931
   size: 276, 84
   orig: 276, 84
   offset: 0, 0
   index: -1
 buttonMenuDown
   rotate: false
-  xy: 1, 69
+  xy: 1, 61
   size: 276, 84
   orig: 276, 84
   offset: 0, 0
   index: -1
 button_adown
   rotate: false
-  xy: 291, 283
+  xy: 291, 275
   size: 160, 160
   orig: 160, 160
   offset: 0, 0
   index: -1
 button_a
   rotate: false
-  xy: 581, 777
+  xy: 581, 769
   size: 160, 160
   orig: 160, 160
   offset: 0, 0
   index: -1
 dialog_bg
   rotate: false
-  xy: 1, 9
+  xy: 1, 1
   size: 200, 58
   orig: 200, 58
   offset: 0, 0
   index: -1
 button_b
   rotate: false
-  xy: 581, 647
+  xy: 581, 639
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 button_bdown
   rotate: false
-  xy: 581, 517
+  xy: 581, 509
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 b192down
   rotate: false
-  xy: 291, 233
+  xy: 291, 225
   size: 192, 48
   orig: 192, 48
   offset: 0, 0
   index: -1
 dialog_bg2
   rotate: false
-  xy: 291, 183
+  xy: 291, 175
   size: 192, 48
   orig: 192, 48
   offset: 0, 0
   index: -1
 b192up
   rotate: false
-  xy: 291, 133
+  xy: 291, 125
   size: 192, 48
   orig: 192, 48
   offset: 0, 0
   index: -1
 b192down_clear
   rotate: false
-  xy: 279, 85
+  xy: 279, 77
   size: 186, 46
   orig: 186, 46
   offset: 0, 0
   index: -1
 buttonSideBarUp
   rotate: false
-  xy: 859, 960
+  xy: 859, 952
   size: 144, 63
   orig: 144, 63
   offset: 0, 0
   index: -1
 b192up_clear
   rotate: false
-  xy: 279, 37
+  xy: 279, 29
   size: 186, 46
   orig: 186, 46
   offset: 0, 0
   index: -1
 buttonSideBarDown
   rotate: false
-  xy: 581, 452
+  xy: 581, 444
   size: 144, 63
   orig: 144, 63
   offset: 0, 0
   index: -1
 b1down
   rotate: false
-  xy: 453, 395
+  xy: 453, 387
   size: 128, 48
   orig: 128, 48
   offset: 0, 0
   index: -1
 b1up
   rotate: false
-  xy: 453, 345
+  xy: 453, 337
   size: 128, 48
   orig: 128, 48
   offset: 0, 0
   index: -1
 dialog_name_bg
   rotate: false
-  xy: 743, 909
+  xy: 743, 901
   size: 112, 28
   orig: 112, 28
   offset: 0, 0
   index: -1
+b96x32up
+  rotate: false
+  xy: 453, 303
+  size: 96, 32
+  orig: 96, 32
+  offset: 0, 0
+  index: -1
+b96x32down
+  rotate: false
+  xy: 743, 867
+  size: 96, 32
+  orig: 96, 32
+  offset: 0, 0
+  index: -1
 dialog_name_bg
   rotate: false
-  xy: 453, 318
+  xy: 453, 276
   size: 87, 25
   split: 17, 17, 17, 7
   orig: 87, 25
@@ -167,14 +181,28 @@ dialog_name_bg
   index: -1
 dialog_name_bg2
   rotate: false
-  xy: 859, 940
+  xy: 859, 932
   size: 89, 18
   orig: 89, 18
   offset: 0, 0
   index: -1
-label-bg-burgund
+b64x24down
   rotate: false
   xy: 203, 35
+  size: 64, 24
+  orig: 64, 24
+  offset: 0, 0
+  index: -1
+b64x24up
+  rotate: false
+  xy: 743, 841
+  size: 64, 24
+  orig: 64, 24
+  offset: 0, 0
+  index: -1
+label-bg-burgund
+  rotate: false
+  xy: 203, 1
   size: 32, 32
   split: 12, 12, 15, 15
   orig: 32, 32
@@ -182,7 +210,7 @@ label-bg-burgund
   index: -1
 label-bg-sandstone
   rotate: false
-  xy: 203, 1
+  xy: 743, 807
   size: 32, 32
   split: 4, 4, 4, 7
   orig: 32, 32
@@ -190,7 +218,7 @@ label-bg-sandstone
   index: -1
 label-bg-paper
   rotate: false
-  xy: 743, 875
+  xy: 743, 773
   size: 32, 32
   split: 14, 15, 19, 11
   orig: 32, 32
@@ -198,7 +226,7 @@ label-bg-paper
   index: -1
 label-bg-royal
   rotate: false
-  xy: 453, 284
+  xy: 485, 242
   size: 32, 32
   split: 12, 12, 15, 15
   orig: 32, 32
@@ -206,7 +234,7 @@ label-bg-royal
   index: -1
 label-bg-woods
   rotate: false
-  xy: 237, 35
+  xy: 485, 208
   size: 32, 32
   split: 12, 12, 15, 15
   orig: 32, 32
@@ -214,14 +242,14 @@ label-bg-woods
   index: -1
 black
   rotate: false
-  xy: 467, 123
+  xy: 269, 51
   size: 8, 8
   orig: 8, 8
   offset: 0, 0
   index: -1
 transparent
   rotate: false
-  xy: 279, 145
+  xy: 269, 41
   size: 8, 8
   orig: 8, 8
   offset: 0, 0

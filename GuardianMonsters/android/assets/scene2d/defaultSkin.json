@@ -22,7 +22,9 @@
   "com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle": {
     "open-menu":  {"down": "buttonMenuDown",    "up": "buttonMenuUp",     "font": "font16", "unpressedOffsetY": 3},
     "menu-entry": {"down": "buttonSideBarDown", "up": "buttonSideBarUp",  "font": "font16", "unpressedOffsetY": 3},
-    "button-192": {"font": "font16", "down": "b192down", "up": "b192up", "unpressedOffsetY": 2}
+    "button-192": {"font": "font16", "down": "b192down", "up": "b192up", "unpressedOffsetY": 2},
+    "button-64x24": {"font": "font16", "down": "b64x24down", "up": "b64x24up", "pressedOffsetY": -1},
+    "button-96x32": {"font": "font16", "down": "b96x32down", "up": "b96x32up", "pressedOffsetY": -2}
   },
 
   "com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle": {

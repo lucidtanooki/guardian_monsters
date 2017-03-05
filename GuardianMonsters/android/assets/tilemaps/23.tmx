@@ -1,37 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="32" height="28" tilewidth="16" tileheight="16">
- <tileset firstgid="1" nameID="limbusdev_world2" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="limbusdev_world2" tilewidth="16" tileheight="16">
   <image source="../spritesheets/limbusdev_world2.png" width="1024" height="1024"/>
  </tileset>
- <tileset firstgid="4097" nameID="spritesheet_oriental" tilewidth="16" tileheight="16">
+ <tileset firstgid="4097" name="spritesheet_oriental" tilewidth="16" tileheight="16">
   <image source="../spritesheets/spritesheet_oriental.png" width="1024" height="1024"/>
  </tileset>
- <layer nameID="Kachelebene 1" width="32" height="28">
+ <layer name="Kachelebene 1" width="32" height="28">
   <data encoding="base64" compression="zlib">
    eJztlE0OgyAQRsGVdNdlPQ71TD2A7dpDVQ9miG2YTIYZUIoau3gJ8jNP4NNeK9X/2QyjZi6KHq+VnyMRqsHVG/RMrQN1tZ8jEayxsN6ZuZn85HC3V5mUd7hXnraS9wA9zaevMfF+hwXOJ+CV6F+yf0eHvEfyP7QHP8P+WP8AGAv538CZmr8c/jX5W4v75rj7L/Fv25Mf56+En8vfr90ue1z+znb/W/v3lL9vBi3RpsZwrmLWWOSj7qAj2tQYdabSmtDdh+bDsxoj/dyaVD8+yxg/twb7J0NRw6s=
   </data>
  </layer>
- <layer nameID="Kachelebene 2" width="32" height="28">
+ <layer name="Kachelebene 2" width="32" height="28">
   <data encoding="base64" compression="zlib">
    eJztlUtOwzAQhu2wSQQcgyMApS2lgCrOAPeAPmkFbDgLe/pWyxIJuAj70qdafquOapKxnCCSbPilT9F4ZvI78shh7F9J6okny2fC7CUMpTzWb9jfE1RXTugxCqTLAO+NyjvoHl6itWfMc+b39poHO17/O+lrOWu2nHj9ufQ9k5zH7H8qfb2K2j9nyKci9Bb3yolnzTt/JVBm0dw/ddCQvrr5S4MMeAZN0AJt0CHiLuiBPlFP9Q/AUPrr5q8CqmAEvsAYTMCUiGdgDhZEPdW/BCvpr5u/LDgG+zirA3AIUuCIiNMgA7LcX0/158T5a/45rmrgFlyLfxAoghIoE3EFVEGN++up/jpoGO6/lchbOD88m6AF2qBDxF3QA33ur6f6B2BouP+E8vAfyboxnhMwJeIZmIMF99dT/Uvl23XzF5d080epYJgZky5C9Lu1j7a+Rpf7Tc873/Ch7PNVqRd7Kmhyqrzrup43xXPH2rBrmT3C+Htz7n62rZ++cfm7Uv2/AV9E0ec=
   </data>
  </layer>
- <layer nameID="Kachelebene 3" width="32" height="28">
+ <layer name="Kachelebene 3" width="32" height="28">
   <data encoding="base64" compression="zlib">
    eJzt000OQDAQBeDW1nVQNjiOA/hb4VLcDFuVWDKvycTufUkzixcz1abGEFGoJJLzVMgr8O2ttsYs9jtvfY9eWJ0wY47wHiaQZ0/exO/5Iez9VgacQcj8L2i+lgPzc+X/IQO4//Hn+Z0/3xNUjQLkq+/vrFw1SvBGdt9/s3LVmn++QyIiogsFByIk
   </data>
  </layer>
- <layer nameID="Kachelebene 4" width="32" height="28">
+ <layer name="Kachelebene 4" width="32" height="28">
   <data encoding="base64" compression="zlib">
    eJztkrkNAkEMRQ2kswk0wdUEkE4hXE0AKYVwNQGkFMJVBC+AAAdInh0JhPykpw12/b+1sojzi4T6d/Ni5n5r3jJzvzXvlLnfmhcan9+fg8gFr3jDeyiXp4nP72fsPceF2r9ZiLSwjR3sFu/v9Vw09r/udc/zgEfVP6RvhGOc4FT167nU+6+wdxVrav8VfWvc4BZ3ql/Ppd5/j/k+Doz/T8/92/1bSb3/XOTOcxzHcZwyPADbTCCM
   </data>
  </layer>
- <layer nameID="Kachelebene 5" width="32" height="28">
+ <layer name="Kachelebene 5" width="32" height="28">
   <data encoding="base64" compression="zlib">
    eJztzckJgEAQBdH27ATiBqblBqalo4G5BWFdDMBLi/AL3rnM1B9rUrMWHXoMqe9/4jcjYsHq/N/47Thw4nL+Z8EsR4ESVfD9N/xadOgxOP8nfjMiFqzO/6c6+eb7NH78V0oppZR62w2jDxIm
   </data>
  </layer>
- <layer nameID="Kachelebene 6" width="32" height="28">
+ <layer name="Kachelebene 6" width="32" height="28">
   <data encoding="base64" compression="zlib">
    eJztwQEBAAAAgiD/r25IQAEAAPBgDgAAAQ==
   </data>

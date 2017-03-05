@@ -21,8 +21,8 @@ public class GS {
     public static final int zoom = 3;
 
     // ................................................................................... DEBUGGING
-    public static final boolean DEBUGGING_ON = false;
-    public final static DebugMode DEBUG_MODE = DebugMode.INVENTORY;
+    public static final boolean DEBUGGING_ON = true;
+    public final static DebugMode DEBUG_MODE = DebugMode.WORLD;
     public final static int startMap = 251;
 
 

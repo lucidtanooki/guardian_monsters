@@ -28,7 +28,8 @@
   },
 
   "com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle": {
-    "trans-white": {"font": "font16w" }
+    "trans-white": {"font": "font16w" },
+    "default-white": {"font": "font16w"}
   }
 
 }

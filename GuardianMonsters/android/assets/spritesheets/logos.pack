@@ -1,33 +1,47 @@
 
 logos.png
 format: RGBA8888
-filter: MipMapLinearNearest,MipMapLinearNearest
+filter: MipMapNearestNearest,MipMapNearestLinear
 repeat: none
-libgdx
-  rotate: false
-  xy: 1, 70
-  size: 256, 43
-  orig: 256, 43
-  offset: 0, 0
-  index: -1
 limbusdevIntro
   rotate: false
-  xy: 259, 1
+  xy: 1, 13
   size: 178, 112
   orig: 178, 112
   offset: 0, 0
   index: -1
-limbusdev
-  rotate: false
-  xy: 1, 44
-  size: 128, 24
-  orig: 128, 24
-  offset: 0, 0
-  index: -1
 limbusdev2bit
   rotate: false
-  xy: 439, 103
+  xy: 1, 1
   size: 44, 10
   orig: 44, 10
+  offset: 0, 0
+  index: -1
+libgdx
+  rotate: false
+  xy: 181, 82
+  size: 256, 43
+  orig: 256, 43
+  offset: 0, 0
+  index: -1
+limbusdev3dbit
+  rotate: false
+  xy: 181, 42
+  size: 128, 38
+  orig: 128, 38
+  offset: 0, 0
+  index: -1
+libgdx_pixel
+  rotate: false
+  xy: 181, 12
+  size: 130, 28
+  orig: 130, 28
+  offset: 0, 0
+  index: -1
+limbusdev
+  rotate: false
+  xy: 311, 56
+  size: 128, 24
+  orig: 128, 24
   offset: 0, 0
   index: -1

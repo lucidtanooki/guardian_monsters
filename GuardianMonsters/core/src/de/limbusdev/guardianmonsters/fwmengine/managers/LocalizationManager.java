@@ -39,6 +39,12 @@ public class LocalizationManager implements L18N {
         l18n.put(BundleAssets.ELEMENTS,     I18NBundle.createBundle(Gdx.files.internal(BundleAssets.ELEMENTS_BUNDLE)));
         l18n.put(BundleAssets.GENERAL,      I18NBundle.createBundle(Gdx.files.internal(BundleAssets.GENERAL_BUNDLE)));
 
+        int[] mapIDs ={1,2,25,251,252,253};
+        for(int i : mapIDs) {
+            l18nMap.put(i, I18NBundle.createBundle(Gdx.files.internal(BundleAssets.MAP_BUNDLE_PREFIX+Integer.toString(i))));
+        }
+
+
         if(Locale.getDefault().getLanguage().equals("ru")) {
             font = new BitmapFont(Gdx.files.internal(FONT_PATH_RUSSIAN));
         } else {

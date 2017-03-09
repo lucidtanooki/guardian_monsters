@@ -5,7 +5,6 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -14,9 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.I18NBundle;
@@ -28,7 +25,7 @@ import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.widgets.AnimatedImage;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.widgets.CreditsScreenWidget;
-import de.limbusdev.guardianmonsters.fwmengine.world.ui.OutdoorGameWorldScreen;
+import de.limbusdev.guardianmonsters.fwmengine.world.ui.WorldScreen;
 import de.limbusdev.guardianmonsters.utils.GS;
 import de.limbusdev.guardianmonsters.utils.GameState;
 
@@ -118,9 +115,9 @@ public class MainMenuScreen implements Screen {
     public void setUpGame() {
         if(SaveGameManager.doesGameSaveExist()) {
             GameState state = SaveGameManager.loadSaveGame();
-            Services.getScreenManager().pushScreen(new OutdoorGameWorldScreen(state.map, 1, true));
+            Services.getScreenManager().pushScreen(new WorldScreen(state.map, 1, true));
         } else
-            Services.getScreenManager().pushScreen(new OutdoorGameWorldScreen(25, 1, false));
+            Services.getScreenManager().pushScreen(new WorldScreen(25, 1, false));
     }
 
 
@@ -239,7 +236,6 @@ public class MainMenuScreen implements Screen {
                 ));
                 stage.addActor(credits);
                 credits.start(20);
-                stage.setDebugAll(true);
             }
         });
         buttons.put("credits", button);

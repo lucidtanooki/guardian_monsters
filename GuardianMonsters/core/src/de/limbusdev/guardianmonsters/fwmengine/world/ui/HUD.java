@@ -20,6 +20,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
@@ -58,7 +59,8 @@ public class HUD extends InputAdapter {
 
     private Label convText;
     private Label titleLabel;
-    private Group menuButtons, conversationLabel;
+    private Group conversationLabel;
+    private VerticalGroup menuButtons;
     public final BattleScreen battleScreen;
     public final SaveGameManager saveGameManager;
     public Engine engine;
@@ -84,7 +86,7 @@ public class HUD extends InputAdapter {
         this.hero = hero;
 
         // Scene2D
-        FitViewport fit = new FitViewport(GS.RES_X, GS.RES_Y);
+        FitViewport fit = new FitViewport(GS.WIDTH, GS.HEIGHT);
         this.stage = new Stage(fit);
         Skin skin = Services.getUI().getDefaultSkin();
 
@@ -95,8 +97,7 @@ public class HUD extends InputAdapter {
 
         // Images ............................................................................ START
         this.blackCourtain = new Image(skin.getDrawable("black"));
-        this.blackCourtain.setWidth(GS.RES_X);
-        this.blackCourtain.setHeight(GS.RES_Y);
+        this.blackCourtain.setSize(GS.WIDTH, GS.HEIGHT);
         this.blackCourtain.setPosition(0, 0);
         // Images .............................................................................. END
 
@@ -114,28 +115,29 @@ public class HUD extends InputAdapter {
 
         // Menu Button
         TextButton menu = new TextButton(Services.getL18N().l18n(BundleAssets.GENERAL).get("hud_menu"), skin, "open-menu");
-        menu.setPosition(GS.RES_X, GS.RES_Y+12, Align.topRight);
+        menu.setPosition(GS.WIDTH, GS.HEIGHT-2, Align.topRight);
         menu.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 if(conversationLabel.isVisible()) return;
                 if (menuButtons.isVisible()) {
                     menuButtons.addAction(Actions.sequence(
-                        Actions.moveBy(144,0,.5f,Interpolation.pow2In), Actions.visible(false)));
+                        Actions.moveBy(80,0,.5f,Interpolation.pow2In), Actions.visible(false)));
                 } else {
                     menuButtons.addAction(Actions.sequence(
-                            Actions.visible(true), Actions.moveBy(-144,0,.5f,Interpolation.pow2In)
+                            Actions.visible(true), Actions.moveBy(-80,0,.5f,Interpolation.pow2In)
                     ));
                 }
             }
         });
 
         // Group containing buttons: Save, Quit, Monsters
-        this.menuButtons = new Group();
+        this.menuButtons = new VerticalGroup();
+        this.menuButtons.space(2);
+        this.menuButtons.columnAlign(Align.topRight);
 
         // Save Button
         TextButton save = new TextButton(Services.getL18N().l18n(BundleAssets.GENERAL).get("hud_save"), skin, "menu-entry");
-        save.setPosition(0, 0, Align.bottomLeft);
         save.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -146,7 +148,6 @@ public class HUD extends InputAdapter {
 
         // Quit Button
         TextButton quit = new TextButton(Services.getL18N().l18n(BundleAssets.GENERAL).get("hud_quit"), skin, "menu-entry");
-        quit.setPosition(0, -4.5f*GS.ROW , Align.bottomLeft);
         quit.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -165,7 +166,6 @@ public class HUD extends InputAdapter {
 
         // Team Button
         TextButton teamButton = new TextButton(Services.getL18N().l18n(BundleAssets.GENERAL).get("hud_team"), skin, "menu-entry");
-        teamButton.setPosition(0, -9f*GS.ROW , Align.bottomLeft);
         teamButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -179,7 +179,7 @@ public class HUD extends InputAdapter {
         // ................................................................................ CONTROLS
         // A Button
         ImageButton A = new ImageButton(skin, "a");
-        A.setPosition(GS.RES_X - 3*GS.COL, 9*GS.ROW, Align.bottomRight);
+        A.setPosition(GS.WIDTH-4, 56, Align.bottomRight);
         A.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -192,7 +192,8 @@ public class HUD extends InputAdapter {
 
         // B Button
         ImageButton B = new ImageButton(skin, "b");
-        B.setPosition(GS.RES_X - GS.COL, GS.ROW, Align.bottomRight);
+        B.setSize(48,48);
+        B.setPosition(GS.WIDTH-48, 8, Align.bottomRight);
         B.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -207,7 +208,7 @@ public class HUD extends InputAdapter {
         this.stage.addActor(B);
 
         this.menuButtons.setVisible(false);
-        this.menuButtons.setPosition(GS.RES_X,GS.RES_Y-GS.ROW*9,Align.bottomLeft);
+        this.menuButtons.setPosition(GS.WIDTH+80, GS.HEIGHT-44, Align.topLeft);
         stage.addActor(menu);
         stage.addActor(menuButtons);
     }
@@ -325,7 +326,7 @@ public class HUD extends InputAdapter {
     }
 
     public void closeConversation() {
-        conversationLabel.addAction(Actions.sequence(Actions.moveTo(0,-256,.5f, Interpolation.exp10In), Actions.visible(false)));
+        conversationLabel.addAction(Actions.sequence(Actions.moveTo(0,-50,.5f, Interpolation.exp10In), Actions.visible(false)));
         Components.getInputComponent(hero).talking = false;
     }
 
@@ -343,44 +344,34 @@ public class HUD extends InputAdapter {
     }
 
     private void setUpConversation(Skin skin) {
-        Label.LabelStyle lbs = new Label.LabelStyle();
-
         this.conversationLabel = new Group();
 
         Image convImg = new Image(skin.getDrawable("dialog_bg2"));
-        convImg.setWidth(576); convImg.setHeight(144);
-        convImg.setPosition(GS.RES_X/2,0,Align.bottom);
+        convImg.setSize(192,48);
+        convImg.setPosition(GS.WIDTH/2,0,Align.bottom);
 
         Image convImg2 = new Image(skin.getDrawable("dialog_name_bg2"));
-        convImg2.setWidth(267); convImg2.setHeight(54);
-        convImg2.setPosition(GS.RES_X/2-267,132,Align.bottomLeft);
+        convImg2.setSize(89,18);
+        convImg2.setPosition(GS.WIDTH/2-80,46,Align.bottomLeft);
 
         conversationLabel.addActor(convImg2);
         conversationLabel.addActor(convImg);
 
-        lbs = new Label.LabelStyle();
-        lbs.font=skin.getFont("default-font");
-        lbs.background=skin.getDrawable("transparent");
-        convText = new Label("Test label", lbs);
-        convText.setHeight(130);
-        convText.setWidth(540);
+        convText = new Label("Test label", skin, "default");
+        convText.setSize(186,40);
         convText.setWrap(true);
         convText.setAlignment(Align.topLeft,Align.topLeft);
-        convText.setPosition(GS.RES_X / 2 - 270, 0);
+        convText.setPosition(GS.WIDTH/2-90,4,Align.bottomLeft);
         conversationLabel.addActor(convText);
         conversationLabel.setVisible(false);
 
-        lbs = new Label.LabelStyle();
-        lbs.font = skin.getFont("default-font");
-        lbs.background = skin.getDrawable("transparent");
-        titleLabel = new Label("", lbs);
-        titleLabel.setHeight(48);
-        titleLabel.setWidth(256);
+        titleLabel = new Label("", skin, "default");
+        titleLabel.setSize(84,16);
         titleLabel.setVisible(false);
-        titleLabel.setPosition(GS.RES_X / 2 -267/2,140,Align.bottom);
-        titleLabel.setAlignment(Align.center);
+        titleLabel.setPosition(GS.WIDTH/2-78,48,Align.bottomLeft);
+        titleLabel.setAlignment(Align.bottomLeft);
         conversationLabel.addActor(titleLabel);
-        conversationLabel.setPosition(0,-256,Align.bottomLeft);
+        conversationLabel.setPosition(0,-56,Align.bottomLeft);
 
         stage.addActor(conversationLabel);
     }
@@ -478,12 +469,12 @@ public class HUD extends InputAdapter {
     private void setUpDpad(Skin skin) {
         // Initialize DPAD
         this.touchPos = new Vector2();
-        float borderDist = GS.RES_X *0.0125f;
+        float borderDist = 8;
         this.dPadArea = new Rectangle(
                 borderDist,
                 borderDist,
-                0.225f* GS.RES_X +borderDist,
-                0.225f* GS.RES_X +borderDist);
+                112,
+                112);
         this.dPadCenter = dPadArea.getCenter(new Vector2());
         this.dPadCenterDist = new Vector2();
 

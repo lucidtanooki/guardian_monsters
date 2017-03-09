@@ -22,7 +22,7 @@ import de.limbusdev.guardianmonsters.fwmengine.world.model.MapPersonInformation;
 import de.limbusdev.guardianmonsters.fwmengine.world.model.WarpPoint;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.fwmengine.world.model.MonsterArea;
-import de.limbusdev.guardianmonsters.fwmengine.world.ui.OrthogonalTiledMapAndEntityRenderer;
+import de.limbusdev.guardianmonsters.fwmengine.world.ui.ExtendedTiledMapRenderer;
 import de.limbusdev.guardianmonsters.utils.GS;
 
 /**
@@ -37,7 +37,7 @@ public class GameArea {
     public int areaID;
     //................................................................................... ATTRIBUTES
     private TiledMap tiledMap;
-    private OrthogonalTiledMapAndEntityRenderer mapRenderer;
+    private ExtendedTiledMapRenderer mapRenderer;
     private String bgMusic;
     private ArrayMap<Integer, Array<IntRect>> colliders;
     private ArrayMap<Integer, Array<IntRect>> movingColliders;
@@ -54,7 +54,7 @@ public class GameArea {
         initializeArrays();
 
         this.tiledMap = setUpTiledMap(areaID, startPosID);
-        this.mapRenderer = new OrthogonalTiledMapAndEntityRenderer(tiledMap);
+        this.mapRenderer = new ExtendedTiledMapRenderer(tiledMap);
         this.areaID = areaID;
 
         this.gridPosition = new IntVec2(0, 0);
@@ -254,7 +254,7 @@ public class GameArea {
 
     /* ..................................................................... GETTERS & SETTERS .. */
 
-    public OrthogonalTiledMapAndEntityRenderer getMapRenderer() {
+    public ExtendedTiledMapRenderer getMapRenderer() {
         return mapRenderer;
     }
 

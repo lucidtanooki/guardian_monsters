@@ -22,9 +22,9 @@ import de.limbusdev.guardianmonsters.utils.UnitConverter;
 
 
 /**
- * Created by georg on 21.11.15.
+ * Created by Georg Eckert 2016
  */
-public class OutdoorGameWorldScreen implements Screen {
+public class WorldScreen implements Screen {
     /* ............................................................................ ATTRIBUTES .. */
 
     // Renderers and Cameras
@@ -40,7 +40,7 @@ public class OutdoorGameWorldScreen implements Screen {
 
 
     /* ........................................................................... CONSTRUCTOR .. */
-    public OutdoorGameWorldScreen(int mapID, int startPosID, boolean
+    public WorldScreen(int mapID, int startPosID, boolean
             fromSave) {
         setUpRendering();
         this.gameArea = new GameArea(mapID, startPosID);
@@ -143,10 +143,7 @@ public class OutdoorGameWorldScreen implements Screen {
     private void setUpRendering() {
         // Rendering ...............................................................................
         camera   = new OrthographicCamera();    // set up the camera and viewport
-        viewport = new FitViewport(
-                UnitConverter.pixelsToMeters(GS.RES_X)/ GS.zoom,
-                UnitConverter.pixelsToMeters(GS.RES_Y)/ GS.zoom,
-                camera);
+        viewport = new FitViewport(GS.WIDTH, GS.HEIGHT, camera);
         viewport.apply();
         camera.position.set(camera.viewportWidth/2, camera.viewportHeight/2, 0); // center camera
 

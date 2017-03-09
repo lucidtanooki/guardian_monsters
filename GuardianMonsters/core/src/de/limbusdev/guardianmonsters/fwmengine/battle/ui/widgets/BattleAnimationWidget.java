@@ -1,6 +1,7 @@
 package de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.Action;
@@ -16,6 +17,7 @@ import java.util.Observer;
 import de.limbusdev.guardianmonsters.data.AudioAssets;
 import de.limbusdev.guardianmonsters.fwmengine.battle.control.BattleSystem;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.AHUD;
+import de.limbusdev.guardianmonsters.fwmengine.world.ui.ImageZComparator;
 import de.limbusdev.guardianmonsters.geometry.IntVec2;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Media;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
@@ -37,6 +39,7 @@ public class BattleAnimationWidget extends BattleWidget implements ObservableWid
     private ArrayMap<Integer,Boolean> leftPositionsOccupied, rightPositionsOccupied;
 
     private ArrayMap<Integer,Image> monsterImgsLeft, monsterImgsRight;
+    private Array<Image> zSortedMonsterImgs;
     private Media media;
 
     public boolean attackAnimationRunning;
@@ -46,12 +49,13 @@ public class BattleAnimationWidget extends BattleWidget implements ObservableWid
     public BattleAnimationWidget(final AHUD hud, CallbackHandler callbackHandler) {
         super(hud);
 
-        leftPositionsOccupied = new ArrayMap<Integer, Boolean>();
-        rightPositionsOccupied = new ArrayMap<Integer, Boolean>();
+        leftPositionsOccupied = new ArrayMap<>();
+        rightPositionsOccupied = new ArrayMap<>();
 
-        observers = new Array<WidgetObserver>();
-        this.monsterImgsLeft = new ArrayMap<Integer,Image>();
-        this.monsterImgsRight = new ArrayMap<Integer,Image>();
+        observers = new Array<>();
+        this.monsterImgsLeft = new ArrayMap<>();
+        this.monsterImgsRight = new ArrayMap<>();
+        this.zSortedMonsterImgs = new Array<>();
         this.setBounds(0,0,0,0);
         this.media = Services.getMedia();
 
@@ -59,9 +63,20 @@ public class BattleAnimationWidget extends BattleWidget implements ObservableWid
 
     }
 
+    @Override
+    public void draw(Batch batch, float parentAlpha) {
+        sortMonsterSpritesByDepth();
+        super.draw(batch, parentAlpha);
+    }
+
+    private void sortMonsterSpritesByDepth() {
+        zSortedMonsterImgs.sort(new ImageZComparator());
+        for(Image i : zSortedMonsterImgs) i.setZIndex(zSortedMonsterImgs.indexOf(i,true));
+    }
 
     public void init(BattleSystem battleSystem) {
         clear();
+        zSortedMonsterImgs.clear();
         addMonsterAnimationsForTeam(battleSystem.getLeftInBattle(),true);
         addMonsterAnimationsForTeam(battleSystem.getRightInBattle(),false);
     }
@@ -140,6 +155,8 @@ public class BattleAnimationWidget extends BattleWidget implements ObservableWid
             monsterImgsRight.put(pos,monImg);
             align = Align.center;
         }
+
+        zSortedMonsterImgs.add(monImg);
 
         monImg.setPosition(position2d.x, position2d.y, align);
     }
@@ -345,6 +362,7 @@ public class BattleAnimationWidget extends BattleWidget implements ObservableWid
 
     @Override
     public void update(Observable o, Object arg) {
+
         if(o instanceof BattleSystem && arg != null) {
             boolean side = (Boolean) arg;
             BattleSystem bs = (BattleSystem) o;
@@ -355,7 +373,6 @@ public class BattleAnimationWidget extends BattleWidget implements ObservableWid
             }
         }
     }
-
 
     private final static class ImPos {
         private static final IntVec2 HERO_MID = new IntVec2(GS.COL*13+128,GS.ROW*18+128);

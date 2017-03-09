@@ -22,8 +22,8 @@ public class GS {
 
     // ................................................................................... DEBUGGING
     public static final boolean DEBUGGING_ON = false;
-    public final static DebugMode DEBUG_MODE = DebugMode.WORLD;
-    public final static int startMap = 251;
+    public final static DebugMode DEBUG_MODE = DebugMode.BATTLE;
+    public final static int startMap = 25;
 
 
 }

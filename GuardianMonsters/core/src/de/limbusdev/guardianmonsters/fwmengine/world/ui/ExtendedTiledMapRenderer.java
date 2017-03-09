@@ -26,7 +26,7 @@ import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
  *
  * Copyright 2017 by Georg Eckert
  */
-public class OrthogonalTiledMapAndEntityRenderer extends OrthogonalTiledMapRenderer {
+public class ExtendedTiledMapRenderer extends OrthogonalTiledMapRenderer {
     /* ............................................................................ ATTRIBUTES .. */
     private Array<AnimatedPersonSprite> sprites;
     private ArrayMap<String,Animation> objectAnimations;
@@ -42,7 +42,7 @@ public class OrthogonalTiledMapAndEntityRenderer extends OrthogonalTiledMapRende
      * description see Documents/TiledMapStructure.md
      * @param map
      */
-    public OrthogonalTiledMapAndEntityRenderer(TiledMap map) {
+    public ExtendedTiledMapRenderer(TiledMap map) {
         super(map, 1);
 
         this.sprites = new Array<>();

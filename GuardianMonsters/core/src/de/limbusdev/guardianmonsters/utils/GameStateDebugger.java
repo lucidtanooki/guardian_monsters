@@ -11,7 +11,7 @@ import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager;
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.BattleFactory;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.BattleScreen;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.InventoryScreen;
-import de.limbusdev.guardianmonsters.fwmengine.world.ui.OutdoorGameWorldScreen;
+import de.limbusdev.guardianmonsters.fwmengine.world.ui.WorldScreen;
 import de.limbusdev.guardianmonsters.model.Ability;
 import de.limbusdev.guardianmonsters.model.AttackInfo;
 import de.limbusdev.guardianmonsters.model.Inventory;
@@ -96,13 +96,13 @@ public class GameStateDebugger {
     private void setUpTestWorld() {
         if(SaveGameManager.doesGameSaveExist()) {
             GameState state = SaveGameManager.loadSaveGame();
-            game.setScreen(new OutdoorGameWorldScreen(state.map, 1, true));
+            game.setScreen(new WorldScreen(state.map, 1, true));
         } else
-            game.setScreen(new OutdoorGameWorldScreen(GS.startMap, 1, false));
+            game.setScreen(new WorldScreen(GS.startMap, 1, false));
     }
 
     private void setUpTestWorldUI() {
-        game.setScreen(new OutdoorGameWorldScreen(1, 1, false));
+        game.setScreen(new WorldScreen(1, 1, false));
     }
 
     private void TestBattleSystem() {

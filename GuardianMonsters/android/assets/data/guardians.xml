@@ -9,8 +9,7 @@
             <element>earth</element>
         </elements>
         <attacks>
-            <ability element="none"   id="2" abilityPos="0" />
-            <ability element="earth" id="1" abilityPos="9" />
+            <ability element="none"  id="2" abilityPos="0" />
             <ability element="earth" id="2" abilityPos="13" />
             <ability element="earth" id="3" abilityPos="11" />
             <ability element="earth" id="4" abilityPos="15" />
@@ -31,8 +30,7 @@
             <element>forest</element>
         </elements>
         <attacks>
-            <ability element="none"   id="1" abilityPos="0" /> <!-- Self Defense, Ability 1 in Category ANY -->
-            <ability element="none"   id="2" abilityPos="2" /> <!-- Bite -->
+            <ability element="none"  id="2" abilityPos="0" /> <!-- Bite -->
             <ability element="earth" id="1" abilityPos="5" /> <!-- Earth, available on Ability Board, Field 5 -->
         </attacks>
         <basestats hp="198" mp="38" speed="2" pstr="2" pdef="2" mstr="2" mdef="2" />
@@ -46,8 +44,7 @@
             <element>forest</element>
         </elements>
         <attacks>
-            <ability element="none"   id="1" abilityPos="0" /> <!-- Self Defense, Ability 1 in Category ANY -->
-            <ability element="none"   id="2" abilityPos="1" /> <!-- Bite -->
+            <ability element="none"  id="2" abilityPos="0" /> <!-- Bite -->
             <ability element="earth" id="1" abilityPos="5" /> <!-- Earth, available on Ability Board, Field 5 -->
         </attacks>
         <basestats hp="396" mp="76" speed="4" pstr="4" pdef="4" mstr="4" mdef="4" />
@@ -65,8 +62,7 @@
             <element>water</element>
         </elements>
         <attacks>
-            <ability element="none"   id="1" abilityPos="0" /> <!-- Self Defense, Ability 1 in Category ANY -->
-            <ability element="none"   id="2" abilityPos="1" /> <!-- Bite -->
+            <ability element="none"  id="2" abilityPos="0" /> <!-- Bite -->
             <ability element="water" id="1" abilityPos="5" />
         </attacks>
         <basestats hp="99" mp="19" speed="1" pstr="1" pdef="1" mstr="1" mdef="1" />
@@ -85,9 +81,8 @@
             <element>lindworm</element>
         </elements>
         <attacks>
-            <ability element="none"   id="1" abilityPos="0" /> <!-- Self Defense, Ability 1 in Category ANY -->
-            <ability element="none"   id="2" abilityPos="1" /> <!-- Bite -->
-            <ability element="water"   id="1" abilityPos="5" />
+            <ability element="none"   id="2" abilityPos="0" /> <!-- Bite -->
+            <ability element="water"  id="1" abilityPos="5" />
         </attacks>
         <basestats hp="198" mp="38" speed="2" pstr="2" pdef="2" mstr="2" mdef="2" />
         <equipment-compatibility head="helmet" hands="claws" body="breastplate" feet="kneepads" />
@@ -100,8 +95,7 @@
             <element>lindworm</element>
         </elements>
         <attacks>
-            <ability element="none"   id="1" abilityPos="0" /> <!-- Self Defense, Ability 1 in Category ANY -->
-            <ability element="none"   id="2" abilityPos="1" /> <!-- Bite -->
+            <ability element="none"   id="2" abilityPos="0" /> <!-- Bite -->
             <ability element="water" id="1" abilityPos="5" />
         </attacks>
         <basestats hp="396" mp="76" speed="4" pstr="4" pdef="4" mstr="4" mdef="4" />
@@ -119,8 +113,7 @@
             <element>fire</element>
         </elements>
         <attacks>
-            <ability element="none"   id="1" abilityPos="0" /> <!-- Self Defense, Ability 1 in Category ANY -->
-            <ability element="none"   id="2" abilityPos="1" /> <!-- Bite -->
+            <ability element="none"   id="2" abilityPos="0" /> <!-- Bite -->
             <ability element="fire" id="1" abilityPos="5" />
         </attacks>
         <basestats hp="99" mp="19" speed="1" pstr="1" pdef="1" mstr="1" mdef="1" />
@@ -139,8 +132,7 @@
             <element>lindworm</element>
         </elements>
         <attacks>
-            <ability element="none"   id="1" abilityPos="0" /> <!-- Self Defense, Ability 1 in Category ANY -->
-            <ability element="none"   id="2" abilityPos="1" /> <!-- Bite -->
+            <ability element="none"   id="2" abilityPos="0" /> <!-- Bite -->
             <ability element="fire"   id="1" abilityPos="5" />
         </attacks>
         <basestats hp="198" mp="38" speed="2" pstr="2" pdef="2" mstr="2" mdef="2" />
@@ -154,8 +146,7 @@
             <element>lindworm</element>
         </elements>
         <attacks>
-            <ability element="none"   id="1" abilityPos="0" /> <!-- Self Defense, Ability 1 in Category ANY -->
-            <ability element="none"   id="2" abilityPos="1" /> <!-- Bite -->
+            <ability element="none"   id="2" abilityPos="0" /> <!-- Bite -->
             <ability element="fire" id="1" abilityPos="5" />
         </attacks>
         <basestats hp="396" mp="76" speed="4" pstr="4" pdef="4" mstr="4" mdef="4" />

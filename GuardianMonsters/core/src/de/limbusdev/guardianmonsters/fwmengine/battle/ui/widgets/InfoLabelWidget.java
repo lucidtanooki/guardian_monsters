@@ -7,7 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Align;
 
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.AHUD;
-import de.limbusdev.guardianmonsters.utils.GS;
+import de.limbusdev.guardianmonsters.utils.Constant;
 
 /**
  * Created by georg on 24.11.16.
@@ -24,16 +24,13 @@ public class InfoLabelWidget extends BattleWidget {
         super(hud);
 
         infoBGImg = new Image(skin.getDrawable("label"));
-        infoBGImg.setSize(372*GS.zoom,62*GS.zoom);
-        infoBGImg.setPosition(GS.RES_X / 2, GS.zoom *2, Align.bottom);
+        infoBGImg.setSize(372* Constant.zoom,62* Constant.zoom);
+        infoBGImg.setPosition(Constant.RES_X / 2, Constant.zoom *2, Align.bottom);
 
-        Label.LabelStyle labs = new Label.LabelStyle();
-        labs.font = skin.getFont("default-font");
-        infoLabel = new Label("", labs);
-        infoLabel.setHeight(GS.ROW*8);
-        infoLabel.setWidth(GS.COL*36);
+        infoLabel = new Label("", skin, "default");
+        infoLabel.setSize(200,58);
         infoLabel.setWrap(true);
-        infoLabel.setPosition(GS.RES_X/2, GS.ROW*4, Align.bottom);
+        infoLabel.setPosition(Constant.RES_X/2, 3, Align.bottom);
 
 
         addActor(infoBGImg);

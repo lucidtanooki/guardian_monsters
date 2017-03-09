@@ -23,7 +23,7 @@ import de.limbusdev.guardianmonsters.fwmengine.managers.Media;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.model.Ability;
 import de.limbusdev.guardianmonsters.model.Monster;
-import de.limbusdev.guardianmonsters.utils.GS;
+import de.limbusdev.guardianmonsters.utils.Constant;
 
 /**
  * Widget for displaying monster status in battle: HP, MP, EXP, Name, Level
@@ -132,7 +132,6 @@ public class BattleAnimationWidget extends BattleWidget implements ObservableWid
             if(!monReg.isFlipX())
                 monReg.flip(true, false);
         monImg = new Image(monReg);
-        monImg.setSize(256,256);
 
         IntVec2 position2d;
         int align;
@@ -324,9 +323,9 @@ public class BattleAnimationWidget extends BattleWidget implements ObservableWid
         anim.setFrameDuration(.1f);
         // Ability direction
         if(direction == LEFT) {
-            sra.setSize(256,256);
+            sra.setSize(128,128);
         } else {
-            sra.setSize(-256,256); // flipped animation
+            sra.setSize(-128,128); // flipped animation
         }
         sra.setAlign(Align.center);
 
@@ -338,7 +337,7 @@ public class BattleAnimationWidget extends BattleWidget implements ObservableWid
                 break;
             case MOVING_VERT:
                 anim.setFrameDuration(1f/anim.getKeyFrames().length);
-                sra.setPosition(target.x, target.y + 256, Align.center);
+                sra.setPosition(target.x, target.y + 128, Align.center);
                 sra.addAction(Actions.moveToAligned(target.x, target.y, Align.center, 1f, Interpolation.pow2In));
                 break;
             case CONTACT:
@@ -375,12 +374,12 @@ public class BattleAnimationWidget extends BattleWidget implements ObservableWid
     }
 
     private final static class ImPos {
-        private static final IntVec2 HERO_MID = new IntVec2(GS.COL*13+128,GS.ROW*18+128);
-        private static final IntVec2 HERO_BOT = new IntVec2(GS.COL*7+128,GS.ROW*15+128);
-        private static final IntVec2 HERO_TOP = new IntVec2(GS.COL*19+128,GS.ROW*21+128);
-        private static final IntVec2 OPPO_MID = new IntVec2(GS.RES_X-GS.COL*7-128,GS.ROW*18+128);
-        private static final IntVec2 OPPO_BOT = new IntVec2(GS.RES_X-GS.COL*1-128,GS.ROW*15+128);
-        private static final IntVec2 OPPO_TOP = new IntVec2(GS.RES_X-GS.COL*13-128,GS.ROW*21+128);
+        private static final IntVec2 HERO_MID = new IntVec2(Constant.COL*13+128, Constant.ROW*18+128);
+        private static final IntVec2 HERO_BOT = new IntVec2(Constant.COL*7+128, Constant.ROW*15+128);
+        private static final IntVec2 HERO_TOP = new IntVec2(Constant.COL*19+128, Constant.ROW*21+128);
+        private static final IntVec2 OPPO_MID = new IntVec2(Constant.RES_X- Constant.COL*7-128, Constant.ROW*18+128);
+        private static final IntVec2 OPPO_BOT = new IntVec2(Constant.RES_X- Constant.COL*1-128, Constant.ROW*15+128);
+        private static final IntVec2 OPPO_TOP = new IntVec2(Constant.RES_X- Constant.COL*13-128, Constant.ROW*21+128);
     }
 
     public interface CallbackHandler {

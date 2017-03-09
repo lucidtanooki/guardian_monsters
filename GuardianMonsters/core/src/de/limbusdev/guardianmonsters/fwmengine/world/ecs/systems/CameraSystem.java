@@ -13,7 +13,7 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.CameraCompon
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Components;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PositionComponent;
 import de.limbusdev.guardianmonsters.geometry.IntRect;
-import de.limbusdev.guardianmonsters.utils.GS;
+import de.limbusdev.guardianmonsters.utils.Constant;
 
 /**
  * The camera system updates the cameras position according to the hero's position by keeping it
@@ -40,8 +40,8 @@ public class CameraSystem extends EntitySystem {
         this.mapOutline = new IntRect(
                 0,
                 0,
-                tiledMap.getProperties().get("width", Integer.class)* GS.TILE_SIZE,
-                tiledMap.getProperties().get("height", Integer.class)* GS.TILE_SIZE
+                tiledMap.getProperties().get("width", Integer.class)* Constant.TILE_SIZE,
+                tiledMap.getProperties().get("height", Integer.class)* Constant.TILE_SIZE
         );
     }
 

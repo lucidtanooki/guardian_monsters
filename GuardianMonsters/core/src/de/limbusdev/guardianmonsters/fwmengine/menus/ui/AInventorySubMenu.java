@@ -4,7 +4,7 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Align;
 
-import de.limbusdev.guardianmonsters.utils.GS;
+import de.limbusdev.guardianmonsters.utils.Constant;
 
 /**
  * @author Georg Eckert 2017
@@ -17,8 +17,8 @@ public abstract class AInventorySubMenu extends Group {
     public AInventorySubMenu(Skin skin) {
         super();
         this.skin = skin;
-        setDebug(GS.DEBUGGING_ON, true);
-        setSize(GS.WIDTH,GS.HEIGHT-TOOLBAR_HEIGHT);
+        setDebug(Constant.DEBUGGING_ON, true);
+        setSize(Constant.WIDTH, Constant.HEIGHT-TOOLBAR_HEIGHT);
         setPosition(0,0, Align.bottomLeft);
     }
 

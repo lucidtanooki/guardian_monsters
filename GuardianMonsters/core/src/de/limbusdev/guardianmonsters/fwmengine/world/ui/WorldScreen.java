@@ -17,8 +17,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.EntityComponentSystem;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.GameArea;
 import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager;
-import de.limbusdev.guardianmonsters.utils.GS;
-import de.limbusdev.guardianmonsters.utils.UnitConverter;
+import de.limbusdev.guardianmonsters.utils.Constant;
 
 
 /**
@@ -83,7 +82,7 @@ public class WorldScreen implements Screen {
         // Tiled Map
         gameArea.render(camera);
         ECS.render(batch, shpRend);
-        if(GS.DEBUGGING_ON)gameArea.renderDebugging(shpRend);
+        if(Constant.DEBUGGING_ON)gameArea.renderDebugging(shpRend);
 
         ECS.draw();
 
@@ -143,7 +142,7 @@ public class WorldScreen implements Screen {
     private void setUpRendering() {
         // Rendering ...............................................................................
         camera   = new OrthographicCamera();    // set up the camera and viewport
-        viewport = new FitViewport(GS.WIDTH, GS.HEIGHT, camera);
+        viewport = new FitViewport(Constant.WIDTH, Constant.HEIGHT, camera);
         viewport.apply();
         camera.position.set(camera.viewportWidth/2, camera.viewportHeight/2, 0); // center camera
 

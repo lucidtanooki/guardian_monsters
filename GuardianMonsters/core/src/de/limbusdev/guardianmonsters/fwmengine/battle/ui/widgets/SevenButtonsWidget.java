@@ -10,8 +10,9 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ArrayMap;
 
+import de.limbusdev.guardianmonsters.enums.Element;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.AHUD;
-import de.limbusdev.guardianmonsters.utils.GS;
+import de.limbusdev.guardianmonsters.utils.Constant;
 
 public class SevenButtonsWidget extends BattleWidget {
 
@@ -30,42 +31,28 @@ public class SevenButtonsWidget extends BattleWidget {
             throw new IllegalArgumentException("buttonOrder must contain 7 values");
         }
 
-        buttons = new ArrayMap<Integer, TextButton>();
+        buttons = new ArrayMap<>();
 
         // Ability Buttons
-        TextButton tb = new TextButton("", skin, "tb-attack-none");
-        tb.setSize(82*GS.zoom,32*GS.zoom);
-        tb.setPosition(GS.RES_X/2,32*GS.zoom+1*GS.zoom,Align.center);
-        buttons.put(buttonOrder[3],tb);
-
-        tb = new TextButton("", skin, "tb-attack-none");
-        tb.setSize(82*GS.zoom,32*GS.zoom);
-        tb.setPosition(GS.RES_X/2-71*GS.zoom,16*GS.zoom+1*GS.zoom,Align.center);
-        buttons.put(buttonOrder[2],tb);
-
-        tb = new TextButton("", skin, "tb-attack-none");
-        tb.setSize(82*GS.zoom,32*GS.zoom);
-        tb.setPosition(GS.RES_X/2+71*GS.zoom,16*GS.zoom+1*GS.zoom,Align.center);
-        buttons.put(buttonOrder[5],tb);
-
-        tb = new TextButton("", skin, "tb-attack-none");
-        tb.setSize(82*GS.zoom,32*GS.zoom);
-        tb.setPosition(GS.RES_X/2-71*GS.zoom,(32+16)*GS.zoom+1*GS.zoom,Align.center);
-        buttons.put(buttonOrder[1],tb);
-
-        tb = new TextButton("", skin, "tb-attack-none");
-        tb.setSize(82*GS.zoom,32*GS.zoom);
-        tb.setPosition(GS.RES_X/2+71*GS.zoom,(32+16)*GS.zoom+1*GS.zoom,Align.center);
-        buttons.put(buttonOrder[4],tb);
-
-        tb = new TextButton("", skin, "tb-attack-none");
-        tb.setSize(82*GS.zoom,32*GS.zoom);
-        tb.setPosition(GS.RES_X/2-(71+71)*GS.zoom,32*GS.zoom+1*GS.zoom,Align.center);
+        TextButton tb = new BattleHUDTextButton("", skin, BattleHUDTextButton.LEFT, Element.NONE);
         buttons.put(buttonOrder[0],tb);
 
-        tb = new TextButton("", skin, "tb-attack-none");
-        tb.setSize(82*GS.zoom,32*GS.zoom);
-        tb.setPosition(GS.RES_X/2+(71+71)*GS.zoom,32*GS.zoom+1*GS.zoom,Align.center);
+        tb = new BattleHUDTextButton("", skin, BattleHUDTextButton.TOPLEFT, Element.NONE);
+        buttons.put(buttonOrder[1],tb);
+
+        tb = new BattleHUDTextButton("", skin, BattleHUDTextButton.BOTTOMLEFT, Element.NONE);
+        buttons.put(buttonOrder[2],tb);
+
+        tb = new BattleHUDTextButton("", skin, BattleHUDTextButton.CENTER, Element.NONE);
+        buttons.put(buttonOrder[3],tb);
+
+        tb = new BattleHUDTextButton("", skin, BattleHUDTextButton.TOPRIGHT, Element.NONE);
+        buttons.put(buttonOrder[4],tb);
+
+        tb = new BattleHUDTextButton("", skin, BattleHUDTextButton.BOTTOMRIGHT, Element.NONE);
+        buttons.put(buttonOrder[5],tb);
+
+        tb = new BattleHUDTextButton("", skin, BattleHUDTextButton.RIGHT, Element.NONE);
         buttons.put(buttonOrder[6],tb);
 
         this.callbackHandler = callbackHandler;

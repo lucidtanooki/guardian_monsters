@@ -26,7 +26,7 @@ import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.widgets.AnimatedImage;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.widgets.CreditsScreenWidget;
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.WorldScreen;
-import de.limbusdev.guardianmonsters.utils.GS;
+import de.limbusdev.guardianmonsters.utils.Constant;
 import de.limbusdev.guardianmonsters.utils.GameState;
 
 
@@ -50,8 +50,8 @@ public class MainMenuScreen implements Screen {
         Skin skin = Services.getUI().getDefaultSkin();
 
         Image bg = new Image(skin.getDrawable("black"));
-        bg.setWidth(GS.WIDTH);
-        bg.setHeight(GS.HEIGHT);
+        bg.setWidth(Constant.WIDTH);
+        bg.setHeight(Constant.HEIGHT);
         bg.setPosition(0,0);
         black = bg;
 
@@ -124,7 +124,7 @@ public class MainMenuScreen implements Screen {
     public void setUpUI(Skin skin) {
 
         // Scene2D
-        FitViewport fit = new FitViewport(GS.WIDTH, GS.HEIGHT);
+        FitViewport fit = new FitViewport(Constant.WIDTH, Constant.HEIGHT);
         this.stage = new Stage(fit);
         Gdx.input.setInputProcessor(stage);
 
@@ -139,11 +139,11 @@ public class MainMenuScreen implements Screen {
         stage.addActor(bgAnimation);
 
         Image logo = new Image(Services.getMedia().getTexture(TextureAssets.mainMenuBGImgFile));
-        logo.setPosition(GS.WIDTH / 2, GS.HEIGHT / 2, Align.center);
+        logo.setPosition(Constant.WIDTH / 2, Constant.HEIGHT / 2, Align.center);
         logoScreen.addActor(logo);
 
         Label creatorLabel = new Label("by Georg Eckert", Services.getUI().getDefaultSkin(),"trans-white");
-        creatorLabel.setPosition(GS.WIDTH/2,76,Align.bottomLeft);
+        creatorLabel.setPosition(Constant.WIDTH/2,76,Align.bottomLeft);
         creatorLabel.setAlignment(Align.center,Align.center);
         logoScreen.addActor(creatorLabel);
 
@@ -153,7 +153,7 @@ public class MainMenuScreen implements Screen {
         // Start Button
         TextButton button = new TextButton(i18n.get("main_menu_touch_start"), skin, "button-96x32");
         button.setSize(96,32);
-        button.setPosition(GS.WIDTH/2 - 96/2, 16f, Align.bottomLeft);
+        button.setPosition(Constant.WIDTH/2 - 96/2, 16f, Align.bottomLeft);
 
         button.addListener(new ClickListener() {
             @Override
@@ -178,13 +178,13 @@ public class MainMenuScreen implements Screen {
 
         // .................................................................................. IMAGES
         Image bg = new Image(skin.getDrawable("black"));
-        bg.setWidth(GS.WIDTH);bg.setHeight(GS.HEIGHT);
+        bg.setWidth(Constant.WIDTH);bg.setHeight(Constant.HEIGHT);
         bg.setPosition(0, 0);
         bg.addAction(Actions.alpha(.75f));
         startMenu.addActor(bg);
 
         Image mon = new Image(Services.getMedia().getMonsterSprite(100));
-        mon.setPosition(GS.WIDTH - 8, 8, Align.bottomRight);
+        mon.setPosition(Constant.WIDTH - 8, 8, Align.bottomRight);
         startMenu.addActor(mon);
 
         // ................................................................................. BUTTONS
@@ -201,7 +201,7 @@ public class MainMenuScreen implements Screen {
         // ............................................................................ START BUTTON
         TextButton button = new TextButton(startButton, skin, "button-96x32");
         button.setSize(96,32);
-        button.setPosition(16,GS.HEIGHT-16,Align.topLeft);
+        button.setPosition(16, Constant.HEIGHT-16,Align.topLeft);
 
         button.addListener(new ClickListener() {
             @Override
@@ -224,7 +224,7 @@ public class MainMenuScreen implements Screen {
 
         button = new TextButton(i18n.get("main_menu_credits"), skin, "button-96x32");
         button.setSize(96,32);
-        button.setPosition(16,GS.HEIGHT-16-48,Align.topLeft);
+        button.setPosition(16, Constant.HEIGHT-16-48,Align.topLeft);
 
         button.addListener(new ClickListener() {
             @Override
@@ -251,11 +251,11 @@ public class MainMenuScreen implements Screen {
         TextureAtlas logos = Services.getMedia().getTextureAtlas(TextureAssets.logosSpriteSheetFile);
         this.introScreen = new Group();
         Image bg = new Image(skin.getDrawable("black"));
-        bg.setWidth(GS.WIDTH);
-        bg.setHeight(GS.HEIGHT);
+        bg.setWidth(Constant.WIDTH);
+        bg.setHeight(Constant.HEIGHT);
         bg.setPosition(0,0);
         Image logo = new Image(logos.findRegion("limbusdevIntro"));
-        logo.setPosition(GS.WIDTH / 2, GS.HEIGHT/ 2,Align.center);
+        logo.setPosition(Constant.WIDTH / 2, Constant.HEIGHT/ 2,Align.center);
         introScreen.addActor(bg);
         introScreen.addActor(logo);
     }

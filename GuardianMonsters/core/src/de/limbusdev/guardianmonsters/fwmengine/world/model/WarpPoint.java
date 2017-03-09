@@ -4,7 +4,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 
 import de.limbusdev.guardianmonsters.geometry.IntRect;
-import de.limbusdev.guardianmonsters.utils.GS;
+import de.limbusdev.guardianmonsters.utils.Constant;
 
 
 /**
@@ -27,8 +27,8 @@ public class WarpPoint extends IntRect {
     public WarpPoint(int targetWarpPointID, Rectangle warpField, int targetID) {
         super(warpField);
         this.targetWarpPointID = targetWarpPointID;
-        this.x = MathUtils.round(warpField.x + GS.TILE_SIZE/2);
-        this.y = MathUtils.round(warpField.y + GS.TILE_SIZE/2);
+        this.x = MathUtils.round(warpField.x + Constant.TILE_SIZE/2);
+        this.y = MathUtils.round(warpField.y + Constant.TILE_SIZE/2);
         this.targetID = targetID;
     }
     /* ............................................................................... METHODS .. */

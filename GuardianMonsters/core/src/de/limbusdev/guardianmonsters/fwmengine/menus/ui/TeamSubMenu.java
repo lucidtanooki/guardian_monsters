@@ -17,7 +17,7 @@ import de.limbusdev.guardianmonsters.fwmengine.menus.ui.team.StatusPentagonWidge
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.team.TeamCircleWidget;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TeamComponent;
 import de.limbusdev.guardianmonsters.model.Monster;
-import de.limbusdev.guardianmonsters.utils.GS;
+import de.limbusdev.guardianmonsters.utils.Constant;
 
 /**
  * Created by georg on 16.02.17.
@@ -42,7 +42,7 @@ public class TeamSubMenu extends AInventorySubMenu {
         this.team = guardians;
 
         monsterChoice = new Group();
-        monsterChoice.setSize(140, GS.HEIGHT-36);
+        monsterChoice.setSize(140, Constant.HEIGHT-36);
         monsterChoice.setPosition(0,0, Align.bottomLeft);
         Image monsterChoiceBg = new Image(skin.getDrawable("menu-col-bg"));
         monsterChoiceBg.setPosition(2,2,Align.bottomLeft);
@@ -80,7 +80,7 @@ public class TeamSubMenu extends AInventorySubMenu {
         monsterChoice.addActor(circleWidget);
 
         blackOverlay = new Image(skin.getDrawable("black-a80"));
-        blackOverlay.setSize(GS.WIDTH, GS.HEIGHT);
+        blackOverlay.setSize(Constant.WIDTH, Constant.HEIGHT);
         ImageButton swapButton = new ImageButton(skin, "button-switch");
         swapButton.setPosition(8,8,Align.bottomLeft);
         swapButton.addListener(new com.badlogic.gdx.scenes.scene2d.utils.ClickListener() {
@@ -117,7 +117,7 @@ public class TeamSubMenu extends AInventorySubMenu {
 
 
         Group monsterView = new Group();
-        monsterView.setSize(140,GS.HEIGHT-36);
+        monsterView.setSize(140, Constant.HEIGHT-36);
         monsterView.setPosition((140+2)*2,0,Align.bottomLeft);
         Image monsterViewBg = new Image(skin.getDrawable("menu-col-bg"));
         monsterViewBg.setPosition(2,2,Align.bottomLeft);
@@ -137,7 +137,7 @@ public class TeamSubMenu extends AInventorySubMenu {
 
         showGuardianInformation(0);
 
-        setDebug(GS.DEBUGGING_ON, true);
+        setDebug(Constant.DEBUGGING_ON, true);
     }
 
     private void showGuardianInformation(int teamPosition) {

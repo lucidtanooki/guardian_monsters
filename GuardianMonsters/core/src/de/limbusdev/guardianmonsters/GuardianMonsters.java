@@ -13,7 +13,7 @@ import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.fwmengine.managers.SettingsService;
 import de.limbusdev.guardianmonsters.fwmengine.managers.UIManager;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.MainMenuScreen;
-import de.limbusdev.guardianmonsters.utils.GS;
+import de.limbusdev.guardianmonsters.utils.Constant;
 import de.limbusdev.guardianmonsters.utils.GameStateDebugger;
 
 
@@ -26,7 +26,7 @@ public class GuardianMonsters extends Game{
         // Inject Dependencies: MediaManager, AudioManager, ScreenManager, SaveGameManager, ...
         injectDependencies();
 
-        if(!GS.DEBUGGING_ON) {
+        if(!Constant.DEBUGGING_ON) {
             // Start normal game from Main Menu
             Services.getScreenManager().pushScreen(new MainMenuScreen());
         } else {

@@ -23,7 +23,7 @@ import de.limbusdev.guardianmonsters.fwmengine.world.model.WarpPoint;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.fwmengine.world.model.MonsterArea;
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.ExtendedTiledMapRenderer;
-import de.limbusdev.guardianmonsters.utils.GS;
+import de.limbusdev.guardianmonsters.utils.Constant;
 
 /**
  * Contains logic and information about one game world area like a forest or a path. One
@@ -144,7 +144,7 @@ public class GameArea {
                 healingTriggers.add(new Rectangle(
                     ((RectangleMapObject) mo).getRectangle().x,
                     ((RectangleMapObject) mo).getRectangle().y,
-                    GS.COL, GS.ROW));
+                    Constant.COL, Constant.ROW));
             }
             if (mo.getName().equals("warpField"))
                 warpTriggers.add(new WarpPoint(
@@ -237,16 +237,16 @@ public class GameArea {
         for (int i : colliders.keys()) {
             Array<IntRect> layerColliders = colliders.get(i);
             layerColliders.add(new IntRect(
-                -1 * GS.TILE_SIZE, -1 * GS.TILE_SIZE, (mapWidth + 2) * GS.TILE_SIZE, GS.TILE_SIZE
+                -1 * Constant.TILE_SIZE, -1 * Constant.TILE_SIZE, (mapWidth + 2) * Constant.TILE_SIZE, Constant.TILE_SIZE
             ));
             layerColliders.add(new IntRect(
-                -1 * GS.TILE_SIZE, mapHeight * GS.TILE_SIZE, (mapWidth + 2) * GS.TILE_SIZE, GS.TILE_SIZE
+                -1 * Constant.TILE_SIZE, mapHeight * Constant.TILE_SIZE, (mapWidth + 2) * Constant.TILE_SIZE, Constant.TILE_SIZE
             ));
             layerColliders.add(new IntRect(
-                -1 * GS.TILE_SIZE, 0, GS.TILE_SIZE, mapHeight * GS.TILE_SIZE
+                -1 * Constant.TILE_SIZE, 0, Constant.TILE_SIZE, mapHeight * Constant.TILE_SIZE
             ));
             layerColliders.add(new IntRect(
-                mapWidth * GS.TILE_SIZE, 0, GS.TILE_SIZE, mapHeight * GS.TILE_SIZE
+                mapWidth * Constant.TILE_SIZE, 0, Constant.TILE_SIZE, mapHeight * Constant.TILE_SIZE
             ));
         }
 

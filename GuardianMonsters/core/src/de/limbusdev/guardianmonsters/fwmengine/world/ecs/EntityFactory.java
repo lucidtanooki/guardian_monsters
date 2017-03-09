@@ -27,7 +27,7 @@ import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager;
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.BattleFactory;
 import de.limbusdev.guardianmonsters.model.Inventory;
 import de.limbusdev.guardianmonsters.model.ItemDB;
-import de.limbusdev.guardianmonsters.utils.GS;
+import de.limbusdev.guardianmonsters.utils.Constant;
 import de.limbusdev.guardianmonsters.utils.GameState;
 import de.limbusdev.guardianmonsters.utils.UnitConverter;
 
@@ -68,8 +68,8 @@ public class EntityFactory {
 
         // Position
         position.onGrid = new IntVec2(
-                position.x/ GS.TILE_SIZE,
-                position.y/ GS.TILE_SIZE);
+                position.x/ Constant.TILE_SIZE,
+                position.y/ Constant.TILE_SIZE);
         hero.add(position);
 
         // Camera Component
@@ -135,9 +135,9 @@ public class EntityFactory {
         sign.add(new ConversationComponent(mapInfo.content));
         sign.add(new TitleComponent(mapInfo.title));
         sign.add(new ColliderComponent(
-                mapInfo.x, mapInfo.y, GS.TILE_SIZE, GS.TILE_SIZE));
+                mapInfo.x, mapInfo.y, Constant.TILE_SIZE, Constant.TILE_SIZE));
         sign.add(new PositionComponent(mapInfo.x, mapInfo.y,
-                GS.TILE_SIZE, GS.TILE_SIZE,layer));
+                Constant.TILE_SIZE, Constant.TILE_SIZE,layer));
         engine.addEntity(sign);
         return sign;
     }
@@ -154,7 +154,7 @@ public class EntityFactory {
 
         // Use second Constructor
         return createPerson(new PositionComponent(personInformation.startPosition.x,
-                personInformation.startPosition.y, GS.TILE_SIZE, GS
+                personInformation.startPosition.y, Constant.TILE_SIZE, Constant
                 .TILE_SIZE, layer), path, personInformation.moves, personInformation.conversation,
                 personInformation.name,
                 personInformation.male, personInformation.spriteIndex

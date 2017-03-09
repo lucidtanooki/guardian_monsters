@@ -14,7 +14,7 @@ import de.limbusdev.guardianmonsters.data.TextureAssets;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Media;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.geometry.IntVec2;
-import de.limbusdev.guardianmonsters.utils.GS;
+import de.limbusdev.guardianmonsters.utils.Constant;
 
 /**
  * Created by Georg Eckert on 05.02.17.
@@ -98,8 +98,8 @@ public class WeatherAnimator {
         }
 
         private IntVec2 setRandomDropPosition(IntVec2 dropPos) {
-            dropPos.x = MathUtils.random(width)*GS.TILE_SIZE+MathUtils.random(-8,7);
-            dropPos.y = MathUtils.random(height)*GS.TILE_SIZE+MathUtils.random(-8,7);
+            dropPos.x = MathUtils.random(width)* Constant.TILE_SIZE+MathUtils.random(-8,7);
+            dropPos.y = MathUtils.random(height)* Constant.TILE_SIZE+MathUtils.random(-8,7);
             return dropPos;
         }
 
@@ -132,7 +132,7 @@ public class WeatherAnimator {
 
         @Override
         public void render(Batch batch, float elapsedTime) {
-            batch.draw(fogTexture, 0, 0, GS.RES_X, GS.RES_Y);
+            batch.draw(fogTexture, 0, 0, Constant.RES_X, Constant.RES_Y);
         }
     }
 
@@ -146,7 +146,7 @@ public class WeatherAnimator {
 
         @Override
         public void render(Batch batch, float elapsedTime) {
-            batch.draw(woodTexture, 0, 0, GS.RES_X, GS.RES_Y);
+            batch.draw(woodTexture, 0, 0, Constant.RES_X, Constant.RES_Y);
         }
     }
 

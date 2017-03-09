@@ -98,7 +98,7 @@ public class GameStateDebugger {
             GameState state = SaveGameManager.loadSaveGame();
             game.setScreen(new WorldScreen(state.map, 1, true));
         } else
-            game.setScreen(new WorldScreen(GS.startMap, 1, false));
+            game.setScreen(new WorldScreen(Constant.startMap, 1, false));
     }
 
     private void setUpTestWorldUI() {
@@ -173,7 +173,7 @@ public class GameStateDebugger {
     }
 
     public void startDebugging() {
-        switch(GS.DEBUG_MODE) {
+        switch(Constant.DEBUG_MODE) {
             case BATTLE:
                 setUpTestBattle();
                 break;

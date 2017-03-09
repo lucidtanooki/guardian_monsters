@@ -11,7 +11,7 @@ import com.badlogic.gdx.utils.Align;
 
 import de.limbusdev.guardianmonsters.data.TextureAssets;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
-import de.limbusdev.guardianmonsters.utils.GS;
+import de.limbusdev.guardianmonsters.utils.Constant;
 
 /**
  * CreditsScreenWidget
@@ -25,12 +25,12 @@ public class CreditsScreenWidget extends WidgetGroup {
 
     public CreditsScreenWidget(Skin skin) {
         super();
-        setSize(GS.WIDTH, GS.HEIGHT);
+        setSize(Constant.WIDTH, Constant.HEIGHT);
 
         // Background Transparent Black
         Image bgImg = new Image(skin.getDrawable("black"));
         bgImg.setColor(0,0,0,.75f);
-        bgImg.setSize(GS.WIDTH,GS.HEIGHT);
+        bgImg.setSize(Constant.WIDTH, Constant.HEIGHT);
         bgImg.setPosition(0,0, Align.bottomLeft);
         addActor(bgImg);
 
@@ -81,19 +81,19 @@ public class CreditsScreenWidget extends WidgetGroup {
         creditImg.setAlign(Align.top);
         credits.addActorAt(5, creditImg);
 
-        credits.setPosition(GS.WIDTH/2, 0, Align.top);
+        credits.setPosition(Constant.WIDTH/2, 0, Align.top);
         credits.validate();
         addActor(credits);
     }
 
     public void start(float time) {
         credits.addAction(Actions.sequence(
-            Actions.moveBy(0, credits.getPrefHeight()+GS.HEIGHT, time),
+            Actions.moveBy(0, credits.getPrefHeight()+ Constant.HEIGHT, time),
             Actions.run(new Runnable() {
                 @Override
                 public void run() {
                     remove();
-                    credits.setPosition(GS.WIDTH/2, 0, Align.top);
+                    credits.setPosition(Constant.WIDTH/2, 0, Align.top);
                 }
             })
         ));

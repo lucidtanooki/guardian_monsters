@@ -28,7 +28,7 @@ import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.BattleScreen;
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.HUD;
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.WorldScreen;
-import de.limbusdev.guardianmonsters.utils.GS;
+import de.limbusdev.guardianmonsters.utils.Constant;
 
 
 /**
@@ -174,7 +174,7 @@ public class EntityComponentSystem {
      * @param shape
      */
     public void render(Batch batch, ShapeRenderer shape) {
-        if(GS.DEBUGGING_ON) engine.getSystem(DebuggingSystem.class).render(shape);
+        if(Constant.DEBUGGING_ON) engine.getSystem(DebuggingSystem.class).render(shape);
     }
 
     /**

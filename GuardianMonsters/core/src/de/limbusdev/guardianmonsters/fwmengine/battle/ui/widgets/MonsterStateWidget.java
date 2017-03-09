@@ -18,7 +18,7 @@ import de.limbusdev.guardianmonsters.data.BundleAssets;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.model.Monster;
 import de.limbusdev.guardianmonsters.model.MonsterDB;
-import de.limbusdev.guardianmonsters.utils.GS;
+import de.limbusdev.guardianmonsters.utils.Constant;
 
 /**
  * Widget for displaying monster status in battle: HP, MP, EXP, Name, Level
@@ -41,12 +41,12 @@ public class MonsterStateWidget extends WidgetGroup implements Observer {
     public MonsterStateWidget(Skin skin, boolean showExp) {
         hudBgImg = new Image(skin.getDrawable("monStateUIbg2"));
         hudBgImg.setPosition(0,0,Align.bottomLeft);
-        hudBgImg.setHeight(56);
-        hudBgImg.setWidth(416);
+        hudBgImg.setHeight(28);
+        hudBgImg.setWidth(208);
 
         hudRingImg = new Image(skin.getDrawable("monStateWidgetRing"));
-        hudRingImg.setPosition(GS.COL*12,0,Align.bottomLeft);
-        hudRingImg.setSize(56,56);
+        hudRingImg.setPosition(Constant.COL*12,0,Align.bottomLeft);
+        hudRingImg.setSize(28,28);
 
         hudNameImg = new Image(skin.getDrawable("monStateUIname"));
         hudNameImg.setPosition(0,0,Align.bottomLeft);
@@ -57,8 +57,8 @@ public class MonsterStateWidget extends WidgetGroup implements Observer {
         ls.fontColor = Color.WHITE;
 
         nameLabel = new Label("Monster", ls);
-        nameLabel.setWidth(192);
-        nameLabel.setHeight(48);
+        nameLabel.setWidth(96);
+        nameLabel.setHeight(24);
         nameLabel.setPosition(24,4);
 
         hpBar = new ProgressBar(0, 100, 1, false, skin, "hp");
@@ -66,7 +66,7 @@ public class MonsterStateWidget extends WidgetGroup implements Observer {
         epBar = new ProgressBar(0, 100, 1, false, skin, "ep");
 
         hpBar.setPosition(240,23,Align.bottomLeft);
-        hpBar.setSize(176,19);
+        hpBar.setSize(88,9);
         hpBar.setValue(0);
         mpBar.setPosition(240, 13, Align.bottomLeft);
         mpBar.setSize(150,11);

@@ -6,7 +6,6 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.Rectangle;
@@ -29,7 +28,6 @@ import com.badlogic.gdx.utils.TimeUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
 import de.limbusdev.guardianmonsters.data.BundleAssets;
-import de.limbusdev.guardianmonsters.data.TextureAssets;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Components;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.InputComponent;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PositionComponent;
@@ -43,7 +41,7 @@ import de.limbusdev.guardianmonsters.geometry.IntVec2;
 import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.entities.EntityFamilies;
-import de.limbusdev.guardianmonsters.utils.GS;
+import de.limbusdev.guardianmonsters.utils.Constant;
 
 
 /**
@@ -86,7 +84,7 @@ public class HUD extends InputAdapter {
         this.hero = hero;
 
         // Scene2D
-        FitViewport fit = new FitViewport(GS.WIDTH, GS.HEIGHT);
+        FitViewport fit = new FitViewport(Constant.WIDTH, Constant.HEIGHT);
         this.stage = new Stage(fit);
         Skin skin = Services.getUI().getDefaultSkin();
 
@@ -97,7 +95,7 @@ public class HUD extends InputAdapter {
 
         // Images ............................................................................ START
         this.blackCourtain = new Image(skin.getDrawable("black"));
-        this.blackCourtain.setSize(GS.WIDTH, GS.HEIGHT);
+        this.blackCourtain.setSize(Constant.WIDTH, Constant.HEIGHT);
         this.blackCourtain.setPosition(0, 0);
         // Images .............................................................................. END
 
@@ -115,7 +113,7 @@ public class HUD extends InputAdapter {
 
         // Menu Button
         TextButton menu = new TextButton(Services.getL18N().l18n(BundleAssets.GENERAL).get("hud_menu"), skin, "open-menu");
-        menu.setPosition(GS.WIDTH, GS.HEIGHT-2, Align.topRight);
+        menu.setPosition(Constant.WIDTH, Constant.HEIGHT-2, Align.topRight);
         menu.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -179,7 +177,7 @@ public class HUD extends InputAdapter {
         // ................................................................................ CONTROLS
         // A Button
         ImageButton A = new ImageButton(skin, "a");
-        A.setPosition(GS.WIDTH-4, 56, Align.bottomRight);
+        A.setPosition(Constant.WIDTH-4, 56, Align.bottomRight);
         A.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -188,12 +186,12 @@ public class HUD extends InputAdapter {
             }
         });
         this.stage.addActor(A);
-        this.stage.setDebugAll(GS.DEBUGGING_ON);
+        this.stage.setDebugAll(Constant.DEBUGGING_ON);
 
         // B Button
         ImageButton B = new ImageButton(skin, "b");
         B.setSize(48,48);
-        B.setPosition(GS.WIDTH-48, 8, Align.bottomRight);
+        B.setPosition(Constant.WIDTH-48, 8, Align.bottomRight);
         B.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -208,7 +206,7 @@ public class HUD extends InputAdapter {
         this.stage.addActor(B);
 
         this.menuButtons.setVisible(false);
-        this.menuButtons.setPosition(GS.WIDTH+80, GS.HEIGHT-44, Align.topLeft);
+        this.menuButtons.setPosition(Constant.WIDTH+80, Constant.HEIGHT-44, Align.topLeft);
         stage.addActor(menu);
         stage.addActor(menuButtons);
     }
@@ -348,11 +346,11 @@ public class HUD extends InputAdapter {
 
         Image convImg = new Image(skin.getDrawable("dialog_bg2"));
         convImg.setSize(192,48);
-        convImg.setPosition(GS.WIDTH/2,0,Align.bottom);
+        convImg.setPosition(Constant.WIDTH/2,0,Align.bottom);
 
         Image convImg2 = new Image(skin.getDrawable("dialog_name_bg2"));
         convImg2.setSize(89,18);
-        convImg2.setPosition(GS.WIDTH/2-80,46,Align.bottomLeft);
+        convImg2.setPosition(Constant.WIDTH/2-80,46,Align.bottomLeft);
 
         conversationLabel.addActor(convImg2);
         conversationLabel.addActor(convImg);
@@ -361,14 +359,14 @@ public class HUD extends InputAdapter {
         convText.setSize(186,40);
         convText.setWrap(true);
         convText.setAlignment(Align.topLeft,Align.topLeft);
-        convText.setPosition(GS.WIDTH/2-90,4,Align.bottomLeft);
+        convText.setPosition(Constant.WIDTH/2-90,4,Align.bottomLeft);
         conversationLabel.addActor(convText);
         conversationLabel.setVisible(false);
 
         titleLabel = new Label("", skin, "default");
         titleLabel.setSize(84,16);
         titleLabel.setVisible(false);
-        titleLabel.setPosition(GS.WIDTH/2-78,48,Align.bottomLeft);
+        titleLabel.setPosition(Constant.WIDTH/2-78,48,Align.bottomLeft);
         titleLabel.setAlignment(Align.bottomLeft);
         conversationLabel.addActor(titleLabel);
         conversationLabel.setPosition(0,-56,Align.bottomLeft);
@@ -391,7 +389,7 @@ public class HUD extends InputAdapter {
             default: break;
         }
 
-        if(GS.DEBUGGING_ON)
+        if(Constant.DEBUGGING_ON)
             System.out.println("Grid cell to be checked: ("+checkGridCell.x+"|"+checkGridCell.y+")");
 
         for(Entity e : engine.getEntitiesFor(Family.all(PositionComponent.class).get())) {
@@ -399,7 +397,7 @@ public class HUD extends InputAdapter {
             if (Components.position.get(e) != null && !(e instanceof HeroEntity)) {
                 PositionComponent p = Components.position.get(e);
 
-                if(GS.DEBUGGING_ON)
+                if(Constant.DEBUGGING_ON)
                     System.out.println("Grid Cell of tested Entity: ("+p.onGrid.x+"|"+p.onGrid.y+")");
 
                 // Is there an entity?

@@ -1,8 +1,10 @@
 package de.limbusdev.guardianmonsters.fwmengine.battle.ui;
 
 import com.badlogic.gdx.scenes.scene2d.Action;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 
 import de.limbusdev.guardianmonsters.data.AudioAssets;
 import de.limbusdev.guardianmonsters.data.BundleAssets;
@@ -27,7 +29,7 @@ import de.limbusdev.guardianmonsters.model.Monster;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleMainMenuWidget;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleStatusOverviewWidget;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.ObservableWidget;
-import de.limbusdev.guardianmonsters.utils.GS;
+import de.limbusdev.guardianmonsters.utils.Constant;
 
 /**
  * BattleHUD manages all actions and UI elements in the {@link BattleScreen}
@@ -55,6 +57,8 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
     private InfoLabelWidget             infoLabelWidget;
     private TargetMenuWidget            targetMenuWidget;
     private MonsterMenuWidget           monsterMenuWidget;
+
+    private Stage battleAnimationStage;
 
     // CallbackHandlers
     private BattleActionMenuWidget.CallbackHandler  battleActionCallbacks;
@@ -157,12 +161,16 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
      * Setting up HUD elements:
      */
     public void setUpUI() {
+        // Second stage
+        FitViewport viewport = new FitViewport(640,360);
+        battleAnimationStage = new Stage(viewport);
+        addAddtitionalStage(battleAnimationStage);
 
         // Widgets
         statusWidget      = new BattleStatusOverviewWidget(this, skin);
 
         animationWidget   = new BattleAnimationWidget(this, battleAnimationCallbacks);
-        animationWidget   .addWidgetObserver(this);
+        animationWidget.addWidgetObserver(this);
 
         mainMenu          = new BattleMainMenuWidget(   this, skin, mainMenuCallbacks);
         actionMenu        = new BattleActionMenuWidget( this, skin, battleActionCallbacks);
@@ -171,8 +179,7 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
         monsterMenuWidget = new MonsterMenuWidget(      this, skin, monsterMenuCallbacks);
 
         battleQueueWidget = new BattleQueueWidget(this, skin, Align.bottomLeft);
-        battleQueueWidget.setScale(GS.zoom);
-        battleQueueWidget.setPosition(GS.zoom,70*GS.zoom, Align.bottomLeft);
+        battleQueueWidget.setPosition(1,65, Align.bottomLeft);
 
         infoLabelWidget = new InfoLabelWidget(this,skin);
     }
@@ -509,7 +516,7 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
 
             // Add Widgets
             infoLabelWidget.addToStageAndFadeIn(stage);
-            animationWidget.addToStageAndFadeIn(stage);
+            animationWidget.addToStageAndFadeIn(battleAnimationStage);
             actionMenu.addToStageAndFadeIn(stage);
             statusWidget.addToStageAndFadeIn(stage);
 
@@ -528,7 +535,7 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
             reset();
 
             // Add Widgets
-            animationWidget.addToStage(stage);
+            animationWidget.addToStage(battleAnimationStage);
             statusWidget.addToStage(stage);
             attackMenu.addToStage(stage);
             battleQueueWidget.addToStage(stage);
@@ -607,7 +614,7 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
 
         public void toTeamMenu() {
             reset();
-            animationWidget.addToStage(stage);
+            animationWidget.addToStage(battleAnimationStage);
             actionMenu.disableAllButBackButton();
             actionMenu.addToStage(stage);
             actionMenu.setCallbackHandler(backToActionMenuCallbacks);
@@ -620,7 +627,7 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
 
         public void toMainMenu() {
             reset();
-            animationWidget.addToStage(stage);
+            animationWidget.addToStage(battleAnimationStage);
             actionMenu.disable();
             actionMenu.addToStage(stage);
             mainMenu.addToStageAndFadeIn(stage);
@@ -632,7 +639,7 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
         public void toInfoLabel() {
             reset();
             infoLabelWidget.addToStage(stage);
-            animationWidget.addToStage(stage);
+            animationWidget.addToStage(battleAnimationStage);
             actionMenu.addToStage(stage);
             statusWidget.addToStage(stage);
 

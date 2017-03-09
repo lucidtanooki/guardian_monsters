@@ -10,10 +10,9 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.I18NBundle;
 
 import de.limbusdev.guardianmonsters.data.BundleAssets;
-import de.limbusdev.guardianmonsters.enums.ButtonIDs;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.BattleHUD;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
-import de.limbusdev.guardianmonsters.utils.GS;
+import de.limbusdev.guardianmonsters.utils.Constant;
 
 /**
  * Widget for displaying monster status in battle: HP, MP, EXP, Name, Level
@@ -36,9 +35,9 @@ public class EndOfBattleWidget extends BattleWidget {
         this.setBounds(0,0,0,0);
 
         labelBGImg = new Image(skin.getDrawable("b-long-up"));
-        labelBGImg.setPosition(GS.RES_X / 2, GS.ROW*7, Align.bottom);
+        labelBGImg.setPosition(Constant.RES_X / 2, Constant.ROW*7, Align.bottom);
         bgImg      = new Image(skin.getDrawable("eob-pane"));
-        bgImg.setPosition(GS.RES_X / 2, 0, Align.bottom);
+        bgImg.setPosition(Constant.RES_X / 2, 0, Align.bottom);
 
         addActor(labelBGImg);
         addActor(bgImg);
@@ -49,12 +48,12 @@ public class EndOfBattleWidget extends BattleWidget {
         messageLabel.setHeight(64);
         messageLabel.setWidth(500);
         messageLabel.setWrap(true);
-        messageLabel.setPosition(GS.RES_X / 2, GS.ROW*8, Align.bottom);
+        messageLabel.setPosition(Constant.RES_X / 2, Constant.ROW*8, Align.bottom);
         addActor(messageLabel);
 
         // Change Screen
         backButton = new ImageButton(skin, "b-back-eob");
-        backButton.setPosition(GS.RES_X, 0, Align.bottomRight);
+        backButton.setPosition(Constant.RES_X, 0, Align.bottomRight);
         addActor(backButton);
 
         setCallbackHandler(callbackHandler);

@@ -11,7 +11,7 @@ import com.badlogic.gdx.utils.Align;
 
 import de.limbusdev.guardianmonsters.data.BundleAssets;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
-import de.limbusdev.guardianmonsters.utils.GS;
+import de.limbusdev.guardianmonsters.utils.Constant;
 
 /**
  * Created by georg on 20.02.17.
@@ -24,21 +24,21 @@ public class ReassuranceWidget extends Group {
 
     public ReassuranceWidget(Skin skin) {
         super();
-        setSize(GS.WIDTH, GS.HEIGHT);
+        setSize(Constant.WIDTH, Constant.HEIGHT);
 
         Image bg = new Image(skin.getDrawable("black-a80"));
-        bg.setSize(GS.WIDTH, GS.HEIGHT);
+        bg.setSize(Constant.WIDTH, Constant.HEIGHT);
         bg.setPosition(0,0,Align.bottomLeft);
         addActor(bg);
 
         question = new Label(Services.getL18N().l18n(BundleAssets.INVENTORY).get("reassurance"), skin, "paper");
         question.setSize(256,64);
-        question.setPosition(GS.WIDTH/2-128, GS.HEIGHT/2-32, Align.bottomLeft);
+        question.setPosition(Constant.WIDTH/2-128, Constant.HEIGHT/2-32, Align.bottomLeft);
         addActor(question);
 
         buttonNo = new TextButton(Services.getL18N().l18n(BundleAssets.GENERAL).get("no"), skin, "button-sandstone");
         buttonNo.setSize(64,24);
-        buttonNo.setPosition(GS.WIDTH/2+2,40,Align.bottomLeft);
+        buttonNo.setPosition(Constant.WIDTH/2+2,40,Align.bottomLeft);
         buttonNo.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -49,7 +49,7 @@ public class ReassuranceWidget extends Group {
 
         buttonYes = new TextButton(Services.getL18N().l18n(BundleAssets.GENERAL).get("yes"), skin, "button-sandstone");
         buttonYes.setSize(64,24);
-        buttonYes.setPosition(GS.WIDTH/2-2,40,Align.bottomRight);
+        buttonYes.setPosition(Constant.WIDTH/2-2,40,Align.bottomRight);
         addActor(buttonYes);
     }
 }

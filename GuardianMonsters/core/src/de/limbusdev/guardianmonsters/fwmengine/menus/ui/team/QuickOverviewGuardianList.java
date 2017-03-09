@@ -14,7 +14,7 @@ import com.badlogic.gdx.utils.ArrayMap;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.items.GuardianOverviewButton;
 import de.limbusdev.guardianmonsters.model.Item;
 import de.limbusdev.guardianmonsters.model.Monster;
-import de.limbusdev.guardianmonsters.utils.GS;
+import de.limbusdev.guardianmonsters.utils.Constant;
 
 /**
  * Gives the player a quick overview over all guardians currently in team. All status values are
@@ -33,12 +33,12 @@ public class QuickOverviewGuardianList extends Group {
         this.handler = cBhandler;
 
         blackLayer = new Image(skin.getDrawable("black-a80"));
-        blackLayer.setSize(GS.WIDTH, GS.HEIGHT);
+        blackLayer.setSize(Constant.WIDTH, Constant.HEIGHT);
         blackLayer.setPosition(0,0,Align.bottomLeft);
         addActor(blackLayer);
 
         ImageButton back = new ImageButton(skin, "button-back");
-        back.setPosition(GS.WIDTH-4, 0, Align.bottomRight);
+        back.setPosition(Constant.WIDTH-4, 0, Align.bottomRight);
         back.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {

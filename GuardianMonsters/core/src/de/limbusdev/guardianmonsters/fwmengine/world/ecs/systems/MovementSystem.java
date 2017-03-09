@@ -24,7 +24,7 @@ import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.BattleFactory;
 import de.limbusdev.guardianmonsters.model.Monster;
 import de.limbusdev.guardianmonsters.fwmengine.world.model.MonsterArea;
-import de.limbusdev.guardianmonsters.utils.GS;
+import de.limbusdev.guardianmonsters.utils.Constant;
 
 
 /**
@@ -120,32 +120,32 @@ public class MovementSystem extends EntitySystem {
             switch(input.skyDir) {
                 case N:
                     position.nextX = position.x;
-                    position.nextY = position.y + GS.TILE_SIZE;
+                    position.nextY = position.y + Constant.TILE_SIZE;
                     break;
                 case W:
-                    position.nextX = position.x - GS.TILE_SIZE;
+                    position.nextX = position.x - Constant.TILE_SIZE;
                     position.nextY = position.y;
                     break;
                 case E:
-                    position.nextX = position.x + GS.TILE_SIZE;
+                    position.nextX = position.x + Constant.TILE_SIZE;
                     position.nextY = position.y;
                     break;
                 default:
                     position.nextX = position.x;
-                    position.nextY = position.y - GS.TILE_SIZE;
+                    position.nextY = position.y - Constant.TILE_SIZE;
                     break;
             }
 
             // Check whether movement is possible or blocked by a collider
             IntVec2 nextPos = new IntVec2(0,0);
             for(IntRect r : ecs.gameArea.getColliders().get(position.layer)) {
-                nextPos.x = position.nextX + GS.TILE_SIZE / 2;
-                nextPos.y = position.nextY + GS.TILE_SIZE / 2;
+                nextPos.x = position.nextX + Constant.TILE_SIZE / 2;
+                nextPos.y = position.nextY + Constant.TILE_SIZE / 2;
                 if (r.contains(nextPos)) return;
             }
             for(IntRect r : ecs.gameArea.getMovingColliders().get(position.layer)) {
-                nextPos.x = position.nextX + GS.TILE_SIZE / 2;
-                nextPos.y = position.nextY + GS.TILE_SIZE / 2;
+                nextPos.x = position.nextX + Constant.TILE_SIZE / 2;
+                nextPos.y = position.nextY + Constant.TILE_SIZE / 2;
                 if (!collider.equals(r) && r.contains(nextPos)) return;
             }
 
@@ -160,7 +160,7 @@ public class MovementSystem extends EntitySystem {
 
 
         // If entity is already moving, and last incremental step has completed (long enough ago)
-        if(input.moving && TimeUtils.timeSinceMillis(position.lastPixelStep) > GS.ONE_STEPDURATION_MS) {
+        if(input.moving && TimeUtils.timeSinceMillis(position.lastPixelStep) > Constant.ONE_STEPDURATION_MS) {
 
             switch(input.skyDir) {
                 case N: position.y += 1;break;
@@ -208,8 +208,8 @@ public class MovementSystem extends EntitySystem {
                 // Check whether hero can get attacked by monsters
                 for(MonsterArea ma : ecs.gameArea.getMonsterAreas().get(position.layer)) {
                     if (ma.contains(new IntVec2(
-                            position.x + GS.TILE_SIZE / 2,
-                            position.y + GS.TILE_SIZE / 2))
+                            position.x + Constant.TILE_SIZE / 2,
+                            position.y + Constant.TILE_SIZE / 2))
                             && MathUtils.randomBoolean(ma.attackProbabilities.get(0))) {
 
                         System.out.print("Monster appeared!\n");

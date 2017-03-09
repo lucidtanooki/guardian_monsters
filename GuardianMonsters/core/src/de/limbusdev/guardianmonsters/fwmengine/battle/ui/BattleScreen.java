@@ -7,7 +7,6 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -18,7 +17,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import de.limbusdev.guardianmonsters.data.AudioAssets;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TeamComponent;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
-import de.limbusdev.guardianmonsters.utils.GS;
+import de.limbusdev.guardianmonsters.utils.Constant;
 
 /**
  * Created by georg on 03.12.15.
@@ -79,7 +78,7 @@ public class BattleScreen implements Screen {
 
         viewport.apply();
         batch.begin();
-        batch.draw(background, 0, 0, GS.RES_X, GS.RES_Y);
+        batch.draw(background, 0, 0, Constant.RES_X, Constant.RES_Y);
 
         batch.end();
 
@@ -141,8 +140,8 @@ public class BattleScreen implements Screen {
         // Rendering ...............................................................................
         camera   = new OrthographicCamera();    // set up the camera and viewport
         viewport = new FitViewport(
-                GS.RES_X,
-                GS.RES_Y,
+                Constant.RES_X,
+                Constant.RES_Y,
                 camera);
         viewport.apply();
         camera.position.set(camera.viewportWidth/2, camera.viewportHeight/2, 0); // center camera

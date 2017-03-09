@@ -17,7 +17,7 @@ import de.limbusdev.guardianmonsters.enums.SkyDirection;
 import de.limbusdev.guardianmonsters.geometry.IntVec2;
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.HUD;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.entities.EntityFamilies;
-import de.limbusdev.guardianmonsters.utils.GS;
+import de.limbusdev.guardianmonsters.utils.Constant;
 
 
 /**
@@ -152,7 +152,7 @@ public class InputSystem extends EntitySystem implements InputProcessor {
             default: break;
         }
 
-        if(GS.DEBUGGING_ON)
+        if(Constant.DEBUGGING_ON)
             System.out.println("Grid cell to be checked: ("+checkGridCell.x+"|"+checkGridCell.y+")");
 
         for(Entity e : this.getEngine().getEntitiesFor(Family.all(PositionComponent.class).get())) {
@@ -160,7 +160,7 @@ public class InputSystem extends EntitySystem implements InputProcessor {
             if (Components.position.get(e) != null && !(e instanceof HeroEntity)) {
                 PositionComponent p = Components.position.get(e);
 
-                if(GS.DEBUGGING_ON)
+                if(Constant.DEBUGGING_ON)
                     System.out.println("Grid Cell of tested Entity: ("+p.onGrid.x+"|"+p.onGrid.y+")");
 
                 // Is there an entity?
@@ -182,7 +182,7 @@ public class InputSystem extends EntitySystem implements InputProcessor {
      */
     public SkyDirection decideMovementDirection(int entX, int entY, float targetX, float targetY) {
         SkyDirection dir;
-        int tileCenter = GS.TILE_SIZE/2;
+        int tileCenter = Constant.TILE_SIZE/2;
 
         if(Math.abs(targetY - (entY + tileCenter)) > Math.abs(targetX - (entX+tileCenter))) {
             // Vertical Movement
@@ -216,8 +216,8 @@ public class InputSystem extends EntitySystem implements InputProcessor {
      */
     public boolean decideIfToMove(int entX, int entY, Vector2 target) {
         boolean move;
-        if(target.dst(entX+ GS.TILE_SIZE/2,entY+ GS.TILE_SIZE/2) >
-                2* GS.TILE_SIZE) move = true;
+        if(target.dst(entX+ Constant.TILE_SIZE/2,entY+ Constant.TILE_SIZE/2) >
+                2* Constant.TILE_SIZE) move = true;
         else
             move = false;
         return move;

@@ -2,11 +2,12 @@ package de.limbusdev.guardianmonsters.fwmengine.battle.ui;
 
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
 import de.limbusdev.guardianmonsters.enums.ButtonIDs;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
-import de.limbusdev.guardianmonsters.utils.GS;
+import de.limbusdev.guardianmonsters.utils.Constant;
 
 /**
  * Template HUD, does nothing but setting up a stage with a FitViewport
@@ -16,20 +17,28 @@ public abstract class AHUD {
 
     protected Stage stage;
     protected Skin skin;
+    private Array<Stage> stages;
 
     public AHUD(Skin skin) {
-        FitViewport fit = new FitViewport(GS.RES_X, GS.RES_Y);
+        stages = new Array<>();
+        FitViewport fit = new FitViewport(Constant.WIDTH, Constant.HEIGHT);
         stage = new Stage(fit);
         this.skin = skin;
-        stage.setDebugAll(GS.DEBUGGING_ON);
+        stage.setDebugAll(Constant.DEBUGGING_ON);
+
+        stages.add(stage);
     }
 
     public void draw() {
-        stage.draw();
+        for(Stage s : stages) {
+            s.draw();
+        }
     }
 
     public void update(float delta) {
-        stage.act(delta);
+        for(Stage s : stages) {
+            s.act(delta);
+        }
     }
 
     protected abstract void reset();
@@ -55,5 +64,9 @@ public abstract class AHUD {
 
     public Stage getStage() {
         return stage;
+    }
+
+    public void addAddtitionalStage(Stage stage) {
+        stages.add(stage);
     }
 }

@@ -11,7 +11,7 @@ import de.limbusdev.guardianmonsters.geometry.IntVec2;
 import de.limbusdev.guardianmonsters.model.Inventory;
 import de.limbusdev.guardianmonsters.model.Item;
 import de.limbusdev.guardianmonsters.model.ItemDB;
-import de.limbusdev.guardianmonsters.utils.GS;
+import de.limbusdev.guardianmonsters.utils.Constant;
 
 /**
  * Created by georg on 23.02.17.
@@ -20,7 +20,7 @@ import de.limbusdev.guardianmonsters.utils.GS;
 public class KeyItemsSubMenu extends AInventorySubMenu {
 
     private ArrayMap<Item, IntVec2> keyItemPositions;
-    private IntVec2 relictRootPos = new IntVec2(GS.WIDTH/2-70,30);
+    private IntVec2 relictRootPos = new IntVec2(Constant.WIDTH/2-70,30);
 
 
     public KeyItemsSubMenu(Skin skin, Inventory inventory) {
@@ -32,7 +32,7 @@ public class KeyItemsSubMenu extends AInventorySubMenu {
         addActor(bgLabel);
 
         Image relicsBgImg = new Image(skin.getDrawable("element-relics-bg"));
-        relicsBgImg.setPosition(GS.WIDTH/2-70,30, Align.bottomLeft);
+        relicsBgImg.setPosition(Constant.WIDTH/2-70,30, Align.bottomLeft);
         addActor(relicsBgImg);
 
         keyItemPositions = new ArrayMap<>();

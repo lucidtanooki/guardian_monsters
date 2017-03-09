@@ -13,7 +13,7 @@ import de.limbusdev.guardianmonsters.enums.Element;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.model.Monster;
 import de.limbusdev.guardianmonsters.model.MonsterDB;
-import de.limbusdev.guardianmonsters.utils.GS;
+import de.limbusdev.guardianmonsters.utils.Constant;
 
 
 /*
@@ -33,7 +33,7 @@ public class MonsterStatusInventoryWidget extends Group {
         super();
         this.skin = skin;
 
-        setSize(140,GS.HEIGHT-36);
+        setSize(140, Constant.HEIGHT-36);
         Image monsterStatsBg = new Image(skin.getDrawable("menu-col-bg"));
         monsterStatsBg.setPosition(2,2,Align.bottomLeft);
         addActor(monsterStatsBg);

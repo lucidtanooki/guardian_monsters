@@ -17,7 +17,7 @@ import de.limbusdev.guardianmonsters.fwmengine.menus.ui.widgets.TiledImage;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TeamComponent;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.model.Inventory;
-import de.limbusdev.guardianmonsters.utils.GS;
+import de.limbusdev.guardianmonsters.utils.Constant;
 
 /**
  * Inventory Screen, holds Team view, Ability Board, Item View, Encyclopedia
@@ -32,7 +32,7 @@ public class InventoryScreen implements Screen, MainToolBar.Controller {
     private ArrayMap<String,Group> views;
 
     public InventoryScreen(TeamComponent team, Inventory inventory) {
-        FitViewport fit = new FitViewport(GS.WIDTH, GS.HEIGHT);
+        FitViewport fit = new FitViewport(Constant.WIDTH, Constant.HEIGHT);
         this.stage = new Stage(fit);
         this.skin = Services.getUI().getInventorySkin();
 
@@ -107,7 +107,7 @@ public class InventoryScreen implements Screen, MainToolBar.Controller {
     private void assembleToolbar() {
 
         MainToolBar toolBar = new MainToolBar(skin, this);
-        toolBar.setPosition(0,GS.HEIGHT,Align.topLeft);
+        toolBar.setPosition(0, Constant.HEIGHT,Align.topLeft);
 
         stage.addActor(toolBar);
     }

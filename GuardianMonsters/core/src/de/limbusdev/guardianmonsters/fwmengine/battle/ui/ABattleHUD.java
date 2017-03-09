@@ -6,30 +6,30 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.ArrayMap;
 
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleWidget;
-import de.limbusdev.guardianmonsters.utils.GS;
+import de.limbusdev.guardianmonsters.utils.Constant;
 
 /**
- * Created by georg on 09.09.16.
+ * Created by Georg Eckert 2016
  */
 public abstract class ABattleHUD extends AHUD {
 
-    protected ArrayMap<String, de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleWidget> widgets;
+    protected ArrayMap<String, BattleWidget> widgets;
 
     // Images
     private Image battleUIbg, blackCurtain;
 
     public ABattleHUD(Skin skin) {
         super(skin);
-        widgets = new ArrayMap<String, de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleWidget>();
+        widgets = new ArrayMap<>();
 
         // Battle UI Black transparent Background
-        this.battleUIbg = new Image(skin.getDrawable("bg"));
+        battleUIbg = new Image(skin.getDrawable("bg"));
+        battleUIbg.setSize(Constant.WIDTH,61);
         battleUIbg.setPosition(0, 0);
-        battleUIbg.setSize(GS.RES_X, GS.ROW*12.5f);
 
         // Black Curtain for fade-in and -out
         this.blackCurtain = new Image(skin.getDrawable("black"));
-        this.blackCurtain.setSize(GS.RES_X,GS.RES_Y);
+        this.blackCurtain.setSize(Constant.WIDTH, Constant.HEIGHT);
         this.blackCurtain.setPosition(0, 0);
 
         stage.addActor(battleUIbg);

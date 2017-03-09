@@ -5,10 +5,8 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.utils.Align;
 
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.AHUD;
-import de.limbusdev.guardianmonsters.utils.GS;
 
 public class BattleActionMenuWidget extends BattleWidget {
 
@@ -29,31 +27,16 @@ public class BattleActionMenuWidget extends BattleWidget {
 
         this.callbackHandler = callbackHandler;
 
-        // Monster Button
-        monsterButton = new ImageButton(skin, "b-attack-monsters");
-        monsterButton.setSize(105*GS.zoom,32*GS.zoom);
-        monsterButton.setPosition(6*GS.zoom, 64*GS.zoom+1*GS.zoom, Align.topLeft);
-
-        // Extra Button
-        extraButton = new ImageButton(skin, "b-attack-extra");
-        extraButton.setSize(105*GS.zoom,32*GS.zoom);
-        extraButton.setPosition(6*GS.zoom, 1*GS.zoom, Align.bottomLeft);
-
-        // Back Button
-        backButton = new ImageButton(skin, "b-attack-back");
-        backButton.setSize(105*GS.zoom,32*GS.zoom);
-        backButton.setPosition(GS.RES_X-6*GS.zoom, 1*GS.zoom, Align.bottomRight);
-
-        // Bag Button
-        bagButton = new ImageButton(skin, "b-attack-bag");
-        bagButton.setSize(105*GS.zoom,32*GS.zoom);
-        bagButton.setPosition(GS.RES_X-6*GS.zoom, 64*GS.zoom+1*GS.zoom, Align.topRight);
+        monsterButton   = new BattleHUDMenuButton(skin, BattleHUDMenuButton.TEAM    );
+        extraButton     = new BattleHUDMenuButton(skin, BattleHUDMenuButton.DEFEND  );
+        backButton      = new BattleHUDMenuButton(skin, BattleHUDMenuButton.BACK    );
+        bagButton       = new BattleHUDMenuButton(skin, BattleHUDMenuButton.BAG     );
 
         // Add to parent
-        addActor(backButton);
-        addActor(monsterButton);
-        addActor(bagButton);
-        addActor(extraButton);
+        addActor(backButton     );
+        addActor(monsterButton  );
+        addActor(bagButton      );
+        addActor(extraButton    );
 
         initCallbackHandler();
     }
@@ -128,9 +111,9 @@ public class BattleActionMenuWidget extends BattleWidget {
 
     // INNER INTERFACE
     public interface CallbackHandler {
-        public void onMonsterButton();
-        public void onBagButton();
-        public void onBackButton();
-        public void onExtraButton();
+        void onMonsterButton();
+        void onBagButton();
+        void onBackButton();
+        void onExtraButton();
     }
 }

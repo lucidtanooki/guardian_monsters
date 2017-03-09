@@ -11,7 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
-import de.limbusdev.guardianmonsters.utils.GS;
+import de.limbusdev.guardianmonsters.utils.Constant;
 
 /**
  * Created by Georg Eckert on 17.02.17.
@@ -30,7 +30,7 @@ public class MainToolBar extends Group {
 
         // ...................................................................................... BG
         Image bg = new Image(skin.getDrawable("toolBar-bg"));
-        bg.setWidth(GS.WIDTH);
+        bg.setWidth(Constant.WIDTH);
         bg.setPosition(0,0,Align.bottomLeft);
         addActor(bg);
 

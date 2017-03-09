@@ -1,10 +1,5 @@
 package de.limbusdev.guardianmonsters.fwmengine.menus.ui;
 
-import com.badlogic.gdx.scenes.scene2d.Group;
-import com.badlogic.gdx.scenes.scene2d.ui.Container;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ArrayMap;
@@ -18,7 +13,7 @@ import de.limbusdev.guardianmonsters.fwmengine.menus.ui.team.TeamMemberSwitcher;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.widgets.LogoWithCounter;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.widgets.ScrollableWidget;
 import de.limbusdev.guardianmonsters.model.Monster;
-import de.limbusdev.guardianmonsters.utils.GS;
+import de.limbusdev.guardianmonsters.utils.Constant;
 
 
 /**
@@ -49,7 +44,7 @@ public class AbilityMapSubMenu extends AInventorySubMenu implements Observer,
         graphWidget = new GraphWidget(skin, this);
         graphWidget.init(this.team.get(0));
 
-        ScrollableWidget scrollWidget = new ScrollableWidget(GS.WIDTH, GS.HEIGHT - 36, 1200, 600, graphWidget, skin);
+        ScrollableWidget scrollWidget = new ScrollableWidget(Constant.WIDTH, Constant.HEIGHT - 36, 1200, 600, graphWidget, skin);
         scrollWidget.setPosition(0, 0, Align.bottomLeft);
         addActor(scrollWidget);
 
@@ -58,11 +53,11 @@ public class AbilityMapSubMenu extends AInventorySubMenu implements Observer,
         addActor(switcher);
 
         details = new AbilityDetailWidget(skin, this);
-        details.setPosition(GS.WIDTH - 2, 2, Align.bottomRight);
+        details.setPosition(Constant.WIDTH - 2, 2, Align.bottomRight);
         addActor(details);
 
         remainingLevels = new LogoWithCounter(skin, "label-bg-sandstone", "stats-symbol-exp");
-        remainingLevels.setPosition(GS.WIDTH - 2, 67, Align.bottomRight);
+        remainingLevels.setPosition(Constant.WIDTH - 2, 67, Align.bottomRight);
         addActor(remainingLevels);
         remainingLevels.counter.setText(Integer.toString(this.team.get(0).getAbilityLevels()));
 

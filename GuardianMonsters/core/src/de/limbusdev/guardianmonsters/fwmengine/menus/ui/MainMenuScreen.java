@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
@@ -26,6 +27,7 @@ import de.limbusdev.guardianmonsters.data.TextureAssets;
 import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.widgets.AnimatedImage;
+import de.limbusdev.guardianmonsters.fwmengine.menus.ui.widgets.CreditsScreenWidget;
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.OutdoorGameWorldScreen;
 import de.limbusdev.guardianmonsters.utils.GS;
 import de.limbusdev.guardianmonsters.utils.GameState;
@@ -43,7 +45,8 @@ public class MainMenuScreen implements Screen {
     private Image black;
 
     private ArrayMap<String,TextButton> buttons;
-    private Group startMenu, logoScreen, creditsScreen, introScreen;
+    private Group startMenu, logoScreen, introScreen;
+    private CreditsScreenWidget credits;
     
     /* ........................................................................... CONSTRUCTOR .. */
     public MainMenuScreen() {
@@ -58,7 +61,6 @@ public class MainMenuScreen implements Screen {
         setUpIntro(skin);
         setUpUI(skin);
         setUpStartMenu(skin);
-        setUpCredits(skin);
 
         stage.addActor(black);
         stage.addActor(introScreen);
@@ -221,6 +223,8 @@ public class MainMenuScreen implements Screen {
 
 
         // .......................................................................... CREDITS BUTTON
+        credits = new CreditsScreenWidget(skin);
+
         button = new TextButton(i18n.get("main_menu_credits"), skin, "button-96x32");
         button.setSize(96,32);
         button.setPosition(16,GS.HEIGHT-16-48,Align.topLeft);
@@ -230,17 +234,12 @@ public class MainMenuScreen implements Screen {
             public void clicked(InputEvent event, float x, float y) {
                 startMenu.addAction(Actions.sequence(
                         Actions.fadeOut(1), Actions.visible(false),
-                        Actions.delay(13), Actions.visible(true),
+                        Actions.delay(20), Actions.visible(true),
                         Actions.fadeIn(1)
                 ));
-                stage.addActor(creditsScreen);
-                creditsScreen.addAction(Actions.sequence(
-                        Actions.moveTo(0, GS.RES_Y),
-                        Actions.alpha(0), Actions.visible(true), Actions.fadeIn(2),
-                        Actions.moveBy(0, 2000, 15),
-                        Actions.fadeOut(2),Actions.visible(false)
-                ));
-                // TODO fading out has some problems
+                stage.addActor(credits);
+                credits.start(20);
+                stage.setDebugAll(true);
             }
         });
         buttons.put("credits", button);
@@ -251,54 +250,6 @@ public class MainMenuScreen implements Screen {
         stage.addActor(startMenu);
     }
 
-    public void setUpCredits(Skin skin) {
-        TextureAtlas logos = Services.getMedia().getTextureAtlas(TextureAssets.logosSpriteSheetFile);
-        this.creditsScreen = new Group();
-        Image bg = new Image(skin.getDrawable("black"));
-        bg.setWidth(GS.RES_X);bg.setHeight(4000);
-        bg.setPosition(0, GS.RES_Y, Align.topLeft);
-        bg.addAction(Actions.alpha(.75f));
-        creditsScreen.addActor(bg);
-        Image limbusLogo = new Image(logos.findRegion("limbusdev"));
-        limbusLogo.setWidth(254);limbusLogo.setHeight(44);
-        limbusLogo.setPosition(GS.RES_X / 2, -900, Align.center);
-        Image libgdxLogo = new Image(logos.findRegion("libgdx"));
-        libgdxLogo.setWidth(256);libgdxLogo.setHeight(43);
-        libgdxLogo.setPosition(GS.RES_X / 2, -1900, Align.center);
-
-        String creditText = "Developed by\n\n" +
-            "Georg Eckert, LimbusDev 2016\n\n\n\n" +
-            "Artwork\n\n" +
-            "Monsters by\n" +
-            "Moritz, Maria-Christin & Georg Eckert\n\n\n" +
-            "Character Templates by PlayerRed-1\n" +
-            "\n\n\n" +
-            "~ Music ~\n\n" +
-            "Music by Matthew Pablo\n" +
-            "http://www.matthewpablo.com\n\n" +
-            "The Last Encounter (Battle Theme)\n" +
-            "Liveley Meadow (Victory Fanfare & Song)" +
-            "\n\n\n\n" +
-            "Music by other Artists" +
-            "City Loop by Homingstar (CC-BY-SA-3.0)\n\n" +
-            "CalmBGM by syncopika (CC-BY-3.0)\n\n" +
-            "XXXXXX written and produced by Ove Melaa (Omsofware@hotmail.com)\n\n" +
-            "\n\n" +
-            "Powered by\n\n";
-        Label.LabelStyle labs = new Label.LabelStyle();
-        labs.font = skin.getFont("white");
-        Label text = new Label(creditText, labs);
-        text.setAlignment(Align.top,Align.top);
-        text.setPosition(GS.RES_X /2, -2900, Align.left);
-        text.setWidth(0);text.setHeight(2300);
-        text.setWrap(true);
-
-        // Sorting
-        creditsScreen.addActor(text);
-        creditsScreen.addActor(limbusLogo);
-        creditsScreen.addActor(libgdxLogo);
-        creditsScreen.setVisible(false);
-    }
 
     public void setUpIntro(Skin skin) {
         TextureAtlas logos = Services.getMedia().getTextureAtlas(TextureAssets.logosSpriteSheetFile);

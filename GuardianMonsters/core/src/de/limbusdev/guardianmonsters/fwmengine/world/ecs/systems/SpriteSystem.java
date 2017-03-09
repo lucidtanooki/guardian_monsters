@@ -10,7 +10,7 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.CharacterSpr
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Components;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.SpriteComponent;
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.AnimatedPersonSprite;
-import de.limbusdev.guardianmonsters.fwmengine.world.ui.OrthogonalTiledMapAndEntityRenderer;
+import de.limbusdev.guardianmonsters.fwmengine.world.ui.ExtendedTiledMapRenderer;
 
 
 /**
@@ -18,10 +18,10 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ui.OrthogonalTiledMapAndEnt
  */
 public class SpriteSystem extends EntitySystem {
     /* ............................................................................ ATTRIBUTES .. */
-    private OrthogonalTiledMapAndEntityRenderer mapRenderer;
+    private ExtendedTiledMapRenderer mapRenderer;
     private ImmutableArray<Entity> visibleEntities;
     /* ........................................................................... CONSTRUCTOR .. */
-    public SpriteSystem(OrthogonalTiledMapAndEntityRenderer mapRenderer) {
+    public SpriteSystem(ExtendedTiledMapRenderer mapRenderer) {
         this.mapRenderer = mapRenderer;
     }
     /* ............................................................................... METHODS .. */

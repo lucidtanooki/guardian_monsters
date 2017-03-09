@@ -27,7 +27,7 @@ import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.BattleScreen;
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.HUD;
-import de.limbusdev.guardianmonsters.fwmengine.world.ui.OutdoorGameWorldScreen;
+import de.limbusdev.guardianmonsters.fwmengine.world.ui.WorldScreen;
 import de.limbusdev.guardianmonsters.utils.GS;
 
 
@@ -56,7 +56,7 @@ public class EntityComponentSystem {
      * @param sgm           the SaveGameManager
      */
     public EntityComponentSystem(Viewport viewport, GameArea gameArea, boolean
-            fromSave, OutdoorGameWorldScreen gameScreen, SaveGameManager sgm
+            fromSave, WorldScreen gameScreen, SaveGameManager sgm
     ) {
 
         media = Services.getMedia();
@@ -184,7 +184,7 @@ public class EntityComponentSystem {
      */
     public void changeGameArea(int mapID, int startFieldID) {
         Services.getScreenManager().pushScreen(
-            new OutdoorGameWorldScreen(mapID, startFieldID, false));
+            new WorldScreen(mapID, startFieldID, false));
     }
 
     /**

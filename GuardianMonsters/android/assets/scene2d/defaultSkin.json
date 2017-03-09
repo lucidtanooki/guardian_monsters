@@ -14,22 +14,22 @@
   },
 
   "com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle": {
-    "a":            {"down": "button_adown",        "up": "button_a"},
-    "b":            {"down": "button_bdown",        "up": "button_b"},
+    "a":            {"down": "button_a_down",        "up": "button_a"},
+    "b":            {"down": "button_b_down",        "up": "button_b"},
     "transparent":  { }
   },
 
   "com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle": {
-    "open-menu":  {"down": "buttonMenuDown",    "up": "buttonMenuUp",     "font": "font16", "unpressedOffsetY": 3},
-    "menu-entry": {"down": "buttonSideBarDown", "up": "buttonSideBarUp",  "font": "font16", "unpressedOffsetY": 3},
-    "button-192": {"font": "font16", "down": "b192down", "up": "b192up", "unpressedOffsetY": 2},
+    "open-menu":  {"down": "b96x40side_down", "up": "b96x40side_up", "checked": "b96x40side_down",  "font": "font16", "unpressedOffsetY": 2},
+    "menu-entry": {"down": "b80x36side_down", "up": "b80x36side_up", "checked": "b80x36side_up",    "font": "font16", "unpressedOffsetY": 2},
     "button-64x24": {"font": "font16", "down": "b64x24down", "up": "b64x24up", "pressedOffsetY": -1},
     "button-96x32": {"font": "font16", "down": "b96x32down", "up": "b96x32up", "pressedOffsetY": -2}
   },
 
   "com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle": {
     "trans-white": {"font": "font16w" },
-    "default-white": {"font": "font16w"}
+    "default-white": {"font": "font16w"},
+    "default": {"font": "font16"}
   }
 
 }

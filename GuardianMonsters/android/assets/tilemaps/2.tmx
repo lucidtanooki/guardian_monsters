@@ -88,14 +88,14 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="people1" visible="0">
+ <objectgroup name="people1">
   <object id="61" name="person" type="person" x="32" y="160" width="16" height="16">
    <properties>
     <property name="male" value="true"/>
     <property name="path" value="ESTOP"/>
     <property name="spriteIndex" value="1"/>
     <property name="static" value="true"/>
-    <property name="text" value="person_02_1"/>
+    <property name="text" value="person_2_1"/>
    </properties>
   </object>
   <object id="69" name="person" type="person" x="304" y="320" width="16" height="16">
@@ -104,7 +104,7 @@
     <property name="path" value="SSTOP"/>
     <property name="spriteIndex" value="4"/>
     <property name="static" value="true"/>
-    <property name="text" value="person_02_2"/>
+    <property name="text" value="person_2_2"/>
    </properties>
   </object>
  </objectgroup>
@@ -353,8 +353,8 @@
  <objectgroup name="descriptions1" visible="0">
   <object id="62" name="sign" type="objectDescription" x="80" y="432" width="16" height="16">
    <properties>
-    <property name="text" value="sign_02_1_text"/>
-    <property name="title" value="sign_02_1_title"/>
+    <property name="text" value="sign_2_1_text"/>
+    <property name="title" value="sign_2_1_title"/>
    </properties>
   </object>
  </objectgroup>

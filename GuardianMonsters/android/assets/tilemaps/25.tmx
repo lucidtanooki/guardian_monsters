@@ -143,7 +143,7 @@
     <property name="path" value="SSTOP,E,E,E,E,ESTOP,NSTOP,NSTOP,WSTOP,SSTOP,S,S,S,ESTOP,SSTOP,W,W,W,W,SSTOP,WSTOP,SSTOP,SSTOP,SSTOP,SSTOP,WSTOP,NSTOP,N,N,N"/>
     <property name="spriteIndex" value="2"/>
     <property name="static" value="false"/>
-    <property name="text" value="person_1"/>
+    <property name="text" value="person_25_8"/>
    </properties>
   </object>
   <object id="291" name="person" type="person" x="208" y="416" width="16" height="16">
@@ -152,7 +152,7 @@
     <property name="path" value="SSTOP,ESTOP,NSTOP,N,N,N,N,N,ESTOP,NSTOP,WSTOP,NSTOP,ESTOP,E,SSTOP,WSTOP,S,S,W,S,S,S,SSTOP,ESTOP,NSTOP"/>
     <property name="spriteIndex" value="2"/>
     <property name="static" value="false"/>
-    <property name="text" value="person_1"/>
+    <property name="text" value="person_25_11"/>
    </properties>
   </object>
   <object id="292" name="person" type="person" x="544" y="288" width="16" height="16">
@@ -161,7 +161,7 @@
     <property name="path" value="SSTOP"/>
     <property name="spriteIndex" value="1"/>
     <property name="static" value="true"/>
-    <property name="text" value="person_1"/>
+    <property name="text" value="person_25_9"/>
    </properties>
   </object>
   <object id="293" name="person" type="person" x="592" y="112" width="16" height="16">
@@ -170,7 +170,7 @@
     <property name="path" value="SSTOP"/>
     <property name="spriteIndex" value="2"/>
     <property name="static" value="true"/>
-    <property name="text" value="person_1"/>
+    <property name="text" value="person_25_12"/>
    </properties>
   </object>
   <object id="294" name="person" type="person" x="480" y="320" width="16" height="16">
@@ -179,7 +179,7 @@
     <property name="path" value="SSTOP,ESTOP,NSTOP,ESTOP,E,E,E,E,E,SSTOP,S,SSTOP,ESTOP,E,E,E,E,N,N,E,E,ESTOP,N,N,N,N,N,N,ESTOP,SSTOP,S,S,S,S,S,S,SSTOP,SSTOP,W,W,S,S,W,W,W,W,WSTOP,NSTOP,WSTOP,N,W,W,W,W,W,WSTOP,SSTOP"/>
     <property name="spriteIndex" value="2"/>
     <property name="static" value="false"/>
-    <property name="text" value="person_1"/>
+    <property name="text" value="person_25_10"/>
    </properties>
   </object>
   <object id="295" name="person" type="person" x="720" y="272" width="16" height="16">
@@ -188,7 +188,7 @@
     <property name="path" value="SSTOP,E,E,E,E,ESTOP,NSTOP,NSTOP,WSTOP,SSTOP,S,S,S,ESTOP,SSTOP,W,W,W,W,SSTOP,WSTOP,SSTOP,SSTOP,SSTOP,SSTOP,WSTOP,NSTOP,N,N,N"/>
     <property name="spriteIndex" value="4"/>
     <property name="static" value="false"/>
-    <property name="text" value="person_1"/>
+    <property name="text" value="person_25_13"/>
    </properties>
   </object>
   <object id="296" name="person" type="person" x="864" y="192" width="16" height="16">

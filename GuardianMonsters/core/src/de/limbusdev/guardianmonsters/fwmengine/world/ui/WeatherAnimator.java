@@ -50,7 +50,7 @@ public class WeatherAnimator {
 
     /**
      * Renders the weather effect above a tiled map
-     * @param batch {@link Batch} of the {@link OrthogonalTiledMapAndEntityRenderer}
+     * @param batch {@link Batch} of the {@link ExtendedTiledMapRenderer}
      */
     public void render(Batch batch, float elapsedTime) {
         if(!weatherOn) {

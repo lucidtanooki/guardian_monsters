@@ -18,7 +18,7 @@
  </layer>
  <layer name="walls1" width="32" height="32">
   <data encoding="base64" compression="zlib">
-   eJzlV+1OwjAUrcLGYFNMeCJApvGtQDf8ocZX0n3gY3kauaG5uqz3jjAST3JyaEp7errbJt3FxtTgzkO/wOXImFtwBaYgoRLM4+ooMSZM/DQCH+H5BGZg7vhnmCsHt0KVrPec8weCeVy9A1NPvQcLeJZgBdaO/0owj9WPiTGf4Ba/88RPn23+CPnBDMwj5/u3jB+AQ6d9gb2/jA/r8MVy723XkEbt/ycU8CrjQ5t8aR2+aMrfBspPOHV+7nPq/NynLf8ce7Ww9Y6+EqzAGizgWYIVWAv85/BaCL7/Gt4bW7foG4IBGIKDMdpgAIZjf/81xm4E+dtA+6KF9vsTaF+06Jqf6kMLqgdtfqoPLagetPmPBW3+Y6Gv/Lz+qZ74vSM9Z/y+4kr9vP6pnvi903TOmvaN31dcqb/r+W8aN7mSjf8rx83sR1/2+j77Pb4pv6//Oed/ZXnf/ln+a5Z3Ksj/0HN+6Xjt/df13uw7P73BaB1aJWjff5RDqwTt++8bw5rOZg==
+   eJztV+FOwjAYrOLGgCkmPBEg0/hWoBv+UOMrKdvwsbxFLmk+nGu/LRmJXnI5mtJer/vapPuJMSW4d9BPcDk05gZcgQlIFB7z2DqMjQljN43AB3g+gimYWf4p5srAraf6rPeU8wce89h6CyaOegfu4JmDBVha/iuPeSp9HxvzAW7xO4vd9KnKHyE/mIJZZH3/hvFn2OvzyXGb63DF8uBdrSGJmv9PSB+2uQ5X1OVvgvT5z/97/jlqZFHVO/pysABLcAfPHCzA0sN/Dq+F5d+Ufw3vDThA3wUYgCE4GKENBmA4cvdfY+ymg+9PcF+00H5/gvuiRdv8rA8tWA/a/KwPLVgP2vxdQZu/K/SVX9Y/60neO77nTN5XUtkv65/1JO+dunNWt2/yvpLK/rbnv27c+NJv/E85rmff+nzQt9nx+Lr8rv6nnP9F5H39Y/mvRN6pR/77nvP7jtfef23vzb7z8w3GdWiV0L7/mEOrhPb99wXhBc5U
   </data>
  </layer>
  <layer name="objects1" width="32" height="32">
@@ -110,7 +110,7 @@
  </objectgroup>
  <layer name="tops1" width="32" height="32">
   <data encoding="base64" compression="zlib">
-   eJztldtqwmAQhLfaeMYLfSK1SW/a6iupTfpcCkbphfaROpAM/CxKNiYmiH4wDBLd/Q/ZUaRevLbIa9vmRH9+cj2bvsi2n/09vysSdMvv8zIQaQyyfx+idwQ1O7h/yINaHXt/a59L7NA7LrD/a2n2sF/Ig1q96vryvmbo+Qb5UFBhf97XGj2/oRCKnP48l7rgudQFz8UlHorsz+gwLL+/NTduRdY8M6+0VwXzSntVMK+0W+F85Z0znVfa+XwCTZ26fJ907uSdM51X2vl8Ca2cunyfdO6cmzN3vSRO50znlfZL9fJS9P/sVvyWsKa/UeIf48QX4+I174lPtd+vB9v/Mb3/ebrv06i+tTwKzGOra3xkYQC9G13DPLa6JkTNCPox+pOEf+y1T6g=
+   eJztld1qwkAUhE+1MfEHLxQfKLZJb2rbV1Kb9LkUjKUX2kfqQDKwHC3ZRN0g+sEwmJ89u5s9o0izeL7Io2/nRP++U59VX2TdL38u6orE3fp1wonIdHJ4/WEg0hqUv5+gdgq1A3x/yIM6Qf35VGWD2tkJ669Lu4f1Qh7U6bmry3PxhJrPUATFDuvzXCxR8xNKoNSoz31pCu5LU3BfTLKhyPaIvofnr2+bG5eiLDeYV9pdwbzS7grmlXZb2F9V+0znlXbeD6GpMS7Pk86dqn2m80o778+hhTEuz5POnWN9Zs6XZEWf6bzS/t94VbH933TNzxnm9DvK/XWc+8f49DGviZla79uNrX9XfP/3Yt37UXNzuRWYx7auiZCFMfRi6Rrmsa1rEoyZQl+WfifnDwReTqE=
   </data>
  </layer>
  <objectgroup name="colliderWalls1" visible="0">
@@ -192,7 +192,7 @@
   </object>
   <object id="38" name="monsterArea" x="32" y="96" width="160" height="48">
    <properties>
-    <property name="monsters" value="4;0.7;8;0.3"/>
+    <property name="monsters" value="28;0.90;13;0.05;32;0.05"/>
     <property name="probability" value="0.05"/>
     <property name="probability2" value="0.02"/>
     <property name="probability3" value="0.01"/>
@@ -200,7 +200,7 @@
   </object>
   <object id="39" name="monsterArea" x="32" y="144" width="32" height="16">
    <properties>
-    <property name="monsters" value="4;0.7;8;0.3"/>
+    <property name="monsters" value="28;0.90;13;0.05;32;0.05"/>
     <property name="probability" value="0.05"/>
     <property name="probability2" value="0.02"/>
     <property name="probability3" value="0.01"/>
@@ -208,7 +208,7 @@
   </object>
   <object id="40" name="monsterArea" x="32" y="256" width="64" height="32">
    <properties>
-    <property name="monsters" value="4;0.7;8;0.3"/>
+    <property name="monsters" value="28;0.90;13;0.05;32;0.05"/>
     <property name="probability" value="0.05"/>
     <property name="probability2" value="0.2"/>
     <property name="probability3" value="0.1"/>
@@ -216,7 +216,7 @@
   </object>
   <object id="41" name="monsterArea" x="176" y="208" width="48" height="80">
    <properties>
-    <property name="monsters" value="4;0.7;8;0.3"/>
+    <property name="monsters" value="28;0.90;13;0.05;32;0.05"/>
     <property name="probability" value="0.05"/>
     <property name="probability2" value="0.02"/>
     <property name="probability3" value="0.01"/>
@@ -224,7 +224,7 @@
   </object>
   <object id="42" name="monsterArea" x="224" y="256" width="32" height="32">
    <properties>
-    <property name="monsters" value="4;0.7;8;0.3"/>
+    <property name="monsters" value="28;0.90;13;0.05;32;0.05"/>
     <property name="probability" value="0.05"/>
     <property name="probability2" value="0.02"/>
     <property name="probability3" value="0.01"/>
@@ -232,7 +232,7 @@
   </object>
   <object id="43" name="monsterArea" x="288" y="96" width="128" height="96">
    <properties>
-    <property name="monsters" value="4;0.7;8;0.3"/>
+    <property name="monsters" value="28;0.90;13;0.05;32;0.05"/>
     <property name="probability" value="0.05"/>
     <property name="probability2" value="0.02"/>
     <property name="probability3" value="0.01"/>
@@ -240,7 +240,7 @@
   </object>
   <object id="45" name="monsterArea" x="448" y="128" width="32" height="96">
    <properties>
-    <property name="monsters" value="4;0.7;8;0.3"/>
+    <property name="monsters" value="28;0.90;13;0.05;32;0.05"/>
     <property name="probability" value="0.05"/>
     <property name="probability2" value="0.02"/>
     <property name="probability3" value="0.01"/>
@@ -248,7 +248,7 @@
   </object>
   <object id="46" name="monsterArea" x="336" y="336" width="144" height="96">
    <properties>
-    <property name="monsters" value="4;0.7;8;0.3"/>
+    <property name="monsters" value="28;0.90;13;0.05;32;0.05"/>
     <property name="probability" value="0.05"/>
     <property name="probability2" value="0.3"/>
     <property name="probability3" value="0.1"/>
@@ -256,7 +256,7 @@
   </object>
   <object id="47" name="monsterArea" x="160" y="304" width="64" height="32">
    <properties>
-    <property name="monsters" value="4;0.7;8;0.3"/>
+    <property name="monsters" value="28;0.90;13;0.05;32;0.05"/>
     <property name="probability" value="0.05"/>
     <property name="probability2" value="0.02"/>
     <property name="probability3" value="0.01"/>
@@ -264,7 +264,7 @@
   </object>
   <object id="48" name="monsterArea" x="160" y="368" width="16" height="32">
    <properties>
-    <property name="monsters" value="4;0.7;8;0.3"/>
+    <property name="monsters" value="28;0.90;13;0.05;32;0.05"/>
     <property name="probability" value="0.05"/>
     <property name="probability2" value="0.02"/>
     <property name="probability3" value="0.01"/>
@@ -294,7 +294,7 @@
   </object>
   <object id="53" name="monsterArea" x="176" y="336" width="48" height="80">
    <properties>
-    <property name="monsters" value="4;0.7;8;0.3"/>
+    <property name="monsters" value="28;0.90;13;0.05;32;0.05"/>
     <property name="probability" value="0.05"/>
     <property name="probability2" value="0.02"/>
     <property name="probability3" value="0.01"/>
@@ -302,7 +302,7 @@
   </object>
   <object id="54" name="monsterArea" x="160" y="416" width="64" height="48">
    <properties>
-    <property name="monsters" value="4;0.7;8;0.3"/>
+    <property name="monsters" value="28;0.90;13;0.05;32;0.05"/>
     <property name="probability" value="0.05"/>
     <property name="probability2" value="0.02"/>
     <property name="probability3" value="0.01"/>
@@ -310,7 +310,7 @@
   </object>
   <object id="55" name="monsterArea" x="144" y="448" width="16" height="16">
    <properties>
-    <property name="monsters" value="4;0.7;8;0.3"/>
+    <property name="monsters" value="28;0.90;13;0.05;32;0.05"/>
     <property name="probability" value="0.05"/>
     <property name="probability2" value="0.02"/>
     <property name="probability3" value="0.01"/>
@@ -318,7 +318,7 @@
   </object>
   <object id="56" name="monsterArea" x="64" y="336" width="96" height="16">
    <properties>
-    <property name="monsters" value="4;0.7;8;0.3"/>
+    <property name="monsters" value="28;0.90;13;0.05;32;0.05"/>
     <property name="probability" value="0.05"/>
     <property name="probability2" value="0.02"/>
     <property name="probability3" value="0.01"/>
@@ -326,7 +326,7 @@
   </object>
   <object id="57" name="monsterArea" x="32" y="352" width="48" height="32">
    <properties>
-    <property name="monsters" value="4;0.7;8;0.3"/>
+    <property name="monsters" value="28;0.90;13;0.05;32;0.05"/>
     <property name="probability" value="0.05"/>
     <property name="probability2" value="0.02"/>
     <property name="probability3" value="0.01"/>
@@ -334,7 +334,7 @@
   </object>
   <object id="58" name="monsterArea" x="32" y="400" width="16" height="64">
    <properties>
-    <property name="monsters" value="4;0.7;8;0.3"/>
+    <property name="monsters" value="28;0.90;13;0.05;32;0.05"/>
     <property name="probability" value="0.05"/>
     <property name="probability2" value="0.02"/>
     <property name="probability3" value="0.01"/>
@@ -342,7 +342,7 @@
   </object>
   <object id="59" name="monsterArea" x="48" y="448" width="16" height="16">
    <properties>
-    <property name="monsters" value="4;0.7;8;0.3"/>
+    <property name="monsters" value="28;0.90;13;0.05;32;0.05"/>
     <property name="probability" value="0.05"/>
     <property name="probability2" value="0.02"/>
     <property name="probability3" value="0.01"/>

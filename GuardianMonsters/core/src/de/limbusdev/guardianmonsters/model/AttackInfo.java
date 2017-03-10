@@ -15,7 +15,7 @@ import de.limbusdev.guardianmonsters.enums.SFXType;
 
 /**
  * Contains all existing attacks, sorted by element
- * Created by georg on 24.01.16.
+ * Created by Georg Eckert 2017
  */
 public class AttackInfo {
 

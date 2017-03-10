@@ -41,38 +41,35 @@ public class MonsterStateWidget extends WidgetGroup implements Observer {
     public MonsterStateWidget(Skin skin, boolean showExp) {
         hudBgImg = new Image(skin.getDrawable("monStateUIbg2"));
         hudBgImg.setPosition(0,0,Align.bottomLeft);
-        hudBgImg.setHeight(28);
-        hudBgImg.setWidth(208);
 
         hudRingImg = new Image(skin.getDrawable("monStateWidgetRing"));
         hudRingImg.setPosition(Constant.COL*12,0,Align.bottomLeft);
-        hudRingImg.setSize(28,28);
 
         hudNameImg = new Image(skin.getDrawable("monStateUIname"));
         hudNameImg.setPosition(0,0,Align.bottomLeft);
 
         Label.LabelStyle ls = new Label.LabelStyle();
         ls.background = skin.getDrawable("invis");
-        ls.font = skin.getFont("default-font");
+        ls.font = skin.getFont("font16");
         ls.fontColor = Color.WHITE;
 
         nameLabel = new Label("Monster", ls);
         nameLabel.setWidth(96);
         nameLabel.setHeight(24);
-        nameLabel.setPosition(24,4);
+        nameLabel.setPosition(24,2);
 
         hpBar = new ProgressBar(0, 100, 1, false, skin, "hp");
         mpBar = new ProgressBar(0, 100, 1, false, skin, "mp");
         epBar = new ProgressBar(0, 100, 1, false, skin, "ep");
 
-        hpBar.setPosition(240,23,Align.bottomLeft);
-        hpBar.setSize(88,9);
+        hpBar.setPosition(120,13,Align.bottomLeft);
+        hpBar.setSize(96,9);
         hpBar.setValue(0);
-        mpBar.setPosition(240, 13, Align.bottomLeft);
-        mpBar.setSize(150,11);
+        mpBar.setPosition(120, 5, Align.bottomLeft);
+        mpBar.setSize(92,11);
         mpBar.setValue(0);
-        epBar.setPosition(4,6,Align.bottomLeft);
-        epBar.setSize(200,4);
+        epBar.setPosition(4,2,Align.bottomLeft);
+        epBar.setSize(100,4);
         epBar.setValue(0);
 
         hpBar.setAnimateInterpolation(Interpolation.linear);
@@ -82,9 +79,9 @@ public class MonsterStateWidget extends WidgetGroup implements Observer {
         epBar.setAnimateInterpolation(Interpolation.linear);
         epBar.setAnimateDuration(.1f);
 
-        ls.font = skin.getFont("white");
+        ls.font = skin.getFont("font16w");
         levelLabel = new Label("0", ls);
-        levelLabel.setPosition(222, 27, Align.center);
+        levelLabel.setPosition(110, 13, Align.center);
 
         // Sorting
         if(showExp) this.addActor(epBar);
@@ -96,7 +93,7 @@ public class MonsterStateWidget extends WidgetGroup implements Observer {
         this.addActor(nameLabel);
         this.addActor(levelLabel);
 
-        this.setBounds(0,0,416,56);
+        this.setBounds(0,0,220,32);
 
     }
 

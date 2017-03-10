@@ -27,7 +27,7 @@ public class BattleMainMenuWidget extends BattleWidget {
      */
     public BattleMainMenuWidget(AHUD hud, Skin skin, CallbackHandler callbackHandler) {
         super(hud);
-        this.setBounds(0,0, Constant.RES_X, Constant.RES_Y/4);
+        this.setBounds(0,0, Constant.RES_X, 64);
 
         BattleHUDMenuButton emptyButton = new BattleHUDMenuButton(skin, BattleHUDMenuButton.EMPTY);
         addActor(emptyButton);

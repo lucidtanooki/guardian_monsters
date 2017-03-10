@@ -515,10 +515,10 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
             reset();
 
             // Add Widgets
-            infoLabelWidget.addToStageAndFadeIn(stage);
             animationWidget.addToStageAndFadeIn(battleAnimationStage);
+            statusWidget.addToStageAndFadeIn(battleAnimationStage);
+            infoLabelWidget.addToStageAndFadeIn(stage);
             actionMenu.addToStageAndFadeIn(stage);
-            statusWidget.addToStageAndFadeIn(stage);
 
             // Set Widget State
             actionMenu.disableAllButBackButton();
@@ -536,7 +536,7 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
 
             // Add Widgets
             animationWidget.addToStage(battleAnimationStage);
-            statusWidget.addToStage(stage);
+            statusWidget.addToStage(battleAnimationStage);
             attackMenu.addToStage(stage);
             battleQueueWidget.addToStage(stage);
             actionMenu.addToStage(stage);
@@ -601,12 +601,12 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
 
         public void toTargetChoice() {
             reset();
-            animationWidget.addToStage(stage);
+            animationWidget.addToStage(battleAnimationStage);
+            statusWidget.addToStage(battleAnimationStage);
             actionMenu.disableAllButBackButton();
             actionMenu.addToStage(stage);
             actionMenu.setCallbackHandler(backToActionMenuCallbacks);
             targetMenuWidget.addToStage(stage);
-            statusWidget.addToStage(stage);
             battleQueueWidget.addToStage(stage);
 
             state = BattleState.TARGET_CHOICE;
@@ -615,11 +615,12 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
         public void toTeamMenu() {
             reset();
             animationWidget.addToStage(battleAnimationStage);
+            statusWidget.addToStage(battleAnimationStage);
             actionMenu.disableAllButBackButton();
             actionMenu.addToStage(stage);
             actionMenu.setCallbackHandler(backToActionMenuCallbacks);
             monsterMenuWidget.addToStage(stage);
-            statusWidget.addToStage(stage);
+
             battleQueueWidget.addToStage(stage);
 
             state = BattleState.TARGET_CHOICE;
@@ -628,20 +629,21 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
         public void toMainMenu() {
             reset();
             animationWidget.addToStage(battleAnimationStage);
+            statusWidget.addToStage(battleAnimationStage);
             actionMenu.disable();
             actionMenu.addToStage(stage);
             mainMenu.addToStageAndFadeIn(stage);
-            statusWidget.addToStage(stage);
 
             state = BattleState.MAINMENU;
         }
 
         public void toInfoLabel() {
             reset();
-            infoLabelWidget.addToStage(stage);
+
             animationWidget.addToStage(battleAnimationStage);
+            statusWidget.addToStage(battleAnimationStage);
+            infoLabelWidget.addToStage(stage);
             actionMenu.addToStage(stage);
-            statusWidget.addToStage(stage);
 
             actionMenu.disableAllButBackButton();
         }

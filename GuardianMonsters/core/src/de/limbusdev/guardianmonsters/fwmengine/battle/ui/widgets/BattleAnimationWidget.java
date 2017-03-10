@@ -142,7 +142,7 @@ public class BattleAnimationWidget extends BattleWidget implements ObservableWid
                 case 1:  position2d = ImPos.HERO_BOT;break;
                 default: position2d = ImPos.HERO_MID;break;
             }
-            align = Align.center;
+            align = Align.bottom;
             monsterImgsLeft.put(pos,monImg);
         } else {
             // Opponent Side
@@ -152,7 +152,7 @@ public class BattleAnimationWidget extends BattleWidget implements ObservableWid
                 default: position2d = ImPos.OPPO_MID;break;
             }
             monsterImgsRight.put(pos,monImg);
-            align = Align.center;
+            align = Align.bottom;
         }
 
         zSortedMonsterImgs.add(monImg);
@@ -231,10 +231,10 @@ public class BattleAnimationWidget extends BattleWidget implements ObservableWid
         Action horMovingAttDelay = Actions.delay(1f);
 
         // Moves actor from origin to target
-        Action moveToTargetAction = Actions.moveToAligned(target.x, target.y, Align.center, .6f, Interpolation.pow2In);
+        Action moveToTargetAction = Actions.moveToAligned(target.x, target.y, Align.bottom, .6f, Interpolation.pow2In);
 
         // Moves actor back from target to origin
-        Action moveToOriginAction = Actions.moveToAligned(origin.x, origin.y, Align.center, .4f, Interpolation.pow2In);
+        Action moveToOriginAction = Actions.moveToAligned(origin.x, origin.y, Align.bottom, .4f, Interpolation.pow2In);
 
         // Plays the ability animatiom
         Action attackAnimationAction = Actions.run(new Runnable() {
@@ -327,22 +327,22 @@ public class BattleAnimationWidget extends BattleWidget implements ObservableWid
         } else {
             sra.setSize(-128,128); // flipped animation
         }
-        sra.setAlign(Align.center);
+        sra.setAlign(Align.bottom);
 
         switch(ability.animationType) {
             case MOVING_HOR:
                 anim.setFrameDuration(1f/anim.getKeyFrames().length);
-                sra.setPosition(origin.x, origin.y, Align.center);
-                sra.addAction(Actions.moveToAligned(target.x, target.y, Align.center, 1f, Interpolation.linear));
+                sra.setPosition(origin.x, origin.y, Align.bottom);
+                sra.addAction(Actions.moveToAligned(target.x, target.y, Align.bottom, 1f, Interpolation.linear));
                 break;
             case MOVING_VERT:
                 anim.setFrameDuration(1f/anim.getKeyFrames().length);
-                sra.setPosition(target.x, target.y + 128, Align.center);
-                sra.addAction(Actions.moveToAligned(target.x, target.y, Align.center, 1f, Interpolation.pow2In));
+                sra.setPosition(target.x, target.y + 128, Align.bottom);
+                sra.addAction(Actions.moveToAligned(target.x, target.y, Align.bottom, 1f, Interpolation.pow2In));
                 break;
             case CONTACT:
             default: // CONTACTLESS
-                sra.setPosition(target.x, target.y, Align.center);
+                sra.setPosition(target.x, target.y, Align.bottom);
                 break;
         }
 
@@ -374,12 +374,12 @@ public class BattleAnimationWidget extends BattleWidget implements ObservableWid
     }
 
     private final static class ImPos {
-        private static final IntVec2 HERO_MID = new IntVec2(Constant.COL*13+128, Constant.ROW*18+128);
-        private static final IntVec2 HERO_BOT = new IntVec2(Constant.COL*7+128, Constant.ROW*15+128);
-        private static final IntVec2 HERO_TOP = new IntVec2(Constant.COL*19+128, Constant.ROW*21+128);
-        private static final IntVec2 OPPO_MID = new IntVec2(Constant.RES_X- Constant.COL*7-128, Constant.ROW*18+128);
-        private static final IntVec2 OPPO_BOT = new IntVec2(Constant.RES_X- Constant.COL*1-128, Constant.ROW*15+128);
-        private static final IntVec2 OPPO_TOP = new IntVec2(Constant.RES_X- Constant.COL*13-128, Constant.ROW*21+128);
+        private static final IntVec2 HERO_MID = new IntVec2(32+64+64, 100+24);
+        private static final IntVec2 HERO_BOT = new IntVec2(32+16+64, 100);
+        private static final IntVec2 HERO_TOP = new IntVec2(32+112+64, 100+48);
+        private static final IntVec2 OPPO_MID = new IntVec2(640+32-HERO_MID.x,HERO_MID.y);
+        private static final IntVec2 OPPO_BOT = new IntVec2(640+32-HERO_BOT.x,HERO_BOT.y);
+        private static final IntVec2 OPPO_TOP = new IntVec2(640+32-HERO_TOP.x,HERO_TOP.y);
     }
 
     public interface CallbackHandler {

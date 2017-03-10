@@ -369,18 +369,17 @@ black
   orig: 8, 8
   offset: 0, 0
   index: -1
-yellow-progress-bar
-  rotate: false
-  xy: 276, 93
-  size: 9, 7
-  split: 3, 3, 3, 3
-  orig: 9, 7
-  offset: 0, 0
-  index: -1
 bg
   rotate: false
-  xy: 444, 81
+  xy: 276, 92
   size: 8, 8
   orig: 8, 8
+  offset: 0, 0
+  index: -1
+yellow-progress-bar
+  rotate: false
+  xy: 444, 84
+  size: 5, 5
+  orig: 5, 5
   offset: 0, 0
   index: -1

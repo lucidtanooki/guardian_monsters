@@ -29,28 +29,30 @@ public class BattleStatusOverviewWidget extends BattleWidget {
 
         // Hero Team ###############################################################################
         MonsterStateWidget msw = new MonsterStateWidget(skin, true);
-        msw.setPosition(IndPos.statWPos1.x+32,IndPos.statWPos1.y);
+        msw.setPosition(IndPos.statWPos1left.x, IndPos.statWPos1left.y, Align.topLeft);
         monsterStateWidgetsLeft.add(msw);
         msw = new MonsterStateWidget(skin, true);
-        msw.setPosition(IndPos.statWPos2.x+32,IndPos.statWPos2.y);
+        msw.setPosition(IndPos.statWPos2left.x, IndPos.statWPos2left.y, Align.topLeft);
         monsterStateWidgetsLeft.add(msw);
         msw = new MonsterStateWidget(skin, true);
-        msw.setPosition(IndPos.statWPos3.x+32,IndPos.statWPos3.y);
+        msw.setPosition(IndPos.statWPos3left.x, IndPos.statWPos3left.y, Align.topLeft);
         monsterStateWidgetsLeft.add(msw);
 
         // Opponent Team ###########################################################################
         msw = new MonsterStateWidget(skin, false);
-        msw.setPosition(Constant.WIDTH-IndPos.statWPos1.x,IndPos.statWPos1.y,Align.bottomRight);
+        msw.setPosition(IndPos.statWPos1right.x, IndPos.statWPos1right.y, Align.topRight);
         monsterStateWidgetsRight.add(msw);
         msw = new MonsterStateWidget(skin, false);
-        msw.setPosition(Constant.WIDTH-IndPos.statWPos2.x,IndPos.statWPos2.y,Align.bottomRight);
+        msw.setPosition(IndPos.statWPos2right.x, IndPos.statWPos2right.y, Align.topRight);
         monsterStateWidgetsRight.add(msw);
         msw = new MonsterStateWidget(skin, false);
-        msw.setPosition(Constant.WIDTH-IndPos.statWPos3.x,IndPos.statWPos3.y,Align.bottomRight);
+        msw.setPosition(IndPos.statWPos3right.x, IndPos.statWPos3right.y, Align.topRight);
         monsterStateWidgetsRight.add(msw);
 
         for(MonsterStateWidget w : monsterStateWidgetsLeft) addActor(w);
         for(MonsterStateWidget w : monsterStateWidgetsRight) addActor(w);
+
+        setDebug(Constant.DEBUGGING_ON, true);
 
     }
 
@@ -93,9 +95,12 @@ public class BattleStatusOverviewWidget extends BattleWidget {
      * Possible Indicator coordinates
      */
     private final static class IndPos {
-        private static final IntVec2 statWPos1 = new IntVec2(Constant.COL*5, Constant.HEIGHT - Constant.ROW*7);
-        private static final IntVec2 statWPos2 = new IntVec2(Constant.COL*2, Constant.HEIGHT - Constant.ROW*10);
-        private static final IntVec2 statWPos3 = new IntVec2(Constant.COL*8, Constant.HEIGHT - Constant.ROW*4);
+        private static final IntVec2 statWPos1left = new IntVec2(56+24, 360-24);
+        private static final IntVec2 statWPos2left = new IntVec2(56, 360-48);
+        private static final IntVec2 statWPos3left = new IntVec2(56+48, 360);
+        private static final IntVec2 statWPos1right = new IntVec2(640-8-24, statWPos1left.y);
+        private static final IntVec2 statWPos2right = new IntVec2(640-8, statWPos2left.y);
+        private static final IntVec2 statWPos3right = new IntVec2(640-8-48, statWPos3left.y);
     }
 
 

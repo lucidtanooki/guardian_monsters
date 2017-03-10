@@ -39,7 +39,7 @@ public class UIManager extends AssetManager implements UI  {
         param.minFilter = Texture.TextureFilter.Linear;
 
         fonts = new ArrayMap<>();
-        int[] sizes = {12,16,32};
+        int[] sizes = {8,12,14,15,16,32};
         Color[] colors = {Color.BLACK, Color.WHITE, DGREEN, DRED};
 
         for(int size : sizes) {
@@ -65,6 +65,10 @@ public class UIManager extends AssetManager implements UI  {
         skinResources.put("font16w", fonts.get(16).get(Color.WHITE));
         skinResources.put("font16g", fonts.get(16).get(DGREEN));
         skinResources.put("font16r", fonts.get(16).get(DRED));
+        skinResources.put("font14", fonts.get(14).get(Color.BLACK));
+        skinResources.put("font14w", fonts.get(14).get(Color.WHITE));
+        skinResources.put("font15", fonts.get(15).get(Color.BLACK));
+        skinResources.put("font15w", fonts.get(15).get(Color.WHITE));
 
         String[] skinPaths = {
             SkinAssets.defaultSkin,

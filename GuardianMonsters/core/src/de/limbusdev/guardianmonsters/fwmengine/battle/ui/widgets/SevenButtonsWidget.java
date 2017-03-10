@@ -12,7 +12,14 @@ import com.badlogic.gdx.utils.ArrayMap;
 
 import de.limbusdev.guardianmonsters.enums.Element;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.AHUD;
-import de.limbusdev.guardianmonsters.utils.Constant;
+
+import static de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleHUDTextButton.BOTTOMLEFT;
+import static de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleHUDTextButton.BOTTOMRIGHT;
+import static de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleHUDTextButton.CENTER;
+import static de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleHUDTextButton.LEFT;
+import static de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleHUDTextButton.RIGHT;
+import static de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleHUDTextButton.TOPLEFT;
+import static de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleHUDTextButton.TOPRIGHT;
 
 public class SevenButtonsWidget extends BattleWidget {
 
@@ -21,8 +28,8 @@ public class SevenButtonsWidget extends BattleWidget {
     private CallbackHandler callbackHandler;
     protected Skin skin;
 
-    public SevenButtonsWidget (final AHUD hud, Skin skin, CallbackHandler callbackHandler,
-                               int[] buttonOrder) {
+    public SevenButtonsWidget (
+        final AHUD hud, Skin skin, CallbackHandler callbackHandler, int[] buttonOrder) {
 
         super(hud);
         this.skin = skin;
@@ -34,33 +41,25 @@ public class SevenButtonsWidget extends BattleWidget {
         buttons = new ArrayMap<>();
 
         // Ability Buttons
-        TextButton tb = new BattleHUDTextButton("", skin, BattleHUDTextButton.LEFT, Element.NONE);
-        buttons.put(buttonOrder[0],tb);
+        int[] positions = {
+            LEFT,
+            TOPLEFT,
+            BOTTOMLEFT,
+            CENTER,
+            TOPRIGHT,
+            BOTTOMRIGHT,
+            RIGHT
+        };
 
-        tb = new BattleHUDTextButton("", skin, BattleHUDTextButton.TOPLEFT, Element.NONE);
-        buttons.put(buttonOrder[1],tb);
-
-        tb = new BattleHUDTextButton("", skin, BattleHUDTextButton.BOTTOMLEFT, Element.NONE);
-        buttons.put(buttonOrder[2],tb);
-
-        tb = new BattleHUDTextButton("", skin, BattleHUDTextButton.CENTER, Element.NONE);
-        buttons.put(buttonOrder[3],tb);
-
-        tb = new BattleHUDTextButton("", skin, BattleHUDTextButton.TOPRIGHT, Element.NONE);
-        buttons.put(buttonOrder[4],tb);
-
-        tb = new BattleHUDTextButton("", skin, BattleHUDTextButton.BOTTOMRIGHT, Element.NONE);
-        buttons.put(buttonOrder[5],tb);
-
-        tb = new BattleHUDTextButton("", skin, BattleHUDTextButton.RIGHT, Element.NONE);
-        buttons.put(buttonOrder[6],tb);
+        TextButton tb;
+        for(int i : positions) {
+            tb = new BattleHUDTextButton("", skin, i, Element.NONE);
+            buttons.put(buttonOrder[i],tb);
+            addActor(tb);
+        }
 
         this.callbackHandler = callbackHandler;
         initCallbackHandler();
-
-        for(TextButton b : buttons.values()) {
-            addActor(b);
-        }
 
     }
 

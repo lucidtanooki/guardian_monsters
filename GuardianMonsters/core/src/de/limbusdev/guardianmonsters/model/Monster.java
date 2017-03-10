@@ -63,7 +63,7 @@ public class Monster extends Observable {
         BaseStat base = MonsterDB.singleton().getStatusInfos().get(ID).baseStat;
         this.pStr = pStrFull = base.basePhysStrength;
         this.HPfull = base.baseHP;
-        this.HP = base.baseHP/2;
+        this.HP = base.baseHP;
         this.mStr = mStrFull = base.baseMagStrength;
         this.MP = MPfull = base.baseMP;
         this.pDefFull = pDef = base.basePhysDefense;

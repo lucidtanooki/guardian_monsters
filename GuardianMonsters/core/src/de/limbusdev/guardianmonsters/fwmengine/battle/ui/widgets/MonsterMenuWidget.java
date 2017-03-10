@@ -2,10 +2,12 @@ package de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.ArrayMap;
 
 import de.limbusdev.guardianmonsters.data.BundleAssets;
+import de.limbusdev.guardianmonsters.enums.Element;
 import de.limbusdev.guardianmonsters.fwmengine.battle.control.BattleSystem;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.AHUD;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
@@ -39,13 +41,15 @@ public class MonsterMenuWidget extends SevenButtonsWidget {
         for(int key : team.keys()) {
             if(key > 6) break;
             Monster m = team.get(key);
-            ButtonWithImage bwi = new ButtonWithImage(
+            TextButton bwi = new BattleHUDTextButton(
+                Services.getL18N().l18n(BundleAssets.MONSTERS).get(MonsterDB.singleton().getNameById(m.ID)),
+                skin, key, Element.AIR
+            );
+                new ButtonWithImage(
                 Services.getL18N().l18n(BundleAssets.MONSTERS).get(MonsterDB.singleton().getNameById(m.ID)),
                 skin,
                 "tb-attack-air");
 
-            TextureRegion miniSprite = Services.getMedia().getMonsterMiniSprite(m.ID);
-            bwi.setChildImage(new TextureRegionDrawable(miniSprite));
             replaceButton(bwi,key);
 
             if(m.getHP() > 0 && !inBattle.containsValue(m,false)) {

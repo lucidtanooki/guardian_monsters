@@ -19,8 +19,8 @@ public class BattleFactory {
     /* ........................................................................... CONSTRUCTOR .. */
 
     private BattleFactory() {
-        this.monsters = new ArrayMap<Integer, Monster>();
-        for(int i = 1; i<= 9; i++) {
+        this.monsters = new ArrayMap<>();
+        for(int i = 1; i<= 33; i++) {
             System.out.println("Creating Monster Nr. " + i);
             createMonster(i);
         }

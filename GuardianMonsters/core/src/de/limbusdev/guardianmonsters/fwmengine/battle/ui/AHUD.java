@@ -26,7 +26,7 @@ public abstract class AHUD {
         this.skin = skin;
         stage.setDebugAll(Constant.DEBUGGING_ON);
 
-        stages.add(stage);
+        stages.insert(0,stage);
     }
 
     public void draw() {
@@ -67,6 +67,6 @@ public abstract class AHUD {
     }
 
     public void addAddtitionalStage(Stage stage) {
-        stages.add(stage);
+        stages.insert(0,stage);
     }
 }

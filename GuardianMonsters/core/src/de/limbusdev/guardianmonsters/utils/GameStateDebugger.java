@@ -131,37 +131,7 @@ public class GameStateDebugger {
         oppTeam.monsters.put(1,BattleFactory.getInstance().createMonster(5));
         oppTeam.monsters.put(2,BattleFactory.getInstance().createMonster(6));
 
-        BattleSystem bs = new BattleSystem(heroTeam.monsters, oppTeam.monsters, new BattleSystem.CallbackHandler() {
-            @Override
-            public void onDefense(Monster defensiveMonster) {
-
-            }
-
-            @Override
-            public void onMonsterKilled(Monster m) {
-                // TODO
-            }
-
-            @Override
-            public void onQueueUpdated() {
-                // TODO
-            }
-
-            @Override
-            public void onAttack(Monster attacker, Monster target, Ability attack, AttackCalculationReport rep) {
-                // TODO
-            }
-
-            @Override
-            public void onPlayersTurn() {
-                // TODO
-            }
-
-            @Override
-            public void onBattleEnds(boolean winnerSide) {
-                // TODO
-            }
-        });
+        BattleSystem bs = new BattleSystem(heroTeam.monsters, oppTeam.monsters, new BattleSystem.CallbackHandler() {});
 
         boolean enemyFit = true;
         while(enemyFit) {

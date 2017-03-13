@@ -163,6 +163,10 @@ public class BattleAnimationWidget extends BattleWidget implements ObservableWid
         clickListener.onHitAnimationComplete();
     }
 
+    public void animateItemUsage() {
+        clickListener.onHitAnimationComplete();
+    }
+
     /**
      * Animate an ability of the given monster
      * @param attPos    position of attacker

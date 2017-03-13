@@ -52,6 +52,8 @@ public class Monster extends Observable {
     public int pDefFull, pDef;
     public int mDefFull, mDef;
 
+    public LevelUpReport levelUpReport;
+
     /* ........................................................................... CONSTRUCTOR .. */
 
     public Monster(int ID) {
@@ -93,6 +95,11 @@ public class Monster extends Observable {
             counter++;
         }
 
+        levelUpReport = new LevelUpReport(
+            HPfull, MPfull, pStrFull, pDefFull, mStrFull, mDefFull, SpeedFull,
+            HPfull, MPfull, pStrFull, pDefFull, mStrFull, mDefFull, SpeedFull,
+            1,1);
+
     }
     /* ............................................................................... METHODS .. */
 
@@ -108,17 +115,7 @@ public class Monster extends Observable {
 
         // Increase Level
         if(this.exp >= expAvailableInThisLevel()) {
-            this.exp -= expAvailableInThisLevel();
-            level++;
-            System.out.println("Reached Level " + level);
-            ans = true;
-            this.pStr +=1;
-            this.HPfull+=2;
-            this.MPfull+=1;
-            this.mStr +=1;
-            this.pDefFull +=1;
-            this.mDefFull +=1;
-            this.abilityLevels++;
+            ans = doLevelUp();
         }
         System.out.println("EXP: " + this.exp);
 
@@ -136,6 +133,35 @@ public class Monster extends Observable {
         // TODO
     }
 
+    private boolean doLevelUp() {
+
+        levelUpReport = new LevelUpReport(
+            HPfull, MPfull, pStrFull, pDefFull, mStrFull, mDefFull, SpeedFull,
+            HPfull+2, MPfull+1, pStrFull+1, pDefFull+1, mStrFull+1, mDefFull+1, SpeedFull+1,
+            level, level+1
+        );
+
+        boolean ans;
+        this.exp -= expAvailableInThisLevel();
+        System.out.println("Reached Level " + level);
+        ans = true;
+        this.abilityLevels++;
+
+        applyLevelUp(levelUpReport);
+
+        return ans;
+    }
+
+    private void applyLevelUp(LevelUpReport levelUpReport) {
+        HPfull = levelUpReport.newHP;
+        MPfull = levelUpReport.newMP;
+        pStrFull = levelUpReport.newPStr;
+        pDefFull = levelUpReport.newPDef;
+        mStrFull = levelUpReport.newMStr;
+        mDefFull = levelUpReport.newMDef;
+        SpeedFull = levelUpReport.newSpeed;
+        level = levelUpReport.newLevel;
+    }
 
 
     @Override
@@ -437,5 +463,32 @@ public class Monster extends Observable {
             }
         }
         activeAbilities.put(slot, abilityGraph.learntAbilities.get(learntAbilityNumber));
+    }
+
+    public static class LevelUpReport {
+        public int oldHP, oldMP, oldPStr, oldPDef, oldMStr, oldMDef, oldSpeed;
+        public int newHP, newMP, newPStr, newPDef, newMStr, newMDef, newSpeed;
+        public int oldLevel, newLevel;
+
+        public LevelUpReport(int oldHP, int oldMP, int oldPStr, int oldPDef, int oldMStr, int oldMDef, int oldSpeed,
+                             int newHP, int newMP, int newPStr, int newPDef, int newMStr, int newMDef, int newSpeed,
+                             int oldLevel, int newLevel) {
+            this.oldHP = oldHP;
+            this.oldMP = oldMP;
+            this.oldPStr = oldPStr;
+            this.oldPDef = oldPDef;
+            this.oldMStr = oldMStr;
+            this.oldMDef = oldMDef;
+            this.oldSpeed = oldSpeed;
+            this.newHP = newHP;
+            this.newMP = newMP;
+            this.newPStr = newPStr;
+            this.newPDef = newPDef;
+            this.newMStr = newMStr;
+            this.newMDef = newMDef;
+            this.newSpeed = newSpeed;
+            this.oldLevel = oldLevel;
+            this.newLevel = newLevel;
+        }
     }
 }

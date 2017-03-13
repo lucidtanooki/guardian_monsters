@@ -61,10 +61,10 @@ public class BattleSystem extends Observable {
         aiPlayer = new AIPlayer();
 
         // Use two queues, to see the coming round in the widget
-        currentRound = new Array<Monster>();
-        nextRound = new Array<Monster>();
-        leftInBattle = new ArrayMap<Integer,Monster>();
-        rightInBattle = new ArrayMap<Integer,Monster>();
+        currentRound = new Array<>();
+        nextRound = new Array<>();
+        leftInBattle = new ArrayMap<>();
+        rightInBattle = new ArrayMap<>();
 
         addFitMonstersToBattleField(leftTeam,LEFT);
         addFitMonstersToBattleField(rightTeam,RIGHT);
@@ -146,6 +146,13 @@ public class BattleSystem extends Observable {
     public void defend() {
         latestAttackReport = MonsterManager.calcDefense(getActiveMonster());
         callbackHandler.onDefense(getActiveMonster());
+    }
+
+    /**
+     * Monster does nothing. Use when e.g. using an item.
+     */
+    public void doNothing() {
+        callbackHandler.onDoingNothing(getActiveMonster());
     }
 
     public void nextMonster() {
@@ -359,12 +366,13 @@ public class BattleSystem extends Observable {
     }
 
     // INNER INTERFACE
-    public interface CallbackHandler {
-        void onMonsterKilled(Monster m);
-        void onQueueUpdated();
-        void onAttack(Monster attacker, Monster target, Ability ability, AttackCalculationReport rep);
-        void onDefense(Monster defensiveMonster);
-        void onPlayersTurn();
-        void onBattleEnds(boolean winnerSide);
+    public static abstract class CallbackHandler {
+        public void onMonsterKilled(Monster m){}
+        public void onQueueUpdated(){}
+        public void onAttack(Monster attacker, Monster target, Ability ability, AttackCalculationReport rep){}
+        public void onDefense(Monster defensiveMonster){}
+        public void onPlayersTurn(){}
+        public void onBattleEnds(boolean winnerSide){}
+        public void onDoingNothing(Monster monster){}
     }
 }

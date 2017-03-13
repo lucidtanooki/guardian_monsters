@@ -19,11 +19,13 @@ import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleActionMen
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleAnimationWidget;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleQueueWidget;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.InfoLabelWidget;
+import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.ItemChoice;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.MonsterMenuWidget;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.SevenButtonsWidget;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.TargetMenuWidget;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.WidgetObserver;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.items.ItemListWidget;
+import de.limbusdev.guardianmonsters.fwmengine.menus.ui.team.QuickOverviewGuardianList;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TeamComponent;
 import de.limbusdev.guardianmonsters.enums.ButtonIDs;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
@@ -34,6 +36,7 @@ import de.limbusdev.guardianmonsters.model.Monster;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleMainMenuWidget;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleStatusOverviewWidget;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.ObservableWidget;
+import de.limbusdev.guardianmonsters.model.MonsterDB;
 import de.limbusdev.guardianmonsters.utils.Constant;
 
 /**
@@ -239,27 +242,7 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
 
             @Override
             public void onBagButton() {
-                final Group bag = new Group();
-                bag.setSize(Constant.WIDTH, Constant.HEIGHT);
-                bag.setPosition(0,0,Align.bottomLeft);
-                Image overlay = new Image(Services.getUI().getInventorySkin().getDrawable("black-a80"));
-                overlay.setSize(Constant.WIDTH, Constant.HEIGHT);
-                overlay.setPosition(0,0,Align.bottomLeft);
-                bag.addActor(overlay);
-
-                ItemListWidget.ClickListener clicks = new ItemListWidget.ClickListener() {
-                    @Override
-                    public void onChoosingItem(Item item) {
-                        // TODO use item on monster
-                        bag.remove();
-                    }
-                };
-
-                ItemListWidget itemList = new ItemListWidget(Services.getUI().getInventorySkin(), inventory, clicks, Item.CATEGORY.MEDICINE);
-                itemList.setSize(140,Constant.HEIGHT);
-                itemList.setPosition(Constant.WIDTH/2-70, 0, Align.bottomLeft);
-                bag.addActor(itemList);
-                stage.addActor(bag);
+                stage.addActor(new ItemChoice(Services.getUI().getInventorySkin(), inventory, leftTeam.monsters, battleSystem));
             }
 
             @Override
@@ -337,6 +320,16 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
             }
 
             @Override
+            public void onDoingNothing(Monster monster) {
+                battleStateSwitcher.toAnimation();
+                infoLabelWidget.setWholeText(
+                    Services.getL18N().l18n(BundleAssets.BATTLE).format("batt_item_usage",
+                    Services.getL18N().l18n(BundleAssets.MONSTERS).get(MonsterDB.singleton().getNameById(monster.ID))));
+                infoLabelWidget.animateTextAppearance();
+                animationWidget.animateItemUsage();
+            }
+
+            @Override
             public void onPlayersTurn() {
                 battleStateSwitcher.toActionMenu();
             }
@@ -400,70 +393,25 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
 
         backToActionMenuCallbacks = new BattleActionMenuWidget.ClickListener() {
             @Override
-            public void onMonsterButton() {
-                // not needed
-            }
-
-            @Override
-            public void onBagButton() {
-                // not needed
-            }
-
-            @Override
             public void onBackButton() {
                 System.out.println("BackToActionMenuButtons: onBackButton()");
                 battleStateSwitcher.toActionMenu();
-            }
-
-            @Override
-            public void onExtraButton() {
-                // not needed
             }
         };
 
         escapeSuccessCallbacks = new BattleActionMenuWidget.ClickListener() {
             @Override
-            public void onMonsterButton() {
-                // not needed
-            }
-
-            @Override
-            public void onBagButton() {
-                // not needed
-            }
-
-            @Override
             public void onBackButton() {
                 System.out.println("EscapeSuccessButtons: onBackButton()");
                 goToPreviousScreen();
-            }
-
-            @Override
-            public void onExtraButton() {
-                // not needed
             }
         };
 
         escapeFailCallbacks = new BattleActionMenuWidget.ClickListener() {
             @Override
-            public void onMonsterButton() {
-                // not needed
-            }
-
-            @Override
-            public void onBagButton() {
-                // not needed
-            }
-
-            @Override
             public void onBackButton() {
                 System.out.println("EscapeFailButtons: onBackButton()");
                 battleSystem.continueBattle();
-            }
-
-            @Override
-            public void onExtraButton() {
-                // not needed
             }
         };
 

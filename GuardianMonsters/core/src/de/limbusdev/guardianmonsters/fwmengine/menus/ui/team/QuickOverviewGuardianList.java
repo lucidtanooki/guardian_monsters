@@ -75,7 +75,12 @@ public class QuickOverviewGuardianList extends Group {
         }
     }
 
+
     public interface CallbackHandler {
+        /**
+         * @param i
+         * @return if the list should stay opened
+         */
         boolean onButton(int i);
     }
 

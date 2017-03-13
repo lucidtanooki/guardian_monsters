@@ -16,6 +16,7 @@ import java.util.Observer;
 
 import de.limbusdev.guardianmonsters.model.Inventory;
 import de.limbusdev.guardianmonsters.model.Item;
+import de.limbusdev.guardianmonsters.model.Monster;
 
 /**
  * Created by georg on 22.02.17.

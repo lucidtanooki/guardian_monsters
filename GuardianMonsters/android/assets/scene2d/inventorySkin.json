@@ -1,13 +1,13 @@
 {
   "com.badlogic.gdx.graphics.Color": {
-	  "green":  { "a": 1, "b": 0,   "g": 1,   "r": 0 },
-	  "white":  { "a": 1, "b": 1,   "g": 1,   "r": 1 },
-	  "red":    { "a": 1, "b": 0,   "g": 0,   "r": 1 },
-	  "black":  { "a": 1, "b": 0,   "g": 0,   "r": 0 },
-	  "grey":   { "a": 1, "b": 0.2, "g": 0.2, "r": 0.2 }
+    "green":  { "a": 1, "b": 0,   "g": 1,   "r": 0 },
+    "white":  { "a": 1, "b": 1,   "g": 1,   "r": 1 },
+    "red":    { "a": 1, "b": 0,   "g": 0,   "r": 1 },
+    "black":  { "a": 1, "b": 0,   "g": 0,   "r": 0 },
+    "grey":   { "a": 1, "b": 0.2, "g": 0.2, "r": 0.2 }
   },
 
-	"com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle": {
+  "com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle": {
     "b-toolbar-exit":           { "down": "toolBarButton-exit-down",         "up": "toolBarButton-exit-up"},
     "b-toolbar-team":           { "down": "toolBarButton-team-down",         "up": "toolBarButton-team-up",                 "checked": "toolBarButton-team-down"},
     "b-toolbar-equip":          { "down": "toolBarButton-equip-down",        "up": "toolBarButton-equip-up",                "checked": "toolBarButton-equip-down"},
@@ -41,13 +41,13 @@
     "board-equipment-enabled":      {"up": "board-equip-enabled",                 "down": "board-equip-enabled-selected",       "checked": "board-equip-enabled-selected"},
     "board-equipment-active":       {"up": "board-equip-active",                  "down": "board-equip-active-selected",        "checked": "board-equip-active-selected"},
 
-      "board-metamorphosis-disabled":     {"up": "board-metamorphosis-disabled",                "down": "board-metamorphosis-disabled-selected",      "checked": "board-metamorphosis-disabled-selected"},
-      "board-metamorphosis-enabled":      {"up": "board-metamorphosis-enabled",                 "down": "board-metamorphosis-enabled-selected",       "checked": "board-metamorphosis-enabled-selected"},
-      "board-metamorphosis-active":       {"up": "board-metamorphosis-active",                  "down": "board-metamorphosis-active-selected",        "checked": "board-metamorphosis-active-selected"},
+    "board-metamorphosis-disabled":     {"up": "board-metamorphosis-disabled",                "down": "board-metamorphosis-disabled-selected",      "checked": "board-metamorphosis-disabled-selected"},
+    "board-metamorphosis-enabled":      {"up": "board-metamorphosis-enabled",                 "down": "board-metamorphosis-enabled-selected",       "checked": "board-metamorphosis-enabled-selected"},
+    "board-metamorphosis-active":       {"up": "board-metamorphosis-active",                  "down": "board-metamorphosis-active-selected",        "checked": "board-metamorphosis-active-selected"},
 
-      "button-next": {"up": "button-next-up", "down": "button-next-down"},
-      "button-previous": {"up": "button-previous-up", "down": "button-previous-down"}
-	},
+    "button-next": {"up": "button-next-up", "down": "button-next-down"},
+    "button-previous": {"up": "button-previous-up", "down": "button-previous-down"}
+  },
 
 
   "com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle": {
@@ -58,7 +58,7 @@
     "item-button-burgund":    {"font": "font16w", "down": "label-bg-burgund-down",   "up": "label-bg-burgund",   "checked": "label-bg-burgund-down"}
   },
 
-	"com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle": {
+  "com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle": {
     "default":    {"font": "font16"},
     "green":      {"font": "font16g"},
     "red":        {"font": "font16r"},
@@ -80,7 +80,7 @@
     "elem-spirit":      {"font": "font16",  "background": "button-element-spirit"},
     "elem-demon":       {"font": "font16w", "background": "button-element-demon"},
     "elem-lindworm":    {"font": "font16w", "background": "button-element-lindworm"},
-      "elem-none":    {"font": "font16w", "background": "button-element-none"}
+    "elem-none":    {"font": "font16w", "background": "button-element-none"}
   },
 
   "com.badlogic.gdx.scenes.scene2d.ui.List$ListStyle": {

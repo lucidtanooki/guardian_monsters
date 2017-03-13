@@ -28,10 +28,11 @@ public class SevenButtonsWidget extends BattleWidget {
     private CallbackHandler callbackHandler;
     protected Skin skin;
 
-    public SevenButtonsWidget (
-        final AHUD hud, Skin skin, CallbackHandler callbackHandler, int[] buttonOrder) {
+    public static final int[] ABILITY_ORDER = {5,3,1,0,4,2,6};
 
-        super(hud);
+    public SevenButtonsWidget (Skin skin, CallbackHandler callbackHandler, int[] buttonOrder) {
+
+        super();
         this.skin = skin;
 
         if(buttonOrder.length < 7) {
@@ -143,6 +144,6 @@ public class SevenButtonsWidget extends BattleWidget {
 
     // INNER INTERFACE
     public interface CallbackHandler {
-        public void onButtonNr(int nr);
+        void onButtonNr(int nr);
     }
 }

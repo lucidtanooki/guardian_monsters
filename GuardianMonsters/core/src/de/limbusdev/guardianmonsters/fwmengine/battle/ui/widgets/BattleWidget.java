@@ -18,11 +18,9 @@ import de.limbusdev.guardianmonsters.fwmengine.battle.ui.AHUD;
 public abstract class BattleWidget extends WidgetGroup {
 
     private Runnable runnableRemove;
-    private AHUD hud;
 
-    public BattleWidget (final AHUD hud) {
+    public BattleWidget () {
         super();
-        this.hud = hud;
 
         // Controller
         runnableRemove = new Runnable() {

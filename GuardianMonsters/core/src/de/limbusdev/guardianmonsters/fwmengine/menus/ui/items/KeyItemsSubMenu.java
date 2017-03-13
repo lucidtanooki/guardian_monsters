@@ -66,5 +66,8 @@ public class KeyItemsSubMenu extends AInventorySubMenu {
     }
 
 
-
+    @Override
+    public void refresh() {
+        // Do nothing
+    }
 }

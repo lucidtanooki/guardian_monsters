@@ -62,6 +62,17 @@ public class Ability {
         this.MPcost = MPcost;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof Ability) {
+            Ability a = (Ability) obj;
+            if(a.ID == this.ID && a.element.equals(this.element)) return true;
+            else return false;
+        } else {
+            return false;
+        }
+    }
+
     /* ............................................................................... METHODS .. */
     
     /* ..................................................................... GETTERS & SETTERS .. */

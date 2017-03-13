@@ -29,7 +29,7 @@ public class InventoryScreen implements Screen, MainToolBar.Controller {
 
     private Stage stage;
     private Skin skin;
-    private ArrayMap<String,Group> views;
+    private ArrayMap<String,AInventorySubMenu> views;
 
     public InventoryScreen(TeamComponent team, Inventory inventory) {
         FitViewport fit = new FitViewport(Constant.WIDTH, Constant.HEIGHT);
@@ -45,6 +45,7 @@ public class InventoryScreen implements Screen, MainToolBar.Controller {
         views.put("items",      new ItemsSubMenu(skin, inventory, team.monsters));
         views.put("ability",    new AbilityMapSubMenu(skin, team.monsters));
         views.put("key",        new KeyItemsSubMenu(skin, inventory));
+        views.put("abilityChoice", new AbilityChoiceSubMenu(skin, team.monsters));
 
         stage.addActor(views.get("team"));
     }
@@ -119,7 +120,7 @@ public class InventoryScreen implements Screen, MainToolBar.Controller {
     @Override
     public void onTeamButton() {
         removeSubMenus();
-        ((TeamSubMenu)views.get("team")).refresh();
+        views.get("team").refresh();
         stage.addActor(views.get("team"));
     }
 
@@ -139,6 +140,13 @@ public class InventoryScreen implements Screen, MainToolBar.Controller {
     public void onKeyButton() {
         removeSubMenus();
         stage.addActor(views.get("key"));
+    }
+
+    @Override
+    public void onAbilityChoiceButton() {
+        removeSubMenus();
+        views.get("abilityChoice").refresh();
+        stage.addActor(views.get("abilityChoice"));
     }
 
     @Override

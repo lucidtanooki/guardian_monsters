@@ -22,8 +22,8 @@ public class MonsterMenuWidget extends SevenButtonsWidget {
 
     private static int order[] = {0,1,2,3,4,5,6};
 
-    public MonsterMenuWidget(AHUD hud, Skin skin, CallbackHandler callbackHandler) {
-        super(hud, skin, callbackHandler, order);
+    public MonsterMenuWidget(Skin skin, CallbackHandler callbackHandler) {
+        super(skin, callbackHandler, order);
     }
 
     public void init(BattleSystem battleSystem, boolean side) {

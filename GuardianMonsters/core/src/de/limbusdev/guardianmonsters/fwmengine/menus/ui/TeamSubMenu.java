@@ -20,7 +20,7 @@ import de.limbusdev.guardianmonsters.model.Monster;
 import de.limbusdev.guardianmonsters.utils.Constant;
 
 /**
- * Created by georg on 16.02.17.
+ * Created by Georg Eckert 2017
  */
 
 public class TeamSubMenu extends AInventorySubMenu {
@@ -165,6 +165,7 @@ public class TeamSubMenu extends AInventorySubMenu {
         }
     }
 
+    @Override
     public void refresh() {
         showGuardianInformation(circleWidget.getCurrentPosition());
     }

@@ -79,6 +79,17 @@ public class MainToolBar extends Group {
         });
         addActor(ability);
 
+        // .......................................................................... ABILITY CHOICE
+        ImageButton abilityChoice = new ImageButton(skin, "b-toolbar-ability-choice");
+        abilityChoice.setPosition((64+4)*4+2,4, Align.bottomLeft);
+        abilityChoice.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                callbacks.onAbilityChoiceButton();
+            }
+        });
+        addActor(abilityChoice);
+
         // .................................................................................... EXIT
         ImageButton exit = new ImageButton(skin, "b-toolbar-exit");
         exit.setPosition(428-2,4, Align.bottomRight);
@@ -91,7 +102,7 @@ public class MainToolBar extends Group {
         });
         addActor(exit);
 
-        buttonGroup = new ButtonGroup<>(team,items,ability,key);
+        buttonGroup = new ButtonGroup<>(team,items,ability,key,abilityChoice);
         buttonGroup.setMaxCheckCount(1);
         buttonGroup.setMinCheckCount(1);
 
@@ -102,6 +113,7 @@ public class MainToolBar extends Group {
         void onItemsButton();
         void onAbilityButton();
         void onKeyButton();
+        void onAbilityChoiceButton();
         void onExitButton();
     }
 }

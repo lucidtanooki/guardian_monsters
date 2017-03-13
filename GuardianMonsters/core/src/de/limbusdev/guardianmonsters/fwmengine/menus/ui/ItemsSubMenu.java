@@ -86,4 +86,9 @@ public class ItemsSubMenu extends AInventorySubMenu
     public void onChoosingItem(Item item) {
         showItemDetailView(item);
     }
+
+    @Override
+    public void refresh() {
+        // Do nothing
+    }
 }

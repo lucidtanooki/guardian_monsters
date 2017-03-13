@@ -20,8 +20,8 @@ public class InfoLabelWidget extends BattleWidget {
     private String wholeText;
     private String currentText;
 
-    public InfoLabelWidget(AHUD hud, Skin skin) {
-        super(hud);
+    public InfoLabelWidget(Skin skin) {
+        super();
 
         infoBGImg = new Image(skin.getDrawable("label"));
         infoBGImg.setSize(372* Constant.zoom,62* Constant.zoom);

@@ -18,14 +18,12 @@ public class AttackMenuWidget extends SevenButtonsWidget {
      *
      * @param skin battle action UI skin
      */
-    public AttackMenuWidget(final AHUD hud, Skin skin, SevenButtonsWidget.CallbackHandler callbackHandler) {
-        super(hud, skin, callbackHandler, order);
+    public AttackMenuWidget(Skin skin, SevenButtonsWidget.CallbackHandler callbackHandler) {
+        super(skin, callbackHandler, order);
     }
 
     public void init(Monster monster) {
 
-        // get monsters attacks
-        Array<Ability> attacks = monster.abilityGraph.learntAbilities.values().toArray();
 
         // Set all buttons inactive
         for(Integer i : getButtons().keys()) {
@@ -33,14 +31,17 @@ public class AttackMenuWidget extends SevenButtonsWidget {
         }
 
         // for every attack, activate a button
-        for(int i=0; i<attacks.size && i < 7; i++) {
-            Ability att = attacks.get(i);
-            setButtonStyle(i,skin, SkinAssets.attackButtonStyle(att.element));
-            String mpCostString = (att.MPcost > 0) ? (" " + Integer.toString(att.MPcost)) : "";
-            setButtonText(i,Services.getL18N().l18n(BundleAssets.ATTACKS).get(att.name) + mpCostString);
+        for(int i=0; i<7; i++) {
+            Ability attack = monster.getActiveAbility(i);
 
-            // Disable Ability, when monster does not have enough MP for it
-            if(att.MPcost <= monster.getMP()) enableButton(i);
+            if(attack != null) {
+                setButtonStyle(i,skin, SkinAssets.attackButtonStyle(attack.element));
+                String mpCostString = (attack.MPcost > 0) ? (" " + Integer.toString(attack.MPcost)) : "";
+                setButtonText(i,Services.getL18N().l18n(BundleAssets.ATTACKS).get(attack.name) + mpCostString);
+
+                // Disable Ability, when monster does not have enough MP for it
+                if(attack.MPcost <= monster.getMP()) enableButton(i);
+            }
         }
     }
 }

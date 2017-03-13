@@ -22,8 +22,8 @@ public class BattleActionMenuWidget extends BattleWidget {
      *
      * @param skin battle action UI skin
      */
-    public BattleActionMenuWidget(final AHUD hud, Skin skin, CallbackHandler callbackHandler) {
-        super(hud);
+    public BattleActionMenuWidget(Skin skin, CallbackHandler callbackHandler) {
+        super();
 
         this.callbackHandler = callbackHandler;
 

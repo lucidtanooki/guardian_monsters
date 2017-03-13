@@ -34,6 +34,8 @@ public class AbilityDetailWidget extends Container {
     private Image abilityType;
     private ImageButton learn;
     private int nodeID;
+    private Label element;
+    private Group group;
 
     public Controller callbacks;
 
@@ -52,7 +54,7 @@ public class AbilityDetailWidget extends Container {
         setBackground(skin.getDrawable("label-bg-sandstone"));
         setSize(170,64);
 
-        Group group = new Group();
+        group = new Group();
         group.setSize(160,51);
         group.setPosition(5,6,Align.bottomLeft);
         setActor(group);
@@ -86,6 +88,7 @@ public class AbilityDetailWidget extends Container {
     // .............................................................................. INITIALIZATION
 
     private void setActorVisibility(AbilityGraph.NodeType type, boolean learnable, boolean enoughFreeLevels) {
+        if(element != null) element.remove();
         name.setVisible(false);
         damage.setVisible(false);
         abilityType.setVisible(false);
@@ -108,7 +111,9 @@ public class AbilityDetailWidget extends Container {
         learn.setVisible(learnable && enoughFreeLevels);
     }
 
+
     public void init(Monster monster, int nodeID) {
+        if(element != null) element.remove();
         if(monster.abilityGraph.learnsSomethingAt(nodeID)) {
             if(monster.abilityGraph.learnsAbilityAt(nodeID)) {
                 init(monster.abilityGraph.learnableAbilities.get(nodeID), nodeID, monster.abilityGraph, monster.getAbilityLevels() > 0);
@@ -140,8 +145,12 @@ public class AbilityDetailWidget extends Container {
      */
     private void init(Ability ability, int nodeID, AbilityGraph graph, boolean enoughFreeLvls) {
         this.nodeID = nodeID;
+        initAbilityDetails(ability, (graph.isNodeLearnable(nodeID) && enoughFreeLvls));
+    }
 
-        setActorVisibility(AbilityGraph.NodeType.ABILITY, graph.isNodeLearnable(nodeID), enoughFreeLvls);
+    public void initAbilityDetails(Ability ability, boolean showButton) {
+        if(element != null) element.remove();
+        setActorVisibility(AbilityGraph.NodeType.ABILITY, showButton, showButton);
 
         if(ability == null) {
             name.setText("Empty");
@@ -151,6 +160,12 @@ public class AbilityDetailWidget extends Container {
             damage.setText(Integer.toString(ability.damage));
             Drawable drawable = ability.attackType == AttackType.PHYSICAL ? skin.getDrawable("stats-symbol-pstr") : skin.getDrawable("stats-symbol-mstr");
             abilityType.setDrawable(drawable);
+            String elem = ability.element.toString().toLowerCase();
+            String elemName = Services.getL18N().l18n(BundleAssets.ELEMENTS).get("element_" + elem);
+            elemName = elemName.length() < 7 ? elemName : elemName.substring(0,6);
+            element = new Label(elemName, skin, "elem-" + elem);
+            element.setPosition(124,0,Align.bottomRight);
+            group.addActor(element);
         }
     }
 

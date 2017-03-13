@@ -33,10 +33,10 @@ public class GameStateDebugger {
     private void setUpTestInventory() {
         TeamComponent herTeam = new TeamComponent();
         Monster mon = BattleFactory.getInstance().createMonster(1);
-        mon.abilityGraph.activateNode(0);
         mon.abilityGraph.activateNode(1);
         mon.abilityGraph.activateNode(5);
         mon.abilityGraph.activateNode(9);
+        mon.abilityGraph.activateNode(13);
         mon.abilityGraph.activateNode(17);
         mon.abilityGraph.activateNode(21);
         mon.abilityGraph.activateNode(2);
@@ -84,6 +84,8 @@ public class GameStateDebugger {
         heroTeam.monsters.put(0,BattleFactory.getInstance().createMonster(1));
         heroTeam.monsters.put(1,BattleFactory.getInstance().createMonster(2));
         heroTeam.monsters.put(2,BattleFactory.getInstance().createMonster(3));
+        heroTeam.monsters.get(0).abilityGraph.activateNode(13);
+        heroTeam.monsters.get(0).setActiveAbility(6,1);
         TeamComponent oppTeam = new TeamComponent();
         oppTeam.monsters.put(0,BattleFactory.getInstance().createMonster(4));
         oppTeam.monsters.put(1,BattleFactory.getInstance().createMonster(5));

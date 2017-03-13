@@ -9,9 +9,11 @@ import java.util.Observable;
 
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.AttackCalculationReport;
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.MonsterSpeedComparator;
+import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager;
 import de.limbusdev.guardianmonsters.model.Ability;
 import de.limbusdev.guardianmonsters.model.Monster;
 import de.limbusdev.guardianmonsters.utils.DebugOutput;
+import de.limbusdev.guardianmonsters.utils.GameState;
 
 /**
  * Created by georg on 21.11.16.
@@ -78,7 +80,11 @@ public class BattleSystem extends Observable {
      * @param side
      */
     private void addFitMonstersToBattleField(ArrayMap<Integer,Monster> team, boolean side) {
+        GameState gameState = SaveGameManager.loadSaveGame();
         int teamSize = team.size > 3 ? 3 : team.size;
+        if(side == LEFT && teamSize > gameState.maxTeamSizeInBattle) {
+            teamSize = gameState.maxTeamSizeInBattle;
+        }
         int counter = 0;
         int actualTeamSize = 0;
 
@@ -218,6 +224,9 @@ public class BattleSystem extends Observable {
             Monster m = it.next();
             if (m.getHP() == 0) {
                 it.remove();
+                if(rightTeam.containsValue(m,false)) {
+                    giveEXPtoWinners(m);
+                }
                 callbackHandler.onMonsterKilled(m);
             }
         }
@@ -227,7 +236,21 @@ public class BattleSystem extends Observable {
             Monster m = it.next();
             if (m.getHP() == 0) {
                 it.remove();
+                if(rightTeam.containsValue(m,false)) {
+                    giveEXPtoWinners(m);
+                }
                 callbackHandler.onMonsterKilled(m);
+            }
+        }
+    }
+
+    private void giveEXPtoWinners(Monster defeatedMonster) {
+        for(Monster m : leftInBattle.values()) {
+            if(m.getHP() > 0) {
+                boolean levelUp = m.receiveEXP(MathUtils.round(defeatedMonster.level*1f/m.level*(100*defeatedMonster.level)));
+                if(levelUp) {
+                    callbackHandler.onLevelup(m);
+                }
             }
         }
     }
@@ -318,9 +341,21 @@ public class BattleSystem extends Observable {
             System.out.println("\n### AI's turn ###");
             Monster m = getActiveMonster();
             int att = MathUtils.random(0,m.abilityGraph.learntAbilities.size-1);
-            setChosenTarget(leftInBattle.get(MathUtils.random(0,leftInBattle.size-1)));
+            chooseTarget();
             setChosenAttack(att);
             attack();
+        }
+
+        private void chooseTarget() {
+            boolean foundTarget = false;
+            Monster target;
+            while(!foundTarget) {
+                target = leftInBattle.get(MathUtils.random(0,leftInBattle.size-1));
+                if(target.getHP() > 0) {
+                    foundTarget = true;
+                    setChosenTarget(target);
+                }
+            }
         }
     }
 
@@ -374,5 +409,6 @@ public class BattleSystem extends Observable {
         public void onPlayersTurn(){}
         public void onBattleEnds(boolean winnerSide){}
         public void onDoingNothing(Monster monster){}
+        public void onLevelup(Monster m){}
     }
 }

@@ -12,6 +12,7 @@ public class GameState {
     /* ............................................................................ ATTRIBUTES .. */
     public int x,y,gridx,gridy,map;
     public ArrayMap<Integer,Monster> team;
+    public int maxTeamSizeInBattle;
     /* ........................................................................... CONSTRUCTOR .. */
 
     public GameState(int x, int y, int map) {
@@ -20,12 +21,13 @@ public class GameState {
         this.gridx = x/ Constant.TILE_SIZE;
         this.gridy = y/ Constant.TILE_SIZE;
         this.map = map;
-        this.team = new ArrayMap<Integer, Monster>();
+        this.team = new ArrayMap<>();
+        this.maxTeamSizeInBattle = 1;
     }
 
     public GameState() {
         // ONLY FOR JSON CREATION
-        this.team = new ArrayMap<Integer, Monster>();
+        this.team = new ArrayMap<>();
     }
     /* ............................................................................... METHODS .. */
     

@@ -93,8 +93,6 @@ public class EntityFactory {
         // Add Team
         TeamComponent team = new TeamComponent();
         team.monsters.put(0,BattleFactory.getInstance().createMonster(1));
-        team.monsters.put(1,BattleFactory.getInstance().createMonster(2));
-        team.monsters.put(2,BattleFactory.getInstance().createMonster(3));
         if(restoreSave) {
             team.monsters = gameState.team;
         }

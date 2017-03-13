@@ -25,8 +25,8 @@ public class BattleMainMenuWidget extends BattleWidget {
      *
      * @param skin battle UI skin
      */
-    public BattleMainMenuWidget(AHUD hud, Skin skin, CallbackHandler callbackHandler) {
-        super(hud);
+    public BattleMainMenuWidget(Skin skin, CallbackHandler callbackHandler) {
+        super();
         this.setBounds(0,0, Constant.RES_X, 64);
 
         BattleHUDMenuButton emptyButton = new BattleHUDMenuButton(skin, BattleHUDMenuButton.EMPTY);

@@ -68,6 +68,7 @@ public class AbilityMapSubMenu extends AInventorySubMenu implements Observer,
     /**
      * Takes the currently chosen monster and refreshes the display of remaining levels
      */
+    @Override
     public void refresh() {
         Monster activeMonster = team.get(switcher.getCurrentlyChosen());
         remainingLevels.counter.setText(Integer.toString(activeMonster.getAbilityLevels()));

@@ -25,4 +25,6 @@ public abstract class AInventorySubMenu extends Group {
     public Skin getSkin() {
         return skin;
     }
+
+    public abstract void refresh();
 }

@@ -22,8 +22,8 @@ public class BattleStatusOverviewWidget extends BattleWidget {
 
     private Array<MonsterStateWidget> monsterStateWidgetsLeft, monsterStateWidgetsRight;
 
-    public BattleStatusOverviewWidget(final AHUD hud, Skin skin) {
-        super(hud);
+    public BattleStatusOverviewWidget(Skin skin) {
+        super();
         this.monsterStateWidgetsLeft = new Array<>();
         this.monsterStateWidgetsRight = new Array<>();
 

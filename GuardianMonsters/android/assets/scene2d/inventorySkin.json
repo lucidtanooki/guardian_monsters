@@ -14,6 +14,7 @@
     "b-toolbar-items":          { "down": "toolBarButton-items-down",        "up": "toolBarButton-items-up",                "checked": "toolBarButton-items-down"},
     "b-toolbar-ability":        { "down": "toolBarButton-ability-down",      "up": "toolBarButton-ability-up",              "checked": "toolBarButton-ability-down"},
     "b-toolbar-key":            { "down": "toolBarButton-key-down",          "up": "toolBarButton-key-up",                  "checked": "toolBarButton-key-down"},
+    "b-toolbar-ability-choice": { "down": "toolBarButton-attacks-down",      "up": "toolBarButton-attacks-up",              "checked": "toolBarButton-attacks-down"},
 
     "b-toolbar-side-equip":     { "down": "toolBarButtonSide-equip-down",    "up": "toolBarButtonSide-equip-up",            "checked": "toolBarButtonSide-equip-down"},
     "b-toolbar-side-medicine":  { "down": "toolBarButtonSide-medicine-down", "up": "toolBarButtonSide-medicine-up",         "checked": "toolBarButtonSide-medicine-down"},
@@ -54,7 +55,7 @@
 
 
     "item-button-sandstone":  {"font": "font16",  "down": "label-bg-sandstone-down", "up": "label-bg-sandstone", "checked": "label-bg-sandstone-down", "pressedOffsetY": -1, "checkedOffsetY": -1},
-    "item-button-burgund":    {"font": "font16w",       "down": "label-bg-burgund-down",   "up": "label-bg-burgund",   "checked": "label-bg-burgund-down"}
+    "item-button-burgund":    {"font": "font16w", "down": "label-bg-burgund-down",   "up": "label-bg-burgund",   "checked": "label-bg-burgund-down"}
   },
 
 	"com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle": {
@@ -78,7 +79,8 @@
     "elem-frost":       {"font": "font16w", "background": "button-element-frost"},
     "elem-spirit":      {"font": "font16",  "background": "button-element-spirit"},
     "elem-demon":       {"font": "font16w", "background": "button-element-demon"},
-    "elem-lindworm":    {"font": "font16w", "background": "button-element-lindworm"}
+    "elem-lindworm":    {"font": "font16w", "background": "button-element-lindworm"},
+      "elem-none":    {"font": "font16w", "background": "button-element-none"}
   },
 
   "com.badlogic.gdx.scenes.scene2d.ui.List$ListStyle": {

@@ -26,8 +26,8 @@ public class TargetMenuWidget extends SevenButtonsWidget implements Observer {
 
     private static int[] order = {0,2,1,3,6,5,4};
 
-    public TargetMenuWidget(AHUD hud, Skin skin, CallbackHandler callbackHandler) {
-        super(hud, skin, callbackHandler, order);
+    public TargetMenuWidget(Skin skin, CallbackHandler callbackHandler) {
+        super(skin, callbackHandler, order);
     }
 
     public void init(BattleSystem battleSystem) {

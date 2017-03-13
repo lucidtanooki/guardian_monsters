@@ -30,8 +30,8 @@ public class BattleQueueWidget extends BattleWidget {
 
     private Image bgIndicator;
 
-    public BattleQueueWidget(AHUD hud, Skin skin, int align) {
-        super(hud);
+    public BattleQueueWidget(Skin skin, int align) {
+        super();
         this.align = align;
 
         bgIndicator = new Image(skin.getDrawable("monster-preview-active"));

@@ -167,21 +167,21 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
         addAddtitionalStage(battleAnimationStage);
 
         // Widgets
-        statusWidget      = new BattleStatusOverviewWidget(this, skin);
+        statusWidget      = new BattleStatusOverviewWidget(skin);
 
-        animationWidget   = new BattleAnimationWidget(this, battleAnimationCallbacks);
+        animationWidget   = new BattleAnimationWidget(battleAnimationCallbacks);
         animationWidget.addWidgetObserver(this);
 
-        mainMenu          = new BattleMainMenuWidget(   this, skin, mainMenuCallbacks);
-        actionMenu        = new BattleActionMenuWidget( this, skin, battleActionCallbacks);
-        attackMenu        = new AttackMenuWidget(       this, skin, attackMenuCallbacks);
-        targetMenuWidget  = new TargetMenuWidget(       this, skin, targetMenuCallbacks);
-        monsterMenuWidget = new MonsterMenuWidget(      this, skin, monsterMenuCallbacks);
+        mainMenu          = new BattleMainMenuWidget(skin, mainMenuCallbacks);
+        actionMenu        = new BattleActionMenuWidget(skin, battleActionCallbacks);
+        attackMenu        = new AttackMenuWidget(skin, attackMenuCallbacks);
+        targetMenuWidget  = new TargetMenuWidget(skin, targetMenuCallbacks);
+        monsterMenuWidget = new MonsterMenuWidget(skin, monsterMenuCallbacks);
 
-        battleQueueWidget = new BattleQueueWidget(this, skin, Align.bottomLeft);
+        battleQueueWidget = new BattleQueueWidget(skin, Align.bottomLeft);
         battleQueueWidget.setPosition(1,65, Align.bottomLeft);
 
-        infoLabelWidget = new InfoLabelWidget(this,skin);
+        infoLabelWidget = new InfoLabelWidget(skin);
     }
 
 
@@ -323,9 +323,11 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
         attackMenuCallbacks = new SevenButtonsWidget.CallbackHandler() {
             @Override
             public void onButtonNr(int nr) {
+                Monster activeMonster = battleSystem.getActiveMonster();
                 System.out.println("AttackMenuButtons: onButtonNr("+nr+")");
                 System.out.println("Input: User chose attack Nr. " + nr);
-                battleSystem.setChosenAttack(nr);
+                int chosenAttackNr = activeMonster.abilityGraph.learntAbilities.indexOfValue(activeMonster.getActiveAbility(nr),false);
+                battleSystem.setChosenAttack(chosenAttackNr);
                 battleStateSwitcher.toTargetChoice();
             }
         };
@@ -537,9 +539,9 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
             // Add Widgets
             animationWidget.addToStage(battleAnimationStage);
             statusWidget.addToStage(battleAnimationStage);
-            attackMenu.addToStage(stage);
             battleQueueWidget.addToStage(stage);
             actionMenu.addToStage(stage);
+            attackMenu.addToStage(stage);
 
             // Setup Widgets
             actionMenu.setCallbackHandler(battleActionCallbacks);

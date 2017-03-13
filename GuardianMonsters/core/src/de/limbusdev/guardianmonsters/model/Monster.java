@@ -2,6 +2,7 @@ package de.limbusdev.guardianmonsters.model;
 
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.ArrayMap;
 
 import java.util.Observable;
 
@@ -34,6 +35,7 @@ public class Monster extends Observable {
     private int MPfull, MP;
     private int SpeedFull;
     private int abilityLevels;
+    private ArrayMap<Integer,Ability> activeAbilities;
 
     public int getSpeed() {
         return Speed;
@@ -79,6 +81,16 @@ public class Monster extends Observable {
 
         for(int i = 0; i<level; i++) {
             abilityGraph.activateNode(i);
+        }
+
+        activeAbilities = new ArrayMap<>();
+        for(int i=0; i<7; i++) {
+            activeAbilities.put(i,null);
+        }
+        int counter = 0;
+        for(Ability a : abilityGraph.learntAbilities.values()) {
+            activeAbilities.put(counter, a);
+            counter++;
         }
 
     }
@@ -352,5 +364,25 @@ public class Monster extends Observable {
         this.abilityLevels--;
         setChanged();
         notifyObservers();
+    }
+
+    public Ability getActiveAbility(int abilitySlot) {
+        return activeAbilities.get(abilitySlot);
+    }
+
+    public void setActiveAbility(int slot, int learntAbilityNumber) {
+        Ability abilityToLearn = abilityGraph.learntAbilities.get(learntAbilityNumber);
+        if(abilityToLearn == null) return;
+
+        for(int key : activeAbilities.keys()) {
+            Ability abilityAtThisSlot = activeAbilities.get(key);
+
+            if(abilityAtThisSlot != null) {
+                if (abilityAtThisSlot.equals(abilityToLearn)) {
+                    activeAbilities.put(key, null);
+                }
+            }
+        }
+        activeAbilities.put(slot, abilityGraph.learntAbilities.get(learntAbilityNumber));
     }
 }

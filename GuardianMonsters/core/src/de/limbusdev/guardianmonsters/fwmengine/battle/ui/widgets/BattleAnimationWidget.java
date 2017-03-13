@@ -46,8 +46,8 @@ public class BattleAnimationWidget extends BattleWidget implements ObservableWid
 
     private CallbackHandler callbackHandler;
 
-    public BattleAnimationWidget(final AHUD hud, CallbackHandler callbackHandler) {
-        super(hud);
+    public BattleAnimationWidget(CallbackHandler callbackHandler) {
+        super();
 
         leftPositionsOccupied = new ArrayMap<>();
         rightPositionsOccupied = new ArrayMap<>();

@@ -17,6 +17,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import de.limbusdev.guardianmonsters.data.AudioAssets;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TeamComponent;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
+import de.limbusdev.guardianmonsters.model.Inventory;
 import de.limbusdev.guardianmonsters.utils.Constant;
 
 /**
@@ -35,8 +36,8 @@ public class BattleScreen implements Screen {
     private boolean initialized=false;
     /* ........................................................................... CONSTRUCTOR .. */
 
-    public BattleScreen() {
-        this.battleHUD = new BattleHUD();
+    public BattleScreen(Inventory inventory) {
+        this.battleHUD = new BattleHUD(inventory);
         setUpRendering();
         setUpInputProcessor();
         this.background = Services.getMedia().getBackgroundTexture(0);

@@ -148,7 +148,6 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
         targetMenuWidget.init(battleSystem);
 
         show();
-        showLevelUp();
     }
 
 
@@ -382,6 +381,11 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
                 infoLabelWidget.animateTextAppearance();
                 animationWidget.animateSelfDefense();
             }
+
+            @Override
+            public void onLevelup(Monster m) {
+                showLevelUp(m);
+            }
         };
 
         targetMenuCallbacks = new SevenButtonsWidget.ClickListener() {
@@ -448,8 +452,8 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
     @Override
     public void onButtonClicked(int id) {}
 
-    private void showLevelUp() {
-        stage.addActor(new LevelUpWidget(Services.getUI().getInventorySkin(), leftTeam.monsters.get(0)));
+    private void showLevelUp(Monster m) {
+        stage.addActor(new LevelUpWidget(Services.getUI().getInventorySkin(), m));
     }
 
 

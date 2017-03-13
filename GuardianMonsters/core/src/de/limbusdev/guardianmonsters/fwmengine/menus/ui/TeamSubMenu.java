@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 
 import de.limbusdev.guardianmonsters.fwmengine.managers.Media;
+import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.team.ATeamChoiceWidget;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.team.MonsterStatusInventoryWidget;
@@ -18,6 +19,7 @@ import de.limbusdev.guardianmonsters.fwmengine.menus.ui.team.TeamCircleWidget;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TeamComponent;
 import de.limbusdev.guardianmonsters.model.Monster;
 import de.limbusdev.guardianmonsters.utils.Constant;
+import de.limbusdev.guardianmonsters.utils.GameState;
 
 /**
  * Created by Georg Eckert 2017
@@ -148,8 +150,10 @@ public class TeamSubMenu extends AInventorySubMenu {
         joinsBattleButton.setChecked(false);
         joinsBattleButton.setStyle(normalButtonStyle);
 
+        GameState state = SaveGameManager.loadSaveGame();
+
         // If the shown position belongs to the range given by activeInCombat & within 0-2
-        if(teamPosition <= team.activeInCombat && teamPosition <3) {
+        if(teamPosition <= team.activeInCombat && teamPosition <3 && teamPosition < state.maxTeamSizeInBattle) {
             joinsBattleButton.setTouchable(Touchable.enabled);
             monsterChoice.addActor(joinsBattleButton);
 

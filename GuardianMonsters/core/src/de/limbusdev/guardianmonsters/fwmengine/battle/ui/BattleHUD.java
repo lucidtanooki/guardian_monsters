@@ -20,12 +20,14 @@ import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleAnimation
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleQueueWidget;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.InfoLabelWidget;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.ItemChoice;
+import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.LevelUpWidget;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.MonsterMenuWidget;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.SevenButtonsWidget;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.TargetMenuWidget;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.WidgetObserver;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.items.ItemListWidget;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.team.QuickOverviewGuardianList;
+import de.limbusdev.guardianmonsters.fwmengine.menus.ui.widgets.OverlayWidget;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TeamComponent;
 import de.limbusdev.guardianmonsters.enums.ButtonIDs;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
@@ -146,6 +148,7 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
         targetMenuWidget.init(battleSystem);
 
         show();
+        showLevelUp();
     }
 
 
@@ -444,6 +447,10 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
      */
     @Override
     public void onButtonClicked(int id) {}
+
+    private void showLevelUp() {
+        stage.addActor(new LevelUpWidget(Services.getUI().getInventorySkin(), leftTeam.monsters.get(0)));
+    }
 
 
     // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ GETTERS & SETTERS

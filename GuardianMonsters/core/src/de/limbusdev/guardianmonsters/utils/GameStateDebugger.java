@@ -90,7 +90,21 @@ public class GameStateDebugger {
         oppTeam.monsters.put(0,BattleFactory.getInstance().createMonster(4));
         oppTeam.monsters.put(1,BattleFactory.getInstance().createMonster(5));
         oppTeam.monsters.put(2,BattleFactory.getInstance().createMonster(6));
-        BattleScreen battleScreen = new BattleScreen();
+
+
+        Inventory inventory = new Inventory();
+
+        inventory.putItemInInventory(ItemDB.singleton().getItem("sword-barb-steel"));
+        inventory.putItemInInventory(ItemDB.singleton().getItem("bread"));
+        inventory.putItemInInventory(ItemDB.singleton().getItem("bread"));
+        inventory.putItemInInventory(ItemDB.singleton().getItem("potion-blue"));
+        inventory.putItemInInventory(ItemDB.singleton().getItem("potion-blue"));
+        inventory.putItemInInventory(ItemDB.singleton().getItem("potion-red"));
+        inventory.putItemInInventory(ItemDB.singleton().getItem("medicine-blue"));
+        inventory.putItemInInventory(ItemDB.singleton().getItem("angel-tear"));
+
+
+        BattleScreen battleScreen = new BattleScreen(inventory);
         battleScreen.init(heroTeam, oppTeam);
         game.setScreen(battleScreen);
     }

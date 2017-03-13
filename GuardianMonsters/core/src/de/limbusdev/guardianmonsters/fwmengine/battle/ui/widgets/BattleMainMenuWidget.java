@@ -3,10 +3,7 @@ package de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
-import de.limbusdev.guardianmonsters.enums.Element;
-import de.limbusdev.guardianmonsters.fwmengine.battle.ui.AHUD;
 import de.limbusdev.guardianmonsters.utils.Constant;
 
 /**
@@ -25,7 +22,7 @@ public class BattleMainMenuWidget extends BattleWidget {
      *
      * @param skin battle UI skin
      */
-    public BattleMainMenuWidget(Skin skin, CallbackHandler callbackHandler) {
+    public BattleMainMenuWidget(Skin skin, ClickListener clickListener) {
         super();
         this.setBounds(0,0, Constant.RES_X, 64);
 
@@ -42,27 +39,27 @@ public class BattleMainMenuWidget extends BattleWidget {
         this.addActor(swordButton);
         this.addActor(runButton);
 
-        setCallbackHandler(callbackHandler);
+        setCallbackHandler(clickListener);
 
     }
 
 
 
-    public void setCallbackHandler(final CallbackHandler callbackHandler) {
+    public void setCallbackHandler(final ClickListener clickListener) {
         runButton.addListener(
-            new ClickListener() {
+            new com.badlogic.gdx.scenes.scene2d.utils.ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    callbackHandler.onRunButton();
+                    clickListener.onRunButton();
                 }
             }
         );
 
         swordButton.addListener(
-            new ClickListener() {
+            new com.badlogic.gdx.scenes.scene2d.utils.ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    callbackHandler.onSwordButton();
+                    clickListener.onSwordButton();
                 }
             }
         );
@@ -70,7 +67,7 @@ public class BattleMainMenuWidget extends BattleWidget {
 
 
     // INNER INTERFACE
-    public interface CallbackHandler {
+    public interface ClickListener {
         void onRunButton();
         void onSwordButton();
     }

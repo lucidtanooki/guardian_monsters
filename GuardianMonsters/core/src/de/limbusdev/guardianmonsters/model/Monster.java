@@ -194,6 +194,10 @@ public class Monster extends Observable {
         return HPfull;
     }
 
+    /**
+     * Returns HP by taking {@link Equipment} effects into account
+     * @return
+     */
     public int getExtendedHPfull() {
         int hp=getHPfull();
         int hpAddFactor=0;
@@ -205,6 +209,10 @@ public class Monster extends Observable {
         return hp;
     }
 
+    /**
+     * Returns MP by taking {@link Equipment} effects into account
+     * @return
+     */
     public int getExtendedMPfull() {
         int mp=getMPfull();
         int mpAddFactor=0;
@@ -216,6 +224,11 @@ public class Monster extends Observable {
         return mp;
     }
 
+    /**
+     * Calculates the {@link EquipmentPotential} of a given {@link Equipment} for this {@link Monster}
+     * @param eq
+     * @return
+     */
     public EquipmentPotential getEquipmentPotential(Equipment eq) {
         EquipmentPotential pot;
 
@@ -278,6 +291,10 @@ public class Monster extends Observable {
         this.notifyObservers();
     }
 
+    /**
+     * Reduces currently remaining MP, e.g., when using an {@link Ability}, which consumes MP
+     * @param cost
+     */
     public void consumeMP(int cost) {
         if(cost > MP) {
             System.err.println("This attack consumed more MP that the monster had.");
@@ -296,6 +313,10 @@ public class Monster extends Observable {
         return MPfull;
     }
 
+    /**
+     * Returns the currently remaining MP, is reset to MPfull, when resting or sleeping
+     * @return
+     */
     public int getMP() {
         return MP;
     }
@@ -306,14 +327,28 @@ public class Monster extends Observable {
         this.notifyObservers();
     }
 
+    /**
+     * Changes the current physical defense value,
+     * should be resetted after battle
+     * @param pDef
+     */
     public void setpDef(int pDef) {
         this.pDef = pDef;
     }
 
+    /**
+     * Changes the current magical defense value,
+     * should be resetted after battle
+     * @param mDef
+     */
     public void setmDef(int mDef) {
         this.mDef = mDef;
     }
 
+    /**
+     * Holds positive and negative values to show how much a given {@link Equipment} would improve
+     * the various monster status values
+     */
     public class EquipmentPotential {
         public int hp, mp, speed, exp, pstr, pdef, mstr, mdef;
 
@@ -356,20 +391,38 @@ public class Monster extends Observable {
         return replacedEq;
     }
 
+    /**
+     * returns the number of levels, which can be used to activate nodes in the {@link AbilityGraph}
+     * @return
+     */
     public int getAbilityLevels() {
         return abilityLevels;
     }
 
+    /**
+     * Reduces the number of available ability levels by 1,
+     * usually, when a field in the ability board is activated
+     */
     public void consumeAbilityLevel() {
         this.abilityLevels--;
         setChanged();
         notifyObservers();
     }
 
+    /**
+     * returns the ability placed at the given slot
+     * @param abilitySlot   slot for in battle ability usage
+     * @return              ability which resides there
+     */
     public Ability getActiveAbility(int abilitySlot) {
         return activeAbilities.get(abilitySlot);
     }
 
+    /**
+     * Puts an ability into one of seven slots, available in battle
+     * @param slot                  where the ability should be placed in battle
+     * @param learntAbilityNumber   number of ability to be placed there
+     */
     public void setActiveAbility(int slot, int learntAbilityNumber) {
         Ability abilityToLearn = abilityGraph.learntAbilities.get(learntAbilityNumber);
         if(abilityToLearn == null) return;

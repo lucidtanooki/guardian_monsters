@@ -1,11 +1,9 @@
 package de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.utils.Array;
 
 import de.limbusdev.guardianmonsters.data.BundleAssets;
 import de.limbusdev.guardianmonsters.data.SkinAssets;
-import de.limbusdev.guardianmonsters.fwmengine.battle.ui.AHUD;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.model.Ability;
 import de.limbusdev.guardianmonsters.model.Monster;
@@ -18,8 +16,8 @@ public class AttackMenuWidget extends SevenButtonsWidget {
      *
      * @param skin battle action UI skin
      */
-    public AttackMenuWidget(Skin skin, SevenButtonsWidget.CallbackHandler callbackHandler) {
-        super(skin, callbackHandler, order);
+    public AttackMenuWidget(Skin skin, ClickListener clickListener) {
+        super(skin, clickListener, order);
     }
 
     public void init(Monster monster) {

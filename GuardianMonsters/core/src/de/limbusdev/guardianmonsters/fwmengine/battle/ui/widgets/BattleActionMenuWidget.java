@@ -4,9 +4,6 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-
-import de.limbusdev.guardianmonsters.fwmengine.battle.ui.AHUD;
 
 public class BattleActionMenuWidget extends BattleWidget {
 
@@ -16,16 +13,16 @@ public class BattleActionMenuWidget extends BattleWidget {
     public ImageButton bagButton;
     public ImageButton extraButton;
 
-    private CallbackHandler callbackHandler;
+    private ClickListener clickListener;
 
     /**
      *
      * @param skin battle action UI skin
      */
-    public BattleActionMenuWidget(Skin skin, CallbackHandler callbackHandler) {
+    public BattleActionMenuWidget(Skin skin, ClickListener clickListener) {
         super();
 
-        this.callbackHandler = callbackHandler;
+        this.clickListener = clickListener;
 
         monsterButton   = new BattleHUDMenuButton(skin, BattleHUDMenuButton.TEAM    );
         extraButton     = new BattleHUDMenuButton(skin, BattleHUDMenuButton.DEFEND  );
@@ -54,44 +51,44 @@ public class BattleActionMenuWidget extends BattleWidget {
 
     private void initCallbackHandler() {
         backButton.addListener(
-            new ClickListener() {
+            new com.badlogic.gdx.scenes.scene2d.utils.ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    callbackHandler.onBackButton();
+                    clickListener.onBackButton();
                 }
             }
         );
 
         bagButton.addListener(
-            new ClickListener() {
+            new com.badlogic.gdx.scenes.scene2d.utils.ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    callbackHandler.onBagButton();
+                    clickListener.onBagButton();
                 }
             }
         );
 
         monsterButton.addListener(
-            new ClickListener() {
+            new com.badlogic.gdx.scenes.scene2d.utils.ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    callbackHandler.onMonsterButton();
+                    clickListener.onMonsterButton();
                 }
             }
         );
 
         extraButton.addListener(
-            new ClickListener() {
+            new com.badlogic.gdx.scenes.scene2d.utils.ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    callbackHandler.onExtraButton();
+                    clickListener.onExtraButton();
                 }
             }
         );
     }
 
-    public void setCallbackHandler(CallbackHandler callbackHandler) {
-        this.callbackHandler = callbackHandler;
+    public void setClickListener(ClickListener clickListener) {
+        this.clickListener = clickListener;
     }
 
     public void disableAllButBackButton() {
@@ -110,10 +107,10 @@ public class BattleActionMenuWidget extends BattleWidget {
     }
 
     // INNER INTERFACE
-    public interface CallbackHandler {
-        void onMonsterButton();
-        void onBagButton();
-        void onBackButton();
-        void onExtraButton();
+    public static abstract class ClickListener {
+        public void onMonsterButton(){}
+        public void onBagButton(){}
+        public void onBackButton(){}
+        public void onExtraButton(){}
     }
 }

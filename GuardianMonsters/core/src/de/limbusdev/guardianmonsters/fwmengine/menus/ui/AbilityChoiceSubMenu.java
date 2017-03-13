@@ -28,7 +28,7 @@ import de.limbusdev.guardianmonsters.utils.Constant;
  */
 
 public class AbilityChoiceSubMenu extends AInventorySubMenu
-    implements TeamMemberSwitcher.Controller, AbilityDetailWidget.Controller, SevenButtonsWidget.CallbackHandler {
+    implements TeamMemberSwitcher.Controller, AbilityDetailWidget.Controller, SevenButtonsWidget.ClickListener {
 
     private TeamMemberSwitcher switcher;
     private VerticalGroup abilityMenu;

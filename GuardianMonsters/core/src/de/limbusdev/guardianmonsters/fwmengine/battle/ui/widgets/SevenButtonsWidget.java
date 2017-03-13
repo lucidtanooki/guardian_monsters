@@ -6,12 +6,10 @@ import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ArrayMap;
 
 import de.limbusdev.guardianmonsters.enums.Element;
-import de.limbusdev.guardianmonsters.fwmengine.battle.ui.AHUD;
 
 import static de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleHUDTextButton.BOTTOMLEFT;
 import static de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleHUDTextButton.BOTTOMRIGHT;
@@ -25,12 +23,12 @@ public class SevenButtonsWidget extends BattleWidget {
 
     // Buttons
     private ArrayMap<Integer,TextButton> buttons;
-    private CallbackHandler callbackHandler;
+    private ClickListener clickListener;
     protected Skin skin;
 
     public static final int[] ABILITY_ORDER = {5,3,1,0,4,2,6};
 
-    public SevenButtonsWidget (Skin skin, CallbackHandler callbackHandler, int[] buttonOrder) {
+    public SevenButtonsWidget (Skin skin, ClickListener clickListener, int[] buttonOrder) {
 
         super();
         this.skin = skin;
@@ -59,7 +57,7 @@ public class SevenButtonsWidget extends BattleWidget {
             addActor(tb);
         }
 
-        this.callbackHandler = callbackHandler;
+        this.clickListener = clickListener;
         initCallbackHandler();
 
     }
@@ -69,13 +67,13 @@ public class SevenButtonsWidget extends BattleWidget {
             final int j = i;
             final TextButton attButt = buttons.get(i);
             attButt.addListener(
-                new ClickListener() {
+                new com.badlogic.gdx.scenes.scene2d.utils.ClickListener() {
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
                         super.clicked(event,x,y);
                         System.out.println("SevenButtonsWidget: Clicked button " + j);
                         if(!attButt.isDisabled()) {
-                            callbackHandler.onButtonNr(j);
+                            clickListener.onButtonNr(j);
                         }
                     }
                 }
@@ -83,8 +81,8 @@ public class SevenButtonsWidget extends BattleWidget {
         }
     }
 
-    public void setCallbackHandler(CallbackHandler callbackHandler) {
-        this.callbackHandler = callbackHandler;
+    public void setClickListener(ClickListener clickListener) {
+        this.clickListener = clickListener;
     }
 
     protected void enableButton(int index) {
@@ -126,13 +124,13 @@ public class SevenButtonsWidget extends BattleWidget {
 
         buttons.put(index,button);
         button.addListener(
-            new ClickListener() {
+            new com.badlogic.gdx.scenes.scene2d.utils.ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
                     super.clicked(event,x,y);
                     System.out.println("SevenButtonsWidget: Clicked button " + index);
                     if(button.isDisabled()) {
-                        callbackHandler.onButtonNr(index);
+                        clickListener.onButtonNr(index);
                     }
                 }
             }
@@ -143,7 +141,7 @@ public class SevenButtonsWidget extends BattleWidget {
 
 
     // INNER INTERFACE
-    public interface CallbackHandler {
+    public interface ClickListener {
         void onButtonNr(int nr);
     }
 }

@@ -16,14 +16,12 @@ import java.util.Observer;
 
 import de.limbusdev.guardianmonsters.data.AudioAssets;
 import de.limbusdev.guardianmonsters.fwmengine.battle.control.BattleSystem;
-import de.limbusdev.guardianmonsters.fwmengine.battle.ui.AHUD;
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.ImageZComparator;
 import de.limbusdev.guardianmonsters.geometry.IntVec2;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Media;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.model.Ability;
 import de.limbusdev.guardianmonsters.model.Monster;
-import de.limbusdev.guardianmonsters.utils.Constant;
 
 /**
  * Widget for displaying monster status in battle: HP, MP, EXP, Name, Level
@@ -44,9 +42,9 @@ public class BattleAnimationWidget extends BattleWidget implements ObservableWid
 
     public boolean attackAnimationRunning;
 
-    private CallbackHandler callbackHandler;
+    private ClickListener clickListener;
 
-    public BattleAnimationWidget(CallbackHandler callbackHandler) {
+    public BattleAnimationWidget(ClickListener clickListener) {
         super();
 
         leftPositionsOccupied = new ArrayMap<>();
@@ -59,7 +57,7 @@ public class BattleAnimationWidget extends BattleWidget implements ObservableWid
         this.setBounds(0,0,0,0);
         this.media = Services.getMedia();
 
-        this.callbackHandler = callbackHandler;
+        this.clickListener = clickListener;
 
     }
 
@@ -162,7 +160,7 @@ public class BattleAnimationWidget extends BattleWidget implements ObservableWid
 
 
     public void animateSelfDefense() {
-        callbackHandler.onHitAnimationComplete();
+        clickListener.onHitAnimationComplete();
     }
 
     /**
@@ -256,7 +254,7 @@ public class BattleAnimationWidget extends BattleWidget implements ObservableWid
         Action callbackAction = Actions.run(new Runnable() {
             @Override
             public void run() {
-                callbackHandler.onHitAnimationComplete();
+                clickListener.onHitAnimationComplete();
             }
         });
 
@@ -382,7 +380,7 @@ public class BattleAnimationWidget extends BattleWidget implements ObservableWid
         private static final IntVec2 OPPO_TOP = new IntVec2(640+32-HERO_TOP.x,HERO_TOP.y);
     }
 
-    public interface CallbackHandler {
+    public interface ClickListener {
         void onHitAnimationComplete();
     }
 

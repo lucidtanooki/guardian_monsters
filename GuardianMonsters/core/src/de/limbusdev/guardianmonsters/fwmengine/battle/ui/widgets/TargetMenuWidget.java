@@ -8,7 +8,6 @@ import java.util.Observer;
 
 import de.limbusdev.guardianmonsters.data.BundleAssets;
 import de.limbusdev.guardianmonsters.fwmengine.battle.control.BattleSystem;
-import de.limbusdev.guardianmonsters.fwmengine.battle.ui.AHUD;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.model.Monster;
 import de.limbusdev.guardianmonsters.model.MonsterDB;
@@ -26,8 +25,8 @@ public class TargetMenuWidget extends SevenButtonsWidget implements Observer {
 
     private static int[] order = {0,2,1,3,6,5,4};
 
-    public TargetMenuWidget(Skin skin, CallbackHandler callbackHandler) {
-        super(skin, callbackHandler, order);
+    public TargetMenuWidget(Skin skin, ClickListener clickListener) {
+        super(skin, clickListener, order);
     }
 
     public void init(BattleSystem battleSystem) {

@@ -34,7 +34,7 @@ public class Ability {
      */
     public Ability(int ID, AttackType attackType, Element element, int damage, String name, SFXType sfxType,
                    int sfxIndex, AnimationType animType) {
-        this(ID,attackType,element,damage,name,sfxType,sfxIndex,animType,0);
+        this(ID,attackType,element, damage,name,sfxType,sfxIndex,animType,0);
     }
 
 

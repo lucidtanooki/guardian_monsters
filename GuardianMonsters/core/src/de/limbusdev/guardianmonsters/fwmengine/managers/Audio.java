@@ -14,4 +14,9 @@ public interface Audio {
     void stopMusic(String path);
     void dispose();
     Action getMuteAudioAction();
+
+    /**
+     * Stops the currently playing music
+     */
+    void stopMusic();
 }

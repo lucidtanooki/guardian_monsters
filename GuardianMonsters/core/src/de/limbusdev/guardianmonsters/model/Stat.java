@@ -90,7 +90,7 @@ public class Stat extends Observable {
         }
 
         this.level = level;
-        this.abilityLevels = level;
+        this.abilityLevels = level-1;
 
         this.HPmax      = baseStat.baseHP;
         this.MPmax      = baseStat.baseMP;
@@ -139,6 +139,8 @@ public class Stat extends Observable {
         this.SpeedMax   = report.newSpeed;
 
         this.abilityLevels += 1;
+
+        this.lvlUpReport = report;
 
         setChanged();
         notifyObservers();
@@ -411,7 +413,7 @@ public class Stat extends Observable {
     public int getMaxPossibleHP() {
         int maxPossHP = MonsterDB.singleton().getStatusInfos().get(monster.ID).baseStat.baseHP;
         for(int i=1; i<100; i++) {
-            maxPossHP = MathTool.dice(characterGrowthRates[character][StatType.HP]);
+            maxPossHP += MathTool.dice(characterGrowthRates[character][StatType.HP]);
         }
         return maxPossHP;
     }
@@ -419,7 +421,7 @@ public class Stat extends Observable {
     public int getMaxPossibleMP() {
         int maxPossMP = MonsterDB.singleton().getStatusInfos().get(monster.ID).baseStat.baseMP;
         for(int i=1; i<100; i++) {
-            maxPossMP = MathTool.dice(characterGrowthRates[character][StatType.MP]);
+            maxPossMP += MathTool.dice(characterGrowthRates[character][StatType.MP]);
         }
         return maxPossMP;
     }
@@ -427,7 +429,7 @@ public class Stat extends Observable {
     public int getMaxPossiblePStr() {
         int maxPossPStr = MonsterDB.singleton().getStatusInfos().get(monster.ID).baseStat.basePStr;
         for(int i=1; i<100; i++) {
-            maxPossPStr = MathTool.dice(characterGrowthRates[character][StatType.PSTR]);
+            maxPossPStr += MathTool.dice(characterGrowthRates[character][StatType.PSTR]);
         }
         return maxPossPStr;
     }
@@ -435,7 +437,7 @@ public class Stat extends Observable {
     public int getMaxPossiblePDef() {
         int maxPossPDef = MonsterDB.singleton().getStatusInfos().get(monster.ID).baseStat.basePDef;
         for(int i=1; i<100; i++) {
-            maxPossPDef = MathTool.dice(characterGrowthRates[character][StatType.PDEF]);
+            maxPossPDef += MathTool.dice(characterGrowthRates[character][StatType.PDEF]);
         }
         return maxPossPDef;
     }
@@ -443,7 +445,7 @@ public class Stat extends Observable {
     public int getMaxPossibleMStr() {
         int maxPossMStr = MonsterDB.singleton().getStatusInfos().get(monster.ID).baseStat.baseMStr;
         for(int i=1; i<100; i++) {
-            maxPossMStr = MathTool.dice(characterGrowthRates[character][StatType.MSTR]);
+            maxPossMStr += MathTool.dice(characterGrowthRates[character][StatType.MSTR]);
         }
         return maxPossMStr;
     }
@@ -451,7 +453,7 @@ public class Stat extends Observable {
     public int getMaxPossibleMDef() {
         int maxPossMDef = MonsterDB.singleton().getStatusInfos().get(monster.ID).baseStat.baseMDef;
         for(int i=1; i<100; i++) {
-            maxPossMDef = MathTool.dice(characterGrowthRates[character][StatType.MDEF]);
+            maxPossMDef += MathTool.dice(characterGrowthRates[character][StatType.MDEF]);
         }
         return maxPossMDef;
     }
@@ -459,7 +461,7 @@ public class Stat extends Observable {
     public int getMaxPossibleSpeed() {
         int maxPossSpeed = MonsterDB.singleton().getStatusInfos().get(monster.ID).baseStat.baseSpeed;
         for(int i=1; i<100; i++) {
-            maxPossSpeed = MathTool.dice(characterGrowthRates[character][StatType.SPEED]);
+            maxPossSpeed += MathTool.dice(characterGrowthRates[character][StatType.SPEED]);
         }
         return maxPossSpeed;
     }

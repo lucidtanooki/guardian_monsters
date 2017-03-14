@@ -19,23 +19,6 @@ public class ConcreteScreenManager implements ScreenManager {
         this.game = game;
     }
 
-    /*
-    public static ConcreteScreenManager get() {
-        if(instance == null) {
-
-             //Making Singleton Thread Safe
-             //http://www.journaldev.com/1377/java-singleton-design-pattern-best-practices-examples
-
-            synchronized (ConcreteScreenManager.class) {
-                if(instance == null) {
-                    instance = new ConcreteScreenManager();
-                }
-            }
-        }
-        return instance;
-    }*/
-
-
     /**
      * Pushes a new screen onto the game state stack and changes to it
      * @param screen

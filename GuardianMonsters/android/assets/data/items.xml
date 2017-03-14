@@ -41,19 +41,19 @@
     <!-- HP Curing Items -->
     <medicine>
         <nameID>bread</nameID>
-        <value>10</value>
+        <value>100</value>
         <type>HPcure</type>
     </medicine>
 
     <medicine>
         <nameID>potion-blue</nameID>
-        <value>50</value>
+        <value>300</value>
         <type>HPcure</type>
     </medicine>
 
     <medicine>
         <nameID>potion-red</nameID>
-        <value>100</value>
+        <value>500</value>
         <type>HPcure</type>
     </medicine>
 

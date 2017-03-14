@@ -64,6 +64,12 @@ public class AudioManager implements Audio {
     public void stopMusic(String path) {
         Music music = assets.get(path,Music.class);
         music.stop();
+        currentlyPlayingBGMusic = null;
+    }
+
+    @Override
+    public void stopMusic() {
+        stopMusic(currentlyPlayingBGMusic);
     }
 
     @Override

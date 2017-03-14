@@ -250,7 +250,7 @@ public class BattleSystem extends Observable {
         for(Monster m : leftInBattle.values()) {
             if(m.stat.isFit()) {
                 float opponentFactor = 1f * defeatedMonster.stat.getLevel() / m.stat.getLevel();
-                int EXP = MathUtils.floor(Constant.BASE_EXP * defeatedMonster.stat.getLevel() / 10f * opponentFactor);
+                int EXP = MathUtils.floor(Constant.BASE_EXP * defeatedMonster.stat.getLevel() / 6f * opponentFactor);
                 boolean levelUp = m.stat.earnEXP(EXP);
                 if(levelUp) {
                     callbackHandler.onLevelup(m);

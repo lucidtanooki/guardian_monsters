@@ -37,4 +37,9 @@ public class NullAudio implements Audio {
     public Action getMuteAudioAction() {
         return Actions.sequence();
     }
+
+    @Override
+    public void stopMusic() {
+
+    }
 }

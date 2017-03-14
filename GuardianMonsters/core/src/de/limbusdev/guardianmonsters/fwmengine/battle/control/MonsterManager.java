@@ -41,6 +41,9 @@ public class MonsterManager {
 
     /**
      * Calculates attacks, the report attributes are for information only
+     *
+     *  Damage = Elemental-Multiplier * (((2*Level)/5 + 2) * Power * (Attack/Defense))/50 + 2)
+     *
      * @param att
      * @param def
      * @return
@@ -48,7 +51,7 @@ public class MonsterManager {
     public static AttackCalculationReport calcAttack(Monster att, Monster def, Ability ability) {
         System.out.println("\n--- new ability ---");
         AttackCalculationReport report = new AttackCalculationReport(att, def, 0, 0, ability);
-        float effectiveness = ElemEff.singelton().getElemEff(ability.element, def.stat.elements);
+        float efficiency = ElemEff.singelton().getElemEff(ability.element, def.stat.elements);
 
         float defenseRatio;
 
@@ -59,10 +62,10 @@ public class MonsterManager {
         }
 
         /* Calculate Damage */
-        float damage = (effectiveness * ability.damage)*defenseRatio;
+        float damage = efficiency * ((((2*att.stat.getLevel()/5 + 2) * ability.damage * defenseRatio) / 3) + 2);
 
         report.damage = MathUtils.round(damage);
-        report.effectiveness = effectiveness;
+        report.effectiveness = efficiency;
 
         // Print Battle Debug Message
         String attackerName = Services.getL18N().l18n(BundleAssets.MONSTERS).get(MonsterDB.singleton().getNameById(att.ID));

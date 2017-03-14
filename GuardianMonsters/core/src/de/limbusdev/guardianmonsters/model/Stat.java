@@ -3,6 +3,8 @@ package de.limbusdev.guardianmonsters.model;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 
+import java.util.Observable;
+
 import de.limbusdev.guardianmonsters.enums.Element;
 import de.limbusdev.guardianmonsters.utils.Constant;
 import de.limbusdev.guardianmonsters.utils.MathTool;
@@ -35,7 +37,7 @@ import static de.limbusdev.guardianmonsters.model.Stat.Growth.SLOWHP;
  * @author Georg Eckert 2016
  */
 
-public class Stat {
+public class Stat extends Observable {
 
     public static abstract class Character {
         public static final int BALANCED=0, VIVACIOUS=1, PRUDENT=2;
@@ -73,9 +75,12 @@ public class Stat {
     private Equipment feet;
 
     private LevelUpReport lvlUpReport;
+    public final Monster monster;
 
     // ................................................................................. CONSTRUCTOR
-    public Stat(int level, BaseStat baseStat, Array<Element> elements) {
+    public Stat(int level, BaseStat baseStat, Array<Element> elements, Monster monster) {
+
+        this.monster = monster;
 
         // Choose a random character
         switch(MathUtils.random(0,2)) {
@@ -133,10 +138,16 @@ public class Stat {
         this.MDefMax    = report.newMDef;
         this.SpeedMax   = report.newSpeed;
 
+        this.abilityLevels += 1;
+
+        setChanged();
+        notifyObservers();
+
         return report;
     }
 
-    public void earnEXP(int EXP) {
+    public boolean earnEXP(int EXP) {
+        boolean leveledUp = false;
         float extFactor = 100f;
 
         if(hands != null)   extFactor += hands.addsEXP;
@@ -151,7 +162,13 @@ public class Stat {
         if(this.EXP > getEXPAvailableAtLevel(level)) {
             this.EXP -= getEXPAvailableAtLevel(level);
             levelUp();
+            leveledUp = true;
         }
+
+        setChanged();
+        notifyObservers();
+
+        return leveledUp;
     }
 
     /**
@@ -167,8 +184,75 @@ public class Stat {
         setSpeed(getSpeedMax());
     }
 
+    public void healHP(int value) {
+        setHP(HP + value);
+    }
+
+    public void decreaseHP(int value) {
+        setHP(HP - value);
+    }
+
+    public void healMP(int value) {
+        setMP(MP + value);
+    }
+
+    public void decreaseMP(int value) {
+        setMP(MP - value);
+    }
+
+    /**
+     * Increases Physical Strength, by the given fraction (%)
+     * @param fraction
+     */
+    public void increasePStr(int fraction) {
+        setPStr(MathUtils.round(PStr * (100 + fraction)/(100f)));
+    }
+
+    /**
+     * Increases Physical Defense, by the given fraction (%)
+     * @param fraction
+     */
+    public void increasePDef(int fraction) {
+        setPDef(MathUtils.round(PDef * (100 + fraction)/(100f)));
+    }
+
+    /**
+     * Increases Magical Strength, by the given fraction (%)
+     * @param fraction
+     */
+    public void increaseMStr(int fraction) {
+        setMStr(MathUtils.round(MStr * (100 + fraction)/(100f)));
+    }
+
+    /**
+     * Increases Magical Defense, by the given fraction (%)
+     * @param fraction
+     */
+    public void increaseMDef(int fraction) {
+        setMDef(MathUtils.round(MDef * (100 + fraction)/(100f)));
+    }
+
+    /**
+     * Increases Speed, by the given fraction (%)
+     * @param fraction
+     */
+    public void increaseSpeed(int fraction) {
+        setSpeed(MathUtils.round(Speed * (100 + fraction)/(100f)));
+    }
 
     // ........................................................................... CALCULATED VALUES
+
+    public int getEXPfraction() {
+        return MathUtils.round(EXP/1.f/getEXPAvailableAtLevel(level)*100f);
+    }
+
+    public int getHPfraction() {
+        return MathUtils.round(100f*HP/getHPmax());
+    }
+
+    public int getMPfraction() {
+        return MathUtils.round(100f*MP/getMPmax());
+    }
 
     /**
      * Calculates how much EXP are available at the given level
@@ -208,7 +292,62 @@ public class Stat {
                 head = equipment;
                 break;
         }
+
+        setChanged();
+        notifyObservers();
+
         return oldEquipment;
+    }
+
+    /**
+     * Calculates the {@link EquipmentPotential} of a given {@link Equipment} for this {@link Monster}
+     * @param eq
+     * @return
+     */
+    public EquipmentPotential getEquipmentPotential(Equipment eq) {
+        EquipmentPotential pot;
+
+        Equipment currentEquipment;
+        switch(eq.type) {
+            case HEAD:
+                currentEquipment = head;
+                break;
+            case BODY:
+                currentEquipment = body;
+                break;
+            case FEET:
+                currentEquipment = feet;
+                break;
+            default:
+                currentEquipment = hands;
+                break;
+        }
+
+        if(currentEquipment == null) {
+            pot = new EquipmentPotential(
+                eq.addsHP,
+                eq.addsMP,
+                eq.addsSpeed,
+                eq.addsEXP,
+                eq.addsPStr,
+                eq.addsPDef,
+                eq.addsMStr,
+                eq.addsMDef
+            );
+        } else {
+            pot = new EquipmentPotential(
+                eq.addsHP      - currentEquipment.addsHP,
+                eq.addsMP      - currentEquipment.addsMP,
+                eq.addsSpeed   - currentEquipment.addsSpeed,
+                eq.addsEXP     - currentEquipment.addsEXP,
+                eq.addsPStr    - currentEquipment.addsPStr,
+                eq.addsPDef    - currentEquipment.addsPDef,
+                eq.addsMStr    - currentEquipment.addsMStr,
+                eq.addsMDef    - currentEquipment.addsMDef
+            );
+        }
+
+        return pot;
     }
 
     // ........................................................................... SETTERS & GETTERS
@@ -217,8 +356,24 @@ public class Stat {
         return level;
     }
 
+    public boolean isFit() {
+        return HP > 0;
+    }
+
+    public boolean isKO() {
+        return !isFit();
+    }
+
+    /**
+     * returns the number of levels, which can be used to activate nodes in the {@link AbilityGraph}
+     * @return
+     */
     public int getAbilityLevels() {
         return abilityLevels;
+    }
+
+    public boolean hasAbilityLevelsLeft() {
+        return getAbilityLevels() > 0;
     }
 
     public int getEXP() {
@@ -253,6 +408,62 @@ public class Stat {
         return Speed;
     }
 
+    public int getMaxPossibleHP() {
+        int maxPossHP = MonsterDB.singleton().getStatusInfos().get(monster.ID).baseStat.baseHP;
+        for(int i=1; i<100; i++) {
+            maxPossHP = MathTool.dice(characterGrowthRates[character][StatType.HP]);
+        }
+        return maxPossHP;
+    }
+
+    public int getMaxPossibleMP() {
+        int maxPossMP = MonsterDB.singleton().getStatusInfos().get(monster.ID).baseStat.baseMP;
+        for(int i=1; i<100; i++) {
+            maxPossMP = MathTool.dice(characterGrowthRates[character][StatType.MP]);
+        }
+        return maxPossMP;
+    }
+
+    public int getMaxPossiblePStr() {
+        int maxPossPStr = MonsterDB.singleton().getStatusInfos().get(monster.ID).baseStat.basePStr;
+        for(int i=1; i<100; i++) {
+            maxPossPStr = MathTool.dice(characterGrowthRates[character][StatType.PSTR]);
+        }
+        return maxPossPStr;
+    }
+
+    public int getMaxPossiblePDef() {
+        int maxPossPDef = MonsterDB.singleton().getStatusInfos().get(monster.ID).baseStat.basePDef;
+        for(int i=1; i<100; i++) {
+            maxPossPDef = MathTool.dice(characterGrowthRates[character][StatType.PDEF]);
+        }
+        return maxPossPDef;
+    }
+
+    public int getMaxPossibleMStr() {
+        int maxPossMStr = MonsterDB.singleton().getStatusInfos().get(monster.ID).baseStat.baseMStr;
+        for(int i=1; i<100; i++) {
+            maxPossMStr = MathTool.dice(characterGrowthRates[character][StatType.MSTR]);
+        }
+        return maxPossMStr;
+    }
+
+    public int getMaxPossibleMDef() {
+        int maxPossMDef = MonsterDB.singleton().getStatusInfos().get(monster.ID).baseStat.baseMDef;
+        for(int i=1; i<100; i++) {
+            maxPossMDef = MathTool.dice(characterGrowthRates[character][StatType.MDEF]);
+        }
+        return maxPossMDef;
+    }
+
+    public int getMaxPossibleSpeed() {
+        int maxPossSpeed = MonsterDB.singleton().getStatusInfos().get(monster.ID).baseStat.baseSpeed;
+        for(int i=1; i<100; i++) {
+            maxPossSpeed = MathTool.dice(characterGrowthRates[character][StatType.SPEED]);
+        }
+        return maxPossSpeed;
+    }
+
     /**
      * @return maximum HP, taking {@link Equipment} into account
      */
@@ -264,7 +475,7 @@ public class Stat {
         if(feet != null)    extFactor += feet.addsHP;
         if(head != null)    extFactor += head.addsHP;
 
-        return MathUtils.round((HP * extFactor) / 100f);
+        return MathUtils.round((HPmax * extFactor) / 100f);
     }
 
     /**
@@ -278,7 +489,7 @@ public class Stat {
         if(feet != null)    extFactor += feet.addsMP;
         if(head != null)    extFactor += head.addsMP;
 
-        return MathUtils.round((MP * extFactor) / 100f);
+        return MathUtils.round((MPmax * extFactor) / 100f);
     }
 
     /**
@@ -355,6 +566,19 @@ public class Stat {
         return elements;
     }
 
+    public boolean hasHandsEquipped() {
+        return hands != null;
+    }
+    public boolean hasHeadEquipped() {
+        return head != null;
+    }
+    public boolean hasBodyEquipped() {
+        return body != null;
+    }
+    public boolean hasFeetEquipped() {
+        return feet != null;
+    }
+
     public Equipment getHands() {
         return hands;
     }
@@ -373,30 +597,81 @@ public class Stat {
 
     public void setHP(int HP) {
         this.HP = HP;
+        if(HP > getHPmax()) this.HP = getHPmax();
+        if(HP < 0)          this.HP = 0;
+
+        setChanged();
+        notifyObservers();
     }
 
     public void setMP(int MP) {
         this.MP = MP;
+
+        if(MP > getMPmax()) this.MP = getMPmax();
+        if(MP < 0)          this.MP = 0;
+
+        setChanged();
+        notifyObservers();
     }
 
     public void setPStr(int PStr) {
         this.PStr = PStr;
+
+        if(PStr > getPStrMax()*1.5f) this.PStr = getPStrMax();
+        if(PStr < 1)            this.PStr = 1;
+
+        setChanged();
+        notifyObservers();
     }
 
     public void setPDef(int PDef) {
         this.PDef = PDef;
+
+        if(PDef > getPDefMax()*1.5f) this.PDef = getPDefMax();
+        if(PDef < 1)            this.PDef = 1;
+
+        setChanged();
+        notifyObservers();
     }
 
     public void setMStr(int MStr) {
         this.MStr = MStr;
+
+        if(MStr > getMStrMax()*1.5f) this.MStr = getMStrMax();
+        if(MStr < 1)            this.MStr = 1;
+
+        setChanged();
+        notifyObservers();
     }
 
     public void setMDef(int MDef) {
         this.MDef = MDef;
+
+        if(MDef > getMDefMax()*1.5f) this.MDef = getMDefMax();
+        if(MDef < 1)            this.MDef = 1;
+
+        setChanged();
+        notifyObservers();
     }
 
-    public void setSpeed(int speed) {
-        Speed = speed;
+    public void setSpeed(int Speed) {
+        this.Speed = Speed;
+
+        if(Speed > getSpeedMax()) this.Speed = getSpeedMax();
+        if(Speed < 1)          this.Speed = 1;
+
+        setChanged();
+        notifyObservers();
+    }
+
+    /**
+     * Reduces the number of available ability levels by 1,
+     * usually, when a field in the ability board is activated
+     */
+    public void consumeAbilityLevel() {
+        this.abilityLevels--;
+        setChanged();
+        notifyObservers();
     }
 
     public static class LevelUpReport {
@@ -423,6 +698,25 @@ public class Stat {
             this.newSpeed = newSpeed;
             this.oldLevel = oldLevel;
             this.newLevel = newLevel;
+        }
+    }
+
+    /**
+     * Holds positive and negative values to show how much a given {@link Equipment} would improve
+     * the various monster status values
+     */
+    public class EquipmentPotential {
+        public int hp, mp, speed, exp, pstr, pdef, mstr, mdef;
+
+        public EquipmentPotential(int hp, int mp, int speed, int exp, int pstr, int pdef, int mstr, int mdef) {
+            this.hp = hp;
+            this.mp = mp;
+            this.speed = speed;
+            this.exp = exp;
+            this.pstr = pstr;
+            this.pdef = pdef;
+            this.mstr = mstr;
+            this.mdef = mdef;
         }
     }
 

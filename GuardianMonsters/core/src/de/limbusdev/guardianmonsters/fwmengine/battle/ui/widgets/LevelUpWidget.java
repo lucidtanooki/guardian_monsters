@@ -16,6 +16,7 @@ import de.limbusdev.guardianmonsters.fwmengine.menus.ui.widgets.AnimatedImage;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.widgets.OverlayWidget;
 import de.limbusdev.guardianmonsters.model.Monster;
 import de.limbusdev.guardianmonsters.model.MonsterDB;
+import de.limbusdev.guardianmonsters.model.Stat;
 import de.limbusdev.guardianmonsters.utils.Constant;
 
 /**
@@ -60,7 +61,7 @@ public class LevelUpWidget extends OverlayWidget {
 
         // Values
 
-        Monster.LevelUpReport lvlUp = monster.levelUpReport;
+        Stat.LevelUpReport lvlUp = monster.stat.getLatestLevelUpReport();
 
         Table values = new Table();
         values.align(Align.topLeft);

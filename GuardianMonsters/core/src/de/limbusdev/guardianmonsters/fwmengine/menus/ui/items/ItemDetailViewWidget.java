@@ -89,7 +89,7 @@ public class ItemDetailViewWidget extends Group {
                 inventory.takeItemFromInventory(item);
 
                 if(item instanceof Equipment) {
-                    Item replaced = team.get(i).equip((Equipment)item);
+                    Item replaced = team.get(i).stat.giveEquipment((Equipment)item);
                     if(replaced != null) inventory.putItemInInventory(replaced);
                 } else {
                     item.apply(team.get(i));

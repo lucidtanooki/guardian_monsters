@@ -13,6 +13,7 @@ import de.limbusdev.guardianmonsters.fwmengine.menus.ui.team.TeamMemberSwitcher;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.widgets.LogoWithCounter;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.widgets.ScrollableWidget;
 import de.limbusdev.guardianmonsters.model.Monster;
+import de.limbusdev.guardianmonsters.model.Stat;
 import de.limbusdev.guardianmonsters.utils.Constant;
 
 
@@ -38,7 +39,7 @@ public class AbilityMapSubMenu extends AInventorySubMenu implements Observer,
         this.team = team;
 
         for (Monster m : this.team.values()) {
-            m.addObserver(this);
+            m.stat.addObserver(this);
         }
 
         graphWidget = new GraphWidget(skin, this);
@@ -59,7 +60,7 @@ public class AbilityMapSubMenu extends AInventorySubMenu implements Observer,
         remainingLevels = new LogoWithCounter(skin, "label-bg-sandstone", "stats-symbol-exp");
         remainingLevels.setPosition(Constant.WIDTH - 2, 67, Align.bottomRight);
         addActor(remainingLevels);
-        remainingLevels.counter.setText(Integer.toString(this.team.get(0).getAbilityLevels()));
+        remainingLevels.counter.setText(Integer.toString(this.team.get(0).stat.getAbilityLevels()));
 
         details.init(this.team.get(0), 0);
 
@@ -71,14 +72,14 @@ public class AbilityMapSubMenu extends AInventorySubMenu implements Observer,
     @Override
     public void refresh() {
         Monster activeMonster = team.get(switcher.getCurrentlyChosen());
-        remainingLevels.counter.setText(Integer.toString(activeMonster.getAbilityLevels()));
+        remainingLevels.counter.setText(Integer.toString(activeMonster.stat.getAbilityLevels()));
     }
 
 
     @Override
     public void update(Observable o, Object arg) {
-        if (o instanceof Monster) {
-            Monster m = (Monster) o;
+        if (o instanceof Stat) {
+            Monster m = ((Stat)o).monster;
             if (m.equals(team.get(switcher.getCurrentlyChosen()))) {
                 refresh();
             }
@@ -102,7 +103,7 @@ public class AbilityMapSubMenu extends AInventorySubMenu implements Observer,
     @Override
     public void onLearn(int nodeID) {
         Monster m = team.get(switcher.getCurrentlyChosen());
-        m.consumeAbilityLevel();
+        m.stat.consumeAbilityLevel();
         m.abilityGraph.activateNode(nodeID);
         graphWidget.refreshStatus(m);
         details.init(m, nodeID);

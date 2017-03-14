@@ -101,7 +101,7 @@ public class BattleAnimationWidget extends BattleWidget implements ObservableWid
         int actualTeamSize = 0;
         while(actualTeamSize < teamSize && counter < team.size) {
             Monster m = team.get(counter);
-            if(m.getHP() > 0) {
+            if(m.stat.isFit()) {
                 // Add monster to team
                 setUpMonsterSprite(m.ID,actualTeamSize, side);
                 positions.put(actualTeamSize,true);

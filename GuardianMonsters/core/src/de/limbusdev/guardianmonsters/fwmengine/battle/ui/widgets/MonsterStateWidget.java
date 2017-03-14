@@ -18,6 +18,7 @@ import de.limbusdev.guardianmonsters.data.BundleAssets;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.model.Monster;
 import de.limbusdev.guardianmonsters.model.MonsterDB;
+import de.limbusdev.guardianmonsters.model.Stat;
 import de.limbusdev.guardianmonsters.utils.Constant;
 
 /**
@@ -102,9 +103,9 @@ public class MonsterStateWidget extends WidgetGroup implements Observer {
      * @param mon
      */
     public void init(Monster mon) {
-        update(mon, "");
+        update(mon.stat, "");
         nameLabel.setText(Services.getL18N().l18n(BundleAssets.MONSTERS).get((MonsterDB.singleton().getNameById(mon.ID))));
-        mon.addObserver(this);
+        mon.stat.addObserver(this);
     }
 
     /**
@@ -114,12 +115,12 @@ public class MonsterStateWidget extends WidgetGroup implements Observer {
      */
     @Override
     public void update(Observable o, Object arg) {
-        Monster obsMon = (Monster)o;
-        this.hpBar.setValue(obsMon.getHPPerc());
-        this.mpBar.setValue(obsMon.getMPPerc());
-        this.epBar.setValue(obsMon.getExpPerc());
-        this.levelLabel.setText(Integer.toString(obsMon.level));
-        if(obsMon.getHP() == 0) {
+        Stat monStat = (Stat)o;
+        this.hpBar.setValue(monStat.getHPfraction());
+        this.mpBar.setValue(monStat.getMPfraction());
+        this.epBar.setValue(monStat.getEXPfraction());
+        this.levelLabel.setText(Integer.toString(monStat.getLevel()));
+        if(monStat.getHP() == 0) {
             addAction(Actions.sequence(Actions.alpha(0, 2), Actions.visible(false)));
         }
         System.out.println("Received Update");

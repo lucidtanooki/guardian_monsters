@@ -12,8 +12,10 @@ import de.limbusdev.guardianmonsters.fwmengine.battle.model.MonsterSpeedComparat
 import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager;
 import de.limbusdev.guardianmonsters.model.Ability;
 import de.limbusdev.guardianmonsters.model.Monster;
+import de.limbusdev.guardianmonsters.utils.Constant;
 import de.limbusdev.guardianmonsters.utils.DebugOutput;
 import de.limbusdev.guardianmonsters.utils.GameState;
+import de.limbusdev.guardianmonsters.utils.MathTool;
 
 /**
  * Created by georg on 21.11.16.
@@ -97,7 +99,7 @@ public class BattleSystem extends Observable {
 
         while(actualTeamSize < teamSize && counter < team.size) {
             Monster m = team.get(counter);
-            if(m.getHP() > 0) {
+            if(m.stat.isFit()) {
                 // Add monster to team
                 nextRound.add(m);
                 inBattle.put(actualTeamSize,m);
@@ -197,7 +199,7 @@ public class BattleSystem extends Observable {
         boolean isKO = true;
 
         for(Monster m : team.values()) {
-            isKO = isKO && m.getHP() == 0;
+            isKO = isKO && m.stat.isKO();
         }
 
         return isKO;
@@ -209,7 +211,7 @@ public class BattleSystem extends Observable {
     private void newRound() {
 
         currentRound = nextRound;
-        nextRound = new Array<Monster>();
+        nextRound = new Array<>();
 
         // Sort monsters by speed
         sortQueue(currentRound);
@@ -222,7 +224,7 @@ public class BattleSystem extends Observable {
         Iterator<Monster> it = currentRound.iterator();
         while (it.hasNext()) {
             Monster m = it.next();
-            if (m.getHP() == 0) {
+            if (m.stat.isKO()) {
                 it.remove();
                 if(rightTeam.containsValue(m,false)) {
                     giveEXPtoWinners(m);
@@ -234,7 +236,7 @@ public class BattleSystem extends Observable {
         it = nextRound.iterator();
         while (it.hasNext()) {
             Monster m = it.next();
-            if (m.getHP() == 0) {
+            if (m.stat.isKO()) {
                 it.remove();
                 if(rightTeam.containsValue(m,false)) {
                     giveEXPtoWinners(m);
@@ -246,8 +248,10 @@ public class BattleSystem extends Observable {
 
     private void giveEXPtoWinners(Monster defeatedMonster) {
         for(Monster m : leftInBattle.values()) {
-            if(m.getHP() > 0) {
-                boolean levelUp = m.receiveEXP(MathUtils.round(defeatedMonster.level*1f/m.level*(100*defeatedMonster.level)));
+            if(m.stat.isFit()) {
+                float opponentFactor = 1f * defeatedMonster.stat.getLevel() / m.stat.getLevel();
+                int EXP = MathUtils.floor(Constant.BASE_EXP * defeatedMonster.stat.getLevel() / 10f * opponentFactor);
+                boolean levelUp = m.stat.earnEXP(EXP);
                 if(levelUp) {
                     callbackHandler.onLevelup(m);
                 }
@@ -351,7 +355,7 @@ public class BattleSystem extends Observable {
             Monster target;
             while(!foundTarget) {
                 target = leftInBattle.get(MathUtils.random(0,leftInBattle.size-1));
-                if(target.getHP() > 0) {
+                if(target.stat.isFit()) {
                     foundTarget = true;
                     setChosenTarget(target);
                 }

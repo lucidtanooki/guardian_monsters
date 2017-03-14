@@ -10,6 +10,6 @@ import de.limbusdev.guardianmonsters.model.Monster;
 public class MonsterSpeedComparator implements Comparator<Monster> {
     @Override
     public int compare(Monster o1, Monster o2) {
-        return o1.getSpeed() - o2.getSpeed();
+        return o1.stat.getSpeed() - o2.stat.getSpeed();
     }
 }

@@ -116,16 +116,16 @@ public class AbilityDetailWidget extends Container {
         if(element != null) element.remove();
         if(monster.abilityGraph.learnsSomethingAt(nodeID)) {
             if(monster.abilityGraph.learnsAbilityAt(nodeID)) {
-                init(monster.abilityGraph.learnableAbilities.get(nodeID), nodeID, monster.abilityGraph, monster.getAbilityLevels() > 0);
+                init(monster.abilityGraph.learnableAbilities.get(nodeID), nodeID, monster.abilityGraph, monster.stat.hasAbilityLevelsLeft());
             }
             if(monster.abilityGraph.learnsEquipmentAt(nodeID)) {
-                init(monster.abilityGraph.learnableEquipment.get(nodeID), nodeID, monster.abilityGraph, monster.getAbilityLevels() > 0);
+                init(monster.abilityGraph.learnableEquipment.get(nodeID), nodeID, monster.abilityGraph, monster.stat.hasAbilityLevelsLeft());
             }
             if(monster.abilityGraph.metamorphsAt(nodeID)) {
-                initMetamorphosis(nodeID, monster.abilityGraph, monster.getAbilityLevels() > 0);
+                initMetamorphosis(nodeID, monster.abilityGraph, monster.stat.hasAbilityLevelsLeft());
             }
         } else {
-            initEmpty(nodeID,monster.abilityGraph, monster.getAbilityLevels() > 0);
+            initEmpty(nodeID,monster.abilityGraph, monster.stat.getAbilityLevels() > 0);
         }
     }
 

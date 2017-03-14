@@ -36,8 +36,8 @@ public class DebugOutput {
         for (int i = 0; i < queue.size; i++) {
             Monster m = queue.get(i);
             String name = Services.getL18N().l18n(BundleAssets.MONSTERS).get(MonsterDB.singleton().getNameById(m.ID));
-            System.out.print("[" + i + "] " + name + "\t\t(" + m.getSpeed() + "),");
-            System.out.println("\tKP: " + m.getHP() + "\tMP: " + m.getMP());
+            System.out.print("[" + i + "] " + name + "\t\t(" + m.stat.getSpeed() + "),");
+            System.out.println("\tKP: " + m.stat.getHP() + "\tMP: " + m.stat.getMP());
         }
     }
 

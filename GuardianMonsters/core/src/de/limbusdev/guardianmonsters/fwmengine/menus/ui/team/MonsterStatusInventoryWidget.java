@@ -16,10 +16,8 @@ import de.limbusdev.guardianmonsters.model.MonsterDB;
 import de.limbusdev.guardianmonsters.utils.Constant;
 
 
-/*
- * Copyright (c) 2016 by Georg Eckert
- *
- * Licensed under GPL 3.0 https://www.gnu.org/licenses/gpl-3.0.en.html
+/**
+ * @author Georg Eckert 2016
  */
 
 public class MonsterStatusInventoryWidget extends Group {
@@ -89,17 +87,17 @@ public class MonsterStatusInventoryWidget extends Group {
 
     public void init(Monster m) {
         name.setText(Services.getL18N().l18n(BundleAssets.MONSTERS).get(MonsterDB.singleton().getNameById(m.ID)));
-        valueLabels.get("hp").setText(m.getHP() + "/" + m.getHPfull());
-        valueLabels.get("mp").setText(m.getMP() + "/" + m.getMPfull());
-        valueLabels.get("exp").setText(m.getExp() + "/" + m.expAvailableInThisLevel());
-        valueLabels.get("pstr").setText(Integer.toString(m.pStrFull));
-        valueLabels.get("pdef").setText(Integer.toString(m.pDefFull));
-        valueLabels.get("mstr").setText(Integer.toString(m.mStrFull));
-        valueLabels.get("mdef").setText(Integer.toString(m.mDefFull));
-        valueLabels.get("speed").setText(Integer.toString(m.getSpeedFull()));
+        valueLabels.get("hp").setText(m.stat.getHP() + "/" + m.stat.getHPmax());
+        valueLabels.get("mp").setText(m.stat.getMP() + "/" + m.stat.getMPmax());
+        valueLabels.get("exp").setText(m.stat.getEXP() + "/" + m.stat.getEXPtoNextLevel()+m.stat.getEXP());
+        valueLabels.get("pstr").setText(Integer.toString(m.stat.getPStrMax()));
+        valueLabels.get("pdef").setText(Integer.toString(m.stat.getPDefMax()));
+        valueLabels.get("mstr").setText(Integer.toString(m.stat.getMStrMax()));
+        valueLabels.get("mdef").setText(Integer.toString(m.stat.getMDefMax()));
+        valueLabels.get("speed").setText(Integer.toString(m.stat.getSpeedMax()));
 
         elementGroup.clear();
-        for(Element e : m.elements) {
+        for(Element e : m.stat.elements) {
             String elem = e.toString().toLowerCase();
             String elemName = Services.getL18N().l18n(BundleAssets.ELEMENTS).get("element_" + elem);
             elemName = elemName.length() < 7 ? elemName : elemName.substring(0,6);
@@ -108,26 +106,26 @@ public class MonsterStatusInventoryWidget extends Group {
         }
 
         equipmentGroup.clear();
-        if(m.head != null) {
-            Image img = new Image(skin.getDrawable(m.head.getName()));
+        if(m.stat.hasHeadEquipped()) {
+            Image img = new Image(skin.getDrawable(m.stat.getHead().getName()));
             img.setSize(32,32);
             img.setPosition(102,178-2,Align.topLeft);
             equipmentGroup.addActor(img);
         }
-        if(m.hands != null) {
-            Image img = new Image(skin.getDrawable(m.hands.getName()));
+        if(m.stat.hasHandsEquipped()) {
+            Image img = new Image(skin.getDrawable(m.stat.getHands().getName()));
             img.setSize(32,32);
             img.setPosition(102,178-2-38,Align.topLeft);
             equipmentGroup.addActor(img);
         }
-        if(m.body != null) {
-            Image img = new Image(skin.getDrawable(m.body.getName()));
+        if(m.stat.hasBodyEquipped()) {
+            Image img = new Image(skin.getDrawable(m.stat.getBody().getName()));
             img.setSize(32,32);
             img.setPosition(102,178-2-38*2,Align.topLeft);
             equipmentGroup.addActor(img);
         }
-        if(m.feet != null) {
-            Image img = new Image(skin.getDrawable(m.feet.getName()));
+        if(m.stat.hasFeetEquipped()) {
+            Image img = new Image(skin.getDrawable(m.stat.getFeet().getName()));
             img.setSize(32,32);
             img.setPosition(102,178-2-38*3,Align.topLeft);
             equipmentGroup.addActor(img);

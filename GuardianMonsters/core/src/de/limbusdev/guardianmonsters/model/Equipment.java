@@ -1,7 +1,18 @@
 package de.limbusdev.guardianmonsters.model;
 
 /**
- * Created by georg on 20.02.17.
+ * Equipment extends the {@link Stat}s of a monster in the following way:
+ *
+ * HP   .. by factor (1 + addsHP/100)
+ * MP   .. by factor (1 + addsMP/100)
+ * PStr .. by adding addsPStr
+ * PDef .. by adding addsPDef
+ * MStr .. by adding addsMStr
+ * MDef .. by adding addsMDef
+ * Speed.. by adding addsSpeed
+ * EXP  .. by factor (1 + addsEXP/100)
+ *
+ * @author Georg Eckert
  */
 
 public abstract class Equipment extends Item {
@@ -31,8 +42,8 @@ public abstract class Equipment extends Item {
         HANDS, HEAD, BODY, FEET,
     }
 
-    private int addsPStr, addsPDef, addsMStr, addsMDef, addsSpeed, addsHP, addsMP, addsEXP;
-    private EQUIPMENT_TYPE type;
+    public final int addsPStr, addsPDef, addsMStr, addsMDef, addsSpeed, addsHP, addsMP, addsEXP;
+    public final EQUIPMENT_TYPE type;
 
     public Equipment(String name, EQUIPMENT_TYPE type, int addsPStr, int addsPDef, int addsMStr, int addsMDef, int addsSpeed, int addsHP, int addsMP, int addsExp) {
         super(name, CATEGORY.EQUIPMENT);
@@ -48,42 +59,7 @@ public abstract class Equipment extends Item {
     }
 
 
-
-    public int getAddsPStr() {
-        return addsPStr;
-    }
-
-    public int getAddsPDef() {
-        return addsPDef;
-    }
-
-    public int getAddsMStr() {
-        return addsMStr;
-    }
-
-    public int getAddsMDef() {
-        return addsMDef;
-    }
-
-    public int getAddsSpeed() {
-        return addsSpeed;
-    }
-
-    public int getAddsHP() {
-        return addsHP;
-    }
-
-    public int getAddsMP() {
-        return addsMP;
-    }
-
-    public int getAddsEXP() {
-        return addsEXP;
-    }
-
-    public EQUIPMENT_TYPE getEquipmentType() {
-        return type;
-    }
+    // ........................................................................... DERIVED EQUIPMENT
 
     public static class Hands extends Equipment {
 

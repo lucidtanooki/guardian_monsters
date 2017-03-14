@@ -18,41 +18,16 @@ public class Monster extends Observable {
     // .................................................................................. ATTRIBUTES
 
     public int INSTANCE_ID;
-    public Array<Element> elements;
-    public Equipment hands;
-    public Equipment head;
-    public Equipment body;
-    public Equipment feet;
+    public final Stat stat;
+
     public String    nickname;
 
     // -------------------------------------------------------------------------------------- STATUS
     public int ID;
-    public int level;
-    private int exp;
-    public int pStr, pStrFull;
-    private int HPfull, HP;
-    public int mStr, mStrFull;
-    private int MPfull, MP;
-    private int SpeedFull;
+
     private int abilityLevels;
     private ArrayMap<Integer,Ability> activeAbilities;
-
-    public int getSpeed() {
-        return Speed;
-    }
-
-    public int getSpeedFull() {
-        return SpeedFull;
-    }
-
     public AbilityGraph abilityGraph;
-
-    private int Speed;
-
-    public int pDefFull, pDef;
-    public int mDefFull, mDef;
-
-    public LevelUpReport levelUpReport;
 
     /* ........................................................................... CONSTRUCTOR .. */
 
@@ -62,26 +37,16 @@ public class Monster extends Observable {
         INSTANCECOUNTER++;
         // STATUS
         this.ID = ID;
-        this.level = 1;
-        this.exp = 0;
         BaseStat base = MonsterDB.singleton().getStatusInfos().get(ID).baseStat;
-        this.pStr = pStrFull = base.basePhysStrength;
-        this.HPfull = base.baseHP;
-        this.HP = base.baseHP;
-        this.mStr = mStrFull = base.baseMagStrength;
-        this.MP = MPfull = base.baseMP;
-        this.pDefFull = pDef = base.basePhysDefense;
-        this.mDefFull = mDef = base.baseMagDefense;
-        this.Speed = this.SpeedFull = base.baseSpeed;
         this.nickname = "";
         this.abilityLevels = 30 ;
 
-        this.elements = MonsterDB.singleton().getStatusInfos().get(ID).elements;
+        Array<Element> elements = MonsterDB.singleton().getStatusInfos().get(ID).elements;
 
         abilityGraph = new AbilityGraph();
         abilityGraph.init(MonsterDB.singleton().getData(ID));
 
-        for(int i = 0; i<level; i++) {
+        for(int i = 0; i<1; i++) {
             abilityGraph.activateNode(i);
         }
 
@@ -95,10 +60,7 @@ public class Monster extends Observable {
             counter++;
         }
 
-        levelUpReport = new LevelUpReport(
-            HPfull, MPfull, pStrFull, pDefFull, mStrFull, mDefFull, SpeedFull,
-            HPfull, MPfull, pStrFull, pDefFull, mStrFull, mDefFull, SpeedFull,
-            1,1);
+        this.stat = new Stat(1, base, elements);
 
     }
     /* ............................................................................... METHODS .. */

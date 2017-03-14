@@ -57,43 +57,43 @@ public class WeaponDetailViewWidget extends ItemDetailViewWidget {
         Equipment eq = (Equipment) item;
         String sign;
 
-        int value = eq.getAddsHP();
+        int value = eq.addsHP;
         if (value != 0) {
             sign = value >= 0 ? "+" : "-";
             valueLabels.get("hp").setText(sign + Integer.toString(value) + "%");
         }
 
-        value = eq.getAddsMP();
+        value = eq.addsMP;
         if (value != 0) {
             sign = value >= 0 ? "+" : "-";
             valueLabels.get("mp").setText(sign + Integer.toString(value) + "%");
         }
 
-        value = eq.getAddsPStr();
+        value = eq.addsPStr;
         if (value != 0) {
             sign = value >= 0 ? "+" : "-";
             valueLabels.get("pstr").setText(sign + Integer.toString(value));
         }
 
-        value = eq.getAddsPDef();
+        value = eq.addsPDef;
         if (value != 0) {
             sign = value >= 0 ? "+" : "-";
             valueLabels.get("pdef").setText(sign + Integer.toString(value));
         }
 
-        value = eq.getAddsMStr();
+        value = eq.addsMStr;
         if (value != 0) {
             sign = value >= 0 ? "+" : "-";
             valueLabels.get("mstr").setText(sign + Integer.toString(value));
         }
 
-        value = eq.getAddsMDef();
+        value = eq.addsMDef;
         if (value != 0) {
             sign = value >= 0 ? "+" : "-";
             valueLabels.get("mdef").setText(sign + Integer.toString(value));
         }
 
-        value = eq.getAddsSpeed();
+        value = eq.addsSpeed;
         if (value != 0) {
             sign = value >= 0 ? "+" : "-";
             valueLabels.get("speed").setText(sign + Integer.toString(value));

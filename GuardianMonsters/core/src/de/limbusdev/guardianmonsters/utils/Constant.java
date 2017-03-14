@@ -22,7 +22,7 @@ public class Constant {
     public static final int zoom = 1;
 
     // ................................................................................... DEBUGGING
-    public static final boolean DEBUGGING_ON = false;
+    public static final boolean DEBUGGING_ON = true;
     public final static DebugMode DEBUG_MODE = DebugMode.BATTLE;
     public final static int startMap = 25;
 

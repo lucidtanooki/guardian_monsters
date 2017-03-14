@@ -38,7 +38,7 @@ public class AttackMenuWidget extends SevenButtonsWidget {
                 setButtonText(i,Services.getL18N().l18n(BundleAssets.ATTACKS).get(attack.name) + mpCostString);
 
                 // Disable Ability, when monster does not have enough MP for it
-                if(attack.MPcost <= monster.getMP()) enableButton(i);
+                if(attack.MPcost <= monster.stat.getMP()) enableButton(i);
             }
         }
     }

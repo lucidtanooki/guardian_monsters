@@ -140,7 +140,7 @@ public class GameStateDebugger {
             int att = MathUtils.random(0,m.abilityGraph.learntAbilities.size-1);
             Array<Monster> targets = new Array<Monster>();
             for(Monster h : oppTeam.monsters.values()) {
-                if(h.getHP() > 0) {
+                if(h.stat.isFit()) {
                     targets.add(h);
                 }
             }

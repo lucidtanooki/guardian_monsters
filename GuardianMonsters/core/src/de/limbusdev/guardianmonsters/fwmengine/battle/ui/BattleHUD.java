@@ -291,7 +291,7 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
             public void onBackButton() {
                 boolean teamOk = false;
                 for(Monster m : leftTeam.monsters.values()) {
-                    if(m.getHP() > 0) {
+                    if(m.stat.isFit()) {
                         teamOk = true || teamOk;
                     } else {
                         teamOk = false || teamOk;

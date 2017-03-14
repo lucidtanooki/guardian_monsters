@@ -44,11 +44,11 @@ public class StatusPentagonWidget extends Group {
     }
 
     public void init(Monster monster) {
-        float pstr = monster.pStrFull / 999f*32f;
-        float pdef = monster.pDefFull / 999f*32f;
-        float mstr = monster.mStrFull / 999f*32f;
-        float mdef = monster.mDefFull / 999f*32f;
-        float speed= monster.getSpeedFull()/999f*32f;
+        float pstr = monster.stat.getPStrMax() / monster.stat.getMaxPossiblePStr()*32f;
+        float pdef = monster.stat.getPDefMax() / monster.stat.getMaxPossiblePDef()*32f;
+        float mstr = monster.stat.getMStrMax() / monster.stat.getMaxPossibleMStr()*32f;
+        float mdef = monster.stat.getMDefMax() / monster.stat.getMaxPossibleMDef()*32f;
+        float speed= monster.stat.getSpeedMax()/ monster.stat.getMaxPossibleSpeed()*32f;
 
         points = new float[10];
 

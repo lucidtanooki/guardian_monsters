@@ -11,6 +11,7 @@ import de.limbusdev.guardianmonsters.fwmengine.battle.control.BattleSystem;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.model.Monster;
 import de.limbusdev.guardianmonsters.model.MonsterDB;
+import de.limbusdev.guardianmonsters.model.Stat;
 
 /**
  * Created by georg on 26.11.16.
@@ -56,7 +57,7 @@ public class TargetMenuWidget extends SevenButtonsWidget implements Observer {
             setButtonText(key + offset, Services.getL18N().l18n(BundleAssets.MONSTERS).get(
                 MonsterDB.singleton().getNameById(m.ID)));
             enableButton(key + offset);
-            m.addObserver(this);
+            m.stat.addObserver(this);
         }
     }
 
@@ -88,14 +89,14 @@ public class TargetMenuWidget extends SevenButtonsWidget implements Observer {
     @Override
     public void update(Observable o, Object arg) {
         // Disable Button if monster got killed
-        if(o instanceof Monster) {
-            Monster observedMonster = (Monster) o;
+        if(o instanceof Stat) {
+            Stat observedMonster = (Stat) o;
             if(observedMonster.getHP() <= 0) {
                 int index;
-                if(leftTeam.containsValue(observedMonster,false)) {
-                    index = leftTeam.indexOfValue(observedMonster,false);
+                if(leftTeam.containsValue(observedMonster.monster,false)) {
+                    index = leftTeam.indexOfValue(observedMonster.monster,false);
                 } else {
-                    index = rightTeam.indexOfValue(observedMonster,false)+4;
+                    index = rightTeam.indexOfValue(observedMonster.monster,false)+4;
                 }
                 disableButton(index);
             }

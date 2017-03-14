@@ -33,8 +33,8 @@ public class MonsterManager {
     public static AttackCalculationReport calcDefense(Monster defensiveMonster) {
         System.out.println("Monster defends itself");
         AttackCalculationReport report = new AttackCalculationReport(defensiveMonster);
-        defensiveMonster.setpDef(MathUtils.round(defensiveMonster.pDef *1.05f));
-        defensiveMonster.setmDef(MathUtils.round(defensiveMonster.mDef *1.05f));
+        defensiveMonster.stat.increasePDef(5);
+        defensiveMonster.stat.increaseMDef(5);
 
         return report;
     }
@@ -48,14 +48,14 @@ public class MonsterManager {
     public static AttackCalculationReport calcAttack(Monster att, Monster def, Ability ability) {
         System.out.println("\n--- new ability ---");
         AttackCalculationReport report = new AttackCalculationReport(att, def, 0, 0, ability);
-        float effectiveness = ElemEff.singelton().getElemEff(ability.element, def.elements);
+        float effectiveness = ElemEff.singelton().getElemEff(ability.element, def.stat.elements);
 
         float defenseRatio;
 
         if(ability.attackType == AttackType.PHYSICAL) {
-            defenseRatio = (att.pStr *1f) / (def.pDef *1f);
+            defenseRatio = (att.stat.getPStr() * 1f) / (def.stat.getPDef() *1f);
         } else {
-            defenseRatio = (att.mStr *1f) / (def.mDef *1f);
+            defenseRatio = (att.stat.getMStr() *1f) / (def.stat.getMDef() *1f);
         }
 
         /* Calculate Damage */
@@ -75,15 +75,15 @@ public class MonsterManager {
 
     /**
      * Applies the previously calculated attack
-     * @param rep
+     * @param report
      */
-    public static void apply(AttackCalculationReport rep) {
-        if(rep.defender == null) {
+    public static void apply(AttackCalculationReport report) {
+        if(report.defender == null) {
             System.out.println("Only self defending");
             return;
         }
-        rep.defender.setHP(rep.defender.getHP() - MathUtils.round(rep.damage));
-        rep.attacker.consumeMP(rep.attack.MPcost);
+        report.defender.stat.decreaseHP(report.damage);
+        report.attacker.stat.decreaseMP(report.attack.MPcost);
     }
 
     public static boolean tryToRun(ArrayMap<Integer,Monster> escapingTeam, ArrayMap<Integer,Monster> attackingTeam) {
@@ -91,14 +91,14 @@ public class MonsterManager {
         float meanAttackingTeamLevel = 0;
 
         for(Monster m : escapingTeam.values()) {
-            if(m.getHP() > 0) {
-                meanEscapingTeamLevel += m.getLevel();
+            if(m.stat.isFit()) {
+                meanEscapingTeamLevel += m.stat.getLevel();
             }
         }
         meanEscapingTeamLevel /= escapingTeam.size;
 
         for(Monster m : attackingTeam.values()) {
-            meanAttackingTeamLevel += m.getLevel();
+            meanAttackingTeamLevel += m.stat.getLevel();
         }
         meanAttackingTeamLevel /= escapingTeam.size;
 

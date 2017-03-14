@@ -21,6 +21,7 @@ import de.limbusdev.guardianmonsters.model.Equipment;
 import de.limbusdev.guardianmonsters.model.Item;
 import de.limbusdev.guardianmonsters.model.Monster;
 import de.limbusdev.guardianmonsters.model.MonsterDB;
+import de.limbusdev.guardianmonsters.model.Stat;
 
 /**
  * Created by georg on 21.02.17.
@@ -68,7 +69,7 @@ public class GuardianOverviewButton extends TextButton implements Observer{
     private void construct(Monster monster, Item item) {
         this.item = item;
         this.monster = monster;
-        monster.addObserver(this);
+        monster.stat.addObserver(this);
 
         getLabel().setAlignment(Align.topLeft);
         TextureRegion region = Services.getMedia().getMonsterMiniSprite(monster.ID);
@@ -94,7 +95,7 @@ public class GuardianOverviewButton extends TextButton implements Observer{
             row();
         }
 
-        Monster.EquipmentPotential pot = monster.getEquipmentPotential(equipment);
+        Stat.EquipmentPotential pot = monster.stat.getEquipmentPotential(equipment);
 
         String props[]  = {"hp", "mp", "speed", "exp", "pstr", "pdef", "mstr", "mdef"};
         int potValues[] = {pot.hp, pot.mp, pot.speed, pot.exp, pot.pstr, pot.pdef, pot.mstr, pot.mdef};
@@ -129,9 +130,9 @@ public class GuardianOverviewButton extends TextButton implements Observer{
 
         subTable = new Table();
         subTable.add(new Image(getSkin().getDrawable("stats-symbol-hp")));
-        subTable.add(new Label(Integer.toString(monster.getHP()) + " / " + Integer.toString(monster.getHPfull()), getSkin(), "default")).width(56);
+        subTable.add(new Label(Integer.toString(monster.stat.getHP()) + " / " + Integer.toString(monster.stat.getHPmax()), getSkin(), "default")).width(56);
         subTable.add(new Image(getSkin().getDrawable("stats-symbol-mp")));
-        subTable.add(new Label(Integer.toString(monster.getMP()) + " / " + Integer.toString(monster.getMPfull()), getSkin(), "default")).width(56);
+        subTable.add(new Label(Integer.toString(monster.stat.getMP()) + " / " + Integer.toString(monster.stat.getMPmax()), getSkin(), "default")).width(56);
 
         add(subTable).align(Align.left);
         layout();
@@ -144,7 +145,7 @@ public class GuardianOverviewButton extends TextButton implements Observer{
 
     @Override
     public void update(Observable o, Object arg) {
-        if(o instanceof Monster) {
+        if(o instanceof Stat) {
             switch(item.getCategory()) {
                 case EQUIPMENT:
                     augmentButtonEquipment(monster, (Equipment) item);

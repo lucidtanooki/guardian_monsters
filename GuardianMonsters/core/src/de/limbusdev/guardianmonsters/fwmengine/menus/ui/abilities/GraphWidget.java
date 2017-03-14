@@ -19,6 +19,7 @@ import de.limbusdev.guardianmonsters.fwmengine.menus.ui.widgets.AnimatedImage;
 import de.limbusdev.guardianmonsters.geometry.IntVec2;
 import de.limbusdev.guardianmonsters.model.AbilityGraph;
 import de.limbusdev.guardianmonsters.model.Monster;
+import de.limbusdev.guardianmonsters.model.Stat;
 
 /**
  * Created by georg on 27.02.17.
@@ -68,7 +69,7 @@ public class GraphWidget extends Group implements Observer {
         clear();
         currentMonster = monster;
         this.graph = monster.abilityGraph;
-        monster.addObserver(this);
+        monster.stat.addObserver(this);
 
         edgeWidgets.clear();
         for(AbilityGraph.Edge edge : graph.getEdges()) {
@@ -137,10 +138,10 @@ public class GraphWidget extends Group implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        if(o instanceof Monster) {
-            Monster m = (Monster)o;
-            if(m.equals(currentMonster)) {
-                refreshStatus(m);
+        if(o instanceof Stat) {
+            Stat stat = (Stat)o;
+            if(stat.monster.equals(currentMonster)) {
+                refreshStatus(stat.monster);
             }
         }
     }

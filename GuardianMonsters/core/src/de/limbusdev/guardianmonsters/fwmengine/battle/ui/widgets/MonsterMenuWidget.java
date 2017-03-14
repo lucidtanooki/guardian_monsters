@@ -49,7 +49,7 @@ public class MonsterMenuWidget extends SevenButtonsWidget {
 
             replaceButton(bwi,key);
 
-            if(m.getHP() > 0 && !inBattle.containsValue(m,false)) {
+            if(m.stat.isFit() && !inBattle.containsValue(m,false)) {
                 enableButton(key);
             }
         }

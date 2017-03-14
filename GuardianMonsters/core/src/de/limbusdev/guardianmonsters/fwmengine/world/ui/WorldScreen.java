@@ -123,7 +123,6 @@ public class WorldScreen implements Screen {
      */
     @Override
     public void hide() {
-        gameArea.stopMusic();
         ECS.hud.hide();
     }
 

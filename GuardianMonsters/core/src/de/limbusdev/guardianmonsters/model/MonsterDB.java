@@ -54,7 +54,28 @@ public class MonsterDB {
 
     private MonsterData parseMonster(XmlReader.Element element) {
         MonsterData monData;
-        int metamorphsTo = element.getInt("metamorphesTo", 0);
+
+        int ID = element.getIntAttribute("id", 0);
+        String nameID = element.getAttribute("nameID", "gm000");
+
+        XmlReader.Element elemElement = element.getChildByName("elements");
+        Array<Element> elements = new Array<>();
+        for(int i = 0; i < elemElement.getChildCount(); i++) {
+            XmlReader.Element e = elemElement.getChild(i);
+            String eStr = e.getText();
+            Element newE = Element.valueOf(eStr.toUpperCase());
+            elements.add(newE);
+        }
+
+        int metamorphsFrom = element.getInt("metamorphsFrom", 0);
+        int metamorphsTo   = element.getInt("metamorphesTo",  0);
+
+        if(metamorphsFrom > 0) {
+            MonsterData ancestorMonData = getData(metamorphsFrom);
+            monData = new MonsterData(ID, nameID, metamorphsTo, elements, ancestorMonData);
+            return monData;
+        }
+
         Array<Integer> metamorphosisNodes = new Array<>();
         XmlReader.Element metaElement = element.getChildByName("metamorphosisNodes");
         if(metaElement != null) {
@@ -69,9 +90,9 @@ public class MonsterDB {
         ArrayMap<Integer,Ability> attacks = new ArrayMap<>();
         for(int i = 0; i < attElement.getChildCount(); i++) {
             XmlReader.Element a = attElement.getChild(i);
-            int ID = a.getIntAttribute("id", 0);
+            int attID = a.getIntAttribute("id", 0);
             Element el = Element.valueOf(a.getAttribute("element").toUpperCase());
-            Ability att = attInf.getAttack(el, ID);
+            Ability att = attInf.getAttack(el, attID);
             int abilityPos = a.getIntAttribute("abilityPos", 0);
             attacks.put(abilityPos, att);
         }
@@ -83,28 +104,16 @@ public class MonsterDB {
         equipmentGraph.put(equipGraphElem.getIntAttribute("head"), Equipment.EQUIPMENT_TYPE.HEAD);
         equipmentGraph.put(equipGraphElem.getIntAttribute("feet"), Equipment.EQUIPMENT_TYPE.FEET);
 
-        XmlReader.Element elemElement = element.getChildByName("elements");
-        Array<Element> elements = new Array<>();
-        for(int i = 0; i < elemElement.getChildCount(); i++) {
-            XmlReader.Element e = elemElement.getChild(i);
-            String eStr = e.getText();
-            Element newE = Element.valueOf(eStr.toUpperCase());
-            elements.add(newE);
-        }
-
-        int ID = element.getIntAttribute("id", 0);
-        String nameID = element.getAttribute("nameID", "gm000");
-
         XmlReader.Element statEl = element.getChildByName("basestats");
         BaseStat stat = new BaseStat(
             ID,
-            statEl.getIntAttribute("hp", 99),
-            statEl.getIntAttribute("mp", 19),
-            statEl.getIntAttribute("pstr", 1),
-            statEl.getIntAttribute("pdef", 1),
-            statEl.getIntAttribute("mstr", 1),
-            statEl.getIntAttribute("mdef", 1),
-            statEl.getIntAttribute("speed", 1)
+            statEl.getIntAttribute("hp",    300),
+            statEl.getIntAttribute("mp",    50),
+            statEl.getIntAttribute("pstr",  10),
+            statEl.getIntAttribute("pdef",  10),
+            statEl.getIntAttribute("mstr",  10),
+            statEl.getIntAttribute("mdef",  10),
+            statEl.getIntAttribute("speed", 10)
         );
 
         XmlReader.Element equipComp = element.getChildByName("equipment-compatibility");

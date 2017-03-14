@@ -13,18 +13,18 @@ import de.limbusdev.guardianmonsters.enums.Element;
  */
 public class MonsterData {
     /* ............................................................................ ATTRIBUTES .. */
-    public int ID;
-    public String nameID;
-    public ArrayMap<Integer,Ability> learnableAbilitiesByNode;
-    public ArrayMap<Integer, Equipment.EQUIPMENT_TYPE> learnableEquipmentByNode;
-    public Array<Integer> metamorphosisNodes;
-    public int metamorphesTo;
-    public Array<Element> elements;
-    public BaseStat baseStat;
-    private Equipment.HeadEquipment compatibleHeadEquip;
-    private Equipment.BodyEquipment compatibleBodyEquip;
-    private Equipment.HandEquipment compatibleHandEquip;
-    private Equipment.FootEquipment compatibleFootEquip;
+    public final int ID;
+    public final String nameID;
+    public final ArrayMap<Integer,Ability> learnableAbilitiesByNode;
+    public final ArrayMap<Integer, Equipment.EQUIPMENT_TYPE> learnableEquipmentByNode;
+    public final Array<Integer> metamorphosisNodes;
+    public final int metamorphesTo;
+    public final Array<Element> elements;
+    public final BaseStat baseStat;
+    private final Equipment.HeadEquipment compatibleHeadEquip;
+    private final Equipment.BodyEquipment compatibleBodyEquip;
+    private final Equipment.HandEquipment compatibleHandEquip;
+    private final Equipment.FootEquipment compatibleFootEquip;
 
     /* ........................................................................... CONSTRUCTOR .. */
 
@@ -52,6 +52,22 @@ public class MonsterData {
         this.compatibleHeadEquip = head;
         this.compatibleFootEquip = feet;
     }
+
+    public MonsterData(int ID, String nameID, int metamorphsTo, Array<Element> elements, MonsterData ancestorData) {
+        this(
+            ID, nameID, metamorphsTo,
+            ancestorData.baseStat,
+            elements,
+            ancestorData.learnableAbilitiesByNode,
+            ancestorData.learnableEquipmentByNode,
+            ancestorData.metamorphosisNodes,
+            ancestorData.getCompatibleHeadEquip(),
+            ancestorData.getCompatibleBodyEquip(),
+            ancestorData.getCompatibleHandEquip(),
+            ancestorData.getCompatibleFootEquip()
+        );
+    }
+
     /* ............................................................................... METHODS .. */
     
     /* ..................................................................... GETTERS & SETTERS .. */

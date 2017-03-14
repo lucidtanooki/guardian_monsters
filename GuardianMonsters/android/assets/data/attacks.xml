@@ -8,35 +8,35 @@
     </ability>
 
     <ability id="2" element="none" nameID="attNone2_kick">
-        <damage>5</damage>
+        <damage>50</damage>
         <sfx type="hit" index="0" />
         <animation>contact</animation>
         <category>physical</category>
     </ability>
 
     <ability id="3" element="none" nameID="attNone3_tooth">
-        <damage>5</damage>
+        <damage>50</damage>
         <sfx type="hit" index="0" />
         <animation>contact</animation>
         <category>physical</category>
     </ability>
 
     <ability id="4" element="none" nameID="attNone4_punch">
-        <damage>10</damage>
+        <damage>60</damage>
         <sfx type="hit" index="0" />
         <animation>contact</animation>
         <category>physical</category>
     </ability>
 
     <ability id="5" element="none" nameID="attNone5_slap">
-        <damage>15</damage>
+        <damage>70</damage>
         <sfx type="hit" index="0" />
         <animation>contact</animation>
         <category>physical</category>
     </ability>
 
     <ability id="6" element="none" nameID="attNone6_triphazard">
-        <damage>20</damage>
+        <damage>80</damage>
         <sfx type="hit" index="0" />
         <animation>contact</animation>
         <category>physical</category>

@@ -298,7 +298,10 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
                     }
                 }
                 if(!teamOk) Services.getScreenManager().getGame().create();
-                else Services.getScreenManager().popScreen();
+                else {
+                    Services.getAudio().stopMusic();
+                    Services.getScreenManager().popScreen();
+                }
             }
         };
 

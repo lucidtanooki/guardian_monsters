@@ -89,7 +89,7 @@ public class MonsterStatusInventoryWidget extends Group {
         name.setText(Services.getL18N().l18n(BundleAssets.MONSTERS).get(MonsterDB.singleton().getNameById(m.ID)));
         valueLabels.get("hp").setText(m.stat.getHP() + "/" + m.stat.getHPmax());
         valueLabels.get("mp").setText(m.stat.getMP() + "/" + m.stat.getMPmax());
-        valueLabels.get("exp").setText(m.stat.getEXP() + "/" + m.stat.getEXPtoNextLevel()+m.stat.getEXP());
+        valueLabels.get("exp").setText(m.stat.getEXP() + "/" + (m.stat.getEXPtoNextLevel() + m.stat.getEXP()));
         valueLabels.get("pstr").setText(Integer.toString(m.stat.getPStrMax()));
         valueLabels.get("pdef").setText(Integer.toString(m.stat.getPDefMax()));
         valueLabels.get("mstr").setText(Integer.toString(m.stat.getMStrMax()));

@@ -1,7 +1,6 @@
 package de.limbusdev.guardianmonsters.utils;
 
 import de.limbusdev.guardianmonsters.enums.DebugMode;
-import de.limbusdev.guardianmonsters.model.Stat;
 
 /**
  * Static container for Settings. Every parameter used in the game should be configured here
@@ -22,7 +21,7 @@ public class Constant {
     public static final int zoom = 1;
 
     // ................................................................................... DEBUGGING
-    public static final boolean DEBUGGING_ON = true;
+    public static final boolean DEBUGGING_ON = false;
     public final static DebugMode DEBUG_MODE = DebugMode.BATTLE;
     public final static int startMap = 25;
 

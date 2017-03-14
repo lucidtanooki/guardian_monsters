@@ -29,6 +29,18 @@ public class GameState {
         // ONLY FOR JSON CREATION
         this.team = new ArrayMap<>();
     }
+
+    public String toString() {
+        String out = "";
+        out += "Last position: (" + gridx + "|" + gridy + ")" + " at map " + map + "\n";
+        out += "Team:\n";
+
+        for(Monster m : team.values()) {
+            out += m.toString() + "\n";
+        }
+
+        return out;
+    }
     /* ............................................................................... METHODS .. */
     
     /* ..................................................................... GETTERS & SETTERS .. */

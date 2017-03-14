@@ -11,7 +11,7 @@ import de.limbusdev.guardianmonsters.enums.SFXType;
  */
 public class Ability {
     /* ............................................................................ ATTRIBUTES .. */
-    public final int ID;
+    public int ID;
     public AttackType attackType;
     public Element element;
     public int damage;
@@ -21,6 +21,11 @@ public class Ability {
     public AnimationType animationType;
     public int MPcost;
     /* ........................................................................... CONSTRUCTOR .. */
+
+    /**
+     * For Serialization only!
+     */
+    public Ability() {}
 
     /**
      * For attacks that cost no MP

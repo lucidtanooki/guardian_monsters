@@ -108,10 +108,15 @@ public class AbilityGraph {
     }
 
     // ............................................................................... INNER CLASSES
-    public class Node {
+    public static class Node {
         public int x;
         public int y;
         public int ID;
+
+        /**
+         * For Serialization only!
+         */
+        public Node(){}
 
         public Node(int x, int y, int ID) {
             this.y = y;
@@ -120,10 +125,15 @@ public class AbilityGraph {
         }
     }
 
-    public class Edge {
+    public static class Edge {
         public Node from;
         public Node to;
         public Orientation orientation;
+
+        /**
+         * For Serialization only!
+         */
+        public Edge (){}
 
         public Edge(Node from, Node to) {
             this.from = from;

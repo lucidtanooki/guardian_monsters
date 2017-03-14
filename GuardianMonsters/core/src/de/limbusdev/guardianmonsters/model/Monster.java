@@ -15,7 +15,7 @@ public class Monster {
     // .................................................................................. ATTRIBUTES
 
     public int INSTANCE_ID;
-    public final Stat stat;
+    public Stat stat;
 
     public String nickname;
 
@@ -56,6 +56,13 @@ public class Monster {
         }
 
         this.stat = new Stat(1, base, elements, this);
+
+    }
+
+    /**
+     * For Serialization only
+     */
+    public Monster() {
 
     }
     /* ............................................................................... METHODS .. */
@@ -108,4 +115,10 @@ public class Monster {
         activeAbilities.put(slot, abilityGraph.learntAbilities.get(learntAbilityNumber));
     }
 
+    @Override
+    public String toString() {
+        String out = "";
+        out += MonsterDB.singleton().getNameById(ID) + " Level: " + stat.getLevel();
+        return out;
+    }
 }

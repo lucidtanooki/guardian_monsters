@@ -63,7 +63,7 @@ public class Stat extends Observable {
     private int abilityLevels;
     private int EXP;
 
-    public final int character;   // for growth rates
+    public int character;   // for growth rates
 
     private int HP, MP, PStr, PDef, MStr, MDef, Speed;
     private int HPmax, MPmax, PStrMax, PDefMax, MStrMax, MDefMax, SpeedMax;
@@ -75,9 +75,12 @@ public class Stat extends Observable {
     private Equipment feet;
 
     private LevelUpReport lvlUpReport;
-    public final Monster monster;
+    public Monster monster;
 
     // ................................................................................. CONSTRUCTOR
+
+    public Stat() {}
+
     public Stat(int level, BaseStat baseStat, Array<Element> elements, Monster monster) {
 
         this.monster = monster;
@@ -701,6 +704,8 @@ public class Stat extends Observable {
             this.oldLevel = oldLevel;
             this.newLevel = newLevel;
         }
+
+        LevelUpReport() {}
     }
 
     /**

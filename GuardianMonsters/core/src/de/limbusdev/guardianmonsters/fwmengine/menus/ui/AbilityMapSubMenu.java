@@ -1,5 +1,7 @@
 package de.limbusdev.guardianmonsters.fwmengine.menus.ui;
 
+import com.badlogic.ashley.signals.Listener;
+import com.badlogic.ashley.signals.Signal;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ArrayMap;
@@ -24,7 +26,7 @@ import de.limbusdev.guardianmonsters.utils.Constant;
  * @author Georg Eckert 2017
  */
 
-public class AbilityMapSubMenu extends AInventorySubMenu implements Observer,
+public class AbilityMapSubMenu extends AInventorySubMenu implements Listener<Monster>,
     GraphWidget.Controller, TeamMemberSwitcher.Controller, AbilityDetailWidget.Controller {
 
     private ArrayMap<Integer, Monster> team;
@@ -39,7 +41,7 @@ public class AbilityMapSubMenu extends AInventorySubMenu implements Observer,
         this.team = team;
 
         for (Monster m : this.team.values()) {
-            m.stat.addObserver(this);
+            m.add(this);
         }
 
         graphWidget = new GraphWidget(skin, this);
@@ -76,16 +78,6 @@ public class AbilityMapSubMenu extends AInventorySubMenu implements Observer,
     }
 
 
-    @Override
-    public void update(Observable o, Object arg) {
-        if (o instanceof Stat) {
-            Monster m = ((Stat)o).monster;
-            if (m.equals(team.get(switcher.getCurrentlyChosen()))) {
-                refresh();
-            }
-        }
-    }
-
 
     // ........................................................................... INTERFACE METHODS
     @Override
@@ -109,4 +101,10 @@ public class AbilityMapSubMenu extends AInventorySubMenu implements Observer,
         details.init(m, nodeID);
     }
 
+    @Override
+    public void receive(Signal<Monster> signal, Monster monster) {
+        if(monster.equalsMonster(team.get(switcher.getCurrentlyChosen()))) {
+            refresh();
+        }
+    }
 }

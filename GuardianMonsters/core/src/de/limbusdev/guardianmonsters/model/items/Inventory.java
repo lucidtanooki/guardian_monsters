@@ -1,15 +1,15 @@
-package de.limbusdev.guardianmonsters.model;
+package de.limbusdev.guardianmonsters.model.items;
 
+import com.badlogic.ashley.signals.Signal;
 import com.badlogic.gdx.utils.OrderedMap;
 
 import java.util.Comparator;
-import java.util.Observable;
 
 /**
- * Created by Georg Eckert on 17.02.17.
+ * @author Georg Eckert 2017
  */
 
-public class Inventory extends Observable {
+public class Inventory extends Signal<ItemSignal> {
     private OrderedMap<Item, Integer> items;
 
     public Inventory() {
@@ -26,8 +26,8 @@ public class Inventory extends Observable {
         } else {
             items.put(item,1);
         }
-        setChanged();
-        notifyObservers(item);
+
+        dispatch(new ItemSignal(item, ItemSignal.Message.ADDED));
     }
 
     public Item takeItemFromInventory(Item item) {
@@ -36,12 +36,18 @@ public class Inventory extends Observable {
             if(items.get(item) < 1) {
                 items.remove(item);
             }
-            setChanged();
-            notifyObservers(item);
+
+            dispatch(new ItemSignal(item, ItemSignal.Message.DELETED));
+
             return item;
         } else {
             return null;
         }
+    }
+
+    public boolean containsItem(Item item) {
+        if(getItemAmount(item) == 0) return false;
+        else return true;
     }
 
     public Integer getItemAmount(Item item) {
@@ -54,8 +60,8 @@ public class Inventory extends Observable {
 
     public void sortItemsByID() {
         items.orderedKeys().sort(new IDComparator());
-        setChanged();
-        notifyObservers();
+
+        dispatch(null);
     }
 
     private class IDComparator implements Comparator<Item> {

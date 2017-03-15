@@ -8,8 +8,8 @@ import com.badlogic.gdx.utils.ArrayMap;
 
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.AInventorySubMenu;
 import de.limbusdev.guardianmonsters.geometry.IntVec2;
-import de.limbusdev.guardianmonsters.model.Inventory;
-import de.limbusdev.guardianmonsters.model.Item;
+import de.limbusdev.guardianmonsters.model.items.Inventory;
+import de.limbusdev.guardianmonsters.model.items.Item;
 import de.limbusdev.guardianmonsters.model.ItemDB;
 import de.limbusdev.guardianmonsters.utils.Constant;
 

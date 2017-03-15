@@ -6,9 +6,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ArrayMap;
 
-import de.limbusdev.guardianmonsters.model.Equipment;
-import de.limbusdev.guardianmonsters.model.Inventory;
-import de.limbusdev.guardianmonsters.model.Item;
+import de.limbusdev.guardianmonsters.model.items.Equipment;
+import de.limbusdev.guardianmonsters.model.items.Inventory;
+import de.limbusdev.guardianmonsters.model.items.Item;
 import de.limbusdev.guardianmonsters.model.Monster;
 
 /**

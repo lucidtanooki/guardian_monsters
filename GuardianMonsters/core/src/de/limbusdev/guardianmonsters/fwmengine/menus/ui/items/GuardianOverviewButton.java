@@ -1,5 +1,7 @@
 package de.limbusdev.guardianmonsters.fwmengine.menus.ui.items;
 
+import com.badlogic.ashley.signals.Listener;
+import com.badlogic.ashley.signals.Signal;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -12,22 +14,19 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.Align;
 
 
-import java.util.Observable;
-import java.util.Observer;
-
 import de.limbusdev.guardianmonsters.data.BundleAssets;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
-import de.limbusdev.guardianmonsters.model.Equipment;
-import de.limbusdev.guardianmonsters.model.Item;
+import de.limbusdev.guardianmonsters.model.items.Equipment;
+import de.limbusdev.guardianmonsters.model.items.EquipmentPotential;
+import de.limbusdev.guardianmonsters.model.items.Item;
 import de.limbusdev.guardianmonsters.model.Monster;
 import de.limbusdev.guardianmonsters.model.MonsterDB;
-import de.limbusdev.guardianmonsters.model.Stat;
 
 /**
  * Created by georg on 21.02.17.
  */
 
-public class GuardianOverviewButton extends TextButton implements Observer{
+public class GuardianOverviewButton extends TextButton implements Listener<Monster> {
 
     private Table subTable;
     private Item item;
@@ -69,7 +68,7 @@ public class GuardianOverviewButton extends TextButton implements Observer{
     private void construct(Monster monster, Item item) {
         this.item = item;
         this.monster = monster;
-        monster.stat.addObserver(this);
+        monster.add(this);
 
         getLabel().setAlignment(Align.topLeft);
         TextureRegion region = Services.getMedia().getMonsterMiniSprite(monster.ID);
@@ -95,7 +94,7 @@ public class GuardianOverviewButton extends TextButton implements Observer{
             row();
         }
 
-        Stat.EquipmentPotential pot = monster.stat.getEquipmentPotential(equipment);
+        EquipmentPotential pot = monster.stat.getEquipmentPotential(equipment);
 
         String props[]  = {"hp", "mp", "speed", "exp", "pstr", "pdef", "mstr", "mdef"};
         int potValues[] = {pot.hp, pot.mp, pot.speed, pot.exp, pot.pstr, pot.pdef, pot.mstr, pot.mdef};
@@ -144,16 +143,14 @@ public class GuardianOverviewButton extends TextButton implements Observer{
     }
 
     @Override
-    public void update(Observable o, Object arg) {
-        if(o instanceof Stat) {
-            switch(item.getCategory()) {
-                case EQUIPMENT:
-                    augmentButtonEquipment(monster, (Equipment) item);
-                    break;
-                default:
-                    augmentButtonMedicine(monster, item);
-                    break;
-            }
+    public void receive(Signal<Monster> signal, Monster monster) {
+        switch(item.getCategory()) {
+            case EQUIPMENT:
+                augmentButtonEquipment(monster, (Equipment) item);
+                break;
+            default:
+                augmentButtonMedicine(monster, item);
+                break;
         }
     }
 }

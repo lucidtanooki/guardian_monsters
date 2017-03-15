@@ -10,12 +10,11 @@ import java.util.Observable;
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.AttackCalculationReport;
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.MonsterSpeedComparator;
 import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager;
-import de.limbusdev.guardianmonsters.model.Ability;
+import de.limbusdev.guardianmonsters.model.abilities.Ability;
 import de.limbusdev.guardianmonsters.model.Monster;
 import de.limbusdev.guardianmonsters.utils.Constant;
 import de.limbusdev.guardianmonsters.utils.DebugOutput;
 import de.limbusdev.guardianmonsters.utils.GameState;
-import de.limbusdev.guardianmonsters.utils.MathTool;
 
 /**
  * Created by georg on 21.11.16.

@@ -17,7 +17,7 @@ import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.SevenButtonsWid
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.abilities.AbilityDetailWidget;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.team.TeamMemberSwitcher;
-import de.limbusdev.guardianmonsters.model.Ability;
+import de.limbusdev.guardianmonsters.model.abilities.Ability;
 import de.limbusdev.guardianmonsters.model.Monster;
 import de.limbusdev.guardianmonsters.utils.Constant;
 

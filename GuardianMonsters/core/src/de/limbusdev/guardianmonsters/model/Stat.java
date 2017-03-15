@@ -1,11 +1,12 @@
 package de.limbusdev.guardianmonsters.model;
 
+import com.badlogic.ashley.signals.Signal;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 
-import java.util.Observable;
 
 import de.limbusdev.guardianmonsters.enums.Element;
+import de.limbusdev.guardianmonsters.model.items.EquipmentPotential;
 import de.limbusdev.guardianmonsters.utils.Constant;
 import de.limbusdev.guardianmonsters.utils.MathTool;
 
@@ -37,7 +38,7 @@ import static de.limbusdev.guardianmonsters.model.Stat.Growth.SLOWHP;
  * @author Georg Eckert 2016
  */
 
-public class Stat extends Observable {
+public class Stat extends Signal<Stat> {
 
     public static abstract class Character {
         public static final int BALANCED=0, VIVACIOUS=1, PRUDENT=2;
@@ -69,10 +70,10 @@ public class Stat extends Observable {
     private int HPmax, MPmax, PStrMax, PDefMax, MStrMax, MDefMax, SpeedMax;
     public Array<Element> elements;
 
-    private Equipment hands;
-    private Equipment head;
-    private Equipment body;
-    private Equipment feet;
+    private de.limbusdev.guardianmonsters.model.items.Equipment hands;
+    private de.limbusdev.guardianmonsters.model.items.Equipment head;
+    private de.limbusdev.guardianmonsters.model.items.Equipment body;
+    private de.limbusdev.guardianmonsters.model.items.Equipment feet;
 
     private LevelUpReport lvlUpReport;
     public Monster monster;
@@ -145,8 +146,7 @@ public class Stat extends Observable {
 
         this.lvlUpReport = report;
 
-        setChanged();
-        notifyObservers();
+        dispatch(this);
 
         return report;
     }
@@ -170,8 +170,7 @@ public class Stat extends Observable {
             leveledUp = true;
         }
 
-        setChanged();
-        notifyObservers();
+        dispatch(this);
 
         return leveledUp;
     }
@@ -277,8 +276,8 @@ public class Stat extends Observable {
         return (getEXPAvailableAtLevel(level) - EXP);
     }
 
-    public Equipment giveEquipment(Equipment equipment) {
-        Equipment oldEquipment=null;
+    public de.limbusdev.guardianmonsters.model.items.Equipment giveEquipment(de.limbusdev.guardianmonsters.model.items.Equipment equipment) {
+        de.limbusdev.guardianmonsters.model.items.Equipment oldEquipment=null;
         switch(equipment.type) {
             case HANDS:
                 oldEquipment = hands;
@@ -298,21 +297,20 @@ public class Stat extends Observable {
                 break;
         }
 
-        setChanged();
-        notifyObservers();
+        dispatch(this);
 
         return oldEquipment;
     }
 
     /**
-     * Calculates the {@link EquipmentPotential} of a given {@link Equipment} for this {@link Monster}
+     * Calculates the {@link de.limbusdev.guardianmonsters.model.items.EquipmentPotential} of a given {@link de.limbusdev.guardianmonsters.model.items.Equipment} for this {@link Monster}
      * @param eq
      * @return
      */
-    public EquipmentPotential getEquipmentPotential(Equipment eq) {
-        EquipmentPotential pot;
+    public de.limbusdev.guardianmonsters.model.items.EquipmentPotential getEquipmentPotential(de.limbusdev.guardianmonsters.model.items.Equipment eq) {
+        de.limbusdev.guardianmonsters.model.items.EquipmentPotential pot;
 
-        Equipment currentEquipment;
+        de.limbusdev.guardianmonsters.model.items.Equipment currentEquipment;
         switch(eq.type) {
             case HEAD:
                 currentEquipment = head;
@@ -329,7 +327,7 @@ public class Stat extends Observable {
         }
 
         if(currentEquipment == null) {
-            pot = new EquipmentPotential(
+            pot = new de.limbusdev.guardianmonsters.model.items.EquipmentPotential(
                 eq.addsHP,
                 eq.addsMP,
                 eq.addsSpeed,
@@ -370,7 +368,7 @@ public class Stat extends Observable {
     }
 
     /**
-     * returns the number of levels, which can be used to activate nodes in the {@link AbilityGraph}
+     * returns the number of levels, which can be used to activate nodes in the {@link de.limbusdev.guardianmonsters.model.abilities.AbilityGraph}
      * @return
      */
     public int getAbilityLevels() {
@@ -470,7 +468,7 @@ public class Stat extends Observable {
     }
 
     /**
-     * @return maximum HP, taking {@link Equipment} into account
+     * @return maximum HP, taking {@link de.limbusdev.guardianmonsters.model.items.Equipment} into account
      */
     public int getHPmax() {
         float extFactor = 100f;
@@ -484,7 +482,7 @@ public class Stat extends Observable {
     }
 
     /**
-     * @return maximum MP, taking {@link Equipment} into account
+     * @return maximum MP, taking {@link de.limbusdev.guardianmonsters.model.items.Equipment} into account
      */
     public int getMPmax() {
         float extFactor = 100f;
@@ -498,7 +496,7 @@ public class Stat extends Observable {
     }
 
     /**
-     * @return maximum Pstr, taking {@link Equipment} into account
+     * @return maximum Pstr, taking {@link de.limbusdev.guardianmonsters.model.items.Equipment} into account
      */
     public int getPStrMax() {
         int extPStr = PStrMax;
@@ -512,7 +510,7 @@ public class Stat extends Observable {
     }
 
     /**
-     * @return maximum PDef, taking {@link Equipment} into account
+     * @return maximum PDef, taking {@link de.limbusdev.guardianmonsters.model.items.Equipment} into account
      */
     public int getPDefMax() {
         int extPDef = PDefMax;
@@ -526,7 +524,7 @@ public class Stat extends Observable {
     }
 
     /**
-     * @return maximum MStr, taking {@link Equipment} into account
+     * @return maximum MStr, taking {@link de.limbusdev.guardianmonsters.model.items.Equipment} into account
      */
     public int getMStrMax() {
         int extMStr = MStrMax;
@@ -540,7 +538,7 @@ public class Stat extends Observable {
     }
 
     /**
-     * @return maximum MDef, taking {@link Equipment} into account
+     * @return maximum MDef, taking {@link de.limbusdev.guardianmonsters.model.items.Equipment} into account
      */
     public int getMDefMax() {
         int extMDef = MDefMax;
@@ -554,7 +552,7 @@ public class Stat extends Observable {
     }
 
     /**
-     * @return maximum Speed, taking {@link Equipment} into account
+     * @return maximum Speed, taking {@link de.limbusdev.guardianmonsters.model.items.Equipment} into account
      */
     public int getSpeedMax() {
         int extSpeed = SpeedMax;
@@ -584,19 +582,19 @@ public class Stat extends Observable {
         return feet != null;
     }
 
-    public Equipment getHands() {
+    public de.limbusdev.guardianmonsters.model.items.Equipment getHands() {
         return hands;
     }
 
-    public Equipment getHead() {
+    public de.limbusdev.guardianmonsters.model.items.Equipment getHead() {
         return head;
     }
 
-    public Equipment getBody() {
+    public de.limbusdev.guardianmonsters.model.items.Equipment getBody() {
         return body;
     }
 
-    public Equipment getFeet() {
+    public de.limbusdev.guardianmonsters.model.items.Equipment getFeet() {
         return feet;
     }
 
@@ -605,8 +603,7 @@ public class Stat extends Observable {
         if(HP > getHPmax()) this.HP = getHPmax();
         if(HP < 0)          this.HP = 0;
 
-        setChanged();
-        notifyObservers();
+        dispatch(this);
     }
 
     public void setMP(int MP) {
@@ -615,8 +612,7 @@ public class Stat extends Observable {
         if(MP > getMPmax()) this.MP = getMPmax();
         if(MP < 0)          this.MP = 0;
 
-        setChanged();
-        notifyObservers();
+        dispatch(this);
     }
 
     public void setPStr(int PStr) {
@@ -625,8 +621,7 @@ public class Stat extends Observable {
         if(PStr > getPStrMax()*1.5f) this.PStr = getPStrMax();
         if(PStr < 1)            this.PStr = 1;
 
-        setChanged();
-        notifyObservers();
+        dispatch(this);
     }
 
     public void setPDef(int PDef) {
@@ -635,8 +630,7 @@ public class Stat extends Observable {
         if(PDef > getPDefMax()*1.5f) this.PDef = getPDefMax();
         if(PDef < 1)            this.PDef = 1;
 
-        setChanged();
-        notifyObservers();
+        dispatch(this);
     }
 
     public void setMStr(int MStr) {
@@ -645,8 +639,7 @@ public class Stat extends Observable {
         if(MStr > getMStrMax()*1.5f) this.MStr = getMStrMax();
         if(MStr < 1)            this.MStr = 1;
 
-        setChanged();
-        notifyObservers();
+        dispatch(this);
     }
 
     public void setMDef(int MDef) {
@@ -655,8 +648,7 @@ public class Stat extends Observable {
         if(MDef > getMDefMax()*1.5f) this.MDef = getMDefMax();
         if(MDef < 1)            this.MDef = 1;
 
-        setChanged();
-        notifyObservers();
+        dispatch(this);
     }
 
     public void setSpeed(int Speed) {
@@ -665,8 +657,7 @@ public class Stat extends Observable {
         if(Speed > getSpeedMax()) this.Speed = getSpeedMax();
         if(Speed < 1)          this.Speed = 1;
 
-        setChanged();
-        notifyObservers();
+        dispatch(this);
     }
 
     /**
@@ -675,57 +666,9 @@ public class Stat extends Observable {
      */
     public void consumeAbilityLevel() {
         this.abilityLevels--;
-        setChanged();
-        notifyObservers();
+        dispatch(this);
     }
 
-    public static class LevelUpReport {
-        public int oldHP, oldMP, oldPStr, oldPDef, oldMStr, oldMDef, oldSpeed;
-        public int newHP, newMP, newPStr, newPDef, newMStr, newMDef, newSpeed;
-        public int oldLevel, newLevel;
-
-        public LevelUpReport(int oldHP, int oldMP, int oldPStr, int oldPDef, int oldMStr, int oldMDef, int oldSpeed,
-                             int newHP, int newMP, int newPStr, int newPDef, int newMStr, int newMDef, int newSpeed,
-                             int oldLevel, int newLevel) {
-            this.oldHP = oldHP;
-            this.oldMP = oldMP;
-            this.oldPStr = oldPStr;
-            this.oldPDef = oldPDef;
-            this.oldMStr = oldMStr;
-            this.oldMDef = oldMDef;
-            this.oldSpeed = oldSpeed;
-            this.newHP = newHP;
-            this.newMP = newMP;
-            this.newPStr = newPStr;
-            this.newPDef = newPDef;
-            this.newMStr = newMStr;
-            this.newMDef = newMDef;
-            this.newSpeed = newSpeed;
-            this.oldLevel = oldLevel;
-            this.newLevel = newLevel;
-        }
-
-        LevelUpReport() {}
-    }
-
-    /**
-     * Holds positive and negative values to show how much a given {@link Equipment} would improve
-     * the various monster status values
-     */
-    public class EquipmentPotential {
-        public int hp, mp, speed, exp, pstr, pdef, mstr, mdef;
-
-        public EquipmentPotential(int hp, int mp, int speed, int exp, int pstr, int pdef, int mstr, int mdef) {
-            this.hp = hp;
-            this.mp = mp;
-            this.speed = speed;
-            this.exp = exp;
-            this.pstr = pstr;
-            this.pdef = pdef;
-            this.mstr = mstr;
-            this.mdef = mdef;
-        }
-    }
 
     public LevelUpReport getLatestLevelUpReport() {
         return lvlUpReport;

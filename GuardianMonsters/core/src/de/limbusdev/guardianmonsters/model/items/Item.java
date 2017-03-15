@@ -1,9 +1,12 @@
-package de.limbusdev.guardianmonsters.model;
+package de.limbusdev.guardianmonsters.model.items;
 
+import com.badlogic.ashley.signals.Signal;
 import com.badlogic.gdx.math.MathUtils;
 
+import de.limbusdev.guardianmonsters.model.Monster;
+
 /**
- * Created by Georg Eckert on 17.02.17.
+ * @author Georg Eckert on 17.02.17.
  */
 
 public abstract class Item {
@@ -51,7 +54,6 @@ public abstract class Item {
             return false;
         }
     }
-
 
     // .................................................................................... MEDICINE
     public enum TYPE {

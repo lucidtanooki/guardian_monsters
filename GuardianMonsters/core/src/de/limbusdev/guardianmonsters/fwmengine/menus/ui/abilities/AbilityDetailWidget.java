@@ -16,9 +16,9 @@ import com.badlogic.gdx.utils.I18NBundle;
 import de.limbusdev.guardianmonsters.data.BundleAssets;
 import de.limbusdev.guardianmonsters.enums.AttackType;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
-import de.limbusdev.guardianmonsters.model.Ability;
-import de.limbusdev.guardianmonsters.model.AbilityGraph;
-import de.limbusdev.guardianmonsters.model.Equipment;
+import de.limbusdev.guardianmonsters.model.abilities.Ability;
+import de.limbusdev.guardianmonsters.model.abilities.AbilityGraph;
+import de.limbusdev.guardianmonsters.model.items.Equipment;
 import de.limbusdev.guardianmonsters.model.Monster;
 
 

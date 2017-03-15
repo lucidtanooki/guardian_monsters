@@ -1,7 +1,5 @@
 package de.limbusdev.guardianmonsters.fwmengine.menus.ui.abilities;
 
-import com.badlogic.ashley.signals.Listener;
-import com.badlogic.ashley.signals.Signal;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.ButtonGroup;
@@ -40,15 +38,17 @@ public class GraphWidget extends Group {
 
         setSize(600,300);
 
-        // Create EdgeWidgets from Graph Edges
-        edgeWidgets = new ArrayMap<>();
-
         // Create NodeWidgets from Graph Nodes
         nodeGroup = new ButtonGroup();
         nodeGroup.setMinCheckCount(1);
         nodeGroup.setMaxCheckCount(1);
         nodeWidgets = new ArrayMap<>();
+
+        // Create EdgeWidgets from Graph Edges
+        edgeWidgets = new ArrayMap<>();
     }
+
+
 
     public void init(Monster monster) {
         clear();
@@ -57,40 +57,49 @@ public class GraphWidget extends Group {
 
         edgeWidgets.clear();
         for(Edge edge : graph.getEdges()) {
-            EdgeWidget ew = new EdgeWidget(skin, edge);
-            ew.setPosition(ew.pivot.x*32+300, ew.pivot.y*32+150);
-            addActor(ew);
-
-            if(!edgeWidgets.containsKey(edge.from)) edgeWidgets.put(edge.from,new Array<EdgeWidget>());
-            if(!edgeWidgets.containsKey(edge.to))   edgeWidgets.put(edge.to,  new Array<EdgeWidget>());
-            edgeWidgets.get(edge.from).add(ew);
-            edgeWidgets.get(edge.to).add(ew);
+            addNewEdgeWidget(edge);
         }
 
         nodeWidgets.clear();
         nodeGroup.clear();
-        for(Node v : graph.getNodes().values()) {
-            final int nodeID = v.ID;
-            NodeWidget nw = new NodeWidget(skin, v);
-            nw.addListener(new ClickListener() {
-                @Override
-                public void clicked(InputEvent event, float x, float y) {
-                    callbacks.onNodeClicked(nodeID);
-                }
-            });
-            nw.setPosition(nw.getNode().x*32+300,nw.getNode().y*32+150);
-            nodeWidgets.put(v.ID,nw);
-            addActor(nw);
-            nodeGroup.add(nw);
+        for(Node node : graph.getNodes().values()) {
+            addNewNodeWidget(node);
         }
         nodeWidgets.get(0).setChecked(true);
-
     }
 
 
-
-
     // ..................................................................................... METHODS
+    private void addNewNodeWidget(Node node) {
+        final int nodeID = node.ID;
+        NodeWidget nw = new NodeWidget(skin, node);
+        nw.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                callbacks.onNodeClicked(nodeID);
+            }
+        });
+        nw.setPosition(nw.getNode().x*32+300,nw.getNode().y*32+150);
+        nodeWidgets.put(node.ID,nw);
+        addActor(nw);
+        nodeGroup.add(nw);
+    }
+
+    private void addNewEdgeWidget(Edge edge) {
+        EdgeWidget ew = new EdgeWidget(skin, edge);
+        ew.setPosition(ew.pivot.x*32+300, ew.pivot.y*32+150);
+        addActor(ew);
+
+        if(!edgeWidgets.containsKey(edge.from)) {
+            edgeWidgets.put(edge.from,new Array<EdgeWidget>());
+        }
+        if(!edgeWidgets.containsKey(edge.to)) {
+            edgeWidgets.put(edge.to,  new Array<EdgeWidget>());
+        }
+
+        edgeWidgets.get(edge.from).add(ew);
+        edgeWidgets.get(edge.to).add(ew);
+    }
 
     public interface Controller {
         /**

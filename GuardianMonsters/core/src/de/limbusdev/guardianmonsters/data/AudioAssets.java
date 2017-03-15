@@ -3,7 +3,7 @@ package de.limbusdev.guardianmonsters.data;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 
-import de.limbusdev.guardianmonsters.enums.SFXType;
+import de.limbusdev.guardianmonsters.fwmengine.managers.SFXType;
 
 /**
  * Simple Convenience Class for file path storage

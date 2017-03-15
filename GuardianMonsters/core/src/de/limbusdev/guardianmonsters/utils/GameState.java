@@ -2,7 +2,7 @@ package de.limbusdev.guardianmonsters.utils;
 
 import com.badlogic.gdx.utils.ArrayMap;
 
-import de.limbusdev.guardianmonsters.model.Monster;
+import de.limbusdev.guardianmonsters.model.monsters.Monster;
 
 
 /**

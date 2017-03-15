@@ -11,10 +11,10 @@ import de.limbusdev.guardianmonsters.fwmengine.battle.model.BattleFactory;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.BattleScreen;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.InventoryScreen;
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.WorldScreen;
-import de.limbusdev.guardianmonsters.model.AttackInfo;
+import de.limbusdev.guardianmonsters.model.AbilityDB;
 import de.limbusdev.guardianmonsters.model.items.Inventory;
 import de.limbusdev.guardianmonsters.model.ItemDB;
-import de.limbusdev.guardianmonsters.model.Monster;
+import de.limbusdev.guardianmonsters.model.monsters.Monster;
 import de.limbusdev.guardianmonsters.model.MonsterDB;
 
 /**
@@ -148,7 +148,7 @@ public class GameStateDebugger {
     }
 
     public void testAttackParsing() {
-        AttackInfo ai = AttackInfo.getInst();
+        AbilityDB ai = AbilityDB.getInst();
     }
 
     public void testMonsterParsing() {

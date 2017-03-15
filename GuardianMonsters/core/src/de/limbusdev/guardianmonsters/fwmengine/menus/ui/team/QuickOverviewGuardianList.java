@@ -13,7 +13,7 @@ import com.badlogic.gdx.utils.ArrayMap;
 
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.items.GuardianOverviewButton;
 import de.limbusdev.guardianmonsters.model.items.Item;
-import de.limbusdev.guardianmonsters.model.Monster;
+import de.limbusdev.guardianmonsters.model.monsters.Monster;
 import de.limbusdev.guardianmonsters.utils.Constant;
 
 /**

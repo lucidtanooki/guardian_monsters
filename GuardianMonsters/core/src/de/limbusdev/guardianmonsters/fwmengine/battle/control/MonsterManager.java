@@ -5,12 +5,12 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.ArrayMap;
 
 import de.limbusdev.guardianmonsters.data.BundleAssets;
-import de.limbusdev.guardianmonsters.enums.AttackType;
+import de.limbusdev.guardianmonsters.model.abilities.DamageType;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.model.abilities.Ability;
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.AttackCalculationReport;
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.ElemEff;
-import de.limbusdev.guardianmonsters.model.Monster;
+import de.limbusdev.guardianmonsters.model.monsters.Monster;
 import de.limbusdev.guardianmonsters.model.MonsterDB;
 
 /**
@@ -51,11 +51,11 @@ public class MonsterManager {
     public static AttackCalculationReport calcAttack(Monster att, Monster def, Ability ability) {
         System.out.println("\n--- new ability ---");
         AttackCalculationReport report = new AttackCalculationReport(att, def, 0, 0, ability);
-        float efficiency = ElemEff.singelton().getElemEff(ability.element, def.stat.elements);
+        float efficiency = ElemEff.singelton().getElemEff(ability.element, def.data.elements);
 
         float defenseRatio;
 
-        if(ability.attackType == AttackType.PHYSICAL) {
+        if(ability.damageType == DamageType.PHYSICAL) {
             defenseRatio = (att.stat.getPStr() * 1f) / (def.stat.getPDef() *1f);
         } else {
             defenseRatio = (att.stat.getMStr() *1f) / (def.stat.getMDef() *1f);

@@ -5,15 +5,11 @@ import com.badlogic.ashley.signals.Signal;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.ArrayMap;
 
-import java.util.Observable;
-import java.util.Observer;
-
 import de.limbusdev.guardianmonsters.data.BundleAssets;
 import de.limbusdev.guardianmonsters.fwmengine.battle.control.BattleSystem;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
-import de.limbusdev.guardianmonsters.model.Monster;
+import de.limbusdev.guardianmonsters.model.monsters.Monster;
 import de.limbusdev.guardianmonsters.model.MonsterDB;
-import de.limbusdev.guardianmonsters.model.Stat;
 
 /**
  * @author Georg Eckert 2017

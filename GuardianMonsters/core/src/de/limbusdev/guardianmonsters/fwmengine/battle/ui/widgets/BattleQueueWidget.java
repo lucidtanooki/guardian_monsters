@@ -1,6 +1,5 @@
 package de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets;
 
-import com.badlogic.gdx.Net;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Group;
@@ -10,11 +9,8 @@ import com.badlogic.gdx.utils.Array;
 
 
 import de.limbusdev.guardianmonsters.data.TextureAssets;
-import de.limbusdev.guardianmonsters.fwmengine.battle.model.ListObserver;
-import de.limbusdev.guardianmonsters.fwmengine.battle.model.MonsterSpeedComparator;
-import de.limbusdev.guardianmonsters.fwmengine.battle.ui.AHUD;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
-import de.limbusdev.guardianmonsters.model.Monster;
+import de.limbusdev.guardianmonsters.model.monsters.Monster;
 
 /**
  * Created by georg on 20.11.16.

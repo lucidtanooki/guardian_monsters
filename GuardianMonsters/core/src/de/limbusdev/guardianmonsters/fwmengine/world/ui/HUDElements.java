@@ -1,4 +1,4 @@
-package de.limbusdev.guardianmonsters.enums;
+package de.limbusdev.guardianmonsters.fwmengine.world.ui;
 
 /**
  * Created by georg on 28.01.16.

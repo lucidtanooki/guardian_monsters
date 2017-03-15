@@ -17,7 +17,7 @@ import de.limbusdev.guardianmonsters.fwmengine.menus.ui.team.MonsterStatusInvent
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.team.StatusPentagonWidget;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.team.TeamCircleWidget;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TeamComponent;
-import de.limbusdev.guardianmonsters.model.Monster;
+import de.limbusdev.guardianmonsters.model.monsters.Monster;
 import de.limbusdev.guardianmonsters.utils.Constant;
 import de.limbusdev.guardianmonsters.utils.GameState;
 

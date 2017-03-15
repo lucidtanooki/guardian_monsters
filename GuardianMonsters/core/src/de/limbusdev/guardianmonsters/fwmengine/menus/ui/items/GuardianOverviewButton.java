@@ -19,7 +19,7 @@ import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.model.items.Equipment;
 import de.limbusdev.guardianmonsters.model.items.EquipmentPotential;
 import de.limbusdev.guardianmonsters.model.items.Item;
-import de.limbusdev.guardianmonsters.model.Monster;
+import de.limbusdev.guardianmonsters.model.monsters.Monster;
 import de.limbusdev.guardianmonsters.model.MonsterDB;
 
 /**

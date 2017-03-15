@@ -1,4 +1,4 @@
-package de.limbusdev.guardianmonsters.enums;
+package de.limbusdev.guardianmonsters.fwmengine.managers;
 
 /**
  * Created by georg on 14.01.16.

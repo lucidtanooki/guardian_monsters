@@ -2,11 +2,18 @@ package de.limbusdev.guardianmonsters.model;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.XmlReader;
 
 import java.io.IOException;
 
+import de.limbusdev.guardianmonsters.model.items.BodyEquipment;
+import de.limbusdev.guardianmonsters.model.items.BodyPart;
+import de.limbusdev.guardianmonsters.model.items.Equipment;
+import de.limbusdev.guardianmonsters.model.items.FootEquipment;
+import de.limbusdev.guardianmonsters.model.items.HandEquipment;
+import de.limbusdev.guardianmonsters.model.items.HeadEquipment;
 import de.limbusdev.guardianmonsters.model.items.Item;
 
 /**
@@ -78,28 +85,28 @@ public class ItemDB {
             case "revive":
                 return parseRevivingItem(element);
             default:
-                return new de.limbusdev.guardianmonsters.model.items.Item.Medicine("Water", 0, de.limbusdev.guardianmonsters.model.items.Item.TYPE.HP_CURE);
+                return new Item.Medicine("Water", 0, de.limbusdev.guardianmonsters.model.items.Item.TYPE.HP_CURE);
         }
     }
 
-    private de.limbusdev.guardianmonsters.model.items.Item parseHPCuringItem(XmlReader.Element e) {
-        return new de.limbusdev.guardianmonsters.model.items.Item.Medicine(e.get("nameID", "Water"), e.getInt("value", 0), de.limbusdev.guardianmonsters.model.items.Item.TYPE.HP_CURE);
+    private Item parseHPCuringItem(XmlReader.Element e) {
+        return new Item.Medicine(e.get("nameID", "Water"), e.getInt("value", 0), Item.TYPE.HP_CURE);
     }
 
-    private de.limbusdev.guardianmonsters.model.items.Item parseMPCuringItem(XmlReader.Element e) {
-        return new de.limbusdev.guardianmonsters.model.items.Item.Medicine(e.get("nameID", "Water"), e.getInt("value", 0), de.limbusdev.guardianmonsters.model.items.Item.TYPE.MP_CURE);
+    private Item parseMPCuringItem(XmlReader.Element e) {
+        return new Item.Medicine(e.get("nameID", "Water"), e.getInt("value", 0), Item.TYPE.MP_CURE);
     }
 
-    private de.limbusdev.guardianmonsters.model.items.Item parseRevivingItem(XmlReader.Element e) {
-        return new de.limbusdev.guardianmonsters.model.items.Item.Medicine(e.get("nameID", "Water"), e.getInt("fraction", 0), de.limbusdev.guardianmonsters.model.items.Item.TYPE.REVIVE);
+    private Item parseRevivingItem(XmlReader.Element e) {
+        return new Item.Medicine(e.get("nameID", "Water"), e.getInt("fraction", 0), Item.TYPE.REVIVE);
     }
 
-    private de.limbusdev.guardianmonsters.model.items.Item parseKeyItem(XmlReader.Element e) {
-        return new de.limbusdev.guardianmonsters.model.items.Item.Key(e.get("nameID", "Water"));
+    private Item parseKeyItem(XmlReader.Element e) {
+        return new Item.Key(e.get("nameID", "Water"));
     }
 
-    private de.limbusdev.guardianmonsters.model.items.Item parseEquipmentItem(XmlReader.Element e) {
-        de.limbusdev.guardianmonsters.model.items.Equipment.EQUIPMENT_TYPE bodyPart = de.limbusdev.guardianmonsters.model.items.Equipment.EQUIPMENT_TYPE.valueOf(e.get("body-part", "hands").toUpperCase());
+    private Item parseEquipmentItem(XmlReader.Element e) {
+        BodyPart bodyPart = BodyPart.valueOf(e.get("body-part", "hands").toUpperCase());
 
         String nameID = e.get("nameID", "claws-wood");
         int pStr = e.getInt("addsPStr",    0);
@@ -112,23 +119,23 @@ public class ItemDB {
         int exp = e.getInt("addsEXP",     0);
         String type = e.getChildByName("body-part").getAttribute("type").toUpperCase();
 
-        de.limbusdev.guardianmonsters.model.items.Equipment equip;
+        Equipment equip;
         switch(bodyPart) {
             case HEAD:
-                equip = new de.limbusdev.guardianmonsters.model.items.Equipment.Head(nameID, de.limbusdev.guardianmonsters.model.items.Equipment.HeadEquipment.valueOf(type), pStr,
+                equip = new HeadEquipment(nameID, HeadEquipment.Type.valueOf(type), pStr,
                     pDef, mStr, mDef, speed, hp, mp, exp);
                 break;
             case BODY:
-                equip = new de.limbusdev.guardianmonsters.model.items.Equipment.Body(nameID, de.limbusdev.guardianmonsters.model.items.Equipment.BodyEquipment.valueOf(type), pStr,
+                equip = new BodyEquipment(nameID, BodyEquipment.Type.valueOf(type), pStr,
                     pDef, mStr, mDef, speed, hp, mp, exp);
                 break;
             case FEET:
-                equip = new de.limbusdev.guardianmonsters.model.items.Equipment.Feet(nameID, de.limbusdev.guardianmonsters.model.items.Equipment.FootEquipment.valueOf(type), pStr,
+                equip = new FootEquipment(nameID, FootEquipment.Type.valueOf(type), pStr,
                     pDef, mStr, mDef, speed, hp, mp, exp);
                 break;
             default:
-                // Hands
-                equip = new de.limbusdev.guardianmonsters.model.items.Equipment.Hands(nameID, de.limbusdev.guardianmonsters.model.items.Equipment.HandEquipment.valueOf(type), pStr,
+                // HandEquipment
+                equip = new HandEquipment(nameID, HandEquipment.Type.valueOf(type), pStr,
                     pDef, mStr, mDef, speed, hp, mp, exp);
                 break;
         }

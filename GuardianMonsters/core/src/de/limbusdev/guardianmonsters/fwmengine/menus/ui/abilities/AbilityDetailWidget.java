@@ -14,12 +14,13 @@ import com.badlogic.gdx.utils.I18NBundle;
 
 
 import de.limbusdev.guardianmonsters.data.BundleAssets;
-import de.limbusdev.guardianmonsters.enums.AttackType;
+import de.limbusdev.guardianmonsters.model.abilities.DamageType;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.model.abilities.Ability;
 import de.limbusdev.guardianmonsters.model.abilities.AbilityGraph;
+import de.limbusdev.guardianmonsters.model.items.BodyPart;
 import de.limbusdev.guardianmonsters.model.items.Equipment;
-import de.limbusdev.guardianmonsters.model.Monster;
+import de.limbusdev.guardianmonsters.model.monsters.Monster;
 
 
 /**
@@ -158,7 +159,7 @@ public class AbilityDetailWidget extends Container {
         } else {
             name.setText(Services.getL18N().l18n(BundleAssets.ATTACKS).get(ability.name));
             damage.setText(Integer.toString(ability.damage));
-            Drawable drawable = ability.attackType == AttackType.PHYSICAL ? skin.getDrawable("stats-symbol-pstr") : skin.getDrawable("stats-symbol-mstr");
+            Drawable drawable = ability.damageType == DamageType.PHYSICAL ? skin.getDrawable("stats-symbol-pstr") : skin.getDrawable("stats-symbol-mstr");
             abilityType.setDrawable(drawable);
             String elem = ability.element.toString().toLowerCase();
             String elemName = Services.getL18N().l18n(BundleAssets.ELEMENTS).get("element_" + elem);
@@ -169,7 +170,7 @@ public class AbilityDetailWidget extends Container {
         }
     }
 
-    private void init(Equipment.EQUIPMENT_TYPE equipmentType, int nodeID, AbilityGraph graph, boolean enoughFreeLvls) {
+    private void init(BodyPart equipmentType, int nodeID, AbilityGraph graph, boolean enoughFreeLvls) {
         this.nodeID = nodeID;
 
         String equipment;

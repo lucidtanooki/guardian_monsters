@@ -28,13 +28,13 @@ public class ItemListWidget extends Group implements Listener<ItemSignal> {
     private Skin skin;
     private int lastChosenItem=0;
     private ClickListener clickListener;
-    private Item.CATEGORY currentFilter;
+    private Item.Category currentFilter;
 
     public interface ClickListener {
         void onChoosingItem(Item item);
     }
 
-    public ItemListWidget(Skin skin, Inventory inventory, ClickListener handler, Item.CATEGORY filter) {
+    public ItemListWidget(Skin skin, Inventory inventory, ClickListener handler, Item.Category filter) {
         this.inventory = inventory;
         this.skin = skin;
         this.clickListener = handler;
@@ -54,7 +54,7 @@ public class ItemListWidget extends Group implements Listener<ItemSignal> {
         init(inventory, filter);
     }
 
-    private void init(Inventory inventory, Item.CATEGORY filter) {
+    private void init(Inventory inventory, Item.Category filter) {
         itemTable.clearChildren();
         this.inventory = inventory;
         inventory.add(this);
@@ -69,7 +69,7 @@ public class ItemListWidget extends Group implements Listener<ItemSignal> {
             int counter = 0;
             for (final Item i : inventory.getItems().keys()) {
 
-                if(filter == Item.CATEGORY.ALL || i.getCategory() == filter) {
+                if(filter == Item.Category.ALL || i.getCategory() == filter) {
                     final ItemInventoryButton item = new ItemInventoryButton(i, skin, "item-button-sandstone", inventory);
                     inventory.add(this);
                     itemTable.add(item).width(192).height(40);
@@ -100,7 +100,7 @@ public class ItemListWidget extends Group implements Listener<ItemSignal> {
         }
     }
 
-    public void applyFilter(Item.CATEGORY filter) {
+    public void applyFilter(Item.Category filter) {
         lastChosenItem = 0;
         currentFilter = filter;
         init(inventory, filter);

@@ -1,7 +1,5 @@
 package de.limbusdev.guardianmonsters.utils;
 
-import de.limbusdev.guardianmonsters.enums.DebugMode;
-
 /**
  * Static container for Settings. Every parameter used in the game should be configured here
  * @author Georg Eckert 2017

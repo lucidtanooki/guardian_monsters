@@ -8,8 +8,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 
-import de.limbusdev.guardianmonsters.enums.SkyDirection;
-import de.limbusdev.guardianmonsters.enums.TextureAtlasType;
+import de.limbusdev.guardianmonsters.fwmengine.world.model.SkyDirection;
 
 
 /**

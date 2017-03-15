@@ -1,6 +1,6 @@
 package de.limbusdev.guardianmonsters.data;
 
-import de.limbusdev.guardianmonsters.enums.Element;
+import de.limbusdev.guardianmonsters.model.monsters.Element;
 
 /**
  * @author Georg Eckert 2017

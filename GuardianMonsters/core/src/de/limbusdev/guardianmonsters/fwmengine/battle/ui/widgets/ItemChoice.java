@@ -16,7 +16,7 @@ import de.limbusdev.guardianmonsters.fwmengine.menus.ui.items.ItemListWidget;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.team.QuickOverviewGuardianList;
 import de.limbusdev.guardianmonsters.model.items.Inventory;
 import de.limbusdev.guardianmonsters.model.items.Item;
-import de.limbusdev.guardianmonsters.model.Monster;
+import de.limbusdev.guardianmonsters.model.monsters.Monster;
 import de.limbusdev.guardianmonsters.utils.Constant;
 
 /**
@@ -96,7 +96,7 @@ public class ItemChoice extends Group {
             }
         };
 
-        ItemListWidget itemList = new ItemListWidget(Services.getUI().getInventorySkin(), inventory, clicks, Item.CATEGORY.MEDICINE);
+        ItemListWidget itemList = new ItemListWidget(Services.getUI().getInventorySkin(), inventory, clicks, Item.Category.MEDICINE);
         itemList.setSize(140, Constant.HEIGHT);
         itemList.setPosition(Constant.WIDTH/2-32, 0, Align.bottomLeft);
         addActor(itemList);

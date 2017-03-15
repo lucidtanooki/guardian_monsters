@@ -8,15 +8,24 @@ import com.badlogic.gdx.utils.XmlReader;
 
 import java.io.IOException;
 
-import de.limbusdev.guardianmonsters.enums.Element;
+import de.limbusdev.guardianmonsters.model.abilities.Ability;
+import de.limbusdev.guardianmonsters.model.items.BodyEquipment;
+import de.limbusdev.guardianmonsters.model.items.BodyPart;
+import de.limbusdev.guardianmonsters.model.items.Equipment;
+import de.limbusdev.guardianmonsters.model.items.FootEquipment;
+import de.limbusdev.guardianmonsters.model.items.HandEquipment;
+import de.limbusdev.guardianmonsters.model.items.HeadEquipment;
+import de.limbusdev.guardianmonsters.model.monsters.Element;
+import de.limbusdev.guardianmonsters.model.monsters.BaseStat;
+import de.limbusdev.guardianmonsters.model.monsters.MonsterData;
 
 
 /**
- * Created by Georg Eckert on 20.12.15.
+ * @author Georg Eckert 2017
  */
 public class MonsterDB {
     /* ............................................................................ ATTRIBUTES .. */
-    private ArrayMap<Integer,MonsterData> statusInfos;
+    private ArrayMap<Integer, MonsterData> statusInfos;
     private static MonsterDB instance;
 
 
@@ -53,11 +62,13 @@ public class MonsterDB {
     }
 
     private MonsterData parseMonster(XmlReader.Element element) {
-        MonsterData monData;
+        MonsterData monsterData;
 
+        // ............................................................................... name & id
         int ID = element.getIntAttribute("id", 0);
         String nameID = element.getAttribute("nameID", "gm000");
 
+        // ................................................................................ elements
         XmlReader.Element elemElement = element.getChildByName("elements");
         Array<Element> elements = new Array<>();
         for(int i = 0; i < elemElement.getChildCount(); i++) {
@@ -67,13 +78,14 @@ public class MonsterDB {
             elements.add(newE);
         }
 
+        // ........................................................................... metamorphosis
         int metamorphsFrom = element.getInt("metamorphsFrom", 0);
         int metamorphsTo   = element.getInt("metamorphesTo",  0);
 
         if(metamorphsFrom > 0) {
             MonsterData ancestorMonData = getData(metamorphsFrom);
-            monData = new MonsterData(ID, nameID, metamorphsTo, elements, ancestorMonData);
-            return monData;
+            monsterData = new MonsterData(ID, nameID, metamorphsTo, elements, ancestorMonData);
+            return monsterData;
         }
 
         Array<Integer> metamorphosisNodes = new Array<>();
@@ -85,25 +97,28 @@ public class MonsterDB {
             }
         }
 
-        AttackInfo attInf = AttackInfo.getInst();
+        // ............................................................................... abilities
+        AbilityDB attInf = AbilityDB.getInst();
         XmlReader.Element attElement = element.getChildByName("attacks");
-        ArrayMap<Integer, de.limbusdev.guardianmonsters.model.abilities.Ability> attacks = new ArrayMap<>();
+        ArrayMap<Integer, Ability> attacks = new ArrayMap<>();
         for(int i = 0; i < attElement.getChildCount(); i++) {
             XmlReader.Element a = attElement.getChild(i);
             int attID = a.getIntAttribute("id", 0);
             Element el = Element.valueOf(a.getAttribute("element").toUpperCase());
-            de.limbusdev.guardianmonsters.model.abilities.Ability att = attInf.getAttack(el, attID);
+            Ability att = attInf.getAttack(el, attID);
             int abilityPos = a.getIntAttribute("abilityPos", 0);
             attacks.put(abilityPos, att);
         }
 
-        ArrayMap<Integer, de.limbusdev.guardianmonsters.model.items.Equipment.EQUIPMENT_TYPE> equipmentGraph = new ArrayMap<>();
+        // ............................................................................... equipment
+        ArrayMap<Integer, BodyPart> equipmentGraph = new ArrayMap<>();
         XmlReader.Element equipGraphElem = element.getChildByName("ability-graph-equip");
-        equipmentGraph.put(equipGraphElem.getIntAttribute("body"), de.limbusdev.guardianmonsters.model.items.Equipment.EQUIPMENT_TYPE.BODY);
-        equipmentGraph.put(equipGraphElem.getIntAttribute("hands"), de.limbusdev.guardianmonsters.model.items.Equipment.EQUIPMENT_TYPE.HANDS);
-        equipmentGraph.put(equipGraphElem.getIntAttribute("head"), de.limbusdev.guardianmonsters.model.items.Equipment.EQUIPMENT_TYPE.HEAD);
-        equipmentGraph.put(equipGraphElem.getIntAttribute("feet"), de.limbusdev.guardianmonsters.model.items.Equipment.EQUIPMENT_TYPE.FEET);
+        equipmentGraph.put(equipGraphElem.getIntAttribute("body"), BodyPart.BODY);
+        equipmentGraph.put(equipGraphElem.getIntAttribute("hands"), BodyPart.HANDS);
+        equipmentGraph.put(equipGraphElem.getIntAttribute("head"), BodyPart.HEAD);
+        equipmentGraph.put(equipGraphElem.getIntAttribute("feet"), BodyPart.FEET);
 
+        // ................................................................................... stats
         XmlReader.Element statEl = element.getChildByName("basestats");
         BaseStat stat = new BaseStat(
             ID,
@@ -117,19 +132,20 @@ public class MonsterDB {
         );
 
         XmlReader.Element equipComp = element.getChildByName("equipment-compatibility");
-        de.limbusdev.guardianmonsters.model.items.Equipment.HeadEquipment head = de.limbusdev.guardianmonsters.model.items.Equipment.HeadEquipment.valueOf(equipComp.getAttribute("head", "helmet").toUpperCase());
-        de.limbusdev.guardianmonsters.model.items.Equipment.BodyEquipment body = de.limbusdev.guardianmonsters.model.items.Equipment.BodyEquipment.valueOf(equipComp.getAttribute("body", "shield").toUpperCase());
-        de.limbusdev.guardianmonsters.model.items.Equipment.HandEquipment hand = de.limbusdev.guardianmonsters.model.items.Equipment.HandEquipment.valueOf(equipComp.getAttribute("hands", "sword").toUpperCase());
-        de.limbusdev.guardianmonsters.model.items.Equipment.FootEquipment feet = de.limbusdev.guardianmonsters.model.items.Equipment.FootEquipment.valueOf(equipComp.getAttribute("feet", "claws").toUpperCase());
+        HeadEquipment.Type head = HeadEquipment.Type.valueOf(equipComp.getAttribute("head", "helmet").toUpperCase());
+        BodyEquipment.Type body = BodyEquipment.Type.valueOf(equipComp.getAttribute("body", "shield").toUpperCase());
+        HandEquipment.Type hand = HandEquipment.Type.valueOf(equipComp.getAttribute("hands", "sword").toUpperCase());
+        FootEquipment.Type feet = FootEquipment.Type.valueOf(equipComp.getAttribute("feet", "claws").toUpperCase());
 
-        monData = new MonsterData(
+        // ............................................................................ construction
+        monsterData = new MonsterData(
             ID, nameID, metamorphsTo,
             stat, elements,
             attacks, equipmentGraph, metamorphosisNodes,
             head, body, hand, feet
         );
 
-        return monData;
+        return monsterData;
     }
 
     public ArrayMap<Integer, MonsterData> getStatusInfos() {
@@ -140,9 +156,5 @@ public class MonsterDB {
         return statusInfos.get(monsterID);
     }
 
-
-    /* ............................................................................... METHODS .. */
-    
-    /* ..................................................................... GETTERS & SETTERS .. */
 
 }

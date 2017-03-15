@@ -11,7 +11,7 @@ import de.limbusdev.guardianmonsters.fwmengine.battle.model.AttackCalculationRep
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.MonsterSpeedComparator;
 import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager;
 import de.limbusdev.guardianmonsters.model.abilities.Ability;
-import de.limbusdev.guardianmonsters.model.Monster;
+import de.limbusdev.guardianmonsters.model.monsters.Monster;
 import de.limbusdev.guardianmonsters.utils.Constant;
 import de.limbusdev.guardianmonsters.utils.DebugOutput;
 import de.limbusdev.guardianmonsters.utils.GameState;

@@ -6,7 +6,7 @@ import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
 
-import de.limbusdev.guardianmonsters.enums.SkyDirection;
+import de.limbusdev.guardianmonsters.fwmengine.world.model.SkyDirection;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.CharacterSpriteComponent;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Components;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.InputComponent;

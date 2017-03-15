@@ -8,21 +8,21 @@ import com.badlogic.gdx.utils.XmlReader;
 
 import java.io.IOException;
 
-import de.limbusdev.guardianmonsters.enums.AnimationType;
-import de.limbusdev.guardianmonsters.enums.AttackType;
-import de.limbusdev.guardianmonsters.enums.Element;
-import de.limbusdev.guardianmonsters.enums.SFXType;
+import de.limbusdev.guardianmonsters.fwmengine.battle.ui.AnimationType;
+import de.limbusdev.guardianmonsters.model.abilities.DamageType;
+import de.limbusdev.guardianmonsters.model.monsters.Element;
+import de.limbusdev.guardianmonsters.fwmengine.managers.SFXType;
 
 /**
  * Contains all existing attacks, sorted by element
  * Created by Georg Eckert 2017
  */
-public class AttackInfo {
+public class AbilityDB {
 
-    private static AttackInfo instance;
+    private static AbilityDB instance;
     private ArrayMap<Element, ArrayMap<Integer, de.limbusdev.guardianmonsters.model.abilities.Ability>> attacks;
 
-    private AttackInfo() {
+    private AbilityDB() {
         attacks = new ArrayMap<>();
 
         FileHandle handle = Gdx.files.internal("data/attacks.xml");
@@ -44,9 +44,9 @@ public class AttackInfo {
         }
     }
 
-    public static AttackInfo getInst() {
+    public static AbilityDB getInst() {
         if(instance == null) {
-            instance = new AttackInfo();
+            instance = new AbilityDB();
         }
         return instance;
     }
@@ -55,7 +55,7 @@ public class AttackInfo {
 
     private de.limbusdev.guardianmonsters.model.abilities.Ability parseAttack(XmlReader.Element element) {
         Element e = Element.valueOf(element.getAttribute("element", "none").toUpperCase());
-        AttackType a = AttackType.valueOf(element.get("category", "physical").toUpperCase());
+        DamageType a = DamageType.valueOf(element.get("category", "physical").toUpperCase());
         int id = element.getIntAttribute("id", 0);
         int damage = element.getInt("damage", 0);
         String nameID = element.getAttribute("nameID");

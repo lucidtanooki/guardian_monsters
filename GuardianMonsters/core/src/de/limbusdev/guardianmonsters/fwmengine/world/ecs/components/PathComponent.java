@@ -3,7 +3,7 @@ package de.limbusdev.guardianmonsters.fwmengine.world.ecs.components;
 import com.badlogic.ashley.core.Component;
 import com.badlogic.gdx.utils.Array;
 
-import de.limbusdev.guardianmonsters.enums.SkyDirection;
+import de.limbusdev.guardianmonsters.fwmengine.world.model.SkyDirection;
 
 /**
  * Defines a path for AI to walk on. It also contains to boolean attributes to indicate whether an

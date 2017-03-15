@@ -3,7 +3,7 @@ package de.limbusdev.guardianmonsters.fwmengine.battle.control;
 import de.limbusdev.guardianmonsters.data.BundleAssets;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.AttackCalculationReport;
-import de.limbusdev.guardianmonsters.model.Monster;
+import de.limbusdev.guardianmonsters.model.monsters.Monster;
 import de.limbusdev.guardianmonsters.model.MonsterDB;
 
 /**

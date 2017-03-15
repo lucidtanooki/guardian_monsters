@@ -1,4 +1,4 @@
-package de.limbusdev.guardianmonsters.model;
+package de.limbusdev.guardianmonsters.model.monsters;
 
 /**
  * LevelUpReport
@@ -32,5 +32,8 @@ public class LevelUpReport {
         this.newLevel = newLevel;
     }
 
+    /**
+     * For Serialization only!
+     */
     LevelUpReport() {}
 }

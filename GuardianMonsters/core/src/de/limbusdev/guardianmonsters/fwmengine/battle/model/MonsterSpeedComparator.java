@@ -2,7 +2,7 @@ package de.limbusdev.guardianmonsters.fwmengine.battle.model;
 
 import java.util.Comparator;
 
-import de.limbusdev.guardianmonsters.model.Monster;
+import de.limbusdev.guardianmonsters.model.monsters.Monster;
 
 /**
  * Created by georg on 15.08.16.

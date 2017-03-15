@@ -1,12 +1,13 @@
-package de.limbusdev.guardianmonsters.model;
+package de.limbusdev.guardianmonsters.model.monsters;
 
 import com.badlogic.ashley.signals.Listener;
 import com.badlogic.ashley.signals.Signal;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 
-import de.limbusdev.guardianmonsters.enums.Element;
 import de.limbusdev.guardianmonsters.fwmengine.battle.control.BattleSystem;
+import de.limbusdev.guardianmonsters.model.MonsterDB;
+import de.limbusdev.guardianmonsters.model.abilities.Ability;
 import de.limbusdev.guardianmonsters.model.abilities.AbilityGraph;
 
 /**
@@ -22,11 +23,12 @@ public class Monster extends Signal<Monster> implements Listener<Stat> {
     public int INSTANCE_ID;
     public int ID;
 
+    public MonsterData data;
     public Stat stat;
     public String nickname;
 
-    private ArrayMap<Integer, de.limbusdev.guardianmonsters.model.abilities.Ability> activeAbilities;
-    public de.limbusdev.guardianmonsters.model.abilities.AbilityGraph abilityGraph;
+    private ArrayMap<Integer, Ability> activeAbilities;
+    public AbilityGraph abilityGraph;
 
     // ................................................................................. CONSTRUCTOR
 
@@ -38,7 +40,7 @@ public class Monster extends Signal<Monster> implements Listener<Stat> {
         this.nickname = "";
 
         // Retrieve monster data from DataBase
-        MonsterData data = MonsterDB.singleton().getData(ID);
+        data = MonsterDB.singleton().getData(ID);
         Array<Element> elements = data.elements;
 
         // Initialize Ability Graph
@@ -54,13 +56,13 @@ public class Monster extends Signal<Monster> implements Listener<Stat> {
         }
 
         int counter = 0;
-        for(de.limbusdev.guardianmonsters.model.abilities.Ability a : abilityGraph.learntAbilities.values()) {
+        for(Ability a : abilityGraph.learntAbilities.values()) {
             activeAbilities.put(counter, a);
             counter++;
         }
 
         // Copy base stats over and register monster as listener at it's stats
-        this.stat = new Stat(1, data.baseStat, elements, this);
+        this.stat = new Stat(1, data.baseStat);
         this.stat.add(this);
 
     }
@@ -102,7 +104,7 @@ public class Monster extends Signal<Monster> implements Listener<Stat> {
      * @param abilitySlot   slot for in battle ability usage
      * @return              ability which resides there
      */
-    public de.limbusdev.guardianmonsters.model.abilities.Ability getActiveAbility(int abilitySlot) {
+    public Ability getActiveAbility(int abilitySlot) {
         return activeAbilities.get(abilitySlot);
     }
 
@@ -112,11 +114,11 @@ public class Monster extends Signal<Monster> implements Listener<Stat> {
      * @param learntAbilityNumber   number of ability to be placed there
      */
     public void setActiveAbility(int slot, int learntAbilityNumber) {
-        de.limbusdev.guardianmonsters.model.abilities.Ability abilityToLearn = abilityGraph.learntAbilities.get(learntAbilityNumber);
+        Ability abilityToLearn = abilityGraph.learntAbilities.get(learntAbilityNumber);
         if(abilityToLearn == null) return;
 
         for(int key : activeAbilities.keys()) {
-            de.limbusdev.guardianmonsters.model.abilities.Ability abilityAtThisSlot = activeAbilities.get(key);
+            Ability abilityAtThisSlot = activeAbilities.get(key);
 
             if(abilityAtThisSlot != null) {
                 if (abilityAtThisSlot.equals(abilityToLearn)) {

@@ -1,4 +1,4 @@
-package de.limbusdev.guardianmonsters.model;
+package de.limbusdev.guardianmonsters.model.monsters;
 
 /**
  * BaseStat contains all base values. BaseStats are stats of a monster at level 1 without any
@@ -32,7 +32,8 @@ public class BaseStat {
         this(ID, 300, 100, 10, 10, 10, 10, 10);
     }
 
-    public BaseStat(int ID, int baseHP, int baseMP, int basePStr, int basePDef, int baseMStr, int baseMDef, int baseSpeed) {
+    public BaseStat(int ID, int baseHP, int baseMP, int basePStr, int basePDef, int baseMStr,
+                    int baseMDef, int baseSpeed) {
         this.ID = ID;
         this.baseHP = baseHP;
         this.baseMP = baseMP;

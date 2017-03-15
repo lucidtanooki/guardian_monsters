@@ -1,31 +1,29 @@
 package de.limbusdev.guardianmonsters.model.items;
 
-import com.badlogic.ashley.signals.Signal;
 import com.badlogic.gdx.math.MathUtils;
 
-import de.limbusdev.guardianmonsters.model.Monster;
+import de.limbusdev.guardianmonsters.model.monsters.Monster;
 
 /**
  * @author Georg Eckert on 17.02.17.
  */
 
 public abstract class Item {
-    private static int idCounter=0;
+    private static int INSTANCE_COUNTER=0;
+
     public final int ID;
     private String name;
-    private CATEGORY category;
+    private Category category;
 
-    public enum CATEGORY {
+    public enum Category {
         ALL, MEDICINE, EQUIPMENT, KEY,
     }
 
-
-
-    public Item(String name, CATEGORY category) {
+    public Item(String name, Category category) {
         this.name = name;
-        this.ID = idCounter;
+        this.ID = INSTANCE_COUNTER;
         this.category = category;
-        idCounter++;
+        INSTANCE_COUNTER++;
     }
 
     public String getName() {
@@ -33,7 +31,7 @@ public abstract class Item {
     }
 
 
-    public CATEGORY getCategory() {
+    public Category getCategory() {
         return category;
     }
 
@@ -66,7 +64,7 @@ public abstract class Item {
         private TYPE type;
 
         public Medicine(String name, int value, TYPE type) {
-            super(name, CATEGORY.MEDICINE);
+            super(name, Category.MEDICINE);
             this.value = value;
             this.type = type;
         }
@@ -106,7 +104,7 @@ public abstract class Item {
     public static class Key extends Item {
 
         public Key(String name) {
-            super(name, CATEGORY.KEY);
+            super(name, Category.KEY);
         }
 
         @Override

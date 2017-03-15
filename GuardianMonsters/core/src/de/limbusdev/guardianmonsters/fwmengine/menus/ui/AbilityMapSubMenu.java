@@ -6,16 +6,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ArrayMap;
 
-import java.util.Observable;
-import java.util.Observer;
-
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.abilities.AbilityDetailWidget;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.abilities.GraphWidget;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.team.TeamMemberSwitcher;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.widgets.LogoWithCounter;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.widgets.ScrollableWidget;
-import de.limbusdev.guardianmonsters.model.Monster;
-import de.limbusdev.guardianmonsters.model.Stat;
+import de.limbusdev.guardianmonsters.model.monsters.Monster;
 import de.limbusdev.guardianmonsters.utils.Constant;
 
 

@@ -1,7 +1,7 @@
-package de.limbusdev.guardianmonsters.enums;
+package de.limbusdev.guardianmonsters.model.monsters;
 
 /**
- * Created by georg on 24.01.16.
+ * @author Georg Eckert 2016
  */
 public enum Element {
     NONE, EARTH, FIRE, WATER, AIR, FOREST, DEMON, LINDWORM, FROST, SPIRIT, MOUNTAIN, ARTHROPODA, LIGHTNING,

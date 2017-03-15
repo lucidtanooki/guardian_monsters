@@ -1,23 +1,22 @@
-package de.limbusdev.guardianmonsters.model;
+package de.limbusdev.guardianmonsters.model.monsters;
 
 import com.badlogic.ashley.signals.Signal;
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.utils.Array;
 
-
-import de.limbusdev.guardianmonsters.enums.Element;
+import de.limbusdev.guardianmonsters.model.items.Equipment;
 import de.limbusdev.guardianmonsters.model.items.EquipmentPotential;
 import de.limbusdev.guardianmonsters.utils.Constant;
 import de.limbusdev.guardianmonsters.utils.MathTool;
+import de.limbusdev.guardianmonsters.model.abilities.AbilityGraph;
 
-import static de.limbusdev.guardianmonsters.model.Stat.Growth.FAST;
-import static de.limbusdev.guardianmonsters.model.Stat.Growth.FASTHP;
-import static de.limbusdev.guardianmonsters.model.Stat.Growth.FASTMP;
-import static de.limbusdev.guardianmonsters.model.Stat.Growth.MED;
-import static de.limbusdev.guardianmonsters.model.Stat.Growth.MEDHP;
-import static de.limbusdev.guardianmonsters.model.Stat.Growth.MEDMP;
-import static de.limbusdev.guardianmonsters.model.Stat.Growth.SLOW;
-import static de.limbusdev.guardianmonsters.model.Stat.Growth.SLOWHP;
+import static de.limbusdev.guardianmonsters.model.monsters.Stat.Growth.FAST;
+import static de.limbusdev.guardianmonsters.model.monsters.Stat.Growth.FASTHP;
+import static de.limbusdev.guardianmonsters.model.monsters.Stat.Growth.FASTMP;
+import static de.limbusdev.guardianmonsters.model.monsters.Stat.Growth.MED;
+import static de.limbusdev.guardianmonsters.model.monsters.Stat.Growth.MEDHP;
+import static de.limbusdev.guardianmonsters.model.monsters.Stat.Growth.MEDMP;
+import static de.limbusdev.guardianmonsters.model.monsters.Stat.Growth.SLOW;
+import static de.limbusdev.guardianmonsters.model.monsters.Stat.Growth.SLOWHP;
 
 /**
  * Stat contains all statistic values of a {@link Monster}. The statistic values at level 1 should
@@ -65,26 +64,25 @@ public class Stat extends Signal<Stat> {
     private int EXP;
 
     public int character;   // for growth rates
+    public BaseStat base;
 
     private int HP, MP, PStr, PDef, MStr, MDef, Speed;
     private int HPmax, MPmax, PStrMax, PDefMax, MStrMax, MDefMax, SpeedMax;
-    public Array<Element> elements;
 
-    private de.limbusdev.guardianmonsters.model.items.Equipment hands;
-    private de.limbusdev.guardianmonsters.model.items.Equipment head;
-    private de.limbusdev.guardianmonsters.model.items.Equipment body;
-    private de.limbusdev.guardianmonsters.model.items.Equipment feet;
+    private Equipment hands;
+    private Equipment head;
+    private Equipment body;
+    private Equipment feet;
 
     private LevelUpReport lvlUpReport;
-    public Monster monster;
 
     // ................................................................................. CONSTRUCTOR
 
     public Stat() {}
 
-    public Stat(int level, BaseStat baseStat, Array<Element> elements, Monster monster) {
+    public Stat(int level, BaseStat baseStat) {
 
-        this.monster = monster;
+        this.base = baseStat;
 
         // Choose a random character
         switch(MathUtils.random(0,2)) {
@@ -111,7 +109,6 @@ public class Stat extends Signal<Stat> {
         healCompletely();
 
         this.EXP = 0;
-        this.elements = elements;
 
         lvlUpReport = new LevelUpReport(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
 
@@ -276,9 +273,9 @@ public class Stat extends Signal<Stat> {
         return (getEXPAvailableAtLevel(level) - EXP);
     }
 
-    public de.limbusdev.guardianmonsters.model.items.Equipment giveEquipment(de.limbusdev.guardianmonsters.model.items.Equipment equipment) {
-        de.limbusdev.guardianmonsters.model.items.Equipment oldEquipment=null;
-        switch(equipment.type) {
+    public Equipment giveEquipment(Equipment equipment) {
+        Equipment oldEquipment=null;
+        switch(equipment.bodyPart) {
             case HANDS:
                 oldEquipment = hands;
                 hands = equipment;
@@ -303,15 +300,15 @@ public class Stat extends Signal<Stat> {
     }
 
     /**
-     * Calculates the {@link de.limbusdev.guardianmonsters.model.items.EquipmentPotential} of a given {@link de.limbusdev.guardianmonsters.model.items.Equipment} for this {@link Monster}
+     * Calculates the {@link EquipmentPotential} of a given {@link Equipment} for this {@link Monster}
      * @param eq
      * @return
      */
-    public de.limbusdev.guardianmonsters.model.items.EquipmentPotential getEquipmentPotential(de.limbusdev.guardianmonsters.model.items.Equipment eq) {
-        de.limbusdev.guardianmonsters.model.items.EquipmentPotential pot;
+    public EquipmentPotential getEquipmentPotential(Equipment eq) {
+        EquipmentPotential pot;
 
-        de.limbusdev.guardianmonsters.model.items.Equipment currentEquipment;
-        switch(eq.type) {
+        Equipment currentEquipment;
+        switch(eq.bodyPart) {
             case HEAD:
                 currentEquipment = head;
                 break;
@@ -327,7 +324,7 @@ public class Stat extends Signal<Stat> {
         }
 
         if(currentEquipment == null) {
-            pot = new de.limbusdev.guardianmonsters.model.items.EquipmentPotential(
+            pot = new EquipmentPotential(
                 eq.addsHP,
                 eq.addsMP,
                 eq.addsSpeed,
@@ -368,7 +365,7 @@ public class Stat extends Signal<Stat> {
     }
 
     /**
-     * returns the number of levels, which can be used to activate nodes in the {@link de.limbusdev.guardianmonsters.model.abilities.AbilityGraph}
+     * returns the number of levels, which can be used to activate nodes in the {@link AbilityGraph}
      * @return
      */
     public int getAbilityLevels() {
@@ -412,7 +409,7 @@ public class Stat extends Signal<Stat> {
     }
 
     public int getMaxPossibleHP() {
-        int maxPossHP = MonsterDB.singleton().getStatusInfos().get(monster.ID).baseStat.baseHP;
+        int maxPossHP = base.baseHP;
         for(int i=1; i<100; i++) {
             maxPossHP += MathTool.dice(characterGrowthRates[character][StatType.HP]);
         }
@@ -420,7 +417,7 @@ public class Stat extends Signal<Stat> {
     }
 
     public int getMaxPossibleMP() {
-        int maxPossMP = MonsterDB.singleton().getStatusInfos().get(monster.ID).baseStat.baseMP;
+        int maxPossMP = base.baseMP;
         for(int i=1; i<100; i++) {
             maxPossMP += MathTool.dice(characterGrowthRates[character][StatType.MP]);
         }
@@ -428,7 +425,7 @@ public class Stat extends Signal<Stat> {
     }
 
     public int getMaxPossiblePStr() {
-        int maxPossPStr = MonsterDB.singleton().getStatusInfos().get(monster.ID).baseStat.basePStr;
+        int maxPossPStr = base.basePStr;
         for(int i=1; i<100; i++) {
             maxPossPStr += MathTool.dice(characterGrowthRates[character][StatType.PSTR]);
         }
@@ -436,7 +433,7 @@ public class Stat extends Signal<Stat> {
     }
 
     public int getMaxPossiblePDef() {
-        int maxPossPDef = MonsterDB.singleton().getStatusInfos().get(monster.ID).baseStat.basePDef;
+        int maxPossPDef = base.basePDef;
         for(int i=1; i<100; i++) {
             maxPossPDef += MathTool.dice(characterGrowthRates[character][StatType.PDEF]);
         }
@@ -444,7 +441,7 @@ public class Stat extends Signal<Stat> {
     }
 
     public int getMaxPossibleMStr() {
-        int maxPossMStr = MonsterDB.singleton().getStatusInfos().get(monster.ID).baseStat.baseMStr;
+        int maxPossMStr = base.baseMStr;
         for(int i=1; i<100; i++) {
             maxPossMStr += MathTool.dice(characterGrowthRates[character][StatType.MSTR]);
         }
@@ -452,7 +449,7 @@ public class Stat extends Signal<Stat> {
     }
 
     public int getMaxPossibleMDef() {
-        int maxPossMDef = MonsterDB.singleton().getStatusInfos().get(monster.ID).baseStat.baseMDef;
+        int maxPossMDef = base.baseMDef;
         for(int i=1; i<100; i++) {
             maxPossMDef += MathTool.dice(characterGrowthRates[character][StatType.MDEF]);
         }
@@ -460,7 +457,7 @@ public class Stat extends Signal<Stat> {
     }
 
     public int getMaxPossibleSpeed() {
-        int maxPossSpeed = MonsterDB.singleton().getStatusInfos().get(monster.ID).baseStat.baseSpeed;
+        int maxPossSpeed = base.baseSpeed;
         for(int i=1; i<100; i++) {
             maxPossSpeed += MathTool.dice(characterGrowthRates[character][StatType.SPEED]);
         }
@@ -468,7 +465,7 @@ public class Stat extends Signal<Stat> {
     }
 
     /**
-     * @return maximum HP, taking {@link de.limbusdev.guardianmonsters.model.items.Equipment} into account
+     * @return maximum HP, taking {@link Equipment} into account
      */
     public int getHPmax() {
         float extFactor = 100f;
@@ -482,7 +479,7 @@ public class Stat extends Signal<Stat> {
     }
 
     /**
-     * @return maximum MP, taking {@link de.limbusdev.guardianmonsters.model.items.Equipment} into account
+     * @return maximum MP, taking {@link Equipment} into account
      */
     public int getMPmax() {
         float extFactor = 100f;
@@ -496,7 +493,7 @@ public class Stat extends Signal<Stat> {
     }
 
     /**
-     * @return maximum Pstr, taking {@link de.limbusdev.guardianmonsters.model.items.Equipment} into account
+     * @return maximum Pstr, taking {@link Equipment} into account
      */
     public int getPStrMax() {
         int extPStr = PStrMax;
@@ -510,7 +507,7 @@ public class Stat extends Signal<Stat> {
     }
 
     /**
-     * @return maximum PDef, taking {@link de.limbusdev.guardianmonsters.model.items.Equipment} into account
+     * @return maximum PDef, taking {@link Equipment} into account
      */
     public int getPDefMax() {
         int extPDef = PDefMax;
@@ -524,7 +521,7 @@ public class Stat extends Signal<Stat> {
     }
 
     /**
-     * @return maximum MStr, taking {@link de.limbusdev.guardianmonsters.model.items.Equipment} into account
+     * @return maximum MStr, taking {@link Equipment} into account
      */
     public int getMStrMax() {
         int extMStr = MStrMax;
@@ -538,7 +535,7 @@ public class Stat extends Signal<Stat> {
     }
 
     /**
-     * @return maximum MDef, taking {@link de.limbusdev.guardianmonsters.model.items.Equipment} into account
+     * @return maximum MDef, taking {@link Equipment} into account
      */
     public int getMDefMax() {
         int extMDef = MDefMax;
@@ -552,7 +549,7 @@ public class Stat extends Signal<Stat> {
     }
 
     /**
-     * @return maximum Speed, taking {@link de.limbusdev.guardianmonsters.model.items.Equipment} into account
+     * @return maximum Speed, taking {@link Equipment} into account
      */
     public int getSpeedMax() {
         int extSpeed = SpeedMax;
@@ -565,9 +562,6 @@ public class Stat extends Signal<Stat> {
         return extSpeed;
     }
 
-    public Array<Element> getElements() {
-        return elements;
-    }
 
     public boolean hasHandsEquipped() {
         return hands != null;
@@ -582,19 +576,19 @@ public class Stat extends Signal<Stat> {
         return feet != null;
     }
 
-    public de.limbusdev.guardianmonsters.model.items.Equipment getHands() {
+    public Equipment getHands() {
         return hands;
     }
 
-    public de.limbusdev.guardianmonsters.model.items.Equipment getHead() {
+    public Equipment getHead() {
         return head;
     }
 
-    public de.limbusdev.guardianmonsters.model.items.Equipment getBody() {
+    public Equipment getBody() {
         return body;
     }
 
-    public de.limbusdev.guardianmonsters.model.items.Equipment getFeet() {
+    public Equipment getFeet() {
         return feet;
     }
 

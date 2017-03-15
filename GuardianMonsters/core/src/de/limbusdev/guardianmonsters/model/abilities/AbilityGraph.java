@@ -3,8 +3,9 @@ package de.limbusdev.guardianmonsters.model.abilities;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 
+import de.limbusdev.guardianmonsters.model.items.BodyPart;
 import de.limbusdev.guardianmonsters.model.items.Equipment;
-import de.limbusdev.guardianmonsters.model.MonsterData;
+import de.limbusdev.guardianmonsters.model.monsters.MonsterData;
 
 /**
  * Created by Georg Eckert on 21.02.17.
@@ -18,8 +19,8 @@ public class AbilityGraph {
     public ArrayMap<Integer,NodeType> typesOfNodes;
     public ArrayMap<Integer,Ability> learnableAbilities;
     public ArrayMap<Integer,Ability> learntAbilities;
-    public ArrayMap<Integer,Equipment.EQUIPMENT_TYPE> learnableEquipment;
-    public Array<Equipment.EQUIPMENT_TYPE> learntEquipment;
+    public ArrayMap<Integer,BodyPart> learnableEquipment;
+    public Array<BodyPart> learntEquipment;
     public Array<Integer> metamorphosisNodes;
 
     private ArrayMap<Integer, Node> nodes;
@@ -88,10 +89,10 @@ public class AbilityGraph {
         for(int i=0; i<=100; i++) nodeEnabled.put(i,false);
         for(int i=0; i<=100; i++) typesOfNodes.put(i,NodeType.EMPTY);
 
-        for(int key : data.learnableAbilitiesByNode.keys()) {
+        for(int key : data.abilityNodes.keys()) {
             typesOfNodes.put(key,NodeType.ABILITY);
         }
-        for(int key : data.learnableEquipmentByNode.keys()) {
+        for(int key : data.equipmentNodes.keys()) {
             typesOfNodes.put(key,NodeType.EQUIPMENT);
         }
         for(int key : data.metamorphosisNodes) {
@@ -99,8 +100,8 @@ public class AbilityGraph {
         }
 
         metamorphosisNodes.addAll(data.metamorphosisNodes);
-        learnableAbilities.putAll(data.learnableAbilitiesByNode);
-        learnableEquipment.putAll(data.learnableEquipmentByNode);
+        learnableAbilities.putAll(data.abilityNodes);
+        learnableEquipment.putAll(data.equipmentNodes);
     }
 
     // ................................................................................ ENUMERATIONS
@@ -262,5 +263,18 @@ public class AbilityGraph {
             return NodeType.METAMORPHOSIS;
         }
         return NodeType.EMPTY;
+    }
+
+    /**
+     * Finds out if the ability to carry a specific equipment has already been learnt
+     * @param bodyPart  the body part in question
+     * @return          if it is already possible to carry such equipment
+     */
+    public boolean hasLearntEquipment(BodyPart bodyPart) {
+        if(learntEquipment.contains(bodyPart,true)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

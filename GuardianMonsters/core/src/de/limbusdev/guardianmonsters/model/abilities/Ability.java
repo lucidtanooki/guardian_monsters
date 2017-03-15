@@ -1,35 +1,39 @@
 package de.limbusdev.guardianmonsters.model.abilities;
 
 
-import de.limbusdev.guardianmonsters.enums.AnimationType;
-import de.limbusdev.guardianmonsters.enums.AttackType;
-import de.limbusdev.guardianmonsters.enums.Element;
-import de.limbusdev.guardianmonsters.enums.SFXType;
+import de.limbusdev.guardianmonsters.fwmengine.battle.ui.AnimationType;
+import de.limbusdev.guardianmonsters.model.monsters.Element;
+import de.limbusdev.guardianmonsters.fwmengine.managers.SFXType;
 
 /**
- * Created by georg on 06.12.15.
+ * @author Georg Eckert 2017
  */
 public class Ability {
     /* ............................................................................ ATTRIBUTES .. */
     public int ID;
-    public AttackType attackType;
-    public Element element;
-    public int damage;
     public String name;
+
+    public int damage;
+    public int MPcost;
+    public DamageType damageType;
+    public Element element;
+
     public SFXType sfxType;
     public int sfxIndex;
     public AnimationType animationType;
-    public int MPcost;
-    /* ........................................................................... CONSTRUCTOR .. */
 
+
+    /* ........................................................................... CONSTRUCTOR .. */
     /**
      * For Serialization only!
      */
-    public Ability() {}
+    public Ability() {
+    }
 
     /**
-     * For attacks that cost no MP
-     * @param attackType
+     * For physcial Attacks
+     *
+     * @param damageType
      * @param element
      * @param damage
      * @param name
@@ -37,15 +41,16 @@ public class Ability {
      * @param sfxIndex
      * @param animType
      */
-    public Ability(int ID, AttackType attackType, Element element, int damage, String name, SFXType sfxType,
-                   int sfxIndex, AnimationType animType) {
-        this(ID,attackType,element, damage,name,sfxType,sfxIndex,animType,0);
+    public Ability(int ID, DamageType damageType, Element element, int damage, String name,
+                   SFXType sfxType, int sfxIndex, AnimationType animType) {
+        this(ID, damageType, element, damage, name, sfxType, sfxIndex, animType, 0);
     }
 
 
     /**
-     * For attacks that cost MP
-     * @param attackType
+     * For magical Attacks
+     *
+     * @param damageType
      * @param element
      * @param damage
      * @param name
@@ -54,11 +59,11 @@ public class Ability {
      * @param animType
      * @param MPcost
      */
-    public Ability(int ID, AttackType attackType, Element element, int damage, String name, SFXType sfxType,
-                   int sfxIndex, AnimationType animType, int MPcost) {
+    public Ability(int ID, DamageType damageType, Element element, int damage, String name,
+                   SFXType sfxType, int sfxIndex, AnimationType animType, int MPcost) {
         this.ID = ID;
         this.element = element;
-        this.attackType = attackType;
+        this.damageType = damageType;
         this.damage = damage;
         this.name = name;
         this.sfxIndex = sfxIndex;
@@ -68,17 +73,17 @@ public class Ability {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if(obj instanceof Ability) {
-            Ability a = (Ability) obj;
-            if(a.ID == this.ID && a.element.equals(this.element)) return true;
-            else return false;
+    public boolean equals(Object other) {
+        if (other instanceof Ability) {
+            Ability otherAbility = (Ability) other;
+            if (otherAbility.ID == this.ID && otherAbility.element == this.element) {
+                return true;
+            } else {
+                return false;
+            }
         } else {
             return false;
         }
     }
 
-    /* ............................................................................... METHODS .. */
-    
-    /* ..................................................................... GETTERS & SETTERS .. */
 }

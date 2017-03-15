@@ -18,7 +18,7 @@ import de.limbusdev.guardianmonsters.fwmengine.menus.ui.widgets.ReassuranceWidge
 import de.limbusdev.guardianmonsters.model.items.Equipment;
 import de.limbusdev.guardianmonsters.model.items.Inventory;
 import de.limbusdev.guardianmonsters.model.items.Item;
-import de.limbusdev.guardianmonsters.model.Monster;
+import de.limbusdev.guardianmonsters.model.monsters.Monster;
 
 /**
  * Created by georg on 20.02.17.

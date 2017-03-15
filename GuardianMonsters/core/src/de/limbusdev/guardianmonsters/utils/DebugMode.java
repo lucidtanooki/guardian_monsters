@@ -1,4 +1,4 @@
-package de.limbusdev.guardianmonsters.enums;
+package de.limbusdev.guardianmonsters.utils;
 
 /*
  * Copyright (c) 2016 by Georg Eckert

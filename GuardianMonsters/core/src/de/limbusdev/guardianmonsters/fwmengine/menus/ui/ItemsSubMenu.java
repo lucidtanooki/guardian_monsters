@@ -11,7 +11,7 @@ import de.limbusdev.guardianmonsters.fwmengine.menus.ui.items.KeyItemDetailViewW
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.items.WeaponDetailViewWidget;
 import de.limbusdev.guardianmonsters.model.items.Inventory;
 import de.limbusdev.guardianmonsters.model.items.Item;
-import de.limbusdev.guardianmonsters.model.Monster;
+import de.limbusdev.guardianmonsters.model.monsters.Monster;
 
 /**
  * Created by Georg Eckert on 17.02.17.
@@ -34,7 +34,7 @@ public class ItemsSubMenu extends AInventorySubMenu
         addActor(toolbar);
 
         // ......................................................................... SCROLLABLE LIST
-        itemListWidget = new ItemListWidget(skin, inventory, this, Item.CATEGORY.MEDICINE);
+        itemListWidget = new ItemListWidget(skin, inventory, this, Item.Category.MEDICINE);
         itemListWidget.setPosition(68,0,Align.bottomLeft);
 
         addActor(itemListWidget);
@@ -64,22 +64,22 @@ public class ItemsSubMenu extends AInventorySubMenu
 
     @Override
     public void onMedicineButton() {
-        itemListWidget.applyFilter(Item.CATEGORY.MEDICINE);
+        itemListWidget.applyFilter(Item.Category.MEDICINE);
     }
 
     @Override
     public void onOtherItemsButton() {
-        itemListWidget.applyFilter(Item.CATEGORY.ALL);
+        itemListWidget.applyFilter(Item.Category.ALL);
     }
 
     @Override
     public void onEquipItemsButton() {
-        itemListWidget.applyFilter(Item.CATEGORY.EQUIPMENT);
+        itemListWidget.applyFilter(Item.Category.EQUIPMENT);
     }
 
     @Override
     public void onKeyItemsButton() {
-        itemListWidget.applyFilter(Item.CATEGORY.KEY);
+        itemListWidget.applyFilter(Item.Category.KEY);
     }
 
     @Override

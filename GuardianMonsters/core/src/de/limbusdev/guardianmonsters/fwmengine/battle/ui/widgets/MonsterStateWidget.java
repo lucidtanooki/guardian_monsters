@@ -13,14 +13,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 import com.badlogic.gdx.utils.Align;
 
 
-import java.util.Observable;
-import java.util.Observer;
-
 import de.limbusdev.guardianmonsters.data.BundleAssets;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
-import de.limbusdev.guardianmonsters.model.Monster;
+import de.limbusdev.guardianmonsters.model.monsters.Monster;
 import de.limbusdev.guardianmonsters.model.MonsterDB;
-import de.limbusdev.guardianmonsters.model.Stat;
+import de.limbusdev.guardianmonsters.model.monsters.Stat;
 import de.limbusdev.guardianmonsters.utils.Constant;
 
 /**

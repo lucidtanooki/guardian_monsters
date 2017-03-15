@@ -14,10 +14,9 @@ import de.limbusdev.guardianmonsters.data.BundleAssets;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.widgets.AnimatedImage;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.widgets.OverlayWidget;
-import de.limbusdev.guardianmonsters.model.LevelUpReport;
-import de.limbusdev.guardianmonsters.model.Monster;
+import de.limbusdev.guardianmonsters.model.monsters.LevelUpReport;
+import de.limbusdev.guardianmonsters.model.monsters.Monster;
 import de.limbusdev.guardianmonsters.model.MonsterDB;
-import de.limbusdev.guardianmonsters.model.Stat;
 import de.limbusdev.guardianmonsters.utils.Constant;
 
 /**

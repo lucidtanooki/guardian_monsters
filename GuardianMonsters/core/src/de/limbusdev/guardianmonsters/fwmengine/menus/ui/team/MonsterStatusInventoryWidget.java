@@ -9,9 +9,9 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ArrayMap;
 
 import de.limbusdev.guardianmonsters.data.BundleAssets;
-import de.limbusdev.guardianmonsters.enums.Element;
+import de.limbusdev.guardianmonsters.model.monsters.Element;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
-import de.limbusdev.guardianmonsters.model.Monster;
+import de.limbusdev.guardianmonsters.model.monsters.Monster;
 import de.limbusdev.guardianmonsters.model.MonsterDB;
 import de.limbusdev.guardianmonsters.utils.Constant;
 
@@ -97,7 +97,7 @@ public class MonsterStatusInventoryWidget extends Group {
         valueLabels.get("speed").setText(Integer.toString(m.stat.getSpeedMax()));
 
         elementGroup.clear();
-        for(Element e : m.stat.elements) {
+        for(Element e : m.data.elements) {
             String elem = e.toString().toLowerCase();
             String elemName = Services.getL18N().l18n(BundleAssets.ELEMENTS).get("element_" + elem);
             elemName = elemName.length() < 7 ? elemName : elemName.substring(0,6);

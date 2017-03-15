@@ -23,7 +23,7 @@ import de.limbusdev.guardianmonsters.utils.Constant;
  */
 
 public class AbilityMapSubMenu extends AInventorySubMenu implements Listener<Monster>,
-    GraphWidget.Controller, TeamMemberSwitcher.Controller, AbilityDetailWidget.Controller {
+    GraphWidget.Controller, TeamMemberSwitcher.Controller, AbilityDetailWidget.ClickHandler {
 
     private ArrayMap<Integer, Monster> team;
     private GraphWidget graphWidget;
@@ -93,7 +93,6 @@ public class AbilityMapSubMenu extends AInventorySubMenu implements Listener<Mon
         Monster m = team.get(switcher.getCurrentlyChosen());
         m.stat.consumeAbilityLevel();
         m.abilityGraph.activateNode(nodeID);
-        graphWidget.refreshStatus(m);
         details.init(m, nodeID);
     }
 

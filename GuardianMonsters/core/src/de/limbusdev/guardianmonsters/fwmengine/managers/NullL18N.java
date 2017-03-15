@@ -24,6 +24,36 @@ public class NullL18N implements L18N {
     }
 
     @Override
+    public I18NBundle i18nGeneral() {
+        return null;
+    }
+
+    @Override
+    public I18NBundle i18nAbilities() {
+        return null;
+    }
+
+    @Override
+    public I18NBundle i18nMonsters() {
+        return null;
+    }
+
+    @Override
+    public I18NBundle i18nElements() {
+        return null;
+    }
+
+    @Override
+    public I18NBundle i18nInventory() {
+        return null;
+    }
+
+    @Override
+    public I18NBundle i18nBattle() {
+        return null;
+    }
+
+    @Override
     public void dispose() {
         // DO Nothing
     }

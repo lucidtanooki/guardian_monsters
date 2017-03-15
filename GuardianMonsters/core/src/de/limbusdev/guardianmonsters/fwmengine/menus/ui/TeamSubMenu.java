@@ -150,10 +150,9 @@ public class TeamSubMenu extends AInventorySubMenu {
         joinsBattleButton.setChecked(false);
         joinsBattleButton.setStyle(normalButtonStyle);
 
-        GameState state = SaveGameManager.loadSaveGame();
-
         // If the shown position belongs to the range given by activeInCombat & within 0-2
-        if(teamPosition <= team.activeInCombat && teamPosition <3 && teamPosition < state.maxTeamSizeInBattle) {
+        if(teamPosition <= team.activeInCombat && teamPosition <3 && teamPosition < 3) {
+            // TODO take max team size into account
             joinsBattleButton.setTouchable(Touchable.enabled);
             monsterChoice.addActor(joinsBattleButton);
 

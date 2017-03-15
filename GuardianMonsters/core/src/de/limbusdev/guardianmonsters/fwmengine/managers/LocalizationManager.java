@@ -77,6 +77,36 @@ public class LocalizationManager implements L18N {
     }
 
     @Override
+    public I18NBundle i18nGeneral() {
+        return this.l18n.get(BundleAssets.GENERAL);
+    }
+
+    @Override
+    public I18NBundle i18nAbilities() {
+        return this.l18n.get(BundleAssets.ATTACKS);
+    }
+
+    @Override
+    public I18NBundle i18nMonsters() {
+        return this.l18n.get(BundleAssets.MONSTERS);
+    }
+
+    @Override
+    public I18NBundle i18nElements() {
+        return this.l18n.get(BundleAssets.ELEMENTS);
+    }
+
+    @Override
+    public I18NBundle i18nInventory() {
+        return this.l18n.get(BundleAssets.INVENTORY);
+    }
+
+    @Override
+    public I18NBundle i18nBattle() {
+        return this.l18n.get(BundleAssets.BATTLE);
+    }
+
+    @Override
     public void dispose() {
         this.font.dispose();
     }

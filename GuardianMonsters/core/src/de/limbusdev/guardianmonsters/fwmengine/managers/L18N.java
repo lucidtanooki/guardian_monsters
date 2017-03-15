@@ -16,5 +16,17 @@ public interface L18N {
 
     BitmapFont getFont();
 
+    I18NBundle i18nGeneral();
+
+    I18NBundle i18nAbilities();
+
+    I18NBundle i18nMonsters();
+
+    I18NBundle i18nElements();
+
+    I18NBundle i18nInventory();
+
+    I18NBundle i18nBattle();
+
     void dispose();
 }

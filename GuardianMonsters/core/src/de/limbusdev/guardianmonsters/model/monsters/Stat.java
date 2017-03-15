@@ -372,7 +372,7 @@ public class Stat extends Signal<Stat> {
         return abilityLevels;
     }
 
-    public boolean hasAbilityLevelsLeft() {
+    public boolean hasAbilityPoints() {
         return getAbilityLevels() > 0;
     }
 

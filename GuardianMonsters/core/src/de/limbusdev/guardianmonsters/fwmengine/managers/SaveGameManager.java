@@ -97,6 +97,7 @@ public class SaveGameManager extends EntitySystem {
 
         } catch (Exception e) {
             e.printStackTrace();
+            gameState = new GameState();
         }
 
         return gameState;

@@ -18,9 +18,10 @@ import de.limbusdev.guardianmonsters.model.abilities.DamageType;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.model.abilities.Ability;
 import de.limbusdev.guardianmonsters.model.abilities.AbilityGraph;
+import de.limbusdev.guardianmonsters.model.abilities.Node;
 import de.limbusdev.guardianmonsters.model.items.BodyPart;
-import de.limbusdev.guardianmonsters.model.items.Equipment;
 import de.limbusdev.guardianmonsters.model.monsters.Monster;
+import de.limbusdev.guardianmonsters.model.monsters.Stat;
 
 
 /**
@@ -34,26 +35,19 @@ public class AbilityDetailWidget extends Container {
     private Skin skin;
     private Group group;
 
-    public Label name;
-    public Label damage;
+    private Label name;
+    private Label damage;
     private Label element;
     private Image abilityType;
     private ImageButton learn;
 
-    public Controller callbacks;
+    public ClickHandler clickHandler;
 
-    public interface Controller {
-        /**
-         * Is called, when the learn button of the detail widget is clicked.
-         * @param nodeID    ID of the currently chosen graph node
-         */
-        void onLearn(int nodeID);
-    }
-
-    public AbilityDetailWidget(Skin skin, Controller handler) {
+    public AbilityDetailWidget(Skin skin, ClickHandler handler) {
         super();
         this.skin = skin;
-        this.callbacks = handler;
+
+        this.clickHandler = handler;
         setBackground(skin.getDrawable("label-bg-sandstone"));
         setSize(170,64);
 
@@ -77,26 +71,32 @@ public class AbilityDetailWidget extends Container {
 
         learn = new ImageButton(skin, "button-learn");
         learn.setPosition(160,0,Align.bottomRight);
+        group.addActor(learn);
+
+        // Callbacks
         learn.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                callbacks.onLearn(nodeID);
+                clickHandler.onLearn(nodeID);
             }
         });
-        group.addActor(learn);
 
     }
 
 
     // .............................................................................. INITIALIZATION
 
-    private void setActorVisibility(AbilityGraph.NodeType type, boolean learnable, boolean enoughFreeLevels) {
-        if(element != null) element.remove();
+    private void setLayout(Node.Type type, boolean showLearnButton) {
+        // Hide Everything
+        if(element != null) {
+            element.remove();
+        }
         name.setVisible(false);
         damage.setVisible(false);
         abilityType.setVisible(false);
         learn.setVisible(false);
 
+        // Unhide needed actors
         switch(type) {
             case EMPTY:
                 break;
@@ -111,55 +111,48 @@ public class AbilityDetailWidget extends Container {
                 break;
         }
 
-        learn.setVisible(learnable && enoughFreeLevels);
+        learn.setVisible(showLearnButton);
     }
 
 
     public void init(Monster monster, int nodeID) {
-        if(element != null) element.remove();
-        if(monster.abilityGraph.learnsSomethingAt(nodeID)) {
-            if(monster.abilityGraph.learnsAbilityAt(nodeID)) {
-                init(monster.abilityGraph.learnableAbilities.get(nodeID), nodeID, monster.abilityGraph, monster.stat.hasAbilityLevelsLeft());
-            }
-            if(monster.abilityGraph.learnsEquipmentAt(nodeID)) {
-                init(monster.abilityGraph.learnableEquipment.get(nodeID), nodeID, monster.abilityGraph, monster.stat.hasAbilityLevelsLeft());
-            }
-            if(monster.abilityGraph.metamorphsAt(nodeID)) {
-                initMetamorphosis(nodeID, monster.abilityGraph, monster.stat.hasAbilityLevelsLeft());
-            }
-        } else {
-            initEmpty(nodeID,monster.abilityGraph, monster.stat.getAbilityLevels() > 0);
+        this.nodeID = nodeID;
+
+        AbilityGraph graph = monster.abilityGraph;
+        Node.Type type = graph.nodeTypeAt(nodeID);
+        Stat stat = monster.stat;
+
+        boolean showLearnButton = (stat.hasAbilityPoints() && graph.isNodeEnabled(nodeID));
+        setLayout(type, showLearnButton);
+
+        switch(type) {
+            case ABILITY:
+                initAbilityDetails(graph.abilityNodes.get(nodeID));
+                break;
+            case EQUIPMENT:
+                initEquipmentDetails(graph.equipmentNodes.get(nodeID));
+                break;
+            case METAMORPHOSIS:
+                initMetamorphosis();
+                break;
+            default:    // EMPTY NODE
+                initEmpty();
+                break;
         }
     }
 
-    private void initMetamorphosis(int nodeID, AbilityGraph graph, boolean enoughFreeLvls) {
-        this.nodeID = nodeID;
-
-        setActorVisibility(AbilityGraph.NodeType.METAMORPHOSIS, graph.isNodeLearnable(nodeID), enoughFreeLvls);
-
-        name.setText(Services.getL18N().l18n(BundleAssets.GENERAL).get("metamorphosis"));
+    private void initMetamorphosis() {
+        String text = Services.getL18N().i18nGeneral().get("metamorphosis");
+        name.setText(text);
     }
 
-    /**
-     * Node Type: ABILITY
-     * @param ability
-     * @param nodeID
-     * @param graph
-     */
-    private void init(Ability ability, int nodeID, AbilityGraph graph, boolean enoughFreeLvls) {
-        this.nodeID = nodeID;
-        initAbilityDetails(ability, (graph.isNodeLearnable(nodeID) && enoughFreeLvls));
-    }
 
-    public void initAbilityDetails(Ability ability, boolean showButton) {
-        if(element != null) element.remove();
-        setActorVisibility(AbilityGraph.NodeType.ABILITY, showButton, showButton);
-
+    public void initAbilityDetails(Ability ability) {
         if(ability == null) {
             name.setText("Empty");
             damage.setText("0");
         } else {
-            name.setText(Services.getL18N().l18n(BundleAssets.ATTACKS).get(ability.name));
+            name.setText(Services.getL18N().i18nAbilities().get(ability.name));
             damage.setText(Integer.toString(ability.damage));
 
             String drawableID = ability.damageType == DamageType.PHYSICAL ? "pstr" : "mstr";
@@ -167,7 +160,7 @@ public class AbilityDetailWidget extends Container {
 
             abilityType.setDrawable(drawable);
             String elem = ability.element.toString().toLowerCase();
-            String elemName = Services.getL18N().l18n(BundleAssets.ELEMENTS).get("element_" + elem);
+            String elemName = Services.getL18N().i18nElements().get("element_" + elem);
             elemName = elemName.length() < 7 ? elemName : elemName.substring(0,6);
             element = new Label(elemName, skin, "elem-" + elem);
             element.setPosition(124,0,Align.bottomRight);
@@ -175,27 +168,32 @@ public class AbilityDetailWidget extends Container {
         }
     }
 
-    private void init(BodyPart equipmentType, int nodeID, AbilityGraph graph, boolean enoughFreeLvls) {
-        this.nodeID = nodeID;
-
+    private void initEquipmentDetails(BodyPart equipmentType) {
         String equipment;
-        I18NBundle bundle = Services.getL18N().l18n(BundleAssets.INVENTORY);
-
-        setActorVisibility(AbilityGraph.NodeType.EQUIPMENT, graph.isNodeLearnable(nodeID), enoughFreeLvls);
+        I18NBundle bundle = Services.getL18N().i18nInventory();
 
         switch(equipmentType) {
             case HANDS: equipment = bundle.get("equip-hands"); break;
-            case FEET: equipment = bundle.get("equip-feet"); break;
-            case HEAD: equipment = bundle.get("equip-head"); break;
-            default: equipment = bundle.get("equip-body"); break;
+            case FEET:  equipment = bundle.get("equip-feet"); break;
+            case HEAD:  equipment = bundle.get("equip-head"); break;
+            default:    equipment = bundle.get("equip-body"); break;
         }
 
         name.setText(bundle.format("ability-carry-equipment", equipment));
     }
 
-    private void initEmpty(int nodeID, AbilityGraph graph, boolean enoughFreeLvls) {
-        this.nodeID = nodeID;
+    private void initEmpty() {
+        // DO NOTHING
+    }
 
-        setActorVisibility(AbilityGraph.NodeType.EMPTY, graph.isNodeLearnable(nodeID), enoughFreeLvls);
+
+
+    // .................................................................... CLICK LISTENER INTERFACE
+    public interface ClickHandler {
+        /**
+         * Is called, when the learn button of the detail widget is clicked.
+         * @param nodeID    ID of the currently chosen graph node
+         */
+        void onLearn(int nodeID);
     }
 }

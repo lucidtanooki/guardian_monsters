@@ -18,6 +18,7 @@ import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.abilities.AbilityDetailWidget;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.team.TeamMemberSwitcher;
 import de.limbusdev.guardianmonsters.model.abilities.Ability;
+import de.limbusdev.guardianmonsters.model.abilities.AbilityGraph;
 import de.limbusdev.guardianmonsters.model.monsters.Monster;
 import de.limbusdev.guardianmonsters.utils.Constant;
 
@@ -28,7 +29,7 @@ import de.limbusdev.guardianmonsters.utils.Constant;
  */
 
 public class AbilityChoiceSubMenu extends AInventorySubMenu
-    implements TeamMemberSwitcher.Controller, AbilityDetailWidget.Controller, SevenButtonsWidget.ClickListener {
+    implements TeamMemberSwitcher.Controller, AbilityDetailWidget.ClickHandler, SevenButtonsWidget.ClickListener {
 
     private TeamMemberSwitcher switcher;
     private VerticalGroup abilityMenu;
@@ -120,7 +121,9 @@ public class AbilityChoiceSubMenu extends AInventorySubMenu
     }
 
     private void showAbilityDetails() {
-        details.initAbilityDetails(team.get(switcher.getCurrentlyChosen()).abilityGraph.learntAbilities.get(abilityButtons.getCheckedIndex()), true);
+        AbilityGraph graph = team.get(switcher.getCurrentlyChosen()).abilityGraph;
+        int chosenAbilityIndex = abilityButtons.getCheckedIndex();
+        details.initAbilityDetails(graph.learntAbilities.get(chosenAbilityIndex));
     }
 
     @Override

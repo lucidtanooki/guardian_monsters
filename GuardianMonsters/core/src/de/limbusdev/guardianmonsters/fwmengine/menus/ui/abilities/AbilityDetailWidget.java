@@ -24,19 +24,21 @@ import de.limbusdev.guardianmonsters.model.monsters.Monster;
 
 
 /**
- * Created by Georg Eckert on 02.03.17.
+ * @author Georg Eckert 2017
  */
 
 public class AbilityDetailWidget extends Container {
 
+    private int nodeID;
+
+    private Skin skin;
+    private Group group;
+
     public Label name;
     public Label damage;
-    private Skin skin;
+    private Label element;
     private Image abilityType;
     private ImageButton learn;
-    private int nodeID;
-    private Label element;
-    private Group group;
 
     public Controller callbacks;
 
@@ -159,7 +161,10 @@ public class AbilityDetailWidget extends Container {
         } else {
             name.setText(Services.getL18N().l18n(BundleAssets.ATTACKS).get(ability.name));
             damage.setText(Integer.toString(ability.damage));
-            Drawable drawable = ability.damageType == DamageType.PHYSICAL ? skin.getDrawable("stats-symbol-pstr") : skin.getDrawable("stats-symbol-mstr");
+
+            String drawableID = ability.damageType == DamageType.PHYSICAL ? "pstr" : "mstr";
+            Drawable drawable = skin.getDrawable("stats-symbol-" + drawableID);
+
             abilityType.setDrawable(drawable);
             String elem = ability.element.toString().toLowerCase();
             String elemName = Services.getL18N().l18n(BundleAssets.ELEMENTS).get("element_" + elem);

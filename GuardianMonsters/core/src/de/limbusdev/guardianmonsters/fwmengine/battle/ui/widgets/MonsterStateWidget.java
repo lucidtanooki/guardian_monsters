@@ -1,5 +1,7 @@
 package de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets;
 
+import com.badlogic.ashley.signals.Listener;
+import com.badlogic.ashley.signals.Signal;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
@@ -26,7 +28,7 @@ import de.limbusdev.guardianmonsters.utils.Constant;
  * HINT: Don't forget calling the init() method
  * Created by georg on 03.07.16.
  */
-public class MonsterStateWidget extends WidgetGroup implements Observer {
+public class MonsterStateWidget extends WidgetGroup implements Listener<Monster> {
     private ProgressBar hpBar;
     private ProgressBar mpBar;
     private ProgressBar epBar;
@@ -100,30 +102,23 @@ public class MonsterStateWidget extends WidgetGroup implements Observer {
 
     /**
      * Initializes the widget to show a monsters status values
-     * @param mon
+     * @param monster
      */
-    public void init(Monster mon) {
-        update(mon.stat, "");
-        nameLabel.setText(Services.getL18N().l18n(BundleAssets.MONSTERS).get((MonsterDB.singleton().getNameById(mon.ID))));
-        mon.stat.addObserver(this);
+    public void init(Monster monster) {
+        refresh(monster);
+        nameLabel.setText(Services.getL18N().l18n(BundleAssets.MONSTERS).get((MonsterDB.singleton().getNameById(monster.ID))));
+        monster.add(this);
     }
 
-    /**
-     * Updates status view when the monster provides updates
-     * @param o
-     * @param arg
-     */
-    @Override
-    public void update(Observable o, Object arg) {
-        Stat monStat = (Stat)o;
-        this.hpBar.setValue(monStat.getHPfraction());
-        this.mpBar.setValue(monStat.getMPfraction());
-        this.epBar.setValue(monStat.getEXPfraction());
-        this.levelLabel.setText(Integer.toString(monStat.getLevel()));
-        if(monStat.getHP() == 0) {
+    public void refresh(Monster monster) {
+        Stat stat = monster.stat;
+        this.hpBar.setValue(stat.getHPfraction());
+        this.mpBar.setValue(stat.getMPfraction());
+        this.epBar.setValue(stat.getEXPfraction());
+        this.levelLabel.setText(Integer.toString(stat.getLevel()));
+        if(stat.isKO()) {
             addAction(Actions.sequence(Actions.alpha(0, 2), Actions.visible(false)));
         }
-        System.out.println("Received Update");
     }
 
     @Override
@@ -137,5 +132,10 @@ public class MonsterStateWidget extends WidgetGroup implements Observer {
         hudBgImg.act(delta);
         hudRingImg.act(delta);
         hudNameImg.act(delta);
+    }
+
+    @Override
+    public void receive(Signal<Monster> signal, Monster monster) {
+        refresh(monster);
     }
 }

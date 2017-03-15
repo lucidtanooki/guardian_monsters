@@ -1,4 +1,4 @@
-package de.limbusdev.guardianmonsters.model;
+package de.limbusdev.guardianmonsters.model.abilities;
 
 
 import de.limbusdev.guardianmonsters.enums.AnimationType;

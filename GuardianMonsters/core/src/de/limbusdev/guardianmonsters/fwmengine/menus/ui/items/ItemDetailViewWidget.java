@@ -15,9 +15,9 @@ import de.limbusdev.guardianmonsters.data.BundleAssets;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.team.QuickOverviewGuardianList;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.widgets.ReassuranceWidget;
-import de.limbusdev.guardianmonsters.model.Equipment;
-import de.limbusdev.guardianmonsters.model.Inventory;
-import de.limbusdev.guardianmonsters.model.Item;
+import de.limbusdev.guardianmonsters.model.items.Equipment;
+import de.limbusdev.guardianmonsters.model.items.Inventory;
+import de.limbusdev.guardianmonsters.model.items.Item;
 import de.limbusdev.guardianmonsters.model.Monster;
 
 /**

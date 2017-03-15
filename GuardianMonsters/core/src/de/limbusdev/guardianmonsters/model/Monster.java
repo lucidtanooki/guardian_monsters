@@ -1,45 +1,48 @@
 package de.limbusdev.guardianmonsters.model;
 
+import com.badlogic.ashley.signals.Listener;
+import com.badlogic.ashley.signals.Signal;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 
 import de.limbusdev.guardianmonsters.enums.Element;
+import de.limbusdev.guardianmonsters.fwmengine.battle.control.BattleSystem;
+import de.limbusdev.guardianmonsters.model.abilities.AbilityGraph;
 
 /**
- * Created by Georg Eckert on 12.12.15.
+ * Monster is the basic entity for the {@link BattleSystem}
+ *
+ * @author Georg Eckert 2015
  */
-public class Monster {
+public class Monster extends Signal<Monster> implements Listener<Stat> {
     // ...................................................................................... STATIC
     public static int INSTANCECOUNTER=0;
 
     // .................................................................................. ATTRIBUTES
-
     public int INSTANCE_ID;
-    public Stat stat;
-
-    public String nickname;
-
-    // -------------------------------------------------------------------------------------- STATUS
     public int ID;
 
-    private ArrayMap<Integer,Ability> activeAbilities;
-    public AbilityGraph abilityGraph;
+    public Stat stat;
+    public String nickname;
 
-    /* ........................................................................... CONSTRUCTOR .. */
+    private ArrayMap<Integer, de.limbusdev.guardianmonsters.model.abilities.Ability> activeAbilities;
+    public de.limbusdev.guardianmonsters.model.abilities.AbilityGraph abilityGraph;
+
+    // ................................................................................. CONSTRUCTOR
 
     public Monster(int ID) {
-        super();
         this.INSTANCE_ID = INSTANCECOUNTER;
         INSTANCECOUNTER++;
-        // STATUS
+
         this.ID = ID;
-        BaseStat base = MonsterDB.singleton().getStatusInfos().get(ID).baseStat;
         this.nickname = "";
 
-        Array<Element> elements = MonsterDB.singleton().getStatusInfos().get(ID).elements;
+        // Retrieve monster data from DataBase
+        MonsterData data = MonsterDB.singleton().getData(ID);
+        Array<Element> elements = data.elements;
 
-        abilityGraph = new AbilityGraph();
-        abilityGraph.init(MonsterDB.singleton().getData(ID));
+        // Initialize Ability Graph
+        abilityGraph = new AbilityGraph(data);
 
         for(int i = 0; i<1; i++) {
             abilityGraph.activateNode(i);
@@ -49,13 +52,16 @@ public class Monster {
         for(int i=0; i<7; i++) {
             activeAbilities.put(i,null);
         }
+
         int counter = 0;
-        for(Ability a : abilityGraph.learntAbilities.values()) {
+        for(de.limbusdev.guardianmonsters.model.abilities.Ability a : abilityGraph.learntAbilities.values()) {
             activeAbilities.put(counter, a);
             counter++;
         }
 
-        this.stat = new Stat(1, base, elements, this);
+        // Copy base stats over and register monster as listener at it's stats
+        this.stat = new Stat(1, data.baseStat, elements, this);
+        this.stat.add(this);
 
     }
 
@@ -63,20 +69,26 @@ public class Monster {
      * For Serialization only
      */
     public Monster() {
-
+        this.INSTANCE_ID = INSTANCECOUNTER;
+        INSTANCECOUNTER++;
     }
+
+
     /* ............................................................................... METHODS .. */
 
 
-    public void update() {
-        // TODO
+    public boolean equals(Object monster) {
+        if(!(monster instanceof  Monster)) return false;
+        else return equalsMonster((Monster) monster);
     }
 
-
-    @Override
-    public boolean equals(Object o) {
-        if(!(o instanceof  Monster)) return false;
-        if(((Monster)o).INSTANCE_ID == this.INSTANCE_ID) return true;
+    /**
+     * Checks wether two monster objects define the same monster
+     * @param otherMonster
+     * @return
+     */
+    public boolean equalsMonster(Monster otherMonster) {
+        if(INSTANCE_ID == otherMonster.INSTANCE_ID) return true;
         else return false;
     }
 
@@ -90,7 +102,7 @@ public class Monster {
      * @param abilitySlot   slot for in battle ability usage
      * @return              ability which resides there
      */
-    public Ability getActiveAbility(int abilitySlot) {
+    public de.limbusdev.guardianmonsters.model.abilities.Ability getActiveAbility(int abilitySlot) {
         return activeAbilities.get(abilitySlot);
     }
 
@@ -100,11 +112,11 @@ public class Monster {
      * @param learntAbilityNumber   number of ability to be placed there
      */
     public void setActiveAbility(int slot, int learntAbilityNumber) {
-        Ability abilityToLearn = abilityGraph.learntAbilities.get(learntAbilityNumber);
+        de.limbusdev.guardianmonsters.model.abilities.Ability abilityToLearn = abilityGraph.learntAbilities.get(learntAbilityNumber);
         if(abilityToLearn == null) return;
 
         for(int key : activeAbilities.keys()) {
-            Ability abilityAtThisSlot = activeAbilities.get(key);
+            de.limbusdev.guardianmonsters.model.abilities.Ability abilityAtThisSlot = activeAbilities.get(key);
 
             if(abilityAtThisSlot != null) {
                 if (abilityAtThisSlot.equals(abilityToLearn)) {
@@ -120,5 +132,13 @@ public class Monster {
         String out = "";
         out += MonsterDB.singleton().getNameById(ID) + " Level: " + stat.getLevel();
         return out;
+    }
+
+
+    // ............................................................................... STAT LISTENER
+
+    @Override
+    public void receive(Signal<Stat> signal, Stat object) {
+        dispatch(this);
     }
 }

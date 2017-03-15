@@ -1,5 +1,7 @@
 package de.limbusdev.guardianmonsters.fwmengine.menus.ui.abilities;
 
+import com.badlogic.ashley.signals.Listener;
+import com.badlogic.ashley.signals.Signal;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -12,20 +14,16 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 
-import java.util.Observable;
-import java.util.Observer;
-
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.widgets.AnimatedImage;
 import de.limbusdev.guardianmonsters.geometry.IntVec2;
-import de.limbusdev.guardianmonsters.model.AbilityGraph;
+import de.limbusdev.guardianmonsters.model.abilities.AbilityGraph;
 import de.limbusdev.guardianmonsters.model.Monster;
-import de.limbusdev.guardianmonsters.model.Stat;
 
 /**
  * Created by georg on 27.02.17.
  */
 
-public class GraphWidget extends Group implements Observer {
+public class GraphWidget extends Group implements Listener<Monster> {
 
     private AbilityGraph graph;
     private Skin skin;
@@ -69,7 +67,7 @@ public class GraphWidget extends Group implements Observer {
         clear();
         currentMonster = monster;
         this.graph = monster.abilityGraph;
-        monster.stat.addObserver(this);
+        monster.add(this);
 
         edgeWidgets.clear();
         for(AbilityGraph.Edge edge : graph.getEdges()) {
@@ -137,12 +135,9 @@ public class GraphWidget extends Group implements Observer {
     }
 
     @Override
-    public void update(Observable o, Object arg) {
-        if(o instanceof Stat) {
-            Stat stat = (Stat)o;
-            if(stat.monster.equals(currentMonster)) {
-                refreshStatus(stat.monster);
-            }
+    public void receive(Signal<Monster> signal, Monster monster) {
+        if(monster.equalsMonster(currentMonster)) {
+            refreshStatus(monster);
         }
     }
 

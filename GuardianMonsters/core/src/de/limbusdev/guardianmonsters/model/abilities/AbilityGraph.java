@@ -1,7 +1,10 @@
-package de.limbusdev.guardianmonsters.model;
+package de.limbusdev.guardianmonsters.model.abilities;
 
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
+
+import de.limbusdev.guardianmonsters.model.items.Equipment;
+import de.limbusdev.guardianmonsters.model.MonsterData;
 
 /**
  * Created by Georg Eckert on 21.02.17.
@@ -54,7 +57,7 @@ public class AbilityGraph {
         {54,66}, {66,82}, {82,98}, {66,90}, {66,74}, {74,96}, {96,100}
     };
 
-    public AbilityGraph() {
+    public AbilityGraph(MonsterData data) {
         nodes = new ArrayMap<>();
         edges = new Array<>();
         nodeActive = new ArrayMap<>();
@@ -76,9 +79,11 @@ public class AbilityGraph {
             edges.add(new Edge(nodes.get(e[X]), nodes.get(e[Y])));
         }
 
+        init(data);
+
     }
 
-    public void init(MonsterData data) {
+    private void init(MonsterData data) {
         for(int i=0; i<=100; i++) nodeActive.put(i,false);
         for(int i=0; i<=100; i++) nodeEnabled.put(i,false);
         for(int i=0; i<=100; i++) typesOfNodes.put(i,NodeType.EMPTY);

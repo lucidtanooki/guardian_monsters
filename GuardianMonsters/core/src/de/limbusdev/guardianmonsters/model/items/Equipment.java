@@ -1,4 +1,9 @@
-package de.limbusdev.guardianmonsters.model;
+package de.limbusdev.guardianmonsters.model.items;
+
+import de.limbusdev.guardianmonsters.model.Monster;
+import de.limbusdev.guardianmonsters.model.MonsterDB;
+import de.limbusdev.guardianmonsters.model.MonsterData;
+import de.limbusdev.guardianmonsters.model.Stat;
 
 /**
  * Equipment extends the {@link Stat}s of a monster in the following way:

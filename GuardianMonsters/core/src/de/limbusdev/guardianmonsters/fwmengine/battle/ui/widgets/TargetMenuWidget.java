@@ -1,5 +1,7 @@
 package de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets;
 
+import com.badlogic.ashley.signals.Listener;
+import com.badlogic.ashley.signals.Signal;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.ArrayMap;
 
@@ -14,10 +16,10 @@ import de.limbusdev.guardianmonsters.model.MonsterDB;
 import de.limbusdev.guardianmonsters.model.Stat;
 
 /**
- * Created by georg on 26.11.16.
+ * @author Georg Eckert 2017
  */
 
-public class TargetMenuWidget extends SevenButtonsWidget implements Observer {
+public class TargetMenuWidget extends SevenButtonsWidget implements Listener<Monster> {
 
     public static final boolean LEFT = true;
     public static final boolean RIGHT = false;
@@ -31,8 +33,8 @@ public class TargetMenuWidget extends SevenButtonsWidget implements Observer {
     }
 
     public void init(BattleSystem battleSystem) {
-        this.leftTeam = new ArrayMap<Integer, Monster>();
-        this.rightTeam = new ArrayMap<Integer, Monster>();
+        this.leftTeam = new ArrayMap<>();
+        this.rightTeam = new ArrayMap<>();
 
         // Set all buttons inactive
         for(Integer i : getButtons().keys()) {
@@ -57,7 +59,9 @@ public class TargetMenuWidget extends SevenButtonsWidget implements Observer {
             setButtonText(key + offset, Services.getL18N().l18n(BundleAssets.MONSTERS).get(
                 MonsterDB.singleton().getNameById(m.ID)));
             enableButton(key + offset);
-            m.stat.addObserver(this);
+
+            // Add the TargetMenuWidget as a Listener
+            m.add(this);
         }
     }
 
@@ -86,20 +90,17 @@ public class TargetMenuWidget extends SevenButtonsWidget implements Observer {
         }
     }
 
+
     @Override
-    public void update(Observable o, Object arg) {
-        // Disable Button if monster got killed
-        if(o instanceof Stat) {
-            Stat observedMonster = (Stat) o;
-            if(observedMonster.getHP() <= 0) {
-                int index;
-                if(leftTeam.containsValue(observedMonster.monster,false)) {
-                    index = leftTeam.indexOfValue(observedMonster.monster,false);
-                } else {
-                    index = rightTeam.indexOfValue(observedMonster.monster,false)+4;
-                }
-                disableButton(index);
+    public void receive(Signal<Monster> signal, Monster monster) {
+        if(monster.stat.isKO()) {
+            int index;
+            if(leftTeam.containsValue(monster, false)) {
+                index = leftTeam.indexOfValue(monster, false);
+            } else {
+                index = rightTeam.indexOfValue(monster, false);
             }
+            disableButton(index);
         }
     }
 }

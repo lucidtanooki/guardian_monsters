@@ -2,7 +2,7 @@ package de.limbusdev.guardianmonsters.fwmengine.world.ecs.components;
 
 import com.badlogic.ashley.core.Component;
 
-import de.limbusdev.guardianmonsters.model.Inventory;
+import de.limbusdev.guardianmonsters.model.items.Inventory;
 
 /**
  * Created by Georg Eckert on 17.02.17.

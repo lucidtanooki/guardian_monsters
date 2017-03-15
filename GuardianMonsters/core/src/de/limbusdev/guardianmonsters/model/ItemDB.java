@@ -7,6 +7,8 @@ import com.badlogic.gdx.utils.XmlReader;
 
 import java.io.IOException;
 
+import de.limbusdev.guardianmonsters.model.items.Item;
+
 /**
  * ItemDB provides information about all items. Items are created from data/items.xml
  *
@@ -16,7 +18,7 @@ import java.io.IOException;
 public class ItemDB {
 
     private static ItemDB instance;
-    private ArrayMap<String,Item> items;
+    private ArrayMap<String, de.limbusdev.guardianmonsters.model.items.Item> items;
 
     private ItemDB() {
         items = new ArrayMap<>();
@@ -32,7 +34,7 @@ public class ItemDB {
         }
 
         for(int i=0; i<element.getChildCount(); i++) {
-            Item item = parseXmlItem(element.getChild(i));
+            de.limbusdev.guardianmonsters.model.items.Item item = parseXmlItem(element.getChild(i));
             if(!items.containsKey(item.getName())) {
                 items.put(item.getName(), item);
             }
@@ -41,8 +43,8 @@ public class ItemDB {
 
 
     // ................................................................................. XML PARSING
-    private Item parseXmlItem(XmlReader.Element e) {
-        Item item;
+    private de.limbusdev.guardianmonsters.model.items.Item parseXmlItem(XmlReader.Element e) {
+        de.limbusdev.guardianmonsters.model.items.Item item;
 
         try {
             switch (e.getName()) {
@@ -56,18 +58,18 @@ public class ItemDB {
                     item = parseKeyItem(e);
                     break;
                 default:
-                    item = new Item.Medicine("Water", 0, Item.TYPE.HP_CURE);
+                    item = new de.limbusdev.guardianmonsters.model.items.Item.Medicine("Water", 0, de.limbusdev.guardianmonsters.model.items.Item.TYPE.HP_CURE);
                     break;
             }
         } catch (Exception ex) {
             ex.printStackTrace();
-            item = new Item.Medicine("Water", 0, Item.TYPE.HP_CURE);
+            item = new de.limbusdev.guardianmonsters.model.items.Item.Medicine("Water", 0, de.limbusdev.guardianmonsters.model.items.Item.TYPE.HP_CURE);
         }
 
         return item;
     }
 
-    private Item parseMedicine(XmlReader.Element element) {
+    private de.limbusdev.guardianmonsters.model.items.Item parseMedicine(XmlReader.Element element) {
         switch(element.get("type")) {
             case "HPcure":
                 return parseHPCuringItem(element);
@@ -76,28 +78,28 @@ public class ItemDB {
             case "revive":
                 return parseRevivingItem(element);
             default:
-                return new Item.Medicine("Water", 0, Item.TYPE.HP_CURE);
+                return new de.limbusdev.guardianmonsters.model.items.Item.Medicine("Water", 0, de.limbusdev.guardianmonsters.model.items.Item.TYPE.HP_CURE);
         }
     }
 
-    private Item parseHPCuringItem(XmlReader.Element e) {
-        return new Item.Medicine(e.get("nameID", "Water"), e.getInt("value", 0), Item.TYPE.HP_CURE);
+    private de.limbusdev.guardianmonsters.model.items.Item parseHPCuringItem(XmlReader.Element e) {
+        return new de.limbusdev.guardianmonsters.model.items.Item.Medicine(e.get("nameID", "Water"), e.getInt("value", 0), de.limbusdev.guardianmonsters.model.items.Item.TYPE.HP_CURE);
     }
 
-    private Item parseMPCuringItem(XmlReader.Element e) {
-        return new Item.Medicine(e.get("nameID", "Water"), e.getInt("value", 0), Item.TYPE.MP_CURE);
+    private de.limbusdev.guardianmonsters.model.items.Item parseMPCuringItem(XmlReader.Element e) {
+        return new de.limbusdev.guardianmonsters.model.items.Item.Medicine(e.get("nameID", "Water"), e.getInt("value", 0), de.limbusdev.guardianmonsters.model.items.Item.TYPE.MP_CURE);
     }
 
-    private Item parseRevivingItem(XmlReader.Element e) {
-        return new Item.Medicine(e.get("nameID", "Water"), e.getInt("fraction", 0), Item.TYPE.REVIVE);
+    private de.limbusdev.guardianmonsters.model.items.Item parseRevivingItem(XmlReader.Element e) {
+        return new de.limbusdev.guardianmonsters.model.items.Item.Medicine(e.get("nameID", "Water"), e.getInt("fraction", 0), de.limbusdev.guardianmonsters.model.items.Item.TYPE.REVIVE);
     }
 
-    private Item parseKeyItem(XmlReader.Element e) {
-        return new Item.Key(e.get("nameID", "Water"));
+    private de.limbusdev.guardianmonsters.model.items.Item parseKeyItem(XmlReader.Element e) {
+        return new de.limbusdev.guardianmonsters.model.items.Item.Key(e.get("nameID", "Water"));
     }
 
-    private Item parseEquipmentItem(XmlReader.Element e) {
-        Equipment.EQUIPMENT_TYPE bodyPart = Equipment.EQUIPMENT_TYPE.valueOf(e.get("body-part", "hands").toUpperCase());
+    private de.limbusdev.guardianmonsters.model.items.Item parseEquipmentItem(XmlReader.Element e) {
+        de.limbusdev.guardianmonsters.model.items.Equipment.EQUIPMENT_TYPE bodyPart = de.limbusdev.guardianmonsters.model.items.Equipment.EQUIPMENT_TYPE.valueOf(e.get("body-part", "hands").toUpperCase());
 
         String nameID = e.get("nameID", "claws-wood");
         int pStr = e.getInt("addsPStr",    0);
@@ -110,23 +112,23 @@ public class ItemDB {
         int exp = e.getInt("addsEXP",     0);
         String type = e.getChildByName("body-part").getAttribute("type").toUpperCase();
 
-        Equipment equip;
+        de.limbusdev.guardianmonsters.model.items.Equipment equip;
         switch(bodyPart) {
             case HEAD:
-                equip = new Equipment.Head(nameID, Equipment.HeadEquipment.valueOf(type), pStr,
+                equip = new de.limbusdev.guardianmonsters.model.items.Equipment.Head(nameID, de.limbusdev.guardianmonsters.model.items.Equipment.HeadEquipment.valueOf(type), pStr,
                     pDef, mStr, mDef, speed, hp, mp, exp);
                 break;
             case BODY:
-                equip = new Equipment.Body(nameID, Equipment.BodyEquipment.valueOf(type), pStr,
+                equip = new de.limbusdev.guardianmonsters.model.items.Equipment.Body(nameID, de.limbusdev.guardianmonsters.model.items.Equipment.BodyEquipment.valueOf(type), pStr,
                     pDef, mStr, mDef, speed, hp, mp, exp);
                 break;
             case FEET:
-                equip = new Equipment.Feet(nameID, Equipment.FootEquipment.valueOf(type), pStr,
+                equip = new de.limbusdev.guardianmonsters.model.items.Equipment.Feet(nameID, de.limbusdev.guardianmonsters.model.items.Equipment.FootEquipment.valueOf(type), pStr,
                     pDef, mStr, mDef, speed, hp, mp, exp);
                 break;
             default:
                 // Hands
-                equip = new Equipment.Hands(nameID, Equipment.HandEquipment.valueOf(type), pStr,
+                equip = new de.limbusdev.guardianmonsters.model.items.Equipment.Hands(nameID, de.limbusdev.guardianmonsters.model.items.Equipment.HandEquipment.valueOf(type), pStr,
                     pDef, mStr, mDef, speed, hp, mp, exp);
                 break;
         }

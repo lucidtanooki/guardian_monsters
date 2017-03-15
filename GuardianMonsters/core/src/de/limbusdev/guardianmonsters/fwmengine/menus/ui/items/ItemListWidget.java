@@ -1,5 +1,7 @@
 package de.limbusdev.guardianmonsters.fwmengine.menus.ui.items;
 
+import com.badlogic.ashley.signals.Listener;
+import com.badlogic.ashley.signals.Signal;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
@@ -11,18 +13,15 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 
-import java.util.Observable;
-import java.util.Observer;
-
-import de.limbusdev.guardianmonsters.model.Inventory;
-import de.limbusdev.guardianmonsters.model.Item;
-import de.limbusdev.guardianmonsters.model.Monster;
+import de.limbusdev.guardianmonsters.model.items.Inventory;
+import de.limbusdev.guardianmonsters.model.items.Item;
+import de.limbusdev.guardianmonsters.model.items.ItemSignal;
 
 /**
- * Created by georg on 22.02.17.
+ * @author Georg Eckert 2017
  */
 
-public class ItemListWidget extends Group implements Observer {
+public class ItemListWidget extends Group implements Listener<ItemSignal> {
 
     private Table itemTable;
     private Inventory inventory;
@@ -58,7 +57,7 @@ public class ItemListWidget extends Group implements Observer {
     private void init(Inventory inventory, Item.CATEGORY filter) {
         itemTable.clearChildren();
         this.inventory = inventory;
-        inventory.addObserver(this);
+        inventory.add(this);
 
         Array<Button> buttons = new Array<>();
         final ButtonGroup<TextButton> btnGroup = new ButtonGroup<>();
@@ -72,7 +71,7 @@ public class ItemListWidget extends Group implements Observer {
 
                 if(filter == Item.CATEGORY.ALL || i.getCategory() == filter) {
                     final ItemInventoryButton item = new ItemInventoryButton(i, skin, "item-button-sandstone", inventory);
-                    inventory.addObserver(item);
+                    inventory.add(this);
                     itemTable.add(item).width(192).height(40);
                     buttons.add(item);
                     btnGroup.add(item);
@@ -108,10 +107,10 @@ public class ItemListWidget extends Group implements Observer {
     }
 
     @Override
-    public void update(Observable o, Object arg) {
-        if(o instanceof Inventory && arg instanceof Item) {
-            // If item got deleted completely
-            if(!inventory.getItems().containsKey((Item)arg)) {
+    public void receive(Signal<ItemSignal> signal, ItemSignal itemSignal) {
+        if(itemSignal.message == ItemSignal.Message.DELETED) {
+            // Refresh Inventory List, if last item of it's kind got removed
+            if (!inventory.containsItem(itemSignal.item)) {
                 init(inventory, currentFilter);
             }
         }

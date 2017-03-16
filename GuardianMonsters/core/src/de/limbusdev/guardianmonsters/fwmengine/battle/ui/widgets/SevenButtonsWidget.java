@@ -9,6 +9,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ArrayMap;
 
+import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
+import de.limbusdev.guardianmonsters.model.abilities.Ability;
 import de.limbusdev.guardianmonsters.model.monsters.Element;
 
 import static de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleHUDTextButton.BOTTOMLEFT;
@@ -23,12 +25,12 @@ public class SevenButtonsWidget extends BattleWidget {
 
     // Buttons
     private ArrayMap<Integer,TextButton> buttons;
-    private ClickListener clickListener;
+    private Callbacks callbacks;
     protected Skin skin;
 
     public static final int[] ABILITY_ORDER = {5,3,1,0,4,2,6};
 
-    public SevenButtonsWidget (Skin skin, ClickListener clickListener, int[] buttonOrder) {
+    public SevenButtonsWidget (Skin skin, Callbacks callbacks, int[] buttonOrder) {
 
         super();
         this.skin = skin;
@@ -57,7 +59,7 @@ public class SevenButtonsWidget extends BattleWidget {
             addActor(tb);
         }
 
-        this.clickListener = clickListener;
+        this.callbacks = callbacks;
         initCallbackHandler();
 
     }
@@ -73,7 +75,7 @@ public class SevenButtonsWidget extends BattleWidget {
                         super.clicked(event,x,y);
                         System.out.println("SevenButtonsWidget: Clicked button " + j);
                         if(!attButt.isDisabled()) {
-                            clickListener.onButtonNr(j);
+                            callbacks.onButtonNr(j);
                         }
                     }
                 }
@@ -81,8 +83,8 @@ public class SevenButtonsWidget extends BattleWidget {
         }
     }
 
-    public void setClickListener(ClickListener clickListener) {
-        this.clickListener = clickListener;
+    public void setCallbacks(Callbacks callbacks) {
+        this.callbacks = callbacks;
     }
 
     protected void enableButton(int index) {
@@ -101,9 +103,19 @@ public class SevenButtonsWidget extends BattleWidget {
         buttons.get(index).setText(text);
     }
 
+    public void setButtonText(int index, Ability ability) {
+        setButtonText(index, Services.getL18N().i18nAbilities().get(ability.name));
+    }
+
     public void setButtonStyle(int index, Skin skin, String style) {
         Button.ButtonStyle bs = skin.get(style, TextButton.TextButtonStyle.class);
         buttons.get(index).setStyle(bs);
+    }
+
+    public void setButtonStyle(int index, Element element) {
+        Skin skin = Services.getUI().getBattleSkin();
+        String styleString = "tb-attack-" + element.toString().toLowerCase();
+        setButtonStyle(index, skin, styleString);
     }
 
     protected ArrayMap<Integer,TextButton> getButtons() {
@@ -130,7 +142,7 @@ public class SevenButtonsWidget extends BattleWidget {
                     super.clicked(event,x,y);
                     System.out.println("SevenButtonsWidget: Clicked button " + index);
                     if(button.isDisabled()) {
-                        clickListener.onButtonNr(index);
+                        callbacks.onButtonNr(index);
                     }
                 }
             }
@@ -141,7 +153,7 @@ public class SevenButtonsWidget extends BattleWidget {
 
 
     // INNER INTERFACE
-    public interface ClickListener {
+    public interface Callbacks {
         void onButtonNr(int nr);
     }
 }

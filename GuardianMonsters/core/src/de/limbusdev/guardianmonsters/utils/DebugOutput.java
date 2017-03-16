@@ -22,10 +22,10 @@ public class DebugOutput {
                                    Monster defender, int defPos,
                                    Ability ability, int damage) {
         System.out.println("Attacker: "
-                + MonsterDB.singleton().getNameById(attacker.ID) +
+                + MonsterDB.getInstance().getNameById(attacker.ID) +
                 " at Position " + attPos + "\n" +
                 "Defender: " +
-                MonsterDB.singleton().getNameById(defender.ID) +
+                MonsterDB.getInstance().getNameById(defender.ID) +
                 " at Position " + defPos + "\n" +
                 "Ability: " + ability.name + "\n" +
                 "Damage: " + damage);
@@ -35,7 +35,7 @@ public class DebugOutput {
         System.out.println("\nQueue: ");
         for (int i = 0; i < queue.size; i++) {
             Monster m = queue.get(i);
-            String name = Services.getL18N().l18n(BundleAssets.MONSTERS).get(MonsterDB.singleton().getNameById(m.ID));
+            String name = Services.getL18N().l18n(BundleAssets.MONSTERS).get(MonsterDB.getInstance().getNameById(m.ID));
             System.out.print("[" + i + "] " + name + "\t\t(" + m.stat.getSpeed() + "),");
             System.out.println("\tKP: " + m.stat.getHP() + "\tMP: " + m.stat.getMP());
         }

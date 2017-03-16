@@ -22,13 +22,13 @@ import de.limbusdev.guardianmonsters.model.monsters.Monster;
 public abstract class ATeamChoiceWidget extends Group {
 
     protected Array<IntVec2> positions;
-    protected ClickListener handler;
+    protected Callbacks handler;
     protected ButtonGroup<ImageButton> memberButtons;
     protected int currentPosition=0, oldPosition=0;
     protected Skin skin;
     protected Group buttons;
 
-    public ATeamChoiceWidget(Skin skin, ClickListener clHandler) {
+    public ATeamChoiceWidget(Skin skin, Callbacks clHandler) {
         super();
         this.skin = skin;
         this.handler = clHandler;
@@ -87,11 +87,11 @@ public abstract class ATeamChoiceWidget extends Group {
         return oldPosition;
     }
 
-    public void setHandler(ClickListener handler) {
+    public void setHandler(Callbacks handler) {
         this.handler = handler;
     }
 
-    public interface ClickListener {
+    public interface Callbacks {
         void onTeamMemberButton(int position);
     }
 

@@ -18,20 +18,20 @@ import de.limbusdev.guardianmonsters.model.monsters.Monster;
 import de.limbusdev.guardianmonsters.model.MonsterDB;
 
 /**
- * Created by Georg Eckert on 01.03.17.
+ * @author Georg Eckert 2017
  */
 
 public class TeamMemberSwitcher extends Group {
 
-    private Controller callbacks;
+    private Callbacks callbacks;
     private int currentlyChosen;
     private Image monsterImg;
     private Label name;
 
-    public TeamMemberSwitcher(Skin skin, final ArrayMap<Integer, Monster> team, final Controller controller) {
+    public TeamMemberSwitcher(Skin skin, final ArrayMap<Integer, Monster> team, final Callbacks callbacks) {
         super();
 
-        this.callbacks = controller;
+        this.callbacks = callbacks;
         this.currentlyChosen = 0;
 
         setSize(96,64);
@@ -73,7 +73,7 @@ public class TeamMemberSwitcher extends Group {
                     currentlyChosen = team.size-1;
                 }
                 init(team.get(currentlyChosen));
-                callbacks.onChanged(currentlyChosen);
+                TeamMemberSwitcher.this.callbacks.onChanged(currentlyChosen);
             }
         });
 
@@ -85,7 +85,7 @@ public class TeamMemberSwitcher extends Group {
                     currentlyChosen = 0;
                 }
                 init(team.get(currentlyChosen));
-                callbacks.onChanged(currentlyChosen);
+                TeamMemberSwitcher.this.callbacks.onChanged(currentlyChosen);
             }
         });
 
@@ -94,7 +94,7 @@ public class TeamMemberSwitcher extends Group {
 
     public void init(Monster m) {
         name.setText(Services.getL18N().l18n(BundleAssets.MONSTERS)
-            .get(MonsterDB.singleton().getNameById(m.ID)));
+            .get(MonsterDB.getInstance().getNameById(m.ID)));
 
         Image monsterBg = new Image(Services.getUI().getBattleSkin().getDrawable("monster-preview"));
         monsterBg.setPosition(32,58,Align.topLeft);
@@ -107,7 +107,7 @@ public class TeamMemberSwitcher extends Group {
         addActor(monsterImg);
     }
 
-    public interface Controller {
+    public interface Callbacks {
         /**
          * Is called, when one of the switch buttons is clicked to choose a new team member position
          * @param position

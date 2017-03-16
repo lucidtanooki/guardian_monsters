@@ -100,16 +100,16 @@ public class EntityFactory {
 
         // Inventory
         Inventory inventory = new Inventory();
-        inventory.putItemInInventory(ItemDB.singleton().getItem("bread"));
-        inventory.putItemInInventory(ItemDB.singleton().getItem("bread"));
-        inventory.putItemInInventory(ItemDB.singleton().getItem("bread"));
-        inventory.putItemInInventory(ItemDB.singleton().getItem("bread"));
-        inventory.putItemInInventory(ItemDB.singleton().getItem("potion-blue"));
-        inventory.putItemInInventory(ItemDB.singleton().getItem("potion-blue"));
-        inventory.putItemInInventory(ItemDB.singleton().getItem("potion-blue"));
-        inventory.putItemInInventory(ItemDB.singleton().getItem("angel-tear"));
-        inventory.putItemInInventory(ItemDB.singleton().getItem("sword-wood"));
-        inventory.putItemInInventory(ItemDB.singleton().getItem("claws-wood"));
+        inventory.putItemInInventory(ItemDB.getInstance().getItem("bread"));
+        inventory.putItemInInventory(ItemDB.getInstance().getItem("bread"));
+        inventory.putItemInInventory(ItemDB.getInstance().getItem("bread"));
+        inventory.putItemInInventory(ItemDB.getInstance().getItem("bread"));
+        inventory.putItemInInventory(ItemDB.getInstance().getItem("potion-blue"));
+        inventory.putItemInInventory(ItemDB.getInstance().getItem("potion-blue"));
+        inventory.putItemInInventory(ItemDB.getInstance().getItem("potion-blue"));
+        inventory.putItemInInventory(ItemDB.getInstance().getItem("angel-tear"));
+        inventory.putItemInInventory(ItemDB.getInstance().getItem("sword-wood"));
+        inventory.putItemInInventory(ItemDB.getInstance().getItem("claws-wood"));
 
         InventoryComponent inventoryComp = new InventoryComponent(inventory);
         hero.add(inventoryComp);

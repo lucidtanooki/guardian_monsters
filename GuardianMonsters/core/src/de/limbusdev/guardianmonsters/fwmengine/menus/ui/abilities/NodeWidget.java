@@ -20,8 +20,8 @@ import de.limbusdev.guardianmonsters.model.abilities.Node;
 
 public class NodeWidget extends ImageButton implements Listener<Node> {
 
-    private static ArrayMap<Node.Type,ArrayMap<Node.State,ImageButton.ImageButtonStyle>> nodeStyles;
-    private AnimatedImage nodeActivationAnimation;
+    private static ArrayMap<Node.Type,ArrayMap<Node.State,ImageButtonStyle>> nodeStyles;
+    private AnimatedImage activationAnimation;
 
     private Node node;
     private IntVec2 offset;
@@ -32,6 +32,7 @@ public class NodeWidget extends ImageButton implements Listener<Node> {
         super(skin,"board-" + node.type.toString().toLowerCase() + "-disabled");
         this.skin = skin;
         this.node = node;
+
         switch(node.type) {
             case ABILITY:
             case METAMORPHOSIS:
@@ -41,21 +42,21 @@ public class NodeWidget extends ImageButton implements Listener<Node> {
 
         // Animation
         Animation anim = new Animation(.12f,skin.getRegions("node-activation-animation"));
-        nodeActivationAnimation = new AnimatedImage(anim);
-        nodeActivationAnimation.setPlayMode(Animation.PlayMode.NORMAL);
+        activationAnimation = new AnimatedImage(anim);
+        activationAnimation.setPlayMode(Animation.PlayMode.NORMAL);
 
         changeStatus(node.getState());
     }
 
     private void playActivationAnimation() {
         if(offset != null) {
-            nodeActivationAnimation.setPosition(-32 - offset.x, -32 - offset.y, Align.bottomLeft);
-            this.addActor(nodeActivationAnimation);
+            activationAnimation.setPosition(-32 - offset.x, -32 - offset.y, Align.bottomLeft);
+            this.addActor(activationAnimation);
         }
     }
 
     private void changeStatus(Node.State state) {
-        if(Node.State.ACTIVE == state && state != node.getState()) {
+        if(state == Node.State.ACTIVE && node.getState() != Node.State.ACTIVE) {
             playActivationAnimation();
         }
         this.setStyle(getNodeStyles(skin).get(node.type).get(state));

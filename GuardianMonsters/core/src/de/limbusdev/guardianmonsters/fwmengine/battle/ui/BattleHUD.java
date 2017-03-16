@@ -67,16 +67,16 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
     private BattleMainMenuWidget.ClickListener      mainMenuCallbacks;
     private BattleActionMenuWidget.ClickListener    infoLabelCallbacks;
     private BattleActionMenuWidget.ClickListener    endOfBattleCallbacks;
-    private SevenButtonsWidget.ClickListener        attackMenuCallbacks;
+    private SevenButtonsWidget.Callbacks attackMenuCallbacks;
     private BattleSystem.CallbackHandler            battleSystemCallbacks;
-    private SevenButtonsWidget.ClickListener        targetMenuCallbacks;
+    private SevenButtonsWidget.Callbacks targetMenuCallbacks;
     private BattleStateSwitcher                     battleStateSwitcher;
     private BattleActionMenuWidget.ClickListener    battleStartLabelCallbacks;
     private BattleActionMenuWidget.ClickListener    backToActionMenuCallbacks;
     private BattleActionMenuWidget.ClickListener    escapeSuccessCallbacks;
     private BattleActionMenuWidget.ClickListener    escapeFailCallbacks;
     private BattleAnimationWidget.ClickListener     battleAnimationCallbacks;
-    private SevenButtonsWidget.ClickListener        monsterMenuCallbacks;
+    private SevenButtonsWidget.Callbacks monsterMenuCallbacks;
 
 
     // ....................................................................................... other
@@ -297,13 +297,13 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
             }
         };
 
-        attackMenuCallbacks = new SevenButtonsWidget.ClickListener() {
+        attackMenuCallbacks = new SevenButtonsWidget.Callbacks() {
             @Override
             public void onButtonNr(int nr) {
                 Monster activeMonster = battleSystem.getActiveMonster();
                 System.out.println("AttackMenuButtons: onButtonNr("+nr+")");
                 System.out.println("Input: User chose attack Nr. " + nr);
-                int chosenAttackNr = activeMonster.abilityGraph.learntAbilities.indexOfValue(activeMonster.getActiveAbility(nr),false);
+                int chosenAttackNr = activeMonster.abilityGraph.learntAbilities.indexOfValue(activeMonster.abilityGraph.getActiveAbility(nr),false);
                 battleSystem.setChosenAttack(chosenAttackNr);
                 battleStateSwitcher.toTargetChoice();
             }
@@ -321,7 +321,7 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
                 battleStateSwitcher.toAnimation();
                 infoLabelWidget.setWholeText(
                     Services.getL18N().l18n(BundleAssets.BATTLE).format("batt_item_usage",
-                    Services.getL18N().l18n(BundleAssets.MONSTERS).get(MonsterDB.singleton().getNameById(monster.ID))));
+                    Services.getL18N().l18n(BundleAssets.MONSTERS).get(MonsterDB.getInstance().getNameById(monster.ID))));
                 infoLabelWidget.animateTextAppearance();
                 animationWidget.animateItemUsage();
             }
@@ -383,7 +383,7 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
             }
         };
 
-        targetMenuCallbacks = new SevenButtonsWidget.ClickListener() {
+        targetMenuCallbacks = new SevenButtonsWidget.Callbacks() {
             @Override
             public void onButtonNr(int nr) {
                 System.out.println("TargetMenuButtons: onButtonNr("+nr+")");
@@ -425,7 +425,7 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
             }
         };
 
-        monsterMenuCallbacks = new SevenButtonsWidget.ClickListener() {
+        monsterMenuCallbacks = new SevenButtonsWidget.Callbacks() {
             @Override
             public void onButtonNr(int nr) {
                 System.out.println("Teammember " + nr);

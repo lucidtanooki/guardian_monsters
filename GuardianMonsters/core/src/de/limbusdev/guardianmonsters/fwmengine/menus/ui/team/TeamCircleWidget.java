@@ -14,8 +14,8 @@ import de.limbusdev.guardianmonsters.model.monsters.Monster;
 
 public class TeamCircleWidget extends ATeamChoiceWidget {
 
-    public TeamCircleWidget(Skin skin, ArrayMap<Integer,Monster> team, ClickListener clHandler) {
-        super(skin, clHandler);
+    public TeamCircleWidget(Skin skin, ArrayMap<Integer,Monster> team, Callbacks callbacks) {
+        super(skin, callbacks);
 
         positions.add(new IntVec2(54,144-85));
         positions.add(new IntVec2(54,144-45));

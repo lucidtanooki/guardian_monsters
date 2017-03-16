@@ -16,14 +16,14 @@ public class BattleStringBuilder {
     
     /* ............................................................................... METHODS .. */
     public static String receivedDamage(Monster victim, int damage) {
-        String text = MonsterDB.singleton().getNameById(victim.ID)
+        String text = MonsterDB.getInstance().getNameById(victim.ID)
             + " lost " + damage + " HP";
         return text;
     }
 
     public static String givenDamage(Monster attacker, Monster victim, AttackCalculationReport report) {
-        String attName = MonsterDB.singleton().getNameById(attacker.ID);
-        String defName = MonsterDB.singleton().getNameById(victim.ID);
+        String attName = MonsterDB.getInstance().getNameById(attacker.ID);
+        String defName = MonsterDB.getInstance().getNameById(victim.ID);
 
         String eff;
         if(report.effectiveness > 1.1) {
@@ -47,7 +47,7 @@ public class BattleStringBuilder {
     }
 
     public static String selfDefense(Monster defensiveMonster) {
-        String defName = Services.getL18N().l18n(BundleAssets.MONSTERS).get(MonsterDB.singleton().getNameById(defensiveMonster.ID));
+        String defName = Services.getL18N().l18n(BundleAssets.MONSTERS).get(MonsterDB.getInstance().getNameById(defensiveMonster.ID));
         String message = defName + " " + Services.getL18N().l18n(BundleAssets.BATTLE).get("suff_defense");
         return message;
     }

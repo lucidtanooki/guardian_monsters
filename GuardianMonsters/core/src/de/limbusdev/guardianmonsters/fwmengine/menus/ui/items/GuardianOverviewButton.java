@@ -23,7 +23,7 @@ import de.limbusdev.guardianmonsters.model.monsters.Monster;
 import de.limbusdev.guardianmonsters.model.MonsterDB;
 
 /**
- * Created by georg on 21.02.17.
+ * @author Georg Eckert 2017
  */
 
 public class GuardianOverviewButton extends TextButton implements Listener<Monster> {
@@ -33,21 +33,45 @@ public class GuardianOverviewButton extends TextButton implements Listener<Monst
     private Monster monster;
 
 
+    // ................................................................................ CONSTRUCTORS
     public GuardianOverviewButton(Monster monster, Skin skin, Item item) {
-        super(Services.getL18N().l18n(BundleAssets.MONSTERS).get(MonsterDB.singleton().getNameById(monster.ID)), skin);
+        super(MonsterDB.getLocalNameById(monster.ID), skin);
         construct(monster, item);
     }
 
     public GuardianOverviewButton(Monster monster, Skin skin, String styleName, Item item) {
-        super(Services.getL18N().l18n(BundleAssets.MONSTERS).get(MonsterDB.singleton().getNameById(monster.ID)), skin, styleName);
+        super(MonsterDB.getLocalNameById(monster.ID), skin, styleName);
         construct(monster, item);
     }
 
     public GuardianOverviewButton(Monster monster, TextButtonStyle style, Item item) {
-        super(Services.getL18N().l18n(BundleAssets.MONSTERS).get(MonsterDB.singleton().getNameById(monster.ID)), style);
+        super(MonsterDB.getLocalNameById(monster.ID), style);
         construct(monster, item);
     }
 
+    private void construct(Monster monster, Item item) {
+        this.item = item;
+        this.monster = monster;
+        monster.add(this);
+
+        getLabel().setAlignment(Align.topLeft);
+        TextureRegion region = Services.getMedia().getMonsterMiniSprite(monster.ID);
+        Image monsterImg = new Image(region);
+        add(monsterImg).width(16).height(region.getRegionHeight()).align(Align.topLeft);
+        row();
+
+        switch(item.getCategory()) {
+            case EQUIPMENT:
+                augmentButtonEquipment(monster, (Equipment) item);
+                break;
+            default:
+                augmentButtonMedicine(monster, item);
+                break;
+        }
+    }
+
+
+    // ..................................................................................... METHODS
     @Override
     public void setColor(float r, float g, float b, float a) {
         setColor(new Color(r,g,b,a));
@@ -65,27 +89,7 @@ public class GuardianOverviewButton extends TextButton implements Listener<Monst
         }
     }
 
-    private void construct(Monster monster, Item item) {
-        this.item = item;
-        this.monster = monster;
-        monster.add(this);
 
-        getLabel().setAlignment(Align.topLeft);
-        TextureRegion region = Services.getMedia().getMonsterMiniSprite(monster.ID);
-        Image monsterImg = new Image(region);
-        add(monsterImg).width(16).height(region.getRegionHeight()).align(Align.topLeft);
-
-        row();
-
-        switch(item.getCategory()) {
-            case EQUIPMENT:
-                augmentButtonEquipment(monster, (Equipment) item);
-                break;
-            default:
-                augmentButtonMedicine(monster, item);
-                break;
-        }
-    }
 
     private void augmentButtonEquipment(Monster monster, Equipment equipment) {
         if(subTable != null) {
@@ -99,13 +103,17 @@ public class GuardianOverviewButton extends TextButton implements Listener<Monst
         String props[]  = {"hp", "mp", "speed", "exp", "pstr", "pdef", "mstr", "mdef"};
         int potValues[] = {pot.hp, pot.mp, pot.speed, pot.exp, pot.pstr, pot.pdef, pot.mstr, pot.mdef};
 
-        String fontStyle;
+        String fontStyle, sign, value;
         subTable = new Table();
 
         for(int i=0; i<props.length; i++) {
             subTable.add(new Image(getSkin().getDrawable("stats-symbol-" + props[i]))).width(16).height(16);
+
             fontStyle = (potValues[i] > 0 ? "green" : (pot.hp == potValues[i] ? "default" : "red"));
-            subTable.add(new Label((potValues[i] > 0 ? "+" : "")  + Integer.toString(potValues[i]), getSkin(), fontStyle)).width(32);
+            sign = potValues[i] > 0 ? "+" : "";
+            value = Integer.toString(potValues[i]);
+
+            subTable.add(new Label(sign + value, getSkin(), fontStyle)).width(32);
             if(i  == 3) subTable.row();
         }
 
@@ -129,9 +137,9 @@ public class GuardianOverviewButton extends TextButton implements Listener<Monst
 
         subTable = new Table();
         subTable.add(new Image(getSkin().getDrawable("stats-symbol-hp")));
-        subTable.add(new Label(Integer.toString(monster.stat.getHP()) + " / " + Integer.toString(monster.stat.getHPmax()), getSkin(), "default")).width(56);
+        subTable.add(new Label(monster.stat.getHPfractionAsString(), getSkin(), "default")).width(56);
         subTable.add(new Image(getSkin().getDrawable("stats-symbol-mp")));
-        subTable.add(new Label(Integer.toString(monster.stat.getMP()) + " / " + Integer.toString(monster.stat.getMPmax()), getSkin(), "default")).width(56);
+        subTable.add(new Label(monster.stat.getMPfractionAsString(), getSkin(), "default")).width(56);
 
         add(subTable).align(Align.left);
         layout();

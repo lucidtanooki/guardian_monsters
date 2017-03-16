@@ -68,9 +68,9 @@ public class MonsterManager {
         report.effectiveness = efficiency;
 
         // Print Battle Debug Message
-        String attackerName = Services.getL18N().l18n(BundleAssets.MONSTERS).get(MonsterDB.singleton().getNameById(att.ID));
+        String attackerName = Services.getL18N().l18n(BundleAssets.MONSTERS).get(MonsterDB.getInstance().getNameById(att.ID));
         String attackName   = Services.getL18N().l18n(BundleAssets.ATTACKS).get(ability.name);
-        String victimName   = Services.getL18N().l18n(BundleAssets.MONSTERS).get(MonsterDB.singleton().getNameById(def.ID));
+        String victimName   = Services.getL18N().l18n(BundleAssets.MONSTERS).get(MonsterDB.getInstance().getNameById(def.ID));
         System.out.println(attackerName + ": " + attackName + " causes " + damage + " damage on " + victimName);
 
         return report;

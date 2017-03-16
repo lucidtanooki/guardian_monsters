@@ -14,7 +14,7 @@ import de.limbusdev.guardianmonsters.model.ItemDB;
 import de.limbusdev.guardianmonsters.utils.Constant;
 
 /**
- * Created by georg on 23.02.17.
+ * @author Georg Eckert 2017
  */
 
 public class KeyItemsSubMenu extends AInventorySubMenu {
@@ -37,21 +37,21 @@ public class KeyItemsSubMenu extends AInventorySubMenu {
 
         keyItemPositions = new ArrayMap<>();
 
-        ItemDB itemDB = ItemDB.singleton();
+        ItemDB itemDB = ItemDB.getInstance();
 
-        keyItemPositions.put(itemDB.getItem("relict-earth"), new IntVec2(70,5));
-        keyItemPositions.put(itemDB.getItem("relict-flame"), new IntVec2(6,5));
-        keyItemPositions.put(itemDB.getItem("relict-lightning"), new IntVec2(22,26));
-        keyItemPositions.put(itemDB.getItem("relict-arthropoda"), new IntVec2(86,26));
-        keyItemPositions.put(itemDB.getItem("relict-mountain"), new IntVec2(54,45));
-        keyItemPositions.put(itemDB.getItem("relict-frost"), new IntVec2(38,66));
-        keyItemPositions.put(itemDB.getItem("relict-spirit"), new IntVec2(6,23));
-        keyItemPositions.put(itemDB.getItem("relict-water"), new IntVec2(70,24));
-        keyItemPositions.put(itemDB.getItem("relict-air"), new IntVec2(38,24));
-        keyItemPositions.put(itemDB.getItem("relict-forest"), new IntVec2(102,23));
-        keyItemPositions.put(itemDB.getItem("relict-lindworm"), new IntVec2(38,79));
-        keyItemPositions.put(itemDB.getItem("relict-lindworm"), new IntVec2(38,79));
-        keyItemPositions.put(itemDB.getItem("relict-demon"), new IntVec2(70,79));
+        keyItemPositions.put(itemDB.getItem("relict-earth"),        new IntVec2(70,5));
+        keyItemPositions.put(itemDB.getItem("relict-flame"),        new IntVec2(6,5));
+        keyItemPositions.put(itemDB.getItem("relict-lightning"),    new IntVec2(22,26));
+        keyItemPositions.put(itemDB.getItem("relict-arthropoda"),   new IntVec2(86,26));
+        keyItemPositions.put(itemDB.getItem("relict-mountain"),     new IntVec2(54,45));
+        keyItemPositions.put(itemDB.getItem("relict-frost"),        new IntVec2(38,66));
+        keyItemPositions.put(itemDB.getItem("relict-spirit"),       new IntVec2(6,23));
+        keyItemPositions.put(itemDB.getItem("relict-water"),        new IntVec2(70,24));
+        keyItemPositions.put(itemDB.getItem("relict-air"),          new IntVec2(38,24));
+        keyItemPositions.put(itemDB.getItem("relict-forest"),       new IntVec2(102,23));
+        keyItemPositions.put(itemDB.getItem("relict-lindworm"),     new IntVec2(38,79));
+        keyItemPositions.put(itemDB.getItem("relict-lindworm"),     new IntVec2(38,79));
+        keyItemPositions.put(itemDB.getItem("relict-demon"),        new IntVec2(70,79));
 
         for(Item key : keyItemPositions.keys()) {
             if(inventory.getItems().containsKey(key)) {
@@ -61,8 +61,6 @@ public class KeyItemsSubMenu extends AInventorySubMenu {
                 addActor(img);
             }
         }
-
-
     }
 
 

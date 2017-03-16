@@ -1,5 +1,6 @@
 package de.limbusdev.guardianmonsters.model.abilities;
 
+import com.badlogic.ashley.signals.Signal;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 
@@ -15,7 +16,7 @@ import static de.limbusdev.guardianmonsters.model.abilities.Node.Type.METAMORPHO
  * @author Georg Eckert 2017
  */
 
-public class AbilityGraph {
+public class AbilityGraph extends Signal<AbilityGraph> {
 
     private final static int X=0, Y=1;
 
@@ -26,6 +27,7 @@ public class AbilityGraph {
     public ArrayMap<Integer,BodyPart> equipmentNodes;
     public Array<Integer> metamorphosisNodes;
 
+    private ArrayMap<Integer, Ability> activeAbilities;
     public ArrayMap<Integer,Ability> learntAbilities;
     public Array<BodyPart> learntEquipment;
 
@@ -49,6 +51,11 @@ public class AbilityGraph {
             edges.add(new Edge(nodes.get(e[X]), nodes.get(e[Y])));
         }
 
+        activeAbilities = new ArrayMap<>();
+        for(int i=0; i<7; i++) {
+            activeAbilities.put(i,null);
+        }
+
         init(data);
 
     }
@@ -65,6 +72,12 @@ public class AbilityGraph {
         for(int key : data.metamorphosisNodes) {
             nodes.get(key).type = METAMORPHOSIS;
             metamorphosisNodes.add(key);
+        }
+
+        int counter = 0;
+        for(Ability a : learntAbilities.values()) {
+            activeAbilities.put(counter, a);
+            counter++;
         }
 
         activateNode(0);
@@ -102,6 +115,8 @@ public class AbilityGraph {
             default:
                 break;
         }
+
+        dispatch(this);
     }
 
     public boolean isNodeEnabled(int nodeID) {
@@ -192,5 +207,37 @@ public class AbilityGraph {
                 nodes.get(enableID).enable();
             }
         }
+    }
+
+    /**
+     * returns the ability placed at the given slot
+     * @param abilitySlot   slot for in battle ability usage
+     * @return              ability which resides there
+     */
+    public Ability getActiveAbility(int abilitySlot) {
+        return activeAbilities.get(abilitySlot);
+    }
+
+    /**
+     * Puts an ability into one of seven slots, available in battle
+     * @param slot                  where the ability should be placed in battle
+     * @param learntAbilityNumber   number of ability to be placed there
+     */
+    public void setActiveAbility(int slot, int learntAbilityNumber) {
+        Ability abilityToLearn = learntAbilities.get(learntAbilityNumber);
+        if(abilityToLearn == null) return;
+
+        for(int key : activeAbilities.keys()) {
+            Ability abilityAtThisSlot = activeAbilities.get(key);
+
+            if(abilityAtThisSlot != null) {
+                if (abilityAtThisSlot.equals(abilityToLearn)) {
+                    activeAbilities.put(key, null);
+                }
+            }
+        }
+        activeAbilities.put(slot, learntAbilities.get(learntAbilityNumber));
+
+        dispatch(this);
     }
 }

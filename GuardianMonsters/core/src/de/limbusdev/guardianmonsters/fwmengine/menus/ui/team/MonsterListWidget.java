@@ -7,7 +7,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ArrayMap;
 
@@ -20,15 +19,15 @@ import de.limbusdev.guardianmonsters.utils.Constant;
  * Gives the player a quick overview over all guardians currently in team. All status values are
  * shown and guardians not applicable for the choice to be made, should be disabled
  * <p>
- * Created by Georg Eckert on 21.02.17.
+ * @author Georg Eckert 2017
  */
 
-public class QuickOverviewGuardianList extends Group {
+public class MonsterListWidget extends Group {
 
-    private CallbackHandler handler;
+    private Callbacks handler;
     private Image blackLayer;
 
-    public QuickOverviewGuardianList(Skin skin, ArrayMap<Integer, Monster> team, CallbackHandler cBhandler, Item item) {
+    public MonsterListWidget(Skin skin, ArrayMap<Integer, Monster> team, Callbacks cBhandler, Item item) {
 
         this.handler = cBhandler;
 
@@ -39,7 +38,7 @@ public class QuickOverviewGuardianList extends Group {
 
         ImageButton back = new ImageButton(skin, "button-back");
         back.setPosition(Constant.WIDTH-4, 0, Align.bottomRight);
-        back.addListener(new ClickListener() {
+        back.addListener(new com.badlogic.gdx.scenes.scene2d.utils.ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 remove();
@@ -65,7 +64,7 @@ public class QuickOverviewGuardianList extends Group {
             monsterTable.add(guardianButton).width(192).height(64);
             monsterTable.row().spaceBottom(1);
 
-            guardianButton.addListener(new ClickListener() {
+            guardianButton.addListener(new com.badlogic.gdx.scenes.scene2d.utils.ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
                     boolean moreItems = handler.onButton(index);
@@ -76,7 +75,7 @@ public class QuickOverviewGuardianList extends Group {
     }
 
 
-    public interface CallbackHandler {
+    public interface Callbacks {
         /**
          * @param i
          * @return if the list should stay opened

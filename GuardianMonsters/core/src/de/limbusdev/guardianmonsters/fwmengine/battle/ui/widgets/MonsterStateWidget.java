@@ -103,7 +103,7 @@ public class MonsterStateWidget extends WidgetGroup implements Listener<Monster>
      */
     public void init(Monster monster) {
         refresh(monster);
-        nameLabel.setText(Services.getL18N().l18n(BundleAssets.MONSTERS).get((MonsterDB.singleton().getNameById(monster.ID))));
+        nameLabel.setText(Services.getL18N().l18n(BundleAssets.MONSTERS).get((MonsterDB.getInstance().getNameById(monster.ID))));
         monster.add(this);
     }
 

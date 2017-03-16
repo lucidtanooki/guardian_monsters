@@ -14,7 +14,7 @@ import de.limbusdev.guardianmonsters.model.abilities.Node;
 import de.limbusdev.guardianmonsters.model.monsters.Monster;
 
 /**
- * Created by georg on 27.02.17.
+ * @author Georg Eckert 2017
  */
 
 public class GraphWidget extends Group {

@@ -243,6 +243,14 @@ public class Stat extends Signal<Stat> {
 
     // ........................................................................... CALCULATED VALUES
 
+    public String getHPfractionAsString() {
+        return (Integer.toString(HP) + "/" + Integer.toString(getHPmax()));
+    }
+
+    public String getMPfractionAsString() {
+        return (Integer.toString(MP) + "/" + Integer.toString(getMPmax()));
+    }
+
     public int getEXPfraction() {
         return MathUtils.round(EXP/1.f/getEXPAvailableAtLevel(level)*100f);
     }

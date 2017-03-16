@@ -11,9 +11,8 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.I18NBundle;
 
-import de.limbusdev.guardianmonsters.data.BundleAssets;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
-import de.limbusdev.guardianmonsters.fwmengine.menus.ui.team.QuickOverviewGuardianList;
+import de.limbusdev.guardianmonsters.fwmengine.menus.ui.team.MonsterListWidget;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.widgets.ReassuranceWidget;
 import de.limbusdev.guardianmonsters.model.items.Equipment;
 import de.limbusdev.guardianmonsters.model.items.Inventory;
@@ -21,28 +20,77 @@ import de.limbusdev.guardianmonsters.model.items.Item;
 import de.limbusdev.guardianmonsters.model.monsters.Monster;
 
 /**
- * Created by georg on 20.02.17.
+ * @author Georg Eckert 2017
  */
 
-public class ItemDetailViewWidget extends Group {
+public class ItemDetailViewWidget extends Group implements MonsterListWidget.Callbacks{
 
+    // UI
     private Label itemName, itemDescription, itemArea;
     private Image itemImg;
     private Skin skin;
     private ReassuranceWidget reassuranceWidget;
+    private ImageButton delete, use;
+
+    // Data
     private Inventory inventory;
     private ArrayMap<Integer, Monster> team;
     private Item item;
-    private ImageButton delete, use;
 
 
-    public ItemDetailViewWidget(Skin skin, final Inventory inventory, ArrayMap<Integer,Monster> monsters)  {
+    // ................................................................................. CONSTRCUTOR
+    public ItemDetailViewWidget(Skin skin, Inventory inventory, ArrayMap<Integer,Monster> monsters)  {
         super();
 
-        this.skin = skin;
-        this.inventory = inventory;
-        this.team = monsters;
+        this.skin       = skin;
+        this.inventory  = inventory;
+        this.team       = monsters;
 
+        constructLayout();
+
+        delete.addListener(new com.badlogic.gdx.scenes.scene2d.utils.ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                addActor(reassuranceWidget);
+            }
+        });
+
+
+        use.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                MonsterListWidget monsterListWidget = new MonsterListWidget(getSkin(), team, ItemDetailViewWidget.this, item);
+                monsterListWidget.setPosition(-262,0,Align.topLeft);
+                addActor(monsterListWidget);
+            }
+        });
+    }
+
+
+
+    public void init(Item itemToShow) {
+        this.item = itemToShow;
+        I18NBundle i18n = Services.getL18N().i18nInventory();
+
+        itemName.setText(i18n.get(item.getName()));
+        itemDescription.setText(i18n.get(item.getName()+"-description"));
+        itemImg.setDrawable(skin, item.getName());
+
+        reassuranceWidget.question.setText(i18n.format("reassurance-throwaway", i18n.get(item.getName())));
+        reassuranceWidget.buttonYes.addListener(new com.badlogic.gdx.scenes.scene2d.utils.ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                inventory.takeItemFromInventory(item);
+                if(inventory.getItems().containsKey(item)) {
+                    reassuranceWidget.remove();
+                } else {
+                    remove();
+                }
+            }
+        });
+    }
+
+    private void constructLayout() {
         reassuranceWidget = new ReassuranceWidget(skin);
         reassuranceWidget.setPosition(-264,0,Align.bottomLeft);
 
@@ -61,12 +109,12 @@ public class ItemDetailViewWidget extends Group {
         itemImg.setPosition(65,160,Align.bottomLeft);
         addActor(itemImg);
 
-        itemName = new Label("Steely Barb Sword", skin, "paper-border");
+        itemName = new Label("Item Name", skin, "paper-border");
         itemName.setSize(156,25);
         itemName.setPosition(4,130,Align.bottomLeft);
         addActor(itemName);
 
-        itemDescription = new Label("A new, stable and shiny sword.", skin, "paper-border");
+        itemDescription = new Label("Item Description", skin, "paper-border");
         itemDescription.setSize(156,64);
         itemDescription.setPosition(4,128,Align.topLeft);
         itemDescription.setWrap(true);
@@ -75,72 +123,11 @@ public class ItemDetailViewWidget extends Group {
 
         delete = new ImageButton(skin, "button-delete");
         delete.setPosition(24,160,Align.bottomLeft);
-        delete.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                addActor(reassuranceWidget);
-            }
-        });
         addActor(delete);
-
-        final QuickOverviewGuardianList.CallbackHandler handler = new QuickOverviewGuardianList.CallbackHandler() {
-            @Override
-            public boolean onButton(int i) {
-                inventory.takeItemFromInventory(item);
-
-                if(item instanceof Equipment) {
-                    Item replaced = team.get(i).stat.giveEquipment((Equipment)item);
-                    if(replaced != null) inventory.putItemInInventory(replaced);
-                } else {
-                    item.apply(team.get(i));
-                }
-
-                boolean empty = !(inventory.getItemAmount(item) > 0);
-                if(empty) remove();
-                return !empty;
-            }
-        };
 
         use = new ImageButton(skin, "button-use");
         use.setPosition(106,160,Align.bottomLeft);
-        use.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                QuickOverviewGuardianList monsterList = new QuickOverviewGuardianList(getSkin(), team, handler, item);
-                monsterList.setPosition(-262,0,Align.topLeft);
-                addActor(monsterList);
-            }
-        });
-        addActor(delete);
         addActor(use);
-
-
-    }
-
-    public void init(Item itemToShow) {
-        this.item = itemToShow;
-
-        I18NBundle locale = Services.getL18N().l18n(BundleAssets.INVENTORY);
-        itemName.setText(locale.get(item.getName()));
-        itemDescription.setText(locale.get(item.getName()+"-description"));
-        itemImg.setDrawable(skin, item.getName());
-
-        reassuranceWidget.question.setText(locale.format("reassurance-throwaway", locale.get(item.getName())));
-        reassuranceWidget.buttonYes.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                inventory.takeItemFromInventory(item);
-                if(inventory.getItems().containsKey(item)) {
-                    reassuranceWidget.remove();
-                } else {
-                    remove();
-                }
-            }
-        });
-    }
-
-    public Label getItemArea() {
-        return itemArea;
     }
 
     public Skin getSkin() {
@@ -153,5 +140,22 @@ public class ItemDetailViewWidget extends Group {
 
     public ImageButton getUse() {
         return use;
+    }
+
+    @Override
+    public boolean onButton(int i) {
+        inventory.takeItemFromInventory(item);
+        if(item instanceof Equipment) {
+            Item replaced = team.get(i).stat.giveEquipment((Equipment)item);
+            if(replaced != null) {
+                inventory.putItemInInventory(replaced);
+            }
+        } else {
+            item.apply(team.get(i));
+        }
+
+        boolean empty = !(inventory.getItemAmount(item) > 0);
+        if(empty) remove();
+        return !empty;
     }
 }

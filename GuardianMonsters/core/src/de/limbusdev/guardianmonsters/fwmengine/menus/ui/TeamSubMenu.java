@@ -10,7 +10,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 
 import de.limbusdev.guardianmonsters.fwmengine.managers.Media;
-import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.team.ATeamChoiceWidget;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.team.MonsterStatusInventoryWidget;
@@ -19,7 +18,6 @@ import de.limbusdev.guardianmonsters.fwmengine.menus.ui.team.TeamCircleWidget;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TeamComponent;
 import de.limbusdev.guardianmonsters.model.monsters.Monster;
 import de.limbusdev.guardianmonsters.utils.Constant;
-import de.limbusdev.guardianmonsters.utils.GameState;
 
 /**
  * Created by Georg Eckert 2017
@@ -32,7 +30,7 @@ public class TeamSubMenu extends AInventorySubMenu {
     private Image monsterImg;
     private Image blackOverlay;
     private TeamCircleWidget circleWidget;
-    private ATeamChoiceWidget.ClickListener choiceHandler, swapHandler;
+    private ATeamChoiceWidget.Callbacks choiceHandler, swapHandler;
     private TeamComponent team;
     private ImageButton joinsBattleButton;
     private Group monsterChoice;
@@ -50,14 +48,14 @@ public class TeamSubMenu extends AInventorySubMenu {
         monsterChoiceBg.setPosition(2,2,Align.bottomLeft);
         monsterChoice.addActor(monsterChoiceBg);
 
-        choiceHandler = new ATeamChoiceWidget.ClickListener() {
+        choiceHandler = new ATeamChoiceWidget.Callbacks() {
             @Override
             public void onTeamMemberButton(int position) {
                 showGuardianInformation(position);
             }
         };
 
-        swapHandler = new ATeamChoiceWidget.ClickListener() {
+        swapHandler = new ATeamChoiceWidget.Callbacks() {
             @Override
             public void onTeamMemberButton(int position) {
                 System.out.println("Clicked " + position);

@@ -51,7 +51,7 @@ public class LevelUpWidget extends OverlayWidget {
         });
 
         Label info = new Label(Services.getL18N().l18n(BundleAssets.BATTLE).format("level_up",
-            Services.getL18N().l18n(BundleAssets.MONSTERS).get(MonsterDB.singleton().getNameById(monster.ID))), skin, "default");
+            Services.getL18N().l18n(BundleAssets.MONSTERS).get(MonsterDB.getInstance().getNameById(monster.ID))), skin, "default");
         info.setSize(140,32);
         info.setPosition(128+64,140,Align.bottomLeft);
         info.setWrap(true);

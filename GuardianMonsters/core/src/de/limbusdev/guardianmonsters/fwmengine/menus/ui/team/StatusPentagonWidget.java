@@ -17,7 +17,7 @@ import de.limbusdev.guardianmonsters.model.monsters.Monster;
  * MStrength, MDefense, Speed. All values are given as a fraction
  * of 999.
  *
- * Created by Georg Eckert on 16.02.17.
+ * @author Georg Eckert 2017
  */
 
 public class StatusPentagonWidget extends Group {

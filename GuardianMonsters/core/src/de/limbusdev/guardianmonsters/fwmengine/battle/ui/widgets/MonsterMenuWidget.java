@@ -19,8 +19,8 @@ public class MonsterMenuWidget extends SevenButtonsWidget {
 
     private static int order[] = {0,1,2,3,4,5,6};
 
-    public MonsterMenuWidget(Skin skin, ClickListener clickListener) {
-        super(skin, clickListener, order);
+    public MonsterMenuWidget(Skin skin, Callbacks callbacks) {
+        super(skin, callbacks, order);
     }
 
     public void init(BattleSystem battleSystem, boolean side) {
@@ -39,11 +39,11 @@ public class MonsterMenuWidget extends SevenButtonsWidget {
             if(key > 6) break;
             Monster m = team.get(key);
             TextButton bwi = new BattleHUDTextButton(
-                Services.getL18N().l18n(BundleAssets.MONSTERS).get(MonsterDB.singleton().getNameById(m.ID)),
+                Services.getL18N().l18n(BundleAssets.MONSTERS).get(MonsterDB.getInstance().getNameById(m.ID)),
                 skin, key, Element.AIR
             );
                 new ButtonWithImage(
-                Services.getL18N().l18n(BundleAssets.MONSTERS).get(MonsterDB.singleton().getNameById(m.ID)),
+                Services.getL18N().l18n(BundleAssets.MONSTERS).get(MonsterDB.getInstance().getNameById(m.ID)),
                 skin,
                 "tb-attack-air");
 

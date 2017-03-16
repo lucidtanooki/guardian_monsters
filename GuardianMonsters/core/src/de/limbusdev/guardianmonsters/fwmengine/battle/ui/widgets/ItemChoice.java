@@ -5,7 +5,6 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ArrayMap;
 
@@ -13,7 +12,7 @@ import de.limbusdev.guardianmonsters.fwmengine.battle.control.BattleSystem;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.items.ItemDetailViewWidget;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.items.ItemListWidget;
-import de.limbusdev.guardianmonsters.fwmengine.menus.ui.team.QuickOverviewGuardianList;
+import de.limbusdev.guardianmonsters.fwmengine.menus.ui.team.MonsterListWidget;
 import de.limbusdev.guardianmonsters.model.items.Inventory;
 import de.limbusdev.guardianmonsters.model.items.Item;
 import de.limbusdev.guardianmonsters.model.monsters.Monster;
@@ -29,7 +28,7 @@ public class ItemChoice extends Group {
 
     private ArrayMap<Integer, Monster> team;
     private Inventory inventory;
-    private QuickOverviewGuardianList guardianList;
+    private MonsterListWidget guardianList;
     private Item chosenItem;
     private BattleSystem battleSystem;
     private ItemDetailViewWidget detailViewWidget;
@@ -66,7 +65,7 @@ public class ItemChoice extends Group {
     }
 
     private void setUp () {
-        final QuickOverviewGuardianList.CallbackHandler callbacks = new QuickOverviewGuardianList.CallbackHandler() {
+        final MonsterListWidget.Callbacks callbacks = new MonsterListWidget.Callbacks() {
             @Override
             public boolean onButton(int i) {
                 inventory.takeItemFromInventory(chosenItem);
@@ -84,11 +83,11 @@ public class ItemChoice extends Group {
                 detailViewWidget.init(item);
                 addActor(detailViewWidget);
                 detailViewWidget.getUse().clearListeners();
-                detailViewWidget.getUse().addListener(new ClickListener() {
+                detailViewWidget.getUse().addListener(new com.badlogic.gdx.scenes.scene2d.utils.ClickListener() {
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
                         if(guardianList != null) guardianList.remove();
-                        guardianList = new QuickOverviewGuardianList(Services.getUI().getInventorySkin(), team, callbacks, chosenItem);
+                        guardianList = new MonsterListWidget(Services.getUI().getInventorySkin(), team, callbacks, chosenItem);
                         addActor(guardianList);
                         detailViewWidget.remove();
                     }

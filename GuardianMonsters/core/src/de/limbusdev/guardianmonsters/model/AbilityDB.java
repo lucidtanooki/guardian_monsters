@@ -8,22 +8,21 @@ import com.badlogic.gdx.utils.XmlReader;
 
 import java.io.IOException;
 
-import de.limbusdev.guardianmonsters.fwmengine.battle.ui.AnimationType;
-import de.limbusdev.guardianmonsters.model.abilities.DamageType;
+import de.limbusdev.guardianmonsters.model.abilities.Ability;
 import de.limbusdev.guardianmonsters.model.monsters.Element;
-import de.limbusdev.guardianmonsters.fwmengine.managers.SFXType;
+import de.limbusdev.guardianmonsters.utils.XMLAbilityParser;
 
 /**
  * Contains all existing attacks, sorted by element
- * Created by Georg Eckert 2017
+ * @author Georg Eckert 2017
  */
 public class AbilityDB {
 
     private static AbilityDB instance;
-    private ArrayMap<Element, ArrayMap<Integer, de.limbusdev.guardianmonsters.model.abilities.Ability>> attacks;
+    private ArrayMap<Element, ArrayMap<Integer, Ability>> abilities;
 
     private AbilityDB() {
-        attacks = new ArrayMap<>();
+        abilities = new ArrayMap<>();
 
         FileHandle handle = Gdx.files.internal("data/attacks.xml");
         XmlReader xmlReader = new XmlReader();
@@ -36,51 +35,31 @@ public class AbilityDB {
         }
 
         for (int i = 0; i < element.getChildCount(); i++) {
-            de.limbusdev.guardianmonsters.model.abilities.Ability att = parseAttack(element.getChild(i));
-            if(!attacks.containsKey(att.element)) {
-                attacks.put(att.element, new ArrayMap<Integer, de.limbusdev.guardianmonsters.model.abilities.Ability>());
+            Ability att = XMLAbilityParser.parseAbility(element.getChild(i));
+            if(!abilities.containsKey(att.element)) {
+                abilities.put(att.element, new ArrayMap<Integer, Ability>());
             }
-            attacks.get(att.element).put(att.ID, att);
+            abilities.get(att.element).put(att.ID, att);
         }
     }
 
-    public static AbilityDB getInst() {
+    public static AbilityDB getInstance() {
         if(instance == null) {
             instance = new AbilityDB();
         }
         return instance;
     }
 
-    /* ............................................................................ ATTRIBUTES .. */
-
-    private de.limbusdev.guardianmonsters.model.abilities.Ability parseAttack(XmlReader.Element element) {
-        Element e = Element.valueOf(element.getAttribute("element", "none").toUpperCase());
-        DamageType a = DamageType.valueOf(element.get("category", "physical").toUpperCase());
-        int id = element.getIntAttribute("id", 0);
-        int damage = element.getInt("damage", 0);
-        String nameID = element.getAttribute("nameID");
-        SFXType sfxType = SFXType.valueOf(element.getChildByName("sfx").getAttribute("type").toUpperCase());
-        int sfxIndex = element.getChildByName("sfx").getIntAttribute("index", 0);
-        AnimationType animType = AnimationType.valueOf(element.get("animation", "none").toUpperCase());
-
-        de.limbusdev.guardianmonsters.model.abilities.Ability att;
-        if(element.getChildByName("mpcost") == null) {
-            att = new de.limbusdev.guardianmonsters.model.abilities.Ability(id, a, e, damage, nameID, sfxType, sfxIndex, animType);
-        } else {
-            int mpcost = element.getInt("mpcost", 0);
-            att = new de.limbusdev.guardianmonsters.model.abilities.Ability(id, a, e, damage, nameID, sfxType, sfxIndex, animType, mpcost);
-        }
-        return att;
-    }
-
+    /* .............................................................
     /**
      * Returns attack of the given element and index
      * @param e
      * @param index
      * @return
      */
-    public de.limbusdev.guardianmonsters.model.abilities.Ability getAttack(Element e, int index) {
-        return attacks.get(e).get(index);
+    public static Ability getAttack(Element e, int index) {
+        AbilityDB db = getInstance();
+        return db.abilities.get(e).get(index);
     }
 
 }

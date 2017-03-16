@@ -9,14 +9,14 @@ import de.limbusdev.guardianmonsters.geometry.IntVec2;
 import de.limbusdev.guardianmonsters.model.monsters.Monster;
 
 /**
- * Created by Georg Eckert on 01.03.17.
+ * @author Georg Eckert 2017
  */
 
 public class TeamBarWidget extends ATeamChoiceWidget {
 
 
-    public TeamBarWidget(Skin skin, ArrayMap<Integer, Monster> team, ClickListener clHandler) {
-        super(skin, clHandler);
+    public TeamBarWidget(Skin skin, ArrayMap<Integer, Monster> team, Callbacks callbacks) {
+        super(skin, callbacks);
 
         setSize(260,44);
 

@@ -23,7 +23,7 @@ import de.limbusdev.guardianmonsters.utils.Constant;
  */
 
 public class AbilityMapSubMenu extends AInventorySubMenu implements Listener<Monster>,
-    GraphWidget.Controller, TeamMemberSwitcher.Controller, AbilityDetailWidget.ClickHandler {
+    GraphWidget.Controller, TeamMemberSwitcher.Callbacks, AbilityDetailWidget.Callbacks {
 
     private ArrayMap<Integer, Monster> team;
     private GraphWidget graphWidget;
@@ -60,7 +60,7 @@ public class AbilityMapSubMenu extends AInventorySubMenu implements Listener<Mon
         addActor(remainingLevels);
         remainingLevels.counter.setText(Integer.toString(this.team.get(0).stat.getAbilityLevels()));
 
-        details.init(this.team.get(0), 0);
+        details.init(this.team.get(0), 0, false);
 
     }
 
@@ -79,7 +79,7 @@ public class AbilityMapSubMenu extends AInventorySubMenu implements Listener<Mon
     @Override
     public void onNodeClicked(int nodeID) {
         Monster monster = team.get(switcher.getCurrentlyChosen());
-        details.init(monster, nodeID);
+        details.init(monster, nodeID, false);
     }
 
     @Override
@@ -93,7 +93,7 @@ public class AbilityMapSubMenu extends AInventorySubMenu implements Listener<Mon
         Monster m = team.get(switcher.getCurrentlyChosen());
         m.stat.consumeAbilityLevel();
         m.abilityGraph.activateNode(nodeID);
-        details.init(m, nodeID);
+        details.init(m, nodeID, false);
     }
 
     @Override

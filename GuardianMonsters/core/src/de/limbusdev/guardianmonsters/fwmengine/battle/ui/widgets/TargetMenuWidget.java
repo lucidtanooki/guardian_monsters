@@ -24,8 +24,8 @@ public class TargetMenuWidget extends SevenButtonsWidget implements Listener<Mon
 
     private static int[] order = {0,2,1,3,6,5,4};
 
-    public TargetMenuWidget(Skin skin, ClickListener clickListener) {
-        super(skin, clickListener, order);
+    public TargetMenuWidget(Skin skin, Callbacks callbacks) {
+        super(skin, callbacks, order);
     }
 
     public void init(BattleSystem battleSystem) {
@@ -53,7 +53,7 @@ public class TargetMenuWidget extends SevenButtonsWidget implements Listener<Mon
         for(int key : team.keys()) {
             Monster m = team.get(key);
             setButtonText(key + offset, Services.getL18N().l18n(BundleAssets.MONSTERS).get(
-                MonsterDB.singleton().getNameById(m.ID)));
+                MonsterDB.getInstance().getNameById(m.ID)));
             enableButton(key + offset);
 
             // Add the TargetMenuWidget as a Listener

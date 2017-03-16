@@ -12,7 +12,7 @@ import de.limbusdev.guardianmonsters.model.items.Item;
 import de.limbusdev.guardianmonsters.model.monsters.Monster;
 
 /**
- * Created by Georg Eckert on 20.02.17.
+ * @author Georg Eckert 2017
  */
 
 public class WeaponDetailViewWidget extends ItemDetailViewWidget {

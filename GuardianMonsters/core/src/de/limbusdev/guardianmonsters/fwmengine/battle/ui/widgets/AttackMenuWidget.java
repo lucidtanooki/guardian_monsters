@@ -16,8 +16,8 @@ public class AttackMenuWidget extends SevenButtonsWidget {
      *
      * @param skin battle action UI skin
      */
-    public AttackMenuWidget(Skin skin, ClickListener clickListener) {
-        super(skin, clickListener, order);
+    public AttackMenuWidget(Skin skin, Callbacks callbacks) {
+        super(skin, callbacks, order);
     }
 
     public void init(Monster monster) {
@@ -30,7 +30,7 @@ public class AttackMenuWidget extends SevenButtonsWidget {
 
         // for every attack, activate a button
         for(int i=0; i<7; i++) {
-            Ability attack = monster.getActiveAbility(i);
+            Ability attack = monster.abilityGraph.getActiveAbility(i);
 
             if(attack != null) {
                 setButtonStyle(i,skin, SkinAssets.attackButtonStyle(attack.element));

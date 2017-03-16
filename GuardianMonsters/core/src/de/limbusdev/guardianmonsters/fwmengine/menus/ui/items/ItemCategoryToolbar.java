@@ -8,7 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Align;
 
 /**
- * Created by Georg Eckert on 17.02.17.
+ * @author Georg Eckert 2017
  */
 
 public class ItemCategoryToolbar extends Group {

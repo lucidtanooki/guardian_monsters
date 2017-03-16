@@ -13,7 +13,6 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.I18NBundle;
 
 
-import de.limbusdev.guardianmonsters.data.BundleAssets;
 import de.limbusdev.guardianmonsters.model.abilities.DamageType;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.model.abilities.Ability;
@@ -41,13 +40,13 @@ public class AbilityDetailWidget extends Container {
     private Image abilityType;
     private ImageButton learn;
 
-    public ClickHandler clickHandler;
+    public Callbacks callbacks;
 
-    public AbilityDetailWidget(Skin skin, ClickHandler handler) {
+    public AbilityDetailWidget(Skin skin, Callbacks handler) {
         super();
         this.skin = skin;
 
-        this.clickHandler = handler;
+        this.callbacks = handler;
         setBackground(skin.getDrawable("label-bg-sandstone"));
         setSize(170,64);
 
@@ -77,7 +76,7 @@ public class AbilityDetailWidget extends Container {
         learn.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                clickHandler.onLearn(nodeID);
+                callbacks.onLearn(nodeID);
             }
         });
 
@@ -114,15 +113,14 @@ public class AbilityDetailWidget extends Container {
         learn.setVisible(showLearnButton);
     }
 
-
-    public void init(Monster monster, int nodeID) {
+    public void init(Monster monster, int nodeID, boolean forceShowLearnButton) {
         this.nodeID = nodeID;
 
         AbilityGraph graph = monster.abilityGraph;
         Node.Type type = graph.nodeTypeAt(nodeID);
         Stat stat = monster.stat;
 
-        boolean showLearnButton = (stat.hasAbilityPoints() && graph.isNodeEnabled(nodeID));
+        boolean showLearnButton = ((stat.hasAbilityPoints() && graph.isNodeEnabled(nodeID)) || forceShowLearnButton);
         setLayout(type, showLearnButton);
 
         switch(type) {
@@ -147,7 +145,7 @@ public class AbilityDetailWidget extends Container {
     }
 
 
-    public void initAbilityDetails(Ability ability) {
+    private void initAbilityDetails(Ability ability) {
         if(ability == null) {
             name.setText("Empty");
             damage.setText("0");
@@ -189,7 +187,7 @@ public class AbilityDetailWidget extends Container {
 
 
     // .................................................................... CLICK LISTENER INTERFACE
-    public interface ClickHandler {
+    public interface Callbacks {
         /**
          * Is called, when the learn button of the detail widget is clicked.
          * @param nodeID    ID of the currently chosen graph node

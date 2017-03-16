@@ -27,7 +27,6 @@ public class Monster extends Signal<Monster> implements Listener<Stat> {
     public Stat stat;
     public String nickname;
 
-    private ArrayMap<Integer, Ability> activeAbilities;
     public AbilityGraph abilityGraph;
 
     // ................................................................................. CONSTRUCTOR
@@ -40,26 +39,13 @@ public class Monster extends Signal<Monster> implements Listener<Stat> {
         this.nickname = "";
 
         // Retrieve monster data from DataBase
-        data = MonsterDB.singleton().getData(ID);
+        data = MonsterDB.getData(ID);
         Array<Element> elements = data.elements;
 
         // Initialize Ability Graph
         abilityGraph = new AbilityGraph(data);
-
-        for(int i = 0; i<1; i++) {
-            abilityGraph.activateNode(i);
-        }
-
-        activeAbilities = new ArrayMap<>();
-        for(int i=0; i<7; i++) {
-            activeAbilities.put(i,null);
-        }
-
-        int counter = 0;
-        for(Ability a : abilityGraph.learntAbilities.values()) {
-            activeAbilities.put(counter, a);
-            counter++;
-        }
+        abilityGraph.activateNode(0);
+        abilityGraph.setActiveAbility(0,0);
 
         // Copy base stats over and register monster as listener at it's stats
         this.stat = new Stat(1, data.baseStat);
@@ -97,42 +83,10 @@ public class Monster extends Signal<Monster> implements Listener<Stat> {
 
     /* ..................................................................... GETTERS & SETTERS .. */
 
-
-
-    /**
-     * returns the ability placed at the given slot
-     * @param abilitySlot   slot for in battle ability usage
-     * @return              ability which resides there
-     */
-    public Ability getActiveAbility(int abilitySlot) {
-        return activeAbilities.get(abilitySlot);
-    }
-
-    /**
-     * Puts an ability into one of seven slots, available in battle
-     * @param slot                  where the ability should be placed in battle
-     * @param learntAbilityNumber   number of ability to be placed there
-     */
-    public void setActiveAbility(int slot, int learntAbilityNumber) {
-        Ability abilityToLearn = abilityGraph.learntAbilities.get(learntAbilityNumber);
-        if(abilityToLearn == null) return;
-
-        for(int key : activeAbilities.keys()) {
-            Ability abilityAtThisSlot = activeAbilities.get(key);
-
-            if(abilityAtThisSlot != null) {
-                if (abilityAtThisSlot.equals(abilityToLearn)) {
-                    activeAbilities.put(key, null);
-                }
-            }
-        }
-        activeAbilities.put(slot, abilityGraph.learntAbilities.get(learntAbilityNumber));
-    }
-
     @Override
     public String toString() {
         String out = "";
-        out += MonsterDB.singleton().getNameById(ID) + " Level: " + stat.getLevel();
+        out += MonsterDB.getLocalNameById(ID) + " Level: " + stat.getLevel();
         return out;
     }
 

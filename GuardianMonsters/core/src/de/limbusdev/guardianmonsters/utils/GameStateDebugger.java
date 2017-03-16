@@ -48,29 +48,29 @@ public class GameStateDebugger {
 
         Inventory inventory = new Inventory();
 
-        inventory.putItemInInventory(ItemDB.singleton().getItem("sword-barb-steel"));
-        inventory.putItemInInventory(ItemDB.singleton().getItem("sword-excalibur"));
-        inventory.putItemInInventory(ItemDB.singleton().getItem("bread"));
-        inventory.putItemInInventory(ItemDB.singleton().getItem("bread"));
-        inventory.putItemInInventory(ItemDB.singleton().getItem("bread"));
-        inventory.putItemInInventory(ItemDB.singleton().getItem("bread"));
-        inventory.putItemInInventory(ItemDB.singleton().getItem("potion-blue"));
-        inventory.putItemInInventory(ItemDB.singleton().getItem("potion-blue"));
-        inventory.putItemInInventory(ItemDB.singleton().getItem("potion-blue"));
-        inventory.putItemInInventory(ItemDB.singleton().getItem("potion-red"));
-        inventory.putItemInInventory(ItemDB.singleton().getItem("medicine-blue"));
-        inventory.putItemInInventory(ItemDB.singleton().getItem("angel-tear"));
-        inventory.putItemInInventory(ItemDB.singleton().getItem("sword-wood"));
-        inventory.putItemInInventory(ItemDB.singleton().getItem("claws-rusty"));
-        inventory.putItemInInventory(ItemDB.singleton().getItem("sword-silver"));
-        inventory.putItemInInventory(ItemDB.singleton().getItem("sword-knightly-steel"));
-        inventory.putItemInInventory(ItemDB.singleton().getItem("relict-earth"));
-        inventory.putItemInInventory(ItemDB.singleton().getItem("relict-demon"));
-        inventory.putItemInInventory(ItemDB.singleton().getItem("relict-lightning"));
-        inventory.putItemInInventory(ItemDB.singleton().getItem("relict-water"));
-        inventory.putItemInInventory(ItemDB.singleton().getItem("helmet-iron"));
-        inventory.putItemInInventory(ItemDB.singleton().getItem("shield-iron"));
-        inventory.putItemInInventory(ItemDB.singleton().getItem("shoes-leather"));
+        inventory.putItemInInventory(ItemDB.getInstance().getItem("sword-barb-steel"));
+        inventory.putItemInInventory(ItemDB.getInstance().getItem("sword-excalibur"));
+        inventory.putItemInInventory(ItemDB.getInstance().getItem("bread"));
+        inventory.putItemInInventory(ItemDB.getInstance().getItem("bread"));
+        inventory.putItemInInventory(ItemDB.getInstance().getItem("bread"));
+        inventory.putItemInInventory(ItemDB.getInstance().getItem("bread"));
+        inventory.putItemInInventory(ItemDB.getInstance().getItem("potion-blue"));
+        inventory.putItemInInventory(ItemDB.getInstance().getItem("potion-blue"));
+        inventory.putItemInInventory(ItemDB.getInstance().getItem("potion-blue"));
+        inventory.putItemInInventory(ItemDB.getInstance().getItem("potion-red"));
+        inventory.putItemInInventory(ItemDB.getInstance().getItem("medicine-blue"));
+        inventory.putItemInInventory(ItemDB.getInstance().getItem("angel-tear"));
+        inventory.putItemInInventory(ItemDB.getInstance().getItem("sword-wood"));
+        inventory.putItemInInventory(ItemDB.getInstance().getItem("claws-rusty"));
+        inventory.putItemInInventory(ItemDB.getInstance().getItem("sword-silver"));
+        inventory.putItemInInventory(ItemDB.getInstance().getItem("sword-knightly-steel"));
+        inventory.putItemInInventory(ItemDB.getInstance().getItem("relict-earth"));
+        inventory.putItemInInventory(ItemDB.getInstance().getItem("relict-demon"));
+        inventory.putItemInInventory(ItemDB.getInstance().getItem("relict-lightning"));
+        inventory.putItemInInventory(ItemDB.getInstance().getItem("relict-water"));
+        inventory.putItemInInventory(ItemDB.getInstance().getItem("helmet-iron"));
+        inventory.putItemInInventory(ItemDB.getInstance().getItem("shield-iron"));
+        inventory.putItemInInventory(ItemDB.getInstance().getItem("shoes-leather"));
 
         inventory.sortItemsByID();
         InventoryScreen ivs = new InventoryScreen(herTeam, inventory);
@@ -83,7 +83,7 @@ public class GameStateDebugger {
         heroTeam.monsters.put(1,BattleFactory.getInstance().createMonster(2));
         heroTeam.monsters.put(2,BattleFactory.getInstance().createMonster(3));
         heroTeam.monsters.get(0).abilityGraph.activateNode(13);
-        heroTeam.monsters.get(0).setActiveAbility(6,1);
+        heroTeam.monsters.get(0).abilityGraph.setActiveAbility(6,1);
         TeamComponent oppTeam = new TeamComponent();
         oppTeam.monsters.put(0,BattleFactory.getInstance().createMonster(4));
         oppTeam.monsters.put(1,BattleFactory.getInstance().createMonster(5));
@@ -92,14 +92,14 @@ public class GameStateDebugger {
 
         Inventory inventory = new Inventory();
 
-        inventory.putItemInInventory(ItemDB.singleton().getItem("sword-barb-steel"));
-        inventory.putItemInInventory(ItemDB.singleton().getItem("bread"));
-        inventory.putItemInInventory(ItemDB.singleton().getItem("bread"));
-        inventory.putItemInInventory(ItemDB.singleton().getItem("potion-blue"));
-        inventory.putItemInInventory(ItemDB.singleton().getItem("potion-blue"));
-        inventory.putItemInInventory(ItemDB.singleton().getItem("potion-red"));
-        inventory.putItemInInventory(ItemDB.singleton().getItem("medicine-blue"));
-        inventory.putItemInInventory(ItemDB.singleton().getItem("angel-tear"));
+        inventory.putItemInInventory(ItemDB.getInstance().getItem("sword-barb-steel"));
+        inventory.putItemInInventory(ItemDB.getInstance().getItem("bread"));
+        inventory.putItemInInventory(ItemDB.getInstance().getItem("bread"));
+        inventory.putItemInInventory(ItemDB.getInstance().getItem("potion-blue"));
+        inventory.putItemInInventory(ItemDB.getInstance().getItem("potion-blue"));
+        inventory.putItemInInventory(ItemDB.getInstance().getItem("potion-red"));
+        inventory.putItemInInventory(ItemDB.getInstance().getItem("medicine-blue"));
+        inventory.putItemInInventory(ItemDB.getInstance().getItem("angel-tear"));
 
 
         BattleScreen battleScreen = new BattleScreen(inventory);
@@ -148,11 +148,11 @@ public class GameStateDebugger {
     }
 
     public void testAttackParsing() {
-        AbilityDB ai = AbilityDB.getInst();
+        AbilityDB ai = AbilityDB.getInstance();
     }
 
     public void testMonsterParsing() {
-        MonsterDB mi = MonsterDB.singleton();
+        MonsterDB mi = MonsterDB.getInstance();
         System.out.println("Tested");
     }
 

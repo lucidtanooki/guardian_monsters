@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
@@ -25,6 +26,7 @@ import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.widgets.AnimatedImage;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.widgets.CreditsScreenWidget;
+import de.limbusdev.guardianmonsters.fwmengine.menus.ui.widgets.StartScreenWidget;
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.WorldScreen;
 import de.limbusdev.guardianmonsters.utils.Constant;
 import de.limbusdev.guardianmonsters.utils.GameState;
@@ -41,8 +43,8 @@ public class MainMenuScreen implements Screen {
     private Stage stage;
     private Image black;
 
-    private ArrayMap<String,TextButton> buttons;
-    private Group startMenu, logoScreen, introScreen;
+    private Group startMenu, introScreen;
+    private StartScreenWidget logoScreen;
     private CreditsScreenWidget credits;
     
     /* ........................................................................... CONSTRUCTOR .. */
@@ -112,14 +114,6 @@ public class MainMenuScreen implements Screen {
         // TODO
     }
 
-    public void setUpGame() {
-        if(SaveGameManager.doesGameSaveExist()) {
-            GameState state = SaveGameManager.loadSaveGame();
-            Services.getScreenManager().pushScreen(new WorldScreen(state.map, 1, true));
-        } else
-            Services.getScreenManager().pushScreen(new WorldScreen(25, 1, false));
-    }
-
 
     public void setUpUI(Skin skin) {
 
@@ -128,34 +122,9 @@ public class MainMenuScreen implements Screen {
         this.stage = new Stage(fit);
         Gdx.input.setInputProcessor(stage);
 
-        this.logoScreen = new Group();
+        this.logoScreen = new StartScreenWidget(skin);
 
-        Animation bgAnim = new Animation(.1f, Services.getMedia()
-            .getTextureAtlas(TextureAssets.bigAnimations).findRegions("mainMenuAnimation"));
-        bgAnim.setPlayMode(Animation.PlayMode.LOOP);
-        AnimatedImage bgAnimation = new AnimatedImage(bgAnim);
-        bgAnimation.setColor(1,1,1,.3f);
-        bgAnimation.setPosition(35,-30,Align.bottomLeft);
-        stage.addActor(bgAnimation);
-
-        Image logo = new Image(Services.getMedia().getTexture(TextureAssets.mainMenuBGImgFile));
-        logo.setPosition(Constant.WIDTH / 2, Constant.HEIGHT / 2, Align.center);
-        logoScreen.addActor(logo);
-
-        Label creatorLabel = new Label("by Georg Eckert", Services.getUI().getDefaultSkin(),"trans-white");
-        creatorLabel.setPosition(Constant.WIDTH/2,76,Align.bottomLeft);
-        creatorLabel.setAlignment(Align.center,Align.center);
-        logoScreen.addActor(creatorLabel);
-
-        I18NBundle i18n = Services.getL18N().l18n(BundleAssets.GENERAL);
-
-        // Buttons ......................................................................... BUTTONS
-        // Start Button
-        TextButton button = new TextButton(i18n.get("main_menu_touch_start"), skin, "button-96x32");
-        button.setSize(96,32);
-        button.setPosition(Constant.WIDTH/2 - 96/2, 16f, Align.bottomLeft);
-
-        button.addListener(new ClickListener() {
+        logoScreen.startButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 logoScreen.addAction(Actions.sequence(
@@ -166,10 +135,6 @@ public class MainMenuScreen implements Screen {
                 ));
             }
         });
-        logoScreen.addActor(button);
-
-
-        // Buttons ............................................................................. END
         stage.addActor(logoScreen);
     }
 
@@ -188,45 +153,51 @@ public class MainMenuScreen implements Screen {
         startMenu.addActor(mon);
 
         // ................................................................................. BUTTONS
-        this.buttons = new ArrayMap<>();
-
         I18NBundle i18n = Services.getL18N().l18n(BundleAssets.GENERAL);
-        String startButton;
-        if(SaveGameManager.doesGameSaveExist()) {
-            startButton = i18n.get("main_menu_load_saved");
-        } else {
-            startButton = i18n.get("main_menu_start_new");
-        }
 
         // ............................................................................ START BUTTON
-        TextButton button = new TextButton(startButton, skin, "button-96x32");
-        button.setSize(96,32);
-        button.setPosition(16, Constant.HEIGHT-16,Align.topLeft);
+        String label = i18n.get("main_menu_start_new");
+        TextButton buttonStart = new TextButton(label, skin, "button-96x32");
 
-        button.addListener(new ClickListener() {
+        buttonStart.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 stage.addAction(Actions.sequence(
                         Actions.fadeOut(1), Actions.run(new Runnable() {
                             @Override
                             public void run() {
-                                setUpGame();
+                                Services.getScreenManager().pushScreen(new WorldScreen(25, 1, false));
                             }
                         })
                 ));
             }
         });
-        buttons.put("start", button);
+
+        label = i18n.get("main_menu_load_saved");
+        TextButton buttonContinue = new TextButton(label, skin, "button-96x32");
+
+        buttonContinue.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                stage.addAction(Actions.sequence(
+                    Actions.fadeOut(1), Actions.run(new Runnable() {
+                        @Override
+                        public void run() {
+                            GameState state = SaveGameManager.loadSaveGame();
+                            Services.getScreenManager().pushScreen(new WorldScreen(state.map, 1, true));
+                        }
+                    })
+                ));
+            }
+        });
 
 
         // .......................................................................... CREDITS BUTTON
         credits = new CreditsScreenWidget(skin);
 
-        button = new TextButton(i18n.get("main_menu_credits"), skin, "button-96x32");
-        button.setSize(96,32);
-        button.setPosition(16, Constant.HEIGHT-16-48,Align.topLeft);
+        TextButton buttonCredtis = new TextButton(i18n.get("main_menu_credits"), skin, "button-96x32");
 
-        button.addListener(new ClickListener() {
+        buttonCredtis.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 startMenu.addAction(Actions.sequence(
@@ -238,10 +209,22 @@ public class MainMenuScreen implements Screen {
                 credits.start(20);
             }
         });
-        buttons.put("credits", button);
 
+        // Layout
+        Table tableButtons = new Table();
+        tableButtons.top().left();
+        tableButtons.setDebug(true);
+        tableButtons.setSize(96,Constant.HEIGHT);
+        tableButtons.setPosition(4, Constant.HEIGHT-4, Align.topLeft);
+        if(SaveGameManager.doesGameSaveExist()) {
+            tableButtons.add(buttonContinue).size(96,32).spaceBottom(2);
+            tableButtons.row();
+        }
+        tableButtons.add(buttonStart).size(96,32).spaceBottom(2);
+        tableButtons.row();
+        tableButtons.add(buttonCredtis).size(96,32).spaceBottom(2);
 
-        for(String key : buttons.keys()) startMenu.addActor(buttons.get(key));
+        startMenu.addActor(tableButtons);
         startMenu.setVisible(false);
         stage.addActor(startMenu);
     }

@@ -97,7 +97,7 @@ public class MonsterStatusInventoryWidget extends Group {
         valueLabels.get("speed").setText(Integer.toString(m.stat.getSpeedMax()));
 
         elementGroup.clear();
-        for(Element e : m.data.elements) {
+        for(Element e : m.data.getElements()) {
             String elem = e.toString().toLowerCase();
             String elemName = Services.getL18N().l18n(BundleAssets.ELEMENTS).get("element_" + elem);
             elemName = elemName.length() < 7 ? elemName : elemName.substring(0,6);

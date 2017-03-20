@@ -6,6 +6,7 @@ import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
@@ -31,12 +32,12 @@ import de.limbusdev.guardianmonsters.utils.GameState;
 
 
 /**
- * Created by georg on 03.12.15.
+ * @author Georg Eckert 2017
  */
 public class SaveGameManager extends EntitySystem {
     /* ............................................................................ ATTRIBUTES .. */
     private ImmutableArray<Entity> savableEntities;
-    private GameState gameState;
+    private static GameState gameState;
     private GameArea gameArea;
     /* ........................................................................... CONSTRUCTOR .. */
 
@@ -47,15 +48,28 @@ public class SaveGameManager extends EntitySystem {
 
     /* ............................................................................... METHODS .. */
     public void addedToEngine(Engine engine) {
-        savableEntities = engine.getEntitiesFor(Family.all(
-                SaveGameComponent.class,
-                PositionComponent.class,
-                TeamComponent.class).get());
+        Family saveGameComps = Family.all(
+            SaveGameComponent.class,
+            PositionComponent.class,
+            TeamComponent.class).get();
+
+        savableEntities = engine.getEntitiesFor(saveGameComps);
         gameState = Components.saveGame.get(savableEntities.first()).gameState;
         gameState.map = this.gameArea.areaID;
         gameState.team = Components.team.get(savableEntities.first()).monsters;
     }
 
+    public static GameState getCurrentGameState() {
+        if(gameState == null) {
+            gameState = loadSaveGame();
+        }
+        return gameState;
+    }
+
+    /**
+     * Updates the savable data
+     * @param deltaTime
+     */
     public void update(float deltaTime) {
         for (Entity entity : savableEntities) {
             PositionComponent position = Components.getPositionComponent(entity);
@@ -67,42 +81,54 @@ public class SaveGameManager extends EntitySystem {
         }
     }
 
-
+    /**
+     * Serializes the current save game object with Kryo and writes it to a file in binary format
+     */
     public void saveGame() {
-
         Kryo kryo = new Kryo();
         addLibGdxSerializers(kryo);
         try {
-            Output output = new Output(new FileOutputStream("gamestate/gamestate0.sav"));
+            FileHandle handle = Gdx.files.local("gamestate/gamestate0.sav");
+            Output output = new Output(handle.write(false));
             kryo.writeObject(output, gameState);
             output.close();
-        } catch (FileNotFoundException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
-
+        System.out.println(gameState);
     }
 
+    /**
+     * Loads the most recent game save file from internal storage and parses it into a gamestate obj
+     * @return
+     */
     public static GameState loadSaveGame() {
-        GameState gameState = new GameState();
 
         Kryo kryo = new Kryo();
         addLibGdxSerializers(kryo);
-        try {
-            Input input = new Input(new FileInputStream("gamestate/gamestate0.sav"));
-            gameState = kryo.readObject(input, GameState.class);
-            System.out.println(gameState.toString());
-            input.close();
 
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            gameState = new GameState();
+        if(doesGameSaveExist()) {
+            try {
+                FileHandle handle = Gdx.files.local("gamestate/gamestate0.sav");
+                Input input = new Input(handle.read());
+                gameState = kryo.readObject(input, GameState.class);
+                System.out.println(gameState.toString());
+                input.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            gameState = new GameState(1,1,25);
         }
 
         return gameState;
     }
 
+    /**
+     * Searches for game state files in the internal storage
+     * @return
+     */
     public static boolean doesGameSaveExist() {
         return Gdx.files.local( "gamestate/gamestate0.sav" ).exists();
     }

@@ -9,6 +9,7 @@ import de.limbusdev.guardianmonsters.fwmengine.battle.control.BattleSystem;
 import de.limbusdev.guardianmonsters.model.MonsterDB;
 import de.limbusdev.guardianmonsters.model.abilities.Ability;
 import de.limbusdev.guardianmonsters.model.abilities.AbilityGraph;
+import de.limbusdev.guardianmonsters.model.gamestate.SerializableMonster;
 
 /**
  * Monster is the basic entity for the {@link BattleSystem}
@@ -40,7 +41,7 @@ public class Monster extends Signal<Monster> implements Listener<Stat> {
 
         // Retrieve monster data from DataBase
         data = MonsterDB.getData(ID);
-        Array<Element> elements = data.elements;
+        Array<Element> elements = data.getElements();
 
         // Initialize Ability Graph
         abilityGraph = new AbilityGraph(data);
@@ -48,17 +49,21 @@ public class Monster extends Signal<Monster> implements Listener<Stat> {
         abilityGraph.setActiveAbility(0,0);
 
         // Copy base stats over and register monster as listener at it's stats
-        this.stat = new Stat(1, data.baseStat);
+        this.stat = new Stat(1, data.getBaseStat());
         this.stat.add(this);
 
     }
 
     /**
-     * For Serialization only
+     * For Serialization Only!
+     * @param serializableMonster
      */
-    public Monster() {
+    public Monster (SerializableMonster serializableMonster) {
         this.INSTANCE_ID = INSTANCECOUNTER;
         INSTANCECOUNTER++;
+
+        this.ID = serializableMonster.ID;
+        this.nickname = serializableMonster.nickname;
     }
 
 

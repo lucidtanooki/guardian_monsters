@@ -6,7 +6,6 @@ import com.badlogic.gdx.utils.ArrayMap;
 import de.limbusdev.guardianmonsters.model.abilities.Ability;
 import de.limbusdev.guardianmonsters.model.items.BodyEquipment;
 import de.limbusdev.guardianmonsters.model.items.BodyPart;
-import de.limbusdev.guardianmonsters.model.items.Equipment;
 import de.limbusdev.guardianmonsters.model.items.FootEquipment;
 import de.limbusdev.guardianmonsters.model.items.HandEquipment;
 import de.limbusdev.guardianmonsters.model.items.HeadEquipment;
@@ -19,23 +18,28 @@ import de.limbusdev.guardianmonsters.model.items.HeadEquipment;
  */
 public class MonsterData {
     /* ............................................................................ ATTRIBUTES .. */
-    public final int ID;
-    public final String nameID;
+    private int ID;
+    private String nameID;
 
-    public final ArrayMap<Integer, Ability> abilityNodes;
-    public final ArrayMap<Integer, BodyPart> equipmentNodes;
-    public final Array<Integer> metamorphosisNodes;
+    private ArrayMap<Integer, Ability> abilityNodes;
+    private ArrayMap<Integer, BodyPart> equipmentNodes;
+    private Array<Integer> metamorphosisNodes;
 
-    public final int metamorphesTo;
-    public final Array<Element> elements;
-    public final BaseStat baseStat;
+    private int metamorphesTo;
+    private Array<Element> elements;
+    private BaseStat baseStat;
 
-    private final HeadEquipment.Type headType;
-    private final BodyEquipment.Type bodyType;
-    private final HandEquipment.Type handType;
-    private final FootEquipment.Type footType;
+    private HeadEquipment.Type headType;
+    private BodyEquipment.Type bodyType;
+    private HandEquipment.Type handType;
+    private FootEquipment.Type footType;
 
     /* ........................................................................... CONSTRUCTOR .. */
+
+    /**
+     * For Serialization only!
+     */
+    public MonsterData() {}
 
     public MonsterData(int ID, String nameID, int metamorphesTo, BaseStat baseStat,
                        Array<Element> elements, ArrayMap<Integer, Ability> abilityNodes,
@@ -91,4 +95,35 @@ public class MonsterData {
         return footType;
     }
 
+    public int getID() {
+        return ID;
+    }
+
+    public String getNameID() {
+        return nameID;
+    }
+
+    public ArrayMap<Integer, Ability> getAbilityNodes() {
+        return abilityNodes;
+    }
+
+    public ArrayMap<Integer, BodyPart> getEquipmentNodes() {
+        return equipmentNodes;
+    }
+
+    public Array<Integer> getMetamorphosisNodes() {
+        return metamorphosisNodes;
+    }
+
+    public int getMetamorphesTo() {
+        return metamorphesTo;
+    }
+
+    public Array<Element> getElements() {
+        return elements;
+    }
+
+    public BaseStat getBaseStat() {
+        return baseStat;
+    }
 }

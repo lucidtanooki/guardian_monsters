@@ -6,7 +6,7 @@ import de.limbusdev.guardianmonsters.model.monsters.Monster;
 
 
 /**
- * Created by georg on 03.12.15.
+ * @author Georg Eckert 2017
  */
 public class GameState {
     /* ............................................................................ ATTRIBUTES .. */
@@ -25,14 +25,16 @@ public class GameState {
         this.maxTeamSizeInBattle = 1;
     }
 
-    public GameState() {
-        // ONLY FOR JSON CREATION
-        this.team = new ArrayMap<>();
-    }
+    /**
+     * For Serialization only!
+     */
+    public GameState() {}
 
     public String toString() {
         String out = "";
+        out += "== Current Game State ==\n";
         out += "Last position: (" + gridx + "|" + gridy + ")" + " at map " + map + "\n";
+        out += "Team Size: " + maxTeamSizeInBattle + "\n";
         out += "Team:\n";
 
         for(Monster m : team.values()) {

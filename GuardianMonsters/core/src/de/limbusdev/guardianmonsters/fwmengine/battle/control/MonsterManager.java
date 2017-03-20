@@ -51,7 +51,7 @@ public class MonsterManager {
     public static AttackCalculationReport calcAttack(Monster att, Monster def, Ability ability) {
         System.out.println("\n--- new ability ---");
         AttackCalculationReport report = new AttackCalculationReport(att, def, 0, 0, ability);
-        float efficiency = ElemEff.singelton().getElemEff(ability.element, def.data.elements);
+        float efficiency = ElemEff.singelton().getElemEff(ability.element, def.data.getElements());
 
         float defenseRatio;
 

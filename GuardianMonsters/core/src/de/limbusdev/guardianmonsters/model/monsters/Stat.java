@@ -94,13 +94,13 @@ public class Stat extends Signal<Stat> {
         this.level = level;
         this.abilityLevels = level-1;
 
-        this.HPmax      = baseStat.baseHP;
-        this.MPmax      = baseStat.baseMP;
-        this.PStrMax    = baseStat.basePStr;
-        this.PDefMax    = baseStat.basePDef;
-        this.MStrMax    = baseStat.baseMStr;
-        this.MDefMax    = baseStat.baseMDef;
-        this.SpeedMax   = baseStat.baseSpeed;
+        this.HPmax      = baseStat.getBaseHP();
+        this.MPmax      = baseStat.getBaseMP();
+        this.PStrMax    = baseStat.getBasePStr();
+        this.PDefMax    = baseStat.getBasePDef();
+        this.MStrMax    = baseStat.getBaseMStr();
+        this.MDefMax    = baseStat.getBaseMDef();
+        this.SpeedMax   = baseStat.getBaseSpeed();
 
         for(int i=1; i<level; i++) {
             levelUp();
@@ -417,7 +417,7 @@ public class Stat extends Signal<Stat> {
     }
 
     public int getMaxPossibleHP() {
-        int maxPossHP = base.baseHP;
+        int maxPossHP = base.getBaseHP();
         for(int i=1; i<100; i++) {
             maxPossHP += MathTool.dice(characterGrowthRates[character][StatType.HP]);
         }
@@ -425,7 +425,7 @@ public class Stat extends Signal<Stat> {
     }
 
     public int getMaxPossibleMP() {
-        int maxPossMP = base.baseMP;
+        int maxPossMP = base.getBaseMP();
         for(int i=1; i<100; i++) {
             maxPossMP += MathTool.dice(characterGrowthRates[character][StatType.MP]);
         }
@@ -433,7 +433,7 @@ public class Stat extends Signal<Stat> {
     }
 
     public int getMaxPossiblePStr() {
-        int maxPossPStr = base.basePStr;
+        int maxPossPStr = base.getBasePStr();
         for(int i=1; i<100; i++) {
             maxPossPStr += MathTool.dice(characterGrowthRates[character][StatType.PSTR]);
         }
@@ -441,7 +441,7 @@ public class Stat extends Signal<Stat> {
     }
 
     public int getMaxPossiblePDef() {
-        int maxPossPDef = base.basePDef;
+        int maxPossPDef = base.getBasePDef();
         for(int i=1; i<100; i++) {
             maxPossPDef += MathTool.dice(characterGrowthRates[character][StatType.PDEF]);
         }
@@ -449,7 +449,7 @@ public class Stat extends Signal<Stat> {
     }
 
     public int getMaxPossibleMStr() {
-        int maxPossMStr = base.baseMStr;
+        int maxPossMStr = base.getBaseMStr();
         for(int i=1; i<100; i++) {
             maxPossMStr += MathTool.dice(characterGrowthRates[character][StatType.MSTR]);
         }
@@ -457,7 +457,7 @@ public class Stat extends Signal<Stat> {
     }
 
     public int getMaxPossibleMDef() {
-        int maxPossMDef = base.baseMDef;
+        int maxPossMDef = base.getBaseMDef();
         for(int i=1; i<100; i++) {
             maxPossMDef += MathTool.dice(characterGrowthRates[character][StatType.MDEF]);
         }
@@ -465,7 +465,7 @@ public class Stat extends Signal<Stat> {
     }
 
     public int getMaxPossibleSpeed() {
-        int maxPossSpeed = base.baseSpeed;
+        int maxPossSpeed = base.getBaseSpeed();
         for(int i=1; i<100; i++) {
             maxPossSpeed += MathTool.dice(characterGrowthRates[character][StatType.SPEED]);
         }

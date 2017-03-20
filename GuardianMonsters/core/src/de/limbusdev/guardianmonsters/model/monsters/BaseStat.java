@@ -19,14 +19,19 @@ package de.limbusdev.guardianmonsters.model.monsters;
 
 public class BaseStat {
 
-    public final int ID;
-    public final int baseHP;
-    public final int baseMP;
-    public final int basePStr;
-    public final int basePDef;
-    public final int baseMStr;
-    public final int baseMDef;
-    public final int baseSpeed;
+    private int ID;
+    private int baseHP;
+    private int baseMP;
+    private int basePStr;
+    private int basePDef;
+    private int baseMStr;
+    private int baseMDef;
+    private int baseSpeed;
+
+    /**
+     * For Serialization only!
+     */
+    public BaseStat() {}
 
     public BaseStat(int ID) {
         this(ID, 300, 100, 10, 10, 10, 10, 10);
@@ -42,5 +47,37 @@ public class BaseStat {
         this.baseMStr = baseMStr;
         this.baseMDef = baseMDef;
         this.baseSpeed = baseSpeed;
+    }
+
+    public int getID() {
+        return ID;
+    }
+
+    public int getBaseHP() {
+        return baseHP;
+    }
+
+    public int getBaseMP() {
+        return baseMP;
+    }
+
+    public int getBasePStr() {
+        return basePStr;
+    }
+
+    public int getBasePDef() {
+        return basePDef;
+    }
+
+    public int getBaseMStr() {
+        return baseMStr;
+    }
+
+    public int getBaseMDef() {
+        return baseMDef;
+    }
+
+    public int getBaseSpeed() {
+        return baseSpeed;
     }
 }

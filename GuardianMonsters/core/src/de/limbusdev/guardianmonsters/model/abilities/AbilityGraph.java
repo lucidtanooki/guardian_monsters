@@ -31,6 +31,10 @@ public class AbilityGraph extends Signal<AbilityGraph> {
     public ArrayMap<Integer,Ability> learntAbilities;
     public Array<BodyPart> learntEquipment;
 
+    /**
+     * For Serialization only!
+     */
+    public AbilityGraph() {}
 
     public AbilityGraph(MonsterData data) {
         nodes = new ArrayMap<>();
@@ -61,15 +65,15 @@ public class AbilityGraph extends Signal<AbilityGraph> {
     }
 
     private void init(MonsterData data) {
-        for(int key : data.abilityNodes.keys()) {
+        for(int key : data.getAbilityNodes().keys()) {
             nodes.get(key).type = ABILITY;
-            abilityNodes.put(key, data.abilityNodes.get(key));
+            abilityNodes.put(key, data.getAbilityNodes().get(key));
         }
-        for(int key : data.equipmentNodes.keys()) {
+        for(int key : data.getEquipmentNodes().keys()) {
             nodes.get(key).type = EQUIPMENT;
-            equipmentNodes.put(key, data.equipmentNodes.get(key));
+            equipmentNodes.put(key, data.getEquipmentNodes().get(key));
         }
-        for(int key : data.metamorphosisNodes) {
+        for(int key : data.getMetamorphosisNodes()) {
             nodes.get(key).type = METAMORPHOSIS;
             metamorphosisNodes.add(key);
         }

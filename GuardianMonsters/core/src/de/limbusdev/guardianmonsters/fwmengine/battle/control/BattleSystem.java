@@ -81,7 +81,7 @@ public class BattleSystem extends Observable {
      * @param side
      */
     private void addFitMonstersToBattleField(ArrayMap<Integer,Monster> team, boolean side) {
-        GameState gameState = SaveGameManager.loadSaveGame();
+        GameState gameState = SaveGameManager.getCurrentGameState();
         int teamSize = team.size > 3 ? 3 : team.size;
         if(side == LEFT && teamSize > gameState.maxTeamSizeInBattle) {
             teamSize = gameState.maxTeamSizeInBattle;

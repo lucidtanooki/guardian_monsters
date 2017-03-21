@@ -31,11 +31,6 @@ public class AbilityGraph extends Signal<AbilityGraph> {
     public ArrayMap<Integer,Ability> learntAbilities;
     public Array<BodyPart> learntEquipment;
 
-    /**
-     * For Serialization only!
-     */
-    public AbilityGraph() {}
-
     public AbilityGraph(MonsterData data) {
         nodes = new ArrayMap<>();
         edges = new Array<>();
@@ -87,6 +82,16 @@ public class AbilityGraph extends Signal<AbilityGraph> {
         activateNode(0);
     }
 
+    public AbilityGraph(ArrayMap<Integer, Node> nodes, Array<Edge> edges, ArrayMap<Integer, Ability> abilityNodes, ArrayMap<Integer, BodyPart> equipmentNodes, Array<Integer> metamorphosisNodes, ArrayMap<Integer, Ability> activeAbilities, ArrayMap<Integer, Ability> learntAbilities, Array<BodyPart> learntEquipment) {
+        this.nodes = nodes;
+        this.edges = edges;
+        this.abilityNodes = abilityNodes;
+        this.equipmentNodes = equipmentNodes;
+        this.metamorphosisNodes = metamorphosisNodes;
+        this.activeAbilities = activeAbilities;
+        this.learntAbilities = learntAbilities;
+        this.learntEquipment = learntEquipment;
+    }
 
     // ........................................................................... GETTERS & SETTERS
     public ArrayMap<Integer, Node> getNodes() {
@@ -243,5 +248,9 @@ public class AbilityGraph extends Signal<AbilityGraph> {
         activeAbilities.put(slot, learntAbilities.get(learntAbilityNumber));
 
         dispatch(this);
+    }
+
+    public ArrayMap<Integer, Ability> getActiveAbilities() {
+        return activeAbilities;
     }
 }

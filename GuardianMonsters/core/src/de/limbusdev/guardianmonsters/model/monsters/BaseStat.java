@@ -29,7 +29,7 @@ public class BaseStat {
     private int baseSpeed;
 
     /**
-     * For Serialization only!
+     * For Serialization only
      */
     public BaseStat() {}
 

@@ -163,12 +163,13 @@ public class MainMenuScreen implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 stage.addAction(Actions.sequence(
-                        Actions.fadeOut(1), Actions.run(new Runnable() {
-                            @Override
-                            public void run() {
-                                Services.getScreenManager().pushScreen(new WorldScreen(25, 1, false));
-                            }
-                        })
+                    Actions.fadeOut(1), Actions.run(new Runnable() {
+                        @Override
+                        public void run() {
+                            SaveGameManager.newSaveGame();
+                            Services.getScreenManager().pushScreen(new WorldScreen(25, 1, false));
+                        }
+                    })
                 ));
             }
         });

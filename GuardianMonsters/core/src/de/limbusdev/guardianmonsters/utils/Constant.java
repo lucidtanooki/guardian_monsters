@@ -22,6 +22,7 @@ public class Constant {
     public static final boolean DEBUGGING_ON = false;
     public final static DebugMode DEBUG_MODE = DebugMode.INVENTORY;
     public final static int startMap = 25;
+    public final static int startX = 1, startY = 1;
 
     // ............................................................................ BATTLE BALANCING
     public final static float LVL_EXPONENT = 1.5f;

@@ -1,7 +1,9 @@
 package de.limbusdev.guardianmonsters.model.gamestate;
 
+import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.ObjectMap;
 
+import de.limbusdev.guardianmonsters.model.items.Inventory;
 import de.limbusdev.guardianmonsters.model.monsters.Monster;
 import de.limbusdev.guardianmonsters.utils.GameState;
 
@@ -20,52 +22,49 @@ public class SerializableGameState {
     public SerializableProgress progress;
 
 
-    /**
-     * For Serialization Only
-     */
-    public SerializableGameState() {
-
-    }
+    @ForSerializationOnly
+    public SerializableGameState() {}
 
     /**
      * Creates a serializable game state object from a given {@link GameState}
      * @param gameState
      * @return
      */
-    public static SerializableGameState convertToSerializable(GameState gameState) {
-        SerializableGameState state = new SerializableGameState();
+    public SerializableGameState(GameState gameState) {
+        position = new SerializablePosition(gameState.gridx, gameState.gridy, gameState.map);
 
-        SerializablePosition position =
-            new SerializablePosition(gameState.gridx, gameState.gridy, gameState.map);
-        state.position = position;
+        inventory = new SerializableInventory(gameState.inventory);
 
-        SerializableInventory inventory = new SerializableInventory();
-        state.inventory = inventory;
-
-        SerializableMonster[] team = new SerializableMonster[7];
+        team = new SerializableMonster[7];
         for(ObjectMap.Entry<Integer,Monster> entry : gameState.team.entries()) {
-            SerializableMonster monster = new SerializableMonster();
+            SerializableMonster monster = new SerializableMonster(entry.value);
             team[entry.key] = monster;
         }
-        state.team = team;
 
-        SerializableMonster[] allBannedGuardians = new SerializableMonster[300];
-        state.allBannedGuardians = allBannedGuardians;
+        allBannedGuardians = new SerializableMonster[300];
 
-        SerializableProgress progress = new SerializableProgress(1);
-        state.progress = progress;
-
-        return state;
+        progress = new SerializableProgress(1);
     }
 
     public static GameState deserialize(SerializableGameState state) {
-        GameState gameState = new GameState();
 
-        gameState.map = state.position.map;
-        gameState.gridx = state.position.x;
-        gameState.gridy = state.position.y;
+        ArrayMap<Integer,Monster> team = new ArrayMap<>();
+        for(int i=0; i<state.team.length; i++) {
+            if(state.team[i] != null) {
+                team.put(i, SerializableMonster.deserialize(state.team[i]));
+            }
+        }
 
-        gameState.maxTeamSizeInBattle = state.progress.maxBattleTeamSize;
+        Inventory inventory = SerializableInventory.deserialize(state.inventory);
+
+        GameState gameState = new GameState(
+            state.position.map,
+            state.position.x,
+            state.position.y,
+            state.progress.maxBattleTeamSize,
+            team,
+            inventory
+        );
 
         return gameState;
     }

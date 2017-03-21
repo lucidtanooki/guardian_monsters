@@ -9,6 +9,7 @@ import de.limbusdev.guardianmonsters.fwmengine.battle.control.BattleSystem;
 import de.limbusdev.guardianmonsters.model.MonsterDB;
 import de.limbusdev.guardianmonsters.model.abilities.Ability;
 import de.limbusdev.guardianmonsters.model.abilities.AbilityGraph;
+import de.limbusdev.guardianmonsters.model.gamestate.SerializableAbilityGraph;
 import de.limbusdev.guardianmonsters.model.gamestate.SerializableMonster;
 
 /**
@@ -21,12 +22,12 @@ public class Monster extends Signal<Monster> implements Listener<Stat> {
     public static int INSTANCECOUNTER=0;
 
     // .................................................................................. ATTRIBUTES
-    public int INSTANCE_ID;
-    public int ID;
+    public final int INSTANCE_ID;
+    public final int ID;
 
-    public MonsterData data;
-    public Stat stat;
-    public String nickname;
+    public final MonsterData data;
+    public final Stat stat;
+    public final String nickname;
 
     public AbilityGraph abilityGraph;
 
@@ -56,14 +57,16 @@ public class Monster extends Signal<Monster> implements Listener<Stat> {
 
     /**
      * For Serialization Only!
-     * @param serializableMonster
      */
-    public Monster (SerializableMonster serializableMonster) {
+    public Monster (int ID, String nickname, AbilityGraph abilityGraph, Stat stat) {
         this.INSTANCE_ID = INSTANCECOUNTER;
         INSTANCECOUNTER++;
 
-        this.ID = serializableMonster.ID;
-        this.nickname = serializableMonster.nickname;
+        this.ID = ID;
+        this.nickname = nickname;
+        this.data = MonsterDB.getData(ID);
+        this.stat = stat;
+        this.abilityGraph = abilityGraph;
     }
 
 

@@ -82,11 +82,11 @@ public class EntityFactory {
         hero.add(collider);
 
         // Game State
-        GameState gameState = SaveGameManager.loadSaveGame();
+        GameState gameState = SaveGameManager.getCurrentGameState();
         hero.add(new SaveGameComponent(gameState));
         if(restoreSave) {
-            position.x = gameState.x;
-            position.y = gameState.y;
+            position.x = gameState.gridx*Constant.TILE_SIZE;
+            position.y = gameState.gridy*Constant.TILE_SIZE;
             position.onGrid = new IntVec2(gameState.gridx, gameState.gridy);
         }
 

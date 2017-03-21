@@ -78,18 +78,57 @@ public class Stat extends Signal<Stat> {
 
     // ................................................................................. CONSTRUCTOR
 
-    public Stat() {}
+    /**
+     * For Serialization only!
+     */
+    public Stat(int level, int abilityLevels, int EXP, int character, BaseStat base,
+                int HP, int MP, int PStr, int PDef, int MStr, int MDef, int speed,
+                int HPmax, int MPmax, int PStrMax, int PDefMax, int MStrMax, int MDefMax, int speedMax,
+                Equipment hands, Equipment head, Equipment body, Equipment feet) {
+        this.level = level;
+        this.abilityLevels = abilityLevels;
+        this.EXP = EXP;
+        this.character = character;
+        this.base = base;
+        this.HP = HP;
+        this.MP = MP;
+        this.PStr = PStr;
+        this.PDef = PDef;
+        this.MStr = MStr;
+        this.MDef = MDef;
+        this.Speed = speed;
+        this.HPmax = HPmax;
+        this.MPmax = MPmax;
+        this.PStrMax = PStrMax;
+        this.PDefMax = PDefMax;
+        this.MStrMax = MStrMax;
+        this.MDefMax = MDefMax;
+        this.SpeedMax = speedMax;
+        this.hands = hands;
+        this.head = head;
+        this.body = body;
+        this.feet = feet;
+        lvlUpReport = new LevelUpReport(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
+    }
+
+    public Stat(int level, BaseStat baseStat, int character) {
+        construct(level, baseStat, character);
+    }
 
     public Stat(int level, BaseStat baseStat) {
-
-        this.base = baseStat;
-
+        int character;
         // Choose a random character
         switch(MathUtils.random(0,2)) {
             case 2:  character = Character.VIVACIOUS; break;
             case 1:  character = Character.PRUDENT; break;
             default: character = Character.BALANCED; break;
         }
+        construct(level, baseStat, character);
+    }
+
+    private void construct(int level, BaseStat baseStat, int character) {
+        this.base = baseStat;
+        this.character = character;
 
         this.level = level;
         this.abilityLevels = level-1;
@@ -111,7 +150,6 @@ public class Stat extends Signal<Stat> {
         this.EXP = 0;
 
         lvlUpReport = new LevelUpReport(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
-
     }
 
     // ..................................................................................... METHODS

@@ -24,17 +24,20 @@ public class Node extends Signal<Node> {
     public Type type;
     private State state;
 
-    /**
-     * For Serialization only!
-     */
-    public Node(){}
-
     public Node(int x, int y, int ID) {
         this.y = y;
         this.x = x;
         this.ID = ID;
         this.type = Type.EMPTY;
         this.state = State.DISABLED;
+    }
+
+    public Node(int x, int y, int ID, Type type, State state) {
+        this.x = x;
+        this.y = y;
+        this.ID = ID;
+        this.type = type;
+        this.state = state;
     }
 
     public void activate() {

@@ -18,16 +18,18 @@ import com.esotericsoftware.kryo.Serializer;
 import com.esotericsoftware.kryo.io.Input;
 import com.esotericsoftware.kryo.io.Output;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.util.Iterator;
 
+import de.limbusdev.guardianmonsters.fwmengine.battle.model.BattleFactory;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Components;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PositionComponent;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.SaveGameComponent;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TeamComponent;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.GameArea;
+import de.limbusdev.guardianmonsters.model.ItemDB;
+import de.limbusdev.guardianmonsters.model.gamestate.SerializableGameState;
+import de.limbusdev.guardianmonsters.model.items.Inventory;
+import de.limbusdev.guardianmonsters.utils.Constant;
 import de.limbusdev.guardianmonsters.utils.GameState;
 
 
@@ -57,6 +59,8 @@ public class SaveGameManager extends EntitySystem {
         gameState = Components.saveGame.get(savableEntities.first()).gameState;
         gameState.map = this.gameArea.areaID;
         gameState.team = Components.team.get(savableEntities.first()).monsters;
+        gameState.gridx = Components.position.get(savableEntities.first()).onGrid.x;
+        gameState.gridy = Components.position.get(savableEntities.first()).onGrid.y;
     }
 
     public static GameState getCurrentGameState() {
@@ -74,8 +78,6 @@ public class SaveGameManager extends EntitySystem {
         for (Entity entity : savableEntities) {
             PositionComponent position = Components.getPositionComponent(entity);
             SaveGameComponent saveGame = Components.saveGame.get(entity);
-            saveGame.gameState.x = position.x;
-            saveGame.gameState.y = position.y;
             saveGame.gameState.gridx = position.onGrid.x;
             saveGame.gameState.gridy = position.onGrid.y;
         }
@@ -88,15 +90,44 @@ public class SaveGameManager extends EntitySystem {
         Kryo kryo = new Kryo();
         addLibGdxSerializers(kryo);
         try {
+            SerializableGameState state = new SerializableGameState(gameState);
             FileHandle handle = Gdx.files.local("gamestate/gamestate0.sav");
             Output output = new Output(handle.write(false));
-            kryo.writeObject(output, gameState);
+            kryo.writeObject(output, state);
             output.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         System.out.println(gameState);
+    }
+
+    public static GameState newSaveGame() {
+        // Inventory
+        Inventory inventory = new Inventory();
+        inventory.putItemInInventory(ItemDB.getInstance().getItem("bread"));
+        inventory.putItemInInventory(ItemDB.getInstance().getItem("bread"));
+        inventory.putItemInInventory(ItemDB.getInstance().getItem("bread"));
+        inventory.putItemInInventory(ItemDB.getInstance().getItem("bread"));
+        inventory.putItemInInventory(ItemDB.getInstance().getItem("potion-blue"));
+        inventory.putItemInInventory(ItemDB.getInstance().getItem("potion-blue"));
+        inventory.putItemInInventory(ItemDB.getInstance().getItem("potion-blue"));
+        inventory.putItemInInventory(ItemDB.getInstance().getItem("angel-tear"));
+        inventory.putItemInInventory(ItemDB.getInstance().getItem("sword-wood"));
+        inventory.putItemInInventory(ItemDB.getInstance().getItem("claws-wood"));
+
+        TeamComponent team = new TeamComponent();
+        team.monsters.put(0, BattleFactory.getInstance().createMonster(1));
+
+        gameState = new GameState(
+            Constant.startMap,
+            Constant.startX,
+            Constant.startY,
+            1,
+            team.monsters,
+            inventory);
+
+        return gameState;
     }
 
     /**
@@ -112,7 +143,8 @@ public class SaveGameManager extends EntitySystem {
             try {
                 FileHandle handle = Gdx.files.local("gamestate/gamestate0.sav");
                 Input input = new Input(handle.read());
-                gameState = kryo.readObject(input, GameState.class);
+                SerializableGameState state = kryo.readObject(input, SerializableGameState.class);
+                gameState = SerializableGameState.deserialize(state);
                 System.out.println(gameState.toString());
                 input.close();
             } catch (Exception e) {

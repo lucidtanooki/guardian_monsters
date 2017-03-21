@@ -2,6 +2,8 @@ package de.limbusdev.guardianmonsters.utils;
 
 import com.badlogic.gdx.utils.ArrayMap;
 
+import de.limbusdev.guardianmonsters.model.gamestate.ForSerializationOnly;
+import de.limbusdev.guardianmonsters.model.items.Inventory;
 import de.limbusdev.guardianmonsters.model.monsters.Monster;
 
 
@@ -10,25 +12,30 @@ import de.limbusdev.guardianmonsters.model.monsters.Monster;
  */
 public class GameState {
     /* ............................................................................ ATTRIBUTES .. */
-    public int x,y,gridx,gridy,map;
+    public int gridx,gridy,map;
     public ArrayMap<Integer,Monster> team;
+    public Inventory inventory;
     public int maxTeamSizeInBattle;
     /* ........................................................................... CONSTRUCTOR .. */
 
+    @ForSerializationOnly
+    public GameState(int map, int x, int y, int maxTeamSizeInBattle,
+                     ArrayMap<Integer, Monster> team, Inventory inventory) {
+        this.map = map;
+        this.gridx = x;
+        this.gridy = y;
+        this.maxTeamSizeInBattle = maxTeamSizeInBattle;
+        this.team = team;
+        this.inventory = inventory;
+    }
+
     public GameState(int x, int y, int map) {
-        this.x = x;
-        this.y = y;
-        this.gridx = x/ Constant.TILE_SIZE;
-        this.gridy = y/ Constant.TILE_SIZE;
+        this.gridx = x;
+        this.gridy = y;
         this.map = map;
         this.team = new ArrayMap<>();
         this.maxTeamSizeInBattle = 1;
     }
-
-    /**
-     * For Serialization only!
-     */
-    public GameState() {}
 
     public String toString() {
         String out = "";

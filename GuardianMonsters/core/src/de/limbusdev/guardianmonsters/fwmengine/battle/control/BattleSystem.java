@@ -12,9 +12,10 @@ import de.limbusdev.guardianmonsters.fwmengine.battle.model.MonsterSpeedComparat
 import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager;
 import de.limbusdev.guardianmonsters.model.abilities.Ability;
 import de.limbusdev.guardianmonsters.model.monsters.Monster;
+import de.limbusdev.guardianmonsters.model.monsters.Team;
 import de.limbusdev.guardianmonsters.utils.Constant;
 import de.limbusdev.guardianmonsters.utils.DebugOutput;
-import de.limbusdev.guardianmonsters.utils.GameState;
+import de.limbusdev.guardianmonsters.model.gamestate.GameState;
 
 /**
  * Created by georg on 21.11.16.
@@ -27,8 +28,8 @@ public class BattleSystem extends Observable {
     public static final boolean LEFT = true;
     public static final boolean RIGHT = false;
 
-    private ArrayMap<Integer,Monster> leftTeam;
-    private ArrayMap<Integer,Monster> rightTeam;
+    private Team leftTeam;
+    private Team rightTeam;
 
     private ArrayMap<Integer,Monster> leftInBattle;
     private ArrayMap<Integer,Monster> rightInBattle;
@@ -51,7 +52,7 @@ public class BattleSystem extends Observable {
     // Status values for GUI
 
 
-    public BattleSystem(ArrayMap<Integer,Monster> left, ArrayMap<Integer,Monster> right, CallbackHandler callbackHandler) {
+    public BattleSystem(Team left, Team right, CallbackHandler callbackHandler) {
 
         this.callbackHandler = callbackHandler;
 
@@ -80,14 +81,7 @@ public class BattleSystem extends Observable {
      * @param team
      * @param side
      */
-    private void addFitMonstersToBattleField(ArrayMap<Integer,Monster> team, boolean side) {
-        GameState gameState = SaveGameManager.getCurrentGameState();
-        int teamSize = team.size > 3 ? 3 : team.size;
-        if(side == LEFT && teamSize > gameState.maxTeamSizeInBattle) {
-            teamSize = gameState.maxTeamSizeInBattle;
-        }
-        int counter = 0;
-        int actualTeamSize = 0;
+    private void addFitMonstersToBattleField(Team team, boolean side) {
 
         ArrayMap<Integer,Monster> inBattle;
         if(side == LEFT) {
@@ -96,16 +90,7 @@ public class BattleSystem extends Observable {
             inBattle = rightInBattle;
         }
 
-        while(actualTeamSize < teamSize && counter < team.size) {
-            Monster m = team.get(counter);
-            if(m.stat.isFit()) {
-                // Add monster to team
-                nextRound.add(m);
-                inBattle.put(actualTeamSize,m);
-                actualTeamSize++;
-            }
-            counter++;
-        }
+        inBattle.putAll(team.getFitTeam());
     }
 
 

@@ -42,9 +42,9 @@ public class GameStateDebugger {
         mon.abilityGraph.activateNode(4);
         mon.abilityGraph.activateNode(3);
         mon.abilityGraph.activateNode(7);
-        herTeam.monsters.put(0,mon);
-        herTeam.monsters.put(1,BattleFactory.getInstance().createMonster(2));
-        herTeam.monsters.put(2,BattleFactory.getInstance().createMonster(3));
+        herTeam.team.put(0,mon);
+        herTeam.team.put(1,BattleFactory.getInstance().createMonster(2));
+        herTeam.team.put(2,BattleFactory.getInstance().createMonster(3));
 
         Inventory inventory = new Inventory();
 
@@ -79,15 +79,15 @@ public class GameStateDebugger {
 
     private void setUpTestBattle() {
         TeamComponent heroTeam = new TeamComponent();
-        heroTeam.monsters.put(0,BattleFactory.getInstance().createMonster(1));
-        heroTeam.monsters.put(1,BattleFactory.getInstance().createMonster(2));
-        heroTeam.monsters.put(2,BattleFactory.getInstance().createMonster(3));
-        heroTeam.monsters.get(0).abilityGraph.activateNode(13);
-        heroTeam.monsters.get(0).abilityGraph.setActiveAbility(6,1);
+        heroTeam.team.put(0,BattleFactory.getInstance().createMonster(1));
+        heroTeam.team.put(1,BattleFactory.getInstance().createMonster(2));
+        heroTeam.team.put(2,BattleFactory.getInstance().createMonster(3));
+        heroTeam.team.get(0).abilityGraph.activateNode(13);
+        heroTeam.team.get(0).abilityGraph.setActiveAbility(6,1);
         TeamComponent oppTeam = new TeamComponent();
-        oppTeam.monsters.put(0,BattleFactory.getInstance().createMonster(4));
-        oppTeam.monsters.put(1,BattleFactory.getInstance().createMonster(5));
-        oppTeam.monsters.put(2,BattleFactory.getInstance().createMonster(6));
+        oppTeam.team.put(0,BattleFactory.getInstance().createMonster(4));
+        oppTeam.team.put(1,BattleFactory.getInstance().createMonster(5));
+        oppTeam.team.put(2,BattleFactory.getInstance().createMonster(6));
 
 
         Inventory inventory = new Inventory();
@@ -109,7 +109,7 @@ public class GameStateDebugger {
 
     private void setUpTestWorld() {
         if(SaveGameManager.doesGameSaveExist()) {
-            GameState state = SaveGameManager.loadSaveGame();
+            de.limbusdev.guardianmonsters.model.gamestate.GameState state = SaveGameManager.loadSaveGame();
             game.setScreen(new WorldScreen(state.map, 1, true));
         } else
             game.setScreen(new WorldScreen(Constant.startMap, 1, false));
@@ -121,15 +121,15 @@ public class GameStateDebugger {
 
     private void TestBattleSystem() {
         TeamComponent heroTeam = new TeamComponent();
-        heroTeam.monsters.put(0,BattleFactory.getInstance().createMonster(1));
-        heroTeam.monsters.put(1,BattleFactory.getInstance().createMonster(2));
-        heroTeam.monsters.put(2,BattleFactory.getInstance().createMonster(3));
+        heroTeam.team.put(0,BattleFactory.getInstance().createMonster(1));
+        heroTeam.team.put(1,BattleFactory.getInstance().createMonster(2));
+        heroTeam.team.put(2,BattleFactory.getInstance().createMonster(3));
         TeamComponent oppTeam = new TeamComponent();
-        oppTeam.monsters.put(0,BattleFactory.getInstance().createMonster(4));
-        oppTeam.monsters.put(1,BattleFactory.getInstance().createMonster(5));
-        oppTeam.monsters.put(2,BattleFactory.getInstance().createMonster(6));
+        oppTeam.team.put(0,BattleFactory.getInstance().createMonster(4));
+        oppTeam.team.put(1,BattleFactory.getInstance().createMonster(5));
+        oppTeam.team.put(2,BattleFactory.getInstance().createMonster(6));
 
-        BattleSystem bs = new BattleSystem(heroTeam.monsters, oppTeam.monsters, new BattleSystem.CallbackHandler() {});
+        BattleSystem bs = new BattleSystem(heroTeam.team, oppTeam.team, new BattleSystem.CallbackHandler() {});
 
         boolean enemyFit = true;
         while(enemyFit) {
@@ -137,7 +137,7 @@ public class GameStateDebugger {
             Monster m = bs.getActiveMonster();
             int att = MathUtils.random(0,m.abilityGraph.learntAbilities.size-1);
             Array<Monster> targets = new Array<Monster>();
-            for(Monster h : oppTeam.monsters.values()) {
+            for(Monster h : oppTeam.team.values()) {
                 if(h.stat.isFit()) {
                     targets.add(h);
                 }

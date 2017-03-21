@@ -5,7 +5,6 @@ import com.badlogic.gdx.utils.ObjectMap;
 
 import de.limbusdev.guardianmonsters.model.items.Inventory;
 import de.limbusdev.guardianmonsters.model.monsters.Monster;
-import de.limbusdev.guardianmonsters.utils.GameState;
 
 /**
  * SerializableGameState
@@ -20,6 +19,7 @@ public class SerializableGameState {
     public SerializableMonster[] team;
     public SerializableMonster[] allBannedGuardians;
     public SerializableProgress progress;
+    public int activeTeamSize;
 
 
     @ForSerializationOnly
@@ -44,6 +44,8 @@ public class SerializableGameState {
         allBannedGuardians = new SerializableMonster[300];
 
         progress = new SerializableProgress(1);
+
+        activeTeamSize = gameState.activeTeamSize;
     }
 
     public static GameState deserialize(SerializableGameState state) {
@@ -61,7 +63,8 @@ public class SerializableGameState {
             state.position.map,
             state.position.x,
             state.position.y,
-            state.progress.maxBattleTeamSize,
+            state.progress.maxTeamSize,
+            state.activeTeamSize,
             team,
             inventory
         );

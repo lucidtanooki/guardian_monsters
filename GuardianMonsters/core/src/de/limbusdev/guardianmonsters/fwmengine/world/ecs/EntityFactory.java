@@ -28,7 +28,7 @@ import de.limbusdev.guardianmonsters.fwmengine.battle.model.BattleFactory;
 import de.limbusdev.guardianmonsters.model.items.Inventory;
 import de.limbusdev.guardianmonsters.model.ItemDB;
 import de.limbusdev.guardianmonsters.utils.Constant;
-import de.limbusdev.guardianmonsters.utils.GameState;
+import de.limbusdev.guardianmonsters.model.gamestate.GameState;
 import de.limbusdev.guardianmonsters.utils.UnitConverter;
 
 
@@ -92,9 +92,9 @@ public class EntityFactory {
 
         // Add Team
         TeamComponent team = new TeamComponent();
-        team.monsters.put(0,BattleFactory.getInstance().createMonster(1));
+        team.team.put(0,BattleFactory.getInstance().createMonster(1));
         if(restoreSave) {
-            team.monsters = gameState.team;
+            team.team = gameState.team;
         }
         hero.add(team);
 

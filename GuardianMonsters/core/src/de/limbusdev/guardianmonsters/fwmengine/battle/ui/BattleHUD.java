@@ -129,7 +129,7 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
         this.rightTeam = opponentTeam;
 
         // initialize independent battle system
-        battleSystem = new BattleSystem(heroTeam.monsters,opponentTeam.monsters, battleSystemCallbacks);
+        battleSystem = new BattleSystem(heroTeam.team,opponentTeam.team, battleSystemCallbacks);
         battleQueueWidget.update(battleSystem.getCurrentRound(),battleSystem.getNextRound());
 
         // initialize attack menu with active monster
@@ -236,7 +236,7 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
 
             @Override
             public void onBagButton() {
-                stage.addActor(new ItemChoice(Services.getUI().getInventorySkin(), inventory, leftTeam.monsters, battleSystem));
+                stage.addActor(new ItemChoice(Services.getUI().getInventorySkin(), inventory, leftTeam.team, battleSystem));
             }
 
             @Override
@@ -255,7 +255,7 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
             @Override
             public void onRunButton() {
                 System.out.println("Input: Run Button");
-                if(MonsterManager.tryToRun(leftTeam.monsters, rightTeam.monsters)) {
+                if(MonsterManager.tryToRun(leftTeam.team, rightTeam.team)) {
                     battleStateSwitcher.toEscapeSuccessInfo();
                 } else {
                     battleStateSwitcher.toEscapeFailInfo();
@@ -282,7 +282,7 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
             @Override
             public void onBackButton() {
                 boolean teamOk = false;
-                for(Monster m : leftTeam.monsters.values()) {
+                for(Monster m : leftTeam.team.values()) {
                     if(m.stat.isFit()) {
                         teamOk = true || teamOk;
                     } else {
@@ -429,7 +429,7 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
             @Override
             public void onButtonNr(int nr) {
                 System.out.println("Teammember " + nr);
-                battleSystem.replaceActiveMonster(leftTeam.monsters.get(nr));
+                battleSystem.replaceActiveMonster(leftTeam.team.get(nr));
             }
         };
     }

@@ -41,10 +41,10 @@ public class InventoryScreen implements Screen, MainToolBar.Controller {
         assembleToolbar();
 
         views.put("team",       new TeamSubMenu(skin, team));
-        views.put("items",      new ItemsSubMenu(skin, inventory, team.monsters));
-        views.put("ability",    new AbilityMapSubMenu(skin, team.monsters));
+        views.put("items",      new ItemsSubMenu(skin, inventory, team.team));
+        views.put("ability",    new AbilityMapSubMenu(skin, team.team));
         views.put("key",        new KeyItemsSubMenu(skin, inventory));
-        views.put("abilityChoice", new AbilityChoiceSubMenu(skin, team.monsters));
+        views.put("abilityChoice", new AbilityChoiceSubMenu(skin, team.team));
 
         stage.addActor(views.get("team"));
     }

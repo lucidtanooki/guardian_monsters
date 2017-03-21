@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 
@@ -17,6 +18,7 @@ import de.limbusdev.guardianmonsters.fwmengine.menus.ui.team.StatusPentagonWidge
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.team.TeamCircleWidget;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TeamComponent;
 import de.limbusdev.guardianmonsters.model.monsters.Monster;
+import de.limbusdev.guardianmonsters.model.monsters.Team;
 import de.limbusdev.guardianmonsters.utils.Constant;
 
 /**
@@ -31,15 +33,15 @@ public class TeamSubMenu extends AInventorySubMenu {
     private Image blackOverlay;
     private TeamCircleWidget circleWidget;
     private ATeamChoiceWidget.Callbacks choiceHandler, swapHandler;
-    private TeamComponent team;
+    private Team team;
     private ImageButton joinsBattleButton;
     private Group monsterChoice;
     private ImageButton.ImageButtonStyle lockedButtonStyle, normalButtonStyle;
 
-    public TeamSubMenu(Skin skin, TeamComponent guardians) {
+    public TeamSubMenu(Skin skin, TeamComponent teamComp) {
         super(skin);
         Media media = Services.getMedia();
-        this.team = guardians;
+        this.team = teamComp.team;
 
         monsterChoice = new Group();
         monsterChoice.setSize(140, Constant.HEIGHT-36);
@@ -61,13 +63,13 @@ public class TeamSubMenu extends AInventorySubMenu {
                 System.out.println("Clicked " + position);
                 int oldPos = circleWidget.getOldPosition();
                 if(position != oldPos) {
-                    Monster currentMonster = team.monsters.get(oldPos);
-                    Monster monsterToSwapWith = team.monsters.get(position);
+                    Monster currentMonster = team.get(oldPos);
+                    Monster monsterToSwapWith = team.get(position);
 
-                    team.monsters.put(oldPos, monsterToSwapWith);
-                    team.monsters.put(position, currentMonster);
+                    team.put(oldPos, monsterToSwapWith);
+                    team.put(position, currentMonster);
 
-                    circleWidget.init(team.monsters);
+                    circleWidget.init(team);
                     showGuardianInformation(position);
                 }
                 circleWidget.setHandler(choiceHandler);
@@ -75,7 +77,7 @@ public class TeamSubMenu extends AInventorySubMenu {
             }
         };
 
-        circleWidget = new TeamCircleWidget(skin, team.monsters, choiceHandler);
+        circleWidget = new TeamCircleWidget(skin, team, choiceHandler);
         circleWidget.setPosition(1,40,Align.bottomLeft);
         monsterChoice.addActor(circleWidget);
 
@@ -96,15 +98,15 @@ public class TeamSubMenu extends AInventorySubMenu {
 
         joinsBattleButton = new ImageButton(skin, "button-check");
         joinsBattleButton.setPosition(140-8,8,Align.bottomRight);
-        joinsBattleButton.addListener(new com.badlogic.gdx.scenes.scene2d.utils.ClickListener() {
+        joinsBattleButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                if(joinsBattleButton.isChecked())
-                    team.activeInCombat+=1;
-                else
-                    team.activeInCombat-=1;
-
-                System.out.println("Now active in combat: " + team.activeInCombat);
+                if(joinsBattleButton.isChecked()) {
+                    team.setActiveTeamSize(team.getActiveTeamSize() + 1);
+                } else {
+                    team.setActiveTeamSize(team.getActiveTeamSize() - 1);
+                }
+                System.out.println("Now active in combat: " + team.getActiveTeamSize());
             }
         });
         normalButtonStyle = joinsBattleButton.getStyle();
@@ -113,7 +115,7 @@ public class TeamSubMenu extends AInventorySubMenu {
 
         monsterStats = new MonsterStatusInventoryWidget(skin);
         monsterStats.setPosition(140+2,0,Align.bottomLeft);
-        monsterStats.init(team.monsters.get(0));
+        monsterStats.init(team.get(0));
 
 
         Group monsterView = new Group();
@@ -141,25 +143,25 @@ public class TeamSubMenu extends AInventorySubMenu {
     }
 
     private void showGuardianInformation(int teamPosition) {
-        monsterStats.init(team.monsters.get(teamPosition));
-        monsterImg.setDrawable(new TextureRegionDrawable(Services.getMedia().getMonsterSprite(team.monsters.get(teamPosition).ID)));
-        statPent.init(team.monsters.get(teamPosition));
+        monsterStats.init(team.get(teamPosition));
+        monsterImg.setDrawable(new TextureRegionDrawable(Services.getMedia().getMonsterSprite(team.get(teamPosition).ID)));
+        statPent.init(team.get(teamPosition));
         joinsBattleButton.remove();
         joinsBattleButton.setChecked(false);
         joinsBattleButton.setStyle(normalButtonStyle);
 
         // If the shown position belongs to the range given by activeInCombat & within 0-2
-        if(teamPosition <= team.activeInCombat && teamPosition <3 && teamPosition < 3) {
+        if(teamPosition <= team.getActiveTeamSize() && teamPosition <3 && teamPosition < 3) {
             // TODO take max team size into account
             joinsBattleButton.setTouchable(Touchable.enabled);
             monsterChoice.addActor(joinsBattleButton);
 
             // if shown monster is in the range of active monsters
-            if(teamPosition < team.activeInCombat) {
+            if(teamPosition < team.getActiveTeamSize()) {
                 joinsBattleButton.setChecked(true);
             }
             // the shown monster is at position 0 or not the last active monster
-            if(teamPosition == 0 || teamPosition < team.activeInCombat -1) {
+            if(teamPosition == 0 || teamPosition < team.getActiveTeamSize() -1) {
                 joinsBattleButton.setTouchable(Touchable.disabled);
                 joinsBattleButton.setStyle(lockedButtonStyle);
             }

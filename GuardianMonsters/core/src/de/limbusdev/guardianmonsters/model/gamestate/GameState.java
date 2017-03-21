@@ -1,10 +1,11 @@
-package de.limbusdev.guardianmonsters.utils;
+package de.limbusdev.guardianmonsters.model.gamestate;
 
 import com.badlogic.gdx.utils.ArrayMap;
 
 import de.limbusdev.guardianmonsters.model.gamestate.ForSerializationOnly;
 import de.limbusdev.guardianmonsters.model.items.Inventory;
 import de.limbusdev.guardianmonsters.model.monsters.Monster;
+import de.limbusdev.guardianmonsters.model.monsters.Team;
 
 
 /**
@@ -13,35 +14,30 @@ import de.limbusdev.guardianmonsters.model.monsters.Monster;
 public class GameState {
     /* ............................................................................ ATTRIBUTES .. */
     public int gridx,gridy,map;
-    public ArrayMap<Integer,Monster> team;
+    public Team team;
     public Inventory inventory;
-    public int maxTeamSizeInBattle;
+    public int maxTeamSize;
+    public int activeTeamSize;
     /* ........................................................................... CONSTRUCTOR .. */
 
     @ForSerializationOnly
-    public GameState(int map, int x, int y, int maxTeamSizeInBattle,
+    public GameState(int map, int x, int y, int maxTeamSize, int activeTeamSize,
                      ArrayMap<Integer, Monster> team, Inventory inventory) {
         this.map = map;
         this.gridx = x;
         this.gridy = y;
-        this.maxTeamSizeInBattle = maxTeamSizeInBattle;
-        this.team = team;
+        this.maxTeamSize = maxTeamSize;
+        this.activeTeamSize = activeTeamSize;
+        this.team = new Team(7,maxTeamSize,activeTeamSize);
+        this.team.putAll(team);
         this.inventory = inventory;
-    }
-
-    public GameState(int x, int y, int map) {
-        this.gridx = x;
-        this.gridy = y;
-        this.map = map;
-        this.team = new ArrayMap<>();
-        this.maxTeamSizeInBattle = 1;
     }
 
     public String toString() {
         String out = "";
         out += "== Current Game State ==\n";
         out += "Last position: (" + gridx + "|" + gridy + ")" + " at map " + map + "\n";
-        out += "Team Size: " + maxTeamSizeInBattle + "\n";
+        out += "Team Size: " + maxTeamSize + "\n";
         out += "Team:\n";
 
         for(Monster m : team.values()) {

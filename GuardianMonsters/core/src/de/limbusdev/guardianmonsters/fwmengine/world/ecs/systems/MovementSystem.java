@@ -86,7 +86,7 @@ public class MovementSystem extends EntitySystem {
                 System.out.println("Entered Healing Area");
                 TeamComponent tc = Components.team.get(hero);
                 boolean teamHurt = false;
-                for(Monster m : tc.monsters.values())
+                for(Monster m : tc.team.values())
                     if(m.stat.getHP() < m.stat.getHPmax()) {
                         m.stat.setHP(m.stat.getHPmax());
                     }

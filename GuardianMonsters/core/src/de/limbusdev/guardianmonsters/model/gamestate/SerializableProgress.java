@@ -8,11 +8,11 @@ package de.limbusdev.guardianmonsters.model.gamestate;
 
 public class SerializableProgress {
 
-    public int maxBattleTeamSize;
+    public int maxTeamSize;
 
     public SerializableProgress() {}
 
-    public SerializableProgress(int maxBattleTeamSize) {
-        this.maxBattleTeamSize = maxBattleTeamSize;
+    public SerializableProgress(int maxTeamSize) {
+        this.maxTeamSize = maxTeamSize;
     }
 }

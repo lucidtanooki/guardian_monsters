@@ -30,7 +30,7 @@ import de.limbusdev.guardianmonsters.model.ItemDB;
 import de.limbusdev.guardianmonsters.model.gamestate.SerializableGameState;
 import de.limbusdev.guardianmonsters.model.items.Inventory;
 import de.limbusdev.guardianmonsters.utils.Constant;
-import de.limbusdev.guardianmonsters.utils.GameState;
+import de.limbusdev.guardianmonsters.model.gamestate.GameState;
 
 
 /**
@@ -58,7 +58,7 @@ public class SaveGameManager extends EntitySystem {
         savableEntities = engine.getEntitiesFor(saveGameComps);
         gameState = Components.saveGame.get(savableEntities.first()).gameState;
         gameState.map = this.gameArea.areaID;
-        gameState.team = Components.team.get(savableEntities.first()).monsters;
+        gameState.team.putAll(Components.team.get(savableEntities.first()).team);
         gameState.gridx = Components.position.get(savableEntities.first()).onGrid.x;
         gameState.gridy = Components.position.get(savableEntities.first()).onGrid.y;
     }
@@ -117,14 +117,14 @@ public class SaveGameManager extends EntitySystem {
         inventory.putItemInInventory(ItemDB.getInstance().getItem("claws-wood"));
 
         TeamComponent team = new TeamComponent();
-        team.monsters.put(0, BattleFactory.getInstance().createMonster(1));
+        team.team.put(0, BattleFactory.getInstance().createMonster(1));
 
         gameState = new GameState(
             Constant.startMap,
             Constant.startX,
             Constant.startY,
-            1,
-            team.monsters,
+            1,1,
+            team.team,
             inventory);
 
         return gameState;
@@ -151,7 +151,7 @@ public class SaveGameManager extends EntitySystem {
                 e.printStackTrace();
             }
         } else {
-            gameState = new GameState(1,1,25);
+            newSaveGame();
         }
 
         return gameState;

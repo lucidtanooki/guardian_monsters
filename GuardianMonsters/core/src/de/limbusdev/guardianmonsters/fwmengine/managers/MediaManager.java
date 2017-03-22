@@ -251,8 +251,9 @@ public class MediaManager implements Media {
     }
 
     public Animation<AtlasRegion> getObjectAnimation(String id) {
-        Animation<AtlasRegion> anim = new Animation<AtlasRegion>(1f, assets.get(animations, TextureAtlas.class)
-            .findRegions(id), Animation.PlayMode.LOOP);
+        TextureAtlas atlas = assets.get(animations, TextureAtlas.class);
+        Array<AtlasRegion> regions = atlas.findRegions(id);
+        Animation<AtlasRegion> anim = new Animation<>(1f, regions, Animation.PlayMode.LOOP);
         return anim;
     }
 

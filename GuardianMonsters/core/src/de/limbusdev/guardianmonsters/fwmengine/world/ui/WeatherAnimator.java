@@ -87,7 +87,7 @@ public class WeatherAnimator {
             fogRenderer = new FogRenderer(map,1);
             rainAnimation = media.getObjectAnimation("rain0");
             rainAnimation.setFrameDuration(0.2f);
-            lastFrameIndex = rainAnimation.getKeyFrames().length-1;
+            lastFrameIndex = 8;
 
             randomRaindropOffset = new Array<>();
             randomRaindropPosition = new Array<>();
@@ -132,7 +132,7 @@ public class WeatherAnimator {
 
         @Override
         public void render(Batch batch, float elapsedTime) {
-            batch.draw(fogTexture, super.width, super.height);
+            batch.draw(fogTexture, 0, 0, super.width*Constant.TILE_SIZE, super.height*Constant.TILE_SIZE);
         }
     }
 

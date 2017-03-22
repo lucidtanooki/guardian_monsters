@@ -2,6 +2,8 @@ package de.limbusdev.guardianmonsters.fwmengine.world.ui;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.ArrayMap;
 
@@ -14,8 +16,8 @@ import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 
 public class AnimatedPersonSprite extends Sprite {
 
-    public ArrayMap<SkyDirection,Animation<TextureRegion>> animations; // characters animations (N,S,W,E)
-    public Animation<TextureRegion>         recentAnim; // alive animation
+    public ArrayMap<SkyDirection,Animation<AtlasRegion>> animations; // characters animations (N,S,W,E)
+    public Animation<AtlasRegion>         recentAnim; // alive animation
     public boolean visible;
     /* ........................................................................... CONSTRUCTOR .. */
     public AnimatedPersonSprite(boolean male, int index) {
@@ -36,7 +38,7 @@ public class AnimatedPersonSprite extends Sprite {
         construct(animations);
     }
 
-    private void construct(ArrayMap<SkyDirection,Animation<TextureRegion>> animations) {
+    private void construct(ArrayMap<SkyDirection,Animation<AtlasRegion>> animations) {
 
         this.visible = true;
 
@@ -55,11 +57,11 @@ public class AnimatedPersonSprite extends Sprite {
     }
 
     public void update(float elapsedTime) {
-        TextureRegion keyFrame = recentAnim.getKeyFrame(elapsedTime);
+        AtlasRegion keyFrame = recentAnim.getKeyFrame(elapsedTime);
         super.setRegion(keyFrame, 0, 0, keyFrame.getRegionWidth(), keyFrame.getRegionHeight());
     }
 
-    public Animation getAnimation() {
+    public Animation<AtlasRegion> getAnimation() {
         return recentAnim;
     }
 

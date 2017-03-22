@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.MathUtils;
@@ -75,7 +76,7 @@ public class WeatherAnimator {
     }
 
     private class RainRenderer extends AWeatherRenderer {
-        private Animation<TextureRegion> rainAnimation;
+        private Animation<TextureAtlas.AtlasRegion> rainAnimation;
         private FogRenderer fogRenderer;
         private Array<Float> randomRaindropOffset;
         private Array<IntVec2> randomRaindropPosition;
@@ -127,12 +128,11 @@ public class WeatherAnimator {
                 case 1:     fogTexture = media.getTexture(TextureAssets.weatherTextures[3]); break;
                 default:    fogTexture = media.getTexture(TextureAssets.weatherTextures[1]); break;
             }
-
         }
 
         @Override
         public void render(Batch batch, float elapsedTime) {
-            batch.draw(fogTexture, 0, 0, Constant.RES_X, Constant.RES_Y);
+            batch.draw(fogTexture, super.width, super.height);
         }
     }
 

@@ -3,6 +3,7 @@ package de.limbusdev.guardianmonsters.fwmengine.managers;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.ArrayMap;
@@ -27,17 +28,17 @@ public class NullMedia implements Media {
     }
 
     @Override
-    public ArrayMap<SkyDirection, Animation<TextureRegion>> getPersonAnimationSet(boolean gender, int index) {
+    public ArrayMap<SkyDirection, Animation<AtlasRegion>> getPersonAnimationSet(boolean gender, int index) {
         return null;
     }
 
     @Override
-    public ArrayMap<SkyDirection, Animation<TextureRegion>> getPersonAnimationSet(String name) {
+    public ArrayMap<SkyDirection, Animation<AtlasRegion>> getPersonAnimationSet(String name) {
         return null;
     }
 
     @Override
-    public ArrayMap<SkyDirection, Animation<TextureRegion>> getPersonAnimationSet(TextureAtlas atlas) {
+    public ArrayMap<SkyDirection, Animation<AtlasRegion>> getPersonAnimationSet(TextureAtlas atlas) {
         return null;
     }
 

@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 
@@ -25,10 +26,11 @@ public class MediaManager implements Media {
     private String monsterSpriteSheetFile;
     private String monsterMiniSpriteSheetFile;
     private String heroSpritesheetFile;
+    private String monsterFaceSpriteSheetFile;
 
     private Array<String> bgs;
     private Array<String> maleSprites, femaleSprites;
-    private Array<Animation> animatedTiles;
+    private Array<Animation<TextureRegion>> animatedTiles;
 
     
     /* ................,........................................................... CONSTRUCTOR .. */
@@ -39,7 +41,8 @@ public class MediaManager implements Media {
         String monsterSpriteSheetPath,
         String monsterMiniSpriteSheetPath,
         String heroSpriteSheetPath,
-        String animationsSpriteSheetPath
+        String animationsSpriteSheetPath,
+        String monsterFaceSpriteSheetPath
     ){
 
         this.assets = new AssetManager();
@@ -55,6 +58,7 @@ public class MediaManager implements Media {
         this.monsterSpriteSheetFile = monsterSpriteSheetPath;
         this.heroSpritesheetFile = heroSpriteSheetPath;
         this.animations = animationsSpriteSheetPath;
+        this.monsterFaceSpriteSheetFile = monsterFaceSpriteSheetPath;
 
         this.maleSprites = new Array<String>();
         for(int i=1;i<=9;i++)this.maleSprites.add("spritesheets/person" + i + "m.pack");
@@ -71,7 +75,7 @@ public class MediaManager implements Media {
 
 
         // Animated Tiles
-        animatedTiles = new Array<Animation>();
+        animatedTiles = new Array<Animation<TextureRegion>>();
 
         assets.finishLoading();
 
@@ -139,13 +143,13 @@ public class MediaManager implements Media {
     }
 
     @Override
-    public ArrayMap<SkyDirection, Animation> getPersonAnimationSet(boolean gender, int index) {
+    public ArrayMap<SkyDirection, Animation<TextureRegion>> getPersonAnimationSet(boolean gender, int index) {
         TextureAtlas textureAtlas = getPersonTextureAtlas(gender, index);
         return getPersonAnimationSet(textureAtlas);
     }
 
     @Override
-    public ArrayMap<SkyDirection, Animation> getPersonAnimationSet(String name) {
+    public ArrayMap<SkyDirection, Animation<TextureRegion>> getPersonAnimationSet(String name) {
 
         TextureAtlas textureAtlas;
         if(name.equals("hero")) {
@@ -158,8 +162,8 @@ public class MediaManager implements Media {
     }
 
     @Override
-    public ArrayMap<SkyDirection, Animation> getPersonAnimationSet(TextureAtlas textureAtlas) {
-        ArrayMap<SkyDirection, Animation> animations = new ArrayMap<SkyDirection,Animation>();
+    public ArrayMap<SkyDirection, Animation<TextureRegion>> getPersonAnimationSet(TextureAtlas textureAtlas) {
+        ArrayMap<SkyDirection, Animation<TextureRegion>> animations = new ArrayMap<SkyDirection,Animation<TextureRegion>>();
 
         animations.put(SkyDirection.N, new Animation(.15f, textureAtlas.findRegions("n"), Animation.PlayMode.LOOP));
         animations.put(SkyDirection.E, new Animation(.15f, textureAtlas.findRegions("e"), Animation.PlayMode.LOOP));
@@ -195,6 +199,14 @@ public class MediaManager implements Media {
         }
 
         return sprite;
+    }
+
+    @Override
+    public Image getMonsterFace(int id) {
+        TextureRegion region = assets.get(monsterFaceSpriteSheetFile, TextureAtlas.class).findRegion(Integer.toString(id));
+        Image faceImg = new Image(region);
+        faceImg.setSize(24,23);
+        return faceImg;
     }
 
     public TextureRegion getBackgroundTexture(int index) {

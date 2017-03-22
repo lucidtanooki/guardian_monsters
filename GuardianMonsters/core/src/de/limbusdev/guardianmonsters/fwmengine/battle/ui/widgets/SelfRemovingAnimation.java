@@ -6,13 +6,13 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 /**
- * Created by georg on 05.09.16.
+ * @author Georg Eckert 2016
  */
 public class SelfRemovingAnimation extends Image {
     private float animationTime=0;
-    private Animation animation;
+    private Animation<TextureRegion> animation;
 
-    public SelfRemovingAnimation(Animation animation) {
+    public SelfRemovingAnimation(Animation<TextureRegion> animation) {
         super(animation.getKeyFrame(0));
         this.animation = animation;
     }

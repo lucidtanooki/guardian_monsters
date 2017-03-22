@@ -11,7 +11,7 @@ import de.limbusdev.guardianmonsters.utils.Constant;
 /**
  * Created by Georg Eckert 2016
  */
-public abstract class ABattleHUD extends AHUD {
+public abstract class ABattleHUD extends de.limbusdev.guardianmonsters.fwmengine.ui.AHUD {
 
     protected ArrayMap<String, BattleWidget> widgets;
 

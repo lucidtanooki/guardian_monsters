@@ -4,12 +4,13 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.ArrayMap;
 
 import de.limbusdev.guardianmonsters.fwmengine.world.model.SkyDirection;
 
 /**
- * Created by georg on 14.11.16.
+ * @author Georg Eckert 2016
  */
 
 public interface Media {
@@ -26,11 +27,11 @@ public interface Media {
      */
     TextureAtlas getPersonTextureAtlas(boolean male, int index);
 
-    ArrayMap<SkyDirection, Animation> getPersonAnimationSet(boolean gender, int index);
+    ArrayMap<SkyDirection, Animation<TextureRegion>> getPersonAnimationSet(boolean gender, int index);
 
-    ArrayMap<SkyDirection, Animation> getPersonAnimationSet(String name);
+    ArrayMap<SkyDirection, Animation<TextureRegion>> getPersonAnimationSet(String name);
 
-    ArrayMap<SkyDirection, Animation> getPersonAnimationSet(TextureAtlas atlas);
+    ArrayMap<SkyDirection, Animation<TextureRegion>> getPersonAnimationSet(TextureAtlas atlas);
 
     Texture getTexture(String path);
 
@@ -38,11 +39,13 @@ public interface Media {
 
     public TextureAtlas.AtlasRegion getMonsterMiniSprite(int index);
 
+    public Image getMonsterFace(int id);
+
     public TextureRegion getBackgroundTexture(int index);
 
     public TextureAtlas getTextureAtlas(String path);
 
-    public Animation getAttackAnimation(String attack);
+    public Animation<TextureRegion> getAttackAnimation(String attack);
 
     /**
      * 0 - Water
@@ -65,8 +68,8 @@ public interface Media {
      * @param index
      * @return
      */
-    public Animation getTileAnimation(int index);
+    public Animation<TextureRegion> getTileAnimation(int index);
 
-    public Animation getObjectAnimation(String id);
+    public Animation<TextureRegion> getObjectAnimation(String id);
 
 }

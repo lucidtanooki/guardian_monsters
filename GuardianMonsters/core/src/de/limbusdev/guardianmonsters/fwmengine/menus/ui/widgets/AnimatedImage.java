@@ -22,20 +22,20 @@ public class AnimatedImage extends Widget {
     private int align = Align.center;
     private float imageX, imageY, imageWidth, imageHeight;
 
-    private Animation animation;
+    private Animation<TextureRegion> animation;
     private TextureRegion region;
     public int state;
     public float stateTime;
 
     public AnimatedImage() {
-        this((Animation) null);
+        this((Animation<TextureRegion>) null);
     }
 
-    public AnimatedImage(Animation animation) {
+    public AnimatedImage(Animation<TextureRegion> animation) {
         this(animation, Scaling.stretch, Align.center);
     }
 
-    public AnimatedImage(Animation animation, Scaling scaling, int align) {
+    public AnimatedImage(Animation<TextureRegion> animation, Scaling scaling, int align) {
         setAnimation(animation);
         this.scaling = scaling;
         this.align = align;

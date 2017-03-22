@@ -66,7 +66,8 @@ public class GuardianMonsters extends Game{
             TextureAssets.monsterSpriteSheetFile,
             TextureAssets.monsterMiniSpriteSheetFile,
             TextureAssets.heroSpritesheetFile,
-            TextureAssets.animations
+            TextureAssets.animations,
+            TextureAssets.battleMonsterPreviews
         ));
         Services.provide(new AudioManager(
             AudioAssets.get().getAllSfxPaths(),

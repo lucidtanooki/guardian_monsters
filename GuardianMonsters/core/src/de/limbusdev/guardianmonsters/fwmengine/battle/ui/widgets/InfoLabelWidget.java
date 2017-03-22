@@ -6,7 +6,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Align;
 
-import de.limbusdev.guardianmonsters.fwmengine.battle.ui.AHUD;
 import de.limbusdev.guardianmonsters.utils.Constant;
 
 /**

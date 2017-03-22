@@ -21,7 +21,7 @@ import de.limbusdev.guardianmonsters.model.items.Inventory;
 import de.limbusdev.guardianmonsters.utils.Constant;
 
 /**
- * Created by georg on 03.12.15.
+ * @author Georg Eckert 2016
  */
 public class BattleScreen implements Screen {
     /* ............................................................................ ATTRIBUTES .. */

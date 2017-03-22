@@ -17,7 +17,7 @@ import de.limbusdev.guardianmonsters.geometry.IntVec2;
 import de.limbusdev.guardianmonsters.utils.Constant;
 
 /**
- * Created by Georg Eckert on 05.02.17.
+ * @author Georg Eckert 2017
  */
 
 public class WeatherAnimator {
@@ -75,7 +75,7 @@ public class WeatherAnimator {
     }
 
     private class RainRenderer extends AWeatherRenderer {
-        private Animation rainAnimation;
+        private Animation<TextureRegion> rainAnimation;
         private FogRenderer fogRenderer;
         private Array<Float> randomRaindropOffset;
         private Array<IntVec2> randomRaindropPosition;

@@ -1,4 +1,4 @@
-package de.limbusdev.guardianmonsters.fwmengine.battle.ui;
+package de.limbusdev.guardianmonsters.fwmengine.ui;
 
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -51,15 +51,6 @@ public abstract class AHUD {
     public void resize(int width, int height) {
         stage.getViewport().update(width, height, true);
     }
-
-    /**
-     * Provides a callback for all buttons, an inheriting class must implement the single callbacks
-     * and use this method to choose them according to the ID
-     * @param id    ID of the clicked button of a @link{BattleWidget}
-     */
-    public abstract void onButtonClicked(ButtonIDs id);
-
-    public abstract void onButtonClicked(int id);
 
     public Stage getStage() {
         return stage;

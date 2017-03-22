@@ -14,8 +14,8 @@ import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 
 public class AnimatedPersonSprite extends Sprite {
 
-    public ArrayMap<SkyDirection,Animation> animations; // characters animations (N,S,W,E)
-    public Animation                        recentAnim; // alive animation
+    public ArrayMap<SkyDirection,Animation<TextureRegion>> animations; // characters animations (N,S,W,E)
+    public Animation<TextureRegion>         recentAnim; // alive animation
     public boolean visible;
     /* ........................................................................... CONSTRUCTOR .. */
     public AnimatedPersonSprite(boolean male, int index) {
@@ -36,7 +36,7 @@ public class AnimatedPersonSprite extends Sprite {
         construct(animations);
     }
 
-    private void construct(ArrayMap<SkyDirection,Animation> animations) {
+    private void construct(ArrayMap<SkyDirection,Animation<TextureRegion>> animations) {
 
         this.visible = true;
 

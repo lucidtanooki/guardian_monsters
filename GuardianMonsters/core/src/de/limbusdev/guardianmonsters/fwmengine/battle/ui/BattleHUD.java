@@ -68,7 +68,7 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
     private BattleActionMenuWidget.ClickListener    infoLabelCallbacks;
     private BattleActionMenuWidget.ClickListener    endOfBattleCallbacks;
     private SevenButtonsWidget.Callbacks attackMenuCallbacks;
-    private BattleSystem.CallbackHandler            battleSystemCallbacks;
+    private BattleSystem.Callbacks battleSystemCallbacks;
     private SevenButtonsWidget.Callbacks targetMenuCallbacks;
     private BattleStateSwitcher                     battleStateSwitcher;
     private BattleActionMenuWidget.ClickListener    battleStartLabelCallbacks;
@@ -309,7 +309,7 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
             }
         };
 
-        battleSystemCallbacks = new BattleSystem.CallbackHandler() {
+        battleSystemCallbacks = new BattleSystem.Callbacks() {
 
             @Override
             public void onBattleEnds(boolean winnerSide) {
@@ -433,19 +433,6 @@ public class BattleHUD extends ABattleHUD implements WidgetObserver {
             }
         };
     }
-
-    @Deprecated
-    @Override
-    public void onButtonClicked(ButtonIDs id) {
-        // TODO
-    }
-
-    /**
-     * Empty implementation, because using the other method only
-     * @param id
-     */
-    @Override
-    public void onButtonClicked(int id) {}
 
     private void showLevelUp(Monster m) {
         stage.addActor(new LevelUpWidget(Services.getUI().getInventorySkin(), m));

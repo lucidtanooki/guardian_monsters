@@ -63,6 +63,20 @@ public class Team extends ArrayMap<Integer,Monster> {
         return true;
     }
 
+    /**
+     * Checks if any monster in the team is still fit to fight
+     * @return  if all monsters are KO
+     */
+    public boolean isKO() {
+        boolean ko = true;
+
+        for(Monster monster : this.values()) {
+            ko = ko && monster.stat.isKO();
+        }
+
+        return ko;
+    }
+
     public int getMaximumTeamSize() {
         return maximumTeamSize;
     }

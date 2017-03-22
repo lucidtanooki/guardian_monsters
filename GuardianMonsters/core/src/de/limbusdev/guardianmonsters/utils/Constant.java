@@ -20,7 +20,7 @@ public class Constant {
 
     // ................................................................................... DEBUGGING
     public static final boolean DEBUGGING_ON = true;
-    public final static DebugMode DEBUG_MODE = DebugMode.WORLD;
+    public final static DebugMode DEBUG_MODE = DebugMode.INVENTORY;
     public final static int startMap = 25;
     public final static int startX = 1, startY = 1;
 

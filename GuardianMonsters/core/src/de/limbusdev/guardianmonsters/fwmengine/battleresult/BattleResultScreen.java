@@ -5,12 +5,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.utils.Array;
 
-import de.limbusdev.guardianmonsters.data.TextureAssets;
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.BattleResult;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.model.monsters.Team;
@@ -25,15 +20,9 @@ import de.limbusdev.guardianmonsters.model.monsters.Team;
 public class BattleResultScreen implements Screen {
 
     private BattleResultHUD resultHUD;
-    private Animation<TextureAtlas.AtlasRegion> anim;
-    private float elapsedTime=0;
 
     public BattleResultScreen(Team team, BattleResult result) {
         this.resultHUD = new BattleResultHUD(Services.getUI().getInventorySkin(), team, result);
-
-        TextureAtlas atlas = Services.getMedia().getTextureAtlas(TextureAssets.battleAnimations);
-        Array<TextureAtlas.AtlasRegion> regions = atlas.findRegions("att_alllightning");
-        anim = new Animation<TextureAtlas.AtlasRegion>(.1f, regions, Animation.PlayMode.LOOP);
     }
 
     /**
@@ -51,7 +40,6 @@ public class BattleResultScreen implements Screen {
      */
     @Override
     public void render(float delta) {
-        elapsedTime += delta;
         // Clear screen
         Gdx.gl.glClearColor(.3f, .3f, .3f, 1);
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
@@ -60,11 +48,6 @@ public class BattleResultScreen implements Screen {
         resultHUD.getStage().getViewport().apply();
         resultHUD.update(delta);
         resultHUD.draw();
-
-        Batch batch = resultHUD.getStage().getBatch();
-        batch.begin();
-        batch.draw(anim.getKeyFrame(elapsedTime),0,0);
-        batch.end();
     }
 
     /**

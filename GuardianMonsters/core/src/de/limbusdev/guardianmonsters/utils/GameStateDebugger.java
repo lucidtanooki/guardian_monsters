@@ -5,6 +5,8 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 
 import de.limbusdev.guardianmonsters.fwmengine.battle.control.BattleSystem;
+import de.limbusdev.guardianmonsters.fwmengine.battle.model.BattleResult;
+import de.limbusdev.guardianmonsters.fwmengine.battleresult.BattleResultScreen;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TeamComponent;
 import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager;
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.BattleFactory;
@@ -14,8 +16,10 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ui.WorldScreen;
 import de.limbusdev.guardianmonsters.model.AbilityDB;
 import de.limbusdev.guardianmonsters.model.items.Inventory;
 import de.limbusdev.guardianmonsters.model.ItemDB;
+import de.limbusdev.guardianmonsters.model.items.Item;
 import de.limbusdev.guardianmonsters.model.monsters.Monster;
 import de.limbusdev.guardianmonsters.model.MonsterDB;
+import de.limbusdev.guardianmonsters.model.monsters.Team;
 
 /**
  * Created by georg on 15.11.16.
@@ -129,7 +133,7 @@ public class GameStateDebugger {
         oppTeam.team.put(1,BattleFactory.getInstance().createMonster(5));
         oppTeam.team.put(2,BattleFactory.getInstance().createMonster(6));
 
-        BattleSystem bs = new BattleSystem(heroTeam.team, oppTeam.team, new BattleSystem.CallbackHandler() {});
+        BattleSystem bs = new BattleSystem(heroTeam.team, oppTeam.team, new BattleSystem.Callbacks() {});
 
         boolean enemyFit = true;
         while(enemyFit) {
@@ -156,6 +160,23 @@ public class GameStateDebugger {
         System.out.println("Tested");
     }
 
+    public void testResultScreen() {
+        Team team = new Team(7,1,1);
+        Monster mon = BattleFactory.getInstance().createMonster(1);
+        mon.abilityGraph.activateNode(1);
+        team.put(0,mon);
+        team.put(1,BattleFactory.getInstance().createMonster(2));
+        team.put(2,BattleFactory.getInstance().createMonster(3));
+        Array<Item> droppedItems = new Array<>();
+        droppedItems.add(ItemDB.getItem("bread"));
+
+        BattleResult result = new BattleResult(team, droppedItems);
+        result.gainEXP(mon,1200);
+        result.gainEXP(team.get(1), 1200);
+        result.gainEXP(team.get(2), 1200);
+        game.setScreen(new BattleResultScreen(team, result));
+    }
+
     public void startDebugging() {
         switch(Constant.DEBUG_MODE) {
             case BATTLE:
@@ -175,6 +196,9 @@ public class GameStateDebugger {
                 break;
             case MONSTER_PARSING:
                 testMonsterParsing();
+                break;
+            case RESULT_SCREEN:
+                testResultScreen();
                 break;
             default:
                 setUpTestWorld();

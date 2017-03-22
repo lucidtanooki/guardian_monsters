@@ -2,6 +2,7 @@ package de.limbusdev.guardianmonsters.fwmengine.world.ui;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
@@ -212,7 +213,7 @@ public class ExtendedTiledMapRenderer extends OrthogonalTiledMapRenderer {
      * @param x
      * @param y
      */
-    private void renderAnimation(Animation anim, float x, float y) {
+    private void renderAnimation(Animation<TextureRegion> anim, float x, float y) {
         try {
             this.batch.draw(anim.getKeyFrame(elapsedTime), x, y);
         } catch (Exception e) {

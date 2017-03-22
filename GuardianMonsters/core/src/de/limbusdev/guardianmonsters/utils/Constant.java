@@ -19,8 +19,8 @@ public class Constant {
     public static final int zoom = 1;
 
     // ................................................................................... DEBUGGING
-    public static final boolean DEBUGGING_ON = false;
-    public final static DebugMode DEBUG_MODE = DebugMode.INVENTORY;
+    public static final boolean DEBUGGING_ON = true;
+    public final static DebugMode DEBUG_MODE = DebugMode.RESULT_SCREEN;
     public final static int startMap = 25;
     public final static int startX = 1, startY = 1;
 

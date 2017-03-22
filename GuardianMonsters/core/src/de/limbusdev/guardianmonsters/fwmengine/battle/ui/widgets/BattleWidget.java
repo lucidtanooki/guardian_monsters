@@ -7,8 +7,6 @@ import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 
-import de.limbusdev.guardianmonsters.fwmengine.battle.ui.AHUD;
-
 /**
  * For all children of a BattleWidget, callbacks have to be added. When adding a widget to the
  * @link{AHUD}, the method onButtonClicked() can be used, in that case you can enter the button ID

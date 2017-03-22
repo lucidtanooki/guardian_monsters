@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.ArrayMap;
 
 import de.limbusdev.guardianmonsters.fwmengine.world.model.SkyDirection;
@@ -26,17 +27,17 @@ public class NullMedia implements Media {
     }
 
     @Override
-    public ArrayMap<SkyDirection, Animation> getPersonAnimationSet(boolean gender, int index) {
+    public ArrayMap<SkyDirection, Animation<TextureRegion>> getPersonAnimationSet(boolean gender, int index) {
         return null;
     }
 
     @Override
-    public ArrayMap<SkyDirection, Animation> getPersonAnimationSet(String name) {
+    public ArrayMap<SkyDirection, Animation<TextureRegion>> getPersonAnimationSet(String name) {
         return null;
     }
 
     @Override
-    public ArrayMap<SkyDirection, Animation> getPersonAnimationSet(TextureAtlas atlas) {
+    public ArrayMap<SkyDirection, Animation<TextureRegion>> getPersonAnimationSet(TextureAtlas atlas) {
         return null;
     }
 
@@ -51,6 +52,11 @@ public class NullMedia implements Media {
 
     @Override
     public TextureAtlas.AtlasRegion getMonsterMiniSprite(int index) {
+        return null;
+    }
+
+    @Override
+    public Image getMonsterFace(int id) {
         return null;
     }
 

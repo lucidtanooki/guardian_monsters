@@ -8,17 +8,16 @@ import java.util.Iterator;
 import java.util.Observable;
 
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.AttackCalculationReport;
+import de.limbusdev.guardianmonsters.fwmengine.battle.model.BattleResult;
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.MonsterSpeedComparator;
-import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager;
 import de.limbusdev.guardianmonsters.model.abilities.Ability;
 import de.limbusdev.guardianmonsters.model.monsters.Monster;
 import de.limbusdev.guardianmonsters.model.monsters.Team;
 import de.limbusdev.guardianmonsters.utils.Constant;
 import de.limbusdev.guardianmonsters.utils.DebugOutput;
-import de.limbusdev.guardianmonsters.model.gamestate.GameState;
 
 /**
- * Created by georg on 21.11.16.
+ * @author Georg Eckert 2017
  */
 
 public class BattleSystem extends Observable {
@@ -34,12 +33,10 @@ public class BattleSystem extends Observable {
     private ArrayMap<Integer,Monster> leftInBattle;
     private ArrayMap<Integer,Monster> rightInBattle;
 
-    private AIPlayer aiPlayer;
-
     private Array<Monster> currentRound;
     private Array<Monster> nextRound;
 
-    private CallbackHandler callbackHandler;
+    private Callbacks callbacks;
 
     private Monster chosenTarget;
     private int chosenAttack;
@@ -48,13 +45,16 @@ public class BattleSystem extends Observable {
     private boolean attackChosen;
 
     private AttackCalculationReport latestAttackReport;
+    private BattleResult result;
+
+    private AIPlayer aiPlayer;
 
     // Status values for GUI
 
+    // ................................................................................. CONSTRUCTOR
+    public BattleSystem(Team left, Team right, Callbacks callbacks) {
 
-    public BattleSystem(Team left, Team right, CallbackHandler callbackHandler) {
-
-        this.callbackHandler = callbackHandler;
+        this.callbacks = callbacks;
 
         choiceComplete = false;
         targetChosen = false;
@@ -72,6 +72,8 @@ public class BattleSystem extends Observable {
 
         addFitMonstersToBattleField(leftTeam,LEFT);
         addFitMonstersToBattleField(rightTeam,RIGHT);
+
+        result = new BattleResult(left, null);
 
         newRound();
     }
@@ -113,9 +115,10 @@ public class BattleSystem extends Observable {
         }
 
         // Calculate Ability
-        latestAttackReport = MonsterManager.calcAttack(
-            getActiveMonster(), target, getActiveMonster().abilityGraph.learntAbilities.get(attack));
-        callbackHandler.onAttack(getActiveMonster(), target, getActiveMonster().abilityGraph.learntAbilities.get(attack), latestAttackReport);
+        Ability ability= getActiveMonster().abilityGraph.learntAbilities.get(attack);
+        Monster attacker = getActiveMonster();
+        latestAttackReport = MonsterManager.calcAttack(attacker, target, ability);
+        callbacks.onAttack(attacker, target, ability, latestAttackReport);
     }
 
     public void applyAttack() {
@@ -124,27 +127,23 @@ public class BattleSystem extends Observable {
         checkKO();
     }
 
-    public void attack(int attack) {
-        attack(chosenTarget,attack);
-    }
-
     public void attack() {
         attack(chosenTarget, chosenAttack);
     }
 
     /**
-     * The monster decides to not attack and instead raised it's defense values for one round
+     * The monster decides to not attack and instead raise it's defense values for one round
      */
     public void defend() {
         latestAttackReport = MonsterManager.calcDefense(getActiveMonster());
-        callbackHandler.onDefense(getActiveMonster());
+        callbacks.onDefense(getActiveMonster());
     }
 
     /**
      * Monster does nothing. Use when e.g. using an item.
      */
     public void doNothing() {
-        callbackHandler.onDoingNothing(getActiveMonster());
+        callbacks.onDoingNothing(getActiveMonster());
     }
 
     public void nextMonster() {
@@ -159,34 +158,22 @@ public class BattleSystem extends Observable {
             newRound();
         }
 
-        callbackHandler.onQueueUpdated();
+        callbacks.onQueueUpdated();
     }
 
     public void continueBattle() {
-
         // Check if one team is KO
-        if(isTeamKO(leftTeam) || isTeamKO(rightTeam)) {
-            callbackHandler.onBattleEnds(isTeamKO(leftTeam));
+        if(leftTeam.isKO() || rightTeam.isKO()) {
+            callbacks.onBattleEnds(leftTeam.isKO());
         } else {
-
             if (rightTeam.containsValue(getActiveMonster(), false)) {
                 // It's AI's turn
                 letAItakeTurn();
             } else {
                 // It's player's turn
-                callbackHandler.onPlayersTurn();
+                callbacks.onPlayersTurn();
             }
         }
-    }
-
-    private boolean isTeamKO(ArrayMap<Integer,Monster> team) {
-        boolean isKO = true;
-
-        for(Monster m : team.values()) {
-            isKO = isKO && m.stat.isKO();
-        }
-
-        return isKO;
     }
 
     /**
@@ -213,7 +200,7 @@ public class BattleSystem extends Observable {
                 if(rightTeam.containsValue(m,false)) {
                     giveEXPtoWinners(m);
                 }
-                callbackHandler.onMonsterKilled(m);
+                callbacks.onMonsterKilled(m);
             }
         }
 
@@ -225,7 +212,7 @@ public class BattleSystem extends Observable {
                 if(rightTeam.containsValue(m,false)) {
                     giveEXPtoWinners(m);
                 }
-                callbackHandler.onMonsterKilled(m);
+                callbacks.onMonsterKilled(m);
             }
         }
     }
@@ -235,9 +222,10 @@ public class BattleSystem extends Observable {
             if(m.stat.isFit()) {
                 float opponentFactor = 1f * defeatedMonster.stat.getLevel() / m.stat.getLevel();
                 int EXP = MathUtils.floor(Constant.BASE_EXP * defeatedMonster.stat.getLevel() / 6f * opponentFactor);
+                result.gainEXP(m, EXP);
                 boolean levelUp = m.stat.earnEXP(EXP);
                 if(levelUp) {
-                    callbackHandler.onLevelup(m);
+                    callbacks.onLevelup(m);
                 }
             }
         }
@@ -250,8 +238,7 @@ public class BattleSystem extends Observable {
     public void letAItakeTurn() {
         if(!rightTeam.containsValue(getActiveMonster(),false)) {
             throw new IllegalStateException(TAG +
-                " AI can't take turn. The first monster in queue" +
-                "is not in it's team.");
+                " AI can't take turn. The first monster in queue is not in it's team.");
         }
         aiPlayer.turn();
     }
@@ -264,7 +251,7 @@ public class BattleSystem extends Observable {
         DebugOutput.printRound(queue);
 
         try {
-            callbackHandler.onQueueUpdated();
+            callbacks.onQueueUpdated();
         } catch(Exception e) {
             // TODO
         }
@@ -388,8 +375,12 @@ public class BattleSystem extends Observable {
         }
     }
 
+    public BattleResult getResult() {
+        return result;
+    }
+
     // INNER INTERFACE
-    public static abstract class CallbackHandler {
+    public static abstract class Callbacks {
         public void onMonsterKilled(Monster m){}
         public void onQueueUpdated(){}
         public void onAttack(Monster attacker, Monster target, Ability ability, AttackCalculationReport rep){}

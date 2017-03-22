@@ -14,9 +14,11 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 
+import de.limbusdev.guardianmonsters.data.SkinAssets;
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.BattleResult;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.LevelUpWidget;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
+import de.limbusdev.guardianmonsters.fwmengine.managers.UIManager;
 import de.limbusdev.guardianmonsters.fwmengine.ui.AHUD;
 import de.limbusdev.guardianmonsters.model.MonsterDB;
 import de.limbusdev.guardianmonsters.model.items.Item;
@@ -92,7 +94,9 @@ public class BattleResultHUD extends AHUD {
         table.setPosition(4,8,Align.bottomLeft);
         group.addActor(table);
 
-        apply = new TextButton(Services.getL18N().i18nGeneral().get("apply"), skin, "button-sandstone");
+        apply = new Button(skin, "default");
+        apply.setSize(72,32);
+        apply.add(new Label(Services.getL18N().i18nGeneral().get("apply"), skin, "default"));
         apply.setPosition(group.getWidth()-4,4,Align.bottomRight);
         group.addActor(apply);
 
@@ -107,11 +111,14 @@ public class BattleResultHUD extends AHUD {
                     constructMonsterTable(team,result);
                     apply.remove();
                     group.addActor(next);
+                    System.out.printf(Boolean.toString(apply.isDisabled()));
                 }
             }
         );
 
-        next = new TextButton(Services.getL18N().i18nGeneral().get("next"), skin, "button-sandstone");
+        next = new Button(skin, "default");
+        next.setSize(72,32);
+        next.add(new Label(Services.getL18N().i18nGeneral().get("next"), skin, "default"));
         next.setPosition(group.getWidth()-4,4,Align.bottomRight);
 
         next.addListener(

@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
@@ -30,7 +31,7 @@ public class MediaManager implements Media {
 
     private Array<String> bgs;
     private Array<String> maleSprites, femaleSprites;
-    private Array<Animation<TextureRegion>> animatedTiles;
+    private Array<Animation<AtlasRegion>> animatedTiles;
 
     
     /* ................,........................................................... CONSTRUCTOR .. */
@@ -75,35 +76,35 @@ public class MediaManager implements Media {
 
 
         // Animated Tiles
-        animatedTiles = new Array<Animation<TextureRegion>>();
+        animatedTiles = new Array<Animation<AtlasRegion>>();
 
         assets.finishLoading();
 
-        animatedTiles.add(new Animation(1f, assets.get(animations, TextureAtlas.class)
+        animatedTiles.add(new Animation<AtlasRegion>(1f, assets.get(animations, TextureAtlas.class)
                 .findRegions("water"), Animation.PlayMode.LOOP));
-        animatedTiles.add(new Animation(1f, assets.get(animations, TextureAtlas.class)
+        animatedTiles.add(new Animation<AtlasRegion>(1f, assets.get(animations, TextureAtlas.class)
                 .findRegions("waterine"), Animation.PlayMode.LOOP));
-        animatedTiles.add(new Animation(1f, assets.get(animations, TextureAtlas.class)
+        animatedTiles.add(new Animation<AtlasRegion>(1f, assets.get(animations, TextureAtlas.class)
                 .findRegions("waterinw"), Animation.PlayMode.LOOP));
-        animatedTiles.add(new Animation(1f, assets.get(animations, TextureAtlas.class)
+        animatedTiles.add(new Animation<AtlasRegion>(1f, assets.get(animations, TextureAtlas.class)
                 .findRegions("waterise"), Animation.PlayMode.LOOP));
-        animatedTiles.add(new Animation(1f, assets.get(animations, TextureAtlas.class)
+        animatedTiles.add(new Animation<AtlasRegion>(1f, assets.get(animations, TextureAtlas.class)
                 .findRegions("waterisw"), Animation.PlayMode.LOOP));
-        animatedTiles.add(new Animation(1f, assets.get(animations, TextureAtlas.class)
+        animatedTiles.add(new Animation<AtlasRegion>(1f, assets.get(animations, TextureAtlas.class)
                 .findRegions("watern"), Animation.PlayMode.LOOP));
-        animatedTiles.add(new Animation(1f, assets.get(animations, TextureAtlas.class)
+        animatedTiles.add(new Animation<AtlasRegion>(1f, assets.get(animations, TextureAtlas.class)
                 .findRegions("waterne"), Animation.PlayMode.LOOP));
-        animatedTiles.add(new Animation(1f, assets.get(animations, TextureAtlas.class)
+        animatedTiles.add(new Animation<AtlasRegion>(1f, assets.get(animations, TextureAtlas.class)
                 .findRegions("waternw"), Animation.PlayMode.LOOP));
-        animatedTiles.add(new Animation(1f, assets.get(animations, TextureAtlas.class)
+        animatedTiles.add(new Animation<AtlasRegion>(1f, assets.get(animations, TextureAtlas.class)
                 .findRegions("waters"), Animation.PlayMode.LOOP));
-        animatedTiles.add(new Animation(1f, assets.get(animations, TextureAtlas.class)
+        animatedTiles.add(new Animation<AtlasRegion>(1f, assets.get(animations, TextureAtlas.class)
                 .findRegions("waterse"), Animation.PlayMode.LOOP));
-        animatedTiles.add(new Animation(1f, assets.get(animations, TextureAtlas.class)
+        animatedTiles.add(new Animation<AtlasRegion>(1f, assets.get(animations, TextureAtlas.class)
                 .findRegions("watersw"), Animation.PlayMode.LOOP));
-        animatedTiles.add(new Animation(1f, assets.get(animations, TextureAtlas.class)
+        animatedTiles.add(new Animation<AtlasRegion>(1f, assets.get(animations, TextureAtlas.class)
                 .findRegions("watere"), Animation.PlayMode.LOOP));
-        animatedTiles.add(new Animation(1f, assets.get(animations, TextureAtlas.class)
+        animatedTiles.add(new Animation<AtlasRegion>(1f, assets.get(animations, TextureAtlas.class)
                 .findRegions("waterw"), Animation.PlayMode.LOOP));
     }
     /* ............................................................................... METHODS .. */
@@ -143,13 +144,13 @@ public class MediaManager implements Media {
     }
 
     @Override
-    public ArrayMap<SkyDirection, Animation<TextureRegion>> getPersonAnimationSet(boolean gender, int index) {
+    public ArrayMap<SkyDirection, Animation<AtlasRegion>> getPersonAnimationSet(boolean gender, int index) {
         TextureAtlas textureAtlas = getPersonTextureAtlas(gender, index);
         return getPersonAnimationSet(textureAtlas);
     }
 
     @Override
-    public ArrayMap<SkyDirection, Animation<TextureRegion>> getPersonAnimationSet(String name) {
+    public ArrayMap<SkyDirection, Animation<AtlasRegion>> getPersonAnimationSet(String name) {
 
         TextureAtlas textureAtlas;
         if(name.equals("hero")) {
@@ -162,17 +163,17 @@ public class MediaManager implements Media {
     }
 
     @Override
-    public ArrayMap<SkyDirection, Animation<TextureRegion>> getPersonAnimationSet(TextureAtlas textureAtlas) {
-        ArrayMap<SkyDirection, Animation<TextureRegion>> animations = new ArrayMap<SkyDirection,Animation<TextureRegion>>();
+    public ArrayMap<SkyDirection, Animation<AtlasRegion>> getPersonAnimationSet(TextureAtlas textureAtlas) {
+        ArrayMap<SkyDirection, Animation<AtlasRegion>> animations = new ArrayMap<SkyDirection,Animation<AtlasRegion>>();
 
-        animations.put(SkyDirection.N, new Animation(.15f, textureAtlas.findRegions("n"), Animation.PlayMode.LOOP));
-        animations.put(SkyDirection.E, new Animation(.15f, textureAtlas.findRegions("e"), Animation.PlayMode.LOOP));
-        animations.put(SkyDirection.S, new Animation(.15f, textureAtlas.findRegions("s"), Animation.PlayMode.LOOP));
-        animations.put(SkyDirection.W, new Animation(.15f, textureAtlas.findRegions("w"), Animation.PlayMode.LOOP));
-        animations.put(SkyDirection.NSTOP, new Animation(.15f, textureAtlas.findRegions("n").get(0)));
-        animations.put(SkyDirection.ESTOP, new Animation(.15f, textureAtlas.findRegions("e").get(0)));
-        animations.put(SkyDirection.SSTOP, new Animation(.15f, textureAtlas.findRegions("s").get(0)));
-        animations.put(SkyDirection.WSTOP, new Animation(.15f, textureAtlas.findRegions("w").get(0)));
+        animations.put(SkyDirection.N, new Animation<AtlasRegion>(.15f, textureAtlas.findRegions("n"), Animation.PlayMode.LOOP));
+        animations.put(SkyDirection.E, new Animation<AtlasRegion>(.15f, textureAtlas.findRegions("e"), Animation.PlayMode.LOOP));
+        animations.put(SkyDirection.S, new Animation<AtlasRegion>(.15f, textureAtlas.findRegions("s"), Animation.PlayMode.LOOP));
+        animations.put(SkyDirection.W, new Animation<AtlasRegion>(.15f, textureAtlas.findRegions("w"), Animation.PlayMode.LOOP));
+        animations.put(SkyDirection.NSTOP, new Animation<AtlasRegion>(.15f, textureAtlas.findRegions("n").get(0)));
+        animations.put(SkyDirection.ESTOP, new Animation<AtlasRegion>(.15f, textureAtlas.findRegions("e").get(0)));
+        animations.put(SkyDirection.SSTOP, new Animation<AtlasRegion>(.15f, textureAtlas.findRegions("s").get(0)));
+        animations.put(SkyDirection.WSTOP, new Animation<AtlasRegion>(.15f, textureAtlas.findRegions("w").get(0)));
 
         return animations;
     }
@@ -217,13 +218,13 @@ public class MediaManager implements Media {
         return assets.get(path, TextureAtlas.class);
     }
 
-    public Animation getAttackAnimation(String attack) {
+    public Animation<AtlasRegion> getAttackAnimation(String attack) {
         TextureAtlas atlas = assets.get("spritesheets/battleAnimations.pack", TextureAtlas.class);
-        Animation anim;
+        Animation<AtlasRegion> anim;
         if(atlas.findRegions(attack).size == 0) {
-            anim = new Animation(1f / 12f, atlas.findRegions("att_kick"), Animation.PlayMode.NORMAL);
+            anim = new Animation<AtlasRegion>(1f / 12f, atlas.findRegions("att_kick"), Animation.PlayMode.NORMAL);
         } else {
-            anim = new Animation(1f / 12f, atlas.findRegions(attack), Animation.PlayMode.NORMAL);
+            anim = new Animation<AtlasRegion>(1f / 12f, atlas.findRegions(attack), Animation.PlayMode.NORMAL);
         }
         return anim;
     }
@@ -245,12 +246,12 @@ public class MediaManager implements Media {
      * @param index
      * @return
      */
-    public Animation getTileAnimation(int index) {
+    public Animation<AtlasRegion> getTileAnimation(int index) {
         return animatedTiles.get(index);
     }
 
-    public Animation getObjectAnimation(String id) {
-        Animation anim = new Animation(1f, assets.get(animations, TextureAtlas.class)
+    public Animation<AtlasRegion> getObjectAnimation(String id) {
+        Animation<AtlasRegion> anim = new Animation<AtlasRegion>(1f, assets.get(animations, TextureAtlas.class)
             .findRegions(id), Animation.PlayMode.LOOP);
         return anim;
     }

@@ -51,10 +51,15 @@
 
 
   "com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle": {
-    "button-sandstone":  {"font": "font16",  "down": "label-bg-sandstone-down", "up": "label-bg-sandstone", "unpressedOffsetY": 1},
+    "default":            {"font": "font16",  "down": "label-bg-sandstone-down", "up": "label-bg-sandstone"},
+    "button-sandstone":   {"font": "font16",  "down": "label-bg-sandstone-down", "up": "label-bg-sandstone"},
 
-    "item-button-sandstone":  {"font": "font16",  "down": "label-bg-sandstone-down", "up": "label-bg-sandstone", "checked": "label-bg-sandstone-down", "pressedOffsetY": -1, "checkedOffsetY": -1},
+    "item-button-sandstone":  {"font": "font16",  "down": "label-bg-sandstone-down", "up": "label-bg-sandstone", "checked": "label-bg-sandstone-down"},
     "item-button-burgund":    {"font": "font16w", "down": "label-bg-burgund-down",   "up": "label-bg-burgund",   "checked": "label-bg-burgund-down"}
+  },
+
+  "com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle": {
+    "default":  {"down": "label-bg-sandstone-down", "up": "label-bg-sandstone"}
   },
 
   "com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle": {

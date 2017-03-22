@@ -49,7 +49,9 @@ public abstract class AHUD {
     }
 
     public void resize(int width, int height) {
-        stage.getViewport().update(width, height, true);
+        for(Stage s : stages) {
+            s.getViewport().update(width, height);
+        }
     }
 
     public Stage getStage() {

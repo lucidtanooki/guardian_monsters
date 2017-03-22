@@ -732,7 +732,7 @@ label-bg-sandstone
   rotate: false
   xy: 441, 147
   size: 32, 32
-  split: 4, 4, 4, 7
+  split: 4, 4, 5, 7
   orig: 32, 32
   offset: 0, 0
   index: -1
@@ -1446,25 +1446,18 @@ stats-symbol-pdef
   orig: 16, 16
   offset: 0, 0
   index: -1
-scrollbar-knob
-  rotate: false
-  xy: 297, 1
-  size: 8, 8
-  orig: 8, 8
-  offset: 0, 0
-  index: -1
-scrollbar-knob
-  rotate: false
-  xy: 297, 1
-  size: 8, 8
-  split: 2, 2, 2, 4
-  orig: 8, 8
-  offset: 0, 0
-  index: -1
 scrollbar-bg
+  rotate: false
+  xy: 297, 1
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: -1
+scrollbar-knob
   rotate: false
   xy: 307, 1
   size: 8, 8
+  split: 2, 2, 2, 4
   orig: 8, 8
   offset: 0, 0
   index: -1

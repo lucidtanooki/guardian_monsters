@@ -2,6 +2,8 @@ package de.limbusdev.guardianmonsters.model.monsters;
 
 import com.badlogic.gdx.utils.ArrayMap;
 
+import de.limbusdev.guardianmonsters.fwmengine.battle.model.CombatTeam;
+
 /**
  * Team
  *
@@ -27,9 +29,9 @@ public class Team extends ArrayMap<Integer,Monster> {
      * team size and the chosen active team size.
      * @return
      */
-    public ArrayMap<Integer,Monster> getFitTeam() {
+    public CombatTeam getFitTeam() {
         int teamSize = Math.min(maximumTeamSize, activeTeamSize);
-        ArrayMap<Integer,Monster> fitTeam = new ArrayMap<>();
+        CombatTeam fitTeam = new CombatTeam();
 
         int counter = 0;
         for(int i=0; i < this.size && counter < teamSize; i++) {
@@ -91,5 +93,13 @@ public class Team extends ArrayMap<Integer,Monster> {
 
     public void setActiveTeamSize(int activeTeamSize) {
         this.activeTeamSize = activeTeamSize;
+    }
+
+    public boolean isMember(Monster monster) {
+        return containsValue(monster,false);
+    }
+
+    public int getPosition(Monster monster) {
+        return getKey(monster, false);
     }
 }

@@ -123,7 +123,7 @@ public class BattleHUD extends ABattleHUD {
 
         // initialize independent battle system
         battleSystem = new BattleSystem(heroTeam,opponentTeam, battleSystemCallbacks);
-        battleQueueWidget.update(battleSystem.getCurrentRound(),battleSystem.getNextRound());
+        battleSystem.getQueue().add(battleQueueWidget);
 
         // initialize attack menu with active monster
         attackMenu.init(battleSystem.getActiveMonster());
@@ -308,18 +308,9 @@ public class BattleHUD extends ABattleHUD {
 
             @Override
             public void onMonsterKilled(Monster m) {
-
-                boolean side = battleSystem.getLeftInBattle().containsValue(m,false);
-                int pos = side ?
-                    battleSystem.getLeftInBattle().getKey(m,false)
-                    : battleSystem.getRightInBattle().getKey(m,false);
-
+                boolean side = battleSystem.getQueue().getTeamSideFor(m);
+                int pos = battleSystem.getQueue().getFieldPositionFor(m);
                 animationWidget.animateMonsterKO(pos,side);
-            }
-
-            @Override
-            public void onQueueUpdated() {
-                battleQueueWidget.update(battleSystem.getCurrentRound(),battleSystem.getNextRound());
             }
 
             @Override
@@ -335,11 +326,11 @@ public class BattleHUD extends ABattleHUD {
                 boolean activeSide;
                 boolean passiveSide;
 
-                activeSide =  battleSystem.getBattleFieldSideFor(attacker);
-                passiveSide = battleSystem.getBattleFieldSideFor(target);
+                activeSide =  battleSystem.getQueue().getTeamSideFor(attacker);
+                passiveSide = !activeSide;
 
-                attPos = battleSystem.getBattleFieldPositionFor(attacker);
-                defPos = battleSystem.getBattleFieldPositionFor(target);
+                attPos = battleSystem.getQueue().getFieldPositionFor(attacker);
+                defPos = battleSystem.getQueue().getFieldPositionFor(target);
 
                 animationWidget.animateAttack(attPos, defPos, activeSide, passiveSide, ability);
             }

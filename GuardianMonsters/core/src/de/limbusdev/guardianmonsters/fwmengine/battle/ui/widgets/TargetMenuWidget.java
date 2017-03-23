@@ -6,10 +6,15 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.ArrayMap;
 
 import de.limbusdev.guardianmonsters.data.BundleAssets;
+import de.limbusdev.guardianmonsters.fwmengine.battle.control.BattleQueue;
 import de.limbusdev.guardianmonsters.fwmengine.battle.control.BattleSystem;
+import de.limbusdev.guardianmonsters.fwmengine.battle.model.CombatTeam;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.model.monsters.Monster;
 import de.limbusdev.guardianmonsters.model.MonsterDB;
+
+import static de.limbusdev.guardianmonsters.Constant.LEFT;
+import static de.limbusdev.guardianmonsters.Constant.RIGHT;
 
 /**
  * @author Georg Eckert 2017
@@ -17,10 +22,7 @@ import de.limbusdev.guardianmonsters.model.MonsterDB;
 
 public class TargetMenuWidget extends SevenButtonsWidget implements Listener<Monster> {
 
-    public static final boolean LEFT = true;
-    public static final boolean RIGHT = false;
-
-    private ArrayMap<Integer,Monster> leftTeam, rightTeam;
+    private CombatTeam leftTeam, rightTeam;
 
     private static int[] order = {0,2,1,3,6,5,4};
 
@@ -29,20 +31,20 @@ public class TargetMenuWidget extends SevenButtonsWidget implements Listener<Mon
     }
 
     public void init(BattleSystem battleSystem) {
-        this.leftTeam = new ArrayMap<>();
-        this.rightTeam = new ArrayMap<>();
+        this.leftTeam = new CombatTeam();
+        this.rightTeam = new CombatTeam();
 
         // Set all buttons inactive
         for(Integer i : getButtons().keys()) {
             disableButton(i);
         }
 
-
-        addMonstersToMenu(battleSystem.getLeftInBattle(), LEFT);
-        addMonstersToMenu(battleSystem.getRightInBattle(), RIGHT);
+        BattleQueue queue = battleSystem.getQueue();
+        addMonstersToMenu(queue.getCombatTeamLeft(), LEFT);
+        addMonstersToMenu(queue.getCombatTeamRight(), RIGHT);
     }
 
-    private void addMonstersToMenu(ArrayMap<Integer,Monster> team, boolean side) {
+    private void addMonstersToMenu(CombatTeam team, boolean side) {
         int offset = side ? 0 : 4;
         if(side == LEFT) {
             leftTeam = team;
@@ -52,8 +54,7 @@ public class TargetMenuWidget extends SevenButtonsWidget implements Listener<Mon
 
         for(int key : team.keys()) {
             Monster m = team.get(key);
-            setButtonText(key + offset, Services.getL18N().l18n(BundleAssets.MONSTERS).get(
-                MonsterDB.getInstance().getNameById(m.ID)));
+            setButtonText(key + offset, MonsterDB.getLocalNameById(m.ID));
             enableButton(key + offset);
 
             // Add the TargetMenuWidget as a Listener
@@ -91,10 +92,10 @@ public class TargetMenuWidget extends SevenButtonsWidget implements Listener<Mon
     public void receive(Signal<Monster> signal, Monster monster) {
         if(monster.stat.isKO()) {
             int index;
-            if(leftTeam.containsValue(monster, false)) {
-                index = leftTeam.indexOfValue(monster, false);
+            if(leftTeam.isMember(monster)) {
+                index = leftTeam.getFieldPosition(monster);
             } else {
-                index = rightTeam.indexOfValue(monster, false);
+                index = rightTeam.getFieldPosition(monster);
             }
             disableButton(index);
         }

@@ -8,9 +8,13 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 
 import de.limbusdev.guardianmonsters.fwmengine.battle.control.BattleSystem;
+import de.limbusdev.guardianmonsters.fwmengine.battle.model.CombatTeam;
 import de.limbusdev.guardianmonsters.geometry.IntVec2;
 import de.limbusdev.guardianmonsters.model.monsters.Monster;
 import de.limbusdev.guardianmonsters.Constant;
+
+import static de.limbusdev.guardianmonsters.Constant.LEFT;
+import static de.limbusdev.guardianmonsters.Constant.RIGHT;
 
 /**
  * Widget for displaying monster status in battle: HP, MP, EXP, Name, Level
@@ -55,7 +59,7 @@ public class BattleStatusOverviewWidget extends BattleWidget {
 
     }
 
-    private void addStatusWidgetsForTeam(ArrayMap<Integer,Monster> team, boolean side) {
+    private void addStatusWidgetsForTeam(CombatTeam team, boolean side) {
         Array<MonsterStateWidget> stateWidgets = side ?
             monsterStateWidgetsLeft : monsterStateWidgetsRight;
 
@@ -75,8 +79,8 @@ public class BattleStatusOverviewWidget extends BattleWidget {
     }
 
     public void init(BattleSystem battleSystem) {
-        addStatusWidgetsForTeam(battleSystem.getLeftInBattle(),true);
-        addStatusWidgetsForTeam(battleSystem.getRightInBattle(),false);
+        addStatusWidgetsForTeam(battleSystem.getQueue().getCombatTeamLeft(),LEFT);
+        addStatusWidgetsForTeam(battleSystem.getQueue().getCombatTeamRight(),RIGHT);
     }
 
     public void fadeStatusWidget(int pos, boolean side) {

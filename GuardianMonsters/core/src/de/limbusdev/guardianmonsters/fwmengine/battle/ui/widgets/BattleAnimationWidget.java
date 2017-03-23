@@ -11,10 +11,8 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 
-import java.util.Observable;
-import java.util.Observer;
-
 import de.limbusdev.guardianmonsters.data.AudioAssets;
+import de.limbusdev.guardianmonsters.fwmengine.battle.control.BattleQueue;
 import de.limbusdev.guardianmonsters.fwmengine.battle.control.BattleSystem;
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.ImageZComparator;
 import de.limbusdev.guardianmonsters.geometry.IntVec2;
@@ -26,9 +24,10 @@ import de.limbusdev.guardianmonsters.model.monsters.Monster;
 /**
  * Widget for displaying monster status in battle: HP, MP, EXP, Name, Level
  * HINT: Don't forget calling the init() method
- * Created by georg on 03.07.16.
+ *
+ * @author Georg Eckert 2016
  */
-public class BattleAnimationWidget extends BattleWidget implements Observer {
+public class BattleAnimationWidget extends BattleWidget{
 
     private static boolean LEFT = true;
     private static boolean RIGHT = false;
@@ -75,8 +74,9 @@ public class BattleAnimationWidget extends BattleWidget implements Observer {
     public void init(BattleSystem battleSystem) {
         clear();
         zSortedMonsterImgs.clear();
-        addMonsterAnimationsForTeam(battleSystem.getLeftInBattle(),true);
-        addMonsterAnimationsForTeam(battleSystem.getRightInBattle(),false);
+        BattleQueue queue = battleSystem.getQueue();
+        addMonsterAnimationsForTeam(queue.getCombatTeamLeft(),LEFT);
+        addMonsterAnimationsForTeam(queue.getCombatTeamRight(),RIGHT);
     }
 
     private void addMonsterAnimationsForTeam(ArrayMap<Integer,Monster> team, boolean side) {
@@ -126,7 +126,7 @@ public class BattleAnimationWidget extends BattleWidget implements Observer {
         Image monImg;
         TextureRegion monReg;
         monReg = media.getMonsterSprite(id);
-        if(side)
+        if(side == LEFT)
             if(!monReg.isFlipX())
                 monReg.flip(true, false);
         monImg = new Image(monReg);
@@ -171,17 +171,17 @@ public class BattleAnimationWidget extends BattleWidget implements Observer {
      * Animate an ability of the given monster
      * @param attPos    position of attacker
      * @param defPos    position of defender
-     * @param side      side of attacker
+     * @param attSide      side of attacker
      * @param defSide   side of target
      */
-    public void animateAttack(final int attPos, final int defPos, boolean side, boolean defSide, final Ability ability) {
+    public void animateAttack(final int attPos, final int defPos, boolean attSide, boolean defSide, final Ability ability) {
         Image attIm;
         final IntVec2 startPos,endPos;
 
         attackAnimationRunning = true;
 
         // Get Position of attacking monster
-        if(side)
+        if(attSide == LEFT)
             switch(attPos) {
                 case 2:  startPos = ImPos.HERO_TOP;break;
                 case 1:  startPos = ImPos.HERO_BOT;break;
@@ -195,24 +195,37 @@ public class BattleAnimationWidget extends BattleWidget implements Observer {
             }
 
         // Get position of target monster
-        if(!defSide)
-            switch(defPos) {
-                case 2:  endPos = ImPos.OPPO_TOP;break;
-                case 1:  endPos = ImPos.OPPO_BOT;break;
-                default: endPos = ImPos.OPPO_MID;break;
+        if(defSide == RIGHT) {
+            switch (defPos) {
+                case 2:
+                    endPos = ImPos.OPPO_TOP;
+                    break;
+                case 1:
+                    endPos = ImPos.OPPO_BOT;
+                    break;
+                default:
+                    endPos = ImPos.OPPO_MID;
+                    break;
             }
-        else
-            switch(defPos) {
-                case 2: endPos= ImPos.HERO_TOP; break;
-                case 1: endPos = ImPos.HERO_BOT;break;
-                default:endPos = ImPos.HERO_MID;break;
+        } else {
+            switch (defPos) {
+                case 2:
+                    endPos = ImPos.HERO_TOP;
+                    break;
+                case 1:
+                    endPos = ImPos.HERO_BOT;
+                    break;
+                default:
+                    endPos = ImPos.HERO_MID;
+                    break;
             }
+        }
 
 
-        if(side) attIm = monsterImgsLeft.get(attPos);
+        if(attSide == LEFT) attIm = monsterImgsLeft.get(attPos);
         else attIm = monsterImgsRight.get(attPos);
 
-        attIm.addAction(getAnimationSequence(ability,startPos,endPos, defPos, side, defSide));
+        attIm.addAction(getAnimationSequence(ability,startPos,endPos, defPos, attSide, defSide));
     }
 
 
@@ -296,8 +309,9 @@ public class BattleAnimationWidget extends BattleWidget implements Observer {
      */
     private void animateAttackImpact(int defPos, boolean side) {
         Image defIm;
-        if(side) defIm = monsterImgsLeft.get(defPos);
+        if(side == LEFT) defIm = monsterImgsLeft.get(defPos);
         else defIm = monsterImgsRight.get(defPos);
+
         defIm.addAction(Actions.sequence(
             Actions.moveBy(0, 15, .1f, Interpolation.bounceIn),
             Actions.moveBy(0, -15, .1f, Interpolation.bounceIn)
@@ -306,7 +320,7 @@ public class BattleAnimationWidget extends BattleWidget implements Observer {
 
     public void animateMonsterKO(int pos, boolean side) {
         ArrayMap<Integer,Image> monImgs;
-        if(side) monImgs = monsterImgsLeft;
+        if(side == LEFT) monImgs = monsterImgsLeft;
         else monImgs = monsterImgsRight;
 
         monImgs.get(pos).addAction(Actions.sequence(Actions.alpha(0, 2), Actions.visible(false)));
@@ -349,20 +363,6 @@ public class BattleAnimationWidget extends BattleWidget implements Observer {
         }
 
         addActor(sra);
-    }
-
-    @Override
-    public void update(Observable o, Object arg) {
-
-        if(o instanceof BattleSystem && arg != null) {
-            boolean side = (Boolean) arg;
-            BattleSystem bs = (BattleSystem) o;
-            if(side == LEFT) {
-                init(bs);
-            } else {
-
-            }
-        }
     }
 
     private final static class ImPos {

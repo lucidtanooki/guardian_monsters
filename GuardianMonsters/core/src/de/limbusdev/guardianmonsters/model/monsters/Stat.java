@@ -5,7 +5,7 @@ import com.badlogic.gdx.math.MathUtils;
 
 import de.limbusdev.guardianmonsters.model.items.Equipment;
 import de.limbusdev.guardianmonsters.model.items.EquipmentPotential;
-import de.limbusdev.guardianmonsters.utils.Constant;
+import de.limbusdev.guardianmonsters.Constant;
 import de.limbusdev.guardianmonsters.utils.MathTool;
 import de.limbusdev.guardianmonsters.model.abilities.AbilityGraph;
 

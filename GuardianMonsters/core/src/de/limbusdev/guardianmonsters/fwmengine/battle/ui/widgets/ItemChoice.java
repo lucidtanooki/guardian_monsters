@@ -16,7 +16,7 @@ import de.limbusdev.guardianmonsters.fwmengine.menus.ui.team.MonsterListWidget;
 import de.limbusdev.guardianmonsters.model.items.Inventory;
 import de.limbusdev.guardianmonsters.model.items.Item;
 import de.limbusdev.guardianmonsters.model.monsters.Monster;
-import de.limbusdev.guardianmonsters.utils.Constant;
+import de.limbusdev.guardianmonsters.Constant;
 
 /**
  * ItemChoice

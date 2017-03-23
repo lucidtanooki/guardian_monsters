@@ -15,7 +15,7 @@ import de.limbusdev.guardianmonsters.data.TextureAssets;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Media;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.geometry.IntVec2;
-import de.limbusdev.guardianmonsters.utils.Constant;
+import de.limbusdev.guardianmonsters.Constant;
 
 /**
  * @author Georg Eckert 2017

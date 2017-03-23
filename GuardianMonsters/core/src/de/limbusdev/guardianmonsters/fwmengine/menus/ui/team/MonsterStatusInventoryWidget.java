@@ -13,7 +13,7 @@ import de.limbusdev.guardianmonsters.model.monsters.Element;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.model.monsters.Monster;
 import de.limbusdev.guardianmonsters.model.MonsterDB;
-import de.limbusdev.guardianmonsters.utils.Constant;
+import de.limbusdev.guardianmonsters.Constant;
 
 
 /**

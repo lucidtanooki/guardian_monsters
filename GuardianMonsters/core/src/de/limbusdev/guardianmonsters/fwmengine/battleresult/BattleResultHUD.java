@@ -1,9 +1,6 @@
 package de.limbusdev.guardianmonsters.fwmengine.battleresult;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
@@ -14,7 +11,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 
@@ -26,7 +22,9 @@ import de.limbusdev.guardianmonsters.model.MonsterDB;
 import de.limbusdev.guardianmonsters.model.items.Item;
 import de.limbusdev.guardianmonsters.model.monsters.Monster;
 import de.limbusdev.guardianmonsters.model.monsters.Team;
-import de.limbusdev.guardianmonsters.utils.Constant;
+
+import static de.limbusdev.guardianmonsters.Constant.WIDTH;
+import static de.limbusdev.guardianmonsters.Constant.HEIGHT;
 
 /**
  * BattleResultHUD
@@ -76,12 +74,12 @@ public class BattleResultHUD extends AHUD {
     private void constructLayout() {
         Container container = new Container();
         container.setBackground(skin.getDrawable("label-bg-paper"));
-        container.setSize(Constant.WIDTH-2, Constant.HEIGHT-2);
+        container.setSize(WIDTH-2, HEIGHT-2);
         container.setPosition(1, 1, Align.bottomLeft);
         stage.addActor(container);
 
         group = new Group();
-        group.setSize(Constant.WIDTH-8,Constant.HEIGHT-8);
+        group.setSize(WIDTH-8,HEIGHT-8);
         group.setPosition(4,4,Align.bottomLeft);
         stage.addActor(group);
 

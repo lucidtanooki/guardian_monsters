@@ -24,7 +24,7 @@ import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.BattleFactory;
 import de.limbusdev.guardianmonsters.model.monsters.Monster;
 import de.limbusdev.guardianmonsters.fwmengine.world.model.MonsterArea;
-import de.limbusdev.guardianmonsters.utils.Constant;
+import de.limbusdev.guardianmonsters.Constant;
 
 
 /**
@@ -218,7 +218,7 @@ public class MovementSystem extends EntitySystem {
                         //............................................................. START BATTLE
                         input.inBattle = true;
                         TeamComponent oppTeam = BattleFactory.getInstance().createOpponentTeam(ma);
-                        ecs.hud.battleScreen.init(Components.team.get(ecs.hero), oppTeam);
+                        ecs.hud.battleScreen.init(Components.team.get(ecs.hero).team, oppTeam.team);
                         Services.getScreenManager().pushScreen(ecs.hud.battleScreen);
                         //............................................................. START BATTLE
 

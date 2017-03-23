@@ -29,7 +29,7 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.GameArea;
 import de.limbusdev.guardianmonsters.model.ItemDB;
 import de.limbusdev.guardianmonsters.model.gamestate.SerializableGameState;
 import de.limbusdev.guardianmonsters.model.items.Inventory;
-import de.limbusdev.guardianmonsters.utils.Constant;
+import de.limbusdev.guardianmonsters.Constant;
 import de.limbusdev.guardianmonsters.model.gamestate.GameState;
 
 

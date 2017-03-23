@@ -17,7 +17,7 @@ import de.limbusdev.guardianmonsters.fwmengine.world.model.SkyDirection;
 import de.limbusdev.guardianmonsters.geometry.IntVec2;
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.HUD;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.entities.EntityFamilies;
-import de.limbusdev.guardianmonsters.utils.Constant;
+import de.limbusdev.guardianmonsters.Constant;
 
 
 /**

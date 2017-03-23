@@ -28,7 +28,7 @@ import de.limbusdev.guardianmonsters.model.monsters.Monster;
  * HINT: Don't forget calling the init() method
  * Created by georg on 03.07.16.
  */
-public class BattleAnimationWidget extends BattleWidget implements ObservableWidget, Observer {
+public class BattleAnimationWidget extends BattleWidget implements Observer {
 
     private static boolean LEFT = true;
     private static boolean RIGHT = false;
@@ -42,9 +42,9 @@ public class BattleAnimationWidget extends BattleWidget implements ObservableWid
 
     public boolean attackAnimationRunning;
 
-    private ClickListener clickListener;
+    private Callbacks callbacks;
 
-    public BattleAnimationWidget(ClickListener clickListener) {
+    public BattleAnimationWidget(Callbacks callbacks) {
         super();
 
         leftPositionsOccupied = new ArrayMap<>();
@@ -57,7 +57,7 @@ public class BattleAnimationWidget extends BattleWidget implements ObservableWid
         this.setBounds(0,0,0,0);
         this.media = Services.getMedia();
 
-        this.clickListener = clickListener;
+        this.callbacks = callbacks;
 
     }
 
@@ -160,11 +160,11 @@ public class BattleAnimationWidget extends BattleWidget implements ObservableWid
 
 
     public void animateSelfDefense() {
-        clickListener.onHitAnimationComplete();
+        callbacks.onHitAnimationComplete();
     }
 
     public void animateItemUsage() {
-        clickListener.onHitAnimationComplete();
+        callbacks.onHitAnimationComplete();
     }
 
     /**
@@ -258,7 +258,7 @@ public class BattleAnimationWidget extends BattleWidget implements ObservableWid
         Action callbackAction = Actions.run(new Runnable() {
             @Override
             public void run() {
-                clickListener.onHitAnimationComplete();
+                callbacks.onHitAnimationComplete();
             }
         });
 
@@ -352,16 +352,6 @@ public class BattleAnimationWidget extends BattleWidget implements ObservableWid
     }
 
     @Override
-    public void addWidgetObserver(WidgetObserver wo) {
-        observers.add(wo);
-    }
-
-    @Override
-    public void notifyWidgetObservers() {
-        for(WidgetObserver wo : observers) wo.getNotified(this);
-    }
-
-    @Override
     public void update(Observable o, Object arg) {
 
         if(o instanceof BattleSystem && arg != null) {
@@ -384,7 +374,7 @@ public class BattleAnimationWidget extends BattleWidget implements ObservableWid
         private static final IntVec2 OPPO_TOP = new IntVec2(640+32-HERO_TOP.x,HERO_TOP.y);
     }
 
-    public interface ClickListener {
+    public interface Callbacks {
         void onHitAnimationComplete();
     }
 

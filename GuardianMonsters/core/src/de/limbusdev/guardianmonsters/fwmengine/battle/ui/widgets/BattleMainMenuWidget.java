@@ -4,7 +4,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
-import de.limbusdev.guardianmonsters.utils.Constant;
+import de.limbusdev.guardianmonsters.Constant;
 
 /**
  * Created by Georg Eckert 2016
@@ -22,7 +22,7 @@ public class BattleMainMenuWidget extends BattleWidget {
      *
      * @param skin battle UI skin
      */
-    public BattleMainMenuWidget(Skin skin, ClickListener clickListener) {
+    public BattleMainMenuWidget(Skin skin, Callbacks callbacks) {
         super();
         this.setBounds(0,0, Constant.RES_X, 64);
 
@@ -39,18 +39,18 @@ public class BattleMainMenuWidget extends BattleWidget {
         this.addActor(swordButton);
         this.addActor(runButton);
 
-        setCallbackHandler(clickListener);
+        setCallbackHandler(callbacks);
 
     }
 
 
 
-    public void setCallbackHandler(final ClickListener clickListener) {
+    public void setCallbackHandler(final Callbacks callbacks) {
         runButton.addListener(
             new com.badlogic.gdx.scenes.scene2d.utils.ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    clickListener.onRunButton();
+                    callbacks.onRunButton();
                 }
             }
         );
@@ -59,7 +59,7 @@ public class BattleMainMenuWidget extends BattleWidget {
             new com.badlogic.gdx.scenes.scene2d.utils.ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    clickListener.onSwordButton();
+                    callbacks.onSwordButton();
                 }
             }
         );
@@ -67,7 +67,7 @@ public class BattleMainMenuWidget extends BattleWidget {
 
 
     // INNER INTERFACE
-    public interface ClickListener {
+    public interface Callbacks {
         void onRunButton();
         void onSwordButton();
     }

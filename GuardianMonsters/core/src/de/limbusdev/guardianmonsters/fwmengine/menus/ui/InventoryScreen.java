@@ -16,7 +16,7 @@ import de.limbusdev.guardianmonsters.fwmengine.menus.ui.widgets.TiledImage;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TeamComponent;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.model.items.Inventory;
-import de.limbusdev.guardianmonsters.utils.Constant;
+import de.limbusdev.guardianmonsters.Constant;
 
 /**
  * Inventory Screen, holds Team view, Ability Board, Item View, Encyclopedia

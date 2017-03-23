@@ -1,5 +1,7 @@
 package de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets;
 
+import com.badlogic.ashley.signals.Listener;
+import com.badlogic.ashley.signals.Signal;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Group;
@@ -9,14 +11,15 @@ import com.badlogic.gdx.utils.Array;
 
 
 import de.limbusdev.guardianmonsters.data.TextureAssets;
+import de.limbusdev.guardianmonsters.fwmengine.battle.control.BattleQueue;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.model.monsters.Monster;
 
 /**
- * Created by georg on 20.11.16.
+ * @author Georg Eckert
  */
 
-public class BattleQueueWidget extends BattleWidget {
+public class BattleQueueWidget extends BattleWidget implements Listener<BattleQueue.QueueSignal> {
 
     private int startx = 0;
     private int starty = 0;
@@ -31,22 +34,6 @@ public class BattleQueueWidget extends BattleWidget {
         this.align = align;
 
         bgIndicator = new Image(skin.getDrawable("monster-preview-active"));
-    }
-
-    /**
-     * Re-adds all monsters to the widget in the correct order
-     * @param current
-     * @param next
-     */
-    public void update(Array<Monster> current, Array<Monster> next) {
-        clear();
-
-        bgIndicator.setPosition(-4,0,align);
-        addActor(bgIndicator);
-
-        int pos=0;
-        pos =   addPreviewImagesToWidget(current,pos,false);
-                addPreviewImagesToWidget(next,pos,true);
     }
 
     /**
@@ -87,5 +74,21 @@ public class BattleQueueWidget extends BattleWidget {
         }
 
         return startSlot;
+    }
+
+    /**
+     * Re-adds all monsters to the widget in the correct order
+     */
+    @Override
+    public void receive(Signal<BattleQueue.QueueSignal> signal, BattleQueue.QueueSignal queueSignal) {
+        BattleQueue queue = queueSignal.queue;
+        clear();
+
+        bgIndicator.setPosition(-4,0,align);
+        addActor(bgIndicator);
+
+        int pos=0;
+        pos = addPreviewImagesToWidget(queue.getCurrentRound(),pos,false);
+        addPreviewImagesToWidget(queue.getNextRound(),pos,true);
     }
 }

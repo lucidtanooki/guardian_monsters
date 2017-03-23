@@ -6,11 +6,15 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
-import de.limbusdev.guardianmonsters.utils.Constant;
+
+import static de.limbusdev.guardianmonsters.Constant.WIDTH;
+import static de.limbusdev.guardianmonsters.Constant.HEIGHT;
+import static de.limbusdev.guardianmonsters.Constant.DEBUGGING_ON;
 
 /**
  * Template HUD, does nothing but setting up a stage with a FitViewport
- * Created by georg on 07.09.16.
+ *
+ * @author Georg Eckert 2017
  */
 public abstract class AHUD {
 
@@ -20,10 +24,10 @@ public abstract class AHUD {
 
     public AHUD(Skin skin) {
         stages = new Array<>();
-        FitViewport fit = new FitViewport(Constant.WIDTH, Constant.HEIGHT);
+        FitViewport fit = new FitViewport(WIDTH, HEIGHT);
         stage = new Stage(fit);
         this.skin = skin;
-        stage.setDebugAll(Constant.DEBUGGING_ON);
+        stage.setDebugAll(DEBUGGING_ON);
 
         stages.insert(0,stage);
     }
@@ -43,6 +47,10 @@ public abstract class AHUD {
     protected abstract void reset();
 
     public abstract void show();
+
+    public void hide() {
+        for (Stage s : stages) s.act(100);
+    }
 
     public void goToPreviousScreen() {
         Services.getScreenManager().popScreen();

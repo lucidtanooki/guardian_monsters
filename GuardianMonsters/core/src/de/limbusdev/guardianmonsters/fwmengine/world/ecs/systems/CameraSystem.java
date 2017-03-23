@@ -13,7 +13,7 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.CameraCompon
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Components;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PositionComponent;
 import de.limbusdev.guardianmonsters.geometry.IntRect;
-import de.limbusdev.guardianmonsters.utils.Constant;
+import de.limbusdev.guardianmonsters.Constant;
 
 /**
  * The camera system updates the cameras position according to the hero's position by keeping it

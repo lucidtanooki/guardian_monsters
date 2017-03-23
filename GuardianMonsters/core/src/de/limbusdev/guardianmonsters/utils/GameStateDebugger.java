@@ -22,7 +22,7 @@ import de.limbusdev.guardianmonsters.model.MonsterDB;
 import de.limbusdev.guardianmonsters.model.monsters.Team;
 
 /**
- * Created by georg on 15.11.16.
+ * @author Georg Eckert 2016
  */
 
 public class GameStateDebugger {
@@ -107,7 +107,7 @@ public class GameStateDebugger {
 
 
         BattleScreen battleScreen = new BattleScreen(inventory);
-        battleScreen.init(heroTeam, oppTeam);
+        battleScreen.init(heroTeam.team, oppTeam.team);
         game.setScreen(battleScreen);
     }
 
@@ -116,7 +116,7 @@ public class GameStateDebugger {
             de.limbusdev.guardianmonsters.model.gamestate.GameState state = SaveGameManager.loadSaveGame();
             game.setScreen(new WorldScreen(state.map, 1, true));
         } else
-            game.setScreen(new WorldScreen(Constant.startMap, 1, false));
+            game.setScreen(new WorldScreen(de.limbusdev.guardianmonsters.Constant.startMap, 1, false));
     }
 
     private void setUpTestWorldUI() {
@@ -178,7 +178,7 @@ public class GameStateDebugger {
     }
 
     public void startDebugging() {
-        switch(Constant.DEBUG_MODE) {
+        switch(de.limbusdev.guardianmonsters.Constant.DEBUG_MODE) {
             case BATTLE:
                 setUpTestBattle();
                 break;

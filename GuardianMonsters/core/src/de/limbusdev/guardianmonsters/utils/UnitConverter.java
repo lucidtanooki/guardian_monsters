@@ -10,19 +10,19 @@ public class UnitConverter {
     
     /* ............................................................................... METHODS .. */
     public static int pixelsToMeters(int pixels) {
-        return pixels/ Constant.PIXELS_PER_METER;
+        return pixels/ de.limbusdev.guardianmonsters.Constant.PIXELS_PER_METER;
     }
 
     public static int metersToPixels(int meters) {
-        return meters* Constant.PIXELS_PER_METER;
+        return meters* de.limbusdev.guardianmonsters.Constant.PIXELS_PER_METER;
     }
 
     public static int tilesToPixels(int tiles) {
-        return tiles* Constant.TILE_SIZE;
+        return tiles* de.limbusdev.guardianmonsters.Constant.TILE_SIZE;
     }
 
     public static int pixelsToTiles(int tiles) {
-        return Constant.TILE_SIZE/tiles;
+        return de.limbusdev.guardianmonsters.Constant.TILE_SIZE/tiles;
     }
     /* ..................................................................... GETTERS & SETTERS .. */
 }

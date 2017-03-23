@@ -24,7 +24,7 @@ import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.widgets.CreditsScreenWidget;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.widgets.StartScreenWidget;
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.WorldScreen;
-import de.limbusdev.guardianmonsters.utils.Constant;
+import de.limbusdev.guardianmonsters.Constant;
 import de.limbusdev.guardianmonsters.model.gamestate.GameState;
 
 

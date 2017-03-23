@@ -13,8 +13,11 @@ import de.limbusdev.guardianmonsters.fwmengine.battle.model.MonsterSpeedComparat
 import de.limbusdev.guardianmonsters.model.abilities.Ability;
 import de.limbusdev.guardianmonsters.model.monsters.Monster;
 import de.limbusdev.guardianmonsters.model.monsters.Team;
-import de.limbusdev.guardianmonsters.utils.Constant;
+import de.limbusdev.guardianmonsters.Constant;
 import de.limbusdev.guardianmonsters.utils.DebugOutput;
+
+import static de.limbusdev.guardianmonsters.Constant.LEFT;
+import static de.limbusdev.guardianmonsters.Constant.RIGHT;
 
 /**
  * @author Georg Eckert 2017
@@ -24,9 +27,6 @@ public class BattleSystem extends Observable {
 
     public static String TAG = BattleSystem.class.getSimpleName();
 
-    public static final boolean LEFT = true;
-    public static final boolean RIGHT = false;
-
     private Team leftTeam;
     private Team rightTeam;
 
@@ -35,6 +35,8 @@ public class BattleSystem extends Observable {
 
     private Array<Monster> currentRound;
     private Array<Monster> nextRound;
+
+    private BattleQueue queue;
 
     private Callbacks callbacks;
 
@@ -67,34 +69,14 @@ public class BattleSystem extends Observable {
         // Use two queues, to see the coming round in the widget
         currentRound = new Array<>();
         nextRound = new Array<>();
-        leftInBattle = new ArrayMap<>();
-        rightInBattle = new ArrayMap<>();
-
-        addFitMonstersToBattleField(leftTeam,LEFT);
-        addFitMonstersToBattleField(rightTeam,RIGHT);
+        queue = new BattleQueue(left,right);
+        leftInBattle = leftTeam.getFitTeam();
+        rightInBattle = rightTeam.getFitTeam();
 
         result = new BattleResult(left, null);
 
         newRound();
     }
-
-    /**
-     * Looks for monsters with HP > 0 and adds the first 3 to the battle
-     * @param team
-     * @param side
-     */
-    private void addFitMonstersToBattleField(Team team, boolean side) {
-
-        ArrayMap<Integer,Monster> inBattle;
-        if(side == LEFT) {
-            inBattle = leftInBattle;
-        } else {
-            inBattle = rightInBattle;
-        }
-
-        inBattle.putAll(team.getFitTeam());
-    }
-
 
     // .............................................................................. battle methods
     public Monster getActiveMonster() {
@@ -334,22 +316,6 @@ public class BattleSystem extends Observable {
         }
     }
 
-    public ArrayMap<Integer,Monster> getLeftTeam() {
-        return leftTeam;
-    }
-
-    public ArrayMap<Integer,Monster> getRightTeam() {
-        return rightTeam;
-    }
-
-    public ArrayMap<Integer,Monster> getLeftInBattle() {
-        return leftInBattle;
-    }
-
-    public ArrayMap<Integer,Monster> getRightInBattle() {
-        return rightInBattle;
-    }
-
     /**
      *
      * @param m
@@ -377,6 +343,22 @@ public class BattleSystem extends Observable {
 
     public BattleResult getResult() {
         return result;
+    }
+
+    public ArrayMap<Integer,Monster> getLeftTeam() {
+        return leftTeam;
+    }
+
+    public ArrayMap<Integer,Monster> getRightTeam() {
+        return rightTeam;
+    }
+
+    public ArrayMap<Integer,Monster> getLeftInBattle() {
+        return leftInBattle;
+    }
+
+    public ArrayMap<Integer,Monster> getRightInBattle() {
+        return rightInBattle;
     }
 
     // INNER INTERFACE

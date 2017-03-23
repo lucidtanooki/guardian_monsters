@@ -13,16 +13,16 @@ public class BattleActionMenuWidget extends BattleWidget {
     public ImageButton bagButton;
     public ImageButton extraButton;
 
-    private ClickListener clickListener;
+    private Callbacks callbacks;
 
     /**
      *
      * @param skin battle action UI skin
      */
-    public BattleActionMenuWidget(Skin skin, ClickListener clickListener) {
+    public BattleActionMenuWidget(Skin skin, Callbacks callbacks) {
         super();
 
-        this.clickListener = clickListener;
+        this.callbacks = callbacks;
 
         monsterButton   = new BattleHUDMenuButton(skin, BattleHUDMenuButton.TEAM    );
         extraButton     = new BattleHUDMenuButton(skin, BattleHUDMenuButton.DEFEND  );
@@ -54,7 +54,7 @@ public class BattleActionMenuWidget extends BattleWidget {
             new com.badlogic.gdx.scenes.scene2d.utils.ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    clickListener.onBackButton();
+                    callbacks.onBackButton();
                 }
             }
         );
@@ -63,7 +63,7 @@ public class BattleActionMenuWidget extends BattleWidget {
             new com.badlogic.gdx.scenes.scene2d.utils.ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    clickListener.onBagButton();
+                    callbacks.onBagButton();
                 }
             }
         );
@@ -72,7 +72,7 @@ public class BattleActionMenuWidget extends BattleWidget {
             new com.badlogic.gdx.scenes.scene2d.utils.ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    clickListener.onMonsterButton();
+                    callbacks.onMonsterButton();
                 }
             }
         );
@@ -81,14 +81,14 @@ public class BattleActionMenuWidget extends BattleWidget {
             new com.badlogic.gdx.scenes.scene2d.utils.ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    clickListener.onExtraButton();
+                    callbacks.onExtraButton();
                 }
             }
         );
     }
 
-    public void setClickListener(ClickListener clickListener) {
-        this.clickListener = clickListener;
+    public void setCallbacks(Callbacks callbacks) {
+        this.callbacks = callbacks;
     }
 
     public void disableAllButBackButton() {
@@ -107,7 +107,7 @@ public class BattleActionMenuWidget extends BattleWidget {
     }
 
     // INNER INTERFACE
-    public static abstract class ClickListener {
+    public static abstract class Callbacks {
         public void onMonsterButton(){}
         public void onBagButton(){}
         public void onBackButton(){}

@@ -25,7 +25,7 @@ public class BattleScreen extends AScreen {
     /* ........................................................................... CONSTRUCTOR .. */
     public BattleScreen(Inventory inventory) {
         super(new BattleHUD(inventory));
-        this.background = Services.getMedia().getBackgroundTexture(0);
+        setBackground(0);
     }
 
 
@@ -42,6 +42,7 @@ public class BattleScreen extends AScreen {
 
     @Override
     public void show() {
+        super.show();
         if(!initialized) {
             throw new ExceptionInInitializerError("BattleScreen must get initialized before drawn.");
         }
@@ -51,11 +52,6 @@ public class BattleScreen extends AScreen {
     @Override
     public void render(float delta) {
         super.render(delta);
-
-        Batch batch = super.getBatch();
-        batch.begin();
-        batch.draw(background, 0, 0, WIDTH, HEIGHT);
-        batch.end();
     }
 
     @Override

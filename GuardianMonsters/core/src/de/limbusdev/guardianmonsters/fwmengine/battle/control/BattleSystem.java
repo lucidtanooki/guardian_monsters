@@ -22,20 +22,18 @@ public class BattleSystem {
 
     public static String TAG = BattleSystem.class.getSimpleName();
 
+    private AIPlayer aiPlayer;
+
     private Callbacks callbacks;
 
     private BattleQueue queue;
-
     private Monster chosenTarget;
+    private AttackCalculationReport latestAttackReport;
+    private BattleResult result;
     private int chosenAttack;
     private boolean choiceComplete;
     private boolean targetChosen;
     private boolean attackChosen;
-
-    private AttackCalculationReport latestAttackReport;
-    private BattleResult result;
-
-    private AIPlayer aiPlayer;
 
     // ................................................................................. CONSTRUCTOR
     public BattleSystem(Team left, Team right, Callbacks callbacks) {
@@ -114,8 +112,8 @@ public class BattleSystem {
 
     public void continueBattle() {
         // Check if one team is KO
-        if(queue.getLeft().isKO() || queue.getRight().isKO()) {
-            callbacks.onBattleEnds(queue.getLeft().isKO());
+        if(queue.getCombatTeamLeft().isKO() || queue.getCombatTeamRight().isKO()) {
+            callbacks.onBattleEnds(queue.getCombatTeamLeft().isKO());
         } else {
             if (queue.peekNextSide() == RIGHT) {
                 // It's AI's turn
@@ -225,7 +223,7 @@ public class BattleSystem {
             boolean foundTarget = false;
             Monster target;
             while(!foundTarget) {
-                target = queue.getCombatTeamLeft().getRandomMember();
+                target = queue.getCombatTeamLeft().getRandomFitMember();
                 if(target.stat.isFit()) {
                     foundTarget = true;
                     setChosenTarget(target);

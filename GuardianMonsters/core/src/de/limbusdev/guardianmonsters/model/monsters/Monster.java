@@ -49,6 +49,11 @@ public class Monster extends Signal<Monster> implements Listener<Stat> {
         abilityGraph.activateNode(0);
         abilityGraph.setActiveAbility(0,0);
 
+        int ancestors = MonsterDB.getNumberOfAncestors(ID);
+        for(int i=0; i<ancestors; i++) {
+            abilityGraph.activateNode(abilityGraph.metamorphosisNodes.get(i));
+        }
+
         // Copy base stats over and register monster as listener at it's stats
         this.stat = new Stat(1, data.getBaseStat());
         this.stat.add(this);

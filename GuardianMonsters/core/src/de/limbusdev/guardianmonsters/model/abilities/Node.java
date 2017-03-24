@@ -74,4 +74,9 @@ public class Node extends Signal<Node> {
     public State getState() {
         return state;
     }
+
+    @Override
+    public String toString() {
+        return "Node " + Integer.toString(ID) + ": " + type.toString() + " & " + state.toString();
+    }
 }

@@ -55,7 +55,7 @@ public class MonsterDB {
         for (int i = 0; i < rootElement.getChildCount(); i++) {
             MonsterData info = XMLMonsterParser.parseMonster(rootElement.getChild(i), ancestor);
             statusInfos.put(info.getID(),info);
-            if(info.getMetamorphesTo() == i+1) {
+            if(info.getMetamorphesTo() == info.getID()+1) {
                 ancestor = info;
             } else {
                 ancestor = null;
@@ -81,5 +81,27 @@ public class MonsterDB {
 
     public static String getLocalNameById(int id) {
         return Services.getL18N().i18nMonsters().get(getNameById(id));
+    }
+
+    public static int getNumberOfAncestors(int id) {
+        if(id == 1) return 0;
+
+        boolean hasAncestor = true;
+        int ancestors = 0;
+
+        while(hasAncestor) {
+            MonsterData possibleAncestor = getData(id - 1 - ancestors);
+            if(possibleAncestor != null) {
+                if (possibleAncestor.getMetamorphesTo() == id - ancestors) {
+                    ancestors++;
+                } else {
+                    hasAncestor = false;
+                }
+            } else {
+                hasAncestor = false;
+            }
+        }
+
+        return ancestors;
     }
 }

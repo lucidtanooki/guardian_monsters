@@ -4,6 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 
+import de.limbusdev.guardianmonsters.Constant;
 import de.limbusdev.guardianmonsters.fwmengine.battle.control.BattleSystem;
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.BattleResult;
 import de.limbusdev.guardianmonsters.fwmengine.battleresult.BattleResultScreen;
@@ -14,6 +15,7 @@ import de.limbusdev.guardianmonsters.fwmengine.battle.ui.BattleScreen;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.InventoryScreen;
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.WorldScreen;
 import de.limbusdev.guardianmonsters.model.AbilityDB;
+import de.limbusdev.guardianmonsters.model.gamestate.GameState;
 import de.limbusdev.guardianmonsters.model.items.Inventory;
 import de.limbusdev.guardianmonsters.model.ItemDB;
 import de.limbusdev.guardianmonsters.model.items.Item;
@@ -82,16 +84,17 @@ public class GameStateDebugger {
     }
 
     private void setUpTestBattle() {
-        TeamComponent heroTeam = new TeamComponent();
-        heroTeam.team.put(0,BattleFactory.getInstance().createMonster(1));
-        heroTeam.team.put(1,BattleFactory.getInstance().createMonster(2));
-        heroTeam.team.put(2,BattleFactory.getInstance().createMonster(3));
-        heroTeam.team.get(0).abilityGraph.activateNode(13);
-        heroTeam.team.get(0).abilityGraph.setActiveAbility(6,1);
-        TeamComponent oppTeam = new TeamComponent();
-        oppTeam.team.put(0,BattleFactory.getInstance().createMonster(4));
-        oppTeam.team.put(1,BattleFactory.getInstance().createMonster(5));
-        oppTeam.team.put(2,BattleFactory.getInstance().createMonster(6));
+        Team heroTeam = new Team(3,3,3);
+        heroTeam.put(0,BattleFactory.getInstance().createMonster(1));
+        heroTeam.put(1,BattleFactory.getInstance().createMonster(2));
+        heroTeam.put(2,BattleFactory.getInstance().createMonster(3));
+        heroTeam.get(0).abilityGraph.activateNode(13);
+        heroTeam.get(0).abilityGraph.setActiveAbility(6,1);
+
+        Team oppTeam = new Team(3,3,3);
+        oppTeam.put(0,BattleFactory.getInstance().createMonster(4));
+        oppTeam.put(1,BattleFactory.getInstance().createMonster(5));
+        oppTeam.put(2,BattleFactory.getInstance().createMonster(6));
 
 
         Inventory inventory = new Inventory();
@@ -105,18 +108,26 @@ public class GameStateDebugger {
         inventory.putItemInInventory(ItemDB.getInstance().getItem("medicine-blue"));
         inventory.putItemInInventory(ItemDB.getInstance().getItem("angel-tear"));
 
+        int i = MonsterDB.getNumberOfAncestors(1);
+        i = MonsterDB.getNumberOfAncestors(2);
+        i = MonsterDB.getNumberOfAncestors(3);
+        i = MonsterDB.getNumberOfAncestors(4);
+        i = MonsterDB.getNumberOfAncestors(5);
+        i = MonsterDB.getNumberOfAncestors(6);
+
+
 
         BattleScreen battleScreen = new BattleScreen(inventory);
-        battleScreen.init(heroTeam.team, oppTeam.team);
+        battleScreen.init(heroTeam, oppTeam);
         game.setScreen(battleScreen);
     }
 
     private void setUpTestWorld() {
         if(SaveGameManager.doesGameSaveExist()) {
-            de.limbusdev.guardianmonsters.model.gamestate.GameState state = SaveGameManager.loadSaveGame();
+            GameState state = SaveGameManager.loadSaveGame();
             game.setScreen(new WorldScreen(state.map, 1, true));
         } else
-            game.setScreen(new WorldScreen(de.limbusdev.guardianmonsters.Constant.startMap, 1, false));
+            game.setScreen(new WorldScreen(Constant.startMap, 1, false));
     }
 
     private void setUpTestWorldUI() {
@@ -128,12 +139,12 @@ public class GameStateDebugger {
         heroTeam.team.put(0,BattleFactory.getInstance().createMonster(1));
         heroTeam.team.put(1,BattleFactory.getInstance().createMonster(2));
         heroTeam.team.put(2,BattleFactory.getInstance().createMonster(3));
-        TeamComponent oppTeam = new TeamComponent();
-        oppTeam.team.put(0,BattleFactory.getInstance().createMonster(4));
-        oppTeam.team.put(1,BattleFactory.getInstance().createMonster(5));
-        oppTeam.team.put(2,BattleFactory.getInstance().createMonster(6));
+        Team oppTeam = new Team(3,3,3);
+        oppTeam.put(0,BattleFactory.getInstance().createMonster(4));
+        oppTeam.put(1,BattleFactory.getInstance().createMonster(5));
+        oppTeam.put(2,BattleFactory.getInstance().createMonster(6));
 
-        BattleSystem bs = new BattleSystem(heroTeam.team, oppTeam.team, new BattleSystem.Callbacks() {});
+        BattleSystem bs = new BattleSystem(heroTeam.team, oppTeam, new BattleSystem.Callbacks() {});
 
         boolean enemyFit = true;
         while(enemyFit) {
@@ -141,7 +152,7 @@ public class GameStateDebugger {
             Monster m = bs.getActiveMonster();
             int att = MathUtils.random(0,m.abilityGraph.learntAbilities.size-1);
             Array<Monster> targets = new Array<Monster>();
-            for(Monster h : oppTeam.team.values()) {
+            for(Monster h : oppTeam.values()) {
                 if(h.stat.isFit()) {
                     targets.add(h);
                 }

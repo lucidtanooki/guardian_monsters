@@ -42,7 +42,7 @@ public class XMLMonsterParser {
 
         // ........................................................................... metamorphosis
         int metamorphsFrom = element.getInt("metamorphsFrom", 0);
-        int metamorphsTo   = element.getInt("metamorphesTo",  0);
+        int metamorphsTo   = element.getInt("metamorphsTo",  0);
 
         if(ancestor != null) {
             monsterData = new MonsterData(ID, nameID, metamorphsTo, elements, ancestor);

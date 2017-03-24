@@ -10,7 +10,7 @@ import de.limbusdev.guardianmonsters.fwmengine.world.model.MonsterArea;
 
 
 /**
- * Created by georg on 12.12.15.
+ * @author Georg Eckert
  */
 public class BattleFactory {
     /* ............................................................................ ATTRIBUTES .. */
@@ -21,7 +21,6 @@ public class BattleFactory {
     private BattleFactory() {
         this.monsters = new ArrayMap<>();
         for(int i = 1; i<= 33; i++) {
-            System.out.println("Creating Monster Nr. " + i);
             createMonster(i);
         }
     }

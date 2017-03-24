@@ -25,24 +25,28 @@ public class Team extends ArrayMap<Integer,Monster> {
     }
 
     /**
-     * Returns a team of monsters fit for battle. Team size is determined by the maximum possible
+     * Returns a team of monsters for battle. Team size is determined by the maximum possible
      * team size and the chosen active team size.
+     *
+     * Even defeated monsters are added. They can be revived during battle. If all monsters of the
+     * active team get defeated during battle, even if there are other monsters available, the
+     * player is game over, because he can't call them anymore.
+     *
+     * Therefore players must watch out, that the active team never gets defeated completely.
+     *
+     * Only players can revive members of the combat party. Enemies can't.
+     *
      * @return
      */
-    public CombatTeam getFitTeam() {
+    public CombatTeam getCombatTeam() {
         int teamSize = Math.min(maximumTeamSize, activeTeamSize);
-        CombatTeam fitTeam = new CombatTeam();
+        CombatTeam combatTeam = new CombatTeam();
 
-        int counter = 0;
-        for(int i=0; i < this.size && counter < teamSize; i++) {
-            Monster member = get(i);
-            if(member.stat.isFit()) {
-                fitTeam.put(counter, member);
-                counter++;
-            }
+        for(int i=0; i < this.size && i < teamSize; i++) {
+            combatTeam.put(i,get(i));
         }
 
-        return fitTeam;
+        return combatTeam;
     }
 
     /**
@@ -63,20 +67,6 @@ public class Team extends ArrayMap<Integer,Monster> {
         put(position2, monster1);
 
         return true;
-    }
-
-    /**
-     * Checks if any monster in the team is still fit to fight
-     * @return  if all monsters are KO
-     */
-    public boolean isKO() {
-        boolean ko = true;
-
-        for(Monster monster : this.values()) {
-            ko = ko && monster.stat.isKO();
-        }
-
-        return ko;
     }
 
     public int getMaximumTeamSize() {

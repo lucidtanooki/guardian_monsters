@@ -25,7 +25,7 @@ public class TeamMemberSwitcher extends Group {
 
     private Callbacks callbacks;
     private int currentlyChosen;
-    private Image monsterImg;
+    private MonsterPreviewWidget previewWidget;
     private Label name;
 
     public TeamMemberSwitcher(Skin skin, final ArrayMap<Integer, Monster> team, final Callbacks callbacks) {
@@ -54,16 +54,9 @@ public class TeamMemberSwitcher extends Group {
         next.setPosition(80,16,Align.bottomLeft);
         addActor(next);
 
-
-        Image monsterBg = new Image(Services.getUI().getBattleSkin().getDrawable("monster-preview"));
-        monsterBg.setPosition(32,58,Align.topLeft);
-        addActor(monsterBg);
-        monsterImg = new Image(new TextureRegionDrawable(
-            Services.getMedia().getTextureAtlas(TextureAssets.battleMonsterPreviews)
-            .findRegion(Integer.toString(team.get(0).ID))
-        ));
-        monsterImg.setPosition(36,53,Align.topLeft);
-        addActor(monsterImg);
+        previewWidget = new MonsterPreviewWidget();
+        previewWidget.setPosition(32,25,Align.bottomLeft);
+        addActor(previewWidget);
 
         previous.addListener(new ClickListener() {
             @Override
@@ -93,18 +86,8 @@ public class TeamMemberSwitcher extends Group {
     }
 
     public void init(Monster m) {
-        name.setText(Services.getL18N().l18n(BundleAssets.MONSTERS)
-            .get(MonsterDB.getInstance().getNameById(m.ID)));
-
-        Image monsterBg = new Image(Services.getUI().getBattleSkin().getDrawable("monster-preview"));
-        monsterBg.setPosition(32,58,Align.topLeft);
-        addActor(monsterBg);
-        monsterImg.setDrawable(new TextureRegionDrawable(
-            Services.getMedia().getTextureAtlas(TextureAssets.battleMonsterPreviews)
-                .findRegion(Integer.toString(m.ID))
-        ));
-        monsterImg.setPosition(36,53,Align.topLeft);
-        addActor(monsterImg);
+        name.setText(MonsterDB.getLocalNameById(m.ID));
+        previewWidget.setPreview(m.ID);
     }
 
     public interface Callbacks {

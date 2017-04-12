@@ -45,6 +45,7 @@ public class InventoryScreen implements Screen, MainToolBar.Controller {
         views.put("ability",    new AbilityMapSubMenu(skin, team.team));
         views.put("key",        new KeyItemsSubMenu(skin, inventory));
         views.put("abilityChoice", new AbilityChoiceSubMenu(skin, team.team));
+        views.put("encyclo",    new EncycloSubMenu(skin));
 
         stage.addActor(views.get("team"));
     }
@@ -146,6 +147,12 @@ public class InventoryScreen implements Screen, MainToolBar.Controller {
         removeSubMenus();
         views.get("abilityChoice").refresh();
         stage.addActor(views.get("abilityChoice"));
+    }
+
+    @Override
+    public void onEncycloButton() {
+        removeSubMenus();
+        stage.addActor(views.get("encyclo"));
     }
 
     @Override

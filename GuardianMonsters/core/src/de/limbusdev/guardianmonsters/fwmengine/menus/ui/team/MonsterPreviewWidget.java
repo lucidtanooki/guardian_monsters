@@ -1,5 +1,7 @@
 package de.limbusdev.guardianmonsters.fwmengine.menus.ui.team;
 
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -17,12 +19,11 @@ public class MonsterPreviewWidget extends Group {
 
     private Image monster;
 
-    public MonsterPreviewWidget() {
+    public MonsterPreviewWidget(Skin skin) {
         super();
 
         setSize(32,32);
 
-        Skin skin = Services.getUI().getInventorySkin();
         Image bg = new Image(skin.getDrawable("monster-preview-frame-base"));
         bg.setPosition(0,0,Align.bottomLeft);
 
@@ -40,7 +41,16 @@ public class MonsterPreviewWidget extends Group {
 
     public void setPreview(int monsterID) {
         Image face = Services.getMedia().getMonsterFace(monsterID);
-        monster.setDrawable(face.getDrawable());
+        if(face != null) {
+            monster.setDrawable(face.getDrawable());
+        }
     }
 
+    @Override
+    public void setColor(Color color) {
+        super.setColor(color);
+        for(Actor a : this.getChildren()) {
+            a.setColor(color);
+        }
+    }
 }

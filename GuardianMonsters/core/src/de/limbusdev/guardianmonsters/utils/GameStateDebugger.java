@@ -8,6 +8,7 @@ import de.limbusdev.guardianmonsters.Constant;
 import de.limbusdev.guardianmonsters.fwmengine.battle.control.BattleSystem;
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.BattleResult;
 import de.limbusdev.guardianmonsters.fwmengine.battleresult.BattleResultScreen;
+import de.limbusdev.guardianmonsters.fwmengine.cutscene.MetamorphosisScreen;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TeamComponent;
 import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager;
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.BattleFactory;
@@ -188,6 +189,10 @@ public class GameStateDebugger {
         game.setScreen(new BattleResultScreen(team, result));
     }
 
+    private void testMetamorphosisScreen() {
+        game.setScreen(new MetamorphosisScreen(1,2));
+    }
+
     public void startDebugging() {
         switch(de.limbusdev.guardianmonsters.Constant.DEBUG_MODE) {
             case BATTLE:
@@ -210,6 +215,9 @@ public class GameStateDebugger {
                 break;
             case RESULT_SCREEN:
                 testResultScreen();
+                break;
+            case METAMORPHOSIS:
+                testMetamorphosisScreen();
                 break;
             default:
                 setUpTestWorld();

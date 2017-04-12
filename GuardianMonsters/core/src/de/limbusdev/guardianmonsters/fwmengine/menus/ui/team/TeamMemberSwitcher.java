@@ -54,7 +54,7 @@ public class TeamMemberSwitcher extends Group {
         next.setPosition(80,16,Align.bottomLeft);
         addActor(next);
 
-        previewWidget = new MonsterPreviewWidget();
+        previewWidget = new MonsterPreviewWidget(skin);
         previewWidget.setPosition(32,25,Align.bottomLeft);
         addActor(previewWidget);
 

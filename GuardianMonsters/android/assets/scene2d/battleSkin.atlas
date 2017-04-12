@@ -248,81 +248,81 @@ monster-preview-active
   orig: 42, 40
   offset: 0, 0
   index: -1
+monster-preview-frame-cover
+  rotate: false
+  xy: 990, 221
+  size: 32, 34
+  orig: 32, 34
+  offset: 0, 0
+  index: -1
+monster-preview-frame-base
+  rotate: false
+  xy: 318, 134
+  size: 32, 34
+  orig: 32, 34
+  offset: 0, 0
+  index: -1
+monster-preview
+  rotate: false
+  xy: 318, 134
+  size: 32, 34
+  orig: 32, 34
+  offset: 0, 0
+  index: -1
 b-attack-frost-up
   rotate: false
-  xy: 318, 125
+  xy: 352, 125
   size: 82, 32
   orig: 82, 32
   offset: 0, 0
   index: -1
 b-attack-none-down
   rotate: false
-  xy: 402, 125
+  xy: 436, 125
   size: 82, 32
   orig: 82, 32
   offset: 0, 0
   index: -1
 b-attack-arthropoda-up
   rotate: false
-  xy: 295, 91
+  xy: 520, 121
   size: 82, 32
   orig: 82, 32
   offset: 0, 0
   index: -1
 b-attack-forest-up
   rotate: false
-  xy: 379, 91
+  xy: 604, 121
   size: 82, 32
   orig: 82, 32
   offset: 0, 0
   index: -1
 b-fight-down
   rotate: false
-  xy: 276, 57
+  xy: 688, 121
   size: 82, 32
   orig: 82, 32
   offset: 0, 0
   index: -1
 b-attack-air-down
   rotate: false
-  xy: 360, 57
+  xy: 772, 121
   size: 82, 32
   orig: 82, 32
   offset: 0, 0
   index: -1
 b-attack-mountain-up
   rotate: false
-  xy: 276, 23
+  xy: 856, 121
   size: 82, 32
   orig: 82, 32
   offset: 0, 0
   index: -1
 b-attack-lightning-down
   rotate: false
-  xy: 360, 23
+  xy: 940, 113
   size: 82, 32
   orig: 82, 32
-  offset: 0, 0
-  index: -1
-b-attack-spirit-down
-  rotate: false
-  xy: 486, 121
-  size: 82, 32
-  orig: 82, 32
-  offset: 0, 0
-  index: -1
-b-flee-down
-  rotate: false
-  xy: 570, 121
-  size: 82, 32
-  orig: 82, 32
-  offset: 0, 0
-  index: -1
-monster-preview
-  rotate: false
-  xy: 990, 221
-  size: 32, 34
-  orig: 32, 34
   offset: 0, 0
   index: -1
 choice-r-up
@@ -334,9 +334,23 @@ choice-r-up
   index: -1
 choice-r-down
   rotate: false
-  xy: 654, 127
+  xy: 65, 3
   size: 32, 26
   orig: 32, 26
+  offset: 0, 0
+  index: -1
+b-attack-spirit-down
+  rotate: false
+  xy: 276, 68
+  size: 82, 32
+  orig: 82, 32
+  offset: 0, 0
+  index: -1
+b-flee-down
+  rotate: false
+  xy: 276, 34
+  size: 82, 32
+  orig: 82, 32
   offset: 0, 0
   index: -1
 invis
@@ -356,7 +370,7 @@ blue-bar-lr
   index: -1
 green-progress-bar
   rotate: false
-  xy: 318, 162
+  xy: 99, 23
   size: 11, 6
   split: 3, 3, 2, 2
   orig: 11, 6
@@ -371,14 +385,14 @@ black
   index: -1
 bg
   rotate: false
-  xy: 276, 92
+  xy: 99, 13
   size: 8, 8
   orig: 8, 8
   offset: 0, 0
   index: -1
 yellow-progress-bar
   rotate: false
-  xy: 444, 83
+  xy: 112, 23
   size: 8, 6
   split: 2, 2, 3, 2
   orig: 8, 6

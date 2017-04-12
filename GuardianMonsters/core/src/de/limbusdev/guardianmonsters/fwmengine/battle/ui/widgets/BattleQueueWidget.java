@@ -13,6 +13,7 @@ import com.badlogic.gdx.utils.Array;
 import de.limbusdev.guardianmonsters.data.TextureAssets;
 import de.limbusdev.guardianmonsters.fwmengine.battle.control.BattleQueue;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
+import de.limbusdev.guardianmonsters.fwmengine.menus.ui.team.MonsterPreviewWidget;
 import de.limbusdev.guardianmonsters.model.monsters.Monster;
 
 /**
@@ -46,29 +47,16 @@ public class BattleQueueWidget extends BattleWidget implements Listener<BattleQu
     private int addPreviewImagesToWidget(Array<Monster> queue, int startSlot, boolean greyOut) {
         for(int i = queue.size-1; i>=0; i--) {
             Monster m = queue.get(i);
-            Image previewBackground = new Image(
-                Services.getUI().getBattleSkin().getDrawable("monster-preview"));
+
+            MonsterPreviewWidget previewWidget = new MonsterPreviewWidget(Services.getUI().getBattleSkin());
+            previewWidget.setPreview(m.ID);
             if(greyOut) {
-                previewBackground.setColor(Color.GRAY);
-            }
-            Group monPreview = new Group();
-
-            TextureAtlas previewAtlas = Services.getMedia()
-                .getTextureAtlas(TextureAssets.battleMonsterPreviews);
-
-            TextureAtlas.AtlasRegion sprite = previewAtlas.findRegion(Integer.toString(m.ID));
-            if(sprite == null) {
-                sprite = previewAtlas.findRegion("0");
+                previewWidget.setColor(Color.GRAY);
             }
 
-            Image preview = new Image(sprite);
-            preview.setPosition(4,6,align);
-            monPreview.addActor(previewBackground);
-            monPreview.addActor(preview);
+            previewWidget.setPosition(startx,starty+startSlot*previewYoffset+queueOffset,align);
 
-            monPreview.setPosition(startx,starty+startSlot*previewYoffset+queueOffset,align);
-
-            addActor(monPreview);
+            addActor(previewWidget);
 
             startSlot++;
         }

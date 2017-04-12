@@ -90,6 +90,17 @@ public class MainToolBar extends Group {
         });
         addActor(abilityChoice);
 
+        // ................................................................................. ENCYCLO
+        ImageButton encyclo = new ImageButton(skin, "b-toolbar-encyclo");
+        encyclo.setPosition(428-36,4, Align.bottomRight);
+        encyclo.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                callbacks.onEncycloButton();
+            }
+        });
+        addActor(encyclo);
+
         // .................................................................................... EXIT
         ImageButton exit = new ImageButton(skin, "b-toolbar-exit");
         exit.setPosition(428-2,4, Align.bottomRight);
@@ -102,7 +113,7 @@ public class MainToolBar extends Group {
         });
         addActor(exit);
 
-        buttonGroup = new ButtonGroup<>(team,items,ability,key,abilityChoice);
+        buttonGroup = new ButtonGroup<>(team,items,ability,key,abilityChoice,encyclo);
         buttonGroup.setMaxCheckCount(1);
         buttonGroup.setMinCheckCount(1);
 
@@ -114,6 +125,7 @@ public class MainToolBar extends Group {
         void onAbilityButton();
         void onKeyButton();
         void onAbilityChoiceButton();
+        void onEncycloButton();
         void onExitButton();
     }
 }

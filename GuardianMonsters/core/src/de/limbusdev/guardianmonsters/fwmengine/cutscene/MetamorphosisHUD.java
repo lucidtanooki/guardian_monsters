@@ -2,19 +2,24 @@ package de.limbusdev.guardianmonsters.fwmengine.cutscene;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.scenes.scene2d.Action;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.RunnableAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 
 import de.limbusdev.guardianmonsters.Constant;
 import de.limbusdev.guardianmonsters.data.TextureAssets;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
+import de.limbusdev.guardianmonsters.fwmengine.menus.ui.team.TeamMemberSwitcher;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.widgets.AnimatedImage;
 import de.limbusdev.guardianmonsters.fwmengine.ui.AHUD;
+import de.limbusdev.guardianmonsters.model.MonsterDB;
 
 /**
  * MetamorphosisHUD
@@ -37,6 +42,15 @@ public class MetamorphosisHUD extends AHUD {
         imgAfter.setPosition(Constant.RES_X/2-64,Constant.RES_Y/2-64,Align.bottomLeft);
 
         final Button ok = new TextButton("OK", skin, "default");
+        ok.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                Services.getScreenManager().popScreen();
+            }
+        });
+
+        Label label = new Label(MonsterDB.getLocalNameById(before) + " starts to metamorph!", skin, "default");
+        stage.addActor(label);
 
         stage.addActor(imgBefore);
 

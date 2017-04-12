@@ -47,7 +47,9 @@
     "board-metamorphosis-active":       {"up": "board-metamorphosis-active",                  "down": "board-metamorphosis-active-selected",        "checked": "board-metamorphosis-active-selected"},
 
     "button-next": {"up": "button-next-up", "down": "button-next-down"},
-    "button-previous": {"up": "button-previous-up", "down": "button-previous-down"}
+    "button-previous": {"up": "button-previous-up", "down": "button-previous-down"},
+
+    "burgund-close":            {"up": "button-burgund-close-up", "down": "button-burgund-close-down"}
   },
 
 

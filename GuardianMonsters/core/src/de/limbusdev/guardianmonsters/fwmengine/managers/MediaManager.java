@@ -7,9 +7,13 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 
+import de.limbusdev.guardianmonsters.Constant;
+import de.limbusdev.guardianmonsters.data.TextureAssets;
+import de.limbusdev.guardianmonsters.fwmengine.menus.ui.widgets.AnimatedImage;
 import de.limbusdev.guardianmonsters.fwmengine.world.model.SkyDirection;
 
 
@@ -256,6 +260,21 @@ public class MediaManager implements Media {
         Animation<AtlasRegion> anim = new Animation<>(1f, regions);
         anim.setPlayMode(Animation.PlayMode.LOOP);
         return anim;
+    }
+
+    @Override
+    public Image getMetamorphosisBackground() {
+        TextureAtlas atlas = getTextureAtlas(TextureAssets.battleBackgrounds);
+        Image img = new Image(atlas.findRegion("metamorph_bg"));
+        return img;
+    }
+
+    @Override
+    public AnimatedImage getMetamorphosisAnimation() {
+        Animation animation = new Animation(.15f,getTextureAtlas(TextureAssets.bigAnimations).findRegions("metamorphosis"));
+        AnimatedImage metamorphosisAnimation = new AnimatedImage(animation);
+        metamorphosisAnimation.setPlayMode(Animation.PlayMode.NORMAL);
+        return metamorphosisAnimation;
     }
 
 }

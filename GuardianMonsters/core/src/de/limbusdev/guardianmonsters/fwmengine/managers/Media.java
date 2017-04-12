@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.ArrayMap;
 
+import de.limbusdev.guardianmonsters.fwmengine.menus.ui.widgets.AnimatedImage;
 import de.limbusdev.guardianmonsters.fwmengine.world.model.SkyDirection;
 
 /**
@@ -72,5 +73,9 @@ public interface Media {
     public Animation<AtlasRegion> getTileAnimation(int index);
 
     public Animation<AtlasRegion> getObjectAnimation(String id);
+
+    Image getMetamorphosisBackground();
+
+    AnimatedImage getMetamorphosisAnimation();
 
 }

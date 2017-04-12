@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.ArrayMap;
 
+import de.limbusdev.guardianmonsters.fwmengine.menus.ui.widgets.AnimatedImage;
 import de.limbusdev.guardianmonsters.fwmengine.world.model.SkyDirection;
 
 /**
@@ -79,5 +80,15 @@ public class NullMedia implements Media {
     }
 
     public Animation getObjectAnimation(String id) {return null;}
+
+    @Override
+    public Image getMetamorphosisBackground() {
+        return null;
+    }
+
+    @Override
+    public AnimatedImage getMetamorphosisAnimation() {
+        return null;
+    }
 
 }

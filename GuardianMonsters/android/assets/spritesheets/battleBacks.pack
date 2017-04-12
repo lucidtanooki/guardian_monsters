@@ -1,31 +1,33 @@
 
 battleBacks.png
 format: RGBA8888
-filter: Nearest,Nearest
+filter: MipMapNearestNearest,MipMapNearestLinear
 repeat: none
 forest
   rotate: false
-  xy: 1, 403
-  size: 640, 400
-  orig: 640, 400
+  xy: 1, 513
+  size: 428, 268
+  orig: 428, 268
   offset: 0, 0
   index: -1
 grass
   rotate: false
-  xy: 1, 1
-  size: 640, 400
-  orig: 640, 400
+  xy: 1, 243
+  size: 428, 268
+  orig: 428, 268
   offset: 0, 0
   index: -1
-
-battleBacks2.png
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
 cave
   rotate: false
+  xy: 431, 513
+  size: 428, 268
+  orig: 428, 268
+  offset: 0, 0
+  index: -1
+metamorph_bg
+  rotate: false
   xy: 1, 1
-  size: 640, 400
-  orig: 640, 400
+  size: 428, 240
+  orig: 428, 240
   offset: 0, 0
   index: -1

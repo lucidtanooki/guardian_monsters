@@ -16,6 +16,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.I18NBundle;
 
 import de.limbusdev.guardianmonsters.Constant;
+import de.limbusdev.guardianmonsters.data.AudioAssets;
 import de.limbusdev.guardianmonsters.data.TextureAssets;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Media;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
@@ -41,7 +42,7 @@ public class MetamorphosisHUD extends AHUD {
         super(skin);
 
         I18NBundle bundle = Services.getL18N().i18nGeneral();
-        Media media = Services.getMedia();
+        final Media media = Services.getMedia();
 
         String[] monsterNames = {
             MonsterDB.getLocalNameById(before),
@@ -73,7 +74,17 @@ public class MetamorphosisHUD extends AHUD {
         ok.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                Services.getScreenManager().popScreen();
+                stage.addAction(Actions.sequence(
+                    Services.getAudio().getMuteAudioAction(AudioAssets.metamorphosisMusic),
+                    Actions.fadeOut(1),
+                    Actions.delay(1),
+                    Actions.run(new Runnable() {
+                        @Override
+                        public void run() {
+                            Services.getScreenManager().popScreen();
+                        }
+                    })
+                ));
             }
         });
 
@@ -87,10 +98,15 @@ public class MetamorphosisHUD extends AHUD {
 
         Action metaAction = Actions.sequence(
             Actions.delay(4),
+            Services.getAudio().getMuteAudioAction(AudioAssets.metamorphosisMusic),
+            Actions.delay(1),
             Actions.run(new Runnable() {
                 @Override
                 public void run() {
+                    label.remove();
                     stage.addActor(animation);
+                    Services.getAudio().playSound(AudioAssets.metamorphosisSFX);
+                    stage.addActor(label);
                 }
             }),
             Actions.delay(2),
@@ -105,12 +121,20 @@ public class MetamorphosisHUD extends AHUD {
                     stage.addActor(label);
                 }
             }),
-            Actions.delay(4),
+            Actions.delay(3),
+            Actions.run(new Runnable() {
+                @Override
+                public void run() {
+                    Services.getAudio().playMusic(AudioAssets.victoryFanfareMusic);
+                    label.setText(messages[1]);
+                }
+            }),
+            Actions.delay(5.5f),
+            Services.getAudio().getFadeInMusicAction(AudioAssets.metamorphosisMusic),
             Actions.run(new Runnable() {
                 @Override
                 public void run() {
                     stage.addActor(ok);
-                    label.setText(messages[1]);
                 }
             })
         );
@@ -132,6 +156,12 @@ public class MetamorphosisHUD extends AHUD {
 
     @Override
     public void show() {
+        Services.getAudio().playLoopMusic(AudioAssets.metamorphosisMusic);
+    }
 
+    @Override
+    public void hide() {
+        super.hide();
+        Services.getAudio().stopMusic(AudioAssets.metamorphosisMusic);
     }
 }

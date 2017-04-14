@@ -51,6 +51,7 @@ public abstract class AScreen implements Screen {
 
     @Override
     public void show() {
+        this.hud.show();
         this.batch = new SpriteBatch();
         this.shpRend = new ShapeRenderer();
         if(hud != null) Gdx.input.setInputProcessor(hud.getStage());
@@ -59,7 +60,7 @@ public abstract class AScreen implements Screen {
     @Override
     public void render(float delta) {
         // Clear screen
-        Gdx.gl.glClearColor(.3f, .3f, .3f, 1);
+        Gdx.gl.glClearColor(0,0,0,1);
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 

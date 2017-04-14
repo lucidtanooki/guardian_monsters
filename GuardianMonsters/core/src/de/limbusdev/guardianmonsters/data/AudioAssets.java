@@ -21,6 +21,7 @@ public class AudioAssets {
     public static final String victoryFanfareMusic = "music/victory_fanfare.ogg";
     public static final String victorySongMusic = "music/victory_song.ogg";
     public static final String metamorphosisMusic = "music/metamorphosis.ogg";
+    public static final String guardosphereMusic = "music/guardosphere.ogg";
 
     public static final String metamorphosisSFX = "sfx/metamorphosis.ogg";
 
@@ -110,6 +111,7 @@ public class AudioAssets {
         musicPaths.add(victoryFanfareMusic);
         musicPaths.add(victorySongMusic);
         musicPaths.add(metamorphosisMusic);
+        musicPaths.add(guardosphereMusic);
         return musicPaths;
     }
 }

@@ -38,7 +38,7 @@ public class StartScreenWidget extends WidgetGroup {
         Animation bgAnim = new Animation(.1f, Services.getMedia()
             .getTextureAtlas(TextureAssets.bigAnimations).findRegions("mainMenuAnimation"));
         bgAnim.setPlayMode(Animation.PlayMode.LOOP);
-        AnimatedImage bgAnimation = new AnimatedImage(bgAnim);
+        de.limbusdev.guardianmonsters.fwmengine.ui.AnimatedImage bgAnimation = new de.limbusdev.guardianmonsters.fwmengine.ui.AnimatedImage(bgAnim);
         bgAnimation.setColor(1,1,1,.3f);
         bgAnimation.setPosition(35,-30, Align.bottomLeft);
         group.addActor(bgAnimation);

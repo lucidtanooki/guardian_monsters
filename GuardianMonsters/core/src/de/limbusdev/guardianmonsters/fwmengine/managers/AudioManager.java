@@ -8,9 +8,8 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.utils.Array;
 
 /**
- * Created by georg on 14.11.16.
+ * @author Georg Eckert
  */
-
 public class AudioManager implements Audio {
 
     private String currentlyPlayingBGMusic;
@@ -78,10 +77,8 @@ public class AudioManager implements Audio {
     }
 
     @Override
-    public Action getMuteAudioAction() {
-        // TODO sometimes the next battle is muted, because there was no time at the end of
-        // the last battle to finish this action
-        final Music muteable = assets.get(currentlyPlayingBGMusic, Music.class);
+    public Action getMuteAudioAction(String musicPath) {
+        final Music muteable = assets.get(musicPath, Music.class);
         Action muteAction = Actions.sequence(
             Actions.delay(.005f),
             Actions.repeat(100,Actions.run(new Runnable() {
@@ -98,5 +95,27 @@ public class AudioManager implements Audio {
             }
         })));
         return muteAction;
+    }
+
+    @Override
+    public Action getFadeInMusicAction(String musicPath) {
+        final Music music = assets.get(musicPath, Music.class);
+        music.setLooping(true);
+        Action fadeInAction = Actions.sequence(
+            Actions.delay(.005f),
+            Actions.repeat(100,Actions.run(new Runnable() {
+                private int vol = 0;
+                @Override
+                public void run() {
+                    music.play();
+                    if(vol < 100) {
+                        ++vol;
+                        music.setVolume(vol/100f);
+                    } else {
+                        music.setVolume(100);
+                    }
+                }
+            })));
+        return fadeInAction;
     }
 }

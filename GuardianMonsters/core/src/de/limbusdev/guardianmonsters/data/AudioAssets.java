@@ -20,6 +20,9 @@ public class AudioAssets {
     private Array<String> battleMusic;
     public static final String victoryFanfareMusic = "music/victory_fanfare.ogg";
     public static final String victorySongMusic = "music/victory_song.ogg";
+    public static final String metamorphosisMusic = "music/metamorphosis.ogg";
+
+    public static final String metamorphosisSFX = "sfx/metamorphosis.ogg";
 
     private static AudioAssets instance;
 
@@ -40,15 +43,15 @@ public class AudioAssets {
 
     private AudioAssets() {
         // Music
-        bgMusicTown = new Array<String>();
+        bgMusicTown = new Array<>();
         bgMusicTown.add("music/town_loop_1.wav");
         bgMusicTown.add("music/town_loop_2.ogg");
 
-        battleMusic = new Array<String>();
+        battleMusic = new Array<>();
         battleMusic.add("music/battle_1.ogg");
 
         // SFX
-        battleSFX = new ArrayMap<SFXType,Array<String>>();
+        battleSFX = new ArrayMap<>();
 
         Array<String> sfxHits = new Array<String>();
         for(int i=1;i<=18;i++) sfxHits.add(SFXdir + "hits/" + i + ".ogg");
@@ -94,6 +97,9 @@ public class AudioAssets {
         for(Array<String> a : battleSFX.values()) {
             sfxPaths.addAll(a);
         }
+
+        sfxPaths.add(metamorphosisSFX);
+
         return sfxPaths;
     }
 
@@ -103,6 +109,7 @@ public class AudioAssets {
         musicPaths.addAll(bgMusicTown);
         musicPaths.add(victoryFanfareMusic);
         musicPaths.add(victorySongMusic);
+        musicPaths.add(metamorphosisMusic);
         return musicPaths;
     }
 }

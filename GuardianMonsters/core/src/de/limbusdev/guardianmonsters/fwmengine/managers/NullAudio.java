@@ -34,7 +34,12 @@ public class NullAudio implements Audio {
     }
 
     @Override
-    public Action getMuteAudioAction() {
+    public Action getMuteAudioAction(String path) {
+        return Actions.sequence();
+    }
+
+    @Override
+    public Action getFadeInMusicAction(String path) {
         return Actions.sequence();
     }
 

@@ -13,7 +13,8 @@ public interface Audio {
     void playLoopMusic(String path);
     void stopMusic(String path);
     void dispose();
-    Action getMuteAudioAction();
+    Action getMuteAudioAction(String path);
+    Action getFadeInMusicAction(String path);
 
     /**
      * Stops the currently playing music

@@ -481,7 +481,7 @@ public class BattleHUD extends ABattleHUD {
                 }
             };
             Action endOfBattleMusicSequence = Actions.sequence(
-                Services.getAudio().getMuteAudioAction(),
+                Services.getAudio().getMuteAudioAction(AudioAssets.victorySongMusic),
                 Actions.run(runnable),
                 Actions.delay(5),
                 Actions.run(runnable2)

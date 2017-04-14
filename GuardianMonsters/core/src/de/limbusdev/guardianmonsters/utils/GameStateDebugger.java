@@ -190,7 +190,7 @@ public class GameStateDebugger {
     }
 
     private void testMetamorphosisScreen() {
-        game.setScreen(new MetamorphosisScreen(1,2));
+        game.setScreen(new MetamorphosisScreen(5,6));
     }
 
     public void startDebugging() {

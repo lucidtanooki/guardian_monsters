@@ -1,9 +1,14 @@
-package de.limbusdev.guardianmonsters.fwmengine.menus.ui.widgets;
+package de.limbusdev.guardianmonsters.fwmengine.ui;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+
+import de.limbusdev.guardianmonsters.data.TextureAssets;
+import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 
 /**
  * ParticleEffectActor
@@ -15,9 +20,12 @@ public class ParticleEffectActor extends Actor {
     private ParticleEffect particleEffect;
     private Vector2 acc = new Vector2();
 
-    public ParticleEffectActor(ParticleEffect particleEffect) {
+    public ParticleEffectActor(String name) {
         super();
-        this.particleEffect = particleEffect;
+        TextureAtlas particleAtlas = Services.getMedia().getTextureAtlas(TextureAssets.particleTextures);
+        ParticleEffect particles = new ParticleEffect();
+        particles.load(Gdx.files.internal("particles/" + name + "-particle-effect.p"), particleAtlas);
+        this.particleEffect = particles;
     }
 
     @Override

@@ -1474,37 +1474,37 @@ button-element-mountain
   orig: 16, 16
   offset: 0, 0
   index: -1
-stats-symbol-exp
+guardosphere-frame
   rotate: false
   xy: 697, 155
   size: 16, 16
+  split: 7, 7, 7, 7
   orig: 16, 16
   offset: 0, 0
   index: -1
-stats-symbol-pdef
+stats-symbol-exp
   rotate: false
   xy: 697, 137
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
-button-element-frost
+guardosphere-frame-down
   rotate: false
   xy: 697, 119
   size: 16, 16
-  split: 4, 4, 4, 6
+  split: 7, 7, 7, 7
   orig: 16, 16
   offset: 0, 0
   index: -1
-button-element-spirit
+stats-symbol-pdef
   rotate: false
   xy: 715, 163
   size: 16, 16
-  split: 4, 4, 4, 6
   orig: 16, 16
   offset: 0, 0
   index: -1
-button-element-arthropoda
+button-element-frost
   rotate: false
   xy: 715, 145
   size: 16, 16
@@ -1512,14 +1512,15 @@ button-element-arthropoda
   orig: 16, 16
   offset: 0, 0
   index: -1
-board-node-empty-enabled
+button-element-spirit
   rotate: false
   xy: 715, 127
   size: 16, 16
+  split: 4, 4, 4, 6
   orig: 16, 16
   offset: 0, 0
   index: -1
-button-element-forest
+button-element-arthropoda
   rotate: false
   xy: 733, 163
   size: 16, 16
@@ -1527,30 +1528,45 @@ button-element-forest
   orig: 16, 16
   offset: 0, 0
   index: -1
-stats-symbol-hp
+board-node-empty-enabled
   rotate: false
   xy: 733, 145
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
-board-node-empty-active-selected
+button-element-forest
   rotate: false
   xy: 733, 127
   size: 16, 16
+  split: 4, 4, 4, 6
   orig: 16, 16
   offset: 0, 0
   index: -1
-bg-pattern-3
+stats-symbol-hp
   rotate: false
   xy: 743, 181
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
-button-element-air
+board-node-empty-active-selected
   rotate: false
   xy: 751, 163
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+bg-pattern-3
+  rotate: false
+  xy: 751, 145
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+button-element-air
+  rotate: false
+  xy: 751, 127
   size: 16, 16
   split: 4, 4, 5, 6
   orig: 16, 16
@@ -1558,28 +1574,28 @@ button-element-air
   index: -1
 bg-pattern-2
   rotate: false
-  xy: 751, 145
+  xy: 671, 99
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 bg-pattern-1
   rotate: false
-  xy: 751, 127
+  xy: 689, 101
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 stats-symbol-mstr
   rotate: false
-  xy: 671, 99
+  xy: 715, 109
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 paper-border
   rotate: false
-  xy: 689, 101
+  xy: 733, 109
   size: 16, 16
   split: 7, 7, 7, 7
   orig: 16, 16
@@ -1587,7 +1603,7 @@ paper-border
   index: -1
 button-element-earth
   rotate: false
-  xy: 715, 109
+  xy: 751, 109
   size: 16, 16
   split: 4, 4, 4, 6
   orig: 16, 16
@@ -1595,21 +1611,21 @@ button-element-earth
   index: -1
 stats-symbol-speed
   rotate: false
-  xy: 733, 109
+  xy: 671, 81
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 board-node-empty-disabled-selected
   rotate: false
-  xy: 751, 109
+  xy: 689, 83
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 stats-symbol-mp
   rotate: false
-  xy: 671, 81
+  xy: 707, 91
   size: 16, 16
   orig: 16, 16
   offset: 0, 0

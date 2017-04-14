@@ -20,8 +20,8 @@ import de.limbusdev.guardianmonsters.data.AudioAssets;
 import de.limbusdev.guardianmonsters.data.TextureAssets;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Media;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
-import de.limbusdev.guardianmonsters.fwmengine.menus.ui.widgets.AnimatedImage;
-import de.limbusdev.guardianmonsters.fwmengine.menus.ui.widgets.ParticleEffectActor;
+import de.limbusdev.guardianmonsters.fwmengine.ui.AnimatedImage;
+import de.limbusdev.guardianmonsters.fwmengine.ui.ParticleEffectActor;
 import de.limbusdev.guardianmonsters.fwmengine.ui.AHUD;
 import de.limbusdev.guardianmonsters.model.MonsterDB;
 
@@ -63,10 +63,7 @@ public class MetamorphosisHUD extends AHUD {
         label = new Label(messages[0], skin, "burgund");
         label.setSize(420,64);
 
-        TextureAtlas particleAtlas = media.getTextureAtlas(TextureAssets.particleTextures);
-        ParticleEffect particles = new ParticleEffect();
-        particles.load(Gdx.files.internal("particles/metamorphosis-particle-effect.p"), particleAtlas);
-        ParticleEffectActor particleActor = new ParticleEffectActor(particles);
+        ParticleEffectActor particleActor = new ParticleEffectActor("metamorphosis");
         particleActor.setPosition(214,136);
 
 

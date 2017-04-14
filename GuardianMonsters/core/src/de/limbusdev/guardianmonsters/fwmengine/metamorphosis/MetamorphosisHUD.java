@@ -1,4 +1,4 @@
-package de.limbusdev.guardianmonsters.fwmengine.cutscene;
+package de.limbusdev.guardianmonsters.fwmengine.metamorphosis;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;

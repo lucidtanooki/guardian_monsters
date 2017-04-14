@@ -19,6 +19,7 @@ public class TextureAssets {
     public static final String bigAnimations = "spritesheets/bigAnimations.pack";
     public static final String battleMonsterPreviews = "scene2d/preview.pack";
     public static final String battleBackgrounds = "spritesheets/battleBacks.pack";
+    public static final String particleTextures = "spritesheets/particles.pack";
     public static final String[] weatherTextures = {
         "spritesheets/weather_clouds.png",
         "spritesheets/weather_fog.png",
@@ -39,6 +40,7 @@ public class TextureAssets {
         paths.add(battleBackgrounds);
         paths.add(monsterMiniSpriteSheetFile);
         paths.add(bigAnimations);
+        paths.add(particleTextures);
 
 
         return paths;

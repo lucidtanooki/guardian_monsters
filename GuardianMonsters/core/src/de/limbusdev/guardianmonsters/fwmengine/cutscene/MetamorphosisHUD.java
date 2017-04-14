@@ -1,5 +1,8 @@
 package de.limbusdev.guardianmonsters.fwmengine.cutscene;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
@@ -13,9 +16,11 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.I18NBundle;
 
 import de.limbusdev.guardianmonsters.Constant;
+import de.limbusdev.guardianmonsters.data.TextureAssets;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Media;
 import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.widgets.AnimatedImage;
+import de.limbusdev.guardianmonsters.fwmengine.menus.ui.widgets.ParticleEffectActor;
 import de.limbusdev.guardianmonsters.fwmengine.ui.AHUD;
 import de.limbusdev.guardianmonsters.model.MonsterDB;
 
@@ -57,6 +62,13 @@ public class MetamorphosisHUD extends AHUD {
         label = new Label(messages[0], skin, "burgund");
         label.setSize(420,64);
 
+        TextureAtlas particleAtlas = media.getTextureAtlas(TextureAssets.particleTextures);
+        ParticleEffect particles = new ParticleEffect();
+        particles.load(Gdx.files.internal("particles/metamorphosis-particle-effect.p"), particleAtlas);
+        ParticleEffectActor particleActor = new ParticleEffectActor(particles);
+        particleActor.setPosition(214,136);
+
+
         // Listeners
         ok.addListener(new ClickListener() {
             @Override
@@ -87,8 +99,10 @@ public class MetamorphosisHUD extends AHUD {
                 public void run() {
                     animation.remove();
                     imgBefore.remove();
+                    label.remove();
                     stage.addActor(imgAfter);
                     stage.addActor(animation);
+                    stage.addActor(label);
                 }
             }),
             Actions.delay(4),
@@ -103,9 +117,12 @@ public class MetamorphosisHUD extends AHUD {
 
         // Adding actors to stage
         stage.addActor(bg);
+        stage.addActor(particleActor);
         stage.addActor(imgBefore);
-        stage.addActor(label);
         stage.addAction(metaAction);
+        stage.addActor(label);
+
+        particleActor.start();
     }
 
     @Override

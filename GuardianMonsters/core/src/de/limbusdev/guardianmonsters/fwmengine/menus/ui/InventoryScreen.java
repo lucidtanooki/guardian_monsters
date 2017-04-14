@@ -42,7 +42,7 @@ public class InventoryScreen implements Screen, MainToolBar.Controller {
 
         views.put("team",       new TeamSubMenu(skin, team));
         views.put("items",      new ItemsSubMenu(skin, inventory, team.team));
-        views.put("ability",    new AbilityMapSubMenu(skin, team.team));
+        views.put("ability",    new AbilityGraphSubMenu(skin, team.team));
         views.put("key",        new KeyItemsSubMenu(skin, inventory));
         views.put("abilityChoice", new AbilityChoiceSubMenu(skin, team.team));
         views.put("encyclo",    new EncycloSubMenu(skin));

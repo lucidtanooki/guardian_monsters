@@ -6,11 +6,13 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ArrayMap;
 
+import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.abilities.AbilityDetailWidget;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.abilities.GraphWidget;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.team.TeamMemberSwitcher;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.widgets.LogoWithCounter;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.widgets.ScrollableWidget;
+import de.limbusdev.guardianmonsters.fwmengine.metamorphosis.MetamorphosisScreen;
 import de.limbusdev.guardianmonsters.model.monsters.Monster;
 import de.limbusdev.guardianmonsters.Constant;
 
@@ -22,7 +24,7 @@ import de.limbusdev.guardianmonsters.Constant;
  * @author Georg Eckert 2017
  */
 
-public class AbilityMapSubMenu extends AInventorySubMenu implements Listener<Monster>,
+public class AbilityGraphSubMenu extends AInventorySubMenu implements Listener<Monster>,
     GraphWidget.Controller, TeamMemberSwitcher.Callbacks, AbilityDetailWidget.Callbacks {
 
     private ArrayMap<Integer, Monster> team;
@@ -32,7 +34,7 @@ public class AbilityMapSubMenu extends AInventorySubMenu implements Listener<Mon
     LogoWithCounter remainingLevels;
 
     // ................................................................................. CONSTRUCTOR
-    public AbilityMapSubMenu(Skin skin, ArrayMap<Integer, Monster> team) {
+    public AbilityGraphSubMenu(Skin skin, ArrayMap<Integer, Monster> team) {
         super(skin);
         this.team = team;
 
@@ -94,6 +96,9 @@ public class AbilityMapSubMenu extends AInventorySubMenu implements Listener<Mon
         m.stat.consumeAbilityLevel();
         m.abilityGraph.activateNode(nodeID);
         details.init(m, nodeID, false);
+        if(m.abilityGraph.metamorphsAt(nodeID)) {
+            Services.getScreenManager().pushScreen(new MetamorphosisScreen(m.ID, m.ID+1));
+        }
     }
 
     @Override

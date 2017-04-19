@@ -1,6 +1,7 @@
 package de.limbusdev.guardianmonsters.fwmengine.guardosphere;
 
 import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.ui.ButtonGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.Container;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Align;
@@ -18,15 +19,18 @@ import de.limbusdev.guardianmonsters.model.monsters.Team;
  * @author Georg Eckert 2017
  */
 
-public class GuardoSphereHUD extends AHUD {
+public class GuardoSphereHUD extends AHUD implements GuardoSphereTeamWidget.Callbacks {
 
     private Team team;
     private GuardoSphere guardoSphere;
 
     private GuardianDetailWidget detailWidget;
+    private ButtonGroup guardianButtonGroup;
 
     public GuardoSphereHUD(Skin skin, Team team,GuardoSphere guardoSphere) {
         super(skin);
+
+        this.team = team;
 
         ParticleEffectActor particles = new ParticleEffectActor("guardosphere");
         particles.start();
@@ -41,9 +45,13 @@ public class GuardoSphereHUD extends AHUD {
         detailWidget = new GuardianDetailWidget(skin);
         detailWidget.setPosition(Constant.WIDTH-8,Constant.HEIGHT-8,Align.topRight);
 
-        GuardoSphereTeamWidget teamWidget = new GuardoSphereTeamWidget(skin, team);
-        teamWidget.setPosition(8,8,Align.bottomLeft);
+        guardianButtonGroup = new ButtonGroup();
+        guardianButtonGroup.setMaxCheckCount(1);
+        guardianButtonGroup.setMinCheckCount(1);
 
+        GuardoSphereTeamWidget teamWidget = new GuardoSphereTeamWidget(skin, team, guardianButtonGroup);
+        teamWidget.setPosition(8,8,Align.bottomLeft);
+        teamWidget.setCallbacks(this);
 
         stage.addActor(container);
         stage.addActor(detailWidget);
@@ -63,5 +71,10 @@ public class GuardoSphereHUD extends AHUD {
     @Override
     public void hide() {
         Services.getAudio().stopMusic(AudioAssets.guardosphereMusic);
+    }
+
+    @Override
+    public void onButtonPressed(int teamPosition) {
+        detailWidget.showDetails(team.get(teamPosition));
     }
 }

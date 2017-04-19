@@ -8,6 +8,9 @@
   },
 
   "com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle": {
+    "button-gs":                { "down": "teamCircleGuardoSphere-down",          "up": "teamCircleGuardoSphere-up",         "checked": "teamCircleGuardoSphere-down",         "pressedOffsetY": -1, "checkedOffsetY": -1},
+    "button-gs-selected":       { "down": "teamCircleGuardoSphereSelected-down",  "up": "teamCircleGuardoSphereSelected-up", "checked": "teamCircleGuardoSphereSelected-down", "pressedOffsetY": -1, "checkedOffsetY": -1},
+
     "b-toolbar-exit":           { "down": "toolBarButton-exit-down",         "up": "toolBarButton-exit-up"},
     "b-toolbar-encyclo":        { "down": "toolBarButton-encyclo-down",      "up": "toolBarButton-encyclo-up",              "checked": "toolBarButton-encyclo-down"},
     "b-toolbar-team":           { "down": "toolBarButton-team-down",         "up": "toolBarButton-team-up",                 "checked": "toolBarButton-team-down"},
@@ -22,25 +25,25 @@
     "b-toolbar-side-other":     { "down": "toolBarButtonSide-other-down",    "up": "toolBarButtonSide-other-up",            "checked": "toolBarButtonSide-other-down"},
     "b-toolbar-side-key":       { "down": "toolBarButtonSide-key-down",      "up": "toolBarButtonSide-key-up",              "checked": "toolBarButtonSide-key-down"},
 
-    "button-delete":            { "down": "button-delete-down",              "up": "button-delete-up"},
-    "button-use":               { "down": "button-use-down",                 "up": "button-use-up"},
-    "button-switch":            { "down": "button-switch-down",              "up": "button-switch-up"},
-    "button-check":             { "down": "button-check-down",               "up": "button-check-up",                       "checked": "button-check-down"},
-    "button-check-locked":      { "down": "button-check-down-locked",        "up": "button-check-up",                       "checked": "button-check-down"},
-    "button-back":              { "down": "button-back-down",                "up": "button-back-up"},
-    "button-learn":             { "down": "button-learn-down",               "up": "button-learn-up"},
+    "button-delete":            { "down": "button-delete-down",        "up": "button-delete-up"},
+    "button-use":               { "down": "button-use-down",           "up": "button-use-up"},
+    "button-switch":            { "down": "button-switch-down",        "up": "button-switch-up"},
+    "button-check":             { "down": "button-check-down",         "up": "button-check-up",   "checked": "button-check-down"},
+    "button-check-locked":      { "down": "button-check-down-locked",  "up": "button-check-up",   "checked": "button-check-down"},
+    "button-back":              { "down": "button-back-down",          "up": "button-back-up"},
+    "button-learn":             { "down": "button-learn-down",         "up": "button-learn-up"},
 
-    "board-empty-disabled":     {"up": "board-node-empty-disabled",           "down": "board-node-empty-disabled-selected", "checked": "board-node-empty-disabled-selected"},
-    "board-empty-enabled":      {"up": "board-node-empty-enabled",            "down": "board-node-empty-enabled-selected",  "checked": "board-node-empty-enabled-selected"},
-    "board-empty-active":       {"up": "board-node-empty-active",             "down": "board-node-empty-active-selected",   "checked": "board-node-empty-active-selected"},
+    "board-empty-disabled":     {"up": "board-node-empty-disabled",    "down": "board-node-empty-disabled-selected", "checked": "board-node-empty-disabled-selected"},
+    "board-empty-enabled":      {"up": "board-node-empty-enabled",     "down": "board-node-empty-enabled-selected",  "checked": "board-node-empty-enabled-selected"},
+    "board-empty-active":       {"up": "board-node-empty-active",      "down": "board-node-empty-active-selected",   "checked": "board-node-empty-active-selected"},
 
-    "board-ability-disabled":   {"up": "board-ability-disabled",              "down": "board-ability-disabled-selected",    "checked": "board-ability-disabled-selected"},
-    "board-ability-enabled":    {"up": "board-ability-enabled",               "down": "board-ability-enabled-selected",     "checked": "board-ability-enabled-selected"},
-    "board-ability-active":     {"up": "board-ability-active",                "down": "board-ability-active-selected",      "checked": "board-ability-active-selected"},
+    "board-ability-disabled":   {"up": "board-ability-disabled",       "down": "board-ability-disabled-selected",    "checked": "board-ability-disabled-selected"},
+    "board-ability-enabled":    {"up": "board-ability-enabled",        "down": "board-ability-enabled-selected",     "checked": "board-ability-enabled-selected"},
+    "board-ability-active":     {"up": "board-ability-active",         "down": "board-ability-active-selected",      "checked": "board-ability-active-selected"},
 
-    "board-equipment-disabled":     {"up": "board-equip-disabled",                "down": "board-equip-disabled-selected",      "checked": "board-equip-disabled-selected"},
-    "board-equipment-enabled":      {"up": "board-equip-enabled",                 "down": "board-equip-enabled-selected",       "checked": "board-equip-enabled-selected"},
-    "board-equipment-active":       {"up": "board-equip-active",                  "down": "board-equip-active-selected",        "checked": "board-equip-active-selected"},
+    "board-equipment-disabled":     {"up": "board-equip-disabled",     "down": "board-equip-disabled-selected",      "checked": "board-equip-disabled-selected"},
+    "board-equipment-enabled":      {"up": "board-equip-enabled",      "down": "board-equip-enabled-selected",       "checked": "board-equip-enabled-selected"},
+    "board-equipment-active":       {"up": "board-equip-active",       "down": "board-equip-active-selected",        "checked": "board-equip-active-selected"},
 
     "board-metamorphosis-disabled":     {"up": "board-metamorphosis-disabled",                "down": "board-metamorphosis-disabled-selected",      "checked": "board-metamorphosis-disabled-selected"},
     "board-metamorphosis-enabled":      {"up": "board-metamorphosis-enabled",                 "down": "board-metamorphosis-enabled-selected",       "checked": "board-metamorphosis-enabled-selected"},

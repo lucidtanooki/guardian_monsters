@@ -1,13 +1,16 @@
 package de.limbusdev.guardianmonsters.fwmengine.guardosphere;
 
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.ButtonGroup;
+import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.HorizontalGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
@@ -18,32 +21,31 @@ import de.limbusdev.guardianmonsters.model.monsters.Monster;
 import de.limbusdev.guardianmonsters.model.monsters.Team;
 
 /**
- * GuardoSphereTeamWidget
+ * GuardoSphereChoiceWidget
  *
  * @author Georg Eckert 2017
  */
 
-public class GuardoSphereTeamWidget extends Group {
-
+public class GuardoSphereChoiceWidget extends Group {
     private static final int WIDTH = 252;
-    private static final int HEIGHT= 40;
+    private static final int HEIGHT= 180;
 
     private Skin skin;
-    private Team team;
-    private HorizontalGroup monsterButtons;
+    private GuardoSphere sphere;
+    private Table table;
     private ButtonGroup buttonGroup;
     private Array<Button> buttons;
     private Callbacks callbacks;
 
-    public GuardoSphereTeamWidget(Skin skin, Team team, ButtonGroup group) {
-        this.team = team;
+    public GuardoSphereChoiceWidget(Skin skin, GuardoSphere sphere, ButtonGroup group) {
+        this.sphere = sphere;
         this.skin = skin;
         this.buttonGroup = group;
 
         callbacks = new Callbacks() {
             @Override
             public void onButtonPressed(int teamPosition) {
-                System.out.println("GuardoSphereTeamWidget: Dummy Callback");
+                System.out.println("GuardoSphereChoiceWidget: Dummy Callback");
             }
         };
 
@@ -55,36 +57,45 @@ public class GuardoSphereTeamWidget extends Group {
         background.setPosition(0,0, Align.bottomLeft);
         addActor(background);
 
-        monsterButtons = new HorizontalGroup();
-        monsterButtons.setSize(240,32);
-        monsterButtons.setPosition(6,4,Align.bottomLeft);
-        addActor(monsterButtons);
+        table = new Table();
+        table.setSize(240,170);
+        table.setPosition(6,4,Align.bottomLeft);
+        addActor(table);
 
-        refresh();
+        refresh(0);
     }
 
-    public void refresh() {
+    public void refresh(int page) {
         for(Button b : buttons) {
             buttonGroup.remove(b);
             b.remove();
         }
         buttons.clear();
-        monsterButtons.clear();
+        table.clear();
 
-        for(final Integer key : team.keys()) {
-            Monster monster = team.get(key);
-            ImageButton monsterButton = new GuardoSphereButton(skin, monster);
-            monsterButtons.addActor(monsterButton);
-            buttons.add(monsterButton);
-            buttonGroup.add(monsterButton);
-            monsterButton.addListener(
-                new ClickListener() {
-                    @Override
-                    public void clicked(InputEvent event, float x, float y) {
-                        callbacks.onButtonPressed(key);
+        for(int i=page*21; i<(page+1)*21; i++) {
+            if(i % 7 == 0) {
+                table.row();
+            }
+            if(sphere.containsKey(i)) {
+                final int key = i;
+                Monster monster = sphere.get(i);
+                ImageButton monsterButton = new GuardoSphereButton(skin, monster);
+
+                table.add(monsterButton).width(32).height(32);
+                buttons.add(monsterButton);
+                buttonGroup.add(monsterButton);
+                monsterButton.addListener(
+                    new ClickListener() {
+                        @Override
+                        public void clicked(InputEvent event, float x, float y) {
+                            callbacks.onButtonPressed(key);
+                        }
                     }
-                }
-            );
+                );
+            } else {
+                table.add(new Actor()).width(32).height(32);
+            }
         }
     }
 
@@ -93,6 +104,6 @@ public class GuardoSphereTeamWidget extends Group {
     }
 
     public interface Callbacks {
-        void onButtonPressed(int teamPosition);
+        void onButtonPressed(int spherePosition);
     }
 }

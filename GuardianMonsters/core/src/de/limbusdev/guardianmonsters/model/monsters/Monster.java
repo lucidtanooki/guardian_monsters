@@ -96,6 +96,14 @@ public class Monster extends Signal<Monster> implements Listener<Stat> {
 
     /* ..................................................................... GETTERS & SETTERS .. */
 
+    public String getName() {
+        if(nickname.length() > 0) {
+            return nickname;
+        } else {
+            return MonsterDB.getLocalNameById(ID);
+        }
+    }
+
     @Override
     public String toString() {
         String out = "";

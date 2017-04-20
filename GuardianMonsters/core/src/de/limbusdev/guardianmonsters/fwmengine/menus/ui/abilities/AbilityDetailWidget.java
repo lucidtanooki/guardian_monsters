@@ -14,7 +14,7 @@ import com.badlogic.gdx.utils.I18NBundle;
 
 
 import de.limbusdev.guardianmonsters.model.abilities.DamageType;
-import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
+import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.model.abilities.Ability;
 import de.limbusdev.guardianmonsters.model.abilities.AbilityGraph;
 import de.limbusdev.guardianmonsters.model.abilities.Node;
@@ -140,7 +140,7 @@ public class AbilityDetailWidget extends Container {
     }
 
     private void initMetamorphosis() {
-        String text = Services.getL18N().i18nGeneral().get("metamorphosis");
+        String text = Services.getL18N().General().get("metamorphosis");
         name.setText(text);
     }
 
@@ -150,7 +150,7 @@ public class AbilityDetailWidget extends Container {
             name.setText("Empty");
             damage.setText("0");
         } else {
-            name.setText(Services.getL18N().i18nAbilities().get(ability.name));
+            name.setText(Services.getL18N().Abilities().get(ability.name));
             damage.setText(Integer.toString(ability.damage));
 
             String drawableID = ability.damageType == DamageType.PHYSICAL ? "pstr" : "mstr";
@@ -158,7 +158,7 @@ public class AbilityDetailWidget extends Container {
 
             abilityType.setDrawable(drawable);
             String elem = ability.element.toString().toLowerCase();
-            String elemName = Services.getL18N().i18nElements().get("element_" + elem);
+            String elemName = Services.getL18N().Elements().get("element_" + elem);
             elemName = elemName.length() < 7 ? elemName : elemName.substring(0,6);
             element = new Label(elemName, skin, "elem-" + elem);
             element.setPosition(124,0,Align.bottomRight);
@@ -168,7 +168,7 @@ public class AbilityDetailWidget extends Container {
 
     private void initEquipmentDetails(BodyPart equipmentType) {
         String equipment;
-        I18NBundle bundle = Services.getL18N().i18nInventory();
+        I18NBundle bundle = Services.getL18N().Inventory();
 
         switch(equipmentType) {
             case HANDS: equipment = bundle.get("equip-hands"); break;

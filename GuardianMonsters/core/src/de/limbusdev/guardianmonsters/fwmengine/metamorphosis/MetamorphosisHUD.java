@@ -1,8 +1,5 @@
 package de.limbusdev.guardianmonsters.fwmengine.metamorphosis;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.ParticleEffect;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
@@ -16,11 +13,10 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.I18NBundle;
 
 import de.limbusdev.guardianmonsters.Constant;
-import de.limbusdev.guardianmonsters.data.AudioAssets;
-import de.limbusdev.guardianmonsters.data.TextureAssets;
-import de.limbusdev.guardianmonsters.fwmengine.managers.Media;
-import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
-import de.limbusdev.guardianmonsters.fwmengine.ui.AnimatedImage;
+import de.limbusdev.guardianmonsters.data.paths.Path;
+import de.limbusdev.guardianmonsters.media.Media;
+import de.limbusdev.guardianmonsters.services.Services;
+import de.limbusdev.guardianmonsters.scene2d.AnimatedImage;
 import de.limbusdev.guardianmonsters.fwmengine.ui.ParticleEffectActor;
 import de.limbusdev.guardianmonsters.fwmengine.ui.AHUD;
 import de.limbusdev.guardianmonsters.model.MonsterDB;
@@ -41,7 +37,7 @@ public class MetamorphosisHUD extends AHUD {
     public MetamorphosisHUD(Skin skin, int before, int after) {
         super(skin);
 
-        I18NBundle bundle = Services.getL18N().i18nGeneral();
+        I18NBundle bundle = Services.getL18N().General();
         final Media media = Services.getMedia();
 
         String[] monsterNames = {
@@ -72,7 +68,7 @@ public class MetamorphosisHUD extends AHUD {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 stage.addAction(Actions.sequence(
-                    Services.getAudio().getMuteAudioAction(AudioAssets.metamorphosisMusic),
+                    Services.getAudio().getMuteAudioAction(Path.Audio.Music.METAMORPHOSIS),
                     Actions.fadeOut(1),
                     Actions.delay(1),
                     Actions.run(new Runnable() {
@@ -95,14 +91,14 @@ public class MetamorphosisHUD extends AHUD {
 
         Action metaAction = Actions.sequence(
             Actions.delay(4),
-            Services.getAudio().getMuteAudioAction(AudioAssets.metamorphosisMusic),
+            Services.getAudio().getMuteAudioAction(Path.Audio.Music.METAMORPHOSIS),
             Actions.delay(1),
             Actions.run(new Runnable() {
                 @Override
                 public void run() {
                     label.remove();
                     stage.addActor(animation);
-                    Services.getAudio().playSound(AudioAssets.metamorphosisSFX);
+                    Services.getAudio().playSound(Path.Audio.SFX.METAMORPHOSIS);
                     stage.addActor(label);
                 }
             }),
@@ -122,12 +118,12 @@ public class MetamorphosisHUD extends AHUD {
             Actions.run(new Runnable() {
                 @Override
                 public void run() {
-                    Services.getAudio().playMusic(AudioAssets.victoryFanfareMusic);
+                    Services.getAudio().playMusic(Path.Audio.Music.VICTORY_FANFARE);
                     label.setText(messages[1]);
                 }
             }),
             Actions.delay(5.5f),
-            Services.getAudio().getFadeInMusicAction(AudioAssets.metamorphosisMusic),
+            Services.getAudio().getFadeInMusicAction(Path.Audio.Music.METAMORPHOSIS),
             Actions.run(new Runnable() {
                 @Override
                 public void run() {
@@ -153,12 +149,12 @@ public class MetamorphosisHUD extends AHUD {
 
     @Override
     public void show() {
-        Services.getAudio().playLoopMusic(AudioAssets.metamorphosisMusic);
+        Services.getAudio().playLoopMusic(Path.Audio.Music.METAMORPHOSIS);
     }
 
     @Override
     public void hide() {
         super.hide();
-        Services.getAudio().stopMusic(AudioAssets.metamorphosisMusic);
+        Services.getAudio().stopMusic(Path.Audio.Music.METAMORPHOSIS);
     }
 }

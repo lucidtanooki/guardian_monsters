@@ -1,6 +1,6 @@
 package de.limbusdev.guardianmonsters.fwmengine.metamorphosis;
 
-import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
+import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.fwmengine.ui.AScreen;
 
 /**

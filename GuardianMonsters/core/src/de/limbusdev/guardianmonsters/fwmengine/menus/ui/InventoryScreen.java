@@ -14,7 +14,7 @@ import de.limbusdev.guardianmonsters.fwmengine.menus.ui.items.KeyItemsSubMenu;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.widgets.MainToolBar;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.widgets.TiledImage;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TeamComponent;
-import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
+import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.model.items.Inventory;
 import de.limbusdev.guardianmonsters.Constant;
 

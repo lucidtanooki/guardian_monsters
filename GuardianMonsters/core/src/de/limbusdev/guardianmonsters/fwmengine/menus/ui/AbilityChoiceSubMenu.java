@@ -16,12 +16,12 @@ import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.I18NBundle;
 
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.SevenButtonsWidget;
-import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
+import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.abilities.AbilityDetailWidget;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.team.TeamMemberSwitcher;
 import de.limbusdev.guardianmonsters.model.abilities.Ability;
 import de.limbusdev.guardianmonsters.model.abilities.AbilityGraph;
-import de.limbusdev.guardianmonsters.model.monsters.Element;
+import de.limbusdev.guardianmonsters.enums.Element;
 import de.limbusdev.guardianmonsters.model.monsters.Monster;
 import de.limbusdev.guardianmonsters.Constant;
 
@@ -74,7 +74,7 @@ public class AbilityChoiceSubMenu extends AInventorySubMenu
     private void init(Monster m) {
         abilityMenu.clear();
         abilityButtons.clear();
-        I18NBundle translation = Services.getL18N().i18nAbilities();
+        I18NBundle translation = Services.getL18N().Abilities();
         for(final int key : m.abilityGraph.learntAbilities.keys()) {
             Ability ability = m.abilityGraph.learntAbilities.get(key);
             TextButton tb = new TextButton(translation.get(ability.name), getSkin(), "item-button-sandstone");

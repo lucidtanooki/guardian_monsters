@@ -12,9 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 import com.badlogic.gdx.utils.Align;
 
-
-import de.limbusdev.guardianmonsters.data.BundleAssets;
-import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
+import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.model.monsters.Monster;
 import de.limbusdev.guardianmonsters.model.MonsterDB;
 import de.limbusdev.guardianmonsters.model.monsters.Stat;
@@ -103,7 +101,7 @@ public class MonsterStateWidget extends WidgetGroup implements Listener<Monster>
      */
     public void init(Monster monster) {
         refresh(monster);
-        nameLabel.setText(Services.getL18N().l18n(BundleAssets.MONSTERS).get((MonsterDB.getInstance().getNameById(monster.ID))));
+        nameLabel.setText(Services.getL18N().Guardians().get((MonsterDB.getInstance().getNameById(monster.ID))));
         monster.add(this);
     }
 

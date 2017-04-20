@@ -2,21 +2,12 @@ package de.limbusdev.guardianmonsters.model;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.XmlReader;
 
 import java.io.IOException;
 
-import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
-import de.limbusdev.guardianmonsters.model.abilities.Ability;
-import de.limbusdev.guardianmonsters.model.items.BodyEquipment;
-import de.limbusdev.guardianmonsters.model.items.BodyPart;
-import de.limbusdev.guardianmonsters.model.items.FootEquipment;
-import de.limbusdev.guardianmonsters.model.items.HandEquipment;
-import de.limbusdev.guardianmonsters.model.items.HeadEquipment;
-import de.limbusdev.guardianmonsters.model.monsters.Element;
-import de.limbusdev.guardianmonsters.model.monsters.BaseStat;
+import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.model.monsters.MonsterData;
 import de.limbusdev.guardianmonsters.utils.XMLMonsterParser;
 
@@ -80,7 +71,7 @@ public class MonsterDB {
     }
 
     public static String getLocalNameById(int id) {
-        return Services.getL18N().i18nMonsters().get(getNameById(id));
+        return Services.getL18N().Guardians().get(getNameById(id));
     }
 
     public static int getNumberOfAncestors(int id) {

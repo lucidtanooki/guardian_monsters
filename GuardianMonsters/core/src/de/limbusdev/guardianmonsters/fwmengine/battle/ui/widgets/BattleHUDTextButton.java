@@ -4,7 +4,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.Align;
 
-import de.limbusdev.guardianmonsters.model.monsters.Element;
+import de.limbusdev.guardianmonsters.enums.Element;
 
 /**
  * BattleHUDTextButton

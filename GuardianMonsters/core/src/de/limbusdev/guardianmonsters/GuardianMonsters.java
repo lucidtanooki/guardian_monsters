@@ -2,16 +2,14 @@ package de.limbusdev.guardianmonsters;
 
 import com.badlogic.gdx.Game;
 
-import de.limbusdev.guardianmonsters.data.AudioAssets;
-import de.limbusdev.guardianmonsters.data.SkinAssets;
-import de.limbusdev.guardianmonsters.data.TextureAssets;
-import de.limbusdev.guardianmonsters.fwmengine.managers.AudioManager;
-import de.limbusdev.guardianmonsters.fwmengine.managers.ConcreteScreenManager;
-import de.limbusdev.guardianmonsters.fwmengine.managers.LocalizationManager;
-import de.limbusdev.guardianmonsters.fwmengine.managers.MediaManager;
-import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
-import de.limbusdev.guardianmonsters.fwmengine.managers.SettingsService;
-import de.limbusdev.guardianmonsters.fwmengine.managers.UIManager;
+import de.limbusdev.guardianmonsters.data.paths.Path;
+import de.limbusdev.guardianmonsters.media.AudioManager;
+import de.limbusdev.guardianmonsters.media.MediaManager;
+import de.limbusdev.guardianmonsters.scene2d.ConcreteScreenManager;
+import de.limbusdev.guardianmonsters.services.LocalizationManager;
+import de.limbusdev.guardianmonsters.services.Services;
+import de.limbusdev.guardianmonsters.services.SettingsService;
+import de.limbusdev.guardianmonsters.services.UIManager;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.MainMenuScreen;
 import de.limbusdev.guardianmonsters.utils.GameStateDebugger;
 
@@ -62,22 +60,22 @@ public class GuardianMonsters extends Game{
         // Service Locator: Dependency Injection
         System.out.println("GuardianMonsters: injecting dependencies ...");
         Services.provide(new MediaManager(
-            TextureAssets.getAllTexturePackPaths(),
-            TextureAssets.getAllTexturePaths(),
-            TextureAssets.monsterSpriteSheetFile,
-            TextureAssets.monsterMiniSpriteSheetFile,
-            TextureAssets.heroSpritesheetFile,
-            TextureAssets.animations,
-            TextureAssets.battleMonsterPreviews
+            Path.Spritesheet.all,
+            Path.Texture.all,
+            Path.Spritesheet.GUARDIANS,
+            Path.Spritesheet.GUARDIANS_MINI,
+            Path.Spritesheet.HERO,
+            Path.Spritesheet.ANIMATIONS,
+            Path.Spritesheet.GUARDIANS_PREVIEW
         ));
         Services.provide(new AudioManager(
-            AudioAssets.get().getAllSfxPaths(),
-            AudioAssets.get().getAllMusicPaths()
+            Path.Audio.SFX.all(),
+            Path.Audio.Music.all
         ));
         Services.provide(new ConcreteScreenManager(this));
         Services.provide(new LocalizationManager());
         Services.provide(new SettingsService());
-        Services.provide(new UIManager(SkinAssets.defaultFont));
+        Services.provide(new UIManager(Path.Skin.FONT));
     }
 
 }

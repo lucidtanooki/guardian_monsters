@@ -9,8 +9,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 import com.badlogic.gdx.utils.Align;
 
-import de.limbusdev.guardianmonsters.data.TextureAssets;
-import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
+import de.limbusdev.guardianmonsters.data.paths.Path;
+import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.Constant;
 
 /**
@@ -37,7 +37,7 @@ public class CreditsScreenWidget extends WidgetGroup {
         // Credits
         credits = new VerticalGroup();
         credits.space(32);
-        TextureAtlas logos = Services.getMedia().getTextureAtlas(TextureAssets.logosSpriteSheetFile);
+        TextureAtlas logos = Services.getMedia().getTextureAtlas(Path.Spritesheet.LOGOS);
 
         Image creditImg = new Image(logos.findRegion("limbusdev3dbit"));
         creditImg.setAlign(Align.top);

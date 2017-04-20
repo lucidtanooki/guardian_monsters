@@ -9,8 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 
-import de.limbusdev.guardianmonsters.data.BundleAssets;
-import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
+import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.Constant;
 
 /**
@@ -31,12 +30,12 @@ public class ReassuranceWidget extends Group {
         bg.setPosition(0,0,Align.bottomLeft);
         addActor(bg);
 
-        question = new Label(Services.getL18N().l18n(BundleAssets.INVENTORY).get("reassurance"), skin, "paper");
+        question = new Label(Services.getL18N().Inventory().get("reassurance"), skin, "paper");
         question.setSize(256,64);
         question.setPosition(Constant.WIDTH/2-128, Constant.HEIGHT/2-32, Align.bottomLeft);
         addActor(question);
 
-        buttonNo = new TextButton(Services.getL18N().l18n(BundleAssets.GENERAL).get("no"), skin, "button-sandstone");
+        buttonNo = new TextButton(Services.getL18N().General().get("no"), skin, "button-sandstone");
         buttonNo.setSize(64,24);
         buttonNo.setPosition(Constant.WIDTH/2+2,40,Align.bottomLeft);
         buttonNo.addListener(new ClickListener() {
@@ -47,7 +46,7 @@ public class ReassuranceWidget extends Group {
         });
         addActor(buttonNo);
 
-        buttonYes = new TextButton(Services.getL18N().l18n(BundleAssets.GENERAL).get("yes"), skin, "button-sandstone");
+        buttonYes = new TextButton(Services.getL18N().General().get("yes"), skin, "button-sandstone");
         buttonYes.setSize(64,24);
         buttonYes.setPosition(Constant.WIDTH/2-2,40,Align.bottomRight);
         addActor(buttonYes);

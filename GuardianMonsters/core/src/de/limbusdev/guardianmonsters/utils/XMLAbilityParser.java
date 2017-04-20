@@ -3,10 +3,10 @@ package de.limbusdev.guardianmonsters.utils;
 import com.badlogic.gdx.utils.XmlReader;
 
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.AnimationType;
-import de.limbusdev.guardianmonsters.fwmengine.managers.SFXType;
+import de.limbusdev.guardianmonsters.media.SFXType;
 import de.limbusdev.guardianmonsters.model.abilities.Ability;
 import de.limbusdev.guardianmonsters.model.abilities.DamageType;
-import de.limbusdev.guardianmonsters.model.monsters.Element;
+import de.limbusdev.guardianmonsters.enums.Element;
 
 /**
  * XMLAbilityParser

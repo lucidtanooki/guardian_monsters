@@ -9,9 +9,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ArrayMap;
 
-import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
+import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.model.abilities.Ability;
-import de.limbusdev.guardianmonsters.model.monsters.Element;
+import de.limbusdev.guardianmonsters.enums.Element;
 
 import static de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleHUDTextButton.BOTTOMLEFT;
 import static de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleHUDTextButton.BOTTOMRIGHT;
@@ -104,7 +104,7 @@ public class SevenButtonsWidget extends BattleWidget {
     }
 
     public void setButtonText(int index, Ability ability) {
-        setButtonText(index, Services.getL18N().i18nAbilities().get(ability.name));
+        setButtonText(index, Services.getL18N().Abilities().get(ability.name));
     }
 
     public void setButtonStyle(int index, Skin skin, String style) {

@@ -9,7 +9,7 @@ import com.badlogic.gdx.utils.XmlReader;
 import java.io.IOException;
 
 import de.limbusdev.guardianmonsters.model.abilities.Ability;
-import de.limbusdev.guardianmonsters.model.monsters.Element;
+import de.limbusdev.guardianmonsters.enums.Element;
 import de.limbusdev.guardianmonsters.utils.XMLAbilityParser;
 
 /**

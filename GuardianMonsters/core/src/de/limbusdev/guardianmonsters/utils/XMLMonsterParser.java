@@ -12,7 +12,7 @@ import de.limbusdev.guardianmonsters.model.items.FootEquipment;
 import de.limbusdev.guardianmonsters.model.items.HandEquipment;
 import de.limbusdev.guardianmonsters.model.items.HeadEquipment;
 import de.limbusdev.guardianmonsters.model.monsters.BaseStat;
-import de.limbusdev.guardianmonsters.model.monsters.Element;
+import de.limbusdev.guardianmonsters.enums.Element;
 import de.limbusdev.guardianmonsters.model.monsters.MonsterData;
 
 /**

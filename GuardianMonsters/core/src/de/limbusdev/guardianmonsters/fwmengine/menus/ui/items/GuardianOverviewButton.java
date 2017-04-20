@@ -14,8 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.Align;
 
 
-import de.limbusdev.guardianmonsters.data.BundleAssets;
-import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
+import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.model.items.Equipment;
 import de.limbusdev.guardianmonsters.model.items.EquipmentPotential;
 import de.limbusdev.guardianmonsters.model.items.Item;

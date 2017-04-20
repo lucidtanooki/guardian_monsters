@@ -3,7 +3,7 @@ package de.limbusdev.guardianmonsters.fwmengine.world.ecs.components;
 import com.badlogic.ashley.core.Component;
 import com.badlogic.gdx.math.Vector3;
 
-import de.limbusdev.guardianmonsters.fwmengine.world.model.SkyDirection;
+import de.limbusdev.guardianmonsters.enums.SkyDirection;
 
 
 /**

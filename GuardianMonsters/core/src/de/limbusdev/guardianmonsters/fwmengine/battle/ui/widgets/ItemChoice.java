@@ -9,7 +9,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ArrayMap;
 
 import de.limbusdev.guardianmonsters.fwmengine.battle.control.BattleSystem;
-import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
+import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.items.ItemDetailViewWidget;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.items.ItemListWidget;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.team.MonsterListWidget;

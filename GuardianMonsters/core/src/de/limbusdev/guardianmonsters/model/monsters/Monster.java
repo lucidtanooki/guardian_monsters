@@ -3,14 +3,10 @@ package de.limbusdev.guardianmonsters.model.monsters;
 import com.badlogic.ashley.signals.Listener;
 import com.badlogic.ashley.signals.Signal;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.ArrayMap;
 
 import de.limbusdev.guardianmonsters.fwmengine.battle.control.BattleSystem;
 import de.limbusdev.guardianmonsters.model.MonsterDB;
-import de.limbusdev.guardianmonsters.model.abilities.Ability;
 import de.limbusdev.guardianmonsters.model.abilities.AbilityGraph;
-import de.limbusdev.guardianmonsters.model.gamestate.SerializableAbilityGraph;
-import de.limbusdev.guardianmonsters.model.gamestate.SerializableMonster;
 
 /**
  * Monster is the basic entity for the {@link BattleSystem}
@@ -42,7 +38,7 @@ public class Monster extends Signal<Monster> implements Listener<Stat> {
 
         // Retrieve monster data from DataBase
         data = MonsterDB.getData(ID);
-        Array<Element> elements = data.getElements();
+        Array<de.limbusdev.guardianmonsters.enums.Element> elements = data.getElements();
 
         // Initialize Ability Graph
         abilityGraph = new AbilityGraph(data);

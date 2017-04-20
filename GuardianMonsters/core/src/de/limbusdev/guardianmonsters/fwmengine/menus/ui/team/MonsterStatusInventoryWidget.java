@@ -8,9 +8,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ArrayMap;
 
-import de.limbusdev.guardianmonsters.data.BundleAssets;
-import de.limbusdev.guardianmonsters.model.monsters.Element;
-import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
+import de.limbusdev.guardianmonsters.enums.Element;
+import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.model.monsters.Monster;
 import de.limbusdev.guardianmonsters.model.MonsterDB;
 import de.limbusdev.guardianmonsters.Constant;
@@ -86,7 +85,7 @@ public class MonsterStatusInventoryWidget extends Group {
 
 
     public void init(Monster m) {
-        name.setText(Services.getL18N().l18n(BundleAssets.MONSTERS).get(MonsterDB.getInstance().getNameById(m.ID)));
+        name.setText(Services.getL18N().Guardians().get(MonsterDB.getInstance().getNameById(m.ID)));
         valueLabels.get("hp").setText(m.stat.getHP() + "/" + m.stat.getHPmax());
         valueLabels.get("mp").setText(m.stat.getMP() + "/" + m.stat.getMPmax());
         valueLabels.get("exp").setText(m.stat.getEXP() + "/" + (m.stat.getEXPtoNextLevel() + m.stat.getEXP()));
@@ -99,7 +98,7 @@ public class MonsterStatusInventoryWidget extends Group {
         elementGroup.clear();
         for(Element e : m.data.getElements()) {
             String elem = e.toString().toLowerCase();
-            String elemName = Services.getL18N().l18n(BundleAssets.ELEMENTS).get("element_" + elem);
+            String elemName = Services.getL18N().Elements().get("element_" + elem);
             elemName = elemName.length() < 7 ? elemName : elemName.substring(0,6);
             Label l = new Label(elemName, skin, "elem-" + elem);
             elementGroup.addActor(l);

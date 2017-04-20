@@ -27,18 +27,17 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
-import de.limbusdev.guardianmonsters.data.BundleAssets;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Components;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.InputComponent;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PositionComponent;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.entities.HeroEntity;
-import de.limbusdev.guardianmonsters.fwmengine.world.model.SkyDirection;
+import de.limbusdev.guardianmonsters.enums.SkyDirection;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.BattleScreen;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.InventoryScreen;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.GameArea;
 import de.limbusdev.guardianmonsters.geometry.IntVec2;
 import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager;
-import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
+import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.entities.EntityFamilies;
 import de.limbusdev.guardianmonsters.Constant;
 
@@ -111,7 +110,7 @@ public class HUD extends InputAdapter {
     private void setUpTopLevelButtons(Skin skin) {
 
         // Menu Button
-        TextButton menu = new TextButton(Services.getL18N().l18n(BundleAssets.GENERAL).get("hud_menu"), skin, "open-menu");
+        TextButton menu = new TextButton(Services.getL18N().General().get("hud_menu"), skin, "open-menu");
         menu.setPosition(Constant.WIDTH, Constant.HEIGHT-2, Align.topRight);
         menu.addListener(new ClickListener() {
             @Override
@@ -134,7 +133,7 @@ public class HUD extends InputAdapter {
         this.menuButtons.columnAlign(Align.topRight);
 
         // Save Button
-        TextButton save = new TextButton(Services.getL18N().l18n(BundleAssets.GENERAL).get("hud_save"), skin, "menu-entry");
+        TextButton save = new TextButton(Services.getL18N().General().get("hud_save"), skin, "menu-entry");
         save.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -144,7 +143,7 @@ public class HUD extends InputAdapter {
         this.menuButtons.addActor(save);
 
         // Quit Button
-        TextButton quit = new TextButton(Services.getL18N().l18n(BundleAssets.GENERAL).get("hud_quit"), skin, "menu-entry");
+        TextButton quit = new TextButton(Services.getL18N().General().get("hud_quit"), skin, "menu-entry");
         quit.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -162,7 +161,7 @@ public class HUD extends InputAdapter {
         this.menuButtons.addActor(quit);
 
         // Team Button
-        TextButton teamButton = new TextButton(Services.getL18N().l18n(BundleAssets.GENERAL).get("hud_team"), skin, "menu-entry");
+        TextButton teamButton = new TextButton(Services.getL18N().General().get("hud_team"), skin, "menu-entry");
         teamButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {

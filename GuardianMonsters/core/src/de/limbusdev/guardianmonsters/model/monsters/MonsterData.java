@@ -26,7 +26,7 @@ public class MonsterData {
     private Array<Integer> metamorphosisNodes;
 
     private int metamorphesTo;
-    private Array<Element> elements;
+    private Array<de.limbusdev.guardianmonsters.enums.Element> elements;
     private BaseStat baseStat;
 
     private HeadEquipment.Type headType;
@@ -42,7 +42,7 @@ public class MonsterData {
     public MonsterData() {}
 
     public MonsterData(int ID, String nameID, int metamorphesTo, BaseStat baseStat,
-                       Array<Element> elements, ArrayMap<Integer, Ability> abilityNodes,
+                       Array<de.limbusdev.guardianmonsters.enums.Element> elements, ArrayMap<Integer, Ability> abilityNodes,
                        ArrayMap<Integer, BodyPart> equipmentNodes,
                        Array<Integer> metamorphosisNodes, HeadEquipment.Type head,
                        BodyEquipment.Type body, HandEquipment.Type hands, FootEquipment.Type feet) {
@@ -60,7 +60,7 @@ public class MonsterData {
         this.footType = feet;
     }
 
-    public MonsterData(int ID, String nameID, int metamorphsTo, Array<Element> elements, MonsterData ancestorData) {
+    public MonsterData(int ID, String nameID, int metamorphsTo, Array<de.limbusdev.guardianmonsters.enums.Element> elements, MonsterData ancestorData) {
         this(
             ID, nameID, metamorphsTo,
             ancestorData.baseStat,
@@ -119,7 +119,7 @@ public class MonsterData {
         return metamorphesTo;
     }
 
-    public Array<Element> getElements() {
+    public Array<de.limbusdev.guardianmonsters.enums.Element> getElements() {
         return elements;
     }
 

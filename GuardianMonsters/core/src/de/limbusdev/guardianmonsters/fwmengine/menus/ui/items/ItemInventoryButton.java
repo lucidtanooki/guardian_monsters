@@ -8,8 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.Align;
 
-import de.limbusdev.guardianmonsters.data.BundleAssets;
-import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
+import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.model.items.Inventory;
 import de.limbusdev.guardianmonsters.model.items.Item;
 import de.limbusdev.guardianmonsters.model.items.ItemSignal;
@@ -25,17 +24,17 @@ public class ItemInventoryButton extends TextButton implements Listener<ItemSign
     private Inventory inventory;
 
     public ItemInventoryButton(Item item, Skin skin, Inventory inventory) {
-        super(Services.getL18N().l18n(BundleAssets.INVENTORY).get(item.getName()), skin);
+        super(Services.getL18N().Inventory().get(item.getName()), skin);
         construct(item, inventory);
     }
 
     public ItemInventoryButton(Item item, Skin skin, String styleName, Inventory inventory) {
-        super(Services.getL18N().l18n(BundleAssets.INVENTORY).get(item.getName()), skin, styleName);
+        super(Services.getL18N().Inventory().get(item.getName()), skin, styleName);
         construct(item, inventory);
     }
 
     public ItemInventoryButton(Item item, TextButtonStyle style, Inventory inventory) {
-        super(Services.getL18N().l18n(BundleAssets.INVENTORY).get(item.getName()), style);
+        super(Services.getL18N().Inventory().get(item.getName()), style);
         construct(item, inventory);
     }
 

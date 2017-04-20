@@ -1,6 +1,6 @@
 package de.limbusdev.guardianmonsters.fwmengine.guardosphere;
 
-import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
+import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.fwmengine.ui.AScreen;
 import de.limbusdev.guardianmonsters.model.monsters.Team;
 

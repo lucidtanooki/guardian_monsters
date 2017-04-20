@@ -9,8 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.I18NBundle;
 
-import de.limbusdev.guardianmonsters.data.BundleAssets;
-import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
+import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.Constant;
 
 /**
@@ -64,7 +63,7 @@ public class EndOfBattleWidget extends BattleWidget {
      * @param won
      */
     public void init(boolean won) {
-        I18NBundle i18n = Services.getL18N().l18n(BundleAssets.BATTLE);
+        I18NBundle i18n = Services.getL18N().Battle();
         String message = won ? "batt_game_over" : "batt_you_won";
         messageLabel.setText(i18n.get(message));
     }

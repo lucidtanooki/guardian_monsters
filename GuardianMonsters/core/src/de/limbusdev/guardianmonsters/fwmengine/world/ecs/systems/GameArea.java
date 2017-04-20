@@ -12,7 +12,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 
-import de.limbusdev.guardianmonsters.data.AudioAssets;
+import de.limbusdev.guardianmonsters.data.paths.Path;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PositionComponent;
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.TmxDayTimeMapLoader;
 import de.limbusdev.guardianmonsters.geometry.IntRect;
@@ -20,7 +20,7 @@ import de.limbusdev.guardianmonsters.geometry.IntVec2;
 import de.limbusdev.guardianmonsters.fwmengine.world.model.MapDescriptionInfo;
 import de.limbusdev.guardianmonsters.fwmengine.world.model.MapPersonInformation;
 import de.limbusdev.guardianmonsters.fwmengine.world.model.WarpPoint;
-import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
+import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.fwmengine.world.model.MonsterArea;
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.ExtendedTiledMapRenderer;
 import de.limbusdev.guardianmonsters.Constant;
@@ -116,7 +116,7 @@ public class GameArea {
         String musicType = tiledMap.getProperties().get("musicType", String.class);
         int musicIndex = Integer.parseInt(tiledMap.getProperties().get("musicIndex", String.class)) - 1;
         if (musicType.equals("town")) {
-            bgMusic = AudioAssets.get().getBgMusicTown(musicIndex);
+            bgMusic = Path.Audio.Music.BG_TOWN[musicIndex];
         }
 
         return tiledMap;

@@ -1,0 +1,13 @@
+apply plugin: "java"
+
+targetCompatibility = 1.7
+sourceCompatibility = 1.7
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+sourceSets.main.java.srcDirs = [ "src/" ]
+sourceSets.main.resources.srcDirs = [ project(":enums").file("assets") ]
+
+
+eclipse.project {
+    name = appName + "-enums"
+}

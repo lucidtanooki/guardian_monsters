@@ -11,7 +11,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.I18NBundle;
 
-import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
+import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.team.MonsterListWidget;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.widgets.ReassuranceWidget;
 import de.limbusdev.guardianmonsters.model.items.Equipment;
@@ -70,7 +70,7 @@ public class ItemDetailViewWidget extends Group implements MonsterListWidget.Cal
 
     public void init(Item itemToShow) {
         this.item = itemToShow;
-        I18NBundle i18n = Services.getL18N().i18nInventory();
+        I18NBundle i18n = Services.getL18N().Inventory();
 
         itemName.setText(i18n.get(item.getName()));
         itemDescription.setText(i18n.get(item.getName()+"-description"));

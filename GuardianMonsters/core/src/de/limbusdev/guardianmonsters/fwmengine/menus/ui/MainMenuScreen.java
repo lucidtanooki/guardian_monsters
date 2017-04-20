@@ -17,10 +17,9 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.I18NBundle;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
-import de.limbusdev.guardianmonsters.data.BundleAssets;
-import de.limbusdev.guardianmonsters.data.TextureAssets;
+import de.limbusdev.guardianmonsters.data.paths.Path;
 import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager;
-import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
+import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.widgets.CreditsScreenWidget;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.widgets.StartScreenWidget;
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.WorldScreen;
@@ -149,7 +148,7 @@ public class MainMenuScreen implements Screen {
         startMenu.addActor(mon);
 
         // ................................................................................. BUTTONS
-        I18NBundle i18n = Services.getL18N().l18n(BundleAssets.GENERAL);
+        I18NBundle i18n = Services.getL18N().General();
 
         // ............................................................................ START BUTTON
         String label = i18n.get("main_menu_start_new");
@@ -228,7 +227,7 @@ public class MainMenuScreen implements Screen {
 
 
     public void setUpIntro(Skin skin) {
-        TextureAtlas logos = Services.getMedia().getTextureAtlas(TextureAssets.logosSpriteSheetFile);
+        TextureAtlas logos = Services.getMedia().getTextureAtlas(Path.Spritesheet.LOGOS);
         this.introScreen = new Group();
         Image bg = new Image(skin.getDrawable("black"));
         bg.setWidth(Constant.WIDTH);

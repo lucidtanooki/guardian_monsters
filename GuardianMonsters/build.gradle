@@ -84,6 +84,9 @@ project(":core") {
 
 
     dependencies {
+        compile project(":scene2d")
+        compile project(":services")
+        compile project(":enums")
         compile "com.badlogicgames.gdx:gdx:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
         compile "com.badlogicgames.box2dlights:box2dlights:$box2DLightsVersion"
@@ -91,6 +94,82 @@ project(":core") {
         compile "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-controllers:$gdxVersion"
         compile 'com.esotericsoftware:kryo:4.0.0'
+    }
+}
+
+project(":ui") {
+    apply plugin: "java"
+
+
+    dependencies {
+        compile project(":scene2d")
+        compile "com.badlogicgames.gdx:gdx:$gdxVersion"
+        compile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
+        compile "com.badlogicgames.box2dlights:box2dlights:$box2DLightsVersion"
+        compile "com.badlogicgames.ashley:ashley:$ashleyVersion"
+        compile "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
+        compile "com.badlogicgames.gdx:gdx-controllers:$gdxVersion"
+        compile 'com.esotericsoftware:kryo:4.0.0'
+    }
+}
+
+project(":services") {
+    apply plugin: "java"
+
+
+    dependencies {
+        compile project(":scene2d")
+        compile project(":enums")
+        compile project(":data")
+        compile project(":media")
+        compile "com.badlogicgames.gdx:gdx:$gdxVersion"
+        compile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
+        compile "com.badlogicgames.box2dlights:box2dlights:$box2DLightsVersion"
+        compile "com.badlogicgames.ashley:ashley:$ashleyVersion"
+        compile "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
+        compile "com.badlogicgames.gdx:gdx-controllers:$gdxVersion"
+        compile 'com.esotericsoftware:kryo:4.0.0'
+    }
+}
+
+
+
+project(":enums") {
+    apply plugin: "java"
+
+
+    dependencies {
+
+    }
+}
+
+project(":scene2d") {
+    apply plugin: "java"
+
+    dependencies {
+        compile "com.badlogicgames.gdx:gdx:$gdxVersion"
+        compile "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
+    }
+}
+
+project(":media") {
+    apply plugin: "java"
+
+    dependencies {
+        compile project(":enums")
+        compile project(":scene2d")
+        compile project(":data")
+        compile "com.badlogicgames.gdx:gdx:$gdxVersion"
+        compile "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
+    }
+}
+
+project(":data") {
+    apply plugin: "java"
+
+    dependencies {
+        compile project(":enums")
+        compile "com.badlogicgames.gdx:gdx:$gdxVersion"
     }
 }
 

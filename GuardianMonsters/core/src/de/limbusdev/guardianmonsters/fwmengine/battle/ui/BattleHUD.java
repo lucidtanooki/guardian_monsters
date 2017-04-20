@@ -6,8 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
-import de.limbusdev.guardianmonsters.data.AudioAssets;
-import de.limbusdev.guardianmonsters.data.BundleAssets;
+import de.limbusdev.guardianmonsters.data.paths.Path;
 import de.limbusdev.guardianmonsters.fwmengine.battle.control.BattleStringBuilder;
 import de.limbusdev.guardianmonsters.fwmengine.battle.control.BattleSystem;
 import de.limbusdev.guardianmonsters.fwmengine.battle.control.MonsterManager;
@@ -22,15 +21,12 @@ import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.LevelUpWidget;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.MonsterMenuWidget;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.SevenButtonsWidget;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.TargetMenuWidget;
-import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.WidgetObserver;
-import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TeamComponent;
-import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
+import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.model.abilities.Ability;
 import de.limbusdev.guardianmonsters.model.items.Inventory;
 import de.limbusdev.guardianmonsters.model.monsters.Monster;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleMainMenuWidget;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleStatusOverviewWidget;
-import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.ObservableWidget;
 import de.limbusdev.guardianmonsters.model.MonsterDB;
 import de.limbusdev.guardianmonsters.model.monsters.Team;
 
@@ -295,8 +291,8 @@ public class BattleHUD extends ABattleHUD {
             public void onDoingNothing(Monster monster) {
                 battleStateSwitcher.toAnimation();
                 infoLabelWidget.setWholeText(
-                    Services.getL18N().l18n(BundleAssets.BATTLE).format("batt_item_usage",
-                    Services.getL18N().l18n(BundleAssets.MONSTERS).get(MonsterDB.getInstance().getNameById(monster.ID))));
+                    Services.getL18N().Battle().format("batt_item_usage", monster.getName())
+                );
                 infoLabelWidget.animateTextAppearance();
                 animationWidget.animateItemUsage();
             }
@@ -426,7 +422,7 @@ public class BattleHUD extends ABattleHUD {
 
             // Set Callbacks
             actionMenu.setCallbacks(battleStartLabelCallbacks);
-            infoLabelWidget.setWholeText(Services.getL18N().l18n(BundleAssets.BATTLE).get("battle_start"));
+            infoLabelWidget.setWholeText(Services.getL18N().Battle().get("battle_start"));
             infoLabelWidget.animateTextAppearance();
 
             state = BattleState.BATTLE_START;
@@ -459,7 +455,7 @@ public class BattleHUD extends ABattleHUD {
             reset();
             toInfoLabel();
             String textKey = !winnerSide ? "batt_you_won":"batt_game_over";
-            String wholeText = Services.getL18N().l18n(BundleAssets.BATTLE).get(textKey);
+            String wholeText = Services.getL18N().Battle().get(textKey);
             infoLabelWidget.setWholeText(wholeText);
             infoLabelWidget.animateTextAppearance();
             actionMenu.setCallbacks(endOfBattleCallbacks);
@@ -471,17 +467,17 @@ public class BattleHUD extends ABattleHUD {
             Runnable runnable = new Runnable() {
                 @Override
                 public void run() {
-                    Services.getAudio().playMusic(AudioAssets.victoryFanfareMusic);
+                    Services.getAudio().playMusic(Path.Audio.Music.VICTORY_FANFARE);
                 }
             };
             Runnable runnable2 = new Runnable() {
                 @Override
                 public void run() {
-                    Services.getAudio().playMusic(AudioAssets.victorySongMusic);
+                    Services.getAudio().playMusic(Path.Audio.Music.VICTORY_SONG);
                 }
             };
             Action endOfBattleMusicSequence = Actions.sequence(
-                Services.getAudio().getMuteAudioAction(AudioAssets.victorySongMusic),
+                Services.getAudio().getMuteAudioAction(Path.Audio.Music.VICTORY_SONG),
                 Actions.run(runnable),
                 Actions.delay(5),
                 Actions.run(runnable2)
@@ -551,7 +547,7 @@ public class BattleHUD extends ABattleHUD {
 
         public void toEscapeSuccessInfo() {
             toInfoLabel();
-            String wholeText = Services.getL18N().l18n(BundleAssets.BATTLE).get("escape_success");
+            String wholeText = Services.getL18N().Battle().get("escape_success");
             infoLabelWidget.setWholeText(wholeText);
             infoLabelWidget.animateTextAppearance();
             actionMenu.setCallbacks(escapeSuccessCallbacks);
@@ -559,7 +555,7 @@ public class BattleHUD extends ABattleHUD {
 
         public void toEscapeFailInfo() {
             toInfoLabel();
-            String wholeText = Services.getL18N().l18n(BundleAssets.BATTLE).get("escape_fail");
+            String wholeText = Services.getL18N().Battle().get("escape_fail");
             infoLabelWidget.setWholeText(wholeText);
             infoLabelWidget.animateTextAppearance();
             actionMenu.setCallbacks(escapeFailCallbacks);

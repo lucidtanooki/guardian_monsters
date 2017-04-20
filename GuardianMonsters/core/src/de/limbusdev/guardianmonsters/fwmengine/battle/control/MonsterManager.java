@@ -4,14 +4,11 @@ package de.limbusdev.guardianmonsters.fwmengine.battle.control;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.ArrayMap;
 
-import de.limbusdev.guardianmonsters.data.BundleAssets;
 import de.limbusdev.guardianmonsters.model.abilities.DamageType;
-import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
 import de.limbusdev.guardianmonsters.model.abilities.Ability;
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.AttackCalculationReport;
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.ElemEff;
 import de.limbusdev.guardianmonsters.model.monsters.Monster;
-import de.limbusdev.guardianmonsters.model.MonsterDB;
 
 /**
  * Handles events of monsters like level up, earning EXP, changing status and so on
@@ -68,9 +65,9 @@ public class MonsterManager {
         report.effectiveness = efficiency;
 
         // Print Battle Debug Message
-        String attackerName = Services.getL18N().l18n(BundleAssets.MONSTERS).get(MonsterDB.getInstance().getNameById(att.ID));
-        String attackName   = Services.getL18N().l18n(BundleAssets.ATTACKS).get(ability.name);
-        String victimName   = Services.getL18N().l18n(BundleAssets.MONSTERS).get(MonsterDB.getInstance().getNameById(def.ID));
+        String attackerName = att.getName();
+        String attackName   = ability.getLocalName();
+        String victimName   = def.getName();
         System.out.println(attackerName + ": " + attackName + " causes " + damage + " damage on " + victimName);
 
         return report;

@@ -2,8 +2,9 @@ package de.limbusdev.guardianmonsters.model.abilities;
 
 
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.AnimationType;
-import de.limbusdev.guardianmonsters.model.monsters.Element;
-import de.limbusdev.guardianmonsters.fwmengine.managers.SFXType;
+import de.limbusdev.guardianmonsters.enums.Element;
+import de.limbusdev.guardianmonsters.media.SFXType;
+import de.limbusdev.guardianmonsters.services.Services;
 
 /**
  * @author Georg Eckert 2017
@@ -84,6 +85,10 @@ public class Ability {
         } else {
             return false;
         }
+    }
+
+    public String getLocalName() {
+        return Services.getL18N().Abilities().get(name);
     }
 
 }

@@ -11,9 +11,9 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 
-import de.limbusdev.guardianmonsters.data.TextureAssets;
-import de.limbusdev.guardianmonsters.fwmengine.managers.Media;
-import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
+import de.limbusdev.guardianmonsters.data.paths.Path;
+import de.limbusdev.guardianmonsters.media.Media;
+import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.geometry.IntVec2;
 import de.limbusdev.guardianmonsters.Constant;
 
@@ -125,8 +125,8 @@ public class WeatherAnimator {
         public FogRenderer(TiledMap map, int fogIndex) {
             super(map);
             switch(fogIndex) {
-                case 1:     fogTexture = media.getTexture(TextureAssets.weatherTextures[3]); break;
-                default:    fogTexture = media.getTexture(TextureAssets.weatherTextures[1]); break;
+                case 1:     fogTexture = media.getTexture(Path.Texture.WEATHER[3]); break;
+                default:    fogTexture = media.getTexture(Path.Texture.WEATHER[1]); break;
             }
         }
 
@@ -141,7 +141,7 @@ public class WeatherAnimator {
 
         public WoodsRenderer(TiledMap map) {
             super(map);
-            woodTexture = media.getTexture(TextureAssets.weatherTextures[2]);
+            woodTexture = media.getTexture(Path.Texture.WEATHER[2]);
         }
 
         @Override
@@ -158,7 +158,7 @@ public class WeatherAnimator {
         public CloudRenderer(TiledMap map) {
             super(map);
 
-            cloudTexture = media.getTexture(TextureAssets.weatherTextures[0]);
+            cloudTexture = media.getTexture(Path.Texture.WEATHER[0]);
 
             weatherTiles = new Array<>();
             width = map.getProperties().get("width", Integer.class);

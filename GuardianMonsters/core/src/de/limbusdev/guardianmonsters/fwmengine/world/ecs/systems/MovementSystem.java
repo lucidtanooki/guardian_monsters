@@ -20,7 +20,7 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TeamComponen
 import de.limbusdev.guardianmonsters.geometry.IntRect;
 import de.limbusdev.guardianmonsters.geometry.IntVec2;
 import de.limbusdev.guardianmonsters.fwmengine.world.model.WarpPoint;
-import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
+import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.BattleFactory;
 import de.limbusdev.guardianmonsters.model.monsters.Monster;
 import de.limbusdev.guardianmonsters.fwmengine.world.model.MonsterArea;

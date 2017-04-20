@@ -10,9 +10,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 
-import de.limbusdev.guardianmonsters.data.BundleAssets;
-import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
-import de.limbusdev.guardianmonsters.fwmengine.ui.AnimatedImage;
+import de.limbusdev.guardianmonsters.services.Services;
+import de.limbusdev.guardianmonsters.scene2d.AnimatedImage;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.widgets.OverlayWidget;
 import de.limbusdev.guardianmonsters.model.monsters.LevelUpReport;
 import de.limbusdev.guardianmonsters.model.monsters.Monster;
@@ -50,8 +49,7 @@ public class LevelUpWidget extends OverlayWidget {
             }
         });
 
-        Label info = new Label(Services.getL18N().l18n(BundleAssets.BATTLE).format("level_up",
-            Services.getL18N().l18n(BundleAssets.MONSTERS).get(MonsterDB.getInstance().getNameById(monster.ID))), skin, "default");
+        Label info = new Label(Services.getL18N().Battle().format("level_up", monster.getName()), skin, "default");
         info.setSize(140,32);
         info.setPosition(128+64,140,Align.bottomLeft);
         info.setWrap(true);

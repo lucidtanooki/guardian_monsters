@@ -16,7 +16,7 @@ import com.badlogic.gdx.utils.Array;
 
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.BattleResult;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.LevelUpWidget;
-import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
+import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.fwmengine.ui.AHUD;
 import de.limbusdev.guardianmonsters.model.MonsterDB;
 import de.limbusdev.guardianmonsters.model.items.Item;
@@ -57,7 +57,7 @@ public class BattleResultHUD extends AHUD {
             Monster monster = team.get(key);
             Image face = Services.getMedia().getMonsterFace(monster.ID);
             table.add(face).left();
-            Label name = new Label(Services.getL18N().i18nMonsters().get(MonsterDB.getNameById(monster.ID)), skin, "default");
+            Label name = new Label(Services.getL18N().Guardians().get(MonsterDB.getNameById(monster.ID)), skin, "default");
             table.add(name).left();
             Image expKey = new Image(skin.getDrawable("symbol-exp"));
             table.add(expKey).left();
@@ -83,7 +83,7 @@ public class BattleResultHUD extends AHUD {
         group.setPosition(4,4,Align.bottomLeft);
         stage.addActor(group);
 
-        Label heading = new Label(Services.getL18N().i18nBattle().get("results"), skin, "default");
+        Label heading = new Label(Services.getL18N().Battle().get("results"), skin, "default");
         heading.setAlignment(Align.topLeft, Align.topLeft);
         heading.setPosition(4, group.getHeight()-4, Align.topLeft);
         group.addActor(heading);
@@ -94,7 +94,7 @@ public class BattleResultHUD extends AHUD {
         table.setPosition(4,8,Align.bottomLeft);
         group.addActor(table);
 
-        apply = new TextButton(Services.getL18N().i18nGeneral().get("apply"), skin, "default");
+        apply = new TextButton(Services.getL18N().General().get("apply"), skin, "default");
         apply.setSize(72,32);
         apply.setPosition(group.getWidth()-4,4,Align.bottomRight);
         group.addActor(apply);
@@ -115,7 +115,7 @@ public class BattleResultHUD extends AHUD {
             }
         );
 
-        next = new TextButton(Services.getL18N().i18nGeneral().get("next"), skin, "default");
+        next = new TextButton(Services.getL18N().General().get("next"), skin, "default");
         next.setSize(72,32);
         next.setPosition(group.getWidth()-4,4,Align.bottomRight);
 

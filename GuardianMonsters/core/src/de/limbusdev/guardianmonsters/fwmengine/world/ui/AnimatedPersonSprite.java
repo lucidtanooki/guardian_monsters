@@ -2,13 +2,12 @@ package de.limbusdev.guardianmonsters.fwmengine.world.ui;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.ArrayMap;
 
-import de.limbusdev.guardianmonsters.fwmengine.world.model.SkyDirection;
-import de.limbusdev.guardianmonsters.fwmengine.managers.Services;
+import de.limbusdev.guardianmonsters.enums.SkyDirection;
+import de.limbusdev.guardianmonsters.services.Services;
 
 /**
  * Created by georg on 07.02.17.

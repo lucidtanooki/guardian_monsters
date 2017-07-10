@@ -1,5 +1,9 @@
 package de.limbusdev.guardianmonsters.data.paths;
 
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+
+import static net.dermetfan.gdx.assets.AnnotationAssetManager.Asset;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -17,15 +21,34 @@ public class Path {
         private static final String rootPath = "spritesheets/";
         private static final String extension = ".pack";
 
+        @Asset(TextureAtlas.class)
         public static final String HERO = rootPath + "hero" + extension;
+
+        @Asset(TextureAtlas.class)
         public static final String GUARDIANS = rootPath + "monsters" + extension;
+
+        @Asset(TextureAtlas.class)
         public static final String GUARDIANS_MINI = rootPath + "mini" + extension;
+
+        @Asset(TextureAtlas.class)
         public static final String GUARDIANS_PREVIEW= rootPath + "preview" + extension;
+
+        @Asset(TextureAtlas.class)
         public static final String LOGOS = rootPath + "logos" + extension;
+
+        @Asset(TextureAtlas.class)
         public static final String ANIMATIONS = rootPath + "animations" + extension;
+
+        @Asset(TextureAtlas.class)
         public static final String ANIMATIONS_BATTLE = rootPath + "battleAnimations" + extension;
+
+        @Asset(TextureAtlas.class)
         public static final String ANIMATIONS_BIG = rootPath + "bigAnimations" + extension;
+
+        @Asset(TextureAtlas.class)
         public static final String BATTLE_BG = rootPath + "battleBacks" + extension;
+
+        @Asset(TextureAtlas.class)
         public static final String PARTICLES = rootPath + "particles" + extension;
 
         public static final String[] all = {

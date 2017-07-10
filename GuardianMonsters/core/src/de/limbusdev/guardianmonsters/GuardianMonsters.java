@@ -60,13 +60,7 @@ public class GuardianMonsters extends Game{
         // Service Locator: Dependency Injection
         System.out.println("GuardianMonsters: injecting dependencies ...");
         Services.provide(new MediaManager(
-            Path.Spritesheet.all,
-            Path.Texture.all,
-            Path.Spritesheet.GUARDIANS,
-            Path.Spritesheet.GUARDIANS_MINI,
-            Path.Spritesheet.HERO,
-            Path.Spritesheet.ANIMATIONS,
-            Path.Spritesheet.GUARDIANS_PREVIEW
+            Path.Texture.all
         ));
         Services.provide(new AudioManager(
             Path.Audio.SFX.all(),

@@ -1,6 +1,6 @@
 package de.limbusdev.guardianmonsters.media;
 
-import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -9,6 +9,8 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
+
+import net.dermetfan.gdx.assets.AnnotationAssetManager;
 
 import de.limbusdev.guardianmonsters.data.paths.Path;
 import de.limbusdev.guardianmonsters.enums.SkyDirection;
@@ -22,14 +24,7 @@ import de.limbusdev.guardianmonsters.scene2d.AnimatedImage;
  */
 public class MediaManager implements Media {
     /* ............................................................................ ATTRIBUTES .. */
-    private AssetManager assets;
-
-    // file names
-    private String animations;
-    private String monsterSpriteSheetFile;
-    private String monsterMiniSpriteSheetFile;
-    private String heroSpritesheetFile;
-    private String monsterFaceSpriteSheetFile;
+    private AnnotationAssetManager assets;
 
     private Array<String> bgs;
     private Array<String> maleSprites, femaleSprites;
@@ -38,30 +33,16 @@ public class MediaManager implements Media {
     
     /* ................,........................................................... CONSTRUCTOR .. */
 
-    public MediaManager(
-        String[] texturePackPaths,
-        String[] texturePaths,
-        String monsterSpriteSheetPath,
-        String monsterMiniSpriteSheetPath,
-        String heroSpriteSheetPath,
-        String animationsSpriteSheetPath,
-        String monsterFaceSpriteSheetPath
-    ){
+    public MediaManager(String[] texturePaths)
+    {
+        this.assets = new AnnotationAssetManager(new InternalFileHandleResolver());
+        assets.load(Path.Spritesheet.class);
+        assets.finishLoading();
 
-        this.assets = new AssetManager();
 
-        for(String s : texturePackPaths) {
-            assets.load(s, TextureAtlas.class);
-        }
         for(String s : texturePaths) {
             assets.load(s, Texture.class);
         }
-
-        this.monsterMiniSpriteSheetFile = monsterMiniSpriteSheetPath;
-        this.monsterSpriteSheetFile = monsterSpriteSheetPath;
-        this.heroSpritesheetFile = heroSpriteSheetPath;
-        this.animations = animationsSpriteSheetPath;
-        this.monsterFaceSpriteSheetFile = monsterFaceSpriteSheetPath;
 
         this.maleSprites = new Array<String>();
         for(int i=1;i<=9;i++)this.maleSprites.add("spritesheets/person" + i + "m.pack");
@@ -82,31 +63,32 @@ public class MediaManager implements Media {
 
         assets.finishLoading();
 
-        animatedTiles.add(new Animation<AtlasRegion>(1f, assets.get(animations, TextureAtlas.class)
+        String animations = Path.Spritesheet.ANIMATIONS;
+        animatedTiles.add(new Animation<>(1f, assets.get(animations, TextureAtlas.class)
                 .findRegions("water"), Animation.PlayMode.LOOP));
-        animatedTiles.add(new Animation<AtlasRegion>(1f, assets.get(animations, TextureAtlas.class)
+        animatedTiles.add(new Animation<>(1f, assets.get(animations, TextureAtlas.class)
                 .findRegions("waterine"), Animation.PlayMode.LOOP));
-        animatedTiles.add(new Animation<AtlasRegion>(1f, assets.get(animations, TextureAtlas.class)
+        animatedTiles.add(new Animation<>(1f, assets.get(animations, TextureAtlas.class)
                 .findRegions("waterinw"), Animation.PlayMode.LOOP));
-        animatedTiles.add(new Animation<AtlasRegion>(1f, assets.get(animations, TextureAtlas.class)
+        animatedTiles.add(new Animation<>(1f, assets.get(animations, TextureAtlas.class)
                 .findRegions("waterise"), Animation.PlayMode.LOOP));
-        animatedTiles.add(new Animation<AtlasRegion>(1f, assets.get(animations, TextureAtlas.class)
+        animatedTiles.add(new Animation<>(1f, assets.get(animations, TextureAtlas.class)
                 .findRegions("waterisw"), Animation.PlayMode.LOOP));
-        animatedTiles.add(new Animation<AtlasRegion>(1f, assets.get(animations, TextureAtlas.class)
+        animatedTiles.add(new Animation<>(1f, assets.get(animations, TextureAtlas.class)
                 .findRegions("watern"), Animation.PlayMode.LOOP));
-        animatedTiles.add(new Animation<AtlasRegion>(1f, assets.get(animations, TextureAtlas.class)
+        animatedTiles.add(new Animation<>(1f, assets.get(animations, TextureAtlas.class)
                 .findRegions("waterne"), Animation.PlayMode.LOOP));
-        animatedTiles.add(new Animation<AtlasRegion>(1f, assets.get(animations, TextureAtlas.class)
+        animatedTiles.add(new Animation<>(1f, assets.get(animations, TextureAtlas.class)
                 .findRegions("waternw"), Animation.PlayMode.LOOP));
-        animatedTiles.add(new Animation<AtlasRegion>(1f, assets.get(animations, TextureAtlas.class)
+        animatedTiles.add(new Animation<>(1f, assets.get(animations, TextureAtlas.class)
                 .findRegions("waters"), Animation.PlayMode.LOOP));
-        animatedTiles.add(new Animation<AtlasRegion>(1f, assets.get(animations, TextureAtlas.class)
+        animatedTiles.add(new Animation<>(1f, assets.get(animations, TextureAtlas.class)
                 .findRegions("waterse"), Animation.PlayMode.LOOP));
-        animatedTiles.add(new Animation<AtlasRegion>(1f, assets.get(animations, TextureAtlas.class)
+        animatedTiles.add(new Animation<>(1f, assets.get(animations, TextureAtlas.class)
                 .findRegions("watersw"), Animation.PlayMode.LOOP));
-        animatedTiles.add(new Animation<AtlasRegion>(1f, assets.get(animations, TextureAtlas.class)
+        animatedTiles.add(new Animation<>(1f, assets.get(animations, TextureAtlas.class)
                 .findRegions("watere"), Animation.PlayMode.LOOP));
-        animatedTiles.add(new Animation<AtlasRegion>(1f, assets.get(animations, TextureAtlas.class)
+        animatedTiles.add(new Animation<>(1f, assets.get(animations, TextureAtlas.class)
                 .findRegions("waterw"), Animation.PlayMode.LOOP));
     }
     /* ............................................................................... METHODS .. */
@@ -120,7 +102,7 @@ public class MediaManager implements Media {
         TextureAtlas atlas;
         switch(type) {
             case HERO:
-                atlas = assets.get(heroSpritesheetFile);break;
+                atlas = assets.get(Path.Spritesheet.HERO);break;
             default:
                 atlas = null;
                 System.err.println("TextureAtlasType " + type + " not found.");
@@ -168,14 +150,14 @@ public class MediaManager implements Media {
     public ArrayMap<SkyDirection, Animation<AtlasRegion>> getPersonAnimationSet(TextureAtlas textureAtlas) {
         ArrayMap<SkyDirection, Animation<AtlasRegion>> animations = new ArrayMap<SkyDirection,Animation<AtlasRegion>>();
 
-        animations.put(SkyDirection.N, new Animation<AtlasRegion>(.15f, textureAtlas.findRegions("n"), Animation.PlayMode.LOOP));
-        animations.put(SkyDirection.E, new Animation<AtlasRegion>(.15f, textureAtlas.findRegions("e"), Animation.PlayMode.LOOP));
-        animations.put(SkyDirection.S, new Animation<AtlasRegion>(.15f, textureAtlas.findRegions("s"), Animation.PlayMode.LOOP));
-        animations.put(SkyDirection.W, new Animation<AtlasRegion>(.15f, textureAtlas.findRegions("w"), Animation.PlayMode.LOOP));
-        animations.put(SkyDirection.NSTOP, new Animation<AtlasRegion>(.15f, textureAtlas.findRegions("n").get(0)));
-        animations.put(SkyDirection.ESTOP, new Animation<AtlasRegion>(.15f, textureAtlas.findRegions("e").get(0)));
-        animations.put(SkyDirection.SSTOP, new Animation<AtlasRegion>(.15f, textureAtlas.findRegions("s").get(0)));
-        animations.put(SkyDirection.WSTOP, new Animation<AtlasRegion>(.15f, textureAtlas.findRegions("w").get(0)));
+        animations.put(SkyDirection.N, new Animation<>(.15f, textureAtlas.findRegions("n"), Animation.PlayMode.LOOP));
+        animations.put(SkyDirection.E, new Animation<>(.15f, textureAtlas.findRegions("e"), Animation.PlayMode.LOOP));
+        animations.put(SkyDirection.S, new Animation<>(.15f, textureAtlas.findRegions("s"), Animation.PlayMode.LOOP));
+        animations.put(SkyDirection.W, new Animation<>(.15f, textureAtlas.findRegions("w"), Animation.PlayMode.LOOP));
+        animations.put(SkyDirection.NSTOP, new Animation<>(.15f, textureAtlas.findRegions("n").get(0)));
+        animations.put(SkyDirection.ESTOP, new Animation<>(.15f, textureAtlas.findRegions("e").get(0)));
+        animations.put(SkyDirection.SSTOP, new Animation<>(.15f, textureAtlas.findRegions("s").get(0)));
+        animations.put(SkyDirection.WSTOP, new Animation<>(.15f, textureAtlas.findRegions("w").get(0)));
 
         return animations;
     }
@@ -185,7 +167,7 @@ public class MediaManager implements Media {
     }
 
     public TextureAtlas.AtlasRegion getMonsterSprite(int index) {
-        TextureAtlas monsterSprites = assets.get(monsterSpriteSheetFile, TextureAtlas.class);
+        TextureAtlas monsterSprites = assets.get(Path.Spritesheet.GUARDIANS, TextureAtlas.class);
         TextureAtlas.AtlasRegion sprite = monsterSprites.findRegion(Integer.toString(index));
         if(sprite == null) {
             sprite = monsterSprites.findRegion("0");
@@ -195,7 +177,7 @@ public class MediaManager implements Media {
     }
 
     public TextureAtlas.AtlasRegion getMonsterMiniSprite(int index) {
-        TextureAtlas monsterSprites = assets.get(monsterMiniSpriteSheetFile, TextureAtlas.class);
+        TextureAtlas monsterSprites = assets.get(Path.Spritesheet.GUARDIANS_MINI, TextureAtlas.class);
         TextureAtlas.AtlasRegion sprite = monsterSprites.findRegion(Integer.toString(index));
         if(sprite == null) {
             sprite = monsterSprites.findRegion("0");
@@ -206,7 +188,7 @@ public class MediaManager implements Media {
 
     @Override
     public Image getMonsterFace(int id) {
-        TextureRegion region = assets.get(monsterFaceSpriteSheetFile, TextureAtlas.class).findRegion(Integer.toString(id));
+        TextureRegion region = assets.get(Path.Spritesheet.GUARDIANS_PREVIEW, TextureAtlas.class).findRegion(Integer.toString(id));
         Image faceImg = new Image(region);
         faceImg.setSize(24,23);
         return faceImg;
@@ -252,8 +234,9 @@ public class MediaManager implements Media {
         return animatedTiles.get(index);
     }
 
-    public Animation<AtlasRegion> getObjectAnimation(String id) {
-        TextureAtlas atlas = assets.get(animations, TextureAtlas.class);
+    public Animation<AtlasRegion> getObjectAnimation(String id)
+    {
+        TextureAtlas atlas = assets.get(Path.Spritesheet.ANIMATIONS, TextureAtlas.class);
         Array<AtlasRegion> regions = atlas.findRegions(id);
         Animation<AtlasRegion> anim = new Animation<>(1f, regions);
         anim.setPlayMode(Animation.PlayMode.LOOP);

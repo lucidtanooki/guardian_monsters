@@ -8,18 +8,18 @@ import com.badlogic.gdx.math.Rectangle;
  *
  * Created by Georg Eckert on 25.11.15.
  */
-public class IntRect {
+public class IntRect extends IntVec2
+{
     //................................................................................... ATTRIBUTES
-    public int x,y,width,height;
+    public int width,height;
     public int ID;
     public static int IDcount=0;
     //.................................................................................. CONSTRUCTOR
 
     public IntRect(int x, int y, int width, int height) {
+        super(x,y);
         this.ID = IDcount;
         IntRect.IDcount++;
-        this.x = x;
-        this.y = y;
         this.width = width;
         this.height = height;
     }
@@ -36,10 +36,9 @@ public class IntRect {
     }
 
     public IntRect(Rectangle r) {
+        super(MathUtils.round(r.x), MathUtils.round(r.y));
         this.ID = IDcount;
         IntRect.IDcount++;
-        this.x = MathUtils.round(r.x);
-        this.y = MathUtils.round(r.y);
         this.width = MathUtils.round(r.width);
         this.height = MathUtils.round(r.height);
     }

@@ -5,7 +5,6 @@ import com.badlogic.gdx.utils.XmlReader;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.AnimationType;
 import de.limbusdev.guardianmonsters.media.SFXType;
 import de.limbusdev.guardianmonsters.model.abilities.Ability;
-import de.limbusdev.guardianmonsters.model.abilities.DamageType;
 import de.limbusdev.guardianmonsters.enums.Element;
 
 /**
@@ -18,7 +17,7 @@ public class XMLAbilityParser {
 
     public static Ability parseAbility(XmlReader.Element element) {
         Element e = Element.valueOf(element.getAttribute("element", "none").toUpperCase());
-        DamageType a = DamageType.valueOf(element.get("category", "physical").toUpperCase());
+        Ability.DamageType a = Ability.DamageType.valueOf(element.get("category", "physical").toUpperCase());
         int id = element.getIntAttribute("id", 0);
         int damage = element.getInt("damage", 0);
         String nameID = element.getAttribute("nameID");

@@ -267,16 +267,13 @@ public class BattleHUD extends ABattleHUD {
             }
         };
 
-        attackMenuCallbacks = new SevenButtonsWidget.Callbacks() {
-            @Override
-            public void onButtonNr(int nr) {
-                Monster activeMonster = battleSystem.getActiveMonster();
-                System.out.println("AttackMenuButtons: onButtonNr("+nr+")");
-                System.out.println("Input: User chose attack Nr. " + nr);
-                int chosenAttackNr = activeMonster.abilityGraph.learntAbilities.indexOfValue(activeMonster.abilityGraph.getActiveAbility(nr),false);
-                battleSystem.setChosenAttack(chosenAttackNr);
-                battleStateSwitcher.toTargetChoice();
-            }
+        attackMenuCallbacks = nr -> {
+            Monster activeMonster = battleSystem.getActiveMonster();
+            System.out.println("AttackMenuButtons: onButtonNr("+nr+")");
+            System.out.println("Input: User chose attack Nr. " + nr);
+            int chosenAttackNr = activeMonster.abilityGraph.learntAbilities.indexOfValue(activeMonster.abilityGraph.getActiveAbility(nr),false);
+            battleSystem.setChosenAttack(chosenAttackNr);
+            battleStateSwitcher.toTargetChoice();
         };
 
         battleSystemCallbacks = new BattleSystem.Callbacks() {
@@ -344,14 +341,11 @@ public class BattleHUD extends ABattleHUD {
             }
         };
 
-        targetMenuCallbacks = new SevenButtonsWidget.Callbacks() {
-            @Override
-            public void onButtonNr(int nr) {
-                System.out.println("TargetMenuButtons: onButtonNr("+nr+")");
-                Monster target = targetMenuWidget.getMonsterOfIndex(nr);
-                battleSystem.setChosenTarget(target);
-                battleSystem.attack();
-            }
+        targetMenuCallbacks = nr -> {
+            System.out.println("TargetMenuButtons: onButtonNr("+nr+")");
+            Monster target = targetMenuWidget.getMonsterOfIndex(nr);
+            battleSystem.setChosenTarget(target);
+            battleSystem.attack();
         };
 
         backToActionMenuCallbacks = new BattleActionMenuWidget.Callbacks() {
@@ -378,20 +372,14 @@ public class BattleHUD extends ABattleHUD {
             }
         };
 
-        battleAnimationCallbacks = new BattleAnimationWidget.Callbacks() {
-            @Override
-            public void onHitAnimationComplete() {
-                battleSystem.applyAttack();
-                actionMenu.enable(actionMenu.backButton);
-            }
+        battleAnimationCallbacks = () -> {
+            battleSystem.applyAttack();
+            actionMenu.enable(actionMenu.backButton);
         };
 
-        monsterMenuCallbacks = new SevenButtonsWidget.Callbacks() {
-            @Override
-            public void onButtonNr(int nr) {
-                System.out.println("Teammember " + nr);
-                battleSystem.replaceActiveMonster(leftTeam.get(nr));
-            }
+        monsterMenuCallbacks = nr -> {
+            System.out.println("Teammember " + nr);
+            battleSystem.replaceActiveMonster(leftTeam.get(nr));
         };
     }
 
@@ -463,23 +451,11 @@ public class BattleHUD extends ABattleHUD {
 
             state = BattleState.ENDOFBATTLE;
 
-            Runnable runnable = new Runnable() {
-                @Override
-                public void run() {
-                    Services.getAudio().playMusic(AssetPath.Audio.Music.VICTORY_FANFARE);
-                }
-            };
-            Runnable runnable2 = new Runnable() {
-                @Override
-                public void run() {
-                    Services.getAudio().playMusic(AssetPath.Audio.Music.VICTORY_SONG);
-                }
-            };
             Action endOfBattleMusicSequence = Actions.sequence(
                 Services.getAudio().getMuteAudioAction(AssetPath.Audio.Music.VICTORY_SONG),
-                Actions.run(runnable),
+                Actions.run(() -> Services.getAudio().playMusic(AssetPath.Audio.Music.VICTORY_FANFARE)),
                 Actions.delay(5),
-                Actions.run(runnable2)
+                Actions.run(() -> Services.getAudio().playMusic(AssetPath.Audio.Music.VICTORY_SONG))
             );
 
             stage.addAction(endOfBattleMusicSequence);

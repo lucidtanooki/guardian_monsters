@@ -33,7 +33,8 @@ import de.limbusdev.guardianmonsters.Constant;
 
 public class AbilityChoiceSubMenu extends AInventorySubMenu
     implements TeamMemberSwitcher.Callbacks, AbilityDetailWidget.Callbacks, SevenButtonsWidget.Callbacks,
-    Listener<AbilityGraph> {
+    Listener<AbilityGraph>
+{
 
     private TeamMemberSwitcher switcher;
     private VerticalGroup abilityMenu;

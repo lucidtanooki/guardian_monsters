@@ -20,9 +20,10 @@ import de.limbusdev.guardianmonsters.Constant;
 public class MainToolBar extends Group {
 
     private ButtonGroup<ImageButton> buttonGroup;
-    private Controller callbacks;
+    private Callbacks callbacks;
 
-    public MainToolBar(Skin skin, final Controller handler) {
+    public MainToolBar(Skin skin, Callbacks handler)
+    {
         super();
         this.callbacks = handler;
 
@@ -119,7 +120,8 @@ public class MainToolBar extends Group {
 
     }
 
-    public interface Controller {
+    public interface Callbacks
+    {
         void onTeamButton();
         void onItemsButton();
         void onAbilityButton();

@@ -241,7 +241,8 @@ public class BattleSystem {
     }
 
     // INNER INTERFACE
-    public static abstract class Callbacks {
+    public static abstract class Callbacks
+    {
         public void onMonsterKilled(Monster m){}
         public void onAttack(Monster attacker, Monster target, Ability ability, AttackCalculationReport rep){}
         public void onDefense(Monster defensiveMonster){}

@@ -16,7 +16,8 @@ import de.limbusdev.guardianmonsters.scene2d.AnimatedImage;
  * @author Georg Eckert 2016
  */
 
-public interface Media {
+public interface IMediaManager
+{
 
     void dispose();
 

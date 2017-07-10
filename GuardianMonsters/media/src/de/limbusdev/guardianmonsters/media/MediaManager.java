@@ -12,7 +12,7 @@ import com.badlogic.gdx.utils.ArrayMap;
 
 import net.dermetfan.gdx.assets.AnnotationAssetManager;
 
-import de.limbusdev.guardianmonsters.data.paths.Path;
+import de.limbusdev.guardianmonsters.assets.paths.AssetPath;
 import de.limbusdev.guardianmonsters.enums.SkyDirection;
 import de.limbusdev.guardianmonsters.scene2d.AnimatedImage;
 
@@ -22,7 +22,8 @@ import de.limbusdev.guardianmonsters.scene2d.AnimatedImage;
  * MediaManager implements the Design Pattern Singleton
  * Created by Georg Eckert on 21.11.15.
  */
-public class MediaManager implements Media {
+public class MediaManager implements IMediaManager
+{
     /* ............................................................................ ATTRIBUTES .. */
     private AnnotationAssetManager assets;
 
@@ -33,26 +34,23 @@ public class MediaManager implements Media {
     
     /* ................,........................................................... CONSTRUCTOR .. */
 
-    public MediaManager(String[] texturePaths)
+    public MediaManager()
     {
         this.assets = new AnnotationAssetManager(new InternalFileHandleResolver());
-        assets.load(Path.Spritesheet.class);
+        assets.load(AssetPath.Spritesheet.class);
+        assets.load(AssetPath.Textures.class);
         assets.finishLoading();
 
 
-        for(String s : texturePaths) {
-            assets.load(s, Texture.class);
-        }
-
-        this.maleSprites = new Array<String>();
+        this.maleSprites = new Array<>();
         for(int i=1;i<=9;i++)this.maleSprites.add("spritesheets/person" + i + "m.pack");
         for(String s : maleSprites) assets.load(s, TextureAtlas.class);
-        this.femaleSprites = new Array<String>();
+        this.femaleSprites = new Array<>();
         for(int i=1;i<=2;i++)this.femaleSprites.add("spritesheets/person" + i + "f.pack");
         for(String s : femaleSprites) assets.load(s, TextureAtlas.class);
 
 
-        bgs = new Array<String>();
+        bgs = new Array<>();
         bgs.add("grass");
         bgs.add("cave");
         bgs.add("forest");
@@ -63,7 +61,7 @@ public class MediaManager implements Media {
 
         assets.finishLoading();
 
-        String animations = Path.Spritesheet.ANIMATIONS;
+        String animations = AssetPath.Spritesheet.ANIMATIONS;
         animatedTiles.add(new Animation<>(1f, assets.get(animations, TextureAtlas.class)
                 .findRegions("water"), Animation.PlayMode.LOOP));
         animatedTiles.add(new Animation<>(1f, assets.get(animations, TextureAtlas.class)
@@ -102,7 +100,7 @@ public class MediaManager implements Media {
         TextureAtlas atlas;
         switch(type) {
             case HERO:
-                atlas = assets.get(Path.Spritesheet.HERO);break;
+                atlas = assets.get(AssetPath.Spritesheet.HERO);break;
             default:
                 atlas = null;
                 System.err.println("TextureAtlasType " + type + " not found.");
@@ -167,7 +165,7 @@ public class MediaManager implements Media {
     }
 
     public TextureAtlas.AtlasRegion getMonsterSprite(int index) {
-        TextureAtlas monsterSprites = assets.get(Path.Spritesheet.GUARDIANS, TextureAtlas.class);
+        TextureAtlas monsterSprites = assets.get(AssetPath.Spritesheet.GUARDIANS, TextureAtlas.class);
         TextureAtlas.AtlasRegion sprite = monsterSprites.findRegion(Integer.toString(index));
         if(sprite == null) {
             sprite = monsterSprites.findRegion("0");
@@ -177,7 +175,7 @@ public class MediaManager implements Media {
     }
 
     public TextureAtlas.AtlasRegion getMonsterMiniSprite(int index) {
-        TextureAtlas monsterSprites = assets.get(Path.Spritesheet.GUARDIANS_MINI, TextureAtlas.class);
+        TextureAtlas monsterSprites = assets.get(AssetPath.Spritesheet.GUARDIANS_MINI, TextureAtlas.class);
         TextureAtlas.AtlasRegion sprite = monsterSprites.findRegion(Integer.toString(index));
         if(sprite == null) {
             sprite = monsterSprites.findRegion("0");
@@ -188,7 +186,7 @@ public class MediaManager implements Media {
 
     @Override
     public Image getMonsterFace(int id) {
-        TextureRegion region = assets.get(Path.Spritesheet.GUARDIANS_PREVIEW, TextureAtlas.class).findRegion(Integer.toString(id));
+        TextureRegion region = assets.get(AssetPath.Spritesheet.GUARDIANS_PREVIEW, TextureAtlas.class).findRegion(Integer.toString(id));
         Image faceImg = new Image(region);
         faceImg.setSize(24,23);
         return faceImg;
@@ -206,9 +204,9 @@ public class MediaManager implements Media {
         TextureAtlas atlas = assets.get("spritesheets/battleAnimations.pack", TextureAtlas.class);
         Animation<AtlasRegion> anim;
         if(atlas.findRegions(attack).size == 0) {
-            anim = new Animation<AtlasRegion>(1f / 12f, atlas.findRegions("att_kick"), Animation.PlayMode.NORMAL);
+            anim = new Animation<>(1f / 12f, atlas.findRegions("att_kick"), Animation.PlayMode.NORMAL);
         } else {
-            anim = new Animation<AtlasRegion>(1f / 12f, atlas.findRegions(attack), Animation.PlayMode.NORMAL);
+            anim = new Animation<>(1f / 12f, atlas.findRegions(attack), Animation.PlayMode.NORMAL);
         }
         return anim;
     }
@@ -236,7 +234,7 @@ public class MediaManager implements Media {
 
     public Animation<AtlasRegion> getObjectAnimation(String id)
     {
-        TextureAtlas atlas = assets.get(Path.Spritesheet.ANIMATIONS, TextureAtlas.class);
+        TextureAtlas atlas = assets.get(AssetPath.Spritesheet.ANIMATIONS, TextureAtlas.class);
         Array<AtlasRegion> regions = atlas.findRegions(id);
         Animation<AtlasRegion> anim = new Animation<>(1f, regions);
         anim.setPlayMode(Animation.PlayMode.LOOP);
@@ -245,14 +243,14 @@ public class MediaManager implements Media {
 
     @Override
     public Image getMetamorphosisBackground() {
-        TextureAtlas atlas = getTextureAtlas(Path.Spritesheet.BATTLE_BG);
+        TextureAtlas atlas = getTextureAtlas(AssetPath.Spritesheet.BATTLE_BG);
         Image img = new Image(atlas.findRegion("metamorph_bg"));
         return img;
     }
 
     @Override
     public AnimatedImage getMetamorphosisAnimation() {
-        Animation animation = new Animation(.15f,getTextureAtlas(Path.Spritesheet.ANIMATIONS_BIG).findRegions("metamorphosis"));
+        Animation animation = new Animation(.15f,getTextureAtlas(AssetPath.Spritesheet.ANIMATIONS_BIG).findRegions("metamorphosis"));
         AnimatedImage metamorphosisAnimation = new AnimatedImage(animation);
         metamorphosisAnimation.setPlayMode(Animation.PlayMode.NORMAL);
         return metamorphosisAnimation;

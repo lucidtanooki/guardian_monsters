@@ -6,7 +6,8 @@ import com.badlogic.gdx.scenes.scene2d.Action;
  * Created by Georg Eckert on 14.11.16.
  */
 
-public interface Audio {
+public interface IAudioManager
+{
 
     void playSound(String path);
     void playMusic(String path);

@@ -11,7 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.I18NBundle;
 
-import de.limbusdev.guardianmonsters.data.paths.Path;
+import de.limbusdev.guardianmonsters.assets.paths.AssetPath;
 import de.limbusdev.guardianmonsters.scene2d.AnimatedImage;
 import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.Constant;
@@ -36,14 +36,14 @@ public class StartScreenWidget extends WidgetGroup {
         addActor(group);
 
         Animation bgAnim = new Animation(.1f, Services.getMedia()
-            .getTextureAtlas(Path.Spritesheet.ANIMATIONS_BIG).findRegions("mainMenuAnimation"));
+            .getTextureAtlas(AssetPath.Spritesheet.ANIMATIONS_BIG).findRegions("mainMenuAnimation"));
         bgAnim.setPlayMode(Animation.PlayMode.LOOP);
         AnimatedImage bgAnimation = new AnimatedImage(bgAnim);
         bgAnimation.setColor(1,1,1,.3f);
         bgAnimation.setPosition(35,-30, Align.bottomLeft);
         group.addActor(bgAnimation);
 
-        Image logo = new Image(Services.getMedia().getTexture(Path.Texture.MAIN_MENU_BG1));
+        Image logo = new Image(Services.getMedia().getTexture(AssetPath.Textures.MAIN_MENU_BG1));
         logo.setPosition(Constant.WIDTH / 2, Constant.HEIGHT / 2, Align.center);
         group.addActor(logo);
 

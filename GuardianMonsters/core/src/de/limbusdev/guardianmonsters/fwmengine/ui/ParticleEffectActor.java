@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
-import de.limbusdev.guardianmonsters.data.paths.Path;
+import de.limbusdev.guardianmonsters.assets.paths.AssetPath;
 import de.limbusdev.guardianmonsters.services.Services;
 
 /**
@@ -22,7 +22,7 @@ public class ParticleEffectActor extends Actor {
 
     public ParticleEffectActor(String name) {
         super();
-        TextureAtlas particleAtlas = Services.getMedia().getTextureAtlas(Path.Spritesheet.PARTICLES);
+        TextureAtlas particleAtlas = Services.getMedia().getTextureAtlas(AssetPath.Spritesheet.PARTICLES);
         ParticleEffect particles = new ParticleEffect();
         particles.load(Gdx.files.internal("particles/" + name + "-particle-effect.p"), particleAtlas);
         this.particleEffect = particles;

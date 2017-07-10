@@ -2,7 +2,7 @@ package de.limbusdev.guardianmonsters;
 
 import com.badlogic.gdx.Game;
 
-import de.limbusdev.guardianmonsters.data.paths.Path;
+import de.limbusdev.guardianmonsters.assets.paths.AssetPath;
 import de.limbusdev.guardianmonsters.media.AudioManager;
 import de.limbusdev.guardianmonsters.media.MediaManager;
 import de.limbusdev.guardianmonsters.scene2d.ConcreteScreenManager;
@@ -59,17 +59,12 @@ public class GuardianMonsters extends Game{
     private void injectDependencies() {
         // Service Locator: Dependency Injection
         System.out.println("GuardianMonsters: injecting dependencies ...");
-        Services.provide(new MediaManager(
-            Path.Texture.all
-        ));
-        Services.provide(new AudioManager(
-            Path.Audio.SFX.all(),
-            Path.Audio.Music.all
-        ));
+        Services.provide(new MediaManager());
+        Services.provide(new AudioManager());
         Services.provide(new ConcreteScreenManager(this));
         Services.provide(new LocalizationManager());
         Services.provide(new SettingsService());
-        Services.provide(new UIManager(Path.Skin.FONT));
+        Services.provide(new UIManager(AssetPath.Skin.FONT));
     }
 
 }

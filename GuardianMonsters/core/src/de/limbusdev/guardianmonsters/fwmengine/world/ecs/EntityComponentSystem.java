@@ -23,7 +23,7 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.SpriteSystem;
 import de.limbusdev.guardianmonsters.fwmengine.world.model.MapDescriptionInfo;
 import de.limbusdev.guardianmonsters.fwmengine.world.model.MapPersonInformation;
 import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager;
-import de.limbusdev.guardianmonsters.media.Media;
+import de.limbusdev.guardianmonsters.media.IMediaManager;
 import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.BattleScreen;
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.HUD;
@@ -37,7 +37,7 @@ import de.limbusdev.guardianmonsters.Constant;
 public class EntityComponentSystem {
     /* ............................................................................ ATTRIBUTES .. */
     private Engine engine;
-    private Media media;
+    private IMediaManager media;
     private EntityFactory entityFactory;
     private PositionComponent heroPosition;
     public GameArea gameArea;

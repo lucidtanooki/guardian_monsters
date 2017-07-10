@@ -5,9 +5,9 @@ sourceCompatibility = 1.8
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
 sourceSets.main.java.srcDirs = [ "src/" ]
-sourceSets.main.resources.srcDirs = [ project(":data").file("assets") ]
+sourceSets.main.resources.srcDirs = [ project(":assets").file("assets") ]
 
 
 eclipse.project {
-    name = appName + "-data"
+    name = appName + "-assets"
 }

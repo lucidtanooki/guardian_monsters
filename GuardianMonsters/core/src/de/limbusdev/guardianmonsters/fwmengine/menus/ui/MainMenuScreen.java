@@ -17,7 +17,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.I18NBundle;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
-import de.limbusdev.guardianmonsters.data.paths.Path;
+import de.limbusdev.guardianmonsters.assets.paths.AssetPath;
 import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager;
 import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.widgets.CreditsScreenWidget;
@@ -227,7 +227,7 @@ public class MainMenuScreen implements Screen {
 
 
     public void setUpIntro(Skin skin) {
-        TextureAtlas logos = Services.getMedia().getTextureAtlas(Path.Spritesheet.LOGOS);
+        TextureAtlas logos = Services.getMedia().getTextureAtlas(AssetPath.Spritesheet.LOGOS);
         this.introScreen = new Group();
         Image bg = new Image(skin.getDrawable("black"));
         bg.setWidth(Constant.WIDTH);

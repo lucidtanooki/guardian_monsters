@@ -17,7 +17,8 @@ import de.limbusdev.guardianmonsters.scene2d.AnimatedImage;
  * Created by georg on 14.11.16.
  */
 
-public class NullMedia implements Media {
+public class NullMediaManager implements IMediaManager
+{
 
     public void dispose() {}
 

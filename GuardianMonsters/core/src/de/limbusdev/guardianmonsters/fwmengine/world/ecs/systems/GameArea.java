@@ -12,7 +12,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 
-import de.limbusdev.guardianmonsters.data.paths.Path;
+import de.limbusdev.guardianmonsters.assets.paths.AssetPath;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PositionComponent;
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.TmxDayTimeMapLoader;
 import de.limbusdev.guardianmonsters.geometry.IntRect;
@@ -116,7 +116,7 @@ public class GameArea {
         String musicType = tiledMap.getProperties().get("musicType", String.class);
         int musicIndex = Integer.parseInt(tiledMap.getProperties().get("musicIndex", String.class)) - 1;
         if (musicType.equals("town")) {
-            bgMusic = Path.Audio.Music.BG_TOWN[musicIndex];
+            bgMusic = AssetPath.Audio.Music.BG_TOWN[musicIndex];
         }
 
         return tiledMap;

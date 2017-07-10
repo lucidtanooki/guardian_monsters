@@ -1,0 +1,26 @@
+
+particles.png
+format: RGBA8888
+filter: MipMapNearestNearest,MipMapNearestNearest
+repeat: none
+particle-guardosphere
+  rotate: false
+  xy: 1, 10
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+particle-metamorph
+  rotate: false
+  xy: 19, 10
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+particle-metamorph2
+  rotate: false
+  xy: 1, 1
+  size: 7, 7
+  orig: 7, 7
+  offset: 0, 0
+  index: -1

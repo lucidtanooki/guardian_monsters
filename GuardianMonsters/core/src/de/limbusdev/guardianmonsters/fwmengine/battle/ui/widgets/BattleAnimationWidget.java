@@ -11,12 +11,12 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 
-import de.limbusdev.guardianmonsters.data.paths.Path;
+import de.limbusdev.guardianmonsters.assets.paths.AssetPath;
 import de.limbusdev.guardianmonsters.fwmengine.battle.control.BattleQueue;
 import de.limbusdev.guardianmonsters.fwmengine.battle.control.BattleSystem;
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.ImageZComparator;
 import de.limbusdev.guardianmonsters.geometry.IntVec2;
-import de.limbusdev.guardianmonsters.media.Media;
+import de.limbusdev.guardianmonsters.media.IMediaManager;
 import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.model.abilities.Ability;
 import de.limbusdev.guardianmonsters.model.monsters.Monster;
@@ -37,7 +37,7 @@ public class BattleAnimationWidget extends BattleWidget{
 
     private ArrayMap<Integer,Image> monsterImgsLeft, monsterImgsRight;
     private Array<Image> zSortedMonsterImgs;
-    private Media media;
+    private IMediaManager media;
 
     public boolean attackAnimationRunning;
 
@@ -260,7 +260,7 @@ public class BattleAnimationWidget extends BattleWidget{
         });
 
         // Plays the attacks sound
-        final String path = Path.Audio.SFX.BATTLE().get(ability.sfxType.toString().toUpperCase()).get(0);
+        final String path = AssetPath.Audio.SFX.BATTLE().get(ability.sfxType.toString().toUpperCase()).get(0);
         Action playSFXAction = Actions.run(new Runnable() {
             @Override
             public void run() {

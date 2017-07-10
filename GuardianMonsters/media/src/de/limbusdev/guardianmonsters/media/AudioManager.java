@@ -1,29 +1,30 @@
 package de.limbusdev.guardianmonsters.media;
 
-import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.badlogic.gdx.utils.Array;
 
-import java.util.ArrayList;
+import net.dermetfan.gdx.assets.AnnotationAssetManager;
+
+import de.limbusdev.guardianmonsters.assets.paths.AssetPath;
 
 /**
  * @author Georg Eckert
  */
-public class AudioManager implements Audio {
+public class AudioManager implements IAudioManager
+{
 
     private String currentlyPlayingBGMusic;
 
-    private AssetManager assets;
+    private AnnotationAssetManager assets;
 
-    public AudioManager(ArrayList<String> sfxPaths, String[] musicPaths) {
-        assets = new AssetManager();
-        for(String s : sfxPaths)
-            assets.load(s,Sound.class);
-        for(String s : musicPaths)
-            assets.load(s,Music.class);
+    public AudioManager()
+    {
+        assets = new AnnotationAssetManager(new InternalFileHandleResolver());
+        assets.load(AssetPath.Audio.SFX.class);
+        assets.load(AssetPath.Audio.Music.class);
         assets.finishLoading();
     }
 

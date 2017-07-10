@@ -7,7 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Align;
 
 import de.limbusdev.guardianmonsters.Constant;
-import de.limbusdev.guardianmonsters.data.paths.Path;
+import de.limbusdev.guardianmonsters.assets.paths.AssetPath;
 import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.fwmengine.ui.AHUD;
 import de.limbusdev.guardianmonsters.fwmengine.ui.ParticleEffectActor;
@@ -65,12 +65,12 @@ public class GuardoSphereHUD extends AHUD implements GuardoSphereTeamWidget.Call
 
     @Override
     public void show() {
-        Services.getAudio().playLoopMusic(Path.Audio.Music.GUARDOSPHERE);
+        Services.getAudio().playLoopMusic(AssetPath.Audio.Music.GUARDOSPHERE);
     }
 
     @Override
     public void hide() {
-        Services.getAudio().stopMusic(Path.Audio.Music.GUARDOSPHERE);
+        Services.getAudio().stopMusic(AssetPath.Audio.Music.GUARDOSPHERE);
     }
 
     @Override

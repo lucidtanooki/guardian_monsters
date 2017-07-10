@@ -10,7 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 
-import de.limbusdev.guardianmonsters.media.Media;
+import de.limbusdev.guardianmonsters.media.IMediaManager;
 import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.team.ATeamChoiceWidget;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.team.MonsterStatusInventoryWidget;
@@ -40,7 +40,7 @@ public class TeamSubMenu extends AInventorySubMenu {
 
     public TeamSubMenu(Skin skin, TeamComponent teamComp) {
         super(skin);
-        Media media = Services.getMedia();
+        IMediaManager media = Services.getMedia();
         this.team = teamComp.team;
 
         monsterChoice = new Group();

@@ -2,7 +2,7 @@ package de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
-import de.limbusdev.guardianmonsters.data.paths.Path;
+import de.limbusdev.guardianmonsters.assets.paths.AssetPath;
 import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.model.abilities.Ability;
 import de.limbusdev.guardianmonsters.model.monsters.Monster;
@@ -32,7 +32,7 @@ public class AttackMenuWidget extends SevenButtonsWidget {
             Ability attack = monster.abilityGraph.getActiveAbility(i);
 
             if(attack != null) {
-                setButtonStyle(i,skin, Path.Skin.attackButtonStyle(attack.element));
+                setButtonStyle(i,skin, AssetPath.Skin.attackButtonStyle(attack.element));
                 String mpCostString = (attack.MPcost > 0) ? (" " + Integer.toString(attack.MPcost)) : "";
                 setButtonText(i,Services.getL18N().Abilities().get(attack.name) + mpCostString);
 

@@ -139,7 +139,7 @@ project(":services") {
     dependencies {
         compile project(":scene2d")
         compile project(":enums")
-        compile project(":data")
+        compile project(":assets")
         compile project(":media")
         compile "com.badlogicgames.gdx:gdx:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
@@ -177,7 +177,7 @@ project(":media") {
     dependencies {
         compile project(":enums")
         compile project(":scene2d")
-        compile project(":data")
+        compile project(":assets")
         compile "com.badlogicgames.gdx:gdx:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
         compile "net.dermetfan.libgdx-utils:libgdx-utils:$gdxUtilsVersion"
@@ -185,7 +185,7 @@ project(":media") {
     }
 }
 
-project(":data") {
+project(":assets") {
     apply plugin: "java"
 
     dependencies {

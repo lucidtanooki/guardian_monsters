@@ -10,7 +10,7 @@ import com.badlogic.gdx.utils.I18NBundle;
 
 import java.util.Locale;
 
-import de.limbusdev.guardianmonsters.data.paths.Path;
+import de.limbusdev.guardianmonsters.assets.paths.AssetPath;
 
 
 /**
@@ -32,16 +32,16 @@ public class LocalizationManager implements L18N {
 
         System.out.println("Language: " + Locale.getDefault().getLanguage());
 
-        l18n.put(Path.I18N.GUARDIANS,    I18NBundle.createBundle(Gdx.files.internal(Path.I18N.GUARDIANS)));
-        l18n.put(Path.I18N.BATTLE,       I18NBundle.createBundle(Gdx.files.internal(Path.I18N.BATTLE)));
-        l18n.put(Path.I18N.INVENTORY,    I18NBundle.createBundle(Gdx.files.internal(Path.I18N.INVENTORY)));
-        l18n.put(Path.I18N.ATTACKS,      I18NBundle.createBundle(Gdx.files.internal(Path.I18N.ATTACKS)));
-        l18n.put(Path.I18N.ELEMENTS,     I18NBundle.createBundle(Gdx.files.internal(Path.I18N.ELEMENTS)));
-        l18n.put(Path.I18N.GENERAL,      I18NBundle.createBundle(Gdx.files.internal(Path.I18N.GENERAL)));
+        l18n.put(AssetPath.I18N.GUARDIANS,    I18NBundle.createBundle(Gdx.files.internal(AssetPath.I18N.GUARDIANS)));
+        l18n.put(AssetPath.I18N.BATTLE,       I18NBundle.createBundle(Gdx.files.internal(AssetPath.I18N.BATTLE)));
+        l18n.put(AssetPath.I18N.INVENTORY,    I18NBundle.createBundle(Gdx.files.internal(AssetPath.I18N.INVENTORY)));
+        l18n.put(AssetPath.I18N.ATTACKS,      I18NBundle.createBundle(Gdx.files.internal(AssetPath.I18N.ATTACKS)));
+        l18n.put(AssetPath.I18N.ELEMENTS,     I18NBundle.createBundle(Gdx.files.internal(AssetPath.I18N.ELEMENTS)));
+        l18n.put(AssetPath.I18N.GENERAL,      I18NBundle.createBundle(Gdx.files.internal(AssetPath.I18N.GENERAL)));
 
         int[] mapIDs ={1,2,25,251,252,253};
         for(int i : mapIDs) {
-            l18nMap.put(i, I18NBundle.createBundle(Gdx.files.internal(Path.I18N.MAP_PREFIX+Integer.toString(i))));
+            l18nMap.put(i, I18NBundle.createBundle(Gdx.files.internal(AssetPath.I18N.MAP_PREFIX+Integer.toString(i))));
         }
 
 
@@ -78,32 +78,32 @@ public class LocalizationManager implements L18N {
 
     @Override
     public I18NBundle General() {
-        return this.l18n.get(Path.I18N.GENERAL);
+        return this.l18n.get(AssetPath.I18N.GENERAL);
     }
 
     @Override
     public I18NBundle Abilities() {
-        return this.l18n.get(Path.I18N.ATTACKS);
+        return this.l18n.get(AssetPath.I18N.ATTACKS);
     }
 
     @Override
     public I18NBundle Guardians() {
-        return this.l18n.get(Path.I18N.GUARDIANS);
+        return this.l18n.get(AssetPath.I18N.GUARDIANS);
     }
 
     @Override
     public I18NBundle Elements() {
-        return this.l18n.get(Path.I18N.ELEMENTS);
+        return this.l18n.get(AssetPath.I18N.ELEMENTS);
     }
 
     @Override
     public I18NBundle Inventory() {
-        return this.l18n.get(Path.I18N.INVENTORY);
+        return this.l18n.get(AssetPath.I18N.INVENTORY);
     }
 
     @Override
     public I18NBundle Battle() {
-        return this.l18n.get(Path.I18N.BATTLE);
+        return this.l18n.get(AssetPath.I18N.BATTLE);
     }
 
     @Override

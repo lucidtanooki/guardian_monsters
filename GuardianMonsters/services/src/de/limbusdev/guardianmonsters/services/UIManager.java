@@ -11,7 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.ObjectMap;
 
-import de.limbusdev.guardianmonsters.data.paths.Path;
+import de.limbusdev.guardianmonsters.assets.paths.AssetPath;
 
 
 /**
@@ -70,9 +70,9 @@ public class UIManager extends AssetManager implements UI  {
         skinResources.put("font15w", fonts.get(15).get(Color.WHITE));
 
         String[] skinPaths = {
-            Path.Skin.DEFAULT,
-            Path.Skin.BATTLE,
-            Path.Skin.INVENTORY
+            AssetPath.Skin.DEFAULT,
+            AssetPath.Skin.BATTLE,
+            AssetPath.Skin.INVENTORY
         };
 
         for(String path : skinPaths) {
@@ -88,17 +88,17 @@ public class UIManager extends AssetManager implements UI  {
 
     @Override
     public Skin getDefaultSkin() {
-        return get(Path.Skin.DEFAULT + ".json", Skin.class);
+        return get(AssetPath.Skin.DEFAULT + ".json", Skin.class);
     }
 
     @Override
     public Skin getBattleSkin() {
-        return get(Path.Skin.BATTLE + ".json", Skin.class);
+        return get(AssetPath.Skin.BATTLE + ".json", Skin.class);
     }
 
     @Override
     public Skin getInventorySkin() {
-        return get(Path.Skin.INVENTORY + ".json", Skin.class);
+        return get(AssetPath.Skin.INVENTORY + ".json", Skin.class);
     }
 
     @Override

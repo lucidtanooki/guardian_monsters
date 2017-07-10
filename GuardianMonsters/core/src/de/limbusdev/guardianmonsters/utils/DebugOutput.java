@@ -3,8 +3,6 @@ package de.limbusdev.guardianmonsters.utils;
 
 import com.badlogic.gdx.utils.Array;
 
-import de.limbusdev.guardianmonsters.data.paths.Path;
-import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.model.abilities.Ability;
 import de.limbusdev.guardianmonsters.model.monsters.Monster;
 import de.limbusdev.guardianmonsters.model.MonsterDB;

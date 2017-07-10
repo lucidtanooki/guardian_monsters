@@ -1,10 +1,10 @@
 package de.limbusdev.guardianmonsters.services;
 
 
-import de.limbusdev.guardianmonsters.media.Audio;
-import de.limbusdev.guardianmonsters.media.Media;
-import de.limbusdev.guardianmonsters.media.NullAudio;
-import de.limbusdev.guardianmonsters.media.NullMedia;
+import de.limbusdev.guardianmonsters.media.IAudioManager;
+import de.limbusdev.guardianmonsters.media.IMediaManager;
+import de.limbusdev.guardianmonsters.media.NullAudioManager;
+import de.limbusdev.guardianmonsters.media.NullMediaManager;
 
 /**
  * Services implements the Service Locator Pattern
@@ -14,34 +14,34 @@ import de.limbusdev.guardianmonsters.media.NullMedia;
  */
 
 public class Services {
-    private static Media media;
-    private static Audio audio;
+    private static IMediaManager media;
+    private static IAudioManager audio;
     private static de.limbusdev.guardianmonsters.scene2d.ScreenManager screens;
     private static L18N l18n;
     private static Settings settings;
     private static UI ui;
 
-    public static void provide(Media service) {
+    public static void provide(IMediaManager service) {
         media = service;
     }
 
-    public static Media getMedia() {
+    public static IMediaManager getMedia() {
         if(media == null) {
             System.err.println("SERVICES: No Media service injected yet with Services.provide(Media media). Returning NullMedia.");
-            return new NullMedia();
+            return new NullMediaManager();
         } else {
             return media;
         }
     }
 
-    public static void provide(Audio service) {
+    public static void provide(IAudioManager service) {
         audio = service;
     }
 
-    public static Audio getAudio() {
+    public static IAudioManager getAudio() {
         if(audio == null) {
             System.err.println("SERVICES: No Audio service injected yet with Services.provide(Audio audio). Returning NullAudio.");
-            return new NullAudio();
+            return new NullAudioManager();
         } else {
             return audio;
         }

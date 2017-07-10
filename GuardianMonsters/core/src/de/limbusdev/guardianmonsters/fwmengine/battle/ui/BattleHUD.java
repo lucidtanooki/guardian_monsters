@@ -6,7 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
-import de.limbusdev.guardianmonsters.data.paths.Path;
+import de.limbusdev.guardianmonsters.assets.paths.AssetPath;
 import de.limbusdev.guardianmonsters.fwmengine.battle.control.BattleStringBuilder;
 import de.limbusdev.guardianmonsters.fwmengine.battle.control.BattleSystem;
 import de.limbusdev.guardianmonsters.fwmengine.battle.control.MonsterManager;
@@ -27,7 +27,6 @@ import de.limbusdev.guardianmonsters.model.items.Inventory;
 import de.limbusdev.guardianmonsters.model.monsters.Monster;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleMainMenuWidget;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleStatusOverviewWidget;
-import de.limbusdev.guardianmonsters.model.MonsterDB;
 import de.limbusdev.guardianmonsters.model.monsters.Team;
 
 import static de.limbusdev.guardianmonsters.Constant.LEFT;
@@ -467,17 +466,17 @@ public class BattleHUD extends ABattleHUD {
             Runnable runnable = new Runnable() {
                 @Override
                 public void run() {
-                    Services.getAudio().playMusic(Path.Audio.Music.VICTORY_FANFARE);
+                    Services.getAudio().playMusic(AssetPath.Audio.Music.VICTORY_FANFARE);
                 }
             };
             Runnable runnable2 = new Runnable() {
                 @Override
                 public void run() {
-                    Services.getAudio().playMusic(Path.Audio.Music.VICTORY_SONG);
+                    Services.getAudio().playMusic(AssetPath.Audio.Music.VICTORY_SONG);
                 }
             };
             Action endOfBattleMusicSequence = Actions.sequence(
-                Services.getAudio().getMuteAudioAction(Path.Audio.Music.VICTORY_SONG),
+                Services.getAudio().getMuteAudioAction(AssetPath.Audio.Music.VICTORY_SONG),
                 Actions.run(runnable),
                 Actions.delay(5),
                 Actions.run(runnable2)

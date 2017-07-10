@@ -14,7 +14,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.Sort;
 
-import de.limbusdev.guardianmonsters.media.Media;
+import de.limbusdev.guardianmonsters.media.IMediaManager;
 import de.limbusdev.guardianmonsters.services.Services;
 
 
@@ -30,7 +30,7 @@ public class ExtendedTiledMapRenderer extends OrthogonalTiledMapRenderer {
     private Array<AnimatedPersonSprite> sprites;
     private ArrayMap<String,Animation> objectAnimations;
     private ArrayMap<Integer,Animation> tileAnimations;
-    private Media media;
+    private IMediaManager media;
     private float elapsedTime;
     private WeatherAnimator weatherAnimator;
 

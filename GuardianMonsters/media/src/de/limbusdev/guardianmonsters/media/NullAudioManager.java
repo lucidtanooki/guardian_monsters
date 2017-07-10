@@ -7,7 +7,8 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
  * Created by georg on 14.11.16.
  */
 
-public class NullAudio implements Audio {
+public class NullAudioManager implements IAudioManager
+{
     @Override
     public void playSound(String path) {
 

@@ -2,7 +2,7 @@ package de.limbusdev.guardianmonsters.fwmengine.battle.ui;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-import de.limbusdev.guardianmonsters.data.paths.Path;
+import de.limbusdev.guardianmonsters.assets.paths.AssetPath;
 import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.fwmengine.ui.AScreen;
 import de.limbusdev.guardianmonsters.model.items.Inventory;
@@ -41,7 +41,7 @@ public class BattleScreen extends AScreen {
         if(!initialized) {
             throw new ExceptionInInitializerError("BattleScreen must get initialized before drawn.");
         }
-        Services.getAudio().playLoopMusic(Path.Audio.Music.BG_BATTLE[0]);
+        Services.getAudio().playLoopMusic(AssetPath.Audio.Music.BG_BATTLE[0]);
     }
 
     @Override
@@ -53,7 +53,7 @@ public class BattleScreen extends AScreen {
     public void hide() {
         super.hide();
         initialized = false;
-        Services.getAudio().stopMusic(Path.Audio.Music.BG_BATTLE[0]);
+        Services.getAudio().stopMusic(AssetPath.Audio.Music.BG_BATTLE[0]);
     }
 
     private BattleHUD getBattleHUD() {

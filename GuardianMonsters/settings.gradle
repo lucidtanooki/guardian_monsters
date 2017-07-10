@@ -1,1 +1,1 @@
-include 'desktop', 'android', 'core', 'scene2d', 'services', 'enums', 'ui', 'media', 'data'
+include 'desktop', 'android', 'core', 'scene2d', 'services', 'enums', 'ui', 'media', 'assets'

@@ -112,6 +112,7 @@ public class HUD extends InputAdapter {
         // Menu Button
         TextButton menu = new TextButton(Services.getL18N().General().get("hud_menu"), skin, "open-menu");
         menu.setPosition(Constant.WIDTH, Constant.HEIGHT-2, Align.topRight);
+
         menu.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {

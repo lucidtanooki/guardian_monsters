@@ -26,6 +26,7 @@ allprojects {
         box2DLightsVersion = '1.4'
         ashleyVersion = '1.7.0'
         aiVersion = '1.8.0'
+        gdxUtilsVersion = '0.13.4'
     }
 
     repositories {
@@ -50,7 +51,8 @@ project(":desktop") {
         compile "com.badlogicgames.gdx:gdx-controllers-desktop:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-controllers-platform:$gdxVersion:natives-desktop"
         compile "de.tomgrill.gdxdialogs:gdx-dialogs-desktop:1.2.1"
-        
+        compile "net.dermetfan.libgdx-utils:libgdx-utils:$gdxUtilsVersion"
+        compile "net.dermetfan.libgdx-utils:libgdx-utils-box2d:$gdxUtilsVersion" // Box2D module (optional)
     }
 }
 
@@ -84,7 +86,8 @@ project(":android") {
         compile "com.badlogicgames.box2dlights:box2dlights:$box2DLightsVersion"
         compile "com.badlogicgames.ashley:ashley:$ashleyVersion"
         compile "de.tomgrill.gdxdialogs:gdx-dialogs-android:1.2.1"
-        
+        compile "net.dermetfan.libgdx-utils:libgdx-utils:$gdxUtilsVersion"
+        compile "net.dermetfan.libgdx-utils:libgdx-utils-box2d:$gdxUtilsVersion" // Box2D module (optional)
     }
 }
 
@@ -108,6 +111,8 @@ project(":core") {
         compile "de.tomgrill.gdxdialogs:gdx-dialogs-core:1.2.1"
         compile "com.github.czyzby:gdx-lml:1.9.1.9.6"
         compile 'com.esotericsoftware:kryo:4.0.0'
+        compile "net.dermetfan.libgdx-utils:libgdx-utils:$gdxUtilsVersion"
+        compile "net.dermetfan.libgdx-utils:libgdx-utils-box2d:$gdxUtilsVersion" // Box2D module (optional)
     }
 }
 
@@ -175,6 +180,8 @@ project(":media") {
         compile project(":data")
         compile "com.badlogicgames.gdx:gdx:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
+        compile "net.dermetfan.libgdx-utils:libgdx-utils:$gdxUtilsVersion"
+        compile "net.dermetfan.libgdx-utils:libgdx-utils-box2d:$gdxUtilsVersion" // Box2D module (optional)
     }
 }
 
@@ -184,6 +191,8 @@ project(":data") {
     dependencies {
         compile project(":enums")
         compile "com.badlogicgames.gdx:gdx:$gdxVersion"
+        compile "net.dermetfan.libgdx-utils:libgdx-utils:$gdxUtilsVersion"
+        compile "net.dermetfan.libgdx-utils:libgdx-utils-box2d:$gdxUtilsVersion" // Box2D module (optional)
     }
 }
 

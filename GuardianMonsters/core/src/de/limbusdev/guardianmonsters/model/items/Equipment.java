@@ -18,15 +18,17 @@ import de.limbusdev.guardianmonsters.model.monsters.Stat;
  * @author Georg Eckert
  */
 
-public abstract class Equipment extends Item {
-
+public abstract class Equipment extends Item
+{
     @Override
-    public void apply(Monster m) {
+    public void apply(Monster m)
+    {
 
     }
 
     @Override
-    public boolean applicable(Monster monster) {
+    public boolean applicable(Monster monster)
+    {
         return (monster.abilityGraph.hasLearntEquipment(this.bodyPart));
     }
 
@@ -34,7 +36,8 @@ public abstract class Equipment extends Item {
     public final BodyPart bodyPart;
 
     public Equipment(String name, BodyPart bodyPart, int addsPStr, int addsPDef, int addsMStr,
-                     int addsMDef, int addsSpeed, int addsHP, int addsMP, int addsExp) {
+                     int addsMDef, int addsSpeed, int addsHP, int addsMP, int addsExp)
+    {
         super(name, Category.EQUIPMENT);
         this.addsPStr = addsPStr;
         this.addsPDef = addsPDef;

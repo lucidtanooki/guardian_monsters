@@ -2,12 +2,9 @@ package de.limbusdev.guardianmonsters.fwmengine.battle.model;
 
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.AnimationType;
 import de.limbusdev.guardianmonsters.media.SFXType;
-import de.limbusdev.guardianmonsters.model.AbilityDB;
-import de.limbusdev.guardianmonsters.model.abilities.DamageType;
 import de.limbusdev.guardianmonsters.enums.Element;
 import de.limbusdev.guardianmonsters.model.abilities.Ability;
 import de.limbusdev.guardianmonsters.model.monsters.Monster;
-import de.limbusdev.guardianmonsters.services.Services;
 
 /**
  * Contains information about the effect of an attack on another monster
@@ -38,6 +35,6 @@ public class AttackCalculationReport {
         this.defender = null;
         this.damage = 0;
         this.effectiveness = 0;
-        this.attack = new Ability(0, DamageType.PHYSICAL, Element.NONE, 0, "", SFXType.HIT, 0, AnimationType.NONE);
+        this.attack = new Ability(0, Ability.DamageType.PHYSICAL, Element.NONE, 0, "", SFXType.HIT, 0, AnimationType.NONE);
     }
 }

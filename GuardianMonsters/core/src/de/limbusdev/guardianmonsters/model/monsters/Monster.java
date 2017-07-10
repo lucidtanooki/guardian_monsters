@@ -14,10 +14,10 @@ import de.limbusdev.guardianmonsters.model.abilities.AbilityGraph;
  * @author Georg Eckert 2015
  */
 public class Monster extends Signal<Monster> implements Listener<Stat> {
-    // ...................................................................................... STATIC
+    // ............................................................................................. STATIC
     public static int INSTANCECOUNTER=0;
 
-    // .................................................................................. ATTRIBUTES
+    // ............................................................................................. ATTRIBUTES
     public final int INSTANCE_ID;
     public final int ID;
 
@@ -27,7 +27,7 @@ public class Monster extends Signal<Monster> implements Listener<Stat> {
 
     public AbilityGraph abilityGraph;
 
-    // ................................................................................. CONSTRUCTOR
+    // ............................................................................................. CONSTRUCTOR
 
     public Monster(int ID) {
         this.INSTANCE_ID = INSTANCECOUNTER;

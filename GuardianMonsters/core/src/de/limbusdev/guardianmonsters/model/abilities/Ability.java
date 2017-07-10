@@ -10,6 +10,11 @@ import de.limbusdev.guardianmonsters.services.Services;
  * @author Georg Eckert 2017
  */
 public class Ability {
+
+    public enum DamageType {
+        MAGICAL, PHYSICAL
+    }
+
     /* ............................................................................ ATTRIBUTES .. */
     public int ID;
     public String name;

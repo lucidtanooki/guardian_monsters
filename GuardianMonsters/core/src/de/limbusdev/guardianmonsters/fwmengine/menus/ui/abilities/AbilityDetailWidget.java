@@ -13,7 +13,6 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.I18NBundle;
 
 
-import de.limbusdev.guardianmonsters.model.abilities.DamageType;
 import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.model.abilities.Ability;
 import de.limbusdev.guardianmonsters.model.abilities.AbilityGraph;
@@ -153,7 +152,7 @@ public class AbilityDetailWidget extends Container {
             name.setText(Services.getL18N().Abilities().get(ability.name));
             damage.setText(Integer.toString(ability.damage));
 
-            String drawableID = ability.damageType == DamageType.PHYSICAL ? "pstr" : "mstr";
+            String drawableID = ability.damageType == Ability.DamageType.PHYSICAL ? "pstr" : "mstr";
             Drawable drawable = skin.getDrawable("stats-symbol-" + drawableID);
 
             abilityType.setDrawable(drawable);

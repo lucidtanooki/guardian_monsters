@@ -4,7 +4,6 @@ package de.limbusdev.guardianmonsters.fwmengine.battle.control;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.ArrayMap;
 
-import de.limbusdev.guardianmonsters.model.abilities.DamageType;
 import de.limbusdev.guardianmonsters.model.abilities.Ability;
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.AttackCalculationReport;
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.ElemEff;
@@ -52,7 +51,7 @@ public class MonsterManager {
 
         float defenseRatio;
 
-        if(ability.damageType == DamageType.PHYSICAL) {
+        if(ability.damageType == Ability.DamageType.PHYSICAL) {
             defenseRatio = (att.stat.getPStr() * 1f) / (def.stat.getPDef() *1f);
         } else {
             defenseRatio = (att.stat.getMStr() *1f) / (def.stat.getMDef() *1f);

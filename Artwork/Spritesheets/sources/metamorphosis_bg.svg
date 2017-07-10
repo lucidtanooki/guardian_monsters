@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="428"
+   height="240"
+   viewBox="0 0 113.24166 63.500002"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.1 unknown"
+   sodipodi:docname="metamorphosis_bg.svg"
+   inkscape:export-filename="/home/georg/Entwicklung/Android/guardianmonsters/Artwork/Spritesheets/BattleBackgrounds/metamorph_bg.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="2.8"
+     inkscape:cx="185.00014"
+     inkscape:cy="107.863"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="true"
+     units="px"
+     inkscape:window-width="1920"
+     inkscape:window-height="1022"
+     inkscape:window-x="1920"
+     inkscape:window-y="30"
+     inkscape:window-maximized="1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid4485" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Ebene 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-233.49998)">
+    <rect
+       style="opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.01321648;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.99607843"
+       id="rect4495"
+       width="115.09375"
+       height="71.172935"
+       x="0"
+       y="229.53123" />
+    <ellipse
+       style="opacity:1;fill:#672e00;fill-opacity:1;stroke:none;stroke-width:0.03453285;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.99607843"
+       id="ellipse4550"
+       cx="56.620834"
+       cy="272.67722"
+       rx="54.820889"
+       ry="11.421019" />
+    <ellipse
+       ry="10.837493"
+       rx="52.019966"
+       cy="272.53317"
+       cx="56.620834"
+       id="ellipse4493"
+       style="opacity:1;fill:#ce5c00;fill-opacity:1;stroke:none;stroke-width:0.03276848;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.99607843" />
+    <ellipse
+       style="opacity:1;fill:#f57900;fill-opacity:1;stroke:none;stroke-width:0.02572708;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.99607843"
+       id="ellipse4491"
+       cx="56.620834"
+       cy="271.02075"
+       rx="40.841747"
+       ry="8.5086975" />
+    <ellipse
+       ry="5.6971669"
+       rx="27.346403"
+       cy="270.5166"
+       cx="56.620834"
+       id="ellipse4489"
+       style="opacity:1;fill:#fcaf3e;fill-opacity:1;stroke:none;stroke-width:0.01722608;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.99607843" />
+    <ellipse
+       style="opacity:1;fill:#fce94f;fill-opacity:1;stroke:none;stroke-width:0.00952706;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.99607843"
+       id="path4487"
+       cx="56.620834"
+       cy="269.5083"
+       rx="15.124202"
+       ry="3.1508751" />
+  </g>
+</svg>

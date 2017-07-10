@@ -22,7 +22,8 @@ import de.limbusdev.guardianmonsters.Constant;
  * Inventory Screen, holds Team view, Ability Board, Item View, Encyclopedia
  * Copyright Georg Eckert
  */
-public class InventoryScreen implements Screen, MainToolBar.Controller {
+public class InventoryScreen implements Screen, MainToolBar.Callbacks
+{
 
     private static final String BG_TILE = "bg-pattern-3";
 

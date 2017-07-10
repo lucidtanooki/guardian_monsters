@@ -158,12 +158,9 @@ public class MainMenuScreen implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 stage.addAction(Actions.sequence(
-                    Actions.fadeOut(1), Actions.run(new Runnable() {
-                        @Override
-                        public void run() {
-                            SaveGameManager.newSaveGame();
-                            Services.getScreenManager().pushScreen(new WorldScreen(25, 1, false));
-                        }
+                    Actions.fadeOut(1), Actions.run(() -> {
+                        SaveGameManager.newSaveGame();
+                        Services.getScreenManager().pushScreen(new WorldScreen(25, 1, false));
                     })
                 ));
             }
@@ -176,12 +173,9 @@ public class MainMenuScreen implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 stage.addAction(Actions.sequence(
-                    Actions.fadeOut(1), Actions.run(new Runnable() {
-                        @Override
-                        public void run() {
-                            GameState state = SaveGameManager.loadSaveGame();
-                            Services.getScreenManager().pushScreen(new WorldScreen(state.map, 1, true));
-                        }
+                    Actions.fadeOut(1), Actions.run(() -> {
+                        GameState state = SaveGameManager.loadSaveGame();
+                        Services.getScreenManager().pushScreen(new WorldScreen(state.map, 1, true));
                     })
                 ));
             }

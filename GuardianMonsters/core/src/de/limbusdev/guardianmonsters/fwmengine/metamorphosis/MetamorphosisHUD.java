@@ -71,12 +71,7 @@ public class MetamorphosisHUD extends AHUD {
                     Services.getAudio().getMuteAudioAction(AssetPath.Audio.Music.METAMORPHOSIS),
                     Actions.fadeOut(1),
                     Actions.delay(1),
-                    Actions.run(new Runnable() {
-                        @Override
-                        public void run() {
-                            Services.getScreenManager().popScreen();
-                        }
-                    })
+                    Actions.run(() -> Services.getScreenManager().popScreen())
                 ));
             }
         });
@@ -93,43 +88,29 @@ public class MetamorphosisHUD extends AHUD {
             Actions.delay(4),
             Services.getAudio().getMuteAudioAction(AssetPath.Audio.Music.METAMORPHOSIS),
             Actions.delay(1),
-            Actions.run(new Runnable() {
-                @Override
-                public void run() {
-                    label.remove();
-                    stage.addActor(animation);
-                    Services.getAudio().playSound(AssetPath.Audio.SFX.METAMORPHOSIS);
-                    stage.addActor(label);
-                }
+            Actions.run(() -> {
+                label.remove();
+                stage.addActor(animation);
+                Services.getAudio().playSound(AssetPath.Audio.SFX.METAMORPHOSIS);
+                stage.addActor(label);
             }),
             Actions.delay(2),
-            Actions.run(new Runnable() {
-                @Override
-                public void run() {
-                    animation.remove();
-                    imgBefore.remove();
-                    label.remove();
-                    stage.addActor(imgAfter);
-                    stage.addActor(animation);
-                    stage.addActor(label);
-                }
+            Actions.run(() -> {
+                animation.remove();
+                imgBefore.remove();
+                label.remove();
+                stage.addActor(imgAfter);
+                stage.addActor(animation);
+                stage.addActor(label);
             }),
             Actions.delay(3),
-            Actions.run(new Runnable() {
-                @Override
-                public void run() {
-                    Services.getAudio().playMusic(AssetPath.Audio.Music.VICTORY_FANFARE);
-                    label.setText(messages[1]);
-                }
+            Actions.run(() -> {
+                Services.getAudio().playMusic(AssetPath.Audio.Music.VICTORY_FANFARE);
+                label.setText(messages[1]);
             }),
             Actions.delay(5.5f),
             Services.getAudio().getFadeInMusicAction(AssetPath.Audio.Music.METAMORPHOSIS),
-            Actions.run(new Runnable() {
-                @Override
-                public void run() {
-                    stage.addActor(ok);
-                }
-            })
+            Actions.run(() -> stage.addActor(ok))
         );
 
         // Adding actors to stage

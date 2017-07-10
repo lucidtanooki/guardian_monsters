@@ -252,37 +252,17 @@ public class BattleAnimationWidget extends BattleWidget{
         Action moveToOriginAction = Actions.moveToAligned(origin.x, origin.y, Align.bottom, .4f, Interpolation.pow2In);
 
         // Plays the ability animatiom
-        Action attackAnimationAction = Actions.run(new Runnable() {
-            @Override
-            public void run() {
-                animateAttackOfType(ability, origin, target);
-            }
-        });
+        Action attackAnimationAction = Actions.run(() -> animateAttackOfType(ability, origin, target));
 
         // Plays the attacks sound
         final String path = AssetPath.Audio.SFX.BATTLE().get(ability.sfxType.toString().toUpperCase()).get(0);
-        Action playSFXAction = Actions.run(new Runnable() {
-            @Override
-            public void run() {
-                Services.getAudio().playSound(path);
-            }
-        });
+        Action playSFXAction = Actions.run(() -> Services.getAudio().playSound(path));
 
         // Runs the callback handler
-        Action callbackAction = Actions.run(new Runnable() {
-            @Override
-            public void run() {
-                callbacks.onHitAnimationComplete();
-            }
-        });
+        Action callbackAction = Actions.run(() -> callbacks.onHitAnimationComplete());
 
         // Animates the impact of the ability on the target
-        Action animateImpactAction = Actions.run(new Runnable() {
-            @Override
-            public void run() {
-                animateAttackImpact(targetPos, defSide);
-            }
-        });
+        Action animateImpactAction = Actions.run(() -> animateAttackImpact(targetPos, defSide));
 
         switch(ability.animationType) {
             case CONTACT:

@@ -25,7 +25,8 @@ import de.limbusdev.guardianmonsters.Constant;
  * Created by Georg Eckert 2017
  */
 
-public class TeamSubMenu extends AInventorySubMenu {
+public class TeamSubMenu extends AInventorySubMenu
+{
 
     private StatusPentagonWidget statPent;
     private MonsterStatusInventoryWidget monsterStats;

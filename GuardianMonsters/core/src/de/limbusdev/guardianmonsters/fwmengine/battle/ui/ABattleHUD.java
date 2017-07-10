@@ -71,12 +71,7 @@ public abstract class ABattleHUD extends AHUD {
     @Override
     public void goToPreviousScreen() {
         blackCurtain.addAction(Actions.sequence(Actions.visible(true), Actions.fadeIn(1),
-            Actions.run(new Runnable() {
-                @Override
-                public void run() {
-                    superGoToPreviousScreen();
-                }
-            })));
+            Actions.run(() -> superGoToPreviousScreen())));
     }
 
     private void superGoToPreviousScreen() {

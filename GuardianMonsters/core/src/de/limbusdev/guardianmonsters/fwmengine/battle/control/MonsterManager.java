@@ -11,7 +11,8 @@ import de.limbusdev.guardianmonsters.model.monsters.Monster;
 
 /**
  * Handles events of monsters like level up, earning EXP, changing status and so on
- * Created by georg on 24.01.16.
+ *
+ * @author Georg Eckert
  */
 public class MonsterManager {
     /* ............................................................................ ATTRIBUTES .. */
@@ -44,7 +45,8 @@ public class MonsterManager {
      * @param def
      * @return
      */
-    public static AttackCalculationReport calcAttack(Monster att, Monster def, Ability ability) {
+    public static AttackCalculationReport calcAttack(Monster att, Monster def, Ability ability)
+    {
         System.out.println("\n--- new ability ---");
         AttackCalculationReport report = new AttackCalculationReport(att, def, 0, 0, ability);
         float efficiency = ElemEff.singelton().getElemEff(ability.element, def.data.getElements());

@@ -108,7 +108,7 @@ public class XMLMonsterParser {
                 XmlReader.Element a = element.getChild(i);
                 int attID = a.getIntAttribute("id", 0);
                 Element el = Element.valueOf(a.getAttribute("element").toUpperCase());
-                Ability att = attInf.getAttack(el, attID);
+                Ability att = attInf.getAbility(el, attID);
                 int abilityPos = a.getIntAttribute("abilityPos", 0);
                 abilities.put(abilityPos, att);
             }

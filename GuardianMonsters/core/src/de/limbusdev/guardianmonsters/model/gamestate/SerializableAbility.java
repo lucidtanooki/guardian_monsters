@@ -23,7 +23,7 @@ public class SerializableAbility {
     }
 
     public static Ability deserialize(SerializableAbility sAbility) {
-        Ability ability = AbilityDB.getAttack(sAbility.element, sAbility.ID);
+        Ability ability = AbilityDB.getAbility(sAbility.element, sAbility.ID);
         return ability;
     }
 }

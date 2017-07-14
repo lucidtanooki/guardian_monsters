@@ -18,12 +18,13 @@ import de.limbusdev.guardianmonsters.enums.Element;
  * Contains all existing attacks, sorted by element
  * @author Georg Eckert 2017
  */
-public class AbilityDB {
-
+public class AbilityDB
+{
     private static AbilityDB instance;
     private ArrayMap<Element, ArrayMap<Integer, Ability>> abilities;
 
-    private AbilityDB() {
+    private AbilityDB()
+    {
         abilities = new ArrayMap<>();
 
         String[] elements = {"None", "Fire", "Earth", "Water"};
@@ -56,7 +57,8 @@ public class AbilityDB {
         }
     }
 
-    public static AbilityDB getInstance() {
+    public static synchronized AbilityDB getInstance()
+    {
         if(instance == null) {
             instance = new AbilityDB();
         }
@@ -69,7 +71,8 @@ public class AbilityDB {
      * @param index
      * @return
      */
-    public static Ability getAttack(Element e, int index) {
+    public static Ability getAbility(Element e, int index)
+    {
         AbilityDB db = getInstance();
         return db.abilities.get(e).get(index);
     }

@@ -50,6 +50,7 @@ public class AbilityDB {
                     AnimationType.valueOf(jsa.animationType.toUpperCase()),
                     jsa.MPcost
                 );
+                elAbilities.put(ability.ID, ability);
             }
             abilities.put(Element.valueOf(el.toUpperCase()), elAbilities);
         }

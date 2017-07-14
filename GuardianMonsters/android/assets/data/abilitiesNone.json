@@ -55,6 +55,7 @@
     "sfxType": "hit",
     "sfxIndex": 0,
     "animationType": "contact",
+    "MPcost": 0,
     "damageType": "physical",
     "element": "none"
   },

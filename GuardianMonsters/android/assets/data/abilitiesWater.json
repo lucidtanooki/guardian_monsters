@@ -1,0 +1,50 @@
+[
+  {
+    "ID": 1,
+    "element": "water",
+    "name": "attWater1_sprinkle",
+    "damage": 5,
+    "sfxType": "hit",
+    "sfxIndex": 0,
+    "animationType": "moving_hor",
+    "MPcost": 0,
+    "damageType": "physical",
+    "element": "water"
+  },
+  {
+    "ID": 2,
+    "element": "water",
+    "name": "attWater2_shower",
+    "damage": 10,
+    "sfxType": "hit",
+    "sfxIndex": 0,
+    "animationType": "moving_hor",
+    "MPcost": 0,
+    "damageType": "physical",
+    "element": "water"
+  },
+  {
+    "ID": 3,
+    "element": "water",
+    "name": "attWater3_splash",
+    "damage": 20,
+    "sfxType": "hit",
+    "sfxIndex": 0,
+    "animationType": "moving_hor",
+    "MPcost": 0,
+    "damageType": "physical",
+    "element": "water"
+  },
+  {
+    "ID": 4,
+    "element": "water",
+    "name": "attWater4_waterjet",
+    "damage": 40,
+    "sfxType": "hit",
+    "sfxIndex": 0,
+    "animationType": "moving_hor",
+    "MPcost": 0,
+    "damageType": "physical",
+    "element": "water"
+  }
+]

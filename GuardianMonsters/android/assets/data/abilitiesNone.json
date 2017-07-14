@@ -1,0 +1,73 @@
+[
+  {
+    "ID": 1,
+    "element": "none",
+    "name": "attNone1_selfdef",
+    "damage": 0,
+    "sfxType": "none",
+    "sfxIndex": 0,
+    "animationType": "none",
+    "MPcost": 0,
+    "damageType": "physical",
+    "element": "none"
+  },
+  {
+    "ID": 2,
+    "element": "none",
+    "name": "attNone2_kick",
+    "damage": 50,
+    "sfxType": "hit",
+    "sfxIndex": 0,
+    "animationType": "contact",
+    "MPcost": 0,
+    "damageType": "physical",
+    "element": "none"
+  },
+  {
+    "ID": 3,
+    "element": "none",
+    "name": "attNone3_tooth",
+    "damage": 50,
+    "sfxType": "hit",
+    "sfxIndex": 0,
+    "animationType": "contact",
+    "MPcost": 0,
+    "damageType": "physical",
+    "element": "none"
+  },
+  {
+    "ID": "4",
+    "element": "none",
+    "name": "attNone4_punch",
+    "damage": "60",
+    "sfxType": "hit",
+    "sfxIndex": 0,
+    "animationType": "contact",
+    "MPcost": 0,
+    "damageType": "physical",
+    "element": "none"
+  },
+  {
+    "ID": "5",
+    "element": "none",
+    "name": "attNone5_slap",
+    "damage": "70",
+    "sfxType": "hit",
+    "sfxIndex": 0,
+    "animationType": "contact",
+    "damageType": "physical",
+    "element": "none"
+  },
+  {
+    "ID": 6,
+    "element": "none",
+    "name": "attNone6_triphazard",
+    "damage": 80,
+    "sfxType": "hit",
+    "sfxIndex": 0,
+    "animationType": "contact",
+    "MPcost": 0,
+    "damageType": "physical",
+    "element": "none"
+  }
+]

@@ -4,13 +4,15 @@ package de.limbusdev.guardianmonsters.model;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.ArrayMap;
-import com.badlogic.gdx.utils.XmlReader;
+import com.badlogic.gdx.utils.Json;
+import com.badlogic.gdx.utils.JsonValue;
 
-import java.io.IOException;
+import java.util.ArrayList;
 
+import de.limbusdev.guardianmonsters.fwmengine.battle.ui.AnimationType;
+import de.limbusdev.guardianmonsters.media.SFXType;
 import de.limbusdev.guardianmonsters.model.abilities.Ability;
 import de.limbusdev.guardianmonsters.enums.Element;
-import de.limbusdev.guardianmonsters.utils.XMLAbilityParser;
 
 /**
  * Contains all existing attacks, sorted by element
@@ -24,22 +26,32 @@ public class AbilityDB {
     private AbilityDB() {
         abilities = new ArrayMap<>();
 
-        FileHandle handle = Gdx.files.internal("data/attacks.xml");
-        XmlReader xmlReader = new XmlReader();
-        XmlReader.Element element;
-        try {
-            element = xmlReader.parse(handle);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return;
-        }
+        String[] elements = {"None", "Fire", "Earth", "Water"};
+        for(String el : elements)
+        {
+            ArrayMap<Integer,Ability> elAbilities = new ArrayMap<>();
+            FileHandle handleJson = Gdx.files.internal("data/abilities" + el + ".json");
+            String jsonString = handleJson.readString();
+            Json json = new Json();
+            ArrayList<JsonValue> elementList = json.fromJson(ArrayList.class, jsonString);
 
-        for (int i = 0; i < element.getChildCount(); i++) {
-            Ability att = XMLAbilityParser.parseAbility(element.getChild(i));
-            if(!abilities.containsKey(att.element)) {
-                abilities.put(att.element, new ArrayMap<Integer, Ability>());
+            JsonAbility jsa;
+            Ability ability;
+            for (JsonValue v : elementList) {
+                jsa = json.readValue(JsonAbility.class, v);
+                ability = new Ability(
+                    jsa.ID,
+                    Ability.DamageType.valueOf(jsa.damageType.toUpperCase()),
+                    Element.valueOf(jsa.element.toUpperCase()),
+                    jsa.damage,
+                    jsa.name,
+                    SFXType.valueOf(jsa.sfxType.toUpperCase()),
+                    jsa.sfxIndex,
+                    AnimationType.valueOf(jsa.animationType.toUpperCase()),
+                    jsa.MPcost
+                );
             }
-            abilities.get(att.element).put(att.ID, att);
+            abilities.put(Element.valueOf(el.toUpperCase()), elAbilities);
         }
     }
 
@@ -50,7 +62,6 @@ public class AbilityDB {
         return instance;
     }
 
-    /* .............................................................
     /**
      * Returns attack of the given element and index
      * @param e
@@ -62,4 +73,28 @@ public class AbilityDB {
         return db.abilities.get(e).get(index);
     }
 
+    /**
+     * Simple Container for JSON parsed Object
+     */
+    private static class JsonAbility
+    {
+        public int ID;
+        public String name;
+        public int damage;
+        public int MPcost;
+        public String damageType;
+        public String element;
+        public String sfxType;
+        public int sfxIndex;
+        public String animationType;
+
+        @Override
+        public String toString()
+        {
+            String out = "Ability:\n";
+            out += ID + " " + name + "\n" + "Damage: " + damage;
+            out += " " + " MPcost: " + MPcost;
+            return out;
+        }
+    }
 }

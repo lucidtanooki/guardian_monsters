@@ -1,0 +1,50 @@
+[
+  {
+    "ID": 1,
+    "element": "fire",
+    "name": "attFire1_embers",
+    "damage": 5,
+    "sfxType": "hit",
+    "sfxIndex": 0,
+    "animationType": "contactless",
+    "MPcost": 1,
+    "damageType": "magical",
+    "element": "fire"
+  },
+  {
+    "ID": 2,
+    "element": "fire",
+    "name": "attFire2_fire",
+    "damage": "10",
+    "sfxType": "hit",
+    "sfxIndex": 0,
+    "animationType": "moving_hor",
+    "MPcost": 2,
+    "damageType": "magical",
+    "element": "fire"
+  },
+  {
+    "ID": 3,
+    "element": "fire",
+    "name": "attFire3_flame",
+    "damage": 20,
+    "sfxType": "hit",
+    "sfxIndex": 0,
+    "animationType": "moving_hor",
+    "MPcost": 3,
+    "damageType": "magical",
+    "element": "fire"
+  },
+  {
+    "ID": 4,
+    "element": "fire",
+    "name": "attFire2_blaze",
+    "damage": 40,
+    "sfxType": "hit",
+    "sfxIndex": 0,
+    "animationType": "moving_hor",
+    "MPcost": 4,
+    "damageType": "magical",
+    "element": "fire"
+  }
+]

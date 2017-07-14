@@ -100,6 +100,7 @@ project(":core") {
         compile project(":services")
         compile project(":enums")
         compile project(":battle")
+        compile project(":guardians")
         compile "com.badlogicgames.gdx:gdx:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
@@ -160,6 +161,7 @@ project(":battle") {
         compile project(":enums")
         compile project(":assets")
         compile project(":media")
+        compile project(":guardians")
         compile "com.badlogicgames.gdx:gdx:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
         compile "com.badlogicgames.box2dlights:box2dlights:$box2DLightsVersion"

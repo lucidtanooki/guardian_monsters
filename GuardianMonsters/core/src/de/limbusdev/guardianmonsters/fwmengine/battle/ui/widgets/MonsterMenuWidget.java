@@ -10,6 +10,7 @@ import de.limbusdev.guardianmonsters.fwmengine.battle.control.BattleSystem;
 import de.limbusdev.guardianmonsters.guardians.monsters.Monster;
 import de.limbusdev.guardianmonsters.guardians.MonsterDB;
 import de.limbusdev.guardianmonsters.guardians.monsters.Team;
+import de.limbusdev.guardianmonsters.services.Services;
 
 
 /**
@@ -37,8 +38,7 @@ public class MonsterMenuWidget extends SevenButtonsWidget {
         for(int key : team.keys()) {
             if(key > 6) break;
             Monster m = team.get(key);
-            TextButton bwi = new BattleHUDTextButton(
-                MonsterDB.getLocalNameById(m.ID), skin, key, Element.AIR);
+            TextButton bwi = new BattleHUDTextButton(Services.getL18N().getLocalizedGuardianName(m), skin, key, Element.AIR);
 
             replaceButton(bwi,key);
 

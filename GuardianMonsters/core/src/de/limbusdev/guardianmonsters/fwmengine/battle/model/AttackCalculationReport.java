@@ -35,6 +35,6 @@ public class AttackCalculationReport {
         this.defender = null;
         this.damage = 0;
         this.effectiveness = 0;
-        this.attack = new Ability(0, Ability.DamageType.PHYSICAL, Element.NONE, 0, "", SFXType.HIT, 0, AnimationType.NONE);
+        this.attack = new Ability(0, Ability.DamageType.PHYSICAL, Element.NONE, 0, "", SFXType.HIT.toString(), 0, AnimationType.NONE.toString());
     }
 }

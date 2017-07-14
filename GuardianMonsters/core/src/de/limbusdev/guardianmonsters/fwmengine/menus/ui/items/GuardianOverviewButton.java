@@ -34,17 +34,17 @@ public class GuardianOverviewButton extends TextButton implements Listener<Monst
 
     // ................................................................................ CONSTRUCTORS
     public GuardianOverviewButton(Monster monster, Skin skin, Item item) {
-        super(MonsterDB.getLocalNameById(monster.ID), skin);
+        super(Services.getL18N().getLocalizedGuardianName(monster), skin);
         construct(monster, item);
     }
 
     public GuardianOverviewButton(Monster monster, Skin skin, String styleName, Item item) {
-        super(MonsterDB.getLocalNameById(monster.ID), skin, styleName);
+        super(Services.getL18N().getLocalizedGuardianName(monster), skin, styleName);
         construct(monster, item);
     }
 
     public GuardianOverviewButton(Monster monster, TextButtonStyle style, Item item) {
-        super(MonsterDB.getLocalNameById(monster.ID), style);
+        super(Services.getL18N().getLocalizedGuardianName(monster), style);
         construct(monster, item);
     }
 

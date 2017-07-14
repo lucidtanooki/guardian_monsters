@@ -11,6 +11,7 @@ import com.badlogic.gdx.utils.ArrayMap;
 
 import de.limbusdev.guardianmonsters.guardians.monsters.Monster;
 import de.limbusdev.guardianmonsters.guardians.MonsterDB;
+import de.limbusdev.guardianmonsters.services.Services;
 
 /**
  * @author Georg Eckert 2017
@@ -81,7 +82,7 @@ public class TeamMemberSwitcher extends Group {
     }
 
     public void init(Monster m) {
-        name.setText(MonsterDB.getLocalNameById(m.ID));
+        name.setText(Services.getL18N().getLocalizedGuardianName(m));
         previewWidget.setPreview(m.ID);
     }
 

@@ -5,6 +5,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 
 import de.limbusdev.guardianmonsters.guardians.monsters.Monster;
+import de.limbusdev.guardianmonsters.guardians.monsters.Team;
 
 /**
  * CombatTeam
@@ -12,7 +13,31 @@ import de.limbusdev.guardianmonsters.guardians.monsters.Monster;
  * @author Georg Eckert 2017
  */
 
-public class CombatTeam extends ArrayMap<Integer,Monster> {
+public class CombatTeam extends ArrayMap<Integer,Monster>
+{
+    /**
+     * Returns a team of monsters for battle. Team size is determined by the maximum possible
+     * team size and the chosen active team size.
+     *
+     * Even defeated monsters are added. They can be revived during battle. If all monsters of the
+     * active team get defeated during battle, even if there are other monsters available, the
+     * player is game over, because he can't call them anymore.
+     *
+     * Therefore players must watch out, that the active team never gets defeated completely.
+     *
+     * Only players can revive members of the combat party. Enemies can't.
+     *
+     * @return
+     */
+    public CombatTeam(Team team)
+    {
+        super();
+        int teamSize = Math.min(team.getMaximumTeamSize(), team.getActiveTeamSize());
+        for(int i=0; i < this.size && i < teamSize; i++) {
+            put(i,get(i));
+        }
+    }
+
     public CombatTeam() {
         super();
     }

@@ -8,6 +8,7 @@ import de.limbusdev.guardianmonsters.guardians.abilities.Ability;
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.AttackCalculationReport;
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.ElemEff;
 import de.limbusdev.guardianmonsters.guardians.monsters.Monster;
+import de.limbusdev.guardianmonsters.services.Services;
 
 /**
  * Handles events of monsters like level up, earning EXP, changing status and so on
@@ -67,7 +68,7 @@ public class MonsterManager {
 
         // Print Battle Debug Message
         String attackerName = att.getName();
-        String attackName   = ability.getLocalName();
+        String attackName   = Services.getL18N().getLocalizedAbilityName(ability.name);
         String victimName   = def.getName();
         System.out.println(attackerName + ": " + attackName + " causes " + damage + " damage on " + victimName);
 

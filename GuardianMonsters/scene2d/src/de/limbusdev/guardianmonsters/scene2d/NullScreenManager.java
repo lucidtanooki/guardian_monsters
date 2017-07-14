@@ -7,7 +7,8 @@ import com.badlogic.gdx.Screen;
  * Created by georg on 14.11.16.
  */
 
-public class NullScreenManager implements de.limbusdev.guardianmonsters.scene2d.ScreenManager {
+public class NullScreenManager implements IScreenManager
+{
     @Override
     public void pushScreen(Screen screen) {
         // DO NOTHING

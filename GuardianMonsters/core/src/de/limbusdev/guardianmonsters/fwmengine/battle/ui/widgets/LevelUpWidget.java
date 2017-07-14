@@ -13,9 +13,8 @@ import com.badlogic.gdx.utils.Align;
 import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.scene2d.AnimatedImage;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.widgets.OverlayWidget;
-import de.limbusdev.guardianmonsters.model.monsters.LevelUpReport;
-import de.limbusdev.guardianmonsters.model.monsters.Monster;
-import de.limbusdev.guardianmonsters.model.MonsterDB;
+import de.limbusdev.guardianmonsters.guardians.monsters.LevelUpReport;
+import de.limbusdev.guardianmonsters.guardians.monsters.Monster;
 import de.limbusdev.guardianmonsters.Constant;
 
 /**

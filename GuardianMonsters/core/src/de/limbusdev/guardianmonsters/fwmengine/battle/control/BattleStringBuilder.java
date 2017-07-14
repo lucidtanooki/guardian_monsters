@@ -2,8 +2,8 @@ package de.limbusdev.guardianmonsters.fwmengine.battle.control;
 
 import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.AttackCalculationReport;
-import de.limbusdev.guardianmonsters.model.monsters.Monster;
-import de.limbusdev.guardianmonsters.model.MonsterDB;
+import de.limbusdev.guardianmonsters.guardians.monsters.Monster;
+import de.limbusdev.guardianmonsters.guardians.MonsterDB;
 
 /**
  * Created by georg on 12.01.16.

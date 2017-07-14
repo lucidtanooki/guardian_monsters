@@ -15,11 +15,11 @@ import com.badlogic.gdx.utils.Align;
 
 
 import de.limbusdev.guardianmonsters.services.Services;
-import de.limbusdev.guardianmonsters.model.items.Equipment;
-import de.limbusdev.guardianmonsters.model.items.EquipmentPotential;
-import de.limbusdev.guardianmonsters.model.items.Item;
-import de.limbusdev.guardianmonsters.model.monsters.Monster;
-import de.limbusdev.guardianmonsters.model.MonsterDB;
+import de.limbusdev.guardianmonsters.guardians.items.Equipment;
+import de.limbusdev.guardianmonsters.guardians.items.EquipmentPotential;
+import de.limbusdev.guardianmonsters.guardians.items.Item;
+import de.limbusdev.guardianmonsters.guardians.monsters.Monster;
+import de.limbusdev.guardianmonsters.guardians.MonsterDB;
 
 /**
  * @author Georg Eckert 2017

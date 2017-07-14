@@ -9,7 +9,8 @@ import com.badlogic.gdx.utils.Array;
  * @author Georg Eckert
  */
 
-public class ConcreteScreenManager implements de.limbusdev.guardianmonsters.scene2d.ScreenManager {
+public class ConcreteScreenManager implements IScreenManager
+{
 
     private Array<Screen> gameStateStack;
     private Game game;

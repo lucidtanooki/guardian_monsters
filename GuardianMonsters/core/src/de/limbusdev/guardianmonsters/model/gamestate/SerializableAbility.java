@@ -1,8 +1,8 @@
 package de.limbusdev.guardianmonsters.model.gamestate;
 
-import de.limbusdev.guardianmonsters.model.AbilityDB;
-import de.limbusdev.guardianmonsters.model.abilities.Ability;
-import de.limbusdev.guardianmonsters.enums.Element;
+import de.limbusdev.guardianmonsters.guardians.AbilityDB;
+import de.limbusdev.guardianmonsters.guardians.abilities.Ability;
+import de.limbusdev.guardianmonsters.guardians.Element;
 
 /**
  * SerializableAbility

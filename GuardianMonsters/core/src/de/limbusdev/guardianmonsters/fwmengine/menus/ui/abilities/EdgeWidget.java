@@ -10,9 +10,9 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 
-import de.limbusdev.guardianmonsters.model.abilities.Edge;
-import de.limbusdev.guardianmonsters.model.abilities.Node;
-import de.limbusdev.guardianmonsters.model.abilities.Edge.Orientation;
+import de.limbusdev.guardianmonsters.guardians.abilities.Edge;
+import de.limbusdev.guardianmonsters.guardians.abilities.Node;
+import de.limbusdev.guardianmonsters.guardians.abilities.Edge.Orientation;
 
 /**
  * EdgeWidget

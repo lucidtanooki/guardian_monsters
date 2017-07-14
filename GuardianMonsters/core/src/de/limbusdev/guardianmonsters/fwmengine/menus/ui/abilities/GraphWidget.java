@@ -8,10 +8,10 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 
-import de.limbusdev.guardianmonsters.model.abilities.AbilityGraph;
-import de.limbusdev.guardianmonsters.model.abilities.Edge;
-import de.limbusdev.guardianmonsters.model.abilities.Node;
-import de.limbusdev.guardianmonsters.model.monsters.Monster;
+import de.limbusdev.guardianmonsters.guardians.abilities.AbilityGraph;
+import de.limbusdev.guardianmonsters.guardians.abilities.Edge;
+import de.limbusdev.guardianmonsters.guardians.abilities.Node;
+import de.limbusdev.guardianmonsters.guardians.monsters.Monster;
 
 /**
  * @author Georg Eckert 2017

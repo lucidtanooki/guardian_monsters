@@ -10,7 +10,7 @@ import static net.dermetfan.gdx.assets.AnnotationAssetManager.Asset;
 import java.util.HashMap;
 import java.util.Map;
 
-import de.limbusdev.guardianmonsters.enums.Element;
+import de.limbusdev.guardianmonsters.guardians.Element;
 
 /**
  * Paths

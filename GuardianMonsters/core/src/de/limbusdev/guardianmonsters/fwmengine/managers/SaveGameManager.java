@@ -26,9 +26,9 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PositionComp
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.SaveGameComponent;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TeamComponent;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.GameArea;
-import de.limbusdev.guardianmonsters.model.ItemDB;
+import de.limbusdev.guardianmonsters.guardians.ItemDB;
 import de.limbusdev.guardianmonsters.model.gamestate.SerializableGameState;
-import de.limbusdev.guardianmonsters.model.items.Inventory;
+import de.limbusdev.guardianmonsters.guardians.items.Inventory;
 import de.limbusdev.guardianmonsters.Constant;
 import de.limbusdev.guardianmonsters.model.gamestate.GameState;
 

@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.GL20;
 
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.BattleResult;
 import de.limbusdev.guardianmonsters.services.Services;
-import de.limbusdev.guardianmonsters.model.monsters.Team;
+import de.limbusdev.guardianmonsters.guardians.monsters.Team;
 
 
 /**

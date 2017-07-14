@@ -3,7 +3,7 @@ package de.limbusdev.guardianmonsters.fwmengine.battle.model;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 
-import de.limbusdev.guardianmonsters.enums.Element;
+import de.limbusdev.guardianmonsters.guardians.Element;
 
 /**
  * Singleton

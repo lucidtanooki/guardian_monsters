@@ -3,9 +3,9 @@ package de.limbusdev.guardianmonsters.utils;
 
 import com.badlogic.gdx.utils.Array;
 
-import de.limbusdev.guardianmonsters.model.abilities.Ability;
-import de.limbusdev.guardianmonsters.model.monsters.Monster;
-import de.limbusdev.guardianmonsters.model.MonsterDB;
+import de.limbusdev.guardianmonsters.guardians.abilities.Ability;
+import de.limbusdev.guardianmonsters.guardians.monsters.Monster;
+import de.limbusdev.guardianmonsters.guardians.MonsterDB;
 
 /**
  * Created by georg on 11.01.16.

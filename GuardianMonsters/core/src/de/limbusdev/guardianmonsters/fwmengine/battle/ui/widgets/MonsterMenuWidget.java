@@ -5,11 +5,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 
 import de.limbusdev.guardianmonsters.fwmengine.battle.control.BattleQueue;
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.CombatTeam;
-import de.limbusdev.guardianmonsters.enums.Element;
+import de.limbusdev.guardianmonsters.guardians.Element;
 import de.limbusdev.guardianmonsters.fwmengine.battle.control.BattleSystem;
-import de.limbusdev.guardianmonsters.model.monsters.Monster;
-import de.limbusdev.guardianmonsters.model.MonsterDB;
-import de.limbusdev.guardianmonsters.model.monsters.Team;
+import de.limbusdev.guardianmonsters.guardians.monsters.Monster;
+import de.limbusdev.guardianmonsters.guardians.MonsterDB;
+import de.limbusdev.guardianmonsters.guardians.monsters.Team;
 
 
 /**

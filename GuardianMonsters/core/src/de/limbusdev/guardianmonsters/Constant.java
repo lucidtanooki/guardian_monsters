@@ -33,11 +33,4 @@ public final class Constant {
     public final static DebugMode DEBUG_MODE = DebugMode.WORLD;
     public final static int startMap = 25;
     public final static int startX = 1, startY = 1;
-
-    // ............................................................................ BATTLE BALANCING
-    public final static float LVL_EXPONENT = 1.5f;
-    public final static float BASE_EXP = 1000f;
-
-
-
 }

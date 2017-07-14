@@ -2,7 +2,7 @@ package de.limbusdev.guardianmonsters.fwmengine.guardosphere;
 
 import com.badlogic.gdx.utils.ArrayMap;
 
-import de.limbusdev.guardianmonsters.model.monsters.Monster;
+import de.limbusdev.guardianmonsters.guardians.monsters.Monster;
 
 /**
  * GuardoSphere

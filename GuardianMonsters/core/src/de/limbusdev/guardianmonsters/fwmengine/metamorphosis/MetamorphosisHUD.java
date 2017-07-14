@@ -19,7 +19,7 @@ import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.scene2d.AnimatedImage;
 import de.limbusdev.guardianmonsters.fwmengine.ui.ParticleEffectActor;
 import de.limbusdev.guardianmonsters.fwmengine.ui.AHUD;
-import de.limbusdev.guardianmonsters.model.MonsterDB;
+import de.limbusdev.guardianmonsters.guardians.MonsterDB;
 
 /**
  * MetamorphosisHUD

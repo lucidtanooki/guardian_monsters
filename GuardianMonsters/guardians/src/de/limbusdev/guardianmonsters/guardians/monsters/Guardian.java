@@ -30,7 +30,8 @@ public class Guardian extends Signal<Guardian> implements Listener<Stat>
 
     // ............................................................................................. CONSTRUCTOR
 
-    public Guardian(int ID) {
+    public Guardian(int ID)
+    {
         this.INSTANCE_ID = INSTANCECOUNTER;
         INSTANCECOUNTER++;
 
@@ -60,7 +61,8 @@ public class Guardian extends Signal<Guardian> implements Listener<Stat>
     /**
      * For Serialization Only!
      */
-    public Guardian(int ID, String nickname, AbilityGraph abilityGraph, Stat stat) {
+    public Guardian(int ID, String nickname, AbilityGraph abilityGraph, Stat stat)
+    {
         this.INSTANCE_ID = INSTANCECOUNTER;
         INSTANCECOUNTER++;
 
@@ -75,7 +77,8 @@ public class Guardian extends Signal<Guardian> implements Listener<Stat>
     /* ............................................................................... METHODS .. */
 
 
-    public boolean equals(Object monster) {
+    public boolean equals(Object monster)
+    {
         if(!(monster instanceof Guardian)) return false;
         else return equalsMonster((Guardian) monster);
     }
@@ -85,7 +88,8 @@ public class Guardian extends Signal<Guardian> implements Listener<Stat>
      * @param otherGuardian
      * @return
      */
-    public boolean equalsMonster(Guardian otherGuardian) {
+    public boolean equalsMonster(Guardian otherGuardian)
+    {
         if(INSTANCE_ID == otherGuardian.INSTANCE_ID) return true;
         else return false;
     }
@@ -93,16 +97,14 @@ public class Guardian extends Signal<Guardian> implements Listener<Stat>
 
     /* ..................................................................... GETTERS & SETTERS .. */
 
-    public String getName() {
-        if(nickname.length() > 0) {
-            return nickname;
-        } else {
-            return data.getNameID();
-        }
+    public String getName()
+    {
+        return data.getNameID();
     }
 
     @Override
-    public String toString() {
+    public String toString()
+    {
         String out = "";
         out += data.getNameID() + " Level: " + stat.getLevel();
         return out;

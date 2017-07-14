@@ -10,13 +10,14 @@ import com.badlogic.gdx.math.Rectangle;
  */
 public class IntRect extends IntVec2
 {
-    //................................................................................... ATTRIBUTES
+    //.............................................................................................. ATTRIBUTES
     public int width,height;
     public int ID;
     public static int IDcount=0;
-    //.................................................................................. CONSTRUCTOR
+    //.............................................................................................. CONSTRUCTOR
 
-    public IntRect(int x, int y, int width, int height) {
+    public IntRect(int x, int y, int width, int height)
+    {
         super(x,y);
         this.ID = IDcount;
         IntRect.IDcount++;
@@ -31,26 +32,30 @@ public class IntRect extends IntVec2
      * @param width
      * @param height
      */
-    public IntRect(float x, float y, float width, float height) {
+    public IntRect(float x, float y, float width, float height)
+    {
         this(MathUtils.round(x), MathUtils.round(y), MathUtils.round(width), MathUtils.round(height));
     }
 
-    public IntRect(Rectangle r) {
+    public IntRect(Rectangle r)
+    {
         super(MathUtils.round(r.x), MathUtils.round(r.y));
         this.ID = IDcount;
         IntRect.IDcount++;
         this.width = MathUtils.round(r.width);
         this.height = MathUtils.round(r.height);
     }
-    /* ............................................................................... METHODS .. */
-    public boolean contains(IntVec2 point) {
+
+    // ............................................................................................. METHODS
+    public boolean contains(IntVec2 point)
+    {
         if(point.x > x && point.x < x+width && point.y > y && point.y < y+height) return true;
         else return false;
     }
 
-    public boolean equals(IntRect r) {
+    public boolean equals(IntRect r)
+    {
         if(r.ID == this.ID) return true;
         else return false;
     }
-    /* ..................................................................... GETTERS & SETTERS .. */
 }

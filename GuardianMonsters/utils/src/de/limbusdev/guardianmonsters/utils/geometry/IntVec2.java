@@ -1,4 +1,4 @@
-package de.limbusdev.guardianmonsters.geometry;
+package de.limbusdev.guardianmonsters.utils.geometry;
 
 /**
  * Created by georg on 25.11.15.

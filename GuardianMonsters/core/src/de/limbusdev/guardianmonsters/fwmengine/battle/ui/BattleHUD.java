@@ -24,7 +24,7 @@ import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.TargetMenuWidge
 import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.guardians.abilities.Ability;
 import de.limbusdev.guardianmonsters.guardians.items.Inventory;
-import de.limbusdev.guardianmonsters.guardians.monsters.Monster;
+import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleMainMenuWidget;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleStatusOverviewWidget;
 import de.limbusdev.guardianmonsters.guardians.monsters.Team;
@@ -252,7 +252,7 @@ public class BattleHUD extends ABattleHUD {
             @Override
             public void onBackButton() {
                 boolean teamOk = false;
-                for(Monster m : leftTeam.values()) {
+                for(Guardian m : leftTeam.values()) {
                     if(m.stat.isFit()) {
                         teamOk = true || teamOk;
                     } else {
@@ -268,10 +268,10 @@ public class BattleHUD extends ABattleHUD {
         };
 
         attackMenuCallbacks = nr -> {
-            Monster activeMonster = battleSystem.getActiveMonster();
+            Guardian activeGuardian = battleSystem.getActiveMonster();
             System.out.println("AttackMenuButtons: onButtonNr("+nr+")");
             System.out.println("Input: User chose attack Nr. " + nr);
-            int chosenAttackNr = activeMonster.abilityGraph.learntAbilities.indexOfValue(activeMonster.abilityGraph.getActiveAbility(nr),false);
+            int chosenAttackNr = activeGuardian.abilityGraph.learntAbilities.indexOfValue(activeGuardian.abilityGraph.getActiveAbility(nr),false);
             battleSystem.setChosenAttack(chosenAttackNr);
             battleStateSwitcher.toTargetChoice();
         };
@@ -284,10 +284,10 @@ public class BattleHUD extends ABattleHUD {
             }
 
             @Override
-            public void onDoingNothing(Monster monster) {
+            public void onDoingNothing(Guardian guardian) {
                 battleStateSwitcher.toAnimation();
                 infoLabelWidget.setWholeText(
-                    Services.getL18N().Battle().format("batt_item_usage", monster.getName())
+                    Services.getL18N().Battle().format("batt_item_usage", guardian.getName())
                 );
                 infoLabelWidget.animateTextAppearance();
                 animationWidget.animateItemUsage();
@@ -299,14 +299,14 @@ public class BattleHUD extends ABattleHUD {
             }
 
             @Override
-            public void onMonsterKilled(Monster m) {
+            public void onMonsterKilled(Guardian m) {
                 boolean side = battleSystem.getQueue().getTeamSideFor(m);
                 int pos = battleSystem.getQueue().getFieldPositionFor(m);
                 animationWidget.animateMonsterKO(pos,side);
             }
 
             @Override
-            public void onAttack(Monster attacker, Monster target, Ability ability, AttackCalculationReport rep) {
+            public void onAttack(Guardian attacker, Guardian target, Ability ability, AttackCalculationReport rep) {
 
                 // Change widget set
                 battleStateSwitcher.toAnimation();
@@ -328,22 +328,22 @@ public class BattleHUD extends ABattleHUD {
             }
 
             @Override
-            public void onDefense(Monster defensiveMonster) {
+            public void onDefense(Guardian defensiveGuardian) {
                 battleStateSwitcher.toAnimation();
-                infoLabelWidget.setWholeText(BattleStringBuilder.selfDefense(defensiveMonster));
+                infoLabelWidget.setWholeText(BattleStringBuilder.selfDefense(defensiveGuardian));
                 infoLabelWidget.animateTextAppearance();
                 animationWidget.animateSelfDefense();
             }
 
             @Override
-            public void onLevelup(Monster m) {
+            public void onLevelup(Guardian m) {
                 showLevelUp(m);
             }
         };
 
         targetMenuCallbacks = nr -> {
             System.out.println("TargetMenuButtons: onButtonNr("+nr+")");
-            Monster target = targetMenuWidget.getMonsterOfIndex(nr);
+            Guardian target = targetMenuWidget.getMonsterOfIndex(nr);
             battleSystem.setChosenTarget(target);
             battleSystem.attack();
         };
@@ -383,7 +383,7 @@ public class BattleHUD extends ABattleHUD {
         };
     }
 
-    private void showLevelUp(Monster m) {
+    private void showLevelUp(Guardian m) {
         stage.addActor(new LevelUpWidget(Services.getUI().getInventorySkin(), m));
     }
 

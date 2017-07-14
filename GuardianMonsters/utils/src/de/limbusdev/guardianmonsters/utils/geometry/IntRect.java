@@ -1,4 +1,4 @@
-package de.limbusdev.guardianmonsters.geometry;
+package de.limbusdev.guardianmonsters.utils.geometry;
 
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;

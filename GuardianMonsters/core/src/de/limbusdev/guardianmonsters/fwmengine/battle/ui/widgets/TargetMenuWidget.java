@@ -3,14 +3,11 @@ package de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets;
 import com.badlogic.ashley.signals.Listener;
 import com.badlogic.ashley.signals.Signal;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.utils.I18NBundle;
 
 import de.limbusdev.guardianmonsters.fwmengine.battle.control.BattleQueue;
 import de.limbusdev.guardianmonsters.fwmengine.battle.control.BattleSystem;
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.CombatTeam;
-import de.limbusdev.guardianmonsters.guardians.monsters.Monster;
-import de.limbusdev.guardianmonsters.guardians.MonsterDB;
-import de.limbusdev.guardianmonsters.services.LocalizationManager;
+import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
 import de.limbusdev.guardianmonsters.services.Services;
 
 import static de.limbusdev.guardianmonsters.Constant.LEFT;
@@ -20,7 +17,7 @@ import static de.limbusdev.guardianmonsters.Constant.RIGHT;
  * @author Georg Eckert 2017
  */
 
-public class TargetMenuWidget extends SevenButtonsWidget implements Listener<Monster> {
+public class TargetMenuWidget extends SevenButtonsWidget implements Listener<Guardian> {
 
     private CombatTeam leftTeam, rightTeam;
 
@@ -54,7 +51,7 @@ public class TargetMenuWidget extends SevenButtonsWidget implements Listener<Mon
 
         for(int key : team.keys())
         {
-            Monster m = team.get(key);
+            Guardian m = team.get(key);
             setButtonText(key + offset, Services.getL18N().getLocalizedGuardianName(m));
             enableButton(key + offset);
 
@@ -63,7 +60,7 @@ public class TargetMenuWidget extends SevenButtonsWidget implements Listener<Mon
         }
     }
 
-    public Monster getMonsterOfIndex(int index) {
+    public Guardian getMonsterOfIndex(int index) {
         if(index <=2) {
             return leftTeam.get(index);
         } else {
@@ -90,13 +87,13 @@ public class TargetMenuWidget extends SevenButtonsWidget implements Listener<Mon
 
 
     @Override
-    public void receive(Signal<Monster> signal, Monster monster) {
-        if(monster.stat.isKO()) {
+    public void receive(Signal<Guardian> signal, Guardian guardian) {
+        if(guardian.stat.isKO()) {
             int index;
-            if(leftTeam.isMember(monster)) {
-                index = leftTeam.getFieldPosition(monster);
+            if(leftTeam.isMember(guardian)) {
+                index = leftTeam.getFieldPosition(guardian);
             } else {
-                index = rightTeam.getFieldPosition(monster);
+                index = rightTeam.getFieldPosition(guardian);
             }
             disableButton(index);
         }

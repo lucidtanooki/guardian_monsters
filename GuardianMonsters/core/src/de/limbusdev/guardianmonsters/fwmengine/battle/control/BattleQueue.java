@@ -5,7 +5,7 @@ import com.badlogic.gdx.utils.Array;
 
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.CombatTeam;
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.MonsterSpeedComparator;
-import de.limbusdev.guardianmonsters.guardians.monsters.Monster;
+import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.Team;
 
 import static de.limbusdev.guardianmonsters.Constant.LEFT;
@@ -34,8 +34,8 @@ public class BattleQueue extends Signal<BattleQueue.QueueSignal> {
     }
 
     private CombatTeam combatTeamLeft, combatTeamRight;
-    private Array<Monster> currentRound;
-    private Array<Monster> nextRound;
+    private Array<Guardian> currentRound;
+    private Array<Guardian> nextRound;
 
     private Team left, right;
 
@@ -57,11 +57,11 @@ public class BattleQueue extends Signal<BattleQueue.QueueSignal> {
      * Takes the next monster in line and moves it to the next round
      * @return next in line
      */
-    public Monster next() {
-        Monster next = currentRound.pop();
+    public Guardian next() {
+        Guardian next = currentRound.pop();
         nextRound.insert(0,next);
         if(currentRound.size == 0) {
-            Array<Monster> tmp = currentRound;
+            Array<Guardian> tmp = currentRound;
             currentRound = nextRound;
             nextRound = currentRound;
             currentRound.sort(new MonsterSpeedComparator());
@@ -79,7 +79,7 @@ public class BattleQueue extends Signal<BattleQueue.QueueSignal> {
      * Returns next in line
      * @return
      */
-    public Monster peekNext() {
+    public Guardian peekNext() {
         return currentRound.get(currentRound.size-1);
     }
 
@@ -92,7 +92,7 @@ public class BattleQueue extends Signal<BattleQueue.QueueSignal> {
         else return RIGHT;
     }
 
-    public Monster exchangeNext(Monster substitute) {
+    public Guardian exchangeNext(Guardian substitute) {
         CombatTeam combatTeam;
         if(peekNextSide() == LEFT) {
             combatTeam = combatTeamLeft;
@@ -100,7 +100,7 @@ public class BattleQueue extends Signal<BattleQueue.QueueSignal> {
             combatTeam = combatTeamRight;
         }
 
-        Monster next = next();
+        Guardian next = next();
         int position = combatTeam.getFieldPosition(next);
         combatTeam.exchange(position, substitute);
 
@@ -114,20 +114,20 @@ public class BattleQueue extends Signal<BattleQueue.QueueSignal> {
         String text = "";
 
         text += "=== Next Round    ===\n";
-        for(Monster m : nextRound) text += m.toString() + "\n";
+        for(Guardian m : nextRound) text += m.toString() + "\n";
         text += "=== Current Round ===\n";
-        for(Monster m : currentRound) text += m.toString() + "\n";
+        for(Guardian m : currentRound) text += m.toString() + "\n";
         text += "---------------------\n";
         text += "Next: " + peekNext().toString();
 
         return text;
     }
 
-    public Array<Monster> getCurrentRound() {
+    public Array<Guardian> getCurrentRound() {
         return currentRound;
     }
 
-    public Array<Monster> getNextRound() {
+    public Array<Guardian> getNextRound() {
         return nextRound;
     }
 
@@ -147,16 +147,16 @@ public class BattleQueue extends Signal<BattleQueue.QueueSignal> {
         return right;
     }
 
-    public boolean getTeamSideFor(Monster monster) {
-        if(left.isMember(monster)) return LEFT;
+    public boolean getTeamSideFor(Guardian guardian) {
+        if(left.isMember(guardian)) return LEFT;
         else return RIGHT;
     }
 
-    public int getFieldPositionFor(Monster monster) {
-        if(getTeamSideFor(monster) == LEFT) {
-            return combatTeamLeft.getFieldPosition(monster);
+    public int getFieldPositionFor(Guardian guardian) {
+        if(getTeamSideFor(guardian) == LEFT) {
+            return combatTeamLeft.getFieldPosition(guardian);
         } else {
-            return combatTeamRight.getFieldPosition(monster);
+            return combatTeamRight.getFieldPosition(guardian);
         }
     }
 }

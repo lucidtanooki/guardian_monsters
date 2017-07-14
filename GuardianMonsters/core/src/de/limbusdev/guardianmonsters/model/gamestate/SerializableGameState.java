@@ -4,7 +4,7 @@ import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.ObjectMap;
 
 import de.limbusdev.guardianmonsters.guardians.items.Inventory;
-import de.limbusdev.guardianmonsters.guardians.monsters.Monster;
+import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
 
 /**
  * SerializableGameState
@@ -36,7 +36,7 @@ public class SerializableGameState {
         inventory = new SerializableInventory(gameState.inventory);
 
         team = new SerializableMonster[7];
-        for(ObjectMap.Entry<Integer,Monster> entry : gameState.team.entries()) {
+        for(ObjectMap.Entry<Integer,Guardian> entry : gameState.team.entries()) {
             SerializableMonster monster = new SerializableMonster(entry.value);
             team[entry.key] = monster;
         }
@@ -50,7 +50,7 @@ public class SerializableGameState {
 
     public static GameState deserialize(SerializableGameState state) {
 
-        ArrayMap<Integer,Monster> team = new ArrayMap<>();
+        ArrayMap<Integer,Guardian> team = new ArrayMap<>();
         for(int i=0; i<state.team.length; i++) {
             if(state.team[i] != null) {
                 team.put(i, SerializableMonster.deserialize(state.team[i]));

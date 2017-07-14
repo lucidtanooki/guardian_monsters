@@ -7,7 +7,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ArrayMap;
 
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.AInventorySubMenu;
-import de.limbusdev.guardianmonsters.geometry.IntVec2;
+import de.limbusdev.guardianmonsters.utils.geometry.IntVec2;
 import de.limbusdev.guardianmonsters.guardians.items.Inventory;
 import de.limbusdev.guardianmonsters.guardians.items.Item;
 import de.limbusdev.guardianmonsters.guardians.ItemDB;

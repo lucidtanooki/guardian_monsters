@@ -18,53 +18,52 @@ import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.guardians.items.Equipment;
 import de.limbusdev.guardianmonsters.guardians.items.EquipmentPotential;
 import de.limbusdev.guardianmonsters.guardians.items.Item;
-import de.limbusdev.guardianmonsters.guardians.monsters.Monster;
-import de.limbusdev.guardianmonsters.guardians.MonsterDB;
+import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
 
 /**
  * @author Georg Eckert 2017
  */
 
-public class GuardianOverviewButton extends TextButton implements Listener<Monster> {
+public class GuardianOverviewButton extends TextButton implements Listener<Guardian> {
 
     private Table subTable;
     private Item item;
-    private Monster monster;
+    private Guardian guardian;
 
 
     // ................................................................................ CONSTRUCTORS
-    public GuardianOverviewButton(Monster monster, Skin skin, Item item) {
-        super(Services.getL18N().getLocalizedGuardianName(monster), skin);
-        construct(monster, item);
+    public GuardianOverviewButton(Guardian guardian, Skin skin, Item item) {
+        super(Services.getL18N().getLocalizedGuardianName(guardian), skin);
+        construct(guardian, item);
     }
 
-    public GuardianOverviewButton(Monster monster, Skin skin, String styleName, Item item) {
-        super(Services.getL18N().getLocalizedGuardianName(monster), skin, styleName);
-        construct(monster, item);
+    public GuardianOverviewButton(Guardian guardian, Skin skin, String styleName, Item item) {
+        super(Services.getL18N().getLocalizedGuardianName(guardian), skin, styleName);
+        construct(guardian, item);
     }
 
-    public GuardianOverviewButton(Monster monster, TextButtonStyle style, Item item) {
-        super(Services.getL18N().getLocalizedGuardianName(monster), style);
-        construct(monster, item);
+    public GuardianOverviewButton(Guardian guardian, TextButtonStyle style, Item item) {
+        super(Services.getL18N().getLocalizedGuardianName(guardian), style);
+        construct(guardian, item);
     }
 
-    private void construct(Monster monster, Item item) {
+    private void construct(Guardian guardian, Item item) {
         this.item = item;
-        this.monster = monster;
-        monster.add(this);
+        this.guardian = guardian;
+        guardian.add(this);
 
         getLabel().setAlignment(Align.topLeft);
-        TextureRegion region = Services.getMedia().getMonsterMiniSprite(monster.ID);
+        TextureRegion region = Services.getMedia().getMonsterMiniSprite(guardian.ID);
         Image monsterImg = new Image(region);
         add(monsterImg).width(16).height(region.getRegionHeight()).align(Align.topLeft);
         row();
 
         switch(item.getCategory()) {
             case EQUIPMENT:
-                augmentButtonEquipment(monster, (Equipment) item);
+                augmentButtonEquipment(guardian, (Equipment) item);
                 break;
             default:
-                augmentButtonMedicine(monster, item);
+                augmentButtonMedicine(guardian, item);
                 break;
         }
     }
@@ -90,14 +89,14 @@ public class GuardianOverviewButton extends TextButton implements Listener<Monst
 
 
 
-    private void augmentButtonEquipment(Monster monster, Equipment equipment) {
+    private void augmentButtonEquipment(Guardian guardian, Equipment equipment) {
         if(subTable != null) {
             removeActor(subTable);
             getCells().removeIndex(getCells().size-1);
             row();
         }
 
-        EquipmentPotential pot = monster.stat.getEquipmentPotential(equipment);
+        EquipmentPotential pot = guardian.stat.getEquipmentPotential(equipment);
 
         String props[]  = {"hp", "mp", "speed", "exp", "pstr", "pdef", "mstr", "mdef"};
         int potValues[] = {pot.hp, pot.mp, pot.speed, pot.exp, pot.pstr, pot.pdef, pot.mstr, pot.mdef};
@@ -120,13 +119,13 @@ public class GuardianOverviewButton extends TextButton implements Listener<Monst
         add(subTable).align(Align.left);
         layout();
 
-        if(!item.applicable(monster)) {
+        if(!item.applicable(guardian)) {
             setTouchable(Touchable.disabled);
             setColor(.6f,.6f,.6f,1f);
         }
     }
 
-    private void augmentButtonMedicine(Monster monster, Item item) {
+    private void augmentButtonMedicine(Guardian guardian, Item item) {
 
         if(subTable != null) {
             removeActor(subTable);
@@ -136,27 +135,27 @@ public class GuardianOverviewButton extends TextButton implements Listener<Monst
 
         subTable = new Table();
         subTable.add(new Image(getSkin().getDrawable("stats-symbol-hp")));
-        subTable.add(new Label(monster.stat.getHPfractionAsString(), getSkin(), "default")).width(56);
+        subTable.add(new Label(guardian.stat.getHPfractionAsString(), getSkin(), "default")).width(56);
         subTable.add(new Image(getSkin().getDrawable("stats-symbol-mp")));
-        subTable.add(new Label(monster.stat.getMPfractionAsString(), getSkin(), "default")).width(56);
+        subTable.add(new Label(guardian.stat.getMPfractionAsString(), getSkin(), "default")).width(56);
 
         add(subTable).align(Align.left);
         layout();
 
-        if(!item.applicable(monster)) {
+        if(!item.applicable(guardian)) {
             setTouchable(Touchable.disabled);
             setColor(.6f,.6f,.6f,1f);
         }
     }
 
     @Override
-    public void receive(Signal<Monster> signal, Monster monster) {
+    public void receive(Signal<Guardian> signal, Guardian guardian) {
         switch(item.getCategory()) {
             case EQUIPMENT:
-                augmentButtonEquipment(monster, (Equipment) item);
+                augmentButtonEquipment(guardian, (Equipment) item);
                 break;
             default:
-                augmentButtonMedicine(monster, item);
+                augmentButtonMedicine(guardian, item);
                 break;
         }
     }

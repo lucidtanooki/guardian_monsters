@@ -35,7 +35,7 @@ import de.limbusdev.guardianmonsters.enums.SkyDirection;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.BattleScreen;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.InventoryScreen;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.GameArea;
-import de.limbusdev.guardianmonsters.geometry.IntVec2;
+import de.limbusdev.guardianmonsters.utils.geometry.IntVec2;
 import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager;
 import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.entities.EntityFamilies;

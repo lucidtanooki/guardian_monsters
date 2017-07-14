@@ -2,7 +2,7 @@ package de.limbusdev.guardianmonsters.guardians.items;
 
 import com.badlogic.gdx.math.MathUtils;
 
-import de.limbusdev.guardianmonsters.guardians.monsters.Monster;
+import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
 
 /**
  * Medicine
@@ -26,7 +26,7 @@ public class MedicalItem extends Item {
     }
 
     @Override
-    public void apply(Monster m) {
+    public void apply(Guardian m) {
         switch(type) {
             case REVIVE:
                 m.stat.healHP(MathUtils.round(m.stat.getHPmax()*value/100f));
@@ -43,7 +43,7 @@ public class MedicalItem extends Item {
     }
 
     @Override
-    public boolean applicable(Monster m) {
+    public boolean applicable(Guardian m) {
         switch(type) {
             case REVIVE:
                 return m.stat.isKO();

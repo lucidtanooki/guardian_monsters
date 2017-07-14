@@ -9,7 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 
 import de.limbusdev.guardianmonsters.services.Services;
-import de.limbusdev.guardianmonsters.guardians.monsters.Monster;
+import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
 
 /**
  * GuardianDetailWidget
@@ -49,10 +49,10 @@ public class GuardianDetailWidget extends Group {
         addActor(level);
     }
 
-    public void showDetails(Monster monster) {
-        TextureAtlas.AtlasRegion region = Services.getMedia().getMonsterSprite(monster.ID);
+    public void showDetails(Guardian guardian) {
+        TextureAtlas.AtlasRegion region = Services.getMedia().getMonsterSprite(guardian.ID);
         monsterSprite.setDrawable(new TextureRegionDrawable(region));
-        name.setText(monster.getName());
-        level.setText("Lvl " + monster.stat.getLevel());
+        name.setText(guardian.getName());
+        level.setText("Lvl " + guardian.stat.getLevel());
     }
 }

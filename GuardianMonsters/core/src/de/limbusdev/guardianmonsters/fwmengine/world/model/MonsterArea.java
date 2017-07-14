@@ -2,7 +2,7 @@ package de.limbusdev.guardianmonsters.fwmengine.world.model;
 
 import com.badlogic.gdx.utils.Array;
 
-import de.limbusdev.guardianmonsters.geometry.IntRect;
+import de.limbusdev.guardianmonsters.utils.geometry.IntRect;
 
 
 /**

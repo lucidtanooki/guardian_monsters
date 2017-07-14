@@ -17,12 +17,12 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.HeroComponen
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.InputComponent;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PositionComponent;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TeamComponent;
-import de.limbusdev.guardianmonsters.geometry.IntRect;
-import de.limbusdev.guardianmonsters.geometry.IntVec2;
+import de.limbusdev.guardianmonsters.utils.geometry.IntRect;
+import de.limbusdev.guardianmonsters.utils.geometry.IntVec2;
 import de.limbusdev.guardianmonsters.fwmengine.world.model.WarpPoint;
 import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.BattleFactory;
-import de.limbusdev.guardianmonsters.guardians.monsters.Monster;
+import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
 import de.limbusdev.guardianmonsters.fwmengine.world.model.MonsterArea;
 import de.limbusdev.guardianmonsters.Constant;
 
@@ -86,7 +86,7 @@ public class MovementSystem extends EntitySystem {
                 System.out.println("Entered Healing Area");
                 TeamComponent tc = Components.team.get(hero);
                 boolean teamHurt = false;
-                for(Monster m : tc.team.values())
+                for(Guardian m : tc.team.values())
                     if(m.stat.getHP() < m.stat.getHPmax()) {
                         m.stat.setHP(m.stat.getHPmax());
                     }

@@ -11,9 +11,8 @@ import com.badlogic.gdx.utils.I18NBundle;
 import java.util.Locale;
 
 import de.limbusdev.guardianmonsters.assets.paths.AssetPath;
-import de.limbusdev.guardianmonsters.guardians.Element;
 import de.limbusdev.guardianmonsters.guardians.MonsterDB;
-import de.limbusdev.guardianmonsters.guardians.monsters.Monster;
+import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
 
 
 /**
@@ -111,12 +110,12 @@ public class LocalizationManager implements L18N
     }
 
     @Override
-    public String getLocalizedGuardianName(Monster monster)
+    public String getLocalizedGuardianName(Guardian guardian)
     {
-        if(!monster.nickname.isEmpty()) {
-            return monster.nickname;
+        if(!guardian.nickname.isEmpty()) {
+            return guardian.nickname;
         } else {
-            return Guardians().get(monster.getName());
+            return Guardians().get(guardian.getName());
         }
     }
 

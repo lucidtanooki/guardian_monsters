@@ -11,7 +11,7 @@ import com.badlogic.gdx.utils.Array;
 import de.limbusdev.guardianmonsters.fwmengine.battle.control.BattleQueue;
 import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.team.MonsterPreviewWidget;
-import de.limbusdev.guardianmonsters.guardians.monsters.Monster;
+import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
 
 /**
  * @author Georg Eckert
@@ -41,9 +41,9 @@ public class BattleQueueWidget extends BattleWidget implements Listener<BattleQu
      * @param greyOut whether preview should look deactivated
      * @return next free slot
      */
-    private int addPreviewImagesToWidget(Array<Monster> queue, int startSlot, boolean greyOut) {
+    private int addPreviewImagesToWidget(Array<Guardian> queue, int startSlot, boolean greyOut) {
         for(int i = queue.size-1; i>=0; i--) {
-            Monster m = queue.get(i);
+            Guardian m = queue.get(i);
 
             MonsterPreviewWidget previewWidget = new MonsterPreviewWidget(Services.getUI().getBattleSkin());
             previewWidget.setPreview(m.ID);

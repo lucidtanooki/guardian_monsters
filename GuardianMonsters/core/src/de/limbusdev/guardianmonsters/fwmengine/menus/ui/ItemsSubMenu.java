@@ -11,7 +11,7 @@ import de.limbusdev.guardianmonsters.fwmengine.menus.ui.items.KeyItemDetailViewW
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.items.WeaponDetailViewWidget;
 import de.limbusdev.guardianmonsters.guardians.items.Inventory;
 import de.limbusdev.guardianmonsters.guardians.items.Item;
-import de.limbusdev.guardianmonsters.guardians.monsters.Monster;
+import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
 
 /**
  * Created by Georg Eckert on 17.02.17.
@@ -22,10 +22,10 @@ public class ItemsSubMenu extends AInventorySubMenu
 
     private Inventory inventory;
     private ItemDetailViewWidget detailView;
-    private ArrayMap<Integer, Monster> team;
+    private ArrayMap<Integer, Guardian> team;
     private ItemListWidget itemListWidget;
 
-    public ItemsSubMenu(Skin skin, Inventory inventory, ArrayMap<Integer, Monster> team) {
+    public ItemsSubMenu(Skin skin, Inventory inventory, ArrayMap<Integer, Guardian> team) {
         super(skin);
         this.team = team;
         this.inventory = inventory;

@@ -1,7 +1,7 @@
 package de.limbusdev.guardianmonsters.guardians.items;
 
 
-import de.limbusdev.guardianmonsters.guardians.monsters.Monster;
+import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
 
 /**
  * Equipment extends the {@link Stat}s of a monster in the following way:
@@ -21,15 +21,15 @@ import de.limbusdev.guardianmonsters.guardians.monsters.Monster;
 public abstract class Equipment extends Item
 {
     @Override
-    public void apply(Monster m)
+    public void apply(Guardian m)
     {
 
     }
 
     @Override
-    public boolean applicable(Monster monster)
+    public boolean applicable(Guardian guardian)
     {
-        return (monster.abilityGraph.hasLearntEquipment(this.bodyPart));
+        return (guardian.abilityGraph.hasLearntEquipment(this.bodyPart));
     }
 
     public final int addsPStr, addsPDef, addsMStr, addsMDef, addsSpeed, addsHP, addsMP, addsEXP;

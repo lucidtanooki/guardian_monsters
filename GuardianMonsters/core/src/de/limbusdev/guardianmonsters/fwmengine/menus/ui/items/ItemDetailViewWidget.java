@@ -17,7 +17,7 @@ import de.limbusdev.guardianmonsters.fwmengine.menus.ui.widgets.ReassuranceWidge
 import de.limbusdev.guardianmonsters.guardians.items.Equipment;
 import de.limbusdev.guardianmonsters.guardians.items.Inventory;
 import de.limbusdev.guardianmonsters.guardians.items.Item;
-import de.limbusdev.guardianmonsters.guardians.monsters.Monster;
+import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
 
 /**
  * @author Georg Eckert 2017
@@ -34,12 +34,12 @@ public class ItemDetailViewWidget extends Group implements MonsterListWidget.Cal
 
     // Data
     private Inventory inventory;
-    private ArrayMap<Integer, Monster> team;
+    private ArrayMap<Integer, Guardian> team;
     private Item item;
 
 
     // ................................................................................. CONSTRCUTOR
-    public ItemDetailViewWidget(Skin skin, Inventory inventory, ArrayMap<Integer,Monster> monsters)  {
+    public ItemDetailViewWidget(Skin skin, Inventory inventory, ArrayMap<Integer,Guardian> monsters)  {
         super();
 
         this.skin       = skin;

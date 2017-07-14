@@ -12,8 +12,8 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 
 import de.limbusdev.guardianmonsters.services.Services;
-import de.limbusdev.guardianmonsters.geometry.IntVec2;
-import de.limbusdev.guardianmonsters.guardians.monsters.Monster;
+import de.limbusdev.guardianmonsters.utils.geometry.IntVec2;
+import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
 
 /**
  * Created by Georg Eckert on 01.03.17.
@@ -36,13 +36,13 @@ public abstract class ATeamChoiceWidget extends Group {
         buttons = new Group();
     }
 
-    public void init(ArrayMap<Integer,Monster> team) {
+    public void init(ArrayMap<Integer,Guardian> team) {
         memberButtons = new ButtonGroup<>();
         buttons.clearChildren();
         addActor(buttons);
 
         for(final int key : team.keys()) {
-            Monster m = team.get(key);
+            Guardian m = team.get(key);
             Image preview = new Image(Services.getMedia().getMonsterMiniSprite(m.ID));
             preview.setPosition(38/2-8, 38/2-8, Align.bottomLeft);
             ImageButton.ImageButtonStyle ibs = new ImageButton.ImageButtonStyle();

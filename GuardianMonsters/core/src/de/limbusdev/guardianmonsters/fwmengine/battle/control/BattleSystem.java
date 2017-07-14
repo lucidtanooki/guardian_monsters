@@ -7,7 +7,7 @@ import java.util.Iterator;
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.AttackCalculationReport;
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.BattleResult;
 import de.limbusdev.guardianmonsters.guardians.abilities.Ability;
-import de.limbusdev.guardianmonsters.guardians.monsters.Monster;
+import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.Team;
 
 import static de.limbusdev.guardianmonsters.Constant.LEFT;
@@ -27,7 +27,7 @@ public class BattleSystem {
     private Callbacks callbacks;
 
     private BattleQueue queue;
-    private Monster chosenTarget;
+    private Guardian chosenTarget;
     private AttackCalculationReport latestAttackReport;
     private BattleResult result;
     private int chosenAttack;
@@ -52,7 +52,7 @@ public class BattleSystem {
     }
 
     // .............................................................................. battle methods
-    public Monster getActiveMonster() {
+    public Guardian getActiveMonster() {
         return queue.peekNext();
     }
 
@@ -62,7 +62,7 @@ public class BattleSystem {
      * @param target
      * @param attack
      */
-    public void attack(Monster target, int attack) {
+    public void attack(Guardian target, int attack) {
 
         // Throw exception if target or attack are unset
         if(!choiceComplete) {
@@ -71,7 +71,7 @@ public class BattleSystem {
 
         // Calculate Ability
         Ability ability= getActiveMonster().abilityGraph.learntAbilities.get(attack);
-        Monster attacker = getActiveMonster();
+        Guardian attacker = getActiveMonster();
         latestAttackReport = MonsterManager.calcAttack(attacker, target, ability);
         callbacks.onAttack(attacker, target, ability, latestAttackReport);
     }
@@ -129,9 +129,9 @@ public class BattleSystem {
      * Checks if a monster has been defeated during the last attack
      */
     private void checkKO() {
-        Iterator<Monster> it = queue.getCurrentRound().iterator();
+        Iterator<Guardian> it = queue.getCurrentRound().iterator();
         while (it.hasNext()) {
-            Monster m = it.next();
+            Guardian m = it.next();
             if (m.stat.isKO()) {
                 it.remove();
                 if(queue.getRight().containsValue(m,false)) {
@@ -143,7 +143,7 @@ public class BattleSystem {
 
         it = queue.getNextRound().iterator();
         while (it.hasNext()) {
-            Monster m = it.next();
+            Guardian m = it.next();
             if (m.stat.isKO()) {
                 it.remove();
                 if(queue.getRight().containsValue(m,false)) {
@@ -154,11 +154,11 @@ public class BattleSystem {
         }
     }
 
-    private void giveEXPtoWinners(Monster defeatedMonster) {
-        for(Monster m : queue.getCombatTeamLeft().values()) {
+    private void giveEXPtoWinners(Guardian defeatedGuardian) {
+        for(Guardian m : queue.getCombatTeamLeft().values()) {
             if(m.stat.isFit()) {
-                float opponentFactor = 1f * defeatedMonster.stat.getLevel() / m.stat.getLevel();
-                int EXP = MathUtils.floor(BASE_EXP * defeatedMonster.stat.getLevel() / 6f * opponentFactor);
+                float opponentFactor = 1f * defeatedGuardian.stat.getLevel() / m.stat.getLevel();
+                int EXP = MathUtils.floor(BASE_EXP * defeatedGuardian.stat.getLevel() / 6f * opponentFactor);
                 result.gainEXP(m, EXP);
                 boolean levelUp = m.stat.earnEXP(EXP);
                 if(levelUp) {
@@ -183,14 +183,14 @@ public class BattleSystem {
 
     /**
      * Swaps two monsters
-     * @param newMonster
+     * @param newGuardian
      */
-    public void replaceActiveMonster(Monster newMonster) {
-        Monster replaced = queue.exchangeNext(newMonster);
+    public void replaceActiveMonster(Guardian newGuardian) {
+        Guardian replaced = queue.exchangeNext(newGuardian);
         nextMonster();
     }
 
-    public void setChosenTarget(Monster target) {
+    public void setChosenTarget(Guardian target) {
         this.chosenTarget = target;
         targetChosen = true;
         choiceComplete = targetChosen && attackChosen;
@@ -212,7 +212,7 @@ public class BattleSystem {
 
         public void turn() {
             System.out.println("\n### AI's turn ###");
-            Monster m = getActiveMonster();
+            Guardian m = getActiveMonster();
             int att = MathUtils.random(0,m.abilityGraph.learntAbilities.size-1);
             chooseTarget();
             setChosenAttack(att);
@@ -221,7 +221,7 @@ public class BattleSystem {
 
         private void chooseTarget() {
             boolean foundTarget = false;
-            Monster target;
+            Guardian target;
             while(!foundTarget) {
                 target = queue.getCombatTeamLeft().getRandomFitMember();
                 if(target.stat.isFit()) {
@@ -243,12 +243,12 @@ public class BattleSystem {
     // INNER INTERFACE
     public static abstract class Callbacks
     {
-        public void onMonsterKilled(Monster m){}
-        public void onAttack(Monster attacker, Monster target, Ability ability, AttackCalculationReport rep){}
-        public void onDefense(Monster defensiveMonster){}
+        public void onMonsterKilled(Guardian m){}
+        public void onAttack(Guardian attacker, Guardian target, Ability ability, AttackCalculationReport rep){}
+        public void onDefense(Guardian defensiveGuardian){}
         public void onPlayersTurn(){}
         public void onBattleEnds(boolean winnerSide){}
-        public void onDoingNothing(Monster monster){}
-        public void onLevelup(Monster m){}
+        public void onDoingNothing(Guardian guardian){}
+        public void onLevelup(Guardian m){}
     }
 }

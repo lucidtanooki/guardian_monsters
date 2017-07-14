@@ -1,7 +1,7 @@
 package de.limbusdev.guardianmonsters.guardians.items;
 
 
-import de.limbusdev.guardianmonsters.guardians.monsters.Monster;
+import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
 
 /**
  * HandEquipment
@@ -26,7 +26,7 @@ public class HandEquipment extends Equipment {
     }
 
     @Override
-    public boolean applicable(Monster m) {
+    public boolean applicable(Guardian m) {
         if(super.applicable(m)) {
             return (m.data.getHandType() == type);
         } else {

@@ -22,7 +22,7 @@ import de.limbusdev.guardianmonsters.fwmengine.menus.ui.team.TeamMemberSwitcher;
 import de.limbusdev.guardianmonsters.guardians.abilities.Ability;
 import de.limbusdev.guardianmonsters.guardians.abilities.AbilityGraph;
 import de.limbusdev.guardianmonsters.guardians.Element;
-import de.limbusdev.guardianmonsters.guardians.monsters.Monster;
+import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
 import de.limbusdev.guardianmonsters.Constant;
 
 /**
@@ -38,7 +38,7 @@ public class AbilityChoiceSubMenu extends AInventorySubMenu
 
     private TeamMemberSwitcher switcher;
     private VerticalGroup abilityMenu;
-    private ArrayMap<Integer, Monster> team;
+    private ArrayMap<Integer, Guardian> team;
     private ButtonGroup<TextButton> abilityButtons;
     private AbilityDetailWidget details;
     private SevenButtonsWidget abilitySlotButtons;
@@ -47,7 +47,7 @@ public class AbilityChoiceSubMenu extends AInventorySubMenu
 
     private Group abilitySlotChoice;
 
-    public AbilityChoiceSubMenu(Skin skin, ArrayMap<Integer, Monster> team) {
+    public AbilityChoiceSubMenu(Skin skin, ArrayMap<Integer, Guardian> team) {
         super(skin);
         this.team = team;
 
@@ -72,7 +72,7 @@ public class AbilityChoiceSubMenu extends AInventorySubMenu
      * Initializes the menu with the data of the given monster
      * @param m
      */
-    private void init(Monster m) {
+    private void init(Guardian m) {
         abilityMenu.clear();
         abilityButtons.clear();
         I18NBundle translation = Services.getL18N().Abilities();
@@ -107,8 +107,8 @@ public class AbilityChoiceSubMenu extends AInventorySubMenu
     }
 
     private void showAbilityDetails() {
-        Monster monster = team.get(switcher.getCurrentlyChosen());
-        details.init(monster, currentlyChosenAbility, true);
+        Guardian guardian = team.get(switcher.getCurrentlyChosen());
+        details.init(guardian, currentlyChosenAbility, true);
     }
 
     // ............................................................... AbilityDetailWidget.Callbacks
@@ -119,9 +119,9 @@ public class AbilityChoiceSubMenu extends AInventorySubMenu
     }
 
     private void refreshAbilitySlotButtons() {
-        Monster monster = team.get(switcher.getCurrentlyChosen());
+        Guardian guardian = team.get(switcher.getCurrentlyChosen());
         for(int i=0; i<7; i++) {
-            Ability ability = monster.abilityGraph.getActiveAbility(i);
+            Ability ability = guardian.abilityGraph.getActiveAbility(i);
             if(ability != null) {
                 abilitySlotButtons.setButtonText(i, ability);
                 abilitySlotButtons.setButtonStyle(i, ability.element);
@@ -135,8 +135,8 @@ public class AbilityChoiceSubMenu extends AInventorySubMenu
     // ................................................................ SevenButtonsWidget.Callbacks
     @Override
     public void onButtonNr(int nr) {
-        Monster monster = team.get(switcher.getCurrentlyChosen());
-        monster.abilityGraph.setActiveAbility(nr, currentlyChosenAbility);
+        Guardian guardian = team.get(switcher.getCurrentlyChosen());
+        guardian.abilityGraph.setActiveAbility(nr, currentlyChosenAbility);
         refreshAbilitySlotButtons();
     }
 

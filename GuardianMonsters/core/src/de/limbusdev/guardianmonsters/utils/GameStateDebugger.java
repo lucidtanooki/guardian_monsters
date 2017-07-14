@@ -21,7 +21,7 @@ import de.limbusdev.guardianmonsters.model.gamestate.GameState;
 import de.limbusdev.guardianmonsters.guardians.items.Inventory;
 import de.limbusdev.guardianmonsters.guardians.ItemDB;
 import de.limbusdev.guardianmonsters.guardians.items.Item;
-import de.limbusdev.guardianmonsters.guardians.monsters.Monster;
+import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
 import de.limbusdev.guardianmonsters.guardians.MonsterDB;
 import de.limbusdev.guardianmonsters.guardians.monsters.Team;
 
@@ -38,7 +38,7 @@ public class GameStateDebugger {
 
     private void setUpTestInventory() {
         TeamComponent herTeam = new TeamComponent();
-        Monster mon = BattleFactory.getInstance().createMonster(1);
+        Guardian mon = BattleFactory.getInstance().createMonster(1);
         mon.abilityGraph.activateNode(1);
         mon.abilityGraph.activateNode(5);
         mon.abilityGraph.activateNode(9);
@@ -151,15 +151,15 @@ public class GameStateDebugger {
         boolean enemyFit = true;
         while(enemyFit) {
             System.out.println("\n### Player's turn ###");
-            Monster m = bs.getActiveMonster();
+            Guardian m = bs.getActiveMonster();
             int att = MathUtils.random(0,m.abilityGraph.learntAbilities.size-1);
-            Array<Monster> targets = new Array<Monster>();
-            for(Monster h : oppTeam.values()) {
+            Array<Guardian> targets = new Array<Guardian>();
+            for(Guardian h : oppTeam.values()) {
                 if(h.stat.isFit()) {
                     targets.add(h);
                 }
             }
-            Monster target = targets.get(MathUtils.random(0,targets.size-1));
+            Guardian target = targets.get(MathUtils.random(0,targets.size-1));
             bs.attack(target,att);
         }
     }
@@ -175,7 +175,7 @@ public class GameStateDebugger {
 
     public void testResultScreen() {
         Team team = new Team(7,1,1);
-        Monster mon = BattleFactory.getInstance().createMonster(1);
+        Guardian mon = BattleFactory.getInstance().createMonster(1);
         mon.abilityGraph.activateNode(1);
         team.put(0,mon);
         team.put(1,BattleFactory.getInstance().createMonster(2));

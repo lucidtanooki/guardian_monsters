@@ -14,7 +14,7 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.HeroComponen
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PositionComponent;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.entities.HeroEntity;
 import de.limbusdev.guardianmonsters.enums.SkyDirection;
-import de.limbusdev.guardianmonsters.geometry.IntVec2;
+import de.limbusdev.guardianmonsters.utils.geometry.IntVec2;
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.HUD;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.entities.EntityFamilies;
 import de.limbusdev.guardianmonsters.Constant;

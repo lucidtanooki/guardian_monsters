@@ -4,7 +4,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 
-import de.limbusdev.guardianmonsters.guardians.monsters.Monster;
+import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.Team;
 
 /**
@@ -13,7 +13,7 @@ import de.limbusdev.guardianmonsters.guardians.monsters.Team;
  * @author Georg Eckert 2017
  */
 
-public class CombatTeam extends ArrayMap<Integer,Monster>
+public class CombatTeam extends ArrayMap<Integer,Guardian>
 {
     /**
      * Returns a team of monsters for battle. Team size is determined by the maximum possible
@@ -44,22 +44,22 @@ public class CombatTeam extends ArrayMap<Integer,Monster>
 
     /**
      * Returns the current position of the given monster on the battle field
-     * @param monster
+     * @param guardian
      * @return battle field position
      */
-    public int getFieldPosition(Monster monster) {
-        if(!containsValue(monster,false)) {
-            throw new IllegalArgumentException("Monster " + monster.toString() + " is not in this CombatTeam");
+    public int getFieldPosition(Guardian guardian) {
+        if(!containsValue(guardian,false)) {
+            throw new IllegalArgumentException("Monster " + guardian.toString() + " is not in this CombatTeam");
         }
-        return getKey(monster,false);
+        return getKey(guardian,false);
     }
 
-    public boolean isMember(Monster monster) {
-        return containsValue(monster,false);
+    public boolean isMember(Guardian guardian) {
+        return containsValue(guardian,false);
     }
 
-    public Monster exchange(int position, Monster substitute) {
-        Monster replaced = get(position);
+    public Guardian exchange(int position, Guardian substitute) {
+        Guardian replaced = get(position);
         put(position, substitute);
         return replaced;
     }
@@ -67,8 +67,8 @@ public class CombatTeam extends ArrayMap<Integer,Monster>
     public int getRandomFitPosition() {
         Array<Integer> fitPositions = new Array<>();
         for(int key : keys()) {
-            Monster monster = get(key);
-            if(monster.stat.isFit()) {
+            Guardian guardian = get(key);
+            if(guardian.stat.isFit()) {
                 fitPositions.add(key);
             }
         }
@@ -79,7 +79,7 @@ public class CombatTeam extends ArrayMap<Integer,Monster>
      * Returns a random fit monster of this combat team
      * @return
      */
-    public Monster getRandomFitMember() {
+    public Guardian getRandomFitMember() {
         return get(getRandomFitPosition());
     }
 
@@ -89,8 +89,8 @@ public class CombatTeam extends ArrayMap<Integer,Monster>
      */
     public boolean isKO() {
         boolean ko = true;
-        for(Monster monster : values()) {
-            ko = ko && monster.stat.isKO();
+        for(Guardian guardian : values()) {
+            ko = ko && guardian.stat.isKO();
         }
         return ko;
     }

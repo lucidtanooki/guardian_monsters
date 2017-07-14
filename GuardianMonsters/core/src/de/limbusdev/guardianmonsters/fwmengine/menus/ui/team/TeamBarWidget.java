@@ -5,8 +5,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ArrayMap;
 
-import de.limbusdev.guardianmonsters.geometry.IntVec2;
-import de.limbusdev.guardianmonsters.guardians.monsters.Monster;
+import de.limbusdev.guardianmonsters.utils.geometry.IntVec2;
+import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
 
 /**
  * @author Georg Eckert 2017
@@ -15,7 +15,7 @@ import de.limbusdev.guardianmonsters.guardians.monsters.Monster;
 public class TeamBarWidget extends ATeamChoiceWidget {
 
 
-    public TeamBarWidget(Skin skin, ArrayMap<Integer, Monster> team, Callbacks callbacks) {
+    public TeamBarWidget(Skin skin, ArrayMap<Integer, Guardian> team, Callbacks callbacks) {
         super(skin, callbacks);
 
         setSize(260,44);

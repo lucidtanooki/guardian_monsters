@@ -1,7 +1,7 @@
 package de.limbusdev.guardianmonsters.model.gamestate;
 
 import de.limbusdev.guardianmonsters.guardians.abilities.AbilityGraph;
-import de.limbusdev.guardianmonsters.guardians.monsters.Monster;
+import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.Stat;
 
 /**
@@ -20,21 +20,21 @@ public class SerializableMonster {
     @ForSerializationOnly
     public SerializableMonster() {}
 
-    public SerializableMonster(Monster monster) {
-        this.ID = monster.ID;
-        this.nickname = monster.nickname;
-        this.graph = new SerializableAbilityGraph(monster.abilityGraph);
-        this.stat = new SerializableStat(monster.stat);
+    public SerializableMonster(Guardian guardian) {
+        this.ID = guardian.ID;
+        this.nickname = guardian.nickname;
+        this.graph = new SerializableAbilityGraph(guardian.abilityGraph);
+        this.stat = new SerializableStat(guardian.stat);
     }
 
-    public static Monster deserialize(SerializableMonster sMonster) {
+    public static Guardian deserialize(SerializableMonster sMonster) {
 
         AbilityGraph graph = SerializableAbilityGraph.deserialize(sMonster.graph);
         Stat stat = SerializableStat.deserialize(sMonster.stat);
 
         new SerializableStat();
 
-        return new Monster(sMonster.ID, sMonster.nickname, graph, stat);
+        return new Guardian(sMonster.ID, sMonster.nickname, graph, stat);
     }
 
 }

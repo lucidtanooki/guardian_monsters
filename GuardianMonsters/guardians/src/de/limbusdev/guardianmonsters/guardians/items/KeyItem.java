@@ -1,7 +1,7 @@
 package de.limbusdev.guardianmonsters.guardians.items;
 
 
-import de.limbusdev.guardianmonsters.guardians.monsters.Monster;
+import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
 
 /**
  * KeyItem
@@ -16,12 +16,12 @@ public class KeyItem extends Item {
     }
 
     @Override
-    public void apply(Monster m) {
+    public void apply(Guardian m) {
         // Do nothing
     }
 
     @Override
-    public boolean applicable(Monster m) {
+    public boolean applicable(Guardian m) {
         return false;
     }
 }

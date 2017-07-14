@@ -14,7 +14,7 @@ import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.scene2d.AnimatedImage;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.widgets.OverlayWidget;
 import de.limbusdev.guardianmonsters.guardians.monsters.LevelUpReport;
-import de.limbusdev.guardianmonsters.guardians.monsters.Monster;
+import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
 import de.limbusdev.guardianmonsters.Constant;
 
 /**
@@ -26,7 +26,7 @@ import de.limbusdev.guardianmonsters.Constant;
 public class LevelUpWidget extends OverlayWidget {
     private Image monsterImg;
 
-    public LevelUpWidget(Skin skin, Monster monster) {
+    public LevelUpWidget(Skin skin, Guardian guardian) {
         super(skin);
 
         Label bg = new Label("", skin, "paper");
@@ -34,7 +34,7 @@ public class LevelUpWidget extends OverlayWidget {
         bg.setPosition(Constant.WIDTH/2-150,30,Align.bottomLeft);
         addActor(bg);
 
-        monsterImg = new Image(Services.getMedia().getMonsterSprite(monster.ID));
+        monsterImg = new Image(Services.getMedia().getMonsterSprite(guardian.ID));
         monsterImg.setPosition(64,64, Align.bottomLeft);
         addActor(monsterImg);
 
@@ -48,7 +48,7 @@ public class LevelUpWidget extends OverlayWidget {
             }
         });
 
-        Label info = new Label(Services.getL18N().Battle().format("level_up", monster.getName()), skin, "default");
+        Label info = new Label(Services.getL18N().Battle().format("level_up", guardian.getName()), skin, "default");
         info.setSize(140,32);
         info.setPosition(128+64,140,Align.bottomLeft);
         info.setWrap(true);
@@ -58,7 +58,7 @@ public class LevelUpWidget extends OverlayWidget {
 
         // Values
 
-        LevelUpReport lvlUp = monster.stat.getLatestLevelUpReport();
+        LevelUpReport lvlUp = guardian.stat.getLatestLevelUpReport();
 
         Table values = new Table();
         values.align(Align.topLeft);

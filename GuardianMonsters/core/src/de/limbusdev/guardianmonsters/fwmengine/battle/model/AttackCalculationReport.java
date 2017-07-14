@@ -4,21 +4,21 @@ import de.limbusdev.guardianmonsters.fwmengine.battle.ui.AnimationType;
 import de.limbusdev.guardianmonsters.media.SFXType;
 import de.limbusdev.guardianmonsters.guardians.Element;
 import de.limbusdev.guardianmonsters.guardians.abilities.Ability;
-import de.limbusdev.guardianmonsters.guardians.monsters.Monster;
+import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
 
 /**
  * Contains information about the effect of an attack on another monster
  * Created by georg on 07.09.16.
  */
 public class AttackCalculationReport {
-    public Monster attacker;
-    public Monster defender;
+    public Guardian attacker;
+    public Guardian defender;
     public Ability attack;
 
     public int damage;
     public float effectiveness;
 
-    public AttackCalculationReport(Monster att, Monster def, int damage, float effectiveness, Ability ability) {
+    public AttackCalculationReport(Guardian att, Guardian def, int damage, float effectiveness, Ability ability) {
         this.attacker = att;
         this.defender = def;
         this.damage = damage;
@@ -28,10 +28,10 @@ public class AttackCalculationReport {
 
     /**
      * Report for defending monster
-     * @param defensiveMonster
+     * @param defensiveGuardian
      */
-    public AttackCalculationReport(Monster defensiveMonster) {
-        this.attacker = defensiveMonster;
+    public AttackCalculationReport(Guardian defensiveGuardian) {
+        this.attacker = defensiveGuardian;
         this.defender = null;
         this.damage = 0;
         this.effectiveness = 0;

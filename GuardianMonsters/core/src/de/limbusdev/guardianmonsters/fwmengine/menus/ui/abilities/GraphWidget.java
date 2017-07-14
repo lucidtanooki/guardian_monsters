@@ -11,7 +11,7 @@ import com.badlogic.gdx.utils.ArrayMap;
 import de.limbusdev.guardianmonsters.guardians.abilities.AbilityGraph;
 import de.limbusdev.guardianmonsters.guardians.abilities.Edge;
 import de.limbusdev.guardianmonsters.guardians.abilities.Node;
-import de.limbusdev.guardianmonsters.guardians.monsters.Monster;
+import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
 
 /**
  * @author Georg Eckert 2017
@@ -28,7 +28,7 @@ public class GraphWidget extends Group {
     private ArrayMap<Integer,NodeWidget> nodeWidgets;
     private ArrayMap<Node,Array<EdgeWidget>> edgeWidgets;
 
-    private Monster currentMonster;
+    private Guardian currentGuardian;
 
 
     public GraphWidget(Skin skin, Controller callbacks) {
@@ -50,10 +50,10 @@ public class GraphWidget extends Group {
 
 
 
-    public void init(Monster monster) {
+    public void init(Guardian guardian) {
         clear();
-        currentMonster = monster;
-        this.graph = monster.abilityGraph;
+        currentGuardian = guardian;
+        this.graph = guardian.abilityGraph;
 
         edgeWidgets.clear();
         for(Edge edge : graph.getEdges()) {

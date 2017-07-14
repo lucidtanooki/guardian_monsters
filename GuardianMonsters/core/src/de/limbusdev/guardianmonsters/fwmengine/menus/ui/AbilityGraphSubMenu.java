@@ -13,7 +13,7 @@ import de.limbusdev.guardianmonsters.fwmengine.menus.ui.team.TeamMemberSwitcher;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.widgets.LogoWithCounter;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.widgets.ScrollableWidget;
 import de.limbusdev.guardianmonsters.fwmengine.metamorphosis.MetamorphosisScreen;
-import de.limbusdev.guardianmonsters.guardians.monsters.Monster;
+import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
 import de.limbusdev.guardianmonsters.Constant;
 
 
@@ -24,21 +24,21 @@ import de.limbusdev.guardianmonsters.Constant;
  * @author Georg Eckert 2017
  */
 
-public class AbilityGraphSubMenu extends AInventorySubMenu implements Listener<Monster>,
+public class AbilityGraphSubMenu extends AInventorySubMenu implements Listener<Guardian>,
     GraphWidget.Controller, TeamMemberSwitcher.Callbacks, AbilityDetailWidget.Callbacks {
 
-    private ArrayMap<Integer, Monster> team;
+    private ArrayMap<Integer, Guardian> team;
     private GraphWidget graphWidget;
     private AbilityDetailWidget details;
     private TeamMemberSwitcher switcher;
     LogoWithCounter remainingLevels;
 
     // ................................................................................. CONSTRUCTOR
-    public AbilityGraphSubMenu(Skin skin, ArrayMap<Integer, Monster> team) {
+    public AbilityGraphSubMenu(Skin skin, ArrayMap<Integer, Guardian> team) {
         super(skin);
         this.team = team;
 
-        for (Monster m : this.team.values()) {
+        for (Guardian m : this.team.values()) {
             m.add(this);
         }
 
@@ -71,8 +71,8 @@ public class AbilityGraphSubMenu extends AInventorySubMenu implements Listener<M
      */
     @Override
     public void refresh() {
-        Monster activeMonster = team.get(switcher.getCurrentlyChosen());
-        remainingLevels.counter.setText(Integer.toString(activeMonster.stat.getAbilityLevels()));
+        Guardian activeGuardian = team.get(switcher.getCurrentlyChosen());
+        remainingLevels.counter.setText(Integer.toString(activeGuardian.stat.getAbilityLevels()));
     }
 
 
@@ -80,8 +80,8 @@ public class AbilityGraphSubMenu extends AInventorySubMenu implements Listener<M
     // ........................................................................... INTERFACE METHODS
     @Override
     public void onNodeClicked(int nodeID) {
-        Monster monster = team.get(switcher.getCurrentlyChosen());
-        details.init(monster, nodeID, false);
+        Guardian guardian = team.get(switcher.getCurrentlyChosen());
+        details.init(guardian, nodeID, false);
     }
 
     @Override
@@ -92,7 +92,7 @@ public class AbilityGraphSubMenu extends AInventorySubMenu implements Listener<M
 
     @Override
     public void onLearn(int nodeID) {
-        Monster m = team.get(switcher.getCurrentlyChosen());
+        Guardian m = team.get(switcher.getCurrentlyChosen());
         m.stat.consumeAbilityLevel();
         m.abilityGraph.activateNode(nodeID);
         details.init(m, nodeID, false);
@@ -102,8 +102,8 @@ public class AbilityGraphSubMenu extends AInventorySubMenu implements Listener<M
     }
 
     @Override
-    public void receive(Signal<Monster> signal, Monster monster) {
-        if(monster.equalsMonster(team.get(switcher.getCurrentlyChosen()))) {
+    public void receive(Signal<Guardian> signal, Guardian guardian) {
+        if(guardian.equalsMonster(team.get(switcher.getCurrentlyChosen()))) {
             refresh();
         }
     }

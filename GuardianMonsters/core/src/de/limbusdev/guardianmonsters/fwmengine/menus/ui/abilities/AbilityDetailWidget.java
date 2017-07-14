@@ -18,7 +18,7 @@ import de.limbusdev.guardianmonsters.guardians.abilities.Ability;
 import de.limbusdev.guardianmonsters.guardians.abilities.AbilityGraph;
 import de.limbusdev.guardianmonsters.guardians.abilities.Node;
 import de.limbusdev.guardianmonsters.guardians.items.BodyPart;
-import de.limbusdev.guardianmonsters.guardians.monsters.Monster;
+import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.Stat;
 
 
@@ -112,12 +112,12 @@ public class AbilityDetailWidget extends Container {
         learn.setVisible(showLearnButton);
     }
 
-    public void init(Monster monster, int nodeID, boolean forceShowLearnButton) {
+    public void init(Guardian guardian, int nodeID, boolean forceShowLearnButton) {
         this.nodeID = nodeID;
 
-        AbilityGraph graph = monster.abilityGraph;
+        AbilityGraph graph = guardian.abilityGraph;
         Node.Type type = graph.nodeTypeAt(nodeID);
-        Stat stat = monster.stat;
+        Stat stat = guardian.stat;
 
         boolean showLearnButton = ((stat.hasAbilityPoints() && graph.isNodeEnabled(nodeID)) || forceShowLearnButton);
         setLayout(type, showLearnButton);

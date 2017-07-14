@@ -13,7 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 import com.badlogic.gdx.utils.Align;
 
 import de.limbusdev.guardianmonsters.services.Services;
-import de.limbusdev.guardianmonsters.guardians.monsters.Monster;
+import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
 import de.limbusdev.guardianmonsters.guardians.MonsterDB;
 import de.limbusdev.guardianmonsters.guardians.monsters.Stat;
 import de.limbusdev.guardianmonsters.Constant;
@@ -23,7 +23,7 @@ import de.limbusdev.guardianmonsters.Constant;
  * HINT: Don't forget calling the init() method
  * Created by georg on 03.07.16.
  */
-public class MonsterStateWidget extends WidgetGroup implements Listener<Monster> {
+public class MonsterStateWidget extends WidgetGroup implements Listener<Guardian> {
     private ProgressBar hpBar;
     private ProgressBar mpBar;
     private ProgressBar epBar;
@@ -97,16 +97,16 @@ public class MonsterStateWidget extends WidgetGroup implements Listener<Monster>
 
     /**
      * Initializes the widget to show a monsters status values
-     * @param monster
+     * @param guardian
      */
-    public void init(Monster monster) {
-        refresh(monster);
-        nameLabel.setText(Services.getL18N().Guardians().get((MonsterDB.getInstance().getNameById(monster.ID))));
-        monster.add(this);
+    public void init(Guardian guardian) {
+        refresh(guardian);
+        nameLabel.setText(Services.getL18N().Guardians().get((MonsterDB.getInstance().getNameById(guardian.ID))));
+        guardian.add(this);
     }
 
-    public void refresh(Monster monster) {
-        Stat stat = monster.stat;
+    public void refresh(Guardian guardian) {
+        Stat stat = guardian.stat;
         this.hpBar.setValue(stat.getHPfraction());
         this.mpBar.setValue(stat.getMPfraction());
         this.epBar.setValue(stat.getEXPfraction());
@@ -130,7 +130,7 @@ public class MonsterStateWidget extends WidgetGroup implements Listener<Monster>
     }
 
     @Override
-    public void receive(Signal<Monster> signal, Monster monster) {
-        refresh(monster);
+    public void receive(Signal<Guardian> signal, Guardian guardian) {
+        refresh(guardian);
     }
 }

@@ -2,7 +2,7 @@ package de.limbusdev.guardianmonsters.fwmengine.battle.control;
 
 import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.AttackCalculationReport;
-import de.limbusdev.guardianmonsters.guardians.monsters.Monster;
+import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
 import de.limbusdev.guardianmonsters.guardians.MonsterDB;
 
 /**
@@ -14,13 +14,13 @@ public class BattleStringBuilder {
     /* ........................................................................... CONSTRUCTOR .. */
     
     /* ............................................................................... METHODS .. */
-    public static String receivedDamage(Monster victim, int damage) {
+    public static String receivedDamage(Guardian victim, int damage) {
         String text = MonsterDB.getInstance().getNameById(victim.ID)
             + " lost " + damage + " HP";
         return text;
     }
 
-    public static String givenDamage(Monster attacker, Monster victim, AttackCalculationReport report) {
+    public static String givenDamage(Guardian attacker, Guardian victim, AttackCalculationReport report) {
         String attName = MonsterDB.getInstance().getNameById(attacker.ID);
         String defName = MonsterDB.getInstance().getNameById(victim.ID);
 
@@ -45,8 +45,8 @@ public class BattleStringBuilder {
         return message;
     }
 
-    public static String selfDefense(Monster defensiveMonster) {
-        String defName = defensiveMonster.getName();
+    public static String selfDefense(Guardian defensiveGuardian) {
+        String defName = defensiveGuardian.getName();
         String message = defName + " " + Services.getL18N().Battle().get("suff_defense");
         return message;
     }

@@ -9,8 +9,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Align;
 
-import de.limbusdev.guardianmonsters.geometry.IntVec2;
-import de.limbusdev.guardianmonsters.guardians.monsters.Monster;
+import de.limbusdev.guardianmonsters.utils.geometry.IntVec2;
+import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
 
 /**
  * Draws a monsters values as a pentaggon of PStrength, PDefense,
@@ -42,12 +42,12 @@ public class StatusPentagonWidget extends Group {
         addActor(statPentagon);
     }
 
-    public void init(Monster monster) {
-        float pstr = monster.stat.getPStrMax() / monster.stat.getMaxPossiblePStr()*32f;
-        float pdef = monster.stat.getPDefMax() / monster.stat.getMaxPossiblePDef()*32f;
-        float mstr = monster.stat.getMStrMax() / monster.stat.getMaxPossibleMStr()*32f;
-        float mdef = monster.stat.getMDefMax() / monster.stat.getMaxPossibleMDef()*32f;
-        float speed= monster.stat.getSpeedMax()/ monster.stat.getMaxPossibleSpeed()*32f;
+    public void init(Guardian guardian) {
+        float pstr = guardian.stat.getPStrMax() / guardian.stat.getMaxPossiblePStr()*32f;
+        float pdef = guardian.stat.getPDefMax() / guardian.stat.getMaxPossiblePDef()*32f;
+        float mstr = guardian.stat.getMStrMax() / guardian.stat.getMaxPossibleMStr()*32f;
+        float mdef = guardian.stat.getMDefMax() / guardian.stat.getMaxPossibleMDef()*32f;
+        float speed= guardian.stat.getSpeedMax()/ guardian.stat.getMaxPossibleSpeed()*32f;
 
         points = new float[10];
 

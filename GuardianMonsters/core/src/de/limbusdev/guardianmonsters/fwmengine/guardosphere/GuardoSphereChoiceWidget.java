@@ -13,7 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 
-import de.limbusdev.guardianmonsters.guardians.monsters.Monster;
+import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
 
 /**
  * GuardoSphereChoiceWidget
@@ -74,8 +74,8 @@ public class GuardoSphereChoiceWidget extends Group {
             }
             if(sphere.containsKey(i)) {
                 final int key = i;
-                Monster monster = sphere.get(i);
-                ImageButton monsterButton = new GuardoSphereButton(skin, monster);
+                Guardian guardian = sphere.get(i);
+                ImageButton monsterButton = new GuardoSphereButton(skin, guardian);
 
                 table.add(monsterButton).width(32).height(32);
                 buttons.add(monsterButton);

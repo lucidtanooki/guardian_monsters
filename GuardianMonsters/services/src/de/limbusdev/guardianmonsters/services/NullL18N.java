@@ -3,7 +3,7 @@ package de.limbusdev.guardianmonsters.services;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.utils.I18NBundle;
 
-import de.limbusdev.guardianmonsters.guardians.monsters.Monster;
+import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
 
 public class NullL18N implements L18N
 {
@@ -55,7 +55,7 @@ public class NullL18N implements L18N
     }
 
     @Override
-    public String getLocalizedGuardianName(Monster monster)
+    public String getLocalizedGuardianName(Guardian guardian)
     {
         return null;
     }

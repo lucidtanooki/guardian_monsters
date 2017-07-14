@@ -7,7 +7,7 @@ import com.badlogic.gdx.utils.ArrayMap;
 import de.limbusdev.guardianmonsters.guardians.abilities.Ability;
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.AttackCalculationReport;
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.ElemEff;
-import de.limbusdev.guardianmonsters.guardians.monsters.Monster;
+import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
 import de.limbusdev.guardianmonsters.services.Services;
 
 /**
@@ -25,14 +25,14 @@ public class MonsterManager {
 
     /**
      * Call this, when a monster decides not to attack and instead defends itself
-     * @param defensiveMonster
+     * @param defensiveGuardian
      * @return
      */
-    public static AttackCalculationReport calcDefense(Monster defensiveMonster) {
+    public static AttackCalculationReport calcDefense(Guardian defensiveGuardian) {
         System.out.println("Monster defends itself");
-        AttackCalculationReport report = new AttackCalculationReport(defensiveMonster);
-        defensiveMonster.stat.increasePDef(5);
-        defensiveMonster.stat.increaseMDef(5);
+        AttackCalculationReport report = new AttackCalculationReport(defensiveGuardian);
+        defensiveGuardian.stat.increasePDef(5);
+        defensiveGuardian.stat.increaseMDef(5);
 
         return report;
     }
@@ -46,7 +46,7 @@ public class MonsterManager {
      * @param def
      * @return
      */
-    public static AttackCalculationReport calcAttack(Monster att, Monster def, Ability ability)
+    public static AttackCalculationReport calcAttack(Guardian att, Guardian def, Ability ability)
     {
         System.out.println("\n--- new ability ---");
         AttackCalculationReport report = new AttackCalculationReport(att, def, 0, 0, ability);
@@ -88,18 +88,18 @@ public class MonsterManager {
         report.attacker.stat.decreaseMP(report.attack.MPcost);
     }
 
-    public static boolean tryToRun(ArrayMap<Integer,Monster> escapingTeam, ArrayMap<Integer,Monster> attackingTeam) {
+    public static boolean tryToRun(ArrayMap<Integer,Guardian> escapingTeam, ArrayMap<Integer,Guardian> attackingTeam) {
         float meanEscapingTeamLevel = 0;
         float meanAttackingTeamLevel = 0;
 
-        for(Monster m : escapingTeam.values()) {
+        for(Guardian m : escapingTeam.values()) {
             if(m.stat.isFit()) {
                 meanEscapingTeamLevel += m.stat.getLevel();
             }
         }
         meanEscapingTeamLevel /= escapingTeam.size;
 
-        for(Monster m : attackingTeam.values()) {
+        for(Guardian m : attackingTeam.values()) {
             meanAttackingTeamLevel += m.stat.getLevel();
         }
         meanAttackingTeamLevel /= escapingTeam.size;

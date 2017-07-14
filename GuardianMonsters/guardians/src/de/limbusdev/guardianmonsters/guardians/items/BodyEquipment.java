@@ -1,7 +1,7 @@
 package de.limbusdev.guardianmonsters.guardians.items;
 
 
-import de.limbusdev.guardianmonsters.guardians.monsters.Monster;
+import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
 
 /**
  * BodyEquipment
@@ -27,7 +27,7 @@ public class BodyEquipment extends Equipment {
     }
 
     @Override
-    public boolean applicable(Monster m) {
+    public boolean applicable(Guardian m) {
         if(super.applicable(m)) {
             return (m.data.getBodyType() == type);
         } else {

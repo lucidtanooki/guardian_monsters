@@ -20,7 +20,7 @@ import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.fwmengine.ui.AHUD;
 import de.limbusdev.guardianmonsters.guardians.MonsterDB;
 import de.limbusdev.guardianmonsters.guardians.items.Item;
-import de.limbusdev.guardianmonsters.guardians.monsters.Monster;
+import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.Team;
 
 import static de.limbusdev.guardianmonsters.Constant.WIDTH;
@@ -39,7 +39,7 @@ public class BattleResultHUD extends AHUD {
     private Table table;
     private Button apply;
     private Button next;
-    private Array<Monster> reachedNextLevel;
+    private Array<Guardian> reachedNextLevel;
     private Group group;
 
     public BattleResultHUD(Skin skin, Team team, BattleResult result) {
@@ -54,18 +54,18 @@ public class BattleResultHUD extends AHUD {
     private void constructMonsterTable(final Team team, final BattleResult result) {
         table.clear();
         for(int key : team.keys()) {
-            Monster monster = team.get(key);
-            Image face = Services.getMedia().getMonsterFace(monster.ID);
+            Guardian guardian = team.get(key);
+            Image face = Services.getMedia().getMonsterFace(guardian.ID);
             table.add(face).left();
-            Label name = new Label(Services.getL18N().Guardians().get(MonsterDB.getNameById(monster.ID)), skin, "default");
+            Label name = new Label(Services.getL18N().Guardians().get(MonsterDB.getNameById(guardian.ID)), skin, "default");
             table.add(name).left();
             Image expKey = new Image(skin.getDrawable("symbol-exp"));
             table.add(expKey).left();
-            Label exp = new Label(Integer.toString(result.getGainedEXP(monster)), skin, "default");
+            Label exp = new Label(Integer.toString(result.getGainedEXP(guardian)), skin, "default");
             table.add(exp).width(48).left();
             Image lvlUpKey = new Image(skin.getDrawable("symbol-levelup"));
             table.add(lvlUpKey).left();
-            Label lvlUp = new Label(Integer.toString(monster.stat.getEXPtoNextLevel()), skin, "default");
+            Label lvlUp = new Label(Integer.toString(guardian.stat.getEXPtoNextLevel()), skin, "default");
             table.add(lvlUp).width(96).left();
             table.row().space(4);
         }

@@ -17,7 +17,7 @@ import de.limbusdev.guardianmonsters.fwmengine.menus.ui.team.MonsterStatusInvent
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.team.StatusPentagonWidget;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.team.TeamCircleWidget;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TeamComponent;
-import de.limbusdev.guardianmonsters.guardians.monsters.Monster;
+import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.Team;
 import de.limbusdev.guardianmonsters.Constant;
 
@@ -64,11 +64,11 @@ public class TeamSubMenu extends AInventorySubMenu
                 System.out.println("Clicked " + position);
                 int oldPos = circleWidget.getOldPosition();
                 if(position != oldPos) {
-                    Monster currentMonster = team.get(oldPos);
-                    Monster monsterToSwapWith = team.get(position);
+                    Guardian currentGuardian = team.get(oldPos);
+                    Guardian guardianToSwapWith = team.get(position);
 
-                    team.put(oldPos, monsterToSwapWith);
-                    team.put(position, currentMonster);
+                    team.put(oldPos, guardianToSwapWith);
+                    team.put(position, currentGuardian);
 
                     circleWidget.init(team);
                     showGuardianInformation(position);

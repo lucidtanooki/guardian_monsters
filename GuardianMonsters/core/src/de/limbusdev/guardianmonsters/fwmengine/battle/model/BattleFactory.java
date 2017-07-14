@@ -5,7 +5,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TeamComponent;
-import de.limbusdev.guardianmonsters.guardians.monsters.Monster;
+import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
 import de.limbusdev.guardianmonsters.fwmengine.world.model.MonsterArea;
 
 
@@ -14,7 +14,7 @@ import de.limbusdev.guardianmonsters.fwmengine.world.model.MonsterArea;
  */
 public class BattleFactory {
     /* ............................................................................ ATTRIBUTES .. */
-    private static ArrayMap<Integer,Monster> monsters;
+    private static ArrayMap<Integer,Guardian> monsters;
     private static BattleFactory instance;
     /* ........................................................................... CONSTRUCTOR .. */
 
@@ -27,10 +27,10 @@ public class BattleFactory {
     /* ............................................................................... METHODS .. */
     
     /* ..................................................................... GETTERS & SETTERS .. */
-    public Monster createMonster(int ID) {
-        Monster monster = new Monster(ID);
-        this.monsters.put(ID,monster);
-        return monster;
+    public Guardian createMonster(int ID) {
+        Guardian guardian = new Guardian(ID);
+        this.monsters.put(ID, guardian);
+        return guardian;
     }
 
     public static BattleFactory getInstance() {

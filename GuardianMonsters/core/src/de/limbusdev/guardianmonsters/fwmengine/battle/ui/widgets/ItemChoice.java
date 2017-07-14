@@ -15,7 +15,7 @@ import de.limbusdev.guardianmonsters.fwmengine.menus.ui.items.ItemListWidget;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.team.MonsterListWidget;
 import de.limbusdev.guardianmonsters.guardians.items.Inventory;
 import de.limbusdev.guardianmonsters.guardians.items.Item;
-import de.limbusdev.guardianmonsters.guardians.monsters.Monster;
+import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
 import de.limbusdev.guardianmonsters.Constant;
 
 /**
@@ -26,14 +26,14 @@ import de.limbusdev.guardianmonsters.Constant;
 
 public class ItemChoice extends Group {
 
-    private ArrayMap<Integer, Monster> team;
+    private ArrayMap<Integer, Guardian> team;
     private Inventory inventory;
     private MonsterListWidget guardianList;
     private Item chosenItem;
     private BattleSystem battleSystem;
     private ItemDetailViewWidget detailViewWidget;
 
-    public ItemChoice(Skin skin, Inventory inventory, ArrayMap<Integer,Monster> team, BattleSystem battleSystem) {
+    public ItemChoice(Skin skin, Inventory inventory, ArrayMap<Integer,Guardian> team, BattleSystem battleSystem) {
         this.team = team;
         this.inventory = inventory;
         this.battleSystem = battleSystem;

@@ -19,7 +19,7 @@ import static de.limbusdev.guardianmonsters.guardians.monsters.Stat.Growth.SLOW;
 import static de.limbusdev.guardianmonsters.guardians.monsters.Stat.Growth.SLOWHP;
 
 /**
- * Stat contains all statistic values of a {@link Monster}. The statistic values at level 1 should
+ * Stat contains all statistic values of a {@link Guardian}. The statistic values at level 1 should
  * be copied over from {@link BaseStat}
  *
  * The Status Values (Stats) are:
@@ -346,7 +346,7 @@ public class Stat extends Signal<Stat> {
     }
 
     /**
-     * Calculates the {@link EquipmentPotential} of a given {@link Equipment} for this {@link Monster}
+     * Calculates the {@link EquipmentPotential} of a given {@link Equipment} for this {@link Guardian}
      * @param eq
      * @return
      */

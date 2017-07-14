@@ -12,7 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 
-import de.limbusdev.guardianmonsters.guardians.monsters.Monster;
+import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.Team;
 
 /**
@@ -70,8 +70,8 @@ public class GuardoSphereTeamWidget extends Group {
         monsterButtons.clear();
 
         for(final Integer key : team.keys()) {
-            Monster monster = team.get(key);
-            ImageButton monsterButton = new GuardoSphereButton(skin, monster);
+            Guardian guardian = team.get(key);
+            ImageButton monsterButton = new GuardoSphereButton(skin, guardian);
             monsterButtons.addActor(monsterButton);
             buttons.add(monsterButton);
             buttonGroup.add(monsterButton);

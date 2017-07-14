@@ -4,7 +4,7 @@ package de.limbusdev.guardianmonsters.utils;
 import com.badlogic.gdx.utils.Array;
 
 import de.limbusdev.guardianmonsters.guardians.abilities.Ability;
-import de.limbusdev.guardianmonsters.guardians.monsters.Monster;
+import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
 import de.limbusdev.guardianmonsters.guardians.MonsterDB;
 
 /**
@@ -16,8 +16,8 @@ public class DebugOutput {
     /* ........................................................................... CONSTRUCTOR .. */
     
     /* ............................................................................... METHODS .. */
-    public static void printAttack(Monster attacker, int attPos,
-                                   Monster defender, int defPos,
+    public static void printAttack(Guardian attacker, int attPos,
+                                   Guardian defender, int defPos,
                                    Ability ability, int damage) {
         System.out.println("Attacker: "
                 + MonsterDB.getInstance().getNameById(attacker.ID) +
@@ -29,10 +29,10 @@ public class DebugOutput {
                 "Damage: " + damage);
     }
 
-    public static void printRound(Array<Monster> queue) {
+    public static void printRound(Array<Guardian> queue) {
         System.out.println("\nQueue: ");
         for (int i = 0; i < queue.size; i++) {
-            Monster m = queue.get(i);
+            Guardian m = queue.get(i);
             String name = m.getName();
             System.out.print("[" + i + "] " + name + "\t\t(" + m.stat.getSpeed() + "),");
             System.out.println("\tKP: " + m.stat.getHP() + "\tMP: " + m.stat.getMP());

@@ -20,7 +20,7 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ecs.entities.HeroEntity;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.GameArea;
 import de.limbusdev.guardianmonsters.enums.SkyDirection;
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.AnimatedPersonSprite;
-import de.limbusdev.guardianmonsters.geometry.IntVec2;
+import de.limbusdev.guardianmonsters.utils.geometry.IntVec2;
 import de.limbusdev.guardianmonsters.fwmengine.world.model.MapDescriptionInfo;
 import de.limbusdev.guardianmonsters.fwmengine.world.model.MapPersonInformation;
 import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager;

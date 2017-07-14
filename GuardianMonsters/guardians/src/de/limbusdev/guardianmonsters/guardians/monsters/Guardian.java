@@ -13,7 +13,8 @@ import de.limbusdev.guardianmonsters.guardians.abilities.AbilityGraph;
  *
  * @author Georg Eckert 2015
  */
-public class Monster extends Signal<Monster> implements Listener<Stat> {
+public class Guardian extends Signal<Guardian> implements Listener<Stat>
+{
     // ............................................................................................. STATIC
     public static int INSTANCECOUNTER=0;
 
@@ -29,7 +30,7 @@ public class Monster extends Signal<Monster> implements Listener<Stat> {
 
     // ............................................................................................. CONSTRUCTOR
 
-    public Monster(int ID) {
+    public Guardian(int ID) {
         this.INSTANCE_ID = INSTANCECOUNTER;
         INSTANCECOUNTER++;
 
@@ -59,7 +60,7 @@ public class Monster extends Signal<Monster> implements Listener<Stat> {
     /**
      * For Serialization Only!
      */
-    public Monster (int ID, String nickname, AbilityGraph abilityGraph, Stat stat) {
+    public Guardian(int ID, String nickname, AbilityGraph abilityGraph, Stat stat) {
         this.INSTANCE_ID = INSTANCECOUNTER;
         INSTANCECOUNTER++;
 
@@ -75,17 +76,17 @@ public class Monster extends Signal<Monster> implements Listener<Stat> {
 
 
     public boolean equals(Object monster) {
-        if(!(monster instanceof  Monster)) return false;
-        else return equalsMonster((Monster) monster);
+        if(!(monster instanceof Guardian)) return false;
+        else return equalsMonster((Guardian) monster);
     }
 
     /**
      * Checks wether two monster objects define the same monster
-     * @param otherMonster
+     * @param otherGuardian
      * @return
      */
-    public boolean equalsMonster(Monster otherMonster) {
-        if(INSTANCE_ID == otherMonster.INSTANCE_ID) return true;
+    public boolean equalsMonster(Guardian otherGuardian) {
+        if(INSTANCE_ID == otherGuardian.INSTANCE_ID) return true;
         else return false;
     }
 

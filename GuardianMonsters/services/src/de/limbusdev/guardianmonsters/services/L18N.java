@@ -3,6 +3,9 @@ package de.limbusdev.guardianmonsters.services;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.utils.I18NBundle;
 
+import de.limbusdev.guardianmonsters.guardians.Element;
+import de.limbusdev.guardianmonsters.guardians.monsters.Monster;
+
 
 /**
  * Singleton
@@ -27,6 +30,12 @@ public interface L18N {
     I18NBundle Inventory();
 
     I18NBundle Battle();
+
+    String getLocalizedGuardianName(Monster monster);
+
+    String getLocalizedGuardianName(int guardianID);
+
+    String getLocalizedAbilityName(String abilityID);
 
     void dispose();
 }

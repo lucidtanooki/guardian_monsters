@@ -3,14 +3,19 @@ package de.limbusdev.guardianmonsters.services;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.utils.I18NBundle;
 
-public class NullL18N implements L18N {
+import de.limbusdev.guardianmonsters.guardians.monsters.Monster;
+
+public class NullL18N implements L18N
+{
     @Override
-    public I18NBundle l18n(String type) {
+    public I18NBundle l18n(String type)
+    {
         return null;
     }
 
     @Override
-    public I18NBundle l18nMap(int mapID) {
+    public I18NBundle l18nMap(int mapID)
+    {
         return null;
     }
 
@@ -46,6 +51,24 @@ public class NullL18N implements L18N {
 
     @Override
     public I18NBundle Battle() {
+        return null;
+    }
+
+    @Override
+    public String getLocalizedGuardianName(Monster monster)
+    {
+        return null;
+    }
+
+    @Override
+    public String getLocalizedGuardianName(int guardianID)
+    {
+        return null;
+    }
+
+    @Override
+    public String getLocalizedAbilityName(String abilityID)
+    {
         return null;
     }
 

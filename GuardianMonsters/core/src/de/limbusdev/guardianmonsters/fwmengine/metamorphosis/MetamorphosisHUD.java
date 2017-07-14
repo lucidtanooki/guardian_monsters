@@ -41,8 +41,8 @@ public class MetamorphosisHUD extends AHUD {
         final IMediaManager media = Services.getMedia();
 
         String[] monsterNames = {
-            MonsterDB.getLocalNameById(before),
-            MonsterDB.getLocalNameById(after)
+            Services.getL18N().getLocalizedGuardianName(before),
+            Services.getL18N().getLocalizedGuardianName(after)
         };
 
         final String[] messages =  {

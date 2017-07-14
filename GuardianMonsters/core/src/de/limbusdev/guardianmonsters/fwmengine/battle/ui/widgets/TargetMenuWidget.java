@@ -3,12 +3,15 @@ package de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets;
 import com.badlogic.ashley.signals.Listener;
 import com.badlogic.ashley.signals.Signal;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.utils.I18NBundle;
 
 import de.limbusdev.guardianmonsters.fwmengine.battle.control.BattleQueue;
 import de.limbusdev.guardianmonsters.fwmengine.battle.control.BattleSystem;
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.CombatTeam;
 import de.limbusdev.guardianmonsters.guardians.monsters.Monster;
 import de.limbusdev.guardianmonsters.guardians.MonsterDB;
+import de.limbusdev.guardianmonsters.services.LocalizationManager;
+import de.limbusdev.guardianmonsters.services.Services;
 
 import static de.limbusdev.guardianmonsters.Constant.LEFT;
 import static de.limbusdev.guardianmonsters.Constant.RIGHT;
@@ -49,9 +52,10 @@ public class TargetMenuWidget extends SevenButtonsWidget implements Listener<Mon
             rightTeam = team;
         }
 
-        for(int key : team.keys()) {
+        for(int key : team.keys())
+        {
             Monster m = team.get(key);
-            setButtonText(key + offset, MonsterDB.getLocalNameById(m.ID));
+            setButtonText(key + offset, Services.getL18N().getLocalizedGuardianName(m));
             enableButton(key + offset);
 
             // Add the TargetMenuWidget as a Listener

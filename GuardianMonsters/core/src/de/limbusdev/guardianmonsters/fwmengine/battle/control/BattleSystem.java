@@ -9,10 +9,10 @@ import de.limbusdev.guardianmonsters.fwmengine.battle.model.BattleResult;
 import de.limbusdev.guardianmonsters.guardians.abilities.Ability;
 import de.limbusdev.guardianmonsters.guardians.monsters.Monster;
 import de.limbusdev.guardianmonsters.guardians.monsters.Team;
-import de.limbusdev.guardianmonsters.Constant;
 
 import static de.limbusdev.guardianmonsters.Constant.LEFT;
 import static de.limbusdev.guardianmonsters.Constant.RIGHT;
+import static de.limbusdev.guardianmonsters.guardians.Constant.BASE_EXP;
 
 /**
  * @author Georg Eckert 2017
@@ -158,7 +158,7 @@ public class BattleSystem {
         for(Monster m : queue.getCombatTeamLeft().values()) {
             if(m.stat.isFit()) {
                 float opponentFactor = 1f * defeatedMonster.stat.getLevel() / m.stat.getLevel();
-                int EXP = MathUtils.floor(Constant.BASE_EXP * defeatedMonster.stat.getLevel() / 6f * opponentFactor);
+                int EXP = MathUtils.floor(BASE_EXP * defeatedMonster.stat.getLevel() / 6f * opponentFactor);
                 result.gainEXP(m, EXP);
                 boolean levelUp = m.stat.earnEXP(EXP);
                 if(levelUp) {

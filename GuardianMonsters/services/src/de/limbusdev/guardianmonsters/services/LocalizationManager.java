@@ -11,13 +11,17 @@ import com.badlogic.gdx.utils.I18NBundle;
 import java.util.Locale;
 
 import de.limbusdev.guardianmonsters.assets.paths.AssetPath;
+import de.limbusdev.guardianmonsters.guardians.Element;
+import de.limbusdev.guardianmonsters.guardians.MonsterDB;
+import de.limbusdev.guardianmonsters.guardians.monsters.Monster;
 
 
 /**
  * @author Georg Eckert 2017
  */
 
-public class LocalizationManager implements L18N {
+public class LocalizationManager implements L18N
+{
 
     private ArrayMap<String,I18NBundle> l18n;
     private ArrayMap<Integer,I18NBundle> l18nMap;
@@ -104,6 +108,28 @@ public class LocalizationManager implements L18N {
     @Override
     public I18NBundle Battle() {
         return this.l18n.get(AssetPath.I18N.BATTLE);
+    }
+
+    @Override
+    public String getLocalizedGuardianName(Monster monster)
+    {
+        if(!monster.nickname.isEmpty()) {
+            return monster.nickname;
+        } else {
+            return Guardians().get(monster.getName());
+        }
+    }
+
+    @Override
+    public String getLocalizedGuardianName(int guardianID)
+    {
+        return Guardians().get(MonsterDB.getNameById(guardianID));
+    }
+
+    @Override
+    public String getLocalizedAbilityName(String abilityID)
+    {
+        return Abilities().get(abilityID);
     }
 
     @Override

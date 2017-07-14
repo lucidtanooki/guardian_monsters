@@ -39,7 +39,7 @@ public class BattleStringBuilder {
             "batt_message",
             attacker.getName(),
             victim.getName(),
-            report.attack.getLocalName(),
+            Services.getL18N().getLocalizedAbilityName(report.attack.name),
             report.damage, eff);
 
         return message;

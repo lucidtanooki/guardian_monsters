@@ -14,6 +14,7 @@ import com.badlogic.gdx.utils.ArrayMap;
 import de.limbusdev.guardianmonsters.assets.paths.AssetPath;
 import de.limbusdev.guardianmonsters.fwmengine.battle.control.BattleQueue;
 import de.limbusdev.guardianmonsters.fwmengine.battle.control.BattleSystem;
+import de.limbusdev.guardianmonsters.fwmengine.battle.ui.AnimationType;
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.ImageZComparator;
 import de.limbusdev.guardianmonsters.geometry.IntVec2;
 import de.limbusdev.guardianmonsters.media.IMediaManager;
@@ -264,7 +265,7 @@ public class BattleAnimationWidget extends BattleWidget{
         // Animates the impact of the ability on the target
         Action animateImpactAction = Actions.run(() -> animateAttackImpact(targetPos, defSide));
 
-        switch(ability.animationType) {
+        switch(AnimationType.valueOf(ability.animationType.toUpperCase())) {
             case CONTACT:
                 action = Actions.sequence(delayAction,moveToTargetAction,attackAnimationAction,
                     playSFXAction,animateImpactAction,callbackAction,moveToOriginAction);
@@ -326,7 +327,8 @@ public class BattleAnimationWidget extends BattleWidget{
         }
         sra.setAlign(Align.bottom);
 
-        switch(ability.animationType) {
+        switch(AnimationType.valueOf(ability.animationType.toUpperCase()))
+        {
             case MOVING_HOR:
                 anim.setFrameDuration(1f/anim.getKeyFrames().length);
                 sra.setPosition(origin.x, origin.y, Align.bottom);

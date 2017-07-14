@@ -46,8 +46,8 @@ public class BattleQueue extends Signal<BattleQueue.QueueSignal> {
         currentRound = new Array<>();
         nextRound = new Array<>();
 
-        combatTeamLeft = left.getCombatTeam();
-        combatTeamRight = right.getCombatTeam();
+        combatTeamLeft = new CombatTeam(left);
+        combatTeamRight = new CombatTeam(right);
         currentRound.addAll(combatTeamLeft.values().toArray());
         currentRound.addAll(combatTeamRight.values().toArray());
         currentRound.sort(new MonsterSpeedComparator());

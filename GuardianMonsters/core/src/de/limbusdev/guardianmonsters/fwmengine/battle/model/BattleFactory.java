@@ -5,7 +5,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TeamComponent;
-import de.limbusdev.guardianmonsters.model.monsters.Monster;
+import de.limbusdev.guardianmonsters.guardians.monsters.Monster;
 import de.limbusdev.guardianmonsters.fwmengine.world.model.MonsterArea;
 
 

@@ -18,8 +18,8 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ui.ImageZComparator;
 import de.limbusdev.guardianmonsters.geometry.IntVec2;
 import de.limbusdev.guardianmonsters.media.IMediaManager;
 import de.limbusdev.guardianmonsters.services.Services;
-import de.limbusdev.guardianmonsters.model.abilities.Ability;
-import de.limbusdev.guardianmonsters.model.monsters.Monster;
+import de.limbusdev.guardianmonsters.guardians.abilities.Ability;
+import de.limbusdev.guardianmonsters.guardians.monsters.Monster;
 
 /**
  * Widget for displaying monster status in battle: HP, MP, EXP, Name, Level

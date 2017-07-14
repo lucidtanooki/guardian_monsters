@@ -2,9 +2,9 @@ package de.limbusdev.guardianmonsters.fwmengine.battle.model;
 
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.AnimationType;
 import de.limbusdev.guardianmonsters.media.SFXType;
-import de.limbusdev.guardianmonsters.enums.Element;
-import de.limbusdev.guardianmonsters.model.abilities.Ability;
-import de.limbusdev.guardianmonsters.model.monsters.Monster;
+import de.limbusdev.guardianmonsters.guardians.Element;
+import de.limbusdev.guardianmonsters.guardians.abilities.Ability;
+import de.limbusdev.guardianmonsters.guardians.monsters.Monster;
 
 /**
  * Contains information about the effect of an attack on another monster

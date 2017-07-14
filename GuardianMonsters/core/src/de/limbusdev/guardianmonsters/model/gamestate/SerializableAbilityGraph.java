@@ -3,11 +3,11 @@ package de.limbusdev.guardianmonsters.model.gamestate;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 
-import de.limbusdev.guardianmonsters.model.abilities.Ability;
-import de.limbusdev.guardianmonsters.model.abilities.AbilityGraph;
-import de.limbusdev.guardianmonsters.model.abilities.Edge;
-import de.limbusdev.guardianmonsters.model.abilities.Node;
-import de.limbusdev.guardianmonsters.model.items.BodyPart;
+import de.limbusdev.guardianmonsters.guardians.abilities.Ability;
+import de.limbusdev.guardianmonsters.guardians.abilities.AbilityGraph;
+import de.limbusdev.guardianmonsters.guardians.abilities.Edge;
+import de.limbusdev.guardianmonsters.guardians.abilities.Node;
+import de.limbusdev.guardianmonsters.guardians.items.BodyPart;
 
 /**
  * SerializableAbilityGraph

@@ -1,8 +1,8 @@
 package de.limbusdev.guardianmonsters.model.gamestate;
 
-import de.limbusdev.guardianmonsters.model.abilities.AbilityGraph;
-import de.limbusdev.guardianmonsters.model.monsters.Monster;
-import de.limbusdev.guardianmonsters.model.monsters.Stat;
+import de.limbusdev.guardianmonsters.guardians.abilities.AbilityGraph;
+import de.limbusdev.guardianmonsters.guardians.monsters.Monster;
+import de.limbusdev.guardianmonsters.guardians.monsters.Stat;
 
 /**
  * SerializableMonster

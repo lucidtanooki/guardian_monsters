@@ -5,6 +5,7 @@ import de.limbusdev.guardianmonsters.media.IAudioManager;
 import de.limbusdev.guardianmonsters.media.IMediaManager;
 import de.limbusdev.guardianmonsters.media.NullAudioManager;
 import de.limbusdev.guardianmonsters.media.NullMediaManager;
+import de.limbusdev.guardianmonsters.scene2d.IScreenManager;
 
 /**
  * Services implements the Service Locator Pattern
@@ -16,7 +17,7 @@ import de.limbusdev.guardianmonsters.media.NullMediaManager;
 public class Services {
     private static IMediaManager media;
     private static IAudioManager audio;
-    private static de.limbusdev.guardianmonsters.scene2d.ScreenManager screens;
+    private static IScreenManager screens;
     private static L18N l18n;
     private static Settings settings;
     private static UI ui;
@@ -47,11 +48,11 @@ public class Services {
         }
     }
 
-    public static void provide(de.limbusdev.guardianmonsters.scene2d.ScreenManager service) {
+    public static void provide(IScreenManager service) {
         screens = service;
     }
 
-    public static de.limbusdev.guardianmonsters.scene2d.ScreenManager getScreenManager() {
+    public static IScreenManager getScreenManager() {
         if(screens == null) {
             System.err.println("SERVICES: No ScreenManager service injected yet with Services.provide(ScreenManager service). Returning NullScreenManager.");
             return new de.limbusdev.guardianmonsters.scene2d.NullScreenManager();

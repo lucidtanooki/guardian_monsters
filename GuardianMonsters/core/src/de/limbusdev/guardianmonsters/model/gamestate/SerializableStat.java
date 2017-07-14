@@ -1,9 +1,9 @@
 package de.limbusdev.guardianmonsters.model.gamestate;
 
-import de.limbusdev.guardianmonsters.model.ItemDB;
-import de.limbusdev.guardianmonsters.model.items.Equipment;
-import de.limbusdev.guardianmonsters.model.monsters.BaseStat;
-import de.limbusdev.guardianmonsters.model.monsters.Stat;
+import de.limbusdev.guardianmonsters.guardians.ItemDB;
+import de.limbusdev.guardianmonsters.guardians.items.Equipment;
+import de.limbusdev.guardianmonsters.guardians.monsters.BaseStat;
+import de.limbusdev.guardianmonsters.guardians.monsters.Stat;
 
 /**
  * SerializableStat

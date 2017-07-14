@@ -5,7 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 import de.limbusdev.guardianmonsters.services.Services;
-import de.limbusdev.guardianmonsters.model.monsters.Monster;
+import de.limbusdev.guardianmonsters.guardians.monsters.Monster;
 import de.limbusdev.guardianmonsters.scene2d.SubImageImageButton;
 
 /**

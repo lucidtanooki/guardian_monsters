@@ -2,7 +2,7 @@ package de.limbusdev.guardianmonsters.fwmengine.guardosphere;
 
 import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.fwmengine.ui.AScreen;
-import de.limbusdev.guardianmonsters.model.monsters.Team;
+import de.limbusdev.guardianmonsters.guardians.monsters.Team;
 
 /**
  * GuardoSphereScreen

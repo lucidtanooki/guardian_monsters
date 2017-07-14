@@ -4,8 +4,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 import de.limbusdev.guardianmonsters.assets.paths.AssetPath;
 import de.limbusdev.guardianmonsters.services.Services;
-import de.limbusdev.guardianmonsters.model.abilities.Ability;
-import de.limbusdev.guardianmonsters.model.monsters.Monster;
+import de.limbusdev.guardianmonsters.guardians.abilities.Ability;
+import de.limbusdev.guardianmonsters.guardians.monsters.Monster;
 
 public class AttackMenuWidget extends SevenButtonsWidget {
 

@@ -3,8 +3,8 @@ package de.limbusdev.guardianmonsters.model.gamestate;
 import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.ObjectMap;
 
-import de.limbusdev.guardianmonsters.model.items.Inventory;
-import de.limbusdev.guardianmonsters.model.monsters.Monster;
+import de.limbusdev.guardianmonsters.guardians.items.Inventory;
+import de.limbusdev.guardianmonsters.guardians.monsters.Monster;
 
 /**
  * SerializableGameState

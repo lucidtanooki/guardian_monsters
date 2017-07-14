@@ -13,9 +13,9 @@ import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.items.ItemDetailViewWidget;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.items.ItemListWidget;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.team.MonsterListWidget;
-import de.limbusdev.guardianmonsters.model.items.Inventory;
-import de.limbusdev.guardianmonsters.model.items.Item;
-import de.limbusdev.guardianmonsters.model.monsters.Monster;
+import de.limbusdev.guardianmonsters.guardians.items.Inventory;
+import de.limbusdev.guardianmonsters.guardians.items.Item;
+import de.limbusdev.guardianmonsters.guardians.monsters.Monster;
 import de.limbusdev.guardianmonsters.Constant;
 
 /**

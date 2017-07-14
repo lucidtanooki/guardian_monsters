@@ -11,8 +11,8 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ArrayMap;
 
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.items.GuardianOverviewButton;
-import de.limbusdev.guardianmonsters.model.items.Item;
-import de.limbusdev.guardianmonsters.model.monsters.Monster;
+import de.limbusdev.guardianmonsters.guardians.items.Item;
+import de.limbusdev.guardianmonsters.guardians.monsters.Monster;
 import de.limbusdev.guardianmonsters.Constant;
 
 /**

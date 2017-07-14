@@ -4,10 +4,10 @@ package de.limbusdev.guardianmonsters.fwmengine.battle.control;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.ArrayMap;
 
-import de.limbusdev.guardianmonsters.model.abilities.Ability;
+import de.limbusdev.guardianmonsters.guardians.abilities.Ability;
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.AttackCalculationReport;
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.ElemEff;
-import de.limbusdev.guardianmonsters.model.monsters.Monster;
+import de.limbusdev.guardianmonsters.guardians.monsters.Monster;
 
 /**
  * Handles events of monsters like level up, earning EXP, changing status and so on

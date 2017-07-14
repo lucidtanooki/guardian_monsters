@@ -2,7 +2,7 @@ package de.limbusdev.guardianmonsters.fwmengine.world.ecs.components;
 
 import com.badlogic.ashley.core.Component;
 
-import de.limbusdev.guardianmonsters.model.monsters.Team;
+import de.limbusdev.guardianmonsters.guardians.monsters.Team;
 
 /**
  * @author Georg Eckert 2016

@@ -22,12 +22,12 @@ import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.MonsterMenuWidg
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.SevenButtonsWidget;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.TargetMenuWidget;
 import de.limbusdev.guardianmonsters.services.Services;
-import de.limbusdev.guardianmonsters.model.abilities.Ability;
-import de.limbusdev.guardianmonsters.model.items.Inventory;
-import de.limbusdev.guardianmonsters.model.monsters.Monster;
+import de.limbusdev.guardianmonsters.guardians.abilities.Ability;
+import de.limbusdev.guardianmonsters.guardians.items.Inventory;
+import de.limbusdev.guardianmonsters.guardians.monsters.Monster;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleMainMenuWidget;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleStatusOverviewWidget;
-import de.limbusdev.guardianmonsters.model.monsters.Team;
+import de.limbusdev.guardianmonsters.guardians.monsters.Team;
 
 import static de.limbusdev.guardianmonsters.Constant.LEFT;
 

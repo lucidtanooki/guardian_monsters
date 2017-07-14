@@ -22,7 +22,7 @@ import de.limbusdev.guardianmonsters.geometry.IntVec2;
 import de.limbusdev.guardianmonsters.fwmengine.world.model.WarpPoint;
 import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.BattleFactory;
-import de.limbusdev.guardianmonsters.model.monsters.Monster;
+import de.limbusdev.guardianmonsters.guardians.monsters.Monster;
 import de.limbusdev.guardianmonsters.fwmengine.world.model.MonsterArea;
 import de.limbusdev.guardianmonsters.Constant;
 

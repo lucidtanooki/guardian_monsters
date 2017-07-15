@@ -1,7 +1,7 @@
 package de.limbusdev.guardianmonsters.model.gamestate;
 
 import de.limbusdev.guardianmonsters.guardians.ItemDB;
-import de.limbusdev.guardianmonsters.guardians.items.Equipment;
+import de.limbusdev.guardianmonsters.guardians.items.equipment.Equipment;
 import de.limbusdev.guardianmonsters.guardians.monsters.BaseStat;
 import de.limbusdev.guardianmonsters.guardians.monsters.Stat;
 

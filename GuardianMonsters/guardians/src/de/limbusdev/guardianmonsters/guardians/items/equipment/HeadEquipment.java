@@ -1,4 +1,4 @@
-package de.limbusdev.guardianmonsters.guardians.items;
+package de.limbusdev.guardianmonsters.guardians.items.equipment;
 
 import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
 
@@ -26,8 +26,8 @@ public class HeadEquipment extends Equipment {
     }
 
     @Override
-    public boolean applicable(Guardian m) {
-        if(super.applicable(m)) {
+    public boolean equipable(Guardian m) {
+        if(super.equipable(m)) {
             return (m.data.getHeadType() == type);
         } else {
             return false;

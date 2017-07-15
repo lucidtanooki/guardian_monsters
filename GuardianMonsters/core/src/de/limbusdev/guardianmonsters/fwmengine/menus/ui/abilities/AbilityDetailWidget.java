@@ -17,7 +17,7 @@ import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.guardians.abilities.Ability;
 import de.limbusdev.guardianmonsters.guardians.abilities.AbilityGraph;
 import de.limbusdev.guardianmonsters.guardians.abilities.Node;
-import de.limbusdev.guardianmonsters.guardians.items.BodyPart;
+import de.limbusdev.guardianmonsters.guardians.items.equipment.BodyPart;
 import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.Stat;
 

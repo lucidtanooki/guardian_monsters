@@ -6,9 +6,11 @@ import de.limbusdev.guardianmonsters.guardians.Element;
 /**
  * @author Georg Eckert 2017
  */
-public class Ability {
+public class Ability
+{
 
-    public enum DamageType {
+    public enum DamageType
+    {
         MAGICAL, PHYSICAL
     }
 
@@ -30,8 +32,8 @@ public class Ability {
     /**
      * For Serialization only!
      */
-    public Ability() {
-    }
+    public Ability()
+    {}
 
     /**
      * For physcial Attacks

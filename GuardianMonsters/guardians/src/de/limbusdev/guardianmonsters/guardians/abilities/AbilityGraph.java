@@ -4,7 +4,7 @@ import com.badlogic.ashley.signals.Signal;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 
-import de.limbusdev.guardianmonsters.guardians.items.BodyPart;
+import de.limbusdev.guardianmonsters.guardians.items.equipment.BodyPart;
 import de.limbusdev.guardianmonsters.guardians.monsters.MonsterData;
 
 /**

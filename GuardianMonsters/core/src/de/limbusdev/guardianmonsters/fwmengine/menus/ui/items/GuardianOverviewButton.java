@@ -14,9 +14,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.Align;
 
 
+import de.limbusdev.guardianmonsters.guardians.items.medicine.AMedicalItem;
 import de.limbusdev.guardianmonsters.services.Services;
-import de.limbusdev.guardianmonsters.guardians.items.Equipment;
-import de.limbusdev.guardianmonsters.guardians.items.EquipmentPotential;
+import de.limbusdev.guardianmonsters.guardians.items.equipment.Equipment;
+import de.limbusdev.guardianmonsters.guardians.items.equipment.EquipmentPotential;
 import de.limbusdev.guardianmonsters.guardians.items.Item;
 import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
 
@@ -119,7 +120,7 @@ public class GuardianOverviewButton extends TextButton implements Listener<Guard
         add(subTable).align(Align.left);
         layout();
 
-        if(!item.applicable(guardian)) {
+        if(!equipment.equipable(guardian)) {
             setTouchable(Touchable.disabled);
             setColor(.6f,.6f,.6f,1f);
         }
@@ -142,9 +143,11 @@ public class GuardianOverviewButton extends TextButton implements Listener<Guard
         add(subTable).align(Align.left);
         layout();
 
-        if(!item.applicable(guardian)) {
-            setTouchable(Touchable.disabled);
-            setColor(.6f,.6f,.6f,1f);
+        if(item instanceof AMedicalItem) {
+            if (!((AMedicalItem)item).applicable(guardian)) {
+                setTouchable(Touchable.disabled);
+                setColor(.6f, .6f, .6f, 1f);
+            }
         }
     }
 

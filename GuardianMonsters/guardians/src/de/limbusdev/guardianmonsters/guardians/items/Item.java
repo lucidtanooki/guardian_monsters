@@ -1,8 +1,5 @@
 package de.limbusdev.guardianmonsters.guardians.items;
 
-
-import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
-
 /**
  * @author Georg Eckert on 17.02.17.
  */
@@ -35,10 +32,6 @@ public abstract class Item
     public Category getCategory() {
         return category;
     }
-
-    public abstract void apply(Guardian m);
-
-    public abstract boolean applicable(Guardian m);
 
     @Override
     public boolean equals(Object obj)

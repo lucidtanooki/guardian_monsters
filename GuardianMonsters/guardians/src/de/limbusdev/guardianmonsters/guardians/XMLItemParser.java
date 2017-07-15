@@ -2,15 +2,15 @@ package de.limbusdev.guardianmonsters.guardians;
 
 import com.badlogic.gdx.utils.XmlReader;
 
-import de.limbusdev.guardianmonsters.guardians.items.BodyEquipment;
-import de.limbusdev.guardianmonsters.guardians.items.BodyPart;
-import de.limbusdev.guardianmonsters.guardians.items.Equipment;
-import de.limbusdev.guardianmonsters.guardians.items.FootEquipment;
-import de.limbusdev.guardianmonsters.guardians.items.HandEquipment;
-import de.limbusdev.guardianmonsters.guardians.items.HeadEquipment;
+import de.limbusdev.guardianmonsters.guardians.items.equipment.BodyEquipment;
+import de.limbusdev.guardianmonsters.guardians.items.equipment.BodyPart;
+import de.limbusdev.guardianmonsters.guardians.items.equipment.Equipment;
+import de.limbusdev.guardianmonsters.guardians.items.equipment.FootEquipment;
+import de.limbusdev.guardianmonsters.guardians.items.equipment.HandEquipment;
+import de.limbusdev.guardianmonsters.guardians.items.equipment.HeadEquipment;
 import de.limbusdev.guardianmonsters.guardians.items.Item;
 import de.limbusdev.guardianmonsters.guardians.items.KeyItem;
-import de.limbusdev.guardianmonsters.guardians.items.MedicalItem;
+import de.limbusdev.guardianmonsters.guardians.items.medicine.MedicalItem;
 
 /**
  * XMLItemParser

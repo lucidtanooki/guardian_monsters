@@ -1,10 +1,11 @@
-package de.limbusdev.guardianmonsters.guardians.items;
+package de.limbusdev.guardianmonsters.guardians.items.equipment;
 
 
+import de.limbusdev.guardianmonsters.guardians.items.Item;
 import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
 
 /**
- * Equipment extends the {@link Stat}s of a monster in the following way:
+ * Equipment extends the Stats of a monster in the following way:
  *
  * HP   .. by factor (1 + addsHP/100)
  * MP   .. by factor (1 + addsMP/100)
@@ -20,18 +21,6 @@ import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
 
 public abstract class Equipment extends Item
 {
-    @Override
-    public void apply(Guardian m)
-    {
-
-    }
-
-    @Override
-    public boolean applicable(Guardian guardian)
-    {
-        return (guardian.abilityGraph.hasLearntEquipment(this.bodyPart));
-    }
-
     public final int addsPStr, addsPDef, addsMStr, addsMDef, addsSpeed, addsHP, addsMP, addsEXP;
     public final BodyPart bodyPart;
 
@@ -48,5 +37,26 @@ public abstract class Equipment extends Item
         this.addsMP = addsMP;
         this.bodyPart = bodyPart;
         this.addsEXP = addsExp;
+    }
+
+    /**
+     * Equips Guardian with this Equipment and returns the previously equipped item.
+     * @param m Guardian to give equipment to
+     * @return  previously worn equipment, null if nothing was worn yet
+     */
+    public Equipment equip(Guardian m)
+    {
+        return m.stat.giveEquipment(this);
+    }
+
+    /**
+     * Checks if the given monster has already learnt the ability for being able to wear equipment
+     * at this body part.
+     * @param guardian
+     * @return  if the given monster has learnt the needed ability yet
+     */
+    public boolean equipable(Guardian guardian)
+    {
+        return (guardian.abilityGraph.hasLearntEquipment(this.bodyPart));
     }
 }

@@ -11,10 +11,11 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.I18NBundle;
 
+import de.limbusdev.guardianmonsters.guardians.items.medicine.AMedicalItem;
 import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.team.MonsterListWidget;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.widgets.ReassuranceWidget;
-import de.limbusdev.guardianmonsters.guardians.items.Equipment;
+import de.limbusdev.guardianmonsters.guardians.items.equipment.Equipment;
 import de.limbusdev.guardianmonsters.guardians.items.Inventory;
 import de.limbusdev.guardianmonsters.guardians.items.Item;
 import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
@@ -150,8 +151,8 @@ public class ItemDetailViewWidget extends Group implements MonsterListWidget.Cal
             if(replaced != null) {
                 inventory.putItemInInventory(replaced);
             }
-        } else {
-            item.apply(team.get(i));
+        } else if (item instanceof AMedicalItem) {
+            ((AMedicalItem)item).apply(team.get(i));
         }
 
         boolean empty = !(inventory.getItemAmount(item) > 0);

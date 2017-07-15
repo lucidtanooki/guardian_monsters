@@ -7,7 +7,7 @@ import com.badlogic.gdx.utils.XmlReader;
 
 import java.io.IOException;
 
-import de.limbusdev.guardianmonsters.guardians.monsters.MonsterData;
+import de.limbusdev.guardianmonsters.guardians.monsters.GuardianData;
 
 
 /**
@@ -15,7 +15,7 @@ import de.limbusdev.guardianmonsters.guardians.monsters.MonsterData;
  */
 public class MonsterDB {
     /* ............................................................................ ATTRIBUTES .. */
-    private ArrayMap<Integer, MonsterData> statusInfos;
+    private ArrayMap<Integer, GuardianData> statusInfos;
     private static MonsterDB instance;
 
 
@@ -40,9 +40,9 @@ public class MonsterDB {
             return;
         }
 
-        MonsterData ancestor = null;
+        GuardianData ancestor = null;
         for (int i = 0; i < rootElement.getChildCount(); i++) {
-            MonsterData info = XMLMonsterParser.parseMonster(rootElement.getChild(i), ancestor);
+            GuardianData info = XMLMonsterParser.parseMonster(rootElement.getChild(i), ancestor);
             statusInfos.put(info.getID(),info);
             if(info.getMetamorphesTo() == info.getID()+1) {
                 ancestor = info;
@@ -53,12 +53,12 @@ public class MonsterDB {
 
     }
 
-    public static ArrayMap<Integer, MonsterData> getStatusInfos() {
+    public static ArrayMap<Integer, GuardianData> getStatusInfos() {
         MonsterDB db = getInstance();
         return db.statusInfos;
     }
 
-    public static MonsterData getData(int monsterID) {
+    public static GuardianData getData(int monsterID) {
         MonsterDB db = getInstance();
         return db.statusInfos.get(monsterID);
     }
@@ -75,7 +75,7 @@ public class MonsterDB {
         int ancestors = 0;
 
         while(hasAncestor) {
-            MonsterData possibleAncestor = getData(id - 1 - ancestors);
+            GuardianData possibleAncestor = getData(id - 1 - ancestors);
             if(possibleAncestor != null) {
                 if (possibleAncestor.getMetamorphesTo() == id - ancestors) {
                     ancestors++;

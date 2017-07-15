@@ -22,7 +22,7 @@ public class Guardian extends Signal<Guardian> implements Listener<Stat>
     public final int INSTANCE_ID;
     public final int ID;
 
-    public final MonsterData data;
+    public final GuardianData data;
     public final Stat stat;
     public final String nickname;
 

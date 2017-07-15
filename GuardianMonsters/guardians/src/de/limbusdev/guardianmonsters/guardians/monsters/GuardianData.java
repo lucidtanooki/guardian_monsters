@@ -17,7 +17,8 @@ import de.limbusdev.guardianmonsters.guardians.items.equipment.HeadEquipment;
  *
  * @author Georg Eckert 2016
  */
-public class MonsterData {
+public class GuardianData
+{
     /* ............................................................................ ATTRIBUTES .. */
     private int ID;
     private String nameID;
@@ -40,13 +41,13 @@ public class MonsterData {
     /**
      * For Serialization only!
      */
-    public MonsterData() {}
+    public GuardianData() {}
 
-    public MonsterData(int ID, String nameID, int metamorphesTo, BaseStat baseStat,
-                       Array<Element> elements, ArrayMap<Integer, Ability> abilityNodes,
-                       ArrayMap<Integer, BodyPart> equipmentNodes,
-                       Array<Integer> metamorphosisNodes, HeadEquipment.Type head,
-                       BodyEquipment.Type body, HandEquipment.Type hands, FootEquipment.Type feet) {
+    public GuardianData(int ID, String nameID, int metamorphesTo, BaseStat baseStat,
+                        Array<Element> elements, ArrayMap<Integer, Ability> abilityNodes,
+                        ArrayMap<Integer, BodyPart> equipmentNodes,
+                        Array<Integer> metamorphosisNodes, HeadEquipment.Type head,
+                        BodyEquipment.Type body, HandEquipment.Type hands, FootEquipment.Type feet) {
         this.ID = ID;
         this.nameID = nameID;
         this.abilityNodes = abilityNodes;
@@ -61,7 +62,7 @@ public class MonsterData {
         this.footType = feet;
     }
 
-    public MonsterData(int ID, String nameID, int metamorphsTo, Array<Element> elements, MonsterData ancestorData) {
+    public GuardianData(int ID, String nameID, int metamorphsTo, Array<Element> elements, GuardianData ancestorData) {
         this(
             ID, nameID, metamorphsTo,
             ancestorData.baseStat,

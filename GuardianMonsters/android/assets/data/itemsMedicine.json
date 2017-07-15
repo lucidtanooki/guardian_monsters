@@ -1,0 +1,27 @@
+[
+  {
+    "nameID": "bread",
+    "value": 100,
+    "type": "HPcure"
+  },
+  {
+    "nameID": "potion-blue",
+    "value": 300,
+    "type": "HPcure"
+  },
+  {
+    "nameID": "potion-red",
+    "value": 500,
+    "type": "HPcure"
+  },
+  {
+    "nameID": "medicine-blue",
+    "value": 10,
+    "type": "MPcure"
+  },
+  {
+    "nameID": "angel-tear",
+    "value": 50,
+    "type": "revive"
+  }
+]

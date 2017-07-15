@@ -5,7 +5,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 
 import de.limbusdev.guardianmonsters.guardians.items.equipment.BodyPart;
-import de.limbusdev.guardianmonsters.guardians.monsters.MonsterData;
+import de.limbusdev.guardianmonsters.guardians.monsters.GuardianData;
 
 /**
  * @author Georg Eckert 2017
@@ -26,7 +26,7 @@ public class AbilityGraph extends Signal<AbilityGraph> {
     public ArrayMap<Integer,Ability> learntAbilities;
     public Array<BodyPart> learntEquipment;
 
-    public AbilityGraph(MonsterData data) {
+    public AbilityGraph(GuardianData data) {
         nodes = new ArrayMap<>();
         edges = new Array<>();
         abilityNodes = new ArrayMap<>();
@@ -54,7 +54,7 @@ public class AbilityGraph extends Signal<AbilityGraph> {
 
     }
 
-    private void init(MonsterData data) {
+    private void init(GuardianData data) {
         for(int key : data.getAbilityNodes().keys()) {
             nodes.get(key).type = Node.Type.ABILITY;
             abilityNodes.put(key, data.getAbilityNodes().get(key));

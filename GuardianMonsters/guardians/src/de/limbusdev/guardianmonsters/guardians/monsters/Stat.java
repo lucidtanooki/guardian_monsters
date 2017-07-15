@@ -306,7 +306,8 @@ public class Stat extends Signal<Stat> {
      * @param level
      * @return
      */
-    public static int getEXPAvailableAtLevel(int level) {
+    public static int getEXPAvailableAtLevel(int level)
+    {
         float levelFactor = (float) Math.round(Math.pow(level, Constant.LVL_EXPONENT));
         return MathUtils.floor(Constant.BASE_EXP * levelFactor);
     }
@@ -319,9 +320,11 @@ public class Stat extends Signal<Stat> {
         return (getEXPAvailableAtLevel(level) - EXP);
     }
 
-    public Equipment giveEquipment(Equipment equipment) {
+    public Equipment giveEquipment(Equipment equipment)
+    {
         Equipment oldEquipment=null;
-        switch(equipment.bodyPart) {
+        switch(equipment.bodyPart)
+        {
             case HANDS:
                 oldEquipment = hands;
                 hands = equipment;
@@ -350,7 +353,8 @@ public class Stat extends Signal<Stat> {
      * @param eq
      * @return
      */
-    public EquipmentPotential getEquipmentPotential(Equipment eq) {
+    public EquipmentPotential getEquipmentPotential(Equipment eq)
+    {
         EquipmentPotential pot;
 
         Equipment currentEquipment;

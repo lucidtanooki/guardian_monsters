@@ -9,6 +9,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ArrayMap;
 
 import de.limbusdev.guardianmonsters.fwmengine.battle.control.BattleSystem;
+import de.limbusdev.guardianmonsters.guardians.items.medicine.AMedicalItem;
 import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.items.ItemDetailViewWidget;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.items.ItemListWidget;
@@ -24,8 +25,8 @@ import de.limbusdev.guardianmonsters.Constant;
  * @author Georg Eckert 2017
  */
 
-public class ItemChoice extends Group {
-
+public class ItemChoice extends Group
+{
     private ArrayMap<Integer, Guardian> team;
     private Inventory inventory;
     private MonsterListWidget guardianList;
@@ -33,7 +34,8 @@ public class ItemChoice extends Group {
     private BattleSystem battleSystem;
     private ItemDetailViewWidget detailViewWidget;
 
-    public ItemChoice(Skin skin, Inventory inventory, ArrayMap<Integer,Guardian> team, BattleSystem battleSystem) {
+    public ItemChoice(Skin skin, Inventory inventory, ArrayMap<Integer,Guardian> team, BattleSystem battleSystem)
+    {
         this.team = team;
         this.inventory = inventory;
         this.battleSystem = battleSystem;
@@ -64,35 +66,36 @@ public class ItemChoice extends Group {
         detailViewWidget.getDelete().setVisible(false);
     }
 
-    private void setUp () {
-        final MonsterListWidget.Callbacks callbacks = new MonsterListWidget.Callbacks() {
-            @Override
-            public boolean onButton(int i) {
+    private void setUp ()
+    {
+        final MonsterListWidget.Callbacks callbacks = i ->
+        {
+            if(chosenItem instanceof AMedicalItem) {
+                AMedicalItem med = (AMedicalItem) chosenItem;
                 inventory.takeItemFromInventory(chosenItem);
-                chosenItem.apply(team.get(i));
+                med.apply(team.get(i));
                 remove();
                 battleSystem.doNothing();
-                return false;
             }
+            return false;
         };
 
-        ItemListWidget.ClickListener clicks = new ItemListWidget.ClickListener() {
-            @Override
-            public void onChoosingItem(Item item) {
-                chosenItem = item;
-                detailViewWidget.init(item);
-                addActor(detailViewWidget);
-                detailViewWidget.getUse().clearListeners();
-                detailViewWidget.getUse().addListener(new com.badlogic.gdx.scenes.scene2d.utils.ClickListener() {
-                    @Override
-                    public void clicked(InputEvent event, float x, float y) {
-                        if(guardianList != null) guardianList.remove();
-                        guardianList = new MonsterListWidget(Services.getUI().getInventorySkin(), team, callbacks, chosenItem);
-                        addActor(guardianList);
-                        detailViewWidget.remove();
-                    }
-                });
-            }
+        ItemListWidget.ClickListener clicks = item ->
+        {
+            chosenItem = item;
+            detailViewWidget.init(item);
+            addActor(detailViewWidget);
+            detailViewWidget.getUse().clearListeners();
+            detailViewWidget.getUse().addListener(new com.badlogic.gdx.scenes.scene2d.utils.ClickListener()
+            {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    if(guardianList != null) guardianList.remove();
+                    guardianList = new MonsterListWidget(Services.getUI().getInventorySkin(), team, callbacks, chosenItem);
+                    addActor(guardianList);
+                    detailViewWidget.remove();
+                }
+            });
         };
 
         ItemListWidget itemList = new ItemListWidget(Services.getUI().getInventorySkin(), inventory, clicks, Item.Category.MEDICINE);

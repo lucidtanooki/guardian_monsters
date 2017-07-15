@@ -1,4 +1,4 @@
-package de.limbusdev.guardianmonsters.guardians.items;
+package de.limbusdev.guardianmonsters.guardians.items.equipment;
 
 /**
  * EquipmentPotential

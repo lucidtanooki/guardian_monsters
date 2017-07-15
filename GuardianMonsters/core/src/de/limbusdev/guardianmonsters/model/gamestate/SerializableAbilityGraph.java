@@ -7,7 +7,7 @@ import de.limbusdev.guardianmonsters.guardians.abilities.Ability;
 import de.limbusdev.guardianmonsters.guardians.abilities.AbilityGraph;
 import de.limbusdev.guardianmonsters.guardians.abilities.Edge;
 import de.limbusdev.guardianmonsters.guardians.abilities.Node;
-import de.limbusdev.guardianmonsters.guardians.items.BodyPart;
+import de.limbusdev.guardianmonsters.guardians.items.equipment.BodyPart;
 
 /**
  * SerializableAbilityGraph

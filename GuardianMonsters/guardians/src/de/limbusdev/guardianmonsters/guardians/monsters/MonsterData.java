@@ -5,11 +5,11 @@ import com.badlogic.gdx.utils.ArrayMap;
 
 import de.limbusdev.guardianmonsters.guardians.Element;
 import de.limbusdev.guardianmonsters.guardians.abilities.Ability;
-import de.limbusdev.guardianmonsters.guardians.items.BodyEquipment;
-import de.limbusdev.guardianmonsters.guardians.items.BodyPart;
-import de.limbusdev.guardianmonsters.guardians.items.FootEquipment;
-import de.limbusdev.guardianmonsters.guardians.items.HandEquipment;
-import de.limbusdev.guardianmonsters.guardians.items.HeadEquipment;
+import de.limbusdev.guardianmonsters.guardians.items.equipment.BodyEquipment;
+import de.limbusdev.guardianmonsters.guardians.items.equipment.BodyPart;
+import de.limbusdev.guardianmonsters.guardians.items.equipment.FootEquipment;
+import de.limbusdev.guardianmonsters.guardians.items.equipment.HandEquipment;
+import de.limbusdev.guardianmonsters.guardians.items.equipment.HeadEquipment;
 
 
 /**

@@ -4,8 +4,8 @@ import com.badlogic.ashley.signals.Signal;
 import com.badlogic.gdx.math.MathUtils;
 
 import de.limbusdev.guardianmonsters.guardians.Constant;
-import de.limbusdev.guardianmonsters.guardians.items.Equipment;
-import de.limbusdev.guardianmonsters.guardians.items.EquipmentPotential;
+import de.limbusdev.guardianmonsters.guardians.items.equipment.Equipment;
+import de.limbusdev.guardianmonsters.guardians.items.equipment.EquipmentPotential;
 import de.limbusdev.guardianmonsters.guardians.abilities.AbilityGraph;
 import de.limbusdev.guardianmonsters.utils.MathTool;
 

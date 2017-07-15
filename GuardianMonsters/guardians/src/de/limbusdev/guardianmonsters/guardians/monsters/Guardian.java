@@ -55,7 +55,6 @@ public class Guardian extends Signal<Guardian> implements Listener<Stat>
         // Copy base stats over and register monster as listener at it's stats
         this.stat = new Stat(1, data.getBaseStat());
         this.stat.add(this);
-
     }
 
     /**

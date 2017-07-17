@@ -23,7 +23,8 @@ import de.limbusdev.guardianmonsters.Constant;
  * @author Georg Eckert 2017
  */
 
-public class LevelUpWidget extends OverlayWidget {
+public class LevelUpWidget extends OverlayWidget
+{
     private Image monsterImg;
 
     public LevelUpWidget(Skin skin, Guardian guardian) {

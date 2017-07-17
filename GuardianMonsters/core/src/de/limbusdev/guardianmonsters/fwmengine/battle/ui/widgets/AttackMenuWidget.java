@@ -16,7 +16,7 @@ public class AttackMenuWidget extends SevenButtonsWidget {
      * @param skin battle action UI skin
      */
     public AttackMenuWidget(Skin skin, Callbacks callbacks) {
-        super(skin, callbacks, order);
+        super(skin, callbacks::onButtonNr, order);
     }
 
     public void init(Guardian guardian) {

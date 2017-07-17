@@ -14,6 +14,7 @@ import de.limbusdev.guardianmonsters.fwmengine.battle.model.AttackCalculationRep
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.AttackMenuWidget;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleActionMenuWidget;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleAnimationWidget;
+import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleHUDTextButton;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleQueueWidget;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.InfoLabelWidget;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.ItemChoice;
@@ -28,6 +29,7 @@ import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleMainMenuWidget;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleStatusOverviewWidget;
 import de.limbusdev.guardianmonsters.guardians.monsters.Team;
+import de.limbusdev.guardianmonsters.ui.Command;
 
 import static de.limbusdev.guardianmonsters.Constant.LEFT;
 
@@ -156,7 +158,7 @@ public class BattleHUD extends ABattleHUD {
         animationWidget   = new BattleAnimationWidget(battleAnimationCallbacks);
         mainMenu          = new BattleMainMenuWidget(skin, mainMenuCallbacks);
         actionMenu        = new BattleActionMenuWidget(skin, battleActionCallbacks);
-        attackMenu        = new AttackMenuWidget(skin, attackMenuCallbacks);
+        attackMenu        = new AttackMenuWidget(skin, attackMenuCallbacks::onButtonNr);
         targetMenuWidget  = new TargetMenuWidget(skin, targetMenuCallbacks);
         monsterMenuWidget = new MonsterMenuWidget(skin, monsterMenuCallbacks);
 

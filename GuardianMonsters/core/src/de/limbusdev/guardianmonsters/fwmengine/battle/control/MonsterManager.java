@@ -15,14 +15,8 @@ import de.limbusdev.guardianmonsters.services.Services;
  *
  * @author Georg Eckert
  */
-public class MonsterManager {
-    /* ............................................................................ ATTRIBUTES .. */
-    
-    /* ........................................................................... CONSTRUCTOR .. */
-    
-    /* ............................................................................... METHODS .. */
-
-
+public class MonsterManager
+{
     /**
      * Call this, when a monster decides not to attack and instead defends itself
      * @param defensiveGuardian

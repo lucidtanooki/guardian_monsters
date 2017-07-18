@@ -7,7 +7,7 @@ import de.limbusdev.guardianmonsters.guardians.Constant;
 import de.limbusdev.guardianmonsters.guardians.items.equipment.Equipment;
 import de.limbusdev.guardianmonsters.guardians.items.equipment.EquipmentPotential;
 import de.limbusdev.guardianmonsters.guardians.abilities.AbilityGraph;
-import de.limbusdev.guardianmonsters.utils.MathTool;
+import de.limbusdev.utils.MathTool;
 
 import static de.limbusdev.guardianmonsters.guardians.monsters.Stat.Growth.FAST;
 import static de.limbusdev.guardianmonsters.guardians.monsters.Stat.Growth.FASTHP;

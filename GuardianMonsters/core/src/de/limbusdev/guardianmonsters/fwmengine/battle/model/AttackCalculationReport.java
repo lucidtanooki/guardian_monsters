@@ -10,7 +10,8 @@ import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
  * Contains information about the effect of an attack on another monster
  * Created by georg on 07.09.16.
  */
-public class AttackCalculationReport {
+public class AttackCalculationReport
+{
     public Guardian attacker;
     public Guardian defender;
     public Ability attack;

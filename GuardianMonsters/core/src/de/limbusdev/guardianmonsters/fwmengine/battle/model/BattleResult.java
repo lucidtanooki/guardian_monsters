@@ -15,8 +15,8 @@ import de.limbusdev.guardianmonsters.guardians.monsters.Team;
  * @author Georg Eckert 2017
  */
 
-public class BattleResult {
-
+public class BattleResult
+{
     private ArrayMap<Guardian, Integer> gainedEXP;
     private Array<Item> droppedItems;
 

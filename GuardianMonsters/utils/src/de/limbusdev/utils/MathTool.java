@@ -8,9 +8,8 @@ import com.badlogic.gdx.math.MathUtils;
  * @author Georg Eckert 2017
  */
 
-public class MathTool {
-
-
+public class MathTool
+{
     /**
      * Rolls a dice and adds the results
      * @param rolls how many times the dice is rolled
@@ -18,19 +17,22 @@ public class MathTool {
      * @param add   how much base value should be added to the result
      * @return      the resulting value
      */
-    public static int dice(int rolls, int sides, int add) {
+    public static int dice(int rolls, int sides, int add)
+    {
         int result=add;
-        for(int i=0; i<rolls; i++) {
+        for(int i=0; i<rolls; i++)
+        {
             result += MathUtils.random(sides);
         }
         return result;
     }
 
-    public static int dice(int[] triple) {
-        if(triple.length < 3) {
+    public static int dice(int[] triple)
+    {
+        if(triple.length < 3)
+        {
             throw new IllegalArgumentException("Not enough values. Use (rolls, sides, add)");
         }
         return dice(triple[0], triple[1], triple[2]);
     }
-
 }

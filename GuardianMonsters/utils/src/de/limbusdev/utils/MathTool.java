@@ -1,4 +1,4 @@
-package de.limbusdev.guardianmonsters.utils;
+package de.limbusdev.utils;
 
 import com.badlogic.gdx.math.MathUtils;
 

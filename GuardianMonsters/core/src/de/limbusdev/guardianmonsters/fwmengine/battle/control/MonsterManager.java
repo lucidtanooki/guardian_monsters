@@ -19,14 +19,14 @@ public class MonsterManager
 {
     /**
      * Call this, when a monster decides not to attack and instead defends itself
-     * @param defensiveGuardian
+     * @param defender
      * @return
      */
-    public static AttackCalculationReport calcDefense(Guardian defensiveGuardian) {
+    public static AttackCalculationReport calcDefense(Guardian defender) {
         System.out.println("Monster defends itself");
-        AttackCalculationReport report = new AttackCalculationReport(defensiveGuardian);
-        defensiveGuardian.stat.increasePDef(5);
-        defensiveGuardian.stat.increaseMDef(5);
+        AttackCalculationReport report = new AttackCalculationReport(defender);
+        defender.stat.increasePDef(5);
+        defender.stat.increaseMDef(5);
 
         return report;
     }
@@ -36,34 +36,34 @@ public class MonsterManager
      *
      *  Damage = Elemental-Multiplier * (((2*Level)/5 + 2) * Power * (Attack/Defense))/50 + 2)
      *
-     * @param att
-     * @param def
+     * @param attacker
+     * @param defender
      * @return
      */
-    public static AttackCalculationReport calcAttack(Guardian att, Guardian def, Ability ability)
+    public static AttackCalculationReport calcAttack(Guardian attacker, Guardian defender, Ability ability)
     {
         System.out.println("\n--- new ability ---");
-        AttackCalculationReport report = new AttackCalculationReport(att, def, 0, 0, ability);
-        float efficiency = ElemEff.singelton().getElemEff(ability.element, def.data.getElements());
+        AttackCalculationReport report = new AttackCalculationReport(attacker, defender, 0, 0, ability);
+        float efficiency = ElemEff.singelton().getElemEff(ability.element, defender.data.getElements());
 
         float defenseRatio;
 
         if(ability.damageType == Ability.DamageType.PHYSICAL) {
-            defenseRatio = (att.stat.getPStr() * 1f) / (def.stat.getPDef() *1f);
+            defenseRatio = (attacker.stat.getPStr() * 1f) / (defender.stat.getPDef() *1f);
         } else {
-            defenseRatio = (att.stat.getMStr() *1f) / (def.stat.getMDef() *1f);
+            defenseRatio = (attacker.stat.getMStr() *1f) / (defender.stat.getMDef() *1f);
         }
 
         /* Calculate Damage */
-        float damage = efficiency * ((((2*att.stat.getLevel()/5 + 2) * ability.damage * defenseRatio) / 3) + 2);
+        float damage = efficiency * ((((2*attacker.stat.getLevel()/5 + 2) * ability.damage * defenseRatio) / 3) + 2);
 
         report.damage = MathUtils.round(damage);
-        report.effectiveness = efficiency;
+        report.efficiency = efficiency;
 
         // Print Battle Debug Message
-        String attackerName = att.getName();
+        String attackerName = attacker.getName();
         String attackName   = Services.getL18N().getLocalizedAbilityName(ability.name);
-        String victimName   = def.getName();
+        String victimName   = defender.getName();
         System.out.println(attackerName + ": " + attackName + " causes " + damage + " damage on " + victimName);
 
         return report;
@@ -82,18 +82,21 @@ public class MonsterManager
         report.attacker.stat.decreaseMP(report.attack.MPcost);
     }
 
-    public static boolean tryToRun(ArrayMap<Integer,Guardian> escapingTeam, ArrayMap<Integer,Guardian> attackingTeam) {
+    public static boolean tryToRun(ArrayMap<Integer,Guardian> escapingTeam, ArrayMap<Integer,Guardian> attackingTeam)
+    {
         float meanEscapingTeamLevel = 0;
         float meanAttackingTeamLevel = 0;
 
-        for(Guardian m : escapingTeam.values()) {
+        for(Guardian m : escapingTeam.values())
+        {
             if(m.stat.isFit()) {
                 meanEscapingTeamLevel += m.stat.getLevel();
             }
         }
         meanEscapingTeamLevel /= escapingTeam.size;
 
-        for(Guardian m : attackingTeam.values()) {
+        for(Guardian m : attackingTeam.values())
+        {
             meanAttackingTeamLevel += m.stat.getLevel();
         }
         meanAttackingTeamLevel /= escapingTeam.size;
@@ -104,6 +107,4 @@ public class MonsterManager
             return MathUtils.randomBoolean(.9f);
         }
     }
-
-    /* ..................................................................... GETTERS & SETTERS .. */
 }

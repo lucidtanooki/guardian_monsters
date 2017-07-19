@@ -24,10 +24,10 @@ public class ElemEff {
     }
 
     /**
-     * Calculates the effectiveness of an attack, based on the attack element and the defenders elements
+     * Calculates the efficiency of an attack, based on the attack element and the defenders elements
      * @param attacker attackers element
      * @param defender defenders elements
-     * @return effectiveness ratio
+     * @return efficiency ratio
      */
     public float getElemEff(Element attacker, Array<Element> defender) {
         float effectiveness = 1.0f;

@@ -11,7 +11,6 @@ public interface Constant
     boolean LEFT = true;
     boolean RIGHT = false;
 
-    // ............................................................................................. ATTRIBUTES
     int TILE_SIZE = 16;
     int PIXELS_PER_METER = 1;
     int RES_X = 428;

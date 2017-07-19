@@ -5,9 +5,10 @@ import com.badlogic.gdx.math.MathUtils;
 /**
  * MathTool
  *
+ * Provides several mathematical calculations for simple access.
+ *
  * @author Georg Eckert 2017
  */
-
 public class MathTool
 {
     /**
@@ -27,6 +28,14 @@ public class MathTool
         return result;
     }
 
+    /**
+     * Rolls a dice and adds the results
+     * @param triple    [rolls, sides, add]
+     * rolls ...        how many times the dice is rolled
+     * sides ...        how many sides the used dice has
+     * add   ...        how much base value should be added to the result
+     * @return          the resulting value
+     */
     public static int dice(int[] triple)
     {
         if(triple.length < 3)

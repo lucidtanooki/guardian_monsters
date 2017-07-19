@@ -6,30 +6,27 @@ import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
 import de.limbusdev.guardianmonsters.guardians.MonsterDB;
 
 /**
- * Created by georg on 12.01.16.
+ * @author Georg Eckert 2017
  */
-public class BattleStringBuilder {
-    /* ............................................................................ ATTRIBUTES .. */
-    
-    /* ........................................................................... CONSTRUCTOR .. */
-    
-    /* ............................................................................... METHODS .. */
-    public static String receivedDamage(Guardian victim, int damage) {
-        String text = MonsterDB.getInstance().getNameById(victim.ID)
-            + " lost " + damage + " HP";
+public class BattleStringBuilder
+{
+    public static String receivedDamage(Guardian victim, int damage)
+    {
+        String text = MonsterDB.getInstance().getNameById(victim.ID) + " lost " + damage + " HP";
         return text;
     }
 
-    public static String givenDamage(Guardian attacker, Guardian victim, AttackCalculationReport report) {
+    public static String givenDamage(Guardian attacker, Guardian victim, AttackCalculationReport report)
+    {
         String attName = MonsterDB.getInstance().getNameById(attacker.ID);
         String defName = MonsterDB.getInstance().getNameById(victim.ID);
 
         String eff;
-        if(report.effectiveness > 1.1) {
+        if(report.efficiency > 1.1) {
             eff = Services.getL18N().Battle().get("suff_severe");
-        } else if (report.effectiveness < .9 && report.effectiveness > 0.1) {
+        } else if (report.efficiency < .9 && report.efficiency > 0.1) {
             eff = Services.getL18N().Battle().get("suff_less");
-        } else if(report.effectiveness < 0) {
+        } else if(report.efficiency < 0) {
             eff = Services.getL18N().Battle().get("suff_healed");
         } else {
             eff = Services.getL18N().Battle().get("suff_normal");
@@ -45,11 +42,10 @@ public class BattleStringBuilder {
         return message;
     }
 
-    public static String selfDefense(Guardian defensiveGuardian) {
-        String defName = defensiveGuardian.getName();
+    public static String selfDefense(Guardian defender)
+    {
+        String defName = defender.getName();
         String message = defName + " " + Services.getL18N().Battle().get("suff_defense");
         return message;
     }
-
-    /* ..................................................................... GETTERS & SETTERS .. */
 }

@@ -11,7 +11,7 @@ import de.limbusdev.guardianmonsters.guardians.items.equipment.FootEquipment;
 import de.limbusdev.guardianmonsters.guardians.items.equipment.HandEquipment;
 import de.limbusdev.guardianmonsters.guardians.items.equipment.HeadEquipment;
 import de.limbusdev.guardianmonsters.guardians.monsters.BaseStat;
-import de.limbusdev.guardianmonsters.guardians.monsters.GuardianData;
+import de.limbusdev.guardianmonsters.guardians.monsters.SpeciesData;
 
 /**
  * XMLMonsterParser
@@ -21,8 +21,8 @@ import de.limbusdev.guardianmonsters.guardians.monsters.GuardianData;
 
 public class XMLMonsterParser {
 
-    public static GuardianData parseMonster(XmlReader.Element element, GuardianData ancestor) {
-        GuardianData guardianData;
+    public static SpeciesData parseMonster(XmlReader.Element element, SpeciesData ancestor) {
+        SpeciesData speciesData;
 
         // ............................................................................... name & id
         int ID = element.getIntAttribute("id", 0);
@@ -43,8 +43,8 @@ public class XMLMonsterParser {
         int metamorphsTo   = element.getInt("metamorphsTo",  0);
 
         if(ancestor != null) {
-            guardianData = new GuardianData(ID, nameID, metamorphsTo, elements, ancestor);
-            return guardianData;
+            speciesData = new SpeciesData(ID, nameID, metamorphsTo, elements, ancestor);
+            return speciesData;
         }
 
         Array<Integer> metamorphosisNodes = new Array<>();
@@ -88,14 +88,14 @@ public class XMLMonsterParser {
         }
 
         // ............................................................................ construction
-        guardianData = new GuardianData(
+        speciesData = new SpeciesData(
             ID, nameID, metamorphsTo,
             stat, elements,
             attacks, equipmentGraph, metamorphosisNodes,
             head, body, hand, feet
         );
 
-        return guardianData;
+        return speciesData;
     }
 
     private static ArrayMap<Integer, Ability> parseAbilities(XmlReader.Element element) {

@@ -5,7 +5,7 @@ import com.badlogic.gdx.utils.Array;
 
 import de.limbusdev.guardianmonsters.guardians.abilities.Ability;
 import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
-import de.limbusdev.guardianmonsters.guardians.MonsterDB;
+import de.limbusdev.guardianmonsters.guardians.monsters.GuardianDB;
 
 /**
  * Created by georg on 11.01.16.
@@ -20,10 +20,10 @@ public class DebugOutput {
                                    Guardian defender, int defPos,
                                    Ability ability, int damage) {
         System.out.println("Attacker: "
-                + MonsterDB.getInstance().getNameById(attacker.ID) +
+                + GuardianDB.getInstance().getNameById(attacker.ID) +
                 " at Position " + attPos + "\n" +
                 "Defender: " +
-                MonsterDB.getInstance().getNameById(defender.ID) +
+                GuardianDB.getInstance().getNameById(defender.ID) +
                 " at Position " + defPos + "\n" +
                 "Ability: " + ability.name + "\n" +
                 "Damage: " + damage);

@@ -5,8 +5,10 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TeamComponent;
-import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
 import de.limbusdev.guardianmonsters.fwmengine.world.model.MonsterArea;
+import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
+import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
+import de.limbusdev.guardianmonsters.guardians.monsters.GuardianDB;
 
 
 /**
@@ -27,8 +29,8 @@ public class BattleFactory {
     /* ............................................................................... METHODS .. */
     
     /* ..................................................................... GETTERS & SETTERS .. */
-    public Guardian createMonster(int ID) {
-        Guardian guardian = new Guardian(ID);
+    public AGuardian createMonster(int ID) {
+        AGuardian guardian = GuardianDB.getInstance().createGuardian(ID, 1);
         this.monsters.put(ID, guardian);
         return guardian;
     }

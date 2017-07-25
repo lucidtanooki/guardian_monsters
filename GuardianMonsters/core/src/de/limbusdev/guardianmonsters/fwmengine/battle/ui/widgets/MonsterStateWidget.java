@@ -12,11 +12,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 import com.badlogic.gdx.utils.Align;
 
-import de.limbusdev.guardianmonsters.services.Services;
-import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
-import de.limbusdev.guardianmonsters.guardians.MonsterDB;
-import de.limbusdev.guardianmonsters.guardians.monsters.Stat;
 import de.limbusdev.guardianmonsters.Constant;
+import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
+import de.limbusdev.guardianmonsters.guardians.monsters.GuardianDB;
+import de.limbusdev.guardianmonsters.guardians.monsters.Stat;
+import de.limbusdev.guardianmonsters.services.Services;
 
 /**
  * Widget for displaying monster status in battle: HP, MP, EXP, Name, Level
@@ -101,7 +101,7 @@ public class MonsterStateWidget extends WidgetGroup implements Listener<Guardian
      */
     public void init(Guardian guardian) {
         refresh(guardian);
-        nameLabel.setText(Services.getL18N().Guardians().get((MonsterDB.getInstance().getNameById(guardian.ID))));
+        nameLabel.setText(Services.getL18N().Guardians().get((GuardianDB.getInstance().getNameById(guardian.ID))));
         guardian.add(this);
     }
 

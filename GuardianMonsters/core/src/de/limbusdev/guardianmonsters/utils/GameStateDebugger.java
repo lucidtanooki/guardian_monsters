@@ -6,24 +6,24 @@ import com.badlogic.gdx.utils.Array;
 
 import de.limbusdev.guardianmonsters.Constant;
 import de.limbusdev.guardianmonsters.fwmengine.battle.control.BattleSystem;
+import de.limbusdev.guardianmonsters.fwmengine.battle.model.BattleFactory;
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.BattleResult;
+import de.limbusdev.guardianmonsters.fwmengine.battle.ui.BattleScreen;
 import de.limbusdev.guardianmonsters.fwmengine.battleresult.BattleResultScreen;
 import de.limbusdev.guardianmonsters.fwmengine.guardosphere.GuardoSphereScreen;
+import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager;
+import de.limbusdev.guardianmonsters.fwmengine.menus.ui.InventoryScreen;
 import de.limbusdev.guardianmonsters.fwmengine.metamorphosis.MetamorphosisScreen;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TeamComponent;
-import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager;
-import de.limbusdev.guardianmonsters.fwmengine.battle.model.BattleFactory;
-import de.limbusdev.guardianmonsters.fwmengine.battle.ui.BattleScreen;
-import de.limbusdev.guardianmonsters.fwmengine.menus.ui.InventoryScreen;
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.WorldScreen;
 import de.limbusdev.guardianmonsters.guardians.AbilityDB;
-import de.limbusdev.guardianmonsters.model.gamestate.GameState;
-import de.limbusdev.guardianmonsters.guardians.items.Inventory;
 import de.limbusdev.guardianmonsters.guardians.ItemDB;
+import de.limbusdev.guardianmonsters.guardians.items.Inventory;
 import de.limbusdev.guardianmonsters.guardians.items.Item;
 import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
-import de.limbusdev.guardianmonsters.guardians.MonsterDB;
+import de.limbusdev.guardianmonsters.guardians.monsters.GuardianDB;
 import de.limbusdev.guardianmonsters.guardians.monsters.Team;
+import de.limbusdev.guardianmonsters.model.gamestate.GameState;
 
 /**
  * @author Georg Eckert 2016
@@ -110,12 +110,12 @@ public class GameStateDebugger {
         inventory.putItemInInventory(ItemDB.getInstance().getItem("medicine-blue"));
         inventory.putItemInInventory(ItemDB.getInstance().getItem("angel-tear"));
 
-        int i = MonsterDB.getNumberOfAncestors(1);
-        i = MonsterDB.getNumberOfAncestors(2);
-        i = MonsterDB.getNumberOfAncestors(3);
-        i = MonsterDB.getNumberOfAncestors(4);
-        i = MonsterDB.getNumberOfAncestors(5);
-        i = MonsterDB.getNumberOfAncestors(6);
+        int i = GuardianDB.getNumberOfAncestors(1);
+        i = GuardianDB.getNumberOfAncestors(2);
+        i = GuardianDB.getNumberOfAncestors(3);
+        i = GuardianDB.getNumberOfAncestors(4);
+        i = GuardianDB.getNumberOfAncestors(5);
+        i = GuardianDB.getNumberOfAncestors(6);
 
 
 
@@ -169,7 +169,7 @@ public class GameStateDebugger {
     }
 
     public void testMonsterParsing() {
-        MonsterDB mi = MonsterDB.getInstance();
+        GuardianDB mi = GuardianDB.getInstance();
         System.out.println("Tested");
     }
 

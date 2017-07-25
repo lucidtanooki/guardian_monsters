@@ -1,119 +1,74 @@
 package de.limbusdev.guardianmonsters.guardians.monsters;
 
-import com.badlogic.ashley.signals.Listener;
-import com.badlogic.ashley.signals.Signal;
-import com.badlogic.gdx.utils.Array;
-
-import de.limbusdev.guardianmonsters.guardians.Element;
-import de.limbusdev.guardianmonsters.guardians.MonsterDB;
-import de.limbusdev.guardianmonsters.guardians.abilities.AbilityGraph;
+import de.limbusdev.guardianmonsters.guardians.abilities.IAbilityGraph;
 
 /**
  * Monster is the basic entity for the BattleSystem
  *
  * @author Georg Eckert 2015
  */
-public class Guardian extends Signal<Guardian> implements Listener<Stat>
+public class Guardian extends AGuardian
 {
-    // ............................................................................................. STATIC
-    public static int INSTANCECOUNTER=0;
+    // Components
+    private SpeciesData   data;
+    private Stat          stat;
+    private IAbilityGraph abilityGraph;
 
-    // ............................................................................................. ATTRIBUTES
-    public final int INSTANCE_ID;
-    public final int ID;
-
-    public final GuardianData data;
-    public final Stat stat;
-    public final String nickname;
-
-    public AbilityGraph abilityGraph;
+    private String nickname;
 
     // ............................................................................................. CONSTRUCTOR
-
-    public Guardian(int ID)
-    {
-        this.INSTANCE_ID = INSTANCECOUNTER;
-        INSTANCECOUNTER++;
-
-        this.ID = ID;
-        this.nickname = "";
-
-        // Retrieve monster data from DataBase
-        data = MonsterDB.getData(ID);
-        Array<Element> elements = data.getElements();
-
-        // Initialize Ability Graph
-        abilityGraph = new AbilityGraph(data);
-        abilityGraph.activateNode(0);
-        abilityGraph.setActiveAbility(0,0);
-
-        int ancestors = MonsterDB.getNumberOfAncestors(ID);
-        for(int i=0; i<ancestors; i++) {
-            abilityGraph.activateNode(abilityGraph.metamorphosisNodes.get(i));
-        }
-
-        // Copy base stats over and register monster as listener at it's stats
-        this.stat = new Stat(1, data.getBaseStat());
-        this.stat.add(this);
-    }
-
     /**
-     * For Serialization Only!
+     * The protected constructor makes it available from the {@link AGuardianFactory} only.
+     * @param ID
      */
-    public Guardian(int ID, String nickname, AbilityGraph abilityGraph, Stat stat)
+    protected Guardian(int ID, SpeciesData data, Stat stat, IAbilityGraph abilityGraph)
     {
-        this.INSTANCE_ID = INSTANCECOUNTER;
-        INSTANCECOUNTER++;
+        super();
 
-        this.ID = ID;
-        this.nickname = nickname;
-        this.data = MonsterDB.getData(ID);
+        this.data = data;
         this.stat = stat;
         this.abilityGraph = abilityGraph;
+
+        this.nickname = "";
     }
 
-
-    /* ............................................................................... METHODS .. */
-
-
-    public boolean equals(Object monster)
+    // ............................................................................................. GETTERS & SETTERS
+    @Override
+    public SpeciesData getSpeciesData()
     {
-        if(!(monster instanceof Guardian)) return false;
-        else return equalsMonster((Guardian) monster);
+        return data;
     }
 
-    /**
-     * Checks wether two monster objects define the same monster
-     * @param otherGuardian
-     * @return
-     */
-    public boolean equalsMonster(Guardian otherGuardian)
+    @Override
+    public Stat getStat()
     {
-        if(INSTANCE_ID == otherGuardian.INSTANCE_ID) return true;
-        else return false;
+        return stat;
     }
 
-
-    /* ..................................................................... GETTERS & SETTERS .. */
-
-    public String getName()
+    @Override
+    public IAbilityGraph getAbilityGraph()
     {
-        return data.getNameID();
+        return abilityGraph;
     }
 
+    @Override
+    public String getNickname()
+    {
+        return nickname;
+    }
+
+    @Override
+    public void setNickname(String name)
+    {
+        this.nickname = name;
+    }
+
+    // ............................................................................................. OBJECT
     @Override
     public String toString()
     {
         String out = "";
-        out += data.getNameID() + " Level: " + stat.getLevel();
+        out += data.getNameID() + " Level: " + stat.getLevel() + " Instance: " + getInstanceID();
         return out;
-    }
-
-
-    // ............................................................................... STAT LISTENER
-
-    @Override
-    public void receive(Signal<Stat> signal, Stat object) {
-        dispatch(this);
     }
 }

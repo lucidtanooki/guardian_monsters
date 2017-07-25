@@ -4,9 +4,9 @@ import com.badlogic.ashley.signals.Signal;
 import com.badlogic.gdx.math.MathUtils;
 
 import de.limbusdev.guardianmonsters.guardians.Constant;
+import de.limbusdev.guardianmonsters.guardians.abilities.AbilityGraph;
 import de.limbusdev.guardianmonsters.guardians.items.equipment.Equipment;
 import de.limbusdev.guardianmonsters.guardians.items.equipment.EquipmentPotential;
-import de.limbusdev.guardianmonsters.guardians.abilities.AbilityGraph;
 import de.limbusdev.utils.MathTool;
 
 import static de.limbusdev.guardianmonsters.guardians.monsters.Stat.Growth.FAST;
@@ -19,7 +19,7 @@ import static de.limbusdev.guardianmonsters.guardians.monsters.Stat.Growth.SLOW;
 import static de.limbusdev.guardianmonsters.guardians.monsters.Stat.Growth.SLOWHP;
 
 /**
- * Stat contains all statistic values of a {@link Guardian}. The statistic values at level 1 should
+ * Stat contains all statistic values of a {@link AGuardian}. The statistic values at level 1 should
  * be copied over from {@link BaseStat}
  *
  * The Status Values (Stats) are:
@@ -37,20 +37,20 @@ import static de.limbusdev.guardianmonsters.guardians.monsters.Stat.Growth.SLOWH
  * @author Georg Eckert 2016
  */
 
-public class Stat extends Signal<Stat> {
-
-    public static abstract class Character {
-        public static final int BALANCED=0, VIVACIOUS=1, PRUDENT=2;
+public class Stat extends Signal<Stat>
+{
+    public interface Character {
+        int BALANCED=0, VIVACIOUS=1, PRUDENT=2;
     }
 
-    public static abstract class Growth {
-        public static final int[] SLOW={1,2,0}, MED={1,3,0}, FAST={3,2,0};
-        public static final int[] SLOWHP={4,30,100}, MEDHP={4,40,100}, FASTHP={4,50,100};
-        public static final int[] SLOWMP={2,20,30},  MEDMP={3,30,40},  FASTMP={4,30,50};
+    public interface Growth {
+        int[] SLOW={1,2,0}, MED={1,3,0}, FAST={3,2,0};
+        int[] SLOWHP={4,30,100}, MEDHP={4,40,100}, FASTHP={4,50,100};
+        int[] SLOWMP={2,20,30},  MEDMP={3,30,40},  FASTMP={4,30,50};
     }
 
-    public static abstract class StatType {
-        public static final int PSTR=0, PDEF=1, MSTR=2, MDEF=3, SPEED=4, HP=5, MP=6;
+    public interface StatType {
+        int PSTR=0, PDEF=1, MSTR=2, MDEF=3, SPEED=4, HP=5, MP=6;
     }
 
     public static final int[][][] characterGrowthRates = {
@@ -84,7 +84,8 @@ public class Stat extends Signal<Stat> {
     public Stat(int level, int abilityLevels, int EXP, int character, BaseStat base,
                 int HP, int MP, int PStr, int PDef, int MStr, int MDef, int speed,
                 int HPmax, int MPmax, int PStrMax, int PDefMax, int MStrMax, int MDefMax, int speedMax,
-                Equipment hands, Equipment head, Equipment body, Equipment feet) {
+                Equipment hands, Equipment head, Equipment body, Equipment feet)
+    {
         this.level = level;
         this.abilityLevels = abilityLevels;
         this.EXP = EXP;

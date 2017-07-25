@@ -17,8 +17,8 @@ package de.limbusdev.guardianmonsters.guardians.monsters;
  * Created by Georg Eckert 2016
  */
 
-public class BaseStat {
-
+public class BaseStat
+{
     private int ID;
     private int baseHP;
     private int baseMP;

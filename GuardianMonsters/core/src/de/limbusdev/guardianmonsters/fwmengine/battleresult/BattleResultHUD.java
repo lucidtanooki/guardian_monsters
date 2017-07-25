@@ -16,15 +16,15 @@ import com.badlogic.gdx.utils.Array;
 
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.BattleResult;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.LevelUpWidget;
-import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.fwmengine.ui.AHUD;
-import de.limbusdev.guardianmonsters.guardians.MonsterDB;
 import de.limbusdev.guardianmonsters.guardians.items.Item;
 import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
+import de.limbusdev.guardianmonsters.guardians.monsters.GuardianDB;
 import de.limbusdev.guardianmonsters.guardians.monsters.Team;
+import de.limbusdev.guardianmonsters.services.Services;
 
-import static de.limbusdev.guardianmonsters.Constant.WIDTH;
 import static de.limbusdev.guardianmonsters.Constant.HEIGHT;
+import static de.limbusdev.guardianmonsters.Constant.WIDTH;
 
 /**
  * BattleResultHUD
@@ -57,7 +57,7 @@ public class BattleResultHUD extends AHUD {
             Guardian guardian = team.get(key);
             Image face = Services.getMedia().getMonsterFace(guardian.ID);
             table.add(face).left();
-            Label name = new Label(Services.getL18N().Guardians().get(MonsterDB.getNameById(guardian.ID)), skin, "default");
+            Label name = new Label(Services.getL18N().Guardians().get(GuardianDB.getNameById(guardian.ID)), skin, "default");
             table.add(name).left();
             Image expKey = new Image(skin.getDrawable("symbol-exp"));
             table.add(expKey).left();

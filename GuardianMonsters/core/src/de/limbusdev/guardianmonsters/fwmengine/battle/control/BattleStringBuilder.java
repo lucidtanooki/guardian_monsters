@@ -1,9 +1,9 @@
 package de.limbusdev.guardianmonsters.fwmengine.battle.control;
 
-import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.AttackCalculationReport;
 import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
-import de.limbusdev.guardianmonsters.guardians.MonsterDB;
+import de.limbusdev.guardianmonsters.guardians.monsters.GuardianDB;
+import de.limbusdev.guardianmonsters.services.Services;
 
 /**
  * @author Georg Eckert 2017
@@ -12,14 +12,14 @@ public class BattleStringBuilder
 {
     public static String receivedDamage(Guardian victim, int damage)
     {
-        String text = MonsterDB.getInstance().getNameById(victim.ID) + " lost " + damage + " HP";
+        String text = GuardianDB.getInstance().getNameById(victim.ID) + " lost " + damage + " HP";
         return text;
     }
 
     public static String givenDamage(Guardian attacker, Guardian victim, AttackCalculationReport report)
     {
-        String attName = MonsterDB.getInstance().getNameById(attacker.ID);
-        String defName = MonsterDB.getInstance().getNameById(victim.ID);
+        String attName = GuardianDB.getInstance().getNameById(attacker.ID);
+        String defName = GuardianDB.getInstance().getNameById(victim.ID);
 
         String eff;
         if(report.efficiency > 1.1) {

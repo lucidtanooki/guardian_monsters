@@ -6,7 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ArrayMap;
 
-import de.limbusdev.guardianmonsters.services.Services;
+import de.limbusdev.guardianmonsters.Constant;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.abilities.AbilityDetailWidget;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.abilities.GraphWidget;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.team.TeamMemberSwitcher;
@@ -14,7 +14,7 @@ import de.limbusdev.guardianmonsters.fwmengine.menus.ui.widgets.LogoWithCounter;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.widgets.ScrollableWidget;
 import de.limbusdev.guardianmonsters.fwmengine.metamorphosis.MetamorphosisScreen;
 import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
-import de.limbusdev.guardianmonsters.Constant;
+import de.limbusdev.guardianmonsters.services.Services;
 
 
 /**
@@ -103,7 +103,7 @@ public class AbilityGraphSubMenu extends AInventorySubMenu implements Listener<G
 
     @Override
     public void receive(Signal<Guardian> signal, Guardian guardian) {
-        if(guardian.equalsMonster(team.get(switcher.getCurrentlyChosen()))) {
+        if(guardian.equals(team.get(switcher.getCurrentlyChosen()))) {
             refresh();
         }
     }

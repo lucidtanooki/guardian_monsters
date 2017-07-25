@@ -5,28 +5,27 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 
 import de.limbusdev.guardianmonsters.guardians.items.equipment.BodyPart;
-import de.limbusdev.guardianmonsters.guardians.monsters.GuardianData;
+import de.limbusdev.guardianmonsters.guardians.monsters.SpeciesData;
 
 /**
  * @author Georg Eckert 2017
  */
 
-public class AbilityGraph extends Signal<AbilityGraph> {
-
-    private final static int X=0, Y=1;
-
+public class AbilityGraph extends Signal<AbilityGraph> implements IAbilityGraph
+{
     private ArrayMap<Integer, Node> nodes;
     private Array<Edge> edges;
 
-    public ArrayMap<Integer,Ability> abilityNodes;
-    public ArrayMap<Integer,BodyPart> equipmentNodes;
-    public Array<Integer> metamorphosisNodes;
+    private ArrayMap<Integer,Ability> abilityNodes;
+    private ArrayMap<Integer,BodyPart> equipmentNodes;
+    private Array<Integer> metamorphosisNodes;
 
     private ArrayMap<Integer, Ability> activeAbilities;
-    public ArrayMap<Integer,Ability> learntAbilities;
-    public Array<BodyPart> learntEquipment;
+    private ArrayMap<Integer,Ability> learntAbilities;
+    private Array<BodyPart> learntEquipment;
 
-    public AbilityGraph(GuardianData data) {
+    public AbilityGraph(SpeciesData data)
+    {
         nodes = new ArrayMap<>();
         edges = new Array<>();
         abilityNodes = new ArrayMap<>();
@@ -51,33 +50,10 @@ public class AbilityGraph extends Signal<AbilityGraph> {
         }
 
         init(data);
-
     }
 
-    private void init(GuardianData data) {
-        for(int key : data.getAbilityNodes().keys()) {
-            nodes.get(key).type = Node.Type.ABILITY;
-            abilityNodes.put(key, data.getAbilityNodes().get(key));
-        }
-        for(int key : data.getEquipmentNodes().keys()) {
-            nodes.get(key).type = Node.Type.EQUIPMENT;
-            equipmentNodes.put(key, data.getEquipmentNodes().get(key));
-        }
-        for(int key : data.getMetamorphosisNodes()) {
-            nodes.get(key).type = Node.Type.METAMORPHOSIS;
-            metamorphosisNodes.add(key);
-        }
-
-        int counter = 0;
-        for(Ability a : learntAbilities.values()) {
-            activeAbilities.put(counter, a);
-            counter++;
-        }
-
-        activateNode(0);
-    }
-
-    public AbilityGraph(ArrayMap<Integer, Node> nodes, Array<Edge> edges, ArrayMap<Integer, Ability> abilityNodes, ArrayMap<Integer, BodyPart> equipmentNodes, Array<Integer> metamorphosisNodes, ArrayMap<Integer, Ability> activeAbilities, ArrayMap<Integer, Ability> learntAbilities, Array<BodyPart> learntEquipment) {
+    public AbilityGraph(ArrayMap<Integer, Node> nodes, Array<Edge> edges, ArrayMap<Integer, Ability> abilityNodes, ArrayMap<Integer, BodyPart> equipmentNodes, Array<Integer> metamorphosisNodes, ArrayMap<Integer, Ability> activeAbilities, ArrayMap<Integer, Ability> learntAbilities, Array<BodyPart> learntEquipment)
+    {
         this.nodes = nodes;
         this.edges = edges;
         this.abilityNodes = abilityNodes;
@@ -88,21 +64,67 @@ public class AbilityGraph extends Signal<AbilityGraph> {
         this.learntEquipment = learntEquipment;
     }
 
+    private void init(SpeciesData data)
+    {
+        for(int key : data.getAbilityNodes().keys())
+        {
+            nodes.get(key).type = Node.Type.ABILITY;
+            abilityNodes.put(key, data.getAbilityNodes().get(key));
+        }
+
+        for(int key : data.getEquipmentNodes().keys())
+        {
+            nodes.get(key).type = Node.Type.EQUIPMENT;
+            equipmentNodes.put(key, data.getEquipmentNodes().get(key));
+        }
+
+        for(int key : data.getMetamorphosisNodes())
+        {
+            nodes.get(key).type = Node.Type.METAMORPHOSIS;
+            metamorphosisNodes.add(key);
+        }
+
+        int counter = 0;
+        for(Ability a : learntAbilities.values())
+        {
+            activeAbilities.put(counter, a);
+            counter++;
+        }
+
+        activateNode(0);
+    }
+
+
     // ........................................................................... GETTERS & SETTERS
+    @Override
     public ArrayMap<Integer, Node> getNodes() {
         return nodes;
     }
 
+    @Override
     public Array<Edge> getEdges() {
         return edges;
     }
 
+    @Override
+    public ArrayMap<Integer, Ability> getAbilityNodes()
+    {
+        return abilityNodes;
+    }
 
-    /**
-     * Sets the state of the given node to ACTIVE and learns the
-     * ability at that node
-     * @param nodeID
-     */
+    @Override
+    public ArrayMap<Integer, BodyPart> getEquipmentNodes()
+    {
+        return equipmentNodes;
+    }
+
+    @Override
+    public Array<Integer> getMetamorphosisNodes()
+    {
+        return metamorphosisNodes;
+    }
+
+    @Override
     public void activateNode(int nodeID) {
         Node node = nodes.get(nodeID);
 
@@ -123,24 +145,17 @@ public class AbilityGraph extends Signal<AbilityGraph> {
         dispatch(this);
     }
 
+    @Override
     public boolean isNodeEnabled(int nodeID) {
         return nodes.get(nodeID).isEnabled();
     }
 
-    /**
-     * Wether this monster learns an attack or other ability at this node
-     * @param nodeID
-     * @return
-     */
+    @Override
     public boolean learnsAbilityAt(int nodeID) {
         return abilityNodes.containsKey(nodeID);
     }
 
-    /**
-     * Wether this monster learns to carry some kind of equipment at this node
-     * @param nodeID
-     * @return
-     */
+    @Override
     public boolean learnsEquipmentAt(int nodeID) {
         return equipmentNodes.containsKey(nodeID);
     }
@@ -149,15 +164,12 @@ public class AbilityGraph extends Signal<AbilityGraph> {
         return metamorphosisNodes.contains(nodeID, false);
     }
 
-    /**
-     * Wether this monster learns an ability or to carry equipment at this node
-     * @param nodeID
-     * @return
-     */
+    @Override
     public boolean learnsSomethingAt(int nodeID) {
         return (learnsAbilityAt(nodeID) || learnsEquipmentAt(nodeID) || metamorphsAt(nodeID));
     }
 
+    @Override
     public Node.Type nodeTypeAt(int nodeID) {
         if(learnsAbilityAt(nodeID)) {
             return Node.Type.ABILITY;
@@ -171,17 +183,42 @@ public class AbilityGraph extends Signal<AbilityGraph> {
         return Node.Type.EMPTY;
     }
 
-    /**
-     * Finds out if the ability to carry a specific equipment has already been learnt
-     * @param bodyPart  the body part in question
-     * @return          if it is already possible to carry such equipment
-     */
+    @Override
     public boolean hasLearntEquipment(BodyPart bodyPart) {
         if(learntEquipment.contains(bodyPart,true)) {
             return true;
         } else {
             return false;
         }
+    }
+
+    @Override
+    public Ability getActiveAbility(int abilitySlot) {
+        return activeAbilities.get(abilitySlot);
+    }
+
+    @Override
+    public void setActiveAbility(int slot, int learntAbilityNumber) {
+        Ability abilityToLearn = learntAbilities.get(learntAbilityNumber);
+        if(abilityToLearn == null) return;
+
+        for(int key : activeAbilities.keys()) {
+            Ability abilityAtThisSlot = activeAbilities.get(key);
+
+            if(abilityAtThisSlot != null) {
+                if (abilityAtThisSlot.equals(abilityToLearn)) {
+                    activeAbilities.put(key, null);
+                }
+            }
+        }
+        activeAbilities.put(slot, learntAbilities.get(learntAbilityNumber));
+
+        dispatch(this);
+    }
+
+    @Override
+    public ArrayMap<Integer, Ability> getActiveAbilities() {
+        return activeAbilities;
     }
 
 
@@ -211,41 +248,5 @@ public class AbilityGraph extends Signal<AbilityGraph> {
                 nodes.get(enableID).enable();
             }
         }
-    }
-
-    /**
-     * returns the ability placed at the given slot
-     * @param abilitySlot   slot for in battle ability usage
-     * @return              ability which resides there
-     */
-    public Ability getActiveAbility(int abilitySlot) {
-        return activeAbilities.get(abilitySlot);
-    }
-
-    /**
-     * Puts an ability into one of seven slots, available in battle
-     * @param slot                  where the ability should be placed in battle
-     * @param learntAbilityNumber   number of ability to be placed there
-     */
-    public void setActiveAbility(int slot, int learntAbilityNumber) {
-        Ability abilityToLearn = learntAbilities.get(learntAbilityNumber);
-        if(abilityToLearn == null) return;
-
-        for(int key : activeAbilities.keys()) {
-            Ability abilityAtThisSlot = activeAbilities.get(key);
-
-            if(abilityAtThisSlot != null) {
-                if (abilityAtThisSlot.equals(abilityToLearn)) {
-                    activeAbilities.put(key, null);
-                }
-            }
-        }
-        activeAbilities.put(slot, learntAbilities.get(learntAbilityNumber));
-
-        dispatch(this);
-    }
-
-    public ArrayMap<Integer, Ability> getActiveAbilities() {
-        return activeAbilities;
     }
 }

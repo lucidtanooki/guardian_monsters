@@ -1,6 +1,7 @@
 package de.limbusdev.guardianmonsters.fwmengine.battle.control;
 
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.AttackCalculationReport;
+import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.GuardianDB;
 import de.limbusdev.guardianmonsters.services.Services;
@@ -12,14 +13,14 @@ public class BattleStringBuilder
 {
     public static String receivedDamage(Guardian victim, int damage)
     {
-        String text = GuardianDB.getInstance().getNameById(victim.ID) + " lost " + damage + " HP";
+        String text = GuardianDB.getInstance().getNameById(victim.getID()) + " lost " + damage + " HP";
         return text;
     }
 
-    public static String givenDamage(Guardian attacker, Guardian victim, AttackCalculationReport report)
+    public static String givenDamage(AGuardian attacker, AGuardian victim, AttackCalculationReport report)
     {
-        String attName = GuardianDB.getInstance().getNameById(attacker.ID);
-        String defName = GuardianDB.getInstance().getNameById(victim.ID);
+        String attName = GuardianDB.getInstance().getNameById(attacker.getID());
+        String defName = GuardianDB.getInstance().getNameById(victim.getID());
 
         String eff;
         if(report.efficiency > 1.1) {
@@ -34,17 +35,17 @@ public class BattleStringBuilder
 
         String message = Services.getL18N().Battle().format(
             "batt_message",
-            attacker.getName(),
-            victim.getName(),
+            attacker.getNickname(),
+            victim.getNickname(),
             Services.getL18N().getLocalizedAbilityName(report.attack.name),
             report.damage, eff);
 
         return message;
     }
 
-    public static String selfDefense(Guardian defender)
+    public static String selfDefense(AGuardian defender)
     {
-        String defName = defender.getName();
+        String defName = defender.getNickname();
         String message = defName + " " + Services.getL18N().Battle().get("suff_defense");
         return message;
     }

@@ -2,7 +2,7 @@ package de.limbusdev.guardianmonsters.guardians.items.medicine;
 
 
 import de.limbusdev.guardianmonsters.guardians.items.Item;
-import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
+import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 
 /**
  * AMedicalItem
@@ -17,7 +17,7 @@ public abstract class AMedicalItem extends Item
         super(name, Category.MEDICINE);
     }
 
-    public abstract void apply(Guardian guardian);
+    public abstract void apply(AGuardian guardian);
 
-    public abstract boolean applicable(Guardian guardian);
+    public abstract boolean applicable(AGuardian guardian);
 }

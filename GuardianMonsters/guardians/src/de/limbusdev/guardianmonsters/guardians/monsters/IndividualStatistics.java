@@ -1,6 +1,5 @@
 package de.limbusdev.guardianmonsters.guardians.monsters;
 
-import com.badlogic.ashley.signals.Signal;
 import com.badlogic.gdx.math.MathUtils;
 
 import de.limbusdev.guardianmonsters.guardians.Constant;
@@ -9,18 +8,20 @@ import de.limbusdev.guardianmonsters.guardians.items.equipment.Equipment;
 import de.limbusdev.guardianmonsters.guardians.items.equipment.EquipmentPotential;
 import de.limbusdev.utils.MathTool;
 
-import static de.limbusdev.guardianmonsters.guardians.monsters.Stat.Growth.FAST;
-import static de.limbusdev.guardianmonsters.guardians.monsters.Stat.Growth.FASTHP;
-import static de.limbusdev.guardianmonsters.guardians.monsters.Stat.Growth.FASTMP;
-import static de.limbusdev.guardianmonsters.guardians.monsters.Stat.Growth.MED;
-import static de.limbusdev.guardianmonsters.guardians.monsters.Stat.Growth.MEDHP;
-import static de.limbusdev.guardianmonsters.guardians.monsters.Stat.Growth.MEDMP;
-import static de.limbusdev.guardianmonsters.guardians.monsters.Stat.Growth.SLOW;
-import static de.limbusdev.guardianmonsters.guardians.monsters.Stat.Growth.SLOWHP;
+import static de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics.Growth.FAST;
+import static de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics.Growth.FASTHP;
+import static de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics.Growth.FASTMP;
+import static de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics.Growth.MED;
+import static de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics.Growth.MEDHP;
+import static de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics.Growth.MEDMP;
+import static de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics.Growth.SLOW;
+import static de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics.Growth.SLOWHP;
 
 /**
- * Stat contains all statistic values of a {@link AGuardian}. The statistic values at level 1 should
- * be copied over from {@link BaseStat}
+ * Guardians Individual Statistic Component
+ *
+ * IndividualStatisticscontains all statistic values of a {@link AGuardian}. The statistic values at
+ * level 1 should be copied over from {@link CommonStatistics}
  *
  * The Status Values (Stats) are:
  *
@@ -37,7 +38,7 @@ import static de.limbusdev.guardianmonsters.guardians.monsters.Stat.Growth.SLOWH
  * @author Georg Eckert 2016
  */
 
-public class Stat extends Signal<Stat>
+public class IndividualStatistics
 {
     public interface Character {
         int BALANCED=0, VIVACIOUS=1, PRUDENT=2;
@@ -59,12 +60,14 @@ public class Stat extends Signal<Stat>
         {MED, FAST, SLOW, FAST, SLOW, FASTHP, FASTMP}   // PRUDENT
     };
 
+    private AGuardian core;  // Core Object
+
     private int level;
     private int abilityLevels;
     private int EXP;
 
     public int character;   // for growth rates
-    public BaseStat base;
+    public CommonStatistics base;
 
     private int HP, MP, PStr, PDef, MStr, MDef, Speed;
     private int HPmax, MPmax, PStrMax, PDefMax, MStrMax, MDefMax, SpeedMax;
@@ -76,15 +79,15 @@ public class Stat extends Signal<Stat>
 
     private LevelUpReport lvlUpReport;
 
-    // ................................................................................. CONSTRUCTOR
+    // ............................................................................................. CONSTRUCTOR
 
     /**
      * For Serialization only!
      */
-    public Stat(int level, int abilityLevels, int EXP, int character, BaseStat base,
-                int HP, int MP, int PStr, int PDef, int MStr, int MDef, int speed,
-                int HPmax, int MPmax, int PStrMax, int PDefMax, int MStrMax, int MDefMax, int speedMax,
-                Equipment hands, Equipment head, Equipment body, Equipment feet)
+    public IndividualStatistics(int level, int abilityLevels, int EXP, int character, CommonStatistics base,
+                                int HP, int MP, int PStr, int PDef, int MStr, int MDef, int speed,
+                                int HPmax, int MPmax, int PStrMax, int PDefMax, int MStrMax, int MDefMax, int speedMax,
+                                Equipment hands, Equipment head, Equipment body, Equipment feet)
     {
         this.level = level;
         this.abilityLevels = abilityLevels;
@@ -112,11 +115,11 @@ public class Stat extends Signal<Stat>
         lvlUpReport = new LevelUpReport(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
     }
 
-    public Stat(int level, BaseStat baseStat, int character) {
+    public IndividualStatistics(int level, CommonStatistics baseStat, int character) {
         construct(level, baseStat, character);
     }
 
-    public Stat(int level, BaseStat baseStat) {
+    public IndividualStatistics(int level, CommonStatistics baseStat) {
         int character;
         // Choose a random character
         switch(MathUtils.random(0,2)) {
@@ -127,7 +130,7 @@ public class Stat extends Signal<Stat>
         construct(level, baseStat, character);
     }
 
-    private void construct(int level, BaseStat baseStat, int character) {
+    private void construct(int level, CommonStatistics baseStat, int character) {
         this.base = baseStat;
         this.character = character;
 
@@ -153,7 +156,7 @@ public class Stat extends Signal<Stat>
         lvlUpReport = new LevelUpReport(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
     }
 
-    // ..................................................................................... METHODS
+    // ............................................................................................. METHODS
     private LevelUpReport levelUp() {
 
         LevelUpReport report = new LevelUpReport(
@@ -182,7 +185,8 @@ public class Stat extends Signal<Stat>
 
         this.lvlUpReport = report;
 
-        dispatch(this);
+        core.setStatisticsChanged();
+        core.notifyObservers();
 
         return report;
     }
@@ -206,7 +210,8 @@ public class Stat extends Signal<Stat>
             leveledUp = true;
         }
 
-        dispatch(this);
+        core.setStatisticsChanged();
+        core.notifyObservers();
 
         return leveledUp;
     }
@@ -280,7 +285,7 @@ public class Stat extends Signal<Stat>
         setSpeed(MathUtils.round(Speed * (100 + fraction)/(100f)));
     }
 
-    // ........................................................................... CALCULATED VALUES
+    // ............................................................................................. CALCULATED VALUES
 
     public String getHPfractionAsString() {
         return (Integer.toString(HP) + "/" + Integer.toString(getHPmax()));
@@ -344,7 +349,8 @@ public class Stat extends Signal<Stat>
                 break;
         }
 
-        dispatch(this);
+        core.setStatisticsChanged();
+        core.notifyObservers();
 
         return oldEquipment;
     }
@@ -401,7 +407,7 @@ public class Stat extends Signal<Stat>
         return pot;
     }
 
-    // ........................................................................... SETTERS & GETTERS
+    // ............................................................................................. SETTERS & GETTERS
 
     public int getLevel() {
         return level;
@@ -648,7 +654,8 @@ public class Stat extends Signal<Stat>
         if(HP > getHPmax()) this.HP = getHPmax();
         if(HP < 0)          this.HP = 0;
 
-        dispatch(this);
+        core.setStatisticsChanged();
+        core.notifyObservers();
     }
 
     public void setMP(int MP) {
@@ -657,7 +664,8 @@ public class Stat extends Signal<Stat>
         if(MP > getMPmax()) this.MP = getMPmax();
         if(MP < 0)          this.MP = 0;
 
-        dispatch(this);
+        core.setStatisticsChanged();
+        core.notifyObservers();
     }
 
     public void setPStr(int PStr) {
@@ -666,7 +674,8 @@ public class Stat extends Signal<Stat>
         if(PStr > getPStrMax()*1.5f) this.PStr = getPStrMax();
         if(PStr < 1)            this.PStr = 1;
 
-        dispatch(this);
+        core.setStatisticsChanged();
+        core.notifyObservers();
     }
 
     public void setPDef(int PDef) {
@@ -675,7 +684,8 @@ public class Stat extends Signal<Stat>
         if(PDef > getPDefMax()*1.5f) this.PDef = getPDefMax();
         if(PDef < 1)            this.PDef = 1;
 
-        dispatch(this);
+        core.setStatisticsChanged();
+        core.notifyObservers();
     }
 
     public void setMStr(int MStr) {
@@ -684,7 +694,8 @@ public class Stat extends Signal<Stat>
         if(MStr > getMStrMax()*1.5f) this.MStr = getMStrMax();
         if(MStr < 1)            this.MStr = 1;
 
-        dispatch(this);
+        core.setStatisticsChanged();
+        core.notifyObservers();
     }
 
     public void setMDef(int MDef) {
@@ -693,7 +704,8 @@ public class Stat extends Signal<Stat>
         if(MDef > getMDefMax()*1.5f) this.MDef = getMDefMax();
         if(MDef < 1)            this.MDef = 1;
 
-        dispatch(this);
+        core.setStatisticsChanged();
+        core.notifyObservers();
     }
 
     public void setSpeed(int Speed) {
@@ -702,7 +714,8 @@ public class Stat extends Signal<Stat>
         if(Speed > getSpeedMax()) this.Speed = getSpeedMax();
         if(Speed < 1)          this.Speed = 1;
 
-        dispatch(this);
+        core.setStatisticsChanged();
+        core.notifyObservers();
     }
 
     /**
@@ -711,7 +724,8 @@ public class Stat extends Signal<Stat>
      */
     public void consumeAbilityLevel() {
         this.abilityLevels--;
-        dispatch(this);
+        core.setStatisticsChanged();
+        core.notifyObservers();
     }
 
 

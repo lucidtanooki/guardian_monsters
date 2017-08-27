@@ -3,7 +3,7 @@ package de.limbusdev.guardianmonsters.model.gamestate;
 import com.badlogic.gdx.utils.ArrayMap;
 
 import de.limbusdev.guardianmonsters.guardians.items.Inventory;
-import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
+import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.Team;
 
 
@@ -21,7 +21,7 @@ public class GameState {
 
     @ForSerializationOnly
     public GameState(int map, int x, int y, int maxTeamSize, int activeTeamSize,
-                     ArrayMap<Integer, Guardian> team, Inventory inventory) {
+                     ArrayMap<Integer, AGuardian> team, Inventory inventory) {
         this.map = map;
         this.gridx = x;
         this.gridy = y;
@@ -39,7 +39,7 @@ public class GameState {
         out += "Team Size: " + maxTeamSize + "\n";
         out += "Team:\n";
 
-        for(Guardian m : team.values()) {
+        for(AGuardian m : team.values()) {
             out += m.toString() + "\n";
         }
 

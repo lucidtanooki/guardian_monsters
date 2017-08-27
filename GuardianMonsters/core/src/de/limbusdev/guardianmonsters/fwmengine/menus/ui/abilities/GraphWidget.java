@@ -8,10 +8,10 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 
-import de.limbusdev.guardianmonsters.guardians.abilities.AbilityGraph;
 import de.limbusdev.guardianmonsters.guardians.abilities.Edge;
+import de.limbusdev.guardianmonsters.guardians.abilities.IAbilityGraph;
 import de.limbusdev.guardianmonsters.guardians.abilities.Node;
-import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
+import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 
 /**
  * @author Georg Eckert 2017
@@ -21,14 +21,14 @@ public class GraphWidget extends Group {
 
     private Controller callbacks;
 
-    private AbilityGraph graph;
+    private IAbilityGraph graph;
     private Skin skin;
 
     private ButtonGroup nodeGroup;
     private ArrayMap<Integer,NodeWidget> nodeWidgets;
     private ArrayMap<Node,Array<EdgeWidget>> edgeWidgets;
 
-    private Guardian currentGuardian;
+    private AGuardian currentGuardian;
 
 
     public GraphWidget(Skin skin, Controller callbacks) {
@@ -50,10 +50,10 @@ public class GraphWidget extends Group {
 
 
 
-    public void init(Guardian guardian) {
+    public void init(AGuardian guardian) {
         clear();
         currentGuardian = guardian;
-        this.graph = guardian.abilityGraph;
+        this.graph = guardian.getAbilityGraph();
 
         edgeWidgets.clear();
         for(Edge edge : graph.getEdges()) {

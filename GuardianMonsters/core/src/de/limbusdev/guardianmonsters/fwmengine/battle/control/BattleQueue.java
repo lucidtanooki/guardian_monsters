@@ -5,7 +5,7 @@ import com.badlogic.gdx.utils.Array;
 
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.CombatTeam;
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.MonsterSpeedComparator;
-import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
+import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.Team;
 
 import static de.limbusdev.guardianmonsters.Constant.LEFT;
@@ -34,8 +34,8 @@ public class BattleQueue extends Signal<BattleQueue.QueueSignal> {
     }
 
     private CombatTeam combatTeamLeft, combatTeamRight;
-    private Array<Guardian> currentRound;
-    private Array<Guardian> nextRound;
+    private Array<AGuardian> currentRound;
+    private Array<AGuardian> nextRound;
 
     private Team left, right;
 
@@ -57,11 +57,11 @@ public class BattleQueue extends Signal<BattleQueue.QueueSignal> {
      * Takes the next monster in line and moves it to the next round
      * @return next in line
      */
-    public Guardian next() {
-        Guardian next = currentRound.pop();
+    public AGuardian next() {
+        AGuardian next = currentRound.pop();
         nextRound.insert(0,next);
         if(currentRound.size == 0) {
-            Array<Guardian> tmp = currentRound;
+            Array<AGuardian> tmp = currentRound;
             currentRound = nextRound;
             nextRound = currentRound;
             currentRound.sort(new MonsterSpeedComparator());
@@ -79,7 +79,7 @@ public class BattleQueue extends Signal<BattleQueue.QueueSignal> {
      * Returns next in line
      * @return
      */
-    public Guardian peekNext() {
+    public AGuardian peekNext() {
         return currentRound.get(currentRound.size-1);
     }
 
@@ -92,7 +92,7 @@ public class BattleQueue extends Signal<BattleQueue.QueueSignal> {
         else return RIGHT;
     }
 
-    public Guardian exchangeNext(Guardian substitute) {
+    public AGuardian exchangeNext(AGuardian substitute) {
         CombatTeam combatTeam;
         if(peekNextSide() == LEFT) {
             combatTeam = combatTeamLeft;
@@ -100,7 +100,7 @@ public class BattleQueue extends Signal<BattleQueue.QueueSignal> {
             combatTeam = combatTeamRight;
         }
 
-        Guardian next = next();
+        AGuardian next = next();
         int position = combatTeam.getFieldPosition(next);
         combatTeam.exchange(position, substitute);
 
@@ -114,20 +114,20 @@ public class BattleQueue extends Signal<BattleQueue.QueueSignal> {
         String text = "";
 
         text += "=== Next Round    ===\n";
-        for(Guardian m : nextRound) text += m.toString() + "\n";
+        for(AGuardian m : nextRound) text += m.toString() + "\n";
         text += "=== Current Round ===\n";
-        for(Guardian m : currentRound) text += m.toString() + "\n";
+        for(AGuardian m : currentRound) text += m.toString() + "\n";
         text += "---------------------\n";
         text += "Next: " + peekNext().toString();
 
         return text;
     }
 
-    public Array<Guardian> getCurrentRound() {
+    public Array<AGuardian> getCurrentRound() {
         return currentRound;
     }
 
-    public Array<Guardian> getNextRound() {
+    public Array<AGuardian> getNextRound() {
         return nextRound;
     }
 
@@ -147,12 +147,12 @@ public class BattleQueue extends Signal<BattleQueue.QueueSignal> {
         return right;
     }
 
-    public boolean getTeamSideFor(Guardian guardian) {
+    public boolean getTeamSideFor(AGuardian guardian) {
         if(left.isMember(guardian)) return LEFT;
         else return RIGHT;
     }
 
-    public int getFieldPositionFor(Guardian guardian) {
+    public int getFieldPositionFor(AGuardian guardian) {
         if(getTeamSideFor(guardian) == LEFT) {
             return combatTeamLeft.getFieldPosition(guardian);
         } else {

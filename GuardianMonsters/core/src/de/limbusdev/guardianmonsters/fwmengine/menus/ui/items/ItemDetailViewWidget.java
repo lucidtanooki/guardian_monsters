@@ -11,14 +11,14 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.I18NBundle;
 
-import de.limbusdev.guardianmonsters.guardians.items.medicine.AMedicalItem;
-import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.team.MonsterListWidget;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.widgets.ReassuranceWidget;
-import de.limbusdev.guardianmonsters.guardians.items.equipment.Equipment;
 import de.limbusdev.guardianmonsters.guardians.items.Inventory;
 import de.limbusdev.guardianmonsters.guardians.items.Item;
-import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
+import de.limbusdev.guardianmonsters.guardians.items.equipment.Equipment;
+import de.limbusdev.guardianmonsters.guardians.items.medicine.AMedicalItem;
+import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
+import de.limbusdev.guardianmonsters.services.Services;
 
 /**
  * @author Georg Eckert 2017
@@ -35,12 +35,12 @@ public class ItemDetailViewWidget extends Group implements MonsterListWidget.Cal
 
     // Data
     private Inventory inventory;
-    private ArrayMap<Integer, Guardian> team;
+    private ArrayMap<Integer, AGuardian> team;
     private Item item;
 
 
     // ................................................................................. CONSTRCUTOR
-    public ItemDetailViewWidget(Skin skin, Inventory inventory, ArrayMap<Integer,Guardian> monsters)  {
+    public ItemDetailViewWidget(Skin skin, Inventory inventory, ArrayMap<Integer,AGuardian> monsters)  {
         super();
 
         this.skin       = skin;
@@ -147,7 +147,7 @@ public class ItemDetailViewWidget extends Group implements MonsterListWidget.Cal
     public boolean onButton(int i) {
         inventory.takeItemFromInventory(item);
         if(item instanceof Equipment) {
-            Item replaced = team.get(i).stat.giveEquipment((Equipment)item);
+            Item replaced = team.get(i).getStatistics().giveEquipment((Equipment)item);
             if(replaced != null) {
                 inventory.putItemInInventory(replaced);
             }

@@ -5,8 +5,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ArrayMap;
 
+import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.utils.geometry.IntVec2;
-import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
 
 /**
  * Created by Georg Eckert on 16.02.17.
@@ -14,7 +14,7 @@ import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
 
 public class TeamCircleWidget extends ATeamChoiceWidget {
 
-    public TeamCircleWidget(Skin skin, ArrayMap<Integer,Guardian> team, Callbacks callbacks) {
+    public TeamCircleWidget(Skin skin, ArrayMap<Integer,AGuardian> team, Callbacks callbacks) {
         super(skin, callbacks);
 
         positions.add(new IntVec2(54,144-85));

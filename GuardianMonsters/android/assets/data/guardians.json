@@ -1,0 +1,898 @@
+[
+    {
+      "id": 1,
+      "nameID": "gm001_fordin",
+      "metamorphsTo": 2,
+      "metamorphosisNodes": [
+        91,
+        92
+      ],
+      "elements": [
+        "earth"
+      ],
+      "abilities": [
+        {
+          "element": "none",
+          "id": 2,
+          "abilityPos": 0
+        },
+        {
+          "element": "earth",
+          "id": 2,
+          "abilityPos": 13
+        },
+        {
+          "element": "earth",
+          "id": 3,
+          "abilityPos": 11
+        },
+        {
+          "element": "earth",
+          "id": 4,
+          "abilityPos": 15
+        }
+      ],
+      "basestats": {
+        "hp": 300,
+        "mp": 50,
+        "speed": 10,
+        "pstr": 10,
+        "pdef": 10,
+        "mstr": 10,
+        "mdef": 10
+      },
+      "equipment-compatibility": {
+        "head": "bridle",
+        "hands": "claws",
+        "body": "barding",
+        "feet": "shinprotection"
+      },
+      "ability-graph-equip": {
+        "body": 21,
+        "hands": 23,
+        "feet": 89,
+        "head": 90
+      }
+    },
+    {
+      "id": 4,
+      "nameID": "gm004_kroki",
+      "metamorphsTo": 5,
+      "metamorphosisNodes": [
+        91,
+        92
+      ],
+      "elements": [
+        "water"
+      ],
+      "abilities": [
+        {
+          "element": "none",
+          "id": 2,
+          "abilityPos": 0
+        },
+        {
+          "element": "water",
+          "id": 1,
+          "abilityPos": 5
+        }
+      ],
+      "basestats": {
+        "hp": 300,
+        "mp": 50,
+        "speed": 10,
+        "pstr": 10,
+        "pdef": 10,
+        "mstr": 10,
+        "mdef": 10
+      },
+      "equipment-compatibility": {
+        "head": "helmet",
+        "hands": "claws",
+        "body": "breastplate",
+        "feet": "kneepads"
+      },
+      "ability-graph-equip": {
+        "body": 17,
+        "hands": 19,
+        "feet": 53,
+        "head": 54
+      }
+    },
+    {
+      "id": 7,
+      "nameID": "gm007_devidin",
+      "metamorphsTo": 8,
+      "metamorphosisNodes": [
+        91,
+        92
+      ],
+      "elements": [
+        "fire"
+      ],
+      "abilities": [
+        {
+          "element": "none",
+          "id": 2,
+          "abilityPos": 0
+        },
+        {
+          "element": "fire",
+          "id": 1,
+          "abilityPos": 5
+        }
+      ],
+      "basestats": {
+        "hp": 300,
+        "mp": 50,
+        "speed": 10,
+        "pstr": 10,
+        "pdef": 10,
+        "mstr": 10,
+        "mdef": 10
+      },
+      "equipment-compatibility": {
+        "head": "mask",
+        "hands": "claws",
+        "body": "barding",
+        "feet": "shinprotection"
+      },
+      "ability-graph-equip": {
+        "body": 17,
+        "hands": 19,
+        "feet": 53,
+        "head": 54
+      }
+    },
+    {
+      "id": 10,
+      "nameID": "gm010_aerodin",
+      "metamorphsTo": 11,
+      "metamorphosisNodes": [
+        91,
+        92
+      ],
+      "elements": [
+        "air"
+      ],
+      "abilities": [
+        {
+          "element": "none",
+          "id": 2,
+          "abilityPos": 0
+        }
+      ],
+      "basestats": {
+        "hp": 99,
+        "mp": 19,
+        "speed": 1,
+        "pstr": 1,
+        "pdef": 1,
+        "mstr": 1,
+        "mdef": 1
+      },
+      "equipment-compatibility": {
+        "head": "mask",
+        "hands": "claws",
+        "body": "barding",
+        "feet": "shinprotection"
+      },
+      "ability-graph-equip": {
+        "body": 17,
+        "hands": 19,
+        "feet": 53,
+        "head": 54
+      }
+    },
+    {
+      "id": 13,
+      "nameID": "gm013_weastoat",
+      "elements": [
+        "forest"
+      ],
+      "abilities": {
+        "element": "none",
+        "id": 2,
+        "abilityPos": 0
+      },
+      "basestats": {
+        "hp": 300,
+        "mp": 50,
+        "speed": 10,
+        "pstr": 10,
+        "pdef": 10,
+        "mstr": 10,
+        "mdef": 10
+      },
+      "equipment-compatibility": {
+        "head": "mask",
+        "hands": "claws",
+        "body": "barding",
+        "feet": "shinprotection"
+      },
+      "ability-graph-equip": {
+        "body": 17,
+        "hands": 19,
+        "feet": 53,
+        "head": 54
+      }
+    },
+    {
+      "id": 14,
+      "nameID": "gm014_mooty",
+      "metamorphsTo": 15,
+      "metamorphosisNodes": [
+        91,
+        92
+      ],
+      "elements": [
+        "demon"
+      ],
+      "abilities": {
+        "element": "none",
+        "id": 2,
+        "abilityPos": 0
+      },
+      "basestats": {
+        "hp": 99,
+        "mp": 19,
+        "speed": 1,
+        "pstr": 1,
+        "pdef": 1,
+        "mstr": 1,
+        "mdef": 1
+      },
+      "equipment-compatibility": {
+        "head": "mask",
+        "hands": "claws",
+        "body": "barding",
+        "feet": "shinprotection"
+      },
+      "ability-graph-equip": {
+        "body": 17,
+        "hands": 19,
+        "feet": 53,
+        "head": 54
+      }
+    },
+    {
+      "id": 15,
+      "nameID": "gm015_camoon",
+      "metamorphsTo": 16,
+      "metamorphosisNodes": [
+        91,
+        92
+      ],
+      "elements": [
+        "demon"
+      ],
+      "abilities": {
+        "element": "none",
+        "id": 2,
+        "abilityPos": 0
+      },
+      "basestats": {
+        "hp": 99,
+        "mp": 19,
+        "speed": 1,
+        "pstr": 1,
+        "pdef": 1,
+        "mstr": 1,
+        "mdef": 1
+      },
+      "equipment-compatibility": {
+        "head": "mask",
+        "hands": "claws",
+        "body": "barding",
+        "feet": "shinprotection"
+      },
+      "ability-graph-equip": {
+        "body": 17,
+        "hands": 19,
+        "feet": 53,
+        "head": 54
+      }
+    },
+    {
+      "id": 16,
+      "nameID": "gm016_moopard",
+      "elements": [
+        "demon"
+      ],
+      "abilities": {
+        "element": "none",
+        "id": 2,
+        "abilityPos": 0
+      },
+      "basestats": {
+        "hp": 99,
+        "mp": 19,
+        "speed": 1,
+        "pstr": 1,
+        "pdef": 1,
+        "mstr": 1,
+        "mdef": 1
+      },
+      "equipment-compatibility": {
+        "head": "mask",
+        "hands": "claws",
+        "body": "barding",
+        "feet": "shinprotection"
+      },
+      "ability-graph-equip": {
+        "body": 17,
+        "hands": 19,
+        "feet": 53,
+        "head": 54
+      }
+    },
+    {
+      "id": 17,
+      "nameID": "gm017_wuppy",
+      "metamorphsTo": 18,
+      "metamorphosisNodes": [
+        91,
+        92
+      ],
+      "elements": [
+        "demon"
+      ],
+      "abilities": {
+        "element": "none",
+        "id": 2,
+        "abilityPos": 0
+      },
+      "basestats": {
+        "hp": 99,
+        "mp": 19,
+        "speed": 1,
+        "pstr": 1,
+        "pdef": 1,
+        "mstr": 1,
+        "mdef": 1
+      },
+      "equipment-compatibility": {
+        "head": "mask",
+        "hands": "claws",
+        "body": "barding",
+        "feet": "shinprotection"
+      },
+      "ability-graph-equip": {
+        "body": 17,
+        "hands": 19,
+        "feet": 53,
+        "head": 54
+      }
+    },
+    {
+      "id": 18,
+      "nameID": "gm018_earog",
+      "metamorphsTo": 19,
+      "metamorphosisNodes": [
+        91,
+        92
+      ],
+      "elements": [
+        "demon"
+      ],
+      "abilities": {
+        "element": "none",
+        "id": 2,
+        "abilityPos": 0
+      },
+      "basestats": {
+        "hp": 99,
+        "mp": 19,
+        "speed": 1,
+        "pstr": 1,
+        "pdef": 1,
+        "mstr": 1,
+        "mdef": 1
+      },
+      "equipment-compatibility": {
+        "head": "mask",
+        "hands": "claws",
+        "body": "barding",
+        "feet": "shinprotection"
+      },
+      "ability-graph-equip": {
+        "body": 17,
+        "hands": 19,
+        "feet": 53,
+        "head": 54
+      }
+    },
+    {
+      "id": 19,
+      "nameID": "gm019_deemog",
+      "elements": [
+        "demon"
+      ],
+      "abilities": {
+        "element": "none",
+        "id": 2,
+        "abilityPos": 0
+      },
+      "basestats": {
+        "hp": 99,
+        "mp": 19,
+        "speed": 1,
+        "pstr": 1,
+        "pdef": 1,
+        "mstr": 1,
+        "mdef": 1
+      },
+      "equipment-compatibility": {
+        "head": "mask",
+        "hands": "claws",
+        "body": "barding",
+        "feet": "shinprotection"
+      },
+      "ability-graph-equip": {
+        "body": 17,
+        "hands": 19,
+        "feet": 53,
+        "head": 54
+      }
+    },
+    {
+      "id": 20,
+      "nameID": "gm020_dradder",
+      "metamorphsTo": 21,
+      "metamorphosisNodes": [
+        91,
+        92
+      ],
+      "elements": [
+        "forest"
+      ],
+      "abilities": {
+        "element": "none",
+        "id": 2,
+        "abilityPos": 0
+      },
+      "basestats": {
+        "hp": 99,
+        "mp": 19,
+        "speed": 1,
+        "pstr": 1,
+        "pdef": 1,
+        "mstr": 1,
+        "mdef": 1
+      },
+      "equipment-compatibility": {
+        "head": "mask",
+        "hands": "claws",
+        "body": "barding",
+        "feet": "shinprotection"
+      },
+      "ability-graph-equip": {
+        "body": 17,
+        "hands": 19,
+        "feet": 53,
+        "head": 54
+      }
+    },
+    {
+      "id": 21,
+      "nameID": "gm021_driper",
+      "elements": [
+        "forest"
+      ],
+      "abilities": {
+        "element": "none",
+        "id": 2,
+        "abilityPos": 0
+      },
+      "basestats": {
+        "hp": 99,
+        "mp": 19,
+        "speed": 1,
+        "pstr": 1,
+        "pdef": 1,
+        "mstr": 1,
+        "mdef": 1
+      },
+      "equipment-compatibility": {
+        "head": "mask",
+        "hands": "claws",
+        "body": "barding",
+        "feet": "shinprotection"
+      },
+      "ability-graph-equip": {
+        "body": 17,
+        "hands": 19,
+        "feet": 53,
+        "head": 54
+      }
+    },
+    {
+      "id": 22,
+      "nameID": "gm022_spreye",
+      "metamorphsTo": 23,
+      "metamorphosisNodes": [
+        91,
+        92
+      ],
+      "elements": [
+        "demon"
+      ],
+      "abilities": {
+        "element": "none",
+        "id": 2,
+        "abilityPos": 0
+      },
+      "basestats": {
+        "hp": 99,
+        "mp": 19,
+        "speed": 1,
+        "pstr": 1,
+        "pdef": 1,
+        "mstr": 1,
+        "mdef": 1
+      },
+      "equipment-compatibility": {
+        "head": "mask",
+        "hands": "claws",
+        "body": "barding",
+        "feet": "shinprotection"
+      },
+      "ability-graph-equip": {
+        "body": 17,
+        "hands": 19,
+        "feet": 53,
+        "head": 54
+      }
+    },
+    {
+      "id": 23,
+      "nameID": "gm023_buttereye",
+      "elements": [
+        "demon"
+      ],
+      "abilities": {
+        "element": "none",
+        "id": 2,
+        "abilityPos": 0
+      },
+      "basestats": {
+        "hp": 99,
+        "mp": 19,
+        "speed": 1,
+        "pstr": 1,
+        "pdef": 1,
+        "mstr": 1,
+        "mdef": 1
+      },
+      "equipment-compatibility": {
+        "head": "mask",
+        "hands": "claws",
+        "body": "barding",
+        "feet": "shinprotection"
+      },
+      "ability-graph-equip": {
+        "body": 17,
+        "hands": 19,
+        "feet": 53,
+        "head": 54
+      }
+    },
+    {
+      "id": 24,
+      "nameID": "gm024_duggot",
+      "metamorphsTo": 25,
+      "metamorphosisNodes": [
+        91,
+        92
+      ],
+      "elements": [
+        "arthropoda"
+      ],
+      "abilities": {
+        "element": "none",
+        "id": 2,
+        "abilityPos": 0
+      },
+      "basestats": {
+        "hp": 99,
+        "mp": 19,
+        "speed": 1,
+        "pstr": 1,
+        "pdef": 1,
+        "mstr": 1,
+        "mdef": 1
+      },
+      "equipment-compatibility": {
+        "head": "mask",
+        "hands": "claws",
+        "body": "barding",
+        "feet": "shinprotection"
+      },
+      "ability-graph-equip": {
+        "body": 17,
+        "hands": 19,
+        "feet": 53,
+        "head": 54
+      }
+    },
+    {
+      "id": 25,
+      "nameID": "gm025_breem",
+      "elements": [
+        "arthropoda"
+      ],
+      "abilities": {
+        "element": "none",
+        "id": 2,
+        "abilityPos": 0
+      },
+      "basestats": {
+        "hp": 99,
+        "mp": 19,
+        "speed": 1,
+        "pstr": 1,
+        "pdef": 1,
+        "mstr": 1,
+        "mdef": 1
+      },
+      "equipment-compatibility": {
+        "head": "mask",
+        "hands": "claws",
+        "body": "barding",
+        "feet": "shinprotection"
+      },
+      "ability-graph-equip": {
+        "body": 17,
+        "hands": 19,
+        "feet": 53,
+        "head": 54
+      }
+    },
+    {
+      "id": 26,
+      "nameID": "gm026_marvillar",
+      "metamorphsTo": 27,
+      "metamorphosisNodes": [
+        91
+      ],
+      "elements": [
+        "arthropoda"
+      ],
+      "abilities": {
+        "element": "none",
+        "id": 2,
+        "abilityPos": 0
+      },
+      "basestats": {
+        "hp": 99,
+        "mp": 19,
+        "speed": 1,
+        "pstr": 1,
+        "pdef": 1,
+        "mstr": 1,
+        "mdef": 1
+      },
+      "equipment-compatibility": {
+        "head": "mask",
+        "hands": "claws",
+        "body": "barding",
+        "feet": "shinprotection"
+      },
+      "ability-graph-equip": {
+        "body": 17,
+        "hands": 19,
+        "feet": 53,
+        "head": 54
+      }
+    },
+    {
+      "id": 27,
+      "nameID": "gm027_marvantis",
+      "elements": [
+        "arthropoda"
+      ],
+      "abilities": {
+        "element": "none",
+        "id": 2,
+        "abilityPos": 0
+      },
+      "basestats": {
+        "hp": 99,
+        "mp": 19,
+        "speed": 1,
+        "pstr": 1,
+        "pdef": 1,
+        "mstr": 1,
+        "mdef": 1
+      },
+      "equipment-compatibility": {
+        "head": "mask",
+        "hands": "claws",
+        "body": "barding",
+        "feet": "shinprotection"
+      },
+      "ability-graph-equip": {
+        "body": 17,
+        "hands": 19,
+        "feet": 53,
+        "head": 54
+      }
+    },
+    {
+      "id": 28,
+      "nameID": "gm028_palmpot",
+      "metamorphsTo": 29,
+      "metamorphosisNodes": [
+        91
+      ],
+      "elements": [
+        "forest"
+      ],
+      "abilities": {
+        "element": "none",
+        "id": 2,
+        "abilityPos": 0
+      },
+      "basestats": {
+        "hp": 290,
+        "mp": 50,
+        "speed": 10,
+        "pstr": 10,
+        "pdef": 10,
+        "mstr": 10,
+        "mdef": 10
+      },
+      "equipment-compatibility": {
+        "head": "mask",
+        "hands": "claws",
+        "body": "barding",
+        "feet": "shinprotection"
+      },
+      "ability-graph-equip": {
+        "body": 17,
+        "hands": 19,
+        "feet": 53,
+        "head": 54
+      }
+    },
+    {
+      "id": 30,
+      "nameID": "gm030_erimat",
+      "metamorphsTo": 31,
+      "metamorphosisNodes": [
+        91
+      ],
+      "elements": [
+        "mountain"
+      ],
+      "abilities": {
+        "element": "none",
+        "id": 2,
+        "abilityPos": 0
+      },
+      "basestats": {
+        "hp": 99,
+        "mp": 19,
+        "speed": 1,
+        "pstr": 1,
+        "pdef": 1,
+        "mstr": 1,
+        "mdef": 1
+      },
+      "equipment-compatibility": {
+        "head": "mask",
+        "hands": "claws",
+        "body": "barding",
+        "feet": "shinprotection"
+      },
+      "ability-graph-equip": {
+        "body": 17,
+        "hands": 19,
+        "feet": 53,
+        "head": 54
+      }
+    },
+    {
+      "id": 31,
+      "nameID": "gm031_erichief",
+      "elements": [
+        "mountain"
+      ],
+      "abilities": {
+        "element": "none",
+        "id": 2,
+        "abilityPos": 0
+      },
+      "basestats": {
+        "hp": 99,
+        "mp": 19,
+        "speed": 1,
+        "pstr": 1,
+        "pdef": 1,
+        "mstr": 1,
+        "mdef": 1
+      },
+      "equipment-compatibility": {
+        "head": "mask",
+        "hands": "claws",
+        "body": "barding",
+        "feet": "shinprotection"
+      },
+      "ability-graph-equip": {
+        "body": 17,
+        "hands": 19,
+        "feet": 53,
+        "head": 54
+      }
+    },
+    {
+      "id": 32,
+      "nameID": "gm032_eggatch",
+      "metamorphsTo": 33,
+      "metamorphosisNodes": [
+        91
+      ],
+      "elements": {
+        "element": "air"
+      },
+      "abilities": {
+        "element": "none",
+        "id": 2,
+        "abilityPos": 0
+      },
+      "basestats": {
+        "hp": 99,
+        "mp": 19,
+        "speed": 1,
+        "pstr": 1,
+        "pdef": 1,
+        "mstr": 1,
+        "mdef": 1
+      },
+      "equipment-compatibility": {
+        "head": "mask",
+        "hands": "claws",
+        "body": "barding",
+        "feet": "shinprotection"
+      },
+      "ability-graph-equip": {
+        "body": 17,
+        "hands": 19,
+        "feet": 53,
+        "head": 54
+      }
+    },
+    {
+      "id": 33,
+      "nameID": "gm033_owlock",
+      "elements": [
+        "air"
+      ],
+      "abilities": {
+        "element": "none",
+        "id": 2,
+        "abilityPos": 0
+      },
+      "basestats": {
+        "hp": 99,
+        "mp": 19,
+        "speed": 1,
+        "pstr": 1,
+        "pdef": 1,
+        "mstr": 1,
+        "mdef": 1
+      },
+      "equipment-compatibility": {
+        "head": "mask",
+        "hands": "claws",
+        "body": "barding",
+        "feet": "shinprotection"
+      },
+      "ability-graph-equip": {
+        "body": 17,
+        "hands": 19,
+        "feet": 53,
+        "head": 54
+      }
+    }
+  ]

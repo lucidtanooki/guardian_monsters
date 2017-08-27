@@ -8,7 +8,7 @@ import com.badlogic.gdx.utils.ArrayMap;
  * @author Georg Eckert 2017
  */
 
-public class Team extends ArrayMap<Integer,Guardian>
+public class Team extends ArrayMap<Integer,AGuardian>
 {
     private int maximumTeamSize;
     private int activeTeamSize;
@@ -30,8 +30,8 @@ public class Team extends ArrayMap<Integer,Guardian>
      * @return  wether the swap was successful
      */
     public boolean swapPositions(int position1, int position2) {
-        Guardian guardian1 = get(position1);
-        Guardian guardian2 = get(position2);
+        AGuardian guardian1 = get(position1);
+        AGuardian guardian2 = get(position2);
 
         if(guardian1 == null || guardian2 == null) {
             return false;
@@ -59,11 +59,11 @@ public class Team extends ArrayMap<Integer,Guardian>
         this.activeTeamSize = activeTeamSize;
     }
 
-    public boolean isMember(Guardian guardian) {
+    public boolean isMember(AGuardian guardian) {
         return containsValue(guardian,false);
     }
 
-    public int getPosition(Guardian guardian) {
+    public int getPosition(AGuardian guardian) {
         return getKey(guardian, false);
     }
 }

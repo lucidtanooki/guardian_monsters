@@ -9,7 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ArrayMap;
 
-import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
+import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.services.Services;
 
 /**
@@ -23,7 +23,7 @@ public class TeamMemberSwitcher extends Group {
     private MonsterPreviewWidget previewWidget;
     private Label name;
 
-    public TeamMemberSwitcher(Skin skin, final ArrayMap<Integer, Guardian> team, final Callbacks callbacks) {
+    public TeamMemberSwitcher(Skin skin, final ArrayMap<Integer, AGuardian> team, final Callbacks callbacks) {
         super();
 
         this.callbacks = callbacks;
@@ -80,9 +80,9 @@ public class TeamMemberSwitcher extends Group {
         init(team.get(0));
     }
 
-    public void init(Guardian m) {
+    public void init(AGuardian m) {
         name.setText(Services.getL18N().getLocalizedGuardianName(m));
-        previewWidget.setPreview(m.ID);
+        previewWidget.setPreview(m.getSpeciesData().getID());
     }
 
     public interface Callbacks {

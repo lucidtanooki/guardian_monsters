@@ -10,8 +10,8 @@ import de.limbusdev.guardianmonsters.guardians.items.equipment.BodyPart;
 import de.limbusdev.guardianmonsters.guardians.items.equipment.FootEquipment;
 import de.limbusdev.guardianmonsters.guardians.items.equipment.HandEquipment;
 import de.limbusdev.guardianmonsters.guardians.items.equipment.HeadEquipment;
-import de.limbusdev.guardianmonsters.guardians.monsters.BaseStat;
-import de.limbusdev.guardianmonsters.guardians.monsters.SpeciesData;
+import de.limbusdev.guardianmonsters.guardians.monsters.CommonStatistics;
+import de.limbusdev.guardianmonsters.guardians.monsters.SpeciesDescription;
 
 /**
  * XMLMonsterParser
@@ -19,10 +19,12 @@ import de.limbusdev.guardianmonsters.guardians.monsters.SpeciesData;
  * @author Georg Eckert 2017
  */
 
-public class XMLMonsterParser {
+public class XMLMonsterParser
+{
 
-    public static SpeciesData parseMonster(XmlReader.Element element, SpeciesData ancestor) {
-        SpeciesData speciesData;
+    public static SpeciesDescription parseMonster(XmlReader.Element element, SpeciesDescription ancestor)
+    {
+        SpeciesDescription speciesDescription;
 
         // ............................................................................... name & id
         int ID = element.getIntAttribute("id", 0);
@@ -43,8 +45,8 @@ public class XMLMonsterParser {
         int metamorphsTo   = element.getInt("metamorphsTo",  0);
 
         if(ancestor != null) {
-            speciesData = new SpeciesData(ID, nameID, metamorphsTo, elements, ancestor);
-            return speciesData;
+            speciesDescription = new SpeciesDescription(ID, nameID, metamorphsTo, elements, ancestor);
+            return speciesDescription;
         }
 
         Array<Integer> metamorphosisNodes = new Array<>();
@@ -67,7 +69,7 @@ public class XMLMonsterParser {
 
         // ................................................................................... stats
         XmlReader.Element statEl = element.getChildByName("basestats");
-        BaseStat stat = parseBaseStats(statEl, ID);
+        CommonStatistics stat = parseBaseStats(statEl, ID);
 
         HeadEquipment.Type head;
         BodyEquipment.Type body;
@@ -88,14 +90,14 @@ public class XMLMonsterParser {
         }
 
         // ............................................................................ construction
-        speciesData = new SpeciesData(
+        speciesDescription = new SpeciesDescription(
             ID, nameID, metamorphsTo,
             stat, elements,
             attacks, equipmentGraph, metamorphosisNodes,
             head, body, hand, feet
         );
 
-        return speciesData;
+        return speciesDescription;
     }
 
     private static ArrayMap<Integer, Ability> parseAbilities(XmlReader.Element element) {
@@ -125,10 +127,10 @@ public class XMLMonsterParser {
         return equipmentGraph;
     }
 
-    private static BaseStat parseBaseStats(XmlReader.Element statEl, int ID) {
-        BaseStat stat;
+    private static CommonStatistics parseBaseStats(XmlReader.Element statEl, int ID) {
+        CommonStatistics stat;
         if(statEl != null) {
-            stat = new BaseStat(
+            stat = new CommonStatistics(
                 ID,
                 statEl.getIntAttribute("hp",    300),
                 statEl.getIntAttribute("mp",    50),
@@ -139,7 +141,7 @@ public class XMLMonsterParser {
                 statEl.getIntAttribute("speed", 10)
             );
         } else {
-            stat = new BaseStat(ID, 300, 50, 10, 10, 10, 10, 10);
+            stat = new CommonStatistics(ID, 300, 50, 10, 10, 10, 10, 10);
         }
         return stat;
     }

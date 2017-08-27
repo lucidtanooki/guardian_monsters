@@ -14,22 +14,20 @@ import de.limbusdev.guardianmonsters.fwmengine.battle.model.AttackCalculationRep
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.AttackMenuWidget;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleActionMenuWidget;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleAnimationWidget;
-import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleHUDTextButton;
+import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleMainMenuWidget;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleQueueWidget;
+import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleStatusOverviewWidget;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.InfoLabelWidget;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.ItemChoice;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.LevelUpWidget;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.MonsterMenuWidget;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.SevenButtonsWidget;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.TargetMenuWidget;
-import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.guardians.abilities.Ability;
 import de.limbusdev.guardianmonsters.guardians.items.Inventory;
-import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
-import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleMainMenuWidget;
-import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleStatusOverviewWidget;
+import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.Team;
-import de.limbusdev.guardianmonsters.ui.Command;
+import de.limbusdev.guardianmonsters.services.Services;
 
 import static de.limbusdev.guardianmonsters.Constant.LEFT;
 
@@ -254,8 +252,8 @@ public class BattleHUD extends ABattleHUD {
             @Override
             public void onBackButton() {
                 boolean teamOk = false;
-                for(Guardian m : leftTeam.values()) {
-                    if(m.stat.isFit()) {
+                for(AGuardian m : leftTeam.values()) {
+                    if(m.getStatistics().isFit()) {
                         teamOk = true || teamOk;
                     } else {
                         teamOk = false || teamOk;
@@ -270,10 +268,10 @@ public class BattleHUD extends ABattleHUD {
         };
 
         attackMenuCallbacks = nr -> {
-            Guardian activeGuardian = battleSystem.getActiveMonster();
+            AGuardian activeGuardian = battleSystem.getActiveMonster();
             System.out.println("AttackMenuButtons: onButtonNr("+nr+")");
             System.out.println("Input: User chose attack Nr. " + nr);
-            int chosenAttackNr = activeGuardian.abilityGraph.learntAbilities.indexOfValue(activeGuardian.abilityGraph.getActiveAbility(nr),false);
+            int chosenAttackNr = activeGuardian.getAbilityGraph().getActiveAbilities().indexOfValue(activeGuardian.getAbilityGraph().getActiveAbility(nr),false);
             battleSystem.setChosenAttack(chosenAttackNr);
             battleStateSwitcher.toTargetChoice();
         };
@@ -286,10 +284,10 @@ public class BattleHUD extends ABattleHUD {
             }
 
             @Override
-            public void onDoingNothing(Guardian guardian) {
+            public void onDoingNothing(AGuardian guardian) {
                 battleStateSwitcher.toAnimation();
                 infoLabelWidget.setWholeText(
-                    Services.getL18N().Battle().format("batt_item_usage", guardian.getName())
+                    Services.getL18N().Battle().format("batt_item_usage", guardian.getNickname())
                 );
                 infoLabelWidget.animateTextAppearance();
                 animationWidget.animateItemUsage();
@@ -301,14 +299,14 @@ public class BattleHUD extends ABattleHUD {
             }
 
             @Override
-            public void onMonsterKilled(Guardian m) {
+            public void onMonsterKilled(AGuardian m) {
                 boolean side = battleSystem.getQueue().getTeamSideFor(m);
                 int pos = battleSystem.getQueue().getFieldPositionFor(m);
                 animationWidget.animateMonsterKO(pos,side);
             }
 
             @Override
-            public void onAttack(Guardian attacker, Guardian target, Ability ability, AttackCalculationReport rep) {
+            public void onAttack(AGuardian attacker, AGuardian target, Ability ability, AttackCalculationReport rep) {
 
                 // Change widget set
                 battleStateSwitcher.toAnimation();
@@ -330,7 +328,7 @@ public class BattleHUD extends ABattleHUD {
             }
 
             @Override
-            public void onDefense(Guardian defensiveGuardian) {
+            public void onDefense(AGuardian defensiveGuardian) {
                 battleStateSwitcher.toAnimation();
                 infoLabelWidget.setWholeText(BattleStringBuilder.selfDefense(defensiveGuardian));
                 infoLabelWidget.animateTextAppearance();
@@ -338,14 +336,14 @@ public class BattleHUD extends ABattleHUD {
             }
 
             @Override
-            public void onLevelup(Guardian m) {
+            public void onLevelup(AGuardian m) {
                 showLevelUp(m);
             }
         };
 
         targetMenuCallbacks = nr -> {
             System.out.println("TargetMenuButtons: onButtonNr("+nr+")");
-            Guardian target = targetMenuWidget.getMonsterOfIndex(nr);
+            AGuardian target = targetMenuWidget.getMonsterOfIndex(nr);
             battleSystem.setChosenTarget(target);
             battleSystem.attack();
         };
@@ -385,7 +383,7 @@ public class BattleHUD extends ABattleHUD {
         };
     }
 
-    private void showLevelUp(Guardian m) {
+    private void showLevelUp(AGuardian m) {
         stage.addActor(new LevelUpWidget(Services.getUI().getInventorySkin(), m));
     }
 

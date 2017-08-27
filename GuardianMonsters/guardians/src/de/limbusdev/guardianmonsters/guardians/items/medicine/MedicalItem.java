@@ -2,8 +2,7 @@ package de.limbusdev.guardianmonsters.guardians.items.medicine;
 
 import com.badlogic.gdx.math.MathUtils;
 
-import de.limbusdev.guardianmonsters.guardians.items.Item;
-import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
+import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 
 /**
  * Medicine
@@ -36,18 +35,18 @@ public class MedicalItem extends AMedicalItem
     }
 
     @Override
-    public void apply(Guardian m)
+    public void apply(AGuardian m)
     {
         switch(type)
         {
             case REVIVE:
-                m.stat.healHP(MathUtils.round(m.stat.getHPmax()*value/100f));
+                m.getStatistics().healHP(MathUtils.round(m.getStatistics().getHPmax()*value/100f));
                 break;
             case HP_CURE:
-                m.stat.healHP(value);
+                m.getStatistics().healHP(value);
                 break;
             case MP_CURE:
-                m.stat.healMP(value);
+                m.getStatistics().healMP(value);
                 break;
             default:
                 break;
@@ -55,15 +54,15 @@ public class MedicalItem extends AMedicalItem
     }
 
     @Override
-    public boolean applicable(Guardian m)
+    public boolean applicable(AGuardian m)
     {
         switch(type) {
             case REVIVE:
-                return m.stat.isKO();
+                return m.getStatistics().isKO();
             case HP_CURE:
-                return (m.stat.isFit() && m.stat.getHP() < m.stat.getHPmax());
+                return (m.getStatistics().isFit() && m.getStatistics().getHP() < m.getStatistics().getHPmax());
             case MP_CURE:
-                return m.stat.getMP() < m.stat.getMPmax();
+                return m.getStatistics().getMP() < m.getStatistics().getMPmax();
             default:
                 return false;
         }

@@ -10,39 +10,43 @@ import de.limbusdev.guardianmonsters.guardians.abilities.IAbilityGraph;
 public class Guardian extends AGuardian
 {
     // Components
-    private SpeciesData   data;
-    private Stat          stat;
-    private IAbilityGraph abilityGraph;
+    private SpeciesDescription data;
+    private IndividualStatistics statistics;
+    private IAbilityGraph   abilityGraph;
 
-    private String nickname;
 
     // ............................................................................................. CONSTRUCTOR
     /**
      * The protected constructor makes it available from the {@link AGuardianFactory} only.
      * @param ID
      */
-    protected Guardian(int ID, SpeciesData data, Stat stat, IAbilityGraph abilityGraph)
+    protected Guardian(String UUID, int ID, SpeciesDescription data, IndividualStatistics statistics, IAbilityGraph abilityGraph)
     {
-        super();
+        super(UUID);
 
         this.data = data;
-        this.stat = stat;
+        this.statistics = statistics;
         this.abilityGraph = abilityGraph;
 
-        this.nickname = "";
+        setNickname("");
+    }
+
+    @Override
+    public int getID()
+    {
+        return getSpeciesData().getID();
     }
 
     // ............................................................................................. GETTERS & SETTERS
     @Override
-    public SpeciesData getSpeciesData()
+    public SpeciesDescription getSpeciesData()
     {
         return data;
     }
 
-    @Override
-    public Stat getStat()
+    public IndividualStatistics getStatistics()
     {
-        return stat;
+        return statistics;
     }
 
     @Override
@@ -51,24 +55,10 @@ public class Guardian extends AGuardian
         return abilityGraph;
     }
 
-    @Override
-    public String getNickname()
-    {
-        return nickname;
-    }
-
-    @Override
-    public void setNickname(String name)
-    {
-        this.nickname = name;
-    }
-
     // ............................................................................................. OBJECT
     @Override
     public String toString()
     {
-        String out = "";
-        out += data.getNameID() + " Level: " + stat.getLevel() + " Instance: " + getInstanceID();
-        return out;
+        return data.getNameID() + " Level: " + statistics.getLevel() + " UUID: " + getUUID();
     }
 }

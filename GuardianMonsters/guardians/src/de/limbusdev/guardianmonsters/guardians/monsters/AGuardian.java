@@ -1,7 +1,6 @@
 package de.limbusdev.guardianmonsters.guardians.monsters;
 
-import com.badlogic.ashley.signals.Listener;
-import com.badlogic.ashley.signals.Signal;
+import java.util.Observable;
 
 import de.limbusdev.guardianmonsters.guardians.abilities.IAbilityGraph;
 
@@ -14,43 +13,73 @@ import de.limbusdev.guardianmonsters.guardians.abilities.IAbilityGraph;
  * @author Georg Eckert 2017
  */
 
-public abstract class AGuardian extends Signal<AGuardian> implements Listener<Stat>
+public abstract class AGuardian extends Observable
 {
-    private static int INSTANCE_COUNTER = 0;
+    // Unique ID for Guardian Identification, must be stored when persisted
+    private final String UUID;
+    private String nickname;
 
-    private final int INSTANCE_ID;
-
-    protected AGuardian()
+    protected AGuardian(String UUID)
     {
-        this.INSTANCE_ID = INSTANCE_COUNTER++;
+        this.UUID = UUID;
     }
 
-    public abstract SpeciesData getSpeciesData();
-    public abstract Stat getStat();
+    // ............................................................................................. GETTERS & SETTERS
+
+    public String getUUID()
+    {
+        return UUID;
+    }
+    public String getNickname()
+    {
+        return nickname;
+    }
+    public void setNickname(String name)
+    {
+        this.nickname = name;
+    }
+    public abstract int getID();
+
+
+    // ............................................................................................. COMPONENTS
+
+    public abstract SpeciesDescription getSpeciesData();
+    public abstract IndividualStatistics getStatistics();
     public abstract IAbilityGraph getAbilityGraph();
 
-    public abstract String getNickname();
-    public abstract void setNickname(String name);
 
-    public int getInstanceID()
+    // ............................................................................................. OBSERVABLE
+
+    private Class changeType;
+
+    public void setStatisticsChanged()
     {
-        return INSTANCE_ID;
+        this.changeType = IndividualStatistics.class;
     }
 
-    @Override
-    public void receive(Signal<Stat> signal, Stat object) {
-        dispatch(this);
+    public void setAbilitiesChanged()
+    {
+        this.changeType = IAbilityGraph.class;
     }
 
-    @Override
-    public boolean equals(Object o)
+    public Class getChangeType()
     {
-        if(!(o instanceof AGuardian)) {
+        return changeType;
+    }
+
+
+    // ............................................................................................. OBJECT
+    @Override
+    public boolean equals(Object other)
+    {
+        if(!(other instanceof AGuardian))
+        {
             return false;
         }
 
-        AGuardian g = (AGuardian) o;
-        if(((AGuardian) o).getInstanceID() == INSTANCE_ID) {
+        AGuardian otherGuardian = (AGuardian) other;
+        if(otherGuardian.getUUID().equals(UUID))
+        {
             return true;
         }
 

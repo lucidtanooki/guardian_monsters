@@ -19,21 +19,27 @@ import de.limbusdev.guardianmonsters.guardians.abilities.IAbilityGraph;
  */
 public class GuardianDB extends AGuardianFactory
 {
-    // ............................................................................................. ATTRIBUTES
-    private ArrayMap<Integer, SpeciesData> speciesDB;
     private static GuardianDB instance;
 
 
-    // ............................................................................................. CONSTRUCTOR
+    // ............................................................................................. ATTRIBUTES
+
+    private ArrayMap<Integer, SpeciesDescription> speciesDB;
+
+
+    // ............................................................................................. CONSTRUCTORS
+
     public static GuardianDB getInstance() {
         if(instance == null) instance = new GuardianDB();
         return instance;
     }
 
-    private GuardianDB() {
+    private GuardianDB()
+    {
         speciesDB = new ArrayMap<>();
 
         FileHandle handle = Gdx.files.internal("data/guardians.xml");
+
         XmlReader xmlReader = new XmlReader();
         XmlReader.Element rootElement;
 
@@ -44,11 +50,11 @@ public class GuardianDB extends AGuardianFactory
             return;
         }
 
-        SpeciesData ancestor = null;
+        SpeciesDescription ancestor = null;
         for (int i = 0; i < rootElement.getChildCount(); i++) {
-            SpeciesData info = XMLMonsterParser.parseMonster(rootElement.getChild(i), ancestor);
+            SpeciesDescription info = XMLMonsterParser.parseMonster(rootElement.getChild(i), ancestor);
             speciesDB.put(info.getID(),info);
-            if(info.getMetamorphesTo() == info.getID()+1) {
+            if(info.getMetamorphsTo() == info.getID()+1) {
                 ancestor = info;
             } else {
                 ancestor = null;
@@ -57,12 +63,12 @@ public class GuardianDB extends AGuardianFactory
 
     }
 
-    public static ArrayMap<Integer, SpeciesData> getSpeciesDB() {
+    public static ArrayMap<Integer, SpeciesDescription> getSpeciesDB() {
         GuardianDB db = getInstance();
         return db.speciesDB;
     }
 
-    public static SpeciesData getData(int monsterID) {
+    public static SpeciesDescription getData(int monsterID) {
         GuardianDB db = getInstance();
         return db.speciesDB.get(monsterID);
     }
@@ -79,9 +85,9 @@ public class GuardianDB extends AGuardianFactory
         int ancestors = 0;
 
         while(hasAncestor) {
-            SpeciesData possibleAncestor = getData(id - 1 - ancestors);
+            SpeciesDescription possibleAncestor = getData(id - 1 - ancestors);
             if(possibleAncestor != null) {
-                if (possibleAncestor.getMetamorphesTo() == id - ancestors) {
+                if (possibleAncestor.getMetamorphsTo() == id - ancestors) {
                     ancestors++;
                 } else {
                     hasAncestor = false;
@@ -107,10 +113,10 @@ public class GuardianDB extends AGuardianFactory
     public AGuardian createGuardian(int ID, int level)
     {
         // Get Common Guardian Data from DataBase
-        SpeciesData data = getData(ID);
+        SpeciesDescription data = getData(ID);
 
         // Copy Base Stats
-        Stat stat = new Stat(1, data.getBaseStat());
+        IndividualStatistics statistics = new IndividualStatistics(1, data.getBaseStat());
 
         // Initialize Ability Graph
         IAbilityGraph graph = new AbilityGraph(data);
@@ -124,8 +130,9 @@ public class GuardianDB extends AGuardianFactory
             graph.activateNode(metamorphNode);
         }
 
+        String UUID = createNewUUID();
         // Put it all together
-        AGuardian guardian = new Guardian(ID, data, stat, graph);
+        AGuardian guardian = new Guardian(UUID, ID, data, statistics, graph);
 
         // Return complete Guardian
         return guardian;

@@ -1,6 +1,6 @@
 package de.limbusdev.guardianmonsters.guardians.items.equipment;
 
-import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
+import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 
 /**
  * FootEquipment
@@ -28,9 +28,9 @@ public class FootEquipment extends Equipment {
     }
 
     @Override
-    public boolean equipable(Guardian m) {
+    public boolean equipable(AGuardian m) {
         if(super.equipable(m)) {
-            return (m.data.getFootType() == type);
+            return (m.getSpeciesData().getFootType() == type);
         } else {
             return false;
         }

@@ -14,10 +14,13 @@ package de.limbusdev.guardianmonsters.guardians.monsters;
  * MDef ..  Magical Defense
  * Speed
  *
- * Created by Georg Eckert 2016
+ * Base Stats are common to all Guardians of the same species, and therefore are part of the
+ * {@link SpeciesDescription}.
+ *
+ * @author Georg Eckert 2016
  */
 
-public class BaseStat
+public class CommonStatistics
 {
     private int ID;
     private int baseHP;
@@ -31,14 +34,14 @@ public class BaseStat
     /**
      * For Serialization only
      */
-    public BaseStat() {}
+    public CommonStatistics() {}
 
-    public BaseStat(int ID) {
+    public CommonStatistics(int ID) {
         this(ID, 300, 100, 10, 10, 10, 10, 10);
     }
 
-    public BaseStat(int ID, int baseHP, int baseMP, int basePStr, int basePDef, int baseMStr,
-                    int baseMDef, int baseSpeed) {
+    public CommonStatistics(int ID, int baseHP, int baseMP, int basePStr, int basePDef, int baseMStr,
+                            int baseMDef, int baseSpeed) {
         this.ID = ID;
         this.baseHP = baseHP;
         this.baseMP = baseMP;

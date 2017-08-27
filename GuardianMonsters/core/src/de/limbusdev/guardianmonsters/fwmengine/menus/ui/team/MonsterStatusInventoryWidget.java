@@ -10,7 +10,7 @@ import com.badlogic.gdx.utils.ArrayMap;
 
 import de.limbusdev.guardianmonsters.Constant;
 import de.limbusdev.guardianmonsters.guardians.Element;
-import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
+import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.GuardianDB;
 import de.limbusdev.guardianmonsters.services.Services;
 
@@ -84,19 +84,19 @@ public class MonsterStatusInventoryWidget extends Group {
     }
 
 
-    public void init(Guardian m) {
-        name.setText(Services.getL18N().Guardians().get(GuardianDB.getInstance().getNameById(m.ID)));
-        valueLabels.get("hp").setText(m.stat.getHP() + "/" + m.stat.getHPmax());
-        valueLabels.get("mp").setText(m.stat.getMP() + "/" + m.stat.getMPmax());
-        valueLabels.get("exp").setText(m.stat.getEXP() + "/" + (m.stat.getEXPtoNextLevel() + m.stat.getEXP()));
-        valueLabels.get("pstr").setText(Integer.toString(m.stat.getPStrMax()));
-        valueLabels.get("pdef").setText(Integer.toString(m.stat.getPDefMax()));
-        valueLabels.get("mstr").setText(Integer.toString(m.stat.getMStrMax()));
-        valueLabels.get("mdef").setText(Integer.toString(m.stat.getMDefMax()));
-        valueLabels.get("speed").setText(Integer.toString(m.stat.getSpeedMax()));
+    public void init(AGuardian m) {
+        name.setText(Services.getL18N().Guardians().get(GuardianDB.getInstance().getNameById(m.getSpeciesData().getID())));
+        valueLabels.get("hp").setText(m.getStatistics().getHP() + "/" + m.getStatistics().getHPmax());
+        valueLabels.get("mp").setText(m.getStatistics().getMP() + "/" + m.getStatistics().getMPmax());
+        valueLabels.get("exp").setText(m.getStatistics().getEXP() + "/" + (m.getStatistics().getEXPtoNextLevel() + m.getStatistics().getEXP()));
+        valueLabels.get("pstr").setText(Integer.toString(m.getStatistics().getPStrMax()));
+        valueLabels.get("pdef").setText(Integer.toString(m.getStatistics().getPDefMax()));
+        valueLabels.get("mstr").setText(Integer.toString(m.getStatistics().getMStrMax()));
+        valueLabels.get("mdef").setText(Integer.toString(m.getStatistics().getMDefMax()));
+        valueLabels.get("speed").setText(Integer.toString(m.getStatistics().getSpeedMax()));
 
         elementGroup.clear();
-        for(Element e : m.data.getElements()) {
+        for(Element e : m.getSpeciesData().getElements()) {
             String elem = e.toString().toLowerCase();
             String elemName = Services.getL18N().Elements().get("element_" + elem);
             elemName = elemName.length() < 7 ? elemName : elemName.substring(0,6);
@@ -105,26 +105,26 @@ public class MonsterStatusInventoryWidget extends Group {
         }
 
         equipmentGroup.clear();
-        if(m.stat.hasHeadEquipped()) {
-            Image img = new Image(skin.getDrawable(m.stat.getHead().getName()));
+        if(m.getStatistics().hasHeadEquipped()) {
+            Image img = new Image(skin.getDrawable(m.getStatistics().getHead().getName()));
             img.setSize(32,32);
             img.setPosition(102,178-2,Align.topLeft);
             equipmentGroup.addActor(img);
         }
-        if(m.stat.hasHandsEquipped()) {
-            Image img = new Image(skin.getDrawable(m.stat.getHands().getName()));
+        if(m.getStatistics().hasHandsEquipped()) {
+            Image img = new Image(skin.getDrawable(m.getStatistics().getHands().getName()));
             img.setSize(32,32);
             img.setPosition(102,178-2-38,Align.topLeft);
             equipmentGroup.addActor(img);
         }
-        if(m.stat.hasBodyEquipped()) {
-            Image img = new Image(skin.getDrawable(m.stat.getBody().getName()));
+        if(m.getStatistics().hasBodyEquipped()) {
+            Image img = new Image(skin.getDrawable(m.getStatistics().getBody().getName()));
             img.setSize(32,32);
             img.setPosition(102,178-2-38*2,Align.topLeft);
             equipmentGroup.addActor(img);
         }
-        if(m.stat.hasFeetEquipped()) {
-            Image img = new Image(skin.getDrawable(m.stat.getFeet().getName()));
+        if(m.getStatistics().hasFeetEquipped()) {
+            Image img = new Image(skin.getDrawable(m.getStatistics().getFeet().getName()));
             img.setSize(32,32);
             img.setPosition(102,178-2-38*3,Align.topLeft);
             equipmentGroup.addActor(img);

@@ -16,11 +16,11 @@ import de.limbusdev.guardianmonsters.fwmengine.battle.control.BattleQueue;
 import de.limbusdev.guardianmonsters.fwmengine.battle.control.BattleSystem;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.AnimationType;
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.ImageZComparator;
-import de.limbusdev.guardianmonsters.utils.geometry.IntVec2;
+import de.limbusdev.guardianmonsters.guardians.abilities.Ability;
+import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.media.IMediaManager;
 import de.limbusdev.guardianmonsters.services.Services;
-import de.limbusdev.guardianmonsters.guardians.abilities.Ability;
-import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
+import de.limbusdev.guardianmonsters.utils.geometry.IntVec2;
 
 /**
  * Widget for displaying monster status in battle: HP, MP, EXP, Name, Level
@@ -80,7 +80,7 @@ public class BattleAnimationWidget extends BattleWidget{
         addMonsterAnimationsForTeam(queue.getCombatTeamRight(),RIGHT);
     }
 
-    private void addMonsterAnimationsForTeam(ArrayMap<Integer,Guardian> team, boolean side) {
+    private void addMonsterAnimationsForTeam(ArrayMap<Integer,AGuardian> team, boolean side) {
 
         ArrayMap<Integer,Image> imgs;
         ArrayMap<Integer,Boolean> positions;
@@ -101,10 +101,10 @@ public class BattleAnimationWidget extends BattleWidget{
         int counter = 0;
         int actualTeamSize = 0;
         while(actualTeamSize < teamSize && counter < team.size) {
-            Guardian m = team.get(counter);
-            if(m.stat.isFit()) {
+            AGuardian m = team.get(counter);
+            if(m.getStatistics().isFit()) {
                 // Add monster to team
-                setUpMonsterSprite(m.ID,actualTeamSize, side);
+                setUpMonsterSprite(m.getSpeciesData().getID(),actualTeamSize, side);
                 positions.put(actualTeamSize,true);
                 actualTeamSize++;
             }

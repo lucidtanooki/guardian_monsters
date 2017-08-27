@@ -10,12 +10,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 
-import de.limbusdev.guardianmonsters.services.Services;
-import de.limbusdev.guardianmonsters.scene2d.AnimatedImage;
-import de.limbusdev.guardianmonsters.fwmengine.menus.ui.widgets.OverlayWidget;
-import de.limbusdev.guardianmonsters.guardians.monsters.LevelUpReport;
-import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
 import de.limbusdev.guardianmonsters.Constant;
+import de.limbusdev.guardianmonsters.fwmengine.menus.ui.widgets.OverlayWidget;
+import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
+import de.limbusdev.guardianmonsters.guardians.monsters.LevelUpReport;
+import de.limbusdev.guardianmonsters.scene2d.AnimatedImage;
+import de.limbusdev.guardianmonsters.services.Services;
 
 /**
  * LevelUpWidget
@@ -27,7 +27,7 @@ public class LevelUpWidget extends OverlayWidget
 {
     private Image monsterImg;
 
-    public LevelUpWidget(Skin skin, Guardian guardian) {
+    public LevelUpWidget(Skin skin, AGuardian guardian) {
         super(skin);
 
         Label bg = new Label("", skin, "paper");
@@ -35,7 +35,7 @@ public class LevelUpWidget extends OverlayWidget
         bg.setPosition(Constant.WIDTH/2-150,30,Align.bottomLeft);
         addActor(bg);
 
-        monsterImg = new Image(Services.getMedia().getMonsterSprite(guardian.ID));
+        monsterImg = new Image(Services.getMedia().getMonsterSprite(guardian.getID()));
         monsterImg.setPosition(64,64, Align.bottomLeft);
         addActor(monsterImg);
 
@@ -49,7 +49,7 @@ public class LevelUpWidget extends OverlayWidget
             }
         });
 
-        Label info = new Label(Services.getL18N().Battle().format("level_up", guardian.getName()), skin, "default");
+        Label info = new Label(Services.getL18N().Battle().format("level_up", guardian.getNickname()), skin, "default");
         info.setSize(140,32);
         info.setPosition(128+64,140,Align.bottomLeft);
         info.setWrap(true);
@@ -59,7 +59,7 @@ public class LevelUpWidget extends OverlayWidget
 
         // Values
 
-        LevelUpReport lvlUp = guardian.stat.getLatestLevelUpReport();
+        LevelUpReport lvlUp = guardian.getStatistics().getLatestLevelUpReport();
 
         Table values = new Table();
         values.align(Align.topLeft);

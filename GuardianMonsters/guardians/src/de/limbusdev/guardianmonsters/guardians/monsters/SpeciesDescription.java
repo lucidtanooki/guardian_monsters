@@ -13,47 +13,59 @@ import de.limbusdev.guardianmonsters.guardians.items.equipment.HeadEquipment;
 
 
 /**
- * Holds common data of a monster of the given ID
+ * Species Description
+ *
+ * Holds a formal description of the given ID. This data follows the idea of a biological
+ * classification, following the classical evolutionary classification systematic.
+ *
+ * Life > Domain > Kingdom > Phylum > Class > Order > Family > Genus > Species
+ *
+ * Guardians however are divided by only two hierarchical levels: Phylum > Species
+ * Where this can be simplified to Element > Species
+ *
+ * The species can be identified exactly by the unique SpeciesID or simply ID.
+ *
+ * Instances of this class hold all attributes which are common for all Guardians of the same species.
  *
  * @author Georg Eckert 2016
  */
-public class SpeciesData
+public class SpeciesDescription
 {
-    /* ............................................................................ ATTRIBUTES .. */
-    private int ID;
+    // ............................................................................................. ATTRIBUTES
+    private int speciesID;
     private String nameID;
 
     private ArrayMap<Integer, Ability> abilityNodes;
     private ArrayMap<Integer, BodyPart> equipmentNodes;
     private Array<Integer> metamorphosisNodes;
 
-    private int metamorphesTo;
+    private int metamorphsTo;
     private Array<Element> elements;
-    private BaseStat baseStat;
+    private CommonStatistics baseStat;
 
     private HeadEquipment.Type headType;
     private BodyEquipment.Type bodyType;
     private HandEquipment.Type handType;
     private FootEquipment.Type footType;
 
-    /* ........................................................................... CONSTRUCTOR .. */
+    // ............................................................................................. CONSTRUCTOR
 
     /**
      * For Serialization only!
      */
-    public SpeciesData() {}
+    public SpeciesDescription() {}
 
-    public SpeciesData(int ID, String nameID, int metamorphesTo, BaseStat baseStat,
-                       Array<Element> elements, ArrayMap<Integer, Ability> abilityNodes,
-                       ArrayMap<Integer, BodyPart> equipmentNodes,
-                       Array<Integer> metamorphosisNodes, HeadEquipment.Type head,
-                       BodyEquipment.Type body, HandEquipment.Type hands, FootEquipment.Type feet) {
-        this.ID = ID;
+    public SpeciesDescription(int ID, String nameID, int metamorphsTo, CommonStatistics baseStat,
+                              Array<Element> elements, ArrayMap<Integer, Ability> abilityNodes,
+                              ArrayMap<Integer, BodyPart> equipmentNodes,
+                              Array<Integer> metamorphosisNodes, HeadEquipment.Type head,
+                              BodyEquipment.Type body, HandEquipment.Type hands, FootEquipment.Type feet) {
+        this.speciesID = ID;
         this.nameID = nameID;
         this.abilityNodes = abilityNodes;
         this.equipmentNodes = equipmentNodes;
         this.metamorphosisNodes = metamorphosisNodes;
-        this.metamorphesTo = metamorphesTo;
+        this.metamorphsTo = metamorphsTo;
         this.elements = elements;
         this.baseStat = baseStat;
         this.handType = hands;
@@ -62,7 +74,7 @@ public class SpeciesData
         this.footType = feet;
     }
 
-    public SpeciesData(int ID, String nameID, int metamorphsTo, Array<Element> elements, SpeciesData ancestorData) {
+    public SpeciesDescription(int ID, String nameID, int metamorphsTo, Array<Element> elements, SpeciesDescription ancestorData) {
         this(
             ID, nameID, metamorphsTo,
             ancestorData.baseStat,
@@ -98,7 +110,7 @@ public class SpeciesData
     }
 
     public int getID() {
-        return ID;
+        return speciesID;
     }
 
     public String getNameID() {
@@ -117,15 +129,16 @@ public class SpeciesData
         return metamorphosisNodes;
     }
 
-    public int getMetamorphesTo() {
-        return metamorphesTo;
+    public int getMetamorphsTo() {
+        return metamorphsTo;
     }
 
     public Array<Element> getElements() {
         return elements;
     }
 
-    public BaseStat getBaseStat() {
+    public CommonStatistics getBaseStat() {
         return baseStat;
     }
+
 }

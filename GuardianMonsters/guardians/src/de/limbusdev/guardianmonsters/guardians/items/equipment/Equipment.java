@@ -2,7 +2,7 @@ package de.limbusdev.guardianmonsters.guardians.items.equipment;
 
 
 import de.limbusdev.guardianmonsters.guardians.items.Item;
-import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
+import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 
 /**
  * Equipment extends the Stats of a monster in the following way:
@@ -44,9 +44,9 @@ public abstract class Equipment extends Item
      * @param m Guardian to give equipment to
      * @return  previously worn equipment, null if nothing was worn yet
      */
-    public Equipment equip(Guardian m)
+    public Equipment equip(AGuardian m)
     {
-        return m.stat.giveEquipment(this);
+        return m.getStatistics().giveEquipment(this);
     }
 
     /**
@@ -55,8 +55,8 @@ public abstract class Equipment extends Item
      * @param guardian
      * @return  if the given monster has learnt the needed ability yet
      */
-    public boolean equipable(Guardian guardian)
+    public boolean equipable(AGuardian guardian)
     {
-        return (guardian.abilityGraph.hasLearntEquipment(this.bodyPart));
+        return (guardian.getAbilityGraph().hasLearntEquipment(this.bodyPart));
     }
 }

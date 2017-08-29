@@ -38,7 +38,7 @@
   {
     "ID": 4,
     "element": "earth",
-    "name": "attEarth4_landslIDe",
+    "name": "attEarth4_landslide",
     "damage": 40,
     "sfxType": "hit",
     "sfxIndex": 0,

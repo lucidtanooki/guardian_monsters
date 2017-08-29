@@ -40,6 +40,7 @@ public class SpeciesDescription
     private Array<Integer> metamorphosisNodes;
 
     private int metamorphsTo;
+    private int metamorphsFrom;
     private Array<Element> elements;
     private CommonStatistics baseStat;
 
@@ -55,17 +56,28 @@ public class SpeciesDescription
      */
     public SpeciesDescription() {}
 
-    public SpeciesDescription(int ID, String nameID, int metamorphsTo, CommonStatistics baseStat,
-                              Array<Element> elements, ArrayMap<Integer, Ability> abilityNodes,
-                              ArrayMap<Integer, BodyPart> equipmentNodes,
-                              Array<Integer> metamorphosisNodes, HeadEquipment.Type head,
-                              BodyEquipment.Type body, HandEquipment.Type hands, FootEquipment.Type feet) {
-        this.speciesID = ID;
+    public SpeciesDescription (
+        int speciesID,
+        String nameID,
+        int metamorphsTo,
+        CommonStatistics baseStat,
+        Array<Element> elements,
+        ArrayMap<Integer, Ability> abilityNodes,
+        ArrayMap<Integer, BodyPart> equipmentNodes,
+        Array<Integer> metamorphosisNodes,
+        HeadEquipment.Type head,
+        BodyEquipment.Type body,
+        HandEquipment.Type hands,
+        FootEquipment.Type feet,
+        int metamorphsFrom
+    ) {
+        this.speciesID = speciesID;
         this.nameID = nameID;
         this.abilityNodes = abilityNodes;
         this.equipmentNodes = equipmentNodes;
         this.metamorphosisNodes = metamorphosisNodes;
         this.metamorphsTo = metamorphsTo;
+        this.metamorphsFrom = metamorphsFrom;
         this.elements = elements;
         this.baseStat = baseStat;
         this.handType = hands;
@@ -85,13 +97,14 @@ public class SpeciesDescription
             ancestorData.getHeadType(),
             ancestorData.getBodyType(),
             ancestorData.getHandType(),
-            ancestorData.getFootType()
+            ancestorData.getFootType(),
+            ancestorData.getID()
         );
     }
 
-    /* ............................................................................... METHODS .. */
+    // ............................................................................................. METHODS
     
-    /* ..................................................................... GETTERS & SETTERS .. */
+    // ............................................................................................. GETTERS & SETTERS
 
     public HeadEquipment.Type getHeadType() {
         return headType;
@@ -159,18 +172,19 @@ public class SpeciesDescription
         pretty += "| Elements: ";
         for(Element e : elements) pretty += e.toString() + ", ";
         pretty += "\n";
-        pretty += "| Abilities: \n";
+        pretty += "| Abilitiy-Nodes: \n";
         for(int key : abilityNodes.keys()) pretty += "|\tNode " + key + ":\t" + abilityNodes.get(key).name + "\n";
-        pretty += "| Equipment: \n";
+        pretty += "| Equipment-Nodes: \n";
         for(int key : equipmentNodes.keys()) pretty += "|\tNode " + key + ":\t" + equipmentNodes.get(key).toString() + "\n";
         pretty += "| Equipment-Type:\n";
         pretty += "|\tBody:\t"   + bodyType.toString() + "\n";
         pretty += "|\tHands:\t"  + handType.toString() + "\n";
         pretty += "|\tFeet:\t"   + footType.toString() + "\n";
         pretty += "|\tHead:\t"   + headType.toString() + "\n";
-        pretty += "| Metamorphosis to: " + metamorphsTo + "\n";
+        pretty += "| Can metamorph: " + ((metamorphsTo == 0) ? "no" : "yes") + "\n";
+        pretty += "| Metamorphosis to:\t" + metamorphsTo + "\n";
+        pretty += "| Metamorphosis from:\t" + metamorphsFrom + "\n";
         pretty += "+--------------------------------------+\n";
         return pretty;
     }
-
 }

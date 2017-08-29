@@ -98,7 +98,7 @@ public class XMLGuardianParser
 
         if(Constant.DEBUGGING_ON)
         {
-            System.out.println("Parsed XML Guardian Data:");
+            System.out.println("Parsed XML Guardian Data:\n");
             System.out.println(speciesDescription.prettyPrint());
         }
 

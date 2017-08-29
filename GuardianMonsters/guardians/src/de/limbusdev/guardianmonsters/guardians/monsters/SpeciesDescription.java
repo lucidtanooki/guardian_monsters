@@ -155,11 +155,19 @@ public class SpeciesDescription
     {
         String pretty = "";
         pretty += "+---- Guardian Species Description ----+\n";
-        pretty += "| Species: " + speciesID + "\n";
-        pretty += "| nameID: " + nameID + "\n";
+        pretty += "| Species: " + speciesID + " (" + nameID + ")\n";
         pretty += "| Elements: ";
         for(Element e : elements) pretty += e.toString() + ", ";
         pretty += "\n";
+        pretty += "| Abilities: \n";
+        for(int key : abilityNodes.keys()) pretty += "|\tNode " + key + ":\t" + abilityNodes.get(key).name + "\n";
+        pretty += "| Equipment: \n";
+        for(int key : equipmentNodes.keys()) pretty += "|\tNode " + key + ":\t" + equipmentNodes.get(key).toString() + "\n";
+        pretty += "| Equipment-Type:\n";
+        pretty += "|\tBody:\t"   + bodyType.toString() + "\n";
+        pretty += "|\tHands:\t"  + handType.toString() + "\n";
+        pretty += "|\tFeet:\t"   + footType.toString() + "\n";
+        pretty += "|\tHead:\t"   + headType.toString() + "\n";
         pretty += "| Metamorphosis to: " + metamorphsTo + "\n";
         pretty += "+--------------------------------------+\n";
         return pretty;

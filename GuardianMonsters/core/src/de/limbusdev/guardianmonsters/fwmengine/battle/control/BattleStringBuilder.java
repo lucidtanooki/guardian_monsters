@@ -13,14 +13,14 @@ public class BattleStringBuilder
 {
     public static String receivedDamage(Guardian victim, int damage)
     {
-        String text = GuardianFactory.getInstance().getNameById(victim.getID()) + " lost " + damage + " HP";
+        String text = GuardianFactory.getInstance().getNameById(victim.getSpeciesID()) + " lost " + damage + " HP";
         return text;
     }
 
     public static String givenDamage(AGuardian attacker, AGuardian victim, AttackCalculationReport report)
     {
-        String attName = GuardianFactory.getInstance().getNameById(attacker.getID());
-        String defName = GuardianFactory.getInstance().getNameById(victim.getID());
+        String attName = GuardianFactory.getInstance().getNameById(attacker.getSpeciesID());
+        String defName = GuardianFactory.getInstance().getNameById(victim.getSpeciesID());
 
         String eff;
         if(report.efficiency > 1.1) {

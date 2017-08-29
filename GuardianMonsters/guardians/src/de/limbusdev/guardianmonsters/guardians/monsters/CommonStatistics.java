@@ -23,13 +23,7 @@ package de.limbusdev.guardianmonsters.guardians.monsters;
 public class CommonStatistics
 {
     private int ID;
-    private int baseHP;
-    private int baseMP;
-    private int basePStr;
-    private int basePDef;
-    private int baseMStr;
-    private int baseMDef;
-    private int baseSpeed;
+    private Statistics baseStats;
 
     /**
      * For Serialization only
@@ -37,19 +31,12 @@ public class CommonStatistics
     public CommonStatistics() {}
 
     public CommonStatistics(int ID) {
-        this(ID, 300, 100, 10, 10, 10, 10, 10);
+        this(ID, new Statistics(300, 50, 10, 10, 10, 10, 10));
     }
 
-    public CommonStatistics(int ID, int baseHP, int baseMP, int basePStr, int basePDef, int baseMStr,
-                            int baseMDef, int baseSpeed) {
+    public CommonStatistics(int ID, Statistics baseStats) {
         this.ID = ID;
-        this.baseHP = baseHP;
-        this.baseMP = baseMP;
-        this.basePStr = basePStr;
-        this.basePDef = basePDef;
-        this.baseMStr = baseMStr;
-        this.baseMDef = baseMDef;
-        this.baseSpeed = baseSpeed;
+        this.baseStats =  baseStats;
     }
 
     public int getID() {
@@ -57,30 +44,30 @@ public class CommonStatistics
     }
 
     public int getBaseHP() {
-        return baseHP;
+        return baseStats.HP;
     }
 
     public int getBaseMP() {
-        return baseMP;
+        return baseStats.MP;
     }
 
     public int getBasePStr() {
-        return basePStr;
+        return baseStats.PStr;
     }
 
     public int getBasePDef() {
-        return basePDef;
+        return baseStats.PDef;
     }
 
     public int getBaseMStr() {
-        return baseMStr;
+        return baseStats.MStr;
     }
 
     public int getBaseMDef() {
-        return baseMDef;
+        return baseStats.MDef;
     }
 
     public int getBaseSpeed() {
-        return baseSpeed;
+        return baseStats.Speed;
     }
 }

@@ -35,7 +35,7 @@ public class LevelUpWidget extends OverlayWidget
         bg.setPosition(Constant.WIDTH/2-150,30,Align.bottomLeft);
         addActor(bg);
 
-        monsterImg = new Image(Services.getMedia().getMonsterSprite(guardian.getID()));
+        monsterImg = new Image(Services.getMedia().getMonsterSprite(guardian.getSpeciesID()));
         monsterImg.setPosition(64,64, Align.bottomLeft);
         addActor(monsterImg);
 
@@ -67,8 +67,26 @@ public class LevelUpWidget extends OverlayWidget
         values.setPosition(128+64,64,Align.bottomLeft);
 
         String[] attributes = {"exp", "hp", "mp", "pstr", "pdef", "mstr", "mdef", "speed"};
-        int[] oldAttribVals = {lvlUp.oldLevel, lvlUp.oldHP, lvlUp.oldMP, lvlUp.oldPStr, lvlUp.oldPDef, lvlUp.oldMStr, lvlUp.oldMDef, lvlUp.oldSpeed};
-        int[] newAttribVals = {lvlUp.newLevel, lvlUp.newHP, lvlUp.newMP, lvlUp.newPStr, lvlUp.newPDef, lvlUp.newMStr, lvlUp.newMDef, lvlUp.newSpeed};
+        int[] oldAttribVals = {
+            lvlUp.oldLevel,
+            lvlUp.oldStats.getHP(),
+            lvlUp.oldStats.getMP(),
+            lvlUp.oldStats.getPDef(),
+            lvlUp.oldStats.getPStr(),
+            lvlUp.oldStats.getMStr(),
+            lvlUp.oldStats.getMDef(),
+            lvlUp.oldStats.getSpeed()
+        };
+        int[] newAttribVals = {
+            lvlUp.newLevel,
+            lvlUp.newStats.getHP(),
+            lvlUp.newStats.getMP(),
+            lvlUp.newStats.getPDef(),
+            lvlUp.newStats.getPStr(),
+            lvlUp.newStats.getMStr(),
+            lvlUp.newStats.getMDef(),
+            lvlUp.newStats.getSpeed()
+        };
         for(int i=0; i<attributes.length; i++) {
             values.add(new Image(skin.getDrawable("stats-symbol-" + attributes[i]))).size(16,16);
             values.add(new Label(Integer.toString(oldAttribVals[i]) + " > ", skin, "default")).height(16);

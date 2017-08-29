@@ -23,7 +23,7 @@ public class SerializableMonster
     public SerializableMonster() {}
 
     public SerializableMonster(AGuardian guardian) {
-        this.ID = guardian.getSpeciesData().getID();
+        this.ID = guardian.getSpeciesDescription().getID();
         this.nickname = guardian.getNickname();
         this.graph = new SerializableAbilityGraph(guardian.getAbilityGraph());
         this.stat = new SerializableStat(guardian.getStatistics());

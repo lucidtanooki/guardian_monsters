@@ -30,7 +30,7 @@ public class FootEquipment extends Equipment {
     @Override
     public boolean equipable(AGuardian m) {
         if(super.equipable(m)) {
-            return (m.getSpeciesData().getFootType() == type);
+            return (m.getSpeciesDescription().getFootType() == type);
         } else {
             return false;
         }

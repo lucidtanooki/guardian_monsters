@@ -4,6 +4,7 @@ import de.limbusdev.guardianmonsters.guardians.ItemDB;
 import de.limbusdev.guardianmonsters.guardians.items.equipment.Equipment;
 import de.limbusdev.guardianmonsters.guardians.monsters.CommonStatistics;
 import de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics;
+import de.limbusdev.guardianmonsters.guardians.monsters.Statistics;
 
 /**
  * SerializableStat
@@ -61,27 +62,34 @@ public class SerializableStat {
         }
     }
 
-    public static IndividualStatistics deserialize(SerializableStat sStat) {
-        return new IndividualStatistics(
-            sStat.level,
-            sStat.abilityLevels,
-            sStat.exp,
-            sStat.character,
-            sStat.base,
+    public static IndividualStatistics deserialize(SerializableStat sStat)
+    {
+        Statistics stats = new Statistics(
             sStat.HP,
             sStat.MP,
             sStat.PStr,
             sStat.PDef,
             sStat.MStr,
             sStat.MDef,
-            sStat.Speed,
+            sStat.Speed
+        );
+        Statistics maxStats = new Statistics(
             sStat.HPmax,
             sStat.MPmax,
             sStat.PStrMax,
             sStat.PDefMax,
             sStat.MStrMax,
             sStat.MDefMax,
-            sStat.SpeedMax,
+            sStat.SpeedMax
+        );
+        return new IndividualStatistics(
+            sStat.level,
+            sStat.abilityLevels,
+            sStat.exp,
+            sStat.character,
+            sStat.base,
+            stats,
+            maxStats,
             (Equipment)ItemDB.getItem(sStat.hand),
             (Equipment)ItemDB.getItem(sStat.head),
             (Equipment)ItemDB.getItem(sStat.body),

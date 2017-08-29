@@ -62,8 +62,7 @@ public class IndividualStatistics
     public int character;   // for growth rates
     public CommonStatistics base;
 
-    private int HP, MP, PStr, PDef, MStr, MDef, Speed;
-    private int HPmax, MPmax, PStrMax, PDefMax, MStrMax, MDefMax, SpeedMax;
+    private Statistics currentStats, maxStats;
 
     private Equipment hands;
     private Equipment head;
@@ -78,8 +77,7 @@ public class IndividualStatistics
      * For Serialization only!
      */
     public IndividualStatistics(int level, int abilityLevels, int EXP, int character, CommonStatistics base,
-                                int HP, int MP, int PStr, int PDef, int MStr, int MDef, int speed,
-                                int HPmax, int MPmax, int PStrMax, int PDefMax, int MStrMax, int MDefMax, int speedMax,
+                                Statistics stats, Statistics maxStats,
                                 Equipment hands, Equipment head, Equipment body, Equipment feet)
     {
         this.level = level;
@@ -87,25 +85,14 @@ public class IndividualStatistics
         this.EXP = EXP;
         this.character = character;
         this.base = base;
-        this.HP = HP;
-        this.MP = MP;
-        this.PStr = PStr;
-        this.PDef = PDef;
-        this.MStr = MStr;
-        this.MDef = MDef;
-        this.Speed = speed;
-        this.HPmax = HPmax;
-        this.MPmax = MPmax;
-        this.PStrMax = PStrMax;
-        this.PDefMax = PDefMax;
-        this.MStrMax = MStrMax;
-        this.MDefMax = MDefMax;
-        this.SpeedMax = speedMax;
+        this.currentStats = stats;
+        this.maxStats = maxStats;
         this.hands = hands;
         this.head = head;
         this.body = body;
         this.feet = feet;
-        lvlUpReport = new LevelUpReport(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
+        Statistics nullStats = new Statistics(0,0,0,0,0,0,0);
+        lvlUpReport = new LevelUpReport(nullStats, nullStats, 0, 0);
     }
 
     public IndividualStatistics(int level, CommonStatistics baseStat, int character) {
@@ -130,13 +117,15 @@ public class IndividualStatistics
         this.level = level;
         this.abilityLevels = level-1;
 
-        this.HPmax      = baseStat.getBaseHP();
-        this.MPmax      = baseStat.getBaseMP();
-        this.PStrMax    = baseStat.getBasePStr();
-        this.PDefMax    = baseStat.getBasePDef();
-        this.MStrMax    = baseStat.getBaseMStr();
-        this.MDefMax    = baseStat.getBaseMDef();
-        this.SpeedMax   = baseStat.getBaseSpeed();
+        this.maxStats = new Statistics(
+            baseStat.getBaseHP(),
+            baseStat.getBaseMP(),
+            baseStat.getBasePStr(),
+            baseStat.getBasePDef(),
+            baseStat.getBaseMStr(),
+            baseStat.getBaseMDef(),
+            baseStat.getBaseSpeed()
+        );
 
         for(int i=1; i<level; i++) {
             levelUp();
@@ -146,33 +135,30 @@ public class IndividualStatistics
 
         this.EXP = 0;
 
-        lvlUpReport = new LevelUpReport(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
+        Statistics nullStats = new Statistics(0,0,0,0,0,0,0);
+        lvlUpReport = new LevelUpReport(nullStats, nullStats, 0, 0);
     }
 
     // ............................................................................................. METHODS
     private LevelUpReport levelUp() {
 
         LevelUpReport report = new LevelUpReport(
-            this.HPmax, this.MPmax, this.PStrMax, this.PDefMax, this.MStrMax, this.MDefMax, this.SpeedMax,
-            this.HPmax      + MathTool.dice(characterGrowthRates[character][StatType.HP]),
-            this.MPmax      + MathTool.dice(characterGrowthRates[character][StatType.MP]),
-            this.PStrMax    + MathTool.dice(characterGrowthRates[character][StatType.PSTR]),
-            this.PDefMax    + MathTool.dice(characterGrowthRates[character][StatType.PDEF]),
-            this.MStrMax    + MathTool.dice(characterGrowthRates[character][StatType.MSTR]),
-            this.MDefMax    + MathTool.dice(characterGrowthRates[character][StatType.MDEF]),
-            this.SpeedMax   + MathTool.dice(characterGrowthRates[character][StatType.SPEED]),
+            maxStats.clone(),
+            new Statistics(
+                maxStats.getHP()      + MathTool.dice(characterGrowthRates[character][StatType.HP]),
+                maxStats.getMP()      + MathTool.dice(characterGrowthRates[character][StatType.MP]),
+                maxStats.getPStr()    + MathTool.dice(characterGrowthRates[character][StatType.PSTR]),
+                maxStats.getPDef()    + MathTool.dice(characterGrowthRates[character][StatType.PDEF]),
+                maxStats.getMStr()    + MathTool.dice(characterGrowthRates[character][StatType.MSTR]),
+                maxStats.getMDef()    + MathTool.dice(characterGrowthRates[character][StatType.MDEF]),
+                maxStats.getSpeed()   + MathTool.dice(characterGrowthRates[character][StatType.SPEED])
+            ),
             this.level,
             this.level + 1
         );
 
         this.level      = report.newLevel;
-        this.HPmax      = report.newHP;
-        this.MPmax      = report.newMP;
-        this.PStrMax    = report.newPStr;
-        this.PDefMax    = report.newPDef;
-        this.MStrMax    = report.newMStr;
-        this.MDefMax    = report.newMDef;
-        this.SpeedMax   = report.newSpeed;
+        this.maxStats   = report.newStats;
 
         this.abilityLevels += 1;
 
@@ -223,19 +209,19 @@ public class IndividualStatistics
     }
 
     public void healHP(int value) {
-        setHP(HP + value);
+        setHP(currentStats.HP + value);
     }
 
     public void decreaseHP(int value) {
-        setHP(HP - value);
+        setHP(currentStats.HP - value);
     }
 
     public void healMP(int value) {
-        setMP(MP + value);
+        setMP(currentStats.MP + value);
     }
 
     public void decreaseMP(int value) {
-        setMP(MP - value);
+        setMP(currentStats.MP - value);
     }
 
     /**
@@ -243,7 +229,7 @@ public class IndividualStatistics
      * @param fraction
      */
     public void increasePStr(int fraction) {
-        setPStr(MathUtils.round(PStr * (100 + fraction)/(100f)));
+        setPStr(MathUtils.round(currentStats.PStr * (100 + fraction)/(100f)));
     }
 
     /**
@@ -251,7 +237,7 @@ public class IndividualStatistics
      * @param fraction
      */
     public void increasePDef(int fraction) {
-        setPDef(MathUtils.round(PDef * (100 + fraction)/(100f)));
+        setPDef(MathUtils.round(currentStats.PDef * (100 + fraction)/(100f)));
     }
 
     /**
@@ -259,7 +245,7 @@ public class IndividualStatistics
      * @param fraction
      */
     public void increaseMStr(int fraction) {
-        setMStr(MathUtils.round(MStr * (100 + fraction)/(100f)));
+        setMStr(MathUtils.round(currentStats.MStr * (100 + fraction)/(100f)));
     }
 
     /**
@@ -267,7 +253,7 @@ public class IndividualStatistics
      * @param fraction
      */
     public void increaseMDef(int fraction) {
-        setMDef(MathUtils.round(MDef * (100 + fraction)/(100f)));
+        setMDef(MathUtils.round(currentStats.MDef * (100 + fraction)/(100f)));
     }
 
     /**
@@ -275,17 +261,17 @@ public class IndividualStatistics
      * @param fraction
      */
     public void increaseSpeed(int fraction) {
-        setSpeed(MathUtils.round(Speed * (100 + fraction)/(100f)));
+        setSpeed(MathUtils.round(currentStats.Speed * (100 + fraction)/(100f)));
     }
 
     // ............................................................................................. CALCULATED VALUES
 
     public String getHPfractionAsString() {
-        return (Integer.toString(HP) + "/" + Integer.toString(getHPmax()));
+        return (Integer.toString(currentStats.HP) + "/" + Integer.toString(getHPmax()));
     }
 
     public String getMPfractionAsString() {
-        return (Integer.toString(MP) + "/" + Integer.toString(getMPmax()));
+        return (Integer.toString(currentStats.MP) + "/" + Integer.toString(getMPmax()));
     }
 
     public int getEXPfraction() {
@@ -293,11 +279,11 @@ public class IndividualStatistics
     }
 
     public int getHPfraction() {
-        return MathUtils.round(100f*HP/getHPmax());
+        return MathUtils.round(100f*currentStats.HP/getHPmax());
     }
 
     public int getMPfraction() {
-        return MathUtils.round(100f*MP/getMPmax());
+        return MathUtils.round(100f*currentStats.MP/getMPmax());
     }
 
     /**
@@ -407,7 +393,7 @@ public class IndividualStatistics
     }
 
     public boolean isFit() {
-        return HP > 0;
+        return currentStats.HP > 0;
     }
 
     public boolean isKO() {
@@ -431,31 +417,31 @@ public class IndividualStatistics
     }
 
     public int getHP() {
-        return HP;
+        return currentStats.HP;
     }
 
     public int getMP() {
-        return MP;
+        return currentStats.MP;
     }
 
     public int getPStr() {
-        return PStr;
+        return currentStats.PStr;
     }
 
     public int getPDef() {
-        return PDef;
+        return currentStats.PDef;
     }
 
     public int getMStr() {
-        return MStr;
+        return currentStats.MStr;
     }
 
     public int getMDef() {
-        return MDef;
+        return currentStats.MDef;
     }
 
     public int getSpeed() {
-        return Speed;
+        return currentStats.Speed;
     }
 
     public int getMaxPossibleHP() {
@@ -525,7 +511,7 @@ public class IndividualStatistics
         if(feet != null)    extFactor += feet.addsHP;
         if(head != null)    extFactor += head.addsHP;
 
-        return MathUtils.round((HPmax * extFactor) / 100f);
+        return MathUtils.round((maxStats.HP * extFactor) / 100f);
     }
 
     /**
@@ -539,14 +525,14 @@ public class IndividualStatistics
         if(feet != null)    extFactor += feet.addsMP;
         if(head != null)    extFactor += head.addsMP;
 
-        return MathUtils.round((MPmax * extFactor) / 100f);
+        return MathUtils.round((maxStats.MP * extFactor) / 100f);
     }
 
     /**
      * @return maximum Pstr, taking {@link Equipment} into account
      */
     public int getPStrMax() {
-        int extPStr = PStrMax;
+        int extPStr = maxStats.PStr;
 
         if(hands != null)   extPStr += hands.addsPStr;
         if(body != null)    extPStr += body.addsPStr;
@@ -560,7 +546,7 @@ public class IndividualStatistics
      * @return maximum PDef, taking {@link Equipment} into account
      */
     public int getPDefMax() {
-        int extPDef = PDefMax;
+        int extPDef = maxStats.PDef;
 
         if(hands != null)   extPDef += hands.addsPDef;
         if(body != null)    extPDef += body.addsPDef;
@@ -574,7 +560,7 @@ public class IndividualStatistics
      * @return maximum MStr, taking {@link Equipment} into account
      */
     public int getMStrMax() {
-        int extMStr = MStrMax;
+        int extMStr = maxStats.MStr;
 
         if(hands != null)   extMStr += hands.addsMStr;
         if(body != null)    extMStr += body.addsMStr;
@@ -588,7 +574,7 @@ public class IndividualStatistics
      * @return maximum MDef, taking {@link Equipment} into account
      */
     public int getMDefMax() {
-        int extMDef = MDefMax;
+        int extMDef = maxStats.MDef;
 
         if(hands != null)   extMDef += hands.addsMDef;
         if(body != null)    extMDef += body.addsMDef;
@@ -602,7 +588,7 @@ public class IndividualStatistics
      * @return maximum Speed, taking {@link Equipment} into account
      */
     public int getSpeedMax() {
-        int extSpeed = SpeedMax;
+        int extSpeed = maxStats.Speed;
 
         if(hands != null)   extSpeed += hands.addsSpeed;
         if(body != null)    extSpeed += body.addsSpeed;
@@ -643,69 +629,69 @@ public class IndividualStatistics
     }
 
     public void setHP(int HP) {
-        this.HP = HP;
-        if(HP > getHPmax()) this.HP = getHPmax();
-        if(HP < 0)          this.HP = 0;
+        currentStats.HP = HP;
+        if(HP > getHPmax()) currentStats.HP = getHPmax();
+        if(HP < 0)          currentStats.HP = 0;
 
         core.setStatisticsChanged();
         core.notifyObservers();
     }
 
     public void setMP(int MP) {
-        this.MP = MP;
+        currentStats.MP = MP;
 
-        if(MP > getMPmax()) this.MP = getMPmax();
-        if(MP < 0)          this.MP = 0;
+        if(MP > getMPmax()) currentStats.MP = getMPmax();
+        if(MP < 0)          currentStats.MP = 0;
 
         core.setStatisticsChanged();
         core.notifyObservers();
     }
 
     public void setPStr(int PStr) {
-        this.PStr = PStr;
+        currentStats.PStr = PStr;
 
-        if(PStr > getPStrMax()*1.5f) this.PStr = getPStrMax();
-        if(PStr < 1)            this.PStr = 1;
+        if(PStr > getPStrMax()*1.5f) currentStats.PStr = getPStrMax();
+        if(PStr < 1)            currentStats.PStr = 1;
 
         core.setStatisticsChanged();
         core.notifyObservers();
     }
 
     public void setPDef(int PDef) {
-        this.PDef = PDef;
+        currentStats.PDef = PDef;
 
-        if(PDef > getPDefMax()*1.5f) this.PDef = getPDefMax();
-        if(PDef < 1)            this.PDef = 1;
+        if(PDef > getPDefMax()*1.5f) currentStats.PDef = getPDefMax();
+        if(PDef < 1)            currentStats.PDef = 1;
 
         core.setStatisticsChanged();
         core.notifyObservers();
     }
 
     public void setMStr(int MStr) {
-        this.MStr = MStr;
+        currentStats.MStr = MStr;
 
-        if(MStr > getMStrMax()*1.5f) this.MStr = getMStrMax();
-        if(MStr < 1)            this.MStr = 1;
+        if(MStr > getMStrMax()*1.5f) currentStats.MStr = getMStrMax();
+        if(MStr < 1)            currentStats.MStr = 1;
 
         core.setStatisticsChanged();
         core.notifyObservers();
     }
 
     public void setMDef(int MDef) {
-        this.MDef = MDef;
+        currentStats.MDef = MDef;
 
-        if(MDef > getMDefMax()*1.5f) this.MDef = getMDefMax();
-        if(MDef < 1)            this.MDef = 1;
+        if(MDef > getMDefMax()*1.5f) currentStats.MDef = getMDefMax();
+        if(MDef < 1)            currentStats.MDef = 1;
 
         core.setStatisticsChanged();
         core.notifyObservers();
     }
 
     public void setSpeed(int Speed) {
-        this.Speed = Speed;
+        currentStats.Speed = Speed;
 
-        if(Speed > getSpeedMax()) this.Speed = getSpeedMax();
-        if(Speed < 1)          this.Speed = 1;
+        if(Speed > getSpeedMax()) currentStats.Speed = getSpeedMax();
+        if(Speed < 1)          currentStats.Speed = 1;
 
         core.setStatisticsChanged();
         core.notifyObservers();

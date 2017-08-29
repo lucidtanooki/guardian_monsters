@@ -21,9 +21,8 @@ public class Guardian extends AGuardian
 
     /**
      * The protected constructor makes it available from the {@link AGuardianFactory} only.
-     * @param ID
      */
-    protected Guardian(String UUID, int ID, SpeciesDescription desc, IndividualStatistics stat, IAbilityGraph graph)
+    protected Guardian(String UUID, SpeciesDescription desc, IndividualStatistics stat, IAbilityGraph graph)
     {
         super(UUID);
 
@@ -34,10 +33,13 @@ public class Guardian extends AGuardian
         setNickname("");
     }
 
+    // ............................................................................................. DELEGATED METHODS
+
+    // delegated to SpeciesDescription Component
     @Override
-    public int getID()
+    public int getSpeciesID()
     {
-        return getSpeciesData().getID();
+        return description.getID();
     }
 
     // ............................................................................................. GETTERS & SETTERS
@@ -55,7 +57,7 @@ public class Guardian extends AGuardian
     }
 
     @Override
-    public SpeciesDescription getSpeciesData()
+    public SpeciesDescription getSpeciesDescription()
     {
         return description;
     }
@@ -75,6 +77,6 @@ public class Guardian extends AGuardian
     @Override
     public String toString()
     {
-        return description.getNameID() + " Level: " + statistics.getLevel() + " UUID: " + getUUID();
+        return "SpeciesID: " + getSpeciesID() + " Level: " + statistics.getLevel() + " UUID: " + getUUID();
     }
 }

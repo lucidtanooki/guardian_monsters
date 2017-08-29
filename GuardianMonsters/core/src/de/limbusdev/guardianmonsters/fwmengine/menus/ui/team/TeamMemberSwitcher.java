@@ -82,7 +82,7 @@ public class TeamMemberSwitcher extends Group {
 
     public void init(AGuardian m) {
         name.setText(Services.getL18N().getLocalizedGuardianName(m));
-        previewWidget.setPreview(m.getSpeciesData().getID());
+        previewWidget.setPreview(m.getSpeciesDescription().getID());
     }
 
     public interface Callbacks {

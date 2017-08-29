@@ -28,7 +28,7 @@ public class HeadEquipment extends Equipment {
     @Override
     public boolean equipable(AGuardian m) {
         if(super.equipable(m)) {
-            return (m.getSpeciesData().getHeadType() == type);
+            return (m.getSpeciesDescription().getHeadType() == type);
         } else {
             return false;
         }

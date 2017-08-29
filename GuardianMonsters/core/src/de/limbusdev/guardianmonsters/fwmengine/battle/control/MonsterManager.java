@@ -44,7 +44,7 @@ public class MonsterManager
     {
         System.out.println("\n--- new ability ---");
         AttackCalculationReport report = new AttackCalculationReport(attacker, defender, 0, 0, ability);
-        float efficiency = ElemEff.singelton().getElemEff(ability.element, defender.getSpeciesData().getElements());
+        float efficiency = ElemEff.singelton().getElemEff(ability.element, defender.getSpeciesDescription().getElements());
 
         float defenseRatio;
 

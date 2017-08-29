@@ -28,7 +28,7 @@ public class HandEquipment extends Equipment {
     @Override
     public boolean equipable(AGuardian m) {
         if(super.equipable(m)) {
-            return (m.getSpeciesData().getHandType() == type);
+            return (m.getSpeciesDescription().getHandType() == type);
         } else {
             return false;
         }

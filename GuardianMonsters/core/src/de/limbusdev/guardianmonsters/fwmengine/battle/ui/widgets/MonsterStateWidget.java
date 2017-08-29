@@ -104,7 +104,7 @@ public class MonsterStateWidget extends WidgetGroup implements Observer
      */
     public void init(AGuardian guardian) {
         refresh(guardian);
-        nameLabel.setText(Services.getL18N().Guardians().get((GuardianFactory.getInstance().getNameById(guardian.getSpeciesData().getID()))));
+        nameLabel.setText(Services.getL18N().Guardians().get((GuardianFactory.getInstance().getNameById(guardian.getSpeciesDescription().getID()))));
         guardian.addObserver(this);
     }
 

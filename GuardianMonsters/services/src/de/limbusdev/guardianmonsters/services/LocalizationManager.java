@@ -116,7 +116,7 @@ public class LocalizationManager implements L18N
         if(!guardian.getNickname().isEmpty()) {
             return guardian.getNickname();
         } else {
-            return Guardians().get(guardian.getSpeciesData().getNameID());
+            return Guardians().get(guardian.getSpeciesDescription().getNameID());
         }
     }
 

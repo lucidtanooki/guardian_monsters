@@ -74,7 +74,7 @@ public class GuardianFactory extends AGuardianFactory
 
         String UUID = createNewUUID();
         // Put it all together
-        AGuardian guardian = new Guardian(UUID, ID, data, statistics, graph);
+        AGuardian guardian = new Guardian(UUID, data, statistics, graph);
 
         // Return complete Guardian
         return guardian;

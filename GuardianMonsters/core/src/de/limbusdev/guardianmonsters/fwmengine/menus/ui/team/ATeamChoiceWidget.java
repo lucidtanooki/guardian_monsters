@@ -43,7 +43,7 @@ public abstract class ATeamChoiceWidget extends Group {
 
         for(final int key : team.keys()) {
             AGuardian m = team.get(key);
-            Image preview = new Image(Services.getMedia().getMonsterMiniSprite(m.getSpeciesData().getID()));
+            Image preview = new Image(Services.getMedia().getMonsterMiniSprite(m.getSpeciesDescription().getID()));
             preview.setPosition(38/2-8, 38/2-8, Align.bottomLeft);
             ImageButton.ImageButtonStyle ibs = new ImageButton.ImageButtonStyle();
             Drawable imUp = skin.getDrawable("transparent");

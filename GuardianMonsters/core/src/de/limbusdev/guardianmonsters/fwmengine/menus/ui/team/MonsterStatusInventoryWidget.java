@@ -85,7 +85,7 @@ public class MonsterStatusInventoryWidget extends Group {
 
 
     public void init(AGuardian m) {
-        name.setText(Services.getL18N().Guardians().get(GuardianFactory.getInstance().getNameById(m.getSpeciesData().getID())));
+        name.setText(Services.getL18N().Guardians().get(GuardianFactory.getInstance().getNameById(m.getSpeciesDescription().getID())));
         valueLabels.get("hp").setText(m.getStatistics().getHP() + "/" + m.getStatistics().getHPmax());
         valueLabels.get("mp").setText(m.getStatistics().getMP() + "/" + m.getStatistics().getMPmax());
         valueLabels.get("exp").setText(m.getStatistics().getEXP() + "/" + (m.getStatistics().getEXPtoNextLevel() + m.getStatistics().getEXP()));
@@ -96,7 +96,7 @@ public class MonsterStatusInventoryWidget extends Group {
         valueLabels.get("speed").setText(Integer.toString(m.getStatistics().getSpeedMax()));
 
         elementGroup.clear();
-        for(Element e : m.getSpeciesData().getElements()) {
+        for(Element e : m.getSpeciesDescription().getElements()) {
             String elem = e.toString().toLowerCase();
             String elemName = Services.getL18N().Elements().get("element_" + elem);
             elemName = elemName.length() < 7 ? elemName : elemName.substring(0,6);

@@ -45,7 +45,7 @@ public class BattleQueueWidget extends BattleWidget implements Listener<BattleQu
             AGuardian m = queue.get(i);
 
             MonsterPreviewWidget previewWidget = new MonsterPreviewWidget(Services.getUI().getBattleSkin());
-            previewWidget.setPreview(m.getSpeciesData().getID());
+            previewWidget.setPreview(m.getSpeciesDescription().getID());
             if(greyOut) {
                 previewWidget.setColor(Color.GRAY);
             }

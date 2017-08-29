@@ -55,9 +55,9 @@ public class BattleResultHUD extends AHUD {
         table.clear();
         for(int key : team.keys()) {
             AGuardian guardian = team.get(key);
-            Image face = Services.getMedia().getMonsterFace(guardian.getID());
+            Image face = Services.getMedia().getMonsterFace(guardian.getSpeciesID());
             table.add(face).left();
-            Label name = new Label(Services.getL18N().Guardians().get(GuardianFactory.getInstance().getNameById(guardian.getID())), skin, "default");
+            Label name = new Label(Services.getL18N().Guardians().get(GuardianFactory.getInstance().getNameById(guardian.getSpeciesID())), skin, "default");
             table.add(name).left();
             Image expKey = new Image(skin.getDrawable("symbol-exp"));
             table.add(expKey).left();

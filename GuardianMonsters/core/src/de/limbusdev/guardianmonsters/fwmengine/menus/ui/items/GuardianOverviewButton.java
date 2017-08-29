@@ -54,7 +54,7 @@ public class GuardianOverviewButton extends TextButton implements Listener<Guard
 //       TODO guardian.add(this);
 
         getLabel().setAlignment(Align.topLeft);
-        TextureRegion region = Services.getMedia().getMonsterMiniSprite(guardian.getID());
+        TextureRegion region = Services.getMedia().getMonsterMiniSprite(guardian.getSpeciesID());
         Image monsterImg = new Image(region);
         add(monsterImg).width(16).height(region.getRegionHeight()).align(Align.topLeft);
         row();

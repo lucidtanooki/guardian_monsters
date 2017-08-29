@@ -10,4 +10,6 @@ public class Constant
 {
     public final static float LVL_EXPONENT = 1.5f;
     public final static float BASE_EXP = 1000f;
+
+    public final static boolean DEBUGGING_ON = true;
 }

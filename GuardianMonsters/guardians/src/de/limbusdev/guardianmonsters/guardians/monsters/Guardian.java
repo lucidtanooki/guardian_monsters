@@ -9,24 +9,27 @@ import de.limbusdev.guardianmonsters.guardians.abilities.IAbilityGraph;
  */
 public class Guardian extends AGuardian
 {
+    private String nickname;
+
     // Components
-    private SpeciesDescription data;
-    private IndividualStatistics statistics;
-    private IAbilityGraph   abilityGraph;
+    private SpeciesDescription      description;
+    private IndividualStatistics    statistics;
+    private IAbilityGraph           abilityGraph;
 
 
     // ............................................................................................. CONSTRUCTOR
+
     /**
      * The protected constructor makes it available from the {@link AGuardianFactory} only.
      * @param ID
      */
-    protected Guardian(String UUID, int ID, SpeciesDescription data, IndividualStatistics statistics, IAbilityGraph abilityGraph)
+    protected Guardian(String UUID, int ID, SpeciesDescription desc, IndividualStatistics stat, IAbilityGraph graph)
     {
         super(UUID);
 
-        this.data = data;
-        this.statistics = statistics;
-        this.abilityGraph = abilityGraph;
+        this.description =  desc;
+        this.statistics =   stat;
+        this.abilityGraph = graph;
 
         setNickname("");
     }
@@ -38,10 +41,23 @@ public class Guardian extends AGuardian
     }
 
     // ............................................................................................. GETTERS & SETTERS
+
+    @Override
+    public String getNickname()
+    {
+        return nickname;
+    }
+
+    @Override
+    public void setNickname(String name)
+    {
+        this.nickname = name;
+    }
+
     @Override
     public SpeciesDescription getSpeciesData()
     {
-        return data;
+        return description;
     }
 
     public IndividualStatistics getStatistics()
@@ -59,6 +75,6 @@ public class Guardian extends AGuardian
     @Override
     public String toString()
     {
-        return data.getNameID() + " Level: " + statistics.getLevel() + " UUID: " + getUUID();
+        return description.getNameID() + " Level: " + statistics.getLevel() + " UUID: " + getUUID();
     }
 }

@@ -141,4 +141,28 @@ public class SpeciesDescription
         return baseStat;
     }
 
+
+    // ............................................................................................. OBJECT
+
+    @Override
+    public String toString()
+    {
+        String text = "Species: " + speciesID + "\t with nameID: " + nameID;
+        return text;
+    }
+
+    public String prettyPrint()
+    {
+        String pretty = "";
+        pretty += "+---- Guardian Species Description ----+\n";
+        pretty += "| Species: " + speciesID + "\n";
+        pretty += "| nameID: " + nameID + "\n";
+        pretty += "| Elements: ";
+        for(Element e : elements) pretty += e.toString() + ", ";
+        pretty += "\n";
+        pretty += "| Metamorphosis to: " + metamorphsTo + "\n";
+        pretty += "+--------------------------------------+\n";
+        return pretty;
+    }
+
 }

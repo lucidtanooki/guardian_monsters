@@ -1,27 +1,26 @@
-package de.limbusdev.guardianmonsters.guardians;
+package de.limbusdev.guardianmonsters.guardians.monsters;
 
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.XmlReader;
 
+import de.limbusdev.guardianmonsters.guardians.AbilityDB;
+import de.limbusdev.guardianmonsters.guardians.Constant;
+import de.limbusdev.guardianmonsters.guardians.Element;
 import de.limbusdev.guardianmonsters.guardians.abilities.Ability;
 import de.limbusdev.guardianmonsters.guardians.items.equipment.BodyEquipment;
 import de.limbusdev.guardianmonsters.guardians.items.equipment.BodyPart;
 import de.limbusdev.guardianmonsters.guardians.items.equipment.FootEquipment;
 import de.limbusdev.guardianmonsters.guardians.items.equipment.HandEquipment;
 import de.limbusdev.guardianmonsters.guardians.items.equipment.HeadEquipment;
-import de.limbusdev.guardianmonsters.guardians.monsters.CommonStatistics;
-import de.limbusdev.guardianmonsters.guardians.monsters.SpeciesDescription;
 
 /**
  * XMLMonsterParser
  *
  * @author Georg Eckert 2017
  */
-
-public class XMLMonsterParser
+public class XMLGuardianParser
 {
-
     public static SpeciesDescription parseMonster(XmlReader.Element element, SpeciesDescription ancestor)
     {
         SpeciesDescription speciesDescription;
@@ -96,6 +95,12 @@ public class XMLMonsterParser
             attacks, equipmentGraph, metamorphosisNodes,
             head, body, hand, feet
         );
+
+        if(Constant.DEBUGGING_ON)
+        {
+            System.out.println("Parsed XML Guardian Data:");
+            System.out.println(speciesDescription.prettyPrint());
+        }
 
         return speciesDescription;
     }

@@ -16,7 +16,7 @@ import java.util.Observer;
 import de.limbusdev.guardianmonsters.Constant;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
-import de.limbusdev.guardianmonsters.guardians.monsters.GuardianDB;
+import de.limbusdev.guardianmonsters.guardians.monsters.GuardianFactory;
 import de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics;
 import de.limbusdev.guardianmonsters.services.Services;
 
@@ -104,7 +104,7 @@ public class MonsterStateWidget extends WidgetGroup implements Observer
      */
     public void init(AGuardian guardian) {
         refresh(guardian);
-        nameLabel.setText(Services.getL18N().Guardians().get((GuardianDB.getInstance().getNameById(guardian.getSpeciesData().getID()))));
+        nameLabel.setText(Services.getL18N().Guardians().get((GuardianFactory.getInstance().getNameById(guardian.getSpeciesData().getID()))));
         guardian.addObserver(this);
     }
 
@@ -134,6 +134,9 @@ public class MonsterStateWidget extends WidgetGroup implements Observer
 
     @Override
     public void update(Observable o, Object arg) {
-        refresh((Guardian)o);
+        if(o instanceof AGuardian)
+        {
+            refresh((Guardian) o);
+        }
     }
 }

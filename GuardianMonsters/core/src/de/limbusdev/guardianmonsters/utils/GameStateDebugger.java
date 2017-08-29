@@ -7,7 +7,8 @@ import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager;
 import de.limbusdev.guardianmonsters.fwmengine.metamorphosis.MetamorphosisScreen;
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.WorldScreen;
 import de.limbusdev.guardianmonsters.guardians.AbilityDB;
-import de.limbusdev.guardianmonsters.guardians.monsters.GuardianDB;
+import de.limbusdev.guardianmonsters.guardians.monsters.AGuardianFactory;
+import de.limbusdev.guardianmonsters.guardians.monsters.GuardianFactory;
 import de.limbusdev.guardianmonsters.model.gamestate.GameState;
 
 /**
@@ -154,7 +155,7 @@ public class GameStateDebugger {
     }
 
     public void testMonsterParsing() {
-        GuardianDB mi = GuardianDB.getInstance();
+        AGuardianFactory mi = GuardianFactory.getInstance();
         System.out.println("Tested");
     }
 

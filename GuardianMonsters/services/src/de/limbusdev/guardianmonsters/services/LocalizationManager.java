@@ -12,7 +12,8 @@ import java.util.Locale;
 
 import de.limbusdev.guardianmonsters.assets.paths.AssetPath;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
-import de.limbusdev.guardianmonsters.guardians.monsters.GuardianDB;
+import de.limbusdev.guardianmonsters.guardians.monsters.AGuardianFactory;
+import de.limbusdev.guardianmonsters.guardians.monsters.GuardianFactory;
 
 
 /**
@@ -122,7 +123,9 @@ public class LocalizationManager implements L18N
     @Override
     public String getLocalizedGuardianName(int guardianID)
     {
-        return Guardians().get(GuardianDB.getNameById(guardianID));
+        AGuardianFactory factory = GuardianFactory.getInstance();
+        String nameID = factory.getNameById(guardianID);
+        return Guardians().get(nameID);
     }
 
     @Override

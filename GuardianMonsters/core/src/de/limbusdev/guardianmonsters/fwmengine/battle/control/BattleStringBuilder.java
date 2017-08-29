@@ -3,7 +3,7 @@ package de.limbusdev.guardianmonsters.fwmengine.battle.control;
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.AttackCalculationReport;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
-import de.limbusdev.guardianmonsters.guardians.monsters.GuardianDB;
+import de.limbusdev.guardianmonsters.guardians.monsters.GuardianFactory;
 import de.limbusdev.guardianmonsters.services.Services;
 
 /**
@@ -13,14 +13,14 @@ public class BattleStringBuilder
 {
     public static String receivedDamage(Guardian victim, int damage)
     {
-        String text = GuardianDB.getInstance().getNameById(victim.getID()) + " lost " + damage + " HP";
+        String text = GuardianFactory.getInstance().getNameById(victim.getID()) + " lost " + damage + " HP";
         return text;
     }
 
     public static String givenDamage(AGuardian attacker, AGuardian victim, AttackCalculationReport report)
     {
-        String attName = GuardianDB.getInstance().getNameById(attacker.getID());
-        String defName = GuardianDB.getInstance().getNameById(victim.getID());
+        String attName = GuardianFactory.getInstance().getNameById(attacker.getID());
+        String defName = GuardianFactory.getInstance().getNameById(victim.getID());
 
         String eff;
         if(report.efficiency > 1.1) {

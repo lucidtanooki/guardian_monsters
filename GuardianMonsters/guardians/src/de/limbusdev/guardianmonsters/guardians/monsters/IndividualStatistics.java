@@ -8,14 +8,6 @@ import de.limbusdev.guardianmonsters.guardians.items.equipment.Equipment;
 import de.limbusdev.guardianmonsters.guardians.items.equipment.EquipmentPotential;
 import de.limbusdev.utils.MathTool;
 
-import static de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics.Growth.FAST;
-import static de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics.Growth.FASTHP;
-import static de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics.Growth.FASTMP;
-import static de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics.Growth.MED;
-import static de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics.Growth.MEDHP;
-import static de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics.Growth.MEDMP;
-import static de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics.Growth.SLOW;
-import static de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics.Growth.SLOWHP;
 
 /**
  * Guardians Individual Statistic Component
@@ -45,9 +37,9 @@ public class IndividualStatistics
     }
 
     public interface Growth {
-        int[] SLOW={1,2,0}, MED={1,3,0}, FAST={3,2,0};
-        int[] SLOWHP={4,30,100}, MEDHP={4,40,100}, FASTHP={4,50,100};
-        int[] SLOWMP={2,20,30},  MEDMP={3,30,40},  FASTMP={4,30,50};
+        int[] SLOW =    {1,2,0},        MED =   {1,3,0},    FAST =  {3,2,0};
+        int[] SLOWHP =  {4,30,100},     MEDHP = {4,40,100}, FASTHP ={4,50,100};
+        int[] SLOWMP =  {2,20,30},      MEDMP = {3,30,40},  FASTMP ={4,30,50};
     }
 
     public interface StatType {
@@ -55,9 +47,10 @@ public class IndividualStatistics
     }
 
     public static final int[][][] characterGrowthRates = {
-        {MED, MED, MED, MED, MED, MEDHP, MEDMP},        // BALANCED
-        {FAST, SLOW, MED, SLOW, FAST, SLOWHP, MEDMP},   // VIVACIOUS
-        {MED, FAST, SLOW, FAST, SLOW, FASTHP, FASTMP}   // PRUDENT
+        /* PStr         PDef            MStr            MDef            Speed           HP              MP          */
+        {Growth.MED,    Growth.MED,     Growth.MED,     Growth.MED,     Growth.MED,     Growth.MEDHP,   Growth.MEDMP},   // BALANCED
+        {Growth.FAST,   Growth.SLOW,    Growth.MED,     Growth.SLOW,    Growth.FAST,    Growth.SLOWHP,  Growth.MEDMP},   // VIVACIOUS
+        {Growth.MED,    Growth.FAST,    Growth.SLOW,    Growth.FAST,    Growth.SLOW,    Growth.FASTHP,  Growth.FASTMP}   // PRUDENT
     };
 
     private AGuardian core;  // Core Object

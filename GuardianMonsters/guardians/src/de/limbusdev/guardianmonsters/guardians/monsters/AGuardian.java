@@ -17,7 +17,6 @@ public abstract class AGuardian extends Observable
 {
     // Unique ID for Guardian Identification, must be stored when persisted
     private final String UUID;
-    private String nickname;
 
     protected AGuardian(String UUID)
     {
@@ -30,14 +29,8 @@ public abstract class AGuardian extends Observable
     {
         return UUID;
     }
-    public String getNickname()
-    {
-        return nickname;
-    }
-    public void setNickname(String name)
-    {
-        this.nickname = name;
-    }
+    public abstract String getNickname();
+    public abstract void setNickname(String name);
     public abstract int getID();
 
 

@@ -86,14 +86,14 @@ public class MonsterStatusInventoryWidget extends Group {
 
     public void init(AGuardian m) {
         name.setText(Services.getL18N().Guardians().get(GuardianFactory.getInstance().getNameById(m.getSpeciesDescription().getID())));
-        valueLabels.get("hp").setText(m.getStatistics().getHP() + "/" + m.getStatistics().getHPmax());
-        valueLabels.get("mp").setText(m.getStatistics().getMP() + "/" + m.getStatistics().getMPmax());
-        valueLabels.get("exp").setText(m.getStatistics().getEXP() + "/" + (m.getStatistics().getEXPtoNextLevel() + m.getStatistics().getEXP()));
-        valueLabels.get("pstr").setText(Integer.toString(m.getStatistics().getPStrMax()));
-        valueLabels.get("pdef").setText(Integer.toString(m.getStatistics().getPDefMax()));
-        valueLabels.get("mstr").setText(Integer.toString(m.getStatistics().getMStrMax()));
-        valueLabels.get("mdef").setText(Integer.toString(m.getStatistics().getMDefMax()));
-        valueLabels.get("speed").setText(Integer.toString(m.getStatistics().getSpeedMax()));
+        valueLabels.get("hp").setText(m.getIndividualStatistics().getHP() + "/" + m.getIndividualStatistics().getHPmax());
+        valueLabels.get("mp").setText(m.getIndividualStatistics().getMP() + "/" + m.getIndividualStatistics().getMPmax());
+        valueLabels.get("exp").setText(m.getIndividualStatistics().getEXP() + "/" + (m.getIndividualStatistics().getEXPtoNextLevel() + m.getIndividualStatistics().getEXP()));
+        valueLabels.get("pstr").setText(Integer.toString(m.getIndividualStatistics().getPStrMax()));
+        valueLabels.get("pdef").setText(Integer.toString(m.getIndividualStatistics().getPDefMax()));
+        valueLabels.get("mstr").setText(Integer.toString(m.getIndividualStatistics().getMStrMax()));
+        valueLabels.get("mdef").setText(Integer.toString(m.getIndividualStatistics().getMDefMax()));
+        valueLabels.get("speed").setText(Integer.toString(m.getIndividualStatistics().getSpeedMax()));
 
         elementGroup.clear();
         for(Element e : m.getSpeciesDescription().getElements()) {
@@ -105,26 +105,26 @@ public class MonsterStatusInventoryWidget extends Group {
         }
 
         equipmentGroup.clear();
-        if(m.getStatistics().hasHeadEquipped()) {
-            Image img = new Image(skin.getDrawable(m.getStatistics().getHead().getName()));
+        if(m.getIndividualStatistics().hasHeadEquipped()) {
+            Image img = new Image(skin.getDrawable(m.getIndividualStatistics().getHead().getName()));
             img.setSize(32,32);
             img.setPosition(102,178-2,Align.topLeft);
             equipmentGroup.addActor(img);
         }
-        if(m.getStatistics().hasHandsEquipped()) {
-            Image img = new Image(skin.getDrawable(m.getStatistics().getHands().getName()));
+        if(m.getIndividualStatistics().hasHandsEquipped()) {
+            Image img = new Image(skin.getDrawable(m.getIndividualStatistics().getHands().getName()));
             img.setSize(32,32);
             img.setPosition(102,178-2-38,Align.topLeft);
             equipmentGroup.addActor(img);
         }
-        if(m.getStatistics().hasBodyEquipped()) {
-            Image img = new Image(skin.getDrawable(m.getStatistics().getBody().getName()));
+        if(m.getIndividualStatistics().hasBodyEquipped()) {
+            Image img = new Image(skin.getDrawable(m.getIndividualStatistics().getBody().getName()));
             img.setSize(32,32);
             img.setPosition(102,178-2-38*2,Align.topLeft);
             equipmentGroup.addActor(img);
         }
-        if(m.getStatistics().hasFeetEquipped()) {
-            Image img = new Image(skin.getDrawable(m.getStatistics().getFeet().getName()));
+        if(m.getIndividualStatistics().hasFeetEquipped()) {
+            Image img = new Image(skin.getDrawable(m.getIndividualStatistics().getFeet().getName()));
             img.setSize(32,32);
             img.setPosition(102,178-2-38*3,Align.topLeft);
             equipmentGroup.addActor(img);

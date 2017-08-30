@@ -59,7 +59,7 @@ public class LevelUpWidget extends OverlayWidget
 
         // Values
 
-        LevelUpReport lvlUp = guardian.getStatistics().getLatestLevelUpReport();
+        LevelUpReport lvlUp = guardian.getIndividualStatistics().getLatestLevelUpReport();
 
         Table values = new Table();
         values.align(Align.topLeft);

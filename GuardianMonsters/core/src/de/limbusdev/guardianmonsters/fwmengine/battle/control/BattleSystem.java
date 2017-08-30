@@ -132,7 +132,7 @@ public class BattleSystem {
         Iterator<AGuardian> it = queue.getCurrentRound().iterator();
         while (it.hasNext()) {
             AGuardian m = it.next();
-            if (m.getStatistics().isKO()) {
+            if (m.getIndividualStatistics().isKO()) {
                 it.remove();
                 if(queue.getRight().containsValue(m,false)) {
                     giveEXPtoWinners(m);
@@ -144,7 +144,7 @@ public class BattleSystem {
         it = queue.getNextRound().iterator();
         while (it.hasNext()) {
             AGuardian m = it.next();
-            if (m.getStatistics().isKO()) {
+            if (m.getIndividualStatistics().isKO()) {
                 it.remove();
                 if(queue.getRight().containsValue(m,false)) {
                     giveEXPtoWinners(m);
@@ -156,11 +156,11 @@ public class BattleSystem {
 
     private void giveEXPtoWinners(AGuardian defeatedGuardian) {
         for(AGuardian m : queue.getCombatTeamLeft().values()) {
-            if(m.getStatistics().isFit()) {
-                float opponentFactor = 1f * defeatedGuardian.getStatistics().getLevel() / m.getStatistics().getLevel();
-                int EXP = MathUtils.floor(BASE_EXP * defeatedGuardian.getStatistics().getLevel() / 6f * opponentFactor);
+            if(m.getIndividualStatistics().isFit()) {
+                float opponentFactor = 1f * defeatedGuardian.getIndividualStatistics().getLevel() / m.getIndividualStatistics().getLevel();
+                int EXP = MathUtils.floor(BASE_EXP * defeatedGuardian.getIndividualStatistics().getLevel() / 6f * opponentFactor);
                 result.gainEXP(m, EXP);
-                boolean levelUp = m.getStatistics().earnEXP(EXP);
+                boolean levelUp = m.getIndividualStatistics().earnEXP(EXP);
                 if(levelUp) {
                     callbacks.onLevelup(m);
                 }
@@ -224,7 +224,7 @@ public class BattleSystem {
             AGuardian target;
             while(!foundTarget) {
                 target = queue.getCombatTeamLeft().getRandomFitMember();
-                if(target.getStatistics().isFit()) {
+                if(target.getIndividualStatistics().isFit()) {
                     foundTarget = true;
                     setChosenTarget(target);
                 }

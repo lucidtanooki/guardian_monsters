@@ -12,8 +12,8 @@ public class Guardian extends AGuardian
     private String nickname;
 
     // Components
-    private SpeciesDescription      description;
-    private IndividualStatistics    statistics;
+    private SpeciesDescription      speciesDescription;
+    private IndividualStatistics    individualStatistics;
     private IAbilityGraph           abilityGraph;
 
 
@@ -33,12 +33,12 @@ public class Guardian extends AGuardian
 
     protected void injectSpeciesDescription(SpeciesDescription speciesDescription)
     {
-        this.description = speciesDescription;
+        this.speciesDescription = speciesDescription;
     }
 
     protected void injectIndiviualStatistics(IndividualStatistics individualStatistics)
     {
-        this.statistics = individualStatistics;
+        this.individualStatistics = individualStatistics;
     }
 
     protected void injectAbilityGraph(IAbilityGraph abilityGraph)
@@ -52,13 +52,13 @@ public class Guardian extends AGuardian
     @Override
     public int getSpeciesID()
     {
-        return description.getID();
+        return speciesDescription.getID();
     }
 
     @Override
     public CommonStatistics getCommonStatistics()
     {
-        return description.getBaseStat();
+        return speciesDescription.getCommonStatistics();
     }
 
     // ............................................................................................. GETTERS & SETTERS
@@ -78,12 +78,13 @@ public class Guardian extends AGuardian
     @Override
     public SpeciesDescription getSpeciesDescription()
     {
-        return description;
+        return speciesDescription;
     }
 
-    public IndividualStatistics getStatistics()
+    @Override
+    public IndividualStatistics getIndividualStatistics()
     {
-        return statistics;
+        return individualStatistics;
     }
 
     @Override
@@ -96,6 +97,6 @@ public class Guardian extends AGuardian
     @Override
     public String toString()
     {
-        return "SpeciesID: " + getSpeciesID() + " Level: " + statistics.getLevel() + " UUID: " + getUUID();
+        return "SpeciesID: " + getSpeciesID() + " Level: " + individualStatistics.getLevel() + " UUID: " + getUUID();
     }
 }

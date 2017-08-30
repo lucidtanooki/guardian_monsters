@@ -106,11 +106,11 @@ public class IndividualStatistics
         lvlUpReport = new LevelUpReport(nullStats, nullStats, 0, 0);
     }
 
-    public IndividualStatistics(AGuardian core, int level, int character) {
+    protected IndividualStatistics(AGuardian core, int level, int character) {
         construct(core, level, character);
     }
 
-    public IndividualStatistics(AGuardian core, int level)
+    protected IndividualStatistics(AGuardian core, int level)
     {
         int character;
         // Choose a random character
@@ -715,5 +715,8 @@ public class IndividualStatistics
     public LevelUpReport getLatestLevelUpReport() {
         return lvlUpReport;
     }
+
+
+    // ............................................................................................. DELEGATIONS
 
 }

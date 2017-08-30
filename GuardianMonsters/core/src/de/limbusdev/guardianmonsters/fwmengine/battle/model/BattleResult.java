@@ -35,7 +35,7 @@ public class BattleResult
     }
 
     public boolean applyGainedEXP(AGuardian guardian) {
-        boolean levelUp = guardian.getStatistics().earnEXP(gainedEXP.get(guardian));
+        boolean levelUp = guardian.getIndividualStatistics().earnEXP(gainedEXP.get(guardian));
         return levelUp;
     }
 

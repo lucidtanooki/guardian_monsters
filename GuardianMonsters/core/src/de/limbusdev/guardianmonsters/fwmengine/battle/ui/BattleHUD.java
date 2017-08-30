@@ -253,7 +253,7 @@ public class BattleHUD extends ABattleHUD {
             public void onBackButton() {
                 boolean teamOk = false;
                 for(AGuardian m : leftTeam.values()) {
-                    if(m.getStatistics().isFit()) {
+                    if(m.getIndividualStatistics().isFit()) {
                         teamOk = true || teamOk;
                     } else {
                         teamOk = false || teamOk;

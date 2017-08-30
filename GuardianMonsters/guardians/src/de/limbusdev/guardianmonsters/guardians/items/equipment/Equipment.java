@@ -46,7 +46,7 @@ public abstract class Equipment extends Item
      */
     public Equipment equip(AGuardian m)
     {
-        return m.getStatistics().giveEquipment(this);
+        return m.getIndividualStatistics().giveEquipment(this);
     }
 
     /**

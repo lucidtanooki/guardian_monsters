@@ -42,7 +42,7 @@ public class SpeciesDescription
     private int metamorphsTo;
     private int metamorphsFrom;
     private Array<Element> elements;
-    private CommonStatistics baseStat;
+    private CommonStatistics commonStatistics;
 
     private HeadEquipment.Type headType;
     private BodyEquipment.Type bodyType;
@@ -56,11 +56,11 @@ public class SpeciesDescription
      */
     public SpeciesDescription() {}
 
-    public SpeciesDescription (
+    protected SpeciesDescription (
         int speciesID,
         String nameID,
         int metamorphsTo,
-        CommonStatistics baseStat,
+        CommonStatistics commonStatistics,
         Array<Element> elements,
         ArrayMap<Integer, Ability> abilityNodes,
         ArrayMap<Integer, BodyPart> equipmentNodes,
@@ -79,17 +79,17 @@ public class SpeciesDescription
         this.metamorphsTo = metamorphsTo;
         this.metamorphsFrom = metamorphsFrom;
         this.elements = elements;
-        this.baseStat = baseStat;
+        this.commonStatistics = commonStatistics;
         this.handType = hands;
         this.bodyType = body;
         this.headType = head;
         this.footType = feet;
     }
 
-    public SpeciesDescription(int ID, String nameID, int metamorphsTo, Array<Element> elements, SpeciesDescription ancestorData) {
+    protected SpeciesDescription(int ID, String nameID, int metamorphsTo, Array<Element> elements, SpeciesDescription ancestorData) {
         this(
             ID, nameID, metamorphsTo,
-            ancestorData.baseStat,
+            ancestorData.commonStatistics,
             elements,
             ancestorData.abilityNodes,
             ancestorData.equipmentNodes,
@@ -150,8 +150,8 @@ public class SpeciesDescription
         return elements;
     }
 
-    public CommonStatistics getBaseStat() {
-        return baseStat;
+    public CommonStatistics getCommonStatistics() {
+        return commonStatistics;
     }
 
 

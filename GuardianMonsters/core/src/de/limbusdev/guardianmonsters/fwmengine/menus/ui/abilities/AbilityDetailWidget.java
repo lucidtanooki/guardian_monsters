@@ -116,7 +116,7 @@ public class AbilityDetailWidget extends Container {
 
         IAbilityGraph graph = guardian.getAbilityGraph();
         Node.Type type = graph.nodeTypeAt(nodeID);
-        IndividualStatistics statistics = guardian.getStatistics();
+        IndividualStatistics statistics = guardian.getIndividualStatistics();
 
         boolean showLearnButton = ((statistics.hasAbilityPoints() && graph.isNodeEnabled(nodeID)) || forceShowLearnButton);
         setLayout(type, showLearnButton);

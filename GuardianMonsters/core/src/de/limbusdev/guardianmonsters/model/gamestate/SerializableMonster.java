@@ -26,7 +26,7 @@ public class SerializableMonster
         this.ID = guardian.getSpeciesDescription().getID();
         this.nickname = guardian.getNickname();
         this.graph = new SerializableAbilityGraph(guardian.getAbilityGraph());
-        this.stat = new SerializableStat(guardian.getStatistics());
+        this.stat = new SerializableStat(guardian.getIndividualStatistics());
     }
 
     public static Guardian deserialize(SerializableMonster sMonster) {

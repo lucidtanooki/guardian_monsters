@@ -97,7 +97,7 @@ public class GuardianOverviewButton extends TextButton implements Listener<Guard
             row();
         }
 
-        EquipmentPotential pot = guardian.getStatistics().getEquipmentPotential(equipment);
+        EquipmentPotential pot = guardian.getIndividualStatistics().getEquipmentPotential(equipment);
 
         String props[]  = {"hp", "mp", "speed", "exp", "pstr", "pdef", "mstr", "mdef"};
         int potValues[] = {pot.hp, pot.mp, pot.speed, pot.exp, pot.pstr, pot.pdef, pot.mstr, pot.mdef};
@@ -136,9 +136,9 @@ public class GuardianOverviewButton extends TextButton implements Listener<Guard
 
         subTable = new Table();
         subTable.add(new Image(getSkin().getDrawable("stats-symbol-hp")));
-        subTable.add(new Label(guardian.getStatistics().getHPfractionAsString(), getSkin(), "default")).width(56);
+        subTable.add(new Label(guardian.getIndividualStatistics().getHPfractionAsString(), getSkin(), "default")).width(56);
         subTable.add(new Image(getSkin().getDrawable("stats-symbol-mp")));
-        subTable.add(new Label(guardian.getStatistics().getMPfractionAsString(), getSkin(), "default")).width(56);
+        subTable.add(new Label(guardian.getIndividualStatistics().getMPfractionAsString(), getSkin(), "default")).width(56);
 
         add(subTable).align(Align.left);
         layout();

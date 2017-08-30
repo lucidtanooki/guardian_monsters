@@ -53,6 +53,6 @@ public class GuardianDetailWidget extends Group {
         TextureAtlas.AtlasRegion region = Services.getMedia().getMonsterSprite(guardian.getSpeciesDescription().getID());
         monsterSprite.setDrawable(new TextureRegionDrawable(region));
         name.setText(guardian.getNickname());
-        level.setText("Lvl " + guardian.getStatistics().getLevel());
+        level.setText("Lvl " + guardian.getIndividualStatistics().getLevel());
     }
 }

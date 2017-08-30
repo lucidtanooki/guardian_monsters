@@ -102,7 +102,7 @@ public class BattleAnimationWidget extends BattleWidget{
         int actualTeamSize = 0;
         while(actualTeamSize < teamSize && counter < team.size) {
             AGuardian m = team.get(counter);
-            if(m.getStatistics().isFit()) {
+            if(m.getIndividualStatistics().isFit()) {
                 // Add monster to team
                 setUpMonsterSprite(m.getSpeciesDescription().getID(),actualTeamSize, side);
                 positions.put(actualTeamSize,true);

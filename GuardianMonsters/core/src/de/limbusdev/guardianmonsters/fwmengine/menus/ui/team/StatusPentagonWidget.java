@@ -43,11 +43,11 @@ public class StatusPentagonWidget extends Group {
     }
 
     public void init(AGuardian guardian) {
-        float pstr = guardian.getStatistics().getPStrMax() / guardian.getStatistics().getMaxPossiblePStr()*32f;
-        float pdef = guardian.getStatistics().getPDefMax() / guardian.getStatistics().getMaxPossiblePDef()*32f;
-        float mstr = guardian.getStatistics().getMStrMax() / guardian.getStatistics().getMaxPossibleMStr()*32f;
-        float mdef = guardian.getStatistics().getMDefMax() / guardian.getStatistics().getMaxPossibleMDef()*32f;
-        float speed= guardian.getStatistics().getSpeedMax()/ guardian.getStatistics().getMaxPossibleSpeed()*32f;
+        float pstr = guardian.getIndividualStatistics().getPStrMax() / guardian.getIndividualStatistics().getMaxPossiblePStr()*32f;
+        float pdef = guardian.getIndividualStatistics().getPDefMax() / guardian.getIndividualStatistics().getMaxPossiblePDef()*32f;
+        float mstr = guardian.getIndividualStatistics().getMStrMax() / guardian.getIndividualStatistics().getMaxPossibleMStr()*32f;
+        float mdef = guardian.getIndividualStatistics().getMDefMax() / guardian.getIndividualStatistics().getMaxPossibleMDef()*32f;
+        float speed= guardian.getIndividualStatistics().getSpeedMax()/ guardian.getIndividualStatistics().getMaxPossibleSpeed()*32f;
 
         points = new float[10];
 

@@ -41,9 +41,11 @@ public class GuardianFactory extends AGuardianFactory
         }
 
         SpeciesDescription ancestor = null;
-        for (int i = 0; i < rootElement.getChildCount(); i++) {
+        for (int i = 0; i < rootElement.getChildCount(); i++)
+        {
             SpeciesDescription info = XMLGuardianParser.parseMonster(rootElement.getChild(i), ancestor);
             getSpeciesDB().put(info.getID(),info);
+
             if(info.getMetamorphsTo() == info.getID()+1) {
                 ancestor = info;
             } else {
@@ -66,7 +68,7 @@ public class GuardianFactory extends AGuardianFactory
         // Component 1: SpeciesDescription - Get Common Guardian Data from DataBase
         SpeciesDescription speciesDescription = getSpeciesDescription(ID);
 
-        // Component 2: IndiviualStatistics - Copy Base Stats
+        // Component 2: IndividualStatistics - Copy Base Stats
         IndividualStatistics individualStatistics = new IndividualStatistics(newGuardian, 1);
 
         // Component 3: AbilityGraph - Initialize Ability Graph
@@ -77,8 +79,8 @@ public class GuardianFactory extends AGuardianFactory
         // Activate Evolution Abilities of Ancestors
         for(int i=0; i<getNumberOfAncestors(ID); i++)
         {
-            int metamorphNode = abilityGraph.getMetamorphosisNodes().get(i);
-            abilityGraph.activateNode(metamorphNode);
+            int metamorphosisNode = abilityGraph.getMetamorphosisNodes().get(i);
+            abilityGraph.activateNode(metamorphosisNode);
         }
 
 

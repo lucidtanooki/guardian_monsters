@@ -2,7 +2,6 @@ package de.limbusdev.guardianmonsters.model.gamestate;
 
 import de.limbusdev.guardianmonsters.guardians.ItemDB;
 import de.limbusdev.guardianmonsters.guardians.items.equipment.Equipment;
-import de.limbusdev.guardianmonsters.guardians.monsters.CommonStatistics;
 import de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics;
 import de.limbusdev.guardianmonsters.guardians.monsters.Statistics;
 
@@ -18,7 +17,6 @@ public class SerializableStat {
     public int level;
     public int abilityLevels;
     public int exp;
-    public CommonStatistics base;
 
     public int HP, MP, PStr, PDef, MStr, MDef, Speed;
     public int HPmax, MPmax, PStrMax, PDefMax, MStrMax, MDefMax, SpeedMax;
@@ -33,7 +31,6 @@ public class SerializableStat {
         this.level = statistics.getLevel();
         this.abilityLevels = statistics.getAbilityLevels();
         this.exp = statistics.getEXP();
-        this.base = statistics.base;
         this.HP = statistics.getHP();
         this.MP = statistics.getMP();
         this.PStr = statistics.getPStr();
@@ -82,12 +79,14 @@ public class SerializableStat {
             sStat.MDefMax,
             sStat.SpeedMax
         );
+
+        // TODO
         return new IndividualStatistics(
+            null,
             sStat.level,
             sStat.abilityLevels,
             sStat.exp,
             sStat.character,
-            sStat.base,
             stats,
             maxStats,
             (Equipment)ItemDB.getItem(sStat.hand),

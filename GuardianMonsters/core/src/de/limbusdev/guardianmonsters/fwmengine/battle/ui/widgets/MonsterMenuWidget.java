@@ -41,7 +41,7 @@ public class MonsterMenuWidget extends SevenButtonsWidget {
 
             replaceButton(bwi,key);
 
-            if(m.getStatistics().isFit() && !combatTeam.containsValue(m,false)) {
+            if(m.getIndividualStatistics().isFit() && !combatTeam.containsValue(m,false)) {
                 enableButton(key);
             }
         }

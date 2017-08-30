@@ -65,7 +65,7 @@ public class BattleResultHUD extends AHUD {
             table.add(exp).width(48).left();
             Image lvlUpKey = new Image(skin.getDrawable("symbol-levelup"));
             table.add(lvlUpKey).left();
-            Label lvlUp = new Label(Integer.toString(guardian.getStatistics().getEXPtoNextLevel()), skin, "default");
+            Label lvlUp = new Label(Integer.toString(guardian.getIndividualStatistics().getEXPtoNextLevel()), skin, "default");
             table.add(lvlUp).width(96).left();
             table.row().space(4);
         }

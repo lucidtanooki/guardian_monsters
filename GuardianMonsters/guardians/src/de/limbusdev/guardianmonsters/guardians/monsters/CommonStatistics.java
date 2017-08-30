@@ -30,7 +30,7 @@ public class CommonStatistics extends Statistics
         this(300, 50, 10, 10, 10, 10, 10);
     }
 
-    public CommonStatistics(int HP, int MP, int PStr, int PDef, int MStr, int MDef, int Speed)
+    protected CommonStatistics(int HP, int MP, int PStr, int PDef, int MStr, int MDef, int Speed)
     {
         super(HP, MP, PStr, PDef, MStr, MDef, Speed);
     }

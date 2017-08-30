@@ -32,16 +32,10 @@ public abstract class AGuardian extends Observable
     public abstract String getNickname();
     public abstract void setNickname(String name);
 
-    // ............................................................................................. DELEGATIONS
-
-    public abstract int getSpeciesID();
-    public abstract CommonStatistics getCommonStatistics();
-
-
     // ............................................................................................. COMPONENTS
 
     public abstract SpeciesDescription getSpeciesDescription();
-    public abstract IndividualStatistics getStatistics();
+    public abstract IndividualStatistics getIndividualStatistics();
     public abstract IAbilityGraph getAbilityGraph();
 
 
@@ -82,4 +76,17 @@ public abstract class AGuardian extends Observable
 
         return false;
     }
+
+
+
+    // ............................................................................................. DELEGATIONS
+
+    // ............................................................. delegations: SpeciesDescription
+
+    public abstract int getSpeciesID();
+    public abstract CommonStatistics getCommonStatistics();
+
+    // ........................................................... delegations: IndividualStatistics
+
+    // ................................................................... delegations: AbilityGraph
 }

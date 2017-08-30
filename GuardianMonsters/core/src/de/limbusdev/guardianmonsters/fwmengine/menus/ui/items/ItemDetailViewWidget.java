@@ -147,7 +147,7 @@ public class ItemDetailViewWidget extends Group implements MonsterListWidget.Cal
     public boolean onButton(int i) {
         inventory.takeItemFromInventory(item);
         if(item instanceof Equipment) {
-            Item replaced = team.get(i).getStatistics().giveEquipment((Equipment)item);
+            Item replaced = team.get(i).getIndividualStatistics().giveEquipment((Equipment)item);
             if(replaced != null) {
                 inventory.putItemInInventory(replaced);
             }

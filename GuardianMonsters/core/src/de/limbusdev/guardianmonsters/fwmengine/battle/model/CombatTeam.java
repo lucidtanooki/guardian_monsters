@@ -68,7 +68,7 @@ public class CombatTeam extends ArrayMap<Integer,AGuardian>
         Array<Integer> fitPositions = new Array<>();
         for(int key : keys()) {
             AGuardian guardian = get(key);
-            if(guardian.getStatistics().isFit()) {
+            if(guardian.getIndividualStatistics().isFit()) {
                 fitPositions.add(key);
             }
         }
@@ -90,7 +90,7 @@ public class CombatTeam extends ArrayMap<Integer,AGuardian>
     public boolean isKO() {
         boolean ko = true;
         for(AGuardian guardian : values()) {
-            ko = ko && guardian.getStatistics().isKO();
+            ko = ko && guardian.getIndividualStatistics().isKO();
         }
         return ko;
     }

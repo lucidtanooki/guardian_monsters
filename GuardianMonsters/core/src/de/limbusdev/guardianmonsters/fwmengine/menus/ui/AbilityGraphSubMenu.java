@@ -61,7 +61,7 @@ public class AbilityGraphSubMenu extends AInventorySubMenu implements Listener<G
         remainingLevels = new LogoWithCounter(skin, "label-bg-sandstone", "stats-symbol-exp");
         remainingLevels.setPosition(Constant.WIDTH - 2, 67, Align.bottomRight);
         addActor(remainingLevels);
-        remainingLevels.counter.setText(Integer.toString(this.team.get(0).getStatistics().getAbilityLevels()));
+        remainingLevels.counter.setText(Integer.toString(this.team.get(0).getIndividualStatistics().getAbilityLevels()));
 
         details.init(this.team.get(0), 0, false);
 
@@ -73,7 +73,7 @@ public class AbilityGraphSubMenu extends AInventorySubMenu implements Listener<G
     @Override
     public void refresh() {
         AGuardian activeGuardian = team.get(switcher.getCurrentlyChosen());
-        remainingLevels.counter.setText(Integer.toString(activeGuardian.getStatistics().getAbilityLevels()));
+        remainingLevels.counter.setText(Integer.toString(activeGuardian.getIndividualStatistics().getAbilityLevels()));
     }
 
 
@@ -94,7 +94,7 @@ public class AbilityGraphSubMenu extends AInventorySubMenu implements Listener<G
     @Override
     public void onLearn(int nodeID) {
         AGuardian m = team.get(switcher.getCurrentlyChosen());
-        m.getStatistics().consumeAbilityLevel();
+        m.getIndividualStatistics().consumeAbilityLevel();
         m.getAbilityGraph().activateNode(nodeID);
         details.init(m, nodeID, false);
         if(m.getAbilityGraph().metamorphsAt(nodeID)) {

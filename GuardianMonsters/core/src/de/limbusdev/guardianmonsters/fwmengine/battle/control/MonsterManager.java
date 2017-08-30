@@ -25,8 +25,8 @@ public class MonsterManager
     public static AttackCalculationReport calcDefense(AGuardian defender) {
         System.out.println("Monster defends itself");
         AttackCalculationReport report = new AttackCalculationReport(defender);
-        defender.getStatistics().increasePDef(5);
-        defender.getStatistics().increaseMDef(5);
+        defender.getIndividualStatistics().increasePDef(5);
+        defender.getIndividualStatistics().increaseMDef(5);
 
         return report;
     }
@@ -49,13 +49,13 @@ public class MonsterManager
         float defenseRatio;
 
         if(ability.damageType == Ability.DamageType.PHYSICAL) {
-            defenseRatio = (attacker.getStatistics().getPStr() * 1f) / (defender.getStatistics().getPDef() *1f);
+            defenseRatio = (attacker.getIndividualStatistics().getPStr() * 1f) / (defender.getIndividualStatistics().getPDef() *1f);
         } else {
-            defenseRatio = (attacker.getStatistics().getMStr() *1f) / (defender.getStatistics().getMDef() *1f);
+            defenseRatio = (attacker.getIndividualStatistics().getMStr() *1f) / (defender.getIndividualStatistics().getMDef() *1f);
         }
 
         /* Calculate Damage */
-        float damage = efficiency * ((((2*attacker.getStatistics().getLevel()/5 + 2) * ability.damage * defenseRatio) / 3) + 2);
+        float damage = efficiency * ((((2*attacker.getIndividualStatistics().getLevel()/5 + 2) * ability.damage * defenseRatio) / 3) + 2);
 
         report.damage = MathUtils.round(damage);
         report.efficiency = efficiency;
@@ -78,8 +78,8 @@ public class MonsterManager
             System.out.println("Only self defending");
             return;
         }
-        report.defender.getStatistics().decreaseHP(report.damage);
-        report.attacker.getStatistics().decreaseMP(report.attack.MPcost);
+        report.defender.getIndividualStatistics().decreaseHP(report.damage);
+        report.attacker.getIndividualStatistics().decreaseMP(report.attack.MPcost);
     }
 
     public static boolean tryToRun(Team escapingTeam, Team attackingTeam)
@@ -89,15 +89,15 @@ public class MonsterManager
 
         for(AGuardian m : escapingTeam.values())
         {
-            if(m.getStatistics().isFit()) {
-                meanEscapingTeamLevel += m.getStatistics().getLevel();
+            if(m.getIndividualStatistics().isFit()) {
+                meanEscapingTeamLevel += m.getIndividualStatistics().getLevel();
             }
         }
         meanEscapingTeamLevel /= escapingTeam.size;
 
         for(AGuardian m : attackingTeam.values())
         {
-            meanAttackingTeamLevel += m.getStatistics().getLevel();
+            meanAttackingTeamLevel += m.getIndividualStatistics().getLevel();
         }
         meanAttackingTeamLevel /= escapingTeam.size;
 

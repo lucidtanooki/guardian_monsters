@@ -31,7 +31,11 @@ public abstract class AGuardian extends Observable
     }
     public abstract String getNickname();
     public abstract void setNickname(String name);
+
+    // ............................................................................................. DELEGATIONS
+
     public abstract int getSpeciesID();
+    public abstract CommonStatistics getCommonStatistics();
 
 
     // ............................................................................................. COMPONENTS

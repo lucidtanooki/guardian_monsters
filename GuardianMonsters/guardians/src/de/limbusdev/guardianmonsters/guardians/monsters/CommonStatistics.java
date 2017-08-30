@@ -20,54 +20,47 @@ package de.limbusdev.guardianmonsters.guardians.monsters;
  * @author Georg Eckert 2016
  */
 
-public class CommonStatistics
+public class CommonStatistics extends Statistics
 {
-    private int ID;
-    private Statistics baseStats;
-
     /**
      * For Serialization only
      */
-    public CommonStatistics() {}
-
-    public CommonStatistics(int ID) {
-        this(ID, new Statistics(300, 50, 10, 10, 10, 10, 10));
+    public CommonStatistics()
+    {
+        this(300, 50, 10, 10, 10, 10, 10);
     }
 
-    public CommonStatistics(int ID, Statistics baseStats) {
-        this.ID = ID;
-        this.baseStats =  baseStats;
+    public CommonStatistics(int HP, int MP, int PStr, int PDef, int MStr, int MDef, int Speed)
+    {
+        super(HP, MP, PStr, PDef, MStr, MDef, Speed);
     }
 
-    public int getID() {
-        return ID;
-    }
 
     public int getBaseHP() {
-        return baseStats.HP;
+        return getHP();
     }
 
     public int getBaseMP() {
-        return baseStats.MP;
+        return getMP();
     }
 
     public int getBasePStr() {
-        return baseStats.PStr;
+        return getPStr();
     }
 
     public int getBasePDef() {
-        return baseStats.PDef;
+        return getPDef();
     }
 
     public int getBaseMStr() {
-        return baseStats.MStr;
+        return getMStr();
     }
 
     public int getBaseMDef() {
-        return baseStats.MDef;
+        return getMDef();
     }
 
     public int getBaseSpeed() {
-        return baseStats.Speed;
+        return getSpeed();
     }
 }

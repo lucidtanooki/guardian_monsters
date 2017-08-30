@@ -19,6 +19,11 @@ public class Statistics
 {
     protected int HP, MP, PStr, PDef, MStr, MDef, Speed;
 
+    /**
+     * For Serialization only
+     */
+    public Statistics() {}
+
     public Statistics(int HP, int MP, int PStr, int PDef, int MStr, int MDef, int speed)
     {
         this.HP = HP;

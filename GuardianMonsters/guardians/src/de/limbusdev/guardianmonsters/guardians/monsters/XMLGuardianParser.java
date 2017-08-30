@@ -255,7 +255,7 @@ public class XMLGuardianParser
 
         CommonStatistics stat;
         if(statEl != null) {
-            Statistics baseStats = new Statistics(
+            stat = new CommonStatistics(
                 statEl.getIntAttribute("hp",    300),
                 statEl.getIntAttribute("mp",    50),
                 statEl.getIntAttribute("pstr",  10),
@@ -264,9 +264,8 @@ public class XMLGuardianParser
                 statEl.getIntAttribute("mdef",  10),
                 statEl.getIntAttribute("speed", 10)
             );
-            stat = new CommonStatistics(ID, baseStats);
         } else {
-            stat = new CommonStatistics(ID);
+            stat = new CommonStatistics();
         }
         return stat;
     }

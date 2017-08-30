@@ -27,6 +27,7 @@ public class GuardianFactory extends AGuardianFactory
 
     private GuardianFactory()
     {
+        // Read common Guardian Descriptions from XML file
         FileHandle handle = Gdx.files.internal("data/guardians.xml");
 
         XmlReader xmlReader = new XmlReader();
@@ -54,29 +55,40 @@ public class GuardianFactory extends AGuardianFactory
     @Override
     public AGuardian createGuardian(int ID, int level)
     {
-        // Get Common Guardian Data from DataBase
-        SpeciesDescription data = getSpeciesDescription(ID);
+        // ...................................................................... create core object
 
-        // Copy Base Stats
-        IndividualStatistics statistics = new IndividualStatistics(1, data.getBaseStat());
+        String UUID = createNewUUID();
+        Guardian newGuardian = new Guardian(UUID);
 
-        // Initialize Ability Graph
-        IAbilityGraph graph = new AbilityGraph(data);
-        graph.activateNode(0);
-        graph.setActiveAbility(0,0);
+
+        // ....................................................................... create components
+
+        // Component 1: SpeciesDescription - Get Common Guardian Data from DataBase
+        SpeciesDescription speciesDescription = getSpeciesDescription(ID);
+
+        // Component 2: IndiviualStatistics - Copy Base Stats
+        IndividualStatistics individualStatistics = new IndividualStatistics(newGuardian, 1);
+
+        // Component 3: AbilityGraph - Initialize Ability Graph
+        IAbilityGraph abilityGraph = new AbilityGraph(speciesDescription);
+        abilityGraph.activateNode(0);
+        abilityGraph.setActiveAbility(0,0);
 
         // Activate Evolution Abilities of Ancestors
         for(int i=0; i<getNumberOfAncestors(ID); i++)
         {
-            int metamorphNode = graph.getMetamorphosisNodes().get(i);
-            graph.activateNode(metamorphNode);
+            int metamorphNode = abilityGraph.getMetamorphosisNodes().get(i);
+            abilityGraph.activateNode(metamorphNode);
         }
 
-        String UUID = createNewUUID();
-        // Put it all together
-        AGuardian guardian = new Guardian(UUID, data, statistics, graph);
+
+        // ....................................................................... inject components
+
+        newGuardian.injectSpeciesDescription(speciesDescription);
+        newGuardian.injectIndiviualStatistics(individualStatistics);
+        newGuardian.injectAbilityGraph(abilityGraph);
 
         // Return complete Guardian
-        return guardian;
+        return newGuardian;
     }
 }

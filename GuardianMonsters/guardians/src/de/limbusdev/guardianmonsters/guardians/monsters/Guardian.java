@@ -21,16 +21,29 @@ public class Guardian extends AGuardian
 
     /**
      * The protected constructor makes it available from the {@link AGuardianFactory} only.
+     *
+     * After Object creation the missing components have to be injected.
+     * @param UUID
      */
-    protected Guardian(String UUID, SpeciesDescription desc, IndividualStatistics stat, IAbilityGraph graph)
+    protected Guardian(String UUID)
     {
         super(UUID);
-
-        this.description =  desc;
-        this.statistics =   stat;
-        this.abilityGraph = graph;
-
         setNickname("");
+    }
+
+    protected void injectSpeciesDescription(SpeciesDescription speciesDescription)
+    {
+        this.description = speciesDescription;
+    }
+
+    protected void injectIndiviualStatistics(IndividualStatistics individualStatistics)
+    {
+        this.statistics = individualStatistics;
+    }
+
+    protected void injectAbilityGraph(IAbilityGraph abilityGraph)
+    {
+        this.abilityGraph = abilityGraph;
     }
 
     // ............................................................................................. DELEGATED METHODS
@@ -40,6 +53,12 @@ public class Guardian extends AGuardian
     public int getSpeciesID()
     {
         return description.getID();
+    }
+
+    @Override
+    public CommonStatistics getCommonStatistics()
+    {
+        return description.getBaseStat();
     }
 
     // ............................................................................................. GETTERS & SETTERS

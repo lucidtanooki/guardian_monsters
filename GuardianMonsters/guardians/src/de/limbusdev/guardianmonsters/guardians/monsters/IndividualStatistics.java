@@ -32,17 +32,20 @@ import de.limbusdev.utils.MathTool;
 
 public class IndividualStatistics
 {
-    public interface Character {
+    public interface Character
+    {
         int BALANCED=0, VIVACIOUS=1, PRUDENT=2;
     }
 
-    public interface Growth {
+    public interface Growth
+    {
         int[] SLOW =    {1,2,0},        MED =   {1,3,0},    FAST =  {3,2,0};
         int[] SLOWHP =  {4,30,100},     MEDHP = {4,40,100}, FASTHP ={4,50,100};
         int[] SLOWMP =  {2,20,30},      MEDMP = {3,30,40},  FASTMP ={4,30,50};
     }
 
-    public interface StatType {
+    public interface StatType
+    {
         int PSTR=0, PDEF=1, MSTR=2, MDEF=3, SPEED=4, HP=5, MP=6;
     }
 
@@ -60,7 +63,6 @@ public class IndividualStatistics
     private int EXP;
 
     public int character;   // for growth rates
-    public CommonStatistics base;
 
     private Statistics currentStats, maxStats;
 
@@ -76,15 +78,24 @@ public class IndividualStatistics
     /**
      * For Serialization only!
      */
-    public IndividualStatistics(int level, int abilityLevels, int EXP, int character, CommonStatistics base,
-                                Statistics stats, Statistics maxStats,
-                                Equipment hands, Equipment head, Equipment body, Equipment feet)
+    public IndividualStatistics(
+        AGuardian core,
+        int level,
+        int abilityLevels,
+        int EXP,
+        int character,
+        Statistics stats,
+        Statistics maxStats,
+        Equipment hands,
+        Equipment head,
+        Equipment body,
+        Equipment feet)
     {
+        this.core = core;
         this.level = level;
         this.abilityLevels = abilityLevels;
         this.EXP = EXP;
         this.character = character;
-        this.base = base;
         this.currentStats = stats;
         this.maxStats = maxStats;
         this.hands = hands;
@@ -95,11 +106,12 @@ public class IndividualStatistics
         lvlUpReport = new LevelUpReport(nullStats, nullStats, 0, 0);
     }
 
-    public IndividualStatistics(int level, CommonStatistics baseStat, int character) {
-        construct(level, baseStat, character);
+    public IndividualStatistics(AGuardian core, int level, int character) {
+        construct(core, level, character);
     }
 
-    public IndividualStatistics(int level, CommonStatistics baseStat) {
+    public IndividualStatistics(AGuardian core, int level)
+    {
         int character;
         // Choose a random character
         switch(MathUtils.random(0,2)) {
@@ -107,27 +119,19 @@ public class IndividualStatistics
             case 1:  character = Character.PRUDENT; break;
             default: character = Character.BALANCED; break;
         }
-        construct(level, baseStat, character);
+        construct(core, level, character);
     }
 
-    private void construct(int level, CommonStatistics baseStat, int character) {
-        this.base = baseStat;
+    private void construct(AGuardian core, int level, int character)
+    {
         this.character = character;
-
         this.level = level;
         this.abilityLevels = level-1;
 
-        this.maxStats = new Statistics(
-            baseStat.getBaseHP(),
-            baseStat.getBaseMP(),
-            baseStat.getBasePStr(),
-            baseStat.getBasePDef(),
-            baseStat.getBaseMStr(),
-            baseStat.getBaseMDef(),
-            baseStat.getBaseSpeed()
-        );
+        this.maxStats = core.getCommonStatistics().clone();
 
-        for(int i=1; i<level; i++) {
+        for(int i=1; i<level; i++)
+        {
             levelUp();
         }
 
@@ -445,7 +449,7 @@ public class IndividualStatistics
     }
 
     public int getMaxPossibleHP() {
-        int maxPossHP = base.getBaseHP();
+        int maxPossHP = core.getCommonStatistics().getBaseHP();
         for(int i=1; i<100; i++) {
             maxPossHP += MathTool.dice(characterGrowthRates[character][StatType.HP]);
         }
@@ -453,7 +457,7 @@ public class IndividualStatistics
     }
 
     public int getMaxPossibleMP() {
-        int maxPossMP = base.getBaseMP();
+        int maxPossMP = core.getCommonStatistics().getBaseMP();
         for(int i=1; i<100; i++) {
             maxPossMP += MathTool.dice(characterGrowthRates[character][StatType.MP]);
         }
@@ -461,7 +465,7 @@ public class IndividualStatistics
     }
 
     public int getMaxPossiblePStr() {
-        int maxPossPStr = base.getBasePStr();
+        int maxPossPStr = core.getCommonStatistics().getBasePStr();
         for(int i=1; i<100; i++) {
             maxPossPStr += MathTool.dice(characterGrowthRates[character][StatType.PSTR]);
         }
@@ -469,7 +473,7 @@ public class IndividualStatistics
     }
 
     public int getMaxPossiblePDef() {
-        int maxPossPDef = base.getBasePDef();
+        int maxPossPDef = core.getCommonStatistics().getBasePDef();
         for(int i=1; i<100; i++) {
             maxPossPDef += MathTool.dice(characterGrowthRates[character][StatType.PDEF]);
         }
@@ -477,7 +481,7 @@ public class IndividualStatistics
     }
 
     public int getMaxPossibleMStr() {
-        int maxPossMStr = base.getBaseMStr();
+        int maxPossMStr = core.getCommonStatistics().getBaseMStr();
         for(int i=1; i<100; i++) {
             maxPossMStr += MathTool.dice(characterGrowthRates[character][StatType.MSTR]);
         }
@@ -485,7 +489,7 @@ public class IndividualStatistics
     }
 
     public int getMaxPossibleMDef() {
-        int maxPossMDef = base.getBaseMDef();
+        int maxPossMDef = core.getCommonStatistics().getBaseMDef();
         for(int i=1; i<100; i++) {
             maxPossMDef += MathTool.dice(characterGrowthRates[character][StatType.MDEF]);
         }
@@ -493,7 +497,7 @@ public class IndividualStatistics
     }
 
     public int getMaxPossibleSpeed() {
-        int maxPossSpeed = base.getBaseSpeed();
+        int maxPossSpeed = core.getCommonStatistics().getBaseSpeed();
         for(int i=1; i<100; i++) {
             maxPossSpeed += MathTool.dice(characterGrowthRates[character][StatType.SPEED]);
         }

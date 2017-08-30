@@ -58,13 +58,13 @@ public class IndividualStatistics
 
     private AGuardian core;  // Core Object
 
+    private Statistics currentStats, maxStats;
+
     private int level;
     private int abilityLevels;
     private int EXP;
 
     public int character;   // for growth rates
-
-    private Statistics currentStats, maxStats;
 
     private Equipment hands;
     private Equipment head;

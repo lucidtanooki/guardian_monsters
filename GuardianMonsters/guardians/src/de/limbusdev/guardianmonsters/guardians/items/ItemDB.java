@@ -1,4 +1,4 @@
-package de.limbusdev.guardianmonsters.guardians;
+package de.limbusdev.guardianmonsters.guardians.items;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
@@ -6,8 +6,6 @@ import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.XmlReader;
 
 import java.io.IOException;
-
-import de.limbusdev.guardianmonsters.guardians.items.Item;
 
 
 /**
@@ -35,7 +33,7 @@ public class ItemDB {
         }
 
         for(int i=0; i<element.getChildCount(); i++) {
-            Item item = XMLItemParser.parseXmlItem(element.getChild(i));
+            Item item = de.limbusdev.guardianmonsters.guardians.items.XMLItemParser.parseXmlItem(element.getChild(i));
             if(!items.containsKey(item.getName())) {
                 items.put(item.getName(), item);
             }

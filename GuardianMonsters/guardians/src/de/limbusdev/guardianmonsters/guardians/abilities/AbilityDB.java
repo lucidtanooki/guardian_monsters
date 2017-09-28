@@ -1,4 +1,4 @@
-package de.limbusdev.guardianmonsters.guardians;
+package de.limbusdev.guardianmonsters.guardians.abilities;
 
 
 import com.badlogic.gdx.Gdx;
@@ -9,7 +9,7 @@ import com.badlogic.gdx.utils.JsonValue;
 
 import java.util.ArrayList;
 
-import de.limbusdev.guardianmonsters.guardians.abilities.Ability;
+import de.limbusdev.guardianmonsters.guardians.Element;
 
 /**
  * Contains all existing attacks, sorted by element
@@ -27,31 +27,38 @@ public class AbilityDB
         String[] elements = {"None", "Fire", "Earth", "Water"};
         for(String el : elements)
         {
-            ArrayMap<Integer,Ability> elAbilities = new ArrayMap<>();
             FileHandle handleJson = Gdx.files.internal("data/abilities" + el + ".json");
             String jsonString = handleJson.readString();
-            Json json = new Json();
-            ArrayList<JsonValue> elementList = json.fromJson(ArrayList.class, jsonString);
-
-            JsonAbility jsa;
-            Ability ability;
-            for (JsonValue v : elementList) {
-                jsa = json.readValue(JsonAbility.class, v);
-                ability = new Ability(
-                    jsa.ID,
-                    Ability.DamageType.valueOf(jsa.damageType.toUpperCase()),
-                    Element.valueOf(jsa.element.toUpperCase()),
-                    jsa.damage,
-                    jsa.name,
-                    jsa.sfxType.toUpperCase(),
-                    jsa.sfxIndex,
-                    jsa.animationType.toUpperCase(),
-                    jsa.MPcost
-                );
-                elAbilities.put(ability.ID, ability);
-            }
+            ArrayMap<Integer,Ability> elAbilities = readAbilitiesFromJsonString(jsonString);
             abilities.put(Element.valueOf(el.toUpperCase()), elAbilities);
         }
+    }
+
+    public static ArrayMap<Integer, Ability> readAbilitiesFromJsonString(String jsonString)
+    {
+        ArrayMap<Integer,Ability> elAbilities = new ArrayMap<>();
+        Json json = new Json();
+        ArrayList<JsonValue> elementList = json.fromJson(ArrayList.class, jsonString);
+
+        JsonAbility jsa;
+        Ability ability;
+        for (JsonValue v : elementList) {
+            jsa = json.readValue(JsonAbility.class, v);
+            ability = new Ability(
+                jsa.ID,
+                Ability.DamageType.valueOf(jsa.damageType.toUpperCase()),
+                Element.valueOf(jsa.element.toUpperCase()),
+                jsa.damage,
+                jsa.name,
+                jsa.sfxType.toUpperCase(),
+                jsa.sfxIndex,
+                jsa.animationType.toUpperCase(),
+                jsa.MPcost
+            );
+            elAbilities.put(ability.ID, ability);
+        }
+
+        return elAbilities;
     }
 
     public static synchronized AbilityDB getInstance()

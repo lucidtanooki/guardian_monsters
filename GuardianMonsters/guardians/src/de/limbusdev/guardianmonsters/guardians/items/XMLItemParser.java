@@ -1,4 +1,4 @@
-package de.limbusdev.guardianmonsters.guardians;
+package de.limbusdev.guardianmonsters.guardians.items;
 
 import com.badlogic.gdx.utils.XmlReader;
 
@@ -8,8 +8,6 @@ import de.limbusdev.guardianmonsters.guardians.items.equipment.Equipment;
 import de.limbusdev.guardianmonsters.guardians.items.equipment.FootEquipment;
 import de.limbusdev.guardianmonsters.guardians.items.equipment.HandEquipment;
 import de.limbusdev.guardianmonsters.guardians.items.equipment.HeadEquipment;
-import de.limbusdev.guardianmonsters.guardians.items.Item;
-import de.limbusdev.guardianmonsters.guardians.items.KeyItem;
 import de.limbusdev.guardianmonsters.guardians.items.medicine.MedicalItem;
 
 /**

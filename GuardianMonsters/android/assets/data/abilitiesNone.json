@@ -8,8 +8,7 @@
     "sfxIndex": 0,
     "animationType": "none",
     "MPcost": 0,
-    "damageType": "physical",
-    "element": "none"
+    "damageType": "physical"
   },
   {
     "ID": 2,
@@ -20,8 +19,7 @@
     "sfxIndex": 0,
     "animationType": "contact",
     "MPcost": 0,
-    "damageType": "physical",
-    "element": "none"
+    "damageType": "physical"
   },
   {
     "ID": 3,
@@ -32,8 +30,7 @@
     "sfxIndex": 0,
     "animationType": "contact",
     "MPcost": 0,
-    "damageType": "physical",
-    "element": "none"
+    "damageType": "physical"
   },
   {
     "ID": "4",
@@ -44,8 +41,7 @@
     "sfxIndex": 0,
     "animationType": "contact",
     "MPcost": 0,
-    "damageType": "physical",
-    "element": "none"
+    "damageType": "physical"
   },
   {
     "ID": "5",
@@ -56,8 +52,7 @@
     "sfxIndex": 0,
     "animationType": "contact",
     "MPcost": 0,
-    "damageType": "physical",
-    "element": "none"
+    "damageType": "physical"
   },
   {
     "ID": 6,
@@ -68,7 +63,6 @@
     "sfxIndex": 0,
     "animationType": "contact",
     "MPcost": 0,
-    "damageType": "physical",
-    "element": "none"
+    "damageType": "physical"
   }
 ]

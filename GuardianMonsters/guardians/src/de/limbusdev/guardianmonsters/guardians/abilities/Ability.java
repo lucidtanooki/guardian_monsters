@@ -90,4 +90,10 @@ public class Ability
             return false;
         }
     }
+
+    @Override
+    public String toString()
+    {
+        return "Ability " + ID + " of Element " + element + ": " + name;
+    }
 }

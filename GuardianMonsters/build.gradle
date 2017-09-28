@@ -9,7 +9,7 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.3.3'
-        
+        classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.0'
 
     }
 }
@@ -118,6 +118,17 @@ project(":core") {
     }
 }
 
+project(":guardians") {
+    apply plugin: "java"
+
+    dependencies {
+        compile project(":utils")
+        compile "com.badlogicgames.gdx:gdx:$gdxVersion"
+        compile "com.badlogicgames.ashley:ashley:$ashleyVersion"
+        testCompile "junit:junit:+"
+    }
+}
+
 project(":ui") {
     apply plugin: "java"
 
@@ -192,15 +203,7 @@ project(":scene2d") {
     }
 }
 
-project(":guardians") {
-    apply plugin: "java"
 
-    dependencies {
-        compile project(":utils")
-        compile "com.badlogicgames.gdx:gdx:$gdxVersion"
-        compile "com.badlogicgames.ashley:ashley:$ashleyVersion"
-    }
-}
 
 project(":media") {
     apply plugin: "java"

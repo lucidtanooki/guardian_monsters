@@ -20,20 +20,11 @@ public class ModuleBattleJUnitTest
     @Test
     public void abilityMediaParsingTest()
     {
-        String testString = "[\n" +
-            "  {\n" +
-            "    \"name\": \"attEarth1_dirt\",\n" +
-            "    \"sfxType\": \"hit\",\n" +
-            "    \"sfxIndex\": 0,\n" +
-            "    \"animationType\": \"moving_hor\"\n" +
-            "  },\n" +
-            "  {\n" +
-            "    \"name\": \"attEarth2_mud\",\n" +
-            "    \"sfxType\": \"hit\",\n" +
-            "    \"sfxIndex\": 0,\n" +
-            "    \"animationType\": \"moving_hor\"\n" +
-            "  }\n" +
-            "]";
+        String testString =
+            "[" +
+                "{\"name\":\"attNone1_selfdef\",\"sfxType\":\"none\",\"sfxIndex\":0,\"animationType\":\"none\"}," +
+                "{\"name\":\"attNone2_kick\",\"sfxType\":\"hit\",\"sfxIndex\":0,\"animationType\":\"contact\"}" +
+                "]";
 
         ArrayMap<String, AbilityMedia> abilityMediaInfos = AbilityMediaDB.readAbilityMediaFromJsonString(testString);
 

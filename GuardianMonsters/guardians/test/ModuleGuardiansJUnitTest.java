@@ -25,9 +25,6 @@ public class ModuleGuardiansJUnitTest
             "    \"element\": \"none\",\n" +
             "    \"name\": \"attNone1_selfdef\",\n" +
             "    \"damage\": 0,\n" +
-            "    \"sfxType\": \"none\",\n" +
-            "    \"sfxIndex\": 0,\n" +
-            "    \"animationType\": \"none\",\n" +
             "    \"MPcost\": 0,\n" +
             "    \"damageType\": \"physical\"\n" +
             "  },\n" +
@@ -36,9 +33,6 @@ public class ModuleGuardiansJUnitTest
             "    \"element\": \"earth\",\n" +
             "    \"name\": \"attNone2_kick\",\n" +
             "    \"damage\": 50,\n" +
-            "    \"sfxType\": \"hit\",\n" +
-            "    \"sfxIndex\": 1,\n" +
-            "    \"animationType\": \"contact\",\n" +
             "    \"MPcost\": 10,\n" +
             "    \"damageType\": \"magical\"\n" +
             "  }" +
@@ -51,9 +45,6 @@ public class ModuleGuardiansJUnitTest
         assertEquals(ability.ID, 1);
         assertEquals(ability.element, Element.NONE);
         assertEquals(ability.name, "attNone1_selfdef");
-        assertEquals(ability.sfxType, "NONE");
-        assertEquals(ability.sfxIndex, 0);
-        assertEquals(ability.animationType, "NONE");
         assertEquals(ability.MPcost, 0);
         assertEquals(ability.damageType, Ability.DamageType.PHYSICAL);
 
@@ -62,9 +53,6 @@ public class ModuleGuardiansJUnitTest
         assertEquals(ability.ID, 2);
         assertEquals(ability.element, Element.EARTH);
         assertEquals(ability.name, "attNone2_kick");
-        assertEquals(ability.sfxType, "HIT");
-        assertEquals(ability.sfxIndex, 1);
-        assertEquals(ability.animationType, "CONTACT");
         assertEquals(ability.MPcost, 10);
         assertEquals(ability.damageType, Ability.DamageType.MAGICAL);
     }

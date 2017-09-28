@@ -180,6 +180,7 @@ project(":battle") {
         compile "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-controllers:$gdxVersion"
         compile 'com.esotericsoftware:kryo:4.0.0'
+        testCompile "junit:junit:+"
     }
 }
 

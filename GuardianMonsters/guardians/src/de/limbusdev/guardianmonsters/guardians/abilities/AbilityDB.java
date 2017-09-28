@@ -50,9 +50,6 @@ public class AbilityDB
                 Element.valueOf(jsa.element.toUpperCase()),
                 jsa.damage,
                 jsa.name,
-                jsa.sfxType.toUpperCase(),
-                jsa.sfxIndex,
-                jsa.animationType.toUpperCase(),
                 jsa.MPcost
             );
             elAbilities.put(ability.ID, ability);
@@ -92,9 +89,6 @@ public class AbilityDB
         public int MPcost;
         public String damageType;
         public String element;
-        public String sfxType;
-        public int sfxIndex;
-        public String animationType;
 
         @Override
         public String toString()

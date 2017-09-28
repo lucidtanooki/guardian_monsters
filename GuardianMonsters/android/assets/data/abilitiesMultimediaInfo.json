@@ -1,0 +1,110 @@
+[
+  {
+    "name": "attNone1_selfdef",
+    "sfxType": "none",
+    "sfxIndex": 0,
+    "animationType": "none"
+  },
+  {
+    "name": "attNone2_kick",
+    "sfxType": "hit",
+    "sfxIndex": 0,
+    "animationType": "contact"
+  },
+  {
+    "name": "attNone3_tooth",
+    "sfxType": "hit",
+    "sfxIndex": 0,
+    "animationType": "contact"
+  },
+  {
+    "name": "attNone4_punch",
+    "sfxType": "hit",
+    "sfxIndex": 0,
+    "animationType": "contact"
+  },
+  {
+    "name": "attNone5_slap",
+    "sfxType": "hit",
+    "sfxIndex": 0,
+    "animationType": "contact"
+  },
+  {
+    "name": "attNone6_triphazard",
+    "sfxType": "hit",
+    "sfxIndex": 0,
+    "animationType": "contact"
+  },
+  {
+    "name": "attEarth1_dirt",
+    "sfxType": "hit",
+    "sfxIndex": 0,
+    "animationType": "moving_hor"
+  },
+  {
+    "name": "attEarth2_mud",
+    "sfxType": "hit",
+    "sfxIndex": 0,
+    "animationType": "moving_hor"
+  },
+  {
+    "name": "attEarth3_stones",
+    "sfxType": "hit",
+    "sfxIndex": 0,
+    "animationType": "moving_hor"
+  },
+  {
+    "name": "attEarth4_landslide",
+    "sfxType": "hit",
+    "sfxIndex": 0,
+    "animationType": "moving_hor"
+  },
+  {
+    "name": "attFire1_embers",
+    "sfxType": "hit",
+    "sfxIndex": 0,
+    "animationType": "moving_hor"
+  },
+  {
+    "name": "attFire2_fire",
+    "sfxType": "hit",
+    "sfxIndex": 0,
+    "animationType": "moving_hor"
+  },
+  {
+    "name": "attFire3_flame",
+    "sfxType": "hit",
+    "sfxIndex": 0,
+    "animationType": "moving_hor"
+  },
+  {
+    "name": "attFire4_blaze",
+    "sfxType": "hit",
+    "sfxIndex": 0,
+    "animationType": "moving_hor"
+  },
+  {
+    "name": "attWater1_sprinkle",
+    "sfxType": "hit",
+    "sfxIndex": 0,
+    "animationType": "moving_hor"
+  },
+  {
+    "name": "attWater2_shower",
+    "sfxType": "hit",
+    "sfxIndex": 0,
+    "animationType": "moving_hor"
+  },
+  {
+    "name": "attWater3_splash",
+    "sfxType": "hit",
+    "sfxIndex": 0,
+    "animationType": "moving_hor"
+  },
+  {
+    "name": "attWater4_waterjet",
+    "sfxType": "hit",
+    "sfxIndex": 0,
+    "animationType": "moving_hor"
+  }
+]

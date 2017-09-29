@@ -28,11 +28,16 @@ public class ModuleBattleJUnitTest
 
         ArrayMap<String, AbilityMedia> abilityMediaInfos = AbilityMediaDB.readAbilityMediaFromJsonString(testString);
 
-        System.out.println(abilityMediaInfos.get(abilityMediaInfos.firstKey()));
+        AbilityMedia found  = abilityMediaInfos.get("attNone1_selfdef");
+        assertEquals("attNone1_selfdef",    found.getName());
+        assertEquals(0,                     found.getSfxIndex());
+        assertEquals(SFXType.NONE,          found.getSfxType());
+        assertEquals(AnimationType.NONE,    found.getAnimationType());
 
-        AbilityMedia wanted = new AbilityMedia("attEarth1_dirt", 0, SFXType.HIT, AnimationType.CONTACT);
-        assertEquals(abilityMediaInfos.get("attEarth1_dirt"), wanted);
-        wanted = new AbilityMedia("attEarth2_mud", 0, SFXType.HIT, AnimationType.MOVING_HOR);
-        assertEquals(abilityMediaInfos.get("attEarth2_mud"), wanted);
+        found =  abilityMediaInfos.get("attNone2_kick");
+        assertEquals("attNone2_kick",       found.getName());
+        assertEquals(0,                     found.getSfxIndex());
+        assertEquals(SFXType.HIT,           found.getSfxType());
+        assertEquals(AnimationType.CONTACT, found.getAnimationType());
     }
 }

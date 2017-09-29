@@ -50,4 +50,18 @@ public class AbilityMedia
         return "Media for Ability " + name + ": SFX " + sfxIndex + " of type " + sfxType + ", Anim: " + animationType;
     }
 
+    @Override
+    public boolean equals(Object obj)
+    {
+        if(!(obj instanceof AbilityMedia)) return false;
+        AbilityMedia other = (AbilityMedia) obj;
+        if(other.getSfxIndex() == other.getSfxIndex() &&
+            other.sfxType.equals(sfxType) &&
+            other.getName().equals(name) &&
+            other.getAnimationType().equals(animationType))
+        {
+            return true;
+        }
+        return super.equals(obj);
+    }
 }

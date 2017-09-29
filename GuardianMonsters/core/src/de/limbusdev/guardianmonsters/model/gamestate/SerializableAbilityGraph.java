@@ -6,6 +6,7 @@ import com.badlogic.gdx.utils.ArrayMap;
 import de.limbusdev.guardianmonsters.guardians.abilities.Ability;
 import de.limbusdev.guardianmonsters.guardians.abilities.AbilityGraph;
 import de.limbusdev.guardianmonsters.guardians.abilities.Edge;
+import de.limbusdev.guardianmonsters.guardians.abilities.IAbilityGraph;
 import de.limbusdev.guardianmonsters.guardians.abilities.Node;
 import de.limbusdev.guardianmonsters.guardians.items.equipment.BodyPart;
 
@@ -26,15 +27,15 @@ public class SerializableAbilityGraph {
 
     public SerializableAbilityGraph() {}
 
-    public SerializableAbilityGraph(AbilityGraph graph) {
+    public SerializableAbilityGraph(IAbilityGraph graph) {
         SerializableAbilityGraph serAbilGraph = new SerializableAbilityGraph();
 
         nodes = new SNode[graph.getNodes().size];
         edges = new SEdge[graph.getEdges().size];
 
         activeAbilities = new int[graph.getActiveAbilities().size];
-        abilityNodes = new SAbilityNode[graph.abilityNodes.size];
-        equipmentNodes = new SEquipmentNode[graph.equipmentNodes.size];
+        abilityNodes = new SAbilityNode[graph.getAbilityNodes().size];
+        equipmentNodes = new SEquipmentNode[graph.getEquipmentNodes().size];
 
         for(int key : graph.getNodes().keys()) {
             nodes[key] = new SNode(graph.getNodes().get(key));
@@ -53,14 +54,14 @@ public class SerializableAbilityGraph {
         }
 
         counter=0;
-        for(int key : graph.abilityNodes.keys()) {
-            abilityNodes[counter] = new SAbilityNode(key, new SerializableAbility(graph.abilityNodes.get(key)));
+        for(int key : graph.getAbilityNodes().keys()) {
+            abilityNodes[counter] = new SAbilityNode(key, new SerializableAbility(graph.getAbilityNodes().get(key)));
             counter++;
         }
 
         counter = 0;
-        for(int key : graph.equipmentNodes.keys()) {
-            equipmentNodes[counter] = new SEquipmentNode(key, graph.equipmentNodes.get(key));
+        for(int key : graph.getEquipmentNodes().keys()) {
+            equipmentNodes[counter] = new SEquipmentNode(key, graph.getEquipmentNodes().get(key));
             counter++;
         }
     }

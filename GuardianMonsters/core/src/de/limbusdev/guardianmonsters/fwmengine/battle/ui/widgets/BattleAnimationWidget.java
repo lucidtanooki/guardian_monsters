@@ -12,15 +12,16 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 
 import de.limbusdev.guardianmonsters.assets.paths.AssetPath;
+import de.limbusdev.guardianmonsters.battle.AbilityMedia;
+import de.limbusdev.guardianmonsters.battle.AbilityMediaDB;
 import de.limbusdev.guardianmonsters.fwmengine.battle.control.BattleQueue;
 import de.limbusdev.guardianmonsters.fwmengine.battle.control.BattleSystem;
-import de.limbusdev.guardianmonsters.fwmengine.battle.ui.AnimationType;
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.ImageZComparator;
-import de.limbusdev.guardianmonsters.utils.geometry.IntVec2;
+import de.limbusdev.guardianmonsters.guardians.abilities.Ability;
+import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.media.IMediaManager;
 import de.limbusdev.guardianmonsters.services.Services;
-import de.limbusdev.guardianmonsters.guardians.abilities.Ability;
-import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
+import de.limbusdev.guardianmonsters.utils.geometry.IntVec2;
 
 /**
  * Widget for displaying monster status in battle: HP, MP, EXP, Name, Level
@@ -80,7 +81,7 @@ public class BattleAnimationWidget extends BattleWidget{
         addMonsterAnimationsForTeam(queue.getCombatTeamRight(),RIGHT);
     }
 
-    private void addMonsterAnimationsForTeam(ArrayMap<Integer,Guardian> team, boolean side) {
+    private void addMonsterAnimationsForTeam(ArrayMap<Integer,AGuardian> team, boolean side) {
 
         ArrayMap<Integer,Image> imgs;
         ArrayMap<Integer,Boolean> positions;
@@ -101,10 +102,10 @@ public class BattleAnimationWidget extends BattleWidget{
         int counter = 0;
         int actualTeamSize = 0;
         while(actualTeamSize < teamSize && counter < team.size) {
-            Guardian m = team.get(counter);
-            if(m.stat.isFit()) {
+            AGuardian m = team.get(counter);
+            if(m.getIndividualStatistics().isFit()) {
                 // Add monster to team
-                setUpMonsterSprite(m.ID,actualTeamSize, side);
+                setUpMonsterSprite(m.getSpeciesDescription().getID(),actualTeamSize, side);
                 positions.put(actualTeamSize,true);
                 actualTeamSize++;
             }
@@ -241,6 +242,7 @@ public class BattleAnimationWidget extends BattleWidget{
                                         boolean side, final boolean defSide) {
         final boolean direction = defSide;
         Action action;
+        AbilityMedia abilityMedia = AbilityMediaDB.getInstance().getAbilityMedia(ability.name);
 
         // Short delay before ability starts
         Action delayAction = Actions.delay(.5f);
@@ -256,7 +258,7 @@ public class BattleAnimationWidget extends BattleWidget{
         Action attackAnimationAction = Actions.run(() -> animateAttackOfType(ability, origin, target));
 
         // Plays the attacks sound
-        final String path = AssetPath.Audio.SFX.BATTLE().get(ability.sfxType.toString().toUpperCase()).get(0);
+        final String path = AssetPath.Audio.SFX.BATTLE().get(abilityMedia.getSfxType().toString().toUpperCase()).get(0);
         Action playSFXAction = Actions.run(() -> Services.getAudio().playSound(path));
 
         // Runs the callback handler
@@ -265,7 +267,7 @@ public class BattleAnimationWidget extends BattleWidget{
         // Animates the impact of the ability on the target
         Action animateImpactAction = Actions.run(() -> animateAttackImpact(targetPos, defSide));
 
-        switch(AnimationType.valueOf(ability.animationType.toUpperCase())) {
+        switch(abilityMedia.getAnimationType()) {
             case CONTACT:
                 action = Actions.sequence(delayAction,moveToTargetAction,attackAnimationAction,
                     playSFXAction,animateImpactAction,callbackAction,moveToOriginAction);
@@ -327,7 +329,9 @@ public class BattleAnimationWidget extends BattleWidget{
         }
         sra.setAlign(Align.bottom);
 
-        switch(AnimationType.valueOf(ability.animationType.toUpperCase()))
+        AbilityMedia abilityMedia = AbilityMediaDB.getInstance().getAbilityMedia(ability.name);
+
+        switch(abilityMedia.getAnimationType())
         {
             case MOVING_HOR:
                 anim.setFrameDuration(1f/anim.getKeyFrames().length);

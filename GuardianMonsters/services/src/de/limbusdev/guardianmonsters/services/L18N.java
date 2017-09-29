@@ -3,7 +3,7 @@ package de.limbusdev.guardianmonsters.services;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.utils.I18NBundle;
 
-import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
+import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 
 
 /**
@@ -30,7 +30,7 @@ public interface L18N {
 
     I18NBundle Battle();
 
-    String getLocalizedGuardianName(Guardian guardian);
+    String getLocalizedGuardianName(AGuardian guardian);
 
     String getLocalizedGuardianName(int guardianID);
 

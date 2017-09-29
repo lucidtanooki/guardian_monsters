@@ -1,8 +1,8 @@
 package de.limbusdev.guardianmonsters.model.gamestate;
 
-import de.limbusdev.guardianmonsters.guardians.ItemDB;
 import de.limbusdev.guardianmonsters.guardians.items.Inventory;
 import de.limbusdev.guardianmonsters.guardians.items.Item;
+import de.limbusdev.guardianmonsters.guardians.items.ItemDB;
 
 /**
  * SerializableInventory

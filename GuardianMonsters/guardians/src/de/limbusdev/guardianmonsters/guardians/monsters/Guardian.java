@@ -9,47 +9,59 @@ import de.limbusdev.guardianmonsters.guardians.abilities.IAbilityGraph;
  */
 public class Guardian extends AGuardian
 {
-    // Components
-    private SpeciesData   data;
-    private Stat          stat;
-    private IAbilityGraph abilityGraph;
-
     private String nickname;
 
+    // Components
+    private SpeciesDescription      speciesDescription;
+    private IndividualStatistics    individualStatistics;
+    private IAbilityGraph           abilityGraph;
+
+
     // ............................................................................................. CONSTRUCTOR
+
     /**
      * The protected constructor makes it available from the {@link AGuardianFactory} only.
-     * @param ID
+     *
+     * After Object creation the missing components have to be injected.
+     * @param UUID
      */
-    protected Guardian(int ID, SpeciesData data, Stat stat, IAbilityGraph abilityGraph)
+    protected Guardian(String UUID)
     {
-        super();
+        super(UUID);
+        setNickname("");
+    }
 
-        this.data = data;
-        this.stat = stat;
+    protected void injectSpeciesDescription(SpeciesDescription speciesDescription)
+    {
+        this.speciesDescription = speciesDescription;
+    }
+
+    protected void injectIndiviualStatistics(IndividualStatistics individualStatistics)
+    {
+        this.individualStatistics = individualStatistics;
+    }
+
+    protected void injectAbilityGraph(IAbilityGraph abilityGraph)
+    {
         this.abilityGraph = abilityGraph;
+    }
 
-        this.nickname = "";
+    // ............................................................................................. DELEGATED METHODS
+
+    // delegated to SpeciesDescription Component
+    @Override
+    public int getSpeciesID()
+    {
+        return speciesDescription.getID();
+    }
+
+    @Override
+    public CommonStatistics getCommonStatistics()
+    {
+        return speciesDescription.getCommonStatistics();
     }
 
     // ............................................................................................. GETTERS & SETTERS
-    @Override
-    public SpeciesData getSpeciesData()
-    {
-        return data;
-    }
-
-    @Override
-    public Stat getStat()
-    {
-        return stat;
-    }
-
-    @Override
-    public IAbilityGraph getAbilityGraph()
-    {
-        return abilityGraph;
-    }
 
     @Override
     public String getNickname()
@@ -63,12 +75,28 @@ public class Guardian extends AGuardian
         this.nickname = name;
     }
 
+    @Override
+    public SpeciesDescription getSpeciesDescription()
+    {
+        return speciesDescription;
+    }
+
+    @Override
+    public IndividualStatistics getIndividualStatistics()
+    {
+        return individualStatistics;
+    }
+
+    @Override
+    public IAbilityGraph getAbilityGraph()
+    {
+        return abilityGraph;
+    }
+
     // ............................................................................................. OBJECT
     @Override
     public String toString()
     {
-        String out = "";
-        out += data.getNameID() + " Level: " + stat.getLevel() + " Instance: " + getInstanceID();
-        return out;
+        return "SpeciesID: " + getSpeciesID() + " Level: " + individualStatistics.getLevel() + " UUID: " + getUUID();
     }
 }

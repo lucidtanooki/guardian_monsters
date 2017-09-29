@@ -12,14 +12,13 @@ import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.I18NBundle;
 
-
-import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.guardians.abilities.Ability;
-import de.limbusdev.guardianmonsters.guardians.abilities.AbilityGraph;
+import de.limbusdev.guardianmonsters.guardians.abilities.IAbilityGraph;
 import de.limbusdev.guardianmonsters.guardians.abilities.Node;
 import de.limbusdev.guardianmonsters.guardians.items.equipment.BodyPart;
-import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
-import de.limbusdev.guardianmonsters.guardians.monsters.Stat;
+import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
+import de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics;
+import de.limbusdev.guardianmonsters.services.Services;
 
 
 /**
@@ -112,22 +111,22 @@ public class AbilityDetailWidget extends Container {
         learn.setVisible(showLearnButton);
     }
 
-    public void init(Guardian guardian, int nodeID, boolean forceShowLearnButton) {
+    public void init(AGuardian guardian, int nodeID, boolean forceShowLearnButton) {
         this.nodeID = nodeID;
 
-        AbilityGraph graph = guardian.abilityGraph;
+        IAbilityGraph graph = guardian.getAbilityGraph();
         Node.Type type = graph.nodeTypeAt(nodeID);
-        Stat stat = guardian.stat;
+        IndividualStatistics statistics = guardian.getIndividualStatistics();
 
-        boolean showLearnButton = ((stat.hasAbilityPoints() && graph.isNodeEnabled(nodeID)) || forceShowLearnButton);
+        boolean showLearnButton = ((statistics.hasAbilityPoints() && graph.isNodeEnabled(nodeID)) || forceShowLearnButton);
         setLayout(type, showLearnButton);
 
         switch(type) {
             case ABILITY:
-                initAbilityDetails(graph.abilityNodes.get(nodeID));
+                initAbilityDetails(graph.getAbilityNodes().get(nodeID));
                 break;
             case EQUIPMENT:
-                initEquipmentDetails(graph.equipmentNodes.get(nodeID));
+                initEquipmentDetails(graph.getEquipmentNodes().get(nodeID));
                 break;
             case METAMORPHOSIS:
                 initMetamorphosis();

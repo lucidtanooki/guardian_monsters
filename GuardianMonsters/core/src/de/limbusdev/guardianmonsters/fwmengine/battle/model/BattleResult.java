@@ -4,6 +4,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 
 import de.limbusdev.guardianmonsters.guardians.items.Item;
+import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.Team;
 
@@ -17,24 +18,24 @@ import de.limbusdev.guardianmonsters.guardians.monsters.Team;
 
 public class BattleResult
 {
-    private ArrayMap<Guardian, Integer> gainedEXP;
+    private ArrayMap<AGuardian, Integer> gainedEXP;
     private Array<Item> droppedItems;
 
     public BattleResult(Team team, Array<Item> droppedItems) {
         this.gainedEXP = new ArrayMap<>();
-        for(Guardian guardian : team.values()) {
+        for(AGuardian guardian : team.values()) {
             gainedEXP.put(guardian,0);
         }
         this.droppedItems = droppedItems;
 
     }
 
-    public void gainEXP(Guardian guardian, int EXP) {
+    public void gainEXP(AGuardian guardian, int EXP) {
         gainedEXP.put(guardian, gainedEXP.get(guardian) + EXP);
     }
 
-    public boolean applyGainedEXP(Guardian guardian) {
-        boolean levelUp = guardian.stat.earnEXP(gainedEXP.get(guardian));
+    public boolean applyGainedEXP(AGuardian guardian) {
+        boolean levelUp = guardian.getIndividualStatistics().earnEXP(gainedEXP.get(guardian));
         return levelUp;
     }
 
@@ -43,9 +44,9 @@ public class BattleResult
      * next level.
      * @return  {@link Array} of {@link Guardian}s that reached a new level
      */
-    public Array<Guardian> applyGainedEXPtoAll() {
-        Array<Guardian> leveledUpMonsters = new Array<>();
-        for(Guardian guardian : gainedEXP.keys()) {
+    public Array<AGuardian> applyGainedEXPtoAll() {
+        Array<AGuardian> leveledUpMonsters = new Array<>();
+        for(AGuardian guardian : gainedEXP.keys()) {
             boolean lvlUp = applyGainedEXP(guardian);
             if(lvlUp) {
                 leveledUpMonsters.add(guardian);
@@ -54,7 +55,7 @@ public class BattleResult
         return leveledUpMonsters;
     }
 
-    public int getGainedEXP(Guardian guardian) {
+    public int getGainedEXP(AGuardian guardian) {
         return gainedEXP.get(guardian);
     }
 }

@@ -23,10 +23,6 @@ public class Ability
     public DamageType damageType;
     public Element element;
 
-    public String sfxType;
-    public int sfxIndex;
-    public String animationType;
-
 
     /* ........................................................................... CONSTRUCTOR .. */
     /**
@@ -42,13 +38,9 @@ public class Ability
      * @param element
      * @param damage
      * @param name
-     * @param sfxType
-     * @param sfxIndex
-     * @param animType
      */
-    public Ability(int ID, DamageType damageType, Element element, int damage, String name,
-                   String sfxType, int sfxIndex, String animType) {
-        this(ID, damageType, element, damage, name, sfxType, sfxIndex, animType, 0);
+    public Ability(int ID, DamageType damageType, Element element, int damage, String name) {
+        this(ID, damageType, element, damage, name, 0);
     }
 
 
@@ -59,21 +51,14 @@ public class Ability
      * @param element
      * @param damage
      * @param name
-     * @param sfxType
-     * @param sfxIndex
-     * @param animType
      * @param MPcost
      */
-    public Ability(int ID, DamageType damageType, Element element, int damage, String name,
-                   String sfxType, int sfxIndex, String animType, int MPcost) {
+    public Ability(int ID, DamageType damageType, Element element, int damage, String name, int MPcost) {
         this.ID = ID;
         this.element = element;
         this.damageType = damageType;
         this.damage = damage;
         this.name = name;
-        this.sfxIndex = sfxIndex;
-        this.sfxType = sfxType;
-        this.animationType = animType;
         this.MPcost = MPcost;
     }
 
@@ -89,5 +74,11 @@ public class Ability
         } else {
             return false;
         }
+    }
+
+    @Override
+    public String toString()
+    {
+        return "Ability " + ID + " of Element " + element + ": " + name;
     }
 }

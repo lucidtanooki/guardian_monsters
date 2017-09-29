@@ -6,8 +6,10 @@ package de.limbusdev.guardianmonsters.guardians;
  * @author Georg Eckert 2017
  */
 
-public class Constant
+public interface Constant
 {
-    public final static float LVL_EXPONENT = 1.5f;
-    public final static float BASE_EXP = 1000f;
+    float LVL_EXPONENT = 1.5f;
+    float BASE_EXP = 1000f;
+
+    boolean DEBUGGING_ON = true;
 }

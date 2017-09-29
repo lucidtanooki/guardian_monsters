@@ -13,13 +13,13 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.Align;
 
-
-import de.limbusdev.guardianmonsters.guardians.items.medicine.AMedicalItem;
-import de.limbusdev.guardianmonsters.services.Services;
+import de.limbusdev.guardianmonsters.guardians.items.Item;
 import de.limbusdev.guardianmonsters.guardians.items.equipment.Equipment;
 import de.limbusdev.guardianmonsters.guardians.items.equipment.EquipmentPotential;
-import de.limbusdev.guardianmonsters.guardians.items.Item;
+import de.limbusdev.guardianmonsters.guardians.items.medicine.AMedicalItem;
+import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
+import de.limbusdev.guardianmonsters.services.Services;
 
 /**
  * @author Georg Eckert 2017
@@ -29,32 +29,32 @@ public class GuardianOverviewButton extends TextButton implements Listener<Guard
 
     private Table subTable;
     private Item item;
-    private Guardian guardian;
+    private AGuardian guardian;
 
 
     // ................................................................................ CONSTRUCTORS
-    public GuardianOverviewButton(Guardian guardian, Skin skin, Item item) {
+    public GuardianOverviewButton(AGuardian guardian, Skin skin, Item item) {
         super(Services.getL18N().getLocalizedGuardianName(guardian), skin);
         construct(guardian, item);
     }
 
-    public GuardianOverviewButton(Guardian guardian, Skin skin, String styleName, Item item) {
+    public GuardianOverviewButton(AGuardian guardian, Skin skin, String styleName, Item item) {
         super(Services.getL18N().getLocalizedGuardianName(guardian), skin, styleName);
         construct(guardian, item);
     }
 
-    public GuardianOverviewButton(Guardian guardian, TextButtonStyle style, Item item) {
+    public GuardianOverviewButton(AGuardian guardian, TextButtonStyle style, Item item) {
         super(Services.getL18N().getLocalizedGuardianName(guardian), style);
         construct(guardian, item);
     }
 
-    private void construct(Guardian guardian, Item item) {
+    private void construct(AGuardian guardian, Item item) {
         this.item = item;
         this.guardian = guardian;
-        guardian.add(this);
+//       TODO guardian.add(this);
 
         getLabel().setAlignment(Align.topLeft);
-        TextureRegion region = Services.getMedia().getMonsterMiniSprite(guardian.ID);
+        TextureRegion region = Services.getMedia().getMonsterMiniSprite(guardian.getSpeciesID());
         Image monsterImg = new Image(region);
         add(monsterImg).width(16).height(region.getRegionHeight()).align(Align.topLeft);
         row();
@@ -90,14 +90,14 @@ public class GuardianOverviewButton extends TextButton implements Listener<Guard
 
 
 
-    private void augmentButtonEquipment(Guardian guardian, Equipment equipment) {
+    private void augmentButtonEquipment(AGuardian guardian, Equipment equipment) {
         if(subTable != null) {
             removeActor(subTable);
             getCells().removeIndex(getCells().size-1);
             row();
         }
 
-        EquipmentPotential pot = guardian.stat.getEquipmentPotential(equipment);
+        EquipmentPotential pot = guardian.getIndividualStatistics().getEquipmentPotential(equipment);
 
         String props[]  = {"hp", "mp", "speed", "exp", "pstr", "pdef", "mstr", "mdef"};
         int potValues[] = {pot.hp, pot.mp, pot.speed, pot.exp, pot.pstr, pot.pdef, pot.mstr, pot.mdef};
@@ -126,7 +126,7 @@ public class GuardianOverviewButton extends TextButton implements Listener<Guard
         }
     }
 
-    private void augmentButtonMedicine(Guardian guardian, Item item) {
+    private void augmentButtonMedicine(AGuardian guardian, Item item) {
 
         if(subTable != null) {
             removeActor(subTable);
@@ -136,9 +136,9 @@ public class GuardianOverviewButton extends TextButton implements Listener<Guard
 
         subTable = new Table();
         subTable.add(new Image(getSkin().getDrawable("stats-symbol-hp")));
-        subTable.add(new Label(guardian.stat.getHPfractionAsString(), getSkin(), "default")).width(56);
+        subTable.add(new Label(guardian.getIndividualStatistics().getHPfractionAsString(), getSkin(), "default")).width(56);
         subTable.add(new Image(getSkin().getDrawable("stats-symbol-mp")));
-        subTable.add(new Label(guardian.stat.getMPfractionAsString(), getSkin(), "default")).width(56);
+        subTable.add(new Label(guardian.getIndividualStatistics().getMPfractionAsString(), getSkin(), "default")).width(56);
 
         add(subTable).align(Align.left);
         layout();

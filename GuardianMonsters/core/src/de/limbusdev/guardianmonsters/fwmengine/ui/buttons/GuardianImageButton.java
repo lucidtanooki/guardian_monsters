@@ -4,9 +4,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
-import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
 import de.limbusdev.guardianmonsters.scene2d.SubImageImageButton;
+import de.limbusdev.guardianmonsters.services.Services;
 
 /**
  * GuardianImageButton
@@ -21,7 +21,7 @@ public class GuardianImageButton extends SubImageImageButton {
 
     private static Image construct(Guardian guardian) {
         TextureRegionDrawable drawable = new TextureRegionDrawable(
-            Services.getMedia().getMonsterMiniSprite(guardian.ID));
+            Services.getMedia().getMonsterMiniSprite(guardian.getSpeciesDescription().getID()));
         Image miniSprite = new Image(drawable);
         return miniSprite;
     }

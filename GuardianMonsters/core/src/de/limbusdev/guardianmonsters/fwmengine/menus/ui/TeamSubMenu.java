@@ -10,16 +10,16 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 
-import de.limbusdev.guardianmonsters.media.IMediaManager;
-import de.limbusdev.guardianmonsters.services.Services;
+import de.limbusdev.guardianmonsters.Constant;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.team.ATeamChoiceWidget;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.team.MonsterStatusInventoryWidget;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.team.StatusPentagonWidget;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.team.TeamCircleWidget;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TeamComponent;
-import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
+import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.Team;
-import de.limbusdev.guardianmonsters.Constant;
+import de.limbusdev.guardianmonsters.media.IMediaManager;
+import de.limbusdev.guardianmonsters.services.Services;
 
 /**
  * Created by Georg Eckert 2017
@@ -64,8 +64,8 @@ public class TeamSubMenu extends AInventorySubMenu
                 System.out.println("Clicked " + position);
                 int oldPos = circleWidget.getOldPosition();
                 if(position != oldPos) {
-                    Guardian currentGuardian = team.get(oldPos);
-                    Guardian guardianToSwapWith = team.get(position);
+                    AGuardian currentGuardian = team.get(oldPos);
+                    AGuardian guardianToSwapWith = team.get(position);
 
                     team.put(oldPos, guardianToSwapWith);
                     team.put(position, currentGuardian);
@@ -145,7 +145,7 @@ public class TeamSubMenu extends AInventorySubMenu
 
     private void showGuardianInformation(int teamPosition) {
         monsterStats.init(team.get(teamPosition));
-        monsterImg.setDrawable(new TextureRegionDrawable(Services.getMedia().getMonsterSprite(team.get(teamPosition).ID)));
+        monsterImg.setDrawable(new TextureRegionDrawable(Services.getMedia().getMonsterSprite(team.get(teamPosition).getSpeciesDescription().getID())));
         statPent.init(team.get(teamPosition));
         joinsBattleButton.remove();
         joinsBattleButton.setChecked(false);

@@ -59,6 +59,7 @@ public class GuardianMonsters extends Game{
     private void injectDependencies() {
         // Service Locator: Dependency Injection
         System.out.println("GuardianMonsters: injecting dependencies ...");
+
         Services.provide(new MediaManager());
         Services.provide(new AudioManager());
         Services.provide(new ConcreteScreenManager(this));

@@ -1,18 +1,20 @@
 package de.limbusdev.guardianmonsters.guardians.abilities;
 
-import com.badlogic.ashley.signals.Signal;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 
 import de.limbusdev.guardianmonsters.guardians.items.equipment.BodyPart;
-import de.limbusdev.guardianmonsters.guardians.monsters.SpeciesData;
+import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
+import de.limbusdev.guardianmonsters.guardians.monsters.SpeciesDescription;
 
 /**
  * @author Georg Eckert 2017
  */
 
-public class AbilityGraph extends Signal<AbilityGraph> implements IAbilityGraph
+public class AbilityGraph implements IAbilityGraph
 {
+    private AGuardian core;
+
     private ArrayMap<Integer, Node> nodes;
     private Array<Edge> edges;
 
@@ -24,7 +26,7 @@ public class AbilityGraph extends Signal<AbilityGraph> implements IAbilityGraph
     private ArrayMap<Integer,Ability> learntAbilities;
     private Array<BodyPart> learntEquipment;
 
-    public AbilityGraph(SpeciesData data)
+    public AbilityGraph(SpeciesDescription data)
     {
         nodes = new ArrayMap<>();
         edges = new Array<>();
@@ -64,7 +66,7 @@ public class AbilityGraph extends Signal<AbilityGraph> implements IAbilityGraph
         this.learntEquipment = learntEquipment;
     }
 
-    private void init(SpeciesData data)
+    private void init(SpeciesDescription data)
     {
         for(int key : data.getAbilityNodes().keys())
         {
@@ -142,7 +144,8 @@ public class AbilityGraph extends Signal<AbilityGraph> implements IAbilityGraph
                 break;
         }
 
-        dispatch(this);
+        core.setAbilitiesChanged();
+        core.notifyObservers();
     }
 
     @Override
@@ -213,7 +216,8 @@ public class AbilityGraph extends Signal<AbilityGraph> implements IAbilityGraph
         }
         activeAbilities.put(slot, learntAbilities.get(learntAbilityNumber));
 
-        dispatch(this);
+        core.setAbilitiesChanged();
+        core.notifyObservers();
     }
 
     @Override

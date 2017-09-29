@@ -1,5 +1,5 @@
 <guardians>
-    <guardian id="1" nameID="gm001_fordin">
+    <guardian speciesID="1" nameID="gm001_fordin">
         <metamorphsTo>2</metamorphsTo>
         <metamorphosisNodes>
             <metamorphosisNode>91</metamorphosisNode>
@@ -9,17 +9,17 @@
             <element>earth</element>
         </elements>
         <attacks>
-            <ability element="none"  id="2" abilityPos="0" />
-            <ability element="earth" id="2" abilityPos="13" />
-            <ability element="earth" id="3" abilityPos="11" />
-            <ability element="earth" id="4" abilityPos="15" />
+            <ability element="none"  abilityID="2" abilityPos="0" />
+            <ability element="earth" abilityID="2" abilityPos="13" />
+            <ability element="earth" abilityID="3" abilityPos="11" />
+            <ability element="earth" abilityID="4" abilityPos="15" />
         </attacks>
         <basestats hp="300" mp="50" speed="10" pstr="10" pdef="10" mstr="10" mdef="10" />
         <equipment-compatibility head="bridle" hands="claws" body="barding" feet="shinprotection" />
         <ability-graph-equip body="21" hands="23" feet="89" head="90" />
     </guardian>
 
-    <guardian id="2" nameID="gm002_stegofor">
+    <guardian speciesID="2" nameID="gm002_stegofor">
         <metamorphsFrom>1</metamorphsFrom>
         <metamorphsTo>3</metamorphsTo>
         <elements>
@@ -28,7 +28,7 @@
         </elements>
     </guardian>
 
-    <guardian id="3" nameID="gm003_brachifor">
+    <guardian speciesID="3" nameID="gm003_brachifor">
         <metamorphsFrom>2</metamorphsFrom>
         <elements>
             <element>earth</element>
@@ -36,7 +36,7 @@
         </elements>
     </guardian>
 
-    <guardian id="4" nameID="gm004_kroki">
+    <guardian speciesID="4" nameID="gm004_kroki">
         <metamorphsTo>5</metamorphsTo>
         <metamorphosisNodes>
             <metamorphosisNode>91</metamorphosisNode>
@@ -46,15 +46,15 @@
             <element>water</element>
         </elements>
         <attacks>
-            <ability element="none"  id="2" abilityPos="0" /> <!-- Bite -->
-            <ability element="water" id="1" abilityPos="5" />
+            <ability element="none"  abilityID="2" abilityPos="0" /> <!-- Bite -->
+            <ability element="water" abilityID="1" abilityPos="5" />
         </attacks>
         <basestats hp="300" mp="50" speed="10" pstr="10" pdef="10" mstr="10" mdef="10" />
         <equipment-compatibility head="helmet" hands="claws" body="breastplate" feet="kneepads" />
         <ability-graph-equip body="17" hands="19" feet="53" head="54" />
     </guardian>
 
-    <guardian id="5" nameID="gm005_krokivip">
+    <guardian speciesID="5" nameID="gm005_krokivip">
         <metamorphsFrom>4</metamorphsFrom>
         <metamorphsTo>6</metamorphsTo>
         <elements>
@@ -63,7 +63,7 @@
         </elements>
     </guardian>
 
-    <guardian id="6" nameID="gm006_leviadile">
+    <guardian speciesID="6" nameID="gm006_leviadile">
         <metamorphsFrom>5</metamorphsFrom>
         <elements>
             <element>water</element>
@@ -71,7 +71,7 @@
         </elements>
     </guardian>
 
-    <guardian id="7" nameID="gm007_devidin">
+    <guardian speciesID="7" nameID="gm007_devidin">
         <metamorphsTo>8</metamorphsTo>
         <metamorphosisNodes>
             <metamorphosisNode>91</metamorphosisNode>
@@ -81,15 +81,15 @@
             <element>fire</element>
         </elements>
         <attacks>
-            <ability element="none"   id="2" abilityPos="0" /> <!-- Bite -->
-            <ability element="fire" id="1" abilityPos="5" />
+            <ability element="none"   abilityID="2" abilityPos="0" /> <!-- Bite -->
+            <ability element="fire" abilityID="1" abilityPos="5" />
         </attacks>
         <basestats hp="300" mp="50" speed="10" pstr="10" pdef="10" mstr="10" mdef="10" />
         <equipment-compatibility head="mask" hands="claws" body="barding" feet="shinprotection" />
         <ability-graph-equip body="17" hands="19" feet="53" head="54" />
     </guardian>
 
-    <guardian id="8" nameID="gm008_devidra">
+    <guardian speciesID="8" nameID="gm008_devidra">
         <metamorphsFrom>7</metamorphsFrom>
         <metamorphsTo>9</metamorphsTo>
         <elements>
@@ -98,7 +98,7 @@
         </elements>
     </guardian>
 
-    <guardian id="9" nameID="gm009_deviraptor">
+    <guardian speciesID="9" nameID="gm009_deviraptor">
         <metamorphsFrom>8</metamorphsFrom>
         <elements>
             <element>fire</element>
@@ -106,7 +106,7 @@
         </elements>
     </guardian>
 
-    <guardian id="10" nameID="gm010_aerodin">
+    <guardian speciesID="10" nameID="gm010_aerodin">
         <metamorphsTo>11</metamorphsTo>
         <metamorphosisNodes>
             <metamorphosisNode>91</metamorphosisNode>
@@ -116,14 +116,14 @@
             <element>air</element>
         </elements>
         <attacks>
-            <ability element="none"   id="2" abilityPos="0" /> <!-- Bite -->
+            <ability element="none"   abilityID="2" abilityPos="0" /> <!-- Bite -->
         </attacks>
         <basestats hp="99" mp="19" speed="1" pstr="1" pdef="1" mstr="1" mdef="1" />
         <equipment-compatibility head="mask" hands="claws" body="barding" feet="shinprotection" />
         <ability-graph-equip body="17" hands="19" feet="53" head="54" />
     </guardian>
 
-    <guardian id="11" nameID="gm011_aerodeer">
+    <guardian speciesID="11" nameID="gm011_aerodeer">
         <metamorphsFrom>10</metamorphsFrom>
         <metamorphsTo>12</metamorphsTo>
         <elements>
@@ -131,26 +131,26 @@
         </elements>
     </guardian>
 
-    <guardian id="12" nameID="gm012_aerostag">
+    <guardian speciesID="12" nameID="gm012_aerostag">
         <metamorphsFrom>11</metamorphsFrom>
         <elements>
             <element>air</element>
         </elements>
     </guardian>
 
-    <guardian id="13" nameID="gm013_weastoat">
+    <guardian speciesID="13" nameID="gm013_weastoat">
         <elements>
             <element>forest</element>
         </elements>
         <attacks>
-            <ability element="none"   id="2" abilityPos="0" /> <!-- Bite -->
+            <ability element="none"   abilityID="2" abilityPos="0" /> <!-- Bite -->
         </attacks>
         <basestats hp="300" mp="50" speed="10" pstr="10" pdef="10" mstr="10" mdef="10" />
         <equipment-compatibility head="mask" hands="claws" body="barding" feet="shinprotection" />
         <ability-graph-equip body="17" hands="19" feet="53" head="54" />
     </guardian>
 
-    <guardian id="14" nameID="gm014_mooty">
+    <guardian speciesID="14" nameID="gm014_mooty">
         <metamorphsTo>15</metamorphsTo>
         <metamorphosisNodes>
             <metamorphosisNode>91</metamorphosisNode>
@@ -160,14 +160,14 @@
             <element>demon</element>
         </elements>
         <attacks>
-            <ability element="none"   id="2" abilityPos="0" /> <!-- Bite -->
+            <ability element="none"   abilityID="2" abilityPos="0" /> <!-- Bite -->
         </attacks>
         <basestats hp="99" mp="19" speed="1" pstr="1" pdef="1" mstr="1" mdef="1" />
         <equipment-compatibility head="mask" hands="claws" body="barding" feet="shinprotection" />
         <ability-graph-equip body="17" hands="19" feet="53" head="54" />
     </guardian>
 
-    <guardian id="15" nameID="gm015_camoon">
+    <guardian speciesID="15" nameID="gm015_camoon">
         <metamorphsTo>16</metamorphsTo>
         <metamorphosisNodes>
             <metamorphosisNode>91</metamorphosisNode>
@@ -177,26 +177,26 @@
             <element>demon</element>
         </elements>
         <attacks>
-            <ability element="none"   id="2" abilityPos="0" /> <!-- Bite -->
+            <ability element="none"   abilityID="2" abilityPos="0" /> <!-- Bite -->
         </attacks>
         <basestats hp="99" mp="19" speed="1" pstr="1" pdef="1" mstr="1" mdef="1" />
         <equipment-compatibility head="mask" hands="claws" body="barding" feet="shinprotection" />
         <ability-graph-equip body="17" hands="19" feet="53" head="54" />
     </guardian>
 
-    <guardian id="16" nameID="gm016_moopard">
+    <guardian speciesID="16" nameID="gm016_moopard">
         <elements>
             <element>demon</element>
         </elements>
         <attacks>
-            <ability element="none"   id="2" abilityPos="0" /> <!-- Bite -->
+            <ability element="none"   abilityID="2" abilityPos="0" /> <!-- Bite -->
         </attacks>
         <basestats hp="99" mp="19" speed="1" pstr="1" pdef="1" mstr="1" mdef="1" />
         <equipment-compatibility head="mask" hands="claws" body="barding" feet="shinprotection" />
         <ability-graph-equip body="17" hands="19" feet="53" head="54" />
     </guardian>
 
-    <guardian id="17" nameID="gm017_wuppy">
+    <guardian speciesID="17" nameID="gm017_wuppy">
         <metamorphsTo>18</metamorphsTo>
         <metamorphosisNodes>
             <metamorphosisNode>91</metamorphosisNode>
@@ -206,14 +206,14 @@
             <element>demon</element>
         </elements>
         <attacks>
-            <ability element="none"   id="2" abilityPos="0" /> <!-- Bite -->
+            <ability element="none"   abilityID="2" abilityPos="0" /> <!-- Bite -->
         </attacks>
         <basestats hp="99" mp="19" speed="1" pstr="1" pdef="1" mstr="1" mdef="1" />
         <equipment-compatibility head="mask" hands="claws" body="barding" feet="shinprotection" />
         <ability-graph-equip body="17" hands="19" feet="53" head="54" />
     </guardian>
 
-    <guardian id="18" nameID="gm018_earog">
+    <guardian speciesID="18" nameID="gm018_earog">
         <metamorphsTo>19</metamorphsTo>
         <metamorphosisNodes>
             <metamorphosisNode>91</metamorphosisNode>
@@ -223,26 +223,26 @@
             <element>demon</element>
         </elements>
         <attacks>
-            <ability element="none"   id="2" abilityPos="0" /> <!-- Bite -->
+            <ability element="none"   abilityID="2" abilityPos="0" /> <!-- Bite -->
         </attacks>
         <basestats hp="99" mp="19" speed="1" pstr="1" pdef="1" mstr="1" mdef="1" />
         <equipment-compatibility head="mask" hands="claws" body="barding" feet="shinprotection" />
         <ability-graph-equip body="17" hands="19" feet="53" head="54" />
     </guardian>
 
-    <guardian id="19" nameID="gm019_deemog">
+    <guardian speciesID="19" nameID="gm019_deemog">
         <elements>
             <element>demon</element>
         </elements>
         <attacks>
-            <ability element="none"   id="2" abilityPos="0" /> <!-- Bite -->
+            <ability element="none"   abilityID="2" abilityPos="0" /> <!-- Bite -->
         </attacks>
         <basestats hp="99" mp="19" speed="1" pstr="1" pdef="1" mstr="1" mdef="1" />
         <equipment-compatibility head="mask" hands="claws" body="barding" feet="shinprotection" />
         <ability-graph-equip body="17" hands="19" feet="53" head="54" />
     </guardian>
 
-    <guardian id="20" nameID="gm020_dradder">
+    <guardian speciesID="20" nameID="gm020_dradder">
         <metamorphsTo>21</metamorphsTo>
         <metamorphosisNodes>
             <metamorphosisNode>91</metamorphosisNode>
@@ -252,26 +252,26 @@
             <element>forest</element>
         </elements>
         <attacks>
-            <ability element="none"   id="2" abilityPos="0" /> <!-- Bite -->
+            <ability element="none"   abilityID="2" abilityPos="0" /> <!-- Bite -->
         </attacks>
         <basestats hp="99" mp="19" speed="1" pstr="1" pdef="1" mstr="1" mdef="1" />
         <equipment-compatibility head="mask" hands="claws" body="barding" feet="shinprotection" />
         <ability-graph-equip body="17" hands="19" feet="53" head="54" />
     </guardian>
 
-    <guardian id="21" nameID="gm021_driper">
+    <guardian speciesID="21" nameID="gm021_driper">
         <elements>
             <element>forest</element>
         </elements>
         <attacks>
-            <ability element="none"   id="2" abilityPos="0" /> <!-- Bite -->
+            <ability element="none"   abilityID="2" abilityPos="0" /> <!-- Bite -->
         </attacks>
         <basestats hp="99" mp="19" speed="1" pstr="1" pdef="1" mstr="1" mdef="1" />
         <equipment-compatibility head="mask" hands="claws" body="barding" feet="shinprotection" />
         <ability-graph-equip body="17" hands="19" feet="53" head="54" />
     </guardian>
 
-    <guardian id="22" nameID="gm022_spreye">
+    <guardian speciesID="22" nameID="gm022_spreye">
         <metamorphsTo>23</metamorphsTo>
         <metamorphosisNodes>
             <metamorphosisNode>91</metamorphosisNode>
@@ -281,26 +281,26 @@
             <element>demon</element>
         </elements>
         <attacks>
-            <ability element="none"   id="2" abilityPos="0" /> <!-- Bite -->
+            <ability element="none"   abilityID="2" abilityPos="0" /> <!-- Bite -->
         </attacks>
         <basestats hp="99" mp="19" speed="1" pstr="1" pdef="1" mstr="1" mdef="1" />
         <equipment-compatibility head="mask" hands="claws" body="barding" feet="shinprotection" />
         <ability-graph-equip body="17" hands="19" feet="53" head="54" />
     </guardian>
 
-    <guardian id="23" nameID="gm023_buttereye">
+    <guardian speciesID="23" nameID="gm023_buttereye">
         <elements>
             <element>demon</element>
         </elements>
         <attacks>
-            <ability element="none"   id="2" abilityPos="0" /> <!-- Bite -->
+            <ability element="none"   abilityID="2" abilityPos="0" /> <!-- Bite -->
         </attacks>
         <basestats hp="99" mp="19" speed="1" pstr="1" pdef="1" mstr="1" mdef="1" />
         <equipment-compatibility head="mask" hands="claws" body="barding" feet="shinprotection" />
         <ability-graph-equip body="17" hands="19" feet="53" head="54" />
     </guardian>
 
-    <guardian id="24" nameID="gm024_duggot">
+    <guardian speciesID="24" nameID="gm024_duggot">
         <metamorphsTo>25</metamorphsTo>
         <metamorphosisNodes>
             <metamorphosisNode>91</metamorphosisNode>
@@ -310,26 +310,26 @@
             <element>arthropoda</element>
         </elements>
         <attacks>
-            <ability element="none"   id="2" abilityPos="0" /> <!-- Bite -->
+            <ability element="none"   abilityID="2" abilityPos="0" /> <!-- Bite -->
         </attacks>
         <basestats hp="99" mp="19" speed="1" pstr="1" pdef="1" mstr="1" mdef="1" />
         <equipment-compatibility head="mask" hands="claws" body="barding" feet="shinprotection" />
         <ability-graph-equip body="17" hands="19" feet="53" head="54" />
     </guardian>
 
-    <guardian id="25" nameID="gm025_breem">
+    <guardian speciesID="25" nameID="gm025_breem">
         <elements>
             <element>arthropoda</element>
         </elements>
         <attacks>
-            <ability element="none"   id="2" abilityPos="0" /> <!-- Bite -->
+            <ability element="none"   abilityID="2" abilityPos="0" /> <!-- Bite -->
         </attacks>
         <basestats hp="99" mp="19" speed="1" pstr="1" pdef="1" mstr="1" mdef="1" />
         <equipment-compatibility head="mask" hands="claws" body="barding" feet="shinprotection" />
         <ability-graph-equip body="17" hands="19" feet="53" head="54" />
     </guardian>
 
-    <guardian id="26" nameID="gm026_marvillar">
+    <guardian speciesID="26" nameID="gm026_marvillar">
         <metamorphsTo>27</metamorphsTo>
         <metamorphosisNodes>
             <metamorphosisNode>91</metamorphosisNode>
@@ -338,26 +338,26 @@
             <element>arthropoda</element>
         </elements>
         <attacks>
-            <ability element="none"   id="2" abilityPos="0" /> <!-- Bite -->
+            <ability element="none"   abilityID="2" abilityPos="0" /> <!-- Bite -->
         </attacks>
         <basestats hp="99" mp="19" speed="1" pstr="1" pdef="1" mstr="1" mdef="1" />
         <equipment-compatibility head="mask" hands="claws" body="barding" feet="shinprotection" />
         <ability-graph-equip body="17" hands="19" feet="53" head="54" />
     </guardian>
 
-    <guardian id="27" nameID="gm027_marvantis">
+    <guardian speciesID="27" nameID="gm027_marvantis">
         <elements>
             <element>arthropoda</element>
         </elements>
         <attacks>
-            <ability element="none"   id="2" abilityPos="0" /> <!-- Bite -->
+            <ability element="none"   abilityID="2" abilityPos="0" /> <!-- Bite -->
         </attacks>
         <basestats hp="99" mp="19" speed="1" pstr="1" pdef="1" mstr="1" mdef="1" />
         <equipment-compatibility head="mask" hands="claws" body="barding" feet="shinprotection" />
         <ability-graph-equip body="17" hands="19" feet="53" head="54" />
     </guardian>
 
-    <guardian id="28" nameID="gm028_palmpot">
+    <guardian speciesID="28" nameID="gm028_palmpot">
         <metamorphsTo>29</metamorphsTo>
         <metamorphosisNodes>
             <metamorphosisNode>91</metamorphosisNode>
@@ -366,21 +366,21 @@
             <element>forest</element>
         </elements>
         <attacks>
-            <ability element="none"   id="2" abilityPos="0" /> <!-- Bite -->
+            <ability element="none"   abilityID="2" abilityPos="0" /> <!-- Bite -->
         </attacks>
         <basestats hp="290" mp="50" speed="10" pstr="10" pdef="10" mstr="10" mdef="10" />
         <equipment-compatibility head="mask" hands="claws" body="barding" feet="shinprotection" />
         <ability-graph-equip body="17" hands="19" feet="53" head="54" />
     </guardian>
 
-    <guardian id="29" nameID="gm029_bonsot">
+    <guardian speciesID="29" nameID="gm029_bonsot">
         <metamorphsFrom>28</metamorphsFrom>
         <elements>
             <element>forest</element>
         </elements>
     </guardian>
 
-    <guardian id="30" nameID="gm030_erimat">
+    <guardian speciesID="30" nameID="gm030_erimat">
         <metamorphsTo>31</metamorphsTo>
         <metamorphosisNodes>
             <metamorphosisNode>91</metamorphosisNode>
@@ -389,26 +389,26 @@
             <element>mountain</element>
         </elements>
         <attacks>
-            <ability element="none"   id="2" abilityPos="0" /> <!-- Bite -->
+            <ability element="none"   abilityID="2" abilityPos="0" /> <!-- Bite -->
         </attacks>
         <basestats hp="99" mp="19" speed="1" pstr="1" pdef="1" mstr="1" mdef="1" />
         <equipment-compatibility head="mask" hands="claws" body="barding" feet="shinprotection" />
         <ability-graph-equip body="17" hands="19" feet="53" head="54" />
     </guardian>
 
-    <guardian id="31" nameID="gm031_erichief">
+    <guardian speciesID="31" nameID="gm031_erichief">
         <elements>
             <element>mountain</element>
         </elements>
         <attacks>
-            <ability element="none"   id="2" abilityPos="0" /> <!-- Bite -->
+            <ability element="none"   abilityID="2" abilityPos="0" /> <!-- Bite -->
         </attacks>
         <basestats hp="99" mp="19" speed="1" pstr="1" pdef="1" mstr="1" mdef="1" />
         <equipment-compatibility head="mask" hands="claws" body="barding" feet="shinprotection" />
         <ability-graph-equip body="17" hands="19" feet="53" head="54" />
     </guardian>
 
-    <guardian id="32" nameID="gm032_eggatch">
+    <guardian speciesID="32" nameID="gm032_eggatch">
         <metamorphsTo>33</metamorphsTo>
         <metamorphosisNodes>
             <metamorphosisNode>91</metamorphosisNode>
@@ -417,19 +417,19 @@
             <element>air</element>
         </elements>
         <attacks>
-            <ability element="none"   id="2" abilityPos="0" /> <!-- Bite -->
+            <ability element="none"   abilityID="2" abilityPos="0" /> <!-- Bite -->
         </attacks>
         <basestats hp="99" mp="19" speed="1" pstr="1" pdef="1" mstr="1" mdef="1" />
         <equipment-compatibility head="mask" hands="claws" body="barding" feet="shinprotection" />
         <ability-graph-equip body="17" hands="19" feet="53" head="54" />
     </guardian>
 
-    <guardian id="33" nameID="gm033_owlock">
+    <guardian speciesID="33" nameID="gm033_owlock">
         <elements>
             <element>air</element>
         </elements>
         <attacks>
-            <ability element="none"   id="2" abilityPos="0" /> <!-- Bite -->
+            <ability element="none"   abilityID="2" abilityPos="0" /> <!-- Bite -->
         </attacks>
         <basestats hp="99" mp="19" speed="1" pstr="1" pdef="1" mstr="1" mdef="1" />
         <equipment-compatibility head="mask" hands="claws" body="barding" feet="shinprotection" />

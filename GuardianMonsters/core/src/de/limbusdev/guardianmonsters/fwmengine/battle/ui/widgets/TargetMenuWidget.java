@@ -1,12 +1,15 @@
 package de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets;
 
-import com.badlogic.ashley.signals.Listener;
 import com.badlogic.ashley.signals.Signal;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+
+import java.util.Observable;
+import java.util.Observer;
 
 import de.limbusdev.guardianmonsters.fwmengine.battle.control.BattleQueue;
 import de.limbusdev.guardianmonsters.fwmengine.battle.control.BattleSystem;
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.CombatTeam;
+import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
 import de.limbusdev.guardianmonsters.services.Services;
 
@@ -17,7 +20,8 @@ import static de.limbusdev.guardianmonsters.Constant.RIGHT;
  * @author Georg Eckert 2017
  */
 
-public class TargetMenuWidget extends SevenButtonsWidget implements Listener<Guardian> {
+public class TargetMenuWidget extends SevenButtonsWidget implements Observer
+{
 
     private CombatTeam leftTeam, rightTeam;
 
@@ -51,16 +55,16 @@ public class TargetMenuWidget extends SevenButtonsWidget implements Listener<Gua
 
         for(int key : team.keys())
         {
-            Guardian m = team.get(key);
+            AGuardian m = team.get(key);
             setButtonText(key + offset, Services.getL18N().getLocalizedGuardianName(m));
             enableButton(key + offset);
 
             // Add the TargetMenuWidget as a Listener
-            m.add(this);
+            m.addObserver(this);
         }
     }
 
-    public Guardian getMonsterOfIndex(int index) {
+    public AGuardian getMonsterOfIndex(int index) {
         if(index <=2) {
             return leftTeam.get(index);
         } else {
@@ -86,9 +90,15 @@ public class TargetMenuWidget extends SevenButtonsWidget implements Listener<Gua
     }
 
 
-    @Override
     public void receive(Signal<Guardian> signal, Guardian guardian) {
-        if(guardian.stat.isKO()) {
+
+    }
+
+    @Override
+    public void update(Observable o, Object arg)
+    {
+        Guardian guardian = (Guardian)o;
+        if(guardian.getIndividualStatistics().isKO()) {
             int index;
             if(leftTeam.isMember(guardian)) {
                 index = leftTeam.getFieldPosition(guardian);

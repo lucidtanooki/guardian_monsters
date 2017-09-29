@@ -1,7 +1,5 @@
 package de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets;
 
-import com.badlogic.ashley.signals.Listener;
-import com.badlogic.ashley.signals.Signal;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
@@ -12,10 +10,14 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 import com.badlogic.gdx.utils.Align;
 
+import java.util.Observable;
+import java.util.Observer;
+
 import de.limbusdev.guardianmonsters.Constant;
+import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
-import de.limbusdev.guardianmonsters.guardians.monsters.GuardianDB;
-import de.limbusdev.guardianmonsters.guardians.monsters.Stat;
+import de.limbusdev.guardianmonsters.guardians.monsters.GuardianFactory;
+import de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics;
 import de.limbusdev.guardianmonsters.services.Services;
 
 /**
@@ -23,7 +25,8 @@ import de.limbusdev.guardianmonsters.services.Services;
  * HINT: Don't forget calling the init() method
  * Created by georg on 03.07.16.
  */
-public class MonsterStateWidget extends WidgetGroup implements Listener<Guardian> {
+public class MonsterStateWidget extends WidgetGroup implements Observer
+{
     private ProgressBar hpBar;
     private ProgressBar mpBar;
     private ProgressBar epBar;
@@ -99,19 +102,19 @@ public class MonsterStateWidget extends WidgetGroup implements Listener<Guardian
      * Initializes the widget to show a monsters status values
      * @param guardian
      */
-    public void init(Guardian guardian) {
+    public void init(AGuardian guardian) {
         refresh(guardian);
-        nameLabel.setText(Services.getL18N().Guardians().get((GuardianDB.getInstance().getNameById(guardian.ID))));
-        guardian.add(this);
+        nameLabel.setText(Services.getL18N().Guardians().get((GuardianFactory.getInstance().getNameById(guardian.getSpeciesDescription().getID()))));
+        guardian.addObserver(this);
     }
 
-    public void refresh(Guardian guardian) {
-        Stat stat = guardian.stat;
-        this.hpBar.setValue(stat.getHPfraction());
-        this.mpBar.setValue(stat.getMPfraction());
-        this.epBar.setValue(stat.getEXPfraction());
-        this.levelLabel.setText(Integer.toString(stat.getLevel()));
-        if(stat.isKO()) {
+    public void refresh(AGuardian guardian) {
+        IndividualStatistics statistics = guardian.getIndividualStatistics();
+        this.hpBar.setValue(statistics.getHPfraction());
+        this.mpBar.setValue(statistics.getMPfraction());
+        this.epBar.setValue(statistics.getEXPfraction());
+        this.levelLabel.setText(Integer.toString(statistics.getLevel()));
+        if(statistics.isKO()) {
             addAction(Actions.sequence(Actions.alpha(0, 2), Actions.visible(false)));
         }
     }
@@ -130,7 +133,10 @@ public class MonsterStateWidget extends WidgetGroup implements Listener<Guardian
     }
 
     @Override
-    public void receive(Signal<Guardian> signal, Guardian guardian) {
-        refresh(guardian);
+    public void update(Observable o, Object arg) {
+        if(o instanceof AGuardian)
+        {
+            refresh((Guardian) o);
+        }
     }
 }

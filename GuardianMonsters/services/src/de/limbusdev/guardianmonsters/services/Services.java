@@ -14,7 +14,8 @@ import de.limbusdev.guardianmonsters.scene2d.IScreenManager;
  * @author Georg Eckert
  */
 
-public class Services {
+public class Services
+{
     private static IMediaManager media;
     private static IAudioManager audio;
     private static IScreenManager screens;

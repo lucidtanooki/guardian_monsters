@@ -1,8 +1,9 @@
 package de.limbusdev.guardianmonsters.model.gamestate;
 
 import de.limbusdev.guardianmonsters.guardians.abilities.AbilityGraph;
+import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
-import de.limbusdev.guardianmonsters.guardians.monsters.Stat;
+import de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics;
 
 /**
  * SerializableMonster
@@ -10,7 +11,8 @@ import de.limbusdev.guardianmonsters.guardians.monsters.Stat;
  * @author Georg Eckert 2017
  */
 
-public class SerializableMonster {
+public class SerializableMonster
+{
 
     public int ID;
     public String nickname;
@@ -20,21 +22,21 @@ public class SerializableMonster {
     @ForSerializationOnly
     public SerializableMonster() {}
 
-    public SerializableMonster(Guardian guardian) {
-        this.ID = guardian.ID;
-        this.nickname = guardian.nickname;
-        this.graph = new SerializableAbilityGraph(guardian.abilityGraph);
-        this.stat = new SerializableStat(guardian.stat);
+    public SerializableMonster(AGuardian guardian) {
+        this.ID = guardian.getSpeciesDescription().getID();
+        this.nickname = guardian.getNickname();
+        this.graph = new SerializableAbilityGraph(guardian.getAbilityGraph());
+        this.stat = new SerializableStat(guardian.getIndividualStatistics());
     }
 
     public static Guardian deserialize(SerializableMonster sMonster) {
 
         AbilityGraph graph = SerializableAbilityGraph.deserialize(sMonster.graph);
-        Stat stat = SerializableStat.deserialize(sMonster.stat);
+        IndividualStatistics statistics = SerializableStat.deserialize(sMonster.stat);
 
         new SerializableStat();
 
-        return new Guardian(sMonster.ID, sMonster.nickname, graph, stat);
+        return null; //new Guardian("", sMonster.ID, sMonster.nickname, statistics, graph);
     }
 
 }

@@ -13,6 +13,7 @@ import de.limbusdev.guardianmonsters.fwmengine.menus.ui.team.TeamMemberSwitcher;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.widgets.LogoWithCounter;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.widgets.ScrollableWidget;
 import de.limbusdev.guardianmonsters.fwmengine.metamorphosis.MetamorphosisScreen;
+import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
 import de.limbusdev.guardianmonsters.services.Services;
 
@@ -27,19 +28,19 @@ import de.limbusdev.guardianmonsters.services.Services;
 public class AbilityGraphSubMenu extends AInventorySubMenu implements Listener<Guardian>,
     GraphWidget.Controller, TeamMemberSwitcher.Callbacks, AbilityDetailWidget.Callbacks {
 
-    private ArrayMap<Integer, Guardian> team;
+    private ArrayMap<Integer, AGuardian> team;
     private GraphWidget graphWidget;
     private AbilityDetailWidget details;
     private TeamMemberSwitcher switcher;
     LogoWithCounter remainingLevels;
 
     // ................................................................................. CONSTRUCTOR
-    public AbilityGraphSubMenu(Skin skin, ArrayMap<Integer, Guardian> team) {
+    public AbilityGraphSubMenu(Skin skin, ArrayMap<Integer, AGuardian> team) {
         super(skin);
         this.team = team;
 
-        for (Guardian m : this.team.values()) {
-            m.add(this);
+        for (AGuardian m : this.team.values()) {
+//           TODO m.add(this);
         }
 
         graphWidget = new GraphWidget(skin, this);
@@ -60,7 +61,7 @@ public class AbilityGraphSubMenu extends AInventorySubMenu implements Listener<G
         remainingLevels = new LogoWithCounter(skin, "label-bg-sandstone", "stats-symbol-exp");
         remainingLevels.setPosition(Constant.WIDTH - 2, 67, Align.bottomRight);
         addActor(remainingLevels);
-        remainingLevels.counter.setText(Integer.toString(this.team.get(0).stat.getAbilityLevels()));
+        remainingLevels.counter.setText(Integer.toString(this.team.get(0).getIndividualStatistics().getAbilityLevels()));
 
         details.init(this.team.get(0), 0, false);
 
@@ -71,8 +72,8 @@ public class AbilityGraphSubMenu extends AInventorySubMenu implements Listener<G
      */
     @Override
     public void refresh() {
-        Guardian activeGuardian = team.get(switcher.getCurrentlyChosen());
-        remainingLevels.counter.setText(Integer.toString(activeGuardian.stat.getAbilityLevels()));
+        AGuardian activeGuardian = team.get(switcher.getCurrentlyChosen());
+        remainingLevels.counter.setText(Integer.toString(activeGuardian.getIndividualStatistics().getAbilityLevels()));
     }
 
 
@@ -80,7 +81,7 @@ public class AbilityGraphSubMenu extends AInventorySubMenu implements Listener<G
     // ........................................................................... INTERFACE METHODS
     @Override
     public void onNodeClicked(int nodeID) {
-        Guardian guardian = team.get(switcher.getCurrentlyChosen());
+        AGuardian guardian = team.get(switcher.getCurrentlyChosen());
         details.init(guardian, nodeID, false);
     }
 
@@ -92,12 +93,12 @@ public class AbilityGraphSubMenu extends AInventorySubMenu implements Listener<G
 
     @Override
     public void onLearn(int nodeID) {
-        Guardian m = team.get(switcher.getCurrentlyChosen());
-        m.stat.consumeAbilityLevel();
-        m.abilityGraph.activateNode(nodeID);
+        AGuardian m = team.get(switcher.getCurrentlyChosen());
+        m.getIndividualStatistics().consumeAbilityLevel();
+        m.getAbilityGraph().activateNode(nodeID);
         details.init(m, nodeID, false);
-        if(m.abilityGraph.metamorphsAt(nodeID)) {
-            Services.getScreenManager().pushScreen(new MetamorphosisScreen(m.ID, m.ID+1));
+        if(m.getAbilityGraph().metamorphsAt(nodeID)) {
+            Services.getScreenManager().pushScreen(new MetamorphosisScreen(m.getSpeciesDescription().getID(), m.getSpeciesDescription().getID()+1));
         }
     }
 

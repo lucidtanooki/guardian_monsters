@@ -4,9 +4,6 @@
     "element": "earth",
     "name": "attEarth1_dirt",
     "damage": 5,
-    "sfxType": "hit",
-    "sfxIndex": 0,
-    "animationType": "moving_hor",
     "MPcost": 0,
     "damageType": "physical",
     "element": "earth"
@@ -16,9 +13,6 @@
     "element": "earth",
     "name": "attEarth2_mud",
     "damage": 10,
-    "sfxType": "hit",
-    "sfxIndex": 0,
-    "animationType": "moving_hor",
     "MPcost": 0,
     "damageType": "physical",
     "element": "earth"
@@ -28,9 +22,6 @@
     "element": "earth",
     "name": "attEarth3_stones",
     "damage": 20,
-    "sfxType": "hit",
-    "sfxIndex": 0,
-    "animationType": "moving_hor",
     "MPcost": 0,
     "damageType": "physical",
     "element": "earth"
@@ -38,11 +29,8 @@
   {
     "ID": 4,
     "element": "earth",
-    "name": "attEarth4_landslIDe",
+    "name": "attEarth4_landslide",
     "damage": 40,
-    "sfxType": "hit",
-    "sfxIndex": 0,
-    "animationType": "moving_hor",
     "MPcost": 0,
     "damageType": "physical",
     "element": "earth"

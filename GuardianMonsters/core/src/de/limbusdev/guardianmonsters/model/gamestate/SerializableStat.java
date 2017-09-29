@@ -1,9 +1,9 @@
 package de.limbusdev.guardianmonsters.model.gamestate;
 
-import de.limbusdev.guardianmonsters.guardians.ItemDB;
+import de.limbusdev.guardianmonsters.guardians.items.ItemDB;
 import de.limbusdev.guardianmonsters.guardians.items.equipment.Equipment;
-import de.limbusdev.guardianmonsters.guardians.monsters.BaseStat;
-import de.limbusdev.guardianmonsters.guardians.monsters.Stat;
+import de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics;
+import de.limbusdev.guardianmonsters.guardians.monsters.Statistics;
 
 /**
  * SerializableStat
@@ -17,7 +17,6 @@ public class SerializableStat {
     public int level;
     public int abilityLevels;
     public int exp;
-    public BaseStat base;
 
     public int HP, MP, PStr, PDef, MStr, MDef, Speed;
     public int HPmax, MPmax, PStrMax, PDefMax, MStrMax, MDefMax, SpeedMax;
@@ -27,61 +26,69 @@ public class SerializableStat {
     @ForSerializationOnly
     public SerializableStat() {}
 
-    public SerializableStat(Stat stat) {
-        this.character = stat.character;
-        this.level = stat.getLevel();
-        this.abilityLevels = stat.getAbilityLevels();
-        this.exp = stat.getEXP();
-        this.base = stat.base;
-        this.HP = stat.getHP();
-        this.MP = stat.getMP();
-        this.PStr = stat.getPStr();
-        this.PDef = stat.getPDef();
-        this.MStr = stat.getMStr();
-        this.MDef = stat.getMDef();
-        this.Speed = stat.getSpeed();
-        this.HPmax = stat.getHPmax();
-        this.MPmax = stat.getMPmax();
-        this.PStrMax = stat.getPStrMax();
-        this.PDefMax = stat.getPDefMax();
-        this.MStrMax = stat.getMStrMax();
-        this.MDefMax = stat.getMDefMax();
-        this.SpeedMax = stat.getSpeedMax();
-        if(stat.hasHandsEquipped()) {
-            this.hand = stat.getHands().getName();
+    public SerializableStat(IndividualStatistics statistics) {
+        this.character = statistics.character;
+        this.level = statistics.getLevel();
+        this.abilityLevels = statistics.getAbilityLevels();
+        this.exp = statistics.getEXP();
+        this.HP = statistics.getHP();
+        this.MP = statistics.getMP();
+        this.PStr = statistics.getPStr();
+        this.PDef = statistics.getPDef();
+        this.MStr = statistics.getMStr();
+        this.MDef = statistics.getMDef();
+        this.Speed = statistics.getSpeed();
+        this.HPmax = statistics.getHPmax();
+        this.MPmax = statistics.getMPmax();
+        this.PStrMax = statistics.getPStrMax();
+        this.PDefMax = statistics.getPDefMax();
+        this.MStrMax = statistics.getMStrMax();
+        this.MDefMax = statistics.getMDefMax();
+        this.SpeedMax = statistics.getSpeedMax();
+        if(statistics.hasHandsEquipped()) {
+            this.hand = statistics.getHands().getName();
         }
-        if(stat.hasBodyEquipped()) {
-            this.body = stat.getBody().getName();
+        if(statistics.hasBodyEquipped()) {
+            this.body = statistics.getBody().getName();
         }
-        if(stat.hasFeetEquipped()) {
-            this.foot = stat.getFeet().getName();
+        if(statistics.hasFeetEquipped()) {
+            this.foot = statistics.getFeet().getName();
         }
-        if(stat.hasHeadEquipped()) {
-            this.head = stat.getHead().getName();
+        if(statistics.hasHeadEquipped()) {
+            this.head = statistics.getHead().getName();
         }
     }
 
-    public static Stat deserialize(SerializableStat sStat) {
-        return new Stat(
-            sStat.level,
-            sStat.abilityLevels,
-            sStat.exp,
-            sStat.character,
-            sStat.base,
+    public static IndividualStatistics deserialize(SerializableStat sStat)
+    {
+        Statistics stats = new Statistics(
             sStat.HP,
             sStat.MP,
             sStat.PStr,
             sStat.PDef,
             sStat.MStr,
             sStat.MDef,
-            sStat.Speed,
+            sStat.Speed
+        );
+        Statistics maxStats = new Statistics(
             sStat.HPmax,
             sStat.MPmax,
             sStat.PStrMax,
             sStat.PDefMax,
             sStat.MStrMax,
             sStat.MDefMax,
-            sStat.SpeedMax,
+            sStat.SpeedMax
+        );
+
+        // TODO
+        return new IndividualStatistics(
+            null,
+            sStat.level,
+            sStat.abilityLevels,
+            sStat.exp,
+            sStat.character,
+            stats,
+            maxStats,
             (Equipment)ItemDB.getItem(sStat.hand),
             (Equipment)ItemDB.getItem(sStat.head),
             (Equipment)ItemDB.getItem(sStat.body),

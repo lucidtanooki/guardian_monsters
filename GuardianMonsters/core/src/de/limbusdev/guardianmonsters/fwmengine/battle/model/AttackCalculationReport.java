@@ -1,10 +1,8 @@
 package de.limbusdev.guardianmonsters.fwmengine.battle.model;
 
-import de.limbusdev.guardianmonsters.fwmengine.battle.ui.AnimationType;
-import de.limbusdev.guardianmonsters.media.SFXType;
 import de.limbusdev.guardianmonsters.guardians.Element;
 import de.limbusdev.guardianmonsters.guardians.abilities.Ability;
-import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
+import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 
 /**
  * Contains information about the effect of an attack on another monster
@@ -13,14 +11,14 @@ import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
  */
 public class AttackCalculationReport
 {
-    public Guardian attacker;
-    public Guardian defender;
+    public AGuardian attacker;
+    public AGuardian defender;
     public Ability attack;
 
     public int damage;
     public float efficiency;
 
-    public AttackCalculationReport(Guardian attacker, Guardian defender, int damage, float efficiency, Ability ability)
+    public AttackCalculationReport(AGuardian attacker, AGuardian defender, int damage, float efficiency, Ability ability)
     {
         this.attacker = attacker;
         this.defender = defender;
@@ -33,12 +31,12 @@ public class AttackCalculationReport
      * Report for defending monster
      * @param defender
      */
-    public AttackCalculationReport(Guardian defender)
+    public AttackCalculationReport(AGuardian defender)
     {
         this.attacker = defender;
         this.defender = null;
         this.damage = 0;
         this.efficiency = 0;
-        this.attack = new Ability(0, Ability.DamageType.PHYSICAL, Element.NONE, 0, "", SFXType.HIT.toString(), 0, AnimationType.NONE.toString());
+        this.attack = new Ability(0, Ability.DamageType.PHYSICAL, Element.NONE, 0, "");
     }
 }

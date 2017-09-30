@@ -18,6 +18,8 @@ import static org.junit.Assert.assertEquals;
 
 public class ModuleGuardiansJUnitTest
 {
+
+
     @Test
     public void guardianParsingTest()
     {
@@ -30,7 +32,6 @@ public class ModuleGuardiansJUnitTest
         assertEquals(1, XMLGuardianParser.parseSpeciesID(element));
         assertEquals(2, XMLGuardianParser.parseMetamorphsTo(element));
         assertEquals(0, XMLGuardianParser.parseMetamorphsFrom(element));
-
     }
 
     @Test

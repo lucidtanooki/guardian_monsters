@@ -4,8 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.XmlReader;
 
-import java.io.IOException;
-
 import de.limbusdev.guardianmonsters.guardians.abilities.AbilityGraph;
 import de.limbusdev.guardianmonsters.guardians.abilities.IAbilityGraph;
 
@@ -30,15 +28,7 @@ public class GuardianFactory extends AGuardianFactory
         // Read common Guardian Descriptions from XML file
         FileHandle handle = Gdx.files.internal("data/guardians.xml");
 
-        XmlReader xmlReader = new XmlReader();
-        XmlReader.Element rootElement;
-
-        try {
-            rootElement = xmlReader.parse(handle);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return;
-        }
+        XmlReader.Element rootElement = XMLGuardianParser.parseGuardianList(handle.readString());
 
         SpeciesDescription ancestor = null;
         for (int i = 0; i < rootElement.getChildCount(); i++)

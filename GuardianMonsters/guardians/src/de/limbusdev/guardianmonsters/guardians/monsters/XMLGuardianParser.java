@@ -52,27 +52,62 @@ import de.limbusdev.guardianmonsters.guardians.items.equipment.HeadEquipment;
  */
 public class XMLGuardianParser
 {
+    public static XmlReader.Element parseGuardianList(String xmlString)
+    {
+        XmlReader xmlReader = new XmlReader();
+        XmlReader.Element rootElement;
+
+        rootElement = xmlReader.parse(xmlString);
+
+        return rootElement;
+    }
+
+    public static int parseSpeciesID(XmlReader.Element element)
+    {
+        return element.getIntAttribute("speciesID", 0);
+    }
+
+    public static String parsenameID(XmlReader.Element element)
+    {
+        return element.getAttribute("nameID", "gm000");
+    }
+
+    public static int parseMetamorphsFrom(XmlReader.Element element)
+    {
+        return element.getInt("metamorphsFrom", 0);
+    }
+
+    public static int parseMetamorphsTo(XmlReader.Element element)
+    {
+        return element.getInt("metamorphsTo", 0);
+    }
+
     public static SpeciesDescription parseMonster(XmlReader.Element element, SpeciesDescription ancestor)
     {
         SpeciesDescription speciesDescription;
 
         // ......................................................................................... name & id
-        int speciesID = element.getIntAttribute("speciesID", 0);
-        String nameID = element.getAttribute("nameID", "gm000");
+        int speciesID = parseSpeciesID(element);
+        String nameID = parsenameID(element);
+
+        // ......................................................................................... metamorphosis
+        int metamorphsFrom = parseMetamorphsFrom(element);
+        int metamorphsTo = parseMetamorphsTo(element);
 
         // ......................................................................................... elements
         Array<Element> elements = parseElements(element);
-
-        // ......................................................................................... metamorphosis
-        int metamorphsFrom = element.getInt("metamorphsFrom", 0);
-        int metamorphsTo   = element.getInt("metamorphsTo",  0);
-
 
 
         if(ancestor != null) {
 
             // ..................................................................................... ancestor
-            speciesDescription = new SpeciesDescription(speciesID, nameID, metamorphsTo, elements, ancestor);
+            speciesDescription = new SpeciesDescription(
+                speciesID,
+                nameID,
+                metamorphsTo,
+                elements,
+                ancestor
+            );
 
         } else {
             // ..................................................................................... metamorphosis
@@ -269,4 +304,6 @@ public class XMLGuardianParser
         }
         return stat;
     }
+
+
 }

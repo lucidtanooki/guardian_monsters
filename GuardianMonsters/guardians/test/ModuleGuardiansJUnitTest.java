@@ -9,6 +9,7 @@ import de.limbusdev.guardianmonsters.guardians.abilities.AbilityDB;
 import de.limbusdev.guardianmonsters.guardians.monsters.XMLGuardianParser;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * GuardiansJUnitTestAbilities
@@ -18,8 +19,6 @@ import static org.junit.Assert.assertEquals;
 
 public class ModuleGuardiansJUnitTest
 {
-
-
     @Test
     public void guardianParsingTest()
     {
@@ -32,6 +31,9 @@ public class ModuleGuardiansJUnitTest
         assertEquals(1, XMLGuardianParser.parseSpeciesID(element));
         assertEquals(2, XMLGuardianParser.parseMetamorphsTo(element));
         assertEquals(0, XMLGuardianParser.parseMetamorphsFrom(element));
+        assertTrue(XMLGuardianParser.parseMetamorphosisNodes(element).contains(91, true));
+        assertTrue(XMLGuardianParser.parseMetamorphosisNodes(element).contains(92, true));
+        assertTrue(XMLGuardianParser.parseElements(element).contains(Element.EARTH, true));
     }
 
     @Test

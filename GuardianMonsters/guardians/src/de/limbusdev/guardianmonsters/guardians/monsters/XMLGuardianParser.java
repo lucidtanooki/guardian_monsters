@@ -184,7 +184,7 @@ public class XMLGuardianParser
      * @param xmlRootElement
      * @return
      */
-    private static Array<Element> parseElements(XmlReader.Element xmlRootElement)
+    public static Array<Element> parseElements(XmlReader.Element xmlRootElement)
     {
         XmlReader.Element elemElement = xmlRootElement.getChildByName("elements");
 
@@ -211,7 +211,7 @@ public class XMLGuardianParser
      * @param xmlRootElement
      * @return
      */
-    private static Array<Integer> parseMetamorphosisNodes(XmlReader.Element xmlRootElement)
+    public static Array<Integer> parseMetamorphosisNodes(XmlReader.Element xmlRootElement)
     {
         Array<Integer> metamorphosisNodes = new Array<>();
         XmlReader.Element metaElement = xmlRootElement.getChildByName("metamorphosisNodes");
@@ -236,7 +236,7 @@ public class XMLGuardianParser
      * @param xmlRootElement
      * @return
      */
-    private static ArrayMap<Integer, Ability> parseAbilities(XmlReader.Element xmlRootElement)
+    public static ArrayMap<Integer, Ability> parseAbilities(XmlReader.Element xmlRootElement)
     {
         XmlReader.Element element = xmlRootElement.getChildByName("attacks");
         ArrayMap<Integer, Ability> abilities = new ArrayMap<>();
@@ -263,7 +263,7 @@ public class XMLGuardianParser
      * @param xmlRootElement
      * @return
      */
-    private static ArrayMap<Integer, BodyPart> parseEquipmentGraph(XmlReader.Element xmlRootElement)
+    public static ArrayMap<Integer, BodyPart> parseEquipmentGraph(XmlReader.Element xmlRootElement)
     {
         XmlReader.Element equipGraphElem = xmlRootElement.getChildByName("ability-graph-equip");
         ArrayMap<Integer, BodyPart> equipmentGraph = new ArrayMap<>();
@@ -284,7 +284,7 @@ public class XMLGuardianParser
      * @param xmlRootElement
      * @return
      */
-    private static CommonStatistics parseBaseStats(XmlReader.Element xmlRootElement, int ID)
+    public static CommonStatistics parseBaseStats(XmlReader.Element xmlRootElement, int ID)
     {
         XmlReader.Element statEl = xmlRootElement.getChildByName("basestats");
 

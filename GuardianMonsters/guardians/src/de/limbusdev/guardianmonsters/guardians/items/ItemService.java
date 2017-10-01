@@ -1,11 +1,8 @@
 package de.limbusdev.guardianmonsters.guardians.items;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.XmlReader;
-
-import java.io.IOException;
 
 
 /**
@@ -14,26 +11,21 @@ import java.io.IOException;
  * @author Georg Eckert 2017
  */
 
-public class ItemDB {
-
-    private static ItemDB instance;
+public class ItemService implements IItemService
+{
+    private static ItemService instance;
     private ArrayMap<String, Item> items;
 
-    private ItemDB() {
+    private ItemService(String xmlItems)
+    {
         items = new ArrayMap<>();
 
-        FileHandle handle = Gdx.files.internal("data/items.xml");
         XmlReader xmlReader = new XmlReader();
         XmlReader.Element element;
-        try {
-            element = xmlReader.parse(handle);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return;
-        }
+        element = xmlReader.parse(xmlItems);
 
         for(int i=0; i<element.getChildCount(); i++) {
-            Item item = de.limbusdev.guardianmonsters.guardians.items.XMLItemParser.parseXmlItem(element.getChild(i));
+            Item item = XMLItemParser.parseXmlItem(element.getChild(i));
             if(!items.containsKey(item.getName())) {
                 items.put(item.getName(), item);
             }
@@ -42,16 +34,23 @@ public class ItemDB {
 
 
     // ............................................................................. GETTER & SETTER
-    public static ItemDB getInstance() {
+    public static ItemService getInstance(String xmlItems)
+    {
         if(instance == null) {
-            instance = new ItemDB();
+            instance = new ItemService(xmlItems);
         }
         return instance;
     }
 
-    public static Item getItem(String name) {
-        ItemDB db = getInstance();
-        return db.items.get(name);
+    public static ItemService getInstanceFromFile(String xmlItemsFilePath)
+    {
+        String xml = Gdx.files.internal(xmlItemsFilePath).readString();
+        return getInstance(xml);
+    }
+
+    public Item getItem(String name)
+    {
+        return items.get(name);
     }
 
 }

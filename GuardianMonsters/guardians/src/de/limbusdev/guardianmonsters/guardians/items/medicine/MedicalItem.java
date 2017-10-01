@@ -67,4 +67,14 @@ public class MedicalItem extends AMedicalItem
                 return false;
         }
     }
+
+    public int getValue()
+    {
+        return value;
+    }
+
+    public Type getType()
+    {
+        return type;
+    }
 }

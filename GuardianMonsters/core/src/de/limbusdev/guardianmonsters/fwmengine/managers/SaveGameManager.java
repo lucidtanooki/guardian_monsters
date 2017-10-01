@@ -28,7 +28,7 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.SaveGameComp
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TeamComponent;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.GameArea;
 import de.limbusdev.guardianmonsters.guardians.items.Inventory;
-import de.limbusdev.guardianmonsters.guardians.items.ItemDB;
+import de.limbusdev.guardianmonsters.guardians.items.ItemService;
 import de.limbusdev.guardianmonsters.model.gamestate.GameState;
 import de.limbusdev.guardianmonsters.model.gamestate.SerializableGameState;
 
@@ -105,16 +105,16 @@ public class SaveGameManager extends EntitySystem {
     public static GameState newSaveGame() {
         // Inventory
         Inventory inventory = new Inventory();
-        inventory.putItemInInventory(ItemDB.getInstance().getItem("bread"));
-        inventory.putItemInInventory(ItemDB.getInstance().getItem("bread"));
-        inventory.putItemInInventory(ItemDB.getInstance().getItem("bread"));
-        inventory.putItemInInventory(ItemDB.getInstance().getItem("bread"));
-        inventory.putItemInInventory(ItemDB.getInstance().getItem("potion-blue"));
-        inventory.putItemInInventory(ItemDB.getInstance().getItem("potion-blue"));
-        inventory.putItemInInventory(ItemDB.getInstance().getItem("potion-blue"));
-        inventory.putItemInInventory(ItemDB.getInstance().getItem("angel-tear"));
-        inventory.putItemInInventory(ItemDB.getInstance().getItem("sword-wood"));
-        inventory.putItemInInventory(ItemDB.getInstance().getItem("claws-wood"));
+        inventory.putItemInInventory(ItemService.getInstance().getItem("bread"));
+        inventory.putItemInInventory(ItemService.getInstance().getItem("bread"));
+        inventory.putItemInInventory(ItemService.getInstance().getItem("bread"));
+        inventory.putItemInInventory(ItemService.getInstance().getItem("bread"));
+        inventory.putItemInInventory(ItemService.getInstance().getItem("potion-blue"));
+        inventory.putItemInInventory(ItemService.getInstance().getItem("potion-blue"));
+        inventory.putItemInInventory(ItemService.getInstance().getItem("potion-blue"));
+        inventory.putItemInInventory(ItemService.getInstance().getItem("angel-tear"));
+        inventory.putItemInInventory(ItemService.getInstance().getItem("sword-wood"));
+        inventory.putItemInInventory(ItemService.getInstance().getItem("claws-wood"));
 
         TeamComponent team = new TeamComponent();
         team.team.put(0, BattleFactory.getInstance().createMonster(1));

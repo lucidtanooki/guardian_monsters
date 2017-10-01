@@ -1,6 +1,6 @@
 package de.limbusdev.guardianmonsters.model.gamestate;
 
-import de.limbusdev.guardianmonsters.guardians.items.ItemDB;
+import de.limbusdev.guardianmonsters.guardians.items.ItemService;
 import de.limbusdev.guardianmonsters.guardians.items.equipment.Equipment;
 import de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics;
 import de.limbusdev.guardianmonsters.guardians.monsters.Statistics;
@@ -89,10 +89,10 @@ public class SerializableStat {
             sStat.character,
             stats,
             maxStats,
-            (Equipment)ItemDB.getItem(sStat.hand),
-            (Equipment)ItemDB.getItem(sStat.head),
-            (Equipment)ItemDB.getItem(sStat.body),
-            (Equipment)ItemDB.getItem(sStat.foot)
+            (Equipment) ItemService.getItem(sStat.hand),
+            (Equipment) ItemService.getItem(sStat.head),
+            (Equipment) ItemService.getItem(sStat.body),
+            (Equipment) ItemService.getItem(sStat.foot)
         );
     }
 }

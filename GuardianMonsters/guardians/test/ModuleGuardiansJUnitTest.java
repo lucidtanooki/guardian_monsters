@@ -8,6 +8,9 @@ import de.limbusdev.guardianmonsters.guardians.GuardiansServiceLocator;
 import de.limbusdev.guardianmonsters.guardians.abilities.Ability;
 import de.limbusdev.guardianmonsters.guardians.abilities.AbilityService;
 import de.limbusdev.guardianmonsters.guardians.abilities.IAbilityService;
+import de.limbusdev.guardianmonsters.guardians.items.Item;
+import de.limbusdev.guardianmonsters.guardians.items.ItemService;
+import de.limbusdev.guardianmonsters.guardians.items.medicine.MedicalItem;
 import de.limbusdev.guardianmonsters.guardians.monsters.XMLGuardianParser;
 
 import static org.junit.Assert.assertEquals;
@@ -36,6 +39,8 @@ public class ModuleGuardiansJUnitTest
         assertTrue(XMLGuardianParser.parseMetamorphosisNodes(element).contains(91, true));
         assertTrue(XMLGuardianParser.parseMetamorphosisNodes(element).contains(92, true));
         assertTrue(XMLGuardianParser.parseElements(element).contains(Element.EARTH, true));
+
+        System.out.println("[Test 1] Guardian parsed correctly");
     }
 
     @Test
@@ -81,5 +86,30 @@ public class ModuleGuardiansJUnitTest
         assertEquals(ability.name, "attNone2_kick");
         assertEquals(ability.MPcost, 10);
         assertEquals(ability.damageType, Ability.DamageType.MAGICAL);
+
+        System.out.println("[Test 2] Ability parsed correctly");
+    }
+
+    @Test
+    public void itemParsingTest()
+    {
+        String xml = "<items><!-- HP Curing Items -->\n" +
+            "    <medicine>\n" +
+            "        <nameID>bread</nameID>\n" +
+            "        <value>100</value>\n" +
+            "        <type>HPcure</type>\n" +
+            "    </medicine>" +
+            "</items>";
+
+        GuardiansServiceLocator.provide(ItemService.getInstance(xml));
+
+        Item item = GuardiansServiceLocator.getItems().getItem("bread");
+        assertEquals("bread", item.getName());
+        assertEquals(MedicalItem.class, item.getClass());
+        assertEquals(Item.Category.MEDICINE, item.getCategory());
+        assertEquals(100, ((MedicalItem)item).getValue());
+        assertEquals(MedicalItem.Type.HP_CURE, ((MedicalItem)item).getType());
+
+        System.out.println("[Test 3] Item parsed correctly");
     }
 }

@@ -10,17 +10,18 @@ import com.badlogic.gdx.utils.JsonValue;
 import java.util.ArrayList;
 
 import de.limbusdev.guardianmonsters.guardians.Element;
+import de.limbusdev.guardianmonsters.guardians.GuardiansServiceLocator;
 
 /**
  * Contains all existing attacks, sorted by element
  * @author Georg Eckert 2017
  */
-public class AbilityDB
+public class AbilityService implements IAbilityService
 {
-    private static AbilityDB instance;
+    private static AbilityService instance;
     private ArrayMap<Element, ArrayMap<Integer, Ability>> abilities;
 
-    private AbilityDB()
+    private AbilityService(ArrayMap<Element,String> jsonAbilitiesResources)
     {
         abilities = new ArrayMap<>();
 
@@ -34,7 +35,7 @@ public class AbilityDB
         }
     }
 
-    public static ArrayMap<Integer, Ability> readAbilitiesFromJsonString(String jsonString)
+    private static ArrayMap<Integer, Ability> readAbilitiesFromJsonString(String jsonString)
     {
         ArrayMap<Integer,Ability> elAbilities = new ArrayMap<>();
         Json json = new Json();
@@ -58,12 +59,39 @@ public class AbilityDB
         return elAbilities;
     }
 
-    public static synchronized AbilityDB getInstance()
+    /**
+     * Best practice: Use only once, when providing {@link IAbilityService} to
+     * {@link GuardiansServiceLocator}, afterwards always retrieve it from there.
+     *
+     * @param jsonAbilitiesResources
+     * @return
+     */
+    public static synchronized AbilityService getInstance(ArrayMap<Element,String> jsonAbilitiesResources)
     {
         if(instance == null) {
-            instance = new AbilityDB();
+            instance = new AbilityService(jsonAbilitiesResources);
         }
         return instance;
+    }
+
+    /**
+     * Best practice: Use only once, when providing {@link IAbilityService} to
+     * {@link GuardiansServiceLocator}, afterwards always retrieve it from there.
+     *
+     * @param jsonFilePaths Files that contain Abilities in Json format
+     * @return
+     */
+    public static synchronized AbilityService getInstanceFromFile(ArrayMap<Element,String> jsonFilePaths)
+    {
+        ArrayMap<Element,String> jsonResources = new ArrayMap<>();
+        for(Element key : jsonFilePaths.keys()) {
+
+            FileHandle handleJson = Gdx.files.internal(jsonFilePaths.get(key));
+            String jsonString = handleJson.readString();
+            jsonResources.put(key, jsonString);
+        }
+
+        return getInstance(jsonResources);
     }
 
     /**
@@ -72,10 +100,10 @@ public class AbilityDB
      * @param index
      * @return
      */
-    public static Ability getAbility(Element e, int index)
+    @Override
+    public Ability getAbility(Element e, int index)
     {
-        AbilityDB db = getInstance();
-        return db.abilities.get(e).get(index);
+        return abilities.get(e).get(index);
     }
 
     /**

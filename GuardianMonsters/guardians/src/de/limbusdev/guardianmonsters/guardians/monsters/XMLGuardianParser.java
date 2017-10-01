@@ -6,10 +6,13 @@ import com.badlogic.gdx.utils.XmlReader;
 
 import de.limbusdev.guardianmonsters.guardians.Constant;
 import de.limbusdev.guardianmonsters.guardians.Element;
+import de.limbusdev.guardianmonsters.guardians.GuardiansServiceLocator;
 import de.limbusdev.guardianmonsters.guardians.abilities.Ability;
-import de.limbusdev.guardianmonsters.guardians.abilities.AbilityDB;
+import de.limbusdev.guardianmonsters.guardians.abilities.IAbilityService;
+import de.limbusdev.guardianmonsters.guardians.abilities.Node;
 import de.limbusdev.guardianmonsters.guardians.items.equipment.BodyEquipment;
 import de.limbusdev.guardianmonsters.guardians.items.equipment.BodyPart;
+import de.limbusdev.guardianmonsters.guardians.items.equipment.Equipment;
 import de.limbusdev.guardianmonsters.guardians.items.equipment.FootEquipment;
 import de.limbusdev.guardianmonsters.guardians.items.equipment.HandEquipment;
 import de.limbusdev.guardianmonsters.guardians.items.equipment.HeadEquipment;
@@ -200,7 +203,7 @@ public class XMLGuardianParser
     }
 
     /**
-     * Parses the the {@link de.limbusdev.guardianmonsters.guardians.abilities.Node}s which allow a
+     * Parses the the {@link Node}s which allow a
      * guardian to metamorph. The XML element (guardian root element) must provide this structure:
      *
      * <metamorphosisNodes>
@@ -240,9 +243,12 @@ public class XMLGuardianParser
     {
         XmlReader.Element element = xmlRootElement.getChildByName("attacks");
         ArrayMap<Integer, Ability> abilities = new ArrayMap<>();
+
         if(element != null) {
-            AbilityDB attInf = AbilityDB.getInstance();
-            for(int i = 0; i < element.getChildCount(); i++) {
+
+            IAbilityService attInf = GuardiansServiceLocator.getAbilities();
+            for(int i = 0; i < element.getChildCount(); i++)
+            {
                 XmlReader.Element a = element.getChild(i);
                 int attID = a.getIntAttribute("abilityID", 0);
                 Element el = Element.valueOf(a.getAttribute("element").toUpperCase());
@@ -250,12 +256,13 @@ public class XMLGuardianParser
                 int abilityPos = a.getIntAttribute("abilityPos", 0);
                 abilities.put(abilityPos, att);
             }
+
         }
         return abilities;
     }
 
     /**
-     * Parses the {@link de.limbusdev.guardianmonsters.guardians.items.equipment.Equipment} nodes of
+     * Parses the {@link Equipment} nodes of
      * a Guardian. The XML element must provide this structure:
      *
      * <ability-graph-equip body="21" hands="23" feet="89" head="90" />

@@ -1,8 +1,9 @@
 package de.limbusdev.guardianmonsters.model.gamestate;
 
 import de.limbusdev.guardianmonsters.guardians.Element;
+import de.limbusdev.guardianmonsters.guardians.GuardiansServiceLocator;
 import de.limbusdev.guardianmonsters.guardians.abilities.Ability;
-import de.limbusdev.guardianmonsters.guardians.abilities.AbilityDB;
+import de.limbusdev.guardianmonsters.guardians.abilities.IAbilityService;
 
 /**
  * SerializableAbility
@@ -22,8 +23,10 @@ public class SerializableAbility {
         this.ID = ability.ID;
     }
 
-    public static Ability deserialize(SerializableAbility sAbility) {
-        Ability ability = AbilityDB.getAbility(sAbility.element, sAbility.ID);
+    public static Ability deserialize(SerializableAbility sAbility)
+    {
+        IAbilityService abilities = GuardiansServiceLocator.getAbilities();
+        Ability ability = abilities.getAbility(sAbility.element, sAbility.ID);
         return ability;
     }
 }

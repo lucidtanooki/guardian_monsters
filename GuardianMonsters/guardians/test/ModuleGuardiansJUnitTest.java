@@ -46,22 +46,23 @@ public class ModuleGuardiansJUnitTest
     @Test
     public void abilityParsingTest()
     {
-        String testJson = "[\n" +
-            "  {\n" +
-            "    \"ID\": 1,\n" +
-            "    \"element\": \"none\",\n" +
-            "    \"name\": \"attNone1_selfdef\",\n" +
-            "    \"damage\": 0,\n" +
-            "    \"MPcost\": 0,\n" +
-            "    \"damageType\": \"physical\"\n" +
-            "  },\n" +
-            "  {\n" +
-            "    \"ID\": 2,\n" +
-            "    \"element\": \"earth\",\n" +
-            "    \"name\": \"attNone2_kick\",\n" +
-            "    \"damage\": 50,\n" +
-            "    \"MPcost\": 10,\n" +
-            "    \"damageType\": \"magical\"\n" +
+        String testJson =
+            "[" +
+            "  {" +
+            "    \"ID\": 1," +
+            "    \"element\": \"none\"," +
+            "    \"name\": \"attNone1_selfdef\"," +
+            "    \"damage\": 0," +
+            "    \"MPcost\": 0," +
+            "    \"damageType\": \"physical\"" +
+            "  }," +
+            "  {" +
+            "    \"ID\": 2," +
+            "    \"element\": \"earth\"," +
+            "    \"name\": \"attNone2_kick\"," +
+            "    \"damage\": 50," +
+            "    \"MPcost\": 10," +
+            "    \"damageType\": \"magical\"" +
             "  }" +
             "]";
 
@@ -93,11 +94,12 @@ public class ModuleGuardiansJUnitTest
     @Test
     public void itemParsingTest()
     {
-        String xml = "<items><!-- HP Curing Items -->\n" +
-            "    <medicine>\n" +
-            "        <nameID>bread</nameID>\n" +
-            "        <value>100</value>\n" +
-            "        <type>HPcure</type>\n" +
+        String xml =
+            "<items>" +
+            "    <medicine>" +
+            "        <nameID>bread</nameID>" +
+            "        <value>100</value>" +
+            "        <type>HPcure</type>" +
             "    </medicine>" +
             "</items>";
 

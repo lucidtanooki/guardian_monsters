@@ -11,14 +11,16 @@ import de.limbusdev.guardianmonsters.guardians.abilities.IAbilityService;
  * @author Georg Eckert 2017
  */
 
-public class SerializableAbility {
+public class SerializableAbility
+{
     public Element element;
     public int ID;
 
     @ForSerializationOnly
     public SerializableAbility() {}
 
-    public SerializableAbility(Ability ability) {
+    public SerializableAbility(Ability ability)
+    {
         this.element = ability.element;
         this.ID = ability.ID;
     }

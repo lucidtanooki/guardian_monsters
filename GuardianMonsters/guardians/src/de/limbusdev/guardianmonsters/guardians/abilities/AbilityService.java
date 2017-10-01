@@ -25,13 +25,10 @@ public class AbilityService implements IAbilityService
     {
         abilities = new ArrayMap<>();
 
-        String[] elements = {"None", "Fire", "Earth", "Water"};
-        for(String el : elements)
+        for(Element key : jsonAbilitiesResources.keys())
         {
-            FileHandle handleJson = Gdx.files.internal("data/abilities" + el + ".json");
-            String jsonString = handleJson.readString();
-            ArrayMap<Integer,Ability> elAbilities = readAbilitiesFromJsonString(jsonString);
-            abilities.put(Element.valueOf(el.toUpperCase()), elAbilities);
+            ArrayMap<Integer,Ability> elAbilities = readAbilitiesFromJsonString(jsonAbilitiesResources.get(key));
+            abilities.put(key, elAbilities);
         }
     }
 

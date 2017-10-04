@@ -50,6 +50,9 @@ public class GuardianMonsters extends Game
         Services.getL18N().dispose();
         Services.getScreenManager().dispose();
         super.dispose();
+
+        // Dispose of Modules
+        ModuleGuardians.destroyModule();
     }
 
 

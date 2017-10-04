@@ -52,4 +52,10 @@ public class ItemService implements IItemService
         return items.get(name);
     }
 
+    @Override
+    public void destroy()
+    {
+        instance = null;
+    }
+
 }

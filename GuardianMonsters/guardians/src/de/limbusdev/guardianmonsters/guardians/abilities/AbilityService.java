@@ -103,6 +103,12 @@ public class AbilityService implements IAbilityService
         return abilities.get(e).get(index);
     }
 
+    @Override
+    public void destroy()
+    {
+        instance = null;
+    }
+
     /**
      * Simple Container for JSON parsed Object
      */

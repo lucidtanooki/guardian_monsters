@@ -62,4 +62,11 @@ public class GuardianFactory extends AGuardianFactory
         // Return complete Guardian
         return newGuardian;
     }
+
+    @Override
+    public void destroy()
+    {
+        super.destroy();
+        instance = null;
+    }
 }

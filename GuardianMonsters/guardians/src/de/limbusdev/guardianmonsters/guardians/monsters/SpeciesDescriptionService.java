@@ -86,4 +86,10 @@ public class SpeciesDescriptionService implements ISpeciesDescriptionService
 
         return ancestors;
     }
+
+    @Override
+    public void destroy()
+    {
+        instance = null;
+    }
 }

@@ -1,0 +1,38 @@
+[
+  {
+    "ID": 1,
+    "element": "earth",
+    "name": "attEarth1_dirt",
+    "damage": 5,
+    "MPcost": 0,
+    "damageType": "physical",
+    "element": "earth"
+  },
+  {
+    "ID": 2,
+    "element": "earth",
+    "name": "attEarth2_mud",
+    "damage": 10,
+    "MPcost": 0,
+    "damageType": "physical",
+    "element": "earth"
+  },
+  {
+    "ID": 3,
+    "element": "earth",
+    "name": "attEarth3_stones",
+    "damage": 20,
+    "MPcost": 0,
+    "damageType": "physical",
+    "element": "earth"
+  },
+  {
+    "ID": 4,
+    "element": "earth",
+    "name": "attEarth4_landslide",
+    "damage": 40,
+    "MPcost": 0,
+    "damageType": "physical",
+    "element": "earth"
+  }
+]

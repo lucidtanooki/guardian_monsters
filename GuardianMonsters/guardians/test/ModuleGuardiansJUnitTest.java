@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import de.limbusdev.guardianmonsters.guardians.Element;
 import de.limbusdev.guardianmonsters.guardians.GuardiansServiceLocator;
+import de.limbusdev.guardianmonsters.guardians.ModuleGuardians;
 import de.limbusdev.guardianmonsters.guardians.abilities.Ability;
 import de.limbusdev.guardianmonsters.guardians.abilities.AbilityService;
 import de.limbusdev.guardianmonsters.guardians.abilities.IAbilityService;
@@ -27,6 +28,8 @@ public class ModuleGuardiansJUnitTest
     @Test
     public void guardianParsingTest()
     {
+        ModuleGuardians.destroyModule();
+
         String testJsonString = "<guardians><guardian speciesID=\"1\" nameID=\"gm001_fordin\"><metamorphsTo>2</metamorphsTo><metamorphosisNodes><metamorphosisNode>91</metamorphosisNode><metamorphosisNode>92</metamorphosisNode></metamorphosisNodes><elements><element>earth</element></elements><attacks><ability element=\"none\"  abilityID=\"2\" abilityPos=\"0\" /><ability element=\"earth\" abilityID=\"2\" abilityPos=\"13\" /><ability element=\"earth\" abilityID=\"3\" abilityPos=\"11\" /><ability element=\"earth\" abilityID=\"4\" abilityPos=\"15\" /></attacks><basestats hp=\"300\" mp=\"50\" speed=\"10\" pstr=\"10\" pdef=\"10\" mstr=\"10\" mdef=\"10\" /><equipment-compatibility head=\"bridle\" hands=\"claws\" body=\"barding\" feet=\"shinprotection\" /><ability-graph-equip body=\"21\" hands=\"23\" feet=\"89\" head=\"90\" /></guardian><guardian speciesID=\"2\" nameID=\"gm002_stegofor\"><metamorphsFrom>1</metamorphsFrom><metamorphsTo>3</metamorphsTo><elements><element>earth</element><element>forest</element></elements></guardian></guardians>\n";
         XmlReader.Element rootElement = XMLGuardianParser.parseGuardianList(testJsonString);
 
@@ -46,6 +49,8 @@ public class ModuleGuardiansJUnitTest
     @Test
     public void abilityParsingTest()
     {
+        ModuleGuardians.destroyModule();
+
         String testJson =
             "[" +
             "  {" +
@@ -94,6 +99,8 @@ public class ModuleGuardiansJUnitTest
     @Test
     public void itemParsingTest()
     {
+        ModuleGuardians.destroyModule();
+
         String xml =
             "<items>" +
             "    <medicine>" +
@@ -113,5 +120,13 @@ public class ModuleGuardiansJUnitTest
         assertEquals(MedicalItem.Type.HP_CURE, ((MedicalItem)item).getType());
 
         System.out.println("[Test 3] Item parsed correctly");
+    }
+
+    @Test
+    public void moduleTest()
+    {
+        ModuleGuardians.destroyModule();
+        ModuleGuardians.initModuleForTesting();
+        ModuleGuardians.destroyModule();
     }
 }

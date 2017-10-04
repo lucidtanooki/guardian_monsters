@@ -1,0 +1,18 @@
+[
+  {
+    "ID": 1,
+    "element": "none",
+    "name": "attNone1_selfdef",
+    "damage": 0,
+    "MPcost": 0,
+    "damageType": "physical"
+  },
+  {
+    "ID": 2,
+    "element": "none",
+    "name": "attNone2_kick",
+    "damage": 50,
+    "MPcost": 0,
+    "damageType": "physical"
+  }
+]

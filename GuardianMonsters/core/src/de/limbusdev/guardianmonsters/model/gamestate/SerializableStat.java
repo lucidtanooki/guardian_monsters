@@ -1,6 +1,7 @@
 package de.limbusdev.guardianmonsters.model.gamestate;
 
-import de.limbusdev.guardianmonsters.guardians.items.ItemService;
+import de.limbusdev.guardianmonsters.guardians.GuardiansServiceLocator;
+import de.limbusdev.guardianmonsters.guardians.items.IItemService;
 import de.limbusdev.guardianmonsters.guardians.items.equipment.Equipment;
 import de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics;
 import de.limbusdev.guardianmonsters.guardians.monsters.Statistics;
@@ -81,6 +82,9 @@ public class SerializableStat {
         );
 
         // TODO
+
+        IItemService items = GuardiansServiceLocator.getItems();
+
         return new IndividualStatistics(
             null,
             sStat.level,
@@ -89,10 +93,10 @@ public class SerializableStat {
             sStat.character,
             stats,
             maxStats,
-            (Equipment) ItemService.getItem(sStat.hand),
-            (Equipment) ItemService.getItem(sStat.head),
-            (Equipment) ItemService.getItem(sStat.body),
-            (Equipment) ItemService.getItem(sStat.foot)
+            (Equipment) items.getItem(sStat.hand),
+            (Equipment) items.getItem(sStat.head),
+            (Equipment) items.getItem(sStat.body),
+            (Equipment) items.getItem(sStat.foot)
         );
     }
 }

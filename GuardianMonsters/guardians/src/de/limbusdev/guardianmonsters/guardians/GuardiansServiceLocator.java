@@ -1,5 +1,7 @@
 package de.limbusdev.guardianmonsters.guardians;
 
+import com.github.czyzby.autumn.annotation.Inject;
+
 import de.limbusdev.guardianmonsters.guardians.abilities.Ability;
 import de.limbusdev.guardianmonsters.guardians.abilities.IAbilityService;
 import de.limbusdev.guardianmonsters.guardians.items.IItemService;
@@ -16,7 +18,9 @@ import de.limbusdev.guardianmonsters.guardians.items.medicine.MedicalItem;
 
 public class GuardiansServiceLocator
 {
+    @Inject
     private static IAbilityService abilities;
+    @Inject
     private static IItemService items;
 
     public static void provide(IAbilityService service) {

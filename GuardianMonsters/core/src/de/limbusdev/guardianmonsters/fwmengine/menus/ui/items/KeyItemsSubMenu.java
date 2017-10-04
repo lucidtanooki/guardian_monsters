@@ -8,9 +8,10 @@ import com.badlogic.gdx.utils.ArrayMap;
 
 import de.limbusdev.guardianmonsters.Constant;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.AInventorySubMenu;
+import de.limbusdev.guardianmonsters.guardians.GuardiansServiceLocator;
+import de.limbusdev.guardianmonsters.guardians.items.IItemService;
 import de.limbusdev.guardianmonsters.guardians.items.Inventory;
 import de.limbusdev.guardianmonsters.guardians.items.Item;
-import de.limbusdev.guardianmonsters.guardians.items.ItemService;
 import de.limbusdev.guardianmonsters.utils.geometry.IntVec2;
 
 /**
@@ -37,7 +38,7 @@ public class KeyItemsSubMenu extends AInventorySubMenu {
 
         keyItemPositions = new ArrayMap<>();
 
-        ItemService itemDB = ItemService.getInstance();
+        IItemService itemDB = GuardiansServiceLocator.getItems();
 
         keyItemPositions.put(itemDB.getItem("relict-earth"),        new IntVec2(70,5));
         keyItemPositions.put(itemDB.getItem("relict-flame"),        new IntVec2(6,5));

@@ -25,8 +25,9 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.GameArea;
 import de.limbusdev.guardianmonsters.fwmengine.world.model.MapDescriptionInfo;
 import de.limbusdev.guardianmonsters.fwmengine.world.model.MapPersonInformation;
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.AnimatedPersonSprite;
+import de.limbusdev.guardianmonsters.guardians.GuardiansServiceLocator;
+import de.limbusdev.guardianmonsters.guardians.items.IItemService;
 import de.limbusdev.guardianmonsters.guardians.items.Inventory;
-import de.limbusdev.guardianmonsters.guardians.items.ItemService;
 import de.limbusdev.guardianmonsters.model.gamestate.GameState;
 import de.limbusdev.guardianmonsters.utils.UnitConverter;
 import de.limbusdev.guardianmonsters.utils.geometry.IntVec2;
@@ -35,7 +36,8 @@ import de.limbusdev.guardianmonsters.utils.geometry.IntVec2;
 /**
  * Created by georg on 23.11.15.
  */
-public class EntityFactory {
+public class EntityFactory
+{
     /* ............................................................................ ATTRIBUTES .. */
     private Engine engine;
     private GameArea area;
@@ -98,18 +100,20 @@ public class EntityFactory {
         }
         hero.add(team);
 
+        IItemService items = GuardiansServiceLocator.getItems();
+
         // Inventory
         Inventory inventory = new Inventory();
-        inventory.putItemInInventory(ItemService.getInstance().getItem("bread"));
-        inventory.putItemInInventory(ItemService.getInstance().getItem("bread"));
-        inventory.putItemInInventory(ItemService.getInstance().getItem("bread"));
-        inventory.putItemInInventory(ItemService.getInstance().getItem("bread"));
-        inventory.putItemInInventory(ItemService.getInstance().getItem("potion-blue"));
-        inventory.putItemInInventory(ItemService.getInstance().getItem("potion-blue"));
-        inventory.putItemInInventory(ItemService.getInstance().getItem("potion-blue"));
-        inventory.putItemInInventory(ItemService.getInstance().getItem("angel-tear"));
-        inventory.putItemInInventory(ItemService.getInstance().getItem("sword-wood"));
-        inventory.putItemInInventory(ItemService.getInstance().getItem("claws-wood"));
+        inventory.putItemInInventory(items.getItem("bread"));
+        inventory.putItemInInventory(items.getItem("bread"));
+        inventory.putItemInInventory(items.getItem("bread"));
+        inventory.putItemInInventory(items.getItem("bread"));
+        inventory.putItemInInventory(items.getItem("potion-blue"));
+        inventory.putItemInInventory(items.getItem("potion-blue"));
+        inventory.putItemInInventory(items.getItem("potion-blue"));
+        inventory.putItemInInventory(items.getItem("angel-tear"));
+        inventory.putItemInInventory(items.getItem("sword-wood"));
+        inventory.putItemInInventory(items.getItem("claws-wood"));
 
         InventoryComponent inventoryComp = new InventoryComponent(inventory);
         hero.add(inventoryComp);

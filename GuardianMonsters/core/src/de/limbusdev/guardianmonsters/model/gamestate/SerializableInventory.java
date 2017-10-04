@@ -1,8 +1,9 @@
 package de.limbusdev.guardianmonsters.model.gamestate;
 
+import de.limbusdev.guardianmonsters.guardians.GuardiansServiceLocator;
+import de.limbusdev.guardianmonsters.guardians.items.IItemService;
 import de.limbusdev.guardianmonsters.guardians.items.Inventory;
 import de.limbusdev.guardianmonsters.guardians.items.Item;
-import de.limbusdev.guardianmonsters.guardians.items.ItemService;
 
 /**
  * SerializableInventory
@@ -35,9 +36,11 @@ public class SerializableInventory {
 
         Inventory inventory = new Inventory();
 
+        IItemService items = GuardiansServiceLocator.getItems();
+
         for(int i=0; i<sInventory.items.length; i++) {
             for(int j=0; j<sInventory.amount[i]; j++) {
-                inventory.putItemInInventory(ItemService.getItem(sInventory.items[i]));
+                inventory.putItemInInventory(items.getItem(sInventory.items[i]));
             }
         }
 

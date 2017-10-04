@@ -3,6 +3,7 @@ package de.limbusdev.guardianmonsters.guardians.items;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.XmlReader;
+import com.github.czyzby.autumn.annotation.Component;
 
 
 /**
@@ -10,11 +11,13 @@ import com.badlogic.gdx.utils.XmlReader;
  *
  * @author Georg Eckert 2017
  */
-
+@Component
 public class ItemService implements IItemService
 {
     private static ItemService instance;
     private ArrayMap<String, Item> items;
+
+    public ItemService() {}
 
     private ItemService(String xmlItems)
     {

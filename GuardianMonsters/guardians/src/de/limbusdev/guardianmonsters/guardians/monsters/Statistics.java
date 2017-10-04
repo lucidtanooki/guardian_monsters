@@ -71,6 +71,14 @@ public class Statistics
     }
 
     @Override
+    public String toString()
+    {
+        return "HP: " + HP + " MP: " + MP + " PStr: " + PStr
+            + " PDef: " + PDef + " MStr: " + MStr + " MDef: " + MDef
+            + " Speed: " + Speed;
+    }
+
+    @Override
     public Statistics clone()
     {
         return new Statistics(HP, MP, PStr, PDef, MStr, MDef, Speed);

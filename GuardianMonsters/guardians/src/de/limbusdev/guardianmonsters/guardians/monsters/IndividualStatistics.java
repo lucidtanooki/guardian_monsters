@@ -12,7 +12,7 @@ import de.limbusdev.utils.MathTool;
 /**
  * Guardians Individual Statistic Component
  *
- * IndividualStatisticscontains all statistic values of a {@link AGuardian}. The statistic values at
+ * IndividualStatistics contains all statistic values of a {@link AGuardian}. The statistic values at
  * level 1 should be copied over from {@link CommonStatistics}
  *
  * The Status Values (Stats) are:
@@ -37,11 +37,27 @@ public class IndividualStatistics
         int BALANCED=0, VIVACIOUS=1, PRUDENT=2;
     }
 
+    /**
+     * The triple stands for rolling a dive parameters (Rolls, Sides, Base-Value)
+     * 1D6 means one roll of a 6-sided dice
+     *
+     * Use Common for PStr, PDef, MStr, MDef, Speed
+     *
+     * Stat     SLOW        MED         FAST
+     * Common   1D2         1D3         3D2
+     * HP       4D30+100    4D40+100    4D50+100
+     * MP       2D20+30     3D30+40     4D30+50
+     */
     public interface Growth
     {
         int[] SLOW =    {1,2,0},        MED =   {1,3,0},    FAST =  {3,2,0};
         int[] SLOWHP =  {4,30,100},     MEDHP = {4,40,100}, FASTHP ={4,50,100};
         int[] SLOWMP =  {2,20,30},      MEDMP = {3,30,40},  FASTMP ={4,30,50};
+    }
+
+    public interface StatBaseGrowth
+    {
+        int PStr = 0, PDef = 0, MStr = 0, MDef = 0, Speed = 0;
     }
 
     public interface StatType
@@ -176,7 +192,8 @@ public class IndividualStatistics
         return report;
     }
 
-    public boolean earnEXP(int EXP) {
+    public boolean earnEXP(int EXP)
+    {
         boolean leveledUp = false;
         float extFactor = 100f;
 
@@ -189,7 +206,7 @@ public class IndividualStatistics
 
         this.EXP += extEXP;
 
-        if(this.EXP > getEXPAvailableAtLevel(level)) {
+        if(this.EXP >= getEXPAvailableAtLevel(level)) {
             this.EXP -= getEXPAvailableAtLevel(level);
             levelUp();
             leveledUp = true;
@@ -451,10 +468,15 @@ public class IndividualStatistics
         return currentStats.Speed;
     }
 
+    /**
+     * Returns the highest value a guardian can reach, if it
+     * receives the best values at every level up
+     * @return
+     */
     public int getMaxPossibleHP() {
         int maxPossHP = core.getCommonStatistics().getBaseHP();
         for(int i=1; i<100; i++) {
-            maxPossHP += MathTool.dice(characterGrowthRates[character][StatType.HP]);
+            maxPossHP += MathTool.diceMax(characterGrowthRates[character][StatType.HP]);
         }
         return maxPossHP;
     }
@@ -462,7 +484,7 @@ public class IndividualStatistics
     public int getMaxPossibleMP() {
         int maxPossMP = core.getCommonStatistics().getBaseMP();
         for(int i=1; i<100; i++) {
-            maxPossMP += MathTool.dice(characterGrowthRates[character][StatType.MP]);
+            maxPossMP += MathTool.diceMax(characterGrowthRates[character][StatType.MP]);
         }
         return maxPossMP;
     }
@@ -470,7 +492,7 @@ public class IndividualStatistics
     public int getMaxPossiblePStr() {
         int maxPossPStr = core.getCommonStatistics().getBasePStr();
         for(int i=1; i<100; i++) {
-            maxPossPStr += MathTool.dice(characterGrowthRates[character][StatType.PSTR]);
+            maxPossPStr += MathTool.diceMax(characterGrowthRates[character][StatType.PSTR]);
         }
         return maxPossPStr;
     }
@@ -478,7 +500,7 @@ public class IndividualStatistics
     public int getMaxPossiblePDef() {
         int maxPossPDef = core.getCommonStatistics().getBasePDef();
         for(int i=1; i<100; i++) {
-            maxPossPDef += MathTool.dice(characterGrowthRates[character][StatType.PDEF]);
+            maxPossPDef += MathTool.diceMax(characterGrowthRates[character][StatType.PDEF]);
         }
         return maxPossPDef;
     }
@@ -486,7 +508,7 @@ public class IndividualStatistics
     public int getMaxPossibleMStr() {
         int maxPossMStr = core.getCommonStatistics().getBaseMStr();
         for(int i=1; i<100; i++) {
-            maxPossMStr += MathTool.dice(characterGrowthRates[character][StatType.MSTR]);
+            maxPossMStr += MathTool.diceMax(characterGrowthRates[character][StatType.MSTR]);
         }
         return maxPossMStr;
     }
@@ -494,7 +516,7 @@ public class IndividualStatistics
     public int getMaxPossibleMDef() {
         int maxPossMDef = core.getCommonStatistics().getBaseMDef();
         for(int i=1; i<100; i++) {
-            maxPossMDef += MathTool.dice(characterGrowthRates[character][StatType.MDEF]);
+            maxPossMDef += MathTool.diceMax(characterGrowthRates[character][StatType.MDEF]);
         }
         return maxPossMDef;
     }
@@ -502,7 +524,7 @@ public class IndividualStatistics
     public int getMaxPossibleSpeed() {
         int maxPossSpeed = core.getCommonStatistics().getBaseSpeed();
         for(int i=1; i<100; i++) {
-            maxPossSpeed += MathTool.dice(characterGrowthRates[character][StatType.SPEED]);
+            maxPossSpeed += MathTool.diceMax(characterGrowthRates[character][StatType.SPEED]);
         }
         return maxPossSpeed;
     }

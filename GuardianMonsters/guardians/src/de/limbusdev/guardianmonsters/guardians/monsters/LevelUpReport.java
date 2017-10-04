@@ -24,4 +24,14 @@ public class LevelUpReport
      * For Serialization only!
      */
     LevelUpReport() {}
+
+    @Override
+    public String toString()
+    {
+        String result = "";
+        result += "Before: Lvl " + oldLevel + ", " + oldStats + "\n";
+        result += "After:  Lvl " + newLevel + ", " + newStats;
+
+        return result;
+    }
 }

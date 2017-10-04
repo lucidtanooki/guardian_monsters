@@ -19,6 +19,7 @@ import de.limbusdev.guardianmonsters.guardians.monsters.SpeciesDescription;
 import de.limbusdev.guardianmonsters.guardians.monsters.XMLGuardianParser;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -163,6 +164,15 @@ public class ModuleGuardiansJUnitTest
         AGuardianFactory factory = GuardiansServiceLocator.getGuardianFactory();
         AGuardian guardian = factory.createGuardian(1,1);
         assertEquals(GuardiansServiceLocator.getSpecies().getSpeciesDescription(1), guardian.getSpeciesDescription());
+
+        AGuardian guardian2 = factory.createGuardian(1,1);
+        assertNotEquals(guardian2, guardian);
+
+        guardian.getIndividualStatistics().earnEXP(guardian.getIndividualStatistics().getEXPtoNextLevel());
+
+        assertEquals(2, guardian.getIndividualStatistics().getLevel());
+
+        System.out.println(guardian.getIndividualStatistics().getLatestLevelUpReport());
 
         ModuleGuardians.destroyModule();
     }

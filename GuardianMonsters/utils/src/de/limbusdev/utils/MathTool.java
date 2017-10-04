@@ -44,4 +44,14 @@ public class MathTool
         }
         return dice(triple[0], triple[1], triple[2]);
     }
+
+    /**
+     * Returns the best possible result
+     * @param triple
+     * @return
+     */
+    public static int diceMax(int[] triple)
+    {
+        return triple[0] * triple[1] + triple[2];
+    }
 }

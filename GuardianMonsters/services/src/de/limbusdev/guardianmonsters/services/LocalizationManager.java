@@ -11,9 +11,11 @@ import com.badlogic.gdx.utils.I18NBundle;
 import java.util.Locale;
 
 import de.limbusdev.guardianmonsters.assets.paths.AssetPath;
+import de.limbusdev.guardianmonsters.guardians.GuardiansServiceLocator;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardianFactory;
 import de.limbusdev.guardianmonsters.guardians.monsters.GuardianFactory;
+import de.limbusdev.guardianmonsters.guardians.monsters.ISpeciesDescriptionService;
 
 
 /**
@@ -123,8 +125,9 @@ public class LocalizationManager implements L18N
     @Override
     public String getLocalizedGuardianName(int guardianID)
     {
+        ISpeciesDescriptionService species = GuardiansServiceLocator.getSpecies();
         AGuardianFactory factory = GuardianFactory.getInstance();
-        String nameID = factory.getNameById(guardianID);
+        String nameID = species.getCommonNameById(guardianID);
         return Guardians().get(nameID);
     }
 

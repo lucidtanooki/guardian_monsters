@@ -17,9 +17,10 @@ import com.badlogic.gdx.utils.Array;
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.BattleResult;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.LevelUpWidget;
 import de.limbusdev.guardianmonsters.fwmengine.ui.AHUD;
+import de.limbusdev.guardianmonsters.guardians.GuardiansServiceLocator;
 import de.limbusdev.guardianmonsters.guardians.items.Item;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
-import de.limbusdev.guardianmonsters.guardians.monsters.GuardianFactory;
+import de.limbusdev.guardianmonsters.guardians.monsters.ISpeciesDescriptionService;
 import de.limbusdev.guardianmonsters.guardians.monsters.Team;
 import de.limbusdev.guardianmonsters.services.Services;
 
@@ -51,13 +52,15 @@ public class BattleResultHUD extends AHUD {
         Gdx.input.setInputProcessor(stage);
     }
 
-    private void constructMonsterTable(final Team team, final BattleResult result) {
+    private void constructMonsterTable(final Team team, final BattleResult result)
+    {
+        ISpeciesDescriptionService species = GuardiansServiceLocator.getSpecies();
         table.clear();
         for(int key : team.keys()) {
             AGuardian guardian = team.get(key);
             Image face = Services.getMedia().getMonsterFace(guardian.getSpeciesID());
             table.add(face).left();
-            Label name = new Label(Services.getL18N().Guardians().get(GuardianFactory.getInstance().getNameById(guardian.getSpeciesID())), skin, "default");
+            Label name = new Label(Services.getL18N().Guardians().get(species.getCommonNameById(guardian.getSpeciesID())), skin, "default");
             table.add(name).left();
             Image expKey = new Image(skin.getDrawable("symbol-exp"));
             table.add(expKey).left();

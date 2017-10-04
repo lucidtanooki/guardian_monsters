@@ -14,9 +14,10 @@ import java.util.Observable;
 import java.util.Observer;
 
 import de.limbusdev.guardianmonsters.Constant;
+import de.limbusdev.guardianmonsters.guardians.GuardiansServiceLocator;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
-import de.limbusdev.guardianmonsters.guardians.monsters.GuardianFactory;
+import de.limbusdev.guardianmonsters.guardians.monsters.ISpeciesDescriptionService;
 import de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics;
 import de.limbusdev.guardianmonsters.services.Services;
 
@@ -102,9 +103,11 @@ public class MonsterStateWidget extends WidgetGroup implements Observer
      * Initializes the widget to show a monsters status values
      * @param guardian
      */
-    public void init(AGuardian guardian) {
+    public void init(AGuardian guardian)
+    {
+        ISpeciesDescriptionService species = GuardiansServiceLocator.getSpecies();
         refresh(guardian);
-        nameLabel.setText(Services.getL18N().Guardians().get((GuardianFactory.getInstance().getNameById(guardian.getSpeciesDescription().getID()))));
+        nameLabel.setText(Services.getL18N().Guardians().get((species.getCommonNameById(guardian.getSpeciesDescription().getID()))));
         guardian.addObserver(this);
     }
 

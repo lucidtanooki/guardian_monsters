@@ -1,14 +1,10 @@
 package de.limbusdev.guardianmonsters;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.utils.ArrayMap;
 
 import de.limbusdev.guardianmonsters.assets.paths.AssetPath;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.MainMenuScreen;
-import de.limbusdev.guardianmonsters.guardians.Element;
-import de.limbusdev.guardianmonsters.guardians.GuardiansServiceLocator;
-import de.limbusdev.guardianmonsters.guardians.abilities.AbilityService;
-import de.limbusdev.guardianmonsters.guardians.items.ItemService;
+import de.limbusdev.guardianmonsters.guardians.ModuleGuardians;
 import de.limbusdev.guardianmonsters.media.AudioManager;
 import de.limbusdev.guardianmonsters.media.MediaManager;
 import de.limbusdev.guardianmonsters.scene2d.ConcreteScreenManager;
@@ -75,15 +71,7 @@ public class GuardianMonsters extends Game
         Services.provide(new UIManager(AssetPath.Skin.FONT));
 
         // ....................................................................... module: guardians
-        ArrayMap<Element, String> jsonPaths = new ArrayMap<>();
-        jsonPaths.put(Element.NONE, "data/abilitiesNone.json");
-        jsonPaths.put(Element.EARTH, "data/abilitiesEarth.json");
-        jsonPaths.put(Element.FIRE, "data/abilitiesFire.json");
-        jsonPaths.put(Element.WATER, "data/abilitiesWater.json");
-        GuardiansServiceLocator.provide(AbilityService.getInstanceFromFile(jsonPaths));
-
-        GuardiansServiceLocator.provide(ItemService.getInstanceFromFile("data/items.xml"));
-
+        ModuleGuardians.initModule();
     }
 
 }

@@ -1,9 +1,6 @@
 package de.limbusdev.guardianmonsters.guardians.monsters;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.utils.XmlReader;
-
+import de.limbusdev.guardianmonsters.guardians.GuardiansServiceLocator;
 import de.limbusdev.guardianmonsters.guardians.abilities.AbilityGraph;
 import de.limbusdev.guardianmonsters.guardians.abilities.IAbilityGraph;
 
@@ -23,30 +20,12 @@ public class GuardianFactory extends AGuardianFactory
         return instance;
     }
 
-    private GuardianFactory()
-    {
-        // Read common Guardian Descriptions from XML file
-        FileHandle handle = Gdx.files.internal("data/guardians.xml");
-
-        XmlReader.Element rootElement = XMLGuardianParser.parseGuardianList(handle.readString());
-
-        SpeciesDescription ancestor = null;
-        for (int i = 0; i < rootElement.getChildCount(); i++)
-        {
-            SpeciesDescription info = XMLGuardianParser.parseMonster(rootElement.getChild(i), ancestor);
-            getSpeciesDB().put(info.getID(),info);
-
-            if(info.getMetamorphsTo() == info.getID()+1) {
-                ancestor = info;
-            } else {
-                ancestor = null;
-            }
-        }
-    }
+    private GuardianFactory() {}
 
     @Override
     public AGuardian createGuardian(int ID, int level)
     {
+        ISpeciesDescriptionService species = GuardiansServiceLocator.getSpecies();
         // ...................................................................... create core object
 
         String UUID = createNewUUID();
@@ -56,7 +35,7 @@ public class GuardianFactory extends AGuardianFactory
         // ....................................................................... create components
 
         // Component 1: SpeciesDescription - Get Common Guardian Data from DataBase
-        SpeciesDescription speciesDescription = getSpeciesDescription(ID);
+        SpeciesDescription speciesDescription = species.getSpeciesDescription(ID);
 
         // Component 2: IndividualStatistics - Copy Base Stats
         IndividualStatistics individualStatistics = new IndividualStatistics(newGuardian, 1);
@@ -67,7 +46,7 @@ public class GuardianFactory extends AGuardianFactory
         abilityGraph.setActiveAbility(0,0);
 
         // Activate Evolution Abilities of Ancestors
-        for(int i=0; i<getNumberOfAncestors(ID); i++)
+        for(int i = 0; i < species.getNumberOfAncestors(ID); i++)
         {
             int metamorphosisNode = abilityGraph.getMetamorphosisNodes().get(i);
             abilityGraph.activateNode(metamorphosisNode);

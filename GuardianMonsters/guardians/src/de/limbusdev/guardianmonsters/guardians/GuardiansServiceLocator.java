@@ -4,6 +4,7 @@ import de.limbusdev.guardianmonsters.guardians.abilities.Ability;
 import de.limbusdev.guardianmonsters.guardians.abilities.IAbilityService;
 import de.limbusdev.guardianmonsters.guardians.items.IItemService;
 import de.limbusdev.guardianmonsters.guardians.items.medicine.MedicalItem;
+import de.limbusdev.guardianmonsters.guardians.monsters.ISpeciesDescriptionService;
 
 /**
  * GuardiansServiceLocator
@@ -18,6 +19,7 @@ public class GuardiansServiceLocator
 {
     private static IAbilityService abilities;
     private static IItemService items;
+    private static ISpeciesDescriptionService species;
 
     public static void provide(IAbilityService service) {
         abilities = service;
@@ -54,6 +56,26 @@ public class GuardiansServiceLocator
         } else {
 
             return items;
+
+        }
+    }
+
+    public static void provide(ISpeciesDescriptionService service)
+    {
+        species = service;
+    }
+
+    public static ISpeciesDescriptionService getSpecies()
+    {
+        if(items == null) {
+
+            System.err.println("SERVICES: No SpeciesDescription service injected yet with " +
+                "Services.provide(ISpeciesDescription service). Returning NullSpeciesDescriptionService.");
+            throw new ExceptionInInitializerError("No SpeciesDescriptionService provided.");
+
+        } else {
+
+            return species;
 
         }
     }

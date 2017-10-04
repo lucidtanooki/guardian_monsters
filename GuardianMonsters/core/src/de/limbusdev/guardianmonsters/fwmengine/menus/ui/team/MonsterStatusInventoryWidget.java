@@ -10,8 +10,9 @@ import com.badlogic.gdx.utils.ArrayMap;
 
 import de.limbusdev.guardianmonsters.Constant;
 import de.limbusdev.guardianmonsters.guardians.Element;
+import de.limbusdev.guardianmonsters.guardians.GuardiansServiceLocator;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
-import de.limbusdev.guardianmonsters.guardians.monsters.GuardianFactory;
+import de.limbusdev.guardianmonsters.guardians.monsters.ISpeciesDescriptionService;
 import de.limbusdev.guardianmonsters.services.Services;
 
 
@@ -84,8 +85,10 @@ public class MonsterStatusInventoryWidget extends Group {
     }
 
 
-    public void init(AGuardian m) {
-        name.setText(Services.getL18N().Guardians().get(GuardianFactory.getInstance().getNameById(m.getSpeciesDescription().getID())));
+    public void init(AGuardian m)
+    {
+        ISpeciesDescriptionService species = GuardiansServiceLocator.getSpecies();
+        name.setText(Services.getL18N().Guardians().get(species.getCommonNameById(m.getSpeciesDescription().getID())));
         valueLabels.get("hp").setText(m.getIndividualStatistics().getHP() + "/" + m.getIndividualStatistics().getHPmax());
         valueLabels.get("mp").setText(m.getIndividualStatistics().getMP() + "/" + m.getIndividualStatistics().getMPmax());
         valueLabels.get("exp").setText(m.getIndividualStatistics().getEXP() + "/" + (m.getIndividualStatistics().getEXPtoNextLevel() + m.getIndividualStatistics().getEXP()));

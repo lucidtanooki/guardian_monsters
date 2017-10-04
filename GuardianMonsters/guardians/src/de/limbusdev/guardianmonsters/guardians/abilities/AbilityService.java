@@ -6,7 +6,6 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
-import com.github.czyzby.autumn.annotation.Component;
 
 import java.util.ArrayList;
 
@@ -17,13 +16,10 @@ import de.limbusdev.guardianmonsters.guardians.GuardiansServiceLocator;
  * Contains all existing attacks, sorted by element
  * @author Georg Eckert 2017
  */
-@Component
 public class AbilityService implements IAbilityService
 {
     private static AbilityService instance;
-    private ArrayMap<Element, ArrayMap<Integer, Ability>> abilities;
-
-    public AbilityService() {}
+    private static ArrayMap<Element, ArrayMap<Integer, Ability>> abilities;
 
     private AbilityService(ArrayMap<Element,String> jsonAbilitiesResources)
     {

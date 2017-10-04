@@ -54,7 +54,6 @@ project(":desktop") {
         compile "de.tomgrill.gdxdialogs:gdx-dialogs-desktop:1.2.1"
         compile "net.dermetfan.libgdx-utils:libgdx-utils:$gdxUtilsVersion"
         compile "net.dermetfan.libgdx-utils:libgdx-utils-box2d:$gdxUtilsVersion" // Box2D module (optional)
-        compile "com.github.czyzby:gdx-autumn-fcs:$autumnVersion.$gdxVersion"
     }
 }
 
@@ -90,7 +89,6 @@ project(":android") {
         compile "de.tomgrill.gdxdialogs:gdx-dialogs-android:1.2.1"
         compile "net.dermetfan.libgdx-utils:libgdx-utils:$gdxUtilsVersion"
         compile "net.dermetfan.libgdx-utils:libgdx-utils-box2d:$gdxUtilsVersion" // Box2D module (optional)
-        compile "com.github.czyzby:gdx-autumn-android:$autumnVersion.$gdxVersion"
     }
 }
 
@@ -128,7 +126,6 @@ project(":guardians") {
         compile project(":utils")
         compile "com.badlogicgames.gdx:gdx:$gdxVersion"
         compile "com.badlogicgames.ashley:ashley:$ashleyVersion"
-        compile "com.github.czyzby:gdx-autumn:$autumnVersion.$gdxVersion"
         testCompile "junit:junit:+"
     }
 }

@@ -12,6 +12,10 @@ import de.limbusdev.guardianmonsters.guardians.abilities.IAbilityService;
 import de.limbusdev.guardianmonsters.guardians.items.Item;
 import de.limbusdev.guardianmonsters.guardians.items.ItemService;
 import de.limbusdev.guardianmonsters.guardians.items.medicine.MedicalItem;
+import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
+import de.limbusdev.guardianmonsters.guardians.monsters.AGuardianFactory;
+import de.limbusdev.guardianmonsters.guardians.monsters.CommonStatistics;
+import de.limbusdev.guardianmonsters.guardians.monsters.SpeciesDescription;
 import de.limbusdev.guardianmonsters.guardians.monsters.XMLGuardianParser;
 
 import static org.junit.Assert.assertEquals;
@@ -30,8 +34,8 @@ public class ModuleGuardiansJUnitTest
     {
         ModuleGuardians.destroyModule();
 
-        String testJsonString = "<guardians><guardian speciesID=\"1\" nameID=\"gm001_fordin\"><metamorphsTo>2</metamorphsTo><metamorphosisNodes><metamorphosisNode>91</metamorphosisNode><metamorphosisNode>92</metamorphosisNode></metamorphosisNodes><elements><element>earth</element></elements><attacks><ability element=\"none\"  abilityID=\"2\" abilityPos=\"0\" /><ability element=\"earth\" abilityID=\"2\" abilityPos=\"13\" /><ability element=\"earth\" abilityID=\"3\" abilityPos=\"11\" /><ability element=\"earth\" abilityID=\"4\" abilityPos=\"15\" /></attacks><basestats hp=\"300\" mp=\"50\" speed=\"10\" pstr=\"10\" pdef=\"10\" mstr=\"10\" mdef=\"10\" /><equipment-compatibility head=\"bridle\" hands=\"claws\" body=\"barding\" feet=\"shinprotection\" /><ability-graph-equip body=\"21\" hands=\"23\" feet=\"89\" head=\"90\" /></guardian><guardian speciesID=\"2\" nameID=\"gm002_stegofor\"><metamorphsFrom>1</metamorphsFrom><metamorphsTo>3</metamorphsTo><elements><element>earth</element><element>forest</element></elements></guardian></guardians>\n";
-        XmlReader.Element rootElement = XMLGuardianParser.parseGuardianList(testJsonString);
+        String xml = "<guardians><guardian speciesID=\"1\" nameID=\"gm001_fordin\"><metamorphsTo>2</metamorphsTo><metamorphosisNodes><metamorphosisNode>91</metamorphosisNode><metamorphosisNode>92</metamorphosisNode></metamorphosisNodes><elements><element>earth</element></elements><attacks><ability element=\"none\"  abilityID=\"2\" abilityPos=\"0\" /><ability element=\"earth\" abilityID=\"2\" abilityPos=\"13\" /><ability element=\"earth\" abilityID=\"3\" abilityPos=\"11\" /><ability element=\"earth\" abilityID=\"4\" abilityPos=\"15\" /></attacks><basestats hp=\"300\" mp=\"50\" speed=\"10\" pstr=\"10\" pdef=\"10\" mstr=\"10\" mdef=\"10\" /><equipment-compatibility head=\"bridle\" hands=\"claws\" body=\"barding\" feet=\"shinprotection\" /><ability-graph-equip body=\"21\" hands=\"23\" feet=\"89\" head=\"90\" /></guardian><guardian speciesID=\"2\" nameID=\"gm002_stegofor\"><metamorphsFrom>1</metamorphsFrom><metamorphsTo>3</metamorphsTo><elements><element>earth</element><element>forest</element></elements></guardian><guardian speciesID=\"4\" nameID=\"gm004_kroki\"><metamorphsTo>5</metamorphsTo><metamorphosisNodes><metamorphosisNode>91</metamorphosisNode><metamorphosisNode>92</metamorphosisNode></metamorphosisNodes><elements><element>water</element></elements><attacks><ability element=\"none\"  abilityID=\"2\" abilityPos=\"0\" /><ability element=\"water\" abilityID=\"1\" abilityPos=\"5\" /></attacks><basestats hp=\"300\" mp=\"50\" speed=\"10\" pstr=\"10\" pdef=\"10\" mstr=\"10\" mdef=\"10\" /><equipment-compatibility head=\"helmet\" hands=\"claws\" body=\"breastplate\" feet=\"kneepads\" /><ability-graph-equip body=\"17\" hands=\"19\" feet=\"53\" head=\"54\" /></guardian><guardian speciesID=\"5\" nameID=\"gm005_krokivip\"><metamorphsFrom>4</metamorphsFrom><metamorphsTo>6</metamorphsTo><elements><element>water</element><element>lindworm</element></elements></guardian><guardian speciesID=\"7\" nameID=\"gm007_devidin\"><metamorphsTo>8</metamorphsTo><metamorphosisNodes><metamorphosisNode>91</metamorphosisNode><metamorphosisNode>92</metamorphosisNode></metamorphosisNodes><elements><element>fire</element></elements><attacks><ability element=\"none\"   abilityID=\"2\" abilityPos=\"0\" /><ability element=\"fire\" abilityID=\"1\" abilityPos=\"5\" /></attacks><basestats hp=\"300\" mp=\"50\" speed=\"10\" pstr=\"10\" pdef=\"10\" mstr=\"10\" mdef=\"10\" /><equipment-compatibility head=\"mask\" hands=\"claws\" body=\"barding\" feet=\"shinprotection\" /><ability-graph-equip body=\"17\" hands=\"19\" feet=\"53\" head=\"54\" /></guardian><guardian speciesID=\"8\" nameID=\"gm008_devidra\"><metamorphsFrom>7</metamorphsFrom><metamorphsTo>9</metamorphsTo><elements><element>fire</element><element>lindworm</element></elements></guardian></guardians>\n";
+        XmlReader.Element rootElement = XMLGuardianParser.parseGuardianList(xml);
 
         XmlReader.Element element = rootElement.getChild(0);
 
@@ -123,10 +127,43 @@ public class ModuleGuardiansJUnitTest
     }
 
     @Test
+    public void commonStatisticsTest()
+    {
+        ModuleGuardians.destroyModule();
+        ModuleGuardians.initModuleForTesting();
+
+        SpeciesDescription description = GuardiansServiceLocator.getSpecies().getSpeciesDescription(1);
+        CommonStatistics commonStatistics = description.getCommonStatistics();
+
+        assertEquals(300, commonStatistics.getBaseHP());
+        assertEquals(50, commonStatistics.getBaseMP());
+        assertEquals(10, commonStatistics.getBasePStr());
+        assertEquals(10, commonStatistics.getBasePDef());
+        assertEquals(10, commonStatistics.getBaseMStr());
+        assertEquals(10, commonStatistics.getBaseMDef());
+        assertEquals(10, commonStatistics.getBaseSpeed());
+
+        ModuleGuardians.destroyModule();
+    }
+
+    @Test
     public void moduleTest()
     {
         ModuleGuardians.destroyModule();
         ModuleGuardians.initModuleForTesting();
+        ModuleGuardians.destroyModule();
+    }
+
+    @Test
+    public void guardianFactoryTest()
+    {
+        ModuleGuardians.destroyModule();
+        ModuleGuardians.initModuleForTesting();
+
+        AGuardianFactory factory = GuardiansServiceLocator.getGuardianFactory();
+        AGuardian guardian = factory.createGuardian(1,1);
+        assertEquals(GuardiansServiceLocator.getSpecies().getSpeciesDescription(1), guardian.getSpeciesDescription());
+
         ModuleGuardians.destroyModule();
     }
 }

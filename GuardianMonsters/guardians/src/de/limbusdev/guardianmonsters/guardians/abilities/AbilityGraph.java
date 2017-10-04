@@ -26,7 +26,7 @@ public class AbilityGraph implements IAbilityGraph
     private ArrayMap<Integer,Ability> learntAbilities;
     private Array<BodyPart> learntEquipment;
 
-    public AbilityGraph(SpeciesDescription data)
+    public AbilityGraph(AGuardian core, SpeciesDescription data)
     {
         nodes = new ArrayMap<>();
         edges = new Array<>();
@@ -51,7 +51,7 @@ public class AbilityGraph implements IAbilityGraph
             activeAbilities.put(i,null);
         }
 
-        init(data);
+        init(core, data);
     }
 
     public AbilityGraph(ArrayMap<Integer, Node> nodes, Array<Edge> edges, ArrayMap<Integer, Ability> abilityNodes, ArrayMap<Integer, BodyPart> equipmentNodes, Array<Integer> metamorphosisNodes, ArrayMap<Integer, Ability> activeAbilities, ArrayMap<Integer, Ability> learntAbilities, Array<BodyPart> learntEquipment)
@@ -66,8 +66,10 @@ public class AbilityGraph implements IAbilityGraph
         this.learntEquipment = learntEquipment;
     }
 
-    private void init(SpeciesDescription data)
+    private void init(AGuardian core, SpeciesDescription data)
     {
+        this.core = core;
+
         for(int key : data.getAbilityNodes().keys())
         {
             nodes.get(key).type = Node.Type.ABILITY;
@@ -127,7 +129,8 @@ public class AbilityGraph implements IAbilityGraph
     }
 
     @Override
-    public void activateNode(int nodeID) {
+    public void activateNode(int nodeID)
+    {
         Node node = nodes.get(nodeID);
 
         node.activate();

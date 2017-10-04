@@ -106,11 +106,11 @@ public class IndividualStatistics
         lvlUpReport = new LevelUpReport(nullStats, nullStats, 0, 0);
     }
 
-    protected IndividualStatistics(AGuardian core, int level, int character) {
-        construct(core, level, character);
+    protected IndividualStatistics(AGuardian core, CommonStatistics commonStatistics, int level, int character) {
+        construct(core, commonStatistics, level, character);
     }
 
-    protected IndividualStatistics(AGuardian core, int level)
+    protected IndividualStatistics(AGuardian core, CommonStatistics commonStatistics, int level)
     {
         int character;
         // Choose a random character
@@ -119,16 +119,18 @@ public class IndividualStatistics
             case 1:  character = Character.PRUDENT; break;
             default: character = Character.BALANCED; break;
         }
-        construct(core, level, character);
+        construct(core, commonStatistics, level, character);
     }
 
-    private void construct(AGuardian core, int level, int character)
+    private void construct(AGuardian core, CommonStatistics commonStatistics,int level, int character)
     {
+        this.core = core;
         this.character = character;
         this.level = level;
         this.abilityLevels = level-1;
 
-        this.maxStats = core.getCommonStatistics().clone();
+        this.currentStats = commonStatistics.clone();
+        this.maxStats = commonStatistics.clone();
 
         for(int i=1; i<level; i++)
         {
@@ -202,7 +204,8 @@ public class IndividualStatistics
     /**
      * Resets all status values to the maximum
      */
-    public void healCompletely() {
+    public void healCompletely()
+    {
         setHP(getHPmax());
         setMP(getMPmax());
         setPStr(getPStrMax());
@@ -632,7 +635,8 @@ public class IndividualStatistics
         return feet;
     }
 
-    public void setHP(int HP) {
+    public void setHP(int HP)
+    {
         currentStats.HP = HP;
         if(HP > getHPmax()) currentStats.HP = getHPmax();
         if(HP < 0)          currentStats.HP = 0;

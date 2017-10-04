@@ -38,10 +38,11 @@ public class GuardianFactory extends AGuardianFactory
         SpeciesDescription speciesDescription = species.getSpeciesDescription(ID);
 
         // Component 2: IndividualStatistics - Copy Base Stats
-        IndividualStatistics individualStatistics = new IndividualStatistics(newGuardian, 1);
+        IndividualStatistics individualStatistics =
+            new IndividualStatistics(newGuardian, speciesDescription.getCommonStatistics(), 1);
 
         // Component 3: AbilityGraph - Initialize Ability Graph
-        IAbilityGraph abilityGraph = new AbilityGraph(speciesDescription);
+        IAbilityGraph abilityGraph = new AbilityGraph(newGuardian, speciesDescription);
         abilityGraph.activateNode(0);
         abilityGraph.setActiveAbility(0,0);
 

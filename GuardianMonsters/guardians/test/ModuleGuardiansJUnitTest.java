@@ -168,11 +168,26 @@ public class ModuleGuardiansJUnitTest
         AGuardian guardian2 = factory.createGuardian(1,1);
         assertNotEquals(guardian2, guardian);
 
-        guardian.getIndividualStatistics().earnEXP(guardian.getIndividualStatistics().getEXPtoNextLevel());
+        ModuleGuardians.destroyModule();
+    }
 
-        assertEquals(2, guardian.getIndividualStatistics().getLevel());
+    @Test
+    public void guardianLevelingTest()
+    {
+        ModuleGuardians.destroyModule();
+        ModuleGuardians.initModuleForTesting();
 
-        System.out.println(guardian.getIndividualStatistics().getLatestLevelUpReport());
+        AGuardianFactory factory = GuardiansServiceLocator.getGuardianFactory();
+        AGuardian guardian = factory.createGuardian(1,1);
+
+        for(int i=2; i<=99; i++)
+        {
+            guardian.getIndividualStatistics().earnEXP(guardian.getIndividualStatistics().getEXPtoNextLevel());
+
+            assertEquals(i, guardian.getIndividualStatistics().getLevel());
+
+            System.out.println(guardian.getIndividualStatistics().getLatestLevelUpReport().newStats);
+        }
 
         ModuleGuardians.destroyModule();
     }

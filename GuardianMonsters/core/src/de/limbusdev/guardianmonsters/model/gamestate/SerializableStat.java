@@ -21,6 +21,8 @@ public class SerializableStat {
 
     public int HP, MP, PStr, PDef, MStr, MDef, Speed;
     public int HPmax, MPmax, PStrMax, PDefMax, MStrMax, MDefMax, SpeedMax;
+    public int HPindi, MPindi, PStrIndi, PDefIndi, MStrIndi, MDefIndi, SpeedIndi;
+    public int HPgrowth, MPgrowth, PStrGrowth, PDefGrowth, MStrGrowth, MDefGrowth, SpeedGrowth;
 
     public String hand, body, head, foot;
 
@@ -46,6 +48,22 @@ public class SerializableStat {
         this.MStrMax = statistics.getMStrMax();
         this.MDefMax = statistics.getMDefMax();
         this.SpeedMax = statistics.getSpeedMax();
+        Statistics indiStats = statistics.getIndiBaseStats();
+        this.HPindi = indiStats.getHP();
+        this.MPindi = indiStats.getMP();
+        this.PStrIndi = indiStats.getPStr();
+        this.PDefIndi = indiStats.getPDef();
+        this.MStrIndi = indiStats.getMStr();
+        this.MDefIndi = indiStats.getMDef();
+        this.SpeedIndi = indiStats.getSpeed();
+        Statistics growthStats = statistics.getGrowthStats();
+        this.HPgrowth = growthStats.getHP();
+        this.MPgrowth = growthStats.getMP();
+        this.PStrGrowth = growthStats.getPStr();
+        this.PDefGrowth = growthStats.getPDef();
+        this.MStrGrowth = growthStats.getMStr();
+        this.MDefGrowth = growthStats.getMDef();
+        this.SpeedGrowth = growthStats.getSpeed();
         if(statistics.hasHandsEquipped()) {
             this.hand = statistics.getHands().getName();
         }
@@ -81,6 +99,26 @@ public class SerializableStat {
             sStat.SpeedMax
         );
 
+        Statistics indiStats = new Statistics(
+            sStat.HPindi,
+            sStat.MPindi,
+            sStat.PStrIndi,
+            sStat.PDefIndi,
+            sStat.MStrIndi,
+            sStat.MDefIndi,
+            sStat.SpeedIndi
+        );
+
+        Statistics growthStats = new Statistics(
+            sStat.HPgrowth,
+            sStat.MPgrowth,
+            sStat.PStrGrowth,
+            sStat.PDefGrowth,
+            sStat.MStrGrowth,
+            sStat.MDefGrowth,
+            sStat.SpeedGrowth
+        );
+
         // TODO
 
         IItemService items = GuardiansServiceLocator.getItems();
@@ -93,6 +131,8 @@ public class SerializableStat {
             sStat.character,
             stats,
             maxStats,
+            indiStats,
+            growthStats,
             (Equipment) items.getItem(sStat.hand),
             (Equipment) items.getItem(sStat.head),
             (Equipment) items.getItem(sStat.body),

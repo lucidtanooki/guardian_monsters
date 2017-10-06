@@ -23,7 +23,8 @@ public class MonsterManager
      * @param defender
      * @return
      */
-    public static AttackCalculationReport calcDefense(AGuardian defender) {
+    public static AttackCalculationReport calcDefense(AGuardian defender)
+    {
         System.out.println("Monster defends itself");
         AttackCalculationReport report = new AttackCalculationReport(defender);
         defender.getIndividualStatistics().increasePDef(5);
@@ -91,7 +92,8 @@ public class MonsterManager
      * Applies the previously calculated attack
      * @param report
      */
-    public static void apply(AttackCalculationReport report) {
+    public static void apply(AttackCalculationReport report)
+    {
         if(report.defender == null) {
             System.out.println("Only self defending");
             return;

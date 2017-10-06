@@ -857,6 +857,15 @@ public class IndividualStatistics
         return lvlUpReport;
     }
 
+    public Statistics getIndiBaseStats()
+    {
+        return indiBaseStats;
+    }
+
+    public Statistics getGrowthStats()
+    {
+        return growthStats;
+    }
 
     // ............................................................................................. DELEGATIONS
 

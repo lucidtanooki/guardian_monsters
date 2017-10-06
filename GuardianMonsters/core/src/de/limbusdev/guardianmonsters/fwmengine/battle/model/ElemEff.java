@@ -5,15 +5,12 @@ import com.badlogic.gdx.utils.ArrayMap;
 
 import de.limbusdev.guardianmonsters.guardians.Element;
 
-/**
- * Singleton
- * Created by georg on 07.09.16.
- */
-public class ElemEff {
-
+public class ElemEff
+{
     private static ElemEff instance;
 
-    public static ElemEff getInstance() {
+    public static ElemEff getInstance()
+    {
         if(instance == null)
             instance = new ElemEff();
         return instance;
@@ -29,7 +26,8 @@ public class ElemEff {
      * @param defender defenders elements
      * @return efficiency ratio
      */
-    public float getElemEff(Element attacker, Array<Element> defender) {
+    public float getElemEff(Element attacker, Array<Element> defender)
+    {
         float effectiveness = 1.0f;
         ArrayMap<Element, Float> table;
         switch(attacker) {
@@ -66,9 +64,10 @@ public class ElemEff {
 
     private static ArrayMap<Element, Float> none, earth, water, flame, air, frost, mountain, arthropoda, demon, lindworm, forest, lightning, spirit;
 
-    private ElemEff() {
+    private ElemEff()
+    {
         // Earth
-        earth = new ArrayMap<Element, Float>();
+        earth = new ArrayMap<>();
         earth.put(Element.NONE,         0f);
         earth.put(Element.EARTH,        0f);
         earth.put(Element.WATER,        0f);
@@ -84,7 +83,7 @@ public class ElemEff {
         earth.put(Element.LINDWORM,       0f);
 
         // Water
-        water = new ArrayMap<Element, Float>();
+        water = new ArrayMap<>();
         water.put(Element.NONE, 0f);
         water.put(Element.EARTH, 0f);
         water.put(Element.WATER, -1.5f);
@@ -100,7 +99,7 @@ public class ElemEff {
         water.put(Element.LINDWORM, 0f);
 
         // AIR
-        air = new ArrayMap<Element, Float>();
+        air = new ArrayMap<>();
         air.put(Element.NONE, 0f);
         air.put(Element.EARTH, -.5f);
         air.put(Element.WATER, 0f);
@@ -116,7 +115,7 @@ public class ElemEff {
         air.put(Element.LINDWORM, 0f);
 
         // Fire
-        flame = new ArrayMap<Element, Float>();
+        flame = new ArrayMap<>();
         flame.put(Element.NONE, 0f);
         flame.put(Element.EARTH, -.5f);
         flame.put(Element.WATER, -.5f);
@@ -132,7 +131,7 @@ public class ElemEff {
         flame.put(Element.LINDWORM, -.5f);
 
         // Forest
-        forest = new ArrayMap<Element, Float>();
+        forest = new ArrayMap<>();
         forest.put(Element.NONE, 0f);
         forest.put(Element.EARTH, .5f);
         forest.put(Element.WATER, .5f);
@@ -148,7 +147,7 @@ public class ElemEff {
         forest.put(Element.LINDWORM, 0f);
 
         // Frost
-        frost = new ArrayMap<Element, Float>();
+        frost = new ArrayMap<>();
         frost.put(Element.NONE, 0f);
         frost.put(Element.EARTH, -.5f);
         frost.put(Element.WATER, -1.5f);
@@ -164,7 +163,7 @@ public class ElemEff {
         frost.put(Element.LINDWORM, .5f);
 
         // Spirit
-        spirit = new ArrayMap<Element, Float>();
+        spirit = new ArrayMap<>();
         spirit.put(Element.NONE,        0f);
         spirit.put(Element.EARTH,       0f);
         spirit.put(Element.WATER,       0f);
@@ -177,10 +176,10 @@ public class ElemEff {
         spirit.put(Element.ARTHROPODA,  .5f);
         spirit.put(Element.MOUNTAIN,    0f);
         spirit.put(Element.LIGHTNING,   0f);
-        spirit.put(Element.LINDWORM,      0f);
+        spirit.put(Element.LINDWORM,    0f);
 
         // Demon
-        demon = new ArrayMap<Element, Float>();
+        demon = new ArrayMap<>();
         demon.put(Element.NONE,        0f);
         demon.put(Element.EARTH,       .5f);
         demon.put(Element.WATER,       0f);
@@ -196,7 +195,7 @@ public class ElemEff {
         demon.put(Element.LINDWORM,      0f);
 
         // Arthropoda
-        arthropoda = new ArrayMap<Element, Float>();
+        arthropoda = new ArrayMap<>();
         arthropoda.put(Element.NONE,        0f);
         arthropoda.put(Element.EARTH,       0f);
         arthropoda.put(Element.WATER,       0f);
@@ -209,10 +208,10 @@ public class ElemEff {
         arthropoda.put(Element.ARTHROPODA,  0f);
         arthropoda.put(Element.MOUNTAIN,    0f);
         arthropoda.put(Element.LIGHTNING,   0f);
-        arthropoda.put(Element.LINDWORM,      0f);
+        arthropoda.put(Element.LINDWORM,    0f);
 
         // Mountain
-        mountain = new ArrayMap<Element, Float>();
+        mountain = new ArrayMap<>();
         mountain.put(Element.NONE,        0f);
         mountain.put(Element.EARTH,       0f);
         mountain.put(Element.WATER,       0f);
@@ -225,10 +224,10 @@ public class ElemEff {
         mountain.put(Element.ARTHROPODA,  0f);
         mountain.put(Element.MOUNTAIN,    0f);
         mountain.put(Element.LIGHTNING,   0f);
-        mountain.put(Element.LINDWORM,      -.5f);
+        mountain.put(Element.LINDWORM,    -.5f);
 
         // Lightning
-        lightning = new ArrayMap<Element, Float>();
+        lightning = new ArrayMap<>();
         lightning.put(Element.NONE,        0f);
         lightning.put(Element.EARTH,       -1f);
         lightning.put(Element.WATER,       .5f);
@@ -241,10 +240,10 @@ public class ElemEff {
         lightning.put(Element.ARTHROPODA,  0f);
         lightning.put(Element.MOUNTAIN,    -.5f);
         lightning.put(Element.LIGHTNING,   -1.5f);
-        lightning.put(Element.LINDWORM,      0f);
+        lightning.put(Element.LINDWORM,    0f);
 
         // Dragon
-        lindworm = new ArrayMap<Element, Float>();
+        lindworm = new ArrayMap<>();
         lindworm.put(Element.NONE,        0f);
         lindworm.put(Element.EARTH,       .5f);
         lindworm.put(Element.WATER,       0f);
@@ -257,10 +256,10 @@ public class ElemEff {
         lindworm.put(Element.ARTHROPODA,  .5f);
         lindworm.put(Element.MOUNTAIN,    0f);
         lindworm.put(Element.LIGHTNING,   0f);
-        lindworm.put(Element.LINDWORM,      0f);
+        lindworm.put(Element.LINDWORM,    0f);
 
         // None
-        none = new ArrayMap<Element, Float>();
+        none = new ArrayMap<>();
         none.put(Element.NONE,        0f);
         none.put(Element.EARTH,       0f);
         none.put(Element.WATER,       0f);
@@ -273,6 +272,6 @@ public class ElemEff {
         none.put(Element.ARTHROPODA,  0f);
         none.put(Element.MOUNTAIN,    0f);
         none.put(Element.LIGHTNING,   0f);
-        none.put(Element.LINDWORM,      0f);
+        none.put(Element.LINDWORM,    0f);
     }
 }

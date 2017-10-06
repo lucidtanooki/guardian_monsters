@@ -404,8 +404,8 @@ public class IndividualStatistics
      */
     public static int getEXPAvailableAtLevel(int level)
     {
-        float levelFactor = (float) Math.round(Math.pow(level, Constant.LVL_EXPONENT));
-        return MathUtils.floor(Constant.BASE_EXP * levelFactor);
+        float levelFactor = (float) Math.floor(Math.pow(level, Constant.LVL_EXPONENT));
+        return MathUtils.floor(levelFactor);
     }
 
     /**

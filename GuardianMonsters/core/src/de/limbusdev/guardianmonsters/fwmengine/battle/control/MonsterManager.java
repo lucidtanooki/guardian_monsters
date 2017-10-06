@@ -7,6 +7,7 @@ import de.limbusdev.guardianmonsters.fwmengine.battle.model.AttackCalculationRep
 import de.limbusdev.guardianmonsters.fwmengine.battle.model.ElemEff;
 import de.limbusdev.guardianmonsters.guardians.abilities.Ability;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
+import de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics;
 import de.limbusdev.guardianmonsters.guardians.monsters.Team;
 import de.limbusdev.guardianmonsters.services.Services;
 
@@ -44,21 +45,38 @@ public class MonsterManager
     {
         System.out.println("\n--- new ability ---");
         AttackCalculationReport report = new AttackCalculationReport(attacker, defender, 0, 0, ability);
-        float efficiency = ElemEff.singelton().getElemEff(ability.element, defender.getSpeciesDescription().getElements());
 
-        float defenseRatio;
+        // Elemental Efficiency
+        float eff = ElemEff.singelton().getElemEff(ability.element, defender.getSpeciesDescription().getElements());
 
-        if(ability.damageType == Ability.DamageType.PHYSICAL) {
-            defenseRatio = (attacker.getIndividualStatistics().getPStr() * 1f) / (defender.getIndividualStatistics().getPDef() *1f);
-        } else {
-            defenseRatio = (attacker.getIndividualStatistics().getMStr() *1f) / (defender.getIndividualStatistics().getMDef() *1f);
+        IndividualStatistics statAtt = attacker.getIndividualStatistics();
+        IndividualStatistics statDef = defender.getIndividualStatistics();
+
+        int typeStrength;
+        switch(ability.damageType)
+        {
+            case MAGICAL: typeStrength = statAtt.getMStr(); break;
+            default:      typeStrength = statAtt.getPStr(); break;
         }
 
+        int typeDefense;
+        switch(ability.damageType)
+        {
+            case MAGICAL: typeDefense = statDef.getMDef(); break;
+            default:      typeDefense = statAtt.getPDef(); break;
+        }
+
+        int abilityStrength = ability.damage;
+
+        int level = statAtt.getLevel();
+
         /* Calculate Damage */
-        float damage = efficiency * ((((2*attacker.getIndividualStatistics().getLevel()/5 + 2) * ability.damage * defenseRatio) / 3) + 2);
+
+
+        float damage = (((2f/5f * level + 2f) * abilityStrength * (typeStrength/typeDefense) / 50f)) * eff;
 
         report.damage = MathUtils.round(damage);
-        report.efficiency = efficiency;
+        report.efficiency = eff;
 
         // Print Battle Debug Message
         String attackerName = attacker.getNickname();

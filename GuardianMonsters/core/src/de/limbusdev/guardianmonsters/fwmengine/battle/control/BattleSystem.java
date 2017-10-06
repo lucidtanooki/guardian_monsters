@@ -12,7 +12,6 @@ import de.limbusdev.guardianmonsters.guardians.monsters.Team;
 
 import static de.limbusdev.guardianmonsters.Constant.LEFT;
 import static de.limbusdev.guardianmonsters.Constant.RIGHT;
-import static de.limbusdev.guardianmonsters.guardians.Constant.BASE_EXP;
 
 /**
  * @author Georg Eckert 2017
@@ -154,11 +153,19 @@ public class BattleSystem {
         }
     }
 
-    private void giveEXPtoWinners(AGuardian defeatedGuardian) {
-        for(AGuardian m : queue.getCombatTeamLeft().values()) {
-            if(m.getIndividualStatistics().isFit()) {
-                float opponentFactor = 1f * defeatedGuardian.getIndividualStatistics().getLevel() / m.getIndividualStatistics().getLevel();
-                int EXP = MathUtils.floor(BASE_EXP * defeatedGuardian.getIndividualStatistics().getLevel() / 6f * opponentFactor);
+    private void giveEXPtoWinners(AGuardian defeatedGuardian)
+    {
+        for(AGuardian m : queue.getCombatTeamLeft().values())
+        {
+            if(m.getIndividualStatistics().isFit())
+            {
+                int victoriousLevel = m.getIndividualStatistics().getLevel();
+                int defeatedLevel = defeatedGuardian.getIndividualStatistics().getLevel();
+
+                int EXP = MathUtils.floor(
+                    200f * (1.5f * defeatedLevel*defeatedLevel) / (6f*victoriousLevel)
+                );
+
                 result.gainEXP(m, EXP);
                 boolean levelUp = m.getIndividualStatistics().earnEXP(EXP);
                 if(levelUp) {
@@ -172,7 +179,8 @@ public class BattleSystem {
      * The Computer Player takes his turn and chooses his attack and the target to be attacked.
      * This is possible only, when the first monster in queue is of AI's team.
      */
-    public void letAItakeTurn() {
+    public void letAItakeTurn()
+    {
         if(queue.peekNextSide() == LEFT) {
             throw new IllegalStateException(TAG +
                 " AI can't take turn. The first monster in queue is not in it's team.");

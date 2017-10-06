@@ -21,7 +21,8 @@ public class BattleResult
     private ArrayMap<AGuardian, Integer> gainedEXP;
     private Array<Item> droppedItems;
 
-    public BattleResult(Team team, Array<Item> droppedItems) {
+    public BattleResult(Team team, Array<Item> droppedItems)
+    {
         this.gainedEXP = new ArrayMap<>();
         for(AGuardian guardian : team.values()) {
             gainedEXP.put(guardian,0);
@@ -30,11 +31,13 @@ public class BattleResult
 
     }
 
-    public void gainEXP(AGuardian guardian, int EXP) {
+    public void gainEXP(AGuardian guardian, int EXP)
+    {
         gainedEXP.put(guardian, gainedEXP.get(guardian) + EXP);
     }
 
-    public boolean applyGainedEXP(AGuardian guardian) {
+    public boolean applyGainedEXP(AGuardian guardian)
+    {
         boolean levelUp = guardian.getIndividualStatistics().earnEXP(gainedEXP.get(guardian));
         return levelUp;
     }
@@ -44,7 +47,8 @@ public class BattleResult
      * next level.
      * @return  {@link Array} of {@link Guardian}s that reached a new level
      */
-    public Array<AGuardian> applyGainedEXPtoAll() {
+    public Array<AGuardian> applyGainedEXPtoAll()
+    {
         Array<AGuardian> leveledUpMonsters = new Array<>();
         for(AGuardian guardian : gainedEXP.keys()) {
             boolean lvlUp = applyGainedEXP(guardian);

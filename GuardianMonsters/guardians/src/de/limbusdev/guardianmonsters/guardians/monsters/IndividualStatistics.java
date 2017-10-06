@@ -50,7 +50,7 @@ public class IndividualStatistics
      */
     public interface Growth
     {
-        int[] SLOW =    {1,2,1},        MED =   {1,3,1},    FAST =  {3,2,1};
+        int[] SLOW =    {1,2,0},        MED =   {1,3,0},    FAST =  {3,2,0};
         int[] SLOWHP =  {4,30,100},     MEDHP = {4,40,100}, FASTHP ={4,50,100};
         int[] SLOWMP =  {2,20,30},      MEDMP = {3,30,40},  FASTMP ={4,30,50};
     }

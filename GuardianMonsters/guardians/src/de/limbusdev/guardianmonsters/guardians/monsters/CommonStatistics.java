@@ -27,7 +27,7 @@ public class CommonStatistics extends Statistics
      */
     public CommonStatistics()
     {
-        this(500, 100, 50, 50, 50, 50, 10);
+        this(50, 50, 50, 50, 50, 50, 50);
     }
 
     protected CommonStatistics(int HP, int MP, int PStr, int PDef, int MStr, int MDef, int Speed)

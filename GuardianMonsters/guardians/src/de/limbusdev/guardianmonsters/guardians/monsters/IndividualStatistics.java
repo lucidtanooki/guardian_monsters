@@ -3,6 +3,7 @@ package de.limbusdev.guardianmonsters.guardians.monsters;
 import com.badlogic.gdx.math.MathUtils;
 
 import de.limbusdev.guardianmonsters.guardians.Constant;
+import de.limbusdev.guardianmonsters.guardians.StatCalculator;
 import de.limbusdev.guardianmonsters.guardians.abilities.AbilityGraph;
 import de.limbusdev.guardianmonsters.guardians.items.equipment.Equipment;
 import de.limbusdev.guardianmonsters.guardians.items.equipment.EquipmentPotential;
@@ -24,6 +25,13 @@ import de.limbusdev.utils.MathTool;
  * MStr ..  Magical Strength
  * MDef ..  Magical Defense
  * Speed
+ *
+ * Individual Base Stats (IndBaseStats) are different in every Guardian. They change randomly,
+ * when the guardian levels up (0..2). The Range from 0-15 for every Stat, except HP and MP,
+ * there it's 0-63.
+ *
+ * Growth Stats determine how a Guardian ist developing. They range from 1..3 in every Battle.
+ * And every Stat can get a maximum of 0..255.
  *
  * Development Mechanics based on:
  * http://howtomakeanrpg.com/a/how-to-make-an-rpg-levels.html
@@ -50,14 +58,7 @@ public class IndividualStatistics
      */
     public interface Growth
     {
-        int[] SLOW =    {1,2,0},        MED =   {1,3,0},    FAST =  {3,2,0};
-        int[] SLOWHP =  {4,30,100},     MEDHP = {4,40,100}, FASTHP ={4,50,100};
-        int[] SLOWMP =  {2,20,30},      MEDMP = {3,30,40},  FASTMP ={4,30,50};
-    }
-
-    public interface StatBaseGrowth
-    {
-        int PStr = 0, PDef = 0, MStr = 0, MDef = 0, Speed = 0;
+        float SLOW =    0.9f,        MED =   1.0f,    FAST =  1.1f;
     }
 
     public interface StatType
@@ -65,16 +66,16 @@ public class IndividualStatistics
         int PSTR=0, PDEF=1, MSTR=2, MDEF=3, SPEED=4, HP=5, MP=6;
     }
 
-    public static final int[][][] characterGrowthRates = {
+    public static final float[][] characterGrowthRates = {
         /* PStr         PDef            MStr            MDef            Speed           HP              MP          */
-        {Growth.MED,    Growth.MED,     Growth.MED,     Growth.MED,     Growth.MED,     Growth.MEDHP,   Growth.MEDMP},   // BALANCED
-        {Growth.FAST,   Growth.SLOW,    Growth.MED,     Growth.SLOW,    Growth.FAST,    Growth.SLOWHP,  Growth.MEDMP},   // VIVACIOUS
-        {Growth.MED,    Growth.FAST,    Growth.SLOW,    Growth.FAST,    Growth.SLOW,    Growth.FASTHP,  Growth.FASTMP}   // PRUDENT
+        {Growth.MED,    Growth.MED,     Growth.MED,     Growth.MED,     Growth.MED,     Growth.MED,   Growth.MED},   // BALANCED
+        {Growth.FAST,   Growth.SLOW,    Growth.MED,     Growth.SLOW,    Growth.FAST,    Growth.SLOW,  Growth.MED},   // VIVACIOUS
+        {Growth.MED,    Growth.FAST,    Growth.SLOW,    Growth.FAST,    Growth.SLOW,    Growth.FAST,  Growth.FAST}   // PRUDENT
     };
 
     private AGuardian core;  // Core Object
 
-    private Statistics currentStats, maxStats;
+    private Statistics currentStats, maxStats, indiBaseStats, growthStats;
 
     private int level;
     private int abilityLevels;
@@ -102,6 +103,8 @@ public class IndividualStatistics
         int character,
         Statistics stats,
         Statistics maxStats,
+        Statistics indiBaseStats,
+        Statistics growthStats,
         Equipment hands,
         Equipment head,
         Equipment body,
@@ -114,6 +117,9 @@ public class IndividualStatistics
         this.character = character;
         this.currentStats = stats;
         this.maxStats = maxStats;
+        this.indiBaseStats = indiBaseStats;
+        this.growthStats = growthStats;
+
         this.hands = hands;
         this.head = head;
         this.body = body;
@@ -145,8 +151,18 @@ public class IndividualStatistics
         this.level = level;
         this.abilityLevels = level-1;
 
+        this.growthStats = new Statistics(0,0,0,0,0,0,0);
         this.currentStats = commonStatistics.clone();
         this.maxStats = commonStatistics.clone();
+        this.indiBaseStats = new Statistics(
+            MathUtils.random(0,63),
+            MathUtils.random(0,63),
+            MathUtils.random(0,15),
+            MathUtils.random(0,15),
+            MathUtils.random(0,15),
+            MathUtils.random(0,15),
+            MathUtils.random(0,15)
+        );
 
         for(int i=1; i<level; i++)
         {
@@ -162,19 +178,90 @@ public class IndividualStatistics
     }
 
     // ............................................................................................. METHODS
-    private LevelUpReport levelUp() {
+
+    /**
+     * Formula:
+     *  indiStats: raised at every LevelUp, randomly (HP, MP: 0..2, other: 0..1)
+     *  newMP = character * newLevel + 6 +  floor( (newLevel / 100) * (2*baseMP + indBaseMP + floor(growthMP/4))
+     *  other = floor(character * (5 + floor((newLevel/100) * (2*base+indi+floor(growth/4)))))
+     * @return
+     */
+    private LevelUpReport levelUp()
+    {
+        // Raise individual Base Stats randomly
+        indiBaseStats = new Statistics(
+            indiBaseStats.getHP() + MathTool.dice(2,3,0),
+            indiBaseStats.getMP() + MathTool.dice(2,2,0),
+            indiBaseStats.getPStr() + MathTool.dice(1,2,0),
+            indiBaseStats.getPDef() + MathTool.dice(1,2,0),
+            indiBaseStats.getMStr() + MathTool.dice(1,2,0),
+            indiBaseStats.getMDef() + MathTool.dice(1,2,0),
+            indiBaseStats.getSpeed() + MathTool.dice(1,2,0)
+        );
+
+
+        CommonStatistics common = core.getCommonStatistics();
+        int newLevel = this.level + 1;
+
+        int newHP = StatCalculator.calculateHP(
+            characterGrowthRates[character][StatType.HP],
+            newLevel,
+            common.getBaseHP(),
+            indiBaseStats.getHP(),
+            growthStats.getHP()
+        );
+
+        int newMP = StatCalculator.calculateMP(
+            characterGrowthRates[character][StatType.MP],
+            newLevel,
+            common.getBaseMP(),
+            indiBaseStats.getMP(),
+            growthStats.getMP()
+        );
+
+        int newPStr = StatCalculator.calculateStat(
+            characterGrowthRates[character][StatType.PSTR],
+            newLevel,
+            common.getBasePStr(),
+            indiBaseStats.getPStr(),
+            growthStats.getPStr()
+        );
+
+        int newPDef = StatCalculator.calculateStat(
+            characterGrowthRates[character][StatType.PDEF],
+            newLevel,
+            common.getBasePDef(),
+            indiBaseStats.getPDef(),
+            growthStats.getPDef()
+        );
+
+        int newMStr = StatCalculator.calculateStat(
+            characterGrowthRates[character][StatType.MSTR],
+            newLevel,
+            common.getBaseMStr(),
+            indiBaseStats.getMStr(),
+            growthStats.getMStr()
+        );
+
+        int newMDef = StatCalculator.calculateStat(
+            characterGrowthRates[character][StatType.MDEF],
+            newLevel,
+            common.getBaseMDef(),
+            indiBaseStats.getMDef(),
+            growthStats.getMDef()
+        );
+
+        int newSpeed = StatCalculator.calculateStat(
+            characterGrowthRates[character][StatType.SPEED],
+            newLevel,
+            common.getBaseSpeed(),
+            indiBaseStats.getSpeed(),
+            growthStats.getSpeed()
+        );
 
         LevelUpReport report = new LevelUpReport(
             maxStats.clone(),
-            new Statistics(
-                maxStats.getHP()      + MathTool.dice(characterGrowthRates[character][StatType.HP]),
-                maxStats.getMP()      + MathTool.dice(characterGrowthRates[character][StatType.MP]),
-                maxStats.getPStr()    + MathTool.dice(characterGrowthRates[character][StatType.PSTR]),
-                maxStats.getPDef()    + MathTool.dice(characterGrowthRates[character][StatType.PDEF]),
-                maxStats.getMStr()    + MathTool.dice(characterGrowthRates[character][StatType.MSTR]),
-                maxStats.getMDef()    + MathTool.dice(characterGrowthRates[character][StatType.MDEF]),
-                maxStats.getSpeed()   + MathTool.dice(characterGrowthRates[character][StatType.SPEED])
-            ),
+            new Statistics(newHP, newMP, newPStr, newPDef, newMStr, newMDef, newSpeed),
             this.level,
             this.level + 1
         );
@@ -473,59 +560,87 @@ public class IndividualStatistics
      * receives the best values at every level up
      * @return
      */
-    public int getMaxPossibleHP() {
-        int maxPossHP = core.getCommonStatistics().getBaseHP();
-        for(int i=1; i<100; i++) {
-            maxPossHP += MathTool.diceMax(characterGrowthRates[character][StatType.HP]);
-        }
+    public int getMaxPossibleHP()
+    {
+        int maxPossHP = StatCalculator.calculateHP(
+            characterGrowthRates[character][StatType.HP],
+            99,
+            core.getCommonStatistics().getBaseHP(),
+            indiBaseStats.getHP()+50,
+            255
+        );
         return maxPossHP;
     }
 
-    public int getMaxPossibleMP() {
-        int maxPossMP = core.getCommonStatistics().getBaseMP();
-        for(int i=1; i<100; i++) {
-            maxPossMP += MathTool.diceMax(characterGrowthRates[character][StatType.MP]);
-        }
+    public int getMaxPossibleMP()
+    {
+        int maxPossMP = StatCalculator.calculateMP(
+            characterGrowthRates[character][StatType.MP],
+            99,
+            core.getCommonStatistics().getBaseMP(),
+            indiBaseStats.getMP()+50,
+            255
+        );
         return maxPossMP;
     }
 
-    public int getMaxPossiblePStr() {
-        int maxPossPStr = core.getCommonStatistics().getBasePStr();
-        for(int i=1; i<100; i++) {
-            maxPossPStr += MathTool.diceMax(characterGrowthRates[character][StatType.PSTR]);
-        }
+    public int getMaxPossiblePStr()
+    {
+        int maxPossPStr = StatCalculator.calculateStat(
+            characterGrowthRates[character][StatType.PSTR],
+            99,
+            core.getCommonStatistics().getBasePStr(),
+            indiBaseStats.getPStr()+50,
+            255
+        );
         return maxPossPStr;
     }
 
-    public int getMaxPossiblePDef() {
-        int maxPossPDef = core.getCommonStatistics().getBasePDef();
-        for(int i=1; i<100; i++) {
-            maxPossPDef += MathTool.diceMax(characterGrowthRates[character][StatType.PDEF]);
-        }
+    public int getMaxPossiblePDef()
+    {
+        int maxPossPDef = StatCalculator.calculateStat(
+            characterGrowthRates[character][StatType.PDEF],
+            99,
+            core.getCommonStatistics().getBasePDef(),
+            indiBaseStats.getPDef()+50,
+            255
+        );
         return maxPossPDef;
     }
 
-    public int getMaxPossibleMStr() {
-        int maxPossMStr = core.getCommonStatistics().getBaseMStr();
-        for(int i=1; i<100; i++) {
-            maxPossMStr += MathTool.diceMax(characterGrowthRates[character][StatType.MSTR]);
-        }
+    public int getMaxPossibleMStr()
+    {
+        int maxPossMStr = StatCalculator.calculateStat(
+            characterGrowthRates[character][StatType.MSTR],
+            99,
+            core.getCommonStatistics().getBaseMStr(),
+            indiBaseStats.getMStr()+50,
+            255
+        );
         return maxPossMStr;
     }
 
-    public int getMaxPossibleMDef() {
-        int maxPossMDef = core.getCommonStatistics().getBaseMDef();
-        for(int i=1; i<100; i++) {
-            maxPossMDef += MathTool.diceMax(characterGrowthRates[character][StatType.MDEF]);
-        }
+    public int getMaxPossibleMDef()
+    {
+        int maxPossMDef = StatCalculator.calculateStat(
+            characterGrowthRates[character][StatType.MDEF],
+            99,
+            core.getCommonStatistics().getBaseMDef(),
+            indiBaseStats.getMDef()+50,
+            255
+        );
         return maxPossMDef;
     }
 
-    public int getMaxPossibleSpeed() {
-        int maxPossSpeed = core.getCommonStatistics().getBaseSpeed();
-        for(int i=1; i<100; i++) {
-            maxPossSpeed += MathTool.diceMax(characterGrowthRates[character][StatType.SPEED]);
-        }
+    public int getMaxPossibleSpeed()
+    {
+        int maxPossSpeed = StatCalculator.calculateStat(
+            characterGrowthRates[character][StatType.SPEED],
+            99,
+            core.getCommonStatistics().getBaseSpeed(),
+            indiBaseStats.getSpeed()+50,
+            255
+        );
         return maxPossSpeed;
     }
 

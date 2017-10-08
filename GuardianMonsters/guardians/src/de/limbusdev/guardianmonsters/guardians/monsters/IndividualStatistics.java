@@ -2,6 +2,7 @@ package de.limbusdev.guardianmonsters.guardians.monsters;
 
 import com.badlogic.gdx.math.MathUtils;
 
+import de.limbusdev.guardianmonsters.guardians.Constant;
 import de.limbusdev.guardianmonsters.guardians.StatCalculator;
 import de.limbusdev.guardianmonsters.guardians.abilities.AbilityGraph;
 import de.limbusdev.guardianmonsters.guardians.items.equipment.Equipment;
@@ -143,7 +144,7 @@ public class IndividualStatistics
         construct(core, commonStatistics, level, character);
     }
 
-    private void construct(AGuardian core, CommonStatistics commonStatistics,int level, int character)
+    private void construct(AGuardian core, CommonStatistics commonStatistics, int level, int character)
     {
         this.core = core;
         this.character = character;
@@ -151,8 +152,6 @@ public class IndividualStatistics
         this.abilityLevels = -1;
 
         this.growthStats = new Statistics(0,0,0,0,0,0,0);
-        this.currentStats = commonStatistics.clone();
-        this.maxStats = commonStatistics.clone();
         this.indiBaseStats = new Statistics(
             MathUtils.random(0,63),
             MathUtils.random(0,63),
@@ -162,6 +161,16 @@ public class IndividualStatistics
             MathUtils.random(0,15),
             MathUtils.random(0,15)
         );
+
+        // Debugging
+        if(Constant.DEBUGGING_ON) {
+            commonStatistics = new CommonStatistics(50,50,50,50,50,50,50);
+            indiBaseStats = new CommonStatistics(0,0,0,0,0,0,0);
+            this.character = Character.BALANCED;
+        }
+
+        this.currentStats = commonStatistics.clone();
+        this.maxStats = commonStatistics.clone();
 
         for(int i=0; i<level; i++)
         {
@@ -198,6 +207,11 @@ public class IndividualStatistics
             indiBaseStats.getMDef() + MathTool.dice(1,2,0),
             indiBaseStats.getSpeed() + MathTool.dice(1,2,0)
         );
+
+        // Debugging
+        if(Constant.DEBUGGING_ON) {
+            indiBaseStats = new CommonStatistics(0,0,0,0,0,0,0);
+        }
 
 
         CommonStatistics common = core.getCommonStatistics();

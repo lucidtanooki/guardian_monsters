@@ -3,6 +3,7 @@ import com.badlogic.gdx.utils.XmlReader;
 
 import org.junit.Test;
 
+import de.limbusdev.guardianmonsters.guardians.Constant;
 import de.limbusdev.guardianmonsters.guardians.Element;
 import de.limbusdev.guardianmonsters.guardians.GuardiansServiceLocator;
 import de.limbusdev.guardianmonsters.guardians.ModuleGuardians;
@@ -223,6 +224,14 @@ public class ModuleGuardiansJUnitTest
             System.out.println(guardian.getIndividualStatistics().getLatestLevelUpReport().newStats);
         }
 
+        assertEquals(209, guardian.getIndividualStatistics().getHPmax());
+        assertEquals(158, guardian.getIndividualStatistics().getMPmax());
+        assertEquals(105, guardian.getIndividualStatistics().getPStrMax());
+        assertEquals(105, guardian.getIndividualStatistics().getPDefMax());
+        assertEquals(105, guardian.getIndividualStatistics().getMStrMax());
+        assertEquals(105, guardian.getIndividualStatistics().getMDefMax());
+        assertEquals(105, guardian.getIndividualStatistics().getSpeedMax());
+
         ModuleGuardians.destroyModule();
     }
 
@@ -246,5 +255,11 @@ public class ModuleGuardiansJUnitTest
 
 
         ModuleGuardians.destroyModule();
+    }
+
+    @Test
+    public void debuggingOnTest()
+    {
+        assertTrue(Constant.DEBUGGING_ON);
     }
 }

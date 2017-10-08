@@ -33,8 +33,8 @@ public class CombatTeam extends ArrayMap<Integer,AGuardian>
     {
         super();
         int teamSize = Math.min(team.getMaximumTeamSize(), team.getActiveTeamSize());
-        for(int i=0; i < this.size && i < teamSize; i++) {
-            put(i,get(i));
+        for(int i=0; i < team.size && i < teamSize; i++) {
+            put(i,team.get(i));
         }
     }
 

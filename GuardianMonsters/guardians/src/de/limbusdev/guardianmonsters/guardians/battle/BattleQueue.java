@@ -37,7 +37,8 @@ public class BattleQueue extends Signal<BattleQueue.QueueSignal> {
 
     private Team left, right;
 
-    public BattleQueue(Team left, Team right) {
+    public BattleQueue(Team left, Team right)
+    {
         this.left = left;
         this.right = right;
 
@@ -55,13 +56,14 @@ public class BattleQueue extends Signal<BattleQueue.QueueSignal> {
      * Takes the next monster in line and moves it to the next round
      * @return next in line
      */
-    public AGuardian next() {
+    public AGuardian next()
+    {
         AGuardian next = currentRound.pop();
         nextRound.insert(0,next);
         if(currentRound.size == 0) {
             Array<AGuardian> tmp = currentRound;
             currentRound = nextRound;
-            nextRound = currentRound;
+            nextRound = tmp;
             currentRound.sort(new MonsterSpeedComparator());
             dispatch(new QueueSignal(Message.NEWROUND));
         } else {
@@ -77,7 +79,8 @@ public class BattleQueue extends Signal<BattleQueue.QueueSignal> {
      * Returns next in line
      * @return
      */
-    public AGuardian peekNext() {
+    public AGuardian peekNext()
+    {
         return currentRound.get(currentRound.size-1);
     }
 
@@ -85,12 +88,14 @@ public class BattleQueue extends Signal<BattleQueue.QueueSignal> {
      * Returns the side of the next monster in line
      * @return
      */
-    public boolean peekNextSide() {
+    public boolean peekNextSide()
+    {
         if(left.isMember(peekNext())) return HERO;
         else return OPPONENT;
     }
 
-    public AGuardian exchangeNext(AGuardian substitute) {
+    public AGuardian exchangeNext(AGuardian substitute)
+    {
         CombatTeam combatTeam;
         if(peekNextSide() == HERO) {
             combatTeam = combatTeamLeft;
@@ -108,7 +113,8 @@ public class BattleQueue extends Signal<BattleQueue.QueueSignal> {
     }
 
     @Override
-    public String toString() {
+    public String toString()
+    {
         String text = "";
 
         text += "=== Next Round    ===\n";

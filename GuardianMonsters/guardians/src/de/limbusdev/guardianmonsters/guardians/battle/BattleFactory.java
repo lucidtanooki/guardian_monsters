@@ -4,34 +4,23 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 
-import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
-import de.limbusdev.guardianmonsters.guardians.monsters.GuardianFactory;
+import de.limbusdev.guardianmonsters.guardians.GuardiansServiceLocator;
+import de.limbusdev.guardianmonsters.guardians.monsters.AGuardianFactory;
 import de.limbusdev.guardianmonsters.guardians.monsters.Team;
 
 
 /**
  * @author Georg Eckert
  */
-public class BattleFactory {
+public class BattleFactory
+{
     /* ............................................................................ ATTRIBUTES .. */
-    private static ArrayMap<Integer,AGuardian> monsters;
     private static BattleFactory instance;
+
     /* ........................................................................... CONSTRUCTOR .. */
 
-    private BattleFactory() {
-        this.monsters = new ArrayMap<>();
-        for(int i = 1; i<= 33; i++) {
-            createGuardian(i,1);
-        }
-    }
+    private BattleFactory() {}
     /* ............................................................................... METHODS .. */
-    
-    /* ..................................................................... GETTERS & SETTERS .. */
-    public AGuardian createGuardian(int ID, int level) {
-        AGuardian guardian = GuardianFactory.getInstance().createGuardian(ID, level);
-        this.monsters.put(ID, guardian);
-        return guardian;
-    }
 
     public static BattleFactory getInstance() {
         if(instance == null) instance = new BattleFactory();
@@ -53,9 +42,12 @@ public class BattleFactory {
 
         Team team = new Team(availableGuardianProbabilities.size, numMonsters, numMonsters);
 
-        for(int j=0; j<numMonsters; j++) {
-            team.put(j,BattleFactory.getInstance().createGuardian(
-                decideWichMonster(availableGuardianProbabilities), MathUtils.random(minLevel, maxLevel)));
+        AGuardianFactory factory = GuardiansServiceLocator.getGuardianFactory();
+
+        for(int j=0; j<numMonsters; j++)
+        {
+            int level = MathUtils.random(minLevel, maxLevel);
+            team.put(j,factory.createGuardian(decideWichMonster(availableGuardianProbabilities), level));
         }
         return team;
     }

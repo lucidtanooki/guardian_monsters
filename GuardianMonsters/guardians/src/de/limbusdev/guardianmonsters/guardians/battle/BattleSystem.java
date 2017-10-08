@@ -23,7 +23,7 @@ public class BattleSystem
 
     private Callbacks callbacks;
 
-    private de.limbusdev.guardianmonsters.guardians.battle.BattleQueue queue;
+    private BattleQueue queue;
     private AGuardian chosenTarget;
     private AttackCalculationReport latestAttackReport;
     private BattleResult result;
@@ -44,13 +44,14 @@ public class BattleSystem
 
         aiPlayer = new AIPlayer();
 
-        queue = new de.limbusdev.guardianmonsters.guardians.battle.BattleQueue(left,right);
+        queue = new BattleQueue(left,right);
 
         result = new BattleResult(left, null);
     }
 
     // .............................................................................. battle methods
-    public AGuardian getActiveMonster() {
+    public AGuardian getActiveMonster()
+    {
         return queue.peekNext();
     }
 
@@ -60,7 +61,7 @@ public class BattleSystem
      * @param target
      * @param attack
      */
-    public void attack(AGuardian target, int attack) {
+    private void attack(AGuardian target, int attack) {
 
         // Throw exception if target or attack are unset
         if(!choiceComplete) {
@@ -99,7 +100,8 @@ public class BattleSystem
         callbacks.onDoingNothing(getActiveMonster());
     }
 
-    public void nextMonster() {
+    public void nextMonster()
+    {
         queue.next();
         chosenAttack = 0;
         chosenTarget = null;
@@ -213,16 +215,23 @@ public class BattleSystem
             // TODO
         }
 
-        public void turn() {
+        public void turn()
+        {
             System.out.println("\n### AI's turn ###");
             AGuardian m = getActiveMonster();
-            int att = MathUtils.random(0,m.getAbilityGraph().getActiveAbilities().size-1);
+            int att = 0;
+            Ability ability = null;
+            while(ability == null) {
+                att = MathUtils.random(0,m.getAbilityGraph().getActiveAbilities().size-1);
+                ability = m.getAbilityGraph().getActiveAbility(att);
+            }
             chooseTarget();
             setChosenAttack(att);
             attack();
         }
 
-        private void chooseTarget() {
+        private void chooseTarget()
+        {
             boolean foundTarget = false;
             AGuardian target;
             while(!foundTarget) {

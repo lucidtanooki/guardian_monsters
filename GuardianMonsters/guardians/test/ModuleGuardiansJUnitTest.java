@@ -1,4 +1,5 @@
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.XmlReader;
 
@@ -14,6 +15,7 @@ import de.limbusdev.guardianmonsters.guardians.abilities.AbilityService;
 import de.limbusdev.guardianmonsters.guardians.abilities.IAbilityService;
 import de.limbusdev.guardianmonsters.guardians.battle.AttackCalculationReport;
 import de.limbusdev.guardianmonsters.guardians.battle.BattleCalculator;
+import de.limbusdev.guardianmonsters.guardians.battle.BattleSystem;
 import de.limbusdev.guardianmonsters.guardians.items.Item;
 import de.limbusdev.guardianmonsters.guardians.items.ItemService;
 import de.limbusdev.guardianmonsters.guardians.items.equipment.BodyEquipment;
@@ -22,6 +24,7 @@ import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardianFactory;
 import de.limbusdev.guardianmonsters.guardians.monsters.CommonStatistics;
 import de.limbusdev.guardianmonsters.guardians.monsters.SpeciesDescription;
+import de.limbusdev.guardianmonsters.guardians.monsters.Team;
 import de.limbusdev.guardianmonsters.guardians.monsters.XMLGuardianParser;
 
 import static org.junit.Assert.assertEquals;
@@ -290,6 +293,55 @@ public class ModuleGuardiansJUnitTest
         winner.getIndividualStatistics().giveEquipment(new BodyEquipment("", BodyEquipment.Type.ARMOR, 5, 5, 5, 5, 5, 5, 5, 0));
         assertEquals(13+MathUtils.floor(13f*0.05f), winner.getIndividualStatistics().getHPmax());
         assertEquals(7+5, winner.getIndividualStatistics().getPStrMax());
+
+        ModuleGuardians.destroyModule();
+    }
+
+    @Test
+    public void TestBattleSystem()
+    {
+        // TODO add real tests
+        ModuleGuardians.destroyModule();
+        ModuleGuardians.initModuleForTesting();
+
+        AGuardianFactory factory = GuardiansServiceLocator.getGuardianFactory();
+
+        Team team = new Team(3,3,3);
+        team.put(0, factory.createGuardian(1,1));
+        team.put(1, factory.createGuardian(1,1));
+        team.put(2, factory.createGuardian(1,1));
+        Team oppTeam = new Team(3,3,3);
+        oppTeam.put(0,factory.createGuardian(1,1));
+        oppTeam.put(1,factory.createGuardian(1,1));
+        oppTeam.put(2,factory.createGuardian(1,1));
+
+        BattleSystem bs = new BattleSystem(team, oppTeam, new BattleSystem.Callbacks() {});
+
+        boolean enemyFit = true;
+
+        while(enemyFit)
+        {
+            System.out.println("\n### Player's turn ###");
+            AGuardian m = bs.getActiveMonster();
+            int att = 0;
+            Ability ability = null;
+            while(ability == null) {
+                att = MathUtils.random(0,m.getAbilityGraph().getActiveAbilities().size-1);
+                ability = m.getAbilityGraph().getActiveAbility(att);
+            }
+            Array<AGuardian> targets = new Array<>();
+            for(AGuardian h : oppTeam.values()) {
+                if(h.getIndividualStatistics().isFit()) {
+                    targets.add(h);
+                }
+            }
+            AGuardian target = targets.get(MathUtils.random(0,targets.size-1));
+            bs.setChosenTarget(target);
+            bs.setChosenAttack(att);
+            bs.attack();
+            bs.applyAttack();
+            bs.continueBattle();
+        }
 
         ModuleGuardians.destroyModule();
     }

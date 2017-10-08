@@ -661,7 +661,7 @@ public class IndividualStatistics
         if(feet != null)    extFactor += feet.addsHP;
         if(head != null)    extFactor += head.addsHP;
 
-        return MathUtils.round((maxStats.HP * extFactor) / 100f);
+        return MathUtils.floor((maxStats.HP * extFactor) / 100f);
     }
 
     /**
@@ -675,7 +675,7 @@ public class IndividualStatistics
         if(feet != null)    extFactor += feet.addsMP;
         if(head != null)    extFactor += head.addsMP;
 
-        return MathUtils.round((maxStats.MP * extFactor) / 100f);
+        return MathUtils.floor((maxStats.MP * extFactor) / 100f);
     }
 
     /**

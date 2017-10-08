@@ -16,6 +16,7 @@ import de.limbusdev.guardianmonsters.guardians.battle.AttackCalculationReport;
 import de.limbusdev.guardianmonsters.guardians.battle.BattleCalculator;
 import de.limbusdev.guardianmonsters.guardians.items.Item;
 import de.limbusdev.guardianmonsters.guardians.items.ItemService;
+import de.limbusdev.guardianmonsters.guardians.items.equipment.BodyEquipment;
 import de.limbusdev.guardianmonsters.guardians.items.medicine.MedicalItem;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardianFactory;
@@ -273,6 +274,22 @@ public class ModuleGuardiansJUnitTest
         BattleCalculator.apply(report);
 
         assertEquals(10, looser.getIndividualStatistics().getHP());
+
+        ModuleGuardians.destroyModule();
+    }
+
+    @Test
+    public void equipmentTest()
+    {
+        ModuleGuardians.destroyModule();
+        ModuleGuardians.initModuleForTesting();
+
+        AGuardianFactory factory = GuardiansServiceLocator.getGuardianFactory();
+        AGuardian winner = factory.createGuardian(1,1);
+
+        winner.getIndividualStatistics().giveEquipment(new BodyEquipment("", BodyEquipment.Type.ARMOR, 5, 5, 5, 5, 5, 5, 5, 0));
+        assertEquals(13+MathUtils.floor(13f*0.05f), winner.getIndividualStatistics().getHPmax());
+        assertEquals(7+5, winner.getIndividualStatistics().getPStrMax());
 
         ModuleGuardians.destroyModule();
     }

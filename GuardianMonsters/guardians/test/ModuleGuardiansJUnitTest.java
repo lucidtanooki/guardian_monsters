@@ -298,6 +298,12 @@ public class ModuleGuardiansJUnitTest
     }
 
     @Test
+    public void abilityGraphTest()
+    {
+        // TODO
+    }
+
+    @Test
     public void TestBattleSystem()
     {
         // TODO add real tests

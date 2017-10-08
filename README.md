@@ -1,4 +1,4 @@
-![alt text](./Artwork/Spritesheets/LimbusDev/GM_logo_hires.png "Logo")
+![alt text](./GM_logo_hires.png "Logo")
 
 # Welcome
 
@@ -18,7 +18,7 @@ For more screenshots see the [Galery](https://bitbucket.org/gemlion/monsterworld
 # Downloads
 here you can Download the [Test-Build for Desktop](./Builds/Testing/Desktop/FriendsWithMonsters-ALPHA-0.0.3.0.jar)
 and the [Test-Build for Android](./Builds/Testing/Android/FriendsWithMonsters-ALPHA-0.0.3.0.apk).
-All you need is Java 8. Launch it with 
+All you need is Java 8. Launch it with
 
 ```
 java -jar FriendsWithMonsters-VERSION.jar

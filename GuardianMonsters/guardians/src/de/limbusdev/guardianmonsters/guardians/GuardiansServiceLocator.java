@@ -4,6 +4,8 @@ import de.limbusdev.guardianmonsters.guardians.abilities.Ability;
 import de.limbusdev.guardianmonsters.guardians.abilities.IAbilityService;
 import de.limbusdev.guardianmonsters.guardians.items.IItemService;
 import de.limbusdev.guardianmonsters.guardians.items.Item;
+import de.limbusdev.guardianmonsters.guardians.items.equipment.BodyEquipment;
+import de.limbusdev.guardianmonsters.guardians.items.equipment.Equipment;
 import de.limbusdev.guardianmonsters.guardians.items.medicine.MedicalItem;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardianFactory;
 import de.limbusdev.guardianmonsters.guardians.monsters.ISpeciesDescriptionService;
@@ -80,6 +82,12 @@ public class GuardiansServiceLocator
                 public Item getItem(String name)
                 {
                     return new MedicalItem("bread", 100, MedicalItem.Type.HP_CURE);
+                }
+
+                @Override
+                public Equipment getEquipment(String name)
+                {
+                    return new BodyEquipment("Jacket", BodyEquipment.Type.ARMOR, 1, 1, 1, 1, 1, 1, 1, 0);
                 }
 
                 @Override

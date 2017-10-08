@@ -136,13 +136,13 @@ public class ModuleGuardiansJUnitTest
         SpeciesDescription description = GuardiansServiceLocator.getSpecies().getSpeciesDescription(1);
         CommonStatistics commonStatistics = description.getCommonStatistics();
 
-        assertEquals(300, commonStatistics.getBaseHP());
+        assertEquals(50, commonStatistics.getBaseHP());
         assertEquals(50, commonStatistics.getBaseMP());
-        assertEquals(10, commonStatistics.getBasePStr());
-        assertEquals(10, commonStatistics.getBasePDef());
-        assertEquals(10, commonStatistics.getBaseMStr());
-        assertEquals(10, commonStatistics.getBaseMDef());
-        assertEquals(10, commonStatistics.getBaseSpeed());
+        assertEquals(50, commonStatistics.getBasePStr());
+        assertEquals(50, commonStatistics.getBasePDef());
+        assertEquals(50, commonStatistics.getBaseMStr());
+        assertEquals(50, commonStatistics.getBaseMDef());
+        assertEquals(50, commonStatistics.getBaseSpeed());
 
         ModuleGuardians.destroyModule();
     }

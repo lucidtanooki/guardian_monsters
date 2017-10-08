@@ -4,6 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.XmlReader;
 
+import de.limbusdev.guardianmonsters.guardians.items.equipment.Equipment;
+
 
 /**
  * ItemDB provides information about all items. Items are created from data/items.xml
@@ -50,6 +52,19 @@ public class ItemService implements IItemService
     public Item getItem(String name)
     {
         return items.get(name);
+    }
+
+    @Override
+    public Equipment getEquipment(String name)
+    {
+        Equipment equipment;
+        Item item = getItem(name);
+        if(item instanceof Equipment) {
+            equipment = (Equipment) item;
+        } else {
+            throw new IllegalArgumentException("Given name is not an Equipment Item.");
+        }
+        return equipment;
     }
 
     @Override

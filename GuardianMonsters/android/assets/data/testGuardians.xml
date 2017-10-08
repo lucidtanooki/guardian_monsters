@@ -14,7 +14,7 @@
             <ability element="earth" abilityID="3" abilityPos="11" />
             <ability element="earth" abilityID="4" abilityPos="15" />
         </attacks>
-        <basestats hp="300" mp="50" speed="10" pstr="10" pdef="10" mstr="10" mdef="10" />
+        <basestats hp="50" mp="50" speed="50" pstr="50" pdef="50" mstr="50" mdef="50" />
         <equipment-compatibility head="bridle" hands="claws" body="barding" feet="shinprotection" />
         <ability-graph-equip body="21" hands="23" feet="89" head="90" />
     </guardian>
@@ -41,7 +41,7 @@
             <ability element="none"  abilityID="2" abilityPos="0" /> <!-- Bite -->
             <ability element="water" abilityID="1" abilityPos="5" />
         </attacks>
-        <basestats hp="300" mp="50" speed="10" pstr="10" pdef="10" mstr="10" mdef="10" />
+        <basestats hp="50" mp="50" speed="50" pstr="50" pdef="50" mstr="50" mdef="50" />
         <equipment-compatibility head="helmet" hands="claws" body="breastplate" feet="kneepads" />
         <ability-graph-equip body="17" hands="19" feet="53" head="54" />
     </guardian>
@@ -68,7 +68,7 @@
             <ability element="none"   abilityID="2" abilityPos="0" /> <!-- Bite -->
             <ability element="fire" abilityID="1" abilityPos="5" />
         </attacks>
-        <basestats hp="300" mp="50" speed="10" pstr="10" pdef="10" mstr="10" mdef="10" />
+        <basestats hp="50" mp="50" speed="50" pstr="50" pdef="50" mstr="50" mdef="50" />
         <equipment-compatibility head="mask" hands="claws" body="barding" feet="shinprotection" />
         <ability-graph-equip body="17" hands="19" feet="53" head="54" />
     </guardian>

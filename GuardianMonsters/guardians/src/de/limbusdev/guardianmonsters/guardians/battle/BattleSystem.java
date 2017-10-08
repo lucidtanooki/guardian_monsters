@@ -159,12 +159,7 @@ public class BattleSystem
         {
             if(m.getIndividualStatistics().isFit())
             {
-                int victoriousLevel = m.getIndividualStatistics().getLevel();
-                int defeatedLevel = defeatedGuardian.getIndividualStatistics().getLevel();
-
-                int EXP = MathUtils.floor(
-                    200f * (1.5f * defeatedLevel*defeatedLevel) / (6f*victoriousLevel)
-                );
+                int EXP = BattleCalculator.calculateEarnedEXP(m, defeatedGuardian);
 
                 result.gainEXP(m, EXP);
                 boolean levelUp = m.getIndividualStatistics().earnEXP(EXP);

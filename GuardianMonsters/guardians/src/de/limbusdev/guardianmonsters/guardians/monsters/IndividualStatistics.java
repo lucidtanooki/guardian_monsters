@@ -295,6 +295,7 @@ public class IndividualStatistics
 
     public boolean earnEXP(int EXP)
     {
+        // TODO add growth values for every victory, 0 when debugging
         boolean leveledUp = false;
         float extFactor = 100f;
 

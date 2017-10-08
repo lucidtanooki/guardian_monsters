@@ -69,11 +69,9 @@ public class BattleCalculator
         int level = statAtt.getLevel();
 
         /* Calculate Damage */
+        float damage = (((2f/5f * level + 2f) * abilityStrength * (typeStrength/typeDefense) / 48f) + 2f) * eff;
 
-
-        float damage = (((2f/5f * level + 2f) * abilityStrength * (typeStrength/typeDefense) / 50f)) * eff;
-
-        report.damage = MathUtils.round(damage);
+        report.damage = MathUtils.ceil(damage);
         report.efficiency = eff;
 
         // Print Battle Debug Message
@@ -123,5 +121,17 @@ public class BattleCalculator
         } else {
             return MathUtils.randomBoolean(.9f);
         }
+    }
+
+    public static int calculateEarnedEXP(AGuardian victoriousG, AGuardian defeatedG)
+    {
+        int victoriousLevel = victoriousG.getIndividualStatistics().getLevel();
+        int defeatedLevel = defeatedG.getIndividualStatistics().getLevel();
+
+        int EXP = MathUtils.floor(
+            200f * (1.5f * defeatedLevel*defeatedLevel) / (6f*victoriousLevel)
+        );
+
+        return EXP;
     }
 }

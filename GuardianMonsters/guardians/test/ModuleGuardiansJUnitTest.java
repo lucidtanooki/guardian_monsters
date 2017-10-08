@@ -1,3 +1,4 @@
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.XmlReader;
 
@@ -11,6 +12,8 @@ import de.limbusdev.guardianmonsters.guardians.StatCalculator;
 import de.limbusdev.guardianmonsters.guardians.abilities.Ability;
 import de.limbusdev.guardianmonsters.guardians.abilities.AbilityService;
 import de.limbusdev.guardianmonsters.guardians.abilities.IAbilityService;
+import de.limbusdev.guardianmonsters.guardians.battle.AttackCalculationReport;
+import de.limbusdev.guardianmonsters.guardians.battle.BattleCalculator;
 import de.limbusdev.guardianmonsters.guardians.items.Item;
 import de.limbusdev.guardianmonsters.guardians.items.ItemService;
 import de.limbusdev.guardianmonsters.guardians.items.medicine.MedicalItem;
@@ -241,7 +244,13 @@ public class ModuleGuardiansJUnitTest
         ModuleGuardians.destroyModule();
         ModuleGuardians.initModuleForTesting();
 
+        AGuardianFactory factory = GuardiansServiceLocator.getGuardianFactory();
+        AGuardian winner = factory.createGuardian(1,1);
+        AGuardian looser = factory.createGuardian(1,1);
 
+        int EXP = BattleCalculator.calculateEarnedEXP(winner, looser);
+
+        assertEquals(MathUtils.floor(200f*1.5f/6f), EXP);
 
         ModuleGuardians.destroyModule();
     }
@@ -252,7 +261,18 @@ public class ModuleGuardiansJUnitTest
         ModuleGuardians.destroyModule();
         ModuleGuardians.initModuleForTesting();
 
+        AGuardianFactory factory = GuardiansServiceLocator.getGuardianFactory();
+        AGuardian winner = factory.createGuardian(1,1);
+        AGuardian looser = factory.createGuardian(1,1);
 
+        int expectedDamage = MathUtils.ceil((0.6f*1f + 2f) * 10f / 48f + 2f);
+        System.out.println("Expected Damage: " + expectedDamage);
+        AttackCalculationReport report = BattleCalculator.calcAttack(winner, looser, new Ability(1, Ability.DamageType.PHYSICAL, Element.NONE, 10, ""));
+        assertEquals(expectedDamage, report.damage);
+
+        BattleCalculator.apply(report);
+
+        assertEquals(10, looser.getIndividualStatistics().getHP());
 
         ModuleGuardians.destroyModule();
     }

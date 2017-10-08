@@ -25,9 +25,9 @@ import de.limbusdev.guardianmonsters.fwmengine.world.model.MapDescriptionInfo;
 import de.limbusdev.guardianmonsters.fwmengine.world.model.MapPersonInformation;
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.AnimatedPersonSprite;
 import de.limbusdev.guardianmonsters.guardians.GuardiansServiceLocator;
-import de.limbusdev.guardianmonsters.guardians.battle.BattleFactory;
 import de.limbusdev.guardianmonsters.guardians.items.IItemService;
 import de.limbusdev.guardianmonsters.guardians.items.Inventory;
+import de.limbusdev.guardianmonsters.guardians.monsters.AGuardianFactory;
 import de.limbusdev.guardianmonsters.model.gamestate.GameState;
 import de.limbusdev.guardianmonsters.utils.UnitConverter;
 import de.limbusdev.guardianmonsters.utils.geometry.IntVec2;
@@ -93,8 +93,9 @@ public class EntityFactory
         }
 
         // Add Team
+        AGuardianFactory factory = GuardiansServiceLocator.getGuardianFactory();
         TeamComponent team = new TeamComponent();
-        team.team.put(0,BattleFactory.getInstance().createGuardian(1));
+        team.team.put(0,factory.createGuardian(1,1));
         if(restoreSave) {
             team.team = gameState.team;
         }

@@ -22,6 +22,7 @@ import de.limbusdev.guardianmonsters.fwmengine.world.model.MonsterArea;
 import de.limbusdev.guardianmonsters.fwmengine.world.model.WarpPoint;
 import de.limbusdev.guardianmonsters.guardians.battle.BattleFactory;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
+import de.limbusdev.guardianmonsters.guardians.monsters.Team;
 import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.utils.geometry.IntRect;
 import de.limbusdev.guardianmonsters.utils.geometry.IntVec2;
@@ -216,9 +217,16 @@ public class MovementSystem extends EntitySystem {
                         System.out.print("Monster appeared!\n");
 
                         //............................................................. START BATTLE
+                        // TODO change min and max levels
                         input.inBattle = true;
-                        TeamComponent oppTeam = BattleFactory.getInstance().createOpponentTeam(ma);
-                        ecs.hud.battleScreen.init(Components.team.get(ecs.hero).team, oppTeam.team);
+                        ArrayMap<Integer, Float> guardianProbabilities = new ArrayMap<>();
+                        for(int i=0; i<ma.monsters.size; i++) {
+                            guardianProbabilities.put(ma.monsters.get(i), ma.monsterProbabilities.get(i));
+                        }
+                        Team oppTeam = BattleFactory.getInstance().createOpponentTeam(
+                            guardianProbabilities,ma.teamSizeProbabilities,1,1
+                        );
+                        ecs.hud.battleScreen.init(Components.team.get(ecs.hero).team, oppTeam);
                         Services.getScreenManager().pushScreen(ecs.hud.battleScreen);
                         //............................................................. START BATTLE
 

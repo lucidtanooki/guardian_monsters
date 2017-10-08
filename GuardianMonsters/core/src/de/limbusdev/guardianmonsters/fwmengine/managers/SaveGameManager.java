@@ -27,9 +27,9 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.SaveGameComp
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TeamComponent;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.GameArea;
 import de.limbusdev.guardianmonsters.guardians.GuardiansServiceLocator;
-import de.limbusdev.guardianmonsters.guardians.battle.BattleFactory;
 import de.limbusdev.guardianmonsters.guardians.items.IItemService;
 import de.limbusdev.guardianmonsters.guardians.items.Inventory;
+import de.limbusdev.guardianmonsters.guardians.monsters.AGuardianFactory;
 import de.limbusdev.guardianmonsters.model.gamestate.GameState;
 import de.limbusdev.guardianmonsters.model.gamestate.SerializableGameState;
 
@@ -121,7 +121,8 @@ public class SaveGameManager extends EntitySystem {
         inventory.putItemInInventory(items.getItem("claws-wood"));
 
         TeamComponent team = new TeamComponent();
-        team.team.put(0, BattleFactory.getInstance().createGuardian(1));
+        AGuardianFactory factory = GuardiansServiceLocator.getGuardianFactory();
+        team.team.put(0, factory.createGuardian(1,1));
 
         gameState = new GameState(
             Constant.startMap,

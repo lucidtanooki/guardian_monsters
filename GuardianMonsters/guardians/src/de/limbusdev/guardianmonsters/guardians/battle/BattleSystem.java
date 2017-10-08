@@ -12,6 +12,17 @@ import static de.limbusdev.guardianmonsters.guardians.Constant.HERO;
 import static de.limbusdev.guardianmonsters.guardians.Constant.OPPONENT;
 
 /**
+ * Correct Usage:
+ *
+ * 1. Create Teams using AGuardianFactory
+ * 2. Initialize BattleSystem with these Teams
+ * 3. BS.getActiveMonster()
+ * 4. choose Target: BS.setChosenTaget(Target)
+ * 5. choose Ability to use: BS.setChosenAbility(Ability)
+ * 6. calculate Attack: BS.attack()
+ * 7. apply calculated Attack: BS.applyAttack()
+ * 8. continue: BS.continue()
+ *
  * @author Georg Eckert 2017
  */
 

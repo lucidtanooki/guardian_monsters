@@ -2,7 +2,6 @@ package de.limbusdev.guardianmonsters.guardians.monsters;
 
 import com.badlogic.gdx.math.MathUtils;
 
-import de.limbusdev.guardianmonsters.guardians.Constant;
 import de.limbusdev.guardianmonsters.guardians.StatCalculator;
 import de.limbusdev.guardianmonsters.guardians.abilities.AbilityGraph;
 import de.limbusdev.guardianmonsters.guardians.items.equipment.Equipment;
@@ -148,8 +147,8 @@ public class IndividualStatistics
     {
         this.core = core;
         this.character = character;
-        this.level = level;
-        this.abilityLevels = level-1;
+        this.level = 0;
+        this.abilityLevels = -1;
 
         this.growthStats = new Statistics(0,0,0,0,0,0,0);
         this.currentStats = commonStatistics.clone();
@@ -164,14 +163,15 @@ public class IndividualStatistics
             MathUtils.random(0,15)
         );
 
-        for(int i=1; i<level; i++)
+        for(int i=0; i<level; i++)
         {
             levelUp();
         }
 
         healCompletely();
 
-        this.EXP = 0;
+        // set EXP according to level
+        this.EXP = StatCalculator.calcEXPtoReachLevel(level);
 
         Statistics nullStats = new Statistics(0,0,0,0,0,0,0);
         lvlUpReport = new LevelUpReport(nullStats, nullStats, 0, 0);
@@ -293,8 +293,8 @@ public class IndividualStatistics
 
         this.EXP += extEXP;
 
-        if(this.EXP >= getEXPAvailableAtLevel(level)) {
-            this.EXP -= getEXPAvailableAtLevel(level);
+        if(this.EXP >= StatCalculator.calcEXPtoReachLevel(level)) {
+            this.EXP -= StatCalculator.calcEXPtoReachLevel(level);
             levelUp();
             leveledUp = true;
         }
@@ -386,7 +386,7 @@ public class IndividualStatistics
     }
 
     public int getEXPfraction() {
-        return MathUtils.round(EXP/1.f/getEXPAvailableAtLevel(level)*100f);
+        return MathUtils.round(EXP/1.f/StatCalculator.calcEXPtoReachLevel(level)*100f);
     }
 
     public int getHPfraction() {
@@ -397,23 +397,14 @@ public class IndividualStatistics
         return MathUtils.round(100f*currentStats.MP/getMPmax());
     }
 
-    /**
-     * Calculates how much EXP are available at the given level
-     * @param level
-     * @return
-     */
-    public static int getEXPAvailableAtLevel(int level)
-    {
-        float levelFactor = (float) Math.floor(Math.pow(level, Constant.LVL_EXPONENT));
-        return MathUtils.floor(levelFactor);
-    }
+
 
     /**
      * Calculates how much EXP are still needed to reach the next level
      * @return
      */
     public int getEXPtoNextLevel() {
-        return (getEXPAvailableAtLevel(level) - EXP);
+        return (StatCalculator.calcEXPtoReachLevel(level) - EXP);
     }
 
     public Equipment giveEquipment(Equipment equipment)
@@ -869,4 +860,10 @@ public class IndividualStatistics
 
     // ............................................................................................. DELEGATIONS
 
+
+    @Override
+    public String toString()
+    {
+        return maxStats.toString();
+    }
 }

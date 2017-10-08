@@ -1,6 +1,5 @@
-package de.limbusdev.guardianmonsters.fwmengine.battle.control;
+package de.limbusdev.guardianmonsters.fwmengine.battle.controller;
 
-import de.limbusdev.guardianmonsters.fwmengine.battle.model.AttackCalculationReport;
 import de.limbusdev.guardianmonsters.guardians.GuardiansServiceLocator;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
@@ -19,7 +18,7 @@ public class BattleStringBuilder
         return text;
     }
 
-    public static String givenDamage(AGuardian attacker, AGuardian victim, AttackCalculationReport report)
+    public static String givenDamage(AGuardian attacker, AGuardian victim, de.limbusdev.guardianmonsters.guardians.battle.AttackCalculationReport report)
     {
         ISpeciesDescriptionService species = GuardiansServiceLocator.getSpecies();
         String attName = species.getCommonNameById(attacker.getSpeciesID());

@@ -36,10 +36,11 @@ public class GuardianFactory extends AGuardianFactory
 
         // Component 1: SpeciesDescription - Get Common Guardian Data from DataBase
         SpeciesDescription speciesDescription = species.getSpeciesDescription(ID);
+        newGuardian.injectSpeciesDescription(speciesDescription);
 
         // Component 2: IndividualStatistics - Copy Base Stats
         IndividualStatistics individualStatistics =
-            new IndividualStatistics(newGuardian, speciesDescription.getCommonStatistics(), 1);
+            new IndividualStatistics(newGuardian, speciesDescription.getCommonStatistics(), level);
 
         // Component 3: AbilityGraph - Initialize Ability Graph
         IAbilityGraph abilityGraph = new AbilityGraph(newGuardian, speciesDescription);
@@ -56,7 +57,6 @@ public class GuardianFactory extends AGuardianFactory
 
         // ....................................................................... inject components
 
-        newGuardian.injectSpeciesDescription(speciesDescription);
         newGuardian.injectIndiviualStatistics(individualStatistics);
         newGuardian.injectAbilityGraph(abilityGraph);
 

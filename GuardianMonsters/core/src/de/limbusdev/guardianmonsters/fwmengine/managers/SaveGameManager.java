@@ -21,13 +21,13 @@ import com.esotericsoftware.kryo.io.Output;
 import java.util.Iterator;
 
 import de.limbusdev.guardianmonsters.Constant;
-import de.limbusdev.guardianmonsters.fwmengine.battle.model.BattleFactory;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Components;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PositionComponent;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.SaveGameComponent;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TeamComponent;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.GameArea;
 import de.limbusdev.guardianmonsters.guardians.GuardiansServiceLocator;
+import de.limbusdev.guardianmonsters.guardians.battle.BattleFactory;
 import de.limbusdev.guardianmonsters.guardians.items.IItemService;
 import de.limbusdev.guardianmonsters.guardians.items.Inventory;
 import de.limbusdev.guardianmonsters.model.gamestate.GameState;
@@ -121,7 +121,7 @@ public class SaveGameManager extends EntitySystem {
         inventory.putItemInInventory(items.getItem("claws-wood"));
 
         TeamComponent team = new TeamComponent();
-        team.team.put(0, BattleFactory.getInstance().createMonster(1));
+        team.team.put(0, BattleFactory.getInstance().createGuardian(1));
 
         gameState = new GameState(
             Constant.startMap,

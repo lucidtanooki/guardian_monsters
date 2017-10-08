@@ -17,7 +17,8 @@ public class Team extends ArrayMap<Integer,AGuardian>
         this(7,1,1);
     }
 
-    public Team(int capacity, int maximumTeamSize, int activeTeamSize) {
+    public Team(int capacity, int maximumTeamSize, int activeTeamSize)
+    {
         super(true, capacity);
         this.maximumTeamSize = maximumTeamSize;
         this.activeTeamSize = activeTeamSize;
@@ -29,7 +30,8 @@ public class Team extends ArrayMap<Integer,AGuardian>
      * @param position2
      * @return  wether the swap was successful
      */
-    public boolean swapPositions(int position1, int position2) {
+    public boolean swapPositions(int position1, int position2)
+    {
         AGuardian guardian1 = get(position1);
         AGuardian guardian2 = get(position2);
 

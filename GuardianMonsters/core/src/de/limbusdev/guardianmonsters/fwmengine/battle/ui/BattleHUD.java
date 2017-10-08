@@ -7,10 +7,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
 import de.limbusdev.guardianmonsters.assets.paths.AssetPath;
-import de.limbusdev.guardianmonsters.fwmengine.battle.control.BattleStringBuilder;
-import de.limbusdev.guardianmonsters.fwmengine.battle.control.BattleSystem;
-import de.limbusdev.guardianmonsters.fwmengine.battle.control.MonsterManager;
-import de.limbusdev.guardianmonsters.fwmengine.battle.model.AttackCalculationReport;
+import de.limbusdev.guardianmonsters.fwmengine.battle.controller.BattleStringBuilder;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.AttackMenuWidget;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleActionMenuWidget;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.BattleAnimationWidget;
@@ -24,6 +21,9 @@ import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.MonsterMenuWidg
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.SevenButtonsWidget;
 import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.TargetMenuWidget;
 import de.limbusdev.guardianmonsters.guardians.abilities.Ability;
+import de.limbusdev.guardianmonsters.guardians.battle.AttackCalculationReport;
+import de.limbusdev.guardianmonsters.guardians.battle.BattleCalculator;
+import de.limbusdev.guardianmonsters.guardians.battle.BattleSystem;
 import de.limbusdev.guardianmonsters.guardians.items.Inventory;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.Team;
@@ -225,7 +225,7 @@ public class BattleHUD extends ABattleHUD {
             @Override
             public void onRunButton() {
                 System.out.println("Input: Run Button");
-                if(MonsterManager.tryToRun(leftTeam, rightTeam)) {
+                if(BattleCalculator.tryToRun(leftTeam, rightTeam)) {
                     battleStateSwitcher.toEscapeSuccessInfo();
                 } else {
                     battleStateSwitcher.toEscapeFailInfo();

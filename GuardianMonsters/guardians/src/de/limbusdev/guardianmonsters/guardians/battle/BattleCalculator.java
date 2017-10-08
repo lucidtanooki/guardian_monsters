@@ -1,22 +1,19 @@
-package de.limbusdev.guardianmonsters.fwmengine.battle.control;
+package de.limbusdev.guardianmonsters.guardians.battle;
 
 
 import com.badlogic.gdx.math.MathUtils;
 
-import de.limbusdev.guardianmonsters.fwmengine.battle.model.AttackCalculationReport;
-import de.limbusdev.guardianmonsters.fwmengine.battle.model.ElemEff;
 import de.limbusdev.guardianmonsters.guardians.abilities.Ability;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics;
 import de.limbusdev.guardianmonsters.guardians.monsters.Team;
-import de.limbusdev.guardianmonsters.services.Services;
 
 /**
  * Handles events of monsters like level up, earning EXP, changing status and so on
  *
  * @author Georg Eckert
  */
-public class MonsterManager
+public class BattleCalculator
 {
     /**
      * Call this, when a monster decides not to attack and instead defends itself
@@ -81,7 +78,7 @@ public class MonsterManager
 
         // Print Battle Debug Message
         String attackerName = attacker.getNickname();
-        String attackName   = Services.getL18N().getLocalizedAbilityName(ability.name);
+        String attackName   = ability.name;
         String victimName   = defender.getNickname();
         System.out.println(attackerName + ": " + attackName + " causes " + damage + " damage on " + victimName);
 

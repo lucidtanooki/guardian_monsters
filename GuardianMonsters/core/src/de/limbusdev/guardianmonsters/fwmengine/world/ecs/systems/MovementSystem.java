@@ -11,7 +11,6 @@ import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.TimeUtils;
 
 import de.limbusdev.guardianmonsters.Constant;
-import de.limbusdev.guardianmonsters.fwmengine.battle.model.BattleFactory;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.EntityComponentSystem;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.ColliderComponent;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Components;
@@ -21,6 +20,7 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PositionComp
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TeamComponent;
 import de.limbusdev.guardianmonsters.fwmengine.world.model.MonsterArea;
 import de.limbusdev.guardianmonsters.fwmengine.world.model.WarpPoint;
+import de.limbusdev.guardianmonsters.guardians.battle.BattleFactory;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.utils.geometry.IntRect;
@@ -211,7 +211,7 @@ public class MovementSystem extends EntitySystem {
                     if (ma.contains(new IntVec2(
                             position.x + Constant.TILE_SIZE / 2,
                             position.y + Constant.TILE_SIZE / 2))
-                            && MathUtils.randomBoolean(ma.attackProbabilities.get(0))) {
+                            && MathUtils.randomBoolean(ma.teamSizeProbabilities.get(0))) {
 
                         System.out.print("Monster appeared!\n");
 

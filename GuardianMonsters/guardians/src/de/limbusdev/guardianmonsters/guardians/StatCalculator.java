@@ -48,4 +48,21 @@ public class StatCalculator
         int stat = MathUtils.floor(characterFactor * (6f + MathUtils.floor((level/100f) * (2f*base+individualBase+MathUtils.floor(growth/4f)))));
         return stat;
     }
+
+    /**
+     * Calculates how much EXP are available at the given level
+     * @param level
+     * @return
+     */
+    public static int calcEXPtoReachLevel(int level)
+    {
+        if(level <= 1) return 0;
+        float levelFactor = (float) Math.floor(Math.pow(level, Constant.LVL_EXPONENT));
+        return MathUtils.floor(levelFactor);
+    }
+
+    public static int calcEXPavailableAtLevel(int level)
+    {
+        return calcEXPtoReachLevel(level+1) - calcEXPtoReachLevel(level);
+    }
 }

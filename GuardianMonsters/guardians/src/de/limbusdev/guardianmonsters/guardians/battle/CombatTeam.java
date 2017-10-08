@@ -1,4 +1,4 @@
-package de.limbusdev.guardianmonsters.fwmengine.battle.model;
+package de.limbusdev.guardianmonsters.guardians.battle;
 
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
@@ -47,7 +47,8 @@ public class CombatTeam extends ArrayMap<Integer,AGuardian>
      * @param guardian
      * @return battle field position
      */
-    public int getFieldPosition(AGuardian guardian) {
+    public int getFieldPosition(AGuardian guardian)
+    {
         if(!containsValue(guardian,false)) {
             throw new IllegalArgumentException("Monster " + guardian.toString() + " is not in this CombatTeam");
         }
@@ -58,13 +59,15 @@ public class CombatTeam extends ArrayMap<Integer,AGuardian>
         return containsValue(guardian,false);
     }
 
-    public AGuardian exchange(int position, AGuardian substitute) {
+    public AGuardian exchange(int position, AGuardian substitute)
+    {
         AGuardian replaced = get(position);
         put(position, substitute);
         return replaced;
     }
 
-    public int getRandomFitPosition() {
+    public int getRandomFitPosition()
+    {
         Array<Integer> fitPositions = new Array<>();
         for(int key : keys()) {
             AGuardian guardian = get(key);
@@ -79,7 +82,8 @@ public class CombatTeam extends ArrayMap<Integer,AGuardian>
      * Returns a random fit monster of this combat team
      * @return
      */
-    public AGuardian getRandomFitMember() {
+    public AGuardian getRandomFitMember()
+    {
         return get(getRandomFitPosition());
     }
 
@@ -87,7 +91,8 @@ public class CombatTeam extends ArrayMap<Integer,AGuardian>
      * Wether the whole combat team is defeated
      * @return
      */
-    public boolean isKO() {
+    public boolean isKO()
+    {
         boolean ko = true;
         for(AGuardian guardian : values()) {
             ko = ko && guardian.getIndividualStatistics().isKO();

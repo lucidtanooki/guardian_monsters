@@ -1,13 +1,12 @@
-package de.limbusdev.guardianmonsters.fwmengine.battle.model;
+package de.limbusdev.guardianmonsters.guardians.battle;
 
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 
-import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TeamComponent;
-import de.limbusdev.guardianmonsters.fwmengine.world.model.MonsterArea;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.GuardianFactory;
+import de.limbusdev.guardianmonsters.guardians.monsters.Team;
 
 
 /**
@@ -22,14 +21,14 @@ public class BattleFactory {
     private BattleFactory() {
         this.monsters = new ArrayMap<>();
         for(int i = 1; i<= 33; i++) {
-            createMonster(i);
+            createGuardian(i,1);
         }
     }
     /* ............................................................................... METHODS .. */
     
     /* ..................................................................... GETTERS & SETTERS .. */
-    public AGuardian createMonster(int ID) {
-        AGuardian guardian = GuardianFactory.getInstance().createGuardian(ID, 1);
+    public AGuardian createGuardian(int ID, int level) {
+        AGuardian guardian = GuardianFactory.getInstance().createGuardian(ID, level);
         this.monsters.put(ID, guardian);
         return guardian;
     }
@@ -39,35 +38,38 @@ public class BattleFactory {
         return instance;
     }
 
-    public TeamComponent createOpponentTeam(MonsterArea ma) {
-        TeamComponent team = new TeamComponent();
-        float oneMonsterProb = 1 - ma.attackProbabilities.get(1) + ma.attackProbabilities.get(2);
+    public Team createOpponentTeam(ArrayMap<Integer, Float> availableGuardianProbabilities, Array<Float> teamSizeProbabilities, int minLevel, int maxLevel)
+    {
+        float oneMonsterProb = 1 - teamSizeProbabilities.get(1) + teamSizeProbabilities.get(2);
         int numMonsters;
 
         // 1 Monster?
         if(MathUtils.randomBoolean(oneMonsterProb)) numMonsters = 1;
         else {
             // Decide 2 or 3 Monsters
-            if(MathUtils.randomBoolean(ma.attackProbabilities.get(1)/(1-oneMonsterProb))) numMonsters = 2;
+            if(MathUtils.randomBoolean(teamSizeProbabilities.get(1)/(1-oneMonsterProb))) numMonsters = 2;
             else numMonsters = 3;
         }
 
+        Team team = new Team(availableGuardianProbabilities.size, numMonsters, numMonsters);
+
         for(int j=0; j<numMonsters; j++) {
-            team.team.put(j,BattleFactory.getInstance().createMonster(
-                decideWichMonster(ma.monsters, ma.monsterProbabilities)));
+            team.put(j,BattleFactory.getInstance().createGuardian(
+                decideWichMonster(availableGuardianProbabilities), MathUtils.random(minLevel, maxLevel)));
         }
         return team;
     }
 
-    public int decideWichMonster(Array<Integer> monsters, Array<Float> probs) {
+    public int decideWichMonster(ArrayMap<Integer, Float> availableGuardianProbabilities)
+    {
         double p = MathUtils.random();
         double cumulativeProbability = 0.0;
-        for (int i=0;i<monsters.size;i++) {
-            cumulativeProbability += probs.get(i);
-            if (p <= cumulativeProbability) {
-                return monsters.get(i);
+        for(Integer key : availableGuardianProbabilities.keys()) {
+            cumulativeProbability += availableGuardianProbabilities.get(key);
+            if(p <= cumulativeProbability) {
+                return key;
             }
         }
-        return monsters.get(0);
+        return availableGuardianProbabilities.firstKey();
     }
 }

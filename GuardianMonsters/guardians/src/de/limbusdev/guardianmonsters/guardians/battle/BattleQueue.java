@@ -1,15 +1,13 @@
-package de.limbusdev.guardianmonsters.fwmengine.battle.control;
+package de.limbusdev.guardianmonsters.guardians.battle;
 
 import com.badlogic.ashley.signals.Signal;
 import com.badlogic.gdx.utils.Array;
 
-import de.limbusdev.guardianmonsters.fwmengine.battle.model.CombatTeam;
-import de.limbusdev.guardianmonsters.fwmengine.battle.model.MonsterSpeedComparator;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.Team;
 
-import static de.limbusdev.guardianmonsters.Constant.LEFT;
-import static de.limbusdev.guardianmonsters.Constant.RIGHT;
+import static de.limbusdev.guardianmonsters.guardians.Constant.HERO;
+import static de.limbusdev.guardianmonsters.guardians.Constant.OPPONENT;
 
 /**
  * BattleQueue
@@ -88,13 +86,13 @@ public class BattleQueue extends Signal<BattleQueue.QueueSignal> {
      * @return
      */
     public boolean peekNextSide() {
-        if(left.isMember(peekNext())) return LEFT;
-        else return RIGHT;
+        if(left.isMember(peekNext())) return HERO;
+        else return OPPONENT;
     }
 
     public AGuardian exchangeNext(AGuardian substitute) {
         CombatTeam combatTeam;
-        if(peekNextSide() == LEFT) {
+        if(peekNextSide() == HERO) {
             combatTeam = combatTeamLeft;
         } else {
             combatTeam = combatTeamRight;
@@ -148,12 +146,12 @@ public class BattleQueue extends Signal<BattleQueue.QueueSignal> {
     }
 
     public boolean getTeamSideFor(AGuardian guardian) {
-        if(left.isMember(guardian)) return LEFT;
-        else return RIGHT;
+        if(left.isMember(guardian)) return HERO;
+        else return OPPONENT;
     }
 
     public int getFieldPositionFor(AGuardian guardian) {
-        if(getTeamSideFor(guardian) == LEFT) {
+        if(getTeamSideFor(guardian) == HERO) {
             return combatTeamLeft.getFieldPosition(guardian);
         } else {
             return combatTeamRight.getFieldPosition(guardian);

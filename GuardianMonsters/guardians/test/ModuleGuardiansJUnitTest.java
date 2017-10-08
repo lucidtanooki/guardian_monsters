@@ -6,6 +6,7 @@ import org.junit.Test;
 import de.limbusdev.guardianmonsters.guardians.Element;
 import de.limbusdev.guardianmonsters.guardians.GuardiansServiceLocator;
 import de.limbusdev.guardianmonsters.guardians.ModuleGuardians;
+import de.limbusdev.guardianmonsters.guardians.StatCalculator;
 import de.limbusdev.guardianmonsters.guardians.abilities.Ability;
 import de.limbusdev.guardianmonsters.guardians.abilities.AbilityService;
 import de.limbusdev.guardianmonsters.guardians.abilities.IAbilityService;
@@ -164,11 +165,40 @@ public class ModuleGuardiansJUnitTest
         AGuardianFactory factory = GuardiansServiceLocator.getGuardianFactory();
         AGuardian guardian = factory.createGuardian(1,1);
         assertEquals(GuardiansServiceLocator.getSpecies().getSpeciesDescription(1), guardian.getSpeciesDescription());
+        assertEquals(1, guardian.getIndividualStatistics().getLevel());
+        assertEquals(0, guardian.getIndividualStatistics().getAbilityLevels());
+
+        System.out.print("Level " + guardian.getIndividualStatistics().getLevel() + ":\t");
+        System.out.println(guardian.getIndividualStatistics());
 
         AGuardian guardian2 = factory.createGuardian(1,1);
         assertNotEquals(guardian2, guardian);
 
+        AGuardian guardian3 = factory.createGuardian(1,5);
+        assertEquals(125, guardian3.getIndividualStatistics().getEXP());
+
+        System.out.print("Level " + guardian3.getIndividualStatistics().getLevel() + ":\t");
+        System.out.println(guardian3.getIndividualStatistics());
+        assertEquals(5, guardian3.getIndividualStatistics().getLevel());
+        assertEquals(4, guardian3.getIndividualStatistics().getAbilityLevels());
+
+
         ModuleGuardians.destroyModule();
+    }
+
+    @Test
+    public void statCalculatorTest()
+    {
+        assertEquals(0, StatCalculator.calcEXPavailableAtLevel(0));
+        assertEquals(0, StatCalculator.calcEXPtoReachLevel(0));
+        assertEquals(8, StatCalculator.calcEXPavailableAtLevel(1));
+        assertEquals(0, StatCalculator.calcEXPtoReachLevel(1));
+        assertEquals(19, StatCalculator.calcEXPavailableAtLevel(2));
+        assertEquals(8, StatCalculator.calcEXPtoReachLevel(2));
+        assertEquals(27, StatCalculator.calcEXPtoReachLevel(3));
+        assertEquals(125, StatCalculator.calcEXPtoReachLevel(5));
+        assertEquals(StatCalculator.calcEXPavailableAtLevel(2)+StatCalculator.calcEXPavailableAtLevel(1), StatCalculator.calcEXPtoReachLevel(3));
+        assertEquals(StatCalculator.calcEXPavailableAtLevel(5), StatCalculator.calcEXPtoReachLevel(6)-StatCalculator.calcEXPtoReachLevel(5));
     }
 
     @Test
@@ -180,14 +210,40 @@ public class ModuleGuardiansJUnitTest
         AGuardianFactory factory = GuardiansServiceLocator.getGuardianFactory();
         AGuardian guardian = factory.createGuardian(1,1);
 
+        System.out.print("Level " + 1 + ":\t");
+        System.out.println(guardian.getIndividualStatistics());
+
         for(int i=2; i<=99; i++)
         {
+            System.out.print("Level " + i + ":\t");
             guardian.getIndividualStatistics().earnEXP(guardian.getIndividualStatistics().getEXPtoNextLevel());
 
             assertEquals(i, guardian.getIndividualStatistics().getLevel());
 
             System.out.println(guardian.getIndividualStatistics().getLatestLevelUpReport().newStats);
         }
+
+        ModuleGuardians.destroyModule();
+    }
+
+    @Test
+    public void EXPcalculationTest()
+    {
+        ModuleGuardians.destroyModule();
+        ModuleGuardians.initModuleForTesting();
+
+
+
+        ModuleGuardians.destroyModule();
+    }
+
+    @Test
+    public void damageCalculationTest()
+    {
+        ModuleGuardians.destroyModule();
+        ModuleGuardians.initModuleForTesting();
+
+
 
         ModuleGuardians.destroyModule();
     }

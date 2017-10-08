@@ -6,7 +6,6 @@ import com.badlogic.gdx.utils.Array;
 
 import de.limbusdev.guardianmonsters.Constant;
 import de.limbusdev.guardianmonsters.enums.SkyDirection;
-import de.limbusdev.guardianmonsters.fwmengine.battle.model.BattleFactory;
 import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.CameraComponent;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.CharacterSpriteComponent;
@@ -26,6 +25,7 @@ import de.limbusdev.guardianmonsters.fwmengine.world.model.MapDescriptionInfo;
 import de.limbusdev.guardianmonsters.fwmengine.world.model.MapPersonInformation;
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.AnimatedPersonSprite;
 import de.limbusdev.guardianmonsters.guardians.GuardiansServiceLocator;
+import de.limbusdev.guardianmonsters.guardians.battle.BattleFactory;
 import de.limbusdev.guardianmonsters.guardians.items.IItemService;
 import de.limbusdev.guardianmonsters.guardians.items.Inventory;
 import de.limbusdev.guardianmonsters.model.gamestate.GameState;
@@ -94,7 +94,7 @@ public class EntityFactory
 
         // Add Team
         TeamComponent team = new TeamComponent();
-        team.team.put(0,BattleFactory.getInstance().createMonster(1));
+        team.team.put(0,BattleFactory.getInstance().createGuardian(1));
         if(restoreSave) {
             team.team = gameState.team;
         }

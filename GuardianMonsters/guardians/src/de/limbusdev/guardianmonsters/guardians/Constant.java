@@ -13,4 +13,10 @@ public interface Constant
     float LVL_EXPONENT = 3f;
 
     boolean DEBUGGING_ON = true;
+
+    boolean LEFT = true;
+    boolean RIGHT = false;
+
+    boolean HERO = true;
+    boolean OPPONENT = false;
 }

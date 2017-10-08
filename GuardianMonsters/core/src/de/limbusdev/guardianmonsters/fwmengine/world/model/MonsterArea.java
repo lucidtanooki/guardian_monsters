@@ -12,7 +12,7 @@ public class MonsterArea extends IntRect {
     /* ............................................................................ ATTRIBUTES .. */
     public Array<Integer> monsters;
     public Array<Float> monsterProbabilities;
-    public Array<Float> attackProbabilities; // for 1, 2 or 3 monsters
+    public Array<Float> teamSizeProbabilities; // for 1, 2 or 3 monsters
     /* ........................................................................... CONSTRUCTOR .. */
 
 
@@ -21,7 +21,7 @@ public class MonsterArea extends IntRect {
         super(x, y, width, height);
         this.monsters = new Array<>();
         this.monsterProbabilities = new Array<>();
-        this.attackProbabilities = attProb;
+        this.teamSizeProbabilities = attProb;
 
         String[] atts = monsterProperties.split(";");
 

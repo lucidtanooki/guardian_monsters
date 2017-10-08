@@ -23,7 +23,7 @@ public class GameStateDebugger {
 
     private void setUpTestInventory() {
 //        TeamComponent herTeam = new TeamComponent();
-//        Guardian mon = BattleFactory.getInstance().createMonster(1);
+//        Guardian mon = BattleFactory.getInstance().createGuardian(1);
 //        mon.abilityGraph.activateNode(1);
 //        mon.abilityGraph.activateNode(5);
 //        mon.abilityGraph.activateNode(9);
@@ -36,8 +36,8 @@ public class GameStateDebugger {
 //        mon.abilityGraph.activateNode(3);
 //        mon.abilityGraph.activateNode(7);
 //        herTeam.team.put(0,mon);
-//        herTeam.team.put(1,BattleFactory.getInstance().createMonster(2));
-//        herTeam.team.put(2,BattleFactory.getInstance().createMonster(3));
+//        herTeam.team.put(1,BattleFactory.getInstance().createGuardian(2));
+//        herTeam.team.put(2,BattleFactory.getInstance().createGuardian(3));
 //
 //        Inventory inventory = new Inventory();
 //
@@ -72,16 +72,16 @@ public class GameStateDebugger {
 
     private void setUpTestBattle() {
 //        Team heroTeam = new Team(3,3,3);
-//        heroTeam.put(0,BattleFactory.getInstance().createMonster(1));
-//        heroTeam.put(1,BattleFactory.getInstance().createMonster(2));
-//        heroTeam.put(2,BattleFactory.getInstance().createMonster(3));
+//        heroTeam.put(0,BattleFactory.getInstance().createGuardian(1));
+//        heroTeam.put(1,BattleFactory.getInstance().createGuardian(2));
+//        heroTeam.put(2,BattleFactory.getInstance().createGuardian(3));
 //        heroTeam.get(0).abilityGraph.activateNode(13);
 //        heroTeam.get(0).abilityGraph.setActiveAbility(6,1);
 //
 //        Team oppTeam = new Team(3,3,3);
-//        oppTeam.put(0,BattleFactory.getInstance().createMonster(4));
-//        oppTeam.put(1,BattleFactory.getInstance().createMonster(5));
-//        oppTeam.put(2,BattleFactory.getInstance().createMonster(6));
+//        oppTeam.put(0,BattleFactory.getInstance().createGuardian(4));
+//        oppTeam.put(1,BattleFactory.getInstance().createGuardian(5));
+//        oppTeam.put(2,BattleFactory.getInstance().createGuardian(6));
 //
 //
 //        Inventory inventory = new Inventory();
@@ -123,13 +123,13 @@ public class GameStateDebugger {
 
     private void TestBattleSystem() {
 //        TeamComponent heroTeam = new TeamComponent();
-//        heroTeam.team.put(0,BattleFactory.getInstance().createMonster(1));
-//        heroTeam.team.put(1,BattleFactory.getInstance().createMonster(2));
-//        heroTeam.team.put(2,BattleFactory.getInstance().createMonster(3));
+//        heroTeam.team.put(0,BattleFactory.getInstance().createGuardian(1));
+//        heroTeam.team.put(1,BattleFactory.getInstance().createGuardian(2));
+//        heroTeam.team.put(2,BattleFactory.getInstance().createGuardian(3));
 //        Team oppTeam = new Team(3,3,3);
-//        oppTeam.put(0,BattleFactory.getInstance().createMonster(4));
-//        oppTeam.put(1,BattleFactory.getInstance().createMonster(5));
-//        oppTeam.put(2,BattleFactory.getInstance().createMonster(6));
+//        oppTeam.put(0,BattleFactory.getInstance().createGuardian(4));
+//        oppTeam.put(1,BattleFactory.getInstance().createGuardian(5));
+//        oppTeam.put(2,BattleFactory.getInstance().createGuardian(6));
 //
 //        BattleSystem bs = new BattleSystem(heroTeam.team, oppTeam, new BattleSystem.Callbacks() {});
 //
@@ -157,11 +157,11 @@ public class GameStateDebugger {
 
     public void testResultScreen() {
 //        Team team = new Team(7,1,1);
-//        Guardian mon = BattleFactory.getInstance().createMonster(1);
+//        Guardian mon = BattleFactory.getInstance().createGuardian(1);
 //        mon.abilityGraph.activateNode(1);
 //        team.put(0,mon);
-//        team.put(1,BattleFactory.getInstance().createMonster(2));
-//        team.put(2,BattleFactory.getInstance().createMonster(3));
+//        team.put(1,BattleFactory.getInstance().createGuardian(2));
+//        team.put(2,BattleFactory.getInstance().createGuardian(3));
 //        Array<Item> droppedItems = new Array<>();
 //        droppedItems.add(ItemDB.getItem("bread"));
 //
@@ -178,9 +178,9 @@ public class GameStateDebugger {
 
     private void testGuardoSphereScreen() {
 //        Team heroTeam = new Team(3,3,3);
-//        heroTeam.put(0,BattleFactory.getInstance().createMonster(1));
-//        heroTeam.put(1,BattleFactory.getInstance().createMonster(2));
-//        heroTeam.put(2,BattleFactory.getInstance().createMonster(3));
+//        heroTeam.put(0,BattleFactory.getInstance().createGuardian(1));
+//        heroTeam.put(1,BattleFactory.getInstance().createGuardian(2));
+//        heroTeam.put(2,BattleFactory.getInstance().createGuardian(3));
 //
 //        game.setScreen(new GuardoSphereScreen(heroTeam, null));
     }

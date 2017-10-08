@@ -1,4 +1,4 @@
-package de.limbusdev.guardianmonsters.fwmengine.battle.model;
+package de.limbusdev.guardianmonsters.guardians.battle;
 
 import java.util.Comparator;
 

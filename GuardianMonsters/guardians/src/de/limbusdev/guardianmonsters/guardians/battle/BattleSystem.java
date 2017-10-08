@@ -1,31 +1,29 @@
-package de.limbusdev.guardianmonsters.fwmengine.battle.control;
+package de.limbusdev.guardianmonsters.guardians.battle;
 
 import com.badlogic.gdx.math.MathUtils;
 
 import java.util.Iterator;
 
-import de.limbusdev.guardianmonsters.fwmengine.battle.model.AttackCalculationReport;
-import de.limbusdev.guardianmonsters.fwmengine.battle.model.BattleResult;
 import de.limbusdev.guardianmonsters.guardians.abilities.Ability;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.Team;
 
-import static de.limbusdev.guardianmonsters.Constant.LEFT;
-import static de.limbusdev.guardianmonsters.Constant.RIGHT;
+import static de.limbusdev.guardianmonsters.guardians.Constant.HERO;
+import static de.limbusdev.guardianmonsters.guardians.Constant.OPPONENT;
 
 /**
  * @author Georg Eckert 2017
  */
 
-public class BattleSystem {
-
+public class BattleSystem
+{
     public static String TAG = BattleSystem.class.getSimpleName();
 
     private AIPlayer aiPlayer;
 
     private Callbacks callbacks;
 
-    private BattleQueue queue;
+    private de.limbusdev.guardianmonsters.guardians.battle.BattleQueue queue;
     private AGuardian chosenTarget;
     private AttackCalculationReport latestAttackReport;
     private BattleResult result;
@@ -35,7 +33,8 @@ public class BattleSystem {
     private boolean attackChosen;
 
     // ................................................................................. CONSTRUCTOR
-    public BattleSystem(Team left, Team right, Callbacks callbacks) {
+    public BattleSystem(Team left, Team right, Callbacks callbacks)
+    {
 
         this.callbacks = callbacks;
 
@@ -45,7 +44,7 @@ public class BattleSystem {
 
         aiPlayer = new AIPlayer();
 
-        queue = new BattleQueue(left,right);
+        queue = new de.limbusdev.guardianmonsters.guardians.battle.BattleQueue(left,right);
 
         result = new BattleResult(left, null);
     }
@@ -71,12 +70,12 @@ public class BattleSystem {
         // Calculate Ability
         Ability ability= getActiveMonster().getAbilityGraph().getActiveAbilities().get(attack);
         AGuardian attacker = getActiveMonster();
-        latestAttackReport = MonsterManager.calcAttack(attacker, target, ability);
+        latestAttackReport = BattleCalculator.calcAttack(attacker, target, ability);
         callbacks.onAttack(attacker, target, ability, latestAttackReport);
     }
 
     public void applyAttack() {
-        MonsterManager.apply(latestAttackReport);
+        BattleCalculator.apply(latestAttackReport);
         nextMonster();
         checkKO();
     }
@@ -89,7 +88,7 @@ public class BattleSystem {
      * The monster decides to not attack and instead raise it's defense values for one round
      */
     public void defend() {
-        latestAttackReport = MonsterManager.calcDefense(getActiveMonster());
+        latestAttackReport = BattleCalculator.calcDefense(getActiveMonster());
         callbacks.onDefense(getActiveMonster());
     }
 
@@ -109,12 +108,13 @@ public class BattleSystem {
         attackChosen = false;
     }
 
-    public void continueBattle() {
+    public void continueBattle()
+    {
         // Check if one team is KO
         if(queue.getCombatTeamLeft().isKO() || queue.getCombatTeamRight().isKO()) {
             callbacks.onBattleEnds(queue.getCombatTeamLeft().isKO());
         } else {
-            if (queue.peekNextSide() == RIGHT) {
+            if (queue.peekNextSide() == OPPONENT) {
                 // It's AI's turn
                 letAItakeTurn();
             } else {
@@ -181,7 +181,7 @@ public class BattleSystem {
      */
     public void letAItakeTurn()
     {
-        if(queue.peekNextSide() == LEFT) {
+        if(queue.peekNextSide() == HERO) {
             throw new IllegalStateException(TAG +
                 " AI can't take turn. The first monster in queue is not in it's team.");
         }

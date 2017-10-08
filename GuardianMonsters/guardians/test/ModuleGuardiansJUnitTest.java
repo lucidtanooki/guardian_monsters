@@ -315,11 +315,21 @@ public class ModuleGuardiansJUnitTest
         oppTeam.put(1,factory.createGuardian(1,1));
         oppTeam.put(2,factory.createGuardian(1,1));
 
-        BattleSystem bs = new BattleSystem(team, oppTeam, new BattleSystem.Callbacks() {});
+        final boolean[] battleEnds = {false};
+
+        BattleSystem bs = new BattleSystem(team, oppTeam, new BattleSystem.Callbacks()
+        {
+            @Override
+            public void onBattleEnds(boolean winnerSide)
+            {
+                System.out.println("Battle Ends: One team defeated");
+                battleEnds[0] = true;
+            }
+        });
 
         boolean enemyFit = true;
 
-        while(enemyFit)
+        while(enemyFit && !battleEnds[0])
         {
             System.out.println("\n### Player's turn ###");
             AGuardian m = bs.getActiveMonster();

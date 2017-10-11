@@ -93,6 +93,7 @@ public class BattleCalculator
             System.out.println("Only self defending");
             return;
         }
+        System.out.println(report.attacker.getUUID() + " attacks " + report.defender.getUUID() + " with " + report.attack.name);
         report.defender.getIndividualStatistics().decreaseHP(report.damage);
         report.attacker.getIndividualStatistics().decreaseMP(report.attack.MPcost);
     }

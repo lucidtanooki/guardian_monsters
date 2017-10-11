@@ -28,7 +28,7 @@ public class Team extends ArrayMap<Integer,AGuardian>
      * Swaps positions of two monsters, if both positions are populated.
      * @param position1
      * @param position2
-     * @return  wether the swap was successful
+     * @return  whether the swap was successful
      */
     public boolean swapPositions(int position1, int position2)
     {

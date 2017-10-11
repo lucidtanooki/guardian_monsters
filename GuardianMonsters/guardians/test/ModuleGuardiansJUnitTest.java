@@ -340,11 +340,16 @@ public class ModuleGuardiansJUnitTest
                 for(AGuardian g : oppTeam.values()) if(g.getIndividualStatistics().isFit()) oppKO = false;
                 assertTrue(teamKO || oppKO);
             }
+
+            @Override
+            public void onPlayersTurn()
+            {
+                super.onPlayersTurn();
+            }
         });
 
-        boolean enemyFit = true;
 
-        while(enemyFit && !battleEnds[0])
+        while(!battleEnds[0])
         {
             System.out.println("\n### Player's turn ###");
             AGuardian m = bs.getActiveMonster();
@@ -361,12 +366,16 @@ public class ModuleGuardiansJUnitTest
                 }
             }
             AGuardian target = targets.get(MathUtils.random(0,targets.size-1));
+            System.out.println("Hero chooses target: " + target.getUUID());
+
+            assertEquals("Active Monster is in Hero's team", true, team.isMember(m));
+            assertEquals("Target is in Opponent's team", true, oppTeam.isMember(target));
+
             bs.setChosenTarget(target);
             bs.setChosenAttack(att);
             bs.attack();
             bs.applyAttack();
             bs.continueBattle();
-
         }
 
         ModuleGuardians.destroyModule();

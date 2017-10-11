@@ -46,7 +46,6 @@ public class BattleSystem
     // ................................................................................. CONSTRUCTOR
     public BattleSystem(Team left, Team right, Callbacks callbacks)
     {
-
         this.callbacks = callbacks;
 
         choiceComplete = false;
@@ -111,7 +110,7 @@ public class BattleSystem
         callbacks.onDoingNothing(getActiveMonster());
     }
 
-    public void nextMonster()
+    private void nextMonster()
     {
         queue.next();
         chosenAttack = 0;

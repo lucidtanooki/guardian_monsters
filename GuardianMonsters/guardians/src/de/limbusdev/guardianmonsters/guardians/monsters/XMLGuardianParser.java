@@ -162,7 +162,7 @@ public class XMLGuardianParser
             );
         }
 
-        if(Constant.DEBUGGING_ON)
+        if(Constant.PRINT_PARSED_GUARDIAN)
         {
             System.out.println("Parsed XML Guardian Data:\n");
             System.out.println(speciesDescription.prettyPrint());

@@ -879,6 +879,15 @@ public class IndividualStatistics
     @Override
     public String toString()
     {
-        return maxStats.toString();
+        String stats = String.format("HP: %d / %d\tMP: %d / %d\tPStr: %d\tPDef: %d\tMStr: %d\tMDef: %d\tSpeed: %d",
+            currentStats.getHP(), maxStats.getHP(),
+            currentStats.getMP(), maxStats.getMP(),
+            maxStats.getPStr(),
+            maxStats.getPDef(),
+            maxStats.getMStr(),
+            maxStats.getMDef(),
+            maxStats.getSpeed()
+        );
+        return stats;
     }
 }

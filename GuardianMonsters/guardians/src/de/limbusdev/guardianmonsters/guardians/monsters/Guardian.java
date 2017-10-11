@@ -97,6 +97,10 @@ public class Guardian extends AGuardian
     @Override
     public String toString()
     {
-        return "SpeciesID: " + getSpeciesID() + " Level: " + individualStatistics.getLevel() + " UUID: " + getUUID();
+        String label = "\n+------------------------------------------------------------------------+\n";
+        label += "| " + String.format("UUID: %s\n| SID: %d,\t Lvl: %d", getUUID(), getIndividualStatistics().getLevel(), getSpeciesID());
+        label += "\n| " + individualStatistics.toString();
+        label +=       "\n+------------------------------------------------------------------------+\n";
+        return label;
     }
 }

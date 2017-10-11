@@ -307,29 +307,38 @@ public class ModuleGuardiansJUnitTest
     public void TestBattleSystem()
     {
         // TODO add real tests
+        printTestLabel("Battle System");
+
         ModuleGuardians.destroyModule();
         ModuleGuardians.initModuleForTesting();
 
         AGuardianFactory factory = GuardiansServiceLocator.getGuardianFactory();
 
+        // Team Creation
         Team team = new Team(3,3,3);
         team.put(0, factory.createGuardian(1,1));
         team.put(1, factory.createGuardian(1,1));
         team.put(2, factory.createGuardian(1,1));
         Team oppTeam = new Team(3,3,3);
-        oppTeam.put(0,factory.createGuardian(1,1));
-        oppTeam.put(1,factory.createGuardian(1,1));
-        oppTeam.put(2,factory.createGuardian(1,1));
+        oppTeam.put(0,factory.createGuardian(4,1));
+        oppTeam.put(1,factory.createGuardian(4,1));
+        oppTeam.put(2,factory.createGuardian(4,1));
 
+        // Battle System Initialization
         final boolean[] battleEnds = {false};
-
         BattleSystem bs = new BattleSystem(team, oppTeam, new BattleSystem.Callbacks()
         {
             @Override
             public void onBattleEnds(boolean winnerSide)
             {
-                System.out.println("Battle Ends: One team defeated");
+                System.out.println("\n=== Battle ends, winner is: " + ((winnerSide) ? "Hero" : "Opponent") + " ===\n");
                 battleEnds[0] = true;
+
+                // Check, that one team is KO
+                boolean teamKO = true, oppKO = true;
+                for(AGuardian g : team.values()) if(g.getIndividualStatistics().isFit()) teamKO = false;
+                for(AGuardian g : oppTeam.values()) if(g.getIndividualStatistics().isFit()) oppKO = false;
+                assertTrue(teamKO || oppKO);
             }
         });
 
@@ -357,6 +366,7 @@ public class ModuleGuardiansJUnitTest
             bs.attack();
             bs.applyAttack();
             bs.continueBattle();
+
         }
 
         ModuleGuardians.destroyModule();
@@ -366,5 +376,16 @@ public class ModuleGuardiansJUnitTest
     public void debuggingOnTest()
     {
         assertTrue(Constant.DEBUGGING_ON);
+    }
+
+    public static void printTestLabel(String name)
+    {
+        System.out.println("\n\n#############################################################");
+        System.out.println("#                                                           #");
+        System.out.print("#          Test: " + name);
+        for (int i = 0; i < 43 - name.length(); i++) System.out.print(" ");
+        System.out.println("#");
+        System.out.println("#                                                           #");
+        System.out.println("#############################################################");
     }
 }

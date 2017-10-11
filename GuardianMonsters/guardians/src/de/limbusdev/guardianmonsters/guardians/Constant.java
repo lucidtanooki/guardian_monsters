@@ -13,6 +13,7 @@ public interface Constant
     float LVL_EXPONENT = 3f;
 
     boolean DEBUGGING_ON = true;
+    boolean PRINT_PARSED_GUARDIAN = false;
 
     boolean LEFT = true;
     boolean RIGHT = false;

@@ -10,6 +10,10 @@
 
 * [Character Templates](http://playerred-1.deviantart.com/art/Pokemon-Character-bases-New-174895108) by [PlayerRed-1](http://playerred-1.deviantart.com/)
 
+# Fonts
+
+MUN Public Domain Font https://www.dafont.com/mun.font
+
 
 ## Tilesets from the Tuxemon Project
 

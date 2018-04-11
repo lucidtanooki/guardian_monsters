@@ -1,0 +1,40 @@
+[
+  {
+    "id": 1,
+    "metamorphsTo": 2,
+    "metamorphosisNodes": [91,92],
+    "elements": ["earth"],
+    "abilities": [
+      {"abilityID": 2, "element": "none", "abilityPos": 0},
+      {"abilityID": 2, "element": "earth", "abilityPos": 13},
+      {"abilityID": 3, "element": "earth", "abilityPos": 11},
+      {"abilityID": 4, "element": "earth", "abilityPos": 15}
+    ],
+    "basestats": {
+      "hp": 300, "mp": 50, "speed": 10, "pstr": 10, "pdef": 10, "mstr": 10, "mdef": 10
+    },
+    "equipment-compatibility": {
+      "head": "bridle", "hands": "claws", "body": "barding", "feet": "shinprotection"
+    },
+    "ability-graph-equip": {
+      "head": 21, "hands": 23, "body": 89, "feet": 90
+    },
+    "metaForms": [
+      {
+        "form": 0,
+        "nameID": "gm001_0_fordin",
+        "elements": ["earth"]
+      },
+      {
+        "form": 1,
+        "nameID": "gm001_1_stegofor",
+        "elements": ["earth", "forest"]
+      },
+      {
+        "form": 2,
+        "nameID": "gm001_2_brachifor",
+        "elements": ["earth", "forest"]
+      }
+    ]
+  }
+]

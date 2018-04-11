@@ -18,7 +18,7 @@ public interface IAbilityGraph
 
     ArrayMap<Integer, Node> getNodes();
     Array<Edge> getEdges();
-    ArrayMap<Integer,Ability> getAbilityNodes();
+    ArrayMap<Integer,Ability.aID> getAbilityNodes();
     ArrayMap<Integer,BodyPart> getEquipmentNodes();
     Array<Integer> getMetamorphosisNodes();
 
@@ -70,7 +70,7 @@ public interface IAbilityGraph
      * @param abilitySlot   slot for in battle ability usage
      * @return              ability which resides there
      */
-    Ability getActiveAbility(int abilitySlot);
+    Ability.aID getActiveAbility(int abilitySlot);
 
     /**
      * Puts an ability into one of seven slots, available in battle
@@ -79,5 +79,5 @@ public interface IAbilityGraph
      */
     void setActiveAbility(int slot, int learntAbilityNumber);
 
-    ArrayMap<Integer, Ability> getActiveAbilities();
+    ArrayMap<Integer, Ability.aID> getActiveAbilities();
 }

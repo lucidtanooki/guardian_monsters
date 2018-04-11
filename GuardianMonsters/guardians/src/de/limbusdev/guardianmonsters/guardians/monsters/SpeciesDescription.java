@@ -34,7 +34,7 @@ public class SpeciesDescription
     // ............................................................................................. ATTRIBUTES
     private int speciesID;
 
-    private ArrayMap<Integer, Ability> abilityNodes;
+    private ArrayMap<Integer, Ability.aID> abilityNodes;
     private ArrayMap<Integer, BodyPart> equipmentNodes;
     private Array<Integer> metamorphosisNodes;
 
@@ -71,7 +71,7 @@ public class SpeciesDescription
     protected SpeciesDescription (
         int speciesID,
         CommonStatistics commonStatistics,
-        ArrayMap<Integer, Ability> abilityNodes,
+        ArrayMap<Integer, Ability.aID> abilityNodes,
         ArrayMap<Integer, BodyPart> equipmentNodes,
         Array<Integer> metamorphosisNodes,
         HeadEquipment.Type head,
@@ -120,7 +120,7 @@ public class SpeciesDescription
         return metaForms.get(currentForm).nameID;
     }
 
-    public ArrayMap<Integer, Ability> getAbilityNodes() {
+    public ArrayMap<Integer, Ability.aID> getAbilityNodes() {
         return abilityNodes;
     }
 
@@ -157,7 +157,7 @@ public class SpeciesDescription
         pretty += "+---- Guardian Species Description ----+\n";
         pretty += "| Species: " + speciesID + "\n";
         pretty += "| Abilitiy-Nodes: \n";
-        for(int key : abilityNodes.keys()) pretty += "|\tNode " + key + ":\t" + abilityNodes.get(key).name + "\n";
+        for(int key : abilityNodes.keys()) pretty += "|\tNode " + key + ":\t" + abilityNodes.get(key).ID + "_" + abilityNodes.get(key).element + "\n";
         pretty += "| Equipment-Nodes: \n";
         for(int key : equipmentNodes.keys()) pretty += "|\tNode " + key + ":\t" + equipmentNodes.get(key).toString() + "\n";
         pretty += "| Equipment-Type:\n";

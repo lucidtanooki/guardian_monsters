@@ -77,7 +77,7 @@ public class SerializableAbilityGraph {
             edges.add(graph.deserialize(sEdge));
         }
 
-        ArrayMap<Integer,Ability> abilityNodes = new ArrayMap<>();
+        ArrayMap<Integer,Ability.aID> abilityNodes = new ArrayMap<>();
         for(SAbilityNode sAbilityNode : graph.abilityNodes) {
             abilityNodes.put(sAbilityNode.ID, SerializableAbility.deserialize(sAbilityNode.ability));
         }
@@ -94,12 +94,12 @@ public class SerializableAbilityGraph {
             }
         }
 
-        ArrayMap<Integer,Ability> activeAbilities = new ArrayMap<>();
+        ArrayMap<Integer,Ability.aID> activeAbilities = new ArrayMap<>();
         for(int i : graph.activeAbilities) {
             activeAbilities.put(i,SerializableAbility.deserialize(graph.abilityNodes[i].ability));
         }
 
-        ArrayMap<Integer,Ability> learntAbilities = new ArrayMap<>();
+        ArrayMap<Integer,Ability.aID> learntAbilities = new ArrayMap<>();
         for(int key : abilityNodes.keys()) {
             if(nodes.get(key).isActive()) {
                 learntAbilities.put(key,abilityNodes.get(key));

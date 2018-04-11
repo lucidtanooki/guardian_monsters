@@ -8,9 +8,7 @@ import com.badlogic.gdx.utils.JsonValue;
 
 import de.limbusdev.guardianmonsters.guardians.Constant;
 import de.limbusdev.guardianmonsters.guardians.Element;
-import de.limbusdev.guardianmonsters.guardians.GuardiansServiceLocator;
 import de.limbusdev.guardianmonsters.guardians.abilities.Ability;
-import de.limbusdev.guardianmonsters.guardians.abilities.IAbilityService;
 import de.limbusdev.guardianmonsters.guardians.abilities.Node;
 import de.limbusdev.guardianmonsters.guardians.items.equipment.BodyEquipment;
 import de.limbusdev.guardianmonsters.guardians.items.equipment.BodyPart;
@@ -159,7 +157,7 @@ public class JSONGuardianParser
         Array<Integer> metamorphosisNodes = parseMetamorphosisNodes(spec);
 
         // ......................................................................................... abilities
-        ArrayMap<Integer, Ability> attacks = parseAbilities(spec);
+        ArrayMap<Integer, Ability.aID> attacks = parseAbilities(spec);
 
         // ......................................................................................... equipment
         ArrayMap<Integer, BodyPart> equipmentGraph = parseEquipmentGraph(spec);
@@ -224,16 +222,14 @@ public class JSONGuardianParser
     /**
      * Parses the {@link Ability}s of a Guardian.
      */
-    public static ArrayMap<Integer, Ability> parseAbilities(JSONGuardianSpeciesDescription spec)
+    public static ArrayMap<Integer, Ability.aID> parseAbilities(JSONGuardianSpeciesDescription spec)
     {
-        IAbilityService attInf = GuardiansServiceLocator.getAbilities();
-        ArrayMap<Integer, Ability> abilities = new ArrayMap<>();
+        ArrayMap<Integer, Ability.aID> abilities = new ArrayMap<>();
 
         for(JSONGuardianSpeciesDescription.JSONGuardianAbility jsonAbility : spec.abilities)
         {
             Element element = Element.valueOf(jsonAbility.element.toUpperCase());
-            Ability ability = attInf.getAbility(element, jsonAbility.abilityID);
-            abilities.put(jsonAbility.abilityPos, ability);
+            abilities.put(jsonAbility.abilityPos, new Ability.aID(jsonAbility.abilityID, element));
         }
 
         return abilities;

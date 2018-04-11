@@ -18,12 +18,12 @@ public class AbilityGraph implements IAbilityGraph
     private ArrayMap<Integer, Node> nodes;
     private Array<Edge> edges;
 
-    private ArrayMap<Integer,Ability> abilityNodes;
+    private ArrayMap<Integer,Ability.aID> abilityNodes;
     private ArrayMap<Integer,BodyPart> equipmentNodes;
     private Array<Integer> metamorphosisNodes;
 
-    private ArrayMap<Integer, Ability> activeAbilities;
-    private ArrayMap<Integer,Ability> learntAbilities;
+    private ArrayMap<Integer, Ability.aID> activeAbilities;
+    private ArrayMap<Integer,Ability.aID> learntAbilities;
     private Array<BodyPart> learntEquipment;
 
     public AbilityGraph(AGuardian core, SpeciesDescription data)
@@ -54,7 +54,7 @@ public class AbilityGraph implements IAbilityGraph
         init(core, data);
     }
 
-    public AbilityGraph(ArrayMap<Integer, Node> nodes, Array<Edge> edges, ArrayMap<Integer, Ability> abilityNodes, ArrayMap<Integer, BodyPart> equipmentNodes, Array<Integer> metamorphosisNodes, ArrayMap<Integer, Ability> activeAbilities, ArrayMap<Integer, Ability> learntAbilities, Array<BodyPart> learntEquipment)
+    public AbilityGraph(ArrayMap<Integer, Node> nodes, Array<Edge> edges, ArrayMap<Integer, Ability.aID> abilityNodes, ArrayMap<Integer, BodyPart> equipmentNodes, Array<Integer> metamorphosisNodes, ArrayMap<Integer, Ability.aID> activeAbilities, ArrayMap<Integer, Ability.aID> learntAbilities, Array<BodyPart> learntEquipment)
     {
         this.nodes = nodes;
         this.edges = edges;
@@ -89,7 +89,7 @@ public class AbilityGraph implements IAbilityGraph
         }
 
         int counter = 0;
-        for(Ability a : learntAbilities.values())
+        for(Ability.aID a : learntAbilities.values())
         {
             activeAbilities.put(counter, a);
             counter++;
@@ -111,7 +111,7 @@ public class AbilityGraph implements IAbilityGraph
     }
 
     @Override
-    public ArrayMap<Integer, Ability> getAbilityNodes()
+    public ArrayMap<Integer, Ability.aID> getAbilityNodes()
     {
         return abilityNodes;
     }
@@ -199,17 +199,17 @@ public class AbilityGraph implements IAbilityGraph
     }
 
     @Override
-    public Ability getActiveAbility(int abilitySlot) {
+    public Ability.aID getActiveAbility(int abilitySlot) {
         return activeAbilities.get(abilitySlot);
     }
 
     @Override
     public void setActiveAbility(int slot, int learntAbilityNumber) {
-        Ability abilityToLearn = learntAbilities.get(learntAbilityNumber);
+        Ability.aID abilityToLearn = learntAbilities.get(learntAbilityNumber);
         if(abilityToLearn == null) return;
 
         for(int key : activeAbilities.keys()) {
-            Ability abilityAtThisSlot = activeAbilities.get(key);
+            Ability.aID abilityAtThisSlot = activeAbilities.get(key);
 
             if(abilityAtThisSlot != null) {
                 if (abilityAtThisSlot.equals(abilityToLearn)) {
@@ -224,7 +224,7 @@ public class AbilityGraph implements IAbilityGraph
     }
 
     @Override
-    public ArrayMap<Integer, Ability> getActiveAbilities() {
+    public ArrayMap<Integer, Ability.aID> getActiveAbilities() {
         return activeAbilities;
     }
 

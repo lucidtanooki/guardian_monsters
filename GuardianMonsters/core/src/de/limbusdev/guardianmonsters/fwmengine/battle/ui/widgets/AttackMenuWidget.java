@@ -3,6 +3,7 @@ package de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 import de.limbusdev.guardianmonsters.assets.paths.AssetPath;
+import de.limbusdev.guardianmonsters.guardians.GuardiansServiceLocator;
 import de.limbusdev.guardianmonsters.guardians.abilities.Ability;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.services.Services;
@@ -29,7 +30,9 @@ public class AttackMenuWidget extends SevenButtonsWidget {
 
         // for every attack, activate a button
         for(int i=0; i<7; i++) {
-            Ability attack = guardian.getAbilityGraph().getActiveAbility(i);
+
+            Ability.aID abilityID = guardian.getAbilityGraph().getActiveAbility(i);
+            Ability attack = GuardiansServiceLocator.getAbilities().getAbility(abilityID);
 
             if(attack != null) {
                 setButtonStyle(i,skin, AssetPath.Skin.attackButtonStyle(attack.element));

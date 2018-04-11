@@ -53,6 +53,12 @@ public class GuardiansServiceLocator
                 }
 
                 @Override
+                public Ability getAbility(Ability.aID aID)
+                {
+                    return new Ability(1, Ability.DamageType.PHYSICAL, Element.NONE, 0, "attNone1_selfdef");
+                }
+
+                @Override
                 public void destroy()
                 {
 

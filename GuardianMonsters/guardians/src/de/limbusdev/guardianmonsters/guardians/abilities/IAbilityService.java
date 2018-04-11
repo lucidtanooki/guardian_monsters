@@ -12,4 +12,5 @@ import de.limbusdev.guardianmonsters.guardians.GuardiansServiceLocator;
 public interface IAbilityService extends GuardiansServiceLocator.Service
 {
     Ability getAbility(Element e, int index);
+    Ability getAbility(Ability.aID aID);
 }

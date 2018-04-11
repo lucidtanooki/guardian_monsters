@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.I18NBundle;
 
+import de.limbusdev.guardianmonsters.guardians.GuardiansServiceLocator;
 import de.limbusdev.guardianmonsters.guardians.abilities.Ability;
 import de.limbusdev.guardianmonsters.guardians.abilities.IAbilityGraph;
 import de.limbusdev.guardianmonsters.guardians.abilities.Node;
@@ -143,7 +144,9 @@ public class AbilityDetailWidget extends Container {
     }
 
 
-    private void initAbilityDetails(Ability ability) {
+    private void initAbilityDetails(Ability.aID abilityID) {
+
+        Ability ability = GuardiansServiceLocator.getAbilities().getAbility(abilityID);
         if(ability == null) {
             name.setText("Empty");
             damage.setText("0");

@@ -22,6 +22,7 @@ import de.limbusdev.guardianmonsters.fwmengine.battle.ui.widgets.SevenButtonsWid
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.abilities.AbilityDetailWidget;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.team.TeamMemberSwitcher;
 import de.limbusdev.guardianmonsters.guardians.Element;
+import de.limbusdev.guardianmonsters.guardians.GuardiansServiceLocator;
 import de.limbusdev.guardianmonsters.guardians.abilities.Ability;
 import de.limbusdev.guardianmonsters.guardians.abilities.AbilityGraph;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
@@ -78,7 +79,9 @@ public class AbilityChoiceSubMenu extends AInventorySubMenu
         abilityButtons.clear();
         I18NBundle translation = Services.getL18N().Abilities();
         for(final int key : m.getAbilityGraph().getActiveAbilities().keys()) {
-            Ability ability = m.getAbilityGraph().getActiveAbilities().get(key);
+
+            Ability.aID abilityID = m.getAbilityGraph().getActiveAbilities().get(key);
+            Ability ability = GuardiansServiceLocator.getAbilities().getAbility(abilityID);
             TextButton tb = new TextButton(translation.get(ability.name), getSkin(), "item-button-sandstone");
             tb.addListener(new com.badlogic.gdx.scenes.scene2d.utils.ClickListener() {
                 @Override
@@ -122,7 +125,9 @@ public class AbilityChoiceSubMenu extends AInventorySubMenu
     private void refreshAbilitySlotButtons() {
         AGuardian guardian = team.get(switcher.getCurrentlyChosen());
         for(int i=0; i<7; i++) {
-            Ability ability = guardian.getAbilityGraph().getActiveAbility(i);
+
+            Ability.aID abilityID = guardian.getAbilityGraph().getActiveAbility(i);
+            Ability ability = GuardiansServiceLocator.getAbilities().getAbility(abilityID);
             if(ability != null) {
                 abilitySlotButtons.setButtonText(i, ability);
                 abilitySlotButtons.setButtonStyle(i, ability.element);

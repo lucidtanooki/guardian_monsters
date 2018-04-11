@@ -1,9 +1,7 @@
 package de.limbusdev.guardianmonsters.model.gamestate;
 
 import de.limbusdev.guardianmonsters.guardians.Element;
-import de.limbusdev.guardianmonsters.guardians.GuardiansServiceLocator;
 import de.limbusdev.guardianmonsters.guardians.abilities.Ability;
-import de.limbusdev.guardianmonsters.guardians.abilities.IAbilityService;
 
 /**
  * SerializableAbility
@@ -19,16 +17,15 @@ public class SerializableAbility
     @ForSerializationOnly
     public SerializableAbility() {}
 
-    public SerializableAbility(Ability ability)
+    public SerializableAbility(Ability.aID ability)
     {
         this.element = ability.element;
         this.ID = ability.ID;
     }
 
-    public static Ability deserialize(SerializableAbility sAbility)
+    public static Ability.aID deserialize(SerializableAbility sAbility)
     {
-        IAbilityService abilities = GuardiansServiceLocator.getAbilities();
-        Ability ability = abilities.getAbility(sAbility.element, sAbility.ID);
-        return ability;
+        Ability.aID abilityID = new Ability.aID(sAbility.ID, sAbility.element);
+        return abilityID;
     }
 }

@@ -104,6 +104,12 @@ public class AbilityService implements IAbilityService
     }
 
     @Override
+    public Ability getAbility(Ability.aID aID)
+    {
+        return getAbility(aID.element, aID.ID);
+    }
+
+    @Override
     public void destroy()
     {
         instance = null;

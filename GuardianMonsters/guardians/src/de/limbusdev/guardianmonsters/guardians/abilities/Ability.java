@@ -8,6 +8,22 @@ import de.limbusdev.guardianmonsters.guardians.Element;
  */
 public class Ability
 {
+    /**
+     * An aID provides a unique key for an ability. This way there is one central point of ability
+     * management and Guardians only have to keep an aID instance to fetch the ability instance from
+     * there.
+     */
+    public static class aID {
+
+        public final int ID;
+        public final Element element;
+
+        public aID(int ID, Element element)
+        {
+            this.ID = ID;
+            this.element = element;
+        }
+    }
 
     public enum DamageType
     {

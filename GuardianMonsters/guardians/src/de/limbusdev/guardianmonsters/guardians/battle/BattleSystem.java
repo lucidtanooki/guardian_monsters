@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.MathUtils;
 
 import java.util.Iterator;
 
+import de.limbusdev.guardianmonsters.guardians.GuardiansServiceLocator;
 import de.limbusdev.guardianmonsters.guardians.abilities.Ability;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.Team;
@@ -79,7 +80,8 @@ public class BattleSystem
         }
 
         // Calculate Ability
-        Ability ability= getActiveMonster().getAbilityGraph().getActiveAbilities().get(attack);
+        Ability.aID aID= getActiveMonster().getAbilityGraph().getActiveAbilities().get(attack);
+        Ability ability = GuardiansServiceLocator.getAbilities().getAbility(aID);
         AGuardian attacker = getActiveMonster();
         latestAttackReport = BattleCalculator.calcAttack(attacker, target, ability);
         callbacks.onAttack(attacker, target, ability, latestAttackReport);
@@ -230,10 +232,10 @@ public class BattleSystem
             System.out.println("\n### AI's turn ###");
             AGuardian m = getActiveMonster();
             int att = 0;
-            Ability ability = null;
-            while(ability == null) {
+            Ability.aID aID = null;
+            while(aID == null) {
                 att = MathUtils.random(0,m.getAbilityGraph().getActiveAbilities().size-1);
-                ability = m.getAbilityGraph().getActiveAbility(att);
+                aID = m.getAbilityGraph().getActiveAbility(att);
             }
             chooseTarget();
             setChosenAttack(att);

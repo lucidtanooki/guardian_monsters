@@ -169,9 +169,9 @@ public class JSONGuardianParser
         CommonStatistics stat = parseBaseStats(spec);
 
         HeadEquipment.Type head = HeadEquipment.Type.valueOf(spec.equipmentCompatibility.head.toUpperCase());
-        BodyEquipment.Type body = BodyEquipment.Type.valueOf(spec.equipmentCompatibility.head.toUpperCase());
-        HandEquipment.Type hand = HandEquipment.Type.valueOf(spec.equipmentCompatibility.head.toUpperCase());
-        FootEquipment.Type feet = FootEquipment.Type.valueOf(spec.equipmentCompatibility.head.toUpperCase());
+        BodyEquipment.Type body = BodyEquipment.Type.valueOf(spec.equipmentCompatibility.body.toUpperCase());
+        HandEquipment.Type hand = HandEquipment.Type.valueOf(spec.equipmentCompatibility.hands.toUpperCase());
+        FootEquipment.Type feet = FootEquipment.Type.valueOf(spec.equipmentCompatibility.feet.toUpperCase());
 
         // ......................................................................................... meta forms
         ArrayMap<Integer,SpeciesDescription.MetaForm> metaForms = new ArrayMap<>();

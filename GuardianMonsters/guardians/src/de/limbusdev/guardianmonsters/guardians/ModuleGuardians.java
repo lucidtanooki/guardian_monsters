@@ -26,7 +26,7 @@ public class ModuleGuardians
 
         GuardiansServiceLocator.provide(ItemService.getInstanceFromFile("data/items.xml"));
 
-        GuardiansServiceLocator.provide(SpeciesDescriptionService.getInstanceFromFile("data/guardians.xml"));
+        GuardiansServiceLocator.provide(SpeciesDescriptionService.getInstanceFromFile("data/guardians.json"));
 
         GuardiansServiceLocator.provide(GuardianFactory.getInstance());
     }

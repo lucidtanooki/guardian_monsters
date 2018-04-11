@@ -2,13 +2,13 @@ package de.limbusdev.guardianmonsters.guardians.monsters;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.ArrayMap;
-import com.badlogic.gdx.utils.XmlReader;
+import com.badlogic.gdx.utils.JsonValue;
 
 
 /**
  * GuardianDescriptionService
  *
- * @author Georg Eckert 2017
+ * @author Georg Eckert 2018
  */
 
 public class SpeciesDescriptionService implements ISpeciesDescriptionService
@@ -20,19 +20,12 @@ public class SpeciesDescriptionService implements ISpeciesDescriptionService
     private SpeciesDescriptionService(String xmlSpeciesDescriptions)
     {
         speciesDB = new ArrayMap<>();
-        XmlReader.Element rootElement = XMLGuardianParser.parseGuardianList(xmlSpeciesDescriptions);
+        JsonValue rootElement = JSONGuardianParser.parseGuardianList(xmlSpeciesDescriptions);
 
-        SpeciesDescription ancestor = null;
-        for (int i = 0; i < rootElement.getChildCount(); i++)
+        for (int i = 0; i < rootElement.size; i++)
         {
-            SpeciesDescription info = XMLGuardianParser.parseMonster(rootElement.getChild(i), ancestor);
+            SpeciesDescription info = JSONGuardianParser.parseGuardian(rootElement.get(i));
             speciesDB.put(info.getID(),info);
-
-//            if(info.getMetamorphsTo() == info.getID()+1) {
-//                ancestor = info;
-//            } else {
-//                ancestor = null;
-//            }
         }
     }
 

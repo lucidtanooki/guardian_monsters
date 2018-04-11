@@ -199,7 +199,7 @@ public class JSONGuardianParser
 
         if(Constant.PRINT_PARSED_GUARDIAN)
         {
-            System.out.println("Parsed XML Guardian Data:\n");
+            System.out.println("Parsed JSON Guardian Data:\n");
             System.out.println(speciesDescription.prettyPrint());
         }
 

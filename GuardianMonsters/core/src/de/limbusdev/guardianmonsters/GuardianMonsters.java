@@ -26,7 +26,7 @@ public class GuardianMonsters extends Game
     {
 
         // Inject Dependencies: MediaManager, AudioManager, ScreenManager, SaveGameManager, ...
-        injectDependencies();
+        //injectDependencies();
 
         if(!DEBUGGING_ON) {
             // Start normal game from Main Menu

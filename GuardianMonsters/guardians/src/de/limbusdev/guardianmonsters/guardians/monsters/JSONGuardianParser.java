@@ -2,7 +2,9 @@ package de.limbusdev.guardianmonsters.guardians.monsters;
 
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
-import com.badlogic.gdx.utils.XmlReader;
+import com.badlogic.gdx.utils.Json;
+import com.badlogic.gdx.utils.JsonReader;
+import com.badlogic.gdx.utils.JsonValue;
 
 import de.limbusdev.guardianmonsters.guardians.Constant;
 import de.limbusdev.guardianmonsters.guardians.Element;
@@ -83,112 +85,117 @@ import de.limbusdev.guardianmonsters.guardians.items.equipment.HeadEquipment;
  */
 public class JSONGuardianParser
 {
-    public static XmlReader.Element parseGuardianList(String xmlString)
-    {
-        XmlReader xmlReader = new XmlReader();
-        XmlReader.Element rootElement;
+    /**
+     * Helper class for easier JSON parsing
+     */
+    private static class JSONGuardianSpeciesDescription {
 
-        rootElement = xmlReader.parse(xmlString);
+        int id;
+        int metamorphosisNodes[];
+        JSONGuardianAbility abilities[];
+        JSONGuardianBaseStats basestats;
+        JSONGuardianEquipmentCompatibility equipmentCompatibility;
+        JSONGuardianGraphEquip abilityGraphEquip;
+        JSONGuardianMetaForm metaForms[];
 
-        return rootElement;
+        static class JSONGuardianAbility {
+            int abilityID;
+            String element;
+            int abilityPos;
+        }
+
+        static class JSONGuardianBaseStats {
+            int hp, mp, pstr, pdef, mstr, mdef, speed;
+        }
+
+        static class JSONGuardianEquipmentCompatibility {
+            String head, hands, body, feet;
+        }
+
+        static class JSONGuardianGraphEquip {
+            int head, hands, body, feet;
+        }
+
+        static class JSONGuardianMetaForm {
+            int form;
+            String nameID;
+            String elements[];
+        }
+
+        @Override
+        public String toString() {
+            String output = String.format(
+                "--------------------\nSpecies ID: %d\nMeta forms: %d\n%d abilities\n" +
+                    "Stats: HP: %d MP: %d\nEquipment:\n\tHands: %s (Node: %d)\n--------------------",
+                id,
+                metamorphosisNodes.length,
+                abilities.length,
+                basestats.hp,
+                basestats.mp,
+                equipmentCompatibility.hands,
+                abilityGraphEquip.hands
+            );
+            return output;
+        }
     }
 
-    public static int parseSpeciesID(XmlReader.Element element)
+    public static JsonValue parseGuardianList(String jsonString)
     {
-        return element.getIntAttribute("speciesID", 0);
+        Json json = new Json();
+        JsonValue rootElement = new JsonReader().parse(jsonString);
+        return rootElement.get("guardians");
     }
 
-    public static String parsenameID(XmlReader.Element element)
+    public static SpeciesDescription parseGuardian(JsonValue element)
     {
-        return element.getAttribute("nameID", "gm000");
-    }
-
-    public static int parseMetamorphsFrom(XmlReader.Element element)
-    {
-        return element.getInt("metamorphsFrom", 0);
-    }
-
-    public static int parseMetamorphsTo(XmlReader.Element element)
-    {
-        return element.getInt("metamorphsTo", 0);
-    }
-
-    public static SpeciesDescription parseMonster(XmlReader.Element element, SpeciesDescription ancestor)
-    {
+        Json json = new Json();
         SpeciesDescription speciesDescription;
+        JSONGuardianSpeciesDescription spec = json.fromJson(JSONGuardianSpeciesDescription.class, element.toString());
 
         // ......................................................................................... name & id
-        int speciesID = parseSpeciesID(element);
-        String nameID = parsenameID(element);
+        int speciesID = spec.id;
 
         // ......................................................................................... metamorphosis
-        int metamorphsFrom = parseMetamorphsFrom(element);
-        int metamorphsTo = parseMetamorphsTo(element);
+        Array<Integer> metamorphosisNodes = parseMetamorphosisNodes(spec);
 
-        // ......................................................................................... elements
-        Array<Element> elements = parseElements(element);
+        // ......................................................................................... abilities
+        ArrayMap<Integer, Ability> attacks = parseAbilities(spec);
+
+        // ......................................................................................... equipment
+        ArrayMap<Integer, BodyPart> equipmentGraph = parseEquipmentGraph(spec);
+
+        // ......................................................................................... stats
+
+        CommonStatistics stat = parseBaseStats(spec);
+
+        HeadEquipment.Type head = HeadEquipment.Type.valueOf(spec.equipmentCompatibility.head.toUpperCase());
+        BodyEquipment.Type body = BodyEquipment.Type.valueOf(spec.equipmentCompatibility.head.toUpperCase());
+        HandEquipment.Type hand = HandEquipment.Type.valueOf(spec.equipmentCompatibility.head.toUpperCase());
+        FootEquipment.Type feet = FootEquipment.Type.valueOf(spec.equipmentCompatibility.head.toUpperCase());
+
+        // ......................................................................................... meta forms
+        ArrayMap<Integer,SpeciesDescription.MetaForm> metaForms = new ArrayMap<>();
+
+        for(JSONGuardianSpeciesDescription.JSONGuardianMetaForm form : spec.metaForms)
+        {
+            Array<Element> elements = new Array<>();
+            for(String jsonElement : form.elements) elements.add(Element.valueOf(jsonElement.toUpperCase()));
+            SpeciesDescription.MetaForm metaForm
+                = new SpeciesDescription.MetaForm(form.form, form.nameID, elements);
+            metaForms.put(form.form, metaForm);
+        }
 
 
-        if(ancestor != null) {
-
-            // ..................................................................................... ancestor
+        // ......................................................................................... construction
             speciesDescription = new SpeciesDescription(
                 speciesID,
-                nameID,
-                metamorphsTo,
-                elements,
-                ancestor
-            );
-
-        } else {
-            // ..................................................................................... metamorphosis
-            Array<Integer> metamorphosisNodes = parseMetamorphosisNodes(element);
-
-            // ..................................................................................... abilities
-            ArrayMap<Integer, Ability> attacks = parseAbilities(element);
-
-            // ..................................................................................... equipment
-            ArrayMap<Integer, BodyPart> equipmentGraph = parseEquipmentGraph(element);
-
-            // ..................................................................................... stats
-
-            CommonStatistics stat = parseBaseStats(element, speciesID);
-
-            HeadEquipment.Type head;
-            BodyEquipment.Type body;
-            HandEquipment.Type hand;
-            FootEquipment.Type feet;
-
-            XmlReader.Element equipComp = element.getChildByName("equipment-compatibility");
-            if (equipComp != null) {
-                head = HeadEquipment.Type.valueOf(equipComp.getAttribute("head", "helmet").toUpperCase());
-                body = BodyEquipment.Type.valueOf(equipComp.getAttribute("body", "shield").toUpperCase());
-                hand = HandEquipment.Type.valueOf(equipComp.getAttribute("hands", "sword").toUpperCase());
-                feet = FootEquipment.Type.valueOf(equipComp.getAttribute("feet", "claws").toUpperCase());
-            } else {
-                head = HeadEquipment.Type.HELMET;
-                body = BodyEquipment.Type.ARMOR;
-                hand = HandEquipment.Type.SWORD;
-                feet = FootEquipment.Type.SHOES;
-            }
-
-            // ..................................................................................... construction
-            speciesDescription = new SpeciesDescription(
-                speciesID,
-                nameID,
-                metamorphsTo,
                 stat,
-                elements,
                 attacks,
                 equipmentGraph,
                 metamorphosisNodes,
-                head,
-                body,
-                hand,
-                feet,
-                metamorphsFrom
+                head, body, hand, feet,
+                metaForms
             );
-        }
 
         if(Constant.PRINT_PARSED_GUARDIAN)
         {
@@ -197,146 +204,71 @@ public class JSONGuardianParser
         }
 
         return speciesDescription;
-    }
+}
 
 
     // ............................................................................................. XML Element Parsers
 
-    /**
-     * Parses the {@link Element}s of a Guardian. The XML element must provide this structure:
-     *
-     * <guardian>
-     *   <element>
-     *       <element>earth</element>
-     *       <element>fire</element>
-     *   </element>
-     * </guardian>
-     *
-     * @param xmlRootElement
-     * @return
-     */
-    public static Array<Element> parseElements(XmlReader.Element xmlRootElement)
-    {
-        XmlReader.Element elemElement = xmlRootElement.getChildByName("elements");
-
-        Array<Element> elements = new Array<>();
-        for(int i = 0; i < elemElement.getChildCount(); i++) {
-            XmlReader.Element e = elemElement.getChild(i);
-            String eStr = e.getText();
-            Element newE = Element.valueOf(eStr.toUpperCase());
-            elements.add(newE);
-        }
-
-        return elements;
-    }
 
     /**
      * Parses the the {@link Node}s which allow a
-     * guardian to metamorph. The XML element (guardian root element) must provide this structure:
-     *
-     * <metamorphosisNodes>
-     *   <metamorphosisNode>91</metamorphosisNode>
-     *   <metamorphosisNode>99</metamorphosisNode>
-     * </metamorphosisNodes>
-     *
-     * @param xmlRootElement
-     * @return
+     * guardian to metamorph.
      */
-    public static Array<Integer> parseMetamorphosisNodes(XmlReader.Element xmlRootElement)
+    public static Array<Integer> parseMetamorphosisNodes(JSONGuardianSpeciesDescription spec)
     {
         Array<Integer> metamorphosisNodes = new Array<>();
-        XmlReader.Element metaElement = xmlRootElement.getChildByName("metamorphosisNodes");
-        if (metaElement != null) {
-            for (int i = 0; i < metaElement.getChildCount(); i++) {
-                int metaNode = Integer.parseInt(metaElement.getChild(i).getText());
-                metamorphosisNodes.add(metaNode);
-            }
-        }
-
+        for(int node : spec.metamorphosisNodes) metamorphosisNodes.add(node);
         return metamorphosisNodes;
     }
 
     /**
-     * Parses the {@link Ability}s of a Guardian. The XML element must provide this structure:
-     *
-     * <attacks>
-     *   <ability element="none"  abilityID="2" abilityPos="0" />
-     *   <ability element="earth" abilityID="2" abilityPos="13" />
-     * </attacks>
-     *
-     * @param xmlRootElement
-     * @return
+     * Parses the {@link Ability}s of a Guardian.
      */
-    public static ArrayMap<Integer, Ability> parseAbilities(XmlReader.Element xmlRootElement)
+    public static ArrayMap<Integer, Ability> parseAbilities(JSONGuardianSpeciesDescription spec)
     {
-        XmlReader.Element element = xmlRootElement.getChildByName("attacks");
+        IAbilityService attInf = GuardiansServiceLocator.getAbilities();
         ArrayMap<Integer, Ability> abilities = new ArrayMap<>();
 
-        if(element != null) {
-
-            IAbilityService attInf = GuardiansServiceLocator.getAbilities();
-            for(int i = 0; i < element.getChildCount(); i++)
-            {
-                XmlReader.Element a = element.getChild(i);
-                int attID = a.getIntAttribute("abilityID", 0);
-                Element el = Element.valueOf(a.getAttribute("element").toUpperCase());
-                Ability att = attInf.getAbility(el, attID);
-                int abilityPos = a.getIntAttribute("abilityPos", 0);
-                abilities.put(abilityPos, att);
-            }
-
+        for(JSONGuardianSpeciesDescription.JSONGuardianAbility jsonAbility : spec.abilities)
+        {
+            Element element = Element.valueOf(jsonAbility.element.toUpperCase());
+            Ability ability = attInf.getAbility(element, jsonAbility.abilityID);
+            abilities.put(jsonAbility.abilityPos, ability);
         }
+
         return abilities;
     }
 
     /**
      * Parses the {@link Equipment} nodes of
-     * a Guardian. The XML element must provide this structure:
-     *
-     * <ability-graph-equip body="21" hands="23" feet="89" head="90" />
-     *
-     * @param xmlRootElement
-     * @return
+     * a Guardian.
      */
-    public static ArrayMap<Integer, BodyPart> parseEquipmentGraph(XmlReader.Element xmlRootElement)
+    public static ArrayMap<Integer, BodyPart> parseEquipmentGraph(JSONGuardianSpeciesDescription spec)
     {
-        XmlReader.Element equipGraphElem = xmlRootElement.getChildByName("ability-graph-equip");
         ArrayMap<Integer, BodyPart> equipmentGraph = new ArrayMap<>();
-        if(equipGraphElem != null) {
-            equipmentGraph.put(equipGraphElem.getIntAttribute("body"), BodyPart.BODY);
-            equipmentGraph.put(equipGraphElem.getIntAttribute("hands"), BodyPart.HANDS);
-            equipmentGraph.put(equipGraphElem.getIntAttribute("head"), BodyPart.HEAD);
-            equipmentGraph.put(equipGraphElem.getIntAttribute("feet"), BodyPart.FEET);
-        }
+
+            equipmentGraph.put(spec.abilityGraphEquip.body,  BodyPart.BODY);
+            equipmentGraph.put(spec.abilityGraphEquip.hands, BodyPart.HANDS);
+            equipmentGraph.put(spec.abilityGraphEquip.head,  BodyPart.HEAD);
+            equipmentGraph.put(spec.abilityGraphEquip.feet,  BodyPart.FEET);
+
         return equipmentGraph;
     }
 
     /**
-     * Parses the {@link CommonStatistics} of a Guardian. The XML element must provide this structure:
-     *
-     * <basestats hp="300" mp="50" speed="10" pstr="10" pdef="10" mstr="10" mdef="10" />
-     *
-     * @param xmlRootElement
-     * @return
+     * Parses the {@link CommonStatistics} of a Guardian.
      */
-    public static CommonStatistics parseBaseStats(XmlReader.Element xmlRootElement, int ID)
+    public static CommonStatistics parseBaseStats(JSONGuardianSpeciesDescription spec)
     {
-        XmlReader.Element statEl = xmlRootElement.getChildByName("basestats");
-
-        CommonStatistics stat;
-        if(statEl != null) {
-            stat = new CommonStatistics(
-                statEl.getIntAttribute("hp",    300),
-                statEl.getIntAttribute("mp",    50),
-                statEl.getIntAttribute("pstr",  10),
-                statEl.getIntAttribute("pdef",  10),
-                statEl.getIntAttribute("mstr",  10),
-                statEl.getIntAttribute("mdef",  10),
-                statEl.getIntAttribute("speed", 10)
-            );
-        } else {
-            stat = new CommonStatistics();
-        }
+        CommonStatistics stat = new CommonStatistics(
+            spec.basestats.hp,
+            spec.basestats.mp,
+            spec.basestats.pstr,
+            spec.basestats.pdef,
+            spec.basestats.mstr,
+            spec.basestats.mdef,
+            spec.basestats.speed
+        );
         return stat;
     }
 

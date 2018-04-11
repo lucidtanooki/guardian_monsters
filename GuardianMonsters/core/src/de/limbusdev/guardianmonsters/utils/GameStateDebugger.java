@@ -1,13 +1,13 @@
 package de.limbusdev.guardianmonsters.utils;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 
 import de.limbusdev.guardianmonsters.Constant;
 import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager;
 import de.limbusdev.guardianmonsters.fwmengine.metamorphosis.MetamorphosisScreen;
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.WorldScreen;
-import de.limbusdev.guardianmonsters.guardians.monsters.AGuardianFactory;
-import de.limbusdev.guardianmonsters.guardians.monsters.GuardianFactory;
+import de.limbusdev.guardianmonsters.guardians.monsters.JSONGuardianParser;
 import de.limbusdev.guardianmonsters.model.gamestate.GameState;
 
 /**
@@ -151,8 +151,12 @@ public class GameStateDebugger {
 
 
     public void testMonsterParsing() {
-        AGuardianFactory mi = GuardianFactory.getInstance();
-        System.out.println("Tested");
+//        AGuardianFactory mi = GuardianFactory.getInstance();
+//        System.out.println("Tested");
+
+
+        String json = Gdx.files.internal("data/guardians.json").readString();
+        JSONGuardianParser.parseGuardianList(json);
     }
 
     public void testResultScreen() {

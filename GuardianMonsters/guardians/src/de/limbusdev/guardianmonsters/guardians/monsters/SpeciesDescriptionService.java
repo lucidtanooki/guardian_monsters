@@ -28,11 +28,11 @@ public class SpeciesDescriptionService implements ISpeciesDescriptionService
             SpeciesDescription info = XMLGuardianParser.parseMonster(rootElement.getChild(i), ancestor);
             speciesDB.put(info.getID(),info);
 
-            if(info.getMetamorphsTo() == info.getID()+1) {
-                ancestor = info;
-            } else {
-                ancestor = null;
-            }
+//            if(info.getMetamorphsTo() == info.getID()+1) {
+//                ancestor = info;
+//            } else {
+//                ancestor = null;
+//            }
         }
     }
 

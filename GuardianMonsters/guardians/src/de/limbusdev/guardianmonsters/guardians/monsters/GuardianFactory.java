@@ -48,11 +48,11 @@ public class GuardianFactory extends AGuardianFactory
         abilityGraph.setActiveAbility(0,0);
 
         // Activate Evolution Abilities of Ancestors
-        for(int i = 0; i < species.getNumberOfAncestors(ID); i++)
-        {
-            int metamorphosisNode = abilityGraph.getMetamorphosisNodes().get(i);
-            abilityGraph.activateNode(metamorphosisNode);
-        }
+//        for(int i = 0; i < species.getNumberOfAncestors(ID); i++)
+//        {
+//            int metamorphosisNode = abilityGraph.getMetamorphosisNodes().get(i);
+//            abilityGraph.activateNode(metamorphosisNode);
+//        }
 
 
         // ....................................................................... inject components

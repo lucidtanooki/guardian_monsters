@@ -47,7 +47,14 @@ public class SpeciesDescription
 
     private ArrayMap<Integer, MetaForm> metaForms;
 
-    public class MetaForm {
+    public static class MetaForm {
+
+        public MetaForm(int form, String nameID, Array<Element> elements)
+        {
+            this.form = form;
+            this.nameID = nameID;
+            this.elements = elements;
+        }
 
         private int form;
         private String nameID;
@@ -64,7 +71,6 @@ public class SpeciesDescription
     protected SpeciesDescription (
         int speciesID,
         CommonStatistics commonStatistics,
-        Array<Element> elements,
         ArrayMap<Integer, Ability> abilityNodes,
         ArrayMap<Integer, BodyPart> equipmentNodes,
         Array<Integer> metamorphosisNodes,

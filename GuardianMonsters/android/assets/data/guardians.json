@@ -1,4 +1,4 @@
-[
+{"guardians": [
   {
     "id": 1,
     "metamorphosisNodes": [91,92],
@@ -11,10 +11,10 @@
     "basestats": {
       "hp": 300, "mp": 50, "speed": 10, "pstr": 10, "pdef": 10, "mstr": 10, "mdef": 10
     },
-    "equipment-compatibility": {
+    "equipmentCompatibility": {
       "head": "bridle", "hands": "claws", "body": "barding", "feet": "shinprotection"
     },
-    "ability-graph-equip": {
+    "abilityGraphEquip": {
       "head": 21, "hands": 23, "body": 89, "feet": 90
     },
     "metaForms": [
@@ -34,5 +34,39 @@
         "elements": ["earth", "forest"]
       }
     ]
+  },
+  {
+    "id": 2,
+    "metamorphosisNodes": [91,92],
+    "abilities": [
+      {"abilityID": 2, "element": "none", "abilityPos": 0},
+      {"abilityID": 1, "element": "water", "abilityPos": 5}
+    ],
+    "basestats": {
+      "hp": 300, "mp": 50, "speed": 10, "pstr": 10, "pdef": 10, "mstr": 10, "mdef": 10
+    },
+    "equipmentCompatibility": {
+      "head": "helmet", "hands": "claws", "body": "breastplate", "feet": "kneepads"
+    },
+    "abilityGraphEquip": {
+      "head": 21, "hands": 23, "body": 89, "feet": 90
+    },
+    "metaForms": [
+      {
+        "form": 0,
+        "nameID": "gm002_0_kroki",
+        "elements": ["water"]
+      },
+      {
+        "form": 1,
+        "nameID": "gm002_1_krokivip",
+        "elements": ["water", "lindworm"]
+      },
+      {
+        "form": 2,
+        "nameID": "gm002_2_leviadile",
+        "elements": ["water", "lindworm"]
+      }
+    ]
   }
-]
+]}

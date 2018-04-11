@@ -45,7 +45,7 @@ public class BattleCalculator
         AttackCalculationReport report = new AttackCalculationReport(attacker, defender, 0, 0, ability);
 
         // Elemental Efficiency
-        float eff = ElemEff.singelton().getElemEff(ability.element, defender.getSpeciesDescription().getElements());
+        float eff = ElemEff.singelton().getElemEff(ability.element, defender.getSpeciesDescription().getElements(0));   // TODO elements currentForm
 
         IndividualStatistics statAtt = attacker.getIndividualStatistics();
         IndividualStatistics statDef = defender.getIndividualStatistics();

@@ -104,13 +104,13 @@ public class XMLGuardianParser
         if(ancestor != null) {
 
             // ..................................................................................... ancestor
-            speciesDescription = new SpeciesDescription(
-                speciesID,
-                nameID,
-                metamorphsTo,
-                elements,
-                ancestor
-            );
+//            speciesDescription = new SpeciesDescription(
+//                speciesID,
+//                nameID,
+//                metamorphsTo,
+//                elements,
+//                ancestor
+//            );
 
         } else {
             // ..................................................................................... metamorphosis
@@ -145,21 +145,21 @@ public class XMLGuardianParser
             }
 
             // ..................................................................................... construction
-            speciesDescription = new SpeciesDescription(
-                speciesID,
-                nameID,
-                metamorphsTo,
-                stat,
-                elements,
-                attacks,
-                equipmentGraph,
-                metamorphosisNodes,
-                head,
-                body,
-                hand,
-                feet,
-                metamorphsFrom
-            );
+//            speciesDescription = new SpeciesDescription(
+//                speciesID,
+//                nameID,
+//                metamorphsTo,
+//                stat,
+//                elements,
+//                attacks,
+//                equipmentGraph,
+//                metamorphosisNodes,
+//                head,
+//                body,
+//                hand,
+//                feet,
+//                metamorphsFrom
+//            );
         }
 
         if(Constant.PRINT_PARSED_GUARDIAN)
@@ -168,6 +168,7 @@ public class XMLGuardianParser
             System.out.println(speciesDescription.prettyPrint());
         }
 
+        speciesDescription = null;
         return speciesDescription;
     }
 

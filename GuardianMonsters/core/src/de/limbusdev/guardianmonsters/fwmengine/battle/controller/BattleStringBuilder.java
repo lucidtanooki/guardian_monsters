@@ -14,15 +14,15 @@ public class BattleStringBuilder
     public static String receivedDamage(Guardian victim, int damage)
     {
         ISpeciesDescriptionService species = GuardiansServiceLocator.getSpecies();
-        String text = species.getCommonNameById(victim.getSpeciesID()) + " lost " + damage + " HP";
+        String text = species.getCommonNameById(victim.getSpeciesID(),0) + " lost " + damage + " HP"; // TODO currentForm
         return text;
     }
 
     public static String givenDamage(AGuardian attacker, AGuardian victim, de.limbusdev.guardianmonsters.guardians.battle.AttackCalculationReport report)
     {
         ISpeciesDescriptionService species = GuardiansServiceLocator.getSpecies();
-        String attName = species.getCommonNameById(attacker.getSpeciesID());
-        String defName = species.getCommonNameById(victim.getSpeciesID());
+        String attName = species.getCommonNameById(attacker.getSpeciesID(),0);
+        String defName = species.getCommonNameById(victim.getSpeciesID(),0); // TODO currentForm
 
         String eff;
         if(report.efficiency > 1.1) {

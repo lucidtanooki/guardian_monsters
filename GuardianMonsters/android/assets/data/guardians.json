@@ -1,9 +1,7 @@
 [
   {
     "id": 1,
-    "metamorphsTo": 2,
     "metamorphosisNodes": [91,92],
-    "elements": ["earth"],
     "abilities": [
       {"abilityID": 2, "element": "none", "abilityPos": 0},
       {"abilityID": 2, "element": "earth", "abilityPos": 13},

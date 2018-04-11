@@ -1,6 +1,7 @@
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
+import com.badlogic.gdx.utils.JsonValue;
 
 import org.junit.Test;
 
@@ -18,10 +19,14 @@ import de.limbusdev.guardianmonsters.guardians.battle.BattleSystem;
 import de.limbusdev.guardianmonsters.guardians.items.Item;
 import de.limbusdev.guardianmonsters.guardians.items.ItemService;
 import de.limbusdev.guardianmonsters.guardians.items.equipment.BodyEquipment;
+import de.limbusdev.guardianmonsters.guardians.items.equipment.FootEquipment;
+import de.limbusdev.guardianmonsters.guardians.items.equipment.HandEquipment;
+import de.limbusdev.guardianmonsters.guardians.items.equipment.HeadEquipment;
 import de.limbusdev.guardianmonsters.guardians.items.medicine.MedicalItem;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardianFactory;
 import de.limbusdev.guardianmonsters.guardians.monsters.CommonStatistics;
+import de.limbusdev.guardianmonsters.guardians.monsters.JSONGuardianParser;
 import de.limbusdev.guardianmonsters.guardians.monsters.SpeciesDescription;
 import de.limbusdev.guardianmonsters.guardians.monsters.Team;
 
@@ -44,7 +49,30 @@ public class ModuleGuardiansJUnitTest
 
         String jsonString = "{\"guardians\":[{\"id\":1,\"metamorphosisNodes\":[91,92],\"abilities\":[{\"abilityID\":2,\"element\":\"none\",\"abilityPos\":0},{\"abilityID\":2,\"element\":\"earth\",\"abilityPos\":13},{\"abilityID\":3,\"element\":\"earth\",\"abilityPos\":11},{\"abilityID\":4,\"element\":\"earth\",\"abilityPos\":15}],\"basestats\":{\"hp\":300,\"mp\":50,\"speed\":10,\"pstr\":10,\"pdef\":10,\"mstr\":10,\"mdef\":10},\"equipmentCompatibility\":{\"head\":\"bridle\",\"hands\":\"claws\",\"body\":\"barding\",\"feet\":\"shinprotection\"},\"abilityGraphEquip\":{\"head\":21,\"hands\":23,\"body\":89,\"feet\":90},\"metaForms\":[{\"form\":0,\"nameID\":\"gm001_0_fordin\",\"elements\":[\"earth\"]},{\"form\":1,\"nameID\":\"gm001_1_stegofor\",\"elements\":[\"earth\",\"forest\"]},{\"form\":2,\"nameID\":\"gm001_2_brachifor\",\"elements\":[\"earth\",\"forest\"]}]}]}";
 
-        // TODO test guardian JSON parser
+        JsonValue value = JSONGuardianParser.parseGuardianList(jsonString);
+        SpeciesDescription spec = JSONGuardianParser.parseGuardian(value.get(0));
+
+        assertEquals(1, spec.getID());
+        assertEquals(2, spec.getMetamorphosisNodes().size);
+        assertTrue(spec.getMetamorphosisNodes().contains(91, true));
+        assertTrue(spec.getMetamorphosisNodes().contains(92, true));
+        assertEquals(4, spec.getAbilityNodes().size);
+//        assertTrue(spec.getAbilityNodes().containsValue(new Ability.aID(2, Element.NONE), false));
+//        assertTrue(spec.getAbilityNodes().containsValue(new Ability.aID(2, Element.EARTH), true));
+//        assertTrue(spec.getAbilityNodes().containsValue(new Ability.aID(3, Element.EARTH), true));
+//        assertTrue(spec.getAbilityNodes().containsValue(new Ability.aID(4, Element.EARTH), true));
+        assertEquals(300, spec.getCommonStatistics().getBaseHP());
+        assertEquals(50, spec.getCommonStatistics().getBaseMP());
+        assertEquals(10, spec.getCommonStatistics().getBasePStr());
+        assertEquals(10, spec.getCommonStatistics().getBasePDef());
+        assertEquals(10, spec.getCommonStatistics().getBaseMStr());
+        assertEquals(10, spec.getCommonStatistics().getBaseMDef());
+        assertEquals(10, spec.getCommonStatistics().getBaseSpeed());
+        assertEquals(HeadEquipment.Type.BRIDLE, spec.getHeadType());
+        assertEquals(BodyEquipment.Type.BARDING, spec.getBodyType());
+        assertEquals(HandEquipment.Type.CLAWS, spec.getHandType());
+        assertEquals(FootEquipment.Type.SHINPROTECTION, spec.getFootType());
+
 
         System.out.println("[Test 1] Guardian parsed correctly");
     }
@@ -343,10 +371,10 @@ public class ModuleGuardiansJUnitTest
             System.out.println("\n### Player's turn ###");
             AGuardian m = bs.getActiveMonster();
             int att = 0;
-            Ability ability = null;
-            while(ability == null) {
+            Ability.aID abilityID = null;
+            while(abilityID == null) {
                 att = MathUtils.random(0,m.getAbilityGraph().getActiveAbilities().size-1);
-                ability = m.getAbilityGraph().getActiveAbility(att);
+                abilityID = m.getAbilityGraph().getActiveAbility(att);
             }
             Array<AGuardian> targets = new Array<>();
             for(AGuardian h : oppTeam.values()) {

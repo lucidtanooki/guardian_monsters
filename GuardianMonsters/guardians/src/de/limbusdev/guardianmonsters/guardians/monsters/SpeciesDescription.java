@@ -33,21 +33,26 @@ public class SpeciesDescription
 {
     // ............................................................................................. ATTRIBUTES
     private int speciesID;
-    private String nameID;
 
     private ArrayMap<Integer, Ability> abilityNodes;
     private ArrayMap<Integer, BodyPart> equipmentNodes;
     private Array<Integer> metamorphosisNodes;
 
-    private int metamorphsTo;
-    private int metamorphsFrom;
-    private Array<Element> elements;
     private CommonStatistics commonStatistics;
 
     private HeadEquipment.Type headType;
     private BodyEquipment.Type bodyType;
     private HandEquipment.Type handType;
     private FootEquipment.Type footType;
+
+    private ArrayMap<Integer, MetaForm> metaForms;
+
+    public class MetaForm {
+
+        private int form;
+        private String nameID;
+        private Array<Element> elements;
+    }
 
     // ............................................................................................. CONSTRUCTOR
 
@@ -58,8 +63,6 @@ public class SpeciesDescription
 
     protected SpeciesDescription (
         int speciesID,
-        String nameID,
-        int metamorphsTo,
         CommonStatistics commonStatistics,
         Array<Element> elements,
         ArrayMap<Integer, Ability> abilityNodes,
@@ -69,37 +72,18 @@ public class SpeciesDescription
         BodyEquipment.Type body,
         HandEquipment.Type hands,
         FootEquipment.Type feet,
-        int metamorphsFrom
+        ArrayMap<Integer, MetaForm> metaForms
     ) {
         this.speciesID = speciesID;
-        this.nameID = nameID;
         this.abilityNodes = abilityNodes;
         this.equipmentNodes = equipmentNodes;
         this.metamorphosisNodes = metamorphosisNodes;
-        this.metamorphsTo = metamorphsTo;
-        this.metamorphsFrom = metamorphsFrom;
-        this.elements = elements;
         this.commonStatistics = commonStatistics;
         this.handType = hands;
         this.bodyType = body;
         this.headType = head;
         this.footType = feet;
-    }
-
-    protected SpeciesDescription(int ID, String nameID, int metamorphsTo, Array<Element> elements, SpeciesDescription ancestorData) {
-        this(
-            ID, nameID, metamorphsTo,
-            ancestorData.commonStatistics,
-            elements,
-            ancestorData.abilityNodes,
-            ancestorData.equipmentNodes,
-            ancestorData.metamorphosisNodes,
-            ancestorData.getHeadType(),
-            ancestorData.getBodyType(),
-            ancestorData.getHandType(),
-            ancestorData.getFootType(),
-            ancestorData.getID()
-        );
+        this.metaForms = metaForms;
     }
 
     // ............................................................................................. METHODS
@@ -126,8 +110,8 @@ public class SpeciesDescription
         return speciesID;
     }
 
-    public String getNameID() {
-        return nameID;
+    public String getNameID(int currentForm) {
+        return metaForms.get(currentForm).nameID;
     }
 
     public ArrayMap<Integer, Ability> getAbilityNodes() {
@@ -142,12 +126,9 @@ public class SpeciesDescription
         return metamorphosisNodes;
     }
 
-    public int getMetamorphsTo() {
-        return metamorphsTo;
-    }
 
-    public Array<Element> getElements() {
-        return elements;
+    public Array<Element> getElements(int currentForm) {
+        return metaForms.get(currentForm).elements;
     }
 
     public CommonStatistics getCommonStatistics() {
@@ -160,7 +141,7 @@ public class SpeciesDescription
     @Override
     public String toString()
     {
-        String text = "Species: " + speciesID + "\t with nameID: " + nameID;
+        String text = "Species: " + speciesID;
         return text;
     }
 
@@ -168,10 +149,7 @@ public class SpeciesDescription
     {
         String pretty = "";
         pretty += "+---- Guardian Species Description ----+\n";
-        pretty += "| Species: " + speciesID + " (" + nameID + ")\n";
-        pretty += "| Elements: ";
-        for(Element e : elements) pretty += e.toString() + ", ";
-        pretty += "\n";
+        pretty += "| Species: " + speciesID + "\n";
         pretty += "| Abilitiy-Nodes: \n";
         for(int key : abilityNodes.keys()) pretty += "|\tNode " + key + ":\t" + abilityNodes.get(key).name + "\n";
         pretty += "| Equipment-Nodes: \n";
@@ -181,9 +159,8 @@ public class SpeciesDescription
         pretty += "|\tHands:\t"  + handType.toString() + "\n";
         pretty += "|\tFeet:\t"   + footType.toString() + "\n";
         pretty += "|\tHead:\t"   + headType.toString() + "\n";
-        pretty += "| Can metamorph: " + ((metamorphsTo == 0) ? "no" : "yes") + "\n";
-        pretty += "| Metamorphosis to:\t" + metamorphsTo + "\n";
-        pretty += "| Metamorphosis from:\t" + metamorphsFrom + "\n";
+        pretty += "| Can metamorph: " + ((metaForms.size > 1) ? "no" : "yes") + "\n";
+        pretty += "| Metamorphs\t" + (metaForms.size-1) + " times\n";
         pretty += "+--------------------------------------+\n";
         return pretty;
     }

@@ -11,6 +11,5 @@ import de.limbusdev.guardianmonsters.guardians.GuardiansServiceLocator;
 public interface ISpeciesDescriptionService extends GuardiansServiceLocator.Service
 {
     SpeciesDescription getSpeciesDescription(int speciesID);
-    String getCommonNameById(int speciesID);
-    int getNumberOfAncestors(int speciesID);
+    String getCommonNameById(int speciesID, int form);
 }

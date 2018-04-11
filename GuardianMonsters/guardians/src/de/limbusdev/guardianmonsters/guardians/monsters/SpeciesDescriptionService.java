@@ -58,34 +58,11 @@ public class SpeciesDescriptionService implements ISpeciesDescriptionService
     }
 
     @Override
-    public String getCommonNameById(int speciesID)
+    public String getCommonNameById(int speciesID, int form)
     {
-        return speciesDB.get(speciesID).getNameID();
+        return speciesDB.get(speciesID).getNameID(form);
     }
 
-    @Override
-    public int getNumberOfAncestors(int speciesID)
-    {
-        if(speciesID == 1) return 0;
-
-        boolean hasAncestor = true;
-        int ancestors = 0;
-
-        while(hasAncestor) {
-            SpeciesDescription possibleAncestor = getSpeciesDescription(speciesID - 1 - ancestors);
-            if(possibleAncestor != null) {
-                if (possibleAncestor.getMetamorphsTo() == speciesID - ancestors) {
-                    ancestors++;
-                } else {
-                    hasAncestor = false;
-                }
-            } else {
-                hasAncestor = false;
-            }
-        }
-
-        return ancestors;
-    }
 
     @Override
     public void destroy()

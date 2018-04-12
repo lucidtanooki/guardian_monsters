@@ -33,7 +33,10 @@ public class BattleCalculator
     /**
      * Calculates attacks, the report attributes are for information only
      *
-     *  Damage = Elemental-Multiplier * (((2*Level)/5 + 2) * Power * (Attack/Defense))/50 + 2)
+     *  Damage = Elemental-Multiplier * ((0.5 * Level + 1) * Ability-Damage * (Strength/Defense) + 50) / 50
+     *
+     *  Strength ... PStr / MStr, according to Ability Type
+     *  Defense  ... PDef / MDef, according to Ability Type
      *
      * @param attacker
      * @param defender

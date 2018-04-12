@@ -1,72 +1,328 @@
-{"guardians": [
-  {
-    "id": 1,
-    "metamorphosisNodes": [91,92],
-    "abilities": [
-      {"abilityID": 2, "element": "none", "abilityPos": 0},
-      {"abilityID": 2, "element": "earth", "abilityPos": 13},
-      {"abilityID": 3, "element": "earth", "abilityPos": 11},
-      {"abilityID": 4, "element": "earth", "abilityPos": 15}
-    ],
-    "basestats": {
-      "hp": 300, "mp": 50, "speed": 10, "pstr": 10, "pdef": 10, "mstr": 10, "mdef": 10
-    },
-    "equipmentCompatibility": {
-      "head": "bridle", "hands": "claws", "body": "barding", "feet": "shinprotection"
-    },
-    "abilityGraphEquip": {
-      "head": 21, "hands": 23, "body": 89, "feet": 90
-    },
-    "metaForms": [
-      {
-        "form": 0,
-        "nameID": "gm001_0_fordin",
-        "elements": ["earth"]
+{
+  "guardians": [
+    {
+      "id": 1,
+      "metamorphosisNodes": [91,92],
+      "abilities": [
+        {"abilityID": 2, "element": "none", "abilityPos": 0},
+        {"abilityID": 2, "element": "earth", "abilityPos": 13},
+        {"abilityID": 3, "element": "earth", "abilityPos": 11},
+        {"abilityID": 4, "element": "earth", "abilityPos": 15}
+      ],
+      "basestats": {
+        "hp": 300, "mp": 50, "speed": 10, "pstr": 10, "pdef": 10, "mstr": 10, "mdef": 10
       },
-      {
-        "form": 1,
-        "nameID": "gm001_1_stegofor",
-        "elements": ["earth", "forest"]
+      "equipmentCompatibility": {
+        "head": "bridle", "hands": "claws", "body": "barding", "feet": "shinprotection"
       },
-      {
-        "form": 2,
-        "nameID": "gm001_2_brachifor",
-        "elements": ["earth", "forest"]
-      }
-    ]
-  },
-  {
-    "id": 2,
-    "metamorphosisNodes": [91,92],
-    "abilities": [
-      {"abilityID": 2, "element": "none", "abilityPos": 0},
-      {"abilityID": 1, "element": "water", "abilityPos": 5}
-    ],
-    "basestats": {
-      "hp": 300, "mp": 50, "speed": 10, "pstr": 10, "pdef": 10, "mstr": 10, "mdef": 10
-    },
-    "equipmentCompatibility": {
-      "head": "helmet", "hands": "claws", "body": "breastplate", "feet": "kneepads"
-    },
-    "abilityGraphEquip": {
-      "head": 21, "hands": 23, "body": 89, "feet": 90
-    },
-    "metaForms": [
-      {
-        "form": 0,
-        "nameID": "gm002_0_kroki",
-        "elements": ["water"]
+      "abilityGraphEquip": {
+        "head": 21, "hands": 23, "body": 89, "feet": 90
       },
-      {
-        "form": 1,
-        "nameID": "gm002_1_krokivip",
-        "elements": ["water", "lindworm"]
+      "metaForms": [
+        {
+          "form": 0,
+          "nameID": "gm001_0_fordin",
+          "elements": ["earth"]
+        },
+        {
+          "form": 1,
+          "nameID": "gm001_1_stegofor",
+          "elements": ["earth", "forest"]
+        },
+        {
+          "form": 2,
+          "nameID": "gm001_2_brachifor",
+          "elements": ["earth", "forest"]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "metamorphosisNodes": [91,92],
+      "abilities": [
+        {"abilityID": 2, "element": "none", "abilityPos": 0},
+        {"abilityID": 1, "element": "water", "abilityPos": 5}
+      ],
+      "basestats": {
+        "hp": 300, "mp": 50, "speed": 10, "pstr": 10, "pdef": 10, "mstr": 10, "mdef": 10
       },
-      {
-        "form": 2,
-        "nameID": "gm002_2_leviadile",
-        "elements": ["water", "lindworm"]
-      }
-    ]
-  }
-]}
+      "equipmentCompatibility": {
+        "head": "helmet", "hands": "claws", "body": "breastplate", "feet": "kneepads"
+      },
+      "abilityGraphEquip": {
+        "head": 21, "hands": 23, "body": 89, "feet": 90
+      },
+      "metaForms": [
+        {
+          "form": 0,
+          "nameID": "gm002_0_kroki",
+          "elements": ["water"]
+        },
+        {
+          "form": 1,
+          "nameID": "gm002_1_krokivip",
+          "elements": ["water", "lindworm"]
+        },
+        {
+          "form": 2,
+          "nameID": "gm002_2_leviadile",
+          "elements": ["water", "lindworm"]
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "metamorphosisNodes": [91,92],
+      "abilities": [
+        {"abilityID": 2, "element": "none", "abilityPos": 0},
+        {"abilityID": 1, "element": "fire", "abilityPos": 5}
+      ],
+      "basestats": {
+        "hp": 300, "mp": 50, "speed": 10, "pstr": 10, "pdef": 10, "mstr": 10, "mdef": 10
+      },
+      "equipmentCompatibility": {
+        "head": "mask", "hands": "claws", "body": "barding", "feet": "shinprotection"
+      },
+      "abilityGraphEquip": {
+        "head": 54, "hands": 19, "body": 17, "feet": 53
+      },
+      "metaForms": [
+        {
+          "form": 0,
+          "nameID": "gm003_0_devidin",
+          "elements": ["fire"]
+        },
+        {
+          "form": 1,
+          "nameID": "gm003_1_devidra",
+          "elements": ["fire", "lindworm"]
+        },
+        {
+          "form": 2,
+          "nameID": "gm003_2_deviraptor",
+          "elements": ["fire", "lindworm"]
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "metamorphosisNodes": [91,92],
+      "abilities": [
+        {"abilityID": 2, "element": "none", "abilityPos": 0}
+      ],
+      "basestats": {
+        "hp": 300, "mp": 50, "speed": 10, "pstr": 10, "pdef": 10, "mstr": 10, "mdef": 10
+      },
+      "equipmentCompatibility": {
+        "head": "mask", "hands": "claws", "body": "barding", "feet": "shinprotection"
+      },
+      "abilityGraphEquip": {
+        "head": 54, "hands": 19, "body": 17, "feet": 53
+      },
+      "metaForms": [
+        {
+          "form": 0,
+          "nameID": "gm004_0_aerodin",
+          "elements": ["air"]
+        },
+        {
+          "form": 1,
+          "nameID": "gm004_1_aerodeer",
+          "elements": ["air"]
+        },
+        {
+          "form": 2,
+          "nameID": "gm004_2_aerostag",
+          "elements": ["air"]
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "metamorphosisNodes": [],
+      "abilities": [
+        {"abilityID": 2, "element": "none", "abilityPos": 0}
+      ],
+      "basestats": {
+        "hp": 300, "mp": 50, "speed": 10, "pstr": 10, "pdef": 10, "mstr": 10, "mdef": 10
+      },
+      "equipmentCompatibility": {
+        "head": "mask", "hands": "claws", "body": "barding", "feet": "shinprotection"
+      },
+      "abilityGraphEquip": {
+        "head": 54, "hands": 19, "body": 17, "feet": 53
+      },
+      "metaForms": [
+        {
+          "form": 0,
+          "nameID": "gm005_0_westoat",
+          "elements": ["demon"]
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "metamorphosisNodes": [91,92],
+      "abilities": [
+        {"abilityID": 2, "element": "none", "abilityPos": 0}
+      ],
+      "basestats": {
+        "hp": 300, "mp": 50, "speed": 10, "pstr": 10, "pdef": 10, "mstr": 10, "mdef": 10
+      },
+      "equipmentCompatibility": {
+        "head": "mask", "hands": "claws", "body": "barding", "feet": "shinprotection"
+      },
+      "abilityGraphEquip": {"head": 54, "hands": 19, "body": 17, "feet": 53},
+      "metaForms": [
+        {"form": 0, "nameID": "gm006_0_mooty",    "elements": ["demon"]},
+        {"form": 1, "nameID": "gm006_1_camoon",   "elements": ["demon"]},
+        {"form": 2, "nameID": "gm006_2_moopard",  "elements": ["demon"]}
+      ]
+    },
+    {
+      "id": 7,
+      "metamorphosisNodes": [91,92],
+      "abilities": [
+        {"abilityID": 2, "element": "none", "abilityPos": 0}
+      ],
+      "basestats": {
+        "hp": 300, "mp": 50, "speed": 10, "pstr": 10, "pdef": 10, "mstr": 10, "mdef": 10
+      },
+      "equipmentCompatibility": {
+        "head": "mask", "hands": "claws", "body": "barding", "feet": "shinprotection"
+      },
+      "abilityGraphEquip": {"head": 54, "hands": 19, "body": 17, "feet": 53},
+      "metaForms": [
+        {"form": 0, "nameID": "gm007_0_wuppy",  "elements": ["demon"]},
+        {"form": 1, "nameID": "gm007_1_aerog",  "elements": ["demon"]},
+        {"form": 2, "nameID": "gm007_2_deemog", "elements": ["demon"]}
+      ]
+    },
+    {
+      "id": 8,
+      "metamorphosisNodes": [91],
+      "abilities": [
+        {"abilityID": 2, "element": "none", "abilityPos": 0}
+      ],
+      "basestats": {
+        "hp": 300, "mp": 50, "speed": 10, "pstr": 10, "pdef": 10, "mstr": 10, "mdef": 10
+      },
+      "equipmentCompatibility": {
+        "head": "mask", "hands": "claws", "body": "barding", "feet": "shinprotection"
+      },
+      "abilityGraphEquip": {"head": 54, "hands": 19, "body": 17, "feet": 53},
+      "metaForms": [
+        {"form": 0, "nameID": "gm008_0_dradder",  "elements": ["forest"]},
+        {"form": 1, "nameID": "gm008_1_driper",   "elements": ["forest"]}
+      ]
+    },
+    {
+      "id": 10,
+      "metamorphosisNodes": [91],
+      "abilities": [
+        {"abilityID": 2, "element": "none", "abilityPos": 0}
+      ],
+      "basestats": {
+        "hp": 300, "mp": 50, "speed": 10, "pstr": 10, "pdef": 10, "mstr": 10, "mdef": 10
+      },
+      "equipmentCompatibility": {
+        "head": "mask", "hands": "claws", "body": "barding", "feet": "shinprotection"
+      },
+      "abilityGraphEquip": {"head": 54, "hands": 19, "body": 17, "feet": 53},
+      "metaForms": [
+        {"form": 0, "nameID": "gm010_0_spreye",     "elements": ["demon"]},
+        {"form": 1, "nameID": "gm010_1_buttereye",  "elements": ["demon"]}
+      ]
+    },
+    {
+      "id": 11,
+      "metamorphosisNodes": [91],
+      "abilities": [
+        {"abilityID": 2, "element": "none", "abilityPos": 0}
+      ],
+      "basestats": {
+        "hp": 300, "mp": 50, "speed": 10, "pstr": 10, "pdef": 10, "mstr": 10, "mdef": 10
+      },
+      "equipmentCompatibility": {
+        "head": "mask", "hands": "claws", "body": "barding", "feet": "shinprotection"
+      },
+      "abilityGraphEquip": {"head": 54, "hands": 19, "body": 17, "feet": 53},
+      "metaForms": [
+        {"form": 0, "nameID": "gm011_0_duggot", "elements": ["arthropoda"]},
+        {"form": 1, "nameID": "gm011_1_breem",  "elements": ["arthropoda"]}
+      ]
+    },
+    {
+      "id": 12,
+      "metamorphosisNodes": [91],
+      "abilities": [
+        {"abilityID": 2, "element": "none", "abilityPos": 0}
+      ],
+      "basestats": {
+        "hp": 300, "mp": 50, "speed": 10, "pstr": 10, "pdef": 10, "mstr": 10, "mdef": 10
+      },
+      "equipmentCompatibility": {
+        "head": "mask", "hands": "claws", "body": "barding", "feet": "shinprotection"
+      },
+      "abilityGraphEquip": {"head": 54, "hands": 19, "body": 17, "feet": 53},
+      "metaForms": [
+        {"form": 0, "nameID": "gm012_0_marvillar", "elements": ["arthropoda"]},
+        {"form": 1, "nameID": "gm012_1_marvantis", "elements": ["arthropoda"]}
+      ]
+    },
+    {
+      "id": 13,
+      "metamorphosisNodes": [91],
+      "abilities": [
+        {"abilityID": 2, "element": "none", "abilityPos": 0}
+      ],
+      "basestats": {
+        "hp": 300, "mp": 50, "speed": 10, "pstr": 10, "pdef": 10, "mstr": 10, "mdef": 10
+      },
+      "equipmentCompatibility": {
+        "head": "mask", "hands": "claws", "body": "barding", "feet": "shinprotection"
+      },
+      "abilityGraphEquip": {"head": 54, "hands": 19, "body": 17, "feet": 53},
+      "metaForms": [
+        {"form": 0, "nameID": "gm013_0_palmpot", "elements": ["forest"]},
+        {"form": 1, "nameID": "gm013_1_bonsot",  "elements": ["forest"]}
+      ]
+    },
+    {
+      "id": 14,
+      "metamorphosisNodes": [91],
+      "abilities": [
+        {"abilityID": 2, "element": "none", "abilityPos": 0}
+      ],
+      "basestats": {
+        "hp": 300, "mp": 50, "speed": 10, "pstr": 10, "pdef": 10, "mstr": 10, "mdef": 10
+      },
+      "equipmentCompatibility": {
+        "head": "mask", "hands": "claws", "body": "barding", "feet": "shinprotection"
+      },
+      "abilityGraphEquip": {"head": 54, "hands": 19, "body": 17, "feet": 53},
+      "metaForms": [
+        {"form": 0, "nameID": "gm014_0_erimat",   "elements": ["mountain"]},
+        {"form": 1, "nameID": "gm014_1_erichief", "elements": ["mountain"]}
+      ]
+    },
+    {
+      "id": 15,
+      "metamorphosisNodes": [91],
+      "abilities": [
+        {"abilityID": 2, "element": "none", "abilityPos": 0}
+      ],
+      "basestats": {
+        "hp": 300, "mp": 50, "speed": 10, "pstr": 10, "pdef": 10, "mstr": 10, "mdef": 10
+      },
+      "equipmentCompatibility": {
+        "head": "mask", "hands": "claws", "body": "barding", "feet": "shinprotection"
+      },
+      "abilityGraphEquip": {"head": 54, "hands": 19, "body": 17, "feet": 53},
+      "metaForms": [
+        {"form": 0, "nameID": "gm015_0_eggatch", "elements": ["air"]},
+        {"form": 1, "nameID": "gm015_1_owlock",  "elements": ["air"]}
+      ]
+    }
+  ]
+}

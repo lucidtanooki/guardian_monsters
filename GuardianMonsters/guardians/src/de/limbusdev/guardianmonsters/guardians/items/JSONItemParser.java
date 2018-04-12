@@ -30,10 +30,10 @@ public class JSONItemParser
                 case "medicine":
                     item = parseMedicine(jsonItem);
                     break;
-                case "Equipment":
+                case "equipment":
                     item = parseEquipmentItem(jsonItem);
                     break;
-                case "Key":
+                case "key":
                     item = parseKeyItem(jsonItem);
                     break;
                 default:
@@ -85,10 +85,9 @@ public class JSONItemParser
 
     private static Item parseRevivingItem(JsonValue jsonItem)
     {
-
         return new MedicalItem(
             jsonItem.getString("nameID"),
-            jsonItem.getInt("fraction"),
+            jsonItem.getInt("value"),
             MedicalItem.Type.REVIVE
         );
     }

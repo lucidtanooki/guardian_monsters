@@ -16,8 +16,10 @@ import de.limbusdev.guardianmonsters.guardians.abilities.IAbilityService;
 import de.limbusdev.guardianmonsters.guardians.battle.AttackCalculationReport;
 import de.limbusdev.guardianmonsters.guardians.battle.BattleCalculator;
 import de.limbusdev.guardianmonsters.guardians.battle.BattleSystem;
+import de.limbusdev.guardianmonsters.guardians.items.IItemService;
 import de.limbusdev.guardianmonsters.guardians.items.Item;
 import de.limbusdev.guardianmonsters.guardians.items.ItemService;
+import de.limbusdev.guardianmonsters.guardians.items.KeyItem;
 import de.limbusdev.guardianmonsters.guardians.items.equipment.BodyEquipment;
 import de.limbusdev.guardianmonsters.guardians.items.equipment.BodyPart;
 import de.limbusdev.guardianmonsters.guardians.items.equipment.FootEquipment;
@@ -48,7 +50,20 @@ public class ModuleGuardiansJUnitTest
     {
         ModuleGuardians.destroyModule();
 
-        String jsonString = "{\"guardians\":[{\"id\":1,\"metamorphosisNodes\":[91,92],\"abilities\":[{\"abilityID\":2,\"element\":\"none\",\"abilityPos\":0},{\"abilityID\":2,\"element\":\"earth\",\"abilityPos\":13},{\"abilityID\":3,\"element\":\"earth\",\"abilityPos\":11},{\"abilityID\":4,\"element\":\"earth\",\"abilityPos\":15}],\"basestats\":{\"hp\":300,\"mp\":50,\"speed\":10,\"pstr\":10,\"pdef\":10,\"mstr\":10,\"mdef\":10},\"equipmentCompatibility\":{\"head\":\"bridle\",\"hands\":\"claws\",\"body\":\"barding\",\"feet\":\"shinprotection\"},\"abilityGraphEquip\":{\"head\":21,\"hands\":23,\"body\":89,\"feet\":90},\"metaForms\":[{\"form\":0,\"nameID\":\"gm001_0_fordin\",\"elements\":[\"earth\"]},{\"form\":1,\"nameID\":\"gm001_1_stegofor\",\"elements\":[\"earth\",\"forest\"]},{\"form\":2,\"nameID\":\"gm001_2_brachifor\",\"elements\":[\"earth\",\"forest\"]}]}]}";
+        String jsonString = "{\"guardians\":[" +
+            "{\"id\":1,\"metamorphosisNodes\":[91,92]," +
+            "\"abilities\":[" +
+            "{\"abilityID\":2,\"element\":\"none\",\"abilityPos\":0}," +
+            "{\"abilityID\":2,\"element\":\"earth\",\"abilityPos\":13}," +
+            "{\"abilityID\":3,\"element\":\"earth\",\"abilityPos\":11}," +
+            "{\"abilityID\":4,\"element\":\"earth\",\"abilityPos\":15}]," +
+            "\"basestats\":{\"hp\":300,\"mp\":50,\"speed\":10,\"pstr\":10,\"pdef\":10,\"mstr\":10,\"mdef\":10}," +
+            "\"equipmentCompatibility\":{\"head\":\"bridle\",\"hands\":\"claws\",\"body\":\"barding\",\"feet\":\"shinprotection\"}," +
+            "\"abilityGraphEquip\":{\"head\":21,\"hands\":23,\"body\":89,\"feet\":90}," +
+            "\"metaForms\":[" +
+            "{\"form\":0,\"nameID\":\"gm001_0_fordin\",\"elements\":[\"earth\"]}," +
+            "{\"form\":1,\"nameID\":\"gm001_1_stegofor\",\"elements\":[\"earth\",\"forest\"]}," +
+            "{\"form\":2,\"nameID\":\"gm001_2_brachifor\",\"elements\":[\"earth\",\"forest\"]}]}]}";
 
         JsonValue value = JSONGuardianParser.parseGuardianList(jsonString);
         SpeciesDescription spec = JSONGuardianParser.parseGuardian(value.get(0));
@@ -156,23 +171,41 @@ public class ModuleGuardiansJUnitTest
     {
         ModuleGuardians.destroyModule();
 
-        String xml =
-            "<items>" +
-            "    <medicine>" +
-            "        <nameID>bread</nameID>" +
-            "        <value>100</value>" +
-            "        <type>HPcure</type>" +
-            "    </medicine>" +
-            "</items>";
+        ArrayMap<String,String> jsonItemStrings = new ArrayMap<>();
 
-        GuardiansServiceLocator.provide(ItemService.getInstance(xml));
+        jsonItemStrings.put("itemsKey",
+            "{\"items\":[{\"nameID\":\"relict-earth\",\"category\":\"key\"}]}");
 
-        Item item = GuardiansServiceLocator.getItems().getItem("bread");
-        assertEquals("bread", item.getName());
-        assertEquals(MedicalItem.class, item.getClass());
-        assertEquals(Item.Category.MEDICINE, item.getCategory());
-        assertEquals(100, ((MedicalItem)item).getValue());
-        assertEquals(MedicalItem.Type.HP_CURE, ((MedicalItem)item).getType());
+        jsonItemStrings.put("itemsMedicine",
+            "{\"items\":[" +
+                "{\"nameID\":\"bread\",\"value\":100,\"type\":\"HPcure\",\"category\":\"medicine\"}," +
+                "{\"nameID\":\"medicine-blue\",\"value\":10,\"type\":\"MPcure\",\"category\":\"medicine\"}," +
+                "{\"nameID\":\"angel-tear\",\"value\":50,\"type\":\"revive\",\"category\":\"medicine\"}]}");
+
+        jsonItemStrings.put("itemsEquipment",
+            "{\"items\":[{\"nameID\":\"sword-wood\",\"body-part\":\"hands\",\"type\":\"sword\"," +
+                "\"addsPStr\":1,\"addsPDef\":0,\"addsMStr\":0,\"addsMDef\":0,\"addsSpeed\":0," +
+                "\"category\":\"equipment\"}]}");
+
+
+        GuardiansServiceLocator.provide(ItemService.getInstance(jsonItemStrings));
+
+        IItemService itemService = GuardiansServiceLocator.getItems();
+
+        Item item = itemService.getItem("relict-earth");
+        assertEquals(new KeyItem("relict-earth"), item);
+
+        item = GuardiansServiceLocator.getItems().getItem("bread");
+        assertEquals(new MedicalItem("bread", 100, MedicalItem.Type.HP_CURE), item);
+
+        item = GuardiansServiceLocator.getItems().getItem("medicine-blue");
+        assertEquals(new MedicalItem("medicine-blue", 10, MedicalItem.Type.MP_CURE), item);
+
+        item = GuardiansServiceLocator.getItems().getItem("angel-tear");
+        assertEquals(new MedicalItem("angel-tear", 50, MedicalItem.Type.REVIVE), item);
+
+        item = GuardiansServiceLocator.getItems().getItem("sword-wood");
+        assertEquals(new HandEquipment("sword-wood", HandEquipment.Type.SWORD, 1, 0, 0, 0, 0, 0, 0, 0), item);
 
         System.out.println("[Test 3] Item parsed correctly");
     }

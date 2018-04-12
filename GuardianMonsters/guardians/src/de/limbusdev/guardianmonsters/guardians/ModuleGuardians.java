@@ -24,7 +24,11 @@ public class ModuleGuardians
         jsonPaths.put(Element.WATER, "data/abilitiesWater.json");
         GuardiansServiceLocator.provide(AbilityService.getInstanceFromFile(jsonPaths));
 
-        GuardiansServiceLocator.provide(ItemService.getInstanceFromFile("data/items.xml"));
+        ArrayMap<String,String> jsonItemPaths = new ArrayMap<>();
+        jsonItemPaths.put("itemsKey",       "data/itemsKey.json");
+        jsonItemPaths.put("itemsMedicine",  "data/itemsMedicine.json");
+        jsonItemPaths.put("itemsEquipment", "data/itemsEquipment.json");
+        GuardiansServiceLocator.provide(ItemService.getInstanceFromFiles(jsonItemPaths));
 
         GuardiansServiceLocator.provide(SpeciesDescriptionService.getInstanceFromFile("data/guardians.json"));
 
@@ -33,23 +37,79 @@ public class ModuleGuardians
 
     public static void initModuleForTesting()
     {
+        // ......................................................................................... init abilities
         ArrayMap<Element, String> jsonStrings = new ArrayMap<>();
-        String testJson = "[{\"ID\":1,\"element\":\"none\",\"name\":\"attNone1_selfdef\",\"damage\":0,\"MPcost\":0,\"damageType\":\"physical\"},{\"ID\":2,\"element\":\"none\",\"name\":\"attNone2_kick\",\"damage\":50,\"MPcost\":0,\"damageType\":\"physical\"}]";
+        String testJson = "[" +
+            "{\"ID\":1,\"element\":\"none\",\"name\":\"attNone1_selfdef\",\"damage\":0,\"MPcost\":0,\"damageType\":\"physical\"}," +
+            "{\"ID\":2,\"element\":\"none\",\"name\":\"attNone2_kick\",\"damage\":50,\"MPcost\":0,\"damageType\":\"physical\"}]";
         jsonStrings.put(Element.NONE, testJson);
-        testJson = "[{\"ID\":1,\"element\":\"earth\",\"name\":\"attEarth1_dirt\",\"damage\":5,\"MPcost\":0,\"damageType\":\"physical\"},{\"ID\":2,\"element\":\"earth\",\"name\":\"attEarth2_mud\",\"damage\":10,\"MPcost\":0,\"damageType\":\"physical\"},{\"ID\":3,\"element\":\"earth\",\"name\":\"attEarth3_stones\",\"damage\":20,\"MPcost\":0,\"damageType\":\"physical\"},{\"ID\":4,\"element\":\"earth\",\"name\":\"attEarth4_landslide\",\"damage\":40,\"MPcost\":0,\"damageType\":\"physical\"}]";
+
+        testJson = "[" +
+            "{\"ID\":1,\"element\":\"earth\",\"name\":\"attEarth1_dirt\",\"damage\":5,\"MPcost\":0,\"damageType\":\"physical\"}," +
+            "{\"ID\":2,\"element\":\"earth\",\"name\":\"attEarth2_mud\",\"damage\":10,\"MPcost\":0,\"damageType\":\"physical\"}," +
+            "{\"ID\":3,\"element\":\"earth\",\"name\":\"attEarth3_stones\",\"damage\":20,\"MPcost\":0,\"damageType\":\"physical\"}," +
+            "{\"ID\":4,\"element\":\"earth\",\"name\":\"attEarth4_landslide\",\"damage\":40,\"MPcost\":0,\"damageType\":\"physical\"}]";
         jsonStrings.put(Element.EARTH, testJson);
-        testJson = "[{\"ID\":1,\"element\":\"fire\",\"name\":\"attFire1_embers\",\"damage\":5,\"MPcost\":1,\"damageType\":\"magical\"},{\"ID\":2,\"element\":\"fire\",\"name\":\"attFire2_fire\",\"damage\":\"10\",\"MPcost\":2,\"damageType\":\"magical\"},{\"ID\":3,\"element\":\"fire\",\"name\":\"attFire3_flame\",\"damage\":20,\"MPcost\":3,\"damageType\":\"magical\"},{\"ID\":4,\"element\":\"fire\",\"name\":\"attFire4_blaze\",\"damage\":40,\"MPcost\":4,\"damageType\":\"magical\"}]";
+
+        testJson = "[" +
+            "{\"ID\":1,\"element\":\"fire\",\"name\":\"attFire1_embers\",\"damage\":5,\"MPcost\":1,\"damageType\":\"magical\"}," +
+            "{\"ID\":2,\"element\":\"fire\",\"name\":\"attFire2_fire\",\"damage\":\"10\",\"MPcost\":2,\"damageType\":\"magical\"}," +
+            "{\"ID\":3,\"element\":\"fire\",\"name\":\"attFire3_flame\",\"damage\":20,\"MPcost\":3,\"damageType\":\"magical\"}," +
+            "{\"ID\":4,\"element\":\"fire\",\"name\":\"attFire4_blaze\",\"damage\":40,\"MPcost\":4,\"damageType\":\"magical\"}]";
         jsonStrings.put(Element.FIRE, testJson);
-        testJson = "[{\"ID\":1,\"element\":\"water\",\"name\":\"attWater1_sprinkle\",\"damage\":5,\"MPcost\":0,\"damageType\":\"physical\"},{\"ID\":2,\"element\":\"water\",\"name\":\"attWater2_shower\",\"damage\":10,\"MPcost\":0,\"damageType\":\"physical\"},{\"ID\":3,\"element\":\"water\",\"name\":\"attWater3_splash\",\"damage\":20,\"MPcost\":0,\"damageType\":\"physical\"},{\"ID\":4,\"element\":\"water\",\"name\":\"attWater4_waterjet\",\"damage\":40,\"MPcost\":0,\"damageType\":\"physical\"}]";
+
+        testJson = "[" +
+            "{\"ID\":1,\"element\":\"water\",\"name\":\"attWater1_sprinkle\",\"damage\":5,\"MPcost\":0,\"damageType\":\"physical\"}," +
+            "{\"ID\":2,\"element\":\"water\",\"name\":\"attWater2_shower\",\"damage\":10,\"MPcost\":0,\"damageType\":\"physical\"}," +
+            "{\"ID\":3,\"element\":\"water\",\"name\":\"attWater3_splash\",\"damage\":20,\"MPcost\":0,\"damageType\":\"physical\"}," +
+            "{\"ID\":4,\"element\":\"water\",\"name\":\"attWater4_waterjet\",\"damage\":40,\"MPcost\":0,\"damageType\":\"physical\"}]";
         jsonStrings.put(Element.WATER,testJson);
 
         GuardiansServiceLocator.provide(AbilityService.getInstance(jsonStrings));
 
-        String xml = "<guardians><guardian speciesID=\"1\" nameID=\"gm001_fordin\"><metamorphsTo>2</metamorphsTo><metamorphosisNodes><metamorphosisNode>91</metamorphosisNode><metamorphosisNode>92</metamorphosisNode></metamorphosisNodes><elements><element>earth</element></elements><attacks><ability element=\"none\"  abilityID=\"2\" abilityPos=\"0\" /><ability element=\"earth\" abilityID=\"2\" abilityPos=\"13\" /><ability element=\"earth\" abilityID=\"3\" abilityPos=\"11\" /><ability element=\"earth\" abilityID=\"4\" abilityPos=\"15\" /></attacks><basestats hp=\"50\" mp=\"50\" speed=\"50\" pstr=\"50\" pdef=\"50\" mstr=\"50\" mdef=\"50\" /><equipment-compatibility head=\"bridle\" hands=\"claws\" body=\"barding\" feet=\"shinprotection\" /><ability-graph-equip body=\"21\" hands=\"23\" feet=\"89\" head=\"90\" /></guardian><guardian speciesID=\"2\" nameID=\"gm002_stegofor\"><metamorphsFrom>1</metamorphsFrom><metamorphsTo>3</metamorphsTo><elements><element>earth</element><element>forest</element></elements></guardian><guardian speciesID=\"4\" nameID=\"gm004_kroki\"><metamorphsTo>5</metamorphsTo><metamorphosisNodes><metamorphosisNode>91</metamorphosisNode><metamorphosisNode>92</metamorphosisNode></metamorphosisNodes><elements><element>water</element></elements><attacks><ability element=\"none\"  abilityID=\"2\" abilityPos=\"0\" /><ability element=\"water\" abilityID=\"1\" abilityPos=\"5\" /></attacks><basestats hp=\"50\" mp=\"50\" speed=\"50\" pstr=\"50\" pdef=\"50\" mstr=\"50\" mdef=\"50\" /><equipment-compatibility head=\"helmet\" hands=\"claws\" body=\"breastplate\" feet=\"kneepads\" /><ability-graph-equip body=\"17\" hands=\"19\" feet=\"53\" head=\"54\" /></guardian><guardian speciesID=\"5\" nameID=\"gm005_krokivip\"><metamorphsFrom>4</metamorphsFrom><metamorphsTo>6</metamorphsTo><elements><element>water</element><element>lindworm</element></elements></guardian><guardian speciesID=\"7\" nameID=\"gm007_devidin\"><metamorphsTo>8</metamorphsTo><metamorphosisNodes><metamorphosisNode>91</metamorphosisNode><metamorphosisNode>92</metamorphosisNode></metamorphosisNodes><elements><element>fire</element></elements><attacks><ability element=\"none\"   abilityID=\"2\" abilityPos=\"0\" /><ability element=\"fire\" abilityID=\"1\" abilityPos=\"5\" /></attacks><basestats hp=\"50\" mp=\"50\" speed=\"50\" pstr=\"50\" pdef=\"50\" mstr=\"50\" mdef=\"50\" /><equipment-compatibility head=\"mask\" hands=\"claws\" body=\"barding\" feet=\"shinprotection\" /><ability-graph-equip body=\"17\" hands=\"19\" feet=\"53\" head=\"54\" /></guardian><guardian speciesID=\"8\" nameID=\"gm008_devidra\"><metamorphsFrom>7</metamorphsFrom><metamorphsTo>9</metamorphsTo><elements><element>fire</element><element>lindworm</element></elements></guardian></guardians>";
-        GuardiansServiceLocator.provide(SpeciesDescriptionService.getInstance(xml));
 
-        xml = "<items><Key><nameID>relict-earth</nameID></Key><medicine><nameID>bread</nameID><value>100</value><type>HPcure</type></medicine><medicine><nameID>medicine-blue</nameID><value>10</value><type>MPcure</type></medicine><medicine><nameID>angel-tear</nameID><value>50</value><type>revive</type></medicine><Equipment><nameID>sword-wood</nameID><body-part type=\"sword\">hands</body-part><addsPStr>1</addsPStr></Equipment><Equipment><nameID>claws-wood</nameID><body-part type=\"claws\">hands</body-part><addsPStr>1</addsPStr></Equipment><Equipment><nameID>helmet-iron</nameID><body-part type=\"helmet\">head</body-part><addsPDef>2</addsPDef></Equipment><Equipment><nameID>shield-iron</nameID><body-part type=\"shield\">body</body-part><addsPDef>2</addsPDef></Equipment><Equipment><nameID>shoes-leather</nameID><body-part type=\"shoes\">feet</body-part><addsPDef>1</addsPDef><addsSpeed>1</addsSpeed></Equipment></items>";
-        GuardiansServiceLocator.provide(ItemService.getInstance(xml));
+        // ......................................................................................... init guardians
+        String json = "{\"guardians\":[" +
+            "{\"id\":1,\"metamorphosisNodes\":[91,92]," +
+            "\"abilities\":[" +
+            "{\"abilityID\":2,\"element\":\"none\",\"abilityPos\":0}," +
+            "{\"abilityID\":2,\"element\":\"earth\",\"abilityPos\":13}," +
+            "{\"abilityID\":3,\"element\":\"earth\",\"abilityPos\":11}," +
+            "{\"abilityID\":4,\"element\":\"earth\",\"abilityPos\":15}]," +
+            "\"basestats\":{\"hp\":300,\"mp\":50,\"speed\":10,\"pstr\":10,\"pdef\":10,\"mstr\":10,\"mdef\":10}," +
+            "\"equipmentCompatibility\":{\"head\":\"bridle\",\"hands\":\"claws\",\"body\":\"barding\",\"feet\":\"shinprotection\"}," +
+            "\"abilityGraphEquip\":{\"head\":21,\"hands\":23,\"body\":89,\"feet\":90}," +
+            "\"metaForms\":[" +
+            "{\"form\":0,\"nameID\":\"gm001_0_fordin\",\"elements\":[\"earth\"]}," +
+            "{\"form\":1,\"nameID\":\"gm001_1_stegofor\",\"elements\":[\"earth\",\"forest\"]}," +
+            "{\"form\":2,\"nameID\":\"gm001_2_brachifor\",\"elements\":[\"earth\",\"forest\"]}]}]}";
+        GuardiansServiceLocator.provide(SpeciesDescriptionService.getInstance(json));
+
+
+        // ......................................................................................... init items
+        ArrayMap<String,String> jsonItemStrings = new ArrayMap<>();
+
+        jsonItemStrings.put("itemsKey",
+            "{\"items\":[" +
+                "{\"nameID\":\"relict-earth\",\"category\":\"key\"}," +
+                "{\"nameID\":\"relict-flame\",\"category\":\"key\"}]}");
+
+        jsonItemStrings.put("itemsMedicine",
+            "{\"items\":[" +
+                "{\"nameID\":\"bread\",\"value\":100,\"type\":\"HPcure\",\"category\":\"medicine\"}," +
+                "{\"nameID\":\"medicine-blue\",\"value\":10,\"type\":\"MPcure\",\"category\":\"medicine\"}," +
+                "{\"nameID\":\"angel-tear\",\"value\":50,\"type\":\"revive\",\"category\":\"medicine\"}]}");
+
+        jsonItemStrings.put("itemsEquipment",
+            "{\"items\":[" +
+                "{\"nameID\":\"sword-wood\",\"body-part\":\"hands\",\"type\":\"sword\"," +
+                "\"addsPStr\":1,\"addsPDef\":0,\"addsMStr\":0,\"addsMDef\":0,\"addsSpeed\":0," +
+                "\"category\":\"equipment\"}," +
+                "{\"nameID\":\"sword-rusty\",\"body-part\":\"hands\",\"type\":\"sword\"," +
+                "\"addsPStr\":2,\"addsPDef\":0,\"addsMStr\":0,\"addsMDef\":0,\"addsSpeed\":0," +
+                "\"category\":\"equipment\"}]}");
+
+        GuardiansServiceLocator.provide(ItemService.getInstance(jsonItemStrings));
 
         GuardiansServiceLocator.provide(GuardianFactory.getInstance());
 

@@ -2,7 +2,8 @@ package de.limbusdev.guardianmonsters.guardians.items;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.ArrayMap;
-import com.badlogic.gdx.utils.XmlReader;
+import com.badlogic.gdx.utils.JsonReader;
+import com.badlogic.gdx.utils.JsonValue;
 
 import de.limbusdev.guardianmonsters.guardians.items.equipment.Equipment;
 
@@ -17,36 +18,55 @@ public class ItemService implements IItemService
     private static ItemService instance;
     private static ArrayMap<String, Item> items;
 
-    private ItemService(String xmlItems)
+    /**
+     * Takes several JsonStrings and parses items from them:
+     *      itemsEquipment.json
+     *      itemsKey.json
+     *      itemsMedicine.json
+     *
+     * @param jsonItemStrings
+     */
+    private ItemService(ArrayMap<String,String> jsonItemStrings)
     {
         items = new ArrayMap<>();
 
-        XmlReader xmlReader = new XmlReader();
-        XmlReader.Element element;
-        element = xmlReader.parse(xmlItems);
+        JsonReader jsonReader = new JsonReader();
+        JsonValue jsonValue;
 
-        for(int i=0; i<element.getChildCount(); i++) {
-            Item item = XMLItemParser.parseXmlItem(element.getChild(i));
-            if(!items.containsKey(item.getName())) {
-                items.put(item.getName(), item);
+        for(String jsonString : jsonItemStrings.values())
+        {
+            jsonValue = jsonReader.parse(jsonString);
+            jsonValue = jsonValue.get("items");
+            for(JsonValue value : jsonValue)
+            {
+                Item item = JSONItemParser.parseJsonItem(value);
+                if(!items.containsKey(item.getName())) {
+                    items.put(item.getName(), item);
+                }
             }
         }
     }
 
 
     // ............................................................................. GETTER & SETTER
-    public static ItemService getInstance(String xmlItems)
+    public static ItemService getInstance(ArrayMap<String,String> jsonItemStrings)
     {
         if(instance == null) {
-            instance = new ItemService(xmlItems);
+            instance = new ItemService(jsonItemStrings);
         }
         return instance;
     }
 
-    public static ItemService getInstanceFromFile(String xmlItemsFilePath)
+    public static ItemService getInstanceFromFiles(ArrayMap<String,String> jsonItemPaths)
     {
-        String xml = Gdx.files.internal(xmlItemsFilePath).readString();
-        return getInstance(xml);
+        ArrayMap<String,String> jsonItemStrings = new ArrayMap<>();
+        for(String category : jsonItemPaths.keys())
+        {
+            String json = Gdx.files.internal(jsonItemPaths.get(category)).readString();
+            jsonItemStrings.put(category, json);
+        }
+
+        return getInstance(jsonItemStrings);
     }
 
     public Item getItem(String name)

@@ -1,165 +1,183 @@
-[
-  {
-    "nameID": "sword-wood",
-    "body-part": "hands",
-    "type": "sword",
-    "addsPStr": 1,
-    "addsPDef": 0,
-    "addsMStr": 0,
-    "addsMDef": 0,
-    "addsSpeed": 0
-  },
-  {
-    "nameID": "sword-rusty",
-    "body-part": "hands",
-    "type": "sword",
-    "addsPStr": 2,
-    "addsPDef": 0,
-    "addsMStr": 0,
-    "addsMDef": 0,
-    "addsSpeed": 0
-  },
-  {
-    "nameID": "sword-iron",
-    "body-part": "hands",
-    "type": "sword",
-    "addsPStr": 3,
-    "addsPDef": 0,
-    "addsMStr": 0,
-    "addsMDef": 0,
-    "addsSpeed": 0
-  },
-  {
-    "nameID": "sword-steel",
-    "body-part": "hands",
-    "type": "sword",
-    "addsPStr": 4,
-    "addsPDef": 0,
-    "addsMStr": 0,
-    "addsMDef": 0,
-    "addsSpeed": 0
-  },
-  {
-    "nameID": "sword-silver",
-    "body-part": "hands",
-    "type": "sword",
-    "addsPStr": 4,
-    "addsPDef": 0,
-    "addsMStr": 0,
-    "addsMDef": 0,
-    "addsSpeed": 1
-  },
-  {
-    "nameID": "sword-titanium",
-    "body-part": "hands",
-    "type": "sword",
-    "addsPStr": 5,
-    "addsPDef": 0,
-    "addsMStr": 0,
-    "addsMDef": 0,
-    "addsSpeed": 2
-  },
-  {
-    "nameID": "sword-knightly-steel",
-    "body-part": "hands",
-    "type": "sword",
-    "addsPStr": 5,
-    "addsPDef": 1,
-    "addsMStr": 0,
-    "addsMDef": 0,
-    "addsSpeed": 0
-  },
-  {
-    "nameID": "sword-broad-steel",
-    "body-part": "hands",
-    "type": "sword",
-    "addsPStr": 6,
-    "addsPDef": 0,
-    "addsMStr": 0,
-    "addsMDef": 0,
-    "addsSpeed": -1
-  },
-  {
-    "nameID": "sword-barb-steel",
-    "body-part": "hands",
-    "type": "sword",
-    "addsPStr": 6,
-    "addsPDef": 0,
-    "addsMStr": 0,
-    "addsMDef": 1,
-    "addsSpeed": 3
-  },
-  {
-    "nameID": "sword-gap-steel",
-    "body-part": "hands",
-    "type": "sword",
-    "addsPStr": 5,
-    "addsPDef": 0,
-    "addsMStr": 0,
-    "addsMDef": 0,
-    "addsSpeed": 3
-  },
-  {
-    "nameID": "sword-excalibur",
-    "body-part": "hands",
-    "type": "sword",
-    "addsPStr": 100,
-    "addsPDef": 20,
-    "addsMStr": 20,
-    "addsMDef": 20,
-    "addsSpeed": 10,
-    "addsHP": 25,
-    "addsMP": 20,
-    "addsEXP": 2
-  },
-  {
-    "nameID": "claws-wood",
-    "body-part": "hands",
-    "type": "claws",
-    "addsPStr": 1,
-    "addsPDef": 0,
-    "addsMStr": 0,
-    "addsMDef": 0,
-    "addsSpeed": 0
-  },
-  {
-    "nameID": "claws-rusty",
-    "body-part": "hands",
-    "type": "claws",
-    "addsPStr": 2,
-    "addsPDef": 0,
-    "addsMStr": 0,
-    "addsMDef": 0,
-    "addsSpeed": 0
-  },
-  {
-    "nameID": "helmet-iron",
-    "body-part": "head",
-    "type": "helmet",
-    "addsPStr": 0,
-    "addsPDef": 2,
-    "addsMStr": 0,
-    "addsMDef": 0,
-    "addsSpeed": 0
-  },
-  {
-    "nameID": "shield-iron",
-    "body-part": "body",
-    "type": "shield",
-    "addsPStr": 0,
-    "addsPDef": 2,
-    "addsMStr": 0,
-    "addsMDef": 0,
-    "addsSpeed": 0
-  },
-  {
-    "nameID": "shoes-leather",
-    "body-part": "feet",
-    "type": "shoes",
-    "addsPStr": 0,
-    "addsPDef": 1,
-    "addsMStr": 0,
-    "addsMDef": 0,
-    "addsSpeed": 1
-  }
-]
+{
+  "items": [
+    {
+      "nameID": "sword-wood",
+      "body-part": "hands",
+      "type": "sword",
+      "addsPStr": 1,
+      "addsPDef": 0,
+      "addsMStr": 0,
+      "addsMDef": 0,
+      "addsSpeed": 0,
+      "category": "equipment"
+    },
+    {
+      "nameID": "sword-rusty",
+      "body-part": "hands",
+      "type": "sword",
+      "addsPStr": 2,
+      "addsPDef": 0,
+      "addsMStr": 0,
+      "addsMDef": 0,
+      "addsSpeed": 0,
+      "category": "equipment"
+    },
+    {
+      "nameID": "sword-iron",
+      "body-part": "hands",
+      "type": "sword",
+      "addsPStr": 3,
+      "addsPDef": 0,
+      "addsMStr": 0,
+      "addsMDef": 0,
+      "addsSpeed": 0,
+      "category": "equipment"
+    },
+    {
+      "nameID": "sword-steel",
+      "body-part": "hands",
+      "type": "sword",
+      "addsPStr": 4,
+      "addsPDef": 0,
+      "addsMStr": 0,
+      "addsMDef": 0,
+      "addsSpeed": 0,
+      "category": "equipment"
+    },
+    {
+      "nameID": "sword-silver",
+      "body-part": "hands",
+      "type": "sword",
+      "addsPStr": 4,
+      "addsPDef": 0,
+      "addsMStr": 0,
+      "addsMDef": 0,
+      "addsSpeed": 1,
+      "category": "equipment"
+    },
+    {
+      "nameID": "sword-titanium",
+      "body-part": "hands",
+      "type": "sword",
+      "addsPStr": 5,
+      "addsPDef": 0,
+      "addsMStr": 0,
+      "addsMDef": 0,
+      "addsSpeed": 2,
+      "category": "equipment"
+    },
+    {
+      "nameID": "sword-knightly-steel",
+      "body-part": "hands",
+      "type": "sword",
+      "addsPStr": 5,
+      "addsPDef": 1,
+      "addsMStr": 0,
+      "addsMDef": 0,
+      "addsSpeed": 0,
+      "category": "equipment"
+    },
+    {
+      "nameID": "sword-broad-steel",
+      "body-part": "hands",
+      "type": "sword",
+      "addsPStr": 6,
+      "addsPDef": 0,
+      "addsMStr": 0,
+      "addsMDef": 0,
+      "addsSpeed": -1,
+      "category": "equipment"
+    },
+    {
+      "nameID": "sword-barb-steel",
+      "body-part": "hands",
+      "type": "sword",
+      "addsPStr": 6,
+      "addsPDef": 0,
+      "addsMStr": 0,
+      "addsMDef": 1,
+      "addsSpeed": 3,
+      "category": "equipment"
+    },
+    {
+      "nameID": "sword-gap-steel",
+      "body-part": "hands",
+      "type": "sword",
+      "addsPStr": 5,
+      "addsPDef": 0,
+      "addsMStr": 0,
+      "addsMDef": 0,
+      "addsSpeed": 3,
+      "category": "equipment"
+    },
+    {
+      "nameID": "sword-excalibur",
+      "body-part": "hands",
+      "type": "sword",
+      "addsPStr": 100,
+      "addsPDef": 20,
+      "addsMStr": 20,
+      "addsMDef": 20,
+      "addsSpeed": 10,
+      "addsHP": 25,
+      "addsMP": 20,
+      "addsEXP": 2,
+      "category": "equipment"
+    },
+    {
+      "nameID": "claws-wood",
+      "body-part": "hands",
+      "type": "claws",
+      "addsPStr": 1,
+      "addsPDef": 0,
+      "addsMStr": 0,
+      "addsMDef": 0,
+      "addsSpeed": 0,
+      "category": "equipment"
+    },
+    {
+      "nameID": "claws-rusty",
+      "body-part": "hands",
+      "type": "claws",
+      "addsPStr": 2,
+      "addsPDef": 0,
+      "addsMStr": 0,
+      "addsMDef": 0,
+      "addsSpeed": 0,
+      "category": "equipment"
+    },
+    {
+      "nameID": "helmet-iron",
+      "body-part": "head",
+      "type": "helmet",
+      "addsPStr": 0,
+      "addsPDef": 2,
+      "addsMStr": 0,
+      "addsMDef": 0,
+      "addsSpeed": 0,
+      "category": "equipment"
+    },
+    {
+      "nameID": "shield-iron",
+      "body-part": "body",
+      "type": "shield",
+      "addsPStr": 0,
+      "addsPDef": 2,
+      "addsMStr": 0,
+      "addsMDef": 0,
+      "addsSpeed": 0,
+      "category": "equipment"
+    },
+    {
+      "nameID": "shoes-leather",
+      "body-part": "feet",
+      "type": "shoes",
+      "addsPStr": 0,
+      "addsPDef": 1,
+      "addsMStr": 0,
+      "addsMDef": 0,
+      "addsSpeed": 1,
+      "category": "equipment"
+    }
+  ]
+}

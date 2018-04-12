@@ -17,10 +17,10 @@ public class SpeciesDescriptionService implements ISpeciesDescriptionService
 
     private static SpeciesDescriptionService instance;
 
-    private SpeciesDescriptionService(String xmlSpeciesDescriptions)
+    private SpeciesDescriptionService(String jsonSpeciesDescriptions)
     {
         speciesDB = new ArrayMap<>();
-        JsonValue rootElement = JSONGuardianParser.parseGuardianList(xmlSpeciesDescriptions);
+        JsonValue rootElement = JSONGuardianParser.parseGuardianList(jsonSpeciesDescriptions);
 
         for (int i = 0; i < rootElement.size; i++)
         {
@@ -29,17 +29,17 @@ public class SpeciesDescriptionService implements ISpeciesDescriptionService
         }
     }
 
-    public static SpeciesDescriptionService getInstance(String xmlSpecies)
+    public static SpeciesDescriptionService getInstance(String jsonSpecies)
     {
         if(instance == null) {
-            instance = new SpeciesDescriptionService(xmlSpecies);
+            instance = new SpeciesDescriptionService(jsonSpecies);
         }
         return instance;
     }
 
-    public static SpeciesDescriptionService getInstanceFromFile(String xmlSpeciesDescriptionFilePath)
+    public static SpeciesDescriptionService getInstanceFromFile(String jsonSpeciesDescriptionFilePath)
     {
-        String xml = Gdx.files.internal(xmlSpeciesDescriptionFilePath).readString();
+        String xml = Gdx.files.internal(jsonSpeciesDescriptionFilePath).readString();
         return getInstance(xml);
     }
 

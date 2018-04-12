@@ -1,27 +1,34 @@
-[
-  {
-    "nameID": "bread",
-    "value": 100,
-    "type": "HPcure"
-  },
-  {
-    "nameID": "potion-blue",
-    "value": 300,
-    "type": "HPcure"
-  },
-  {
-    "nameID": "potion-red",
-    "value": 500,
-    "type": "HPcure"
-  },
-  {
-    "nameID": "medicine-blue",
-    "value": 10,
-    "type": "MPcure"
-  },
-  {
-    "nameID": "angel-tear",
-    "value": 50,
-    "type": "revive"
-  }
-]
+{
+  "items": [
+    {
+      "nameID": "bread",
+      "value": 100,
+      "type": "HPcure",
+      "category": "medicine"
+    },
+    {
+      "nameID": "potion-blue",
+      "value": 300,
+      "type": "HPcure",
+      "category": "medicine"
+    },
+    {
+      "nameID": "potion-red",
+      "value": 500,
+      "type": "HPcure",
+      "category": "medicine"
+    },
+    {
+      "nameID": "medicine-blue",
+      "value": 10,
+      "type": "MPcure",
+      "category": "medicine"
+    },
+    {
+      "nameID": "angel-tear",
+      "value": 50,
+      "type": "revive",
+      "category": "medicine"
+    }
+  ]
+}

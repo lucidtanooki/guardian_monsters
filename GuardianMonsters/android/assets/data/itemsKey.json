@@ -1,38 +1,52 @@
-[
-  {
-    "nameID": "relict-earth"
-  },
-  {
-    "nameID": "relict-flame"
-  },
-  {
-    "nameID": "relict-water"
-  },
-  {
-    "nameID": "relict-air"
-  },
-  {
-    "nameID": "relict-forest"
-  },
-  {
-    "nameID": "relict-frost"
-  },
-  {
-    "nameID": "relict-arthropoda"
-  },
-  {
-    "nameID": "relict-lightning"
-  },
-  {
-    "nameID": "relict-mountain"
-  },
-  {
-    "nameID": "relict-spirit"
-  },
-  {
-    "nameID": "relict-demon"
-  },
-  {
-    "nameID": "relict-lindworm"
-  }
-]
+{
+  "items": [
+    {
+      "nameID": "relict-earth",
+      "category": "key"
+    },
+    {
+      "nameID": "relict-flame",
+      "category": "key"
+    },
+    {
+      "nameID": "relict-water",
+      "category": "key"
+    },
+    {
+      "nameID": "relict-air",
+      "category": "key"
+    },
+    {
+      "nameID": "relict-forest",
+      "category": "key"
+    },
+    {
+      "nameID": "relict-frost",
+      "category": "key"
+    },
+    {
+      "nameID": "relict-arthropoda",
+      "category": "key"
+    },
+    {
+      "nameID": "relict-lightning",
+      "category": "key"
+    },
+    {
+      "nameID": "relict-mountain",
+      "category": "key"
+    },
+    {
+      "nameID": "relict-spirit",
+      "category": "key"
+    },
+    {
+      "nameID": "relict-demon",
+      "category": "key"
+    },
+    {
+      "nameID": "relict-lindworm",
+      "category": "key"
+    }
+  ]
+}

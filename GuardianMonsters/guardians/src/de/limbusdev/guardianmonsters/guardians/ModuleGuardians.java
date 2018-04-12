@@ -76,7 +76,7 @@ public class ModuleGuardians
             "{\"abilityID\":2,\"element\":\"earth\",\"abilityPos\":13}," +
             "{\"abilityID\":3,\"element\":\"earth\",\"abilityPos\":11}," +
             "{\"abilityID\":4,\"element\":\"earth\",\"abilityPos\":15}]," +
-            "\"basestats\":{\"hp\":300,\"mp\":50,\"speed\":10,\"pstr\":10,\"pdef\":10,\"mstr\":10,\"mdef\":10}," +
+            "\"basestats\":{\"hp\":300,\"mp\":50,\"speed\":10,\"pstr\":11,\"pdef\":12,\"mstr\":13,\"mdef\":14}," +
             "\"equipmentCompatibility\":{\"head\":\"bridle\",\"hands\":\"claws\",\"body\":\"barding\",\"feet\":\"shinprotection\"}," +
             "\"abilityGraphEquip\":{\"head\":21,\"hands\":23,\"body\":89,\"feet\":90}," +
             "\"metaForms\":[" +

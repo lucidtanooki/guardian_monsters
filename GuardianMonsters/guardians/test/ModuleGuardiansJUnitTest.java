@@ -29,6 +29,7 @@ import de.limbusdev.guardianmonsters.guardians.items.medicine.MedicalItem;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardianFactory;
 import de.limbusdev.guardianmonsters.guardians.monsters.CommonStatistics;
+import de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics;
 import de.limbusdev.guardianmonsters.guardians.monsters.JSONGuardianParser;
 import de.limbusdev.guardianmonsters.guardians.monsters.SpeciesDescription;
 import de.limbusdev.guardianmonsters.guardians.monsters.Team;
@@ -57,7 +58,7 @@ public class ModuleGuardiansJUnitTest
             "{\"abilityID\":2,\"element\":\"earth\",\"abilityPos\":13}," +
             "{\"abilityID\":3,\"element\":\"earth\",\"abilityPos\":11}," +
             "{\"abilityID\":4,\"element\":\"earth\",\"abilityPos\":15}]," +
-            "\"basestats\":{\"hp\":300,\"mp\":50,\"speed\":10,\"pstr\":10,\"pdef\":10,\"mstr\":10,\"mdef\":10}," +
+            "\"basestats\":{\"hp\":300,\"mp\":50,\"speed\":10,\"pstr\":11,\"pdef\":12,\"mstr\":13,\"mdef\":14}," +
             "\"equipmentCompatibility\":{\"head\":\"bridle\",\"hands\":\"claws\",\"body\":\"barding\",\"feet\":\"shinprotection\"}," +
             "\"abilityGraphEquip\":{\"head\":21,\"hands\":23,\"body\":89,\"feet\":90}," +
             "\"metaForms\":[" +
@@ -84,10 +85,10 @@ public class ModuleGuardiansJUnitTest
         assertTrue(spec.getAbilityNodes().containsValue(aID4, false));
         assertEquals(300, spec.getCommonStatistics().getBaseHP());
         assertEquals(50, spec.getCommonStatistics().getBaseMP());
-        assertEquals(10, spec.getCommonStatistics().getBasePStr());
-        assertEquals(10, spec.getCommonStatistics().getBasePDef());
-        assertEquals(10, spec.getCommonStatistics().getBaseMStr());
-        assertEquals(10, spec.getCommonStatistics().getBaseMDef());
+        assertEquals(11, spec.getCommonStatistics().getBasePStr());
+        assertEquals(12, spec.getCommonStatistics().getBasePDef());
+        assertEquals(13, spec.getCommonStatistics().getBaseMStr());
+        assertEquals(14, spec.getCommonStatistics().getBaseMDef());
         assertEquals(10, spec.getCommonStatistics().getBaseSpeed());
         assertEquals(HeadEquipment.Type.BRIDLE, spec.getHeadType());
         assertEquals(BodyEquipment.Type.BARDING, spec.getBodyType());
@@ -219,13 +220,13 @@ public class ModuleGuardiansJUnitTest
         SpeciesDescription description = GuardiansServiceLocator.getSpecies().getSpeciesDescription(1);
         CommonStatistics commonStatistics = description.getCommonStatistics();
 
-        assertEquals(50, commonStatistics.getBaseHP());
+        assertEquals(300, commonStatistics.getBaseHP());
         assertEquals(50, commonStatistics.getBaseMP());
-        assertEquals(50, commonStatistics.getBasePStr());
-        assertEquals(50, commonStatistics.getBasePDef());
-        assertEquals(50, commonStatistics.getBaseMStr());
-        assertEquals(50, commonStatistics.getBaseMDef());
-        assertEquals(50, commonStatistics.getBaseSpeed());
+        assertEquals(11, commonStatistics.getBasePStr());
+        assertEquals(12, commonStatistics.getBasePDef());
+        assertEquals(13, commonStatistics.getBaseMStr());
+        assertEquals(14, commonStatistics.getBaseMDef());
+        assertEquals(10, commonStatistics.getBaseSpeed());
 
         ModuleGuardians.destroyModule();
     }
@@ -362,11 +363,14 @@ public class ModuleGuardiansJUnitTest
         ModuleGuardians.initModuleForTesting();
 
         AGuardianFactory factory = GuardiansServiceLocator.getGuardianFactory();
-        AGuardian winner = factory.createGuardian(1,1);
+        AGuardian guardian = factory.createGuardian(1,1);
 
-        winner.getIndividualStatistics().giveEquipment(new BodyEquipment("", BodyEquipment.Type.ARMOR, 5, 5, 5, 5, 5, 5, 5, 0));
-        assertEquals(13+MathUtils.floor(13f*0.05f), winner.getIndividualStatistics().getHPmax());
-        assertEquals(7+5, winner.getIndividualStatistics().getPStrMax());
+        guardian.getIndividualStatistics().giveEquipment(new BodyEquipment("", BodyEquipment.Type.ARMOR, 5, 5, 5, 5, 5, 5, 5, 0));
+        assertEquals(
+            StatCalculator.calculateHP(IndividualStatistics.Growth.MED, 1, 300, 0, 0),
+            guardian.getIndividualStatistics().getHPmax()
+        );
+        assertEquals(10+5, guardian.getIndividualStatistics().getPStrMax());
 
         ModuleGuardians.destroyModule();
     }

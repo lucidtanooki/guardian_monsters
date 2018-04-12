@@ -27,7 +27,7 @@ import de.limbusdev.utils.MathTool;
  * Speed
  *
  * Individual Base Stats (IndBaseStats) are different in every Guardian. They change randomly,
- * when the guardian levels up (0..2). The Range from 0-15 for every Stat, except HP and MP,
+ * when the guardian levels up (0..2). They range from 0-15 for every Stat, except HP and MP,
  * there it's 0-63.
  *
  * Growth Stats determine how a Guardian ist developing. They range from 1..3 in every Battle.
@@ -162,9 +162,10 @@ public class IndividualStatistics
             MathUtils.random(0,15)
         );
 
+        // TODO find correct value calculation - difference between base values and actual values?
         // Debugging
         if(Constant.DEBUGGING_ON) {
-            commonStatistics = new CommonStatistics(50,50,50,50,50,50,50);
+            commonStatistics = new CommonStatistics(300,50,10,11,12,13,14);
             indiBaseStats = new CommonStatistics(0,0,0,0,0,0,0);
             this.character = Character.BALANCED;
         }
@@ -653,7 +654,8 @@ public class IndividualStatistics
     /**
      * @return maximum HP, taking {@link Equipment} into account
      */
-    public int getHPmax() {
+    public int getHPmax()
+    {
         float extFactor = 100f;
 
         if(hands != null)   extFactor += hands.addsHP;

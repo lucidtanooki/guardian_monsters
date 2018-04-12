@@ -19,6 +19,7 @@ import de.limbusdev.guardianmonsters.guardians.battle.BattleSystem;
 import de.limbusdev.guardianmonsters.guardians.items.Item;
 import de.limbusdev.guardianmonsters.guardians.items.ItemService;
 import de.limbusdev.guardianmonsters.guardians.items.equipment.BodyEquipment;
+import de.limbusdev.guardianmonsters.guardians.items.equipment.BodyPart;
 import de.limbusdev.guardianmonsters.guardians.items.equipment.FootEquipment;
 import de.limbusdev.guardianmonsters.guardians.items.equipment.HandEquipment;
 import de.limbusdev.guardianmonsters.guardians.items.equipment.HeadEquipment;
@@ -57,10 +58,15 @@ public class ModuleGuardiansJUnitTest
         assertTrue(spec.getMetamorphosisNodes().contains(91, true));
         assertTrue(spec.getMetamorphosisNodes().contains(92, true));
         assertEquals(4, spec.getAbilityNodes().size);
-//        assertTrue(spec.getAbilityNodes().containsValue(new Ability.aID(2, Element.NONE), false));
-//        assertTrue(spec.getAbilityNodes().containsValue(new Ability.aID(2, Element.EARTH), true));
-//        assertTrue(spec.getAbilityNodes().containsValue(new Ability.aID(3, Element.EARTH), true));
-//        assertTrue(spec.getAbilityNodes().containsValue(new Ability.aID(4, Element.EARTH), true));
+        Ability.aID aID1, aID2, aID3, aID4;
+        aID1 = new Ability.aID(2, Element.NONE);
+        aID2 = new Ability.aID(2, Element.EARTH);
+        aID3 = new Ability.aID(3, Element.EARTH);
+        aID4 = new Ability.aID(4, Element.EARTH);
+        assertTrue(spec.getAbilityNodes().containsValue(aID1, false));
+        assertTrue(spec.getAbilityNodes().containsValue(aID2, false));
+        assertTrue(spec.getAbilityNodes().containsValue(aID3, false));
+        assertTrue(spec.getAbilityNodes().containsValue(aID4, false));
         assertEquals(300, spec.getCommonStatistics().getBaseHP());
         assertEquals(50, spec.getCommonStatistics().getBaseMP());
         assertEquals(10, spec.getCommonStatistics().getBasePStr());
@@ -72,6 +78,24 @@ public class ModuleGuardiansJUnitTest
         assertEquals(BodyEquipment.Type.BARDING, spec.getBodyType());
         assertEquals(HandEquipment.Type.CLAWS, spec.getHandType());
         assertEquals(FootEquipment.Type.SHINPROTECTION, spec.getFootType());
+        assertTrue(21 == spec.getEquipmentNodes().getKey(BodyPart.HEAD, true));
+        assertTrue(23 == spec.getEquipmentNodes().getKey(BodyPart.HANDS, true));
+        assertTrue(89 == spec.getEquipmentNodes().getKey(BodyPart.BODY, true));
+        assertTrue(90 == spec.getEquipmentNodes().getKey(BodyPart.FEET, true));
+
+        assertTrue(spec.getMetaForms().size == 3);
+        SpeciesDescription.MetaForm f1, f2, f3;
+        Array<Element> e1, e2, e3;
+        e1 = new Array<>(); e1.add(Element.EARTH);
+        e2 = new Array<>(); e2.add(Element.EARTH); e2.add(Element.FOREST);
+        e3 = new Array<>(); e3.add(Element.EARTH); e3.add(Element.FOREST);
+        f1 = new SpeciesDescription.MetaForm(0, "gm001_0_fordin", e1);
+        f2 = new SpeciesDescription.MetaForm(1, "gm001_1_stegofor", e2);
+        f3 = new SpeciesDescription.MetaForm(2, "gm001_2_brachifor", e3);
+
+        assertEquals(f1, spec.getMetaForms().get(0));
+        assertEquals(f2, spec.getMetaForms().get(1));
+        assertEquals(f3, spec.getMetaForms().get(2));
 
 
         System.out.println("[Test 1] Guardian parsed correctly");

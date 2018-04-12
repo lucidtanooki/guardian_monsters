@@ -59,6 +59,17 @@ public class SpeciesDescription
         private int form;
         private String nameID;
         private Array<Element> elements;
+
+        @Override
+        public boolean equals(Object o)
+        {
+            if(!(o instanceof MetaForm)) return false;
+            MetaForm other = (MetaForm) o;
+            if(other.nameID.equals(nameID) && other.form == form && other.elements.equals(elements))
+                return true;
+            else
+                return false;
+        }
     }
 
     // ............................................................................................. CONSTRUCTOR
@@ -132,6 +143,10 @@ public class SpeciesDescription
         return metamorphosisNodes;
     }
 
+    public ArrayMap<Integer, MetaForm> getMetaForms()
+    {
+        return metaForms;
+    }
 
     public Array<Element> getElements(int currentForm) {
         return metaForms.get(currentForm).elements;

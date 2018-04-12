@@ -23,6 +23,15 @@ public class Ability
             this.ID = ID;
             this.element = element;
         }
+
+        @Override
+        public boolean equals(Object o)
+        {
+            if(!(o instanceof aID)) return false;
+            aID other = (aID) o;
+            if(this.ID == other.ID && this.element == other.element) return true;
+            else return false;
+        }
     }
 
     public enum DamageType

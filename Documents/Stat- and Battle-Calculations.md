@@ -1,5 +1,37 @@
 # Calculations
 
+## Base Values vs. Stat Values
+
+Stats are a Guardians points of HP, MP, PStr, PDef, MStr, MDef and Speed. They are calculated from it's base values. Individual Base values can be interpreted as some sort of a Guardians *genes*. Common base values can be considered a species' common properties. And growth base values are a Guardians "experience".
+
+## Common Base Values (Species)
+
+Every species has a set of base values for the various Stats. These base values are the same for every Guardian of the same species. Every Kroki has the same base values, no matter what. Guardians only differ in *Individual Base Values* and *Growth Values*. The *Common Base Values* stay the same, always, even at level-up.
+
+## Individual Base Values (Genes)
+
+Every Guardian has individual base values of HP, MP, PStr, PDef, MStr, MDef and Speed. These values make every Guardian unique. The values are given at birth and will never change. They can range from:
+
+|Stat|minimum|maximum|
+|-----------------------|-------------------------|----------------------------|
+|HP   |0   |63   |
+|MP   |0   |63   |
+|PStr   |0   |15   |
+|PDef   |0   |15   |
+|MStr   |0   |15   |
+|MDef   |0   |15   |
+|Speed   |0   |15
+
+
+## Growth Base Values (Experience)
+
+At level-up Guardians gain some extra points on their Stats. This gain is partly random, so it makes Guardians even more unique.
+
+## Equipment Stats
+
+Equipment can add some extra points to the Guardians Stat values. Equipment raising HP or MP work as fractions. An **HP +10%** helmet raises the Guardians *common + individual base HP value* to 110%. Equipment improving PStr, PDef, MStr, MDef or Speed work additionally. Shoes with **Speed +5** raise a Guardians full Speed Stat from e.g. 50 to 55.
+
+
 ## Damage Calculation
 
 $$\Delta = \epsilon \cdot \left({{(0.5 \cdot \lambda + 1) \cdot \Delta_a \cdot {\Sigma \over \Theta} + 50} \over {5}}\right)$$

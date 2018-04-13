@@ -2,8 +2,13 @@ package de.limbusdev.guardianmonsters.guardians;
 
 import com.badlogic.gdx.math.MathUtils;
 
+import de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics;
+import de.limbusdev.guardianmonsters.guardians.monsters.Statistics;
+
 /**
  * StatCalculator
+ *
+ * For Formulas see "Documents/Stat- and Battle-Calculations.md"
  *
  * @author Georg Eckert 2017
  */
@@ -11,41 +16,42 @@ import com.badlogic.gdx.math.MathUtils;
 public class StatCalculator
 {
     /**
-     * newHP = character * newLevel + 11 + floor( (newLevel / 100) * (2*baseHP + indBaseHP + floor(growthHP/4))
-     * @param characterFactor
-     * @param level
+     * @param cf    character factor
+     * @param lvl
      * @param baseHP
-     * @param individualBaseHP
+     * @param indiBaseHP
      * @param growthHP
      * @return
      */
-    public static int calculateHP(float characterFactor, int level, int baseHP, int individualBaseHP, int growthHP)
+    public static int calculateHP(float cf, int lvl, int baseHP, int indiBaseHP, int growthHP)
     {
-        int HP = level + 11 + MathUtils.floor(
-            characterFactor * (
-                (level / 100f) * (2f * baseHP + individualBaseHP + MathUtils.floor(growthHP / 4f))
-            )
-        );
+        int HP = lvl * 10 + 100 + MathUtils.floor(cf * ((2f * baseHP + indiBaseHP + growthHP*lvl) / 10f));
         return HP;
     }
 
-    public static int calculateMP(float characterFactor, int level, int baseMP, int individualBaseMP, int growthMP)
+    /**
+     *
+     * @param cf    character factor
+     * @param lvl
+     * @param baseMP
+     * @param indiBaseMP
+     * @param growthMP
+     * @return
+     */
+    public static int calculateMP(float cf, int lvl, int baseMP, int indiBaseMP, int growthMP)
     {
-        int MP = level + 10 + MathUtils.floor(
-            characterFactor * (
-                (level / 200f) * (2f * baseMP + individualBaseMP + MathUtils.floor(growthMP / 4f))
-            )
-        );
+        int MP = lvl * 2 + 20 + MathUtils.floor(cf * ((2f * baseMP + indiBaseMP + growthMP*lvl) / 20f));
         return MP;
     }
 
     /**
      * For PStr, PDef, MStr, MDef, Speed
+     * @param cf character factor
      * @return
      */
-    public static int calculateStat(float characterFactor, int level, int base, int individualBase, int growth)
+    public static int calculateStat(float cf, int lvl, int base, int indiBase, int growth)
     {
-        int stat = MathUtils.floor(characterFactor * (6f + MathUtils.floor((level/100f) * (2f*base+individualBase+MathUtils.floor(growth/4f)))));
+        int stat = lvl + 50 + MathUtils.floor(cf * ((2f * base + indiBase + growth*lvl) / 10f));
         return stat;
     }
 
@@ -59,6 +65,38 @@ public class StatCalculator
         if(level <= 1) return 0;
         float levelFactor = (float) Math.floor(Math.pow(level, Constant.LVL_EXPONENT));
         return MathUtils.floor(levelFactor);
+    }
+
+    /**
+     * Takes all base values of a guardians {@link IndividualStatistics} and calculates the complete
+     * Stats from them.
+     * @param characterFactors
+     * @param level
+     * @param commonBaseValues
+     * @param individualBaseValues
+     * @param growthBaseValues
+     * @return
+     */
+    public static Statistics calculateAllStats(
+        float[] characterFactors, int level,
+        Statistics commonBaseValues, Statistics individualBaseValues, Statistics growthBaseValues)
+    {
+        return new Statistics(
+            calculateHP(characterFactors[IndividualStatistics.StatType.HP], level,
+                commonBaseValues.getHP(), individualBaseValues.getHP(), growthBaseValues.getHP()),
+            calculateMP(characterFactors[IndividualStatistics.StatType.MP], level,
+                commonBaseValues.getMP(), individualBaseValues.getMP(), growthBaseValues.getMP()),
+            calculateStat(characterFactors[IndividualStatistics.StatType.PSTR], level,
+                commonBaseValues.getPStr(), individualBaseValues.getPStr(), growthBaseValues.getPStr()),
+            calculateStat(characterFactors[IndividualStatistics.StatType.PDEF], level,
+                commonBaseValues.getPDef(), individualBaseValues.getPDef(), growthBaseValues.getPDef()),
+            calculateStat(characterFactors[IndividualStatistics.StatType.MSTR], level,
+                commonBaseValues.getMStr(), individualBaseValues.getMStr(), growthBaseValues.getMStr()),
+            calculateStat(characterFactors[IndividualStatistics.StatType.MDEF], level,
+                commonBaseValues.getMDef(), individualBaseValues.getMDef(), growthBaseValues.getMDef()),
+            calculateStat(characterFactors[IndividualStatistics.StatType.SPEED], level,
+                commonBaseValues.getSpeed(), individualBaseValues.getSpeed(), growthBaseValues.getSpeed())
+        );
     }
 
     public static int calcEXPavailableAtLevel(int level)

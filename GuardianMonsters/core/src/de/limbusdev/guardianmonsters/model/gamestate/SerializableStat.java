@@ -48,7 +48,7 @@ public class SerializableStat {
         this.MStrMax = statistics.getMStrMax();
         this.MDefMax = statistics.getMDefMax();
         this.SpeedMax = statistics.getSpeedMax();
-        Statistics indiStats = statistics.getIndiBaseStats();
+        Statistics indiStats = statistics.getIndiBaseValues();
         this.HPindi = indiStats.getHP();
         this.MPindi = indiStats.getMP();
         this.PStrIndi = indiStats.getPStr();
@@ -56,7 +56,7 @@ public class SerializableStat {
         this.MStrIndi = indiStats.getMStr();
         this.MDefIndi = indiStats.getMDef();
         this.SpeedIndi = indiStats.getSpeed();
-        Statistics growthStats = statistics.getGrowthStats();
+        Statistics growthStats = statistics.getGrowthBaseValues();
         this.HPgrowth = growthStats.getHP();
         this.MPgrowth = growthStats.getMP();
         this.PStrGrowth = growthStats.getPStr();

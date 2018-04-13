@@ -75,7 +75,10 @@ public class IndividualStatistics
 
     private AGuardian core;  // Core Object
 
-    private Statistics currentStats, maxStats, indiBaseStats, growthStats;
+    private Statistics currentStatValues;   // current values of the various Stats (HP, MP, PStr, ...)
+    private Statistics fullStatValues;      // fully healed values of the various Stats, recalculate at level-up
+    private Statistics indiBaseValues;      // individual base values of the various Stats, decided at birth
+    private Statistics growthBaseValues;    // accumulated values earned during level-up
 
     private int level;
     private int abilityLevels;
@@ -102,9 +105,9 @@ public class IndividualStatistics
         int EXP,
         int character,
         Statistics stats,
-        Statistics maxStats,
-        Statistics indiBaseStats,
-        Statistics growthStats,
+        Statistics fullStatValues,
+        Statistics indiBaseValues,
+        Statistics growthBaseValues,
         Equipment hands,
         Equipment head,
         Equipment body,
@@ -115,10 +118,10 @@ public class IndividualStatistics
         this.abilityLevels = abilityLevels;
         this.EXP = EXP;
         this.character = character;
-        this.currentStats = stats;
-        this.maxStats = maxStats;
-        this.indiBaseStats = indiBaseStats;
-        this.growthStats = growthStats;
+        this.currentStatValues = stats;
+        this.fullStatValues = fullStatValues;
+        this.indiBaseValues = indiBaseValues;
+        this.growthBaseValues = growthBaseValues;
 
         this.hands = hands;
         this.head = head;
@@ -128,15 +131,24 @@ public class IndividualStatistics
         lvlUpReport = new LevelUpReport(nullStats, nullStats, 0, 0);
     }
 
-    protected IndividualStatistics(AGuardian core, CommonStatistics commonStatistics, int level, int character) {
+    protected IndividualStatistics(AGuardian core, CommonStatistics commonStatistics, int level, int character)
+    {
         construct(core, commonStatistics, level, character);
     }
 
+    /**
+     * Creates an IndividualStatistics object, containing all information that is unique to the
+     * submitted guardian.
+     * @param core              the guardian, this object will belong to
+     * @param commonStatistics  the common stats, which are equal for all guardians of this species
+     * @param level             the level, the created guardian will have
+     */
     protected IndividualStatistics(AGuardian core, CommonStatistics commonStatistics, int level)
     {
         int character;
-        // Choose a random character
-        switch(MathUtils.random(0,2)) {
+        // Choose a random character, to create really individual guardians
+        switch(MathUtils.random(0,2))
+        {
             case 2:  character = Character.VIVACIOUS; break;
             case 1:  character = Character.PRUDENT; break;
             default: character = Character.BALANCED; break;
@@ -151,8 +163,11 @@ public class IndividualStatistics
         this.level = 0;
         this.abilityLevels = -1;
 
-        this.growthStats = new Statistics(0,0,0,0,0,0,0);
-        this.indiBaseStats = new Statistics(
+        // ......................................................................................... base values
+        this.growthBaseValues = new Statistics(0,0,0,0,0,0,0);
+
+        // Individual Base Values are determined once, and shall be never changed again
+        this.indiBaseValues = new Statistics(
             MathUtils.random(0,63),
             MathUtils.random(0,63),
             MathUtils.random(0,15),
@@ -162,17 +177,29 @@ public class IndividualStatistics
             MathUtils.random(0,15)
         );
 
-        // TODO find correct value calculation - difference between base values and actual values?
         // Debugging
         if(Constant.DEBUGGING_ON) {
             commonStatistics = new CommonStatistics(300,50,10,11,12,13,14);
-            indiBaseStats = new CommonStatistics(0,0,0,0,0,0,0);
+            indiBaseValues = new CommonStatistics(0,0,0,0,0,0,0);
             this.character = Character.BALANCED;
         }
 
-        this.currentStats = commonStatistics.clone();
-        this.maxStats = commonStatistics.clone();
 
+        // ......................................................................................... stats
+        // Calculate the visible Stat values from the base values
+
+        this.fullStatValues     = StatCalculator.calculateAllStats(
+            characterGrowthRates[character],
+            level,
+            core.getCommonStatistics(),
+            indiBaseValues,
+            growthBaseValues
+        );
+
+        this.currentStatValues  = fullStatValues.clone();
+
+
+        // ......................................................................................... leveling
         for(int i=0; i<level; i++)
         {
             levelUp();
@@ -198,91 +225,44 @@ public class IndividualStatistics
      */
     private LevelUpReport levelUp()
     {
-        // Raise individual Base Stats randomly
-        indiBaseStats = new Statistics(
-            indiBaseStats.getHP() + MathTool.dice(2,3,0),
-            indiBaseStats.getMP() + MathTool.dice(2,2,0),
-            indiBaseStats.getPStr() + MathTool.dice(1,2,0),
-            indiBaseStats.getPDef() + MathTool.dice(1,2,0),
-            indiBaseStats.getMStr() + MathTool.dice(1,2,0),
-            indiBaseStats.getMDef() + MathTool.dice(1,2,0),
-            indiBaseStats.getSpeed() + MathTool.dice(1,2,0)
+        // Raise growth base values randomly
+        growthBaseValues = new Statistics(
+            growthBaseValues.getHP() + MathTool.dice(2,3,0),
+            growthBaseValues.getMP() + MathTool.dice(2,2,0),
+            growthBaseValues.getPStr() + MathTool.dice(1,2,0),
+            growthBaseValues.getPDef() + MathTool.dice(1,2,0),
+            growthBaseValues.getMStr() + MathTool.dice(1,2,0),
+            growthBaseValues.getMDef() + MathTool.dice(1,2,0),
+            growthBaseValues.getSpeed() + MathTool.dice(1,2,0)
         );
 
         // Debugging
         if(Constant.DEBUGGING_ON) {
-            indiBaseStats = new CommonStatistics(0,0,0,0,0,0,0);
+            growthBaseValues = new CommonStatistics(0,0,0,0,0,0,0);
         }
 
 
-        CommonStatistics common = core.getCommonStatistics();
+        CommonStatistics commonBaseValues = core.getCommonStatistics();
         int newLevel = this.level + 1;
 
-        int newHP = StatCalculator.calculateHP(
-            characterGrowthRates[character][StatType.HP],
+        // Calculate the Stats on the new level
+        Statistics newFullStatValues = StatCalculator.calculateAllStats(
+            characterGrowthRates[character],
             newLevel,
-            common.getBaseHP(),
-            indiBaseStats.getHP(),
-            growthStats.getHP()
-        );
-
-        int newMP = StatCalculator.calculateMP(
-            characterGrowthRates[character][StatType.MP],
-            newLevel,
-            common.getBaseMP(),
-            indiBaseStats.getMP(),
-            growthStats.getMP()
-        );
-
-        int newPStr = StatCalculator.calculateStat(
-            characterGrowthRates[character][StatType.PSTR],
-            newLevel,
-            common.getBasePStr(),
-            indiBaseStats.getPStr(),
-            growthStats.getPStr()
-        );
-
-        int newPDef = StatCalculator.calculateStat(
-            characterGrowthRates[character][StatType.PDEF],
-            newLevel,
-            common.getBasePDef(),
-            indiBaseStats.getPDef(),
-            growthStats.getPDef()
-        );
-
-        int newMStr = StatCalculator.calculateStat(
-            characterGrowthRates[character][StatType.MSTR],
-            newLevel,
-            common.getBaseMStr(),
-            indiBaseStats.getMStr(),
-            growthStats.getMStr()
-        );
-
-        int newMDef = StatCalculator.calculateStat(
-            characterGrowthRates[character][StatType.MDEF],
-            newLevel,
-            common.getBaseMDef(),
-            indiBaseStats.getMDef(),
-            growthStats.getMDef()
-        );
-
-        int newSpeed = StatCalculator.calculateStat(
-            characterGrowthRates[character][StatType.SPEED],
-            newLevel,
-            common.getBaseSpeed(),
-            indiBaseStats.getSpeed(),
-            growthStats.getSpeed()
+            commonBaseValues,
+            indiBaseValues,
+            growthBaseValues
         );
 
         LevelUpReport report = new LevelUpReport(
-            maxStats.clone(),
-            new Statistics(newHP, newMP, newPStr, newPDef, newMStr, newMDef, newSpeed),
+            fullStatValues.clone(),
+            newFullStatValues,
             this.level,
-            this.level + 1
+            newLevel
         );
 
         this.level      = report.newLevel;
-        this.maxStats   = report.newStats;
+        this.fullStatValues = report.newStats;
 
         this.abilityLevels += 1;
 
@@ -336,19 +316,19 @@ public class IndividualStatistics
     }
 
     public void healHP(int value) {
-        setHP(currentStats.HP + value);
+        setHP(currentStatValues.HP + value);
     }
 
     public void decreaseHP(int value) {
-        setHP(currentStats.HP - value);
+        setHP(currentStatValues.HP - value);
     }
 
     public void healMP(int value) {
-        setMP(currentStats.MP + value);
+        setMP(currentStatValues.MP + value);
     }
 
     public void decreaseMP(int value) {
-        setMP(currentStats.MP - value);
+        setMP(currentStatValues.MP - value);
     }
 
     /**
@@ -356,7 +336,7 @@ public class IndividualStatistics
      * @param fraction
      */
     public void increasePStr(int fraction) {
-        setPStr(MathUtils.round(currentStats.PStr * (100 + fraction)/(100f)));
+        setPStr(MathUtils.round(currentStatValues.PStr * (100 + fraction)/(100f)));
     }
 
     /**
@@ -364,7 +344,7 @@ public class IndividualStatistics
      * @param fraction
      */
     public void increasePDef(int fraction) {
-        setPDef(MathUtils.round(currentStats.PDef * (100 + fraction)/(100f)));
+        setPDef(MathUtils.round(currentStatValues.PDef * (100 + fraction)/(100f)));
     }
 
     /**
@@ -372,7 +352,7 @@ public class IndividualStatistics
      * @param fraction
      */
     public void increaseMStr(int fraction) {
-        setMStr(MathUtils.round(currentStats.MStr * (100 + fraction)/(100f)));
+        setMStr(MathUtils.round(currentStatValues.MStr * (100 + fraction)/(100f)));
     }
 
     /**
@@ -380,7 +360,7 @@ public class IndividualStatistics
      * @param fraction
      */
     public void increaseMDef(int fraction) {
-        setMDef(MathUtils.round(currentStats.MDef * (100 + fraction)/(100f)));
+        setMDef(MathUtils.round(currentStatValues.MDef * (100 + fraction)/(100f)));
     }
 
     /**
@@ -388,17 +368,17 @@ public class IndividualStatistics
      * @param fraction
      */
     public void increaseSpeed(int fraction) {
-        setSpeed(MathUtils.round(currentStats.Speed * (100 + fraction)/(100f)));
+        setSpeed(MathUtils.round(currentStatValues.Speed * (100 + fraction)/(100f)));
     }
 
     // ............................................................................................. CALCULATED VALUES
 
     public String getHPfractionAsString() {
-        return (Integer.toString(currentStats.HP) + "/" + Integer.toString(getHPmax()));
+        return (Integer.toString(currentStatValues.HP) + "/" + Integer.toString(getHPmax()));
     }
 
     public String getMPfractionAsString() {
-        return (Integer.toString(currentStats.MP) + "/" + Integer.toString(getMPmax()));
+        return (Integer.toString(currentStatValues.MP) + "/" + Integer.toString(getMPmax()));
     }
 
     public int getEXPfraction() {
@@ -406,11 +386,11 @@ public class IndividualStatistics
     }
 
     public int getHPfraction() {
-        return MathUtils.round(100f*currentStats.HP/getHPmax());
+        return MathUtils.round(100f* currentStatValues.HP/getHPmax());
     }
 
     public int getMPfraction() {
-        return MathUtils.round(100f*currentStats.MP/getMPmax());
+        return MathUtils.round(100f* currentStatValues.MP/getMPmax());
     }
 
 
@@ -511,7 +491,7 @@ public class IndividualStatistics
     }
 
     public boolean isFit() {
-        return currentStats.HP > 0;
+        return currentStatValues.HP > 0;
     }
 
     public boolean isKO() {
@@ -535,31 +515,31 @@ public class IndividualStatistics
     }
 
     public int getHP() {
-        return currentStats.HP;
+        return currentStatValues.HP;
     }
 
     public int getMP() {
-        return currentStats.MP;
+        return currentStatValues.MP;
     }
 
     public int getPStr() {
-        return currentStats.PStr;
+        return currentStatValues.PStr;
     }
 
     public int getPDef() {
-        return currentStats.PDef;
+        return currentStatValues.PDef;
     }
 
     public int getMStr() {
-        return currentStats.MStr;
+        return currentStatValues.MStr;
     }
 
     public int getMDef() {
-        return currentStats.MDef;
+        return currentStatValues.MDef;
     }
 
     public int getSpeed() {
-        return currentStats.Speed;
+        return currentStatValues.Speed;
     }
 
     /**
@@ -573,7 +553,7 @@ public class IndividualStatistics
             characterGrowthRates[character][StatType.HP],
             99,
             core.getCommonStatistics().getBaseHP(),
-            indiBaseStats.getHP()+50,
+            indiBaseValues.getHP()+50,
             255
         );
         return maxPossHP;
@@ -585,7 +565,7 @@ public class IndividualStatistics
             characterGrowthRates[character][StatType.MP],
             99,
             core.getCommonStatistics().getBaseMP(),
-            indiBaseStats.getMP()+50,
+            indiBaseValues.getMP()+50,
             255
         );
         return maxPossMP;
@@ -597,7 +577,7 @@ public class IndividualStatistics
             characterGrowthRates[character][StatType.PSTR],
             99,
             core.getCommonStatistics().getBasePStr(),
-            indiBaseStats.getPStr()+50,
+            indiBaseValues.getPStr()+50,
             255
         );
         return maxPossPStr;
@@ -609,7 +589,7 @@ public class IndividualStatistics
             characterGrowthRates[character][StatType.PDEF],
             99,
             core.getCommonStatistics().getBasePDef(),
-            indiBaseStats.getPDef()+50,
+            indiBaseValues.getPDef()+50,
             255
         );
         return maxPossPDef;
@@ -621,7 +601,7 @@ public class IndividualStatistics
             characterGrowthRates[character][StatType.MSTR],
             99,
             core.getCommonStatistics().getBaseMStr(),
-            indiBaseStats.getMStr()+50,
+            indiBaseValues.getMStr()+50,
             255
         );
         return maxPossMStr;
@@ -633,7 +613,7 @@ public class IndividualStatistics
             characterGrowthRates[character][StatType.MDEF],
             99,
             core.getCommonStatistics().getBaseMDef(),
-            indiBaseStats.getMDef()+50,
+            indiBaseValues.getMDef()+50,
             255
         );
         return maxPossMDef;
@@ -645,7 +625,7 @@ public class IndividualStatistics
             characterGrowthRates[character][StatType.SPEED],
             99,
             core.getCommonStatistics().getBaseSpeed(),
-            indiBaseStats.getSpeed()+50,
+            indiBaseValues.getSpeed()+50,
             255
         );
         return maxPossSpeed;
@@ -656,35 +636,41 @@ public class IndividualStatistics
      */
     public int getHPmax()
     {
-        float extFactor = 100f;
+        float extFactor = 0;
 
         if(hands != null)   extFactor += hands.addsHP;
         if(body != null)    extFactor += body.addsHP;
         if(feet != null)    extFactor += feet.addsHP;
         if(head != null)    extFactor += head.addsHP;
 
-        return MathUtils.floor((maxStats.HP * extFactor) / 100f);
+        extFactor /= 100f;
+
+        return fullStatValues.HP + MathUtils.floor(fullStatValues.HP * extFactor);
     }
 
     /**
      * @return maximum MP, taking {@link Equipment} into account
      */
-    public int getMPmax() {
-        float extFactor = 100f;
+    public int getMPmax()
+    {
+        float extFactor = 0;
 
-        if(hands != null)   extFactor += hands.addsMP;
-        if(body != null)    extFactor += body.addsMP;
-        if(feet != null)    extFactor += feet.addsMP;
-        if(head != null)    extFactor += head.addsMP;
+        if(hands != null)   extFactor += hands.addsHP;
+        if(body != null)    extFactor += body.addsHP;
+        if(feet != null)    extFactor += feet.addsHP;
+        if(head != null)    extFactor += head.addsHP;
 
-        return MathUtils.floor((maxStats.MP * extFactor) / 100f);
+        extFactor /= 100f;
+
+        return fullStatValues.MP + MathUtils.floor(fullStatValues.MP * extFactor);
     }
 
     /**
      * @return maximum Pstr, taking {@link Equipment} into account
      */
-    public int getPStrMax() {
-        int extPStr = maxStats.PStr;
+    public int getPStrMax()
+    {
+        int extPStr = fullStatValues.PStr;
 
         if(hands != null)   extPStr += hands.addsPStr;
         if(body != null)    extPStr += body.addsPStr;
@@ -697,8 +683,9 @@ public class IndividualStatistics
     /**
      * @return maximum PDef, taking {@link Equipment} into account
      */
-    public int getPDefMax() {
-        int extPDef = maxStats.PDef;
+    public int getPDefMax()
+    {
+        int extPDef = fullStatValues.PDef;
 
         if(hands != null)   extPDef += hands.addsPDef;
         if(body != null)    extPDef += body.addsPDef;
@@ -711,8 +698,9 @@ public class IndividualStatistics
     /**
      * @return maximum MStr, taking {@link Equipment} into account
      */
-    public int getMStrMax() {
-        int extMStr = maxStats.MStr;
+    public int getMStrMax()
+    {
+        int extMStr = fullStatValues.MStr;
 
         if(hands != null)   extMStr += hands.addsMStr;
         if(body != null)    extMStr += body.addsMStr;
@@ -725,8 +713,9 @@ public class IndividualStatistics
     /**
      * @return maximum MDef, taking {@link Equipment} into account
      */
-    public int getMDefMax() {
-        int extMDef = maxStats.MDef;
+    public int getMDefMax()
+    {
+        int extMDef = fullStatValues.MDef;
 
         if(hands != null)   extMDef += hands.addsMDef;
         if(body != null)    extMDef += body.addsMDef;
@@ -739,8 +728,9 @@ public class IndividualStatistics
     /**
      * @return maximum Speed, taking {@link Equipment} into account
      */
-    public int getSpeedMax() {
-        int extSpeed = maxStats.Speed;
+    public int getSpeedMax()
+    {
+        int extSpeed = fullStatValues.Speed;
 
         if(hands != null)   extSpeed += hands.addsSpeed;
         if(body != null)    extSpeed += body.addsSpeed;
@@ -782,69 +772,69 @@ public class IndividualStatistics
 
     public void setHP(int HP)
     {
-        currentStats.HP = HP;
-        if(HP > getHPmax()) currentStats.HP = getHPmax();
-        if(HP < 0)          currentStats.HP = 0;
+        currentStatValues.HP = HP;
+        if(HP > getHPmax()) currentStatValues.HP = getHPmax();
+        if(HP < 0)          currentStatValues.HP = 0;
 
         core.setStatisticsChanged();
         core.notifyObservers();
     }
 
     public void setMP(int MP) {
-        currentStats.MP = MP;
+        currentStatValues.MP = MP;
 
-        if(MP > getMPmax()) currentStats.MP = getMPmax();
-        if(MP < 0)          currentStats.MP = 0;
+        if(MP > getMPmax()) currentStatValues.MP = getMPmax();
+        if(MP < 0)          currentStatValues.MP = 0;
 
         core.setStatisticsChanged();
         core.notifyObservers();
     }
 
     public void setPStr(int PStr) {
-        currentStats.PStr = PStr;
+        currentStatValues.PStr = PStr;
 
-        if(PStr > getPStrMax()*1.5f) currentStats.PStr = getPStrMax();
-        if(PStr < 1)            currentStats.PStr = 1;
+        if(PStr > getPStrMax()*1.5f) currentStatValues.PStr = getPStrMax();
+        if(PStr < 1)            currentStatValues.PStr = 1;
 
         core.setStatisticsChanged();
         core.notifyObservers();
     }
 
     public void setPDef(int PDef) {
-        currentStats.PDef = PDef;
+        currentStatValues.PDef = PDef;
 
-        if(PDef > getPDefMax()*1.5f) currentStats.PDef = getPDefMax();
-        if(PDef < 1)            currentStats.PDef = 1;
+        if(PDef > getPDefMax()*1.5f) currentStatValues.PDef = getPDefMax();
+        if(PDef < 1)            currentStatValues.PDef = 1;
 
         core.setStatisticsChanged();
         core.notifyObservers();
     }
 
     public void setMStr(int MStr) {
-        currentStats.MStr = MStr;
+        currentStatValues.MStr = MStr;
 
-        if(MStr > getMStrMax()*1.5f) currentStats.MStr = getMStrMax();
-        if(MStr < 1)            currentStats.MStr = 1;
+        if(MStr > getMStrMax()*1.5f) currentStatValues.MStr = getMStrMax();
+        if(MStr < 1)            currentStatValues.MStr = 1;
 
         core.setStatisticsChanged();
         core.notifyObservers();
     }
 
     public void setMDef(int MDef) {
-        currentStats.MDef = MDef;
+        currentStatValues.MDef = MDef;
 
-        if(MDef > getMDefMax()*1.5f) currentStats.MDef = getMDefMax();
-        if(MDef < 1)            currentStats.MDef = 1;
+        if(MDef > getMDefMax()*1.5f) currentStatValues.MDef = getMDefMax();
+        if(MDef < 1)            currentStatValues.MDef = 1;
 
         core.setStatisticsChanged();
         core.notifyObservers();
     }
 
     public void setSpeed(int Speed) {
-        currentStats.Speed = Speed;
+        currentStatValues.Speed = Speed;
 
-        if(Speed > getSpeedMax()) currentStats.Speed = getSpeedMax();
-        if(Speed < 1)          currentStats.Speed = 1;
+        if(Speed > getSpeedMax()) currentStatValues.Speed = getSpeedMax();
+        if(Speed < 1)          currentStatValues.Speed = 1;
 
         core.setStatisticsChanged();
         core.notifyObservers();
@@ -865,14 +855,14 @@ public class IndividualStatistics
         return lvlUpReport;
     }
 
-    public Statistics getIndiBaseStats()
+    public Statistics getIndiBaseValues()
     {
-        return indiBaseStats;
+        return indiBaseValues;
     }
 
-    public Statistics getGrowthStats()
+    public Statistics getGrowthBaseValues()
     {
-        return growthStats;
+        return growthBaseValues;
     }
 
     // ............................................................................................. DELEGATIONS
@@ -882,13 +872,13 @@ public class IndividualStatistics
     public String toString()
     {
         String stats = String.format("HP: %d / %d\tMP: %d / %d\tPStr: %d\tPDef: %d\tMStr: %d\tMDef: %d\tSpeed: %d",
-            currentStats.getHP(), maxStats.getHP(),
-            currentStats.getMP(), maxStats.getMP(),
-            maxStats.getPStr(),
-            maxStats.getPDef(),
-            maxStats.getMStr(),
-            maxStats.getMDef(),
-            maxStats.getSpeed()
+            currentStatValues.getHP(), fullStatValues.getHP(),
+            currentStatValues.getMP(), fullStatValues.getMP(),
+            fullStatValues.getPStr(),
+            fullStatValues.getPDef(),
+            fullStatValues.getMStr(),
+            fullStatValues.getMDef(),
+            fullStatValues.getSpeed()
         );
         return stats;
     }

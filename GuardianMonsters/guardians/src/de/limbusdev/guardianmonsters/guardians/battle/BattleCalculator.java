@@ -68,11 +68,12 @@ public class BattleCalculator
         }
 
         int abilityStrength = ability.damage;
+        float ratioSD = ((float) typeStrength) / ((float) typeDefense);
 
         int level = statAtt.getLevel();
 
         /* Calculate Damage */
-        float damage = (((2f/5f * level + 2f) * abilityStrength * (typeStrength/typeDefense) / 48f) + 2f) * eff;
+        float damage = eff * ((0.5f * level + 1) * abilityStrength * ratioSD + 50) / 5f;
 
         report.damage = MathUtils.ceil(damage);
         report.efficiency = eff;

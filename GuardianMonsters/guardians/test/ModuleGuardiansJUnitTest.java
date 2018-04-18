@@ -365,12 +365,17 @@ public class ModuleGuardiansJUnitTest
         AGuardianFactory factory = GuardiansServiceLocator.getGuardianFactory();
         AGuardian guardian = factory.createGuardian(1,1);
 
-        guardian.getIndividualStatistics().giveEquipment(new BodyEquipment("", BodyEquipment.Type.ARMOR, 5, 5, 5, 5, 5, 5, 5, 0));
+
         assertEquals(
             StatCalculator.calculateHP(IndividualStatistics.Growth.MED, 1, 300, 0, 0),
             guardian.getIndividualStatistics().getHPmax()
         );
-        assertEquals(10+5, guardian.getIndividualStatistics().getPStrMax());
+
+        guardian.getIndividualStatistics().giveEquipment(new BodyEquipment("", BodyEquipment.Type.ARMOR, 5, 5, 5, 5, 5, 5, 5, 0));
+        assertEquals(
+            StatCalculator.calculateStat(IndividualStatistics.Growth.MED, 1, 10, 0, 0) + 5,
+            guardian.getIndividualStatistics().getPStrMax()
+        );
 
         ModuleGuardians.destroyModule();
     }

@@ -344,14 +344,14 @@ public class ModuleGuardiansJUnitTest
         AGuardian winner = factory.createGuardian(1,1);
         AGuardian looser = factory.createGuardian(1,1);
 
-        int expectedDamage = MathUtils.ceil((0.6f*1f + 2f) * 10f / 48f + 2f);
+        int expectedDamage = MathUtils.ceil(1.0f * ((0.5f * 1 + 1) * 10 * (10.0f / 11.0f) + 50) / 50.0f);
         System.out.println("Expected Damage: " + expectedDamage);
         AttackCalculationReport report = BattleCalculator.calcAttack(winner, looser, new Ability(1, Ability.DamageType.PHYSICAL, Element.NONE, 10, ""));
         assertEquals(expectedDamage, report.damage);
 
         BattleCalculator.apply(report);
 
-        assertEquals(10, looser.getIndividualStatistics().getHP());
+        assertEquals(StatCalculator.calculateHP(IndividualStatistics.Growth.MED, 1, 300, 0, 0) - 2, looser.getIndividualStatistics().getHP());
 
         ModuleGuardians.destroyModule();
     }

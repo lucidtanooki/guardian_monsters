@@ -27,19 +27,19 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
+import de.limbusdev.guardianmonsters.Constant;
+import de.limbusdev.guardianmonsters.battle.BattleScreen;
+import de.limbusdev.guardianmonsters.enums.SkyDirection;
+import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Components;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.InputComponent;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PositionComponent;
-import de.limbusdev.guardianmonsters.fwmengine.world.ecs.entities.HeroEntity;
-import de.limbusdev.guardianmonsters.enums.SkyDirection;
-import de.limbusdev.guardianmonsters.fwmengine.battle.ui.BattleScreen;
-import de.limbusdev.guardianmonsters.fwmengine.menus.ui.InventoryScreen;
-import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.GameArea;
-import de.limbusdev.guardianmonsters.utils.geometry.IntVec2;
-import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager;
-import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.entities.EntityFamilies;
-import de.limbusdev.guardianmonsters.Constant;
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.entities.HeroEntity;
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.GameArea;
+import de.limbusdev.guardianmonsters.services.Services;
+import de.limbusdev.guardianmonsters.utils.geometry.IntVec2;
+import main.java.de.limbusdev.guardianmonsters.inventory.InventoryScreen;
 
 
 /**
@@ -162,7 +162,7 @@ public class HUD extends InputAdapter {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 Services.getScreenManager().pushScreen(new InventoryScreen(
-                    Components.team.get(hero), Components.inventory.get(hero).inventory));
+                    Components.team.get(hero).team, Components.inventory.get(hero).inventory));
             }
         });
         this.menuButtons.addActor(teamButton);

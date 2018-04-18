@@ -102,6 +102,7 @@ project(":core") {
         compile project(":battle")
         compile project(":guardians")
         compile project(":ui")
+        compile project(":inventory")
         compile "com.badlogicgames.gdx:gdx:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
@@ -136,6 +137,8 @@ project(":ui") {
 
     dependencies {
         compile project(":scene2d")
+        compile project(":services")
+        compile project(":guardians")
         compile "com.badlogicgames.gdx:gdx:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
         compile "com.badlogicgames.box2dlights:box2dlights:$box2DLightsVersion"
@@ -174,6 +177,8 @@ project(":battle") {
         compile project(":assets")
         compile project(":media")
         compile project(":guardians")
+        compile project(":services")
+        compile project(":ui")
         compile "com.badlogicgames.gdx:gdx:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
         compile "com.badlogicgames.box2dlights:box2dlights:$box2DLightsVersion"
@@ -182,6 +187,27 @@ project(":battle") {
         compile "com.badlogicgames.gdx:gdx-controllers:$gdxVersion"
         compile 'com.esotericsoftware:kryo:4.0.0'
         testCompile "junit:junit:+"
+    }
+}
+
+project(":inventory") {
+    apply plugin: "java"
+
+    dependencies {
+        compile project(":scene2d")
+        compile project(":enums")
+        compile project(":assets")
+        compile project(":media")
+        compile project(":guardians")
+        compile project(":services")
+        compile project(":ui")
+        compile project(":battle")
+        compile "com.badlogicgames.gdx:gdx:$gdxVersion"
+        compile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
+        compile "com.badlogicgames.box2dlights:box2dlights:$box2DLightsVersion"
+        compile "com.badlogicgames.ashley:ashley:$ashleyVersion"
+        compile "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
+        compile "com.badlogicgames.gdx:gdx-controllers:$gdxVersion"
     }
 }
 

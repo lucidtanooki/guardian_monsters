@@ -223,6 +223,6 @@ public class ExtendedTiledMapRenderer extends OrthogonalTiledMapRenderer {
      * Sorts sprites, so people in the background are drawn behind those in the front
      */
     private void sortSpritesByDepth() {
-        Sort.instance().sort(sprites,new SpriteZComparator());
+        Sort.instance().sort(sprites,new de.limbusdev.guardianmonsters.scene2d.SpriteZComparator());
     }
 }

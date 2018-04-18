@@ -1,11 +1,12 @@
 package de.limbusdev.guardianmonsters.battle;
 
+import de.limbusdev.guardianmonsters.guardians.abilities.Ability;
 import de.limbusdev.guardianmonsters.media.SFXType;
 
 /**
  * AbilityMedia
  *
- * Holds information about which animation and sound to use for an {@link de.limbusdev.guardianmonsters.guardians.abilities.Ability}.
+ * Holds information about which animation and sound to use for an {@link Ability}.
  *
  * @author Georg Eckert 2017
  */

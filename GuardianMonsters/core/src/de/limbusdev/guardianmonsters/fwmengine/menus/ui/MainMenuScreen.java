@@ -17,14 +17,14 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.I18NBundle;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
+import de.limbusdev.guardianmonsters.Constant;
 import de.limbusdev.guardianmonsters.assets.paths.AssetPath;
 import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager;
-import de.limbusdev.guardianmonsters.services.Services;
-import de.limbusdev.guardianmonsters.fwmengine.menus.ui.widgets.CreditsScreenWidget;
-import de.limbusdev.guardianmonsters.fwmengine.menus.ui.widgets.StartScreenWidget;
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.WorldScreen;
-import de.limbusdev.guardianmonsters.Constant;
 import de.limbusdev.guardianmonsters.model.gamestate.GameState;
+import de.limbusdev.guardianmonsters.services.Services;
+import de.limbusdev.guardianmonsters.ui.widgets.CreditsScreenWidget;
+import de.limbusdev.guardianmonsters.ui.widgets.StartScreenWidget;
 
 
 /**

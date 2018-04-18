@@ -82,7 +82,19 @@ public class ModuleGuardians
             "\"metaForms\":[" +
             "{\"form\":0,\"nameID\":\"gm001_0_fordin\",\"elements\":[\"earth\"]}," +
             "{\"form\":1,\"nameID\":\"gm001_1_stegofor\",\"elements\":[\"earth\",\"forest\"]}," +
-            "{\"form\":2,\"nameID\":\"gm001_2_brachifor\",\"elements\":[\"earth\",\"forest\"]}]}]}";
+            "{\"form\":2,\"nameID\":\"gm001_2_brachifor\",\"elements\":[\"earth\",\"forest\"]}]}," +
+            "{\"id\":2,\"metamorphosisNodes\":[91,92]," +
+            "\"abilities\":[" +
+            "{\"abilityID\":2,\"element\":\"none\",\"abilityPos\":0}," +
+            "{\"abilityID\":1,\"element\":\"water\",\"abilityPos\":5}]," +
+            "\"basestats\":{\"hp\":300,\"mp\":50,\"speed\":10,\"pstr\":10,\"pdef\":10,\"mstr\":10,\"mdef\":10}," +
+            "\"equipmentCompatibility\":{\"head\":\"helmet\",\"hands\":\"claws\",\"body\":\"breastplate\",\"feet\":\"kneepads\"}," +
+            "\"abilityGraphEquip\":{\"head\":21,\"hands\":23,\"body\":89,\"feet\":90}," +
+            "\"metaForms\":[" +
+            "{\"form\":0,\"nameID\":\"gm002_0_kroki\",\"elements\":[\"water\"]}," +
+            "{\"form\":1,\"nameID\":\"gm002_1_krokivip\",\"elements\":[\"water\",\"lindworm\"]}," +
+            "{\"form\":2,\"nameID\":\"gm002_2_leviadile\",\"elements\":[\"water\",\"lindworm\"]}]}" +
+            "]}";
         GuardiansServiceLocator.provide(SpeciesDescriptionService.getInstance(json));
 
 

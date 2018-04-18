@@ -58,6 +58,16 @@ public class BattleSystem
         queue = new BattleQueue(left,right);
 
         result = new BattleResult(left, null);
+
+        if (callbacks == null) System.out.println("Use 'setCallbacks(...) to set Callbacks later.'");
+    }
+
+    /**
+     * If callbacks must be set later, usually only in debugging.
+     * @param callbacks
+     */
+    public void setCallbacks(Callbacks callbacks) {
+        this.callbacks = callbacks;
     }
 
     // .............................................................................. battle methods
@@ -240,6 +250,7 @@ public class BattleSystem
             chooseTarget();
             setChosenAttack(att);
             attack();
+            applyAttack();
         }
 
         private void chooseTarget()

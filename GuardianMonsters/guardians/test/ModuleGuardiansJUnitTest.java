@@ -485,13 +485,15 @@ public class ModuleGuardiansJUnitTest
         team.put(1, factory.createGuardian(1,1));
         team.put(2, factory.createGuardian(1,1));
         Team oppTeam = new Team(3,3,3);
-        oppTeam.put(0,factory.createGuardian(4,1));
-        oppTeam.put(1,factory.createGuardian(4,1));
-        oppTeam.put(2,factory.createGuardian(4,1));
+        oppTeam.put(0,factory.createGuardian(2,1));
+        oppTeam.put(1,factory.createGuardian(2,1));
+        oppTeam.put(2,factory.createGuardian(2,1));
 
         // Battle System Initialization
         final boolean[] battleEnds = {false};
-        BattleSystem bs = new BattleSystem(team, oppTeam, new BattleSystem.Callbacks()
+        final BattleSystem bs = new BattleSystem(team, oppTeam, null);
+
+        BattleSystem.Callbacks bsCB = new BattleSystem.Callbacks()
         {
             @Override
             public void onBattleEnds(boolean winnerSide)
@@ -509,37 +511,16 @@ public class ModuleGuardiansJUnitTest
             @Override
             public void onPlayersTurn()
             {
-                super.onPlayersTurn();
+                playersTurn(bs, team, oppTeam);
             }
-        });
+        };
+
+        bs.setCallbacks(bsCB);
 
 
         while(!battleEnds[0])
         {
-            System.out.println("\n### Player's turn ###");
-            AGuardian m = bs.getActiveMonster();
-            int att = 0;
-            Ability.aID abilityID = null;
-            while(abilityID == null) {
-                att = MathUtils.random(0,m.getAbilityGraph().getActiveAbilities().size-1);
-                abilityID = m.getAbilityGraph().getActiveAbility(att);
-            }
-            Array<AGuardian> targets = new Array<>();
-            for(AGuardian h : oppTeam.values()) {
-                if(h.getIndividualStatistics().isFit()) {
-                    targets.add(h);
-                }
-            }
-            AGuardian target = targets.get(MathUtils.random(0,targets.size-1));
-            System.out.println("Hero chooses target: " + target.getUUID());
-
-            assertEquals("Active Monster is in Hero's team", true, team.isMember(m));
-            assertEquals("Target is in Opponent's team", true, oppTeam.isMember(target));
-
-            bs.setChosenTarget(target);
-            bs.setChosenAttack(att);
-            bs.attack();
-            bs.applyAttack();
+            System.out.println(bs.getQueue().toString());
             bs.continueBattle();
         }
 
@@ -561,5 +542,34 @@ public class ModuleGuardiansJUnitTest
         System.out.println("#");
         System.out.println("#                                                           #");
         System.out.println("#############################################################");
+    }
+
+    public static void playersTurn(BattleSystem bs, Team heroTeam, Team oppTeam)
+    {
+        System.out.println("\n### Player's turn ###");
+        AGuardian m = bs.getActiveMonster();
+        int att = 0;
+        Ability.aID abilityID = null;
+        while(abilityID == null) {
+            att = MathUtils.random(0,m.getAbilityGraph().getActiveAbilities().size-1);
+            abilityID = m.getAbilityGraph().getActiveAbility(att);
+        }
+
+        Array<AGuardian> targets = new Array<>();
+        for(AGuardian h : oppTeam.values()) {
+            if(h.getIndividualStatistics().isFit()) {
+                targets.add(h);
+            }
+        }
+        AGuardian target = targets.get(MathUtils.random(0,targets.size-1));
+        System.out.println("Hero chooses target: " + target.getUUID());
+
+        assertEquals("Active Monster is in Hero's team", true, heroTeam.isMember(m));
+        assertEquals("Target is in Opponent's team", true, oppTeam.isMember(target));
+
+        bs.setChosenTarget(target);
+        bs.setChosenAttack(att);
+        bs.attack();
+        bs.applyAttack();
     }
 }

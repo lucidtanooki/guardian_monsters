@@ -306,13 +306,34 @@ public class ModuleGuardiansJUnitTest
             System.out.println(guardian.getIndividualStatistics().getLatestLevelUpReport().newStats);
         }
 
-        assertEquals(209, guardian.getIndividualStatistics().getHPmax());
-        assertEquals(158, guardian.getIndividualStatistics().getMPmax());
-        assertEquals(105, guardian.getIndividualStatistics().getPStrMax());
-        assertEquals(105, guardian.getIndividualStatistics().getPDefMax());
-        assertEquals(105, guardian.getIndividualStatistics().getMStrMax());
-        assertEquals(105, guardian.getIndividualStatistics().getMDefMax());
-        assertEquals(105, guardian.getIndividualStatistics().getSpeedMax());
+        assertEquals(
+            StatCalculator.calculateHP(IndividualStatistics.Growth.MED, 99, 300, 0, 0),
+            guardian.getIndividualStatistics().getHPmax()
+        );
+        assertEquals(
+            StatCalculator.calculateMP(IndividualStatistics.Growth.MED, 99, 50, 0, 0),
+            guardian.getIndividualStatistics().getMPmax()
+        );
+        assertEquals(
+            StatCalculator.calculateStat(IndividualStatistics.Growth.MED, 99, 10, 0, 0),
+            guardian.getIndividualStatistics().getPStrMax()
+        );
+        assertEquals(
+            StatCalculator.calculateStat(IndividualStatistics.Growth.MED, 99, 11, 0, 0),
+            guardian.getIndividualStatistics().getPDefMax()
+        );
+        assertEquals(
+            StatCalculator.calculateStat(IndividualStatistics.Growth.MED, 99, 12, 0, 0),
+            guardian.getIndividualStatistics().getMStrMax()
+        );
+        assertEquals(
+            StatCalculator.calculateStat(IndividualStatistics.Growth.MED, 99, 13, 0, 0),
+            guardian.getIndividualStatistics().getMDefMax()
+        );
+        assertEquals(
+            StatCalculator.calculateStat(IndividualStatistics.Growth.MED, 99, 14, 0, 0),
+            guardian.getIndividualStatistics().getSpeedMax()
+        );
 
         ModuleGuardians.destroyModule();
     }

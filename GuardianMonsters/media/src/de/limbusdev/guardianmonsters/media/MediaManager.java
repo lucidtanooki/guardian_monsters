@@ -164,19 +164,10 @@ public class MediaManager implements IMediaManager
         return assets.get(path);
     }
 
-    public TextureAtlas.AtlasRegion getMonsterSprite(int index) {
+    @Override
+    public TextureAtlas.AtlasRegion getMonsterSprite(int index, int form) {
         TextureAtlas monsterSprites = assets.get(AssetPath.Spritesheet.GUARDIANS, TextureAtlas.class);
-        TextureAtlas.AtlasRegion sprite = monsterSprites.findRegion(Integer.toString(index));
-        if(sprite == null) {
-            sprite = monsterSprites.findRegion("0");
-        }
-
-        return sprite;
-    }
-
-    public TextureAtlas.AtlasRegion getMonsterMiniSprite(int index) {
-        TextureAtlas monsterSprites = assets.get(AssetPath.Spritesheet.GUARDIANS_MINI, TextureAtlas.class);
-        TextureAtlas.AtlasRegion sprite = monsterSprites.findRegion(Integer.toString(index));
+        TextureAtlas.AtlasRegion sprite = monsterSprites.findRegion(Integer.toString(index), form);
         if(sprite == null) {
             sprite = monsterSprites.findRegion("0");
         }
@@ -185,8 +176,20 @@ public class MediaManager implements IMediaManager
     }
 
     @Override
-    public Image getMonsterFace(int id) {
-        TextureRegion region = assets.get(AssetPath.Spritesheet.GUARDIANS_PREVIEW, TextureAtlas.class).findRegion(Integer.toString(id));
+    public TextureAtlas.AtlasRegion getMonsterMiniSprite(int index, int form) {
+        TextureAtlas monsterSprites = assets.get(AssetPath.Spritesheet.GUARDIANS_MINI, TextureAtlas.class);
+        TextureAtlas.AtlasRegion sprite = monsterSprites.findRegion(Integer.toString(index), form);
+        if(sprite == null) {
+            sprite = monsterSprites.findRegion("0");
+        }
+
+        return sprite;
+    }
+
+    @Override
+    public Image getMonsterFace(int id, int form) {
+        TextureRegion region = assets.get(AssetPath.Spritesheet.GUARDIANS_PREVIEW, TextureAtlas.class)
+            .findRegion(Integer.toString(id),form);
         Image faceImg = new Image(region);
         faceImg.setSize(24,23);
         return faceImg;

@@ -871,7 +871,7 @@ public class IndividualStatistics
     @Override
     public String toString()
     {
-        String stats = String.format("HP: %d / %d\tMP: %d / %d\tPStr: %d\tPDef: %d\tMStr: %d\tMDef: %d\tSpeed: %d",
+        String stats = String.format("| HP: %d / %d\tMP: %d / %d\n| PStr: %d\tPDef: %d\tMStr: %d\tMDef: %d\tSpeed: %d",
             currentStatValues.getHP(), fullStatValues.getHP(),
             currentStatValues.getMP(), fullStatValues.getMP(),
             fullStatValues.getPStr(),

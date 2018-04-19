@@ -39,11 +39,11 @@ public interface IMediaManager
 
     Texture getTexture(String path);
 
-    TextureAtlas.AtlasRegion getMonsterSprite(int index);
+    TextureAtlas.AtlasRegion getMonsterSprite(int index, int form);
 
-    TextureAtlas.AtlasRegion getMonsterMiniSprite(int index);
+    TextureAtlas.AtlasRegion getMonsterMiniSprite(int index, int form);
 
-    Image getMonsterFace(int id);
+    Image getMonsterFace(int id, int form);
 
     TextureRegion getBackgroundTexture(int index);
 

@@ -117,11 +117,11 @@ public class BattleQueue extends Signal<BattleQueue.QueueSignal> {
     {
         String text = "";
 
-        text += "=== Next Round    ===\n";
+        text += "#==================== Next Round    ====================#\n";
         for(AGuardian m : nextRound) text += m.toString() + "\n";
-        text += "=== Current Round ===\n";
+        text += "#==================== Current Round ====================#\n";
         for(AGuardian m : currentRound) text += m.toString() + "\n";
-        text += "---------------------\n";
+        text += "#=======================================================#\n";
         text += "Next: " + peekNext().toString();
 
         return text;

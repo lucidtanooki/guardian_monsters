@@ -8,7 +8,7 @@ import de.limbusdev.guardianmonsters.guardians.abilities.Ability;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.services.Services;
 
-public class AttackMenuWidget extends de.limbusdev.guardianmonsters.battle.ui.widgets.SevenButtonsWidget
+public class AttackMenuWidget extends SevenButtonsWidget
 {
 
     private static int[] order = {5,3,1,0,4,2,6};
@@ -17,13 +17,13 @@ public class AttackMenuWidget extends de.limbusdev.guardianmonsters.battle.ui.wi
      *
      * @param skin battle action UI skin
      */
-    public AttackMenuWidget(Skin skin, Callbacks callbacks) {
+    public AttackMenuWidget(Skin skin, Callbacks callbacks)
+    {
         super(skin, callbacks::onButtonNr, order);
     }
 
-    public void init(AGuardian guardian) {
-
-
+    public void init(AGuardian guardian)
+    {
         // Set all buttons inactive
         for(Integer i : getButtons().keys()) {
             disableButton(i);
@@ -33,9 +33,10 @@ public class AttackMenuWidget extends de.limbusdev.guardianmonsters.battle.ui.wi
         for(int i=0; i<7; i++) {
 
             Ability.aID abilityID = guardian.getAbilityGraph().getActiveAbility(i);
-            Ability attack = GuardiansServiceLocator.getAbilities().getAbility(abilityID);
 
-            if(attack != null) {
+
+            if(abilityID != null) {
+                Ability attack = GuardiansServiceLocator.getAbilities().getAbility(abilityID);
                 setButtonStyle(i,skin, AssetPath.Skin.attackButtonStyle(attack.element));
                 String mpCostString = (attack.MPcost > 0) ? (" " + Integer.toString(attack.MPcost)) : "";
                 setButtonText(i,Services.getL18N().Abilities().get(attack.name) + mpCostString);

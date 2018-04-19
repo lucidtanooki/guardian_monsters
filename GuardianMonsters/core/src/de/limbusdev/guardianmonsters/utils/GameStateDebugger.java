@@ -3,10 +3,15 @@ package de.limbusdev.guardianmonsters.utils;
 import com.badlogic.gdx.Game;
 
 import de.limbusdev.guardianmonsters.Constant;
+import de.limbusdev.guardianmonsters.battle.BattleScreen;
 import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager;
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.WorldScreen;
+import de.limbusdev.guardianmonsters.guardians.GuardiansServiceLocator;
+import de.limbusdev.guardianmonsters.guardians.items.IItemService;
+import de.limbusdev.guardianmonsters.guardians.items.Inventory;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardianFactory;
 import de.limbusdev.guardianmonsters.guardians.monsters.GuardianFactory;
+import de.limbusdev.guardianmonsters.guardians.monsters.Team;
 import de.limbusdev.guardianmonsters.model.gamestate.GameState;
 import de.limbusdev.guardianmonsters.ui.metamorphosis.MetamorphosisScreen;
 
@@ -70,43 +75,38 @@ public class GameStateDebugger {
 //        game.setScreen(ivs);
     }
 
-    private void setUpTestBattle() {
-//        Team heroTeam = new Team(3,3,3);
-//        heroTeam.put(0,BattleFactory.getInstance().createGuardian(1));
-//        heroTeam.put(1,BattleFactory.getInstance().createGuardian(2));
-//        heroTeam.put(2,BattleFactory.getInstance().createGuardian(3));
-//        heroTeam.get(0).abilityGraph.activateNode(13);
-//        heroTeam.get(0).abilityGraph.setActiveAbility(6,1);
-//
-//        Team oppTeam = new Team(3,3,3);
-//        oppTeam.put(0,BattleFactory.getInstance().createGuardian(4));
-//        oppTeam.put(1,BattleFactory.getInstance().createGuardian(5));
-//        oppTeam.put(2,BattleFactory.getInstance().createGuardian(6));
-//
-//
-//        Inventory inventory = new Inventory();
-//
-//        inventory.putItemInInventory(ItemDB.getInstance().getItem("sword-barb-steel"));
-//        inventory.putItemInInventory(ItemDB.getInstance().getItem("bread"));
-//        inventory.putItemInInventory(ItemDB.getInstance().getItem("bread"));
-//        inventory.putItemInInventory(ItemDB.getInstance().getItem("potion-blue"));
-//        inventory.putItemInInventory(ItemDB.getInstance().getItem("potion-blue"));
-//        inventory.putItemInInventory(ItemDB.getInstance().getItem("potion-red"));
-//        inventory.putItemInInventory(ItemDB.getInstance().getItem("medicine-blue"));
-//        inventory.putItemInInventory(ItemDB.getInstance().getItem("angel-tear"));
-//
-//        int i = GuardianDB.getNumberOfAncestors(1);
-//        i = GuardianDB.getNumberOfAncestors(2);
-//        i = GuardianDB.getNumberOfAncestors(3);
-//        i = GuardianDB.getNumberOfAncestors(4);
-//        i = GuardianDB.getNumberOfAncestors(5);
-//        i = GuardianDB.getNumberOfAncestors(6);
-//
-//
-//
-//        BattleScreen battleScreen = new BattleScreen(inventory);
-//        battleScreen.init(heroTeam, oppTeam);
-//        game.setScreen(battleScreen);
+    private void setUpTestBattle()
+    {
+        AGuardianFactory guardianFactory = GuardiansServiceLocator.getGuardianFactory();
+        Team heroTeam = new Team(3,3,3);
+        heroTeam.put(0, guardianFactory.createGuardian(1,1));
+        heroTeam.put(1, guardianFactory.createGuardian(2,1));
+        heroTeam.put(2, guardianFactory.createGuardian(3,1));
+        heroTeam.get(0).getAbilityGraph().activateNode(13);
+        heroTeam.get(0).getAbilityGraph().setActiveAbility(6,1);
+
+        Team oppoTeam = new Team(3,3,3);
+        oppoTeam.put(0, guardianFactory.createGuardian(4,1));
+        oppoTeam.put(1, guardianFactory.createGuardian(5,1));
+        oppoTeam.put(2, guardianFactory.createGuardian(6,1));
+
+
+        Inventory inventory = new Inventory();
+
+        IItemService itemService = GuardiansServiceLocator.getItems();
+
+        inventory.putItemInInventory(itemService.getItem("sword-barb-steel"));
+        inventory.putItemInInventory(itemService.getItem("bread"));
+        inventory.putItemInInventory(itemService.getItem("bread"));
+        inventory.putItemInInventory(itemService.getItem("potion-blue"));
+        inventory.putItemInInventory(itemService.getItem("potion-blue"));
+        inventory.putItemInInventory(itemService.getItem("potion-red"));
+        inventory.putItemInInventory(itemService.getItem("medicine-blue"));
+        inventory.putItemInInventory(itemService.getItem("angel-tear"));
+
+        BattleScreen battleScreen = new BattleScreen(inventory);
+        battleScreen.init(heroTeam, oppoTeam);
+        game.setScreen(battleScreen);
     }
 
     private void setUpTestWorld() {

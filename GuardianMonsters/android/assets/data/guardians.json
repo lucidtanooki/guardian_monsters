@@ -155,7 +155,7 @@
       "metaForms": [
         {
           "form": 0,
-          "nameID": "gm005_0_westoat",
+          "nameID": "gm005_0_weastoat",
           "elements": ["demon"]
         }
       ]
@@ -217,6 +217,24 @@
       ]
     },
     {
+      "id": 9,
+      "metamorphosisNodes": [91],
+      "abilities": [
+        {"abilityID": 2, "element": "none", "abilityPos": 0}
+      ],
+      "basestats": {
+        "hp": 300, "mp": 50, "speed": 10, "pstr": 10, "pdef": 10, "mstr": 10, "mdef": 10
+      },
+      "equipmentCompatibility": {
+        "head": "mask", "hands": "claws", "body": "barding", "feet": "shinprotection"
+      },
+      "abilityGraphEquip": {"head": 54, "hands": 19, "body": 17, "feet": 53},
+      "metaForms": [
+        {"form": 0, "nameID": "gm009_0_spreye",     "elements": ["demon"]},
+        {"form": 1, "nameID": "gm009_1_buttereye",  "elements": ["demon"]}
+      ]
+    },
+    {
       "id": 10,
       "metamorphosisNodes": [91],
       "abilities": [
@@ -230,8 +248,8 @@
       },
       "abilityGraphEquip": {"head": 54, "hands": 19, "body": 17, "feet": 53},
       "metaForms": [
-        {"form": 0, "nameID": "gm010_0_spreye",     "elements": ["demon"]},
-        {"form": 1, "nameID": "gm010_1_buttereye",  "elements": ["demon"]}
+        {"form": 0, "nameID": "gm010_0_duggot", "elements": ["arthropoda"]},
+        {"form": 1, "nameID": "gm010_1_breem",  "elements": ["arthropoda"]}
       ]
     },
     {
@@ -248,8 +266,8 @@
       },
       "abilityGraphEquip": {"head": 54, "hands": 19, "body": 17, "feet": 53},
       "metaForms": [
-        {"form": 0, "nameID": "gm011_0_duggot", "elements": ["arthropoda"]},
-        {"form": 1, "nameID": "gm011_1_breem",  "elements": ["arthropoda"]}
+        {"form": 0, "nameID": "gm011_0_marvillar", "elements": ["arthropoda"]},
+        {"form": 1, "nameID": "gm011_1_marvantis", "elements": ["arthropoda"]}
       ]
     },
     {
@@ -266,8 +284,8 @@
       },
       "abilityGraphEquip": {"head": 54, "hands": 19, "body": 17, "feet": 53},
       "metaForms": [
-        {"form": 0, "nameID": "gm012_0_marvillar", "elements": ["arthropoda"]},
-        {"form": 1, "nameID": "gm012_1_marvantis", "elements": ["arthropoda"]}
+        {"form": 0, "nameID": "gm012_0_palmpot", "elements": ["forest"]},
+        {"form": 1, "nameID": "gm012_1_bonsot",  "elements": ["forest"]}
       ]
     },
     {
@@ -284,8 +302,8 @@
       },
       "abilityGraphEquip": {"head": 54, "hands": 19, "body": 17, "feet": 53},
       "metaForms": [
-        {"form": 0, "nameID": "gm013_0_palmpot", "elements": ["forest"]},
-        {"form": 1, "nameID": "gm013_1_bonsot",  "elements": ["forest"]}
+        {"form": 0, "nameID": "gm013_0_erimat",   "elements": ["mountain"]},
+        {"form": 1, "nameID": "gm013_1_erichief", "elements": ["mountain"]}
       ]
     },
     {
@@ -302,26 +320,8 @@
       },
       "abilityGraphEquip": {"head": 54, "hands": 19, "body": 17, "feet": 53},
       "metaForms": [
-        {"form": 0, "nameID": "gm014_0_erimat",   "elements": ["mountain"]},
-        {"form": 1, "nameID": "gm014_1_erichief", "elements": ["mountain"]}
-      ]
-    },
-    {
-      "id": 15,
-      "metamorphosisNodes": [91],
-      "abilities": [
-        {"abilityID": 2, "element": "none", "abilityPos": 0}
-      ],
-      "basestats": {
-        "hp": 300, "mp": 50, "speed": 10, "pstr": 10, "pdef": 10, "mstr": 10, "mdef": 10
-      },
-      "equipmentCompatibility": {
-        "head": "mask", "hands": "claws", "body": "barding", "feet": "shinprotection"
-      },
-      "abilityGraphEquip": {"head": 54, "hands": 19, "body": 17, "feet": 53},
-      "metaForms": [
-        {"form": 0, "nameID": "gm015_0_eggatch", "elements": ["air"]},
-        {"form": 1, "nameID": "gm015_1_owlock",  "elements": ["air"]}
+        {"form": 0, "nameID": "gm014_0_eggatch", "elements": ["air"]},
+        {"form": 1, "nameID": "gm014_1_owlock",  "elements": ["air"]}
       ]
     }
   ]

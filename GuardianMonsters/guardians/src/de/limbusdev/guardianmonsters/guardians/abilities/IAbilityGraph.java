@@ -48,6 +48,8 @@ public interface IAbilityGraph
 
     boolean metamorphsAt(int nodeID);
 
+    int getCurrentForm();
+
     /**
      * Wether this monster learns an ability or to carry equipment at this node
      * @param nodeID

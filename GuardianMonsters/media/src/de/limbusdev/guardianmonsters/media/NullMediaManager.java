@@ -50,17 +50,18 @@ public class NullMediaManager implements IMediaManager
         return null;
     }
 
-    public TextureAtlas.AtlasRegion getMonsterSprite(int index) {
+    @Override
+    public TextureAtlas.AtlasRegion getMonsterSprite(int index, int form) {
         return null;
     }
 
     @Override
-    public TextureAtlas.AtlasRegion getMonsterMiniSprite(int index) {
+    public TextureAtlas.AtlasRegion getMonsterMiniSprite(int index, int form) {
         return null;
     }
 
     @Override
-    public Image getMonsterFace(int id) {
+    public Image getMonsterFace(int id, int form) {
         return null;
     }
 

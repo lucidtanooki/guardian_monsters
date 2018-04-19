@@ -61,7 +61,7 @@ public class NullL18N implements L18N
     }
 
     @Override
-    public String getLocalizedGuardianName(int guardianID)
+    public String getLocalizedGuardianName(int guardianID, int form)
     {
         return null;
     }

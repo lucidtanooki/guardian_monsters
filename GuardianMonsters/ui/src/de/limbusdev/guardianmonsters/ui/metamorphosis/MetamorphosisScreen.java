@@ -12,8 +12,10 @@ import de.limbusdev.guardianmonsters.ui.AScreen;
  * @author Georg Eckert 2017
  */
 
-public class MetamorphosisScreen extends AScreen {
-    public MetamorphosisScreen(int before, int after) {
-        super(new MetamorphosisHUD(Services.getUI().getInventorySkin(), before, after));
+public class MetamorphosisScreen extends AScreen
+{
+    public MetamorphosisScreen(int speciesID, int before)
+    {
+        super(new MetamorphosisHUD(Services.getUI().getInventorySkin(), speciesID, before, before+1));
     }
 }

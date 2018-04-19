@@ -171,6 +171,17 @@ public class AbilityGraph implements IAbilityGraph
     }
 
     @Override
+    public int getCurrentForm()
+    {
+        int activatedMetamorphosisNodes = 0;
+        for(int key : metamorphosisNodes)
+        {
+            if(isNodeEnabled(key)) activatedMetamorphosisNodes++;
+        }
+        return activatedMetamorphosisNodes;
+    }
+
+    @Override
     public boolean learnsSomethingAt(int nodeID) {
         return (learnsAbilityAt(nodeID) || learnsEquipmentAt(nodeID) || metamorphsAt(nodeID));
     }

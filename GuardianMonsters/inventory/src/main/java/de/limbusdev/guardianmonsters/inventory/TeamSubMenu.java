@@ -144,7 +144,8 @@ public class TeamSubMenu extends AInventorySubMenu
 
     private void showGuardianInformation(int teamPosition) {
         monsterStats.init(team.get(teamPosition));
-        monsterImg.setDrawable(new TextureRegionDrawable(Services.getMedia().getMonsterSprite(team.get(teamPosition).getSpeciesDescription().getID())));
+        monsterImg.setDrawable(new TextureRegionDrawable(
+            Services.getMedia().getMonsterSprite(team.get(teamPosition).getSpeciesDescription().getID(), team.get(teamPosition).getAbilityGraph().getCurrentForm())));
         statPent.init(team.get(teamPosition));
         joinsBattleButton.remove();
         joinsBattleButton.setChecked(false);

@@ -143,7 +143,7 @@ public class MainMenuScreen implements Screen {
         bg.addAction(Actions.alpha(.75f));
         startMenu.addActor(bg);
 
-        Image mon = new Image(Services.getMedia().getMonsterSprite(100));
+        Image mon = new Image(Services.getMedia().getMonsterSprite(100,0));
         mon.setPosition(Constant.WIDTH - 8, 8, Align.bottomRight);
         startMenu.addActor(mon);
 

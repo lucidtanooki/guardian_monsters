@@ -118,16 +118,18 @@ public class LocalizationManager implements L18N
         if(!guardian.getNickname().isEmpty()) {
             return guardian.getNickname();
         } else {
-            return Guardians().get(guardian.getSpeciesDescription().getNameID(0));  // TODO currentForm
+            int form = guardian.getAbilityGraph().getCurrentForm();
+            int speciesID = guardian.getSpeciesDescription().getID();
+            return getLocalizedGuardianName(speciesID, form);
         }
     }
 
     @Override
-    public String getLocalizedGuardianName(int guardianID)
+    public String getLocalizedGuardianName(int speciesID, int form)
     {
         ISpeciesDescriptionService species = GuardiansServiceLocator.getSpecies();
         AGuardianFactory factory = GuardianFactory.getInstance();
-        String nameID = species.getCommonNameById(guardianID, 0);   // TODO currentForm
+        String nameID = species.getCommonNameById(speciesID, form);
         return Guardians().get(nameID);
     }
 

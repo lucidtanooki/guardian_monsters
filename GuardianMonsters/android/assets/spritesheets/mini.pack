@@ -1,96 +1,96 @@
 
 mini.png
 format: RGBA8888
-filter: MipMapNearestNearest,MipMapNearestLinear
+filter: Nearest,Nearest
 repeat: none
-57
+3
   rotate: false
   xy: 1, 19
   size: 16, 32
   orig: 16, 32
   offset: 0, 0
-  index: -1
-8
+  index: 1
+24
   rotate: false
   xy: 19, 19
   size: 16, 32
   orig: 16, 32
   offset: 0, 0
-  index: -1
-15
+  index: 0
+1
   rotate: false
   xy: 1, 1
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
-  index: -1
+  index: 1
 1
   rotate: false
   xy: 37, 35
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
-  index: -1
-7
+  index: 2
+22
   rotate: false
   xy: 19, 1
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
-  index: -1
-54
+  index: 0
+6
   rotate: false
   xy: 37, 17
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
-  index: -1
-4
+  index: 0
+20
   rotate: false
   xy: 55, 35
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
-  index: -1
+  index: 2
 3
   rotate: false
   xy: 55, 17
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
-  index: -1
-0
+  index: 0
+1
   rotate: false
   xy: 73, 35
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
-  index: -1
-2
+  index: 0
+20
   rotate: false
   xy: 73, 17
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
-  index: -1
-29
+  index: 0
+5
   rotate: false
   xy: 91, 35
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
-  index: -1
-48
+  index: 0
+2
   rotate: false
   xy: 91, 17
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
-  index: -1
-50
+  index: 0
+0
   rotate: false
   xy: 109, 35
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
-  index: -1
+  index: 0

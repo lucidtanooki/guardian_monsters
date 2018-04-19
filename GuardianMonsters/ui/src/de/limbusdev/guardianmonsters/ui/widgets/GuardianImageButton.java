@@ -21,7 +21,7 @@ public class GuardianImageButton extends SubImageImageButton {
 
     private static Image construct(Guardian guardian) {
         TextureRegionDrawable drawable = new TextureRegionDrawable(
-            Services.getMedia().getMonsterMiniSprite(guardian.getSpeciesDescription().getID()));
+            Services.getMedia().getMonsterMiniSprite(guardian.getSpeciesDescription().getID(), guardian.getAbilityGraph().getCurrentForm()));
         Image miniSprite = new Image(drawable);
         return miniSprite;
     }

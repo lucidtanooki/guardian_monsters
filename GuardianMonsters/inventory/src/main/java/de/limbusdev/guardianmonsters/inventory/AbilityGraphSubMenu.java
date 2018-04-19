@@ -98,7 +98,7 @@ public class AbilityGraphSubMenu extends AInventorySubMenu implements Listener<G
         m.getAbilityGraph().activateNode(nodeID);
         details.init(m, nodeID, false);
         if(m.getAbilityGraph().metamorphsAt(nodeID)) {
-            Services.getScreenManager().pushScreen(new MetamorphosisScreen(m.getSpeciesDescription().getID(), m.getSpeciesDescription().getID()+1));
+            Services.getScreenManager().pushScreen(new MetamorphosisScreen(m.getSpeciesDescription().getID(), m.getAbilityGraph().getCurrentForm()));
         }
     }
 

@@ -45,7 +45,7 @@ public class BattleQueueWidget extends de.limbusdev.guardianmonsters.battle.ui.w
             AGuardian m = queue.get(i);
 
             MonsterPreviewWidget previewWidget = new MonsterPreviewWidget(Services.getUI().getBattleSkin());
-            previewWidget.setPreview(m.getSpeciesDescription().getID());
+            previewWidget.setPreview(m.getSpeciesDescription().getID(), m.getAbilityGraph().getCurrentForm());
             if(greyOut) {
                 previewWidget.setColor(Color.GRAY);
             }

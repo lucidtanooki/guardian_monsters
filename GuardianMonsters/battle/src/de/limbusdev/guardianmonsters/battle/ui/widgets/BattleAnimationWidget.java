@@ -106,7 +106,12 @@ public class BattleAnimationWidget extends de.limbusdev.guardianmonsters.battle.
             AGuardian m = team.get(counter);
             if(m.getIndividualStatistics().isFit()) {
                 // Add monster to team
-                setUpMonsterSprite(m.getSpeciesDescription().getID(),actualTeamSize, side);
+                setUpMonsterSprite(
+                    m.getSpeciesDescription().getID(),
+                    m.getAbilityGraph().getCurrentForm(),
+                    actualTeamSize,
+                    side
+                );
                 positions.put(actualTeamSize,true);
                 actualTeamSize++;
             }
@@ -125,10 +130,11 @@ public class BattleAnimationWidget extends de.limbusdev.guardianmonsters.battle.
      * @param pos
      * @param side
      */
-    private void setUpMonsterSprite(int id, int pos, boolean side) {
+    private void setUpMonsterSprite(int id, int metaForm, int pos, boolean side)
+    {
         Image monImg;
         TextureRegion monReg;
-        monReg = media.getMonsterSprite(id);
+        monReg = media.getMonsterSprite(id, metaForm);
         if(side == LEFT)
             if(!monReg.isFlipX())
                 monReg.flip(true, false);

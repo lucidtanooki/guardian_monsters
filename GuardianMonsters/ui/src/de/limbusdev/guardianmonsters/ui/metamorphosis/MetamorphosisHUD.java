@@ -33,15 +33,15 @@ public class MetamorphosisHUD extends AHUD {
     private Button ok;
     private Label label;
 
-    public MetamorphosisHUD(Skin skin, int before, int after) {
+    public MetamorphosisHUD(Skin skin, int speciesID, int formerMetaForm, int newMetaForm) {
         super(skin);
 
         I18NBundle bundle = Services.getL18N().General();
         final IMediaManager media = Services.getMedia();
 
         String[] monsterNames = {
-            Services.getL18N().getLocalizedGuardianName(before),
-            Services.getL18N().getLocalizedGuardianName(after)
+            Services.getL18N().getLocalizedGuardianName(speciesID, formerMetaForm),
+            Services.getL18N().getLocalizedGuardianName(speciesID, newMetaForm)
         };
 
         final String[] messages =  {
@@ -49,11 +49,14 @@ public class MetamorphosisHUD extends AHUD {
             bundle.format("monster_metamorph_complete", monsterNames[0], monsterNames[1])
         };
 
+
+        // TODO metamorph only at node activation
+
         // Actor Creation
         Image bg = media.getMetamorphosisBackground();
         animation = media.getMetamorphosisAnimation();
-        imgBefore = new Image(media.getMonsterSprite(before));
-        imgAfter  = new Image(media.getMonsterSprite(after));
+        imgBefore = new Image(media.getMonsterSprite(formerMetaForm,0));
+        imgAfter  = new Image(media.getMonsterSprite(newMetaForm,0));
         ok = new ImageButton(skin, "burgund-close");
         label = new Label(messages[0], skin, "burgund");
         label.setSize(420,64);

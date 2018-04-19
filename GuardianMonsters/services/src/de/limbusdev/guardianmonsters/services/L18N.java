@@ -32,7 +32,7 @@ public interface L18N {
 
     String getLocalizedGuardianName(AGuardian guardian);
 
-    String getLocalizedGuardianName(int guardianID);
+    String getLocalizedGuardianName(int speciesID, int form);
 
     String getLocalizedAbilityName(String abilityID);
 

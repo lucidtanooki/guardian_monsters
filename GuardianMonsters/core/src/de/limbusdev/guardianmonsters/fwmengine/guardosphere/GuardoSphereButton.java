@@ -21,7 +21,7 @@ public class GuardoSphereButton extends SubImageImageButton {
 
     private static Image construct(AGuardian guardian) {
         TextureRegionDrawable drawable = new TextureRegionDrawable(
-            Services.getMedia().getMonsterMiniSprite(guardian.getSpeciesDescription().getID()));
+            Services.getMedia().getMonsterMiniSprite(guardian.getSpeciesDescription().getID(), guardian.getAbilityGraph().getCurrentForm()));
         Image miniSprite = new Image(drawable);
         return miniSprite;
     }

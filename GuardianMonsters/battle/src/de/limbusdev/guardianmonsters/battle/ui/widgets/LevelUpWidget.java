@@ -35,7 +35,7 @@ public class LevelUpWidget extends OverlayWidget
         bg.setPosition(Constant.WIDTH/2-150,30,Align.bottomLeft);
         addActor(bg);
 
-        monsterImg = new Image(Services.getMedia().getMonsterSprite(guardian.getSpeciesID()));
+        monsterImg = new Image(Services.getMedia().getMonsterSprite(guardian.getSpeciesID(), guardian.getAbilityGraph().getCurrentForm()));
         monsterImg.setPosition(64,64, Align.bottomLeft);
         addActor(monsterImg);
 

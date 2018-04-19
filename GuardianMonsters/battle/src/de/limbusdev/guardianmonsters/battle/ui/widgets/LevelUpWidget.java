@@ -21,13 +21,16 @@ import de.limbusdev.guardianmonsters.ui.widgets.OverlayWidget;
  * LevelUpWidget
  *
  * @author Georg Eckert 2017
+ *
+ * TODO only show this at the end of a battle
  */
 
 public class LevelUpWidget extends OverlayWidget
 {
     private Image monsterImg;
 
-    public LevelUpWidget(Skin skin, AGuardian guardian) {
+    public LevelUpWidget(Skin skin, AGuardian guardian)
+    {
         super(skin);
 
         Label bg = new Label("", skin, "paper");

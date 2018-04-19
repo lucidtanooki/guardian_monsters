@@ -250,7 +250,8 @@ public class BattleSystem
             chooseTarget();
             setChosenAttack(att);
             attack();
-            applyAttack();
+            // applyAttack() is called by the client, as soon as it is neccessary
+            // e.g. when the Battle Animation finishes
         }
 
         private void chooseTarget()

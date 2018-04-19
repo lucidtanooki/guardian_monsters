@@ -15,7 +15,7 @@ import de.limbusdev.guardianmonsters.services.Services;
 /**
  * @author Georg Eckert 2017
  */
-public class MonsterMenuWidget extends de.limbusdev.guardianmonsters.battle.ui.widgets.SevenButtonsWidget
+public class MonsterMenuWidget extends SevenButtonsWidget
 {
 
     private static int order[] = {0,1,2,3,4,5,6};
@@ -24,8 +24,8 @@ public class MonsterMenuWidget extends de.limbusdev.guardianmonsters.battle.ui.w
         super(skin, callbacks, order);
     }
 
-    public void init(BattleSystem battleSystem, boolean side) {
-
+    public void init(BattleSystem battleSystem, boolean side)
+    {
         BattleQueue queue = battleSystem.getQueue();
         Team team = side ? queue.getLeft() : queue.getRight();
         CombatTeam combatTeam = side ? queue.getCombatTeamLeft() : queue.getCombatTeamRight();
@@ -35,10 +35,11 @@ public class MonsterMenuWidget extends de.limbusdev.guardianmonsters.battle.ui.w
             disableButton(i);
         }
 
-        for(int key : team.keys()) {
+        for(int key : team.keys())
+        {
             if(key > 6) break;
             AGuardian m = team.get(key);
-            TextButton bwi = new de.limbusdev.guardianmonsters.battle.ui.widgets.BattleHUDTextButton(Services.getL18N().getLocalizedGuardianName(m), skin, key, Element.AIR);
+            TextButton bwi = new BattleHUDTextButton(Services.getL18N().getLocalizedGuardianName(m), skin, key, Element.AIR);
 
             replaceButton(bwi,key);
 

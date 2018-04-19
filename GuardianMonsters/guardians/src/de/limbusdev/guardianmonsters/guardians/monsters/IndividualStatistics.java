@@ -397,7 +397,8 @@ public class IndividualStatistics
         return MathUtils.round(100f* currentStatValues.HP/getHPmax());
     }
 
-    public int getMPfraction() {
+    public int getMPfraction()
+    {
         return MathUtils.round(100f* currentStatValues.MP/getMPmax());
     }
 

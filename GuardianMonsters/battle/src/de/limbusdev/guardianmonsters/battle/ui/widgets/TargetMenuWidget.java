@@ -1,6 +1,5 @@
 package de.limbusdev.guardianmonsters.battle.ui.widgets;
 
-import com.badlogic.ashley.signals.Signal;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 import java.util.Observable;
@@ -14,6 +13,9 @@ import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
 import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.ui.Constant;
 
+import static de.limbusdev.guardianmonsters.guardians.Constant.LEFT;
+import static de.limbusdev.guardianmonsters.guardians.Constant.RIGHT;
+
 
 /**
  * @author Georg Eckert 2017
@@ -21,7 +23,6 @@ import de.limbusdev.guardianmonsters.ui.Constant;
 
 public class TargetMenuWidget extends SevenButtonsWidget implements Observer
 {
-
     private CombatTeam leftTeam, rightTeam;
 
     private static int[] order = {0,2,1,3,6,5,4};
@@ -30,12 +31,14 @@ public class TargetMenuWidget extends SevenButtonsWidget implements Observer
         super(skin, callbacks, order);
     }
 
-    public void init(BattleSystem battleSystem) {
+    public void init(BattleSystem battleSystem)
+    {
         this.leftTeam = new CombatTeam();
         this.rightTeam = new CombatTeam();
 
         // Set all buttons inactive
-        for(Integer i : getButtons().keys()) {
+        for(Integer i : getButtons().keys())
+        {
             disableButton(i);
         }
 
@@ -44,7 +47,8 @@ public class TargetMenuWidget extends SevenButtonsWidget implements Observer
         addMonstersToMenu(queue.getCombatTeamRight(), Constant.RIGHT);
     }
 
-    private void addMonstersToMenu(CombatTeam team, boolean side) {
+    private void addMonstersToMenu(CombatTeam team, boolean side)
+    {
         int offset = side ? 0 : 4;
         if(side == Constant.LEFT) {
             leftTeam = team;
@@ -63,7 +67,8 @@ public class TargetMenuWidget extends SevenButtonsWidget implements Observer
         }
     }
 
-    public AGuardian getMonsterOfIndex(int index) {
+    public AGuardian getMonsterOfIndex(int index)
+    {
         if(index <=2) {
             return leftTeam.get(index);
         } else {
@@ -71,7 +76,8 @@ public class TargetMenuWidget extends SevenButtonsWidget implements Observer
         }
     }
 
-    public void disableSide(boolean side) {
+    public void disableSide(boolean side)
+    {
         int from, to;
         if(side == Constant.LEFT) {
             // Disable all Buttons for the left team
@@ -88,9 +94,10 @@ public class TargetMenuWidget extends SevenButtonsWidget implements Observer
         }
     }
 
-
-    public void receive(Signal<Guardian> signal, Guardian guardian) {
-
+    public int getButtonPositionByFieldPosition(boolean side, int fieldPosition)
+    {
+        if(side == LEFT) return fieldPosition;
+        else             return fieldPosition + 4;
     }
 
     @Override
@@ -98,13 +105,17 @@ public class TargetMenuWidget extends SevenButtonsWidget implements Observer
     {
         Guardian guardian = (Guardian)o;
         if(guardian.getIndividualStatistics().isKO()) {
-            int index;
+            int position;
+            boolean side;
             if(leftTeam.isMember(guardian)) {
-                index = leftTeam.getFieldPosition(guardian);
+                side = LEFT;
+                position = leftTeam.getFieldPosition(guardian);
             } else {
-                index = rightTeam.getFieldPosition(guardian);
+                side = RIGHT;
+                position = rightTeam.getFieldPosition(guardian);
             }
-            disableButton(index);
+            int buttonIndex = getButtonPositionByFieldPosition(side, position);
+            disableButton(buttonIndex);
         }
     }
 }

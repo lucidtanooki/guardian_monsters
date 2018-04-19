@@ -4,8 +4,9 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
-public class BattleActionMenuWidget extends de.limbusdev.guardianmonsters.battle.ui.widgets.BattleWidget
+public class BattleActionMenuWidget extends BattleWidget
 {
 
     // Buttons
@@ -25,10 +26,10 @@ public class BattleActionMenuWidget extends de.limbusdev.guardianmonsters.battle
 
         this.callbacks = callbacks;
 
-        monsterButton   = new de.limbusdev.guardianmonsters.battle.ui.widgets.BattleHUDMenuButton(skin, de.limbusdev.guardianmonsters.battle.ui.widgets.BattleHUDMenuButton.TEAM    );
-        extraButton     = new de.limbusdev.guardianmonsters.battle.ui.widgets.BattleHUDMenuButton(skin, de.limbusdev.guardianmonsters.battle.ui.widgets.BattleHUDMenuButton.DEFEND  );
-        backButton      = new de.limbusdev.guardianmonsters.battle.ui.widgets.BattleHUDMenuButton(skin, de.limbusdev.guardianmonsters.battle.ui.widgets.BattleHUDMenuButton.BACK    );
-        bagButton       = new de.limbusdev.guardianmonsters.battle.ui.widgets.BattleHUDMenuButton(skin, de.limbusdev.guardianmonsters.battle.ui.widgets.BattleHUDMenuButton.BAG     );
+        monsterButton   = new BattleHUDMenuButton(skin, BattleHUDMenuButton.TEAM    );
+        extraButton     = new BattleHUDMenuButton(skin, BattleHUDMenuButton.DEFEND  );
+        backButton      = new BattleHUDMenuButton(skin, BattleHUDMenuButton.BACK    );
+        bagButton       = new BattleHUDMenuButton(skin, BattleHUDMenuButton.BAG     );
 
         // Add to parent
         addActor(backButton     );
@@ -52,7 +53,7 @@ public class BattleActionMenuWidget extends de.limbusdev.guardianmonsters.battle
 
     private void initCallbackHandler() {
         backButton.addListener(
-            new com.badlogic.gdx.scenes.scene2d.utils.ClickListener() {
+            new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
                     callbacks.onBackButton();
@@ -61,7 +62,7 @@ public class BattleActionMenuWidget extends de.limbusdev.guardianmonsters.battle
         );
 
         bagButton.addListener(
-            new com.badlogic.gdx.scenes.scene2d.utils.ClickListener() {
+            new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
                     callbacks.onBagButton();
@@ -70,7 +71,7 @@ public class BattleActionMenuWidget extends de.limbusdev.guardianmonsters.battle
         );
 
         monsterButton.addListener(
-            new com.badlogic.gdx.scenes.scene2d.utils.ClickListener() {
+            new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
                     callbacks.onMonsterButton();
@@ -79,7 +80,7 @@ public class BattleActionMenuWidget extends de.limbusdev.guardianmonsters.battle
         );
 
         extraButton.addListener(
-            new com.badlogic.gdx.scenes.scene2d.utils.ClickListener() {
+            new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
                     callbacks.onExtraButton();

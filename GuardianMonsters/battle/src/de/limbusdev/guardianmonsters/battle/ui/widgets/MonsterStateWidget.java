@@ -40,7 +40,8 @@ public class MonsterStateWidget extends WidgetGroup implements Observer
      * @param skin  skin containing needed graphics
      * @param showExp  whether exp bar shall be shown
      */
-    public MonsterStateWidget(Skin skin, boolean showExp) {
+    public MonsterStateWidget(Skin skin, boolean showExp)
+    {
         hudBgImg = new Image(skin.getDrawable("monStateUIbg2"));
         hudBgImg.setPosition(0,0,Align.bottomLeft);
 
@@ -107,12 +108,15 @@ public class MonsterStateWidget extends WidgetGroup implements Observer
     {
         ISpeciesDescriptionService species = GuardiansServiceLocator.getSpecies();
         refresh(guardian);
-        nameLabel.setText(Services.getL18N().Guardians().get((species.getCommonNameById(guardian.getSpeciesDescription().getID(),0))));
-        // TODO currentForm
+        int speciesID = guardian.getSpeciesID();
+        int metaForm = guardian.getAbilityGraph().getCurrentForm();
+        String name = species.getCommonNameById(speciesID, metaForm);
+        nameLabel.setText(Services.getL18N().Guardians().get(name));
         guardian.addObserver(this);
     }
 
-    public void refresh(AGuardian guardian) {
+    public void refresh(AGuardian guardian)
+    {
         IndividualStatistics statistics = guardian.getIndividualStatistics();
         this.hpBar.setValue(statistics.getHPfraction());
         this.mpBar.setValue(statistics.getMPfraction());

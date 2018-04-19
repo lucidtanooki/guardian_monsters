@@ -45,6 +45,7 @@ public abstract class AGuardian extends Observable
 
     public void setStatisticsChanged()
     {
+        this.setChanged();
         this.changeType = IndividualStatistics.class;
     }
 

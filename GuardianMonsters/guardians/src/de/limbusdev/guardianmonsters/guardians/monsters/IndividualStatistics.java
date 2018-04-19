@@ -373,19 +373,27 @@ public class IndividualStatistics
 
     // ............................................................................................. CALCULATED VALUES
 
-    public String getHPfractionAsString() {
+    public String getHPfractionAsString()
+    {
         return (Integer.toString(currentStatValues.HP) + "/" + Integer.toString(getHPmax()));
     }
 
-    public String getMPfractionAsString() {
+    public String getMPfractionAsString()
+    {
         return (Integer.toString(currentStatValues.MP) + "/" + Integer.toString(getMPmax()));
     }
 
-    public int getEXPfraction() {
+    public int getEXPfraction()
+    {
         return MathUtils.round(EXP/1.f/StatCalculator.calcEXPtoReachLevel(level)*100f);
     }
 
-    public int getHPfraction() {
+    /**
+     * Returns HP fraction in %
+     * @return
+     */
+    public int getHPfraction()
+    {
         return MathUtils.round(100f* currentStatValues.HP/getHPmax());
     }
 

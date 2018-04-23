@@ -6,6 +6,7 @@ import com.badlogic.gdx.utils.ArrayMap;
 import de.limbusdev.guardianmonsters.guardians.items.Item;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
+import de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics;
 import de.limbusdev.guardianmonsters.guardians.monsters.Team;
 
 /**
@@ -38,8 +39,9 @@ public class BattleResult
 
     public boolean applyGainedEXP(AGuardian guardian)
     {
-        guardian.getIndividualStatistics().earnEXP(gainedEXP.get(guardian));
-        return (guardian.getIndividualStatistics().getRemainingLevelUps() > 0);
+        IndividualStatistics indiStats = guardian.getIndividualStatistics();
+        indiStats.earnEXP(gainedEXP.get(guardian));
+        return indiStats.didLevelUp();
     }
 
     /**

@@ -417,6 +417,11 @@ public class IndividualStatistics
         return remainingLevelUps;
     }
 
+    public boolean didLevelUp()
+    {
+        return (getRemainingLevelUps() > 0);
+    }
+
     public Equipment giveEquipment(Equipment equipment)
     {
         Equipment oldEquipment=null;

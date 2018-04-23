@@ -17,6 +17,7 @@ import de.limbusdev.guardianmonsters.guardians.monsters.AGuardianFactory;
 import de.limbusdev.guardianmonsters.guardians.monsters.GuardianFactory;
 import de.limbusdev.guardianmonsters.guardians.monsters.Team;
 import de.limbusdev.guardianmonsters.model.gamestate.GameState;
+import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.ui.metamorphosis.MetamorphosisScreen;
 
 import static de.limbusdev.guardianmonsters.Constant.DEBUG_MODE;
@@ -197,10 +198,10 @@ public class GameStateDebugger
         droppedItems.add(itemService.getItem("bread"));
 
         BattleResult result = new BattleResult(heroTeam, droppedItems);
-        result.gainEXP(heroTeam.get(0),1200);
-        result.gainEXP(heroTeam.get(1), 1200);
-        result.gainEXP(heroTeam.get(2), 1200);
-        game.setScreen(new BattleResultScreen(heroTeam, result));
+        result.gainEXP(heroTeam.get(0), 222);
+        result.gainEXP(heroTeam.get(1), 333);
+        result.gainEXP(heroTeam.get(2), 444);
+        Services.getScreenManager().pushScreen(new BattleResultScreen(heroTeam, result));
     }
 
     private void testMetamorphosisScreen() {

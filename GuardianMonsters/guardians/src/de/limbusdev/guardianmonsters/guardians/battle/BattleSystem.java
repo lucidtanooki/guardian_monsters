@@ -186,7 +186,6 @@ public class BattleSystem
                 int EXP = BattleCalculator.calculateEarnedEXP(m, defeatedGuardian);
 
                 result.gainEXP(m, EXP);
-                m.getIndividualStatistics().earnEXP(EXP);
             }
         }
     }

@@ -385,7 +385,7 @@ public class IndividualStatistics
 
     public int getEXPfraction()
     {
-        return MathUtils.round(EXP/1.f/StatCalculator.calcEXPtoReachLevel(level)*100f);
+        return MathUtils.round((EXP*1f) / StatCalculator.calcEXPtoReachLevel(level+1) * 100f);
     }
 
     /**
@@ -408,7 +408,8 @@ public class IndividualStatistics
      * Calculates how much EXP are still needed to reach the next level
      * @return
      */
-    public int getEXPtoNextLevel() {
+    public int getEXPtoNextLevel()
+    {
         return (StatCalculator.calcEXPtoReachLevel(level) - EXP);
     }
 

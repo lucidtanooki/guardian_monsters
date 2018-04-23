@@ -92,6 +92,7 @@ public class GameStateDebugger
         heroTeam.put(2, guardianFactory.createGuardian(3,1));
         heroTeam.get(0).getAbilityGraph().activateNode(13);
         heroTeam.get(0).getAbilityGraph().setActiveAbility(6,1);
+        heroTeam.get(0).getIndividualStatistics().earnEXP(4);
 
         Team oppoTeam = new Team(3,3,3);
         oppoTeam.put(0, guardianFactory.createGuardian(4,1));

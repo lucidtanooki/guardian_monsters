@@ -128,7 +128,8 @@ public class MonsterStateWidget extends WidgetGroup implements Observer
     }
 
     @Override
-    public void act(float delta) {
+    public void act(float delta)
+    {
         super.act(delta);
         hpBar.act(delta);
         mpBar.act(delta);

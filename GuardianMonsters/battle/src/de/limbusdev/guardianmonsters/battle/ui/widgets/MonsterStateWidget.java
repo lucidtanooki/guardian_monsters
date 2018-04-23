@@ -141,7 +141,8 @@ public class MonsterStateWidget extends WidgetGroup implements Observer
     }
 
     @Override
-    public void update(Observable o, Object arg) {
+    public void update(Observable o, Object arg)
+    {
         if(o instanceof AGuardian)
         {
             refresh((Guardian) o);

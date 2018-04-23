@@ -1,6 +1,7 @@
 package de.limbusdev.guardianmonsters.battle.utils;
 
 import de.limbusdev.guardianmonsters.guardians.GuardiansServiceLocator;
+import de.limbusdev.guardianmonsters.guardians.battle.AttackCalculationReport;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.ISpeciesDescriptionService;
@@ -18,7 +19,7 @@ public class BattleStringBuilder
         return text;
     }
 
-    public static String givenDamage(AGuardian attacker, AGuardian victim, de.limbusdev.guardianmonsters.guardians.battle.AttackCalculationReport report)
+    public static String givenDamage(AGuardian attacker, AGuardian victim, AttackCalculationReport report)
     {
         ISpeciesDescriptionService species = GuardiansServiceLocator.getSpecies();
         String attName = species.getCommonNameById(attacker.getSpeciesID(),0);
@@ -37,8 +38,8 @@ public class BattleStringBuilder
 
         String message = Services.getL18N().Battle().format(
             "batt_message",
-            attacker.getNickname(),
-            victim.getNickname(),
+            Services.getL18N().getGuardianNicknameIfAvailable(attacker),
+            Services.getL18N().getGuardianNicknameIfAvailable(victim),
             Services.getL18N().getLocalizedAbilityName(report.attack.name),
             report.damage, eff);
 
@@ -47,7 +48,7 @@ public class BattleStringBuilder
 
     public static String selfDefense(AGuardian defender)
     {
-        String defName = defender.getNickname();
+        String defName = Services.getL18N().getGuardianNicknameIfAvailable(defender);
         String message = defName + " " + Services.getL18N().Battle().get("suff_defense");
         return message;
     }

@@ -52,7 +52,8 @@ public class LevelUpWidget extends OverlayWidget
             }
         });
 
-        Label info = new Label(Services.getL18N().Battle().format("level_up", guardian.getNickname()), skin, "default");
+        String guardianName = Services.getL18N().getGuardianNicknameIfAvailable(guardian);
+        Label info = new Label(Services.getL18N().Battle().format("level_up", guardianName), skin, "default");
         info.setSize(140,32);
         info.setPosition(128+64,140,Align.bottomLeft);
         info.setWrap(true);

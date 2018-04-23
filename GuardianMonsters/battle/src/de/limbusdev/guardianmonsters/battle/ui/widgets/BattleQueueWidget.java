@@ -1,11 +1,12 @@
 package de.limbusdev.guardianmonsters.battle.ui.widgets;
 
-import com.badlogic.ashley.signals.Listener;
-import com.badlogic.ashley.signals.Signal;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Array;
+
+import java.util.Observable;
+import java.util.Observer;
 
 import de.limbusdev.guardianmonsters.guardians.battle.BattleQueue;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
@@ -16,7 +17,8 @@ import de.limbusdev.guardianmonsters.ui.widgets.MonsterPreviewWidget;
  * @author Georg Eckert
  */
 
-public class BattleQueueWidget extends de.limbusdev.guardianmonsters.battle.ui.widgets.BattleWidget implements Listener<BattleQueue.QueueSignal> {
+public class BattleQueueWidget extends BattleWidget implements Observer
+{
 
     private int startx = 0;
     private int starty = 0;
@@ -26,7 +28,8 @@ public class BattleQueueWidget extends de.limbusdev.guardianmonsters.battle.ui.w
 
     private Image bgIndicator;
 
-    public BattleQueueWidget(Skin skin, int align) {
+    public BattleQueueWidget(Skin skin, int align)
+    {
         super();
         this.align = align;
 
@@ -35,17 +38,21 @@ public class BattleQueueWidget extends de.limbusdev.guardianmonsters.battle.ui.w
 
     /**
      * Adds the given monsters to the widget, beginning at the provided slot
-     * @param queue
+     * @param round
      * @param startSlot
      * @param greyOut whether preview should look deactivated
      * @return next free slot
      */
-    private int addPreviewImagesToWidget(Array<AGuardian> queue, int startSlot, boolean greyOut) {
-        for(int i = queue.size-1; i>=0; i--) {
-            AGuardian m = queue.get(i);
+    private int addPreviewImagesToWidget(BattleQueue queue, Array<AGuardian> round, int startSlot, boolean greyOut)
+    {
+        for(int i = round.size-1; i>=0; i--)
+        {
+            AGuardian m = round.get(i);
+            boolean side = queue.getTeamSideFor(m);
 
             MonsterPreviewWidget previewWidget = new MonsterPreviewWidget(Services.getUI().getBattleSkin());
-            previewWidget.setPreview(m.getSpeciesDescription().getID(), m.getAbilityGraph().getCurrentForm());
+            previewWidget.setPreview(m.getSpeciesDescription().getID(), m.getAbilityGraph().getCurrentForm(), side);
+
             if(greyOut) {
                 previewWidget.setColor(Color.GRAY);
             }
@@ -60,19 +67,30 @@ public class BattleQueueWidget extends de.limbusdev.guardianmonsters.battle.ui.w
         return startSlot;
     }
 
-    /**
-     * Re-adds all monsters to the widget in the correct order
-     */
-    @Override
-    public void receive(Signal<BattleQueue.QueueSignal> signal, BattleQueue.QueueSignal queueSignal) {
-        BattleQueue queue = queueSignal.queue;
+    public void updateQueue(BattleQueue queue)
+    {
         clear();
 
         bgIndicator.setPosition(-4,0,align);
         addActor(bgIndicator);
 
         int pos=0;
-        pos = addPreviewImagesToWidget(queue.getCurrentRound(),pos,false);
-        addPreviewImagesToWidget(queue.getNextRound(),pos,true);
+        pos = addPreviewImagesToWidget(queue, queue.getCurrentRound(),pos,false);
+        addPreviewImagesToWidget(queue, queue.getNextRound(),pos,true);
+    }
+
+    /**
+     * Re-adds all monsters to the widget in the correct order
+     */
+    @Override
+    public void update(Observable observable, Object o)
+    {
+        if(observable instanceof BattleQueue && o instanceof BattleQueue.QueueSignal)
+        {
+            BattleQueue queue = (BattleQueue) observable;
+            BattleQueue.QueueSignal signal = (BattleQueue.QueueSignal) o;
+
+            updateQueue(queue);
+        }
     }
 }

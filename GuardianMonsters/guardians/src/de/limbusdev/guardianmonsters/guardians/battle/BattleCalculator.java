@@ -79,9 +79,9 @@ public class BattleCalculator
         report.efficiency = eff;
 
         // Print Battle Debug Message
-        String attackerName = attacker.getNickname();
+        String attackerName = attacker.getUUID();
         String attackName   = ability.name;
-        String victimName   = defender.getNickname();
+        String victimName   = defender.getUUID();
         System.out.println(attackerName + ": " + attackName + " causes " + damage + " damage on " + victimName);
 
         return report;

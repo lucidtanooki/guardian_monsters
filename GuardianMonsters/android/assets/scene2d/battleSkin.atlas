@@ -248,21 +248,14 @@ monster-preview-active
   orig: 42, 40
   offset: 0, 0
   index: -1
-monster-preview-frame-cover
+monster-preview-frame-cover-opp
   rotate: false
   xy: 990, 221
   size: 32, 34
   orig: 32, 34
   offset: 0, 0
   index: -1
-monster-preview-frame-base
-  rotate: false
-  xy: 318, 134
-  size: 32, 34
-  orig: 32, 34
-  offset: 0, 0
-  index: -1
-monster-preview
+monster-preview-frame-cover
   rotate: false
   xy: 318, 134
   size: 32, 34
@@ -339,16 +332,37 @@ choice-r-down
   orig: 32, 26
   offset: 0, 0
   index: -1
+monster-preview-frame-base
+  rotate: false
+  xy: 276, 66
+  size: 32, 34
+  orig: 32, 34
+  offset: 0, 0
+  index: -1
+monster-preview
+  rotate: false
+  xy: 276, 66
+  size: 32, 34
+  orig: 32, 34
+  offset: 0, 0
+  index: -1
+monster-preview-frame-base-opp
+  rotate: false
+  xy: 276, 30
+  size: 32, 34
+  orig: 32, 34
+  offset: 0, 0
+  index: -1
 b-attack-spirit-down
   rotate: false
-  xy: 276, 68
+  xy: 310, 91
   size: 82, 32
   orig: 82, 32
   offset: 0, 0
   index: -1
 b-flee-down
   rotate: false
-  xy: 276, 34
+  xy: 394, 91
   size: 82, 32
   orig: 82, 32
   offset: 0, 0
@@ -385,14 +399,14 @@ black
   index: -1
 bg
   rotate: false
-  xy: 99, 13
+  xy: 310, 81
   size: 8, 8
   orig: 8, 8
   offset: 0, 0
   index: -1
 yellow-progress-bar
   rotate: false
-  xy: 112, 23
+  xy: 478, 117
   size: 8, 6
   split: 2, 2, 3, 2
   orig: 8, 6

@@ -49,10 +49,12 @@ public class GuardianDetailWidget extends Group {
         addActor(level);
     }
 
-    public void showDetails(AGuardian guardian) {
-        TextureAtlas.AtlasRegion region = Services.getMedia().getMonsterSprite(guardian.getSpeciesDescription().getID(), guardian.getAbilityGraph().getCurrentForm());
+    public void showDetails(AGuardian guardian)
+    {
+        TextureAtlas.AtlasRegion region = Services.getMedia().getMonsterSprite(
+            guardian.getSpeciesDescription().getID(), guardian.getAbilityGraph().getCurrentForm());
         monsterSprite.setDrawable(new TextureRegionDrawable(region));
-        name.setText(guardian.getNickname());
+        name.setText(Services.getL18N().getGuardianNicknameIfAvailable(guardian));
         level.setText("Lvl " + guardian.getIndividualStatistics().getLevel());
     }
 }

@@ -11,6 +11,9 @@ import com.badlogic.gdx.utils.ArrayMap;
 
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.services.Services;
+import de.limbusdev.guardianmonsters.ui.widgets.MonsterPreviewWidget;
+
+import static de.limbusdev.guardianmonsters.ui.Constant.LEFT;
 
 /**
  * @author Georg Eckert 2017
@@ -20,7 +23,7 @@ public class TeamMemberSwitcher extends Group {
 
     private Callbacks callbacks;
     private int currentlyChosen;
-    private de.limbusdev.guardianmonsters.ui.widgets.MonsterPreviewWidget previewWidget;
+    private MonsterPreviewWidget previewWidget;
     private Label name;
 
     public TeamMemberSwitcher(Skin skin, final ArrayMap<Integer, AGuardian> team, final Callbacks callbacks) {
@@ -49,7 +52,7 @@ public class TeamMemberSwitcher extends Group {
         next.setPosition(80,16,Align.bottomLeft);
         addActor(next);
 
-        previewWidget = new de.limbusdev.guardianmonsters.ui.widgets.MonsterPreviewWidget(skin);
+        previewWidget = new MonsterPreviewWidget(skin);
         previewWidget.setPosition(32,25,Align.bottomLeft);
         addActor(previewWidget);
 
@@ -80,9 +83,10 @@ public class TeamMemberSwitcher extends Group {
         init(team.get(0));
     }
 
-    public void init(AGuardian m) {
+    public void init(AGuardian m)
+    {
         name.setText(Services.getL18N().getLocalizedGuardianName(m));
-        previewWidget.setPreview(m.getSpeciesDescription().getID(), m.getAbilityGraph().getCurrentForm());
+        previewWidget.setPreview(m.getSpeciesDescription().getID(), m.getAbilityGraph().getCurrentForm(), LEFT);
     }
 
     public interface Callbacks {

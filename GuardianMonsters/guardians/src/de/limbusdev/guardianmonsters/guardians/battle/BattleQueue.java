@@ -1,7 +1,8 @@
 package de.limbusdev.guardianmonsters.guardians.battle;
 
-import com.badlogic.ashley.signals.Signal;
 import com.badlogic.gdx.utils.Array;
+
+import java.util.Observable;
 
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.Team;
@@ -15,7 +16,8 @@ import static de.limbusdev.guardianmonsters.guardians.Constant.OPPONENT;
  * @author Georg Eckert 2017
  */
 
-public class BattleQueue extends Signal<BattleQueue.QueueSignal> {
+public class BattleQueue extends Observable
+{
 
     public enum Message {
         NEXT, NEWROUND,
@@ -65,9 +67,11 @@ public class BattleQueue extends Signal<BattleQueue.QueueSignal> {
             currentRound = nextRound;
             nextRound = tmp;
             currentRound.sort(new MonsterSpeedComparator());
-            dispatch(new QueueSignal(Message.NEWROUND));
+            setChanged();
+            notifyObservers(new QueueSignal(Message.NEWROUND));
         } else {
-            dispatch(new QueueSignal(Message.NEXT));
+            setChanged();
+            notifyObservers(new QueueSignal(Message.NEXT));
         }
 
         System.out.println(toString());

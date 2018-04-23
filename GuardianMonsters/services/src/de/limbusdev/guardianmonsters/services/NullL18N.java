@@ -55,6 +55,12 @@ public class NullL18N implements L18N
     }
 
     @Override
+    public String getGuardianNicknameIfAvailable(AGuardian guardian)
+    {
+        return "NullL18N-Dummy";
+    }
+
+    @Override
     public String getLocalizedGuardianName(AGuardian guardian)
     {
         return null;

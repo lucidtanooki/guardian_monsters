@@ -113,15 +113,21 @@ public class LocalizationManager implements L18N
     }
 
     @Override
-    public String getLocalizedGuardianName(AGuardian guardian)
+    public String getGuardianNicknameIfAvailable(AGuardian guardian)
     {
         if(!guardian.getNickname().isEmpty()) {
             return guardian.getNickname();
         } else {
-            int form = guardian.getAbilityGraph().getCurrentForm();
-            int speciesID = guardian.getSpeciesDescription().getID();
-            return getLocalizedGuardianName(speciesID, form);
+            return getLocalizedGuardianName(guardian);
         }
+    }
+
+    @Override
+    public String getLocalizedGuardianName(AGuardian guardian)
+    {
+        int form = guardian.getAbilityGraph().getCurrentForm();
+        int speciesID = guardian.getSpeciesDescription().getID();
+        return getLocalizedGuardianName(speciesID, form);
     }
 
     @Override

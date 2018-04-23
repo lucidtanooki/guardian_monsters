@@ -35,7 +35,7 @@ import de.limbusdev.guardianmonsters.ui.Constant;
  *
  * @author Georg Eckert 2015
  */
-public class BattleHUD extends de.limbusdev.guardianmonsters.battle.ABattleHUD
+public class BattleHUD extends ABattleHUD
 {
 
     // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ ATTRIBUTES
@@ -118,7 +118,7 @@ public class BattleHUD extends de.limbusdev.guardianmonsters.battle.ABattleHUD
 
         // initialize independent battle system
         battleSystem = new BattleSystem(heroTeam,opponentTeam, battleSystemCallbacks);
-        battleSystem.getQueue().add(battleQueueWidget);
+        battleSystem.getQueue().addObserver(battleQueueWidget);
 
         // initialize attack menu with active monster
         attackMenu.init(battleSystem.getActiveMonster());
@@ -126,6 +126,8 @@ public class BattleHUD extends de.limbusdev.guardianmonsters.battle.ABattleHUD
         statusWidget.init(battleSystem);
         animationWidget.init(battleSystem);
         targetMenuWidget.init(battleSystem);
+
+        battleQueueWidget.updateQueue(battleSystem.getQueue());
 
         show();
     }
@@ -285,10 +287,12 @@ public class BattleHUD extends de.limbusdev.guardianmonsters.battle.ABattleHUD
             }
 
             @Override
-            public void onDoingNothing(AGuardian guardian) {
+            public void onDoingNothing(AGuardian guardian)
+            {
+                String guardianName = Services.getL18N().getGuardianNicknameIfAvailable(guardian);
                 battleStateSwitcher.toAnimation();
                 infoLabelWidget.setWholeText(
-                    Services.getL18N().Battle().format("batt_item_usage", guardian.getNickname())
+                    Services.getL18N().Battle().format("batt_item_usage", guardianName)
                 );
                 infoLabelWidget.animateTextAppearance();
                 animationWidget.animateItemUsage();

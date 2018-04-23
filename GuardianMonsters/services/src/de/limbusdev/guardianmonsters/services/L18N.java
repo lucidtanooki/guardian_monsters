@@ -30,6 +30,14 @@ public interface L18N {
 
     I18NBundle Battle();
 
+    /**
+     * Returns the nickname of the given Guardian, if it has one. Otherwise the localized species
+     * name is used.
+     * @param guardian  Guardian in question
+     * @return          nickname if available, localized species name otherwise
+     */
+    String getGuardianNicknameIfAvailable(AGuardian guardian);
+
     String getLocalizedGuardianName(AGuardian guardian);
 
     String getLocalizedGuardianName(int speciesID, int form);

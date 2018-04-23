@@ -186,10 +186,7 @@ public class BattleSystem
                 int EXP = BattleCalculator.calculateEarnedEXP(m, defeatedGuardian);
 
                 result.gainEXP(m, EXP);
-                boolean levelUp = m.getIndividualStatistics().earnEXP(EXP);
-                if(levelUp) {
-                    callbacks.onLevelup(m);
-                }
+                m.getIndividualStatistics().earnEXP(EXP);
             }
         }
     }
@@ -285,6 +282,5 @@ public class BattleSystem
         public void onPlayersTurn(){}
         public void onBattleEnds(boolean winnerSide){}
         public void onDoingNothing(AGuardian guardian){}
-        public void onLevelup(AGuardian m){}
     }
 }

@@ -265,7 +265,8 @@ public class BattleHUD extends ABattleHUD
                 if(!teamOk) Services.getScreenManager().getGame().create();
                 else {
                     Services.getAudio().stopMusic();
-                    Services.getScreenManager().popScreen();
+                    BattleResultScreen resultScreen = new BattleResultScreen(leftTeam, battleSystem.getResult());
+                    Services.getScreenManager().pushScreen(resultScreen);
                 }
             }
         };
@@ -279,7 +280,8 @@ public class BattleHUD extends ABattleHUD
             battleStateSwitcher.toTargetChoice();
         };
 
-        battleSystemCallbacks = new BattleSystem.Callbacks() {
+        battleSystemCallbacks = new BattleSystem.Callbacks()
+        {
 
             @Override
             public void onBattleEnds(boolean winnerSide) {
@@ -338,11 +340,6 @@ public class BattleHUD extends ABattleHUD
                 infoLabelWidget.setWholeText(BattleStringBuilder.selfDefense(defensiveGuardian));
                 infoLabelWidget.animateTextAppearance();
                 animationWidget.animateSelfDefense();
-            }
-
-            @Override
-            public void onLevelup(AGuardian m) {
-                showLevelUp(m);
             }
         };
 
@@ -443,7 +440,8 @@ public class BattleHUD extends ABattleHUD
             state = BattleState.ACTIONMENU;
         }
 
-        public void toEndOfBattle(boolean winnerSide) {
+        public void toEndOfBattle(boolean winnerSide)
+        {
             reset();
             toInfoLabel();
             String textKey = !winnerSide ? "batt_you_won":"batt_game_over";

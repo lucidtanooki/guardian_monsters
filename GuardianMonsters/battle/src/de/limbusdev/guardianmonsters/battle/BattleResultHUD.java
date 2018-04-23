@@ -17,7 +17,6 @@ import com.badlogic.gdx.utils.Array;
 import de.limbusdev.guardianmonsters.battle.ui.widgets.LevelUpWidget;
 import de.limbusdev.guardianmonsters.guardians.GuardiansServiceLocator;
 import de.limbusdev.guardianmonsters.guardians.battle.BattleResult;
-import de.limbusdev.guardianmonsters.guardians.items.Item;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.ISpeciesDescriptionService;
 import de.limbusdev.guardianmonsters.guardians.monsters.Team;
@@ -42,7 +41,8 @@ public class BattleResultHUD extends AHUD {
     private Array<AGuardian> reachedNextLevel;
     private Group group;
 
-    public BattleResultHUD(Skin skin, Team team, BattleResult result) {
+    public BattleResultHUD(Skin skin, Team team, BattleResult result)
+    {
         super(skin);
         this.team = team;
         this.result = result;
@@ -55,7 +55,8 @@ public class BattleResultHUD extends AHUD {
     {
         ISpeciesDescriptionService species = GuardiansServiceLocator.getSpecies();
         table.clear();
-        for(int key : team.keys()) {
+        for(int key : team.keys())
+        {
             AGuardian guardian = team.get(key);
             Image face = Services.getMedia().getMonsterFace(guardian.getSpeciesID(), guardian.getAbilityGraph().getCurrentForm());
             table.add(face).left(); // TODO currentForm
@@ -67,13 +68,14 @@ public class BattleResultHUD extends AHUD {
             table.add(exp).width(48).left();
             Image lvlUpKey = new Image(skin.getDrawable("symbol-levelup"));
             table.add(lvlUpKey).left();
-            Label lvlUp = new Label(Integer.toString(guardian.getIndividualStatistics().getEXPtoNextLevel()), skin, "default");
+            Label lvlUp = new Label(Integer.toString(guardian.getIndividualStatistics().getRemainingLevelUps()), skin, "default");
             table.add(lvlUp).width(96).left();
             table.row().space(4);
         }
     }
 
-    private void constructLayout() {
+    private void constructLayout()
+    {
         Container container = new Container();
         container.setBackground(skin.getDrawable("label-bg-paper"));
         container.setSize(Constant.WIDTH-2, Constant.HEIGHT-2);
@@ -108,7 +110,7 @@ public class BattleResultHUD extends AHUD {
                     super.clicked(event,x,y);
                     System.out.println("BattleResultScreen: APPLY pressed");
                     reachedNextLevel = result.applyGainedEXPtoAll();
-                    BattleResult result = new BattleResult(team,new Array<Item>());
+                    result = new BattleResult(team,new Array<>()); // TODO droppped items
                     constructMonsterTable(team,result);
                     apply.remove();
                     group.addActor(next);
@@ -128,9 +130,11 @@ public class BattleResultHUD extends AHUD {
                     super.clicked(event,x,y);
                     System.out.println("BattleResultScreen: NEXT pressed");
                     if(reachedNextLevel.size > 0) {
+                        reachedNextLevel.first().getIndividualStatistics().levelUp();
                         LevelUpWidget lvlUpWidget = new LevelUpWidget(skin, reachedNextLevel.first());
                         stage.addActor(lvlUpWidget);
-                        reachedNextLevel.removeIndex(0);
+                        if(reachedNextLevel.first().getIndividualStatistics().getRemainingLevelUps() == 0) reachedNextLevel.removeIndex(0);
+                        constructMonsterTable(team, result);
                     } else {
                         Services.getScreenManager().popScreen();
                     }

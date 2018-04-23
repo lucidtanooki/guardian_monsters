@@ -1,25 +1,32 @@
 package de.limbusdev.guardianmonsters.utils;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.utils.Array;
 
 import de.limbusdev.guardianmonsters.Constant;
+import de.limbusdev.guardianmonsters.battle.BattleResultScreen;
 import de.limbusdev.guardianmonsters.battle.BattleScreen;
 import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager;
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.WorldScreen;
 import de.limbusdev.guardianmonsters.guardians.GuardiansServiceLocator;
+import de.limbusdev.guardianmonsters.guardians.battle.BattleResult;
 import de.limbusdev.guardianmonsters.guardians.items.IItemService;
 import de.limbusdev.guardianmonsters.guardians.items.Inventory;
+import de.limbusdev.guardianmonsters.guardians.items.Item;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardianFactory;
 import de.limbusdev.guardianmonsters.guardians.monsters.GuardianFactory;
 import de.limbusdev.guardianmonsters.guardians.monsters.Team;
 import de.limbusdev.guardianmonsters.model.gamestate.GameState;
 import de.limbusdev.guardianmonsters.ui.metamorphosis.MetamorphosisScreen;
 
+import static de.limbusdev.guardianmonsters.Constant.DEBUG_MODE;
+
 /**
  * @author Georg Eckert 2016
  */
 
-public class GameStateDebugger {
+public class GameStateDebugger
+{
     private Game game;
 
     public GameStateDebugger(Game game) {
@@ -156,21 +163,44 @@ public class GameStateDebugger {
         System.out.println("Tested");
     }
 
-    public void testResultScreen() {
-//        Team team = new Team(7,1,1);
-//        Guardian mon = BattleFactory.getInstance().createGuardian(1);
-//        mon.abilityGraph.activateNode(1);
-//        team.put(0,mon);
-//        team.put(1,BattleFactory.getInstance().createGuardian(2));
-//        team.put(2,BattleFactory.getInstance().createGuardian(3));
-//        Array<Item> droppedItems = new Array<>();
-//        droppedItems.add(ItemDB.getItem("bread"));
-//
-//        BattleResult result = new BattleResult(team, droppedItems);
-//        result.gainEXP(mon,1200);
-//        result.gainEXP(team.get(1), 1200);
-//        result.gainEXP(team.get(2), 1200);
-//        game.setScreen(new BattleResultScreen(team, result));
+    public void testResultScreen()
+    {
+
+        AGuardianFactory guardianFactory = GuardiansServiceLocator.getGuardianFactory();
+        Team heroTeam = new Team(3,3,3);
+        heroTeam.put(0, guardianFactory.createGuardian(1,1));
+        heroTeam.put(1, guardianFactory.createGuardian(2,1));
+        heroTeam.put(2, guardianFactory.createGuardian(3,1));
+        heroTeam.get(0).getAbilityGraph().activateNode(13);
+        heroTeam.get(0).getAbilityGraph().setActiveAbility(6,1);
+
+        Team oppoTeam = new Team(3,3,3);
+        oppoTeam.put(0, guardianFactory.createGuardian(4,1));
+        oppoTeam.put(1, guardianFactory.createGuardian(5,1));
+        oppoTeam.put(2, guardianFactory.createGuardian(6,1));
+
+
+        Inventory inventory = new Inventory();
+
+        IItemService itemService = GuardiansServiceLocator.getItems();
+
+        inventory.putItemInInventory(itemService.getItem("sword-barb-steel"));
+        inventory.putItemInInventory(itemService.getItem("bread"));
+        inventory.putItemInInventory(itemService.getItem("bread"));
+        inventory.putItemInInventory(itemService.getItem("potion-blue"));
+        inventory.putItemInInventory(itemService.getItem("potion-blue"));
+        inventory.putItemInInventory(itemService.getItem("potion-red"));
+        inventory.putItemInInventory(itemService.getItem("medicine-blue"));
+        inventory.putItemInInventory(itemService.getItem("angel-tear"));
+
+        Array<Item> droppedItems = new Array<>();
+        droppedItems.add(itemService.getItem("bread"));
+
+        BattleResult result = new BattleResult(heroTeam, droppedItems);
+        result.gainEXP(heroTeam.get(0),1200);
+        result.gainEXP(heroTeam.get(1), 1200);
+        result.gainEXP(heroTeam.get(2), 1200);
+        game.setScreen(new BattleResultScreen(heroTeam, result));
     }
 
     private void testMetamorphosisScreen() {
@@ -186,8 +216,10 @@ public class GameStateDebugger {
 //        game.setScreen(new GuardoSphereScreen(heroTeam, null));
     }
 
-    public void startDebugging() {
-        switch(de.limbusdev.guardianmonsters.Constant.DEBUG_MODE) {
+    public void startDebugging()
+    {
+        switch(DEBUG_MODE)
+        {
             case BATTLE:
                 setUpTestBattle();
                 break;

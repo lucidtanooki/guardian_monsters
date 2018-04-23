@@ -25,7 +25,7 @@ public interface Constant
 
     // ............................................................................................. DEBUGGING
     boolean DEBUGGING_ON = true;
-    DebugMode DEBUG_MODE = DebugMode.BATTLE;
+    DebugMode DEBUG_MODE = DebugMode.RESULT_SCREEN;
     int startMap = 25;
     int startX = 1, startY = 1;
 }

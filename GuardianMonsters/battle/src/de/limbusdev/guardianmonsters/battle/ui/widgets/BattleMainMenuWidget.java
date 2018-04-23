@@ -10,7 +10,7 @@ import de.limbusdev.guardianmonsters.ui.Constant;
 /**
  * Created by Georg Eckert 2016
  */
-public class BattleMainMenuWidget extends de.limbusdev.guardianmonsters.battle.ui.widgets.BattleWidget
+public class BattleMainMenuWidget extends BattleWidget
 {
 
 
@@ -28,14 +28,14 @@ public class BattleMainMenuWidget extends de.limbusdev.guardianmonsters.battle.u
         super();
         this.setBounds(0,0, Constant.RES_X, 64);
 
-        de.limbusdev.guardianmonsters.battle.ui.widgets.BattleHUDMenuButton emptyButton = new de.limbusdev.guardianmonsters.battle.ui.widgets.BattleHUDMenuButton(skin, de.limbusdev.guardianmonsters.battle.ui.widgets.BattleHUDMenuButton.EMPTY);
+        BattleHUDMenuButton emptyButton = new BattleHUDMenuButton(skin, BattleHUDMenuButton.EMPTY);
         addActor(emptyButton);
 
         // Fight Button
-        swordButton = new de.limbusdev.guardianmonsters.battle.ui.widgets.BattleHUDMenuButton(skin, de.limbusdev.guardianmonsters.battle.ui.widgets.BattleHUDMenuButton.SWORD);
+        swordButton = new BattleHUDMenuButton(skin, BattleHUDMenuButton.SWORD);
 
         // Escape Button
-        runButton = new de.limbusdev.guardianmonsters.battle.ui.widgets.BattleHUDMenuButton(skin, de.limbusdev.guardianmonsters.battle.ui.widgets.BattleHUDMenuButton.ESCAPE);
+        runButton = new BattleHUDMenuButton(skin, BattleHUDMenuButton.ESCAPE);
 
         this.addActor(emptyButton);
         this.addActor(swordButton);

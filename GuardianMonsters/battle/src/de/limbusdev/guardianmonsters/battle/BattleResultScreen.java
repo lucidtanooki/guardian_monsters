@@ -21,7 +21,8 @@ public class BattleResultScreen implements Screen {
 
     private BattleResultHUD resultHUD;
 
-    public BattleResultScreen(Team team, BattleResult result) {
+    public BattleResultScreen(Team team, BattleResult result)
+    {
         this.resultHUD = new BattleResultHUD(Services.getUI().getInventorySkin(), team, result);
     }
 
@@ -29,7 +30,8 @@ public class BattleResultScreen implements Screen {
      * Called when this screen becomes the current screen for a {@link Game}.
      */
     @Override
-    public void show() {
+    public void show()
+    {
 
     }
 

@@ -83,6 +83,7 @@ public class IndividualStatistics
     private int level;
     private int abilityLevels;
     private int EXP;
+    private int remainingLevelUps;          // How many levels have been reached without level-up
 
     public int character;   // for growth rates
 
@@ -115,6 +116,7 @@ public class IndividualStatistics
     {
         this.core = core;
         this.level = level;
+        this.remainingLevelUps = 0;
         this.abilityLevels = abilityLevels;
         this.EXP = EXP;
         this.character = character;
@@ -162,6 +164,7 @@ public class IndividualStatistics
         this.character = character;
         this.level = 0;
         this.abilityLevels = -1;
+        this.remainingLevelUps = level;
 
         // ......................................................................................... base values
         this.growthBaseValues = new Statistics(0,0,0,0,0,0,0);
@@ -223,7 +226,7 @@ public class IndividualStatistics
      *  other = floor(character * (5 + floor((newLevel/100) * (2*base+indi+floor(growth/4)))))
      * @return
      */
-    private LevelUpReport levelUp()
+    public LevelUpReport levelUp()
     {
         // Raise growth base values randomly
         growthBaseValues = new Statistics(
@@ -267,18 +270,16 @@ public class IndividualStatistics
         this.abilityLevels += 1;
 
         this.lvlUpReport = report;
-
-        core.setStatisticsChanged();
-        core.notifyObservers();
+        this.remainingLevelUps--;
 
         return report;
     }
 
-    public boolean earnEXP(int EXP)
+    public void earnEXP(int EXP)
     {
         // TODO add growth values for every victory, 0 when debugging
-        boolean leveledUp = false;
         float extFactor = 100f;
+        int potentiallyReachableLevel = this.level;
 
         if(hands != null)   extFactor += hands.addsEXP;
         if(body != null)    extFactor += body.addsEXP;
@@ -289,16 +290,15 @@ public class IndividualStatistics
 
         this.EXP += extEXP;
 
-        if(this.EXP >= StatCalculator.calcEXPtoReachLevel(level)) {
-            this.EXP -= StatCalculator.calcEXPtoReachLevel(level);
-            levelUp();
-            leveledUp = true;
+        while(this.EXP >= StatCalculator.calcEXPtoReachLevel(potentiallyReachableLevel))
+        {
+            this.EXP -= StatCalculator.calcEXPtoReachLevel(potentiallyReachableLevel);
+            potentiallyReachableLevel++;
+            remainingLevelUps++;
         }
 
         core.setStatisticsChanged();
         core.notifyObservers();
-
-        return leveledUp;
     }
 
     /**
@@ -410,6 +410,11 @@ public class IndividualStatistics
      */
     public int getEXPtoNextLevel() {
         return (StatCalculator.calcEXPtoReachLevel(level) - EXP);
+    }
+
+    public int getRemainingLevelUps()
+    {
+        return remainingLevelUps;
     }
 
     public Equipment giveEquipment(Equipment equipment)

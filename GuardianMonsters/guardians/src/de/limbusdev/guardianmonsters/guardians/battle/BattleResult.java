@@ -38,8 +38,8 @@ public class BattleResult
 
     public boolean applyGainedEXP(AGuardian guardian)
     {
-        boolean levelUp = guardian.getIndividualStatistics().earnEXP(gainedEXP.get(guardian));
-        return levelUp;
+        guardian.getIndividualStatistics().earnEXP(gainedEXP.get(guardian));
+        return (guardian.getIndividualStatistics().getRemainingLevelUps() > 0);
     }
 
     /**

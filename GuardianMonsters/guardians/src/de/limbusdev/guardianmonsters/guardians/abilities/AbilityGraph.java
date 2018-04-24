@@ -22,8 +22,8 @@ public class AbilityGraph implements IAbilityGraph
     private ArrayMap<Integer,BodyPart> equipmentNodes;
     private Array<Integer> metamorphosisNodes;
 
-    private ArrayMap<Integer, Ability.aID> activeAbilities;
-    private ArrayMap<Integer,Ability.aID> learntAbilities;
+    private ArrayMap<Integer, Ability.aID> activeAbilities; // Abilities available in battle
+    private ArrayMap<Integer, Ability.aID> learntAbilities; // Abilities activated on the graph
     private Array<BodyPart> learntEquipment;
 
     public AbilityGraph(AGuardian core, SpeciesDescription data)
@@ -182,7 +182,8 @@ public class AbilityGraph implements IAbilityGraph
     }
 
     @Override
-    public boolean learnsSomethingAt(int nodeID) {
+    public boolean learnsSomethingAt(int nodeID)
+    {
         return (learnsAbilityAt(nodeID) || learnsEquipmentAt(nodeID) || metamorphsAt(nodeID));
     }
 
@@ -210,12 +211,14 @@ public class AbilityGraph implements IAbilityGraph
     }
 
     @Override
-    public Ability.aID getActiveAbility(int abilitySlot) {
+    public Ability.aID getActiveAbility(int abilitySlot)
+    {
         return activeAbilities.get(abilitySlot);
     }
 
     @Override
-    public void setActiveAbility(int slot, int learntAbilityNumber) {
+    public void setActiveAbility(int slot, int learntAbilityNumber)
+    {
         Ability.aID abilityToLearn = learntAbilities.get(learntAbilityNumber);
         if(abilityToLearn == null) return;
 
@@ -241,7 +244,8 @@ public class AbilityGraph implements IAbilityGraph
 
 
     // .............................................................................. HELPER METHODS
-    private boolean learnAbility(int nodeID) {
+    private boolean learnAbility(int nodeID)
+    {
         if(learnsAbilityAt(nodeID)) {
             learntAbilities.put(nodeID, abilityNodes.get(nodeID));
             return true;

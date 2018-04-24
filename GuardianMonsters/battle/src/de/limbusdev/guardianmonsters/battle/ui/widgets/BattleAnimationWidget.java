@@ -29,13 +29,13 @@ import de.limbusdev.guardianmonsters.utils.geometry.IntVec2;
  *
  * @author Georg Eckert 2016
  */
-public class BattleAnimationWidget extends de.limbusdev.guardianmonsters.battle.ui.widgets.BattleWidget
+public class BattleAnimationWidget extends BattleWidget
 {
 
     private static boolean LEFT = true;
     private static boolean RIGHT = false;
 
-    private Array<de.limbusdev.guardianmonsters.battle.ui.widgets.WidgetObserver> observers;
+    private Array<WidgetObserver> observers;
     private ArrayMap<Integer,Boolean> leftPositionsOccupied, rightPositionsOccupied;
 
     private ArrayMap<Integer,Image> monsterImgsLeft, monsterImgsRight;
@@ -183,7 +183,8 @@ public class BattleAnimationWidget extends de.limbusdev.guardianmonsters.battle.
      * @param attSide      side of attacker
      * @param defSide   side of target
      */
-    public void animateAttack(final int attPos, final int defPos, boolean attSide, boolean defSide, final Ability ability) {
+    public void animateAttack(final int attPos, final int defPos, boolean attSide, boolean defSide, final Ability ability)
+    {
         Image attIm;
         final IntVec2 startPos,endPos;
 
@@ -234,7 +235,7 @@ public class BattleAnimationWidget extends de.limbusdev.guardianmonsters.battle.
         if(attSide == LEFT) attIm = monsterImgsLeft.get(attPos);
         else attIm = monsterImgsRight.get(attPos);
 
-        attIm.addAction(getAnimationSequence(ability,startPos,endPos, defPos, attSide, defSide));
+        attIm.addAction(getAnimationSequence(ability, startPos, endPos, defPos, attSide, defSide));
     }
 
 
@@ -245,8 +246,10 @@ public class BattleAnimationWidget extends de.limbusdev.guardianmonsters.battle.
      * @param target    position of the attacks target
      * @return
      */
-    private Action getAnimationSequence(final Ability ability, final IntVec2 origin, final IntVec2 target, final int targetPos,
-                                        boolean side, final boolean defSide) {
+    private Action getAnimationSequence(
+        final Ability ability, final IntVec2 origin, final IntVec2 target, final int targetPos,
+        boolean side, final boolean defSide)
+    {
         final boolean direction = defSide;
         Action action;
         AbilityMedia abilityMedia = AbilityMediaDB.getInstance().getAbilityMedia(ability.name);
@@ -298,7 +301,8 @@ public class BattleAnimationWidget extends de.limbusdev.guardianmonsters.battle.
      * @param side
      * @param defPos
      */
-    private void animateAttackImpact(int defPos, boolean side) {
+    private void animateAttackImpact(int defPos, boolean side)
+    {
         Image defIm;
         if(side == LEFT) defIm = monsterImgsLeft.get(defPos);
         else defIm = monsterImgsRight.get(defPos);
@@ -309,7 +313,8 @@ public class BattleAnimationWidget extends de.limbusdev.guardianmonsters.battle.
         ));
     }
 
-    public void animateMonsterKO(int pos, boolean side) {
+    public void animateMonsterKO(int pos, boolean side)
+    {
         ArrayMap<Integer,Image> monImgs;
         if(side == LEFT) monImgs = monsterImgsLeft;
         else monImgs = monsterImgsRight;
@@ -321,12 +326,13 @@ public class BattleAnimationWidget extends de.limbusdev.guardianmonsters.battle.
      * Takes an ability and starts the animation
      * @param ability
      */
-    private void animateAttackOfType(Ability ability, IntVec2 origin, IntVec2 target) {
+    private void animateAttackOfType(Ability ability, IntVec2 origin, IntVec2 target)
+    {
 
         boolean direction = origin.x > target.x;
 
         Animation anim = media.getAttackAnimation(ability.name);
-        de.limbusdev.guardianmonsters.battle.ui.widgets.SelfRemovingAnimation sra = new de.limbusdev.guardianmonsters.battle.ui.widgets.SelfRemovingAnimation(anim);
+        SelfRemovingAnimation sra = new SelfRemovingAnimation(anim);
         anim.setFrameDuration(.1f);
         // Ability direction
         if(direction == LEFT) {
@@ -359,7 +365,8 @@ public class BattleAnimationWidget extends de.limbusdev.guardianmonsters.battle.
         addActor(sra);
     }
 
-    private final static class ImPos {
+    private final static class ImPos
+    {
         private static final IntVec2 HERO_MID = new IntVec2(32+64+64, 100+24);
         private static final IntVec2 HERO_BOT = new IntVec2(32+16+64, 100);
         private static final IntVec2 HERO_TOP = new IntVec2(32+112+64, 100+48);
@@ -368,7 +375,8 @@ public class BattleAnimationWidget extends de.limbusdev.guardianmonsters.battle.
         private static final IntVec2 OPPO_TOP = new IntVec2(640+32-HERO_TOP.x,HERO_TOP.y);
     }
 
-    public interface Callbacks {
+    public interface Callbacks
+    {
         void onHitAnimationComplete();
     }
 

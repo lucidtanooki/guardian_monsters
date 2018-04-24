@@ -66,7 +66,8 @@ public class BattleSystem
      * If callbacks must be set later, usually only in debugging.
      * @param callbacks
      */
-    public void setCallbacks(Callbacks callbacks) {
+    public void setCallbacks(Callbacks callbacks)
+    {
         this.callbacks = callbacks;
     }
 

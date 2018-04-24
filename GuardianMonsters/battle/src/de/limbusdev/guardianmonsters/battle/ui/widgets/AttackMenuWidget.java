@@ -3,6 +3,7 @@ package de.limbusdev.guardianmonsters.battle.ui.widgets;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 import de.limbusdev.guardianmonsters.assets.paths.AssetPath;
+import de.limbusdev.guardianmonsters.guardians.Element;
 import de.limbusdev.guardianmonsters.guardians.GuardiansServiceLocator;
 import de.limbusdev.guardianmonsters.guardians.abilities.Ability;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
@@ -22,12 +23,17 @@ public class AttackMenuWidget extends SevenButtonsWidget
         super(skin, callbacks::onButtonNr, order);
     }
 
+    private void resetButton(int index)
+    {
+        disableButton(index);
+        setButtonStyle(index, Element.NONE);
+        setButtonText(index, "");
+    }
+
     public void init(AGuardian guardian)
     {
-        // Set all buttons inactive
-        for(Integer i : getButtons().keys()) {
-            disableButton(i);
-        }
+        // Set all buttons inactive & reset appearance
+        for(Integer i : getButtons().keys()) resetButton(i);
 
         // for every attack, activate a button
         for(int i=0; i<7; i++) {

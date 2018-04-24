@@ -203,7 +203,8 @@ public class MediaManager implements IMediaManager
         return assets.get(path, TextureAtlas.class);
     }
 
-    public Animation<AtlasRegion> getAttackAnimation(String attack) {
+    public Animation<AtlasRegion> getAttackAnimation(String attack)
+    {
         TextureAtlas atlas = assets.get("spritesheets/battleAnimations.pack", TextureAtlas.class);
         Animation<AtlasRegion> anim;
         if(atlas.findRegions(attack).size == 0) {
@@ -245,14 +246,16 @@ public class MediaManager implements IMediaManager
     }
 
     @Override
-    public Image getMetamorphosisBackground() {
+    public Image getMetamorphosisBackground()
+    {
         TextureAtlas atlas = getTextureAtlas(AssetPath.Spritesheet.BATTLE_BG);
         Image img = new Image(atlas.findRegion("metamorph_bg"));
         return img;
     }
 
     @Override
-    public AnimatedImage getMetamorphosisAnimation() {
+    public AnimatedImage getMetamorphosisAnimation()
+    {
         Animation animation = new Animation(.15f,getTextureAtlas(AssetPath.Spritesheet.ANIMATIONS_BIG).findRegions("metamorphosis"));
         AnimatedImage metamorphosisAnimation = new AnimatedImage(animation);
         metamorphosisAnimation.setPlayMode(Animation.PlayMode.NORMAL);

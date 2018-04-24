@@ -90,14 +90,30 @@ public class GameStateDebugger
         heroTeam.put(0, guardianFactory.createGuardian(1,1));
         heroTeam.put(1, guardianFactory.createGuardian(2,1));
         heroTeam.put(2, guardianFactory.createGuardian(3,1));
+
+        // Enable Abilities
         heroTeam.get(0).getAbilityGraph().activateNode(13);
-        heroTeam.get(0).getAbilityGraph().setActiveAbility(6,1);
+        heroTeam.get(0).getAbilityGraph().setActiveAbility(1,13);
+        heroTeam.get(0).getAbilityGraph().activateNode(5);
+        heroTeam.get(0).getAbilityGraph().setActiveAbility(2,5);
+        heroTeam.get(0).getAbilityGraph().activateNode(20);
+        heroTeam.get(0).getAbilityGraph().setActiveAbility(3,20);
+        heroTeam.get(0).getAbilityGraph().activateNode(30);
+        heroTeam.get(0).getAbilityGraph().setActiveAbility(4,30);
+        heroTeam.get(0).getAbilityGraph().activateNode(35);
+        heroTeam.get(0).getAbilityGraph().setActiveAbility(5,35);
         heroTeam.get(0).getIndividualStatistics().earnEXP(4);
+        heroTeam.get(1).getAbilityGraph().activateNode(5);
+        heroTeam.get(1).getAbilityGraph().setActiveAbility(1,5);
+        heroTeam.get(1).getAbilityGraph().activateNode(60);
+        heroTeam.get(1).getAbilityGraph().setActiveAbility(2,60);
 
         Team oppoTeam = new Team(3,3,3);
         oppoTeam.put(0, guardianFactory.createGuardian(4,1));
         oppoTeam.put(1, guardianFactory.createGuardian(5,1));
         oppoTeam.put(2, guardianFactory.createGuardian(6,1));
+        oppoTeam.get(0).getAbilityGraph().activateNode(13);
+        oppoTeam.get(0).getAbilityGraph().setActiveAbility(1,13);
 
 
         Inventory inventory = new Inventory();

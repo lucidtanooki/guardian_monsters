@@ -5,8 +5,7 @@
     "name": "attWater1_sprinkle",
     "damage": 5,
     "MPcost": 0,
-    "damageType": "physical",
-    "element": "water"
+    "damageType": "physical"
   },
   {
     "ID": 2,
@@ -14,8 +13,7 @@
     "name": "attWater2_shower",
     "damage": 10,
     "MPcost": 0,
-    "damageType": "physical",
-    "element": "water"
+    "damageType": "physical"
   },
   {
     "ID": 3,
@@ -23,8 +21,7 @@
     "name": "attWater3_splash",
     "damage": 20,
     "MPcost": 0,
-    "damageType": "physical",
-    "element": "water"
+    "damageType": "physical"
   },
   {
     "ID": 4,
@@ -32,7 +29,14 @@
     "name": "attWater4_waterjet",
     "damage": 40,
     "MPcost": 0,
-    "damageType": "physical",
-    "element": "water"
+    "damageType": "physical"
+  },
+  {
+    "ID": 5,
+    "element": "water",
+    "name": "attWater5_icepillars",
+    "damage": 50,
+    "MPcost": 0,
+    "damageType": "physical"
   }
 ]

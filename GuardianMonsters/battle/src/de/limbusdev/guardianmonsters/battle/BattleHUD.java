@@ -77,7 +77,8 @@ public class BattleHUD extends ABattleHUD
 
 
     // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ CONSTRUCTOR
-    public BattleHUD(Inventory inventory) {
+    public BattleHUD(Inventory inventory)
+    {
         super(Services.getUI().getBattleSkin());
         this.inventory = inventory;
         setUpCallbacks();
@@ -282,7 +283,6 @@ public class BattleHUD extends ABattleHUD
 
         battleSystemCallbacks = new BattleSystem.Callbacks()
         {
-
             @Override
             public void onBattleEnds(boolean winnerSide) {
                 battleStateSwitcher.toEndOfBattle(winnerSide);
@@ -313,8 +313,8 @@ public class BattleHUD extends ABattleHUD
             }
 
             @Override
-            public void onAttack(AGuardian attacker, AGuardian target, Ability ability, AttackCalculationReport rep) {
-
+            public void onAttack(AGuardian attacker, AGuardian target, Ability ability, AttackCalculationReport rep)
+            {
                 // Change widget set
                 battleStateSwitcher.toAnimation();
                 infoLabelWidget.setWholeText(BattleStringBuilder.givenDamage(attacker,target,rep));

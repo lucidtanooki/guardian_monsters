@@ -101,7 +101,8 @@ public class AudioManager implements IAudioManager
     }
 
     @Override
-    public Action getFadeInMusicAction(String musicPath) {
+    public Action getFadeInMusicAction(String musicPath)
+    {
         final Music music = assets.get(musicPath, Music.class);
         music.setLooping(true);
         Action fadeInAction = Actions.sequence(

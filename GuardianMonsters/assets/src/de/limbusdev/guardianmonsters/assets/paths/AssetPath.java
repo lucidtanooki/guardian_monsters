@@ -75,8 +75,12 @@ public class AssetPath
                 Array<String> water = new Array<>();
                 for(int i=1;i<=1;i++) water.add(rootPath + "water/" + i + ".ogg");
 
+                Array<String> spell = new Array<>();
+                for(int i=1;i<=1;i++) spell.add(rootPath + "spell/" + i + ".ogg");
+
                 battleSFX.put("HIT", hits);
                 battleSFX.put("WATER", water);
+                battleSFX.put("SPELL", spell);
 
                 return battleSFX;
             }

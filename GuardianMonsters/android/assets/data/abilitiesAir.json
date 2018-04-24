@@ -1,0 +1,10 @@
+[
+  {
+    "ID": 1,
+    "element": "air",
+    "name": "attAir1_leafgust",
+    "damage": 5,
+    "MPcost": 0,
+    "damageType": "physical"
+  }
+]

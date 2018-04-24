@@ -106,5 +106,11 @@
     "sfxType": "hit",
     "sfxIndex": 0,
     "animationType": "moving_hor"
+  },
+  {
+    "name": "attWater5_icepillars",
+    "sfxType": "spell",
+    "sfxIndex": 0,
+    "animationType": "contactless"
   }
 ]

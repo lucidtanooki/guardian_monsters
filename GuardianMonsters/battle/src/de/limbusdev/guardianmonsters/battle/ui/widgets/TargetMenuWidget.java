@@ -104,9 +104,11 @@ public class TargetMenuWidget extends SevenButtonsWidget implements Observer
     public void update(Observable o, Object arg)
     {
         Guardian guardian = (Guardian)o;
+
         if(guardian.getIndividualStatistics().isKO()) {
             int position;
             boolean side;
+
             if(leftTeam.isMember(guardian)) {
                 side = LEFT;
                 position = leftTeam.getFieldPosition(guardian);
@@ -114,6 +116,7 @@ public class TargetMenuWidget extends SevenButtonsWidget implements Observer
                 side = RIGHT;
                 position = rightTeam.getFieldPosition(guardian);
             }
+
             int buttonIndex = getButtonPositionByFieldPosition(side, position);
             disableButton(buttonIndex);
         }

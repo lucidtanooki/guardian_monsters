@@ -83,8 +83,8 @@ public class BattleSystem
      * @param target
      * @param attack
      */
-    private void attack(AGuardian target, int attack) {
-
+    private void attack(AGuardian target, int attack)
+    {
         // Throw exception if target or attack are unset
         if(!choiceComplete) {
             throw new IllegalStateException(TAG + " you forgot to set the " + (targetChosen ? "attack" : "target"));
@@ -93,12 +93,15 @@ public class BattleSystem
         // Calculate Ability
         Ability.aID aID= getActiveMonster().getAbilityGraph().getActiveAbilities().get(attack);
         Ability ability = GuardiansServiceLocator.getAbilities().getAbility(aID);
+
+
         AGuardian attacker = getActiveMonster();
         latestAttackReport = BattleCalculator.calcAttack(attacker, target, ability);
         callbacks.onAttack(attacker, target, ability, latestAttackReport);
     }
 
-    public void applyAttack() {
+    public void applyAttack()
+    {
         BattleCalculator.apply(latestAttackReport);
         nextMonster();
         checkKO();

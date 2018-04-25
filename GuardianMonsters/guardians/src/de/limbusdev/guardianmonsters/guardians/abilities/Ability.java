@@ -2,6 +2,7 @@ package de.limbusdev.guardianmonsters.guardians.abilities;
 
 
 import de.limbusdev.guardianmonsters.guardians.Element;
+import de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics;
 
 /**
  * @author Georg Eckert 2017
@@ -13,8 +14,8 @@ public class Ability
      * management and Guardians only have to keep an aID instance to fetch the ability instance from
      * there.
      */
-    public static class aID {
-
+    public static class aID
+    {
         public final int ID;
         public final Element element;
 
@@ -47,7 +48,10 @@ public class Ability
     public int MPcost;
     public DamageType damageType;
     public Element element;
-
+    public boolean areaDamage;
+    public boolean canChangeStatusEffect;
+    public IndividualStatistics.StatusEffect statusEffect;
+    public int probabilityToChangeStatusEffect;
 
     /* ........................................................................... CONSTRUCTOR .. */
     /**
@@ -56,6 +60,17 @@ public class Ability
     public Ability()
     {}
 
+    public Ability(int ID, DamageType damageType, Element element, int damage, String name)
+    {
+        this(ID, damageType, element, damage, name, 0, false, false, IndividualStatistics.StatusEffect.HEALTHY, 0);
+    }
+
+    public Ability(int ID, DamageType damageType, Element element, int damage, String name, int MPcost)
+    {
+        this(ID, damageType, element, damage, name, MPcost, false, false, IndividualStatistics.StatusEffect.HEALTHY, 0);
+    }
+
+
     /**
      * For physcial Attacks
      *
@@ -63,9 +78,16 @@ public class Ability
      * @param element
      * @param damage
      * @param name
+     * @param areaDamage
+     * @param canChangeStatusEffect
+     * @param statusEffect
+     * @param probabilityToChangeStatusEffect
      */
-    public Ability(int ID, DamageType damageType, Element element, int damage, String name) {
-        this(ID, damageType, element, damage, name, 0);
+    public Ability(
+        int ID, DamageType damageType, Element element, int damage, String name, boolean areaDamage,
+        boolean canChangeStatusEffect, IndividualStatistics.StatusEffect statusEffect, int probabilityToChangeStatusEffect)
+    {
+        this(ID, damageType, element, damage, name, 0, areaDamage, canChangeStatusEffect, statusEffect, probabilityToChangeStatusEffect);
     }
 
 
@@ -77,18 +99,29 @@ public class Ability
      * @param damage
      * @param name
      * @param MPcost
+     * @param areaDamage
+     * @param canChangeStatusEffect
+     * @param statusEffect
+     * @param probabilityToChangeStatusEffect
      */
-    public Ability(int ID, DamageType damageType, Element element, int damage, String name, int MPcost) {
+    public Ability(int ID, DamageType damageType, Element element, int damage, String name, int MPcost, boolean areaDamage,
+                   boolean canChangeStatusEffect, IndividualStatistics.StatusEffect statusEffect, int probabilityToChangeStatusEffect)
+    {
         this.ID = ID;
         this.element = element;
         this.damageType = damageType;
         this.damage = damage;
         this.name = name;
         this.MPcost = MPcost;
+        this.areaDamage = areaDamage;
+        this.canChangeStatusEffect = canChangeStatusEffect;
+        this.statusEffect = statusEffect;
+        this.probabilityToChangeStatusEffect = probabilityToChangeStatusEffect;
     }
 
     @Override
-    public boolean equals(Object other) {
+    public boolean equals(Object other)
+    {
         if (other instanceof Ability) {
             Ability otherAbility = (Ability) other;
             if (otherAbility.ID == this.ID && otherAbility.element == this.element) {

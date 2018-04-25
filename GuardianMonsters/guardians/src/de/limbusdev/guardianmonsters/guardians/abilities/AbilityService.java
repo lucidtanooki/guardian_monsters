@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 import de.limbusdev.guardianmonsters.guardians.Element;
 import de.limbusdev.guardianmonsters.guardians.GuardiansServiceLocator;
+import de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics;
 
 /**
  * Contains all existing attacks, sorted by element
@@ -40,7 +41,8 @@ public class AbilityService implements IAbilityService
 
         JsonAbility jsa;
         Ability ability;
-        for (JsonValue v : elementList) {
+        for (JsonValue v : elementList)
+        {
             jsa = json.readValue(JsonAbility.class, v);
             ability = new Ability(
                 jsa.ID,
@@ -48,7 +50,11 @@ public class AbilityService implements IAbilityService
                 Element.valueOf(jsa.element.toUpperCase()),
                 jsa.damage,
                 jsa.name,
-                jsa.MPcost
+                jsa.MPcost,
+                jsa.areaDamage,
+                jsa.canChangeStatusEffect,
+                IndividualStatistics.StatusEffect.valueOf(jsa.statusEffect.toUpperCase()),
+                jsa.probabilityToChangeStatusEffect
             );
             elAbilities.put(ability.ID, ability);
         }
@@ -126,6 +132,10 @@ public class AbilityService implements IAbilityService
         public int MPcost;
         public String damageType;
         public String element;
+        public String statusEffect;
+        public boolean canChangeStatusEffect;
+        public int probabilityToChangeStatusEffect;
+        public boolean areaDamage;
 
         @Override
         public String toString()

@@ -130,7 +130,10 @@ public class ModuleGuardiansJUnitTest
             "    \"name\": \"attNone1_selfdef\"," +
             "    \"damage\": 0," +
             "    \"MPcost\": 0," +
-            "    \"damageType\": \"physical\"" +
+            "    \"damageType\": \"physical\",\n" +
+                "    \"canChangeStatusEffect\": false,\n" +
+                "    \"statusEffect\": \"healthy\",\n" +
+                "    \"probabilityToChangeStatusEffect\": 0" +
             "  }," +
             "  {" +
             "    \"ID\": 2," +
@@ -138,7 +141,10 @@ public class ModuleGuardiansJUnitTest
             "    \"name\": \"attNone2_kick\"," +
             "    \"damage\": 50," +
             "    \"MPcost\": 10," +
-            "    \"damageType\": \"magical\"" +
+            "    \"damageType\": \"magical\",\n" +
+                "    \"canChangeStatusEffect\": false,\n" +
+                "    \"statusEffect\": \"healthy\",\n" +
+                "    \"probabilityToChangeStatusEffect\": 0" +
             "  }" +
             "]";
 
@@ -155,6 +161,10 @@ public class ModuleGuardiansJUnitTest
         assertEquals(ability.name, "attNone1_selfdef");
         assertEquals(ability.MPcost, 0);
         assertEquals(ability.damageType, Ability.DamageType.PHYSICAL);
+        assertEquals(ability.areaDamage, false);
+        assertEquals(ability.canChangeStatusEffect, false);
+        assertEquals(ability.statusEffect, IndividualStatistics.StatusEffect.HEALTHY);
+        assertEquals(ability.probabilityToChangeStatusEffect, 0);
 
         ability = abilities.getAbility(Element.NONE, 2);
 
@@ -163,6 +173,9 @@ public class ModuleGuardiansJUnitTest
         assertEquals(ability.name, "attNone2_kick");
         assertEquals(ability.MPcost, 10);
         assertEquals(ability.damageType, Ability.DamageType.MAGICAL);
+        assertEquals(ability.canChangeStatusEffect, false);
+        assertEquals(ability.statusEffect, IndividualStatistics.StatusEffect.HEALTHY);
+        assertEquals(ability.probabilityToChangeStatusEffect, 0);
 
         System.out.println("[Test 2] Ability parsed correctly");
     }

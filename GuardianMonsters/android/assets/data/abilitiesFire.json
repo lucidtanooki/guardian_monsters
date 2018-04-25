@@ -6,7 +6,9 @@
     "damage": 5,
     "MPcost": 1,
     "damageType": "magical",
-    "element": "fire"
+    "canChangeStatusEffect": false,
+    "statusEffect": "healthy",
+    "probabilityToChangeStatusEffect": 0
   },
   {
     "ID": 2,
@@ -15,7 +17,9 @@
     "damage": "10",
     "MPcost": 2,
     "damageType": "magical",
-    "element": "fire"
+    "canChangeStatusEffect": false,
+    "statusEffect": "healthy",
+    "probabilityToChangeStatusEffect": 0
   },
   {
     "ID": 3,
@@ -24,7 +28,9 @@
     "damage": 20,
     "MPcost": 3,
     "damageType": "magical",
-    "element": "fire"
+    "canChangeStatusEffect": false,
+    "statusEffect": "healthy",
+    "probabilityToChangeStatusEffect": 0
   },
   {
     "ID": 4,
@@ -33,6 +39,8 @@
     "damage": 40,
     "MPcost": 4,
     "damageType": "magical",
-    "element": "fire"
+    "canChangeStatusEffect": false,
+    "statusEffect": "healthy",
+    "probabilityToChangeStatusEffect": 0
   }
 ]

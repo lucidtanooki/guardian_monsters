@@ -8,6 +8,8 @@ import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics;
 import de.limbusdev.guardianmonsters.guardians.monsters.Team;
 
+import static de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics.StatusEffect.HEALTHY;
+
 /**
  * Handles events of monsters like level up, earning EXP, changing status and so on
  *
@@ -45,7 +47,7 @@ public class BattleCalculator
     public static AttackCalculationReport calcAttack(AGuardian attacker, AGuardian defender, Ability ability)
     {
         System.out.println("\n--- new ability ---");
-        AttackCalculationReport report = new AttackCalculationReport(attacker, defender, 0, 0, ability);
+        AttackCalculationReport report = new AttackCalculationReport(attacker, defender, 0, 0, ability, false, HEALTHY);
 
         // Elemental Efficiency
         float eff = ElemEff.singelton().getElemEff(ability.element, defender.getSpeciesDescription().getElements(0));   // TODO elements currentForm
@@ -78,6 +80,19 @@ public class BattleCalculator
         report.damage = MathUtils.ceil(damage);
         report.efficiency = eff;
 
+        // Consider StatusEffect
+        if(ability.canChangeStatusEffect && statDef.getStatusEffect().equals(HEALTHY)) {
+
+            boolean willChange = MathUtils.randomBoolean(ability.probabilityToChangeStatusEffect/100f);
+            if(willChange) {
+                report.newStatusEffect = ability.statusEffect;
+                report.changedStatusEffect = true;
+            }
+        } else {
+            // Can't change StatusEffect if it is already changed
+            report.changedStatusEffect = false;
+        }
+
         // Print Battle Debug Message
         String attackerName = attacker.getUUID();
         String attackName   = ability.name;
@@ -100,6 +115,7 @@ public class BattleCalculator
         System.out.println(report.attacker.getUUID() + " attacks " + report.defender.getUUID() + " with " + report.attack.name);
         report.defender.getIndividualStatistics().decreaseHP(report.damage);
         report.attacker.getIndividualStatistics().decreaseMP(report.attack.MPcost);
+        if(report.changedStatusEffect) report.defender.getIndividualStatistics().setStatusEffect(report.newStatusEffect);
     }
 
     public static boolean tryToRun(Team escapingTeam, Team attackingTeam)

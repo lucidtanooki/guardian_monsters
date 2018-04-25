@@ -45,6 +45,11 @@ public class IndividualStatistics
         int BALANCED=0, VIVACIOUS=1, PRUDENT=2;
     }
 
+    public enum StatusEffect
+    {
+        HEALTHY, SLEEPING, PETRIFIED, BLIND, LUNATIC, POISONED,
+    }
+
     /**
      * The triple stands for rolling a dive parameters (Rolls, Sides, Base-Value)
      * 1D6 means one roll of a 6-sided dice
@@ -79,6 +84,8 @@ public class IndividualStatistics
     private Statistics fullStatValues;      // fully healed values of the various Stats, recalculate at level-up
     private Statistics indiBaseValues;      // individual base values of the various Stats, decided at birth
     private Statistics growthBaseValues;    // accumulated values earned during level-up
+
+    private StatusEffect statusEffect;
 
     private int level;
     private int abilityLevels;
@@ -165,6 +172,7 @@ public class IndividualStatistics
         this.level = 0;
         this.abilityLevels = -1;
         this.remainingLevelUps = level;
+        this.statusEffect = StatusEffect.HEALTHY;
 
         // ......................................................................................... base values
         this.growthBaseValues = new Statistics(0,0,0,0,0,0,0);
@@ -313,6 +321,7 @@ public class IndividualStatistics
         setMStr(getMStrMax());
         setMDef(getMDefMax());
         setSpeed(getSpeedMax());
+        setStatusEffect(StatusEffect.HEALTHY);
     }
 
     public void healHP(int value) {
@@ -788,6 +797,18 @@ public class IndividualStatistics
 
     public Equipment getFeet() {
         return feet;
+    }
+
+    public StatusEffect getStatusEffect()
+    {
+        return statusEffect;
+    }
+
+    public void setStatusEffect(StatusEffect statusEffect)
+    {
+        this.statusEffect = statusEffect;
+        core.setStatisticsChanged();
+        core.notifyObservers();
     }
 
     public void setHP(int HP)

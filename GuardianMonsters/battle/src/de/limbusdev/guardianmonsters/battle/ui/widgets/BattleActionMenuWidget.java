@@ -93,14 +93,16 @@ public class BattleActionMenuWidget extends BattleWidget
         this.callbacks = callbacks;
     }
 
-    public void disableAllButBackButton() {
+    public void disableAllButBackButton()
+    {
         enable();
         disable(bagButton);
         disable(monsterButton);
         disable(extraButton);
     }
 
-    public void disableAllChildButtons() {
+    public void disableAllChildButtons()
+    {
         enable();
         disable(bagButton);
         disable(monsterButton);
@@ -109,7 +111,8 @@ public class BattleActionMenuWidget extends BattleWidget
     }
 
     // INNER INTERFACE
-    public static abstract class Callbacks {
+    public static abstract class Callbacks
+    {
         public void onMonsterButton(){}
         public void onBagButton(){}
         public void onBackButton(){}

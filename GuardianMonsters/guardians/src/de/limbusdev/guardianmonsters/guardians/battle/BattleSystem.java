@@ -1,6 +1,7 @@
 package de.limbusdev.guardianmonsters.guardians.battle;
 
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.utils.Array;
 
 import java.util.Iterator;
 
@@ -37,12 +38,15 @@ public class BattleSystem
 
     private BattleQueue queue;
     private AGuardian chosenTarget;
+    private Array<AGuardian> chosenArea;
     private AttackCalculationReport latestAttackReport;
+    private Array<AttackCalculationReport> latestAreaAttackReports;
     private BattleResult result;
     private int chosenAttack;
     private boolean choiceComplete;
     private boolean targetChosen;
     private boolean attackChosen;
+    private boolean areaChosen;
 
     // ................................................................................. CONSTRUCTOR
     public BattleSystem(Team left, Team right, Callbacks callbacks)
@@ -52,6 +56,7 @@ public class BattleSystem
         choiceComplete = false;
         targetChosen = false;
         attackChosen = false;
+        areaChosen = false;
 
         aiPlayer = new AIPlayer();
 
@@ -100,21 +105,55 @@ public class BattleSystem
         callbacks.onAttack(attacker, target, ability, latestAttackReport);
     }
 
+    private void attackArea(Array<AGuardian> targets, int attack)
+    {
+        if(!choiceComplete) {
+            throw new IllegalStateException(TAG + " you forgot to set area, attack or targets.");
+        }
+
+        // Calculate Ability
+        Ability.aID aID= getActiveMonster().getAbilityGraph().getActiveAbilities().get(attack);
+        Ability ability = GuardiansServiceLocator.getAbilities().getAbility(aID);
+
+
+        AGuardian attacker = getActiveMonster();
+        latestAreaAttackReports = new Array<>();
+        for(AGuardian g : targets)
+        {
+            AttackCalculationReport report = BattleCalculator.calcAttack(attacker, g, ability);
+            latestAreaAttackReports.add(report);
+        }
+        callbacks.onAreaAttack(attacker, targets, ability, latestAreaAttackReports);
+    }
+
     public void applyAttack()
     {
-        BattleCalculator.apply(latestAttackReport);
+        if(areaChosen) {
+            for(AttackCalculationReport report : latestAreaAttackReports)
+            {
+                BattleCalculator.apply(report);
+            }
+        } else {
+            BattleCalculator.apply(latestAttackReport);
+        }
         nextMonster();
         checkKO();
     }
 
-    public void attack() {
-        attack(chosenTarget, chosenAttack);
+    public void attack()
+    {
+        if(areaChosen) {
+            attackArea(chosenArea, chosenAttack);
+        } else {
+            attack(chosenTarget, chosenAttack);
+        }
     }
 
     /**
      * The monster decides to not attack and instead raise it's defense values for one round
      */
-    public void defend() {
+    public void defend()
+    {
         latestAttackReport = BattleCalculator.calcDefense(getActiveMonster());
         callbacks.onDefense(getActiveMonster());
     }
@@ -134,14 +173,19 @@ public class BattleSystem
         choiceComplete = false;
         targetChosen = false;
         attackChosen = false;
+        areaChosen = false;
+        chosenArea = null;
     }
 
     public void continueBattle()
     {
         // Check if one team is KO
         if(queue.getCombatTeamLeft().isKO() || queue.getCombatTeamRight().isKO()) {
+
             callbacks.onBattleEnds(queue.getCombatTeamLeft().isKO());
+
         } else {
+
             if (queue.peekNextSide() == OPPONENT) {
                 // It's AI's turn
                 letAItakeTurn();
@@ -155,9 +199,11 @@ public class BattleSystem
     /**
      * Checks if a monster has been defeated during the last attack
      */
-    private void checkKO() {
+    private void checkKO()
+    {
         Iterator<AGuardian> it = queue.getCurrentRound().iterator();
-        while (it.hasNext()) {
+        while (it.hasNext())
+        {
             AGuardian m = it.next();
             if (m.getIndividualStatistics().isKO()) {
                 it.remove();
@@ -169,7 +215,8 @@ public class BattleSystem
         }
 
         it = queue.getNextRound().iterator();
-        while (it.hasNext()) {
+        while (it.hasNext())
+        {
             AGuardian m = it.next();
             if (m.getIndividualStatistics().isKO()) {
                 it.remove();
@@ -212,18 +259,29 @@ public class BattleSystem
      * Swaps two monsters
      * @param newGuardian
      */
-    public void replaceActiveMonster(AGuardian newGuardian) {
+    public void replaceActiveMonster(AGuardian newGuardian)
+    {
         AGuardian replaced = queue.exchangeNext(newGuardian);
         nextMonster();
     }
 
-    public void setChosenTarget(AGuardian target) {
+    public void setChosenTarget(AGuardian target)
+    {
         this.chosenTarget = target;
-        targetChosen = true;
-        choiceComplete = targetChosen && attackChosen;
+        this.targetChosen = true;
+        this.choiceComplete = targetChosen && attackChosen;
     }
 
-    public void setChosenAttack(int attack) {
+    public void setChosenArea(Array<AGuardian> targets)
+    {
+        this.areaChosen = true;
+        this.targetChosen = true;
+        this.chosenArea = targets;
+        this.choiceComplete = targetChosen && attackChosen && areaChosen;
+    }
+
+    public void setChosenAttack(int attack)
+    {
         this.chosenAttack = attack;
         attackChosen = true;
         choiceComplete = targetChosen && attackChosen;
@@ -281,6 +339,7 @@ public class BattleSystem
     {
         public void onMonsterKilled(AGuardian m){}
         public void onAttack(AGuardian attacker, AGuardian target, Ability ability, AttackCalculationReport rep){}
+        public void onAreaAttack(AGuardian attacker, Array<AGuardian> targets, Ability ability, Array<AttackCalculationReport> reports) {}
         public void onDefense(AGuardian defensiveGuardian){}
         public void onPlayersTurn(){}
         public void onBattleEnds(boolean winnerSide){}

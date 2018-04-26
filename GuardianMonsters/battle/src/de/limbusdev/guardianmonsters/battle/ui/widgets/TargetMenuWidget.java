@@ -80,7 +80,7 @@ public class TargetMenuWidget extends SevenButtonsWidget implements Observer
         for(int key : team.keys())
         {
             AGuardian m = team.get(key);
-            setButtonText(key + offset, Services.getL18N().getLocalizedGuardianName(m));
+            setButtonText(key + offset, Services.getL18N().getGuardianNicknameIfAvailable(m));
             enableButton(key + offset);
 
             // Add the TargetMenuWidget as a Listener

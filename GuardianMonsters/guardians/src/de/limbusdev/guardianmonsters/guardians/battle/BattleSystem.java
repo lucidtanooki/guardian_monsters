@@ -318,11 +318,22 @@ public class BattleSystem
             AGuardian m = getActiveMonster();
             int att = 0;
             Ability.aID aID = null;
-            while(aID == null) {
-                att = MathUtils.random(0,m.getAbilityGraph().getActiveAbilities().size-1);
-                aID = m.getAbilityGraph().getActiveAbility(att);
+            Ability ability = GuardiansServiceLocator.getAbilities().getAbility(aID);
+
+            if(ability.areaDamage) {
+
+                setChosenArea(queue.getCombatTeamLeft());
+
+            } else {
+
+                while (aID == null) {
+                    att = MathUtils.random(0, m.getAbilityGraph().getActiveAbilities().size - 1);
+                    aID = m.getAbilityGraph().getActiveAbility(att);
+                }
+                chooseTarget();
+
             }
-            chooseTarget();
+
             setChosenAttack(att);
             attack();
             // applyAttack() is called by the client, as soon as it is neccessary

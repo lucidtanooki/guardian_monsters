@@ -318,6 +318,12 @@ public class BattleSystem
             AGuardian m = getActiveMonster();
             int att = 0;
             Ability.aID aID = null;
+
+            while (aID == null) {
+                att = MathUtils.random(0, m.getAbilityGraph().getActiveAbilities().size - 1);
+                aID = m.getAbilityGraph().getActiveAbility(att);
+            }
+
             Ability ability = GuardiansServiceLocator.getAbilities().getAbility(aID);
 
             if(ability.areaDamage) {
@@ -326,10 +332,6 @@ public class BattleSystem
 
             } else {
 
-                while (aID == null) {
-                    att = MathUtils.random(0, m.getAbilityGraph().getActiveAbilities().size - 1);
-                    aID = m.getAbilityGraph().getActiveAbility(att);
-                }
                 chooseTarget();
 
             }

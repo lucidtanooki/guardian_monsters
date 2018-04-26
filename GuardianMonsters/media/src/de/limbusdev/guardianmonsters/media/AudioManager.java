@@ -29,13 +29,15 @@ public class AudioManager implements IAudioManager
     }
 
     @Override
-    public void playSound(String path) {
+    public void playSound(String path)
+    {
         Sound sfx = assets.get(path,Sound.class);
         sfx.play();
     }
 
     @Override
-    public void playMusic(String path) {
+    public void playMusic(String path)
+    {
         Music music = assets.get(path,Music.class);
 
         // If there is music playing, check, whether it is the same, like the requested
@@ -54,7 +56,8 @@ public class AudioManager implements IAudioManager
     }
 
     @Override
-    public void playLoopMusic(String path) {
+    public void playLoopMusic(String path)
+    {
         Music music = assets.get(path,Music.class);
         music.setVolume(1);
         music.setLooping(true);
@@ -63,7 +66,8 @@ public class AudioManager implements IAudioManager
     }
 
     @Override
-    public void stopMusic(String path) {
+    public void stopMusic(String path)
+    {
         Music music = assets.get(path,Music.class);
         music.stop();
         currentlyPlayingBGMusic = null;
@@ -80,7 +84,8 @@ public class AudioManager implements IAudioManager
     }
 
     @Override
-    public Action getMuteAudioAction(String musicPath) {
+    public Action getMuteAudioAction(String musicPath)
+    {
         final Music muteable = assets.get(musicPath, Music.class);
         Action muteAction = Actions.sequence(
             Actions.delay(.005f),

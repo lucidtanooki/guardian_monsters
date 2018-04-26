@@ -84,6 +84,12 @@
     "animationType": "moving_hor"
   },
   {
+    "name": "attFire5_hellfire",
+    "sfxType": "spell",
+    "sfxIndex": 1,
+    "animationType": "contactless"
+  },
+  {
     "name": "attWater1_sprinkle",
     "sfxType": "hit",
     "sfxIndex": 0,

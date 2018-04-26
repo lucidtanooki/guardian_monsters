@@ -5,12 +5,12 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.utils.Array;
 
-import static net.dermetfan.gdx.assets.AnnotationAssetManager.Asset;
-
 import java.util.HashMap;
 import java.util.Map;
 
 import de.limbusdev.guardianmonsters.guardians.Element;
+
+import static net.dermetfan.gdx.assets.AnnotationAssetManager.Asset;
 
 /**
  * Paths
@@ -76,7 +76,7 @@ public class AssetPath
                 for(int i=1;i<=1;i++) water.add(rootPath + "water/" + i + ".ogg");
 
                 Array<String> spell = new Array<>();
-                for(int i=1;i<=1;i++) spell.add(rootPath + "spell/" + i + ".ogg");
+                for(int i=1;i<=2;i++) spell.add(rootPath + "spell/" + i + ".ogg");
 
                 battleSFX.put("HIT", hits);
                 battleSFX.put("WATER", water);

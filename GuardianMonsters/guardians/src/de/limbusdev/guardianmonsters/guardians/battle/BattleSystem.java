@@ -2,6 +2,7 @@ package de.limbusdev.guardianmonsters.guardians.battle;
 
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.ArrayMap;
 
 import java.util.Iterator;
 
@@ -38,7 +39,7 @@ public class BattleSystem
 
     private BattleQueue queue;
     private AGuardian chosenTarget;
-    private Array<AGuardian> chosenArea;
+    private ArrayMap<Integer,AGuardian> chosenArea;
     private AttackCalculationReport latestAttackReport;
     private Array<AttackCalculationReport> latestAreaAttackReports;
     private BattleResult result;
@@ -105,7 +106,7 @@ public class BattleSystem
         callbacks.onAttack(attacker, target, ability, latestAttackReport);
     }
 
-    private void attackArea(Array<AGuardian> targets, int attack)
+    private void attackArea(ArrayMap<Integer,AGuardian> targets, int attack)
     {
         if(!choiceComplete) {
             throw new IllegalStateException(TAG + " you forgot to set area, attack or targets.");
@@ -118,7 +119,7 @@ public class BattleSystem
 
         AGuardian attacker = getActiveMonster();
         latestAreaAttackReports = new Array<>();
-        for(AGuardian g : targets)
+        for(AGuardian g : targets.values())
         {
             AttackCalculationReport report = BattleCalculator.calcAttack(attacker, g, ability);
             latestAreaAttackReports.add(report);
@@ -272,7 +273,7 @@ public class BattleSystem
         this.choiceComplete = targetChosen && attackChosen;
     }
 
-    public void setChosenArea(Array<AGuardian> targets)
+    public void setChosenArea(ArrayMap<Integer,AGuardian> targets)
     {
         this.areaChosen = true;
         this.targetChosen = true;
@@ -355,7 +356,7 @@ public class BattleSystem
     {
         public void onMonsterKilled(AGuardian m){}
         public void onAttack(AGuardian attacker, AGuardian target, Ability ability, AttackCalculationReport rep){}
-        public void onAreaAttack(AGuardian attacker, Array<AGuardian> targets, Ability ability, Array<AttackCalculationReport> reports) {}
+        public void onAreaAttack(AGuardian attacker, ArrayMap<Integer,AGuardian> targets, Ability ability, Array<AttackCalculationReport> reports) {}
         public void onDefense(AGuardian defensiveGuardian){}
         public void onPlayersTurn(){}
         public void onBattleEnds(boolean winnerSide){}

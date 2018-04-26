@@ -21,6 +21,7 @@ import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.media.IMediaManager;
 import de.limbusdev.guardianmonsters.scene2d.ImageZComparator;
 import de.limbusdev.guardianmonsters.services.Services;
+import de.limbusdev.guardianmonsters.ui.Constant;
 import de.limbusdev.guardianmonsters.utils.geometry.IntVec2;
 
 /**
@@ -440,7 +441,7 @@ public class BattleAnimationWidget extends BattleWidget
 
         AbilityMedia abilityMedia = AbilityMediaDB.getInstance().getAbilityMedia(ability.name);
 
-        IntVec2 target = direction ? new IntVec2(50,100) : new IntVec2(400,100); // TODO enter correct coordinates
+        IntVec2 target = direction ? (new IntVec2(128,100)) : (new IntVec2(Constant.WIDTH+64,100));
 
         sra.setPosition(target.x, target.y, Align.bottom);
 

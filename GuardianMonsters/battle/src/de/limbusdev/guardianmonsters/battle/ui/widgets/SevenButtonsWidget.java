@@ -21,7 +21,7 @@ import static de.limbusdev.guardianmonsters.battle.ui.widgets.BattleHUDTextButto
 import static de.limbusdev.guardianmonsters.battle.ui.widgets.BattleHUDTextButton.TOPLEFT;
 import static de.limbusdev.guardianmonsters.battle.ui.widgets.BattleHUDTextButton.TOPRIGHT;
 
-public class SevenButtonsWidget extends de.limbusdev.guardianmonsters.battle.ui.widgets.BattleWidget
+public class SevenButtonsWidget extends BattleWidget
 {
 
     // Buttons
@@ -54,8 +54,9 @@ public class SevenButtonsWidget extends de.limbusdev.guardianmonsters.battle.ui.
         };
 
         TextButton tb;
-        for(int i : positions) {
-            tb = new de.limbusdev.guardianmonsters.battle.ui.widgets.BattleHUDTextButton("", skin, i, Element.NONE);
+        for(int i : positions)
+        {
+            tb = new BattleHUDTextButton("", skin, i, Element.NONE);
             buttons.put(buttonOrder[i],tb);
             addActor(tb);
         }
@@ -94,7 +95,8 @@ public class SevenButtonsWidget extends de.limbusdev.guardianmonsters.battle.ui.
         buttons.get(index).setTouchable(Touchable.enabled);
     }
 
-    protected void disableButton(int index) {
+    protected void disableButton(int index)
+    {
         buttons.get(index).setColor(Color.GRAY);
         buttons.get(index).setDisabled(true);
         buttons.get(index).setTouchable(Touchable.disabled);
@@ -104,16 +106,19 @@ public class SevenButtonsWidget extends de.limbusdev.guardianmonsters.battle.ui.
         buttons.get(index).setText(text);
     }
 
-    public void setButtonText(int index, Ability ability) {
+    public void setButtonText(int index, Ability ability)
+    {
         setButtonText(index, Services.getL18N().Abilities().get(ability.name));
     }
 
-    public void setButtonStyle(int index, Skin skin, String style) {
+    public void setButtonStyle(int index, Skin skin, String style)
+    {
         Button.ButtonStyle bs = skin.get(style, TextButton.TextButtonStyle.class);
         buttons.get(index).setStyle(bs);
     }
 
-    public void setButtonStyle(int index, Element element) {
+    public void setButtonStyle(int index, Element element)
+    {
         Skin skin = Services.getUI().getBattleSkin();
         String styleString = "tb-attack-" + element.toString().toLowerCase();
         setButtonStyle(index, skin, styleString);
@@ -127,7 +132,8 @@ public class SevenButtonsWidget extends de.limbusdev.guardianmonsters.battle.ui.
         return buttons.get(index);
     }
 
-    protected void replaceButton(final TextButton button, final int index) {
+    protected void replaceButton(final TextButton button, final int index)
+    {
         Button removedButton = buttons.get(index);
         buttons.removeKey(index);
         button.setPosition(removedButton.getX(), removedButton.getY(), Align.bottomLeft);

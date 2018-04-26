@@ -8,7 +8,8 @@
     "damageType": "physical",
     "canChangeStatusEffect": false,
     "statusEffect": "healthy",
-    "probabilityToChangeStatusEffect": 0
+    "probabilityToChangeStatusEffect": 0,
+    "areaDamage": false
   },
   {
     "ID": 2,
@@ -19,7 +20,8 @@
     "damageType": "physical",
     "canChangeStatusEffect": false,
     "statusEffect": "healthy",
-    "probabilityToChangeStatusEffect": 0
+    "probabilityToChangeStatusEffect": 0,
+    "areaDamage": false
   },
   {
     "ID": 3,
@@ -30,7 +32,8 @@
     "damageType": "physical",
     "canChangeStatusEffect": false,
     "statusEffect": "healthy",
-    "probabilityToChangeStatusEffect": 0
+    "probabilityToChangeStatusEffect": 0,
+    "areaDamage": false
   },
   {
     "ID": 4,
@@ -41,6 +44,7 @@
     "damageType": "physical",
     "canChangeStatusEffect": false,
     "statusEffect": "healthy",
-    "probabilityToChangeStatusEffect": 0
+    "probabilityToChangeStatusEffect": 0,
+    "areaDamage": false
   }
 ]

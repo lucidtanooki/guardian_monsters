@@ -8,6 +8,7 @@
     "damageType": "physical",
     "canChangeStatusEffect": false,
     "statusEffect": "healthy",
-    "probabilityToChangeStatusEffect": 0
+    "probabilityToChangeStatusEffect": 0,
+    "areaDamage": false
   }
 ]

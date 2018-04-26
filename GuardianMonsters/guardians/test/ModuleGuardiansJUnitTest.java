@@ -133,7 +133,8 @@ public class ModuleGuardiansJUnitTest
             "    \"damageType\": \"physical\",\n" +
                 "    \"canChangeStatusEffect\": false,\n" +
                 "    \"statusEffect\": \"healthy\",\n" +
-                "    \"probabilityToChangeStatusEffect\": 0" +
+                "    \"probabilityToChangeStatusEffect\": 0,\n" +
+                "    \"areaDamage\": false" +
             "  }," +
             "  {" +
             "    \"ID\": 2," +
@@ -144,7 +145,8 @@ public class ModuleGuardiansJUnitTest
             "    \"damageType\": \"magical\",\n" +
                 "    \"canChangeStatusEffect\": false,\n" +
                 "    \"statusEffect\": \"healthy\",\n" +
-                "    \"probabilityToChangeStatusEffect\": 0" +
+                "    \"probabilityToChangeStatusEffect\": 0,\n" +
+                "    \"areaDamage\": false" +
             "  }" +
             "]";
 
@@ -173,6 +175,7 @@ public class ModuleGuardiansJUnitTest
         assertEquals(ability.name, "attNone2_kick");
         assertEquals(ability.MPcost, 10);
         assertEquals(ability.damageType, Ability.DamageType.MAGICAL);
+        assertEquals(ability.areaDamage, false);
         assertEquals(ability.canChangeStatusEffect, false);
         assertEquals(ability.statusEffect, IndividualStatistics.StatusEffect.HEALTHY);
         assertEquals(ability.probabilityToChangeStatusEffect, 0);

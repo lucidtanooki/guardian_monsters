@@ -32,7 +32,7 @@ public class BattleSystem
 {
     public static String TAG = BattleSystem.class.getSimpleName();
 
-    private AIPlayer aiPlayer;
+    private DefaultAIPlayer defaultAiPlayer;
 
     private Callbacks callbacks;
 
@@ -58,7 +58,7 @@ public class BattleSystem
         attackChosen = false;
         areaChosen = false;
 
-        aiPlayer = new AIPlayer();
+        defaultAiPlayer = new DefaultAIPlayer();
 
         queue = new BattleQueue(left,right);
 
@@ -251,7 +251,7 @@ public class BattleSystem
             throw new IllegalStateException(TAG +
                 " AI can't take turn. The first monster in queue is not in it's team.");
         }
-        aiPlayer.turn();
+        defaultAiPlayer.turn();
     }
 
 
@@ -289,9 +289,25 @@ public class BattleSystem
 
     // INNER CLASS
 
-    private class AIPlayer {
+    /**
+     * Defines AIPlayer. Use this to implement different players like:
+     *
+     *  Normal Enemy
+     *  Boss Enemy
+     *  Training Enemy
+     */
+    public interface AIPlayer
+    {
+        /**
+         * Define how the player makes his turn.
+         */
+        void turn();
+    }
 
-        public AIPlayer() {
+    private class DefaultAIPlayer implements AIPlayer
+    {
+
+        public DefaultAIPlayer() {
             // TODO
         }
 

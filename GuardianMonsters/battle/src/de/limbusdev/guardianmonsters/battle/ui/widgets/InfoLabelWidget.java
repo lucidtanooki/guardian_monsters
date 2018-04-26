@@ -54,7 +54,8 @@ public class InfoLabelWidget extends de.limbusdev.guardianmonsters.battle.ui.wid
         )));
     }
 
-    public void setWholeText(String wholeText) {
+    public void setWholeText(String wholeText)
+    {
         this.wholeText = wholeText;
         clearActions();
     }

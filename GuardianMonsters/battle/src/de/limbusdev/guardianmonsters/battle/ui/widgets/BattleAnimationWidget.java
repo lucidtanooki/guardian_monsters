@@ -238,6 +238,15 @@ public class BattleAnimationWidget extends BattleWidget
         attIm.addAction(getAnimationSequence(ability, startPos, endPos, defPos, attSide, defSide));
     }
 
+    public void animateAreaAttack(final int attPos, boolean attSide, boolean defSide, final Ability ability)
+    {
+        Image attIm;
+        if(attSide == LEFT) attIm = monsterImgsLeft.get(attPos);
+        else attIm = monsterImgsRight.get(attPos);
+
+        attIm.addAction(getAreaAttackAnimationSequence(ability, attSide, defSide));
+    }
+
 
     /**
      * Assembles the animation action sequence
@@ -296,6 +305,35 @@ public class BattleAnimationWidget extends BattleWidget
         return action;
     }
 
+    private Action getAreaAttackAnimationSequence(
+        final Ability ability, boolean side, final boolean defSide)
+    {
+        final boolean direction = defSide;
+        Action action;
+        AbilityMedia abilityMedia = AbilityMediaDB.getInstance().getAbilityMedia(ability.name);
+
+        // Short delay before ability starts
+        Action delayAction = Actions.delay(.5f);
+
+        // Plays the ability animatiom
+        Action attackAnimationAction = Actions.run(() -> animateAreaAttackOfType(ability, defSide));
+
+        // Plays the attacks sound
+        final String path = AssetPath.Audio.SFX.BATTLE().get(abilityMedia.getSfxType().toString().toUpperCase()).get(0);
+        Action playSFXAction = Actions.run(() -> Services.getAudio().playSound(path));
+
+        // Runs the callback handler
+        Action callbackAction = Actions.run(() -> callbacks.onHitAnimationComplete());
+
+        // Animates the impact of the ability on the target
+        Action animateImpactAction = Actions.run(() -> animateAreaAttackImpact(defSide));
+
+        action = Actions.sequence(delayAction, attackAnimationAction, playSFXAction,
+                    animateImpactAction, callbackAction);
+
+        return action;
+    }
+
     /**
      * Animates the  impact of the attack
      * @param side
@@ -311,6 +349,26 @@ public class BattleAnimationWidget extends BattleWidget
             Actions.moveBy(0, 15, .1f, Interpolation.bounceIn),
             Actions.moveBy(0, -15, .1f, Interpolation.bounceIn)
         ));
+    }
+
+    /**
+     * Animates the impact of an area attack for a whole side.
+     * @param side
+     */
+    private void animateAreaAttackImpact(boolean side)
+    {
+        ArrayMap<Integer, Image> monsterImgs;
+
+        if(side == LEFT) monsterImgs = monsterImgsLeft;
+        else             monsterImgs = monsterImgsRight;
+
+        for(Image defImg : monsterImgs.values())
+        {
+            defImg.addAction(Actions.sequence(
+                Actions.moveBy(0, 15, .1f, Interpolation.bounceIn),
+                Actions.moveBy(0, -15, .1f, Interpolation.bounceIn)
+            ));
+        }
     }
 
     public void animateMonsterKO(int pos, boolean side)
@@ -361,6 +419,30 @@ public class BattleAnimationWidget extends BattleWidget
                 sra.setPosition(target.x, target.y, Align.bottom);
                 break;
         }
+
+        addActor(sra);
+    }
+
+    private void animateAreaAttackOfType(Ability ability, boolean defSide)
+    {
+        boolean direction = defSide;
+
+        Animation anim = media.getAttackAnimation(ability.name);
+        SelfRemovingAnimation sra = new SelfRemovingAnimation(anim);
+        anim.setFrameDuration(.1f);
+        // Ability direction
+        if(direction == LEFT) {
+            sra.setSize(256,192);
+        } else {
+            sra.setSize(-256,192); // flipped animation
+        }
+        sra.setAlign(Align.bottom);
+
+        AbilityMedia abilityMedia = AbilityMediaDB.getInstance().getAbilityMedia(ability.name);
+
+        IntVec2 target = direction ? new IntVec2(50,100) : new IntVec2(400,100); // TODO enter correct coordinates
+
+        sra.setPosition(target.x, target.y, Align.bottom);
 
         addActor(sra);
     }

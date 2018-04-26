@@ -4,6 +4,7 @@ import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
 import de.limbusdev.guardianmonsters.assets.paths.AssetPath;
@@ -284,7 +285,8 @@ public class BattleHUD extends ABattleHUD
         battleSystemCallbacks = new BattleSystem.Callbacks()
         {
             @Override
-            public void onBattleEnds(boolean winnerSide) {
+            public void onBattleEnds(boolean winnerSide)
+            {
                 battleStateSwitcher.toEndOfBattle(winnerSide);
             }
 
@@ -301,12 +303,14 @@ public class BattleHUD extends ABattleHUD
             }
 
             @Override
-            public void onPlayersTurn() {
+            public void onPlayersTurn()
+            {
                 battleStateSwitcher.toActionMenu();
             }
 
             @Override
-            public void onMonsterKilled(AGuardian m) {
+            public void onMonsterKilled(AGuardian m)
+            {
                 boolean side = battleSystem.getQueue().getTeamSideFor(m);
                 int pos = battleSystem.getQueue().getFieldPositionFor(m);
                 animationWidget.animateMonsterKO(pos,side);
@@ -335,7 +339,28 @@ public class BattleHUD extends ABattleHUD
             }
 
             @Override
-            public void onDefense(AGuardian defensiveGuardian) {
+            public void onAreaAttack(AGuardian attacker, Array<AGuardian> targets, Ability ability, Array<AttackCalculationReport> reports)
+            {
+                // Change widget set
+                battleStateSwitcher.toAnimation();
+                infoLabelWidget.setWholeText(BattleStringBuilder.givenDamage(attacker,reports));
+                infoLabelWidget.animateTextAppearance();
+
+                // Start ability animation
+                boolean activeSide;
+                boolean passiveSide;
+
+                activeSide =  battleSystem.getQueue().getTeamSideFor(attacker);
+                passiveSide = !activeSide;
+
+                int attPos = battleSystem.getQueue().getFieldPositionFor(attacker);
+
+                animationWidget.animateAreaAttack(attPos, activeSide, passiveSide, ability);
+            }
+
+            @Override
+            public void onDefense(AGuardian defensiveGuardian)
+            {
                 battleStateSwitcher.toAnimation();
                 infoLabelWidget.setWholeText(BattleStringBuilder.selfDefense(defensiveGuardian));
                 infoLabelWidget.animateTextAppearance();
@@ -343,14 +368,16 @@ public class BattleHUD extends ABattleHUD
             }
         };
 
-        targetMenuCallbacks = nr -> {
+        targetMenuCallbacks = nr ->
+        {
             System.out.println("TargetMenuButtons: onButtonNr("+nr+")");
             AGuardian target = targetMenuWidget.getMonsterOfIndex(nr);
             battleSystem.setChosenTarget(target);
             battleSystem.attack();
         };
 
-        backToActionMenuCallbacks = new BattleActionMenuWidget.Callbacks() {
+        backToActionMenuCallbacks = new BattleActionMenuWidget.Callbacks()
+        {
             @Override
             public void onBackButton() {
                 System.out.println("BackToActionMenuButtons: onBackButton()");
@@ -358,7 +385,8 @@ public class BattleHUD extends ABattleHUD
             }
         };
 
-        escapeSuccessCallbacks = new BattleActionMenuWidget.Callbacks() {
+        escapeSuccessCallbacks = new BattleActionMenuWidget.Callbacks()
+        {
             @Override
             public void onBackButton() {
                 System.out.println("EscapeSuccessButtons: onBackButton()");
@@ -366,7 +394,8 @@ public class BattleHUD extends ABattleHUD
             }
         };
 
-        escapeFailCallbacks = new BattleActionMenuWidget.Callbacks() {
+        escapeFailCallbacks = new BattleActionMenuWidget.Callbacks()
+        {
             @Override
             public void onBackButton() {
                 System.out.println("EscapeFailButtons: onBackButton()");
@@ -374,18 +403,21 @@ public class BattleHUD extends ABattleHUD
             }
         };
 
-        battleAnimationCallbacks = () -> {
+        battleAnimationCallbacks = () ->
+        {
             battleSystem.applyAttack();
             actionMenu.enable(actionMenu.backButton);
         };
 
-        monsterMenuCallbacks = nr -> {
+        monsterMenuCallbacks = nr ->
+        {
             System.out.println("Teammember " + nr);
             battleSystem.replaceActiveMonster(leftTeam.get(nr));
         };
     }
 
-    private void showLevelUp(AGuardian m) {
+    private void showLevelUp(AGuardian m)
+    {
         stage.addActor(new LevelUpWidget(Services.getUI().getInventorySkin(), m));
     }
 

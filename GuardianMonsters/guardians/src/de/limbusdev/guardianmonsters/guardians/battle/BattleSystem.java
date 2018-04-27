@@ -12,7 +12,9 @@ import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.Team;
 
 import static de.limbusdev.guardianmonsters.guardians.Constant.HERO;
+import static de.limbusdev.guardianmonsters.guardians.Constant.LEFT;
 import static de.limbusdev.guardianmonsters.guardians.Constant.OPPONENT;
+import static de.limbusdev.guardianmonsters.guardians.Constant.RIGHT;
 
 /**
  * Correct Usage:
@@ -183,7 +185,7 @@ public class BattleSystem
         // Check if one team is KO
         if(queue.getCombatTeamLeft().isKO() || queue.getCombatTeamRight().isKO()) {
 
-            callbacks.onBattleEnds(queue.getCombatTeamLeft().isKO());
+            finishBattle();
 
         } else {
 
@@ -195,6 +197,16 @@ public class BattleSystem
                 callbacks.onPlayersTurn();
             }
         }
+    }
+
+    /**
+     * Called, when one of the teams is KO
+     */
+    private void finishBattle()
+    {
+        queue.resetTeamsModifiedStats(LEFT);
+        queue.resetTeamsModifiedStats(RIGHT);
+        callbacks.onBattleEnds(queue.getCombatTeamLeft().isKO());
     }
 
     /**

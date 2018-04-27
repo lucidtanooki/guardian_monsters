@@ -8,6 +8,7 @@ import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.Team;
 
 import static de.limbusdev.guardianmonsters.guardians.Constant.HERO;
+import static de.limbusdev.guardianmonsters.guardians.Constant.LEFT;
 import static de.limbusdev.guardianmonsters.guardians.Constant.OPPONENT;
 
 /**
@@ -165,6 +166,43 @@ public class BattleQueue extends Observable
             return combatTeamLeft.getFieldPosition(guardian);
         } else {
             return combatTeamRight.getFieldPosition(guardian);
+        }
+    }
+
+    public void resetModifiedStats(AGuardian guardian)
+    {
+        guardian.getIndividualStatistics().resetModifiedStats();
+    }
+
+    public void resetTeamsModifiedStats(boolean side)
+    {
+        Team team;
+
+        if(side == LEFT) {
+            team = left;
+        } else /* side == RIGHT */ {
+            team = right;
+        }
+
+        for(AGuardian combatant : team.values())
+        {
+            resetModifiedStats(combatant);
+        }
+    }
+
+    public void resetCombatTeamsModifiedStats(boolean side)
+    {
+        CombatTeam team;
+
+        if(side == LEFT) {
+            team = combatTeamLeft;
+        } else /* side == RIGHT */ {
+            team = combatTeamRight;
+        }
+
+        for(AGuardian combatant : team.values())
+        {
+            resetModifiedStats(combatant);
         }
     }
 }

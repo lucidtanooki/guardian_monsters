@@ -1,3 +1,12 @@
+/*
+ * *************************************************************************************************
+ * Copyright (c) 2018. limbusdev (Georg Eckert) - All Rights Reserved
+ * Unauthorized copying of this file, via any medium is strictly prohibited
+ * Proprietary and confidential
+ * Written by Georg Eckert <georg.eckert@limbusdev.de>
+ * *************************************************************************************************
+ */
+
 package de.limbusdev.guardianmonsters.battle.ui.widgets;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -18,36 +27,36 @@ import de.limbusdev.guardianmonsters.guardians.abilities.Ability;
 import de.limbusdev.guardianmonsters.guardians.battle.BattleQueue;
 import de.limbusdev.guardianmonsters.guardians.battle.BattleSystem;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
-import de.limbusdev.guardianmonsters.media.IMediaManager;
+import de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics;
 import de.limbusdev.guardianmonsters.scene2d.ImageZComparator;
 import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.ui.Constant;
 import de.limbusdev.guardianmonsters.utils.geometry.IntVec2;
 
+import static de.limbusdev.guardianmonsters.guardians.Constant.LEFT;
+import static de.limbusdev.guardianmonsters.guardians.Constant.RIGHT;
+
 /**
- * Widget for displaying monster status in battle: HP, MP, EXP, Name, Level
  * HINT: Don't forget calling the init() method
  *
  * @author Georg Eckert 2016
  */
 public class BattleAnimationWidget extends BattleWidget
 {
-
-    private static boolean LEFT = true;
-    private static boolean RIGHT = false;
-
     private Array<WidgetObserver> observers;
     private ArrayMap<Integer,Boolean> leftPositionsOccupied, rightPositionsOccupied;
 
     private ArrayMap<Integer,Image> monsterImgsLeft, monsterImgsRight;
     private Array<Image> zSortedMonsterImgs;
-    private IMediaManager media;
+    private ArrayMap<Integer, Animation<TextureRegion>>
+        statusEffectIndicatorsLeft, getStatusEffectIndicatorsRight;
 
     public boolean attackAnimationRunning;
 
     private Callbacks callbacks;
 
-    public BattleAnimationWidget(Callbacks callbacks) {
+    public BattleAnimationWidget(Callbacks callbacks)
+    {
         super();
 
         leftPositionsOccupied = new ArrayMap<>();
@@ -58,24 +67,41 @@ public class BattleAnimationWidget extends BattleWidget
         this.monsterImgsRight = new ArrayMap<>();
         this.zSortedMonsterImgs = new Array<>();
         this.setBounds(0,0,0,0);
-        this.media = Services.getMedia();
+
+        this.statusEffectIndicatorsLeft = new ArrayMap<>();
+        this.getStatusEffectIndicatorsRight = new ArrayMap<>();
 
         this.callbacks = callbacks;
 
     }
 
+    public void setStatusEffect(
+        int position,
+        boolean side,
+        IndividualStatistics.StatusEffect statusEffect)
+    {
+        if(statusEffect == IndividualStatistics.StatusEffect.HEALTHY) {
+            // TODO: set empty animation
+        } else {
+            // TODO: set correct animation
+        }
+    }
+
     @Override
-    public void draw(Batch batch, float parentAlpha) {
+    public void draw(Batch batch, float parentAlpha)
+    {
         sortMonsterSpritesByDepth();
         super.draw(batch, parentAlpha);
     }
 
-    private void sortMonsterSpritesByDepth() {
+    private void sortMonsterSpritesByDepth()
+    {
         zSortedMonsterImgs.sort(new ImageZComparator());
-        for(Image i : zSortedMonsterImgs) i.setZIndex(zSortedMonsterImgs.indexOf(i,true));
+        for(Image i : zSortedMonsterImgs) { i.setZIndex(zSortedMonsterImgs.indexOf(i,true)); }
     }
 
-    public void init(BattleSystem battleSystem) {
+    public void init(BattleSystem battleSystem)
+    {
         clear();
         zSortedMonsterImgs.clear();
         BattleQueue queue = battleSystem.getQueue();
@@ -91,7 +117,7 @@ public class BattleAnimationWidget extends BattleWidget
         if(side == LEFT) {
             imgs = monsterImgsLeft;
             positions = leftPositionsOccupied;
-        } else {
+        } else /* (side == RIGHT) */ {
             imgs = monsterImgsRight;
             positions = rightPositionsOccupied;
         }
@@ -103,7 +129,9 @@ public class BattleAnimationWidget extends BattleWidget
         int teamSize = team.size > 3 ? 3 : team.size;
         int counter = 0;
         int actualTeamSize = 0;
-        while(actualTeamSize < teamSize && counter < team.size) {
+
+        while(actualTeamSize < teamSize && counter < team.size)
+        {
             AGuardian m = team.get(counter);
             if(m.getIndividualStatistics().isFit()) {
                 // Add monster to team
@@ -120,9 +148,9 @@ public class BattleAnimationWidget extends BattleWidget
         }
 
         // Correct Image Depth Sorting
-        if(positions.containsKey(2)) addActor(imgs.get(2));
-        if(positions.containsKey(1)) addActor(imgs.get(1));
-        if(positions.containsKey(0)) addActor(imgs.get(0));
+        if(positions.containsKey(2)) { addActor(imgs.get(2)); }
+        if(positions.containsKey(1)) { addActor(imgs.get(1)); }
+        if(positions.containsKey(0)) { addActor(imgs.get(0)); }
     }
 
     /**
@@ -135,7 +163,7 @@ public class BattleAnimationWidget extends BattleWidget
     {
         Image monImg;
         TextureRegion monReg;
-        monReg = media.getMonsterSprite(id, metaForm);
+        monReg = Services.getMedia().getMonsterSprite(id, metaForm);
         if(side == LEFT)
             if(!monReg.isFlipX())
                 monReg.flip(true, false);
@@ -184,7 +212,12 @@ public class BattleAnimationWidget extends BattleWidget
      * @param attSide      side of attacker
      * @param defSide   side of target
      */
-    public void animateAttack(final int attPos, final int defPos, boolean attSide, boolean defSide, final Ability ability)
+    public void animateAttack(
+        final int attPos,
+        final int defPos,
+        boolean attSide,
+        boolean defSide,
+        final Ability ability)
     {
         Image attIm;
         final IntVec2 startPos,endPos;
@@ -390,7 +423,7 @@ public class BattleAnimationWidget extends BattleWidget
 
         boolean direction = origin.x > target.x;
 
-        Animation anim = media.getAttackAnimation(ability.name);
+        Animation anim = Services.getMedia().getAttackAnimation(ability.name);
         SelfRemovingAnimation sra = new SelfRemovingAnimation(anim);
         anim.setFrameDuration(.1f);
         // Ability direction
@@ -428,7 +461,7 @@ public class BattleAnimationWidget extends BattleWidget
     {
         boolean direction = defSide;
 
-        Animation anim = media.getAttackAnimation(ability.name);
+        Animation anim = Services.getMedia().getAttackAnimation(ability.name);
         SelfRemovingAnimation sra = new SelfRemovingAnimation(anim);
         anim.setFrameDuration(.1f);
         // Ability direction

@@ -136,383 +136,794 @@ attNone3_tooth
   orig: 128, 128
   offset: 0, 0
   index: 7
-attWater5_icepillars
+attNone8_sana
   rotate: false
   xy: 775, 713
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 4
+attNone8_sana
+  rotate: false
+  xy: 517, 131
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 23
+attNone8_sana
+  rotate: false
+  xy: 517, 131
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 19
+attNone8_sana
+  rotate: false
+  xy: 517, 131
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 18
+attNone8_sana
+  rotate: false
+  xy: 517, 131
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 17
+attNone8_sana
+  rotate: false
+  xy: 517, 131
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 21
+attNone8_sana
+  rotate: false
+  xy: 517, 131
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 22
+attNone8_sana
+  rotate: false
+  xy: 517, 131
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 20
+attNone8_sana
+  rotate: false
+  xy: 517, 131
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 24
+attNone8_sana
+  rotate: false
+  xy: 517, 131
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 16
+attWater5_icepillars
+  rotate: false
+  xy: 775, 583
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 7
 att_embers
   rotate: false
-  xy: 517, 131
+  xy: 775, 453
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 5
 att_embers
   rotate: false
-  xy: 517, 131
+  xy: 775, 453
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 1
 attNone4_punch
   rotate: false
-  xy: 775, 583
+  xy: 647, 261
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 1
 attNone4_punch
   rotate: false
-  xy: 775, 583
+  xy: 647, 261
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 3
 attNone3_tooth
   rotate: false
-  xy: 775, 453
+  xy: 647, 131
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 2
 attNone3_tooth
   rotate: false
-  xy: 775, 453
+  xy: 647, 131
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 10
 attNone3_tooth
   rotate: false
-  xy: 775, 453
+  xy: 647, 131
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 6
 attWater5_icepillars
   rotate: false
-  xy: 647, 261
+  xy: 517, 1
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 10
 attWater5_icepillars
   rotate: false
-  xy: 647, 261
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 11
-attNone4_punch
-  rotate: false
-  xy: 647, 131
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 0
-attNone4_punch
-  rotate: false
-  xy: 647, 131
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 4
-attNone4_punch
-  rotate: false
-  xy: 647, 131
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 2
-att_darkspunk
-  rotate: false
   xy: 517, 1
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
-  index: 1
-att_thought
+  index: 11
+attNone7_shield
   rotate: false
   xy: 647, 1
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
-  index: 0
-attNone6_energyball
+  index: 9
+attNone7_shield
   rotate: false
   xy: 777, 323
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
+  index: 24
+attNone4_punch
+  rotate: false
+  xy: 777, 193
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
   index: 0
-att_fire
+attNone4_punch
+  rotate: false
+  xy: 777, 193
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 4
+attNone4_punch
   rotate: false
   xy: 777, 193
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 2
-attWater5_icepillars
+att_darkspunk
   rotate: false
   xy: 777, 63
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
-  index: 5
+  index: 1
 
 battleAnimations2.png
 format: RGBA8888
 filter: MipMapNearestNearest,MipMapNearestLinear
 repeat: none
-attEarth2_mud
+attNone7_shield
   rotate: false
   xy: 1, 781
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
-  index: 0
-attSpirit1_prayer
+  index: 21
+attNone7_shield
   rotate: false
   xy: 1, 651
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
-  index: 0
-attEarth1_dirt
+  index: 27
+att_thought
   rotate: false
   xy: 131, 781
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
-  index: 3
-attNone2_kick
+  index: 0
+attNone6_energyball
   rotate: false
   xy: 1, 521
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
-  index: 1
-att_alllightning
+  index: 0
+att_fire
   rotate: false
   xy: 131, 651
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
-  index: 0
+  index: 2
 attWater5_icepillars
   rotate: false
   xy: 261, 781
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
-  index: 9
-attNone2_kick
+  index: 5
+attNone8_sana
   rotate: false
   xy: 1, 391
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 9
+attNone7_shield
+  rotate: false
+  xy: 131, 521
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 4
+attNone7_shield
+  rotate: false
+  xy: 261, 651
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 22
+attNone7_shield
+  rotate: false
+  xy: 261, 651
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 13
+attEarth2_mud
+  rotate: false
+  xy: 391, 781
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 0
+attNone7_shield
+  rotate: false
+  xy: 1, 261
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 8
+attSpirit1_prayer
+  rotate: false
+  xy: 131, 391
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 0
+attEarth1_dirt
+  rotate: false
+  xy: 261, 521
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 3
+attNone2_kick
+  rotate: false
+  xy: 391, 651
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 1
+attNone7_shield
+  rotate: false
+  xy: 521, 781
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 16
+attNone7_shield
+  rotate: false
+  xy: 1, 131
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 7
+att_alllightning
+  rotate: false
+  xy: 131, 261
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 0
+attWater5_icepillars
+  rotate: false
+  xy: 261, 391
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 9
+attNone8_sana
+  rotate: false
+  xy: 391, 521
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 12
+attNone7_shield
+  rotate: false
+  xy: 521, 651
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 6
 attNone2_kick
   rotate: false
-  xy: 1, 391
+  xy: 651, 781
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
-  index: 4
+  index: 6
 attNone2_kick
-  rotate: false
-  xy: 1, 391
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 2
-attNone2_kick
-  rotate: false
-  xy: 131, 521
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 0
-att_thought
-  rotate: false
-  xy: 261, 651
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 3
-attWater1_sprinkle
-  rotate: false
-  xy: 391, 781
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 1
-att_kick
-  rotate: false
-  xy: 1, 261
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 2
-attNone6_energyball
-  rotate: false
-  xy: 131, 391
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 1
-att_embers
-  rotate: false
-  xy: 261, 521
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 0
-attNone2_kick
-  rotate: false
-  xy: 391, 651
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 3
-attNone2_kick
-  rotate: false
-  xy: 391, 651
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 5
-att_darkspunk
-  rotate: false
-  xy: 521, 781
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 3
-att_alllightning
-  rotate: false
-  xy: 1, 131
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 1
-attWater5_icepillars
-  rotate: false
-  xy: 131, 261
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 1
-attNone5_slap
-  rotate: false
-  xy: 261, 391
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 3
-attEarth1_dirt
-  rotate: false
-  xy: 391, 521
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 2
-att_alllightning
-  rotate: false
-  xy: 521, 651
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 3
-attNone5_slap
   rotate: false
   xy: 651, 781
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
-  index: 1
-attWater1_sprinkle
+  index: 4
+attNone2_kick
+  rotate: false
+  xy: 651, 781
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 2
+attNone2_kick
   rotate: false
   xy: 1, 1
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
-  index: 3
-attNone3_tooth
-  rotate: false
-  xy: 131, 131
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
   index: 0
-attNone3_tooth
+attNone8_sana
   rotate: false
   xy: 131, 131
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
-  index: 8
-attNone3_tooth
-  rotate: false
-  xy: 131, 131
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 4
-att_embers
-  rotate: false
-  xy: 261, 261
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 4
-att_embers
+  index: 3
+attNone8_sana
   rotate: false
   xy: 261, 261
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 2
-attWater5_icepillars
+attNone8_sana
   rotate: false
   xy: 391, 391
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
-  index: 2
-attEarth1_dirt
+  index: 10
+att_thought
   rotate: false
   xy: 521, 521
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
-  index: 0
-attNone5_slap
+  index: 3
+attNone8_sana
   rotate: false
   xy: 651, 651
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
-  index: 0
-att_thought
+  index: 8
+attWater1_sprinkle
   rotate: false
   xy: 781, 781
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
-  index: 2
-attWater1_sprinkle
+  index: 1
+att_kick
   rotate: false
   xy: 131, 1
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 2
+attNone6_energyball
+  rotate: false
+  xy: 261, 131
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 1
+attNone8_sana
+  rotate: false
+  xy: 391, 261
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 0
+att_embers
+  rotate: false
+  xy: 521, 391
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 0
+attNone2_kick
+  rotate: false
+  xy: 651, 521
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 3
+attNone2_kick
+  rotate: false
+  xy: 651, 521
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 5
+attNone7_shield
+  rotate: false
+  xy: 781, 651
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 12
+attNone8_sana
+  rotate: false
+  xy: 261, 1
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 7
+att_darkspunk
+  rotate: false
+  xy: 391, 131
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 3
+att_alllightning
+  rotate: false
+  xy: 521, 261
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 1
+attWater5_icepillars
+  rotate: false
+  xy: 651, 391
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 1
+attNone8_sana
+  rotate: false
+  xy: 781, 521
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 6
+attNone5_slap
+  rotate: false
+  xy: 391, 1
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 3
+attEarth1_dirt
+  rotate: false
+  xy: 521, 131
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 2
+att_alllightning
+  rotate: false
+  xy: 651, 261
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 3
+attNone7_shield
+  rotate: false
+  xy: 781, 391
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 2
+attNone5_slap
+  rotate: false
+  xy: 521, 1
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 1
+attNone7_shield
+  rotate: false
+  xy: 651, 131
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 1
+attNone7_shield
+  rotate: false
+  xy: 781, 261
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 5
+attNone7_shield
+  rotate: false
+  xy: 651, 1
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 28
+attWater1_sprinkle
+  rotate: false
+  xy: 781, 131
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 3
+attNone3_tooth
+  rotate: false
+  xy: 781, 1
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 0
+attNone3_tooth
+  rotate: false
+  xy: 781, 1
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 8
+attNone3_tooth
+  rotate: false
+  xy: 781, 1
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 4
+
+battleAnimations3.png
+format: RGBA8888
+filter: MipMapNearestNearest,MipMapNearestLinear
+repeat: none
+att_embers
+  rotate: false
+  xy: 1, 781
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 4
+att_embers
+  rotate: false
+  xy: 1, 781
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 2
+attNone7_shield
+  rotate: false
+  xy: 1, 651
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 20
+attNone7_shield
+  rotate: false
+  xy: 131, 781
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 18
+attWater5_icepillars
+  rotate: false
+  xy: 1, 521
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 2
+attNone7_shield
+  rotate: false
+  xy: 131, 651
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 10
+attEarth1_dirt
+  rotate: false
+  xy: 261, 781
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 0
+attNone5_slap
+  rotate: false
+  xy: 1, 391
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 0
+attNone8_sana
+  rotate: false
+  xy: 131, 521
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 11
+att_thought
+  rotate: false
+  xy: 261, 651
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 2
+attWater1_sprinkle
+  rotate: false
+  xy: 391, 781
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 2
+attNone8_sana
+  rotate: false
+  xy: 1, 261
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 15
+attNone7_shield
+  rotate: false
+  xy: 131, 391
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 0
 att_kick
+  rotate: false
+  xy: 261, 521
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 3
+attNone7_shield
+  rotate: false
+  xy: 391, 651
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 23
+attAir1_leafgust
+  rotate: false
+  xy: 521, 781
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 2
+attNone7_shield
+  rotate: false
+  xy: 1, 131
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 15
+attAir1_leafgust
+  rotate: false
+  xy: 131, 261
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 0
+attEarth1_dirt
+  rotate: false
+  xy: 261, 391
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 1
+att_fire
+  rotate: false
+  xy: 391, 521
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 1
+attNone7_shield
+  rotate: false
+  xy: 521, 651
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 11
+att_kick
+  rotate: false
+  xy: 651, 781
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 0
+attNone8_sana
+  rotate: false
+  xy: 1, 1
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 5
+attWater5_icepillars
+  rotate: false
+  xy: 131, 131
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 6
+att_fire
+  rotate: false
+  xy: 261, 261
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 3
+attWater5_icepillars
+  rotate: false
+  xy: 391, 391
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 4
+attNone8_sana
+  rotate: false
+  xy: 521, 521
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 14
+attNone7_shield
+  rotate: false
+  xy: 651, 651
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 26
+attNone7_shield
+  rotate: false
+  xy: 781, 781
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 14
+att_embers
+  rotate: false
+  xy: 131, 1
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 3
+attWater5_icepillars
   rotate: false
   xy: 261, 131
   size: 128, 128
@@ -525,148 +936,115 @@ attAir1_leafgust
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
-  index: 2
-attAir1_leafgust
-  rotate: false
-  xy: 521, 391
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 0
-attEarth1_dirt
-  rotate: false
-  xy: 651, 521
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 1
-att_fire
-  rotate: false
-  xy: 781, 651
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 1
-att_kick
-  rotate: false
-  xy: 261, 1
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 0
-attWater5_icepillars
-  rotate: false
-  xy: 391, 131
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 6
-att_fire
-  rotate: false
-  xy: 521, 261
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 3
-attWater5_icepillars
-  rotate: false
-  xy: 651, 391
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 4
-att_embers
-  rotate: false
-  xy: 781, 521
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 3
-attWater5_icepillars
-  rotate: false
-  xy: 391, 1
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
-  index: 3
-attAir1_leafgust
-  rotate: false
-  xy: 521, 131
-  size: 128, 128
-  orig: 128, 128
-  offset: 0, 0
   index: 1
 att_darkspunk
   rotate: false
-  xy: 651, 261
+  xy: 521, 391
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 2
 att_thought
   rotate: false
-  xy: 781, 391
+  xy: 651, 521
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 1
+attNone7_shield
+  rotate: false
+  xy: 781, 651
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 25
 attNone5_slap
   rotate: false
-  xy: 521, 1
+  xy: 261, 1
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 2
 att_kick
   rotate: false
-  xy: 651, 131
+  xy: 391, 131
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 1
 attNone6_energyball
   rotate: false
-  xy: 781, 261
+  xy: 521, 261
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 2
 att_fire
   rotate: false
-  xy: 651, 1
+  xy: 651, 391
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 0
+attNone8_sana
+  rotate: false
+  xy: 781, 521
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 13
+attNone7_shield
+  rotate: false
+  xy: 391, 1
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 17
 attWater5_icepillars
   rotate: false
-  xy: 781, 131
+  xy: 521, 131
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 0
+attNone7_shield
+  rotate: false
+  xy: 651, 261
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 19
+attNone7_shield
+  rotate: false
+  xy: 781, 391
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 3
+attNone8_sana
+  rotate: false
+  xy: 521, 1
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 1
 attWater5_icepillars
   rotate: false
-  xy: 781, 1
+  xy: 651, 131
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 8
-
-battleAnimations3.png
-format: RGBA8888
-filter: MipMapNearestNearest,MipMapNearestLinear
-repeat: none
 att_alllightning
   rotate: false
-  xy: 1, 1
+  xy: 781, 261
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: 2
 attWater1_sprinkle
   rotate: false
-  xy: 131, 1
+  xy: 651, 1
   size: 128, 128
   orig: 128, 128
   offset: 0, 0

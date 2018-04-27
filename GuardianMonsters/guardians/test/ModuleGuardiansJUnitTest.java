@@ -134,7 +134,9 @@ public class ModuleGuardiansJUnitTest
                 "    \"canChangeStatusEffect\": false,\n" +
                 "    \"statusEffect\": \"healthy\",\n" +
                 "    \"probabilityToChangeStatusEffect\": 0,\n" +
-                "    \"areaDamage\": false" +
+                "    \"areaDamage\": false,\n" +
+                "    \"modifiedStats\": {\"PStr\": 0, \"PDef\": 0, \"MStr\": 0, \"MDef\": 0, \"Speed\": 0},\n" +
+                "    \"healedStats\": {\"HP\": 0, \"MP\": 0}" +
             "  }," +
             "  {" +
             "    \"ID\": 2," +
@@ -146,7 +148,9 @@ public class ModuleGuardiansJUnitTest
                 "    \"canChangeStatusEffect\": false,\n" +
                 "    \"statusEffect\": \"healthy\",\n" +
                 "    \"probabilityToChangeStatusEffect\": 0,\n" +
-                "    \"areaDamage\": false" +
+                "    \"areaDamage\": false,\n" +
+                "    \"modifiedStats\": {\"PStr\": 0, \"PDef\": 0, \"MStr\": 0, \"MDef\": 0, \"Speed\": 0},\n" +
+                "    \"healedStats\": {\"HP\": 0, \"MP\": 0}" +
             "  }" +
             "]";
 
@@ -158,6 +162,7 @@ public class ModuleGuardiansJUnitTest
 
         Ability ability = abilities.getAbility(Element.NONE, 1);
 
+
         assertEquals(ability.ID, 1);
         assertEquals(ability.element, Element.NONE);
         assertEquals(ability.name, "attNone1_selfdef");
@@ -167,6 +172,15 @@ public class ModuleGuardiansJUnitTest
         assertEquals(ability.canChangeStatusEffect, false);
         assertEquals(ability.statusEffect, IndividualStatistics.StatusEffect.HEALTHY);
         assertEquals(ability.probabilityToChangeStatusEffect, 0);
+        assertEquals(ability.changesStats, false);
+        assertEquals(ability.addsPStr, 0);
+        assertEquals(ability.addsPDef, 0);
+        assertEquals(ability.addsMStr, 0);
+        assertEquals(ability.addsMDef, 0);
+        assertEquals(ability.addsSpeed, 0);
+        assertEquals(ability.curesStats, false);
+        assertEquals(ability.curesHP, 0);
+        assertEquals(ability.curesMP, 0);
 
         ability = abilities.getAbility(Element.NONE, 2);
 
@@ -179,6 +193,15 @@ public class ModuleGuardiansJUnitTest
         assertEquals(ability.canChangeStatusEffect, false);
         assertEquals(ability.statusEffect, IndividualStatistics.StatusEffect.HEALTHY);
         assertEquals(ability.probabilityToChangeStatusEffect, 0);
+        assertEquals(ability.changesStats, false);
+        assertEquals(ability.addsPStr, 0);
+        assertEquals(ability.addsPDef, 0);
+        assertEquals(ability.addsMStr, 0);
+        assertEquals(ability.addsMDef, 0);
+        assertEquals(ability.addsSpeed, 0);
+        assertEquals(ability.curesStats, false);
+        assertEquals(ability.curesHP, 0);
+        assertEquals(ability.curesMP, 0);
 
         System.out.println("[Test 2] Ability parsed correctly");
     }
@@ -296,8 +319,14 @@ public class ModuleGuardiansJUnitTest
         assertEquals(8, StatCalculator.calcEXPtoReachLevel(2));
         assertEquals(27, StatCalculator.calcEXPtoReachLevel(3));
         assertEquals(125, StatCalculator.calcEXPtoReachLevel(5));
-        assertEquals(StatCalculator.calcEXPavailableAtLevel(2)+StatCalculator.calcEXPavailableAtLevel(1), StatCalculator.calcEXPtoReachLevel(3));
-        assertEquals(StatCalculator.calcEXPavailableAtLevel(5), StatCalculator.calcEXPtoReachLevel(6)-StatCalculator.calcEXPtoReachLevel(5));
+        assertEquals(
+            StatCalculator.calcEXPavailableAtLevel(2) + StatCalculator.calcEXPavailableAtLevel(1),
+            StatCalculator.calcEXPtoReachLevel(3)
+        );
+        assertEquals(
+            StatCalculator.calcEXPavailableAtLevel(5),
+            StatCalculator.calcEXPtoReachLevel(6)-StatCalculator.calcEXPtoReachLevel(5)
+        );
     }
 
     @Test
@@ -384,12 +413,14 @@ public class ModuleGuardiansJUnitTest
 
         int expectedDamage = MathUtils.ceil(1.0f * ((0.5f * 1 + 1) * 10 * (10.0f / 11.0f) + 50) / 5f);
         System.out.println("Expected Damage: " + expectedDamage);
-        AttackCalculationReport report = BattleCalculator.calcAttack(winner, looser, new Ability(1, Ability.DamageType.PHYSICAL, Element.NONE, 10, ""));
+        AttackCalculationReport report = BattleCalculator.calcAttack(winner, looser,
+            new Ability.aID(1, Element.NONE));
         assertEquals(expectedDamage, report.damage);
 
         BattleCalculator.apply(report);
 
-        assertEquals(StatCalculator.calculateHP(IndividualStatistics.Growth.MED, 1, 300, 0, 0) - 13, looser.getIndividualStatistics().getHP());
+        assertEquals(StatCalculator.calculateHP(IndividualStatistics.Growth.MED, 1, 300, 0, 0) - 13,
+            looser.getIndividualStatistics().getHP());
 
         ModuleGuardians.destroyModule();
     }

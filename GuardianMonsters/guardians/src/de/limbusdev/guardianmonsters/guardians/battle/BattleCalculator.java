@@ -3,12 +3,12 @@ package de.limbusdev.guardianmonsters.guardians.battle;
 
 import com.badlogic.gdx.math.MathUtils;
 
+import de.limbusdev.guardianmonsters.guardians.GuardiansServiceLocator;
 import de.limbusdev.guardianmonsters.guardians.abilities.Ability;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics;
+import de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics.StatusEffect;
 import de.limbusdev.guardianmonsters.guardians.monsters.Team;
-
-import static de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics.StatusEffect.HEALTHY;
 
 /**
  * Handles events of monsters like level up, earning EXP, changing status and so on
@@ -26,8 +26,8 @@ public class BattleCalculator
     {
         System.out.println("Monster defends itself");
         AttackCalculationReport report = new AttackCalculationReport(defender);
-        defender.getIndividualStatistics().increasePDef(5);
-        defender.getIndividualStatistics().increaseMDef(5);
+        defender.getIndividualStatistics().modifyPDef(5);
+        defender.getIndividualStatistics().modifyMDef(5);
 
         return report;
     }
@@ -44,10 +44,12 @@ public class BattleCalculator
      * @param defender
      * @return
      */
-    public static AttackCalculationReport calcAttack(AGuardian attacker, AGuardian defender, Ability ability)
+    public static AttackCalculationReport calcAttack(AGuardian attacker, AGuardian defender, Ability.aID abilityID)
     {
         System.out.println("\n--- new ability ---");
-        AttackCalculationReport report = new AttackCalculationReport(attacker, defender, 0, 0, ability, false, HEALTHY);
+        Ability ability = GuardiansServiceLocator.getAbilities().getAbility(abilityID);
+        AttackCalculationReport report = new AttackCalculationReport(
+            attacker, defender, ability, 0, 0, false, StatusEffect.HEALTHY, false, 0, 0, 0, 0, 0, false, 0, 0);
 
         // Elemental Efficiency
         float eff = ElemEff.singelton().getElemEff(ability.element, defender.getSpeciesDescription().getElements(0));   // TODO elements currentForm
@@ -75,22 +77,49 @@ public class BattleCalculator
         int level = statAtt.getLevel();
 
         /* Calculate Damage */
-        float damage = eff * ((0.5f * level + 1) * abilityStrength * ratioSD + 50) / 5f;
+        float damage;
+        if(abilityStrength == 0) {
+            damage = 0;
+        } else {
+            damage = eff * ((0.5f * level + 1) * abilityStrength * ratioSD + 50) / 5f;
+        }
 
         report.damage = MathUtils.ceil(damage);
         report.efficiency = eff;
 
         // Consider StatusEffect
-        if(ability.canChangeStatusEffect && statDef.getStatusEffect().equals(HEALTHY)) {
+        if(ability.canChangeStatusEffect && statDef.getStatusEffect().equals(StatusEffect.HEALTHY)) {
 
             boolean willChange = MathUtils.randomBoolean(ability.probabilityToChangeStatusEffect/100f);
             if(willChange) {
                 report.newStatusEffect = ability.statusEffect;
                 report.changedStatusEffect = true;
             }
+
         } else {
+
             // Can't change StatusEffect if it is already changed
             report.changedStatusEffect = false;
+
+        }
+
+        // Handle Stat changing
+        if(ability.changesStats)
+        {
+            report.modifiedStat = true;
+            report.modifiedPStr = ability.addsPStr;
+            report.modifiedPDef = ability.addsPDef;
+            report.modifiedMStr = ability.addsMStr;
+            report.modifiedMDef = ability.addsMDef;
+            report.modifiedSpeed = ability.addsSpeed;
+        }
+
+        // Handle Stat curing
+        if(ability.curesStats)
+        {
+            report.healedStat = true;
+            report.healedHP = ability.curesHP;
+            report.healedMP = ability.curesMP;
         }
 
         // Print Battle Debug Message
@@ -108,14 +137,41 @@ public class BattleCalculator
      */
     public static void apply(AttackCalculationReport report)
     {
-        if(report.defender == null) {
+        if(report.defending == null) {
+
             System.out.println("Only self defending");
             return;
         }
-        System.out.println(report.attacker.getUUID() + " attacks " + report.defender.getUUID() + " with " + report.attack.name);
-        report.defender.getIndividualStatistics().decreaseHP(report.damage);
-        report.attacker.getIndividualStatistics().decreaseMP(report.attack.MPcost);
-        if(report.changedStatusEffect) report.defender.getIndividualStatistics().setStatusEffect(report.newStatusEffect);
+
+        AGuardian defending = report.defending;
+        AGuardian attacking = report.attacking;
+
+        System.out.println(report.attacking.getUUID() + " attacks " + defending.getUUID() + " with " + report.attack.name);
+        defending.getIndividualStatistics().decreaseHP(report.damage);
+        attacking.getIndividualStatistics().decreaseMP(report.attack.MPcost);
+
+        // Apply Status Effect
+        if(report.changedStatusEffect) {
+
+            defending.getIndividualStatistics().setStatusEffect(report.newStatusEffect);
+        }
+
+        // Apply Stat Change
+        if(report.modifiedStat) {
+
+            defending.getIndividualStatistics().modifyPStr(report.modifiedPStr);
+            defending.getIndividualStatistics().modifyPDef(report.modifiedPDef);
+            defending.getIndividualStatistics().modifyMStr(report.modifiedMStr);
+            defending.getIndividualStatistics().modifyMDef(report.modifiedMDef);
+            defending.getIndividualStatistics().modifySpeed(report.modifiedSpeed);
+        }
+
+        // Apply Stat Cure
+        if(report.healedStat) {
+
+            defending.getIndividualStatistics().healHP(report.healedHP);
+            defending.getIndividualStatistics().healMP(report.healedMP);
+        }
     }
 
     public static boolean tryToRun(Team escapingTeam, Team attackingTeam)
@@ -126,6 +182,7 @@ public class BattleCalculator
         for(AGuardian m : escapingTeam.values())
         {
             if(m.getIndividualStatistics().isFit()) {
+
                 meanEscapingTeamLevel += m.getIndividualStatistics().getLevel();
             }
         }

@@ -8,8 +8,8 @@
     "damageType": "magical",
     "canChangeStatusEffect": false,
     "statusEffect": "healthy",
-    "probabilityToChangeStatusEffect": 0,
-    "areaDamage": false
+    "modifiedStats": {"PStr": 0, "PDef": 0, "MStr": 0, "MDef": 0, "Speed": 0},
+    "healedStats": {"HP": 0, "MP": 0}
   },
   {
     "ID": 2,
@@ -20,8 +20,8 @@
     "damageType": "magical",
     "canChangeStatusEffect": false,
     "statusEffect": "healthy",
-    "probabilityToChangeStatusEffect": 0,
-    "areaDamage": false
+    "modifiedStats": {"PStr": 0, "PDef": 0, "MStr": 0, "MDef": 0, "Speed": 0},
+    "healedStats": {"HP": 0, "MP": 0}
   },
   {
     "ID": 3,
@@ -33,7 +33,9 @@
     "canChangeStatusEffect": false,
     "statusEffect": "healthy",
     "probabilityToChangeStatusEffect": 0,
-    "areaDamage": false
+    "areaDamage": false,
+    "modifiedStats": {"PStr": 0, "PDef": 0, "MStr": 0, "MDef": 0, "Speed": 0},
+    "healedStats": {"HP": 0, "MP": 0}
   },
   {
     "ID": 4,
@@ -45,7 +47,9 @@
     "canChangeStatusEffect": false,
     "statusEffect": "healthy",
     "probabilityToChangeStatusEffect": 0,
-    "areaDamage": false
+    "areaDamage": false,
+    "modifiedStats": {"PStr": 0, "PDef": 0, "MStr": 0, "MDef": 0, "Speed": 0},
+    "healedStats": {"HP": 0, "MP": 0}
   },
   {
     "ID": 5,
@@ -57,6 +61,8 @@
     "canChangeStatusEffect": false,
     "statusEffect": "healthy",
     "probabilityToChangeStatusEffect": 0,
-    "areaDamage": true
+    "areaDamage": true,
+    "modifiedStats": {"PStr": 0, "PDef": 0, "MStr": 0, "MDef": 0, "Speed": 0},
+    "healedStats": {"HP": 0, "MP": 0}
   }
 ]

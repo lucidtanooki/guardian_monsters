@@ -36,6 +36,18 @@
     "animationType": "contact"
   },
   {
+    "name": "attNone7_shield",
+    "sfxType": "hit",
+    "sfxIndex": 0,
+    "animationType": "contactless"
+  },
+  {
+    "name": "attNone8_cure",
+    "sfxType": "hit",
+    "sfxIndex": 0,
+    "animationType": "contactless"
+  },
+  {
     "name": "attEarth1_dirt",
     "sfxType": "hit",
     "sfxIndex": 0,

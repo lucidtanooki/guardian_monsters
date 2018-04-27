@@ -74,8 +74,8 @@ public class BattleStringBuilder
             case 2:
                 report1 = reports.get(0);
                 report2 = reports.get(1);
-                defName1 = Services.getL18N().getGuardianNicknameIfAvailable(report1.defender);
-                defName2 = Services.getL18N().getGuardianNicknameIfAvailable(report2.defender);
+                defName1 = Services.getL18N().getGuardianNicknameIfAvailable(report1.defending);
+                defName2 = Services.getL18N().getGuardianNicknameIfAvailable(report2.defending);
 
                 message += Services.getL18N().Battle().format(
                     "batt_area_message_2", defName1, report1.damage, defName2, report2.damage);
@@ -85,9 +85,9 @@ public class BattleStringBuilder
                 report1 = reports.get(0);
                 report2 = reports.get(1);
                 report3 = reports.get(2);
-                defName1 = Services.getL18N().getGuardianNicknameIfAvailable(report1.defender);
-                defName2 = Services.getL18N().getGuardianNicknameIfAvailable(report2.defender);
-                defName3 = Services.getL18N().getGuardianNicknameIfAvailable(report3.defender);
+                defName1 = Services.getL18N().getGuardianNicknameIfAvailable(report1.defending);
+                defName2 = Services.getL18N().getGuardianNicknameIfAvailable(report2.defending);
+                defName3 = Services.getL18N().getGuardianNicknameIfAvailable(report3.defending);
 
                 message += Services.getL18N().Battle().format(
                     "batt_area_message_3", defName1, report1.damage, defName2, report2.damage, defName3, report3.damage);
@@ -96,7 +96,7 @@ public class BattleStringBuilder
 
             default: // case 0:
                 report1 = reports.get(0);
-                defName1 = Services.getL18N().getGuardianNicknameIfAvailable(report1.defender);
+                defName1 = Services.getL18N().getGuardianNicknameIfAvailable(report1.defending);
 
                 message += Services.getL18N().Battle().format(
                     "batt_area_message_0", defName1, report1.damage);

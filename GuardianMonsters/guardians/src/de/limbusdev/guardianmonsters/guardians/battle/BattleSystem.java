@@ -97,12 +97,12 @@ public class BattleSystem
         }
 
         // Calculate Ability
-        Ability.aID aID= getActiveMonster().getAbilityGraph().getActiveAbilities().get(attack);
+        Ability.aID aID = getActiveMonster().getAbilityGraph().getActiveAbilities().get(attack);
         Ability ability = GuardiansServiceLocator.getAbilities().getAbility(aID);
 
 
         AGuardian attacker = getActiveMonster();
-        latestAttackReport = BattleCalculator.calcAttack(attacker, target, ability);
+        latestAttackReport = BattleCalculator.calcAttack(attacker, target, aID);
         callbacks.onAttack(attacker, target, ability, latestAttackReport);
     }
 
@@ -121,7 +121,7 @@ public class BattleSystem
         latestAreaAttackReports = new Array<>();
         for(AGuardian g : targets.values())
         {
-            AttackCalculationReport report = BattleCalculator.calcAttack(attacker, g, ability);
+            AttackCalculationReport report = BattleCalculator.calcAttack(attacker, g, aID);
             latestAreaAttackReports.add(report);
         }
         callbacks.onAreaAttack(attacker, targets, ability, latestAreaAttackReports);

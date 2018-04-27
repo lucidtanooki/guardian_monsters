@@ -35,10 +35,7 @@ public class Ability
         }
     }
 
-    public enum DamageType
-    {
-        MAGICAL, PHYSICAL
-    }
+    public enum DamageType { MAGICAL, PHYSICAL }
 
     /* ............................................................................ ATTRIBUTES .. */
     public int ID;
@@ -52,6 +49,10 @@ public class Ability
     public boolean canChangeStatusEffect;
     public IndividualStatistics.StatusEffect statusEffect;
     public int probabilityToChangeStatusEffect;
+    public boolean changesStats;
+    public boolean curesStats;
+    public int addsPStr, addsPDef, addsMStr, addsMDef, addsSpeed;
+    public int curesHP, curesMP;
 
     /* ........................................................................... CONSTRUCTOR .. */
     /**
@@ -107,6 +108,31 @@ public class Ability
     public Ability(int ID, DamageType damageType, Element element, int damage, String name, int MPcost, boolean areaDamage,
                    boolean canChangeStatusEffect, IndividualStatistics.StatusEffect statusEffect, int probabilityToChangeStatusEffect)
     {
+        this(ID, damageType, element, damage, name, 0, areaDamage,
+            canChangeStatusEffect, statusEffect, probabilityToChangeStatusEffect,
+            false, 0, 0, 0, 0, 0, false, 0, 0);
+    }
+
+    /**
+     * For stat changing or curing abilities
+     * @param ID
+     * @param damageType
+     * @param element
+     * @param damage
+     * @param name
+     * @param MPcost
+     * @param areaDamage
+     * @param canChangeStatusEffect
+     * @param statusEffect
+     * @param probabilityToChangeStatusEffect
+     */
+    public Ability(
+        int ID, DamageType damageType, Element element, int damage, String name, int MPcost,
+        boolean areaDamage, boolean canChangeStatusEffect,
+        IndividualStatistics.StatusEffect statusEffect, int probabilityToChangeStatusEffect,
+        boolean changesStats, int addsPStr, int addsPDef, int addsMStr, int addsMDef, int addsSpeed,
+        boolean curesStats, int curesHP, int curesMP)
+    {
         this.ID = ID;
         this.element = element;
         this.damageType = damageType;
@@ -117,6 +143,15 @@ public class Ability
         this.canChangeStatusEffect = canChangeStatusEffect;
         this.statusEffect = statusEffect;
         this.probabilityToChangeStatusEffect = probabilityToChangeStatusEffect;
+        this.changesStats = changesStats;
+        this.addsPStr = addsPStr;
+        this.addsPDef = addsPDef;
+        this.addsMStr = addsMStr;
+        this.addsMDef = addsMDef;
+        this.addsSpeed = addsSpeed;
+        this.curesStats = curesStats;
+        this.curesHP = curesHP;
+        this.curesMP = curesMP;
     }
 
     @Override

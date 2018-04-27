@@ -344,7 +344,8 @@ public class IndividualStatistics
      * Increases Physical Strength, by the given fraction (%)
      * @param fraction
      */
-    public void increasePStr(int fraction) {
+    public void modifyPStr(int fraction)
+    {
         setPStr(MathUtils.round(currentStatValues.PStr * (100 + fraction)/(100f)));
     }
 
@@ -352,7 +353,8 @@ public class IndividualStatistics
      * Increases Physical Defense, by the given fraction (%)
      * @param fraction
      */
-    public void increasePDef(int fraction) {
+    public void modifyPDef(int fraction)
+    {
         setPDef(MathUtils.round(currentStatValues.PDef * (100 + fraction)/(100f)));
     }
 
@@ -360,7 +362,8 @@ public class IndividualStatistics
      * Increases Magical Strength, by the given fraction (%)
      * @param fraction
      */
-    public void increaseMStr(int fraction) {
+    public void modifyMStr(int fraction)
+    {
         setMStr(MathUtils.round(currentStatValues.MStr * (100 + fraction)/(100f)));
     }
 
@@ -368,7 +371,8 @@ public class IndividualStatistics
      * Increases Magical Defense, by the given fraction (%)
      * @param fraction
      */
-    public void increaseMDef(int fraction) {
+    public void modifyMDef(int fraction)
+    {
         setMDef(MathUtils.round(currentStatValues.MDef * (100 + fraction)/(100f)));
     }
 
@@ -376,7 +380,8 @@ public class IndividualStatistics
      * Increases Speed, by the given fraction (%)
      * @param fraction
      */
-    public void increaseSpeed(int fraction) {
+    public void modifySpeed(int fraction)
+    {
         setSpeed(MathUtils.round(currentStatValues.Speed * (100 + fraction)/(100f)));
     }
 
@@ -872,6 +877,7 @@ public class IndividualStatistics
     }
 
     public void setSpeed(int Speed) {
+
         currentStatValues.Speed = Speed;
 
         if(Speed > getSpeedMax()) currentStatValues.Speed = getSpeedMax();
@@ -882,10 +888,23 @@ public class IndividualStatistics
     }
 
     /**
+     * Resets boostable Stats: PStr, PDef, MStr, MDef, Speed
+     */
+    public void resetModifiedStats()
+    {
+        setPStr(getPStrMax());
+        setPDef(getPDefMax());
+        setMStr(getMStrMax());
+        setMDef(getMDefMax());
+        setSpeed(getSpeedMax());
+    }
+
+    /**
      * Reduces the number of available ability levels by 1,
      * usually, when a field in the ability board is activated
      */
     public void consumeAbilityLevel() {
+
         this.abilityLevels--;
         core.setStatisticsChanged();
         core.notifyObservers();

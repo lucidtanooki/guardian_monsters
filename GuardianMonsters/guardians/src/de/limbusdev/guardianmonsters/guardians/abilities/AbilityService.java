@@ -54,7 +54,16 @@ public class AbilityService implements IAbilityService
                 jsa.areaDamage,
                 jsa.canChangeStatusEffect,
                 IndividualStatistics.StatusEffect.valueOf(jsa.statusEffect.toUpperCase()),
-                jsa.probabilityToChangeStatusEffect
+                jsa.probabilityToChangeStatusEffect,
+                jsa.modifiedStats.changesStats(),
+                jsa.modifiedStats.PStr,
+                jsa.modifiedStats.PDef,
+                jsa.modifiedStats.MStr,
+                jsa.modifiedStats.MDef,
+                jsa.modifiedStats.Speed,
+                jsa.healedStats.curesStats(),
+                jsa.healedStats.HP,
+                jsa.healedStats.MP
             );
             elAbilities.put(ability.ID, ability);
         }
@@ -87,8 +96,8 @@ public class AbilityService implements IAbilityService
     public static synchronized AbilityService getInstanceFromFile(ArrayMap<Element,String> jsonFilePaths)
     {
         ArrayMap<Element,String> jsonResources = new ArrayMap<>();
-        for(Element key : jsonFilePaths.keys()) {
-
+        for(Element key : jsonFilePaths.keys())
+        {
             FileHandle handleJson = Gdx.files.internal(jsonFilePaths.get(key));
             String jsonString = handleJson.readString();
             jsonResources.put(key, jsonString);
@@ -126,6 +135,18 @@ public class AbilityService implements IAbilityService
      */
     private static class JsonAbility
     {
+        private static class JsonAbilityModifiedStats
+        {
+            public int PStr, PDef, MStr, MDef, Speed;
+            public boolean changesStats() {return (PStr!=0 || PDef!=0 || MStr!=0 || MDef!=0 || Speed!=0);}
+        }
+
+        private static class JsonAbilityHealedStats
+        {
+            public int HP, MP;
+            public boolean curesStats() {return (HP != 0 || MP != 0);}
+        }
+
         public int ID;
         public String name;
         public int damage;
@@ -136,6 +157,9 @@ public class AbilityService implements IAbilityService
         public boolean canChangeStatusEffect;
         public int probabilityToChangeStatusEffect;
         public boolean areaDamage;
+
+        public JsonAbilityModifiedStats modifiedStats;
+        public JsonAbilityHealedStats healedStats;
 
         @Override
         public String toString()

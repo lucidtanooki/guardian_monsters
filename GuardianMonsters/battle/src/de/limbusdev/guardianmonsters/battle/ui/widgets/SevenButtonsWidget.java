@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ArrayMap;
 
@@ -162,5 +163,44 @@ public class SevenButtonsWidget extends BattleWidget
     // INNER INTERFACE
     public interface Callbacks {
         void onButtonNr(int nr);
+    }
+
+    public static class CentralHalfButtonsAddOn extends BattleWidget
+    {
+        private ArrayMap<Integer,TextButton> buttons;
+        private Callbacks callbacks;
+        protected Skin skin;
+
+        public CentralHalfButtonsAddOn(Skin skin, Callbacks callbacks)
+        {
+            super();
+            this.buttons = new ArrayMap<>();
+            this.callbacks = callbacks;
+            this.skin = skin;
+
+            TextButton tb;
+            tb = new BattleHUDTextButton("info", skin, 7, Element.NONE);
+            buttons.put(7,tb);
+            addActor(tb);
+            tb = new BattleHUDTextButton("back", skin, 8, Element.NONE);
+            buttons.put(8,tb);
+            addActor(tb);
+
+            for (int i = 7; i <= 8; i++) {
+                final int j = i;
+                final TextButton attButt = buttons.get(i);
+                attButt.addListener(
+                    new ClickListener()
+                    {
+                        @Override
+                        public void clicked(InputEvent event, float x, float y)
+                        {
+                            super.clicked(event,x,y);
+                            if(!attButt.isDisabled()) {callbacks.onButtonNr(j);}
+                        }
+                    }
+                );
+            }
+        }
     }
 }

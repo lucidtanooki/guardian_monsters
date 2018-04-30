@@ -33,6 +33,9 @@ import de.limbusdev.guardianmonsters.guardians.monsters.Team;
 import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.ui.Constant;
 
+import static de.limbusdev.guardianmonsters.battle.ui.widgets.BattleHUDTextButton.CENTERBOTTOM;
+import static de.limbusdev.guardianmonsters.battle.ui.widgets.BattleHUDTextButton.CENTERTOP;
+
 
 /**
  * BattleHUD manages all actions and UI elements in the {@link BattleScreen}
@@ -54,6 +57,7 @@ public class BattleHUD extends ABattleHUD
     private BattleMainMenuWidget        mainMenu;
     private BattleActionMenuWidget      actionMenu;
     private AttackMenuWidget            attackMenu;
+    private AttackMenuWidget            attackInfoMenu;
     private BattleAnimationWidget       animationWidget;
     private BattleStatusOverviewWidget  statusWidget;
     private BattleQueueWidget           battleQueueWidget;
@@ -61,6 +65,9 @@ public class BattleHUD extends ABattleHUD
     private TargetMenuWidget            targetMenuWidget;
     private TargetMenuWidget            targetAreaMenuWidget;
     private MonsterMenuWidget           monsterMenuWidget;
+    private InfoLabelWidget             abilityInfoWidget;
+
+    private SevenButtonsWidget.CentralHalfButtonsAddOn attackMenuAddOn;
 
     // CallbackHandlers
     private BattleActionMenuWidget.Callbacks    battleActionCallbacks;
@@ -68,6 +75,7 @@ public class BattleHUD extends ABattleHUD
     private BattleActionMenuWidget.Callbacks    infoLabelCallbacks;
     private BattleActionMenuWidget.Callbacks    infoLabelStatusEffectCallbacks;
     private BattleActionMenuWidget.Callbacks    endOfBattleCallbacks;
+    private BattleActionMenuWidget.Callbacks    attackDetailInfoCallbacks;
     private SevenButtonsWidget.Callbacks        attackMenuCallbacks;
     private BattleSystem.Callbacks              battleSystemCallbacks;
     private SevenButtonsWidget.Callbacks        targetMenuCallbacks;
@@ -78,6 +86,8 @@ public class BattleHUD extends ABattleHUD
     private BattleActionMenuWidget.Callbacks    escapeFailCallbacks;
     private BattleAnimationWidget.Callbacks     battleAnimationCallbacks;
     private SevenButtonsWidget.Callbacks        monsterMenuCallbacks;
+    private SevenButtonsWidget.Callbacks        attackMenuAddOnCallbacks;
+    private SevenButtonsWidget.Callbacks        attackInfoMenuCallbacks;
 
     private Team leftTeam, rightTeam;
     private Inventory inventory;
@@ -169,6 +179,8 @@ public class BattleHUD extends ABattleHUD
         mainMenu            = new BattleMainMenuWidget(skin, mainMenuCallbacks);
         actionMenu          = new BattleActionMenuWidget(skin, battleActionCallbacks);
         attackMenu          = new AttackMenuWidget(skin, attackMenuCallbacks::onButtonNr);
+        attackInfoMenu      = new AttackMenuWidget(skin, attackInfoMenuCallbacks);
+        attackMenuAddOn     = new SevenButtonsWidget.CentralHalfButtonsAddOn(skin, attackMenuAddOnCallbacks);
         targetMenuWidget    = new TargetMenuWidget(skin, targetMenuCallbacks);
         targetAreaMenuWidget= new TargetMenuWidget(skin, targetAreaMenuCallbacks);
         monsterMenuWidget   = new MonsterMenuWidget(skin, monsterMenuCallbacks);
@@ -186,45 +198,36 @@ public class BattleHUD extends ABattleHUD
 
         battleStateSwitcher = new BattleStateSwitcher();
 
-        battleStartLabelCallbacks = new BattleActionMenuWidget.Callbacks() {
+        battleStartLabelCallbacks = new BattleActionMenuWidget.Callbacks()
+        {
             @Override
-            public void onMonsterButton() {
-                // Not needed
-            }
-
-            @Override
-            public void onBagButton() {
-                // not needed
-            }
-
-            @Override
-            public void onBackButton() {
+            public void onBackButton()
+            {
                 System.out.println("BattleStartLabel: onBackButton()");
                 battleStateSwitcher.toMainMenu();
             }
-
-            @Override
-            public void onExtraButton() {
-                // not needed
-            }
         };
 
-        battleActionCallbacks = new BattleActionMenuWidget.Callbacks() {
+        battleActionCallbacks = new BattleActionMenuWidget.Callbacks()
+        {
             @Override
-            public void onMonsterButton() {
+            public void onMonsterButton()
+            {
                 System.out.println("Show Monster Menu");
                 monsterMenuWidget.init(battleSystem, Constant.LEFT);
                 battleStateSwitcher.toTeamMenu();
             }
 
             @Override
-            public void onBagButton() {
+            public void onBagButton()
+            {
                 // TODO make new widget, as this one belongs to package inventory and is not accessible here
                 /*stage.addActor(new ItemChoice(Services.getUI().getInventorySkin(), inventory, leftTeam, battleSystem));*/
             }
 
             @Override
-            public void onBackButton() {
+            public void onBackButton()
+            {
                 System.out.println("BattleActionButtons: onBackButton()");
                 battleStateSwitcher.toMainMenu();
             }
@@ -235,7 +238,8 @@ public class BattleHUD extends ABattleHUD
             }
         };
 
-        mainMenuCallbacks = new BattleMainMenuWidget.Callbacks() {
+        mainMenuCallbacks = new BattleMainMenuWidget.Callbacks()
+        {
             @Override
             public void onRunButton() {
                 System.out.println("Input: Run Button");
@@ -269,6 +273,15 @@ public class BattleHUD extends ABattleHUD
             }
         };
 
+        attackDetailInfoCallbacks = new BattleActionMenuWidget.Callbacks()
+        {
+            @Override
+            public void onBackButton()
+            {
+                abilityInfoWidget.remove();
+            }
+        };
+
         infoLabelStatusEffectCallbacks = new BattleActionMenuWidget.Callbacks()
         {
             @Override
@@ -285,7 +298,8 @@ public class BattleHUD extends ABattleHUD
         endOfBattleCallbacks = new BattleActionMenuWidget.Callbacks()
         {
             @Override
-            public void onBackButton() {
+            public void onBackButton()
+            {
                 boolean teamOk = false;
                 for(AGuardian m : leftTeam.values()) {
                     if(m.getIndividualStatistics().isFit()) {
@@ -318,6 +332,24 @@ public class BattleHUD extends ABattleHUD
                 battleStateSwitcher.toTargetAreaChoice();
             } else {
                 battleStateSwitcher.toTargetChoice();
+            }
+        };
+
+        attackInfoMenuCallbacks = nr ->
+        {
+            abilityInfoWidget.setWholeText("Example");
+            // TODO show information about chosen attack
+        };
+
+        attackMenuAddOnCallbacks = nr ->
+        {
+            switch(nr)
+            {
+                case CENTERTOP: // TODO
+                    break;
+                case CENTERBOTTOM:
+                    break;
+                default:;
             }
         };
 
@@ -529,6 +561,7 @@ public class BattleHUD extends ABattleHUD
             battleQueueWidget.addToStage(stage);
             actionMenu.addToStage(stage);
             attackMenu.addToStage(stage);
+            attackMenuAddOn.addToStage(stage);
 
             // Setup Widgets
             actionMenu.setCallbacks(battleActionCallbacks);
@@ -679,6 +712,7 @@ public class BattleHUD extends ABattleHUD
             statusWidget.remove();
             actionMenu.remove();
             battleQueueWidget.remove();
+            attackMenuAddOn.remove();
 
             actionMenu.enable();
         }

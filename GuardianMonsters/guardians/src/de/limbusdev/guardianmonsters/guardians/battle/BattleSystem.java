@@ -415,9 +415,11 @@ public class BattleSystem
         {
             boolean foundTarget = false;
             AGuardian target;
-            while(!foundTarget) {
+            while(!foundTarget)
+            {
                 target = queue.getCombatTeamLeft().getRandomFitMember();
-                if(target.getIndividualStatistics().isFit()) {
+                if(target.getIndividualStatistics().isFit())
+                {
                     foundTarget = true;
                     setChosenTarget(target);
                 }

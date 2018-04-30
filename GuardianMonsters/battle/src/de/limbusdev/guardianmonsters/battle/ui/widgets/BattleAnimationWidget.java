@@ -11,6 +11,7 @@ package de.limbusdev.guardianmonsters.battle.ui.widgets;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.Action;
@@ -48,8 +49,8 @@ public class BattleAnimationWidget extends BattleWidget
 
     private ArrayMap<Integer,Image> monsterImgsLeft, monsterImgsRight;
     private Array<Image> zSortedMonsterImgs;
-    private ArrayMap<Integer, Animation<TextureRegion>>
-        statusEffectIndicatorsLeft, getStatusEffectIndicatorsRight;
+    private ArrayMap<Integer, Animation<TextureAtlas.AtlasRegion>>
+        statusEffectIndicatorsLeft, statusEffectIndicatorsRight;
 
     public boolean attackAnimationRunning;
 
@@ -68,22 +69,46 @@ public class BattleAnimationWidget extends BattleWidget
         this.zSortedMonsterImgs = new Array<>();
         this.setBounds(0,0,0,0);
 
-        this.statusEffectIndicatorsLeft = new ArrayMap<>();
-        this.getStatusEffectIndicatorsRight = new ArrayMap<>();
+        // Status Effect Animations
+        {
+            this.statusEffectIndicatorsLeft = new ArrayMap<>();
+            this.statusEffectIndicatorsRight = new ArrayMap<>();
+
+            for (int i = 0; i <= 2; i++)
+            {
+                // left
+                statusEffectIndicatorsLeft.put(i, Services.getMedia().getStatusEffectAnimation(
+                    IndividualStatistics.StatusEffect.HEALTHY.toString().toLowerCase()
+                ));
+                // right
+                statusEffectIndicatorsRight.put(i, Services.getMedia().getStatusEffectAnimation(
+                    IndividualStatistics.StatusEffect.HEALTHY.toString().toLowerCase()
+                ));
+            }
+        }
 
         this.callbacks = callbacks;
 
     }
 
+    /**
+     * Changes to the correct status effect animation of a Guardian
+     * @param position
+     * @param side
+     * @param statusEffect
+     */
     public void setStatusEffect(
         int position,
         boolean side,
         IndividualStatistics.StatusEffect statusEffect)
     {
-        if(statusEffect == IndividualStatistics.StatusEffect.HEALTHY) {
-            // TODO: set empty animation
-        } else {
-            // TODO: set correct animation
+        Animation<TextureAtlas.AtlasRegion> anim = Services.getMedia().getStatusEffectAnimation(
+            statusEffect.toString().toLowerCase());
+
+        if(side == LEFT) {
+            statusEffectIndicatorsLeft.put(position, anim);
+        } else /* (side == RIGHT) */ {
+            statusEffectIndicatorsRight.put(position, anim);
         }
     }
 

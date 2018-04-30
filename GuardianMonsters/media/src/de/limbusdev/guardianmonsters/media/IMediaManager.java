@@ -51,6 +51,8 @@ public interface IMediaManager
 
     Animation<AtlasRegion> getAttackAnimation(String attack);
 
+    Animation<AtlasRegion> getStatusEffectAnimation(String statusEffect);
+
     /**
      * 0 - Water
      * 1 - Water Inner NE

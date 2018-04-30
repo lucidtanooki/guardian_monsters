@@ -21,12 +21,7 @@ public abstract class BattleWidget extends WidgetGroup {
         super();
 
         // Controller
-        runnableRemove = new Runnable() {
-            @Override
-            public void run() {
-                superRemove();
-            }
-        };
+        runnableRemove = () -> superRemove();
 
     }
 

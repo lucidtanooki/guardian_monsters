@@ -1,0 +1,383 @@
+
+statusEffectAnimations.png
+format: RGBA8888
+filter: MipMapNearestNearest,MipMapNearestLinear
+repeat: none
+status_effect_blind
+  rotate: false
+  xy: 1, 69
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: 1
+status_effect_lucatic
+  rotate: false
+  xy: 1, 35
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: 6
+status_effect_lucatic
+  rotate: false
+  xy: 1, 35
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: 2
+status_effect_blind
+  rotate: false
+  xy: 67, 69
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: 2
+status_effect_poisoned
+  rotate: false
+  xy: 1, 1
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: 4
+status_effect_poisoned
+  rotate: false
+  xy: 1, 1
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: 5
+status_effect_poisoned
+  rotate: false
+  xy: 1, 1
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: 6
+status_effect_poisoned
+  rotate: false
+  xy: 67, 35
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: 8
+status_effect_poisoned
+  rotate: false
+  xy: 67, 35
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: 2
+status_effect_petrified
+  rotate: false
+  xy: 133, 69
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: 3
+status_effect_poisoned
+  rotate: false
+  xy: 67, 1
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: 10
+status_effect_poisoned
+  rotate: false
+  xy: 67, 1
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: 11
+status_effect_poisoned
+  rotate: false
+  xy: 67, 1
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: 12
+status_effect_blind
+  rotate: false
+  xy: 133, 35
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: 8
+status_effect_petrified
+  rotate: false
+  xy: 199, 69
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: 1
+status_effect_petrified
+  rotate: false
+  xy: 199, 69
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: 5
+status_effect_lucatic
+  rotate: false
+  xy: 133, 1
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: 8
+status_effect_lucatic
+  rotate: false
+  xy: 133, 1
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: 0
+status_effect_lucatic
+  rotate: false
+  xy: 133, 1
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: 11
+status_effect_lucatic
+  rotate: false
+  xy: 133, 1
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: 9
+status_effect_lucatic
+  rotate: false
+  xy: 133, 1
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: 10
+status_effect_sleeping
+  rotate: false
+  xy: 199, 35
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: 6
+status_effect_sleeping
+  rotate: false
+  xy: 199, 35
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: 7
+status_effect_sleeping
+  rotate: false
+  xy: 199, 35
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: 8
+status_effect_lucatic
+  rotate: false
+  xy: 265, 69
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: 5
+status_effect_lucatic
+  rotate: false
+  xy: 265, 69
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: 3
+status_effect_poisoned
+  rotate: false
+  xy: 199, 1
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: 9
+status_effect_poisoned
+  rotate: false
+  xy: 199, 1
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: 1
+status_effect_blind
+  rotate: false
+  xy: 265, 35
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: 7
+status_effect_sleeping
+  rotate: false
+  xy: 331, 69
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: 3
+status_effect_sleeping
+  rotate: false
+  xy: 331, 69
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: 5
+status_effect_sleeping
+  rotate: false
+  xy: 331, 69
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: 4
+status_effect_blind
+  rotate: false
+  xy: 265, 1
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: 6
+status_effect_blind
+  rotate: false
+  xy: 331, 35
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: 3
+status_effect_healthy
+  rotate: false
+  xy: 397, 69
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: 0
+status_effect_sleeping
+  rotate: false
+  xy: 331, 1
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: 0
+status_effect_sleeping
+  rotate: false
+  xy: 331, 1
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: 1
+status_effect_sleeping
+  rotate: false
+  xy: 331, 1
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: 2
+status_effect_petrified
+  rotate: false
+  xy: 397, 35
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: 2
+status_effect_petrified
+  rotate: false
+  xy: 397, 35
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: 4
+status_effect_lucatic
+  rotate: false
+  xy: 463, 69
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: 4
+status_effect_blind
+  rotate: false
+  xy: 397, 1
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: 4
+status_effect_blind
+  rotate: false
+  xy: 463, 35
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: 12
+status_effect_poisoned
+  rotate: false
+  xy: 529, 69
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: 0
+status_effect_lucatic
+  rotate: false
+  xy: 463, 1
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: 7
+status_effect_lucatic
+  rotate: false
+  xy: 463, 1
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: 1
+status_effect_blind
+  rotate: false
+  xy: 529, 35
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: 10
+status_effect_blind
+  rotate: false
+  xy: 595, 69
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: 9
+status_effect_poisoned
+  rotate: false
+  xy: 529, 1
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: 7
+status_effect_poisoned
+  rotate: false
+  xy: 529, 1
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: 3
+status_effect_blind
+  rotate: false
+  xy: 595, 35
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: 0
+status_effect_blind
+  rotate: false
+  xy: 661, 69
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: 11
+status_effect_blind
+  rotate: false
+  xy: 595, 1
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: 5
+status_effect_petrified
+  rotate: false
+  xy: 661, 35
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: 0

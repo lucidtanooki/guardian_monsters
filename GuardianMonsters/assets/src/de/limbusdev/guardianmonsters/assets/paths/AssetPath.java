@@ -34,6 +34,7 @@ public class AssetPath
             LOGOS = rootPath + "logos" + extension,
             ANIMATIONS = rootPath + "animations" + extension,
             ANIMATIONS_BATTLE = rootPath + "battleAnimations" + extension,
+            ANIMATIONS_STATUS_EFFECT = rootPath + "statusEffectAnimations" + extension,
             ANIMATIONS_BIG = rootPath + "bigAnimations" + extension,
             BATTLE_BG = rootPath + "battleBacks" + extension,
             PARTICLES = rootPath + "particles" + extension;

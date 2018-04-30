@@ -4,8 +4,8 @@ import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
@@ -145,8 +145,9 @@ public class MediaManager implements IMediaManager
     }
 
     @Override
-    public ArrayMap<SkyDirection, Animation<AtlasRegion>> getPersonAnimationSet(TextureAtlas textureAtlas) {
-        ArrayMap<SkyDirection, Animation<AtlasRegion>> animations = new ArrayMap<SkyDirection,Animation<AtlasRegion>>();
+    public ArrayMap<SkyDirection, Animation<AtlasRegion>> getPersonAnimationSet(TextureAtlas textureAtlas)
+    {
+        ArrayMap<SkyDirection, Animation<AtlasRegion>> animations = new ArrayMap<>();
 
         animations.put(SkyDirection.N, new Animation<>(.15f, textureAtlas.findRegions("n"), Animation.PlayMode.LOOP));
         animations.put(SkyDirection.E, new Animation<>(.15f, textureAtlas.findRegions("e"), Animation.PlayMode.LOOP));
@@ -212,6 +213,21 @@ public class MediaManager implements IMediaManager
         } else {
             anim = new Animation<>(1f / 12f, atlas.findRegions(attack), Animation.PlayMode.NORMAL);
         }
+        return anim;
+    }
+
+    @Override
+    public Animation<AtlasRegion> getStatusEffectAnimation(String statusEffect)
+    {
+        TextureAtlas atlas = assets.get("spritesheets/statusEffectAnimations.pack", TextureAtlas.class);
+        Animation<AtlasRegion> anim;
+
+        if(atlas.findRegions(statusEffect).size == 0) {
+            anim = new Animation<>(1f / 12f, atlas.findRegions("healthy"), Animation.PlayMode.LOOP);
+        } else {
+            anim = new Animation<>(1f / 12f, atlas.findRegions(statusEffect), Animation.PlayMode.LOOP);
+        }
+
         return anim;
     }
 

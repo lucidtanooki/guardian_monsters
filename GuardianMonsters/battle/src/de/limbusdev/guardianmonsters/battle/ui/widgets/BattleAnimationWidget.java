@@ -12,11 +12,9 @@ package de.limbusdev.guardianmonsters.battle.ui.widgets;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
@@ -29,7 +27,6 @@ import de.limbusdev.guardianmonsters.guardians.battle.BattleQueue;
 import de.limbusdev.guardianmonsters.guardians.battle.BattleSystem;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics;
-import de.limbusdev.guardianmonsters.scene2d.ImageZComparator;
 import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.ui.Constant;
 import de.limbusdev.guardianmonsters.utils.geometry.IntVec2;
@@ -47,8 +44,8 @@ public class BattleAnimationWidget extends BattleWidget
     private Array<WidgetObserver> observers;
     private ArrayMap<Integer,Boolean> leftPositionsOccupied, rightPositionsOccupied;
 
-    private ArrayMap<Integer,Image> monsterImgsLeft, monsterImgsRight;
-    private Array<Image> zSortedMonsterImgs;
+    private ArrayMap<Integer,BattleGuardianWidget> monsterImgsLeft, monsterImgsRight;
+    private Array<BattleGuardianWidget> zSortedMonsterImgs;
     private ArrayMap<Integer, Animation<TextureAtlas.AtlasRegion>>
         statusEffectIndicatorsLeft, statusEffectIndicatorsRight;
 
@@ -121,8 +118,8 @@ public class BattleAnimationWidget extends BattleWidget
 
     private void sortMonsterSpritesByDepth()
     {
-        zSortedMonsterImgs.sort(new ImageZComparator());
-        for(Image i : zSortedMonsterImgs) { i.setZIndex(zSortedMonsterImgs.indexOf(i,true)); }
+        zSortedMonsterImgs.sort(new BattleGuardianWidget.ZComparator());
+        for(BattleGuardianWidget i : zSortedMonsterImgs) { i.setZIndex(zSortedMonsterImgs.indexOf(i,true)); }
     }
 
     public void init(BattleSystem battleSystem)
@@ -136,7 +133,7 @@ public class BattleAnimationWidget extends BattleWidget
 
     private void addMonsterAnimationsForTeam(ArrayMap<Integer,AGuardian> team, boolean side) {
 
-        ArrayMap<Integer,Image> imgs;
+        ArrayMap<Integer,BattleGuardianWidget> imgs;
         ArrayMap<Integer,Boolean> positions;
 
         if(side == LEFT) {
@@ -186,13 +183,7 @@ public class BattleAnimationWidget extends BattleWidget
      */
     private void setUpMonsterSprite(int id, int metaForm, int pos, boolean side)
     {
-        Image monImg;
-        TextureRegion monReg;
-        monReg = Services.getMedia().getMonsterSprite(id, metaForm);
-        if(side == LEFT)
-            if(!monReg.isFlipX())
-                monReg.flip(true, false);
-        monImg = new Image(monReg);
+        BattleGuardianWidget monImg = new BattleGuardianWidget(id, metaForm, side);
 
         IntVec2 position2d;
         int align;
@@ -244,7 +235,7 @@ public class BattleAnimationWidget extends BattleWidget
         boolean defSide,
         final Ability ability)
     {
-        Image attIm;
+        BattleGuardianWidget attIm;
         final IntVec2 startPos,endPos;
 
         attackAnimationRunning = true;
@@ -299,7 +290,7 @@ public class BattleAnimationWidget extends BattleWidget
 
     public void animateAreaAttack(final int attPos, boolean attSide, boolean defSide, final Ability ability)
     {
-        Image attIm;
+        BattleGuardianWidget attIm;
         if(attSide == LEFT) attIm = monsterImgsLeft.get(attPos);
         else attIm = monsterImgsRight.get(attPos);
 
@@ -400,7 +391,7 @@ public class BattleAnimationWidget extends BattleWidget
      */
     private void animateAttackImpact(int defPos, boolean side)
     {
-        Image defIm;
+        BattleGuardianWidget defIm;
         if(side == LEFT) defIm = monsterImgsLeft.get(defPos);
         else defIm = monsterImgsRight.get(defPos);
 
@@ -416,12 +407,12 @@ public class BattleAnimationWidget extends BattleWidget
      */
     private void animateAreaAttackImpact(boolean side)
     {
-        ArrayMap<Integer, Image> monsterImgs;
+        ArrayMap<Integer, BattleGuardianWidget> monsterImgs;
 
         if(side == LEFT) monsterImgs = monsterImgsLeft;
         else             monsterImgs = monsterImgsRight;
 
-        for(Image defImg : monsterImgs.values())
+        for(BattleGuardianWidget defImg : monsterImgs.values())
         {
             defImg.addAction(Actions.sequence(
                 Actions.moveBy(0, 15, .1f, Interpolation.bounceIn),
@@ -432,7 +423,7 @@ public class BattleAnimationWidget extends BattleWidget
 
     public void animateMonsterKO(int pos, boolean side)
     {
-        ArrayMap<Integer,Image> monImgs;
+        ArrayMap<Integer,BattleGuardianWidget> monImgs;
         if(side == LEFT) monImgs = monsterImgsLeft;
         else monImgs = monsterImgsRight;
 

@@ -78,6 +78,12 @@ public class NullMediaManager implements IMediaManager
         return null;
     }
 
+    @Override
+    public Animation<AtlasRegion> getStatusEffectAnimation(String statusEffect)
+    {
+        return null;
+    }
+
     public Animation getTileAnimation(int index) {
         return null;
     }

@@ -28,6 +28,7 @@ import de.limbusdev.guardianmonsters.guardians.battle.BattleCalculator;
 import de.limbusdev.guardianmonsters.guardians.battle.BattleSystem;
 import de.limbusdev.guardianmonsters.guardians.items.Inventory;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
+import de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics;
 import de.limbusdev.guardianmonsters.guardians.monsters.Team;
 import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.ui.Constant;
@@ -65,6 +66,7 @@ public class BattleHUD extends ABattleHUD
     private BattleActionMenuWidget.Callbacks    battleActionCallbacks;
     private BattleMainMenuWidget.Callbacks      mainMenuCallbacks;
     private BattleActionMenuWidget.Callbacks    infoLabelCallbacks;
+    private BattleActionMenuWidget.Callbacks    infoLabelStatusEffectCallbacks;
     private BattleActionMenuWidget.Callbacks    endOfBattleCallbacks;
     private SevenButtonsWidget.Callbacks        attackMenuCallbacks;
     private BattleSystem.Callbacks              battleSystemCallbacks;
@@ -252,15 +254,36 @@ public class BattleHUD extends ABattleHUD
             }
         };
 
-        infoLabelCallbacks = new BattleActionMenuWidget.Callbacks() {
+        infoLabelCallbacks = new BattleActionMenuWidget.Callbacks()
+        {
             @Override
-            public void onBackButton() {
+            public void onBackButton()
+            {
+                if(battleSystem.getActiveMonster().getIndividualStatistics().getStatusEffect() == IndividualStatistics.StatusEffect.HEALTHY) {
+                    battleSystem.nextMonster();
+                    battleSystem.continueBattle();
+                } else {
+                    battleStateSwitcher.toStatusEffectInfoLabel();
+                    battleSystem.applyStatusEffect();
+                }
+            }
+        };
+
+        infoLabelStatusEffectCallbacks = new BattleActionMenuWidget.Callbacks()
+        {
+            @Override
+            public void onBackButton()
+            {
                 System.out.println("InfoLabelButtons: onBackButton()");
+                actionMenu.setCallbacks(infoLabelCallbacks);
+                battleSystem.nextMonster();
                 battleSystem.continueBattle();
             }
         };
 
-        endOfBattleCallbacks = new BattleActionMenuWidget.Callbacks() {
+
+        endOfBattleCallbacks = new BattleActionMenuWidget.Callbacks()
+        {
             @Override
             public void onBackButton() {
                 boolean teamOk = false;
@@ -311,9 +334,16 @@ public class BattleHUD extends ABattleHUD
             {
                 String guardianName = Services.getL18N().getGuardianNicknameIfAvailable(guardian);
                 battleStateSwitcher.toAnimation();
-                infoLabelWidget.setWholeText(
-                    Services.getL18N().Battle().format("batt_item_usage", guardianName)
-                );
+                String message;
+                if(guardian.getIndividualStatistics().getStatusEffect() == IndividualStatistics.StatusEffect.PETRIFIED) {
+                    message = Services.getL18N().Battle().format(
+                        "batt_message_failed",
+                        guardianName,
+                        Services.getL18N().Battle().get("batt_petrified"));
+                } else {
+                    message = Services.getL18N().Battle().format("batt_item_usage", guardianName);
+                }
+                infoLabelWidget.setWholeText(message);
                 infoLabelWidget.animateTextAppearance();
                 animationWidget.animateItemUsage();
             }
@@ -340,18 +370,23 @@ public class BattleHUD extends ABattleHUD
                 infoLabelWidget.setWholeText(BattleStringBuilder.givenDamage(attacker,target,rep));
                 infoLabelWidget.animateTextAppearance();
 
-                // Start ability animation
-                int attPos, defPos;
-                boolean activeSide;
-                boolean passiveSide;
 
-                activeSide =  battleSystem.getQueue().getTeamSideFor(attacker);
-                passiveSide = battleSystem.getQueue().getTeamSideFor(target);
+                if(rep.statusEffectPreventedAttack) {
+                    return;
+                } else {
+                    // Start ability animation
+                    int attPos, defPos;
+                    boolean activeSide;
+                    boolean passiveSide;
 
-                attPos = battleSystem.getQueue().getFieldPositionFor(attacker);
-                defPos = battleSystem.getQueue().getFieldPositionFor(target);
+                    activeSide = battleSystem.getQueue().getTeamSideFor(attacker);
+                    passiveSide = battleSystem.getQueue().getTeamSideFor(target);
 
-                animationWidget.animateAttack(attPos, defPos, activeSide, passiveSide, ability);
+                    attPos = battleSystem.getQueue().getFieldPositionFor(attacker);
+                    defPos = battleSystem.getQueue().getFieldPositionFor(target);
+
+                    animationWidget.animateAttack(attPos, defPos, activeSide, passiveSide, ability);
+                }
             }
 
             @Override
@@ -362,16 +397,29 @@ public class BattleHUD extends ABattleHUD
                 infoLabelWidget.setWholeText(BattleStringBuilder.givenDamage(attacker,reports));
                 infoLabelWidget.animateTextAppearance();
 
-                // Start ability animation
-                boolean activeSide;
-                boolean passiveSide;
+                if(reports.first().statusEffectPreventedAttack) {
+                    return;
+                } else {
+                    // Start ability animation
+                    boolean activeSide;
+                    boolean passiveSide;
 
-                activeSide =  battleSystem.getQueue().getTeamSideFor(attacker);
-                passiveSide = battleSystem.getQueue().getTeamSideFor(targets.firstValue());
+                    activeSide = battleSystem.getQueue().getTeamSideFor(attacker);
+                    passiveSide = battleSystem.getQueue().getTeamSideFor(targets.firstValue());
 
-                int attPos = battleSystem.getQueue().getFieldPositionFor(attacker);
+                    int attPos = battleSystem.getQueue().getFieldPositionFor(attacker);
 
-                animationWidget.animateAreaAttack(attPos, activeSide, passiveSide, ability);
+                    animationWidget.animateAreaAttack(attPos, activeSide, passiveSide, ability);
+                }
+            }
+
+            @Override
+            public void onApplyStatusEffect(AGuardian guardian)
+            {
+                infoLabelWidget.setWholeText(
+                        Services.getL18N().getGuardianNicknameIfAvailable(guardian) + " " +
+                        Services.getL18N().Battle().get("batt_info_status_effect_" + guardian.getIndividualStatistics().getStatusEffect().toString().toLowerCase()));
+                infoLabelWidget.animateTextAppearance();
             }
 
             @Override
@@ -590,6 +638,16 @@ public class BattleHUD extends ABattleHUD
             actionMenu.addToStage(stage);
 
             actionMenu.disableAllButBackButton();
+        }
+
+        public void toStatusEffectInfoLabel()
+        {
+            reset();
+            toInfoLabel();
+            battleQueueWidget.addToStage(stage);
+            actionMenu.setCallbacks(infoLabelStatusEffectCallbacks);
+
+            state = BattleState.ANIMATION;
         }
 
         public void toEscapeSuccessInfo() {

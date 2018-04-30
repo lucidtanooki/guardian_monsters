@@ -1,5 +1,6 @@
 package de.limbusdev.guardianmonsters.guardians.battle;
 
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 
 import java.util.Observable;
@@ -146,6 +147,12 @@ public class BattleQueue extends Observable
 
     public CombatTeam getCombatTeamRight() {
         return combatTeamRight;
+    }
+
+    public CombatTeam getRandomCombatTeam()
+    {
+        if(MathUtils.randomBoolean()) {return combatTeamLeft;}
+        else {return combatTeamRight;}
     }
 
     public Team getLeft() {

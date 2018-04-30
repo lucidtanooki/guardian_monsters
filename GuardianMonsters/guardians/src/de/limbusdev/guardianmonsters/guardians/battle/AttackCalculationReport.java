@@ -25,6 +25,7 @@ public class AttackCalculationReport
     public AGuardian defending;
     public Ability attack;
 
+    public boolean statusEffectPreventedAttack;
     public int damage;
     public float efficiency;
     public boolean changedStatusEffect;
@@ -68,6 +69,7 @@ public class AttackCalculationReport
         this.healedStat = healedStat;
         this.healedHP = healedHP;
         this.healedMP = healedMP;
+        this.statusEffectPreventedAttack = false;
     }
 
     /**

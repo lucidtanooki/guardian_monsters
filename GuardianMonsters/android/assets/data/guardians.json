@@ -81,7 +81,8 @@
       "abilities": [
         {"abilityID": 2, "element": "none", "abilityPos": 0},
         {"abilityID": 1, "element": "fire", "abilityPos": 5},
-        {"abilityID": 5, "element": "fire", "abilityPos": 70}
+        {"abilityID": 5, "element": "fire", "abilityPos": 70},
+        {"abilityID": 10, "element": "none", "abilityPos": 30}
       ],
       "basestats": {
         "hp": 300, "mp": 50, "speed": 10, "pstr": 10, "pdef": 10, "mstr": 10, "mdef": 10

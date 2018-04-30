@@ -9,6 +9,7 @@ import java.util.Iterator;
 import de.limbusdev.guardianmonsters.guardians.GuardiansServiceLocator;
 import de.limbusdev.guardianmonsters.guardians.abilities.Ability;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
+import de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics;
 import de.limbusdev.guardianmonsters.guardians.monsters.Team;
 
 import static de.limbusdev.guardianmonsters.guardians.Constant.HERO;
@@ -139,12 +140,60 @@ public class BattleSystem
         } else {
             BattleCalculator.apply(latestAttackReport);
         }
-        nextMonster();
         checkKO();
+    }
+
+    public void applyStatusEffect()
+    {
+        if(getActiveMonster().getIndividualStatistics().getStatusEffect() != IndividualStatistics.StatusEffect.HEALTHY) {
+            BattleCalculator.applyStatusEffect(getActiveMonster());
+            callbacks.onApplyStatusEffect(getActiveMonster());
+            checkKO();
+        }
+
+    }
+
+    public AGuardian getRandomFitCombatant()
+    {
+        if(MathUtils.randomBoolean()) {
+            return queue.getCombatTeamLeft().getRandomFitMember();
+        } else {
+            return queue.getCombatTeamRight().getRandomFitMember();
+        }
     }
 
     public void attack()
     {
+        // if status effect prevents normal attack calculation
+        AGuardian activeGuardian = getActiveMonster();
+
+        switch(activeGuardian.getIndividualStatistics().getStatusEffect())
+        {
+            case PETRIFIED:
+                doNothing();
+                return;
+            case LUNATIC:
+                if(MathUtils.randomBoolean(0.2f)) {
+                    activeGuardian
+                        .getIndividualStatistics()
+                        .setStatusEffect(IndividualStatistics.StatusEffect.HEALTHY);
+                } else {
+                    // chose arbitrary target and ability
+                    Ability.aID aID = activeGuardian.getAbilityGraph().getRandomActiveAbility();
+                    Ability ability = GuardiansServiceLocator.getAbilities().getAbility(aID);
+                    int att = activeGuardian.getAbilityGraph().getActiveAbilities().getKey(aID, false);
+
+                    if (ability.areaDamage) {setChosenArea(queue.getRandomCombatTeam());}
+                    else                    {setChosenTarget(getRandomFitCombatant());}
+
+                    setChosenAttack(att);
+                    break;
+                }
+            default: /*case: HEALTHY*/
+                break;
+        }
+
+        // if no status effect prevents normal attack calculation
         if(areaChosen) {
             attackArea(chosenArea, chosenAttack);
         } else {
@@ -168,7 +217,7 @@ public class BattleSystem
         callbacks.onDoingNothing(getActiveMonster());
     }
 
-    private void nextMonster()
+    public void nextMonster()
     {
         queue.next();
         chosenAttack = 0;
@@ -328,30 +377,38 @@ public class BattleSystem
         {
             System.out.println("\n### AI's turn ###");
             AGuardian m = getActiveMonster();
-            int att = 0;
-            Ability.aID aID = null;
 
-            while (aID == null) {
-                att = MathUtils.random(0, m.getAbilityGraph().getActiveAbilities().size - 1);
-                aID = m.getAbilityGraph().getActiveAbility(att);
-            }
+            if(getActiveMonster().getIndividualStatistics().getStatusEffect() == IndividualStatistics.StatusEffect.PETRIFIED) {
 
-            Ability ability = GuardiansServiceLocator.getAbilities().getAbility(aID);
-
-            if(ability.areaDamage) {
-
-                setChosenArea(queue.getCombatTeamLeft());
+                doNothing();
 
             } else {
 
-                chooseTarget();
+                int att = 0;
+                Ability.aID aID = null;
 
+                while (aID == null) {
+                    att = MathUtils.random(0, m.getAbilityGraph().getActiveAbilities().size - 1);
+                    aID = m.getAbilityGraph().getActiveAbility(att);
+                }
+
+                Ability ability = GuardiansServiceLocator.getAbilities().getAbility(aID);
+
+                if(ability.areaDamage) {
+
+                    setChosenArea(queue.getCombatTeamLeft());
+
+                } else {
+
+                    chooseTarget();
+
+                }
+
+                setChosenAttack(att);
+                attack();
+                // applyAttack() is called by the client, as soon as it is neccessary
+                // e.g. when the Battle Animation finishes
             }
-
-            setChosenAttack(att);
-            attack();
-            // applyAttack() is called by the client, as soon as it is neccessary
-            // e.g. when the Battle Animation finishes
         }
 
         private void chooseTarget()
@@ -386,5 +443,6 @@ public class BattleSystem
         public void onPlayersTurn(){}
         public void onBattleEnds(boolean winnerSide){}
         public void onDoingNothing(AGuardian guardian){}
+        public void onApplyStatusEffect(AGuardian guardian){}
     }
 }

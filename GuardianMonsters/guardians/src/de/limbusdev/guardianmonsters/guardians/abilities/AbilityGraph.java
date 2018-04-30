@@ -1,5 +1,6 @@
 package de.limbusdev.guardianmonsters.guardians.abilities;
 
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 
@@ -214,6 +215,12 @@ public class AbilityGraph implements IAbilityGraph
     public Ability.aID getActiveAbility(int abilitySlot)
     {
         return activeAbilities.get(abilitySlot);
+    }
+
+    @Override
+    public Ability.aID getRandomActiveAbility()
+    {
+        return getActiveAbility(MathUtils.random(0, activeAbilities.size-1));
     }
 
     @Override

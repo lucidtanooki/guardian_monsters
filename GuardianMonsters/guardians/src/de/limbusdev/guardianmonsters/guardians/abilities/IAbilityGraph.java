@@ -74,6 +74,8 @@ public interface IAbilityGraph
      */
     Ability.aID getActiveAbility(int abilitySlot);
 
+    Ability.aID getRandomActiveAbility();
+
     /**
      * Puts an ability into one of seven slots, available in battle
      * @param slot                  where the ability should be placed in battle

@@ -819,7 +819,7 @@ public class IndividualStatistics
     public void setHP(int HP)
     {
         currentStatValues.HP = HP;
-        if(HP > getHPmax()) currentStatValues.HP = getHPmax();
+        if(HP > getHPmax()) {currentStatValues.HP = getHPmax();}
         if(HP < 0)          currentStatValues.HP = 0;
 
         core.setStatisticsChanged();
@@ -839,7 +839,7 @@ public class IndividualStatistics
     public void setPStr(int PStr) {
         currentStatValues.PStr = PStr;
 
-        if(PStr > getPStrMax()*1.5f) currentStatValues.PStr = getPStrMax();
+        if(PStr > getPStrMax()*1.5f) currentStatValues.PStr = MathUtils.floor(getPStrMax()*1.5f);
         if(PStr < 1)            currentStatValues.PStr = 1;
 
         core.setStatisticsChanged();
@@ -849,7 +849,7 @@ public class IndividualStatistics
     public void setPDef(int PDef) {
         currentStatValues.PDef = PDef;
 
-        if(PDef > getPDefMax()*1.5f) currentStatValues.PDef = getPDefMax();
+        if(PDef > getPDefMax()*1.5f) MathUtils.floor(getPDefMax()*1.5f);
         if(PDef < 1)            currentStatValues.PDef = 1;
 
         core.setStatisticsChanged();
@@ -859,7 +859,7 @@ public class IndividualStatistics
     public void setMStr(int MStr) {
         currentStatValues.MStr = MStr;
 
-        if(MStr > getMStrMax()*1.5f) currentStatValues.MStr = getMStrMax();
+        if(MStr > getMStrMax()*1.5f) currentStatValues.MStr = MathUtils.floor(getMStrMax()*1.5f);
         if(MStr < 1)            currentStatValues.MStr = 1;
 
         core.setStatisticsChanged();
@@ -869,7 +869,7 @@ public class IndividualStatistics
     public void setMDef(int MDef) {
         currentStatValues.MDef = MDef;
 
-        if(MDef > getMDefMax()*1.5f) currentStatValues.MDef = getMDefMax();
+        if(MDef > getMDefMax()*1.5f) currentStatValues.MDef = MathUtils.floor(getMDefMax()*1.5f);
         if(MDef < 1)            currentStatValues.MDef = 1;
 
         core.setStatisticsChanged();
@@ -880,7 +880,7 @@ public class IndividualStatistics
 
         currentStatValues.Speed = Speed;
 
-        if(Speed > getSpeedMax()) currentStatValues.Speed = getSpeedMax();
+        if(Speed > getSpeedMax()) currentStatValues.Speed = MathUtils.floor(getSpeedMax()*1.5f);
         if(Speed < 1)          currentStatValues.Speed = 1;
 
         core.setStatisticsChanged();

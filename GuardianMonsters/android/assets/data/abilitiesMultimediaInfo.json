@@ -42,7 +42,19 @@
     "animationType": "contactless"
   },
   {
-    "name": "attNone8_cure",
+    "name": "attNone8_sana",
+    "sfxType": "hit",
+    "sfxIndex": 0,
+    "animationType": "contactless"
+  },
+  {
+    "name": "attNone9_somnum",
+    "sfxType": "hit",
+    "sfxIndex": 0,
+    "animationType": "contactless"
+  },
+  {
+    "name": "attNone10_venenum",
     "sfxType": "hit",
     "sfxIndex": 0,
     "animationType": "contactless"

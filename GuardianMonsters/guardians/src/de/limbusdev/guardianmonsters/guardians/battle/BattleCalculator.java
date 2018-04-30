@@ -46,10 +46,34 @@ public class BattleCalculator
      */
     public static AttackCalculationReport calcAttack(AGuardian attacker, AGuardian defender, Ability.aID abilityID)
     {
+        // Calculate Attack
         System.out.println("\n--- new ability ---");
         Ability ability = GuardiansServiceLocator.getAbilities().getAbility(abilityID);
         AttackCalculationReport report = new AttackCalculationReport(
             attacker, defender, ability, 0, 0, false, StatusEffect.HEALTHY, false, 0, 0, 0, 0, 0, false, 0, 0);
+
+        // Consider current Status Effect of attacker
+        switch (attacker.getIndividualStatistics().getStatusEffect())
+        {
+            case BLIND:
+                if(MathUtils.randomBoolean(0.66f)) {
+                    report.statusEffectPreventedAttack = true;
+                    return report;
+                };
+                break;
+            case SLEEPING:
+                if(MathUtils.randomBoolean(0.66f)) {
+                    report.statusEffectPreventedAttack = true;
+                    return report;
+                } else {
+                    attacker.getIndividualStatistics().setStatusEffect(StatusEffect.HEALTHY);
+                }
+                break;
+            case PETRIFIED:
+                throw new IllegalStateException("calcAttack() can't be called, when Guardian is petrified.");
+
+            default: /*case HEALTHY || LUNATIC:*/ break;
+        }
 
         // Elemental Efficiency
         float eff = ElemEff.singelton().getElemEff(ability.element, defender.getSpeciesDescription().getElements(0));   // TODO elements currentForm
@@ -131,6 +155,23 @@ public class BattleCalculator
         return report;
     }
 
+    public static void applyStatusEffect(AGuardian guardian)
+    {
+        AGuardian attacking = guardian;
+
+        switch(attacking.getIndividualStatistics().getStatusEffect())
+        {
+            case POISONED:
+                attacking.getIndividualStatistics().decreaseHP(5);
+                break;
+            case PETRIFIED:
+            case LUNATIC:
+            case BLIND:
+            default: /*case HEALTHY:*/
+                break;
+        }
+    }
+
     /**
      * Applies the previously calculated attack
      * @param report
@@ -140,6 +181,11 @@ public class BattleCalculator
         if(report.defending == null) {
 
             System.out.println("Only self defending");
+            return;
+        }
+
+        if(report.statusEffectPreventedAttack) {
+            System.out.println("Status Effect prevented attack.");
             return;
         }
 

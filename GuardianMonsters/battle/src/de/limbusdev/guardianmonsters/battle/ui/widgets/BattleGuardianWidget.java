@@ -15,7 +15,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.Align;
 
 import java.util.Comparator;
+import java.util.Observable;
+import java.util.Observer;
 
+import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics;
 import de.limbusdev.guardianmonsters.services.Services;
 
@@ -28,7 +31,7 @@ import static de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatist
  * @author Georg Eckert 2018
  */
 
-public class BattleGuardianWidget extends BattleWidget
+public class BattleGuardianWidget extends BattleWidget implements Observer
 {
     private Image guardianImage;
     private AnimatedImage statusEffectAnimation;
@@ -54,6 +57,15 @@ public class BattleGuardianWidget extends BattleWidget
     {
         Animation anim = Services.getMedia().getStatusEffectAnimation(statusEffect.toString().toLowerCase());
         statusEffectAnimation.setAnimation(anim);
+    }
+
+    @Override
+    public void update(Observable observable, Object o)
+    {
+        if(observable instanceof AGuardian) {
+            AGuardian guardian = (AGuardian) observable;
+            setStatusEffect(guardian.getIndividualStatistics().getStatusEffect());
+        }
     }
 
     public static class ZComparator implements Comparator<BattleGuardianWidget>

@@ -88,27 +88,6 @@ public class BattleAnimationWidget extends BattleWidget
 
     }
 
-    /**
-     * Changes to the correct status effect animation of a Guardian
-     * @param position
-     * @param side
-     * @param statusEffect
-     */
-    public void setStatusEffect(
-        int position,
-        boolean side,
-        IndividualStatistics.StatusEffect statusEffect)
-    {
-        Animation<TextureAtlas.AtlasRegion> anim = Services.getMedia().getStatusEffectAnimation(
-            statusEffect.toString().toLowerCase());
-
-        if(side == LEFT) {
-            statusEffectIndicatorsLeft.put(position, anim);
-        } else /* (side == RIGHT) */ {
-            statusEffectIndicatorsRight.put(position, anim);
-        }
-    }
-
     @Override
     public void draw(Batch batch, float parentAlpha)
     {
@@ -158,6 +137,7 @@ public class BattleAnimationWidget extends BattleWidget
             if(m.getIndividualStatistics().isFit()) {
                 // Add monster to team
                 setUpMonsterSprite(
+                    m,
                     m.getSpeciesDescription().getID(),
                     m.getAbilityGraph().getCurrentForm(),
                     actualTeamSize,
@@ -181,9 +161,10 @@ public class BattleAnimationWidget extends BattleWidget
      * @param pos
      * @param side
      */
-    private void setUpMonsterSprite(int id, int metaForm, int pos, boolean side)
+    private void setUpMonsterSprite(AGuardian guardian, int id, int metaForm, int pos, boolean side)
     {
         BattleGuardianWidget monImg = new BattleGuardianWidget(id, metaForm, side);
+        guardian.addObserver(monImg);
 
         IntVec2 position2d;
         int align;

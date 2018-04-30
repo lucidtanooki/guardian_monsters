@@ -10,16 +10,17 @@
 package de.limbusdev.guardianmonsters.battle.ui.widgets;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.Align;
 
 import java.util.Comparator;
 
+import de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics;
 import de.limbusdev.guardianmonsters.services.Services;
 
 import static de.limbusdev.guardianmonsters.guardians.Constant.LEFT;
+import static de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics.StatusEffect.HEALTHY;
 
 /**
  * BattleGuardianWidget
@@ -30,7 +31,7 @@ import static de.limbusdev.guardianmonsters.guardians.Constant.LEFT;
 public class BattleGuardianWidget extends BattleWidget
 {
     private Image guardianImage;
-    private Animation<TextureAtlas.AtlasRegion> statusEffectAnimation;
+    private AnimatedImage statusEffectAnimation;
 
     public BattleGuardianWidget(int index, int metaForm, boolean side)
     {
@@ -42,6 +43,17 @@ public class BattleGuardianWidget extends BattleWidget
         guardianImage = new Image(monReg);
         guardianImage.setPosition(0,0, Align.bottom);
         addActor(guardianImage);
+
+        Animation anim = Services.getMedia().getStatusEffectAnimation(HEALTHY.toString().toLowerCase());
+        statusEffectAnimation = new AnimatedImage(anim);
+        addActor(statusEffectAnimation);
+        statusEffectAnimation.setPosition(0,96,Align.top);
+    }
+
+    public void setStatusEffect(IndividualStatistics.StatusEffect statusEffect)
+    {
+        Animation anim = Services.getMedia().getStatusEffectAnimation(statusEffect.toString().toLowerCase());
+        statusEffectAnimation.setAnimation(anim);
     }
 
     public static class ZComparator implements Comparator<BattleGuardianWidget>

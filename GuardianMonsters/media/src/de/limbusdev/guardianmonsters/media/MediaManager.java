@@ -222,10 +222,10 @@ public class MediaManager implements IMediaManager
         TextureAtlas atlas = assets.get("spritesheets/statusEffectAnimations.pack", TextureAtlas.class);
         Animation<AtlasRegion> anim;
 
-        if(atlas.findRegions(statusEffect).size == 0) {
-            anim = new Animation<>(1f / 12f, atlas.findRegions("healthy"), Animation.PlayMode.LOOP);
+        if(atlas.findRegions("status_effect_" + statusEffect).size == 0) {
+            anim = new Animation<>(1f / 12f, atlas.findRegions("status_effect_healthy"), Animation.PlayMode.LOOP);
         } else {
-            anim = new Animation<>(1f / 12f, atlas.findRegions(statusEffect), Animation.PlayMode.LOOP);
+            anim = new Animation<>(1f / 12f, atlas.findRegions("status_effect_" + statusEffect), Animation.PlayMode.LOOP);
         }
 
         return anim;

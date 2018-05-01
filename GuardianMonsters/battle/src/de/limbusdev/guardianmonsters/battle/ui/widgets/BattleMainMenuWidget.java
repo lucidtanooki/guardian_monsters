@@ -1,10 +1,11 @@
 package de.limbusdev.guardianmonsters.battle.ui.widgets;
 
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 import de.limbusdev.guardianmonsters.ui.Constant;
+import de.limbusdev.guardianmonsters.ui.widgets.Callback;
+import de.limbusdev.guardianmonsters.ui.widgets.SimpleClickListener;
 
 
 /**
@@ -12,19 +13,16 @@ import de.limbusdev.guardianmonsters.ui.Constant;
  */
 public class BattleMainMenuWidget extends BattleWidget
 {
-
-
-
     // Buttons
     private ImageButton swordButton;
     private ImageButton runButton;
-
 
     /**
      *
      * @param skin battle UI skin
      */
-    public BattleMainMenuWidget(Skin skin, Callbacks callbacks) {
+    public BattleMainMenuWidget(Skin skin, Callback onSwordButton, Callback onRunButton)
+    {
         super();
         this.setBounds(0,0, Constant.RES_X, 64);
 
@@ -41,37 +39,15 @@ public class BattleMainMenuWidget extends BattleWidget
         this.addActor(swordButton);
         this.addActor(runButton);
 
-        setCallbackHandler(callbacks);
+        setCallbackHandler(onSwordButton, onRunButton);
 
     }
 
 
 
-    public void setCallbackHandler(final Callbacks callbacks) {
-        runButton.addListener(
-            new com.badlogic.gdx.scenes.scene2d.utils.ClickListener() {
-                @Override
-                public void clicked(InputEvent event, float x, float y) {
-                    callbacks.onRunButton();
-                }
-            }
-        );
-
-        swordButton.addListener(
-            new com.badlogic.gdx.scenes.scene2d.utils.ClickListener() {
-                @Override
-                public void clicked(InputEvent event, float x, float y) {
-                    callbacks.onSwordButton();
-                }
-            }
-        );
+    public void setCallbackHandler(Callback onSwordButton, Callback onRunButton)
+    {
+        swordButton.addListener(new SimpleClickListener(onSwordButton::onClick));
+        runButton.addListener  (new SimpleClickListener(onRunButton::onClick));
     }
-
-
-    // INNER INTERFACE
-    public interface Callbacks {
-        void onRunButton();
-        void onSwordButton();
-    }
-
 }

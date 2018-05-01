@@ -6,6 +6,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
+import de.limbusdev.guardianmonsters.ui.widgets.Callback;
+
 public class BattleActionMenuWidget extends BattleWidget
 {
 
@@ -131,11 +133,5 @@ public class BattleActionMenuWidget extends BattleWidget
         disable(monsterButton);
         disable(extraButton);
         disable(backButton);
-    }
-
-    // Inner Interface
-    public interface Callback
-    {
-        void onClick();
     }
 }

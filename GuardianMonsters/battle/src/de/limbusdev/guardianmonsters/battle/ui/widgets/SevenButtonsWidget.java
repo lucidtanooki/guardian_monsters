@@ -13,6 +13,7 @@ import com.badlogic.gdx.utils.ArrayMap;
 import de.limbusdev.guardianmonsters.guardians.Element;
 import de.limbusdev.guardianmonsters.guardians.abilities.Ability;
 import de.limbusdev.guardianmonsters.services.Services;
+import de.limbusdev.guardianmonsters.ui.widgets.Callback;
 
 import static de.limbusdev.guardianmonsters.battle.ui.widgets.BattleHUDTextButton.BOTTOMLEFT;
 import static de.limbusdev.guardianmonsters.battle.ui.widgets.BattleHUDTextButton.BOTTOMRIGHT;
@@ -27,12 +28,12 @@ public class SevenButtonsWidget extends BattleWidget
 
     // Buttons
     private ArrayMap<Integer,TextButton> buttons;
-    private Callbacks callbacks;
+    private Callback.ButtonID callbacks;
     protected Skin skin;
 
     public static final int[] ABILITY_ORDER = {5,3,1,0,4,2,6};
 
-    public SevenButtonsWidget (Skin skin, Callbacks callbacks, int[] buttonOrder) {
+    public SevenButtonsWidget (Skin skin, Callback.ButtonID callbacks, int[] buttonOrder) {
 
         super();
         this.skin = skin;
@@ -78,7 +79,7 @@ public class SevenButtonsWidget extends BattleWidget
                         super.clicked(event,x,y);
                         System.out.println("SevenButtonsWidget: Clicked button " + j);
                         if(!attButt.isDisabled()) {
-                            callbacks.onButtonNr(j);
+                            callbacks.onClick(j);
                         }
                     }
                 }
@@ -86,7 +87,7 @@ public class SevenButtonsWidget extends BattleWidget
         }
     }
 
-    public void setCallbacks(Callbacks callbacks) {
+    public void setCallbacks(Callback.ButtonID callbacks) {
         this.callbacks = callbacks;
     }
 
@@ -151,7 +152,7 @@ public class SevenButtonsWidget extends BattleWidget
                     super.clicked(event,x,y);
                     System.out.println("SevenButtonsWidget: Clicked button " + index);
                     if(button.isDisabled()) {
-                        callbacks.onButtonNr(index);
+                        callbacks.onClick(index);
                     }
                 }
             }
@@ -161,18 +162,13 @@ public class SevenButtonsWidget extends BattleWidget
     }
 
 
-    // INNER INTERFACE
-    public interface Callbacks {
-        void onButtonNr(int nr);
-    }
-
     public static class CentralHalfButtonsAddOn extends BattleWidget
     {
         private ArrayMap<Integer,TextButton> buttons;
-        private Callbacks callbacks;
+        private Callback.ButtonID callbacks;
         protected Skin skin;
 
-        public CentralHalfButtonsAddOn(Skin skin, Callbacks callbacks)
+        public CentralHalfButtonsAddOn(Skin skin, Callback.ButtonID callbacks)
         {
             super();
             this.buttons = new ArrayMap<>();
@@ -199,7 +195,7 @@ public class SevenButtonsWidget extends BattleWidget
                         public void clicked(InputEvent event, float x, float y)
                         {
                             super.clicked(event,x,y);
-                            if(!attButt.isDisabled()) {callbacks.onButtonNr(j);}
+                            if(!attButt.isDisabled()) {callbacks.onClick(j);}
                         }
                     }
                 );

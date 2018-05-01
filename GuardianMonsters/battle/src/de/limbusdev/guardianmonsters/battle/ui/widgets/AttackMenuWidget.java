@@ -9,6 +9,7 @@ import de.limbusdev.guardianmonsters.guardians.GuardiansServiceLocator;
 import de.limbusdev.guardianmonsters.guardians.abilities.Ability;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.services.Services;
+import de.limbusdev.guardianmonsters.ui.widgets.Callback;
 
 public class AttackMenuWidget extends SevenButtonsWidget
 {
@@ -19,9 +20,9 @@ public class AttackMenuWidget extends SevenButtonsWidget
      *
      * @param skin battle action UI skin
      */
-    public AttackMenuWidget(Skin skin, Callbacks callbacks)
+    public AttackMenuWidget(Skin skin, Callback.ButtonID callbacks)
     {
-        super(skin, callbacks::onButtonNr, order);
+        super(skin, callbacks::onClick, order);
     }
 
     public void toAttackInfoStyle()

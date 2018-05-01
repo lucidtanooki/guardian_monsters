@@ -25,6 +25,7 @@ import de.limbusdev.guardianmonsters.guardians.abilities.AbilityGraph;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.ui.Constant;
+import de.limbusdev.guardianmonsters.ui.widgets.Callback;
 import main.java.de.limbusdev.guardianmonsters.inventory.ui.widgets.abilities.AbilityDetailWidget;
 import main.java.de.limbusdev.guardianmonsters.inventory.ui.widgets.team.TeamMemberSwitcher;
 
@@ -35,7 +36,7 @@ import main.java.de.limbusdev.guardianmonsters.inventory.ui.widgets.team.TeamMem
  */
 
 public class AbilityChoiceSubMenu extends AInventorySubMenu
-    implements TeamMemberSwitcher.Callbacks, AbilityDetailWidget.Callbacks, SevenButtonsWidget.Callbacks, Observer
+    implements TeamMemberSwitcher.Callbacks, AbilityDetailWidget.Callbacks, Callback.ButtonID, Observer
 {
 
     private TeamMemberSwitcher switcher;
@@ -140,9 +141,9 @@ public class AbilityChoiceSubMenu extends AInventorySubMenu
 
     // ................................................................ SevenButtonsWidget.Callbacks
     @Override
-    public void onButtonNr(int nr) {
+    public void onClick(int buttonID) {
         AGuardian guardian = team.get(switcher.getCurrentlyChosen());
-        guardian.getAbilityGraph().setActiveAbility(nr, currentlyChosenAbility);
+        guardian.getAbilityGraph().setActiveAbility(buttonID, currentlyChosenAbility);
         refreshAbilitySlotButtons();
     }
 

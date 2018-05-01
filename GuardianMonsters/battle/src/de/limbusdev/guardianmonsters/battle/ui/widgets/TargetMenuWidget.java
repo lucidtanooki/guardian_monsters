@@ -14,6 +14,7 @@ import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
 import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.ui.Constant;
+import de.limbusdev.guardianmonsters.ui.widgets.Callback;
 
 import static de.limbusdev.guardianmonsters.guardians.Constant.LEFT;
 import static de.limbusdev.guardianmonsters.guardians.Constant.RIGHT;
@@ -30,7 +31,8 @@ public class TargetMenuWidget extends SevenButtonsWidget implements Observer
 
     private static int[] order = {0,2,1,3,6,5,4};
 
-    public TargetMenuWidget(Skin skin, Callbacks callbacks) {
+    public TargetMenuWidget(Skin skin, Callback.ButtonID callbacks)
+    {
         super(skin, callbacks, order);
     }
 

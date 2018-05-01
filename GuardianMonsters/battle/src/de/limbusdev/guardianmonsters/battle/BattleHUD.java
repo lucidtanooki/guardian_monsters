@@ -33,6 +33,7 @@ import de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics;
 import de.limbusdev.guardianmonsters.guardians.monsters.Team;
 import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.ui.Constant;
+import de.limbusdev.guardianmonsters.ui.widgets.Callback;
 
 import static de.limbusdev.guardianmonsters.battle.ui.widgets.BattleHUDTextButton.CENTERTOP;
 
@@ -72,27 +73,28 @@ public class BattleHUD extends ABattleHUD
     private SevenButtonsWidget.CentralHalfButtonsAddOn attackMenuAddOn;
 
     // CallbackHandlers
+    private Callback
+        actionMenuBackCB, actionMenuBagCB, actionMenuMonsterCB, actionMenuExtraCB;
+    private Callback infoLabelBackCB;
+    private Callback battleStartLabelBackCB;
+    private Callback statusEffectLabelBackCB;
+    private Callback attackDetailLabelBackCB;
+    private Callback endOfBattleLabelBackCB;
+    private Callback backToActionMenuCB;
+    private Callback escapeSuccessLabelBackCB;
+    private Callback escapeFailedLabelBackCB;
+    private Callback mainMenuOnSwordButton;
+    private Callback mainMenuOnRunButton;
+
     private BattleSystem.Callbacks          battleSystemCallbacks;
-    private BattleMainMenuWidget.Callbacks  mainMenuCallbacks;
     private BattleAnimationWidget.Callbacks battleAnimationCallbacks;
 
-    private BattleActionMenuWidget.Callback
-        actionMenuBackCB, actionMenuBagCB, actionMenuMonsterCB, actionMenuExtraCB;
-    private BattleActionMenuWidget.Callback infoLabelBackCB;
-    private BattleActionMenuWidget.Callback battleStartLabelBackCB;
-    private BattleActionMenuWidget.Callback statusEffectLabelBackCB;
-    private BattleActionMenuWidget.Callback attackDetailLabelBackCB;
-    private BattleActionMenuWidget.Callback endOfBattleLabelBackCB;
-    private BattleActionMenuWidget.Callback backToActionMenuCB;
-    private BattleActionMenuWidget.Callback escapeSuccessLabelBackCB;
-    private BattleActionMenuWidget.Callback escapeFailedLabelBackCB;
-
-    private SevenButtonsWidget.Callbacks    attackMenuCallbacks;
-    private SevenButtonsWidget.Callbacks    targetMenuCallbacks;
-    private SevenButtonsWidget.Callbacks    targetAreaMenuCallbacks;
-    private SevenButtonsWidget.Callbacks    monsterMenuCallbacks;
-    private SevenButtonsWidget.Callbacks    attackMenuAddOnCallbacks;
-    private SevenButtonsWidget.Callbacks    attackInfoMenuCallbacks;
+    private Callback.ButtonID attackMenuCallbacks;
+    private Callback.ButtonID targetMenuCallbacks;
+    private Callback.ButtonID targetAreaMenuCallbacks;
+    private Callback.ButtonID monsterMenuCallbacks;
+    private Callback.ButtonID attackMenuAddOnCallbacks;
+    private Callback.ButtonID attackInfoMenuCallbacks;
 
     private Team leftTeam, rightTeam;
     private Inventory inventory;
@@ -121,7 +123,8 @@ public class BattleHUD extends ABattleHUD
      * Resets the UI into a state where it can be initialized for a new battle
      */
     @Override
-    protected void reset() {
+    protected void reset()
+    {
         super.reset();
         actionMenu.clearActions();
         mainMenu.clearActions();
@@ -132,7 +135,8 @@ public class BattleHUD extends ABattleHUD
      * @param heroTeam
      * @param opponentTeam
      */
-    public void init(Team heroTeam, Team opponentTeam) {
+    public void init(Team heroTeam, Team opponentTeam)
+    {
         reset();
 
         // Keep monster teams
@@ -161,7 +165,8 @@ public class BattleHUD extends ABattleHUD
     // .............................................................................. LibGDX METHODS
 
     @Override
-    public void show() {
+    public void show()
+    {
         super.show();
         battleStateSwitcher.toBattleStart();
     }
@@ -179,53 +184,51 @@ public class BattleHUD extends ABattleHUD
         addAddtitionalStage(battleAnimationStage);
 
         // Widgets
+        mainMenu            = new BattleMainMenuWidget(skin, mainMenuOnSwordButton, mainMenuOnRunButton);
         statusWidget        = new BattleStatusOverviewWidget(skin);
         animationWidget     = new BattleAnimationWidget(battleAnimationCallbacks);
-        mainMenu            = new BattleMainMenuWidget(skin, mainMenuCallbacks);
-        actionMenu          = new BattleActionMenuWidget(skin, actionMenuBackCB, actionMenuBagCB, actionMenuMonsterCB, actionMenuExtraCB);
-        attackMenu          = new AttackMenuWidget(skin, attackMenuCallbacks::onButtonNr);
-        attackInfoMenu      = new AttackMenuWidget(skin, attackInfoMenuCallbacks);
         attackMenuAddOn     = new SevenButtonsWidget.CentralHalfButtonsAddOn(skin, attackMenuAddOnCallbacks);
-        targetMenuWidget    = new TargetMenuWidget(skin, targetMenuCallbacks);
-        targetAreaMenuWidget= new TargetMenuWidget(skin, targetAreaMenuCallbacks);
-        monsterMenuWidget   = new MonsterMenuWidget(skin, monsterMenuCallbacks);
+
+        monsterMenuWidget   = new MonsterMenuWidget(skin, monsterMenuCallbacks      ::onClick);
+        attackMenu          = new AttackMenuWidget (skin, attackMenuCallbacks       ::onClick);
+        attackInfoMenu      = new AttackMenuWidget (skin, attackInfoMenuCallbacks   ::onClick);
+        targetMenuWidget    = new TargetMenuWidget (skin, targetMenuCallbacks       ::onClick);
+        targetAreaMenuWidget= new TargetMenuWidget (skin, targetAreaMenuCallbacks   ::onClick);
+
+        attackInfoMenuFrame    = new BattleActionMenuWidget(skin, () -> {});
+        attackDetailBackButton = new BattleActionMenuWidget(skin, attackDetailLabelBackCB::onClick);
+        actionMenu             = new BattleActionMenuWidget(
+            skin,
+            actionMenuBackCB    :: onClick,
+            actionMenuBagCB     :: onClick,
+            actionMenuMonsterCB :: onClick,
+            actionMenuExtraCB   :: onClick);
 
         battleQueueWidget = new BattleQueueWidget(skin, Align.bottomLeft);
         battleQueueWidget.setPosition(1,65, Align.bottomLeft);
 
         infoLabelWidget = new InfoLabelWidget(skin);
         attackDetailWidget = new AbilityInfoLabelWidget(skin, Services.getUI().getInventorySkin());
-        attackDetailBackButton = new BattleActionMenuWidget(skin, attackDetailLabelBackCB);
+
         attackDetailBackButton.disableAllButBackButton();
-        attackInfoMenuFrame = new BattleActionMenuWidget(skin, () -> {});
         attackInfoMenuFrame.disableAllChildButtons();
     }
 
 
     // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ CALLBACKS
 
-    private void setUpCallbacks() {
-
+    private void setUpCallbacks()
+    {
         battleStateSwitcher = new BattleStateSwitcher();
 
         // ......................................................................................... main menu
-
-        mainMenuCallbacks = new BattleMainMenuWidget.Callbacks()
+        mainMenuOnSwordButton = () -> battleSystem.continueBattle();
+        mainMenuOnRunButton = () ->
         {
-            @Override
-            public void onRunButton()
-            {
-                if(BattleCalculator.tryToRun(leftTeam, rightTeam)) {
-                    battleStateSwitcher.toEscapeSuccessInfo();
-                } else {
-                    battleStateSwitcher.toEscapeFailInfo();
-                }
-            }
-
-            @Override
-            public void onSwordButton()
-            {
-                battleSystem.continueBattle();
+            if(BattleCalculator.tryToRun(leftTeam, rightTeam)) {
+                battleStateSwitcher.toEscapeSuccessInfo();
+            } else {
+                battleStateSwitcher.toEscapeFailInfo();
             }
         };
 
@@ -328,15 +331,15 @@ public class BattleHUD extends ABattleHUD
         attackDetailLabelBackCB = () -> battleStateSwitcher.toAttackInfoMenu();
 
         // ......................................................................................... attack menu info switch
-        attackMenuAddOnCallbacks = new SevenButtonsWidget.Callbacks()
+        attackMenuAddOnCallbacks = new Callback.ButtonID()
         {
-            private boolean checked=false;
+            private boolean checked = false;
 
             @Override
-            public void onButtonNr(int nr)
+            public void onClick(int buttonID)
             {
                 checked = !checked;
-                switch(nr)
+                switch(buttonID)
                 {
                     case CENTERTOP:
                         if(checked) {battleStateSwitcher.toAttackInfoMenu();}

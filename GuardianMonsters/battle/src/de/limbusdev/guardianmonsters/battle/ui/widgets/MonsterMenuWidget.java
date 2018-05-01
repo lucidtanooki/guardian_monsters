@@ -10,6 +10,7 @@ import de.limbusdev.guardianmonsters.guardians.battle.CombatTeam;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.Team;
 import de.limbusdev.guardianmonsters.services.Services;
+import de.limbusdev.guardianmonsters.ui.widgets.Callback;
 
 
 /**
@@ -20,7 +21,8 @@ public class MonsterMenuWidget extends SevenButtonsWidget
 
     private static int order[] = {0,1,2,3,4,5,6};
 
-    public MonsterMenuWidget(Skin skin, Callbacks callbacks) {
+    public MonsterMenuWidget(Skin skin, Callback.ButtonID callbacks)
+    {
         super(skin, callbacks, order);
     }
 

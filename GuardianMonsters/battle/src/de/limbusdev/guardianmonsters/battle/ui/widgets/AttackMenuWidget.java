@@ -39,27 +39,36 @@ public class AttackMenuWidget extends SevenButtonsWidget
         setButtonText(index, "");
     }
 
-    public void init(AGuardian guardian)
+    public void init(AGuardian guardian, boolean disableAbilitiesWithInsufficientMP)
     {
         // Set all buttons inactive & reset appearance
-        for(Integer i : getButtons().keys()) {resetButton(i);}
+        for (Integer i : getButtons().keys())
+        {
+            resetButton(i);
+        }
 
-            // for every attack, activate a button
-            for (int i = 0; i < 7; i++) {
+        // for every attack, activate a button
+        for (int i = 0; i < 7; i++)
+        {
+            Ability.aID abilityID = guardian.getAbilityGraph().getActiveAbility(i);
 
-                Ability.aID abilityID = guardian.getAbilityGraph().getActiveAbility(i);
+            if (abilityID != null) {
 
+                Ability attack = GuardiansServiceLocator.getAbilities().getAbility(abilityID);
+                setButtonStyle(i, skin, AssetPath.Skin.attackButtonStyle(attack.element));
+                setButtonText(i, Services.getL18N().Abilities().get(attack.name));
 
-                if (abilityID != null) {
-                    Ability attack = GuardiansServiceLocator.getAbilities().getAbility(abilityID);
-                    setButtonStyle(i, skin, AssetPath.Skin.attackButtonStyle(attack.element));
-                    String mpCostString = (attack.MPcost > 0) ? (" " + Integer.toString(attack.MPcost)) : "";
-                    setButtonText(i, Services.getL18N().Abilities().get(attack.name) + mpCostString);
+                enableButton(i);
 
-                    // Disable Ability, when monster does not have enough MP for it
-                    if (attack.MPcost <= guardian.getIndividualStatistics().getMP())
-                        enableButton(i);
+                // Disable Ability, when monster does not have enough MP for it
+                if (disableAbilitiesWithInsufficientMP) {
+
+                    if (attack.MPcost > guardian.getIndividualStatistics().getMP()) {
+
+                        disableButton(i);
+                    }
                 }
             }
+        }
     }
 }

@@ -141,7 +141,7 @@ public class BattleHUD extends ABattleHUD
         battleSystem.getQueue().addObserver(battleQueueWidget);
 
         // initialize attack menu with active monster
-        attackMenu.init(battleSystem.getActiveMonster());
+        attackMenu.init(battleSystem.getActiveMonster(), true);
 
         statusWidget.init(battleSystem);
         animationWidget.init(battleSystem);
@@ -586,7 +586,7 @@ public class BattleHUD extends ABattleHUD
 
             // Setup Widgets
             actionMenu.setCallbacks(battleActionCallbacks);
-            attackMenu.init(battleSystem.getActiveMonster());
+            attackMenu.init(battleSystem.getActiveMonster(), true);
 
             state = BattleState.ACTIONMENU;
         }
@@ -608,7 +608,7 @@ public class BattleHUD extends ABattleHUD
             attackMenuAddOn.addToStage(stage);
             attackInfoMenuFrame.addToStage(stage);
 
-            attackInfoMenu.init(battleSystem.getActiveMonster());
+            attackInfoMenu.init(battleSystem.getActiveMonster(), false);
             attackInfoMenu.toAttackInfoStyle();
 
             state = BattleState.ATTACK_INFO_MENU;

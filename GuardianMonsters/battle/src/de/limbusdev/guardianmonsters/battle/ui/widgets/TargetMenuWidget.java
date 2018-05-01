@@ -58,7 +58,7 @@ public class TargetMenuWidget extends SevenButtonsWidget implements Observer
         addMonstersToMenu(queue.getCombatTeamRight(), Constant.RIGHT);
 
         if(areaMode) {
-            setButtonText(4, Services.getL18N().Battle().get("battle_choose_area"));
+            setButtonText(3, Services.getL18N().Battle().get("battle_choose_area"));
             super.setButtonStyle(0, Element.ARTHROPODA);
             super.setButtonStyle(1, Element.ARTHROPODA);
             super.setButtonStyle(2, Element.ARTHROPODA);

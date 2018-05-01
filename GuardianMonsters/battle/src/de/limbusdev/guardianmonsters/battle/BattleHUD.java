@@ -318,14 +318,10 @@ public class BattleHUD extends ABattleHUD
         };
 
         // ......................................................................................... attack info menu
-        attackInfoMenuCallbacks = nr ->
-        {
-            battleStateSwitcher.toAttackDetail(
-                battleSystem
+        attackInfoMenuCallbacks = nr -> battleStateSwitcher.toAttackDetail(battleSystem
                     .getActiveMonster()
                     .getAbilityGraph()
                     .getActiveAbility(nr));
-        };
 
         // ......................................................................................... attack detail label
         attackDetailLabelBackCB = () -> battleStateSwitcher.toAttackInfoMenu();
@@ -495,10 +491,7 @@ public class BattleHUD extends ABattleHUD
         };
 
         // ......................................................................................... monster menu
-        monsterMenuCallbacks = nr ->
-        {
-            battleSystem.replaceActiveMonster(leftTeam.get(nr));
-        };
+        monsterMenuCallbacks = nr -> battleSystem.replaceActiveMonster(leftTeam.get(nr));
     }
 
     private void showLevelUp(AGuardian m)

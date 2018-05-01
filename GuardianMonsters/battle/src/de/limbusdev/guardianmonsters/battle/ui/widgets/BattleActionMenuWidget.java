@@ -1,12 +1,11 @@
 package de.limbusdev.guardianmonsters.battle.ui.widgets;
 
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import de.limbusdev.guardianmonsters.ui.widgets.Callback;
+import de.limbusdev.guardianmonsters.ui.widgets.SimpleClickListener;
 
 public class BattleActionMenuWidget extends BattleWidget
 {
@@ -69,45 +68,10 @@ public class BattleActionMenuWidget extends BattleWidget
 
     private void initCallbackHandler()
     {
-        backButton.addListener(
-            new ClickListener() {
-                @Override
-                public void clicked(InputEvent event, float x, float y)
-                {
-                    backCB.onClick();
-                }
-            }
-        );
-
-        bagButton.addListener(
-            new ClickListener() {
-                @Override
-                public void clicked(InputEvent event, float x, float y)
-                {
-                    bagCB.onClick();
-                }
-            }
-        );
-
-        monsterButton.addListener(
-            new ClickListener() {
-                @Override
-                public void clicked(InputEvent event, float x, float y)
-                {
-                    monsterCB.onClick();
-                }
-            }
-        );
-
-        extraButton.addListener(
-            new ClickListener() {
-                @Override
-                public void clicked(InputEvent event, float x, float y)
-                {
-                    extraCB.onClick();
-                }
-            }
-        );
+        backButton.addListener   (new SimpleClickListener(() -> backCB.onClick()));
+        bagButton.addListener    (new SimpleClickListener(() -> bagCB.onClick()));
+        monsterButton.addListener(new SimpleClickListener(() -> monsterCB.onClick()));
+        extraButton.addListener  (new SimpleClickListener(() -> extraCB.onClick()));
     }
 
     public void setCallbacks(Callback backCB, Callback bagCB, Callback monsterCB, Callback extraCB)

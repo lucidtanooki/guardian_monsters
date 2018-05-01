@@ -72,24 +72,27 @@ public class BattleHUD extends ABattleHUD
     private SevenButtonsWidget.CentralHalfButtonsAddOn attackMenuAddOn;
 
     // CallbackHandlers
-    private BattleActionMenuWidget.Callbacks    battleActionCallbacks;
-    private BattleMainMenuWidget.Callbacks      mainMenuCallbacks;
-    private BattleActionMenuWidget.Callbacks    infoLabelCallbacks;
-    private BattleActionMenuWidget.Callbacks    infoLabelStatusEffectCallbacks;
-    private BattleActionMenuWidget.Callbacks    endOfBattleCallbacks;
-    private BattleActionMenuWidget.Callbacks    attackDetailBackButtonCallback;
-    private SevenButtonsWidget.Callbacks        attackMenuCallbacks;
-    private BattleSystem.Callbacks              battleSystemCallbacks;
-    private SevenButtonsWidget.Callbacks        targetMenuCallbacks;
-    private SevenButtonsWidget.Callbacks        targetAreaMenuCallbacks;
-    private BattleActionMenuWidget.Callbacks    battleStartLabelCallbacks;
-    private BattleActionMenuWidget.Callbacks    backToActionMenuCallbacks;
-    private BattleActionMenuWidget.Callbacks    escapeSuccessCallbacks;
-    private BattleActionMenuWidget.Callbacks    escapeFailCallbacks;
-    private BattleAnimationWidget.Callbacks     battleAnimationCallbacks;
-    private SevenButtonsWidget.Callbacks        monsterMenuCallbacks;
-    private SevenButtonsWidget.Callbacks        attackMenuAddOnCallbacks;
-    private SevenButtonsWidget.Callbacks        attackInfoMenuCallbacks;
+    private BattleSystem.Callbacks          battleSystemCallbacks;
+    private BattleMainMenuWidget.Callbacks  mainMenuCallbacks;
+    private BattleAnimationWidget.Callbacks battleAnimationCallbacks;
+
+    private BattleActionMenuWidget.Callback
+        actionMenuBackCB, actionMenuBagCB, actionMenuMonsterCB, actionMenuExtraCB;
+    private BattleActionMenuWidget.Callback infoLabelBackCB;
+    private BattleActionMenuWidget.Callback battleStartLabelBackCB;
+    private BattleActionMenuWidget.Callback statusEffectLabelBackCB;
+    private BattleActionMenuWidget.Callback attackDetailLabelBackCB;
+    private BattleActionMenuWidget.Callback endOfBattleLabelBackCB;
+    private BattleActionMenuWidget.Callback backToActionMenuCB;
+    private BattleActionMenuWidget.Callback escapeSuccessLabelBackCB;
+    private BattleActionMenuWidget.Callback escapeFailedLabelBackCB;
+
+    private SevenButtonsWidget.Callbacks    attackMenuCallbacks;
+    private SevenButtonsWidget.Callbacks    targetMenuCallbacks;
+    private SevenButtonsWidget.Callbacks    targetAreaMenuCallbacks;
+    private SevenButtonsWidget.Callbacks    monsterMenuCallbacks;
+    private SevenButtonsWidget.Callbacks    attackMenuAddOnCallbacks;
+    private SevenButtonsWidget.Callbacks    attackInfoMenuCallbacks;
 
     private Team leftTeam, rightTeam;
     private Inventory inventory;
@@ -179,7 +182,7 @@ public class BattleHUD extends ABattleHUD
         statusWidget        = new BattleStatusOverviewWidget(skin);
         animationWidget     = new BattleAnimationWidget(battleAnimationCallbacks);
         mainMenu            = new BattleMainMenuWidget(skin, mainMenuCallbacks);
-        actionMenu          = new BattleActionMenuWidget(skin, battleActionCallbacks);
+        actionMenu          = new BattleActionMenuWidget(skin, actionMenuBackCB, actionMenuBagCB, actionMenuMonsterCB, actionMenuExtraCB);
         attackMenu          = new AttackMenuWidget(skin, attackMenuCallbacks::onButtonNr);
         attackInfoMenu      = new AttackMenuWidget(skin, attackInfoMenuCallbacks);
         attackMenuAddOn     = new SevenButtonsWidget.CentralHalfButtonsAddOn(skin, attackMenuAddOnCallbacks);
@@ -192,9 +195,9 @@ public class BattleHUD extends ABattleHUD
 
         infoLabelWidget = new InfoLabelWidget(skin);
         attackDetailWidget = new AbilityInfoLabelWidget(skin, Services.getUI().getInventorySkin());
-        attackDetailBackButton = new BattleActionMenuWidget(skin, attackDetailBackButtonCallback);
+        attackDetailBackButton = new BattleActionMenuWidget(skin, attackDetailLabelBackCB);
         attackDetailBackButton.disableAllButBackButton();
-        attackInfoMenuFrame = new BattleActionMenuWidget(skin, new BattleActionMenuWidget.Callbacks() {});
+        attackInfoMenuFrame = new BattleActionMenuWidget(skin, () -> {});
         attackInfoMenuFrame.disableAllChildButtons();
     }
 
@@ -205,51 +208,13 @@ public class BattleHUD extends ABattleHUD
 
         battleStateSwitcher = new BattleStateSwitcher();
 
-        battleStartLabelCallbacks = new BattleActionMenuWidget.Callbacks()
-        {
-            @Override
-            public void onBackButton()
-            {
-                System.out.println("BattleStartLabel: onBackButton()");
-                battleStateSwitcher.toMainMenu();
-            }
-        };
-
-        battleActionCallbacks = new BattleActionMenuWidget.Callbacks()
-        {
-            @Override
-            public void onMonsterButton()
-            {
-                System.out.println("Show Monster Menu");
-                monsterMenuWidget.init(battleSystem, Constant.LEFT);
-                battleStateSwitcher.toTeamMenu();
-            }
-
-            @Override
-            public void onBagButton()
-            {
-                // TODO make new widget, as this one belongs to package inventory and is not accessible here
-                /*stage.addActor(new ItemChoice(Services.getUI().getInventorySkin(), inventory, leftTeam, battleSystem));*/
-            }
-
-            @Override
-            public void onBackButton()
-            {
-                System.out.println("BattleActionButtons: onBackButton()");
-                battleStateSwitcher.toMainMenu();
-            }
-
-            @Override
-            public void onExtraButton() {
-                battleSystem.defend();
-            }
-        };
+        // ......................................................................................... main menu
 
         mainMenuCallbacks = new BattleMainMenuWidget.Callbacks()
         {
             @Override
-            public void onRunButton() {
-                System.out.println("Input: Run Button");
+            public void onRunButton()
+            {
                 if(BattleCalculator.tryToRun(leftTeam, rightTeam)) {
                     battleStateSwitcher.toEscapeSuccessInfo();
                 } else {
@@ -258,63 +223,76 @@ public class BattleHUD extends ABattleHUD
             }
 
             @Override
-            public void onSwordButton() {
-                System.out.println("MainMenuButtons: onSwordButton()");
-                System.out.println("Input: Sword Button");
+            public void onSwordButton()
+            {
                 battleSystem.continueBattle();
             }
         };
 
-        infoLabelCallbacks = new BattleActionMenuWidget.Callbacks()
+        // ......................................................................................... battle start label
+        battleStartLabelBackCB = () -> battleStateSwitcher.toMainMenu();
+
+        // ......................................................................................... battle action menu
+        actionMenuBackCB = () -> battleStateSwitcher.toMainMenu();
+        actionMenuExtraCB = () -> battleSystem.defend();
+
+        actionMenuBagCB = () ->
         {
-            @Override
-            public void onBackButton()
-            {
-                if(battleSystem.getActiveMonster().getIndividualStatistics().getStatusEffect() == IndividualStatistics.StatusEffect.HEALTHY) {
-                    battleSystem.nextMonster();
-                    battleSystem.continueBattle();
-                } else {
-                    battleStateSwitcher.toStatusEffectInfoLabel();
-                    battleSystem.applyStatusEffect();
-                }
-            }
+            // TODO make new widget, as this one belongs to package inventory and is not accessible here
+            /*stage.addActor(new ItemChoice(Services.getUI().getInventorySkin(), inventory, leftTeam, battleSystem));*/
         };
 
-        infoLabelStatusEffectCallbacks = new BattleActionMenuWidget.Callbacks()
+        actionMenuMonsterCB = () ->
         {
-            @Override
-            public void onBackButton()
-            {
-                System.out.println("InfoLabelButtons: onBackButton()");
-                actionMenu.setCallbacks(infoLabelCallbacks);
+            monsterMenuWidget.init(battleSystem, Constant.LEFT);
+            battleStateSwitcher.toTeamMenu();
+        };
+
+        // ......................................................................................... info label
+        infoLabelBackCB = () ->
+        {
+            IndividualStatistics.StatusEffect statusEffect = battleSystem
+                .getActiveMonster()
+                .getIndividualStatistics()
+                .getStatusEffect();
+
+            if(statusEffect == IndividualStatistics.StatusEffect.HEALTHY) {
                 battleSystem.nextMonster();
                 battleSystem.continueBattle();
+            } else {
+                battleStateSwitcher.toStatusEffectInfoLabel();
+                battleSystem.applyStatusEffect();
             }
         };
 
-
-        endOfBattleCallbacks = new BattleActionMenuWidget.Callbacks()
+        // ......................................................................................... status effect label
+        statusEffectLabelBackCB = () ->
         {
-            @Override
-            public void onBackButton()
-            {
-                boolean teamOk = false;
-                for(AGuardian m : leftTeam.values()) {
-                    if(m.getIndividualStatistics().isFit()) {
-                        teamOk = true || teamOk;
-                    } else {
-                        teamOk = false || teamOk;
-                    }
+            actionMenu.setCallbacks(infoLabelBackCB, ()->{}, ()->{}, ()->{});
+            battleSystem.nextMonster();
+            battleSystem.continueBattle();
+        };
+
+        // ......................................................................................... end of battle
+        endOfBattleLabelBackCB = () ->
+        {
+            boolean teamOk = false;
+            for(AGuardian m : leftTeam.values()) {
+                if(m.getIndividualStatistics().isFit()) {
+                    teamOk = true || teamOk;
+                } else {
+                    teamOk = false || teamOk;
                 }
-                if(!teamOk) Services.getScreenManager().getGame().create();
-                else {
-                    Services.getAudio().stopMusic();
-                    BattleResultScreen resultScreen = new BattleResultScreen(leftTeam, battleSystem.getResult());
-                    Services.getScreenManager().pushScreen(resultScreen);
-                }
+            }
+            if(!teamOk) Services.getScreenManager().getGame().create();
+            else {
+                Services.getAudio().stopMusic();
+                BattleResultScreen resultScreen = new BattleResultScreen(leftTeam, battleSystem.getResult());
+                Services.getScreenManager().pushScreen(resultScreen);
             }
         };
 
+        // ......................................................................................... attack menu
         attackMenuCallbacks = nr ->
         {
             AGuardian activeGuardian = battleSystem.getActiveMonster();
@@ -336,6 +314,7 @@ public class BattleHUD extends ABattleHUD
             }
         };
 
+        // ......................................................................................... attack info menu
         attackInfoMenuCallbacks = nr ->
         {
             battleStateSwitcher.toAttackDetail(
@@ -345,15 +324,10 @@ public class BattleHUD extends ABattleHUD
                     .getActiveAbility(nr));
         };
 
-        attackDetailBackButtonCallback = new BattleActionMenuWidget.Callbacks()
-        {
-            @Override
-            public void onBackButton()
-            {
-                battleStateSwitcher.toAttackInfoMenu();
-            }
-        };
+        // ......................................................................................... attack detail label
+        attackDetailLabelBackCB = () -> battleStateSwitcher.toAttackInfoMenu();
 
+        // ......................................................................................... attack menu info switch
         attackMenuAddOnCallbacks = new SevenButtonsWidget.Callbacks()
         {
             private boolean checked=false;
@@ -374,6 +348,7 @@ public class BattleHUD extends ABattleHUD
             }
         };
 
+        // ......................................................................................... battle system
         battleSystemCallbacks = new BattleSystem.Callbacks()
         {
             @Override
@@ -443,7 +418,8 @@ public class BattleHUD extends ABattleHUD
             }
 
             @Override
-            public void onAreaAttack(AGuardian attacker, ArrayMap<Integer,AGuardian> targets, Ability ability, Array<AttackCalculationReport> reports)
+            public void onAreaAttack(AGuardian attacker, ArrayMap<Integer,AGuardian> targets,
+                                     Ability ability, Array<AttackCalculationReport> reports)
             {
                 // Change widget set
                 battleStateSwitcher.toAnimation();
@@ -471,7 +447,8 @@ public class BattleHUD extends ABattleHUD
             {
                 infoLabelWidget.setWholeText(
                         Services.getL18N().getGuardianNicknameIfAvailable(guardian) + " " +
-                        Services.getL18N().Battle().get("batt_info_status_effect_" + guardian.getIndividualStatistics().getStatusEffect().toString().toLowerCase()));
+                        Services.getL18N().Battle().get("batt_info_status_effect_"
+                            + guardian.getIndividualStatistics().getStatusEffect().toString().toLowerCase()));
                 infoLabelWidget.animateTextAppearance();
             }
 
@@ -485,57 +462,38 @@ public class BattleHUD extends ABattleHUD
             }
         };
 
+        // ......................................................................................... target menu
         targetMenuCallbacks = nr ->
         {
-            System.out.println("TargetMenuButtons: onButtonNr("+nr+")");
             AGuardian target = targetMenuWidget.getMonsterOfIndex(nr);
             battleSystem.setChosenTarget(target);
             battleSystem.attack();
         };
 
+        // ......................................................................................... target area menu
         targetAreaMenuCallbacks = nr ->
         {
-            System.out.println("TargetMenuButtons: onButtonNr("+nr+")");
             battleSystem.setChosenArea(targetAreaMenuWidget.getCombatTeamOfIndex(nr));
             battleSystem.attack();
         };
 
-        backToActionMenuCallbacks = new BattleActionMenuWidget.Callbacks()
-        {
-            @Override
-            public void onBackButton() {
-                System.out.println("BackToActionMenuButtons: onBackButton()");
-                battleStateSwitcher.toActionMenu();
-            }
-        };
+        // ......................................................................................... back to action menu
+        backToActionMenuCB = () -> battleStateSwitcher.toActionMenu();
 
-        escapeSuccessCallbacks = new BattleActionMenuWidget.Callbacks()
-        {
-            @Override
-            public void onBackButton() {
-                System.out.println("EscapeSuccessButtons: onBackButton()");
-                goToPreviousScreen();
-            }
-        };
+        // ......................................................................................... escape success / fail
+        escapeSuccessLabelBackCB = () -> goToPreviousScreen();
+        escapeFailedLabelBackCB  = () -> battleSystem.continueBattle();
 
-        escapeFailCallbacks = new BattleActionMenuWidget.Callbacks()
-        {
-            @Override
-            public void onBackButton() {
-                System.out.println("EscapeFailButtons: onBackButton()");
-                battleSystem.continueBattle();
-            }
-        };
-
+        // ......................................................................................... battle animation
         battleAnimationCallbacks = () ->
         {
             battleSystem.applyAttack();
             actionMenu.enable(actionMenu.backButton);
         };
 
+        // ......................................................................................... monster menu
         monsterMenuCallbacks = nr ->
         {
-            System.out.println("Teammember " + nr);
             battleSystem.replaceActiveMonster(leftTeam.get(nr));
         };
     }
@@ -553,7 +511,8 @@ public class BattleHUD extends ABattleHUD
 
         public BattleState state;
 
-        public void toBattleStart() {
+        public void toBattleStart()
+        {
             reset();
 
             // Add Widgets
@@ -566,14 +525,15 @@ public class BattleHUD extends ABattleHUD
             actionMenu.disableAllButBackButton();
 
             // Set Callbacks
-            actionMenu.setCallbacks(battleStartLabelCallbacks);
+            actionMenu.setCallbacks(battleStartLabelBackCB, ()->{}, ()->{}, ()->{});
             infoLabelWidget.setWholeText(Services.getL18N().Battle().get("battle_start"));
             infoLabelWidget.animateTextAppearance();
 
             state = BattleState.BATTLE_START;
         }
 
-        public void toActionMenu() {
+        public void toActionMenu()
+        {
             reset();
 
             // Add Widgets
@@ -585,7 +545,7 @@ public class BattleHUD extends ABattleHUD
             attackMenuAddOn.addToStage(stage);
 
             // Setup Widgets
-            actionMenu.setCallbacks(battleActionCallbacks);
+            actionMenu.setCallbacks(actionMenuBackCB, actionMenuBagCB, actionMenuMonsterCB, actionMenuExtraCB);
             attackMenu.init(battleSystem.getActiveMonster(), true);
 
             state = BattleState.ACTIONMENU;
@@ -638,7 +598,7 @@ public class BattleHUD extends ABattleHUD
             String wholeText = Services.getL18N().Battle().get(textKey);
             infoLabelWidget.setWholeText(wholeText);
             infoLabelWidget.animateTextAppearance();
-            actionMenu.setCallbacks(endOfBattleCallbacks);
+            actionMenu.setCallbacks(endOfBattleLabelBackCB, ()->{}, ()->{}, ()->{});
 
             statusWidget.addToStage(stage);
 
@@ -654,23 +614,25 @@ public class BattleHUD extends ABattleHUD
             stage.addAction(endOfBattleMusicSequence);
         }
 
-        public void toAnimation() {
+        public void toAnimation()
+        {
             reset();
             toInfoLabel();
             actionMenu.disableAllChildButtons();
             battleQueueWidget.addToStage(stage);
-            actionMenu.setCallbacks(infoLabelCallbacks);
+            actionMenu.setCallbacks(infoLabelBackCB, ()->{}, ()->{}, ()->{});
 
             state = BattleState.ANIMATION;
         }
 
-        public void toTargetChoice() {
+        public void toTargetChoice()
+        {
             reset();
             animationWidget.addToStage(battleAnimationStage);
             statusWidget.addToStage(battleAnimationStage);
             actionMenu.disableAllButBackButton();
             actionMenu.addToStage(stage);
-            actionMenu.setCallbacks(backToActionMenuCallbacks);
+            actionMenu.setCallbacks(backToActionMenuCB, ()->{}, ()->{}, ()->{});
             targetMenuWidget.addToStage(stage);
             battleQueueWidget.addToStage(stage);
 
@@ -684,20 +646,21 @@ public class BattleHUD extends ABattleHUD
             statusWidget.addToStage(battleAnimationStage);
             actionMenu.disableAllButBackButton();
             actionMenu.addToStage(stage);
-            actionMenu.setCallbacks(backToActionMenuCallbacks);
+            actionMenu.setCallbacks(backToActionMenuCB, ()->{}, ()->{}, ()->{});
             targetAreaMenuWidget.addToStage(stage);
             battleQueueWidget.addToStage(stage);
 
             state = BattleState.TARGET_AREA_CHOICE;
         }
 
-        public void toTeamMenu() {
+        public void toTeamMenu()
+        {
             reset();
             animationWidget.addToStage(battleAnimationStage);
             statusWidget.addToStage(battleAnimationStage);
             actionMenu.disableAllButBackButton();
             actionMenu.addToStage(stage);
-            actionMenu.setCallbacks(backToActionMenuCallbacks);
+            actionMenu.setCallbacks(backToActionMenuCB, ()->{}, ()->{}, ()->{});
             monsterMenuWidget.addToStage(stage);
 
             battleQueueWidget.addToStage(stage);
@@ -705,7 +668,8 @@ public class BattleHUD extends ABattleHUD
             state = BattleState.TARGET_CHOICE;
         }
 
-        public void toMainMenu() {
+        public void toMainMenu()
+        {
             reset();
             animationWidget.addToStage(battleAnimationStage);
             statusWidget.addToStage(battleAnimationStage);
@@ -716,7 +680,8 @@ public class BattleHUD extends ABattleHUD
             state = BattleState.MAINMENU;
         }
 
-        public void toInfoLabel() {
+        public void toInfoLabel()
+        {
             reset();
 
             animationWidget.addToStage(battleAnimationStage);
@@ -732,7 +697,7 @@ public class BattleHUD extends ABattleHUD
             reset();
             toInfoLabel();
             battleQueueWidget.addToStage(stage);
-            actionMenu.setCallbacks(infoLabelStatusEffectCallbacks);
+            actionMenu.setCallbacks(statusEffectLabelBackCB, ()->{}, ()->{}, ()->{});
 
             state = BattleState.ANIMATION;
         }
@@ -743,7 +708,7 @@ public class BattleHUD extends ABattleHUD
             String wholeText = Services.getL18N().Battle().get("escape_success");
             infoLabelWidget.setWholeText(wholeText);
             infoLabelWidget.animateTextAppearance();
-            actionMenu.setCallbacks(escapeSuccessCallbacks);
+            actionMenu.setCallbacks(escapeSuccessLabelBackCB, ()->{}, ()->{}, ()->{});
         }
 
         public void toEscapeFailInfo()
@@ -752,7 +717,7 @@ public class BattleHUD extends ABattleHUD
             String wholeText = Services.getL18N().Battle().get("escape_fail");
             infoLabelWidget.setWholeText(wholeText);
             infoLabelWidget.animateTextAppearance();
-            actionMenu.setCallbacks(escapeFailCallbacks);
+            actionMenu.setCallbacks(escapeFailedLabelBackCB, ()->{}, ()->{}, ()->{});
         }
 
         public void reset()
@@ -772,6 +737,7 @@ public class BattleHUD extends ABattleHUD
             attackDetailBackButton.remove();
             attackDetailWidget.remove();
             attackInfoMenuFrame.remove();
+            attackInfoMenu.remove();
 
             actionMenu.enable();
         }

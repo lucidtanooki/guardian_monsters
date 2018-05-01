@@ -15,16 +15,30 @@ public class BattleActionMenuWidget extends BattleWidget
     public ImageButton bagButton;
     public ImageButton extraButton;
 
-    private Callbacks callbacks;
+    private Callback backCB, bagCB, monsterCB, extraCB;
+
+    public BattleActionMenuWidget(Skin skin, Callback backCB)
+    {
+        this(skin, backCB, () -> {}, () -> {}, () -> {});
+    }
 
     /**
      *
      * @param skin battle action UI skin
      */
-    public BattleActionMenuWidget(Skin skin, Callbacks callbacks) {
+    public BattleActionMenuWidget(
+        Skin skin,
+        Callback backCB,
+        Callback bagCB,
+        Callback monsterCB,
+        Callback extraCB)
+    {
         super();
 
-        this.callbacks = callbacks;
+        this.backCB     = backCB;
+        this.bagCB      = bagCB;
+        this.monsterCB  = monsterCB;
+        this.extraCB    = extraCB;
 
         monsterButton   = new BattleHUDMenuButton(skin, BattleHUDMenuButton.TEAM    );
         extraButton     = new BattleHUDMenuButton(skin, BattleHUDMenuButton.DEFEND  );
@@ -51,12 +65,14 @@ public class BattleActionMenuWidget extends BattleWidget
         super.addToStageAndFadeIn(newParent);
     }
 
-    private void initCallbackHandler() {
+    private void initCallbackHandler()
+    {
         backButton.addListener(
             new ClickListener() {
                 @Override
-                public void clicked(InputEvent event, float x, float y) {
-                    callbacks.onBackButton();
+                public void clicked(InputEvent event, float x, float y)
+                {
+                    backCB.onClick();
                 }
             }
         );
@@ -64,8 +80,9 @@ public class BattleActionMenuWidget extends BattleWidget
         bagButton.addListener(
             new ClickListener() {
                 @Override
-                public void clicked(InputEvent event, float x, float y) {
-                    callbacks.onBagButton();
+                public void clicked(InputEvent event, float x, float y)
+                {
+                    bagCB.onClick();
                 }
             }
         );
@@ -73,8 +90,9 @@ public class BattleActionMenuWidget extends BattleWidget
         monsterButton.addListener(
             new ClickListener() {
                 @Override
-                public void clicked(InputEvent event, float x, float y) {
-                    callbacks.onMonsterButton();
+                public void clicked(InputEvent event, float x, float y)
+                {
+                    monsterCB.onClick();
                 }
             }
         );
@@ -82,15 +100,20 @@ public class BattleActionMenuWidget extends BattleWidget
         extraButton.addListener(
             new ClickListener() {
                 @Override
-                public void clicked(InputEvent event, float x, float y) {
-                    callbacks.onExtraButton();
+                public void clicked(InputEvent event, float x, float y)
+                {
+                    extraCB.onClick();
                 }
             }
         );
     }
 
-    public void setCallbacks(Callbacks callbacks) {
-        this.callbacks = callbacks;
+    public void setCallbacks(Callback backCB, Callback bagCB, Callback monsterCB, Callback extraCB)
+    {
+        this.backCB     = backCB;
+        this.bagCB      = bagCB;
+        this.monsterCB  = monsterCB;
+        this.extraCB    = extraCB;
     }
 
     public void disableAllButBackButton()
@@ -110,12 +133,9 @@ public class BattleActionMenuWidget extends BattleWidget
         disable(backButton);
     }
 
-    // INNER INTERFACE
-    public static abstract class Callbacks
+    // Inner Interface
+    public interface Callback
     {
-        public void onMonsterButton(){}
-        public void onBagButton(){}
-        public void onBackButton(){}
-        public void onExtraButton(){}
+        void onClick();
     }
 }

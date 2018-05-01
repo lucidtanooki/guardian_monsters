@@ -81,7 +81,7 @@
 
     "elem-earth":       {"font": "font16w", "background": "button-element-earth"},
     "elem-water":       {"font": "font16w", "background": "button-element-water"},
-    "elem-flame":       {"font": "font16w", "background": "button-element-flame"},
+    "elem-fire":       {"font": "font16w", "background": "button-element-fire"},
     "elem-air":         {"font": "font16",  "background": "button-element-air"},
     "elem-lightning":   {"font": "font16",  "background": "button-element-lightning"},
     "elem-arthropoda":  {"font": "font16",  "background": "button-element-arthropoda"},

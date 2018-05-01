@@ -1,6 +1,7 @@
 package de.limbusdev.guardianmonsters.battle.ui.widgets;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 
 import de.limbusdev.guardianmonsters.assets.paths.AssetPath;
 import de.limbusdev.guardianmonsters.guardians.Element;
@@ -21,6 +22,14 @@ public class AttackMenuWidget extends SevenButtonsWidget
     public AttackMenuWidget(Skin skin, Callbacks callbacks)
     {
         super(skin, callbacks::onButtonNr, order);
+    }
+
+    public void toAttackInfoStyle()
+    {
+        for(Integer i : getButtons().keys())
+        {
+            getButton(i).setStyle(skin.get("b-attack-info", TextButton.TextButtonStyle.class));
+        }
     }
 
     private void resetButton(int index)

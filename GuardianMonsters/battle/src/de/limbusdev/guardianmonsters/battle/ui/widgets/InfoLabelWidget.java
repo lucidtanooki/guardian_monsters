@@ -1,3 +1,13 @@
+
+/*
+ * *************************************************************************************************
+ * Copyright (c) 2018. limbusdev (Georg Eckert) - All Rights Reserved
+ * Unauthorized copying of this file, via any medium is strictly prohibited
+ * Proprietary and confidential
+ * Written by Georg Eckert <georg.eckert@limbusdev.de>
+ * *************************************************************************************************
+ */
+
 package de.limbusdev.guardianmonsters.battle.ui.widgets;
 
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
@@ -8,19 +18,16 @@ import com.badlogic.gdx.utils.Align;
 
 import de.limbusdev.guardianmonsters.ui.Constant;
 
-/**
- * Created by georg on 24.11.16.
- */
-
-public class InfoLabelWidget extends de.limbusdev.guardianmonsters.battle.ui.widgets.BattleWidget
+public class InfoLabelWidget extends BattleWidget
 {
 
-    private Image infoBGImg;
+    protected Image infoBGImg;
     public Label infoLabel;
     private String wholeText;
     private String currentText;
 
-    public InfoLabelWidget(Skin skin) {
+    public InfoLabelWidget(Skin skin)
+    {
         super();
 
         infoBGImg = new Image(skin.getDrawable("label"));
@@ -42,14 +49,12 @@ public class InfoLabelWidget extends de.limbusdev.guardianmonsters.battle.ui.wid
         addAction(Actions.repeat(
             wholeText.length(),
             Actions.sequence(
-                Actions.run(new Runnable() {
-                @Override
-                public void run() {
+                Actions.run(() ->
+                {
                     currentText += wholeText.substring(0,1);
                     wholeText = wholeText.substring(1,wholeText.length());
                     infoLabel.setText(currentText);
-                }
-            }),
+                }),
                 Actions.delay(.01f)
         )));
     }

@@ -32,12 +32,17 @@ public class BattleHUDTextButton extends TextButton {
     {
         String style;
 
-        if(position <= 6) {
-            if (element == null) element = Element.NONE;
-
-            style = "tb-attack-" + element.toString().toLowerCase();
-        } else {
-            style = "tb-attack-none-center" + ((position == 7) ? "top" : "bottom");
+        switch(position)
+        {
+            case CENTERTOP:
+                style = "b-attack-question-centertop";
+                break;
+            case CENTERBOTTOM:
+                style = "tb-attack-none-centerbottom";
+                break;
+            default:
+                if (element == null) element = Element.NONE;
+                style = "tb-attack-" + element.toString().toLowerCase();
         }
 
         return style;

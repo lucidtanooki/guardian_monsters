@@ -34,6 +34,8 @@
     "tb-attack-lightning":          {"down": "b-attack-lightning-down", "up": "b-attack-lightning-up",  "font": "font15", "pressedOffsetY": -2},
     "tb-attack-none-centertop":   {"down":"b-attack-none-centertop-down",   "up":"b-attack-none-centertop-up",   "font":"font15","pressedOffsetY":-2},
     "tb-attack-none-centerbottom":{"down":"b-attack-none-centerbottom-down","up":"b-attack-none-centerbottom-up","font":"font15","pressedOffsetY":-2},
+    "b-attack-question-centertop":{"checked": "b-attack-question-centertop-checked", "down":"b-attack-question-centertop-down","up":"b-attack-question-centertop-up","font":"font15","pressedOffsetY":-2},
+    "b-attack-info":                {"down": "b-attack-info-down",      "up": "b-attack-info-up",       "font": "font15", "pressedOffsetY": -2}
   },
 	
   "com.badlogic.gdx.scenes.scene2d.ui.ProgressBar$ProgressBarStyle": {

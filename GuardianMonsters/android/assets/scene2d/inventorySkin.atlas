@@ -1478,7 +1478,7 @@ button-element-lindworm
   orig: 16, 16
   offset: 0, 0
   index: -1
-button-element-flame
+button-element-demon
   rotate: false
   xy: 647, 47
   size: 16, 16
@@ -1486,7 +1486,7 @@ button-element-flame
   orig: 16, 16
   offset: 0, 0
   index: -1
-button-element-demon
+button-element-mountain
   rotate: false
   xy: 665, 65
   size: 16, 16
@@ -1494,17 +1494,9 @@ button-element-demon
   orig: 16, 16
   offset: 0, 0
   index: -1
-button-element-mountain
-  rotate: false
-  xy: 665, 47
-  size: 16, 16
-  split: 4, 4, 4, 6
-  orig: 16, 16
-  offset: 0, 0
-  index: -1
 guardosphere-frame
   rotate: false
-  xy: 739, 147
+  xy: 665, 47
   size: 16, 16
   split: 7, 7, 7, 7
   orig: 16, 16
@@ -1512,14 +1504,14 @@ guardosphere-frame
   index: -1
 stats-symbol-exp
   rotate: false
-  xy: 683, 69
+  xy: 739, 147
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 guardosphere-frame-down
   rotate: false
-  xy: 683, 51
+  xy: 683, 69
   size: 16, 16
   split: 7, 7, 7, 7
   orig: 16, 16
@@ -1527,14 +1519,14 @@ guardosphere-frame-down
   index: -1
 stats-symbol-pdef
   rotate: false
-  xy: 697, 87
+  xy: 683, 51
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 button-element-frost
   rotate: false
-  xy: 701, 69
+  xy: 697, 87
   size: 16, 16
   split: 4, 4, 4, 6
   orig: 16, 16
@@ -1542,7 +1534,7 @@ button-element-frost
   index: -1
 button-element-spirit
   rotate: false
-  xy: 701, 51
+  xy: 701, 69
   size: 16, 16
   split: 4, 4, 4, 6
   orig: 16, 16
@@ -1550,7 +1542,7 @@ button-element-spirit
   index: -1
 button-element-arthropoda
   rotate: false
-  xy: 739, 129
+  xy: 701, 51
   size: 16, 16
   split: 4, 4, 4, 6
   orig: 16, 16
@@ -1558,20 +1550,27 @@ button-element-arthropoda
   index: -1
 board-node-empty-enabled
   rotate: false
-  xy: 705, 113
+  xy: 739, 129
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 button-element-forest
   rotate: false
-  xy: 261, 3
+  xy: 705, 113
   size: 16, 16
   split: 4, 4, 4, 6
   orig: 16, 16
   offset: 0, 0
   index: -1
 stats-symbol-hp
+  rotate: false
+  xy: 261, 3
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+board-node-empty-active-selected
   rotate: false
   xy: 279, 3
   size: 16, 16
@@ -1601,17 +1600,18 @@ list-selection
   orig: 8, 8
   offset: 0, 0
   index: -1
-board-node-empty-active-selected
+bg-pattern-3
   rotate: false
   xy: 731, 419
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
-bg-pattern-3
+button-element-fire
   rotate: false
   xy: 731, 401
   size: 16, 16
+  split: 4, 4, 4, 6
   orig: 16, 16
   offset: 0, 0
   index: -1

@@ -3,422 +3,450 @@ battleSkin.png
 format: RGBA8888
 filter: MipMapNearestNearest,MipMapNearestLinear
 repeat: none
+label-info
+  rotate: false
+  xy: 1, 193
+  size: 372, 62
+  orig: 372, 62
+  offset: 0, 0
+  index: -1
 label
   rotate: false
-  xy: 1, 189
+  xy: 1, 129
   size: 372, 62
   orig: 372, 62
   offset: 0, 0
   index: -1
 monStateUIL
   rotate: false
-  xy: 1, 159
+  xy: 375, 227
   size: 208, 28
   orig: 208, 28
   offset: 0, 0
   index: -1
 monStateUIbg2
   rotate: false
-  xy: 375, 223
+  xy: 1, 99
   size: 208, 28
   orig: 208, 28
   offset: 0, 0
   index: -1
 monStateUIname
   rotate: false
-  xy: 1, 129
+  xy: 375, 197
   size: 208, 28
   orig: 208, 28
   offset: 0, 0
   index: -1
 monStateUIL-gold
   rotate: false
-  xy: 211, 166
+  xy: 585, 234
   size: 144, 21
   orig: 144, 21
   offset: 0, 0
   index: -1
 b-attack-bag-up
   rotate: false
-  xy: 375, 189
+  xy: 1, 65
   size: 105, 32
   orig: 105, 32
   offset: 0, 0
   index: -1
 b-attack-ld-down
   rotate: false
-  xy: 1, 95
+  xy: 375, 163
   size: 105, 32
   orig: 105, 32
   offset: 0, 0
   index: -1
 b-attack-monsters-up
   rotate: false
-  xy: 211, 132
+  xy: 585, 200
   size: 105, 32
   orig: 105, 32
   offset: 0, 0
   index: -1
 b-attack-monsters-down
   rotate: false
-  xy: 1, 61
+  xy: 1, 31
   size: 105, 32
   orig: 105, 32
   offset: 0, 0
   index: -1
 b-attack-ld-up
   rotate: false
-  xy: 1, 27
+  xy: 375, 129
   size: 105, 32
   orig: 105, 32
   offset: 0, 0
   index: -1
 b-attack-back-up
   rotate: false
-  xy: 585, 219
+  xy: 211, 95
   size: 105, 32
   orig: 105, 32
   offset: 0, 0
   index: -1
 b-attack-bag-down
   rotate: false
-  xy: 692, 219
+  xy: 318, 95
   size: 105, 32
   orig: 105, 32
   offset: 0, 0
   index: -1
 b-attack-back-down
   rotate: false
-  xy: 799, 219
+  xy: 482, 163
   size: 105, 32
   orig: 105, 32
   offset: 0, 0
   index: -1
 b-attack-frost-down
   rotate: false
-  xy: 108, 95
+  xy: 108, 65
+  size: 82, 32
+  orig: 82, 32
+  offset: 0, 0
+  index: -1
+b-attack-info-up
+  rotate: false
+  xy: 482, 129
   size: 82, 32
   orig: 82, 32
   offset: 0, 0
   index: -1
 b-attack-air-up
   rotate: false
-  xy: 482, 189
+  xy: 425, 95
   size: 82, 32
   orig: 82, 32
   offset: 0, 0
   index: -1
 b-attack-fire-down
   rotate: false
-  xy: 906, 219
+  xy: 108, 31
   size: 82, 32
   orig: 82, 32
   offset: 0, 0
   index: -1
 b-attack-water-up
   rotate: false
-  xy: 108, 61
+  xy: 589, 166
   size: 82, 32
   orig: 82, 32
   offset: 0, 0
   index: -1
 b-attack-fire-up
   rotate: false
-  xy: 108, 27
+  xy: 731, 223
   size: 82, 32
   orig: 82, 32
   offset: 0, 0
   index: -1
 b-attack-water-down
   rotate: false
-  xy: 357, 155
+  xy: 815, 223
   size: 82, 32
   orig: 82, 32
   offset: 0, 0
   index: -1
 b-attack-none-up
   rotate: false
-  xy: 441, 155
+  xy: 899, 223
   size: 82, 32
   orig: 82, 32
   offset: 0, 0
   index: -1
 b-attack-none-centerbottom-up
   rotate: false
-  xy: 1, 9
+  xy: 1, 13
   size: 82, 16
   orig: 82, 16
   offset: 0, 0
   index: -1
-b-attack-none-centertop-down
+b-attack-question-centertop-checked
   rotate: false
-  xy: 85, 9
+  xy: 85, 13
   size: 82, 16
   orig: 82, 16
   offset: 0, 0
   index: -1
 b-attack-spirit-up
   rotate: false
-  xy: 566, 185
+  xy: 192, 61
   size: 82, 32
   orig: 82, 32
   offset: 0, 0
   index: -1
 b-attack-demon-down
   rotate: false
-  xy: 650, 185
+  xy: 276, 61
   size: 82, 32
   orig: 82, 32
   offset: 0, 0
   index: -1
 b-attack-forest-down
   rotate: false
-  xy: 734, 185
+  xy: 360, 61
   size: 82, 32
   orig: 82, 32
   offset: 0, 0
   index: -1
 b-attack-earth-up
   rotate: false
-  xy: 818, 185
+  xy: 192, 27
   size: 82, 32
   orig: 82, 32
   offset: 0, 0
   index: -1
 b-flee
   rotate: false
-  xy: 902, 185
+  xy: 276, 27
   size: 82, 32
   orig: 82, 32
   offset: 0, 0
   index: -1
-b-attack-none-centertop-up
-  rotate: false
-  xy: 211, 114
-  size: 82, 16
-  orig: 82, 16
-  offset: 0, 0
-  index: -1
 b-attack-mountain-down
   rotate: false
-  xy: 192, 80
+  xy: 360, 27
   size: 82, 32
   orig: 82, 32
   offset: 0, 0
   index: -1
 b-attack-arthropoda-down
   rotate: false
-  xy: 192, 46
+  xy: 444, 61
   size: 82, 32
   orig: 82, 32
   offset: 0, 0
   index: -1
 b-attack-lightning-up
   rotate: false
-  xy: 192, 12
+  xy: 444, 27
   size: 82, 32
   orig: 82, 32
   offset: 0, 0
   index: -1
 b-attack-dragon-up
   rotate: false
-  xy: 525, 151
+  xy: 509, 95
   size: 82, 32
   orig: 82, 32
   offset: 0, 0
   index: -1
 b-attack-demon-up
   rotate: false
-  xy: 609, 151
+  xy: 528, 61
   size: 82, 32
   orig: 82, 32
   offset: 0, 0
   index: -1
 b-attack-earth-down
   rotate: false
-  xy: 693, 151
+  xy: 528, 27
   size: 82, 32
   orig: 82, 32
+  offset: 0, 0
+  index: -1
+b-attack-question-centertop-down
+  rotate: false
+  xy: 589, 148
+  size: 82, 16
+  orig: 82, 16
   offset: 0, 0
   index: -1
 b-fight
   rotate: false
-  xy: 777, 151
+  xy: 593, 114
   size: 82, 32
   orig: 82, 32
+  offset: 0, 0
+  index: -1
+b-attack-none-centertop-down
+  rotate: false
+  xy: 593, 96
+  size: 82, 16
+  orig: 82, 16
   offset: 0, 0
   index: -1
 b-attack-dragon-down
   rotate: false
-  xy: 861, 151
+  xy: 612, 62
   size: 82, 32
   orig: 82, 32
   offset: 0, 0
   index: -1
-monster-preview-active
+b-attack-frost-up
   rotate: false
-  xy: 945, 143
-  size: 42, 40
-  orig: 42, 40
+  xy: 612, 28
+  size: 82, 32
+  orig: 82, 32
+  offset: 0, 0
+  index: -1
+b-attack-none-centertop-up
+  rotate: false
+  xy: 612, 10
+  size: 82, 16
+  orig: 82, 16
+  offset: 0, 0
+  index: -1
+b-attack-none-centerbottom-down
+  rotate: false
+  xy: 169, 9
+  size: 82, 16
+  orig: 82, 16
+  offset: 0, 0
+  index: -1
+b-attack-question-centertop-up
+  rotate: false
+  xy: 253, 9
+  size: 82, 16
+  orig: 82, 16
   offset: 0, 0
   index: -1
 monster-preview-frame-cover-opp
   rotate: false
-  xy: 990, 217
+  xy: 983, 221
   size: 32, 34
   orig: 32, 34
   offset: 0, 0
   index: -1
 monster-preview-frame-cover
   rotate: false
-  xy: 318, 130
+  xy: 692, 198
   size: 32, 34
   orig: 32, 34
   offset: 0, 0
   index: -1
-b-attack-frost-up
-  rotate: false
-  xy: 352, 121
-  size: 82, 32
-  orig: 82, 32
-  offset: 0, 0
-  index: -1
 b-attack-none-down
   rotate: false
-  xy: 436, 121
+  xy: 726, 189
   size: 82, 32
   orig: 82, 32
   offset: 0, 0
   index: -1
 b-attack-arthropoda-up
   rotate: false
-  xy: 520, 117
+  xy: 810, 189
   size: 82, 32
   orig: 82, 32
   offset: 0, 0
   index: -1
 b-attack-forest-up
   rotate: false
-  xy: 604, 117
+  xy: 894, 189
   size: 82, 32
   orig: 82, 32
   offset: 0, 0
   index: -1
+monster-preview-active
+  rotate: false
+  xy: 673, 156
+  size: 42, 40
+  orig: 42, 40
+  offset: 0, 0
+  index: -1
 b-fight-down
   rotate: false
-  xy: 688, 117
+  xy: 717, 155
   size: 82, 32
   orig: 82, 32
   offset: 0, 0
   index: -1
 b-attack-air-down
   rotate: false
-  xy: 772, 117
+  xy: 801, 155
   size: 82, 32
   orig: 82, 32
   offset: 0, 0
   index: -1
 b-attack-mountain-up
   rotate: false
-  xy: 856, 117
+  xy: 885, 155
   size: 82, 32
   orig: 82, 32
   offset: 0, 0
   index: -1
 b-attack-lightning-down
   rotate: false
-  xy: 940, 109
+  xy: 677, 121
   size: 82, 32
   orig: 82, 32
   offset: 0, 0
   index: -1
-choice-r-up
-  rotate: false
-  xy: 986, 189
-  size: 32, 26
-  orig: 32, 26
-  offset: 0, 0
-  index: -1
-monster-preview-frame-base
-  rotate: false
-  xy: 989, 153
-  size: 32, 34
-  orig: 32, 34
-  offset: 0, 0
-  index: -1
-monster-preview
-  rotate: false
-  xy: 989, 153
-  size: 32, 34
-  orig: 32, 34
-  offset: 0, 0
-  index: -1
-monster-preview-frame-base-opp
-  rotate: false
-  xy: 276, 78
-  size: 32, 34
-  orig: 32, 34
-  offset: 0, 0
-  index: -1
 b-attack-spirit-down
   rotate: false
-  xy: 310, 87
+  xy: 761, 121
+  size: 82, 32
+  orig: 82, 32
+  offset: 0, 0
+  index: -1
+b-attack-info-down
+  rotate: false
+  xy: 845, 121
   size: 82, 32
   orig: 82, 32
   offset: 0, 0
   index: -1
 b-flee-down
   rotate: false
-  xy: 394, 87
+  xy: 696, 87
   size: 82, 32
   orig: 82, 32
   offset: 0, 0
   index: -1
-b-attack-none-centerbottom-down
+monster-preview-frame-base
   rotate: false
-  xy: 310, 69
-  size: 82, 16
-  orig: 82, 16
+  xy: 696, 51
+  size: 32, 34
+  orig: 32, 34
+  offset: 0, 0
+  index: -1
+monster-preview
+  rotate: false
+  xy: 696, 51
+  size: 32, 34
+  orig: 32, 34
+  offset: 0, 0
+  index: -1
+monster-preview-frame-base-opp
+  rotate: false
+  xy: 696, 15
+  size: 32, 34
+  orig: 32, 34
+  offset: 0, 0
+  index: -1
+choice-r-up
+  rotate: false
+  xy: 929, 127
+  size: 32, 26
+  orig: 32, 26
   offset: 0, 0
   index: -1
 choice-r-down
   rotate: false
-  xy: 276, 50
+  xy: 780, 93
   size: 32, 26
   orig: 32, 26
   offset: 0, 0
   index: -1
 monStateWidgetRing
   rotate: false
-  xy: 478, 91
+  xy: 730, 57
   size: 28, 28
   orig: 28, 28
   offset: 0, 0
   index: -1
 invis
   rotate: false
-  xy: 169, 9
+  xy: 566, 145
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
-black
-  rotate: false
-  xy: 989, 143
-  size: 8, 8
-  orig: 8, 8
-  offset: 0, 0
-  index: -1
-bg
-  rotate: false
-  xy: 999, 143
-  size: 8, 8
-  orig: 8, 8
-  offset: 0, 0
-  index: -1
 blue-bar-lr
   rotate: false
-  xy: 192, 116
+  xy: 337, 14
   size: 11, 11
   split: 2, 4, 4, 3
   orig: 11, 11
@@ -432,9 +460,23 @@ green-progress-bar
   orig: 11, 6
   offset: 0, 0
   index: -1
+black
+  rotate: false
+  xy: 677, 111
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: -1
+bg
+  rotate: false
+  xy: 814, 111
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: -1
 yellow-progress-bar
   rotate: false
-  xy: 295, 124
+  xy: 730, 49
   size: 8, 6
   split: 2, 2, 3, 2
   orig: 8, 6

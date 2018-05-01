@@ -9,6 +9,7 @@ import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
 import de.limbusdev.guardianmonsters.assets.paths.AssetPath;
+import de.limbusdev.guardianmonsters.battle.ui.widgets.AbilityInfoLabelWidget;
 import de.limbusdev.guardianmonsters.battle.ui.widgets.AttackMenuWidget;
 import de.limbusdev.guardianmonsters.battle.ui.widgets.BattleActionMenuWidget;
 import de.limbusdev.guardianmonsters.battle.ui.widgets.BattleAnimationWidget;
@@ -33,7 +34,6 @@ import de.limbusdev.guardianmonsters.guardians.monsters.Team;
 import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.ui.Constant;
 
-import static de.limbusdev.guardianmonsters.battle.ui.widgets.BattleHUDTextButton.CENTERBOTTOM;
 import static de.limbusdev.guardianmonsters.battle.ui.widgets.BattleHUDTextButton.CENTERTOP;
 
 
@@ -65,7 +65,9 @@ public class BattleHUD extends ABattleHUD
     private TargetMenuWidget            targetMenuWidget;
     private TargetMenuWidget            targetAreaMenuWidget;
     private MonsterMenuWidget           monsterMenuWidget;
-    private InfoLabelWidget             abilityInfoWidget;
+    private AbilityInfoLabelWidget      attackDetailWidget;
+    private BattleActionMenuWidget      attackDetailBackButton;
+    private BattleActionMenuWidget      attackInfoMenuFrame;
 
     private SevenButtonsWidget.CentralHalfButtonsAddOn attackMenuAddOn;
 
@@ -75,7 +77,7 @@ public class BattleHUD extends ABattleHUD
     private BattleActionMenuWidget.Callbacks    infoLabelCallbacks;
     private BattleActionMenuWidget.Callbacks    infoLabelStatusEffectCallbacks;
     private BattleActionMenuWidget.Callbacks    endOfBattleCallbacks;
-    private BattleActionMenuWidget.Callbacks    attackDetailInfoCallbacks;
+    private BattleActionMenuWidget.Callbacks    attackDetailBackButtonCallback;
     private SevenButtonsWidget.Callbacks        attackMenuCallbacks;
     private BattleSystem.Callbacks              battleSystemCallbacks;
     private SevenButtonsWidget.Callbacks        targetMenuCallbacks;
@@ -189,6 +191,11 @@ public class BattleHUD extends ABattleHUD
         battleQueueWidget.setPosition(1,65, Align.bottomLeft);
 
         infoLabelWidget = new InfoLabelWidget(skin);
+        attackDetailWidget = new AbilityInfoLabelWidget(skin, Services.getUI().getInventorySkin());
+        attackDetailBackButton = new BattleActionMenuWidget(skin, attackDetailBackButtonCallback);
+        attackDetailBackButton.disableAllButBackButton();
+        attackInfoMenuFrame = new BattleActionMenuWidget(skin, new BattleActionMenuWidget.Callbacks() {});
+        attackInfoMenuFrame.disableAllChildButtons();
     }
 
 
@@ -273,15 +280,6 @@ public class BattleHUD extends ABattleHUD
             }
         };
 
-        attackDetailInfoCallbacks = new BattleActionMenuWidget.Callbacks()
-        {
-            @Override
-            public void onBackButton()
-            {
-                abilityInfoWidget.remove();
-            }
-        };
-
         infoLabelStatusEffectCallbacks = new BattleActionMenuWidget.Callbacks()
         {
             @Override
@@ -322,7 +320,10 @@ public class BattleHUD extends ABattleHUD
             AGuardian activeGuardian = battleSystem.getActiveMonster();
             System.out.println("AttackMenuButtons: onButtonNr("+nr+")");
             System.out.println("Input: User chose attack Nr. " + nr);
-            int chosenAttackNr = activeGuardian.getAbilityGraph().getActiveAbilities().indexOfValue(activeGuardian.getAbilityGraph().getActiveAbility(nr),false);
+            int chosenAttackNr = activeGuardian
+                .getAbilityGraph()
+                .getActiveAbilities()
+                .indexOfValue(activeGuardian.getAbilityGraph().getActiveAbility(nr),false);
             battleSystem.setChosenAttack(chosenAttackNr);
 
             Ability.aID abilityID = activeGuardian.getAbilityGraph().getActiveAbility(nr);
@@ -337,19 +338,39 @@ public class BattleHUD extends ABattleHUD
 
         attackInfoMenuCallbacks = nr ->
         {
-            abilityInfoWidget.setWholeText("Example");
-            // TODO show information about chosen attack
+            battleStateSwitcher.toAttackDetail(
+                battleSystem
+                    .getActiveMonster()
+                    .getAbilityGraph()
+                    .getActiveAbility(nr));
         };
 
-        attackMenuAddOnCallbacks = nr ->
+        attackDetailBackButtonCallback = new BattleActionMenuWidget.Callbacks()
         {
-            switch(nr)
+            @Override
+            public void onBackButton()
             {
-                case CENTERTOP: // TODO
-                    break;
-                case CENTERBOTTOM:
-                    break;
-                default:;
+                battleStateSwitcher.toAttackInfoMenu();
+            }
+        };
+
+        attackMenuAddOnCallbacks = new SevenButtonsWidget.Callbacks()
+        {
+            private boolean checked=false;
+
+            @Override
+            public void onButtonNr(int nr)
+            {
+                checked = !checked;
+                switch(nr)
+                {
+                    case CENTERTOP:
+                        if(checked) {battleStateSwitcher.toAttackInfoMenu();}
+                        else        {battleStateSwitcher.toAttackMenu();}
+                        break;
+                    default:
+                        break;
+                }
             }
         };
 
@@ -570,10 +591,43 @@ public class BattleHUD extends ABattleHUD
             state = BattleState.ACTIONMENU;
         }
 
-        public void toAttackMenu() {
+        public void toAttackMenu()
+        {
             toActionMenu();
-
             state = BattleState.ACTIONMENU;
+        }
+
+        public void toAttackInfoMenu()
+        {
+            reset();
+
+            animationWidget.addToStage(battleAnimationStage);
+            statusWidget.addToStage(battleAnimationStage);
+            battleQueueWidget.addToStage(stage);
+            attackInfoMenu.addToStage(stage);
+            attackMenuAddOn.addToStage(stage);
+            attackInfoMenuFrame.addToStage(stage);
+
+            attackInfoMenu.init(battleSystem.getActiveMonster());
+            attackInfoMenu.toAttackInfoStyle();
+
+            state = BattleState.ATTACK_INFO_MENU;
+        }
+
+        public void toAttackDetail(Ability.aID aID)
+        {
+            reset();
+
+            animationWidget.addToStage(battleAnimationStage);
+            statusWidget.addToStage(battleAnimationStage);
+            battleQueueWidget.addToStage(stage);
+            attackMenuAddOn.addToStage(stage);
+            attackDetailWidget.addToStage(stage);
+            attackDetailBackButton.addToStage(stage);
+
+            attackDetailWidget.init(aID);
+
+            state = BattleState.ATTACK_DETAIL;
         }
 
         public void toEndOfBattle(boolean winnerSide)
@@ -683,7 +737,8 @@ public class BattleHUD extends ABattleHUD
             state = BattleState.ANIMATION;
         }
 
-        public void toEscapeSuccessInfo() {
+        public void toEscapeSuccessInfo()
+        {
             toInfoLabel();
             String wholeText = Services.getL18N().Battle().get("escape_success");
             infoLabelWidget.setWholeText(wholeText);
@@ -691,7 +746,8 @@ public class BattleHUD extends ABattleHUD
             actionMenu.setCallbacks(escapeSuccessCallbacks);
         }
 
-        public void toEscapeFailInfo() {
+        public void toEscapeFailInfo()
+        {
             toInfoLabel();
             String wholeText = Services.getL18N().Battle().get("escape_fail");
             infoLabelWidget.setWholeText(wholeText);
@@ -713,6 +769,9 @@ public class BattleHUD extends ABattleHUD
             actionMenu.remove();
             battleQueueWidget.remove();
             attackMenuAddOn.remove();
+            attackDetailBackButton.remove();
+            attackDetailWidget.remove();
+            attackInfoMenuFrame.remove();
 
             actionMenu.enable();
         }
@@ -720,7 +779,8 @@ public class BattleHUD extends ABattleHUD
 
     private enum BattleState
     {
-        MAINMENU, ACTIONMENU, ATTACKMENU, ENDOFBATTLE, ANIMATION, TARGET_CHOICE, BATTLE_START, TARGET_AREA_CHOICE,
+        MAINMENU, ACTIONMENU, ATTACKMENU, ENDOFBATTLE, ANIMATION, TARGET_CHOICE, BATTLE_START,
+        TARGET_AREA_CHOICE, ATTACK_INFO_MENU, ATTACK_DETAIL
     }
 
 }

@@ -129,7 +129,8 @@ public class SevenButtonsWidget extends BattleWidget
         return buttons;
     }
 
-    protected TextButton getButton(int index) {
+    protected TextButton getButton(int index)
+    {
         return buttons.get(index);
     }
 
@@ -179,14 +180,16 @@ public class SevenButtonsWidget extends BattleWidget
             this.skin = skin;
 
             TextButton tb;
-            tb = new BattleHUDTextButton("info", skin, 7, Element.NONE);
+            tb = new BattleHUDTextButton("", skin, 7, Element.NONE);
             buttons.put(7,tb);
             addActor(tb);
-            tb = new BattleHUDTextButton("back", skin, 8, Element.NONE);
+            tb = new BattleHUDTextButton("", skin, 8, Element.NONE);
+            tb.setTouchable(Touchable.disabled);
             buttons.put(8,tb);
             addActor(tb);
 
-            for (int i = 7; i <= 8; i++) {
+            for (int i = 7; i <= 8; i++)
+            {
                 final int j = i;
                 final TextButton attButt = buttons.get(i);
                 attButt.addListener(

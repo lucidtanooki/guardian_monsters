@@ -34,6 +34,7 @@ import de.limbusdev.guardianmonsters.guardians.monsters.Team;
 import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.ui.Constant;
 import de.limbusdev.guardianmonsters.ui.widgets.Callback;
+import de.limbusdev.guardianmonsters.ui.widgets.GuardianStatusWidget;
 
 import static de.limbusdev.guardianmonsters.battle.ui.widgets.BattleHUDTextButton.CENTERTOP;
 
@@ -69,6 +70,8 @@ public class BattleHUD extends ABattleHUD
     private AbilityInfoLabelWidget      attackDetailWidget;
     private BattleActionMenuWidget      attackDetailBackButton;
     private BattleActionMenuWidget      attackInfoMenuFrame;
+
+    private GuardianStatusWidget guardianPreviewWidget;
 
     private SevenButtonsWidget.CentralHalfButtonsAddOn attackMenuAddOn;
 
@@ -212,6 +215,9 @@ public class BattleHUD extends ABattleHUD
 
         attackDetailBackButton.disableAllButBackButton();
         attackInfoMenuFrame.disableAllChildButtons();
+
+        guardianPreviewWidget = new GuardianStatusWidget(Services.getUI().getInventorySkin());
+        guardianPreviewWidget.setPosition(10,10,Align.bottomLeft);
     }
 
 
@@ -491,7 +497,12 @@ public class BattleHUD extends ABattleHUD
         };
 
         // ......................................................................................... monster menu
-        monsterMenuCallbacks = nr -> battleSystem.replaceActiveMonster(leftTeam.get(nr));
+        monsterMenuCallbacks = nr ->
+        {
+            guardianPreviewWidget.init(leftTeam.get(nr));
+            stage.addActor(guardianPreviewWidget);
+            battleSystem.replaceActiveMonster(leftTeam.get(nr));
+        };
     }
 
     private void showLevelUp(AGuardian m)
@@ -734,6 +745,7 @@ public class BattleHUD extends ABattleHUD
             attackDetailWidget.remove();
             attackInfoMenuFrame.remove();
             attackInfoMenu.remove();
+            guardianPreviewWidget.remove();
 
             actionMenu.enable();
         }

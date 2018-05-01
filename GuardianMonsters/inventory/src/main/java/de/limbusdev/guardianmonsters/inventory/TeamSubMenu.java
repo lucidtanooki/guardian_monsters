@@ -15,8 +15,8 @@ import de.limbusdev.guardianmonsters.guardians.monsters.Team;
 import de.limbusdev.guardianmonsters.media.IMediaManager;
 import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.ui.Constant;
+import de.limbusdev.guardianmonsters.ui.widgets.GuardianStatusWidget;
 import main.java.de.limbusdev.guardianmonsters.inventory.ui.widgets.team.ATeamChoiceWidget;
-import main.java.de.limbusdev.guardianmonsters.inventory.ui.widgets.team.MonsterStatusInventoryWidget;
 import main.java.de.limbusdev.guardianmonsters.inventory.ui.widgets.team.StatusPentagonWidget;
 import main.java.de.limbusdev.guardianmonsters.inventory.ui.widgets.team.TeamCircleWidget;
 
@@ -28,7 +28,7 @@ public class TeamSubMenu extends AInventorySubMenu
 {
 
     private StatusPentagonWidget statPent;
-    private MonsterStatusInventoryWidget monsterStats;
+    private GuardianStatusWidget monsterStats;
     private Image monsterImg;
     private Image blackOverlay;
     private TeamCircleWidget circleWidget;
@@ -113,7 +113,7 @@ public class TeamSubMenu extends AInventorySubMenu
         lockedButtonStyle = new ImageButton.ImageButtonStyle();
         lockedButtonStyle.checked = skin.getDrawable("button-check-down-locked");
 
-        monsterStats = new MonsterStatusInventoryWidget(skin);
+        monsterStats = new GuardianStatusWidget(skin);
         monsterStats.setPosition(140+2,0,Align.bottomLeft);
         monsterStats.init(team.get(0));
 

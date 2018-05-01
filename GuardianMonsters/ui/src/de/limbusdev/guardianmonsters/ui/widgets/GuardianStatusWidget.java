@@ -1,4 +1,13 @@
-package main.java.de.limbusdev.guardianmonsters.inventory.ui.widgets.team;
+/*
+ * *************************************************************************************************
+ * Copyright (c) 2018. limbusdev (Georg Eckert) - All Rights Reserved
+ * Unauthorized copying of this file, via any medium is strictly prohibited
+ * Proprietary and confidential
+ * Written by Georg Eckert <georg.eckert@limbusdev.de>
+ * *************************************************************************************************
+ */
+
+package de.limbusdev.guardianmonsters.ui.widgets;
 
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.HorizontalGroup;
@@ -15,19 +24,16 @@ import de.limbusdev.guardianmonsters.guardians.monsters.ISpeciesDescriptionServi
 import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.ui.Constant;
 
-
-/**
- * @author Georg Eckert 2016
- */
-
-public class MonsterStatusInventoryWidget extends Group {
+public class GuardianStatusWidget extends Group
+{
     private Label name;
     private ArrayMap<String,Label> valueLabels;
     private HorizontalGroup elementGroup;
     private Group equipmentGroup;
     private Skin skin;
 
-    public MonsterStatusInventoryWidget (Skin skin) {
+    public GuardianStatusWidget(Skin skin)
+    {
         super();
         this.skin = skin;
 

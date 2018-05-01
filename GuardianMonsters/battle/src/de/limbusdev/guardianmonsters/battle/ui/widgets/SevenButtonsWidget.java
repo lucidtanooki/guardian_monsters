@@ -14,6 +14,7 @@ import de.limbusdev.guardianmonsters.guardians.Element;
 import de.limbusdev.guardianmonsters.guardians.abilities.Ability;
 import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.ui.widgets.Callback;
+import de.limbusdev.guardianmonsters.ui.widgets.SimpleClickListener;
 
 import static de.limbusdev.guardianmonsters.battle.ui.widgets.BattleHUDTextButton.BOTTOMLEFT;
 import static de.limbusdev.guardianmonsters.battle.ui.widgets.BattleHUDTextButton.BOTTOMRIGHT;
@@ -68,27 +69,26 @@ public class SevenButtonsWidget extends BattleWidget
 
     }
 
-    private void initCallbackHandler() {
-        for (int i = 0; i < 7; i++) {
+    private void initCallbackHandler()
+    {
+        for (int i = 0; i < 7; i++)
+        {
             final int j = i;
             final TextButton attButt = buttons.get(i);
-            attButt.addListener(
-                new com.badlogic.gdx.scenes.scene2d.utils.ClickListener() {
-                    @Override
-                    public void clicked(InputEvent event, float x, float y) {
-                        super.clicked(event,x,y);
-                        System.out.println("SevenButtonsWidget: Clicked button " + j);
-                        if(!attButt.isDisabled()) {
-                            callbacks.onClick(j);
-                        }
-                    }
+            attButt.addListener(new SimpleClickListener(() ->
+            {
+                System.out.println("SevenButtonsWidget: Clicked button " + j);
+                if(!attButt.isDisabled()) {
+                    callbacks.onClick(j);
                 }
-            );
+            }));
         }
     }
 
-    public void setCallbacks(Callback.ButtonID callbacks) {
+    public void setCallbacks(Callback.ButtonID callbacks)
+    {
         this.callbacks = callbacks;
+        initCallbackHandler();
     }
 
     protected void enableButton(int index) {
@@ -151,7 +151,7 @@ public class SevenButtonsWidget extends BattleWidget
                 public void clicked(InputEvent event, float x, float y) {
                     super.clicked(event,x,y);
                     System.out.println("SevenButtonsWidget: Clicked button " + index);
-                    if(button.isDisabled()) {
+                    if(!button.isDisabled()) {
                         callbacks.onClick(index);
                     }
                 }

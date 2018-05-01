@@ -33,7 +33,8 @@ public class MonsterMenuWidget extends SevenButtonsWidget
         CombatTeam combatTeam = side ? queue.getCombatTeamLeft() : queue.getCombatTeamRight();
 
         // Set all buttons inactive
-        for(Integer i : getButtons().keys()) {
+        for(Integer i : getButtons().keys())
+        {
             disableButton(i);
         }
 
@@ -46,6 +47,7 @@ public class MonsterMenuWidget extends SevenButtonsWidget
             replaceButton(bwi,key);
 
             if(m.getIndividualStatistics().isFit() && !combatTeam.containsValue(m,false)) {
+
                 enableButton(key);
             }
         }

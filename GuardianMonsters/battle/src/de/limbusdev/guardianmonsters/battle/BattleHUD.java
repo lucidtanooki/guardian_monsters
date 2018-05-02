@@ -477,7 +477,17 @@ public class BattleHUD extends ABattleHUD
             @Override
             public void onGuardianSubstituted(AGuardian substituted, AGuardian substitute)
             {
-                // TODO animate guardian substitution
+                battleStateSwitcher.toAnimation();
+                infoLabelWidget.setWholeText(BattleStringBuilder.substitution(substituted, substitute));
+                infoLabelWidget.animateTextAppearance();
+                animationWidget.animateGuardianSubstitution(
+                    battleSystem.getQueue().getFieldPositionFor(substituted),
+                    battleSystem.getQueue().getTeamSideFor(substituted),
+                    substitute.getSpeciesID(),
+                    substitute.getAbilityGraph().getCurrentForm()
+                );
+
+
             }
         };
 

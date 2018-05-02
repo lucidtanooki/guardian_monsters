@@ -1,5 +1,5 @@
 
-animationsBattle.png
+animationsSummonBan.png
 format: RGBA8888
 filter: MipMapNearestNearest,MipMapNearestLinear
 repeat: none
@@ -163,73 +163,80 @@ ban-circle
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
-  index: 5
+  index: 14
 ban-circle
   rotate: false
   xy: 261, 261
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
-  index: 6
+  index: 5
 ban-circle
   rotate: false
   xy: 391, 391
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
-  index: 22
+  index: 6
 ban-circle
   rotate: false
   xy: 521, 521
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
-  index: 28
+  index: 22
 ban-circle
   rotate: false
   xy: 651, 651
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
-  index: 11
+  index: 28
 ban-circle
   rotate: false
   xy: 781, 781
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
-  index: 20
+  index: 11
 ban-circle
   rotate: false
   xy: 131, 1
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
-  index: 9
+  index: 20
 ban-circle
   rotate: false
   xy: 261, 131
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
-  index: 15
+  index: 9
 ban-circle
   rotate: false
   xy: 391, 261
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
-  index: 21
+  index: 15
 ban-circle
   rotate: false
   xy: 521, 391
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
-  index: 27
+  index: 21
 ban-circle
   rotate: false
   xy: 651, 521
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 27
+ban-circle
+  rotate: false
+  xy: 781, 651
   size: 128, 128
   orig: 128, 128
   offset: 0, 0

@@ -51,6 +51,10 @@ public interface IMediaManager
 
     Animation<AtlasRegion> getAttackAnimation(String attack);
 
+    Animation<AtlasRegion> getSummoningAnimation();
+
+    Animation<AtlasRegion> getBanningAnimation();
+
     Animation<AtlasRegion> getStatusEffectAnimation(String statusEffect);
 
     /**

@@ -324,7 +324,6 @@ public class BattleSystem
     public void replaceActiveMonster(AGuardian newGuardian)
     {
         AGuardian replaced = queue.exchangeNext(newGuardian);
-        nextMonster();
         callbacks.onGuardianSubstituted(getActiveMonster(), newGuardian);
     }
 

@@ -186,4 +186,16 @@ public class BattleStringBuilder
         String message = defName + " " + Services.getL18N().Battle().get("suff_defense");
         return message;
     }
+
+    public static String substitution(AGuardian substituted, AGuardian substitute)
+    {
+        String sub1Name = Services.getL18N().getGuardianNicknameIfAvailable(substituted);
+        String sub2Name = Services.getL18N().getGuardianNicknameIfAvailable(substitute);
+        String message = Services.getL18N().Battle().format(
+            "batt_substitution",
+            sub1Name,
+            sub2Name
+        );
+        return message;
+    }
 }

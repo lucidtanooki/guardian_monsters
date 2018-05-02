@@ -110,8 +110,8 @@ public class BattleAnimationWidget extends BattleWidget
         addMonsterAnimationsForTeam(queue.getCombatTeamRight(),RIGHT);
     }
 
-    private void addMonsterAnimationsForTeam(ArrayMap<Integer,AGuardian> team, boolean side) {
-
+    private void addMonsterAnimationsForTeam(ArrayMap<Integer,AGuardian> team, boolean side)
+    {
         ArrayMap<Integer,BattleGuardianWidget> imgs;
         ArrayMap<Integer,Boolean> positions;
 
@@ -194,7 +194,8 @@ public class BattleAnimationWidget extends BattleWidget
     }
 
 
-    public void animateSelfDefense() {
+    public void animateSelfDefense()
+    {
         callbacks.onHitAnimationComplete();
     }
 
@@ -409,6 +410,16 @@ public class BattleAnimationWidget extends BattleWidget
         else monImgs = monsterImgsRight;
 
         monImgs.get(pos).addAction(Actions.sequence(Actions.alpha(0, 2), Actions.visible(false)));
+    }
+
+    public void animateGuardianSubstitution(int pos, boolean side, int substitutesID, int substitutesForm)
+    {
+        ArrayMap<Integer,BattleGuardianWidget> monImgs;
+        if(side == LEFT) { monImgs = monsterImgsLeft; }
+        else             { monImgs = monsterImgsRight; }
+
+        BattleGuardianWidget guardianWidget = monImgs.get(pos);
+        guardianWidget.substitute(substitutesID, substitutesForm, side, callbacks::onHitAnimationComplete);
     }
 
     /**

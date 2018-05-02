@@ -11,7 +11,9 @@ package de.limbusdev.guardianmonsters.battle.ui.widgets;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 
 import java.util.Comparator;
@@ -21,6 +23,7 @@ import java.util.Observer;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics;
 import de.limbusdev.guardianmonsters.services.Services;
+import de.limbusdev.guardianmonsters.ui.widgets.Callback;
 
 import static de.limbusdev.guardianmonsters.guardians.Constant.LEFT;
 import static de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics.StatusEffect.HEALTHY;
@@ -38,12 +41,8 @@ public class BattleGuardianWidget extends BattleWidget implements Observer
 
     public BattleGuardianWidget(int index, int metaForm, boolean side)
     {
-        TextureRegion monReg;
-        monReg = Services.getMedia().getMonsterSprite(index, metaForm);
-        if(side == LEFT)
-            if(!monReg.isFlipX())
-                monReg.flip(true, false);
-        guardianImage = new Image(monReg);
+        guardianImage = new Image();
+        guardianImage.setSize(128,128);
         guardianImage.setPosition(0,0, Align.bottom);
         addActor(guardianImage);
 
@@ -51,12 +50,48 @@ public class BattleGuardianWidget extends BattleWidget implements Observer
         statusEffectAnimation = new AnimatedImage(anim);
         addActor(statusEffectAnimation);
         statusEffectAnimation.setPosition(0,96,Align.top);
+
+        init(index, metaForm, side);
+    }
+
+    private void init(int index, int metaForm, boolean side)
+    {
+        TextureRegion monReg;
+        monReg = Services.getMedia().getMonsterSprite(index, metaForm);
+        if(side == LEFT)
+            if(!monReg.isFlipX())
+                monReg.flip(true, false);
+        TextureRegionDrawable drawable = new TextureRegionDrawable(monReg);
+        guardianImage.setDrawable(drawable);
     }
 
     public void setStatusEffect(IndividualStatistics.StatusEffect statusEffect)
     {
         Animation anim = Services.getMedia().getStatusEffectAnimation(statusEffect.toString().toLowerCase());
         statusEffectAnimation.setAnimation(anim);
+    }
+
+    public void substitute(int index, int metaForm, boolean side, Callback callback)
+    {
+        Animation anim = Services.getMedia().getBanningAnimation();
+        SelfRemovingAnimation sra = new SelfRemovingAnimation(anim);
+        sra.setPosition(0,0,Align.bottom);
+        addActor(sra);
+        guardianImage.addAction(Actions.sequence(
+            Actions.delay(1f),
+            Actions.visible(false),
+            Actions.run(() -> {
+                Animation anim2 = Services.getMedia().getSummoningAnimation();
+                SelfRemovingAnimation sra2 = new SelfRemovingAnimation(anim2);
+                sra2.setPosition(0,0,Align.bottom);
+                addActor(sra2);
+            }),
+            Actions.delay(1f),
+            Actions.run(() -> {init(index, metaForm, side);}),
+            Actions.visible(true),
+            Actions.delay(1f),
+            Actions.run(callback::onClick)
+        ));
     }
 
     @Override

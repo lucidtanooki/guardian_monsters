@@ -217,6 +217,24 @@ public class MediaManager implements IMediaManager
     }
 
     @Override
+    public Animation<AtlasRegion> getSummoningAnimation()
+    {
+        TextureAtlas atlas = assets.get(AssetPath.Spritesheet.ANIMATIONS_SUMMON_BAN, TextureAtlas.class);
+        Animation<AtlasRegion> anim;
+        anim = new Animation<>(1f / 12f, atlas.findRegions("ban-circle"), Animation.PlayMode.REVERSED);
+
+        return anim;
+    }
+
+    @Override
+    public Animation<AtlasRegion> getBanningAnimation()
+    {
+        Animation<AtlasRegion> anim = getSummoningAnimation();
+        anim.setPlayMode(Animation.PlayMode.NORMAL);
+        return anim;
+    }
+
+    @Override
     public Animation<AtlasRegion> getStatusEffectAnimation(String statusEffect)
     {
         TextureAtlas atlas = assets.get("spritesheets/statusEffectAnimations.pack", TextureAtlas.class);

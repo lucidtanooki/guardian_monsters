@@ -1,0 +1,236 @@
+
+animationsBattle.png
+format: RGBA8888
+filter: MipMapNearestNearest,MipMapNearestLinear
+repeat: none
+ban-circle
+  rotate: false
+  xy: 1, 781
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 2
+ban-circle
+  rotate: false
+  xy: 1, 651
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 32
+ban-circle
+  rotate: false
+  xy: 131, 781
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 24
+ban-circle
+  rotate: false
+  xy: 1, 521
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 19
+ban-circle
+  rotate: false
+  xy: 131, 651
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 10
+ban-circle
+  rotate: false
+  xy: 261, 781
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 35
+ban-circle
+  rotate: false
+  xy: 1, 391
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 26
+ban-circle
+  rotate: false
+  xy: 131, 521
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 23
+ban-circle
+  rotate: false
+  xy: 261, 651
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 18
+ban-circle
+  rotate: false
+  xy: 391, 781
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 3
+ban-circle
+  rotate: false
+  xy: 1, 261
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 4
+ban-circle
+  rotate: false
+  xy: 131, 391
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 17
+ban-circle
+  rotate: false
+  xy: 261, 521
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 25
+ban-circle
+  rotate: false
+  xy: 391, 651
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 0
+ban-circle
+  rotate: false
+  xy: 521, 781
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 13
+ban-circle
+  rotate: false
+  xy: 1, 131
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 7
+ban-circle
+  rotate: false
+  xy: 131, 261
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 16
+ban-circle
+  rotate: false
+  xy: 261, 391
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 34
+ban-circle
+  rotate: false
+  xy: 391, 521
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 33
+ban-circle
+  rotate: false
+  xy: 521, 651
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 1
+ban-circle
+  rotate: false
+  xy: 651, 781
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 8
+ban-circle
+  rotate: false
+  xy: 1, 1
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 12
+ban-circle
+  rotate: false
+  xy: 131, 131
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 5
+ban-circle
+  rotate: false
+  xy: 261, 261
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 6
+ban-circle
+  rotate: false
+  xy: 391, 391
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 22
+ban-circle
+  rotate: false
+  xy: 521, 521
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 28
+ban-circle
+  rotate: false
+  xy: 651, 651
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 11
+ban-circle
+  rotate: false
+  xy: 781, 781
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 20
+ban-circle
+  rotate: false
+  xy: 131, 1
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 9
+ban-circle
+  rotate: false
+  xy: 261, 131
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 15
+ban-circle
+  rotate: false
+  xy: 391, 261
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 21
+ban-circle
+  rotate: false
+  xy: 521, 391
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 27
+ban-circle
+  rotate: false
+  xy: 651, 521
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: 31

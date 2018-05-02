@@ -473,6 +473,12 @@ public class BattleHUD extends ABattleHUD
                 infoLabelWidget.animateTextAppearance();
                 animationWidget.animateSelfDefense();
             }
+
+            @Override
+            public void onGuardianSubstituted(AGuardian substituted, AGuardian substitute)
+            {
+                // TODO animate guardian substitution
+            }
         };
 
         // ......................................................................................... target menu

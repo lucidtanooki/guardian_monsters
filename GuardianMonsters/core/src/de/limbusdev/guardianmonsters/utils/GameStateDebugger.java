@@ -85,8 +85,9 @@ public class GameStateDebugger
 
     private void setUpTestBattle()
     {
+        int ACTIVE_TEAM_SIZE_HERO = 2;
         AGuardianFactory guardianFactory = GuardiansServiceLocator.getGuardianFactory();
-        Team heroTeam = new Team(3,3,3);
+        Team heroTeam = new Team(3,3,ACTIVE_TEAM_SIZE_HERO);
         heroTeam.put(0, guardianFactory.createGuardian(1,1));
         heroTeam.put(1, guardianFactory.createGuardian(2,1));
         heroTeam.put(2, guardianFactory.createGuardian(3,1));

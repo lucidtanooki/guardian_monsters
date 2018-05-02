@@ -325,6 +325,7 @@ public class BattleSystem
     {
         AGuardian replaced = queue.exchangeNext(newGuardian);
         nextMonster();
+        callbacks.onGuardianSubstituted(getActiveMonster(), newGuardian);
     }
 
     public void setChosenTarget(AGuardian target)
@@ -446,5 +447,6 @@ public class BattleSystem
         public void onBattleEnds(boolean winnerSide){}
         public void onDoingNothing(AGuardian guardian){}
         public void onApplyStatusEffect(AGuardian guardian){}
+        public void onGuardianSubstituted(AGuardian substituted, AGuardian substitute) {}
     }
 }

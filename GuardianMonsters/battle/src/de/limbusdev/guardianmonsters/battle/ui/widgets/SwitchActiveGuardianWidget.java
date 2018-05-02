@@ -111,7 +111,8 @@ public class SwitchActiveGuardianWidget extends BattleWidget
     private void activateGuardian(AGuardian guardian, Team team)
     {
         int chosenPos = teamChoiceWidget.getCurrentPosition();
-        if(chosenPos >= team.getActiveTeamSize()) {
+
+        if(chosenPos >= team.getActiveTeamSize() && guardian.getIndividualStatistics().isFit()) {
             switchButton.setTouchable(Touchable.enabled);
             switchButton.setColor(Color.WHITE);
         } else {

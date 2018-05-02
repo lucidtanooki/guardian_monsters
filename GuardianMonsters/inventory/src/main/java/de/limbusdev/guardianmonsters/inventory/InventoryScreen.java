@@ -56,7 +56,8 @@ public class InventoryScreen implements Screen, MainToolBar.Callbacks
     /**
      * Tiles the complete Background with a specific 16x16 image
      */
-    private void tileBackground() {
+    private void tileBackground()
+    {
         TiledImage bg = new TiledImage(skin.getDrawable(BG_TILE), 27, 13);
         bg.setPosition(0, -4, Align.bottomLeft);
         stage.addActor(bg);

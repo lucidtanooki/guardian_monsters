@@ -1,7 +1,15 @@
-package main.java.de.limbusdev.guardianmonsters.inventory.ui.widgets.team;
+/*
+ * *************************************************************************************************
+ * Copyright (c) 2018. limbusdev (Georg Eckert) - All Rights Reserved
+ * Unauthorized copying of this file, via any medium is strictly prohibited
+ * Proprietary and confidential
+ * Written by Georg Eckert <georg.eckert@limbusdev.de>
+ * *************************************************************************************************
+ */
+
+package de.limbusdev.guardianmonsters.ui.widgets;
 
 import com.badlogic.gdx.scenes.scene2d.Group;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.ButtonGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
@@ -15,20 +23,17 @@ import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.utils.geometry.IntVec2;
 
-/**
- * Created by Georg Eckert on 01.03.17.
- */
-
 public abstract class ATeamChoiceWidget extends Group {
 
     protected Array<IntVec2> positions;
-    protected Callbacks handler;
+    protected Callback.ButtonID handler;
     protected ButtonGroup<ImageButton> memberButtons;
     protected int currentPosition=0, oldPosition=0;
     protected Skin skin;
     protected Group buttons;
 
-    public ATeamChoiceWidget(Skin skin, Callbacks clHandler) {
+    public ATeamChoiceWidget(Skin skin, Callback.ButtonID clHandler)
+    {
         super();
         this.skin = skin;
         this.handler = clHandler;
@@ -36,12 +41,20 @@ public abstract class ATeamChoiceWidget extends Group {
         buttons = new Group();
     }
 
-    public void init(ArrayMap<Integer,AGuardian> team) {
+    public void init(ArrayMap<Integer, AGuardian> team, int initialPosition)
+    {
+        this.currentPosition = initialPosition;
+        init(team);
+    }
+
+    public void init(ArrayMap<Integer,AGuardian> team)
+    {
         memberButtons = new ButtonGroup<>();
         buttons.clearChildren();
         addActor(buttons);
 
-        for(final int key : team.keys()) {
+        for(final int key : team.keys())
+        {
             AGuardian m = team.get(key);
             Image preview = new Image(Services.getMedia().getMonsterMiniSprite(m.getSpeciesDescription().getID(), m.getAbilityGraph().getCurrentForm()));
             preview.setPosition(38/2-8, 38/2-8, Align.bottomLeft);
@@ -56,15 +69,13 @@ public abstract class ATeamChoiceWidget extends Group {
             button.addActor(preview);
             IntVec2 pos = positions.get(key);
             button.setPosition(pos.x-3, pos.y-4, Align.bottomLeft);
-            button.addListener(new com.badlogic.gdx.scenes.scene2d.utils.ClickListener() {
-                @Override
-                public void clicked(InputEvent event, float x, float y) {
+            button.addListener(new SimpleClickListener(() ->
+            {
                     oldPosition = currentPosition;
                     currentPosition = key;
-                    handler.onTeamMemberButton(key);
+                    handler.onClick(key);
                     System.out.println("Current Position set to " + key);
-                }
-            });
+            }));
 
             memberButtons.add(button);
             buttons.addActor(button);
@@ -87,12 +98,9 @@ public abstract class ATeamChoiceWidget extends Group {
         return oldPosition;
     }
 
-    public void setHandler(Callbacks handler) {
+    public void setHandler(Callback.ButtonID handler) {
         this.handler = handler;
     }
 
-    public interface Callbacks {
-        void onTeamMemberButton(int position);
-    }
 
 }

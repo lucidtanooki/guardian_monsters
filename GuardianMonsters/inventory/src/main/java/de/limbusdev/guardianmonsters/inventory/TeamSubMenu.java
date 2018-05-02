@@ -15,10 +15,11 @@ import de.limbusdev.guardianmonsters.guardians.monsters.Team;
 import de.limbusdev.guardianmonsters.media.IMediaManager;
 import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.ui.Constant;
+import de.limbusdev.guardianmonsters.ui.widgets.Callback;
 import de.limbusdev.guardianmonsters.ui.widgets.GuardianStatusWidget;
-import main.java.de.limbusdev.guardianmonsters.inventory.ui.widgets.team.ATeamChoiceWidget;
+import de.limbusdev.guardianmonsters.ui.widgets.SimpleClickListener;
+import de.limbusdev.guardianmonsters.ui.widgets.TeamCircleWidget;
 import main.java.de.limbusdev.guardianmonsters.inventory.ui.widgets.team.StatusPentagonWidget;
-import main.java.de.limbusdev.guardianmonsters.inventory.ui.widgets.team.TeamCircleWidget;
 
 /**
  * Created by Georg Eckert 2017
@@ -32,7 +33,7 @@ public class TeamSubMenu extends AInventorySubMenu
     private Image monsterImg;
     private Image blackOverlay;
     private TeamCircleWidget circleWidget;
-    private ATeamChoiceWidget.Callbacks choiceHandler, swapHandler;
+    private Callback.ButtonID choiceHandler, swapHandler;
     private Team team;
     private ImageButton joinsBattleButton;
     private Group monsterChoice;
@@ -50,31 +51,23 @@ public class TeamSubMenu extends AInventorySubMenu
         monsterChoiceBg.setPosition(2,2,Align.bottomLeft);
         monsterChoice.addActor(monsterChoiceBg);
 
-        choiceHandler = new ATeamChoiceWidget.Callbacks() {
-            @Override
-            public void onTeamMemberButton(int position) {
+        choiceHandler = position -> showGuardianInformation(position);
+
+        swapHandler = position -> {
+            System.out.println("Clicked " + position);
+            int oldPos = circleWidget.getOldPosition();
+            if(position != oldPos) {
+                AGuardian currentGuardian = team.get(oldPos);
+                AGuardian guardianToSwapWith = team.get(position);
+
+                team.put(oldPos, guardianToSwapWith);
+                team.put(position, currentGuardian);
+
+                circleWidget.init(team);
                 showGuardianInformation(position);
             }
-        };
-
-        swapHandler = new ATeamChoiceWidget.Callbacks() {
-            @Override
-            public void onTeamMemberButton(int position) {
-                System.out.println("Clicked " + position);
-                int oldPos = circleWidget.getOldPosition();
-                if(position != oldPos) {
-                    AGuardian currentGuardian = team.get(oldPos);
-                    AGuardian guardianToSwapWith = team.get(position);
-
-                    team.put(oldPos, guardianToSwapWith);
-                    team.put(position, currentGuardian);
-
-                    circleWidget.init(team);
-                    showGuardianInformation(position);
-                }
-                circleWidget.setHandler(choiceHandler);
-                blackOverlay.remove();
-            }
+            circleWidget.setHandler(choiceHandler);
+            blackOverlay.remove();
         };
 
         circleWidget = new TeamCircleWidget(skin, team, choiceHandler);
@@ -85,15 +78,15 @@ public class TeamSubMenu extends AInventorySubMenu
         blackOverlay.setSize(Constant.WIDTH, Constant.HEIGHT);
         ImageButton swapButton = new ImageButton(skin, "button-switch");
         swapButton.setPosition(8,8,Align.bottomLeft);
-        swapButton.addListener(new com.badlogic.gdx.scenes.scene2d.utils.ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                circleWidget.remove();
-                circleWidget.setHandler(swapHandler);
-                addActor(blackOverlay);
-                addActor(circleWidget);
-            }
-        });
+
+        swapButton.addListener(new SimpleClickListener(() ->
+        {
+            circleWidget.remove();
+            circleWidget.setHandler(swapHandler);
+            addActor(blackOverlay);
+            addActor(circleWidget);
+        }));
+
         monsterChoice.addActor(swapButton);
 
         joinsBattleButton = new ImageButton(skin, "button-check");
@@ -142,7 +135,8 @@ public class TeamSubMenu extends AInventorySubMenu
         setDebug(Constant.DEBUGGING_ON, true);
     }
 
-    private void showGuardianInformation(int teamPosition) {
+    private void showGuardianInformation(int teamPosition)
+    {
         monsterStats.init(team.get(teamPosition));
         monsterImg.setDrawable(new TextureRegionDrawable(
             Services.getMedia().getMonsterSprite(team.get(teamPosition).getSpeciesDescription().getID(), team.get(teamPosition).getAbilityGraph().getCurrentForm())));

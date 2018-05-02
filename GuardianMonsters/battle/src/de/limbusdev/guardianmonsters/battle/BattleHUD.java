@@ -18,8 +18,8 @@ import de.limbusdev.guardianmonsters.battle.ui.widgets.BattleQueueWidget;
 import de.limbusdev.guardianmonsters.battle.ui.widgets.BattleStatusOverviewWidget;
 import de.limbusdev.guardianmonsters.battle.ui.widgets.InfoLabelWidget;
 import de.limbusdev.guardianmonsters.battle.ui.widgets.LevelUpWidget;
-import de.limbusdev.guardianmonsters.battle.ui.widgets.MonsterMenuWidget;
 import de.limbusdev.guardianmonsters.battle.ui.widgets.SevenButtonsWidget;
+import de.limbusdev.guardianmonsters.battle.ui.widgets.SwitchActiveGuardianWidget;
 import de.limbusdev.guardianmonsters.battle.ui.widgets.TargetMenuWidget;
 import de.limbusdev.guardianmonsters.battle.utils.BattleStringBuilder;
 import de.limbusdev.guardianmonsters.guardians.GuardiansServiceLocator;
@@ -32,9 +32,7 @@ import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics;
 import de.limbusdev.guardianmonsters.guardians.monsters.Team;
 import de.limbusdev.guardianmonsters.services.Services;
-import de.limbusdev.guardianmonsters.ui.Constant;
 import de.limbusdev.guardianmonsters.ui.widgets.Callback;
-import de.limbusdev.guardianmonsters.ui.widgets.GuardianStatusWidget;
 
 import static de.limbusdev.guardianmonsters.battle.ui.widgets.BattleHUDTextButton.CENTERTOP;
 
@@ -66,12 +64,10 @@ public class BattleHUD extends ABattleHUD
     private InfoLabelWidget             infoLabelWidget;
     private TargetMenuWidget            targetMenuWidget;
     private TargetMenuWidget            targetAreaMenuWidget;
-    private MonsterMenuWidget           monsterMenuWidget;
     private AbilityInfoLabelWidget      attackDetailWidget;
     private BattleActionMenuWidget      attackDetailBackButton;
     private BattleActionMenuWidget      attackInfoMenuFrame;
-
-    private GuardianStatusWidget guardianPreviewWidget;
+    private SwitchActiveGuardianWidget  switchActiveGuardianWidget;
 
     private SevenButtonsWidget.CentralHalfButtonsAddOn attackMenuAddOn;
 
@@ -88,6 +84,7 @@ public class BattleHUD extends ABattleHUD
     private Callback escapeFailedLabelBackCB;
     private Callback mainMenuOnSwordButton;
     private Callback mainMenuOnRunButton;
+    private Callback teamMenuOnBackButton, teamMenuOnSwitchButton;
 
     private BattleSystem.Callbacks          battleSystemCallbacks;
     private BattleAnimationWidget.Callbacks battleAnimationCallbacks;
@@ -95,7 +92,6 @@ public class BattleHUD extends ABattleHUD
     private Callback.ButtonID attackMenuCallbacks;
     private Callback.ButtonID targetMenuCallbacks;
     private Callback.ButtonID targetAreaMenuCallbacks;
-    private Callback.ButtonID monsterMenuCallbacks;
     private Callback.ButtonID attackMenuAddOnCallbacks;
     private Callback.ButtonID attackInfoMenuCallbacks;
 
@@ -192,7 +188,6 @@ public class BattleHUD extends ABattleHUD
         animationWidget     = new BattleAnimationWidget(battleAnimationCallbacks);
         attackMenuAddOn     = new SevenButtonsWidget.CentralHalfButtonsAddOn(skin, attackMenuAddOnCallbacks);
 
-        monsterMenuWidget   = new MonsterMenuWidget(skin, monsterMenuCallbacks      ::onClick);
         attackMenu          = new AttackMenuWidget (skin, attackMenuCallbacks       ::onClick);
         attackInfoMenu      = new AttackMenuWidget (skin, attackInfoMenuCallbacks   ::onClick);
         targetMenuWidget    = new TargetMenuWidget (skin, targetMenuCallbacks       ::onClick);
@@ -216,8 +211,8 @@ public class BattleHUD extends ABattleHUD
         attackDetailBackButton.disableAllButBackButton();
         attackInfoMenuFrame.disableAllChildButtons();
 
-        guardianPreviewWidget = new GuardianStatusWidget(Services.getUI().getInventorySkin());
-        guardianPreviewWidget.setPosition(10,10,Align.bottomLeft);
+        switchActiveGuardianWidget = new SwitchActiveGuardianWidget(skin, Services.getUI().getInventorySkin());
+        switchActiveGuardianWidget.setCallbacks(teamMenuOnBackButton, teamMenuOnSwitchButton);
     }
 
 
@@ -238,6 +233,16 @@ public class BattleHUD extends ABattleHUD
             }
         };
 
+        // ......................................................................................... team menu
+        teamMenuOnBackButton = () -> battleStateSwitcher.toAttackMenu();
+        teamMenuOnSwitchButton = () ->
+        {
+            battleStateSwitcher.toAnimation();
+            int substituteNr = switchActiveGuardianWidget.getChosenSubstitute();
+            AGuardian substitute = battleSystem.getQueue().getLeft().get(substituteNr);
+            battleSystem.replaceActiveMonster(substitute);
+        };
+
         // ......................................................................................... battle start label
         battleStartLabelBackCB = () -> battleStateSwitcher.toMainMenu();
 
@@ -253,7 +258,10 @@ public class BattleHUD extends ABattleHUD
 
         actionMenuMonsterCB = () ->
         {
-            monsterMenuWidget.init(battleSystem, Constant.LEFT);
+            switchActiveGuardianWidget.init(
+                battleSystem.getActiveMonster(),
+                battleSystem.getQueue().getLeft()
+            );
             battleStateSwitcher.toTeamMenu();
         };
 
@@ -495,14 +503,6 @@ public class BattleHUD extends ABattleHUD
             battleSystem.applyAttack();
             actionMenu.enable(actionMenu.backButton);
         };
-
-        // ......................................................................................... monster menu
-        monsterMenuCallbacks = nr ->
-        {
-            guardianPreviewWidget.init(leftTeam.get(nr));
-            stage.addActor(guardianPreviewWidget);
-            battleSystem.replaceActiveMonster(leftTeam.get(nr));
-        };
     }
 
     private void showLevelUp(AGuardian m)
@@ -663,16 +663,9 @@ public class BattleHUD extends ABattleHUD
         public void toTeamMenu()
         {
             reset();
-            animationWidget.addToStage(battleAnimationStage);
-            statusWidget.addToStage(battleAnimationStage);
-            actionMenu.disableAllButBackButton();
-            actionMenu.addToStage(stage);
-            actionMenu.setCallbacks(backToActionMenuCB, ()->{}, ()->{}, ()->{});
-            monsterMenuWidget.addToStage(stage);
+            switchActiveGuardianWidget.addToStage(stage);
 
-            battleQueueWidget.addToStage(stage);
-
-            state = BattleState.TARGET_CHOICE;
+            state = BattleState.TEAM_MENU;
         }
 
         public void toMainMenu()
@@ -730,7 +723,6 @@ public class BattleHUD extends ABattleHUD
         public void reset()
         {
             // Remove all Widgets
-            monsterMenuWidget.remove();
             infoLabelWidget.remove();
             animationWidget.remove();
             mainMenu.remove();
@@ -745,7 +737,7 @@ public class BattleHUD extends ABattleHUD
             attackDetailWidget.remove();
             attackInfoMenuFrame.remove();
             attackInfoMenu.remove();
-            guardianPreviewWidget.remove();
+            switchActiveGuardianWidget.remove();
 
             actionMenu.enable();
         }
@@ -754,7 +746,7 @@ public class BattleHUD extends ABattleHUD
     private enum BattleState
     {
         MAINMENU, ACTIONMENU, ATTACKMENU, ENDOFBATTLE, ANIMATION, TARGET_CHOICE, BATTLE_START,
-        TARGET_AREA_CHOICE, ATTACK_INFO_MENU, ATTACK_DETAIL
+        TARGET_AREA_CHOICE, ATTACK_INFO_MENU, ATTACK_DETAIL, TEAM_MENU
     }
 
 }

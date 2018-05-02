@@ -1,4 +1,15 @@
-package main.java.de.limbusdev.guardianmonsters.inventory.ui.widgets.team;
+
+
+/*
+ * *************************************************************************************************
+ * Copyright (c) 2018. limbusdev (Georg Eckert) - All Rights Reserved
+ * Unauthorized copying of this file, via any medium is strictly prohibited
+ * Proprietary and confidential
+ * Written by Georg Eckert <georg.eckert@limbusdev.de>
+ * *************************************************************************************************
+ */
+
+package de.limbusdev.guardianmonsters.ui.widgets;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -8,14 +19,10 @@ import com.badlogic.gdx.utils.ArrayMap;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.utils.geometry.IntVec2;
 
-/**
- * Created by Georg Eckert on 16.02.17.
- */
-
-public class TeamCircleWidget extends main.java.de.limbusdev.guardianmonsters.inventory.ui.widgets.team.ATeamChoiceWidget
+public class TeamCircleWidget extends ATeamChoiceWidget
 {
-
-    public TeamCircleWidget(Skin skin, ArrayMap<Integer,AGuardian> team, Callbacks callbacks) {
+    public TeamCircleWidget(Skin skin, Callback.ButtonID callbacks)
+    {
         super(skin, callbacks);
 
         positions.add(new IntVec2(54,144-85));
@@ -30,7 +37,11 @@ public class TeamCircleWidget extends main.java.de.limbusdev.guardianmonsters.in
         Image bgImg = new Image(skin.getDrawable("teamCircle"));
         bgImg.setPosition(0,0, Align.bottomLeft);
         addActor(bgImg);
+    }
 
+    public TeamCircleWidget(Skin skin, ArrayMap<Integer,AGuardian> team, Callback.ButtonID callbacks)
+    {
+        this(skin, callbacks);
         init(team);
     }
 }

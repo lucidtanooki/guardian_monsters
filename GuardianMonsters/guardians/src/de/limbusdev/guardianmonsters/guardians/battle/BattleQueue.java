@@ -100,22 +100,28 @@ public class BattleQueue extends Observable
         else return OPPONENT;
     }
 
-    public AGuardian exchangeNext(AGuardian substitute)
+    public AGuardian exchangeActive(AGuardian substitute)
     {
         CombatTeam combatTeam;
-        if(peekNextSide() == HERO) {
+
+        boolean side = getTeamSideFor(currentRound.peek());
+        if(side == LEFT) {
             combatTeam = combatTeamLeft;
         } else {
             combatTeam = combatTeamRight;
         }
 
-        AGuardian next = next();
-        int position = combatTeam.getFieldPosition(next);
+        AGuardian activeGuardian = currentRound.peek();
+        int position = combatTeam.getFieldPosition(activeGuardian);
         combatTeam.exchange(position, substitute);
 
-        nextRound.removeValue(next,false);
-        nextRound.insert(0,substitute);
-        return next;
+        int queuePos = currentRound.indexOf(activeGuardian, false);
+        currentRound.removeValue(activeGuardian, false);
+        currentRound.insert(queuePos, substitute);
+
+        setChanged();
+        notifyObservers();
+        return activeGuardian;
     }
 
     @Override

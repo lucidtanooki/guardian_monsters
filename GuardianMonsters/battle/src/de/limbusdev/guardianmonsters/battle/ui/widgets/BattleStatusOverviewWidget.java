@@ -8,6 +8,7 @@ import com.badlogic.gdx.utils.Array;
 
 import de.limbusdev.guardianmonsters.guardians.battle.BattleSystem;
 import de.limbusdev.guardianmonsters.guardians.battle.CombatTeam;
+import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.ui.Constant;
 import de.limbusdev.guardianmonsters.utils.geometry.IntVec2;
 
@@ -17,10 +18,12 @@ import de.limbusdev.guardianmonsters.utils.geometry.IntVec2;
  * HINT: Don't forget calling the init() method
  * Created by Georg Eckert 2016
  */
-public class BattleStatusOverviewWidget extends de.limbusdev.guardianmonsters.battle.ui.widgets.BattleWidget
+public class BattleStatusOverviewWidget extends BattleWidget
 {
 
-    private Array<de.limbusdev.guardianmonsters.battle.ui.widgets.MonsterStateWidget> monsterStateWidgetsLeft, monsterStateWidgetsRight;
+    private Array<MonsterStateWidget>
+        monsterStateWidgetsLeft,
+        monsterStateWidgetsRight;
 
     public BattleStatusOverviewWidget(Skin skin) {
         super();
@@ -28,40 +31,42 @@ public class BattleStatusOverviewWidget extends de.limbusdev.guardianmonsters.ba
         this.monsterStateWidgetsRight = new Array<>();
 
         // Hero Team ###############################################################################
-        de.limbusdev.guardianmonsters.battle.ui.widgets.MonsterStateWidget msw = new de.limbusdev.guardianmonsters.battle.ui.widgets.MonsterStateWidget(skin, true);
+        MonsterStateWidget msw = new MonsterStateWidget(skin, true);
         msw.setPosition(IndPos.statWPos1left.x, IndPos.statWPos1left.y, Align.topLeft);
         monsterStateWidgetsLeft.add(msw);
-        msw = new de.limbusdev.guardianmonsters.battle.ui.widgets.MonsterStateWidget(skin, true);
+        msw = new MonsterStateWidget(skin, true);
         msw.setPosition(IndPos.statWPos2left.x, IndPos.statWPos2left.y, Align.topLeft);
         monsterStateWidgetsLeft.add(msw);
-        msw = new de.limbusdev.guardianmonsters.battle.ui.widgets.MonsterStateWidget(skin, true);
+        msw = new MonsterStateWidget(skin, true);
         msw.setPosition(IndPos.statWPos3left.x, IndPos.statWPos3left.y, Align.topLeft);
         monsterStateWidgetsLeft.add(msw);
 
         // Opponent Team ###########################################################################
-        msw = new de.limbusdev.guardianmonsters.battle.ui.widgets.MonsterStateWidget(skin, false);
+        msw = new MonsterStateWidget(skin, false);
         msw.setPosition(IndPos.statWPos1right.x, IndPos.statWPos1right.y, Align.topRight);
         monsterStateWidgetsRight.add(msw);
-        msw = new de.limbusdev.guardianmonsters.battle.ui.widgets.MonsterStateWidget(skin, false);
+        msw = new MonsterStateWidget(skin, false);
         msw.setPosition(IndPos.statWPos2right.x, IndPos.statWPos2right.y, Align.topRight);
         monsterStateWidgetsRight.add(msw);
-        msw = new de.limbusdev.guardianmonsters.battle.ui.widgets.MonsterStateWidget(skin, false);
+        msw = new MonsterStateWidget(skin, false);
         msw.setPosition(IndPos.statWPos3right.x, IndPos.statWPos3right.y, Align.topRight);
         monsterStateWidgetsRight.add(msw);
 
-        for(de.limbusdev.guardianmonsters.battle.ui.widgets.MonsterStateWidget w : monsterStateWidgetsLeft) addActor(w);
-        for(de.limbusdev.guardianmonsters.battle.ui.widgets.MonsterStateWidget w : monsterStateWidgetsRight) addActor(w);
+        for(MonsterStateWidget w : monsterStateWidgetsLeft) {addActor(w);}
+        for(MonsterStateWidget w : monsterStateWidgetsRight) {addActor(w);}
 
         setDebug(Constant.DEBUGGING_ON, true);
 
     }
 
-    private void addStatusWidgetsForTeam(CombatTeam team, boolean side) {
-        Array<de.limbusdev.guardianmonsters.battle.ui.widgets.MonsterStateWidget> stateWidgets = side ?
+    private void addStatusWidgetsForTeam(CombatTeam team, boolean side)
+    {
+        Array<MonsterStateWidget> stateWidgets = side ?
             monsterStateWidgetsLeft : monsterStateWidgetsRight;
 
         // Clear Actions
-        for(de.limbusdev.guardianmonsters.battle.ui.widgets.MonsterStateWidget w : stateWidgets) {
+        for(MonsterStateWidget w : stateWidgets)
+        {
             w.clearActions();
             w.remove();
             w.setVisible(true);
@@ -69,18 +74,35 @@ public class BattleStatusOverviewWidget extends de.limbusdev.guardianmonsters.ba
         }
 
         // Initialize UI
-        for(int key : team.keys()) {
+        for(int key : team.keys())
+        {
             stateWidgets.get(key).init(team.get(key));
             addActor(stateWidgets.get(key));
         }
     }
 
-    public void init(BattleSystem battleSystem) {
+    public void init(BattleSystem battleSystem)
+    {
         addStatusWidgetsForTeam(battleSystem.getQueue().getCombatTeamLeft(), Constant.LEFT);
         addStatusWidgetsForTeam(battleSystem.getQueue().getCombatTeamRight(), Constant.RIGHT);
     }
 
-    public void fadeStatusWidget(int pos, boolean side) {
+    public void updateStatusWidgetToSubstitute(int pos, boolean side, AGuardian guardian)
+    {
+        Array<MonsterStateWidget> stateWidgets = side ?
+            monsterStateWidgetsLeft : monsterStateWidgetsRight;
+
+        MonsterStateWidget w = stateWidgets.get(pos);
+        w.clearActions();
+        w.addAction(Actions.sequence(
+            Actions.fadeOut(1f),
+            Actions.run(() -> {w.init(guardian);}),
+            Actions.fadeIn(1f)
+        ));
+    }
+
+    public void fadeStatusWidget(int pos, boolean side)
+    {
         if(side) {
             monsterStateWidgetsLeft.get(pos).addAction(
                 Actions.sequence(Actions.alpha(0, 2), Actions.visible(false)));
@@ -94,7 +116,8 @@ public class BattleStatusOverviewWidget extends de.limbusdev.guardianmonsters.ba
     /**
      * Possible Indicator coordinates
      */
-    private final static class IndPos {
+    private final static class IndPos
+    {
         private static final IntVec2 statWPos1left = new IntVec2(56+24, 360-24);
         private static final IntVec2 statWPos2left = new IntVec2(56, 360-48);
         private static final IntVec2 statWPos3left = new IntVec2(56+48, 360);

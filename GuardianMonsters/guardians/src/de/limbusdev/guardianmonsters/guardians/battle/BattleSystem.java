@@ -323,8 +323,10 @@ public class BattleSystem
      */
     public void replaceActiveMonster(AGuardian newGuardian)
     {
-        AGuardian replaced = queue.exchangeNext(newGuardian);
-        callbacks.onGuardianSubstituted(getActiveMonster(), newGuardian);
+        int fieldPos = queue.getFieldPositionFor(getActiveMonster());
+        getActiveMonster().deleteObservers();
+        AGuardian replaced = queue.exchangeActive(newGuardian);
+        callbacks.onGuardianSubstituted(replaced, newGuardian, fieldPos);
     }
 
     public void setChosenTarget(AGuardian target)
@@ -446,6 +448,6 @@ public class BattleSystem
         public void onBattleEnds(boolean winnerSide){}
         public void onDoingNothing(AGuardian guardian){}
         public void onApplyStatusEffect(AGuardian guardian){}
-        public void onGuardianSubstituted(AGuardian substituted, AGuardian substitute) {}
+        public void onGuardianSubstituted(AGuardian substituted, AGuardian substitute, int fieldPos) {}
     }
 }

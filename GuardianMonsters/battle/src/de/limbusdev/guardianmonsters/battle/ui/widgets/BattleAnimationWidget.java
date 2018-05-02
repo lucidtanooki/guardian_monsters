@@ -29,6 +29,7 @@ import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics;
 import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.ui.Constant;
+import de.limbusdev.guardianmonsters.ui.widgets.Callback;
 import de.limbusdev.guardianmonsters.utils.geometry.IntVec2;
 
 import static de.limbusdev.guardianmonsters.guardians.Constant.LEFT;
@@ -412,14 +413,14 @@ public class BattleAnimationWidget extends BattleWidget
         monImgs.get(pos).addAction(Actions.sequence(Actions.alpha(0, 2), Actions.visible(false)));
     }
 
-    public void animateGuardianSubstitution(int pos, boolean side, int substitutesID, int substitutesForm)
+    public void animateGuardianSubstitution(int pos, boolean side, int substitutesID, int substitutesForm, Callback onSubstitutionComplete)
     {
         ArrayMap<Integer,BattleGuardianWidget> monImgs;
         if(side == LEFT) { monImgs = monsterImgsLeft; }
         else             { monImgs = monsterImgsRight; }
 
         BattleGuardianWidget guardianWidget = monImgs.get(pos);
-        guardianWidget.substitute(substitutesID, substitutesForm, side, callbacks::onHitAnimationComplete);
+        guardianWidget.substitute(substitutesID, substitutesForm, side, onSubstitutionComplete::onClick);
     }
 
     /**

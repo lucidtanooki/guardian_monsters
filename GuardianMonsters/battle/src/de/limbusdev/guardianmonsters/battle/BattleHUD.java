@@ -260,7 +260,8 @@ public class BattleHUD extends ABattleHUD
         {
             switchActiveGuardianWidget.init(
                 battleSystem.getActiveMonster(),
-                battleSystem.getQueue().getLeft()
+                battleSystem.getQueue().getLeft(),
+                battleSystem.getQueue().getCombatTeamLeft()
             );
             battleStateSwitcher.toTeamMenu();
         };
@@ -475,19 +476,23 @@ public class BattleHUD extends ABattleHUD
             }
 
             @Override
-            public void onGuardianSubstituted(AGuardian substituted, AGuardian substitute)
+            public void onGuardianSubstituted(AGuardian substituted, AGuardian substitute, int fieldPos)
             {
                 battleStateSwitcher.toAnimation();
                 infoLabelWidget.setWholeText(BattleStringBuilder.substitution(substituted, substitute));
                 infoLabelWidget.animateTextAppearance();
                 animationWidget.animateGuardianSubstitution(
-                    battleSystem.getQueue().getFieldPositionFor(substituted),
+                    fieldPos,
                     battleSystem.getQueue().getTeamSideFor(substituted),
                     substitute.getSpeciesID(),
-                    substitute.getAbilityGraph().getCurrentForm()
+                    substitute.getAbilityGraph().getCurrentForm(),
+                    () -> actionMenu.enable(actionMenu.backButton)
                 );
-
-
+                statusWidget.updateStatusWidgetToSubstitute(
+                    fieldPos,
+                    battleSystem.getQueue().getTeamSideFor(substituted),
+                    substitute
+                );
             }
         };
 
@@ -519,6 +524,7 @@ public class BattleHUD extends ABattleHUD
             battleSystem.applyAttack();
             actionMenu.enable(actionMenu.backButton);
         };
+
     }
 
     private void showLevelUp(AGuardian m)

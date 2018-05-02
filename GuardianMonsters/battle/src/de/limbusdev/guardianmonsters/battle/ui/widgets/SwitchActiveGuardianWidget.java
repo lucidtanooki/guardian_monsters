@@ -20,6 +20,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 
+import de.limbusdev.guardianmonsters.guardians.battle.CombatTeam;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.Team;
 import de.limbusdev.guardianmonsters.services.Services;
@@ -66,7 +67,7 @@ public class SwitchActiveGuardianWidget extends BattleWidget
         switchButton.setPosition(2,2,Align.bottomLeft);
         addActor(switchButton);
 
-        teamChoiceWidget = new TeamCircleWidget(Services.getUI().getInventorySkin(), null);
+        teamChoiceWidget = new TeamCircleWidget(Services.getUI().getInventorySkin(), nr -> {});
         teamChoiceWidget.setPosition(Constant.WIDTH-2,Constant.HEIGHT/2,Align.right);
         addActor(teamChoiceWidget);
 
@@ -94,25 +95,23 @@ public class SwitchActiveGuardianWidget extends BattleWidget
         switchButton.addListener(new SimpleClickListener(switchButtonCallback));
     }
 
-    public void init(AGuardian guardian, Team team)
+    public void init(AGuardian guardian, Team team, CombatTeam combatTeam)
     {
         guardianStatusWidget.init(guardian);
         teamChoiceWidget.init(team, team.getPosition(guardian));
-        activateGuardian(guardian, team);
+        activateGuardian(guardian, team, combatTeam);
 
         Callback.ButtonID circleMenuCallbacks = nr ->
         {
-            activateGuardian(team.get(nr), team);
+            activateGuardian(team.get(nr), team, combatTeam);
         };
 
         teamChoiceWidget.setHandler(circleMenuCallbacks);
     }
 
-    private void activateGuardian(AGuardian guardian, Team team)
+    private void activateGuardian(AGuardian guardian, Team team, CombatTeam combatTeam)
     {
-        int chosenPos = teamChoiceWidget.getCurrentPosition();
-
-        if(chosenPos >= team.getActiveTeamSize() && guardian.getIndividualStatistics().isFit()) {
+        if(!combatTeam.isMember(guardian) && guardian.getIndividualStatistics().isFit()) {
             switchButton.setTouchable(Touchable.enabled);
             switchButton.setColor(Color.WHITE);
         } else {

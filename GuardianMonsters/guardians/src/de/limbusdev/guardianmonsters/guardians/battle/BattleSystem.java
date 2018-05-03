@@ -130,7 +130,11 @@ public class BattleSystem
         callbacks.onAreaAttack(attacker, targets, ability, latestAreaAttackReports);
     }
 
-    public void applyAttack()
+    /**
+     * Whether this application defeated a guardian
+     * @return
+     */
+    public boolean applyAttack()
     {
         if(areaChosen) {
             for(AttackCalculationReport report : latestAreaAttackReports)
@@ -140,7 +144,7 @@ public class BattleSystem
         } else {
             BattleCalculator.apply(latestAttackReport);
         }
-        checkKO();
+        return checkKO();
     }
 
     public void applyStatusEffect()
@@ -261,34 +265,42 @@ public class BattleSystem
     /**
      * Checks if a monster has been defeated during the last attack
      */
-    private void checkKO()
+    private boolean checkKO()
     {
-        Iterator<AGuardian> it = queue.getCurrentRound().iterator();
-        while (it.hasNext())
+        boolean guardianDefeated = false;
+        Array<Iterator<AGuardian>> its;
+        its = new Array<>();
+        its.add(queue.getCurrentRound().iterator());
+        its.add(queue.getNextRound().iterator());
+
+        for(Iterator<AGuardian> it : its)
         {
-            AGuardian m = it.next();
-            if (m.getIndividualStatistics().isKO()) {
-                it.remove();
-                if(queue.getRight().containsValue(m,false)) {
-                    giveEXPtoWinners(m);
+            while (it.hasNext())
+            {
+                AGuardian m = it.next();
+                if (m.getIndividualStatistics().isKO()) {
+
+                    if (queue.getTeamSideFor(m) == RIGHT) {
+                        giveEXPtoWinners(m);
+                        if(queue.getRight().teamKO()) {
+                            it.remove();
+                            callbacks.onMonsterKilled(m);
+                        } else {
+                            randomlyReplaceDefeatedGuardian(RIGHT, m);
+                        }
+                    } else {
+                        it.remove();
+                        callbacks.onMonsterKilled(m);
+                    }
+                    guardianDefeated = true;
                 }
-                callbacks.onMonsterKilled(m);
             }
         }
 
-        it = queue.getNextRound().iterator();
-        while (it.hasNext())
-        {
-            AGuardian m = it.next();
-            if (m.getIndividualStatistics().isKO()) {
-                it.remove();
-                if(queue.getRight().containsValue(m,false)) {
-                    giveEXPtoWinners(m);
-                }
-                callbacks.onMonsterKilled(m);
-            }
-        }
+        return guardianDefeated;
     }
+
+
 
     private void giveEXPtoWinners(AGuardian defeatedGuardian)
     {
@@ -327,6 +339,17 @@ public class BattleSystem
         getActiveMonster().deleteObservers();
         AGuardian replaced = queue.exchangeActive(newGuardian);
         callbacks.onGuardianSubstituted(replaced, newGuardian, fieldPos);
+    }
+
+    /**
+     * Mainly for replacing defeated opponent Guardians
+     */
+    private void randomlyReplaceDefeatedGuardian(boolean side, AGuardian defeated) throws IllegalStateException
+    {
+        int fieldPos = queue.getFieldPositionFor(defeated);
+        defeated.deleteObservers();
+        AGuardian substitute = queue.randomlyExchangeDefeated(defeated);
+        callbacks.onReplacingDefeatedGuardian(defeated, substitute, fieldPos);
     }
 
     public void setChosenTarget(AGuardian target)
@@ -449,5 +472,6 @@ public class BattleSystem
         public void onDoingNothing(AGuardian guardian){}
         public void onApplyStatusEffect(AGuardian guardian){}
         public void onGuardianSubstituted(AGuardian substituted, AGuardian substitute, int fieldPos) {}
+        public void onReplacingDefeatedGuardian(AGuardian substituted, AGuardian substitute, int fieldPos) {}
     }
 }

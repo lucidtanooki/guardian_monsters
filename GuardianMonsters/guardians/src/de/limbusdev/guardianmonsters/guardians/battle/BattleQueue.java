@@ -3,6 +3,7 @@ package de.limbusdev.guardianmonsters.guardians.battle;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 
+import java.util.Iterator;
 import java.util.Observable;
 
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
@@ -122,6 +123,53 @@ public class BattleQueue extends Observable
         setChanged();
         notifyObservers();
         return activeGuardian;
+    }
+
+    public AGuardian randomlyExchangeDefeated(AGuardian defeated)
+    {
+        CombatTeam combatTeam;
+        Team team;
+
+        boolean side = getTeamSideFor(defeated);
+        if(side == LEFT) {
+            combatTeam = combatTeamLeft;
+            team = left;
+        } else {
+            combatTeam = combatTeamRight;
+            team = right;
+        }
+
+        int position = combatTeam.getFieldPosition(defeated);
+        if(currentRound.contains(defeated, false)) {
+            currentRound.removeValue(defeated, false);
+        } else {
+            nextRound.removeValue(defeated, false);
+        }
+
+        AGuardian substitute = null;
+        boolean newGuardianFound = false;
+        Iterator<AGuardian> teamIterator = team.values().iterator();
+        while(!newGuardianFound && teamIterator.hasNext())
+        {
+            AGuardian guardian = teamIterator.next();
+            if(guardian.getIndividualStatistics().isFit() && !combatTeam.isMember(guardian)) {
+                substitute = guardian;
+                combatTeam.exchange(position, substitute);
+                substitute = guardian;
+                newGuardianFound = true;
+            }
+        }
+
+
+        if(substitute == null) {
+            throw new IllegalStateException("Do not call randomlyExchangeDefeated() if there is no Guardian left in team.");
+        } else {
+            nextRound.add(substitute);
+            setChanged();
+            notifyObservers();
+        }
+
+        return substitute;
     }
 
     @Override

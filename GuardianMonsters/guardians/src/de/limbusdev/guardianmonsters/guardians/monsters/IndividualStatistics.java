@@ -902,6 +902,7 @@ public class IndividualStatistics
         setMStr(getMStrMax());
         setMDef(getMDefMax());
         setSpeed(getSpeedMax());
+        setStatusEffect(StatusEffect.HEALTHY);
     }
 
     /**

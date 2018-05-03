@@ -302,8 +302,10 @@ public class BattleHUD extends ABattleHUD
                     teamOk = false || teamOk;
                 }
             }
-            if(!teamOk) Services.getScreenManager().getGame().create();
-            else {
+            if(!teamOk) {
+                Services.getAudio().stopMusic();
+                Services.getScreenManager().getGame().create();
+            } else {
                 Services.getAudio().stopMusic();
                 BattleResultScreen resultScreen = new BattleResultScreen(leftTeam, battleSystem.getResult());
                 Services.getScreenManager().pushScreen(resultScreen);
@@ -404,6 +406,8 @@ public class BattleHUD extends ABattleHUD
                 animationWidget.animateMonsterKO(pos,side);
             }
 
+
+
             @Override
             public void onAttack(AGuardian attacker, AGuardian target, Ability ability, AttackCalculationReport rep)
             {
@@ -493,6 +497,30 @@ public class BattleHUD extends ABattleHUD
                     battleSystem.getQueue().getTeamSideFor(substituted),
                     substitute
                 );
+                targetMenuWidget.init(battleSystem, false);
+                targetAreaMenuWidget.init(battleSystem, true);
+            }
+
+            @Override
+            public void onReplacingDefeatedGuardian(AGuardian substituted, AGuardian substitute, int fieldPos)
+            {
+                battleStateSwitcher.toAnimation();
+                infoLabelWidget.setWholeText(BattleStringBuilder.replacingDefeated(substituted, substitute));
+                infoLabelWidget.animateTextAppearance();
+                animationWidget.animateReplacingDefeatedGuardian(
+                    fieldPos,
+                    battleSystem.getQueue().getTeamSideFor(substituted),
+                    substitute.getSpeciesID(),
+                    substitute.getAbilityGraph().getCurrentForm(),
+                    () -> actionMenu.enable(actionMenu.backButton)
+                );
+                statusWidget.updateStatusWidgetToSubstitute(
+                    fieldPos,
+                    battleSystem.getQueue().getTeamSideFor(substituted),
+                    substitute
+                );
+                targetMenuWidget.init(battleSystem, false);
+                targetAreaMenuWidget.init(battleSystem, true);
             }
         };
 
@@ -521,8 +549,10 @@ public class BattleHUD extends ABattleHUD
         // ......................................................................................... battle animation
         battleAnimationCallbacks = () ->
         {
-            battleSystem.applyAttack();
-            actionMenu.enable(actionMenu.backButton);
+            boolean defeated = battleSystem.applyAttack();
+            if(!defeated || battleSystem.getQueue().getRight().teamKO() || battleSystem.getQueue().getLeft().teamKO()) {
+                actionMenu.enable(actionMenu.backButton);
+            }
         };
 
     }

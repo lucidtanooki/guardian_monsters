@@ -95,6 +95,31 @@ public class BattleGuardianWidget extends BattleWidget implements Observer
         ));
     }
 
+    public void replaceDefeated(int index, int metaForm, boolean side, Callback callback)
+    {
+        Animation anim = Services.getMedia().getSummoningAnimation();
+        SelfRemovingAnimation sra = new SelfRemovingAnimation(anim);
+
+        sra.setPosition(0,0,Align.bottom);
+
+        guardianImage.addAction(Actions.sequence(
+            Actions.fadeOut(1f),
+            Actions.run(() -> {
+                TextureRegion tombStoneDrawable = Services.getUI().getBattleSkin().getRegion("tomb-stone");
+                if (side == RIGHT) {
+                    tombStoneDrawable.flip(true, false);
+                }
+                guardianImage.setDrawable(new TextureRegionDrawable(tombStoneDrawable));
+            }),
+            Actions.fadeIn(1f),
+            Actions.run(() -> addActor(sra)),
+            Actions.delay(1f),
+            Actions.run(() -> {init(index, metaForm, side);}),
+            Actions.delay(1f),
+            Actions.run(callback::onClick)
+        ));
+    }
+
     public void die(boolean side)
     {
         if(side == LEFT) {

@@ -17,7 +17,7 @@
     "ID": 2,
     "element": "none",
     "name": "attNone2_kick",
-    "damage": 50,
+    "damage": 200,
     "MPcost": 0,
     "damageType": "physical",
     "canChangeStatusEffect": true,

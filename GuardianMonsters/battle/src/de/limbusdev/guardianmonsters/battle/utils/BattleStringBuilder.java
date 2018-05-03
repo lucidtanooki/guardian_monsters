@@ -173,7 +173,7 @@ public class BattleStringBuilder
                 }
 
                 message += Services.getL18N().Battle().format(
-                    "batt_area_message_0", defName1, damage1);
+                    "batt_area_message_1", defName1, damage1);
                 break;
         }
 
@@ -193,6 +193,18 @@ public class BattleStringBuilder
         String sub2Name = Services.getL18N().getGuardianNicknameIfAvailable(substitute);
         String message = Services.getL18N().Battle().format(
             "batt_substitution",
+            sub1Name,
+            sub2Name
+        );
+        return message;
+    }
+
+    public static String replacingDefeated(AGuardian substituted, AGuardian substitute)
+    {
+        String sub1Name = Services.getL18N().getGuardianNicknameIfAvailable(substituted);
+        String sub2Name = Services.getL18N().getGuardianNicknameIfAvailable(substitute);
+        String message = Services.getL18N().Battle().format(
+            "batt_replace_defeated",
             sub1Name,
             sub2Name
         );

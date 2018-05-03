@@ -51,12 +51,15 @@ public class BattleAnimationWidget extends BattleWidget
         statusEffectIndicatorsLeft, statusEffectIndicatorsRight;
 
     public boolean attackAnimationRunning;
+    public boolean replacingDefeatedAnimationRunning;
 
     private Callbacks callbacks;
 
     public BattleAnimationWidget(Callbacks callbacks)
     {
         super();
+
+        attackAnimationRunning = false;
 
         leftPositionsOccupied = new ArrayMap<>();
         rightPositionsOccupied = new ArrayMap<>();
@@ -314,7 +317,9 @@ public class BattleAnimationWidget extends BattleWidget
         Action playSFXAction = Actions.run(() -> Services.getAudio().playSound(path));
 
         // Runs the callback handler
-        Action callbackAction = Actions.run(() -> callbacks.onHitAnimationComplete());
+        Action callbackAction = Actions.run(() -> {
+            callbacks.onHitAnimationComplete();
+        });
 
         // Animates the impact of the ability on the target
         Action animateImpactAction = Actions.run(() -> animateAttackImpact(targetPos, defSide));
@@ -421,6 +426,16 @@ public class BattleAnimationWidget extends BattleWidget
 
         BattleGuardianWidget guardianWidget = monImgs.get(pos);
         guardianWidget.substitute(substitutesID, substitutesForm, side, onSubstitutionComplete::onClick);
+    }
+
+    public void animateReplacingDefeatedGuardian(int pos, boolean side, int substitutesID, int substitutesForm, Callback onSubstitutionComplete)
+    {
+        ArrayMap<Integer,BattleGuardianWidget> monImgs;
+        if(side == LEFT) { monImgs = monsterImgsLeft; }
+        else             { monImgs = monsterImgsRight; }
+
+        BattleGuardianWidget guardianWidget = monImgs.get(pos);
+        guardianWidget.replaceDefeated(substitutesID, substitutesForm, side, onSubstitutionComplete::onClick);
     }
 
     /**

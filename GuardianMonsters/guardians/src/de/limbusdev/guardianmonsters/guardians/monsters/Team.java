@@ -68,4 +68,14 @@ public class Team extends ArrayMap<Integer,AGuardian>
     public int getPosition(AGuardian guardian) {
         return getKey(guardian, false);
     }
+
+    public boolean teamKO()
+    {
+        boolean ko = true;
+        for(AGuardian guardian : values())
+        {
+            ko = guardian.getIndividualStatistics().isKO() && ko;
+        }
+        return ko;
+    }
 }

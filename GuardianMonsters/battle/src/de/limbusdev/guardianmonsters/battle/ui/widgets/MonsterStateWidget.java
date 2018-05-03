@@ -113,7 +113,6 @@ public class MonsterStateWidget extends WidgetGroup implements Observer
         int metaForm = guardian.getAbilityGraph().getCurrentForm();
         String name = species.getCommonNameById(speciesID, metaForm);
         nameLabel.setText(Services.getL18N().Guardians().get(name));
-        guardian.deleteObservers();
         guardian.addObserver(this);
     }
 

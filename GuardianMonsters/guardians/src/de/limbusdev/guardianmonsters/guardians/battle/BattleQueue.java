@@ -63,8 +63,18 @@ public class BattleQueue extends Observable
      */
     public AGuardian next()
     {
+        if(currentRound.size == 0) {
+            Array<AGuardian> tmp = currentRound;
+            currentRound = nextRound;
+            nextRound = tmp;
+            currentRound.sort(new MonsterSpeedComparator());
+            setChanged();
+            notifyObservers(new QueueSignal(Message.NEWROUND));
+        }
+
         AGuardian next = currentRound.pop();
-        nextRound.insert(0,next);
+        nextRound.insert(0, next);
+
         if(currentRound.size == 0) {
             Array<AGuardian> tmp = currentRound;
             currentRound = nextRound;
@@ -123,6 +133,13 @@ public class BattleQueue extends Observable
         setChanged();
         notifyObservers();
         return activeGuardian;
+    }
+
+    public void revive(AGuardian guardian)
+    {
+        nextRound.insert(nextRound.size-1, guardian);
+        setChanged();
+        notifyObservers();
     }
 
     public AGuardian randomlyExchangeDefeated(AGuardian defeated)
@@ -213,7 +230,8 @@ public class BattleQueue extends Observable
         return left;
     }
 
-    public Team getRight() {
+    public Team getRight()
+    {
         return right;
     }
 

@@ -130,6 +130,11 @@ public class BattleSystem
         callbacks.onAreaAttack(attacker, targets, ability, latestAreaAttackReports);
     }
 
+    public void revive(AGuardian guardian)
+    {
+        queue.revive(guardian);
+    }
+
     /**
      * Whether this application defeated a guardian
      * @return
@@ -217,7 +222,8 @@ public class BattleSystem
     /**
      * Monster does nothing. Use when e.g. using an item.
      */
-    public void doNothing() {
+    public void doNothing()
+    {
         callbacks.onDoingNothing(getActiveMonster());
     }
 

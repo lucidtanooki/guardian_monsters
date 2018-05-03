@@ -33,6 +33,7 @@ import de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics;
 import de.limbusdev.guardianmonsters.guardians.monsters.Team;
 import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.ui.widgets.Callback;
+import main.java.de.limbusdev.guardianmonsters.inventory.ui.widgets.items.ItemChoice;
 
 import static de.limbusdev.guardianmonsters.battle.ui.widgets.BattleHUDTextButton.CENTERTOP;
 
@@ -87,7 +88,9 @@ public class BattleHUD extends ABattleHUD
     private Callback teamMenuOnBackButton, teamMenuOnSwitchButton;
 
     private BattleSystem.Callbacks          battleSystemCallbacks;
-    private BattleAnimationWidget.Callbacks battleAnimationCallbacks;
+    private Callback battleAnimationOnHitCompleteCallback,
+        battleAnimationOnDieingCallback,
+        battleAnimationOnDoingNothingCallback;
 
     private Callback.ButtonID attackMenuCallbacks;
     private Callback.ButtonID targetMenuCallbacks;
@@ -185,7 +188,10 @@ public class BattleHUD extends ABattleHUD
         // Widgets
         mainMenu            = new BattleMainMenuWidget(skin, mainMenuOnSwordButton, mainMenuOnRunButton);
         statusWidget        = new BattleStatusOverviewWidget(skin);
-        animationWidget     = new BattleAnimationWidget(battleAnimationCallbacks);
+        animationWidget     = new BattleAnimationWidget(
+            battleAnimationOnHitCompleteCallback,
+            battleAnimationOnDieingCallback,
+            battleAnimationOnDoingNothingCallback);
         attackMenuAddOn     = new SevenButtonsWidget.CentralHalfButtonsAddOn(skin, attackMenuAddOnCallbacks);
 
         attackMenu          = new AttackMenuWidget (skin, attackMenuCallbacks       ::onClick);
@@ -252,8 +258,7 @@ public class BattleHUD extends ABattleHUD
 
         actionMenuBagCB = () ->
         {
-            // TODO make new widget, as this one belongs to package inventory and is not accessible here
-            /*stage.addActor(new ItemChoice(Services.getUI().getInventorySkin(), inventory, leftTeam, battleSystem));*/
+            stage.addActor(new ItemChoice(Services.getUI().getInventorySkin(), inventory, leftTeam, battleSystem));
         };
 
         actionMenuMonsterCB = () ->
@@ -490,7 +495,9 @@ public class BattleHUD extends ABattleHUD
                     battleSystem.getQueue().getTeamSideFor(substituted),
                     substitute.getSpeciesID(),
                     substitute.getAbilityGraph().getCurrentForm(),
-                    () -> actionMenu.enable(actionMenu.backButton)
+                    () -> actionMenu.enable(actionMenu.backButton),
+                    substituted,
+                    substitute
                 );
                 statusWidget.updateStatusWidgetToSubstitute(
                     fieldPos,
@@ -512,7 +519,9 @@ public class BattleHUD extends ABattleHUD
                     battleSystem.getQueue().getTeamSideFor(substituted),
                     substitute.getSpeciesID(),
                     substitute.getAbilityGraph().getCurrentForm(),
-                    () -> actionMenu.enable(actionMenu.backButton)
+                    () -> actionMenu.enable(actionMenu.backButton),
+                    substituted,
+                    substitute
                 );
                 statusWidget.updateStatusWidgetToSubstitute(
                     fieldPos,
@@ -547,12 +556,22 @@ public class BattleHUD extends ABattleHUD
         escapeFailedLabelBackCB  = () -> battleSystem.continueBattle();
 
         // ......................................................................................... battle animation
-        battleAnimationCallbacks = () ->
+        battleAnimationOnHitCompleteCallback = () ->
         {
             boolean defeated = battleSystem.applyAttack();
             if(!defeated || battleSystem.getQueue().getRight().teamKO() || battleSystem.getQueue().getLeft().teamKO()) {
                 actionMenu.enable(actionMenu.backButton);
             }
+        };
+
+        battleAnimationOnDieingCallback = () ->
+        {
+            actionMenu.enable(actionMenu.backButton);
+        };
+
+        battleAnimationOnDoingNothingCallback = () ->
+        {
+            actionMenu.enable(actionMenu.backButton);
         };
 
     }

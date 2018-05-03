@@ -53,11 +53,15 @@ public class BattleAnimationWidget extends BattleWidget
     public boolean attackAnimationRunning;
     public boolean replacingDefeatedAnimationRunning;
 
-    private Callbacks callbacks;
+    private Callback onHitAnimationComplete, onDieing, onDoingNothing;
 
-    public BattleAnimationWidget(Callbacks callbacks)
+    public BattleAnimationWidget(Callback onHitAnimationComplete, Callback onDieing, Callback onDoingNothing)
     {
         super();
+
+        this.onHitAnimationComplete = onHitAnimationComplete;
+        this.onDieing = onDieing;
+        this.onDoingNothing = onDoingNothing;
 
         attackAnimationRunning = false;
 
@@ -87,9 +91,6 @@ public class BattleAnimationWidget extends BattleWidget
                 ));
             }
         }
-
-        this.callbacks = callbacks;
-
     }
 
     @Override
@@ -200,11 +201,11 @@ public class BattleAnimationWidget extends BattleWidget
 
     public void animateSelfDefense()
     {
-        callbacks.onHitAnimationComplete();
+        onHitAnimationComplete.onClick();
     }
 
     public void animateItemUsage() {
-        callbacks.onHitAnimationComplete();
+        onDoingNothing.onClick();
     }
 
     /**
@@ -318,7 +319,7 @@ public class BattleAnimationWidget extends BattleWidget
 
         // Runs the callback handler
         Action callbackAction = Actions.run(() -> {
-            callbacks.onHitAnimationComplete();
+            onHitAnimationComplete.onClick();
         });
 
         // Animates the impact of the ability on the target
@@ -361,7 +362,7 @@ public class BattleAnimationWidget extends BattleWidget
         Action playSFXAction = Actions.run(() -> Services.getAudio().playSound(path));
 
         // Runs the callback handler
-        Action callbackAction = Actions.run(() -> callbacks.onHitAnimationComplete());
+        Action callbackAction = Actions.run(() -> onHitAnimationComplete.onClick());
 
         // Animates the impact of the ability on the target
         Action animateImpactAction = Actions.run(() -> animateAreaAttackImpact(defSide));
@@ -415,26 +416,32 @@ public class BattleAnimationWidget extends BattleWidget
         if(side == LEFT) monImgs = monsterImgsLeft;
         else monImgs = monsterImgsRight;
 
-        monImgs.get(pos).die(side);
+        monImgs.get(pos).die(side, onDieing);
     }
 
-    public void animateGuardianSubstitution(int pos, boolean side, int substitutesID, int substitutesForm, Callback onSubstitutionComplete)
+    public void animateGuardianSubstitution(
+        int pos, boolean side, int substitutesID, int substitutesForm,
+        Callback onSubstitutionComplete, AGuardian substituted, AGuardian substitute)
     {
         ArrayMap<Integer,BattleGuardianWidget> monImgs;
         if(side == LEFT) { monImgs = monsterImgsLeft; }
         else             { monImgs = monsterImgsRight; }
 
         BattleGuardianWidget guardianWidget = monImgs.get(pos);
+        substitute.addObserver(guardianWidget);
         guardianWidget.substitute(substitutesID, substitutesForm, side, onSubstitutionComplete::onClick);
     }
 
-    public void animateReplacingDefeatedGuardian(int pos, boolean side, int substitutesID, int substitutesForm, Callback onSubstitutionComplete)
+    public void animateReplacingDefeatedGuardian(
+        int pos, boolean side, int substitutesID, int substitutesForm,
+        Callback onSubstitutionComplete, AGuardian substituted, AGuardian substitute)
     {
         ArrayMap<Integer,BattleGuardianWidget> monImgs;
         if(side == LEFT) { monImgs = monsterImgsLeft; }
         else             { monImgs = monsterImgsRight; }
 
         BattleGuardianWidget guardianWidget = monImgs.get(pos);
+        substitute.addObserver(guardianWidget);
         guardianWidget.replaceDefeated(substitutesID, substitutesForm, side, onSubstitutionComplete::onClick);
     }
 
@@ -515,9 +522,5 @@ public class BattleAnimationWidget extends BattleWidget
         private static final IntVec2 OPPO_TOP = new IntVec2(640+32-HERO_TOP.x,HERO_TOP.y);
     }
 
-    public interface Callbacks
-    {
-        void onHitAnimationComplete();
-    }
 
 }

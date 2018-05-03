@@ -12,6 +12,7 @@ import de.limbusdev.guardianmonsters.guardians.battle.BattleSystem;
 import de.limbusdev.guardianmonsters.guardians.items.Inventory;
 import de.limbusdev.guardianmonsters.guardians.items.Item;
 import de.limbusdev.guardianmonsters.guardians.items.medicine.AMedicalItem;
+import de.limbusdev.guardianmonsters.guardians.items.medicine.MedicalItem;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.ui.Constant;
@@ -73,6 +74,11 @@ public class ItemChoice extends Group
                 AMedicalItem med = (AMedicalItem) chosenItem;
                 inventory.takeItemFromInventory(chosenItem);
                 med.apply(team.get(i));
+                if(chosenItem instanceof MedicalItem) {
+                    if(((MedicalItem)chosenItem).getType() == MedicalItem.Type.REVIVE) {
+                        battleSystem.revive(team.get(i));
+                    }
+                }
                 remove();
                 battleSystem.doNothing();
             }

@@ -39,6 +39,8 @@ public class BattleGuardianWidget extends BattleWidget implements Observer
 {
     private Image guardianImage;
     private AnimatedImage statusEffectAnimation;
+    private boolean showsTombStone;
+    private TextureRegionDrawable drawable;
 
     public BattleGuardianWidget(int index, int metaForm, boolean side)
     {
@@ -53,6 +55,8 @@ public class BattleGuardianWidget extends BattleWidget implements Observer
         statusEffectAnimation.setPosition(0,96,Align.top);
 
         init(index, metaForm, side);
+
+        showsTombStone = false;
     }
 
     private void init(int index, int metaForm, boolean side)
@@ -62,7 +66,7 @@ public class BattleGuardianWidget extends BattleWidget implements Observer
         if(side == LEFT)
             if(!monReg.isFlipX())
                 monReg.flip(true, false);
-        TextureRegionDrawable drawable = new TextureRegionDrawable(monReg);
+        drawable = new TextureRegionDrawable(monReg);
         guardianImage.setDrawable(drawable);
     }
 
@@ -120,21 +124,23 @@ public class BattleGuardianWidget extends BattleWidget implements Observer
         ));
     }
 
-    public void die(boolean side)
+    public void die(boolean side, Callback onDieingComplete)
     {
         if(side == LEFT) {
             guardianImage.addAction(Actions.sequence(
                 Actions.alpha(0f, 2f),
                 Actions.visible(false),
                 Actions.run(() -> {
-                    guardianImage.setDrawable(
-                        Services.getUI().getBattleSkin().getDrawable("tomb-stone"));
+                    TextureRegion tombStoneDrawable = Services.getUI().getBattleSkin().getRegion("tomb-stone");
                     if (side == RIGHT) {
-                        guardianImage.setScaleX(-1f);
+                        tombStoneDrawable.flip(true, false);
                     }
+                    guardianImage.setDrawable(new TextureRegionDrawable(tombStoneDrawable));
+                    showsTombStone = true;
                 }),
                 Actions.visible(true),
-                Actions.alpha(1f, 2f)
+                Actions.alpha(1f, 2f),
+                Actions.run(onDieingComplete::onClick)
             ));
         } else /* side == RIGHT */ {
             guardianImage.addAction(Actions.sequence(Actions.fadeOut(2f), Actions.visible(false)));
@@ -147,6 +153,16 @@ public class BattleGuardianWidget extends BattleWidget implements Observer
         if(observable instanceof AGuardian) {
             AGuardian guardian = (AGuardian) observable;
             setStatusEffect(guardian.getIndividualStatistics().getStatusEffect());
+            if(showsTombStone && guardian.getIndividualStatistics().isFit()) {
+                guardianImage.addAction(Actions.sequence(
+                    Actions.alpha(0f, 2f),
+                    Actions.run(() -> {
+                        guardianImage.setDrawable(drawable);
+                        showsTombStone = false;
+                    }),
+                    Actions.alpha(1f, 2f)
+                ));
+            }
         }
     }
 

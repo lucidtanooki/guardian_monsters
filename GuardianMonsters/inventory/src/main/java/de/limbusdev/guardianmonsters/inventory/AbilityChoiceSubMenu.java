@@ -17,7 +17,6 @@ import com.badlogic.gdx.utils.I18NBundle;
 import java.util.Observable;
 import java.util.Observer;
 
-import de.limbusdev.guardianmonsters.battle.ui.widgets.SevenButtonsWidget;
 import de.limbusdev.guardianmonsters.guardians.Element;
 import de.limbusdev.guardianmonsters.guardians.GuardiansServiceLocator;
 import de.limbusdev.guardianmonsters.guardians.abilities.Ability;
@@ -26,6 +25,7 @@ import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.ui.Constant;
 import de.limbusdev.guardianmonsters.ui.widgets.Callback;
+import de.limbusdev.guardianmonsters.ui.widgets.HoneyComb7ButtonsWidget;
 import main.java.de.limbusdev.guardianmonsters.inventory.ui.widgets.abilities.AbilityDetailWidget;
 import main.java.de.limbusdev.guardianmonsters.inventory.ui.widgets.team.TeamMemberSwitcher;
 
@@ -44,7 +44,7 @@ public class AbilityChoiceSubMenu extends AInventorySubMenu
     private ArrayMap<Integer, AGuardian> team;
     private ButtonGroup<TextButton> abilityButtons;
     private AbilityDetailWidget details;
-    private SevenButtonsWidget abilitySlotButtons;
+    private HoneyComb7ButtonsWidget abilitySlotButtons;
     private ImageButton back;
     private int currentlyChosenAbility;
 
@@ -58,7 +58,7 @@ public class AbilityChoiceSubMenu extends AInventorySubMenu
 
         switcher = new TeamMemberSwitcher(skin, team, this);
         details = new AbilityDetailWidget(skin, this);
-        abilitySlotButtons = new SevenButtonsWidget(Services.getUI().getBattleSkin(), this, SevenButtonsWidget.ABILITY_ORDER);
+        abilitySlotButtons = new HoneyComb7ButtonsWidget(Services.getUI().getBattleSkin(), this, HoneyComb7ButtonsWidget.ABILITY_ORDER);
         back = new ImageButton(skin, "button-back");
         back.addListener(new ClickListener() {
             @Override

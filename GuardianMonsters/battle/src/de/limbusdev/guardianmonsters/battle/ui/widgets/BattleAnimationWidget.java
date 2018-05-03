@@ -410,7 +410,7 @@ public class BattleAnimationWidget extends BattleWidget
         if(side == LEFT) monImgs = monsterImgsLeft;
         else monImgs = monsterImgsRight;
 
-        monImgs.get(pos).addAction(Actions.sequence(Actions.alpha(0, 2), Actions.visible(false)));
+        monImgs.get(pos).die(side);
     }
 
     public void animateGuardianSubstitution(int pos, boolean side, int substitutesID, int substitutesForm, Callback onSubstitutionComplete)

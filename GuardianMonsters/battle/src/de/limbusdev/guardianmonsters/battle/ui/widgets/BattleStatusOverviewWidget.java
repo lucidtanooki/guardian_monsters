@@ -25,7 +25,8 @@ public class BattleStatusOverviewWidget extends BattleWidget
         monsterStateWidgetsLeft,
         monsterStateWidgetsRight;
 
-    public BattleStatusOverviewWidget(Skin skin) {
+    public BattleStatusOverviewWidget(Skin skin)
+    {
         super();
         this.monsterStateWidgetsLeft = new Array<>();
         this.monsterStateWidgetsRight = new Array<>();
@@ -99,17 +100,6 @@ public class BattleStatusOverviewWidget extends BattleWidget
             Actions.run(() -> {w.init(guardian);}),
             Actions.fadeIn(1f)
         ));
-    }
-
-    public void fadeStatusWidget(int pos, boolean side)
-    {
-        if(side) {
-            monsterStateWidgetsLeft.get(pos).addAction(
-                Actions.sequence(Actions.alpha(0, 2), Actions.visible(false)));
-        } else {
-            monsterStateWidgetsRight.get(pos).addAction(
-                Actions.sequence(Actions.alpha(0, 2), Actions.visible(false)));
-        }
     }
 
 

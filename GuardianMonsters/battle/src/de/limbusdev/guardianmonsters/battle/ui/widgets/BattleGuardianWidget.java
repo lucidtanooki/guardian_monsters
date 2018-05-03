@@ -26,6 +26,7 @@ import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.ui.widgets.Callback;
 
 import static de.limbusdev.guardianmonsters.guardians.Constant.LEFT;
+import static de.limbusdev.guardianmonsters.guardians.Constant.RIGHT;
 import static de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics.StatusEffect.HEALTHY;
 
 /**
@@ -92,6 +93,27 @@ public class BattleGuardianWidget extends BattleWidget implements Observer
             Actions.delay(1f),
             Actions.run(callback::onClick)
         ));
+    }
+
+    public void die(boolean side)
+    {
+        if(side == LEFT) {
+            guardianImage.addAction(Actions.sequence(
+                Actions.alpha(0f, 2f),
+                Actions.visible(false),
+                Actions.run(() -> {
+                    guardianImage.setDrawable(
+                        Services.getUI().getBattleSkin().getDrawable("tomb-stone"));
+                    if (side == RIGHT) {
+                        guardianImage.setScaleX(-1f);
+                    }
+                }),
+                Actions.visible(true),
+                Actions.alpha(1f, 2f)
+            ));
+        } else /* side == RIGHT */ {
+            guardianImage.addAction(Actions.sequence(Actions.fadeOut(2f), Actions.visible(false)));
+        }
     }
 
     @Override

@@ -2,6 +2,7 @@ package de.limbusdev.guardianmonsters.battle.ui.widgets;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Interpolation;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -123,8 +124,18 @@ public class MonsterStateWidget extends WidgetGroup implements Observer
         this.mpBar.setValue(statistics.getMPfraction());
         this.epBar.setValue(statistics.getEXPfraction());
         this.levelLabel.setText(Integer.toString(statistics.getLevel()));
+
         if(statistics.isKO()) {
-            addAction(Actions.sequence(Actions.alpha(0, 2), Actions.visible(false)));
+            //addAction(Actions.sequence(Actions.alpha(0, 2), Actions.visible(false)));
+
+            for(Actor actor : getChildren()) {
+                actor.addAction(Actions.color(Color.GRAY, 2f));
+            }
+        } else {
+
+            for(Actor actor : getChildren()) {
+                actor.addAction(Actions.color(Color.WHITE, 2f));
+            }
         }
     }
 

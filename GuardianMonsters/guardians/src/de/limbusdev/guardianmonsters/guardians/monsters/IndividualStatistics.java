@@ -819,8 +819,13 @@ public class IndividualStatistics
     public void setHP(int HP)
     {
         currentStatValues.HP = HP;
-        if(HP > getHPmax()) {currentStatValues.HP = getHPmax();}
-        if(HP < 0)          currentStatValues.HP = 0;
+        if(HP > getHPmax()) {
+            currentStatValues.HP = getHPmax();
+        }
+        if(HP < 0)          {
+            currentStatValues.HP = 0;
+            setStatusEffect(StatusEffect.HEALTHY);
+        }
 
         core.setStatisticsChanged();
         core.notifyObservers();

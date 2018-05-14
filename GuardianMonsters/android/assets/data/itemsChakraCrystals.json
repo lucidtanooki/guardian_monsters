@@ -1,0 +1,64 @@
+{
+  "items": [
+    {
+      "nameID": "guardian-crystal-none",
+      "element": "none",
+      "category": "chakracrystal"
+    },
+    {
+      "nameID": "guardian-crystal-earth",
+      "element": "earth",
+      "category": "chakracrystal"
+    },
+    {
+      "nameID": "guardian-crystal-water",
+      "element": "water",
+      "category": "chakracrystal"
+    },
+    {
+      "nameID": "guardian-crystal-fire",
+      "element": "fire",
+      "category": "chakracrystal"
+    },
+    {
+      "nameID": "guardian-crystal-air",
+      "element": "aiŕ",
+      "category": "chakracrystal"
+    },
+    {
+      "nameID": "guardian-crystal-mountain",
+      "element": "mountain",
+      "category": "chakracrystal"
+    },
+    {
+      "nameID": "guardian-crystal-arthropoda",
+      "element": "arthropoda",
+      "category": "chakracrystal"
+    },
+    {
+      "nameID": "guardian-crystal-demon",
+      "element": "demon",
+      "category": "chakracrystal"
+    },
+    {
+      "nameID": "guardian-crystal-lindworm",
+      "element": "lindworm",
+      "category": "chakracrystal"
+    },
+    {
+      "nameID": "guardian-crystal-flash",
+      "element": "flash",
+      "category": "chakracrystal"
+    },
+    {
+      "nameID": "guardian-crystal-forest",
+      "element": "forest",
+      "category": "chakracrystal"
+    },
+    {
+      "nameID": "guardian-crystal-spirit",
+      "element": "spirit",
+      "category": "chakracrystal"
+    }
+  ]
+}

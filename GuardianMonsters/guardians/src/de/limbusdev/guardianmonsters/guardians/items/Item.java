@@ -8,7 +8,7 @@ public abstract class Item
 {
     public enum Category
     {
-        ALL, MEDICINE, EQUIPMENT, KEY,
+        ALL, MEDICINE, EQUIPMENT, KEY, CHAKRACRYSTAL
     }
 
     private static int INSTANCE_COUNTER=0;

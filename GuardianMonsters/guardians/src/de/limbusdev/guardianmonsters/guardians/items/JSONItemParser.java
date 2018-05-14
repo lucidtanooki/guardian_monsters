@@ -36,6 +36,9 @@ public class JSONItemParser
                 case "key":
                     item = parseKeyItem(jsonItem);
                     break;
+                case "chakracrystal":
+                    item = parseChakraCrystal(jsonItem);
+                    break;
                 default:
                     item = new MedicalItem("Water", 0, MedicalItem.Type.HP_CURE);
                     break;
@@ -61,6 +64,14 @@ public class JSONItemParser
             default:
                 return new MedicalItem("Water", 0, MedicalItem.Type.HP_CURE);
         }
+    }
+
+    private static Item parseChakraCrystal(JsonValue jsonItem)
+    {
+        return new ChakraCrystalItem(
+                jsonItem.getString("nameID"),
+                jsonItem.getString("element")
+        );
     }
 
     private static Item parseHPCuringItem(JsonValue jsonItem)

@@ -99,4 +99,15 @@ public class CombatTeam extends ArrayMap<Integer,AGuardian>
         }
         return ko;
     }
+
+    public int countFitMembers()
+    {
+        int counter = 0;
+        for(AGuardian guardian : values()) {
+            if(guardian.getIndividualStatistics().isFit()) {
+                counter++;
+            }
+        }
+        return counter;
+    }
 }

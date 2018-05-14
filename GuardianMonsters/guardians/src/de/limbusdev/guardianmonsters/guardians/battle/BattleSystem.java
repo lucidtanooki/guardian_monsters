@@ -51,9 +51,10 @@ public class BattleSystem
     private boolean targetChosen;
     private boolean attackChosen;
     private boolean areaChosen;
+    private boolean wildEncounter;  // Guardians can be banned in wild encounters only
 
     // ................................................................................. CONSTRUCTOR
-    public BattleSystem(Team left, Team right, Callbacks callbacks)
+    public BattleSystem(Team left, Team right, Callbacks callbacks, boolean wildEncounter)
     {
         this.callbacks = callbacks;
 
@@ -61,6 +62,8 @@ public class BattleSystem
         targetChosen = false;
         attackChosen = false;
         areaChosen = false;
+
+        this.wildEncounter = wildEncounter;
 
         defaultAiPlayer = new DefaultAIPlayer();
 
@@ -347,6 +350,21 @@ public class BattleSystem
         callbacks.onGuardianSubstituted(replaced, newGuardian, fieldPos);
     }
 
+    public void banWildGuardian(AGuardian bannedGuardian)
+    {
+        if(!isWildEncounter()) {
+            throw new IllegalStateException("Guardians can be banned in wild encounters only!");
+        }
+
+        if(queue.getCombatTeamRight().countFitMembers() > 1) {
+            throw new IllegalStateException("Banning Guardians is possible only, when there is only 1 Guardian left.");
+        }
+
+        int fieldPos = queue.getFieldPositionFor(bannedGuardian);
+
+        callbacks.onBanningWilduardian(bannedGuardian, fieldPos);
+    }
+
     /**
      * Mainly for replacing defeated opponent Guardians
      */
@@ -466,6 +484,11 @@ public class BattleSystem
         return queue;
     }
 
+    public boolean isWildEncounter()
+    {
+        return wildEncounter;
+    }
+
     // INNER INTERFACE
     public static abstract class Callbacks
     {
@@ -479,5 +502,6 @@ public class BattleSystem
         public void onApplyStatusEffect(AGuardian guardian){}
         public void onGuardianSubstituted(AGuardian substituted, AGuardian substitute, int fieldPos) {}
         public void onReplacingDefeatedGuardian(AGuardian substituted, AGuardian substitute, int fieldPos) {}
+        public void onBanningWilduardian(AGuardian bannedGuardian, int fieldPos) {}
     }
 }

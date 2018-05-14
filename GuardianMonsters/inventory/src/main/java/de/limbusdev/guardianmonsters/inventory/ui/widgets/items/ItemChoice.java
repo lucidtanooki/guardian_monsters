@@ -1,3 +1,5 @@
+
+
 package main.java.de.limbusdev.guardianmonsters.inventory.ui.widgets.items;
 
 import com.badlogic.gdx.scenes.scene2d.Group;
@@ -10,6 +12,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 
 import de.limbusdev.guardianmonsters.guardians.battle.BattleSystem;
+import de.limbusdev.guardianmonsters.guardians.items.ChakraCrystalItem;
 import de.limbusdev.guardianmonsters.guardians.items.Inventory;
 import de.limbusdev.guardianmonsters.guardians.items.Item;
 import de.limbusdev.guardianmonsters.guardians.items.medicine.AMedicalItem;
@@ -20,12 +23,6 @@ import de.limbusdev.guardianmonsters.ui.Constant;
 import de.limbusdev.guardianmonsters.ui.widgets.ItemListWidget;
 import de.limbusdev.guardianmonsters.ui.widgets.SimpleClickListener;
 import main.java.de.limbusdev.guardianmonsters.inventory.ui.widgets.team.MonsterListWidget;
-
-/**
- * ItemChoice
- *
- * @author Georg Eckert 2017
- */
 
 public class ItemChoice extends Group
 {
@@ -54,14 +51,7 @@ public class ItemChoice extends Group
         ImageButton back = new ImageButton(skin, "button-back");
         back.setPosition(Constant.WIDTH-2, 2, Align.bottomRight);
         addActor(back);
-        back.addListener(
-            new com.badlogic.gdx.scenes.scene2d.utils.ClickListener() {
-                @Override
-                public void clicked(InputEvent event, float x, float y) {
-                    remove();
-                }
-            }
-        );
+        back.addListener(new SimpleClickListener(() -> remove()));
 
         detailViewWidget = new ItemApplicationWidget(skin, inventory, team);
         detailViewWidget.setPosition(20,2,Align.bottomLeft);
@@ -89,19 +79,28 @@ public class ItemChoice extends Group
 
         ItemListWidget.ClickListener clicks = item ->
         {
-            chosenItem = item;
-            detailViewWidget.init(item);
-            addActor(detailViewWidget);
-            detailViewWidget.getUse().clearListeners();
-            detailViewWidget.getUse().addListener(new SimpleClickListener(() ->
-            {
-                if (guardianList != null) {
-                    guardianList.remove();
-                }
-                guardianList = new MonsterListWidget(Services.getUI().getInventorySkin(), team, callbacks, chosenItem);
-                addActor(guardianList);
-                detailViewWidget.remove();
-            }));
+            if(item instanceof MedicalItem) {
+
+                chosenItem = item;
+                detailViewWidget.init(item);
+                addActor(detailViewWidget);
+                detailViewWidget.getUse().clearListeners();
+                detailViewWidget.getUse().addListener(new SimpleClickListener(() ->
+                {
+                    if (guardianList != null) {
+                        guardianList.remove();
+                    }
+                    guardianList = new MonsterListWidget(Services.getUI().getInventorySkin(), team, callbacks, chosenItem);
+                    addActor(guardianList);
+                    detailViewWidget.remove();
+                }));
+
+            } else if (item instanceof ChakraCrystalItem) {
+
+                chosenItem = item;
+                // TODO show ChakraItem Detail View and handle clicks
+
+            }
         };
 
         Array<Item.Category> filters = new Array<>();

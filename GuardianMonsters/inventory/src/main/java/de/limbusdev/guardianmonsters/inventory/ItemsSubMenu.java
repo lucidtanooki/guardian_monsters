@@ -2,6 +2,7 @@ package main.java.de.limbusdev.guardianmonsters.inventory;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 
 import de.limbusdev.guardianmonsters.guardians.items.Inventory;
@@ -9,7 +10,7 @@ import de.limbusdev.guardianmonsters.guardians.items.Item;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.ui.widgets.ItemListWidget;
 import main.java.de.limbusdev.guardianmonsters.inventory.ui.widgets.items.ItemCategoryToolbar;
-import main.java.de.limbusdev.guardianmonsters.inventory.ui.widgets.items.ItemDetailViewWidget;
+import main.java.de.limbusdev.guardianmonsters.inventory.ui.widgets.items.ItemApplicationWidget;
 import main.java.de.limbusdev.guardianmonsters.inventory.ui.widgets.items.KeyItemDetailViewWidget;
 import main.java.de.limbusdev.guardianmonsters.inventory.ui.widgets.items.WeaponDetailViewWidget;
 
@@ -21,7 +22,7 @@ public class ItemsSubMenu extends AInventorySubMenu
     implements ItemCategoryToolbar.ClickListener, ItemListWidget.ClickListener {
 
     private Inventory inventory;
-    private ItemDetailViewWidget detailView;
+    private ItemApplicationWidget detailView;
     private ArrayMap<Integer, AGuardian> team;
     private ItemListWidget itemListWidget;
 
@@ -34,7 +35,9 @@ public class ItemsSubMenu extends AInventorySubMenu
         addActor(toolbar);
 
         // ......................................................................... SCROLLABLE LIST
-        itemListWidget = new ItemListWidget(skin, inventory, this, Item.Category.MEDICINE);
+        Array<Item.Category> filters = new Array<>();
+        filters.add(Item.Category.MEDICINE);
+        itemListWidget = new ItemListWidget(skin, inventory, this, filters);
         itemListWidget.setPosition(68,0,Align.bottomLeft);
 
         addActor(itemListWidget);
@@ -52,7 +55,7 @@ public class ItemsSubMenu extends AInventorySubMenu
                 detailView = new KeyItemDetailViewWidget(getSkin(), inventory, team);
                 break;
             default:
-                detailView = new ItemDetailViewWidget(getSkin(), inventory, team);
+                detailView = new ItemApplicationWidget(getSkin(), inventory, team);
                 break;
         }
         detailView.setPosition(264,2, Align.bottomLeft);

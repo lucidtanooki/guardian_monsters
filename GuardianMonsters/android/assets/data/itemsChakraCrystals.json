@@ -22,7 +22,7 @@
     },
     {
       "nameID": "guardian-crystal-air",
-      "element": "aiŕ",
+      "element": "air",
       "category": "chakracrystal"
     },
     {
@@ -46,8 +46,8 @@
       "category": "chakracrystal"
     },
     {
-      "nameID": "guardian-crystal-flash",
-      "element": "flash",
+      "nameID": "guardian-crystal-lightning",
+      "element": "lightning",
       "category": "chakracrystal"
     },
     {

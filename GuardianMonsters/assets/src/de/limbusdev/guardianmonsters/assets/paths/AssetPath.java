@@ -38,7 +38,8 @@ public class AssetPath
             ANIMATIONS_SUMMON_BAN = rootPath + "animationsSummonBan" + extension,
             ANIMATIONS_BIG = rootPath + "bigAnimations" + extension,
             BATTLE_BG = rootPath + "battleBacks" + extension,
-            PARTICLES = rootPath + "particles" + extension;
+            PARTICLES = rootPath + "particles" + extension,
+            ITEMS = rootPath + "items" + extension;
     }
 
     public static class Textures

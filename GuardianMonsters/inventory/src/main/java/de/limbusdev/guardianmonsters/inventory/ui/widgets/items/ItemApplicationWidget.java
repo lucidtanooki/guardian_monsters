@@ -16,7 +16,6 @@ import de.limbusdev.guardianmonsters.guardians.items.equipment.Equipment;
 import de.limbusdev.guardianmonsters.guardians.items.medicine.AMedicalItem;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.services.Services;
-import de.limbusdev.guardianmonsters.ui.widgets.Callback;
 import de.limbusdev.guardianmonsters.ui.widgets.ReassuranceWidget;
 import de.limbusdev.guardianmonsters.ui.widgets.SimpleClickListener;
 import main.java.de.limbusdev.guardianmonsters.inventory.ui.widgets.team.MonsterListWidget;
@@ -25,42 +24,71 @@ import main.java.de.limbusdev.guardianmonsters.inventory.ui.widgets.team.Monster
  * @author Georg Eckert 2017
  */
 
-public class ItemDetailViewWidget extends Group {
+public class ItemApplicationWidget extends Group implements MonsterListWidget.Callbacks{
 
     // UI
     private Label itemName, itemDescription, itemArea;
     private Image itemImg;
     private Skin skin;
-    private ImageButton use;
+    private ReassuranceWidget reassuranceWidget;
+    private ImageButton delete, use;
+
+    // Data
+    private Inventory inventory;
+    private ArrayMap<Integer, AGuardian> team;
     private Item item;
 
 
     // ................................................................................. CONSTRCUTOR
-    public ItemDetailViewWidget(Skin skin, Item item, Callback callback)
+    public ItemApplicationWidget(Skin skin, Inventory inventory, ArrayMap<Integer,AGuardian> monsters)
     {
         super();
 
-        this.skin = skin;
+        this.skin       = skin;
+        this.inventory  = inventory;
+        this.team       = monsters;
 
         constructLayout();
 
-        use.addListener(new SimpleClickListener(callback::onClick));
+        delete.addListener(new SimpleClickListener(() -> addActor(reassuranceWidget)));
+
+        use.addListener(new SimpleClickListener(() ->
+        {
+            MonsterListWidget monsterListWidget = new MonsterListWidget(getSkin(), team, ItemApplicationWidget.this, item);
+            monsterListWidget.setPosition(-262, 0, Align.topLeft);
+            addActor(monsterListWidget);
+        }));
     }
 
 
 
-    public void init(Item itemToShow)
-    {
+    public void init(Item itemToShow) {
         this.item = itemToShow;
         I18NBundle i18n = Services.getL18N().Inventory();
 
         itemName.setText(i18n.get(item.getName()));
         itemDescription.setText(i18n.get(item.getName()+"-description"));
         itemImg.setDrawable(Services.getMedia().getItemDrawable(itemToShow.getName()));
+
+        reassuranceWidget.question.setText(i18n.format("reassurance-throwaway", i18n.get(item.getName())));
+        reassuranceWidget.buttonYes.addListener(new com.badlogic.gdx.scenes.scene2d.utils.ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                inventory.takeItemFromInventory(item);
+                if(inventory.getItems().containsKey(item)) {
+                    reassuranceWidget.remove();
+                } else {
+                    remove();
+                }
+            }
+        });
     }
 
     private void constructLayout()
     {
+        reassuranceWidget = new ReassuranceWidget(skin);
+        reassuranceWidget.setPosition(-264,0,Align.bottomLeft);
+
         Label bgLabel = new Label("", skin, "paper");
         bgLabel.setSize(162,200);
         bgLabel.setPosition(0,0,Align.bottomLeft);
@@ -88,6 +116,10 @@ public class ItemDetailViewWidget extends Group {
         itemDescription.setAlignment(Align.topLeft);
         addActor(itemDescription);
 
+        delete = new ImageButton(skin, "button-delete");
+        delete.setPosition(24,160,Align.bottomLeft);
+        addActor(delete);
+
         use = new ImageButton(skin, "button-use");
         use.setPosition(106,160,Align.bottomLeft);
         addActor(use);
@@ -97,7 +129,28 @@ public class ItemDetailViewWidget extends Group {
         return skin;
     }
 
+    public ImageButton getDelete() {
+        return delete;
+    }
+
     public ImageButton getUse() {
         return use;
+    }
+
+    @Override
+    public boolean onButton(int i) {
+        inventory.takeItemFromInventory(item);
+        if(item instanceof Equipment) {
+            Item replaced = team.get(i).getIndividualStatistics().giveEquipment((Equipment)item);
+            if(replaced != null) {
+                inventory.putItemInInventory(replaced);
+            }
+        } else if (item instanceof AMedicalItem) {
+            ((AMedicalItem)item).apply(team.get(i));
+        }
+
+        boolean empty = !(inventory.getItemAmount(item) > 0);
+        if(empty) remove();
+        return !empty;
     }
 }

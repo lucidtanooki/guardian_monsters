@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 
 import de.limbusdev.guardianmonsters.guardians.battle.BattleSystem;
@@ -17,6 +18,7 @@ import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.ui.Constant;
 import de.limbusdev.guardianmonsters.ui.widgets.ItemListWidget;
+import de.limbusdev.guardianmonsters.ui.widgets.SimpleClickListener;
 import main.java.de.limbusdev.guardianmonsters.inventory.ui.widgets.team.MonsterListWidget;
 
 /**
@@ -32,7 +34,7 @@ public class ItemChoice extends Group
     private MonsterListWidget guardianList;
     private Item chosenItem;
     private BattleSystem battleSystem;
-    private ItemDetailViewWidget detailViewWidget;
+    private ItemApplicationWidget detailViewWidget;
 
     public ItemChoice(Skin skin, Inventory inventory, ArrayMap<Integer,AGuardian> team, BattleSystem battleSystem)
     {
@@ -61,7 +63,7 @@ public class ItemChoice extends Group
             }
         );
 
-        detailViewWidget = new ItemDetailViewWidget(skin, inventory, team);
+        detailViewWidget = new ItemApplicationWidget(skin, inventory, team);
         detailViewWidget.setPosition(20,2,Align.bottomLeft);
         detailViewWidget.getDelete().setVisible(false);
     }
@@ -91,19 +93,21 @@ public class ItemChoice extends Group
             detailViewWidget.init(item);
             addActor(detailViewWidget);
             detailViewWidget.getUse().clearListeners();
-            detailViewWidget.getUse().addListener(new com.badlogic.gdx.scenes.scene2d.utils.ClickListener()
+            detailViewWidget.getUse().addListener(new SimpleClickListener(() ->
             {
-                @Override
-                public void clicked(InputEvent event, float x, float y) {
-                    if(guardianList != null) guardianList.remove();
-                    guardianList = new MonsterListWidget(Services.getUI().getInventorySkin(), team, callbacks, chosenItem);
-                    addActor(guardianList);
-                    detailViewWidget.remove();
+                if (guardianList != null) {
+                    guardianList.remove();
                 }
-            });
+                guardianList = new MonsterListWidget(Services.getUI().getInventorySkin(), team, callbacks, chosenItem);
+                addActor(guardianList);
+                detailViewWidget.remove();
+            }));
         };
 
-        ItemListWidget itemList = new ItemListWidget(Services.getUI().getInventorySkin(), inventory, clicks, Item.Category.MEDICINE);
+        Array<Item.Category> filters = new Array<>();
+        filters.add(Item.Category.MEDICINE);
+        filters.add(Item.Category.CHAKRACRYSTAL);
+        ItemListWidget itemList = new ItemListWidget(Services.getUI().getInventorySkin(), inventory, clicks, filters);
         itemList.setSize(140, Constant.HEIGHT);
         itemList.setPosition(Constant.WIDTH/2-32, 0, Align.bottomLeft);
         addActor(itemList);

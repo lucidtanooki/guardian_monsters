@@ -55,7 +55,7 @@ public class ItemInventoryButton extends TextButton implements Listener<ItemSign
         counter.setAlignment(Align.center);
         add(counter).width(32);
 
-        Image itemImg = new Image(getSkin().getDrawable(item.getName()));
+        Image itemImg = new Image(Services.getMedia().getItemDrawable(item.getName()));
         itemImg.setAlign(Align.center);
         add(itemImg).width(32).height(32);
 

@@ -15,7 +15,7 @@ import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
  * @author Georg Eckert 2017
  */
 
-public class WeaponDetailViewWidget extends main.java.de.limbusdev.guardianmonsters.inventory.ui.widgets.items.ItemDetailViewWidget
+public class WeaponDetailViewWidget extends ItemApplicationWidget
 {
 
     private ArrayMap<String, Label> valueLabels;

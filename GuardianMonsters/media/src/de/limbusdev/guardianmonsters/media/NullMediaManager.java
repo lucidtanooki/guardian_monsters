@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.ArrayMap;
 
 import de.limbusdev.guardianmonsters.enums.SkyDirection;
@@ -57,6 +58,11 @@ public class NullMediaManager implements IMediaManager
 
     @Override
     public TextureAtlas.AtlasRegion getMonsterMiniSprite(int index, int form) {
+        return null;
+    }
+
+    @Override
+    public Drawable getItemDrawable(String nameID) {
         return null;
     }
 

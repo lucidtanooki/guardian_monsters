@@ -27,6 +27,7 @@ public class ModuleGuardians
         ArrayMap<String,String> jsonItemPaths = new ArrayMap<>();
         jsonItemPaths.put("itemsKey",       "data/itemsKey.json");
         jsonItemPaths.put("itemsMedicine",  "data/itemsMedicine.json");
+        jsonItemPaths.put("itemsChakraCrystals", "data/itemsChakraCrystals.json");
         jsonItemPaths.put("itemsEquipment", "data/itemsEquipment.json");
         GuardiansServiceLocator.provide(ItemService.getInstanceFromFiles(jsonItemPaths));
 
@@ -105,6 +106,10 @@ public class ModuleGuardians
             "{\"items\":[" +
                 "{\"nameID\":\"relict-earth\",\"category\":\"key\"}," +
                 "{\"nameID\":\"relict-flame\",\"category\":\"key\"}]}");
+
+        jsonItemStrings.put("itemsChakraCrystals",
+                "{\"items\":[" +
+                        "{\"nameID\":\"guardian-crystal-none\",\"category\":\"key\", \"element\": \"none\"}]}");
 
         jsonItemStrings.put("itemsMedicine",
             "{\"items\":[" +

@@ -133,6 +133,7 @@ public class GameStateDebugger
         inventory.putItemInInventory(itemService.getItem("potion-red"));
         inventory.putItemInInventory(itemService.getItem("medicine-blue"));
         inventory.putItemInInventory(itemService.getItem("angel-tear"));
+        inventory.putItemInInventory(itemService.getItem("guardian-crystal-none"));
 
         BattleScreen battleScreen = new BattleScreen(inventory);
         battleScreen.init(heroTeam, oppoTeam);

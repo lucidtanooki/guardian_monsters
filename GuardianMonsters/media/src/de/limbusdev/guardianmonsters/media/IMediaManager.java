@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.ArrayMap;
 
 import de.limbusdev.guardianmonsters.enums.SkyDirection;
@@ -42,6 +43,8 @@ public interface IMediaManager
     TextureAtlas.AtlasRegion getMonsterSprite(int index, int form);
 
     TextureAtlas.AtlasRegion getMonsterMiniSprite(int index, int form);
+
+    Drawable getItemDrawable(String nameID);
 
     Image getMonsterFace(int id, int form);
 

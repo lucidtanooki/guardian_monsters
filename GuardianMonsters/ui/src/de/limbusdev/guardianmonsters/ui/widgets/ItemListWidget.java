@@ -28,17 +28,18 @@ public class ItemListWidget extends Group implements Listener<ItemSignal> {
     private Skin skin;
     private int lastChosenItem=0;
     private ClickListener clickListener;
-    private Item.Category currentFilter;
+    private Array<Item.Category> currentFilters;
 
     public interface ClickListener {
         void onChoosingItem(Item item);
     }
 
-    public ItemListWidget(Skin skin, Inventory inventory, ClickListener handler, Item.Category filter) {
+    public ItemListWidget(Skin skin, Inventory inventory, ClickListener handler, Array<Item.Category> filters)
+    {
         this.inventory = inventory;
         this.skin = skin;
         this.clickListener = handler;
-        this.currentFilter = filter;
+        this.currentFilters = filters;
 
         itemTable = new Table();
         itemTable.align(Align.topLeft);
@@ -51,10 +52,11 @@ public class ItemListWidget extends Group implements Listener<ItemSignal> {
         scrollPane.setScrollBarPositions(false,true);
         addActor(scrollPane);
 
-        init(inventory, filter);
+        init(inventory, filters);
     }
 
-    private void init(Inventory inventory, Item.Category filter) {
+    private void init(Inventory inventory, Array<Item.Category> filters)
+    {
         itemTable.clearChildren();
         this.inventory = inventory;
         inventory.add(this);
@@ -69,7 +71,7 @@ public class ItemListWidget extends Group implements Listener<ItemSignal> {
             int counter = 0;
             for (final Item i : inventory.getItems().keys()) {
 
-                if(filter == Item.Category.ALL || i.getCategory() == filter) {
+                if(filters.contains(Item.Category.ALL, false) || filters.contains(i.getCategory(), false)) {
                     final ItemInventoryButton item = new ItemInventoryButton(i, skin, "item-button-sandstone", inventory);
                     inventory.add(this);
                     itemTable.add(item).width(192).height(40);
@@ -100,10 +102,17 @@ public class ItemListWidget extends Group implements Listener<ItemSignal> {
         }
     }
 
-    public void applyFilter(Item.Category filter) {
+    public void applyFilter(Item.Category filter)
+    {
+        Array<Item.Category> filters = new Array<>();
+        filters.add(filter);
+        applyFilter(filters);
+    }
+
+    public void applyFilter(Array<Item.Category> filters) {
         lastChosenItem = 0;
-        currentFilter = filter;
-        init(inventory, filter);
+        currentFilters = filters;
+        init(inventory, filters);
     }
 
     @Override
@@ -111,7 +120,7 @@ public class ItemListWidget extends Group implements Listener<ItemSignal> {
         if(itemSignal.message == ItemSignal.Message.DELETED) {
             // Refresh Inventory List, if last item of it's kind got removed
             if (!inventory.containsItem(itemSignal.item)) {
-                init(inventory, currentFilter);
+                init(inventory, currentFilters);
             }
         }
     }

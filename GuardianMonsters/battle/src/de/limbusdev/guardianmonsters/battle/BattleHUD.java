@@ -132,12 +132,17 @@ public class BattleHUD extends ABattleHUD
         mainMenu.clearActions();
     }
 
+    public void init(Team heroTeam, Team opponentTeam)
+    {
+        this.init(heroTeam, opponentTeam, true);
+    }
+
     /**
      * Initializes the battle screen with the given teams
      * @param heroTeam
      * @param opponentTeam
      */
-    public void init(Team heroTeam, Team opponentTeam)
+    public void init(Team heroTeam, Team opponentTeam, boolean wildEncounter)
     {
         reset();
 
@@ -146,7 +151,7 @@ public class BattleHUD extends ABattleHUD
         this.rightTeam = opponentTeam;
 
         // initialize independent battle system
-        battleSystem = new BattleSystem(heroTeam,opponentTeam, battleSystemCallbacks);
+        battleSystem = new BattleSystem(heroTeam,opponentTeam, battleSystemCallbacks, wildEncounter);
         battleSystem.getQueue().addObserver(battleQueueWidget);
 
         // initialize attack menu with active monster

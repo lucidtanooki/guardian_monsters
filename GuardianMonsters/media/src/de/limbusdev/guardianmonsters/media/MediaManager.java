@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 
@@ -176,6 +178,8 @@ public class MediaManager implements IMediaManager
         return sprite;
     }
 
+
+
     @Override
     public TextureAtlas.AtlasRegion getMonsterMiniSprite(int index, int form) {
         TextureAtlas monsterSprites = assets.get(AssetPath.Spritesheet.GUARDIANS_MINI, TextureAtlas.class);
@@ -185,6 +189,15 @@ public class MediaManager implements IMediaManager
         }
 
         return sprite;
+    }
+
+    @Override
+    public Drawable getItemDrawable(String nameID)
+    {
+        TextureAtlas itemAtlas = assets.get(AssetPath.Spritesheet.ITEMS, TextureAtlas.class);
+        TextureAtlas.AtlasRegion sprite = itemAtlas.findRegion(nameID);
+
+        return new TextureRegionDrawable(sprite);
     }
 
     @Override

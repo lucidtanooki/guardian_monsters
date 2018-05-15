@@ -79,13 +79,15 @@ public class ItemChoice extends Group
 
         ItemListWidget.ClickListener clicks = item ->
         {
+            chosenItem = item;
+            detailViewWidget.init(item);
+            addActor(detailViewWidget);
+            detailViewWidget.getUse().clearListeners();
+            SimpleClickListener clickListener;
+
             if(item instanceof MedicalItem) {
 
-                chosenItem = item;
-                detailViewWidget.init(item);
-                addActor(detailViewWidget);
-                detailViewWidget.getUse().clearListeners();
-                detailViewWidget.getUse().addListener(new SimpleClickListener(() ->
+                clickListener = new SimpleClickListener(() ->
                 {
                     if (guardianList != null) {
                         guardianList.remove();
@@ -93,19 +95,33 @@ public class ItemChoice extends Group
                     guardianList = new MonsterListWidget(Services.getUI().getInventorySkin(), team, callbacks, chosenItem);
                     addActor(guardianList);
                     detailViewWidget.remove();
-                }));
+                });
 
             } else if (item instanceof ChakraCrystalItem) {
 
-                chosenItem = item;
-                // TODO show ChakraItem Detail View and handle clicks
+                clickListener = new SimpleClickListener(() ->
+                {
+                    if (guardianList != null) {
+                        guardianList.remove();
+                    }
+                    detailViewWidget.remove();
+                    remove();
+                    inventory.takeItemFromInventory(chosenItem);
+                    battleSystem.banWildGuardian((ChakraCrystalItem) item);
+                });
 
+            } else {
+                clickListener = new SimpleClickListener(() -> {});
             }
+
+            detailViewWidget.getUse().addListener(clickListener);
         };
 
         Array<Item.Category> filters = new Array<>();
         filters.add(Item.Category.MEDICINE);
-        filters.add(Item.Category.CHAKRACRYSTAL);
+        if(battleSystem.getQueue().getCombatTeamRight().countFitMembers() == 1 && battleSystem.isWildEncounter()) {
+            filters.add(Item.Category.CHAKRACRYSTAL);
+        }
         ItemListWidget itemList = new ItemListWidget(Services.getUI().getInventorySkin(), inventory, clicks, filters);
         itemList.setSize(140, Constant.HEIGHT);
         itemList.setPosition(Constant.WIDTH/2-32, 0, Align.bottomLeft);

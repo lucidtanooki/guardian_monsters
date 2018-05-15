@@ -28,4 +28,9 @@ public interface Callback
     {
         void onClick(int buttonID);
     }
+
+    interface Boolean
+    {
+        void onBool(boolean bool);
+    }
 }

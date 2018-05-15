@@ -445,6 +445,26 @@ public class BattleAnimationWidget extends BattleWidget
         guardianWidget.replaceDefeated(substitutesID, substitutesForm, side, onSubstitutionComplete::onClick);
     }
 
+    public void animateBanning(int pos, boolean side, AGuardian guardianToBeBanned, Callback onBanningTrialComplete)
+    {
+        ArrayMap<Integer,BattleGuardianWidget> monImgs;
+        if(side == LEFT) { monImgs = monsterImgsLeft; }
+        else             { monImgs = monsterImgsRight; }
+
+        BattleGuardianWidget guardianWidget = monImgs.get(pos);
+        guardianWidget.animateBan(onBanningTrialComplete);
+    }
+
+    public void animateBanningFailure(int pos, boolean side, AGuardian guardianToBeBanned, Callback callback)
+    {
+        ArrayMap<Integer,BattleGuardianWidget> monImgs;
+        if(side == LEFT) { monImgs = monsterImgsLeft; }
+        else             { monImgs = monsterImgsRight; }
+
+        BattleGuardianWidget guardianWidget = monImgs.get(pos);
+        guardianWidget.animateBanFailure(callback);
+    }
+
     /**
      * Takes an ability and starts the animation
      * @param ability

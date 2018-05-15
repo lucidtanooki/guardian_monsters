@@ -124,6 +124,34 @@ public class BattleGuardianWidget extends BattleWidget implements Observer
         ));
     }
 
+    public void animateBan(Callback callback)
+    {
+        Animation anim = Services.getMedia().getBanningAnimation();
+        SelfRemovingAnimation sra = new SelfRemovingAnimation(anim);
+        sra.setPosition(0,0,Align.bottom);
+        addActor(sra);
+        guardianImage.addAction(Actions.sequence(
+                Actions.delay(1f),
+                Actions.visible(false),
+                Actions.delay(1f),
+                Actions.run(callback::onClick)
+        ));
+    }
+
+    public void animateBanFailure(Callback callback)
+    {
+        Animation anim = Services.getMedia().getSummoningAnimation();
+        SelfRemovingAnimation sra = new SelfRemovingAnimation(anim);
+        sra.setPosition(0,0,Align.bottom);
+        addActor(sra);
+        guardianImage.addAction(Actions.sequence(
+                Actions.delay(1f),
+                Actions.visible(true),
+                Actions.delay(1f),
+                Actions.run(callback::onClick)
+        ));
+    }
+
     public void die(boolean side, Callback onDieingComplete)
     {
         if(side == LEFT) {

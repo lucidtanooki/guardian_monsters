@@ -22,12 +22,15 @@ import de.limbusdev.guardianmonsters.battle.ui.widgets.SevenButtonsWidget;
 import de.limbusdev.guardianmonsters.battle.ui.widgets.SwitchActiveGuardianWidget;
 import de.limbusdev.guardianmonsters.battle.ui.widgets.TargetMenuWidget;
 import de.limbusdev.guardianmonsters.battle.utils.BattleStringBuilder;
+import de.limbusdev.guardianmonsters.guardians.Constant;
 import de.limbusdev.guardianmonsters.guardians.GuardiansServiceLocator;
 import de.limbusdev.guardianmonsters.guardians.abilities.Ability;
 import de.limbusdev.guardianmonsters.guardians.battle.AttackCalculationReport;
 import de.limbusdev.guardianmonsters.guardians.battle.BattleCalculator;
 import de.limbusdev.guardianmonsters.guardians.battle.BattleSystem;
+import de.limbusdev.guardianmonsters.guardians.items.ChakraCrystalItem;
 import de.limbusdev.guardianmonsters.guardians.items.Inventory;
+import de.limbusdev.guardianmonsters.guardians.items.Item;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics;
 import de.limbusdev.guardianmonsters.guardians.monsters.Team;
@@ -378,6 +381,44 @@ public class BattleHUD extends ABattleHUD
         battleSystemCallbacks = new BattleSystem.Callbacks()
         {
             @Override
+            public void onBanningWilduardian(AGuardian bannedGuardian, ChakraCrystalItem item, int fieldPos)
+            {
+                battleStateSwitcher.toAnimation();
+                infoLabelWidget.setWholeText(BattleStringBuilder.tryingToBanGuardian(bannedGuardian, item));
+                infoLabelWidget.animateTextAppearance();
+
+                Callback callback = () -> {
+                    boolean success = BattleCalculator.banSucceeds(bannedGuardian, item);
+                    if(success) {
+                        battleSystemCallbacks.onBanningWildGuardianSuccess(bannedGuardian, item, fieldPos);
+                    } else {
+                        battleSystemCallbacks.onBanningWildGuardianFailure(bannedGuardian, item, fieldPos);
+                    }
+                };
+                animationWidget.animateBanning(fieldPos, Constant.RIGHT, bannedGuardian, callback);
+            }
+
+            @Override
+            public void onBanningWildGuardianFailure(AGuardian bannedGuardian, ChakraCrystalItem crystal, int fieldPos)
+            {
+                Callback callback = () -> {animationWidget.animateItemUsage();};
+                battleStateSwitcher.toAnimation();
+                infoLabelWidget.setWholeText(BattleStringBuilder.banGuardianFailure(bannedGuardian, crystal));
+                infoLabelWidget.animateTextAppearance();
+                animationWidget.animateBanningFailure(fieldPos, Constant.RIGHT, bannedGuardian, callback);
+            }
+
+            @Override
+            public void onBanningWildGuardianSuccess(AGuardian bannedGuardian, ChakraCrystalItem crystal, int fieldPos)
+            {
+                battleStateSwitcher.toAnimation();
+                infoLabelWidget.setWholeText(BattleStringBuilder.banGuardianSuccess(bannedGuardian, crystal));
+                infoLabelWidget.animateTextAppearance();
+
+                battleStateSwitcher.toEndOfBattleByBanningLastOpponent(bannedGuardian, crystal);
+            }
+
+            @Override
             public void onBattleEnds(boolean winnerSide)
             {
                 battleStateSwitcher.toEndOfBattle(winnerSide);
@@ -677,7 +718,7 @@ public class BattleHUD extends ABattleHUD
         {
             reset();
             toInfoLabel();
-            String textKey = !winnerSide ? "batt_you_won":"batt_game_over";
+            String textKey = winnerSide ? "batt_you_won":"batt_game_over";
             String wholeText = Services.getL18N().Battle().get(textKey);
             infoLabelWidget.setWholeText(wholeText);
             infoLabelWidget.animateTextAppearance();
@@ -695,6 +736,31 @@ public class BattleHUD extends ABattleHUD
             );
 
             stage.addAction(endOfBattleMusicSequence);
+        }
+
+        public void toEndOfBattleByBanningLastOpponent(AGuardian bannedGuardian, ChakraCrystalItem crystal)
+        {
+            reset();
+            toInfoLabel();
+            infoLabelWidget.setWholeText(BattleStringBuilder.banGuardianSuccess(bannedGuardian, crystal));
+
+            infoLabelWidget.animateTextAppearance();
+            actionMenu.setCallbacks(endOfBattleLabelBackCB, ()->{}, ()->{}, ()->{});
+
+            statusWidget.addToStage(stage);
+
+            state = BattleState.ENDOFBATTLE;
+
+            Action endOfBattleMusicSequence = Actions.sequence(
+                    Services.getAudio().getMuteAudioAction(AssetPath.Audio.Music.VICTORY_SONG),
+                    Actions.run(() -> Services.getAudio().playMusic(AssetPath.Audio.Music.VICTORY_FANFARE)),
+                    Actions.delay(5),
+                    Actions.run(() -> Services.getAudio().playMusic(AssetPath.Audio.Music.VICTORY_SONG))
+            );
+
+            stage.addAction(endOfBattleMusicSequence);
+
+            // TODO put banned guardian into the guardo sphere
         }
 
         public void toAnimation()

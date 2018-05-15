@@ -8,6 +8,8 @@ import java.util.Iterator;
 
 import de.limbusdev.guardianmonsters.guardians.GuardiansServiceLocator;
 import de.limbusdev.guardianmonsters.guardians.abilities.Ability;
+import de.limbusdev.guardianmonsters.guardians.items.ChakraCrystalItem;
+import de.limbusdev.guardianmonsters.guardians.items.Item;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics;
 import de.limbusdev.guardianmonsters.guardians.monsters.Team;
@@ -268,7 +270,7 @@ public class BattleSystem
     {
         queue.resetTeamsModifiedStats(LEFT);
         queue.resetTeamsModifiedStats(RIGHT);
-        callbacks.onBattleEnds(queue.getCombatTeamLeft().isKO());
+        callbacks.onBattleEnds(!queue.getCombatTeamLeft().isKO());
     }
 
     /**
@@ -350,7 +352,7 @@ public class BattleSystem
         callbacks.onGuardianSubstituted(replaced, newGuardian, fieldPos);
     }
 
-    public void banWildGuardian(AGuardian bannedGuardian)
+    public void banWildGuardian(AGuardian bannedGuardian, ChakraCrystalItem item)
     {
         if(!isWildEncounter()) {
             throw new IllegalStateException("Guardians can be banned in wild encounters only!");
@@ -362,7 +364,21 @@ public class BattleSystem
 
         int fieldPos = queue.getFieldPositionFor(bannedGuardian);
 
-        callbacks.onBanningWilduardian(bannedGuardian, fieldPos);
+        callbacks.onBanningWilduardian(bannedGuardian, item, fieldPos);
+    }
+
+    public void banWildGuardian(ChakraCrystalItem item)
+    {
+        if(!isWildEncounter()) {
+            throw new IllegalStateException("Guardians can be banned in wild encounters only!");
+        }
+
+        if(queue.getCombatTeamRight().countFitMembers() > 1) {
+            throw new IllegalStateException("Banning Guardians is possible only, when there is only 1 Guardian left.");
+        }
+
+        AGuardian lastGuardian = queue.getCombatTeamRight().getRandomFitMember();
+        banWildGuardian(lastGuardian, item);
     }
 
     /**
@@ -502,6 +518,8 @@ public class BattleSystem
         public void onApplyStatusEffect(AGuardian guardian){}
         public void onGuardianSubstituted(AGuardian substituted, AGuardian substitute, int fieldPos) {}
         public void onReplacingDefeatedGuardian(AGuardian substituted, AGuardian substitute, int fieldPos) {}
-        public void onBanningWilduardian(AGuardian bannedGuardian, int fieldPos) {}
+        public void onBanningWilduardian(AGuardian bannedGuardian, ChakraCrystalItem crystal, int fieldPos) {}
+        public void onBanningWildGuardianFailure(AGuardian bannedGuardian, ChakraCrystalItem crystal, int fieldPos) {}
+        public void onBanningWildGuardianSuccess(AGuardian bannedGuardian, ChakraCrystalItem crystal, int fieldPos) {}
     }
 }

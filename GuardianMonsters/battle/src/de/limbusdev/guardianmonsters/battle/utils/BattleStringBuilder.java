@@ -4,6 +4,7 @@ import com.badlogic.gdx.utils.Array;
 
 import de.limbusdev.guardianmonsters.guardians.GuardiansServiceLocator;
 import de.limbusdev.guardianmonsters.guardians.battle.AttackCalculationReport;
+import de.limbusdev.guardianmonsters.guardians.items.Item;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.ISpeciesDescriptionService;
@@ -15,6 +16,37 @@ import de.limbusdev.guardianmonsters.services.Services;
  */
 public class BattleStringBuilder
 {
+    public static String tryingToBanGuardian(AGuardian guardian, Item item)
+    {
+        String guardianName = Services.getL18N().getGuardianNicknameIfAvailable(guardian);
+        String text = Services.getL18N().Battle().format(
+            "batt_message_ban_trial",
+                guardianName,
+                Services.getL18N().Inventory().get(item.getName())
+        );
+        return text;
+    }
+
+    public static String banGuardianFailure(AGuardian guardian, Item item)
+    {
+        String guardianName = Services.getL18N().getGuardianNicknameIfAvailable(guardian);
+        String text = Services.getL18N().Battle().format(
+                "batt_message_ban_failure",
+                guardianName
+        );
+        return text;
+    }
+
+    public static String banGuardianSuccess(AGuardian guardian, Item item)
+    {
+        String guardianName = Services.getL18N().getGuardianNicknameIfAvailable(guardian);
+        String text = Services.getL18N().Battle().format(
+                "batt_message_ban_success",
+                guardianName
+        );
+        return text;
+    }
+
     public static String receivedDamage(Guardian victim, int damage)
     {
         ISpeciesDescriptionService species = GuardiansServiceLocator.getSpecies();

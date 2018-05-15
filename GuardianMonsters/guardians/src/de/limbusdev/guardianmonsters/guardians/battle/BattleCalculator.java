@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.MathUtils;
 
 import de.limbusdev.guardianmonsters.guardians.GuardiansServiceLocator;
 import de.limbusdev.guardianmonsters.guardians.abilities.Ability;
+import de.limbusdev.guardianmonsters.guardians.items.ChakraCrystalItem;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics;
 import de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics.StatusEffect;
@@ -170,6 +171,11 @@ public class BattleCalculator
             default: /*case HEALTHY:*/
                 break;
         }
+    }
+
+    public static boolean banSucceeds(AGuardian guardianToBeBanned, ChakraCrystalItem crystal)
+    {
+        return MathUtils.randomBoolean(crystal.chance(guardianToBeBanned));
     }
 
     /**

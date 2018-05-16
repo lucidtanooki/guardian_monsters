@@ -66,7 +66,7 @@ public class ItemListWidget extends Group implements Listener<ItemSignal> {
         btnGroup.setMinCheckCount(1);
         btnGroup.setMaxCheckCount(1);
 
-        // Only proceed of there are any items
+        // Only proceed if there are any items
         if(inventory.getItems().size > 0) {
             int counter = 0;
             for (final Item i : inventory.getItems().keys()) {
@@ -74,8 +74,9 @@ public class ItemListWidget extends Group implements Listener<ItemSignal> {
                 if(filters.contains(Item.Category.ALL, false) || filters.contains(i.getCategory(), false)) {
 
                     final ItemInventoryButton item = new ItemInventoryButton(i, skin, "item-button-sandstone", inventory);
+                    inventory.removeAllListeners();
                     inventory.add(this);
-                    itemTable.add(item).width(192).height(40);
+                    itemTable.add(item).width(192)                                                                                                                                                                                                                                                                                                      .height(40);
                     buttons.add(item);
                     btnGroup.add(item);
                     itemTable.row().spaceBottom(1);
@@ -86,7 +87,10 @@ public class ItemListWidget extends Group implements Listener<ItemSignal> {
                         lastChosenItem = btnGroup.getCheckedIndex();
                     }));
 
-                    if (counter == 0) item.setChecked(true);
+                    if (counter == 0) {
+                        item.setChecked(true);
+                        clickListener.onChoosingItem(i);
+                    }
                     counter++;
                 }
             }
@@ -98,6 +102,7 @@ public class ItemListWidget extends Group implements Listener<ItemSignal> {
 
                 btnGroup.setChecked(btnGroup.getButtons().get(lastChosenItem).getText().toString());
             }
+
         }
     }
 

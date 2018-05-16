@@ -71,17 +71,15 @@ public class ItemApplicationWidget extends Group implements MonsterListWidget.Ca
         itemImg.setDrawable(Services.getMedia().getItemDrawable(itemToShow.getName()));
 
         reassuranceWidget.question.setText(i18n.format("reassurance-throwaway", i18n.get(item.getName())));
-        reassuranceWidget.buttonYes.addListener(new com.badlogic.gdx.scenes.scene2d.utils.ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
+        reassuranceWidget.buttonYes.addListener(new SimpleClickListener(() -> {
+
                 inventory.takeItemFromInventory(item);
                 if(inventory.getItems().containsKey(item)) {
                     reassuranceWidget.remove();
                 } else {
                     remove();
                 }
-            }
-        });
+        }));
     }
 
     private void constructLayout()

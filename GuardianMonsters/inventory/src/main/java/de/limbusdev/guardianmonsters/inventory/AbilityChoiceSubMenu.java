@@ -121,6 +121,7 @@ public class AbilityChoiceSubMenu extends AInventorySubMenu
     // ............................................................... AbilityDetailWidget.Callbacks
     @Override
     public void onLearn(int nodeID) {
+
         addActor(abilitySlotChoice);
         refreshAbilitySlotButtons();
     }

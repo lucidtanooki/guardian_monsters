@@ -93,6 +93,7 @@ public class AbilityGraphSubMenu extends AInventorySubMenu implements Listener<G
 
     @Override
     public void onLearn(int nodeID) {
+
         AGuardian m = team.get(switcher.getCurrentlyChosen());
         m.getIndividualStatistics().consumeAbilityLevel();
         m.getAbilityGraph().activateNode(nodeID);

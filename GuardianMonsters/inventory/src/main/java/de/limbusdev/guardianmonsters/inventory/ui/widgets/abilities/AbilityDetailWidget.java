@@ -20,6 +20,7 @@ import de.limbusdev.guardianmonsters.guardians.items.equipment.BodyPart;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics;
 import de.limbusdev.guardianmonsters.services.Services;
+import de.limbusdev.guardianmonsters.ui.widgets.SimpleClickListener;
 
 
 /**
@@ -72,13 +73,11 @@ public class AbilityDetailWidget extends Container {
         group.addActor(learn);
 
         // Callbacks
-        learn.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                callbacks.onLearn(nodeID);
-            }
+        learn.addListener(event ->
+        {
+            callbacks.onLearn(nodeID);
+            return true;
         });
-
     }
 
 

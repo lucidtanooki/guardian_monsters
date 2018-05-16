@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.ArrayMap;
 
 import de.limbusdev.guardianmonsters.guardians.items.Inventory;
 import de.limbusdev.guardianmonsters.guardians.items.Item;
@@ -68,14 +69,15 @@ public class ItemListWidget extends Group implements Listener<ItemSignal> {
 
         // Only proceed if there are any items
         if(inventory.getItems().size > 0) {
+
+            ArrayMap<Integer, Item> filteredItems = new ArrayMap<>();
             int counter = 0;
             for (final Item i : inventory.getItems().keys()) {
 
                 if(filters.contains(Item.Category.ALL, false) || filters.contains(i.getCategory(), false)) {
 
                     final ItemInventoryButton item = new ItemInventoryButton(i, skin, "item-button-sandstone", inventory);
-                    inventory.removeAllListeners();
-                    inventory.add(this);
+
                     itemTable.add(item).width(192)                                                                                                                                                                                                                                                                                                      .height(40);
                     buttons.add(item);
                     btnGroup.add(item);
@@ -90,17 +92,23 @@ public class ItemListWidget extends Group implements Listener<ItemSignal> {
                     if (counter == 0) {
                         item.setChecked(true);
                         clickListener.onChoosingItem(i);
+                        inventory.removeAllListeners();
+                        inventory.add(this);
                     }
+                    filteredItems.put(counter, i);
                     counter++;
                 }
             }
 
+            // set to item next to that one, which got deleted
             if(btnGroup.getButtons().size > 0) {
+
                 if (lastChosenItem > btnGroup.getButtons().size - 1) {
                     lastChosenItem = btnGroup.getButtons().size - 1;
                 }
 
                 btnGroup.setChecked(btnGroup.getButtons().get(lastChosenItem).getText().toString());
+                clickListener.onChoosingItem(filteredItems.get(lastChosenItem));
             }
 
         }

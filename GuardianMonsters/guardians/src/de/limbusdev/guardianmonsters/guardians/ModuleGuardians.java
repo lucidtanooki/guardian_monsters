@@ -40,30 +40,240 @@ public class ModuleGuardians
     {
         // ......................................................................................... init abilities
         ArrayMap<Element, String> jsonStrings = new ArrayMap<>();
-        String testJson = "[" +
-            "{\"ID\":1,\"element\":\"none\",\"name\":\"attNone1_selfdef\",\"damage\":0,\"MPcost\":0,\"damageType\":\"physical\"}," +
-            "{\"ID\":2,\"element\":\"none\",\"name\":\"attNone2_kick\",\"damage\":50,\"MPcost\":0,\"damageType\":\"physical\"}]";
+        String testJson = "[\n" +
+                "  {\n" +
+                "    \"ID\": 1,\n" +
+                "    \"element\": \"none\",\n" +
+                "    \"name\": \"attNone1_selfdef\",\n" +
+                "    \"damage\": 0,\n" +
+                "    \"MPcost\": 0,\n" +
+                "    \"damageType\": \"physical\",\n" +
+                "    \"canChangeStatusEffect\": false,\n" +
+                "    \"statusEffect\": \"healthy\",\n" +
+                "    \"probabilityToChangeStatusEffect\": 0,\n" +
+                "    \"areaDamage\": false,\n" +
+                "    \"modifiedStats\": {\"PStr\": 0, \"PDef\": 0, \"MStr\": 0, \"MDef\": 0, \"Speed\": 0},\n" +
+                "    \"healedStats\": {\"HP\": 0, \"MP\": 0}\n" +
+                "  },\n" +
+                "  {\n" +
+                "    \"ID\": 2,\n" +
+                "    \"element\": \"none\",\n" +
+                "    \"name\": \"attNone2_kick\",\n" +
+                "    \"damage\": 30,\n" +
+                "    \"MPcost\": 0,\n" +
+                "    \"damageType\": \"physical\",\n" +
+                "    \"canChangeStatusEffect\": false,\n" +
+                "    \"statusEffect\": \"healthy\",\n" +
+                "    \"probabilityToChangeStatusEffect\": 100,\n" +
+                "    \"areaDamage\": false,\n" +
+                "    \"modifiedStats\": {\"PStr\": 0, \"PDef\": 0, \"MStr\": 0, \"MDef\": 0, \"Speed\": 0},\n" +
+                "    \"healedStats\": {\"HP\": 0, \"MP\": 0}\n" +
+                "  }" +
+                "]";
         jsonStrings.put(Element.NONE, testJson);
 
-        testJson = "[" +
-            "{\"ID\":1,\"element\":\"earth\",\"name\":\"attEarth1_dirt\",\"damage\":5,\"MPcost\":0,\"damageType\":\"physical\"}," +
-            "{\"ID\":2,\"element\":\"earth\",\"name\":\"attEarth2_mud\",\"damage\":10,\"MPcost\":0,\"damageType\":\"physical\"}," +
-            "{\"ID\":3,\"element\":\"earth\",\"name\":\"attEarth3_stones\",\"damage\":20,\"MPcost\":0,\"damageType\":\"physical\"}," +
-            "{\"ID\":4,\"element\":\"earth\",\"name\":\"attEarth4_landslide\",\"damage\":40,\"MPcost\":0,\"damageType\":\"physical\"}]";
+        testJson = "[\n" +
+                "  {\n" +
+                "    \"ID\": 1,\n" +
+                "    \"element\": \"earth\",\n" +
+                "    \"name\": \"attEarth1_dirt\",\n" +
+                "    \"damage\": 5,\n" +
+                "    \"MPcost\": 0,\n" +
+                "    \"damageType\": \"physical\",\n" +
+                "    \"canChangeStatusEffect\": false,\n" +
+                "    \"statusEffect\": \"healthy\",\n" +
+                "    \"probabilityToChangeStatusEffect\": 0,\n" +
+                "    \"areaDamage\": false,\n" +
+                "    \"modifiedStats\": {\"PStr\": 0, \"PDef\": 0, \"MStr\": 0, \"MDef\": 0, \"Speed\": 0},\n" +
+                "    \"healedStats\": {\"HP\": 0, \"MP\": 0}\n" +
+                "  },\n" +
+                "  {\n" +
+                "    \"ID\": 2,\n" +
+                "    \"element\": \"earth\",\n" +
+                "    \"name\": \"attEarth2_mud\",\n" +
+                "    \"damage\": 10,\n" +
+                "    \"MPcost\": 0,\n" +
+                "    \"damageType\": \"physical\",\n" +
+                "    \"canChangeStatusEffect\": false,\n" +
+                "    \"statusEffect\": \"healthy\",\n" +
+                "    \"probabilityToChangeStatusEffect\": 0,\n" +
+                "    \"areaDamage\": false,\n" +
+                "    \"modifiedStats\": {\"PStr\": 0, \"PDef\": 0, \"MStr\": 0, \"MDef\": 0, \"Speed\": 0},\n" +
+                "    \"healedStats\": {\"HP\": 0, \"MP\": 0}\n" +
+                "  },\n" +
+                "  {\n" +
+                "    \"ID\": 3,\n" +
+                "    \"element\": \"earth\",\n" +
+                "    \"name\": \"attEarth3_stones\",\n" +
+                "    \"damage\": 20,\n" +
+                "    \"MPcost\": 0,\n" +
+                "    \"damageType\": \"physical\",\n" +
+                "    \"canChangeStatusEffect\": false,\n" +
+                "    \"statusEffect\": \"healthy\",\n" +
+                "    \"probabilityToChangeStatusEffect\": 0,\n" +
+                "    \"areaDamage\": false,\n" +
+                "    \"modifiedStats\": {\"PStr\": 0, \"PDef\": 0, \"MStr\": 0, \"MDef\": 0, \"Speed\": 0},\n" +
+                "    \"healedStats\": {\"HP\": 0, \"MP\": 0}\n" +
+                "  },\n" +
+                "  {\n" +
+                "    \"ID\": 4,\n" +
+                "    \"element\": \"earth\",\n" +
+                "    \"name\": \"attEarth4_landslide\",\n" +
+                "    \"damage\": 40,\n" +
+                "    \"MPcost\": 0,\n" +
+                "    \"damageType\": \"physical\",\n" +
+                "    \"canChangeStatusEffect\": false,\n" +
+                "    \"statusEffect\": \"healthy\",\n" +
+                "    \"probabilityToChangeStatusEffect\": 0,\n" +
+                "    \"areaDamage\": false,\n" +
+                "    \"modifiedStats\": {\"PStr\": 0, \"PDef\": 0, \"MStr\": 0, \"MDef\": 0, \"Speed\": 0},\n" +
+                "    \"healedStats\": {\"HP\": 0, \"MP\": 0}\n" +
+                "  }\n" +
+                "]";
         jsonStrings.put(Element.EARTH, testJson);
 
-        testJson = "[" +
-            "{\"ID\":1,\"element\":\"fire\",\"name\":\"attFire1_embers\",\"damage\":5,\"MPcost\":1,\"damageType\":\"magical\"}," +
-            "{\"ID\":2,\"element\":\"fire\",\"name\":\"attFire2_fire\",\"damage\":\"10\",\"MPcost\":2,\"damageType\":\"magical\"}," +
-            "{\"ID\":3,\"element\":\"fire\",\"name\":\"attFire3_flame\",\"damage\":20,\"MPcost\":3,\"damageType\":\"magical\"}," +
-            "{\"ID\":4,\"element\":\"fire\",\"name\":\"attFire4_blaze\",\"damage\":40,\"MPcost\":4,\"damageType\":\"magical\"}]";
+        testJson = "[\n" +
+                "  {\n" +
+                "    \"ID\": 1,\n" +
+                "    \"element\": \"fire\",\n" +
+                "    \"name\": \"attFire1_embers\",\n" +
+                "    \"damage\": 5,\n" +
+                "    \"MPcost\": 1,\n" +
+                "    \"damageType\": \"magical\",\n" +
+                "    \"canChangeStatusEffect\": false,\n" +
+                "    \"statusEffect\": \"healthy\",\n" +
+                "    \"modifiedStats\": {\"PStr\": 0, \"PDef\": 0, \"MStr\": 0, \"MDef\": 0, \"Speed\": 0},\n" +
+                "    \"healedStats\": {\"HP\": 0, \"MP\": 0}\n" +
+                "  },\n" +
+                "  {\n" +
+                "    \"ID\": 2,\n" +
+                "    \"element\": \"fire\",\n" +
+                "    \"name\": \"attFire2_fire\",\n" +
+                "    \"damage\": \"10\",\n" +
+                "    \"MPcost\": 2,\n" +
+                "    \"damageType\": \"magical\",\n" +
+                "    \"canChangeStatusEffect\": false,\n" +
+                "    \"statusEffect\": \"healthy\",\n" +
+                "    \"modifiedStats\": {\"PStr\": 0, \"PDef\": 0, \"MStr\": 0, \"MDef\": 0, \"Speed\": 0},\n" +
+                "    \"healedStats\": {\"HP\": 0, \"MP\": 0}\n" +
+                "  },\n" +
+                "  {\n" +
+                "    \"ID\": 3,\n" +
+                "    \"element\": \"fire\",\n" +
+                "    \"name\": \"attFire3_flame\",\n" +
+                "    \"damage\": 20,\n" +
+                "    \"MPcost\": 3,\n" +
+                "    \"damageType\": \"magical\",\n" +
+                "    \"canChangeStatusEffect\": false,\n" +
+                "    \"statusEffect\": \"healthy\",\n" +
+                "    \"probabilityToChangeStatusEffect\": 0,\n" +
+                "    \"areaDamage\": false,\n" +
+                "    \"modifiedStats\": {\"PStr\": 0, \"PDef\": 0, \"MStr\": 0, \"MDef\": 0, \"Speed\": 0},\n" +
+                "    \"healedStats\": {\"HP\": 0, \"MP\": 0}\n" +
+                "  },\n" +
+                "  {\n" +
+                "    \"ID\": 4,\n" +
+                "    \"element\": \"fire\",\n" +
+                "    \"name\": \"attFire4_blaze\",\n" +
+                "    \"damage\": 40,\n" +
+                "    \"MPcost\": 4,\n" +
+                "    \"damageType\": \"magical\",\n" +
+                "    \"canChangeStatusEffect\": false,\n" +
+                "    \"statusEffect\": \"healthy\",\n" +
+                "    \"probabilityToChangeStatusEffect\": 0,\n" +
+                "    \"areaDamage\": false,\n" +
+                "    \"modifiedStats\": {\"PStr\": 0, \"PDef\": 0, \"MStr\": 0, \"MDef\": 0, \"Speed\": 0},\n" +
+                "    \"healedStats\": {\"HP\": 0, \"MP\": 0}\n" +
+                "  },\n" +
+                "  {\n" +
+                "    \"ID\": 5,\n" +
+                "    \"element\": \"fire\",\n" +
+                "    \"name\": \"attFire5_hellfire\",\n" +
+                "    \"damage\": 80,\n" +
+                "    \"MPcost\": 20,\n" +
+                "    \"damageType\": \"magical\",\n" +
+                "    \"canChangeStatusEffect\": false,\n" +
+                "    \"statusEffect\": \"healthy\",\n" +
+                "    \"probabilityToChangeStatusEffect\": 0,\n" +
+                "    \"areaDamage\": true,\n" +
+                "    \"modifiedStats\": {\"PStr\": 0, \"PDef\": 0, \"MStr\": 0, \"MDef\": 0, \"Speed\": 0},\n" +
+                "    \"healedStats\": {\"HP\": 0, \"MP\": 0}\n" +
+                "  }\n" +
+                "]";
         jsonStrings.put(Element.FIRE, testJson);
 
-        testJson = "[" +
-            "{\"ID\":1,\"element\":\"water\",\"name\":\"attWater1_sprinkle\",\"damage\":5,\"MPcost\":0,\"damageType\":\"physical\"}," +
-            "{\"ID\":2,\"element\":\"water\",\"name\":\"attWater2_shower\",\"damage\":10,\"MPcost\":0,\"damageType\":\"physical\"}," +
-            "{\"ID\":3,\"element\":\"water\",\"name\":\"attWater3_splash\",\"damage\":20,\"MPcost\":0,\"damageType\":\"physical\"}," +
-            "{\"ID\":4,\"element\":\"water\",\"name\":\"attWater4_waterjet\",\"damage\":40,\"MPcost\":0,\"damageType\":\"physical\"}]";
+        testJson = "[\n" +
+                "  {\n" +
+                "    \"ID\": 1,\n" +
+                "    \"element\": \"water\",\n" +
+                "    \"name\": \"attWater1_sprinkle\",\n" +
+                "    \"damage\": 5,\n" +
+                "    \"MPcost\": 0,\n" +
+                "    \"damageType\": \"physical\",\n" +
+                "    \"canChangeStatusEffect\": false,\n" +
+                "    \"statusEffect\": \"healthy\",\n" +
+                "    \"probabilityToChangeStatusEffect\": 0,\n" +
+                "    \"areaDamage\": false,\n" +
+                "    \"modifiedStats\": {\"PStr\": 0, \"PDef\": 0, \"MStr\": 0, \"MDef\": 0, \"Speed\": 0},\n" +
+                "    \"healedStats\": {\"HP\": 0, \"MP\": 0}\n" +
+                "  },\n" +
+                "  {\n" +
+                "    \"ID\": 2,\n" +
+                "    \"element\": \"water\",\n" +
+                "    \"name\": \"attWater2_shower\",\n" +
+                "    \"damage\": 10,\n" +
+                "    \"MPcost\": 0,\n" +
+                "    \"damageType\": \"physical\",\n" +
+                "    \"canChangeStatusEffect\": false,\n" +
+                "    \"statusEffect\": \"healthy\",\n" +
+                "    \"probabilityToChangeStatusEffect\": 0,\n" +
+                "    \"areaDamage\": false,\n" +
+                "    \"modifiedStats\": {\"PStr\": 0, \"PDef\": 0, \"MStr\": 0, \"MDef\": 0, \"Speed\": 0},\n" +
+                "    \"healedStats\": {\"HP\": 0, \"MP\": 0}\n" +
+                "  },\n" +
+                "  {\n" +
+                "    \"ID\": 3,\n" +
+                "    \"element\": \"water\",\n" +
+                "    \"name\": \"attWater3_splash\",\n" +
+                "    \"damage\": 20,\n" +
+                "    \"MPcost\": 0,\n" +
+                "    \"damageType\": \"physical\",\n" +
+                "    \"canChangeStatusEffect\": false,\n" +
+                "    \"statusEffect\": \"healthy\",\n" +
+                "    \"probabilityToChangeStatusEffect\": 0,\n" +
+                "    \"areaDamage\": false,\n" +
+                "    \"modifiedStats\": {\"PStr\": 0, \"PDef\": 0, \"MStr\": 0, \"MDef\": 0, \"Speed\": 0},\n" +
+                "    \"healedStats\": {\"HP\": 0, \"MP\": 0}\n" +
+                "  },\n" +
+                "  {\n" +
+                "    \"ID\": 4,\n" +
+                "    \"element\": \"water\",\n" +
+                "    \"name\": \"attWater4_waterjet\",\n" +
+                "    \"damage\": 40,\n" +
+                "    \"MPcost\": 0,\n" +
+                "    \"damageType\": \"physical\",\n" +
+                "    \"canChangeStatusEffect\": false,\n" +
+                "    \"statusEffect\": \"healthy\",\n" +
+                "    \"probabilityToChangeStatusEffect\": 0,\n" +
+                "    \"areaDamage\": false,\n" +
+                "    \"modifiedStats\": {\"PStr\": 0, \"PDef\": 0, \"MStr\": 0, \"MDef\": 0, \"Speed\": 0},\n" +
+                "    \"healedStats\": {\"HP\": 0, \"MP\": 0}\n" +
+                "  },\n" +
+                "  {\n" +
+                "    \"ID\": 5,\n" +
+                "    \"element\": \"water\",\n" +
+                "    \"name\": \"attWater5_icepillars\",\n" +
+                "    \"damage\": 50,\n" +
+                "    \"MPcost\": 0,\n" +
+                "    \"damageType\": \"physical\",\n" +
+                "    \"canChangeStatusEffect\": false,\n" +
+                "    \"statusEffect\": \"healthy\",\n" +
+                "    \"probabilityToChangeStatusEffect\": 0,\n" +
+                "    \"areaDamage\": false,\n" +
+                "    \"modifiedStats\": {\"PStr\": 0, \"PDef\": 0, \"MStr\": 0, \"MDef\": 0, \"Speed\": 0},\n" +
+                "    \"healedStats\": {\"HP\": 0, \"MP\": 0}\n" +
+                "  }\n" +
+                "]";
         jsonStrings.put(Element.WATER,testJson);
 
         GuardiansServiceLocator.provide(AbilityService.getInstance(jsonStrings));

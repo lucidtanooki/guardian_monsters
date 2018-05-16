@@ -411,15 +411,15 @@ public class ModuleGuardiansJUnitTest
         AGuardian winner = factory.createGuardian(1,1);
         AGuardian looser = factory.createGuardian(1,1);
 
-        int expectedDamage = MathUtils.ceil(1.0f * ((0.5f * 1 + 1) * 10 * (10.0f / 11.0f) + 50) / 5f);
+        int expectedDamage = MathUtils.ceil(1.0f * ((0.5f * 1 + 1) * 30 * (53f / 53f) + 50) / 5f);
         System.out.println("Expected Damage: " + expectedDamage);
         AttackCalculationReport report = BattleCalculator.calcAttack(winner, looser,
-            new Ability.aID(1, Element.NONE));
+            new Ability.aID(2, Element.NONE));
         assertEquals(expectedDamage, report.damage);
 
         BattleCalculator.apply(report);
 
-        assertEquals(StatCalculator.calculateHP(IndividualStatistics.Growth.MED, 1, 300, 0, 0) - 13,
+        assertEquals(StatCalculator.calculateHP(IndividualStatistics.Growth.MED, 1, 300, 0, 0) - 19,
             looser.getIndividualStatistics().getHP());
 
         ModuleGuardians.destroyModule();
@@ -539,7 +539,7 @@ public class ModuleGuardiansJUnitTest
 
         // Battle System Initialization
         final boolean[] battleEnds = {false};
-        final BattleSystem bs = new BattleSystem(team, oppTeam, null);
+        final BattleSystem bs = new BattleSystem(team, oppTeam, null, true);
 
         BattleSystem.Callbacks bsCB = new BattleSystem.Callbacks()
         {

@@ -5,5 +5,5 @@ package de.limbusdev.guardianmonsters.battle.model;
  */
 
 public interface ListObserver<T> {
-    public void getInformedAboutRemoval(T item);
+    void getInformedAboutRemoval(T item);
 }

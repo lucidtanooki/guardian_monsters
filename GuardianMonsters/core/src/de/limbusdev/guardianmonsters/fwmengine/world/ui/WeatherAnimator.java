@@ -24,7 +24,7 @@ import de.limbusdev.guardianmonsters.Constant;
 public class WeatherAnimator {
 
     private interface WeatherRenderer {
-        public void render(Batch batch, float elapsedTime);
+        void render(Batch batch, float elapsedTime);
     }
 
     private WeatherRenderer renderer;

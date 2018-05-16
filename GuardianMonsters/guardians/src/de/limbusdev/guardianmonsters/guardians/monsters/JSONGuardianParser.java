@@ -6,6 +6,8 @@ import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
 
+import java.util.Locale;
+
 import de.limbusdev.guardianmonsters.guardians.Constant;
 import de.limbusdev.guardianmonsters.guardians.Element;
 import de.limbusdev.guardianmonsters.guardians.abilities.Ability;

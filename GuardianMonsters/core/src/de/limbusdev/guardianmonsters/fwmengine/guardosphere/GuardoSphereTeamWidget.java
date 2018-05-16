@@ -38,12 +38,7 @@ public class GuardoSphereTeamWidget extends Group {
         this.skin = skin;
         this.buttonGroup = group;
 
-        callbacks = new Callbacks() {
-            @Override
-            public void onButtonPressed(int teamPosition) {
-                System.out.println("GuardoSphereTeamWidget: Dummy Callback");
-            }
-        };
+        callbacks = teamPosition -> System.out.println("GuardoSphereTeamWidget: Dummy Callback");
 
         buttons = new Array<>();
 

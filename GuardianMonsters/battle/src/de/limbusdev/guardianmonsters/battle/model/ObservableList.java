@@ -5,9 +5,9 @@ package de.limbusdev.guardianmonsters.battle.model;
  */
 
 public interface ObservableList<T> {
-    public void addObserver(ListObserver o);
-    public void clearObservers();
-    public void notifyObserversRemove(T item);
-    public void notifyObserversAdd(T item);
-    public void notifyObserversSort();
+    void addObserver(ListObserver o);
+    void clearObservers();
+    void notifyObserversRemove(T item);
+    void notifyObserversAdd(T item);
+    void notifyObserversSort();
 }

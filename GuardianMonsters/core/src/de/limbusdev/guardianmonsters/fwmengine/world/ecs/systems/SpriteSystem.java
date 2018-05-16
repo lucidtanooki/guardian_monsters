@@ -19,7 +19,7 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ui.ExtendedTiledMapRenderer
 public class SpriteSystem extends EntitySystem {
     /* ............................................................................ ATTRIBUTES .. */
     private ExtendedTiledMapRenderer mapRenderer;
-    private ImmutableArray<Entity> visibleEntities;
+
     /* ........................................................................... CONSTRUCTOR .. */
     public SpriteSystem(ExtendedTiledMapRenderer mapRenderer) {
         this.mapRenderer = mapRenderer;
@@ -27,7 +27,7 @@ public class SpriteSystem extends EntitySystem {
     /* ............................................................................... METHODS .. */
     public void addedToEngine(Engine engine) {
         // Get all entities with either Sprite-, Equipment- or CharacterSprite Components
-        visibleEntities = engine.getEntitiesFor(Family.one(
+        ImmutableArray<Entity> visibleEntities = engine.getEntitiesFor(Family.one(
                 SpriteComponent.class,
                 CharacterSpriteComponent.class
         ).get());

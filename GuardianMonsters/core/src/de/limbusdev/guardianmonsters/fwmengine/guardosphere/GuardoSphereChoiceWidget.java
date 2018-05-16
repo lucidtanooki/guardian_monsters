@@ -38,12 +38,7 @@ public class GuardoSphereChoiceWidget extends Group {
         this.skin = skin;
         this.buttonGroup = group;
 
-        callbacks = new Callbacks() {
-            @Override
-            public void onButtonPressed(int teamPosition) {
-                System.out.println("GuardoSphereChoiceWidget: Dummy Callback");
-            }
-        };
+        callbacks = teamPosition -> System.out.println("GuardoSphereChoiceWidget: Dummy Callback");
 
         buttons = new Array<>();
 

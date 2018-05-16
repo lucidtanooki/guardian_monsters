@@ -214,12 +214,16 @@ public class InputSystem extends EntitySystem implements InputProcessor {
      * @param target
      * @return
      */
-    public boolean decideIfToMove(int entX, int entY, Vector2 target) {
+    public boolean decideIfToMove(int entX, int entY, Vector2 target)
+    {
         boolean move;
+
         if(target.dst(entX+ Constant.TILE_SIZE/2,entY+ Constant.TILE_SIZE/2) >
-                2* Constant.TILE_SIZE) move = true;
-        else
+                2* Constant.TILE_SIZE) {
+            move = true;
+        } else {
             move = false;
+        }
         return move;
     }
     /* ..................................................................... GETTERS & SETTERS .. */

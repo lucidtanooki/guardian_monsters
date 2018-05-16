@@ -13,7 +13,7 @@ public interface Settings {
      * @param pref  Preference to change
      * @param on    new value of preference
      */
-    public void setPref(String pref, boolean on);
+    void setPref(String pref, boolean on);
 
     /**
      * Returns the current value of the preference in question
@@ -21,5 +21,5 @@ public interface Settings {
      * @param def   default value, when no value is set so far
      * @return      current settings true=on, false=off
      */
-    public boolean getPref(String pref, boolean def);
+    boolean getPref(String pref, boolean def);
 }

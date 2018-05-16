@@ -37,9 +37,7 @@ import de.limbusdev.guardianmonsters.services.Services;
 public class EntityComponentSystem {
     /* ............................................................................ ATTRIBUTES .. */
     private Engine engine;
-    private IMediaManager media;
     private EntityFactory entityFactory;
-    private PositionComponent heroPosition;
     public GameArea gameArea;
     public SaveGameManager saveGameManager;
     public Entity hero;
@@ -58,8 +56,6 @@ public class EntityComponentSystem {
     public EntityComponentSystem(Viewport viewport, GameArea gameArea, boolean
             fromSave, WorldScreen gameScreen, SaveGameManager sgm
     ) {
-
-        media = Services.getMedia();
         this.gameArea = gameArea;
         this.engine = new Engine();
         this.entityFactory = new EntityFactory(engine, gameArea);
@@ -78,7 +74,7 @@ public class EntityComponentSystem {
      */
     public void setUpHero(boolean fromSave) {
         Entity hero = entityFactory.createHero(gameArea.startPosition, fromSave);
-        this.heroPosition = Components.getPositionComponent(hero);
+        PositionComponent heroPosition = Components.getPositionComponent(hero);
         this.hero = hero;
     }
 

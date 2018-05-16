@@ -9,6 +9,7 @@ import com.badlogic.gdx.utils.ArrayMap;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
 import de.limbusdev.guardianmonsters.services.Services;
+import de.limbusdev.guardianmonsters.ui.AScreen;
 import de.limbusdev.guardianmonsters.ui.Constant;
 import de.limbusdev.guardianmonsters.ui.metamorphosis.MetamorphosisScreen;
 import de.limbusdev.guardianmonsters.ui.widgets.LogoWithCounter;
@@ -98,8 +99,13 @@ public class AbilityGraphSubMenu extends AInventorySubMenu implements Listener<G
         m.getIndividualStatistics().consumeAbilityLevel();
         m.getAbilityGraph().activateNode(nodeID);
         details.init(m, nodeID, false);
+
         if(m.getAbilityGraph().metamorphsAt(nodeID)) {
-            Services.getScreenManager().pushScreen(new MetamorphosisScreen(m.getSpeciesDescription().getID(), m.getAbilityGraph().getCurrentForm()));
+
+            AScreen screen = new MetamorphosisScreen(
+                    m.getSpeciesDescription().getID(),
+                    m.getAbilityGraph().getCurrentForm());
+            Services.getScreenManager().pushScreen(screen);
         }
     }
 

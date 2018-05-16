@@ -89,12 +89,9 @@ public class CreditsScreenWidget extends WidgetGroup {
     public void start(float time) {
         credits.addAction(Actions.sequence(
             Actions.moveBy(0, credits.getPrefHeight()+ Constant.HEIGHT, time),
-            Actions.run(new Runnable() {
-                @Override
-                public void run() {
-                    remove();
-                    credits.setPosition(Constant.WIDTH/2, 0, Align.top);
-                }
+            Actions.run(() -> {
+                remove();
+                credits.setPosition(Constant.WIDTH/2, 0, Align.top);
             })
         ));
     }

@@ -26,6 +26,7 @@ import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.ui.Constant;
 import de.limbusdev.guardianmonsters.ui.widgets.Callback;
 import de.limbusdev.guardianmonsters.ui.widgets.HoneyComb7ButtonsWidget;
+import de.limbusdev.guardianmonsters.ui.widgets.SimpleClickListener;
 import main.java.de.limbusdev.guardianmonsters.inventory.ui.widgets.abilities.AbilityDetailWidget;
 import main.java.de.limbusdev.guardianmonsters.inventory.ui.widgets.team.TeamMemberSwitcher;
 
@@ -57,7 +58,7 @@ public class AbilityChoiceSubMenu extends AInventorySubMenu
         currentlyChosenAbility = 0;
 
         switcher = new TeamMemberSwitcher(skin, team, this);
-        details = new AbilityDetailWidget(skin, this);
+        details = new AbilityDetailWidget(skin, this, "button-switch");
         abilitySlotButtons = new HoneyComb7ButtonsWidget(Services.getUI().getBattleSkin(), this, HoneyComb7ButtonsWidget.ABILITY_ORDER);
         back = new ImageButton(skin, "button-back");
         back.addListener(new ClickListener() {
@@ -76,25 +77,26 @@ public class AbilityChoiceSubMenu extends AInventorySubMenu
      * @param m
      */
     private void init(AGuardian m) {
+
         abilityMenu.clear();
         abilityButtons.clear();
         I18NBundle translation = Services.getL18N().Abilities();
-        for(final int key : m.getAbilityGraph().getActiveAbilities().keys()) {
 
+        for(final int key : m.getAbilityGraph().getActiveAbilities().keys())
+        {
             Ability.aID abilityID = m.getAbilityGraph().getActiveAbilities().get(key);
-            Ability ability = GuardiansServiceLocator.getAbilities().getAbility(abilityID);
-            TextButton tb = new TextButton(translation.get(ability.name), getSkin(), "item-button-sandstone");
-            tb.addListener(new com.badlogic.gdx.scenes.scene2d.utils.ClickListener() {
-                @Override
-                public void clicked(InputEvent event, float x, float y) {
+            if(abilityID != null) {
+                Ability ability = GuardiansServiceLocator.getAbilities().getAbility(abilityID);
+                TextButton tb = new TextButton(translation.get(ability.name), getSkin(), "item-button-sandstone");
+                tb.addListener(new SimpleClickListener(() -> {
                     currentlyChosenAbility = key;
                     showAbilityDetails();
-                }
-            });
-            tb.setSize(140,24);
-            abilityMenu.addActor(tb);
-            abilityButtons.add(tb);
-            if(key == 0) tb.setChecked(true);
+                }));
+                tb.setSize(140, 24);
+                abilityMenu.addActor(tb);
+                abilityButtons.add(tb);
+                if (key == 0) tb.setChecked(true);
+            }
         }
         // TODO m.getAbilityGraph().addObserver(this);
     }

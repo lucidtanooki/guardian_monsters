@@ -54,7 +54,7 @@ public class AbilityGraphSubMenu extends AInventorySubMenu implements Listener<G
         switcher.setPosition(2, 202, Align.topLeft);
         addActor(switcher);
 
-        details = new AbilityDetailWidget(skin, this);
+        details = new AbilityDetailWidget(skin, this, "button-learn");
         details.setPosition(Constant.WIDTH - 2, 2, Align.bottomRight);
         addActor(details);
 

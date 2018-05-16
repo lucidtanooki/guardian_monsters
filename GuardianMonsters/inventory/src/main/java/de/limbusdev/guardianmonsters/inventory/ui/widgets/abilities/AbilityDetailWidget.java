@@ -37,11 +37,11 @@ public class AbilityDetailWidget extends Container {
     private Label damage;
     private Label element;
     private Image abilityType;
-    private ImageButton learn;
+    protected ImageButton learn;
 
     public Callbacks callbacks;
 
-    public AbilityDetailWidget(Skin skin, Callbacks handler) {
+    public AbilityDetailWidget(Skin skin, Callbacks handler, String buttonStyle) {
         super();
         this.skin = skin;
 
@@ -67,7 +67,7 @@ public class AbilityDetailWidget extends Container {
         damage.setPosition(18,30, Align.topLeft);
         group.addActor(damage);
 
-        learn = new ImageButton(skin, "button-learn");
+        learn = new ImageButton(skin, buttonStyle);
         learn.setPosition(160,0,Align.bottomRight);
         group.addActor(learn);
 

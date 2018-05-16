@@ -30,7 +30,7 @@ import de.limbusdev.guardianmonsters.guardians.items.Inventory;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardianFactory;
 import de.limbusdev.guardianmonsters.model.gamestate.GameState;
 import de.limbusdev.guardianmonsters.utils.UnitConverter;
-import de.limbusdev.guardianmonsters.utils.geometry.IntVec2;
+import de.limbusdev.utils.geometry.IntVec2;
 
 
 /**

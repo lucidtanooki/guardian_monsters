@@ -24,6 +24,7 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ui.WorldScreen;
 import de.limbusdev.guardianmonsters.model.gamestate.GameState;
 import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.ui.widgets.CreditsScreenWidget;
+import de.limbusdev.guardianmonsters.ui.widgets.SimpleClickListener;
 import de.limbusdev.guardianmonsters.ui.widgets.StartScreenWidget;
 
 
@@ -134,6 +135,7 @@ public class MainMenuScreen implements Screen {
     }
 
     public void setUpStartMenu(Skin skin) {
+
         this.startMenu = new Group();
 
         // .................................................................................. IMAGES
@@ -154,32 +156,28 @@ public class MainMenuScreen implements Screen {
         String label = i18n.get("main_menu_start_new");
         TextButton buttonStart = new TextButton(label, skin, "button-96x32");
 
-        buttonStart.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
+        buttonStart.addListener(new SimpleClickListener(() ->
+        {
                 stage.addAction(Actions.sequence(
                     Actions.fadeOut(1), Actions.run(() -> {
                         SaveGameManager.newSaveGame();
                         Services.getScreenManager().pushScreen(new WorldScreen(25, 1, false));
                     })
                 ));
-            }
-        });
+        }));
 
         label = i18n.get("main_menu_load_saved");
         TextButton buttonContinue = new TextButton(label, skin, "button-96x32");
 
-        buttonContinue.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
+        buttonContinue.addListener(new SimpleClickListener(() ->
+        {
                 stage.addAction(Actions.sequence(
                     Actions.fadeOut(1), Actions.run(() -> {
                         GameState state = SaveGameManager.loadSaveGame();
                         Services.getScreenManager().pushScreen(new WorldScreen(state.map, 1, true));
-                    })
+                        })
                 ));
-            }
-        });
+        }));
 
 
         // .......................................................................... CREDITS BUTTON

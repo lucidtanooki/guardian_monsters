@@ -21,12 +21,14 @@ import com.esotericsoftware.kryo.io.Output;
 import java.util.Iterator;
 
 import de.limbusdev.guardianmonsters.Constant;
+import de.limbusdev.guardianmonsters.fwmengine.guardosphere.GuardoSphere;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Components;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PositionComponent;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.SaveGameComponent;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TeamComponent;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.GameArea;
 import de.limbusdev.guardianmonsters.guardians.GuardiansServiceLocator;
+import de.limbusdev.guardianmonsters.guardians.battle.CombatTeam;
 import de.limbusdev.guardianmonsters.guardians.items.IItemService;
 import de.limbusdev.guardianmonsters.guardians.items.Inventory;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardianFactory;
@@ -37,20 +39,23 @@ import de.limbusdev.guardianmonsters.model.gamestate.SerializableGameState;
 /**
  * @author Georg Eckert 2017
  */
-public class SaveGameManager extends EntitySystem {
+public class SaveGameManager extends EntitySystem
+{
     /* ............................................................................ ATTRIBUTES .. */
     private ImmutableArray<Entity> savableEntities;
     private static GameState gameState;
     private GameArea gameArea;
     /* ........................................................................... CONSTRUCTOR .. */
 
-    public SaveGameManager(GameArea gameArea) {
+    public SaveGameManager(GameArea gameArea)
+    {
         super();
         this.gameArea = gameArea;
     }
 
     /* ............................................................................... METHODS .. */
-    public void addedToEngine(Engine engine) {
+    public void addedToEngine(Engine engine)
+    {
         Family saveGameComps = Family.all(
             SaveGameComponent.class,
             PositionComponent.class,
@@ -60,11 +65,13 @@ public class SaveGameManager extends EntitySystem {
         gameState = Components.saveGame.get(savableEntities.first()).gameState;
         gameState.map = this.gameArea.areaID;
         gameState.team.putAll(Components.team.get(savableEntities.first()).team);
+        gameState.guardoSphere.putAll(Components.guardoSphere.get(savableEntities.first()).guardoSphere);
         gameState.gridx = Components.position.get(savableEntities.first()).onGrid.x;
         gameState.gridy = Components.position.get(savableEntities.first()).onGrid.y;
     }
 
-    public static GameState getCurrentGameState() {
+    public static GameState getCurrentGameState()
+    {
         if(gameState == null) {
             gameState = loadSaveGame();
         }
@@ -75,8 +82,10 @@ public class SaveGameManager extends EntitySystem {
      * Updates the savable data
      * @param deltaTime
      */
-    public void update(float deltaTime) {
-        for (Entity entity : savableEntities) {
+    public void update(float deltaTime)
+    {
+        for (Entity entity : savableEntities)
+        {
             PositionComponent position = Components.getPositionComponent(entity);
             SaveGameComponent saveGame = Components.saveGame.get(entity);
             saveGame.gameState.gridx = position.onGrid.x;
@@ -87,7 +96,8 @@ public class SaveGameManager extends EntitySystem {
     /**
      * Serializes the current save game object with Kryo and writes it to a file in binary format
      */
-    public void saveGame() {
+    public void saveGame()
+    {
         Kryo kryo = new Kryo();
         addLibGdxSerializers(kryo);
         try {
@@ -125,12 +135,14 @@ public class SaveGameManager extends EntitySystem {
         team.team.put(0, factory.createGuardian(1,1));
 
         gameState = new GameState(
-            Constant.startMap,
-            Constant.startX,
-            Constant.startY,
-            1,1,
-            team.team,
-            inventory);
+                Constant.startMap,
+                Constant.startX,
+                Constant.startY,
+                1,1,
+                team.team,
+                inventory,
+                new GuardoSphere()
+        );
 
         return gameState;
     }
@@ -166,13 +178,15 @@ public class SaveGameManager extends EntitySystem {
      * Searches for game state files in the internal storage
      * @return
      */
-    public static boolean doesGameSaveExist() {
+    public static boolean doesGameSaveExist()
+    {
         return Gdx.files.local( "gamestate/gamestate0.sav" ).exists();
     }
     /* ..................................................................... GETTERS & SETTERS .. */
 
 
-    private static void addLibGdxSerializers(Kryo kryo) {
+    private static void addLibGdxSerializers(Kryo kryo)
+    {
         kryo.register(Array.class, new Serializer<Array>() {
             {
                 setAcceptsNull(true);

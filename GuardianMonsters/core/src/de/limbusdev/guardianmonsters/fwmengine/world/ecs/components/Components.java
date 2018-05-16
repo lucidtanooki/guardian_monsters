@@ -35,6 +35,8 @@ public abstract class Components {
             ComponentMapper.getFor(SpriteComponent.class);
     public static ComponentMapper<InventoryComponent> inventory =
         ComponentMapper.getFor(InventoryComponent.class);
+    public static ComponentMapper<GuardoSphereComponent> guardoSphere =
+            ComponentMapper.getFor(GuardoSphereComponent.class);
     /* ........................................................................... CONSTRUCTOR .. */
     
     /* ............................................................................... METHODS .. */

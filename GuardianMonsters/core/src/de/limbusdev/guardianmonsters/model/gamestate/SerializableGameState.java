@@ -17,7 +17,7 @@ public class SerializableGameState {
     public SerializableInventory inventory;
     public SerializablePosition  position;
     public SerializableMonster[] team;
-    public SerializableMonster[] allBannedGuardians;
+    public SerializableMonster[] guardoSphere;
     public SerializableProgress progress;
     public int activeTeamSize;
 
@@ -30,7 +30,8 @@ public class SerializableGameState {
      * @param gameState
      * @return
      */
-    public SerializableGameState(GameState gameState) {
+    public SerializableGameState(GameState gameState)
+    {
         position = new SerializablePosition(gameState.gridx, gameState.gridy, gameState.map);
 
         inventory = new SerializableInventory(gameState.inventory);
@@ -41,7 +42,11 @@ public class SerializableGameState {
             team[entry.key] = monster;
         }
 
-        allBannedGuardians = new SerializableMonster[300];
+        guardoSphere = new SerializableMonster[300];
+        for(ObjectMap.Entry<Integer,AGuardian> entry : gameState.guardoSphere.entries()) {
+            SerializableMonster monster = new SerializableMonster(entry.value);
+            guardoSphere[entry.key] = monster;
+        }
 
         progress = new SerializableProgress(1);
 
@@ -57,6 +62,13 @@ public class SerializableGameState {
             }
         }
 
+        ArrayMap<Integer,AGuardian> guardoSphere = new ArrayMap<>();
+        for(int i=0; i<state.guardoSphere.length; i++) {
+            if(state.guardoSphere[i] != null) {
+                guardoSphere.put(i, SerializableMonster.deserialize(state.guardoSphere[i]));
+            }
+        }
+
         Inventory inventory = SerializableInventory.deserialize(state.inventory);
 
         GameState gameState = new GameState(
@@ -66,7 +78,8 @@ public class SerializableGameState {
             state.progress.maxTeamSize,
             state.activeTeamSize,
             team,
-            inventory
+            inventory,
+                guardoSphere
         );
 
         return gameState;

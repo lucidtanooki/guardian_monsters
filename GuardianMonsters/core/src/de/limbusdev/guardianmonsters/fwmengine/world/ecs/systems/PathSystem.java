@@ -12,8 +12,8 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Components;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.InputComponent;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PathComponent;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PositionComponent;
-import de.limbusdev.guardianmonsters.utils.geometry.IntRect;
-import de.limbusdev.guardianmonsters.utils.geometry.IntVec2;
+import de.limbusdev.utils.geometry.IntRect;
+import de.limbusdev.utils.geometry.IntVec2;
 import de.limbusdev.guardianmonsters.Constant;
 
 

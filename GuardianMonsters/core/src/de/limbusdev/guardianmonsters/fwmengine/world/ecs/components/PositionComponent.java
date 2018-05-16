@@ -2,8 +2,8 @@ package de.limbusdev.guardianmonsters.fwmengine.world.ecs.components;
 
 import com.badlogic.ashley.core.Component;
 
-import de.limbusdev.guardianmonsters.utils.geometry.IntRect;
-import de.limbusdev.guardianmonsters.utils.geometry.IntVec2;
+import de.limbusdev.utils.geometry.IntRect;
+import de.limbusdev.utils.geometry.IntVec2;
 import de.limbusdev.guardianmonsters.Constant;
 
 

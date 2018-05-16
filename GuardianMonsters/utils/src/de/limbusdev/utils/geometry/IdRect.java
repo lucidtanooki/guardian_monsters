@@ -1,4 +1,4 @@
-package de.limbusdev.guardianmonsters.utils.geometry;
+package de.limbusdev.utils.geometry;
 
 /**
  * Identifiable Rectangle

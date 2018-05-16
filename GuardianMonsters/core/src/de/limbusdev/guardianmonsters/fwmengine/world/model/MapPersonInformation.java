@@ -4,7 +4,7 @@ import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.MathUtils;
 
-import de.limbusdev.guardianmonsters.utils.geometry.IntVec2;
+import de.limbusdev.utils.geometry.IntVec2;
 
 /**
  * Created by georg on 01.12.15.

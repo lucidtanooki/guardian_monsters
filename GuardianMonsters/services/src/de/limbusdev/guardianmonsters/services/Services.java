@@ -22,6 +22,20 @@ public class Services
     private static L18N l18n;
     private static Settings settings;
     private static UI ui;
+    private static IGameStateService gameState;
+
+    public static void provide(IGameStateService service) {
+        gameState = service;
+    }
+
+    public static IGameStateService getGameState() {
+        if(gameState == null) {
+            System.err.println("SERVICES: No Game State service injected yet with Services.provide(IGameStateService). Returning NullGameStateService.");
+            return new NullGameStateService();
+        } else {
+            return gameState;
+        }
+    }
 
     public static void provide(IMediaManager service) {
         media = service;

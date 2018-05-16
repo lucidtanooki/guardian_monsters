@@ -14,7 +14,7 @@ import com.badlogic.gdx.utils.Array;
 import de.limbusdev.guardianmonsters.assets.paths.AssetPath;
 import de.limbusdev.guardianmonsters.media.IMediaManager;
 import de.limbusdev.guardianmonsters.services.Services;
-import de.limbusdev.guardianmonsters.utils.geometry.IntVec2;
+import de.limbusdev.utils.geometry.IntVec2;
 import de.limbusdev.guardianmonsters.Constant;
 
 /**

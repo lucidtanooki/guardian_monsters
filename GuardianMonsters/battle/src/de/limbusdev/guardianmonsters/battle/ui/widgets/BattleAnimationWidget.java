@@ -30,7 +30,7 @@ import de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics;
 import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.ui.Constant;
 import de.limbusdev.guardianmonsters.ui.widgets.Callback;
-import de.limbusdev.guardianmonsters.utils.geometry.IntVec2;
+import de.limbusdev.utils.geometry.IntVec2;
 
 import static de.limbusdev.guardianmonsters.guardians.Constant.LEFT;
 import static de.limbusdev.guardianmonsters.guardians.Constant.RIGHT;

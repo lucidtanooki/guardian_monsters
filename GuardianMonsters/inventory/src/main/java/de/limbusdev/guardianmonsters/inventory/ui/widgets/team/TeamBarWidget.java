@@ -8,7 +8,7 @@ import com.badlogic.gdx.utils.ArrayMap;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.ui.widgets.ATeamChoiceWidget;
 import de.limbusdev.guardianmonsters.ui.widgets.Callback;
-import de.limbusdev.guardianmonsters.utils.geometry.IntVec2;
+import de.limbusdev.utils.geometry.IntVec2;
 
 /**
  * @author Georg Eckert 2017

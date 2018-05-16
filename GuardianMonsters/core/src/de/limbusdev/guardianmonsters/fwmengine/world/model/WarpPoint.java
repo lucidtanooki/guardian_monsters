@@ -3,7 +3,7 @@ package de.limbusdev.guardianmonsters.fwmengine.world.model;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 
-import de.limbusdev.guardianmonsters.utils.geometry.IntRect;
+import de.limbusdev.utils.geometry.IntRect;
 import de.limbusdev.guardianmonsters.Constant;
 
 

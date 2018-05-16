@@ -12,7 +12,7 @@ import com.badlogic.gdx.math.MathUtils;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.CameraComponent;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Components;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PositionComponent;
-import de.limbusdev.guardianmonsters.utils.geometry.IntRect;
+import de.limbusdev.utils.geometry.IntRect;
 import de.limbusdev.guardianmonsters.Constant;
 
 /**

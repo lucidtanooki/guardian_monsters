@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Align;
 
 import de.limbusdev.guardianmonsters.guardians.items.Inventory;
@@ -55,7 +56,8 @@ public class ItemInventoryButton extends TextButton implements Listener<ItemSign
         counter.setAlignment(Align.center);
         add(counter).width(32);
 
-        Image itemImg = new Image(Services.getMedia().getItemDrawable(item.getName()));
+        Drawable itemDrawable = Services.getMedia().getItemDrawable(item.getName());
+        Image itemImg = new Image(itemDrawable);
         itemImg.setAlign(Align.center);
         add(itemImg).width(32).height(32);
 

@@ -27,6 +27,7 @@ public class ItemsSubMenu extends AInventorySubMenu
     private ItemListWidget itemListWidget;
 
     public ItemsSubMenu(Skin skin, Inventory inventory, ArrayMap<Integer, AGuardian> team) {
+
         super(skin);
         this.team = team;
         this.inventory = inventory;
@@ -46,6 +47,7 @@ public class ItemsSubMenu extends AInventorySubMenu
 
 
     private void showItemDetailView(Item item)  {
+
         if(detailView != null) detailView.remove();
         switch(item.getCategory()) {
             case EQUIPMENT:

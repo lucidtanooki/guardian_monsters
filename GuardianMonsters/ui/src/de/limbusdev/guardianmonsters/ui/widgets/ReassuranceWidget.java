@@ -12,10 +12,6 @@ import com.badlogic.gdx.utils.Align;
 import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.ui.Constant;
 
-/**
- * Created by georg on 20.02.17.
- */
-
 public class ReassuranceWidget extends Group {
 
     public TextButton buttonYes, buttonNo;
@@ -31,19 +27,14 @@ public class ReassuranceWidget extends Group {
         addActor(bg);
 
         question = new Label(Services.getL18N().Inventory().get("reassurance"), skin, "paper");
-        question.setSize(256,64);
-        question.setPosition(Constant.WIDTH/2-128, Constant.HEIGHT/2-32, Align.bottomLeft);
+        question.setSize(292,64);
+        question.setPosition(Constant.WIDTH/2-(292/2), Constant.HEIGHT/2-32, Align.bottomLeft);
         addActor(question);
 
         buttonNo = new TextButton(Services.getL18N().General().get("no"), skin, "button-sandstone");
         buttonNo.setSize(64,24);
         buttonNo.setPosition(Constant.WIDTH/2+2,40,Align.bottomLeft);
-        buttonNo.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                remove();
-            }
-        });
+        buttonNo.addListener(new SimpleClickListener(() -> remove()));
         addActor(buttonNo);
 
         buttonYes = new TextButton(Services.getL18N().General().get("yes"), skin, "button-sandstone");

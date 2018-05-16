@@ -72,6 +72,7 @@ public class ItemListWidget extends Group implements Listener<ItemSignal> {
             for (final Item i : inventory.getItems().keys()) {
 
                 if(filters.contains(Item.Category.ALL, false) || filters.contains(i.getCategory(), false)) {
+
                     final ItemInventoryButton item = new ItemInventoryButton(i, skin, "item-button-sandstone", inventory);
                     inventory.add(this);
                     itemTable.add(item).width(192).height(40);
@@ -79,13 +80,11 @@ public class ItemListWidget extends Group implements Listener<ItemSignal> {
                     btnGroup.add(item);
                     itemTable.row().spaceBottom(1);
 
-                    item.addListener(new com.badlogic.gdx.scenes.scene2d.utils.ClickListener() {
-                        @Override
-                        public void clicked(InputEvent event, float x, float y) {
-                            clickListener.onChoosingItem(i);
-                            lastChosenItem = btnGroup.getCheckedIndex();
-                        }
-                    });
+                    item.addListener(new SimpleClickListener(() -> {
+
+                        clickListener.onChoosingItem(i);
+                        lastChosenItem = btnGroup.getCheckedIndex();
+                    }));
 
                     if (counter == 0) item.setChecked(true);
                     counter++;

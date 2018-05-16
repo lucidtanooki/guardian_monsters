@@ -6,6 +6,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ArrayMap;
 
+import java.util.Observable;
+
 import de.limbusdev.guardianmonsters.guardians.GuardiansServiceLocator;
 import de.limbusdev.guardianmonsters.guardians.items.IItemService;
 import de.limbusdev.guardianmonsters.guardians.items.Inventory;
@@ -25,6 +27,7 @@ public class KeyItemsSubMenu extends AInventorySubMenu {
 
 
     public KeyItemsSubMenu(Skin skin, Inventory inventory) {
+
         super(skin);
 
         Label bgLabel = new Label("", skin, "paper");

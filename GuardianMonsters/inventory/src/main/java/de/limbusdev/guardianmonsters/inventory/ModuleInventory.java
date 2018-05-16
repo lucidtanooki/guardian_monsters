@@ -1,4 +1,4 @@
-package de.limbusdev.guardianmonsters.inventory;
+package main.java.de.limbusdev.guardianmonsters.inventory;
 
 /**
  * ModuleInventory

@@ -37,7 +37,7 @@ import main.java.de.limbusdev.guardianmonsters.inventory.ui.widgets.team.TeamMem
  */
 
 public class AbilityChoiceSubMenu extends AInventorySubMenu
-    implements TeamMemberSwitcher.Callbacks, AbilityDetailWidget.Callbacks, Callback.ButtonID, Observer
+    implements TeamMemberSwitcher.Callbacks, AbilityDetailWidget.Callbacks, Callback.ButtonID
 {
 
     private TeamMemberSwitcher switcher;
@@ -52,6 +52,7 @@ public class AbilityChoiceSubMenu extends AInventorySubMenu
     private Group abilitySlotChoice;
 
     public AbilityChoiceSubMenu(Skin skin, ArrayMap<Integer, AGuardian> team) {
+
         super(skin);
         this.team = team;
 
@@ -109,6 +110,10 @@ public class AbilityChoiceSubMenu extends AInventorySubMenu
 
     @Override
     public void refresh() {
+        if(hasCore()) {
+            //switcher.setCurrentlyChosen(getCore().getCurrentlyChosenTeamMember());
+            // TODO circular call
+        }
         init(team.get(switcher.getCurrentlyChosen()));
         showAbilityDetails();
     }
@@ -145,9 +150,13 @@ public class AbilityChoiceSubMenu extends AInventorySubMenu
     // ................................................................ SevenButtonsWidget.Callbacks
     @Override
     public void onClick(int buttonID) {
+
         AGuardian guardian = team.get(switcher.getCurrentlyChosen());
         guardian.getAbilityGraph().setActiveAbility(buttonID, currentlyChosenAbility);
         refreshAbilitySlotButtons();
+        if(hasCore()) {
+            getCore().setCurrentlyChosenTeamMember(switcher.getCurrentlyChosen());
+        }
     }
 
     // ...................................................................... Listener<AbilityGraph>
@@ -191,11 +200,5 @@ public class AbilityChoiceSubMenu extends AInventorySubMenu
 
         back.setPosition(Constant.WIDTH-4,4,Align.bottomRight);
         abilitySlotChoice.addActor(back);
-    }
-
-    @Override
-    public void update(Observable o, Object arg)
-    {
-
     }
 }

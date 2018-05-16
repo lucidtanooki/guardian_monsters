@@ -100,4 +100,9 @@ public class TeamMemberSwitcher extends Group {
     public int getCurrentlyChosen() {
         return currentlyChosen;
     }
+
+    public void setCurrentlyChosen(int position)
+    {
+        callbacks.onChanged(position);
+    }
 }

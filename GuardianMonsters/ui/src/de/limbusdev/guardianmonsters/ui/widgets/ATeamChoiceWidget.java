@@ -94,6 +94,8 @@ public abstract class ATeamChoiceWidget extends Group {
         return currentPosition;
     }
 
+    public void setCurrentPosition(int position) {this.handler.onClick(position);}
+
     public int getOldPosition() {
         return oldPosition;
     }

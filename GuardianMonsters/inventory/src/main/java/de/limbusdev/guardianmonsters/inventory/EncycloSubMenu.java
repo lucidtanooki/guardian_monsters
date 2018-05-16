@@ -2,6 +2,8 @@ package main.java.de.limbusdev.guardianmonsters.inventory;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
+import java.util.Observable;
+
 /**
  * EncycloSubMenu
  *

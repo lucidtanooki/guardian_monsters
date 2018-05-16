@@ -10,6 +10,9 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
+import java.util.Observable;
+import java.util.Observer;
+
 import de.limbusdev.guardianmonsters.guardians.items.Inventory;
 import de.limbusdev.guardianmonsters.guardians.monsters.Team;
 import de.limbusdev.guardianmonsters.services.Services;
@@ -27,6 +30,7 @@ public class InventoryScreen implements Screen, MainToolBar.Callbacks
 
     private static final String BG_TILE = "bg-pattern-3";
 
+    private int currentlyChosenTeamMember;
     private Stage stage;
     private Skin skin;
     private ArrayMap<String, AInventorySubMenu> views;
@@ -42,14 +46,21 @@ public class InventoryScreen implements Screen, MainToolBar.Callbacks
         tileBackground();
         assembleToolbar();
 
-        views.put("team",       new main.java.de.limbusdev.guardianmonsters.inventory.TeamSubMenu(skin, team));
+        views.put("team",       new TeamSubMenu(skin, team));
         views.put("items",      new ItemsSubMenu(skin, inventory, team));
         views.put("ability",    new AbilityGraphSubMenu(skin, team));
         views.put("key",        new KeyItemsSubMenu(skin, inventory));
         views.put("abilityChoice", new AbilityChoiceSubMenu(skin, team));
         views.put("encyclo",    new EncycloSubMenu(skin));
 
+        for(AInventorySubMenu ism : views.values()) {
+
+            ism.setCore(this);
+        }
+
         stage.addActor(views.get("team"));
+
+        currentlyChosenTeamMember = 0;
     }
 
 
@@ -118,7 +129,7 @@ public class InventoryScreen implements Screen, MainToolBar.Callbacks
     }
 
     private void removeSubMenus() {
-        for(Actor a : views.values()) a.remove();
+        for(AInventorySubMenu a : views.values()) a.remove();
     }
 
     @Override
@@ -162,5 +173,13 @@ public class InventoryScreen implements Screen, MainToolBar.Callbacks
     @Override
     public void onExitButton() {
         removeSubMenus();
+    }
+
+    public int getCurrentlyChosenTeamMember() {
+        return currentlyChosenTeamMember;
+    }
+
+    public void setCurrentlyChosenTeamMember(int currentlyChosenTeamMember) {
+        this.currentlyChosenTeamMember = currentlyChosenTeamMember;
     }
 }

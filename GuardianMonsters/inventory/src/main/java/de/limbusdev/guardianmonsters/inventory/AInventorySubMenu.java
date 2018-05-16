@@ -4,6 +4,9 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Align;
 
+import java.util.Observable;
+import java.util.Observer;
+
 import de.limbusdev.guardianmonsters.ui.Constant;
 
 
@@ -12,8 +15,10 @@ import de.limbusdev.guardianmonsters.ui.Constant;
  */
 
 public abstract class AInventorySubMenu extends Group {
+
     private Skin skin;
     public static final int TOOLBAR_HEIGHT = 36;
+    private InventoryScreen core;
 
     public AInventorySubMenu(Skin skin) {
         super();
@@ -21,6 +26,19 @@ public abstract class AInventorySubMenu extends Group {
         setDebug(Constant.DEBUGGING_ON, true);
         setSize(Constant.WIDTH, Constant.HEIGHT-TOOLBAR_HEIGHT);
         setPosition(0,0, Align.bottomLeft);
+    }
+
+    public InventoryScreen getCore() {
+        return core;
+    }
+
+    public void setCore(InventoryScreen core) {
+        this.core = core;
+    }
+
+    public boolean hasCore() {
+
+        return (core != null);
     }
 
     public Skin getSkin() {

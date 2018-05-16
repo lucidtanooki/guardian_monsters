@@ -10,6 +10,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 
+import java.util.Observable;
+
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.Team;
 import de.limbusdev.guardianmonsters.media.IMediaManager;
@@ -40,6 +42,7 @@ public class TeamSubMenu extends AInventorySubMenu
     private ImageButton.ImageButtonStyle lockedButtonStyle, normalButtonStyle;
 
     public TeamSubMenu(Skin skin, Team team) {
+
         super(skin);
         IMediaManager media = Services.getMedia();
         this.team = team;
@@ -51,7 +54,13 @@ public class TeamSubMenu extends AInventorySubMenu
         monsterChoiceBg.setPosition(2,2,Align.bottomLeft);
         monsterChoice.addActor(monsterChoiceBg);
 
-        choiceHandler = position -> showGuardianInformation(position);
+        choiceHandler = position -> {
+            showGuardianInformation(position);
+
+            if(hasCore()) {
+                getCore().setCurrentlyChosenTeamMember(position);
+            }
+        };
 
         swapHandler = position -> {
             System.out.println("Clicked " + position);
@@ -165,6 +174,9 @@ public class TeamSubMenu extends AInventorySubMenu
 
     @Override
     public void refresh() {
+        if(hasCore()) {
+            circleWidget.setCurrentPosition(getCore().getCurrentlyChosenTeamMember());
+        }
         showGuardianInformation(circleWidget.getCurrentPosition());
     }
 }

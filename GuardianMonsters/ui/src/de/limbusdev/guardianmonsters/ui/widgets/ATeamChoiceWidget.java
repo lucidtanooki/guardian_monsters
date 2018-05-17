@@ -69,6 +69,7 @@ public abstract class ATeamChoiceWidget extends Group {
             button.addActor(preview);
             IntVec2 pos = positions.get(key);
             button.setPosition(pos.x-3, pos.y-4, Align.bottomLeft);
+
             button.addListener(new SimpleClickListener(() ->
             {
                     oldPosition = currentPosition;
@@ -93,8 +94,6 @@ public abstract class ATeamChoiceWidget extends Group {
     public int getCurrentPosition() {
         return currentPosition;
     }
-
-    public void setCurrentPosition(int position) {this.handler.onClick(position);}
 
     public int getOldPosition() {
         return oldPosition;

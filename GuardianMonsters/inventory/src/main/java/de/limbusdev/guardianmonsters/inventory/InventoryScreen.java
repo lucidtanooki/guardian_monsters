@@ -30,7 +30,6 @@ public class InventoryScreen implements Screen, MainToolBar.Callbacks
 
     private static final String BG_TILE = "bg-pattern-3";
 
-    private int currentlyChosenTeamMember;
     private Stage stage;
     private Skin skin;
     private ArrayMap<String, AInventorySubMenu> views;
@@ -53,14 +52,17 @@ public class InventoryScreen implements Screen, MainToolBar.Callbacks
         views.put("abilityChoice", new AbilityChoiceSubMenu(skin, team));
         views.put("encyclo",    new EncycloSubMenu(skin));
 
+
+
+        stage.addActor(views.get("team"));
+
+        // provide all SubMenus with the InventoryScreen, for synchronisation
         for(AInventorySubMenu ism : views.values()) {
 
             ism.setCore(this);
         }
 
-        stage.addActor(views.get("team"));
-
-        currentlyChosenTeamMember = 0;
+        setCurrentlyChosenTeamMember(0);
     }
 
 
@@ -78,6 +80,7 @@ public class InventoryScreen implements Screen, MainToolBar.Callbacks
 
     @Override
     public void show() {
+
         Gdx.input.setInputProcessor(stage);
     }
 
@@ -175,11 +178,11 @@ public class InventoryScreen implements Screen, MainToolBar.Callbacks
         removeSubMenus();
     }
 
-    public int getCurrentlyChosenTeamMember() {
-        return currentlyChosenTeamMember;
-    }
-
     public void setCurrentlyChosenTeamMember(int currentlyChosenTeamMember) {
-        this.currentlyChosenTeamMember = currentlyChosenTeamMember;
+
+        for(AInventorySubMenu ism : views.values()) {
+
+            ism.syncSelectedGuardian(currentlyChosenTeamMember);
+        }
     }
 }

@@ -37,35 +37,26 @@ public class TeamSubMenu extends AInventorySubMenu
     private TeamCircleWidget circleWidget;
     private Callback.ButtonID choiceHandler, swapHandler;
     private Team team;
-    private ImageButton joinsBattleButton;
+    private ImageButton joinsBattleButton, swapButton;
     private Group monsterChoice;
     private ImageButton.ImageButtonStyle lockedButtonStyle, normalButtonStyle;
 
     public TeamSubMenu(Skin skin, Team team) {
 
         super(skin);
-        IMediaManager media = Services.getMedia();
-        this.team = team;
-
-        monsterChoice = new Group();
-        monsterChoice.setSize(140, Constant.HEIGHT-36);
-        monsterChoice.setPosition(0,0, Align.bottomLeft);
-        Image monsterChoiceBg = new Image(skin.getDrawable("menu-col-bg"));
-        monsterChoiceBg.setPosition(2,2,Align.bottomLeft);
-        monsterChoice.addActor(monsterChoiceBg);
 
         choiceHandler = position -> {
-            showGuardianInformation(position);
 
-            if(hasCore()) {
-                getCore().setCurrentlyChosenTeamMember(position);
-            }
+            showGuardianInformation(position);
+            propagateSelectedGuardian(position);
         };
 
         swapHandler = position -> {
-            System.out.println("Clicked " + position);
+
             int oldPos = circleWidget.getOldPosition();
+
             if(position != oldPos) {
+
                 AGuardian currentGuardian = team.get(oldPos);
                 AGuardian guardianToSwapWith = team.get(position);
 
@@ -74,51 +65,69 @@ public class TeamSubMenu extends AInventorySubMenu
 
                 circleWidget.init(team);
                 showGuardianInformation(position);
+                propagateSelectedGuardian(position);
             }
             circleWidget.setHandler(choiceHandler);
             blackOverlay.remove();
         };
 
-        circleWidget = new TeamCircleWidget(skin, team, choiceHandler);
-        circleWidget.setPosition(1,40,Align.bottomLeft);
-        monsterChoice.addActor(circleWidget);
+        layout(skin);
 
-        blackOverlay = new Image(skin.getDrawable("black-a80"));
-        blackOverlay.setSize(Constant.WIDTH, Constant.HEIGHT);
-        ImageButton swapButton = new ImageButton(skin, "button-switch");
-        swapButton.setPosition(8,8,Align.bottomLeft);
+        this.team = team;
+        circleWidget.init(team);
 
-        swapButton.addListener(new SimpleClickListener(() ->
-        {
+        swapButton.addListener(new SimpleClickListener(() -> {
+
             circleWidget.remove();
             circleWidget.setHandler(swapHandler);
             addActor(blackOverlay);
             addActor(circleWidget);
         }));
 
+        joinsBattleButton.addListener(new SimpleClickListener(() -> {
+
+            if (joinsBattleButton.isChecked()) {
+                team.setActiveTeamSize(team.getActiveTeamSize() + 1);
+            } else {
+                team.setActiveTeamSize(team.getActiveTeamSize() - 1);
+            }
+            System.out.println("Now active in combat: " + team.getActiveTeamSize());
+        }));
+
+        monsterStats.init(team.get(0));
+
+        showGuardianInformation(0);
+
+        setDebug(Constant.DEBUGGING_ON, true);
+    }
+
+    @Override
+    protected void layout(Skin skin) {
+
+        circleWidget = new TeamCircleWidget(skin, choiceHandler);
+
+        monsterChoice = new Group();
+        monsterChoice.setSize(140, Constant.HEIGHT-36);
+        monsterChoice.setPosition(0,0, Align.bottomLeft);
+        Image monsterChoiceBg = new Image(skin.getDrawable("menu-col-bg"));
+        monsterChoiceBg.setPosition(2,2,Align.bottomLeft);
+        monsterChoice.addActor(monsterChoiceBg);
+
+        circleWidget.setPosition(1,40,Align.bottomLeft);
+        monsterChoice.addActor(circleWidget);
+
+        blackOverlay = new Image(skin.getDrawable("black-a80"));
+        blackOverlay.setSize(Constant.WIDTH, Constant.HEIGHT);
+        swapButton = new ImageButton(skin, "button-switch");
+        swapButton.setPosition(8,8,Align.bottomLeft);
         monsterChoice.addActor(swapButton);
 
         joinsBattleButton = new ImageButton(skin, "button-check");
         joinsBattleButton.setPosition(140-8,8,Align.bottomRight);
-        joinsBattleButton.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                if(joinsBattleButton.isChecked()) {
-                    team.setActiveTeamSize(team.getActiveTeamSize() + 1);
-                } else {
-                    team.setActiveTeamSize(team.getActiveTeamSize() - 1);
-                }
-                System.out.println("Now active in combat: " + team.getActiveTeamSize());
-            }
-        });
+
         normalButtonStyle = joinsBattleButton.getStyle();
         lockedButtonStyle = new ImageButton.ImageButtonStyle();
         lockedButtonStyle.checked = skin.getDrawable("button-check-down-locked");
-
-        monsterStats = new GuardianStatusWidget(skin);
-        monsterStats.setPosition(140+2,0,Align.bottomLeft);
-        monsterStats.init(team.get(0));
-
 
         Group monsterView = new Group();
         monsterView.setSize(140, Constant.HEIGHT-36);
@@ -131,6 +140,9 @@ public class TeamSubMenu extends AInventorySubMenu
         monsterImg.setPosition(6,202,Align.topLeft);
         monsterView.addActor(monsterImg);
 
+        monsterStats = new GuardianStatusWidget(skin);
+        monsterStats.setPosition(140+2,0,Align.bottomLeft);
+
         statPent = new StatusPentagonWidget(skin);
         statPent.setPosition(20+2,4,Align.bottomLeft);
         monsterView.addActor(statPent);
@@ -138,17 +150,18 @@ public class TeamSubMenu extends AInventorySubMenu
         addActor(monsterChoice);
         addActor(monsterStats);
         addActor(monsterView);
-
-        showGuardianInformation(0);
-
-        setDebug(Constant.DEBUGGING_ON, true);
     }
 
-    private void showGuardianInformation(int teamPosition)
-    {
+    private void showGuardianInformation(int teamPosition) {
+
         monsterStats.init(team.get(teamPosition));
+
+        AGuardian chosenGuardian = team.get(teamPosition);
+        int guardianID = chosenGuardian.getSpeciesID();
+        int guardianForm = chosenGuardian.getAbilityGraph().getCurrentForm();
+
         monsterImg.setDrawable(new TextureRegionDrawable(
-            Services.getMedia().getMonsterSprite(team.get(teamPosition).getSpeciesDescription().getID(), team.get(teamPosition).getAbilityGraph().getCurrentForm())));
+                Services.getMedia().getMonsterSprite(guardianID, guardianForm)));
         statPent.init(team.get(teamPosition));
         joinsBattleButton.remove();
         joinsBattleButton.setChecked(false);
@@ -174,9 +187,14 @@ public class TeamSubMenu extends AInventorySubMenu
 
     @Override
     public void refresh() {
-        if(hasCore()) {
-            circleWidget.setCurrentPosition(getCore().getCurrentlyChosenTeamMember());
-        }
-        showGuardianInformation(circleWidget.getCurrentPosition());
+
+    }
+
+    @Override
+    public void syncSelectedGuardian(int teamPosition) {
+
+        // Update widgets
+        circleWidget.init(team, teamPosition);
+        showGuardianInformation(teamPosition);
     }
 }

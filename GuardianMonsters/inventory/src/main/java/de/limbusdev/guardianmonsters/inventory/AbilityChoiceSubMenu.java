@@ -62,23 +62,22 @@ public class AbilityChoiceSubMenu extends AInventorySubMenu
         details = new AbilityDetailWidget(skin, this, "button-switch");
         abilitySlotButtons = new HoneyComb7ButtonsWidget(Services.getUI().getBattleSkin(), this, HoneyComb7ButtonsWidget.ABILITY_ORDER);
         back = new ImageButton(skin, "button-back");
-        back.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                abilitySlotChoice.remove();
-            }
-        });
 
-        constructLayout();
-        init(team.get(0));
+        back.addListener(new SimpleClickListener(() -> {
+                abilitySlotChoice.remove();
+        }));
+
+        layout(skin);
+        init(team.get(0), 0);
     }
 
     /**
      * Initializes the menu with the data of the given monster
      * @param m
      */
-    private void init(AGuardian m) {
+    private void init(AGuardian m, int teamPosition) {
 
+        switcher.init(m, teamPosition);
         abilityMenu.clear();
         abilityButtons.clear();
         I18NBundle translation = Services.getL18N().Abilities();
@@ -105,23 +104,56 @@ public class AbilityChoiceSubMenu extends AInventorySubMenu
     // ................................................................ TeamMemberSwitcher.Callbacks
     @Override
     public void onChanged(int position) {
-        refresh();
+
+        propagateSelectedGuardian(position);
     }
 
     @Override
     public void refresh() {
-        if(hasCore()) {
-            //switcher.setCurrentlyChosen(getCore().getCurrentlyChosenTeamMember());
-            // TODO circular call
-        }
-        init(team.get(switcher.getCurrentlyChosen()));
-        showAbilityDetails();
+
+    }
+
+    @Override
+    protected void layout(Skin skin) {
+
+        switcher.setPosition(2, 202, Align.topLeft);
+        addActor(switcher);
+
+        abilityMenu = new VerticalGroup();
+        abilityMenu.setSize(140,200);
+        abilityMenu.setPosition(100,2,Align.bottomLeft);
+        abilityMenu.fill();
+        addActor(abilityMenu);
+
+        abilityButtons = new ButtonGroup<>();
+        abilityButtons.setMaxCheckCount(1);
+        abilityButtons.setMaxCheckCount(1);
+
+        details.setPosition(Constant.WIDTH-2, 2, Align.bottomRight);
+        addActor(details);
+
+        abilitySlotChoice = new Group();
+        abilitySlotChoice.setSize(Constant.WIDTH, Constant.HEIGHT);
+        abilitySlotChoice.setPosition(0,0,Align.bottomLeft);
+        Image overlay = new Image(getSkin().getDrawable("black-a80"));
+        overlay.setSize(Constant.WIDTH, Constant.HEIGHT);
+        overlay.setPosition(0,0,Align.bottomLeft);
+        abilitySlotChoice.addActor(overlay);
+
+        abilitySlotButtons.setPosition(0,32,Align.bottomLeft);
+        abilitySlotChoice.addActor(abilitySlotButtons);
+
+        back.setPosition(Constant.WIDTH-4,4,Align.bottomRight);
+        abilitySlotChoice.addActor(back);
     }
 
     private void showAbilityDetails() {
+
         AGuardian guardian = team.get(switcher.getCurrentlyChosen());
         details.init(guardian, currentlyChosenAbility, true);
     }
+
+
 
     // ............................................................... AbilityDetailWidget.Callbacks
     @Override
@@ -154,9 +186,6 @@ public class AbilityChoiceSubMenu extends AInventorySubMenu
         AGuardian guardian = team.get(switcher.getCurrentlyChosen());
         guardian.getAbilityGraph().setActiveAbility(buttonID, currentlyChosenAbility);
         refreshAbilitySlotButtons();
-        if(hasCore()) {
-            getCore().setCurrentlyChosenTeamMember(switcher.getCurrentlyChosen());
-        }
     }
 
     // ...................................................................... Listener<AbilityGraph>
@@ -166,39 +195,9 @@ public class AbilityChoiceSubMenu extends AInventorySubMenu
         refreshAbilitySlotButtons();
     }
 
+    @Override
+    public void syncSelectedGuardian(int teamPosition) {
 
-    /**
-     * Do only layout construction here. Any functionality should be constructed somewhere else
-     */
-    private void constructLayout() {
-        switcher.setPosition(2, 202, Align.topLeft);
-        addActor(switcher);
-
-        abilityMenu = new VerticalGroup();
-        abilityMenu.setSize(140,200);
-        abilityMenu.setPosition(100,2,Align.bottomLeft);
-        abilityMenu.fill();
-        addActor(abilityMenu);
-
-        abilityButtons = new ButtonGroup<>();
-        abilityButtons.setMaxCheckCount(1);
-        abilityButtons.setMaxCheckCount(1);
-
-        details.setPosition(Constant.WIDTH-2, 2, Align.bottomRight);
-        addActor(details);
-
-        abilitySlotChoice = new Group();
-        abilitySlotChoice.setSize(Constant.WIDTH, Constant.HEIGHT);
-        abilitySlotChoice.setPosition(0,0,Align.bottomLeft);
-        Image overlay = new Image(getSkin().getDrawable("black-a80"));
-        overlay.setSize(Constant.WIDTH, Constant.HEIGHT);
-        overlay.setPosition(0,0,Align.bottomLeft);
-        abilitySlotChoice.addActor(overlay);
-
-        abilitySlotButtons.setPosition(0,32,Align.bottomLeft);
-        abilitySlotChoice.addActor(abilitySlotButtons);
-
-        back.setPosition(Constant.WIDTH-4,4,Align.bottomRight);
-        abilitySlotChoice.addActor(back);
+        init(team.get(teamPosition), teamPosition);
     }
 }

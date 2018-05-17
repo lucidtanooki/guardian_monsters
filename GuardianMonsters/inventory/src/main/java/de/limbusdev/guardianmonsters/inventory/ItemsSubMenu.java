@@ -98,4 +98,9 @@ public class ItemsSubMenu extends AInventorySubMenu
     public void refresh() {
         // Do nothing
     }
+
+    @Override
+    protected void layout(Skin skin) {
+
+    }
 }

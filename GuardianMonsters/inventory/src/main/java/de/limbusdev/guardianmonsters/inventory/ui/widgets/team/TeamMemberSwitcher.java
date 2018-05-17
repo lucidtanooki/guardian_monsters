@@ -12,6 +12,7 @@ import com.badlogic.gdx.utils.ArrayMap;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.ui.widgets.MonsterPreviewWidget;
+import de.limbusdev.guardianmonsters.ui.widgets.SimpleClickListener;
 
 import static de.limbusdev.guardianmonsters.ui.Constant.LEFT;
 
@@ -25,66 +26,43 @@ public class TeamMemberSwitcher extends Group {
     private int currentlyChosen;
     private MonsterPreviewWidget previewWidget;
     private Label name;
+    private ImageButton previous, next;
 
     public TeamMemberSwitcher(Skin skin, final ArrayMap<Integer, AGuardian> team, final Callbacks callbacks) {
+
         super();
 
         this.callbacks = callbacks;
         this.currentlyChosen = 0;
 
-        setSize(96,64);
+        layout(skin);
 
-        Label bg = new Label("", skin, "list-item");
-        bg.setSize(64,64);
-        bg.setPosition(16,0, Align.bottomLeft);
-        addActor(bg);
+        previous.addListener(new SimpleClickListener(() -> {
 
-        name = new Label("", skin, "default");
-        name.setSize(60,20);
-        name.setPosition(18,6,Align.bottomLeft);
-        addActor(name);
-
-        ImageButton previous = new ImageButton(skin, "button-previous");
-        previous.setPosition(0,16,Align.bottomLeft);
-        addActor(previous);
-
-        ImageButton next = new ImageButton(skin, "button-next");
-        next.setPosition(80,16,Align.bottomLeft);
-        addActor(next);
-
-        previewWidget = new MonsterPreviewWidget(skin);
-        previewWidget.setPosition(32,25,Align.bottomLeft);
-        addActor(previewWidget);
-
-        previous.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
                 currentlyChosen--;
                 if(currentlyChosen < 0) {
                     currentlyChosen = team.size-1;
                 }
-                init(team.get(currentlyChosen));
+                init(team.get(currentlyChosen), currentlyChosen);
                 TeamMemberSwitcher.this.callbacks.onChanged(currentlyChosen);
-            }
-        });
+        }));
 
-        next.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
+        next.addListener(new SimpleClickListener(() -> {
+
                 currentlyChosen++;
                 if(currentlyChosen > team.size-1) {
                     currentlyChosen = 0;
                 }
-                init(team.get(currentlyChosen));
+                init(team.get(currentlyChosen), currentlyChosen);
                 TeamMemberSwitcher.this.callbacks.onChanged(currentlyChosen);
-            }
-        });
+        }));
 
-        init(team.get(0));
+        init(team.get(0), 0);
     }
 
-    public void init(AGuardian m)
-    {
+    public void init(AGuardian m, int teamPosition) {
+
+        this.currentlyChosen = teamPosition;
         name.setText(Services.getL18N().getLocalizedGuardianName(m));
         previewWidget.setPreview(m.getSpeciesDescription().getID(), m.getAbilityGraph().getCurrentForm(), LEFT);
     }
@@ -98,11 +76,34 @@ public class TeamMemberSwitcher extends Group {
     }
 
     public int getCurrentlyChosen() {
+
         return currentlyChosen;
     }
 
-    public void setCurrentlyChosen(int position)
-    {
-        callbacks.onChanged(position);
+    private void layout(Skin skin) {
+
+        setSize(96,64);
+
+        Label bg = new Label("", skin, "list-item");
+        bg.setSize(64,64);
+        bg.setPosition(16,0, Align.bottomLeft);
+        addActor(bg);
+
+        name = new Label("", skin, "default");
+        name.setSize(60,20);
+        name.setPosition(18,6,Align.bottomLeft);
+        addActor(name);
+
+        previous = new ImageButton(skin, "button-previous");
+        previous.setPosition(0,16,Align.bottomLeft);
+        addActor(previous);
+
+        next = new ImageButton(skin, "button-next");
+        next.setPosition(80,16,Align.bottomLeft);
+        addActor(next);
+
+        previewWidget = new MonsterPreviewWidget(skin);
+        previewWidget.setPosition(32,25,Align.bottomLeft);
+        addActor(previewWidget);
     }
 }

@@ -20,4 +20,9 @@ public class EncycloSubMenu extends AInventorySubMenu
     public void refresh() {
 
     }
+
+    @Override
+    protected void layout(Skin skin) {
+
+    }
 }

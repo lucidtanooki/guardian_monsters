@@ -69,7 +69,8 @@ public class KeyItemsSubMenu extends AInventorySubMenu {
 
 
     @Override
-    public void refresh() {
-        // Do nothing
-    }
+    public void refresh(){/* not needed */}
+
+    @Override
+    protected void layout(Skin skin) {/* not needed */}
 }

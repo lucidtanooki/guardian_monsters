@@ -70,16 +70,17 @@ public class AbilityGraphSubMenu extends AInventorySubMenu implements Listener<G
 
     }
 
-    /**
-     * Takes the currently chosen monster and refreshes the display of remaining levels
-     */
     @Override
-    public void refresh() {
-        AGuardian activeGuardian = team.get(switcher.getCurrentlyChosen());
-        remainingLevels.counter.setText(Integer.toString(activeGuardian.getIndividualStatistics().getAbilityLevels()));
+    protected void layout(Skin skin) {
+
     }
 
+    public void init(ArrayMap<Integer, AGuardian> team, int teamPosition){
 
+        switcher.init(team.get(teamPosition), teamPosition);
+        graphWidget.init(team.get(teamPosition));
+        details.init(team.get(teamPosition), 0, false);
+    }
 
     // ........................................................................... INTERFACE METHODS
     @Override
@@ -90,8 +91,9 @@ public class AbilityGraphSubMenu extends AInventorySubMenu implements Listener<G
 
     @Override
     public void onChanged(int position) {
+
         graphWidget.init(team.get(position));
-        refresh();
+        propagateSelectedGuardian(position);
     }
 
     @Override
@@ -112,7 +114,21 @@ public class AbilityGraphSubMenu extends AInventorySubMenu implements Listener<G
     }
 
     @Override
+    public void syncSelectedGuardian(int teamPosition) {
+
+        init(team, teamPosition);
+    }
+
+    @Override
+    public void refresh() {
+
+        AGuardian activeGuardian = team.get(switcher.getCurrentlyChosen());
+        remainingLevels.counter.setText(Integer.toString(activeGuardian.getIndividualStatistics().getAbilityLevels()));
+    }
+
+    @Override
     public void receive(Signal<Guardian> signal, Guardian guardian) {
+
         if(guardian.equals(team.get(switcher.getCurrentlyChosen()))) {
             refresh();
         }

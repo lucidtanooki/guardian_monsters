@@ -41,9 +41,29 @@ public abstract class AInventorySubMenu extends Group {
         return (core != null);
     }
 
+    /**
+     * Used to update the currently selected Guardian of this SubMenu, if necessary.
+     * @param teamPosition
+     */
+    public void syncSelectedGuardian(int teamPosition) {}
+
+    /**
+     * Tells the core about the currently selected Guardian
+     * @param teamPosition
+     */
+    protected void propagateSelectedGuardian(int teamPosition) {
+
+        if(hasCore()) {
+
+            getCore().setCurrentlyChosenTeamMember(teamPosition);
+        }
+    }
+
     public Skin getSkin() {
         return skin;
     }
 
     public abstract void refresh();
+
+    protected abstract void layout(Skin skin);
 }

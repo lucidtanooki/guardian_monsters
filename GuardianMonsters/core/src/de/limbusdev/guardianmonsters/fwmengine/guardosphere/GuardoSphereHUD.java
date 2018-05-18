@@ -8,6 +8,7 @@ import com.badlogic.gdx.utils.Align;
 
 import de.limbusdev.guardianmonsters.Constant;
 import de.limbusdev.guardianmonsters.assets.paths.AssetPath;
+import de.limbusdev.guardianmonsters.guardians.monsters.GuardoSphere;
 import de.limbusdev.guardianmonsters.guardians.monsters.Team;
 import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.ui.AHUD;

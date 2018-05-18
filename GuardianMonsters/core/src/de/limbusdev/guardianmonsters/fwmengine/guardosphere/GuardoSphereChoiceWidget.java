@@ -14,7 +14,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
-import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
+import de.limbusdev.guardianmonsters.guardians.monsters.GuardoSphere;
 
 /**
  * GuardoSphereChoiceWidget

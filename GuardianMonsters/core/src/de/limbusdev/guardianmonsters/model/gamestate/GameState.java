@@ -2,7 +2,7 @@ package de.limbusdev.guardianmonsters.model.gamestate;
 
 import com.badlogic.gdx.utils.ArrayMap;
 
-import de.limbusdev.guardianmonsters.fwmengine.guardosphere.GuardoSphere;
+import de.limbusdev.guardianmonsters.guardians.monsters.GuardoSphere;
 import de.limbusdev.guardianmonsters.guardians.items.Inventory;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.Team;

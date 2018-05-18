@@ -50,7 +50,11 @@ public class ItemsSubMenu extends AInventorySubMenu
 
     private void showItemDetailView(Item item)  {
 
-        if(detailView != null) detailView.remove();
+        if(detailView != null) {
+
+            detailView.remove();
+        }
+
         switch(item.getCategory()) {
             case EQUIPMENT:
                 detailView = new WeaponDetailViewWidget(getSkin(), inventory, team);

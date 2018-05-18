@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 
 import java.util.Observable;
+import java.util.Observer;
 
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.Team;
@@ -27,7 +28,7 @@ import main.java.de.limbusdev.guardianmonsters.inventory.ui.widgets.team.StatusP
  * Created by Georg Eckert 2017
  */
 
-public class TeamSubMenu extends AInventorySubMenu
+public class TeamSubMenu extends AInventorySubMenu implements Observer
 {
 
     private StatusPentagonWidget statPent;
@@ -169,16 +170,19 @@ public class TeamSubMenu extends AInventorySubMenu
 
         // If the shown position belongs to the range given by activeInCombat & within 0-2
         if(teamPosition <= team.getActiveTeamSize() && teamPosition <3 && teamPosition < 3) {
+
             // TODO take max team size into account
             joinsBattleButton.setTouchable(Touchable.enabled);
             monsterChoice.addActor(joinsBattleButton);
 
             // if shown monster is in the range of active monsters
             if(teamPosition < team.getActiveTeamSize()) {
+
                 joinsBattleButton.setChecked(true);
             }
             // the shown monster is at position 0 or not the last active monster
             if(teamPosition == 0 || teamPosition < team.getActiveTeamSize() -1) {
+
                 joinsBattleButton.setTouchable(Touchable.disabled);
                 joinsBattleButton.setStyle(lockedButtonStyle);
             }
@@ -196,5 +200,18 @@ public class TeamSubMenu extends AInventorySubMenu
         // Update widgets
         circleWidget.init(team, teamPosition);
         showGuardianInformation(teamPosition);
+
+        for(AGuardian guardian : team.values()) {
+
+            guardian.deleteObserver(this);
+        }
+        team.get(teamPosition).addObserver(this);
+    }
+
+    @Override
+    public void update(Observable observable, Object o) {
+
+        if(observable instanceof AGuardian)
+        showGuardianInformation(team.getPosition((AGuardian) observable));
     }
 }

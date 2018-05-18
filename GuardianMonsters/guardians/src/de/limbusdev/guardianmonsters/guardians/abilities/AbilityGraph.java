@@ -55,7 +55,15 @@ public class AbilityGraph implements IAbilityGraph
         init(core, data);
     }
 
-    public AbilityGraph(ArrayMap<Integer, Node> nodes, Array<Edge> edges, ArrayMap<Integer, Ability.aID> abilityNodes, ArrayMap<Integer, BodyPart> equipmentNodes, Array<Integer> metamorphosisNodes, ArrayMap<Integer, Ability.aID> activeAbilities, ArrayMap<Integer, Ability.aID> learntAbilities, Array<BodyPart> learntEquipment)
+    public AbilityGraph(
+            ArrayMap<Integer, Node> nodes,
+            Array<Edge> edges,
+            ArrayMap<Integer, Ability.aID> abilityNodes,
+            ArrayMap<Integer, BodyPart> equipmentNodes,
+            Array<Integer> metamorphosisNodes,
+            ArrayMap<Integer, Ability.aID> activeAbilities,
+            ArrayMap<Integer, Ability.aID> learntAbilities,
+            Array<BodyPart> learntEquipment)
     {
         this.nodes = nodes;
         this.edges = edges;

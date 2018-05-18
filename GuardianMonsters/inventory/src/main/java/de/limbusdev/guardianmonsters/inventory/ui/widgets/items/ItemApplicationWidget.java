@@ -63,6 +63,7 @@ public class ItemApplicationWidget extends Group implements MonsterListWidget.Ca
 
 
     public void init(Item itemToShow) {
+
         this.item = itemToShow;
         I18NBundle i18n = Services.getL18N().Inventory();
 
@@ -137,15 +138,20 @@ public class ItemApplicationWidget extends Group implements MonsterListWidget.Ca
 
     @Override
     public boolean onButton(int i) {
+
         inventory.takeItemFromInventory(item);
         if(item instanceof Equipment) {
+
             Item replaced = team.get(i).getIndividualStatistics().giveEquipment((Equipment)item);
             if(replaced != null) {
                 inventory.putItemInInventory(replaced);
             }
         } else if (item instanceof AMedicalItem) {
+
             ((AMedicalItem)item).apply(team.get(i));
         }
+
+
 
         boolean empty = !(inventory.getItemAmount(item) > 0);
         if(empty) remove();

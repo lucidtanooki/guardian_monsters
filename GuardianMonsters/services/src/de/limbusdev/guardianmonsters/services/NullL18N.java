@@ -73,6 +73,11 @@ public class NullL18N implements L18N
     }
 
     @Override
+    public String getLocalizedGuardianDescription(int speciesID) {
+        return "NullL18N: dummy description";
+    }
+
+    @Override
     public String getLocalizedAbilityName(String abilityID)
     {
         return null;

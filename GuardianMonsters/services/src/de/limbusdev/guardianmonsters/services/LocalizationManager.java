@@ -134,9 +134,13 @@ public class LocalizationManager implements L18N
     public String getLocalizedGuardianName(int speciesID, int form)
     {
         ISpeciesDescriptionService species = GuardiansServiceLocator.getSpecies();
-        AGuardianFactory factory = GuardianFactory.getInstance();
         String nameID = species.getCommonNameById(speciesID, form);
         return Guardians().get(nameID);
+    }
+
+    @Override
+    public String getLocalizedGuardianDescription(int speciesID) {
+        return Guardians().get("g" + speciesID + "_desc");
     }
 
     @Override

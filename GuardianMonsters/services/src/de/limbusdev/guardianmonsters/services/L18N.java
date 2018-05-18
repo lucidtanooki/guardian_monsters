@@ -42,6 +42,8 @@ public interface L18N {
 
     String getLocalizedGuardianName(int speciesID, int form);
 
+    String getLocalizedGuardianDescription(int speciesID);
+
     String getLocalizedAbilityName(String abilityID);
 
     void dispose();

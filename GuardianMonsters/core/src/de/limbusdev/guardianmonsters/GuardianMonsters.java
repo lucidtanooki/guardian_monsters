@@ -75,10 +75,12 @@ public class GuardianMonsters extends Game
         Services.provide(new LocalizationManager());
         Services.provide(new SettingsService());
         Services.provide(new UIManager(AssetPath.Skin.FONT));
-        CoreServiceLocator.provide(new GameStateService(new SaveGameManager()));
+
 
         // ....................................................................... module: guardians
         ModuleGuardians.initModule();
+
+        CoreServiceLocator.provide(new GameStateService(new SaveGameManager()));
     }
 
 }

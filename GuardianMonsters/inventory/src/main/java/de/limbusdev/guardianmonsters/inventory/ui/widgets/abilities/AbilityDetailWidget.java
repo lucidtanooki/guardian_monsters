@@ -43,6 +43,7 @@ public class AbilityDetailWidget extends Container {
     public Callbacks callbacks;
 
     public AbilityDetailWidget(Skin skin, Callbacks handler, String buttonStyle) {
+
         super();
         this.skin = skin;
 

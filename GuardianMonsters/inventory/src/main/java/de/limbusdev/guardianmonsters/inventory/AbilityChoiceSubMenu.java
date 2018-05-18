@@ -191,8 +191,9 @@ public class AbilityChoiceSubMenu extends AInventorySubMenu
         for(int i=0; i<7; i++) {
 
             Ability.aID abilityID = guardian.getAbilityGraph().getActiveAbility(i);
-            Ability ability = GuardiansServiceLocator.getAbilities().getAbility(abilityID);
-            if(ability != null) {
+
+            if(abilityID != null) {
+                Ability ability = GuardiansServiceLocator.getAbilities().getAbility(abilityID);
                 abilitySlotButtons.setButtonText(i, ability);
                 abilitySlotButtons.setButtonStyle(i, ability.element);
             } else {

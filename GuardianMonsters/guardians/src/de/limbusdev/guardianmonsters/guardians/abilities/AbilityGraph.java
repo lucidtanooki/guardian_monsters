@@ -257,6 +257,10 @@ public class AbilityGraph implements IAbilityGraph
         return activeAbilities;
     }
 
+    @Override
+    public ArrayMap<Integer, Ability.aID> getLearntAbilities() {
+        return learntAbilities;
+    }
 
     // .............................................................................. HELPER METHODS
     private boolean learnAbility(int nodeID)

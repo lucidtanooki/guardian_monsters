@@ -73,11 +73,7 @@ public class AbilityDetailWidget extends Container {
         group.addActor(learn);
 
         // Callbacks
-        learn.addListener(event ->
-        {
-            callbacks.onLearn(nodeID);
-            return true;
-        });
+        learn.addListener(new SimpleClickListener(() -> callbacks.onLearn(nodeID)));
     }
 
 

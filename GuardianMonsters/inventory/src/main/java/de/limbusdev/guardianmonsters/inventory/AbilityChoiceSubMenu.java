@@ -6,7 +6,9 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.ButtonGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -41,13 +43,13 @@ public class AbilityChoiceSubMenu extends AInventorySubMenu
 {
 
     private TeamMemberSwitcher switcher;
-    private VerticalGroup abilityMenu;
     private ArrayMap<Integer, AGuardian> team;
     private ButtonGroup<TextButton> abilityButtons;
     private AbilityDetailWidget details;
     private HoneyComb7ButtonsWidget abilitySlotButtons;
     private ImageButton back;
     private int currentlyChosenAbility;
+    private Table abilityButtonTable;
 
     private Group abilitySlotChoice;
 
@@ -78,26 +80,42 @@ public class AbilityChoiceSubMenu extends AInventorySubMenu
     private void init(AGuardian m, int teamPosition) {
 
         switcher.init(m, teamPosition);
-        abilityMenu.clear();
         abilityButtons.clear();
+        abilityButtonTable.clearChildren();
         I18NBundle translation = Services.getL18N().Abilities();
 
-        for(final int key : m.getAbilityGraph().getActiveAbilities().keys())
-        {
-            Ability.aID abilityID = m.getAbilityGraph().getActiveAbilities().get(key);
+        // For each activated learnt of the given Guardian:
+        for(final int key : m.getAbilityGraph().getLearntAbilities().keys()) {
+
+            Ability.aID abilityID = m.getAbilityGraph().getLearntAbilities().get(key);
+
             if(abilityID != null) {
+
                 Ability ability = GuardiansServiceLocator.getAbilities().getAbility(abilityID);
                 TextButton tb = new TextButton(translation.get(ability.name), getSkin(), "item-button-sandstone");
+
                 tb.addListener(new SimpleClickListener(() -> {
+
                     currentlyChosenAbility = key;
                     showAbilityDetails();
                 }));
-                tb.setSize(140, 24);
-                abilityMenu.addActor(tb);
+
+                abilityButtonTable.row().spaceBottom(1);
+                abilityButtonTable.add(tb).width(140).height(32);
                 abilityButtons.add(tb);
-                if (key == 0) tb.setChecked(true);
+
+                if (key == 0) {
+                    tb.setChecked(true);
+                }
             }
         }
+
+        if(m.getAbilityGraph().getLearntAbilities().size != 0) {
+
+            currentlyChosenAbility = m.getAbilityGraph().getLearntAbilities().firstKey();
+            showAbilityDetails();
+        }
+
         // TODO m.getAbilityGraph().addObserver(this);
     }
 
@@ -116,14 +134,17 @@ public class AbilityChoiceSubMenu extends AInventorySubMenu
     @Override
     protected void layout(Skin skin) {
 
+        abilityButtonTable = new Table();
+        abilityButtonTable.align(Align.topLeft);
+
         switcher.setPosition(2, 202, Align.topLeft);
         addActor(switcher);
 
-        abilityMenu = new VerticalGroup();
-        abilityMenu.setSize(140,200);
-        abilityMenu.setPosition(100,2,Align.bottomLeft);
-        abilityMenu.fill();
-        addActor(abilityMenu);
+        ScrollPane scrollPane = new ScrollPane(abilityButtonTable, skin);
+        scrollPane.setSize(140,204);
+        scrollPane.setPosition(100,0);
+        scrollPane.setScrollBarPositions(false,true);
+        addActor(scrollPane);
 
         abilityButtons = new ButtonGroup<>();
         abilityButtons.setMaxCheckCount(1);
@@ -164,7 +185,9 @@ public class AbilityChoiceSubMenu extends AInventorySubMenu
     }
 
     private void refreshAbilitySlotButtons() {
+
         AGuardian guardian = team.get(switcher.getCurrentlyChosen());
+
         for(int i=0; i<7; i++) {
 
             Ability.aID abilityID = guardian.getAbilityGraph().getActiveAbility(i);

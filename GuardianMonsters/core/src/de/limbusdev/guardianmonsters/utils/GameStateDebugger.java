@@ -48,7 +48,10 @@ public class GameStateDebugger
         heroTeam.put(2, guardianFactory.createGuardian(3,1));
 
         // Enable Abilities
+        heroTeam.get(0).getAbilityGraph().activateNode(0);
         heroTeam.get(0).getAbilityGraph().activateNode(13);
+        heroTeam.get(0).getAbilityGraph().activateNode(11);
+        heroTeam.get(0).getAbilityGraph().activateNode(15);
         heroTeam.get(0).getAbilityGraph().setActiveAbility(1,13);
         heroTeam.get(0).getAbilityGraph().activateNode(5);
         heroTeam.get(0).getAbilityGraph().setActiveAbility(2,5);

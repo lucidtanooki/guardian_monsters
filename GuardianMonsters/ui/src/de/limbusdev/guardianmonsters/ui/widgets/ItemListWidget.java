@@ -32,6 +32,7 @@ public class ItemListWidget extends Group implements Listener<ItemSignal> {
     private Array<Item.Category> currentFilters;
 
     public interface ClickListener {
+
         void onChoosingItem(Item item);
     }
 
@@ -122,6 +123,7 @@ public class ItemListWidget extends Group implements Listener<ItemSignal> {
     }
 
     public void applyFilter(Array<Item.Category> filters) {
+
         lastChosenItem = 0;
         currentFilters = filters;
         init(inventory, filters);
@@ -129,6 +131,7 @@ public class ItemListWidget extends Group implements Listener<ItemSignal> {
 
     @Override
     public void receive(Signal<ItemSignal> signal, ItemSignal itemSignal) {
+
         if(itemSignal.message == ItemSignal.Message.DELETED) {
             // Refresh Inventory List, if last item of it's kind got removed
             if (!inventory.containsItem(itemSignal.item)) {

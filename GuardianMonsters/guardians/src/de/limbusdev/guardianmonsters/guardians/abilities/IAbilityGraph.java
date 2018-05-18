@@ -84,4 +84,6 @@ public interface IAbilityGraph
     void setActiveAbility(int slot, int learntAbilityNumber);
 
     ArrayMap<Integer, Ability.aID> getActiveAbilities();
+
+    ArrayMap<Integer, Ability.aID> getLearntAbilities();
 }

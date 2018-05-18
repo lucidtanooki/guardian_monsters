@@ -32,6 +32,7 @@ import de.limbusdev.guardianmonsters.Constant;
  * Created by Georg Eckert on 21.11.15.
  */
 public class GameArea {
+
     public IntVec2 gridPosition;
     public PositionComponent startPosition;
     public int areaID;

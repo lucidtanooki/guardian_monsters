@@ -3,11 +3,13 @@ package de.limbusdev.guardianmonsters;
 import com.badlogic.gdx.Game;
 
 import de.limbusdev.guardianmonsters.assets.paths.AssetPath;
+import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager;
 import de.limbusdev.guardianmonsters.fwmengine.menus.ui.MainMenuScreen;
 import de.limbusdev.guardianmonsters.guardians.ModuleGuardians;
 import de.limbusdev.guardianmonsters.media.AudioManager;
 import de.limbusdev.guardianmonsters.media.MediaManager;
 import de.limbusdev.guardianmonsters.scene2d.ConcreteScreenManager;
+import de.limbusdev.guardianmonsters.services.GameStateService;
 import de.limbusdev.guardianmonsters.services.LocalizationManager;
 import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.services.SettingsService;
@@ -49,6 +51,7 @@ public class GuardianMonsters extends Game
         Services.getAudio().dispose();
         Services.getL18N().dispose();
         Services.getScreenManager().dispose();
+        CoreServiceLocator.destroy();
         super.dispose();
 
         // Dispose of Modules
@@ -72,6 +75,7 @@ public class GuardianMonsters extends Game
         Services.provide(new LocalizationManager());
         Services.provide(new SettingsService());
         Services.provide(new UIManager(AssetPath.Skin.FONT));
+        CoreServiceLocator.provide(new GameStateService(new SaveGameManager()));
 
         // ....................................................................... module: guardians
         ModuleGuardians.initModule();

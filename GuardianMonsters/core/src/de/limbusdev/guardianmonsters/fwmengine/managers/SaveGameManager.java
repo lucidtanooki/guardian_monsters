@@ -46,6 +46,12 @@ public class SaveGameManager extends EntitySystem
     private GameArea gameArea;
     /* ........................................................................... CONSTRUCTOR .. */
 
+    public SaveGameManager() {
+
+        super();
+        getCurrentGameState();
+    }
+
     public SaveGameManager(GameArea gameArea)
     {
         super();

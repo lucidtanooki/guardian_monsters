@@ -38,26 +38,29 @@ public class GameState {
 
     public String toString()
     {
-        String out = "";
-        out += "== Current Game State ==\n";
-        out += "Last position: (" + gridx + "|" + gridy + ")" + " at map " + map + "\n";
-        out += "Team Size: " + maxTeamSize + "\n";
-        out += "Team:\n";
+        StringBuilder out = new StringBuilder();
+        out.append("")
+                .append("== Current Game State ==\n")
+                .append("Last position: (").append(gridx).append("|").append(gridy).append(")")
+                .append(" at map ").append(map).append("\n")
+                .append("Team Size: ").append(maxTeamSize).append("\n")
+                .append("Team:\n");
 
         for(AGuardian m : team.values())
         {
-            out += m.toString() + "\n";
+            out.append(m.toString()).append("\n");
         }
 
-        out += "GuardoSphere:\n";
+        out.append("GuardoSphere:\n");
 
         for(Integer key : guardoSphere.keys())
         {
-            out += "Position " + key + ": " + guardoSphere.get(key).toString() + "\n";
+            out.append("Position ").append(key).append(": ")
+                    .append(guardoSphere.get(key).toString()).append("\n");
         }
 
 
-        return out;
+        return out.toString();
     }
     /* ............................................................................... METHODS .. */
     

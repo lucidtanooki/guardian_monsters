@@ -12,7 +12,9 @@ import com.badlogic.gdx.utils.Align;
  */
 
 public class SubImageImageButton extends ImageButton {
+
     public SubImageImageButton(Skin skin, String style, Image image) {
+
         super(skin, style);
         image.setPosition(getWidth()/2,getHeight()/2, Align.center);
         addActor(image);

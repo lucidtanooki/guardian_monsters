@@ -10,6 +10,7 @@
   "com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle": {
     "button-gs":                { "down": "teamCircleGuardoSphere-down",          "up": "teamCircleGuardoSphere-up",         "checked": "teamCircleGuardoSphere-down",         "pressedOffsetY": -1, "checkedOffsetY": -1},
     "button-gs-selected":       { "down": "teamCircleGuardoSphereSelected-down",  "up": "teamCircleGuardoSphereSelected-up", "checked": "teamCircleGuardoSphereSelected-down", "pressedOffsetY": -1, "checkedOffsetY": -1},
+    "button-gs-empty":          { "down": "teamCircleGuardoSphere-empty-down",    "up": "teamCircleGuardoSphere-empty-up",   "checked": "teamCircleGuardoSphere-empty-down",   "pressedOffsetY": -1, "checkedOffsetY": -1},
 
     "b-toolbar-exit":           { "down": "toolBarButton-exit-down",         "up": "toolBarButton-exit-up"},
     "b-toolbar-encyclo":        { "down": "toolBarButton-encyclo-down",      "up": "toolBarButton-encyclo-up",              "checked": "toolBarButton-encyclo-down"},

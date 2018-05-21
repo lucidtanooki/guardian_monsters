@@ -6,6 +6,7 @@ import com.badlogic.gdx.utils.Array;
 import de.limbusdev.guardianmonsters.Constant;
 import de.limbusdev.guardianmonsters.battle.BattleResultScreen;
 import de.limbusdev.guardianmonsters.battle.BattleScreen;
+import de.limbusdev.guardianmonsters.fwmengine.guardosphere.GuardoSphereScreen;
 import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TeamComponent;
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.WorldScreen;
@@ -18,6 +19,7 @@ import de.limbusdev.guardianmonsters.guardians.items.Item;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardianFactory;
 import de.limbusdev.guardianmonsters.guardians.monsters.GuardianFactory;
+import de.limbusdev.guardianmonsters.guardians.monsters.GuardoSphere;
 import de.limbusdev.guardianmonsters.guardians.monsters.Team;
 import de.limbusdev.guardianmonsters.model.gamestate.GameState;
 import de.limbusdev.guardianmonsters.services.Services;
@@ -281,12 +283,22 @@ public class GameStateDebugger
     }
 
     private void testGuardoSphereScreen() {
-//        Team heroTeam = new Team(3,3,3);
-//        heroTeam.put(0,BattleFactory.getInstance().createGuardian(1));
-//        heroTeam.put(1,BattleFactory.getInstance().createGuardian(2));
-//        heroTeam.put(2,BattleFactory.getInstance().createGuardian(3));
-//
-//        game.setScreen(new GuardoSphereScreen(heroTeam, null));
+
+        AGuardianFactory guardianFactory = GuardiansServiceLocator.getGuardianFactory();
+        Team heroTeam = new Team(3,3,3);
+        heroTeam.put(0, guardianFactory.createGuardian(1,1));
+        heroTeam.put(1, guardianFactory.createGuardian(2,1));
+        heroTeam.put(2, guardianFactory.createGuardian(3,1));
+        heroTeam.get(0).getAbilityGraph().activateNode(13);
+        heroTeam.get(0).getAbilityGraph().setActiveAbility(6,1);
+
+        GuardoSphere guardoSphere = new GuardoSphere();
+
+        guardoSphere.put(0, guardianFactory.createGuardian(5,1));
+        guardoSphere.put(2, guardianFactory.createGuardian(7,1));
+        guardoSphere.put(7, guardianFactory.createGuardian(8,1));
+
+        game.setScreen(new GuardoSphereScreen(heroTeam, guardoSphere));
     }
 
     public void startDebugging()

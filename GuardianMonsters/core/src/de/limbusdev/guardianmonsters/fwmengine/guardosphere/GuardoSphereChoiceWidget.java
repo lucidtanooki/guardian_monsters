@@ -15,6 +15,7 @@ import com.badlogic.gdx.utils.Array;
 
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.GuardoSphere;
+import de.limbusdev.guardianmonsters.ui.widgets.SimpleClickListener;
 
 /**
  * GuardoSphereChoiceWidget
@@ -23,6 +24,7 @@ import de.limbusdev.guardianmonsters.guardians.monsters.GuardoSphere;
  */
 
 public class GuardoSphereChoiceWidget extends Group {
+
     private static final int WIDTH = 252;
     private static final int HEIGHT= 180;
 
@@ -34,6 +36,7 @@ public class GuardoSphereChoiceWidget extends Group {
     private Callbacks callbacks;
 
     public GuardoSphereChoiceWidget(Skin skin, GuardoSphere sphere, ButtonGroup group) {
+
         this.sphere = sphere;
         this.skin = skin;
         this.buttonGroup = group;
@@ -57,18 +60,20 @@ public class GuardoSphereChoiceWidget extends Group {
     }
 
     public void refresh(int page) {
+
         for(Button b : buttons) {
             buttonGroup.remove(b);
             b.remove();
         }
+
         buttons.clear();
         table.clear();
 
-        for(int i=page*21; i<(page+1)*21; i++) {
+        for(int i=page*35; i<(page+1)*35; i++) {
             if(i % 7 == 0) {
                 table.row();
             }
-            if(sphere.containsKey(i)) {
+
                 final int key = i;
                 AGuardian guardian = sphere.get(i);
                 ImageButton monsterButton = new GuardoSphereButton(skin, guardian);
@@ -76,21 +81,13 @@ public class GuardoSphereChoiceWidget extends Group {
                 table.add(monsterButton).width(32).height(32);
                 buttons.add(monsterButton);
                 buttonGroup.add(monsterButton);
-                monsterButton.addListener(
-                    new ClickListener() {
-                        @Override
-                        public void clicked(InputEvent event, float x, float y) {
-                            callbacks.onButtonPressed(key);
-                        }
-                    }
-                );
-            } else {
-                table.add(new Actor()).width(32).height(32);
-            }
+                monsterButton.addListener(new SimpleClickListener(()
+                        -> callbacks.onButtonPressed(key)));
         }
     }
 
     public void setCallbacks(Callbacks callbacks) {
+
         this.callbacks = callbacks;
     }
 

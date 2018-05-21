@@ -20,7 +20,9 @@ import de.limbusdev.guardianmonsters.ui.AScreen;
  */
 
 public class GuardoSphereScreen extends AScreen {
+
     public GuardoSphereScreen(Team team, GuardoSphere guardoSphere) {
+
         super(new GuardoSphereHUD(Services.getUI().getInventorySkin(), team, guardoSphere));
     }
 }

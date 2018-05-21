@@ -27,21 +27,40 @@ public class GuardoSphereHUD extends AHUD implements GuardoSphereTeamWidget.Call
 
     private GuardianDetailWidget detailWidget;
     private ButtonGroup guardianButtonGroup;
+    private GuardoSphereChoiceWidget guardoSphereChoiceWidget;
 
-    public GuardoSphereHUD(Skin skin, Team team,GuardoSphere guardoSphere) {
+    public GuardoSphereHUD(Skin skin, Team team, GuardoSphere guardoSphere) {
+
         super(skin);
 
         this.team = team;
+        this.guardoSphere = guardoSphere;
+
+        layout(skin);
+
+        GuardoSphereTeamWidget teamWidget = new GuardoSphereTeamWidget(skin, team, guardianButtonGroup);
+        teamWidget.setPosition(8,8,Align.bottomLeft);
+        teamWidget.setCallbacks(this);
+
+        guardoSphereChoiceWidget.setCallbacks(
+
+                spherePosition -> {
+                    if(guardoSphere.get(spherePosition) != null) {
+                        detailWidget.showDetails(guardoSphere.get(spherePosition));
+                    }
+                }
+        );
+
+
+        stage.addActor(teamWidget);
+    }
+
+    private void layout(Skin skin) {
 
         ParticleEffectActor particles = new ParticleEffectActor("guardosphere");
         particles.start();
         particles.setPosition(0,0, Align.bottomLeft);
         stage.addActor(particles);
-
-        Container<Group> container = new Container<>(new Group());
-        container.setBackground(skin.getDrawable("guardosphere-frame"));
-        container.setSize(252,180);
-        container.setPosition(8, Constant.HEIGHT-8,Align.topLeft);
 
         detailWidget = new GuardianDetailWidget(skin);
         detailWidget.setPosition(Constant.WIDTH-8,Constant.HEIGHT-8,Align.topRight);
@@ -50,13 +69,12 @@ public class GuardoSphereHUD extends AHUD implements GuardoSphereTeamWidget.Call
         guardianButtonGroup.setMaxCheckCount(1);
         guardianButtonGroup.setMinCheckCount(1);
 
-        GuardoSphereTeamWidget teamWidget = new GuardoSphereTeamWidget(skin, team, guardianButtonGroup);
-        teamWidget.setPosition(8,8,Align.bottomLeft);
-        teamWidget.setCallbacks(this);
+        guardoSphereChoiceWidget = new GuardoSphereChoiceWidget(skin, guardoSphere, guardianButtonGroup);
+        guardoSphereChoiceWidget.setPosition(8, Constant.HEIGHT-8,Align.topLeft);
 
-        stage.addActor(container);
         stage.addActor(detailWidget);
-        stage.addActor(teamWidget);
+        stage.addActor(guardoSphereChoiceWidget);
+
     }
 
     @Override
@@ -76,6 +94,7 @@ public class GuardoSphereHUD extends AHUD implements GuardoSphereTeamWidget.Call
 
     @Override
     public void onButtonPressed(int teamPosition) {
+
         detailWidget.showDetails(team.get(teamPosition));
     }
 }

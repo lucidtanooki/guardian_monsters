@@ -15,13 +15,22 @@ import de.limbusdev.guardianmonsters.services.Services;
  */
 
 public class GuardoSphereButton extends SubImageImageButton {
+
     public GuardoSphereButton(Skin skin, AGuardian guardian) {
-        super(skin, "button-gs", construct(guardian));
+
+        super(skin, (guardian != null ? "button-gs" : "button-gs-empty"), construct(guardian, skin));
     }
 
-    private static Image construct(AGuardian guardian) {
-        TextureRegionDrawable drawable = new TextureRegionDrawable(
-            Services.getMedia().getMonsterMiniSprite(guardian.getSpeciesDescription().getID(), guardian.getAbilityGraph().getCurrentForm()));
+    private static Image construct(AGuardian guardian, Skin skin) {
+
+        TextureRegionDrawable drawable;
+
+        if(guardian == null) {
+            drawable = new TextureRegionDrawable(skin.getRegion("transparent"));
+        } else {
+            drawable = new TextureRegionDrawable(
+                    Services.getMedia().getMonsterMiniSprite(guardian.getSpeciesDescription().getID(), guardian.getAbilityGraph().getCurrentForm()));
+        }
         Image miniSprite = new Image(drawable);
         return miniSprite;
     }

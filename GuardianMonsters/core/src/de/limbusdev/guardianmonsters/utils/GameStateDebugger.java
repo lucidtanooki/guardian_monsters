@@ -57,15 +57,21 @@ public class GameStateDebugger
         heroTeam.get(0).getAbilityGraph().setActiveAbility(2,5);
         heroTeam.get(0).getAbilityGraph().activateNode(20);
         heroTeam.get(0).getAbilityGraph().setActiveAbility(3,20);
-        heroTeam.get(0).getAbilityGraph().activateNode(30);
-        heroTeam.get(0).getAbilityGraph().setActiveAbility(4,30);
-        heroTeam.get(0).getAbilityGraph().activateNode(35);
-        heroTeam.get(0).getAbilityGraph().setActiveAbility(5,35);
+//        heroTeam.get(0).getAbilityGraph().activateNode(30);
+//        heroTeam.get(0).getAbilityGraph().setActiveAbility(4,30);
+//        heroTeam.get(0).getAbilityGraph().activateNode(35);
+//        heroTeam.get(0).getAbilityGraph().setActiveAbility(5,35);
         heroTeam.get(0).getAbilityGraph().activateNode(21);
         heroTeam.get(0).getAbilityGraph().activateNode(23);
         heroTeam.get(0).getAbilityGraph().activateNode(89);
         heroTeam.get(0).getAbilityGraph().activateNode(90);
-        heroTeam.get(0).getIndividualStatistics().earnEXP(4);
+        heroTeam.get(0).getIndividualStatistics().earnEXP(200);
+        heroTeam.get(0).getIndividualStatistics().levelUp();
+        heroTeam.get(0).getIndividualStatistics().levelUp();
+        heroTeam.get(0).getIndividualStatistics().levelUp();
+        heroTeam.get(0).getIndividualStatistics().levelUp();
+        heroTeam.get(0).getIndividualStatistics().levelUp();
+        heroTeam.get(0).getIndividualStatistics().levelUp();
 
         heroTeam.get(1).getAbilityGraph().activateNode(5);
         heroTeam.get(1).getAbilityGraph().setActiveAbility(1,5);

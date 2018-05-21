@@ -146,6 +146,7 @@ public class AbilityGraph implements IAbilityGraph
         enableNeighborNodes(nodeID);
 
         switch(node.type) {
+
             case ABILITY:
                 learnAbility(nodeID);
                 break;

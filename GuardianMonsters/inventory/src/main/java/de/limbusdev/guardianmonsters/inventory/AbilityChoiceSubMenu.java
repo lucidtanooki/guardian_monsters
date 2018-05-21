@@ -39,7 +39,8 @@ import main.java.de.limbusdev.guardianmonsters.inventory.ui.widgets.team.TeamMem
  */
 
 public class AbilityChoiceSubMenu extends AInventorySubMenu
-    implements TeamMemberSwitcher.Callbacks, AbilityDetailWidget.Callbacks, Callback.ButtonID
+    implements TeamMemberSwitcher.Callbacks, AbilityDetailWidget.Callbacks, Callback.ButtonID,
+        Observer
 {
 
     private TeamMemberSwitcher switcher;
@@ -79,36 +80,11 @@ public class AbilityChoiceSubMenu extends AInventorySubMenu
      */
     private void init(AGuardian m, int teamPosition) {
 
+        team.get(switcher.getCurrentlyChosen()).deleteObserver(this);
+
         switcher.init(m, teamPosition);
-        abilityButtons.clear();
-        abilityButtonTable.clearChildren();
-        I18NBundle translation = Services.getL18N().Abilities();
 
-        // For each activated learnt of the given Guardian:
-        for(final int key : m.getAbilityGraph().getLearntAbilities().keys()) {
-
-            Ability.aID abilityID = m.getAbilityGraph().getLearntAbilities().get(key);
-
-            if(abilityID != null) {
-
-                Ability ability = GuardiansServiceLocator.getAbilities().getAbility(abilityID);
-                TextButton tb = new TextButton(translation.get(ability.name), getSkin(), "item-button-sandstone");
-
-                tb.addListener(new SimpleClickListener(() -> {
-
-                    currentlyChosenAbility = key;
-                    showAbilityDetails();
-                }));
-
-                abilityButtonTable.row().spaceBottom(1);
-                abilityButtonTable.add(tb).width(140).height(32);
-                abilityButtons.add(tb);
-
-                if (key == 0) {
-                    tb.setChecked(true);
-                }
-            }
-        }
+        refreshAbilitySlotButtons();
 
         if(m.getAbilityGraph().getLearntAbilities().size != 0) {
 
@@ -116,7 +92,7 @@ public class AbilityChoiceSubMenu extends AInventorySubMenu
             showAbilityDetails();
         }
 
-        // TODO m.getAbilityGraph().addObserver(this);
+        m.addObserver(this);
     }
 
     // ................................................................ TeamMemberSwitcher.Callbacks
@@ -186,19 +162,38 @@ public class AbilityChoiceSubMenu extends AInventorySubMenu
 
     private void refreshAbilitySlotButtons() {
 
-        AGuardian guardian = team.get(switcher.getCurrentlyChosen());
+        System.out.println("REfresh Buttons");
 
-        for(int i=0; i<7; i++) {
+        abilityButtons.clear();
+        abilityButtonTable.clearChildren();
 
-            Ability.aID abilityID = guardian.getAbilityGraph().getActiveAbility(i);
+        I18NBundle translation = Services.getL18N().Abilities();
+
+        AGuardian m = team.get(switcher.getCurrentlyChosen());
+
+        for(final int key : m.getAbilityGraph().getLearntAbilities().keys()) {
+
+            Ability.aID abilityID = m.getAbilityGraph().getLearntAbilities().get(key);
+            System.out.println("" + abilityID.ID + " " + abilityID.element);
 
             if(abilityID != null) {
+
                 Ability ability = GuardiansServiceLocator.getAbilities().getAbility(abilityID);
-                abilitySlotButtons.setButtonText(i, ability);
-                abilitySlotButtons.setButtonStyle(i, ability.element);
-            } else {
-                abilitySlotButtons.setButtonText(i, "");
-                abilitySlotButtons.setButtonStyle(i, Element.NONE);
+                TextButton tb = new TextButton(translation.get(ability.name), getSkin(), "item-button-sandstone");
+
+                tb.addListener(new SimpleClickListener(() -> {
+
+                    currentlyChosenAbility = key;
+                    showAbilityDetails();
+                }));
+
+                abilityButtonTable.row().spaceBottom(1);
+                abilityButtonTable.add(tb).width(140).height(32);
+                abilityButtons.add(tb);
+
+                if (key == 0) {
+                    tb.setChecked(true);
+                }
             }
         }
     }
@@ -212,16 +207,16 @@ public class AbilityChoiceSubMenu extends AInventorySubMenu
         refreshAbilitySlotButtons();
     }
 
-    // ...................................................................... Listener<AbilityGraph>
-//    @Override
-    public void receive(Signal<AbilityGraph> signal, AbilityGraph object) {
-        refresh();
-        refreshAbilitySlotButtons();
-    }
-
     @Override
     public void syncSelectedGuardian(int teamPosition) {
 
         init(team.get(teamPosition), teamPosition);
+    }
+
+    @Override
+    public void update(Observable observable, Object o) {
+
+        refresh();
+        refreshAbilitySlotButtons();
     }
 }

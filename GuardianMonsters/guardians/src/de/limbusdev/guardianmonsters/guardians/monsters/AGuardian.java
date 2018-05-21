@@ -51,6 +51,7 @@ public abstract class AGuardian extends Observable
 
     public void setAbilitiesChanged()
     {
+        this.setChanged();
         this.changeType = IAbilityGraph.class;
     }
 

@@ -28,10 +28,14 @@ public class NodeWidget extends ImageButton implements Listener<Node> {
 
     private Skin skin;
 
+    private Node.State currentWidgetState;
+
     public NodeWidget(Skin skin, Node node) {
+
         super(skin,"board-" + node.type.toString().toLowerCase() + "-disabled");
         this.skin = skin;
         this.node = node;
+        currentWidgetState = node.getState();
 
         switch(node.type) {
             case ABILITY:
@@ -45,7 +49,10 @@ public class NodeWidget extends ImageButton implements Listener<Node> {
         activationAnimation = new AnimatedImage(anim);
         activationAnimation.setPlayMode(Animation.PlayMode.NORMAL);
 
-        changeStatus(node.getState());
+        changeStatus(node.getState(), true);
+
+        // Add to Observable
+        node.add(this);
     }
 
     private void playActivationAnimation() {
@@ -55,11 +62,13 @@ public class NodeWidget extends ImageButton implements Listener<Node> {
         }
     }
 
-    private void changeStatus(Node.State state) {
-        if(state == Node.State.ACTIVE && node.getState() != Node.State.ACTIVE) {
+    private void changeStatus(Node.State state, boolean initializing) {
+
+        if(state == Node.State.ACTIVE && currentWidgetState != Node.State.ACTIVE && !initializing) {
             playActivationAnimation();
         }
         this.setStyle(getNodeStyles(skin).get(node.type).get(state));
+        this.currentWidgetState = state;
     }
 
     @Override
@@ -77,6 +86,7 @@ public class NodeWidget extends ImageButton implements Listener<Node> {
     }
 
     public static ArrayMap<Node.Type, ArrayMap<Node.State, ImageButtonStyle>> getNodeStyles(Skin skin) {
+
         if(nodeStyles == null) {
             setupNodeStyles(skin);
         }
@@ -84,10 +94,11 @@ public class NodeWidget extends ImageButton implements Listener<Node> {
     }
 
     private static void setupNodeStyles(Skin skin) {
+
         // Set Node ImageButton Styles
         nodeStyles = new ArrayMap<>();
         for(Node.Type t : Node.Type.values()) {
-            nodeStyles.put(t,new ArrayMap<Node.State, ImageButtonStyle>());
+            nodeStyles.put(t,new ArrayMap<>());
             ArrayMap<Node.State, ImageButtonStyle> statusStyles = nodeStyles.get(t);
 
             for(Node.State s : Node.State.values()) {
@@ -100,6 +111,7 @@ public class NodeWidget extends ImageButton implements Listener<Node> {
 
     @Override
     public void receive(Signal<Node> signal, Node object) {
-        changeStatus(object.getState());
+
+        changeStatus(object.getState(), false);
     }
 }

@@ -25,13 +25,13 @@ public class GraphWidget extends Group {
     private Skin skin;
 
     private ButtonGroup nodeGroup;
-    private ArrayMap<Integer, main.java.de.limbusdev.guardianmonsters.inventory.ui.widgets.abilities.NodeWidget> nodeWidgets;
-    private ArrayMap<Node,Array<main.java.de.limbusdev.guardianmonsters.inventory.ui.widgets.abilities.EdgeWidget>> edgeWidgets;
+    private ArrayMap<Integer, NodeWidget> nodeWidgets;
+    private ArrayMap<Node,Array<EdgeWidget>> edgeWidgets;
 
     private AGuardian currentGuardian;
 
-
     public GraphWidget(Skin skin, Controller callbacks) {
+
         super();
         this.skin = skin;
         this.callbacks = callbacks;
@@ -51,6 +51,7 @@ public class GraphWidget extends Group {
 
 
     public void init(AGuardian guardian) {
+
         clear();
         currentGuardian = guardian;
         this.graph = guardian.getAbilityGraph();
@@ -71,8 +72,9 @@ public class GraphWidget extends Group {
 
     // ..................................................................................... METHODS
     private void addNewNodeWidget(Node node) {
+
         final int nodeID = node.ID;
-        main.java.de.limbusdev.guardianmonsters.inventory.ui.widgets.abilities.NodeWidget nw = new main.java.de.limbusdev.guardianmonsters.inventory.ui.widgets.abilities.NodeWidget(skin, node);
+        NodeWidget nw = new main.java.de.limbusdev.guardianmonsters.inventory.ui.widgets.abilities.NodeWidget(skin, node);
         nw.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -86,15 +88,16 @@ public class GraphWidget extends Group {
     }
 
     private void addNewEdgeWidget(Edge edge) {
-        main.java.de.limbusdev.guardianmonsters.inventory.ui.widgets.abilities.EdgeWidget ew = new main.java.de.limbusdev.guardianmonsters.inventory.ui.widgets.abilities.EdgeWidget(skin, edge);
+
+        EdgeWidget ew = new EdgeWidget(skin, edge);
         ew.setPosition(ew.pivot.x*32+300, ew.pivot.y*32+150);
         addActor(ew);
 
         if(!edgeWidgets.containsKey(edge.from)) {
-            edgeWidgets.put(edge.from,new Array<main.java.de.limbusdev.guardianmonsters.inventory.ui.widgets.abilities.EdgeWidget>());
+            edgeWidgets.put(edge.from,new Array<>());
         }
         if(!edgeWidgets.containsKey(edge.to)) {
-            edgeWidgets.put(edge.to,  new Array<main.java.de.limbusdev.guardianmonsters.inventory.ui.widgets.abilities.EdgeWidget>());
+            edgeWidgets.put(edge.to,  new Array<>());
         }
 
         edgeWidgets.get(edge.from).add(ew);

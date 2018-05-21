@@ -21,6 +21,7 @@ import de.limbusdev.guardianmonsters.guardians.abilities.Node;
  */
 
 public class EdgeWidget extends Group implements Listener<Node> {
+
     private ArrayMap<Edge.Orientation,String> edgeImgsDisabled;
     private Edge edge;
     private Array<Image> images;
@@ -28,6 +29,7 @@ public class EdgeWidget extends Group implements Listener<Node> {
     private Skin skin;
 
     public EdgeWidget(Skin skin, Edge edge) {
+
         this.skin = skin;
 
         // Set Edge Image Names
@@ -46,10 +48,14 @@ public class EdgeWidget extends Group implements Listener<Node> {
             default:        assembleHorizontalEdge(edge); break;
         }
 
+        edge.from.add(this);
+        edge.to.add(this);
+
         changeStatus(edge);
     }
 
     private void assembleHorizontalEdge(Edge edge) {
+
         pivot = edge.from.x < edge.to.x ? edge.from : edge.to;
         for(int x = 0; x < edge.getXLength(); x++) {
             Image img = new Image(skin.getDrawable(edgeImgsDisabled.get(Orientation.HORIZONTAL)));
@@ -60,6 +66,7 @@ public class EdgeWidget extends Group implements Listener<Node> {
     }
 
     private void assembleVerticalEdge(Edge edge) {
+
         pivot = edge.from.y < edge.to.y ? edge.from : edge.to;
         for(int y = 0; y < edge.getYLength(); y++) {
             Image img = new Image(skin.getDrawable(edgeImgsDisabled.get(Orientation.VERTICAL)));
@@ -70,6 +77,7 @@ public class EdgeWidget extends Group implements Listener<Node> {
     }
 
     private void assembleUpLeftEdge(Edge edge) {
+
         pivot = edge.from.y < edge.to.y ? edge.from : edge.to;
         int x=0; int y=0;
         do {
@@ -82,6 +90,7 @@ public class EdgeWidget extends Group implements Listener<Node> {
     }
 
     private void assembleUpRightEdge(Edge edge) {
+
         pivot = edge.from.y < edge.to.y ? edge.from : edge.to;
         int x=0; int y=0;
         do {
@@ -95,6 +104,7 @@ public class EdgeWidget extends Group implements Listener<Node> {
     }
 
     public void changeStatus(Edge edge) {
+
         String ending;
         if(edge.from.isActive() || edge.to.isActive()) {
             ending = "-active";
@@ -110,6 +120,7 @@ public class EdgeWidget extends Group implements Listener<Node> {
 
     @Override
     public void receive(Signal<Node> signal, Node object) {
+
         if(object.isActive()) {
             changeStatus(edge);
         }

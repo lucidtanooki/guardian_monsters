@@ -41,11 +41,14 @@ public class Node extends Signal<Node> {
     }
 
     public void activate() {
+
         state = State.ACTIVE;
         dispatch(this);
+
     }
 
     public void enable() {
+
         if(state != State.ACTIVE) {
             state = State.ENABLED;
         }

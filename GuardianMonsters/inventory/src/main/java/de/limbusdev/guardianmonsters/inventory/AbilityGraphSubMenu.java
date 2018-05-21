@@ -7,9 +7,11 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ArrayMap;
 
 import java.util.Observable;
+import java.util.Observer;
 
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
+import de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics;
 import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.ui.AScreen;
 import de.limbusdev.guardianmonsters.ui.Constant;
@@ -29,7 +31,8 @@ import main.java.de.limbusdev.guardianmonsters.inventory.ui.widgets.team.TeamMem
  */
 
 public class AbilityGraphSubMenu extends AInventorySubMenu implements Listener<Guardian>,
-    GraphWidget.Controller, TeamMemberSwitcher.Callbacks, AbilityDetailWidget.Callbacks {
+    GraphWidget.Controller, TeamMemberSwitcher.Callbacks, AbilityDetailWidget.Callbacks,
+        Observer {
 
     private ArrayMap<Integer, AGuardian> team;
     private GraphWidget graphWidget;
@@ -39,12 +42,9 @@ public class AbilityGraphSubMenu extends AInventorySubMenu implements Listener<G
 
     // ................................................................................. CONSTRUCTOR
     public AbilityGraphSubMenu(Skin skin, ArrayMap<Integer, AGuardian> team) {
+
         super(skin);
         this.team = team;
-
-        for (AGuardian m : this.team.values()) {
-//           TODO m.add(this);
-        }
 
         graphWidget = new GraphWidget(skin, this);
         graphWidget.init(this.team.get(0));
@@ -75,8 +75,9 @@ public class AbilityGraphSubMenu extends AInventorySubMenu implements Listener<G
 
     }
 
-    public void init(ArrayMap<Integer, AGuardian> team, int teamPosition){
+    public void init(ArrayMap<Integer, AGuardian> team, int teamPosition) {
 
+        team.get(teamPosition).addObserver(this);
         switcher.init(team.get(teamPosition), teamPosition);
         graphWidget.init(team.get(teamPosition));
         details.init(team.get(teamPosition), 0, false);
@@ -92,8 +93,12 @@ public class AbilityGraphSubMenu extends AInventorySubMenu implements Listener<G
     @Override
     public void onChanged(int position) {
 
-        graphWidget.init(team.get(position));
+        team.get(switcher.getCurrentlyChosen()).deleteObserver(this);
+        AGuardian selectedGuardian = team.get(position);
+        graphWidget.init(selectedGuardian);
         propagateSelectedGuardian(position);
+        remainingLevels.counter.setText(Integer.toString(selectedGuardian.getIndividualStatistics().getAbilityLevels()));
+        selectedGuardian.addObserver(this);
     }
 
     @Override
@@ -130,6 +135,15 @@ public class AbilityGraphSubMenu extends AInventorySubMenu implements Listener<G
     public void receive(Signal<Guardian> signal, Guardian guardian) {
 
         if(guardian.equals(team.get(switcher.getCurrentlyChosen()))) {
+
+            refresh();
+        }
+    }
+
+    @Override
+    public void update(Observable observable, Object o) {
+
+        if(observable instanceof AGuardian) {
             refresh();
         }
     }

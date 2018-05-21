@@ -202,7 +202,7 @@
       "abilityGraphEquip": {"head": 54, "hands": 19, "body": 17, "feet": 53},
       "metaForms": [
         {"form": 0, "nameID": "gm007_0_wuppy",  "elements": ["demon"]},
-        {"form": 1, "nameID": "gm007_1_aerog",  "elements": ["demon"]},
+        {"form": 1, "nameID": "gm007_1_earog",  "elements": ["demon"]},
         {"form": 2, "nameID": "gm007_2_deemog", "elements": ["demon"]}
       ]
     },

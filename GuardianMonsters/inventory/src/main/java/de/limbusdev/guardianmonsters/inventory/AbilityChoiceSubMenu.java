@@ -174,7 +174,6 @@ public class AbilityChoiceSubMenu extends AInventorySubMenu
         for(final int key : m.getAbilityGraph().getLearntAbilities().keys()) {
 
             Ability.aID abilityID = m.getAbilityGraph().getLearntAbilities().get(key);
-            System.out.println("" + abilityID.ID + " " + abilityID.element);
 
             if(abilityID != null) {
 

@@ -65,6 +65,12 @@ public class GameStateDebugger
         heroTeam.get(0).getAbilityGraph().activateNode(23);
         heroTeam.get(0).getAbilityGraph().activateNode(89);
         heroTeam.get(0).getAbilityGraph().activateNode(90);
+        heroTeam.get(0).getAbilityGraph().activateNode(80);
+        heroTeam.get(0).getAbilityGraph().activateNode(81);
+        heroTeam.get(0).getAbilityGraph().activateNode(82);
+        heroTeam.get(0).getAbilityGraph().activateNode(83);
+        heroTeam.get(0).getAbilityGraph().activateNode(84);
+        heroTeam.get(0).getAbilityGraph().activateNode(85);
         heroTeam.get(0).getIndividualStatistics().earnEXP(200);
         heroTeam.get(0).getIndividualStatistics().levelUp();
         heroTeam.get(0).getIndividualStatistics().levelUp();
@@ -72,6 +78,17 @@ public class GameStateDebugger
         heroTeam.get(0).getIndividualStatistics().levelUp();
         heroTeam.get(0).getIndividualStatistics().levelUp();
         heroTeam.get(0).getIndividualStatistics().levelUp();
+        heroTeam.get(0).getIndividualStatistics().levelUp();
+        heroTeam.get(0).getIndividualStatistics().levelUp();
+        heroTeam.get(0).getIndividualStatistics().levelUp();
+        heroTeam.get(0).getIndividualStatistics().levelUp();
+        heroTeam.get(0).getIndividualStatistics().levelUp();
+        heroTeam.get(0).getIndividualStatistics().levelUp();
+        heroTeam.get(0).getIndividualStatistics().levelUp();
+        heroTeam.get(0).getIndividualStatistics().levelUp();
+
+        heroTeam.get(0).getAbilityGraph().activateNode(91);
+
 
         heroTeam.get(1).getAbilityGraph().activateNode(5);
         heroTeam.get(1).getAbilityGraph().setActiveAbility(1,5);
@@ -81,6 +98,8 @@ public class GameStateDebugger
         heroTeam.get(2).getAbilityGraph().setActiveAbility(1,70);
         heroTeam.get(2).getAbilityGraph().activateNode(30);
         heroTeam.get(2).getAbilityGraph().setActiveAbility(2,30);
+
+
 
         Inventory inventory = new Inventory();
 

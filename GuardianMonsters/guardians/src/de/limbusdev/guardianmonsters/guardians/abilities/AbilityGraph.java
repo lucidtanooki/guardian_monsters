@@ -186,7 +186,9 @@ public class AbilityGraph implements IAbilityGraph
         int activatedMetamorphosisNodes = 0;
         for(int key : metamorphosisNodes)
         {
-            if(isNodeEnabled(key)) activatedMetamorphosisNodes++;
+            if(getNodes().get(key).isActive()) {
+                activatedMetamorphosisNodes++;
+            }
         }
         return activatedMetamorphosisNodes;
     }

@@ -19,6 +19,7 @@ import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.ui.AHUD;
 import de.limbusdev.guardianmonsters.ui.Constant;
 import de.limbusdev.guardianmonsters.ui.widgets.ParticleEffectActor;
+import de.limbusdev.guardianmonsters.ui.widgets.SimpleClickListener;
 
 /**
  * MetamorphosisHUD
@@ -49,14 +50,11 @@ public class MetamorphosisHUD extends AHUD {
             bundle.format("monster_metamorph_complete", monsterNames[0], monsterNames[1])
         };
 
-
-        // TODO metamorph only at node activation
-
         // Actor Creation
         Image bg = media.getMetamorphosisBackground();
         animation = media.getMetamorphosisAnimation();
-        imgBefore = new Image(media.getMonsterSprite(formerMetaForm,0));
-        imgAfter  = new Image(media.getMonsterSprite(newMetaForm,0));
+        imgBefore = new Image(media.getMonsterSprite(speciesID, formerMetaForm));
+        imgAfter  = new Image(media.getMonsterSprite(speciesID, newMetaForm));
         ok = new ImageButton(skin, "burgund-close");
         label = new Label(messages[0], skin, "burgund");
         label.setSize(420,64);
@@ -66,17 +64,13 @@ public class MetamorphosisHUD extends AHUD {
 
 
         // Listeners
-        ok.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
+        ok.addListener(new SimpleClickListener(() ->
+
                 stage.addAction(Actions.sequence(
-                    Services.getAudio().getMuteAudioAction(AssetPath.Audio.Music.METAMORPHOSIS),
-                    Actions.fadeOut(1),
-                    Actions.delay(1),
-                    Actions.run(() -> Services.getScreenManager().popScreen())
-                ));
-            }
-        });
+                Services.getAudio().getMuteAudioAction(AssetPath.Audio.Music.METAMORPHOSIS),
+                Actions.fadeOut(.5f),
+                Actions.run(() -> Services.getScreenManager().popScreen())
+        ))));
 
         // Layout
         bg.setPosition(0,0,Align.bottomLeft);

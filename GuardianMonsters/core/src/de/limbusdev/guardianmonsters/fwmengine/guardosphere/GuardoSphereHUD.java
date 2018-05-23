@@ -4,6 +4,7 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.ButtonGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.Container;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.Align;
 
 import de.limbusdev.guardianmonsters.Constant;
@@ -28,6 +29,7 @@ public class GuardoSphereHUD extends AHUD implements GuardoSphereTeamWidget.Call
     private GuardianDetailWidget detailWidget;
     private ButtonGroup guardianButtonGroup;
     private GuardoSphereChoiceWidget guardoSphereChoiceWidget;
+    private TextButton toggleGuardianStatView;
 
     public GuardoSphereHUD(Skin skin, Team team, GuardoSphere guardoSphere) {
 
@@ -75,6 +77,11 @@ public class GuardoSphereHUD extends AHUD implements GuardoSphereTeamWidget.Call
         stage.addActor(detailWidget);
         stage.addActor(guardoSphereChoiceWidget);
 
+        toggleGuardianStatView = new TextButton("?", skin, "button-gs-default");
+        toggleGuardianStatView.setSize(40,40);
+        toggleGuardianStatView.setPosition(Constant.WIDTH-8,8,Align.bottomRight);
+
+        stage.addActor(toggleGuardianStatView);
     }
 
     @Override

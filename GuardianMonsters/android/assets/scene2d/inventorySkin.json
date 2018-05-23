@@ -10,7 +10,7 @@
   "com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle": {
     "button-gs":                { "down": "teamCircleGuardoSphere-down",          "up": "teamCircleGuardoSphere-up",         "checked": "teamCircleGuardoSphere-down",         "pressedOffsetY": -1, "checkedOffsetY": -1},
     "button-gs-selected":       { "down": "teamCircleGuardoSphereSelected-down",  "up": "teamCircleGuardoSphereSelected-up", "checked": "teamCircleGuardoSphereSelected-down", "pressedOffsetY": -1, "checkedOffsetY": -1},
-    "button-gs-empty":          { "down": "teamCircleGuardoSphere-empty-down",    "up": "teamCircleGuardoSphere-empty-up",   "checked": "teamCircleGuardoSphere-empty-down",   "pressedOffsetY": -1, "checkedOffsetY": -1},
+    "button-gs-empty":          { "down": "teamCircleGuardoSphere-empty2-down",    "up": "teamCircleGuardoSphere-empty2-up",   "checked": "teamCircleGuardoSphere-empty2-down",   "pressedOffsetY": -1, "checkedOffsetY": -1},
 
     "b-toolbar-exit":           { "down": "toolBarButton-exit-down",         "up": "toolBarButton-exit-up"},
     "b-toolbar-encyclo":        { "down": "toolBarButton-encyclo-down",      "up": "toolBarButton-encyclo-up",              "checked": "toolBarButton-encyclo-down"},
@@ -58,6 +58,7 @@
 
 
   "com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle": {
+    "button-gs-default":        { "font": "font16w", "down": "guardosphere-frame-down",              "up": "guardosphere-frame", "checked": "guardosphere-frame-down",   "pressedOffsetY": -1, "checkedOffsetY": -1},
     "default":            {"font": "font16",  "down": "label-bg-sandstone-down", "up": "label-bg-sandstone", "pressedOffsetY": -1},
     "button-sandstone":   {"font": "font16",  "down": "label-bg-sandstone-down", "up": "label-bg-sandstone", "pressedOffsetY": -1},
     "default-toggleable": {"font": "font16",  "down": "label-bg-sandstone-down", "up": "label-bg-sandstone", "checked": "label-bg-sandstone-down", "pressedOffsetY": -1, "checkedOffsetY": -1},

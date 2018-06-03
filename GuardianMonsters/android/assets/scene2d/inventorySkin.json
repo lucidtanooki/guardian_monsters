@@ -72,19 +72,20 @@
   },
 
   "com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle": {
-    "default":    {"font": "font16"},
-    "white":      {"font": "font16w"},
-    "green":      {"font": "font16g"},
-    "red":        {"font": "font16r"},
-    "burgund":    {"font": "font16w", "background": "label-bg-burgund"},
-    "paper":      {"font": "font16",  "background": "label-bg-paper"},
-    "paper-dark-area":      {"font": "font16",  "background": "darker-paper-area"},
-    "paper-border":{"font": "font16",  "background": "paper-border"},
-    "list-item":  {"font": "font16", "background": "label-bg-sandstone"},
+    "default":        {"font": "font16"},
+    "white":          {"font": "font16w"},
+    "green":          {"font": "font16g"},
+    "red":            {"font": "font16r"},
+    "burgund":        {"font": "font16w", "background": "label-bg-burgund"},
+    "paper":          {"font": "font16",  "background": "label-bg-paper"},
+    "paper-dark-area":{"font": "font16",  "background": "darker-paper-area"},
+    "paper-border":   {"font": "font16",  "background": "paper-border"},
+    "list-item":      {"font": "font16",  "background": "label-bg-sandstone"},
+    "sphere":         {"font": "font16w", "background": "guardosphere-frame"},
 
     "elem-earth":       {"font": "font16w", "background": "button-element-earth"},
     "elem-water":       {"font": "font16w", "background": "button-element-water"},
-    "elem-fire":       {"font": "font16w", "background": "button-element-fire"},
+    "elem-fire":        {"font": "font16w", "background": "button-element-fire"},
     "elem-air":         {"font": "font16",  "background": "button-element-air"},
     "elem-lightning":   {"font": "font16",  "background": "button-element-lightning"},
     "elem-arthropoda":  {"font": "font16",  "background": "button-element-arthropoda"},
@@ -94,7 +95,7 @@
     "elem-spirit":      {"font": "font16",  "background": "button-element-spirit"},
     "elem-demon":       {"font": "font16w", "background": "button-element-demon"},
     "elem-lindworm":    {"font": "font16w", "background": "button-element-lindworm"},
-    "elem-none":    {"font": "font16w", "background": "button-element-none"}
+    "elem-none":        {"font": "font16w", "background": "button-element-none"}
   },
 
   "com.badlogic.gdx.scenes.scene2d.ui.List$ListStyle": {

@@ -13,6 +13,7 @@ import de.limbusdev.guardianmonsters.guardians.monsters.GuardoSphere;
 import de.limbusdev.guardianmonsters.guardians.monsters.Team;
 import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.ui.AHUD;
+import de.limbusdev.guardianmonsters.ui.widgets.GuardianStatusWidget;
 import de.limbusdev.guardianmonsters.ui.widgets.ParticleEffectActor;
 
 /**
@@ -30,6 +31,7 @@ public class GuardoSphereHUD extends AHUD implements GuardoSphereTeamWidget.Call
     private ButtonGroup guardianButtonGroup;
     private GuardoSphereChoiceWidget guardoSphereChoiceWidget;
     private TextButton toggleGuardianStatView;
+    private GuardoSphereStatWidget guardianStatusWidget;
 
     public GuardoSphereHUD(Skin skin, Team team, GuardoSphere guardoSphere) {
 
@@ -82,6 +84,10 @@ public class GuardoSphereHUD extends AHUD implements GuardoSphereTeamWidget.Call
         toggleGuardianStatView.setPosition(Constant.WIDTH-8,8,Align.bottomRight);
 
         stage.addActor(toggleGuardianStatView);
+
+        guardianStatusWidget = new GuardoSphereStatWidget(skin);
+        guardianStatusWidget.setPosition(Constant.WIDTH-8, Constant.RES_Y-8, Align.topRight);
+        stage.addActor(guardianStatusWidget);
     }
 
     @Override

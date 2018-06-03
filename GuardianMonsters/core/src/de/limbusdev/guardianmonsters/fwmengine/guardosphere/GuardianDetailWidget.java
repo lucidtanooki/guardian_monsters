@@ -27,6 +27,7 @@ public class GuardianDetailWidget extends Group {
     private Label level;
 
     public GuardianDetailWidget(Skin skin) {
+
         setSize(WIDTH,HEIGHT);
         Image background = new Image(skin.getDrawable("guardosphere-frame"));
         background.setSize(WIDTH,HEIGHT);

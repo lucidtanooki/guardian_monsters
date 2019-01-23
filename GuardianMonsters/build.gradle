@@ -4,12 +4,14 @@ buildscript {
     repositories {
         mavenLocal()
         mavenCentral()
+        maven { url "https://plugins.gradle.org/m2/" }
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+        google()
         jcenter()
         google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.3'
+        classpath 'com.android.tools.build:gradle:3.3.0'
         classpath 'org.junit.platform:junit-platform-gradle-plugin:1.2.0'
 
     }
@@ -22,8 +24,8 @@ allprojects {
     version = '1.0'
     ext {
         appName = "Guardian Monsters"
-        gdxVersion = '1.9.8'
-        roboVMVersion = '2.3.1'
+        gdxVersion = '1.9.9'
+        roboVMVersion = '2.3.5'
         box2DLightsVersion = '1.4'
         ashleyVersion = '1.7.0'
         aiVersion = '1.8.0'
@@ -35,6 +37,7 @@ allprojects {
     repositories {
         mavenLocal()
         mavenCentral()
+        google()
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
         maven { url "https://oss.sonatype.org/content/repositories/releases/" }
     }
@@ -45,17 +48,17 @@ project(":desktop") {
 
 
     dependencies {
-        compile project(":core")
-        compile "com.badlogicgames.gdx:gdx-backend-lwjgl:$gdxVersion"
-        compile "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
-        compile "com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-desktop"
-        compile "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-desktop"
-        compile "com.badlogicgames.gdx:gdx-tools:$gdxVersion"
-        compile "com.badlogicgames.gdx:gdx-controllers-desktop:$gdxVersion"
-        compile "com.badlogicgames.gdx:gdx-controllers-platform:$gdxVersion:natives-desktop"
-        compile "de.tomgrill.gdxdialogs:gdx-dialogs-desktop:1.2.1"
-        compile "net.dermetfan.libgdx-utils:libgdx-utils:$gdxUtilsVersion"
-        compile "net.dermetfan.libgdx-utils:libgdx-utils-box2d:$gdxUtilsVersion" // Box2D module (optional)
+        implementation project(":core")
+        implementation "com.badlogicgames.gdx:gdx-backend-lwjgl:$gdxVersion"
+        implementation "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
+        implementation "com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-desktop"
+        implementation "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-desktop"
+        implementation "com.badlogicgames.gdx:gdx-tools:$gdxVersion"
+        implementation "com.badlogicgames.gdx:gdx-controllers-desktop:$gdxVersion"
+        implementation "com.badlogicgames.gdx:gdx-controllers-platform:$gdxVersion:natives-desktop"
+        implementation "de.tomgrill.gdxdialogs:gdx-dialogs-desktop:1.2.1"
+        implementation "net.dermetfan.libgdx-utils:libgdx-utils:$gdxUtilsVersion"
+        implementation "net.dermetfan.libgdx-utils:libgdx-utils-box2d:$gdxUtilsVersion" // Box2D module (optional)
     }
 }
 
@@ -65,32 +68,32 @@ project(":android") {
     configurations { natives }
 
     dependencies {
-        compile project(":core")
-        compile "com.badlogicgames.gdx:gdx-backend-android:$gdxVersion"
+        implementation project(":core")
+        implementation "com.badlogicgames.gdx:gdx-backend-android:$gdxVersion"
         natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-armeabi"
         natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-armeabi-v7a"
         natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-arm64-v8a"
         natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-x86"
         natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-x86_64"
-        compile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
+        implementation "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
         natives "com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-armeabi"
         natives "com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-armeabi-v7a"
         natives "com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-arm64-v8a"
         natives "com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-x86"
         natives "com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-x86_64"
-        compile "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
+        implementation "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
         natives "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-armeabi"
         natives "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-armeabi-v7a"
         natives "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-arm64-v8a"
         natives "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-x86"
         natives "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-x86_64"
-        compile "com.badlogicgames.gdx:gdx-controllers:$gdxVersion"
-        compile "com.badlogicgames.gdx:gdx-controllers-android:$gdxVersion"
-        compile "com.badlogicgames.box2dlights:box2dlights:$box2DLightsVersion"
-        compile "com.badlogicgames.ashley:ashley:$ashleyVersion"
-        compile "de.tomgrill.gdxdialogs:gdx-dialogs-android:1.2.1"
-        compile "net.dermetfan.libgdx-utils:libgdx-utils:$gdxUtilsVersion"
-        compile "net.dermetfan.libgdx-utils:libgdx-utils-box2d:$gdxUtilsVersion" // Box2D module (optional)
+        implementation "com.badlogicgames.gdx:gdx-controllers:$gdxVersion"
+        implementation "com.badlogicgames.gdx:gdx-controllers-android:$gdxVersion"
+        implementation "com.badlogicgames.box2dlights:box2dlights:$box2DLightsVersion"
+        implementation "com.badlogicgames.ashley:ashley:$ashleyVersion"
+        implementation "de.tomgrill.gdxdialogs:gdx-dialogs-android:1.2.1"
+        implementation "net.dermetfan.libgdx-utils:libgdx-utils:$gdxUtilsVersion"
+        implementation "net.dermetfan.libgdx-utils:libgdx-utils-box2d:$gdxUtilsVersion" // Box2D module (optional)
     }
 }
 
@@ -98,24 +101,30 @@ project(":core") {
     apply plugin: "java"
 
     dependencies {
-        compile project(":scene2d")
-        compile project(":services")
-        compile project(":enums")
-        compile project(":battle")
-        compile project(":guardians")
-        compile project(":ui")
-        compile project(":inventory")
-        compile "com.badlogicgames.gdx:gdx:$gdxVersion"
-        compile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
-        compile "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
-        compile "com.badlogicgames.gdx:gdx-controllers:$gdxVersion"
-        compile "com.badlogicgames.box2dlights:box2dlights:$box2DLightsVersion"
-        compile "com.badlogicgames.ashley:ashley:$ashleyVersion"
-        compile "com.underwaterapps.overlap2druntime:overlap2d-runtime-libgdx:0.1.0"
-        compile "de.tomgrill.gdxdialogs:gdx-dialogs-core:1.2.1"
-        compile 'com.esotericsoftware:kryo:4.0.0'
-        compile "net.dermetfan.libgdx-utils:libgdx-utils:$gdxUtilsVersion"
-        compile "net.dermetfan.libgdx-utils:libgdx-utils-box2d:$gdxUtilsVersion" // Box2D module (optional)
+        implementation project(":scene2d")
+        implementation project(":services")
+        implementation project(":enums")
+        implementation project(":battle")
+        implementation project(":guardians")
+        implementation project(":ui")
+        implementation project(":inventory")
+        implementation project(":assets")
+        implementation project(":media")
+        implementation project(":utils")
+        implementation "com.badlogicgames.gdx:gdx:$gdxVersion"
+        implementation "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
+        implementation "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
+        implementation "com.badlogicgames.gdx:gdx-controllers:$gdxVersion"
+        implementation "com.badlogicgames.box2dlights:box2dlights:$box2DLightsVersion"
+        implementation "com.badlogicgames.ashley:ashley:$ashleyVersion"
+        implementation "com.underwaterapps.overlap2druntime:overlap2d-runtime-libgdx:0.1.0"
+        implementation "net.dermetfan.libgdx-utils:libgdx-utils:0.13.4"
+        implementation "net.dermetfan.libgdx-utils:libgdx-utils-box2d:0.13.4"
+        implementation "de.tomgrill.gdxdialogs:gdx-dialogs-core:1.2.1"
+        implementation "com.github.czyzby:gdx-lml:1.9.1.9.6"
+        implementation 'com.esotericsoftware:kryo:4.0.0'
+        implementation "net.dermetfan.libgdx-utils:libgdx-utils:$gdxUtilsVersion"
+        implementation "net.dermetfan.libgdx-utils:libgdx-utils-box2d:$gdxUtilsVersion" // Box2D module (optional)
         compile "com.github.czyzby:gdx-lml:$lmlVersion"
         compile "com.github.czyzby:gdx-lml-vis:$lmlVersion"
     }
@@ -125,9 +134,9 @@ project(":guardians") {
     apply plugin: "java"
 
     dependencies {
-        compile project(":utils")
-        compile "com.badlogicgames.gdx:gdx:$gdxVersion"
-        compile "com.badlogicgames.ashley:ashley:$ashleyVersion"
+        implementation project(":utils")
+        implementation "com.badlogicgames.gdx:gdx:$gdxVersion"
+        implementation "com.badlogicgames.ashley:ashley:$ashleyVersion"
         testCompile "junit:junit:+"
     }
 }
@@ -137,16 +146,19 @@ project(":ui") {
 
 
     dependencies {
-        compile project(":scene2d")
-        compile project(":services")
-        compile project(":guardians")
-        compile "com.badlogicgames.gdx:gdx:$gdxVersion"
-        compile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
-        compile "com.badlogicgames.box2dlights:box2dlights:$box2DLightsVersion"
-        compile "com.badlogicgames.ashley:ashley:$ashleyVersion"
-        compile "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
-        compile "com.badlogicgames.gdx:gdx-controllers:$gdxVersion"
-        compile 'com.esotericsoftware:kryo:4.0.0'
+        implementation project(":scene2d")
+        implementation project(":services")
+        implementation project(":guardians")
+        implementation project(":assets")
+        implementation project(":utils")
+        implementation project(":media")
+        implementation "com.badlogicgames.gdx:gdx:$gdxVersion"
+        implementation "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
+        implementation "com.badlogicgames.box2dlights:box2dlights:$box2DLightsVersion"
+        implementation "com.badlogicgames.ashley:ashley:$ashleyVersion"
+        implementation "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
+        implementation "com.badlogicgames.gdx:gdx-controllers:$gdxVersion"
+        implementation 'com.esotericsoftware:kryo:4.0.0'
         compile "com.github.czyzby:gdx-lml:$lmlVersion"
         compile "com.github.czyzby:gdx-lml-vis:$lmlVersion"
     }
@@ -157,17 +169,18 @@ project(":services") {
 
 
     dependencies {
-        compile project(":scene2d")
-        compile project(":enums")
-        compile project(":assets")
-        compile project(":media")
-        compile "com.badlogicgames.gdx:gdx:$gdxVersion"
-        compile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
-        compile "com.badlogicgames.box2dlights:box2dlights:$box2DLightsVersion"
-        compile "com.badlogicgames.ashley:ashley:$ashleyVersion"
-        compile "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
-        compile "com.badlogicgames.gdx:gdx-controllers:$gdxVersion"
-        compile 'com.esotericsoftware:kryo:4.0.0'
+        implementation project (":guardians")
+        implementation project(":scene2d")
+        implementation project(":enums")
+        implementation project(":assets")
+        implementation project(":media")
+        implementation "com.badlogicgames.gdx:gdx:$gdxVersion"
+        implementation "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
+        implementation "com.badlogicgames.box2dlights:box2dlights:$box2DLightsVersion"
+        implementation "com.badlogicgames.ashley:ashley:$ashleyVersion"
+        implementation "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
+        implementation "com.badlogicgames.gdx:gdx-controllers:$gdxVersion"
+        implementation 'com.esotericsoftware:kryo:4.0.0'
     }
 }
 
@@ -175,21 +188,22 @@ project(":battle") {
     apply plugin: "java"
 
     dependencies {
-        compile project(":scene2d")
-        compile project(":enums")
-        compile project(":assets")
-        compile project(":media")
-        compile project(":guardians")
-        compile project(":services")
-        compile project(":ui")
-        compile project(":inventory")
-        compile "com.badlogicgames.gdx:gdx:$gdxVersion"
-        compile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
-        compile "com.badlogicgames.box2dlights:box2dlights:$box2DLightsVersion"
-        compile "com.badlogicgames.ashley:ashley:$ashleyVersion"
-        compile "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
-        compile "com.badlogicgames.gdx:gdx-controllers:$gdxVersion"
-        compile 'com.esotericsoftware:kryo:4.0.0'
+        implementation project(":scene2d")
+        implementation project(":enums")
+        implementation project(":assets")
+        implementation project(":media")
+        implementation project(":guardians")
+        implementation project(":services")
+        implementation project(":ui")
+        implementation project(":utils")
+        implementation project(":inventory")
+        implementation "com.badlogicgames.gdx:gdx:$gdxVersion"
+        implementation "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
+        implementation "com.badlogicgames.box2dlights:box2dlights:$box2DLightsVersion"
+        implementation "com.badlogicgames.ashley:ashley:$ashleyVersion"
+        implementation "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
+        implementation "com.badlogicgames.gdx:gdx-controllers:$gdxVersion"
+        implementation 'com.esotericsoftware:kryo:4.0.0'
         testCompile "junit:junit:+"
     }
 }
@@ -198,19 +212,20 @@ project(":inventory") {
     apply plugin: "java"
 
     dependencies {
-        compile project(":scene2d")
-        compile project(":enums")
-        compile project(":assets")
-        compile project(":media")
-        compile project(":guardians")
-        compile project(":services")
-        compile project(":ui")
-        compile "com.badlogicgames.gdx:gdx:$gdxVersion"
-        compile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
-        compile "com.badlogicgames.box2dlights:box2dlights:$box2DLightsVersion"
-        compile "com.badlogicgames.ashley:ashley:$ashleyVersion"
-        compile "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
-        compile "com.badlogicgames.gdx:gdx-controllers:$gdxVersion"
+        implementation project(":scene2d")
+        implementation project(":enums")
+        implementation project(":assets")
+        implementation project(":media")
+        implementation project(":guardians")
+        implementation project(":services")
+        implementation project(":ui")
+        implementation project(":utils")
+        implementation "com.badlogicgames.gdx:gdx:$gdxVersion"
+        implementation "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
+        implementation "com.badlogicgames.box2dlights:box2dlights:$box2DLightsVersion"
+        implementation "com.badlogicgames.ashley:ashley:$ashleyVersion"
+        implementation "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
+        implementation "com.badlogicgames.gdx:gdx-controllers:$gdxVersion"
         compile "com.github.czyzby:gdx-lml:$lmlVersion"
         compile "com.github.czyzby:gdx-lml-vis:$lmlVersion"
     }
@@ -231,24 +246,23 @@ project(":scene2d") {
     apply plugin: "java"
 
     dependencies {
-        compile "com.badlogicgames.gdx:gdx:$gdxVersion"
-        compile "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
+        implementation "com.badlogicgames.gdx:gdx:$gdxVersion"
+        implementation "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
     }
 }
-
 
 
 project(":media") {
     apply plugin: "java"
 
     dependencies {
-        compile project(":enums")
-        compile project(":scene2d")
-        compile project(":assets")
-        compile "com.badlogicgames.gdx:gdx:$gdxVersion"
-        compile "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
-        compile "net.dermetfan.libgdx-utils:libgdx-utils:$gdxUtilsVersion"
-        compile "net.dermetfan.libgdx-utils:libgdx-utils-box2d:$gdxUtilsVersion" // Box2D module (optional)
+        implementation project(":enums")
+        implementation project(":scene2d")
+        implementation project(":assets")
+        implementation "com.badlogicgames.gdx:gdx:$gdxVersion"
+        implementation "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
+        implementation "net.dermetfan.libgdx-utils:libgdx-utils:$gdxUtilsVersion"
+        implementation "net.dermetfan.libgdx-utils:libgdx-utils-box2d:$gdxUtilsVersion" // Box2D module (optional)
     }
 }
 
@@ -256,11 +270,11 @@ project(":assets") {
     apply plugin: "java"
 
     dependencies {
-        compile project(":enums")
-        compile project(":guardians")
-        compile "com.badlogicgames.gdx:gdx:$gdxVersion"
-        compile "net.dermetfan.libgdx-utils:libgdx-utils:$gdxUtilsVersion"
-        compile "net.dermetfan.libgdx-utils:libgdx-utils-box2d:$gdxUtilsVersion" // Box2D module (optional)
+        implementation project(":enums")
+        implementation project(":guardians")
+        implementation "com.badlogicgames.gdx:gdx:$gdxVersion"
+        implementation "net.dermetfan.libgdx-utils:libgdx-utils:$gdxUtilsVersion"
+        implementation "net.dermetfan.libgdx-utils:libgdx-utils-box2d:$gdxUtilsVersion" // Box2D module (optional)
     }
 }
 
@@ -268,7 +282,7 @@ project(":utils") {
     apply plugin: "java"
 
     dependencies {
-        compile "com.badlogicgames.gdx:gdx:$gdxVersion"
+        implementation "com.badlogicgames.gdx:gdx:$gdxVersion"
     }
 }
 

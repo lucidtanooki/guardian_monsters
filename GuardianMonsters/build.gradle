@@ -32,6 +32,8 @@ allprojects {
         gdxUtilsVersion = '0.13.4'
         autumnVersion = '1.9'
         lmlVersion = '1.9.1.9.6'
+        gdxDialogsVersion = '1.2.1'
+        kryoVersion = '4.0.0'
     }
 
     repositories {
@@ -56,7 +58,7 @@ project(":desktop") {
         implementation "com.badlogicgames.gdx:gdx-tools:$gdxVersion"
         implementation "com.badlogicgames.gdx:gdx-controllers-desktop:$gdxVersion"
         implementation "com.badlogicgames.gdx:gdx-controllers-platform:$gdxVersion:natives-desktop"
-        implementation "de.tomgrill.gdxdialogs:gdx-dialogs-desktop:1.2.1"
+        implementation "de.tomgrill.gdxdialogs:gdx-dialogs-desktop:$gdxDialogsVersion"
         implementation "net.dermetfan.libgdx-utils:libgdx-utils:$gdxUtilsVersion"
         implementation "net.dermetfan.libgdx-utils:libgdx-utils-box2d:$gdxUtilsVersion" // Box2D module (optional)
     }
@@ -91,7 +93,7 @@ project(":android") {
         implementation "com.badlogicgames.gdx:gdx-controllers-android:$gdxVersion"
         implementation "com.badlogicgames.box2dlights:box2dlights:$box2DLightsVersion"
         implementation "com.badlogicgames.ashley:ashley:$ashleyVersion"
-        implementation "de.tomgrill.gdxdialogs:gdx-dialogs-android:1.2.1"
+        implementation "de.tomgrill.gdxdialogs:gdx-dialogs-android:$gdxDialogsVersion"
         implementation "net.dermetfan.libgdx-utils:libgdx-utils:$gdxUtilsVersion"
         implementation "net.dermetfan.libgdx-utils:libgdx-utils-box2d:$gdxUtilsVersion" // Box2D module (optional)
     }
@@ -118,15 +120,14 @@ project(":core") {
         implementation "com.badlogicgames.box2dlights:box2dlights:$box2DLightsVersion"
         implementation "com.badlogicgames.ashley:ashley:$ashleyVersion"
         implementation "com.underwaterapps.overlap2druntime:overlap2d-runtime-libgdx:0.1.0"
-        implementation "net.dermetfan.libgdx-utils:libgdx-utils:0.13.4"
-        implementation "net.dermetfan.libgdx-utils:libgdx-utils-box2d:0.13.4"
-        implementation "de.tomgrill.gdxdialogs:gdx-dialogs-core:1.2.1"
-        implementation "com.github.czyzby:gdx-lml:1.9.1.9.6"
-        implementation 'com.esotericsoftware:kryo:4.0.0'
+        implementation "net.dermetfan.libgdx-utils:libgdx-utils:$gdxUtilsVersion"
+        implementation "net.dermetfan.libgdx-utils:libgdx-utils-box2d:$gdxUtilsVersion"
+        implementation "de.tomgrill.gdxdialogs:gdx-dialogs-core:$gdxDialogsVersion"
+        implementation "com.esotericsoftware:kryo:$kryoVersion"
         implementation "net.dermetfan.libgdx-utils:libgdx-utils:$gdxUtilsVersion"
         implementation "net.dermetfan.libgdx-utils:libgdx-utils-box2d:$gdxUtilsVersion" // Box2D module (optional)
-        compile "com.github.czyzby:gdx-lml:$lmlVersion"
-        compile "com.github.czyzby:gdx-lml-vis:$lmlVersion"
+        implementation "com.github.czyzby:gdx-lml:$lmlVersion"
+        implementation "com.github.czyzby:gdx-lml-vis:$lmlVersion"
     }
 }
 
@@ -158,9 +159,9 @@ project(":ui") {
         implementation "com.badlogicgames.ashley:ashley:$ashleyVersion"
         implementation "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
         implementation "com.badlogicgames.gdx:gdx-controllers:$gdxVersion"
-        implementation 'com.esotericsoftware:kryo:4.0.0'
-        compile "com.github.czyzby:gdx-lml:$lmlVersion"
-        compile "com.github.czyzby:gdx-lml-vis:$lmlVersion"
+        implementation "com.esotericsoftware:kryo:$kryoVersion"
+        implementation "com.github.czyzby:gdx-lml:$lmlVersion"
+        implementation "com.github.czyzby:gdx-lml-vis:$lmlVersion"
     }
 }
 
@@ -180,7 +181,7 @@ project(":services") {
         implementation "com.badlogicgames.ashley:ashley:$ashleyVersion"
         implementation "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
         implementation "com.badlogicgames.gdx:gdx-controllers:$gdxVersion"
-        implementation 'com.esotericsoftware:kryo:4.0.0'
+        implementation "com.esotericsoftware:kryo:$kryoVersion"
     }
 }
 
@@ -203,7 +204,7 @@ project(":battle") {
         implementation "com.badlogicgames.ashley:ashley:$ashleyVersion"
         implementation "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
         implementation "com.badlogicgames.gdx:gdx-controllers:$gdxVersion"
-        implementation 'com.esotericsoftware:kryo:4.0.0'
+        implementation "com.esotericsoftware:kryo:$kryoVersion"
         testCompile "junit:junit:+"
     }
 }
@@ -226,8 +227,8 @@ project(":inventory") {
         implementation "com.badlogicgames.ashley:ashley:$ashleyVersion"
         implementation "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
         implementation "com.badlogicgames.gdx:gdx-controllers:$gdxVersion"
-        compile "com.github.czyzby:gdx-lml:$lmlVersion"
-        compile "com.github.czyzby:gdx-lml-vis:$lmlVersion"
+        implementation "com.github.czyzby:gdx-lml:$lmlVersion"
+        implementation "com.github.czyzby:gdx-lml-vis:$lmlVersion"
     }
 }
 

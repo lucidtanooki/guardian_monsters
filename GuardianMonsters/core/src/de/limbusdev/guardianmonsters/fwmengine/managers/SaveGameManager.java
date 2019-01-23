@@ -21,7 +21,6 @@ import com.esotericsoftware.kryo.io.Output;
 import java.util.Iterator;
 
 import de.limbusdev.guardianmonsters.Constant;
-import de.limbusdev.guardianmonsters.guardians.monsters.GuardoSphere;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Components;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PositionComponent;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.SaveGameComponent;
@@ -31,6 +30,7 @@ import de.limbusdev.guardianmonsters.guardians.GuardiansServiceLocator;
 import de.limbusdev.guardianmonsters.guardians.items.IItemService;
 import de.limbusdev.guardianmonsters.guardians.items.Inventory;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardianFactory;
+import de.limbusdev.guardianmonsters.guardians.monsters.GuardoSphere;
 import de.limbusdev.guardianmonsters.model.gamestate.GameState;
 import de.limbusdev.guardianmonsters.model.gamestate.SerializableGameState;
 
@@ -71,8 +71,8 @@ public class SaveGameManager extends EntitySystem
         gameState.map = this.gameArea.areaID;
         gameState.team.putAll(Components.team.get(savableEntities.first()).team);
         gameState.guardoSphere.putAll(Components.guardoSphere.get(savableEntities.first()).guardoSphere);
-        gameState.gridx = Components.position.get(savableEntities.first()).onGrid.x;
-        gameState.gridy = Components.position.get(savableEntities.first()).onGrid.y;
+        gameState.gridx = Components.position.get(savableEntities.first()).onGrid.getX();
+        gameState.gridy = Components.position.get(savableEntities.first()).onGrid.getY();
     }
 
     public static GameState getCurrentGameState()
@@ -93,8 +93,8 @@ public class SaveGameManager extends EntitySystem
         {
             PositionComponent position = Components.getPositionComponent(entity);
             SaveGameComponent saveGame = Components.saveGame.get(entity);
-            saveGame.gameState.gridx = position.onGrid.x;
-            saveGame.gameState.gridy = position.onGrid.y;
+            saveGame.gameState.gridx = position.onGrid.getX();
+            saveGame.gameState.gridy = position.onGrid.getY();
         }
     }
 

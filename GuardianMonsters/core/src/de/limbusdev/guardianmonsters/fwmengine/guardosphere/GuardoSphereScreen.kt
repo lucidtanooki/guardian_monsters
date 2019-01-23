@@ -1,9 +1,9 @@
-package de.limbusdev.guardianmonsters.fwmengine.guardosphere;
+package de.limbusdev.guardianmonsters.fwmengine.guardosphere
 
-import de.limbusdev.guardianmonsters.guardians.monsters.GuardoSphere;
-import de.limbusdev.guardianmonsters.guardians.monsters.Team;
-import de.limbusdev.guardianmonsters.services.Services;
-import de.limbusdev.guardianmonsters.ui.AScreen;
+import de.limbusdev.guardianmonsters.guardians.monsters.GuardoSphere
+import de.limbusdev.guardianmonsters.guardians.monsters.Team
+import de.limbusdev.guardianmonsters.services.Services
+import de.limbusdev.guardianmonsters.ui.AScreen
 
 /**
  * GuardoSphereScreen
@@ -19,10 +19,5 @@ import de.limbusdev.guardianmonsters.ui.AScreen;
  * @author Georg Eckert 2017
  */
 
-public class GuardoSphereScreen extends AScreen {
-
-    public GuardoSphereScreen(Team team, GuardoSphere guardoSphere) {
-
-        super(new GuardoSphereHUD(Services.getUI().getInventorySkin(), team, guardoSphere));
-    }
-}
+class GuardoSphereScreen(team: Team, guardoSphere: GuardoSphere)
+    : AScreen(GuardoSphereHUD(Services.getUI().inventorySkin, team, guardoSphere))

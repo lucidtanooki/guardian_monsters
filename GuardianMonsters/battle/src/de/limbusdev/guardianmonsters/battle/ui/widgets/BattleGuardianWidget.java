@@ -20,13 +20,12 @@ import java.util.Comparator;
 import java.util.Observable;
 import java.util.Observer;
 
+import de.limbusdev.guardianmonsters.guardians.Constant;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics;
 import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.ui.widgets.Callback;
 
-import static de.limbusdev.guardianmonsters.guardians.Constant.LEFT;
-import static de.limbusdev.guardianmonsters.guardians.Constant.RIGHT;
 import static de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics.StatusEffect.HEALTHY;
 
 /**
@@ -63,7 +62,7 @@ public class BattleGuardianWidget extends BattleWidget implements Observer
     {
         TextureRegion monReg;
         monReg = Services.getMedia().getMonsterSprite(index, metaForm);
-        if(side == LEFT)
+        if(side == Constant.LEFT)
             if(!monReg.isFlipX())
                 monReg.flip(true, false);
         drawable = new TextureRegionDrawable(monReg);
@@ -110,7 +109,7 @@ public class BattleGuardianWidget extends BattleWidget implements Observer
             Actions.fadeOut(1f),
             Actions.run(() -> {
                 TextureRegion tombStoneDrawable = Services.getUI().getBattleSkin().getRegion("tomb-stone");
-                if (side == RIGHT) {
+                if (side == Constant.RIGHT) {
                     tombStoneDrawable.flip(true, false);
                 }
                 guardianImage.setDrawable(new TextureRegionDrawable(tombStoneDrawable));
@@ -154,13 +153,13 @@ public class BattleGuardianWidget extends BattleWidget implements Observer
 
     public void die(boolean side, Callback onDieingComplete)
     {
-        if(side == LEFT) {
+        if(side == Constant.LEFT) {
             guardianImage.addAction(Actions.sequence(
                 Actions.alpha(0f, 2f),
                 Actions.visible(false),
                 Actions.run(() -> {
                     TextureRegion tombStoneDrawable = Services.getUI().getBattleSkin().getRegion("tomb-stone");
-                    if (side == RIGHT) {
+                    if (side == Constant.RIGHT) {
                         tombStoneDrawable.flip(true, false);
                     }
                     guardianImage.setDrawable(new TextureRegionDrawable(tombStoneDrawable));

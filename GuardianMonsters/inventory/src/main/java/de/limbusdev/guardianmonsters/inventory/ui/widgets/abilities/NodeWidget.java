@@ -57,7 +57,7 @@ public class NodeWidget extends ImageButton implements Listener<Node> {
 
     private void playActivationAnimation() {
         if(offset != null) {
-            activationAnimation.setPosition(-32 - offset.x, -32 - offset.y, Align.bottomLeft);
+            activationAnimation.setPosition(-32 - offset.getX(), -32 - offset.getY(), Align.bottomLeft);
             this.addActor(activationAnimation);
         }
     }
@@ -73,12 +73,12 @@ public class NodeWidget extends ImageButton implements Listener<Node> {
 
     @Override
     public void setPosition(float x, float y, int alignment) {
-        super.setPosition(x+offset.x, y+offset.y, alignment);
+        super.setPosition(x+ offset.getX(), y+ offset.getY(), alignment);
     }
 
     @Override
     public void setPosition(float x, float y) {
-        super.setPosition(x+offset.x, y+offset.y);
+        super.setPosition(x+ offset.getX(), y+ offset.getY());
     }
 
     public Node getNode() {

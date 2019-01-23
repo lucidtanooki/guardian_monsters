@@ -6,18 +6,13 @@ import com.badlogic.gdx.utils.ArrayMap;
 
 import java.util.Iterator;
 
+import de.limbusdev.guardianmonsters.guardians.Constant;
 import de.limbusdev.guardianmonsters.guardians.GuardiansServiceLocator;
 import de.limbusdev.guardianmonsters.guardians.abilities.Ability;
 import de.limbusdev.guardianmonsters.guardians.items.ChakraCrystalItem;
-import de.limbusdev.guardianmonsters.guardians.items.Item;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics;
 import de.limbusdev.guardianmonsters.guardians.monsters.Team;
-
-import static de.limbusdev.guardianmonsters.guardians.Constant.HERO;
-import static de.limbusdev.guardianmonsters.guardians.Constant.LEFT;
-import static de.limbusdev.guardianmonsters.guardians.Constant.OPPONENT;
-import static de.limbusdev.guardianmonsters.guardians.Constant.RIGHT;
 
 /**
  * Correct Usage:
@@ -253,7 +248,7 @@ public class BattleSystem
 
         } else {
 
-            if (queue.peekNextSide() == OPPONENT) {
+            if (queue.peekNextSide() == Constant.OPPONENT) {
                 // It's AI's turn
                 letAItakeTurn();
             } else {
@@ -268,8 +263,8 @@ public class BattleSystem
      */
     private void finishBattle()
     {
-        queue.resetTeamsModifiedStats(LEFT);
-        queue.resetTeamsModifiedStats(RIGHT);
+        queue.resetTeamsModifiedStats(Constant.LEFT);
+        queue.resetTeamsModifiedStats(Constant.RIGHT);
         callbacks.onBattleEnds(!queue.getCombatTeamLeft().isKO());
     }
 
@@ -291,13 +286,13 @@ public class BattleSystem
                 AGuardian m = it.next();
                 if (m.getIndividualStatistics().isKO()) {
 
-                    if (queue.getTeamSideFor(m) == RIGHT) {
+                    if (queue.getTeamSideFor(m) == Constant.RIGHT) {
                         giveEXPtoWinners(m);
                         if(queue.getRight().teamKO()) {
                             it.remove();
                             callbacks.onMonsterKilled(m);
                         } else {
-                            randomlyReplaceDefeatedGuardian(RIGHT, m);
+                            randomlyReplaceDefeatedGuardian(Constant.RIGHT, m);
                         }
                     } else {
                         it.remove();
@@ -332,7 +327,7 @@ public class BattleSystem
      */
     public void letAItakeTurn()
     {
-        if(queue.peekNextSide() == HERO) {
+        if(queue.peekNextSide() == Constant.HERO) {
             throw new IllegalStateException(TAG +
                 " AI can't take turn. The first monster in queue is not in it's team.");
         }

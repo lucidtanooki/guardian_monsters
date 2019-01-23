@@ -51,20 +51,20 @@ public class StatusPentagonWidget extends Group {
 
         points = new float[10];
 
-        points[0] = center.x;
-        points[1] = center.y + pstr;
+        points[0] = center.getX();
+        points[1] = center.getY() + pstr;
 
-        points[2] = center.x + MathUtils.cosDeg(18)*pdef;
-        points[3] = center.y + MathUtils.sinDeg(18)*pdef;
+        points[2] = center.getX() + MathUtils.cosDeg(18)*pdef;
+        points[3] = center.getY() + MathUtils.sinDeg(18)*pdef;
 
-        points[4] = center.x + MathUtils.cosDeg(54)*speed;
-        points[5] = center.y - MathUtils.sinDeg(54)*speed;
+        points[4] = center.getX() + MathUtils.cosDeg(54)*speed;
+        points[5] = center.getY() - MathUtils.sinDeg(54)*speed;
 
-        points[6] = center.x - MathUtils.cosDeg(54)*mstr;
-        points[7] = center.y - MathUtils.sinDeg(54)*mstr;
+        points[6] = center.getX() - MathUtils.cosDeg(54)*mstr;
+        points[7] = center.getY() - MathUtils.sinDeg(54)*mstr;
 
-        points[8] = center.x - MathUtils.cosDeg(18)*mdef;
-        points[9] = center.y + MathUtils.sinDeg(18)*mdef;
+        points[8] = center.getX() - MathUtils.cosDeg(18)*mdef;
+        points[9] = center.getY() + MathUtils.sinDeg(18)*mdef;
 
         initialized = true;
     }
@@ -85,7 +85,7 @@ public class StatusPentagonWidget extends Group {
         shpRend.setColor(color);
         for(int i=0; i<10; i+=2) {
             shpRend.triangle(
-                center.x, center.y,
+                center.getX(), center.getY(),
                 points[i%10], points[(i+1)%10],
                 points[(i+2)%10], points[(i+3)%10]
             );

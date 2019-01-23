@@ -8,6 +8,3 @@ sourceSets.main.java.srcDirs = [ "src/" ]
 sourceSets.main.resources.srcDirs = [ project(":inventory").file("assets") ]
 
 
-eclipse.project {
-    name = appName + "-inventory"
-}

@@ -40,7 +40,7 @@ public class DebuggingSystem extends EntitySystem {
 
         for(Entity e : entities) {
             PositionComponent p = Components.position.get(e);
-            shpr.rect(p.x, p.y, p.width, p.height);
+            shpr.rect(p.getX(), p.getY(), p.getWidth(), p.getHeight());
         }
 
         shpr.end();

@@ -21,8 +21,8 @@ import de.limbusdev.guardianmonsters.guardians.monsters.Team;
  * @author Georg Eckert 2017
  */
 
-public class GuardoSphereTeamWidget extends Group {
-
+public class GuardoSphereTeamWidget extends Group
+{
     private static final int WIDTH = 252;
     private static final int HEIGHT= 40;
 
@@ -33,7 +33,8 @@ public class GuardoSphereTeamWidget extends Group {
     private Array<Button> buttons;
     private Callbacks callbacks;
 
-    public GuardoSphereTeamWidget(Skin skin, Team team, ButtonGroup group) {
+    public GuardoSphereTeamWidget(Skin skin, Team team, ButtonGroup group)
+    {
         this.team = team;
         this.skin = skin;
         this.buttonGroup = group;
@@ -56,15 +57,18 @@ public class GuardoSphereTeamWidget extends Group {
         refresh();
     }
 
-    public void refresh() {
-        for(Button b : buttons) {
+    public void refresh()
+    {
+        for(Button b : buttons)
+        {
             buttonGroup.remove(b);
             b.remove();
         }
         buttons.clear();
         monsterButtons.clear();
 
-        for(final Integer key : team.keys()) {
+        for(final Integer key : team.keys())
+        {
             AGuardian guardian = team.get(key);
             ImageButton monsterButton = new GuardoSphereButton(skin, guardian);
             monsterButtons.addActor(monsterButton);
@@ -85,7 +89,8 @@ public class GuardoSphereTeamWidget extends Group {
         this.callbacks = callbacks;
     }
 
-    public interface Callbacks {
+    public interface Callbacks
+    {
         void onButtonPressed(int teamPosition);
     }
 }

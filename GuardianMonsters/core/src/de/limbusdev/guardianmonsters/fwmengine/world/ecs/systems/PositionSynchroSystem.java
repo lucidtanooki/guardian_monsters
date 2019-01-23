@@ -36,7 +36,7 @@ public class PositionSynchroSystem extends EntitySystem {
             // Synchronize CharacterSprite with PositionComponent
             if(entity.getComponent(CharacterSpriteComponent.class) != null) {
                 CharacterSpriteComponent sprite = Components.characterSprite.get(entity);
-                sprite.sprite.setPosition(position.x, position.y);
+                sprite.sprite.setPosition(position.getX(), position.getY());
             }
         }
     }

@@ -32,8 +32,6 @@ import de.limbusdev.guardianmonsters.ui.Constant;
 import de.limbusdev.guardianmonsters.ui.widgets.Callback;
 import de.limbusdev.utils.geometry.IntVec2;
 
-import static de.limbusdev.guardianmonsters.guardians.Constant.LEFT;
-import static de.limbusdev.guardianmonsters.guardians.Constant.RIGHT;
 
 /**
  * HINT: Don't forget calling the init() method
@@ -111,8 +109,8 @@ public class BattleAnimationWidget extends BattleWidget
         clear();
         zSortedMonsterImgs.clear();
         BattleQueue queue = battleSystem.getQueue();
-        addMonsterAnimationsForTeam(queue.getCombatTeamLeft(),LEFT);
-        addMonsterAnimationsForTeam(queue.getCombatTeamRight(),RIGHT);
+        addMonsterAnimationsForTeam(queue.getCombatTeamLeft(), Constant.LEFT);
+        addMonsterAnimationsForTeam(queue.getCombatTeamRight(), Constant.RIGHT);
     }
 
     private void addMonsterAnimationsForTeam(ArrayMap<Integer,AGuardian> team, boolean side)
@@ -120,7 +118,7 @@ public class BattleAnimationWidget extends BattleWidget
         ArrayMap<Integer,BattleGuardianWidget> imgs;
         ArrayMap<Integer,Boolean> positions;
 
-        if(side == LEFT) {
+        if(side == Constant.LEFT) {
             imgs = monsterImgsLeft;
             positions = leftPositionsOccupied;
         } else /* (side == RIGHT) */ {
@@ -195,7 +193,7 @@ public class BattleAnimationWidget extends BattleWidget
 
         zSortedMonsterImgs.add(monImg);
 
-        monImg.setPosition(position2d.x, position2d.y, align);
+        monImg.setPosition(position2d.getX(), position2d.getY(), align);
     }
 
 
@@ -228,7 +226,7 @@ public class BattleAnimationWidget extends BattleWidget
         attackAnimationRunning = true;
 
         // Get Position of attacking monster
-        if(attSide == LEFT)
+        if(attSide == Constant.LEFT)
             switch(attPos) {
                 case 2:  startPos = ImPos.HERO_TOP;break;
                 case 1:  startPos = ImPos.HERO_BOT;break;
@@ -242,7 +240,7 @@ public class BattleAnimationWidget extends BattleWidget
             }
 
         // Get position of target monster
-        if(defSide == RIGHT) {
+        if(defSide == Constant.RIGHT) {
             switch (defPos) {
                 case 2:
                     endPos = ImPos.OPPO_TOP;
@@ -269,7 +267,7 @@ public class BattleAnimationWidget extends BattleWidget
         }
 
 
-        if(attSide == LEFT) attIm = monsterImgsLeft.get(attPos);
+        if(attSide == Constant.LEFT) attIm = monsterImgsLeft.get(attPos);
         else attIm = monsterImgsRight.get(attPos);
 
         attIm.addAction(getAnimationSequence(ability, startPos, endPos, defPos, attSide, defSide));
@@ -278,7 +276,7 @@ public class BattleAnimationWidget extends BattleWidget
     public void animateAreaAttack(final int attPos, boolean attSide, boolean defSide, final Ability ability)
     {
         BattleGuardianWidget attIm;
-        if(attSide == LEFT) attIm = monsterImgsLeft.get(attPos);
+        if(attSide == Constant.LEFT) attIm = monsterImgsLeft.get(attPos);
         else attIm = monsterImgsRight.get(attPos);
 
         attIm.addAction(getAreaAttackAnimationSequence(ability, attSide, defSide));
@@ -305,10 +303,10 @@ public class BattleAnimationWidget extends BattleWidget
         Action horMovingAttDelay = Actions.delay(1f);
 
         // Moves actor from origin to target
-        Action moveToTargetAction = Actions.moveToAligned(target.x, target.y, Align.bottom, .6f, Interpolation.pow2In);
+        Action moveToTargetAction = Actions.moveToAligned(target.getX(), target.getY(), Align.bottom, .6f, Interpolation.pow2In);
 
         // Moves actor back from target to origin
-        Action moveToOriginAction = Actions.moveToAligned(origin.x, origin.y, Align.bottom, .4f, Interpolation.pow2In);
+        Action moveToOriginAction = Actions.moveToAligned(origin.getX(), origin.getY(), Align.bottom, .4f, Interpolation.pow2In);
 
         // Plays the ability animatiom
         Action attackAnimationAction = Actions.run(() -> animateAttackOfType(ability, origin, target));
@@ -381,7 +379,7 @@ public class BattleAnimationWidget extends BattleWidget
     private void animateAttackImpact(int defPos, boolean side)
     {
         BattleGuardianWidget defIm;
-        if(side == LEFT) defIm = monsterImgsLeft.get(defPos);
+        if(side == Constant.LEFT) defIm = monsterImgsLeft.get(defPos);
         else defIm = monsterImgsRight.get(defPos);
 
         defIm.addAction(Actions.sequence(
@@ -398,7 +396,7 @@ public class BattleAnimationWidget extends BattleWidget
     {
         ArrayMap<Integer, BattleGuardianWidget> monsterImgs;
 
-        if(side == LEFT) monsterImgs = monsterImgsLeft;
+        if(side == Constant.LEFT) monsterImgs = monsterImgsLeft;
         else             monsterImgs = monsterImgsRight;
 
         for(BattleGuardianWidget defImg : monsterImgs.values())
@@ -413,7 +411,7 @@ public class BattleAnimationWidget extends BattleWidget
     public void animateMonsterKO(int pos, boolean side)
     {
         ArrayMap<Integer,BattleGuardianWidget> monImgs;
-        if(side == LEFT) monImgs = monsterImgsLeft;
+        if(side == Constant.LEFT) monImgs = monsterImgsLeft;
         else monImgs = monsterImgsRight;
 
         monImgs.get(pos).die(side, onDieing);
@@ -424,7 +422,7 @@ public class BattleAnimationWidget extends BattleWidget
         Callback onSubstitutionComplete, AGuardian substituted, AGuardian substitute)
     {
         ArrayMap<Integer,BattleGuardianWidget> monImgs;
-        if(side == LEFT) { monImgs = monsterImgsLeft; }
+        if(side == Constant.LEFT) { monImgs = monsterImgsLeft; }
         else             { monImgs = monsterImgsRight; }
 
         BattleGuardianWidget guardianWidget = monImgs.get(pos);
@@ -437,7 +435,7 @@ public class BattleAnimationWidget extends BattleWidget
         Callback onSubstitutionComplete, AGuardian substituted, AGuardian substitute)
     {
         ArrayMap<Integer,BattleGuardianWidget> monImgs;
-        if(side == LEFT) { monImgs = monsterImgsLeft; }
+        if(side == Constant.LEFT) { monImgs = monsterImgsLeft; }
         else             { monImgs = monsterImgsRight; }
 
         BattleGuardianWidget guardianWidget = monImgs.get(pos);
@@ -448,7 +446,7 @@ public class BattleAnimationWidget extends BattleWidget
     public void animateBanning(int pos, boolean side, AGuardian guardianToBeBanned, Callback onBanningTrialComplete)
     {
         ArrayMap<Integer,BattleGuardianWidget> monImgs;
-        if(side == LEFT) { monImgs = monsterImgsLeft; }
+        if(side == Constant.LEFT) { monImgs = monsterImgsLeft; }
         else             { monImgs = monsterImgsRight; }
 
         BattleGuardianWidget guardianWidget = monImgs.get(pos);
@@ -458,7 +456,7 @@ public class BattleAnimationWidget extends BattleWidget
     public void animateBanningFailure(int pos, boolean side, AGuardian guardianToBeBanned, Callback callback)
     {
         ArrayMap<Integer,BattleGuardianWidget> monImgs;
-        if(side == LEFT) { monImgs = monsterImgsLeft; }
+        if(side == Constant.LEFT) { monImgs = monsterImgsLeft; }
         else             { monImgs = monsterImgsRight; }
 
         BattleGuardianWidget guardianWidget = monImgs.get(pos);
@@ -472,13 +470,13 @@ public class BattleAnimationWidget extends BattleWidget
     private void animateAttackOfType(Ability ability, IntVec2 origin, IntVec2 target)
     {
 
-        boolean direction = origin.x > target.x;
+        boolean direction = origin.getX() > target.getX();
 
         Animation anim = Services.getMedia().getAttackAnimation(ability.name);
         SelfRemovingAnimation sra = new SelfRemovingAnimation(anim);
         anim.setFrameDuration(.1f);
         // Ability direction
-        if(direction == LEFT) {
+        if(direction == Constant.LEFT) {
             sra.setSize(128,128);
         } else {
             sra.setSize(-128,128); // flipped animation
@@ -491,17 +489,17 @@ public class BattleAnimationWidget extends BattleWidget
         {
             case MOVING_HOR:
                 anim.setFrameDuration(1f/anim.getKeyFrames().length);
-                sra.setPosition(origin.x, origin.y, Align.bottom);
-                sra.addAction(Actions.moveToAligned(target.x, target.y, Align.bottom, 1f, Interpolation.linear));
+                sra.setPosition(origin.getX(), origin.getY(), Align.bottom);
+                sra.addAction(Actions.moveToAligned(target.getX(), target.getY(), Align.bottom, 1f, Interpolation.linear));
                 break;
             case MOVING_VERT:
                 anim.setFrameDuration(1f/anim.getKeyFrames().length);
-                sra.setPosition(target.x, target.y + 128, Align.bottom);
-                sra.addAction(Actions.moveToAligned(target.x, target.y, Align.bottom, 1f, Interpolation.pow2In));
+                sra.setPosition(target.getX(), target.getY() + 128, Align.bottom);
+                sra.addAction(Actions.moveToAligned(target.getX(), target.getY(), Align.bottom, 1f, Interpolation.pow2In));
                 break;
             case CONTACT:
             default: // CONTACTLESS
-                sra.setPosition(target.x, target.y, Align.bottom);
+                sra.setPosition(target.getX(), target.getY(), Align.bottom);
                 break;
         }
 
@@ -516,7 +514,7 @@ public class BattleAnimationWidget extends BattleWidget
         SelfRemovingAnimation sra = new SelfRemovingAnimation(anim);
         anim.setFrameDuration(.1f);
         // Ability direction
-        if(direction == LEFT) {
+        if(direction == Constant.LEFT) {
             sra.setSize(256,192);
         } else {
             sra.setSize(-256,192); // flipped animation
@@ -527,7 +525,7 @@ public class BattleAnimationWidget extends BattleWidget
 
         IntVec2 target = direction ? (new IntVec2(128,100)) : (new IntVec2(Constant.WIDTH+64,100));
 
-        sra.setPosition(target.x, target.y, Align.bottom);
+        sra.setPosition(target.getX(), target.getY(), Align.bottom);
 
         addActor(sra);
     }
@@ -537,9 +535,9 @@ public class BattleAnimationWidget extends BattleWidget
         private static final IntVec2 HERO_MID = new IntVec2(32+64+64, 100+24);
         private static final IntVec2 HERO_BOT = new IntVec2(32+16+64, 100);
         private static final IntVec2 HERO_TOP = new IntVec2(32+112+64, 100+48);
-        private static final IntVec2 OPPO_MID = new IntVec2(640+32-HERO_MID.x,HERO_MID.y);
-        private static final IntVec2 OPPO_BOT = new IntVec2(640+32-HERO_BOT.x,HERO_BOT.y);
-        private static final IntVec2 OPPO_TOP = new IntVec2(640+32-HERO_TOP.x,HERO_TOP.y);
+        private static final IntVec2 OPPO_MID = new IntVec2(640+32- HERO_MID.getX(), HERO_MID.getY());
+        private static final IntVec2 OPPO_BOT = new IntVec2(640+32- HERO_BOT.getX(), HERO_BOT.getY());
+        private static final IntVec2 OPPO_TOP = new IntVec2(640+32- HERO_TOP.getX(), HERO_TOP.getY());
     }
 
 

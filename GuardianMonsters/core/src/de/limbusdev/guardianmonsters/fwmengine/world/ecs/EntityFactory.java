@@ -62,24 +62,23 @@ public class EntityFactory
         // Input
         hero.add(new InputComponent());
         PositionComponent position = new PositionComponent(
-            startField.x,
-            startField.y,
+            startField.getX(),
+            startField.getY(),
             UnitConverter.tilesToPixels(1),
             UnitConverter.tilesToPixels(1),
             startField.layer);
 
         // Position
         position.onGrid = new IntVec2(
-                position.x/ Constant.TILE_SIZE,
-                position.y/ Constant.TILE_SIZE);
+                position.getX() / Constant.TILE_SIZE,
+                position.getY() / Constant.TILE_SIZE);
         hero.add(position);
 
         // Camera Component
         hero.add(new CameraComponent());
 
         // Collider
-        ColliderComponent collider = new ColliderComponent(position.x, position.y, position
-                .width, position.height);
+        ColliderComponent collider = new ColliderComponent(position.getX(), position.getY(), position.getWidth(), position.getHeight());
         area.addMovingCollider(collider.collider, startField.layer);
         hero.add(collider);
 
@@ -87,8 +86,8 @@ public class EntityFactory
         GameState gameState = SaveGameManager.getCurrentGameState();
         hero.add(new SaveGameComponent(gameState));
         if(restoreSave) {
-            position.x = gameState.gridx*Constant.TILE_SIZE;
-            position.y = gameState.gridy*Constant.TILE_SIZE;
+            position.setX(gameState.gridx * Constant.TILE_SIZE);
+            position.setY(gameState.gridy * Constant.TILE_SIZE);
             position.onGrid = new IntVec2(gameState.gridx, gameState.gridy);
         }
 
@@ -156,8 +155,8 @@ public class EntityFactory
         }
 
         // Use second Constructor
-        return createPerson(new PositionComponent(personInformation.startPosition.x,
-                personInformation.startPosition.y, Constant.TILE_SIZE, Constant
+        return createPerson(new PositionComponent(personInformation.startPosition.getX(),
+                personInformation.startPosition.getY(), Constant.TILE_SIZE, Constant
                 .TILE_SIZE, layer), path, personInformation.moves, personInformation.conversation,
                 personInformation.name,
                 personInformation.male, personInformation.spriteIndex
@@ -187,16 +186,15 @@ public class EntityFactory
 
         // Position
         PositionComponent position = new PositionComponent(
-                startField.x,
-                startField.y,
+            startField.getX(),
+            startField.getY(),
                 UnitConverter.tilesToPixels(1),
                 UnitConverter.tilesToPixels(1),
                 startField.layer);
         person.add(position);
 
         // Collider
-        ColliderComponent collider = new ColliderComponent(position.x, position.y, position
-                .width, position.height);
+        ColliderComponent collider = new ColliderComponent(position.getX(), position.getY(), position.getWidth(), position.getHeight());
         area.addMovingCollider(collider.collider, startField.layer);
         person.add(collider);
 

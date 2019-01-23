@@ -11,11 +11,11 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 
+import de.limbusdev.guardianmonsters.Constant;
 import de.limbusdev.guardianmonsters.assets.paths.AssetPath;
 import de.limbusdev.guardianmonsters.media.IMediaManager;
 import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.utils.geometry.IntVec2;
-import de.limbusdev.guardianmonsters.Constant;
 
 /**
  * @author Georg Eckert 2017
@@ -99,8 +99,8 @@ public class WeatherAnimator {
         }
 
         private IntVec2 setRandomDropPosition(IntVec2 dropPos) {
-            dropPos.x = MathUtils.random(width)* Constant.TILE_SIZE+MathUtils.random(-8,7);
-            dropPos.y = MathUtils.random(height)* Constant.TILE_SIZE+MathUtils.random(-8,7);
+            dropPos.setX(MathUtils.random(width) * Constant.TILE_SIZE + MathUtils.random(-8, 7));
+            dropPos.setY(MathUtils.random(height) * Constant.TILE_SIZE + MathUtils.random(-8, 7));
             return dropPos;
         }
 
@@ -110,7 +110,7 @@ public class WeatherAnimator {
             for(int n=0; n<randomRaindropPosition.size; n++) {
                 TextureRegion r = rainAnimation.getKeyFrame(elapsedTime+randomRaindropOffset.get(n),true);
                 IntVec2 pos = randomRaindropPosition.get(n);
-                batch.draw(r, pos.x, pos.y);
+                batch.draw(r, pos.getX(), pos.getY());
                 if(rainAnimation.getKeyFrameIndex(elapsedTime+randomRaindropOffset.get(n)) == lastFrameIndex) {
                     setRandomDropPosition(pos);
                 }

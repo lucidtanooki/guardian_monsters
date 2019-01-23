@@ -6,12 +6,9 @@ import com.badlogic.gdx.utils.Array;
 import java.util.Iterator;
 import java.util.Observable;
 
+import de.limbusdev.guardianmonsters.guardians.Constant;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.Team;
-
-import static de.limbusdev.guardianmonsters.guardians.Constant.HERO;
-import static de.limbusdev.guardianmonsters.guardians.Constant.LEFT;
-import static de.limbusdev.guardianmonsters.guardians.Constant.OPPONENT;
 
 /**
  * BattleQueue
@@ -107,8 +104,8 @@ public class BattleQueue extends Observable
      */
     public boolean peekNextSide()
     {
-        if(left.isMember(peekNext())) return HERO;
-        else return OPPONENT;
+        if(left.isMember(peekNext())) return Constant.HERO;
+        else return Constant.OPPONENT;
     }
 
     public AGuardian exchangeActive(AGuardian substitute)
@@ -116,7 +113,7 @@ public class BattleQueue extends Observable
         CombatTeam combatTeam;
 
         boolean side = getTeamSideFor(currentRound.peek());
-        if(side == LEFT) {
+        if(side == Constant.LEFT) {
             combatTeam = combatTeamLeft;
         } else {
             combatTeam = combatTeamRight;
@@ -148,7 +145,7 @@ public class BattleQueue extends Observable
         Team team;
 
         boolean side = getTeamSideFor(defeated);
-        if(side == LEFT) {
+        if(side == Constant.LEFT) {
             combatTeam = combatTeamLeft;
             team = left;
         } else {
@@ -236,12 +233,12 @@ public class BattleQueue extends Observable
     }
 
     public boolean getTeamSideFor(AGuardian guardian) {
-        if(left.isMember(guardian)) return HERO;
-        else return OPPONENT;
+        if(left.isMember(guardian)) return Constant.HERO;
+        else return Constant.OPPONENT;
     }
 
     public int getFieldPositionFor(AGuardian guardian) {
-        if(getTeamSideFor(guardian) == HERO) {
+        if(getTeamSideFor(guardian) == Constant.HERO) {
             return combatTeamLeft.getFieldPosition(guardian);
         } else {
             return combatTeamRight.getFieldPosition(guardian);
@@ -257,7 +254,7 @@ public class BattleQueue extends Observable
     {
         Team team;
 
-        if(side == LEFT) {
+        if(side == Constant.LEFT) {
             team = left;
         } else /* side == RIGHT */ {
             team = right;
@@ -273,7 +270,7 @@ public class BattleQueue extends Observable
     {
         CombatTeam team;
 
-        if(side == LEFT) {
+        if(side == Constant.LEFT) {
             team = combatTeamLeft;
         } else /* side == RIGHT */ {
             team = combatTeamRight;

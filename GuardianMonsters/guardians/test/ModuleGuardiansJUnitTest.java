@@ -579,7 +579,7 @@ public class ModuleGuardiansJUnitTest
     @Test
     public void debuggingOnTest()
     {
-        assertTrue(Constant.DEBUGGING_ON);
+        assertTrue(Constant.Companion.getDEBUGGING_ON());
     }
 
     public static void printTestLabel(String name)

@@ -65,11 +65,11 @@ public class MovementSystem extends EntitySystem {
      */
     public void checkWarp() {
         PositionComponent pos = Components.position.get(hero);
-        Rectangle heroArea = new Rectangle(pos.x, pos.y, pos.width, pos.height);
+        Rectangle heroArea = new Rectangle(pos.getX(), pos.getY(), pos.getWidth(), pos.getHeight());
 
         // Check whether hero enters warp area
         for (WarpPoint w : warpPoints.get(pos.layer)) {
-            if (heroArea.contains(w.x, w.y)) {
+            if (heroArea.contains(w.getX(), w.getY())) {
                 System.out.println("Changing to Map " + w.targetID);
                 ecs.changeGameArea(w.targetID, w.targetWarpPointID);
             }
@@ -78,7 +78,7 @@ public class MovementSystem extends EntitySystem {
 
     public void checkHeal() {
         PositionComponent pos = Components.position.get(hero);
-        Rectangle heroArea = new Rectangle(pos.x, pos.y, pos.width, pos.height);
+        Rectangle heroArea = new Rectangle(pos.getX(), pos.getY(), pos.getWidth(), pos.getHeight());
 
         // Check whether hero enters warp area
         for (Rectangle h : healFields.get(pos.layer)) {
@@ -121,39 +121,39 @@ public class MovementSystem extends EntitySystem {
             // Define potential next position according to the input direction
             switch(input.skyDir) {
                 case N:
-                    position.nextX = position.x;
-                    position.nextY = position.y + Constant.TILE_SIZE;
+                    position.nextX = position.getX();
+                    position.nextY = position.getY() + Constant.TILE_SIZE;
                     break;
                 case W:
-                    position.nextX = position.x - Constant.TILE_SIZE;
-                    position.nextY = position.y;
+                    position.nextX = position.getX() - Constant.TILE_SIZE;
+                    position.nextY = position.getY();
                     break;
                 case E:
-                    position.nextX = position.x + Constant.TILE_SIZE;
-                    position.nextY = position.y;
+                    position.nextX = position.getX() + Constant.TILE_SIZE;
+                    position.nextY = position.getY();
                     break;
                 default:
-                    position.nextX = position.x;
-                    position.nextY = position.y - Constant.TILE_SIZE;
+                    position.nextX = position.getX();
+                    position.nextY = position.getY() - Constant.TILE_SIZE;
                     break;
             }
 
             // Check whether movement is possible or blocked by a collider
             IntVec2 nextPos = new IntVec2(0,0);
             for(IntRect r : ecs.gameArea.getColliders().get(position.layer)) {
-                nextPos.x = position.nextX + Constant.TILE_SIZE / 2;
-                nextPos.y = position.nextY + Constant.TILE_SIZE / 2;
+                nextPos.setX(position.nextX + Constant.TILE_SIZE / 2);
+                nextPos.setY(position.nextY + Constant.TILE_SIZE / 2);
                 if (r.contains(nextPos)) return;
             }
             for(IntRect r : ecs.gameArea.getMovingColliders().get(position.layer)) {
-                nextPos.x = position.nextX + Constant.TILE_SIZE / 2;
-                nextPos.y = position.nextY + Constant.TILE_SIZE / 2;
+                nextPos.setX(position.nextX + Constant.TILE_SIZE / 2);
+                nextPos.setY(position.nextY + Constant.TILE_SIZE / 2);
                 if (!collider.equals(r) && r.contains(nextPos)) return;
             }
 
             // Update Collider Position
-            collider.collider.x = position.nextX;
-            collider.collider.y = position.nextY;
+            collider.collider.setX(position.nextX);
+            collider.collider.setY(position.nextY);
             position.lastPixelStep = TimeUtils.millis();    // remember time of this iteration
 
             input.moving = true;        // entity is moving right now
@@ -165,10 +165,11 @@ public class MovementSystem extends EntitySystem {
         if(input.moving && TimeUtils.timeSinceMillis(position.lastPixelStep) > Constant.ONE_STEPDURATION_MS) {
 
             switch(input.skyDir) {
-                case N: position.y += 1;break;
-                case W: position.x -= 1;break;
-                case E: position.x += 1;break;
-                default:position.y -= 1;break;
+                case N: position.setY(position.getY() + 1);break;
+                case W: position.setX(position.getX() - 1);break;
+                case E: position.setX(position.getX() + 1);break;
+                default:
+                    position.setY(position.getY() - 1);break;
             }
             position.lastPixelStep = TimeUtils.millis();
 
@@ -177,11 +178,11 @@ public class MovementSystem extends EntitySystem {
             switch (input.skyDir) {
                 case N:
                 case S:
-                    movementComplete = (position.y == position.nextY);
+                    movementComplete = (position.getY() == position.nextY);
                     break;
                 case W:
                 case E:
-                    movementComplete = (position.x == position.nextX);
+                    movementComplete = (position.getX() == position.nextX);
                 default:
                     break;
             }
@@ -190,13 +191,13 @@ public class MovementSystem extends EntitySystem {
                 input.moving = false;
                 // Update Grid Position of Hero
                 switch(input.skyDir) {
-                    case N: position.onGrid.y+=1;break;
-                    case S: position.onGrid.y-=1;break;
-                    case E: position.onGrid.x+=1;break;
-                    case W: position.onGrid.x-=1;break;
+                    case N: position.onGrid.setY(position.onGrid.getY() + 1);break;
+                    case S: position.onGrid.setY(position.onGrid.getY() - 1);break;
+                    case E: position.onGrid.setX(position.onGrid.getX() + 1);break;
+                    case W: position.onGrid.setX(position.onGrid.getX() - 1);break;
                     default: break;
                 }
-                System.out.println("Position on Grid: ("+position.onGrid.x+"|"+position.onGrid.y+")");
+                System.out.println("Position on Grid: ("+ position.onGrid.getX() +"|"+ position.onGrid.getY() +")");
             }
 
             // Movement completed
@@ -210,8 +211,8 @@ public class MovementSystem extends EntitySystem {
                 // Check whether hero can get attacked by monsters
                 for(MonsterArea ma : ecs.gameArea.getMonsterAreas().get(position.layer)) {
                     if (ma.contains(new IntVec2(
-                            position.x + Constant.TILE_SIZE / 2,
-                            position.y + Constant.TILE_SIZE / 2))
+                            position.getX() + Constant.TILE_SIZE / 2,
+                            position.getY() + Constant.TILE_SIZE / 2))
                             && MathUtils.randomBoolean(ma.teamSizeProbabilities.get(0))) {
 
                         System.out.print("Monster appeared!\n");

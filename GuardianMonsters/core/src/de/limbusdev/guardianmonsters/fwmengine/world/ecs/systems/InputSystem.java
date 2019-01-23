@@ -9,15 +9,15 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+import de.limbusdev.guardianmonsters.Constant;
+import de.limbusdev.guardianmonsters.enums.SkyDirection;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Components;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.HeroComponent;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PositionComponent;
-import de.limbusdev.guardianmonsters.fwmengine.world.ecs.entities.HeroEntity;
-import de.limbusdev.guardianmonsters.enums.SkyDirection;
-import de.limbusdev.utils.geometry.IntVec2;
-import de.limbusdev.guardianmonsters.fwmengine.world.ui.HUD;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.entities.EntityFamilies;
-import de.limbusdev.guardianmonsters.Constant;
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.entities.HeroEntity;
+import de.limbusdev.guardianmonsters.fwmengine.world.ui.HUD;
+import de.limbusdev.utils.geometry.IntVec2;
 
 
 /**
@@ -142,18 +142,18 @@ public class InputSystem extends EntitySystem implements InputProcessor {
      */
     public Entity checkForNearInteractiveObjects(PositionComponent pos, SkyDirection dir) {
         Entity nearEntity=null;
-        IntVec2 checkGridCell = new IntVec2(pos.onGrid.x,pos.onGrid.y);
+        IntVec2 checkGridCell = new IntVec2(pos.onGrid.getX(), pos.onGrid.getY());
 
         switch(dir) {
-            case N: checkGridCell.y+=1;break;
-            case S: checkGridCell.y-=1;break;
-            case E: checkGridCell.x+=1;break;
-            case W: checkGridCell.x-=1;break;
+            case N: checkGridCell.setY(checkGridCell.getY() + 1);break;
+            case S: checkGridCell.setY(checkGridCell.getY() - 1);break;
+            case E: checkGridCell.setX(checkGridCell.getX() + 1);break;
+            case W: checkGridCell.setX(checkGridCell.getX() - 1);break;
             default: break;
         }
 
         if(Constant.DEBUGGING_ON)
-            System.out.println("Grid cell to be checked: ("+checkGridCell.x+"|"+checkGridCell.y+")");
+            System.out.println("Grid cell to be checked: ("+ checkGridCell.getX() +"|"+ checkGridCell.getY() +")");
 
         for(Entity e : this.getEngine().getEntitiesFor(Family.all(PositionComponent.class).get())) {
 
@@ -161,10 +161,10 @@ public class InputSystem extends EntitySystem implements InputProcessor {
                 PositionComponent p = Components.position.get(e);
 
                 if(Constant.DEBUGGING_ON)
-                    System.out.println("Grid Cell of tested Entity: ("+p.onGrid.x+"|"+p.onGrid.y+")");
+                    System.out.println("Grid Cell of tested Entity: ("+ p.onGrid.getX() +"|"+ p.onGrid.getY() +")");
 
                 // Is there an entity?
-                if (p.onGrid.x == checkGridCell.x && p.onGrid.y == checkGridCell.y)
+                if (p.onGrid.getX() == checkGridCell.getX() && p.onGrid.getY() == checkGridCell.getY())
                     nearEntity = e;
             }
         }

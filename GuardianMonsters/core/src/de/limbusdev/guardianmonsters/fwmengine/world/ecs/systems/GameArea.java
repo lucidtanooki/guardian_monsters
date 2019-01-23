@@ -12,18 +12,18 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 
+import de.limbusdev.guardianmonsters.Constant;
 import de.limbusdev.guardianmonsters.assets.paths.AssetPath;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PositionComponent;
-import de.limbusdev.guardianmonsters.fwmengine.world.ui.TmxDayTimeMapLoader;
-import de.limbusdev.utils.geometry.IntRect;
-import de.limbusdev.utils.geometry.IntVec2;
 import de.limbusdev.guardianmonsters.fwmengine.world.model.MapDescriptionInfo;
 import de.limbusdev.guardianmonsters.fwmengine.world.model.MapPersonInformation;
-import de.limbusdev.guardianmonsters.fwmengine.world.model.WarpPoint;
-import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.fwmengine.world.model.MonsterArea;
+import de.limbusdev.guardianmonsters.fwmengine.world.model.WarpPoint;
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.ExtendedTiledMapRenderer;
-import de.limbusdev.guardianmonsters.Constant;
+import de.limbusdev.guardianmonsters.fwmengine.world.ui.TmxDayTimeMapLoader;
+import de.limbusdev.guardianmonsters.services.Services;
+import de.limbusdev.utils.geometry.IntRect;
+import de.limbusdev.utils.geometry.IntVec2;
 
 /**
  * Contains logic and information about one game world area like a forest or a path. One
@@ -81,7 +81,7 @@ public class GameArea {
 
         for (Array<IntRect> a : colliders.values()) {
             for (IntRect r : a) {
-                shape.rect(r.x, r.y, r.width, r.height);
+                shape.rect(r.getX(), r.getY(), r.getWidth(), r.getHeight());
             }
         }
 
@@ -156,8 +156,8 @@ public class GameArea {
             if (mo.getName().equals("startField")) {
                 if (Integer.parseInt(mo.getProperties().get("fieldID", String.class)) == startFieldID) {
                     Rectangle field = ((RectangleMapObject) mo).getRectangle();
-                    startPosition.x = MathUtils.round(field.x);
-                    startPosition.y = MathUtils.round(field.y);
+                    startPosition.setX(MathUtils.round(field.x));
+                    startPosition.setY(MathUtils.round(field.y));
                     startPosition.layer = layerIndex;
                 }
             }
@@ -170,7 +170,7 @@ public class GameArea {
                 ap.add(Float.parseFloat(mo.getProperties().get("probability2", String.class)));
                 ap.add(Float.parseFloat(mo.getProperties().get("probability3", String.class)));
                 battleTriggers.add(new MonsterArea(
-                    mr.x, mr.y, mr.width, mr.height,
+                    mr.getX(), mr.getY(), mr.getWidth(), mr.getHeight(),
                     mo.getProperties().get("monsters", String.class),
                     ap
                 ));

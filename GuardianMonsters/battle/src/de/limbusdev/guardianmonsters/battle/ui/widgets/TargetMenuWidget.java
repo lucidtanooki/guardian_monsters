@@ -16,8 +16,6 @@ import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.ui.Constant;
 import de.limbusdev.guardianmonsters.ui.widgets.Callback;
 
-import static de.limbusdev.guardianmonsters.guardians.Constant.LEFT;
-import static de.limbusdev.guardianmonsters.guardians.Constant.RIGHT;
 
 
 /**
@@ -101,7 +99,7 @@ public class TargetMenuWidget extends SevenButtonsWidget implements Observer
 
     public ArrayMap<Integer,AGuardian> getCombatTeamOfIndex(int index)
     {
-        if(getSideByButtonIndex(index) == LEFT) return leftTeam;
+        if(getSideByButtonIndex(index) == Constant.LEFT) return leftTeam;
         else return rightTeam;
     }
 
@@ -125,14 +123,14 @@ public class TargetMenuWidget extends SevenButtonsWidget implements Observer
 
     public int getButtonPositionByFieldPosition(boolean side, int fieldPosition)
     {
-        if(side == LEFT) return fieldPosition;
+        if(side == Constant.LEFT) return fieldPosition;
         else             return fieldPosition + 4;
     }
 
     public boolean getSideByButtonIndex(int index)
     {
-        if(index < 4) return LEFT;
-        else          return RIGHT;
+        if(index < 4) return Constant.LEFT;
+        else          return Constant.RIGHT;
     }
 
     @Override
@@ -145,10 +143,10 @@ public class TargetMenuWidget extends SevenButtonsWidget implements Observer
             boolean side;
 
             if(leftTeam.isMember(guardian)) {
-                side = LEFT;
+                side = Constant.LEFT;
                 position = leftTeam.getFieldPosition(guardian);
             } else {
-                side = RIGHT;
+                side = Constant.RIGHT;
                 position = rightTeam.getFieldPosition(guardian);
             }
 

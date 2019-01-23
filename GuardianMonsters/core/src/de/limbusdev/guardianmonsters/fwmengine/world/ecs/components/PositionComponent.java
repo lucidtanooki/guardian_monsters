@@ -2,9 +2,9 @@ package de.limbusdev.guardianmonsters.fwmengine.world.ecs.components;
 
 import com.badlogic.ashley.core.Component;
 
+import de.limbusdev.guardianmonsters.Constant;
 import de.limbusdev.utils.geometry.IntRect;
 import de.limbusdev.utils.geometry.IntVec2;
-import de.limbusdev.guardianmonsters.Constant;
 
 
 /**
@@ -33,12 +33,12 @@ public class PositionComponent extends IntRect implements Component {
     /* ..................................................................... GETTERS & SETTERS .. */
     public IntVec2 getCenter() {
         return new IntVec2(
-                onGrid.x* Constant.TILE_SIZE+ Constant.TILE_SIZE/2,
-                onGrid.y* Constant.TILE_SIZE+ Constant.TILE_SIZE/2);
+                onGrid.getX() * Constant.TILE_SIZE+ Constant.TILE_SIZE/2,
+                onGrid.getY() * Constant.TILE_SIZE+ Constant.TILE_SIZE/2);
     }
 
     public void updateGridPosition() {
-        this.onGrid.x = x/ Constant.TILE_SIZE;
-        this.onGrid.y = y/ Constant.TILE_SIZE;
+        this.onGrid.setX(getX() / Constant.TILE_SIZE);
+        this.onGrid.setY(getY() / Constant.TILE_SIZE);
     }
 }

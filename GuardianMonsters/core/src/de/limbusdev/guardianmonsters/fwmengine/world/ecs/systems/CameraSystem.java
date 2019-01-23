@@ -9,11 +9,11 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.MathUtils;
 
+import de.limbusdev.guardianmonsters.Constant;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.CameraComponent;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Components;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PositionComponent;
 import de.limbusdev.utils.geometry.IntRect;
-import de.limbusdev.guardianmonsters.Constant;
 
 /**
  * The camera system updates the cameras position according to the hero's position by keeping it
@@ -59,21 +59,21 @@ public class CameraSystem extends EntitySystem {
         for (Entity entity : entities) {
             PositionComponent position = Components.getPositionComponent(entity);
 
-            if (mapOutline.width >= camera.viewportWidth &&
-                    mapOutline.height >= camera.viewportHeight) {
+            if (mapOutline.getWidth() >= camera.viewportWidth &&
+                    mapOutline.getHeight() >= camera.viewportHeight) {
                 // If map is bigger than camera field
                 camera.position.x = MathUtils.clamp(
-                        position.x,
+                    position.getX(),
                         0 + camera.viewportWidth/2,
-                        mapOutline.width - camera.viewportWidth/2);
+                        mapOutline.getWidth() - camera.viewportWidth/2);
 
                 camera.position.y = MathUtils.clamp(
-                        position.y,
+                    position.getY(),
                         0 + camera.viewportHeight/2,
-                        mapOutline.height - camera.viewportHeight/2);
+                        mapOutline.getHeight() - camera.viewportHeight/2);
             } else {
                 // If camera field is bigger than map dimension
-                camera.position.set(position.x, position.y, 0);
+                camera.position.set(position.getX(), position.getY(), 0);
             }
         }
     }

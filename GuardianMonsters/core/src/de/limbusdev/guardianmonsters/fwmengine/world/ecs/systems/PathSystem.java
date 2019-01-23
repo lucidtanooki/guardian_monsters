@@ -7,6 +7,7 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.utils.TimeUtils;
 
+import de.limbusdev.guardianmonsters.Constant;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.ColliderComponent;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Components;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.InputComponent;
@@ -14,7 +15,6 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PathComponen
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PositionComponent;
 import de.limbusdev.utils.geometry.IntRect;
 import de.limbusdev.utils.geometry.IntVec2;
-import de.limbusdev.guardianmonsters.Constant;
 
 
 /**
@@ -54,27 +54,27 @@ public class PathSystem extends EntitySystem {
         if(path.startMoving && !path.staticEntity) {
             // Define direction of movement
             switch(path.path.get(path.currentDir)) {
-                case N: position.nextX=position.x;position.nextY = position.y + Constant.TILE_SIZE;
+                case N: position.nextX= position.getX();position.nextY = position.getY() + Constant.TILE_SIZE;
                     break;
-                case W: position.nextX=position.x - Constant.TILE_SIZE;position.nextY = position.y;
+                case W: position.nextX= position.getX() - Constant.TILE_SIZE;position.nextY = position.getY();
                     break;
-                case E: position.nextX=position.x + Constant.TILE_SIZE;position.nextY = position.y;
+                case E: position.nextX= position.getX() + Constant.TILE_SIZE;position.nextY = position.getY();
                     break;
-                case S: position.nextX=position.x;position.nextY = position.y - Constant.TILE_SIZE;
+                case S: position.nextX= position.getX();position.nextY = position.getY() - Constant.TILE_SIZE;
                     break;
-                default: position.nextY=position.x;position.nextY=position.y;break;
+                default: position.nextY= position.getX();position.nextY= position.getY();break;
             }
 
             /* Check whether movement is possible or blocked by a collider */
             IntVec2 nextPos = new IntVec2(0,0);
             for(IntRect r : gameArea.getMovingColliders().get(position.layer)) {
-                nextPos.x = position.nextX + Constant.TILE_SIZE / 2;
-                nextPos.y = position.nextY + Constant.TILE_SIZE / 2;
+                nextPos.setX(position.nextX + Constant.TILE_SIZE / 2);
+                nextPos.setY(position.nextY + Constant.TILE_SIZE / 2);
                 if (!collider.collider.equals(r) && r.contains(nextPos)) return;
             }
 
-            collider.collider.x = position.nextX;
-            collider.collider.y = position.nextY;
+            collider.collider.setX(position.nextX);
+            collider.collider.setY(position.nextY);
             position.lastPixelStep = TimeUtils.millis();
             path.moving = true;
             path.startMoving = false;
@@ -84,19 +84,19 @@ public class PathSystem extends EntitySystem {
         if(!path.staticEntity && path.moving && TimeUtils.timeSinceMillis(position.lastPixelStep) >
                 Constant.ONE_STEP_DURATION_PERSON && !path.talking) {
             switch(path.path.get(path.currentDir)) {
-                case N: position.y += 1;break;
-                case W: position.x -= 1;break;
-                case E: position.x += 1;break;
-                case S: position.y -= 1;break;
+                case N: position.setY(position.getY() + 1);break;
+                case W: position.setX(position.getX() - 1);break;
+                case E: position.setX(position.getX() + 1);break;
+                case S: position.setY(position.getY() - 1);break;
                 default:path.stop();break;      // if stopping, count up stopping time
             }
             position.lastPixelStep = TimeUtils.millis();
 
             switch (path.path.get(path.currentDir)) {
-                case N: if(position.y == position.nextY) path.moving = false;break;
-                case E: if(position.x == position.nextX) path.moving = false;break;
-                case W: if(position.x == position.nextX) path.moving = false;break;
-                case S: if(position.y == position.nextY) path.moving = false;break;
+                case N: if(position.getY() == position.nextY) path.moving = false;break;
+                case E: if(position.getX() == position.nextX) path.moving = false;break;
+                case W: if(position.getX() == position.nextX) path.moving = false;break;
+                case S: if(position.getY() == position.nextY) path.moving = false;break;
                 default: if(path.stopCounter==0) path.moving = false;break;
             }
 

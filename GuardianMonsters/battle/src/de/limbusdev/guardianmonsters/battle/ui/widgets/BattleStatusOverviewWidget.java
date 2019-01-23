@@ -33,24 +33,24 @@ public class BattleStatusOverviewWidget extends BattleWidget
 
         // Hero Team ###############################################################################
         MonsterStateWidget msw = new MonsterStateWidget(skin, true);
-        msw.setPosition(IndPos.statWPos1left.x, IndPos.statWPos1left.y, Align.topLeft);
+        msw.setPosition(IndPos.statWPos1left.getX(), IndPos.statWPos1left.getY(), Align.topLeft);
         monsterStateWidgetsLeft.add(msw);
         msw = new MonsterStateWidget(skin, true);
-        msw.setPosition(IndPos.statWPos2left.x, IndPos.statWPos2left.y, Align.topLeft);
+        msw.setPosition(IndPos.statWPos2left.getX(), IndPos.statWPos2left.getY(), Align.topLeft);
         monsterStateWidgetsLeft.add(msw);
         msw = new MonsterStateWidget(skin, true);
-        msw.setPosition(IndPos.statWPos3left.x, IndPos.statWPos3left.y, Align.topLeft);
+        msw.setPosition(IndPos.statWPos3left.getX(), IndPos.statWPos3left.getY(), Align.topLeft);
         monsterStateWidgetsLeft.add(msw);
 
         // Opponent Team ###########################################################################
         msw = new MonsterStateWidget(skin, false);
-        msw.setPosition(IndPos.statWPos1right.x, IndPos.statWPos1right.y, Align.topRight);
+        msw.setPosition(IndPos.statWPos1right.getX(), IndPos.statWPos1right.getY(), Align.topRight);
         monsterStateWidgetsRight.add(msw);
         msw = new MonsterStateWidget(skin, false);
-        msw.setPosition(IndPos.statWPos2right.x, IndPos.statWPos2right.y, Align.topRight);
+        msw.setPosition(IndPos.statWPos2right.getX(), IndPos.statWPos2right.getY(), Align.topRight);
         monsterStateWidgetsRight.add(msw);
         msw = new MonsterStateWidget(skin, false);
-        msw.setPosition(IndPos.statWPos3right.x, IndPos.statWPos3right.y, Align.topRight);
+        msw.setPosition(IndPos.statWPos3right.getX(), IndPos.statWPos3right.getY(), Align.topRight);
         monsterStateWidgetsRight.add(msw);
 
         for(MonsterStateWidget w : monsterStateWidgetsLeft) {addActor(w);}
@@ -111,9 +111,9 @@ public class BattleStatusOverviewWidget extends BattleWidget
         private static final IntVec2 statWPos1left = new IntVec2(56+24, 360-24);
         private static final IntVec2 statWPos2left = new IntVec2(56, 360-48);
         private static final IntVec2 statWPos3left = new IntVec2(56+48, 360);
-        private static final IntVec2 statWPos1right = new IntVec2(640-8-24, statWPos1left.y);
-        private static final IntVec2 statWPos2right = new IntVec2(640-8, statWPos2left.y);
-        private static final IntVec2 statWPos3right = new IntVec2(640-8-48, statWPos3left.y);
+        private static final IntVec2 statWPos1right = new IntVec2(640-8-24, statWPos1left.getY());
+        private static final IntVec2 statWPos2right = new IntVec2(640-8, statWPos2left.getY());
+        private static final IntVec2 statWPos3right = new IntVec2(640-8-48, statWPos3left.getY());
     }
 
 

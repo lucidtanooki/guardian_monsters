@@ -8,7 +8,3 @@ sourceSets.main.java.srcDirs = [ "src/" ]
 sourceSets.main.resources.srcDirs = [ project(":guardians").file("assets") ]
 sourceSets.test.java.srcDirs = ["test/"]
 
-
-eclipse.project {
-    name = appName + "-guardians"
-}

@@ -68,7 +68,7 @@ public abstract class ATeamChoiceWidget extends Group {
             ImageButton button = new ImageButton(ibs);
             button.addActor(preview);
             IntVec2 pos = positions.get(key);
-            button.setPosition(pos.x-3, pos.y-4, Align.bottomLeft);
+            button.setPosition(pos.getX() -3, pos.getY() -4, Align.bottomLeft);
 
             button.addListener(new SimpleClickListener(() ->
             {

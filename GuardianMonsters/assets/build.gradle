@@ -1,13 +1,8 @@
 apply plugin: "java"
-
 targetCompatibility = 1.8
 sourceCompatibility = 1.8
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
-
-sourceSets.main.java.srcDirs = [ "src/" ]
-sourceSets.main.resources.srcDirs = [ project(":assets").file("assets") ]
-
-
-eclipse.project {
-    name = appName + "-assets"
+sourceSets.main.java.srcDirs = ["src/"]
+sourceSets.main.resources.srcDirs = [project(":assets").file("assets")]
+dependencies {
 }

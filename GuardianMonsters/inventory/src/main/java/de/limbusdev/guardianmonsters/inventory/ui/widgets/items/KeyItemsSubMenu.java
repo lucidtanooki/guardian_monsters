@@ -6,8 +6,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ArrayMap;
 
-import java.util.Observable;
-
 import de.limbusdev.guardianmonsters.guardians.GuardiansServiceLocator;
 import de.limbusdev.guardianmonsters.guardians.items.IItemService;
 import de.limbusdev.guardianmonsters.guardians.items.Inventory;
@@ -61,7 +59,7 @@ public class KeyItemsSubMenu extends AInventorySubMenu {
             if(inventory.getItems().containsKey(key)) {
                 Image img = new Image(skin.getDrawable(key.getName() + "-big"));
                 IntVec2 pos = keyItemPositions.get(key);
-                img.setPosition(pos.x + relictRootPos.x, pos.y + relictRootPos.y, Align.bottomLeft);
+                img.setPosition(pos.getX() + relictRootPos.getX(), pos.getY() + relictRootPos.getY(), Align.bottomLeft);
                 addActor(img);
             }
         }

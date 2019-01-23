@@ -1,6 +1,7 @@
 buildscript {
-    
-
+    ext {
+        kotlinVersion = '1.3.20'
+    }
     repositories {
         mavenLocal()
         mavenCentral()
@@ -13,7 +14,7 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:3.3.0'
         classpath 'org.junit.platform:junit-platform-gradle-plugin:1.2.0'
-
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
     }
 }
 
@@ -34,6 +35,7 @@ allprojects {
         lmlVersion = '1.9.1.9.6'
         gdxDialogsVersion = '1.2.1'
         kryoVersion = '4.0.0'
+        ktxVersion = '1.9.8-b5'
     }
 
     repositories {
@@ -46,11 +48,12 @@ allprojects {
 }
 
 project(":desktop") {
-    apply plugin: "java"
+    apply plugin: "kotlin"
 
 
     dependencies {
         implementation project(":core")
+        implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
         implementation "com.badlogicgames.gdx:gdx-backend-lwjgl:$gdxVersion"
         implementation "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
         implementation "com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-desktop"
@@ -66,6 +69,7 @@ project(":desktop") {
 
 project(":android") {
     apply plugin: "android"
+    apply plugin: 'kotlin-android'
 
     configurations { natives }
 
@@ -100,7 +104,7 @@ project(":android") {
 }
 
 project(":core") {
-    apply plugin: "java"
+    apply plugin: "kotlin"
 
     dependencies {
         implementation project(":scene2d")
@@ -113,10 +117,13 @@ project(":core") {
         implementation project(":assets")
         implementation project(":media")
         implementation project(":utils")
+        implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
         implementation "com.badlogicgames.gdx:gdx:$gdxVersion"
         implementation "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
         implementation "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
         implementation "com.badlogicgames.gdx:gdx-controllers:$gdxVersion"
+        implementation "io.github.libktx:ktx-collections:$ktxVersion"
+
         implementation "com.badlogicgames.box2dlights:box2dlights:$box2DLightsVersion"
         implementation "com.badlogicgames.ashley:ashley:$ashleyVersion"
         implementation "com.underwaterapps.overlap2druntime:overlap2d-runtime-libgdx:0.1.0"
@@ -132,10 +139,11 @@ project(":core") {
 }
 
 project(":guardians") {
-    apply plugin: "java"
+    apply plugin: "kotlin"
 
     dependencies {
         implementation project(":utils")
+        implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
         implementation "com.badlogicgames.gdx:gdx:$gdxVersion"
         implementation "com.badlogicgames.ashley:ashley:$ashleyVersion"
         testCompile "junit:junit:+"
@@ -143,7 +151,7 @@ project(":guardians") {
 }
 
 project(":ui") {
-    apply plugin: "java"
+    apply plugin: "kotlin"
 
 
     dependencies {
@@ -166,7 +174,7 @@ project(":ui") {
 }
 
 project(":services") {
-    apply plugin: "java"
+    apply plugin: "kotlin"
 
 
     dependencies {
@@ -186,7 +194,7 @@ project(":services") {
 }
 
 project(":battle") {
-    apply plugin: "java"
+    apply plugin: "kotlin"
 
     dependencies {
         implementation project(":scene2d")
@@ -210,7 +218,7 @@ project(":battle") {
 }
 
 project(":inventory") {
-    apply plugin: "java"
+    apply plugin: "kotlin"
 
     dependencies {
         implementation project(":scene2d")
@@ -235,16 +243,16 @@ project(":inventory") {
 
 
 project(":enums") {
-    apply plugin: "java"
+    apply plugin: "kotlin"
 
 
     dependencies {
-
+        implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
     }
 }
 
 project(":scene2d") {
-    apply plugin: "java"
+    apply plugin: "kotlin"
 
     dependencies {
         implementation "com.badlogicgames.gdx:gdx:$gdxVersion"
@@ -254,7 +262,7 @@ project(":scene2d") {
 
 
 project(":media") {
-    apply plugin: "java"
+    apply plugin: "kotlin"
 
     dependencies {
         implementation project(":enums")
@@ -268,7 +276,7 @@ project(":media") {
 }
 
 project(":assets") {
-    apply plugin: "java"
+    apply plugin: "kotlin"
 
     dependencies {
         implementation project(":enums")
@@ -280,13 +288,10 @@ project(":assets") {
 }
 
 project(":utils") {
-    apply plugin: "java"
+    apply plugin: "kotlin"
 
     dependencies {
+        implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
         implementation "com.badlogicgames.gdx:gdx:$gdxVersion"
     }
-}
-
-tasks.eclipse.doLast {
-    delete ".project"
 }

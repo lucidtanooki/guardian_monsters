@@ -32,7 +32,6 @@ class GuardoSphereHUD(skin: Skin, private val team: Team, private val guardoSphe
     private var guardianStatusWidget: GuardoSphereStatWidget? = null
 
     init {
-
         layout(skin)
 
         val teamWidget = GuardoSphereTeamWidget(skin, team, guardianButtonGroup)
@@ -46,7 +45,6 @@ class GuardoSphereHUD(skin: Skin, private val team: Team, private val guardoSphe
             }
             }
         )
-
 
         stage.addActor(teamWidget)
     }

@@ -27,7 +27,6 @@ import de.limbusdev.guardianmonsters.fwmengine.world.model.MapDescriptionInfo;
 import de.limbusdev.guardianmonsters.fwmengine.world.model.MapPersonInformation;
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.HUD;
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.WorldScreen;
-import de.limbusdev.guardianmonsters.media.IMediaManager;
 import de.limbusdev.guardianmonsters.services.Services;
 
 
@@ -49,7 +48,7 @@ public class EntityComponentSystem {
      * every single Update Cycle according to the present changes in the game world.
      * @param viewport      screen size
      * @param gameArea      active game level/map
-     * @param fromSave      whether to init a new game or restore game state from save game
+     * @param fromSave      whether to initialize a new game or restore game state from save game
      * @param gameScreen    screen
      * @param sgm           the SaveGameManager
      */

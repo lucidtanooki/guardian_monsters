@@ -14,6 +14,7 @@ import de.limbusdev.guardianmonsters.services.Services
 import de.limbusdev.guardianmonsters.ui.AHUD
 import de.limbusdev.guardianmonsters.ui.widgets.Callback
 import de.limbusdev.guardianmonsters.ui.widgets.ParticleEffectActor
+import ktx.actors.plus
 
 /**
  * GuardoSphereHUD
@@ -21,63 +22,67 @@ import de.limbusdev.guardianmonsters.ui.widgets.ParticleEffectActor
  * @author Georg Eckert 2017
  */
 
-class GuardoSphereHUD(skin: Skin, private val team: Team, private val guardoSphere: GuardoSphere) :
-        AHUD(skin),
-        GuardoSphereTeamWidget.Callbacks
+class GuardoSphereHUD(skin: Skin, private val team: Team, private val guardoSphere: GuardoSphere)
+    : AHUD(skin)
 {
-    private var detailWidget: GuardianDetailWidget? = null
-    private var guardianButtonGroup: ButtonGroup<Button>? = null
-    private var guardoSphereChoiceWidget: GuardoSphereChoiceWidget? = null
-    private var toggleGuardianStatView: TextButton? = null
-    private var guardianStatusWidget: GuardoSphereStatWidget? = null
+    private var detailWidget: GuardianDetailWidget
+    private var guardianButtonGroup: ButtonGroup<Button>
+    private var guardoSphereChoiceWidget: GuardoSphereChoiceWidget
+    private var toggleGuardianStatView: TextButton
+    private var guardianStatusWidget: GuardoSphereStatWidget
 
     init {
+
+        detailWidget = GuardianDetailWidget(skin)
+        guardianButtonGroup = ButtonGroup()
+        guardoSphereChoiceWidget = GuardoSphereChoiceWidget(skin, guardoSphere, guardianButtonGroup)
+        toggleGuardianStatView = TextButton("?", skin, "button-gs-default")
+        guardianStatusWidget = GuardoSphereStatWidget(skin)
+
         layout(skin)
 
         val teamWidget = GuardoSphereTeamWidget(skin, team, guardianButtonGroup)
         teamWidget.setPosition(8f, 8f, Align.bottomLeft)
-        teamWidget.setCallbacks(this)
+        teamWidget.callbacks = Callback.SingleInt {
 
-        guardoSphereChoiceWidget!!.setCallbacks(
-                Callback.SingleInt{ spherePosition ->
+            teamPosition -> detailWidget.showDetails(team.get(teamPosition))
+        }
+
+        guardoSphereChoiceWidget.callback = {
+
+            spherePosition ->
             if (guardoSphere.get(spherePosition) != null) {
-                detailWidget!!.showDetails(guardoSphere.get(spherePosition))
+                detailWidget.showDetails(guardoSphere.get(spherePosition))
             }
-            }
-        )
+        }
 
         stage.addActor(teamWidget)
     }
 
-    private fun layout(skin: Skin)
-    {
+    private fun layout(skin: Skin) {
+
+        // Define Actors
         val particles = ParticleEffectActor("guardosphere")
         particles.start()
+
+        // Position Actors
         particles.setPosition(0f, 0f, Align.bottomLeft)
-        stage.addActor(particles)
+        detailWidget.setPosition((Constant.WIDTH - 8).toFloat(), (Constant.HEIGHT - 8).toFloat(), Align.topRight)
+        guardoSphereChoiceWidget.setPosition(8f, (Constant.HEIGHT - 8).toFloat(), Align.topLeft)
+        toggleGuardianStatView.setSize(40f, 40f)
+        toggleGuardianStatView.setPosition((Constant.WIDTH - 8).toFloat(), 8f, Align.bottomRight)
+        guardianStatusWidget.setPosition((Constant.WIDTH - 8).toFloat(), (Constant.RES_Y - 8).toFloat(), Align.topRight)
 
-        detailWidget = GuardianDetailWidget(skin)
-        detailWidget!!.setPosition((Constant.WIDTH - 8).toFloat(), (Constant.HEIGHT - 8).toFloat(), Align.topRight)
+        // Configure Actors
+        guardianButtonGroup.setMaxCheckCount(1)
+        guardianButtonGroup.setMinCheckCount(1)
 
-        guardianButtonGroup = ButtonGroup()
-        guardianButtonGroup!!.setMaxCheckCount(1)
-        guardianButtonGroup!!.setMinCheckCount(1)
-
-        guardoSphereChoiceWidget = GuardoSphereChoiceWidget(skin, guardoSphere, guardianButtonGroup!!)
-        guardoSphereChoiceWidget!!.setPosition(8f, (Constant.HEIGHT - 8).toFloat(), Align.topLeft)
-
-        stage.addActor(detailWidget)
-        stage.addActor(guardoSphereChoiceWidget)
-
-        toggleGuardianStatView = TextButton("?", skin, "button-gs-default")
-        toggleGuardianStatView!!.setSize(40f, 40f)
-        toggleGuardianStatView!!.setPosition((Constant.WIDTH - 8).toFloat(), 8f, Align.bottomRight)
-
-        stage.addActor(toggleGuardianStatView)
-
-        guardianStatusWidget = GuardoSphereStatWidget(skin)
-        guardianStatusWidget!!.setPosition((Constant.WIDTH - 8).toFloat(), (Constant.RES_Y - 8).toFloat(), Align.topRight)
-        stage.addActor(guardianStatusWidget)
+        // Assemble Hierarchy
+        stage+particles
+        stage+detailWidget
+        stage+guardoSphereChoiceWidget
+        stage+toggleGuardianStatView
+        stage+guardianStatusWidget
     }
 
     override fun reset() {}
@@ -90,10 +95,5 @@ class GuardoSphereHUD(skin: Skin, private val team: Team, private val guardoSphe
     override fun hide()
     {
         Services.getAudio().stopMusic(AssetPath.Audio.Music.GUARDOSPHERE)
-    }
-
-    override fun onButtonPressed(teamPosition: Int)
-    {
-        detailWidget!!.showDetails(team.get(teamPosition))
     }
 }

@@ -6,9 +6,10 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration
 import de.limbusdev.guardianmonsters.GuardianMonsters
 
 object DesktopLauncher {
+
     @JvmStatic
-    fun main(arg: Array<String>)
-    {
+    fun main(arg: Array<String>) {
+
         val config = LwjglApplicationConfiguration()
         config.width = 1280
         config.height = 720

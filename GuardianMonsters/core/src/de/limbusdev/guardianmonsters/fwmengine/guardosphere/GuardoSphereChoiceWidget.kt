@@ -5,8 +5,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.*
 import com.badlogic.gdx.utils.Align
 import com.badlogic.gdx.utils.Array
 import de.limbusdev.guardianmonsters.guardians.monsters.GuardoSphere
-import de.limbusdev.guardianmonsters.ui.widgets.Callback
-import de.limbusdev.guardianmonsters.ui.widgets.SimpleClickListener
+import ktx.actors.minus
+import ktx.actors.onClick
+import ktx.actors.plus
+import ktx.scene2d.table
 
 /**
  * GuardoSphereChoiceWidget
@@ -15,70 +17,74 @@ import de.limbusdev.guardianmonsters.ui.widgets.SimpleClickListener
  */
 
 class GuardoSphereChoiceWidget(
+
         private val skin: Skin,
         private val sphere: GuardoSphere,
         private val buttonGroup: ButtonGroup<Button>) : Group()
 {
     private val table: Table
-    private val buttons: Array<Button>
-    private var callbacks: Callback.SingleInt? = null
+    private val buttons = Array<Button>()
 
-    companion object
-    {
-        private const val WIDTH = 252f
-        private const val HEIGHT = 180f
-    }
+    var callback: (Int) -> Unit
 
     init
     {
-        val runnable = Runnable { println("") }
+        callback = {println("$TAG: dummy callback")}
 
-        callbacks = Callback.SingleInt{println("GuardoSphereChoiceWidget: Dummy Callback")}
-
-        buttons = Array()
-
+        // Setup Layout
         setSize(WIDTH, HEIGHT)
-        val background = Image(skin.getDrawable("guardosphere-frame"))
-        background.setSize(WIDTH, HEIGHT)
-        background.setPosition(0f, 0f, Align.bottomLeft)
-        addActor(background)
 
-        table = Table()
-        table.setSize(240f, 170f)
-        table.setPosition(6f, 4f, Align.bottomLeft)
-        addActor(table)
+        val background = Image(skin.getDrawable("guardosphere-frame"))
+        background.setSize(WIDTH,HEIGHT)
+        background.setPosition(0f, 0f, Align.bottomLeft)
+
+
+        table = table {
+
+            setSize(WIDTH,HEIGHT)
+            setPosition(6f, 4f, Align.bottomLeft)
+        }
+
+        // Setup Hierarchy
+        this+background
+        this+table
 
         refresh(0)
     }
 
-    fun refresh(page: Int) {
-
-        for (b in buttons) {
-            buttonGroup.remove(b)
-            b.remove()
+    fun refresh(page: Int)
+    {
+        for (b in buttons)
+        {
+            table-b
         }
 
+        buttonGroup.clear()
         buttons.clear()
         table.clear()
 
-        for (i in page * 35 until (page + 1) * 35) {
-            if (i % 7 == 0) {
+        for (i in page * 35 until (page + 1) * 35)
+        {
+            if (i % 7 == 0)
+            {
                 table.row()
             }
 
             val key = i
-            val guardian = sphere.get(i)
+            val guardian = sphere[i]
             val monsterButton = GuardoSphereButton(skin, guardian)
 
             table.add<ImageButton>(monsterButton).width(32f).height(32f)
-            buttons.add(monsterButton)
+            buttons+monsterButton
             buttonGroup.add(monsterButton)
-            monsterButton.addListener(SimpleClickListener { callbacks!!.onClick(key) })
+            monsterButton.onClick { callback.invoke(key) }
         }
     }
 
-    fun setCallbacks(callbacks: Callback.SingleInt)
+    companion object
     {
-        this.callbacks = callbacks
+        private const val TAG = "GuardoSphereChoiceWidget"
+        private const val WIDTH = 252f
+        private const val HEIGHT = 180f
     }
 }

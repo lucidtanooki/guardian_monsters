@@ -1,13 +1,11 @@
 package de.limbusdev.guardianmonsters.fwmengine.guardosphere
 
 import com.badlogic.gdx.scenes.scene2d.Group
-import com.badlogic.gdx.scenes.scene2d.InputEvent
 import com.badlogic.gdx.scenes.scene2d.ui.*
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener
 import com.badlogic.gdx.utils.Align
 import com.badlogic.gdx.utils.Array
 import de.limbusdev.guardianmonsters.guardians.monsters.Team
-import de.limbusdev.guardianmonsters.ui.widgets.Callback
+import ktx.actors.onClick
 import ktx.actors.plus
 
 /**
@@ -25,15 +23,12 @@ class GuardoSphereTeamWidget(
 {
     private val monsterButtons: HorizontalGroup
     private val buttons: Array<Button>
-    var callbacks: Callback.SingleInt? = null
+    var callback: (Int) -> Unit
 
     init
     {
         // Set Callbacks
-        callbacks = Callback.SingleInt {
-
-            teamPosition -> println("GuardoSphereTeamWidget: Dummy Callback $teamPosition")
-        }
+        callback = { teamPosition -> println("$TAG: Dummy Callback $teamPosition") }
 
         // Define Actors
         buttons = Array()
@@ -61,9 +56,9 @@ class GuardoSphereTeamWidget(
     {
         for(b in buttons)
         {
-            buttonGroup.remove(b)
             b.remove()
         }
+        buttonGroup.clear()
         buttons.clear()
         monsterButtons.clear()
 
@@ -72,22 +67,15 @@ class GuardoSphereTeamWidget(
             val guardian = team[key]
             val monsterButton = GuardoSphereButton(skin, guardian)
             monsterButtons+monsterButton
-            buttons.add(monsterButton)
+            buttons+monsterButton
             buttonGroup.add(monsterButton)
-            monsterButton.addListener(
-                    object : ClickListener()
-                    {
-                        override fun clicked(event: InputEvent?, x: Float, y: Float)
-                        {
-                            callbacks!!.onClick(key!!)
-                        }
-                    }
-            )
+            monsterButton.onClick { callback.invoke(key) }
         }
     }
 
     companion object
     {
+        private const val TAG ="GuardoSphereTeamWidget"
         private const val WIDTH = 252f
         private const val HEIGHT = 40f
     }

@@ -5,14 +5,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.ButtonGroup
 import com.badlogic.gdx.scenes.scene2d.ui.Skin
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton
 import com.badlogic.gdx.utils.Align
-
 import de.limbusdev.guardianmonsters.Constant
 import de.limbusdev.guardianmonsters.assets.paths.AssetPath
 import de.limbusdev.guardianmonsters.guardians.monsters.GuardoSphere
 import de.limbusdev.guardianmonsters.guardians.monsters.Team
 import de.limbusdev.guardianmonsters.services.Services
 import de.limbusdev.guardianmonsters.ui.AHUD
-import de.limbusdev.guardianmonsters.ui.widgets.Callback
 import de.limbusdev.guardianmonsters.ui.widgets.ParticleEffectActor
 import ktx.actors.plus
 
@@ -43,10 +41,7 @@ class GuardoSphereHUD(skin: Skin, private val team: Team, private val guardoSphe
 
         val teamWidget = GuardoSphereTeamWidget(skin, team, guardianButtonGroup)
         teamWidget.setPosition(8f, 8f, Align.bottomLeft)
-        teamWidget.callbacks = Callback.SingleInt {
-
-            teamPosition -> detailWidget.showDetails(team.get(teamPosition))
-        }
+        teamWidget.callback = { teamPosition -> detailWidget.showDetails(team.get(teamPosition)) }
 
         guardoSphereChoiceWidget.callback = {
 
@@ -56,7 +51,7 @@ class GuardoSphereHUD(skin: Skin, private val team: Team, private val guardoSphe
             }
         }
 
-        stage.addActor(teamWidget)
+        stage+teamWidget
     }
 
     private fun layout(skin: Skin) {

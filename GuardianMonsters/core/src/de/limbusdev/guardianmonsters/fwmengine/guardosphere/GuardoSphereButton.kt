@@ -15,19 +15,23 @@ import de.limbusdev.guardianmonsters.services.Services
  */
 
 class GuardoSphereButton(skin: Skin, guardian: AGuardian?) : SubImageImageButton(
+
         skin,
         if (guardian == null) "button-gs-empty" else "button-gs",
-        construct(guardian, skin))
-{
+        construct(guardian, skin)
+) {
     companion object
     {
         private fun construct(guardian: AGuardian?, skin: Skin): Image
         {
             val drawable: TextureRegionDrawable
 
-            if(guardian == null) {
+            if(guardian == null)
+            {
                 drawable = TextureRegionDrawable(skin.getRegion("transparent"))
-            } else {
+            }
+            else
+            {
                 drawable = TextureRegionDrawable(
                         Services.getMedia().getMonsterMiniSprite(guardian.speciesDescription.id, guardian.abilityGraph.currentForm))
             }

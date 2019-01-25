@@ -33,11 +33,18 @@ public class AbilityService implements IAbilityService
         }
     }
 
+    @SuppressWarnings("unchecked")
     private static ArrayMap<Integer, Ability> readAbilitiesFromJsonString(String jsonString)
     {
         ArrayMap<Integer,Ability> elAbilities = new ArrayMap<>();
         Json json = new Json();
-        ArrayList<JsonValue> elementList = json.fromJson(ArrayList.class, jsonString);
+
+        ArrayList<JsonValue> elementList;
+
+        if(json.fromJson(ArrayList.class, jsonString) != null)
+            elementList = json.fromJson(ArrayList.class, jsonString);
+        else
+            elementList = new ArrayList<>();
 
         JsonAbility jsa;
         Ability ability;

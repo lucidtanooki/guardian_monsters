@@ -199,7 +199,7 @@ public class IndividualStatistics
         // ......................................................................................... stats
         // Calculate the visible Stat values from the base values
 
-        this.fullStatValues     = StatCalculator.calculateAllStats(
+        this.fullStatValues     = StatCalculator.INSTANCE.calculateAllStats(
             characterGrowthRates[character],
             level,
             core.getCommonStatistics(),
@@ -219,7 +219,7 @@ public class IndividualStatistics
         healCompletely();
 
         // set EXP according to level
-        this.EXP = StatCalculator.calcEXPtoReachLevel(level);
+        this.EXP = StatCalculator.INSTANCE.calcEXPtoReachLevel(level);
 
         Statistics nullStats = new Statistics(0,0,0,0,0,0,0);
         lvlUpReport = new LevelUpReport(nullStats, nullStats, 0, 0);
@@ -257,7 +257,7 @@ public class IndividualStatistics
         int newLevel = this.level + 1;
 
         // Calculate the Stats on the new level
-        Statistics newFullStatValues = StatCalculator.calculateAllStats(
+        Statistics newFullStatValues = StatCalculator.INSTANCE.calculateAllStats(
             characterGrowthRates[character],
             newLevel,
             commonBaseValues,
@@ -298,9 +298,9 @@ public class IndividualStatistics
 
         this.EXP += extEXP;
 
-        while(this.EXP >= StatCalculator.calcEXPtoReachLevel(potentiallyReachableLevel))
+        while(this.EXP >= StatCalculator.INSTANCE.calcEXPtoReachLevel(potentiallyReachableLevel))
         {
-            this.EXP -= StatCalculator.calcEXPtoReachLevel(potentiallyReachableLevel);
+            this.EXP -= StatCalculator.INSTANCE.calcEXPtoReachLevel(potentiallyReachableLevel);
             potentiallyReachableLevel++;
             remainingLevelUps++;
         }
@@ -399,7 +399,7 @@ public class IndividualStatistics
 
     public int getEXPfraction()
     {
-        return MathUtils.round((EXP*1f) / StatCalculator.calcEXPtoReachLevel(level+1) * 100f);
+        return MathUtils.round((EXP*1f) / StatCalculator.INSTANCE.calcEXPtoReachLevel(level+1) * 100f);
     }
 
     /**
@@ -424,7 +424,7 @@ public class IndividualStatistics
      */
     public int getEXPtoNextLevel()
     {
-        return (StatCalculator.calcEXPtoReachLevel(level) - EXP);
+        return (StatCalculator.INSTANCE.calcEXPtoReachLevel(level) - EXP);
     }
 
     public int getRemainingLevelUps()
@@ -583,7 +583,7 @@ public class IndividualStatistics
      */
     public int getMaxPossibleHP()
     {
-        int maxPossHP = StatCalculator.calculateHP(
+        int maxPossHP = StatCalculator.INSTANCE.calculateHP(
             characterGrowthRates[character][StatType.HP],
             99,
             core.getCommonStatistics().getBaseHP(),
@@ -595,7 +595,7 @@ public class IndividualStatistics
 
     public int getMaxPossibleMP()
     {
-        int maxPossMP = StatCalculator.calculateMP(
+        int maxPossMP = StatCalculator.INSTANCE.calculateMP(
             characterGrowthRates[character][StatType.MP],
             99,
             core.getCommonStatistics().getBaseMP(),
@@ -607,7 +607,7 @@ public class IndividualStatistics
 
     public int getMaxPossiblePStr()
     {
-        int maxPossPStr = StatCalculator.calculateStat(
+        int maxPossPStr = StatCalculator.INSTANCE.calculateStat(
             characterGrowthRates[character][StatType.PSTR],
             99,
             core.getCommonStatistics().getBasePStr(),
@@ -619,7 +619,7 @@ public class IndividualStatistics
 
     public int getMaxPossiblePDef()
     {
-        int maxPossPDef = StatCalculator.calculateStat(
+        int maxPossPDef = StatCalculator.INSTANCE.calculateStat(
             characterGrowthRates[character][StatType.PDEF],
             99,
             core.getCommonStatistics().getBasePDef(),
@@ -631,7 +631,7 @@ public class IndividualStatistics
 
     public int getMaxPossibleMStr()
     {
-        int maxPossMStr = StatCalculator.calculateStat(
+        int maxPossMStr = StatCalculator.INSTANCE.calculateStat(
             characterGrowthRates[character][StatType.MSTR],
             99,
             core.getCommonStatistics().getBaseMStr(),
@@ -643,7 +643,7 @@ public class IndividualStatistics
 
     public int getMaxPossibleMDef()
     {
-        int maxPossMDef = StatCalculator.calculateStat(
+        int maxPossMDef = StatCalculator.INSTANCE.calculateStat(
             characterGrowthRates[character][StatType.MDEF],
             99,
             core.getCommonStatistics().getBaseMDef(),
@@ -655,7 +655,7 @@ public class IndividualStatistics
 
     public int getMaxPossibleSpeed()
     {
-        int maxPossSpeed = StatCalculator.calculateStat(
+        int maxPossSpeed = StatCalculator.INSTANCE.calculateStat(
             characterGrowthRates[character][StatType.SPEED],
             99,
             core.getCommonStatistics().getBaseSpeed(),

@@ -311,21 +311,21 @@ public class ModuleGuardiansJUnitTest
     @Test
     public void statCalculatorTest()
     {
-        assertEquals(0, StatCalculator.calcEXPavailableAtLevel(0));
-        assertEquals(0, StatCalculator.calcEXPtoReachLevel(0));
-        assertEquals(8, StatCalculator.calcEXPavailableAtLevel(1));
-        assertEquals(0, StatCalculator.calcEXPtoReachLevel(1));
-        assertEquals(19, StatCalculator.calcEXPavailableAtLevel(2));
-        assertEquals(8, StatCalculator.calcEXPtoReachLevel(2));
-        assertEquals(27, StatCalculator.calcEXPtoReachLevel(3));
-        assertEquals(125, StatCalculator.calcEXPtoReachLevel(5));
+        assertEquals(0, StatCalculator.INSTANCE.calcEXPavailableAtLevel(0));
+        assertEquals(0, StatCalculator.INSTANCE.calcEXPtoReachLevel(0));
+        assertEquals(8, StatCalculator.INSTANCE.calcEXPavailableAtLevel(1));
+        assertEquals(0, StatCalculator.INSTANCE.calcEXPtoReachLevel(1));
+        assertEquals(19, StatCalculator.INSTANCE.calcEXPavailableAtLevel(2));
+        assertEquals(8, StatCalculator.INSTANCE.calcEXPtoReachLevel(2));
+        assertEquals(27, StatCalculator.INSTANCE.calcEXPtoReachLevel(3));
+        assertEquals(125, StatCalculator.INSTANCE.calcEXPtoReachLevel(5));
         assertEquals(
-            StatCalculator.calcEXPavailableAtLevel(2) + StatCalculator.calcEXPavailableAtLevel(1),
-            StatCalculator.calcEXPtoReachLevel(3)
+            StatCalculator.INSTANCE.calcEXPavailableAtLevel(2) + StatCalculator.INSTANCE.calcEXPavailableAtLevel(1),
+            StatCalculator.INSTANCE.calcEXPtoReachLevel(3)
         );
         assertEquals(
-            StatCalculator.calcEXPavailableAtLevel(5),
-            StatCalculator.calcEXPtoReachLevel(6)-StatCalculator.calcEXPtoReachLevel(5)
+            StatCalculator.INSTANCE.calcEXPavailableAtLevel(5),
+            StatCalculator.INSTANCE.calcEXPtoReachLevel(6)- StatCalculator.INSTANCE.calcEXPtoReachLevel(5)
         );
     }
 
@@ -353,31 +353,31 @@ public class ModuleGuardiansJUnitTest
         }
 
         assertEquals(
-            StatCalculator.calculateHP(IndividualStatistics.Growth.MED, 99, 300, 0, 0),
+            StatCalculator.INSTANCE.calculateHP(IndividualStatistics.Growth.MED, 99, 300, 0, 0),
             guardian.getIndividualStatistics().getHPmax()
         );
         assertEquals(
-            StatCalculator.calculateMP(IndividualStatistics.Growth.MED, 99, 50, 0, 0),
+            StatCalculator.INSTANCE.calculateMP(IndividualStatistics.Growth.MED, 99, 50, 0, 0),
             guardian.getIndividualStatistics().getMPmax()
         );
         assertEquals(
-            StatCalculator.calculateStat(IndividualStatistics.Growth.MED, 99, 10, 0, 0),
+            StatCalculator.INSTANCE.calculateStat(IndividualStatistics.Growth.MED, 99, 10, 0, 0),
             guardian.getIndividualStatistics().getPStrMax()
         );
         assertEquals(
-            StatCalculator.calculateStat(IndividualStatistics.Growth.MED, 99, 11, 0, 0),
+            StatCalculator.INSTANCE.calculateStat(IndividualStatistics.Growth.MED, 99, 11, 0, 0),
             guardian.getIndividualStatistics().getPDefMax()
         );
         assertEquals(
-            StatCalculator.calculateStat(IndividualStatistics.Growth.MED, 99, 12, 0, 0),
+            StatCalculator.INSTANCE.calculateStat(IndividualStatistics.Growth.MED, 99, 12, 0, 0),
             guardian.getIndividualStatistics().getMStrMax()
         );
         assertEquals(
-            StatCalculator.calculateStat(IndividualStatistics.Growth.MED, 99, 13, 0, 0),
+            StatCalculator.INSTANCE.calculateStat(IndividualStatistics.Growth.MED, 99, 13, 0, 0),
             guardian.getIndividualStatistics().getMDefMax()
         );
         assertEquals(
-            StatCalculator.calculateStat(IndividualStatistics.Growth.MED, 99, 14, 0, 0),
+            StatCalculator.INSTANCE.calculateStat(IndividualStatistics.Growth.MED, 99, 14, 0, 0),
             guardian.getIndividualStatistics().getSpeedMax()
         );
 
@@ -419,7 +419,7 @@ public class ModuleGuardiansJUnitTest
 
         BattleCalculator.apply(report);
 
-        assertEquals(StatCalculator.calculateHP(IndividualStatistics.Growth.MED, 1, 300, 0, 0) - 19,
+        assertEquals(StatCalculator.INSTANCE.calculateHP(IndividualStatistics.Growth.MED, 1, 300, 0, 0) - 19,
             looser.getIndividualStatistics().getHP());
 
         ModuleGuardians.destroyModule();
@@ -436,74 +436,74 @@ public class ModuleGuardiansJUnitTest
 
 
         assertEquals(
-            StatCalculator.calculateHP(IndividualStatistics.Growth.MED, 1, 300, 0, 0),
+            StatCalculator.INSTANCE.calculateHP(IndividualStatistics.Growth.MED, 1, 300, 0, 0),
             guardian.getIndividualStatistics().getHPmax()
         );
 
         assertEquals(
-            StatCalculator.calculateMP(IndividualStatistics.Growth.MED, 1, 50, 0, 0),
+            StatCalculator.INSTANCE.calculateMP(IndividualStatistics.Growth.MED, 1, 50, 0, 0),
             guardian.getIndividualStatistics().getMPmax()
         );
 
         assertEquals(
-            StatCalculator.calculateStat(IndividualStatistics.Growth.MED, 1, 10, 0, 0),
+            StatCalculator.INSTANCE.calculateStat(IndividualStatistics.Growth.MED, 1, 10, 0, 0),
             guardian.getIndividualStatistics().getPStrMax()
         );
 
         assertEquals(
-            StatCalculator.calculateStat(IndividualStatistics.Growth.MED, 1, 11, 0, 0),
+            StatCalculator.INSTANCE.calculateStat(IndividualStatistics.Growth.MED, 1, 11, 0, 0),
             guardian.getIndividualStatistics().getPDefMax()
         );
 
         assertEquals(
-            StatCalculator.calculateStat(IndividualStatistics.Growth.MED, 1, 12, 0, 0),
+            StatCalculator.INSTANCE.calculateStat(IndividualStatistics.Growth.MED, 1, 12, 0, 0),
             guardian.getIndividualStatistics().getMStrMax()
         );
 
         assertEquals(
-            StatCalculator.calculateStat(IndividualStatistics.Growth.MED, 1, 13, 0, 0),
+            StatCalculator.INSTANCE.calculateStat(IndividualStatistics.Growth.MED, 1, 13, 0, 0),
             guardian.getIndividualStatistics().getMDefMax()
         );
 
         assertEquals(
-            StatCalculator.calculateStat(IndividualStatistics.Growth.MED, 1, 14, 0, 0),
+            StatCalculator.INSTANCE.calculateStat(IndividualStatistics.Growth.MED, 1, 14, 0, 0),
             guardian.getIndividualStatistics().getSpeedMax()
         );
 
         guardian.getIndividualStatistics().giveEquipment(new BodyEquipment("", BodyEquipment.Type.ARMOR, 1, 2, 3, 4, 5, 6, 7, 0));
 
         assertEquals(
-            MathUtils.floor(StatCalculator.calculateHP(IndividualStatistics.Growth.MED, 1, 300, 0, 0) * 1.06f),
+            MathUtils.floor(StatCalculator.INSTANCE.calculateHP(IndividualStatistics.Growth.MED, 1, 300, 0, 0) * 1.06f),
             guardian.getIndividualStatistics().getHPmax()
         );
 
         assertEquals(
-            MathUtils.floor(StatCalculator.calculateMP(IndividualStatistics.Growth.MED, 1, 50, 0, 0) * 1.07f),
+            MathUtils.floor(StatCalculator.INSTANCE.calculateMP(IndividualStatistics.Growth.MED, 1, 50, 0, 0) * 1.07f),
             guardian.getIndividualStatistics().getMPmax()
         );
 
         assertEquals(
-            StatCalculator.calculateStat(IndividualStatistics.Growth.MED, 1, 10, 0, 0) + 1,
+            StatCalculator.INSTANCE.calculateStat(IndividualStatistics.Growth.MED, 1, 10, 0, 0) + 1,
             guardian.getIndividualStatistics().getPStrMax()
         );
 
         assertEquals(
-            StatCalculator.calculateStat(IndividualStatistics.Growth.MED, 1, 11, 0, 0) + 2,
+            StatCalculator.INSTANCE.calculateStat(IndividualStatistics.Growth.MED, 1, 11, 0, 0) + 2,
             guardian.getIndividualStatistics().getPDefMax()
         );
 
         assertEquals(
-            StatCalculator.calculateStat(IndividualStatistics.Growth.MED, 1, 12, 0, 0) + 3,
+            StatCalculator.INSTANCE.calculateStat(IndividualStatistics.Growth.MED, 1, 12, 0, 0) + 3,
             guardian.getIndividualStatistics().getMStrMax()
         );
 
         assertEquals(
-            StatCalculator.calculateStat(IndividualStatistics.Growth.MED, 1, 13, 0, 0) + 4,
+            StatCalculator.INSTANCE.calculateStat(IndividualStatistics.Growth.MED, 1, 13, 0, 0) + 4,
             guardian.getIndividualStatistics().getMDefMax()
         );
 
         assertEquals(
-            StatCalculator.calculateStat(IndividualStatistics.Growth.MED, 1, 14, 0, 0) + 5,
+            StatCalculator.INSTANCE.calculateStat(IndividualStatistics.Growth.MED, 1, 14, 0, 0) + 5,
             guardian.getIndividualStatistics().getSpeedMax()
         );
 

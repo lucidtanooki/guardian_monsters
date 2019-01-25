@@ -8,56 +8,66 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable
 import com.badlogic.gdx.utils.Align
 
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian
+import de.limbusdev.guardianmonsters.scene2d.lSetPosition
+import de.limbusdev.guardianmonsters.scene2d.lSetSize
 import de.limbusdev.guardianmonsters.services.Services
+import ktx.actors.plus
 
 /**
  * GuardianDetailWidget
  *
  * @author Georg Eckert 2017
  */
-
 class GuardianDetailWidget(skin: Skin) : Group()
 {
     private val monsterSprite: Image
     private val name: Label
     private val level: Label
 
-    companion object
-    {
-        private const val WIDTH = 152f
-        private const val HEIGHT = 180f
-    }
-
     init
     {
         setSize(WIDTH, HEIGHT)
+
         val background = Image(skin.getDrawable("guardosphere-frame"))
-        background.setSize(WIDTH, HEIGHT)
-        background.setPosition(0f, 0f, Align.bottomLeft)
-        addActor(background)
+        background
+                .lSetSize(WIDTH, HEIGHT)
+                .lSetPosition(0f, 0f, Align.bottomLeft)
 
         monsterSprite = Image(skin.getDrawable("transparent"))
-        monsterSprite.setSize(128f, 128f)
-        monsterSprite.setPosition(12f, HEIGHT - 8, Align.topLeft)
-        addActor(monsterSprite)
+        monsterSprite
+                .lSetSize(128f, 128f)
+                .lSetPosition(12f, HEIGHT - 8f, Align.topLeft)
 
         name = Label("Name", skin, "white")
-        name.setSize(92f, 20f)
-        name.setPosition(12f, 20f, Align.bottomLeft)
-        addActor(name)
+        name
+                .lSetSize(92f, 20f)
+                .lSetPosition(12f, 20f, Align.bottomLeft)
 
         level = Label("Lvl 0", skin, "white")
-        level.setSize(32f, 20f)
-        level.setPosition(12f + 96f, 20f, Align.bottomLeft)
-        addActor(level)
+        level
+                .lSetSize(32f, 20f)
+                .lSetPosition(12f + 96f, 20f, Align.bottomLeft)
+
+        this+background
+        this+monsterSprite
+        this+name
+        this+level
     }
 
-    fun showDetails(guardian: AGuardian) {
+    fun showDetails(guardian: AGuardian)
+    {
         val region = Services.getMedia().getMonsterSprite(
                 guardian.speciesDescription.id,
                 guardian.abilityGraph.currentForm)
         monsterSprite.drawable = TextureRegionDrawable(region)
         name.setText(Services.getL18N().getGuardianNicknameIfAvailable(guardian))
-        level.setText("Lvl " + guardian.individualStatistics.level)
+        level.setText("Lvl $guardian.individualStatistics.level")
+    }
+
+    companion object
+    {
+        private const val TAG = "GuardianDetailWidget"
+        private const val WIDTH = 152f
+        private const val HEIGHT = 180f
     }
 }

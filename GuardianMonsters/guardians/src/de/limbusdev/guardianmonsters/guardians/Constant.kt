@@ -12,25 +12,18 @@ interface Constant
     {
         // How much more difficult should it get every new level
         // to reach the next one
-        @JvmField
-        val LVL_EXPONENT = 3f
+        const val LVL_EXPONENT = 3f
 
-        @JvmField
-        val DEBUGGING_ON = true
+        const val DEBUGGING_ON = true
 
-        @JvmField
-        val PRINT_PARSED_GUARDIAN = false
+        const val PRINT_PARSED_GUARDIAN = false
 
-        @JvmField
-        val LEFT = true
+        const val LEFT = true
 
-        @JvmField
-        val RIGHT = false
+        const val RIGHT = false
 
-        @JvmField
-        val HERO = true
+        const val HERO = true
 
-        @JvmField
-        val OPPONENT = false
+        const val OPPONENT = false
     }
 }

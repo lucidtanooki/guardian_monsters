@@ -148,9 +148,9 @@ public class BattleCalculator
         }
 
         // Print Battle Debug Message
-        String attackerName = attacker.getUUID();
+        String attackerName = attacker.getUuid();
         String attackName   = ability.name;
-        String victimName   = defender.getUUID();
+        String victimName   = defender.getUuid();
         System.out.println(attackerName + ": " + attackName + " causes " + damage + " damage on " + victimName);
 
         return report;
@@ -198,7 +198,7 @@ public class BattleCalculator
         AGuardian defending = report.defending;
         AGuardian attacking = report.attacking;
 
-        System.out.println(report.attacking.getUUID() + " attacks " + defending.getUUID() + " with " + report.attack.name);
+        System.out.println(report.attacking.getUuid() + " attacks " + defending.getUuid() + " with " + report.attack.name);
         defending.getIndividualStatistics().decreaseHP(report.damage);
         attacking.getIndividualStatistics().decreaseMP(report.attack.MPcost);
 

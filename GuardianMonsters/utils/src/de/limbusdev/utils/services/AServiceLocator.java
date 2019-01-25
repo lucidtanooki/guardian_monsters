@@ -23,6 +23,7 @@ public abstract class AServiceLocator
 
     public abstract void provideServices();
 
+    @SuppressWarnings("unchecked")
     public <T extends IService> T get(Class<T> serviceInterface)
     {
         if(!services.containsKey(serviceInterface))

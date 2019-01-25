@@ -99,7 +99,7 @@ public class Guardian extends AGuardian
     {
         String label = "\n+-------------------------------------------------------+\n";
         label += "| " + String.format("UUID: %s\n| NameID: %s,\tSID: %d,\t Lvl: %d",
-            getUUID(), speciesDescription.getNameID(0), getIndividualStatistics().getLevel(), getSpeciesID());
+            this.getUuid(), speciesDescription.getNameID(0), getIndividualStatistics().getLevel(), getSpeciesID());
         label += "\n" + individualStatistics.toString();
         label +=       "\n+-------------------------------------------------------+\n";
         return label;

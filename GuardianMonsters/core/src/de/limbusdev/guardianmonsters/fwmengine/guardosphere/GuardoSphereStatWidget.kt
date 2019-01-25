@@ -9,6 +9,7 @@ import com.badlogic.gdx.utils.Align
 import com.badlogic.gdx.utils.ArrayMap
 import de.limbusdev.guardianmonsters.guardians.GuardiansServiceLocator
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian
+import de.limbusdev.guardianmonsters.scene2d.lSetSize
 import de.limbusdev.guardianmonsters.services.Services
 import de.limbusdev.utils.extensions.set
 import ktx.actors.plus
@@ -18,34 +19,29 @@ class GuardoSphereStatWidget(private val skin: Skin) : Group()
 {
     // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ Properties
     // .................................................... private
-    private val valueLabels: ArrayMap<String, Label>
-    private val elementGroup: HorizontalGroup
-    private val equipmentGroup: Group
+    private val valueLabels = ArrayMap<String, Label>()
+    private val elementGroup = HorizontalGroup()
+    private val equipmentGroup = Group()
 
-    // .................................................... static
-    companion object
-    {
-        private const val WIDTH = 152f
-        private const val HEIGHT = 180f
-    }
 
     // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ Initializer
     init
     {
         setSize(WIDTH, HEIGHT)
         val background = Image(skin.getDrawable("guardosphere-frame"))
-        background.setSize(WIDTH, HEIGHT)
-        background.setPosition(0f, 0f, Align.bottomLeft)
+        background
+                .lSetSize(WIDTH, HEIGHT)
+                .setPosition(0f, 0f, Align.bottomLeft)
         this+background
 
         val offX = 16f
         val offY = 200f - 16f
         val gap = 18f
 
-        valueLabels = ArrayMap()
         var value: Label
-        val labels = arrayOf("hp", "mp", "exp", "pstr", "pdef", "mstr", "mdef", "speed")
         var key: Image
+
+        val labels = arrayOf("hp", "mp", "exp", "pstr", "pdef", "mstr", "mdef", "speed")
 
         for (i in labels.indices)
         {
@@ -68,10 +64,8 @@ class GuardoSphereStatWidget(private val skin: Skin) : Group()
             this+bgl
         }
 
-        elementGroup = HorizontalGroup()
         elementGroup.setSize(140f, 20f)
         elementGroup.setPosition(6f, 6f, Align.bottomLeft)
-        equipmentGroup = Group()
 
         // Add actors to this group
         this+elementGroup
@@ -91,7 +85,9 @@ class GuardoSphereStatWidget(private val skin: Skin) : Group()
         valueLabels["mdef"].txt = "${m.individualStatistics.mDefMax}"
         valueLabels["speed"].txt = "${m.individualStatistics.speedMax}"
 
+
         elementGroup.clear()
+
         for(e in m.speciesDescription.getElements(0))
         { // TODO currentForm
             val elem = e.toString().toLowerCase()
@@ -105,7 +101,9 @@ class GuardoSphereStatWidget(private val skin: Skin) : Group()
             elementGroup+l
         }
 
+
         equipmentGroup.clear()
+
         if (m.individualStatistics.hasHeadEquipped())
         {
             val img = Image(skin.getDrawable(m.individualStatistics.head.name))
@@ -134,5 +132,13 @@ class GuardoSphereStatWidget(private val skin: Skin) : Group()
             img.setPosition(102f, (178 - 2 - 38 * 3).toFloat(), Align.topLeft)
             equipmentGroup+img
         }
+    }
+
+    // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ Companion
+    companion object
+    {
+        private const val TAG = "GuardoSphereStatWidget"
+        private const val WIDTH = 152f
+        private const val HEIGHT = 180f
     }
 }

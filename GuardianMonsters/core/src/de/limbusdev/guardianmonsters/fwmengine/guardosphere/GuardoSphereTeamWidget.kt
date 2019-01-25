@@ -5,6 +5,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.*
 import com.badlogic.gdx.utils.Align
 import com.badlogic.gdx.utils.Array
 import de.limbusdev.guardianmonsters.guardians.monsters.Team
+import de.limbusdev.guardianmonsters.scene2d.lSetPosition
+import de.limbusdev.guardianmonsters.scene2d.lSetSize
 import ktx.actors.onClick
 import ktx.actors.plus
 
@@ -21,8 +23,8 @@ class GuardoSphereTeamWidget(
 
 ) : Group()
 {
-    private val monsterButtons: HorizontalGroup
-    private val buttons: Array<Button>
+    private val monsterButtons = HorizontalGroup()
+    private val buttons = Array<Button>()
     var callback: (Int) -> Unit
 
     init
@@ -31,18 +33,16 @@ class GuardoSphereTeamWidget(
         callback = { teamPosition -> println("$TAG: Dummy Callback $teamPosition") }
 
         // Define Actors
-        buttons = Array()
         val background = Image(skin.getDrawable("guardosphere-frame"))
-        monsterButtons = HorizontalGroup()
 
-        // Scale Actors
+        // Configure Actors
         setSize(WIDTH, HEIGHT)
-        background.setSize(WIDTH, HEIGHT)
-        monsterButtons.setSize(240f, 32f)
-
-        // Position Actors
-        background.setPosition(0f, 0f, Align.bottomLeft)
-        monsterButtons.setPosition(6f, 4f, Align.bottomLeft)
+        background
+                .lSetSize(WIDTH, HEIGHT)
+                .lSetPosition(0f, 0f, Align.bottomLeft)
+        monsterButtons
+                .lSetSize(240f, 32f)
+                .lSetPosition(6f, 4f, Align.bottomLeft)
 
         // Add Actors
         this+background
@@ -54,10 +54,8 @@ class GuardoSphereTeamWidget(
 
     fun refresh()
     {
-        for(b in buttons)
-        {
-            b.remove()
-        }
+        for(b in buttons) b.remove()
+
         buttonGroup.clear()
         buttons.clear()
         monsterButtons.clear()

@@ -119,8 +119,8 @@ public class MonsterStateWidget extends WidgetGroup implements Observer
     public void refresh(AGuardian guardian)
     {
         IndividualStatistics statistics = guardian.getIndividualStatistics();
-        this.hpBar.setValue(statistics.getHPfraction());
-        this.mpBar.setValue(statistics.getMPfraction());
+        this.hpBar.setValue(statistics.getHpFraction());
+        this.mpBar.setValue(statistics.getMpFraction());
         this.epBar.setValue(statistics.getEXPfraction());
         this.levelLabel.setText(Integer.toString(statistics.getLevel()));
 

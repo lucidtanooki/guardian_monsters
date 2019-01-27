@@ -36,7 +36,7 @@ public class ChakraCrystalItem extends Item
             elementFactor = 1f;
         }
 
-        chance = (1f - guardian.getIndividualStatistics().getHPfraction()/elementFactor/100f/2f - guardian.getIndividualStatistics().getLevel()/100f);
+        chance = (1f - guardian.getIndividualStatistics().getHpFraction()/elementFactor/100f/2f - guardian.getIndividualStatistics().getLevel()/100f);
 
         if(chance > 1f) {
             chance = 1f;

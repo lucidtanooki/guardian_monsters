@@ -41,7 +41,7 @@ public class SerializableStat {
         this.MStr = statistics.getMStr();
         this.MDef = statistics.getMDef();
         this.Speed = statistics.getSpeed();
-        this.HPmax = statistics.getHPmax();
+        this.HPmax = statistics.getHpMax();
         this.MPmax = statistics.getMPmax();
         this.PStrMax = statistics.getPStrMax();
         this.PDefMax = statistics.getPDefMax();

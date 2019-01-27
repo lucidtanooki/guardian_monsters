@@ -136,9 +136,9 @@ public class GuardianOverviewButton extends TextButton implements Listener<Guard
 
         subTable = new Table();
         subTable.add(new Image(getSkin().getDrawable("stats-symbol-hp")));
-        subTable.add(new Label(guardian.getIndividualStatistics().getHPfractionAsString(), getSkin(), "default")).width(56);
+        subTable.add(new Label(guardian.getIndividualStatistics().getHpFractionToString(), getSkin(), "default")).width(56);
         subTable.add(new Image(getSkin().getDrawable("stats-symbol-mp")));
-        subTable.add(new Label(guardian.getIndividualStatistics().getMPfractionAsString(), getSkin(), "default")).width(56);
+        subTable.add(new Label(guardian.getIndividualStatistics().getMpFractionToString(), getSkin(), "default")).width(56);
 
         add(subTable).align(Align.left);
         layout();

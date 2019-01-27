@@ -40,7 +40,7 @@ public class MedicalItem extends AMedicalItem
         switch(type)
         {
             case REVIVE:
-                m.getIndividualStatistics().healHP(MathUtils.round(m.getIndividualStatistics().getHPmax()*value/100f));
+                m.getIndividualStatistics().healHP(MathUtils.round(m.getIndividualStatistics().getHpMax()*value/100f));
                 break;
             case HP_CURE:
                 m.getIndividualStatistics().healHP(value);
@@ -60,7 +60,7 @@ public class MedicalItem extends AMedicalItem
             case REVIVE:
                 return m.getIndividualStatistics().isKO();
             case HP_CURE:
-                return (m.getIndividualStatistics().isFit() && m.getIndividualStatistics().getHP() < m.getIndividualStatistics().getHPmax());
+                return (m.getIndividualStatistics().isFit() && m.getIndividualStatistics().getHP() < m.getIndividualStatistics().getHpMax());
             case MP_CURE:
                 return m.getIndividualStatistics().getMP() < m.getIndividualStatistics().getMPmax();
             default:

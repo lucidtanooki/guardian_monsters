@@ -95,7 +95,7 @@ public class GuardianStatusWidget extends Group
     {
         ISpeciesDescriptionService species = GuardiansServiceLocator.getSpecies();
         name.setText(Services.getL18N().Guardians().get(species.getCommonNameById(m.getSpeciesDescription().getID(), 0)));  // TODO currentForm
-        valueLabels.get("hp").setText(m.getIndividualStatistics().getHP() + "/" + m.getIndividualStatistics().getHPmax());
+        valueLabels.get("hp").setText(m.getIndividualStatistics().getHP() + "/" + m.getIndividualStatistics().getHpMax());
         valueLabels.get("mp").setText(m.getIndividualStatistics().getMP() + "/" + m.getIndividualStatistics().getMPmax());
         valueLabels.get("exp").setText(m.getIndividualStatistics().getEXP() + "/" + (m.getIndividualStatistics().getEXPtoNextLevel() + m.getIndividualStatistics().getEXP()));
         valueLabels.get("pstr").setText(Integer.toString(m.getIndividualStatistics().getPStrMax()));

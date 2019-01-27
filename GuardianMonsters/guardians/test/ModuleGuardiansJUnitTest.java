@@ -354,7 +354,7 @@ public class ModuleGuardiansJUnitTest
 
         assertEquals(
             StatCalculator.INSTANCE.calculateHP(IndividualStatistics.Growth.MED, 99, 300, 0, 0),
-            guardian.getIndividualStatistics().getHPmax()
+            guardian.getIndividualStatistics().getHpMax()
         );
         assertEquals(
             StatCalculator.INSTANCE.calculateMP(IndividualStatistics.Growth.MED, 99, 50, 0, 0),
@@ -437,7 +437,7 @@ public class ModuleGuardiansJUnitTest
 
         assertEquals(
             StatCalculator.INSTANCE.calculateHP(IndividualStatistics.Growth.MED, 1, 300, 0, 0),
-            guardian.getIndividualStatistics().getHPmax()
+            guardian.getIndividualStatistics().getHpMax()
         );
 
         assertEquals(
@@ -474,7 +474,7 @@ public class ModuleGuardiansJUnitTest
 
         assertEquals(
             MathUtils.floor(StatCalculator.INSTANCE.calculateHP(IndividualStatistics.Growth.MED, 1, 300, 0, 0) * 1.06f),
-            guardian.getIndividualStatistics().getHPmax()
+            guardian.getIndividualStatistics().getHpMax()
         );
 
         assertEquals(

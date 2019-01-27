@@ -76,9 +76,9 @@ class GuardoSphereStatWidget(private val skin: Skin) : Group()
     fun initialize(m: AGuardian)
     {
         val species = GuardiansServiceLocator.getSpecies()
-        valueLabels["hp"].txt = "${m.individualStatistics.hp} / ${m.individualStatistics.hPmax}"
+        valueLabels["hp"].txt = "${m.individualStatistics.hp} / ${m.individualStatistics.hpMax}"
         valueLabels["mp"].txt = "${m.individualStatistics.mp} / ${m.individualStatistics.mPmax}"
-        valueLabels["exp"].txt = "${m.individualStatistics.exp} / ${m.individualStatistics.exPtoNextLevel + m.individualStatistics.exp}"
+        valueLabels["exp"].txt = "${m.individualStatistics.exp} / ${m.individualStatistics.expToNextLevel + m.individualStatistics.exp}"
         valueLabels["pstr"].txt = "${m.individualStatistics.pStrMax}"
         valueLabels["pdef"].txt = "${m.individualStatistics.pDefMax}"
         valueLabels["mstr"].txt = "${m.individualStatistics.mStrMax}"

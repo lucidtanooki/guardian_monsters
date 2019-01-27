@@ -82,19 +82,19 @@ object StatCalculator
     {
         return Statistics(
                 calculateHP(characterFactors[IndividualStatistics.StatType.HP], level,
-                        commonBaseValues.hp, individualBaseValues.hp, growthBaseValues.hp),
+                        commonBaseValues.HP, individualBaseValues.HP, growthBaseValues.HP),
                 calculateMP(characterFactors[IndividualStatistics.StatType.MP], level,
-                        commonBaseValues.mp, individualBaseValues.mp, growthBaseValues.mp),
+                        commonBaseValues.MP, individualBaseValues.MP, growthBaseValues.MP),
                 calculateStat(characterFactors[IndividualStatistics.StatType.PSTR], level,
-                        commonBaseValues.pStr, individualBaseValues.pStr, growthBaseValues.pStr),
+                        commonBaseValues.PStr, individualBaseValues.PStr, growthBaseValues.PStr),
                 calculateStat(characterFactors[IndividualStatistics.StatType.PDEF], level,
-                        commonBaseValues.pDef, individualBaseValues.pDef, growthBaseValues.pDef),
+                        commonBaseValues.PDef, individualBaseValues.PDef, growthBaseValues.PDef),
                 calculateStat(characterFactors[IndividualStatistics.StatType.MSTR], level,
-                        commonBaseValues.mStr, individualBaseValues.mStr, growthBaseValues.mStr),
+                        commonBaseValues.MStr, individualBaseValues.MStr, growthBaseValues.MStr),
                 calculateStat(characterFactors[IndividualStatistics.StatType.MDEF], level,
-                        commonBaseValues.mDef, individualBaseValues.mDef, growthBaseValues.mDef),
+                        commonBaseValues.MDef, individualBaseValues.MDef, growthBaseValues.MDef),
                 calculateStat(characterFactors[IndividualStatistics.StatType.SPEED], level,
-                        commonBaseValues.speed, individualBaseValues.speed, growthBaseValues.speed)
+                        commonBaseValues.Speed, individualBaseValues.Speed, growthBaseValues.Speed)
         )
     }
 

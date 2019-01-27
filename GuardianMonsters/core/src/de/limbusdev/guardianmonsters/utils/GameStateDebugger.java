@@ -8,15 +8,12 @@ import de.limbusdev.guardianmonsters.battle.BattleResultScreen;
 import de.limbusdev.guardianmonsters.battle.BattleScreen;
 import de.limbusdev.guardianmonsters.fwmengine.guardosphere.GuardoSphereScreen;
 import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager;
-import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TeamComponent;
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.WorldScreen;
 import de.limbusdev.guardianmonsters.guardians.GuardiansServiceLocator;
-import de.limbusdev.guardianmonsters.guardians.battle.BattleFactory;
 import de.limbusdev.guardianmonsters.guardians.battle.BattleResult;
 import de.limbusdev.guardianmonsters.guardians.items.IItemService;
 import de.limbusdev.guardianmonsters.guardians.items.Inventory;
 import de.limbusdev.guardianmonsters.guardians.items.Item;
-import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardianFactory;
 import de.limbusdev.guardianmonsters.guardians.monsters.GuardianFactory;
 import de.limbusdev.guardianmonsters.guardians.monsters.GuardoSphere;
@@ -234,7 +231,7 @@ public class GameStateDebugger
 
     public void testMonsterParsing() {
 
-        AGuardianFactory mi = GuardianFactory.getInstance();
+        AGuardianFactory mi = GuardianFactory.INSTANCE;
         System.out.println("Tested");
     }
 

@@ -325,19 +325,19 @@ public class IndividualStatistics
     }
 
     public void healHP(int value) {
-        setHP(currentStatValues.HP + value);
+        setHP(currentStatValues.getHP() + value);
     }
 
     public void decreaseHP(int value) {
-        setHP(currentStatValues.HP - value);
+        setHP(currentStatValues.getHP() - value);
     }
 
     public void healMP(int value) {
-        setMP(currentStatValues.MP + value);
+        setMP(currentStatValues.getMP() + value);
     }
 
     public void decreaseMP(int value) {
-        setMP(currentStatValues.MP - value);
+        setMP(currentStatValues.getMP() - value);
     }
 
     /**
@@ -346,7 +346,7 @@ public class IndividualStatistics
      */
     public void modifyPStr(int fraction)
     {
-        setPStr(MathUtils.round(currentStatValues.PStr * (100 + fraction)/(100f)));
+        setPStr(MathUtils.round(currentStatValues.getPStr() * (100 + fraction)/(100f)));
     }
 
     /**
@@ -355,7 +355,7 @@ public class IndividualStatistics
      */
     public void modifyPDef(int fraction)
     {
-        setPDef(MathUtils.round(currentStatValues.PDef * (100 + fraction)/(100f)));
+        setPDef(MathUtils.round(currentStatValues.getPDef() * (100 + fraction)/(100f)));
     }
 
     /**
@@ -364,7 +364,7 @@ public class IndividualStatistics
      */
     public void modifyMStr(int fraction)
     {
-        setMStr(MathUtils.round(currentStatValues.MStr * (100 + fraction)/(100f)));
+        setMStr(MathUtils.round(currentStatValues.getMStr() * (100 + fraction)/(100f)));
     }
 
     /**
@@ -373,7 +373,7 @@ public class IndividualStatistics
      */
     public void modifyMDef(int fraction)
     {
-        setMDef(MathUtils.round(currentStatValues.MDef * (100 + fraction)/(100f)));
+        setMDef(MathUtils.round(currentStatValues.getMDef() * (100 + fraction)/(100f)));
     }
 
     /**
@@ -382,19 +382,19 @@ public class IndividualStatistics
      */
     public void modifySpeed(int fraction)
     {
-        setSpeed(MathUtils.round(currentStatValues.Speed * (100 + fraction)/(100f)));
+        setSpeed(MathUtils.round(currentStatValues.getSpeed() * (100 + fraction)/(100f)));
     }
 
     // ............................................................................................. CALCULATED VALUES
 
     public String getHPfractionAsString()
     {
-        return (Integer.toString(currentStatValues.HP) + "/" + Integer.toString(getHPmax()));
+        return (Integer.toString(currentStatValues.getHP()) + "/" + Integer.toString(getHPmax()));
     }
 
     public String getMPfractionAsString()
     {
-        return (Integer.toString(currentStatValues.MP) + "/" + Integer.toString(getMPmax()));
+        return (Integer.toString(currentStatValues.getMP()) + "/" + Integer.toString(getMPmax()));
     }
 
     public int getEXPfraction()
@@ -408,12 +408,12 @@ public class IndividualStatistics
      */
     public int getHPfraction()
     {
-        return MathUtils.round(100f* currentStatValues.HP/getHPmax());
+        return MathUtils.round(100f* currentStatValues.getHP() /getHPmax());
     }
 
     public int getMPfraction()
     {
-        return MathUtils.round(100f* currentStatValues.MP/getMPmax());
+        return MathUtils.round(100f* currentStatValues.getMP() /getMPmax());
     }
 
 
@@ -525,7 +525,7 @@ public class IndividualStatistics
     }
 
     public boolean isFit() {
-        return currentStatValues.HP > 0;
+        return currentStatValues.getHP() > 0;
     }
 
     public boolean isKO() {
@@ -549,31 +549,31 @@ public class IndividualStatistics
     }
 
     public int getHP() {
-        return currentStatValues.HP;
+        return currentStatValues.getHP();
     }
 
     public int getMP() {
-        return currentStatValues.MP;
+        return currentStatValues.getMP();
     }
 
     public int getPStr() {
-        return currentStatValues.PStr;
+        return currentStatValues.getPStr();
     }
 
     public int getPDef() {
-        return currentStatValues.PDef;
+        return currentStatValues.getPDef();
     }
 
     public int getMStr() {
-        return currentStatValues.MStr;
+        return currentStatValues.getMStr();
     }
 
     public int getMDef() {
-        return currentStatValues.MDef;
+        return currentStatValues.getMDef();
     }
 
     public int getSpeed() {
-        return currentStatValues.Speed;
+        return currentStatValues.getSpeed();
     }
 
     /**
@@ -679,7 +679,7 @@ public class IndividualStatistics
 
         extFactor /= 100f;
 
-        return fullStatValues.HP + MathUtils.floor(fullStatValues.HP * extFactor);
+        return fullStatValues.getHP() + MathUtils.floor(fullStatValues.getHP() * extFactor);
     }
 
     /**
@@ -696,7 +696,7 @@ public class IndividualStatistics
 
         extFactor /= 100f;
 
-        return fullStatValues.MP + MathUtils.floor(fullStatValues.MP * extFactor);
+        return fullStatValues.getMP() + MathUtils.floor(fullStatValues.getMP() * extFactor);
     }
 
     /**
@@ -704,7 +704,7 @@ public class IndividualStatistics
      */
     public int getPStrMax()
     {
-        int extPStr = fullStatValues.PStr;
+        int extPStr = fullStatValues.getPStr();
 
         if(hands != null)   extPStr += hands.addsPStr;
         if(body != null)    extPStr += body.addsPStr;
@@ -719,7 +719,7 @@ public class IndividualStatistics
      */
     public int getPDefMax()
     {
-        int extPDef = fullStatValues.PDef;
+        int extPDef = fullStatValues.getPDef();
 
         if(hands != null)   extPDef += hands.addsPDef;
         if(body != null)    extPDef += body.addsPDef;
@@ -734,7 +734,7 @@ public class IndividualStatistics
      */
     public int getMStrMax()
     {
-        int extMStr = fullStatValues.MStr;
+        int extMStr = fullStatValues.getMStr();
 
         if(hands != null)   extMStr += hands.addsMStr;
         if(body != null)    extMStr += body.addsMStr;
@@ -749,7 +749,7 @@ public class IndividualStatistics
      */
     public int getMDefMax()
     {
-        int extMDef = fullStatValues.MDef;
+        int extMDef = fullStatValues.getMDef();
 
         if(hands != null)   extMDef += hands.addsMDef;
         if(body != null)    extMDef += body.addsMDef;
@@ -764,7 +764,7 @@ public class IndividualStatistics
      */
     public int getSpeedMax()
     {
-        int extSpeed = fullStatValues.Speed;
+        int extSpeed = fullStatValues.getSpeed();
 
         if(hands != null)   extSpeed += hands.addsSpeed;
         if(body != null)    extSpeed += body.addsSpeed;
@@ -818,12 +818,12 @@ public class IndividualStatistics
 
     public void setHP(int HP)
     {
-        currentStatValues.HP = HP;
+        currentStatValues.setHP(HP);
         if(HP > getHPmax()) {
-            currentStatValues.HP = getHPmax();
+            currentStatValues.setHP(getHPmax());
         }
         if(HP < 0)          {
-            currentStatValues.HP = 0;
+            currentStatValues.setHP(0);
             setStatusEffect(StatusEffect.HEALTHY);
         }
 
@@ -832,50 +832,50 @@ public class IndividualStatistics
     }
 
     public void setMP(int MP) {
-        currentStatValues.MP = MP;
+        currentStatValues.setMP(MP);
 
-        if(MP > getMPmax()) currentStatValues.MP = getMPmax();
-        if(MP < 0)          currentStatValues.MP = 0;
+        if(MP > getMPmax()) currentStatValues.setMP(getMPmax());
+        if(MP < 0)          currentStatValues.setMP(0);
 
         core.setStatisticsChanged();
         core.notifyObservers();
     }
 
     public void setPStr(int PStr) {
-        currentStatValues.PStr = PStr;
+        currentStatValues.setPStr(PStr);
 
-        if(PStr > getPStrMax()*1.5f) currentStatValues.PStr = MathUtils.floor(getPStrMax()*1.5f);
-        if(PStr < 1)            currentStatValues.PStr = 1;
+        if(PStr > getPStrMax()*1.5f) currentStatValues.setPStr(MathUtils.floor(getPStrMax() * 1.5f));
+        if(PStr < 1)            currentStatValues.setPStr(1);
 
         core.setStatisticsChanged();
         core.notifyObservers();
     }
 
     public void setPDef(int PDef) {
-        currentStatValues.PDef = PDef;
+        currentStatValues.setPDef(PDef);
 
         if(PDef > getPDefMax()*1.5f) MathUtils.floor(getPDefMax()*1.5f);
-        if(PDef < 1)            currentStatValues.PDef = 1;
+        if(PDef < 1)            currentStatValues.setPDef(1);
 
         core.setStatisticsChanged();
         core.notifyObservers();
     }
 
     public void setMStr(int MStr) {
-        currentStatValues.MStr = MStr;
+        currentStatValues.setMStr(MStr);
 
-        if(MStr > getMStrMax()*1.5f) currentStatValues.MStr = MathUtils.floor(getMStrMax()*1.5f);
-        if(MStr < 1)            currentStatValues.MStr = 1;
+        if(MStr > getMStrMax()*1.5f) currentStatValues.setMStr(MathUtils.floor(getMStrMax() * 1.5f));
+        if(MStr < 1)            currentStatValues.setMStr(1);
 
         core.setStatisticsChanged();
         core.notifyObservers();
     }
 
     public void setMDef(int MDef) {
-        currentStatValues.MDef = MDef;
+        currentStatValues.setMDef(MDef);
 
-        if(MDef > getMDefMax()*1.5f) currentStatValues.MDef = MathUtils.floor(getMDefMax()*1.5f);
-        if(MDef < 1)            currentStatValues.MDef = 1;
+        if(MDef > getMDefMax()*1.5f) currentStatValues.setMDef(MathUtils.floor(getMDefMax() * 1.5f));
+        if(MDef < 1)            currentStatValues.setMDef(1);
 
         core.setStatisticsChanged();
         core.notifyObservers();
@@ -883,10 +883,10 @@ public class IndividualStatistics
 
     public void setSpeed(int Speed) {
 
-        currentStatValues.Speed = Speed;
+        currentStatValues.setSpeed(Speed);
 
-        if(Speed > getSpeedMax()) currentStatValues.Speed = MathUtils.floor(getSpeedMax()*1.5f);
-        if(Speed < 1)          currentStatValues.Speed = 1;
+        if(Speed > getSpeedMax()) currentStatValues.setSpeed(MathUtils.floor(getSpeedMax() * 1.5f));
+        if(Speed < 1)          currentStatValues.setSpeed(1);
 
         core.setStatisticsChanged();
         core.notifyObservers();

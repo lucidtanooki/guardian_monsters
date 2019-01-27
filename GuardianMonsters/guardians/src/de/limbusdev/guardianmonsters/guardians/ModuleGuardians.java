@@ -33,7 +33,7 @@ public class ModuleGuardians
 
         GuardiansServiceLocator.provide(SpeciesDescriptionService.getInstanceFromFile("data/guardians.json"));
 
-        GuardiansServiceLocator.provide(GuardianFactory.getInstance());
+        GuardiansServiceLocator.provide(GuardianFactory.INSTANCE);
     }
 
     public static void initModuleForTesting()
@@ -338,7 +338,7 @@ public class ModuleGuardians
 
         GuardiansServiceLocator.provide(ItemService.getInstance(jsonItemStrings));
 
-        GuardiansServiceLocator.provide(GuardianFactory.getInstance());
+        GuardiansServiceLocator.provide(GuardianFactory.INSTANCE);
 
     }
 

@@ -24,7 +24,7 @@ abstract class AGuardian protected constructor(val uuid: String) : Observable()
 
     // ............................................................................................. OBSERVABLE
 
-    var changeType: Class<*>? = null
+    var changedProperty: UpdateType = UpdateType.UNCHANGED
         private set
 
     // ............................................................................................. DELEGATIONS
@@ -37,13 +37,13 @@ abstract class AGuardian protected constructor(val uuid: String) : Observable()
     fun setStatisticsChanged()
     {
         this.setChanged()
-        this.changeType = IndividualStatistics::class.java
+        this.changedProperty = UpdateType.STATS
     }
 
     fun setAbilitiesChanged()
     {
         this.setChanged()
-        this.changeType = IAbilityGraph::class.java
+        this.changedProperty = UpdateType.ABILITIES
     }
 
 
@@ -66,4 +66,9 @@ abstract class AGuardian protected constructor(val uuid: String) : Observable()
     // ........................................................... delegations: IndividualStatistics
 
     // ................................................................... delegations: AbilityGraph
+
+    enum class UpdateType
+    {
+        UNCHANGED, ABILITIES, STATS
+    }
 }

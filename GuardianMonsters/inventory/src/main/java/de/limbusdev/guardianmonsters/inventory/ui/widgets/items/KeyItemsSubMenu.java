@@ -39,7 +39,7 @@ public class KeyItemsSubMenu extends AInventorySubMenu {
 
         keyItemPositions = new ArrayMap<>();
 
-        IItemService itemDB = GuardiansServiceLocator.getItems();
+        IItemService itemDB = GuardiansServiceLocator.INSTANCE.getItems();
 
         keyItemPositions.put(itemDB.getItem("relict-earth"),        new IntVec2(70,5));
         keyItemPositions.put(itemDB.getItem("relict-flame"),        new IntVec2(6,5));

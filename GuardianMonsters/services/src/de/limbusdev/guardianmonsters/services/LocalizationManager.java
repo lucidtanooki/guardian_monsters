@@ -13,8 +13,6 @@ import java.util.Locale;
 import de.limbusdev.guardianmonsters.assets.paths.AssetPath;
 import de.limbusdev.guardianmonsters.guardians.GuardiansServiceLocator;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
-import de.limbusdev.guardianmonsters.guardians.monsters.AGuardianFactory;
-import de.limbusdev.guardianmonsters.guardians.monsters.GuardianFactory;
 import de.limbusdev.guardianmonsters.guardians.monsters.ISpeciesDescriptionService;
 
 
@@ -133,7 +131,7 @@ public class LocalizationManager implements L18N
     @Override
     public String getLocalizedGuardianName(int speciesID, int form)
     {
-        ISpeciesDescriptionService species = GuardiansServiceLocator.getSpecies();
+        ISpeciesDescriptionService species = GuardiansServiceLocator.INSTANCE.getSpecies();
         String nameID = species.getCommonNameById(speciesID, form);
         return Guardians().get(nameID);
     }

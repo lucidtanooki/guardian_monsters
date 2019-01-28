@@ -60,9 +60,9 @@ public class MedicalItem extends AMedicalItem
             case REVIVE:
                 return m.getIndividualStatistics().isKO();
             case HP_CURE:
-                return (m.getIndividualStatistics().isFit() && m.getIndividualStatistics().getHP() < m.getIndividualStatistics().getHpMax());
+                return (m.getIndividualStatistics().isFit() && m.getIndividualStatistics().getHp() < m.getIndividualStatistics().getHpMax());
             case MP_CURE:
-                return m.getIndividualStatistics().getMP() < m.getIndividualStatistics().getMPmax();
+                return m.getIndividualStatistics().getMp() < m.getIndividualStatistics().getMPmax();
             default:
                 return false;
         }

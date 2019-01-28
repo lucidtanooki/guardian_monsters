@@ -19,8 +19,9 @@ import de.limbusdev.guardianmonsters.ui.AScreen
  * @author Georg Eckert 2017
  */
 
-class GuardoSphereScreen(
+class GuardoSphereScreen
+(
         team: Team,
-        guardoSphere: GuardoSphere)
-    : AScreen(
-        GuardoSphereHUD(Services.getUI().inventorySkin, team, guardoSphere))
+        guardoSphere: GuardoSphere
+)
+    : AScreen(GuardoSphereHUD(Services.getUI().inventorySkin, team, guardoSphere))

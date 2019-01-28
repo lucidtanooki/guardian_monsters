@@ -1,46 +1,45 @@
-package de.limbusdev.guardianmonsters.guardians;
+package de.limbusdev.guardianmonsters.guardians
 
-import com.badlogic.gdx.utils.ArrayMap;
+import com.badlogic.gdx.utils.ArrayMap
 
-import de.limbusdev.guardianmonsters.guardians.abilities.AbilityService;
-import de.limbusdev.guardianmonsters.guardians.items.ItemService;
-import de.limbusdev.guardianmonsters.guardians.monsters.GuardianFactory;
-import de.limbusdev.guardianmonsters.guardians.monsters.SpeciesDescriptionService;
+import de.limbusdev.guardianmonsters.guardians.abilities.AbilityService
+import de.limbusdev.guardianmonsters.guardians.items.ItemService
+import de.limbusdev.guardianmonsters.guardians.monsters.GuardianFactory
+import de.limbusdev.guardianmonsters.guardians.monsters.SpeciesDescriptionService
 
 /**
  * ModuleGuardians
  *
  * @author Georg Eckert 2017
  */
-
-public class ModuleGuardians
+object ModuleGuardians
 {
-    public static void initModule()
+    fun initModule()
     {
-        ArrayMap<Element, String> jsonPaths = new ArrayMap<>();
-        jsonPaths.put(Element.NONE, "data/abilitiesNone.json");
-        jsonPaths.put(Element.EARTH, "data/abilitiesEarth.json");
-        jsonPaths.put(Element.FIRE, "data/abilitiesFire.json");
-        jsonPaths.put(Element.WATER, "data/abilitiesWater.json");
-        GuardiansServiceLocator.provide(AbilityService.getInstanceFromFile(jsonPaths));
+        val jsonPaths = ArrayMap<Element, String>()
+        jsonPaths.put(Element.NONE, "data/abilitiesNone.json")
+        jsonPaths.put(Element.EARTH, "data/abilitiesEarth.json")
+        jsonPaths.put(Element.FIRE, "data/abilitiesFire.json")
+        jsonPaths.put(Element.WATER, "data/abilitiesWater.json")
+        GuardiansServiceLocator.provide(AbilityService.getInstanceFromFile(jsonPaths))
 
-        ArrayMap<String,String> jsonItemPaths = new ArrayMap<>();
-        jsonItemPaths.put("itemsKey",       "data/itemsKey.json");
-        jsonItemPaths.put("itemsMedicine",  "data/itemsMedicine.json");
-        jsonItemPaths.put("itemsChakraCrystals", "data/itemsChakraCrystals.json");
-        jsonItemPaths.put("itemsEquipment", "data/itemsEquipment.json");
-        GuardiansServiceLocator.provide(ItemService.getInstanceFromFiles(jsonItemPaths));
+        val jsonItemPaths = ArrayMap<String, String>()
+        jsonItemPaths.put("itemsKey", "data/itemsKey.json")
+        jsonItemPaths.put("itemsMedicine", "data/itemsMedicine.json")
+        jsonItemPaths.put("itemsChakraCrystals", "data/itemsChakraCrystals.json")
+        jsonItemPaths.put("itemsEquipment", "data/itemsEquipment.json")
+        GuardiansServiceLocator.provide(ItemService.getInstanceFromFiles(jsonItemPaths))
 
-        GuardiansServiceLocator.provide(SpeciesDescriptionService.getInstanceFromFile("data/guardians.json"));
+        GuardiansServiceLocator.provide(SpeciesDescriptionService.getInstanceFromFile("data/guardians.json"))
 
-        GuardiansServiceLocator.provide(GuardianFactory.INSTANCE);
+        GuardiansServiceLocator.provide(GuardianFactory)
     }
 
-    public static void initModuleForTesting()
+    fun initModuleForTesting()
     {
         // ......................................................................................... init abilities
-        ArrayMap<Element, String> jsonStrings = new ArrayMap<>();
-        String testJson = "[\n" +
+        val jsonStrings = ArrayMap<Element, String>()
+        var testJson = "[\n" +
                 "  {\n" +
                 "    \"ID\": 1,\n" +
                 "    \"element\": \"none\",\n" +
@@ -69,8 +68,8 @@ public class ModuleGuardians
                 "    \"modifiedStats\": {\"PStr\": 0, \"PDef\": 0, \"MStr\": 0, \"MDef\": 0, \"Speed\": 0},\n" +
                 "    \"healedStats\": {\"HP\": 0, \"MP\": 0}\n" +
                 "  }" +
-                "]";
-        jsonStrings.put(Element.NONE, testJson);
+                "]"
+        jsonStrings.put(Element.NONE, testJson)
 
         testJson = "[\n" +
                 "  {\n" +
@@ -129,8 +128,8 @@ public class ModuleGuardians
                 "    \"modifiedStats\": {\"PStr\": 0, \"PDef\": 0, \"MStr\": 0, \"MDef\": 0, \"Speed\": 0},\n" +
                 "    \"healedStats\": {\"HP\": 0, \"MP\": 0}\n" +
                 "  }\n" +
-                "]";
-        jsonStrings.put(Element.EARTH, testJson);
+                "]"
+        jsonStrings.put(Element.EARTH, testJson)
 
         testJson = "[\n" +
                 "  {\n" +
@@ -199,8 +198,8 @@ public class ModuleGuardians
                 "    \"modifiedStats\": {\"PStr\": 0, \"PDef\": 0, \"MStr\": 0, \"MDef\": 0, \"Speed\": 0},\n" +
                 "    \"healedStats\": {\"HP\": 0, \"MP\": 0}\n" +
                 "  }\n" +
-                "]";
-        jsonStrings.put(Element.FIRE, testJson);
+                "]"
+        jsonStrings.put(Element.FIRE, testJson)
 
         testJson = "[\n" +
                 "  {\n" +
@@ -273,77 +272,74 @@ public class ModuleGuardians
                 "    \"modifiedStats\": {\"PStr\": 0, \"PDef\": 0, \"MStr\": 0, \"MDef\": 0, \"Speed\": 0},\n" +
                 "    \"healedStats\": {\"HP\": 0, \"MP\": 0}\n" +
                 "  }\n" +
-                "]";
-        jsonStrings.put(Element.WATER,testJson);
+                "]"
+        jsonStrings.put(Element.WATER, testJson)
 
-        GuardiansServiceLocator.provide(AbilityService.getInstance(jsonStrings));
-
+        GuardiansServiceLocator.provide(AbilityService.getInstance(jsonStrings))
 
         // ......................................................................................... init guardians
-        String json = "{\"guardians\":[" +
-            "{\"id\":1,\"metamorphosisNodes\":[91,92]," +
-            "\"abilities\":[" +
-            "{\"abilityID\":2,\"element\":\"none\",\"abilityPos\":0}," +
-            "{\"abilityID\":2,\"element\":\"earth\",\"abilityPos\":13}," +
-            "{\"abilityID\":3,\"element\":\"earth\",\"abilityPos\":11}," +
-            "{\"abilityID\":4,\"element\":\"earth\",\"abilityPos\":15}]," +
-            "\"basestats\":{\"hp\":300,\"mp\":50,\"speed\":10,\"pstr\":11,\"pdef\":12,\"mstr\":13,\"mdef\":14}," +
-            "\"equipmentCompatibility\":{\"head\":\"bridle\",\"hands\":\"claws\",\"body\":\"barding\",\"feet\":\"shinprotection\"}," +
-            "\"abilityGraphEquip\":{\"head\":21,\"hands\":23,\"body\":89,\"feet\":90}," +
-            "\"metaForms\":[" +
-            "{\"form\":0,\"nameID\":\"gm001_0_fordin\",\"elements\":[\"earth\"]}," +
-            "{\"form\":1,\"nameID\":\"gm001_1_stegofor\",\"elements\":[\"earth\",\"forest\"]}," +
-            "{\"form\":2,\"nameID\":\"gm001_2_brachifor\",\"elements\":[\"earth\",\"forest\"]}]}," +
-            "{\"id\":2,\"metamorphosisNodes\":[91,92]," +
-            "\"abilities\":[" +
-            "{\"abilityID\":2,\"element\":\"none\",\"abilityPos\":0}," +
-            "{\"abilityID\":1,\"element\":\"water\",\"abilityPos\":5}]," +
-            "\"basestats\":{\"hp\":300,\"mp\":50,\"speed\":10,\"pstr\":10,\"pdef\":10,\"mstr\":10,\"mdef\":10}," +
-            "\"equipmentCompatibility\":{\"head\":\"helmet\",\"hands\":\"claws\",\"body\":\"breastplate\",\"feet\":\"kneepads\"}," +
-            "\"abilityGraphEquip\":{\"head\":21,\"hands\":23,\"body\":89,\"feet\":90}," +
-            "\"metaForms\":[" +
-            "{\"form\":0,\"nameID\":\"gm002_0_kroki\",\"elements\":[\"water\"]}," +
-            "{\"form\":1,\"nameID\":\"gm002_1_krokivip\",\"elements\":[\"water\",\"lindworm\"]}," +
-            "{\"form\":2,\"nameID\":\"gm002_2_leviadile\",\"elements\":[\"water\",\"lindworm\"]}]}" +
-            "]}";
-        GuardiansServiceLocator.provide(SpeciesDescriptionService.getInstance(json));
-
+        val json = "{\"guardians\":[" +
+                "{\"id\":1,\"metamorphosisNodes\":[91,92]," +
+                "\"abilities\":[" +
+                "{\"abilityID\":2,\"element\":\"none\",\"abilityPos\":0}," +
+                "{\"abilityID\":2,\"element\":\"earth\",\"abilityPos\":13}," +
+                "{\"abilityID\":3,\"element\":\"earth\",\"abilityPos\":11}," +
+                "{\"abilityID\":4,\"element\":\"earth\",\"abilityPos\":15}]," +
+                "\"basestats\":{\"hp\":300,\"mp\":50,\"speed\":10,\"pstr\":11,\"pdef\":12,\"mstr\":13,\"mdef\":14}," +
+                "\"equipmentCompatibility\":{\"head\":\"bridle\",\"hands\":\"claws\",\"body\":\"barding\",\"feet\":\"shinprotection\"}," +
+                "\"abilityGraphEquip\":{\"head\":21,\"hands\":23,\"body\":89,\"feet\":90}," +
+                "\"metaForms\":[" +
+                "{\"form\":0,\"nameID\":\"gm001_0_fordin\",\"elements\":[\"earth\"]}," +
+                "{\"form\":1,\"nameID\":\"gm001_1_stegofor\",\"elements\":[\"earth\",\"forest\"]}," +
+                "{\"form\":2,\"nameID\":\"gm001_2_brachifor\",\"elements\":[\"earth\",\"forest\"]}]}," +
+                "{\"id\":2,\"metamorphosisNodes\":[91,92]," +
+                "\"abilities\":[" +
+                "{\"abilityID\":2,\"element\":\"none\",\"abilityPos\":0}," +
+                "{\"abilityID\":1,\"element\":\"water\",\"abilityPos\":5}]," +
+                "\"basestats\":{\"hp\":300,\"mp\":50,\"speed\":10,\"pstr\":10,\"pdef\":10,\"mstr\":10,\"mdef\":10}," +
+                "\"equipmentCompatibility\":{\"head\":\"helmet\",\"hands\":\"claws\",\"body\":\"breastplate\",\"feet\":\"kneepads\"}," +
+                "\"abilityGraphEquip\":{\"head\":21,\"hands\":23,\"body\":89,\"feet\":90}," +
+                "\"metaForms\":[" +
+                "{\"form\":0,\"nameID\":\"gm002_0_kroki\",\"elements\":[\"water\"]}," +
+                "{\"form\":1,\"nameID\":\"gm002_1_krokivip\",\"elements\":[\"water\",\"lindworm\"]}," +
+                "{\"form\":2,\"nameID\":\"gm002_2_leviadile\",\"elements\":[\"water\",\"lindworm\"]}]}" +
+                "]}"
+        GuardiansServiceLocator.provide(SpeciesDescriptionService.getInstance(json))
 
         // ......................................................................................... init items
-        ArrayMap<String,String> jsonItemStrings = new ArrayMap<>();
+        val jsonItemStrings = ArrayMap<String, String>()
 
         jsonItemStrings.put("itemsKey",
-            "{\"items\":[" +
-                "{\"nameID\":\"relict-earth\",\"category\":\"key\"}," +
-                "{\"nameID\":\"relict-flame\",\"category\":\"key\"}]}");
+                "{\"items\":[" +
+                        "{\"nameID\":\"relict-earth\",\"category\":\"key\"}," +
+                        "{\"nameID\":\"relict-flame\",\"category\":\"key\"}]}")
 
         jsonItemStrings.put("itemsChakraCrystals",
-                "{\"items\":[" +
-                        "{\"nameID\":\"guardian-crystal-none\",\"category\":\"key\", \"element\": \"none\"}]}");
+                "{\"items\":[" + "{\"nameID\":\"guardian-crystal-none\",\"category\":\"key\", \"element\": \"none\"}]}")
 
         jsonItemStrings.put("itemsMedicine",
-            "{\"items\":[" +
-                "{\"nameID\":\"bread\",\"value\":100,\"type\":\"HPcure\",\"category\":\"medicine\"}," +
-                "{\"nameID\":\"medicine-blue\",\"value\":10,\"type\":\"MPcure\",\"category\":\"medicine\"}," +
-                "{\"nameID\":\"angel-tear\",\"value\":50,\"type\":\"revive\",\"category\":\"medicine\"}]}");
+                "{\"items\":[" +
+                        "{\"nameID\":\"bread\",\"value\":100,\"type\":\"HPcure\",\"category\":\"medicine\"}," +
+                        "{\"nameID\":\"medicine-blue\",\"value\":10,\"type\":\"MPcure\",\"category\":\"medicine\"}," +
+                        "{\"nameID\":\"angel-tear\",\"value\":50,\"type\":\"revive\",\"category\":\"medicine\"}]}")
 
         jsonItemStrings.put("itemsEquipment",
-            "{\"items\":[" +
-                "{\"nameID\":\"sword-wood\",\"body-part\":\"hands\",\"type\":\"sword\"," +
-                "\"addsPStr\":1,\"addsPDef\":0,\"addsMStr\":0,\"addsMDef\":0,\"addsSpeed\":0," +
-                "\"category\":\"equipment\"}," +
-                "{\"nameID\":\"sword-rusty\",\"body-part\":\"hands\",\"type\":\"sword\"," +
-                "\"addsPStr\":2,\"addsPDef\":0,\"addsMStr\":0,\"addsMDef\":0,\"addsSpeed\":0," +
-                "\"category\":\"equipment\"}]}");
+                "{\"items\":[" +
+                        "{\"nameID\":\"sword-wood\",\"body-part\":\"hands\",\"type\":\"sword\"," +
+                        "\"addsPStr\":1,\"addsPDef\":0,\"addsMStr\":0,\"addsMDef\":0,\"addsSpeed\":0," +
+                        "\"category\":\"equipment\"}," +
+                        "{\"nameID\":\"sword-rusty\",\"body-part\":\"hands\",\"type\":\"sword\"," +
+                        "\"addsPStr\":2,\"addsPDef\":0,\"addsMStr\":0,\"addsMDef\":0,\"addsSpeed\":0," +
+                        "\"category\":\"equipment\"}]}")
 
-        GuardiansServiceLocator.provide(ItemService.getInstance(jsonItemStrings));
+        GuardiansServiceLocator.provide(ItemService.getInstance(jsonItemStrings))
 
-        GuardiansServiceLocator.provide(GuardianFactory.INSTANCE);
+        GuardiansServiceLocator.provide(GuardianFactory)
 
     }
 
-    public static void destroyModule()
+    fun destroyModule()
     {
-        GuardiansServiceLocator.destroy();
+        GuardiansServiceLocator.destroy()
     }
 }

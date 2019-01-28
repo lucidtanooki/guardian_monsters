@@ -13,7 +13,7 @@ object GuardianFactory : AGuardianFactory()
 {
     override fun createGuardian(ID: Int, level: Int): AGuardian
     {
-        val species = GuardiansServiceLocator.getSpecies()
+        val species = GuardiansServiceLocator.species
         // ...................................................................... create core object
 
         val UUID = createNewUUID()

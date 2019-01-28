@@ -68,8 +68,8 @@ public class Inventory extends Signal<ItemSignal> {
 
         @Override
         public int compare(Item o1, Item o2) {
-            if(o1.ID < o2.ID) return -1;
-            if(o1.ID > o2.ID) return 1;
+            if(o1.getID() < o2.getID()) return -1;
+            if(o1.getID() > o2.getID()) return 1;
             return 0;
         }
     }

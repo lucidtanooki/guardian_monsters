@@ -1,8 +1,6 @@
 package main.java.de.limbusdev.guardianmonsters.inventory;
 
-import com.badlogic.ashley.signals.Signal;
 import com.badlogic.gdx.scenes.scene2d.Group;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.ButtonGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
@@ -10,8 +8,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.I18NBundle;
@@ -19,10 +15,8 @@ import com.badlogic.gdx.utils.I18NBundle;
 import java.util.Observable;
 import java.util.Observer;
 
-import de.limbusdev.guardianmonsters.guardians.Element;
 import de.limbusdev.guardianmonsters.guardians.GuardiansServiceLocator;
 import de.limbusdev.guardianmonsters.guardians.abilities.Ability;
-import de.limbusdev.guardianmonsters.guardians.abilities.AbilityGraph;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.ui.Constant;
@@ -177,7 +171,7 @@ public class AbilityChoiceSubMenu extends AInventorySubMenu
 
             if(abilityID != null) {
 
-                Ability ability = GuardiansServiceLocator.getAbilities().getAbility(abilityID);
+                Ability ability = GuardiansServiceLocator.INSTANCE.getAbilities().getAbility(abilityID);
                 TextButton tb = new TextButton(translation.get(ability.name), getSkin(), "item-button-sandstone");
 
                 tb.addListener(new SimpleClickListener(() -> {

@@ -51,7 +51,13 @@ class IndividualStatistics
     lateinit var growthBaseValues: Statistics           // accumulated values earned during level-up
         private set
 
-    private var statusEffect: StatusEffect = StatusEffect.HEALTHY
+    var statusEffect: StatusEffect = StatusEffect.HEALTHY
+        set(value)
+        {
+            field = value
+            core.setStatisticsChanged()
+            core.notifyObservers()
+        }
 
     // ............................................................................................. SETTERS & GETTERS
 
@@ -94,7 +100,7 @@ class IndividualStatistics
             if(HP < 0)
             {
                 currentStatValues.HP = 0
-                setStatusEffect(StatusEffect.HEALTHY)
+                statusEffect = StatusEffect.HEALTHY
             }
 
             core.setStatisticsChanged()
@@ -436,7 +442,7 @@ class IndividualStatistics
         latestLevelUpReport = LevelUpReport(nullStats, nullStats, 0, 0)
     }
 
-    protected constructor(core: AGuardian, commonStatistics: CommonStatistics, level: Int, character: Int)
+    internal constructor(core: AGuardian, commonStatistics: CommonStatistics, level: Int, character: Int)
     {
         construct(core, commonStatistics, level, character)
     }
@@ -448,7 +454,7 @@ class IndividualStatistics
      * @param commonStatistics  the common stats, which are equal for all guardians of this species
      * @param level             the level, the created guardian will have
      */
-    protected constructor(core: AGuardian, commonStatistics: CommonStatistics, level: Int)
+    internal constructor(core: AGuardian, commonStatistics: CommonStatistics, level: Int)
     {
         val character: Int
         // Choose a random character, to create really individual guardians
@@ -617,7 +623,7 @@ class IndividualStatistics
         mStr = mStrMax
         mDef = mDefMax
         speed = speedMax
-        setStatusEffect(StatusEffect.HEALTHY)
+        statusEffect = StatusEffect.HEALTHY
     }
 
     fun healHP(value: Int)
@@ -770,43 +776,15 @@ class IndividualStatistics
         return pot
     }
 
-    fun hasAbilityPoints(): Boolean
-    {
-        return abilityLevels > 0
-    }
+    fun hasAbilityPoints(): Boolean = (abilityLevels > 0)
 
+    fun hasHandsEquipped(): Boolean = (hands != null)
 
-    fun hasHandsEquipped(): Boolean
-    {
-        return hands != null
-    }
+    fun hasHeadEquipped(): Boolean = (head != null)
 
-    fun hasHeadEquipped(): Boolean
-    {
-        return head != null
-    }
+    fun hasBodyEquipped(): Boolean = (body != null)
 
-    fun hasBodyEquipped(): Boolean
-    {
-        return body != null
-    }
-
-    fun hasFeetEquipped(): Boolean
-    {
-        return feet != null
-    }
-
-    fun getStatusEffect(): StatusEffect
-    {
-        return statusEffect
-    }
-
-    fun setStatusEffect(statusEffect: StatusEffect)
-    {
-        this.statusEffect = statusEffect
-        core.setStatisticsChanged()
-        core.notifyObservers()
-    }
+    fun hasFeetEquipped(): Boolean = (feet != null)
 
     /**
      * Resets boostable Stats: PStr, PDef, MStr, MDef, Speed
@@ -818,7 +796,7 @@ class IndividualStatistics
         mStr = mStrMax
         mDef = mDefMax
         speed = speedMax
-        setStatusEffect(StatusEffect.HEALTHY)
+        statusEffect = StatusEffect.HEALTHY
     }
 
     /**

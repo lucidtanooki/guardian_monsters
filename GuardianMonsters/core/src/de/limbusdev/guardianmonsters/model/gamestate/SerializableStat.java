@@ -30,12 +30,12 @@ public class SerializableStat {
     public SerializableStat() {}
 
     public SerializableStat(IndividualStatistics statistics) {
-        this.character = statistics.character;
+        this.character = statistics.getCharacter();
         this.level = statistics.getLevel();
         this.abilityLevels = statistics.getAbilityLevels();
-        this.exp = statistics.getEXP();
-        this.HP = statistics.getHP();
-        this.MP = statistics.getMP();
+        this.exp = statistics.getExp();
+        this.HP = statistics.getHp();
+        this.MP = statistics.getMp();
         this.PStr = statistics.getPStr();
         this.PDef = statistics.getPDef();
         this.MStr = statistics.getMStr();
@@ -121,7 +121,7 @@ public class SerializableStat {
 
         // TODO
 
-        IItemService items = GuardiansServiceLocator.getItems();
+        IItemService items = GuardiansServiceLocator.INSTANCE.getItems();
 
         return new IndividualStatistics(
             null,

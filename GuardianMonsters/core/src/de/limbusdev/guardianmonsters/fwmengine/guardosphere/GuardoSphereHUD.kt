@@ -21,14 +21,13 @@ import ktx.actors.plus
  *
  * @author Georg Eckert 2017
  */
-
-class GuardoSphereHUD(
-
+class GuardoSphereHUD
+(
         skin: Skin,
         private val team: Team,
         private val guardoSphere: GuardoSphere
-
-) : AHUD(skin)
+)
+    : AHUD(skin)
 {
     private var detailWidget = GuardianDetailWidget(skin)
     private var guardianButtonGroup = ButtonGroup<Button>()

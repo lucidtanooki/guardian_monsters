@@ -57,7 +57,7 @@ class GuardianDetailWidget(skin: Skin) : Group()
     fun showDetails(guardian: AGuardian)
     {
         val region = Services.getMedia().getMonsterSprite(
-                guardian.speciesDescription.id,
+                guardian.speciesDescription.ID,
                 guardian.abilityGraph.currentForm)
         monsterSprite.drawable = TextureRegionDrawable(region)
         name.setText(Services.getL18N().getGuardianNicknameIfAvailable(guardian))

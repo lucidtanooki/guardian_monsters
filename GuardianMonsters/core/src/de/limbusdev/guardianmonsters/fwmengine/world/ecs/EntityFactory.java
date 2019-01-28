@@ -92,7 +92,7 @@ public class EntityFactory
         }
 
         // Add Team
-        AGuardianFactory factory = GuardiansServiceLocator.getGuardianFactory();
+        AGuardianFactory factory = GuardiansServiceLocator.INSTANCE.getGuardianFactory();
         TeamComponent team = new TeamComponent();
         team.team.put(0,factory.createGuardian(1,1));
         if(restoreSave) {
@@ -100,7 +100,7 @@ public class EntityFactory
         }
         hero.add(team);
 
-        IItemService items = GuardiansServiceLocator.getItems();
+        IItemService items = GuardiansServiceLocator.INSTANCE.getItems();
 
         // Inventory
         Inventory inventory = new Inventory();

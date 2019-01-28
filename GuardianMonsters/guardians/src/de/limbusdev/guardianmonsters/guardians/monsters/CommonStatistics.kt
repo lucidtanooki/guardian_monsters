@@ -32,17 +32,17 @@ class CommonStatistics(
 
 ) : Statistics(HP, MP, PStr, PDef, MStr, MDef, Speed)
 {
-    fun getBaseHP(): Int { return HP }
+    fun getBaseHP(): Int = HP
 
-    fun getBaseMP(): Int { return MP }
+    fun getBaseMP(): Int = MP
 
-    fun getBasePStr(): Int { return PStr }
+    fun getBasePStr(): Int = PStr
 
-    fun getBasePDef(): Int { return PDef }
+    fun getBasePDef(): Int = PDef
 
-    fun getBaseMStr(): Int { return MStr }
+    fun getBaseMStr(): Int = MStr
 
-    fun getBaseMDef(): Int { return MDef }
+    fun getBaseMDef(): Int = MDef
 
-    fun getBaseSpeed(): Int { return Speed }
+    fun getBaseSpeed(): Int = Speed
 }

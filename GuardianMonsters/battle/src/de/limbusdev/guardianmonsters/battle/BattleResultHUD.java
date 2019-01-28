@@ -53,7 +53,7 @@ public class BattleResultHUD extends AHUD {
 
     private void constructMonsterTable(final Team team, final BattleResult result)
     {
-        ISpeciesDescriptionService species = GuardiansServiceLocator.getSpecies();
+        ISpeciesDescriptionService species = GuardiansServiceLocator.INSTANCE.getSpecies();
         table.clear();
         for(int key : team.keys())
         {

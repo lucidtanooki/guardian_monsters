@@ -93,11 +93,11 @@ public class GuardianStatusWidget extends Group
 
     public void init(AGuardian m)
     {
-        ISpeciesDescriptionService species = GuardiansServiceLocator.getSpecies();
+        ISpeciesDescriptionService species = GuardiansServiceLocator.INSTANCE.getSpecies();
         name.setText(Services.getL18N().Guardians().get(species.getCommonNameById(m.getSpeciesDescription().getID(), 0)));  // TODO currentForm
-        valueLabels.get("hp").setText(m.getIndividualStatistics().getHP() + "/" + m.getIndividualStatistics().getHpMax());
-        valueLabels.get("mp").setText(m.getIndividualStatistics().getMP() + "/" + m.getIndividualStatistics().getMPmax());
-        valueLabels.get("exp").setText(m.getIndividualStatistics().getEXP() + "/" + (m.getIndividualStatistics().getEXPtoNextLevel() + m.getIndividualStatistics().getEXP()));
+        valueLabels.get("hp").setText(m.getIndividualStatistics().getHp() + "/" + m.getIndividualStatistics().getHpMax());
+        valueLabels.get("mp").setText(m.getIndividualStatistics().getMp() + "/" + m.getIndividualStatistics().getMPmax());
+        valueLabels.get("exp").setText(m.getIndividualStatistics().getExp() + "/" + (m.getIndividualStatistics().getExpToNextLevel() + m.getIndividualStatistics().getExp()));
         valueLabels.get("pstr").setText(Integer.toString(m.getIndividualStatistics().getPStrMax()));
         valueLabels.get("pdef").setText(Integer.toString(m.getIndividualStatistics().getPDefMax()));
         valueLabels.get("mstr").setText(Integer.toString(m.getIndividualStatistics().getMStrMax()));

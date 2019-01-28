@@ -55,7 +55,7 @@ public class AttackMenuWidget extends SevenButtonsWidget
 
             if (abilityID != null) {
 
-                Ability attack = GuardiansServiceLocator.getAbilities().getAbility(abilityID);
+                Ability attack = GuardiansServiceLocator.INSTANCE.getAbilities().getAbility(abilityID);
                 setButtonStyle(i, skin, AssetPath.Skin.attackButtonStyle(attack.element));
                 setButtonText(i, Services.getL18N().Abilities().get(attack.name));
 
@@ -64,7 +64,7 @@ public class AttackMenuWidget extends SevenButtonsWidget
                 // Disable Ability, when monster does not have enough MP for it
                 if (disableAbilitiesWithInsufficientMP) {
 
-                    if (attack.MPcost > guardian.getIndividualStatistics().getMP()) {
+                    if (attack.MPcost > guardian.getIndividualStatistics().getMp()) {
 
                         disableButton(i);
                     }

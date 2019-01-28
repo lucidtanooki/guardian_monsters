@@ -107,7 +107,7 @@ public class MonsterStateWidget extends WidgetGroup implements Observer
      */
     public void init(AGuardian guardian)
     {
-        ISpeciesDescriptionService species = GuardiansServiceLocator.getSpecies();
+        ISpeciesDescriptionService species = GuardiansServiceLocator.INSTANCE.getSpecies();
         refresh(guardian);
         int speciesID = guardian.getSpeciesID();
         int metaForm = guardian.getAbilityGraph().getCurrentForm();
@@ -121,7 +121,7 @@ public class MonsterStateWidget extends WidgetGroup implements Observer
         IndividualStatistics statistics = guardian.getIndividualStatistics();
         this.hpBar.setValue(statistics.getHpFraction());
         this.mpBar.setValue(statistics.getMpFraction());
-        this.epBar.setValue(statistics.getEXPfraction());
+        this.epBar.setValue(statistics.getExpFraction());
         this.levelLabel.setText(Integer.toString(statistics.getLevel()));
 
         if(statistics.isKO()) {

@@ -49,14 +49,14 @@ public class BattleStringBuilder
 
     public static String receivedDamage(Guardian victim, int damage)
     {
-        ISpeciesDescriptionService species = GuardiansServiceLocator.getSpecies();
+        ISpeciesDescriptionService species = GuardiansServiceLocator.INSTANCE.getSpecies();
         String text = species.getCommonNameById(victim.getSpeciesID(),0) + " lost " + damage + " HP"; // TODO currentForm
         return text;
     }
 
     public static String givenDamage(AGuardian attacker, AGuardian victim, AttackCalculationReport report)
     {
-        ISpeciesDescriptionService species = GuardiansServiceLocator.getSpecies();
+        ISpeciesDescriptionService species = GuardiansServiceLocator.INSTANCE.getSpecies();
         String attName = species.getCommonNameById(attacker.getSpeciesID(),0);
         String defName = species.getCommonNameById(victim.getSpeciesID(),0); // TODO currentForm
 
@@ -115,7 +115,7 @@ public class BattleStringBuilder
      */
     public static String givenDamage(AGuardian attacker, Array<AttackCalculationReport> reports)
     {
-        ISpeciesDescriptionService species = GuardiansServiceLocator.getSpecies();
+        ISpeciesDescriptionService species = GuardiansServiceLocator.INSTANCE.getSpecies();
         String attName = species.getCommonNameById(attacker.getSpeciesID(),0);
 
         String message;

@@ -33,7 +33,7 @@ class GuardoSphereButton(skin: Skin, guardian: AGuardian?) : SubImageImageButton
             else
             {
                 drawable = TextureRegionDrawable(
-                        Services.getMedia().getMonsterMiniSprite(guardian.speciesDescription.id, guardian.abilityGraph.currentForm))
+                        Services.getMedia().getMonsterMiniSprite(guardian.speciesDescription.ID, guardian.abilityGraph.currentForm))
             }
             val miniSprite = Image(drawable)
             return miniSprite

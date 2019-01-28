@@ -88,8 +88,8 @@ public class MovementSystem extends EntitySystem {
                 TeamComponent tc = Components.team.get(hero);
                 boolean teamHurt = false;
                 for(AGuardian m : tc.team.values())
-                    if(m.getIndividualStatistics().getHP() < m.getIndividualStatistics().getHpMax()) {
-                        m.getIndividualStatistics().setHP(m.getIndividualStatistics().getHpMax());
+                    if(m.getIndividualStatistics().getHp() < m.getIndividualStatistics().getHpMax()) {
+                        m.getIndividualStatistics().setHp(m.getIndividualStatistics().getHpMax());
                     }
             }
         }

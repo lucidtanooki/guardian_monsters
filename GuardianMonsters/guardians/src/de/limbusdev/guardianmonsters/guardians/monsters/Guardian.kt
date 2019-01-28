@@ -34,7 +34,7 @@ class Guardian internal constructor(UUID: String) : AGuardian(UUID)
 
     // delegated to SpeciesDescription Component
     override val speciesID: Int
-        get() = speciesDescription.id
+        get() = speciesDescription.ID
 
     override val commonStatistics: CommonStatistics
         get() = speciesDescription.commonStatistics

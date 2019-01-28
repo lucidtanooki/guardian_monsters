@@ -120,7 +120,7 @@ public class SaveGameManager extends EntitySystem
 
     public static GameState newSaveGame()
     {
-        IItemService items = GuardiansServiceLocator.getItems();
+        IItemService items = GuardiansServiceLocator.INSTANCE.getItems();
 
         // Inventory
         Inventory inventory = new Inventory();
@@ -136,7 +136,7 @@ public class SaveGameManager extends EntitySystem
         inventory.putItemInInventory(items.getItem("claws-wood"));
 
         TeamComponent team = new TeamComponent();
-        AGuardianFactory factory = GuardiansServiceLocator.getGuardianFactory();
+        AGuardianFactory factory = GuardiansServiceLocator.INSTANCE.getGuardianFactory();
         team.team.put(0, factory.createGuardian(1,1));
 
         gameState = new GameState(

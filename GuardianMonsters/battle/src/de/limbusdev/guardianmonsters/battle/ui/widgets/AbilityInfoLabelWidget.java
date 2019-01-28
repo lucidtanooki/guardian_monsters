@@ -72,7 +72,7 @@ public class AbilityInfoLabelWidget extends InfoLabelWidget
 
     public void init(Ability.aID aID)
     {
-        IAbilityService abilities = GuardiansServiceLocator.getAbilities();
+        IAbilityService abilities = GuardiansServiceLocator.INSTANCE.getAbilities();
         I18NBundle i18nElements = Services.getL18N().Elements();
         I18NBundle i18nAbilities = Services.getL18N().Abilities();
 

@@ -16,11 +16,13 @@ import ktx.scene2d.table
  * @author Georg Eckert 2017
  */
 
-class GuardoSphereChoiceWidget(
-
+class GuardoSphereChoiceWidget
+(
         private val skin: Skin,
         private val sphere: GuardoSphere,
-        private val buttonGroup: ButtonGroup<Button>) : Group()
+        private val buttonGroup: ButtonGroup<Button>
+)
+    : Group()
 {
     private val table: Table
     private val buttons = Array<Button>()
@@ -42,7 +44,6 @@ class GuardoSphereChoiceWidget(
         table = table {
 
             setSize(WIDTH,HEIGHT)
-            setPosition(6f, 4f, Align.bottomLeft)
         }
 
         // Setup Hierarchy
@@ -54,24 +55,17 @@ class GuardoSphereChoiceWidget(
 
     fun refresh(page: Int)
     {
-        for (b in buttons)
-        {
-            table-b
-        }
+        for (b in buttons) table-b
 
         buttonGroup.clear()
         buttons.clear()
         table.clear()
 
-        for (i in page * 35 until (page + 1) * 35)
+        for (key in page * 35 until (page + 1) * 35)
         {
-            if (i % 7 == 0)
-            {
-                table.row()
-            }
+            if (key % 7 == 0) table.row()
 
-            val key = i
-            val guardian = sphere[i]
+            val guardian = sphere[key]
             val monsterButton = GuardoSphereButton(skin, guardian)
 
             table.add<ImageButton>(monsterButton).width(32f).height(32f)

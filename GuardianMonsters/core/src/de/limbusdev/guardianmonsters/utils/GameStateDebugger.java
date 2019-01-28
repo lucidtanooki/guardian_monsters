@@ -40,7 +40,7 @@ public class GameStateDebugger
     private void setUpTestInventory()
     {
         int ACTIVE_TEAM_SIZE_HERO = 3;
-        AGuardianFactory guardianFactory = GuardiansServiceLocator.getGuardianFactory();
+        AGuardianFactory guardianFactory = GuardiansServiceLocator.INSTANCE.getGuardianFactory();
         Team heroTeam = new Team(3,3,ACTIVE_TEAM_SIZE_HERO);
         heroTeam.put(0, guardianFactory.createGuardian(1,1));
         heroTeam.put(1, guardianFactory.createGuardian(2,1));
@@ -102,7 +102,7 @@ public class GameStateDebugger
 
         Inventory inventory = new Inventory();
 
-        IItemService itemService = GuardiansServiceLocator.getItems();
+        IItemService itemService = GuardiansServiceLocator.INSTANCE.getItems();
 
         inventory.putItemInInventory(itemService.getItem("sword-barb-steel"));
         inventory.putItemInInventory(itemService.getItem("bread"));
@@ -134,7 +134,7 @@ public class GameStateDebugger
     private void setUpTestBattle()
     {
         int ACTIVE_TEAM_SIZE_HERO = 3;
-        AGuardianFactory guardianFactory = GuardiansServiceLocator.getGuardianFactory();
+        AGuardianFactory guardianFactory = GuardiansServiceLocator.INSTANCE.getGuardianFactory();
         Team heroTeam = new Team(3,3,ACTIVE_TEAM_SIZE_HERO);
         heroTeam.put(0, guardianFactory.createGuardian(1,1));
         heroTeam.put(1, guardianFactory.createGuardian(2,1));
@@ -171,7 +171,7 @@ public class GameStateDebugger
 
         Inventory inventory = new Inventory();
 
-        IItemService itemService = GuardiansServiceLocator.getItems();
+        IItemService itemService = GuardiansServiceLocator.INSTANCE.getItems();
 
         inventory.putItemInInventory(itemService.getItem("sword-barb-steel"));
         inventory.putItemInInventory(itemService.getItem("bread"));
@@ -238,7 +238,7 @@ public class GameStateDebugger
     public void testResultScreen()
     {
 
-        AGuardianFactory guardianFactory = GuardiansServiceLocator.getGuardianFactory();
+        AGuardianFactory guardianFactory = GuardiansServiceLocator.INSTANCE.getGuardianFactory();
         Team heroTeam = new Team(3,3,3);
         heroTeam.put(0, guardianFactory.createGuardian(1,1));
         heroTeam.put(1, guardianFactory.createGuardian(2,1));
@@ -254,7 +254,7 @@ public class GameStateDebugger
 
         Inventory inventory = new Inventory();
 
-        IItemService itemService = GuardiansServiceLocator.getItems();
+        IItemService itemService = GuardiansServiceLocator.INSTANCE.getItems();
 
         inventory.putItemInInventory(itemService.getItem("sword-barb-steel"));
         inventory.putItemInInventory(itemService.getItem("bread"));
@@ -281,7 +281,7 @@ public class GameStateDebugger
 
     private void testGuardoSphereScreen() {
 
-        AGuardianFactory guardianFactory = GuardiansServiceLocator.getGuardianFactory();
+        AGuardianFactory guardianFactory = GuardiansServiceLocator.INSTANCE.getGuardianFactory();
         Team heroTeam = new Team(3,3,3);
         heroTeam.put(0, guardianFactory.createGuardian(1,1));
         heroTeam.put(1, guardianFactory.createGuardian(2,1));

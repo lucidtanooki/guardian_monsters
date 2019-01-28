@@ -58,10 +58,7 @@ abstract class AGuardian protected constructor(val uuid: String) : Observable()
         return other.uuid == uuid
     }
 
-    override fun hashCode(): Int
-    {
-        return uuid.hashCode()
-    }
+    override fun hashCode(): Int = uuid.hashCode()
 
     // ........................................................... delegations: IndividualStatistics
 

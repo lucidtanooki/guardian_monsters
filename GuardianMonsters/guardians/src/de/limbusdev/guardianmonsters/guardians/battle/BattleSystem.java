@@ -101,7 +101,7 @@ public class BattleSystem
 
         // Calculate Ability
         Ability.aID aID = getActiveMonster().getAbilityGraph().getActiveAbilities().get(attack);
-        Ability ability = GuardiansServiceLocator.getAbilities().getAbility(aID);
+        Ability ability = GuardiansServiceLocator.INSTANCE.getAbilities().getAbility(aID);
 
 
         AGuardian attacker = getActiveMonster();
@@ -117,7 +117,7 @@ public class BattleSystem
 
         // Calculate Ability
         Ability.aID aID= getActiveMonster().getAbilityGraph().getActiveAbilities().get(attack);
-        Ability ability = GuardiansServiceLocator.getAbilities().getAbility(aID);
+        Ability ability = GuardiansServiceLocator.INSTANCE.getAbilities().getAbility(aID);
 
 
         AGuardian attacker = getActiveMonster();
@@ -189,7 +189,7 @@ public class BattleSystem
                 } else {
                     // chose arbitrary target and ability
                     Ability.aID aID = activeGuardian.getAbilityGraph().getRandomActiveAbility();
-                    Ability ability = GuardiansServiceLocator.getAbilities().getAbility(aID);
+                    Ability ability = GuardiansServiceLocator.INSTANCE.getAbilities().getAbility(aID);
                     int att = activeGuardian.getAbilityGraph().getActiveAbilities().getKey(aID, false);
 
                     if (ability.areaDamage) {setChosenArea(queue.getRandomCombatTeam());}
@@ -452,7 +452,7 @@ public class BattleSystem
                     aID = m.getAbilityGraph().getActiveAbility(att);
                 }
 
-                Ability ability = GuardiansServiceLocator.getAbilities().getAbility(aID);
+                Ability ability = GuardiansServiceLocator.INSTANCE.getAbilities().getAbility(aID);
 
                 if(ability.areaDamage) {
 

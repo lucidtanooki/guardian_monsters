@@ -72,24 +72,24 @@ public class LevelUpWidget extends OverlayWidget
 
         String[] attributes = {"exp", "hp", "mp", "pstr", "pdef", "mstr", "mdef", "speed"};
         int[] oldAttribVals = {
-            lvlUp.oldLevel,
-            lvlUp.oldStats.getHP(),
-            lvlUp.oldStats.getMP(),
-            lvlUp.oldStats.getPDef(),
-            lvlUp.oldStats.getPStr(),
-            lvlUp.oldStats.getMStr(),
-            lvlUp.oldStats.getMDef(),
-            lvlUp.oldStats.getSpeed()
+            lvlUp.getOldLevel(),
+            lvlUp.getOldStats().getHP(),
+            lvlUp.getOldStats().getMP(),
+            lvlUp.getOldStats().getPDef(),
+            lvlUp.getOldStats().getPStr(),
+            lvlUp.getOldStats().getMStr(),
+            lvlUp.getOldStats().getMDef(),
+            lvlUp.getOldStats().getSpeed()
         };
         int[] newAttribVals = {
-            lvlUp.newLevel,
-            lvlUp.newStats.getHP(),
-            lvlUp.newStats.getMP(),
-            lvlUp.newStats.getPDef(),
-            lvlUp.newStats.getPStr(),
-            lvlUp.newStats.getMStr(),
-            lvlUp.newStats.getMDef(),
-            lvlUp.newStats.getSpeed()
+            lvlUp.getNewLevel(),
+            lvlUp.getNewStats().getHP(),
+            lvlUp.getNewStats().getMP(),
+            lvlUp.getNewStats().getPDef(),
+            lvlUp.getNewStats().getPStr(),
+            lvlUp.getNewStats().getMStr(),
+            lvlUp.getNewStats().getMDef(),
+            lvlUp.getNewStats().getSpeed()
         };
         for(int i=0; i<attributes.length; i++) {
             values.add(new Image(skin.getDrawable("stats-symbol-" + attributes[i]))).size(16,16);

@@ -100,7 +100,7 @@ public class GuardianOverviewButton extends TextButton implements Listener<Guard
         EquipmentPotential pot = guardian.getIndividualStatistics().getEquipmentPotential(equipment);
 
         String props[]  = {"hp", "mp", "speed", "exp", "pstr", "pdef", "mstr", "mdef"};
-        int potValues[] = {pot.hp, pot.mp, pot.speed, pot.exp, pot.pstr, pot.pdef, pot.mstr, pot.mdef};
+        int potValues[] = {pot.getHp(), pot.getMp(), pot.getSpeed(), pot.getExp(), pot.getPstr(), pot.getPdef(), pot.getMstr(), pot.getMdef()};
 
         String fontStyle, sign, value;
         subTable = new Table();
@@ -108,7 +108,7 @@ public class GuardianOverviewButton extends TextButton implements Listener<Guard
         for(int i=0; i<props.length; i++) {
             subTable.add(new Image(getSkin().getDrawable("stats-symbol-" + props[i]))).width(16).height(16);
 
-            fontStyle = (potValues[i] > 0 ? "green" : (pot.hp == potValues[i] ? "default" : "red"));
+            fontStyle = (potValues[i] > 0 ? "green" : (pot.getHp() == potValues[i] ? "default" : "red"));
             sign = potValues[i] > 0 ? "+" : "";
             value = Integer.toString(potValues[i]);
 

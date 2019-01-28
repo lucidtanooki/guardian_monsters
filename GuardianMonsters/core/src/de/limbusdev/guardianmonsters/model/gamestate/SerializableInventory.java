@@ -36,7 +36,7 @@ public class SerializableInventory {
 
         Inventory inventory = new Inventory();
 
-        IItemService items = GuardiansServiceLocator.getItems();
+        IItemService items = GuardiansServiceLocator.INSTANCE.getItems();
 
         for(int i=0; i<sInventory.items.length; i++) {
             for(int j=0; j<sInventory.amount[i]; j++) {

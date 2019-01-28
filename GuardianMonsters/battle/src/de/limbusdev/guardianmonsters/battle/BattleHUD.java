@@ -30,7 +30,6 @@ import de.limbusdev.guardianmonsters.guardians.battle.BattleCalculator;
 import de.limbusdev.guardianmonsters.guardians.battle.BattleSystem;
 import de.limbusdev.guardianmonsters.guardians.items.ChakraCrystalItem;
 import de.limbusdev.guardianmonsters.guardians.items.Inventory;
-import de.limbusdev.guardianmonsters.guardians.items.Item;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics;
 import de.limbusdev.guardianmonsters.guardians.monsters.Team;
@@ -338,7 +337,7 @@ public class BattleHUD extends ABattleHUD
             battleSystem.setChosenAttack(chosenAttackNr);
 
             Ability.aID abilityID = activeGuardian.getAbilityGraph().getActiveAbility(nr);
-            boolean areaAttack = GuardiansServiceLocator.getAbilities().getAbility(abilityID).areaDamage;
+            boolean areaAttack = GuardiansServiceLocator.INSTANCE.getAbilities().getAbility(abilityID).areaDamage;
 
             if(areaAttack) {
                 battleStateSwitcher.toTargetAreaChoice();

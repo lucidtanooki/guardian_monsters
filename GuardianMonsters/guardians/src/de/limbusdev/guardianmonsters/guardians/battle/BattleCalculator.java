@@ -49,7 +49,7 @@ public class BattleCalculator
     {
         // Calculate Attack
         System.out.println("\n--- new ability ---");
-        Ability ability = GuardiansServiceLocator.getAbilities().getAbility(abilityID);
+        Ability ability = GuardiansServiceLocator.INSTANCE.getAbilities().getAbility(abilityID);
         AttackCalculationReport report = new AttackCalculationReport(
             attacker, defender, ability, 0, 0, false, StatusEffect.HEALTHY, false, 0, 0, 0, 0, 0, false, 0, 0);
 

@@ -42,7 +42,7 @@ public class BattleFactory
 
         Team team = new Team(availableGuardianProbabilities.size, numMonsters, numMonsters);
 
-        AGuardianFactory factory = GuardiansServiceLocator.getGuardianFactory();
+        AGuardianFactory factory = GuardiansServiceLocator.INSTANCE.getGuardianFactory();
 
         for(int j=0; j<numMonsters; j++)
         {

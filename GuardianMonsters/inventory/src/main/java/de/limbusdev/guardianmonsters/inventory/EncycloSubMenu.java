@@ -120,7 +120,7 @@ public class EncycloSubMenu extends AInventorySubMenu
     private void init(int speciesID) {
 
         StringBuilder nameBuilder = new StringBuilder();
-        for(int i=0; i < GuardiansServiceLocator.getSpecies().getSpeciesDescription(speciesID).getMetaForms().size; i++) {
+        for(int i=0; i < GuardiansServiceLocator.INSTANCE.getSpecies().getSpeciesDescription(speciesID).getMetaForms().size; i++) {
 
             if(i > 0) {nameBuilder.append(" > ");}
             nameBuilder.append(Services.getL18N().getLocalizedGuardianName(speciesID, i));
@@ -132,7 +132,7 @@ public class EncycloSubMenu extends AInventorySubMenu
         currentSpeciesID = speciesID;
 
         IMediaManager media = Services.getMedia();
-        SpeciesDescription desc = GuardiansServiceLocator.getSpecies().getSpeciesDescription(speciesID);
+        SpeciesDescription desc = GuardiansServiceLocator.INSTANCE.getSpecies().getSpeciesDescription(speciesID);
         int metaForms = desc.getMetaForms().size;
 
         guardianImgMeta0.remove();

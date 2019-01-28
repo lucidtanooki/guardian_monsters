@@ -75,7 +75,7 @@ class GuardoSphereStatWidget(private val skin: Skin) : Group()
 
     fun initialize(m: AGuardian)
     {
-        val species = GuardiansServiceLocator.getSpecies()
+        val species = GuardiansServiceLocator.species
         valueLabels["hp"].txt = "${m.individualStatistics.hp} / ${m.individualStatistics.hpMax}"
         valueLabels["mp"].txt = "${m.individualStatistics.mp} / ${m.individualStatistics.mPmax}"
         valueLabels["exp"].txt = "${m.individualStatistics.exp} / ${m.individualStatistics.expToNextLevel + m.individualStatistics.exp}"
@@ -84,7 +84,6 @@ class GuardoSphereStatWidget(private val skin: Skin) : Group()
         valueLabels["mstr"].txt = "${m.individualStatistics.mStrMax}"
         valueLabels["mdef"].txt = "${m.individualStatistics.mDefMax}"
         valueLabels["speed"].txt = "${m.individualStatistics.speedMax}"
-
 
         elementGroup.clear()
 
@@ -104,30 +103,39 @@ class GuardoSphereStatWidget(private val skin: Skin) : Group()
 
         equipmentGroup.clear()
 
-        if (m.individualStatistics.hasHeadEquipped())
+        var name: String?
+
+        name = m.individualStatistics.head?.name
+        if (name != null)
         {
-            val img = Image(skin.getDrawable(m.individualStatistics.head.name))
+            val img = Image(skin.getDrawable(name))
             img.setSize(32f, 32f)
             img.setPosition(102f, (178 - 2).toFloat(), Align.topLeft)
             equipmentGroup+img
         }
-        if (m.individualStatistics.hasHandsEquipped())
+
+        name = m.individualStatistics.hands?.name
+        if (name != null)
         {
-            val img = Image(skin.getDrawable(m.individualStatistics.hands.name))
+            val img = Image(skin.getDrawable(name))
             img.setSize(32f, 32f)
             img.setPosition(102f, (178 - 2 - 38).toFloat(), Align.topLeft)
             equipmentGroup+img
         }
-        if (m.individualStatistics.hasBodyEquipped())
+
+        name = m.individualStatistics.body?.name
+        if (name != null)
         {
-            val img = Image(skin.getDrawable(m.individualStatistics.body.name))
+            val img = Image(skin.getDrawable(name))
             img.setSize(32f, 32f)
             img.setPosition(102f, (178 - 2 - 38 * 2).toFloat(), Align.topLeft)
             equipmentGroup+img
         }
-        if (m.individualStatistics.hasFeetEquipped())
+
+        name = m.individualStatistics.feet?.name
+        if (name != null)
         {
-            val img = Image(skin.getDrawable(m.individualStatistics.feet.name))
+            val img = Image(skin.getDrawable(name))
             img.setSize(32f, 32f)
             img.setPosition(102f, (178 - 2 - 38 * 3).toFloat(), Align.topLeft)
             equipmentGroup+img

@@ -24,4 +24,7 @@ class GuardoSphereScreen
         team: Team,
         guardoSphere: GuardoSphere
 )
-    : AScreen(GuardoSphereHUD(Services.getUI().inventorySkin, team, guardoSphere))
+    : AScreen
+(
+        GuardoSphereHUD(Services.getUI().inventorySkin, team, guardoSphere)
+)

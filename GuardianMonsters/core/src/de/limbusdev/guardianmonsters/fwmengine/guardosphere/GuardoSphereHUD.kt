@@ -45,13 +45,14 @@ class GuardoSphereHUD
 
         val teamWidget = GuardoSphereTeamWidget(skin, team, guardianButtonGroup)
 
-        teamWidget.setPosition(1f,1f, Align.bottomLeft)
+        teamWidget.setPosition(8f,8f, Align.bottomLeft)
         teamWidget.callback = { teamPosition -> detailWidget.showDetails(team.get(teamPosition)) }
 
         guardoSphereChoiceWidget.callback = {
 
             spherePosition ->
-            if (guardoSphere.get(spherePosition) != null) {
+            if (guardoSphere.get(spherePosition) != null)
+            {
                 detailWidget.showDetails(guardoSphere.get(spherePosition))
             }
         }

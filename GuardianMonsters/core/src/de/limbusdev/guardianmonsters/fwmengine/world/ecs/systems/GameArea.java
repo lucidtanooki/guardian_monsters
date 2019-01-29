@@ -117,7 +117,7 @@ public class GameArea {
         String musicType = tiledMap.getProperties().get("musicType", String.class);
         int musicIndex = Integer.parseInt(tiledMap.getProperties().get("musicIndex", String.class)) - 1;
         if (musicType.equals("town")) {
-            bgMusic = AssetPath.Audio.Music.BG_TOWN[musicIndex];
+            bgMusic = AssetPath.Audio.Music.BG_BATTLE[musicIndex];
         }
 
         return tiledMap;

@@ -300,6 +300,7 @@ project(":assets") {
     dependencies {
         implementation project(":enums")
         implementation project(":guardians")
+        implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
         implementation "com.badlogicgames.gdx:gdx:$gdxVersion"
         implementation "net.dermetfan.libgdx-utils:libgdx-utils:$gdxUtilsVersion"
         implementation "net.dermetfan.libgdx-utils:libgdx-utils-box2d:$gdxUtilsVersion" // Box2D module (optional)

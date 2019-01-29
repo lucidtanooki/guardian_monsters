@@ -1,6 +1,6 @@
-package de.limbusdev.utils;
+package de.limbusdev.utils
 
-import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.MathUtils
 
 /**
  * MathTool
@@ -9,7 +9,7 @@ import com.badlogic.gdx.math.MathUtils;
  *
  * @author Georg Eckert 2017
  */
-public class MathTool
+object MathTool
 {
     /**
      * Rolls a dice and adds the results
@@ -18,14 +18,14 @@ public class MathTool
      * @param add   how much base value should be added to the result
      * @return      the resulting value
      */
-    public static int dice(int rolls, int sides, int add)
+    fun dice(rolls: Int, sides: Int, add: Int): Int
     {
-        int result=add;
-        for(int i=0; i<rolls; i++)
+        var result = add
+        for(i in 0 until rolls)
         {
-            result += MathUtils.random(sides);
+            result += MathUtils.random(sides)
         }
-        return result;
+        return result
     }
 
     /**
@@ -36,13 +36,13 @@ public class MathTool
      * add   ...        how much base value should be added to the result
      * @return          the resulting value
      */
-    public static int dice(int[] triple)
+    fun dice(triple: IntArray): Int
     {
-        if(triple.length < 3)
+        if(triple.size < 3)
         {
-            throw new IllegalArgumentException("Not enough values. Use (rolls, sides, add)");
+            throw IllegalArgumentException("Not enough values. Use (rolls, sides, add)")
         }
-        return dice(triple[0], triple[1], triple[2]);
+        return dice(triple[0], triple[1], triple[2])
     }
 
     /**
@@ -50,8 +50,8 @@ public class MathTool
      * @param triple
      * @return
      */
-    public static int diceMax(int[] triple)
+    fun diceMax(triple: IntArray): Int
     {
-        return triple[0] * triple[1] + triple[2];
+        return triple[0] * triple[1] + triple[2]
     }
 }

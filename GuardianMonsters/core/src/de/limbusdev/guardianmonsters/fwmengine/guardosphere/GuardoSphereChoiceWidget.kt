@@ -188,9 +188,14 @@ class GuardoSphereChoiceWidget
             val droppedAtCell = vectorToGrid(target.x, target.y)
 
             // Check, if Guardian was dropped inside the grid
-            if(droppedAtCell.y in (0..6) && droppedAtCell.x in (0..4))
+            if(droppedAtCell.y in (0..4) && droppedAtCell.x in (0..6))
             {
                 choiceWidget.swapButtonsOnGrid(startPosition, droppedAtCell, page, page)
+            }
+            else
+            {
+                val startVector = gridToVector(startPosition.y, startPosition.x)
+                target.setPosition(startVector.x, startVector.y)
             }
         }
     }

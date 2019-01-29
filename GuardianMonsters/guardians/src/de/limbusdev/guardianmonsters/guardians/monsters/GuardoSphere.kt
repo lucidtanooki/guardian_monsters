@@ -28,6 +28,15 @@ class GuardoSphere : ArrayMap<Int, AGuardian>(300)
         }
     }
 
+    fun swap(key1: Int, key2: Int)
+    {
+        val value1 = this[key1]
+        val value2 = this[key2]
+
+        if(value1 == null) this.removeKey(key2) else this[key2] = value1
+        if(value2 == null) this.removeKey(key1) else this[key1] = value2
+    }
+
     fun getEncycloStateOf(speciesID: Int, metaForm: Int): State
     {
         if(encycloStates.containsKey(speciesID) && encycloStates[speciesID].containsKey(metaForm))

@@ -93,54 +93,40 @@ class GuardoSphereChoiceWidget
                 buttonGroup.add(monsterButton)
                 buttonGrid[row][col] = monsterButton
 
-                monsterButton.addListener(object : ActorGestureListener()
-                {
-                    var startPosition = IntVec2(0,0)
-
-                    override fun touchUp(event: InputEvent?, x: Float, y: Float, pointer: Int, button: Int)
-                    {
-                        super.touchUp(event, x, y, pointer, button)
-                        var field = CoordinatesToGridPosition(monsterButton.x, monsterButton.y)
-                        val dropAt = GridPositionToCoordinates(field.y, field.x)
-                        monsterButton.x = dropAt.x
-                        monsterButton.y = dropAt.y
-                        val moveTargetTo = GridPositionToCoordinates(startPosition.y, startPosition.x)
-                        buttonGrid[field.y][field.x].setPosition(moveTargetTo.x, moveTargetTo.y)
-                    }
-
-                    override fun touchDown(event: InputEvent?, x: Float, y: Float, pointer: Int, button: Int)
-                    {
-                        super.touchDown(event, x, y, pointer, button)
-                        callback.invoke(key)
-                        startPosition = CoordinatesToGridPosition(monsterButton.x, monsterButton.y)
-                        println(startPosition.toString())
-                    }
-
-                    override fun pan(event: InputEvent?, x: Float, y: Float, deltaX: Float, deltaY: Float)
-                    {
-                        monsterButton.x += deltaX
-                        monsterButton.y += deltaY
-                    }
-                })
+                monsterButton.addListener(GestureListener(this, key, monsterButton, page))
 
                 key++
             }
         }
     }
 
-    private fun CoordinatesToGridPosition(x: Float, y: Float) : IntVec2
+    fun swapButtonsOnGrid(cellA: IntVec2, cellB: IntVec2, pageA: Int, pageB: Int)
     {
-        return IntVec2(
-                    (x.toInt()+16) / 32, // Column
-                4 - (y.toInt()+16) / 32) // Row
-    }
+        // Get buttons
+        val buttonA = buttonGrid[cellA.y][cellA.x]
+        val buttonB = buttonGrid[cellB.y][cellB.x]
 
-    private fun GridPositionToCoordinates(row: Int, col: Int) : Vector2
-    {
-        return Vector2(
-                col*32f,
-                (4 - row)*32f
-        )
+        // Set new grid entries
+        buttonGrid[cellA.y][cellA.x] = buttonB
+        buttonGrid[cellB.y][cellB.x] = buttonA
+
+        // Move buttons to new positions
+        val newPositionA = gridToVector(cellB.y, cellB.x)
+        val newPositionB = gridToVector(cellA.y, cellA.x)
+        buttonA.setPosition(newPositionA.x, newPositionA.y)
+        buttonB.setPosition(newPositionB.x, newPositionB.y)
+
+        // Swap guardians
+        val guardianA = gridToSphere(cellA.y, cellA.x, pageA)
+        val guardianB = gridToSphere(cellB.y, cellB.x, pageB)
+
+        sphere.swap(guardianA, guardianB)
+
+        // Assign new listeners
+        buttonA.clearListeners()
+        buttonA.addListener(GestureListener(this, guardianB, buttonA, pageB))
+        buttonB.clearListeners()
+        buttonB.addListener(GestureListener(this, guardianA, buttonB, pageA))
     }
 
     companion object
@@ -148,5 +134,59 @@ class GuardoSphereChoiceWidget
         private const val TAG = "GuardoSphereChoiceWidget"
         private const val WIDTH = 252f
         private const val HEIGHT = 180f
+
+        private fun vectorToGrid(x: Float, y: Float) : IntVec2
+        {
+            return IntVec2(
+                    (x.toInt()+16) / 32, // Column
+                    4 - (y.toInt()+16) / 32) // Row
+        }
+
+        private fun gridToVector(row: Int, col: Int) : Vector2
+        {
+            return Vector2(
+                    col*32f,
+                    (4 - row)*32f
+            )
+        }
+
+        private fun gridToSphere(row: Int, col: Int, page: Int) : Int
+        {
+            return (page*35 + row*7 + col)
+        }
+    }
+
+    class GestureListener
+    (
+            private val choiceWidget: GuardoSphereChoiceWidget,
+            private var sphereSlot: Int,
+            private val target: Button,
+            private val page: Int
+    )
+        : ActorGestureListener()
+    {
+        private var startPosition = IntVec2(0,0)
+
+        override fun touchDown(event: InputEvent?, x: Float, y: Float, pointer: Int, button: Int)
+        {
+            super.touchDown(event, x, y, pointer, button)
+
+            startPosition = vectorToGrid(target.x, target.y)    // remember initial position on grid
+            choiceWidget.callback.invoke(sphereSlot)            // show guardian details
+        }
+
+        override fun pan(event: InputEvent?, x: Float, y: Float, deltaX: Float, deltaY: Float)
+        {
+            target.x += deltaX
+            target.y += deltaY
+        }
+
+        override fun touchUp(event: InputEvent?, x: Float, y: Float, pointer: Int, button: Int)
+        {
+            super.touchUp(event, x, y, pointer, button)
+
+            val droppedAtCell = vectorToGrid(target.x, target.y)
+            choiceWidget.swapButtonsOnGrid(startPosition, droppedAtCell, page, page)
+        }
     }
 }

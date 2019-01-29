@@ -54,14 +54,17 @@ class GuardianDetailWidget(skin: Skin) : Group()
         this+level
     }
 
-    fun showDetails(guardian: AGuardian)
+    fun showDetails(guardian: AGuardian?)
     {
-        val region = Services.getMedia().getMonsterSprite(
-                guardian.speciesDescription.ID,
-                guardian.abilityGraph.currentForm)
-        monsterSprite.drawable = TextureRegionDrawable(region)
-        name.setText(Services.getL18N().getGuardianNicknameIfAvailable(guardian))
-        level.setText("Lvl $guardian.individualStatistics.level")
+        if(guardian != null)
+        {
+            val region = Services.getMedia().getMonsterSprite(
+                    guardian.speciesDescription.ID,
+                    guardian.abilityGraph.currentForm)
+            monsterSprite.drawable = TextureRegionDrawable(region)
+            name.setText(Services.getL18N().getGuardianNicknameIfAvailable(guardian))
+            level.setText("Lvl $guardian.individualStatistics.level")
+        }
     }
 
     companion object

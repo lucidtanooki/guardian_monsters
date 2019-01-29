@@ -1,4 +1,4 @@
-package de.limbusdev.guardianmonsters.ui;
+package de.limbusdev.guardianmonsters.ui
 
 /**
  * Command
@@ -8,7 +8,7 @@ package de.limbusdev.guardianmonsters.ui;
  * @author Georg Eckert 2017
  */
 
-public interface Command
+interface Command
 {
-    void run();
+    fun run()
 }

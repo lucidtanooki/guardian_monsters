@@ -190,41 +190,41 @@ public class BattleHUD extends ABattleHUD
         // Second stage
         FitViewport viewport = new FitViewport(640,360);
         battleAnimationStage = new Stage(viewport);
-        addAddtitionalStage(battleAnimationStage);
+        addAdditionalStage(battleAnimationStage);
 
         // Widgets
-        mainMenu            = new BattleMainMenuWidget(skin, mainMenuOnSwordButton, mainMenuOnRunButton);
-        statusWidget        = new BattleStatusOverviewWidget(skin);
+        mainMenu            = new BattleMainMenuWidget(getSkin(), mainMenuOnSwordButton, mainMenuOnRunButton);
+        statusWidget        = new BattleStatusOverviewWidget(getSkin());
         animationWidget     = new BattleAnimationWidget(
             battleAnimationOnHitCompleteCallback,
             battleAnimationOnDieingCallback,
             battleAnimationOnDoingNothingCallback);
-        attackMenuAddOn     = new SevenButtonsWidget.CentralHalfButtonsAddOn(skin, attackMenuAddOnCallbacks);
+        attackMenuAddOn     = new SevenButtonsWidget.CentralHalfButtonsAddOn(getSkin(), attackMenuAddOnCallbacks);
 
-        attackMenu          = new AttackMenuWidget (skin, attackMenuCallbacks       ::onClick);
-        attackInfoMenu      = new AttackMenuWidget (skin, attackInfoMenuCallbacks   ::onClick);
-        targetMenuWidget    = new TargetMenuWidget (skin, targetMenuCallbacks       ::onClick);
-        targetAreaMenuWidget= new TargetMenuWidget (skin, targetAreaMenuCallbacks   ::onClick);
+        attackMenu          = new AttackMenuWidget (getSkin(), attackMenuCallbacks       ::onClick);
+        attackInfoMenu      = new AttackMenuWidget (getSkin(), attackInfoMenuCallbacks   ::onClick);
+        targetMenuWidget    = new TargetMenuWidget (getSkin(), targetMenuCallbacks       ::onClick);
+        targetAreaMenuWidget= new TargetMenuWidget (getSkin(), targetAreaMenuCallbacks   ::onClick);
 
-        attackInfoMenuFrame    = new BattleActionMenuWidget(skin, () -> {});
-        attackDetailBackButton = new BattleActionMenuWidget(skin, attackDetailLabelBackCB::onClick);
+        attackInfoMenuFrame    = new BattleActionMenuWidget(getSkin(), () -> {});
+        attackDetailBackButton = new BattleActionMenuWidget(getSkin(), attackDetailLabelBackCB::onClick);
         actionMenu             = new BattleActionMenuWidget(
-            skin,
+            getSkin(),
             actionMenuBackCB    :: onClick,
             actionMenuBagCB     :: onClick,
             actionMenuMonsterCB :: onClick,
             actionMenuExtraCB   :: onClick);
 
-        battleQueueWidget = new BattleQueueWidget(skin, Align.bottomLeft);
+        battleQueueWidget = new BattleQueueWidget(getSkin(), Align.bottomLeft);
         battleQueueWidget.setPosition(1,65, Align.bottomLeft);
 
-        infoLabelWidget = new InfoLabelWidget(skin);
-        attackDetailWidget = new AbilityInfoLabelWidget(skin, Services.getUI().getInventorySkin());
+        infoLabelWidget = new InfoLabelWidget(getSkin());
+        attackDetailWidget = new AbilityInfoLabelWidget(getSkin(), Services.getUI().getInventorySkin());
 
         attackDetailBackButton.disableAllButBackButton();
         attackInfoMenuFrame.disableAllChildButtons();
 
-        switchActiveGuardianWidget = new SwitchActiveGuardianWidget(skin, Services.getUI().getInventorySkin());
+        switchActiveGuardianWidget = new SwitchActiveGuardianWidget(getSkin(), Services.getUI().getInventorySkin());
         switchActiveGuardianWidget.setCallbacks(teamMenuOnBackButton, teamMenuOnSwitchButton);
     }
 
@@ -265,7 +265,7 @@ public class BattleHUD extends ABattleHUD
 
         actionMenuBagCB = () ->
         {
-            stage.addActor(new ItemChoice(Services.getUI().getInventorySkin(), inventory, leftTeam, battleSystem));
+            getStage().addActor(new ItemChoice(Services.getUI().getInventorySkin(), inventory, leftTeam, battleSystem));
         };
 
         actionMenuMonsterCB = () ->
@@ -623,7 +623,7 @@ public class BattleHUD extends ABattleHUD
 
     private void showLevelUp(AGuardian m)
     {
-        stage.addActor(new LevelUpWidget(Services.getUI().getInventorySkin(), m));
+        getStage().addActor(new LevelUpWidget(Services.getUI().getInventorySkin(), m));
     }
 
 
@@ -641,8 +641,8 @@ public class BattleHUD extends ABattleHUD
             // Add Widgets
             animationWidget.addToStageAndFadeIn(battleAnimationStage);
             statusWidget.addToStageAndFadeIn(battleAnimationStage);
-            infoLabelWidget.addToStageAndFadeIn(stage);
-            actionMenu.addToStageAndFadeIn(stage);
+            infoLabelWidget.addToStageAndFadeIn(getStage());
+            actionMenu.addToStageAndFadeIn(getStage());
 
             // Set Widget State
             actionMenu.disableAllButBackButton();
@@ -662,10 +662,10 @@ public class BattleHUD extends ABattleHUD
             // Add Widgets
             animationWidget.addToStage(battleAnimationStage);
             statusWidget.addToStage(battleAnimationStage);
-            battleQueueWidget.addToStage(stage);
-            actionMenu.addToStage(stage);
-            attackMenu.addToStage(stage);
-            attackMenuAddOn.addToStage(stage);
+            battleQueueWidget.addToStage(getStage());
+            actionMenu.addToStage(getStage());
+            attackMenu.addToStage(getStage());
+            attackMenuAddOn.addToStage(getStage());
 
             // Setup Widgets
             actionMenu.setCallbacks(actionMenuBackCB, actionMenuBagCB, actionMenuMonsterCB, actionMenuExtraCB);
@@ -686,10 +686,10 @@ public class BattleHUD extends ABattleHUD
 
             animationWidget.addToStage(battleAnimationStage);
             statusWidget.addToStage(battleAnimationStage);
-            battleQueueWidget.addToStage(stage);
-            attackInfoMenu.addToStage(stage);
-            attackMenuAddOn.addToStage(stage);
-            attackInfoMenuFrame.addToStage(stage);
+            battleQueueWidget.addToStage(getStage());
+            attackInfoMenu.addToStage(getStage());
+            attackMenuAddOn.addToStage(getStage());
+            attackInfoMenuFrame.addToStage(getStage());
 
             attackInfoMenu.init(battleSystem.getActiveMonster(), false);
             attackInfoMenu.toAttackInfoStyle();
@@ -703,10 +703,10 @@ public class BattleHUD extends ABattleHUD
 
             animationWidget.addToStage(battleAnimationStage);
             statusWidget.addToStage(battleAnimationStage);
-            battleQueueWidget.addToStage(stage);
-            attackMenuAddOn.addToStage(stage);
-            attackDetailWidget.addToStage(stage);
-            attackDetailBackButton.addToStage(stage);
+            battleQueueWidget.addToStage(getStage());
+            attackMenuAddOn.addToStage(getStage());
+            attackDetailWidget.addToStage(getStage());
+            attackDetailBackButton.addToStage(getStage());
 
             attackDetailWidget.init(aID);
 
@@ -723,7 +723,7 @@ public class BattleHUD extends ABattleHUD
             infoLabelWidget.animateTextAppearance();
             actionMenu.setCallbacks(endOfBattleLabelBackCB, ()->{}, ()->{}, ()->{});
 
-            statusWidget.addToStage(stage);
+            statusWidget.addToStage(getStage());
 
             state = BattleState.ENDOFBATTLE;
 
@@ -734,7 +734,7 @@ public class BattleHUD extends ABattleHUD
                 Actions.run(() -> Services.getAudio().playMusic(AssetPath.Audio.Music.VICTORY_SONG))
             );
 
-            stage.addAction(endOfBattleMusicSequence);
+            getStage().addAction(endOfBattleMusicSequence);
         }
 
         public void toEndOfBattleByBanningLastOpponent(AGuardian bannedGuardian, ChakraCrystalItem crystal)
@@ -746,7 +746,7 @@ public class BattleHUD extends ABattleHUD
             infoLabelWidget.animateTextAppearance();
             actionMenu.setCallbacks(endOfBattleLabelBackCB, ()->{}, ()->{}, ()->{});
 
-            statusWidget.addToStage(stage);
+            statusWidget.addToStage(getStage());
 
             state = BattleState.ENDOFBATTLE;
 
@@ -757,7 +757,7 @@ public class BattleHUD extends ABattleHUD
                     Actions.run(() -> Services.getAudio().playMusic(AssetPath.Audio.Music.VICTORY_SONG))
             );
 
-            stage.addAction(endOfBattleMusicSequence);
+            getStage().addAction(endOfBattleMusicSequence);
 
             // TODO put banned guardian into the guardo sphere
         }
@@ -767,7 +767,7 @@ public class BattleHUD extends ABattleHUD
             reset();
             toInfoLabel();
             actionMenu.disableAllChildButtons();
-            battleQueueWidget.addToStage(stage);
+            battleQueueWidget.addToStage(getStage());
             actionMenu.setCallbacks(infoLabelBackCB, ()->{}, ()->{}, ()->{});
 
             state = BattleState.ANIMATION;
@@ -779,10 +779,10 @@ public class BattleHUD extends ABattleHUD
             animationWidget.addToStage(battleAnimationStage);
             statusWidget.addToStage(battleAnimationStage);
             actionMenu.disableAllButBackButton();
-            actionMenu.addToStage(stage);
+            actionMenu.addToStage(getStage());
             actionMenu.setCallbacks(backToActionMenuCB, ()->{}, ()->{}, ()->{});
-            targetMenuWidget.addToStage(stage);
-            battleQueueWidget.addToStage(stage);
+            targetMenuWidget.addToStage(getStage());
+            battleQueueWidget.addToStage(getStage());
 
             state = BattleState.TARGET_CHOICE;
         }
@@ -793,10 +793,10 @@ public class BattleHUD extends ABattleHUD
             animationWidget.addToStage(battleAnimationStage);
             statusWidget.addToStage(battleAnimationStage);
             actionMenu.disableAllButBackButton();
-            actionMenu.addToStage(stage);
+            actionMenu.addToStage(getStage());
             actionMenu.setCallbacks(backToActionMenuCB, ()->{}, ()->{}, ()->{});
-            targetAreaMenuWidget.addToStage(stage);
-            battleQueueWidget.addToStage(stage);
+            targetAreaMenuWidget.addToStage(getStage());
+            battleQueueWidget.addToStage(getStage());
 
             state = BattleState.TARGET_AREA_CHOICE;
         }
@@ -804,7 +804,7 @@ public class BattleHUD extends ABattleHUD
         public void toTeamMenu()
         {
             reset();
-            switchActiveGuardianWidget.addToStage(stage);
+            switchActiveGuardianWidget.addToStage(getStage());
 
             state = BattleState.TEAM_MENU;
         }
@@ -815,8 +815,8 @@ public class BattleHUD extends ABattleHUD
             animationWidget.addToStage(battleAnimationStage);
             statusWidget.addToStage(battleAnimationStage);
             actionMenu.disable();
-            actionMenu.addToStage(stage);
-            mainMenu.addToStageAndFadeIn(stage);
+            actionMenu.addToStage(getStage());
+            mainMenu.addToStageAndFadeIn(getStage());
 
             state = BattleState.MAINMENU;
         }
@@ -827,8 +827,8 @@ public class BattleHUD extends ABattleHUD
 
             animationWidget.addToStage(battleAnimationStage);
             statusWidget.addToStage(battleAnimationStage);
-            infoLabelWidget.addToStage(stage);
-            actionMenu.addToStage(stage);
+            infoLabelWidget.addToStage(getStage());
+            actionMenu.addToStage(getStage());
 
             actionMenu.disableAllButBackButton();
         }
@@ -837,7 +837,7 @@ public class BattleHUD extends ABattleHUD
         {
             reset();
             toInfoLabel();
-            battleQueueWidget.addToStage(stage);
+            battleQueueWidget.addToStage(getStage());
             actionMenu.setCallbacks(statusEffectLabelBackCB, ()->{}, ()->{}, ()->{});
 
             state = BattleState.ANIMATION;

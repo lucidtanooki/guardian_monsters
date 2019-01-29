@@ -9,8 +9,6 @@ import de.limbusdev.guardianmonsters.Constant
 import de.limbusdev.guardianmonsters.assets.paths.AssetPath
 import de.limbusdev.guardianmonsters.guardians.monsters.GuardoSphere
 import de.limbusdev.guardianmonsters.guardians.monsters.Team
-import de.limbusdev.guardianmonsters.scene2d.lSetPosition
-import de.limbusdev.guardianmonsters.scene2d.lSetSize
 import de.limbusdev.guardianmonsters.services.Services
 import de.limbusdev.guardianmonsters.ui.AHUD
 import de.limbusdev.guardianmonsters.ui.widgets.ParticleEffectActor
@@ -45,17 +43,10 @@ class GuardoSphereHUD
 
         val teamWidget = GuardoSphereTeamWidget(skin, team, guardianButtonGroup)
 
-        teamWidget.setPosition(8f,8f, Align.bottomLeft)
-        teamWidget.callback = { teamPosition -> detailWidget.showDetails(team.get(teamPosition)) }
+        teamWidget.setPosition(teamX, teamY, teamAlign)
+        teamWidget.callback = { detailWidget.showDetails(team.get(it)) }
 
-        guardoSphereChoiceWidget.sphereCallback = {
-
-            spherePosition ->
-            if (guardoSphere.get(spherePosition) != null)
-            {
-                detailWidget.showDetails(guardoSphere.get(spherePosition))
-            }
-        }
+        guardoSphereChoiceWidget.sphereCallback = { detailWidget.showDetails(guardoSphere.get(it)) }
 
         //stage+teamWidget
     }
@@ -67,14 +58,14 @@ class GuardoSphereHUD
         particles.start()
 
         // Position Actors
-        particles.setPosition(0f, 0f, Align.bottomLeft)
-        detailWidget.setPosition((Constant.WIDTH - 8).toFloat(), (Constant.HEIGHT - 8).toFloat(), Align.topRight)
-        guardoSphereChoiceWidget.setPosition(8f, (Constant.HEIGHT - 8).toFloat(), Align.topLeft)
+        particles.setPosition(particlesX, particlesY, particlesAlign)
+        detailWidget.setPosition(detailsX, detailsY, detailsAlign)
+        guardoSphereChoiceWidget.setPosition(sphereChoiceX, sphereChoiceY, sphereChoiceAlign)
 
-        toggleGuardianStatView
-                .lSetSize(40f, 40f)
-                .lSetPosition(Constant.WIDTH - 8f, 8f, Align.bottomRight)
-        guardianStatusWidget.setPosition((Constant.WIDTH - 8).toFloat(), (Constant.RES_Y - 8).toFloat(), Align.topRight)
+        toggleGuardianStatView.setSize(statToggleWidth, statToggleHeight)
+        toggleGuardianStatView.setPosition(statToggleX, statToggleY, statToggleAlign)
+
+        guardianStatusWidget.setPosition(statX, statY, statAlign)
 
         // Configure Actors
         guardianButtonGroup.setMaxCheckCount(1)
@@ -92,11 +83,43 @@ class GuardoSphereHUD
 
     override fun show()
     {
-        Services.getAudio().playLoopMusic(AssetPath.Audio.Music.GUARDOSPHERE)
+        startBGMusic()
     }
 
     override fun hide()
     {
-        Services.getAudio().stopMusic(AssetPath.Audio.Music.GUARDOSPHERE)
+        stopBGMusic()
+    }
+
+    companion object
+    {
+        const val particlesX = 0f
+        const val particlesY = 0f
+        const val particlesAlign = Align.bottomLeft
+
+        const val teamX = 8f
+        const val teamY = 8f
+        const val teamAlign = Align.bottomLeft
+
+        const val detailsX = Constant.WIDTH - 8f
+        const val detailsY = Constant.HEIGHT - 8f
+        const val detailsAlign = Align.topRight
+
+        const val sphereChoiceX = 8f
+        const val sphereChoiceY = Constant.HEIGHT - 8f
+        const val sphereChoiceAlign = Align.topLeft
+
+        const val statToggleWidth = 40f
+        const val statToggleHeight = 40f
+        const val statToggleX = Constant.WIDTH - 8f
+        const val statToggleY = 8f
+        const val statToggleAlign = Align.bottomRight
+
+        const val statX = Constant.WIDTH - 8f
+        const val statY = Constant.RES_Y - 8f
+        const val statAlign = Align.topRight
+
+        fun startBGMusic()  = Services.getAudio().playLoopMusic(AssetPath.Audio.Music.GUARDOSPHERE)
+        fun stopBGMusic()   = Services.getAudio().stopMusic(AssetPath.Audio.Music.GUARDOSPHERE)
     }
 }

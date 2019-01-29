@@ -34,8 +34,8 @@ public abstract class ABattleHUD extends AHUD {
         this.blackCurtain.setSize(Constant.WIDTH, Constant.HEIGHT);
         this.blackCurtain.setPosition(0, 0);
 
-        stage.addActor(battleUIbg);
-        stage.addActor(blackCurtain);
+        getStage().addActor(battleUIbg);
+        getStage().addActor(blackCurtain);
     }
 
 
@@ -56,7 +56,7 @@ public abstract class ABattleHUD extends AHUD {
      */
     public void registerBattleWidget(String key, BattleWidget bw) {
         widgets.put(key,bw);
-        if(!bw.hasParent()) stage.addActor(bw);
+        if(!bw.hasParent()) getStage().addActor(bw);
     }
 
     public BattleWidget getBattleWidget(String key) {

@@ -90,10 +90,6 @@ class GuardoSphereHUD
         const val particlesY = 0f
         const val particlesAlign = Align.bottomLeft
 
-        const val teamX = 8f
-        const val teamY = 8f
-        const val teamAlign = Align.bottomLeft
-
         const val detailsX = Constant.WIDTH - 8f
         const val detailsY = Constant.HEIGHT - 8f
         const val detailsAlign = Align.topRight

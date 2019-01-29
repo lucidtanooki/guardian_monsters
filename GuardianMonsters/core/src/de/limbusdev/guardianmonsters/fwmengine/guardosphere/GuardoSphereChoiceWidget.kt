@@ -186,7 +186,12 @@ class GuardoSphereChoiceWidget
             super.touchUp(event, x, y, pointer, button)
 
             val droppedAtCell = vectorToGrid(target.x, target.y)
-            choiceWidget.swapButtonsOnGrid(startPosition, droppedAtCell, page, page)
+
+            // Check, if Guardian was dropped inside the grid
+            if(droppedAtCell.y in (0..6) && droppedAtCell.x in (0..4))
+            {
+                choiceWidget.swapButtonsOnGrid(startPosition, droppedAtCell, page, page)
+            }
         }
     }
 }

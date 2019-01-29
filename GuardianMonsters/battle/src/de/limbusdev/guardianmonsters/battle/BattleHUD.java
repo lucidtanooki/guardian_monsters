@@ -33,9 +33,9 @@ import de.limbusdev.guardianmonsters.guardians.items.Inventory;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics;
 import de.limbusdev.guardianmonsters.guardians.monsters.Team;
+import de.limbusdev.guardianmonsters.inventory.ui.widgets.items.ItemChoice;
 import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.ui.widgets.Callback;
-import main.java.de.limbusdev.guardianmonsters.inventory.ui.widgets.items.ItemChoice;
 
 import static de.limbusdev.guardianmonsters.battle.ui.widgets.BattleHUDTextButton.CENTERTOP;
 

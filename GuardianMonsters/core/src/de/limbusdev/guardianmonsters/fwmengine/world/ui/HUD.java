@@ -37,9 +37,9 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PositionComp
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.entities.EntityFamilies;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.entities.HeroEntity;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.GameArea;
+import de.limbusdev.guardianmonsters.inventory.InventoryScreen;
 import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.utils.geometry.IntVec2;
-import main.java.de.limbusdev.guardianmonsters.inventory.InventoryScreen;
 
 
 /**

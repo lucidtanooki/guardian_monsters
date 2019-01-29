@@ -18,10 +18,10 @@ import de.limbusdev.guardianmonsters.guardians.monsters.AGuardianFactory;
 import de.limbusdev.guardianmonsters.guardians.monsters.GuardianFactory;
 import de.limbusdev.guardianmonsters.guardians.monsters.GuardoSphere;
 import de.limbusdev.guardianmonsters.guardians.monsters.Team;
+import de.limbusdev.guardianmonsters.inventory.InventoryScreen;
 import de.limbusdev.guardianmonsters.model.gamestate.GameState;
 import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.ui.metamorphosis.MetamorphosisScreen;
-import main.java.de.limbusdev.guardianmonsters.inventory.InventoryScreen;
 
 import static de.limbusdev.guardianmonsters.Constant.DEBUG_MODE;
 

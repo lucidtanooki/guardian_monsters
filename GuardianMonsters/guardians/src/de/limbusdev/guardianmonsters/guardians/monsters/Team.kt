@@ -4,16 +4,28 @@ import com.badlogic.gdx.utils.ArrayMap
 import de.limbusdev.utils.extensions.set
 
 /**
- * Team
+ * A [Team] can hold any number > 1 of Guardians. The player's [Team] has
+ * always a capacity of 7. AI players like enemies and bosses may have
+ * more or less than 7, but never < 1.
  *
- * @author Georg Eckert 2017
+ * maximumTeamSize and activeTeamSize are <= capacity. And activeTeamSize
+ * <= maximumTeamSize. maximumTeamSize is how much Guardians the team may
+ * hold. activeTeamSize defines, how many of them take part in the battle.
+ *
+ * A player always has a team with a capacity of 7. His maximumTeamSize
+ * starts with 1 and grows as he opens his other chakras. The
+ * activeTeamSize depends on how many (1..3) Guardians are activated by
+ * the player in the TeamSubMenu of the Inventory
+ *
+ * @param maximumTeamSize   number of Guardians, which can be inside the team
+ * @param activeTeamSize    number of Guardians, which take part in the battle
  */
-class Team(
-
+class Team
+(
         capacity: Int,
         var maximumTeamSize: Int,
-        var activeTeamSize: Int)
-
+        var activeTeamSize: Int
+)
     : ArrayMap<Int, AGuardian>(true, capacity)
 {
 

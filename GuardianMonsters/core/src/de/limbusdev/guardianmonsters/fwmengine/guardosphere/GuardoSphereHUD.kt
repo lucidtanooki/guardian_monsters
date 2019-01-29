@@ -41,18 +41,11 @@ class GuardoSphereHUD
 
         layout(skin)
 
-        val teamWidget = GuardoSphereTeamWidget(skin, team, guardianButtonGroup)
-
-        teamWidget.setPosition(teamX, teamY, teamAlign)
-        teamWidget.callback = { detailWidget.showDetails(team.get(it)) }
-
         guardoSphereChoiceWidget.sphereCallback = { detailWidget.showDetails(guardoSphere.get(it)) }
-
-        //stage+teamWidget
     }
 
-    private fun layout(skin: Skin) {
-
+    private fun layout(skin: Skin)
+    {
         // Define Actors
         val particles = ParticleEffectActor("guardosphere")
         particles.start()

@@ -37,7 +37,7 @@ class GuardoSphereHUD
 
     init
     {
-        guardoSphereChoiceWidget = GuardoSphereChoiceWidget(skin, guardoSphere, guardianButtonGroup)
+        guardoSphereChoiceWidget = GuardoSphereChoiceWidget(skin, guardoSphere, team, guardianButtonGroup)
         toggleGuardianStatView = TextButton("?", skin, "button-gs-default")
         guardianStatusWidget = GuardoSphereStatWidget(skin)
 
@@ -48,7 +48,7 @@ class GuardoSphereHUD
         teamWidget.setPosition(8f,8f, Align.bottomLeft)
         teamWidget.callback = { teamPosition -> detailWidget.showDetails(team.get(teamPosition)) }
 
-        guardoSphereChoiceWidget.callback = {
+        guardoSphereChoiceWidget.sphereCallback = {
 
             spherePosition ->
             if (guardoSphere.get(spherePosition) != null)

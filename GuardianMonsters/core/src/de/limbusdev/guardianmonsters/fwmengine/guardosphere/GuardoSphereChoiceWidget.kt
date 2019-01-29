@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener
 import com.badlogic.gdx.utils.Align
 import com.badlogic.gdx.utils.ArrayMap
 import de.limbusdev.guardianmonsters.guardians.monsters.GuardoSphere
+import de.limbusdev.guardianmonsters.guardians.monsters.Team
 import de.limbusdev.utils.extensions.set
 import de.limbusdev.utils.geometry.IntVec2
 import ktx.actors.minus
@@ -24,14 +25,17 @@ class GuardoSphereChoiceWidget
 (
         private val skin: Skin,
         private val sphere: GuardoSphere,
+        private val team: Team,
         private val buttonGroup: ButtonGroup<Button>
 )
     : Group()
 {
     private val table: Table
     private val buttonGrid: ArrayMap<Int, ArrayMap<Int, Button>> // 7 x 5 grid
+    private val teamButtonBar = ArrayMap<Int, Button>()
 
-    var callback: (Int) -> Unit
+    var sphereCallback: (Int) -> Unit
+    var teamCallback: (Int) -> Unit
 
     init
     {
@@ -43,7 +47,8 @@ class GuardoSphereChoiceWidget
         }
 
         // Create dummy callback
-        callback = {println("$TAG: dummy callback")}
+        sphereCallback = {println("$TAG: dummy sphere callback")}
+        teamCallback = {println("$TAG: dummy team callback")}
 
         // Setup Layout
         setSize(WIDTH, HEIGHT)
@@ -107,11 +112,20 @@ class GuardoSphereChoiceWidget
 
         table.row().height(16f)
         table.add(Actor()).height(16f)
-        table.row()
 
+        // Team entries
+        table.row()
         for(col in 0..6)
         {
-            table.add<ImageButton>(GuardoSphereButton(skin, null)).size(32f, 32f)
+            val guardian = team[col]
+            if(guardian != null)
+            {
+                val guardianButton = GuardoSphereButton(skin, guardian)
+                teamButtonBar[col] = guardianButton
+                buttonGroup.add(guardianButton)
+                table.add(guardianButton).size(32f, 32f)
+                guardianButton.addListener(GestureListener(this, col, guardianButton, -1, true))
+            }
         }
     }
 
@@ -144,6 +158,63 @@ class GuardoSphereChoiceWidget
         buttonB.addListener(GestureListener(this, guardianA, buttonB, pageA))
     }
 
+    fun swapSphereWithTeam(gridCell: IntVec2, teamSlot: Int)
+    {
+        // Get buttons
+        val gridButton = buttonGrid[gridCell.y][gridCell.x]
+        val teamButton = teamButtonBar[teamSlot]
+
+        // Set new grid entries
+        buttonGrid[gridCell.y][gridCell.x] = teamButton
+        teamButtonBar[teamSlot] = gridButton
+
+        // Move buttons to new positions
+        val newPositionGrid = gridToVector(5, teamSlot)
+        val newPositionTeam = gridToVector(gridCell.y, gridCell.x)
+        gridButton.setPosition(newPositionGrid.x, newPositionGrid.y)
+        teamButton.setPosition(newPositionTeam.x, newPositionTeam.y)
+
+        // Swap guardians
+        val sphereSlot = gridToSphere(gridCell.y, gridCell.x, 0)
+
+        val teamGuardian = team[teamSlot]
+        val gridGuardian = sphere[sphereSlot]
+        team[teamSlot] = gridGuardian
+        sphere[sphereSlot] = teamGuardian
+
+        // Assign new listeners
+        gridButton.clearListeners()
+        gridButton.addListener(GestureListener(this, teamSlot, gridButton, -1, true))
+        teamButton.clearListeners()
+        teamButton.addListener(GestureListener(this, sphereSlot, teamButton, 0, false))
+    }
+
+    fun swapInTeam(teamSlotA: Int, teamSlotB: Int)
+    {
+        // Get buttons
+        val buttonA = teamButtonBar[teamSlotA]
+        val buttonB = teamButtonBar[teamSlotB]
+
+        // Set new grid entries
+        teamButtonBar[teamSlotA] = buttonB
+        teamButtonBar[teamSlotB] = buttonA
+
+        // Move buttons to new positions
+        val newPositionA = gridToVector(5, teamSlotB)
+        val newPositionB = gridToVector(5, teamSlotA)
+        buttonA.setPosition(newPositionA.x, newPositionA.y)
+        buttonB.setPosition(newPositionB.x, newPositionB.y)
+
+        // Swap guardians
+        team.swapPositions(teamSlotA, teamSlotB)
+
+        // Assign new listeners
+        buttonA.clearListeners()
+        buttonA.addListener(GestureListener(this, teamSlotB, buttonA, -1, true))
+        buttonB.clearListeners()
+        buttonB.addListener(GestureListener(this, teamSlotA, buttonB, -1, true))
+    }
+
     companion object
     {
         private const val TAG = "GuardoSphereChoiceWidget"
@@ -152,18 +223,32 @@ class GuardoSphereChoiceWidget
 
         private fun vectorToGrid(x: Float, y: Float) : IntVec2
         {
-            return IntVec2(
+            val grid = IntVec2(
                     (x.toInt()+16) / 32,    // Column
-                    5 - (y.toInt()) / 32 // Row
+                    5 - (y.toInt()) / 32    // Row
             )
+
+            if(grid.y > 5) grid.y = 5
+
+            return grid
         }
 
         private fun gridToVector(row: Int, col: Int) : Vector2
         {
-            return Vector2(
-                    col*32f,
-                    (5.5f - row)*32f
-            )
+            if(row < 5)
+            {
+                return Vector2(
+                        col * 32f,
+                        (5.5f - row) * 32f
+                )
+            }
+            else
+            {
+                return Vector2(
+                        col * 32f,
+                        (5f - row) * 32f
+                )
+            }
         }
 
         private fun gridToSphere(row: Int, col: Int, page: Int) : Int
@@ -177,21 +262,27 @@ class GuardoSphereChoiceWidget
             private val choiceWidget: GuardoSphereChoiceWidget,
             private var sphereSlot: Int,
             private val target: Button,
-            private val page: Int
+            private val page: Int,
+            private val team: Boolean = false
     )
         : ActorGestureListener()
     {
-        private var startPosition = IntVec2(0,0)
+        private var initialCell = IntVec2(0,0)
 
         override fun touchDown(event: InputEvent?, x: Float, y: Float, pointer: Int, button: Int)
         {
             super.touchDown(event, x, y, pointer, button)
 
+            // TODO: check if team slot is valid (is it unlocked already? do not leave gaps)
+
             println("${target.x} ${target.y}")
             println(vectorToGrid(target.x, target.y))
 
-            startPosition = vectorToGrid(target.x, target.y)    // remember initial position on grid
-            choiceWidget.callback.invoke(sphereSlot)            // show guardian details
+            initialCell = vectorToGrid(target.x, target.y)
+
+            // show guardian details
+            if(team)    choiceWidget.teamCallback.invoke(sphereSlot)
+            else        choiceWidget.sphereCallback.invoke(sphereSlot)
         }
 
         override fun pan(event: InputEvent?, x: Float, y: Float, deltaX: Float, deltaY: Float)
@@ -204,16 +295,31 @@ class GuardoSphereChoiceWidget
         {
             super.touchUp(event, x, y, pointer, button)
 
-            val droppedAtCell = vectorToGrid(target.x, target.y)
+            // TODO: check if team slot is valid (is it unlocked already? do not leave gaps)
 
-            // Check, if Guardian was dropped inside the grid
-            if(droppedAtCell.y in (0..4) && droppedAtCell.x in (0..6))
+            val droppedAtCell = vectorToGrid(target.x, target.y)
+            println("dropped: $droppedAtCell")
+            val droppedInTeam = (droppedAtCell.y == 5 && droppedAtCell.x in (0..6))
+            val droppedInSphere = (droppedAtCell.y in (0..4) && droppedAtCell.x in (0..6))
+            val dropInvalid = (!droppedInSphere && !droppedInTeam)
+
+            if(droppedInSphere)
             {
-                choiceWidget.swapButtonsOnGrid(startPosition, droppedAtCell, page, page)
+                if(team)
+                    choiceWidget.swapSphereWithTeam(droppedAtCell, sphereSlot)
+                else
+                    choiceWidget.swapButtonsOnGrid(initialCell, droppedAtCell, page, page)
             }
-            else
+            else if(droppedInTeam)
             {
-                val startVector = gridToVector(startPosition.y, startPosition.x)
+                if(team)
+                    choiceWidget.swapInTeam(initialCell.x, droppedAtCell.x)
+                else
+                    choiceWidget.swapSphereWithTeam(droppedAtCell, sphereSlot)
+            }
+            else // drop invalid
+            {
+                val startVector = gridToVector(initialCell.y, initialCell.x)
                 target.setPosition(startVector.x, startVector.y)
             }
         }

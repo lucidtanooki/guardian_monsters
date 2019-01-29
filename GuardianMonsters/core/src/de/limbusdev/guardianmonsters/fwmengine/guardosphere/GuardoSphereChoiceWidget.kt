@@ -1,6 +1,7 @@
 package de.limbusdev.guardianmonsters.fwmengine.guardosphere
 
 import com.badlogic.gdx.math.Vector2
+import com.badlogic.gdx.scenes.scene2d.Actor
 import com.badlogic.gdx.scenes.scene2d.Group
 import com.badlogic.gdx.scenes.scene2d.InputEvent
 import com.badlogic.gdx.scenes.scene2d.ui.*
@@ -48,19 +49,24 @@ class GuardoSphereChoiceWidget
         setSize(WIDTH, HEIGHT)
 
         val background = Image(skin.getDrawable("guardosphere-frame"))
-        background.setSize(WIDTH,HEIGHT)
-        background.setPosition(0f, 0f, Align.bottomLeft)
+        background.setSize(WIDTH, 180f)
+        background.setPosition(0f, HEIGHT, Align.topLeft)
+
+        val backgroundTeam = Image(skin.getDrawable("guardosphere-frame"))
+        backgroundTeam.setSize(WIDTH, 32f+16f)
+        backgroundTeam.setPosition(0f,0f, Align.bottomLeft)
 
 
         table = table {
 
-            setSize(7*32f, 5*32f)
+            setSize(7*32f, 5*32f + 16f + 32f)
             setPosition(14f, 10f)
             align(Align.bottomLeft)
         }
 
         // Setup Hierarchy
         this+background
+        this+backgroundTeam
         this+table
 
         refresh(0)
@@ -98,6 +104,15 @@ class GuardoSphereChoiceWidget
                 key++
             }
         }
+
+        table.row().height(16f)
+        table.add(Actor()).height(16f)
+        table.row()
+
+        for(col in 0..6)
+        {
+            table.add<ImageButton>(GuardoSphereButton(skin, null)).size(32f, 32f)
+        }
     }
 
     fun swapButtonsOnGrid(cellA: IntVec2, cellB: IntVec2, pageA: Int, pageB: Int)
@@ -133,20 +148,21 @@ class GuardoSphereChoiceWidget
     {
         private const val TAG = "GuardoSphereChoiceWidget"
         private const val WIDTH = 252f
-        private const val HEIGHT = 180f
+        private const val HEIGHT = 6*32f + 16f + 16f + 4f
 
         private fun vectorToGrid(x: Float, y: Float) : IntVec2
         {
             return IntVec2(
-                    (x.toInt()+16) / 32, // Column
-                    4 - (y.toInt()+16) / 32) // Row
+                    (x.toInt()+16) / 32,    // Column
+                    5 - (y.toInt()) / 32 // Row
+            )
         }
 
         private fun gridToVector(row: Int, col: Int) : Vector2
         {
             return Vector2(
                     col*32f,
-                    (4 - row)*32f
+                    (5.5f - row)*32f
             )
         }
 
@@ -170,6 +186,9 @@ class GuardoSphereChoiceWidget
         override fun touchDown(event: InputEvent?, x: Float, y: Float, pointer: Int, button: Int)
         {
             super.touchDown(event, x, y, pointer, button)
+
+            println("${target.x} ${target.y}")
+            println(vectorToGrid(target.x, target.y))
 
             startPosition = vectorToGrid(target.x, target.y)    // remember initial position on grid
             choiceWidget.callback.invoke(sphereSlot)            // show guardian details

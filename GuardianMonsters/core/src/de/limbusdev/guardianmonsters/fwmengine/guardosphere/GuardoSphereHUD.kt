@@ -57,7 +57,7 @@ class GuardoSphereHUD
             }
         }
 
-        stage+teamWidget
+        //stage+teamWidget
     }
 
     private fun layout(skin: Skin) {

@@ -135,36 +135,38 @@ class ModuleGuardiansJUnitTest
     {
         ModuleGuardians.destroyModule()
 
-        val testJson = "[" +
-                "  {" +
-                "    \"ID\": 1," +
-                "    \"element\": \"none\"," +
-                "    \"name\": \"attNone1_selfdef\"," +
-                "    \"damage\": 0," +
-                "    \"MPcost\": 0," +
-                "    \"damageType\": \"physical\",\n" +
-                "    \"canChangeStatusEffect\": false,\n" +
-                "    \"statusEffect\": \"healthy\",\n" +
-                "    \"probabilityToChangeStatusEffect\": 0,\n" +
-                "    \"areaDamage\": false,\n" +
-                "    \"modifiedStats\": {\"PStr\": 0, \"PDef\": 0, \"MStr\": 0, \"MDef\": 0, \"Speed\": 0},\n" +
-                "    \"healedStats\": {\"HP\": 0, \"MP\": 0}" +
-                "  }," +
-                "  {" +
-                "    \"ID\": 2," +
-                "    \"element\": \"earth\"," +
-                "    \"name\": \"attNone2_kick\"," +
-                "    \"damage\": 50," +
-                "    \"MPcost\": 10," +
-                "    \"damageType\": \"magical\",\n" +
-                "    \"canChangeStatusEffect\": false,\n" +
-                "    \"statusEffect\": \"healthy\",\n" +
-                "    \"probabilityToChangeStatusEffect\": 0,\n" +
-                "    \"areaDamage\": false,\n" +
-                "    \"modifiedStats\": {\"PStr\": 0, \"PDef\": 0, \"MStr\": 0, \"MDef\": 0, \"Speed\": 0},\n" +
-                "    \"healedStats\": {\"HP\": 0, \"MP\": 0}" +
-                "  }" +
-                "]"
+        val testJson = """
+            [
+                {
+                    "ID": 1,
+                    "element": "none",
+                    "name": "attNone1_selfdef",
+                    "damage": 0,
+                    "MPcost": 0,
+                    "damageType": "physical",
+                    "canChangeStatusEffect": false,
+                    "statusEffect": "healthy",
+                    "probabilityToChangeStatusEffect": 0,
+                    "areaDamage": false,
+                    "modifiedStats": {"PStr": 0, "PDef": 0, "MStr": 0, "MDef": 0, "Speed": 0},
+                    "healedStats": {"HP": 0, "MP": 0}
+                },
+                {
+                    "ID": 2,
+                    "element": "earth",
+                    "name": "attNone2_kick",
+                    "damage": 50,
+                    "MPcost": 10,
+                    "damageType": "magical",
+                    "canChangeStatusEffect": false,
+                    "statusEffect": "healthy",
+                    "probabilityToChangeStatusEffect": 0,
+                    "areaDamage": false,
+                    "modifiedStats": {"PStr": 0, "PDef": 0, "MStr": 0, "MDef": 0, "Speed": 0},
+                    "healedStats": {"HP": 0, "MP": 0}
+                }
+            ]
+        """.trimIndent()
 
         val jsonStrings = ArrayMap<Element, String>()
         jsonStrings.put(Element.NONE, testJson)
@@ -172,48 +174,54 @@ class ModuleGuardiansJUnitTest
         GuardiansServiceLocator.provide(AbilityService.getInstance(jsonStrings))
         val abilities = GuardiansServiceLocator.abilities
 
+        // ................................................. Ability 1
         var ability = abilities.getAbility(Element.NONE, 1)
 
+        assertEquals("attNone1_selfdef",    ability.name)
+        assertEquals(Element.NONE,                  ability.element)
+        assertEquals(Ability.DamageType.PHYSICAL,   ability.damageType)
+        assertEquals(IndividualStatistics.StatusEffect.HEALTHY, ability.statusEffect)
 
-        assertEquals(ability.ID.toLong(), 1)
-        assertEquals(ability.element, Element.NONE)
-        assertEquals(ability.name, "attNone1_selfdef")
-        assertEquals(ability.MPcost.toLong(), 0)
-        assertEquals(ability.damageType, Ability.DamageType.PHYSICAL)
-        assertEquals(ability.areaDamage, false)
-        assertEquals(ability.canChangeStatusEffect, false)
-        assertEquals(ability.statusEffect, IndividualStatistics.StatusEffect.HEALTHY)
-        assertEquals(ability.probabilityToChangeStatusEffect.toLong(), 0)
-        assertEquals(ability.changesStats, false)
-        assertEquals(ability.addsPStr.toLong(), 0)
-        assertEquals(ability.addsPDef.toLong(), 0)
-        assertEquals(ability.addsMStr.toLong(), 0)
-        assertEquals(ability.addsMDef.toLong(), 0)
-        assertEquals(ability.addsSpeed.toLong(), 0)
-        assertEquals(ability.curesStats, false)
-        assertEquals(ability.curesHP.toLong(), 0)
-        assertEquals(ability.curesMP.toLong(), 0)
+        assertEquals(1,     ability.ID)
+        assertEquals(0,     ability.MPcost)
+        assertEquals(false, ability.areaDamage)
+        assertEquals(false, ability.canChangeStatusEffect)
+        assertEquals(0,     ability.probabilityToChangeStatusEffect)
 
+        assertEquals(false, ability.changesStats)
+        assertEquals(0,     ability.addsPStr)
+        assertEquals(0,     ability.addsPDef)
+        assertEquals(0,     ability.addsMStr)
+        assertEquals(0,     ability.addsMDef)
+        assertEquals(0,     ability.addsSpeed)
+        assertEquals(false, ability.curesStats)
+        assertEquals(0,     ability.curesHP)
+        assertEquals(0,     ability.curesMP)
+
+
+        // ................................................. Ability 2
         ability = abilities.getAbility(Element.NONE, 2)
 
-        assertEquals(ability.ID.toLong(), 2)
-        assertEquals(ability.element, Element.EARTH)
-        assertEquals(ability.name, "attNone2_kick")
-        assertEquals(ability.MPcost.toLong(), 10)
-        assertEquals(ability.damageType, Ability.DamageType.MAGICAL)
-        assertEquals(ability.areaDamage, false)
-        assertEquals(ability.canChangeStatusEffect, false)
-        assertEquals(ability.statusEffect, IndividualStatistics.StatusEffect.HEALTHY)
-        assertEquals(ability.probabilityToChangeStatusEffect.toLong(), 0)
-        assertEquals(ability.changesStats, false)
-        assertEquals(ability.addsPStr.toLong(), 0)
-        assertEquals(ability.addsPDef.toLong(), 0)
-        assertEquals(ability.addsMStr.toLong(), 0)
-        assertEquals(ability.addsMDef.toLong(), 0)
-        assertEquals(ability.addsSpeed.toLong(), 0)
-        assertEquals(ability.curesStats, false)
-        assertEquals(ability.curesHP.toLong(), 0)
-        assertEquals(ability.curesMP.toLong(), 0)
+        assertEquals("attNone2_kick",       ability.name)
+        assertEquals(Element.EARTH,                 ability.element)
+        assertEquals(Ability.DamageType.MAGICAL,    ability.damageType)
+        assertEquals(IndividualStatistics.StatusEffect.HEALTHY, ability.statusEffect)
+
+        assertEquals(2,     ability.ID)
+        assertEquals(10,    ability.MPcost)
+        assertEquals(false, ability.areaDamage)
+        assertEquals(false, ability.canChangeStatusEffect)
+        assertEquals(0,     ability.probabilityToChangeStatusEffect)
+
+        assertEquals(false, ability.changesStats)
+        assertEquals(0,     ability.addsPStr)
+        assertEquals(0,     ability.addsPDef)
+        assertEquals(0,     ability.addsMStr)
+        assertEquals(0,     ability.addsMDef)
+        assertEquals(0,     ability.addsSpeed)
+        assertEquals(false, ability.curesStats)
+        assertEquals(0,     ability.curesHP)
+        assertEquals(0,     ability.curesMP)
 
         println("[Test 2] Ability parsed correctly")
     }

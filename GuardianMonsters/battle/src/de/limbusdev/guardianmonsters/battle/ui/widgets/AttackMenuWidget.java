@@ -56,7 +56,7 @@ public class AttackMenuWidget extends SevenButtonsWidget
             if (abilityID != null) {
 
                 Ability attack = GuardiansServiceLocator.INSTANCE.getAbilities().getAbility(abilityID);
-                setButtonStyle(i, skin, AssetPath.Skin.attackButtonStyle(attack.element));
+                setButtonStyle(i, skin, AssetPath.Skin.INSTANCE.attackButtonStyle(attack.element));
                 setButtonText(i, Services.getL18N().Abilities().get(attack.name));
 
                 enableButton(i);

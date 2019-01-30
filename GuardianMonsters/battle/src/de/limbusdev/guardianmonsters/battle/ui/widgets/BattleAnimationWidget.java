@@ -312,7 +312,7 @@ public class BattleAnimationWidget extends BattleWidget
         Action attackAnimationAction = Actions.run(() -> animateAttackOfType(ability, origin, target));
 
         // Plays the attacks sound
-        final String path = AssetPath.Audio.SFX.BATTLE().get(abilityMedia.getSfxType().toString().toUpperCase()).get(0);
+        final String path = AssetPath.Audio.SFX.INSTANCE.BATTLE().get(abilityMedia.getSfxType().toString().toUpperCase())[0];
         Action playSFXAction = Actions.run(() -> Services.getAudio().playSound(path));
 
         // Runs the callback handler
@@ -356,7 +356,7 @@ public class BattleAnimationWidget extends BattleWidget
         Action attackAnimationAction = Actions.run(() -> animateAreaAttackOfType(ability, defSide));
 
         // Plays the attacks sound
-        final String path = AssetPath.Audio.SFX.BATTLE().get(abilityMedia.getSfxType().toString().toUpperCase()).get(0);
+        final String path = AssetPath.Audio.SFX.INSTANCE.BATTLE().get(abilityMedia.getSfxType().toString().toUpperCase())[0];
         Action playSFXAction = Actions.run(() -> Services.getAudio().playSound(path));
 
         // Runs the callback handler

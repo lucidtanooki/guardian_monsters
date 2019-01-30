@@ -125,8 +125,8 @@ public class WeatherAnimator {
         public FogRenderer(TiledMap map, int fogIndex) {
             super(map);
             switch(fogIndex) {
-                case 1:     fogTexture = media.getTexture(AssetPath.Textures.WEATHER[3]); break;
-                default:    fogTexture = media.getTexture(AssetPath.Textures.WEATHER[1]); break;
+                case 1:     fogTexture = media.getTexture(AssetPath.Textures.INSTANCE.getWEATHER()[3]); break;
+                default:    fogTexture = media.getTexture(AssetPath.Textures.INSTANCE.getWEATHER()[1]); break;
             }
         }
 
@@ -141,7 +141,7 @@ public class WeatherAnimator {
 
         public WoodsRenderer(TiledMap map) {
             super(map);
-            woodTexture = media.getTexture(AssetPath.Textures.WEATHER[2]);
+            woodTexture = media.getTexture(AssetPath.Textures.INSTANCE.getWEATHER()[2]);
         }
 
         @Override
@@ -158,7 +158,7 @@ public class WeatherAnimator {
         public CloudRenderer(TiledMap map) {
             super(map);
 
-            cloudTexture = media.getTexture(AssetPath.Textures.WEATHER[0]);
+            cloudTexture = media.getTexture(AssetPath.Textures.INSTANCE.getWEATHER()[0]);
 
             weatherTiles = new Array<>();
             width = map.getProperties().get("width", Integer.class);

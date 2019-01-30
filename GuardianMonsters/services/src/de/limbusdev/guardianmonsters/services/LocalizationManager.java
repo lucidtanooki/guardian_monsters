@@ -45,7 +45,7 @@ public class LocalizationManager implements L18N
 
         int[] mapIDs ={1,2,25,251,252,253};
         for(int i : mapIDs) {
-            l18nMap.put(i, I18NBundle.createBundle(Gdx.files.internal(AssetPath.I18N.MAP_PREFIX+Integer.toString(i))));
+            l18nMap.put(i, I18NBundle.createBundle(Gdx.files.internal(AssetPath.I18N.MAP_PREFIX +Integer.toString(i))));
         }
 
 

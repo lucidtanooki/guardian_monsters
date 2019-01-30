@@ -41,7 +41,7 @@ public class BattleScreen extends AScreen {
         if(!initialized) {
             throw new ExceptionInInitializerError("BattleScreen must get initialized before drawn.");
         }
-        Services.getAudio().playLoopMusic(AssetPath.Audio.Music.BG_BATTLE[0]);
+        Services.getAudio().playLoopMusic(AssetPath.Audio.Music.INSTANCE.getBG_BATTLE()[0]);
     }
 
     @Override
@@ -53,7 +53,7 @@ public class BattleScreen extends AScreen {
     public void hide() {
         super.hide();
         initialized = false;
-        Services.getAudio().stopMusic(AssetPath.Audio.Music.BG_BATTLE[0]);
+        Services.getAudio().stopMusic(AssetPath.Audio.Music.INSTANCE.getBG_BATTLE()[0]);
     }
 
     private BattleHUD getBattleHUD() {

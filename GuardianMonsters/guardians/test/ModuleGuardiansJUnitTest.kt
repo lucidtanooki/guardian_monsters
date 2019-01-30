@@ -232,19 +232,56 @@ class ModuleGuardiansJUnitTest
 
         val jsonItemStrings = ArrayMap<String, String>()
 
-        jsonItemStrings.put("itemsKey",
-                "{\"items\":[{\"nameID\":\"relict-earth\",\"category\":\"key\"}]}")
+        val keyItemsString = """
+            {"items":[
+                {
+                    "nameID":"relict-earth",
+                    "category":"key"
+                }
+            ]}""".trimIndent()
 
-        jsonItemStrings.put("itemsMedicine",
-                "{\"items\":[" +
-                        "{\"nameID\":\"bread\",\"value\":100,\"type\":\"HPcure\",\"category\":\"medicine\"}," +
-                        "{\"nameID\":\"medicine-blue\",\"value\":10,\"type\":\"MPcure\",\"category\":\"medicine\"}," +
-                        "{\"nameID\":\"angel-tear\",\"value\":50,\"type\":\"revive\",\"category\":\"medicine\"}]}")
+        val medicineItemsString = """
+            {"items":[
+                {
+                    "nameID":"bread",
+                    "value":100,
+                    "type":"HPcure",
+                    "category":"medicine"
+                },
+                {
+                    "nameID":"medicine-blue",
+                    "value":10,
+                    "type":"MPcure",
+                    "category":"medicine"
+                },
+                {
+                    "nameID":
+                    "angel-tear",
+                    "value":50,
+                    "type":"revive",
+                    "category":"medicine"
+                }
+            ]}""".trimIndent()
 
-        jsonItemStrings.put("itemsEquipment",
-                "{\"items\":[{\"nameID\":\"sword-wood\",\"body-part\":\"hands\",\"type\":\"sword\"," +
-                        "\"addsPStr\":1,\"addsPDef\":0,\"addsMStr\":0,\"addsMDef\":0,\"addsSpeed\":0," +
-                        "\"category\":\"equipment\"}]}")
+        val equipmentItemsString = """
+            {"items":[
+                {
+                    "nameID":"sword-wood",
+                    "body-part":"hands",
+                    "type":"sword",
+                    "addsPStr":1,
+                    "addsPDef":0,
+                    "addsMStr":0,
+                    "addsMDef":0,
+                    "addsSpeed":0,
+                    "category":"equipment"
+                }
+            ]}""".trimIndent()
+
+
+        jsonItemStrings.put("itemsKey",         keyItemsString)
+        jsonItemStrings.put("itemsMedicine",    medicineItemsString)
+        jsonItemStrings.put("itemsEquipment",   equipmentItemsString)
 
 
         GuardiansServiceLocator.provide(ItemService.getInstance(jsonItemStrings))
@@ -252,19 +289,24 @@ class ModuleGuardiansJUnitTest
         val itemService = GuardiansServiceLocator.items
 
         var item = itemService.getItem("relict-earth")
-        assertEquals(KeyItem("relict-earth"), item)
+        var expectedItem: Item = KeyItem("relict-earth")
+        assertEquals(expectedItem, item)
 
-        item = GuardiansServiceLocator.items.getItem("bread")
-        assertEquals(MedicalItem("bread", 100, MedicalItem.Type.HP_CURE), item)
+        item = itemService.getItem("bread")
+        expectedItem = MedicalItem("bread", 100, MedicalItem.Type.HP_CURE)
+        assertEquals(expectedItem, item)
 
-        item = GuardiansServiceLocator.items.getItem("medicine-blue")
-        assertEquals(MedicalItem("medicine-blue", 10, MedicalItem.Type.MP_CURE), item)
+        item = itemService.getItem("medicine-blue")
+        expectedItem = MedicalItem("medicine-blue", 10, MedicalItem.Type.MP_CURE)
+        assertEquals(expectedItem, item)
 
-        item = GuardiansServiceLocator.items.getItem("angel-tear")
-        assertEquals(MedicalItem("angel-tear", 50, MedicalItem.Type.REVIVE), item)
+        item = itemService.getItem("angel-tear")
+        expectedItem = MedicalItem("angel-tear", 50, MedicalItem.Type.REVIVE)
+        assertEquals(expectedItem, item)
 
-        item = GuardiansServiceLocator.items.getItem("sword-wood")
-        assertEquals(HandEquipment("sword-wood", HandEquipment.Type.SWORD, 1, 0, 0, 0, 0, 0, 0, 0), item)
+        item = itemService.getItem("sword-wood")
+        expectedItem = HandEquipment("sword-wood", HandEquipment.Type.SWORD, 1, 0, 0, 0, 0, 0, 0, 0)
+        assertEquals(expectedItem, item)
 
         println("[Test 3] Item parsed correctly")
     }
@@ -277,15 +319,17 @@ class ModuleGuardiansJUnitTest
         val description = GuardiansServiceLocator.species.getSpeciesDescription(1)
         val commonStatistics = description.commonStatistics
 
-        assertEquals(300, commonStatistics.getBaseHP().toLong())
-        assertEquals(50, commonStatistics.getBaseMP().toLong())
-        assertEquals(11, commonStatistics.getBasePStr().toLong())
-        assertEquals(12, commonStatistics.getBasePDef().toLong())
-        assertEquals(13, commonStatistics.getBaseMStr().toLong())
-        assertEquals(14, commonStatistics.getBaseMDef().toLong())
-        assertEquals(10, commonStatistics.getBaseSpeed().toLong())
+        assertEquals(300,   commonStatistics.getBaseHP())
+        assertEquals(50,    commonStatistics.getBaseMP())
+        assertEquals(11,    commonStatistics.getBasePStr())
+        assertEquals(12,    commonStatistics.getBasePDef())
+        assertEquals(13,    commonStatistics.getBaseMStr())
+        assertEquals(14,    commonStatistics.getBaseMDef())
+        assertEquals(10,    commonStatistics.getBaseSpeed())
 
         ModuleGuardians.destroyModule()
+
+        println("[Test 4] passed")
     }
 
     @Test fun `Test Module`()
@@ -293,6 +337,8 @@ class ModuleGuardiansJUnitTest
         ModuleGuardians.destroyModule()
         ModuleGuardians.initModuleForTesting()
         ModuleGuardians.destroyModule()
+
+        println("[Test 5] Module: passed")
     }
 
     @Test fun `Test Guardian Factory`()

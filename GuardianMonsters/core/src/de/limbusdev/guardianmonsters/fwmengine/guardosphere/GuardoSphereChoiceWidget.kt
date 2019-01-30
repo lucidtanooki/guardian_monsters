@@ -31,7 +31,7 @@ class GuardoSphereChoiceWidget
     : Group()
 {
     private val table: Table
-    private val buttonGrid: ArrayMap<Int, ArrayMap<Int, Button>> // 7 x 5 grid
+    private val buttonGrid = ArrayMap<Int, ArrayMap<Int, Button>>() // 7 x 5 grid
     private val teamButtonBar = ArrayMap<Int, Button>()
 
     var sphereCallback: (Int) -> Unit
@@ -40,7 +40,6 @@ class GuardoSphereChoiceWidget
     init
     {
         // Create 7 x 5 grid for storing buttons
-        buttonGrid = ArrayMap()
         for(row in 0..4)
         {
             buttonGrid[row] = ArrayMap()

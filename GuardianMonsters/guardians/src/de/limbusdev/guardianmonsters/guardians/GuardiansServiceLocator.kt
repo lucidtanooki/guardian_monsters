@@ -19,15 +19,19 @@ import de.limbusdev.guardianmonsters.guardians.monsters.*
  */
 object GuardiansServiceLocator
 {
+    // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ Properties
+    private const val TAG = "GuardiansServiceLocator"
+    private const val debugString = "[WARN] $TAG: No %s service injected with $TAG.provide(I%s service). Returning Null%sService.\n"
+
+    private fun printNullServiceWarning(name: String) = System.err.format(debugString, name, name, name)
+
+
+    // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ Methods
     // .................................................... abilities
     var abilities: IAbilityService = NullAbilityService
         get()
         {
-            if(field == NullAbilityService)
-            {
-                error("SERVICES: No AbilityService service injected yet with " +
-                        "Services.provide(IAbilityService items). Returning NullAbilityService.")
-            }
+            if(field == NullAbilityService) printNullServiceWarning("AbilityService")
             return field
         }
     private set
@@ -41,11 +45,7 @@ object GuardiansServiceLocator
     var items: IItemService = NullItemService
         get()
         {
-            if(field == NullItemService)
-            {
-                error("SERVICES: No ItemService service injected yet with " +
-                        "Services.provide(IItemService items). Returning NullItemService.")
-            }
+            if(field == NullItemService) printNullServiceWarning("ItemService")
             return field
         }
     private set
@@ -57,16 +57,12 @@ object GuardiansServiceLocator
 
     // .................................................... species description
     var species: ISpeciesDescriptionService = NullSpeciesService
-    get()
-    {
-        if(field == NullSpeciesService)
+        get()
         {
-            error("SERVICES: No SpeciesDescription service injected yet with " +
-                    "Services.provide(ISpeciesDescription service). Returning NullSpeciesDescriptionService.")
+            if(field == NullSpeciesService) printNullServiceWarning("SpeciesService")
+            return field
         }
-        return field
-    }
-    private set
+        private set
 
     fun provide(service: ISpeciesDescriptionService)
     {
@@ -75,17 +71,12 @@ object GuardiansServiceLocator
 
     // .................................................... guardian factory
     var guardianFactory: AGuardianFactory = NullGuardianFactory
-    get()
-    {
-        if(field == NullGuardianFactory)
+        get()
         {
-
-            System.err.println("SERVICES: No GuardianFactory service injected yet with " +
-                    "Services.provide(AGuardianFactory service). Returning NullGuardianFactory.")
+            if(field == NullGuardianFactory) printNullServiceWarning("GuardianFactory")
+            return field
         }
-        return field
-    }
-    private set
+        private set
 
     fun provide(service: AGuardianFactory)
     {
@@ -94,9 +85,6 @@ object GuardiansServiceLocator
 
     interface Service
     {
-        /**
-         * If using Singletons as service, set instance null on destroy
-         */
         fun destroy()
     }
 

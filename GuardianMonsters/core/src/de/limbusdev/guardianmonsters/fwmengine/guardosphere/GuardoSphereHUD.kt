@@ -28,11 +28,11 @@ class GuardoSphereHUD
 )
     : AHUD(skin)
 {
-    private var detailWidget = GuardianDetailWidget(skin)
-    private var guardianButtonGroup = ButtonGroup<Button>()
-    private var guardoSphereChoiceWidget: GuardoSphereChoiceWidget
-    private var toggleGuardianStatView: TextButton
-    private var guardianStatusWidget: GuardoSphereStatWidget
+    private var detailWidget                = GuardianDetailWidget(skin)
+    private var guardianButtonGroup         = ButtonGroup<Button>()
+    private var guardoSphereChoiceWidget    : GuardoSphereChoiceWidget
+    private var toggleGuardianStatView      : TextButton
+    private var guardianStatusWidget        : GuardoSphereStatWidget
 
     init
     {
@@ -75,15 +75,9 @@ class GuardoSphereHUD
 
     override fun reset() {}
 
-    override fun show()
-    {
-        startBGMusic()
-    }
+    override fun show() = startBGMusic()
 
-    override fun hide()
-    {
-        stopBGMusic()
-    }
+    override fun hide() = stopBGMusic()
 
     companion object
     {

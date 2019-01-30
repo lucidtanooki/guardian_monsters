@@ -53,6 +53,30 @@ class SpeciesDescription
             internal val nameID: String,
             internal val elements: Array<Element>
     )
+    {
+
+        override fun equals(other: Any?): Boolean
+        {
+            if(this === other) return true
+            if(javaClass != other?.javaClass) return false
+
+            other as MetaForm
+
+            if(form != other.form) return false
+            if(nameID != other.nameID) return false
+            if(elements != other.elements) return false
+
+            return true
+        }
+
+        override fun hashCode(): Int
+        {
+            var result = form
+            result = 31 * result + nameID.hashCode()
+            result = 31 * result + elements.hashCode()
+            return result
+        }
+    }
 
     // ............................................................................................. CONSTRUCTOR
     fun getNameID(currentForm: Int) = metaForms.get(currentForm).nameID

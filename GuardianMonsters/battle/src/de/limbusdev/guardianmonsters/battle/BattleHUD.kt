@@ -194,20 +194,19 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
                 battleAnimationOnDoingNothingCallback)
         attackMenuAddOn = SevenButtonsWidget.CentralHalfButtonsAddOn(skin, attackMenuAddOnCallbacks)
 
-        attackMenu           = AttackMenuWidget(skin) {attackMenuCallbacks(it)}
+        attackMenu           = AttackMenuWidget(skin) { attackMenuCallbacks(it)     }
         attackInfoMenu       = AttackMenuWidget(skin) { attackInfoMenuCallbacks(it) }
-        targetMenuWidget     = TargetMenuWidget(skin) { targetMenuCallbacks(it) }
+        targetMenuWidget     = TargetMenuWidget(skin) { targetMenuCallbacks(it)     }
         targetAreaMenuWidget = TargetMenuWidget(skin) { targetAreaMenuCallbacks(it) }
 
         attackInfoMenuFrame    = BattleActionMenuWidget(skin) { }
         attackDetailBackButton = BattleActionMenuWidget(skin) { attackDetailLabelBackCB() }
         actionMenu             = BattleActionMenuWidget(
-
                 skin,
-                Callback { actionMenuBackCB() },
-                Callback { actionMenuBagCB() },
-                Callback { actionMenuMonsterCB() },
-                Callback { actionMenuExtraCB() })
+                Callback { actionMenuBackCB()   },
+                Callback { actionMenuBagCB()    },
+                Callback { actionMenuMonsterCB()},
+                Callback { actionMenuExtraCB()  })
 
         battleQueueWidget = BattleQueueWidget(skin, Align.bottomLeft)
         battleQueueWidget.setPosition(1f, 65f, Align.bottomLeft)
@@ -243,8 +242,8 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
         }
 
         // ......................................................................................... team menu
-        teamMenuOnBackButton = { battleStateSwitcher.toAttackMenu() }
-        teamMenuOnSwitchButton = {
+        teamMenuOnBackButton    = { battleStateSwitcher.toAttackMenu() }
+        teamMenuOnSwitchButton  = {
 
             battleStateSwitcher.toAnimation()
             val substituteNr = switchActiveGuardianWidget.chosenSubstitute
@@ -253,15 +252,15 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
         }
 
         // ......................................................................................... battle start label
-        battleStartLabelBackCB = { battleStateSwitcher.toMainMenu() }
+        battleStartLabelBackCB  = { battleStateSwitcher.toMainMenu() }
 
         // ......................................................................................... battle action menu
-        actionMenuBackCB = { battleStateSwitcher.toMainMenu() }
-        actionMenuExtraCB = { battleSystem.defend() }
+        actionMenuBackCB        = { battleStateSwitcher.toMainMenu() }
+        actionMenuExtraCB       = { battleSystem.defend() }
 
-        actionMenuBagCB = { stage.addActor(ItemChoice(Services.getUI().inventorySkin, inventory, leftTeam, battleSystem)) }
+        actionMenuBagCB         = { stage.addActor(ItemChoice(Services.getUI().inventorySkin, inventory, leftTeam, battleSystem)) }
 
-        actionMenuMonsterCB = {
+        actionMenuMonsterCB     = {
 
             switchActiveGuardianWidget.init(
 

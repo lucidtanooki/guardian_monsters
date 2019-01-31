@@ -3,13 +3,17 @@ package de.limbusdev.guardianmonsters.guardians.monsters
 import com.badlogic.gdx.utils.ArrayMap
 
 import de.limbusdev.utils.extensions.set
-import java.lang.IllegalArgumentException
 import java.lang.IllegalStateException
 
 /**
- * GuardoSphere
+ * The GuardoSphere is a dimension usually only Guardian Monsters can reach.
+ * Humans may only get access by opening their chakras and deep meditation.
  *
- * @author Georg Eckert 2017
+ * It is a storage place for [AGuardian]s. Up to 300 Guardians can be stored
+ * in the GuardoSphere. This limits the number of Guardians a player may
+ * ban and collect.
+ *
+ * @author Georg Eckert 2019
  */
 
 class GuardoSphere
@@ -90,14 +94,7 @@ class GuardoSphere
      *
      * @return if sphere is full or not
      */
-    fun isFull() : Boolean
-    {
-        for(slot in 0..299)
-            if(this[slot] == null)
-                return false
-
-        return true
-    }
+    fun isFull() : Boolean = (vacantSlots() == 0)
 
     fun vacantSlots() : Int
     {
@@ -108,7 +105,7 @@ class GuardoSphere
         return counter
     }
 
-    fun occupiedSlots() : Int = 299 - vacantSlots()
+    fun occupiedSlots() : Int = 300 - vacantSlots()
 
     /**
      * Swaps two slots in the [GuardoSphere] and the potentially occupying [AGuardian]s.

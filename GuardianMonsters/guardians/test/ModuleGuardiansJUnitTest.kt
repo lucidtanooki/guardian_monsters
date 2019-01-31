@@ -699,6 +699,28 @@ class ModuleGuardiansJUnitTest
             assertEquals(e.message, "Slot must be in 0..299")
         }
 
+        // Test occupancy
+        assertEquals(297, sphere.vacantSlots())
+        assertEquals(3, sphere.occupiedSlots())
+
+        // Test pushing
+        val pushedGuardian = gf.createGuardian(1,1)
+        sphere + pushedGuardian
+        assertEquals(sphere[1], pushedGuardian)
+
+        for(i in 0..299) sphere[i] = gf.createGuardian(1,1)
+        assert(sphere.isFull())
+
+        try
+        {
+            sphere + gf.createGuardian(1,1)
+            fail("Exception should have been thrown")
+        }
+        catch(e: Exception)
+        {
+            assertEquals(e.message, "Sphere is full. This should not happen.")
+        }
+
         println("[Test 15] GuardoSphere: passed")
     }
 

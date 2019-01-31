@@ -4,6 +4,7 @@ import com.badlogic.gdx.utils.ArrayMap
 
 import de.limbusdev.utils.extensions.set
 import java.lang.IllegalArgumentException
+import java.lang.IllegalStateException
 
 /**
  * GuardoSphere
@@ -43,7 +44,7 @@ class GuardoSphere
      */
     operator fun set(slot: Int, guardian: AGuardian?) : AGuardian?
     {
-        if(slot < 0 || slot > 299) throw IndexOutOfBoundsException("Index must be 0 <= slot <= 299")
+        if(slot !in 0..299) throw IndexOutOfBoundsException("Slot must be in 0..299")
         val formerOccupant = sphere[slot]
         sphere[slot] = guardian
         return formerOccupant
@@ -61,15 +62,62 @@ class GuardoSphere
      */
     operator fun get(slot: Int) : AGuardian?
     {
-        if(slot < 0 || slot > 299) throw IndexOutOfBoundsException("Index must be 0 <= slot <= 299")
+        if(slot !in 0..299) throw IndexOutOfBoundsException("Slot must be in 0..299")
         return sphere[slot]
     }
+
+    /**
+     * Pushes an [AGuardian] into the [GuardoSphere] if there are free slots.
+     *
+     * @param guardian Guardian to be pushed
+     * @return slot, where the Guardian has been placed, null if sphere is full
+     */
+    operator fun plus(guardian: AGuardian) : Int
+    {
+        for(slot in 0..299)
+        {
+            if(this[slot] == null)
+            {
+                this[slot] = guardian
+                return slot
+            }
+        }
+        throw IllegalStateException("Sphere is full. This should not happen.")
+    }
+
+    /**
+     * Checks if there are vacant slots in the sphere.
+     *
+     * @return if sphere is full or not
+     */
+    fun isFull() : Boolean
+    {
+        for(slot in 0..299)
+            if(this[slot] == null)
+                return false
+
+        return true
+    }
+
+    fun vacantSlots() : Int
+    {
+        var counter = 0
+        for(slot in 0..299)
+            if(this[slot] == null)
+                counter++
+        return counter
+    }
+
+    fun occupiedSlots() : Int = 299 - vacantSlots()
 
     /**
      * Swaps two slots in the [GuardoSphere] and the potentially occupying [AGuardian]s.
      */
     fun swap(slot1: Int, slot2: Int)
     {
+        if(slot1 !in 0..299 || slot2 !in 0..299)
+            throw IndexOutOfBoundsException("Slot must be in 0..299")
+
         val value1 = this[slot1]
         val value2 = this[slot2]
 

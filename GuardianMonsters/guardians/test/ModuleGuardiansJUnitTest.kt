@@ -689,12 +689,14 @@ class ModuleGuardiansJUnitTest
         assertNull(sphere[299])
 
         // Test exceeding capacity
-        try{
+        try
+        {
             sphere[300]
             fail("Exception should have been thrown")
-        } catch(e: Exception)
+        }
+        catch(e: Exception)
         {
-            assertEquals(e.message, "Index must be 0 <= slot <= 299")
+            assertEquals(e.message, "Slot must be in 0..299")
         }
 
         println("[Test 15] GuardoSphere: passed")

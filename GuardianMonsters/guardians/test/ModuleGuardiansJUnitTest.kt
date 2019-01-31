@@ -671,15 +671,8 @@ class ModuleGuardiansJUnitTest
 
         assertEquals(3, team.size)
 
-        try
-        {
-            team + g1
-            fail("Exception expected.")
-        }
-        catch(e: Exception)
-        {
-            assertEquals(e.message, "Guardian is already in this team.")
-        }
+        try { team + g1;fail("Exception expected.") }
+        catch(e: Exception) { assertEquals(e.message, "Guardian is already in this team.") }
 
 
         println("[Test 15] Team: passed")
@@ -699,9 +692,10 @@ class ModuleGuardiansJUnitTest
         val g1 = gf.createGuardian(1,1)
         val g2 = gf.createGuardian(1,1)
         val g3 = gf.createGuardian(1,1)
-        val g4 = gf.createGuardian(1,1)
-        val g5 = gf.createGuardian(1,1)
-        val g6 = gf.createGuardian(1,1)
+        val g4 = gf.createGuardian(2,1)
+        val g5 = gf.createGuardian(2,1)
+        val g6 = gf.createGuardian(2,1)
+        val g7 = gf.createGuardian(2,1)
 
         team[0] = g1
         team[1] = g2
@@ -712,6 +706,7 @@ class ModuleGuardiansJUnitTest
         sphere[0] = g4
         sphere[2] = g5
         sphere[7] = g6
+        sphere[99] = g7
 
         // Test retrieving Guardians
         assertEquals(g4, sphere[0])
@@ -737,39 +732,73 @@ class ModuleGuardiansJUnitTest
         assertNull(sphere[299])
 
         // Test exceeding capacity
-        try
-        {
-            sphere[300]
-            fail("Exception should have been thrown")
-        }
-        catch(e: Exception)
-        {
-            assertEquals(e.message, "Slot must be in 0..299")
-        }
+        try { sphere[300]; fail("Exception should have been thrown") }
+        catch(e: Exception) { assertEquals(e.message, "Slot must be in 0..299") }
 
         // Test occupancy
-        assertEquals(297, sphere.vacantSlots())
-        assertEquals(3, sphere.occupiedSlots())
+        assertEquals(296, sphere.vacantSlots())
+        assertEquals(4, sphere.occupiedSlots())
 
         // Test pushing
         val pushedGuardian = gf.createGuardian(1,1)
         sphere + pushedGuardian
         assertEquals(sphere[1], pushedGuardian)
 
+        // Test full sphere
         for(i in 0..299) sphere[i] = gf.createGuardian(1,1)
         assert(sphere.isFull())
 
-        try
-        {
-            sphere + gf.createGuardian(1,1)
-            fail("Exception should have been thrown")
-        }
-        catch(e: Exception)
-        {
-            assertEquals(e.message, "Sphere is full. This should not happen.")
-        }
+        try { sphere + gf.createGuardian(1,1); fail("Exception should have been thrown") }
+        catch(e: Exception) { assertEquals(e.message, "Sphere is full. This should not happen.") }
 
         println("[Test 16] GuardoSphere: passed")
+    }
+
+    @Test fun `Test swapping Guardians from Team and GuardoSphere`()
+    {
+        ModuleGuardians.destroyModule()
+        ModuleGuardians.initModuleForTesting()
+
+        val gf = GuardiansServiceLocator.guardianFactory
+
+        // Create Team
+        val team = Team(3, 3, 3)
+        val g1 = gf.createGuardian(1,1)
+        val g2 = gf.createGuardian(1,1)
+        val g3 = gf.createGuardian(1,1)
+        val g4 = gf.createGuardian(2,1)
+        val g5 = gf.createGuardian(2,1)
+        val g6 = gf.createGuardian(2,1)
+        val g7 = gf.createGuardian(2,1)
+
+        team[0] = g1
+        team[1] = g2
+        team[2] = g3
+
+        // Create Sphere
+        val sphere = GuardoSphere()
+        sphere[0] = g4
+        sphere[2] = g5
+        sphere[7] = g6
+        sphere[99] = g7
+
+        // Swap Guardians from Sphere and Team
+        GuardoSphere.teamSphereSwap(sphere, 99, team, 0)
+        assertEquals(g7, team[0])
+        assertEquals(g1, sphere[99])
+
+        GuardoSphere.teamSphereSwap(sphere, 100, team, 0)
+        assertEquals(g7, sphere[100])
+        assertEquals(g2, team[0])
+        assertEquals(g3, team[1])
+        assertEquals(null, team[2])
+
+        team - g2
+        assertEquals(g3, team[0])
+
+        try { team - g3; fail("Exception should have been thrown") }
+        catch(e: Exception) { assertEquals(e.message, "Cannot remove last Guardian from team.") }
+
     }
 
     companion object

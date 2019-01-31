@@ -3,7 +3,7 @@ package de.limbusdev.guardianmonsters.guardians.monsters
 import com.badlogic.gdx.utils.ArrayMap
 
 import de.limbusdev.utils.extensions.set
-import java.lang.IllegalStateException
+import kotlin.IllegalStateException
 
 /**
  * The GuardoSphere is a dimension usually only Guardian Monsters can reach.
@@ -21,14 +21,16 @@ class GuardoSphere
     // Lists whether a Guardian and it's form are unknown, have been seen or already banned.
     private val status = ArrayMap<Int, ArrayMap<Int, State>>(300)
     private val sphere = ArrayMap<Int, AGuardian?>(300)
+    val capacity = 300
+    val range = 0 until capacity
 
     init
     {
         // Initialize sphere slots
-        for(slot in 0..299) sphere[slot] = null
+        for(slot in range) sphere[slot] = null
 
         // Initialize all EncycloStates to UNKNOWN
-        for(species in 0..299)
+        for(species in range)
         {
             status[species] = ArrayMap()
             for(form in 0..4) status[species][form] = State.UNKNOWN
@@ -48,7 +50,9 @@ class GuardoSphere
      */
     operator fun set(slot: Int, guardian: AGuardian?) : AGuardian?
     {
-        if(slot !in 0..299) throw IndexOutOfBoundsException("Slot must be in 0..299")
+        if(slot !in range)
+            throw IndexOutOfBoundsException("Slot must be in $range")
+
         val formerOccupant = sphere[slot]
         sphere[slot] = guardian
         return formerOccupant
@@ -66,7 +70,7 @@ class GuardoSphere
      */
     operator fun get(slot: Int) : AGuardian?
     {
-        if(slot !in 0..299) throw IndexOutOfBoundsException("Slot must be in 0..299")
+        if(slot !in range) throw IndexOutOfBoundsException("Slot must be in $range")
         return sphere[slot]
     }
 
@@ -78,7 +82,7 @@ class GuardoSphere
      */
     operator fun plus(guardian: AGuardian) : Int
     {
-        for(slot in 0..299)
+        for(slot in range)
         {
             if(this[slot] == null)
             {
@@ -99,7 +103,7 @@ class GuardoSphere
     fun vacantSlots() : Int
     {
         var counter = 0
-        for(slot in 0..299)
+        for(slot in range)
             if(this[slot] == null)
                 counter++
         return counter
@@ -112,8 +116,8 @@ class GuardoSphere
      */
     fun swap(slot1: Int, slot2: Int)
     {
-        if(slot1 !in 0..299 || slot2 !in 0..299)
-            throw IndexOutOfBoundsException("Slot must be in 0..299")
+        if(slot1 !in range || slot2 !in range)
+            throw IndexOutOfBoundsException("Slot must be in $range)")
 
         val value1 = this[slot1]
         val value2 = this[slot2]
@@ -152,6 +156,44 @@ class GuardoSphere
         else
         {
             status[speciesID][metaForm] = state
+        }
+    }
+
+    companion object
+    {
+        fun teamSphereSwap(sphere: GuardoSphere, sphereSlot: Int, team: Team, teamSlot: Int)
+        {
+            if(sphereSlot !in sphere.range || teamSlot !in team.range)
+                throw IndexOutOfBoundsException("sphereSlot or teamSlot exceed bounds")
+
+            val teamGuardian = team[teamSlot]
+            val sphereGuardian = sphere[sphereSlot]
+
+            if(teamGuardian != null && sphereGuardian != null)
+            {
+                sphere[sphereSlot] = teamGuardian
+                team[teamSlot] = sphereGuardian
+                return
+            }
+            else if(teamGuardian == null && sphereGuardian == null)
+            {
+                // Do nothing, both are null
+                return
+            }
+            else if(teamGuardian == null && sphereGuardian != null)
+            {
+                team[teamSlot] = sphereGuardian
+                sphere[sphereSlot] = null
+                return
+            }
+            else if(teamGuardian != null && sphereGuardian == null)
+            {
+                sphere[sphereSlot] = teamGuardian
+                team - teamGuardian
+                return
+            }
+
+            throw IllegalStateException("Slots could not be swapped. This should not happen.")
         }
     }
 

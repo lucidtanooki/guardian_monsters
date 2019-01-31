@@ -28,17 +28,18 @@ class Team
         var activeTeamSize: Int
 ) {
     val slots = GdxArray<AGuardian?>(true, capacity)
+    val range = 0 until capacity
 
     init
     {
-        for(i in 0 until capacity) slots.add(null)
+        for(i in range) slots.add(null)
     }
 
     constructor(maximumTeamSize: Int) : this(7, 1, 1)
 
     operator fun get(slot: Int) : AGuardian?
     {
-        if(slot !in 0 until capacity)
+        if(slot !in range)
             throw IndexOutOfBoundsException("Out of capacity. Slot mus be in 0..${capacity-1}")
 
         return slots[slot]
@@ -46,7 +47,7 @@ class Team
 
     operator fun set(slot: Int, guardian: AGuardian) : AGuardian?
     {
-        if(slot !in 0 until capacity)
+        if(slot !in range)
             throw IndexOutOfBoundsException("Out of capacity. Slot mus be in 0..${capacity-1}")
 
         val formerOccupant = slots[slot]
@@ -58,7 +59,7 @@ class Team
     {
         if(isMember(guardian)) throw java.lang.IllegalArgumentException("Guardian is already in this team.")
 
-        for(slot in 0 until capacity)
+        for(slot in range)
         {
             if(this[slot] == null)
             {
@@ -72,13 +73,14 @@ class Team
 
     operator fun minus(guardian: AGuardian) : AGuardian
     {
-        if(slots.size == 1) throw IllegalStateException("Cannot remove last Guardian from team.")
+        if(slots[1] == null)
+            throw IllegalStateException("Cannot remove last Guardian from team.")
 
         val slot = slots.indexOf(guardian)
         val removedGuardian = slots[slot] ?: throw java.lang.IllegalStateException("Given guardian is not a member.")
 
         // Move other team members to close gap
-        for(s in 0 until capacity)
+        for(s in range)
         {
             if(s > slot)
             {
@@ -98,7 +100,7 @@ class Team
      */
     fun swap(position1: Int, position2: Int)
     {
-        if(position1 !in 0 until capacity || position2 !in 0 until capacity)
+        if(position1 !in range || position2 !in range)
             throw IndexOutOfBoundsException("Position must be in 0..${capacity-1}")
 
         val guardian1 = this[position1]

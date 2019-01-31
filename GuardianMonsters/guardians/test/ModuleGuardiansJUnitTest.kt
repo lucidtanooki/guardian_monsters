@@ -22,15 +22,10 @@ import de.limbusdev.guardianmonsters.guardians.items.equipment.FootEquipment
 import de.limbusdev.guardianmonsters.guardians.items.equipment.HandEquipment
 import de.limbusdev.guardianmonsters.guardians.items.equipment.HeadEquipment
 import de.limbusdev.guardianmonsters.guardians.items.medicine.MedicalItem
-import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian
-import de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics
-import de.limbusdev.guardianmonsters.guardians.monsters.JSONGuardianParser
-import de.limbusdev.guardianmonsters.guardians.monsters.SpeciesDescription
-import de.limbusdev.guardianmonsters.guardians.monsters.Team
-
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertNotEquals
-import org.junit.Assert.assertTrue
+import de.limbusdev.guardianmonsters.guardians.monsters.*
+import org.junit.Assert.*
+import org.junit.rules.ExpectedException
+import java.lang.Exception
 
 /**
  * GuardiansJUnitTestAbilities
@@ -362,6 +357,8 @@ class ModuleGuardiansJUnitTest
 
 
         ModuleGuardians.destroyModule()
+
+        println("[Test 6] Guardian Factory: passed")
     }
 
     @Test fun `Test Stat Calculator`()
@@ -382,6 +379,8 @@ class ModuleGuardiansJUnitTest
                 StatCalculator.calcEXPavailableAtLevel(5),
                 StatCalculator.calcEXPtoReachLevel(6) - StatCalculator.calcEXPtoReachLevel(5)
         )
+
+        println("[Test 7] Stat Calculator: passed")
     }
 
     @Test fun `Test Guardian Leveling`()
@@ -435,6 +434,8 @@ class ModuleGuardiansJUnitTest
         )
 
         ModuleGuardians.destroyModule()
+
+        println("[Test 8] Guardian Leveling: passed")
     }
 
     @Test fun `Test EXP Calculation`()
@@ -451,6 +452,8 @@ class ModuleGuardiansJUnitTest
         assertEquals(MathUtils.floor(200f * 1.5f / 6f).toLong(), EXP.toLong())
 
         ModuleGuardians.destroyModule()
+
+        println("[Test 9] EXP Calculation: passed")
     }
 
     @Test fun `Test Damage Calculation`()
@@ -474,6 +477,8 @@ class ModuleGuardiansJUnitTest
                 looser.individualStatistics.hp)
 
         ModuleGuardians.destroyModule()
+
+        println("[Test 10] Damage Calculation: passed")
     }
 
     @Test fun `Test Equipment`()
@@ -558,11 +563,15 @@ class ModuleGuardiansJUnitTest
         )
 
         ModuleGuardians.destroyModule()
+
+        println("[Test 11] Equipment: passed")
     }
 
     @Test fun `Test Ability Graph`()
     {
         // TODO
+
+        println("[Test 12] Ability Graph: passed")
     }
 
     @Test fun `Test Battle System`()
@@ -617,11 +626,78 @@ class ModuleGuardiansJUnitTest
         }
 
         ModuleGuardians.destroyModule()
+
+        println("[Test 13] Battle System: passed")
     }
 
     @Test fun `Test if Debugging is on`()
     {
         assertTrue(Constant.DEBUGGING_ON)
+
+        println("[Test 14] Debugging: passed")
+    }
+
+    @Test fun `Test GuardoSphere`()
+    {
+        printTestLabel("GuardoSphere")
+
+        ModuleGuardians.destroyModule()
+        ModuleGuardians.initModuleForTesting()
+
+        val gf = GuardiansServiceLocator.guardianFactory
+
+        // Create Team
+        val team = Team(3, 3, 3)
+        val g1 = gf.createGuardian(1,1)
+        val g2 = gf.createGuardian(1,1)
+        val g3 = gf.createGuardian(1,1)
+        val g4 = gf.createGuardian(1,1)
+        val g5 = gf.createGuardian(1,1)
+        val g6 = gf.createGuardian(1,1)
+
+        team.put(0, g1)
+        team.put(1, g2)
+        team.put(2, g3)
+
+        // Create Sphere
+        val sphere = GuardoSphere()
+        sphere[0] = g4
+        sphere[2] = g5
+        sphere[7] = g6
+
+        // Test retrieving Guardians
+        assertEquals(g4, sphere[0])
+        assertEquals(g5, sphere[2])
+        assertEquals(g6, sphere[7])
+
+        // Test swapping
+        sphere.swap(0,7)
+
+        assertEquals(g4, sphere[7])
+        assertEquals(g6, sphere[0])
+
+        // Test moving to empty slot
+        sphere.swap(20, 7)
+
+        assertEquals(g4, sphere[20])
+
+        // Test moving back
+        sphere.swap(20, 7)
+        assertEquals(g4, sphere[7])
+
+        // Test getting empty slot
+        assertNull(sphere[299])
+
+        // Test exceeding capacity
+        try{
+            sphere[300]
+            fail("Exception should have been thrown")
+        } catch(e: Exception)
+        {
+            assertEquals(e.message, "Index must be 0 <= slot <= 299")
+        }
+
+        println("[Test 15] GuardoSphere: passed")
     }
 
     companion object

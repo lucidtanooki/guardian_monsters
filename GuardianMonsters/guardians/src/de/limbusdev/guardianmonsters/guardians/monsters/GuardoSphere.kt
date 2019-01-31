@@ -3,6 +3,7 @@ package de.limbusdev.guardianmonsters.guardians.monsters
 import com.badlogic.gdx.utils.ArrayMap
 
 import de.limbusdev.utils.extensions.set
+import java.lang.IllegalArgumentException
 
 /**
  * GuardoSphere
@@ -10,38 +11,77 @@ import de.limbusdev.utils.extensions.set
  * @author Georg Eckert 2017
  */
 
-class GuardoSphere : ArrayMap<Int, AGuardian>(300)
+class GuardoSphere
 {
     // Lists whether a Guardian and it's form are unknown, have been seen or already banned.
-    private val encycloStates: ArrayMap<Int, ArrayMap<Int, State>> = ArrayMap()
+    private val status = ArrayMap<Int, ArrayMap<Int, State>>(300)
+    private val sphere = ArrayMap<Int, AGuardian?>(300)
 
     init
     {
-        // Initialize all Encyclostates to UNKNOWN
-        for(speciesID in 1..300)
+        // Initialize sphere slots
+        for(slot in 0..299) sphere[slot] = null
+
+        // Initialize all EncycloStates to UNKNOWN
+        for(species in 0..299)
         {
-            encycloStates[speciesID] = ArrayMap()
-            for(metaForm in 0..4)
-            {
-                encycloStates[speciesID][metaForm] = State.UNKNOWN
-            }
+            status[species] = ArrayMap()
+            for(form in 0..4) status[species][form] = State.UNKNOWN
         }
     }
 
-    fun swap(key1: Int, key2: Int)
+    /**
+     * Puts an [AGuardian] into the [GuardoSphere].
+     *
+     * Syntax:
+     *
+     *      guardoSphere[slot] = Guardian()
+     *
+     * @param slot      sphere slot, where the given Guardian should reside
+     * @param guardian  Guardian which should stay in sphere
+     * @return          null if slot was empty, former occupant of the slot otherwise
+     */
+    operator fun set(slot: Int, guardian: AGuardian?) : AGuardian?
     {
-        val value1 = this[key1]
-        val value2 = this[key2]
+        if(slot < 0 || slot > 299) throw IndexOutOfBoundsException("Index must be 0 <= slot <= 299")
+        val formerOccupant = sphere[slot]
+        sphere[slot] = guardian
+        return formerOccupant
+    }
 
-        if(value1 == null) this.removeKey(key2) else this[key2] = value1
-        if(value2 == null) this.removeKey(key1) else this[key1] = value2
+    /**
+     * Retrieves an [AGuardian] from the [GuardoSphere].
+     *
+     * Syntax:
+     *
+     *      val myGuardian = guardoSphere[slot]
+     *
+     * @param slot a slot in 0..299
+     * @return Guardian if slot was occupied, null otherwise
+     */
+    operator fun get(slot: Int) : AGuardian?
+    {
+        if(slot < 0 || slot > 299) throw IndexOutOfBoundsException("Index must be 0 <= slot <= 299")
+        return sphere[slot]
+    }
+
+    /**
+     * Swaps two slots in the [GuardoSphere] and the potentially occupying [AGuardian]s.
+     */
+    fun swap(slot1: Int, slot2: Int)
+    {
+        val value1 = this[slot1]
+        val value2 = this[slot2]
+
+        this[slot2] = value1
+        this[slot1] = value2
     }
 
     fun getEncycloStateOf(speciesID: Int, metaForm: Int): State
     {
-        if(encycloStates.containsKey(speciesID) && encycloStates[speciesID].containsKey(metaForm))
+        if(status.containsKey(speciesID) && status[speciesID].containsKey(metaForm))
         {
-            return encycloStates[speciesID][metaForm]
+            return status[speciesID][metaForm]
         }
         else
         {
@@ -54,21 +94,22 @@ class GuardoSphere : ArrayMap<Int, AGuardian>(300)
         // Do not downgrade state
         if(state == State.UNKNOWN) return
 
-        if(!encycloStates.containsKey(speciesID))
+        if(!status.containsKey(speciesID))
         {
-            encycloStates[speciesID] = ArrayMap()
+            status[speciesID] = ArrayMap()
         }
 
         // Do not downgrade state
-        if(encycloStates[speciesID].containsKey(metaForm) && encycloStates[speciesID][metaForm] == State.BANNED)
+        if(status[speciesID].containsKey(metaForm) && status[speciesID][metaForm] == State.BANNED)
         {
             return
         }
         else
         {
-            encycloStates[speciesID][metaForm] = state
+            status[speciesID][metaForm] = state
         }
     }
+
 
     // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ Inner Classes
     enum class State

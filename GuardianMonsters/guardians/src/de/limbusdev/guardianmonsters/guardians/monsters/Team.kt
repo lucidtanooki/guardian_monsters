@@ -1,7 +1,9 @@
 package de.limbusdev.guardianmonsters.guardians.monsters
 
 import com.badlogic.gdx.utils.ArrayMap
+import com.badlogic.gdx.utils.Array
 import de.limbusdev.utils.extensions.set
+import java.lang.IllegalStateException
 
 /**
  * A [Team] can hold any number > 1 of Guardians. The player's [Team] has
@@ -22,14 +24,44 @@ import de.limbusdev.utils.extensions.set
  */
 class Team
 (
-        capacity: Int,
+        private var capacity: Int,
         var maximumTeamSize: Int,
         var activeTeamSize: Int
-)
-    : ArrayMap<Int, AGuardian>(true, capacity)
-{
+) {
+    val slots = ArrayMap<Int, AGuardian?>(true, capacity)
 
     constructor(maximumTeamSize: Int) : this(7, 1, 1) {}
+
+    operator fun get(slot: Int) : AGuardian?
+    {
+        if(slot !in 0..(capacity-1))
+            throw IndexOutOfBoundsException("Out of capacity. Slot mus be in 0..${capacity-1}")
+
+        return slots[slot]
+    }
+
+    operator fun set(slot: Int, guardian: AGuardian) : AGuardian?
+    {
+        if(slot !in 0..(capacity-1))
+            throw IndexOutOfBoundsException("Out of capacity. Slot mus be in 0..${capacity-1}")
+
+        val formerOccupant = slots[slot]
+        slots[slot] = guardian
+        return formerOccupant
+    }
+
+    operator fun plus(guardian: AGuardian) : Int
+    {
+        for(slot in 0..(capacity-1))
+        {
+            if(this[slot] == null)
+            {
+                this[slot] = guardian
+                return slot
+            }
+        }
+        throw IllegalStateException("Team is full. This should not happen.")
+    }
 
     /**
      * Swaps positions of two monsters, if both positions are populated.
@@ -37,37 +69,42 @@ class Team
      * @param position2
      * @return  whether the swap was successful
      */
-    fun swapPositions(position1: Int, position2: Int): Boolean
+    fun swap(position1: Int, position2: Int)
     {
+        if(position1 !in 0..(capacity-1) || position2 !in 0..(capacity-1))
+            throw IndexOutOfBoundsException("Position must be in 0..${capacity-1}")
+
         val guardian1 = this[position1]
         val guardian2 = this[position2]
 
-        if(guardian1 == null || guardian2 == null) {
-            return false
-        }
+        if(guardian1 == null || guardian2 == null)
+            throw IllegalArgumentException("Only occupied positions may be swapped.")
 
         this[position1] = guardian2
         this[position2] = guardian1
-
-        return true
     }
+
+    val size: Int get() { return slots.size }
 
     fun isMember(guardian: AGuardian): Boolean
     {
-        return containsValue(guardian, false)
+        return slots.containsValue(guardian, false)
     }
 
     fun getPosition(guardian: AGuardian): Int
     {
-        return getKey(guardian, false)
+        return slots.getKey(guardian, false)
     }
 
     fun teamKO(): Boolean
     {
         var ko = true
-        for(guardian in values())
+        for(guardian in slots.values())
         {
-            ko = guardian.individualStatistics.isKO && ko
+            if(guardian != null)
+            {
+                ko = guardian.individualStatistics.isKO && ko
+            }
         }
         return ko
     }

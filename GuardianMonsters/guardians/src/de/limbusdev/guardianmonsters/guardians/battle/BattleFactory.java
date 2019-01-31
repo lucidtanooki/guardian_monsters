@@ -47,7 +47,7 @@ public class BattleFactory
         for(int j=0; j<numMonsters; j++)
         {
             int level = MathUtils.random(minLevel, maxLevel);
-            team.put(j,factory.createGuardian(decideWichMonster(availableGuardianProbabilities), level));
+            team.set(j, factory.createGuardian(decideWichMonster(availableGuardianProbabilities), level));
         }
         return team;
     }

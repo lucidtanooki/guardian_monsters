@@ -24,7 +24,6 @@ import de.limbusdev.guardianmonsters.guardians.items.equipment.HeadEquipment
 import de.limbusdev.guardianmonsters.guardians.items.medicine.MedicalItem
 import de.limbusdev.guardianmonsters.guardians.monsters.*
 import org.junit.Assert.*
-import org.junit.rules.ExpectedException
 import java.lang.Exception
 
 /**
@@ -586,13 +585,13 @@ class ModuleGuardiansJUnitTest
 
         // Team Creation
         val team = Team(3, 3, 3)
-        team.put(0, factory.createGuardian(1, 1))
-        team.put(1, factory.createGuardian(1, 1))
-        team.put(2, factory.createGuardian(1, 1))
+        team[0] = factory.createGuardian(1, 1)
+        team[1] = factory.createGuardian(1, 1)
+        team[2] = factory.createGuardian(1, 1)
         val oppTeam = Team(3, 3, 3)
-        oppTeam.put(0, factory.createGuardian(2, 1))
-        oppTeam.put(1, factory.createGuardian(2, 1))
-        oppTeam.put(2, factory.createGuardian(2, 1))
+        oppTeam[0] = factory.createGuardian(2, 1)
+        oppTeam[1] = factory.createGuardian(2, 1)
+        oppTeam[2] = factory.createGuardian(2, 1)
 
         // Battle System Initialization
         val battleEnds = booleanArrayOf(false)
@@ -606,8 +605,8 @@ class ModuleGuardiansJUnitTest
                 // Check, that one team is KO
                 var teamKO = true
                 var oppKO = true
-                for(g in team.values()) if(g.individualStatistics.isFit) teamKO = false
-                for(g in oppTeam.values()) if(g.individualStatistics.isFit) oppKO = false
+                for(g in team.slots.values()) if(g!!.individualStatistics.isFit) teamKO = false
+                for(g in oppTeam.slots.values()) if(g!!.individualStatistics.isFit) oppKO = false
                 assertTrue(teamKO || oppKO)
             }
 
@@ -637,6 +636,29 @@ class ModuleGuardiansJUnitTest
         println("[Test 14] Debugging: passed")
     }
 
+    @Test fun `Test Team`()
+    {
+        ModuleGuardians.destroyModule()
+        ModuleGuardians.initModuleForTesting()
+
+        val gf = GuardiansServiceLocator.guardianFactory
+
+        // Create Team
+        val team = Team(3, 3, 3)
+        val g1 = gf.createGuardian(1,1)
+        val g2 = gf.createGuardian(1,1)
+        val g3 = gf.createGuardian(1,1)
+        val g4 = gf.createGuardian(1,1)
+        val g5 = gf.createGuardian(1,1)
+        val g6 = gf.createGuardian(1,1)
+
+        team[0] = g1
+        team[1] = g2
+        team[2] = g3
+
+        println("[Test 15] Team: passed")
+    }
+
     @Test fun `Test GuardoSphere`()
     {
         printTestLabel("GuardoSphere")
@@ -655,9 +677,9 @@ class ModuleGuardiansJUnitTest
         val g5 = gf.createGuardian(1,1)
         val g6 = gf.createGuardian(1,1)
 
-        team.put(0, g1)
-        team.put(1, g2)
-        team.put(2, g3)
+        team[0] = g1
+        team[1] = g2
+        team[2] = g3
 
         // Create Sphere
         val sphere = GuardoSphere()
@@ -721,7 +743,7 @@ class ModuleGuardiansJUnitTest
             assertEquals(e.message, "Sphere is full. This should not happen.")
         }
 
-        println("[Test 15] GuardoSphere: passed")
+        println("[Test 16] GuardoSphere: passed")
     }
 
     companion object
@@ -750,9 +772,9 @@ class ModuleGuardiansJUnitTest
             }
 
             val targets = Array<AGuardian>()
-            for(h in oppTeam.values())
+            for(h in oppTeam.slots.values())
             {
-                if(h.individualStatistics.isFit)
+                if(h!!.individualStatistics.isFit)
                 {
                     targets.add(h)
                 }

@@ -605,8 +605,8 @@ class ModuleGuardiansJUnitTest
                 // Check, that one team is KO
                 var teamKO = true
                 var oppKO = true
-                for(g in team.slots.values()) if(g!!.individualStatistics.isFit) teamKO = false
-                for(g in oppTeam.slots.values()) if(g!!.individualStatistics.isFit) oppKO = false
+                for(g in team.slots) if(g!!.individualStatistics.isFit) teamKO = false
+                for(g in oppTeam.slots) if(g!!.individualStatistics.isFit) oppKO = false
                 assertTrue(teamKO || oppKO)
             }
 
@@ -655,6 +655,32 @@ class ModuleGuardiansJUnitTest
         team[0] = g1
         team[1] = g2
         team[2] = g3
+
+        assertEquals(g1, team[0])
+        assertNotEquals(g2, team[0])
+
+        team.swap(0,1)
+        assertEquals(g1, team[1])
+        assertEquals(g2, team[0])
+
+        assert(team.isMember(g1))
+        assert(team.isMember(g2))
+        assert(team.isMember(g3))
+
+        assertFalse(team.teamKO())
+
+        assertEquals(3, team.size)
+
+        try
+        {
+            team + g1
+            fail("Exception expected.")
+        }
+        catch(e: Exception)
+        {
+            assertEquals(e.message, "Guardian is already in this team.")
+        }
+
 
         println("[Test 15] Team: passed")
     }
@@ -772,7 +798,7 @@ class ModuleGuardiansJUnitTest
             }
 
             val targets = Array<AGuardian>()
-            for(h in oppTeam.slots.values())
+            for(h in oppTeam.slots)
             {
                 if(h!!.individualStatistics.isFit)
                 {

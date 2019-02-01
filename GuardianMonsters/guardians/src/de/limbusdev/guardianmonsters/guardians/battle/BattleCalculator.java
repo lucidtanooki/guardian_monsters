@@ -231,7 +231,7 @@ public class BattleCalculator
         float meanEscapingTeamLevel = 0;
         float meanAttackingTeamLevel = 0;
 
-        for(AGuardian m : escapingTeam.getSlots())
+        for(AGuardian m : escapingTeam.values())
         {
             if(m.getIndividualStatistics().isFit()) {
 
@@ -240,7 +240,7 @@ public class BattleCalculator
         }
         meanEscapingTeamLevel /= escapingTeam.getSize();
 
-        for(AGuardian m : attackingTeam.getSlots())
+        for(AGuardian m : attackingTeam.values())
         {
             meanAttackingTeamLevel += m.getIndividualStatistics().getLevel();
         }

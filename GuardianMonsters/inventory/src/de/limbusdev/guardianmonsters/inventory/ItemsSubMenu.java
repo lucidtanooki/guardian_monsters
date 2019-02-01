@@ -8,6 +8,7 @@ import com.badlogic.gdx.utils.ArrayMap;
 import de.limbusdev.guardianmonsters.guardians.items.Inventory;
 import de.limbusdev.guardianmonsters.guardians.items.Item;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
+import de.limbusdev.guardianmonsters.guardians.monsters.Team;
 import de.limbusdev.guardianmonsters.inventory.ui.widgets.items.ItemApplicationWidget;
 import de.limbusdev.guardianmonsters.inventory.ui.widgets.items.ItemCategoryToolbar;
 import de.limbusdev.guardianmonsters.inventory.ui.widgets.items.KeyItemDetailViewWidget;
@@ -23,10 +24,10 @@ public class ItemsSubMenu extends AInventorySubMenu
 
     private Inventory inventory;
     private ItemApplicationWidget detailView;
-    private ArrayMap<Integer, AGuardian> team;
+    private Team team;
     private ItemListWidget itemListWidget;
 
-    public ItemsSubMenu(Skin skin, Inventory inventory, ArrayMap<Integer, AGuardian> team) {
+    public ItemsSubMenu(Skin skin, Inventory inventory, Team team) {
 
         super(skin);
         this.team = team;

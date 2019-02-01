@@ -12,6 +12,7 @@ import com.badlogic.gdx.utils.ArrayMap;
 
 import de.limbusdev.guardianmonsters.guardians.items.Item;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
+import de.limbusdev.guardianmonsters.guardians.monsters.Team;
 import de.limbusdev.guardianmonsters.ui.Constant;
 
 /**
@@ -26,7 +27,7 @@ public class MonsterListWidget extends Group {
     private Callbacks handler;
     private Image blackLayer;
 
-    public MonsterListWidget(Skin skin, ArrayMap<Integer, AGuardian> team, Callbacks cBhandler, Item item) {
+    public MonsterListWidget(Skin skin, Team team, Callbacks cBhandler, Item item) {
 
         this.handler = cBhandler;
 
@@ -55,7 +56,7 @@ public class MonsterListWidget extends Group {
         scrollPane.setScrollBarPositions(false, true);
         addActor(scrollPane);
 
-        for (int i = 0; i<team.size; i++) {
+        for (int i = 0; i<team.getSize(); i++) {
             final int index = i;
             AGuardian m = team.get(i);
             GuardianOverviewButton guardianButton = new GuardianOverviewButton(m, skin, "button-sandstone", item);

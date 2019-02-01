@@ -17,6 +17,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ArrayMap;
 
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
+import de.limbusdev.guardianmonsters.guardians.monsters.Team;
 import de.limbusdev.utils.geometry.IntVec2;
 
 public class TeamCircleWidget extends ATeamChoiceWidget
@@ -39,7 +40,7 @@ public class TeamCircleWidget extends ATeamChoiceWidget
         addActor(bgImg);
     }
 
-    public TeamCircleWidget(Skin skin, ArrayMap<Integer,AGuardian> team, Callback.ButtonID callbacks)
+    public TeamCircleWidget(Skin skin, Team team, Callback.ButtonID callbacks)
     {
         this(skin, callbacks);
         init(team);

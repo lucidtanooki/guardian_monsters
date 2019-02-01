@@ -5,6 +5,7 @@ import com.badlogic.gdx.utils.ArrayMap;
 
 import de.limbusdev.guardianmonsters.guardians.items.Inventory;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
+import de.limbusdev.guardianmonsters.guardians.monsters.Team;
 
 /**
  * Created by georg on 20.02.17.
@@ -13,7 +14,7 @@ import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 public class KeyItemDetailViewWidget extends ItemApplicationWidget
 {
 
-    public KeyItemDetailViewWidget(Skin skin, Inventory inventory, ArrayMap<Integer, AGuardian> team) {
+    public KeyItemDetailViewWidget(Skin skin, Inventory inventory, Team team) {
         super(skin, inventory, team);
 
         getUse().remove();

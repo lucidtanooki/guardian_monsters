@@ -5,6 +5,6 @@ sourceCompatibility = 1.8
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
 sourceSets.main.java.srcDirs = [ "src/" ]
-sourceSets.main.resources.srcDirs = [ project(":guardosphere").file("assets") ]
+sourceSets.main.resources.srcDirs = [ project(":guardians").file("assets") ]
 sourceSets.test.java.srcDirs = ["test/"]
 

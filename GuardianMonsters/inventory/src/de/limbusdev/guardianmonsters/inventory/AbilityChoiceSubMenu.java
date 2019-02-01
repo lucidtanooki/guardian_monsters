@@ -18,6 +18,7 @@ import java.util.Observer;
 import de.limbusdev.guardianmonsters.guardians.GuardiansServiceLocator;
 import de.limbusdev.guardianmonsters.guardians.abilities.Ability;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
+import de.limbusdev.guardianmonsters.guardians.monsters.Team;
 import de.limbusdev.guardianmonsters.inventory.ui.widgets.abilities.AbilityDetailWidget;
 import de.limbusdev.guardianmonsters.inventory.ui.widgets.team.TeamMemberSwitcher;
 import de.limbusdev.guardianmonsters.services.Services;
@@ -38,7 +39,7 @@ public class AbilityChoiceSubMenu extends AInventorySubMenu
 {
 
     private TeamMemberSwitcher switcher;
-    private ArrayMap<Integer, AGuardian> team;
+    private Team team;
     private ButtonGroup<TextButton> abilityButtons;
     private AbilityDetailWidget details;
     private HoneyComb7ButtonsWidget abilitySlotButtons;
@@ -48,7 +49,7 @@ public class AbilityChoiceSubMenu extends AInventorySubMenu
 
     private Group abilitySlotChoice;
 
-    public AbilityChoiceSubMenu(Skin skin, ArrayMap<Integer, AGuardian> team) {
+    public AbilityChoiceSubMenu(Skin skin, Team team) {
 
         super(skin);
         this.team = team;

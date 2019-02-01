@@ -1,6 +1,5 @@
 package de.limbusdev.guardianmonsters.guardians.monsters
 
-import de.limbusdev.utils.extensions.set
 import com.badlogic.gdx.utils.Array as GdxArray
 import kotlin.IllegalStateException
 
@@ -27,28 +26,33 @@ class Team
         var maximumTeamSize: Int,
         var activeTeamSize: Int
 ) {
-    val slots = GdxArray<AGuardian?>(true, capacity)
-    val range = 0 until capacity
-
-    init
-    {
-        for(i in range) slots.add(null)
-    }
+    private val slots = mutableListOf<AGuardian>()
+    val range: IntRange
+        get() {return 0 until slots.size}
 
     constructor(maximumTeamSize: Int) : this(7, 1, 1)
 
-    operator fun get(slot: Int) : AGuardian?
+    fun remove(slot: Int) : AGuardian
     {
-        if(slot !in range)
-            throw IndexOutOfBoundsException("Out of capacity. Slot mus be in 0..${capacity-1}")
+        if(slots.size == 1) throw IllegalStateException("Cannot remove last Guardian from team.")
+        if(slot !in range) throw IndexOutOfBoundsException("Out of capacity. Slot must be in $range}")
+
+        return slots.removeAt(slot)
+    }
+
+    fun put(slot: Int, guardian: AGuardian) : AGuardian = set(slot, guardian)
+
+    operator fun get(slot: Int) : AGuardian
+    {
+        if(slot !in range) throw IndexOutOfBoundsException("Out of capacity. Slot must be in $range}")
 
         return slots[slot]
     }
 
-    operator fun set(slot: Int, guardian: AGuardian) : AGuardian?
+    operator fun set(slot: Int, guardian: AGuardian) : AGuardian
     {
-        if(slot !in range)
-            throw IndexOutOfBoundsException("Out of capacity. Slot mus be in 0..${capacity-1}")
+        if(slot !in range) throw IndexOutOfBoundsException("Out of capacity. Slot mus be in 0..$range")
+        if(isMember(guardian)) throw java.lang.IllegalArgumentException("Guardian is already in this team.")
 
         val formerOccupant = slots[slot]
         slots[slot] = guardian
@@ -57,39 +61,19 @@ class Team
 
     operator fun plus(guardian: AGuardian) : Int
     {
+        if(slots.size >= capacity) throw IllegalStateException("Team is full. More members not allowed.")
         if(isMember(guardian)) throw java.lang.IllegalArgumentException("Guardian is already in this team.")
-
-        for(slot in range)
-        {
-            if(this[slot] == null)
-            {
-                this[slot] = guardian
-                return slot
-            }
-        }
-
-        throw IllegalStateException("Team is full. This should not happen.")
+        slots.add(guardian)
+        return slots.size-1
     }
 
     operator fun minus(guardian: AGuardian) : AGuardian
     {
-        if(slots[1] == null)
-            throw IllegalStateException("Cannot remove last Guardian from team.")
+        if(slots.size == 1) throw IllegalStateException("Cannot remove last Guardian from team.")
+        if(!slots.contains(guardian)) throw IllegalArgumentException("Given guardian is not a member.")
 
-        val slot = slots.indexOf(guardian)
-        val removedGuardian = slots[slot] ?: throw java.lang.IllegalStateException("Given guardian is not a member.")
-
-        // Move other team members to close gap
-        for(s in range)
-        {
-            if(s > slot)
-            {
-                slots[s-1] = slots[s]
-                slots[s] = null
-            }
-        }
-
-        return removedGuardian
+        slots.remove(guardian)
+        return guardian
     }
 
     /**
@@ -106,9 +90,6 @@ class Team
         val guardian1 = this[position1]
         val guardian2 = this[position2]
 
-        if(guardian1 == null || guardian2 == null)
-            throw IllegalArgumentException("Only occupied positions may be swapped.")
-
         this[position1] = guardian2
         this[position2] = guardian1
     }
@@ -117,12 +98,12 @@ class Team
 
     fun isMember(guardian: AGuardian): Boolean
     {
-        return slots.contains(guardian, false)
+        return slots.contains(guardian)
     }
 
     fun getPosition(guardian: AGuardian): Int
     {
-        return slots.indexOf(guardian, false)
+        return slots.indexOf(guardian)
     }
 
     fun teamKO(): Boolean
@@ -130,11 +111,18 @@ class Team
         var ko = true
         for(guardian in slots)
         {
-            if(guardian != null)
-            {
-                ko = guardian.individualStatistics.isKO && ko
-            }
+            ko = guardian.individualStatistics.isKO && ko
         }
         return ko
+    }
+
+    fun keys() : Array<Int>
+    {
+        return (IntArray(capacity) {it}).toTypedArray()
+    }
+
+    fun values() : List<AGuardian>
+    {
+        return slots
     }
 }

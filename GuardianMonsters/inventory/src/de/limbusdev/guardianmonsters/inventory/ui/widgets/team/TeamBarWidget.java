@@ -6,6 +6,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ArrayMap;
 
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
+import de.limbusdev.guardianmonsters.guardians.monsters.Team;
 import de.limbusdev.guardianmonsters.ui.widgets.ATeamChoiceWidget;
 import de.limbusdev.guardianmonsters.ui.widgets.Callback;
 import de.limbusdev.utils.geometry.IntVec2;
@@ -18,7 +19,7 @@ public class TeamBarWidget extends ATeamChoiceWidget
 {
 
 
-    public TeamBarWidget(Skin skin, ArrayMap<Integer, AGuardian> team, Callback.ButtonID callbacks) {
+    public TeamBarWidget(Skin skin, Team team, Callback.ButtonID callbacks) {
         super(skin, callbacks);
 
         setSize(260,44);

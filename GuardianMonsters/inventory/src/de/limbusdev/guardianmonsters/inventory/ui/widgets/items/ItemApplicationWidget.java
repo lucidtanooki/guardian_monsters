@@ -14,6 +14,7 @@ import de.limbusdev.guardianmonsters.guardians.items.Item;
 import de.limbusdev.guardianmonsters.guardians.items.equipment.Equipment;
 import de.limbusdev.guardianmonsters.guardians.items.medicine.AMedicalItem;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
+import de.limbusdev.guardianmonsters.guardians.monsters.Team;
 import de.limbusdev.guardianmonsters.inventory.ui.widgets.team.MonsterListWidget;
 import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.ui.widgets.ReassuranceWidget;
@@ -34,12 +35,12 @@ public class ItemApplicationWidget extends Group implements MonsterListWidget.Ca
 
     // Data
     private Inventory inventory;
-    private ArrayMap<Integer, AGuardian> team;
+    private Team team;
     private Item item;
 
 
     // ................................................................................. CONSTRCUTOR
-    public ItemApplicationWidget(Skin skin, Inventory inventory, ArrayMap<Integer,AGuardian> monsters)
+    public ItemApplicationWidget(Skin skin, Inventory inventory, Team monsters)
     {
         super();
 

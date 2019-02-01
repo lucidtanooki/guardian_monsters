@@ -11,6 +11,7 @@ import java.util.Observer;
 
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.Guardian;
+import de.limbusdev.guardianmonsters.guardians.monsters.Team;
 import de.limbusdev.guardianmonsters.inventory.ui.widgets.abilities.AbilityDetailWidget;
 import de.limbusdev.guardianmonsters.inventory.ui.widgets.abilities.GraphWidget;
 import de.limbusdev.guardianmonsters.inventory.ui.widgets.team.TeamMemberSwitcher;
@@ -33,14 +34,14 @@ public class AbilityGraphSubMenu extends AInventorySubMenu implements Listener<G
     GraphWidget.Controller, TeamMemberSwitcher.Callbacks, AbilityDetailWidget.Callbacks,
         Observer {
 
-    private ArrayMap<Integer, AGuardian> team;
+    private Team team;
     private GraphWidget graphWidget;
     private AbilityDetailWidget details;
     private TeamMemberSwitcher switcher;
     LogoWithCounter remainingLevels;
 
     // ................................................................................. CONSTRUCTOR
-    public AbilityGraphSubMenu(Skin skin, ArrayMap<Integer, AGuardian> team) {
+    public AbilityGraphSubMenu(Skin skin, Team team) {
 
         super(skin);
         this.team = team;
@@ -74,7 +75,7 @@ public class AbilityGraphSubMenu extends AInventorySubMenu implements Listener<G
 
     }
 
-    public void init(ArrayMap<Integer, AGuardian> team, int teamPosition) {
+    public void init(Team team, int teamPosition) {
 
         team.get(teamPosition).addObserver(this);
         switcher.init(team.get(teamPosition), teamPosition);

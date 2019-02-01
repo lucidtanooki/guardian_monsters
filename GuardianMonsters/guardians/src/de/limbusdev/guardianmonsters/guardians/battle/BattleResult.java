@@ -25,7 +25,7 @@ public class BattleResult
     public BattleResult(Team team, Array<Item> droppedItems)
     {
         this.gainedEXP = new ArrayMap<>();
-        for(AGuardian guardian : team.getSlots()) {
+        for(AGuardian guardian : team.values()) {
             gainedEXP.put(guardian,0);
         }
         this.droppedItems = droppedItems;

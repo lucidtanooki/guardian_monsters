@@ -3,6 +3,7 @@ package de.limbusdev.guardianmonsters.guardians.monsters
 import com.badlogic.gdx.utils.ArrayMap
 
 import de.limbusdev.utils.extensions.set
+import java.lang.IllegalArgumentException
 import kotlin.IllegalStateException
 
 /**
@@ -161,6 +162,20 @@ class GuardoSphere
 
     companion object
     {
+        fun fromSphereToTeam(sphere: GuardoSphere, sphereSlot: Int, team: Team)
+        {
+            val guardian = sphere[sphereSlot]
+
+            if(guardian == null) throw IllegalArgumentException("Cannot move empty slot to team.")
+
+            team + guardian
+        }
+
+        fun fromTeamToSphere(sphere: GuardoSphere, sphereSlot: Int, team: Team, teamSlot: Int)
+        {
+            sphere[sphereSlot] = team.remove(teamSlot)
+        }
+
         fun teamSphereSwap(sphere: GuardoSphere, sphereSlot: Int, team: Team, teamSlot: Int)
         {
             if(sphereSlot !in sphere.range || teamSlot !in team.range)

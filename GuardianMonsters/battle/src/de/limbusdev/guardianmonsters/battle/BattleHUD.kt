@@ -305,7 +305,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
             var teamOk = false
             for(m in leftTeam.values())
             {
-                if(m.individualStatistics.isFit)
+                if((m != null && m.individualStatistics.isFit) || m == null)
                 {
                     teamOk = true || teamOk
                 }

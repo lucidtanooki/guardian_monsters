@@ -8,6 +8,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ArrayMap;
 
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
+import de.limbusdev.guardianmonsters.guardians.monsters.Team;
 import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.ui.widgets.MonsterPreviewWidget;
 import de.limbusdev.guardianmonsters.ui.widgets.SimpleClickListener;
@@ -26,7 +27,7 @@ public class TeamMemberSwitcher extends Group {
     private Label name;
     private ImageButton previous, next;
 
-    public TeamMemberSwitcher(Skin skin, final ArrayMap<Integer, AGuardian> team, final Callbacks callbacks) {
+    public TeamMemberSwitcher(Skin skin, final Team team, final Callbacks callbacks) {
 
         super();
 
@@ -39,7 +40,7 @@ public class TeamMemberSwitcher extends Group {
 
                 currentlyChosen--;
                 if(currentlyChosen < 0) {
-                    currentlyChosen = team.size-1;
+                    currentlyChosen = team.getSize()-1;
                 }
                 init(team.get(currentlyChosen), currentlyChosen);
                 TeamMemberSwitcher.this.callbacks.onChanged(currentlyChosen);
@@ -48,7 +49,7 @@ public class TeamMemberSwitcher extends Group {
         next.addListener(new SimpleClickListener(() -> {
 
                 currentlyChosen++;
-                if(currentlyChosen > team.size-1) {
+                if(currentlyChosen > team.getSize()-1) {
                     currentlyChosen = 0;
                 }
                 init(team.get(currentlyChosen), currentlyChosen);

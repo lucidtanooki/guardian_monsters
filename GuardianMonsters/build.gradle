@@ -170,6 +170,26 @@ project(":guardians") {
     }
 }
 
+project(":guardosphere") {
+    apply plugin: "kotlin"
+
+    dependencies {
+        implementation project(":utils")
+        implementation project(":guardians")
+        implementation project(":assets")
+        implementation project(":services")
+        implementation project(":ui")
+        implementation "io.github.libktx:ktx-actors:$ktxVersion"
+        implementation "io.github.libktx:ktx-scene2d:$ktxVersion"
+        implementation "io.github.libktx:ktx-vis:$ktxVersion"
+        implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+        implementation "io.github.libktx:ktx-log:$ktxVersion"
+        implementation "com.badlogicgames.gdx:gdx:$gdxVersion"
+        implementation "com.badlogicgames.ashley:ashley:$ashleyVersion"
+        testCompile "junit:junit:+"
+    }
+}
+
 project(":ui") {
     apply plugin: "kotlin"
 

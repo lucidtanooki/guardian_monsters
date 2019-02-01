@@ -10,6 +10,7 @@ import de.limbusdev.guardianmonsters.guardians.items.Inventory;
 import de.limbusdev.guardianmonsters.guardians.items.Item;
 import de.limbusdev.guardianmonsters.guardians.items.equipment.Equipment;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
+import de.limbusdev.guardianmonsters.guardians.monsters.Team;
 
 /**
  * @author Georg Eckert 2017
@@ -20,7 +21,7 @@ public class WeaponDetailViewWidget extends ItemApplicationWidget
 
     private ArrayMap<String, Label> valueLabels;
 
-    public WeaponDetailViewWidget(Skin skin, Inventory inventory, ArrayMap<Integer, AGuardian> team) {
+    public WeaponDetailViewWidget(Skin skin, Inventory inventory, Team team) {
         super(skin, inventory, team);
 
         int offX = 4;

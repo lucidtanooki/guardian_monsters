@@ -20,6 +20,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ArrayMap;
 
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
+import de.limbusdev.guardianmonsters.guardians.monsters.Team;
 import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.utils.geometry.IntVec2;
 
@@ -41,13 +42,13 @@ public abstract class ATeamChoiceWidget extends Group {
         buttons = new Group();
     }
 
-    public void init(ArrayMap<Integer, AGuardian> team, int initialPosition)
+    public void init(Team team, int initialPosition)
     {
         this.currentPosition = initialPosition;
         init(team);
     }
 
-    public void init(ArrayMap<Integer,AGuardian> team)
+    public void init(Team team)
     {
         memberButtons = new ButtonGroup<>();
         buttons.clearChildren();

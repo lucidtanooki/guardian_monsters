@@ -162,7 +162,7 @@ public class BattleQueue extends Observable
 
         AGuardian substitute = null;
         boolean newGuardianFound = false;
-        Iterator<AGuardian> teamIterator = team.getSlots().iterator();
+        Iterator<AGuardian> teamIterator = team.values().iterator();
         while(!newGuardianFound && teamIterator.hasNext())
         {
             AGuardian guardian = teamIterator.next();
@@ -260,7 +260,7 @@ public class BattleQueue extends Observable
             team = right;
         }
 
-        for(AGuardian combatant : team.getSlots())
+        for(AGuardian combatant : team.values())
         {
             resetModifiedStats(combatant);
         }

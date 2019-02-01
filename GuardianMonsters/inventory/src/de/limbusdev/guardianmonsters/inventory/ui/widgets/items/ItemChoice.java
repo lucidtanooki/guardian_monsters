@@ -15,6 +15,7 @@ import de.limbusdev.guardianmonsters.guardians.items.Item;
 import de.limbusdev.guardianmonsters.guardians.items.medicine.AMedicalItem;
 import de.limbusdev.guardianmonsters.guardians.items.medicine.MedicalItem;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
+import de.limbusdev.guardianmonsters.guardians.monsters.Team;
 import de.limbusdev.guardianmonsters.inventory.ui.widgets.team.MonsterListWidget;
 import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.ui.Constant;
@@ -23,14 +24,14 @@ import de.limbusdev.guardianmonsters.ui.widgets.SimpleClickListener;
 
 public class ItemChoice extends Group
 {
-    private ArrayMap<Integer, AGuardian> team;
+    private Team team;
     private Inventory inventory;
     private MonsterListWidget guardianList;
     private Item chosenItem;
     private BattleSystem battleSystem;
     private ItemApplicationWidget detailViewWidget;
 
-    public ItemChoice(Skin skin, Inventory inventory, ArrayMap<Integer,AGuardian> team, BattleSystem battleSystem)
+    public ItemChoice(Skin skin, Inventory inventory, Team team, BattleSystem battleSystem)
     {
         this.team = team;
         this.inventory = inventory;

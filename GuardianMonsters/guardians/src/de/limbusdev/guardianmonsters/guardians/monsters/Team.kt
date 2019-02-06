@@ -2,7 +2,6 @@ package de.limbusdev.guardianmonsters.guardians.monsters
 
 import com.badlogic.gdx.utils.ObjectMap
 import ktx.log.info
-import ktx.log.logger
 import com.badlogic.gdx.utils.Array as GdxArray
 import kotlin.IllegalStateException
 
@@ -35,26 +34,18 @@ class Team
 
     constructor(maximumTeamSize: Int) : this(7, 1, 1)
 
-    fun remove(slot: Int) : AGuardian
-    {
-        if(slots.size == 1) throw IllegalStateException("Cannot remove last Guardian from team.")
-        if(slot !in range) throw IndexOutOfBoundsException("Out of capacity. Slot must be in $range}")
-
-        return slots.removeAt(slot)
-    }
-
     fun put(slot: Int, guardian: AGuardian) : AGuardian = set(slot, guardian)
 
     operator fun get(slot: Int) : AGuardian
     {
-        if(slot !in range) throw IndexOutOfBoundsException("Out of capacity. Slot must be in $range}")
+        if(slot !in range) throw IndexOutOfBoundsException(messageOutOfRange.format(range))
 
         return slots[slot]
     }
 
     operator fun set(slot: Int, guardian: AGuardian) : AGuardian
     {
-        if(slot !in range) throw IndexOutOfBoundsException("Out of capacity. Slot mus be in 0..$range")
+        if(slot !in range) throw IndexOutOfBoundsException(messageOutOfRange.format(range))
         if(isMember(guardian)) throw java.lang.IllegalArgumentException("Guardian is already in this team.")
 
         val formerOccupant = slots[slot]
@@ -105,27 +96,34 @@ class Team
         return guardian
     }
 
+    fun remove(slot: Int) : AGuardian
+    {
+        if(slot !in range) throw IndexOutOfBoundsException(messageOutOfRange.format(range))
+
+        return minus(slots[slot])
+    }
+
     /**
      * Swaps positions of two monsters, if both positions are populated.
-     * @param position1
-     * @param position2
+     * @param slotA
+     * @param slotB
      * @return  whether the swap was successful
      */
-    fun swap(position1: Int, position2: Int)
+    fun swap(slotA: Int, slotB: Int)
     {
-        if(position1 == position2)
+        if(slotA == slotB)
         {
-            info("Team") {"[WARN] Position1 == Position2! Swapping has no effect."}
+            info(TAG) { "[INFO] SlotA == SlotB! Swapping has no effect." }
             return
         }
-        if(position1 !in range || position2 !in range)
+        if(slotA !in range || slotB !in range)
             throw IndexOutOfBoundsException("Position must be in 0..${capacity-1}")
 
-        val guardian1 = this[position1]
-        val guardian2 = this[position2]
+        val guardian1 = this[slotA]
+        val guardian2 = this[slotB]
 
-        slots[position1] = guardian2    // Do not use this[position1] here, since it will throw an
-        slots[position2] = guardian1    // exception because both are already in the team.
+        slots[slotA] = guardian2    // Do not use this[position1] here, since it will throw an
+        slots[slotB] = guardian1    // exception because both are already in the team.
     }
 
     val size: Int get() { return slots.size }
@@ -158,5 +156,11 @@ class Team
     fun values() : List<AGuardian>
     {
         return slots
+    }
+
+    companion object
+    {
+        const val TAG = "Team"
+        const val messageOutOfRange = "Out of capacity. Slot must be in %s}"
     }
 }

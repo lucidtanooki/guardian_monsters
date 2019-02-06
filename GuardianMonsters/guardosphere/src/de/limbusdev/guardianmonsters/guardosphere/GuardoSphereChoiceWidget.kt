@@ -1,4 +1,4 @@
-package de.limbusdev.guardianmonsters.fwmengine.guardosphere
+package de.limbusdev.guardianmonsters.guardosphere
 
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.scenes.scene2d.Actor
@@ -116,9 +116,9 @@ class GuardoSphereChoiceWidget
         table.row()
         for(col in 0..6)
         {
-            val guardian = team[col]
-            if(guardian != null)
+            if(col < team.size)
             {
+                val guardian = team[col]
                 val guardianButton = GuardoSphereButton(skin, guardian)
                 teamButtonBar[col] = guardianButton
                 buttonGroup.add(guardianButton)
@@ -175,11 +175,7 @@ class GuardoSphereChoiceWidget
 
         // Swap guardians
         val sphereSlot = gridToSphere(gridCell.y, gridCell.x, 0)
-
-        val teamGuardian = team[teamSlot]
-        val gridGuardian = sphere[sphereSlot]
-        team[teamSlot] = gridGuardian
-        sphere[sphereSlot] = teamGuardian
+        GuardoSphere.teamSphereSwap(sphere, sphereSlot, team, teamSlot)
 
         // Assign new listeners
         gridButton.clearListeners()
@@ -205,7 +201,7 @@ class GuardoSphereChoiceWidget
         buttonB.setPosition(newPositionB.x, newPositionB.y)
 
         // Swap guardians
-        team.swapPositions(teamSlotA, teamSlotB)
+        team.swap(teamSlotA, teamSlotB)
 
         // Assign new listeners
         buttonA.clearListeners()

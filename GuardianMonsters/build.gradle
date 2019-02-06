@@ -118,6 +118,7 @@ project(":core") {
         implementation project(":assets")
         implementation project(":media")
         implementation project(":utils")
+        implementation project(":guardosphere")
         implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
         implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinCoroutinesVersion"
         implementation "com.badlogicgames.gdx:gdx:$gdxVersion"
@@ -179,6 +180,8 @@ project(":guardosphere") {
         implementation project(":assets")
         implementation project(":services")
         implementation project(":ui")
+        implementation project(":scene2d")
+        implementation project(":media")
         implementation "io.github.libktx:ktx-actors:$ktxVersion"
         implementation "io.github.libktx:ktx-scene2d:$ktxVersion"
         implementation "io.github.libktx:ktx-vis:$ktxVersion"

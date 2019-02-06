@@ -15,7 +15,7 @@
    viewBox="0 0 210 297"
    version="1.1"
    id="svg8"
-   inkscape:version="0.92.3 (2405546, 2018-03-11)"
+   inkscape:version="0.92.4 (unknown)"
    sodipodi:docname="adaptive.svg">
   <defs
      id="defs2">
@@ -50,16 +50,16 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2.8284271"
-     inkscape:cx="366.70743"
-     inkscape:cy="493.47226"
+     inkscape:zoom="4"
+     inkscape:cx="358.01375"
+     inkscape:cy="503.72662"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1366"
-     inkscape:window-height="708"
-     inkscape:window-x="0"
-     inkscape:window-y="0"
+     inkscape:window-width="1920"
+     inkscape:window-height="1023"
+     inkscape:window-x="1920"
+     inkscape:window-y="27"
      inkscape:window-maximized="1" />
   <metadata
      id="metadata5">
@@ -69,7 +69,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -84,28 +84,19 @@
        style="fill:url(#radialGradient4556);fill-opacity:1;stroke-width:0.14511804"
        inkscape:export-xdpi="687.44"
        inkscape:export-ydpi="687.44" />
-    <image
-       y="159.27965"
-       x="81.59304"
-       id="image3740"
-       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAAAmCAYAAAAMe5M4AAAB0UlEQVR4nO2azXGEMAyF5Uyq4cqZ
-oQqXAEVBCVTBcOZKO84J4oAd/0QQD3rfaVc2suzRPCztKq017UzTZPbPWmtl2elJ9phKiYeT0s77
-47GVQJEgAYSjiOiQIWPM94BS53lPYgqLh5OizhsKIBwkgHCQAMJBAggHCSCcz5hJVVUdn7dtM0Tv
-acxIBwognNg+AJ3n3Fy3og/wEFAA4SABhBN1CbQZx/Fic10SU6mq6pC9bdtC051rtG17kc55ns1f
-xs9zYteNec7Hfp4xZxnaU9/3x/gwDJdfH6EAwkECCIerCriMJwfi8JfqK+QjZzwmDo6zyN1/yp5c
-diiAcJIvgSnYF8au67y2VF82KT448MWR81zu/jn3DAUQDhJAOLe+At6IS377vv+XdTmAAggHCSCc
-W/sArho0VJfG+EqZw7HGMAwXmy3JT8Tmqz5crx9f/8D2sT8HBRAOEkA43iog1IbMbfnG4PIdsx5n
-zNxzOWOzXz+h6iDUuIICCOeHAuS2OWNw+fatd2ccsZQQgw1Hr8H2Udc1/g8AkADiQSv45bhkn4ho
-XVciggKIBwkgHFXX9fFlXVfW4r5pmkNylmUxPttv9icpIQYfubG5ZN8GCiCcL/CpEumTuwqsAAAA
-AElFTkSuQmCC
-"
-       preserveAspectRatio="none"
-       height="9.1187239"
-       width="30.715698" />
     <path
        style="fill:#550000;fill-opacity:1;stroke-width:0.54847765"
        d="M 294.93945 621.06445 C 294.90294 630.04842 295.09699 639.41775 295.53711 643.1875 C 296.95374 655.32148 299.69944 665.6198 303.39258 672.66016 C 305.66376 676.98979 312.39453 683.81132 316.63867 686.08398 C 325.83907 691.01071 337.89681 693.67513 355.43359 694.6582 L 355.43555 694.6582 C 357.39913 694.76773 364.25354 694.75713 370.66992 694.63281 C 398.87444 694.08686 414.76582 689.62582 424.27734 679.58203 C 431.29872 672.16781 435.35492 661.0441 437.24805 644.00977 C 437.73745 639.61482 437.95267 630.30668 437.91406 621.38867 C 437.87916 628.96554 437.66375 636.2766 437.24805 640.00977 C 435.35492 657.0441 431.29872 668.16781 424.27734 675.58203 C 414.76582 685.62582 398.87444 690.08686 370.66992 690.63281 C 364.25354 690.75713 357.39913 690.76773 355.43555 690.6582 L 355.43359 690.6582 C 337.89681 689.67513 325.83907 687.01071 316.63867 682.08398 C 312.39453 679.81132 305.66376 672.98979 303.39258 668.66016 C 299.69944 661.6198 296.95374 651.32148 295.53711 639.1875 C 295.16291 635.98233 294.96893 628.69115 294.93945 621.06445 z "
        transform="scale(0.26458333)"
        id="path4592" />
+    <image
+       sodipodi:absref="/home/georg/Entwicklung/Android/catchem/Asset-Sources/3d/menu/limbusdev3d.png"
+       y="154.63391"
+       x="78.70475"
+       id="image830"
+       xlink:href="file:///home/georg/Entwicklung/Android/catchem/Asset-Sources/3d/menu/limbusdev3d.png"
+       preserveAspectRatio="none"
+       height="20.526894"
+       width="36.492252" />
   </g>
 </svg>

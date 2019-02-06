@@ -1,5 +1,8 @@
 package de.limbusdev.guardianmonsters.guardians.monsters
 
+import com.badlogic.gdx.utils.ObjectMap
+import ktx.log.info
+import ktx.log.logger
 import com.badlogic.gdx.utils.Array as GdxArray
 import kotlin.IllegalStateException
 
@@ -59,6 +62,32 @@ class Team
         return formerOccupant
     }
 
+    operator fun plusAssign(guardian: AGuardian) { plus(guardian) }
+    operator fun minusAssign(guardian: AGuardian) { minus(guardian) }
+    operator fun plusAssign(guardians: ObjectMap<Int,AGuardian>) { plus(guardians) }
+
+    /**
+     * Adds all given guardians to the team
+     */
+    operator fun plus(guardians: ObjectMap<Int,AGuardian>)
+    {
+        for(position in guardians.keys())
+        {
+            plusAssign(guardians[position])
+        }
+    }
+
+    fun copy() : Team
+    {
+        val teamCopy = Team(capacity, maximumTeamSize, activeTeamSize)
+        for(guardian in slots) teamCopy += guardian
+        return teamCopy
+    }
+
+    /**
+     * Adds the AGuardian instance on the right side to the team.
+     * @param guardian guardian to be added
+     */
     operator fun plus(guardian: AGuardian) : Int
     {
         if(slots.size >= capacity) throw IllegalStateException("Team is full. More members not allowed.")
@@ -84,14 +113,19 @@ class Team
      */
     fun swap(position1: Int, position2: Int)
     {
+        if(position1 == position2)
+        {
+            info("Team") {"[WARN] Position1 == Position2! Swapping has no effect."}
+            return
+        }
         if(position1 !in range || position2 !in range)
             throw IndexOutOfBoundsException("Position must be in 0..${capacity-1}")
 
         val guardian1 = this[position1]
         val guardian2 = this[position2]
 
-        this[position1] = guardian2
-        this[position2] = guardian1
+        slots[position1] = guardian2    // Do not use this[position1] here, since it will throw an
+        slots[position2] = guardian1    // exception because both are already in the team.
     }
 
     val size: Int get() { return slots.size }

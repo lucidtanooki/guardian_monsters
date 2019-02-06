@@ -1,6 +1,7 @@
 package de.limbusdev.guardianmonsters.model.gamestate;
 
 import com.badlogic.gdx.utils.ArrayMap;
+import com.badlogic.gdx.utils.ObjectMap;
 
 import de.limbusdev.guardianmonsters.guardians.monsters.GuardoSphere;
 import de.limbusdev.guardianmonsters.guardians.items.Inventory;
@@ -23,17 +24,15 @@ public class GameState {
 
     @ForSerializationOnly
     public GameState(int map, int x, int y, int maxTeamSize, int activeTeamSize,
-                     ArrayMap<Integer, AGuardian> team, Inventory inventory, ArrayMap<Integer, AGuardian> guardoSphere) {
+                     Team team, Inventory inventory, GuardoSphere guardoSphere) {
         this.map = map;
         this.gridx = x;
         this.gridy = y;
         this.maxTeamSize = maxTeamSize;
         this.activeTeamSize = activeTeamSize;
-        this.team = new Team(7,maxTeamSize,activeTeamSize);
-        this.team.putAll(team);
+        this.team = team.copy();
         this.inventory = inventory;
-        this.guardoSphere = new GuardoSphere();
-        this.guardoSphere.putAll(guardoSphere);
+        this.guardoSphere = guardoSphere.copy();
     }
 
     public String toString()
@@ -53,11 +52,7 @@ public class GameState {
 
         out.append("GuardoSphere:\n");
 
-        for(Integer key : guardoSphere.keys())
-        {
-            out.append("Position ").append(key).append(": ")
-                    .append(guardoSphere.get(key).toString()).append("\n");
-        }
+        out.append(guardoSphere.toString());
 
 
         return out.toString();

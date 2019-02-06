@@ -1,4 +1,4 @@
-package de.limbusdev.guardianmonsters.fwmengine.guardosphere
+package de.limbusdev.guardianmonsters.guardosphere
 
 import com.badlogic.gdx.scenes.scene2d.Group
 import com.badlogic.gdx.scenes.scene2d.ui.*
@@ -60,7 +60,7 @@ class GuardoSphereTeamWidget(
         buttons.clear()
         monsterButtons.clear()
 
-        for(key in team.keys())
+        for(key in (0 until team.size))
         {
             val guardian = team[key]
             val monsterButton = GuardoSphereButton(skin, guardian)

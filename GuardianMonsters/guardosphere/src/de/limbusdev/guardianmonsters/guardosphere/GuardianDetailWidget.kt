@@ -1,4 +1,4 @@
-package de.limbusdev.guardianmonsters.fwmengine.guardosphere
+package de.limbusdev.guardianmonsters.guardosphere
 
 import com.badlogic.gdx.scenes.scene2d.Group
 import com.badlogic.gdx.scenes.scene2d.ui.Image
@@ -8,8 +8,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable
 import com.badlogic.gdx.utils.Align
 
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian
-import de.limbusdev.guardianmonsters.scene2d.lSetPosition
-import de.limbusdev.guardianmonsters.scene2d.lSetSize
 import de.limbusdev.guardianmonsters.services.Services
 import ktx.actors.plus
 
@@ -29,24 +27,20 @@ class GuardianDetailWidget(skin: Skin) : Group()
         setSize(WIDTH, HEIGHT)
 
         val background = Image(skin.getDrawable("guardosphere-frame"))
-        background
-                .lSetSize(WIDTH, HEIGHT)
-                .lSetPosition(0f, 0f, Align.bottomLeft)
+        background.setSize(WIDTH, HEIGHT)
+        background.setPosition(0f, 0f, Align.bottomLeft)
 
         monsterSprite = Image(skin.getDrawable("transparent"))
-        monsterSprite
-                .lSetSize(128f, 128f)
-                .lSetPosition(12f, HEIGHT - 8f, Align.topLeft)
+        monsterSprite.setSize(128f, 128f)
+        monsterSprite.setPosition(12f, HEIGHT - 8f, Align.topLeft)
 
         name = Label("Name", skin, "white")
-        name
-                .lSetSize(92f, 20f)
-                .lSetPosition(12f, 20f, Align.bottomLeft)
+        name.setSize(92f, 20f)
+        name.setPosition(12f, 20f, Align.bottomLeft)
 
         level = Label("Lvl 0", skin, "white")
-        level
-                .lSetSize(32f, 20f)
-                .lSetPosition(12f + 96f, 20f, Align.bottomLeft)
+        level.setSize(32f, 20f)
+        level.setPosition(12f + 96f, 20f, Align.bottomLeft)
 
         this+background
         this+monsterSprite

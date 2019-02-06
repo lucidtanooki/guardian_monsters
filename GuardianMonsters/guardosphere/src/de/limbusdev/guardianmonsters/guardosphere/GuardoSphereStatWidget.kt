@@ -1,4 +1,4 @@
-package de.limbusdev.guardianmonsters.fwmengine.guardosphere
+package de.limbusdev.guardianmonsters.guardosphere
 
 import com.badlogic.gdx.scenes.scene2d.Group
 import com.badlogic.gdx.scenes.scene2d.ui.HorizontalGroup

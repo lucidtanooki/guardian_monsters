@@ -1,11 +1,11 @@
-package de.limbusdev.guardianmonsters.fwmengine.guardosphere
+package de.limbusdev.guardianmonsters.guardosphere
 
 import com.badlogic.gdx.scenes.scene2d.ui.Button
 import com.badlogic.gdx.scenes.scene2d.ui.ButtonGroup
 import com.badlogic.gdx.scenes.scene2d.ui.Skin
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton
 import com.badlogic.gdx.utils.Align
-import de.limbusdev.guardianmonsters.Constant
+import de.limbusdev.guardianmonsters.ui.Constant
 import de.limbusdev.guardianmonsters.assets.paths.AssetPath
 import de.limbusdev.guardianmonsters.guardians.monsters.GuardoSphere
 import de.limbusdev.guardianmonsters.guardians.monsters.Team

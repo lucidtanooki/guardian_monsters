@@ -1,6 +1,7 @@
 package de.limbusdev.guardianmonsters.guardians.monsters
 
 import com.badlogic.gdx.utils.ArrayMap
+import com.badlogic.gdx.utils.ObjectMap
 
 import de.limbusdev.utils.extensions.set
 import java.lang.IllegalArgumentException
@@ -17,7 +18,7 @@ import kotlin.IllegalStateException
  * @author Georg Eckert 2019
  */
 
-class GuardoSphere
+class GuardoSphere()
 {
     // Lists whether a Guardian and it's form are unknown, have been seen or already banned.
     private val status = ArrayMap<Int, ArrayMap<Int, State>>(300)
@@ -36,6 +37,13 @@ class GuardoSphere
             status[species] = ArrayMap()
             for(form in 0..4) status[species][form] = State.UNKNOWN
         }
+    }
+
+    fun copy() : GuardoSphere
+    {
+        val sphereCopy = GuardoSphere()
+        for(slot in range) sphereCopy[slot] = this[slot]
+        return sphereCopy
     }
 
     /**
@@ -93,6 +101,14 @@ class GuardoSphere
         }
         throw IllegalStateException("Sphere is full. This should not happen.")
     }
+
+    operator fun plus(guardians: ObjectMap<Int,AGuardian>)
+    {
+        for(key in guardians.keys()) this += guardians[key]
+    }
+
+    operator fun plusAssign(guardian: AGuardian) { plus(guardian) }
+    operator fun plusAssign(guardians: ObjectMap<Int,AGuardian>) { plusAssign(guardians) }
 
     /**
      * Checks if there are vacant slots in the sphere.
@@ -160,6 +176,17 @@ class GuardoSphere
         }
     }
 
+    override fun toString(): String
+    {
+        var outString = ""
+        for(key in sphere.keys())
+        {
+            val guardian = sphere[key]
+            if(guardian != null) outString += "Slot $key: $guardian"
+        }
+        return "GuardoSphere(sphere=$sphere, capacity=$capacity)"
+    }
+
     companion object
     {
         fun fromSphereToTeam(sphere: GuardoSphere, sphereSlot: Int, team: Team)
@@ -211,6 +238,8 @@ class GuardoSphere
             throw IllegalStateException("Slots could not be swapped. This should not happen.")
         }
     }
+
+
 
 
     // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ Inner Classes

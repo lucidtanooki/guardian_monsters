@@ -11,7 +11,8 @@ public class TeamComponent implements Component {
     /* ............................................................................ ATTRIBUTES .. */
     public Team team;
 
-    public TeamComponent() {
+    public TeamComponent()
+    {
         this.team = new Team(7,1,1);
     }
     /* ........................................................................... CONSTRUCTOR .. */

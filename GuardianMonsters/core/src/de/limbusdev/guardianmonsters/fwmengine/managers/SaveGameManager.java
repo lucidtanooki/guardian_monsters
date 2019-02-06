@@ -69,8 +69,8 @@ public class SaveGameManager extends EntitySystem
         savableEntities = engine.getEntitiesFor(saveGameComps);
         gameState = Components.saveGame.get(savableEntities.first()).gameState;
         gameState.map = this.gameArea.areaID;
-        gameState.team.putAll(Components.team.get(savableEntities.first()).team);
-        gameState.guardoSphere.putAll(Components.guardoSphere.get(savableEntities.first()).guardoSphere);
+        gameState.team = Components.team.get(savableEntities.first()).team.copy();
+        gameState.guardoSphere = Components.guardoSphere.get(savableEntities.first()).guardoSphere.copy();
         gameState.gridx = Components.position.get(savableEntities.first()).onGrid.getX();
         gameState.gridy = Components.position.get(savableEntities.first()).onGrid.getY();
     }
@@ -137,7 +137,7 @@ public class SaveGameManager extends EntitySystem
 
         TeamComponent team = new TeamComponent();
         AGuardianFactory factory = GuardiansServiceLocator.INSTANCE.getGuardianFactory();
-        team.team.put(0, factory.createGuardian(1,1));
+        team.team.plus(factory.createGuardian(1,1));
 
         gameState = new GameState(
                 Constant.startMap,
@@ -172,7 +172,8 @@ public class SaveGameManager extends EntitySystem
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        } else {
+        }
+        else {
             newSaveGame();
         }
 

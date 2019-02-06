@@ -5,6 +5,8 @@ import com.badlogic.gdx.utils.ObjectMap;
 
 import de.limbusdev.guardianmonsters.guardians.items.Inventory;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
+import de.limbusdev.guardianmonsters.guardians.monsters.GuardoSphere;
+import de.limbusdev.guardianmonsters.guardians.monsters.Team;
 
 /**
  * SerializableGameState
@@ -37,15 +39,24 @@ public class SerializableGameState {
         inventory = new SerializableInventory(gameState.inventory);
 
         team = new SerializableMonster[7];
-        for(ObjectMap.Entry<Integer,AGuardian> entry : gameState.team.entries()) {
-            SerializableMonster monster = new SerializableMonster(entry.value);
-            team[entry.key] = monster;
+
+
+        for(int i=0; i<gameState.team.getSize(); i++)
+        {
+            AGuardian guardian = gameState.team.get(i);
+            SerializableMonster monster = new SerializableMonster(guardian);
+            team[i] = monster;
         }
 
         guardoSphere = new SerializableMonster[300];
-        for(ObjectMap.Entry<Integer,AGuardian> entry : gameState.guardoSphere.entries()) {
-            SerializableMonster monster = new SerializableMonster(entry.value);
-            guardoSphere[entry.key] = monster;
+        for(int i=0; i<gameState.guardoSphere.getCapacity(); i++)
+        {
+            AGuardian guardian = gameState.guardoSphere.get(i);
+            if(guardian != null)
+            {
+                SerializableMonster monster = new SerializableMonster(guardian);
+                guardoSphere[i] = monster;
+            }
         }
 
         progress = new SerializableProgress(1);
@@ -53,19 +64,19 @@ public class SerializableGameState {
         activeTeamSize = gameState.activeTeamSize;
     }
 
-    public static GameState deserialize(SerializableGameState state) {
-
-        ArrayMap<Integer,AGuardian> team = new ArrayMap<>();
+    public static GameState deserialize(SerializableGameState state)
+    {
+        Team team = new Team(state.team.length, state.progress.maxTeamSize, state.activeTeamSize);
         for(int i=0; i<state.team.length; i++) {
             if(state.team[i] != null) {
-                team.put(i, SerializableMonster.deserialize(state.team[i]));
+                team.plus(SerializableMonster.deserialize(state.team[i]));
             }
         }
 
-        ArrayMap<Integer,AGuardian> guardoSphere = new ArrayMap<>();
+        GuardoSphere sphere = new GuardoSphere();
         for(int i=0; i<state.guardoSphere.length; i++) {
             if(state.guardoSphere[i] != null) {
-                guardoSphere.put(i, SerializableMonster.deserialize(state.guardoSphere[i]));
+                sphere.set(i, SerializableMonster.deserialize(state.guardoSphere[i]));
             }
         }
 
@@ -79,7 +90,7 @@ public class SerializableGameState {
             state.activeTeamSize,
             team,
             inventory,
-                guardoSphere
+            sphere
         );
 
         return gameState;

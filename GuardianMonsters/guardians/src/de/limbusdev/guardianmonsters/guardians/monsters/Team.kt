@@ -34,8 +34,6 @@ class Team
 
     constructor(maximumTeamSize: Int) : this(7, 1, 1)
 
-    fun put(slot: Int, guardian: AGuardian) : AGuardian = set(slot, guardian)
-
     operator fun get(slot: Int) : AGuardian
     {
         if(slot !in range) throw IndexOutOfBoundsException(messageOutOfRange.format(range))
@@ -43,7 +41,7 @@ class Team
         return slots[slot]
     }
 
-    operator fun set(slot: Int, guardian: AGuardian) : AGuardian
+    private operator fun set(slot: Int, guardian: AGuardian) : AGuardian
     {
         if(slot !in range) throw IndexOutOfBoundsException(messageOutOfRange.format(range))
         if(isMember(guardian)) throw java.lang.IllegalArgumentException("Guardian is already in this team.")
@@ -126,6 +124,15 @@ class Team
         slots[slotB] = guardian1    // exception because both are already in the team.
     }
 
+    fun replace(slot: Int, guardian: AGuardian) : AGuardian
+    {
+        if(slot >= size) throw IndexOutOfBoundsException("Slot must be in $range")
+
+        val replacedGuardian = slots[slot]
+        this[slot] = guardian
+        return replacedGuardian
+    }
+
     val size: Int get() { return slots.size }
 
     fun isMember(guardian: AGuardian): Boolean
@@ -161,6 +168,6 @@ class Team
     companion object
     {
         const val TAG = "Team"
-        const val messageOutOfRange = "Out of capacity. Slot must be in %s}"
+        const val messageOutOfRange = "Out of capacity. Slot must be in %s."
     }
 }

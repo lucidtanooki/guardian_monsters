@@ -585,13 +585,13 @@ class ModuleGuardiansJUnitTest
 
         // Team Creation
         val team = Team(3, 3, 3)
-        team[0] = factory.createGuardian(1, 1)
-        team[1] = factory.createGuardian(1, 1)
-        team[2] = factory.createGuardian(1, 1)
+        team += factory.createGuardian(1, 1)
+        team += factory.createGuardian(1, 1)
+        team += factory.createGuardian(1, 1)
         val oppTeam = Team(3, 3, 3)
-        oppTeam[0] = factory.createGuardian(2, 1)
-        oppTeam[1] = factory.createGuardian(2, 1)
-        oppTeam[2] = factory.createGuardian(2, 1)
+        oppTeam += factory.createGuardian(2, 1)
+        oppTeam += factory.createGuardian(2, 1)
+        oppTeam += factory.createGuardian(2, 1)
 
         // Battle System Initialization
         val battleEnds = booleanArrayOf(false)
@@ -605,8 +605,8 @@ class ModuleGuardiansJUnitTest
                 // Check, that one team is KO
                 var teamKO = true
                 var oppKO = true
-                for(g in team.slots) if(g!!.individualStatistics.isFit) teamKO = false
-                for(g in oppTeam.slots) if(g!!.individualStatistics.isFit) oppKO = false
+                for(g in team.values()) if(g.individualStatistics.isFit) teamKO = false
+                for(g in oppTeam.values()) if(g.individualStatistics.isFit) oppKO = false
                 assertTrue(teamKO || oppKO)
             }
 
@@ -644,7 +644,7 @@ class ModuleGuardiansJUnitTest
         val gf = GuardiansServiceLocator.guardianFactory
 
         // Create Team
-        val team = Team(3, 3, 3)
+        val team = Team(4, 3, 3)
         val g1 = gf.createGuardian(1,1)
         val g2 = gf.createGuardian(1,1)
         val g3 = gf.createGuardian(1,1)
@@ -652,9 +652,9 @@ class ModuleGuardiansJUnitTest
         val g5 = gf.createGuardian(1,1)
         val g6 = gf.createGuardian(1,1)
 
-        team[0] = g1
-        team[1] = g2
-        team[2] = g3
+        team += g1
+        team += g2
+        team += g3
 
         assertEquals(g1, team[0])
         assertNotEquals(g2, team[0])
@@ -671,8 +671,8 @@ class ModuleGuardiansJUnitTest
 
         assertEquals(3, team.size)
 
-        try { team + g1;fail("Exception expected.") }
-        catch(e: Exception) { assertEquals(e.message, "Guardian is already in this team.") }
+        try { team += g1; fail("Exception expected.") }
+        catch(e: Exception) { assertEquals("Guardian is already in this team.", e.message) }
 
 
         println("[Test 15] Team: passed")
@@ -697,9 +697,9 @@ class ModuleGuardiansJUnitTest
         val g6 = gf.createGuardian(2,1)
         val g7 = gf.createGuardian(2,1)
 
-        team[0] = g1
-        team[1] = g2
-        team[2] = g3
+        team += g1
+        team += g2
+        team += g3
 
         // Create Sphere
         val sphere = GuardoSphere()
@@ -771,9 +771,9 @@ class ModuleGuardiansJUnitTest
         val g6 = gf.createGuardian(2,1)
         val g7 = gf.createGuardian(2,1)
 
-        team[0] = g1
-        team[1] = g2
-        team[2] = g3
+        team += g1
+        team += g2
+        team += g3
 
         // Create Sphere
         val sphere = GuardoSphere()
@@ -791,12 +791,14 @@ class ModuleGuardiansJUnitTest
         assertEquals(g7, sphere[100])
         assertEquals(g2, team[0])
         assertEquals(g3, team[1])
-        assertEquals(null, team[2])
 
-        team - g2
+        try { team[2]; fail("Exception should have been thrown") }
+        catch(e: Exception) { assertEquals("Out of capacity. Slot must be in 0..1.", e.message) }
+
+        team -= g2
         assertEquals(g3, team[0])
 
-        try { team - g3; fail("Exception should have been thrown") }
+        try { team -= g3; fail("Exception should have been thrown") }
         catch(e: Exception) { assertEquals(e.message, "Cannot remove last Guardian from team.") }
 
     }
@@ -827,7 +829,7 @@ class ModuleGuardiansJUnitTest
             }
 
             val targets = Array<AGuardian>()
-            for(h in oppTeam.slots)
+            for(h in oppTeam.values())
             {
                 if(h!!.individualStatistics.isFit)
                 {

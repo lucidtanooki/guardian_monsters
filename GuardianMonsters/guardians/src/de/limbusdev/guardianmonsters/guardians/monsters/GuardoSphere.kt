@@ -192,8 +192,7 @@ class GuardoSphere()
         fun fromSphereToTeam(sphere: GuardoSphere, sphereSlot: Int, team: Team)
         {
             val guardian = sphere[sphereSlot]
-
-            if(guardian == null) throw IllegalArgumentException("Cannot move empty slot to team.")
+                    ?: throw IllegalArgumentException("Cannot move empty slot to team.")
 
             team + guardian
         }
@@ -211,31 +210,18 @@ class GuardoSphere()
             val teamGuardian = team[teamSlot]
             val sphereGuardian = sphere[sphereSlot]
 
-            if(teamGuardian != null && sphereGuardian != null)
+            if(sphereGuardian != null)
             {
                 sphere[sphereSlot] = teamGuardian
-                team[teamSlot] = sphereGuardian
+                team.replace(teamSlot, sphereGuardian)
                 return
             }
-            else if(teamGuardian == null && sphereGuardian == null)
-            {
-                // Do nothing, both are null
-                return
-            }
-            else if(teamGuardian == null && sphereGuardian != null)
-            {
-                team[teamSlot] = sphereGuardian
-                sphere[sphereSlot] = null
-                return
-            }
-            else if(teamGuardian != null && sphereGuardian == null)
+            else
             {
                 sphere[sphereSlot] = teamGuardian
-                team - teamGuardian
+                team -= teamGuardian
                 return
             }
-
-            throw IllegalStateException("Slots could not be swapped. This should not happen.")
         }
     }
 

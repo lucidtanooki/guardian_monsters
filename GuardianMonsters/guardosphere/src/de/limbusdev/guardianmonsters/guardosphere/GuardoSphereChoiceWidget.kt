@@ -83,10 +83,10 @@ class GuardoSphereChoiceWidget
             for(cell in row.values())
             {
                 table-cell
+                buttonGroup.remove(cell)
             }
         }
 
-        buttonGroup.clear()
         table.clear()
 
         var key = page*35
@@ -267,6 +267,7 @@ class GuardoSphereChoiceWidget
         override fun touchDown(event: InputEvent?, x: Float, y: Float, pointer: Int, button: Int)
         {
             super.touchDown(event, x, y, pointer, button)
+            target.isChecked = true
 
             // TODO: check if team slot is valid (is it unlocked already? do not leave gaps)
 

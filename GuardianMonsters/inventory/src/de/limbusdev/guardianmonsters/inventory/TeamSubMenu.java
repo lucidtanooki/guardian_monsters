@@ -58,8 +58,7 @@ public class TeamSubMenu extends AInventorySubMenu implements Observer
                 AGuardian currentGuardian = team.get(oldPos);
                 AGuardian guardianToSwapWith = team.get(position);
 
-                team.set(oldPos,guardianToSwapWith);
-                team.set(position, currentGuardian);
+                team.swap(oldPos, position);
 
                 circleWidget.init(team);
                 showGuardianInformation(position);

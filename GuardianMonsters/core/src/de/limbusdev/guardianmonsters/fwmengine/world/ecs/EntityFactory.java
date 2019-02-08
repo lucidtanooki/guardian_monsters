@@ -94,7 +94,7 @@ public class EntityFactory
         // Add Team
         AGuardianFactory factory = GuardiansServiceLocator.INSTANCE.getGuardianFactory();
         TeamComponent team = new TeamComponent();
-        team.team.put(0,factory.createGuardian(1,1));
+        team.team.plus(factory.createGuardian(1,1));
         if(restoreSave) {
             team.team = gameState.team;
         }

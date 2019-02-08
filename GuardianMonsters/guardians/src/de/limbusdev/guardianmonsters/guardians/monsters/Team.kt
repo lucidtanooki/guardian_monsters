@@ -81,6 +81,7 @@ class Team
     {
         if(slots.size >= capacity) throw IllegalStateException("Team is full. More members not allowed.")
         if(isMember(guardian)) throw java.lang.IllegalArgumentException("Guardian is already in this team.")
+
         slots.add(guardian)
         return slots.size-1
     }
@@ -120,7 +121,7 @@ class Team
         val guardian1 = this[slotA]
         val guardian2 = this[slotB]
 
-        slots[slotA] = guardian2    // Do not use this[position1] here, since it will throw an
+        slots[slotA] = guardian2    // Do not use this[slotA] here, since it will throw an
         slots[slotB] = guardian1    // exception because both are already in the team.
     }
 

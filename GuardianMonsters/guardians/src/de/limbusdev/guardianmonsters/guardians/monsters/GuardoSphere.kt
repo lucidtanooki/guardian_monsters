@@ -146,6 +146,13 @@ class GuardoSphere()
         this[slot1] = value2
     }
 
+    fun remove(slot: Int) : AGuardian?
+    {
+        val removed = this[slot]
+        this[slot] = null
+        return removed
+    }
+
     fun getEncycloStateOf(speciesID: Int, metaForm: Int): State
     {
         if(status.containsKey(speciesID) && status[speciesID].containsKey(metaForm))
@@ -192,34 +199,27 @@ class GuardoSphere()
 
     companion object
     {
-        fun isSwapValid(sphere: GuardoSphere, sphereSlot: Int, team: Team, teamSlot: Int) : Boolean
+        fun fromSphereToTeam(sphere: GuardoSphere, sphereSlot: Int, team: Team)
         {
-            if(team.size == 1 && sphere.isVacant(sphereSlot)) return false
-            if(teamSlot >= team.size) return false
-            if(teamSlot >= team.maximumTeamSize) return false
+            if(team.size >= team.maximumTeamSize)
+                throw IllegalStateException("Team is full.")
+            if(sphere[sphereSlot] == null)
+                throw IllegalArgumentException("Cannot move empty slot to team.")
 
-            return true
-        }
-
-        fun isSphereToTeamMoveValid(sphere: GuardoSphere, sphereSlot: Int, team: Team) : Boolean
-        {
-            if(sphere.isVacant(sphereSlot)) return false
-            if(team.size == team.maximumTeamSize) return false
-
-            return true
-        }
-
-        fun fromSphereToTeam(sphere: GuardoSphere, sphereSlot: Int, team: Team) : Boolean
-        {
-            val guardian = sphere[sphereSlot]
-                    ?: throw IllegalArgumentException("Cannot move empty slot to team.")
-
-            if(team.size == team.maximumTeamSize) return false
-            else { team + guardian; return true }
+            val guardian = sphere.remove(sphereSlot)
+            if(guardian != null) team + guardian
         }
 
         fun fromTeamToSphere(sphere: GuardoSphere, sphereSlot: Int, team: Team, teamSlot: Int)
         {
+            if(team.size == 1)
+                throw IllegalStateException("Cannot remove last Guardian from team.")
+            if(sphere.isFull())
+                throw java.lang.IllegalStateException("Sphere is full.")
+            if(sphereSlot !in sphere.range || teamSlot !in team.range)
+                throw IndexOutOfBoundsException("sphereSlot or teamSlot exceed bounds")
+
+
             sphere[sphereSlot] = team.remove(teamSlot)
         }
 
@@ -227,6 +227,8 @@ class GuardoSphere()
         {
             if(sphereSlot !in sphere.range || teamSlot !in team.range)
                 throw IndexOutOfBoundsException("sphereSlot or teamSlot exceed bounds")
+            if(sphere[sphereSlot] == null && team.size == 1)
+                throw IllegalStateException("Cannot remove last Guardian from team")
 
             val teamGuardian = team[teamSlot]
             val sphereGuardian = sphere[sphereSlot]

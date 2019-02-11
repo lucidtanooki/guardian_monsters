@@ -13,7 +13,6 @@ import de.limbusdev.guardianmonsters.services.Services
 import de.limbusdev.guardianmonsters.ui.AHUD
 import de.limbusdev.guardianmonsters.ui.widgets.ParticleEffectActor
 import ktx.actors.plus
-import ktx.vis.table
 
 /**
  * GuardoSphereHUD
@@ -30,28 +29,15 @@ class GuardoSphereHUD
 {
     // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ Properties
     private var detailWidget             = GuardianDetailWidget(skin)
-    private var guardianButtonGroup      = ButtonGroup<Button>()
-    private var guardoSphereChoiceWidget : GuardoSphereChoiceWidget
-    private var toggleGuardianStatView   : TextButton
-    private var guardianStatusWidget     : GuardoSphereStatWidget
+    private var guardoSphereChoiceWidget = GuardoSphereChoiceWidget(skin, guardoSphere, team)
+    private var toggleGuardianStatView   = TextButton("?", skin, "button-gs-default")
+    private var guardianStatusWidget     = GuardoSphereStatWidget(skin)
 
 
     // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ Initializer
     init
     {
-        guardoSphereChoiceWidget = GuardoSphereChoiceWidget(skin, guardoSphere, team, guardianButtonGroup)
-        toggleGuardianStatView   = TextButton("?", skin, "button-gs-default")
-        guardianStatusWidget     = GuardoSphereStatWidget(skin)
-
-        layout(skin)
-
-        guardoSphereChoiceWidget.sphereCallback = { detailWidget.showDetails(guardoSphere[it]) }
-    }
-
-
-    // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ Methods
-    private fun layout(skin: Skin)
-    {
+        // ................................................ layout
         // Define Actors
         val particles = ParticleEffectActor("guardosphere")
         particles.start()
@@ -66,17 +52,19 @@ class GuardoSphereHUD
 
         guardianStatusWidget.setPosition(statX, statY, statAlign)
 
-        // Configure Actors
-        guardianButtonGroup.setMaxCheckCount(1)
-        guardianButtonGroup.setMinCheckCount(1)
-
         // Assemble Hierarchy
         stage+particles
         stage+detailWidget
         stage+guardoSphereChoiceWidget
         stage+toggleGuardianStatView
         stage+guardianStatusWidget
+
+        guardoSphereChoiceWidget.sphereCallback = { detailWidget.showDetails(guardoSphere[it]) }
     }
+
+
+    // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ Methods
+
 
     // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ Screen
     override fun reset() {}

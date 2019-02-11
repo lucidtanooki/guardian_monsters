@@ -23,28 +23,33 @@ import ktx.vis.table
 class GuardoSphereHUD
 (
         skin: Skin,
-        private val team: Team,
+        team: Team,
         private val guardoSphere: GuardoSphere
 )
     : AHUD(skin)
 {
-    private var detailWidget                = GuardianDetailWidget(skin)
-    private var guardianButtonGroup         = ButtonGroup<Button>()
-    private var guardoSphereChoiceWidget    : GuardoSphereChoiceWidget
-    private var toggleGuardianStatView      : TextButton
-    private var guardianStatusWidget        : GuardoSphereStatWidget
+    // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ Properties
+    private var detailWidget             = GuardianDetailWidget(skin)
+    private var guardianButtonGroup      = ButtonGroup<Button>()
+    private var guardoSphereChoiceWidget : GuardoSphereChoiceWidget
+    private var toggleGuardianStatView   : TextButton
+    private var guardianStatusWidget     : GuardoSphereStatWidget
 
+
+    // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ Initializer
     init
     {
         guardoSphereChoiceWidget = GuardoSphereChoiceWidget(skin, guardoSphere, team, guardianButtonGroup)
-        toggleGuardianStatView = TextButton("?", skin, "button-gs-default")
-        guardianStatusWidget = GuardoSphereStatWidget(skin)
+        toggleGuardianStatView   = TextButton("?", skin, "button-gs-default")
+        guardianStatusWidget     = GuardoSphereStatWidget(skin)
 
         layout(skin)
 
-        guardoSphereChoiceWidget.sphereCallback = { detailWidget.showDetails(guardoSphere.get(it)) }
+        guardoSphereChoiceWidget.sphereCallback = { detailWidget.showDetails(guardoSphere[it]) }
     }
 
+
+    // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ Methods
     private fun layout(skin: Skin)
     {
         // Define Actors
@@ -73,13 +78,15 @@ class GuardoSphereHUD
         stage+guardianStatusWidget
     }
 
+    // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ Screen
     override fun reset() {}
 
     override fun show() = startBGMusic()
 
     override fun hide() = stopBGMusic()
 
-    companion object
+    // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ Static
+    private companion object
     {
         const val particlesX        = 0f
         const val particlesY        = 0f

@@ -117,6 +117,9 @@ class GuardoSphere()
      */
     fun isFull() : Boolean = (vacantSlots() == 0)
 
+    fun isVacant(slot: Int) = (this[slot] == null)
+    fun isOccupied(slot: Int) = !isVacant(slot)
+
     fun vacantSlots() : Int
     {
         var counter = 0
@@ -189,12 +192,30 @@ class GuardoSphere()
 
     companion object
     {
-        fun fromSphereToTeam(sphere: GuardoSphere, sphereSlot: Int, team: Team)
+        fun isSwapValid(sphere: GuardoSphere, sphereSlot: Int, team: Team, teamSlot: Int) : Boolean
+        {
+            if(team.size == 1 && sphere.isVacant(sphereSlot)) return false
+            if(teamSlot >= team.size) return false
+            if(teamSlot >= team.maximumTeamSize) return false
+
+            return true
+        }
+
+        fun isSphereToTeamMoveValid(sphere: GuardoSphere, sphereSlot: Int, team: Team) : Boolean
+        {
+            if(sphere.isVacant(sphereSlot)) return false
+            if(team.size == team.maximumTeamSize) return false
+
+            return true
+        }
+
+        fun fromSphereToTeam(sphere: GuardoSphere, sphereSlot: Int, team: Team) : Boolean
         {
             val guardian = sphere[sphereSlot]
                     ?: throw IllegalArgumentException("Cannot move empty slot to team.")
 
-            team + guardian
+            if(team.size == team.maximumTeamSize) return false
+            else { team + guardian; return true }
         }
 
         fun fromTeamToSphere(sphere: GuardoSphere, sphereSlot: Int, team: Team, teamSlot: Int)

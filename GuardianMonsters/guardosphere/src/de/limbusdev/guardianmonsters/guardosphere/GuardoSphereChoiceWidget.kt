@@ -30,13 +30,16 @@ class GuardoSphereChoiceWidget
 )
     : Group()
 {
-    private val table: Table
+    private val slotButtonTable : Table // holds the slot buttons
+    private val slotImageTable  : Table // holds the slot background images
     private val buttonGroup   = ButtonGroup<Button>()
     private val buttonGrid    = ArrayMap<Int, ArrayMap<Int, Button>>() // 7 x 5 grid
     private val teamButtonBar = ArrayMap<Int, Button>()
 
     private var activeSlot = 0
     private var activeArea = Area.GUARDOSPHERE
+    var currentPage = 0
+        private set
 
     var sphereCallback: (Int) -> Unit
     var teamCallback:   (Int) -> Unit
@@ -61,7 +64,14 @@ class GuardoSphereChoiceWidget
         backgroundTeam.setSize(WIDTH, 32f+16f)
         backgroundTeam.setPosition(0f,0f, Align.bottomLeft)
 
-        table = table {
+        slotButtonTable = table {
+
+            setSize(7*32f, 5*32f + 16f + 32f)
+            setPosition(14f, 10f)
+            align(Align.bottomLeft)
+        }
+
+        slotImageTable = table {
 
             setSize(7*32f, 5*32f + 16f + 32f)
             setPosition(14f, 10f)
@@ -71,14 +81,18 @@ class GuardoSphereChoiceWidget
         // Setup Hierarchy
         this+background
         this+backgroundTeam
-        this+table
+        this+slotImageTable
+        this+slotButtonTable
 
         refresh(0)
     }
 
-    private fun refresh(page: Int)
+    fun refresh(page: Int = currentPage)
     {
-        table.clear()
+        currentPage = page
+
+        slotImageTable.clear()
+        slotButtonTable.clear()
         buttonGroup.clear()
         buttonGrid.clear()
 
@@ -91,39 +105,57 @@ class GuardoSphereChoiceWidget
 
         for(row in 0..4)
         {
-            table.row()
+            slotImageTable.row()
+            slotButtonTable.row()
 
             for(col in 0..6)
             {
-                val guardian   = sphere[slot]
-                val slotButton = GuardoSphereButton(skin, guardian)
+                if(slot < sphere.capacity)
+                {
+                    val guardian = sphere[slot]
+                    val slotButton = GuardoSphereButton(skin, guardian)
 
-                table.add(slotButton).width(32f).height(32f)
-                buttonGroup.add(slotButton)
-                buttonGrid[row][col] = slotButton
+                    val slotImage = ImageButton(skin, if(guardian == null) "button-gs-empty" else "button-gs")
+                    slotImage.isDisabled = true
 
-                slotButton.addListener(GestureListener(this, slot, slotButton, page, IntVec2(col, row), Area.GUARDOSPHERE))
+                    slotImageTable.add(slotImage).width(32f).height(32f)
+                    slotButtonTable.add(slotButton).width(32f).height(32f)
+                    buttonGroup.add(slotButton)
+                    buttonGrid[row][col] = slotButton
 
-                if(slot == activeSlot && activeArea == Area.GUARDOSPHERE) slotButton.isChecked = true
+                    slotButton.addListener(GestureListener(this, slot, slotButton, page, IntVec2(col, row), Area.GUARDOSPHERE))
 
-                slot++
+                    if(slot == activeSlot && activeArea == Area.GUARDOSPHERE) slotButton.isChecked = true
+
+                    slot++
+                }
             }
         }
 
         // Add button row for team
-        table.row().height(16f)
-        table.add(Actor()).height(16f)
+        slotImageTable.row()
+        slotImageTable.add(Actor()).height(16f)
+        slotButtonTable.row()
+        slotButtonTable.add(Actor()).height(16f)
 
         // Team entries
-        table.row()
+        slotImageTable.row()
+        slotButtonTable.row()
         for(col in 0..6)
         {
+            if(col < team.maximumTeamSize)
+            {
+                val slotImage = ImageButton(skin, if(col < team.size) "button-gs" else "button-gs-empty")
+                slotImage.isDisabled = true
+                slotImageTable.add(slotImage).size(32f, 32f)
+            }
+
             if(col < team.size)
             {
                 val guardian = team[col]
                 val teamSlotButton = GuardoSphereButton(skin, guardian)
 
-                table.add(teamSlotButton).size(32f, 32f)
+                slotButtonTable.add(teamSlotButton).size(32f, 32f)
                 buttonGroup.add(teamSlotButton)
                 teamButtonBar[col] = teamSlotButton
 
@@ -149,7 +181,7 @@ class GuardoSphereChoiceWidget
      */
     fun swapSphereWithTeam(gridCell: IntVec2, teamSlot: Int)
     {
-        val sphereSlot = gridToSphere(gridCell,0)
+        val sphereSlot = gridToSphere(gridCell, currentPage)
         GuardoSphere.teamSphereSwap(sphere, sphereSlot, team, teamSlot)
     }
 
@@ -227,18 +259,17 @@ class GuardoSphereChoiceWidget
 
         override fun touchUp(event: InputEvent?, x: Float, y: Float, pointer: Int, button: Int)
         {
-            var dropSlot: Int
             val dropCell = vectorToGrid(target.x, target.y)
-            var dropArea = getArea(dropCell)
+            val dropArea = getArea(dropCell)
             var dropValid = true
 
             val team = choiceWidget.team
             val sphere = choiceWidget.sphere
 
-            dropSlot = when(dropArea)
+            val dropSlot = when(dropArea)
             {
                 Area.TEAM         -> dropCell.x
-                Area.GUARDOSPHERE -> gridToSphere(dropCell, 0)
+                Area.GUARDOSPHERE -> gridToSphere(dropCell, choiceWidget.currentPage)
                 Area.ILLEGAL      -> -1
             }
 
@@ -289,7 +320,8 @@ class GuardoSphereChoiceWidget
                 choiceWidget.activeArea = dropArea
             }
 
-            choiceWidget.refresh(0)
+            if(page >= 0) choiceWidget.refresh(page)
+            else choiceWidget.refresh()
         }
     }
 }

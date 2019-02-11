@@ -1,8 +1,11 @@
 package de.limbusdev.guardianmonsters.guardosphere
 
 import com.badlogic.gdx.scenes.scene2d.ui.Image
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton
 import com.badlogic.gdx.scenes.scene2d.ui.Skin
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable
+import com.badlogic.gdx.utils.Align
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian
 import de.limbusdev.guardianmonsters.scene2d.SubImageImageButton
 import de.limbusdev.guardianmonsters.services.Services
@@ -18,17 +21,14 @@ class GuardoSphereButton
         skin: Skin,
         guardian: AGuardian?
 )
-    : SubImageImageButton
-(
-        skin,
-        if (guardian == null) "button-gs-empty" else "button-gs",
-        construct(guardian, skin)
-) {
+    : SubImageImageButton(skin, "button-gs-selection-overlay", construct(skin, guardian))
+{
     companion object
     {
-        private fun construct(guardian: AGuardian?, skin: Skin): Image
+        private fun construct(skin: Skin, guardian: AGuardian?): Image
         {
             val drawable: TextureRegionDrawable
+            val media = Services.getMedia();
 
             if(guardian == null)
             {
@@ -36,11 +36,12 @@ class GuardoSphereButton
             }
             else
             {
-                drawable = TextureRegionDrawable(
-                        Services.getMedia().getMonsterMiniSprite(guardian.speciesDescription.ID, guardian.abilityGraph.currentForm))
+                val form = guardian.abilityGraph.currentForm
+                val id = guardian.speciesDescription.ID
+                drawable = TextureRegionDrawable(media.getMonsterMiniSprite(id, form))
             }
-            val miniSprite = Image(drawable)
-            return miniSprite
+
+            return Image(drawable)
         }
     }
 }

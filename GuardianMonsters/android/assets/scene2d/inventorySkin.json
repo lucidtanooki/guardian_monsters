@@ -11,6 +11,9 @@
     "button-gs":                { "down": "teamCircleGuardoSphere-down",          "up": "teamCircleGuardoSphere-up",         "checked": "teamCircleGuardoSphere-down",         "pressedOffsetY": -1, "checkedOffsetY": -1},
     "button-gs-selected":       { "down": "teamCircleGuardoSphereSelected-down",  "up": "teamCircleGuardoSphereSelected-up", "checked": "teamCircleGuardoSphereSelected-down", "pressedOffsetY": -1, "checkedOffsetY": -1},
     "button-gs-empty":          { "down": "teamCircleGuardoSphere-empty2-down",    "up": "teamCircleGuardoSphere-empty2-up",   "checked": "teamCircleGuardoSphere-empty2-down",   "pressedOffsetY": -1, "checkedOffsetY": -1},
+    "button-gs-selection-overlay": {"down": "teamCircleGuardoSphere-selectiont", "up": "transparent", "checked": "teamCircleGuardoSphere-selectiont"},
+    "button-gs-back": {"down": "guardosphere-button-back-down", "up": "guardosphere-button-back-up"},
+    "button-gs-forth": {"down": "guardosphere-button-forth-down", "up": "guardosphere-button-forth-up"},
 
     "b-toolbar-exit":           { "down": "toolBarButton-exit-down",         "up": "toolBarButton-exit-up"},
     "b-toolbar-encyclo":        { "down": "toolBarButton-encyclo-down",      "up": "toolBarButton-encyclo-up",              "checked": "toolBarButton-encyclo-down"},

@@ -11,7 +11,7 @@ import kotlin.IllegalStateException
  * The GuardoSphere is a dimension usually only Guardian Monsters can reach.
  * Humans may only get access by opening their chakras and deep meditation.
  *
- * It is a storage place for [AGuardian]s. Up to 300 Guardians can be stored
+ * It is a storage place for [AGuardian]s. Up to 350 Guardians can be stored
  * in the GuardoSphere. This limits the number of Guardians a player may
  * ban and collect.
  *
@@ -21,9 +21,9 @@ import kotlin.IllegalStateException
 class GuardoSphere()
 {
     // Lists whether a Guardian and it's form are unknown, have been seen or already banned.
-    private val status = ArrayMap<Int, ArrayMap<Int, State>>(300)
-    private val sphere = ArrayMap<Int, AGuardian?>(300)
-    val capacity = 300
+    private val status = ArrayMap<Int, ArrayMap<Int, State>>(350)
+    private val sphere = ArrayMap<Int, AGuardian?>(350)
+    val capacity = 350
     val range = 0 until capacity
 
     init
@@ -74,7 +74,7 @@ class GuardoSphere()
      *
      *      val myGuardian = guardoSphere[slot]
      *
-     * @param slot a slot in 0..299
+     * @param slot a slot in 0..349
      * @return Guardian if slot was occupied, null otherwise
      */
     operator fun get(slot: Int) : AGuardian?
@@ -129,7 +129,7 @@ class GuardoSphere()
         return counter
     }
 
-    fun occupiedSlots() : Int = 300 - vacantSlots()
+    fun occupiedSlots() : Int = capacity - vacantSlots()
 
     /**
      * Swaps two slots in the [GuardoSphere] and the potentially occupying [AGuardian]s.

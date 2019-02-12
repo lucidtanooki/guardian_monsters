@@ -1,3 +1,7 @@
+/**
+ * Copyright (C) 2019 Georg Eckert - All Rights Reserved
+ */
+
 package de.limbusdev.guardianmonsters.guardians.monsters
 
 import com.badlogic.gdx.utils.ArrayMap

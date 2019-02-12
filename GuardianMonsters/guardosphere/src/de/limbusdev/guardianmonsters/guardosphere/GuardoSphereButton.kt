@@ -1,3 +1,7 @@
+/**
+ * Copyright (C) 2019 Georg Eckert - All Rights Reserved
+ */
+
 package de.limbusdev.guardianmonsters.guardosphere
 
 import com.badlogic.gdx.scenes.scene2d.ui.Image

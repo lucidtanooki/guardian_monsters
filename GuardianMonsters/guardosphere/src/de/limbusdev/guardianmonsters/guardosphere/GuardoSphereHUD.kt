@@ -28,15 +28,16 @@ class GuardoSphereHUD
     : AHUD(skin)
 {
     // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ Properties
-    private var detailWidget             = GuardianDetailWidget(skin)
-    private var guardoSphereChoiceWidget = GuardoSphereChoiceWidget(skin, guardoSphere, team)
-    private var statViewToggle           = ImageButton(skin, "button-gs-stats")
-    private var guardianStatusWidget     = GuardoSphereStatWidget(skin)
-    private val backButton               = ImageButton(skin, "button-gs-back")
-    private val nextButton               = ImageButton(skin, "button-gs-forth")
-    private val exitButton               = ImageButton(skin, "button-gs-exit")
-    private val pageLabel                = Label("001 .. 035", skin, "white")
-    private var currentPage              = 0
+    private val particles      = ParticleEffectActor("guardosphere")
+    private val detailWidget   = GuardianDetailWidget(skin)
+    private val choiceWidget   = GuardoSphereChoiceWidget(skin, guardoSphere, team)
+    private val statViewToggle = ImageButton(skin, "button-gs-stats")
+    private val statusWidget   = GuardoSphereStatWidget(skin)
+    private val backButton     = ImageButton(skin, "button-gs-back")
+    private val nextButton     = ImageButton(skin, "button-gs-forth")
+    private val exitButton     = ImageButton(skin, "button-gs-exit")
+    private val pageLabel      = Label("001 .. 035", skin, "white")
+    private var currentPage    = 0
 
 
     // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ Initializer
@@ -44,13 +45,13 @@ class GuardoSphereHUD
     {
         // ................................................ layout
         // Define Actors
-        val particles = ParticleEffectActor("guardosphere")
+
         particles.start()
 
         // Position Actors
         particles.setPosition(particlesX, particlesY, particlesAlign)
         detailWidget.setPosition(detailsX, detailsY, detailsAlign)
-        guardoSphereChoiceWidget.setPosition(sphereChoiceX, sphereChoiceY, sphereChoiceAlign)
+        choiceWidget.setPosition(sphereChoiceX, sphereChoiceY, sphereChoiceAlign)
 
         statViewToggle.setPosition(statToggleX, statToggleY, statToggleAlign)
         backButton.setPosition(backX, backY, backAlign)
@@ -59,22 +60,22 @@ class GuardoSphereHUD
 
         pageLabel.setPosition(backX + 34f, backY + 34f, Align.bottom)
 
-        guardianStatusWidget.setPosition(statX, statY, statAlign)
-        guardianStatusWidget.isVisible = false
+        statusWidget.setPosition(statX, statY, statAlign)
+        statusWidget.isVisible = false
 
         // Assemble Hierarchy
         stage+particles
         stage+detailWidget
-        stage+guardoSphereChoiceWidget
+        stage+choiceWidget
         stage+statViewToggle
         stage+backButton
         stage+nextButton
         stage+exitButton
-        stage+guardianStatusWidget
+        stage+statusWidget
         stage+pageLabel
 
-        guardoSphereChoiceWidget.sphereCallback = { updateDetails(guardoSphere[it]) }
-        guardoSphereChoiceWidget.teamCallback   = { updateDetails(team[it])         }
+        choiceWidget.sphereCallback = { updateDetails(guardoSphere[it]) }
+        choiceWidget.teamCallback   = { updateDetails(team[it])         }
 
         backButton.onClick {
 
@@ -98,7 +99,7 @@ class GuardoSphereHUD
 
         statViewToggle.onClick {
 
-            guardianStatusWidget.isVisible = statViewToggle.isChecked
+            statusWidget.isVisible = statViewToggle.isChecked
         }
 
         exitButton.onClick {
@@ -116,13 +117,13 @@ class GuardoSphereHUD
         val o = ((currentPage+1)*35).toString().padStart(3, '0')
         pageLabel.txt = "$a .. $o"
 
-        guardoSphereChoiceWidget.refresh(currentPage)
+        choiceWidget.refresh(currentPage)
     }
 
     private fun updateDetails(guardian: AGuardian?)
     {
         detailWidget.showDetails(guardian)
-        guardianStatusWidget.initialize(guardian)
+        statusWidget.initialize(guardian)
     }
 
 

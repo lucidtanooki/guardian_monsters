@@ -21,7 +21,7 @@ class GuardoSphereButton
         skin: Skin,
         guardian: AGuardian?
 )
-    : SubImageImageButton(skin, "button-gs-selection-overlay", construct(skin, guardian))
+    : SubImageImageButton(skin, "button-gs-selection", construct(skin, guardian))
 {
     companion object
     {

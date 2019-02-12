@@ -11,9 +11,12 @@
     "button-gs":                { "down": "teamCircleGuardoSphere-down",          "up": "teamCircleGuardoSphere-up",         "checked": "teamCircleGuardoSphere-down",         "pressedOffsetY": -1, "checkedOffsetY": -1},
     "button-gs-selected":       { "down": "teamCircleGuardoSphereSelected-down",  "up": "teamCircleGuardoSphereSelected-up", "checked": "teamCircleGuardoSphereSelected-down", "pressedOffsetY": -1, "checkedOffsetY": -1},
     "button-gs-empty":          { "down": "teamCircleGuardoSphere-empty2-down",    "up": "teamCircleGuardoSphere-empty2-up",   "checked": "teamCircleGuardoSphere-empty2-down",   "pressedOffsetY": -1, "checkedOffsetY": -1},
-    "button-gs-selection-overlay": {"down": "teamCircleGuardoSphere-selectiont", "up": "transparent", "checked": "teamCircleGuardoSphere-selectiont"},
-    "button-gs-back": {"down": "guardosphere-button-back-down", "up": "guardosphere-button-back-up"},
-    "button-gs-forth": {"down": "guardosphere-button-forth-down", "up": "guardosphere-button-forth-up"},
+    
+    "button-gs-selection":      {"down": "gs-slot-selection",               "up": "transparent",                    "checked": "gs-slot-selection"},
+    "button-gs-back":           {"down": "guardosphere-button-back-down",   "up": "guardosphere-button-back-up"},
+    "button-gs-forth":          {"down": "guardosphere-button-forth-down",  "up": "guardosphere-button-forth-up"},
+    "button-gs-exit":           {"down": "gs-button-exit-down",             "up": "gs-button-exit-up"},
+    "button-gs-stats":          {"down": "gs-button-stats-down",            "up": "gs-button-stats-up",             "checked": "gs-button-stats-down"},
 
     "b-toolbar-exit":           { "down": "toolBarButton-exit-down",         "up": "toolBarButton-exit-up"},
     "b-toolbar-encyclo":        { "down": "toolBarButton-encyclo-down",      "up": "toolBarButton-encyclo-up",              "checked": "toolBarButton-encyclo-down"},

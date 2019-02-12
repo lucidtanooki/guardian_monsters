@@ -30,10 +30,11 @@ class GuardoSphereHUD
     // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ Properties
     private var detailWidget             = GuardianDetailWidget(skin)
     private var guardoSphereChoiceWidget = GuardoSphereChoiceWidget(skin, guardoSphere, team)
-    private var statViewToggle           = TextButton("?", skin, "button-gs-default")
+    private var statViewToggle           = ImageButton(skin, "button-gs-stats")
     private var guardianStatusWidget     = GuardoSphereStatWidget(skin)
     private val backButton               = ImageButton(skin, "button-gs-back")
     private val nextButton               = ImageButton(skin, "button-gs-forth")
+    private val exitButton               = ImageButton(skin, "button-gs-exit")
     private val pageLabel                = Label("001 .. 035", skin, "white")
     private var currentPage              = 0
 
@@ -51,11 +52,11 @@ class GuardoSphereHUD
         detailWidget.setPosition(detailsX, detailsY, detailsAlign)
         guardoSphereChoiceWidget.setPosition(sphereChoiceX, sphereChoiceY, sphereChoiceAlign)
 
-        statViewToggle.setSize(statToggleWidth, statToggleHeight)
         statViewToggle.setPosition(statToggleX, statToggleY, statToggleAlign)
-
         backButton.setPosition(backX, backY, backAlign)
         nextButton.setPosition(nextX, nextY, nextAlign)
+        exitButton.setPosition(exitX, exitY, exitAlign)
+
         pageLabel.setPosition(backX + 34f, backY + 34f, Align.bottom)
 
         guardianStatusWidget.setPosition(statX, statY, statAlign)
@@ -68,6 +69,7 @@ class GuardoSphereHUD
         stage+statViewToggle
         stage+backButton
         stage+nextButton
+        stage+exitButton
         stage+guardianStatusWidget
         stage+pageLabel
 
@@ -99,7 +101,10 @@ class GuardoSphereHUD
             guardianStatusWidget.isVisible = statViewToggle.isChecked
         }
 
+        exitButton.onClick {
 
+            // TODO leave GuardoSphere
+        }
     }
 
 
@@ -131,33 +136,37 @@ class GuardoSphereHUD
     // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ Static
     private companion object
     {
+        const val PADDING           = 8f
+
         const val particlesX        = 0f
         const val particlesY        = 0f
         const val particlesAlign    = Align.bottomLeft
 
-        const val detailsX          = Constant.WIDTH - 8f
-        const val detailsY          = Constant.HEIGHT - 8f
+        const val detailsX          = Constant.WIDTH - PADDING
+        const val detailsY          = Constant.HEIGHT - PADDING
         const val detailsAlign      = Align.topRight
 
-        const val sphereChoiceX     = 8f
-        const val sphereChoiceY     = Constant.HEIGHT - 8f
+        const val sphereChoiceX     = PADDING
+        const val sphereChoiceY     = Constant.HEIGHT - PADDING
         const val sphereChoiceAlign = Align.topLeft
 
-        const val statX             = Constant.WIDTH - 8f
-        const val statY             = Constant.RES_Y - 8f
+        const val statX             = Constant.WIDTH - PADDING
+        const val statY             = Constant.RES_Y - PADDING
         const val statAlign         = Align.topRight
 
         const val backX             = 268f
         const val backY             = 4f
         const val backAlign         = Align.bottomLeft
 
-        const val nextX             = backX + 36
+        const val nextX             = backX + 36f
         const val nextY             = 4f
         const val nextAlign         = Align.bottomLeft
 
-        const val statToggleWidth   = 32f
-        const val statToggleHeight  = 32f
-        const val statToggleX       = Constant.WIDTH - 8f
+        const val exitX             = Constant.WIDTH - PADDING
+        const val exitY             = 4f
+        const val exitAlign         = Align.bottomRight
+
+        const val statToggleX       = Constant.WIDTH - PADDING - 36f
         const val statToggleY       = 4f
         const val statToggleAlign   = Align.bottomRight
 

@@ -119,10 +119,7 @@ class GuardoSphereHUD
             statusWidget.isVisible = statViewToggle.isChecked
         }
 
-        exitButton.onClick {
-
-            // TODO leave GuardoSphere
-        }
+        exitButton.onClick { super.goToPreviousScreen() }
     }
 
 

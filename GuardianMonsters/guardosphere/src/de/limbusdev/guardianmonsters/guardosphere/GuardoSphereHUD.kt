@@ -4,6 +4,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.*
 import com.badlogic.gdx.utils.Align
 import de.limbusdev.guardianmonsters.ui.Constant
 import de.limbusdev.guardianmonsters.assets.paths.AssetPath
+import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian
 import de.limbusdev.guardianmonsters.guardians.monsters.GuardoSphere
 import de.limbusdev.guardianmonsters.guardians.monsters.Team
 import de.limbusdev.guardianmonsters.services.Services
@@ -21,7 +22,7 @@ import ktx.actors.txt
 class GuardoSphereHUD
 (
         skin: Skin,
-        team: Team,
+        private val team: Team,
         private val guardoSphere: GuardoSphere
 )
     : AHUD(skin)
@@ -29,7 +30,7 @@ class GuardoSphereHUD
     // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ Properties
     private var detailWidget             = GuardianDetailWidget(skin)
     private var guardoSphereChoiceWidget = GuardoSphereChoiceWidget(skin, guardoSphere, team)
-    private var toggleGuardianStatView   = TextButton("?", skin, "button-gs-default")
+    private var statViewToggle           = TextButton("?", skin, "button-gs-default")
     private var guardianStatusWidget     = GuardoSphereStatWidget(skin)
     private val backButton               = ImageButton(skin, "button-gs-back")
     private val nextButton               = ImageButton(skin, "button-gs-forth")
@@ -50,26 +51,28 @@ class GuardoSphereHUD
         detailWidget.setPosition(detailsX, detailsY, detailsAlign)
         guardoSphereChoiceWidget.setPosition(sphereChoiceX, sphereChoiceY, sphereChoiceAlign)
 
-        toggleGuardianStatView.setSize(statToggleWidth, statToggleHeight)
-        toggleGuardianStatView.setPosition(statToggleX, statToggleY, statToggleAlign)
+        statViewToggle.setSize(statToggleWidth, statToggleHeight)
+        statViewToggle.setPosition(statToggleX, statToggleY, statToggleAlign)
 
         backButton.setPosition(backX, backY, backAlign)
         nextButton.setPosition(nextX, nextY, nextAlign)
         pageLabel.setPosition(backX + 34f, backY + 34f, Align.bottom)
 
         guardianStatusWidget.setPosition(statX, statY, statAlign)
+        guardianStatusWidget.isVisible = false
 
         // Assemble Hierarchy
         stage+particles
         stage+detailWidget
         stage+guardoSphereChoiceWidget
-        stage+toggleGuardianStatView
+        stage+statViewToggle
         stage+backButton
         stage+nextButton
         stage+guardianStatusWidget
         stage+pageLabel
 
-        guardoSphereChoiceWidget.sphereCallback = { detailWidget.showDetails(guardoSphere[it]) }
+        guardoSphereChoiceWidget.sphereCallback = { updateDetails(guardoSphere[it]) }
+        guardoSphereChoiceWidget.teamCallback   = { updateDetails(team[it])         }
 
         backButton.onClick {
 
@@ -90,6 +93,13 @@ class GuardoSphereHUD
             }
             updatePage()
         }
+
+        statViewToggle.onClick {
+
+            guardianStatusWidget.isVisible = statViewToggle.isChecked
+        }
+
+
     }
 
 
@@ -102,6 +112,12 @@ class GuardoSphereHUD
         pageLabel.txt = "$a .. $o"
 
         guardoSphereChoiceWidget.refresh(currentPage)
+    }
+
+    private fun updateDetails(guardian: AGuardian?)
+    {
+        detailWidget.showDetails(guardian)
+        guardianStatusWidget.initialize(guardian)
     }
 
 
@@ -127,12 +143,6 @@ class GuardoSphereHUD
         const val sphereChoiceY     = Constant.HEIGHT - 8f
         const val sphereChoiceAlign = Align.topLeft
 
-        const val statToggleWidth   = 40f
-        const val statToggleHeight  = 40f
-        const val statToggleX       = Constant.WIDTH - 8f
-        const val statToggleY       = 8f
-        const val statToggleAlign   = Align.bottomRight
-
         const val statX             = Constant.WIDTH - 8f
         const val statY             = Constant.RES_Y - 8f
         const val statAlign         = Align.topRight
@@ -144,6 +154,12 @@ class GuardoSphereHUD
         const val nextX             = backX + 36
         const val nextY             = 4f
         const val nextAlign         = Align.bottomLeft
+
+        const val statToggleWidth   = 32f
+        const val statToggleHeight  = 32f
+        const val statToggleX       = Constant.WIDTH - 8f
+        const val statToggleY       = 4f
+        const val statToggleAlign   = Align.bottomRight
 
         fun startBGMusic()  = Services.getAudio().playLoopMusic(AssetPath.Audio.Music.GUARDOSPHERE)
         fun stopBGMusic()   = Services.getAudio().stopMusic(AssetPath.Audio.Music.GUARDOSPHERE)

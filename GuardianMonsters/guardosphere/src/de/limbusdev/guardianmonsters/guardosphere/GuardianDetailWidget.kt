@@ -35,12 +35,12 @@ class GuardianDetailWidget(skin: Skin) : Group()
         monsterSprite.setPosition(12f, HEIGHT - 8f, Align.topLeft)
 
         name = Label("Name", skin, "white")
-        name.setSize(92f, 20f)
-        name.setPosition(12f, 20f, Align.bottomLeft)
+        name.setSize(WIDTH - 2*PADDING - 32f, 22f)
+        name.setPosition(PADDING, PADDING, Align.bottomLeft)
 
         level = Label("Lvl 0", skin, "white")
-        level.setSize(32f, 20f)
-        level.setPosition(12f + 96f, 20f, Align.bottomLeft)
+        level.setSize(32f, 22f)
+        level.setPosition(WIDTH - PADDING, PADDING, Align.bottomRight)
 
         this+background
         this+monsterSprite
@@ -57,7 +57,7 @@ class GuardianDetailWidget(skin: Skin) : Group()
                     guardian.abilityGraph.currentForm)
             monsterSprite.drawable = TextureRegionDrawable(region)
             name.setText(Services.getL18N().getGuardianNicknameIfAvailable(guardian))
-            level.setText("Lvl $guardian.individualStatistics.level")
+            level.setText("Lvl ${guardian.individualStatistics.level}")
         }
     }
 
@@ -66,5 +66,6 @@ class GuardianDetailWidget(skin: Skin) : Group()
         private const val TAG = "GuardianDetailWidget"
         private const val WIDTH = 152f
         private const val HEIGHT = 180f
+        private const val PADDING = 6f
     }
 }

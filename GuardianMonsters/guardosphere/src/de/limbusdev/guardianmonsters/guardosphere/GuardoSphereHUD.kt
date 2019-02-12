@@ -29,14 +29,22 @@ class GuardoSphereHUD
 {
     // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ Properties
     private val particles      = ParticleEffectActor("guardosphere")
+
+    // .................................................... widgets
     private val detailWidget   = GuardianDetailWidget(skin)
     private val choiceWidget   = GuardoSphereChoiceWidget(skin, guardoSphere, team)
-    private val statViewToggle = ImageButton(skin, "button-gs-stats")
     private val statusWidget   = GuardoSphereStatWidget(skin)
+
+    // .................................................... buttons
+    private val statViewToggle = ImageButton(skin, "button-gs-stats")
     private val backButton     = ImageButton(skin, "button-gs-back")
     private val nextButton     = ImageButton(skin, "button-gs-forth")
     private val exitButton     = ImageButton(skin, "button-gs-exit")
+
+    // .................................................... labels
     private val pageLabel      = Label("001 .. 035", skin, "white")
+
+    // .................................................... other
     private var currentPage    = 0
 
 
@@ -45,7 +53,6 @@ class GuardoSphereHUD
     {
         // ................................................ layout
         // Define Actors
-
         particles.start()
 
         // Position Actors
@@ -74,6 +81,8 @@ class GuardoSphereHUD
         stage+statusWidget
         stage+pageLabel
 
+
+        // Define callbacks
         choiceWidget.sphereCallback = { updateDetails(guardoSphere[it]) }
         choiceWidget.teamCallback   = { updateDetails(team[it])         }
 

@@ -74,6 +74,16 @@ class GuardoSphereStatWidget(private val skin: Skin) : Group()
         this+equipmentGroup
     }
 
+
+    // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ Public methods
+    fun initialize(m: AGuardian?)
+    {
+        if(m == null) reset()
+        else updateDetails(m)
+    }
+
+
+    // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ Private methods
     private fun reset()
     {
         for(l in valueLabels.values()) l.txt = "0"
@@ -81,76 +91,61 @@ class GuardoSphereStatWidget(private val skin: Skin) : Group()
         equipmentGroup.clear()
     }
 
-    fun initialize(m: AGuardian?)
+    private fun updateDetails(m: AGuardian)
     {
-        if(m == null)
+        val stats = m.individualStatistics
+        val descr = m.speciesDescription
+
+
+        // ................................................ update stats
+        valueLabels["hp"].txt    = "${stats.hp}  / ${stats.hpMax}"
+        valueLabels["mp"].txt    = "${stats.mp}  / ${stats.mPmax}"
+        valueLabels["exp"].txt   = "${stats.exp} / ${stats.expToNextLevel + stats.exp}"
+        valueLabels["pstr"].txt  = "${stats.pStrMax}"
+        valueLabels["pdef"].txt  = "${stats.pDefMax}"
+        valueLabels["mstr"].txt  = "${stats.mStrMax}"
+        valueLabels["mdef"].txt  = "${stats.mDefMax}"
+        valueLabels["speed"].txt = "${stats.speedMax}"
+
+
+        // ................................................ update elements
+        elementGroup.clear()
+
+        for(e in descr.getElements(m.abilityGraph.currentForm))
         {
-            reset()
+            val elem = e.toString().toLowerCase()
+            var elemName = Services.getL18N().Elements().get("element_$elem")
+
+            elemName =
+                    if(elemName.length < 7) elemName
+                    else elemName.substring(0, 6)
+
+            val l = Label(elemName, skin, "elem-$elem")
+            elementGroup + l
         }
-        else
+
+
+        // ................................................ update equipment
+        equipmentGroup.clear()
+
+        val equipmentNames = arrayOf(
+                stats.head?.name,
+                stats.hands?.name,
+                stats.body?.name,
+                stats.feet?.name)
+
+        for((i, name) in equipmentNames.withIndex())
         {
-            val species = GuardiansServiceLocator.species
-            valueLabels["hp"].txt = "${m.individualStatistics.hp} / ${m.individualStatistics.hpMax}"
-            valueLabels["mp"].txt = "${m.individualStatistics.mp} / ${m.individualStatistics.mPmax}"
-            valueLabels["exp"].txt = "${m.individualStatistics.exp} / ${m.individualStatistics.expToNextLevel + m.individualStatistics.exp}"
-            valueLabels["pstr"].txt = "${m.individualStatistics.pStrMax}"
-            valueLabels["pdef"].txt = "${m.individualStatistics.pDefMax}"
-            valueLabels["mstr"].txt = "${m.individualStatistics.mStrMax}"
-            valueLabels["mdef"].txt = "${m.individualStatistics.mDefMax}"
-            valueLabels["speed"].txt = "${m.individualStatistics.speedMax}"
-
-            elementGroup.clear()
-
-            for(e in m.speciesDescription.getElements(0)) { // TODO currentForm
-                val elem = e.toString().toLowerCase()
-                var elemName = Services.getL18N().Elements().get("element_$elem")
-
-                elemName =
-                        if(elemName.length < 7) elemName
-                        else elemName.substring(0, 6)
-
-                val l = Label(elemName, skin, "elem-$elem")
-                elementGroup + l
-            }
-
-
-            equipmentGroup.clear()
-
-            var name: String?
-
-            name = m.individualStatistics.head?.name
-            if(name != null) {
-                val img = Image(skin.getDrawable(name))
+            if(name != null)
+            {
+                val img = Image(skin, name)
                 img.setSize(32f, 32f)
-                img.setPosition(102f, (178 - 2).toFloat(), Align.topLeft)
-                equipmentGroup + img
-            }
-
-            name = m.individualStatistics.hands?.name
-            if(name != null) {
-                val img = Image(skin.getDrawable(name))
-                img.setSize(32f, 32f)
-                img.setPosition(102f, (178 - 2 - 38).toFloat(), Align.topLeft)
-                equipmentGroup + img
-            }
-
-            name = m.individualStatistics.body?.name
-            if(name != null) {
-                val img = Image(skin.getDrawable(name))
-                img.setSize(32f, 32f)
-                img.setPosition(102f, (178 - 2 - 38 * 2).toFloat(), Align.topLeft)
-                equipmentGroup + img
-            }
-
-            name = m.individualStatistics.feet?.name
-            if(name != null) {
-                val img = Image(skin.getDrawable(name))
-                img.setSize(32f, 32f)
-                img.setPosition(102f, (178 - 2 - 38 * 3).toFloat(), Align.topLeft)
+                img.setPosition(WIDTH - PADDING - 2f, HEIGHT - PADDING - 2 - i*37, Align.topRight)
                 equipmentGroup + img
             }
         }
     }
+
 
     // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ Companion
     companion object

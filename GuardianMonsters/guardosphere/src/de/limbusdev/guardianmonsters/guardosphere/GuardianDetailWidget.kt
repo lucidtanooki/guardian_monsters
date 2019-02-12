@@ -10,13 +10,14 @@ import com.badlogic.gdx.utils.Align
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian
 import de.limbusdev.guardianmonsters.services.Services
 import ktx.actors.plus
+import ktx.actors.txt
 
 /**
  * GuardianDetailWidget
  *
  * @author Georg Eckert 2017
  */
-class GuardianDetailWidget(skin: Skin) : Group()
+class GuardianDetailWidget(private val skin: Skin) : Group()
 {
     private val monsterSprite: Image
     private val name: Label
@@ -30,7 +31,7 @@ class GuardianDetailWidget(skin: Skin) : Group()
         background.setSize(WIDTH, HEIGHT)
         background.setPosition(0f, 0f, Align.bottomLeft)
 
-        monsterSprite = Image(skin.getDrawable("transparent"))
+        monsterSprite = Image(skin, "transparent")
         monsterSprite.setSize(128f, 128f)
         monsterSprite.setPosition(12f, HEIGHT - 8f, Align.topLeft)
 
@@ -48,9 +49,17 @@ class GuardianDetailWidget(skin: Skin) : Group()
         this+level
     }
 
+    private fun reset()
+    {
+        monsterSprite.drawable = skin.getDrawable("transparent")
+        name.txt = ""
+        level.txt = ""
+    }
+
     fun showDetails(guardian: AGuardian?)
     {
-        if(guardian != null)
+        if(guardian == null) reset()
+        else
         {
             val region = Services.getMedia().getMonsterSprite(
                     guardian.speciesDescription.ID,

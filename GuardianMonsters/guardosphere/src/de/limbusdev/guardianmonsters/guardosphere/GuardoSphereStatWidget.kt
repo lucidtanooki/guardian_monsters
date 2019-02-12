@@ -29,7 +29,7 @@ class GuardoSphereStatWidget(private val skin: Skin) : Group()
     {
         // ................................................ background
         setSize(WIDTH, HEIGHT)
-        val background = Image(skin.getDrawable("guardosphere-frame"))
+        val background = Image(skin,"guardosphere-frame")
         background.setSize(WIDTH, HEIGHT)
         background.setPosition(0f, 0f, Align.bottomLeft)
         this+background
@@ -44,7 +44,7 @@ class GuardoSphereStatWidget(private val skin: Skin) : Group()
         for (i in labels.indices)
         {
             val yAnchor = HEIGHT - PADDING - i*(STAT_IMG_SIZE + STAT_PADDING)
-            key = Image(skin.getDrawable("stats-symbol-${labels[i]}"))
+            key = Image(skin,"stats-symbol-${labels[i]}")
             key.setSize(16f, 16f)
             key.setPosition(PADDING, yAnchor, Align.topLeft)
             this+key
@@ -74,10 +74,20 @@ class GuardoSphereStatWidget(private val skin: Skin) : Group()
         this+equipmentGroup
     }
 
+    private fun reset()
+    {
+        for(l in valueLabels.values()) l.txt = "0"
+        elementGroup.clear()
+        equipmentGroup.clear()
+    }
 
     fun initialize(m: AGuardian?)
     {
-        if(m != null)
+        if(m == null)
+        {
+            reset()
+        }
+        else
         {
             val species = GuardiansServiceLocator.species
             valueLabels["hp"].txt = "${m.individualStatistics.hp} / ${m.individualStatistics.hpMax}"

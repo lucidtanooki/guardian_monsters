@@ -143,15 +143,15 @@ public class SerializableAbilityGraph {
         public SNode() {}
 
         public SNode(Node node) {
-            this.ID = node.ID;
-            this.x = node.x;
-            this.y = node.y;
+            this.ID = node.getID();
+            this.x = node.getX();
+            this.y = node.getY();
             switch(node.getState()) {
                 case ACTIVE:    this.state = ACTIVE;    break;
                 case ENABLED:   this.state = ENABLED;   break;
                 default:        this.state = DISABLED;  break;
             }
-            switch(node.type) {
+            switch(node.getType()) {
                 case ABILITY:       this.type = ABILITY;        break;
                 case EQUIPMENT:     this.type = EQUIPMENT;      break;
                 case METAMORPHOSIS: this.type = METAMORPHOSIS;  break;
@@ -184,8 +184,8 @@ public class SerializableAbilityGraph {
         public SEdge() {}
 
         public SEdge(Edge edge) {
-            this.from = edge.from.ID;
-            this.to   = edge.to.ID;
+            this.from = edge.getFrom().getID();
+            this.to   = edge.getTo().getID();
         }
     }
 

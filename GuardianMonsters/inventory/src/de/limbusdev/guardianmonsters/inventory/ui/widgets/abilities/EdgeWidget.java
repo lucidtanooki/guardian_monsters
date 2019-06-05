@@ -41,22 +41,22 @@ public class EdgeWidget extends Group implements Listener<Node> {
         this.edge = edge;
         images = new Array<>();
 
-        switch(edge.orientation) {
+        switch(edge.getOrientation()) {
             case VERTICAL:  assembleVerticalEdge(edge); break;
             case UPLEFT:    assembleUpLeftEdge(edge); break;
             case UPRIGHT:   assembleUpRightEdge(edge); break;
             default:        assembleHorizontalEdge(edge); break;
         }
 
-        edge.from.add(this);
-        edge.to.add(this);
+        edge.getFrom().add(this);
+        edge.getTo().add(this);
 
         changeStatus(edge);
     }
 
     private void assembleHorizontalEdge(Edge edge) {
 
-        pivot = edge.from.x < edge.to.x ? edge.from : edge.to;
+        pivot = edge.getFrom().getX() < edge.getTo().getX() ? edge.getFrom() : edge.getTo();
         for(int x = 0; x < edge.getXLength(); x++) {
             Image img = new Image(skin.getDrawable(edgeImgsDisabled.get(Orientation.HORIZONTAL)));
             img.setPosition(x*32,-3, Align.bottomLeft);
@@ -67,7 +67,7 @@ public class EdgeWidget extends Group implements Listener<Node> {
 
     private void assembleVerticalEdge(Edge edge) {
 
-        pivot = edge.from.y < edge.to.y ? edge.from : edge.to;
+        pivot = edge.getFrom().getY() < edge.getTo().getY() ? edge.getFrom() : edge.getTo();
         for(int y = 0; y < edge.getYLength(); y++) {
             Image img = new Image(skin.getDrawable(edgeImgsDisabled.get(Orientation.VERTICAL)));
             img.setPosition(-3,y*32, Align.bottomLeft);
@@ -78,7 +78,7 @@ public class EdgeWidget extends Group implements Listener<Node> {
 
     private void assembleUpLeftEdge(Edge edge) {
 
-        pivot = edge.from.y < edge.to.y ? edge.from : edge.to;
+        pivot = edge.getFrom().getY()< edge.getTo().getY() ? edge.getFrom() : edge.getTo();
         int x=0; int y=0;
         do {
             Image img = new Image(skin.getDrawable(edgeImgsDisabled.get(Edge.Orientation.UPLEFT)));
@@ -91,7 +91,7 @@ public class EdgeWidget extends Group implements Listener<Node> {
 
     private void assembleUpRightEdge(Edge edge) {
 
-        pivot = edge.from.y < edge.to.y ? edge.from : edge.to;
+        pivot = edge.getFrom().getY() < edge.getTo().getY() ? edge.getFrom() : edge.getTo();
         int x=0; int y=0;
         do {
             Drawable drw = skin.getDrawable(edgeImgsDisabled.get(Orientation.UPRIGHT));
@@ -106,14 +106,14 @@ public class EdgeWidget extends Group implements Listener<Node> {
     public void changeStatus(Edge edge) {
 
         String ending;
-        if(edge.from.isActive() || edge.to.isActive()) {
+        if(edge.getFrom().isActive() || edge.getTo().isActive()) {
             ending = "-active";
         } else {
             ending = "";
         }
 
         for(Image i : images) {
-            i.setDrawable(skin.getDrawable(edgeImgsDisabled.get(edge.orientation) + ending));
+            i.setDrawable(skin.getDrawable(edgeImgsDisabled.get(edge.getOrientation()) + ending));
         }
     }
 

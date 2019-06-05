@@ -73,7 +73,7 @@ public class GraphWidget extends Group {
     // ..................................................................................... METHODS
     private void addNewNodeWidget(Node node) {
 
-        final int nodeID = node.ID;
+        final int nodeID = node.getID();
         NodeWidget nw = new NodeWidget(skin, node);
         nw.addListener(new ClickListener() {
             @Override
@@ -81,8 +81,8 @@ public class GraphWidget extends Group {
                 callbacks.onNodeClicked(nodeID);
             }
         });
-        nw.setPosition(nw.getNode().x*32+300,nw.getNode().y*32+150);
-        nodeWidgets.put(node.ID,nw);
+        nw.setPosition(nw.getNode().getX()*32+300,nw.getNode().getY()*32+150);
+        nodeWidgets.put(node.getID(),nw);
         addActor(nw);
         nodeGroup.add(nw);
     }
@@ -90,18 +90,18 @@ public class GraphWidget extends Group {
     private void addNewEdgeWidget(Edge edge) {
 
         EdgeWidget ew = new EdgeWidget(skin, edge);
-        ew.setPosition(ew.pivot.x*32+300, ew.pivot.y*32+150);
+        ew.setPosition(ew.pivot.getX()*32+300, ew.pivot.getY()*32+150);
         addActor(ew);
 
-        if(!edgeWidgets.containsKey(edge.from)) {
-            edgeWidgets.put(edge.from,new Array<>());
+        if(!edgeWidgets.containsKey(edge.getFrom())) {
+            edgeWidgets.put(edge.getFrom(),new Array<>());
         }
-        if(!edgeWidgets.containsKey(edge.to)) {
-            edgeWidgets.put(edge.to,  new Array<>());
+        if(!edgeWidgets.containsKey(edge.getTo())) {
+            edgeWidgets.put(edge.getTo(),  new Array<>());
         }
 
-        edgeWidgets.get(edge.from).add(ew);
-        edgeWidgets.get(edge.to).add(ew);
+        edgeWidgets.get(edge.getFrom()).add(ew);
+        edgeWidgets.get(edge.getTo()).add(ew);
     }
 
     public interface Controller {

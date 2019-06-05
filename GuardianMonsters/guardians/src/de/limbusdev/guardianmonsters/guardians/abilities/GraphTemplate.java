@@ -1,13 +1,20 @@
 package de.limbusdev.guardianmonsters.guardians.abilities;
 
+import de.limbusdev.utils.geometry.IntVec2;
+
 /**
  * GraphTemplate
  *
  * @author Georg Eckert 2017
  */
 
-public class GraphTemplate {
-    public static final int[][] coords = {
+public class GraphTemplate
+{
+    /**
+     * Coordinates of all nodes on the ability graph.
+     */
+    public static final int[][] coordinates =
+    {
         {0,0,0}, {1,0,1}, {2,1,0}, {3,0,-1}, {4,-1,0}, {5,0,2}, {6,2,1}, {7,0,-2}, {8,-2,-1}, {9,-1,2},
         {10,2,2}, {11,1,-2}, {12,-2,-2}, {13,1,2}, {14,3,1}, {15,-1,-2}, {16,-3,-1}, {17,0,3}, {18,4,4}, {19,0,-3},
         {20,-4,-4}, {21,-1,4}, {22,4,2}, {23,1,-4}, {24,-4,-2}, {25,1,4}, {26,3,0}, {27,-1,-4}, {28,-3,0}, {29,2,3},
@@ -21,7 +28,11 @@ public class GraphTemplate {
         {100,-8,-4}
     };
 
-    public static final int[][] conns =  {
+    /**
+     * Connections of the nodes in the ability graph.
+     */
+    public static final int[][] connections =
+    {
         {0,1},{1,5},{5,9},{5,17},{5,13},{5,17},{17,21},{17,25},{25,29},
         {0,3}, {3,7}, {7,11}, {7,15}, {7,19}, {19,23}, {19,27}, {27,31},
         {0,2}, {2,6}, {6,10}, {10,18}, {18,30}, {30,37}, {37,43}, {43,49}, {49,57}, {49,61}, {49,53},
@@ -38,4 +49,14 @@ public class GraphTemplate {
         {54,70}, {70,78}, {78,86}, {78,94},
         {54,66}, {66,82}, {82,98}, {66,90}, {66,74}, {74,96}, {96,100}
     };
+
+    public static IntVec2 getNodePosition(int ID)
+    {
+        return new IntVec2(coordinates[ID][1], coordinates[ID][2]);
+    }
+
+    public static IntVec2 getEdge(int index)
+    {
+        return new IntVec2(connections[index][0], connections[index][1]);
+    }
 }

@@ -22,24 +22,25 @@ class Node : Signal<Node>
     var x: Int = 0
     var y: Int = 0
     var ID: Int = 0
-    val type: Type
-    var state: State private set
+    var type:  Type
+    var state: State
 
     // ................................................................................ Constructors
-    constructor(x: Int, y: Int, ID: Int)
+    init
     {
-        this.y = y
-        this.x = x
-        this.ID = ID
-        this.type = Type.EMPTY
-        this.state = State.DISABLED
+        type = Type.EMPTY
+        state = State.DISABLED
     }
 
-    constructor(x: Int, y: Int, ID: Int, type: Type, state: State)
+    constructor(x: Int, y: Int, ID: Int)
     {
         this.x = x
         this.y = y
         this.ID = ID
+    }
+
+    constructor(x: Int, y: Int, ID: Int, type: Type, state: State) : this(x, y, ID)
+    {
         this.type = type
         this.state = state
     }

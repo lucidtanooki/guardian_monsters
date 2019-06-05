@@ -32,12 +32,12 @@ public class NodeWidget extends ImageButton implements Listener<Node> {
 
     public NodeWidget(Skin skin, Node node) {
 
-        super(skin,"board-" + node.type.toString().toLowerCase() + "-disabled");
+        super(skin,"board-" + node.getType().toString().toLowerCase() + "-disabled");
         this.skin = skin;
         this.node = node;
         currentWidgetState = node.getState();
 
-        switch(node.type) {
+        switch(node.getType()) {
             case ABILITY:
             case METAMORPHOSIS:
             case EQUIPMENT: offset = new IntVec2(-16,-16); break;
@@ -67,7 +67,7 @@ public class NodeWidget extends ImageButton implements Listener<Node> {
         if(state == Node.State.ACTIVE && currentWidgetState != Node.State.ACTIVE && !initializing) {
             playActivationAnimation();
         }
-        this.setStyle(getNodeStyles(skin).get(node.type).get(state));
+        this.setStyle(getNodeStyles(skin).get(node.getType()).get(state));
         this.currentWidgetState = state;
     }
 

@@ -16,18 +16,16 @@ import de.limbusdev.utils.extensions.set
 class AbilityGraph : IAbilityGraph
 {
     // .................................................................................. Properties
-    private var core:               AGuardian? = null
+    private var core                : AGuardian? = null
 
-    private var nodes:              ArrayMap<Int, Node>
-    private var edges:              Array<Edge>
-
-    private var abilityNodes:       ArrayMap<Int, Ability.aID>
-    private var equipmentNodes:     ArrayMap<Int, BodyPart>
-    private var metamorphosisNodes: Array<Int>
-
-    private var activeAbilities:    ArrayMap<Int, Ability.aID> // Abilities available in battle
-    private var learntAbilities:    ArrayMap<Int, Ability.aID> // Abilities activated on the graph
-    private var learntEquipment:    Array<BodyPart>
+    override var nodes              : ArrayMap<Int, Node>
+    override var edges              : Array<Edge>
+    override var abilityNodes       : ArrayMap<Int, Ability.aID>
+    override var equipmentNodes     : ArrayMap<Int, BodyPart>
+    override var metamorphosisNodes : Array<Int>
+    override var activeAbilities    : ArrayMap<Int, Ability.aID>
+    override var learntAbilities    : ArrayMap<Int, Ability.aID>
+    override var learntEquipment    : Array<BodyPart>
 
 
     // ................................................................................ Constructors
@@ -115,15 +113,20 @@ class AbilityGraph : IAbilityGraph
 
 
     // ........................................................................... GETTERS & SETTERS
-    override fun getNodes(): ArrayMap<Int, Node> = nodes
+    override val currentForm: Int get()
+    {
+        var activatedMetamorphosisNodes = 0
+        for (key in metamorphosisNodes)
+        {
+            if (nodes[key].isActive) { activatedMetamorphosisNodes++ }
+        }
+        return activatedMetamorphosisNodes
+    }
 
-    override fun getEdges(): Array<Edge> = edges
-
-    override fun getAbilityNodes(): ArrayMap<Int, Ability.aID> = abilityNodes
-
-    override fun getEquipmentNodes(): ArrayMap<Int, BodyPart> = equipmentNodes
-
-    override fun getMetamorphosisNodes(): Array<Int> = metamorphosisNodes
+    override val randomActiveAbility get(): Ability.aID
+    {
+        return getActiveAbility(MathUtils.random(0, activeAbilities.size - 1))
+    }
 
     override fun activateNode(nodeID: Int)
     {
@@ -136,9 +139,9 @@ class AbilityGraph : IAbilityGraph
 
         when (node.type)
         {
-            Node.Type.ABILITY -> learnAbility(nodeID)
+            Node.Type.ABILITY   -> learnAbility(nodeID)
             Node.Type.EQUIPMENT -> learnEquipment(nodeID)
-            else -> {}
+            else                -> {}
         }
 
         core?.setAbilitiesChanged()
@@ -152,16 +155,6 @@ class AbilityGraph : IAbilityGraph
     override fun learnsEquipmentAt(nodeID: Int) = equipmentNodes.containsKey(nodeID)
 
     override fun metamorphsAt(nodeID: Int) = metamorphosisNodes.contains(nodeID, false)
-
-    override fun getCurrentForm(): Int
-    {
-        var activatedMetamorphosisNodes = 0
-        for (key in metamorphosisNodes)
-        {
-            if (getNodes()[key].isActive) { activatedMetamorphosisNodes++ }
-        }
-        return activatedMetamorphosisNodes
-    }
 
     override fun learnsSomethingAt(nodeID: Int): Boolean
     {
@@ -189,11 +182,6 @@ class AbilityGraph : IAbilityGraph
         return activeAbilities.get(abilitySlot)
     }
 
-    override fun getRandomActiveAbility(): Ability.aID
-    {
-        return getActiveAbility(MathUtils.random(0, activeAbilities.size - 1))
-    }
-
     override fun setActiveAbility(slot: Int, learntAbilityNumber: Int)
     {
         checkNotNull(core)
@@ -216,10 +204,6 @@ class AbilityGraph : IAbilityGraph
         core?.setAbilitiesChanged()
         core?.notifyObservers()
     }
-
-    override fun getActiveAbilities(): ArrayMap<Int, Ability.aID> = activeAbilities
-
-    override fun getLearntAbilities(): ArrayMap<Int, Ability.aID> = learntAbilities
 
 
     // .............................................................................. HELPER METHODS

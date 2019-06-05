@@ -173,7 +173,7 @@ public class AbilityChoiceSubMenu extends AInventorySubMenu
             if(abilityID != null) {
 
                 Ability ability = GuardiansServiceLocator.INSTANCE.getAbilities().getAbility(abilityID);
-                TextButton tb = new TextButton(translation.get(ability.name), getSkin(), "item-button-sandstone");
+                TextButton tb = new TextButton(translation.get(ability.getName()), getSkin(), "item-button-sandstone");
 
                 tb.addListener(new SimpleClickListener(() -> {
 

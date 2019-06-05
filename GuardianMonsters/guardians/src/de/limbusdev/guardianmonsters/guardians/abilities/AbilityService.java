@@ -72,7 +72,7 @@ public class AbilityService implements IAbilityService
                 jsa.healedStats.HP,
                 jsa.healedStats.MP
             );
-            elAbilities.put(ability.ID, ability);
+            elAbilities.put(ability.getID(), ability);
         }
 
         return elAbilities;
@@ -128,7 +128,7 @@ public class AbilityService implements IAbilityService
     @Override
     public Ability getAbility(Ability.aID aID)
     {
-        return getAbility(aID.element, aID.ID);
+        return getAbility(aID.getElement(), aID.getID());
     }
 
     @Override

@@ -296,7 +296,7 @@ public class BattleAnimationWidget extends BattleWidget
     {
         final boolean direction = defSide;
         Action action;
-        AbilityMedia abilityMedia = AbilityMediaDB.getInstance().getAbilityMedia(ability.name);
+        AbilityMedia abilityMedia = AbilityMediaDB.getInstance().getAbilityMedia(ability.getName());
 
         // Short delay before ability starts
         Action delayAction = Actions.delay(.5f);
@@ -347,7 +347,7 @@ public class BattleAnimationWidget extends BattleWidget
     {
         final boolean direction = defSide;
         Action action;
-        AbilityMedia abilityMedia = AbilityMediaDB.getInstance().getAbilityMedia(ability.name);
+        AbilityMedia abilityMedia = AbilityMediaDB.getInstance().getAbilityMedia(ability.getName());
 
         // Short delay before ability starts
         Action delayAction = Actions.delay(.5f);
@@ -472,7 +472,7 @@ public class BattleAnimationWidget extends BattleWidget
 
         boolean direction = origin.getX() > target.getX();
 
-        Animation anim = Services.getMedia().getAttackAnimation(ability.name);
+        Animation anim = Services.getMedia().getAttackAnimation(ability.getName());
         SelfRemovingAnimation sra = new SelfRemovingAnimation(anim);
         anim.setFrameDuration(.1f);
         // Ability direction
@@ -483,7 +483,7 @@ public class BattleAnimationWidget extends BattleWidget
         }
         sra.setAlign(Align.bottom);
 
-        AbilityMedia abilityMedia = AbilityMediaDB.getInstance().getAbilityMedia(ability.name);
+        AbilityMedia abilityMedia = AbilityMediaDB.getInstance().getAbilityMedia(ability.getName());
 
         switch(abilityMedia.getAnimationType())
         {
@@ -510,7 +510,7 @@ public class BattleAnimationWidget extends BattleWidget
     {
         boolean direction = defSide;
 
-        Animation anim = Services.getMedia().getAttackAnimation(ability.name);
+        Animation anim = Services.getMedia().getAttackAnimation(ability.getName());
         SelfRemovingAnimation sra = new SelfRemovingAnimation(anim);
         anim.setFrameDuration(.1f);
         // Ability direction
@@ -521,7 +521,7 @@ public class BattleAnimationWidget extends BattleWidget
         }
         sra.setAlign(Align.bottom);
 
-        AbilityMedia abilityMedia = AbilityMediaDB.getInstance().getAbilityMedia(ability.name);
+        AbilityMedia abilityMedia = AbilityMediaDB.getInstance().getAbilityMedia(ability.getName());
 
         IntVec2 target = direction ? (new IntVec2(128,100)) : (new IntVec2(Constant.WIDTH+64,100));
 

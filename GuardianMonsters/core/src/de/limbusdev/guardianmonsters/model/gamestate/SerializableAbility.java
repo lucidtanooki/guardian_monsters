@@ -19,8 +19,8 @@ public class SerializableAbility
 
     public SerializableAbility(Ability.aID ability)
     {
-        this.element = ability.element;
-        this.ID = ability.ID;
+        this.element = ability.getElement();
+        this.ID = ability.getID();
     }
 
     public static Ability.aID deserialize(SerializableAbility sAbility)

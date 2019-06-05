@@ -121,7 +121,7 @@ public class HoneyComb7ButtonsWidget extends WidgetGroup
 
     public void setButtonText(int index, Ability ability)
     {
-        setButtonText(index, Services.getL18N().Abilities().get(ability.name));
+        setButtonText(index, Services.getL18N().Abilities().get(ability.getName()));
     }
 
     public void setButtonStyle(int index, Skin skin, String style)

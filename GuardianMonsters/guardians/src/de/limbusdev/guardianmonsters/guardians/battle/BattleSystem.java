@@ -192,7 +192,7 @@ public class BattleSystem
                     Ability ability = GuardiansServiceLocator.INSTANCE.getAbilities().getAbility(aID);
                     int att = activeGuardian.getAbilityGraph().getActiveAbilities().getKey(aID, false);
 
-                    if (ability.areaDamage) {setChosenArea(queue.getRandomCombatTeam());}
+                    if (ability.getAreaDamage()) {setChosenArea(queue.getRandomCombatTeam());}
                     else                    {setChosenTarget(getRandomFitCombatant());}
 
                     setChosenAttack(att);
@@ -454,7 +454,7 @@ public class BattleSystem
 
                 Ability ability = GuardiansServiceLocator.INSTANCE.getAbilities().getAbility(aID);
 
-                if(ability.areaDamage) {
+                if(ability.getAreaDamage()) {
 
                     setChosenArea(queue.getCombatTeamLeft());
 

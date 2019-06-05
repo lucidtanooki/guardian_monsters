@@ -48,7 +48,7 @@ public class SerializableAbilityGraph {
         int counter=0;
         for(int key :graph.getActiveAbilities().keys()) {
             if(graph.getActiveAbilities().get(key) != null) {
-                activeAbilities[counter] = graph.getActiveAbilities().get(key).ID;
+                activeAbilities[counter] = graph.getActiveAbilities().get(key).getID();
                 counter++;
             }
         }

@@ -77,26 +77,26 @@ public class BattleCalculator
         }
 
         // Elemental Efficiency
-        float eff = ElemEff.singelton().getElemEff(ability.element, defender.getSpeciesDescription().getElements(0));   // TODO elements currentForm
+        float eff = ElemEff.singelton().getElemEff(ability.getElement(), defender.getSpeciesDescription().getElements(0));   // TODO elements currentForm
 
         IndividualStatistics statAtt = attacker.getIndividualStatistics();
         IndividualStatistics statDef = defender.getIndividualStatistics();
 
         int typeStrength;
-        switch(ability.damageType)
+        switch(ability.getDamageType())
         {
             case MAGICAL: typeStrength = statAtt.getMStr(); break;
             default:      typeStrength = statAtt.getPStr(); break;
         }
 
         int typeDefense;
-        switch(ability.damageType)
+        switch(ability.getDamageType())
         {
             case MAGICAL: typeDefense = statDef.getMDef(); break;
             default:      typeDefense = statAtt.getPDef(); break;
         }
 
-        int abilityStrength = ability.damage;
+        int abilityStrength = ability.getDamage();
         float ratioSD = ((float) typeStrength) / ((float) typeDefense);
 
         int level = statAtt.getLevel();
@@ -113,11 +113,11 @@ public class BattleCalculator
         report.efficiency = eff;
 
         // Consider StatusEffect
-        if(ability.canChangeStatusEffect && statDef.getStatusEffect().equals(StatusEffect.HEALTHY)) {
+        if(ability.getCanChangeStatusEffect() && statDef.getStatusEffect().equals(StatusEffect.HEALTHY)) {
 
-            boolean willChange = MathUtils.randomBoolean(ability.probabilityToChangeStatusEffect/100f);
+            boolean willChange = MathUtils.randomBoolean(ability.getProbabilityToChangeStatusEffect()/100f);
             if(willChange) {
-                report.newStatusEffect = ability.statusEffect;
+                report.newStatusEffect = ability.getStatusEffect();
                 report.changedStatusEffect = true;
             }
 
@@ -129,27 +129,27 @@ public class BattleCalculator
         }
 
         // Handle Stat changing
-        if(ability.changesStats)
+        if(ability.getChangesStats())
         {
             report.modifiedStat = true;
-            report.modifiedPStr = ability.addsPStr;
-            report.modifiedPDef = ability.addsPDef;
-            report.modifiedMStr = ability.addsMStr;
-            report.modifiedMDef = ability.addsMDef;
-            report.modifiedSpeed = ability.addsSpeed;
+            report.modifiedPStr = ability.getAddsPStr();
+            report.modifiedPDef = ability.getAddsPDef();
+            report.modifiedMStr = ability.getAddsMStr();
+            report.modifiedMDef = ability.getAddsMDef();
+            report.modifiedSpeed = ability.getAddsSpeed();
         }
 
         // Handle Stat curing
-        if(ability.curesStats)
+        if(ability.getCuresStats())
         {
             report.healedStat = true;
-            report.healedHP = ability.curesHP;
-            report.healedMP = ability.curesMP;
+            report.healedHP = ability.getCuresHP();
+            report.healedMP = ability.getCuresMP();
         }
 
         // Print Battle Debug Message
         String attackerName = attacker.getUuid();
-        String attackName   = ability.name;
+        String attackName   = ability.getName();
         String victimName   = defender.getUuid();
         System.out.println(attackerName + ": " + attackName + " causes " + damage + " damage on " + victimName);
 
@@ -198,9 +198,9 @@ public class BattleCalculator
         AGuardian defending = report.defending;
         AGuardian attacking = report.attacking;
 
-        System.out.println(report.attacking.getUuid() + " attacks " + defending.getUuid() + " with " + report.attack.name);
+        System.out.println(report.attacking.getUuid() + " attacks " + defending.getUuid() + " with " + report.attack.getName());
         defending.getIndividualStatistics().decreaseHP(report.damage);
-        attacking.getIndividualStatistics().decreaseMP(report.attack.MPcost);
+        attacking.getIndividualStatistics().decreaseMP(report.attack.getMPcost());
 
         // Apply Status Effect
         if(report.changedStatusEffect) {

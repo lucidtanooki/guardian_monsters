@@ -78,20 +78,20 @@ public class AbilityInfoLabelWidget extends InfoLabelWidget
 
         Ability ability = abilities.getAbility(aID);
 
-        element.setText(i18nElements.get("element_" + aID.element.toString().toLowerCase()));
-        element.setStyle(inventorySkin.get("elem-" + aID.element.toString().toLowerCase(), Label.LabelStyle.class));
+        element.setText(i18nElements.get("element_" + aID.getElement().toString().toLowerCase()));
+        element.setStyle(inventorySkin.get("elem-" + aID.getElement().toString().toLowerCase(), Label.LabelStyle.class));
 
-        abilityName.setText(i18nAbilities.get(ability.name));
-        abilityDamage.setText(Integer.toString(ability.damage));
-        abilityMPcost.setText(Integer.toString(ability.MPcost));
-        abilityDescription.setText(i18nAbilities.get(ability.name + "_desc"));
+        abilityName.setText(i18nAbilities.get(ability.getName()));
+        abilityDamage.setText(Integer.toString(ability.getDamage()));
+        abilityMPcost.setText(Integer.toString(ability.getMPcost()));
+        abilityDescription.setText(i18nAbilities.get(ability.getMPcost() + "_desc"));
 
         abilityMPcost.remove();
         SymbolMP.remove();
         SymbolPStr.remove();
         SymbolMStr.remove();
 
-        if(ability.damageType == Ability.DamageType.PHYSICAL) {
+        if(ability.getDamageType() == Ability.DamageType.PHYSICAL) {
             addActor(SymbolPStr);
         } else {
             addActor(SymbolMStr);

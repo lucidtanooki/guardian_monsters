@@ -145,14 +145,14 @@ public class AbilityDetailWidget extends Container {
             name.setText("Empty");
             damage.setText("0");
         } else {
-            name.setText(Services.getL18N().Abilities().get(ability.name));
-            damage.setText(Integer.toString(ability.damage));
+            name.setText(Services.getL18N().Abilities().get(ability.getName()));
+            damage.setText(Integer.toString(ability.getDamage()));
 
-            String drawableID = ability.damageType == Ability.DamageType.PHYSICAL ? "pstr" : "mstr";
+            String drawableID = ability.getDamageType() == Ability.DamageType.PHYSICAL ? "pstr" : "mstr";
             Drawable drawable = skin.getDrawable("stats-symbol-" + drawableID);
 
             abilityType.setDrawable(drawable);
-            String elem = ability.element.toString().toLowerCase();
+            String elem = ability.getElement().toString().toLowerCase();
             String elemName = Services.getL18N().Elements().get("element_" + elem);
             elemName = elemName.length() < 7 ? elemName : elemName.substring(0,6);
             element = new Label(elemName, skin, "elem-" + elem);

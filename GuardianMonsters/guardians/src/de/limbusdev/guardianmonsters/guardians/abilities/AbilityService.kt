@@ -17,12 +17,56 @@ import de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics
  * Contains all existing attacks, sorted by element
  * @author Georg Eckert 2017
  */
-class AbilityService private constructor(jsonAbilitiesResources: ArrayMap<Element, String>) : IAbilityService {
+class AbilityService
+private constructor(jsonAbilitiesResources: ArrayMap<Element, String>)
+    : IAbilityService
+{
+    // ............................................................................... Inner Classes
+    /**
+     * Simple Container for JSON parsed Object
+     */
+    private class JsonAbility
+    {
+        var ID                              : Int = 0
+        var name                            : String = ""
+        var damage                          : Int = 0
+        var MPcost                          : Int = 0
+        var damageType                      : String = "PHYSICAL"
+        var element                         : String = "NONE"
+        var statusEffect                    : String = "HEALTHY"
+        var canChangeStatusEffect           : Boolean = false
+        var probabilityToChangeStatusEffect : Int = 0
+        var areaDamage                      : Boolean = false
 
-    init {
-        abilities = ArrayMap()
+        var modifiedStats                   : JsonAbilityModifiedStats = JsonAbilityModifiedStats()
+        var healedStats                     : JsonAbilityHealedStats   = JsonAbilityHealedStats()
 
-        for (key in jsonAbilitiesResources.keys()) {
+        class JsonAbilityModifiedStats
+        {
+            var PStr  : Int = 0
+            var PDef  : Int = 0
+            var MStr  : Int = 0
+            var MDef  : Int = 0
+            var Speed : Int = 0
+            fun changesStats() = (PStr != 0 || PDef != 0 || MStr != 0 || MDef != 0 || Speed != 0)
+        }
+
+        class JsonAbilityHealedStats
+        {
+            var HP : Int = 0
+            var MP : Int = 0
+            fun curesStats() = (HP != 0 || MP != 0)
+        }
+
+        override fun toString() = "Ability:\n$ID $name\nDamage: $damage MPcost: $MPcost"
+    }
+
+
+    // ................................................................................ Constructors
+    init
+    {
+        for (key in jsonAbilitiesResources.keys())
+        {
             val elAbilities = readAbilitiesFromJsonString(jsonAbilitiesResources.get(key))
             abilities.put(key, elAbilities)
         }
@@ -34,103 +78,55 @@ class AbilityService private constructor(jsonAbilitiesResources: ArrayMap<Elemen
      * @param index
      * @return
      */
-    override fun getAbility(e: Element, index: Int): Ability {
-        return abilities.get(e).get(index)
-    }
+    override fun getAbility(e: Element, index: Int) = abilities.get(e).get(index)
 
-    override fun getAbility(aID: Ability.aID): Ability {
-        return getAbility(aID.element, aID.ID)
-    }
+    override fun getAbility(aID: Ability.aID) = getAbility(aID.element, aID.ID)
 
-    override fun destroy() {
-        instance = null
-    }
+    override fun destroy() { instance = null }
 
-    /**
-     * Simple Container for JSON parsed Object
-     */
-    private class JsonAbility {
+    companion object
+    {
+        private var instance  : AbilityService? = null
+        private var abilities : ArrayMap<Element, ArrayMap<Int, Ability>> = ArrayMap()
 
-        var ID: Int = 0
-        var name: String? = null
-        var damage: Int = 0
-        var MPcost: Int = 0
-        var damageType: String? = null
-        var element: String? = null
-        var statusEffect: String? = null
-        var canChangeStatusEffect: Boolean = false
-        var probabilityToChangeStatusEffect: Int = 0
-        var areaDamage: Boolean = false
-
-        var modifiedStats: JsonAbilityModifiedStats? = null
-        var healedStats: JsonAbilityHealedStats? = null
-
-        private class JsonAbilityModifiedStats {
-            var PStr: Int = 0
-            var PDef: Int = 0
-            var MStr: Int = 0
-            var MDef: Int = 0
-            var Speed: Int = 0
-            fun changesStats(): Boolean {
-                return PStr != 0 || PDef != 0 || MStr != 0 || MDef != 0 || Speed != 0
-            }
-        }
-
-        private class JsonAbilityHealedStats {
-            var HP: Int = 0
-            var MP: Int = 0
-            fun curesStats(): Boolean {
-                return HP != 0 || MP != 0
-            }
-        }
-
-        override fun toString(): String {
-            var out = "Ability:\n"
-            out += "$ID $name\nDamage: $damage"
-            out += "  MPcost: $MPcost"
-            return out
-        }
-    }
-
-    companion object {
-        private var instance: AbilityService? = null
-        private var abilities: ArrayMap<Element, ArrayMap<Int, Ability>>
-
-        private fun readAbilitiesFromJsonString(jsonString: String): ArrayMap<Int, Ability> {
+        private fun readAbilitiesFromJsonString(jsonString: String): ArrayMap<Int, Ability>
+        {
             val elAbilities = ArrayMap<Int, Ability>()
             val json = Json()
 
             val elementList: ArrayList<JsonValue>
 
-            if (json.fromJson(ArrayList<*>::class.java, jsonString) != null)
-                elementList = json.fromJson<ArrayList<*>>(ArrayList<*>::class.java, jsonString)
-            else
-                elementList = ArrayList()
+            elementList = if (json.fromJson(ArrayList::class.java, jsonString) != null)
+            {
+                json.fromJson(ArrayList::class.java, jsonString) as ArrayList<JsonValue>;
+            }
+            else ArrayList()
 
             var jsa: JsonAbility
             var ability: Ability
-            for (v in elementList) {
+            for (v in elementList)
+            {
                 jsa = json.readValue(JsonAbility::class.java, v)
                 ability = Ability(
                         jsa.ID,
-                        Ability.DamageType.valueOf(jsa.damageType!!.toUpperCase()),
-                        Element.valueOf(jsa.element!!.toUpperCase()),
+                        Ability.DamageType.valueOf(jsa.damageType.toUpperCase()),
+                        Element.valueOf(jsa.element.toUpperCase()),
                         jsa.damage,
-                        jsa.name!!,
+                        jsa.name,
                         jsa.MPcost,
                         jsa.areaDamage,
                         jsa.canChangeStatusEffect,
-                        IndividualStatistics.StatusEffect.valueOf(jsa.statusEffect!!.toUpperCase()),
+                        IndividualStatistics.StatusEffect.valueOf(jsa.statusEffect.toUpperCase()),
                         jsa.probabilityToChangeStatusEffect,
-                        jsa.modifiedStats!!.changesStats(),
-                        jsa.modifiedStats!!.PStr,
-                        jsa.modifiedStats!!.PDef,
-                        jsa.modifiedStats!!.MStr,
-                        jsa.modifiedStats!!.MDef,
-                        jsa.modifiedStats!!.Speed,
-                        jsa.healedStats!!.curesStats(),
-                        jsa.healedStats!!.HP,
-                        jsa.healedStats!!.MP
+                        jsa.modifiedStats.changesStats(),
+                        jsa.modifiedStats.PStr,
+                        jsa.modifiedStats.PDef,
+                        jsa.modifiedStats.MStr,
+                        jsa.modifiedStats.MDef,
+                        jsa.modifiedStats.Speed,
+                        jsa.healedStats.curesStats(),
+                        jsa.healedStats.HP,
+                        jsa.healedStats.MP
                 )
                 elAbilities.put(ability.ID, ability)
             }
@@ -146,11 +142,10 @@ class AbilityService private constructor(jsonAbilitiesResources: ArrayMap<Elemen
          * @return
          */
         @Synchronized
-        fun getInstance(jsonAbilitiesResources: ArrayMap<Element, String>): AbilityService {
-            if (instance == null) {
-                instance = AbilityService(jsonAbilitiesResources)
-            }
-            return instance
+        fun getInstance(jsonAbilitiesResources: ArrayMap<Element, String>): AbilityService
+        {
+            if (instance == null) { instance = AbilityService(jsonAbilitiesResources) }
+            return instance as AbilityService
         }
 
         /**
@@ -161,9 +156,11 @@ class AbilityService private constructor(jsonAbilitiesResources: ArrayMap<Elemen
          * @return
          */
         @Synchronized
-        fun getInstanceFromFile(jsonFilePaths: ArrayMap<Element, String>): AbilityService {
+        fun getInstanceFromFile(jsonFilePaths: ArrayMap<Element, String>): AbilityService
+        {
             val jsonResources = ArrayMap<Element, String>()
-            for (key in jsonFilePaths.keys()) {
+            for (key in jsonFilePaths.keys())
+            {
                 val handleJson = Gdx.files.internal(jsonFilePaths.get(key))
                 val jsonString = handleJson.readString()
                 jsonResources.put(key, jsonString)

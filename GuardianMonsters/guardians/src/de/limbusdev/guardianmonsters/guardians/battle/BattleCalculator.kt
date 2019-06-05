@@ -96,7 +96,7 @@ object BattleCalculator
         }
 
         // Elemental Efficiency
-        val eff = ElemEff.singelton().getElemEff(ability.element, defender.speciesDescription.getElements(0))   // TODO elements currentForm
+        val eff = ElemEff.getElemEff(ability.element, defender.speciesDescription.getElements(0))   // TODO elements currentForm
 
         val statAtt = attacker.individualStatistics
         val statDef = defender.individualStatistics

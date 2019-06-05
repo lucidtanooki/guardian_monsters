@@ -159,8 +159,8 @@ object BattleStringBuilder
             2 -> {
                 report1 = reports.get(0)
                 report2 = reports.get(1)
-                defName1 = tryGetNickName(report1.defending)
-                defName2 = tryGetNickName(report2.defending)
+                defName1 = if(report1.defending == null) "" else tryGetNickName(report1.defending as AGuardian)
+                defName2 = if(report2.defending == null) "" else tryGetNickName(report2.defending as AGuardian)
                 damage1 = report1.damage.toString()
                 damage2 = report2.damage.toString()
 
@@ -177,9 +177,9 @@ object BattleStringBuilder
                 report1 = reports.get(0)
                 report2 = reports.get(1)
                 report3 = reports.get(2)
-                defName1 = tryGetNickName(report1.defending)
-                defName2 = tryGetNickName(report2.defending)
-                defName3 = tryGetNickName(report3.defending)
+                defName1 = if(report1.defending == null) "" else tryGetNickName(report1.defending as AGuardian)
+                defName2 = if(report2.defending == null) "" else tryGetNickName(report2.defending as AGuardian)
+                defName3 = if(report3.defending == null) "" else tryGetNickName(report3.defending as AGuardian)
                 damage1 = report1.damage.toString()
                 damage2 = report2.damage.toString()
                 damage3 = report3.damage.toString()
@@ -199,7 +199,7 @@ object BattleStringBuilder
 
             else -> {
                 report1 = reports.get(0)
-                defName1 = tryGetNickName(report1.defending)
+                defName1 = if(report1.defending == null) "" else tryGetNickName(report1.defending as AGuardian)
                 damage1 = report1.damage.toString()
 
                 if(report1.changedStatusEffect)

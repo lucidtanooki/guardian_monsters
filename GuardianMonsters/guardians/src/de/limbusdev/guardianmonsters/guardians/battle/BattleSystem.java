@@ -105,7 +105,7 @@ public class BattleSystem
 
 
         AGuardian attacker = getActiveMonster();
-        latestAttackReport = BattleCalculator.calcAttack(attacker, target, aID);
+        latestAttackReport = BattleCalculator.INSTANCE.calcAttack(attacker, target, aID);
         callbacks.onAttack(attacker, target, ability, latestAttackReport);
     }
 
@@ -124,7 +124,7 @@ public class BattleSystem
         latestAreaAttackReports = new Array<>();
         for(AGuardian g : targets.values())
         {
-            AttackCalculationReport report = BattleCalculator.calcAttack(attacker, g, aID);
+            AttackCalculationReport report = BattleCalculator.INSTANCE.calcAttack(attacker, g, aID);
             latestAreaAttackReports.add(report);
         }
         callbacks.onAreaAttack(attacker, targets, ability, latestAreaAttackReports);
@@ -144,10 +144,10 @@ public class BattleSystem
         if(areaChosen) {
             for(AttackCalculationReport report : latestAreaAttackReports)
             {
-                BattleCalculator.apply(report);
+                BattleCalculator.INSTANCE.apply(report);
             }
         } else {
-            BattleCalculator.apply(latestAttackReport);
+            BattleCalculator.INSTANCE.apply(latestAttackReport);
         }
         return checkKO();
     }
@@ -155,7 +155,7 @@ public class BattleSystem
     public void applyStatusEffect()
     {
         if(getActiveMonster().getIndividualStatistics().getStatusEffect() != IndividualStatistics.StatusEffect.HEALTHY) {
-            BattleCalculator.applyStatusEffect(getActiveMonster());
+            BattleCalculator.INSTANCE.applyStatusEffect(getActiveMonster());
             callbacks.onApplyStatusEffect(getActiveMonster());
             checkKO();
         }
@@ -215,7 +215,7 @@ public class BattleSystem
      */
     public void defend()
     {
-        latestAttackReport = BattleCalculator.calcDefense(getActiveMonster());
+        latestAttackReport = BattleCalculator.INSTANCE.calcDefense(getActiveMonster());
         callbacks.onDefense(getActiveMonster());
     }
 
@@ -314,7 +314,7 @@ public class BattleSystem
         {
             if(m.getIndividualStatistics().isFit())
             {
-                int EXP = BattleCalculator.calculateEarnedEXP(m, defeatedGuardian);
+                int EXP = BattleCalculator.INSTANCE.calculateEarnedEXP(m, defeatedGuardian);
 
                 result.gainEXP(m, EXP);
             }

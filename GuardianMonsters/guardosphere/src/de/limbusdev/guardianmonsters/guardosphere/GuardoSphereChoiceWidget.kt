@@ -114,7 +114,7 @@ class GuardoSphereChoiceWidget
 
             for(col in 0..6)
             {
-                if(slot < sphere.capacity)
+                if(slot < GuardoSphere.capacity)
                 {
                     val guardian = sphere[slot]
                     val slotButton = GuardoSphereButton(skin, guardian)

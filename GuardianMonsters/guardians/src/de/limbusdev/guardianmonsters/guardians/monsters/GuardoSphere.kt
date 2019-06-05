@@ -203,7 +203,7 @@ class GuardoSphere()
 
     companion object
     {
-        const val capacity = 350
+        const val capacity: Int = 350
 
         fun fromSphereToTeam(sphere: GuardoSphere, sphereSlot: Int, team: Team)
         {

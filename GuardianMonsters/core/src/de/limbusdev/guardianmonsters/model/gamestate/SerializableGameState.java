@@ -49,7 +49,7 @@ public class SerializableGameState {
         }
 
         guardoSphere = new SerializableMonster[300];
-        for(int i=0; i<gameState.guardoSphere.getCapacity(); i++)
+        for(int i=0; i < GuardoSphere.capacity; i++)
         {
             AGuardian guardian = gameState.guardoSphere.get(i);
             if(guardian != null)

@@ -255,14 +255,8 @@ object BattleCalculator
         }
         meanAttackingTeamLevel /= escapingTeam.size.toFloat()
 
-        return if (meanAttackingTeamLevel > meanEscapingTeamLevel)
-        {
-            MathUtils.randomBoolean(.2f)
-        }
-        else
-        {
-            MathUtils.randomBoolean(.9f)
-        }
+        return if (meanAttackingTeamLevel > meanEscapingTeamLevel) { MathUtils.randomBoolean(.2f) }
+        else                                                       { MathUtils.randomBoolean(.9f) }
     }
 
     fun calculateEarnedEXP(victoriousG: AGuardian, defeatedG: AGuardian): Int

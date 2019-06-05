@@ -3,12 +3,10 @@ package de.limbusdev.guardianmonsters.services;
 import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager;
 import de.limbusdev.guardianmonsters.model.gamestate.GameState;
 
-public class NullGameStateService implements IGameStateService {
-
+public class NullGameStateService implements IGameStateService
+{
     @Override
-    public void destroy() {
-
-    }
+    public void destroy() { }
 
     @Override
     public SaveGameManager getSaveGameManager() {

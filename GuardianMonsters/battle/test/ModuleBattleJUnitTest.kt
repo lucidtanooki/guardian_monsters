@@ -17,11 +17,15 @@ import org.junit.Assert.assertEquals
 
 class ModuleBattleJUnitTest {
     @Test
-    fun abilityMediaParsingTest() {
-        val testString = "[" +
-                "{\"name\":\"attNone1_selfdef\",\"sfxType\":\"none\",\"sfxIndex\":0,\"animationType\":\"none\"}," +
-                "{\"name\":\"attNone2_kick\",\"sfxType\":\"hit\",\"sfxIndex\":0,\"animationType\":\"contact\"}" +
-                "]"
+    fun abilityMediaParsingTest()
+    {
+        val testString =
+        """
+            [
+              { "name": "attNone1_selfdef", "sfxType": "none",  "sfxIndex": 0, "animationType": "none" },
+              { "name": "attNone2_kick",    "sfxType": "hit",   "sfxIndex": 0, "animationType": "contact" }
+            ]
+        """.trimIndent();
 
         val abilityMediaInfos = AbilityMediaDB.readAbilityMediaFromJsonString(testString)
 

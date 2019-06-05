@@ -27,7 +27,7 @@ class GuardoSphere()
     // Lists whether a Guardian and it's form are unknown, have been seen or already banned.
     private val status = ArrayMap<Int, ArrayMap<Int, State>>(350)
     private val sphere = ArrayMap<Int, AGuardian?>(350)
-    val capacity = 350
+
     val range = 0 until capacity
 
     init
@@ -203,6 +203,8 @@ class GuardoSphere()
 
     companion object
     {
+        const val capacity = 350
+
         fun fromSphereToTeam(sphere: GuardoSphere, sphereSlot: Int, team: Team)
         {
             if(team.size >= team.maximumTeamSize)

@@ -680,6 +680,9 @@ class ModuleGuardiansJUnitTest
 
     @Test fun `Test GuardoSphere`()
     {
+        val sphereCapacity = GuardoSphere.capacity;
+        val sphereMaxSlot = GuardoSphere.capacity-1
+
         printTestLabel("GuardoSphere")
 
         ModuleGuardians.destroyModule()
@@ -729,14 +732,14 @@ class ModuleGuardiansJUnitTest
         assertEquals(g4, sphere[7])
 
         // Test getting empty slot
-        assertNull(sphere[299])
+        assertNull(sphere[sphereMaxSlot])
 
         // Test exceeding capacity
-        try { sphere[300]; fail("Exception should have been thrown") }
-        catch(e: Exception) { assertEquals(e.message, "Slot must be in 0..299") }
+        try { sphere[sphereMaxSlot+1]; fail("Exception should have been thrown") }
+        catch(e: Exception) { assertEquals(e.message, "Slot must be in 0..$sphereMaxSlot") }
 
         // Test occupancy
-        assertEquals(296, sphere.vacantSlots())
+        assertEquals(sphereCapacity - 4, sphere.vacantSlots())
         assertEquals(4, sphere.occupiedSlots())
 
         // Test pushing
@@ -745,7 +748,7 @@ class ModuleGuardiansJUnitTest
         assertEquals(sphere[1], pushedGuardian)
 
         // Test full sphere
-        for(i in 0..299) sphere[i] = gf.createGuardian(1,1)
+        for(i in 0 until GuardoSphere.capacity) sphere[i] = gf.createGuardian(1,1)
         assert(sphere.isFull())
 
         try { sphere + gf.createGuardian(1,1); fail("Exception should have been thrown") }

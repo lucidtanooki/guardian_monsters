@@ -10,11 +10,12 @@ import de.limbusdev.guardianmonsters.guardians.monsters.SpeciesDescription
 import de.limbusdev.utils.extensions.set
 
 /**
- * @author Georg Eckert 2017
+ * @author Georg Eckert 2019
  */
 
 class AbilityGraph : IAbilityGraph
 {
+    // .................................................................................. Properties
     private var core:               AGuardian? = null
 
     private var nodes:              ArrayMap<Int, Node>

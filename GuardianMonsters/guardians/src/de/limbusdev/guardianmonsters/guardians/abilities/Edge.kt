@@ -57,17 +57,10 @@ class Edge
 
         other as Edge
 
-        if((from == other.from && to == other.to) || (from == other.to && to == other.from)
-                && orientation == other.orientation)
-            return true;
-
-        return false
+        return (from == other.from && to == other.to)
+                || (from == other.to && to == other.from)
+                && orientation == other.orientation
     }
 
-    override fun hashCode(): Int
-    {
-        var result = 31 * (to.hashCode() + from.hashCode())
-        result = 31 * result + orientation.hashCode()
-        return result
-    }
+    override fun hashCode() = 31 * (to.hashCode() + from.hashCode()) * 31 + orientation.hashCode()
 }

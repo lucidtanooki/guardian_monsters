@@ -18,27 +18,31 @@ import de.limbusdev.guardianmonsters.guardians.monsters.Team;
 
 public class BattleQueue extends Observable
 {
+    // ............................................................................... Inner Classes
+    public enum Message { NEXT, NEWROUND }
 
-    public enum Message {
-        NEXT, NEWROUND,
-    }
-
-    public class QueueSignal {
+    public class QueueSignal
+    {
         public Message message;
         public BattleQueue queue;
 
-        public QueueSignal(Message message) {
+        public QueueSignal(Message message)
+        {
             this.queue = BattleQueue.this;
             this.message = message;
         }
     }
 
+
+    // .................................................................................. Properties
     private CombatTeam combatTeamLeft, combatTeamRight;
     private Array<AGuardian> currentRound;
     private Array<AGuardian> nextRound;
 
     private Team left, right;
 
+
+    // ................................................................................ Constructors
     public BattleQueue(Team left, Team right)
     {
         this.left = left;

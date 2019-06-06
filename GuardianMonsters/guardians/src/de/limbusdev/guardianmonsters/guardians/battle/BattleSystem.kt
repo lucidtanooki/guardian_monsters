@@ -36,8 +36,9 @@ class BattleSystem
 ) {
     // .................................................................................. Properties
     // .............................................................. public
-    val queue   : BattleQueue
-    val result  : BattleResult
+    val queue           : BattleQueue
+    val result          : BattleResult
+    val isWildEncounter : Boolean = isWildEncounter
 
     // .............................................................. private
     private val defaultAiPlayer: DefaultAIPlayer
@@ -52,7 +53,7 @@ class BattleSystem
     private var targetChosen            : Boolean = false
     private var attackChosen            : Boolean = false
     private var areaChosen              : Boolean = false
-    private val isWildEncounter         : Boolean = isWildEncounter
+
 
     private var latestAttackReport      : AttackCalculationReport? = null
     private var latestAreaAttackReports : Array<AttackCalculationReport> = Array()

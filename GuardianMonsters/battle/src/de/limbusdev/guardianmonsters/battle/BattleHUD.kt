@@ -388,7 +388,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
         // ......................................................................................... battle system
         battleSystemCallbacks = object : BattleSystem.Callbacks()
         {
-            override fun onBanningWilduardian(bannedGuardian: AGuardian, item: ChakraCrystalItem, fieldPos: Int)
+            override fun onBanningWildGuardian(bannedGuardian: AGuardian, item: ChakraCrystalItem, fieldPos: Int)
             {
                 battleStateSwitcher.toAnimation()
                 infoLabelWidget.setWholeText(BattleStringBuilder.tryingToBanGuardian(bannedGuardian, item))

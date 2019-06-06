@@ -224,7 +224,7 @@ public class MovementSystem extends EntitySystem {
                         for(int i=0; i<ma.monsters.size; i++) {
                             guardianProbabilities.put(ma.monsters.get(i), ma.monsterProbabilities.get(i));
                         }
-                        Team oppTeam = BattleFactory.getInstance().createOpponentTeam(
+                        Team oppTeam = BattleFactory.INSTANCE.createOpponentTeam(
                             guardianProbabilities,ma.teamSizeProbabilities,1,1
                         );
                         ecs.hud.battleScreen.init(Components.team.get(ecs.hero).team, oppTeam);

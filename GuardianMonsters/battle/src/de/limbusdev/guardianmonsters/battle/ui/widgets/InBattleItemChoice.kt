@@ -7,12 +7,12 @@
  * *************************************************************************************************
  */
 
-package de.limbusdev.guardianmonsters.battle.ui.widgets;
+package de.limbusdev.guardianmonsters.battle.ui.widgets
 
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin
 
-import de.limbusdev.guardianmonsters.guardians.battle.BattleSystem;
-import de.limbusdev.guardianmonsters.guardians.items.Inventory;
+import de.limbusdev.guardianmonsters.guardians.battle.BattleSystem
+import de.limbusdev.guardianmonsters.guardians.items.Inventory
 
 /**
  * InBattleItemChoice
@@ -20,10 +20,4 @@ import de.limbusdev.guardianmonsters.guardians.items.Inventory;
  * @author Georg Eckert 2018
  */
 
-public class InBattleItemChoice extends BattleWidget
-{
-    public InBattleItemChoice(Skin inventorySkin, Inventory inventory, BattleSystem battleSystem)
-    {
-
-    }
-}
+class InBattleItemChoice(inventorySkin: Skin, inventory: Inventory, battleSystem: BattleSystem) : BattleWidget()

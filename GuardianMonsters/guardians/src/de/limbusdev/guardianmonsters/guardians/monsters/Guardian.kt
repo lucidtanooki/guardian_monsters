@@ -9,7 +9,7 @@ import de.limbusdev.guardianmonsters.guardians.abilities.IAbilityGraph
  */
 class Guardian internal constructor(UUID: String) : AGuardian(UUID)
 {
-// ............................................................................................. CONSTRUCTOR
+// ..................................................................................... CONSTRUCTOR
 
 /**
  * The protected constructor makes it available from the [AGuardianFactory] only.

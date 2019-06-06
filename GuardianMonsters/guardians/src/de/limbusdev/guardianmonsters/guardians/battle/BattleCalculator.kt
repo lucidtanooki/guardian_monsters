@@ -75,17 +75,20 @@ object BattleCalculator
         when (attacker.individualStatistics.statusEffect)
         {
             StatusEffect.BLIND ->
+                // Hit the enemy with a change of 34%
                 if (MathUtils.randomBoolean(0.66f))
                 {
                     report.statusEffectPreventedAttack = true
                     return report
                 }
             StatusEffect.SLEEPING ->
+                // Stay asleep at a chance of 66%
                 if (MathUtils.randomBoolean(0.66f))
                 {
                     report.statusEffectPreventedAttack = true
                     return report
                 }
+                // Wake up
                 else
                 {
                     attacker.individualStatistics.statusEffect = StatusEffect.HEALTHY

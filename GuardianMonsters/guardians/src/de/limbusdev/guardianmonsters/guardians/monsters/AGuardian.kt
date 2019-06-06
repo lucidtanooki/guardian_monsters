@@ -1,5 +1,6 @@
 package de.limbusdev.guardianmonsters.guardians.monsters
 
+import de.limbusdev.guardianmonsters.guardians.Element
 import de.limbusdev.guardianmonsters.guardians.abilities.IAbilityGraph
 import java.util.*
 
@@ -61,12 +62,13 @@ abstract class AGuardian protected constructor(val uuid: String) : Observable()
     override fun hashCode(): Int = uuid.hashCode()
 
     // ........................................................... delegations: IndividualStatistics
-    val stats: IndividualStatistics get() = individualStatistics
+    val stats   : IndividualStatistics get() = individualStatistics
+    val species : SpeciesDescription   get() = speciesDescription
+    fun isOfElement(element: Element) : Boolean = species.getElements(currentForm).contains(element, false)
+
 
     // ................................................................... delegations: AbilityGraph
+    val currentForm : Int get() = abilityGraph.currentForm;
 
-    enum class UpdateType
-    {
-        UNCHANGED, ABILITIES, STATS
-    }
+    enum class UpdateType { UNCHANGED, ABILITIES, STATS }
 }

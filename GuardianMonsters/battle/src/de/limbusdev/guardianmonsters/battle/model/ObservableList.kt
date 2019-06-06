@@ -6,7 +6,7 @@ package de.limbusdev.guardianmonsters.battle.model
 
 interface ObservableList<T>
 {
-    fun addObserver(o: ListObserver<*>)
+    fun addObserver(o: ListObserver<T>)
     fun clearObservers()
     fun notifyObserversRemove(item: T)
     fun notifyObserversAdd(item: T)

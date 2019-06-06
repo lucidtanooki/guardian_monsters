@@ -27,7 +27,6 @@ class SpeciesDescriptionService private constructor (jsonSpeciesDescriptions: St
         }
     }
 
-
     override fun getSpeciesDescription(speciesID: Int): SpeciesDescription
     {
         return speciesDB.get(speciesID)
@@ -37,7 +36,6 @@ class SpeciesDescriptionService private constructor (jsonSpeciesDescriptions: St
     {
         return speciesDB.get(speciesID).getNameID(form)
     }
-
 
     override fun destroy() { instance = null }
 

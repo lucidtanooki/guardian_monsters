@@ -23,7 +23,7 @@ class BattleResult(team: Team, droppedItems: Array<Item>)
     private val gainedEXP    : ArrayMap<AGuardian, Int> = ArrayMap()
     private val droppedItems : Array<Item>
 
-    
+
     // ................................................................................ Constructors
     init
     {

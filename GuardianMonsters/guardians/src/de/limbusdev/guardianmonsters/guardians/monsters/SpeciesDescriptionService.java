@@ -20,11 +20,11 @@ public class SpeciesDescriptionService implements ISpeciesDescriptionService
     private SpeciesDescriptionService(String jsonSpeciesDescriptions)
     {
         speciesDB = new ArrayMap<>();
-        JsonValue rootElement = JSONGuardianParser.parseGuardianList(jsonSpeciesDescriptions);
+        JsonValue rootElement = JSONGuardianParser.INSTANCE.parseGuardianList(jsonSpeciesDescriptions);
 
         for (int i = 0; i < rootElement.size; i++)
         {
-            SpeciesDescription info = JSONGuardianParser.parseGuardian(rootElement.get(i));
+            SpeciesDescription info = JSONGuardianParser.INSTANCE.parseGuardian(rootElement.get(i));
             speciesDB.put(info.getID(),info);
         }
     }

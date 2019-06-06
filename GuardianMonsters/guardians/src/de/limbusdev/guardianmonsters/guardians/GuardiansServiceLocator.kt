@@ -6,6 +6,7 @@ import de.limbusdev.guardianmonsters.guardians.items.IItemService
 import de.limbusdev.guardianmonsters.guardians.items.Item
 import de.limbusdev.guardianmonsters.guardians.items.equipment.BodyEquipment
 import de.limbusdev.guardianmonsters.guardians.items.equipment.Equipment
+import de.limbusdev.guardianmonsters.guardians.items.medicine.AMedicalItem
 import de.limbusdev.guardianmonsters.guardians.items.medicine.MedicalItem
 import de.limbusdev.guardianmonsters.guardians.monsters.*
 
@@ -118,7 +119,7 @@ object GuardiansServiceLocator
     {
         override fun getItem(name: String): Item
         {
-            return MedicalItem("bread", 100, MedicalItem.Type.HP_CURE)
+            return MedicalItem("bread", 100, AMedicalItem.Type.HP_CURE)
         }
 
         override fun getEquipment(name: String): Equipment

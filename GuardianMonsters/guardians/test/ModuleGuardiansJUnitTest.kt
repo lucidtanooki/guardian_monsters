@@ -21,6 +21,7 @@ import de.limbusdev.guardianmonsters.guardians.items.equipment.BodyPart
 import de.limbusdev.guardianmonsters.guardians.items.equipment.FootEquipment
 import de.limbusdev.guardianmonsters.guardians.items.equipment.HandEquipment
 import de.limbusdev.guardianmonsters.guardians.items.equipment.HeadEquipment
+import de.limbusdev.guardianmonsters.guardians.items.medicine.AMedicalItem
 import de.limbusdev.guardianmonsters.guardians.items.medicine.MedicalItem
 import de.limbusdev.guardianmonsters.guardians.monsters.*
 import org.junit.Assert.*
@@ -281,15 +282,15 @@ class ModuleGuardiansJUnitTest
         assertEquals(expectedItem, item)
 
         item = itemService.getItem("bread")
-        expectedItem = MedicalItem("bread", 100, MedicalItem.Type.HP_CURE)
+        expectedItem = MedicalItem("bread", 100, AMedicalItem.Type.HP_CURE)
         assertEquals(expectedItem, item)
 
         item = itemService.getItem("medicine-blue")
-        expectedItem = MedicalItem("medicine-blue", 10, MedicalItem.Type.MP_CURE)
+        expectedItem = MedicalItem("medicine-blue", 10, AMedicalItem.Type.MP_CURE)
         assertEquals(expectedItem, item)
 
         item = itemService.getItem("angel-tear")
-        expectedItem = MedicalItem("angel-tear", 50, MedicalItem.Type.REVIVE)
+        expectedItem = MedicalItem("angel-tear", 50, AMedicalItem.Type.REVIVE)
         assertEquals(expectedItem, item)
 
         item = itemService.getItem("sword-wood")

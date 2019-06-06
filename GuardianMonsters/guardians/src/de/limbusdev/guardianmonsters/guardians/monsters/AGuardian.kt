@@ -61,7 +61,7 @@ abstract class AGuardian protected constructor(val uuid: String) : Observable()
     override fun hashCode(): Int = uuid.hashCode()
 
     // ........................................................... delegations: IndividualStatistics
-    val stats: IndividualStatistics = individualStatistics
+    val stats: IndividualStatistics get() = individualStatistics
 
     // ................................................................... delegations: AbilityGraph
 

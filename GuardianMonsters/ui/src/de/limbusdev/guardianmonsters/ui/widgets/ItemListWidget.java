@@ -132,9 +132,9 @@ public class ItemListWidget extends Group implements Listener<ItemSignal> {
     @Override
     public void receive(Signal<ItemSignal> signal, ItemSignal itemSignal) {
 
-        if(itemSignal.message == ItemSignal.Message.DELETED) {
+        if(itemSignal.getMessage() == ItemSignal.Message.DELETED) {
             // Refresh Inventory List, if last item of it's kind got removed
-            if (!inventory.containsItem(itemSignal.item)) {
+            if (!inventory.containsItem(itemSignal.getItem())) {
                 init(inventory, currentFilters);
             }
         }

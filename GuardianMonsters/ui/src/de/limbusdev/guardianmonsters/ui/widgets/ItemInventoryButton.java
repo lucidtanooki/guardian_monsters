@@ -70,7 +70,7 @@ public class ItemInventoryButton extends TextButton implements Listener<ItemSign
 
     @Override
     public void receive(Signal<ItemSignal> signal, ItemSignal itemSignal) {
-        if(this.item.equals(itemSignal.item)) {
+        if(this.item.equals(itemSignal.getItem())) {
             Integer amount = inventory.getItemAmount(item);
             if (amount > 0) {
                 counter.setText(amount.toString());

@@ -595,7 +595,7 @@ class ModuleGuardiansJUnitTest
 
         // Battle System Initialization
         val battleEnds = booleanArrayOf(false)
-        val bs = BattleSystem(team, oppTeam, null, true)
+        val bs = BattleSystem(left = team, right = oppTeam, isWildEncounter = true)
 
         val bsCB = object : BattleSystem.Callbacks() {
             override fun onBattleEnds(winnerSide: Boolean) {

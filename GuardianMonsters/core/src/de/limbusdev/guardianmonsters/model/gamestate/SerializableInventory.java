@@ -40,7 +40,7 @@ public class SerializableInventory {
 
         for(int i=0; i<sInventory.items.length; i++) {
             for(int j=0; j<sInventory.amount[i]; j++) {
-                inventory.putItemInInventory(items.getItem(sInventory.items[i]));
+                inventory.putIntoInventory(items.getItem(sInventory.items[i]));
             }
         }
 

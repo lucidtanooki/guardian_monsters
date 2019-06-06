@@ -6,7 +6,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.ArrayMap;
 
 import de.limbusdev.guardianmonsters.guardians.battle.BattleSystem;
 import de.limbusdev.guardianmonsters.guardians.items.ChakraCrystalItem;
@@ -14,7 +13,6 @@ import de.limbusdev.guardianmonsters.guardians.items.Inventory;
 import de.limbusdev.guardianmonsters.guardians.items.Item;
 import de.limbusdev.guardianmonsters.guardians.items.medicine.AMedicalItem;
 import de.limbusdev.guardianmonsters.guardians.items.medicine.MedicalItem;
-import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.Team;
 import de.limbusdev.guardianmonsters.inventory.ui.widgets.team.MonsterListWidget;
 import de.limbusdev.guardianmonsters.services.Services;
@@ -62,7 +60,7 @@ public class ItemChoice extends Group
         {
             if(chosenItem instanceof AMedicalItem) {
                 AMedicalItem med = (AMedicalItem) chosenItem;
-                inventory.takeItemFromInventory(chosenItem);
+                inventory.takeFromInventory(chosenItem);
                 med.apply(team.get(i));
                 if(chosenItem instanceof MedicalItem) {
                     if(((MedicalItem)chosenItem).getType() == MedicalItem.Type.REVIVE) {
@@ -104,7 +102,7 @@ public class ItemChoice extends Group
                     }
                     detailViewWidget.remove();
                     remove();
-                    inventory.takeItemFromInventory(chosenItem);
+                    inventory.takeFromInventory(chosenItem);
                     battleSystem.banWildGuardian((ChakraCrystalItem) item);
                 });
 

@@ -23,8 +23,6 @@ import de.limbusdev.guardianmonsters.guardians.items.equipment.Equipment
  */
 class ItemService private constructor(jsonItemStrings: ArrayMap<String, String>) : IItemService
 {
-    // .................................................................................. Properties
-
     // ................................................................................ Constructors
     init
     {

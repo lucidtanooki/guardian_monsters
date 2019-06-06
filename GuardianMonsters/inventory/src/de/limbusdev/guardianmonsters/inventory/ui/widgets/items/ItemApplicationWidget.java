@@ -6,14 +6,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Align;
-import com.badlogic.gdx.utils.ArrayMap;
 import com.badlogic.gdx.utils.I18NBundle;
 
 import de.limbusdev.guardianmonsters.guardians.items.Inventory;
 import de.limbusdev.guardianmonsters.guardians.items.Item;
 import de.limbusdev.guardianmonsters.guardians.items.equipment.Equipment;
 import de.limbusdev.guardianmonsters.guardians.items.medicine.AMedicalItem;
-import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.Team;
 import de.limbusdev.guardianmonsters.inventory.ui.widgets.team.MonsterListWidget;
 import de.limbusdev.guardianmonsters.services.Services;
@@ -74,7 +72,7 @@ public class ItemApplicationWidget extends Group implements MonsterListWidget.Ca
         reassuranceWidget.question.setText(i18n.format("reassurance-throwaway", i18n.get(item.getName())));
         reassuranceWidget.buttonYes.addListener(new SimpleClickListener(() -> {
 
-                inventory.takeItemFromInventory(item);
+                inventory.takeFromInventory(item);
                 if(inventory.getItems().containsKey(item)) {
                     reassuranceWidget.remove();
                 } else {
@@ -139,12 +137,12 @@ public class ItemApplicationWidget extends Group implements MonsterListWidget.Ca
     @Override
     public boolean onButton(int i) {
 
-        inventory.takeItemFromInventory(item);
+        inventory.takeFromInventory(item);
         if(item instanceof Equipment) {
 
             Item replaced = team.get(i).getIndividualStatistics().giveEquipment((Equipment)item);
             if(replaced != null) {
-                inventory.putItemInInventory(replaced);
+                inventory.putIntoInventory(replaced);
             }
         } else if (item instanceof AMedicalItem) {
 
@@ -153,7 +151,7 @@ public class ItemApplicationWidget extends Group implements MonsterListWidget.Ca
 
 
 
-        boolean empty = !(inventory.getItemAmount(item) > 0);
+        boolean empty = !(inventory.getAmountOf(item) > 0);
         if(empty) remove();
         return !empty;
     }

@@ -104,16 +104,16 @@ public class EntityFactory
 
         // Inventory
         Inventory inventory = new Inventory();
-        inventory.putItemInInventory(items.getItem("bread"));
-        inventory.putItemInInventory(items.getItem("bread"));
-        inventory.putItemInInventory(items.getItem("bread"));
-        inventory.putItemInInventory(items.getItem("bread"));
-        inventory.putItemInInventory(items.getItem("potion-blue"));
-        inventory.putItemInInventory(items.getItem("potion-blue"));
-        inventory.putItemInInventory(items.getItem("potion-blue"));
-        inventory.putItemInInventory(items.getItem("angel-tear"));
-        inventory.putItemInInventory(items.getItem("sword-wood"));
-        inventory.putItemInInventory(items.getItem("claws-wood"));
+        inventory.putIntoInventory(items.getItem("bread"));
+        inventory.putIntoInventory(items.getItem("bread"));
+        inventory.putIntoInventory(items.getItem("bread"));
+        inventory.putIntoInventory(items.getItem("bread"));
+        inventory.putIntoInventory(items.getItem("potion-blue"));
+        inventory.putIntoInventory(items.getItem("potion-blue"));
+        inventory.putIntoInventory(items.getItem("potion-blue"));
+        inventory.putIntoInventory(items.getItem("angel-tear"));
+        inventory.putIntoInventory(items.getItem("sword-wood"));
+        inventory.putIntoInventory(items.getItem("claws-wood"));
 
         InventoryComponent inventoryComp = new InventoryComponent(inventory);
         hero.add(inventoryComp);

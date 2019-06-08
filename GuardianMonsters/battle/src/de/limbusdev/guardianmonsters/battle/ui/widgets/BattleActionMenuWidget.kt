@@ -49,10 +49,10 @@ class BattleActionMenuWidget
 
     fun setCallbacks
     (
-            backCB: ()    -> Unit = {},
-            bagCB: ()     -> Unit = {},
-            monsterCB: () -> Unit = {},
-            extraCB: ()   -> Unit = {}
+            backCB    : () -> Unit = {},
+            bagCB     : () -> Unit = {},
+            monsterCB : () -> Unit = {},
+            extraCB   : () -> Unit = {}
     ) {
         this.backCB     = backCB
         this.bagCB      = bagCB

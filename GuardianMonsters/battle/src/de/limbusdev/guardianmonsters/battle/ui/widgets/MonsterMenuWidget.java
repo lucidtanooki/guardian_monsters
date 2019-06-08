@@ -42,7 +42,7 @@ public class MonsterMenuWidget extends SevenButtonsWidget
         {
             if(key > 6) break;
             AGuardian m = team.get(key);
-            TextButton bwi = new BattleHUDTextButton(Services.getL18N().getLocalizedGuardianName(m), skin, key, Element.AIR);
+            TextButton bwi = new BattleHUDTextButton(Services.getL18N().getLocalizedGuardianName(m), getSkin(), key, Element.AIR);
 
             replaceButton(bwi,key);
 

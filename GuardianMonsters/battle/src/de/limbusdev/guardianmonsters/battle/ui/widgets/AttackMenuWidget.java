@@ -29,7 +29,7 @@ public class AttackMenuWidget extends SevenButtonsWidget
     {
         for(Integer i : getButtons().keys())
         {
-            getButton(i).setStyle(skin.get("b-attack-info", TextButton.TextButtonStyle.class));
+            getButton(i).setStyle(getSkin().get("b-attack-info", TextButton.TextButtonStyle.class));
         }
     }
 
@@ -51,12 +51,11 @@ public class AttackMenuWidget extends SevenButtonsWidget
         // for every attack, activate a button
         for (int i = 0; i < 7; i++)
         {
-            Ability.aID abilityID = guardian.getAbilityGraph().getActiveAbility(i);
-
-            if (abilityID != null) {
-
+            if(guardian.getAbilityGraph().getActiveAbilities().containsKey(i))
+            {
+                Ability.aID abilityID = guardian.getAbilityGraph().getActiveAbility(i);
                 Ability attack = GuardiansServiceLocator.INSTANCE.getAbilities().getAbility(abilityID);
-                setButtonStyle(i, skin, AssetPath.Skin.INSTANCE.attackButtonStyle(attack.getElement()));
+                setButtonStyle(i, getSkin(), AssetPath.Skin.INSTANCE.attackButtonStyle(attack.getElement()));
                 setButtonText(i, Services.getL18N().Abilities().get(attack.getName()));
 
                 enableButton(i);

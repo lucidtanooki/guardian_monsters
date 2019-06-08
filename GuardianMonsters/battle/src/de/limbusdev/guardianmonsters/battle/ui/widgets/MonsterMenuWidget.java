@@ -23,7 +23,8 @@ public class MonsterMenuWidget extends SevenButtonsWidget
 
     public MonsterMenuWidget(Skin skin, Callback.ButtonID callbacks)
     {
-        super(skin, callbacks, order);
+        // TODO super(skin, callbacks, order);
+        super();
     }
 
     public void init(BattleSystem battleSystem, boolean side)

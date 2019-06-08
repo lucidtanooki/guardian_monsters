@@ -160,9 +160,15 @@ class Team
         return ko
     }
 
+    /** Returns the keys of all team slots. Includes empty slots. */
     fun keys() : Array<Int>
     {
         return (IntArray(capacity) {it}).toTypedArray()
+    }
+
+    fun occupiedSlotsKeys() : Array<Int>
+    {
+        return (IntArray(slots.size) {it}).toTypedArray()
     }
 
     fun values() : List<AGuardian>

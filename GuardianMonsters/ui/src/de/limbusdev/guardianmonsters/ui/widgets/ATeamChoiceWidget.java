@@ -54,7 +54,7 @@ public abstract class ATeamChoiceWidget extends Group {
         buttons.clearChildren();
         addActor(buttons);
 
-        for(final int key : team.keys())
+        for(final int key : team.occupiedSlotsKeys())
         {
             AGuardian m = team.get(key);
             Image preview = new Image(Services.getMedia().getMonsterMiniSprite(m.getSpeciesDescription().getID(), m.getAbilityGraph().getCurrentForm()));

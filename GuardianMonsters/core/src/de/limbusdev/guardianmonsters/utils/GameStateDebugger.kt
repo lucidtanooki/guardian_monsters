@@ -28,94 +28,50 @@ import de.limbusdev.guardianmonsters.Constant.DEBUG_MODE
 
 class GameStateDebugger(private val game: Game)
 {
-    private fun setUpTestInventory()
+    fun startDebugging()
     {
-        val ACTIVE_TEAM_SIZE_HERO = 3
-        val gf = GuardiansServiceLocator.guardianFactory
-        val heroTeam = Team(3, 3, ACTIVE_TEAM_SIZE_HERO)
-        heroTeam += gf.createGuardian(1, 1)
-        heroTeam += gf.createGuardian(2, 1)
-        heroTeam += gf.createGuardian(3, 1)
-
-        // Enable Abilities
-        heroTeam[0].abilityGraph.activateNode(0)
-        heroTeam[0].abilityGraph.activateNode(13)
-        heroTeam[0].abilityGraph.activateNode(11)
-        heroTeam[0].abilityGraph.activateNode(15)
-        heroTeam[0].abilityGraph.setActiveAbility(1, 13)
-        heroTeam[0].abilityGraph.activateNode(5)
-        heroTeam[0].abilityGraph.setActiveAbility(2, 5)
-        heroTeam[0].abilityGraph.activateNode(20)
-        heroTeam[0].abilityGraph.setActiveAbility(3, 20)
-        //        heroTeam.get(0).getAbilityGraph().activateNode(30);
-        //        heroTeam.get(0).getAbilityGraph().setActiveAbility(4,30);
-        //        heroTeam.get(0).getAbilityGraph().activateNode(35);
-        //        heroTeam.get(0).getAbilityGraph().setActiveAbility(5,35);
-        heroTeam[0].abilityGraph.activateNode(21)
-        heroTeam[0].abilityGraph.activateNode(23)
-        heroTeam[0].abilityGraph.activateNode(89)
-        heroTeam[0].abilityGraph.activateNode(90)
-        heroTeam[0].abilityGraph.activateNode(80)
-        heroTeam[0].abilityGraph.activateNode(81)
-        heroTeam[0].abilityGraph.activateNode(82)
-        heroTeam[0].abilityGraph.activateNode(83)
-        heroTeam[0].abilityGraph.activateNode(84)
-        heroTeam[0].abilityGraph.activateNode(85)
-        heroTeam[0].individualStatistics.earnEXP(200)
-        heroTeam[0].individualStatistics.levelUp()
-        heroTeam[0].individualStatistics.levelUp()
-        heroTeam[0].individualStatistics.levelUp()
-        heroTeam[0].individualStatistics.levelUp()
-        heroTeam[0].individualStatistics.levelUp()
-        heroTeam[0].individualStatistics.levelUp()
-        heroTeam[0].individualStatistics.levelUp()
-        heroTeam[0].individualStatistics.levelUp()
-        heroTeam[0].individualStatistics.levelUp()
-        heroTeam[0].individualStatistics.levelUp()
-        heroTeam[0].individualStatistics.levelUp()
-        heroTeam[0].individualStatistics.levelUp()
-        heroTeam[0].individualStatistics.levelUp()
-        heroTeam[0].individualStatistics.levelUp()
-
-        heroTeam[0].abilityGraph.activateNode(91)
+        when(DEBUG_MODE)
+        {
+            DebugMode.BATTLE            -> setUpTestBattle()
+            DebugMode.INVENTORY         -> testInventoryScreen()
+            DebugMode.WORLD_UI          -> setUpTestWorldUI()
+            DebugMode.BATTLE_SYSTEM     -> TestBattleSystem()
+            DebugMode.MONSTER_PARSING   -> testMonsterParsing()
+            DebugMode.RESULT_SCREEN     -> testResultScreen()
+            DebugMode.METAMORPHOSIS     -> testMetamorphosisScreen()
+            DebugMode.GUARDOSPHERE      -> testGuardoSphereScreen()
+            else                        -> setUpTestWorld()
+        }
+    }
 
 
-        heroTeam[1].abilityGraph.activateNode(5)
-        heroTeam[1].abilityGraph.setActiveAbility(1, 5)
-        heroTeam[1].abilityGraph.activateNode(60)
-        heroTeam[1].abilityGraph.setActiveAbility(2, 60)
-        heroTeam[2].abilityGraph.activateNode(70)
-        heroTeam[2].abilityGraph.setActiveAbility(1, 70)
-        heroTeam[2].abilityGraph.activateNode(30)
-        heroTeam[2].abilityGraph.setActiveAbility(2, 30)
+    // .............................................................................. Testing Setups
+    private fun setUpTestWorld()
+    {
+        val gameScreen =
+        if(SaveGameManager.doesGameSaveExist())
+        {
+            val state = SaveGameManager.loadSaveGame()
+            WorldScreen(state.map, 1, true)
+        }
+        else
+        {
+            WorldScreen(Constant.startMap, 1, false)
+        }
 
-        val inventory = Inventory()
+        Services.getScreenManager().pushScreen(gameScreen)
+    }
 
-        val items = GuardiansServiceLocator.items
+    private fun setUpTestWorldUI()
+    {
+        game.screen = WorldScreen(1, 1, false)
+    }
 
-        inventory.putIntoInventory(items.getItem("sword-barb-steel"))
-        inventory.putIntoInventory(items.getItem("bread"))
-        inventory.putIntoInventory(items.getItem("bread"))
-        inventory.putIntoInventory(items.getItem("potion-blue"))
-        inventory.putIntoInventory(items.getItem("potion-blue"))
-        inventory.putIntoInventory(items.getItem("potion-red"))
-        inventory.putIntoInventory(items.getItem("medicine-blue"))
-        inventory.putIntoInventory(items.getItem("angel-tear"))
-        inventory.putIntoInventory(items.getItem("guardian-crystal-none"))
-        inventory.putIntoInventory(items.getItem("sword-excalibur"))
-        inventory.putIntoInventory(items.getItem("sword-wood"))
-        inventory.putIntoInventory(items.getItem("claws-rusty"))
-        inventory.putIntoInventory(items.getItem("sword-silver"))
-        inventory.putIntoInventory(items.getItem("sword-knightly-steel"))
-        inventory.putIntoInventory(items.getItem("relict-earth"))
-        inventory.putIntoInventory(items.getItem("relict-demon"))
-        inventory.putIntoInventory(items.getItem("relict-lightning"))
-        inventory.putIntoInventory(items.getItem("relict-water"))
-        inventory.putIntoInventory(items.getItem("helmet-iron"))
-        inventory.putIntoInventory(items.getItem("shield-iron"))
-        inventory.putIntoInventory(items.getItem("shoes-leather"))
+    private fun testInventoryScreen()
+    {
+        val inventory = setUpTestInventory()
+        val heroTeam = setUpTestTeam()
 
-        inventory.sortItemsByID()
         val ivs = InventoryScreen(heroTeam, inventory)
         game.screen = ivs
     }
@@ -174,22 +130,6 @@ class GameStateDebugger(private val game: Game)
         val battleScreen = BattleScreen(inventory)
         battleScreen.init(heroTeam, oppoTeam)
         game.screen = battleScreen
-    }
-
-    private fun setUpTestWorld()
-    {
-        if(SaveGameManager.doesGameSaveExist())
-        {
-            val state = SaveGameManager.loadSaveGame()
-            game.screen = WorldScreen(state.map, 1, true)
-        }
-        else
-            game.screen = WorldScreen(Constant.startMap, 1, false)
-    }
-
-    private fun setUpTestWorldUI()
-    {
-        game.screen = WorldScreen(1, 1, false)
     }
 
     private fun TestBattleSystem()
@@ -291,19 +231,103 @@ class GameStateDebugger(private val game: Game)
         game.screen = GuardoSphereScreen(heroTeam, guardoSphere)
     }
 
-    fun startDebugging()
+
+    // .............................................................................. Helper Methods
+
+    private fun setUpTestTeam() : Team
     {
-        when(DEBUG_MODE)
-        {
-            DebugMode.BATTLE            -> setUpTestBattle()
-            DebugMode.INVENTORY         -> setUpTestInventory()
-            DebugMode.WORLD_UI          -> setUpTestWorldUI()
-            DebugMode.BATTLE_SYSTEM     -> TestBattleSystem()
-            DebugMode.MONSTER_PARSING   -> testMonsterParsing()
-            DebugMode.RESULT_SCREEN     -> testResultScreen()
-            DebugMode.METAMORPHOSIS     -> testMetamorphosisScreen()
-            DebugMode.GUARDOSPHERE      -> testGuardoSphereScreen()
-            else                        -> setUpTestWorld()
-        }
+        val ACTIVE_TEAM_SIZE_HERO = 3
+        val gf = GuardiansServiceLocator.guardianFactory
+        val heroTeam = Team(3, 3, ACTIVE_TEAM_SIZE_HERO)
+        heroTeam += gf.createGuardian(1, 1)
+        heroTeam += gf.createGuardian(2, 1)
+        heroTeam += gf.createGuardian(3, 1)
+
+        // Enable Abilities
+        heroTeam[0].abilityGraph.activateNode(0)
+        heroTeam[0].abilityGraph.activateNode(13)
+        heroTeam[0].abilityGraph.activateNode(11)
+        heroTeam[0].abilityGraph.activateNode(15)
+        heroTeam[0].abilityGraph.setActiveAbility(1, 13)
+        heroTeam[0].abilityGraph.activateNode(5)
+        heroTeam[0].abilityGraph.setActiveAbility(2, 5)
+        heroTeam[0].abilityGraph.activateNode(20)
+        heroTeam[0].abilityGraph.setActiveAbility(3, 20)
+        //        heroTeam.get(0).getAbilityGraph().activateNode(30);
+        //        heroTeam.get(0).getAbilityGraph().setActiveAbility(4,30);
+        //        heroTeam.get(0).getAbilityGraph().activateNode(35);
+        //        heroTeam.get(0).getAbilityGraph().setActiveAbility(5,35);
+        heroTeam[0].abilityGraph.activateNode(21)
+        heroTeam[0].abilityGraph.activateNode(23)
+        heroTeam[0].abilityGraph.activateNode(89)
+        heroTeam[0].abilityGraph.activateNode(90)
+        heroTeam[0].abilityGraph.activateNode(80)
+        heroTeam[0].abilityGraph.activateNode(81)
+        heroTeam[0].abilityGraph.activateNode(82)
+        heroTeam[0].abilityGraph.activateNode(83)
+        heroTeam[0].abilityGraph.activateNode(84)
+        heroTeam[0].abilityGraph.activateNode(85)
+        heroTeam[0].individualStatistics.earnEXP(200)
+        heroTeam[0].individualStatistics.levelUp()
+        heroTeam[0].individualStatistics.levelUp()
+        heroTeam[0].individualStatistics.levelUp()
+        heroTeam[0].individualStatistics.levelUp()
+        heroTeam[0].individualStatistics.levelUp()
+        heroTeam[0].individualStatistics.levelUp()
+        heroTeam[0].individualStatistics.levelUp()
+        heroTeam[0].individualStatistics.levelUp()
+        heroTeam[0].individualStatistics.levelUp()
+        heroTeam[0].individualStatistics.levelUp()
+        heroTeam[0].individualStatistics.levelUp()
+        heroTeam[0].individualStatistics.levelUp()
+        heroTeam[0].individualStatistics.levelUp()
+        heroTeam[0].individualStatistics.levelUp()
+
+        heroTeam[0].abilityGraph.activateNode(91)
+
+
+        heroTeam[1].abilityGraph.activateNode(5)
+        heroTeam[1].abilityGraph.setActiveAbility(1, 5)
+        heroTeam[1].abilityGraph.activateNode(60)
+        heroTeam[1].abilityGraph.setActiveAbility(2, 60)
+        heroTeam[2].abilityGraph.activateNode(70)
+        heroTeam[2].abilityGraph.setActiveAbility(1, 70)
+        heroTeam[2].abilityGraph.activateNode(30)
+        heroTeam[2].abilityGraph.setActiveAbility(2, 30)
+
+        return heroTeam
+    }
+
+    private fun setUpTestInventory(): Inventory
+    {
+        val inventory = Inventory()
+
+        val items = GuardiansServiceLocator.items
+
+        inventory.putIntoInventory(items.getItem("sword-barb-steel"))
+        inventory.putIntoInventory(items.getItem("bread"))
+        inventory.putIntoInventory(items.getItem("bread"))
+        inventory.putIntoInventory(items.getItem("potion-blue"))
+        inventory.putIntoInventory(items.getItem("potion-blue"))
+        inventory.putIntoInventory(items.getItem("potion-red"))
+        inventory.putIntoInventory(items.getItem("medicine-blue"))
+        inventory.putIntoInventory(items.getItem("angel-tear"))
+        inventory.putIntoInventory(items.getItem("guardian-crystal-none"))
+        inventory.putIntoInventory(items.getItem("sword-excalibur"))
+        inventory.putIntoInventory(items.getItem("sword-wood"))
+        inventory.putIntoInventory(items.getItem("claws-rusty"))
+        inventory.putIntoInventory(items.getItem("sword-silver"))
+        inventory.putIntoInventory(items.getItem("sword-knightly-steel"))
+        inventory.putIntoInventory(items.getItem("relict-earth"))
+        inventory.putIntoInventory(items.getItem("relict-demon"))
+        inventory.putIntoInventory(items.getItem("relict-lightning"))
+        inventory.putIntoInventory(items.getItem("relict-water"))
+        inventory.putIntoInventory(items.getItem("helmet-iron"))
+        inventory.putIntoInventory(items.getItem("shield-iron"))
+        inventory.putIntoInventory(items.getItem("shoes-leather"))
+
+        inventory.sortItemsByID()
+
+        return inventory
     }
 }

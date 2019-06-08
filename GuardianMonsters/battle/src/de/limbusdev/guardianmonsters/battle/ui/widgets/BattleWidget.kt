@@ -47,20 +47,14 @@ abstract class BattleWidget : WidgetGroup()
 
     open fun fadeOutAndRemove(): Boolean
     {
-        return if(parent != null)
-        {
-            addAction(Actions.sequence(Actions.alpha(1f), Actions.alpha(0f, .3f), Actions.run(runnableRemove)))
-            true
-        }
-        else
-        {
-            false
-        }
+        parent?.addAction(Actions.sequence(Actions.alpha(1f), Actions.alpha(0f, .3f), Actions.run(runnableRemove)))
+
+        return (parent != null)
     }
 
     fun addToStage(stage: Stage)
     {
-        if (parent == null) { stage.addActor(this) }
+        stage.addActor(this)
     }
 
     private fun superRemove(): Boolean = super.remove()

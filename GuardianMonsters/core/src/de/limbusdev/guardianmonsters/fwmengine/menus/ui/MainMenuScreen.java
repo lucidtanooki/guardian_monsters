@@ -219,6 +219,7 @@ public class MainMenuScreen implements Screen {
 
 
     public void setUpIntro(Skin skin) {
+
         TextureAtlas logos = Services.getMedia().getTextureAtlas(AssetPath.Spritesheet.LOGOS);
         this.introScreen = new Group();
         Image bg = new Image(skin.getDrawable("black"));

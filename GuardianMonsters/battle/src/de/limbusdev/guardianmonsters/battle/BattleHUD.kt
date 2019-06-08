@@ -194,10 +194,10 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
                 battleAnimationOnDoingNothingCallback)
         attackMenuAddOn = SevenButtonsWidget.CentralHalfButtonsAddOn(skin, attackMenuAddOnCallbacks)
 
-        attackMenu           = AttackMenuWidget(skin) { attackMenuCallbacks(it)     }
-        attackInfoMenu       = AttackMenuWidget(skin) { attackInfoMenuCallbacks(it) }
-        targetMenuWidget     = TargetMenuWidget(skin) { targetMenuCallbacks(it)     }
-        targetAreaMenuWidget = TargetMenuWidget(skin) { targetAreaMenuCallbacks(it) }
+        attackMenu           = AttackMenuWidget(skin) { ID -> attackMenuCallbacks(ID)     }
+        attackInfoMenu       = AttackMenuWidget(skin) { ID -> attackInfoMenuCallbacks(ID) }
+        targetMenuWidget     = TargetMenuWidget(skin) { ID -> targetMenuCallbacks(ID)     }
+        targetAreaMenuWidget = TargetMenuWidget(skin) { ID -> targetAreaMenuCallbacks(ID) }
 
         attackInfoMenuFrame    = BattleActionMenuWidget(skin) { }
         attackDetailBackButton = BattleActionMenuWidget(skin) { attackDetailLabelBackCB() }

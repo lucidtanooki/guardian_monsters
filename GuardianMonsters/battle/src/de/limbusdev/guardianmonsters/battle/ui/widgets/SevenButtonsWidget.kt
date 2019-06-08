@@ -23,6 +23,7 @@ import de.limbusdev.guardianmonsters.battle.ui.widgets.BattleHUDTextButton.LEFT
 import de.limbusdev.guardianmonsters.battle.ui.widgets.BattleHUDTextButton.RIGHT
 import de.limbusdev.guardianmonsters.battle.ui.widgets.BattleHUDTextButton.TOPLEFT
 import de.limbusdev.guardianmonsters.battle.ui.widgets.BattleHUDTextButton.TOPRIGHT
+import de.limbusdev.utils.extensions.set
 import ktx.actors.onClick
 
 open class SevenButtonsWidget
@@ -100,14 +101,17 @@ open class SevenButtonsWidget
 
     protected fun disableButton(index: Int)
     {
-        buttons.get(index).color = Color.GRAY
-        buttons.get(index).isDisabled = true
-        buttons.get(index).touchable = Touchable.disabled
+        buttons[index].apply {
+
+            color = Color.GRAY
+            isDisabled = true
+            touchable = Touchable.disabled
+        }
     }
 
     fun setButtonText(index: Int, text: String)
     {
-        buttons.get(index).setText(text)
+        buttons[index].setText(text)
     }
 
     fun setButtonText(index: Int, ability: Ability)
@@ -118,7 +122,7 @@ open class SevenButtonsWidget
     fun setButtonStyle(index: Int, skin: Skin, style: String)
     {
         val bs = skin.get(style, TextButton.TextButtonStyle::class.java)
-        buttons.get(index).style = bs
+        buttons[index].style = bs
     }
 
     fun setButtonStyle(index: Int, element: Element)
@@ -128,64 +132,56 @@ open class SevenButtonsWidget
         setButtonStyle(index, skin, styleString)
     }
 
-    protected fun getButton(index: Int): TextButton
-    {
-        return buttons.get(index)
-    }
+    protected fun getButton(index: Int): TextButton = buttons[index]
 
     protected fun replaceButton(button: TextButton, index: Int)
     {
         val removedButton = buttons.get(index)
         buttons.removeKey(index)
+
         button.setPosition(removedButton.x, removedButton.y, Align.bottomLeft)
         button.setScale(removedButton.scaleX, removedButton.scaleY)
         button.setSize(removedButton.width, removedButton.height)
         removedButton.remove()
 
-        buttons.put(index, button)
-        button.addListener(
-                object : com.badlogic.gdx.scenes.scene2d.utils.ClickListener() {
-                    override fun clicked(event: InputEvent?, x: Float, y: Float) {
-                        super.clicked(event, x, y)
-                        println("SevenButtonsWidget: Clicked button $index")
-                        if (!button.isDisabled) {
-                            callbacks!!.onClick(index)
-                        }
-                    }
-                }
-        )
+        buttons[index] = button
 
+        button.onClick {
+
+            println("SevenButtonsWidget: Clicked button $index")
+            if (!button.isDisabled) { callbacks!!.onClick(index) }
+        }
         addActor(button)
     }
 
 
-    class CentralHalfButtonsAddOn(protected var skin: Skin, private val callbacks: Callback.ButtonID) : BattleWidget() {
-        private val buttons: ArrayMap<Int, TextButton>
+    // ............................................................................... Inner Classes
 
-        init {
-            this.buttons = ArrayMap()
+    class CentralHalfButtonsAddOn
+    (
+            skin: Skin,
+            private val callbacks: Callback.ButtonID
+    )
+        : BattleWidget()
+    {
+        private val buttons: ArrayMap<Int, TextButton> = ArrayMap()
 
-            var tb: TextButton
-            tb = BattleHUDTextButton("", skin, 7, Element.NONE)
-            buttons.put(7, tb)
-            addActor(tb)
-            tb = BattleHUDTextButton("", skin, 8, Element.NONE)
-            tb.setTouchable(Touchable.disabled)
-            buttons.put(8, tb)
-            addActor(tb)
+        init
+        {
+            val button7 = BattleHUDTextButton("", skin, 7, Element.NONE)
+            buttons[7] = button7
+            addActor(button7)
+            val button8 = BattleHUDTextButton("", skin, 8, Element.NONE)
+            button8.touchable = Touchable.disabled
+            buttons[8] = button8
+            addActor(button8)
 
-            for (i in 7..8) {
-                val attButt = buttons.get(i)
-                attButt.addListener(
-                        object : ClickListener() {
-                            override fun clicked(event: InputEvent?, x: Float, y: Float) {
-                                super.clicked(event, x, y)
-                                if (!attButt.isDisabled) {
-                                    callbacks.onClick(i)
-                                }
-                            }
-                        }
-                )
+            for (i in 7..8)
+            {
+                buttons[i].onClick {
+
+                    if (!buttons[i].isDisabled) { callbacks.onClick(i) }
+                }
             }
         }
     }

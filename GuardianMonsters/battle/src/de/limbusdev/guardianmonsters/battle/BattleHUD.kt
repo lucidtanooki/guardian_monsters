@@ -2,6 +2,7 @@ package de.limbusdev.guardianmonsters.battle
 
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.actions.Actions
+import com.badlogic.gdx.scenes.scene2d.actions.Actions.delay
 import com.badlogic.gdx.utils.Align
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ArrayMap
@@ -37,6 +38,8 @@ import de.limbusdev.guardianmonsters.services.Services
 import de.limbusdev.guardianmonsters.ui.widgets.Callback
 
 import de.limbusdev.guardianmonsters.battle.ui.widgets.BattleHUDTextButton.CENTERTOP
+import ktx.actors.then
+import com.badlogic.gdx.scenes.scene2d.actions.Actions.run as runThis
 
 
 /**
@@ -199,14 +202,14 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
         targetMenuWidget     = TargetMenuWidget(skin) { ID -> targetMenuCallbacks(ID)     }
         targetAreaMenuWidget = TargetMenuWidget(skin) { ID -> targetAreaMenuCallbacks(ID) }
 
-        attackInfoMenuFrame    = BattleActionMenuWidget(skin) { }
-        attackDetailBackButton = BattleActionMenuWidget(skin) { attackDetailLabelBackCB() }
+        attackInfoMenuFrame    = BattleActionMenuWidget(skin)
+        attackDetailBackButton = BattleActionMenuWidget(skin, backCB = attackDetailLabelBackCB )
         actionMenu             = BattleActionMenuWidget(
                 skin,
-                Callback { actionMenuBackCB()   },
-                Callback { actionMenuBagCB()    },
-                Callback { actionMenuMonsterCB()},
-                Callback { actionMenuExtraCB()  })
+                backCB    = actionMenuBackCB,
+                bagCB     = actionMenuBagCB,
+                monsterCB = actionMenuMonsterCB,
+                extraCB   = actionMenuExtraCB)
 
         battleQueueWidget = BattleQueueWidget(skin, Align.bottomLeft)
         battleQueueWidget.setPosition(1f, 65f, Align.bottomLeft)
@@ -294,7 +297,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
         // ......................................................................................... status effect label
         statusEffectLabelBackCB = {
 
-            actionMenu.setCallbacks(infoLabelBackCB, { }, { }, { })
+            actionMenu.setCallbacks(backCB = infoLabelBackCB)
             battleSystem.nextMonster()
             battleSystem.continueBattle()
         }
@@ -649,7 +652,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
             actionMenu.disableAllButBackButton()
 
             // Set Callbacks
-            actionMenu.setCallbacks(battleStartLabelBackCB, { }, { }, { })
+            actionMenu.setCallbacks(backCB = battleStartLabelBackCB)
             infoLabelWidget.setWholeText(Services.getL18N().Battle().get("battle_start"))
             infoLabelWidget.animateTextAppearance()
 
@@ -722,18 +725,17 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
             val wholeText = Services.getL18N().Battle().get(textKey)
             infoLabelWidget.setWholeText(wholeText)
             infoLabelWidget.animateTextAppearance()
-            actionMenu.setCallbacks(endOfBattleLabelBackCB, { }, { }, { })
+            actionMenu.setCallbacks(backCB = endOfBattleLabelBackCB)
 
             statusWidget.addToStage(stage)
 
             state = BattleState.END_OF_BATTLE
 
-            val endOfBattleMusicSequence = Actions.sequence(
-                    Services.getAudio().getMuteAudioAction(AssetPath.Audio.Music.VICTORY_SONG),
-                    Actions.run { Services.getAudio().playMusic(AssetPath.Audio.Music.VICTORY_FANFARE) },
-                    Actions.delay(5f),
-                    Actions.run { Services.getAudio().playMusic(AssetPath.Audio.Music.VICTORY_SONG) }
-            )
+            val endOfBattleMusicSequence =
+                    Services.getAudio().getMuteAudioAction(AssetPath.Audio.Music.VICTORY_SONG)       then
+                    runThis(){ Services.getAudio().playMusic(AssetPath.Audio.Music.VICTORY_FANFARE)} then
+                    delay(5f)                                                                        then
+                    runThis(){ Services.getAudio().playMusic(AssetPath.Audio.Music.VICTORY_SONG) }
 
             stage.addAction(endOfBattleMusicSequence)
         }
@@ -745,18 +747,17 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
             infoLabelWidget.setWholeText(BattleStringBuilder.banGuardianSuccess(bannedGuardian, crystal))
 
             infoLabelWidget.animateTextAppearance()
-            actionMenu.setCallbacks(endOfBattleLabelBackCB, { }, { }, { })
+            actionMenu.setCallbacks(backCB = endOfBattleLabelBackCB)
 
             statusWidget.addToStage(stage)
 
             state = BattleState.END_OF_BATTLE
 
-            val endOfBattleMusicSequence = Actions.sequence(
-                    Services.getAudio().getMuteAudioAction(AssetPath.Audio.Music.VICTORY_SONG),
-                    Actions.run { Services.getAudio().playMusic(AssetPath.Audio.Music.VICTORY_FANFARE) },
-                    Actions.delay(5f),
-                    Actions.run { Services.getAudio().playMusic(AssetPath.Audio.Music.VICTORY_SONG) }
-            )
+            val endOfBattleMusicSequence =
+                    Services.getAudio().getMuteAudioAction(AssetPath.Audio.Music.VICTORY_SONG)         then
+                    runThis() { Services.getAudio().playMusic(AssetPath.Audio.Music.VICTORY_FANFARE) } then
+                    delay(5f)                                                                          then
+                    runThis() { Services.getAudio().playMusic(AssetPath.Audio.Music.VICTORY_SONG) }
 
             stage.addAction(endOfBattleMusicSequence)
 
@@ -769,7 +770,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
             toInfoLabel()
             actionMenu.disableAllChildButtons()
             battleQueueWidget.addToStage(stage)
-            actionMenu.setCallbacks(infoLabelBackCB, { }, { }, { })
+            actionMenu.setCallbacks(backCB = infoLabelBackCB)
 
             state = BattleState.ANIMATION
         }
@@ -781,7 +782,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
             statusWidget.addToStage(battleAnimationStage)
             actionMenu.disableAllButBackButton()
             actionMenu.addToStage(stage)
-            actionMenu.setCallbacks(backToActionMenuCB, { }, { }, { })
+            actionMenu.setCallbacks(backCB = backToActionMenuCB)
             targetMenuWidget.addToStage(stage)
             battleQueueWidget.addToStage(stage)
 
@@ -795,7 +796,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
             statusWidget.addToStage(battleAnimationStage)
             actionMenu.disableAllButBackButton()
             actionMenu.addToStage(stage)
-            actionMenu.setCallbacks(backToActionMenuCB, { }, { }, { })
+            actionMenu.setCallbacks(backCB = backToActionMenuCB)
             targetAreaMenuWidget.addToStage(stage)
             battleQueueWidget.addToStage(stage)
 
@@ -839,7 +840,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
             reset()
             toInfoLabel()
             battleQueueWidget.addToStage(stage)
-            actionMenu.setCallbacks(statusEffectLabelBackCB, { }, { }, { })
+            actionMenu.setCallbacks(backCB = statusEffectLabelBackCB)
 
             state = BattleState.ANIMATION
         }
@@ -850,7 +851,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
             val wholeText = Services.getL18N().Battle().get("escape_success")
             infoLabelWidget.setWholeText(wholeText)
             infoLabelWidget.animateTextAppearance()
-            actionMenu.setCallbacks(escapeSuccessLabelBackCB, { }, { }, { })
+            actionMenu.setCallbacks(backCB = escapeSuccessLabelBackCB)
         }
 
         fun toEscapeFailInfo()
@@ -859,7 +860,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
             val wholeText = Services.getL18N().Battle().get("escape_fail")
             infoLabelWidget.setWholeText(wholeText)
             infoLabelWidget.animateTextAppearance()
-            actionMenu.setCallbacks(escapeFailedLabelBackCB, { }, { }, { })
+            actionMenu.setCallbacks(backCB = escapeFailedLabelBackCB)
         }
 
         fun reset()

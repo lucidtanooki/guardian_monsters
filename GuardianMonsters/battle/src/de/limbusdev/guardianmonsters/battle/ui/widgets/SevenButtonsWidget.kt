@@ -78,7 +78,7 @@ open class SevenButtonsWidget
             buttons[i].onClick {
 
                 println("SevenButtonsWidget: Clicked button $i")
-                if (!buttons[i].isDisabled) { callbacks(i) }
+                if (!buttons[i].isDisabled) { callbacks.invoke(i) }
             }
         }
     }
@@ -149,7 +149,7 @@ open class SevenButtonsWidget
         button.onClick {
 
             println("SevenButtonsWidget: Clicked button $index")
-            if (!button.isDisabled) { callbacks(index) }
+            if (!button.isDisabled) { callbacks.invoke(index) }
         }
         addActor(button)
     }

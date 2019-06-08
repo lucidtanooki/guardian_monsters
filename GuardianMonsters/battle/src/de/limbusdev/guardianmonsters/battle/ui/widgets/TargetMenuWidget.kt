@@ -19,7 +19,8 @@ import de.limbusdev.guardianmonsters.services.Services
  * @author Georg Eckert 2019
  */
 
-class TargetMenuWidget(
+class TargetMenuWidget
+(
         skin: Skin,
         callbacks: (Int) -> Unit
 )

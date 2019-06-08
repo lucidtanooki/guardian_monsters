@@ -1,7 +1,7 @@
 package de.limbusdev.guardianmonsters.battle
 
 import com.badlogic.gdx.scenes.scene2d.Stage
-import com.badlogic.gdx.scenes.scene2d.actions.Actions.delay
+import com.badlogic.gdx.scenes.scene2d.actions.Actions
 import com.badlogic.gdx.utils.Align
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ArrayMap
@@ -37,8 +37,6 @@ import de.limbusdev.guardianmonsters.services.Services
 import de.limbusdev.guardianmonsters.ui.widgets.Callback
 
 import de.limbusdev.guardianmonsters.battle.ui.widgets.BattleHUDTextButton.CENTERTOP
-import ktx.actors.then
-import com.badlogic.gdx.scenes.scene2d.actions.Actions.run as runThis
 
 
 /**
@@ -731,11 +729,14 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
 
             state = BattleState.END_OF_BATTLE
 
-            val endOfBattleMusicSequence =
-                    Services.getAudio().getMuteAudioAction(AssetPath.Audio.Music.VICTORY_SONG)       then
-                    runThis(){ Services.getAudio().playMusic(AssetPath.Audio.Music.VICTORY_FANFARE)} then
-                    delay(5f)                                                                        then
-                    runThis(){ Services.getAudio().playMusic(AssetPath.Audio.Music.VICTORY_SONG) }
+            val endOfBattleMusicSequence = Actions.sequence(
+
+                    Services.getAudio().getMuteAudioAction(AssetPath.Audio.Music.VICTORY_SONG),
+                    Actions.run { Services.getAudio().playMusic(AssetPath.Audio.Music.VICTORY_FANFARE)},
+                    Actions.delay(5f),
+                    Actions.run { Services.getAudio().playMusic(AssetPath.Audio.Music.VICTORY_SONG) }
+            )
+
 
             stage.addAction(endOfBattleMusicSequence)
         }
@@ -753,11 +754,13 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
 
             state = BattleState.END_OF_BATTLE
 
-            val endOfBattleMusicSequence =
-                    Services.getAudio().getMuteAudioAction(AssetPath.Audio.Music.VICTORY_SONG)         then
-                    runThis() { Services.getAudio().playMusic(AssetPath.Audio.Music.VICTORY_FANFARE) } then
-                    delay(5f)                                                                          then
-                    runThis() { Services.getAudio().playMusic(AssetPath.Audio.Music.VICTORY_SONG) }
+            val endOfBattleMusicSequence = Actions.sequence(
+
+                    Services.getAudio().getMuteAudioAction(AssetPath.Audio.Music.VICTORY_SONG),
+                    Actions.run { Services.getAudio().playMusic(AssetPath.Audio.Music.VICTORY_FANFARE)},
+                    Actions.delay(5f),
+                    Actions.run { Services.getAudio().playMusic(AssetPath.Audio.Music.VICTORY_SONG) }
+            )
 
             stage.addAction(endOfBattleMusicSequence)
 

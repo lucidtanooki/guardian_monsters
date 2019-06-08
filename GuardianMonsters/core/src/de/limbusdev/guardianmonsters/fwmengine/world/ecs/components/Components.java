@@ -9,9 +9,10 @@ import com.badlogic.ashley.core.Entity;
  * {@link com.badlogic.ashley.core.EntitySystem}.
  * Use it without creating instances of it.
  *
- * Created by georg on 23.11.15.
+ * @author Georg Eckert 2019
  */
-public abstract class Components {
+public abstract class Components
+{
     /* ............................................................................ ATTRIBUTES .. */
     public static ComponentMapper<PositionComponent> position =
             ComponentMapper.getFor(PositionComponent.class);

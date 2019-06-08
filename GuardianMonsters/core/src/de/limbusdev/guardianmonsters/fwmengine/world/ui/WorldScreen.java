@@ -39,8 +39,8 @@ public class WorldScreen implements Screen {
 
 
     /* ........................................................................... CONSTRUCTOR .. */
-    public WorldScreen(int mapID, int startPosID, boolean
-            fromSave) {
+    public WorldScreen(int mapID, int startPosID, boolean fromSave)
+    {
         setUpRendering();
         this.gameArea = new GameArea(mapID, startPosID);
         SaveGameManager saveGameManager = new SaveGameManager(this.gameArea);

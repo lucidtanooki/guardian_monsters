@@ -70,6 +70,9 @@ public class SaveGameManager extends EntitySystem
         gameState = Components.saveGame.get(savableEntities.first()).gameState;
         gameState.map = this.gameArea.areaID;
         gameState.team = Components.team.get(savableEntities.first()).team.copy();
+        System.out.println(savableEntities);
+        System.out.println(savableEntities.first());
+        System.out.println(Components.guardoSphere.get(savableEntities.first()));
         gameState.guardoSphere = Components.guardoSphere.get(savableEntities.first()).guardoSphere.copy();
         gameState.gridx = Components.position.get(savableEntities.first()).onGrid.getX();
         gameState.gridy = Components.position.get(savableEntities.first()).onGrid.getY();

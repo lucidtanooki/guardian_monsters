@@ -32,14 +32,18 @@ public class AbilityMediaDB
 
         JsonAbilityMedia jam;
         AbilityMedia abilityMedia;
-        for (JsonValue v : elementList) {
+        for (JsonValue v : elementList)
+        {
             jam = json.readValue(JsonAbilityMedia.class, v);
+
             abilityMedia = new AbilityMedia(
+
                 jam.name,
                 jam.sfxIndex,
                 SFXType.valueOf(jam.sfxType.toUpperCase()),
                 AnimationType.valueOf(jam.animationType.toUpperCase())
             );
+
             abilityMediaInfos.put(abilityMedia.getName(), abilityMedia);
         }
 

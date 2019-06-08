@@ -116,8 +116,9 @@ public class GameArea {
         // Set background music
         String musicType = tiledMap.getProperties().get("musicType", String.class);
         int musicIndex = Integer.parseInt(tiledMap.getProperties().get("musicIndex", String.class)) - 1;
-        if (musicType.equals("town")) {
-            bgMusic = AssetPath.Audio.Music.INSTANCE.getBG_BATTLE()[musicIndex];
+        if (musicType.equals("town"))
+        {
+            bgMusic = AssetPath.Audio.Music.INSTANCE.getBG_TOWN()[musicIndex];
         }
 
         return tiledMap;

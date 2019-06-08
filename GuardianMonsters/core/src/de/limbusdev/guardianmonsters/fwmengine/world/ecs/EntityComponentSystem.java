@@ -52,8 +52,7 @@ public class EntityComponentSystem {
      * @param gameScreen    screen
      * @param sgm           the SaveGameManager
      */
-    public EntityComponentSystem(Viewport viewport, GameArea gameArea, boolean
-            fromSave, WorldScreen gameScreen, SaveGameManager sgm
+    public EntityComponentSystem(Viewport viewport, GameArea gameArea, boolean fromSave, WorldScreen gameScreen, SaveGameManager sgm
     ) {
         this.gameArea = gameArea;
         this.engine = new Engine();
@@ -71,7 +70,8 @@ public class EntityComponentSystem {
      * Creates the hero instance
      * @param fromSave  whether to create hero or reconstruct from game save
      */
-    public void setUpHero(boolean fromSave) {
+    public void setUpHero(boolean fromSave)
+    {
         Entity hero = entityFactory.createHero(gameArea.startPosition, fromSave);
         PositionComponent heroPosition = Components.getPositionComponent(hero);
         this.hero = hero;

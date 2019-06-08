@@ -1,6 +1,5 @@
 package de.limbusdev.guardianmonsters.battle
 
-import com.badlogic.gdx.scenes.scene2d.actions.Actions
 import com.badlogic.gdx.scenes.scene2d.actions.Actions.*
 import com.badlogic.gdx.scenes.scene2d.actions.Actions.run as runThis
 import com.badlogic.gdx.scenes.scene2d.ui.Image
@@ -77,10 +76,7 @@ abstract class ABattleHUD(skin: Skin) : AHUD(skin)
         }
     }
 
-    fun getBattleWidget(key: String): BattleWidget
-    {
-        return widgets.get(key)
-    }
+    fun getBattleWidget(key: String): BattleWidget = widgets.get(key)
 
     fun <T : BattleWidget> getBattleWidget(key: String, type: Class<T>): T
     {

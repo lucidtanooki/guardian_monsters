@@ -4,3 +4,8 @@ Georg Eckert. All rights reserved.
 
 In the case of death of Georg Eckert, the complete project shall be released
 Open Source under MIT License to the public.
+
+
+# Dual Licensing
+https://opensource.stackexchange.com/questions/2338/can-i-use-gpl-libraries-in-a-closed-source-project-if-only-the-output-is-distrib
+https://producingoss.com/de/dual-licensing.html

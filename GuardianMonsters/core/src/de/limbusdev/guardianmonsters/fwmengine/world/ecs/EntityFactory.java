@@ -11,6 +11,7 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.CameraCompon
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.CharacterSpriteComponent;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.ColliderComponent;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.ConversationComponent;
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.GuardoSphereComponent;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.HeroComponent;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.InputComponent;
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.InventoryComponent;
@@ -28,6 +29,7 @@ import de.limbusdev.guardianmonsters.guardians.GuardiansServiceLocator;
 import de.limbusdev.guardianmonsters.guardians.items.IItemService;
 import de.limbusdev.guardianmonsters.guardians.items.Inventory;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardianFactory;
+import de.limbusdev.guardianmonsters.guardians.monsters.GuardoSphere;
 import de.limbusdev.guardianmonsters.model.gamestate.GameState;
 import de.limbusdev.guardianmonsters.utils.UnitConverter;
 import de.limbusdev.utils.geometry.IntVec2;
@@ -52,7 +54,8 @@ public class EntityFactory
      * Creates a hero {@link Entity} and adds it to the {@link Engine}.
      * @return
      */
-    public Entity createHero(PositionComponent startField, boolean restoreSave) {
+    public Entity createHero(PositionComponent startField, boolean restoreSave)
+    {
         Entity hero = new HeroEntity();
 
         // Add Sprite
@@ -85,7 +88,8 @@ public class EntityFactory
         // Game State
         GameState gameState = SaveGameManager.getCurrentGameState();
         hero.add(new SaveGameComponent(gameState));
-        if(restoreSave) {
+        if(restoreSave)
+        {
             position.setX(gameState.gridx * Constant.TILE_SIZE);
             position.setY(gameState.gridy * Constant.TILE_SIZE);
             position.onGrid = new IntVec2(gameState.gridx, gameState.gridy);
@@ -99,6 +103,15 @@ public class EntityFactory
             team.team = gameState.team;
         }
         hero.add(team);
+
+
+        // Add GuardoSphere
+        GuardoSphereComponent sphereComponent = new GuardoSphereComponent();
+        if(restoreSave) {
+            sphereComponent.guardoSphere = gameState.guardoSphere;
+        }
+        hero.add(sphereComponent);
+
 
         IItemService items = GuardiansServiceLocator.INSTANCE.getItems();
 

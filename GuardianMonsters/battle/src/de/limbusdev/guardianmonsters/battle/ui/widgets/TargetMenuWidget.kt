@@ -145,7 +145,7 @@ class TargetMenuWidget(
         }
     }
 
-    override fun update(o: Observable, arg: Any)
+    override fun update(o: Observable, arg: Any?)
     {
         val guardian = o as Guardian
 

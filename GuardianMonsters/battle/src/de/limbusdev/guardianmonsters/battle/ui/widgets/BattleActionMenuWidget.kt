@@ -58,6 +58,8 @@ class BattleActionMenuWidget
         this.bagCB      = bagCB
         this.monsterCB  = monsterCB
         this.extraCB    = extraCB
+
+        initCallbackHandler()
     }
 
     fun disableAllButBackButton()

@@ -29,7 +29,7 @@ import ktx.actors.onClick
 open class SevenButtonsWidget
 (
         protected var skin: Skin,
-        private var callbacks: Callback.ButtonID?,
+        private var callbacks: (Int) -> Unit,
         buttonOrder: IntArray
 )
     : BattleWidget()
@@ -78,12 +78,12 @@ open class SevenButtonsWidget
             buttons[i].onClick {
 
                 println("SevenButtonsWidget: Clicked button $i")
-                if (!buttons[i].isDisabled) { callbacks!!.onClick(i) }
+                if (!buttons[i].isDisabled) { callbacks(i) }
             }
         }
     }
 
-    fun setCallbacks(callbacks: Callback.ButtonID)
+    fun setCallbacks(callbacks: (Int) -> Unit)
     {
         this.callbacks = callbacks
         initCallbackHandler()
@@ -149,7 +149,7 @@ open class SevenButtonsWidget
         button.onClick {
 
             println("SevenButtonsWidget: Clicked button $index")
-            if (!button.isDisabled) { callbacks!!.onClick(index) }
+            if (!button.isDisabled) { callbacks(index) }
         }
         addActor(button)
     }

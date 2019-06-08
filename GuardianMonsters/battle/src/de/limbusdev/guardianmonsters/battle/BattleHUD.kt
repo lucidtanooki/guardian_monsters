@@ -659,7 +659,8 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
             state = BattleState.BATTLE_START
         }
 
-        fun toActionMenu() {
+        fun toActionMenu()
+        {
             reset()
 
 

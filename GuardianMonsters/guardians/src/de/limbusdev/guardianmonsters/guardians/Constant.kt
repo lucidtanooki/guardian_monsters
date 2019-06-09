@@ -22,8 +22,8 @@ interface Constant
 
         const val RIGHT = false
 
-        const val HERO = true
+        val HERO = Side.LEFT
 
-        const val OPPONENT = false
+        val OPPONENT = Side.RIGHT
     }
 }

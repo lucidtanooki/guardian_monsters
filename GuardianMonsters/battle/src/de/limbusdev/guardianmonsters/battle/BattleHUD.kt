@@ -37,6 +37,7 @@ import de.limbusdev.guardianmonsters.services.Services
 import de.limbusdev.guardianmonsters.ui.widgets.Callback
 
 import de.limbusdev.guardianmonsters.battle.ui.widgets.BattleHUDTextButton.CENTERTOP
+import de.limbusdev.guardianmonsters.guardians.Side
 
 
 /**
@@ -156,7 +157,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
         attackMenu.init(battleSystem.activeMonster, true)
 
         statusWidget.init(battleSystem)
-        animationWidget.init(battleSystem)
+        animationWidget.initialize(battleSystem)
         targetMenuWidget.init(battleSystem)
         targetAreaMenuWidget.init(battleSystem, true)
 
@@ -406,7 +407,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
                         battleSystemCallbacks.onBanningWildGuardianFailure(bannedGuardian, item, fieldPos)
                     }
                 }
-                animationWidget.animateBanning(fieldPos, Constant.RIGHT, bannedGuardian, callback)
+                animationWidget.animateBanning(fieldPos, Side.RIGHT, bannedGuardian, callback)
             }
 
             override fun onBanningWildGuardianFailure(bannedGuardian: AGuardian, crystal: ChakraCrystalItem, fieldPos: Int)
@@ -415,7 +416,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
                 battleStateSwitcher.toAnimation()
                 infoLabelWidget.setWholeText(BattleStringBuilder.banGuardianFailure(bannedGuardian, crystal))
                 infoLabelWidget.animateTextAppearance()
-                animationWidget.animateBanningFailure(fieldPos, Constant.RIGHT, bannedGuardian, callback)
+                animationWidget.animateBanningFailure(fieldPos, Side.RIGHT, bannedGuardian, callback)
             }
 
             override fun onBanningWildGuardianSuccess(bannedGuardian: AGuardian, crystal: ChakraCrystalItem, fieldPos: Int)
@@ -483,11 +484,9 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
                     // Start ability animation
                     val attPos: Int
                     val defPos: Int
-                    val activeSide: Boolean
-                    val passiveSide: Boolean
 
-                    activeSide = battleSystem.queue.getTeamSideFor(attacker)
-                    passiveSide = battleSystem.queue.getTeamSideFor(target)
+                    val activeSide = battleSystem.queue.getTeamSideFor(attacker)
+                    val passiveSide = battleSystem.queue.getTeamSideFor(target)
 
                     attPos = battleSystem.queue.getFieldPositionFor(attacker)
                     defPos = battleSystem.queue.getFieldPositionFor(target)
@@ -511,11 +510,8 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
                 else
                 {
                     // Start ability animation
-                    val activeSide: Boolean
-                    val passiveSide: Boolean
-
-                    activeSide = battleSystem.queue.getTeamSideFor(attacker)
-                    passiveSide = battleSystem.queue.getTeamSideFor(targets.firstValue())
+                    val activeSide = battleSystem.queue.getTeamSideFor(attacker)
+                    val passiveSide = battleSystem.queue.getTeamSideFor(targets.firstValue())
 
                     val attPos = battleSystem.queue.getFieldPositionFor(attacker)
 

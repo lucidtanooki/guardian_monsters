@@ -5,6 +5,7 @@ import com.badlogic.gdx.utils.Array
 import java.util.Observable
 
 import de.limbusdev.guardianmonsters.guardians.Constant
+import de.limbusdev.guardianmonsters.guardians.Side
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian
 import de.limbusdev.guardianmonsters.guardians.monsters.Team
 
@@ -107,7 +108,7 @@ class BattleQueue
      * Returns the side of the next monster in line
      * @return
      */
-    fun peekNextSide(): Boolean
+    fun peekNextSide(): Side
     {
         return if (left.isMember(peekNext())) { Constant.HERO }
         else                                  { Constant.OPPONENT }
@@ -118,8 +119,11 @@ class BattleQueue
         val combatTeam: CombatTeam
 
         val side = getTeamSideFor(currentRound.peek())
-        combatTeam = if (side == Constant.LEFT) { combatTeamLeft }
-                     else                       { combatTeamRight }
+        combatTeam = when(side)
+        {
+            Side.LEFT  -> combatTeamLeft
+            Side.RIGHT -> combatTeamRight
+        }
 
         val activeGuardian = currentRound.peek()
         val position = combatTeam.getFieldPosition(activeGuardian)
@@ -147,15 +151,19 @@ class BattleQueue
         val team: Team
 
         val side = getTeamSideFor(defeated)
-        if (side == Constant.LEFT)
+
+        when(side)
         {
-            combatTeam = combatTeamLeft
-            team = left
-        }
-        else
-        {
-            combatTeam = combatTeamRight
-            team = right
+            Side.LEFT ->
+            {
+                combatTeam = combatTeamLeft
+                team = left
+            }
+            Side.RIGHT ->
+            {
+                combatTeam = combatTeamRight
+                team = right
+            }
         }
 
         val position = combatTeam.getFieldPosition(defeated)
@@ -206,7 +214,7 @@ class BattleQueue
         return text
     }
 
-    fun getTeamSideFor(guardian: AGuardian): Boolean
+    fun getTeamSideFor(guardian: AGuardian): Side
     {
         return if (left.isMember(guardian)) { Constant.HERO }
         else                                { Constant.OPPONENT }

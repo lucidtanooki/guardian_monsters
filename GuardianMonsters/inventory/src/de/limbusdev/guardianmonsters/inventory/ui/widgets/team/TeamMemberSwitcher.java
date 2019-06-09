@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ArrayMap;
 
+import de.limbusdev.guardianmonsters.guardians.Side;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.Team;
 import de.limbusdev.guardianmonsters.services.Services;
@@ -63,7 +64,7 @@ public class TeamMemberSwitcher extends Group {
 
         this.currentlyChosen = teamPosition;
         name.setText(Services.getL18N().getLocalizedGuardianName(m));
-        previewWidget.setPreview(m.getSpeciesDescription().getID(), m.getAbilityGraph().getCurrentForm(), LEFT);
+        previewWidget.setPreview(m.getSpeciesDescription().getID(), m.getAbilityGraph().getCurrentForm(), Side.LEFT);
     }
 
     public interface Callbacks {

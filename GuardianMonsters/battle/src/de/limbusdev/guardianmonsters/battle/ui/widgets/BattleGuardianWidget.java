@@ -21,6 +21,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import de.limbusdev.guardianmonsters.guardians.Constant;
+import de.limbusdev.guardianmonsters.guardians.Side;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics;
 import de.limbusdev.guardianmonsters.services.Services;
@@ -41,7 +42,7 @@ public class BattleGuardianWidget extends BattleWidget implements Observer
     private boolean showsTombStone;
     private TextureRegionDrawable drawable;
 
-    public BattleGuardianWidget(int index, int metaForm, boolean side)
+    public BattleGuardianWidget(int index, int metaForm, Side side)
     {
         guardianImage = new Image();
         guardianImage.setSize(128,128);
@@ -58,11 +59,11 @@ public class BattleGuardianWidget extends BattleWidget implements Observer
         showsTombStone = false;
     }
 
-    private void init(int index, int metaForm, boolean side)
+    private void init(int index, int metaForm, Side side)
     {
         TextureRegion monReg;
         monReg = Services.getMedia().getMonsterSprite(index, metaForm);
-        if(side == Constant.LEFT)
+        if(side == Side.LEFT)
             if(!monReg.isFlipX())
                 monReg.flip(true, false);
         drawable = new TextureRegionDrawable(monReg);
@@ -75,7 +76,7 @@ public class BattleGuardianWidget extends BattleWidget implements Observer
         statusEffectAnimation.setAnimation(anim);
     }
 
-    public void substitute(int index, int metaForm, boolean side, Callback callback)
+    public void substitute(int index, int metaForm, Side side, Callback callback)
     {
         Animation anim = Services.getMedia().getBanningAnimation();
         SelfRemovingAnimation sra = new SelfRemovingAnimation(anim);
@@ -98,7 +99,7 @@ public class BattleGuardianWidget extends BattleWidget implements Observer
         ));
     }
 
-    public void replaceDefeated(int index, int metaForm, boolean side, Callback callback)
+    public void replaceDefeated(int index, int metaForm, Side side, Callback callback)
     {
         Animation anim = Services.getMedia().getSummoningAnimation();
         SelfRemovingAnimation sra = new SelfRemovingAnimation(anim);
@@ -109,7 +110,7 @@ public class BattleGuardianWidget extends BattleWidget implements Observer
             Actions.fadeOut(1f),
             Actions.run(() -> {
                 TextureRegion tombStoneDrawable = Services.getUI().getBattleSkin().getRegion("tomb-stone");
-                if (side == Constant.RIGHT) {
+                if (side == Side.RIGHT) {
                     tombStoneDrawable.flip(true, false);
                 }
                 guardianImage.setDrawable(new TextureRegionDrawable(tombStoneDrawable));
@@ -151,15 +152,15 @@ public class BattleGuardianWidget extends BattleWidget implements Observer
         ));
     }
 
-    public void die(boolean side, Callback onDieingComplete)
+    public void die(Side side, Callback onDieingComplete)
     {
-        if(side == Constant.LEFT) {
+        if(side == Side.LEFT) {
             guardianImage.addAction(Actions.sequence(
                 Actions.alpha(0f, 2f),
                 Actions.visible(false),
                 Actions.run(() -> {
                     TextureRegion tombStoneDrawable = Services.getUI().getBattleSkin().getRegion("tomb-stone");
-                    if (side == Constant.RIGHT) {
+                    if (side == Side.RIGHT) {
                         tombStoneDrawable.flip(true, false);
                     }
                     guardianImage.setDrawable(new TextureRegionDrawable(tombStoneDrawable));

@@ -6,6 +6,7 @@ import com.badlogic.gdx.utils.ArrayMap
 
 import de.limbusdev.guardianmonsters.guardians.Constant
 import de.limbusdev.guardianmonsters.guardians.GuardiansServiceLocator
+import de.limbusdev.guardianmonsters.guardians.Side
 import de.limbusdev.guardianmonsters.guardians.abilities.Ability
 import de.limbusdev.guardianmonsters.guardians.items.ChakraCrystalItem
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian
@@ -286,24 +287,28 @@ class BattleSystem
                 val m = it.next()
                 if (m.individualStatistics.isKO)
                 {
-                    if (queue.getTeamSideFor(m) == Constant.RIGHT)
+                    when(queue.getTeamSideFor(m))
                     {
-                        giveEXPtoWinners(m)
-                        if (queue.right.teamKO())
+                        Side.RIGHT ->
+                        {
+                            giveEXPtoWinners(m)
+                            if (queue.right.teamKO())
+                            {
+                                it.remove()
+                                callbacks.onMonsterKilled(m)
+                            }
+                            else
+                            {
+                                randomlyReplaceDefeatedGuardian(Constant.RIGHT, m)
+                            }
+                        }
+                        Side.LEFT ->
                         {
                             it.remove()
                             callbacks.onMonsterKilled(m)
                         }
-                        else
-                        {
-                            randomlyReplaceDefeatedGuardian(Constant.RIGHT, m)
-                        }
                     }
-                    else
-                    {
-                        it.remove()
-                        callbacks.onMonsterKilled(m)
-                    }
+
                     guardianDefeated = true
                 }
             }

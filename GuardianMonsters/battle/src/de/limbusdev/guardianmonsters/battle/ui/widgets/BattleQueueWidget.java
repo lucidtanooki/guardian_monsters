@@ -8,6 +8,7 @@ import com.badlogic.gdx.utils.Array;
 import java.util.Observable;
 import java.util.Observer;
 
+import de.limbusdev.guardianmonsters.guardians.Side;
 import de.limbusdev.guardianmonsters.guardians.battle.BattleQueue;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.services.Services;
@@ -48,7 +49,7 @@ public class BattleQueueWidget extends BattleWidget implements Observer
         for(int i = round.size-1; i>=0; i--)
         {
             AGuardian m = round.get(i);
-            boolean side = queue.getTeamSideFor(m);
+            Side side = queue.getTeamSideFor(m);
 
             MonsterPreviewWidget previewWidget = new MonsterPreviewWidget(Services.getUI().getBattleSkin());
             previewWidget.setPreview(m.getSpeciesDescription().getID(), m.getAbilityGraph().getCurrentForm(), side);

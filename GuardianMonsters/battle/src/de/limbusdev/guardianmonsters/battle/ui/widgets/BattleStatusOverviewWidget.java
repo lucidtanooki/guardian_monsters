@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 
+import de.limbusdev.guardianmonsters.guardians.Side;
 import de.limbusdev.guardianmonsters.guardians.battle.BattleSystem;
 import de.limbusdev.guardianmonsters.guardians.battle.CombatTeam;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
@@ -88,9 +89,9 @@ public class BattleStatusOverviewWidget extends BattleWidget
         addStatusWidgetsForTeam(battleSystem.getQueue().getCombatTeamRight(), Constant.RIGHT);
     }
 
-    public void updateStatusWidgetToSubstitute(int pos, boolean side, AGuardian guardian)
+    public void updateStatusWidgetToSubstitute(int pos, Side side, AGuardian guardian)
     {
-        Array<MonsterStateWidget> stateWidgets = side ?
+        Array<MonsterStateWidget> stateWidgets = side == Side.LEFT ?
             monsterStateWidgetsLeft : monsterStateWidgetsRight;
 
         MonsterStateWidget w = stateWidgets.get(pos);

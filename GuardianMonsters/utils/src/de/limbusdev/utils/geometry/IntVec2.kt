@@ -2,6 +2,8 @@ package de.limbusdev.utils.geometry
 
 open class IntVec2(var x: Int, var y: Int)
 {
+    val xf : Float get() = x.toFloat()
+    val yf : Float get() = y.toFloat()
 
     override fun toString(): String
     {

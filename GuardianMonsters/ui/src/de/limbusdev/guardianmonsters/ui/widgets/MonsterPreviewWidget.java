@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Align;
 
+import de.limbusdev.guardianmonsters.guardians.Side;
 import de.limbusdev.guardianmonsters.services.Services;
 
 import static de.limbusdev.guardianmonsters.ui.Constant.LEFT;
@@ -51,9 +52,9 @@ public class MonsterPreviewWidget extends Group {
         addActor(coverImg);
     }
 
-    public void setPreview(int monsterID, int form, boolean side)
+    public void setPreview(int monsterID, int form, Side side)
     {
-        if(side == LEFT) {
+        if(side == Side.LEFT) {
             bgImg.setDrawable(bg);
             coverImg.setDrawable(cover);
         } else /*side == RIGHT*/ {

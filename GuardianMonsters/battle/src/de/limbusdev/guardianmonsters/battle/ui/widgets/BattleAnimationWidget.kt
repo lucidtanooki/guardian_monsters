@@ -51,40 +51,42 @@ class BattleAnimationWidget
 {
     // .................................................................................. Properties
     private val observers                   : Array<WidgetObserver>  = Array()
-    private val leftPositionsOccupied       : ArrayMap<Int, Boolean> = ArrayMap()
-    private val rightPositionsOccupied      : ArrayMap<Int, Boolean> = ArrayMap()
 
-    private val monsterImgsLeft             : ArrayMap<Int, BattleGuardianWidget> = ArrayMap()
-    private val monsterImgsRight            : ArrayMap<Int, BattleGuardianWidget> = ArrayMap()
     private val zSortedMonsterImgs          : Array<BattleGuardianWidget> = Array()
-    private val statusEffectIndicatorsLeft  : ArrayMap<Int, Animation<TextureAtlas.AtlasRegion>>
-    private val statusEffectIndicatorsRight : ArrayMap<Int, Animation<TextureAtlas.AtlasRegion>>
 
     var attackAnimationRunning              : Boolean = false
     var replacingDefeatedAnimationRunning   : Boolean = false
 
-    private fun monsterImgs(side: Side) = when(side)
-    {
-        Side.LEFT  -> monsterImgsLeft
-        Side.RIGHT -> monsterImgsRight
-    }
+    private val guardianSprites             : ArrayMap<Side, ArrayMap<Int, BattleGuardianWidget>>
+    private val occupiedPositions           : ArrayMap<Side, ArrayMap<Int, Boolean>>
+    private val statusEffectIndicators      : ArrayMap<Side, ArrayMap<Int, Animation<TextureAtlas.AtlasRegion>>>
 
 
     // ................................................................................ Constructors
     init
     {
-        this.setBounds(0f, 0f, 0f, 0f)
+        setBounds(0f, 0f, 0f, 0f)
+
+        guardianSprites = ArrayMap();
+        guardianSprites[Side.LEFT] = ArrayMap()
+        guardianSprites[Side.RIGHT] = ArrayMap()
+
+        occupiedPositions = ArrayMap()
+        occupiedPositions[Side.LEFT] = ArrayMap()
+        occupiedPositions[Side.RIGHT] = ArrayMap()
 
         // Status Effect Animations
-        this.statusEffectIndicatorsLeft = ArrayMap()
-        this.statusEffectIndicatorsRight = ArrayMap()
+        statusEffectIndicators= ArrayMap()
+        statusEffectIndicators[Side.LEFT] = ArrayMap()
+        statusEffectIndicators[Side.RIGHT] = ArrayMap()
+
 
         for (i in 0..2)
         {
             // left
-            statusEffectIndicatorsLeft[i]  = Services.getMedia().getStatusEffectAnimation("healthy")
+            statusEffectIndicators[Side.LEFT][i]  = Services.getMedia().getStatusEffectAnimation("healthy")
             // right
-            statusEffectIndicatorsRight[i] = Services.getMedia().getStatusEffectAnimation("healthy")
+            statusEffectIndicators[Side.RIGHT][i] = Services.getMedia().getStatusEffectAnimation("healthy")
         }
     }
 
@@ -115,14 +117,8 @@ class BattleAnimationWidget
 
     private fun addMonsterAnimationsForTeam(team: ArrayMap<Int, AGuardian>, side: Side)
     {
-        val positions = when(side)
-        {
-            Side.LEFT  -> leftPositionsOccupied
-            Side.RIGHT -> rightPositionsOccupied
-        }
-
-        positions.clear()
-        monsterImgs(side).clear()
+        occupiedPositions[side].clear()
+        guardianSprites[side].clear()
 
         // Not more than 3 monsters can join a fight
         val teamSize = if (team.size > 3) 3 else team.size
@@ -142,16 +138,16 @@ class BattleAnimationWidget
                         actualTeamSize,
                         side
                 )
-                positions.put(actualTeamSize, true)
+                occupiedPositions[side][actualTeamSize] = true
                 actualTeamSize++
             }
             counter++
         }
 
         // Correct Image Depth Sorting
-        if(positions.containsKey(2)) { addActor(monsterImgs(side)[2]) }
-        if(positions.containsKey(1)) { addActor(monsterImgs(side)[1]) }
-        if(positions.containsKey(0)) { addActor(monsterImgs(side)[0]) }
+        if(occupiedPositions[side].containsKey(2)) { addActor(guardianSprites[side][2]) }
+        if(occupiedPositions[side].containsKey(1)) { addActor(guardianSprites[side][1]) }
+        if(occupiedPositions[side].containsKey(0)) { addActor(guardianSprites[side][0]) }
     }
 
     /**
@@ -169,7 +165,6 @@ class BattleAnimationWidget
         {
             Side.LEFT -> // Hero Side
             {
-                monsterImgsLeft[pos] = monImg
                 when(pos)
                 {
                     2    -> ImPos.HERO_TOP
@@ -179,7 +174,6 @@ class BattleAnimationWidget
             }
             Side.RIGHT -> // Opponent Side
             {
-                monsterImgsRight[pos] = monImg
                 when(pos)
                 {
                     2    -> ImPos.OPPO_TOP
@@ -188,6 +182,7 @@ class BattleAnimationWidget
                 }
             }
         }
+        guardianSprites[side][pos] = monImg
 
         zSortedMonsterImgs.add(monImg)
 
@@ -250,12 +245,12 @@ class BattleAnimationWidget
             }
         }
 
-        monsterImgs(attSide)[attPos].addAction(getAnimationSequence(ability, startPos, endPos, defPos, attSide, defSide))
+        guardianSprites[attSide][attPos].addAction(getAnimationSequence(ability, startPos, endPos, defPos, attSide, defSide))
     }
 
     fun animateAreaAttack(attPos: Int, attSide: Side, defSide: Side, ability: Ability)
     {
-        monsterImgs(attSide)[attPos].addAction(getAreaAttackAnimationSequence(ability, attSide, defSide))
+        guardianSprites[attSide][attPos].addAction(getAreaAttackAnimationSequence(ability, attSide, defSide))
     }
 
 
@@ -362,7 +357,7 @@ class BattleAnimationWidget
      */
     private fun animateAttackImpact(defPos: Int, side: Side)
     {
-        val defIm = monsterImgs(side)[defPos]
+        val defIm = guardianSprites[side][defPos]
 
         defIm.addAction(
                 Actions.moveBy(0f, 15f, .1f, Interpolation.bounceIn) then
@@ -376,7 +371,7 @@ class BattleAnimationWidget
      */
     private fun animateAreaAttackImpact(side: Side)
     {
-        for (defImg in monsterImgs(side).values())
+        for (defImg in guardianSprites[side].values())
         {
             defImg.addAction(
                     Actions.moveBy(0f, 15f, .1f, Interpolation.bounceIn) then
@@ -387,7 +382,7 @@ class BattleAnimationWidget
 
     fun animateMonsterKO(pos: Int, side: Side)
     {
-        monsterImgs(side).get(pos).die(side, onDieing)
+        guardianSprites[side].get(pos).die(side, onDieing)
     }
 
     fun animateGuardianSubstitution
@@ -400,7 +395,7 @@ class BattleAnimationWidget
             substituted: AGuardian,
             substitute: AGuardian
     ) {
-        val guardianWidget = monsterImgs(side)[pos]
+        val guardianWidget = guardianSprites[side][pos]
         substitute.addObserver(guardianWidget)
         guardianWidget.substitute(substitutesID, substitutesForm, side) { onSubstitutionComplete.invoke() }
     }
@@ -415,7 +410,7 @@ class BattleAnimationWidget
             substituted: AGuardian,
             substitute: AGuardian
     ) {
-        val guardianWidget = monsterImgs(side)[pos]
+        val guardianWidget = guardianSprites[side][pos]
         substitute.addObserver(guardianWidget)
         guardianWidget.replaceDefeated(substitutesID, substitutesForm, side) { onSubstitutionComplete.invoke() }
     }
@@ -427,7 +422,7 @@ class BattleAnimationWidget
             guardianToBeBanned: AGuardian,
             onBanningTrialComplete: () -> Unit
     ) {
-        val guardianWidget = monsterImgs(side)[pos]
+        val guardianWidget = guardianSprites[side][pos]
         guardianWidget.animateBan(onBanningTrialComplete)
     }
 
@@ -438,7 +433,7 @@ class BattleAnimationWidget
             guardianToBeBanned: AGuardian,
             callback: () -> Unit
     ) {
-        val guardianWidget = monsterImgs(side)[pos]
+        val guardianWidget = guardianSprites[side][pos]
         guardianWidget.animateBanFailure(callback)
     }
 

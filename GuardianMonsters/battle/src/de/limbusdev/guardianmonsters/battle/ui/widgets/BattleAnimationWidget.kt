@@ -149,9 +149,9 @@ class BattleAnimationWidget
         }
 
         // Correct Image Depth Sorting
-        if(positions.containsKey(2)) addActor(monsterImgs(side)[2])
-        if(positions.containsKey(1)) addActor(monsterImgs(side)[1])
-        if(positions.containsKey(0)) addActor(monsterImgs(side)[0])
+        if(positions.containsKey(2)) { addActor(monsterImgs(side)[2]) }
+        if(positions.containsKey(1)) { addActor(monsterImgs(side)[1]) }
+        if(positions.containsKey(0)) { addActor(monsterImgs(side)[0]) }
     }
 
     /**

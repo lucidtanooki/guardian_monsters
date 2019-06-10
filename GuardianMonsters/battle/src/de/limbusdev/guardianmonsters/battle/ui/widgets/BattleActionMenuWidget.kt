@@ -1,11 +1,8 @@
 package de.limbusdev.guardianmonsters.battle.ui.widgets
 
-import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton
 import com.badlogic.gdx.scenes.scene2d.ui.Skin
 
-import de.limbusdev.guardianmonsters.ui.widgets.Callback
-import de.limbusdev.guardianmonsters.ui.widgets.SimpleClickListener
 import ktx.actors.onClick
 
 /**
@@ -15,24 +12,24 @@ import ktx.actors.onClick
 class BattleActionMenuWidget
 (
         skin: Skin,
-        private var backCB      : () -> Unit = {},
-        private var bagCB       : () -> Unit = {},
-        private var monsterCB   : () -> Unit = {},
-        private var extraCB     : () -> Unit = {}
+        private var onBackButton    : () -> Unit = {},
+        private var onBagButton     : () -> Unit = {},
+        private var onTeamButton    : () -> Unit = {},
+        private var onExtraButton   : () -> Unit = {}
 )
     : BattleWidget()
 {
     // Buttons
-    var backButton      : ImageButton = BattleHUDMenuButton(skin, BattleHUDMenuButton.BACK)
-    var monsterButton   : ImageButton = BattleHUDMenuButton(skin, BattleHUDMenuButton.TEAM)
-    var bagButton       : ImageButton = BattleHUDMenuButton(skin, BattleHUDMenuButton.BAG)
-    var extraButton     : ImageButton = BattleHUDMenuButton(skin, BattleHUDMenuButton.DEFEND)
+    var backButton  : ImageButton = BattleHUDMenuButton(skin, BattleHUDMenuButton.BACK)
+    var teamButton  : ImageButton = BattleHUDMenuButton(skin, BattleHUDMenuButton.TEAM)
+    var bagButton   : ImageButton = BattleHUDMenuButton(skin, BattleHUDMenuButton.BAG)
+    var extraButton : ImageButton = BattleHUDMenuButton(skin, BattleHUDMenuButton.DEFEND)
 
     init
     {
         // Add to parent
         addActor(backButton)
-        addActor(monsterButton)
+        addActor(teamButton)
         addActor(bagButton)
         addActor(extraButton)
 
@@ -41,23 +38,23 @@ class BattleActionMenuWidget
 
     private fun initCallbackHandler()
     {
-        backButton.onClick(backCB)
-        bagButton.onClick(bagCB)
-        monsterButton.onClick(monsterCB)
-        extraButton.onClick(extraCB)
+        backButton.onClick(onBackButton)
+        bagButton.onClick(onBagButton)
+        teamButton.onClick(onTeamButton)
+        extraButton.onClick(onExtraButton)
     }
 
     fun setCallbacks
     (
-            backCB    : () -> Unit = {},
-            bagCB     : () -> Unit = {},
-            monsterCB : () -> Unit = {},
-            extraCB   : () -> Unit = {}
+            onBackButton  : () -> Unit = {},
+            onBagButton   : () -> Unit = {},
+            onTeamButton  : () -> Unit = {},
+            onExtraButton : () -> Unit = {}
     ) {
-        this.backCB     = backCB
-        this.bagCB      = bagCB
-        this.monsterCB  = monsterCB
-        this.extraCB    = extraCB
+        this.onBackButton     = onBackButton
+        this.onBagButton      = onBagButton
+        this.onTeamButton     = onTeamButton
+        this.onExtraButton    = onExtraButton
 
         initCallbackHandler()
     }
@@ -66,7 +63,7 @@ class BattleActionMenuWidget
     {
         enable()
         disable(bagButton)
-        disable(monsterButton)
+        disable(teamButton)
         disable(extraButton)
     }
 
@@ -74,7 +71,7 @@ class BattleActionMenuWidget
     {
         enable()
         disable(bagButton)
-        disable(monsterButton)
+        disable(teamButton)
         disable(extraButton)
         disable(backButton)
     }

@@ -29,69 +29,73 @@ import de.limbusdev.guardianmonsters.guardians.Side
 /**
  * BattleHUD manages all actions and UI elements in the [BattleScreen]
  *
+ * For a readable code, the callback initialization has been separated to various initialization
+ * methods. Fot this reason **lateinit** is used on all the properties. The developer has to make
+ * sure, all objects are initialized, before calling show().
+ *
  * @author Georg Eckert 2015
  */
 class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().battleSkin)
 {
-    // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ ATTRIBUTES
-
+    // .................................................................................. Properties
     // Logic
-    private lateinit var battleSystem: BattleSystem
+    private lateinit var battleSystem                   : BattleSystem
 
-    private lateinit var battleAnimationStage   : Stage
-    private lateinit var battleStateSwitcher    : BattleStateSwitcher
+    private lateinit var battleAnimationStage           : Stage
+    private lateinit var battleStateSwitcher            : BattleStateSwitcher
 
     // Groups
-    private lateinit var mainMenu                   : BattleMainMenuWidget
-    private lateinit var actionMenu                 : BattleActionMenuWidget
-    private lateinit var attackMenu                 : AttackMenuWidget
-    private lateinit var attackInfoMenu             : AttackMenuWidget
-    private lateinit var animationWidget            : BattleAnimationWidget
-    private lateinit var statusWidget               : BattleStatusOverviewWidget
-    private lateinit var battleQueueWidget          : BattleQueueWidget
-    private lateinit var infoLabelWidget            : InfoLabelWidget
-    private lateinit var targetMenuWidget           : TargetMenuWidget
-    private lateinit var targetAreaMenuWidget       : TargetMenuWidget
-    private lateinit var attackDetailWidget         : AbilityInfoLabelWidget
-    private lateinit var attackDetailBackButton     : BattleActionMenuWidget
-    private lateinit var attackInfoMenuFrame        : BattleActionMenuWidget
-    private lateinit var switchActiveGuardianWidget : SwitchActiveGuardianWidget
+    private lateinit var mainMenu                       : BattleMainMenuWidget
+    private lateinit var actionMenu                     : BattleActionMenuWidget
+    private lateinit var attackMenu                     : AttackMenuWidget
+    private lateinit var attackInfoMenu                 : AttackMenuWidget
+    private lateinit var animationWidget                : BattleAnimationWidget
+    private lateinit var statusWidget                   : BattleStatusOverviewWidget
+    private lateinit var battleQueueWidget              : BattleQueueWidget
+    private lateinit var infoLabelWidget                : InfoLabelWidget
+    private lateinit var targetMenuWidget               : TargetMenuWidget
+    private lateinit var targetAreaMenuWidget           : TargetMenuWidget
+    private lateinit var attackDetailWidget             : AbilityInfoLabelWidget
+    private lateinit var attackDetailBackButton         : BattleActionMenuWidget
+    private lateinit var attackInfoMenuFrame            : BattleActionMenuWidget
+    private lateinit var switchActiveGuardianWidget     : SwitchActiveGuardianWidget
 
-    private lateinit var attackMenuAddOn            : SevenButtonsWidget.CentralHalfButtonsAddOn
+    private lateinit var attackMenuAddOn                : SevenButtonsWidget.CentralHalfButtonsAddOn
 
     // CallbackHandlers
-    private lateinit var actionMenuBackCB           : () -> Unit
-    private lateinit var actionMenuBagCB            : () -> Unit
-    private lateinit var actionMenuMonsterCB        : () -> Unit
-    private lateinit var actionMenuExtraCB          : () -> Unit
-    private lateinit var infoLabelBackCB            : () -> Unit
-    private lateinit var battleStartLabelBackCB     : () -> Unit
-    private lateinit var statusEffectLabelBackCB    : () -> Unit
-    private lateinit var attackDetailLabelBackCB    : () -> Unit
-    private lateinit var endOfBattleLabelBackCB     : () -> Unit
-    private lateinit var backToActionMenuCB         : () -> Unit
-    private lateinit var escapeSuccessLabelBackCB   : () -> Unit
-    private lateinit var escapeFailedLabelBackCB    : () -> Unit
-    private lateinit var mainMenuOnSwordButton      : () -> Unit
-    private lateinit var mainMenuOnRunButton        : () -> Unit
-    private lateinit var teamMenuOnBackButton       : () -> Unit
-    private lateinit var teamMenuOnSwitchButton     : () -> Unit
+    private lateinit var onActionMenuBackButton         : () -> Unit
+    private lateinit var onActionMenuBagButton          : () -> Unit
+    private lateinit var onActionMenuTeamButton         : () -> Unit
+    private lateinit var onActionMenuExtraButton        : () -> Unit
+    private lateinit var onInfoLabelBackButton          : () -> Unit
+    private lateinit var onBattleStartLabelBackButton   : () -> Unit
+    private lateinit var onStatusEffectLabelBackButton  : () -> Unit
+    private lateinit var onAttackDetailLabelBackButton  : () -> Unit
+    private lateinit var onEndOfBattleLabelBackButton   : () -> Unit
+    private lateinit var onBackToActionMenu             : () -> Unit
+    private lateinit var onEscapeSuccessLabelBackButton : () -> Unit
+    private lateinit var onEscapeFailedLabelBackButton  : () -> Unit
+    private lateinit var onMainMenuSwordButton          : () -> Unit
+    private lateinit var onMainMenuRunButton            : () -> Unit
+    private lateinit var onTeamMenuBackButton           : () -> Unit
+    private lateinit var onTeamMenuSwitchButton         : () -> Unit
 
-    private lateinit var battleSystemCallbacks                  : BattleSystem.Callbacks
-    private lateinit var battleAnimationOnHitCompleteCallback   : () -> Unit
-    private lateinit var battleAnimationOnDieingCallback        : () -> Unit
-    private lateinit var battleAnimationOnDoingNothingCallback  : () -> Unit
+    private lateinit var battleSystemCallbacks          : BattleSystem.Callbacks
+    private lateinit var onBattleAnimationHitComplete   : () -> Unit
+    private lateinit var onBattleAnimationDieing        : () -> Unit
+    private lateinit var onBattleAnimationDoNothing     : () -> Unit
 
-    private lateinit var attackMenuCallbacks        : (Int) -> Unit
-    private lateinit var targetMenuCallbacks        : (Int) -> Unit
-    private lateinit var targetAreaMenuCallbacks    : (Int) -> Unit
-    private lateinit var attackMenuAddOnCallbacks   : (Int) -> Unit
-    private lateinit var attackInfoMenuCallbacks    : (Int) -> Unit
+    private lateinit var onAttackMenuButton             : (Int) -> Unit
+    private lateinit var onTargetMenuButton             : (Int) -> Unit
+    private lateinit var onTargetAreaMenuButton         : (Int) -> Unit
+    private lateinit var onAttackMenuAddOnButton        : (Int) -> Unit
+    private lateinit var onAttackInfoMenuButton         : (Int) -> Unit
 
-    private lateinit var leftTeam   : Team
-    private lateinit var rightTeam  : Team
+    private lateinit var leftTeam                       : Team
+    private lateinit var rightTeam                      : Team
 
 
+    // ................................................................................ Constructors
     init
     {
         setUpCallbacks()
@@ -99,7 +103,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
     }
 
 
-    // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ METHODS
+    // ..................................................................................... Methods
     // ..................................................................... game loop
     override fun update(delta: Float)
     {
@@ -107,9 +111,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
     }
 
     // .............................................................. initialize arena
-    /**
-     * Resets the UI into a state where it can be initialized for a new battle
-     */
+    /** Resets the UI into a state where it can be initialized for a new battle */
     override fun reset()
     {
         super.reset()
@@ -117,17 +119,12 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
         mainMenu.clearActions()
     }
 
-    fun initialize(heroTeam: Team, opponentTeam: Team)
-    {
-        this.initialize(heroTeam, opponentTeam, true)
-    }
-
     /**
      * Initializes the battle screen with the given teams
      * @param heroTeam
      * @param opponentTeam
      */
-    fun initialize(heroTeam: Team, opponentTeam: Team, wildEncounter: Boolean)
+    fun initialize(heroTeam: Team, opponentTeam: Team, wildEncounter: Boolean = true)
     {
         reset()
 
@@ -152,9 +149,8 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
         show()
     }
 
-    // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    // .............................................................................. LibGDX METHODS
 
+    // ............................................................................. libGDX's Screen
     override fun show()
     {
         super.show()
@@ -162,9 +158,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
     }
 
     // ........................................................................ setup
-    /**
-     * Setting up HUD elements:
-     */
+    /** Setting up HUD elements: */
     fun setUpUI()
     {
         // Second stage
@@ -173,27 +167,29 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
         addAdditionalStage(battleAnimationStage)
 
         // Widgets
-        mainMenu        = BattleMainMenuWidget(skin, mainMenuOnSwordButton, mainMenuOnRunButton)
+        mainMenu        = BattleMainMenuWidget(skin, onMainMenuSwordButton, onMainMenuRunButton)
         statusWidget    = BattleStatusOverviewWidget(skin)
-        animationWidget = BattleAnimationWidget(
-                battleAnimationOnHitCompleteCallback,
-                battleAnimationOnDieingCallback,
-                battleAnimationOnDoingNothingCallback)
-        attackMenuAddOn = SevenButtonsWidget.CentralHalfButtonsAddOn(skin, attackMenuAddOnCallbacks)
 
-        attackMenu           = AttackMenuWidget(skin) { ID -> attackMenuCallbacks(ID)     }
-        attackInfoMenu       = AttackMenuWidget(skin) { ID -> attackInfoMenuCallbacks(ID) }
-        targetMenuWidget     = TargetMenuWidget(skin) { ID -> targetMenuCallbacks(ID)     }
-        targetAreaMenuWidget = TargetMenuWidget(skin) { ID -> targetAreaMenuCallbacks(ID) }
+        animationWidget = BattleAnimationWidget(
+                onBattleAnimationHitComplete,
+                onBattleAnimationDieing,
+                onBattleAnimationDoNothing)
+
+        attackMenuAddOn = SevenButtonsWidget.CentralHalfButtonsAddOn(skin, onAttackMenuAddOnButton)
+
+        attackMenu           = AttackMenuWidget(skin) { ID -> onAttackMenuButton(ID)     }
+        attackInfoMenu       = AttackMenuWidget(skin) { ID -> onAttackInfoMenuButton(ID) }
+        targetMenuWidget     = TargetMenuWidget(skin) { ID -> onTargetMenuButton(ID)     }
+        targetAreaMenuWidget = TargetMenuWidget(skin) { ID -> onTargetAreaMenuButton(ID) }
 
         attackInfoMenuFrame    = BattleActionMenuWidget(skin)
-        attackDetailBackButton = BattleActionMenuWidget(skin, backCB = attackDetailLabelBackCB )
+        attackDetailBackButton = BattleActionMenuWidget(skin, onBackButton = onAttackDetailLabelBackButton )
         actionMenu             = BattleActionMenuWidget(
                 skin,
-                backCB    = actionMenuBackCB,
-                bagCB     = actionMenuBagCB,
-                monsterCB = actionMenuMonsterCB,
-                extraCB   = actionMenuExtraCB)
+                onBackButton  = onActionMenuBackButton,
+                onBagButton   = onActionMenuBagButton,
+                onTeamButton  = onActionMenuTeamButton,
+                onExtraButton = onActionMenuExtraButton)
 
         battleQueueWidget = BattleQueueWidget(skin, Align.bottomLeft)
         battleQueueWidget.setPosition(1f, 65f, Align.bottomLeft)
@@ -205,18 +201,18 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
         attackInfoMenuFrame.disableAllChildButtons()
 
         switchActiveGuardianWidget = SwitchActiveGuardianWidget(skin, Services.getUI().inventorySkin)
-        switchActiveGuardianWidget.setCallbacks(teamMenuOnBackButton, teamMenuOnSwitchButton)
+        switchActiveGuardianWidget.setCallbacks(onTeamMenuBackButton, onTeamMenuSwitchButton)
     }
 
-    // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ CALLBACKS
-
+    
+    // ................................................................................... Callbacks
     private fun setUpCallbacks()
     {
         battleStateSwitcher = BattleStateSwitcher()
 
         // ......................................................................................... main menu
-        mainMenuOnSwordButton = { battleSystem.continueBattle() }
-        mainMenuOnRunButton = {
+        onMainMenuSwordButton = { battleSystem.continueBattle() }
+        onMainMenuRunButton = {
 
             if(BattleCalculator.tryToRun(leftTeam, rightTeam))
             {
@@ -229,8 +225,8 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
         }
 
         // ......................................................................................... team menu
-        teamMenuOnBackButton    = { battleStateSwitcher.toAttackMenu() }
-        teamMenuOnSwitchButton  = {
+        onTeamMenuBackButton    = { battleStateSwitcher.toAttackMenu() }
+        onTeamMenuSwitchButton  = {
 
             battleStateSwitcher.toAnimation()
             val substituteNr = switchActiveGuardianWidget.chosenSubstitute
@@ -239,15 +235,15 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
         }
 
         // ......................................................................................... battle start label
-        battleStartLabelBackCB  = { battleStateSwitcher.toMainMenu() }
+        onBattleStartLabelBackButton  = { battleStateSwitcher.toMainMenu() }
 
         // ......................................................................................... battle action menu
-        actionMenuBackCB        = { battleStateSwitcher.toMainMenu() }
-        actionMenuExtraCB       = { battleSystem.defend() }
+        onActionMenuBackButton        = { battleStateSwitcher.toMainMenu() }
+        onActionMenuExtraButton       = { battleSystem.defend() }
 
-        actionMenuBagCB         = { stage.addActor(ItemChoice(Services.getUI().inventorySkin, inventory, leftTeam, battleSystem)) }
+        onActionMenuBagButton         = { stage.addActor(ItemChoice(Services.getUI().inventorySkin, inventory, leftTeam, battleSystem)) }
 
-        actionMenuMonsterCB     = {
+        onActionMenuTeamButton     = {
 
             switchActiveGuardianWidget.initialize(
 
@@ -259,7 +255,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
         }
 
         // ......................................................................................... info label
-        infoLabelBackCB = {
+        onInfoLabelBackButton = {
 
             val statusEffect = battleSystem
                     .activeMonster
@@ -279,15 +275,15 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
         }
 
         // ......................................................................................... status effect label
-        statusEffectLabelBackCB = {
+        onStatusEffectLabelBackButton = {
 
-            actionMenu.setCallbacks(backCB = infoLabelBackCB)
+            actionMenu.setCallbacks(onBackButton = onInfoLabelBackButton)
             battleSystem.nextMonster()
             battleSystem.continueBattle()
         }
 
         // ......................................................................................... end of battle
-        endOfBattleLabelBackCB = {
+        onEndOfBattleLabelBackButton = {
 
             var teamOk = false
             for(m in leftTeam.values())
@@ -308,7 +304,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
         }
 
         // ......................................................................................... attack menu
-        attackMenuCallbacks = {
+        onAttackMenuButton = {
 
             val activeGuardian = battleSystem.activeMonster
             println("AttackMenuButtons: onButtonNr($it)")
@@ -331,7 +327,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
         }
 
         // ......................................................................................... attack info menu
-        attackInfoMenuCallbacks = {
+        onAttackInfoMenuButton = {
 
             battleStateSwitcher.toAttackDetail(battleSystem
                     .activeMonster
@@ -340,10 +336,10 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
         }
 
         // ......................................................................................... attack detail label
-        attackDetailLabelBackCB = { battleStateSwitcher.toAttackInfoMenu() }
+        onAttackDetailLabelBackButton = { battleStateSwitcher.toAttackInfoMenu() }
 
         // ......................................................................................... attack menu info switch
-        attackMenuAddOnCallbacks = object : (Int) -> Unit {
+        onAttackMenuAddOnButton = object : (Int) -> Unit {
 
             private var checked = false
 
@@ -562,7 +558,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
         }
 
         // ......................................................................................... target menu
-        targetMenuCallbacks = {
+        onTargetMenuButton = {
 
             val target = targetMenuWidget.getMonsterOfIndex(it)
             battleSystem.setChosenTarget(target)
@@ -570,21 +566,21 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
         }
 
         // ......................................................................................... target area menu
-        targetAreaMenuCallbacks = {
+        onTargetAreaMenuButton = {
 
             battleSystem.setChosenArea(targetAreaMenuWidget.getCombatTeamOfIndex(it))
             battleSystem.attack()
         }
 
         // ......................................................................................... back to action menu
-        backToActionMenuCB = { battleStateSwitcher.toActionMenu() }
+        onBackToActionMenu = { battleStateSwitcher.toActionMenu() }
 
         // ......................................................................................... escape success / fail
-        escapeSuccessLabelBackCB = { goToPreviousScreen() }
-        escapeFailedLabelBackCB = { battleSystem.continueBattle() }
+        onEscapeSuccessLabelBackButton = { goToPreviousScreen() }
+        onEscapeFailedLabelBackButton = { battleSystem.continueBattle() }
 
         // ......................................................................................... battle animation
-        battleAnimationOnHitCompleteCallback = {
+        onBattleAnimationHitComplete = {
 
             val defeated = battleSystem.applyAttack()
             if(!defeated || battleSystem.queue.right.teamKO() || battleSystem.queue.left.teamKO()) {
@@ -592,9 +588,9 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
             }
         }
 
-        battleAnimationOnDieingCallback = { actionMenu.enable(actionMenu.backButton) }
+        onBattleAnimationDieing = { actionMenu.enable(actionMenu.backButton) }
 
-        battleAnimationOnDoingNothingCallback = { actionMenu.enable(actionMenu.backButton) }
+        onBattleAnimationDoNothing = { actionMenu.enable(actionMenu.backButton) }
 
     }
 
@@ -624,7 +620,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
             actionMenu.disableAllButBackButton()
 
             // Set Callbacks
-            actionMenu.setCallbacks(backCB = battleStartLabelBackCB)
+            actionMenu.setCallbacks(onBackButton = onBattleStartLabelBackButton)
             infoLabelWidget.setWholeText(Services.getL18N().Battle().get("battle_start"))
             infoLabelWidget.animateTextAppearance()
 
@@ -645,7 +641,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
             attackMenuAddOn.addToStage(stage)
 
             // Setup Widgets
-            actionMenu.setCallbacks(actionMenuBackCB, actionMenuBagCB, actionMenuMonsterCB, actionMenuExtraCB)
+            actionMenu.setCallbacks(onActionMenuBackButton, onActionMenuBagButton, onActionMenuTeamButton, onActionMenuExtraButton)
             attackMenu.init(battleSystem.activeMonster, true)
 
             state = BattleState.ACTION_MENU
@@ -698,7 +694,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
             val wholeText = Services.getL18N().Battle().get(textKey)
             infoLabelWidget.setWholeText(wholeText)
             infoLabelWidget.animateTextAppearance()
-            actionMenu.setCallbacks(backCB = endOfBattleLabelBackCB)
+            actionMenu.setCallbacks(onBackButton = onEndOfBattleLabelBackButton)
 
             statusWidget.addToStage(stage)
 
@@ -723,7 +719,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
             infoLabelWidget.setWholeText(BattleStringBuilder.banGuardianSuccess(bannedGuardian, crystal))
 
             infoLabelWidget.animateTextAppearance()
-            actionMenu.setCallbacks(backCB = endOfBattleLabelBackCB)
+            actionMenu.setCallbacks(onBackButton = onEndOfBattleLabelBackButton)
 
             statusWidget.addToStage(stage)
 
@@ -748,7 +744,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
             toInfoLabel()
             actionMenu.disableAllChildButtons()
             battleQueueWidget.addToStage(stage)
-            actionMenu.setCallbacks(backCB = infoLabelBackCB)
+            actionMenu.setCallbacks(onBackButton = onInfoLabelBackButton)
 
             state = BattleState.ANIMATION
         }
@@ -760,7 +756,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
             statusWidget.addToStage(battleAnimationStage)
             actionMenu.disableAllButBackButton()
             actionMenu.addToStage(stage)
-            actionMenu.setCallbacks(backCB = backToActionMenuCB)
+            actionMenu.setCallbacks(onBackButton = onBackToActionMenu)
             targetMenuWidget.addToStage(stage)
             battleQueueWidget.addToStage(stage)
 
@@ -774,7 +770,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
             statusWidget.addToStage(battleAnimationStage)
             actionMenu.disableAllButBackButton()
             actionMenu.addToStage(stage)
-            actionMenu.setCallbacks(backCB = backToActionMenuCB)
+            actionMenu.setCallbacks(onBackButton = onBackToActionMenu)
             targetAreaMenuWidget.addToStage(stage)
             battleQueueWidget.addToStage(stage)
 
@@ -818,7 +814,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
             reset()
             toInfoLabel()
             battleQueueWidget.addToStage(stage)
-            actionMenu.setCallbacks(backCB = statusEffectLabelBackCB)
+            actionMenu.setCallbacks(onBackButton = onStatusEffectLabelBackButton)
 
             state = BattleState.ANIMATION
         }
@@ -829,7 +825,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
             val wholeText = Services.getL18N().Battle().get("escape_success")
             infoLabelWidget.setWholeText(wholeText)
             infoLabelWidget.animateTextAppearance()
-            actionMenu.setCallbacks(backCB = escapeSuccessLabelBackCB)
+            actionMenu.setCallbacks(onBackButton = onEscapeSuccessLabelBackButton)
         }
 
         fun toEscapeFailInfo()
@@ -838,7 +834,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
             val wholeText = Services.getL18N().Battle().get("escape_fail")
             infoLabelWidget.setWholeText(wholeText)
             infoLabelWidget.animateTextAppearance()
-            actionMenu.setCallbacks(backCB = escapeFailedLabelBackCB)
+            actionMenu.setCallbacks(onBackButton = onEscapeFailedLabelBackButton)
         }
 
         fun reset()

@@ -249,7 +249,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
 
         actionMenuMonsterCB     = {
 
-            switchActiveGuardianWidget.init(
+            switchActiveGuardianWidget.initialize(
 
                     battleSystem.activeMonster,
                     battleSystem.queue.left,

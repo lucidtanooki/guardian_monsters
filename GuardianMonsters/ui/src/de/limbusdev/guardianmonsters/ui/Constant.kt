@@ -21,6 +21,13 @@ object Constant
     const val ROW = 8
     const val zoom = 1
 
+
+    // Float Variants for Kotlin
+    const val WIDTHf = WIDTH.toFloat()
+    const val HEIGHTf = HEIGHT.toFloat()
+    const val RES_Xf = RES_X.toFloat()
+    const val RES_Yf = RES_Y.toFloat()
+
     // ............................................................................................. DEBUGGING
     const val DEBUGGING_ON = true
 }

@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.scenes.scene2d.ui.Image
 import com.badlogic.gdx.scenes.scene2d.ui.Skin
 import com.badlogic.gdx.utils.Array
+import de.limbusdev.guardianmonsters.guardians.Side
 
 import java.util.Observable
 import java.util.Observer
@@ -18,21 +19,23 @@ import de.limbusdev.utils.extensions.f
  * @author Georg Eckert
  */
 
-class BattleQueueWidget
-(
-        skin: Skin,
-        internal var align: Int
-)
-    : BattleWidget(), Observer
+class BattleQueueWidget : BattleWidget, Observer
 {
     // .................................................................................. Properties
-    private val startx          = 0
-    private val starty          = 0
-    private val previewYoffset  = 36
-    private val queueOffset     = 4
+    private val startx          : Int = 0
+    private val starty          : Int = 0
+    private val previewYoffset  : Int = 36
+    private val queueOffset     : Int = 4
+    internal val align          : Int
 
-    private val bgIndicator: Image = Image(skin.getDrawable("monster-preview-active"))
+    private val bgIndicator: Image
 
+
+    constructor(skin: Skin, align: Int) : super()
+    {
+        this.align = align
+        bgIndicator = Image(skin.getDrawable("monster-preview-active"))
+    }
 
     // ..................................................................................... Methods
     /**
@@ -53,10 +56,10 @@ class BattleQueueWidget
     {
         var slot = startSlot
 
-        for (i in round.size - 1 downTo 0)
+        for (i: Int in round.size - 1 downTo 0)
         {
-            val guardian = round.get(i)
-            val side = queue.getTeamSideFor(guardian)
+            val guardian: AGuardian = round.get(i)
+            val side: Side = queue.getTeamSideFor(guardian)
 
             val previewWidget = MonsterPreviewWidget(Services.getUI().battleSkin)
             previewWidget.setPreview(guardian.speciesDescription.ID, guardian.abilityGraph.currentForm, side)
@@ -65,7 +68,7 @@ class BattleQueueWidget
 
             previewWidget.setPosition(startx.f(), (starty + startSlot * previewYoffset + queueOffset).f(), align)
 
-            addActor(previewWidget)
+            this.addActor(previewWidget)
 
             slot++
         }
@@ -78,9 +81,10 @@ class BattleQueueWidget
         clear()
 
         bgIndicator.setPosition(-4f, 0f, align)
-        addActor(bgIndicator)
+        this.addActor(bgIndicator)
 
-        val pos = addPreviewImagesToWidget(queue, queue.currentRound, 0, false)
+        var pos: Int = 0
+        pos = addPreviewImagesToWidget(queue, queue.currentRound, pos, false)
         addPreviewImagesToWidget(queue, queue.nextRound, pos, true)
     }
 

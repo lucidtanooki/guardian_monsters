@@ -14,6 +14,7 @@ import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian
 import de.limbusdev.guardianmonsters.ui.Constant
 import de.limbusdev.utils.extensions.set
 import de.limbusdev.utils.geometry.IntVec2
+import ktx.actors.then
 
 
 /**
@@ -72,7 +73,7 @@ class BattleStatusOverviewWidget(skin: Skin) : BattleWidget()
 
         // Initialize UI
         for (key in team.keys()) {
-            monsterStateWidgets[side].get(key).init(team.get(key))
+            monsterStateWidgets[side].get(key).initialize(team.get(key))
             addActor(monsterStateWidgets[side].get(key))
         }
     }
@@ -87,11 +88,12 @@ class BattleStatusOverviewWidget(skin: Skin) : BattleWidget()
     {
         val w = monsterStateWidgets[side].get(pos)
         w.clearActions()
-        w.addAction(Actions.sequence(
-                Actions.fadeOut(1f),
-                Actions.run { w.init(guardian) },
+        w.addAction(
+
+                Actions.fadeOut(1f)                     then
+                Actions.run { w.initialize(guardian) }  then
                 Actions.fadeIn(1f)
-        ))
+        )
     }
 
 

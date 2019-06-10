@@ -4,6 +4,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.ui.Skin
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.viewport.FitViewport
+import com.badlogic.gdx.Game
 
 import de.limbusdev.guardianmonsters.services.Services
 
@@ -14,58 +15,61 @@ import de.limbusdev.guardianmonsters.services.Services
  */
 abstract class AHUD(protected val skin: Skin)
 {
-    var stage: Stage
-        protected set
+    // .................................................................................. Properties
+    var stage: Stage protected set
     private val stages = Array<Stage>()
 
+
+    // ................................................................................ Constructors
     init
     {
-        val fit = FitViewport(Constant.WIDTH.toFloat(), Constant.HEIGHT.toFloat())
+        val fit = FitViewport(Constant.WIDTHf, Constant.HEIGHTf)
         stage = Stage(fit)
-        stage.isDebugAll = Constant.DEBUGGING_ON
         stages.insert(0, stage)
+
+        stage.isDebugAll = Constant.DEBUGGING_ON
     }
 
-    fun draw()
-    {
-        for(s in stages)
-        {
-            s.draw()
-        }
-    }
 
-    open fun update(delta: Float)
-    {
-        for(s in stages)
-        {
-            s.act(delta)
-        }
-    }
-
-    protected abstract fun reset()
-
-    abstract fun show()
-
-    open fun hide()
-    {
-        for(s in stages) s.act(100f)
-    }
-
+    // ..................................................................................... Methods
     open fun goToPreviousScreen()
     {
         Services.getScreenManager().popScreen()
     }
 
-    fun resize(width: Int, height: Int)
-    {
-        for(s in stages)
-        {
-            s.viewport.update(width, height)
-        }
-    }
-
     fun addAdditionalStage(stage: Stage)
     {
         stages.insert(0, stage)
+    }
+
+
+    // ............................................................................. libGDX's Screen
+    /** Called when the parent screen becomes the current screen for a [Game]. */
+    abstract fun show()
+
+    protected abstract fun reset()
+
+    /** Calls the draw() method on all added [Stage] objects. */
+    fun draw()
+    {
+        for(s in stages) { s.draw() }
+    }
+
+    /** Calls the act() method on all added [Stage] objects. */
+    open fun update(delta: Float)
+    {
+        for(s in stages) { s.act(delta) }
+    }
+
+    /** Finalizes acting of all added [Stage] objects. */
+    open fun hide()
+    {
+        for(s in stages) { s.act(100f) }
+    }
+
+    /** Updates the viewports of all added [Stage] objects. */
+    fun resize(width: Int, height: Int)
+    {
+        for(s in stages) { s.viewport.update(width, height) }
     }
 }

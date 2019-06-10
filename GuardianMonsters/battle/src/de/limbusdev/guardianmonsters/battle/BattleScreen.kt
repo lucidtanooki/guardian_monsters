@@ -18,7 +18,7 @@ import de.limbusdev.guardianmonsters.ui.AScreen
  */
 class BattleScreen(inventory: Inventory) : AScreen(BattleHUD(inventory))
 {
-    // ........................................................................ Properties
+    // .................................................................................. Properties
     companion object { const val TAG = "BattleScreen" }
 
     // Keep track of BattleScreen's state
@@ -37,7 +37,7 @@ class BattleScreen(inventory: Inventory) : AScreen(BattleHUD(inventory))
         setBackground(0)
     }
 
-    // ........................................................................ Methods
+    // ..................................................................................... Methods
     /**
      * BattleScreen must get initialized before being shown
      * @param team          [Team] for the human player
@@ -49,6 +49,8 @@ class BattleScreen(inventory: Inventory) : AScreen(BattleHUD(inventory))
         battleHUD.initialize(team, opponentTeam)
     }
 
+
+    // ............................................................................. libGDX's Screen
     override fun show()
     {
         super.show()

@@ -11,60 +11,73 @@ import com.badlogic.gdx.utils.viewport.FitViewport
 import com.badlogic.gdx.utils.viewport.Viewport
 
 import de.limbusdev.guardianmonsters.services.Services
-import de.limbusdev.utils.extensions.f
 
 /**
- * AScreen
+ * AScreen is an abstract class that works as the base skeleton for the screen managing framework.
+ * Any screen in the game should inherit from this class.
  *
  * @author Georg Eckert 2017
  */
 
 abstract class AScreen(var hud: AHUD) : Screen
 {
+    // .................................................................................. Properties
     // Renderers and Cameras
-    private val camera:     OrthographicCamera = OrthographicCamera()
-    private val viewport:   Viewport
-    private var background: TextureRegion? = null
-    private var batch:      SpriteBatch
-    private var shpRend:    ShapeRenderer
+    private val camera      : OrthographicCamera = OrthographicCamera()
+    private val viewport    : Viewport
+    private var background  : TextureRegion = TextureRegion() // initialize with dummy
+    private var batch       : SpriteBatch
+    private var shpRend     : ShapeRenderer
 
+
+    // ................................................................................ Constructors
     init
     {
-        viewport = FitViewport(Constant.WIDTH.f(), Constant.HEIGHT.f(), camera)
-        batch = SpriteBatch()
-        shpRend = ShapeRenderer()
+        viewport = FitViewport(Constant.WIDTHf, Constant.HEIGHTf, camera)
+        batch    = SpriteBatch()
+        shpRend  = ShapeRenderer()
     }
 
+
+    // ..................................................................................... Methods
     fun setBackground(index: Int)
     {
-        this.background = Services.getMedia().getBackgroundTexture(index)
+        background = Services.getMedia().getBackgroundTexture(index)
     }
 
-    override fun show()
+    private fun clearScreen()
     {
-        hud.show()
-        this.batch = SpriteBatch()
-        this.shpRend = ShapeRenderer()
-        Gdx.input.inputProcessor = hud.stage
-    }
-
-    override fun render(delta: Float) {
-        // Clear screen
         Gdx.gl.glClearColor(0f, 0f, 0f, 1f)
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA)
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT)
+    }
 
-        if(background != null)
-        {
-            batch.begin()
-            batch.draw(background, 0f, 0f, Constant.WIDTH.toFloat(), Constant.HEIGHT.toFloat())
-            batch.end()
-        }
+    private fun drawBackground()
+    {
+        batch.begin()
+        batch.draw(background, 0f, 0f, Constant.WIDTHf, Constant.HEIGHTf)
+        batch.end()
+    }
+
+
+    // ............................................................................. libGDX's Screen
+    override fun show()
+    {
+        hud.show()                              // enable this screen's HUD
+        batch = SpriteBatch()                   // initialize SpriteBatch
+        shpRend = ShapeRenderer()               // initialize ShapeRenderer
+        Gdx.input.inputProcessor = hud.stage    // set this screen's HUD as input processor
+    }
+
+    override fun render(delta: Float)
+    {
+        clearScreen()
+        drawBackground()
 
         hud.update(delta)
 
         viewport.apply()
-        batch.projectionMatrix = camera.combined
+        batch.projectionMatrix   = camera.combined
         shpRend.projectionMatrix = camera.combined
         camera.update()
 
@@ -89,7 +102,7 @@ abstract class AScreen(var hud: AHUD) : Screen
 
     override fun dispose()
     {
-        this.batch.dispose()
-        this.shpRend.dispose()
+        batch.dispose()
+        shpRend.dispose()
     }
 }

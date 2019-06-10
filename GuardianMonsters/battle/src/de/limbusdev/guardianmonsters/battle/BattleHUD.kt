@@ -117,9 +117,9 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
         mainMenu.clearActions()
     }
 
-    fun init(heroTeam: Team, opponentTeam: Team)
+    fun initialize(heroTeam: Team, opponentTeam: Team)
     {
-        this.init(heroTeam, opponentTeam, true)
+        this.initialize(heroTeam, opponentTeam, true)
     }
 
     /**
@@ -127,7 +127,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
      * @param heroTeam
      * @param opponentTeam
      */
-    fun init(heroTeam: Team, opponentTeam: Team, wildEncounter: Boolean)
+    fun initialize(heroTeam: Team, opponentTeam: Team, wildEncounter: Boolean)
     {
         reset()
 
@@ -368,22 +368,22 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
         // ......................................................................................... battle system
         battleSystemCallbacks = object : BattleSystem.Callbacks()
         {
-            override fun onBanningWildGuardian(bannedGuardian: AGuardian, item: ChakraCrystalItem, fieldPos: Int)
+            override fun onBanningWildGuardian(bannedGuardian: AGuardian, crystal: ChakraCrystalItem, fieldPos: Int)
             {
                 battleStateSwitcher.toAnimation()
-                infoLabelWidget.setWholeText(BattleStringBuilder.tryingToBanGuardian(bannedGuardian, item))
+                infoLabelWidget.setWholeText(BattleStringBuilder.tryingToBanGuardian(bannedGuardian, crystal))
                 infoLabelWidget.animateTextAppearance()
 
                 val callback = {
 
-                    val success = BattleCalculator.banSucceeds(bannedGuardian, item)
+                    val success = BattleCalculator.banSucceeds(bannedGuardian, crystal)
                     if(success)
                     {
-                        battleSystemCallbacks.onBanningWildGuardianSuccess(bannedGuardian, item, fieldPos)
+                        battleSystemCallbacks.onBanningWildGuardianSuccess(bannedGuardian, crystal, fieldPos)
                     }
                     else
                     {
-                        battleSystemCallbacks.onBanningWildGuardianFailure(bannedGuardian, item, fieldPos)
+                        battleSystemCallbacks.onBanningWildGuardianFailure(bannedGuardian, crystal, fieldPos)
                     }
                 }
                 animationWidget.animateBanning(fieldPos, Side.RIGHT, bannedGuardian, callback)

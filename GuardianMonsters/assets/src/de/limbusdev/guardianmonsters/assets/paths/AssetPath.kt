@@ -87,6 +87,8 @@ object AssetPath
                     "$rootPath/battle_1.ogg"
             )
 
+            val BG_BATTLE_default get() = BG_BATTLE[0]
+
             @Asset(GdxMusic::class) const val VICTORY_FANFARE = "$rootPath/victory_fanfare.ogg"
             @Asset(GdxMusic::class) const val VICTORY_SONG = "$rootPath/victory_song.ogg"
             @Asset(GdxMusic::class) const val METAMORPHOSIS = "$rootPath/metamorphosis.ogg"

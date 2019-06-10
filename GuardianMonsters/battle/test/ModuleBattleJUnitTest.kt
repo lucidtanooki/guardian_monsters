@@ -15,7 +15,8 @@ import org.junit.Assert.assertEquals
  * @author Georg Eckert 2017
  */
 
-class ModuleBattleJUnitTest {
+class ModuleBattleJUnitTest
+{
     @Test
     fun abilityMediaParsingTest()
     {
@@ -31,13 +32,13 @@ class ModuleBattleJUnitTest {
 
         var found = abilityMediaInfos.get("attNone1_selfdef")
         assertEquals("attNone1_selfdef", found.name)
-        assertEquals(0, found.sfxIndex.toLong())
+        assertEquals(0, found.sfxIndex)
         assertEquals(SFXType.NONE, found.sfxType)
         assertEquals(AnimationType.NONE, found.animationType)
 
         found = abilityMediaInfos.get("attNone2_kick")
         assertEquals("attNone2_kick", found.name)
-        assertEquals(0, found.sfxIndex.toLong())
+        assertEquals(0, found.sfxIndex)
         assertEquals(SFXType.HIT, found.sfxType)
         assertEquals(AnimationType.CONTACT, found.animationType)
     }

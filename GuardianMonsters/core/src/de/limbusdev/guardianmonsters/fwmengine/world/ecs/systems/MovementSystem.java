@@ -227,7 +227,7 @@ public class MovementSystem extends EntitySystem {
                         Team oppTeam = BattleFactory.INSTANCE.createOpponentTeam(
                             guardianProbabilities,ma.teamSizeProbabilities,1,1
                         );
-                        ecs.hud.battleScreen.init(Components.team.get(ecs.hero).team, oppTeam);
+                        ecs.hud.battleScreen.initialize(Components.team.get(ecs.hero).team, oppTeam);
                         Services.getScreenManager().pushScreen(ecs.hud.battleScreen);
                         //............................................................. START BATTLE
 

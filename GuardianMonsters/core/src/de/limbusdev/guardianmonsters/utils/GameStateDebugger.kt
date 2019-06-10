@@ -128,7 +128,7 @@ class GameStateDebugger(private val game: Game)
         inventory.putIntoInventory(itemService.getItem("guardian-crystal-none"))
 
         val battleScreen = BattleScreen(inventory)
-        battleScreen.init(heroTeam, oppoTeam)
+        battleScreen.initialize(heroTeam, oppoTeam)
         game.screen = battleScreen
     }
 

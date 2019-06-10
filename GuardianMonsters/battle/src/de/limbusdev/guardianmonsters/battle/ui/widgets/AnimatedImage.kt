@@ -10,6 +10,7 @@
 package de.limbusdev.guardianmonsters.battle.ui.widgets
 
 import com.badlogic.gdx.graphics.g2d.Animation
+import com.badlogic.gdx.graphics.g2d.TextureAtlas
 import com.badlogic.gdx.graphics.g2d.TextureRegion
 import com.badlogic.gdx.scenes.scene2d.ui.Image
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable
@@ -31,7 +32,6 @@ class AnimatedImage
 {
     // .................................................................................. Properties
     private var animationTime = 0f
-
 
     // ..................................................................................... Methods
     fun setAnimation(animation: Animation<TextureRegion>)

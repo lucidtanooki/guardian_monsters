@@ -1,28 +1,16 @@
 package de.limbusdev.guardianmonsters.battle.ui.widgets
 
 import com.badlogic.gdx.graphics.Color
-import com.badlogic.gdx.scenes.scene2d.InputEvent
 import com.badlogic.gdx.scenes.scene2d.Touchable
-import com.badlogic.gdx.scenes.scene2d.ui.Button
 import com.badlogic.gdx.scenes.scene2d.ui.Skin
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener
 import com.badlogic.gdx.utils.Align
 import com.badlogic.gdx.utils.ArrayMap
 
 import de.limbusdev.guardianmonsters.guardians.Element
 import de.limbusdev.guardianmonsters.guardians.abilities.Ability
 import de.limbusdev.guardianmonsters.services.Services
-import de.limbusdev.guardianmonsters.ui.widgets.Callback
-import de.limbusdev.guardianmonsters.ui.widgets.SimpleClickListener
 
-import de.limbusdev.guardianmonsters.battle.ui.widgets.BattleHUDTextButton.BOTTOMLEFT
-import de.limbusdev.guardianmonsters.battle.ui.widgets.BattleHUDTextButton.BOTTOMRIGHT
-import de.limbusdev.guardianmonsters.battle.ui.widgets.BattleHUDTextButton.CENTER
-import de.limbusdev.guardianmonsters.battle.ui.widgets.BattleHUDTextButton.LEFT
-import de.limbusdev.guardianmonsters.battle.ui.widgets.BattleHUDTextButton.RIGHT
-import de.limbusdev.guardianmonsters.battle.ui.widgets.BattleHUDTextButton.TOPLEFT
-import de.limbusdev.guardianmonsters.battle.ui.widgets.BattleHUDTextButton.TOPRIGHT
 import de.limbusdev.utils.extensions.set
 import ktx.actors.onClick
 
@@ -55,7 +43,14 @@ open class SevenButtonsWidget
         }
 
         // Ability Buttons
-        val positions = intArrayOf(LEFT, TOPLEFT, BOTTOMLEFT, CENTER, TOPRIGHT, BOTTOMRIGHT, RIGHT)
+        val positions = intArrayOf(
+                BattleHUDTextButton.LEFT,
+                BattleHUDTextButton.TOPLEFT,
+                BattleHUDTextButton.BOTTOMLEFT,
+                BattleHUDTextButton.CENTER,
+                BattleHUDTextButton.TOPRIGHT,
+                BattleHUDTextButton.BOTTOMRIGHT,
+                BattleHUDTextButton.RIGHT)
 
         for (i in positions)
         {
@@ -160,7 +155,7 @@ open class SevenButtonsWidget
     class CentralHalfButtonsAddOn
     (
             skin: Skin,
-            private val callbacks: Callback.ButtonID
+            private val callbacks: (Int) -> Unit
     )
         : BattleWidget()
     {
@@ -180,7 +175,7 @@ open class SevenButtonsWidget
             {
                 buttons[i].onClick {
 
-                    if (!buttons[i].isDisabled) { callbacks.onClick(i) }
+                    if (!buttons[i].isDisabled) { callbacks.invoke(i) }
                 }
             }
         }

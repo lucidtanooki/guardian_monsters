@@ -248,15 +248,16 @@ public class MediaManager implements IMediaManager
     }
 
     @Override
-    public Animation<AtlasRegion> getStatusEffectAnimation(String statusEffect)
+    public Animation<AtlasRegion> getStatusEffectAnimation(Enum statusEffect)
     {
+        String seString = statusEffect.toString().toLowerCase();
         TextureAtlas atlas = assets.get("spritesheets/statusEffectAnimations.pack", TextureAtlas.class);
         Animation<AtlasRegion> anim;
 
-        if(atlas.findRegions("status_effect_" + statusEffect).size == 0) {
+        if(atlas.findRegions("status_effect_" + seString).size == 0) {
             anim = new Animation<>(1f / 12f, atlas.findRegions("status_effect_healthy"), Animation.PlayMode.LOOP);
         } else {
-            anim = new Animation<>(1f / 12f, atlas.findRegions("status_effect_" + statusEffect), Animation.PlayMode.LOOP);
+            anim = new Animation<>(1f / 12f, atlas.findRegions("status_effect_" + seString), Animation.PlayMode.LOOP);
         }
 
         return anim;

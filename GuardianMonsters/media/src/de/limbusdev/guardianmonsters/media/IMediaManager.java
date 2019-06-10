@@ -58,7 +58,12 @@ public interface IMediaManager
 
     Animation<AtlasRegion> getBanningAnimation();
 
-    Animation<AtlasRegion> getStatusEffectAnimation(String statusEffect);
+    /**
+     * Always use lower case names for status effect assets. All given strings are made to lower case
+     * @param statusEffect
+     * @return
+     */
+    Animation<AtlasRegion> getStatusEffectAnimation(Enum statusEffect);
 
     /**
      * 0 - Water

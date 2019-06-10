@@ -8,18 +8,7 @@ import com.badlogic.gdx.utils.ArrayMap
 import com.badlogic.gdx.utils.viewport.FitViewport
 
 import de.limbusdev.guardianmonsters.assets.paths.AssetPath
-import de.limbusdev.guardianmonsters.battle.ui.widgets.AbilityInfoLabelWidget
-import de.limbusdev.guardianmonsters.battle.ui.widgets.AttackMenuWidget
-import de.limbusdev.guardianmonsters.battle.ui.widgets.BattleActionMenuWidget
-import de.limbusdev.guardianmonsters.battle.ui.widgets.BattleAnimationWidget
-import de.limbusdev.guardianmonsters.battle.ui.widgets.BattleMainMenuWidget
-import de.limbusdev.guardianmonsters.battle.ui.widgets.BattleQueueWidget
-import de.limbusdev.guardianmonsters.battle.ui.widgets.BattleStatusOverviewWidget
-import de.limbusdev.guardianmonsters.battle.ui.widgets.InfoLabelWidget
-import de.limbusdev.guardianmonsters.battle.ui.widgets.LevelUpWidget
-import de.limbusdev.guardianmonsters.battle.ui.widgets.SevenButtonsWidget
-import de.limbusdev.guardianmonsters.battle.ui.widgets.SwitchActiveGuardianWidget
-import de.limbusdev.guardianmonsters.battle.ui.widgets.TargetMenuWidget
+import de.limbusdev.guardianmonsters.battle.ui.widgets.*
 import de.limbusdev.guardianmonsters.battle.utils.BattleStringBuilder
 import de.limbusdev.guardianmonsters.guardians.Constant
 import de.limbusdev.guardianmonsters.guardians.GuardiansServiceLocator
@@ -36,7 +25,6 @@ import de.limbusdev.guardianmonsters.inventory.ui.widgets.items.ItemChoice
 import de.limbusdev.guardianmonsters.services.Services
 import de.limbusdev.guardianmonsters.ui.widgets.Callback
 
-import de.limbusdev.guardianmonsters.battle.ui.widgets.BattleHUDTextButton.CENTERTOP
 import de.limbusdev.guardianmonsters.guardians.Side
 
 
@@ -99,7 +87,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
     private lateinit var attackMenuCallbacks        : (Int) -> Unit
     private lateinit var targetMenuCallbacks        : (Int) -> Unit
     private lateinit var targetAreaMenuCallbacks    : (Int) -> Unit
-    private lateinit var attackMenuAddOnCallbacks   : Callback.ButtonID
+    private lateinit var attackMenuAddOnCallbacks   : (Int) -> Unit
     private lateinit var attackInfoMenuCallbacks    : (Int) -> Unit
 
     private lateinit var leftTeam   : Team
@@ -364,16 +352,16 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
         attackDetailLabelBackCB = { battleStateSwitcher.toAttackInfoMenu() }
 
         // ......................................................................................... attack menu info switch
-        attackMenuAddOnCallbacks = object : Callback.ButtonID {
+        attackMenuAddOnCallbacks = object : (Int) -> Unit {
 
             private var checked = false
 
-            override fun onClick(buttonID: Int)
+            override fun invoke(buttonID: Int)
             {
                 checked = !checked
                 when(buttonID)
                 {
-                    CENTERTOP -> if(checked)
+                    BattleHUDTextButton.CENTERTOP -> if(checked)
                     {
                         battleStateSwitcher.toAttackInfoMenu()
                     }

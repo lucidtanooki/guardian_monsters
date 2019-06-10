@@ -1,6 +1,9 @@
 package de.limbusdev.guardianmonsters.services;
 
+import java.util.HashMap;
+import java.util.Map;
 
+import de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics;
 import de.limbusdev.guardianmonsters.media.IAudioManager;
 import de.limbusdev.guardianmonsters.media.IMediaManager;
 import de.limbusdev.guardianmonsters.media.NullAudioManager;
@@ -25,6 +28,13 @@ public class Services
 
     public static void provide(IMediaManager service) {
         media = service;
+    }
+
+    public static Map<IndividualStatistics.StatusEffect, String> statusEffectAssetNames = new HashMap<>();
+    static
+    {
+        statusEffectAssetNames.put(IndividualStatistics.StatusEffect.HEALTHY, "healthy");
+        statusEffectAssetNames.put(IndividualStatistics.StatusEffect.BLIND, "blind");
     }
 
     public static IMediaManager getMedia() {

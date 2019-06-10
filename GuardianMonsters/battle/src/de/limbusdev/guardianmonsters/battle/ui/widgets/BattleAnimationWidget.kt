@@ -29,6 +29,7 @@ import de.limbusdev.guardianmonsters.guardians.Side
 import de.limbusdev.guardianmonsters.guardians.abilities.Ability
 import de.limbusdev.guardianmonsters.guardians.battle.BattleSystem
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian
+import de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics
 import de.limbusdev.guardianmonsters.services.Services
 import de.limbusdev.guardianmonsters.ui.Constant
 import de.limbusdev.utils.extensions.set
@@ -81,12 +82,13 @@ class BattleAnimationWidget
         statusEffectIndicators[Side.RIGHT] = ArrayMap()
 
 
+        val animation = Services.getMedia().getStatusEffectAnimation(IndividualStatistics.StatusEffect.HEALTHY)
         for (i in 0..2)
         {
             // left
-            statusEffectIndicators[Side.LEFT][i]  = Services.getMedia().getStatusEffectAnimation("healthy")
+            statusEffectIndicators[Side.LEFT][i]  = animation
             // right
-            statusEffectIndicators[Side.RIGHT][i] = Services.getMedia().getStatusEffectAnimation("healthy")
+            statusEffectIndicators[Side.RIGHT][i] = animation
         }
     }
 

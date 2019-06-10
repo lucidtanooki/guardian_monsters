@@ -97,7 +97,7 @@ public class NullMediaManager implements IMediaManager
     }
 
     @Override
-    public Animation<AtlasRegion> getStatusEffectAnimation(String statusEffect)
+    public Animation<AtlasRegion> getStatusEffectAnimation(Enum statusEffect)
     {
         return null;
     }

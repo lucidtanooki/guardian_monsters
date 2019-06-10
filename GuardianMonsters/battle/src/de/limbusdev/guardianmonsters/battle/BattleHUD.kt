@@ -204,7 +204,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
         switchActiveGuardianWidget.setCallbacks(onTeamMenuBackButton, onTeamMenuSwitchButton)
     }
 
-    
+
     // ................................................................................... Callbacks
     private fun setUpCallbacks()
     {

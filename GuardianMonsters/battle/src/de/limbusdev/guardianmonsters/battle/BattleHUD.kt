@@ -10,7 +10,6 @@ import com.badlogic.gdx.utils.viewport.FitViewport
 import de.limbusdev.guardianmonsters.assets.paths.AssetPath
 import de.limbusdev.guardianmonsters.battle.ui.widgets.*
 import de.limbusdev.guardianmonsters.battle.utils.BattleStringBuilder
-import de.limbusdev.guardianmonsters.guardians.Constant
 import de.limbusdev.guardianmonsters.guardians.GuardiansServiceLocator
 import de.limbusdev.guardianmonsters.guardians.abilities.Ability
 import de.limbusdev.guardianmonsters.guardians.battle.AttackCalculationReport
@@ -23,7 +22,6 @@ import de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics
 import de.limbusdev.guardianmonsters.guardians.monsters.Team
 import de.limbusdev.guardianmonsters.inventory.ui.widgets.items.ItemChoice
 import de.limbusdev.guardianmonsters.services.Services
-import de.limbusdev.guardianmonsters.ui.widgets.Callback
 
 import de.limbusdev.guardianmonsters.guardians.Side
 
@@ -294,14 +292,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
             var teamOk = false
             for(m in leftTeam.values())
             {
-                if((m != null && m.individualStatistics.isFit) || m == null)
-                {
-                    teamOk = true || teamOk
-                }
-                else
-                {
-                    teamOk = false || teamOk
-                }
+                teamOk = teamOk || m.individualStatistics.isFit
             }
             if(!teamOk)
             {

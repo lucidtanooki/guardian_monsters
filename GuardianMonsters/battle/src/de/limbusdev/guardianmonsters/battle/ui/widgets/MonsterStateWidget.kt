@@ -26,12 +26,12 @@ import de.limbusdev.utils.extensions.f
 /**
  * Widget for displaying monster status in battle: HP, MP, EXP, Name, Level
  * HINT: Don't forget calling the init() method
- * Created by georg on 03.07.16.
+ *
+ * @author Georg Eckert 2016
  */
 class MonsterStateWidget
 /**
  *
- * @param skin  skin containing needed graphics
  * @param showExp  whether exp bar shall be shown
  */
 (

@@ -23,7 +23,7 @@ class BattleQueue
     : Observable()
 {
     // ............................................................................... Inner Classes
-    enum class Message { NEXT, NEWROUND }
+    enum class Message { NEXT, NEW_ROUND }
 
     inner class QueueSignal(var message: Message)
     {
@@ -71,7 +71,7 @@ class BattleQueue
             nextRound = tmp                                 // set previously current round as next
             currentRound.sort(MonsterSpeedComparator())     // sort round by Guardian speed
             setChanged()
-            notifyObservers(QueueSignal(Message.NEWROUND))  // notify observers
+            notifyObservers(QueueSignal(Message.NEW_ROUND))  // notify observers
         }
 
         val next = currentRound.pop()                       // get next Guardian in queue
@@ -85,7 +85,7 @@ class BattleQueue
             nextRound = tmp
             currentRound.sort(MonsterSpeedComparator())
             setChanged()
-            notifyObservers(QueueSignal(Message.NEWROUND))
+            notifyObservers(QueueSignal(Message.NEW_ROUND))
         }
         else
         {

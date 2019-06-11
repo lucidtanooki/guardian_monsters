@@ -45,19 +45,21 @@ class BattleGuardianWidget
     : BattleWidget(), Observer
 {
     // .................................................................................. Properties
-    private val guardianImage           : Image = Image()
-    private val statusEffectAnimation   : AnimatedImage
-    private var showsTombStone          : Boolean = false
-    private var drawable                : TextureRegionDrawable? = null
+    private val guardianImage             : Image = Image()
+    private val statusEffectAnimation     : AnimatedImage
+    private var currentlyShowingTombstone : Boolean = false
+    private var drawable                  : TextureRegionDrawable? = null
 
 
     // ................................................................................ Constructors
     init
     {
+        // Setup Guardian Sprite
         guardianImage.setSize(128f, 128f)
         guardianImage.setPosition(0f, 0f, Align.bottom)
         addActor(guardianImage)
 
+        // Setup Status Effect Animation
         val anim = Services.getMedia().getStatusEffectAnimation(HEALTHY)
         statusEffectAnimation = AnimatedImage(anim as Animation<TextureRegion>)
         addActor(statusEffectAnimation)
@@ -65,7 +67,7 @@ class BattleGuardianWidget
 
         initialize(index, metaForm, side)
 
-        showsTombStone = false
+        currentlyShowingTombstone = false
     }
 
     // .............................................................................. Initialization
@@ -73,7 +75,8 @@ class BattleGuardianWidget
     {
         val guardianSprite = Services.getMedia().getMonsterSprite(index, metaForm)
 
-        if(side == Side.LEFT && !guardianSprite.isFlipX) { guardianSprite.flip(true, false) }
+        // Flip sprite, if on the left and not already flipped
+        guardianSprite.flip((side == Side.LEFT && !guardianSprite.isFlipX), false)
 
         drawable = TextureRegionDrawable(guardianSprite)
         guardianImage.drawable = drawable
@@ -81,13 +84,15 @@ class BattleGuardianWidget
 
 
     // ..................................................................................... Methods
+    /** Sets a new status effect animation. */
     private fun setStatusEffect(statusEffect: IndividualStatistics.StatusEffect)
     {
         val anim = Services.getMedia().getStatusEffectAnimation(statusEffect)
         statusEffectAnimation.animation = (anim as Animation<TextureRegion>)
     }
 
-    fun substitute(index: Int, metaForm: Int, side: Side, callback: () -> Unit)
+    /** Runs a substitution animation (e.g. when swapping a Guardian with another). */
+    fun substitute(index: Int, metaForm: Int, side: Side, onSubstitutionAnimationComplete: () -> Unit)
     {
         val anim = Services.getMedia().banningAnimation
         val sra = SelfRemovingAnimation(anim as Animation<TextureRegion>)
@@ -111,40 +116,39 @@ class BattleGuardianWidget
                 then runThis { initialize(index, metaForm, side) }
                 then visible(true)
                 then delay(1f)
-                then runThis { callback.invoke() }
+                then runThis(onSubstitutionAnimationComplete)
         )
     }
 
-    fun replaceDefeated(index: Int, metaForm: Int, side: Side, callback: () -> Unit)
+    /** Runs a replacement animation. */
+    fun replaceDefeated(index: Int, metaForm: Int, side: Side, onReplacingAnimationComplete: () -> Unit)
     {
         val anim = Services.getMedia().summoningAnimation
         val sra = SelfRemovingAnimation(anim as Animation<TextureRegion>)
 
         sra.setPosition(0f, 0f, Align.bottom)
 
-        val showTombstoneAction = runThis {
+        val showTombstone = runThis {
 
             val tombStoneDrawable = Services.getUI().battleSkin.getRegion("tomb-stone")
-            if (side === Side.RIGHT) {
-                tombStoneDrawable.flip(true, false)
-            }
+            tombStoneDrawable.flip(side == Side.RIGHT, false)
             guardianImage.drawable = TextureRegionDrawable(tombStoneDrawable)
         }
 
         guardianImage.addAction(
 
                 fadeOut(1f)
-                then showTombstoneAction
+                then showTombstone
                 then fadeIn(1f)
                 then runThis { addActor(sra) }
                 then delay(1f)
                 then runThis { initialize(index, metaForm, side) }
                 then delay(1f)
-                then runThis { callback.invoke() }
+                then runThis(onReplacingAnimationComplete)
         )
     }
 
-    fun animateBan(callback: () -> Unit)
+    fun animateBan(onBanAnimationComplete: () -> Unit)
     {
         val anim = Services.getMedia().banningAnimation
         val sra = SelfRemovingAnimation(anim as Animation<TextureRegion>)
@@ -155,11 +159,11 @@ class BattleGuardianWidget
                 delay(1f)
                 then visible(false)
                 then delay(1f)
-                then runThis { callback.invoke() }
+                then runThis(onBanAnimationComplete)
         )
     }
 
-    fun animateBanFailure(callback: () -> Unit)
+    fun animateBanFailure(onBanFailureAnimationComplete: () -> Unit)
     {
         val anim = Services.getMedia().summoningAnimation
         val sra = SelfRemovingAnimation(anim as Animation<TextureRegion>)
@@ -170,32 +174,32 @@ class BattleGuardianWidget
                 delay(1f)
                 then visible(true)
                 then delay(1f)
-                then runThis { callback.invoke() }
+                then runThis(onBanFailureAnimationComplete)
         )
     }
 
-    fun die(onDieingComplete: () -> Unit)
+    fun die(onDieAnimationComplete: () -> Unit)
     {
         when(side)
         {
             Side.LEFT ->
             {
-                val showTombstone = {
+                val showTombstone = runThis {
 
                     val tombStoneDrawable = Services.getUI().battleSkin.getRegion("tomb-stone")
                     tombStoneDrawable.flip(side == Side.RIGHT, false)
                     guardianImage.drawable = TextureRegionDrawable(tombStoneDrawable)
-                    showsTombStone = true
+                    currentlyShowingTombstone = true
                 }
 
                 guardianImage.addAction(
 
                         alpha(0f, 2f)
                         then visible(false)
-                        then runThis { showTombstone.invoke() }
+                        then showTombstone
                         then visible(true)
                         then alpha(1f, 2f)
-                        then runThis { onDieingComplete.invoke() }
+                        then runThis(onDieAnimationComplete)
                 )
             }
             Side.RIGHT -> guardianImage += (fadeOut(2f) then visible(false))
@@ -207,13 +211,13 @@ class BattleGuardianWidget
         if (observable !is AGuardian) { return }
 
         setStatusEffect(observable.individualStatistics.statusEffect)
-        if (showsTombStone && observable.individualStatistics.isFit)
+        if (currentlyShowingTombstone && observable.individualStatistics.isFit)
         {
             guardianImage.addAction(
 
                     alpha(0f, 2f)
                     then runThis { guardianImage.drawable = drawable }
-                    then runThis { showsTombStone = false }
+                    then runThis { currentlyShowingTombstone = false }
                     then alpha(1f, 2f)
             )
         }

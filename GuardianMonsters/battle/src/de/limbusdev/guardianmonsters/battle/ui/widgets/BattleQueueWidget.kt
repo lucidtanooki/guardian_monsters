@@ -83,7 +83,7 @@ class BattleQueueWidget
     /**
      * Re-adds all monsters to the widget in the correct order
      */
-    override fun update(observable: Observable, o: Any)
+    override fun update(observable: Observable, o: Any?)
     {
         if (observable is BattleQueue && o is BattleQueue.QueueSignal)
         {

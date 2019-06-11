@@ -217,7 +217,7 @@ class BattleAnimationWidget
 
     fun animateMonsterKO(pos: Int, side: Side)
     {
-        guardianSprites[side][pos].die(side, onDieing)
+        guardianSprites[side][pos].die(onDieing)
     }
 
     fun animateGuardianSubstitution

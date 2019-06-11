@@ -50,11 +50,11 @@ open class SevenButtonsWidget
         // Ability Buttons
         val positions = intArrayOf(
                 BattleHUDTextButton.LEFT,
-                BattleHUDTextButton.TOPLEFT,
-                BattleHUDTextButton.BOTTOMLEFT,
+                BattleHUDTextButton.TOP_LEFT,
+                BattleHUDTextButton.BOTTOM_LEFT,
                 BattleHUDTextButton.CENTER,
-                BattleHUDTextButton.TOPRIGHT,
-                BattleHUDTextButton.BOTTOMRIGHT,
+                BattleHUDTextButton.TOP_RIGHT,
+                BattleHUDTextButton.BOTTOM_RIGHT,
                 BattleHUDTextButton.RIGHT)
 
         for (i in positions)

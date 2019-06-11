@@ -347,7 +347,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
                 checked = !checked
                 when(buttonID)
                 {
-                    BattleHUDTextButton.CENTERTOP -> if(checked)
+                    BattleHUDTextButton.CENTER_TOP -> if(checked)
                     {
                         battleStateSwitcher.toAttackInfoMenu()
                     }

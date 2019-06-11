@@ -47,8 +47,8 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
     // Groups
     private lateinit var mainMenu                       : BattleMainMenuWidget
     private lateinit var actionMenu                     : BattleActionMenuWidget
-    private lateinit var abilityMenu                    : AttackMenuWidget
-    private lateinit var abilityInfoMenu                : AttackMenuWidget
+    private lateinit var abilityMenu                    : AbilityMenuWidget
+    private lateinit var abilityInfoMenu                : AbilityMenuWidget
     private lateinit var animationWidget                : BattleAnimationWidget
     private lateinit var statusWidget                   : BattleStatusOverviewWidget
     private lateinit var battleQueueWidget              : BattleQueueWidget
@@ -177,10 +177,10 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
 
         abilityMenuAddOn = SevenButtonsWidget.CentralHalfButtonsAddOn(skin, onAttackMenuAddOnButton)
 
-        abilityMenu           = AttackMenuWidget(skin) { ID -> onAttackMenuButton(ID)     }
-        abilityInfoMenu       = AttackMenuWidget(skin) { ID -> onAttackInfoMenuButton(ID) }
-        targetMenuWidget     = TargetMenuWidget(skin) { ID -> onTargetMenuButton(ID)     }
-        targetAreaMenuWidget = TargetMenuWidget(skin) { ID -> onTargetAreaMenuButton(ID) }
+        abilityMenu          = AbilityMenuWidget(skin) { ID -> onAttackMenuButton(ID)     }
+        abilityInfoMenu      = AbilityMenuWidget(skin) { ID -> onAttackInfoMenuButton(ID) }
+        targetMenuWidget     = TargetMenuWidget(skin)  { ID -> onTargetMenuButton(ID)     }
+        targetAreaMenuWidget = TargetMenuWidget(skin)  { ID -> onTargetAreaMenuButton(ID) }
 
         abilityInfoMenuFrame    = BattleActionMenuWidget(skin)
         abilityDetailBackButton = BattleActionMenuWidget(skin, onBackButton = onAttackDetailLabelBackButton )

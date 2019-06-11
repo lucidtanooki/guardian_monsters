@@ -16,7 +16,7 @@ import de.limbusdev.guardianmonsters.ui.widgets.Callback
  *
  * @param skin battle action UI skin
  */
-class AttackMenuWidget
+class AbilityMenuWidget
 (
         skin: Skin,
         callbacks: (Int) -> Unit

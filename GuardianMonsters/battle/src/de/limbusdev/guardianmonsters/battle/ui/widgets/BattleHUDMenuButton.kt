@@ -12,11 +12,14 @@ import com.badlogic.gdx.utils.Align
 
 class BattleHUDMenuButton(skin: Skin, position: Int) : ImageButton(skin, construct(position))
 {
+    // ................................................................................ Constructors
     init
     {
         setPosition(SLOTS[position][X].toFloat(), SLOTS[position][Y].toFloat(), ALIGN)
     }
 
+
+    // ............................................................................ Companion Object
     companion object
     {
         const val X = 0
@@ -31,13 +34,15 @@ class BattleHUDMenuButton(skin: Skin, position: Int) : ImageButton(skin, constru
         const val ALIGN = Align.bottomLeft
 
         val SLOTS = arrayOf(
+
                 intArrayOf(4, 1),
                 intArrayOf(4, 33),
                 intArrayOf(319, 1),
                 intArrayOf(319, 33),
                 intArrayOf(245, 1),
                 intArrayOf(101, 1),
-                intArrayOf(173, 17))
+                intArrayOf(173, 17)
+        )
 
         private fun construct(position: Int): String
         {

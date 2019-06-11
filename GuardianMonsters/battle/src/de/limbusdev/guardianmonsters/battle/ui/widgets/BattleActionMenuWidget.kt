@@ -12,18 +12,18 @@ import ktx.actors.onClick
 class BattleActionMenuWidget
 (
         skin: Skin,
-        private var onBackButton    : () -> Unit = {},
-        private var onBagButton     : () -> Unit = {},
-        private var onTeamButton    : () -> Unit = {},
-        private var onExtraButton   : () -> Unit = {}
+        onBackButton    : () -> Unit = {},
+        onBagButton     : () -> Unit = {},
+        onTeamButton    : () -> Unit = {},
+        onExtraButton   : () -> Unit = {}
 )
     : BattleWidget()
 {
     // Buttons
-    var backButton  : ImageButton = BattleHUDMenuButton(skin, BattleHUDMenuButton.BACK)
-    var teamButton  : ImageButton = BattleHUDMenuButton(skin, BattleHUDMenuButton.TEAM)
-    var bagButton   : ImageButton = BattleHUDMenuButton(skin, BattleHUDMenuButton.BAG)
-    var extraButton : ImageButton = BattleHUDMenuButton(skin, BattleHUDMenuButton.DEFEND)
+    val backButton  : ImageButton = BattleHUDMenuButton(skin, BattleHUDMenuButton.BACK)
+    val teamButton  : ImageButton = BattleHUDMenuButton(skin, BattleHUDMenuButton.TEAM)
+    val bagButton   : ImageButton = BattleHUDMenuButton(skin, BattleHUDMenuButton.BAG)
+    val extraButton : ImageButton = BattleHUDMenuButton(skin, BattleHUDMenuButton.DEFEND)
 
     init
     {
@@ -33,15 +33,12 @@ class BattleActionMenuWidget
         addActor(bagButton)
         addActor(extraButton)
 
-        initCallbackHandler()
-    }
-
-    private fun initCallbackHandler()
-    {
-        backButton.onClick(onBackButton)
-        bagButton.onClick(onBagButton)
-        teamButton.onClick(onTeamButton)
-        extraButton.onClick(onExtraButton)
+        setCallbacks(
+                onBackButton  = onBackButton,
+                onBagButton   =  onBagButton,
+                onTeamButton  = onTeamButton,
+                onExtraButton = onExtraButton
+        )
     }
 
     fun setCallbacks
@@ -51,12 +48,10 @@ class BattleActionMenuWidget
             onTeamButton  : () -> Unit = {},
             onExtraButton : () -> Unit = {}
     ) {
-        this.onBackButton     = onBackButton
-        this.onBagButton      = onBagButton
-        this.onTeamButton     = onTeamButton
-        this.onExtraButton    = onExtraButton
-
-        initCallbackHandler()
+        backButton.onClick(onBackButton)
+        bagButton.onClick(onBagButton)
+        teamButton.onClick(onTeamButton)
+        extraButton.onClick(onExtraButton)
     }
 
     fun disableAllButBackButton()

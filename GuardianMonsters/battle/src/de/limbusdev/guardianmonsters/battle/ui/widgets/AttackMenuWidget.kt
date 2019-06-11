@@ -32,7 +32,7 @@ class AttackMenuWidget
 
 
     // .............................................................................. Initialization
-    fun init(guardian: AGuardian, disableAbilitiesWithInsufficientMP: Boolean)
+    fun initialize(guardian: AGuardian, disableAbilitiesWithInsufficientMP: Boolean)
     {
         // Set all buttons inactive & reset appearance
         for (i in buttons.keys()) { resetButton(i) }

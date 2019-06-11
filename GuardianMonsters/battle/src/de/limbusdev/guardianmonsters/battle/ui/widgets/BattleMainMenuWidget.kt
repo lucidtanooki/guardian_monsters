@@ -20,16 +20,16 @@ import ktx.actors.onClick
  */
 class BattleMainMenuWidget
 (
-        skin: Skin,
-        onSwordButton: () -> Unit,
-        onRunButton: () -> Unit
+        skin          : Skin,
+        onSwordButton : () -> Unit,
+        onRunButton   : () -> Unit
 )
     : BattleWidget()
 {
     // .................................................................................. Properties
     // Buttons
-    private val swordButton: ImageButton
-    private val runButton: ImageButton
+    private val swordButton : ImageButton
+    private val runButton   : ImageButton
 
 
     // ................................................................................ Constructors

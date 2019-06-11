@@ -9,24 +9,31 @@
 
 package de.limbusdev.guardianmonsters.battle.ui.widgets
 
-import com.badlogic.gdx.scenes.scene2d.actions.Actions
+import com.badlogic.gdx.scenes.scene2d.actions.Actions.*
+import com.badlogic.gdx.scenes.scene2d.actions.Actions.run as runThis
 import com.badlogic.gdx.scenes.scene2d.ui.Image
 import com.badlogic.gdx.scenes.scene2d.ui.Label
-import com.badlogic.gdx.scenes.scene2d.ui.Skin
 import com.badlogic.gdx.utils.Align
+import de.limbusdev.guardianmonsters.battle.BattleHUD
 import de.limbusdev.guardianmonsters.services.Services
 
 import de.limbusdev.guardianmonsters.ui.Constant
 import ktx.actors.then
 
+/**
+ * InfoLabelWidget displays an information label that fits into the [BattleHUD] design.
+ */
 open class InfoLabelWidget() : BattleWidget()
 {
-    protected var infoBGImg : Image
-    private var infoLabel   : Label
+    // .................................................................................. Properties
+    protected var infoBGImg   : Image
+    private   var infoLabel   : Label
 
-    private var wholeText   : String = ""
-    private var currentText : String = ""
+    private   var wholeText   : String = ""
+    private   var currentText : String = ""
 
+
+    // ................................................................................ Constructors
     init
     {
         val skin = Services.getUI().battleSkin
@@ -41,23 +48,25 @@ open class InfoLabelWidget() : BattleWidget()
         infoLabel.setWrap(true)
         infoLabel.setPosition((Constant.RES_X / 2).toFloat(), 3f, Align.bottom)
 
-        addActor(infoBGImg)
-        addActor(infoLabel)
+        this.addActor(infoBGImg)
+        this.addActor(infoLabel)
     }
 
+
+    // ..................................................................................... Methods
     fun animateTextAppearance()
     {
         currentText = ""
 
-        val sequence = Actions.run {
+        val sequence = runThis {
 
             currentText += wholeText.substring(0, 1)
             wholeText = wholeText.substring(1, wholeText.length)
             infoLabel.setText(currentText)
 
-        } then Actions.delay(0.01f)
+        } then delay(0.01f)
 
-        addAction(Actions.repeat(wholeText.length, sequence))
+        addAction(repeat(wholeText.length, sequence))
     }
 
     fun setWholeText(wholeText: String)

@@ -13,6 +13,7 @@ import de.limbusdev.guardianmonsters.scene2d.lSetSize
 import de.limbusdev.guardianmonsters.services.Services
 import de.limbusdev.utils.extensions.set
 import ktx.actors.plus
+import ktx.actors.plusAssign
 import ktx.actors.txt
 
 class GuardoSphereStatWidget(private val skin: Skin) : Group()
@@ -32,7 +33,7 @@ class GuardoSphereStatWidget(private val skin: Skin) : Group()
         val background = Image(skin,"guardosphere-frame")
         background.setSize(WIDTH, HEIGHT)
         background.setPosition(0f, 0f, Align.bottomLeft)
-        this+background
+        this+=background
 
 
         // ................................................ stat labels
@@ -47,12 +48,12 @@ class GuardoSphereStatWidget(private val skin: Skin) : Group()
             key = Image(skin,"stats-symbol-${labels[i]}")
             key.setSize(16f, 16f)
             key.setPosition(PADDING, yAnchor, Align.topLeft)
-            this+key
+            this+=key
 
             value = Label("0", skin, "white")
             value.setPosition(PADDING + 20f, yAnchor - 1, Align.topLeft)
             value.width = WIDTH / 2
-            this+value
+            this+=value
             valueLabels[labels[i]] = value
         }
 
@@ -63,15 +64,15 @@ class GuardoSphereStatWidget(private val skin: Skin) : Group()
             val bgl = Label("", skin, "sphere")
             bgl.setSize(36f, 36f)
             bgl.setPosition(WIDTH - PADDING, HEIGHT - PADDING - bg*(37f), Align.topRight)
-            this+bgl
+            this+=bgl
         }
 
         elementGroup.setSize(WIDTH-PADDING*2, 22f)
         elementGroup.setPosition(PADDING, PADDING, Align.bottomLeft)
 
         // Add actors to this group
-        this+elementGroup
-        this+equipmentGroup
+        this+=elementGroup
+        this+=equipmentGroup
     }
 
 
@@ -121,7 +122,7 @@ class GuardoSphereStatWidget(private val skin: Skin) : Group()
                     else elemName.substring(0, 6)
 
             val l = Label(elemName, skin, "elem-$elem")
-            elementGroup + l
+            elementGroup += l
         }
 
 
@@ -141,7 +142,7 @@ class GuardoSphereStatWidget(private val skin: Skin) : Group()
                 val img = Image(skin, name)
                 img.setSize(32f, 32f)
                 img.setPosition(WIDTH - PADDING - 2f, HEIGHT - PADDING - 2 - i*37, Align.topRight)
-                equipmentGroup + img
+                equipmentGroup += img
             }
         }
     }

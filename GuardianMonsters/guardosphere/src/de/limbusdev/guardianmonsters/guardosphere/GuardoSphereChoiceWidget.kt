@@ -17,6 +17,7 @@ import de.limbusdev.guardianmonsters.guardians.monsters.Team
 import de.limbusdev.utils.extensions.set
 import de.limbusdev.utils.geometry.IntVec2
 import ktx.actors.plus
+import ktx.actors.plusAssign
 import ktx.log.info
 import ktx.scene2d.table
 import kotlin.Exception
@@ -83,10 +84,10 @@ class GuardoSphereChoiceWidget
         }
 
         // Setup Hierarchy
-        this+background
-        this+backgroundTeam
-        this+slotImageTable
-        this+slotButtonTable
+        this+=background
+        this+=backgroundTeam
+        this+=slotImageTable
+        this+=slotButtonTable
 
         refresh(0)
     }

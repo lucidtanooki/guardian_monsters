@@ -10,6 +10,7 @@ import com.badlogic.gdx.utils.Align
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian
 import de.limbusdev.guardianmonsters.services.Services
 import ktx.actors.plus
+import ktx.actors.plusAssign
 import ktx.actors.txt
 
 /**
@@ -43,10 +44,10 @@ class GuardianDetailWidget(private val skin: Skin) : Group()
         level.setSize(32f, 22f)
         level.setPosition(WIDTH - PADDING, PADDING, Align.bottomRight)
 
-        this+background
-        this+monsterSprite
-        this+name
-        this+level
+        this+=background
+        this+=monsterSprite
+        this+=name
+        this+=level
     }
 
     private fun reset()

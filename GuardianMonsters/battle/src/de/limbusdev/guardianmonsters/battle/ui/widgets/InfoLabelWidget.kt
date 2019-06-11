@@ -19,6 +19,7 @@ import de.limbusdev.guardianmonsters.services.Services
 
 import de.limbusdev.guardianmonsters.ui.Constant
 import ktx.actors.then
+import ktx.actors.txt
 
 /**
  * InfoLabelWidget displays an information label that fits into the [BattleHUD] design.
@@ -26,11 +27,14 @@ import ktx.actors.then
 open class InfoLabelWidget() : BattleWidget()
 {
     // .................................................................................. Properties
+    companion object { const val typingDelay = 0.01f }
+
     protected var infoBGImg   : Image
     private   var infoLabel   : Label
 
-    private   var wholeText   : String = ""
-    private   var currentText : String = ""
+    private   var wholeText     : String = ""
+    private   var remainingText : String = ""
+    private   var currentText  : String = ""
 
 
     // ................................................................................ Constructors
@@ -41,12 +45,12 @@ open class InfoLabelWidget() : BattleWidget()
         infoBGImg = Image(skin.getDrawable("label"))
         infoLabel = Label("", skin, "default")
 
-        infoBGImg.setSize(372f * Constant.zoom, 62f * Constant.zoom)
-        infoBGImg.setPosition(Constant.RES_X / 2f, Constant.zoom * 2f, Align.bottom)
+        infoBGImg.setSize(372f * Constant.zoom, 62f)
+        infoBGImg.setPosition(Constant.RES_Xf / 2, 2f, Align.bottom)
 
         infoLabel.setSize(200f, 58f)
         infoLabel.setWrap(true)
-        infoLabel.setPosition((Constant.RES_X / 2).toFloat(), 3f, Align.bottom)
+        infoLabel.setPosition(Constant.RES_Xf / 2, 3f, Align.bottom)
 
         this.addActor(infoBGImg)
         this.addActor(infoLabel)
@@ -54,24 +58,28 @@ open class InfoLabelWidget() : BattleWidget()
 
 
     // ..................................................................................... Methods
+    /** Instead of showing the complete text at once, this function starts a type writer animation. */
     fun animateTextAppearance()
     {
+        // Clear current text
         currentText = ""
 
-        val sequence = runThis {
+        val typeWriterSequence = runThis {
 
-            currentText += wholeText.substring(0, 1)
-            wholeText = wholeText.substring(1, wholeText.length)
-            infoLabel.setText(currentText)
+            currentText += remainingText.substring(0, 1)                     // adds next character
+            remainingText = remainingText.substring(1, remainingText.length) // removes first character from remaining text
+            infoLabel.txt = currentText
 
-        } then delay(0.01f)
+        } then delay(typingDelay)
 
-        addAction(repeat(wholeText.length, sequence))
+        addAction(repeat(wholeText.length, typeWriterSequence))
     }
 
+    /** Provides InfoLabelWidget with the complete text, the label should display. */
     fun setWholeText(wholeText: String)
     {
         this.wholeText = wholeText
+        remainingText = wholeText
         clearActions()
     }
 }

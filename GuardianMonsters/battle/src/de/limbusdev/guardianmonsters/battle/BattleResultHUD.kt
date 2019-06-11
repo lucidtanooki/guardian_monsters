@@ -26,6 +26,7 @@ import de.limbusdev.guardianmonsters.ui.AHUD
 import de.limbusdev.guardianmonsters.ui.Constant
 import ktx.actors.onClick
 import ktx.actors.plus
+import ktx.actors.plusAssign
 
 
 /**
@@ -92,28 +93,28 @@ class BattleResultHUD
         container.background = skin.getDrawable(bgDrawable)
         container.setSize(bgWidth, bgHeight)
         container.setPosition(bgX, bgY, bgAlign)
-        stage+container
+        stage+=container
 
         group = Group()
         group.setSize(groupWidth, groupHeight)
         group.setPosition(groupX, groupY, groupAlign)
-        stage+group
+        stage+=group
 
         val heading = Label(Services.getL18N().Battle().get("results"), skin, "default")
         heading.setAlignment(headingLabelAlign, headingLineAlign)
         heading.setPosition(headingX, headingY, headingAlign)
-        group+heading
+        group+=heading
 
         table = Table()
         table.align(tableInnerAlign)
         table.setSize(tableWidth, tableHeight)
         table.setPosition(tableX, tableY, tableAlign)
-        group+table
+        group+=table
 
         apply = TextButton(Services.getL18N().General().get("apply"), skin, "default")
         apply.setSize(applyWidth, applyHeight)
         apply.setPosition(applyX, applyY, applyAlign)
-        group+apply
+        group+=apply
 
         apply.onClick {
 
@@ -122,7 +123,7 @@ class BattleResultHUD
             result = BattleResult(team, Array<Item>()) // TODO droppped items
             constructMonsterTable(team, result)
             apply.remove()
-            group+next
+            group+=next
             println(apply.isDisabled)
         }
 
@@ -137,7 +138,7 @@ class BattleResultHUD
             {
                 reachedNextLevel.first().individualStatistics.levelUp()
                 val lvlUpWidget = LevelUpWidget(skin, reachedNextLevel.first())
-                stage+lvlUpWidget
+                stage+=lvlUpWidget
                 if(reachedNextLevel.first().individualStatistics.remainingLevelUps == 0)
                 {
                     reachedNextLevel.removeIndex(0)

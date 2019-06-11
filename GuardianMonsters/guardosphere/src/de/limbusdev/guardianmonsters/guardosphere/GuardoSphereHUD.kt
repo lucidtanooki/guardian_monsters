@@ -20,6 +20,7 @@ import de.limbusdev.guardianmonsters.ui.widgets.ParticleEffectActor
 
 import ktx.actors.onClick
 import ktx.actors.plus
+import ktx.actors.plusAssign
 import ktx.actors.txt
 
 /**
@@ -79,15 +80,15 @@ class GuardoSphereHUD
         statusWidget.isVisible = false
 
         // Assemble Hierarchy
-        stage+particles
-        stage+detailWidget
-        stage+choiceWidget
-        stage+statViewToggle
-        stage+backButton
-        stage+nextButton
-        stage+exitButton
-        stage+statusWidget
-        stage+pageLabel
+        stage+=particles
+        stage+=detailWidget
+        stage+=choiceWidget
+        stage+=statViewToggle
+        stage+=backButton
+        stage+=nextButton
+        stage+=exitButton
+        stage+=statusWidget
+        stage+=pageLabel
 
 
         // Define callbacks

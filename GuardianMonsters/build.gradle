@@ -35,7 +35,8 @@ allprojects {
         lmlVersion = '1.9.1.9.6'
         gdxDialogsVersion = '1.2.1'
         kryoVersion = '4.0.0'
-        ktxVersion = '1.9.8-b5'
+        ktxVersion = '1.9.9-b2'
+        ktxVersionOld = '1.9.8-b5'
     }
 
     repositories {
@@ -132,7 +133,7 @@ project(":core") {
         implementation "io.github.libktx:ktx-box2d:$ktxVersion"
         implementation "io.github.libktx:ktx-collections:$ktxVersion"
         implementation "io.github.libktx:ktx-freetype:$ktxVersion"
-        implementation "io.github.libktx:ktx-freetype-async:$ktxVersion"
+        implementation "io.github.libktx:ktx-freetype-async:$ktxVersionOld"
         implementation "io.github.libktx:ktx-graphics:$ktxVersion"
         implementation "io.github.libktx:ktx-i18n:$ktxVersion"
         implementation "io.github.libktx:ktx-inject:$ktxVersion"

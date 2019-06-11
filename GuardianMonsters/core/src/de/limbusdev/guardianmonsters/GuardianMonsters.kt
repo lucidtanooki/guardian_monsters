@@ -11,7 +11,6 @@ import de.limbusdev.guardianmonsters.media.MediaManager
 import de.limbusdev.guardianmonsters.scene2d.ConcreteScreenManager
 import de.limbusdev.guardianmonsters.services.*
 import de.limbusdev.guardianmonsters.utils.GameStateDebugger
-import ktx.async.enableKtxCoroutines
 
 
 class GuardianMonsters : Game() {
@@ -20,8 +19,7 @@ class GuardianMonsters : Game() {
 
     override fun create() {
 
-        // Enables Kotlin Co-routines for async tasks
-        enableKtxCoroutines()
+        // TODO Enable Kotlin Co-routines for async tasks
 
         // Inject Dependencies: MediaManager, AudioManager, ScreenManager, SaveGameManager, ...
         injectDependencies()

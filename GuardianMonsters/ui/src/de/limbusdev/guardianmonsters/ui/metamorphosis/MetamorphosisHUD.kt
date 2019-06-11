@@ -10,10 +10,7 @@ import de.limbusdev.guardianmonsters.services.Services
 import de.limbusdev.guardianmonsters.ui.AHUD
 import de.limbusdev.guardianmonsters.ui.Constant
 import de.limbusdev.guardianmonsters.ui.widgets.ParticleEffectActor
-import ktx.actors.onClick
-import ktx.actors.plus
-import ktx.actors.then
-import ktx.actors.txt
+import ktx.actors.*
 import com.badlogic.gdx.scenes.scene2d.actions.Actions.run as runAction
 
 /**
@@ -70,7 +67,7 @@ class MetamorphosisHUD
         okButton.onClick()
         {
             val sequence = muteAudio() then fadeOut(.5f) then popScreen()
-            stage+sequence
+            stage+=sequence
         }
 
         // Layout
@@ -84,45 +81,45 @@ class MetamorphosisHUD
         val showAnimation = runAction()
         {
             label.remove()
-            stage+animation
+            stage+=animation
             playMetamorphosisSFX()
-            stage+label
+            stage+=label
         }
         val removeAnimation = runAction()
         {
             animation.remove()
             imgBefore.remove()
             label.remove()
-            stage+imgAfter
-            stage+animation
-            stage+label
+            stage+=imgAfter
+            stage+=animation
+            stage+=label
         }
         val playVictorySFX = runAction()
         {
             playVictorySFX()
             label.txt = messages[1]
         }
-        val addOkButton = runAction { stage+okButton }
+        val addOkButton = runAction { stage+=okButton }
 
         val metaAction =
-                delay(4f)   then
-                muteAudio()         then
-                delay(1f)   then
-                showAnimation       then
-                delay(2f)   then
-                removeAnimation     then
-                delay(3f)   then
-                playVictorySFX      then
-                delay(5.5f) then
-                fadeInMusic()       then
+                delay(4f)       then
+                muteAudio()     then
+                delay(1f)       then
+                showAnimation   then
+                delay(2f)       then
+                removeAnimation then
+                delay(3f)       then
+                playVictorySFX  then
+                delay(5.5f)     then
+                fadeInMusic()   then
                 addOkButton
 
         // Adding actors to stage
-        stage+background
-        stage+particleActor
-        stage+imgBefore
-        stage+metaAction
-        stage+label
+        stage+=background
+        stage+=particleActor
+        stage+=imgBefore
+        stage+=metaAction
+        stage+=label
 
         particleActor.start()
     }

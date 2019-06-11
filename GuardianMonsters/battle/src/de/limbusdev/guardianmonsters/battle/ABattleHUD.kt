@@ -12,6 +12,7 @@ import de.limbusdev.guardianmonsters.ui.Constant
 import de.limbusdev.utils.extensions.f
 import de.limbusdev.utils.extensions.set
 import ktx.actors.plus
+import ktx.actors.plusAssign
 import ktx.actors.then
 
 
@@ -47,8 +48,8 @@ abstract class ABattleHUD(skin: Skin) : AHUD(skin)
         }
 
         // Add to stage
-        stage + battleUIbg
-        stage + blackCurtain
+        stage += battleUIbg
+        stage += blackCurtain
     }
 
 
@@ -59,7 +60,7 @@ abstract class ABattleHUD(skin: Skin) : AHUD(skin)
 
     override fun show()
     {
-        blackCurtain + (fadeOut(1f) then visible(false))
+        blackCurtain += (fadeOut(1f) then visible(false))
     }
 
     /**
@@ -72,7 +73,7 @@ abstract class ABattleHUD(skin: Skin) : AHUD(skin)
         widgets[key] = bw
         if(!bw.hasParent())
         {
-            stage + bw
+            stage += bw
         }
     }
 
@@ -85,7 +86,7 @@ abstract class ABattleHUD(skin: Skin) : AHUD(skin)
 
     override fun goToPreviousScreen()
     {
-        blackCurtain + (visible(true) then fadeIn(1f) then runThis{super.goToPreviousScreen()})
+        blackCurtain += (visible(true) then fadeIn(1f) then runThis{super.goToPreviousScreen()})
     }
 
 }

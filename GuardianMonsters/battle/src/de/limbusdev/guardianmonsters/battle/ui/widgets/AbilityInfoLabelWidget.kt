@@ -16,6 +16,9 @@ import com.badlogic.gdx.utils.Align
 import de.limbusdev.guardianmonsters.guardians.GuardiansServiceLocator
 import de.limbusdev.guardianmonsters.guardians.abilities.Ability
 import de.limbusdev.guardianmonsters.services.Services
+import ktx.actors.minusAssign
+import ktx.actors.plusAssign
+import ktx.actors.txt
 import ktx.style.get
 
 /**
@@ -71,17 +74,17 @@ class AbilityInfoLabelWidget() : InfoLabelWidget()
         symbolMStr = Image(inventorySkin.getDrawable("stats-symbol-mstr"))
         symbolMP   = Image(inventorySkin.getDrawable("stats-symbol-mp"))
 
-        symbolPStr.setPosition(36f, 26f, Align.bottomLeft)
-        symbolMStr.setPosition(36f, 26f, Align.bottomLeft)
+        symbolPStr   .setPosition(36f, 26f, Align.bottomLeft)
+        symbolMStr   .setPosition(36f, 26f, Align.bottomLeft)
         abilityDamage.setPosition(52f, 27f, Align.bottomLeft)
-        symbolMP.setPosition(80f, 26f, Align.bottomLeft)
+        symbolMP     .setPosition(80f, 26f, Align.bottomLeft)
         abilityMPCost.setPosition(96f, 27f, Align.bottomLeft)
 
         // Adding actors to Widget and apply z-Order (is order of adding)
-        addActor(element)
-        addActor(abilityName)
-        addActor(abilityDescription)
-        addActor(abilityDamage)
+        this += element
+        this += abilityName
+        this += abilityDescription
+        this += abilityDamage
     }
 
 
@@ -101,31 +104,32 @@ class AbilityInfoLabelWidget() : InfoLabelWidget()
         element.setText(i18nElements.get("element_$elementName"))
         element.style = Services.getUI().inventorySkin["elem-$elementName"]
 
-        abilityName.setText(i18nAbilities.get(ability.name))
-        abilityDamage.setText("${ability.damage}")
-        abilityMPCost.setText("${ability.MPcost}")
-        abilityDescription.setText(i18nAbilities.get("${ability.name}_desc"))
+        abilityName.txt        = i18nAbilities.get(ability.name)
+        abilityDescription.txt = i18nAbilities.get("${ability.name}_desc")
+
+        abilityDamage.txt = "${ability.damage}"
+        abilityMPCost.txt = "${ability.MPcost}"
 
         when(ability.damageType)
         {
             Ability.DamageType.PHYSICAL ->
             {
-                addActor(symbolPStr)
+                this += symbolPStr
             }
             Ability.DamageType.MAGICAL ->
             {
-                addActor(symbolMStr)
-                addActor(symbolMP)
-                addActor(abilityMPCost)
+                this += symbolMStr
+                this += symbolMP
+                this += abilityMPCost
             }
         }
     }
 
     private fun reset()
     {
-        abilityMPCost.remove()
-        symbolMP.remove()
-        symbolPStr.remove()
-        symbolMStr.remove()
+        this -= abilityMPCost
+        this -= symbolMP
+        this -= symbolPStr
+        this -= symbolMStr
     }
 }

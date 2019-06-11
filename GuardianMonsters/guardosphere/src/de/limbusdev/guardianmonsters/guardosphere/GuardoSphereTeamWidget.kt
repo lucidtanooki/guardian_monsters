@@ -8,7 +8,7 @@ import de.limbusdev.guardianmonsters.guardians.monsters.Team
 import de.limbusdev.guardianmonsters.scene2d.lSetPosition
 import de.limbusdev.guardianmonsters.scene2d.lSetSize
 import ktx.actors.onClick
-import ktx.actors.plus
+import ktx.actors.plusAssign
 
 /**
  * GuardoSphereTeamWidget
@@ -21,7 +21,8 @@ class GuardoSphereTeamWidget(
         private val team: Team,
         private val buttonGroup: ButtonGroup<Button>
 
-) : Group()
+)
+    : Group()
 {
     private val monsterButtons = HorizontalGroup()
     private val buttons = Array<Button>()
@@ -45,8 +46,8 @@ class GuardoSphereTeamWidget(
                 .lSetPosition(6f, 4f, Align.bottomLeft)
 
         // Add Actors
-        this+background
-        this+monsterButtons
+        this+=background
+        this+=monsterButtons
 
         // Refresh Layout
         refresh()
@@ -64,8 +65,8 @@ class GuardoSphereTeamWidget(
         {
             val guardian = team[key]
             val monsterButton = GuardoSphereButton(skin, guardian)
-            monsterButtons+monsterButton
-            buttons+monsterButton
+            monsterButtons+=monsterButton
+            buttons.add(monsterButton)
             buttonGroup.add(monsterButton)
             monsterButton.onClick { callback.invoke(key) }
         }

@@ -322,6 +322,7 @@ project(":media") {
         implementation project(":enums")
         implementation project(":scene2d")
         implementation project(":assets")
+        implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
         implementation "com.badlogicgames.gdx:gdx:$gdxVersion"
         implementation "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
         implementation "net.dermetfan.libgdx-utils:libgdx-utils:$gdxUtilsVersion"

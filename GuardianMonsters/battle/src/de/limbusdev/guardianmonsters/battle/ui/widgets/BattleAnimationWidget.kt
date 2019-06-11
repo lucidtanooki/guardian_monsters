@@ -59,7 +59,7 @@ class BattleAnimationWidget
     private val zSortedGuardianSprites      : Array<BattleGuardianWidget> = Array()
     private val guardianSprites             : ArrayMap<Side, ArrayMap<Int, BattleGuardianWidget>>
     private val occupiedPositions           : ArrayMap<Side, ArrayMap<Int, Boolean>>
-    private val statusEffectIndicators      : ArrayMap<Side, ArrayMap<Int, Animation<TextureAtlas.AtlasRegion>>>
+    private val statusEffectIndicators      : ArrayMap<Side, ArrayMap<Int, Animation<TextureRegion>>>
 
 
     // ................................................................................ Constructors

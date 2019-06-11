@@ -71,7 +71,7 @@ class BattleGuardianWidget
     }
 
     // .............................................................................. Initialization
-    fun initialize(index: Int, metaForm: Int, side: Side)
+    private fun initialize(index: Int, metaForm: Int, side: Side)
     {
         val guardianSprite = Services.getMedia().getMonsterSprite(index, metaForm)
 
@@ -88,22 +88,20 @@ class BattleGuardianWidget
     /** Sets a new status effect animation. */
     private fun setStatusEffect(statusEffect: IndividualStatistics.StatusEffect)
     {
-        val anim = Services.getMedia().getStatusEffectAnimation(statusEffect)
-        statusEffectAnimation.animation = (anim as Animation<TextureRegion>)
+        statusEffectAnimation.animation = Services.getMedia().getStatusEffectAnimation(statusEffect)
     }
 
     /** Runs a substitution animation (e.g. when swapping a Guardian with another). */
     fun substitute(index: Int, metaForm: Int, side: Side, onSubstitutionAnimationComplete: () -> Unit)
     {
-        val anim = Services.getMedia().banningAnimation
-        val sra = SelfRemovingAnimation(anim as Animation<TextureRegion>)
+        val sra = SelfRemovingAnimation(Services.getMedia().getBanningAnimation())
         sra.setPosition(0f, 0f, Align.bottom)
         addActor(sra)
 
         val animationSetupAction = runThis {
 
-            val anim2 = Services.getMedia().summoningAnimation
-            val sra2 = SelfRemovingAnimation(anim2 as Animation<TextureRegion>)
+            val anim2 = Services.getMedia().getSummoningAnimation()
+            val sra2 = SelfRemovingAnimation(anim2)
             sra2.setPosition(0f, 0f, Align.bottom)
             addActor(sra2)
         }
@@ -124,8 +122,8 @@ class BattleGuardianWidget
     /** Runs a replacement animation. */
     fun replaceDefeated(index: Int, metaForm: Int, side: Side, onReplacingAnimationComplete: () -> Unit)
     {
-        val anim = Services.getMedia().summoningAnimation
-        val sra = SelfRemovingAnimation(anim as Animation<TextureRegion>)
+        val anim = Services.getMedia().getSummoningAnimation()
+        val sra = SelfRemovingAnimation(anim)
 
         sra.setPosition(0f, 0f, Align.bottom)
 
@@ -151,8 +149,8 @@ class BattleGuardianWidget
 
     fun animateBan(onBanAnimationComplete: () -> Unit)
     {
-        val anim = Services.getMedia().banningAnimation
-        val sra = SelfRemovingAnimation(anim as Animation<TextureRegion>)
+        val anim = Services.getMedia().getBanningAnimation()
+        val sra = SelfRemovingAnimation(anim)
         sra.setPosition(0f, 0f, Align.bottom)
         addActor(sra)
         guardianImage.addAction(
@@ -166,8 +164,8 @@ class BattleGuardianWidget
 
     fun animateBanFailure(onBanFailureAnimationComplete: () -> Unit)
     {
-        val anim = Services.getMedia().summoningAnimation
-        val sra = SelfRemovingAnimation(anim as Animation<TextureRegion>)
+        val anim = Services.getMedia().getSummoningAnimation()
+        val sra = SelfRemovingAnimation(anim)
         sra.setPosition(0f, 0f, Align.bottom)
         addActor(sra)
         guardianImage.addAction(

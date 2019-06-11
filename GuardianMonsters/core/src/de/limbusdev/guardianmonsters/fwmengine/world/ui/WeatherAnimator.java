@@ -76,7 +76,7 @@ public class WeatherAnimator {
     }
 
     private class RainRenderer extends AWeatherRenderer {
-        private Animation<TextureAtlas.AtlasRegion> rainAnimation;
+        private Animation<TextureRegion> rainAnimation;
         private FogRenderer fogRenderer;
         private Array<Float> randomRaindropOffset;
         private Array<IntVec2> randomRaindropPosition;

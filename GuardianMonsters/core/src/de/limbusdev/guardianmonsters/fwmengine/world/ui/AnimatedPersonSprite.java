@@ -13,10 +13,10 @@ import de.limbusdev.guardianmonsters.services.Services;
  * Created by georg on 07.02.17.
  */
 
-public class AnimatedPersonSprite extends Sprite {
-
-    public ArrayMap<SkyDirection,Animation<AtlasRegion>> animations; // characters animations (N,S,W,E)
-    public Animation<AtlasRegion>         recentAnim; // alive animation
+public class AnimatedPersonSprite extends Sprite
+{
+    public ArrayMap<SkyDirection,Animation<TextureRegion>> animations; // characters animations (N,S,W,E)
+    public Animation<TextureRegion>         recentAnim; // alive animation
     public boolean visible;
     /* ........................................................................... CONSTRUCTOR .. */
     public AnimatedPersonSprite(boolean male, int index) {
@@ -37,7 +37,7 @@ public class AnimatedPersonSprite extends Sprite {
         construct(animations);
     }
 
-    private void construct(ArrayMap<SkyDirection,Animation<AtlasRegion>> animations) {
+    private void construct(ArrayMap<SkyDirection,Animation<TextureRegion>> animations) {
 
         this.visible = true;
 
@@ -56,11 +56,11 @@ public class AnimatedPersonSprite extends Sprite {
     }
 
     public void update(float elapsedTime) {
-        AtlasRegion keyFrame = recentAnim.getKeyFrame(elapsedTime);
+        TextureRegion keyFrame = recentAnim.getKeyFrame(elapsedTime);
         super.setRegion(keyFrame, 0, 0, keyFrame.getRegionWidth(), keyFrame.getRegionHeight());
     }
 
-    public Animation<AtlasRegion> getAnimation() {
+    public Animation<TextureRegion> getAnimation() {
         return recentAnim;
     }
 

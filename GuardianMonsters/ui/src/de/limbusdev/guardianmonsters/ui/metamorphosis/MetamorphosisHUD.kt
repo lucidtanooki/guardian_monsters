@@ -52,8 +52,8 @@ class MetamorphosisHUD
         )
 
         // Actor Creation
-        val background  = media.metamorphosisBackground
-        animation       = media.metamorphosisAnimation
+        val background  = media.getMetamorphosisBackground()
+        animation       = media.getMetamorphosisAnimation()
         imgBefore       = Image(media.getMonsterSprite(speciesID, formerMetaForm))
         imgAfter        = Image(media.getMonsterSprite(speciesID, newMetaForm))
         okButton        = ImageButton(skin, "burgund-close")

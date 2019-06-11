@@ -67,32 +67,26 @@ class MediaManager : IMediaManager
         assets.finishLoading()
 
         val animations = AssetPath.Spritesheet.ANIMATIONS
-        animatedTiles.add(Animation(1f, assets.get(animations, TextureAtlas::class.java)
-                .findRegions("water"), Animation.PlayMode.LOOP))
-        animatedTiles.add(Animation(1f, assets.get(animations, TextureAtlas::class.java)
-                .findRegions("waterine"), Animation.PlayMode.LOOP))
-        animatedTiles.add(Animation(1f, assets.get(animations, TextureAtlas::class.java)
-                .findRegions("waterinw"), Animation.PlayMode.LOOP))
-        animatedTiles.add(Animation(1f, assets.get(animations, TextureAtlas::class.java)
-                .findRegions("waterise"), Animation.PlayMode.LOOP))
-        animatedTiles.add(Animation(1f, assets.get(animations, TextureAtlas::class.java)
-                .findRegions("waterisw"), Animation.PlayMode.LOOP))
-        animatedTiles.add(Animation(1f, assets.get(animations, TextureAtlas::class.java)
-                .findRegions("watern"), Animation.PlayMode.LOOP))
-        animatedTiles.add(Animation(1f, assets.get(animations, TextureAtlas::class.java)
-                .findRegions("waterne"), Animation.PlayMode.LOOP))
-        animatedTiles.add(Animation(1f, assets.get(animations, TextureAtlas::class.java)
-                .findRegions("waternw"), Animation.PlayMode.LOOP))
-        animatedTiles.add(Animation(1f, assets.get(animations, TextureAtlas::class.java)
-                .findRegions("waters"), Animation.PlayMode.LOOP))
-        animatedTiles.add(Animation(1f, assets.get(animations, TextureAtlas::class.java)
-                .findRegions("waterse"), Animation.PlayMode.LOOP))
-        animatedTiles.add(Animation(1f, assets.get(animations, TextureAtlas::class.java)
-                .findRegions("watersw"), Animation.PlayMode.LOOP))
-        animatedTiles.add(Animation(1f, assets.get(animations, TextureAtlas::class.java)
-                .findRegions("watere"), Animation.PlayMode.LOOP))
-        animatedTiles.add(Animation(1f, assets.get(animations, TextureAtlas::class.java)
-                .findRegions("waterw"), Animation.PlayMode.LOOP))
+
+        val tileTypes = arrayOf(
+                "water",
+                "waterine",
+                "waterinw",
+                "waterise",
+                "watern",
+                "waterne",
+                "waternw",
+                "waters",
+                "waterse",
+                "watersw",
+                "watere",
+                "waterw")
+
+        for(tileType in tileTypes)
+        {
+            animatedTiles.add(Animation(1f, assets.get(animations, TextureAtlas::class.java)
+                    .findRegions(tileType), Animation.PlayMode.LOOP))
+        }
     }
 
 

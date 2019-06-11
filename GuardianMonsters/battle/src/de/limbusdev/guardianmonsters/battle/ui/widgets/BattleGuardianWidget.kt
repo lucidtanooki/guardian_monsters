@@ -121,8 +121,7 @@ class BattleGuardianWidget
     /** Runs a replacement animation. */
     fun replaceDefeated(index: Int, metaForm: Int, side: Side, onReplacingAnimationComplete: () -> Unit)
     {
-        val anim = Services.getMedia().getSummoningAnimation()
-        val sra = SelfRemovingAnimation(anim)
+        val sra = SelfRemovingAnimation(Services.getMedia().getSummoningAnimation())
 
         sra.setPosition(0f, 0f, Align.bottom)
 
@@ -141,10 +140,11 @@ class BattleGuardianWidget
 
     fun animateBan(onBanAnimationComplete: () -> Unit)
     {
-        val anim = Services.getMedia().getBanningAnimation()
-        val sra = SelfRemovingAnimation(anim)
+        val sra = SelfRemovingAnimation(Services.getMedia().getBanningAnimation())
+
         sra.setPosition(0f, 0f, Align.bottom)
         addActor(sra)
+
         guardianImage.addAction(
 
                 delay(1f)
@@ -156,10 +156,11 @@ class BattleGuardianWidget
 
     fun animateBanFailure(onBanFailureAnimationComplete: () -> Unit)
     {
-        val anim = Services.getMedia().getSummoningAnimation()
-        val sra = SelfRemovingAnimation(anim)
+        val sra = SelfRemovingAnimation(Services.getMedia().getSummoningAnimation())
+
         sra.setPosition(0f, 0f, Align.bottom)
         addActor(sra)
+
         guardianImage.addAction(
 
                 delay(1f)
@@ -217,6 +218,8 @@ class BattleGuardianWidget
         }
     }
 
+
+    // ............................................................................... Inner Classes
     class ZComparator : Comparator<BattleGuardianWidget>
     {
         override fun compare(t0: BattleGuardianWidget, t1: BattleGuardianWidget): Int

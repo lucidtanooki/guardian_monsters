@@ -5,6 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton
 import com.badlogic.gdx.utils.Align
 
 import de.limbusdev.guardianmonsters.guardians.Element
+import de.limbusdev.guardianmonsters.services.Services
 
 /**
  * BattleHUDTextButton
@@ -15,11 +16,10 @@ import de.limbusdev.guardianmonsters.guardians.Element
 class BattleHUDTextButton
 (
         text: String,
-        skin: Skin,
         position: Int,
         element: Element
 )
-    : TextButton(text, skin, construct(position, element))
+    : TextButton(text, Services.getUI().battleSkin, construct(position, element))
 {
     // ................................................................................ Constructors
     init

@@ -13,10 +13,10 @@ import de.limbusdev.guardianmonsters.services.Services
 
 import de.limbusdev.utils.extensions.set
 import ktx.actors.onClick
+import ktx.style.get
 
 open class SevenButtonsWidget
 (
-        protected var skin: Skin,
         private var callbacks: (Int) -> Unit,
         buttonOrder: IntArray
 )
@@ -32,6 +32,7 @@ open class SevenButtonsWidget
     // .................................................................................. Properties
     // Buttons
     protected val buttons: ArrayMap<Int, TextButton> = ArrayMap()
+    private val skin : Skin get() = Services.getUI().battleSkin
 
 
     // ................................................................................ Constructors
@@ -54,9 +55,9 @@ open class SevenButtonsWidget
 
         for (i in positions)
         {
-            val tb : TextButton = BattleHUDTextButton("", skin, i, Element.NONE)
+            val tb : TextButton = BattleHUDTextButton("", i, Element.NONE)
             buttons.put(buttonOrder[i], tb)
-            addActor(tb)
+            this.addActor(tb)
         }
 
         initCallbackHandler()
@@ -114,17 +115,16 @@ open class SevenButtonsWidget
         setButtonText(index, Services.getL18N().Abilities().get(ability.name))
     }
 
-    fun setButtonStyle(index: Int, skin: Skin, style: String)
+    fun setButtonStyle(index: Int, style: String)
     {
-        val bs = skin.get(style, TextButton.TextButtonStyle::class.java)
+        val bs = skin.get<TextButton.TextButtonStyle>(style)
         buttons[index].style = bs
     }
 
     fun setButtonStyle(index: Int, element: Element)
     {
-        val skin = Services.getUI().battleSkin
         val styleString = "tb-attack-" + element.toString().toLowerCase()
-        setButtonStyle(index, skin, styleString)
+        setButtonStyle(index, styleString)
     }
 
     protected fun getButton(index: Int): TextButton = buttons[index]
@@ -154,7 +154,6 @@ open class SevenButtonsWidget
 
     class CentralHalfButtonsAddOn
     (
-            skin: Skin,
             private val callbacks: (Int) -> Unit
     )
         : BattleWidget()
@@ -163,10 +162,10 @@ open class SevenButtonsWidget
 
         init
         {
-            val button7 = BattleHUDTextButton("", skin, 7, Element.NONE)
+            val button7 = BattleHUDTextButton("", 7, Element.NONE)
             buttons[7] = button7
             addActor(button7)
-            val button8 = BattleHUDTextButton("", skin, 8, Element.NONE)
+            val button8 = BattleHUDTextButton("", 8, Element.NONE)
             button8.touchable = Touchable.disabled
             buttons[8] = button8
             addActor(button8)

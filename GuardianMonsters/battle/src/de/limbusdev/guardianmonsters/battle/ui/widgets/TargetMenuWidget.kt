@@ -19,12 +19,7 @@ import de.limbusdev.guardianmonsters.services.Services
  * @author Georg Eckert 2019
  */
 
-class TargetMenuWidget
-(
-        skin: Skin,
-        callbacks: (Int) -> Unit
-)
-    : SevenButtonsWidget(skin, callbacks, order), Observer
+class TargetMenuWidget(callbacks: (Int) -> Unit) : SevenButtonsWidget(callbacks, order), Observer
 {
     // ............................................................................ Companion Object
     companion object

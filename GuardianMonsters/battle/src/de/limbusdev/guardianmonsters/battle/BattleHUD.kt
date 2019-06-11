@@ -175,12 +175,12 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
                 onBattleAnimationDieing,
                 onBattleAnimationDoNothing)
 
-        abilityMenuAddOn = SevenButtonsWidget.CentralHalfButtonsAddOn(skin, onAttackMenuAddOnButton)
+        abilityMenuAddOn = SevenButtonsWidget.CentralHalfButtonsAddOn(onAttackMenuAddOnButton)
 
-        abilityMenu          = AbilityMenuWidget(skin) { ID -> onAttackMenuButton(ID)     }
-        abilityInfoMenu      = AbilityMenuWidget(skin) { ID -> onAttackInfoMenuButton(ID) }
-        targetMenuWidget     = TargetMenuWidget(skin)  { ID -> onTargetMenuButton(ID)     }
-        targetAreaMenuWidget = TargetMenuWidget(skin)  { ID -> onTargetAreaMenuButton(ID) }
+        abilityMenu          = AbilityMenuWidget() { ID -> onAttackMenuButton(ID)     }
+        abilityInfoMenu      = AbilityMenuWidget() { ID -> onAttackInfoMenuButton(ID) }
+        targetMenuWidget     = TargetMenuWidget()  { ID -> onTargetMenuButton(ID)     }
+        targetAreaMenuWidget = TargetMenuWidget()  { ID -> onTargetAreaMenuButton(ID) }
 
         abilityInfoMenuFrame    = BattleActionMenuWidget(skin)
         abilityDetailBackButton = BattleActionMenuWidget(skin, onBackButton = onAttackDetailLabelBackButton )

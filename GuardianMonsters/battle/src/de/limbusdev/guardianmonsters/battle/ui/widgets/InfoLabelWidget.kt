@@ -34,7 +34,7 @@ open class InfoLabelWidget() : BattleWidget()
 
     private   var wholeText     : String = ""
     private   var remainingText : String = ""
-    private   var currentText  : String = ""
+    private   var currentText   : String = ""
 
 
     // ................................................................................ Constructors

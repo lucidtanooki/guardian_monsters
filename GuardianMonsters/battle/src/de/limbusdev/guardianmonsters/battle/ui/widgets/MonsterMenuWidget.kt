@@ -1,28 +1,15 @@
 package de.limbusdev.guardianmonsters.battle.ui.widgets
 
-import com.badlogic.gdx.scenes.scene2d.ui.Skin
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton
-
 import de.limbusdev.guardianmonsters.guardians.Element
 import de.limbusdev.guardianmonsters.guardians.Side
-import de.limbusdev.guardianmonsters.guardians.battle.BattleQueue
 import de.limbusdev.guardianmonsters.guardians.battle.BattleSystem
-import de.limbusdev.guardianmonsters.guardians.battle.CombatTeam
-import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian
-import de.limbusdev.guardianmonsters.guardians.monsters.Team
 import de.limbusdev.guardianmonsters.services.Services
-import de.limbusdev.guardianmonsters.ui.widgets.Callback
 
 
 /**
  * @author Georg Eckert 2017
  */
-class MonsterMenuWidget
-(
-        skin: Skin,
-        callbacks: (Int) -> Unit
-)
-    : SevenButtonsWidget(skin, callbacks, order)
+class MonsterMenuWidget(callbacks: (Int) -> Unit) : SevenButtonsWidget(callbacks, order)
 {
     // ............................................................................ Companion Object
     companion object
@@ -56,7 +43,7 @@ class MonsterMenuWidget
         {
             if (key > 6) break
             val m = team[key]
-            val bwi = BattleHUDTextButton(Services.getL18N().getLocalizedGuardianName(m), skin, key, Element.AIR)
+            val bwi = BattleHUDTextButton(Services.getL18N().getLocalizedGuardianName(m), key, Element.AIR)
 
             replaceButton(bwi, key)
 

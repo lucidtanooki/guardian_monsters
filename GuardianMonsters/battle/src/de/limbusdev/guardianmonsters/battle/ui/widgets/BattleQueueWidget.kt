@@ -2,7 +2,6 @@ package de.limbusdev.guardianmonsters.battle.ui.widgets
 
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.scenes.scene2d.ui.Image
-import com.badlogic.gdx.scenes.scene2d.ui.Skin
 import com.badlogic.gdx.utils.Array
 
 import java.util.Observable
@@ -19,19 +18,20 @@ import de.limbusdev.guardianmonsters.ui.widgets.MonsterPreviewWidget
 
 class BattleQueueWidget
 (
-        skin: Skin,
         internal var align: Int
 )
     : BattleWidget(), Observer
 {
-
-    private val startx = 0
-    private val starty = 0
-    private val previewYoffset = 36
+    // .................................................................................. Properties
+    private val startX = 0
+    private val startY = 0
+    private val previewYOffset = 36
     private val queueOffset = 4
 
-    private val bgIndicator: Image = Image(skin.getDrawable("monster-preview-active"))
+    private val bgIndicator = Image(Services.getUI().battleSkin.getDrawable("monster-preview-active"))
 
+
+    // ..................................................................................... Methods
     /**
      * Adds the given monsters to the widget, beginning at the provided slot
      * @param round
@@ -55,11 +55,11 @@ class BattleQueueWidget
             val side = queue.getTeamSideFor(guardian)
 
             val previewWidget = MonsterPreviewWidget(Services.getUI().battleSkin)
-            previewWidget.setPreview(guardian.speciesDescription.ID, guardian.abilityGraph.currentForm, side)
+            previewWidget.setPreview(guardian.speciesID, guardian.currentForm, side)
 
             if (greyOut) { previewWidget.color = Color.GRAY }
 
-            previewWidget.setPosition(startx.toFloat(), (starty + slot * previewYoffset + queueOffset).toFloat(), align)
+            previewWidget.setPosition(startX.toFloat(), (startY + slot * previewYOffset + queueOffset).toFloat(), align)
 
             addActor(previewWidget)
 
@@ -85,6 +85,7 @@ class BattleQueueWidget
      */
     override fun update(observable: Observable, o: Any?)
     {
+        // TODO Check if QueueSignal is used
         if (observable is BattleQueue && o is BattleQueue.QueueSignal)
         {
             updateQueue(observable)

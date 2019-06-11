@@ -35,7 +35,6 @@ class MonsterStateWidget
  * @param showExp  whether exp bar shall be shown
  */
 (
-        skin: Skin,
         showExp: Boolean
 )
     : WidgetGroup(), Observer
@@ -49,6 +48,8 @@ class MonsterStateWidget
     private val hudBgImg    : Image
     private val hudRingImg  : Image
     private val hudNameImg  : Image
+
+    private val skin = Services.getUI().battleSkin
 
 
     // ................................................................................ Constructors

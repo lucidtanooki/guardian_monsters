@@ -22,43 +22,40 @@ import ktx.actors.then
  * HINT: Don't forget calling the init() method
  * Created by Georg Eckert 2016
  */
-class BattleStatusOverviewWidget(skin: Skin) : BattleWidget()
+class BattleStatusOverviewWidget() : BattleWidget()
 {
-    private val monsterStateWidgets : ArrayMap<Side, Array<MonsterStateWidget>>
+    // .................................................................................. Properties
+    private val monsterStateWidgets : ArrayMap<Side, Array<MonsterStateWidget>> = ArrayMap()
 
+
+    // ................................................................................ Constructors
     init
     {
-        monsterStateWidgets = ArrayMap()
         monsterStateWidgets[Side.LEFT]  = Array()
         monsterStateWidgets[Side.RIGHT] = Array()
 
-        // Hero Team ###############################################################################
-        var msw = MonsterStateWidget(skin, true)
-        msw.setPosition(IndPos.statWPos1left.xf, IndPos.statWPos1left.yf, Align.topLeft)
-        monsterStateWidgets[Side.LEFT].add(msw)
-        msw = MonsterStateWidget(skin, true)
-        msw.setPosition(IndPos.statWPos2left.xf, IndPos.statWPos2left.yf, Align.topLeft)
-        monsterStateWidgets[Side.LEFT].add(msw)
-        msw = MonsterStateWidget(skin, true)
-        msw.setPosition(IndPos.statWPos3left.xf, IndPos.statWPos3left.yf, Align.topLeft)
-        monsterStateWidgets[Side.LEFT].add(msw)
+        // Hero Team
+        monsterStateWidgets[Side.LEFT].add(setupGuardianStateWidget(true, IndPos.statWPos1left, Side.LEFT))
+        monsterStateWidgets[Side.LEFT].add(setupGuardianStateWidget(true, IndPos.statWPos2left, Side.LEFT))
+        monsterStateWidgets[Side.LEFT].add(setupGuardianStateWidget(true, IndPos.statWPos3left, Side.LEFT))
 
-        // Opponent Team ###########################################################################
-        msw = MonsterStateWidget(skin, false)
-        msw.setPosition(IndPos.statWPos1right.xf, IndPos.statWPos1right.yf, Align.topRight)
-        monsterStateWidgets[Side.RIGHT].add(msw)
-        msw = MonsterStateWidget(skin, false)
-        msw.setPosition(IndPos.statWPos2right.xf, IndPos.statWPos2right.yf, Align.topRight)
-        monsterStateWidgets[Side.RIGHT].add(msw)
-        msw = MonsterStateWidget(skin, false)
-        msw.setPosition(IndPos.statWPos3right.xf, IndPos.statWPos3right.yf, Align.topRight)
-        monsterStateWidgets[Side.RIGHT].add(msw)
+        // Opponent Team
+        monsterStateWidgets[Side.RIGHT].add(setupGuardianStateWidget(true, IndPos.statWPos1right, Side.RIGHT))
+        monsterStateWidgets[Side.RIGHT].add(setupGuardianStateWidget(true, IndPos.statWPos2right, Side.RIGHT))
+        monsterStateWidgets[Side.RIGHT].add(setupGuardianStateWidget(true, IndPos.statWPos3right, Side.RIGHT))
 
         for (w in monsterStateWidgets[Side.LEFT])  { addActor(w) }
         for (w in monsterStateWidgets[Side.RIGHT]) { addActor(w) }
 
         setDebug(Constant.DEBUGGING_ON, true)
+    }
 
+    private fun setupGuardianStateWidget(showEXP: Boolean, position: IntVec2, side: Side) : MonsterStateWidget
+    {
+        val align = when(side) { Side.LEFT -> Align.topLeft; Side.RIGHT -> Align.topRight }
+        val widget = MonsterStateWidget(showEXP)
+        widget.setPosition(position.xf, position.yf, align)
+        return widget
     }
 
     private fun addStatusWidgetsForTeam(team: CombatTeam, side: Side)

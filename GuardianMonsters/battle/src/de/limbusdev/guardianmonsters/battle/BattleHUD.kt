@@ -168,7 +168,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
 
         // Widgets
         mainMenu        = BattleMainMenuWidget(onMainMenuSwordButton, onMainMenuRunButton)
-        statusWidget    = BattleStatusOverviewWidget(skin)
+        statusWidget    = BattleStatusOverviewWidget()
 
         animationWidget = BattleAnimationWidget(
                 onBattleAnimationHitComplete,
@@ -190,7 +190,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
                 onTeamButton  = onActionMenuTeamButton,
                 onExtraButton = onActionMenuExtraButton)
 
-        battleQueueWidget = BattleQueueWidget(skin, Align.bottomLeft)
+        battleQueueWidget = BattleQueueWidget(Align.bottomLeft)
         battleQueueWidget.setPosition(1f, 65f, Align.bottomLeft)
 
         infoLabelWidget     = InfoLabelWidget()

@@ -182,10 +182,9 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
         targetMenuWidget     = TargetMenuWidget()  { ID -> onTargetMenuButton(ID)     }
         targetAreaMenuWidget = TargetMenuWidget()  { ID -> onTargetAreaMenuButton(ID) }
 
-        abilityInfoMenuFrame    = BattleActionMenuWidget(skin)
-        abilityDetailBackButton = BattleActionMenuWidget(skin, onBackButton = onAttackDetailLabelBackButton )
+        abilityInfoMenuFrame    = BattleActionMenuWidget()
+        abilityDetailBackButton = BattleActionMenuWidget(onBackButton = onAttackDetailLabelBackButton )
         actionMenu             = BattleActionMenuWidget(
-                skin,
                 onBackButton  = onActionMenuBackButton,
                 onBagButton   = onActionMenuBagButton,
                 onTeamButton  = onActionMenuTeamButton,

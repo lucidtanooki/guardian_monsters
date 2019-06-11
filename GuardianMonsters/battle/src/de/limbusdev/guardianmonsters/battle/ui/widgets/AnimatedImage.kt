@@ -10,7 +10,6 @@
 package de.limbusdev.guardianmonsters.battle.ui.widgets
 
 import com.badlogic.gdx.graphics.g2d.Animation
-import com.badlogic.gdx.graphics.g2d.TextureAtlas
 import com.badlogic.gdx.graphics.g2d.TextureRegion
 import com.badlogic.gdx.scenes.scene2d.ui.Image
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable
@@ -24,26 +23,20 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable
 
 class AnimatedImage
 (
-        // ................................................ Primary Constructor
-        private var animation: Animation<TextureRegion>
+        var animation: Animation<TextureRegion>
 )
-    // .................................................... Super Constructor
     : Image(animation.getKeyFrame(0f))
 {
     // .................................................................................. Properties
-    private var animationTime = 0f
+    private var elapsedAnimationTime = 0f
+
 
     // ..................................................................................... Methods
-    fun setAnimation(animation: Animation<TextureRegion>)
-    {
-        this.animation = animation
-    }
-
     override fun act(delta: Float)
     {
         super.act(delta)
-        animationTime += delta
-        val region = animation.getKeyFrame(animationTime, false)
+        elapsedAnimationTime += delta
+        val region = animation.getKeyFrame(elapsedAnimationTime, false)
         (drawable as TextureRegionDrawable).region = region
     }
 }

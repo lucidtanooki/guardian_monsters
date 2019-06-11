@@ -84,7 +84,7 @@ class BattleGuardianWidget
     fun setStatusEffect(statusEffect: IndividualStatistics.StatusEffect)
     {
         val anim = Services.getMedia().getStatusEffectAnimation(statusEffect)
-        statusEffectAnimation.setAnimation(anim as Animation<TextureRegion>)
+        statusEffectAnimation.animation = (anim as Animation<TextureRegion>)
     }
 
     fun substitute(index: Int, metaForm: Int, side: Side, callback: () -> Unit)

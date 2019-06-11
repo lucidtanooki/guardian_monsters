@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton
 import com.badlogic.gdx.utils.Align
 import com.badlogic.gdx.utils.ArrayMap
+import de.limbusdev.guardianmonsters.battle.BattleHUD
 
 import de.limbusdev.guardianmonsters.guardians.Element
 import de.limbusdev.guardianmonsters.guardians.abilities.Ability
@@ -13,8 +14,13 @@ import de.limbusdev.guardianmonsters.services.Services
 
 import de.limbusdev.utils.extensions.set
 import ktx.actors.onClick
+import ktx.actors.txt
 import ktx.style.get
 
+/**
+ * SevenButtonsWidget is the base for all menu widgets for the [BattleHUD] that use the central
+ * menu area and a 7 buttons comb layout.
+ */
 open class SevenButtonsWidget
 (
         private var callbacks: (Int) -> Unit,
@@ -25,23 +31,21 @@ open class SevenButtonsWidget
     // ............................................................................ Companion Object
     companion object
     {
+        const val TAG = "SevenButtonsWidget"
         val ABILITY_ORDER : IntArray = intArrayOf(5, 3, 1, 0, 4, 2, 6)
     }
 
 
     // .................................................................................. Properties
     // Buttons
-    protected val buttons: ArrayMap<Int, TextButton> = ArrayMap()
-    private val skin : Skin get() = Services.getUI().battleSkin
+    protected val buttons : ArrayMap<Int, TextButton> = ArrayMap()
+    private   val skin    : Skin get() = Services.getUI().battleSkin
 
 
     // ................................................................................ Constructors
     init
     {
-        if (buttonOrder.size < 7)
-        {
-            throw IllegalArgumentException("buttonOrder must contain 7 values")
-        }
+        check(buttonOrder.size == 7) { "$TAG: buttonOrder must contain 7 values" }
 
         // Ability Buttons
         val positions = intArrayOf(
@@ -56,16 +60,16 @@ open class SevenButtonsWidget
         for (i in positions)
         {
             val tb : TextButton = BattleHUDTextButton("", i, Element.NONE)
-            buttons.put(buttonOrder[i], tb)
+            buttons[buttonOrder[i]] = tb
             this.addActor(tb)
         }
 
-        initCallbackHandler()
+        bindCallbackHandler()
     }
 
 
     // ..................................................................................... Methods
-    private fun initCallbackHandler()
+    private fun bindCallbackHandler()
     {
         // bind callback object's methods to the button's onClick
 
@@ -79,12 +83,14 @@ open class SevenButtonsWidget
         }
     }
 
+    /** Binds the widget's buttons to a new callback function. */
     fun setCallbacks(callbacks: (Int) -> Unit)
     {
         this.callbacks = callbacks
-        initCallbackHandler()
+        bindCallbackHandler()
     }
 
+    /** Enables a button visually (tint white) and functionally (touchable and enabled) */
     protected fun enableButton(index: Int)
     {
         buttons[index].apply {
@@ -95,6 +101,7 @@ open class SevenButtonsWidget
         }
     }
 
+    /** Disables a button visually (tint gray) and functionally (not touchable, disabled) */
     protected fun disableButton(index: Int)
     {
         buttons[index].apply {
@@ -107,7 +114,7 @@ open class SevenButtonsWidget
 
     fun setButtonText(index: Int, text: String)
     {
-        buttons[index].setText(text)
+        buttons[index].txt= text
     }
 
     fun setButtonText(index: Int, ability: Ability)
@@ -129,53 +136,62 @@ open class SevenButtonsWidget
 
     protected fun getButton(index: Int): TextButton = buttons[index]
 
+    /** Replaces the button with the given index with the provided button. */
     protected fun replaceButton(button: TextButton, index: Int)
     {
-        val removedButton = buttons.get(index)
+        val removedButton = buttons[index]
         buttons.removeKey(index)
 
+        // Layout button
         button.setPosition(removedButton.x, removedButton.y, Align.bottomLeft)
         button.setScale(removedButton.scaleX, removedButton.scaleY)
         button.setSize(removedButton.width, removedButton.height)
+
+        // Remove old button
         removedButton.remove()
 
+        // Replace button
         buttons[index] = button
 
+        // Bind callback handler to new button
         button.onClick {
 
             println("SevenButtonsWidget: Clicked button $index")
             if (!button.isDisabled) { callbacks.invoke(index) }
         }
+
+        // Add button to menu
         addActor(button)
     }
 
 
     // ............................................................................... Inner Classes
 
-    class CentralHalfButtonsAddOn
-    (
-            private val callbacks: (Int) -> Unit
-    )
-        : BattleWidget()
+    /**
+     * Adds the half buttons above and below the central button.
+     * (Example: the "?" button in the ability menu)
+     */
+    class CentralHalfButtonsAddOn(private val callbacks: (Int) -> Unit) : BattleWidget()
     {
         private val buttons: ArrayMap<Int, TextButton> = ArrayMap()
 
         init
         {
+            // Half button above central button ("?")
             val button7 = BattleHUDTextButton("", 7, Element.NONE)
             buttons[7] = button7
             addActor(button7)
+
+            // Half button below central button
             val button8 = BattleHUDTextButton("", 8, Element.NONE)
             button8.touchable = Touchable.disabled
             buttons[8] = button8
             addActor(button8)
 
+            // Bind callbacks to them
             for (i in 7..8)
             {
-                buttons[i].onClick {
-
-                    if (!buttons[i].isDisabled) { callbacks.invoke(i) }
-                }
+                buttons[i].onClick { if (!buttons[i].isDisabled) { callbacks.invoke(i) } }
             }
         }
     }

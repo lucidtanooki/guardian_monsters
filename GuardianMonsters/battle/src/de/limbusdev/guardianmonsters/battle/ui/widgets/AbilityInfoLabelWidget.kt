@@ -11,97 +11,121 @@ package de.limbusdev.guardianmonsters.battle.ui.widgets
 
 import com.badlogic.gdx.scenes.scene2d.ui.Image
 import com.badlogic.gdx.scenes.scene2d.ui.Label
-import com.badlogic.gdx.scenes.scene2d.ui.Skin
 import com.badlogic.gdx.utils.Align
-import com.badlogic.gdx.utils.I18NBundle
 
 import de.limbusdev.guardianmonsters.guardians.GuardiansServiceLocator
 import de.limbusdev.guardianmonsters.guardians.abilities.Ability
-import de.limbusdev.guardianmonsters.guardians.abilities.IAbilityService
 import de.limbusdev.guardianmonsters.services.Services
+import ktx.style.get
 
 /**
- * AbilityInfoLabelWidget
+ * AbilityInfoLabelWidget displays information about the given [Ability], like damage, MP cost,
+ * a textual description and it's element.
  *
  * @author Georg Eckert 2018
  */
 
-class AbilityInfoLabelWidget
-(
-        skin: Skin,
-        private val inventorySkin: Skin
-)
-    : InfoLabelWidget(skin)
+class AbilityInfoLabelWidget() : InfoLabelWidget()
 {
+    // .................................................................................. Properties
     private val element             : Label
     private val abilityName         : Label
     private val abilityDescription  : Label
     private val abilityDamage       : Label
-    private val abilityMPcost       : Label
-    private val SymbolPStr          : Image
-    private val SymbolMStr          : Image
-    private val SymbolMP            : Image
+    private val abilityMPCost       : Label
+    private val symbolPStr          : Image
+    private val symbolMStr          : Image
+    private val symbolMP            : Image
 
+
+    // ................................................................................ Constructors
     init
     {
-        infoBGImg.drawable = skin.getDrawable("label-info")
-        element = Label("None", inventorySkin, "elem-none")
-        abilityName = Label("Unknown", skin)
-        abilityDescription = Label("No description available", skin)
-        abilityDamage = Label("0", skin)
-        abilityMPcost = Label("0", skin)
-        SymbolPStr = Image(inventorySkin.getDrawable("stats-symbol-pstr"))
-        SymbolMStr = Image(inventorySkin.getDrawable("stats-symbol-mstr"))
-        SymbolMP = Image(inventorySkin.getDrawable("stats-symbol-mp"))
+        // Shorter Skin Access
+        val battleSkin    = Services.getUI().battleSkin
+        val inventorySkin = Services.getUI().inventorySkin
 
+        // Background Image
+        infoBGImg.drawable = battleSkin.getDrawable("label-info")
+
+        // Element Label
+        element = Label("None", inventorySkin, "elem-none")
         element.width = 72f
         element.setPosition(386f, 22f, Align.bottomRight)
+
+        // Ability Name Label
+        abilityName = Label("Unknown", battleSkin)
         abilityName.setPosition(118f, 54f, Align.topLeft)
+
+        // Ability Description Label
+        abilityDescription = Label("No description available", battleSkin)
         abilityDescription.setSize(200f, 32f)
         abilityDescription.setPosition(118f, 40f, Align.topLeft)
         abilityDescription.setWrap(true)
-        SymbolPStr.setPosition(36f, 26f, Align.bottomLeft)
-        SymbolMStr.setPosition(36f, 26f, Align.bottomLeft)
-        abilityDamage.setPosition(52f, 27f, Align.bottomLeft)
-        SymbolMP.setPosition(80f, 26f, Align.bottomLeft)
-        abilityMPcost.setPosition(96f, 27f, Align.bottomLeft)
 
+        // Ability Damage and MP cost Labels & Symbols
+        abilityDamage = Label("0", battleSkin)
+        abilityMPCost = Label("0", battleSkin)
+
+        symbolPStr = Image(inventorySkin.getDrawable("stats-symbol-pstr"))
+        symbolMStr = Image(inventorySkin.getDrawable("stats-symbol-mstr"))
+        symbolMP   = Image(inventorySkin.getDrawable("stats-symbol-mp"))
+
+        symbolPStr.setPosition(36f, 26f, Align.bottomLeft)
+        symbolMStr.setPosition(36f, 26f, Align.bottomLeft)
+        abilityDamage.setPosition(52f, 27f, Align.bottomLeft)
+        symbolMP.setPosition(80f, 26f, Align.bottomLeft)
+        abilityMPCost.setPosition(96f, 27f, Align.bottomLeft)
+
+        // Adding actors to Widget and apply z-Order (is order of adding)
         addActor(element)
         addActor(abilityName)
         addActor(abilityDescription)
         addActor(abilityDamage)
     }
 
-    fun init(aID: Ability.aID)
+
+    // .............................................................................. Initialization
+    /** Initializes the info label with the given [Ability]'s information. */
+    fun initialize(aID: Ability.aID)
     {
+        reset()
+
         val abilities = GuardiansServiceLocator.abilities
         val i18nElements = Services.getL18N().Elements()
         val i18nAbilities = Services.getL18N().Abilities()
+        val elementName = aID.element.toString().toLowerCase()
 
         val ability = abilities.getAbility(aID)
 
-        element.setText(i18nElements.get("element_${aID.element.toString().toLowerCase()}"))
-        element.style = inventorySkin.get("elem-${aID.element.toString().toLowerCase()}", Label.LabelStyle::class.java)
+        element.setText(i18nElements.get("element_$elementName"))
+        element.style = Services.getUI().inventorySkin["elem-$elementName"]
 
         abilityName.setText(i18nAbilities.get(ability.name))
         abilityDamage.setText("${ability.damage}")
-        abilityMPcost.setText("${ability.MPcost}")
-        abilityDescription.setText(i18nAbilities.get("${ability.MPcost}_desc"))
+        abilityMPCost.setText("${ability.MPcost}")
+        abilityDescription.setText(i18nAbilities.get("${ability.name}_desc"))
 
-        abilityMPcost.remove()
-        SymbolMP.remove()
-        SymbolPStr.remove()
-        SymbolMStr.remove()
+        when(ability.damageType)
+        {
+            Ability.DamageType.PHYSICAL ->
+            {
+                addActor(symbolPStr)
+            }
+            Ability.DamageType.MAGICAL ->
+            {
+                addActor(symbolMStr)
+                addActor(symbolMP)
+                addActor(abilityMPCost)
+            }
+        }
+    }
 
-        if (ability.damageType === Ability.DamageType.PHYSICAL)
-        {
-            addActor(SymbolPStr)
-        }
-        else
-        {
-            addActor(SymbolMStr)
-            addActor(SymbolMP)
-            addActor(abilityMPcost)
-        }
+    private fun reset()
+    {
+        abilityMPCost.remove()
+        symbolMP.remove()
+        symbolPStr.remove()
+        symbolMStr.remove()
     }
 }

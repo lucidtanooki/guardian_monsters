@@ -194,8 +194,8 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
         battleQueueWidget = BattleQueueWidget(skin, Align.bottomLeft)
         battleQueueWidget.setPosition(1f, 65f, Align.bottomLeft)
 
-        infoLabelWidget    = InfoLabelWidget(skin)
-        abilityDetailWidget = AbilityInfoLabelWidget(skin, Services.getUI().inventorySkin)
+        infoLabelWidget     = InfoLabelWidget()
+        abilityDetailWidget = AbilityInfoLabelWidget()
 
         abilityDetailBackButton.disableAllButBackButton()
         abilityInfoMenuFrame.disableAllChildButtons()
@@ -681,7 +681,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
             abilityDetailWidget.addToStage(stage)
             abilityDetailBackButton.addToStage(stage)
 
-            abilityDetailWidget.init(aID)
+            abilityDetailWidget.initialize(aID)
 
             state = BattleState.ATTACK_DETAIL
         }

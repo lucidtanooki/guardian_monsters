@@ -14,27 +14,32 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Skin
 import com.badlogic.gdx.utils.Align
+import de.limbusdev.guardianmonsters.services.Services
 
 import de.limbusdev.guardianmonsters.ui.Constant
 import ktx.actors.then
 
-open class InfoLabelWidget(skin: Skin) : BattleWidget()
+open class InfoLabelWidget() : BattleWidget()
 {
-    protected var infoBGImg : Image = Image(skin.getDrawable("label"))
-    var infoLabel           : Label = Label("", skin, "default")
+    protected var infoBGImg : Image
+    private var infoLabel   : Label
 
-    private var wholeText: String = ""
-    private var currentText: String = ""
+    private var wholeText   : String = ""
+    private var currentText : String = ""
 
     init
     {
+        val skin = Services.getUI().battleSkin
+
+        infoBGImg = Image(skin.getDrawable("label"))
+        infoLabel = Label("", skin, "default")
+
         infoBGImg.setSize(372f * Constant.zoom, 62f * Constant.zoom)
         infoBGImg.setPosition(Constant.RES_X / 2f, Constant.zoom * 2f, Align.bottom)
 
         infoLabel.setSize(200f, 58f)
         infoLabel.setWrap(true)
         infoLabel.setPosition((Constant.RES_X / 2).toFloat(), 3f, Align.bottom)
-
 
         addActor(infoBGImg)
         addActor(infoLabel)

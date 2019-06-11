@@ -2,16 +2,12 @@ package de.limbusdev.guardianmonsters.battle.ui.widgets
 
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton
 import com.badlogic.gdx.scenes.scene2d.ui.Skin
+import de.limbusdev.guardianmonsters.services.Services
 
 import ktx.actors.onClick
 
-/**
- *
- * @param skin battle action UI skin
- */
 class BattleActionMenuWidget
 (
-        skin: Skin,
         onBackButton    : () -> Unit = {},
         onBagButton     : () -> Unit = {},
         onTeamButton    : () -> Unit = {},
@@ -19,12 +15,16 @@ class BattleActionMenuWidget
 )
     : BattleWidget()
 {
-    // Buttons
+    // .................................................................................. Properties
     val backButton  : ImageButton = BattleHUDMenuButton(skin, BattleHUDMenuButton.BACK)
     val teamButton  : ImageButton = BattleHUDMenuButton(skin, BattleHUDMenuButton.TEAM)
     val bagButton   : ImageButton = BattleHUDMenuButton(skin, BattleHUDMenuButton.BAG)
     val extraButton : ImageButton = BattleHUDMenuButton(skin, BattleHUDMenuButton.DEFEND)
 
+    val skin : Skin get() = Services.getUI().battleSkin
+
+
+    // ................................................................................ Constructors
     init
     {
         // Add to parent
@@ -41,6 +41,8 @@ class BattleActionMenuWidget
         )
     }
 
+
+    // ..................................................................................... Methods
     fun setCallbacks
     (
             onBackButton  : () -> Unit = {},

@@ -27,6 +27,7 @@ import de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics
 import de.limbusdev.guardianmonsters.services.Services
 
 import de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics.StatusEffect.HEALTHY
+import ktx.actors.plusAssign
 import ktx.actors.then
 
 /**
@@ -39,7 +40,7 @@ class BattleGuardianWidget
 (
         index: Int,
         metaForm: Int,
-        side: Side
+        private val side: Side
 )
     : BattleWidget(), Observer
 {
@@ -70,18 +71,17 @@ class BattleGuardianWidget
     // .............................................................................. Initialization
     fun initialize(index: Int, metaForm: Int, side: Side)
     {
-        val monReg: TextureRegion
-        monReg = Services.getMedia().getMonsterSprite(index, metaForm)
+        val guardianSprite = Services.getMedia().getMonsterSprite(index, metaForm)
 
-        if(side == Side.LEFT && !monReg.isFlipX()) { monReg.flip(true, false) }
+        if(side == Side.LEFT && !guardianSprite.isFlipX) { guardianSprite.flip(true, false) }
 
-        drawable = TextureRegionDrawable(monReg)
+        drawable = TextureRegionDrawable(guardianSprite)
         guardianImage.drawable = drawable
     }
 
 
     // ..................................................................................... Methods
-    fun setStatusEffect(statusEffect: IndividualStatistics.StatusEffect)
+    private fun setStatusEffect(statusEffect: IndividualStatistics.StatusEffect)
     {
         val anim = Services.getMedia().getStatusEffectAnimation(statusEffect)
         statusEffectAnimation.animation = (anim as Animation<TextureRegion>)
@@ -104,14 +104,14 @@ class BattleGuardianWidget
 
         guardianImage.addAction(
 
-                delay(1f)                                       then
-                visible(false)                                  then
-                animationSetupAction                            then
-                delay(1f)                                       then
-                runThis { initialize(index, metaForm, side) }   then
-                visible(true)                                   then
-                delay(1f)                                       then
-                runThis { callback.invoke() }
+                delay(1f)
+                then visible(false)
+                then animationSetupAction
+                then delay(1f)
+                then runThis { initialize(index, metaForm, side) }
+                then visible(true)
+                then delay(1f)
+                then runThis { callback.invoke() }
         )
     }
 
@@ -133,14 +133,14 @@ class BattleGuardianWidget
 
         guardianImage.addAction(
 
-                fadeOut(1f)                                     then
-                showTombstoneAction                             then
-                fadeIn(1f)                                      then
-                runThis { addActor(sra) }                       then
-                delay(1f)                                       then
-                runThis { initialize(index, metaForm, side) }   then
-                delay(1f)                                       then
-                runThis { callback.invoke() }
+                fadeOut(1f)
+                then showTombstoneAction
+                then fadeIn(1f)
+                then runThis { addActor(sra) }
+                then delay(1f)
+                then runThis { initialize(index, metaForm, side) }
+                then delay(1f)
+                then runThis { callback.invoke() }
         )
     }
 
@@ -152,10 +152,10 @@ class BattleGuardianWidget
         addActor(sra)
         guardianImage.addAction(
 
-                delay(1f)                                       then
-                visible(false)                                  then
-                delay(1f)                                       then
-                runThis { callback.invoke() }
+                delay(1f)
+                then visible(false)
+                then delay(1f)
+                then runThis { callback.invoke() }
         )
     }
 
@@ -167,38 +167,38 @@ class BattleGuardianWidget
         addActor(sra)
         guardianImage.addAction(
 
-                delay(1f)                                       then
-                visible(true)                                   then
-                delay(1f)                                       then
-                runThis { callback.invoke() }
+                delay(1f)
+                then visible(true)
+                then delay(1f)
+                then runThis { callback.invoke() }
         )
     }
 
-    fun die(side: Side, onDieingComplete: () -> Unit)
+    fun die(onDieingComplete: () -> Unit)
     {
         when(side)
         {
             Side.LEFT ->
             {
-                val showTombstoneAction = runThis {
+                val showTombstone = {
+
                     val tombStoneDrawable = Services.getUI().battleSkin.getRegion("tomb-stone")
-                    if (side === Side.RIGHT) {
-                        tombStoneDrawable.flip(true, false)
-                    }
+                    tombStoneDrawable.flip(side == Side.RIGHT, false)
                     guardianImage.drawable = TextureRegionDrawable(tombStoneDrawable)
                     showsTombStone = true
                 }
+
                 guardianImage.addAction(
 
-                        alpha(0f, 2f)                               then
-                        visible(false)                              then
-                        showTombstoneAction                         then
-                        visible(true)                               then
-                        alpha(1f, 2f)                               then
-                        runThis { onDieingComplete.invoke() }
+                        alpha(0f, 2f)
+                        then visible(false)
+                        then runThis { showTombstone.invoke() }
+                        then visible(true)
+                        then alpha(1f, 2f)
+                        then runThis { onDieingComplete.invoke() }
                 )
             }
-            Side.RIGHT -> guardianImage.addAction(fadeOut(2f) then visible(false))
+            Side.RIGHT -> guardianImage += (fadeOut(2f) then visible(false))
         }
     }
 
@@ -211,13 +211,12 @@ class BattleGuardianWidget
         {
             guardianImage.addAction(
 
-                    alpha(0f, 2f)                                   then
-                    runThis { guardianImage.drawable = drawable }   then
-                    runThis { showsTombStone = false }              then
-                    alpha(1f, 2f)
+                    alpha(0f, 2f)
+                    then runThis { guardianImage.drawable = drawable }
+                    then runThis { showsTombStone = false }
+                    then alpha(1f, 2f)
             )
         }
-
     }
 
     class ZComparator : Comparator<BattleGuardianWidget>

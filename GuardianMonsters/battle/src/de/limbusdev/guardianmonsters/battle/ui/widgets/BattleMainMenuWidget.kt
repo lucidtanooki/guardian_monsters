@@ -2,6 +2,7 @@ package de.limbusdev.guardianmonsters.battle.ui.widgets
 
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton
 import com.badlogic.gdx.scenes.scene2d.ui.Skin
+import de.limbusdev.guardianmonsters.services.Services
 
 import de.limbusdev.guardianmonsters.ui.Constant
 import de.limbusdev.guardianmonsters.ui.widgets.Callback
@@ -10,17 +11,12 @@ import ktx.actors.onClick
 
 
 /**
- * Created by Georg Eckert 2016
- */
-
-
-/**
+ * BattleMainMenuWidget
  *
- * @param skin battle UI skin
+ * @author Georg Eckert 2016
  */
 class BattleMainMenuWidget
 (
-        skin          : Skin,
         onSwordButton : () -> Unit,
         onRunButton   : () -> Unit
 )
@@ -30,6 +26,8 @@ class BattleMainMenuWidget
     // Buttons
     private val swordButton : ImageButton
     private val runButton   : ImageButton
+
+    private val skin: Skin get() = Services.getUI().battleSkin
 
 
     // ................................................................................ Constructors

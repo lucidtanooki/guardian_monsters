@@ -167,7 +167,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
         addAdditionalStage(battleAnimationStage)
 
         // Widgets
-        mainMenu        = BattleMainMenuWidget(skin, onMainMenuSwordButton, onMainMenuRunButton)
+        mainMenu        = BattleMainMenuWidget(onMainMenuSwordButton, onMainMenuRunButton)
         statusWidget    = BattleStatusOverviewWidget(skin)
 
         animationWidget = BattleAnimationWidget(

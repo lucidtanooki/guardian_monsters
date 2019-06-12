@@ -598,7 +598,7 @@ class ModuleGuardiansJUnitTest
         val battleEnds = booleanArrayOf(false)
         val bs = BattleSystem(left = team, right = oppTeam, isWildEncounter = true)
 
-        val bsCB = object : BattleSystem.Callbacks() {
+        val bsCB = object : BattleSystem.EventHandler() {
             override fun onBattleEnds(winnerSide: Boolean) {
                 println("\n=== Battle ends, winner is: " + (if(winnerSide) "Hero" else "Opponent") + " ===\n")
                 battleEnds[0] = true

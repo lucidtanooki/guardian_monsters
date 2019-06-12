@@ -7,10 +7,12 @@ import com.badlogic.gdx.utils.ArrayMap
 import de.limbusdev.guardianmonsters.guardians.Constant
 import de.limbusdev.guardianmonsters.guardians.GuardiansServiceLocator
 import de.limbusdev.guardianmonsters.guardians.Side
+import de.limbusdev.guardianmonsters.guardians.Side.LEFT as HERO
+import de.limbusdev.guardianmonsters.guardians.Side.RIGHT as OPPONENT
 import de.limbusdev.guardianmonsters.guardians.abilities.Ability
 import de.limbusdev.guardianmonsters.guardians.items.ChakraCrystalItem
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian
-import de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics
+import de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics.StatusEffect
 import de.limbusdev.guardianmonsters.guardians.monsters.Team
 
 /**
@@ -32,7 +34,7 @@ class BattleSystem
 (
         left: Team,
         right: Team,
-        callbacks: Callbacks = NullCallbacks(), // Replace with real Callbacks, if not debugging
+        eventHandler: EventHandler = NullEventHandler(), // Replace with real Callbacks, if not debugging
         isWildEncounter: Boolean = false        // Guardians can be banned in wild encounters only
 ) {
     // .................................................................................. Properties
@@ -40,6 +42,7 @@ class BattleSystem
     val queue           : BattleQueue
     val result          : BattleResult
     val isWildEncounter : Boolean = isWildEncounter
+
 
     // .............................................................. private
     private val defaultAiPlayer: DefaultAIPlayer
@@ -59,7 +62,7 @@ class BattleSystem
     private var latestAttackReport      : AttackCalculationReport? = null
     private var latestAreaAttackReports : Array<AttackCalculationReport> = Array()
 
-    private var callbacks               : Callbacks = callbacks
+    private var eventHandler            : EventHandler = eventHandler
 
 
     // ................................................................................ Constructors
@@ -71,73 +74,54 @@ class BattleSystem
 
         result = BattleResult(left, Array())
 
-        if (callbacks::class == NullCallbacks::class)
-        { println("No Callbacks set. NullCallbacks used.") }
+        if (eventHandler::class == NullEventHandler::class)
+        { println("No EventHandler set. NullEventHandler used.") }
     }
+
 
     // .............................................................................. Battle Methods
     /** Returns the currently active Guardian. The one who's turn it is. */
     val activeGuardian: AGuardian get() = queue.peekNext()
 
-    /**
-     * Attacks the given Monster with the currently active monster
-     *
-     * @param target
-     * @param attack
-     */
+    /** Attacks the given Guardian with the currently active Guardian */
     private fun attack(target: AGuardian?, attack: Int)
     {
-        if(target == null) { throw NullPointerException("$TAG: Attack Target is null!") }
+        checkNotNull(target) { "$TAG: Attack Target is null!" }
 
         // Throw exception if target or attack are unset
-        if (!choiceComplete)
-        {
-            throw IllegalStateException(TAG + " you forgot to set the " + if (targetChosen) "attack" else "target")
-        }
+        check(choiceComplete) { "$TAG you forgot to set the ${if (targetChosen) "attack" else "target"}" }
 
         // Calculate Ability
         val aID = activeGuardian.abilityGraph.activeAbilities.get(attack)
         val ability = GuardiansServiceLocator.abilities.getAbility(aID)
 
-
-        val attacker = activeGuardian
-        val report = BattleCalculator.calcAttack(attacker, target, aID)
-        latestAttackReport = report;
-        callbacks.onAttack(attacker, target, ability, report)
+        latestAttackReport = BattleCalculator.calcAttack(activeGuardian, target, aID)
+        eventHandler.onAttack(activeGuardian, target, ability, latestAttackReport!!)
     }
 
     private fun attackArea(targets: ArrayMap<Int, AGuardian>?, attack: Int)
     {
-        if(targets == null) { throw NullPointerException("$TAG: Area Attack Target is null!") }
+        checkNotNull(targets) { "$TAG: Area Attack Target is null!" }
 
-        if (!choiceComplete)
-        {
-            throw IllegalStateException("$TAG you forgot to set area, attack or targets.")
-        }
+        check(choiceComplete) { "$TAG you forgot to set area, attack or targets." }
 
         // Calculate Ability
         val aID = activeGuardian.abilityGraph.activeAbilities[attack]
         val ability = GuardiansServiceLocator.abilities.getAbility(aID)
 
-        val attacker = activeGuardian
-        latestAreaAttackReports = Array()
+        latestAreaAttackReports.clear()
         for (g in targets.values())
         {
-            val report = BattleCalculator.calcAttack(attacker, g, aID)
+            val report = BattleCalculator.calcAttack(activeGuardian, g, aID)
             latestAreaAttackReports.add(report)
         }
-        callbacks.onAreaAttack(attacker, targets, ability, latestAreaAttackReports)
+        eventHandler.onAreaAttack(activeGuardian, targets, ability, latestAreaAttackReports)
     }
 
-    /**
-     * Puts a Guardian back in the queue, after it was KO
-     */
+    /** Puts a Guardian back in the queue, after it was KO */
     fun revive(guardian: AGuardian) { queue.revive(guardian) }
 
-    /**
-     * Whether this application defeated a guardian
-     * @return
-     */
+    /** Whether this application defeated a guardian */
     fun applyAttack(): Boolean
     {
         if (areaChosen)
@@ -146,18 +130,19 @@ class BattleSystem
         }
         else
         {
-            if(latestAttackReport != null) { BattleCalculator.apply(latestAttackReport!!) }
-            else                           { println("Latest Attack Report is null! This should not happen.") }
+            checkNotNull(latestAttackReport) { "Latest Attack Report is null! This should not happen." }
+            BattleCalculator.apply(latestAttackReport!!)
         }
+
         return checkKO()
     }
 
     fun applyStatusEffect()
     {
-        if (activeGuardian.individualStatistics.statusEffect != IndividualStatistics.StatusEffect.HEALTHY)
+        if (activeGuardian.stats.statusEffect != StatusEffect.HEALTHY)
         {
             BattleCalculator.applyStatusEffect(activeGuardian)
-            callbacks.onApplyStatusEffect(activeGuardian)
+            eventHandler.onApplyStatusEffect(activeGuardian)
             checkKO()
         }
     }
@@ -165,22 +150,19 @@ class BattleSystem
     fun attack()
     {
         // if status effect prevents normal attack calculation
-        val activeGuardian = activeGuardian
-
-        when (activeGuardian.individualStatistics.statusEffect)
+        when(activeGuardian.stats.statusEffect)
         {
-            IndividualStatistics.StatusEffect.PETRIFIED ->
+            StatusEffect.PETRIFIED ->
             {
                 doNothing()
                 return
             }
-            IndividualStatistics.StatusEffect.LUNATIC ->
+            StatusEffect.LUNATIC ->
             {
                 // End Lunatic Status with a chance of 20%
                 if (MathUtils.randomBoolean(0.2f))
                 {
-                    activeGuardian.individualStatistics.statusEffect =
-                            IndividualStatistics.StatusEffect.HEALTHY
+                    activeGuardian.stats.statusEffect = StatusEffect.HEALTHY
                 }
                 // Attack arbitrarily chosen target
                 else
@@ -195,7 +177,7 @@ class BattleSystem
                     setChosenAttack(att)
                 }
             }
-            else /* HEALTHY */ -> {}
+            else -> {}
         }
 
         // if no status effect prevents normal attack calculation
@@ -203,21 +185,17 @@ class BattleSystem
         else            { attack(chosenTarget, chosenAttack) }
     }
 
-    /**
-     * The monster decides to not attack and instead raise it's defense values for one round
-     */
+    /** The monster decides to not attack and instead raise it's defense values for one round */
     fun defend()
     {
         latestAttackReport = BattleCalculator.calcDefense(activeGuardian)
-        callbacks.onDefense(activeGuardian)
+        eventHandler.onDefense(activeGuardian)
     }
 
-    /**
-     * Monster does nothing. Use when e.g. using an item.
-     */
+    /** Monster does nothing. Use when e.g. using an item. */
     fun doNothing()
     {
-        callbacks.onDoingNothing(activeGuardian)
+        eventHandler.onDoingNothing(activeGuardian)
     }
 
     private fun getRandomFitCombatant(): AGuardian
@@ -226,7 +204,7 @@ class BattleSystem
                else                           {  queue.combatTeamRight.getRandomFitMember() }
     }
 
-    fun nextMonster()
+    fun nextGuardian()
     {
         queue.next()
         chosenAttack = 0
@@ -240,39 +218,31 @@ class BattleSystem
 
     fun continueBattle()
     {
-        // Check if one team is KO
+        // If one team is KO, end battle
         if (queue.combatTeamLeft.isKO() || queue.combatTeamRight.isKO())
         {
             finishBattle()
         }
+        // Else decide what to do next
         else
         {
-            if (queue.peekNextSide() == Constant.OPPONENT)
+            when(queue.peekNextSide())
             {
-                // It's AI's turn
-                letAITakeTurn()
-            }
-            else
-            {
-                // It's player's turn
-                callbacks.onPlayersTurn()
+                OPPONENT -> letAITakeTurn()              // It's AI's turn
+                HERO     -> eventHandler.onPlayersTurn() // It's player's turn
             }
         }
     }
 
-    /**
-     * Called, when one of the teams is KO
-     */
+    /** Called, when one of the teams is KO */
     private fun finishBattle()
     {
-        queue.resetTeamsModifiedStats(Constant.LEFT)
-        queue.resetTeamsModifiedStats(Constant.RIGHT)
-        callbacks.onBattleEnds(!queue.combatTeamLeft.isKO())
+        queue.resetTeamsModifiedStats(HERO)
+        queue.resetTeamsModifiedStats(OPPONENT)
+        eventHandler.onBattleEnds(!queue.combatTeamLeft.isKO())
     }
 
-    /**
-     * Checks if a monster has been defeated during the last attack
-     */
+    /** Checks if a monster has been defeated during the last attack */
     private fun checkKO(): Boolean
     {
         var guardianDefeated = false
@@ -284,28 +254,28 @@ class BattleSystem
         {
             while (it.hasNext())
             {
-                val m = it.next()
-                if (m.individualStatistics.isKO)
+                val guardian = it.next()
+                if (guardian.stats.isKO)
                 {
-                    when(queue.getTeamSideFor(m))
+                    when(queue.getTeamSideFor(guardian))
                     {
-                        Side.RIGHT ->
+                        HERO ->
                         {
-                            giveEXPtoWinners(m)
+                            it.remove()
+                            eventHandler.onGuardianDefeated(guardian)
+                        }
+                        OPPONENT ->
+                        {
+                            giveEXPtoWinners(guardian)
                             if (queue.right.teamKO())
                             {
                                 it.remove()
-                                callbacks.onMonsterKilled(m)
+                                eventHandler.onGuardianDefeated(guardian)
                             }
                             else
                             {
-                                randomlyReplaceDefeatedGuardian(Constant.RIGHT, m)
+                                randomlyReplaceDefeatedGuardian(OPPONENT, guardian)
                             }
-                        }
-                        Side.LEFT ->
-                        {
-                            it.remove()
-                            callbacks.onMonsterKilled(m)
                         }
                     }
 
@@ -337,10 +307,9 @@ class BattleSystem
      */
     private fun letAITakeTurn()
     {
-        if (queue.peekNextSide() == Constant.HERO)
-        {
-            throw IllegalStateException("$TAG AI can't take turn. The first monster in queue is not in it's team.")
-        }
+        check(queue.peekNextSide() != Constant.HERO)
+        { "$TAG AI can't take turn. The first monster in queue is not in it's team." }
+
         defaultAiPlayer.turn()
     }
 
@@ -354,51 +323,39 @@ class BattleSystem
         val fieldPos = queue.getFieldPositionFor(activeGuardian)
         activeGuardian.deleteObservers()
         val replaced = queue.exchangeActive(newGuardian)
-        callbacks.onGuardianSubstituted(replaced, newGuardian, fieldPos)
+        eventHandler.onGuardianSubstituted(replaced, newGuardian, fieldPos)
     }
 
     fun banWildGuardian(bannedGuardian: AGuardian, item: ChakraCrystalItem)
     {
-        if (!isWildEncounter)
-        {
-            throw IllegalStateException("Guardians can be banned in wild encounters only!")
-        }
+        check(isWildEncounter) { "Guardians can be banned in wild encounters only!" }
 
-        if (queue.combatTeamRight.countFitMembers() > 1)
-        {
-            throw IllegalStateException("Banning Guardians is possible only, when there is only 1 Guardian left.")
-        }
+        check(queue.combatTeamRight.countFitMembers() > 1)
+        { "Banning Guardians is possible only, when there is only 1 Guardian left." }
 
         val fieldPos = queue.getFieldPositionFor(bannedGuardian)
 
-        callbacks.onBanning(bannedGuardian, item, fieldPos)
+        eventHandler.onBanning(bannedGuardian, item, fieldPos)
     }
 
     fun banWildGuardian(item: ChakraCrystalItem)
     {
-        if (!isWildEncounter)
-        {
-            throw IllegalStateException("Guardians can be banned in wild encounters only!")
-        }
+        check(isWildEncounter) { "Guardians can be banned in wild encounters only!" }
 
-        if (queue.combatTeamRight.countFitMembers() > 1)
-        {
-            throw IllegalStateException("Banning Guardians is possible only, when there is only 1 Guardian left.")
-        }
+        check(queue.combatTeamRight.countFitMembers() > 1)
+        { "Banning Guardians is possible only, when there is only 1 Guardian left." }
 
         val lastGuardian = queue.combatTeamRight.getRandomFitMember()
         banWildGuardian(lastGuardian, item)
     }
 
-    /**
-     * Mainly for replacing defeated opponent Guardians
-     */
-    private fun randomlyReplaceDefeatedGuardian(side: Boolean, defeated: AGuardian)
+    /** Mainly for replacing defeated opponent Guardians */
+    private fun randomlyReplaceDefeatedGuardian(side: Side, defeated: AGuardian)
     {
         val fieldPos = queue.getFieldPositionFor(defeated)
         defeated.deleteObservers()
         val substitute = queue.randomlyExchangeDefeated(defeated)
-        callbacks.onReplacingDefeatedGuardian(defeated, substitute, fieldPos)
+        eventHandler.onReplacingDefeatedGuardian(defeated, substitute, fieldPos)
     }
 
     fun setChosenTarget(target: AGuardian)
@@ -427,18 +384,18 @@ class BattleSystem
     // ........................................................................... Getters & Setters
     /**
      * If callbacks must be set later, usually only in debugging.
-     * @param callbacks
+     * @param eventHandler
      */
-    fun setCallbacks(callbacks: Callbacks)
+    fun setCallbacks(eventHandler: EventHandler)
     {
-        this.callbacks = callbacks
+        this.eventHandler = eventHandler
     }
 
 
     // ............................................................................... Inner Classes
-    abstract class Callbacks
+    abstract class EventHandler
     {
-        open fun onMonsterKilled(m: AGuardian) {}
+        open fun onGuardianDefeated(m: AGuardian) {}
         open fun onAttack(attacker: AGuardian, target: AGuardian, ability: Ability, rep: AttackCalculationReport) {}
         open fun onAreaAttack(attacker: AGuardian, targets: ArrayMap<Int, AGuardian>, ability: Ability, reports: Array<AttackCalculationReport>) {}
         open fun onDefense(defensiveGuardian: AGuardian) {}
@@ -453,8 +410,8 @@ class BattleSystem
         open fun onBanningSuccess(bannedGuardian: AGuardian, crystal: ChakraCrystalItem, fieldPos: Int) {}
     }
 
-    /** Null Implementation so the constructor is not forced to allow Callbacks? (null) */
-    private class NullCallbacks : Callbacks() { }
+    /** Null Implementation */
+    private class NullEventHandler : EventHandler() { }
 
 
     /**
@@ -466,9 +423,7 @@ class BattleSystem
      */
     interface AIPlayer
     {
-        /**
-         * Define how the player makes his turn.
-         */
+        /** Define how the player makes his turn. */
         fun turn()
     }
 
@@ -479,7 +434,7 @@ class BattleSystem
             println("\n### AI's turn ###")
             val m = activeGuardian
 
-            if (activeGuardian.individualStatistics.statusEffect === IndividualStatistics.StatusEffect.PETRIFIED)
+            if (activeGuardian.stats.statusEffect == StatusEffect.PETRIFIED)
             {
                 doNothing()
             }

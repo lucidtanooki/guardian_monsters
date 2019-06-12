@@ -237,10 +237,10 @@ class BattleQueue
         guardian.individualStatistics.resetModifiedStats()
     }
 
-    fun resetTeamsModifiedStats(side: Boolean)
+    fun resetTeamsModifiedStats(side: Side)
     {
         val team: Team =
-            if (side == Constant.LEFT) { left  }
+            if (side == Side.LEFT)     { left  }
             else /* side == RIGHT */   { right }
 
         team.values().forEach{ combatant -> resetModifiedStats(combatant)}

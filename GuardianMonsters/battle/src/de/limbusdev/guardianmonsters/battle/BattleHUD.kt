@@ -93,7 +93,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
     private lateinit var onTeamMenuBackButton           : () -> Unit
     private lateinit var onTeamMenuSwitchButton         : () -> Unit
 
-    private lateinit var battleSystemEventHandler          : BattleSystem.Callbacks
+    private lateinit var battleSystemEventHandler       : BattleSystem.EventHandler
     private lateinit var onBattleAnimationHitComplete   : () -> Unit
     private lateinit var onBattleAnimationDieing        : () -> Unit
     private lateinit var onBattleAnimationDoNothing     : () -> Unit
@@ -535,7 +535,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
 
             if(battleSystem.activeGuardian.stats.statusEffect == StatusEffect.HEALTHY)
             {
-                battleSystem.nextMonster()
+                battleSystem.nextGuardian()
                 battleSystem.continueBattle()
             }
             else
@@ -551,7 +551,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
 
             // TODO replace with separate widget
             actionMenu.setCallbacks(onBackButton = onInfoLabelBackButton)
-            battleSystem.nextMonster()
+            battleSystem.nextGuardian()
             battleSystem.continueBattle()
         }
 
@@ -624,7 +624,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
 
 
         // ........................................................................... battle system
-        battleSystemEventHandler = object : BattleSystem.Callbacks()
+        battleSystemEventHandler = object : BattleSystem.EventHandler()
         {
             override fun onBanning(bannedGuardian: AGuardian, crystal: ChakraCrystalItem, fieldPos: Int)
             {
@@ -691,7 +691,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
                 battleStateMachine.toActionMenu()
             }
 
-            override fun onMonsterKilled(guardian: AGuardian)
+            override fun onGuardianDefeated(guardian: AGuardian)
             {
                 val side = battleSystem.queue.getTeamSideFor(guardian)
                 val pos  = battleSystem.queue.getFieldPositionFor(guardian)

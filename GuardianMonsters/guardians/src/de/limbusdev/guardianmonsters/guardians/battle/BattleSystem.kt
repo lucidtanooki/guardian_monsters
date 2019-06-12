@@ -259,21 +259,23 @@ class BattleSystem
                 {
                     when(queue.getTeamSideFor(guardian))
                     {
-                        HERO ->
+                        HERO ->     // If defeated Guardian is from Hero's Team
                         {
                             it.remove()
                             eventHandler.onGuardianDefeated(guardian)
                         }
-                        OPPONENT ->
+                        OPPONENT -> // If defeated Guardian is from Opponent's Team
                         {
                             giveEXPtoWinners(guardian)
                             if (queue.right.teamKO())
                             {
+                                // If opponent's whole team is defeated, call event handler
                                 it.remove()
                                 eventHandler.onGuardianDefeated(guardian)
                             }
                             else
                             {
+                                // If Opponent has fit team member, replace defeated
                                 randomlyReplaceDefeatedGuardian(OPPONENT, guardian)
                             }
                         }

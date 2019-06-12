@@ -605,36 +605,29 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
         }
 
         // ........................................................................ attack info menu
-        onAttackInfoMenuButton = {
+        onAttackInfoMenuButton = { buttonID ->
 
             battleStateSwitcher.toAttackDetail(battleSystem
                     .activeMonster
                     .abilityGraph
-                    .getActiveAbility(it))
+                    .getActiveAbility(buttonID))
         }
 
         // ..................................................................... attack detail label
         onAttackDetailLabelBackButton = { battleStateSwitcher.toAttackInfoMenu() }
 
         // ................................................................. attack menu info switch
-        onAttackMenuAddOnButton = object : (Int) -> Unit {
-
+        onAttackMenuAddOnButton = object : (Int) -> Unit
+        {
             private var checked = false
 
             override fun invoke(buttonID: Int)
             {
                 checked = !checked
-                when(buttonID)
+                if(buttonID == BattleHUDTextButton.CENTER_TOP)
                 {
-                    BattleHUDTextButton.CENTER_TOP -> if(checked)
-                    {
-                        battleStateSwitcher.toAttackInfoMenu()
-                    }
-                    else
-                    {
-                        battleStateSwitcher.toAttackMenu()
-                    }
-                    else -> { }
+                    if(checked) { battleStateSwitcher.toAttackInfoMenu() }
+                    else        { battleStateSwitcher.toAttackMenu() }
                 }
             }
         }

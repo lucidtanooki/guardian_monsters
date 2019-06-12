@@ -9,3 +9,6 @@ fun Int.f(): Float = toFloat()
 fun Float.i(): Int = toInt()
 
 fun Boolean.toggle() = not()
+
+/** returns enum as lower case string */
+fun Enum<*>.toLCString() = toString().toLowerCase()

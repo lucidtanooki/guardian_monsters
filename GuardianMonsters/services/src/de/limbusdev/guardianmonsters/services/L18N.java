@@ -30,6 +30,10 @@ public interface L18N {
 
     I18NBundle Battle();
 
+    // Short Accessors
+    String Battle(String key);
+    String Battle(String key, Object... args);
+
     /**
      * Returns the nickname of the given Guardian, if it has one. Otherwise the localized species
      * name is used.

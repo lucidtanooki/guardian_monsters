@@ -173,7 +173,7 @@ class MetamorphosisHUD
         fun playVictorySFX()        = Services.getAudio().playMusic(AssetPath.Audio.Music.VICTORY_FANFARE)
         fun playMetamorphosisSFX()  = Services.getAudio().playSound(AssetPath.Audio.SFX.METAMORPHOSIS)
 
-        fun muteAudio(): Action     = Services.getAudio().getMuteAudioAction(AssetPath.Audio.Music.METAMORPHOSIS)
+        fun muteAudio(): Action     = Services.getAudio().createMuteAction(AssetPath.Audio.Music.METAMORPHOSIS)
         fun fadeInMusic(): Action   = Services.getAudio().getFadeInMusicAction(AssetPath.Audio.Music.METAMORPHOSIS)
         fun popScreen(): Action     = runAction { Services.getScreenManager().popScreen() }
     }

@@ -35,7 +35,7 @@ public class NullAudioManager implements IAudioManager
     }
 
     @Override
-    public Action getMuteAudioAction(String path) {
+    public Action createMuteAction(String path) {
         return Actions.sequence();
     }
 
@@ -45,7 +45,20 @@ public class NullAudioManager implements IAudioManager
     }
 
     @Override
-    public void stopMusic() {
-
+    public Action createPlayMusicAction(String path)  {
+        return Actions.sequence();
     }
+
+    @Override
+    public Action createStopMusicAction(String path)  {
+        return Actions.sequence();
+    }
+
+    @Override
+    public Action createEndOfBattleMusicSequence()   {
+        return Actions.sequence();
+    }
+
+    @Override
+    public void stopMusic() {}
 }

@@ -84,7 +84,7 @@ public class AudioManager implements IAudioManager
     }
 
     @Override
-    public Action getMuteAudioAction(String musicPath)
+    public Action createMuteAction(String musicPath)
     {
         final Music muteable = assets.get(musicPath, Music.class);
         Action muteAction = Actions.sequence(
@@ -126,5 +126,29 @@ public class AudioManager implements IAudioManager
                 }
             })));
         return fadeInAction;
+    }
+
+    @Override
+    public Action createPlayMusicAction(String path)
+    {
+        return Actions.run( () -> playMusic(path));
+    }
+
+    @Override
+    public Action createStopMusicAction(String path)
+    {
+        return Actions.run( () -> stopMusic(path));
+    }
+
+    @Override
+    public Action createEndOfBattleMusicSequence()
+    {
+        return Actions.sequence(
+
+                createMuteAction(AssetPath.Audio.Music.VICTORY_SONG),
+                createPlayMusicAction(AssetPath.Audio.Music.VICTORY_FANFARE),
+                Actions.delay(5f),
+                createPlayMusicAction(AssetPath.Audio.Music.VICTORY_SONG)
+        );
     }
 }

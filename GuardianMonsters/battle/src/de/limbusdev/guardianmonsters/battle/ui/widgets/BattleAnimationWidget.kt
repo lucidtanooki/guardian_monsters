@@ -225,12 +225,12 @@ class BattleAnimationWidget
     (
             pos: Int,
             side: Side,
-            substitutesID: Int,
-            substitutesForm: Int,
             onSubstitutionComplete: () -> Unit,
             substituted: AGuardian,
             substitute: AGuardian
     ) {
+        val substitutesID = substitute.speciesID
+        val substitutesForm = substitute.currentForm
         val guardianWidget = guardianSprites[side][pos]
         substitute.addObserver(guardianWidget)
         guardianWidget.substitute(substitutesID, substitutesForm, side) { onSubstitutionComplete.invoke() }
@@ -240,12 +240,12 @@ class BattleAnimationWidget
     (
             pos: Int,
             side: Side,
-            substitutesID: Int,
-            substitutesForm: Int,
             onSubstitutionComplete: () -> Unit,
             substituted: AGuardian,
             substitute: AGuardian
     ) {
+        val substitutesID = substitute.speciesID
+        val substitutesForm = substitute.currentForm
         val guardianWidget = guardianSprites[side][pos]
         substitute.addObserver(guardianWidget)
         guardianWidget.replaceDefeated(substitutesID, substitutesForm, side) { onSubstitutionComplete.invoke() }

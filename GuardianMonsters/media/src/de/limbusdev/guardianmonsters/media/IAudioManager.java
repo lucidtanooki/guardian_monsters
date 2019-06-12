@@ -14,8 +14,11 @@ public interface IAudioManager
     void playLoopMusic(String path);
     void stopMusic(String path);
     void dispose();
-    Action getMuteAudioAction(String path);
+    Action createMuteAction(String path);
     Action getFadeInMusicAction(String path);
+    Action createPlayMusicAction(String path);
+    Action createStopMusicAction(String path);
+    Action createEndOfBattleMusicSequence();
 
     /**
      * Stops the currently playing music

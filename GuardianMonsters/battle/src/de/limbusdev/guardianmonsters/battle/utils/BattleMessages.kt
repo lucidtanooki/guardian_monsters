@@ -14,7 +14,7 @@ import de.limbusdev.guardianmonsters.services.Services
 /**
  * @author Georg Eckert 2017
  */
-object BattleStringBuilder
+object BattleMessages
 {
     private fun species()                           = GuardiansServiceLocator.species
     private fun commonName(id: Int, form: Int)      = species().getCommonNameById(id, form)
@@ -23,7 +23,7 @@ object BattleStringBuilder
     private fun abilityName(id: String)             = Services.getL18N().getLocalizedAbilityName(id)
     private fun l18nBattle()                        = Services.getL18N().Battle()
 
-    fun tryingToBanGuardian(guardian: AGuardian, item: Item): String
+    fun tryingToBan(guardian: AGuardian, item: Item): String
     {
         return l18nBattle().format(
                 "batt_message_ban_trial",

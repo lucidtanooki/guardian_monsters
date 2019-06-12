@@ -11,7 +11,6 @@ package de.limbusdev.guardianmonsters.battle.ui.widgets
 
 import com.badlogic.gdx.graphics.g2d.Animation
 import com.badlogic.gdx.graphics.g2d.Batch
-import com.badlogic.gdx.graphics.g2d.TextureAtlas
 import com.badlogic.gdx.graphics.g2d.TextureRegion
 import com.badlogic.gdx.math.Interpolation
 import com.badlogic.gdx.scenes.scene2d.Action
@@ -34,7 +33,6 @@ import de.limbusdev.guardianmonsters.ui.Constant
 import de.limbusdev.utils.extensions.set
 import de.limbusdev.utils.geometry.IntVec2
 import ktx.actors.plusAssign
-import ktx.actors.then
 
 
 /**
@@ -171,6 +169,9 @@ class BattleAnimationWidget
     /** Run the item usage animation on call the doing nothing callback. */
     fun animateItemUsage() { onDoingNothing.invoke() }
 
+    /** Dummy animation. Useful if no animation is needed. */
+    fun animateIdle() { onDoingNothing.invoke()}
+
     /**
      * Animate an ability of the given monster
      * @param attPos    position of attacker
@@ -265,9 +266,9 @@ class BattleAnimationWidget
             pos: Int,
             side: Side,
             guardianToBeBanned: AGuardian,
-            callback: () -> Unit
+            onBanningFailureComplete: () -> Unit = {}
     ) {
-        guardianSprites[side][pos].animateBanFailure(callback)
+        guardianSprites[side][pos].animateBanFailure(onBanningFailureComplete)
     }
 
     /**

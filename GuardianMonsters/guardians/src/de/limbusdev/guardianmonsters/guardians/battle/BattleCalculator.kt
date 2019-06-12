@@ -238,7 +238,7 @@ object BattleCalculator
         }
     }
 
-    fun tryToRun(escapingTeam: Team, attackingTeam: Team): Boolean
+    fun runSucceeds(escapingTeam: Team, attackingTeam: Team): Boolean
     {
         var meanEscapingTeamLevel = 0f
         var meanAttackingTeamLevel = 0f

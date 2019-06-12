@@ -59,7 +59,7 @@ open class InfoLabelWidget() : BattleWidget()
 
     // ..................................................................................... Methods
     /** Instead of showing the complete text at once, this function starts a type writer animation. */
-    fun animateTextAppearance()
+    fun animateAsTypeWriter()
     {
         // Clear current text
         currentText = ""
@@ -75,11 +75,19 @@ open class InfoLabelWidget() : BattleWidget()
         addAction(repeat(wholeText.length, typeWriterSequence))
     }
 
-    /** Provides InfoLabelWidget with the complete text, the label should display. */
-    fun setWholeText(wholeText: String)
+    fun typeWrite(text: String)
     {
-        this.wholeText = wholeText
-        remainingText = wholeText
-        clearActions()
+        txt = text
+        animateAsTypeWriter()
     }
+
+    /** Provides InfoLabelWidget with the complete text, the label should display. */
+    var txt : String
+        get() = wholeText
+        set(text)
+        {
+            wholeText = text
+            remainingText = wholeText
+            clearActions()
+        }
 }

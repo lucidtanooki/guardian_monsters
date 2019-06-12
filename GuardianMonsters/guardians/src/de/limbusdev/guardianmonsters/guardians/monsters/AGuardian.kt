@@ -1,6 +1,7 @@
 package de.limbusdev.guardianmonsters.guardians.monsters
 
 import de.limbusdev.guardianmonsters.guardians.Element
+import de.limbusdev.guardianmonsters.guardians.abilities.Ability
 import de.limbusdev.guardianmonsters.guardians.abilities.IAbilityGraph
 import java.util.*
 
@@ -70,5 +71,7 @@ abstract class AGuardian protected constructor(val uuid: String) : Observable()
     // ................................................................... delegations: AbilityGraph
     val currentForm : Int get() = abilityGraph.currentForm;
 
+
+    // ............................................................................... Inner Classes
     enum class UpdateType { UNCHANGED, ABILITIES, STATS }
 }

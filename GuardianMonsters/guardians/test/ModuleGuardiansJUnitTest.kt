@@ -823,7 +823,7 @@ class ModuleGuardiansJUnitTest
         fun playersTurn(bs: BattleSystem, heroTeam: Team, oppTeam: Team)
         {
             println("\n### Player's turn ###")
-            val m = bs.activeMonster
+            val m = bs.activeGuardian
             var att = 0
             var abilityID: Ability.aID? = null
             while(abilityID == null)

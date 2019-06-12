@@ -77,7 +77,7 @@ class BattleSystem
 
     // .............................................................................. Battle Methods
     /** Returns the currently active Guardian. The one who's turn it is. */
-    val activeMonster: AGuardian get() = queue.peekNext()
+    val activeGuardian: AGuardian get() = queue.peekNext()
 
     /**
      * Attacks the given Monster with the currently active monster
@@ -96,11 +96,11 @@ class BattleSystem
         }
 
         // Calculate Ability
-        val aID = activeMonster.abilityGraph.activeAbilities.get(attack)
+        val aID = activeGuardian.abilityGraph.activeAbilities.get(attack)
         val ability = GuardiansServiceLocator.abilities.getAbility(aID)
 
 
-        val attacker = activeMonster
+        val attacker = activeGuardian
         val report = BattleCalculator.calcAttack(attacker, target, aID)
         latestAttackReport = report;
         callbacks.onAttack(attacker, target, ability, report)
@@ -116,10 +116,10 @@ class BattleSystem
         }
 
         // Calculate Ability
-        val aID = activeMonster.abilityGraph.activeAbilities[attack]
+        val aID = activeGuardian.abilityGraph.activeAbilities[attack]
         val ability = GuardiansServiceLocator.abilities.getAbility(aID)
 
-        val attacker = activeMonster
+        val attacker = activeGuardian
         latestAreaAttackReports = Array()
         for (g in targets.values())
         {
@@ -154,10 +154,10 @@ class BattleSystem
 
     fun applyStatusEffect()
     {
-        if (activeMonster.individualStatistics.statusEffect != IndividualStatistics.StatusEffect.HEALTHY)
+        if (activeGuardian.individualStatistics.statusEffect != IndividualStatistics.StatusEffect.HEALTHY)
         {
-            BattleCalculator.applyStatusEffect(activeMonster)
-            callbacks.onApplyStatusEffect(activeMonster)
+            BattleCalculator.applyStatusEffect(activeGuardian)
+            callbacks.onApplyStatusEffect(activeGuardian)
             checkKO()
         }
     }
@@ -165,7 +165,7 @@ class BattleSystem
     fun attack()
     {
         // if status effect prevents normal attack calculation
-        val activeGuardian = activeMonster
+        val activeGuardian = activeGuardian
 
         when (activeGuardian.individualStatistics.statusEffect)
         {
@@ -208,8 +208,8 @@ class BattleSystem
      */
     fun defend()
     {
-        latestAttackReport = BattleCalculator.calcDefense(activeMonster)
-        callbacks.onDefense(activeMonster)
+        latestAttackReport = BattleCalculator.calcDefense(activeGuardian)
+        callbacks.onDefense(activeGuardian)
     }
 
     /**
@@ -217,7 +217,7 @@ class BattleSystem
      */
     fun doNothing()
     {
-        callbacks.onDoingNothing(activeMonster)
+        callbacks.onDoingNothing(activeGuardian)
     }
 
     private fun getRandomFitCombatant(): AGuardian
@@ -351,8 +351,8 @@ class BattleSystem
      */
     fun replaceActiveMonsterWith(newGuardian: AGuardian)
     {
-        val fieldPos = queue.getFieldPositionFor(activeMonster)
-        activeMonster.deleteObservers()
+        val fieldPos = queue.getFieldPositionFor(activeGuardian)
+        activeGuardian.deleteObservers()
         val replaced = queue.exchangeActive(newGuardian)
         callbacks.onGuardianSubstituted(replaced, newGuardian, fieldPos)
     }
@@ -371,7 +371,7 @@ class BattleSystem
 
         val fieldPos = queue.getFieldPositionFor(bannedGuardian)
 
-        callbacks.onBanningWildGuardian(bannedGuardian, item, fieldPos)
+        callbacks.onBanning(bannedGuardian, item, fieldPos)
     }
 
     fun banWildGuardian(item: ChakraCrystalItem)
@@ -448,9 +448,9 @@ class BattleSystem
         open fun onApplyStatusEffect(guardian: AGuardian) {}
         open fun onGuardianSubstituted(substituted: AGuardian, substitute: AGuardian, fieldPos: Int) {}
         open fun onReplacingDefeatedGuardian(substituted: AGuardian, substitute: AGuardian, fieldPos: Int) {}
-        open fun onBanningWildGuardian(bannedGuardian: AGuardian, crystal: ChakraCrystalItem, fieldPos: Int) {}
-        open fun onBanningWildGuardianFailure(bannedGuardian: AGuardian, crystal: ChakraCrystalItem, fieldPos: Int) {}
-        open fun onBanningWildGuardianSuccess(bannedGuardian: AGuardian, crystal: ChakraCrystalItem, fieldPos: Int) {}
+        open fun onBanning(bannedGuardian: AGuardian, crystal: ChakraCrystalItem, fieldPos: Int) {}
+        open fun onBanningFailure(bannedGuardian: AGuardian, crystal: ChakraCrystalItem, fieldPos: Int) {}
+        open fun onBanningSuccess(bannedGuardian: AGuardian, crystal: ChakraCrystalItem, fieldPos: Int) {}
     }
 
     /** Null Implementation so the constructor is not forced to allow Callbacks? (null) */
@@ -477,9 +477,9 @@ class BattleSystem
         override fun turn()
         {
             println("\n### AI's turn ###")
-            val m = activeMonster
+            val m = activeGuardian
 
-            if (activeMonster.individualStatistics.statusEffect === IndividualStatistics.StatusEffect.PETRIFIED)
+            if (activeGuardian.individualStatistics.statusEffect === IndividualStatistics.StatusEffect.PETRIFIED)
             {
                 doNothing()
             }

@@ -40,7 +40,7 @@ class TargetMenuWidget(callbacks: (Int) -> Unit) : SevenButtonsWidget(callbacks,
 
 
     // .............................................................................. Initialization
-    fun init(battleSystem: BattleSystem, areaMode: Boolean = false)
+    fun initialize(battleSystem: BattleSystem, areaMode: Boolean = false)
     {
         this.areaMode = areaMode
 
@@ -59,12 +59,12 @@ class TargetMenuWidget(callbacks: (Int) -> Unit) : SevenButtonsWidget(callbacks,
         if (areaMode)
         {
             setButtonText(3, Services.getL18N().Battle().get("battle_choose_area"))
-            super.setButtonStyle(0, Element.ARTHROPODA)
-            super.setButtonStyle(1, Element.ARTHROPODA)
-            super.setButtonStyle(2, Element.ARTHROPODA)
-            super.setButtonStyle(4, Element.FIRE)
-            super.setButtonStyle(5, Element.FIRE)
-            super.setButtonStyle(6, Element.FIRE)
+            setButtonStyle(0, Element.ARTHROPODA)
+            setButtonStyle(1, Element.ARTHROPODA)
+            setButtonStyle(2, Element.ARTHROPODA)
+            setButtonStyle(4, Element.FIRE)
+            setButtonStyle(5, Element.FIRE)
+            setButtonStyle(6, Element.FIRE)
         }
     }
 

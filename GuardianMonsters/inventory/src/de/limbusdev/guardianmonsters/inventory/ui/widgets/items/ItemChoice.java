@@ -29,8 +29,9 @@ public class ItemChoice extends Group
     private BattleSystem battleSystem;
     private ItemApplicationWidget detailViewWidget;
 
-    public ItemChoice(Skin skin, Inventory inventory, Team team, BattleSystem battleSystem)
+    public ItemChoice(Inventory inventory, Team team, BattleSystem battleSystem)
     {
+        Skin skin = Services.getUI().getInventorySkin();
         this.team = team;
         this.inventory = inventory;
         this.battleSystem = battleSystem;

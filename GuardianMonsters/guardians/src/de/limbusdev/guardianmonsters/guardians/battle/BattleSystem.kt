@@ -349,7 +349,7 @@ class BattleSystem
      * Swaps two monsters
      * @param newGuardian
      */
-    fun replaceActiveMonster(newGuardian: AGuardian)
+    fun replaceActiveMonsterWith(newGuardian: AGuardian)
     {
         val fieldPos = queue.getFieldPositionFor(activeMonster)
         activeMonster.deleteObservers()

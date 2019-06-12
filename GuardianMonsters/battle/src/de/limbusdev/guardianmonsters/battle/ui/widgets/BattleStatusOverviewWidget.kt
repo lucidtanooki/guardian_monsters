@@ -75,7 +75,7 @@ class BattleStatusOverviewWidget() : BattleWidget()
         }
     }
 
-    fun init(battleSystem: BattleSystem)
+    fun initialize(battleSystem: BattleSystem)
     {
         addStatusWidgetsForTeam(battleSystem.queue.combatTeamLeft, Side.LEFT)
         addStatusWidgetsForTeam(battleSystem.queue.combatTeamRight, Side.RIGHT)

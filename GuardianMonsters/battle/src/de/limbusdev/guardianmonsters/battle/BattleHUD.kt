@@ -597,11 +597,11 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
 
             battleSystem.setChosenAttack(buttonID)
 
-            val abilityID = activeGuardian.abilityGraph.getActiveAbility(buttonID)
-            val areaAttack = GuardiansServiceLocator.abilities.getAbility(abilityID).areaDamage
+            val abilityID    = activeGuardian.abilityGraph.getActiveAbility(buttonID)
+            val isAreaAttack = GuardiansServiceLocator.abilities.getAbility(abilityID).areaDamage
 
-            if(areaAttack) { battleStateSwitcher.toTargetAreaChoice() }
-            else           { battleStateSwitcher.toTargetChoice()     }
+            if(isAreaAttack) { battleStateSwitcher.toTargetAreaChoice() }
+            else             { battleStateSwitcher.toTargetChoice()     }
         }
 
         // ........................................................................ attack info menu

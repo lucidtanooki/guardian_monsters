@@ -593,21 +593,15 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
         onAbilityMenuButton = { buttonID ->
 
             val activeGuardian = battleSystem.activeMonster
-            println("AbilityMenuButtons: onButtonNr($buttonID)")
-            println("Input: User has chosen ability $buttonID")
+            println("AbilityMenuButtons: User has chosen ability $buttonID")
 
-            val chosenAttackNr = activeGuardian
-                    .abilityGraph
-                    .activeAbilities
-                    .indexOfValue(activeGuardian.abilityGraph.getActiveAbility(buttonID), false)
-
-            battleSystem.setChosenAttack(chosenAttackNr)
+            battleSystem.setChosenAttack(buttonID)
 
             val abilityID = activeGuardian.abilityGraph.getActiveAbility(buttonID)
             val areaAttack = GuardiansServiceLocator.abilities.getAbility(abilityID).areaDamage
 
-            if(areaAttack) {  battleStateSwitcher.toTargetAreaChoice() }
-            else           { battleStateSwitcher.toTargetChoice()      }
+            if(areaAttack) { battleStateSwitcher.toTargetAreaChoice() }
+            else           { battleStateSwitcher.toTargetChoice()     }
         }
 
         // ........................................................................ attack info menu

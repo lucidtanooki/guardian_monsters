@@ -92,12 +92,7 @@ class CombatTeam : ArrayMap<Int, AGuardian>
      * Whether the whole combat team is defeated
      * @return
      */
-    fun isKO(): Boolean
-    {
-        var ko = true
-        values().forEach { guardian -> ko = ko && guardian.individualStatistics.isKO }
-        return ko
-    }
+    fun isKO(): Boolean = values().all { guardian -> guardian.stats.isKO }
 
     fun countFitMembers(): Int
     {

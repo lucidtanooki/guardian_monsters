@@ -1,7 +1,7 @@
 package de.limbusdev.guardianmonsters.guardians.monsters
 
+import com.badlogic.gdx.utils.Array
 import de.limbusdev.guardianmonsters.guardians.Element
-import de.limbusdev.guardianmonsters.guardians.abilities.Ability
 import de.limbusdev.guardianmonsters.guardians.abilities.IAbilityGraph
 import java.util.*
 
@@ -66,6 +66,7 @@ abstract class AGuardian protected constructor(val uuid: String) : Observable()
     val stats   : IndividualStatistics get() = individualStatistics
     val species : SpeciesDescription   get() = speciesDescription
     fun isOfElement(element: Element) : Boolean = species.getElements(currentForm).contains(element, false)
+    val elements : Array<Element> = species.getElements(currentForm)
 
 
     // ................................................................... delegations: AbilityGraph

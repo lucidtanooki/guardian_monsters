@@ -668,7 +668,7 @@ class ModuleGuardiansJUnitTest
         assert(team.isMember(g2))
         assert(team.isMember(g3))
 
-        assertFalse(team.teamKO())
+        assertFalse(team.allKO())
 
         assertEquals(3, team.size)
 

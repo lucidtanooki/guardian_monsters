@@ -837,7 +837,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
         onBattleAnimationHitComplete = {
 
             val defeated = battleSystem.applyAttack()
-            if(!defeated || battleSystem.queue.right.teamKO() || battleSystem.queue.left.teamKO())
+            if(!defeated || battleSystem.queue.right.allKO() || battleSystem.queue.left.allKO())
             {
                 actionMenu.enable(actionMenu.backButton)
             }

@@ -272,7 +272,7 @@ class BattleSystem
                         OPPONENT -> // If defeated Guardian is from Opponent's Team
                         {
                             giveEXPtoWinners(guardian)
-                            if (queue.right.teamKO())
+                            if (queue.right.allKO())
                             {
                                 // If opponent's whole team is defeated, call event handler
                                 iterator.remove()

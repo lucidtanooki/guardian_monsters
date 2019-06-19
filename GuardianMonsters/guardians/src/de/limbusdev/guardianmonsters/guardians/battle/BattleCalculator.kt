@@ -4,6 +4,7 @@ package de.limbusdev.guardianmonsters.guardians.battle
 import com.badlogic.gdx.math.MathUtils
 
 import de.limbusdev.guardianmonsters.guardians.GuardiansServiceLocator
+import de.limbusdev.guardianmonsters.guardians.Logger
 import de.limbusdev.guardianmonsters.guardians.abilities.Ability
 import de.limbusdev.guardianmonsters.guardians.items.ChakraCrystalItem
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian
@@ -26,7 +27,7 @@ object BattleCalculator
      */
     fun calcDefense(defender: AGuardian): AttackCalculationReport
     {
-        println("$TAG: Monster defends itself")
+        Logger.selfDefense(TAG)
         val report = AttackCalculationReport(defender)
         defender.individualStatistics.modifyPDef(5)
         defender.individualStatistics.modifyMDef(5)
@@ -49,7 +50,7 @@ object BattleCalculator
     fun calcAttack(attacker: AGuardian, defender: AGuardian, abilityID: Ability.aID): AttackCalculationReport
     {
         // Calculate Attack
-        println("\n== Calculating Attack: ==")
+        Logger.calcAttackHeader()
         val ability = GuardiansServiceLocator.abilities.getAbility(abilityID)
 
         val report = AttackCalculationReport(
@@ -71,16 +72,18 @@ object BattleCalculator
                 0)
 
         // Consider current Status Effect of attacker
-        when (attacker.individualStatistics.statusEffect)
+        when (attacker.stats.statusEffect)
         {
             StatusEffect.BLIND ->
+            {
                 // Hit the enemy with a change of 34%
-                if (MathUtils.randomBoolean(0.66f))
-                {
+                if (MathUtils.randomBoolean(0.66f)) {
                     report.statusEffectPreventedAttack = true
                     return report
                 }
+            }
             StatusEffect.SLEEPING ->
+            {
                 // Stay asleep at a chance of 66%
                 if (MathUtils.randomBoolean(0.66f))
                 {
@@ -90,46 +93,49 @@ object BattleCalculator
                 // Wake up
                 else
                 {
-                    attacker.individualStatistics.statusEffect = StatusEffect.HEALTHY
+                    attacker.stats.statusEffect = StatusEffect.HEALTHY
                 }
+            }
             StatusEffect.PETRIFIED ->
-                throw IllegalStateException("calcAttack() can't be called, when Guardian is petrified.")
-            else /*case HEALTHY || LUNATIC:*/ -> {}
+            {
+                throw IllegalStateException(Logger.illegalStateCalcAttackWhenPetrified())
+            }
+            else /* HEALTHY, LUNATIC */ -> {}
         }
 
         // Elemental Efficiency
-        val eff = ElementEfficiency.getElemEff(ability.element, defender.speciesDescription.getElements(0))   // TODO elements currentForm
+        val eff = ElementEfficiency.getElemEff(ability.element, defender.elements)
 
-        val statAtt = attacker.individualStatistics
-        val statDef = defender.individualStatistics
 
         val typeStrength = when (ability.damageType)
         {
-            Ability.DamageType.MAGICAL -> statAtt.mStr
-            else                       -> statAtt.pStr
+            Ability.DamageType.MAGICAL -> attacker.stats.mStr
+            else                       -> attacker.stats.pStr
         }
 
         val typeDefense = when (ability.damageType)
         {
-            Ability.DamageType.MAGICAL -> statDef.mDef
-            else                       -> statAtt.pDef
+            Ability.DamageType.MAGICAL -> defender.stats.mDef
+            else                       -> attacker.stats.pDef
         }
 
         val abilityStrength = ability.damage
         val ratioSD = typeStrength.toFloat() / typeDefense.toFloat()
 
-        val level = statAtt.level
+        val level = attacker.stats.level
 
-        /* Calculate Damage */
-        val damage =
-                if (abilityStrength == 0) 0f
-                else eff * ((0.5f * level + 1) * abilityStrength.toFloat() * ratioSD + 50) / 5f
+        // Calculate Damage
+        val damage = when(abilityStrength)
+        {
+            0    -> 0f
+            else -> eff * ((0.5f * level + 1f) * abilityStrength * ratioSD + 50f) / 5f
+        }
 
         report.damage = MathUtils.ceil(damage)
         report.efficiency = eff
 
         // Consider StatusEffect
-        if (ability.canChangeStatusEffect && statDef.statusEffect == StatusEffect.HEALTHY)
+        if (ability.canChangeStatusEffect && defender.stats.statusEffect == StatusEffect.HEALTHY)
         {
             val willChange = MathUtils.randomBoolean(ability.probabilityToChangeStatusEffect / 100f)
             if (willChange)
@@ -163,10 +169,7 @@ object BattleCalculator
             report.healedMP = ability.curesMP
         }
 
-        // Print Battle Debug Message
-        val attackerName = attacker.species.getSimpleName(attacker.currentForm).toUpperCase()
-        val defenderName = defender.species.getSimpleName(defender.currentForm).toUpperCase()
-        println("$attackerName will cause $damage damage on $defenderName with ${ability.simpleName.toUpperCase()}")
+        Logger.attackCalculationAbstract(attacker, defender, ability, damage)
 
         return report
     }
@@ -176,10 +179,10 @@ object BattleCalculator
         when (guardian.individualStatistics.statusEffect)
         {
             StatusEffect.POISONED  -> guardian.individualStatistics.decreaseHP(5)
-            StatusEffect.PETRIFIED,
-            StatusEffect.LUNATIC,
+            StatusEffect.PETRIFIED -> {}
+            StatusEffect.LUNATIC   -> {}
             StatusEffect.BLIND     -> {}
-            else /*case HEALTHY:*/ -> {}
+            else /* HEALTHY */     -> {}
         }
     }
 
@@ -194,86 +197,61 @@ object BattleCalculator
      */
     fun apply(report: AttackCalculationReport)
     {
-        println("\n== Applying Attack: ==")
+        Logger.applyAttackHeader()
 
-        if (report.defending == null)
-        {
-            println("$TAG: Only self defending")
-            return
-        }
-
-        if (report.statusEffectPreventedAttack)
-        {
-            println("$TAG: Status Effect prevented attack.")
-            return
-        }
+        if (report.defending == null)           { Logger.applySelfDefense(TAG);          return }
+        if (report.statusEffectPreventedAttack) { Logger.applyStatusPreventsAttack(TAG); return }
 
         val defending = report.defending
         val attacking = report.attacking
-
         checkNotNull(defending)
 
-        val attackerName = report.attacking.species.getSimpleName(report.attacking.currentForm).toUpperCase()
-        val defenderName = defending.species.getSimpleName(defending.currentForm).toUpperCase()
-        println("$attackerName attacks $defenderName with ${report.attack.simpleName.toUpperCase()}")
-        defending.individualStatistics.decreaseHP(report.damage)
-        attacking.individualStatistics.decreaseMP(report.attack.MPcost)
+        Logger.attackAbstract(attacking, defending, report.attack)
+
+        defending.stats.decreaseHP(report.damage)
+        attacking.stats.decreaseMP(report.attack.MPcost)
 
         // Apply Status Effect
         if (report.changedStatusEffect)
         {
-            defending.individualStatistics.statusEffect = report.newStatusEffect
+            defending.stats.statusEffect = report.newStatusEffect
         }
 
         // Apply Stat Change
         if (report.modifiedStat)
         {
-            defending.individualStatistics.modifyPStr(report.modifiedPStr)
-            defending.individualStatistics.modifyPDef(report.modifiedPDef)
-            defending.individualStatistics.modifyMStr(report.modifiedMStr)
-            defending.individualStatistics.modifyMDef(report.modifiedMDef)
-            defending.individualStatistics.modifySpeed(report.modifiedSpeed)
+            defending.stats.modifyPStr(report.modifiedPStr)
+            defending.stats.modifyPDef(report.modifiedPDef)
+            defending.stats.modifyMStr(report.modifiedMStr)
+            defending.stats.modifyMDef(report.modifiedMDef)
+            defending.stats.modifySpeed(report.modifiedSpeed)
         }
 
         // Apply Stat Cure
         if (report.healedStat)
         {
-            defending.individualStatistics.healHP(report.healedHP)
-            defending.individualStatistics.healMP(report.healedMP)
+            defending.stats.healHP(report.healedHP)
+            defending.stats.healMP(report.healedMP)
         }
     }
 
+    /** Calculates, if escaping succeeds with the given teams. */
     fun runSucceeds(escapingTeam: Team, attackingTeam: Team): Boolean
     {
-        var meanEscapingTeamLevel = 0f
-        var meanAttackingTeamLevel = 0f
-
-        for (m in escapingTeam.values())
+        val chanceToRun = when(attackingTeam.meanLevel > escapingTeam.meanLevel)
         {
-            if (m.individualStatistics.isFit)
-            {
-                meanEscapingTeamLevel += m.individualStatistics.level
-            }
+            true  -> 0.2f
+            false -> 0.9f
         }
-        meanEscapingTeamLevel /= escapingTeam.size.toFloat()
 
-        for (m in attackingTeam.values())
-        {
-            meanAttackingTeamLevel += m.individualStatistics.level
-        }
-        meanAttackingTeamLevel /= escapingTeam.size.toFloat()
-
-        return if (meanAttackingTeamLevel > meanEscapingTeamLevel) { MathUtils.randomBoolean(.2f) }
-        else                                                       { MathUtils.randomBoolean(.9f) }
+        return MathUtils.randomBoolean(chanceToRun)
     }
 
     fun calculateEarnedEXP(victoriousG: AGuardian, defeatedG: AGuardian): Int
     {
-        val victoriousLevel = victoriousG.individualStatistics.level
-        val defeatedLevel = defeatedG.individualStatistics.level
+        val victoriousLevel = victoriousG.stats.level
+        val defeatedLevel = defeatedG.stats.level
 
-        return MathUtils.floor(
-                200f * (1.5f * defeatedLevel * defeatedLevel) / (6f * victoriousLevel)
-        )
+        return MathUtils.floor(200f * (1.5f * defeatedLevel * defeatedLevel) / (6f * victoriousLevel))
     }
 }

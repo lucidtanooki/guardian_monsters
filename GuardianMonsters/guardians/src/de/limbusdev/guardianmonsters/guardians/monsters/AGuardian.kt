@@ -18,21 +18,21 @@ abstract class AGuardian protected constructor(val uuid: String) : Observable()
     // Unique ID for Guardian Identification, must be stored when persisted
     abstract var nickname: String
 
-    // ............................................................................................. COMPONENTS
 
-    abstract val speciesDescription: SpeciesDescription
-    abstract val individualStatistics: IndividualStatistics
-    abstract val abilityGraph: IAbilityGraph
+    // ............................................................................................. COMPONENTS
+    abstract val speciesDescription   : SpeciesDescription
+    abstract val individualStatistics : IndividualStatistics
+    abstract val abilityGraph         : IAbilityGraph
+
 
     // ............................................................................................. OBSERVABLE
-
     var changedProperty: UpdateType = UpdateType.UNCHANGED
         private set
+
 
     // ............................................................................................. DELEGATIONS
 
     // ............................................................. delegations: SpeciesDescription
-
     abstract val speciesID: Int
     abstract val commonStatistics: CommonStatistics
 
@@ -52,15 +52,13 @@ abstract class AGuardian protected constructor(val uuid: String) : Observable()
     // ............................................................................................. OBJECT
     override fun equals(other: Any?): Boolean
     {
-        if(other == null || other !is AGuardian)
-        {
-            return false
-        }
+        if(other == null || other !is AGuardian) { return false }
 
         return other.uuid == uuid
     }
 
     override fun hashCode(): Int = uuid.hashCode()
+
 
     // ........................................................... delegations: IndividualStatistics
     val stats    : IndividualStatistics get() = individualStatistics

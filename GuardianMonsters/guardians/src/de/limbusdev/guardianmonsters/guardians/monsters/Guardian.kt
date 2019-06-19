@@ -58,11 +58,11 @@ class Guardian internal constructor(UUID: String) : AGuardian(UUID)
     // ............................................................................................. OBJECT
     override fun toString(): String
     {
-        return  "\n+-------------------------------------------------------+" +
-                "\n| UUID:   $uuid" +
-                "\n| NameID: ${speciesDescription.getNameID(0)}" +
-                "\n| SID:    $speciesID" +
-                "\n| Lvl:    ${individualStatistics.level}" +
-                "\n+-------------------------------------------------------+"
+        return  "\n  +-----------------------------------------------+" +
+                "\n  | UUID: ${uuid.padEnd(40)}|" +
+                "\n  | Name: ${speciesDescription.getSimpleName(currentForm).toUpperCase().padEnd(40)}|" +
+                "\n  | SID:  ${speciesID.toString().padEnd(40)}|" +
+                "\n  | Lvl:  ${individualStatistics.level.toString().padEnd(40)}|" +
+                "\n  +-----------------------------------------------+"
     }
 }

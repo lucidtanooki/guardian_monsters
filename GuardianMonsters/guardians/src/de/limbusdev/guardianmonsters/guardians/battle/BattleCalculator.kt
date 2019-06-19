@@ -7,7 +7,6 @@ import de.limbusdev.guardianmonsters.guardians.GuardiansServiceLocator
 import de.limbusdev.guardianmonsters.guardians.abilities.Ability
 import de.limbusdev.guardianmonsters.guardians.items.ChakraCrystalItem
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian
-import de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics
 import de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics.StatusEffect
 import de.limbusdev.guardianmonsters.guardians.monsters.Team
 
@@ -50,7 +49,7 @@ object BattleCalculator
     fun calcAttack(attacker: AGuardian, defender: AGuardian, abilityID: Ability.aID): AttackCalculationReport
     {
         // Calculate Attack
-        println("\n--- new ability ---")
+        println("\n== Calculating Attack: ==")
         val ability = GuardiansServiceLocator.abilities.getAbility(abilityID)
 
         val report = AttackCalculationReport(
@@ -99,7 +98,7 @@ object BattleCalculator
         }
 
         // Elemental Efficiency
-        val eff = ElemEff.getElemEff(ability.element, defender.speciesDescription.getElements(0))   // TODO elements currentForm
+        val eff = ElementEfficiency.getElemEff(ability.element, defender.speciesDescription.getElements(0))   // TODO elements currentForm
 
         val statAtt = attacker.individualStatistics
         val statDef = defender.individualStatistics
@@ -165,7 +164,9 @@ object BattleCalculator
         }
 
         // Print Battle Debug Message
-        println("${attacker.uuid}: ${ability.name} causes $damage damage on ${defender.uuid}")
+        val attackerName = attacker.species.getSimpleName(attacker.currentForm).toUpperCase()
+        val defenderName = defender.species.getSimpleName(defender.currentForm).toUpperCase()
+        println("$attackerName will cause $damage damage on $defenderName with ${ability.simpleName.toUpperCase()}")
 
         return report
     }
@@ -193,6 +194,8 @@ object BattleCalculator
      */
     fun apply(report: AttackCalculationReport)
     {
+        println("\n== Applying Attack: ==")
+
         if (report.defending == null)
         {
             println("$TAG: Only self defending")
@@ -210,7 +213,9 @@ object BattleCalculator
 
         checkNotNull(defending)
 
-        println("${report.attacking.uuid} attacks ${defending.uuid} with ${report.attack.name}")
+        val attackerName = report.attacking.species.getSimpleName(report.attacking.currentForm).toUpperCase()
+        val defenderName = defending.species.getSimpleName(defending.currentForm).toUpperCase()
+        println("$attackerName attacks $defenderName with ${report.attack.simpleName.toUpperCase()}")
         defending.individualStatistics.decreaseHP(report.damage)
         attacking.individualStatistics.decreaseMP(report.attack.MPcost)
 

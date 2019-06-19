@@ -2,7 +2,7 @@ package de.limbusdev.guardianmonsters.guardians.abilities
 
 
 import de.limbusdev.guardianmonsters.guardians.Element
-import de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics
+import de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics.StatusEffect
 
 /**
  * @author Georg Eckert 2019
@@ -34,26 +34,30 @@ class Ability
     enum class DamageType { MAGICAL, PHYSICAL }
 
     // .................................................................................. Properties
-    var ID: Int                                         = 0
-    var name: String                                    = ""
+    var ID          : Int = 0
+    var name        : String = ""
+    val simpleName  : String get() = name.split("_")[1]
 
-    var damage: Int                                     = 0
-    var MPcost: Int                                     = 0
-    var damageType: DamageType                          = DamageType.PHYSICAL
-    var element: Element                                = Element.NONE
-    var areaDamage: Boolean                             = false
-    var canChangeStatusEffect: Boolean                  = false
-    var statusEffect: IndividualStatistics.StatusEffect = IndividualStatistics.StatusEffect.HEALTHY
-    var probabilityToChangeStatusEffect: Int            = 0
-    var changesStats: Boolean                           = false
-    var curesStats: Boolean                             = false
-    var addsPStr: Int                                   = 0
-    var addsPDef: Int                                   = 0
-    var addsMStr: Int                                   = 0
-    var addsMDef: Int                                   = 0
-    var addsSpeed: Int                                  = 0
-    var curesHP: Int                                    = 0
-    var curesMP: Int                                    = 0
+    var canChangeStatusEffect : Boolean = false
+    var statusEffect          : StatusEffect = StatusEffect.HEALTHY
+    var damageType            : DamageType = DamageType.PHYSICAL
+    var element               : Element = Element.NONE
+
+    var damage      : Int = 0
+    var MPcost      : Int = 0
+    var addsPStr    : Int = 0
+    var addsPDef    : Int = 0
+    var addsMStr    : Int = 0
+    var addsMDef    : Int = 0
+    var addsSpeed   : Int = 0
+    var curesHP     : Int = 0
+    var curesMP     : Int = 0
+
+    var areaDamage  : Boolean = false
+    var changesStats: Boolean = false
+    var curesStats  : Boolean = false
+
+    var probabilityToChangeStatusEffect : Int = 0
 
 
     // ................................................................................ Constructors
@@ -81,7 +85,7 @@ class Ability
             name: String,
             areaDamage: Boolean,
             canChangeStatusEffect: Boolean,
-            statusEffect: IndividualStatistics.StatusEffect,
+            statusEffect: StatusEffect,
             probabilityToChangeStatusEffect: Int
     ) : this (
             ID,
@@ -120,7 +124,7 @@ class Ability
             MPcost: Int = 0,
             areaDamage: Boolean = false,
             canChangeStatusEffect: Boolean = false,
-            statusEffect: IndividualStatistics.StatusEffect = IndividualStatistics.StatusEffect.HEALTHY,
+            statusEffect: StatusEffect = StatusEffect.HEALTHY,
             probabilityToChangeStatusEffect: Int = 0
     ) : this (
             ID,
@@ -167,7 +171,7 @@ class Ability
             MPcost: Int,
             areaDamage: Boolean,
             canChangeStatusEffect: Boolean,
-            statusEffect: IndividualStatistics.StatusEffect,
+            statusEffect: StatusEffect,
             probabilityToChangeStatusEffect: Int,
             changesStats: Boolean,
             addsPStr: Int,

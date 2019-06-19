@@ -7,9 +7,10 @@ import de.limbusdev.guardianmonsters.guardians.battle.AttackCalculationReport
 import de.limbusdev.guardianmonsters.guardians.items.Item
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian
 import de.limbusdev.guardianmonsters.guardians.monsters.Guardian
-import de.limbusdev.guardianmonsters.guardians.monsters.ISpeciesDescriptionService
 import de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics
+import de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics.StatusEffect
 import de.limbusdev.guardianmonsters.services.Services
+import de.limbusdev.utils.extensions.toLCString
 
 /**
  * @author Georg Eckert 2017
@@ -58,54 +59,47 @@ object BattleMessages
         val attName = commonName(attacker.speciesID, 0)
         val defName = commonName(victim.speciesID, 0) // TODO currentForm
 
-        val eff: String
-        if(report.efficiency > 1.1) {
-            eff = l18nBattle().get("suff_severe")
-        }
-        else if(report.efficiency < .9 && report.efficiency > 0.1) {
-            eff = l18nBattle().get("suff_less")
-        }
-        else if(report.efficiency < 0) {
-            eff = l18nBattle().get("suff_healed")
-        }
-        else {
-            eff = l18nBattle().get("suff_normal")
-        }
-
-        var message: String
-
-        if(attacker.individualStatistics.statusEffect === IndividualStatistics.StatusEffect.LUNATIC)
+        val eff = when
         {
-            message = l18nBattle().format(
+            report.efficiency > 1.1                           -> l18nBattle().get("suff_severe")
+            report.efficiency < .9 && report.efficiency > 0.1 -> l18nBattle().get("suff_less")
+            report.efficiency < 0                             -> l18nBattle().get("suff_healed")
+            else                                              -> l18nBattle().get("suff_normal")
+        }
+
+        var message = when(attacker.stats.statusEffect)
+        {
+            StatusEffect.LUNATIC -> l18nBattle().format(
+
                     "batt_message_lunatic",
                     tryGetNickName(attacker),
                     tryGetNickName(victim),
                     abilityName(report.attack.name),
                     report.damage, eff,
-                    l18nBattle().get("batt_lunatic"))
-        }
-        else
-        {
-            message = l18nBattle().format(
+                    l18nBattle().get("batt_lunatic")
+            )
+            else -> l18nBattle().format(
+
                     "batt_message",
                     tryGetNickName(attacker),
                     tryGetNickName(victim),
                     abilityName(report.attack.name),
-                    report.damage, eff)
+                    report.damage, eff
+            )
         }
 
         if(report.changedStatusEffect)
         {
             message += " " + l18nBattle().format("batt_message_status_effect_change",
                     tryGetNickName(victim),
-                    l18nBattle().get("batt_change_" + report.newStatusEffect.toString().toLowerCase()))
+                    l18nBattle().get("batt_change_" + report.newStatusEffect.toLCString()))
         }
 
         if(report.statusEffectPreventedAttack)
         {
             message = l18nBattle().format(
                     "batt_message_failed",
-                    l18nBattle().get("batt_" + attacker.individualStatistics.statusEffect.toString().toLowerCase()),
+                    l18nBattle().get("batt_" + attacker.individualStatistics.statusEffect.toLCString()),
                     tryGetNickName(attacker)
             )
         }
@@ -124,19 +118,17 @@ object BattleMessages
         val species = GuardiansServiceLocator.species
         val attName = species.getCommonNameById(attacker.speciesID, 0)
 
-        var message: String
-        if(attacker.individualStatistics.statusEffect === IndividualStatistics.StatusEffect.LUNATIC)
+        var message = when(attacker.stats.statusEffect)
         {
-            message = l18nBattle().format(
+            StatusEffect.LUNATIC -> l18nBattle().format(
+
                     "batt_area_message_lunatic",
                     tryGetNickName(attacker),
                     abilityName(reports.first().attack.name),
                     l18nBattle().get("batt_lunatic")
             )
-        }
-        else
-        {
-            message = l18nBattle().format(
+            else -> l18nBattle().format(
+
                     "batt_area_message",
                     tryGetNickName(attacker),
                     abilityName(reports.first().attack.name)
@@ -214,7 +206,7 @@ object BattleMessages
 
     fun selfDefense(defender: AGuardian): String
     {
-        return tryGetNickName(defender) + " " + l18nBattle().get("suff_defense")
+        return "${tryGetNickName(defender)} ${l18nBattle().get("suff_defense")}"
     }
 
     fun substitution(substituted: AGuardian, substitute: AGuardian): String

@@ -37,24 +37,12 @@ class SpeciesDescription
         val footType: FootEquipment.Type = FootEquipment.Type.HORSESHOE,
         val metaForms: ArrayMap<Int, MetaForm> = ArrayMap()
 ) {
-    // ............................................................................................. ATTRIBUTES
-
-
-
-
-    // ............................................................................................. METHODS
-
-    // ............................................................................................. GETTERS & SETTERS
-
-
     class MetaForm
     (
             internal val form: Int,
             internal val nameID: String,
             internal val elements: Array<Element>
-    )
-    {
-
+    ){
         override fun equals(other: Any?): Boolean
         {
             if(this === other) return true
@@ -78,13 +66,12 @@ class SpeciesDescription
         }
     }
 
-    // ............................................................................................. CONSTRUCTOR
     fun getNameID(currentForm: Int) = metaForms.get(currentForm).nameID
+
+    fun getSimpleName(currentForm: Int) = getNameID(currentForm).split("_")[2]
 
     fun getElements(currentForm: Int) = metaForms.get(currentForm).elements
 
-
-    // ............................................................................................. OBJECT
 
     override fun toString() = "Species: $ID"
 

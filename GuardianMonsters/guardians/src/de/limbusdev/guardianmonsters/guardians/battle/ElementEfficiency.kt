@@ -5,9 +5,9 @@ import com.badlogic.gdx.utils.ArrayMap
 
 import de.limbusdev.guardianmonsters.guardians.Element
 
-object ElemEff
+object ElementEfficiency
 {
-    private const val TAG = "ElemEff"
+    private const val TAG = "ElementEfficiency"
 
     private var none        : ArrayMap<Element, Float>
     private var earth       : ArrayMap<Element, Float>
@@ -219,19 +219,19 @@ object ElemEff
 
         // None
         none = ArrayMap()
-        none.put(Element.NONE, 0f)
-        none.put(Element.EARTH, 0f)
-        none.put(Element.WATER, 0f)
-        none.put(Element.FIRE, 0f)
-        none.put(Element.AIR, 0f)
-        none.put(Element.FOREST, 0f)
-        none.put(Element.FROST, 0f)
-        none.put(Element.SPIRIT, 0f)
-        none.put(Element.DEMON, 0f)
-        none.put(Element.ARTHROPODA, 0f)
-        none.put(Element.MOUNTAIN, 0f)
-        none.put(Element.LIGHTNING, 0f)
-        none.put(Element.LINDWORM, 0f)
+        none.put(Element.NONE       , 0f)
+        none.put(Element.EARTH      , 0f)
+        none.put(Element.WATER      , 0f)
+        none.put(Element.FIRE       , 0f)
+        none.put(Element.AIR        , 0f)
+        none.put(Element.FOREST     , 0f)
+        none.put(Element.FROST      , 0f)
+        none.put(Element.SPIRIT     , 0f)
+        none.put(Element.DEMON      , 0f)
+        none.put(Element.ARTHROPODA , 0f)
+        none.put(Element.MOUNTAIN   , 0f)
+        none.put(Element.LIGHTNING  , 0f)
+        none.put(Element.LINDWORM   , 0f)
     }
 
     /**
@@ -262,7 +262,7 @@ object ElemEff
 
         for (e in defender) { effectiveness += table.get(e) }
 
-        print("$TAG: Efficiency of $attacker on ")
+        print("$TAG: $attacker on ")
         for (e in defender) { print("$e, ") }
         println(": $effectiveness")
 

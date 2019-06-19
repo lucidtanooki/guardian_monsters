@@ -272,7 +272,7 @@ class BattleSystem
                         OPPONENT -> // If defeated Guardian is from Opponent's Team
                         {
                             giveEXPtoWinners(guardian)
-                            if (queue.right.allKO())
+                            if (queue.right.allKO)
                             {
                                 // If opponent's whole team is defeated, call event handler
                                 iterator.remove()
@@ -395,7 +395,7 @@ class BattleSystem
     // ............................................................................... Inner Classes
     abstract class EventHandler
     {
-        open fun onGuardianDefeated(m: AGuardian) {}
+        open fun onGuardianDefeated(guardian: AGuardian) {}
         open fun onAttack(attacker: AGuardian, target: AGuardian, ability: Ability, rep: AttackCalculationReport) {}
         open fun onAreaAttack(attacker: AGuardian, targets: ArrayMap<Int, AGuardian>, ability: Ability, reports: Array<AttackCalculationReport>) {}
         open fun onDefense(defensiveGuardian: AGuardian) {}

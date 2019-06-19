@@ -94,7 +94,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
     private lateinit var onTeamMenuBackButton           : () -> Unit
     private lateinit var onTeamMenuSwitchButton         : () -> Unit
 
-    private lateinit var battleSystemEventHandler       : BattleSystem.EventHandler
+    private lateinit var battleEventHandler             : BattleSystem.EventHandler
     private lateinit var onBattleAnimationHitComplete   : () -> Unit
     private lateinit var onBattleAnimationDieing        : () -> Unit
     private lateinit var onBattleAnimationDoNothing     : () -> Unit
@@ -125,7 +125,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
         this.rightTeam = opponentTeam
 
         // initialize independent battle system
-        battleSystem = BattleSystem(heroTeam, opponentTeam, battleSystemEventHandler, wildEncounter)
+        battleSystem = BattleSystem(heroTeam, opponentTeam, battleEventHandler, wildEncounter)
         battleSystem.queue.addObserver(battleQueueWidget)
 
         // initialize attack menu with active monster
@@ -625,8 +625,15 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
 
 
         // ........................................................................... battle system
-        battleSystemEventHandler = object : BattleSystem.EventHandler()
+        battleEventHandler = object : BattleSystem.EventHandler()
         {
+            override fun onPlayersTurn()
+            {
+                info("BattleSystem.EventHandler") { "onPlayersTurn()" }
+
+                battleStateMachine.toActionMenu()
+            }
+
             override fun onBanning(bannedGuardian: AGuardian, crystal: ChakraCrystalItem, fieldPos: Int)
             {
                 info("BattleSystem.EventHandler") { "onBanning()" }
@@ -636,13 +643,10 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
 
                 animationWidget.animateBanning(fieldPos, Side.RIGHT, bannedGuardian) {
 
-                    if(BattleCalculator.banSucceeds(bannedGuardian, crystal))
+                    when(BattleCalculator.banSucceeds(bannedGuardian, crystal))
                     {
-                        battleSystemEventHandler.onBanningSuccess(bannedGuardian, crystal, fieldPos)
-                    }
-                    else
-                    {
-                        battleSystemEventHandler.onBanningFailure(bannedGuardian, crystal, fieldPos)
+                        true  -> battleEventHandler.onBanningSuccess(bannedGuardian, crystal, fieldPos)
+                        false -> battleEventHandler.onBanningFailure(bannedGuardian, crystal, fieldPos)
                     }
                 }
             }
@@ -695,13 +699,6 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
 
                 infoLabelWidget.typeWrite(message)
                 animationWidget.animateItemUsage()
-            }
-
-            override fun onPlayersTurn()
-            {
-                info("BattleSystem.EventHandler") { "onBattleEnds()" }
-
-                battleStateMachine.toActionMenu()
             }
 
             override fun onGuardianDefeated(guardian: AGuardian)
@@ -785,21 +782,18 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
                 battleStateMachine.toAnimation()
                 infoLabelWidget.typeWrite(BattleMessages.substitution(substituted, substitute))
 
+                val substitutedSide = battleSystem.queue.getTeamSideFor(substituted)
+
                 animationWidget.animateGuardianSubstitution(
 
                         fieldPos,
-                        battleSystem.queue.getTeamSideFor(substituted),
+                        substitutedSide,
                         { actionMenu.enable(actionMenu.backButton) },
                         substituted,
                         substitute
                 )
 
-                statusWidget.updateStatusWidgetToSubstitute(
-
-                        fieldPos,
-                        battleSystem.queue.getTeamSideFor(substituted),
-                        substitute
-                )
+                statusWidget.updateStatusWidgetToSubstitute(fieldPos, substitutedSide, substitute)
 
                 targetMenuWidget.initialize(battleSystem)
                 targetAreaMenuWidget.initialize(battleSystem, true)

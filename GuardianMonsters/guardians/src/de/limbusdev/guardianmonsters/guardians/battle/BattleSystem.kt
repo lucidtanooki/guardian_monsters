@@ -43,6 +43,9 @@ class BattleSystem
     val result          : BattleResult
     val isWildEncounter : Boolean = isWildEncounter
 
+    /** Returns the currently active Guardian. The one who's turn it is. */
+    val activeGuardian: AGuardian get() = queue.peekNext()
+
 
     // .............................................................. private
     private val defaultAiPlayer: DefaultAIPlayer
@@ -78,9 +81,120 @@ class BattleSystem
     }
 
 
-    // .............................................................................. Battle Methods
-    /** Returns the currently active Guardian. The one who's turn it is. */
-    val activeGuardian: AGuardian get() = queue.peekNext()
+    //////////////////////////////////////////////////////////////////////////////////////////////// BATTLE METHODS
+    // ............................................................................ Main Battle Loop
+    /** Main Battle Loop Method */
+    fun continueBattle()
+    {
+        // If one team is KO, end battle
+        if (queue.combatTeamLeft.isKO() || queue.combatTeamRight.isKO())
+        {
+            finishBattle()
+        }
+        // Else decide what to do next
+        else
+        {
+            when(queue.peekNextSide())
+            {
+                OPPONENT -> letAITakeTurn()              // It's AI's turn
+                HERO     -> eventHandler.onPlayersTurn() // It's player's turn
+            }
+        }
+    }
+
+    /** Called, when one of the teams is KO */
+    private fun finishBattle()
+    {
+        queue.resetTeamsModifiedStats(HERO)
+        queue.resetTeamsModifiedStats(OPPONENT)
+        eventHandler.onBattleEnds(!queue.combatTeamLeft.isKO())
+    }
+
+    /**
+     * The Computer Player takes his turn and chooses his attack and the target to be attacked.
+     * This is possible only, when the first monster in queue is of AI's team.
+     */
+    private fun letAITakeTurn()
+    {
+        check(queue.peekNextSide() != Constant.HERO)
+        { "$TAG AI can't take turn. The first monster in queue is not in it's team." }
+
+        defaultAiPlayer.turn()
+    }
+
+
+    // ................................................................................ Attack Setup
+    fun setChosenTarget(target: AGuardian)
+    {
+        this.chosenTarget = target
+        this.targetChosen = true
+        this.choiceComplete = targetChosen && attackChosen
+    }
+
+    fun setChosenArea(targets: ArrayMap<Int, AGuardian>)
+    {
+        areaChosen = true
+        targetChosen = true
+        chosenArea = targets
+        choiceComplete = targetChosen && attackChosen && areaChosen
+    }
+
+    fun setChosenAttack(attack: Int)
+    {
+        check(targetChosen) { "$TAG: Target has to be chosen first." }
+
+        chosenAttack = attack
+        attackChosen = true
+        choiceComplete = targetChosen && attackChosen
+    }
+
+
+    // .......................................................................... Attack Application
+    /** Starts the attacking sequence. */
+    fun attack()
+    {
+        // if status effect prevents normal attack calculation
+        when(activeGuardian.stats.statusEffect)
+        {
+            StatusEffect.PETRIFIED ->
+            {
+                // Petrification prevents any kind of action
+                doNothing()
+                return
+            }
+            StatusEffect.LUNATIC ->
+            {
+                // Lunatics attack a randomly chosen target
+                // End Lunatic Status with a chance of 20%
+                if (MathUtils.randomBoolean(0.2f))
+                {
+                    activeGuardian.stats.statusEffect = StatusEffect.HEALTHY
+                }
+                // Attack arbitrarily chosen target
+                else
+                {
+                    val aID = activeGuardian.abilityGraph.randomActiveAbility
+                    val ability = GuardiansServiceLocator.abilities.getAbility(aID)
+                    val att = activeGuardian.abilityGraph.activeAbilities.getKey(aID, false)
+
+                    // Set chosen target(s) and chosen attack
+
+                    when(ability.areaDamage)
+                    {
+                        true  -> setChosenArea(queue.randomCombatTeam)
+                        false -> setChosenTarget(getRandomFitCombatant())
+                    }
+
+                    setChosenAttack(att)
+                }
+            }
+            else -> {}
+        }
+
+        // if no status effect prevents normal attack calculation
+        if (areaChosen) { attackArea(chosenArea, chosenAttack) }
+        else            { attack(chosenTarget, chosenAttack)   }
+    }
 
     /** Attacks the given Guardian with the currently active Guardian */
     private fun attack(target: AGuardian?, attack: Int)
@@ -109,13 +223,26 @@ class BattleSystem
         val ability = GuardiansServiceLocator.abilities.getAbility(aID)
 
         latestAreaAttackReports.clear()
-        for (g in targets.values())
+        for (guardian in targets.values())
         {
-            val report = BattleCalculator.calcAttack(activeGuardian, g, aID)
+            val report = BattleCalculator.calcAttack(activeGuardian, guardian, aID)
             latestAreaAttackReports.add(report)
         }
 
         eventHandler.onAreaAttack(activeGuardian, targets, ability, latestAreaAttackReports)
+    }
+
+    /** The monster decides to not attack and instead raise it's defense values for one round */
+    fun defend()
+    {
+        latestAttackReport = BattleCalculator.calcDefense(activeGuardian)
+        eventHandler.onDefense(activeGuardian)
+    }
+
+    /** Monster does nothing. Use when e.g. using an item. */
+    fun doNothing()
+    {
+        eventHandler.onDoingNothing(activeGuardian)
     }
 
     /** Puts a Guardian back in the queue, after it was KO */
@@ -148,60 +275,21 @@ class BattleSystem
         }
     }
 
-    /** Starts the attacking sequence. */
-    fun attack()
+    private fun giveEXPtoWinners(defeatedGuardian: AGuardian)
     {
-        // if status effect prevents normal attack calculation
-        when(activeGuardian.stats.statusEffect)
+        for (m in queue.combatTeamLeft.values())
         {
-            StatusEffect.PETRIFIED ->
+            if (m.individualStatistics.isFit)
             {
-                // Petrification prevents any kind of action
-                doNothing()
-                return
-            }
-            StatusEffect.LUNATIC ->
-            {
-                // Lunatics attack a randomly chosen target
-                // End Lunatic Status with a chance of 20%
-                if (MathUtils.randomBoolean(0.2f))
-                {
-                    activeGuardian.stats.statusEffect = StatusEffect.HEALTHY
-                }
-                // Attack arbitrarily chosen target
-                else
-                {
-                    val aID = activeGuardian.abilityGraph.randomActiveAbility
-                    val ability = GuardiansServiceLocator.abilities.getAbility(aID)
-                    val att = activeGuardian.abilityGraph.activeAbilities.getKey(aID, false)
+                val exp = BattleCalculator.calculateEarnedEXP(m, defeatedGuardian)
 
-                    if (ability.areaDamage) { setChosenArea(queue.randomCombatTeam)    }
-                    else                    { setChosenTarget(getRandomFitCombatant()) }
-
-                    setChosenAttack(att)
-                }
+                result.gainEXP(m, exp)
             }
-            else -> {}
         }
-
-        // if no status effect prevents normal attack calculation
-        if (areaChosen) { attackArea(chosenArea, chosenAttack) }
-        else            { attack(chosenTarget, chosenAttack)   }
     }
 
-    /** The monster decides to not attack and instead raise it's defense values for one round */
-    fun defend()
-    {
-        latestAttackReport = BattleCalculator.calcDefense(activeGuardian)
-        eventHandler.onDefense(activeGuardian)
-    }
 
-    /** Monster does nothing. Use when e.g. using an item. */
-    fun doNothing()
-    {
-        eventHandler.onDoingNothing(activeGuardian)
-    }
-
+    //////////////////////////////////////////////////////////////////////////////////////////////// GETTERS
     private fun getRandomFitCombatant(): AGuardian
     {
         return if (MathUtils.randomBoolean()) {  queue.combatTeamLeft.getRandomFitMember()  }
@@ -220,31 +308,7 @@ class BattleSystem
         chosenArea = null
     }
 
-    fun continueBattle()
-    {
-        // If one team is KO, end battle
-        if (queue.combatTeamLeft.isKO() || queue.combatTeamRight.isKO())
-        {
-            finishBattle()
-        }
-        // Else decide what to do next
-        else
-        {
-            when(queue.peekNextSide())
-            {
-                OPPONENT -> letAITakeTurn()              // It's AI's turn
-                HERO     -> eventHandler.onPlayersTurn() // It's player's turn
-            }
-        }
-    }
 
-    /** Called, when one of the teams is KO */
-    private fun finishBattle()
-    {
-        queue.resetTeamsModifiedStats(HERO)
-        queue.resetTeamsModifiedStats(OPPONENT)
-        eventHandler.onBattleEnds(!queue.combatTeamLeft.isKO())
-    }
 
     /** Checks if a monster has been defeated during the last attack */
     private fun checkKO(): Boolean
@@ -294,32 +358,8 @@ class BattleSystem
         return guardianDefeated
     }
 
-    private fun giveEXPtoWinners(defeatedGuardian: AGuardian)
-    {
-        for (m in queue.combatTeamLeft.values())
-        {
-            if (m.individualStatistics.isFit)
-            {
-                val exp = BattleCalculator.calculateEarnedEXP(m, defeatedGuardian)
 
-                result.gainEXP(m, exp)
-            }
-        }
-    }
-
-    /**
-     * The Computer Player takes his turn and chooses his attack and the target to be attacked.
-     * This is possible only, when the first monster in queue is of AI's team.
-     */
-    private fun letAITakeTurn()
-    {
-        check(queue.peekNextSide() != Constant.HERO)
-        { "$TAG AI can't take turn. The first monster in queue is not in it's team." }
-
-        defaultAiPlayer.turn()
-    }
-
-
+    //////////////////////////////////////////////////////////////////////////////////////////////// TEAM ORGANIZATION
     /**
      * Swaps two monsters
      * @param newGuardian
@@ -364,30 +404,10 @@ class BattleSystem
         eventHandler.onReplacingDefeatedGuardian(defeated, substitute, fieldPos)
     }
 
-    fun setChosenTarget(target: AGuardian)
-    {
-        this.chosenTarget = target
-        this.targetChosen = true
-        this.choiceComplete = targetChosen && attackChosen
-    }
-
-    fun setChosenArea(targets: ArrayMap<Int, AGuardian>)
-    {
-        this.areaChosen = true
-        this.targetChosen = true
-        this.chosenArea = targets
-        this.choiceComplete = targetChosen && attackChosen && areaChosen
-    }
-
-    fun setChosenAttack(attack: Int)
-    {
-        this.chosenAttack = attack
-        attackChosen = true
-        choiceComplete = targetChosen && attackChosen
-    }
 
 
-    // ........................................................................... Getters & Setters
+
+    //////////////////////////////////////////////////////////////////////////////////////////////// SETTERS
     /** If callbacks must be set later, usually only in debugging. */
     fun setCallbacks(eventHandler: EventHandler) { this.eventHandler = eventHandler }
 

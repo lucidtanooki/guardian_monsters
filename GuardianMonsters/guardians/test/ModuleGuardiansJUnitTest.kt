@@ -35,6 +35,58 @@ import java.lang.Exception
 
 class ModuleGuardiansJUnitTest
 {
+    @Test fun `Test Module`()
+    {
+        printTestLabel("Module")
+
+        ModuleGuardians.destroyModule()
+        ModuleGuardians.initModuleForTesting()
+        ModuleGuardians.destroyModule()
+
+        println("[Test 0] Module: passed")
+    }
+
+    @Test fun `Test if Debugging is on`()
+    {
+        assertTrue(Constant.DEBUGGING_ON)
+
+        println("[Test 14] Debugging: passed")
+    }
+
+    @Test fun `Test Guardian Factory`()
+    {
+        ModuleGuardians.destroyModule()
+        ModuleGuardians.initModuleForTesting()
+
+        val factory = GuardiansServiceLocator.guardianFactory
+        val guardian = factory.createGuardian(1, 1)
+        assertEquals(GuardiansServiceLocator.species.getSpeciesDescription(1), guardian.speciesDescription)
+        assertEquals(1, guardian.individualStatistics.level.toLong())
+        assertEquals(0, guardian.individualStatistics.abilityLevels.toLong())
+
+        print("Level " + guardian.individualStatistics.level + ":\t")
+        println(guardian.individualStatistics)
+
+        val guardian2 = factory.createGuardian(1, 1)
+        assertNotEquals(guardian2, guardian)
+
+        val guardian3 = factory.createGuardian(1, 5)
+        assertEquals(125, guardian3.individualStatistics.exp)
+
+        print("Level " + guardian3.individualStatistics.level + ":\t")
+        println(guardian3.individualStatistics)
+        assertEquals(5, guardian3.individualStatistics.level.toLong())
+        assertEquals(4, guardian3.individualStatistics.abilityLevels.toLong())
+
+
+        ModuleGuardians.destroyModule()
+
+        println("[Test 6] Guardian Factory: passed")
+    }
+
+
+
+    //////////////////////////////////////////////////////////////////////////////////////////////// PARSING
     @Test fun `Test parse Guardians`()
     {
         ModuleGuardians.destroyModule()
@@ -300,6 +352,9 @@ class ModuleGuardiansJUnitTest
         println("[Test 3] Item parsed correctly")
     }
 
+
+
+    //////////////////////////////////////////////////////////////////////////////////////////////// STATS
     @Test fun `Test common Statistics`()
     {
         ModuleGuardians.destroyModule()
@@ -319,46 +374,6 @@ class ModuleGuardiansJUnitTest
         ModuleGuardians.destroyModule()
 
         println("[Test 4] passed")
-    }
-
-    @Test fun `Test Module`()
-    {
-        ModuleGuardians.destroyModule()
-        ModuleGuardians.initModuleForTesting()
-        ModuleGuardians.destroyModule()
-
-        println("[Test 5] Module: passed")
-    }
-
-    @Test fun `Test Guardian Factory`()
-    {
-        ModuleGuardians.destroyModule()
-        ModuleGuardians.initModuleForTesting()
-
-        val factory = GuardiansServiceLocator.guardianFactory
-        val guardian = factory.createGuardian(1, 1)
-        assertEquals(GuardiansServiceLocator.species.getSpeciesDescription(1), guardian.speciesDescription)
-        assertEquals(1, guardian.individualStatistics.level.toLong())
-        assertEquals(0, guardian.individualStatistics.abilityLevels.toLong())
-
-        print("Level " + guardian.individualStatistics.level + ":\t")
-        println(guardian.individualStatistics)
-
-        val guardian2 = factory.createGuardian(1, 1)
-        assertNotEquals(guardian2, guardian)
-
-        val guardian3 = factory.createGuardian(1, 5)
-        assertEquals(125, guardian3.individualStatistics.exp)
-
-        print("Level " + guardian3.individualStatistics.level + ":\t")
-        println(guardian3.individualStatistics)
-        assertEquals(5, guardian3.individualStatistics.level.toLong())
-        assertEquals(4, guardian3.individualStatistics.abilityLevels.toLong())
-
-
-        ModuleGuardians.destroyModule()
-
-        println("[Test 6] Guardian Factory: passed")
     }
 
     @Test fun `Test Stat Calculator`()
@@ -456,31 +471,9 @@ class ModuleGuardiansJUnitTest
         println("[Test 9] EXP Calculation: passed")
     }
 
-    @Test fun `Test Damage Calculation`()
-    {
-        ModuleGuardians.destroyModule()
-        ModuleGuardians.initModuleForTesting()
 
-        val factory = GuardiansServiceLocator.guardianFactory
-        val winner = factory.createGuardian(1, 1)
-        val looser = factory.createGuardian(1, 1)
 
-        val expectedDamage = MathUtils.ceil(1.0f * ((0.5f * 1 + 1) * 30f * (53f / 53f) + 50) / 5f)
-        println("Expected Damage: $expectedDamage")
-        val report = BattleCalculator.calcAttack(winner, looser,
-                Ability.aID(2, Element.NONE))
-        assertEquals(expectedDamage.toLong(), report.damage.toLong())
-
-        BattleCalculator.apply(report)
-
-        assertEquals(StatCalculator.calculateHP(IndividualStatistics.Growth.MED, 1, 300, 0, 0) - 19,
-                looser.individualStatistics.hp)
-
-        ModuleGuardians.destroyModule()
-
-        println("[Test 10] Damage Calculation: passed")
-    }
-
+    //////////////////////////////////////////////////////////////////////////////////////////////// ITEMS
     @Test fun `Test Equipment`()
     {
         ModuleGuardians.destroyModule()
@@ -567,6 +560,9 @@ class ModuleGuardiansJUnitTest
         println("[Test 11] Equipment: passed")
     }
 
+
+
+    //////////////////////////////////////////////////////////////////////////////////////////////// ABILITIES
     @Test fun `Test Ability Graph`()
     {
         // TODO
@@ -574,68 +570,9 @@ class ModuleGuardiansJUnitTest
         println("[Test 12] Ability Graph: passed")
     }
 
-    @Test fun `Test Battle System`()
-    {
-        // TODO add real tests
-        printTestLabel("Battle System")
-
-        ModuleGuardians.destroyModule()
-        ModuleGuardians.initModuleForTesting()
-
-        val factory = GuardiansServiceLocator.guardianFactory
-
-        // Team Creation
-        val team = Team(3, 3, 3)
-        team += factory.createGuardian(1, 1)
-        team += factory.createGuardian(1, 1)
-        team += factory.createGuardian(1, 1)
-        val oppTeam = Team(3, 3, 3)
-        oppTeam += factory.createGuardian(2, 1)
-        oppTeam += factory.createGuardian(2, 1)
-        oppTeam += factory.createGuardian(2, 1)
-
-        // Battle System Initialization
-        val battleEnds = booleanArrayOf(false)
-        val bs = BattleSystem(left = team, right = oppTeam, isWildEncounter = true)
-
-        val bsCB = object : BattleSystem.EventHandler() {
-            override fun onBattleEnds(winnerSide: Boolean) {
-                println("\n=== Battle ends, winner is: " + (if(winnerSide) "Hero" else "Opponent") + " ===\n")
-                battleEnds[0] = true
-
-                // Check, that one team is KO
-                var teamKO = true
-                var oppKO = true
-                for(g in team.values()) if(g.individualStatistics.isFit) teamKO = false
-                for(g in oppTeam.values()) if(g.individualStatistics.isFit) oppKO = false
-                assertTrue(teamKO || oppKO)
-            }
-
-            override fun onPlayersTurn() {
-                playersTurn(bs, team, oppTeam)
-            }
-        }
-
-        bs.setCallbacks(bsCB)
 
 
-        while(!battleEnds[0]) {
-            println(bs.queue.toString())
-            bs.continueBattle()
-            bs.applyAttack()
-        }
-
-        ModuleGuardians.destroyModule()
-
-        println("[Test 13] Battle System: passed")
-    }
-
-    @Test fun `Test if Debugging is on`()
-    {
-        assertTrue(Constant.DEBUGGING_ON)
-
-        println("[Test 14] Debugging: passed")
-    }
+    //////////////////////////////////////////////////////////////////////////////////////////////// TEAM & SPHERE
 
     @Test fun `Test Team`()
     {
@@ -668,7 +605,7 @@ class ModuleGuardiansJUnitTest
         assert(team.isMember(g2))
         assert(team.isMember(g3))
 
-        assertFalse(team.allKO())
+        assertFalse(team.allKO)
 
         assertEquals(3, team.size)
 
@@ -807,29 +744,118 @@ class ModuleGuardiansJUnitTest
 
     }
 
-    companion object
+
+
+    //////////////////////////////////////////////////////////////////////////////////////////////// BATTLE SYSTEM
+    @Test fun `Test Damage Calculation`()
     {
-        fun printTestLabel(name: String)
+        ModuleGuardians.destroyModule()
+        ModuleGuardians.initModuleForTesting()
+
+        val factory = GuardiansServiceLocator.guardianFactory
+        val winner = factory.createGuardian(1, 1)
+        val looser = factory.createGuardian(1, 1)
+
+        val expectedDamage = MathUtils.ceil(1.0f * ((0.5f * 1 + 1) * 30f * (53f / 53f) + 50) / 5f)
+        println("Expected Damage: $expectedDamage")
+        val report = BattleCalculator.calcAttack(winner, looser,
+                Ability.aID(2, Element.NONE))
+        assertEquals(expectedDamage.toLong(), report.damage.toLong())
+
+        BattleCalculator.apply(report)
+
+        assertEquals(StatCalculator.calculateHP(IndividualStatistics.Growth.MED, 1, 300, 0, 0) - 19,
+                looser.individualStatistics.hp)
+
+        ModuleGuardians.destroyModule()
+
+        println("[Test Battle System: 01] Damage Calculation: passed")
+    }
+
+    @Test fun `Test Battle System`()
+    {
+        // TODO add real tests
+        printTestLabel("Battle System")
+
+        ModuleGuardians.destroyModule()
+        ModuleGuardians.initModuleForTesting()
+
+
+        // ........................................................................ Create Teams (1)
+        val factory = GuardiansServiceLocator.guardianFactory
+
+        // Team Creation
+        val heroTeam = Team(3, 3, 3)
+        heroTeam += factory.createGuardian(1, 1)
+        heroTeam += factory.createGuardian(1, 1)
+        heroTeam += factory.createGuardian(1, 1)
+        val oppoTeam = Team(3, 3, 3)
+        oppoTeam += factory.createGuardian(2, 1)
+        oppoTeam += factory.createGuardian(2, 1)
+        oppoTeam += factory.createGuardian(2, 1)
+
+        println("Step 1: Create Teams using AGuardianFactory - Complete")
+
+
+        // ................................................. Initialize Battle System with Teams (2)
+        // Battle System Initialization
+        val battleEnds = booleanArrayOf(false) // use array to have static reference
+        val bs = BattleSystem(left = heroTeam, right = oppoTeam, isWildEncounter = true)
+
+        // Create event handler to handle End of Battle and Player's turn
+        val bsCB = object : BattleSystem.EventHandler()
         {
-            println("\n\n#############################################################")
-            println("#                                                           #")
-            print("#          Test: $name")
-            for(i in 0 until (43 - name.length)) print(" ")
-            println("#")
-            println("#                                                           #")
-            println("#############################################################")
+            override fun onBattleEnds(winnerSide: Boolean)
+            {
+                println("\n=== Battle ends, winner is: " + (if(winnerSide) "Hero" else "Opponent") + " ===\n")
+                battleEnds[0] = true
+
+                // Check, that one team is KO
+                assertTrue(heroTeam.allKO || oppoTeam.allKO)
+            }
+
+            override fun onPlayersTurn()
+            {
+                playersTurn(bs, heroTeam, oppoTeam)
+            }
         }
 
+        bs.setCallbacks(bsCB)
+
+        println("Step 2: Initialize BattleSystem with these Teams - Complete")
+
+
+        // ....................................................................... Repeat (3) to (8)
+        while(!battleEnds[0])
+        {
+            bs.continueBattle()
+            bs.applyAttack()
+        }
+
+        ModuleGuardians.destroyModule()
+
+        println("[Test Battle System 02] Battle System: passed")
+    }
+
+
+    //////////////////////////////////////////////////////////////////////////////////////////////// COMPANION
+    companion object
+    {
         fun playersTurn(bs: BattleSystem, heroTeam: Team, oppTeam: Team)
         {
-            println("\n### Player's turn ###")
-            val m = bs.activeGuardian
+            println(); println("""
+                        +++---------------------------------------------------------------------+++
+                        |||                           Player's turn                             |||
+                        +++---------------------------------------------------------------------+++
+                    """.trimIndent())
+
+            val guardian = bs.activeGuardian
             var att = 0
             var abilityID: Ability.aID? = null
             while(abilityID == null)
             {
-                att = MathUtils.random(0, m.abilityGraph.activeAbilities.size - 1)
-                abilityID = m.abilityGraph.getActiveAbility(att)
+                att = MathUtils.random(0, guardian.abilityGraph.activeAbilities.size - 1)
+                abilityID = guardian.abilityGraph.getActiveAbility(att)
             }
 
             val targets = Array<AGuardian>()
@@ -843,13 +869,26 @@ class ModuleGuardiansJUnitTest
             val target = targets.get(MathUtils.random(0, targets.size - 1))
             System.out.println("Hero chooses target: " + target.uuid)
 
-            assertEquals("Active Monster is in Hero's team", true, heroTeam.isMember(m))
+            assertEquals("Active Monster is in Hero's team", true, heroTeam.isMember(guardian))
             assertEquals("Target is in Opponent's team", true, oppTeam.isMember(target))
 
             bs.setChosenTarget(target)
             bs.setChosenAttack(att)
             bs.attack()
             bs.applyAttack()
+        }
+
+        fun printTestLabel(name: String)
+        {
+            println("""
+
+                #==========================================================#
+                #                                                          #
+                # Test: ${name.padEnd(51)}#
+                #                                                          #
+                #==========================================================#
+
+            """.trimIndent())
         }
     }
 }

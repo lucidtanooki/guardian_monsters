@@ -141,8 +141,6 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
 
         // run first queue update
         battleQueueWidget.updateQueue(battleSystem.queue)
-
-        show()
     }
 
     /** Resets the UI into a state where it can be initialized for a new battle */

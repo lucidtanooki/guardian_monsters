@@ -63,10 +63,11 @@ abstract class AGuardian protected constructor(val uuid: String) : Observable()
     override fun hashCode(): Int = uuid.hashCode()
 
     // ........................................................... delegations: IndividualStatistics
-    val stats   : IndividualStatistics get() = individualStatistics
-    val species : SpeciesDescription   get() = speciesDescription
+    val stats    : IndividualStatistics get() = individualStatistics
+    val species  : SpeciesDescription   get() = speciesDescription
+    val elements : Array<Element>       get() = species.getElements(currentForm)
+
     fun isOfElement(element: Element) : Boolean = elements.contains(element, false)
-    val elements : Array<Element> get() = species.getElements(currentForm)
 
 
     // ................................................................... delegations: AbilityGraph

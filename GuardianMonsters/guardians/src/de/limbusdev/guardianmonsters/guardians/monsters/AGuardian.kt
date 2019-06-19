@@ -15,6 +15,7 @@ import java.util.*
  */
 abstract class AGuardian protected constructor(val uuid: String) : Observable()
 {
+    // ............................................................................................. PROPERTIES
     // Unique ID for Guardian Identification, must be stored when persisted
     abstract var nickname: String
 
@@ -31,33 +32,21 @@ abstract class AGuardian protected constructor(val uuid: String) : Observable()
 
 
     // ............................................................................................. DELEGATIONS
-
     // ............................................................. delegations: SpeciesDescription
     abstract val speciesID: Int
     abstract val commonStatistics: CommonStatistics
 
     fun setStatisticsChanged()
     {
-        this.setChanged()
-        this.changedProperty = UpdateType.STATS
+        setChanged()
+        changedProperty = UpdateType.STATS
     }
 
     fun setAbilitiesChanged()
     {
-        this.setChanged()
-        this.changedProperty = UpdateType.ABILITIES
+        setChanged()
+        changedProperty = UpdateType.ABILITIES
     }
-
-
-    // ............................................................................................. OBJECT
-    override fun equals(other: Any?): Boolean
-    {
-        if(other == null || other !is AGuardian) { return false }
-
-        return other.uuid == uuid
-    }
-
-    override fun hashCode(): Int = uuid.hashCode()
 
 
     // ........................................................... delegations: IndividualStatistics
@@ -70,6 +59,11 @@ abstract class AGuardian protected constructor(val uuid: String) : Observable()
 
     // ................................................................... delegations: AbilityGraph
     val currentForm : Int get() = abilityGraph.currentForm;
+
+
+    // ............................................................................................. OBJECT
+    override fun equals(other: Any?) = (other != null) && (other is AGuardian) && (other.uuid == uuid)
+    override fun hashCode() = uuid.hashCode()
 
 
     // ............................................................................... Inner Classes

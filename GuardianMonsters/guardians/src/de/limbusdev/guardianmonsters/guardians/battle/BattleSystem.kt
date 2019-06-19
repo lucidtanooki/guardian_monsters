@@ -14,18 +14,19 @@ import de.limbusdev.guardianmonsters.guardians.items.ChakraCrystalItem
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian
 import de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics.StatusEffect
 import de.limbusdev.guardianmonsters.guardians.monsters.Team
+import ktx.log.info
 
 /**
  * Correct Usage:
  *
  * 1. Create Teams using AGuardianFactory
  * 2. Initialize BattleSystem with these Teams
- * 3. BS.getActiveMonster()
- * 4. choose Target: BS.setChosenTarget(Target)
- * 5. choose Ability to use: BS.setChosenAbility(Ability)
- * 6. calculate Attack: BS.attack()
- * 7. apply calculated Attack: BS.applyAttack()
- * 8. continue: BS.continue()
+ * 3.                           BS.getActiveMonster()
+ * 4. choose Target:            BS.setChosenTarget(Target)
+ * 5. choose Ability to use:    BS.setChosenAbility(Ability)
+ * 6. calculate Attack:         BS.calculateAttack()
+ * 7. apply calculated Attack:  BS.applyAttack()
+ * 8. continue:                 BS.continue()
  *
  * @author Georg Eckert 2019
  */
@@ -141,8 +142,6 @@ class BattleSystem
 
     fun setChosenAttack(attack: Int)
     {
-        check(targetChosen) { "$TAG: Target has to be chosen first." }
-
         chosenAttack = attack
         attackChosen = true
         choiceComplete = targetChosen && attackChosen
@@ -151,7 +150,7 @@ class BattleSystem
 
     // .......................................................................... Attack Application
     /** Starts the attacking sequence. */
-    fun attack()
+    fun calculateAttack()
     {
         // if status effect prevents normal attack calculation
         when(activeGuardian.stats.statusEffect)
@@ -173,7 +172,7 @@ class BattleSystem
                 // Attack arbitrarily chosen target
                 else
                 {
-                    val aID = activeGuardian.abilityGraph.randomActiveAbility
+                    val aID = activeGuardian.abilityGraph.getRandomActiveAbility()
                     val ability = GuardiansServiceLocator.abilities.getAbility(aID)
                     val att = activeGuardian.abilityGraph.activeAbilities.getKey(aID, false)
 
@@ -192,12 +191,15 @@ class BattleSystem
         }
 
         // if no status effect prevents normal attack calculation
-        if (areaChosen) { attackArea(chosenArea, chosenAttack) }
-        else            { attack(chosenTarget, chosenAttack)   }
+        when(areaChosen)
+        {
+            true  -> calculateAreaAttack(chosenArea, chosenAttack)
+            false -> calculateSingleTargetAttack(chosenTarget, chosenAttack)
+        }
     }
 
     /** Attacks the given Guardian with the currently active Guardian */
-    private fun attack(target: AGuardian?, attack: Int)
+    private fun calculateSingleTargetAttack(target: AGuardian?, attack: Int)
     {
         // Throw exception if target or attack are unset
         checkNotNull(target) { "$TAG: Attack Target is null!" }
@@ -213,7 +215,7 @@ class BattleSystem
     }
 
     /** Attacks all given Guardians with the currently active Guardian. */
-    private fun attackArea(targets: ArrayMap<Int, AGuardian>?, attack: Int)
+    private fun calculateAreaAttack(targets: ArrayMap<Int, AGuardian>?, attack: Int)
     {
         checkNotNull(targets) { "$TAG: Area Attack Target is null!" }
         check(choiceComplete) { "$TAG you forgot to set area, attack or targets." }
@@ -430,10 +432,6 @@ class BattleSystem
         open fun onBanningSuccess(bannedGuardian: AGuardian, crystal: ChakraCrystalItem, fieldPos: Int) {}
     }
 
-    /** Null Implementation */
-    private class NullEventHandler : EventHandler() { }
-
-
     /**
      * Defines AIPlayer. Use this to implement different players like:
      *
@@ -462,34 +460,30 @@ class BattleSystem
 
             val guardian = activeGuardian
 
-            val abilitySlot = MathUtils.random(0, guardian.abilityGraph.activeAbilities.size - 1)
+            val abilitySlot = guardian.abilityGraph.getRandomActiveAbilitySlot()
             val aID: Ability.aID = guardian.abilityGraph.getActiveAbility(abilitySlot)
+            val chosenAbility = GuardiansServiceLocator.abilities.getAbility(aID)
 
-            val ability = GuardiansServiceLocator.abilities.getAbility(aID)
-
-            if (ability.areaDamage)
+            when(chosenAbility.areaDamage)
             {
-                setChosenArea(queue.combatTeamLeft)
-            }
-            else
-            {
-                chooseTarget()
+                true  -> setChosenArea(queue.combatTeamLeft)
+                false -> chooseSingleTarget()
             }
 
             setChosenAttack(abilitySlot)
-            attack()
+            calculateAttack()
             // applyAttack() is called by the client, as soon as it is necessary
             // e.g. when the Battle Animation finishes
         }
 
-        private fun chooseTarget()
+        private fun chooseSingleTarget()
         {
             var foundTarget = false
             var target: AGuardian
             while (!foundTarget)
             {
                 target = queue.combatTeamLeft.getRandomFitMember()
-                if (target.individualStatistics.isFit)
+                if (target.stats.isFit)
                 {
                     foundTarget = true
                     setChosenTarget(target)
@@ -502,5 +496,55 @@ class BattleSystem
     companion object
     {
         private const val TAG: String = "BattleSystem"
+    }
+
+
+
+
+
+
+
+
+    /** Null Implementation */
+    private class NullEventHandler : EventHandler()
+    {
+        override fun onGuardianDefeated(guardian: AGuardian)
+        { info("BattleSystem.NullEventHandler") { "onGuardianDefeated()" } }
+
+        override fun onAttack(attacker: AGuardian, target: AGuardian, ability: Ability, rep: AttackCalculationReport)
+        { info("BattleSystem.NullEventHandler") { "onAttack()" } }
+
+        override fun onAreaAttack(attacker: AGuardian, targets: ArrayMap<Int, AGuardian>, ability: Ability, reports: Array<AttackCalculationReport>)
+        { info("BattleSystem.NullEventHandler") { "onAreaAttack()" } }
+
+        override fun onDefense(defensiveGuardian: AGuardian)
+        { info("BattleSystem.NullEventHandler") { "onDefense()" } }
+
+        override fun onPlayersTurn()
+        { info("BattleSystem.NullEventHandler") { "onBattleEnds()" } }
+
+        override fun onBattleEnds(winnerSide: Boolean)
+        { info("BattleSystem.NullEventHandler") { "onBattleEnds()" } }
+
+        override fun onDoingNothing(guardian: AGuardian)
+        { info("BattleSystem.NullEventHandler") { "onDoingNothing()" } }
+
+        override fun onApplyStatusEffect(guardian: AGuardian)
+        { info("BattleSystem.NullEventHandler") { "onApplyStatusEffect()" } }
+
+        override fun onGuardianSubstituted(substituted: AGuardian, substitute: AGuardian, fieldPos: Int)
+        { info("BattleSystem.NullEventHandler") { "onGuardianSubstituted()" } }
+
+        override fun onReplacingDefeatedGuardian(substituted: AGuardian, substitute: AGuardian, fieldPos: Int)
+        { info("BattleSystem.NullEventHandler") { "onReplacingDefeatedGuardian()" } }
+
+        override fun onBanning(bannedGuardian: AGuardian, crystal: ChakraCrystalItem, fieldPos: Int)
+        { info("BattleSystem.NullEventHandler") { "onBanning()" } }
+
+        override fun onBanningFailure(bannedGuardian: AGuardian, crystal: ChakraCrystalItem, fieldPos: Int)
+        { info("BattleSystem.NullEventHandler") { "onBanningFailure()" } }
+
+        override fun onBanningSuccess(bannedGuardian: AGuardian, crystal: ChakraCrystalItem, fieldPos: Int)
+        { info("BattleSystem.NullEventHandler") { "onBanningSuccess()" } }
     }
 }

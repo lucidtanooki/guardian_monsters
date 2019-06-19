@@ -255,6 +255,7 @@ project(":battle") {
         implementation project(":utils")
         implementation project(":inventory")
         implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+        implementation "io.github.libktx:ktx-log:$ktxVersion"
         implementation "io.github.libktx:ktx-actors:$ktxVersion"
         implementation "io.github.libktx:ktx-collections:$ktxVersion"
         implementation "io.github.libktx:ktx-scene2d:$ktxVersion"

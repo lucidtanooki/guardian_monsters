@@ -24,6 +24,7 @@ import de.limbusdev.guardianmonsters.guardians.items.equipment.HeadEquipment
 import de.limbusdev.guardianmonsters.guardians.items.medicine.AMedicalItem
 import de.limbusdev.guardianmonsters.guardians.items.medicine.MedicalItem
 import de.limbusdev.guardianmonsters.guardians.monsters.*
+import ktx.log.info
 import org.junit.Assert.*
 import java.lang.Exception
 
@@ -772,6 +773,69 @@ class ModuleGuardiansJUnitTest
         println("[Test Battle System: 01] Damage Calculation: passed")
     }
 
+    @Test fun `Test Battle System 1 vs 1`()
+    {
+        printTestLabel("Battle System: 1 vs 1")
+
+        ModuleGuardians.destroyModule()
+        ModuleGuardians.initModuleForTesting()
+
+
+        // ........................................................................ Create Teams (1)
+        val factory = GuardiansServiceLocator.guardianFactory
+
+        // Team Creation
+        val heroTeam = Team(1, 1, 1)
+        heroTeam += factory.createGuardian(1, 1)
+        val oppoTeam = Team(1, 1, 1)
+        oppoTeam += factory.createGuardian(2, 1)
+
+        println("Step 1: Create Teams using AGuardianFactory - Complete")
+
+
+        // ................................................. Initialize Battle System with Teams (2)
+        // Battle System Initialization
+        val battleEnds = booleanArrayOf(false) // use array to have static reference
+        val bs = BattleSystem(left = heroTeam, right = oppoTeam, isWildEncounter = true)
+
+        // Create event handler to handle End of Battle and Player's turn
+        val bsCB = object : BattleSystem.EventHandler()
+        {
+            override fun onBattleEnds(winnerSide: Boolean)
+            {
+                println("BattleSystem.EventHandler: onBattleEnds()")
+                println("\n=== Battle ends, winner is: " + (if(winnerSide) "Hero" else "Opponent") + " ===\n")
+                battleEnds[0] = true
+
+                // Check, that one team is KO
+                assertTrue(heroTeam.allKO || oppoTeam.allKO)
+            }
+
+            override fun onPlayersTurn()
+            {
+                println("BattleSystem.EventHandler: onPlayersTurn()")
+                playersTurn(bs, heroTeam, oppoTeam)
+            }
+        }
+
+        bs.setCallbacks(bsCB)
+
+        println("Step 2: Initialize BattleSystem with these Teams - Complete")
+
+
+        // ....................................................................... Repeat (3) to (8)
+        while(!battleEnds[0])
+        {
+            println(bs.queue)
+            bs.continueBattle()
+            bs.applyAttack()
+        }
+
+        ModuleGuardians.destroyModule()
+
+        println("[Test Battle System 02] Battle System 1 vs 1: passed")
+    }
+
     @Test fun `Test Battle System`()
     {
         // TODO add real tests
@@ -828,13 +892,14 @@ class ModuleGuardiansJUnitTest
         // ....................................................................... Repeat (3) to (8)
         while(!battleEnds[0])
         {
+            println(bs.queue)
             bs.continueBattle()
             bs.applyAttack()
         }
 
         ModuleGuardians.destroyModule()
 
-        println("[Test Battle System 02] Battle System: passed")
+        println("[Test Battle System 03] Battle System: passed")
     }
 
 
@@ -849,32 +914,40 @@ class ModuleGuardiansJUnitTest
                         +++---------------------------------------------------------------------+++
                     """.trimIndent())
 
-            val guardian = bs.activeGuardian
-            var att = 0
-            var abilityID: Ability.aID? = null
-            while(abilityID == null)
-            {
-                att = MathUtils.random(0, guardian.abilityGraph.activeAbilities.size - 1)
-                abilityID = guardian.abilityGraph.getActiveAbility(att)
-            }
-
-            val targets = Array<AGuardian>()
-            for(h in oppTeam.values())
-            {
-                if(h!!.individualStatistics.isFit)
-                {
-                    targets.add(h)
-                }
-            }
-            val target = targets.get(MathUtils.random(0, targets.size - 1))
-            System.out.println("Hero chooses target: " + target.uuid)
+            val guardian = bs.activeGuardian                    // get the currently active Guardian
+                                                                // get random active ability
+            val abilitySlot = guardian.abilityGraph.getRandomActiveAbilitySlot()
+            val aID: Ability.aID = guardian.abilityGraph.getActiveAbility(abilitySlot)
+            val ability = GuardiansServiceLocator.abilities.getAbility(aID)
 
             assertEquals("Active Monster is in Hero's team", true, heroTeam.isMember(guardian))
-            assertEquals("Target is in Opponent's team", true, oppTeam.isMember(target))
 
-            bs.setChosenTarget(target)
-            bs.setChosenAttack(att)
-            bs.attack()
+            when(ability.areaDamage)
+            {
+                true  ->
+                {
+                    bs.setChosenArea(bs.queue.combatTeamRight)
+                }
+                false ->
+                {
+                    val targets = Array<AGuardian>()
+                    for(h in oppTeam.values())
+                    {
+                        if(h.individualStatistics.isFit)
+                        {
+                            targets.add(h)
+                        }
+                    }
+                    val target = targets.get(MathUtils.random(0, targets.size - 1))
+                    System.out.println("Hero chooses target: " + target.uuid)
+                    assertEquals("Target is in Opponent's team", true, oppTeam.isMember(target))
+
+                    bs.setChosenTarget(target)
+                    bs.setChosenAttack(abilitySlot)
+                }
+            }
+
+            bs.calculateAttack()
             bs.applyAttack()
         }
 

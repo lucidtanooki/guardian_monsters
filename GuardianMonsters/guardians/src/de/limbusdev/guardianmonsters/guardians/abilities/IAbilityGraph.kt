@@ -25,7 +25,6 @@ interface IAbilityGraph
     var learntEquipment     : Array<BodyPart>
 
     val currentForm         : Int
-    val randomActiveAbility : Ability.aID
 
 
     // ..................................................................................... Methods
@@ -77,6 +76,10 @@ interface IAbilityGraph
      * @return              ability which resides there
      */
     fun getActiveAbility(abilitySlot: Int): Ability.aID
+
+    fun getRandomActiveAbility() : Ability.aID
+
+    fun getRandomActiveAbilitySlot() : Int
 
     /**
      * Puts an ability into one of seven slots, available in battle

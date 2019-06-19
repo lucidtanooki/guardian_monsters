@@ -123,9 +123,14 @@ class AbilityGraph : IAbilityGraph
         return activatedMetamorphosisNodes
     }
 
-    override val randomActiveAbility get(): Ability.aID
+    override fun getRandomActiveAbility() : Ability.aID
     {
-        return getActiveAbility(MathUtils.random(0, activeAbilities.size - 1))
+        return getActiveAbility(getRandomActiveAbilitySlot())
+    }
+
+    override fun getRandomActiveAbilitySlot() : Int
+    {
+        return MathUtils.random(0, activeAbilities.size - 1)
     }
 
     override fun activateNode(nodeID: Int)

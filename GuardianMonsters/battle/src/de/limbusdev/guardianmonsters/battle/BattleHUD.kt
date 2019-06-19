@@ -24,6 +24,7 @@ import de.limbusdev.guardianmonsters.services.Services
 import de.limbusdev.guardianmonsters.guardians.Side
 import de.limbusdev.utils.extensions.toLCString
 import de.limbusdev.utils.extensions.toggle
+import ktx.log.info
 
 
 /**
@@ -628,6 +629,8 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
         {
             override fun onBanning(bannedGuardian: AGuardian, crystal: ChakraCrystalItem, fieldPos: Int)
             {
+                info("BattleSystem.EventHandler") { "onBanning()" }
+
                 battleStateMachine.toAnimation()
                 infoLabelWidget.typeWrite(BattleMessages.tryingToBan(bannedGuardian, crystal))
 
@@ -646,6 +649,8 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
 
             override fun onBanningFailure(bannedGuardian: AGuardian, crystal: ChakraCrystalItem, fieldPos: Int)
             {
+                info("BattleSystem.EventHandler") { "onBanningFailure()" }
+
                 battleStateMachine.toAnimation()
                 infoLabelWidget.typeWrite(BattleMessages.banGuardianFailure(bannedGuardian, crystal))
                 animationWidget.animateBanningFailure(fieldPos, Side.RIGHT, bannedGuardian)
@@ -653,6 +658,8 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
 
             override fun onBanningSuccess(bannedGuardian: AGuardian, crystal: ChakraCrystalItem, fieldPos: Int)
             {
+                info("BattleSystem.EventHandler") { "onBanningSuccess()" }
+
                 battleStateMachine.toAnimation()
                 infoLabelWidget.typeWrite(BattleMessages.banGuardianSuccess(bannedGuardian, crystal))
 
@@ -661,11 +668,15 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
 
             override fun onBattleEnds(winnerSide: Boolean)
             {
+                info("BattleSystem.EventHandler") { "onBattleEnds()" }
+
                 battleStateMachine.toEndOfBattle(winnerSide)
             }
 
             override fun onDoingNothing(guardian: AGuardian)
             {
+                info("BattleSystem.EventHandler") { "onDoingNothing()" }
+
                 val guardianName = Services.getL18N().getGuardianNicknameIfAvailable(guardian)
                 battleStateMachine.toAnimation()
 
@@ -688,11 +699,15 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
 
             override fun onPlayersTurn()
             {
+                info("BattleSystem.EventHandler") { "onBattleEnds()" }
+
                 battleStateMachine.toActionMenu()
             }
 
             override fun onGuardianDefeated(guardian: AGuardian)
             {
+                info("BattleSystem.EventHandler") { "onGuardianDefeated()" }
+
                 val side = battleSystem.queue.getTeamSideFor(guardian)
                 val pos  = battleSystem.queue.getFieldPositionFor(guardian)
                 animationWidget.animateMonsterKO(pos, side)
@@ -701,6 +716,8 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
 
             override fun onAttack(attacker: AGuardian, target: AGuardian, ability: Ability, report: AttackCalculationReport)
             {
+                info("BattleSystem.EventHandler") { "onAttack()" }
+
                 battleStateMachine.toAnimation()
                 infoLabelWidget.typeWrite(BattleMessages.givenDamage(attacker, target, report))
 
@@ -725,6 +742,8 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
                     ability: Ability,
                     reports: Array<AttackCalculationReport>
             ){
+                info("BattleSystem.EventHandler") { "onAreaAttack()" }
+
                 battleStateMachine.toAnimation()
                 infoLabelWidget.typeWrite(BattleMessages.givenDamage(attacker, reports))
 
@@ -742,6 +761,8 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
 
             override fun onApplyStatusEffect(guardian: AGuardian)
             {
+                info("BattleSystem.EventHandler") { "onApplyStatusEffect()" }
+
                 val nickName = Services.getL18N().getGuardianNicknameIfAvailable(guardian)
                 val statusEffect = guardian.stats.statusEffect.toLCString()
                 val message  = Services.getL18N().Battle("batt_info_status_effect_$statusEffect")
@@ -750,6 +771,8 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
 
             override fun onDefense(defensiveGuardian: AGuardian)
             {
+                info("BattleSystem.EventHandler") { "onDefense()" }
+
                 battleStateMachine.toAnimation()
                 infoLabelWidget.typeWrite(BattleMessages.selfDefense(defensiveGuardian))
                 animationWidget.animateSelfDefense()
@@ -757,6 +780,8 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
 
             override fun onGuardianSubstituted(substituted: AGuardian, substitute: AGuardian, fieldPos: Int)
             {
+                info("BattleSystem.EventHandler") { "onGuardianSubstituted()" }
+
                 battleStateMachine.toAnimation()
                 infoLabelWidget.typeWrite(BattleMessages.substitution(substituted, substitute))
 
@@ -782,6 +807,8 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
 
             override fun onReplacingDefeatedGuardian(substituted: AGuardian, substitute: AGuardian, fieldPos: Int)
             {
+                info("BattleSystem.EventHandler") { "onReplacingDefeatedGuardian()" }
+
                 battleStateMachine.toAnimation()
                 infoLabelWidget.typeWrite(BattleMessages.replacingDefeated(substituted, substitute))
 
@@ -812,7 +839,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
 
             val target = targetMenuWidget.getMonsterOfIndex(buttonID)
             battleSystem.setChosenTarget(target)
-            battleSystem.attack()
+            battleSystem.calculateAttack()
         }
 
 
@@ -820,7 +847,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
         onTargetAreaMenuButton = { buttonID ->
 
             battleSystem.setChosenArea(targetAreaMenuWidget.getCombatTeamOfIndex(buttonID))
-            battleSystem.attack()
+            battleSystem.calculateAttack()
         }
 
 

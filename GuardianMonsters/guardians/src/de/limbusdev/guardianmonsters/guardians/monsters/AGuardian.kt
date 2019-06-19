@@ -66,7 +66,7 @@ abstract class AGuardian protected constructor(val uuid: String) : Observable()
     val stats   : IndividualStatistics get() = individualStatistics
     val species : SpeciesDescription   get() = speciesDescription
     fun isOfElement(element: Element) : Boolean = species.getElements(currentForm).contains(element, false)
-    val elements : Array<Element> = species.getElements(currentForm)
+    val elements : Array<Element> get() = species.getElements(currentForm)
 
 
     // ................................................................... delegations: AbilityGraph

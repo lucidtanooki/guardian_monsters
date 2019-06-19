@@ -90,6 +90,7 @@ class BattleSystem
         // If one team is KO, end battle
         if (queue.combatTeamLeft.isKO() || queue.combatTeamRight.isKO())
         {
+            // TODO gets called when battle has not ended!
             finishBattle()
         }
         // Else decide what to do next

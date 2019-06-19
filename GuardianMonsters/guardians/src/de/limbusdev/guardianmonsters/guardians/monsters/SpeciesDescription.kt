@@ -77,10 +77,12 @@ class SpeciesDescription
 
     fun prettyPrint(): String
     {
-        var pretty =
-            "+---- Guardian Species Description ----+\n" +
-            "| Species: $ID\n" +
-            "| Abilitiy-Nodes: \n"
+        var pretty = """
+            +---- Guardian Species Description ----+
+            | Species: $ID
+            | Abilitiy-Nodes:
+
+        """.trimIndent()
 
         for(key in abilityNodes.keys)
             pretty += "|\tNode $key:\t${abilityNodes.get(key).ID}_${abilityNodes.get(key).element}\n"
@@ -90,14 +92,18 @@ class SpeciesDescription
         for(key in equipmentNodes.keys())
             pretty += "|\tNode $key:\t${equipmentNodes.get(key).toString()}\n"
 
-        pretty += "| Equipment-Type:\n" +
-        "|\tBody:\t$bodyType\n" +
-        "|\tHands:\t$handType\n" +
-        "|\tFeet:\t$footType\n" +
-        "|\tHead:\t$headType\n" +
-        "| Can metamorph: " + (if(metaForms.size > 1) "no" else "yes") + "\n" +
-        "| Metamorphs\t" + (metaForms.size - 1) + " times\n" +
-        "+--------------------------------------+\n"
+        pretty += """
+            | Equipment-Type:
+            |   Body:	$bodyType
+            |   Hands:	$handType
+            |	Feet:	$footType
+            |	Head:	$headType
+            | Can metamorph: " + ${if(metaForms.size > 1) "no" else "yes"}
+            | Metamorphs ${metaForms.size - 1} times
+            +--------------------------------------+
+
+        """.trimIndent()
+
         return pretty
     }
 }

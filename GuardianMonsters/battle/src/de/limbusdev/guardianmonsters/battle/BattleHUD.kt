@@ -540,8 +540,8 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
         onMainMenuSwordButton = {
 
             info(TAG) { "onMainMenuSwordButton" }
-            battleSystem.continueBattle()
-        } // TODO CRITICAL Sword Button changes to menu, if player's turn, continues battle if AI's turn
+            battleSystem.continueBattle() // calls onPlayersTurn() or onAIPlayersTurn()
+        }
 
         onMainMenuRunButton = {
 
@@ -612,11 +612,9 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
 
 
         // .............................................................................. info label
-        // TODO give info label a better name, what information?
         onInfoLabelBackButton = {
 
             info(TAG) { "onInfoLabelBackButton" }
-            // TODO check if only a state change or if battleSystem.continueBattle is correct here
             when(battleSystem.activeGuardian.stats.statusEffect)
             {
                 StatusEffect.HEALTHY ->

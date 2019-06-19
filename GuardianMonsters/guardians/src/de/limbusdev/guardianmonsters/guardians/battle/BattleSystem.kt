@@ -84,7 +84,12 @@ class BattleSystem
 
     //////////////////////////////////////////////////////////////////////////////////////////////// BATTLE METHODS
     // ............................................................................ Main Battle Loop
-    /** Main Battle Loop Method */
+    /** Main Battle Loop Method
+     *
+     *  if one team is KO                 -> finishes battle
+     *  if next Guardian is from Hero     -> calls onPlayersTurn()
+     *  if next Guardian is from Opponent -> calls onAIPlayersTurn()
+     */
     fun continueBattle()
     {
         // If one team is KO, end battle

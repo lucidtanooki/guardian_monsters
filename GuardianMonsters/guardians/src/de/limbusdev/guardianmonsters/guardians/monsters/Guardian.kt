@@ -45,7 +45,7 @@ class Guardian internal constructor(UUID: String) : AGuardian(UUID)
         this.speciesDescription = speciesDescription
     }
 
-    internal fun injectIndiviualStatistics(individualStatistics: IndividualStatistics)
+    internal fun injectIndividualStatistics(individualStatistics: IndividualStatistics)
     {
         this.individualStatistics = individualStatistics
     }

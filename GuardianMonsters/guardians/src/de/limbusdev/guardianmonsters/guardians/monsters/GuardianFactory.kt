@@ -42,7 +42,7 @@ object GuardianFactory : AGuardianFactory()
 
         // ....................................................................... inject components
 
-        newGuardian.injectIndiviualStatistics(individualStatistics)
+        newGuardian.injectIndividualStatistics(individualStatistics)
         newGuardian.injectAbilityGraph(abilityGraph)
 
         // Return complete Guardian

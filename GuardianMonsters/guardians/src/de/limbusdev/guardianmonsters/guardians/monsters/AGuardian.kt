@@ -65,7 +65,7 @@ abstract class AGuardian protected constructor(val uuid: String) : Observable()
     // ........................................................... delegations: IndividualStatistics
     val stats   : IndividualStatistics get() = individualStatistics
     val species : SpeciesDescription   get() = speciesDescription
-    fun isOfElement(element: Element) : Boolean = species.getElements(currentForm).contains(element, false)
+    fun isOfElement(element: Element) : Boolean = elements.contains(element, false)
     val elements : Array<Element> get() = species.getElements(currentForm)
 
 

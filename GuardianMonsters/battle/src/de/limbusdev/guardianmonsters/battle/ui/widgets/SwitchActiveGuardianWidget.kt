@@ -32,7 +32,8 @@ import de.limbusdev.guardianmonsters.ui.widgets.SimpleClickListener
 import de.limbusdev.guardianmonsters.ui.widgets.TeamCircleWidget
 import de.limbusdev.guardianmonsters.ui.widgets.TiledImage
 import de.limbusdev.utils.extensions.f
-import ktx.actors.onClick
+import de.limbusdev.utils.extensions.replaceOnClick
+
 
 /**
  * SwitchActiveGuardianWidget
@@ -101,8 +102,8 @@ class SwitchActiveGuardianWidget(battleSkin: Skin, inventorySkin: Skin) : Battle
 
         backButton.clearListeners()
         switchButton.clearListeners()
-        backButton.onClick(onBack)
-        switchButton.onClick(onSwitch)
+        backButton.replaceOnClick(onBack)
+        switchButton.replaceOnClick(onSwitch)
     }
 
     fun initialize(guardian: AGuardian, team: Team, combatTeam: CombatTeam)

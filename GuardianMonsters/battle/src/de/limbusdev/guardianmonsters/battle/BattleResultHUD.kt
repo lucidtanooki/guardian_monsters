@@ -24,7 +24,8 @@ import de.limbusdev.guardianmonsters.guardians.monsters.Team
 import de.limbusdev.guardianmonsters.services.Services
 import de.limbusdev.guardianmonsters.ui.AHUD
 import de.limbusdev.guardianmonsters.ui.Constant
-import ktx.actors.onClick
+import de.limbusdev.utils.extensions.replaceOnClick
+
 import ktx.actors.plus
 import ktx.actors.plusAssign
 
@@ -116,7 +117,7 @@ class BattleResultHUD
         apply.setPosition(applyX, applyY, applyAlign)
         group+=apply
 
-        apply.onClick {
+        apply.replaceOnClick {
 
             println("BattleResultScreen: APPLY pressed")
             reachedNextLevel = result.applyGainedEXPtoAll()
@@ -131,7 +132,7 @@ class BattleResultHUD
         next.setSize(nextWidth, nextHeight)
         next.setPosition(nextX, nextY, nextAlign)
 
-        next.onClick {
+        next.replaceOnClick {
 
             println("BattleResultScreen: NEXT pressed")
             if(reachedNextLevel.size > 0)

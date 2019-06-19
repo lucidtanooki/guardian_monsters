@@ -97,7 +97,7 @@ class BattleSystem
         {
             when(queue.peekNextSide())
             {
-                OPPONENT -> letAITakeTurn()              // It's AI's turn
+                OPPONENT -> onAIPlayersTurn()            // It's AI's turn
                 HERO     -> eventHandler.onPlayersTurn() // It's player's turn
             }
         }
@@ -115,8 +115,10 @@ class BattleSystem
      * The Computer Player takes his turn and chooses his attack and the target to be attacked.
      * This is possible only, when the first monster in queue is of AI's team.
      */
-    private fun letAITakeTurn()
+    private fun onAIPlayersTurn()
     {
+        info(TAG) { "onAIPlayersTurn()" }
+
         check(queue.peekNextSide() != Constant.HERO)
         { "$TAG AI can't take turn. The first monster in queue is not in it's team." }
 

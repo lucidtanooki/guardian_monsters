@@ -29,6 +29,8 @@ class Ability
         }
 
         override fun hashCode(): Int = 31 * ID + element.hashCode()
+
+        override fun toString(): String = "Ability $ID: $element"
     }
 
     enum class DamageType { MAGICAL, PHYSICAL }

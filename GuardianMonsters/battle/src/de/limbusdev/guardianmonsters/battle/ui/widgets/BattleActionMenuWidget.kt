@@ -3,8 +3,8 @@ package de.limbusdev.guardianmonsters.battle.ui.widgets
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton
 import com.badlogic.gdx.scenes.scene2d.ui.Skin
 import de.limbusdev.guardianmonsters.services.Services
+import de.limbusdev.utils.extensions.replaceOnClick
 
-import ktx.actors.onClick
 
 class BattleActionMenuWidget
 (
@@ -50,10 +50,10 @@ class BattleActionMenuWidget
             onTeamButton  : () -> Unit = {},
             onExtraButton : () -> Unit = {}
     ) {
-        backButton.onClick(onBackButton)
-        bagButton.onClick(onBagButton)
-        teamButton.onClick(onTeamButton)
-        extraButton.onClick(onExtraButton)
+        backButton.replaceOnClick(onBackButton)
+        bagButton.replaceOnClick(onBagButton)
+        teamButton.replaceOnClick(onTeamButton)
+        extraButton.replaceOnClick(onExtraButton)
     }
 
     fun disableAllButBackButton()

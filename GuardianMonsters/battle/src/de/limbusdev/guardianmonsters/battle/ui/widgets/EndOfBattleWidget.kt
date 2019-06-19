@@ -9,7 +9,8 @@ import com.badlogic.gdx.utils.Align
 import de.limbusdev.guardianmonsters.services.Services
 import de.limbusdev.guardianmonsters.ui.Constant
 import de.limbusdev.utils.extensions.f
-import ktx.actors.onClick
+import de.limbusdev.utils.extensions.replaceOnClick
+
 
 /**
  * Widget for displaying monster status in battle: HP, MP, EXP, Name, Level
@@ -62,7 +63,7 @@ class EndOfBattleWidget
         backButton.setPosition(Constant.RES_X.f(), 0f, Align.bottomRight)
         addActor(backButton)
 
-        backButton.onClick(onBackButton)
+        backButton.replaceOnClick(onBackButton)
     }
 
     /**

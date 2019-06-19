@@ -96,7 +96,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
 
     private lateinit var battleEventHandler             : BattleSystem.EventHandler
     private lateinit var onBattleAnimationHitComplete   : () -> Unit
-    private lateinit var onBattleAnimationDieing        : () -> Unit
+    private lateinit var onBattleAnimationDying         : () -> Unit
     private lateinit var onBattleAnimationDoNothing     : () -> Unit
 
     private lateinit var onAbilityMenuButton            : (Int) -> Unit
@@ -118,6 +118,8 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
     /** Initializes the battle screen with the given teams */
     fun initialize(heroTeam: Team, opponentTeam: Team, wildEncounter: Boolean = true)
     {
+        info(TAG) { "initialize(...)" }
+
         reset()
 
         // keep Guardian teams
@@ -146,6 +148,8 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
     /** Resets the UI into a state where it can be initialized for a new battle */
     override fun reset()
     {
+        info(TAG) { "reset()" }
+
         super.reset()
         actionMenu.clearActions()
         mainMenu.clearActions()
@@ -155,6 +159,8 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
     // ............................................................................. libGDX's Screen
     override fun show()
     {
+        info(TAG) { "show()" }
+
         super.show()
         battleStateMachine.toBattleStart()
     }
@@ -172,9 +178,12 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
     private inner class BattleStateMachine
     {
         private var state: BattleState = BattleState.BATTLE_START
+        private val TAG : String = "BattleStateMachine"
 
         fun toBattleStart()
         {
+            info(TAG) { "toBattleStart()" }
+
             reset()
 
             // Add Widgets
@@ -195,6 +204,8 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
 
         fun toActionMenu()
         {
+            info(TAG) { "toActionMenu()" }
+
             reset()
 
 
@@ -207,7 +218,13 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
             abilityMenuAddOn.addToStage(stage)
 
             // Setup Widgets
-            actionMenu.setCallbacks(onActionMenuBackButton, onActionMenuBagButton, onActionMenuTeamButton, onActionMenuExtraButton)
+            actionMenu.setCallbacks(
+
+                    onBackButton  = onActionMenuBackButton,
+                    onBagButton   = onActionMenuBagButton,
+                    onTeamButton  = onActionMenuTeamButton,
+                    onExtraButton = onActionMenuExtraButton
+            )
             abilityMenu.initialize(battleSystem.activeGuardian, true)
 
             state = BattleState.ACTION_MENU
@@ -215,12 +232,16 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
 
         fun toAttackMenu()
         {
+            info(TAG) { "toAttackMenu()" }
+
             toActionMenu()
             state = BattleState.ACTION_MENU
         }
 
         fun toAttackInfoMenu()
         {
+            info(TAG) { "toAttackInfoMenu()" }
+
             reset()
 
             animationWidget.addToStage(battleAnimationStage)
@@ -238,6 +259,8 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
 
         fun toAttackDetail(aID: Ability.aID)
         {
+            info(TAG) { "toAttackDetail($aID)" }
+
             reset()
 
             animationWidget.addToStage(battleAnimationStage)
@@ -254,6 +277,8 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
 
         fun toEndOfBattle(winnerSide: Boolean)
         {
+            info(TAG) { "toEndOfBattle($winnerSide)" }
+
             reset()
 
             toInfoLabel()
@@ -270,6 +295,8 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
 
         fun toEndOfBattleByBanningLastOpponent(bannedGuardian: AGuardian, crystal: ChakraCrystalItem)
         {
+            info(TAG) { "toEndOfBattleByBanningLastOpponent(...)" }
+
             reset()
 
             toInfoLabel()
@@ -287,6 +314,8 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
 
         fun toAnimation()
         {
+            info(TAG) { "toAnimation()" }
+
             reset()
             toInfoLabel()
             actionMenu.disableAllChildButtons()
@@ -298,6 +327,8 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
 
         fun toTargetChoice()
         {
+            info(TAG) { "toTargetChoice()" }
+
             reset()
             animationWidget.addToStage(battleAnimationStage)
             statusWidget.addToStage(battleAnimationStage)
@@ -312,6 +343,8 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
 
         fun toTargetAreaChoice()
         {
+            info(TAG) { "toTargetAreaChoice()" }
+
             reset()
             animationWidget.addToStage(battleAnimationStage)
             statusWidget.addToStage(battleAnimationStage)
@@ -326,6 +359,8 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
 
         fun toTeamMenu()
         {
+            info(TAG) { "toTeamMenu()" }
+
             reset()
             switchActiveGuardianWidget.addToStage(stage)
 
@@ -334,6 +369,8 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
 
         fun toMainMenu()
         {
+            info(TAG) { "toMainMenu()" }
+
             reset()
             animationWidget.addToStage(battleAnimationStage)
             statusWidget.addToStage(battleAnimationStage)
@@ -346,6 +383,8 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
 
         fun toInfoLabel()
         {
+            info(TAG) { "toInfoLabel()" }
+
             reset()
 
             animationWidget.addToStage(battleAnimationStage)
@@ -358,6 +397,8 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
 
         fun toStatusEffectInfoLabel()
         {
+            info(TAG) { "toStatusEffectInfoLabel()" }
+
             reset()
             toInfoLabel()
             battleQueueWidget.addToStage(stage)
@@ -368,6 +409,8 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
 
         fun toEscapeSuccessInfo()
         {
+            info(TAG) { "toEscapeSuccessInfo()" }
+
             toInfoLabel()
             infoLabelWidget.typeWrite(Services.getL18N().Battle("escape_success"))
             actionMenu.setCallbacks(onBackButton = onEscapeSuccessLabelBackButton)
@@ -375,6 +418,8 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
 
         fun toEscapeFailInfo()
         {
+            info(TAG) { "toEscapeFailInfo()" }
+
             toInfoLabel()
             infoLabelWidget.typeWrite(Services.getL18N().Battle("escape_fail"))
             actionMenu.setCallbacks(onBackButton = onEscapeFailedLabelBackButton)
@@ -383,6 +428,8 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
         /** Removes all widgets and enables the action menu. */
         fun reset()
         {
+            info(TAG) { "reset()" }
+
             infoLabelWidget.remove()
             animationWidget.remove()
             mainMenu.remove()
@@ -429,6 +476,8 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
     /** Setting up HUD elements */
     private fun initializeWidgets()
     {
+        info(TAG) { "initializeWidgets()" }
+
         // Second stage
         val viewport = FitViewport(640f, 360f)
         battleAnimationStage = Stage(viewport)
@@ -441,7 +490,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
         animationWidget = BattleAnimationWidget(
 
                 onHitAnimationComplete  = onBattleAnimationHitComplete,
-                onDieing                = onBattleAnimationDieing,
+                onDieing                = onBattleAnimationDying,
                 onDoingNothing          = onBattleAnimationDoNothing
         )
 
@@ -473,35 +522,50 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
         abilityInfoMenuFrame.disableAllChildButtons()
 
         switchActiveGuardianWidget = SwitchActiveGuardianWidget(skin, Services.getUI().inventorySkin)
-        switchActiveGuardianWidget.setCallbacks(onTeamMenuBackButton, onTeamMenuSwitchButton)
+        switchActiveGuardianWidget.setCallbacks(
+
+                onBack = onTeamMenuBackButton,
+                onSwitch = onTeamMenuSwitchButton
+        )
     }
 
 
     // .............................................................. Callbacks
     private fun setUpCallbacks()
     {
+        info(TAG) { "setUpCallbacks()" }
+
         battleStateMachine = BattleStateMachine()
 
 
         // ............................................................................... main menu
-        onMainMenuSwordButton = { battleSystem.continueBattle() }
+        onMainMenuSwordButton = {
+
+            info(TAG) { "onMainMenuSwordButton" }
+            battleSystem.continueBattle()
+        } // TODO CRITICAL Sword Button changes to menu, if player's turn, continues battle if AI's turn
+
         onMainMenuRunButton = {
 
-            if(BattleCalculator.runSucceeds(leftTeam, rightTeam))
+            info(TAG) { "onMainMenuRunButton" }
+            when(BattleCalculator.runSucceeds(leftTeam, rightTeam))
             {
-                battleStateMachine.toEscapeSuccessInfo()
-            }
-            else
-            {
-                battleStateMachine.toEscapeFailInfo()
+                true  -> battleStateMachine.toEscapeSuccessInfo()
+                false -> battleStateMachine.toEscapeFailInfo()
             }
         }
 
 
         // ............................................................................... team menu
-        onTeamMenuBackButton    = { battleStateMachine.toAttackMenu() }
+        onTeamMenuBackButton    = {
+
+            info(TAG) { "onTeamMenuBackButton" }
+            battleStateMachine.toAttackMenu()
+        }
+
         onTeamMenuSwitchButton  = {
 
+            info(TAG) { "onTeamMenuSwitchButton" }
             battleStateMachine.toAnimation()
             val substituteNr = switchActiveGuardianWidget.chosenSubstitute
             val substitute   = battleSystem.queue.left[substituteNr]
@@ -510,17 +574,35 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
 
 
         // ...................................................................... battle start label
-        onBattleStartLabelBackButton  = { battleStateMachine.toMainMenu() }
+        onBattleStartLabelBackButton  = {
+
+            info(TAG) { "onBattleStartLabelBackButton" }
+            battleStateMachine.toMainMenu()
+        }
 
 
         // ...................................................................... battle action menu
-        onActionMenuBackButton        = { battleStateMachine.toMainMenu() }
-        onActionMenuExtraButton       = { battleSystem.defend() }
+        onActionMenuBackButton = {
 
-        onActionMenuBagButton         = { stage.addActor(ItemChoice(inventory, leftTeam, battleSystem)) }
+            info(TAG) { "onActionMenuBackButton" }
+            battleStateMachine.toMainMenu()
+        }
+
+        onActionMenuExtraButton = {
+
+            info(TAG) { "onActionMenuExtraButton" }
+            battleSystem.defend()
+        }
+
+        onActionMenuBagButton = {
+
+            info(TAG) { "onActionMenuBagButton" }
+            stage.addActor(ItemChoice(inventory, leftTeam, battleSystem))
+        }
 
         onActionMenuTeamButton = {
 
+            info(TAG) { "onActionMenuTeamButton" }
             switchActiveGuardianWidget.initialize(
 
                     battleSystem.activeGuardian,
@@ -532,17 +614,23 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
 
 
         // .............................................................................. info label
+        // TODO give info label a better name, what information?
         onInfoLabelBackButton = {
 
-            if(battleSystem.activeGuardian.stats.statusEffect == StatusEffect.HEALTHY)
+            info(TAG) { "onInfoLabelBackButton" }
+            // TODO check if only a state change or if battleSystem.continueBattle is correct here
+            when(battleSystem.activeGuardian.stats.statusEffect)
             {
-                battleSystem.nextGuardian()
-                battleSystem.continueBattle()
-            }
-            else
-            {
-                battleStateMachine.toStatusEffectInfoLabel()
-                battleSystem.applyStatusEffect()
+                StatusEffect.HEALTHY ->
+                {
+                    battleSystem.nextGuardian()
+                    battleSystem.continueBattle()
+                }
+                else ->
+                {
+                    battleStateMachine.toStatusEffectInfoLabel()
+                    battleSystem.applyStatusEffect()
+                }
             }
         }
 
@@ -550,6 +638,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
         // ..................................................................... status effect label
         onStatusEffectLabelBackButton = {
 
+            info(TAG) { "onStatusEffectLabelBackButton" }
             // TODO replace with separate widget
             actionMenu.setCallbacks(onBackButton = onInfoLabelBackButton)
             battleSystem.nextGuardian()
@@ -560,21 +649,19 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
         // ........................................................................... end of battle
         onEndOfBattleLabelBackButton = {
 
-            // Is any of the team's Guardians still fit?
-            val teamOk = leftTeam.values().any { m -> m.stats.isFit }
-
-            if(teamOk)
+            info(TAG) { "onEndOfBattleLabelBackButton" }
+            if(leftTeam.allKO)
+            {
+                // Battle is lost, restart game
+                Services.getAudio().stopMusic()
+                Services.getScreenManager().game.create()
+            }
+            else
             {
                 // Battle is won, show result screen
                 Services.getAudio().stopMusic()
                 val resultScreen = BattleResultScreen(leftTeam, battleSystem.result)
                 Services.getScreenManager().pushScreen(resultScreen)
-            }
-            else
-            {
-                // Battle is lost, restart game
-                Services.getAudio().stopMusic()
-                Services.getScreenManager().game.create()
             }
         }
 
@@ -582,6 +669,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
         // ............................................................................. attack menu
         onAbilityMenuButton = { buttonID ->
 
+            info(TAG) { "onAbilityMenuButton" }
             val activeGuardian = battleSystem.activeGuardian
             println("AbilityMenuButtons: User has chosen ability $buttonID")
 
@@ -598,13 +686,18 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
         // ........................................................................ attack info menu
         onAbilityInfoMenuButton = { buttonID ->
 
+            info(TAG) { "onAbilityInfoMenuButton" }
             val abilityID = battleSystem.activeGuardian.abilityGraph.getActiveAbility(buttonID)
             battleStateMachine.toAttackDetail(abilityID)
         }
 
 
         // ..................................................................... attack detail label
-        onAbilityDetailLabelBackButton = { battleStateMachine.toAttackInfoMenu() }
+        onAbilityDetailLabelBackButton = {
+
+            info(TAG) { "onAbilityDetailLabelBackButton" }
+            battleStateMachine.toAttackInfoMenu()
+        }
 
 
         // ................................................................. attack menu info switch
@@ -614,6 +707,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
 
             override fun invoke(buttonID: Int)
             {
+                info(TAG) { "onAbilityMenuInfoButton.invoke()" }
                 checked = checked.toggle()
                 if(buttonID == BattleHUDTextButton.CENTER_TOP)
                 {
@@ -629,14 +723,14 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
         {
             override fun onPlayersTurn()
             {
-                info("BattleSystem.EventHandler") { "onPlayersTurn()" }
+                info("BattleSystem.battleEventHandler") { "onPlayersTurn()" }
 
                 battleStateMachine.toActionMenu()
             }
 
             override fun onBanning(bannedGuardian: AGuardian, crystal: ChakraCrystalItem, fieldPos: Int)
             {
-                info("BattleSystem.EventHandler") { "onBanning()" }
+                info("BattleSystem.battleEventHandler") { "onBanning()" }
 
                 battleStateMachine.toAnimation()
                 infoLabelWidget.typeWrite(BattleMessages.tryingToBan(bannedGuardian, crystal))
@@ -653,7 +747,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
 
             override fun onBanningFailure(bannedGuardian: AGuardian, crystal: ChakraCrystalItem, fieldPos: Int)
             {
-                info("BattleSystem.EventHandler") { "onBanningFailure()" }
+                info("BattleSystem.battleEventHandler") { "onBanningFailure()" }
 
                 battleStateMachine.toAnimation()
                 infoLabelWidget.typeWrite(BattleMessages.banGuardianFailure(bannedGuardian, crystal))
@@ -662,7 +756,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
 
             override fun onBanningSuccess(bannedGuardian: AGuardian, crystal: ChakraCrystalItem, fieldPos: Int)
             {
-                info("BattleSystem.EventHandler") { "onBanningSuccess()" }
+                info("BattleSystem.battleEventHandler") { "onBanningSuccess()" }
 
                 battleStateMachine.toAnimation()
                 infoLabelWidget.typeWrite(BattleMessages.banGuardianSuccess(bannedGuardian, crystal))
@@ -672,14 +766,14 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
 
             override fun onBattleEnds(winnerSide: Boolean)
             {
-                info("BattleSystem.EventHandler") { "onBattleEnds()" }
+                info("BattleSystem.battleEventHandler") { "onBattleEnds()" }
 
                 battleStateMachine.toEndOfBattle(winnerSide)
             }
 
             override fun onDoingNothing(guardian: AGuardian)
             {
-                info("BattleSystem.EventHandler") { "onDoingNothing()" }
+                info("BattleSystem.battleEventHandler") { "onDoingNothing()" }
 
                 val guardianName = Services.getL18N().getGuardianNicknameIfAvailable(guardian)
                 battleStateMachine.toAnimation()
@@ -703,7 +797,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
 
             override fun onGuardianDefeated(guardian: AGuardian)
             {
-                info("BattleSystem.EventHandler") { "onGuardianDefeated()" }
+                info("BattleSystem.battleEventHandler") { "onGuardianDefeated()" }
 
                 val side = battleSystem.queue.getTeamSideFor(guardian)
                 val pos  = battleSystem.queue.getFieldPositionFor(guardian)
@@ -713,7 +807,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
 
             override fun onAttack(attacker: AGuardian, target: AGuardian, ability: Ability, report: AttackCalculationReport)
             {
-                info("BattleSystem.EventHandler") { "onAttack()" }
+                info("BattleSystem.battleEventHandler") { "onAttack()" }
 
                 battleStateMachine.toAnimation()
                 infoLabelWidget.typeWrite(BattleMessages.givenDamage(attacker, target, report))
@@ -739,7 +833,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
                     ability: Ability,
                     reports: Array<AttackCalculationReport>
             ){
-                info("BattleSystem.EventHandler") { "onAreaAttack()" }
+                info("BattleSystem.battleEventHandler") { "onAreaAttack()" }
 
                 battleStateMachine.toAnimation()
                 infoLabelWidget.typeWrite(BattleMessages.givenDamage(attacker, reports))
@@ -758,7 +852,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
 
             override fun onApplyStatusEffect(guardian: AGuardian)
             {
-                info("BattleSystem.EventHandler") { "onApplyStatusEffect()" }
+                info("BattleSystem.battleEventHandler") { "onApplyStatusEffect()" }
 
                 val nickName = Services.getL18N().getGuardianNicknameIfAvailable(guardian)
                 val statusEffect = guardian.stats.statusEffect.toLCString()
@@ -768,7 +862,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
 
             override fun onDefense(defensiveGuardian: AGuardian)
             {
-                info("BattleSystem.EventHandler") { "onDefense()" }
+                info("BattleSystem.battleEventHandler") { "onDefense()" }
 
                 battleStateMachine.toAnimation()
                 infoLabelWidget.typeWrite(BattleMessages.selfDefense(defensiveGuardian))
@@ -777,7 +871,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
 
             override fun onGuardianSubstituted(substituted: AGuardian, substitute: AGuardian, fieldPos: Int)
             {
-                info("BattleSystem.EventHandler") { "onGuardianSubstituted()" }
+                info("BattleSystem.battleEventHandler") { "onGuardianSubstituted()" }
 
                 battleStateMachine.toAnimation()
                 infoLabelWidget.typeWrite(BattleMessages.substitution(substituted, substitute))
@@ -801,7 +895,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
 
             override fun onReplacingDefeatedGuardian(substituted: AGuardian, substitute: AGuardian, fieldPos: Int)
             {
-                info("BattleSystem.EventHandler") { "onReplacingDefeatedGuardian()" }
+                info("BattleSystem.battleEventHandler") { "onReplacingDefeatedGuardian()" }
 
                 battleStateMachine.toAnimation()
                 infoLabelWidget.typeWrite(BattleMessages.replacingDefeated(substituted, substitute))
@@ -831,6 +925,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
         // ......................................................................................... target menu
         onTargetMenuButton = { buttonID ->
 
+            info(TAG) { "onTargetMenuButton($buttonID)" }
             val target = targetMenuWidget.getMonsterOfIndex(buttonID)
             battleSystem.setChosenTarget(target)
             battleSystem.calculateAttack()
@@ -840,23 +935,37 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
         // ......................................................................................... target area menu
         onTargetAreaMenuButton = { buttonID ->
 
+            info(TAG) { "onTargetAreaMenuButton($buttonID)" }
             battleSystem.setChosenArea(targetAreaMenuWidget.getCombatTeamOfIndex(buttonID))
             battleSystem.calculateAttack()
         }
 
 
         // ......................................................................................... back to action menu
-        onBackToActionMenu = { battleStateMachine.toActionMenu() }
+        onBackToActionMenu = {
+
+            info(TAG) { "onBackToActionMenu()" }
+            battleStateMachine.toActionMenu()
+        }
 
 
         // ......................................................................................... escape success / fail
-        onEscapeSuccessLabelBackButton = { goToPreviousScreen() }
-        onEscapeFailedLabelBackButton = { battleSystem.continueBattle() }
+        onEscapeSuccessLabelBackButton = {
+
+            info(TAG) { "onEscapeSuccessLabelBackButton()" }
+            goToPreviousScreen()
+        }
+        onEscapeFailedLabelBackButton = {
+
+            info(TAG) { "onEscapeFailedLabelBackButton()" }
+            battleSystem.continueBattle()
+        }
 
 
         // ......................................................................................... battle animation
         onBattleAnimationHitComplete = {
 
+            info(TAG) { "onBattleAnimationHitComplete()" }
             val defeated = battleSystem.applyAttack()
             if(!defeated || battleSystem.queue.right.allKO || battleSystem.queue.left.allKO)
             {
@@ -864,8 +973,22 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
             }
         }
 
-        onBattleAnimationDieing = { actionMenu.enable(actionMenu.backButton) }
+        onBattleAnimationDying = {
 
-        onBattleAnimationDoNothing = { actionMenu.enable(actionMenu.backButton) }
+            info(TAG) { "onBattleAnimationDying()" }
+            actionMenu.enable(actionMenu.backButton)
+        }
+
+        onBattleAnimationDoNothing = {
+
+            info(TAG) { "onBattleAnimationDoNothing()" }
+            actionMenu.enable(actionMenu.backButton)
+        }
+    }
+
+
+    companion object
+    {
+        private const val TAG: String = "BattleHUD"
     }
 }

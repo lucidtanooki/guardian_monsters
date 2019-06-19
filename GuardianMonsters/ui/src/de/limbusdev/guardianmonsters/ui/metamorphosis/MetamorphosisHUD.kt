@@ -10,6 +10,7 @@ import de.limbusdev.guardianmonsters.services.Services
 import de.limbusdev.guardianmonsters.ui.AHUD
 import de.limbusdev.guardianmonsters.ui.Constant
 import de.limbusdev.guardianmonsters.ui.widgets.ParticleEffectActor
+import de.limbusdev.utils.extensions.replaceOnClick
 import ktx.actors.*
 import com.badlogic.gdx.scenes.scene2d.actions.Actions.run as runAction
 
@@ -64,7 +65,7 @@ class MetamorphosisHUD
         particleActor.setPosition(particlesX, particlesY)
 
         // Listeners
-        okButton.onClick()
+        okButton.replaceOnClick()
         {
             val sequence = muteAudio() then fadeOut(.5f) then popScreen()
             stage+=sequence

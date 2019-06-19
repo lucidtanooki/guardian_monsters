@@ -17,8 +17,9 @@ import de.limbusdev.guardianmonsters.guardians.monsters.Team
 import de.limbusdev.guardianmonsters.services.Services
 import de.limbusdev.guardianmonsters.ui.AHUD
 import de.limbusdev.guardianmonsters.ui.widgets.ParticleEffectActor
+import de.limbusdev.utils.extensions.replaceOnClick
 
-import ktx.actors.onClick
+
 import ktx.actors.plus
 import ktx.actors.plusAssign
 import ktx.actors.txt
@@ -95,7 +96,7 @@ class GuardoSphereHUD
         choiceWidget.sphereCallback = { updateDetails(guardoSphere[it]) }
         choiceWidget.teamCallback   = { updateDetails(team[it])         }
 
-        backButton.onClick {
+        backButton.replaceOnClick {
 
             currentPage = when(currentPage)
             {
@@ -105,7 +106,7 @@ class GuardoSphereHUD
             updatePage()
         }
 
-        nextButton.onClick {
+        nextButton.replaceOnClick {
 
             currentPage = when(currentPage)
             {
@@ -115,12 +116,12 @@ class GuardoSphereHUD
             updatePage()
         }
 
-        statViewToggle.onClick {
+        statViewToggle.replaceOnClick {
 
             statusWidget.isVisible = statViewToggle.isChecked
         }
 
-        exitButton.onClick { super.goToPreviousScreen() }
+        exitButton.replaceOnClick { super.goToPreviousScreen() }
     }
 
 

@@ -7,7 +7,7 @@ import de.limbusdev.guardianmonsters.services.Services
 import de.limbusdev.guardianmonsters.ui.Constant
 import de.limbusdev.guardianmonsters.ui.widgets.Callback
 import de.limbusdev.guardianmonsters.ui.widgets.SimpleClickListener
-import ktx.actors.onClick
+import de.limbusdev.utils.extensions.replaceOnClick
 
 
 /**
@@ -48,7 +48,7 @@ class BattleMainMenuWidget
         this.addActor(swordButton)
         this.addActor(runButton)
 
-        swordButton.onClick(onSwordButton)
-        runButton.onClick(onRunButton)
+        swordButton.replaceOnClick(onSwordButton)
+        runButton.replaceOnClick(onRunButton)
     }
 }

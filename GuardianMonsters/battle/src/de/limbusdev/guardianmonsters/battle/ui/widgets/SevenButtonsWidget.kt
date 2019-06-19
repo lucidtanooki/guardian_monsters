@@ -11,9 +11,10 @@ import de.limbusdev.guardianmonsters.battle.BattleHUD
 import de.limbusdev.guardianmonsters.guardians.Element
 import de.limbusdev.guardianmonsters.guardians.abilities.Ability
 import de.limbusdev.guardianmonsters.services.Services
+import de.limbusdev.utils.extensions.replaceOnClick
 
 import de.limbusdev.utils.extensions.set
-import ktx.actors.onClick
+
 import ktx.actors.txt
 import ktx.style.get
 
@@ -75,7 +76,7 @@ open class SevenButtonsWidget
 
         for (i in 0..6)
         {
-            buttons[i].onClick {
+            buttons[i].replaceOnClick {
 
                 println("SevenButtonsWidget: Clicked button $i")
                 if (!buttons[i].isDisabled) { callbacks.invoke(i) }
@@ -154,7 +155,7 @@ open class SevenButtonsWidget
         buttons[index] = button
 
         // Bind callback handler to new button
-        button.onClick {
+        button.replaceOnClick {
 
             println("SevenButtonsWidget: Clicked button $index")
             if (!button.isDisabled) { callbacks.invoke(index) }
@@ -191,7 +192,7 @@ open class SevenButtonsWidget
             // Bind callbacks to them
             for (i in 7..8)
             {
-                buttons[i].onClick { if (!buttons[i].isDisabled) { callbacks.invoke(i) } }
+                buttons[i].replaceOnClick { if (!buttons[i].isDisabled) { callbacks.invoke(i) } }
             }
         }
     }

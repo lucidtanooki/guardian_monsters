@@ -16,7 +16,8 @@ import de.limbusdev.guardianmonsters.scene2d.AnimatedImage
 import de.limbusdev.guardianmonsters.services.Services
 import de.limbusdev.guardianmonsters.ui.Constant
 import de.limbusdev.guardianmonsters.ui.widgets.OverlayWidget
-import ktx.actors.onClick
+import de.limbusdev.utils.extensions.replaceOnClick
+
 
 /**
  * LevelUpWidget
@@ -43,7 +44,7 @@ class LevelUpWidget(skin: Skin, guardian: AGuardian) : OverlayWidget(skin)
         val ok = ImageButton(skin, "button-back")
         ok.setPosition((Constant.WIDTH - 64 - 4).toFloat(), (32 + 4).toFloat(), Align.bottomRight)
         addActor(ok)
-        ok.onClick { remove() }
+        ok.replaceOnClick { remove() }
 
         val guardianName = Services.getL18N().getGuardianNicknameIfAvailable(guardian)
         val info = Label(Services.getL18N().Battle().format("level_up", guardianName), skin, "default")

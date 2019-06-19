@@ -7,7 +7,8 @@ import com.badlogic.gdx.utils.Array
 import de.limbusdev.guardianmonsters.guardians.monsters.Team
 import de.limbusdev.guardianmonsters.scene2d.lSetPosition
 import de.limbusdev.guardianmonsters.scene2d.lSetSize
-import ktx.actors.onClick
+import de.limbusdev.utils.extensions.replaceOnClick
+
 import ktx.actors.plusAssign
 
 /**
@@ -26,7 +27,7 @@ class GuardoSphereTeamWidget(
 {
     private val monsterButtons = HorizontalGroup()
     private val buttons = Array<Button>()
-    var callback: (Int) -> Unit
+    private var callback: (Int) -> Unit
 
     init
     {
@@ -55,7 +56,7 @@ class GuardoSphereTeamWidget(
 
     fun refresh()
     {
-        for(b in buttons) b.remove()
+        buttons.forEach { it.remove() }
 
         buttonGroup.clear()
         buttons.clear()
@@ -68,7 +69,7 @@ class GuardoSphereTeamWidget(
             monsterButtons+=monsterButton
             buttons.add(monsterButton)
             buttonGroup.add(monsterButton)
-            monsterButton.onClick { callback.invoke(key) }
+            monsterButton.replaceOnClick { callback.invoke(key) }
         }
     }
 

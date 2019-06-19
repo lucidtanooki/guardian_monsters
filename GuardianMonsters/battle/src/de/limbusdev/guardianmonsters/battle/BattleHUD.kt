@@ -923,7 +923,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
         // ......................................................................................... target menu
         onTargetMenuButton = { buttonID ->
 
-            info(TAG) { "onTargetMenuButton($buttonID)" }
+            info(TAG) { "onTargetMenuButton.invoke($buttonID)" }
             val target = targetMenuWidget.getMonsterOfIndex(buttonID)
             battleSystem.setChosenTarget(target)
             battleSystem.calculateAttack()
@@ -933,7 +933,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
         // ......................................................................................... target area menu
         onTargetAreaMenuButton = { buttonID ->
 
-            info(TAG) { "onTargetAreaMenuButton($buttonID)" }
+            info(TAG) { "onTargetAreaMenuButton.invoke($buttonID)" }
             battleSystem.setChosenArea(targetAreaMenuWidget.getCombatTeamOfIndex(buttonID))
             battleSystem.calculateAttack()
         }
@@ -942,7 +942,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
         // ......................................................................................... back to action menu
         onBackToActionMenu = {
 
-            info(TAG) { "onBackToActionMenu()" }
+            info(TAG) { "onBackToActionMenu" }
             battleStateMachine.toActionMenu()
         }
 
@@ -950,12 +950,12 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
         // ......................................................................................... escape success / fail
         onEscapeSuccessLabelBackButton = {
 
-            info(TAG) { "onEscapeSuccessLabelBackButton()" }
+            info(TAG) { "onEscapeSuccessLabelBackButton" }
             goToPreviousScreen()
         }
         onEscapeFailedLabelBackButton = {
 
-            info(TAG) { "onEscapeFailedLabelBackButton()" }
+            info(TAG) { "onEscapeFailedLabelBackButton" }
             battleSystem.continueBattle()
         }
 
@@ -963,7 +963,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
         // ......................................................................................... battle animation
         onBattleAnimationHitComplete = {
 
-            info(TAG) { "onBattleAnimationHitComplete()" }
+            info(TAG) { "onBattleAnimationHitComplete" }
             val defeated = battleSystem.applyAttack()
             if(!defeated || battleSystem.queue.right.allKO || battleSystem.queue.left.allKO)
             {
@@ -973,13 +973,13 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
 
         onBattleAnimationDying = {
 
-            info(TAG) { "onBattleAnimationDying()" }
+            info(TAG) { "onBattleAnimationDying" }
             actionMenu.enable(actionMenu.backButton)
         }
 
         onBattleAnimationDoNothing = {
 
-            info(TAG) { "onBattleAnimationDoNothing()" }
+            info(TAG) { "onBattleAnimationDoNothing" }
             actionMenu.enable(actionMenu.backButton)
         }
     }

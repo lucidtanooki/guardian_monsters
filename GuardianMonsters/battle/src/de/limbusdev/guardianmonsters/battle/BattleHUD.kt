@@ -189,10 +189,9 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
         ) {
             when(newState)
             {
-                State.ACTION_MENU       -> toActionMenu()
                 State.ANIMATION         -> toAnimation()
                 State.ABILITY_DETAIL    -> toAbilityDetail(aID)
-                State.ATTACK_INFO_MENU  -> toAttackInfoMenu()
+                State.ABILITY_INFO_MENU -> toAbilityInfoMenu()
                 State.ABILITY_MENU      -> toAbilityMenu()
                 State.BATTLE_START      -> toBattleStart()
                 State.END_OF_BATTLE     -> toEndOfBattle(winnerSide)
@@ -207,9 +206,9 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
             }
         }
 
-        private fun toBattleStart()
+        private fun toBattleStart()                                                        // TESTED
         {
-            info(TAG) { "toBattleStart() -> new State: ${State.BATTLE_START}" }
+            info(TAG) { "${"toBattleStart()".padEnd(40)} -> new State: ${State.BATTLE_START}" }
 
             reset()
 
@@ -229,9 +228,200 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
             state = State.BATTLE_START
         }
 
-        private fun toActionMenu()
+        private fun toMainMenu()
         {
-            info(TAG) { "toActionMenu() -> new State: ${State.ACTION_MENU}" }
+            info(TAG) { "${"toMainMenu()".padEnd(40)} -> new State: ${State.MAIN_MENU}" }
+
+            reset()
+            animationWidget.addToStage(battleAnimationStage)
+            statusWidget.addToStage(battleAnimationStage)
+            actionMenu.disable()
+            actionMenu.addToStage(stage)
+            mainMenu.addToStageAndFadeIn(stage)
+
+            state = State.MAIN_MENU
+        }
+
+        private fun toEscapeSuccessInfo()                                                  // TESTED
+        {
+            info(TAG) { "${"toEscapeSuccessInfo()".padEnd(40)} -> new State: ${State.ESCAPE_SUCCESS}" }
+
+            showInfoLabel()
+            infoLabelWidget.typeWrite(Services.getL18N().Battle("escape_success"))
+            actionMenu.setCallbacks(onBackButton = onEscapeSuccessLabelBackButton)
+
+            state = State.ESCAPE_SUCCESS
+        }
+
+        private fun toEscapeFailInfo()                                                     // TESTED
+        {
+            info(TAG) { "${"toEscapeFailInfo()".padEnd(40)} -> new State: ${State.ESCAPE_FAILURE}" }
+
+            showInfoLabel()
+            infoLabelWidget.typeWrite(Services.getL18N().Battle("escape_fail"))
+            actionMenu.setCallbacks(onBackButton = onEscapeFailedLabelBackButton)
+
+            state = State.ESCAPE_FAILURE
+        }
+
+        private fun toAbilityMenu()
+        {
+            info(TAG) { "${"toAbilityMenu()".padEnd(40)} -> new State: ${State.ABILITY_MENU}" }
+
+            showActionMenu()
+            state = State.ABILITY_MENU
+        }
+
+        private fun toAbilityInfoMenu()
+        {
+            info(TAG) { "${"toAbilityInfoMenu()".padEnd(40)} -> new State: ${State.ABILITY_INFO_MENU}" }
+
+            reset()
+
+            animationWidget.addToStage(battleAnimationStage)
+            statusWidget.addToStage(battleAnimationStage)
+            battleQueueWidget.addToStage(stage)
+            abilityInfoMenu.addToStage(stage)
+            abilityMenuAddOn.addToStage(stage)
+            abilityInfoMenuFrame.addToStage(stage)
+
+            abilityInfoMenu.initialize(battleSystem.activeGuardian, false)
+            abilityInfoMenu.toAttackInfoStyle()
+
+            state = State.ABILITY_INFO_MENU
+        }
+
+        private fun toAbilityDetail(aID: Ability.aID?)
+        {
+            checkNotNull(aID)
+            info(TAG) { "${"toAbilityDetail($aID)".padEnd(40)} -> new State: ${State.ABILITY_DETAIL}" }
+
+            reset()
+
+            animationWidget.addToStage(battleAnimationStage)
+            statusWidget.addToStage(battleAnimationStage)
+            battleQueueWidget.addToStage(stage)
+            abilityMenuAddOn.addToStage(stage)
+            abilityDetailWidget.addToStage(stage)
+            abilityDetailBackButton.addToStage(stage)
+
+            abilityDetailWidget.initialize(aID)
+
+            state = State.ABILITY_DETAIL
+        }
+
+        private fun toEndOfBattle(winnerSide: Boolean?)
+        {
+            checkNotNull(winnerSide)
+            info(TAG) { "${"toEndOfBattle($winnerSide)".padEnd(40)} -> new State: ${State.END_OF_BATTLE}" }
+
+            reset()
+
+            showInfoLabel()
+            val textKey = if(winnerSide) "batt_you_won" else "batt_game_over"
+            infoLabelWidget.typeWrite(Services.getL18N().Battle(textKey))
+            actionMenu.setCallbacks(onBackButton = onEndOfBattleLabelBackButton)
+
+            statusWidget.addToStage(stage)
+
+            stage.addAction(Services.getAudio().createEndOfBattleMusicSequence())
+
+            state = State.END_OF_BATTLE
+        }
+
+        private fun toEndOfBattleByBanningLastOpponent(bannedGuardian: AGuardian?, crystal: ChakraCrystalItem?)
+        {
+            checkNotNull(bannedGuardian)
+            checkNotNull(crystal)
+            info(TAG) { "${"toEndOfBattleByBanningLastOpponent(...)".padEnd(40)} -> new State: ${State.END_OF_BATTLE}" }
+
+            reset()
+
+            showInfoLabel()
+            infoLabelWidget.typeWrite(BattleMessages.banGuardianSuccess(bannedGuardian, crystal))
+            actionMenu.setCallbacks(onBackButton = onEndOfBattleLabelBackButton)
+
+            statusWidget.addToStage(stage)
+
+            stage.addAction(Services.getAudio().createEndOfBattleMusicSequence())
+
+            // TODO put banned guardian into the guardo sphere
+
+            state = State.END_OF_BATTLE
+        }
+
+        private fun toAnimation()
+        {
+            info(TAG) { "${"toAnimation()".padEnd(40)} -> new State: ${State.ANIMATION}" }
+
+            reset()
+            showInfoLabel()
+            actionMenu.disableAllChildButtons()
+            battleQueueWidget.addToStage(stage)
+            actionMenu.setCallbacks(onBackButton = onInfoLabelBackButton)
+
+            state = State.ANIMATION
+        }
+
+        private fun toTargetChoice()
+        {
+            info(TAG) { "${"toTargetChoice()".padEnd(40)} -> new State: ${State.TARGET_CHOICE}" }
+
+            reset()
+            animationWidget.addToStage(battleAnimationStage)
+            statusWidget.addToStage(battleAnimationStage)
+            actionMenu.disableAllButBackButton()
+            actionMenu.addToStage(stage)
+            actionMenu.setCallbacks(onBackButton = onBackToActionMenu)
+            targetMenuWidget.addToStage(stage)
+            battleQueueWidget.addToStage(stage)
+
+            state = State.TARGET_CHOICE
+        }
+
+        private fun toTargetAreaChoice()
+        {
+            info(TAG) { "${"toTargetAreaChoice()".padEnd(40)} -> new State: ${State.TARGET_AREA_CHOICE}" }
+
+            reset()
+            animationWidget.addToStage(battleAnimationStage)
+            statusWidget.addToStage(battleAnimationStage)
+            actionMenu.disableAllButBackButton()
+            actionMenu.addToStage(stage)
+            actionMenu.setCallbacks(onBackButton = onBackToActionMenu)
+            targetAreaMenuWidget.addToStage(stage)
+            battleQueueWidget.addToStage(stage)
+
+            state = State.TARGET_AREA_CHOICE
+        }
+
+        private fun toTeamMenu()
+        {
+            info(TAG) { "${"toTeamMenu()".padEnd(40)} -> new State: ${State.TEAM_MENU}" }
+
+            reset()
+            switchActiveGuardianWidget.addToStage(stage)
+
+            state = State.TEAM_MENU
+        }
+
+        private fun toStatusEffectInfoLabel()
+        {
+            info(TAG) { "${"toStatusEffectInfoLabel()".padEnd(40)} -> new State: ${State.STATUS_EFFECT_INFO}" }
+
+            reset()
+            showInfoLabel()
+            battleQueueWidget.addToStage(stage)
+            actionMenu.setCallbacks(onBackButton = onStatusEffectLabelBackButton)
+
+            state = State.STATUS_EFFECT_INFO
+        }
+
+
+        /** Helper function for displaying the action menu. */
+        private fun showActionMenu()
+        {
+            info(TAG) { "showActionMenu()" }
 
             reset()
 
@@ -253,198 +443,8 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
                     onExtraButton = onActionMenuExtraButton
             )
             abilityMenu.initialize(battleSystem.activeGuardian, true)
-
-            state = State.ACTION_MENU
         }
 
-        private fun toAbilityMenu()
-        {
-            info(TAG) { "toAbilityMenu() -> new State: ${State.ACTION_MENU}" }
-
-            toActionMenu()
-            state = State.ACTION_MENU
-        }
-
-        private fun toAttackInfoMenu()
-        {
-            info(TAG) { "toAttackInfoMenu() -> new State: ${State.ATTACK_INFO_MENU}" }
-
-            reset()
-
-            animationWidget.addToStage(battleAnimationStage)
-            statusWidget.addToStage(battleAnimationStage)
-            battleQueueWidget.addToStage(stage)
-            abilityInfoMenu.addToStage(stage)
-            abilityMenuAddOn.addToStage(stage)
-            abilityInfoMenuFrame.addToStage(stage)
-
-            abilityInfoMenu.initialize(battleSystem.activeGuardian, false)
-            abilityInfoMenu.toAttackInfoStyle()
-
-            state = State.ATTACK_INFO_MENU
-        }
-
-        private fun toAbilityDetail(aID: Ability.aID?)
-        {
-            checkNotNull(aID)
-            info(TAG) { "toAbilityDetail($aID) -> new State: ${State.ABILITY_DETAIL}" }
-
-            reset()
-
-            animationWidget.addToStage(battleAnimationStage)
-            statusWidget.addToStage(battleAnimationStage)
-            battleQueueWidget.addToStage(stage)
-            abilityMenuAddOn.addToStage(stage)
-            abilityDetailWidget.addToStage(stage)
-            abilityDetailBackButton.addToStage(stage)
-
-            abilityDetailWidget.initialize(aID)
-
-            state = State.ABILITY_DETAIL
-        }
-
-        private fun toEndOfBattle(winnerSide: Boolean?)
-        {
-            checkNotNull(winnerSide)
-            info(TAG) { "toEndOfBattle($winnerSide) -> new State: ${State.END_OF_BATTLE}" }
-
-            reset()
-
-            showInfoLabel()
-            val textKey = if(winnerSide) "batt_you_won" else "batt_game_over"
-            infoLabelWidget.typeWrite(Services.getL18N().Battle(textKey))
-            actionMenu.setCallbacks(onBackButton = onEndOfBattleLabelBackButton)
-
-            statusWidget.addToStage(stage)
-
-            stage.addAction(Services.getAudio().createEndOfBattleMusicSequence())
-
-            state = State.END_OF_BATTLE
-        }
-
-        private fun toEndOfBattleByBanningLastOpponent(bannedGuardian: AGuardian?, crystal: ChakraCrystalItem?)
-        {
-            checkNotNull(bannedGuardian)
-            checkNotNull(crystal)
-            info(TAG) { "toEndOfBattleByBanningLastOpponent(...) -> new State: ${State.END_OF_BATTLE}" }
-
-            reset()
-
-            showInfoLabel()
-            infoLabelWidget.typeWrite(BattleMessages.banGuardianSuccess(bannedGuardian, crystal))
-            actionMenu.setCallbacks(onBackButton = onEndOfBattleLabelBackButton)
-
-            statusWidget.addToStage(stage)
-
-            stage.addAction(Services.getAudio().createEndOfBattleMusicSequence())
-
-            // TODO put banned guardian into the guardo sphere
-
-            state = State.END_OF_BATTLE
-        }
-
-        private fun toAnimation()
-        {
-            info(TAG) { "toAnimation() -> new State: ${State.ANIMATION}" }
-
-            reset()
-            showInfoLabel()
-            actionMenu.disableAllChildButtons()
-            battleQueueWidget.addToStage(stage)
-            actionMenu.setCallbacks(onBackButton = onInfoLabelBackButton)
-
-            state = State.ANIMATION
-        }
-
-        private fun toTargetChoice()
-        {
-            info(TAG) { "toTargetChoice() -> new State: ${State.TARGET_CHOICE}" }
-
-            reset()
-            animationWidget.addToStage(battleAnimationStage)
-            statusWidget.addToStage(battleAnimationStage)
-            actionMenu.disableAllButBackButton()
-            actionMenu.addToStage(stage)
-            actionMenu.setCallbacks(onBackButton = onBackToActionMenu)
-            targetMenuWidget.addToStage(stage)
-            battleQueueWidget.addToStage(stage)
-
-            state = State.TARGET_CHOICE
-        }
-
-        private fun toTargetAreaChoice()
-        {
-            info(TAG) { "toTargetAreaChoice() -> new State: ${State.TARGET_AREA_CHOICE}" }
-
-            reset()
-            animationWidget.addToStage(battleAnimationStage)
-            statusWidget.addToStage(battleAnimationStage)
-            actionMenu.disableAllButBackButton()
-            actionMenu.addToStage(stage)
-            actionMenu.setCallbacks(onBackButton = onBackToActionMenu)
-            targetAreaMenuWidget.addToStage(stage)
-            battleQueueWidget.addToStage(stage)
-
-            state = State.TARGET_AREA_CHOICE
-        }
-
-        private fun toTeamMenu()
-        {
-            info(TAG) { "toTeamMenu() -> new State: ${State.TEAM_MENU}" }
-
-            reset()
-            switchActiveGuardianWidget.addToStage(stage)
-
-            state = State.TEAM_MENU
-        }
-
-        private fun toMainMenu()
-        {
-            info(TAG) { "toMainMenu() -> new State: ${State.MAIN_MENU}" }
-
-            reset()
-            animationWidget.addToStage(battleAnimationStage)
-            statusWidget.addToStage(battleAnimationStage)
-            actionMenu.disable()
-            actionMenu.addToStage(stage)
-            mainMenu.addToStageAndFadeIn(stage)
-
-            state = State.MAIN_MENU
-        }
-
-        private fun toStatusEffectInfoLabel()
-        {
-            info(TAG) { "toStatusEffectInfoLabel() -> new State: ${State.STATUS_EFFECT_INFO}" }
-
-            reset()
-            showInfoLabel()
-            battleQueueWidget.addToStage(stage)
-            actionMenu.setCallbacks(onBackButton = onStatusEffectLabelBackButton)
-
-            state = State.STATUS_EFFECT_INFO
-        }
-
-        private fun toEscapeSuccessInfo()
-        {
-            info(TAG) { "toEscapeSuccessInfo() -> new State: ${State.ESCAPE_SUCCESS}" }
-
-            showInfoLabel()
-            infoLabelWidget.typeWrite(Services.getL18N().Battle("escape_success"))
-            actionMenu.setCallbacks(onBackButton = onEscapeSuccessLabelBackButton)
-
-            state = State.ESCAPE_SUCCESS
-        }
-
-        private fun toEscapeFailInfo()
-        {
-            info(TAG) { "toEscapeFailInfo() -> new State: ${State.ESCAPE_FAILURE}" }
-
-            showInfoLabel()
-            infoLabelWidget.typeWrite(Services.getL18N().Battle("escape_fail"))
-            actionMenu.setCallbacks(onBackButton = onEscapeFailedLabelBackButton)
-
-            state = State.ESCAPE_FAILURE
-        }
 
         /** Helper function for displaying information. */
         private fun showInfoLabel()
@@ -490,14 +490,13 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
     private enum class State
     {
         MAIN_MENU,                  // the menu widget with: Fight and Run buttons
-        ACTION_MENU,                // the menu widget with: Team, Bag, Extra and Back buttons
         ABILITY_MENU,               // a 7 buttons menu widget, that allows choosing abilities
         END_OF_BATTLE,              // when the battle has come to an end
         ANIMATION,                  // state of ability animation
         TARGET_CHOICE,              // a menu that allows choosing an ability target from one of the teams
         BATTLE_START,               // the first widget to be shown in a battle
         TARGET_AREA_CHOICE,         // a menu that allows choosing a whole team as ability target
-        ATTACK_INFO_MENU,           // a menu that shows the chosen Guardian's abilities and opens details
+        ABILITY_INFO_MENU,           // a menu that shows the chosen Guardian's abilities and opens details
         ABILITY_DETAIL,             // a widget, that shows information about a chosen ability
         TEAM_MENU,                  // the menu that shows all Guardians of the hero's team
         BANNED_LAST,                // when the battle ended due to banning the last opponent
@@ -729,7 +728,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
         onAbilityDetailLabelBackButton = {
 
             info(TAG) { "onAbilityDetailLabelBackButton" }
-            stateMachine.to(State.ATTACK_INFO_MENU)
+            stateMachine.to(State.ABILITY_INFO_MENU)
         }
 
 
@@ -744,7 +743,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
                 checked = checked.toggle()
                 if(buttonID == BattleHUDTextButton.CENTER_TOP)
                 {
-                    if(checked) { stateMachine.to(State.ATTACK_INFO_MENU) }
+                    if(checked) { stateMachine.to(State.ABILITY_INFO_MENU) }
                     else        { stateMachine.to(State.ABILITY_MENU)      }
                 }
             }
@@ -758,7 +757,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
             {
                 info("BattleSystem.battleEventHandler") { "onPlayersTurn()" }
 
-                stateMachine.to(State.ACTION_MENU)
+                stateMachine.to(State.ABILITY_MENU)
             }
 
             override fun onBanning(bannedGuardian: AGuardian, crystal: ChakraCrystalItem, fieldPos: Int)
@@ -978,7 +977,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
         onBackToActionMenu = {
 
             info(TAG) { "onBackToActionMenu" }
-            stateMachine.to(State.ACTION_MENU)
+            stateMachine.to(State.ABILITY_MENU)
         }
 
 

@@ -80,10 +80,14 @@ class GameStateDebugger(private val game: Game)
     {
         val ACTIVE_TEAM_SIZE_HERO = 3
         val guardianFactory = GuardiansServiceLocator.guardianFactory
-        val heroTeam = Team(3, 3, ACTIVE_TEAM_SIZE_HERO)
+        val heroTeam = Team(4, 3, ACTIVE_TEAM_SIZE_HERO)
         heroTeam += guardianFactory.createGuardian(1, 1)
         heroTeam += guardianFactory.createGuardian(2, 1)
         heroTeam += guardianFactory.createGuardian(3, 1)
+
+        // Add a Guardian for testing Guardian swapping
+        val fourthGuardian = guardianFactory.createGuardian(4,1)
+        heroTeam += fourthGuardian
 
         // Enable Abilities
         heroTeam[0].abilityGraph.activateNode(13)

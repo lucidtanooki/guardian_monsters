@@ -291,6 +291,8 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD()
             { actionMenu.enable(actionMenu.backButton) }
 
             state = State.BAN_SUCCESS
+
+            // TODO HERE Put the banned Guardian into the GuardoSphere
         }
 
                                                                                            // TESTED
@@ -396,8 +398,6 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD()
             statusWidget.addToStage(stage)
 
             stage.addAction(Services.getAudio().createEndOfBattleMusicSequence())
-
-            // TODO put banned guardian into the guardo sphere
 
             state = State.END_OF_BATTLE
         }
@@ -819,21 +819,14 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD()
                 stateMachine.to(State.ABILITY_MENU)
             }
 
-            override fun onBanning(bannedGuardian: AGuardian, crystal: ChakraCrystalItem, fieldPos: Int)
+            override fun onBanning(bannedGuardian: AGuardian, crystal: ChakraCrystalItem, fieldPos: Int, continueBanning: () -> Unit)
             {
                 info("BattleSystem.battleEventHandler") { "onBanning()" }
 
                 stateMachine.to(State.ANIMATION)
                 infoLabelWidget.typeWrite(BattleMessages.tryingToBan(bannedGuardian, crystal))
 
-                animationWidget.animateBanning(fieldPos, Side.RIGHT, bannedGuardian) {
-
-                    when(BattleCalculator.banSucceeds(bannedGuardian, crystal))
-                    {
-                        true  -> battleEventHandler.onBanningSuccess(bannedGuardian, crystal, fieldPos)
-                        false -> battleEventHandler.onBanningFailure(bannedGuardian, crystal, fieldPos)
-                    }
-                }
+                animationWidget.animateBanning(fieldPos, Side.RIGHT, bannedGuardian) { continueBanning.invoke() }
             }
 
             override fun onBanningFailure(bannedGuardian: AGuardian, crystal: ChakraCrystalItem, fieldPos: Int)
@@ -1050,11 +1043,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD()
         onBanSuccessBackButton = {
 
             info(TAG) { "onBanSuccessBackButton"}
-
-            // TODO
-            // Somewhere the banned Guardian should be put into the GuardoSphere
-            // if the opponents team is empty now or KO, end the battle
-            // if the opponents team is not empty, get the next Guardian to join the fight
+            battleSystem.finishBattleByBanning()
         }
 
         onBanFailureBackButton = {

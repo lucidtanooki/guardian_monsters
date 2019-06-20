@@ -116,6 +116,13 @@ class BattleSystem
         eventHandler.onBattleEnds(!queue.combatTeamLeft.isKO())
     }
 
+    fun finishBattleByBanning()
+    {
+        queue.resetTeamsModifiedStats(HERO)
+        queue.resetTeamsModifiedStats(OPPONENT)
+        eventHandler.onBattleEnds(Constant.LEFT)
+    }
+
     /**
      * The Computer Player takes his turn and chooses his attack and the target to be attacked.
      * This is possible only, when the first monster in queue is of AI's team.
@@ -390,7 +397,26 @@ class BattleSystem
 
         val fieldPos = queue.getFieldPositionFor(bannedGuardian)
 
-        eventHandler.onBanning(bannedGuardian, item, fieldPos)
+        // If there is only one Guardian on the battle field, banning is allowed.
+        // If banning succeeds, all other wild Guardians will run away and the battle is won.
+        // Successful banning always ends the battle.
+
+        // Will banning succeed?
+        val banSucceeds = BattleCalculator.banSucceeds(bannedGuardian, item)
+
+        val banCallback: () -> Unit
+        if(banSucceeds)
+        {
+            // Successful banning always ends the battle
+            banCallback = { eventHandler.onBanningSuccess(bannedGuardian, item, fieldPos) }
+        }
+        else
+        {
+            // Continue Battle with next Guardian
+            banCallback = { eventHandler.onBanningFailure(bannedGuardian, item, fieldPos) }
+        }
+
+        eventHandler.onBanning(bannedGuardian, item, fieldPos, banCallback)
     }
 
     fun banWildGuardian(item: ChakraCrystalItem)
@@ -415,7 +441,6 @@ class BattleSystem
 
 
 
-
     //////////////////////////////////////////////////////////////////////////////////////////////// SETTERS
     /** If callbacks must be set later, usually only in debugging. */
     fun setCallbacks(eventHandler: EventHandler) { this.eventHandler = eventHandler }
@@ -434,7 +459,7 @@ class BattleSystem
         open fun onApplyStatusEffect(guardian: AGuardian) {}
         open fun onGuardianSubstituted(substituted: AGuardian, substitute: AGuardian, fieldPos: Int) {}
         open fun onReplacingDefeatedGuardian(substituted: AGuardian, substitute: AGuardian, fieldPos: Int) {}
-        open fun onBanning(bannedGuardian: AGuardian, crystal: ChakraCrystalItem, fieldPos: Int) {}
+        open fun onBanning(bannedGuardian: AGuardian, crystal: ChakraCrystalItem, fieldPos: Int, continueBanning: () -> Unit) {}
         open fun onBanningFailure(bannedGuardian: AGuardian, crystal: ChakraCrystalItem, fieldPos: Int) {}
         open fun onBanningSuccess(bannedGuardian: AGuardian, crystal: ChakraCrystalItem, fieldPos: Int) {}
     }
@@ -509,9 +534,6 @@ class BattleSystem
 
 
 
-
-
-
     /** Null Implementation */
     private class NullEventHandler : EventHandler()
     {
@@ -545,7 +567,7 @@ class BattleSystem
         override fun onReplacingDefeatedGuardian(substituted: AGuardian, substitute: AGuardian, fieldPos: Int)
         { info("BattleSystem.NullEventHandler") { "onReplacingDefeatedGuardian()" } }
 
-        override fun onBanning(bannedGuardian: AGuardian, crystal: ChakraCrystalItem, fieldPos: Int)
+        override fun onBanning(bannedGuardian: AGuardian, crystal: ChakraCrystalItem, fieldPos: Int, continueBanning: () -> Unit)
         { info("BattleSystem.NullEventHandler") { "onBanning()" } }
 
         override fun onBanningFailure(bannedGuardian: AGuardian, crystal: ChakraCrystalItem, fieldPos: Int)

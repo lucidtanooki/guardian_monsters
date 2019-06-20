@@ -56,17 +56,17 @@ public class ItemsSubMenu extends AInventorySubMenu
 
         switch(item.getCategory()) {
             case EQUIPMENT:
-                detailView = new WeaponDetailViewWidget(getSkin(), inventory, team);
+                detailView = new WeaponDetailViewWidget(inventory, team);
                 break;
             case KEY:
-                detailView = new KeyItemDetailViewWidget(getSkin(), inventory, team);
+                detailView = new KeyItemDetailViewWidget(inventory, team);
                 break;
             default:
-                detailView = new ItemApplicationWidget(getSkin(), inventory, team);
+                detailView = new ItemApplicationWidget(inventory, team);
                 break;
         }
         detailView.setPosition(264,2, Align.bottomLeft);
-        detailView.init(item);
+        detailView.initialize(item);
         addActor(detailView);
     }
 

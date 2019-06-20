@@ -14,8 +14,8 @@ import de.limbusdev.guardianmonsters.guardians.monsters.Team;
 public class KeyItemDetailViewWidget extends ItemApplicationWidget
 {
 
-    public KeyItemDetailViewWidget(Skin skin, Inventory inventory, Team team) {
-        super(skin, inventory, team);
+    public KeyItemDetailViewWidget(Inventory inventory, Team team) {
+        super(inventory, team);
 
         getUse().remove();
         getDelete().remove();

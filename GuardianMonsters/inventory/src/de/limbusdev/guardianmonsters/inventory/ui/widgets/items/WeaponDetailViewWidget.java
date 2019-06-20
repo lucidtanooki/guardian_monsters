@@ -11,6 +11,7 @@ import de.limbusdev.guardianmonsters.guardians.items.Item;
 import de.limbusdev.guardianmonsters.guardians.items.equipment.Equipment;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.Team;
+import de.limbusdev.guardianmonsters.services.Services;
 
 /**
  * @author Georg Eckert 2017
@@ -21,8 +22,11 @@ public class WeaponDetailViewWidget extends ItemApplicationWidget
 
     private ArrayMap<String, Label> valueLabels;
 
-    public WeaponDetailViewWidget(Skin skin, Inventory inventory, Team team) {
-        super(skin, inventory, team);
+    public WeaponDetailViewWidget(Inventory inventory, Team team)
+    {
+        super(inventory, team);
+
+        Skin skin = Services.getUI().getInventorySkin();
 
         int offX = 4;
         int offY = 74;
@@ -53,8 +57,8 @@ public class WeaponDetailViewWidget extends ItemApplicationWidget
     }
 
     @Override
-    public void init(Item item) {
-        super.init(item);
+    public void initialize(Item item) {
+        super.initialize(item);
 
         Equipment eq = (Equipment) item;
         String sign;

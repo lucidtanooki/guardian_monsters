@@ -19,9 +19,9 @@ import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian
  */
 class MedicalItem
 (
-        name: String,
-        val value: Int,
-        override val type: Type
+        name                : String = "bread",
+        val value           : Int = 100,
+        override val type   : Type = Type.HP_CURE
 )
     : AMedicalItem(name)
 {

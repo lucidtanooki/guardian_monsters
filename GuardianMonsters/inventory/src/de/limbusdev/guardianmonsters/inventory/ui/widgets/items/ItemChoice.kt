@@ -3,7 +3,6 @@ package de.limbusdev.guardianmonsters.inventory.ui.widgets.items
 import com.badlogic.gdx.scenes.scene2d.Group
 import com.badlogic.gdx.scenes.scene2d.ui.Image
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton
-import com.badlogic.gdx.scenes.scene2d.ui.Skin
 import com.badlogic.gdx.utils.Align
 import com.badlogic.gdx.utils.Array
 
@@ -12,13 +11,13 @@ import de.limbusdev.guardianmonsters.guardians.items.ChakraCrystalItem
 import de.limbusdev.guardianmonsters.guardians.items.Inventory
 import de.limbusdev.guardianmonsters.guardians.items.Item
 import de.limbusdev.guardianmonsters.guardians.items.medicine.AMedicalItem
-import de.limbusdev.guardianmonsters.guardians.items.medicine.MedicalItem
 import de.limbusdev.guardianmonsters.guardians.monsters.Team
 import de.limbusdev.guardianmonsters.inventory.ui.widgets.team.MonsterListWidget
 import de.limbusdev.guardianmonsters.services.Services
 import de.limbusdev.guardianmonsters.ui.Constant
 import de.limbusdev.guardianmonsters.ui.widgets.ItemListWidget
 import de.limbusdev.guardianmonsters.ui.widgets.SimpleClickListener
+import de.limbusdev.utils.extensions.replaceOnClick
 
 class ItemChoice
 (
@@ -29,8 +28,8 @@ class ItemChoice
     : Group()
 {
     // ............................................................................................. PROPERTIES
-    private var guardianList: MonsterListWidget? = null
-    private var chosenItem: Item? = null
+    private var guardianList    : MonsterListWidget? = null
+    private var chosenItem      : Item? = null
     private val detailViewWidget: ItemApplicationWidget
 
 
@@ -46,7 +45,7 @@ class ItemChoice
         overlay.setPosition(0f, 0f, Align.bottomLeft)
         addActor(overlay)
 
-        detailViewWidget = ItemApplicationWidget(skin, inventory, team)
+        detailViewWidget = ItemApplicationWidget(inventory, team)
         detailViewWidget.setPosition(20f, 2f, Align.bottomLeft)
         detailViewWidget.delete.isVisible = false
 
@@ -63,7 +62,7 @@ class ItemChoice
     private fun setUp()
     {
         // What happens, when a Guardian is chosen from the list?
-        val callbacks = MonsterListWidget.Callbacks { i ->
+        val onButton: (Int) -> Boolean = { i ->
 
             when(chosenItem)
             {
@@ -91,20 +90,20 @@ class ItemChoice
         val clicks = ItemListWidget.ClickListener { item ->
 
             chosenItem = item
-            detailViewWidget.init(item)
+            detailViewWidget.initialize(item)
             addActor(detailViewWidget)
-            detailViewWidget.use.clearListeners()
 
-            val clickListener = when(item)
+            val onClick: () -> Unit
+            when(item)
             {
-                is AMedicalItem -> SimpleClickListener {
+                is AMedicalItem -> onClick = {
 
                     if (guardianList != null) { guardianList!!.remove() }
-                    guardianList = MonsterListWidget(team, callbacks, chosenItem)
+                    guardianList = MonsterListWidget(team, onButton, chosenItem!!)
                     addActor(guardianList)
                     detailViewWidget.remove()
                 }
-                is ChakraCrystalItem -> SimpleClickListener {
+                is ChakraCrystalItem -> onClick = {
 
                     if (guardianList != null) { guardianList!!.remove() }
                     detailViewWidget.remove()
@@ -112,10 +111,10 @@ class ItemChoice
                     inventory.takeFromInventory(chosenItem!!)
                     battleSystem.banWildGuardian(item)
                 }
-                else -> SimpleClickListener { }
+                else -> onClick = {}
             }
 
-            detailViewWidget.use.addListener(clickListener)
+            detailViewWidget.use.replaceOnClick{ onClick.invoke() }
         }
 
         // Define which items will be shown

@@ -12,7 +12,7 @@ import de.limbusdev.guardianmonsters.guardians.items.Inventory
 import de.limbusdev.guardianmonsters.guardians.items.Item
 import de.limbusdev.guardianmonsters.guardians.items.medicine.AMedicalItem
 import de.limbusdev.guardianmonsters.guardians.monsters.Team
-import de.limbusdev.guardianmonsters.inventory.ui.widgets.team.MonsterListWidget
+import de.limbusdev.guardianmonsters.inventory.ui.widgets.team.GuardianListWidget
 import de.limbusdev.guardianmonsters.services.Services
 import de.limbusdev.guardianmonsters.ui.Constant
 import de.limbusdev.guardianmonsters.ui.widgets.ItemListWidget
@@ -28,7 +28,7 @@ class ItemChoice
     : Group()
 {
     // ............................................................................................. PROPERTIES
-    private var guardianList    : MonsterListWidget? = null
+    private var guardianList    : GuardianListWidget? = null
     private var chosenItem      : Item? = null
     private val detailViewWidget: ItemApplicationWidget
 
@@ -99,7 +99,7 @@ class ItemChoice
                 is AMedicalItem -> onClick = {
 
                     if (guardianList != null) { guardianList!!.remove() }
-                    guardianList = MonsterListWidget(team, onButton, chosenItem!!)
+                    guardianList = GuardianListWidget(team, onButton, chosenItem!!)
                     addActor(guardianList)
                     detailViewWidget.remove()
                 }

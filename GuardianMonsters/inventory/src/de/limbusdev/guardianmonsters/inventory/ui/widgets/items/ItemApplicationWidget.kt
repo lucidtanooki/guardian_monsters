@@ -4,9 +4,7 @@ import com.badlogic.gdx.scenes.scene2d.Group
 import com.badlogic.gdx.scenes.scene2d.ui.Image
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton
 import com.badlogic.gdx.scenes.scene2d.ui.Label
-import com.badlogic.gdx.scenes.scene2d.ui.Skin
 import com.badlogic.gdx.utils.Align
-import com.badlogic.gdx.utils.I18NBundle
 
 import de.limbusdev.guardianmonsters.guardians.items.Inventory
 import de.limbusdev.guardianmonsters.guardians.items.Item
@@ -14,7 +12,7 @@ import de.limbusdev.guardianmonsters.guardians.items.equipment.Equipment
 import de.limbusdev.guardianmonsters.guardians.items.medicine.AMedicalItem
 import de.limbusdev.guardianmonsters.guardians.items.medicine.MedicalItem
 import de.limbusdev.guardianmonsters.guardians.monsters.Team
-import de.limbusdev.guardianmonsters.inventory.ui.widgets.team.MonsterListWidget
+import de.limbusdev.guardianmonsters.inventory.ui.widgets.team.GuardianListWidget
 import de.limbusdev.guardianmonsters.services.Services
 import de.limbusdev.guardianmonsters.ui.widgets.ReassuranceWidget
 import de.limbusdev.guardianmonsters.ui.widgets.SimpleClickListener
@@ -55,7 +53,7 @@ open class ItemApplicationWidget
 
         use.replaceOnClick {
 
-            val monsterListWidget = MonsterListWidget(team, { it -> onButton(it) }, item)
+            val monsterListWidget = GuardianListWidget(team, { it -> onButton(it) }, item)
             monsterListWidget.setPosition(-262f, 0f, Align.topLeft)
             addActor(monsterListWidget)
         }

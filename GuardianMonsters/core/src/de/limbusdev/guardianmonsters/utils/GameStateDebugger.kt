@@ -81,7 +81,8 @@ class GameStateDebugger(private val game: Game)
         val ACTIVE_TEAM_SIZE_HERO = 3
         val guardianFactory = GuardiansServiceLocator.guardianFactory
         val heroTeam = Team(4, 3, ACTIVE_TEAM_SIZE_HERO)
-        heroTeam += guardianFactory.createGuardian(1, 1)
+        val firstGuardian = guardianFactory.createGuardian(1, 1)
+        heroTeam += firstGuardian
         heroTeam += guardianFactory.createGuardian(2, 1)
         heroTeam += guardianFactory.createGuardian(3, 1)
 
@@ -90,17 +91,17 @@ class GameStateDebugger(private val game: Game)
         heroTeam += fourthGuardian
 
         // Enable Abilities
-        heroTeam[0].abilityGraph.activateNode(13)
-        heroTeam[0].abilityGraph.setActiveAbility(1, 13)
-        heroTeam[0].abilityGraph.activateNode(5)
-        heroTeam[0].abilityGraph.setActiveAbility(2, 5)
-        heroTeam[0].abilityGraph.activateNode(20)
-        heroTeam[0].abilityGraph.setActiveAbility(3, 20)
-        heroTeam[0].abilityGraph.activateNode(30)
-        heroTeam[0].abilityGraph.setActiveAbility(4, 30)
-        heroTeam[0].abilityGraph.activateNode(35)
-        heroTeam[0].abilityGraph.setActiveAbility(5, 35)
-        heroTeam[0].individualStatistics.earnEXP(4)
+        firstGuardian.abilityGraph.activateNode(13)
+        firstGuardian.abilityGraph.setActiveAbility(1, 13)
+        firstGuardian.abilityGraph.activateNode(5)
+        firstGuardian.abilityGraph.setActiveAbility(2, 5)
+        firstGuardian.abilityGraph.activateNode(20)
+        firstGuardian.abilityGraph.setActiveAbility(3, 20)
+        firstGuardian.abilityGraph.activateNode(30)
+        firstGuardian.abilityGraph.setActiveAbility(4, 30)
+        firstGuardian.abilityGraph.activateNode(35)
+        firstGuardian.abilityGraph.setActiveAbility(5, 35)
+        firstGuardian.stats.earnEXP(4)
         heroTeam[1].abilityGraph.activateNode(5)
         heroTeam[1].abilityGraph.setActiveAbility(1, 5)
         heroTeam[1].abilityGraph.activateNode(60)

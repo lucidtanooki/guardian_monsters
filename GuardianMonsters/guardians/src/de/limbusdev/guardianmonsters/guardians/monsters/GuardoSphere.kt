@@ -93,7 +93,7 @@ class GuardoSphere()
      * @param guardian Guardian to be pushed
      * @return slot, where the Guardian has been placed, null if sphere is full
      */
-    operator fun plus(guardian: AGuardian) : Int
+    fun push(guardian: AGuardian) : Int
     {
         for(slot in range)
         {
@@ -106,13 +106,14 @@ class GuardoSphere()
         throw IllegalStateException("Sphere is full. This should not happen.")
     }
 
-    operator fun plus(guardians: ObjectMap<Int,AGuardian>)
+    fun push(guardians: ObjectMap<Int,AGuardian>)
     {
-        for(key in guardians.keys()) this += guardians[key]
+        for(key in guardians.keys()) { this += guardians[key] }
     }
 
-    operator fun plusAssign(guardian: AGuardian) { plus(guardian) }
-    operator fun plusAssign(guardians: ObjectMap<Int,AGuardian>) { plusAssign(guardians) }
+    operator fun plusAssign(guardian: AGuardian) { push(guardian) }
+    operator fun plusAssign(guardians: ObjectMap<Int,AGuardian>) { push(guardians) }
+
 
     /**
      * Checks if there are vacant slots in the sphere.

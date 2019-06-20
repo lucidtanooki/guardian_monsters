@@ -2,6 +2,7 @@ package de.limbusdev.guardianmonsters.battle
 
 import de.limbusdev.guardianmonsters.assets.paths.AssetPath
 import de.limbusdev.guardianmonsters.guardians.items.Inventory
+import de.limbusdev.guardianmonsters.guardians.monsters.GuardoSphere
 import de.limbusdev.guardianmonsters.guardians.monsters.Team
 import de.limbusdev.guardianmonsters.services.Services
 import de.limbusdev.guardianmonsters.ui.AScreen
@@ -42,11 +43,12 @@ class BattleScreen(inventory: Inventory) : AScreen(BattleHUD(inventory))
      * BattleScreen must get initialized before being shown
      * @param team          [Team] for the human player
      * @param opponentTeam  [Team] for the AI opponent
+     * @param guardoSphere  [GuardoSphere] for banned Guardians
      */
-    fun initialize(team: Team, opponentTeam: Team)
+    fun initialize(team: Team, opponentTeam: Team, guardoSphere: GuardoSphere)
     {
         this.initialized = true
-        battleHUD.initialize(team, opponentTeam)
+        battleHUD.initialize(team, opponentTeam, guardoSphere)
     }
 
 

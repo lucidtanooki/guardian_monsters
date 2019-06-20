@@ -683,14 +683,14 @@ class ModuleGuardiansJUnitTest
 
         // Test pushing
         val pushedGuardian = gf.createGuardian(1,1)
-        sphere + pushedGuardian
+        sphere.push(pushedGuardian)
         assertEquals(sphere[1], pushedGuardian)
 
         // Test full sphere
         for(i in 0 until GuardoSphere.capacity) sphere[i] = gf.createGuardian(1,1)
         assert(sphere.isFull())
 
-        try { sphere + gf.createGuardian(1,1); fail("Exception should have been thrown") }
+        try { sphere.push(gf.createGuardian(1,1)); fail("Exception should have been thrown") }
         catch(e: Exception) { assertEquals(e.message, "Sphere is full. This should not happen.") }
 
         println("[Test 16] GuardoSphere: passed")

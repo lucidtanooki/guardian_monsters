@@ -22,6 +22,7 @@ import de.limbusdev.guardianmonsters.inventory.ui.widgets.items.ItemChoice
 import de.limbusdev.guardianmonsters.services.Services
 
 import de.limbusdev.guardianmonsters.guardians.Side
+import de.limbusdev.guardianmonsters.guardians.monsters.GuardoSphere
 import de.limbusdev.utils.extensions.toLCString
 import de.limbusdev.utils.extensions.toggle
 import ktx.log.info
@@ -47,6 +48,8 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD()
 
     private lateinit var leftTeam                       : Team
     private lateinit var rightTeam                      : Team
+
+    private lateinit var guardoSphere                   : GuardoSphere
 
     private lateinit var battleAnimationStage           : Stage
     private lateinit var stateMachine                   : BattleStateMachine
@@ -118,7 +121,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD()
 
     // .............................................................................. Initialization
     /** Initializes the battle screen with the given teams */
-    fun initialize(heroTeam: Team, opponentTeam: Team, wildEncounter: Boolean = true)
+    fun initialize(heroTeam: Team, opponentTeam: Team, guardoSphere: GuardoSphere, wildEncounter: Boolean = true)
     {
         info(TAG) { "initialize(...)" }
 
@@ -127,6 +130,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD()
         // keep Guardian teams
         this.leftTeam = heroTeam
         this.rightTeam = opponentTeam
+        this.guardoSphere = guardoSphere
 
         // initialize independent battle system
         battleSystem = BattleSystem(heroTeam, opponentTeam, battleEventHandler, wildEncounter)
@@ -292,7 +296,9 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD()
 
             state = State.BAN_SUCCESS
 
-            // TODO HERE Put the banned Guardian into the GuardoSphere
+            check(!guardoSphere.isFull()) { "If GuardoSphere is full, banning should be impossible." }
+            guardoSphere += bannedGuardian
+                // TODO HERE Put the banned Guardian into the GuardoSphere
         }
 
                                                                                            // TESTED

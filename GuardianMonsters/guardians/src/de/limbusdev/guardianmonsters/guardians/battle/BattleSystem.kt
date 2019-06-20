@@ -129,7 +129,7 @@ class BattleSystem
      */
     private fun onAIPlayersTurn()
     {
-        info(TAG) { "onAIPlayersTurn()" }
+        println("$TAG: onAIPlayersTurn()")
 
         check(queue.peekNextSide() != Constant.HERO)
         { "$TAG AI can't take turn. The first monster in queue is not in it's team." }
@@ -450,7 +450,7 @@ class BattleSystem
     abstract class EventHandler
     {
         open fun onGuardianDefeated(guardian: AGuardian) {}
-        open fun onAttack(attacker: AGuardian, target: AGuardian, ability: Ability, rep: AttackCalculationReport) {}
+        open fun onAttack(attacker: AGuardian, target: AGuardian, ability: Ability, report: AttackCalculationReport) {}
         open fun onAreaAttack(attacker: AGuardian, targets: ArrayMap<Int, AGuardian>, ability: Ability, reports: Array<AttackCalculationReport>) {}
         open fun onDefense(defensiveGuardian: AGuardian) {}
         open fun onPlayersTurn() {}
@@ -540,7 +540,7 @@ class BattleSystem
         override fun onGuardianDefeated(guardian: AGuardian)
         { info("BattleSystem.NullEventHandler") { "onGuardianDefeated()" } }
 
-        override fun onAttack(attacker: AGuardian, target: AGuardian, ability: Ability, rep: AttackCalculationReport)
+        override fun onAttack(attacker: AGuardian, target: AGuardian, ability: Ability, report: AttackCalculationReport)
         { info("BattleSystem.NullEventHandler") { "onAttack()" } }
 
         override fun onAreaAttack(attacker: AGuardian, targets: ArrayMap<Int, AGuardian>, ability: Ability, reports: Array<AttackCalculationReport>)

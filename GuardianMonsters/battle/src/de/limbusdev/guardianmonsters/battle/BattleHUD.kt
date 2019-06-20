@@ -206,7 +206,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD()
                 State.STATUS_EFFECT_INFO-> toStatusEffectInfoLabel()
                 State.ESCAPE_SUCCESS    -> toEscapeSuccessInfo()
                 State.ESCAPE_FAILURE    -> toEscapeFailInfo()
-                State.BAN_SUCCESS       -> toBanSuccess()
+                State.BAN_SUCCESS       -> toBanSuccess(bannedGuardian, crystalItem, fieldPos)
                 State.BAN_FAILURE       -> toBanFailure(bannedGuardian, crystalItem, fieldPos)
             }
         }
@@ -269,29 +269,45 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD()
             state = State.ESCAPE_FAILURE
         }
 
-        private fun toBanSuccess()
+        private fun toBanSuccess(bannedGuardian: AGuardian?, crystal: ChakraCrystalItem?, fieldPos: Int?)
         {
+            checkNotNull(bannedGuardian)
+            checkNotNull(crystal)
+            checkNotNull(fieldPos)
             info(TAG) { "${"toBanningSuccess()".padEnd(40)} -> new State: ${State.BAN_SUCCESS}" }
 
+            // Display info label and disable all buttons
             showInfoLabel()
-            infoLabelWidget.typeWrite(Services.getL18N().Battle("battle_message_ban_success"))
+            actionMenu.disableAllChildButtons()
+
+            // Set, what the back button will do and write the ban success message
             actionMenu.setCallbacks(onBackButton = onBanSuccessBackButton)
+            infoLabelWidget.typeWrite(BattleMessages.banGuardianSuccess(bannedGuardian, crystal))
+
+            // Animate banning success and re-enable back button after animation
+            animationWidget.animateBanning(fieldPos, Side.RIGHT, bannedGuardian)
+            { actionMenu.enable(actionMenu.backButton) }
 
             state = State.BAN_SUCCESS
         }
 
+                                                                                           // TESTED
         private fun toBanFailure(bannedGuardian: AGuardian?, crystal: ChakraCrystalItem?, fieldPos: Int?)
         {
             checkNotNull(bannedGuardian)
             checkNotNull(crystal)
             checkNotNull(fieldPos)
-
             info(TAG) { "${"toBanningFailure()".padEnd(40)} -> new State: ${State.BAN_FAILURE}" }
 
+            // Display info label and disable all buttons
             showInfoLabel()
             actionMenu.disableAllChildButtons()
+
+            // Set the back button to continue with the next Guardian, if ban fails
             actionMenu.setCallbacks(onBackButton = onBanFailureBackButton)
             infoLabelWidget.typeWrite(BattleMessages.banGuardianFailure(bannedGuardian, crystal))
+
+            // Animate banning failure and re-enable back button after animation
             animationWidget.animateBanningFailure(fieldPos, Side.RIGHT, bannedGuardian)
             { actionMenu.enable(actionMenu.backButton) }
 
@@ -835,10 +851,13 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD()
             {
                 info("BattleSystem.battleEventHandler") { "onBanningSuccess()" }
 
-                stateMachine.to(State.ANIMATION)
-                infoLabelWidget.typeWrite(BattleMessages.banGuardianSuccess(bannedGuardian, crystal))
+                stateMachine.to(
 
-                stateMachine.to(State.BANNED_LAST, bannedGuardian = bannedGuardian, crystalItem = crystal)
+                        State.BAN_SUCCESS,
+                        bannedGuardian = bannedGuardian,
+                        crystalItem = crystal,
+                        fieldPos = fieldPos
+                )
             }
 
             override fun onBattleEnds(winnerSide: Boolean)
@@ -1029,7 +1048,11 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD()
         onBanSuccessBackButton = {
 
             info(TAG) { "onBanSuccessBackButton"}
-            // TODO what should happen now?
+
+            // TODO
+            // Somewhere the banned Guardian should be put into the GuardoSphere
+            // if the opponents team is empty now or KO, end the battle
+            // if the opponents team is not empty, get the next Guardian to join the fight
         }
 
         onBanFailureBackButton = {

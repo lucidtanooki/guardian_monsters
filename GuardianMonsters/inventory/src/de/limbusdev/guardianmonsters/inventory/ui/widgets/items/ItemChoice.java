@@ -43,6 +43,10 @@ public class ItemChoice extends Group
         overlay.setPosition(0, 0, Align.bottomLeft);
         addActor(overlay);
 
+        detailViewWidget = new ItemApplicationWidget(skin, inventory, team);
+        detailViewWidget.setPosition(20,2,Align.bottomLeft);
+        detailViewWidget.getDelete().setVisible(false);
+
         setUp();
 
         ImageButton back = new ImageButton(skin, "button-back");
@@ -50,9 +54,7 @@ public class ItemChoice extends Group
         addActor(back);
         back.addListener(new SimpleClickListener(() -> remove()));
 
-        detailViewWidget = new ItemApplicationWidget(skin, inventory, team);
-        detailViewWidget.setPosition(20,2,Align.bottomLeft);
-        detailViewWidget.getDelete().setVisible(false);
+
     }
 
     private void setUp ()

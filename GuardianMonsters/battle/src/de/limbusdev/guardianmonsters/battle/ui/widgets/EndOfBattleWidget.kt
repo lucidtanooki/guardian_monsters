@@ -14,7 +14,7 @@ import de.limbusdev.utils.extensions.replaceOnClick
 
 /**
  * Widget for displaying monster status in battle: HP, MP, EXP, Name, Level
- * HINT: Don't forget calling the init() method
+ * HINT: Don't forget calling the initialize() method
  * Created by georg on 03.07.16.
  */
 

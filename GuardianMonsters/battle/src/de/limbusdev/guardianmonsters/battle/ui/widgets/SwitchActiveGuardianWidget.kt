@@ -10,13 +10,12 @@
 package de.limbusdev.guardianmonsters.battle.ui.widgets
 
 import com.badlogic.gdx.graphics.Color
-import com.badlogic.gdx.graphics.g2d.TextureAtlas
 import com.badlogic.gdx.scenes.scene2d.Group
 import com.badlogic.gdx.scenes.scene2d.Touchable
 import com.badlogic.gdx.scenes.scene2d.ui.Button
 import com.badlogic.gdx.scenes.scene2d.ui.Image
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton
-import com.badlogic.gdx.scenes.scene2d.ui.Skin
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable
 import com.badlogic.gdx.utils.Align
 
@@ -26,13 +25,11 @@ import de.limbusdev.guardianmonsters.guardians.monsters.Team
 import de.limbusdev.guardianmonsters.services.Services
 import de.limbusdev.guardianmonsters.ui.Constant
 import de.limbusdev.guardianmonsters.ui.widgets.ATeamChoiceWidget
-import de.limbusdev.guardianmonsters.ui.widgets.Callback
 import de.limbusdev.guardianmonsters.ui.widgets.GuardianStatusWidget
-import de.limbusdev.guardianmonsters.ui.widgets.SimpleClickListener
 import de.limbusdev.guardianmonsters.ui.widgets.TeamCircleWidget
 import de.limbusdev.guardianmonsters.ui.widgets.TiledImage
-import de.limbusdev.utils.extensions.f
 import de.limbusdev.utils.extensions.replaceOnClick
+import ktx.style.get
 
 
 /**
@@ -41,7 +38,7 @@ import de.limbusdev.utils.extensions.replaceOnClick
  * @author Georg Eckert 2018
  */
 
-class SwitchActiveGuardianWidget(battleSkin: Skin, inventorySkin: Skin) : BattleWidget()
+class SwitchActiveGuardianWidget() : BattleWidget()
 {
     // .................................................................................. Properties
     private val guardianStatusWidget    : GuardianStatusWidget
@@ -59,12 +56,15 @@ class SwitchActiveGuardianWidget(battleSkin: Skin, inventorySkin: Skin) : Battle
     // ................................................................................ Constructors
     init
     {
+        val battleSkin = Services.getUI().battleSkin
+        val inventorySkin = Services.getUI().inventorySkin
+
         setSize(Constant.WIDTHf, Constant.HEIGHTf)
-        val bgImg = TiledImage(inventorySkin.getDrawable("bg-pattern-3"), 27, 16)
+        val bgImg = TiledImage(inventorySkin["bg-pattern-3"], 27, 16)
         bgImg.setPosition(0f, 0f, Align.bottomLeft)
         addActor(bgImg)
 
-        guardianStatusWidget = GuardianStatusWidget(Services.getUI().inventorySkin)
+        guardianStatusWidget = GuardianStatusWidget()
         guardianStatusWidget.setPosition(2f, Constant.HEIGHTf, Align.topLeft)
         addActor(guardianStatusWidget)
 
@@ -76,14 +76,14 @@ class SwitchActiveGuardianWidget(battleSkin: Skin, inventorySkin: Skin) : Battle
         switchButton.setPosition(2f, 2f, Align.bottomLeft)
         addActor(switchButton)
 
-        teamChoiceWidget = TeamCircleWidget(Services.getUI().inventorySkin) { nr -> }
-        teamChoiceWidget.setPosition((Constant.WIDTHf - 2), (Constant.HEIGHTf / 2), Align.right)
+        teamChoiceWidget = TeamCircleWidget(Services.getUI().inventorySkin) {}
+        teamChoiceWidget.setPosition(Constant.WIDTHf - 2, Constant.HEIGHTf / 2, Align.right)
         addActor(teamChoiceWidget)
 
         val guardianView = Group()
-        guardianView.setSize(140f, (Constant.HEIGHTf - 36))
-        guardianView.setPosition((Constant.WIDTHf / 2), Constant.HEIGHTf, Align.top)
-        val monsterViewBg = Image(inventorySkin.getDrawable("menu-col-bg"))
+        guardianView.setSize(140f, Constant.HEIGHTf - 36)
+        guardianView.setPosition(Constant.WIDTHf / 2, Constant.HEIGHTf, Align.top)
+        val monsterViewBg = Image(inventorySkin.get<Drawable>("menu-col-bg"))
         monsterViewBg.setPosition(2f, 2f, Align.bottomLeft)
         guardianView.addActor(monsterViewBg)
         guardianImg = Image()
@@ -100,15 +100,13 @@ class SwitchActiveGuardianWidget(battleSkin: Skin, inventorySkin: Skin) : Battle
         this.backButtonCallback = onBack
         this.switchButtonCallback = onSwitch
 
-        backButton.clearListeners()
-        switchButton.clearListeners()
         backButton.replaceOnClick(onBack)
         switchButton.replaceOnClick(onSwitch)
     }
 
     fun initialize(guardian: AGuardian, team: Team, combatTeam: CombatTeam)
     {
-        guardianStatusWidget.init(guardian)
+        guardianStatusWidget.initialize(guardian)
         teamChoiceWidget.init(team, team.getPosition(guardian))
         activateGuardian(guardian, team, combatTeam)
 
@@ -119,7 +117,7 @@ class SwitchActiveGuardianWidget(battleSkin: Skin, inventorySkin: Skin) : Battle
 
     private fun activateGuardian(guardian: AGuardian, team: Team, combatTeam: CombatTeam)
     {
-        if (!combatTeam.isMember(guardian) && guardian.individualStatistics.isFit)
+        if (!combatTeam.isMember(guardian) && guardian.stats.isFit)
         {
             switchButton.touchable = Touchable.enabled
             switchButton.color = Color.WHITE
@@ -130,10 +128,8 @@ class SwitchActiveGuardianWidget(battleSkin: Skin, inventorySkin: Skin) : Battle
             switchButton.color = Color.GRAY
         }
 
-        guardianStatusWidget.init(guardian)
-        val speciesID = guardian.speciesID
-        val currentForm = guardian.abilityGraph.currentForm
-        val sprite = Services.getMedia().getMonsterSprite(speciesID, currentForm)
+        guardianStatusWidget.initialize(guardian)
+        val sprite = Services.getMedia().getMonsterSprite(guardian.speciesID, guardian.currentForm)
         guardianImg.drawable = TextureRegionDrawable(sprite)
     }
 }

@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin
 import com.badlogic.gdx.utils.ArrayMap
 
 import de.limbusdev.guardianmonsters.battle.ui.widgets.BattleWidget
+import de.limbusdev.guardianmonsters.services.Services
 import de.limbusdev.guardianmonsters.ui.AHUD
 import de.limbusdev.guardianmonsters.ui.Constant
 import de.limbusdev.utils.extensions.f
@@ -19,7 +20,7 @@ import ktx.actors.then
 /**
  * Created by Georg Eckert 2016
  */
-abstract class ABattleHUD(skin: Skin) : AHUD(skin)
+abstract class ABattleHUD() : AHUD(Services.getUI().battleSkin)
 {
     protected var widgets = ArrayMap<String, BattleWidget>()
 

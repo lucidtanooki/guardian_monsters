@@ -91,7 +91,7 @@ public class TeamSubMenu extends AInventorySubMenu implements Observer
             System.out.println("Now active in combat: " + team.getActiveTeamSize());
         }));
 
-        monsterStats.init(team.get(0));
+        monsterStats.initialize(team.get(0));
 
         showGuardianInformation(0);
 
@@ -137,7 +137,7 @@ public class TeamSubMenu extends AInventorySubMenu implements Observer
         monsterImg.setPosition(6,202,Align.topLeft);
         monsterView.addActor(monsterImg);
 
-        monsterStats = new GuardianStatusWidget(skin);
+        monsterStats = new GuardianStatusWidget();
         monsterStats.setPosition(140+2,0,Align.bottomLeft);
 
         statPent = new StatusPentagonWidget(skin);
@@ -151,7 +151,7 @@ public class TeamSubMenu extends AInventorySubMenu implements Observer
 
     private void showGuardianInformation(int teamPosition) {
 
-        monsterStats.init(team.get(teamPosition));
+        monsterStats.initialize(team.get(teamPosition));
 
         AGuardian chosenGuardian = team.get(teamPosition);
         int guardianID = chosenGuardian.getSpeciesID();

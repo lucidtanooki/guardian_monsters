@@ -32,10 +32,10 @@ public class GuardianStatusWidget extends Group
     private Group equipmentGroup;
     private Skin skin;
 
-    public GuardianStatusWidget(Skin skin)
+    public GuardianStatusWidget()
     {
         super();
-        this.skin = skin;
+        this.skin = Services.getUI().getInventorySkin();
 
         setSize(140, Constant.HEIGHT-36);
         Image monsterStatsBg = new Image(skin.getDrawable("menu-col-bg"));
@@ -91,7 +91,7 @@ public class GuardianStatusWidget extends Group
     }
 
 
-    public void init(AGuardian m)
+    public void initialize(AGuardian m)
     {
         ISpeciesDescriptionService species = GuardiansServiceLocator.INSTANCE.getSpecies();
         name.setText(Services.getL18N().Guardians().get(species.getCommonNameById(m.getSpeciesDescription().getID(), 0)));  // TODO currentForm

@@ -25,7 +25,7 @@ import de.limbusdev.utils.extensions.f
 
 /**
  * Widget for displaying monster status in battle: HP, MP, EXP, Name, Level
- * HINT: Don't forget calling the init() method
+ * HINT: Don't forget calling the initialize() method
  *
  * @author Georg Eckert 2016
  */

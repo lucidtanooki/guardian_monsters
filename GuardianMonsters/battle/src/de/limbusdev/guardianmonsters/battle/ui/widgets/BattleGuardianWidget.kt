@@ -74,12 +74,16 @@ class BattleGuardianWidget
     {
         val guardianSprite = Services.getMedia().getMonsterSprite(index, metaForm)
 
-        // Flip sprite, if on the left and not already flipped
-        guardianSprite.flip((side == Side.LEFT), false)
-
         // Set Guardian Sprite
         drawable = TextureRegionDrawable(guardianSprite)
         guardianImage.drawable = drawable
+
+        if(side == Side.LEFT)
+        {
+            // Do not flip texture, as it affects all instances
+            guardianImage.setSize(-128f, 128f)
+            guardianImage.setPosition(0f, 0f, Align.bottom)
+        }
     }
 
 

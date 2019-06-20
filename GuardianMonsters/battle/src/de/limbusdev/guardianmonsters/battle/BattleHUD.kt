@@ -39,7 +39,7 @@ import ktx.log.info
  *
  * @author Georg Eckert 2015
  */
-class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().battleSkin)
+class BattleHUD(private val inventory: Inventory) : ABattleHUD()
 {
     // .................................................................................. Properties
     // .................................................................. Logic
@@ -556,7 +556,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD(Services.getUI().
         abilityDetailBackButton.disableAllButBackButton()
         abilityInfoMenuFrame.disableAllChildButtons()
 
-        switchActiveGuardianWidget = SwitchActiveGuardianWidget(skin, Services.getUI().inventorySkin)
+        switchActiveGuardianWidget = SwitchActiveGuardianWidget()
         switchActiveGuardianWidget.setCallbacks(
 
                 onBack = onTeamMenuBackButton,

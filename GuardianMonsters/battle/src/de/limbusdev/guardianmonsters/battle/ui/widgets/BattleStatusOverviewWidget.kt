@@ -19,7 +19,7 @@ import ktx.actors.then
 
 /**
  * Widget for displaying monster status in battle: HP, MP, EXP, Name, Level
- * HINT: Don't forget calling the init() method
+ * HINT: Don't forget calling the initialize() method
  * Created by Georg Eckert 2016
  */
 class BattleStatusOverviewWidget() : BattleWidget()

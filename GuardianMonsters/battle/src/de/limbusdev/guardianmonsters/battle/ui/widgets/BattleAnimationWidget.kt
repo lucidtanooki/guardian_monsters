@@ -36,7 +36,7 @@ import ktx.actors.plusAssign
 
 
 /**
- * HINT: Don't forget calling the init() method
+ * HINT: Don't forget calling the initialize() method
  *
  * @author Georg Eckert 2016
  */

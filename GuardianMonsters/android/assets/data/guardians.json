@@ -115,7 +115,6 @@
       "id": 4,
       "metamorphosisNodes": [91,92],
       "abilities": [
-        {"abilityID": 2, "element": "none", "abilityPos": 0},
         {"abilityID": 2, "element": "none", "abilityPos": 0}
       ],
       "basestats": {

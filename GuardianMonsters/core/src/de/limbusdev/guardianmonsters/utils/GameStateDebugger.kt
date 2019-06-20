@@ -110,6 +110,10 @@ class GameStateDebugger(private val game: Game)
         heroTeam[2].abilityGraph.activateNode(30)
         heroTeam[2].abilityGraph.setActiveAbility(2, 30)
 
+        // fourthGuardian: first Ability is automatically active
+        // optional: fourthGuardian.abilityGraph.setActiveAbility(0,0)
+
+
         val oppoTeam = Team(3, 3, 1)
         oppoTeam += guardianFactory.createGuardian(4, 1)
         oppoTeam += guardianFactory.createGuardian(5, 1)

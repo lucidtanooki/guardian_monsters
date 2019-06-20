@@ -39,7 +39,7 @@ public class ItemsSubMenu extends AInventorySubMenu
         // ......................................................................... SCROLLABLE LIST
         Array<Item.Category> filters = new Array<>();
         filters.add(Item.Category.MEDICINE);
-        itemListWidget = new ItemListWidget(skin, inventory, this, filters);
+        itemListWidget = new ItemListWidget(inventory, this, filters);
         itemListWidget.setPosition(68,0,Align.bottomLeft);
 
         addActor(itemListWidget);

@@ -17,6 +17,7 @@ import com.badlogic.gdx.utils.ArrayMap;
 import de.limbusdev.guardianmonsters.guardians.items.Inventory;
 import de.limbusdev.guardianmonsters.guardians.items.Item;
 import de.limbusdev.guardianmonsters.guardians.items.ItemSignal;
+import de.limbusdev.guardianmonsters.services.Services;
 
 /**
  * @author Georg Eckert 2017
@@ -36,10 +37,10 @@ public class ItemListWidget extends Group implements Listener<ItemSignal> {
         void onChoosingItem(Item item);
     }
 
-    public ItemListWidget(Skin skin, Inventory inventory, ClickListener handler, Array<Item.Category> filters)
+    public ItemListWidget(Inventory inventory, ClickListener handler, Array<Item.Category> filters)
     {
         this.inventory = inventory;
-        this.skin = skin;
+        this.skin = Services.getUI().getInventorySkin();
         this.clickListener = handler;
         this.currentFilters = filters;
 

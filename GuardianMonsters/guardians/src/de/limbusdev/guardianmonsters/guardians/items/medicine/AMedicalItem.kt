@@ -18,4 +18,6 @@ abstract class AMedicalItem(name: String) : Item(name, Category.MEDICINE)
     abstract fun apply(guardian: AGuardian)
 
     abstract fun applicable(guardian: AGuardian): Boolean
+
+    abstract val type: Type
 }

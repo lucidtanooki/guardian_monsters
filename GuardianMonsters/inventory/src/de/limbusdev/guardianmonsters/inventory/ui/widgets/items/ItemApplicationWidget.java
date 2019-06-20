@@ -52,7 +52,7 @@ public class ItemApplicationWidget extends Group implements MonsterListWidget.Ca
 
         use.addListener(new SimpleClickListener(() ->
         {
-            MonsterListWidget monsterListWidget = new MonsterListWidget(getSkin(), team, ItemApplicationWidget.this, item);
+            MonsterListWidget monsterListWidget = new MonsterListWidget(team, ItemApplicationWidget.this, item);
             monsterListWidget.setPosition(-262, 0, Align.topLeft);
             addActor(monsterListWidget);
         }));

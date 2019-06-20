@@ -13,6 +13,7 @@ import com.badlogic.gdx.utils.ArrayMap;
 import de.limbusdev.guardianmonsters.guardians.items.Item;
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 import de.limbusdev.guardianmonsters.guardians.monsters.Team;
+import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.ui.Constant;
 
 /**
@@ -27,7 +28,9 @@ public class MonsterListWidget extends Group {
     private Callbacks handler;
     private Image blackLayer;
 
-    public MonsterListWidget(Skin skin, Team team, Callbacks cBhandler, Item item) {
+    public MonsterListWidget(Team team, Callbacks cBhandler, Item item)
+    {
+        Skin skin = Services.getUI().getInventorySkin();
 
         this.handler = cBhandler;
 
@@ -75,7 +78,8 @@ public class MonsterListWidget extends Group {
     }
 
 
-    public interface Callbacks {
+    public interface Callbacks
+    {
         /**
          * @param i
          * @return if the list should stay opened

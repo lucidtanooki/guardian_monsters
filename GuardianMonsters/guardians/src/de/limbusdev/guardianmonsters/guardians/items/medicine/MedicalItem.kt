@@ -21,7 +21,7 @@ class MedicalItem
 (
         name: String,
         val value: Int,
-        val type: Type
+        override val type: Type
 )
     : AMedicalItem(name)
 {

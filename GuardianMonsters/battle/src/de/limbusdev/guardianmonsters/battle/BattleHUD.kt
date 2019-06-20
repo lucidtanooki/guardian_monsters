@@ -177,7 +177,9 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD()
      */
     private inner class BattleStateMachine
     {
-        private var state: State = State.BATTLE_START
+        var state: State = State.BATTLE_START
+            private set
+
         private val TAG : String = "BattleStateMachine"
 
         /** Use only named parameters. */
@@ -1073,6 +1075,9 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD()
         onEscapeFailedLabelBackButton = {
 
             info(TAG) { "onEscapeFailedLabelBackButton" }
+
+            // Allow running at the beginning, without losing a turn
+            if(stateMachine.state != State.BATTLE_START) { battleSystem.nextGuardian() }
             battleSystem.continueBattle()
         }
 

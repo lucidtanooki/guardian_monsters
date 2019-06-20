@@ -41,7 +41,7 @@ public class TeamSubMenu extends AInventorySubMenu implements Observer
 
     public TeamSubMenu(Skin skin, Team team) {
 
-        super(skin);
+        super();
 
         choiceHandler = position -> {
 

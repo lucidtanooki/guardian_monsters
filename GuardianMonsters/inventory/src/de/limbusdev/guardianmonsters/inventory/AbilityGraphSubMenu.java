@@ -43,7 +43,7 @@ public class AbilityGraphSubMenu extends AInventorySubMenu implements Listener<G
     // ................................................................................. CONSTRUCTOR
     public AbilityGraphSubMenu(Skin skin, Team team) {
 
-        super(skin);
+        super();
         this.team = team;
 
         graphWidget = new GraphWidget(skin, this);

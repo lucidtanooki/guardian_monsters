@@ -27,7 +27,7 @@ object BattleMessages
     fun tryingToBan(guardian: AGuardian, item: Item): String
     {
         return l18nBattle().format(
-                "batt_message_ban_trial",
+                "battle_message_ban_trial",
                 tryGetNickName(guardian),
                 itemName(item.name)
         )
@@ -36,7 +36,7 @@ object BattleMessages
     fun banGuardianFailure(guardian: AGuardian, item: Item): String
     {
         return l18nBattle().format(
-                "batt_message_ban_failure",
+                "battle_message_ban_failure",
                 tryGetNickName(guardian)
         )
     }
@@ -44,7 +44,7 @@ object BattleMessages
     fun banGuardianSuccess(guardian: AGuardian, item: Item): String
     {
         return l18nBattle().format(
-                "batt_message_ban_success",
+                "battle_message_ban_success",
                 tryGetNickName(guardian)
         )
     }

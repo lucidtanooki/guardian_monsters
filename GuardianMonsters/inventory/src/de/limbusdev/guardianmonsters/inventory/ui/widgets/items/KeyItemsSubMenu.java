@@ -26,7 +26,7 @@ public class KeyItemsSubMenu extends AInventorySubMenu {
 
     public KeyItemsSubMenu(Skin skin, Inventory inventory) {
 
-        super(skin);
+        super();
 
         Label bgLabel = new Label("", skin, "paper");
         bgLabel.setSize(424, 200);
@@ -55,7 +55,8 @@ public class KeyItemsSubMenu extends AInventorySubMenu {
         keyItemPositions.put(itemDB.getItem("relict-lindworm"),     new IntVec2(38,79));
         keyItemPositions.put(itemDB.getItem("relict-demon"),        new IntVec2(70,79));
 
-        for(Item key : keyItemPositions.keys()) {
+        for(Item key : keyItemPositions.keys())
+        {
             if(inventory.getItems().containsKey(key)) {
                 Image img = new Image(skin.getDrawable(key.getName() + "-big"));
                 IntVec2 pos = keyItemPositions.get(key);

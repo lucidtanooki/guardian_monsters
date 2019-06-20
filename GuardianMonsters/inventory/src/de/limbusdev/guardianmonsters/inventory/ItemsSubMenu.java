@@ -29,7 +29,7 @@ public class ItemsSubMenu extends AInventorySubMenu
 
     public ItemsSubMenu(Skin skin, Inventory inventory, Team team) {
 
-        super(skin);
+        super();
         this.team = team;
         this.inventory = inventory;
 

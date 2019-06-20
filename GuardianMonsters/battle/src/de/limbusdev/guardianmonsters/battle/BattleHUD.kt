@@ -93,6 +93,8 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD()
     private lateinit var onMainMenuRunButton            : () -> Unit
     private lateinit var onTeamMenuBackButton           : () -> Unit
     private lateinit var onTeamMenuSwitchButton         : () -> Unit
+    private lateinit var onBanSuccessBackButton         : () -> Unit
+    private lateinit var onBanFailureBackButton         : () -> Unit
 
     private lateinit var battleEventHandler             : BattleSystem.EventHandler
     private lateinit var onBattleAnimationHitComplete   : () -> Unit
@@ -185,7 +187,8 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD()
                 winnerSide: Boolean? = null,
                 aID: Ability.aID? = null,
                 bannedGuardian: AGuardian? = null,
-                crystalItem: ChakraCrystalItem? = null
+                crystalItem: ChakraCrystalItem? = null,
+                fieldPos: Int? = null
         ) {
             when(newState)
             {
@@ -203,6 +206,8 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD()
                 State.STATUS_EFFECT_INFO-> toStatusEffectInfoLabel()
                 State.ESCAPE_SUCCESS    -> toEscapeSuccessInfo()
                 State.ESCAPE_FAILURE    -> toEscapeFailInfo()
+                State.BAN_SUCCESS       -> toBanSuccess()
+                State.BAN_FAILURE       -> toBanFailure(bannedGuardian, crystalItem, fieldPos)
             }
         }
 
@@ -262,6 +267,35 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD()
             actionMenu.setCallbacks(onBackButton = onEscapeFailedLabelBackButton)
 
             state = State.ESCAPE_FAILURE
+        }
+
+        private fun toBanSuccess()
+        {
+            info(TAG) { "${"toBanningSuccess()".padEnd(40)} -> new State: ${State.BAN_SUCCESS}" }
+
+            showInfoLabel()
+            infoLabelWidget.typeWrite(Services.getL18N().Battle("battle_message_ban_success"))
+            actionMenu.setCallbacks(onBackButton = onBanSuccessBackButton)
+
+            state = State.BAN_SUCCESS
+        }
+
+        private fun toBanFailure(bannedGuardian: AGuardian?, crystal: ChakraCrystalItem?, fieldPos: Int?)
+        {
+            checkNotNull(bannedGuardian)
+            checkNotNull(crystal)
+            checkNotNull(fieldPos)
+
+            info(TAG) { "${"toBanningFailure()".padEnd(40)} -> new State: ${State.BAN_FAILURE}" }
+
+            showInfoLabel()
+            actionMenu.disableAllChildButtons()
+            actionMenu.setCallbacks(onBackButton = onBanFailureBackButton)
+            infoLabelWidget.typeWrite(BattleMessages.banGuardianFailure(bannedGuardian, crystal))
+            animationWidget.animateBanningFailure(fieldPos, Side.RIGHT, bannedGuardian)
+            { actionMenu.enable(actionMenu.backButton) }
+
+            state = State.BAN_FAILURE
         }
 
         private fun toAbilityMenu()
@@ -503,6 +537,8 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD()
         STATUS_EFFECT_INFO,         // shows an information label about new status effect
         ESCAPE_SUCCESS,             // shown, when escaping succeeds
         ESCAPE_FAILURE,             // shown, when escaping fails
+        BAN_SUCCESS,            // shown, when banning succeeds
+        BAN_FAILURE             // shown, when banning fails
     }
 
 
@@ -786,9 +822,13 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD()
             {
                 info("BattleSystem.battleEventHandler") { "onBanningFailure()" }
 
-                stateMachine.to(State.ANIMATION)
-                infoLabelWidget.typeWrite(BattleMessages.banGuardianFailure(bannedGuardian, crystal))
-                animationWidget.animateBanningFailure(fieldPos, Side.RIGHT, bannedGuardian)
+                stateMachine.to(
+
+                        State.BAN_FAILURE,
+                        bannedGuardian = bannedGuardian,
+                        crystalItem = crystal,
+                        fieldPos = fieldPos
+                )
             }
 
             override fun onBanningSuccess(bannedGuardian: AGuardian, crystal: ChakraCrystalItem, fieldPos: Int)
@@ -985,6 +1025,20 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD()
             stateMachine.to(State.ABILITY_MENU)
         }
 
+        // ......................................................................................... ban success / fail
+        onBanSuccessBackButton = {
+
+            info(TAG) { "onBanSuccessBackButton"}
+            // TODO what should happen now?
+        }
+
+        onBanFailureBackButton = {
+
+            info(TAG) { "onBanFailureBackButton" }
+            battleSystem.nextGuardian()
+            battleSystem.continueBattle()
+        }
+
 
         // ......................................................................................... escape success / fail
         onEscapeSuccessLabelBackButton = {
@@ -992,6 +1046,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD()
             info(TAG) { "onEscapeSuccessLabelBackButton" }
             goToPreviousScreen()
         }
+
         onEscapeFailedLabelBackButton = {
 
             info(TAG) { "onEscapeFailedLabelBackButton" }

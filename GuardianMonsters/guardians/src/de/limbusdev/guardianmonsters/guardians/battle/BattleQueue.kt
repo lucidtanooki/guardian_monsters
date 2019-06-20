@@ -46,9 +46,9 @@ class BattleQueue
     init
     {
         currentRound = Array()
-        nextRound = Array()
+        nextRound    = Array()
 
-        combatTeamLeft = CombatTeam(left)
+        combatTeamLeft  = CombatTeam(left)
         combatTeamRight = CombatTeam(right)
         currentRound.addAll(combatTeamLeft.values().toArray())
         currentRound.addAll(combatTeamRight.values().toArray())
@@ -150,9 +150,7 @@ class BattleQueue
         val combatTeam: CombatTeam
         val team: Team
 
-        val side = getTeamSideFor(defeated)
-
-        when(side)
+        when(getTeamSideFor(defeated))
         {
             Side.LEFT ->
             {
@@ -185,17 +183,11 @@ class BattleQueue
             }
         }
 
+        checkNotNull(substitute) { "Do not call randomlyExchangeDefeated() if there is no Guardian left in team." }
 
-        if (substitute == null)
-        {
-            throw IllegalStateException("Do not call randomlyExchangeDefeated() if there is no Guardian left in team.")
-        }
-        else
-        {
-            nextRound.add(substitute)
-            setChanged()
-            notifyObservers()
-        }
+        nextRound.add(substitute)
+        setChanged()
+        notifyObservers()
 
         return substitute
     }

@@ -385,8 +385,8 @@ class BattleSystem
     {
         check(isWildEncounter) { "Guardians can be banned in wild encounters only!" }
 
-        check(queue.combatTeamRight.countFitMembers() > 1)
-        { "Banning Guardians is possible only, when there is only 1 Guardian left." }
+        check(queue.combatTeamRight.countFitMembers() == 1)
+        { "Banning Guardians is possible only, when there is only 1 Guardian on the battle field." }
 
         val fieldPos = queue.getFieldPositionFor(bannedGuardian)
 
@@ -397,8 +397,8 @@ class BattleSystem
     {
         check(isWildEncounter) { "Guardians can be banned in wild encounters only!" }
 
-        check(queue.combatTeamRight.countFitMembers() > 1)
-        { "Banning Guardians is possible only, when there is only 1 Guardian left." }
+        check(queue.combatTeamRight.countFitMembers() == 1)
+        { "Banning Guardians is possible only, when there is only 1 Guardian on the battle field." }
 
         val lastGuardian = queue.combatTeamRight.getRandomFitMember()
         banWildGuardian(lastGuardian, item)

@@ -45,7 +45,7 @@ public class EncycloSubMenu extends AInventorySubMenu
 
     public EncycloSubMenu(Skin skin) {
 
-        super(skin);
+        super();
         layout(skin);
         init(1);
 

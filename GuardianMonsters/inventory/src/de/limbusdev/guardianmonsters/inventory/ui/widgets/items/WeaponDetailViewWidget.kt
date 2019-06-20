@@ -42,9 +42,7 @@ class WeaponDetailViewWidget
         val gap = 18f
 
         valueLabels = ArrayMap()
-        var value: Label
         val labels = arrayOf("hp", "mp", "exp", "pstr", "pdef", "mstr", "mdef", "speed")
-        var key: Image
         var reset = 0
 
         for (i in labels.indices)
@@ -55,15 +53,15 @@ class WeaponDetailViewWidget
                 reset = i
             }
 
-            key = Image(skin.get<Drawable>("stats-symbol-${labels[i]}"))
+            val key = Image(skin.get<Drawable>("stats-symbol-${labels[i]}"))
             key.setSize(16f, 16f)
             key.setPosition(offX, offY - gap * (i + 1 - reset), Align.topLeft)
             addActor(key)
 
-            value = Label("-", skin, "default")
-            value.setPosition(offX + 17, offY - gap * (i + 1 - reset), Align.topLeft)
-            addActor(value)
-            valueLabels[labels[i]] = value
+            val label = Label("-", skin, "default")
+            label.setPosition(offX + 17, offY - gap * (i + 1 - reset), Align.topLeft)
+            addActor(label)
+            valueLabels[labels[i]] = label
         }
     }
 

@@ -51,7 +51,7 @@ public class AbilityChoiceSubMenu extends AInventorySubMenu
 
     public AbilityChoiceSubMenu(Skin skin, Team team) {
 
-        super(skin);
+        super();
         this.team = team;
 
         currentlyChosenAbility = 0;
@@ -127,7 +127,7 @@ public class AbilityChoiceSubMenu extends AInventorySubMenu
         abilitySlotChoice = new Group();
         abilitySlotChoice.setSize(Constant.WIDTH, Constant.HEIGHT);
         abilitySlotChoice.setPosition(0,0,Align.bottomLeft);
-        Image overlay = new Image(getSkin().getDrawable("black-a80"));
+        Image overlay = new Image(skin.getDrawable("black-a80"));
         overlay.setSize(Constant.WIDTH, Constant.HEIGHT);
         overlay.setPosition(0,0,Align.bottomLeft);
         abilitySlotChoice.addActor(overlay);
@@ -157,7 +157,7 @@ public class AbilityChoiceSubMenu extends AInventorySubMenu
 
     private void refreshAbilitySlotButtons() {
 
-        System.out.println("REfresh Buttons");
+        System.out.println("Refresh Buttons");
 
         abilityButtons.clear();
         abilityButtonTable.clearChildren();
@@ -173,7 +173,7 @@ public class AbilityChoiceSubMenu extends AInventorySubMenu
             if(abilityID != null) {
 
                 Ability ability = GuardiansServiceLocator.INSTANCE.getAbilities().getAbility(abilityID);
-                TextButton tb = new TextButton(translation.get(ability.getName()), getSkin(), "item-button-sandstone");
+                TextButton tb = new TextButton(translation.get(ability.getName()), Services.getUI().getInventorySkin(), "item-button-sandstone");
 
                 tb.addListener(new SimpleClickListener(() -> {
 

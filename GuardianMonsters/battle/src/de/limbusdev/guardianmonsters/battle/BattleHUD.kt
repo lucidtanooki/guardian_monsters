@@ -318,7 +318,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD()
             reset()
 
             showInfoLabel()
-            val textKey = if(winnerSide) "batt_you_won" else "batt_game_over"
+            val textKey = if(winnerSide) "battle_you_won" else "battle_game_over"
             infoLabelWidget.typeWrite(Services.getL18N().Battle(textKey))
             actionMenu.setCallbacks(onBackButton = onEndOfBattleLabelBackButton)
 
@@ -682,7 +682,12 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD()
         onEndOfBattleLabelBackButton = {
 
             info(TAG) { "onEndOfBattleLabelBackButton" }
-            if(leftTeam.allKO)
+
+            // Battle is lost, when all active Guardians are KO
+            // Revive them, to prevent this. Even fit Guardians
+            // in the team do not help. Only those currently in
+            // the battle are taken into account.
+            if(battleSystem.queue.combatTeamLeft.isKO())
             {
                 // Battle is lost, restart game
                 Services.getAudio().stopMusic()

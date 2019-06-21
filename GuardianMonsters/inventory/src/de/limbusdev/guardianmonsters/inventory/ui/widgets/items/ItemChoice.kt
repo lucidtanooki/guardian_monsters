@@ -57,7 +57,7 @@ class ItemChoice
         addActor(topBar)
 
         // Top Bar Label
-        val label = Label(Services.I18N().Inventory().get("in_battle_item"), skin.get<Label.LabelStyle>("burgund"))
+        val label = Label(Services.I18N().Inventory("in_battle_item"), skin, "burgund")
         label.setSize(Constant.WIDTHf/3, 32f)
         label.setPosition(Constant.WIDTHf/2, Constant.HEIGHTf - 18, Align.center)
         label.setAlignment(Align.center, Align.center)

@@ -423,7 +423,7 @@ class BattleAnimationWidget
     )
         : Action
     {
-        val abilityMedia = AbilityMediaDB.get(ability.name)
+        val abilityMedia = AbilityMediaDB[ability.name]
 
         // ...................................................... Setup Actions
         // Short delay before ability starts
@@ -437,7 +437,7 @@ class BattleAnimationWidget
         val moveToOriginAction = moveToAligned(origin.xf, origin.yf, Align.bottom, .4f, Interpolation.pow2In)
 
         // Plays the attacks sound
-        val path = AssetPath.Audio.SFX.BATTLE().getValue(abilityMedia.sfxType.toString().toUpperCase())[0]
+        val path = AssetPath.Audio.SFX.BATTLE(abilityMedia.sfxType, 0)
         val playSFXAction           = runThis { Services.Audio().playSound(path) }
 
         // Plays the ability animation

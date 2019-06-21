@@ -2,6 +2,7 @@ package de.limbusdev.guardianmonsters.guardians.battle
 
 
 import com.badlogic.gdx.math.MathUtils
+import de.limbusdev.guardianmonsters.guardians.Constant
 
 import de.limbusdev.guardianmonsters.guardians.GuardiansServiceLocator
 import de.limbusdev.guardianmonsters.guardians.Logger
@@ -29,8 +30,8 @@ object BattleCalculator
     {
         Logger.selfDefense(TAG)
         val report = AttackCalculationReport(defender)
-        defender.individualStatistics.modifyPDef(5)
-        defender.individualStatistics.modifyMDef(5)
+        defender.stats.modifyPDef(5)
+        defender.stats.modifyMDef(5)
 
         return report
     }
@@ -240,8 +241,8 @@ object BattleCalculator
     {
         val chanceToRun = when(attackingTeam.meanLevel > escapingTeam.meanLevel)
         {
-            true  -> 0.2f
-            false -> 0.9f
+            true  -> Constant.escapeChanceWeaker
+            false -> Constant.escapeChanceStronger
         }
 
         return MathUtils.randomBoolean(chanceToRun)

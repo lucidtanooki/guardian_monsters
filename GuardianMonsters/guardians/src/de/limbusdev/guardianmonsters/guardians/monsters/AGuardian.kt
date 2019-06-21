@@ -50,10 +50,14 @@ abstract class AGuardian protected constructor(val uuid: String) : Observable()
 
 
     // ........................................................... delegations: IndividualStatistics
-    val stats    : IndividualStatistics get() = individualStatistics
-    val species  : SpeciesDescription   get() = speciesDescription
-    val elements : Array<Element>       get() = species.getElements(currentForm)
 
+    /** Returns [IndividualStatistics] component of this Guardian. */
+    val stats    : IndividualStatistics get() = individualStatistics
+
+    /** Returns [SpeciesDescription] component of this Guardian. */
+    val species  : SpeciesDescription   get() = speciesDescription
+
+    val elements : Array<Element>       get() = species.getElements(currentForm)
     fun isOfElement(element: Element) : Boolean = elements.contains(element, false)
 
 

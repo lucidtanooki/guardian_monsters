@@ -25,5 +25,8 @@ interface Constant
         val HERO = Side.LEFT
 
         val OPPONENT = Side.RIGHT
+
+        const val escapeChanceStronger = 0.9f
+        const val escapeChanceWeaker   = 0.2f
     }
 }

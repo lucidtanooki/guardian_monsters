@@ -24,15 +24,15 @@ class AbilityMedia
 
     override fun equals(other: Any?): Boolean
     {
-        if(this === other) return true
-        if(javaClass != other?.javaClass) return false
+        if(this === other)                  return true
+        if(javaClass != other?.javaClass)   return false
 
         other as AbilityMedia
 
-        if(name != other.name) return false
-        if(sfxIndex != other.sfxIndex) return false
-        if(sfxType != other.sfxType) return false
-        if(animationType != other.animationType) return false
+        if(name != other.name)                      return false
+        if(sfxIndex != other.sfxIndex)              return false
+        if(sfxType != other.sfxType)                return false
+        if(animationType != other.animationType)    return false
 
         return true
     }

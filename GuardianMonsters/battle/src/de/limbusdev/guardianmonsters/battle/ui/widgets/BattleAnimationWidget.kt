@@ -30,9 +30,11 @@ import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian
 import de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics.StatusEffect
 import de.limbusdev.guardianmonsters.services.Services
 import de.limbusdev.guardianmonsters.ui.Constant
+import de.limbusdev.utils.extensions.arrayMapOf
 import de.limbusdev.utils.extensions.set
 import de.limbusdev.utils.geometry.IntVec2
 import ktx.actors.plusAssign
+import ktx.collections.gdxMapOf
 
 
 /**
@@ -65,18 +67,11 @@ class BattleAnimationWidget
     {
         setBounds(0f, 0f, 0f, 0f)
 
-        guardianSprites = ArrayMap();
-        guardianSprites[Side.LEFT] = ArrayMap()
-        guardianSprites[Side.RIGHT] = ArrayMap()
-
-        occupiedPositions = ArrayMap()
-        occupiedPositions[Side.LEFT] = ArrayMap()
-        occupiedPositions[Side.RIGHT] = ArrayMap()
+        guardianSprites         = arrayMapOf(Side.LEFT to ArrayMap(), Side.RIGHT to ArrayMap())
+        occupiedPositions       = arrayMapOf(Side.LEFT to ArrayMap(), Side.RIGHT to ArrayMap())
 
         // Status Effect Animations
-        statusEffectIndicators= ArrayMap()
-        statusEffectIndicators[Side.LEFT] = ArrayMap()
-        statusEffectIndicators[Side.RIGHT] = ArrayMap()
+        statusEffectIndicators  = arrayMapOf(Side.LEFT to ArrayMap(), Side.RIGHT to ArrayMap())
 
         // Initialize all status indicators to healthy
         for (i in 0..2)
@@ -213,7 +208,7 @@ class BattleAnimationWidget
     /** Animates the impact of an area attack for a whole side. */
     private fun animateAreaAttackImpact(side: Side)
     {
-        guardianSprites[side].values().forEach { defenderSprite -> defenderSprite += impactAction }
+        guardianSprites[side].values().forEach { it += impactAction }
     }
 
     fun animateMonsterKO(pos: Int, side: Side)
@@ -223,37 +218,47 @@ class BattleAnimationWidget
 
     fun animateGuardianSubstitution
     (
-            pos: Int,
+            pos : Int,
             side: Side,
             onSubstitutionComplete: () -> Unit,
-            substituted: AGuardian,
-            substitute: AGuardian
+            substituted : AGuardian,
+            substitute  : AGuardian
     ) {
-        val substitutesID = substitute.speciesID
-        val substitutesForm = substitute.currentForm
         val guardianWidget = guardianSprites[side][pos]
         substitute.addObserver(guardianWidget)
-        guardianWidget.substitute(substitutesID, substitutesForm, side) { onSubstitutionComplete.invoke() }
+
+        guardianWidget.substitute(
+
+                substitute.speciesID,
+                substitute.currentForm,
+                side,
+                onSubstitutionComplete
+        )
     }
 
     fun animateReplacingDefeatedGuardian
     (
-            pos: Int,
+            pos : Int,
             side: Side,
             onSubstitutionComplete: () -> Unit,
-            substituted: AGuardian,
-            substitute: AGuardian
+            substituted : AGuardian,
+            substitute  : AGuardian
     ) {
-        val substitutesID = substitute.speciesID
-        val substitutesForm = substitute.currentForm
         val guardianWidget = guardianSprites[side][pos]
         substitute.addObserver(guardianWidget)
-        guardianWidget.replaceDefeated(substitutesID, substitutesForm, side) { onSubstitutionComplete.invoke() }
+
+        guardianWidget.replaceDefeated(
+
+                substitute.speciesID,
+                substitute.currentForm,
+                side,
+                onSubstitutionComplete
+        )
     }
 
     fun animateBanning
     (
-            pos: Int,
+            pos : Int,
             side: Side,
             guardianToBeBanned: AGuardian,
             onBanningTrialComplete: () -> Unit
@@ -263,7 +268,7 @@ class BattleAnimationWidget
 
     fun animateBanningFailure
     (
-            pos: Int,
+            pos : Int,
             side: Side,
             guardianToBeBanned: AGuardian,
             onBanningFailureComplete: () -> Unit = {}
@@ -283,7 +288,7 @@ class BattleAnimationWidget
             false -> Side.RIGHT
         }
 
-        val anim = Services.Media().getAttackAnimation(ability.name) as Animation<TextureRegion>
+        val anim = Services.Media().getAttackAnimation(ability.name)
         val sra = SelfRemovingAnimation(anim)
         anim.frameDuration = .1f
         // Ability direction
@@ -294,7 +299,7 @@ class BattleAnimationWidget
         }
         sra.setAlign(Align.bottom)
 
-        val abilityMedia = AbilityMediaDB.getInstance().getAbilityMedia(ability.name)
+        val abilityMedia = AbilityMediaDB.get(ability.name)
 
         when (abilityMedia.animationType)
         {
@@ -325,7 +330,7 @@ class BattleAnimationWidget
 
     private fun animateAreaAttack(ability: Ability, defSide: Side)
     {
-        val anim = Services.Media().getAttackAnimation(ability.name) as Animation<TextureRegion>
+        val anim = Services.Media().getAttackAnimation(ability.name)
         val sra = SelfRemovingAnimation(anim)
         anim.frameDuration = .1f
         // Ability direction
@@ -359,7 +364,7 @@ class BattleAnimationWidget
     private fun updateGuardianSpriteZOrder()
     {
         zSortedGuardianSprites.sort(BattleGuardianWidget.ZComparator())
-        zSortedGuardianSprites.forEach { img -> img.zIndex = zSortedGuardianSprites.indexOf(img, true) }
+        zSortedGuardianSprites.forEach { it.zIndex = zSortedGuardianSprites.indexOf(it, true) }
     }
 
     /** Returns the coordinates at which a sprite should be placed, according to it's side and position. */
@@ -415,7 +420,7 @@ class BattleAnimationWidget
     )
         : Action
     {
-        val abilityMedia = AbilityMediaDB.getInstance().getAbilityMedia(ability.name)
+        val abilityMedia = AbilityMediaDB.get(ability.name)
 
         // ...................................................... Setup Actions
         // Short delay before ability starts
@@ -483,7 +488,7 @@ class BattleAnimationWidget
 
     private fun createAreaAttackAnimationSequence(ability: Ability, side: Side, defSide: Side) : Action
     {
-        val abilityMedia = AbilityMediaDB.getInstance().getAbilityMedia(ability.name)
+        val abilityMedia = AbilityMediaDB[ability.name]
         val path = AssetPath.Audio.SFX.BATTLE().getValue(abilityMedia.sfxType.toString().toUpperCase())[0]
 
         return sequence(

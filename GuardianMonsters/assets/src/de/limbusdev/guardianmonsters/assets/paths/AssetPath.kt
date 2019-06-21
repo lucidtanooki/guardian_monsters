@@ -70,6 +70,10 @@ object AssetPath
                     "WATER" to battleSFXWater,
                     "SPELL" to battleSFXSpell
             )
+
+            fun BATTLE(sfxName: String) = BATTLE()[sfxName]
+            fun BATTLE(sfxName: Enum<*>) : Array<String> = BATTLE()[sfxName.toString().toUpperCase()] ?: battleSFXHit
+            fun BATTLE(sfxType: Enum<*>, index: Int) : String = BATTLE(sfxType)[index]
         }
 
         object Music

@@ -32,6 +32,8 @@ import de.limbusdev.guardianmonsters.services.Services
 import de.limbusdev.guardianmonsters.ui.Constant
 import de.limbusdev.utils.extensions.arrayMapOf
 import de.limbusdev.utils.extensions.set
+import de.limbusdev.utils.extensions.toLCString
+import de.limbusdev.utils.extensions.toUCString
 import de.limbusdev.utils.geometry.IntVec2
 import ktx.actors.plusAssign
 import ktx.collections.gdxMapOf
@@ -121,7 +123,7 @@ class BattleAnimationWidget
             counter++
         }
 
-        check(actualTeamSize > 0) { "$TAG: The actual team size must be > 0. Check that at least 1 Guardian ist fit." }
+        check(actualTeamSize > 0) { "$TAG: Actual team size must be > 0. Check that at least 1 Guardian ist fit." }
 
         // Correct Image Depth Sorting
         if(occupiedPositions[side].containsKey(2)) { addActor(guardianSprites[side][2]) }
@@ -291,6 +293,7 @@ class BattleAnimationWidget
         val anim = Services.Media().getAttackAnimation(ability.name)
         val sra = SelfRemovingAnimation(anim)
         anim.frameDuration = .1f
+
         // Ability direction
         when(direction)
         {
@@ -489,13 +492,13 @@ class BattleAnimationWidget
     private fun createAreaAttackAnimationSequence(ability: Ability, side: Side, defSide: Side) : Action
     {
         val abilityMedia = AbilityMediaDB[ability.name]
-        val path = AssetPath.Audio.SFX.BATTLE().getValue(abilityMedia.sfxType.toString().toUpperCase())[0]
+        val path = AssetPath.Audio.SFX.BATTLE(abilityMedia.sfxType, 0)
 
         return sequence(
 
                 delay(.5f) ,                                     // Short delay before ability starts
                 runThis { animateAreaAttack(ability, defSide) }, // Plays the ability animation
-                runThis { Services.Audio().playSound(path) }, // Plays the attacks sound
+                runThis { Services.Audio().playSound(path) },    // Plays the attacks sound
                 runThis { animateAreaAttackImpact(defSide)    }, // Animates the impact on the target
                 runThis { onHitAnimationComplete.invoke()     }  // Runs the callback handler
         )

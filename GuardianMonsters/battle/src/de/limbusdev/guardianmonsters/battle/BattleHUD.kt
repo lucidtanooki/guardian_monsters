@@ -692,7 +692,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD()
         onActionMenuBagButton = {
 
             info(TAG) { "onActionMenuBagButton" }
-            stage.addActor(ItemChoice(inventory, leftTeam, battleSystem))
+            stage.addActor(ItemChoice(inventory, leftTeam, battleSystem, guardoSphere))
         }
 
         onActionMenuTeamButton = {

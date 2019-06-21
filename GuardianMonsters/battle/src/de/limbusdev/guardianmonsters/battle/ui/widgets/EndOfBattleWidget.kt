@@ -4,12 +4,15 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Skin
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable
 import com.badlogic.gdx.utils.Align
 
 import de.limbusdev.guardianmonsters.services.Services
 import de.limbusdev.guardianmonsters.ui.Constant
 import de.limbusdev.utils.extensions.f
 import de.limbusdev.utils.extensions.replaceOnClick
+import ktx.actors.txt
+import ktx.style.get
 
 
 /**
@@ -17,15 +20,10 @@ import de.limbusdev.utils.extensions.replaceOnClick
  * HINT: Don't forget calling the initialize() method
  * Created by georg on 03.07.16.
  */
-
-/**
- *
- * @param skin battle action UI skin
- */
 class EndOfBattleWidget
 (
-        skin: Skin,
-        onBackButton: () -> Unit
+        onBackButton: () -> Unit,
+        skin: Skin = Services.UI().battleSkin
 )
     : BattleWidget()
 {
@@ -41,16 +39,16 @@ class EndOfBattleWidget
     {
         this.setBounds(0f, 0f, 0f, 0f)
 
-        labelBGImg = Image(skin.getDrawable("b-long-up"))
+        labelBGImg = Image(skin.get<Drawable>("b-long-up"))
         labelBGImg.setPosition(Constant.RES_X / 2f, Constant.ROW * 7f, Align.bottom)
-        bgImg = Image(skin.getDrawable("eob-pane"))
+        bgImg = Image(skin, "eob-pane")
         bgImg.setPosition(Constant.RES_X / 2f, 0f, Align.bottom)
 
         addActor(labelBGImg)
         addActor(bgImg)
 
         val labs = Label.LabelStyle()
-        labs.font = skin.getFont("default-font")
+        labs.font = skin["default-font"]
         messageLabel = Label("---", labs)
         messageLabel.height = 64f
         messageLabel.width = 500f
@@ -73,8 +71,7 @@ class EndOfBattleWidget
      */
     fun initialize(won: Boolean)
     {
-        val i18n = Services.I18N().Battle()
-        val message = if (won) "batt_game_over" else "batt_you_won"
-        messageLabel.setText(i18n.get(message))
+        val message = if (won) "battle_game_over" else "battle_you_won"
+        messageLabel.txt = Services.I18N().Battle(message)
     }
 }

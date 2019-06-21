@@ -17,6 +17,7 @@ import de.limbusdev.guardianmonsters.services.Services
 import de.limbusdev.guardianmonsters.ui.widgets.ReassuranceWidget
 import de.limbusdev.guardianmonsters.ui.widgets.SimpleClickListener
 import de.limbusdev.utils.extensions.replaceOnClick
+import ktx.actors.txt
 
 /**
  * @author Georg Eckert 2017
@@ -33,6 +34,7 @@ open class ItemApplicationWidget
     // UI
     private lateinit var itemName           : Label
     private lateinit var itemDescription    : Label
+    private lateinit var itemHint           : Label
     private lateinit var itemArea           : Label
     private lateinit var itemImg            : Image
     private lateinit var reassuranceWidget  : ReassuranceWidget
@@ -60,25 +62,37 @@ open class ItemApplicationWidget
     }
 
 
-    open fun initialize(itemToShow: Item)
+    /**
+     * Initializes this widget with an item's information.
+     *
+     * @param itemToShow The item I want to display information about
+     * @param applicable May this item be used?
+     * @param hint       What should I know, when using it?
+     */
+    open fun initialize(itemToShow: Item, applicable: Boolean, hint: String)
     {
         this.item = itemToShow
         val i18n = Services.I18N().Inventory()
 
+        use.isVisible = applicable
+
         itemName.setText(i18n.get(item.name))
-        itemDescription.setText(i18n.get(item.name + "-description"))
+        itemDescription.txt = i18n.get("${item.name}-description")
+        itemHint.txt = hint
         itemImg.drawable = Services.Media().getItemDrawable(itemToShow.name)
 
         reassuranceWidget.question.setText(i18n.format("reassurance-throwaway", i18n.get(item.name)))
         reassuranceWidget.buttonYes.addListener(SimpleClickListener {
 
             inventory.takeFromInventory(item)
-            if (inventory.items.containsKey(item)) {
-                reassuranceWidget.remove()
-            } else {
-                remove()
-            }
+            if (inventory.items.containsKey(item)) { reassuranceWidget.remove() }
+            else                                   { remove()                   }
         })
+    }
+
+    open fun initialize(itemToShow: Item)
+    {
+        initialize(itemToShow, true, "")
     }
 
     private fun constructLayout()
@@ -114,6 +128,13 @@ open class ItemApplicationWidget
         itemDescription.setWrap(true)
         itemDescription.setAlignment(Align.topLeft)
         addActor(itemDescription)
+
+        itemHint = Label("Item Hint", skin, "red")
+        itemHint.setSize(144f, 48f)
+        itemHint.setPosition(10f, 64f, Align.topLeft)
+        itemHint.setWrap(true)
+        itemHint.setAlignment(Align.topLeft)
+        addActor(itemHint)
 
         delete = ImageButton(skin, "button-delete")
         delete.setPosition(24f, 160f, Align.bottomLeft)

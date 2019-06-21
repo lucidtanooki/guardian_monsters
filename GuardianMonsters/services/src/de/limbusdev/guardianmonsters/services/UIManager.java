@@ -41,7 +41,8 @@ public class UIManager extends AssetManager implements UI  {
         int[] sizes = {8,12,14,15,16,32};
         Color[] colors = {Color.BLACK, Color.WHITE, DGREEN, DRED};
 
-        for(int size : sizes) {
+        for(int size : sizes)
+        {
             ArrayMap<Color,BitmapFont> coloredFonts = new ArrayMap<>();
             param.size = size;
             for(Color c : colors) {

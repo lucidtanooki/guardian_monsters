@@ -189,6 +189,7 @@ object BattleCalculator
 
     fun banSucceeds(guardianToBeBanned: AGuardian, crystal: ChakraCrystalItem): Boolean
     {
+        return true // TODO
         return MathUtils.randomBoolean(crystal.chance(guardianToBeBanned))
     }
 

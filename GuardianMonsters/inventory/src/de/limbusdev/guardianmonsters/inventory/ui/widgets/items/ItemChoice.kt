@@ -3,6 +3,8 @@ package de.limbusdev.guardianmonsters.inventory.ui.widgets.items
 import com.badlogic.gdx.scenes.scene2d.Group
 import com.badlogic.gdx.scenes.scene2d.ui.Image
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton
+import com.badlogic.gdx.scenes.scene2d.ui.Label
+import com.badlogic.gdx.scenes.scene2d.ui.Skin
 import com.badlogic.gdx.utils.Align
 import com.badlogic.gdx.utils.Array
 
@@ -11,19 +13,22 @@ import de.limbusdev.guardianmonsters.guardians.items.ChakraCrystalItem
 import de.limbusdev.guardianmonsters.guardians.items.Inventory
 import de.limbusdev.guardianmonsters.guardians.items.Item
 import de.limbusdev.guardianmonsters.guardians.items.medicine.AMedicalItem
+import de.limbusdev.guardianmonsters.guardians.monsters.GuardoSphere
 import de.limbusdev.guardianmonsters.guardians.monsters.Team
 import de.limbusdev.guardianmonsters.inventory.ui.widgets.team.GuardianListWidget
 import de.limbusdev.guardianmonsters.services.Services
 import de.limbusdev.guardianmonsters.ui.Constant
 import de.limbusdev.guardianmonsters.ui.widgets.ItemListWidget
-import de.limbusdev.guardianmonsters.ui.widgets.SimpleClickListener
 import de.limbusdev.utils.extensions.replaceOnClick
+import ktx.style.get
 
 class ItemChoice
 (
         private val inventory: Inventory,
         private val team: Team,
-        private val battleSystem: BattleSystem
+        private val battleSystem: BattleSystem,
+        private val guardoSphere: GuardoSphere,
+        val skin: Skin = Services.UI().inventorySkin
 )
     : Group()
 {
@@ -36,15 +41,29 @@ class ItemChoice
     // ............................................................................................. CONSTRUCTORS
     init
     {
-        val skin = Services.UI().inventorySkin
-
-        setSize(Constant.WIDTH.toFloat(), Constant.HEIGHT.toFloat())
+        setSize(Constant.WIDTHf, Constant.HEIGHTf)
         setPosition(0f, 0f, Align.bottomLeft)
-        val overlay = Image(Services.UI().inventorySkin.getDrawable("black-a80"))
-        overlay.setSize(Constant.WIDTH.toFloat(), Constant.HEIGHT.toFloat())
+
+        // Black transparent Overlay
+        val overlay = Image(skin, "black-a80")
+        overlay.setSize(Constant.WIDTHf, Constant.HEIGHTf)
         overlay.setPosition(0f, 0f, Align.bottomLeft)
         addActor(overlay)
 
+        // Top Bar
+        val topBar = Image(skin, "toolBar-bg")
+        topBar.setSize(Constant.WIDTHf, 38f)
+        topBar.setPosition(0f, Constant.HEIGHTf, Align.topLeft)
+        addActor(topBar)
+
+        // Top Bar Label
+        val label = Label(Services.I18N().Inventory().get("in_battle_item"), skin.get<Label.LabelStyle>("burgund"))
+        label.setSize(Constant.WIDTHf/3, 32f)
+        label.setPosition(Constant.WIDTHf/2, Constant.HEIGHTf - 18, Align.center)
+        label.setAlignment(Align.center, Align.center)
+        addActor(label)
+
+        // Detail Widget
         detailViewWidget = ItemApplicationWidget(inventory, team)
         detailViewWidget.setPosition(20f, 2f, Align.bottomLeft)
         detailViewWidget.delete.isVisible = false
@@ -52,9 +71,9 @@ class ItemChoice
         setUp()
 
         val back = ImageButton(skin, "button-back")
-        back.setPosition((Constant.WIDTH - 2).toFloat(), 2f, Align.bottomRight)
+        back.setPosition(Constant.WIDTHf - 20, 2f, Align.bottomRight)
         addActor(back)
-        back.addListener(SimpleClickListener { remove() })
+        back.replaceOnClick { remove() }
     }
 
 
@@ -87,23 +106,36 @@ class ItemChoice
         }
 
         // What happens, when an item is chosen from the list?
-        val clicks = ItemListWidget.ClickListener { item ->
+        val onItemButton = ItemListWidget.ClickListener { item ->
 
             chosenItem = item
-            detailViewWidget.initialize(item)
-            addActor(detailViewWidget)
+            var hint = ""
+            var applicable = true
 
-            val onClick: () -> Unit
             when(item)
             {
-                is AMedicalItem -> onClick = {
+                is ChakraCrystalItem ->
+                {
+                    applicable = !guardoSphere.isFull()
+                    if(!applicable) {hint = Services.I18N().Inventory("sphere_full") }
+                }
+                else -> {}
+            }
+
+            detailViewWidget.initialize(item, applicable, hint)
+            addActor(detailViewWidget)
+
+            val onUseButton: () -> Unit
+            when(item)
+            {
+                is AMedicalItem -> onUseButton = {
 
                     if (guardianList != null) { guardianList!!.remove() }
                     guardianList = GuardianListWidget(team, onButton, chosenItem!!)
                     addActor(guardianList)
                     detailViewWidget.remove()
                 }
-                is ChakraCrystalItem -> onClick = {
+                is ChakraCrystalItem -> onUseButton = {
 
                     if (guardianList != null) { guardianList!!.remove() }
                     detailViewWidget.remove()
@@ -111,10 +143,10 @@ class ItemChoice
                     inventory.takeFromInventory(chosenItem!!)
                     battleSystem.banWildGuardian(item)
                 }
-                else -> onClick = {}
+                else -> onUseButton = {}
             }
 
-            detailViewWidget.use.replaceOnClick{ onClick.invoke() }
+            detailViewWidget.use.replaceOnClick{ onUseButton.invoke() }
         }
 
         // Define which items will be shown
@@ -128,7 +160,7 @@ class ItemChoice
         }
 
         // Create filtered Item List
-        val itemList = ItemListWidget(inventory, clicks, filters)
+        val itemList = ItemListWidget(inventory, onItemButton, filters)
         itemList.setSize(140f, Constant.HEIGHTf)
         itemList.setPosition(Constant.WIDTHf / 2 - 32, 0f, Align.bottomLeft)
         addActor(itemList)

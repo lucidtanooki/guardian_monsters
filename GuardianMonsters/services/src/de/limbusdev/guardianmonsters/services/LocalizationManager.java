@@ -117,6 +117,9 @@ public class LocalizationManager implements L18N
     public String Battle(String key, Object... args) { return Battle().format(key, args); }
 
     @Override
+    public String Inventory(String key) { return Inventory().get(key); }
+
+    @Override
     public String getGuardianNicknameIfAvailable(AGuardian guardian)
     {
         if(!guardian.getNickname().isEmpty()) {

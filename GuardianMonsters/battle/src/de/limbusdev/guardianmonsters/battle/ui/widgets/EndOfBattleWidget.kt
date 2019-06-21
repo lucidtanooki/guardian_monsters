@@ -73,7 +73,7 @@ class EndOfBattleWidget
      */
     fun initialize(won: Boolean)
     {
-        val i18n = Services.getL18N().Battle()
+        val i18n = Services.I18N().Battle()
         val message = if (won) "batt_game_over" else "batt_you_won"
         messageLabel.setText(i18n.get(message))
     }

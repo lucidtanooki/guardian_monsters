@@ -228,7 +228,7 @@ public class MovementSystem extends EntitySystem {
                             guardianProbabilities,ma.teamSizeProbabilities,1,1
                         );
                         ecs.hud.battleScreen.initialize(Components.team.get(ecs.hero).team, oppTeam, Components.guardoSphere.get(ecs.hero).guardoSphere);
-                        Services.getScreenManager().pushScreen(ecs.hud.battleScreen);
+                        Services.ScreenManager().pushScreen(ecs.hud.battleScreen);
                         //............................................................. START BATTLE
 
                         // Stop when in a battle

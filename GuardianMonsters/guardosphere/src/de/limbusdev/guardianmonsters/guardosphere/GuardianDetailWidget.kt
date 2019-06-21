@@ -62,11 +62,11 @@ class GuardianDetailWidget(private val skin: Skin) : Group()
         if(guardian == null) reset()
         else
         {
-            val region = Services.getMedia().getMonsterSprite(
+            val region = Services.Media().getMonsterSprite(
                     guardian.speciesDescription.ID,
                     guardian.abilityGraph.currentForm)
             monsterSprite.drawable = TextureRegionDrawable(region)
-            name.setText(Services.getL18N().getGuardianNicknameIfAvailable(guardian))
+            name.setText(Services.I18N().getGuardianNicknameIfAvailable(guardian))
             level.setText("Lvl ${guardian.individualStatistics.level}")
         }
     }

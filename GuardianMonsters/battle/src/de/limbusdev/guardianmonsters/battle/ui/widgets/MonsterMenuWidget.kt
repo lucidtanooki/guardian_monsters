@@ -43,7 +43,7 @@ class MonsterMenuWidget(callbacks: (Int) -> Unit) : SevenButtonsWidget(callbacks
         {
             if (key > 6) break
             val m = team[key]
-            val bwi = BattleHUDTextButton(Services.getL18N().getLocalizedGuardianName(m), key, Element.AIR)
+            val bwi = BattleHUDTextButton(Services.I18N().getLocalizedGuardianName(m), key, Element.AIR)
 
             replaceButton(bwi, key)
 

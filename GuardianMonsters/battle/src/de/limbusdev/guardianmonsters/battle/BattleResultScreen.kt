@@ -20,7 +20,7 @@ import de.limbusdev.guardianmonsters.services.Services
 class BattleResultScreen(team: Team, result: BattleResult) : Screen
 {
     private val resultHUD: BattleResultHUD
-            = BattleResultHUD(Services.getUI().inventorySkin, team, result)
+            = BattleResultHUD(Services.UI().inventorySkin, team, result)
 
 
     override fun render(delta: Float)

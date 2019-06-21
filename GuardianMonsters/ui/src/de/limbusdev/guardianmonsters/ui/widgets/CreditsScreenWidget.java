@@ -37,7 +37,7 @@ public class CreditsScreenWidget extends WidgetGroup {
         // Credits
         credits = new VerticalGroup();
         credits.space(32);
-        TextureAtlas logos = Services.getMedia().getTextureAtlas(AssetPath.Spritesheet.LOGOS);
+        TextureAtlas logos = Services.Media().getTextureAtlas(AssetPath.Spritesheet.LOGOS);
 
         Image creditImg = new Image(logos.findRegion("limbusdev3dbit"));
         creditImg.setAlign(Align.top);

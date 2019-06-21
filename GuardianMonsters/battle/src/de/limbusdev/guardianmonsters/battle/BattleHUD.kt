@@ -234,7 +234,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD()
 
             // Set Callbacks
             actionMenu.setCallbacks(onBackButton = onBattleStartLabelBackButton)
-            infoLabelWidget.typeWrite(Services.getL18N().Battle("battle_start"))
+            infoLabelWidget.typeWrite(Services.I18N().Battle("battle_start"))
 
             state = State.BATTLE_START
         }
@@ -258,7 +258,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD()
             info(TAG) { "${"toEscapeSuccessInfo()".padEnd(40)} -> new State: ${State.ESCAPE_SUCCESS}" }
 
             showInfoLabel()
-            infoLabelWidget.typeWrite(Services.getL18N().Battle("escape_success"))
+            infoLabelWidget.typeWrite(Services.I18N().Battle("escape_success"))
             actionMenu.setCallbacks(onBackButton = onEscapeSuccessLabelBackButton)
 
             state = State.ESCAPE_SUCCESS
@@ -269,7 +269,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD()
             info(TAG) { "${"toEscapeFailInfo()".padEnd(40)} -> new State: ${State.ESCAPE_FAILURE}" }
 
             showInfoLabel()
-            infoLabelWidget.typeWrite(Services.getL18N().Battle("escape_fail"))
+            infoLabelWidget.typeWrite(Services.I18N().Battle("escape_fail"))
             actionMenu.setCallbacks(onBackButton = onEscapeFailedLabelBackButton)
 
             state = State.ESCAPE_FAILURE
@@ -379,12 +379,12 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD()
 
             showInfoLabel()
             val textKey = if(winnerSide) "battle_you_won" else "battle_game_over"
-            infoLabelWidget.typeWrite(Services.getL18N().Battle(textKey))
+            infoLabelWidget.typeWrite(Services.I18N().Battle(textKey))
             actionMenu.setCallbacks(onBackButton = onEndOfBattleLabelBackButton)
 
             statusWidget.addToStage(stage)
 
-            stage.addAction(Services.getAudio().createEndOfBattleMusicSequence())
+            stage.addAction(Services.Audio().createEndOfBattleMusicSequence())
 
             state = State.END_OF_BATTLE
         }
@@ -403,7 +403,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD()
 
             statusWidget.addToStage(stage)
 
-            stage.addAction(Services.getAudio().createEndOfBattleMusicSequence())
+            stage.addAction(Services.Audio().createEndOfBattleMusicSequence())
 
             state = State.END_OF_BATTLE
         }
@@ -750,15 +750,15 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD()
             if(battleSystem.queue.combatTeamLeft.isKO())
             {
                 // Battle is lost, restart game
-                Services.getAudio().stopMusic()
-                Services.getScreenManager().game.create()
+                Services.Audio().stopMusic()
+                Services.ScreenManager().game.create()
             }
             else
             {
                 // Battle is won, show result screen
-                Services.getAudio().stopMusic()
+                Services.Audio().stopMusic()
                 val resultScreen = BattleResultScreen(leftTeam, battleSystem.result)
-                Services.getScreenManager().pushScreen(resultScreen)
+                Services.ScreenManager().pushScreen(resultScreen)
             }
         }
 
@@ -872,19 +872,19 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD()
             {
                 info("BattleSystem.battleEventHandler") { "onDoingNothing()" }
 
-                val guardianName = Services.getL18N().getGuardianNicknameIfAvailable(guardian)
+                val guardianName = Services.I18N().getGuardianNicknameIfAvailable(guardian)
                 stateMachine.to(State.ANIMATION)
 
                 val message = when(guardian.stats.statusEffect)
                 {
                     StatusEffect.PETRIFIED ->
                     {
-                        val petrified = Services.getL18N().Battle("batt_petrified")
-                        Services.getL18N().Battle("batt_message_failed", guardianName, petrified)
+                        val petrified = Services.I18N().Battle("batt_petrified")
+                        Services.I18N().Battle("batt_message_failed", guardianName, petrified)
                     }
                     else ->
                     {
-                        Services.getL18N().Battle("batt_item_usage", guardianName)
+                        Services.I18N().Battle("batt_item_usage", guardianName)
                     }
                 }
 
@@ -951,9 +951,9 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD()
             {
                 info("BattleSystem.battleEventHandler") { "onApplyStatusEffect()" }
 
-                val nickName = Services.getL18N().getGuardianNicknameIfAvailable(guardian)
+                val nickName = Services.I18N().getGuardianNicknameIfAvailable(guardian)
                 val statusEffect = guardian.stats.statusEffect.toLCString()
-                val message  = Services.getL18N().Battle("batt_info_status_effect_$statusEffect")
+                val message  = Services.I18N().Battle("batt_info_status_effect_$statusEffect")
                 infoLabelWidget.typeWrite("$nickName $message")
             }
 

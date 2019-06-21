@@ -109,7 +109,7 @@ public class MainToolBar extends Group {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 // Exit Inventory
-                Services.getScreenManager().popScreen();
+                Services.ScreenManager().popScreen();
             }
         });
         addActor(exit);

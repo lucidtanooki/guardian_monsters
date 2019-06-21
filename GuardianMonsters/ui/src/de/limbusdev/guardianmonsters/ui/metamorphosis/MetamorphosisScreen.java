@@ -16,6 +16,6 @@ public class MetamorphosisScreen extends AScreen
 {
     public MetamorphosisScreen(int speciesID, int before)
     {
-        super(new MetamorphosisHUD(Services.getUI().getInventorySkin(), speciesID, before, before+1));
+        super(new MetamorphosisHUD(Services.UI().getInventorySkin(), speciesID, before, before+1));
     }
 }

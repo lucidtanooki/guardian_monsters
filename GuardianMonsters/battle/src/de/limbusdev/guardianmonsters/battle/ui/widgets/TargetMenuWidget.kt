@@ -58,7 +58,7 @@ class TargetMenuWidget(callbacks: (Int) -> Unit) : SevenButtonsWidget(callbacks,
 
         if (areaMode)
         {
-            setButtonText(3, Services.getL18N().Battle().get("battle_choose_area"))
+            setButtonText(3, Services.I18N().Battle().get("battle_choose_area"))
             setButtonStyle(0, Element.ARTHROPODA)
             setButtonStyle(1, Element.ARTHROPODA)
             setButtonStyle(2, Element.ARTHROPODA)
@@ -79,7 +79,7 @@ class TargetMenuWidget(callbacks: (Int) -> Unit) : SevenButtonsWidget(callbacks,
         for (key in team.keys())
         {
             val m = team.get(key)
-            setButtonText(key + offset, Services.getL18N().getLocalizedGuardianName(m))
+            setButtonText(key + offset, Services.I18N().getLocalizedGuardianName(m))
             enableButton(key + offset)
 
             // Add the TargetMenuWidget as a Listener

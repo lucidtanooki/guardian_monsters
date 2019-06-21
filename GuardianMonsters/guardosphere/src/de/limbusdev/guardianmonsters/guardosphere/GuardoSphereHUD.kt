@@ -20,7 +20,6 @@ import de.limbusdev.guardianmonsters.ui.widgets.ParticleEffectActor
 import de.limbusdev.utils.extensions.replaceOnClick
 
 
-import ktx.actors.plus
 import ktx.actors.plusAssign
 import ktx.actors.txt
 
@@ -187,7 +186,7 @@ class GuardoSphereHUD
         const val statToggleY       = 4f
         const val statToggleAlign   = Align.bottomRight
 
-        fun startBGMusic()  = Services.getAudio().playLoopMusic(AssetPath.Audio.Music.GUARDOSPHERE)
-        fun stopBGMusic()   = Services.getAudio().stopMusic(AssetPath.Audio.Music.GUARDOSPHERE)
+        fun startBGMusic()  = Services.Audio().playLoopMusic(AssetPath.Audio.Music.GUARDOSPHERE)
+        fun stopBGMusic()   = Services.Audio().stopMusic(AssetPath.Audio.Music.GUARDOSPHERE)
     }
 }

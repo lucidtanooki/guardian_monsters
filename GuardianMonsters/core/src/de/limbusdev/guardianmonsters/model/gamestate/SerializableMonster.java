@@ -25,7 +25,7 @@ public class SerializableMonster
 
     public SerializableMonster(AGuardian guardian) {
         this.ID = guardian.getSpeciesDescription().getID();
-        this.nickname = Services.getL18N().getGuardianNicknameIfAvailable(guardian);
+        this.nickname = Services.I18N().getGuardianNicknameIfAvailable(guardian);
         this.graph = new SerializableAbilityGraph(guardian.getAbilityGraph());
         this.stat = new SerializableStat(guardian.getIndividualStatistics());
     }

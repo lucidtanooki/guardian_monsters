@@ -45,8 +45,8 @@ class AbilityInfoLabelWidget() : InfoLabelWidget()
     init
     {
         // Shorter Skin Access
-        val battleSkin    = Services.getUI().battleSkin
-        val inventorySkin = Services.getUI().inventorySkin
+        val battleSkin    = Services.UI().battleSkin
+        val inventorySkin = Services.UI().inventorySkin
 
         // Background Image
         infoBGImg.drawable = battleSkin.getDrawable("label-info")
@@ -95,14 +95,14 @@ class AbilityInfoLabelWidget() : InfoLabelWidget()
         reset()
 
         val abilities = GuardiansServiceLocator.abilities
-        val i18nElements = Services.getL18N().Elements()
-        val i18nAbilities = Services.getL18N().Abilities()
+        val i18nElements = Services.I18N().Elements()
+        val i18nAbilities = Services.I18N().Abilities()
         val elementName = aID.element.toString().toLowerCase()
 
         val ability = abilities.getAbility(aID)
 
         element.setText(i18nElements.get("element_$elementName"))
-        element.style = Services.getUI().inventorySkin["elem-$elementName"]
+        element.style = Services.UI().inventorySkin["elem-$elementName"]
 
         abilityName.txt        = i18nAbilities.get(ability.name)
         abilityDescription.txt = i18nAbilities.get("${ability.name}_desc")

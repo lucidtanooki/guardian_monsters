@@ -8,13 +8,13 @@ import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
 public class NullL18N implements L18N
 {
     @Override
-    public I18NBundle l18n(String type)
+    public I18NBundle i18n(String type)
     {
         return null;
     }
 
     @Override
-    public I18NBundle l18nMap(int mapID)
+    public I18NBundle i18nMap(int mapID)
     {
         return null;
     }

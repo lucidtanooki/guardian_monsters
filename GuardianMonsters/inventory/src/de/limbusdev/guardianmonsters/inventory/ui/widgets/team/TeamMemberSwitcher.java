@@ -63,7 +63,7 @@ public class TeamMemberSwitcher extends Group {
     public void init(AGuardian m, int teamPosition) {
 
         this.currentlyChosen = teamPosition;
-        name.setText(Services.getL18N().getLocalizedGuardianName(m));
+        name.setText(Services.I18N().getLocalizedGuardianName(m));
         previewWidget.setPreview(m.getSpeciesDescription().getID(), m.getAbilityGraph().getCurrentForm(), Side.LEFT);
     }
 

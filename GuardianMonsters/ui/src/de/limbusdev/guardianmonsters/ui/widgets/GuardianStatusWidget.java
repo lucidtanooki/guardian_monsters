@@ -35,7 +35,7 @@ public class GuardianStatusWidget extends Group
     public GuardianStatusWidget()
     {
         super();
-        this.skin = Services.getUI().getInventorySkin();
+        this.skin = Services.UI().getInventorySkin();
 
         setSize(140, Constant.HEIGHT-36);
         Image monsterStatsBg = new Image(skin.getDrawable("menu-col-bg"));
@@ -94,7 +94,7 @@ public class GuardianStatusWidget extends Group
     public void initialize(AGuardian m)
     {
         ISpeciesDescriptionService species = GuardiansServiceLocator.INSTANCE.getSpecies();
-        name.setText(Services.getL18N().Guardians().get(species.getCommonNameById(m.getSpeciesDescription().getID(), 0)));  // TODO currentForm
+        name.setText(Services.I18N().Guardians().get(species.getCommonNameById(m.getSpeciesDescription().getID(), 0)));  // TODO currentForm
         valueLabels.get("hp").setText(m.getIndividualStatistics().getHp() + "/" + m.getIndividualStatistics().getHpMax());
         valueLabels.get("mp").setText(m.getIndividualStatistics().getMp() + "/" + m.getIndividualStatistics().getMPmax());
         valueLabels.get("exp").setText(m.getIndividualStatistics().getExp() + "/" + (m.getIndividualStatistics().getExpToNextLevel() + m.getIndividualStatistics().getExp()));
@@ -107,7 +107,7 @@ public class GuardianStatusWidget extends Group
         elementGroup.clear();
         for(Element e : m.getSpeciesDescription().getElements(0)) { // TODO currentForm
             String elem = e.toString().toLowerCase();
-            String elemName = Services.getL18N().Elements().get("element_" + elem);
+            String elemName = Services.I18N().Elements().get("element_" + elem);
             elemName = elemName.length() < 7 ? elemName : elemName.substring(0,6);
             Label l = new Label(elemName, skin, "elem-" + elem);
             elementGroup.addActor(l);

@@ -7,7 +7,6 @@ import de.limbusdev.guardianmonsters.guardians.battle.AttackCalculationReport
 import de.limbusdev.guardianmonsters.guardians.items.Item
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian
 import de.limbusdev.guardianmonsters.guardians.monsters.Guardian
-import de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics
 import de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics.StatusEffect
 import de.limbusdev.guardianmonsters.services.Services
 import de.limbusdev.utils.extensions.toLCString
@@ -19,14 +18,13 @@ object BattleMessages
 {
     private fun species()                           = GuardiansServiceLocator.species
     private fun commonName(id: Int, form: Int)      = species().getCommonNameById(id, form)
-    private fun tryGetNickName(guardian: AGuardian) = Services.getL18N().getGuardianNicknameIfAvailable(guardian)
-    private fun itemName(id: String)                = Services.getL18N().Inventory().get(id)
-    private fun abilityName(id: String)             = Services.getL18N().getLocalizedAbilityName(id)
-    private fun l18nBattle()                        = Services.getL18N().Battle()
+    private fun tryGetNickName(guardian: AGuardian) = Services.I18N().getGuardianNicknameIfAvailable(guardian)
+    private fun itemName(id: String)                = Services.I18N().Inventory().get(id)
+    private fun abilityName(id: String)             = Services.I18N().getLocalizedAbilityName(id)
 
     fun tryingToBan(guardian: AGuardian, item: Item): String
     {
-        return l18nBattle().format(
+        return Services.I18N().Battle().format(
                 "battle_message_ban_trial",
                 tryGetNickName(guardian),
                 itemName(item.name)
@@ -35,7 +33,7 @@ object BattleMessages
 
     fun banGuardianFailure(guardian: AGuardian, item: Item): String
     {
-        return l18nBattle().format(
+        return Services.I18N().Battle().format(
                 "battle_message_ban_failure",
                 tryGetNickName(guardian)
         )
@@ -43,7 +41,7 @@ object BattleMessages
 
     fun banGuardianSuccess(guardian: AGuardian, item: Item): String
     {
-        return l18nBattle().format(
+        return Services.I18N().Battle().format(
                 "battle_message_ban_success",
                 tryGetNickName(guardian)
         )
@@ -61,24 +59,24 @@ object BattleMessages
 
         val eff = when
         {
-            report.efficiency > 1.1                           -> l18nBattle().get("suff_severe")
-            report.efficiency < .9 && report.efficiency > 0.1 -> l18nBattle().get("suff_less")
-            report.efficiency < 0                             -> l18nBattle().get("suff_healed")
-            else                                              -> l18nBattle().get("suff_normal")
+            report.efficiency > 1.1                           -> Services.I18N().Battle("suff_severe")
+            report.efficiency < .9 && report.efficiency > 0.1 -> Services.I18N().Battle("suff_less")
+            report.efficiency < 0                             -> Services.I18N().Battle("suff_healed")
+            else                                              -> Services.I18N().Battle("suff_normal")
         }
 
         var message = when(attacker.stats.statusEffect)
         {
-            StatusEffect.LUNATIC -> l18nBattle().format(
+            StatusEffect.LUNATIC -> Services.I18N().Battle().format(
 
                     "batt_message_lunatic",
                     tryGetNickName(attacker),
                     tryGetNickName(victim),
                     abilityName(report.attack.name),
                     report.damage, eff,
-                    l18nBattle().get("batt_lunatic")
+                    Services.I18N().Battle().get("batt_lunatic")
             )
-            else -> l18nBattle().format(
+            else -> Services.I18N().Battle().format(
 
                     "batt_message",
                     tryGetNickName(attacker),
@@ -90,16 +88,16 @@ object BattleMessages
 
         if(report.changedStatusEffect)
         {
-            message += " " + l18nBattle().format("batt_message_status_effect_change",
+            message += " " + Services.I18N().Battle().format("batt_message_status_effect_change",
                     tryGetNickName(victim),
-                    l18nBattle().get("batt_change_" + report.newStatusEffect.toLCString()))
+                    Services.I18N().Battle().get("batt_change_" + report.newStatusEffect.toLCString()))
         }
 
         if(report.statusEffectPreventedAttack)
         {
-            message = l18nBattle().format(
+            message = Services.I18N().Battle().format(
                     "batt_message_failed",
-                    l18nBattle().get("batt_" + attacker.individualStatistics.statusEffect.toLCString()),
+                    Services.I18N().Battle().get("batt_" + attacker.individualStatistics.statusEffect.toLCString()),
                     tryGetNickName(attacker)
             )
         }
@@ -120,14 +118,14 @@ object BattleMessages
 
         var message = when(attacker.stats.statusEffect)
         {
-            StatusEffect.LUNATIC -> l18nBattle().format(
+            StatusEffect.LUNATIC -> Services.I18N().Battle().format(
 
                     "batt_area_message_lunatic",
                     tryGetNickName(attacker),
                     abilityName(reports.first().attack.name),
-                    l18nBattle().get("batt_lunatic")
+                    Services.I18N().Battle().get("batt_lunatic")
             )
-            else -> l18nBattle().format(
+            else -> Services.I18N().Battle().format(
 
                     "batt_area_message",
                     tryGetNickName(attacker),
@@ -157,12 +155,12 @@ object BattleMessages
                 damage2 = report2.damage.toString()
 
                 if(report1.changedStatusEffect)
-                    damage1 += ", " + l18nBattle().get("batt_change_area_${report1.newStatusEffect.toString().toLowerCase()}")
+                    damage1 += ", " + Services.I18N().Battle().get("batt_change_area_${report1.newStatusEffect.toString().toLowerCase()}")
 
                 if(report2.changedStatusEffect)
-                    damage2 += ", " + l18nBattle().get("batt_change_area_${report2.newStatusEffect.toString().toLowerCase()}")
+                    damage2 += ", " + Services.I18N().Battle().get("batt_change_area_${report2.newStatusEffect.toString().toLowerCase()}")
 
-                message += l18nBattle().format("batt_area_message_2", defName1, damage1, defName2, damage2)
+                message += Services.I18N().Battle().format("batt_area_message_2", defName1, damage1, defName2, damage2)
             }
 
             3 -> {
@@ -177,15 +175,15 @@ object BattleMessages
                 damage3 = report3.damage.toString()
 
                 if(report1.changedStatusEffect)
-                    damage1 += ", " + l18nBattle().get("batt_change_area_${report1.newStatusEffect.toString().toLowerCase()}")
+                    damage1 += ", " + Services.I18N().Battle().get("batt_change_area_${report1.newStatusEffect.toString().toLowerCase()}")
 
                 if(report2.changedStatusEffect)
-                    damage2 += ", " + l18nBattle().get("batt_change_area_${report2.newStatusEffect.toString().toLowerCase()}")
+                    damage2 += ", " + Services.I18N().Battle().get("batt_change_area_${report2.newStatusEffect.toString().toLowerCase()}")
 
                 if(report3.changedStatusEffect)
-                    damage3 += ", " + l18nBattle().get("batt_change_area_${report3.newStatusEffect.toString().toLowerCase()}")
+                    damage3 += ", " + Services.I18N().Battle().get("batt_change_area_${report3.newStatusEffect.toString().toLowerCase()}")
 
-                message += l18nBattle().format("batt_area_message_3", defName1, damage1, defName2, damage2, defName3, damage3)
+                message += Services.I18N().Battle().format("batt_area_message_3", defName1, damage1, defName2, damage2, defName3, damage3)
                 println(message)
             }
 
@@ -195,9 +193,9 @@ object BattleMessages
                 damage1 = report1.damage.toString()
 
                 if(report1.changedStatusEffect)
-                    damage1 += ", " + l18nBattle().get("batt_change_area_${report1.newStatusEffect.toString().toLowerCase()}")
+                    damage1 += ", " + Services.I18N().Battle().get("batt_change_area_${report1.newStatusEffect.toString().toLowerCase()}")
 
-                message += l18nBattle().format("batt_area_message_1", defName1, damage1)
+                message += Services.I18N().Battle().format("batt_area_message_1", defName1, damage1)
             }
         }
 
@@ -206,12 +204,12 @@ object BattleMessages
 
     fun selfDefense(defender: AGuardian): String
     {
-        return "${tryGetNickName(defender)} ${l18nBattle().get("suff_defense")}"
+        return "${tryGetNickName(defender)} ${Services.I18N().Battle().get("suff_defense")}"
     }
 
     fun substitution(substituted: AGuardian, substitute: AGuardian): String
     {
-        return l18nBattle().format(
+        return Services.I18N().Battle().format(
                 "batt_substitution",
                 tryGetNickName(substituted),
                 tryGetNickName(substitute)
@@ -220,7 +218,7 @@ object BattleMessages
 
     fun replacingDefeated(substituted: AGuardian, substitute: AGuardian): String
     {
-        return l18nBattle().format(
+        return Services.I18N().Battle().format(
                 "batt_replace_defeated",
                 tryGetNickName(substituted),
                 tryGetNickName(substitute)

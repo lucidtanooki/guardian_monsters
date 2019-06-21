@@ -32,7 +32,7 @@ class GuardoSphereButton
         private fun construct(skin: Skin, guardian: AGuardian?): Image
         {
             val drawable: TextureRegionDrawable
-            val media = Services.getMedia();
+            val media = Services.Media();
 
             if(guardian == null)
             {

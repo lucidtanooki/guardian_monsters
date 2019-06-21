@@ -158,7 +158,7 @@ public class TeamSubMenu extends AInventorySubMenu implements Observer
         int guardianForm = chosenGuardian.getAbilityGraph().getCurrentForm();
 
         monsterImg.setDrawable(new TextureRegionDrawable(
-                Services.getMedia().getMonsterSprite(guardianID, guardianForm)));
+                Services.Media().getMonsterSprite(guardianID, guardianForm)));
         statPent.init(team.get(teamPosition));
         joinsBattleButton.remove();
         joinsBattleButton.setChecked(false);

@@ -32,7 +32,7 @@ class GuardianImageButton
         {
             val id = guardian.speciesDescription.ID
             val form = guardian.abilityGraph.currentForm
-            val drawable = TextureRegionDrawable(Services.getMedia().getMonsterMiniSprite(id, form))
+            val drawable = TextureRegionDrawable(Services.Media().getMonsterMiniSprite(id, form))
             return Image(drawable)
         }
     }

@@ -40,7 +40,7 @@ public class ItemListWidget extends Group implements Listener<ItemSignal> {
     public ItemListWidget(Inventory inventory, ClickListener handler, Array<Item.Category> filters)
     {
         this.inventory = inventory;
-        this.skin = Services.getUI().getInventorySkin();
+        this.skin = Services.UI().getInventorySkin();
         this.clickListener = handler;
         this.currentFilters = filters;
 

@@ -37,7 +37,7 @@ class GuardianListWidget
     // ............................................................................................. CONSTRUCTORS
     init
     {
-        val skin = Services.getUI().inventorySkin
+        val skin = Services.UI().inventorySkin
 
         blackLayer = Image(skin.getDrawable("black-a80"))
         blackLayer.setSize(Constant.WIDTHf, Constant.HEIGHTf)

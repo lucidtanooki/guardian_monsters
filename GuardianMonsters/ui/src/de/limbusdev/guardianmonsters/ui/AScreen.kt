@@ -42,7 +42,7 @@ abstract class AScreen(var hud: AHUD) : Screen
     // ..................................................................................... Methods
     fun setBackground(index: Int)
     {
-        background = Services.getMedia().getBackgroundTexture(index)
+        background = Services.Media().getBackgroundTexture(index)
     }
 
     private fun clearScreen()

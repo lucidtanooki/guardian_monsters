@@ -40,7 +40,7 @@ open class InfoLabelWidget() : BattleWidget()
     // ................................................................................ Constructors
     init
     {
-        val skin = Services.getUI().battleSkin
+        val skin = Services.UI().battleSkin
 
         infoBGImg = Image(skin.getDrawable("label"))
         infoLabel = Label("", skin, "default")

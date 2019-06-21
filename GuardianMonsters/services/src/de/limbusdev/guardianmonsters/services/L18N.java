@@ -12,9 +12,9 @@ import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian;
  */
 public interface L18N {
 
-    I18NBundle l18n(String type);
+    I18NBundle i18n(String type);
 
-    I18NBundle l18nMap(int mapID);
+    I18NBundle i18nMap(int mapID);
 
     BitmapFont Font();
 

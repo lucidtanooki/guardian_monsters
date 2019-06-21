@@ -59,7 +59,7 @@ class GameStateDebugger(private val game: Game)
             WorldScreen(Constant.startMap, 1, false)
         }
 
-        Services.getScreenManager().pushScreen(gameScreen)
+        Services.ScreenManager().pushScreen(gameScreen)
     }
 
     private fun setUpTestWorldUI()
@@ -212,7 +212,7 @@ class GameStateDebugger(private val game: Game)
         result.gainEXP(heroTeam[0], 222)
         result.gainEXP(heroTeam[1], 333)
         result.gainEXP(heroTeam[2], 444)
-        Services.getScreenManager().pushScreen(BattleResultScreen(heroTeam, result))
+        Services.ScreenManager().pushScreen(BattleResultScreen(heroTeam, result))
     }
 
     private fun testMetamorphosisScreen()

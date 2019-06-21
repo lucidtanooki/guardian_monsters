@@ -58,7 +58,7 @@ public class AbilityChoiceSubMenu extends AInventorySubMenu
 
         switcher = new TeamMemberSwitcher(skin, team, this);
         details = new AbilityDetailWidget(skin, this, "button-switch");
-        abilitySlotButtons = new HoneyComb7ButtonsWidget(Services.getUI().getBattleSkin(), this, HoneyComb7ButtonsWidget.ABILITY_ORDER);
+        abilitySlotButtons = new HoneyComb7ButtonsWidget(Services.UI().getBattleSkin(), this, HoneyComb7ButtonsWidget.ABILITY_ORDER);
         back = new ImageButton(skin, "button-back");
 
         back.addListener(new SimpleClickListener(() -> {
@@ -162,7 +162,7 @@ public class AbilityChoiceSubMenu extends AInventorySubMenu
         abilityButtons.clear();
         abilityButtonTable.clearChildren();
 
-        I18NBundle translation = Services.getL18N().Abilities();
+        I18NBundle translation = Services.I18N().Abilities();
 
         AGuardian m = team.get(switcher.getCurrentlyChosen());
 
@@ -173,7 +173,7 @@ public class AbilityChoiceSubMenu extends AInventorySubMenu
             if(abilityID != null) {
 
                 Ability ability = GuardiansServiceLocator.INSTANCE.getAbilities().getAbility(abilityID);
-                TextButton tb = new TextButton(translation.get(ability.getName()), Services.getUI().getInventorySkin(), "item-button-sandstone");
+                TextButton tb = new TextButton(translation.get(ability.getName()), Services.UI().getInventorySkin(), "item-button-sandstone");
 
                 tb.addListener(new SimpleClickListener(() -> {
 

@@ -63,11 +63,11 @@ open class ItemApplicationWidget
     open fun initialize(itemToShow: Item)
     {
         this.item = itemToShow
-        val i18n = Services.getL18N().Inventory()
+        val i18n = Services.I18N().Inventory()
 
         itemName.setText(i18n.get(item.name))
         itemDescription.setText(i18n.get(item.name + "-description"))
-        itemImg.drawable = Services.getMedia().getItemDrawable(itemToShow.name)
+        itemImg.drawable = Services.Media().getItemDrawable(itemToShow.name)
 
         reassuranceWidget.question.setText(i18n.format("reassurance-throwaway", i18n.get(item.name)))
         reassuranceWidget.buttonYes.addListener(SimpleClickListener {
@@ -83,7 +83,7 @@ open class ItemApplicationWidget
 
     private fun constructLayout()
     {
-        val skin = Services.getUI().inventorySkin
+        val skin = Services.UI().inventorySkin
 
         reassuranceWidget = ReassuranceWidget(skin)
         reassuranceWidget.setPosition(-264f, 0f, Align.bottomLeft)

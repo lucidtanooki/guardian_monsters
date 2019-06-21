@@ -45,7 +45,7 @@ public class MainMenuScreen implements Screen {
     
     /* ........................................................................... CONSTRUCTOR .. */
     public MainMenuScreen() {
-        Skin skin = Services.getUI().getDefaultSkin();
+        Skin skin = Services.UI().getDefaultSkin();
 
         Image bg = new Image(skin.getDrawable("black"));
         bg.setWidth(Constant.WIDTH);
@@ -145,12 +145,12 @@ public class MainMenuScreen implements Screen {
         bg.addAction(Actions.alpha(.75f));
         startMenu.addActor(bg);
 
-        Image mon = new Image(Services.getMedia().getMonsterSprite(100,0));
+        Image mon = new Image(Services.Media().getMonsterSprite(100,0));
         mon.setPosition(Constant.WIDTH - 8, 8, Align.bottomRight);
         startMenu.addActor(mon);
 
         // ................................................................................. BUTTONS
-        I18NBundle i18n = Services.getL18N().General();
+        I18NBundle i18n = Services.I18N().General();
 
         // ............................................................................ START BUTTON
         String label = i18n.get("main_menu_start_new");
@@ -161,7 +161,7 @@ public class MainMenuScreen implements Screen {
                 stage.addAction(Actions.sequence(
                     Actions.fadeOut(1), Actions.run(() -> {
                         SaveGameManager.newSaveGame();
-                        Services.getScreenManager().pushScreen(new WorldScreen(25, 1, false));
+                        Services.ScreenManager().pushScreen(new WorldScreen(25, 1, false));
                     })
                 ));
         }));
@@ -174,7 +174,7 @@ public class MainMenuScreen implements Screen {
                 stage.addAction(Actions.sequence(
                     Actions.fadeOut(1), Actions.run(() -> {
                         GameState state = SaveGameManager.loadSaveGame();
-                        Services.getScreenManager().pushScreen(new WorldScreen(state.map, 1, true));
+                        Services.ScreenManager().pushScreen(new WorldScreen(state.map, 1, true));
                         })
                 ));
         }));
@@ -220,7 +220,7 @@ public class MainMenuScreen implements Screen {
 
     public void setUpIntro(Skin skin) {
 
-        TextureAtlas logos = Services.getMedia().getTextureAtlas(AssetPath.Spritesheet.LOGOS);
+        TextureAtlas logos = Services.Media().getTextureAtlas(AssetPath.Spritesheet.LOGOS);
         this.introScreen = new Group();
         Image bg = new Image(skin.getDrawable("black"));
         bg.setWidth(Constant.WIDTH);

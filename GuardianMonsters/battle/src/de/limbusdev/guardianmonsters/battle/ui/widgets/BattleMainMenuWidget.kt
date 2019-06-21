@@ -27,7 +27,7 @@ class BattleMainMenuWidget
     private val swordButton : ImageButton
     private val runButton   : ImageButton
 
-    private val skin: Skin get() = Services.getUI().battleSkin
+    private val skin: Skin get() = Services.UI().battleSkin
 
 
     // ................................................................................ Constructors

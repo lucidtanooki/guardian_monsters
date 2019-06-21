@@ -39,7 +39,7 @@ public class MonsterPreviewWidget extends Group {
         bgImg = new Image(bg);
         bgImg.setPosition(0,0,Align.bottomLeft);
 
-        monster = Services.getMedia().getMonsterFace(0, 0);
+        monster = Services.Media().getMonsterFace(0, 0);
         monster.setSize(24,24);
         monster.setPosition(4,5, Align.bottomLeft);
 
@@ -62,7 +62,7 @@ public class MonsterPreviewWidget extends Group {
             coverImg.setDrawable(coverOpp);
         }
 
-        Image face = Services.getMedia().getMonsterFace(monsterID, form);
+        Image face = Services.Media().getMonsterFace(monsterID, form);
         if(face != null) {
             monster.setDrawable(face.getDrawable());
         }

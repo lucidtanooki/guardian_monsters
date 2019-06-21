@@ -20,7 +20,7 @@ import ktx.actors.then
 /**
  * Created by Georg Eckert 2016
  */
-abstract class ABattleHUD() : AHUD(Services.getUI().battleSkin)
+abstract class ABattleHUD() : AHUD(Services.UI().battleSkin)
 {
     protected var widgets = ArrayMap<String, BattleWidget>()
 

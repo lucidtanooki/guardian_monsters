@@ -101,7 +101,7 @@ class BattleResultHUD
         group.setPosition(groupX, groupY, groupAlign)
         stage+=group
 
-        val heading = Label(Services.getL18N().Battle().get("results"), skin, "default")
+        val heading = Label(Services.I18N().Battle().get("results"), skin, "default")
         heading.setAlignment(headingLabelAlign, headingLineAlign)
         heading.setPosition(headingX, headingY, headingAlign)
         group+=heading
@@ -112,7 +112,7 @@ class BattleResultHUD
         table.setPosition(tableX, tableY, tableAlign)
         group+=table
 
-        apply = TextButton(Services.getL18N().General().get("apply"), skin, "default")
+        apply = TextButton(Services.I18N().General().get("apply"), skin, "default")
         apply.setSize(applyWidth, applyHeight)
         apply.setPosition(applyX, applyY, applyAlign)
         group+=apply
@@ -128,7 +128,7 @@ class BattleResultHUD
             println(apply.isDisabled)
         }
 
-        next = TextButton(Services.getL18N().General().get("next"), skin, "default")
+        next = TextButton(Services.I18N().General().get("next"), skin, "default")
         next.setSize(nextWidth, nextHeight)
         next.setPosition(nextX, nextY, nextAlign)
 
@@ -148,7 +148,7 @@ class BattleResultHUD
             }
             else
             {
-                Services.getScreenManager().popScreen()
+                Services.ScreenManager().popScreen()
             }
         }
     }
@@ -198,7 +198,7 @@ class BattleResultHUD
         const val nextAlign = applyAlign
 
         fun species() = GuardiansServiceLocator.species
-        fun monsterFace(id: Int, form: Int) = Services.getMedia().getMonsterFace(id, form)
-        fun commonName(id: Int, form: Int) = Services.getL18N().Guardians().get(species().getCommonNameById(id, form))
+        fun monsterFace(id: Int, form: Int) = Services.Media().getMonsterFace(id, form)
+        fun commonName(id: Int, form: Int) = Services.I18N().Guardians().get(species().getCommonNameById(id, form))
     }
 }

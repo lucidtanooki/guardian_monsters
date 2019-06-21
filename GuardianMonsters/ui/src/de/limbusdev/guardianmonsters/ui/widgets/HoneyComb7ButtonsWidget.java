@@ -121,7 +121,7 @@ public class HoneyComb7ButtonsWidget extends WidgetGroup
 
     public void setButtonText(int index, Ability ability)
     {
-        setButtonText(index, Services.getL18N().Abilities().get(ability.getName()));
+        setButtonText(index, Services.I18N().Abilities().get(ability.getName()));
     }
 
     public void setButtonStyle(int index, Skin skin, String style)
@@ -132,7 +132,7 @@ public class HoneyComb7ButtonsWidget extends WidgetGroup
 
     public void setButtonStyle(int index, Element element)
     {
-        Skin skin = Services.getUI().getBattleSkin();
+        Skin skin = Services.UI().getBattleSkin();
         String styleString = "tb-attack-" + element.toString().toLowerCase();
         setButtonStyle(index, skin, styleString);
     }

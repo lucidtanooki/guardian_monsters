@@ -56,8 +56,8 @@ class SwitchActiveGuardianWidget() : BattleWidget()
     // ................................................................................ Constructors
     init
     {
-        val battleSkin = Services.getUI().battleSkin
-        val inventorySkin = Services.getUI().inventorySkin
+        val battleSkin = Services.UI().battleSkin
+        val inventorySkin = Services.UI().inventorySkin
 
         setSize(Constant.WIDTHf, Constant.HEIGHTf)
         val bgImg = TiledImage(inventorySkin["bg-pattern-3"], 27, 16)
@@ -76,7 +76,7 @@ class SwitchActiveGuardianWidget() : BattleWidget()
         switchButton.setPosition(2f, 2f, Align.bottomLeft)
         addActor(switchButton)
 
-        teamChoiceWidget = TeamCircleWidget(Services.getUI().inventorySkin) {}
+        teamChoiceWidget = TeamCircleWidget(Services.UI().inventorySkin) {}
         teamChoiceWidget.setPosition(Constant.WIDTHf - 2, Constant.HEIGHTf / 2, Align.right)
         addActor(teamChoiceWidget)
 
@@ -129,7 +129,7 @@ class SwitchActiveGuardianWidget() : BattleWidget()
         }
 
         guardianStatusWidget.initialize(guardian)
-        val sprite = Services.getMedia().getMonsterSprite(guardian.speciesID, guardian.currentForm)
+        val sprite = Services.Media().getMonsterSprite(guardian.speciesID, guardian.currentForm)
         guardianImg.drawable = TextureRegionDrawable(sprite)
     }
 }

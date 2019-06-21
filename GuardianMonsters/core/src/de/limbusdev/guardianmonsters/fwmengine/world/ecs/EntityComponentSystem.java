@@ -178,7 +178,7 @@ public class EntityComponentSystem {
      * @param startFieldID  start point on new map
      */
     public void changeGameArea(int mapID, int startFieldID) {
-        Services.getScreenManager().pushScreen(
+        Services.ScreenManager().pushScreen(
             new WorldScreen(mapID, startFieldID, false));
     }
 

@@ -40,7 +40,7 @@ open class SevenButtonsWidget
     // .................................................................................. Properties
     // Buttons
     protected val buttons : ArrayMap<Int, TextButton> = ArrayMap()
-    private   val skin    : Skin get() = Services.getUI().battleSkin
+    private   val skin    : Skin get() = Services.UI().battleSkin
 
 
     // ................................................................................ Constructors
@@ -120,7 +120,7 @@ open class SevenButtonsWidget
 
     fun setButtonText(index: Int, ability: Ability)
     {
-        setButtonText(index, Services.getL18N().Abilities().get(ability.name))
+        setButtonText(index, Services.I18N().Abilities().get(ability.name))
     }
 
     fun setButtonStyle(index: Int, style: String)

@@ -35,7 +35,7 @@ class WeaponDetailViewWidget
     // ............................................................................................. CONSTRUCTOR
     init
     {
-        val skin = Services.getUI().inventorySkin
+        val skin = Services.UI().inventorySkin
 
         var offX = 4f
         val offY = 74f

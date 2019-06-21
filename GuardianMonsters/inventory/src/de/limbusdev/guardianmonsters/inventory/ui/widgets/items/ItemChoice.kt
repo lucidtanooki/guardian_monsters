@@ -36,11 +36,11 @@ class ItemChoice
     // ............................................................................................. CONSTRUCTORS
     init
     {
-        val skin = Services.getUI().inventorySkin
+        val skin = Services.UI().inventorySkin
 
         setSize(Constant.WIDTH.toFloat(), Constant.HEIGHT.toFloat())
         setPosition(0f, 0f, Align.bottomLeft)
-        val overlay = Image(Services.getUI().inventorySkin.getDrawable("black-a80"))
+        val overlay = Image(Services.UI().inventorySkin.getDrawable("black-a80"))
         overlay.setSize(Constant.WIDTH.toFloat(), Constant.HEIGHT.toFloat())
         overlay.setPosition(0f, 0f, Align.bottomLeft)
         addActor(overlay)

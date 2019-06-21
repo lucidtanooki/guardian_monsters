@@ -44,11 +44,11 @@ public class ItemDetailViewWidget extends Group {
     public void init(Item itemToShow)
     {
         this.item = itemToShow;
-        I18NBundle i18n = Services.getL18N().Inventory();
+        I18NBundle i18n = Services.I18N().Inventory();
 
         itemName.setText(i18n.get(item.getName()));
         itemDescription.setText(i18n.get(item.getName()+"-description"));
-        itemImg.setDrawable(Services.getMedia().getItemDrawable(itemToShow.getName()));
+        itemImg.setDrawable(Services.Media().getItemDrawable(itemToShow.getName()));
     }
 
     private void constructLayout()

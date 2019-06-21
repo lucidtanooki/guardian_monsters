@@ -33,7 +33,7 @@ public class WeatherAnimator {
     private boolean weatherOn;
 
     public WeatherAnimator(TiledMap map) {
-        media = Services.getMedia();
+        media = Services.Media();
         this.weatherOn = map.getProperties().containsKey("weather");
 
         if(weatherOn) {

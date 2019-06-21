@@ -58,7 +58,7 @@ class BattleGuardianWidget
         addActor(guardianImage)
 
         // Setup Status Effect Animation
-        val anim = Services.getMedia().getStatusEffectAnimation(StatusEffect.HEALTHY)
+        val anim = Services.Media().getStatusEffectAnimation(StatusEffect.HEALTHY)
         statusEffectAnimation = AnimatedImage(anim)
         addActor(statusEffectAnimation)
         statusEffectAnimation.setPosition(0f, 96f, Align.top)
@@ -72,7 +72,7 @@ class BattleGuardianWidget
     // .............................................................................. Initialization
     private fun initialize(index: Int, metaForm: Int, side: Side)
     {
-        val guardianSprite = Services.getMedia().getMonsterSprite(index, metaForm)
+        val guardianSprite = Services.Media().getMonsterSprite(index, metaForm)
 
         // Set Guardian Sprite
         drawable = TextureRegionDrawable(guardianSprite)
@@ -91,19 +91,19 @@ class BattleGuardianWidget
     /** Sets a new status effect animation. */
     private fun setStatusEffect(statusEffect: StatusEffect)
     {
-        statusEffectAnimation.animation = Services.getMedia().getStatusEffectAnimation(statusEffect)
+        statusEffectAnimation.animation = Services.Media().getStatusEffectAnimation(statusEffect)
     }
 
     /** Runs a substitution animation (e.g. when swapping a Guardian with another). */
     fun substitute(index: Int, metaForm: Int, side: Side, onSubstitutionAnimationComplete: () -> Unit)
     {
-        val sra = SelfRemovingAnimation(Services.getMedia().getBanningAnimation())
+        val sra = SelfRemovingAnimation(Services.Media().getBanningAnimation())
         sra.setPosition(0f, 0f, Align.bottom)
         addActor(sra)
 
         val setupAnimation = runThis {
 
-            val anim2 = Services.getMedia().getSummoningAnimation()
+            val anim2 = Services.Media().getSummoningAnimation()
             val sra2 = SelfRemovingAnimation(anim2)
             sra2.setPosition(0f, 0f, Align.bottom)
             addActor(sra2)
@@ -125,7 +125,7 @@ class BattleGuardianWidget
     /** Runs a replacement animation. */
     fun replaceDefeated(index: Int, metaForm: Int, side: Side, onReplacingAnimationComplete: () -> Unit)
     {
-        val sra = SelfRemovingAnimation(Services.getMedia().getSummoningAnimation())
+        val sra = SelfRemovingAnimation(Services.Media().getSummoningAnimation())
 
         sra.setPosition(0f, 0f, Align.bottom)
 
@@ -144,7 +144,7 @@ class BattleGuardianWidget
 
     fun animateBan(onBanAnimationComplete: () -> Unit)
     {
-        val sra = SelfRemovingAnimation(Services.getMedia().getBanningAnimation())
+        val sra = SelfRemovingAnimation(Services.Media().getBanningAnimation())
 
         sra.setPosition(0f, 0f, Align.bottom)
         addActor(sra)
@@ -160,7 +160,7 @@ class BattleGuardianWidget
 
     fun animateBanFailure(onBanFailureAnimationComplete: () -> Unit)
     {
-        val sra = SelfRemovingAnimation(Services.getMedia().getSummoningAnimation())
+        val sra = SelfRemovingAnimation(Services.Media().getSummoningAnimation())
 
         sra.setPosition(0f, 0f, Align.bottom)
         addActor(sra)
@@ -199,7 +199,7 @@ class BattleGuardianWidget
     {
         return runThis {
 
-            val tombStoneDrawable = Services.getUI().battleSkin.getRegion("tomb-stone")
+            val tombStoneDrawable = Services.UI().battleSkin.getRegion("tomb-stone")
             tombStoneDrawable.flip(side == Side.RIGHT, false)
             guardianImage.drawable = TextureRegionDrawable(tombStoneDrawable)
         }

@@ -283,7 +283,7 @@ class BattleAnimationWidget
             false -> Side.RIGHT
         }
 
-        val anim = Services.getMedia().getAttackAnimation(ability.name) as Animation<TextureRegion>
+        val anim = Services.Media().getAttackAnimation(ability.name) as Animation<TextureRegion>
         val sra = SelfRemovingAnimation(anim)
         anim.frameDuration = .1f
         // Ability direction
@@ -325,7 +325,7 @@ class BattleAnimationWidget
 
     private fun animateAreaAttack(ability: Ability, defSide: Side)
     {
-        val anim = Services.getMedia().getAttackAnimation(ability.name) as Animation<TextureRegion>
+        val anim = Services.Media().getAttackAnimation(ability.name) as Animation<TextureRegion>
         val sra = SelfRemovingAnimation(anim)
         anim.frameDuration = .1f
         // Ability direction
@@ -352,7 +352,7 @@ class BattleAnimationWidget
     /** Changes the status effect animation of a battle field slot. */
     private fun setStatusEffect(slot: Int, side: Side, effect: StatusEffect)
     {
-        statusEffectIndicators[side][slot] = Services.getMedia().getStatusEffectAnimation(effect)
+        statusEffectIndicators[side][slot] = Services.Media().getStatusEffectAnimation(effect)
     }
 
     /** Changes the Guardian sprite's z indices. */
@@ -430,7 +430,7 @@ class BattleAnimationWidget
 
         // Plays the attacks sound
         val path = AssetPath.Audio.SFX.BATTLE().getValue(abilityMedia.sfxType.toString().toUpperCase())[0]
-        val playSFXAction           = runThis { Services.getAudio().playSound(path) }
+        val playSFXAction           = runThis { Services.Audio().playSound(path) }
 
         // Plays the ability animation
         val attackAnimationAction   = runThis { animateAttackOfType(ability, origin, target) }
@@ -490,7 +490,7 @@ class BattleAnimationWidget
 
                 delay(.5f) ,                                     // Short delay before ability starts
                 runThis { animateAreaAttack(ability, defSide) }, // Plays the ability animation
-                runThis { Services.getAudio().playSound(path) }, // Plays the attacks sound
+                runThis { Services.Audio().playSound(path) }, // Plays the attacks sound
                 runThis { animateAreaAttackImpact(defSide)    }, // Animates the impact on the target
                 runThis { onHitAnimationComplete.invoke()     }  // Runs the callback handler
         )

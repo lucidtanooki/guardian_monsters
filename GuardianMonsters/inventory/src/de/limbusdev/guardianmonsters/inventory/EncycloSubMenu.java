@@ -123,15 +123,15 @@ public class EncycloSubMenu extends AInventorySubMenu
         for(int i=0; i < GuardiansServiceLocator.INSTANCE.getSpecies().getSpeciesDescription(speciesID).getMetaForms().size; i++) {
 
             if(i > 0) {nameBuilder.append(" > ");}
-            nameBuilder.append(Services.getL18N().getLocalizedGuardianName(speciesID, i));
+            nameBuilder.append(Services.I18N().getLocalizedGuardianName(speciesID, i));
         }
         name.setText(nameBuilder);
 
-        description.setText(Services.getL18N().getLocalizedGuardianDescription(speciesID));
+        description.setText(Services.I18N().getLocalizedGuardianDescription(speciesID));
 
         currentSpeciesID = speciesID;
 
-        IMediaManager media = Services.getMedia();
+        IMediaManager media = Services.Media();
         SpeciesDescription desc = GuardiansServiceLocator.INSTANCE.getSpecies().getSpeciesDescription(speciesID);
         int metaForms = desc.getMetaForms().size;
 

@@ -84,7 +84,7 @@ public class HUD extends InputAdapter {
         // Scene2D
         FitViewport fit = new FitViewport(Constant.WIDTH, Constant.HEIGHT);
         this.stage = new Stage(fit);
-        Skin skin = Services.getUI().getDefaultSkin();
+        Skin skin = Services.UI().getDefaultSkin();
 
         setUpConversation(skin);
         setUpTopLevelButtons(skin);
@@ -110,7 +110,7 @@ public class HUD extends InputAdapter {
     private void setUpTopLevelButtons(Skin skin) {
 
         // Menu Button
-        TextButton menu = new TextButton(Services.getL18N().General().get("hud_menu"), skin, "open-menu");
+        TextButton menu = new TextButton(Services.I18N().General().get("hud_menu"), skin, "open-menu");
         menu.setPosition(Constant.WIDTH, Constant.HEIGHT-2, Align.topRight);
 
         menu.addListener(new ClickListener() {
@@ -134,7 +134,7 @@ public class HUD extends InputAdapter {
         this.menuButtons.columnAlign(Align.topRight);
 
         // Save Button
-        TextButton save = new TextButton(Services.getL18N().General().get("hud_save"), skin, "menu-entry");
+        TextButton save = new TextButton(Services.I18N().General().get("hud_save"), skin, "menu-entry");
         save.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -144,7 +144,7 @@ public class HUD extends InputAdapter {
         this.menuButtons.addActor(save);
 
         // Quit Button
-        TextButton quit = new TextButton(Services.getL18N().General().get("hud_quit"), skin, "menu-entry");
+        TextButton quit = new TextButton(Services.I18N().General().get("hud_quit"), skin, "menu-entry");
         quit.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -157,11 +157,11 @@ public class HUD extends InputAdapter {
         this.menuButtons.addActor(quit);
 
         // Team Button
-        TextButton teamButton = new TextButton(Services.getL18N().General().get("hud_team"), skin, "menu-entry");
+        TextButton teamButton = new TextButton(Services.I18N().General().get("hud_team"), skin, "menu-entry");
         teamButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                Services.getScreenManager().pushScreen(new InventoryScreen(
+                Services.ScreenManager().pushScreen(new InventoryScreen(
                     Components.team.get(hero).team, Components.inventory.get(hero).inventory));
             }
         });
@@ -306,10 +306,10 @@ public class HUD extends InputAdapter {
 
     public void openConversation(String text, String name, int mapID) {
         this.menuButtons.setVisible(false);
-        this.convText.setText(Services.getL18N().l18nMap(mapID).get(text));
+        this.convText.setText(Services.I18N().i18nMap(mapID).get(text));
         String nm = "";
         if(!name.isEmpty()) {
-            nm = Services.getL18N().l18nMap(mapID).get(name);
+            nm = Services.I18N().i18nMap(mapID).get(name);
         }
         this.titleLabel.setText(nm);
         this.titleLabel.setVisible(true);

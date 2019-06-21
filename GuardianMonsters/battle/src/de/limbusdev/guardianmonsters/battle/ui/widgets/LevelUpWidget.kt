@@ -37,7 +37,7 @@ class LevelUpWidget(skin: Skin, guardian: AGuardian) : OverlayWidget(skin)
         bg.setPosition((Constant.WIDTH / 2 - 150).toFloat(), 30f, Align.bottomLeft)
         addActor(bg)
 
-        monsterImg = Image(Services.getMedia().getMonsterSprite(guardian.speciesID, guardian.abilityGraph.currentForm))
+        monsterImg = Image(Services.Media().getMonsterSprite(guardian.speciesID, guardian.abilityGraph.currentForm))
         monsterImg.setPosition(64f, 64f, Align.bottomLeft)
         addActor(monsterImg)
 
@@ -46,8 +46,8 @@ class LevelUpWidget(skin: Skin, guardian: AGuardian) : OverlayWidget(skin)
         addActor(ok)
         ok.replaceOnClick { remove() }
 
-        val guardianName = Services.getL18N().getGuardianNicknameIfAvailable(guardian)
-        val info = Label(Services.getL18N().Battle().format("level_up", guardianName), skin, "default")
+        val guardianName = Services.I18N().getGuardianNicknameIfAvailable(guardian)
+        val info = Label(Services.I18N().Battle().format("level_up", guardianName), skin, "default")
         info.setSize(140f, 32f)
         info.setPosition((128 + 64).toFloat(), 140f, Align.bottomLeft)
         info.setWrap(true)

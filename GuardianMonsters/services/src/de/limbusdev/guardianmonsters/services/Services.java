@@ -37,7 +37,7 @@ public class Services
         statusEffectAssetNames.put(IndividualStatistics.StatusEffect.BLIND, "blind");
     }
 
-    public static IMediaManager getMedia() {
+    public static IMediaManager Media() {
         if(media == null) {
             System.err.println("SERVICES: No Media service injected yet with Services.provide(Media media). Returning NullMedia.");
             return new NullMediaManager();
@@ -50,11 +50,15 @@ public class Services
         audio = service;
     }
 
-    public static IAudioManager getAudio() {
-        if(audio == null) {
+    public static IAudioManager Audio()
+    {
+        if(audio == null)
+        {
             System.err.println("SERVICES: No Audio service injected yet with Services.provide(Audio audio). Returning NullAudio.");
             return new NullAudioManager();
-        } else {
+        }
+        else
+        {
             return audio;
         }
     }
@@ -63,7 +67,7 @@ public class Services
         screens = service;
     }
 
-    public static IScreenManager getScreenManager() {
+    public static IScreenManager ScreenManager() {
         if(screens == null) {
             System.err.println("SERVICES: No ScreenManager service injected yet with Services.provide(ScreenManager service). Returning NullScreenManager.");
             return new de.limbusdev.guardianmonsters.scene2d.NullScreenManager();
@@ -76,7 +80,7 @@ public class Services
         l18n = service;
     }
 
-    public static L18N getL18N() {
+    public static L18N I18N() {
         if(l18n == null) {
             System.err.println("SERVICES: No Localization service injected yet with Services.provide(L18N service). Returning NullL18N.");
             return new NullL18N();
@@ -89,7 +93,7 @@ public class Services
         settings = service;
     }
 
-    public static Settings getSettings() {
+    public static Settings Settings() {
         if(settings == null) {
             System.err.println("SERVICES: No Settings service injected yet with Services.provide(Settings settings). Returning NullSettings.");
             return new NullSettings();
@@ -102,7 +106,7 @@ public class Services
         ui = service;
     }
 
-    public static UI getUI() {
+    public static UI UI() {
         if(ui == null) {
             System.err.println("SERVICES: No UI service injected yet with Services.provide(UI service). Returning NullSettings.");
             return new NullUI();

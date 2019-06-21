@@ -25,17 +25,17 @@ public class ItemInventoryButton extends TextButton implements Listener<ItemSign
     private Inventory inventory;
 
     public ItemInventoryButton(Item item, Skin skin, Inventory inventory) {
-        super(Services.getL18N().Inventory().get(item.getName()), skin);
+        super(Services.I18N().Inventory().get(item.getName()), skin);
         construct(item, inventory);
     }
 
     public ItemInventoryButton(Item item, Skin skin, String styleName, Inventory inventory) {
-        super(Services.getL18N().Inventory().get(item.getName()), skin, styleName);
+        super(Services.I18N().Inventory().get(item.getName()), skin, styleName);
         construct(item, inventory);
     }
 
     public ItemInventoryButton(Item item, TextButtonStyle style, Inventory inventory) {
-        super(Services.getL18N().Inventory().get(item.getName()), style);
+        super(Services.I18N().Inventory().get(item.getName()), style);
         construct(item, inventory);
     }
 
@@ -56,7 +56,7 @@ public class ItemInventoryButton extends TextButton implements Listener<ItemSign
         counter.setAlignment(Align.center);
         add(counter).width(32);
 
-        Drawable itemDrawable = Services.getMedia().getItemDrawable(item.getName());
+        Drawable itemDrawable = Services.Media().getItemDrawable(item.getName());
         Image itemImg = new Image(itemDrawable);
         itemImg.setAlign(Align.center);
         add(itemImg).width(32).height(32);

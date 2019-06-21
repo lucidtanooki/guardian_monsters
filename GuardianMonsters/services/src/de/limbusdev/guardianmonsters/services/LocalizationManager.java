@@ -67,12 +67,12 @@ public class LocalizationManager implements L18N
     }
 
     @Override
-    public I18NBundle l18n(String type) {
+    public I18NBundle i18n(String type) {
         return l18n.get(type);
     }
 
     @Override
-    public I18NBundle l18nMap(int mapID) {
+    public I18NBundle i18nMap(int mapID) {
         return l18nMap.get(mapID);
     }
 

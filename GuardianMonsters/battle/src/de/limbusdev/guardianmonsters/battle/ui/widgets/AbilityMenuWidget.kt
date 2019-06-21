@@ -22,7 +22,7 @@ class AbilityMenuWidget(callbacks: (Int) -> Unit) : SevenButtonsWidget(callbacks
         private val order : IntArray = intArrayOf(5, 3, 1, 0, 4, 2, 6)
     }
 
-    private val skin : Skin get() = Services.getUI().battleSkin
+    private val skin : Skin get() = Services.UI().battleSkin
 
 
     // .............................................................................. Initialization
@@ -39,7 +39,7 @@ class AbilityMenuWidget(callbacks: (Int) -> Unit) : SevenButtonsWidget(callbacks
                 val abilityID = guardian.abilityGraph.getActiveAbility(i)
                 val ability = GuardiansServiceLocator.abilities.getAbility(abilityID)
                 setButtonStyle(i, ability.element)
-                setButtonText(i, Services.getL18N().getLocalizedAbilityName(ability.name))
+                setButtonText(i, Services.I18N().getLocalizedAbilityName(ability.name))
 
                 enableButton(i)
 

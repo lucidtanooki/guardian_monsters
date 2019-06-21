@@ -26,18 +26,18 @@ public class ReassuranceWidget extends Group {
         bg.setPosition(0,0,Align.bottomLeft);
         addActor(bg);
 
-        question = new Label(Services.getL18N().Inventory().get("reassurance"), skin, "paper");
+        question = new Label(Services.I18N().Inventory().get("reassurance"), skin, "paper");
         question.setSize(292,64);
         question.setPosition(Constant.WIDTH/2-(292/2), Constant.HEIGHT/2-32, Align.bottomLeft);
         addActor(question);
 
-        buttonNo = new TextButton(Services.getL18N().General().get("no"), skin, "button-sandstone");
+        buttonNo = new TextButton(Services.I18N().General().get("no"), skin, "button-sandstone");
         buttonNo.setSize(64,24);
         buttonNo.setPosition(Constant.WIDTH/2+2,40,Align.bottomLeft);
         buttonNo.addListener(new SimpleClickListener(() -> remove()));
         addActor(buttonNo);
 
-        buttonYes = new TextButton(Services.getL18N().General().get("yes"), skin, "button-sandstone");
+        buttonYes = new TextButton(Services.I18N().General().get("yes"), skin, "button-sandstone");
         buttonYes.setSize(64,24);
         buttonYes.setPosition(Constant.WIDTH/2-2,40,Align.bottomRight);
         addActor(buttonYes);

@@ -28,7 +28,7 @@ class BattleQueueWidget
     private val previewYOffset = 36
     private val queueOffset = 4
 
-    private val bgIndicator = Image(Services.getUI().battleSkin.getDrawable("monster-preview-active"))
+    private val bgIndicator = Image(Services.UI().battleSkin.getDrawable("monster-preview-active"))
 
 
     // ..................................................................................... Methods
@@ -54,7 +54,7 @@ class BattleQueueWidget
             val guardian = round.get(i)
             val side = queue.getTeamSideFor(guardian)
 
-            val previewWidget = MonsterPreviewWidget(Services.getUI().battleSkin)
+            val previewWidget = MonsterPreviewWidget(Services.UI().battleSkin)
             previewWidget.setPreview(guardian.speciesID, guardian.currentForm, side)
 
             if (greyOut) { previewWidget.color = Color.GRAY }

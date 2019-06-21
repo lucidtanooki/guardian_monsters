@@ -49,7 +49,7 @@ class MonsterStateWidget
     private val hudRingImg  : Image
     private val hudNameImg  : Image
 
-    private val skin = Services.getUI().battleSkin
+    private val skin = Services.UI().battleSkin
 
 
     // ................................................................................ Constructors
@@ -125,7 +125,7 @@ class MonsterStateWidget
         val speciesID = guardian.speciesID
         val metaForm = guardian.abilityGraph.currentForm
         val name = species.getCommonNameById(speciesID, metaForm)
-        nameLabel.setText(Services.getL18N().Guardians().get(name))
+        nameLabel.setText(Services.I18N().Guardians().get(name))
         guardian.addObserver(this)
     }
 

@@ -23,7 +23,7 @@ public class AnimatedPersonSprite extends Sprite
         super();
 
         // load animation textures
-        animations = Services.getMedia().getPersonAnimationSet(male,index);
+        animations = Services.Media().getPersonAnimationSet(male,index);
 
         construct(animations);
     }
@@ -32,7 +32,7 @@ public class AnimatedPersonSprite extends Sprite
         super();
 
         // load animation textures
-        animations = Services.getMedia().getPersonAnimationSet(name);
+        animations = Services.Media().getPersonAnimationSet(name);
 
         construct(animations);
     }

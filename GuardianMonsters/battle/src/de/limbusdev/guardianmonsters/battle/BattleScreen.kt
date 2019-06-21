@@ -47,7 +47,7 @@ class BattleScreen(inventory: Inventory) : AScreen(BattleHUD(inventory))
      */
     fun initialize(team: Team, opponentTeam: Team, guardoSphere: GuardoSphere)
     {
-        this.initialized = true
+        initialized = true
         battleHUD.initialize(team, opponentTeam, guardoSphere)
     }
 
@@ -61,7 +61,7 @@ class BattleScreen(inventory: Inventory) : AScreen(BattleHUD(inventory))
         check(initialized) { "$TAG: initialize(heroTeam, opponentTeam) must be called before drawing." }
 
         // Start Battle Background Music
-        Services.getAudio().playLoopMusic(AssetPath.Audio.Music.BG_BATTLE_default)
+        Services.Audio().playLoopMusic(AssetPath.Audio.Music.BG_BATTLE_default)
     }
 
     override fun hide()
@@ -70,6 +70,6 @@ class BattleScreen(inventory: Inventory) : AScreen(BattleHUD(inventory))
         initialized = false
 
         // Stop Battle Background Music
-        Services.getAudio().stopMusic(AssetPath.Audio.Music.BG_BATTLE_default)
+        Services.Audio().stopMusic(AssetPath.Audio.Music.BG_BATTLE_default)
     }
 }

@@ -18,7 +18,7 @@ class BattleHUDTextButton
         position : Int,
         element  : Element
 )
-    : TextButton(text, Services.getUI().battleSkin, construct(position, element))
+    : TextButton(text, Services.UI().battleSkin, construct(position, element))
 {
     // ................................................................................ Constructors
     init

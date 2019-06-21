@@ -21,7 +21,7 @@ class BattleActionMenuWidget
     val bagButton   : ImageButton = BattleHUDMenuButton(skin, BattleHUDMenuButton.BAG)
     val extraButton : ImageButton = BattleHUDMenuButton(skin, BattleHUDMenuButton.DEFEND)
 
-    val skin : Skin get() = Services.getUI().battleSkin
+    val skin : Skin get() = Services.UI().battleSkin
 
 
     // ................................................................................ Constructors

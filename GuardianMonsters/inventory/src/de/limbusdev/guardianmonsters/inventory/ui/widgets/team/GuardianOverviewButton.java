@@ -34,17 +34,17 @@ public class GuardianOverviewButton extends TextButton implements Listener<Guard
 
     // ................................................................................ CONSTRUCTORS
     public GuardianOverviewButton(AGuardian guardian, Skin skin, Item item) {
-        super(Services.getL18N().getLocalizedGuardianName(guardian), skin);
+        super(Services.I18N().getLocalizedGuardianName(guardian), skin);
         construct(guardian, item);
     }
 
     public GuardianOverviewButton(AGuardian guardian, Skin skin, String styleName, Item item) {
-        super(Services.getL18N().getLocalizedGuardianName(guardian), skin, styleName);
+        super(Services.I18N().getLocalizedGuardianName(guardian), skin, styleName);
         construct(guardian, item);
     }
 
     public GuardianOverviewButton(AGuardian guardian, TextButtonStyle style, Item item) {
-        super(Services.getL18N().getLocalizedGuardianName(guardian), style);
+        super(Services.I18N().getLocalizedGuardianName(guardian), style);
         construct(guardian, item);
     }
 
@@ -54,7 +54,7 @@ public class GuardianOverviewButton extends TextButton implements Listener<Guard
 //       TODO guardian.add(this);
 
         getLabel().setAlignment(Align.topLeft);
-        TextureRegion region = Services.getMedia().getMonsterMiniSprite(guardian.getSpeciesID(), guardian.getAbilityGraph().getCurrentForm());
+        TextureRegion region = Services.Media().getMonsterMiniSprite(guardian.getSpeciesID(), guardian.getAbilityGraph().getCurrentForm());
         Image monsterImg = new Image(region);
         add(monsterImg).width(16).height(region.getRegionHeight()).align(Align.topLeft);
         row();

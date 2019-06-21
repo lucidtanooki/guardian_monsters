@@ -115,7 +115,7 @@ class GuardoSphereStatWidget(private val skin: Skin) : Group()
         for(e in descr.getElements(m.abilityGraph.currentForm))
         {
             val elem = e.toString().toLowerCase()
-            var elemName = Services.getL18N().Elements().get("element_$elem")
+            var elemName = Services.I18N().Elements().get("element_$elem")
 
             elemName =
                     if(elemName.length < 7) elemName

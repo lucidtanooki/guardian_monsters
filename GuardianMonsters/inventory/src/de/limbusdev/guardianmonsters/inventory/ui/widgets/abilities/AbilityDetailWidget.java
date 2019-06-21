@@ -133,7 +133,7 @@ public class AbilityDetailWidget extends Container {
     }
 
     private void initMetamorphosis() {
-        String text = Services.getL18N().General().get("metamorphosis");
+        String text = Services.I18N().General().get("metamorphosis");
         name.setText(text);
     }
 
@@ -145,7 +145,7 @@ public class AbilityDetailWidget extends Container {
             name.setText("Empty");
             damage.setText("0");
         } else {
-            name.setText(Services.getL18N().Abilities().get(ability.getName()));
+            name.setText(Services.I18N().Abilities().get(ability.getName()));
             damage.setText(Integer.toString(ability.getDamage()));
 
             String drawableID = ability.getDamageType() == Ability.DamageType.PHYSICAL ? "pstr" : "mstr";
@@ -153,7 +153,7 @@ public class AbilityDetailWidget extends Container {
 
             abilityType.setDrawable(drawable);
             String elem = ability.getElement().toString().toLowerCase();
-            String elemName = Services.getL18N().Elements().get("element_" + elem);
+            String elemName = Services.I18N().Elements().get("element_" + elem);
             elemName = elemName.length() < 7 ? elemName : elemName.substring(0,6);
             element = new Label(elemName, skin, "elem-" + elem);
             element.setPosition(124,0,Align.bottomRight);
@@ -163,7 +163,7 @@ public class AbilityDetailWidget extends Container {
 
     private void initEquipmentDetails(BodyPart equipmentType) {
         String equipment;
-        I18NBundle bundle = Services.getL18N().Inventory();
+        I18NBundle bundle = Services.I18N().Inventory();
 
         switch(equipmentType) {
             case HANDS: equipment = bundle.get("equip-hands"); break;

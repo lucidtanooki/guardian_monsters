@@ -37,13 +37,13 @@ class MetamorphosisHUD
 
     init
     {
-        val bundle = Services.getL18N().General()
-        val media = Services.getMedia()
+        val bundle = Services.I18N().General()
+        val media = Services.Media()
 
         val monsterNames = arrayOf(
 
-                Services.getL18N().getLocalizedGuardianName(speciesID, formerMetaForm),
-                Services.getL18N().getLocalizedGuardianName(speciesID, newMetaForm)
+                Services.I18N().getLocalizedGuardianName(speciesID, formerMetaForm),
+                Services.I18N().getLocalizedGuardianName(speciesID, newMetaForm)
         )
 
         val messages = arrayOf(
@@ -169,13 +169,13 @@ class MetamorphosisHUD
         const val labelWidth = 420f
         const val labelHeight = 64f
 
-        fun startBGMusic()          = Services.getAudio().playLoopMusic(AssetPath.Audio.Music.METAMORPHOSIS)
-        fun stopBGMusic()           = Services.getAudio().stopMusic(AssetPath.Audio.Music.METAMORPHOSIS)
-        fun playVictorySFX()        = Services.getAudio().playMusic(AssetPath.Audio.Music.VICTORY_FANFARE)
-        fun playMetamorphosisSFX()  = Services.getAudio().playSound(AssetPath.Audio.SFX.METAMORPHOSIS)
+        fun startBGMusic()          = Services.Audio().playLoopMusic(AssetPath.Audio.Music.METAMORPHOSIS)
+        fun stopBGMusic()           = Services.Audio().stopMusic(AssetPath.Audio.Music.METAMORPHOSIS)
+        fun playVictorySFX()        = Services.Audio().playMusic(AssetPath.Audio.Music.VICTORY_FANFARE)
+        fun playMetamorphosisSFX()  = Services.Audio().playSound(AssetPath.Audio.SFX.METAMORPHOSIS)
 
-        fun muteAudio(): Action     = Services.getAudio().createMuteAction(AssetPath.Audio.Music.METAMORPHOSIS)
-        fun fadeInMusic(): Action   = Services.getAudio().getFadeInMusicAction(AssetPath.Audio.Music.METAMORPHOSIS)
-        fun popScreen(): Action     = runAction { Services.getScreenManager().popScreen() }
+        fun muteAudio(): Action     = Services.Audio().createMuteAction(AssetPath.Audio.Music.METAMORPHOSIS)
+        fun fadeInMusic(): Action   = Services.Audio().getFadeInMusicAction(AssetPath.Audio.Music.METAMORPHOSIS)
+        fun popScreen(): Action     = runAction { Services.ScreenManager().popScreen() }
     }
 }

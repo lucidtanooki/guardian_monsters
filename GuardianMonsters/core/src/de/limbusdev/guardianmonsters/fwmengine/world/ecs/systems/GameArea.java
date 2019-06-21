@@ -265,11 +265,11 @@ public class GameArea {
     }
 
     public void playMusic() {
-        Services.getAudio().playLoopMusic(bgMusic);
+        Services.Audio().playLoopMusic(bgMusic);
     }
 
     public void stopMusic() {
-        Services.getAudio().stopMusic(bgMusic);
+        Services.Audio().stopMusic(bgMusic);
     }
 
     public ArrayMap<Integer, Array<IntRect>> getColliders() {

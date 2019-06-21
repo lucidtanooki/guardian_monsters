@@ -11,6 +11,8 @@ import de.limbusdev.guardianmonsters.media.MediaManager
 import de.limbusdev.guardianmonsters.scene2d.ConcreteScreenManager
 import de.limbusdev.guardianmonsters.services.*
 import de.limbusdev.guardianmonsters.utils.GameStateDebugger
+import ktx.inject.Context
+import ktx.log.info
 
 
 class GuardianMonsters : Game() {
@@ -24,25 +26,22 @@ class GuardianMonsters : Game() {
         // Inject Dependencies: MediaManager, AudioManager, ScreenManager, SaveGameManager, ...
         injectDependencies()
 
-        if(DEBUGGING_ON) {
-
+        when(DEBUGGING_ON)
+        {
             // Start Debugging
-            GameStateDebugger(this).startDebugging()
-        }
-        else {
-
+            true  -> GameStateDebugger(this).startDebugging()
             // Start normal game from Main Menu
-            Services.getScreenManager().pushScreen(MainMenuScreen())
+            false -> Services.ScreenManager().pushScreen(MainMenuScreen())
         }
     }
 
     override fun dispose() {
 
-        Services.getUI().dispose()
-        Services.getMedia().dispose()
-        Services.getAudio().dispose()
-        Services.getL18N().dispose()
-        Services.getScreenManager().dispose()
+        Services.UI().dispose()
+        Services.Media().dispose()
+        Services.Audio().dispose()
+        Services.I18N().dispose()
+        Services.ScreenManager().dispose()
         CoreServiceLocator.destroy()
         super.dispose()
 
@@ -54,10 +53,10 @@ class GuardianMonsters : Game() {
     /**
      * Initializes the Service Locator
      */
-    private fun injectDependencies() {
-
+    private fun injectDependencies()
+    {
         // Service Locator: Dependency Injection
-        println("GuardianMonsters: injecting dependencies ...")
+        info { "GuardianMonsters: injecting dependencies ..." }
 
         Services.provide(MediaManager())
         Services.provide(AudioManager())

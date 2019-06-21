@@ -34,7 +34,7 @@ public class InventoryScreen implements Screen, MainToolBar.Callbacks
     {
         FitViewport fit = new FitViewport(Constant.WIDTH, Constant.HEIGHT);
         this.stage = new Stage(fit);
-        this.skin = Services.getUI().getInventorySkin();
+        this.skin = Services.UI().getInventorySkin();
 
         views = new ArrayMap<>();
 

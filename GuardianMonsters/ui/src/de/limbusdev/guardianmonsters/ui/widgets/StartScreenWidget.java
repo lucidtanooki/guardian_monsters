@@ -35,7 +35,7 @@ public class StartScreenWidget extends WidgetGroup {
         group.setPosition(0,0,Align.bottomLeft);
         addActor(group);
 
-        Animation bgAnim = new Animation(.1f, Services.getMedia()
+        Animation bgAnim = new Animation(.1f, Services.Media()
             .getTextureAtlas(AssetPath.Spritesheet.ANIMATIONS_BIG).findRegions("mainMenuAnimation"));
         bgAnim.setPlayMode(Animation.PlayMode.LOOP);
         AnimatedImage bgAnimation = new AnimatedImage(bgAnim);
@@ -43,16 +43,16 @@ public class StartScreenWidget extends WidgetGroup {
         bgAnimation.setPosition(35,-30, Align.bottomLeft);
         group.addActor(bgAnimation);
 
-        Image logo = new Image(Services.getMedia().getTexture(AssetPath.Textures.MAIN_MENU_BG1));
+        Image logo = new Image(Services.Media().getTexture(AssetPath.Textures.MAIN_MENU_BG1));
         logo.setPosition(Constant.WIDTH / 2, Constant.HEIGHT / 2, Align.center);
         group.addActor(logo);
 
-        Label creatorLabel = new Label("by Georg Eckert", Services.getUI().getDefaultSkin(),"trans-white");
+        Label creatorLabel = new Label("by Georg Eckert", Services.UI().getDefaultSkin(),"trans-white");
         creatorLabel.setPosition(Constant.WIDTH/2,76,Align.bottomLeft);
         creatorLabel.setAlignment(Align.center,Align.center);
         group.addActor(creatorLabel);
 
-        I18NBundle i18n = Services.getL18N().General();
+        I18NBundle i18n = Services.I18N().General();
 
         startButton = new TextButton(i18n.get("main_menu_touch_start"), skin, "button-96x32");
         startButton.setSize(96,32);

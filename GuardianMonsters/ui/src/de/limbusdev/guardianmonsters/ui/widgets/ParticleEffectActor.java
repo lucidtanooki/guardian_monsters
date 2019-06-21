@@ -23,7 +23,7 @@ public class ParticleEffectActor extends Actor
 
     public ParticleEffectActor(String name) {
         super();
-        TextureAtlas particleAtlas = Services.getMedia().getTextureAtlas(AssetPath.Spritesheet.PARTICLES);
+        TextureAtlas particleAtlas = Services.Media().getTextureAtlas(AssetPath.Spritesheet.PARTICLES);
         ParticleEffect particles = new ParticleEffect();
         particles.load(Gdx.files.internal("particles/" + name + "-particle-effect.p"), particleAtlas);
         this.particleEffect = particles;

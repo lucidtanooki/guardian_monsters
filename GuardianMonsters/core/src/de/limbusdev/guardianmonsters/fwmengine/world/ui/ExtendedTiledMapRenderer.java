@@ -49,7 +49,7 @@ public class ExtendedTiledMapRenderer extends OrthogonalTiledMapRenderer {
         this.objectAnimations = new ArrayMap<>();
         this.tileAnimations = new ArrayMap<>();
 
-        this.media = Services.getMedia();
+        this.media = Services.Media();
         this.elapsedTime = 0;
         this.weatherAnimator = new WeatherAnimator(map);
 

@@ -34,7 +34,7 @@ abstract class AHUD(protected val skin: Skin)
     // ..................................................................................... Methods
     open fun goToPreviousScreen()
     {
-        Services.getScreenManager().popScreen()
+        Services.ScreenManager().popScreen()
     }
 
     fun addAdditionalStage(stage: Stage)

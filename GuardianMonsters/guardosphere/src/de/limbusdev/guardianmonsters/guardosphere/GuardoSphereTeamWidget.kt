@@ -5,9 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.*
 import com.badlogic.gdx.utils.Align
 import com.badlogic.gdx.utils.Array
 import de.limbusdev.guardianmonsters.guardians.monsters.Team
-import de.limbusdev.guardianmonsters.scene2d.lSetPosition
-import de.limbusdev.guardianmonsters.scene2d.lSetSize
-import de.limbusdev.utils.extensions.replaceOnClick
+import de.limbusdev.guardianmonsters.scene2d.*
 
 import ktx.actors.plusAssign
 
@@ -16,12 +14,11 @@ import ktx.actors.plusAssign
  *
  * @author Georg Eckert 2017
  */
-class GuardoSphereTeamWidget(
-
+class GuardoSphereTeamWidget
+(
         private val skin: Skin,
         private val team: Team,
         private val buttonGroup: ButtonGroup<Button>
-
 )
     : Group()
 {
@@ -39,16 +36,8 @@ class GuardoSphereTeamWidget(
 
         // Configure Actors
         setSize(WIDTH, HEIGHT)
-        background
-                .lSetSize(WIDTH, HEIGHT)
-                .lSetPosition(0f, 0f, Align.bottomLeft)
-        monsterButtons
-                .lSetSize(240f, 32f)
-                .lSetPosition(6f, 4f, Align.bottomLeft)
-
-        // Add Actors
-        this+=background
-        this+=monsterButtons
+        background.setup(WIDTH, HEIGHT, 0f, 0f, Align.bottomLeft, this)
+        monsterButtons.setup(240f, 32f, 6f, 4f, Align.bottomLeft, this)
 
         // Refresh Layout
         refresh()

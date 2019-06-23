@@ -16,11 +16,10 @@ import de.limbusdev.guardianmonsters.guardians.items.medicine.AMedicalItem
 import de.limbusdev.guardianmonsters.guardians.monsters.GuardoSphere
 import de.limbusdev.guardianmonsters.guardians.monsters.Team
 import de.limbusdev.guardianmonsters.inventory.ui.widgets.team.GuardianListWidget
+import de.limbusdev.guardianmonsters.scene2d.replaceOnClick
 import de.limbusdev.guardianmonsters.services.Services
 import de.limbusdev.guardianmonsters.ui.Constant
 import de.limbusdev.guardianmonsters.ui.widgets.ItemListWidget
-import de.limbusdev.utils.extensions.replaceOnClick
-import ktx.style.get
 
 class ItemChoice
 (

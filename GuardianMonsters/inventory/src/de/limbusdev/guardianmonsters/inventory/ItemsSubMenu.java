@@ -13,6 +13,7 @@ import de.limbusdev.guardianmonsters.inventory.ui.widgets.items.ItemApplicationW
 import de.limbusdev.guardianmonsters.inventory.ui.widgets.items.ItemCategoryToolbar;
 import de.limbusdev.guardianmonsters.inventory.ui.widgets.items.KeyItemDetailViewWidget;
 import de.limbusdev.guardianmonsters.inventory.ui.widgets.items.WeaponDetailViewWidget;
+import de.limbusdev.guardianmonsters.services.Services;
 import de.limbusdev.guardianmonsters.ui.widgets.ItemListWidget;
 
 /**
@@ -62,7 +63,7 @@ public class ItemsSubMenu extends AInventorySubMenu
                 detailView = new KeyItemDetailViewWidget(inventory, team);
                 break;
             default:
-                detailView = new ItemApplicationWidget(inventory, team);
+                detailView = new ItemApplicationWidget(inventory, team, Services.UI().getInventorySkin());
                 break;
         }
         detailView.setPosition(264,2, Align.bottomLeft);

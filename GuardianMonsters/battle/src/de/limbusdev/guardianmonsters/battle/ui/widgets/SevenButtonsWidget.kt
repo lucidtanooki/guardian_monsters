@@ -10,8 +10,8 @@ import de.limbusdev.guardianmonsters.battle.BattleHUD
 
 import de.limbusdev.guardianmonsters.guardians.Element
 import de.limbusdev.guardianmonsters.guardians.abilities.Ability
+import de.limbusdev.guardianmonsters.scene2d.replaceOnClick
 import de.limbusdev.guardianmonsters.services.Services
-import de.limbusdev.utils.extensions.replaceOnClick
 
 import de.limbusdev.utils.extensions.set
 

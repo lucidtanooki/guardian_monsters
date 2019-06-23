@@ -10,9 +10,9 @@ import com.badlogic.gdx.utils.Align
 
 import de.limbusdev.guardianmonsters.guardians.items.Item
 import de.limbusdev.guardianmonsters.guardians.monsters.Team
+import de.limbusdev.guardianmonsters.scene2d.replaceOnClick
 import de.limbusdev.guardianmonsters.services.Services
 import de.limbusdev.guardianmonsters.ui.Constant
-import de.limbusdev.utils.extensions.replaceOnClick
 
 /**
  * Gives the player a quick overview over all guardians currently in team. All status values are

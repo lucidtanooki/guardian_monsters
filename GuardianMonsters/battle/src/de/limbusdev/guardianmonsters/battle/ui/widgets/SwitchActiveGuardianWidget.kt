@@ -22,13 +22,13 @@ import com.badlogic.gdx.utils.Align
 import de.limbusdev.guardianmonsters.guardians.battle.CombatTeam
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian
 import de.limbusdev.guardianmonsters.guardians.monsters.Team
+import de.limbusdev.guardianmonsters.scene2d.replaceOnClick
 import de.limbusdev.guardianmonsters.services.Services
 import de.limbusdev.guardianmonsters.ui.Constant
 import de.limbusdev.guardianmonsters.ui.widgets.ATeamChoiceWidget
 import de.limbusdev.guardianmonsters.ui.widgets.GuardianStatusWidget
 import de.limbusdev.guardianmonsters.ui.widgets.TeamCircleWidget
 import de.limbusdev.guardianmonsters.ui.widgets.TiledImage
-import de.limbusdev.utils.extensions.replaceOnClick
 import ktx.style.get
 
 

@@ -23,7 +23,8 @@ import de.limbusdev.guardianmonsters.services.Services;
  * @author Georg Eckert 2017
  */
 
-public class ItemListWidget extends Group implements Listener<ItemSignal> {
+public class ItemListWidget extends Group implements Listener<ItemSignal>
+{
 
     private Table itemTable;
     private Inventory inventory;

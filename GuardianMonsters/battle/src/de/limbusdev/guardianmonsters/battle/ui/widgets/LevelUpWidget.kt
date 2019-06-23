@@ -1,22 +1,19 @@
 package de.limbusdev.guardianmonsters.battle.ui.widgets
 
 import com.badlogic.gdx.graphics.g2d.Animation
-import com.badlogic.gdx.scenes.scene2d.InputEvent
 import com.badlogic.gdx.scenes.scene2d.ui.Image
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Skin
 import com.badlogic.gdx.scenes.scene2d.ui.Table
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener
 import com.badlogic.gdx.utils.Align
 
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian
-import de.limbusdev.guardianmonsters.guardians.monsters.LevelUpReport
 import de.limbusdev.guardianmonsters.scene2d.AnimatedImage
+import de.limbusdev.guardianmonsters.scene2d.replaceOnClick
 import de.limbusdev.guardianmonsters.services.Services
 import de.limbusdev.guardianmonsters.ui.Constant
 import de.limbusdev.guardianmonsters.ui.widgets.OverlayWidget
-import de.limbusdev.utils.extensions.replaceOnClick
 
 
 /**

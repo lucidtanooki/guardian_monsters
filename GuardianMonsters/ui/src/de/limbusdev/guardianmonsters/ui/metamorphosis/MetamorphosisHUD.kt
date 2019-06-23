@@ -6,11 +6,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.*
 import com.badlogic.gdx.utils.Align
 import de.limbusdev.guardianmonsters.assets.paths.AssetPath
 import de.limbusdev.guardianmonsters.scene2d.AnimatedImage
+import de.limbusdev.guardianmonsters.scene2d.replaceOnClick
 import de.limbusdev.guardianmonsters.services.Services
 import de.limbusdev.guardianmonsters.ui.AHUD
 import de.limbusdev.guardianmonsters.ui.Constant
 import de.limbusdev.guardianmonsters.ui.widgets.ParticleEffectActor
-import de.limbusdev.utils.extensions.replaceOnClick
 import ktx.actors.*
 import com.badlogic.gdx.scenes.scene2d.actions.Actions.run as runAction
 

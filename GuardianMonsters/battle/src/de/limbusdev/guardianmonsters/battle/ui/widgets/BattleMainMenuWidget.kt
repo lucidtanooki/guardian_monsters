@@ -2,12 +2,10 @@ package de.limbusdev.guardianmonsters.battle.ui.widgets
 
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton
 import com.badlogic.gdx.scenes.scene2d.ui.Skin
+import de.limbusdev.guardianmonsters.scene2d.replaceOnClick
 import de.limbusdev.guardianmonsters.services.Services
 
 import de.limbusdev.guardianmonsters.ui.Constant
-import de.limbusdev.guardianmonsters.ui.widgets.Callback
-import de.limbusdev.guardianmonsters.ui.widgets.SimpleClickListener
-import de.limbusdev.utils.extensions.replaceOnClick
 
 
 /**

@@ -54,7 +54,7 @@ fun makeLabel(text: String = "", skin: Skin, style: String = "default", width: F
 fun makeLabel(style: Label.LabelStyle, text: String = "", layout: LabelLayout2D, parent: Group? = null) : Label
 {
     val label = makeLabel(style, text, parent)
-    label.setup = layout
+    label.setup(layout)
     return label
 }
 

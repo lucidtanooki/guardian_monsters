@@ -14,6 +14,7 @@ import de.limbusdev.guardianmonsters.scene2d.replaceOnClick
 import de.limbusdev.guardianmonsters.services.Services
 
 import de.limbusdev.utils.extensions.set
+import de.limbusdev.utils.extensions.toLCString
 
 import ktx.actors.txt
 import ktx.style.get
@@ -131,7 +132,7 @@ open class SevenButtonsWidget
 
     fun setButtonStyle(index: Int, element: Element)
     {
-        val styleString = "tb-attack-" + element.toString().toLowerCase()
+        val styleString = "tb-attack-${element.toLCString()}"
         setButtonStyle(index, styleString)
     }
 

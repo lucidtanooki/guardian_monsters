@@ -5,6 +5,7 @@ import com.badlogic.gdx.utils.Align
 
 import de.limbusdev.guardianmonsters.guardians.Element
 import de.limbusdev.guardianmonsters.services.Services
+import de.limbusdev.utils.extensions.f
 
 /**
  * BattleHUDTextButton
@@ -23,7 +24,7 @@ class BattleHUDTextButton
     // ................................................................................ Constructors
     init
     {
-        setPosition(SLOTS[position][X].toFloat(), SLOTS[position][Y].toFloat(), ALIGN)
+        setPosition(SLOTS[position][X].f(), SLOTS[position][Y].f(), ALIGN)
     }
 
 
@@ -62,7 +63,7 @@ class BattleHUDTextButton
             {
                 CENTER_TOP    -> "b-attack-question-centertop"
                 CENTER_BOTTOM -> "tb-attack-none-centerbottom"
-                else         -> "tb-attack-${element.toString().toLowerCase()}"
+                else          -> "tb-attack-${element.toString().toLowerCase()}"
             }
         }
     }

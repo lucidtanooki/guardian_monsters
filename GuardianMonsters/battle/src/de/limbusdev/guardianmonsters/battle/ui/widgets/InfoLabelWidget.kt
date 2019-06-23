@@ -51,11 +51,8 @@ open class InfoLabelWidget() : BattleWidget()
                 layout = Layout2D(372f * Constant.zoom, 62f, Constant.RES_Xf / 2, 2f, Align.bottom)
         )
 
-        infoLabel = makeLabel(
-
-                skin = skin,
-                layout = LabelLayout2D(200f, 58f, Constant.RES_Xf / 2, 3f, Align.bottom, Align.left, true)
-        )
+        infoLabel = makeLabel(skin)
+        infoLabel.setup = LabelLayout2D(200f, 58f, Constant.RES_Xf / 2, 3f, Align.bottom, Align.left, true)
 
         addActor(infoBGImg)
         addActor(infoLabel)

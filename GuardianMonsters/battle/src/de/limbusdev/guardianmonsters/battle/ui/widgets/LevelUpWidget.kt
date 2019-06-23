@@ -23,7 +23,7 @@ import de.limbusdev.guardianmonsters.ui.widgets.OverlayWidget
  *
  * TODO only show this at the end of a battle
  */
-class LevelUpWidget(skin: Skin, guardian: AGuardian) : OverlayWidget(skin)
+class LevelUpWidget(skin: Skin = Services.UI().inventorySkin, guardian: AGuardian) : OverlayWidget(skin)
 {
     private val monsterImg: Image
 
@@ -31,7 +31,7 @@ class LevelUpWidget(skin: Skin, guardian: AGuardian) : OverlayWidget(skin)
     {
         val bg = Label("", skin, "paper")
         bg.setSize(300f, 180f)
-        bg.setPosition((Constant.WIDTH / 2 - 150).toFloat(), 30f, Align.bottomLeft)
+        bg.setPosition(Constant.WIDTHf / 2 - 150, 30f, Align.bottomLeft)
         addActor(bg)
 
         monsterImg = Image(Services.Media().getMonsterSprite(guardian.speciesID, guardian.abilityGraph.currentForm))
@@ -39,14 +39,14 @@ class LevelUpWidget(skin: Skin, guardian: AGuardian) : OverlayWidget(skin)
         addActor(monsterImg)
 
         val ok = ImageButton(skin, "button-back")
-        ok.setPosition((Constant.WIDTH - 64 - 4).toFloat(), (32 + 4).toFloat(), Align.bottomRight)
+        ok.setPosition(Constant.WIDTHf - 64 - 4, 32f + 4, Align.bottomRight)
         addActor(ok)
         ok.replaceOnClick { remove() }
 
         val guardianName = Services.I18N().getGuardianNicknameIfAvailable(guardian)
-        val info = Label(Services.I18N().Battle().format("level_up", guardianName), skin, "default")
+        val info = Label(Services.I18N().Battle("level_up", guardianName), skin, "default")
         info.setSize(140f, 32f)
-        info.setPosition((128 + 64).toFloat(), 140f, Align.bottomLeft)
+        info.setPosition(128f + 64, 140f, Align.bottomLeft)
         info.setWrap(true)
         info.setAlignment(Align.topLeft, Align.topLeft)
         addActor(info)

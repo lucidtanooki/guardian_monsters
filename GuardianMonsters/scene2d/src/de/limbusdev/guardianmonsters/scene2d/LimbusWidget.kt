@@ -3,6 +3,7 @@ package de.limbusdev.guardianmonsters.scene2d
 import com.badlogic.gdx.scenes.scene2d.Actor
 import com.badlogic.gdx.scenes.scene2d.Group
 import com.badlogic.gdx.scenes.scene2d.InputEvent
+import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener
 import com.badlogic.gdx.utils.Align
 import com.badlogic.gdx.utils.ArrayMap
@@ -56,6 +57,15 @@ fun Actor.setup(width: Float, height: Float, x: Float, y: Float, align: Int, par
 fun Actor.setup(layout: Layout2D, parent: Group? = null)
 {
     this.setup(layout.width, layout.height, layout.x, layout.y, layout.align ?: Align.center, parent)
+}
+
+fun Label.setup(layout2D: LabelLayout2D, parent: Group? = null)
+{
+    this.setSize(layout2D.width, layout2D.height)
+    this.setPosition(layout2D.x, layout2D.y, layout2D.align ?: Align.left)
+    this.setAlignment(layout2D.align ?: Align.left, layout2D.line)
+    this.setWrap(layout2D.wrap)
+    parent?.addActor(this)
 }
 
 fun Actor.setup(position: Position2D, parent: Group? = null)

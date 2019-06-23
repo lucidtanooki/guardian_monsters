@@ -34,6 +34,7 @@ class BattleActionMenuWidget
         addActor(extraButton)
 
         setCallbacks(
+
                 onBackButton  = onBackButton,
                 onBagButton   =  onBagButton,
                 onTeamButton  = onTeamButton,

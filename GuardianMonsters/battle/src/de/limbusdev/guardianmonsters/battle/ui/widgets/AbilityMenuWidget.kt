@@ -13,7 +13,12 @@ import ktx.style.get
 /**
  * AbilityMenuWidget is a menu widget with 7 buttons to choose the ability for the next attack.
  */
-class AbilityMenuWidget(callbacks: (Int) -> Unit) : SevenButtonsWidget(callbacks, order)
+class AbilityMenuWidget
+(
+        callbacks: (Int) -> Unit,
+        private val skin : Skin = Services.UI().battleSkin
+)
+    : SevenButtonsWidget(callbacks, order)
 {
     // ............................................................................ Companion Object
     companion object
@@ -22,14 +27,11 @@ class AbilityMenuWidget(callbacks: (Int) -> Unit) : SevenButtonsWidget(callbacks
         private val order : IntArray = intArrayOf(5, 3, 1, 0, 4, 2, 6)
     }
 
-    private val skin : Skin get() = Services.UI().battleSkin
-
-
     // .............................................................................. Initialization
     fun initialize(guardian: AGuardian, disableAbilitiesWithInsufficientMP: Boolean)
     {
         // Set all buttons inactive & reset appearance
-        for (i in buttons.keys()) { resetButton(i) }
+        buttons.forEach { resetButton(it.key) }
 
         // for every active ability, activate a button
         for (i in 0..6)
@@ -37,7 +39,7 @@ class AbilityMenuWidget(callbacks: (Int) -> Unit) : SevenButtonsWidget(callbacks
             if (guardian.abilityGraph.activeAbilities.containsKey(i))
             {
                 val abilityID = guardian.abilityGraph.getActiveAbility(i)
-                val ability = GuardiansServiceLocator.abilities.getAbility(abilityID)
+                val ability = GuardiansServiceLocator.abilities[abilityID]
                 setButtonStyle(i, ability.element)
                 setButtonText(i, Services.I18N().getLocalizedAbilityName(ability.name))
 
@@ -46,7 +48,7 @@ class AbilityMenuWidget(callbacks: (Int) -> Unit) : SevenButtonsWidget(callbacks
                 // Disable Ability, when monster does not have enough MP for it
                 if (disableAbilitiesWithInsufficientMP)
                 {
-                    if (ability.MPcost > guardian.individualStatistics.mp)
+                    if (ability.MPcost > guardian.stats.mp)
                     {
                         disableButton(i)
                     }
@@ -57,12 +59,7 @@ class AbilityMenuWidget(callbacks: (Int) -> Unit) : SevenButtonsWidget(callbacks
 
 
     // ..................................................................................... Methods
-    fun toAttackInfoStyle()
-    {
-        val style = skin.get<TextButton.TextButtonStyle>("b-attack-info")
-
-        for (i in buttons.keys()) { getButton(i).style = style }
-    }
+    fun toAttackInfoStyle() { buttons.forEach { it.value.style = skin["b-attack-info"] } }
 
     private fun resetButton(index: Int)
     {

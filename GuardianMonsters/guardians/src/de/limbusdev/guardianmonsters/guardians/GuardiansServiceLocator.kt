@@ -112,6 +112,8 @@ object GuardiansServiceLocator
             return Ability(1, Ability.DamageType.PHYSICAL, Element.NONE, 0, "attNone1_selfdef")
         }
 
+        override operator fun get(aID: Ability.aID) : Ability = getAbility(aID)
+
         override fun destroy() {}
     }
 

@@ -18,6 +18,7 @@ import de.limbusdev.guardianmonsters.scene2d.*
 import de.limbusdev.guardianmonsters.services.Services
 import de.limbusdev.guardianmonsters.ui.widgets.ReassuranceWidget
 import ktx.actors.txt
+import ktx.style.get
 
 /**
  * @author Georg Eckert 2017
@@ -101,31 +102,28 @@ open class ItemApplicationWidget
 
         val bgLabel = makeLabel(
 
-                skin    = skin,
-                style   = "paper",
+                style   = skin["paper"],
                 layout  = Layout2D(162f, 200f, 0f, 0f, Align.bottomLeft),
                 parent  = this
         )
 
         itemArea = makeLabel(
 
-                skin    = skin,
-                style   = "paper-dark-area",
+                style   = skin["paper-dark-area"],
                 layout  = Layout2D(40f, 40f, 61f, 156f, Align.bottomLeft),
                 parent  = this
         )
 
         itemImg = makeImage(
 
-                drawable= skin.getDrawable("sword-barb-steel"),
+                drawable= skin["sword-barb-steel"],
                 layout  = Layout2D(32f, 32f, 65f, 160f, Align.bottomLeft),
                 parent  = this
         )
 
         itemName = makeLabel(
 
-                skin    = skin,
-                style   = "paper-border",
+                style   = skin["paper-border"],
                 text    = "Item Name",
                 layout  = Layout2D(156f, 25f, 4f, 130f, Align.bottomLeft),
                 parent  = this
@@ -133,8 +131,7 @@ open class ItemApplicationWidget
 
         itemDescription = makeLabel(
 
-                skin    = skin,
-                style   = "paper-border",
+                style   = skin["paper-border"],
                 text    = "Item Description",
                 layout  = LabelLayout2D(156f, 64f, 4f, 128f, Align.topLeft, Align.topLeft, true),
                 parent  = this
@@ -142,8 +139,7 @@ open class ItemApplicationWidget
 
         itemHint = makeLabel(
 
-                skin    = skin,
-                style   = "red",
+                style   = skin["red"],
                 text    = "Item Hint",
                 layout  = LabelLayout2D(144f, 48f, 10f, 64f, Align.topLeft, Align.topLeft, true),
                 parent  = this
@@ -151,21 +147,20 @@ open class ItemApplicationWidget
 
         delete = makeImageButton(
 
-                skin    = skin,
-                style   = "button-delete",
+                style   = skin["button-delete"],
                 position= Position2D(24f, 160f, Align.bottomLeft),
                 parent  = this
         )
 
         use = makeImageButton(
 
-                skin    = skin,
-                style   = "button-use",
+                style   = skin["button-use"],
                 position= Position2D(106f, 160f, Align.bottomLeft),
                 parent  = this
         )
     }
 
+    /** @return if there are still items left*/
     fun onButton(i: Int): Boolean
     {
         inventory.takeFromInventory(item)
@@ -184,7 +179,7 @@ open class ItemApplicationWidget
             else -> {}
         }
 
-        val empty = inventory.getAmountOf(item) <= 0
+        val empty = !inventory.containsItem(item)
         if (empty) { remove() }
         return !empty
     }

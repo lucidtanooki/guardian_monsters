@@ -78,9 +78,11 @@ private constructor(jsonAbilitiesResources: ArrayMap<Element, String>)
      * @param index
      * @return
      */
-    override fun getAbility(e: Element, index: Int) = abilities.get(e).get(index)
+    override fun getAbility(e: Element, index: Int) : Ability = abilities.get(e).get(index)
 
-    override fun getAbility(aID: Ability.aID) = getAbility(aID.element, aID.ID)
+    override operator fun get(aID: Ability.aID): Ability = getAbility(aID)
+
+    override fun getAbility(aID: Ability.aID) : Ability = getAbility(aID.element, aID.ID)
 
     override fun destroy() { instance = null }
 

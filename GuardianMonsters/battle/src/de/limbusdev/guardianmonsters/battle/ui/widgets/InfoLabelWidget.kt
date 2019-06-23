@@ -13,13 +13,16 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions.*
 import com.badlogic.gdx.scenes.scene2d.actions.Actions.run as runThis
 import com.badlogic.gdx.scenes.scene2d.ui.Image
 import com.badlogic.gdx.scenes.scene2d.ui.Label
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable
 import com.badlogic.gdx.utils.Align
 import de.limbusdev.guardianmonsters.battle.BattleHUD
+import de.limbusdev.guardianmonsters.scene2d.*
 import de.limbusdev.guardianmonsters.services.Services
 
 import de.limbusdev.guardianmonsters.ui.Constant
 import ktx.actors.then
 import ktx.actors.txt
+import ktx.style.get
 
 /**
  * InfoLabelWidget displays an information label that fits into the [BattleHUD] design.
@@ -42,18 +45,20 @@ open class InfoLabelWidget() : BattleWidget()
     {
         val skin = Services.UI().battleSkin
 
-        infoBGImg = Image(skin.getDrawable("label"))
-        infoLabel = Label("", skin, "default")
+        infoBGImg = makeImage(
 
-        infoBGImg.setSize(372f * Constant.zoom, 62f)
-        infoBGImg.setPosition(Constant.RES_Xf / 2, 2f, Align.bottom)
+                drawable = skin["label"],
+                layout = Layout2D(372f * Constant.zoom, 62f, Constant.RES_Xf / 2, 2f, Align.bottom)
+        )
 
-        infoLabel.setSize(200f, 58f)
-        infoLabel.setWrap(true)
-        infoLabel.setPosition(Constant.RES_Xf / 2, 3f, Align.bottom)
+        infoLabel = makeLabel(
 
-        this.addActor(infoBGImg)
-        this.addActor(infoLabel)
+                skin = skin,
+                layout = LabelLayout2D(200f, 58f, Constant.RES_Xf / 2, 3f, Align.bottom, Align.left, true)
+        )
+
+        addActor(infoBGImg)
+        addActor(infoLabel)
     }
 
 

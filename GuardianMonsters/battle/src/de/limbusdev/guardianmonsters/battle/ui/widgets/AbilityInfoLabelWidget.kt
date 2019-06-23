@@ -11,11 +11,14 @@ package de.limbusdev.guardianmonsters.battle.ui.widgets
 
 import com.badlogic.gdx.scenes.scene2d.ui.Image
 import com.badlogic.gdx.scenes.scene2d.ui.Label
+import com.badlogic.gdx.scenes.scene2d.ui.Skin
 import com.badlogic.gdx.utils.Align
 
 import de.limbusdev.guardianmonsters.guardians.GuardiansServiceLocator
 import de.limbusdev.guardianmonsters.guardians.abilities.Ability
+import de.limbusdev.guardianmonsters.scene2d.*
 import de.limbusdev.guardianmonsters.services.Services
+import de.limbusdev.utils.extensions.toLCString
 import ktx.actors.minusAssign
 import ktx.actors.plusAssign
 import ktx.actors.txt
@@ -28,7 +31,12 @@ import ktx.style.get
  * @author Georg Eckert 2018
  */
 
-class AbilityInfoLabelWidget() : InfoLabelWidget()
+class AbilityInfoLabelWidget
+(
+        private val battleSkin: Skin = Services.UI().battleSkin,
+        private val inventorySkin: Skin = Services.UI().inventorySkin
+)
+    : InfoLabelWidget()
 {
     // .................................................................................. Properties
     private val element             : Label
@@ -44,41 +52,46 @@ class AbilityInfoLabelWidget() : InfoLabelWidget()
     // ................................................................................ Constructors
     init
     {
-        // Shorter Skin Access
-        val battleSkin    = Services.UI().battleSkin
-        val inventorySkin = Services.UI().inventorySkin
-
         // Background Image
-        infoBGImg.drawable = battleSkin.getDrawable("label-info")
+        infoBGImg.drawable = battleSkin["label-info"]
 
         // Element Label
-        element = Label("None", inventorySkin, "elem-none")
-        element.width = 72f
-        element.setPosition(386f, 22f, Align.bottomRight)
+        element = makeLabel(
+
+                style = inventorySkin["elem-none"],
+                text = "None",
+                layout = Layout2D(72f, 24f, 386f, 22f, Align.bottomRight)
+        )
 
         // Ability Name Label
-        abilityName = Label("Unknown", battleSkin)
-        abilityName.setPosition(118f, 54f, Align.topLeft)
+        abilityName = makeLabel(
+
+                skin = battleSkin,
+                text = "Unknown",
+                position = Position2D(118f, 54f, Align.topLeft)
+        )
 
         // Ability Description Label
-        abilityDescription = Label("No description available", battleSkin)
-        abilityDescription.setSize(200f, 32f)
-        abilityDescription.setPosition(118f, 40f, Align.topLeft)
-        abilityDescription.setWrap(true)
+        abilityDescription = makeLabel(
+
+                skin = battleSkin,
+                text = "No description available",
+                layout = LabelLayout2D(200f, 32f, 118f, 40f, Align.topLeft, Align.topLeft, true)
+        )
 
         // Ability Damage and MP cost Labels & Symbols
         abilityDamage = Label("0", battleSkin)
         abilityMPCost = Label("0", battleSkin)
 
-        symbolPStr = Image(inventorySkin.getDrawable("stats-symbol-pstr"))
-        symbolMStr = Image(inventorySkin.getDrawable("stats-symbol-mstr"))
-        symbolMP   = Image(inventorySkin.getDrawable("stats-symbol-mp"))
+        symbolPStr = makeImage(inventorySkin["stats-symbol-pstr"])
+        symbolMStr = makeImage(inventorySkin["stats-symbol-mstr"])
+        symbolMP   = makeImage(inventorySkin["stats-symbol-mp"])
 
-        symbolPStr   .setPosition(36f, 26f, Align.bottomLeft)
-        symbolMStr   .setPosition(36f, 26f, Align.bottomLeft)
-        abilityDamage.setPosition(52f, 27f, Align.bottomLeft)
-        symbolMP     .setPosition(80f, 26f, Align.bottomLeft)
-        abilityMPCost.setPosition(96f, 27f, Align.bottomLeft)
+        symbolPStr.position     = Position2D(36f, 26f, Align.bottomLeft)
+        symbolMStr.position     = Position2D(36f, 26f, Align.bottomLeft)
+        abilityDamage.position  = Position2D(52f, 27f, Align.bottomLeft)
+        symbolMP.position       = Position2D(80f, 26f, Align.bottomLeft)
+        abilityMPCost.position  = Position2D(96f, 27f, Align.bottomLeft)
 
         // Adding actors to Widget and apply z-Order (is order of adding)
         this += element
@@ -97,15 +110,15 @@ class AbilityInfoLabelWidget() : InfoLabelWidget()
         val abilities = GuardiansServiceLocator.abilities
         val i18nElements = Services.I18N().Elements()
         val i18nAbilities = Services.I18N().Abilities()
-        val elementName = aID.element.toString().toLowerCase()
+        val elementName = aID.element.toLCString()
 
         val ability = abilities.getAbility(aID)
 
-        element.setText(i18nElements.get("element_$elementName"))
-        element.style = Services.UI().inventorySkin["elem-$elementName"]
+        element.txt = i18nElements["element_$elementName"]
+        element.style = inventorySkin["elem-$elementName"]
 
-        abilityName.txt        = i18nAbilities.get(ability.name)
-        abilityDescription.txt = i18nAbilities.get("${ability.name}_desc")
+        abilityName.txt        = i18nAbilities[ability.name]
+        abilityDescription.txt = i18nAbilities["${ability.name}_desc"]
 
         abilityDamage.txt = "${ability.damage}"
         abilityMPCost.txt = "${ability.MPcost}"

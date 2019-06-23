@@ -13,4 +13,5 @@ interface IAbilityService : GuardiansServiceLocator.Service
 {
     fun getAbility(e: Element, index: Int): Ability
     fun getAbility(aID: Ability.aID): Ability
+    operator fun get(aID: Ability.aID) : Ability
 }

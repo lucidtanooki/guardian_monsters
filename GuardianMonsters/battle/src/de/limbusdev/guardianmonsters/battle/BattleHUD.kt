@@ -191,6 +191,10 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD()
         private lateinit var mainMenuWidgets        : WidgetCollection
         private lateinit var escapeSuccessWidgets   : WidgetCollection
         private lateinit var escapeFailureWidgets   : WidgetCollection
+        private lateinit var banSuccessWidgets      : ABanningWidgetCollection
+        private lateinit var banFailureWidgets      : ABanningWidgetCollection
+        private lateinit var abilityMenuWidgets     : WidgetCollection
+        private lateinit var abilityInfoMenuWidgets : WidgetCollection
 
         private val TAG : String = "BattleStateMachine"
 
@@ -200,6 +204,10 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD()
             mainMenuWidgets         = MainMenuWidgetCollection(this@BattleHUD)
             escapeSuccessWidgets    = EscapeSuccessInfoWidgetCollection(this@BattleHUD)
             escapeFailureWidgets    = EscapeFailInfoWidgetCollection(this@BattleHUD)
+            banSuccessWidgets       = BanSuccessWidgetCollection(this@BattleHUD)
+            banFailureWidgets       = BanFailureWidgetCollection(this@BattleHUD)
+            abilityMenuWidgets      = AbilityMenuWidgetCollection(this@BattleHUD)
+            abilityInfoMenuWidgets  = AbilityInfoMenuWidgetCollection(this@BattleHUD)
         }
 
         /** Use only named parameters. */
@@ -217,8 +225,8 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD()
                 State.BATTLE_START      -> { reset(); state = battleStartWidgets.enable() }
                 State.ANIMATION         -> toAnimation()
                 State.ABILITY_DETAIL    -> toAbilityDetail(aID)
-                State.ABILITY_INFO_MENU -> toAbilityInfoMenu()
-                State.ABILITY_MENU      -> toAbilityMenu()
+                State.ABILITY_INFO_MENU -> { reset(); state = abilityInfoMenuWidgets.enable() }
+                State.ABILITY_MENU      -> { reset(); state = abilityMenuWidgets.enable() }
                 State.END_OF_BATTLE     -> toEndOfBattle(winnerSide)
                 State.MAIN_MENU         -> { reset(); state = mainMenuWidgets.enable() }
                 State.TARGET_AREA_CHOICE-> toTargetAreaChoice()
@@ -228,84 +236,9 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD()
                 State.STATUS_EFFECT_INFO-> toStatusEffectInfoLabel()
                 State.ESCAPE_SUCCESS    -> { reset(); state = escapeSuccessWidgets.enable() }
                 State.ESCAPE_FAILURE    -> { reset(); state = escapeSuccessWidgets.enable() }
-                State.BAN_SUCCESS       -> toBanSuccess(bannedGuardian, crystalItem, fieldPos)
-                State.BAN_FAILURE       -> toBanFailure(bannedGuardian, crystalItem, fieldPos)
+                State.BAN_SUCCESS       -> { reset(); state = banSuccessWidgets.enable(bannedGuardian, crystalItem, fieldPos) }
+                State.BAN_FAILURE       -> { reset(); state = banFailureWidgets.enable(bannedGuardian, crystalItem, fieldPos) }
             }
-        }
-
-        private fun toBanSuccess(bannedGuardian: AGuardian?, crystal: ChakraCrystalItem?, fieldPos: Int?)
-        {
-            checkNotNull(bannedGuardian)
-            checkNotNull(crystal)
-            checkNotNull(fieldPos)
-            info(TAG) { "${"toBanningSuccess()".padEnd(40)} -> new State: ${State.BAN_SUCCESS}" }
-
-            // Display info label and disable all buttons
-            showInfoLabel()
-            actionMenu.disableAllChildButtons()
-
-            // Set, what the back button will do and write the ban success message
-            actionMenu.setCallbacks(onBackButton = onBanSuccessBackButton)
-            infoLabelWidget.typeWrite(BattleMessages.banGuardianSuccess(bannedGuardian, crystal))
-
-            // Animate banning success and re-enable back button after animation
-            animationWidget.animateBanning(fieldPos, Side.RIGHT, bannedGuardian)
-            { actionMenu.enable(actionMenu.backButton) }
-
-            state = State.BAN_SUCCESS
-
-            check(!guardoSphere.isFull()) { "If GuardoSphere is full, banning should be impossible." }
-            guardoSphere += bannedGuardian
-        }
-
-                                                                                           // TESTED
-        private fun toBanFailure(bannedGuardian: AGuardian?, crystal: ChakraCrystalItem?, fieldPos: Int?)
-        {
-            checkNotNull(bannedGuardian)
-            checkNotNull(crystal)
-            checkNotNull(fieldPos)
-            info(TAG) { "${"toBanningFailure()".padEnd(40)} -> new State: ${State.BAN_FAILURE}" }
-
-            // Display info label and disable all buttons
-            showInfoLabel()
-            actionMenu.disableAllChildButtons()
-
-            // Set the back button to continue with the next Guardian, if ban fails
-            actionMenu.setCallbacks(onBackButton = onBanFailureBackButton)
-            infoLabelWidget.typeWrite(BattleMessages.banGuardianFailure(bannedGuardian, crystal))
-
-            // Animate banning failure and re-enable back button after animation
-            animationWidget.animateBanningFailure(fieldPos, Side.RIGHT, bannedGuardian)
-            { actionMenu.enable(actionMenu.backButton) }
-
-            state = State.BAN_FAILURE
-        }
-
-        private fun toAbilityMenu()
-        {
-            info(TAG) { "${"toAbilityMenu()".padEnd(40)} -> new State: ${State.ABILITY_MENU}" }
-
-            showActionMenu()
-            state = State.ABILITY_MENU
-        }
-
-        private fun toAbilityInfoMenu()
-        {
-            info(TAG) { "${"toAbilityInfoMenu()".padEnd(40)} -> new State: ${State.ABILITY_INFO_MENU}" }
-
-            reset()
-
-            animationWidget.addToStage(battleAnimationStage)
-            statusWidget.addToStage(battleAnimationStage)
-            battleQueueWidget.addToStage(stage)
-            abilityInfoMenu.addToStage(stage)
-            abilityMenuAddOn.addToStage(stage)
-            abilityInfoMenuFrame.addToStage(stage)
-
-            abilityInfoMenu.initialize(battleSystem.activeGuardian, false)
-            abilityInfoMenu.toAttackInfoStyle()
-
-            state = State.ABILITY_INFO_MENU
         }
 
         private fun toAbilityDetail(aID: Ability.aID?)

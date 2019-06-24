@@ -23,7 +23,6 @@ import de.limbusdev.guardianmonsters.services.Services
 
 import de.limbusdev.guardianmonsters.guardians.Side
 import de.limbusdev.guardianmonsters.guardians.monsters.GuardoSphere
-import de.limbusdev.utils.extensions.arrayMapOf
 import de.limbusdev.utils.extensions.toLCString
 import de.limbusdev.utils.extensions.toggle
 import ktx.log.info
@@ -45,72 +44,71 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD()
 {
     // .................................................................................. Properties
     // .................................................................. Logic
-    lateinit var battleSystem                   : BattleSystem
+    private lateinit var battleSystem                   : BattleSystem
 
-    lateinit var leftTeam                       : Team
-    lateinit var rightTeam                      : Team
+    private lateinit var leftTeam                       : Team
+    private lateinit var rightTeam                      : Team
 
-    lateinit var guardoSphere                   : GuardoSphere
+    private lateinit var guardoSphere                   : GuardoSphere
 
-    lateinit var battleAnimationStage           : Stage
+    private lateinit var battleAnimationStage           : Stage
     private lateinit var stateMachine                   : BattleStateMachine
 
 
     // ................................................................. Groups
     // BattleWidgets
-    lateinit var mainMenu                       : BattleMainMenuWidget
-    lateinit var actionMenu                     : BattleActionMenuWidget
-    lateinit var animationWidget                : BattleAnimationWidget
-    lateinit var battleQueueWidget              : BattleQueueWidget
-    lateinit var abilityDetailBackButton        : BattleActionMenuWidget
+    private lateinit var mainMenu                       : BattleMainMenuWidget
+    private lateinit var actionMenu                     : BattleActionMenuWidget
+    private lateinit var animationWidget                : BattleAnimationWidget
+    private lateinit var statusWidget                   : BattleStatusOverviewWidget
+    private lateinit var battleQueueWidget              : BattleQueueWidget
+    private lateinit var abilityDetailBackButton        : BattleActionMenuWidget
+    private lateinit var abilityInfoMenuFrame           : BattleActionMenuWidget
+    private lateinit var switchActiveGuardianWidget     : SwitchActiveGuardianWidget
 
-    val statusWidget                   : BattleStatusOverviewWidget = BattleStatusOverviewWidget()
-    val abilityInfoMenuFrame           : BattleActionMenuWidget     = BattleActionMenuWidget()
-    val switchActiveGuardianWidget     : SwitchActiveGuardianWidget = SwitchActiveGuardianWidget()
-
-    lateinit var abilityMenuAddOn               : SevenButtonsWidget.CentralHalfButtonsAddOn
+    private lateinit var abilityMenuAddOn               : SevenButtonsWidget.CentralHalfButtonsAddOn
 
     // SevenButtonsWidget
-    lateinit var abilityMenu                    : AbilityMenuWidget
-    lateinit var abilityInfoMenu                : AbilityMenuWidget
-    lateinit var targetMenuWidget               : TargetMenuWidget
-    lateinit var targetAreaMenuWidget           : TargetMenuWidget
+    private lateinit var abilityMenu                    : AbilityMenuWidget
+    private lateinit var abilityInfoMenu                : AbilityMenuWidget
+    private lateinit var targetMenuWidget               : TargetMenuWidget
+    private lateinit var targetAreaMenuWidget           : TargetMenuWidget
 
     // InfoLabelWidget
-    val infoLabelWidget                : InfoLabelWidget            = InfoLabelWidget()
-    val abilityDetailWidget            : AbilityInfoLabelWidget     = AbilityInfoLabelWidget()
+    private lateinit var infoLabelWidget                : InfoLabelWidget
+    private lateinit var abilityDetailWidget            : AbilityInfoLabelWidget
 
 
     // ...................................................... Callback Handlers
-    lateinit var onActionMenuBackButton         : () -> Unit
-    lateinit var onActionMenuBagButton          : () -> Unit
-    lateinit var onActionMenuTeamButton         : () -> Unit
-    lateinit var onActionMenuExtraButton        : () -> Unit
-    lateinit var onInfoLabelBackButton          : () -> Unit
-    lateinit var onBattleStartLabelBackButton   : () -> Unit
-    lateinit var onStatusEffectLabelBackButton  : () -> Unit
-    lateinit var onAbilityDetailLabelBackButton : () -> Unit
-    lateinit var onEndOfBattleLabelBackButton   : () -> Unit
-    lateinit var onBackToActionMenu             : () -> Unit
-    lateinit var onEscapeSuccessLabelBackButton : () -> Unit
-    lateinit var onEscapeFailedLabelBackButton  : () -> Unit
-    lateinit var onMainMenuSwordButton          : () -> Unit
-    lateinit var onMainMenuRunButton            : () -> Unit
-    lateinit var onTeamMenuBackButton           : () -> Unit
-    lateinit var onTeamMenuSwitchButton         : () -> Unit
-    lateinit var onBanSuccessBackButton         : () -> Unit
-    lateinit var onBanFailureBackButton         : () -> Unit
+    private lateinit var onActionMenuBackButton         : () -> Unit
+    private lateinit var onActionMenuBagButton          : () -> Unit
+    private lateinit var onActionMenuTeamButton         : () -> Unit
+    private lateinit var onActionMenuExtraButton        : () -> Unit
+    private lateinit var onInfoLabelBackButton          : () -> Unit
+    private lateinit var onBattleStartLabelBackButton   : () -> Unit
+    private lateinit var onStatusEffectLabelBackButton  : () -> Unit
+    private lateinit var onAbilityDetailLabelBackButton : () -> Unit
+    private lateinit var onEndOfBattleLabelBackButton   : () -> Unit
+    private lateinit var onBackToActionMenu             : () -> Unit
+    private lateinit var onEscapeSuccessLabelBackButton : () -> Unit
+    private lateinit var onEscapeFailedLabelBackButton  : () -> Unit
+    private lateinit var onMainMenuSwordButton          : () -> Unit
+    private lateinit var onMainMenuRunButton            : () -> Unit
+    private lateinit var onTeamMenuBackButton           : () -> Unit
+    private lateinit var onTeamMenuSwitchButton         : () -> Unit
+    private lateinit var onBanSuccessBackButton         : () -> Unit
+    private lateinit var onBanFailureBackButton         : () -> Unit
 
-    lateinit var battleEventHandler             : BattleSystem.EventHandler
-    lateinit var onBattleAnimationHitComplete   : () -> Unit
-    lateinit var onBattleAnimationDying         : () -> Unit
-    lateinit var onBattleAnimationDoNothing     : () -> Unit
+    private lateinit var battleEventHandler             : BattleSystem.EventHandler
+    private lateinit var onBattleAnimationHitComplete   : () -> Unit
+    private lateinit var onBattleAnimationDying         : () -> Unit
+    private lateinit var onBattleAnimationDoNothing     : () -> Unit
 
-    lateinit var onAbilityMenuButton            : (Int) -> Unit
-    lateinit var onTargetMenuButton             : (Int) -> Unit
-    lateinit var onTargetAreaMenuButton         : (Int) -> Unit
-    lateinit var onAbilityMenuInfoButton        : (Int) -> Unit
-    lateinit var onAbilityInfoMenuButton        : (Int) -> Unit
+    private lateinit var onAbilityMenuButton            : (Int) -> Unit
+    private lateinit var onTargetMenuButton             : (Int) -> Unit
+    private lateinit var onTargetAreaMenuButton         : (Int) -> Unit
+    private lateinit var onAbilityMenuInfoButton        : (Int) -> Unit
+    private lateinit var onAbilityInfoMenuButton        : (Int) -> Unit
 
 
     // ................................................................................ Constructors
@@ -118,7 +116,6 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD()
     {
         setUpCallbacks()
         initializeWidgets()
-        stateMachine.initialize()
     }
 
 
@@ -187,58 +184,171 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD()
         var state: State = State.BATTLE_START
             private set
 
-        private lateinit var battleStartWidgets     : WidgetCollection
-        private lateinit var mainMenuWidgets        : WidgetCollection
-        private lateinit var escapeSuccessWidgets   : WidgetCollection
-        private lateinit var escapeFailureWidgets   : WidgetCollection
-        private lateinit var banSuccessWidgets      : ABanningWidgetCollection
-        private lateinit var banFailureWidgets      : ABanningWidgetCollection
-        private lateinit var abilityMenuWidgets     : WidgetCollection
-        private lateinit var abilityInfoMenuWidgets : WidgetCollection
-
         private val TAG : String = "BattleStateMachine"
-
-        fun initialize()
-        {
-            battleStartWidgets      = BattleStartWidgetCollection(this@BattleHUD)
-            mainMenuWidgets         = MainMenuWidgetCollection(this@BattleHUD)
-            escapeSuccessWidgets    = EscapeSuccessInfoWidgetCollection(this@BattleHUD)
-            escapeFailureWidgets    = EscapeFailInfoWidgetCollection(this@BattleHUD)
-            banSuccessWidgets       = BanSuccessWidgetCollection(this@BattleHUD)
-            banFailureWidgets       = BanFailureWidgetCollection(this@BattleHUD)
-            abilityMenuWidgets      = AbilityMenuWidgetCollection(this@BattleHUD)
-            abilityInfoMenuWidgets  = AbilityInfoMenuWidgetCollection(this@BattleHUD)
-        }
 
         /** Use only named parameters. */
         fun to
-        (
-                newState: State,
-                winnerSide: Boolean? = null,
-                aID: Ability.aID? = null,
-                bannedGuardian: AGuardian? = null,
-                crystalItem: ChakraCrystalItem? = null,
-                fieldPos: Int? = null
-        ) {
+                (
+                        newState: State,
+                        winnerSide: Boolean? = null,
+                        aID: Ability.aID? = null,
+                        bannedGuardian: AGuardian? = null,
+                        crystalItem: ChakraCrystalItem? = null,
+                        fieldPos: Int? = null
+                ) {
             when(newState)
             {
-                State.BATTLE_START      -> { reset(); state = battleStartWidgets.enable() }
                 State.ANIMATION         -> toAnimation()
                 State.ABILITY_DETAIL    -> toAbilityDetail(aID)
-                State.ABILITY_INFO_MENU -> { reset(); state = abilityInfoMenuWidgets.enable() }
-                State.ABILITY_MENU      -> { reset(); state = abilityMenuWidgets.enable() }
+                State.ABILITY_INFO_MENU -> toAbilityInfoMenu()
+                State.ABILITY_MENU      -> toAbilityMenu()
+                State.BATTLE_START      -> toBattleStart()
                 State.END_OF_BATTLE     -> toEndOfBattle(winnerSide)
-                State.MAIN_MENU         -> { reset(); state = mainMenuWidgets.enable() }
+                State.MAIN_MENU         -> toMainMenu()
                 State.TARGET_AREA_CHOICE-> toTargetAreaChoice()
                 State.TARGET_CHOICE     -> toTargetChoice()
                 State.TEAM_MENU         -> toTeamMenu()
                 State.BANNED_LAST       -> toEndOfBattleByBanningLastOpponent(bannedGuardian, crystalItem)
                 State.STATUS_EFFECT_INFO-> toStatusEffectInfoLabel()
-                State.ESCAPE_SUCCESS    -> { reset(); state = escapeSuccessWidgets.enable() }
-                State.ESCAPE_FAILURE    -> { reset(); state = escapeSuccessWidgets.enable() }
-                State.BAN_SUCCESS       -> { reset(); state = banSuccessWidgets.enable(bannedGuardian, crystalItem, fieldPos) }
-                State.BAN_FAILURE       -> { reset(); state = banFailureWidgets.enable(bannedGuardian, crystalItem, fieldPos) }
+                State.ESCAPE_SUCCESS    -> toEscapeSuccessInfo()
+                State.ESCAPE_FAILURE    -> toEscapeFailInfo()
+                State.BAN_SUCCESS       -> toBanSuccess(bannedGuardian, crystalItem, fieldPos)
+                State.BAN_FAILURE       -> toBanFailure(bannedGuardian, crystalItem, fieldPos)
             }
+        }
+
+        private fun toBattleStart()                                                        // TESTED
+        {
+            info(TAG) { "${"toBattleStart()".padEnd(40)} -> new State: ${State.BATTLE_START}" }
+
+            reset()
+
+            // Add Widgets
+            animationWidget.addToStageAndFadeIn(battleAnimationStage)
+            statusWidget.addToStageAndFadeIn(battleAnimationStage)
+            infoLabelWidget.addToStageAndFadeIn(stage)
+            actionMenu.addToStageAndFadeIn(stage)
+
+            // Set Widget State
+            actionMenu.disableAllButBackButton()
+
+            // Set Callbacks
+            actionMenu.setCallbacks(onBackButton = onBattleStartLabelBackButton)
+            infoLabelWidget.typeWrite(Services.I18N().Battle("battle_start"))
+
+            state = State.BATTLE_START
+        }
+
+        private fun toMainMenu()
+        {
+            info(TAG) { "${"toMainMenu()".padEnd(40)} -> new State: ${State.MAIN_MENU}" }
+
+            reset()
+            animationWidget.addToStage(battleAnimationStage)
+            statusWidget.addToStage(battleAnimationStage)
+            actionMenu.disable()
+            actionMenu.addToStage(stage)
+            mainMenu.addToStageAndFadeIn(stage)
+
+            state = State.MAIN_MENU
+        }
+
+        private fun toEscapeSuccessInfo()                                                  // TESTED
+        {
+            info(TAG) { "${"toEscapeSuccessInfo()".padEnd(40)} -> new State: ${State.ESCAPE_SUCCESS}" }
+
+            showInfoLabel()
+            infoLabelWidget.typeWrite(Services.I18N().Battle("escape_success"))
+            actionMenu.setCallbacks(onBackButton = onEscapeSuccessLabelBackButton)
+
+            state = State.ESCAPE_SUCCESS
+        }
+
+        private fun toEscapeFailInfo()                                                     // TESTED
+        {
+            info(TAG) { "${"toEscapeFailInfo()".padEnd(40)} -> new State: ${State.ESCAPE_FAILURE}" }
+
+            showInfoLabel()
+            infoLabelWidget.typeWrite(Services.I18N().Battle("escape_fail"))
+            actionMenu.setCallbacks(onBackButton = onEscapeFailedLabelBackButton)
+
+            state = State.ESCAPE_FAILURE
+        }
+
+        private fun toBanSuccess(bannedGuardian: AGuardian?, crystal: ChakraCrystalItem?, fieldPos: Int?)
+        {
+            checkNotNull(bannedGuardian)
+            checkNotNull(crystal)
+            checkNotNull(fieldPos)
+            info(TAG) { "${"toBanningSuccess()".padEnd(40)} -> new State: ${State.BAN_SUCCESS}" }
+
+            // Display info label and disable all buttons
+            showInfoLabel()
+            actionMenu.disableAllChildButtons()
+
+            // Set, what the back button will do and write the ban success message
+            actionMenu.setCallbacks(onBackButton = onBanSuccessBackButton)
+            infoLabelWidget.typeWrite(BattleMessages.banGuardianSuccess(bannedGuardian, crystal))
+
+            // Animate banning success and re-enable back button after animation
+            animationWidget.animateBanning(fieldPos, Side.RIGHT, bannedGuardian)
+            { actionMenu.enable(actionMenu.backButton) }
+
+            state = State.BAN_SUCCESS
+
+            check(!guardoSphere.isFull()) { "If GuardoSphere is full, banning should be impossible." }
+            guardoSphere += bannedGuardian
+            // TODO HERE Put the banned Guardian into the GuardoSphere
+        }
+
+        // TESTED
+        private fun toBanFailure(bannedGuardian: AGuardian?, crystal: ChakraCrystalItem?, fieldPos: Int?)
+        {
+            checkNotNull(bannedGuardian)
+            checkNotNull(crystal)
+            checkNotNull(fieldPos)
+            info(TAG) { "${"toBanningFailure()".padEnd(40)} -> new State: ${State.BAN_FAILURE}" }
+
+            // Display info label and disable all buttons
+            showInfoLabel()
+            actionMenu.disableAllChildButtons()
+
+            // Set the back button to continue with the next Guardian, if ban fails
+            actionMenu.setCallbacks(onBackButton = onBanFailureBackButton)
+            infoLabelWidget.typeWrite(BattleMessages.banGuardianFailure(bannedGuardian, crystal))
+
+            // Animate banning failure and re-enable back button after animation
+            animationWidget.animateBanningFailure(fieldPos, Side.RIGHT, bannedGuardian)
+            { actionMenu.enable(actionMenu.backButton) }
+
+            state = State.BAN_FAILURE
+        }
+
+        private fun toAbilityMenu()
+        {
+            info(TAG) { "${"toAbilityMenu()".padEnd(40)} -> new State: ${State.ABILITY_MENU}" }
+
+            showActionMenu()
+            state = State.ABILITY_MENU
+        }
+
+        private fun toAbilityInfoMenu()
+        {
+            info(TAG) { "${"toAbilityInfoMenu()".padEnd(40)} -> new State: ${State.ABILITY_INFO_MENU}" }
+
+            reset()
+
+            animationWidget.addToStage(battleAnimationStage)
+            statusWidget.addToStage(battleAnimationStage)
+            battleQueueWidget.addToStage(stage)
+            abilityInfoMenu.addToStage(stage)
+            abilityMenuAddOn.addToStage(stage)
+            abilityInfoMenuFrame.addToStage(stage)
+
+            abilityInfoMenu.initialize(battleSystem.activeGuardian, false)
+            abilityInfoMenu.toAttackInfoStyle()
+
+            state = State.ABILITY_INFO_MENU
         }
 
         private fun toAbilityDetail(aID: Ability.aID?)
@@ -435,7 +545,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD()
 
 
     /** State is used to store what state [BattleHUD] is currently in. */
-    enum class State
+    private enum class State
     {
         MAIN_MENU,                  // the menu widget with: Fight and Run buttons
         ABILITY_MENU,               // a 7 buttons menu widget, that allows choosing abilities
@@ -470,6 +580,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD()
 
         // Widgets
         mainMenu        = BattleMainMenuWidget(onMainMenuSwordButton, onMainMenuRunButton)
+        statusWidget    = BattleStatusOverviewWidget()
 
         animationWidget = BattleAnimationWidget(
 
@@ -485,6 +596,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD()
         targetMenuWidget     = TargetMenuWidget(callbacks  = { ID -> onTargetMenuButton(ID)      })
         targetAreaMenuWidget = TargetMenuWidget(callbacks  = { ID -> onTargetAreaMenuButton(ID)  })
 
+        abilityInfoMenuFrame    = BattleActionMenuWidget()
         abilityDetailBackButton = BattleActionMenuWidget(onBackButton = onAbilityDetailLabelBackButton)
 
         actionMenu = BattleActionMenuWidget(
@@ -498,9 +610,13 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD()
         battleQueueWidget = BattleQueueWidget(Align.bottomLeft)
         battleQueueWidget.setPosition(1f, 65f, Align.bottomLeft)
 
+        infoLabelWidget     = InfoLabelWidget()
+        abilityDetailWidget = AbilityInfoLabelWidget()
+
         abilityDetailBackButton.disableAllButBackButton()
         abilityInfoMenuFrame.disableAllChildButtons()
 
+        switchActiveGuardianWidget = SwitchActiveGuardianWidget()
         switchActiveGuardianWidget.setCallbacks(
 
                 onBack = onTeamMenuBackButton,
@@ -808,12 +924,12 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD()
             }
 
             override fun onAreaAttack
-            (
-                    attacker: AGuardian,
-                    targets: ArrayMap<Int, AGuardian>,
-                    ability: Ability,
-                    reports: Array<AttackCalculationReport>
-            ){
+                    (
+                            attacker: AGuardian,
+                            targets: ArrayMap<Int, AGuardian>,
+                            ability: Ability,
+                            reports: Array<AttackCalculationReport>
+                    ){
                 info("BattleSystem.battleEventHandler") { "onAreaAttack()" }
 
                 stateMachine.to(State.ANIMATION)

@@ -59,7 +59,7 @@ fun Actor.setup(layout: Layout2D, parent: Group? = null)
     this.setup(layout.width, layout.height, layout.x, layout.y, layout.align ?: Align.center, parent)
 }
 
-fun Label.setup(layout2D: LabelLayout2D, parent: Group? = null)
+fun Label.setupLabel(layout2D: LabelLayout2D, parent: Group? = null)
 {
     this.setSize(layout2D.width, layout2D.height)
     this.setPosition(layout2D.x, layout2D.y, layout2D.align ?: Align.left)

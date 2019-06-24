@@ -115,7 +115,7 @@ class GameStateDebugger(private val game: Game)
         // optional: fourthGuardian.abilityGraph.setActiveAbility(0,0)
 
 
-        val oppoTeam = Team(3, 3, 1)
+        val oppoTeam = Team(3, 3, 2)
         oppoTeam += guardianFactory.createGuardian(4, 1)
         oppoTeam += guardianFactory.createGuardian(5, 1)
         oppoTeam += guardianFactory.createGuardian(6, 1)

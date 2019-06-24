@@ -174,7 +174,7 @@ class BattleQueue
         while (!newGuardianFound && teamIterator.hasNext())
         {
             val guardian = teamIterator.next()
-            if (guardian.individualStatistics.isFit && !combatTeam.isMember(guardian))
+            if (guardian.stats.isFit && !combatTeam.isMember(guardian))
             {
                 substitute = guardian
                 combatTeam.exchange(position, substitute)

@@ -191,7 +191,7 @@ class BattleGuardianWidget
                         then runThis(onDieAnimationComplete)
                 )
             }
-            Side.RIGHT -> guardianImage += (fadeOut(2f) then visible(false))
+            Side.RIGHT -> guardianImage += (fadeOut(2f) then visible(false) then runThis(onDieAnimationComplete))
         }
     }
 

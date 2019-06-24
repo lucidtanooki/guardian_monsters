@@ -352,16 +352,18 @@ class BattleSystem
                         OPPONENT -> // If defeated Guardian is from Opponent's Team
                         {
                             giveEXPtoWinners(guardian)
-                            if (queue.right.allKO)
+
+
+                            // If Opponent has additional fit team member, replace defeated
+                            val additional = queue.right.values().any { it.stats.isFit && !queue.combatTeamRight.isMember(it) }
+                            if (additional)
                             {
-                                // If opponent's whole team is defeated, call event handler
-                                iterator.remove()
-                                eventHandler.onGuardianDefeated(guardian)
+                                randomlyReplaceDefeatedGuardian(OPPONENT, guardian)
                             }
                             else
                             {
-                                // If Opponent has fit team member, replace defeated
-                                randomlyReplaceDefeatedGuardian(OPPONENT, guardian)
+                                iterator.remove()
+                                eventHandler.onGuardianDefeated(guardian)
                             }
                         }
                     }

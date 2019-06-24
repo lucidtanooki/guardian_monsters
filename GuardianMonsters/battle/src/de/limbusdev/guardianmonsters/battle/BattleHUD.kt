@@ -584,7 +584,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD()
         animationWidget = BattleAnimationWidget(
 
                 onHitAnimationComplete  = onBattleAnimationHitComplete,
-                onDieing                = onBattleAnimationDying,
+                onDying                 = onBattleAnimationDying,
                 onDoingNothing          = onBattleAnimationDoNothing
         )
 

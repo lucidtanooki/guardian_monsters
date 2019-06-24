@@ -32,11 +32,8 @@ import de.limbusdev.guardianmonsters.services.Services
 import de.limbusdev.guardianmonsters.ui.Constant
 import de.limbusdev.utils.extensions.arrayMapOf
 import de.limbusdev.utils.extensions.set
-import de.limbusdev.utils.extensions.toLCString
-import de.limbusdev.utils.extensions.toUCString
 import de.limbusdev.utils.geometry.IntVec2
 import ktx.actors.plusAssign
-import ktx.collections.gdxMapOf
 
 
 /**
@@ -47,7 +44,7 @@ import ktx.collections.gdxMapOf
 class BattleAnimationWidget
 (
         private val onHitAnimationComplete  : () -> Unit,
-        private val onDieing                : () -> Unit,
+        private val onDying                : () -> Unit,
         private val onDoingNothing          : () -> Unit
 )
     : BattleWidget()
@@ -215,7 +212,7 @@ class BattleAnimationWidget
 
     fun animateMonsterKO(pos: Int, side: Side)
     {
-        guardianSprites[side][pos].die(onDieing)
+        guardianSprites[side][pos].die(onDying)
     }
 
     fun animateGuardianSubstitution

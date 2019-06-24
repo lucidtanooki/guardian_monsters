@@ -189,14 +189,14 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD()
 
         /** Use only named parameters. */
         fun to
-                (
-                        newState: State,
-                        winnerSide: Boolean? = null,
-                        aID: Ability.aID? = null,
-                        bannedGuardian: AGuardian? = null,
-                        crystalItem: ChakraCrystalItem? = null,
-                        fieldPos: Int? = null
-                ) {
+        (
+                newState: State,
+                winnerSide: Boolean? = null,
+                aID: Ability.aID? = null,
+                bannedGuardian: AGuardian? = null,
+                crystalItem: ChakraCrystalItem? = null,
+                fieldPos: Int? = null
+        ) {
             when(newState)
             {
                 State.ANIMATION         -> toAnimation()

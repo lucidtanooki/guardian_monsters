@@ -15,8 +15,8 @@ import ktx.style.get
  */
 class AbilityMenuWidget
 (
-        callbacks: (Int) -> Unit,
-        private val skin : Skin = Services.UI().battleSkin
+        private val skin : Skin = Services.UI().battleSkin,
+        callbacks: (Int) -> Unit
 )
     : SevenButtonsWidget(callbacks, order)
 {

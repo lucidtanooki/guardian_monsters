@@ -8,6 +8,7 @@ import de.limbusdev.guardianmonsters.services.Services
 
 class BattleActionMenuWidget
 (
+        skin: Skin = Services.UI().battleSkin,
         onBackButton    : () -> Unit = {},
         onBagButton     : () -> Unit = {},
         onTeamButton    : () -> Unit = {},
@@ -20,8 +21,6 @@ class BattleActionMenuWidget
     val teamButton  : ImageButton = BattleHUDMenuButton(skin, BattleHUDMenuButton.TEAM)
     val bagButton   : ImageButton = BattleHUDMenuButton(skin, BattleHUDMenuButton.BAG)
     val extraButton : ImageButton = BattleHUDMenuButton(skin, BattleHUDMenuButton.DEFEND)
-
-    val skin : Skin get() = Services.UI().battleSkin
 
 
     // ................................................................................ Constructors
@@ -52,9 +51,29 @@ class BattleActionMenuWidget
             onExtraButton : () -> Unit = {}
     ) {
         backButton.replaceOnClick(onBackButton)
-        bagButton.replaceOnClick(onBagButton)
-        teamButton.replaceOnClick(onTeamButton)
-        extraButton.replaceOnClick(onExtraButton)
+        bagButton.replaceOnClick(onBagButton);
+        teamButton.replaceOnClick(onTeamButton);
+        extraButton.replaceOnClick(onExtraButton);
+    }
+
+    /** Sets all given callbacks. Disables all buttons where callback is null. Enables the others. */
+    fun setCallbacksAndAutoEnable
+    (
+            onBackButton  : (() -> Unit)? = null,
+            onBagButton   : (() -> Unit)? = null,
+            onTeamButton  : (() -> Unit)? = null,
+            onExtraButton : (() -> Unit)? = null
+    ) {
+        enable()
+
+        if(onBackButton == null) { backButton.replaceOnClick {};                disable(backButton) }
+        else                     { backButton.replaceOnClick(onBackButton);     enable(backButton)  }
+        if(onBagButton == null)  { bagButton.replaceOnClick {};                 disable(bagButton)  }
+        else                     { bagButton.replaceOnClick(onBagButton);       enable(bagButton)   }
+        if(onTeamButton == null) { teamButton.replaceOnClick {};                disable(teamButton) }
+        else                     { teamButton.replaceOnClick(onTeamButton);     enable(teamButton)  }
+        if(onExtraButton == null){ extraButton.replaceOnClick {};               disable(extraButton)}
+        else                     { extraButton.replaceOnClick(onExtraButton);   enable(extraButton) }
     }
 
     fun disableAllButBackButton()

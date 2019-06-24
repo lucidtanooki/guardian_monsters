@@ -25,6 +25,7 @@ import de.limbusdev.guardianmonsters.guardians.Side
 import de.limbusdev.guardianmonsters.guardians.monsters.GuardoSphere
 import de.limbusdev.utils.extensions.toLCString
 import de.limbusdev.utils.extensions.toggle
+import ktx.actors.plusAssign
 import ktx.log.info
 
 
@@ -224,16 +225,13 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD()
             reset()
 
             // Add Widgets
-            animationWidget.addToStageAndFadeIn(battleAnimationStage)
-            statusWidget.addToStageAndFadeIn(battleAnimationStage)
-            infoLabelWidget.addToStageAndFadeIn(stage)
-            actionMenu.addToStageAndFadeIn(stage)
-
-            // Set Widget State
-            actionMenu.disableAllButBackButton()
+            battleAnimationStage += animationWidget
+            battleAnimationStage += statusWidget
+            stage += infoLabelWidget
+            stage += actionMenu
 
             // Set Callbacks
-            actionMenu.setCallbacks(onBackButton = onBattleStartLabelBackButton)
+            actionMenu.setCallbacksAndAutoEnable(onBackButton = onBattleStartLabelBackButton)
             infoLabelWidget.typeWrite(Services.I18N().Battle("battle_start"))
 
             state = State.BATTLE_START
@@ -244,11 +242,12 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD()
             info(TAG) { "${"toMainMenu()".padEnd(40)} -> new State: ${State.MAIN_MENU}" }
 
             reset()
-            animationWidget.addToStage(battleAnimationStage)
-            statusWidget.addToStage(battleAnimationStage)
             actionMenu.disable()
-            actionMenu.addToStage(stage)
-            mainMenu.addToStageAndFadeIn(stage)
+
+            battleAnimationStage += animationWidget
+            battleAnimationStage += statusWidget
+            stage += actionMenu
+            stage += mainMenu
 
             state = State.MAIN_MENU
         }
@@ -287,18 +286,16 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD()
             actionMenu.disableAllChildButtons()
 
             // Set, what the back button will do and write the ban success message
-            actionMenu.setCallbacks(onBackButton = onBanSuccessBackButton)
             infoLabelWidget.typeWrite(BattleMessages.banGuardianSuccess(bannedGuardian, crystal))
 
             // Animate banning success and re-enable back button after animation
             animationWidget.animateBanning(fieldPos, Side.RIGHT, bannedGuardian)
-            { actionMenu.enable(actionMenu.backButton) }
+            { actionMenu.setCallbacksAndAutoEnable(onBackButton = onBanSuccessBackButton) }
 
             state = State.BAN_SUCCESS
 
             check(!guardoSphere.isFull()) { "If GuardoSphere is full, banning should be impossible." }
             guardoSphere += bannedGuardian
-            // TODO HERE Put the banned Guardian into the GuardoSphere
         }
 
         // TESTED
@@ -314,12 +311,11 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD()
             actionMenu.disableAllChildButtons()
 
             // Set the back button to continue with the next Guardian, if ban fails
-            actionMenu.setCallbacks(onBackButton = onBanFailureBackButton)
             infoLabelWidget.typeWrite(BattleMessages.banGuardianFailure(bannedGuardian, crystal))
 
             // Animate banning failure and re-enable back button after animation
             animationWidget.animateBanningFailure(fieldPos, Side.RIGHT, bannedGuardian)
-            { actionMenu.enable(actionMenu.backButton) }
+            { actionMenu.setCallbacksAndAutoEnable(onBackButton = onBanSuccessBackButton) }
 
             state = State.BAN_FAILURE
         }
@@ -338,12 +334,12 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD()
 
             reset()
 
-            animationWidget.addToStage(battleAnimationStage)
-            statusWidget.addToStage(battleAnimationStage)
-            battleQueueWidget.addToStage(stage)
-            abilityInfoMenu.addToStage(stage)
-            abilityMenuAddOn.addToStage(stage)
-            abilityInfoMenuFrame.addToStage(stage)
+            battleAnimationStage += animationWidget
+            battleAnimationStage += statusWidget
+            stage += battleQueueWidget
+            stage += abilityInfoMenu
+            stage += abilityMenuAddOn
+            stage += abilityInfoMenuFrame
 
             abilityInfoMenu.initialize(battleSystem.activeGuardian, false)
             abilityInfoMenu.toAttackInfoStyle()
@@ -358,12 +354,12 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD()
 
             reset()
 
-            animationWidget.addToStage(battleAnimationStage)
-            statusWidget.addToStage(battleAnimationStage)
-            battleQueueWidget.addToStage(stage)
-            abilityMenuAddOn.addToStage(stage)
-            abilityDetailWidget.addToStage(stage)
-            abilityDetailBackButton.addToStage(stage)
+            battleAnimationStage += animationWidget
+            battleAnimationStage += statusWidget
+            stage += battleQueueWidget
+            stage += abilityMenuAddOn
+            stage += abilityDetailWidget
+            stage += abilityDetailBackButton
 
             abilityDetailWidget.initialize(aID)
 
@@ -401,7 +397,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD()
             infoLabelWidget.typeWrite(BattleMessages.banGuardianSuccess(bannedGuardian, crystal))
             actionMenu.setCallbacks(onBackButton = onEndOfBattleLabelBackButton)
 
-            statusWidget.addToStage(stage)
+            stage += statusWidget
 
             stage.addAction(Services.Audio().createEndOfBattleMusicSequence())
 
@@ -415,7 +411,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD()
             reset()
             showInfoLabel()
             actionMenu.disableAllChildButtons()
-            battleQueueWidget.addToStage(stage)
+            stage += battleQueueWidget
             actionMenu.setCallbacks(onBackButton = onInfoLabelBackButton)
 
             state = State.ANIMATION
@@ -426,13 +422,14 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD()
             info(TAG) { "${"toTargetChoice()".padEnd(40)} -> new State: ${State.TARGET_CHOICE}" }
 
             reset()
-            animationWidget.addToStage(battleAnimationStage)
-            statusWidget.addToStage(battleAnimationStage)
-            actionMenu.disableAllButBackButton()
-            actionMenu.addToStage(stage)
-            actionMenu.setCallbacks(onBackButton = onBackToActionMenu)
-            targetMenuWidget.addToStage(stage)
-            battleQueueWidget.addToStage(stage)
+
+            battleAnimationStage += animationWidget
+            battleAnimationStage += statusWidget
+            stage += actionMenu
+            stage += targetMenuWidget
+            stage += battleQueueWidget
+
+            actionMenu.setCallbacksAndAutoEnable(onBackButton = onBackToActionMenu)
 
             state = State.TARGET_CHOICE
         }
@@ -442,13 +439,14 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD()
             info(TAG) { "${"toTargetAreaChoice()".padEnd(40)} -> new State: ${State.TARGET_AREA_CHOICE}" }
 
             reset()
-            animationWidget.addToStage(battleAnimationStage)
-            statusWidget.addToStage(battleAnimationStage)
-            actionMenu.disableAllButBackButton()
-            actionMenu.addToStage(stage)
-            actionMenu.setCallbacks(onBackButton = onBackToActionMenu)
-            targetAreaMenuWidget.addToStage(stage)
-            battleQueueWidget.addToStage(stage)
+
+            battleAnimationStage += animationWidget
+            battleAnimationStage += statusWidget
+            stage += actionMenu
+            stage += targetAreaMenuWidget
+            stage += battleQueueWidget
+
+            actionMenu.setCallbacksAndAutoEnable(onBackButton = onBackToActionMenu)
 
             state = State.TARGET_AREA_CHOICE
         }
@@ -458,7 +456,8 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD()
             info(TAG) { "${"toTeamMenu()".padEnd(40)} -> new State: ${State.TEAM_MENU}" }
 
             reset()
-            switchActiveGuardianWidget.addToStage(stage)
+
+            stage += switchActiveGuardianWidget
 
             state = State.TEAM_MENU
         }
@@ -469,7 +468,7 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD()
 
             reset()
             showInfoLabel()
-            battleQueueWidget.addToStage(stage)
+            stage += battleQueueWidget
             actionMenu.setCallbacks(onBackButton = onStatusEffectLabelBackButton)
 
             state = State.STATUS_EFFECT_INFO
@@ -485,12 +484,12 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD()
 
 
             // Add Widgets
-            animationWidget.addToStage(battleAnimationStage)
-            statusWidget.addToStage(battleAnimationStage)
-            battleQueueWidget.addToStage(stage)
-            actionMenu.addToStage(stage)
-            abilityMenu.addToStage(stage)
-            abilityMenuAddOn.addToStage(stage)
+            battleAnimationStage += animationWidget
+            battleAnimationStage += statusWidget
+            stage += battleQueueWidget
+            stage += actionMenu
+            stage += abilityMenu
+            stage += abilityMenuAddOn
 
             // Setup Widgets
             actionMenu.setCallbacks(
@@ -511,10 +510,10 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD()
 
             reset()
 
-            animationWidget.addToStage(battleAnimationStage)
-            statusWidget.addToStage(battleAnimationStage)
-            infoLabelWidget.addToStage(stage)
-            actionMenu.addToStage(stage)
+            battleAnimationStage += animationWidget
+            battleAnimationStage += statusWidget
+            stage += infoLabelWidget
+            stage += actionMenu
 
             actionMenu.disableAllButBackButton()
         }

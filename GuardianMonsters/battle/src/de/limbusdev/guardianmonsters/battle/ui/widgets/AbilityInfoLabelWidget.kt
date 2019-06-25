@@ -87,10 +87,10 @@ class AbilityInfoLabelWidget
         symbolMStr = makeImage(inventorySkin["stats-symbol-mstr"])
         symbolMP   = makeImage(inventorySkin["stats-symbol-mp"])
 
-        symbolPStr.position     = Position2D(36f, 26f, Align.bottomLeft)
-        symbolMStr.position     = Position2D(36f, 26f, Align.bottomLeft)
+        symbolPStr.position     = ImgPosition(36f, 26f)
+        symbolMStr.position     = ImgPosition(36f, 26f)
         abilityDamage.position  = Position2D(52f, 27f, Align.bottomLeft)
-        symbolMP.position       = Position2D(80f, 26f, Align.bottomLeft)
+        symbolMP.position       = ImgPosition(80f, 26f)
         abilityMPCost.position  = Position2D(96f, 27f, Align.bottomLeft)
 
         // Adding actors to Widget and apply z-Order (is order of adding)

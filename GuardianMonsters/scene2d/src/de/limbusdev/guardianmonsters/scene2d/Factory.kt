@@ -66,7 +66,7 @@ fun makeImage(drawable: Drawable, parent: Group? = null) : Image
     return image
 }
 
-fun makeImage(drawable: Drawable, position: Position2D, parent: Group? = null) : Image
+fun makeImage(drawable: Drawable, position: ImgPosition, parent: Group? = null) : Image
 {
     val image = makeImage(drawable)
     image.position = position
@@ -106,3 +106,27 @@ fun makeImageButton(skin: Skin, style: String, position: Position2D, parent: Gro
     return makeImageButton(skin[style], position, parent)
 }
 
+fun makeImageButton(style: ImageButton.ImageButtonStyle, position: PositionXYA, parent: Group? = null) : ImageButton
+{
+    val button = ImageButton(style)
+    button.setPosition(position.x, position.y, position.align)
+    parent?.addActor(button)
+    return button
+}
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////// Group
+/** Creates a [Group]. Default position is (0,0,bottomLeft). */
+fun makeGroup(width: Float, height: Float, x: Float = 0f, y: Float = 0f, align: Int = Align.bottomLeft, parent: Group? = null) : Group
+{
+    val group = Group()
+    group.setSize(width, height)
+    group.setPosition(x, y, align)
+    parent?.addActor(group)
+    return group
+}
+
+fun makeGroup(layout: Layout2D, parent: Group? = null)
+{
+    makeGroup(layout.width, layout.height, layout.x, layout.y, layout.align ?: Align.bottomLeft, parent)
+}

@@ -3,6 +3,7 @@ package de.limbusdev.guardianmonsters.inventory
 import com.badlogic.gdx.scenes.scene2d.Group
 import com.badlogic.gdx.scenes.scene2d.ui.Skin
 import com.badlogic.gdx.utils.Align
+import de.limbusdev.guardianmonsters.services.Services
 
 import de.limbusdev.guardianmonsters.ui.Constant
 
@@ -20,7 +21,7 @@ abstract class AInventorySubMenu() : Group()
     // ............................................................................................. CONSTRUCTORS
     init
     {
-        setDebug(Constant.DEBUGGING_ON, true)
+        setDebug(InventoryDebugger.SCENE2D_DEBUG, true)
         setSize(Constant.WIDTHf, Constant.HEIGHTf - TOOLBAR_HEIGHT)
         setPosition(0f, 0f, Align.bottomLeft)
     }
@@ -44,7 +45,7 @@ abstract class AInventorySubMenu() : Group()
 
     abstract fun refresh()
 
-    protected abstract fun layout(skin: Skin)
+    protected abstract fun layout(skin: Skin = Services.UI().inventorySkin)
 
     companion object
     {

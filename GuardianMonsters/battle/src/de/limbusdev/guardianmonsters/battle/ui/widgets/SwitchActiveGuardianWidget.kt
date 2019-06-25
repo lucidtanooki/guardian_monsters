@@ -107,7 +107,7 @@ class SwitchActiveGuardianWidget() : BattleWidget()
     fun initialize(guardian: AGuardian, team: Team, combatTeam: CombatTeam)
     {
         guardianStatusWidget.initialize(guardian)
-        teamChoiceWidget.init(team, team.getPosition(guardian))
+        teamChoiceWidget.initialize(team, team.getPosition(guardian))
         activateGuardian(guardian, team, combatTeam)
 
         val circleMenuCallbacks = { nr: Int -> activateGuardian(team[nr], team, combatTeam) }

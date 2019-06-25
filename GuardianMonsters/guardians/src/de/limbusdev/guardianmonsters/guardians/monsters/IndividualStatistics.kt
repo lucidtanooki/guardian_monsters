@@ -696,7 +696,13 @@ class IndividualStatistics
         return remainingLevelUps > 0
     }
 
-    fun giveEquipment(equipment: Equipment): Equipment?
+    /**
+     * Equips this Guardian with the given [Equipment] object. Make sure it's applicable.
+     *
+     * @param equipment new equipment this Guardian should wear
+     * @return          eventual old equipment it was wearing before that
+     */
+    fun equip(equipment: Equipment): Equipment?
     {
         var oldEquipment: Equipment? = null
         when(equipment.bodyPart)
@@ -762,10 +768,10 @@ class IndividualStatistics
         {
             // Difference between currently equipped item and the new one
             pot = EquipmentPotential(
-                    eq.addsHP - currentEquipment.addsHP,
-                    eq.addsMP - currentEquipment.addsMP,
-                    eq.addsSpeed - currentEquipment.addsSpeed,
-                    eq.addsEXP - currentEquipment.addsEXP,
+                    eq.addsHP   - currentEquipment.addsHP,
+                    eq.addsMP   - currentEquipment.addsMP,
+                    eq.addsSpeed- currentEquipment.addsSpeed,
+                    eq.addsEXP  - currentEquipment.addsEXP,
                     eq.addsPStr - currentEquipment.addsPStr,
                     eq.addsPDef - currentEquipment.addsPDef,
                     eq.addsMStr - currentEquipment.addsMStr,

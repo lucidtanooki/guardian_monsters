@@ -169,7 +169,7 @@ open class ItemApplicationWidget
         {
             is Equipment ->
             {
-                val replaced = team[i].stats.giveEquipment((item as Equipment))
+                val replaced = team[i].stats.equip((item as Equipment))
                 if (replaced != null) { inventory.putIntoInventory(replaced) }
             }
             is AMedicalItem ->

@@ -112,6 +112,7 @@ class TeamSubMenu
         setDebug(InventoryDebugger.SCENE2D_DEBUG, true)
     }
 
+    /** Guardian which are activated to join the battle, are highlighted with a red circle. */
     private fun updateJoinBattleHighlights()
     {
         for(i in 0..6) { circleWidget.unhighlight(i) }

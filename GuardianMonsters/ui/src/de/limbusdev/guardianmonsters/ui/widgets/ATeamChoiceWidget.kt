@@ -52,6 +52,7 @@ abstract class ATeamChoiceWidget(private val skin: Skin, private var handler: (I
         }
     }
 
+    // Adds a red circle to highlight this position
     fun highlight(position: Int)
     {
         if(position !in 0..6 || positions.size <= position) { return }
@@ -60,6 +61,7 @@ abstract class ATeamChoiceWidget(private val skin: Skin, private var handler: (I
         addActorAt(1, highlight)
     }
 
+    // removes the red circle
     fun unhighlight(position: Int)
     {
         if(position !in 0..6 || positions.size <= position) { return }

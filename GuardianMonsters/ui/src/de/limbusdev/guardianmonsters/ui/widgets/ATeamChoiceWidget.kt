@@ -82,10 +82,10 @@ abstract class ATeamChoiceWidget(private val skin: Skin, private var handler: (I
 
             button.replaceOnClick {
 
+                logInfo(TAG) { "Current Position set to $key" }
                 oldPosition = currentPosition
                 currentPosition = key
                 handler(key)
-                logInfo(TAG) { "Current Position set to $key" }
             }
 
             memberButtons.add(button)

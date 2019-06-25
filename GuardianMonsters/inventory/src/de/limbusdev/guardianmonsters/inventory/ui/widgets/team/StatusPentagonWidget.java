@@ -29,7 +29,8 @@ public class StatusPentagonWidget extends Group {
     private boolean initialized;
     private Image statPentagon;
 
-    public StatusPentagonWidget(Skin skin) {
+    public StatusPentagonWidget(Skin skin)
+    {
         setSize(100,80);
         shpRend = new ShapeRenderer();
         center = new IntVec2(50,32);
@@ -42,7 +43,7 @@ public class StatusPentagonWidget extends Group {
         addActor(statPentagon);
     }
 
-    public void init(AGuardian guardian) {
+    public void initialize(AGuardian guardian) {
         float pstr = guardian.getIndividualStatistics().getPStrMax() / guardian.getIndividualStatistics().getMaxPossiblePStr()*32f;
         float pdef = guardian.getIndividualStatistics().getPDefMax() / guardian.getIndividualStatistics().getMaxPossiblePDef()*32f;
         float mstr = guardian.getIndividualStatistics().getMStrMax() / guardian.getIndividualStatistics().getMaxPossibleMStr()*32f;

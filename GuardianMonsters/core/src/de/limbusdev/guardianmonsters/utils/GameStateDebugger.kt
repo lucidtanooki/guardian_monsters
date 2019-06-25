@@ -247,10 +247,11 @@ class GameStateDebugger(private val game: Game)
     {
         val ACTIVE_TEAM_SIZE_HERO = 3
         val gf = GuardiansServiceLocator.guardianFactory
-        val heroTeam = Team(3, 3, ACTIVE_TEAM_SIZE_HERO)
+        val heroTeam = Team(7, 3, ACTIVE_TEAM_SIZE_HERO)
         heroTeam += gf.createGuardian(1, 1)
         heroTeam += gf.createGuardian(2, 1)
         heroTeam += gf.createGuardian(3, 1)
+        heroTeam += gf.createGuardian(4, 2)
 
         // Enable Abilities
         heroTeam[0].abilityGraph.activateNode(0)

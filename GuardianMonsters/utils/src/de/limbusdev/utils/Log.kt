@@ -4,7 +4,7 @@ enum class LogLevel { OFF, ERROR, WARNING, INFO, VERBOSE, DEBUG }
 
 object Log
 {
-    var logLevel = LogLevel.OFF
+    var logLevel = LogLevel.DEBUG
 }
 
 inline fun log(message: () -> String)
@@ -12,17 +12,27 @@ inline fun log(message: () -> String)
     if(Log.logLevel != LogLevel.OFF) { println(message()) }
 }
 
-inline fun logError(tag: String? = "[ERROR]", message: () -> String)
-{
-    if(Log.logLevel == LogLevel.ERROR) { println("$tag ${message()}") }
-}
-
-inline fun logWarning(tag: String? = "[WARNING]", message: () -> String)
+inline fun logError(tag: String? = "", message: () -> String)
 {
     when(Log.logLevel)
     {
-        LogLevel.ERROR,
-        LogLevel.WARNING -> println("$tag ${message()}")
+        LogLevel.DEBUG,
+        LogLevel.VERBOSE,
+        LogLevel.INFO,
+        LogLevel.WARNING,
+        LogLevel.ERROR-> println("[ERROR][$tag] ${message()}")
+        else             -> {}
+    }
+}
+
+inline fun logWarning(tag: String? = "", message: () -> String)
+{
+    when(Log.logLevel)
+    {
+        LogLevel.DEBUG,
+        LogLevel.VERBOSE,
+        LogLevel.INFO,
+        LogLevel.WARNING -> println("[WARNING][$tag] ${message()}")
         else             -> {}
     }
 }
@@ -31,9 +41,9 @@ inline fun logInfo(tag: String? = "[INFO]", message: () -> String)
 {
     when(Log.logLevel)
     {
-        LogLevel.ERROR,
-        LogLevel.WARNING,
-        LogLevel.INFO    -> println("$tag ${message()}")
+        LogLevel.DEBUG,
+        LogLevel.VERBOSE,
+        LogLevel.INFO    -> println("[$tag] ${message()}")
         else             -> {}
     }
 }
@@ -42,10 +52,8 @@ inline fun logVerbose(tag: String? = "[VERBOSE]", message: () -> String)
 {
     when(Log.logLevel)
     {
-        LogLevel.ERROR,
-        LogLevel.WARNING,
-        LogLevel.INFO,
-        LogLevel.VERBOSE -> println("$tag ${message()}")
+        LogLevel.DEBUG,
+        LogLevel.VERBOSE -> println("[$tag] ${message()}")
         else             -> {}
     }
 }
@@ -54,11 +62,7 @@ inline fun logDebug(tag: String? = "[DEBUG]", message: () -> String)
 {
     when(Log.logLevel)
     {
-        LogLevel.ERROR,
-        LogLevel.WARNING,
-        LogLevel.INFO,
-        LogLevel.VERBOSE,
-        LogLevel.DEBUG   -> println("$tag ${message()}")
-        LogLevel.OFF     -> {}
+        LogLevel.DEBUG   -> println("[$tag] ${message()}")
+        else             -> {}
     }
 }

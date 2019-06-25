@@ -5,7 +5,6 @@ import com.badlogic.gdx.scenes.scene2d.Touchable
 import com.badlogic.gdx.scenes.scene2d.ui.Image
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton
 import com.badlogic.gdx.scenes.scene2d.ui.Skin
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable
 import com.badlogic.gdx.utils.Align
 
 import java.util.Observable
@@ -17,10 +16,9 @@ import de.limbusdev.guardianmonsters.inventory.ui.widgets.team.StatusPentagonWid
 import de.limbusdev.guardianmonsters.scene2d.*
 import de.limbusdev.guardianmonsters.services.Services
 import de.limbusdev.guardianmonsters.ui.Constant
-import de.limbusdev.guardianmonsters.ui.widgets.Callback
 import de.limbusdev.guardianmonsters.ui.widgets.GuardianStatusWidget
-import de.limbusdev.guardianmonsters.ui.widgets.SimpleClickListener
 import de.limbusdev.guardianmonsters.ui.widgets.TeamCircleWidget
+import de.limbusdev.utils.logDebug
 import de.limbusdev.utils.logInfo
 import ktx.style.get
 
@@ -28,54 +26,59 @@ import ktx.style.get
  * @author Georg Eckert 2017
  */
 
-class TeamSubMenu(skin: Skin = Services.UI().inventorySkin, private val team: Team) : AInventorySubMenu(), Observer
+class TeamSubMenu
+(
+        skin: Skin = Services.UI().inventorySkin,
+        private val team: Team
+)
+    : AInventorySubMenu(), Observer
 {
     // --------------------------------------------------------------------------------------------- PROPERTIES
     companion object { const val TAG = "TeamSubMenu" }
 
     private lateinit var statPent           : StatusPentagonWidget
     private lateinit var monsterStats       : GuardianStatusWidget
-    private lateinit var monsterImg         : Image
-    private lateinit var blackOverlay       : Image
     private lateinit var circleWidget       : TeamCircleWidget
 
-    private lateinit var joinsBattleButton  : ImageButton
-    private lateinit var swapButton         : ImageButton
+    private lateinit var monsterImg         : Image
+    private lateinit var blackOverlay       : Image
+
+    private lateinit var joinToggleButton   : ImageButton   // activates a team position for battle
+    private lateinit var swapButton         : ImageButton   // activates swap mode
+    private lateinit var lockedStyle        : ImageButton.ImageButtonStyle
+    private lateinit var defaultStyle       : ImageButton.ImageButtonStyle
+
     private lateinit var monsterChoice      : Group
-    private lateinit var lockedButtonStyle  : ImageButton.ImageButtonStyle
-    private lateinit var normalButtonStyle  : ImageButton.ImageButtonStyle
 
     // ................................................................................... Callbacks
-    private val choiceHandler   : (Int) -> Unit
-    private val swapHandler     : (Int) -> Unit
+    private val onCircleWidgetChoice        : (Int) -> Unit // what happens, when circle is touched
+    private val onCircleWidgetSwap          : (Int) -> Unit // what happens, when circle is touched in swap mode
 
 
     // --------------------------------------------------------------------------------------------- CONSTRUCTORS
-    init {
-
-        choiceHandler = { position ->
+    init
+    {
+        onCircleWidgetChoice = { position ->
 
             showGuardianInformation(position)
-            propagateSelectedGuardian(position)
+            propagateSelectedGuardian(position) // propagation calls showGuardianInformation(...)
         }
 
-        swapHandler = { position ->
+        onCircleWidgetSwap = { position ->
 
-            val oldPos = circleWidget.oldPosition
-
-            if (position != oldPos)
+            if (circleWidget.oldPosition != position)
             {
-                val currentGuardian = team[oldPos]
+                val currentGuardian    = team[circleWidget.oldPosition]
                 val guardianToSwapWith = team[position]
 
-                team.swap(oldPos, position)
+                team.swap(circleWidget.oldPosition, position)
 
                 circleWidget.initialize(team)
                 showGuardianInformation(position)
                 propagateSelectedGuardian(position)
             }
 
-            circleWidget.setHandler(choiceHandler)
+            circleWidget.setHandler(onCircleWidgetChoice)
             blackOverlay.remove()
         }
 
@@ -85,14 +88,15 @@ class TeamSubMenu(skin: Skin = Services.UI().inventorySkin, private val team: Te
         swapButton.replaceOnClick {
 
             circleWidget.remove()
-            circleWidget.setHandler(swapHandler)
+            circleWidget.setHandler(onCircleWidgetSwap)
             addActor(blackOverlay)
             addActor(circleWidget)
         }
 
-        joinsBattleButton.replaceOnClick {
+        joinToggleButton.replaceOnClick {
 
-            team.activeTeamSize = when(joinsBattleButton.isChecked)
+            joinToggleButton.toggle()
+            team.activeTeamSize = when(joinToggleButton.isChecked)
             {
                 true  -> team.activeTeamSize + 1
                 false -> team.activeTeamSize - 1
@@ -109,7 +113,7 @@ class TeamSubMenu(skin: Skin = Services.UI().inventorySkin, private val team: Te
 
     override fun layout(skin: Skin)
     {
-        circleWidget = TeamCircleWidget(skin, choiceHandler)
+        circleWidget = TeamCircleWidget(skin, onCircleWidgetChoice)
 
         monsterChoice = makeGroup(width = 140f, height = Constant.HEIGHTf - 36)
 
@@ -121,10 +125,10 @@ class TeamSubMenu(skin: Skin = Services.UI().inventorySkin, private val team: Te
         blackOverlay = makeImage(skin["black-a80"], ImgLayout(Constant.WIDTHf, Constant.HEIGHTf))
         swapButton = makeImageButton(skin["button-switch"], PositionXYA(8f, 8f), monsterChoice)
 
-        joinsBattleButton = makeImageButton(skin["button-check"], PositionXYA(140-8f, 8f, Align.bottomRight))
+        joinToggleButton = makeImageButton(skin["button-check"], PositionXYA(140-8f, 8f, Align.bottomRight))
 
-        normalButtonStyle = joinsBattleButton.style
-        lockedButtonStyle = ImageButton.ImageButtonStyle().apply { checked = skin["button-check-down-locked"] }
+        defaultStyle = joinToggleButton.style
+        lockedStyle = ImageButton.ImageButtonStyle().apply { checked = skin["button-check-down-locked"] }
 
         val monsterView = makeGroup(140f, Constant.HEIGHTf - 36, (140+2)*2f, 0f)
         val monsterViewBg = makeImage(skin["menu-col-bg"], ImgPosition(2f, 2f), monsterView)
@@ -145,35 +149,57 @@ class TeamSubMenu(skin: Skin = Services.UI().inventorySkin, private val team: Te
 
     private fun showGuardianInformation(teamPosition: Int)
     {
-        monsterStats.initialize(team[teamPosition])
+        logDebug(TAG) { "$teamPosition" } // is called twice, due to propagateSelectedGuardian(...)
+        val guardian = team[teamPosition]
 
-        val chosenGuardian = team[teamPosition]
-        val guardianID = chosenGuardian.speciesID
-        val guardianForm = chosenGuardian.abilityGraph.currentForm
+        // Update Stats Widget, Image and Stats Pentagram
+        monsterStats.initialize(guardian)
+        monsterImg.setRegion(Services.Media().getMonsterSprite(guardian.speciesID, guardian.currentForm))
+        statPent.initialize(guardian)
 
-        monsterImg.setRegion(Services.Media().getMonsterSprite(guardianID, guardianForm))
-        statPent.init(team[teamPosition])
-        joinsBattleButton.remove()
-        joinsBattleButton.isChecked = false
-        joinsBattleButton.style = normalButtonStyle
+        // Reset Join Battle Button
+        joinToggleButton.remove()
 
-        // If the shown position belongs to the range given by activeInCombat & within 0-2
-        if (teamPosition <= team.activeTeamSize && teamPosition < 3 && teamPosition < 3)
+        // Only team positions 0..2 can be activated
+        if (teamPosition in 0..2)
         {
-            // TODO take max team size into account
-            joinsBattleButton.touchable = Touchable.enabled
-            monsterChoice.addActor(joinsBattleButton)
+            monsterChoice.addActor(joinToggleButton)
 
-            // if shown monster is in the range of active monsters
-            if (teamPosition < team.activeTeamSize)
+            when
             {
-                joinsBattleButton.isChecked = true
-            }
-            // the shown monster is at position 0 or not the last active monster
-            if (teamPosition == 0 || teamPosition < team.activeTeamSize - 1)
-            {
-                joinsBattleButton.touchable = Touchable.disabled
-                joinsBattleButton.style = lockedButtonStyle
+                // Position 0 can never be disabled
+                teamPosition == 0 ->
+                {
+                    joinToggleButton.isChecked = true
+                    joinToggleButton.style = lockedStyle
+                    joinToggleButton.touchable = Touchable.disabled
+                }
+                // Only the last active Guardian can be disabled
+                teamPosition == team.activeTeamSize - 1 ->
+                {
+                    joinToggleButton.isChecked = true
+                    joinToggleButton.style = defaultStyle
+                    joinToggleButton.touchable = Touchable.enabled
+                }
+                // The Guardian after the last active one can be enabled, too
+                teamPosition == team.activeTeamSize ->
+                {
+                    joinToggleButton.isChecked = false
+                    joinToggleButton.style = defaultStyle
+                    joinToggleButton.touchable = Touchable.enabled
+                }
+                // Active Guardians before the last active one cannot be disabled
+                teamPosition < team.activeTeamSize ->
+                {
+                    joinToggleButton.isChecked = true
+                    joinToggleButton.style = lockedStyle
+                    joinToggleButton.touchable = Touchable.disabled
+                }
+                // Guardians not next to an enabled one cannot be activated
+                else ->
+                {
+                    joinToggleButton.remove()
+                }
             }
         }
     }

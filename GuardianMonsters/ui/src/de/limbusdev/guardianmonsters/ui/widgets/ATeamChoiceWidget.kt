@@ -17,12 +17,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable
 import com.badlogic.gdx.utils.Align
 import com.badlogic.gdx.utils.Array
+import com.badlogic.gdx.utils.ArrayMap
 
 import de.limbusdev.guardianmonsters.guardians.monsters.Team
-import de.limbusdev.guardianmonsters.scene2d.ImgPosition
-import de.limbusdev.guardianmonsters.scene2d.Position2D
-import de.limbusdev.guardianmonsters.scene2d.position
-import de.limbusdev.guardianmonsters.scene2d.replaceOnClick
+import de.limbusdev.guardianmonsters.scene2d.*
 import de.limbusdev.guardianmonsters.services.Services
 import de.limbusdev.utils.geometry.IntVec2
 import de.limbusdev.utils.logInfo
@@ -35,6 +33,7 @@ abstract class ATeamChoiceWidget(private val skin: Skin, private var handler: (I
     var positions: Array<IntVec2> protected set
     protected var memberButtons = ButtonGroup<ImageButton>()
     protected var buttons: Group
+    private val buttonHighlights = ArrayMap<Int, Image>()
 
     var currentPosition = 0
         protected set
@@ -46,6 +45,25 @@ abstract class ATeamChoiceWidget(private val skin: Skin, private var handler: (I
     {
         positions = Array()
         buttons = Group()
+
+        for(i in 0..6)
+        {
+            buttonHighlights[i] = makeImage(skin["teamCircleHighlight"])
+        }
+    }
+
+    fun highlight(position: Int)
+    {
+        if(position !in 0..6 || positions.size <= position) { return }
+        val highlight = buttonHighlights[position]
+        highlight.setPosition(positions[position].xf, positions[position].yf-1, Align.bottomLeft)
+        addActorAt(1, highlight)
+    }
+
+    fun unhighlight(position: Int)
+    {
+        if(position !in 0..6 || positions.size <= position) { return }
+        buttonHighlights[position].remove()
     }
 
     fun initialize(team: Team, initialPosition: Int)

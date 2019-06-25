@@ -102,6 +102,7 @@ class TeamSubMenu
                 false -> team.activeTeamSize - 1
             }
             logInfo(TAG) { "Now active in combat: ${team.activeTeamSize}" }
+            updateJoinBattleHighlights()
         }
 
         monsterStats.initialize(team[0])
@@ -109,6 +110,12 @@ class TeamSubMenu
         showGuardianInformation(0)
 
         setDebug(InventoryDebugger.SCENE2D_DEBUG, true)
+    }
+
+    private fun updateJoinBattleHighlights()
+    {
+        for(i in 0..6) { circleWidget.unhighlight(i) }
+        for(i in 0 until team.activeTeamSize) { circleWidget.highlight(i) }
     }
 
     override fun layout(skin: Skin)
@@ -145,6 +152,8 @@ class TeamSubMenu
         addActor(monsterChoice)
         addActor(monsterStats)
         addActor(monsterView)
+
+        updateJoinBattleHighlights()
     }
 
     private fun showGuardianInformation(teamPosition: Int)

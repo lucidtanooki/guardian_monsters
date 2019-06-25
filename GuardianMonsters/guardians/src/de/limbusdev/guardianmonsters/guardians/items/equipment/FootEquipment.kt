@@ -28,15 +28,8 @@ class FootEquipment
         SHOES, SHINPROTECTION, HORSESHOE, KNEEPADS
     }
 
-    override fun equipable(m: AGuardian): Boolean
+    override fun canBeEquipped(guardian: AGuardian): Boolean
     {
-        return if(super.equipable(m))
-        {
-            m.speciesDescription.footType == type
-        }
-        else
-        {
-            false
-        }
+        return super.canBeEquipped(guardian) && guardian.speciesDescription.footType == type
     }
 }

@@ -28,15 +28,8 @@ class HandEquipment
         SWORD, PATA, BRACELET, CLAWS
     }
 
-    override fun equipable(m: AGuardian): Boolean
+    override fun canBeEquipped(guardian: AGuardian): Boolean
     {
-        return if(super.equipable(m))
-        {
-            m.speciesDescription.handType == type
-        }
-        else
-        {
-            false
-        }
+        return super.canBeEquipped(guardian) && guardian.speciesDescription.handType == type
     }
 }

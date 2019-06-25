@@ -32,7 +32,7 @@ abstract class Equipment
         val addsMP: Int,
         val addsEXP: Int
 )
-    : Item(name, Item.Category.EQUIPMENT)
+    : Item(name, Category.EQUIPMENT)
 {
     /**
      * Equips Guardian with this Equipment and returns the previously equipped item.
@@ -41,7 +41,7 @@ abstract class Equipment
      */
     fun equip(m: AGuardian): Equipment?
     {
-        return m.individualStatistics.giveEquipment(this)
+        return m.stats.equip(this)
     }
 
     /**
@@ -50,7 +50,7 @@ abstract class Equipment
      * @param guardian
      * @return  if the given monster has learnt the needed ability yet
      */
-    open fun equipable(guardian: AGuardian): Boolean
+    open fun canBeEquipped(guardian: AGuardian): Boolean
     {
         return guardian.abilityGraph.hasLearntEquipment(this.bodyPart)
     }

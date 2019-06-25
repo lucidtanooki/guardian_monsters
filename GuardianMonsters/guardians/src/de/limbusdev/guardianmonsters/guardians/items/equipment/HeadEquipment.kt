@@ -28,15 +28,8 @@ class HeadEquipment
         HELMET, BRIDLE, MASK, HEADBAND
     }
 
-    override fun equipable(m: AGuardian): Boolean
+    override fun canBeEquipped(guardian: AGuardian): Boolean
     {
-        return if(super.equipable(m))
-        {
-            m.speciesDescription.headType == type
-        }
-        else
-        {
-            false
-        }
+        return super.canBeEquipped(guardian) && guardian.speciesDescription.headType == type
     }
 }

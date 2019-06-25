@@ -120,7 +120,7 @@ public class GuardianOverviewButton extends TextButton implements Listener<Guard
         add(subTable).align(Align.left);
         layout();
 
-        if(!equipment.equipable(guardian)) {
+        if(!equipment.canBeEquipped(guardian)) {
             setTouchable(Touchable.disabled);
             setColor(.6f,.6f,.6f,1f);
         }

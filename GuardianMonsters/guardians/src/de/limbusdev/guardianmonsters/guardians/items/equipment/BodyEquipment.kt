@@ -24,16 +24,9 @@ class BodyEquipment(
 
 ) : Equipment(name, BodyPart.BODY, PStr, PDef, MStr, MDef, Speed, HP, MP, Exp)
 {
-    override fun equipable(m: AGuardian): Boolean
+    override fun canBeEquipped(guardian: AGuardian): Boolean
     {
-        return if(super.equipable(m))
-        {
-            m.speciesDescription.bodyType == type
-        }
-        else
-        {
-            false
-        }
+        return super.canBeEquipped(guardian) && guardian.speciesDescription.bodyType == type
     }
 
 

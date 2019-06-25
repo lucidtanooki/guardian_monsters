@@ -287,7 +287,7 @@ class IndividualStatistics
 
             extFactor /= 100f
 
-            return fullStatValues.MP + MathUtils.floor(fullStatValues!!.MP * extFactor)
+            return fullStatValues.MP + MathUtils.floor(fullStatValues.MP * extFactor)
         }
 
     /**

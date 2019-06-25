@@ -12,6 +12,7 @@ import java.util.Observer
 
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian
 import de.limbusdev.guardianmonsters.guardians.monsters.Team
+import de.limbusdev.guardianmonsters.inventory.de.limbusdev.guardianmonsters.inventory.ui.widgets.team.BattleParticipationToggleButton
 import de.limbusdev.guardianmonsters.inventory.ui.widgets.team.StatusPentagonWidget
 import de.limbusdev.guardianmonsters.scene2d.*
 import de.limbusdev.guardianmonsters.services.Services
@@ -43,7 +44,7 @@ class TeamSubMenu
     private lateinit var monsterImg         : Image
     private lateinit var blackOverlay       : Image
 
-    private lateinit var joinToggleButton   : ImageButton   // activates a team position for battle
+    private lateinit var joinToggleButton   : BattleParticipationToggleButton // activates a team position for battle
     private lateinit var swapButton         : ImageButton   // activates swap mode
     private lateinit var lockedStyle        : ImageButton.ImageButtonStyle
     private lateinit var defaultStyle       : ImageButton.ImageButtonStyle
@@ -51,77 +52,28 @@ class TeamSubMenu
     private lateinit var monsterChoice      : Group
 
     // ................................................................................... Callbacks
-    private val onCircleWidgetChoice        : (Int) -> Unit // what happens, when circle is touched
-    private val onCircleWidgetSwap          : (Int) -> Unit // what happens, when circle is touched in swap mode
+    private lateinit var onCircleWidgetChoice: (Int) -> Unit // what happens, when circle is touched
+    private lateinit var onCircleWidgetSwap  : (Int) -> Unit // what happens, when circle is touched in swap mode
 
 
     // --------------------------------------------------------------------------------------------- CONSTRUCTORS
     init
     {
-        onCircleWidgetChoice = { position ->
-
-            showGuardianInformation(position)
-            propagateSelectedGuardian(position) // propagation calls showGuardianInformation(...)
-        }
-
-        onCircleWidgetSwap = { position ->
-
-            if (circleWidget.oldPosition != position)
-            {
-                val currentGuardian    = team[circleWidget.oldPosition]
-                val guardianToSwapWith = team[position]
-
-                team.swap(circleWidget.oldPosition, position)
-
-                circleWidget.initialize(team)
-                showGuardianInformation(position)
-                propagateSelectedGuardian(position)
-            }
-
-            circleWidget.setHandler(onCircleWidgetChoice)
-            blackOverlay.remove()
-        }
-
         layout(skin)
+        setupCallbacks()
+
         circleWidget.initialize(team)
-
-        swapButton.replaceOnClick {
-
-            circleWidget.remove()
-            circleWidget.setHandler(onCircleWidgetSwap)
-            addActor(blackOverlay)
-            addActor(circleWidget)
-        }
-
-        joinToggleButton.replaceOnClick {
-
-            joinToggleButton.toggle()
-            team.activeTeamSize = when(joinToggleButton.isChecked)
-            {
-                true  -> team.activeTeamSize + 1
-                false -> team.activeTeamSize - 1
-            }
-            logInfo(TAG) { "Now active in combat: ${team.activeTeamSize}" }
-            updateJoinBattleHighlights()
-        }
-
         monsterStats.initialize(team[0])
-
         showGuardianInformation(0)
 
         setDebug(InventoryDebugger.SCENE2D_DEBUG, true)
     }
 
-    /** Guardian which are activated to join the battle, are highlighted with a red circle. */
-    private fun updateJoinBattleHighlights()
-    {
-        for(i in 0..6) { circleWidget.unhighlight(i) }
-        for(i in 0 until team.activeTeamSize) { circleWidget.highlight(i) }
-    }
 
+    // --------------------------------------------------------------------------------------------- LAYOUT
     override fun layout(skin: Skin)
     {
-        circleWidget = TeamCircleWidget(skin, onCircleWidgetChoice)
+        circleWidget = TeamCircleWidget(skin)
 
         monsterChoice = makeGroup(width = 140f, height = Constant.HEIGHTf - 36)
 
@@ -133,7 +85,7 @@ class TeamSubMenu
         blackOverlay = makeImage(skin["black-a80"], ImgLayout(Constant.WIDTHf, Constant.HEIGHTf))
         swapButton = makeImageButton(skin["button-switch"], PositionXYA(8f, 8f), monsterChoice)
 
-        joinToggleButton = makeImageButton(skin["button-check"], PositionXYA(140-8f, 8f, Align.bottomRight))
+        joinToggleButton = BattleParticipationToggleButton(skin, PositionXYA(140-8f, 8f, Align.bottomRight))
 
         defaultStyle = joinToggleButton.style
         lockedStyle = ImageButton.ImageButtonStyle().apply { checked = skin["button-check-down-locked"] }
@@ -171,50 +123,19 @@ class TeamSubMenu
         joinToggleButton.remove()
 
         // Only team positions 0..2 can be activated
-        if (teamPosition in 0..2)
-        {
-            monsterChoice.addActor(joinToggleButton)
-
-            when
-            {
-                // Position 0 can never be disabled
-                teamPosition == 0 ->
-                {
-                    joinToggleButton.isChecked = true
-                    joinToggleButton.style = lockedStyle
-                    joinToggleButton.touchable = Touchable.disabled
-                }
-                // Only the last active Guardian can be disabled
-                teamPosition == team.activeTeamSize - 1 ->
-                {
-                    joinToggleButton.isChecked = true
-                    joinToggleButton.style = defaultStyle
-                    joinToggleButton.touchable = Touchable.enabled
-                }
-                // The Guardian after the last active one can be enabled, too
-                teamPosition == team.activeTeamSize ->
-                {
-                    joinToggleButton.isChecked = false
-                    joinToggleButton.style = defaultStyle
-                    joinToggleButton.touchable = Touchable.enabled
-                }
-                // Active Guardians before the last active one cannot be disabled
-                teamPosition < team.activeTeamSize ->
-                {
-                    joinToggleButton.isChecked = true
-                    joinToggleButton.style = lockedStyle
-                    joinToggleButton.touchable = Touchable.disabled
-                }
-                // Guardians not next to an enabled one cannot be activated
-                else ->
-                {
-                    joinToggleButton.remove()
-                }
-            }
-        }
+        joinToggleButton.autoEnableOrDisable(teamPosition, team.activeTeamSize, monsterChoice)
     }
 
+
+    // --------------------------------------------------------------------------------------------- SYNCHRONISATION
     override fun refresh() {}
+
+    /** Guardian which are activated to join the battle, are highlighted with a red circle. */
+    private fun updateJoinBattleHighlights()
+    {
+        for(i in 0..6) { circleWidget.unhighlight(i) }
+        for(i in 0 until team.activeTeamSize) { circleWidget.highlight(i) }
+    }
 
     override fun syncSelectedGuardian(teamPosition: Int)
     {
@@ -233,5 +154,56 @@ class TeamSubMenu
         {
             showGuardianInformation(team.getPosition(observable))
         }
+    }
+
+
+    // --------------------------------------------------------------------------------------------- CALLBACKS
+    private fun setupCallbacks()
+    {
+        onCircleWidgetChoice = { position ->
+
+            showGuardianInformation(position)
+            propagateSelectedGuardian(position) // propagation calls showGuardianInformation(...)
+        }
+
+        onCircleWidgetSwap = { position ->
+
+            if (circleWidget.oldPosition != position)
+            {
+                val currentGuardian    = team[circleWidget.oldPosition]
+                val guardianToSwapWith = team[position]
+
+                team.swap(circleWidget.oldPosition, position)
+
+                circleWidget.initialize(team)
+                showGuardianInformation(position)
+                propagateSelectedGuardian(position)
+            }
+
+            circleWidget.setHandler(onCircleWidgetChoice)
+            blackOverlay.remove()
+        }
+
+        swapButton.replaceOnClick {
+
+            circleWidget.remove()
+            circleWidget.setHandler(onCircleWidgetSwap)
+            addActor(blackOverlay)
+            addActor(circleWidget)
+        }
+
+        joinToggleButton.replaceOnClick {
+
+            joinToggleButton.toggle()
+            team.activeTeamSize = when(joinToggleButton.isChecked)
+            {
+                true  -> team.activeTeamSize + 1
+                false -> team.activeTeamSize - 1
+            }
+            logInfo(TAG) { "Now active in combat: ${team.activeTeamSize}" }
+            updateJoinBattleHighlights()
+        }
+
+        circleWidget.setHandler(onCircleWidgetChoice)
     }
 }

@@ -18,7 +18,7 @@ import de.limbusdev.guardianmonsters.scene2d.makeImage
 import de.limbusdev.utils.geometry.IntVec2
 import ktx.style.get
 
-class TeamCircleWidget(skin: Skin, callbacks: (Int) -> Unit) : ATeamChoiceWidget(skin, callbacks)
+class TeamCircleWidget(skin: Skin, callbacks: (Int) -> Unit = {}) : ATeamChoiceWidget(skin, callbacks)
 {
     init
     {

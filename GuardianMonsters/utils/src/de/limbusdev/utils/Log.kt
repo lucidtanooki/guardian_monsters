@@ -7,17 +7,17 @@ object Log
     var logLevel = LogLevel.OFF
 }
 
-inline fun log(tag: String = "[LOG]", message: () -> String)
+inline fun log(message: () -> String)
 {
-    if(Log.logLevel != LogLevel.OFF) { println("$tag ${message()}") }
+    if(Log.logLevel != LogLevel.OFF) { println(message()) }
 }
 
-inline fun logError(tag: String = "[ERROR]", message: () -> String)
+inline fun logError(tag: String? = "[ERROR]", message: () -> String)
 {
     if(Log.logLevel == LogLevel.ERROR) { println("$tag ${message()}") }
 }
 
-inline fun logWarning(tag: String = "[WARNING]", message: () -> String)
+inline fun logWarning(tag: String? = "[WARNING]", message: () -> String)
 {
     when(Log.logLevel)
     {
@@ -27,7 +27,7 @@ inline fun logWarning(tag: String = "[WARNING]", message: () -> String)
     }
 }
 
-inline fun logInfo(tag: String = "[INFO]", message: () -> String)
+inline fun logInfo(tag: String? = "[INFO]", message: () -> String)
 {
     when(Log.logLevel)
     {
@@ -38,7 +38,7 @@ inline fun logInfo(tag: String = "[INFO]", message: () -> String)
     }
 }
 
-inline fun logVerbose(tag: String = "[VERBOSE]", message: () -> String)
+inline fun logVerbose(tag: String? = "[VERBOSE]", message: () -> String)
 {
     when(Log.logLevel)
     {
@@ -50,7 +50,7 @@ inline fun logVerbose(tag: String = "[VERBOSE]", message: () -> String)
     }
 }
 
-inline fun logDebug(tag: String = "[DEBUG]", message: () -> String)
+inline fun logDebug(tag: String? = "[DEBUG]", message: () -> String)
 {
     when(Log.logLevel)
     {

@@ -11,14 +11,13 @@ import de.limbusdev.guardianmonsters.media.MediaManager
 import de.limbusdev.guardianmonsters.scene2d.ConcreteScreenManager
 import de.limbusdev.guardianmonsters.services.*
 import de.limbusdev.guardianmonsters.utils.GameStateDebugger
+import de.limbusdev.utils.logInfo
 import ktx.inject.Context
 import ktx.log.info
 
 
-class GuardianMonsters : Game() {
-
-    /* ............................................................................ ATTRIBUTES .. */
-
+class GuardianMonsters : Game()
+{
     override fun create() {
 
         // TODO Enable Kotlin Co-routines for async tasks
@@ -56,7 +55,7 @@ class GuardianMonsters : Game() {
     private fun injectDependencies()
     {
         // Service Locator: Dependency Injection
-        info { "GuardianMonsters: injecting dependencies ..." }
+        logInfo(TAG) { "injecting dependencies ..." }
 
         Services.provide(MediaManager())
         Services.provide(AudioManager())
@@ -70,4 +69,6 @@ class GuardianMonsters : Game() {
 
         CoreServiceLocator.provide(GameStateService(SaveGameManager()))
     }
+
+    companion object { const val TAG = "GuardianMonsters" }
 }

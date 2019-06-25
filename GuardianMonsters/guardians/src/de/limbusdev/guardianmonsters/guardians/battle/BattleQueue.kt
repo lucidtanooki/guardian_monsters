@@ -8,6 +8,7 @@ import de.limbusdev.guardianmonsters.guardians.Constant
 import de.limbusdev.guardianmonsters.guardians.Side
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian
 import de.limbusdev.guardianmonsters.guardians.monsters.Team
+import de.limbusdev.utils.log
 
 /**
  * BattleQueue
@@ -93,7 +94,7 @@ class BattleQueue
             notifyObservers(QueueSignal(Message.NEXT))
         }
 
-        println(toString())
+        log() { toString() }
 
         return next
     }
@@ -226,7 +227,7 @@ class BattleQueue
 
     fun resetModifiedStats(guardian: AGuardian)
     {
-        guardian.individualStatistics.resetModifiedStats()
+        guardian.stats.resetModifiedStats()
     }
 
     fun resetTeamsModifiedStats(side: Side)
@@ -240,9 +241,11 @@ class BattleQueue
 
     fun resetCombatTeamsModifiedStats(side: Boolean)
     {
-        val team: CombatTeam =
-            if (side == Constant.LEFT) { combatTeamLeft  }
-            else /* side == RIGHT */   { combatTeamRight }
+        val team: CombatTeam = when(side)
+        {
+            Constant.LEFT    -> combatTeamLeft
+            else /* RIGHT */ -> combatTeamRight
+        }
 
         team.values().forEach{ combatant -> resetModifiedStats(combatant)}
     }

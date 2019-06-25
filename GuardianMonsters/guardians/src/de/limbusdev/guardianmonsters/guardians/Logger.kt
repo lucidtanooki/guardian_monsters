@@ -2,62 +2,52 @@ package de.limbusdev.guardianmonsters.guardians
 
 import de.limbusdev.guardianmonsters.guardians.abilities.Ability
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian
+import de.limbusdev.utils.log
+import de.limbusdev.utils.logInfo
 
 object Logger
 {
-    private const val ON = true
-
     fun selfDefense(TAG: String)
     {
-        if(ON) println("$TAG: Guardian defends itself.")
+        logInfo(TAG) { "Guardian defends itself." }
     }
 
     /** Prints: == Calculating Attack: == */
     fun calcAttackHeader()
     {
-        if(!ON) return
-
-        println("\n== Calculating Attack: ==")
+        log() { "\n== Calculating Attack: ==" }
     }
 
     fun applyAttackHeader()
     {
-        if(!ON) return
-
-        println("\n== Applying Attack: ==")
+        log() { "\n== Applying Attack: ==" }
     }
 
     fun applySelfDefense(TAG: String)
     {
-        if(!ON) return
-
-        println("$TAG: Only self defending")
+        logInfo(TAG) { "Only self defending" }
     }
 
     fun applyStatusPreventsAttack(TAG: String)
     {
-        if(!ON) return
-
-        println("$TAG: Status Effect prevented attack.")
+        logInfo(TAG) { "Status Effect prevented attack." }
     }
 
 
     fun attackCalculationAbstract(attacker: AGuardian, defender: AGuardian, usedAbility: Ability, damage: Float)
     {
-        if(!ON) return
-
         val attackerName = attacker.species.getSimpleName(attacker.currentForm).toUpperCase()
         val defenderName = defender.species.getSimpleName(defender.currentForm).toUpperCase()
-        println("$attackerName will cause $damage damage on $defenderName with ${usedAbility.simpleName.toUpperCase()}")
+
+       log() { "$attackerName will cause $damage damage on $defenderName with ${usedAbility.simpleName.toUpperCase()}" }
     }
 
     fun attackAbstract(attacker: AGuardian, defender: AGuardian, ability: Ability)
     {
-        if(!ON) return
-
         val attackerName = attacker.species.getSimpleName(attacker.currentForm).toUpperCase()
         val defenderName = defender.species.getSimpleName(defender.currentForm).toUpperCase()
-        println("$attackerName attacks $defenderName with ${ability.simpleName.toUpperCase()}")
+
+        log() { "$attackerName attacks $defenderName with ${ability.simpleName.toUpperCase()}" }
     }
 
     fun illegalStateCalcAttackWhenPetrified(): String

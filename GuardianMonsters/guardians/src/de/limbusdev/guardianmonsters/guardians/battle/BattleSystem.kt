@@ -14,6 +14,10 @@ import de.limbusdev.guardianmonsters.guardians.items.ChakraCrystalItem
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian
 import de.limbusdev.guardianmonsters.guardians.monsters.IndividualStatistics.StatusEffect
 import de.limbusdev.guardianmonsters.guardians.monsters.Team
+import de.limbusdev.utils.log
+import de.limbusdev.utils.logDebug
+import de.limbusdev.utils.logInfo
+import de.limbusdev.utils.logWarning
 import ktx.log.info
 
 /**
@@ -78,7 +82,7 @@ class BattleSystem
 
         result = BattleResult(left, Array())
 
-        if (eventHandler is NullEventHandler) { println("$TAG: No EventHandler set. NullEventHandler used.") }
+        if (eventHandler is NullEventHandler) { logWarning(TAG) { "No EventHandler set. NullEventHandler used." } }
     }
 
 
@@ -129,7 +133,7 @@ class BattleSystem
      */
     private fun onAIPlayersTurn()
     {
-        println("$TAG: onAIPlayersTurn()")
+        logDebug(TAG) { "onAIPlayersTurn()" }
 
         check(queue.peekNextSide() != Constant.HERO)
         { "$TAG AI can't take turn. The first monster in queue is not in it's team." }
@@ -486,11 +490,12 @@ class BattleSystem
     {
         override fun turn()
         {
-            println(); println("""
+            log() {"""
+
                         +++---------------------------------------------------------------------+++
                         |||                           AI's turn                                 |||
                         +++---------------------------------------------------------------------+++
-                    """.trimIndent())
+                    """.trimIndent()}
 
             val guardian = activeGuardian
 
@@ -539,43 +544,44 @@ class BattleSystem
     /** Null Implementation */
     private class NullEventHandler : EventHandler()
     {
+        companion object { const val TAG = "BattleSystem.NullEventHandler" }
         override fun onGuardianDefeated(guardian: AGuardian)
-        { info("BattleSystem.NullEventHandler") { "onGuardianDefeated()" } }
+        { logInfo(TAG) { "onGuardianDefeated()" } }
 
         override fun onAttack(attacker: AGuardian, target: AGuardian, ability: Ability, report: AttackCalculationReport)
-        { info("BattleSystem.NullEventHandler") { "onAttack()" } }
+        { logInfo(TAG) { "onAttack()" } }
 
         override fun onAreaAttack(attacker: AGuardian, targets: ArrayMap<Int, AGuardian>, ability: Ability, reports: Array<AttackCalculationReport>)
-        { info("BattleSystem.NullEventHandler") { "onAreaAttack()" } }
+        { logInfo(TAG) { "onAreaAttack()" } }
 
         override fun onDefense(defensiveGuardian: AGuardian)
-        { info("BattleSystem.NullEventHandler") { "onDefense()" } }
+        { logInfo(TAG) { "onDefense()" } }
 
         override fun onPlayersTurn()
-        { info("BattleSystem.NullEventHandler") { "onBattleEnds()" } }
+        { logInfo(TAG) { "onBattleEnds()" } }
 
         override fun onBattleEnds(winnerSide: Boolean)
-        { info("BattleSystem.NullEventHandler") { "onBattleEnds()" } }
+        { logInfo(TAG) { "onBattleEnds()" } }
 
         override fun onDoingNothing(guardian: AGuardian)
-        { info("BattleSystem.NullEventHandler") { "onDoingNothing()" } }
+        { logInfo(TAG) { "onDoingNothing()" } }
 
         override fun onApplyStatusEffect(guardian: AGuardian)
-        { info("BattleSystem.NullEventHandler") { "onApplyStatusEffect()" } }
+        { logInfo(TAG) { "onApplyStatusEffect()" } }
 
         override fun onGuardianSubstituted(substituted: AGuardian, substitute: AGuardian, fieldPos: Int)
-        { info("BattleSystem.NullEventHandler") { "onGuardianSubstituted()" } }
+        {logInfo(TAG) { "onGuardianSubstituted()" } }
 
         override fun onReplacingDefeatedGuardian(substituted: AGuardian, substitute: AGuardian, fieldPos: Int)
-        { info("BattleSystem.NullEventHandler") { "onReplacingDefeatedGuardian()" } }
+        { logInfo(TAG) { "onReplacingDefeatedGuardian()" } }
 
         override fun onBanning(bannedGuardian: AGuardian, crystal: ChakraCrystalItem, fieldPos: Int, continueBanning: () -> Unit)
-        { info("BattleSystem.NullEventHandler") { "onBanning()" } }
+        { logInfo(TAG) { "onBanning()" } }
 
         override fun onBanningFailure(bannedGuardian: AGuardian, crystal: ChakraCrystalItem, fieldPos: Int)
-        { info("BattleSystem.NullEventHandler") { "onBanningFailure()" } }
+        { logInfo(TAG) { "onBanningFailure()" } }
 
         override fun onBanningSuccess(bannedGuardian: AGuardian, crystal: ChakraCrystalItem, fieldPos: Int)
-        { info("BattleSystem.NullEventHandler") { "onBanningSuccess()" } }
+        { logInfo(TAG) { "onBanningSuccess()" } }
     }
 }

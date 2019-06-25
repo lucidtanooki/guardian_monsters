@@ -177,9 +177,9 @@ object BattleCalculator
 
     fun applyStatusEffect(guardian: AGuardian)
     {
-        when (guardian.individualStatistics.statusEffect)
+        when (guardian.stats.statusEffect)
         {
-            StatusEffect.POISONED  -> guardian.individualStatistics.decreaseHP(5)
+            StatusEffect.POISONED  -> guardian.stats.decreaseHP(5)
             StatusEffect.PETRIFIED -> {}
             StatusEffect.LUNATIC   -> {}
             StatusEffect.BLIND     -> {}

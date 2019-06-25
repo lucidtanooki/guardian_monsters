@@ -4,6 +4,8 @@ import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ArrayMap
 
 import de.limbusdev.guardianmonsters.guardians.Element
+import de.limbusdev.utils.log
+import de.limbusdev.utils.logInfo
 
 object ElementEfficiency
 {
@@ -262,9 +264,9 @@ object ElementEfficiency
 
         for (e in defender) { effectiveness += table.get(e) }
 
-        print("$TAG: $attacker on ")
-        for (e in defender) { print("$e, ") }
-        println(": $effectiveness")
+        logInfo(TAG) { "$attacker on " }
+        for (e in defender) { log() { "$e, " } }
+        log() { ": $effectiveness" }
 
         // Healing effects are half as effective as hurting attacks
         if (effectiveness < 0) effectiveness /= 2f

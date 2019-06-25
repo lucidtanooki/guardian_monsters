@@ -86,5 +86,7 @@ class Position2D(val x: Float = 0f, val y: Float = 0f, val align: Int? = Align.c
 
 open class Layout2D(val width: Float, val height: Float, val x: Float, val y: Float, val align: Int?)
 
+class ImgLayout(val width: Float, val height: Float, val x: Float = 0f, val y: Float = 0f, val align: Int = Align.bottomLeft)
+
 class LabelLayout2D(width: Float, height: Float, x: Float, y: Float, align: Int, val line: Int, val wrap: Boolean)
     : Layout2D(width, height, x, y, align)

@@ -48,7 +48,7 @@ open class InfoLabelWidget() : BattleWidget()
         infoBGImg = makeImage(
 
                 drawable = skin["label"],
-                layout = Layout2D(372f * Constant.zoom, 62f, Constant.RES_Xf / 2, 2f, Align.bottom)
+                layout = ImgLayout(372f * Constant.zoom, 62f, Constant.RES_Xf / 2, 2f, Align.bottom)
         )
 
         infoLabel = makeLabel(skin)

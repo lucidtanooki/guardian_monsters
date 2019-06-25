@@ -52,24 +52,24 @@ abstract class AHUD(protected val skin: Skin)
     /** Calls the draw() method on all added [Stage] objects. */
     fun draw()
     {
-        for(s in stages) { s.draw() }
+        stages.forEach { it.draw() }
     }
 
     /** Calls the act() method on all added [Stage] objects. */
     open fun update(delta: Float)
     {
-        for(s in stages) { s.act(delta) }
+        stages.forEach { it.act(delta) }
     }
 
     /** Finalizes acting of all added [Stage] objects. */
     open fun hide()
     {
-        for(s in stages) { s.act(100f) }
+        stages.forEach { it.act(100f) }
     }
 
     /** Updates the viewports of all added [Stage] objects. */
     fun resize(width: Int, height: Int)
     {
-        for(s in stages) { s.viewport.update(width, height) }
+        stages.forEach { it.viewport.update(width, height) }
     }
 }

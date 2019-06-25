@@ -117,7 +117,7 @@ open class ItemApplicationWidget
         itemImg = makeImage(
 
                 drawable= skin["sword-barb-steel"],
-                layout  = Layout2D(32f, 32f, 65f, 160f, Align.bottomLeft),
+                layout  = ImgLayout(32f, 32f, 65f, 160f, Align.bottomLeft),
                 parent  = this
         )
 

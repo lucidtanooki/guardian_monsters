@@ -2,16 +2,15 @@ package de.limbusdev.guardianmonsters.battle.ui.widgets
 
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.scenes.scene2d.actions.Actions
-import com.badlogic.gdx.scenes.scene2d.ui.Skin
 import com.badlogic.gdx.utils.Align
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ArrayMap
+import de.limbusdev.guardianmonsters.battle.BattleDebugger
 
 import de.limbusdev.guardianmonsters.guardians.Side
 import de.limbusdev.guardianmonsters.guardians.battle.BattleSystem
 import de.limbusdev.guardianmonsters.guardians.battle.CombatTeam
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian
-import de.limbusdev.guardianmonsters.ui.Constant
 import de.limbusdev.utils.extensions.set
 import de.limbusdev.utils.geometry.IntVec2
 import ktx.actors.then
@@ -47,7 +46,7 @@ class BattleStatusOverviewWidget() : BattleWidget()
         for (w in monsterStateWidgets[Side.LEFT])  { addActor(w) }
         for (w in monsterStateWidgets[Side.RIGHT]) { addActor(w) }
 
-        setDebug(Constant.DEBUGGING_ON, true)
+        setDebug(BattleDebugger.SCENE2D_DEBUG, true)
     }
 
     private fun setupGuardianStateWidget(showEXP: Boolean, position: IntVec2, side: Side) : MonsterStateWidget

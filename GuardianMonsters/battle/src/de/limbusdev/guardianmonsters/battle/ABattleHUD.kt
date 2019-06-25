@@ -2,19 +2,18 @@ package de.limbusdev.guardianmonsters.battle
 
 import com.badlogic.gdx.scenes.scene2d.actions.Actions.*
 import com.badlogic.gdx.scenes.scene2d.actions.Actions.run as runThis
-import com.badlogic.gdx.scenes.scene2d.ui.Image
-import com.badlogic.gdx.scenes.scene2d.ui.Skin
 import com.badlogic.gdx.utils.ArrayMap
 
 import de.limbusdev.guardianmonsters.battle.ui.widgets.BattleWidget
+import de.limbusdev.guardianmonsters.scene2d.ImgLayout
+import de.limbusdev.guardianmonsters.scene2d.makeImage
 import de.limbusdev.guardianmonsters.services.Services
 import de.limbusdev.guardianmonsters.ui.AHUD
 import de.limbusdev.guardianmonsters.ui.Constant
-import de.limbusdev.utils.extensions.f
 import de.limbusdev.utils.extensions.set
-import ktx.actors.plus
 import ktx.actors.plusAssign
 import ktx.actors.then
+import ktx.style.get
 
 
 /**
@@ -24,33 +23,21 @@ abstract class ABattleHUD() : AHUD(Services.UI().battleSkin)
 {
     protected var widgets = ArrayMap<String, BattleWidget>()
 
-    // Images
-    private val battleUIbg   = Image(skin.getDrawable("bg"))
-    private val blackCurtain = Image(skin.getDrawable("black"))
+    // ...................................................................................... Images
+    // Battle UI Black transparent Background
+    private val battleUIbg   = makeImage(skin["bg"], ImgLayout(Constant.WIDTHf, 63f))
 
+    // Black Curtain for fade-in and -out
+    private val blackCurtain = makeImage(skin["black"], ImgLayout(Constant.WIDTHf, Constant.HEIGHTf))
+
+    // ............................................................................................. CONSTRUCTOR
     init
     {
-        // Battle UI Black transparent Background
-        battleUIbg.apply {
-
-            width = Constant.WIDTH.f()
-            height = 61f
-            x = 0f
-            y = 0f
-        }
-
-        // Black Curtain for fade-in and -out
-        blackCurtain.apply {
-
-            width = Constant.WIDTH.f()
-            height = Constant.HEIGHT.f()
-            x = 0f
-            y = 0f
-        }
-
         // Add to stage
         stage += battleUIbg
         stage += blackCurtain
+
+        stage.isDebugAll = BattleDebugger.SCENE2D_DEBUG
     }
 
 
@@ -61,7 +48,7 @@ abstract class ABattleHUD() : AHUD(Services.UI().battleSkin)
 
     override fun show()
     {
-        blackCurtain += (fadeOut(1f) then visible(false))
+        blackCurtain.addAction(fadeOut(1f) then visible(false))
     }
 
     /**
@@ -87,7 +74,7 @@ abstract class ABattleHUD() : AHUD(Services.UI().battleSkin)
 
     override fun goToPreviousScreen()
     {
-        blackCurtain += (visible(true) then fadeIn(1f) then runThis{super.goToPreviousScreen()})
+        blackCurtain.addAction(visible(true) then fadeIn(1f) then runThis{super.goToPreviousScreen()})
     }
 
 }

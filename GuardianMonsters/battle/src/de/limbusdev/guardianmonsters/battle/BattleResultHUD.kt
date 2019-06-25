@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable
 import com.badlogic.gdx.utils.Align
 import com.badlogic.gdx.utils.Array
 
@@ -28,6 +29,8 @@ import de.limbusdev.guardianmonsters.ui.Constant
 
 import ktx.actors.plus
 import ktx.actors.plusAssign
+import ktx.scene2d.table
+import ktx.style.get
 
 
 /**
@@ -63,11 +66,10 @@ class BattleResultHUD
         table.clear()
         for(key in team.keys())
         {
-            val guardian = team.get(key)
+            val guardian = team[key]
 
-            // TODO currentForm
             table.add(
-                    monsterFace(guardian.speciesID, guardian.abilityGraph.currentForm)
+                    monsterFace(guardian.speciesID, guardian.currentForm)
             ).left()
             table.add(
                     Label(commonName(guardian.speciesID, 0), skin, "default")
@@ -76,13 +78,13 @@ class BattleResultHUD
                     Image(skin.getDrawable("symbol-exp"))
             ).left()
             table.add(
-                    Label(Integer.toString(result.getGainedEXP(guardian)), skin, "default")
+                    Label(result.getGainedEXP(guardian).toString(), skin, "default")
             ).width(48f).left()
             table.add(
-                    Image(skin.getDrawable("symbol-levelup"))
+                    Image(skin.get<Drawable>("symbol-levelup"))
             ).left()
             table.add(
-                    Label(Integer.toString(guardian.individualStatistics.remainingLevelUps), skin, "default")
+                    Label(guardian.stats.remainingLevelUps.toString(), skin, "default")
             ).width(96f).left()
             table.row().space(4f)
         }
@@ -121,7 +123,7 @@ class BattleResultHUD
 
             println("BattleResultScreen: APPLY pressed")
             reachedNextLevel = result.applyGainedEXPtoAll()
-            result = BattleResult(team, Array<Item>()) // TODO droppped items
+            result = BattleResult(team, Array()) // TODO droppped items
             constructMonsterTable(team, result)
             apply.remove()
             group+=next

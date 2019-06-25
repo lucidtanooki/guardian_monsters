@@ -73,11 +73,11 @@ fun makeImage(drawable: Drawable, position: Position2D, parent: Group? = null) :
     return image
 }
 
-fun makeImage(drawable: Drawable, layout: Layout2D, parent: Group? = null) : Image
+fun makeImage(drawable: Drawable, layout: ImgLayout, parent: Group? = null) : Image
 {
     val image = Image(drawable)
     image.setSize(layout.width, layout.height)
-    image.setPosition(layout.x, layout.y, layout.align ?: Align.center)
+    image.setPosition(layout.x, layout.y, layout.align)
     parent?.addActor(image)
     return image
 }

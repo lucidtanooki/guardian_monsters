@@ -25,7 +25,7 @@ public interface Constant
 
     // ............................................................................................. DEBUGGING
     boolean DEBUGGING_ON = true;
-    DebugMode DEBUG_MODE = DebugMode.WORLD;
+    DebugMode DEBUG_MODE = DebugMode.INVENTORY;
     int startMap = 25;
     int startX = 1, startY = 1;
 }

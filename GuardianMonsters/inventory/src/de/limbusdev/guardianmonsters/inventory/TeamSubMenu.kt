@@ -1,7 +1,6 @@
 package de.limbusdev.guardianmonsters.inventory
 
 import com.badlogic.gdx.scenes.scene2d.Group
-import com.badlogic.gdx.scenes.scene2d.Touchable
 import com.badlogic.gdx.scenes.scene2d.ui.Image
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton
 import com.badlogic.gdx.scenes.scene2d.ui.Skin
@@ -13,7 +12,7 @@ import java.util.Observer
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian
 import de.limbusdev.guardianmonsters.guardians.monsters.Team
 import de.limbusdev.guardianmonsters.inventory.de.limbusdev.guardianmonsters.inventory.ui.widgets.team.BattleParticipationToggleButton
-import de.limbusdev.guardianmonsters.inventory.ui.widgets.team.StatusPentagonWidget
+import de.limbusdev.guardianmonsters.inventory.ui.widgets.team.StatusStarGlyphWidget
 import de.limbusdev.guardianmonsters.scene2d.*
 import de.limbusdev.guardianmonsters.services.Services
 import de.limbusdev.guardianmonsters.ui.Constant
@@ -24,6 +23,9 @@ import de.limbusdev.utils.logInfo
 import ktx.style.get
 
 /**
+ * TeamSubMenu shows his team to the player. It allows organizing team order and which positions
+ * join the fight. It shows Guardian details, like their [Equipment] and individual statistics.
+ *
  * @author Georg Eckert 2017
  */
 
@@ -37,7 +39,7 @@ class TeamSubMenu
     // --------------------------------------------------------------------------------------------- PROPERTIES
     companion object { const val TAG = "TeamSubMenu" }
 
-    private lateinit var statPent           : StatusPentagonWidget
+    private lateinit var starGlyph          : StatusStarGlyphWidget
     private lateinit var monsterStats       : GuardianStatusWidget
     private lateinit var circleWidget       : TeamCircleWidget
 
@@ -98,9 +100,9 @@ class TeamSubMenu
         monsterStats = GuardianStatusWidget()
         monsterStats.setPosition(140f + 2, 0f, Align.bottomLeft)
 
-        statPent = StatusPentagonWidget(skin)
-        statPent.setPosition(20f + 2, 4f, Align.bottomLeft)
-        monsterView.addActor(statPent)
+        starGlyph = StatusStarGlyphWidget(skin)
+        starGlyph.setPosition(20f + 2, 4f, Align.bottomLeft)
+        monsterView.addActor(starGlyph)
 
         addActor(monsterChoice)
         addActor(monsterStats)
@@ -117,7 +119,7 @@ class TeamSubMenu
         // Update Stats Widget, Image and Stats Pentagram
         monsterStats.initialize(guardian)
         monsterImg.setRegion(Services.Media().getMonsterSprite(guardian.speciesID, guardian.currentForm))
-        statPent.initialize(guardian)
+        starGlyph.initialize(guardian)
 
         // Reset Join Battle Button
         joinToggleButton.remove()

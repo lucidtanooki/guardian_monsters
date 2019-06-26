@@ -31,7 +31,7 @@ class BattleParticipationToggleButton
     /** Adds a button for Guardians on positions 0..2, to enable or disable their battle participation. */
     fun autoEnableOrDisable(teamPosition: Int, activeTeamSize: Int, parent: Group? = null)
     {
-        logWarning(TAG) { "Participation button must not be visible for team position $teamPosition" }
+        if(teamPosition !in 0..2) { logWarning(TAG) { "Participation button must not be visible for team position $teamPosition" } }
 
         // Only team positions 0..2 can be activated
         if (teamPosition in 0..2)

@@ -106,10 +106,11 @@ fun makeImageButton(skin: Skin, style: String, position: Position2D, parent: Gro
     return makeImageButton(skin[style], position, parent)
 }
 
-fun makeImageButton(style: ImageButton.ImageButtonStyle, position: PositionXYA, parent: Group? = null) : ImageButton
+fun makeImageButton(style: ImageButton.ImageButtonStyle, position: PositionXYA, parent: Group? = null, callback: () -> Unit = {}) : ImageButton
 {
     val button = ImageButton(style)
     button.setPosition(position.x, position.y, position.align)
+    button.replaceOnClick(callback)
     parent?.addActor(button)
     return button
 }

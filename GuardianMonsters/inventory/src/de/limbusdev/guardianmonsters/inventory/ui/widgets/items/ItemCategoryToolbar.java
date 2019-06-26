@@ -79,7 +79,8 @@ public class ItemCategoryToolbar extends Group {
 
     }
 
-    public interface ClickListener {
+    public interface ClickListener
+    {
         void onMedicineButton();
         void onOtherItemsButton();
         void onEquipItemsButton();

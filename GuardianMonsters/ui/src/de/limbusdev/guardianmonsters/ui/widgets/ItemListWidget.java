@@ -25,7 +25,6 @@ import de.limbusdev.guardianmonsters.services.Services;
 
 public class ItemListWidget extends Group implements Listener<ItemSignal>
 {
-
     private Table itemTable;
     private Inventory inventory;
     private Skin skin;
@@ -33,8 +32,8 @@ public class ItemListWidget extends Group implements Listener<ItemSignal>
     private ClickListener clickListener;
     private Array<Item.Category> currentFilters;
 
-    public interface ClickListener {
-
+    public interface ClickListener
+    {
         void onChoosingItem(Item item);
     }
 
@@ -56,10 +55,10 @@ public class ItemListWidget extends Group implements Listener<ItemSignal>
         scrollPane.setScrollBarPositions(false,true);
         addActor(scrollPane);
 
-        init(inventory, filters);
+        initialize(inventory, filters);
     }
 
-    private void init(Inventory inventory, Array<Item.Category> filters)
+    private void initialize(Inventory inventory, Array<Item.Category> filters)
     {
         itemTable.clearChildren();
         this.inventory = inventory;
@@ -71,7 +70,8 @@ public class ItemListWidget extends Group implements Listener<ItemSignal>
         btnGroup.setMaxCheckCount(1);
 
         // Only proceed if there are any items
-        if(inventory.getItems().size > 0) {
+        if(inventory.getItems().size > 0)
+        {
 
             ArrayMap<Integer, Item> filteredItems = new ArrayMap<>();
             int counter = 0;
@@ -128,16 +128,17 @@ public class ItemListWidget extends Group implements Listener<ItemSignal>
 
         lastChosenItem = 0;
         currentFilters = filters;
-        init(inventory, filters);
+        initialize(inventory, filters);
     }
 
     @Override
-    public void receive(Signal<ItemSignal> signal, ItemSignal itemSignal) {
-
-        if(itemSignal.getMessage() == ItemSignal.Message.DELETED) {
+    public void receive(Signal<ItemSignal> signal, ItemSignal itemSignal)
+    {
+        if(itemSignal.getMessage() == ItemSignal.Message.DELETED)
+        {
             // Refresh Inventory List, if last item of it's kind got removed
             if (!inventory.containsItem(itemSignal.getItem())) {
-                init(inventory, currentFilters);
+                initialize(inventory, currentFilters);
             }
         }
     }

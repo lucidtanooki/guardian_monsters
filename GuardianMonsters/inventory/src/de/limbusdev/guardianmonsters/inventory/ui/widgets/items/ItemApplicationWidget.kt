@@ -57,7 +57,7 @@ open class ItemApplicationWidget
 
         use.replaceOnClick {
 
-            val widget = GuardianListWidget(team, { it -> onButton(it) }, item)
+            val widget = GuardianListWidget(team, { it -> onGuardianListButton(it) }, item)
             widget.setup(
 
                     position= Position2D(-262f, 0f, Align.topLeft),
@@ -161,7 +161,7 @@ open class ItemApplicationWidget
     }
 
     /** @return if there are still items left*/
-    fun onButton(i: Int): Boolean
+    private fun onGuardianListButton(teamSlot: Int): Boolean
     {
         inventory.takeFromInventory(item)
 
@@ -169,25 +169,38 @@ open class ItemApplicationWidget
         {
             is Equipment ->
             {
-                val replaced = team[i].stats.equip((item as Equipment))
-                if (replaced != null) { inventory.putIntoInventory(replaced) }
+                // Give the Guardian the new equipment and store the old one, if there is any
+                val replacedEquipment = team[teamSlot].stats.equip((item as Equipment))
+                // Put the old equipment back into the inventory
+                if (replacedEquipment != null) { inventory.putIntoInventory(replacedEquipment) }
             }
             is AMedicalItem ->
             {
-                (item as AMedicalItem).apply(team[i])
+                // Apply medical item to the currently chosen Guardian
+                (item as AMedicalItem).apply(team[teamSlot])
             }
-            else -> {}
+            else -> { /* Do nothing with other types of Equipment */ }
         }
 
-        val empty = !inventory.containsItem(item)
-        if (empty) { remove() }
-        return !empty
+        // Remove this widget, if the inventory contains no more instances of this item
+        val hasMore = inventory.containsItem(item)
+        if (!hasMore) { remove() }
+
+        // Return if inventory contains any more ot them
+        return hasMore
     }
 
+    /** Callback function for the reassurance widget. */
     private fun onYesButton(item: Item)
     {
+        // Remove Item from Inventory
         inventory.takeFromInventory(item)
-        if (inventory.items.containsKey(item)) { reassuranceWidget.remove() }
-        else                                   { remove()                   }
+
+        // Remove ItemApplicationWidget, if it was the last one
+        when(inventory.items.containsKey(item))
+        {
+            true  -> reassuranceWidget.remove()
+            false -> remove()
+        }
     }
 }

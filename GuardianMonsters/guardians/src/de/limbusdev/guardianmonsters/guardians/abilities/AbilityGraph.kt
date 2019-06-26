@@ -23,7 +23,7 @@ class AbilityGraph : IAbilityGraph
     override var abilityNodes       : ArrayMap<Int, Ability.aID>
     override var equipmentNodes     : ArrayMap<Int, BodyPart>
     override var metamorphosisNodes : Array<Int>
-    override var activeAbilities    : ArrayMap<Int, Ability.aID>
+    override var activeAbilities    : ArrayMap<Int, Ability.aID>    // TODO Decide if ArrayMap<Int, Ability.aID?> is better
     override var learntAbilities    : ArrayMap<Int, Ability.aID>
     override var learntEquipment    : Array<BodyPart>
 
@@ -189,6 +189,8 @@ class AbilityGraph : IAbilityGraph
 
     override fun setActiveAbility(slot: Int, learntAbilityNumber: Int)
     {
+        // TODO decide if active abilities are Null if slot is empty, or not present
+
         checkNotNull(core)
 
         val abilityToLearn = learntAbilities.get(learntAbilityNumber) ?: return

@@ -25,7 +25,7 @@ abstract class AScreen(var hud: AHUD) : Screen
     // Renderers and Cameras
     private val camera      : OrthographicCamera = OrthographicCamera()
     private val viewport    : Viewport
-    private var background  : TextureRegion? = null
+    private var background  : TextureRegion? = null // Do not use TextureRegion(), it causes NullPointerException when drawn in SpriteBatch
     private var batch       : SpriteBatch
     private var shpRend     : ShapeRenderer
 
@@ -54,12 +54,9 @@ abstract class AScreen(var hud: AHUD) : Screen
 
     private fun drawBackground()
     {
-        if(background != null)
-        {
-            batch.begin()
-            batch.draw(background, 0f, 0f, Constant.WIDTHf, Constant.HEIGHTf)
-            batch.end()
-        }
+        batch.begin()
+        if (background != null) { batch.draw(background, 0f, 0f, Constant.WIDTHf, Constant.HEIGHTf) }
+        batch.end()
     }
 
 

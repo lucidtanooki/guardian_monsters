@@ -66,7 +66,10 @@ class SpeciesDescription
         }
     }
 
-    fun getNameID(currentForm: Int) = metaForms.get(currentForm).nameID
+    fun getNameID(currentForm: Int) : String
+    {
+        return metaForms.get(currentForm).nameID
+    }
 
     fun getSimpleName(currentForm: Int) = getNameID(currentForm).split("_")[2]
 

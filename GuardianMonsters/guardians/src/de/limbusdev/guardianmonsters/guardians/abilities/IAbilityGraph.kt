@@ -24,7 +24,7 @@ interface IAbilityGraph
     var learntAbilities     : ArrayMap<Int, Ability.aID> // Abilities activated on the graph
     var learntEquipment     : Array<BodyPart>
 
-    val currentForm         : Int
+    val currentForm         : Int   // Forms start at 0
 
 
     // ..................................................................................... Methods

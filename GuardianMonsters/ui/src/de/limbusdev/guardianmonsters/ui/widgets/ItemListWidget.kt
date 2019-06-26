@@ -23,6 +23,8 @@ import de.limbusdev.guardianmonsters.services.Services
 /**
  * ItemListWidget displays a list of several items.
  *
+ * Please call initialize() to load item list.
+ *
  * @author Georg Eckert 2017
  */
 

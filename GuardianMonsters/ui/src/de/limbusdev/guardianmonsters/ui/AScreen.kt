@@ -25,7 +25,7 @@ abstract class AScreen(var hud: AHUD) : Screen
     // Renderers and Cameras
     private val camera      : OrthographicCamera = OrthographicCamera()
     private val viewport    : Viewport
-    private var background  : TextureRegion = TextureRegion() // initialize with dummy
+    private var background  : TextureRegion? = null
     private var batch       : SpriteBatch
     private var shpRend     : ShapeRenderer
 
@@ -54,9 +54,12 @@ abstract class AScreen(var hud: AHUD) : Screen
 
     private fun drawBackground()
     {
-        batch.begin()
-        batch.draw(background, 0f, 0f, Constant.WIDTHf, Constant.HEIGHTf)
-        batch.end()
+        if(background != null)
+        {
+            batch.begin()
+            batch.draw(background, 0f, 0f, Constant.WIDTHf, Constant.HEIGHTf)
+            batch.end()
+        }
     }
 
 

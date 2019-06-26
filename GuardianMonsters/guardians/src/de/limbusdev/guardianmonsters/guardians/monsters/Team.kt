@@ -29,8 +29,8 @@ import kotlin.IllegalStateException
 class Team
 (
         private var capacity: Int,
-        var maximumTeamSize: Int,
-        var activeTeamSize: Int
+        var maximumTeamSize : Int,
+        var activeTeamSize  : Int
 ) {
     // .................................................................................. Properties
     private val slots = mutableListOf<AGuardian>()

@@ -32,9 +32,9 @@ class ItemsSubMenu
     : AInventorySubMenu(), ItemCategoryToolbar.ClickListener, ItemListWidget.ClickListener
 {
     // --------------------------------------------------------------------------------------------- PROPERTIES
-    private var detailView      : ItemApplicationWidget = ItemApplicationWidget(inventory, team)
     private val itemListWidget  : ItemListWidget
     private val toolbar = ItemCategoryToolbar(skin, this)
+    private var detailView = ItemApplicationWidget(inventory, team)
 
 
     // --------------------------------------------------------------------------------------------- CONSTRUCTORS
@@ -44,13 +44,14 @@ class ItemsSubMenu
         // initialize with medical items
         val filters = Array<Item.Category>()
         filters.add(Item.Category.MEDICINE)
-
         itemListWidget = ItemListWidget(inventory, this, filters)
         itemListWidget.setPosition(68f, 0f, Align.bottomLeft)
 
         // Add widgets
         addActor(toolbar)
         addActor(itemListWidget)
+
+        itemListWidget.initialize(inventory, filters) // call this last, as it calls showItemDetailView()
     }
 
 

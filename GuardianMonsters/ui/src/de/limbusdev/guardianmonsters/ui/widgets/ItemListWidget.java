@@ -54,11 +54,9 @@ public class ItemListWidget extends Group implements Listener<ItemSignal>
         scrollPane.setPosition(2,2);
         scrollPane.setScrollBarPositions(false,true);
         addActor(scrollPane);
-
-        initialize(inventory, filters);
     }
 
-    private void initialize(Inventory inventory, Array<Item.Category> filters)
+   public void initialize(Inventory inventory, Array<Item.Category> filters)
     {
         itemTable.clearChildren();
         this.inventory = inventory;
@@ -134,12 +132,6 @@ public class ItemListWidget extends Group implements Listener<ItemSignal>
     @Override
     public void receive(Signal<ItemSignal> signal, ItemSignal itemSignal)
     {
-        if(itemSignal.getMessage() == ItemSignal.Message.DELETED)
-        {
-            // Refresh Inventory List, if last item of it's kind got removed
-            if (!inventory.containsItem(itemSignal.getItem())) {
-                initialize(inventory, currentFilters);
-            }
-        }
+        initialize(inventory, currentFilters);
     }
 }

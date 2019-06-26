@@ -51,10 +51,9 @@ class GuardianOverviewButton
         guardianSprite = Image(region)
 
         augmentButton(guardian, item)
-
-        debug = true
     }
 
+    /** Creates the first line in the button, with Guardian name and mini sprite. */
     private fun assembleButtonHead()
     {
         pad(4f)
@@ -91,6 +90,8 @@ class GuardianOverviewButton
     {
         clear()
         assembleButtonHead()
+
+        // Put this into a new table
         val line = Table()
 
         val potential = guardian.stats.getEquipmentPotential(equipment)
@@ -146,6 +147,7 @@ class GuardianOverviewButton
 
         assembleButtonHead()
 
+        // Put this into a new table
         val line = Table()
 
         line.add(makeImage(skin["stats-symbol-hp"])).padRight(2f)

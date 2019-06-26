@@ -2,7 +2,7 @@ package de.limbusdev.guardianmonsters.battle.ui.widgets
 
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton
 import com.badlogic.gdx.scenes.scene2d.ui.Skin
-import de.limbusdev.guardianmonsters.scene2d.replaceOnClick
+import de.limbusdev.guardianmonsters.scene2d.replaceOnButtonClick
 import de.limbusdev.guardianmonsters.services.Services
 
 import de.limbusdev.guardianmonsters.ui.Constant
@@ -46,7 +46,7 @@ class BattleMainMenuWidget
         this.addActor(swordButton)
         this.addActor(runButton)
 
-        swordButton.replaceOnClick(onSwordButton)
-        runButton.replaceOnClick(onRunButton)
+        swordButton.replaceOnButtonClick(onSwordButton)
+        runButton.replaceOnButtonClick(onRunButton)
     }
 }

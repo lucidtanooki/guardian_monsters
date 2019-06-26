@@ -100,7 +100,7 @@ abstract class ATeamChoiceWidget(private val skin: Skin, private var handler: (I
             val pos = positions.get(key)
             button.setPosition(pos.x - 3f, pos.y - 4f, Align.bottomLeft)
 
-            button.replaceOnClick {
+            button.replaceOnButtonClick {
 
                 logInfo(TAG) { "Current Position set to $key" }
                 oldPosition = currentPosition

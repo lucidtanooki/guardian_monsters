@@ -2,14 +2,19 @@ package de.limbusdev.guardianmonsters.scene2d
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion
 import com.badlogic.gdx.scenes.scene2d.Actor
+import com.badlogic.gdx.scenes.scene2d.EventListener
 import com.badlogic.gdx.scenes.scene2d.Group
 import com.badlogic.gdx.scenes.scene2d.InputEvent
+import com.badlogic.gdx.scenes.scene2d.ui.Button
 import com.badlogic.gdx.scenes.scene2d.ui.Image
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener
+import com.badlogic.gdx.scenes.scene2d.utils.FocusListener
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable
 import com.badlogic.gdx.utils.Align
 import com.badlogic.gdx.utils.ArrayMap
+import ktx.actors.onClick
+import ktx.actors.setKeyboardFocus
 
 /**
  * LimbusWidget
@@ -38,13 +43,39 @@ fun Actor.lSetPosition(x: Float, y: Float, align: Int): Actor
  * @param listener invoked each time this actor is clicked.
  * @return [ClickListener] instance.
  */
-inline fun Actor.replaceOnClick(crossinline listener: () -> Unit): ClickListener
+inline fun Actor.replaceOnActorClick(crossinline listener: () -> Unit): ClickListener
 {
     val clickListener = object : ClickListener()
     {
         override fun clicked(event: InputEvent, x: Float, y: Float) = listener()
     }
     this.clearListeners()
+    this.addListener(clickListener)
+    return clickListener
+}
+
+inline fun Button.replaceOnButtonClick(crossinline listener: () -> Unit): ClickListener
+{
+    val clickListener = object : ClickListener()
+    {
+        override fun clicked(event: InputEvent, x: Float, y: Float)
+        {
+            listener()
+        }
+    }
+
+    // Restore default listeners
+    var listener0 : EventListener? = null
+    var listener1 : EventListener? = null
+    if(this.listeners.size >= 2)
+    {
+        listener0 = this.listeners.get(0)
+        listener1 = this.listeners.get(1)
+    }
+
+    this.clearListeners()
+    if(listener0 != null) { this.addListener(listener0) }
+    if(listener1 != null) { this.addListener(listener1) }
     this.addListener(clickListener)
     return clickListener
 }
@@ -121,3 +152,5 @@ fun Group.setup(layout: ImgLayout, parent: Group? = null)
     this.setPosition(layout.x, layout.y, layout.align)
     parent?.addActor(this)
 }
+
+class Scene2DLayout(val width: Float, val height: Float, val x: Float = 0f, val y: Float = 0f, val align: Int = Align.bottomLeft)

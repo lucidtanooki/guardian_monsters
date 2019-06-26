@@ -16,7 +16,7 @@ import de.limbusdev.guardianmonsters.guardians.items.medicine.AMedicalItem
 import de.limbusdev.guardianmonsters.guardians.monsters.GuardoSphere
 import de.limbusdev.guardianmonsters.guardians.monsters.Team
 import de.limbusdev.guardianmonsters.inventory.ui.widgets.team.GuardianListWidget
-import de.limbusdev.guardianmonsters.scene2d.replaceOnClick
+import de.limbusdev.guardianmonsters.scene2d.replaceOnButtonClick
 import de.limbusdev.guardianmonsters.services.Services
 import de.limbusdev.guardianmonsters.ui.Constant
 import de.limbusdev.guardianmonsters.ui.widgets.ItemListWidget
@@ -72,7 +72,7 @@ class ItemChoice
         val back = ImageButton(skin, "button-back")
         back.setPosition(Constant.WIDTHf - 20, 2f, Align.bottomRight)
         addActor(back)
-        back.replaceOnClick { remove() }
+        back.replaceOnButtonClick { remove() }
     }
 
 
@@ -105,7 +105,7 @@ class ItemChoice
         }
 
         // What happens, when an item is chosen from the list?
-        val onItemButton = ItemListWidget.ClickListener { item ->
+        val onItemButton : (Item) -> Unit = { item ->
 
             chosenItem = item
             var hint = ""
@@ -145,7 +145,7 @@ class ItemChoice
                 else -> onUseButton = {}
             }
 
-            detailViewWidget.use.replaceOnClick{ onUseButton.invoke() }
+            detailViewWidget.use.replaceOnButtonClick{ onUseButton.invoke() }
         }
 
         // Define which items will be shown

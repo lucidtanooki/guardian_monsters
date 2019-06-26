@@ -1,9 +1,7 @@
 package de.limbusdev.guardianmonsters.inventory.ui.widgets.team
 
 import com.badlogic.gdx.scenes.scene2d.Group
-import com.badlogic.gdx.scenes.scene2d.InputEvent
 import com.badlogic.gdx.scenes.scene2d.ui.Image
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane
 import com.badlogic.gdx.scenes.scene2d.ui.Table
 import com.badlogic.gdx.utils.Align
@@ -68,7 +66,7 @@ class GuardianListWidget
             guardianTable.add(guardianButton).width(220f).height(64f)
             guardianTable.row().spaceBottom(1f)
 
-            guardianButton.replaceOnClick {
+            guardianButton.replaceOnButtonClick {
 
                 val moreItems = onButton(i)
                 if(!moreItems) { remove() }

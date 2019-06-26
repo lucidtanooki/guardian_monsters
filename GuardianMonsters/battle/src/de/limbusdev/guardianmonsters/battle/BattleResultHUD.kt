@@ -22,7 +22,7 @@ import de.limbusdev.guardianmonsters.guardians.items.Item
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian
 import de.limbusdev.guardianmonsters.guardians.monsters.ISpeciesDescriptionService
 import de.limbusdev.guardianmonsters.guardians.monsters.Team
-import de.limbusdev.guardianmonsters.scene2d.replaceOnClick
+import de.limbusdev.guardianmonsters.scene2d.replaceOnButtonClick
 import de.limbusdev.guardianmonsters.services.Services
 import de.limbusdev.guardianmonsters.ui.AHUD
 import de.limbusdev.guardianmonsters.ui.Constant
@@ -119,7 +119,7 @@ class BattleResultHUD
         apply.setPosition(applyX, applyY, applyAlign)
         group+=apply
 
-        apply.replaceOnClick {
+        apply.replaceOnButtonClick {
 
             println("BattleResultScreen: APPLY pressed")
             reachedNextLevel = result.applyGainedEXPtoAll()
@@ -134,7 +134,7 @@ class BattleResultHUD
         next.setSize(nextWidth, nextHeight)
         next.setPosition(nextX, nextY, nextAlign)
 
-        next.replaceOnClick {
+        next.replaceOnButtonClick {
 
             println("BattleResultScreen: NEXT pressed")
             if(reachedNextLevel.size > 0)

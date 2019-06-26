@@ -29,7 +29,7 @@ class ItemsSubMenu
         private val inventory: Inventory,
         private val team: Team
 )
-    : AInventorySubMenu(), ItemCategoryToolbar.ClickListener, ItemListWidget.ClickListener
+    : AInventorySubMenu(), ItemCategoryToolbar.ClickListener
 {
     // --------------------------------------------------------------------------------------------- PROPERTIES
     private val itemListWidget  : ItemListWidget
@@ -44,7 +44,7 @@ class ItemsSubMenu
         // initialize with medical items
         val filters = Array<Item.Category>()
         filters.add(Item.Category.MEDICINE)
-        itemListWidget = ItemListWidget(inventory, this, filters)
+        itemListWidget = ItemListWidget(inventory, { showItemDetailView(it) }, filters)
         itemListWidget.setPosition(68f, 0f, Align.bottomLeft)
 
         // Add widgets
@@ -94,11 +94,6 @@ class ItemsSubMenu
     override fun onKeyItemsButton()
     {
         itemListWidget.applyFilter(Item.Category.KEY)
-    }
-
-    override fun onChoosingItem(item: Item)
-    {
-        showItemDetailView(item)
     }
 
     override fun refresh()

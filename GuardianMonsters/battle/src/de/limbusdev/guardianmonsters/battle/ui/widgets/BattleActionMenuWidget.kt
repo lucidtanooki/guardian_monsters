@@ -2,7 +2,7 @@ package de.limbusdev.guardianmonsters.battle.ui.widgets
 
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton
 import com.badlogic.gdx.scenes.scene2d.ui.Skin
-import de.limbusdev.guardianmonsters.scene2d.replaceOnClick
+import de.limbusdev.guardianmonsters.scene2d.replaceOnButtonClick
 import de.limbusdev.guardianmonsters.services.Services
 
 
@@ -50,10 +50,10 @@ class BattleActionMenuWidget
             onTeamButton  : () -> Unit = {},
             onExtraButton : () -> Unit = {}
     ) {
-        backButton.replaceOnClick(onBackButton)
-        bagButton.replaceOnClick(onBagButton);
-        teamButton.replaceOnClick(onTeamButton);
-        extraButton.replaceOnClick(onExtraButton);
+        backButton.replaceOnButtonClick(onBackButton)
+        bagButton.replaceOnButtonClick(onBagButton);
+        teamButton.replaceOnButtonClick(onTeamButton);
+        extraButton.replaceOnButtonClick(onExtraButton);
     }
 
     /** Sets all given callbacks. Disables all buttons where callback is null. Enables the others. */
@@ -66,14 +66,14 @@ class BattleActionMenuWidget
     ) {
         enable()
 
-        if(onBackButton == null) { backButton.replaceOnClick {};                disable(backButton) }
-        else                     { backButton.replaceOnClick(onBackButton);     enable(backButton)  }
-        if(onBagButton == null)  { bagButton.replaceOnClick {};                 disable(bagButton)  }
-        else                     { bagButton.replaceOnClick(onBagButton);       enable(bagButton)   }
-        if(onTeamButton == null) { teamButton.replaceOnClick {};                disable(teamButton) }
-        else                     { teamButton.replaceOnClick(onTeamButton);     enable(teamButton)  }
-        if(onExtraButton == null){ extraButton.replaceOnClick {};               disable(extraButton)}
-        else                     { extraButton.replaceOnClick(onExtraButton);   enable(extraButton) }
+        if(onBackButton == null) { backButton.replaceOnButtonClick {};                disable(backButton) }
+        else                     { backButton.replaceOnButtonClick(onBackButton);     enable(backButton)  }
+        if(onBagButton == null)  { bagButton.replaceOnButtonClick {};                 disable(bagButton)  }
+        else                     { bagButton.replaceOnButtonClick(onBagButton);       enable(bagButton)   }
+        if(onTeamButton == null) { teamButton.replaceOnButtonClick {};                disable(teamButton) }
+        else                     { teamButton.replaceOnButtonClick(onTeamButton);     enable(teamButton)  }
+        if(onExtraButton == null){ extraButton.replaceOnButtonClick {};               disable(extraButton)}
+        else                     { extraButton.replaceOnButtonClick(onExtraButton);   enable(extraButton) }
     }
 
     fun disableAllButBackButton()

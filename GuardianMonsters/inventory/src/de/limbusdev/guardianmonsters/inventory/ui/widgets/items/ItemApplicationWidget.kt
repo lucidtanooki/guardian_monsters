@@ -53,9 +53,9 @@ open class ItemApplicationWidget
     {
         constructLayout()
 
-        delete.replaceOnClick { addActor(reassuranceWidget) }
+        delete.replaceOnButtonClick { addActor(reassuranceWidget) }
 
-        use.replaceOnClick {
+        use.replaceOnButtonClick {
 
             val widget = GuardianListWidget(team, { it -> onGuardianListButton(it) }, item)
             widget.setup(
@@ -87,7 +87,7 @@ open class ItemApplicationWidget
         itemImg.drawable = Services.Media().getItemDrawable(itemToShow.name)
 
         reassuranceWidget.question.txt = i18n.format("reassurance-throwaway", i18n.get(item.name))
-        reassuranceWidget.buttonYes.replaceOnClick { onYesButton(item) }
+        reassuranceWidget.buttonYes.replaceOnButtonClick { onYesButton(item) }
     }
 
     open fun initialize(itemToShow: Item)

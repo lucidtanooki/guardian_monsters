@@ -1,5 +1,6 @@
 package de.limbusdev.guardianmonsters.scene2d
 
+import com.badlogic.gdx.scenes.scene2d.Actor
 import com.badlogic.gdx.scenes.scene2d.Group
 import com.badlogic.gdx.scenes.scene2d.ui.*
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable
@@ -110,7 +111,7 @@ fun makeImageButton(style: ImageButton.ImageButtonStyle, position: PositionXYA, 
 {
     val button = ImageButton(style)
     button.setPosition(position.x, position.y, position.align)
-    button.replaceOnClick(callback)
+    button.replaceOnButtonClick(callback)
     parent?.addActor(button)
     return button
 }
@@ -130,4 +131,24 @@ fun makeGroup(width: Float, height: Float, x: Float = 0f, y: Float = 0f, align: 
 fun makeGroup(layout: Layout2D, parent: Group? = null)
 {
     makeGroup(layout.width, layout.height, layout.x, layout.y, layout.align ?: Align.bottomLeft, parent)
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////// ScrollPane
+fun makeScrollPane
+(
+        child: Actor,
+        skin: Skin,
+        layout: Scene2DLayout,
+        enableBottomScrollBar: Boolean = false,
+        enableRightScrollBar: Boolean = false,
+        parent: Group? = null
+)
+    : ScrollPane
+{
+    val scrollPane = ScrollPane(child, skin)
+    scrollPane.setSize(layout.width, layout.height)
+    scrollPane.setPosition(layout.x, layout.y, layout.align)
+    scrollPane.setScrollBarPositions(enableBottomScrollBar, enableRightScrollBar)
+    parent?.addActor(scrollPane)
+    return scrollPane
 }

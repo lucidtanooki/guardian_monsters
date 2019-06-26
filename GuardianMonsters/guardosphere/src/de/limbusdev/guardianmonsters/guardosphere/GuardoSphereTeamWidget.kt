@@ -58,7 +58,7 @@ class GuardoSphereTeamWidget
             monsterButtons+=monsterButton
             buttons.add(monsterButton)
             buttonGroup.add(monsterButton)
-            monsterButton.replaceOnClick { callback.invoke(key) }
+            monsterButton.replaceOnButtonClick { callback.invoke(key) }
         }
     }
 

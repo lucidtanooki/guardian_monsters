@@ -186,7 +186,7 @@ class TeamSubMenu
             blackOverlay.remove()
         }
 
-        swapButton.replaceOnClick {
+        swapButton.replaceOnButtonClick {
 
             circleWidget.remove()
             circleWidget.setHandler(onCircleWidgetSwap)
@@ -194,9 +194,8 @@ class TeamSubMenu
             addActor(circleWidget)
         }
 
-        joinToggleButton.replaceOnClick {
+        joinToggleButton.replaceOnButtonClick {
 
-            joinToggleButton.toggle()
             team.activeTeamSize = when(joinToggleButton.isChecked)
             {
                 true  -> team.activeTeamSize + 1

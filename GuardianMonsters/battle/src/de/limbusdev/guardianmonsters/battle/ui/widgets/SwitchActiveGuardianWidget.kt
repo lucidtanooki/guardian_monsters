@@ -22,7 +22,7 @@ import com.badlogic.gdx.utils.Align
 import de.limbusdev.guardianmonsters.guardians.battle.CombatTeam
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian
 import de.limbusdev.guardianmonsters.guardians.monsters.Team
-import de.limbusdev.guardianmonsters.scene2d.replaceOnClick
+import de.limbusdev.guardianmonsters.scene2d.replaceOnButtonClick
 import de.limbusdev.guardianmonsters.services.Services
 import de.limbusdev.guardianmonsters.ui.Constant
 import de.limbusdev.guardianmonsters.ui.widgets.ATeamChoiceWidget
@@ -100,8 +100,8 @@ class SwitchActiveGuardianWidget() : BattleWidget()
         this.backButtonCallback = onBack
         this.switchButtonCallback = onSwitch
 
-        backButton.replaceOnClick(onBack)
-        switchButton.replaceOnClick(onSwitch)
+        backButton.replaceOnButtonClick(onBack)
+        switchButton.replaceOnButtonClick(onSwitch)
     }
 
     fun initialize(guardian: AGuardian, team: Team, combatTeam: CombatTeam)

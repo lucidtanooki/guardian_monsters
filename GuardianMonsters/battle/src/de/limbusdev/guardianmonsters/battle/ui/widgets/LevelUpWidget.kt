@@ -10,7 +10,7 @@ import com.badlogic.gdx.utils.Align
 
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian
 import de.limbusdev.guardianmonsters.scene2d.AnimatedImage
-import de.limbusdev.guardianmonsters.scene2d.replaceOnClick
+import de.limbusdev.guardianmonsters.scene2d.replaceOnButtonClick
 import de.limbusdev.guardianmonsters.services.Services
 import de.limbusdev.guardianmonsters.ui.Constant
 import de.limbusdev.guardianmonsters.ui.widgets.OverlayWidget
@@ -41,7 +41,7 @@ class LevelUpWidget(skin: Skin = Services.UI().inventorySkin, guardian: AGuardia
         val ok = ImageButton(skin, "button-back")
         ok.setPosition(Constant.WIDTHf - 64 - 4, 32f + 4, Align.bottomRight)
         addActor(ok)
-        ok.replaceOnClick { remove() }
+        ok.replaceOnButtonClick { remove() }
 
         val guardianName = Services.I18N().getGuardianNicknameIfAvailable(guardian)
         val info = Label(Services.I18N().Battle("level_up", guardianName), skin, "default")

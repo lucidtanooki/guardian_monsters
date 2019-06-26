@@ -86,6 +86,7 @@ public class HoneyComb7ButtonsWidget extends WidgetGroup
         {
             final int j = i;
             final TextButton attButt = buttons.get(i);
+            attButt.clearListeners();
             attButt.addListener(new SimpleClickListener(() ->
             {
                 System.out.println("SevenButtonsWidget: Clicked button " + j);
@@ -156,6 +157,7 @@ public class HoneyComb7ButtonsWidget extends WidgetGroup
         removedButton.remove();
 
         buttons.put(index,button);
+        button.clearListeners();
         button.addListener(
             new com.badlogic.gdx.scenes.scene2d.utils.ClickListener() {
                 @Override

@@ -25,8 +25,8 @@ import de.limbusdev.guardianmonsters.ui.widgets.SimpleClickListener;
  * @author Georg Eckert 2017
  */
 
-public class AbilityDetailWidget extends Container {
-
+public class AbilityDetailWidget extends Container
+{
     private int nodeID;
 
     private Skin skin;

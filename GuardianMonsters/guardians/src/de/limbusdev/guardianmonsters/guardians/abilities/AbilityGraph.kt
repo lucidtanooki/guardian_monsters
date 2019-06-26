@@ -193,7 +193,8 @@ class AbilityGraph : IAbilityGraph
 
         val abilityToLearn = learntAbilities.get(learntAbilityNumber) ?: return
 
-        for (key in activeAbilities.keys()) {
+        for (key in activeAbilities.keys())
+        {
             val abilityAtThisSlot = activeAbilities[key]
 
             if (abilityAtThisSlot != null)

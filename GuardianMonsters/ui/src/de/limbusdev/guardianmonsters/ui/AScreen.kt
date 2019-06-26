@@ -25,9 +25,14 @@ abstract class AScreen(var hud: AHUD) : Screen
     // Renderers and Cameras
     private val camera      : OrthographicCamera = OrthographicCamera()
     private val viewport    : Viewport
-    private var background  : TextureRegion? = null // Do not use TextureRegion(), it causes NullPointerException when drawn in SpriteBatch
     private var batch       : SpriteBatch
     private var shpRend     : ShapeRenderer
+
+    /**
+     * Do not use TextureRegion(), it causes NullPointerException when drawn in SpriteBatch
+     * (see Issue #5686 https://github.com/libgdx/libgdx/issues/5686).
+     */
+    private var background  : TextureRegion? = null
 
 
     // ................................................................................ Constructors

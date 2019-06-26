@@ -160,6 +160,7 @@ class ItemChoice
 
         // Create filtered Item List
         val itemList = ItemListWidget(inventory, onItemButton, filters)
+        itemList.initialize(inventory, filters)
         itemList.setSize(140f, Constant.HEIGHTf)
         itemList.setPosition(Constant.WIDTHf / 2 - 32, 0f, Align.bottomLeft)
         addActor(itemList)

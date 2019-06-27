@@ -183,6 +183,7 @@ project(":guardosphere") {
         implementation project(":scene2d")
         implementation project(":media")
         implementation "io.github.libktx:ktx-actors:$ktxVersion"
+        implementation "io.github.libktx:ktx-style:$ktxVersion"
         implementation "io.github.libktx:ktx-scene2d:$ktxVersion"
         implementation "io.github.libktx:ktx-vis:$ktxVersion"
         implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"

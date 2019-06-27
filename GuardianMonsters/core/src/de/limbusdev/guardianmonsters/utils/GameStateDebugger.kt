@@ -229,7 +229,7 @@ class GameStateDebugger(private val game: Game)
         heroTeam += guardianFactory.createGuardian(2, 1)
         heroTeam += guardianFactory.createGuardian(3, 1)
         heroTeam[0].abilityGraph.activateNode(13)
-        heroTeam[0].abilityGraph.setActiveAbility(6, 1)
+        heroTeam[0].abilityGraph.setActiveAbility(6, 0)
 
         val guardoSphere = GuardoSphere()
 

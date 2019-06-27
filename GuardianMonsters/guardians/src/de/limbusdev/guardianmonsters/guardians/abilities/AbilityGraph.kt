@@ -225,11 +225,14 @@ class AbilityGraph : IAbilityGraph
 
     override fun getRandomActiveAbilitySlot() : Int
     {
+        val validActiveAbilitySlots = Array<Int>()
         for(slot in 0..6)
         {
-            if(activeAbilities[slot] != null) { return slot }
+            if(activeAbilities[slot] != null) { validActiveAbilitySlots.add(slot) }
         }
-        checkNotNull(null) { "All active ability slots are null. This should never happen." }
+        check(validActiveAbilitySlots.size != 0) { "All active ability slots are null. This should never happen." }
+
+        return validActiveAbilitySlots.random()
     }
 
 

@@ -7,12 +7,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Skin
 import com.badlogic.gdx.utils.Align
 import com.badlogic.gdx.utils.ArrayMap
-import de.limbusdev.guardianmonsters.guardians.GuardiansServiceLocator
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian
-import de.limbusdev.guardianmonsters.scene2d.lSetSize
 import de.limbusdev.guardianmonsters.services.Services
 import de.limbusdev.utils.extensions.set
-import ktx.actors.plus
 import ktx.actors.plusAssign
 import ktx.actors.txt
 

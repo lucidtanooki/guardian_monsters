@@ -79,12 +79,12 @@ class TeamSubMenu
 
         monsterChoice = makeGroup(width = 140f, height = Constant.HEIGHTf - 36)
 
-        val monsterChoiceBg = makeImage(skin["menu-col-bg"], ImgPosition(2f, 2f), monsterChoice)
+        val monsterChoiceBg = makeImage(skin["menu-col-bg"], PositionXYA(2f, 2f), monsterChoice)
 
         circleWidget.setPosition(1f, 40f, Align.bottomLeft)
         monsterChoice.addActor(circleWidget)
 
-        blackOverlay = makeImage(skin["black-a80"], ImgLayout(Constant.WIDTHf, Constant.HEIGHTf))
+        blackOverlay = makeImage(skin["black-a80"], Scene2DLayout(Constant.WIDTHf, Constant.HEIGHTf))
         swapButton = makeImageButton(skin["button-switch"], PositionXYA(8f, 8f), monsterChoice)
 
         joinToggleButton = BattleParticipationToggleButton(skin, PositionXYA(140-8f, 8f, Align.bottomRight))
@@ -93,9 +93,9 @@ class TeamSubMenu
         lockedStyle = ImageButton.ImageButtonStyle().apply { checked = skin["button-check-down-locked"] }
 
         val monsterView = makeGroup(140f, Constant.HEIGHTf - 36, (140+2)*2f, 0f)
-        val monsterViewBg = makeImage(skin["menu-col-bg"], ImgPosition(2f, 2f), monsterView)
+        val monsterViewBg = makeImage(skin["menu-col-bg"], PositionXYA(2f, 2f), monsterView)
         monsterImg = Image()
-        monsterImg.setup(ImgLayout(128f, 128f, 6f, 202f, Align.topLeft), monsterView)
+        monsterImg.setup(Scene2DLayout(128f, 128f, 6f, 202f, Align.topLeft), monsterView)
 
         monsterStats = GuardianStatusWidget()
         monsterStats.setPosition(140f + 2, 0f, Align.bottomLeft)

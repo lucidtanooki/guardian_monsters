@@ -139,7 +139,7 @@ class AbilityChoiceSubMenu
         abilitySlotChoice.setPosition(0f, 0f, Align.bottomLeft)
 
         // Setup transparent black overlay
-        val overlay = makeImage(skin["black-a80"], ImgLayout(Constant.WIDTHf, Constant.HEIGHTf), abilitySlotChoice)
+        val overlay = makeImage(skin["black-a80"], Scene2DLayout(Constant.WIDTHf, Constant.HEIGHTf), abilitySlotChoice)
 
         abilitySlotButtons.setPosition(0f, 32f, Align.bottomLeft)
         abilitySlotChoice.addActor(abilitySlotButtons)

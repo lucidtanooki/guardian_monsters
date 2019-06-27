@@ -84,7 +84,7 @@ abstract class ATeamChoiceWidget(private val skin: Skin, private var handler: (I
         {
             val guardian = team[key]
             val preview = Image(Services.Media().getMonsterMiniSprite(guardian.speciesID, guardian.currentForm))
-            preview.position = ImgPosition(38f / 2 - 8, 38f / 2 - 8, Align.bottomLeft)
+            preview.position(PositionXYA(38f / 2 - 8, 38f / 2 - 8, Align.bottomLeft))
 
             val imUp = skin.get<Drawable>("transparent").apply { minHeight = 38f; minWidth = 38f }
 

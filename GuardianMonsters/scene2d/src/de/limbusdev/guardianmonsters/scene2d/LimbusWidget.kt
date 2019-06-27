@@ -26,15 +26,23 @@ operator fun <K, V> ArrayMap<K, V>.set(key: K, value: V)
     put(key, value)
 }
 
-fun Actor.lSetSize(width: Float, height: Float): Actor
+/** Chain function, that always returns the actor. */
+fun Actor.size(width: Float, height: Float): Actor
 {
     this.setSize(width, height)
     return this
 }
 
-fun Actor.lSetPosition(x: Float, y: Float, align: Int): Actor
+/** Chain function, that always returns the actor. */
+fun Actor.position(x: Float = 0f, y: Float = 0f, align: Int = Align.bottomLeft): Actor
 {
     this.setPosition(x, y, align)
+    return this
+}
+
+fun Actor.position(position: PositionXYA) : Actor
+{
+    this.setPosition(position.x, position.y, position.align)
     return this
 }
 
@@ -88,44 +96,32 @@ fun Actor.setup(width: Float, height: Float, x: Float, y: Float, align: Int, par
     parent?.addActor(this)
 }
 
-fun Actor.setup(layout: Layout2D, parent: Group? = null)
+fun Actor.setup(layout: Scene2DLayout, parent: Group? = null)
 {
-    this.setup(layout.width, layout.height, layout.x, layout.y, layout.align ?: Align.center, parent)
+    this.setup(layout.width, layout.height, layout.x, layout.y, layout.align, parent)
 }
 
-fun Label.setupLabel(layout2D: LabelLayout2D, parent: Group? = null)
+fun Label.setupLabel(layout: LabelLayout, parent: Group? = null)
 {
-    this.setSize(layout2D.width, layout2D.height)
-    this.setPosition(layout2D.x, layout2D.y, layout2D.align ?: Align.left)
-    this.setAlignment(layout2D.align ?: Align.left, layout2D.line)
-    this.setWrap(layout2D.wrap)
+    this.setSize(layout.width, layout.height)
+    this.setPosition(layout.x, layout.y, layout.align)
+    this.setAlignment(layout.align, layout.line)
+    this.setWrap(layout.wrap)
     parent?.addActor(this)
 }
 
-fun Actor.setup(position: Position2D, parent: Group? = null)
+fun Actor.setup(position: PositionXYA, parent: Group? = null)
 {
-    this.setPosition(position.x, position.y, position.align ?: Align.center)
+    this.setPosition(position.x, position.y, position.align)
     parent?.addActor(this)
 }
-
-inline var Actor.position: Position2D
-    get() = Position2D(x, y, null)
-    set(value) {setPosition(value.x, value.y, value.align ?: Align.center)}
-
-inline var Actor.setup: Layout2D
-    get() = Layout2D(width, height, x, y, null)
-    set(value) {setup(value)}
-
-inline var Image.position: ImgPosition
-    get() = ImgPosition(x, y)
-    set(value) { setPosition(value.x, value.y, value.align) }
 
 fun Image.setRegion(region: TextureRegion)
 {
     this.drawable = TextureRegionDrawable(region)
 }
 
-fun Image.setup(layout: ImgLayout, parent: Group? = null)
+fun Image.setup(layout: Scene2DLayout, parent: Group? = null)
 {
     this.setSize(layout.width, layout.height)
     this.setPosition(layout.x, layout.y, layout.align)
@@ -147,25 +143,19 @@ fun Actor.setPosition(x: Int = 0, y: Float = 0f, align: Int = Align.bottomLeft)
     this.setPosition(x.toFloat(), y, align)
 }
 
-class Position2D(val x: Float = 0f, val y: Float = 0f, val align: Int? = Align.center)
-
-open class Layout2D(val width: Float, val height: Float, val x: Float, val y: Float, val align: Int?)
-
-class ImgLayout(val width: Float, val height: Float, val x: Float = 0f, val y: Float = 0f, val align: Int = Align.bottomLeft)
-
-class ImgPosition(val x: Float = 0f, val y: Float = 0f, val align: Int = Align.bottomLeft)
-
 /** Position: X, Y, Align */
 class PositionXYA(val x: Float = 0f, val y: Float = 0f, val align: Int = Align.bottomLeft)
 
-class LabelLayout2D(width: Float, height: Float, x: Float, y: Float, align: Int, val line: Int, val wrap: Boolean)
-    : Layout2D(width, height, x, y, align)
+class LabelLayout(val width: Float, val height: Float, val x: Float = 0f, val y: Float = 0f,
+                  val align: Int = Align.bottomLeft, val line: Int = Align.left,
+                  val wrap: Boolean = false)
 
-fun Group.setup(layout: ImgLayout, parent: Group? = null)
+fun Group.setup(layout: Scene2DLayout, parent: Group? = null)
 {
     this.setSize(layout.width, layout.height)
     this.setPosition(layout.x, layout.y, layout.align)
     parent?.addActor(this)
 }
 
-class Scene2DLayout(val width: Float, val height: Float, val x: Float = 0f, val y: Float = 0f, val align: Int = Align.bottomLeft)
+class Scene2DLayout(val width: Float, val height: Float, val x: Float = 0f, val y: Float = 0f,
+                    val align: Int = Align.bottomLeft)

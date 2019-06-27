@@ -38,7 +38,7 @@ class GuardianListWidget
     {
         val skin = Services.UI().inventorySkin
 
-        blackLayer = makeImage(skin["black-a80"], ImgLayout(Constant.WIDTHf, Constant.HEIGHTf), this)
+        blackLayer = makeImage(skin["black-a80"], Scene2DLayout(Constant.WIDTHf, Constant.HEIGHTf), this)
 
         val back = makeImageButton(
 

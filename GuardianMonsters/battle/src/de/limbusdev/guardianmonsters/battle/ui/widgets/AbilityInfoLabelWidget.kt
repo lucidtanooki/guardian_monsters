@@ -60,7 +60,7 @@ class AbilityInfoLabelWidget
 
                 style = inventorySkin["elem-none"],
                 text = "None",
-                layout = Layout2D(72f, 24f, 386f, 22f, Align.bottomRight)
+                layout = Scene2DLayout(72f, 24f, 386f, 22f, Align.bottomRight)
         )
 
         // Ability Name Label
@@ -68,7 +68,7 @@ class AbilityInfoLabelWidget
 
                 skin = battleSkin,
                 text = "Unknown",
-                position = Position2D(118f, 54f, Align.topLeft)
+                position = PositionXYA(118f, 54f, Align.topLeft)
         )
 
         // Ability Description Label
@@ -76,7 +76,7 @@ class AbilityInfoLabelWidget
 
                 skin = battleSkin,
                 text = "No description available",
-                layout = LabelLayout2D(200f, 32f, 118f, 40f, Align.topLeft, Align.topLeft, true)
+                layout = LabelLayout(200f, 32f, 118f, 40f, Align.topLeft, Align.topLeft, true)
         )
 
         // Ability Damage and MP cost Labels & Symbols
@@ -87,11 +87,11 @@ class AbilityInfoLabelWidget
         symbolMStr = makeImage(inventorySkin["stats-symbol-mstr"])
         symbolMP   = makeImage(inventorySkin["stats-symbol-mp"])
 
-        symbolPStr.position     = ImgPosition(36f, 26f)
-        symbolMStr.position     = ImgPosition(36f, 26f)
-        abilityDamage.position  = Position2D(52f, 27f, Align.bottomLeft)
-        symbolMP.position       = ImgPosition(80f, 26f)
-        abilityMPCost.position  = Position2D(96f, 27f, Align.bottomLeft)
+        symbolPStr.position(PositionXYA(36f, 26f))
+        symbolMStr.position(PositionXYA(36f, 26f))
+        abilityDamage.position(PositionXYA(52f, 27f))
+        symbolMP.position(PositionXYA(80f, 26f))
+        abilityMPCost.position(PositionXYA(96f, 27f))
 
         // Adding actors to Widget and apply z-Order (is order of adding)
         this += element

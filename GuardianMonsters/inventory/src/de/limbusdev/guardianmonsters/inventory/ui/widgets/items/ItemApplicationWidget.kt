@@ -60,7 +60,7 @@ open class ItemApplicationWidget
             val widget = GuardianListWidget(team, { it -> onGuardianListButton(it) }, item)
             widget.setup(
 
-                    position= Position2D(-262f, 0f, Align.topLeft),
+                    position= PositionXYA(-262f, 0f, Align.topLeft),
                     parent  = this
             )
         }
@@ -98,26 +98,26 @@ open class ItemApplicationWidget
     private fun constructLayout()
     {
         reassuranceWidget = ReassuranceWidget()
-        reassuranceWidget.position = Position2D(-264f, 0f, Align.bottomLeft)
+        reassuranceWidget.position(PositionXYA(-264f, 0f, Align.bottomLeft))
 
         val bgLabel = makeLabel(
 
                 style   = skin["paper"],
-                layout  = Layout2D(162f, 200f, 0f, 0f, Align.bottomLeft),
+                layout  = Scene2DLayout(162f, 200f, 0f, 0f, Align.bottomLeft),
                 parent  = this
         )
 
         itemArea = makeLabel(
 
                 style   = skin["paper-dark-area"],
-                layout  = Layout2D(40f, 40f, 61f, 156f, Align.bottomLeft),
+                layout  = Scene2DLayout(40f, 40f, 61f, 156f, Align.bottomLeft),
                 parent  = this
         )
 
         itemImg = makeImage(
 
                 drawable= skin["sword-barb-steel"],
-                layout  = ImgLayout(32f, 32f, 65f, 160f, Align.bottomLeft),
+                layout  = Scene2DLayout(32f, 32f, 65f, 160f, Align.bottomLeft),
                 parent  = this
         )
 
@@ -125,7 +125,7 @@ open class ItemApplicationWidget
 
                 style   = skin["paper-border"],
                 text    = "Item Name",
-                layout  = Layout2D(156f, 25f, 4f, 130f, Align.bottomLeft),
+                layout  = Scene2DLayout(156f, 25f, 4f, 130f, Align.bottomLeft),
                 parent  = this
         )
 
@@ -133,7 +133,7 @@ open class ItemApplicationWidget
 
                 style   = skin["paper-border"],
                 text    = "Item Description",
-                layout  = LabelLayout2D(156f, 64f, 4f, 128f, Align.topLeft, Align.topLeft, true),
+                layout  = LabelLayout(156f, 64f, 4f, 128f, Align.topLeft, Align.topLeft, true),
                 parent  = this
         )
 
@@ -141,21 +141,21 @@ open class ItemApplicationWidget
 
                 style   = skin["red"],
                 text    = "Item Hint",
-                layout  = LabelLayout2D(144f, 48f, 10f, 64f, Align.topLeft, Align.topLeft, true),
+                layout  = LabelLayout(144f, 48f, 10f, 64f, Align.topLeft, Align.topLeft, true),
                 parent  = this
         )
 
         delete = makeImageButton(
 
                 style   = skin["button-delete"],
-                position= Position2D(24f, 160f, Align.bottomLeft),
+                position= PositionXYA(24f, 160f, Align.bottomLeft),
                 parent  = this
         )
 
         use = makeImageButton(
 
                 style   = skin["button-use"],
-                position= Position2D(106f, 160f, Align.bottomLeft),
+                position= PositionXYA(106f, 160f, Align.bottomLeft),
                 parent  = this
         )
     }

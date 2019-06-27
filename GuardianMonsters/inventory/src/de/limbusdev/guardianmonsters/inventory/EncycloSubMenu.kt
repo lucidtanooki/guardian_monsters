@@ -179,21 +179,21 @@ class EncycloSubMenu(skin: Skin) : AInventorySubMenu()
         val bgImg = makeImage(
 
                 drawable = skin["label-bg-paper"],
-                layout   = ImgLayout(Constant.WIDTHf/2-4, Constant.HEIGHTf-4-35, Constant.WIDTHf-2, 2f, Align.bottomRight),
+                layout   = Scene2DLayout(Constant.WIDTHf/2-4, Constant.HEIGHTf-4-35, Constant.WIDTHf-2, 2f, Align.bottomRight),
                 parent   = this
         )
 
         guardianImgMeta0 = Image()
-        guardianImgMeta0.setup(ImgLayout(128f, 128f, 2f, 16f), this)
+        guardianImgMeta0.setup(Scene2DLayout(128f, 128f, 2f, 16f), this)
 
         guardianImgMeta1 = Image()
-        guardianImgMeta1.setup(ImgLayout(128f, 128f, 64+2f, 32f), this)
+        guardianImgMeta1.setup(Scene2DLayout(128f, 128f, 64+2f, 32f), this)
 
         guardianImgMeta2 = Image()
-        guardianImgMeta2.setup(ImgLayout(128f, 128f, 96+2f, 48f), this)
+        guardianImgMeta2.setup(Scene2DLayout(128f, 128f, 96+2f, 48f), this)
 
         guardianImgMeta3 = Image()
-        guardianImgMeta3.setup(ImgLayout(128f, 128f, 96+2f, 48f), this)
+        guardianImgMeta3.setup(Scene2DLayout(128f, 128f, 96+2f, 48f), this)
 
         metaFormButtonGroup = ButtonGroup()
         metaFormButton0 = TextButton("1", skin, "default-toggleable")
@@ -212,7 +212,7 @@ class EncycloSubMenu(skin: Skin) : AInventorySubMenu()
         next     = makeImageButton(skin["button-next"], PositionXYA(Constant.WIDTHf-8, 10f, Align.bottomRight), this)
         previous = makeImageButton(skin["button-previous"], PositionXYA(Constant.WIDTHf-8-18, 10f, Align.bottomRight), this)
 
-        name = makeLabel(skin["default"], "", LabelLayout2D(96f, 40f, Constant.WIDTHf/2+8, Constant.HEIGHTf-48, Align.left, Align.left, false), this)
+        name = makeLabel(skin["default"], "", LabelLayout(96f, 40f, Constant.WIDTHf/2+8, Constant.HEIGHTf-48, Align.left, Align.left, false), this)
 
         description = Label("", skin, "default")
         description.width = Constant.WIDTHf / 2 - 16

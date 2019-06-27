@@ -5,7 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions.run as runThis
 import com.badlogic.gdx.utils.ArrayMap
 
 import de.limbusdev.guardianmonsters.battle.ui.widgets.BattleWidget
-import de.limbusdev.guardianmonsters.scene2d.ImgLayout
+import de.limbusdev.guardianmonsters.scene2d.Scene2DLayout
 import de.limbusdev.guardianmonsters.scene2d.makeImage
 import de.limbusdev.guardianmonsters.services.Services
 import de.limbusdev.guardianmonsters.ui.AHUD
@@ -25,10 +25,10 @@ abstract class ABattleHUD() : AHUD(Services.UI().battleSkin)
 
     // ...................................................................................... Images
     // Battle UI Black transparent Background
-    private val battleUIbg   = makeImage(skin["bg"], ImgLayout(Constant.WIDTHf, 63f))
+    private val battleUIbg   = makeImage(skin["bg"], Scene2DLayout(Constant.WIDTHf, 63f))
 
     // Black Curtain for fade-in and -out
-    private val blackCurtain = makeImage(skin["black"], ImgLayout(Constant.WIDTHf, Constant.HEIGHTf))
+    private val blackCurtain = makeImage(skin["black"], Scene2DLayout(Constant.WIDTHf, Constant.HEIGHTf))
 
     // ............................................................................................. CONSTRUCTOR
     init

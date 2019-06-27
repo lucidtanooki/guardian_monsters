@@ -10,7 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin
 import com.badlogic.gdx.utils.ArrayMap
 
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian
-import de.limbusdev.guardianmonsters.scene2d.ImgLayout
+import de.limbusdev.guardianmonsters.scene2d.Scene2DLayout
 import de.limbusdev.guardianmonsters.scene2d.makeImage
 import de.limbusdev.utils.extensions.*
 import de.limbusdev.utils.logWarning
@@ -44,7 +44,7 @@ class StatusStarGlyphWidget(skin: Skin) : Group()
         center = Vector2(50.1f, 30.2f)
         initialized = false
 
-        starGlyphBG = makeImage(skin["statPentagram-symbols"], ImgLayout(100f, 80f), this)
+        starGlyphBG = makeImage(skin["statPentagram-symbols"], Scene2DLayout(100f, 80f), this)
     }
 
 

@@ -15,51 +15,54 @@ import de.limbusdev.utils.extensions.set
 
 class AbilityGraph : IAbilityGraph
 {
-    // .................................................................................. Properties
-    private var core                : AGuardian? = null
+    // --------------------------------------------------------------------------------------------- PROPERTIES
 
-    override var nodes              : ArrayMap<Int, Node>
-    override var edges              : Array<Edge>
-    override var abilityNodes       : ArrayMap<Int, Ability.aID>
-    override var equipmentNodes     : ArrayMap<Int, BodyPart>
-    override var metamorphosisNodes : Array<Int>
-    override var activeAbilities    : ArrayMap<Int, Ability.aID>    // TODO Decide if ArrayMap<Int, Ability.aID?> is better
-    override var learntAbilities    : ArrayMap<Int, Ability.aID>
-    override var learntEquipment    : Array<BodyPart>
+    // .............................................................. public
+    // Interface Properties
+    override val nodes              get() = _nodes
+    override val edges              get() = _edges
+    override val abilityNodes       get() = _abilityNodes
+    override val equipmentNodes     get() = _equipmentNodes
+    override val metamorphosisNodes get() = _metamorphosisNodes
+    override val activeAbilities    get() = _activeAbilities
+    override val learntAbilities    get() = _learntAbilities
+    override val learntEquipment    get() = _learntEquipment
+
+    // .............................................................. private
+
+    // Backing Property Fields
+    private var _nodes              : ArrayMap<Int, Node>         = ArrayMap()
+    private var _edges              : Array<Edge>                 = Array()
+    private var _abilityNodes       : ArrayMap<Int, Ability.aID>  = ArrayMap()
+    private var _equipmentNodes     : ArrayMap<Int, BodyPart>     = ArrayMap()
+    private var _metamorphosisNodes : Array<Int>                  = Array()
+    private var _activeAbilities    : ArrayMap<Int, Ability.aID?> = ArrayMap()
+    private var _learntAbilities    : ArrayMap<Int, Ability.aID>  = ArrayMap()
+    private var _learntEquipment    : Array<BodyPart>             = Array()
+
+    private lateinit var core       : AGuardian // Guardian this graph belongs to
 
 
-    // ................................................................................ Constructors
-    init
-    {
-        nodes               = ArrayMap()
-        edges               = Array()
-        abilityNodes        = ArrayMap()
-        equipmentNodes      = ArrayMap()
-        metamorphosisNodes  = Array()
-        activeAbilities     = ArrayMap()
-        learntAbilities     = ArrayMap()
-        learntEquipment     = Array()
-    }
-
+    // --------------------------------------------------------------------------------------------- CONSTRUCTORS
     constructor
     (
-            nodes: ArrayMap<Int, Node>,
-            edges: Array<Edge>,
-            abilityNodes: ArrayMap<Int, Ability.aID>,
-            equipmentNodes: ArrayMap<Int, BodyPart>,
-            metamorphosisNodes: Array<Int>,
-            activeAbilities: ArrayMap<Int, Ability.aID>,
-            learntAbilities: ArrayMap<Int, Ability.aID>,
-            learntEquipment: Array<BodyPart>
+            nodes               : ArrayMap<Int, Node>,
+            edges               : Array<Edge>,
+            abilityNodes        : ArrayMap<Int, Ability.aID>,
+            equipmentNodes      : ArrayMap<Int, BodyPart>,
+            metamorphosisNodes  : Array<Int>,
+            activeAbilities     : ArrayMap<Int, Ability.aID?>,
+            learntAbilities     : ArrayMap<Int, Ability.aID>,
+            learntEquipment     : Array<BodyPart>
      ){
-        this.nodes              = nodes
-        this.edges              = edges
-        this.abilityNodes       = abilityNodes
-        this.equipmentNodes     = equipmentNodes
-        this.metamorphosisNodes = metamorphosisNodes
-        this.activeAbilities    = activeAbilities
-        this.learntAbilities    = learntAbilities
-        this.learntEquipment    = learntEquipment
+        _nodes              = nodes
+        _edges              = edges
+        _abilityNodes       = abilityNodes
+        _equipmentNodes     = equipmentNodes
+        _metamorphosisNodes = metamorphosisNodes
+        _activeAbilities    = activeAbilities
+        _learntAbilities    = learntAbilities
+        _learntEquipment    = learntEquipment
     }
 
     constructor(core: AGuardian, data: SpeciesDescription)
@@ -112,31 +115,23 @@ class AbilityGraph : IAbilityGraph
     }
 
 
-    // ........................................................................... GETTERS & SETTERS
+    // --------------------------------------------------------------------------------------------- INTERFACE
+
+    // .............................................................. Interface Properties
     override val currentForm: Int get()
     {
-        var activatedMetamorphosisNodes = 0
+        var activeMetamorphosisNodeCounter = 0
         for (key in metamorphosisNodes)
         {
-            if (nodes[key].isActive) { activatedMetamorphosisNodes++ }
+            if (nodes[key].isActive) { activeMetamorphosisNodeCounter++ }
         }
-        return activatedMetamorphosisNodes
+        return activeMetamorphosisNodeCounter
     }
 
-    override fun getRandomActiveAbility() : Ability.aID
-    {
-        return getActiveAbility(getRandomActiveAbilitySlot())
-    }
 
-    override fun getRandomActiveAbilitySlot() : Int
-    {
-        return MathUtils.random(0, activeAbilities.size - 1)
-    }
-
+    // .............................................................. Interface Methods
     override fun activateNode(nodeID: Int)
     {
-        checkNotNull(core)
-
         val node = nodes.get(nodeID)
 
         node.activate()
@@ -149,8 +144,36 @@ class AbilityGraph : IAbilityGraph
             else                -> {}
         }
 
-        core?.setAbilitiesChanged()
-        core?.notifyObservers()
+        core.setAbilitiesChanged()
+        core.notifyObservers()
+    }
+
+    override fun setActiveAbility(slot: Int, learntAbilityNumber: Int)
+    {
+        check(slot in 0..6)
+        check(learntAbilities.containsKey(learntAbilityNumber))
+        val newActiveAbility = learntAbilities[learntAbilityNumber]
+        checkNotNull(newActiveAbility)
+
+        // Check if chosen ability already occupies a slot, -1 if not present
+        val oldSlotOfNewAbility = activeAbilities.indexOfValue(newActiveAbility, false)
+
+        // Replace active ability with the new one
+        val oldActiveAbility = activeAbilities[slot]
+        activeAbilities[slot] = newActiveAbility
+
+        // Swap ability slots, if possible
+        if(oldActiveAbility != null && oldSlotOfNewAbility != -1)
+        {
+            activeAbilities[oldSlotOfNewAbility] = oldActiveAbility
+        }
+        else
+        {
+            activeAbilities[oldSlotOfNewAbility] == null
+        }
+
+        core.setAbilitiesChanged()
+        core.notifyObservers()
     }
 
     override fun isNodeEnabled(nodeID: Int) = nodes[nodeID].isEnabled
@@ -182,59 +205,43 @@ class AbilityGraph : IAbilityGraph
         return learntEquipment.contains(bodyPart, true)
     }
 
-    override fun getActiveAbility(abilitySlot: Int): Ability.aID
+    override fun getRandomActiveAbility() : Ability.aID
     {
-        return activeAbilities.get(abilitySlot)
+        val slot = getRandomActiveAbilitySlot()
+        val ability = activeAbilities[slot]
+
+        checkNotNull(ability) { "Random ability is null. The must always be at least one active ability." }
+        return ability
     }
 
-    override fun setActiveAbility(slot: Int, learntAbilityNumber: Int)
+    override fun getRandomActiveAbilitySlot() : Int
     {
-        // TODO decide if active abilities are Null if slot is empty, or not present
-
-        checkNotNull(core)
-
-        val abilityToLearn = learntAbilities.get(learntAbilityNumber) ?: return
-
-        for (key in activeAbilities.keys())
-        {
-            val abilityAtThisSlot = activeAbilities[key]
-
-            if (abilityAtThisSlot != null)
-            {
-                if (abilityAtThisSlot == abilityToLearn)
-                {
-                    activeAbilities.put(key, null)
-                }
-            }
-        }
-        activeAbilities.put(slot, learntAbilities.get(learntAbilityNumber))
-
-        core?.setAbilitiesChanged()
-        core?.notifyObservers()
+        return MathUtils.random(0, activeAbilities.size - 1)
     }
 
 
-    // .............................................................................. HELPER METHODS
+    // --------------------------------------------------------------------------------------------- HELPER METHODS
     private fun learnAbility(nodeID: Int): Boolean
     {
-        return if(learnsAbilityAt(nodeID))
+        if(learnsAbilityAt(nodeID))
         {
             learntAbilities.put(nodeID, abilityNodes.get(nodeID))
-            true
+            return true
         }
-        else false
+        return false
     }
 
     private fun learnEquipment(nodeID: Int): Boolean
     {
-        return if (learnsEquipmentAt(nodeID))
+        if (learnsEquipmentAt(nodeID))
         {
             learntEquipment.add(equipmentNodes.get(nodeID))
             return true
         }
-        else false
+        return false
     }
 
+    /** Usually only neighbors of active nodes may be activated as well. This marks them as ENABLED. */
     private fun enableNeighborNodes(nodeID: Int)
     {
         for (e in edges)

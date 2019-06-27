@@ -224,7 +224,8 @@ class BattleSystem
         check(choiceComplete) { "$TAG you forgot to set the ${if (targetChosen) "attack" else "target"}" }
 
         // Calculate Ability
-        val aID = activeGuardian.abilityGraph.activeAbilities.get(attack)
+        val aID = activeGuardian.abilityGraph.activeAbilities[attack]
+        checkNotNull(aID) { "The chosen Ability's slot returns null. This should not happen." }
         val ability = GuardiansServiceLocator.abilities.getAbility(aID)
 
         latestAttackReport = BattleCalculator.calcAttack(activeGuardian, target, aID)
@@ -240,6 +241,7 @@ class BattleSystem
 
         // Calculate Ability
         val aID = activeGuardian.abilityGraph.activeAbilities[attack]
+        checkNotNull(aID) { "The chosen Ability's slot returns null. This should not happen." }
         val ability = GuardiansServiceLocator.abilities.getAbility(aID)
 
         latestAreaAttackReports.clear()
@@ -500,7 +502,8 @@ class BattleSystem
             val guardian = activeGuardian
 
             val abilitySlot = guardian.abilityGraph.getRandomActiveAbilitySlot()
-            val aID: Ability.aID = guardian.abilityGraph.getActiveAbility(abilitySlot)
+            val aID: Ability.aID? = guardian.abilityGraph.activeAbilities[abilitySlot]
+            checkNotNull(aID) { "The chosen Ability's slot returns null. This should not happen." }
             val chosenAbility = GuardiansServiceLocator.abilities.getAbility(aID)
 
             when(chosenAbility.areaDamage)

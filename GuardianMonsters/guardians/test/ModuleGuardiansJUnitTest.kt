@@ -62,22 +62,22 @@ class ModuleGuardiansJUnitTest
         val factory = GuardiansServiceLocator.guardianFactory
         val guardian = factory.createGuardian(1, 1)
         assertEquals(GuardiansServiceLocator.species.getSpeciesDescription(1), guardian.speciesDescription)
-        assertEquals(1, guardian.individualStatistics.level.toLong())
-        assertEquals(0, guardian.individualStatistics.abilityLevels.toLong())
+        assertEquals(1, guardian.stats.level.toLong())
+        assertEquals(0, guardian.stats.abilityLevels.toLong())
 
-        print("Level " + guardian.individualStatistics.level + ":\t")
-        println(guardian.individualStatistics)
+        print("Level " + guardian.stats.level + ":\t")
+        println(guardian.stats)
 
         val guardian2 = factory.createGuardian(1, 1)
         assertNotEquals(guardian2, guardian)
 
         val guardian3 = factory.createGuardian(1, 5)
-        assertEquals(125, guardian3.individualStatistics.exp)
+        assertEquals(125, guardian3.stats.exp)
 
-        print("Level " + guardian3.individualStatistics.level + ":\t")
-        println(guardian3.individualStatistics)
-        assertEquals(5, guardian3.individualStatistics.level.toLong())
-        assertEquals(4, guardian3.individualStatistics.abilityLevels.toLong())
+        print("Level " + guardian3.stats.level + ":\t")
+        println(guardian3.stats)
+        assertEquals(5, guardian3.stats.level.toLong())
+        assertEquals(4, guardian3.stats.abilityLevels.toLong())
 
 
         ModuleGuardians.destroyModule()
@@ -408,45 +408,45 @@ class ModuleGuardiansJUnitTest
         val guardian = factory.createGuardian(1, 1)
 
         print("Level " + 1 + ":\t")
-        println(guardian.individualStatistics)
+        println(guardian.stats)
 
         for(i in 2..99) {
             print("Level $i:\t")
-            guardian.individualStatistics.earnEXP(guardian.individualStatistics.expToNextLevel)
-            guardian.individualStatistics.levelUp()
+            guardian.stats.earnEXP(guardian.stats.expToNextLevel)
+            guardian.stats.levelUp()
 
-            assertEquals(i.toLong(), guardian.individualStatistics.level.toLong())
+            assertEquals(i.toLong(), guardian.stats.level.toLong())
 
-            println(guardian.individualStatistics.latestLevelUpReport!!.newStats)
+            println(guardian.stats.latestLevelUpReport!!.newStats)
         }
 
         assertEquals(
                 StatCalculator.calculateHP(IndividualStatistics.Growth.MED, 99, 300, 0, 0).toLong(),
-                guardian.individualStatistics.hpMax.toLong()
+                guardian.stats.hpMax.toLong()
         )
         assertEquals(
                 StatCalculator.calculateMP(IndividualStatistics.Growth.MED, 99, 50, 0, 0).toLong(),
-                guardian.individualStatistics.mPmax.toLong()
+                guardian.stats.mPmax.toLong()
         )
         assertEquals(
                 StatCalculator.calculateStat(IndividualStatistics.Growth.MED, 99, 10, 0, 0).toLong(),
-                guardian.individualStatistics.pStrMax.toLong()
+                guardian.stats.pStrMax.toLong()
         )
         assertEquals(
                 StatCalculator.calculateStat(IndividualStatistics.Growth.MED, 99, 11, 0, 0).toLong(),
-                guardian.individualStatistics.pDefMax.toLong()
+                guardian.stats.pDefMax.toLong()
         )
         assertEquals(
                 StatCalculator.calculateStat(IndividualStatistics.Growth.MED, 99, 12, 0, 0).toLong(),
-                guardian.individualStatistics.mStrMax.toLong()
+                guardian.stats.mStrMax.toLong()
         )
         assertEquals(
                 StatCalculator.calculateStat(IndividualStatistics.Growth.MED, 99, 13, 0, 0).toLong(),
-                guardian.individualStatistics.mDefMax.toLong()
+                guardian.stats.mDefMax.toLong()
         )
         assertEquals(
                 StatCalculator.calculateStat(IndividualStatistics.Growth.MED, 99, 14, 0, 0).toLong(),
-                guardian.individualStatistics.speedMax.toLong()
+                guardian.stats.speedMax.toLong()
         )
 
         ModuleGuardians.destroyModule()
@@ -486,74 +486,74 @@ class ModuleGuardiansJUnitTest
 
         assertEquals(
                 StatCalculator.calculateHP(IndividualStatistics.Growth.MED, 1, 300, 0, 0).toLong(),
-                guardian.individualStatistics.hpMax.toLong()
+                guardian.stats.hpMax.toLong()
         )
 
         assertEquals(
                 StatCalculator.calculateMP(IndividualStatistics.Growth.MED, 1, 50, 0, 0).toLong(),
-                guardian.individualStatistics.mPmax.toLong()
+                guardian.stats.mPmax.toLong()
         )
 
         assertEquals(
                 StatCalculator.calculateStat(IndividualStatistics.Growth.MED, 1, 10, 0, 0).toLong(),
-                guardian.individualStatistics.pStrMax.toLong()
+                guardian.stats.pStrMax.toLong()
         )
 
         assertEquals(
                 StatCalculator.calculateStat(IndividualStatistics.Growth.MED, 1, 11, 0, 0).toLong(),
-                guardian.individualStatistics.pDefMax.toLong()
+                guardian.stats.pDefMax.toLong()
         )
 
         assertEquals(
                 StatCalculator.calculateStat(IndividualStatistics.Growth.MED, 1, 12, 0, 0).toLong(),
-                guardian.individualStatistics.mStrMax.toLong()
+                guardian.stats.mStrMax.toLong()
         )
 
         assertEquals(
                 StatCalculator.calculateStat(IndividualStatistics.Growth.MED, 1, 13, 0, 0).toLong(),
-                guardian.individualStatistics.mDefMax.toLong()
+                guardian.stats.mDefMax.toLong()
         )
 
         assertEquals(
                 StatCalculator.calculateStat(IndividualStatistics.Growth.MED, 1, 14, 0, 0).toLong(),
-                guardian.individualStatistics.speedMax.toLong()
+                guardian.stats.speedMax.toLong()
         )
 
-        guardian.individualStatistics.giveEquipment(BodyEquipment("", BodyEquipment.Type.ARMOR, 1, 2, 3, 4, 5, 6, 7, 0))
+        guardian.stats.equip(BodyEquipment("", BodyEquipment.Type.ARMOR, 1, 2, 3, 4, 5, 6, 7, 0))
 
         assertEquals(
                 MathUtils.floor(StatCalculator.calculateHP(IndividualStatistics.Growth.MED, 1, 300, 0, 0) * 1.06f).toLong(),
-                guardian.individualStatistics.hpMax.toLong()
+                guardian.stats.hpMax.toLong()
         )
 
         assertEquals(
                 MathUtils.floor(StatCalculator.calculateMP(IndividualStatistics.Growth.MED, 1, 50, 0, 0) * 1.07f).toLong(),
-                guardian.individualStatistics.mPmax.toLong()
+                guardian.stats.mPmax.toLong()
         )
 
         assertEquals(
                 (StatCalculator.calculateStat(IndividualStatistics.Growth.MED, 1, 10, 0, 0) + 1).toLong(),
-                guardian.individualStatistics.pStrMax.toLong()
+                guardian.stats.pStrMax.toLong()
         )
 
         assertEquals(
                 (StatCalculator.calculateStat(IndividualStatistics.Growth.MED, 1, 11, 0, 0) + 2).toLong(),
-                guardian.individualStatistics.pDefMax.toLong()
+                guardian.stats.pDefMax.toLong()
         )
 
         assertEquals(
                 (StatCalculator.calculateStat(IndividualStatistics.Growth.MED, 1, 12, 0, 0) + 3).toLong(),
-                guardian.individualStatistics.mStrMax.toLong()
+                guardian.stats.mStrMax.toLong()
         )
 
         assertEquals(
                 (StatCalculator.calculateStat(IndividualStatistics.Growth.MED, 1, 13, 0, 0) + 4).toLong(),
-                guardian.individualStatistics.mDefMax.toLong()
+                guardian.stats.mDefMax.toLong()
         )
 
         assertEquals(
                 (StatCalculator.calculateStat(IndividualStatistics.Growth.MED, 1, 14, 0, 0) + 5).toLong(),
-                guardian.individualStatistics.speedMax.toLong()
+                guardian.stats.speedMax.toLong()
         )
 
         ModuleGuardians.destroyModule()
@@ -766,7 +766,7 @@ class ModuleGuardiansJUnitTest
         BattleCalculator.apply(report)
 
         assertEquals(StatCalculator.calculateHP(IndividualStatistics.Growth.MED, 1, 300, 0, 0) - 19,
-                looser.individualStatistics.hp)
+                looser.stats.hp)
 
         ModuleGuardians.destroyModule()
 
@@ -917,7 +917,8 @@ class ModuleGuardiansJUnitTest
             val guardian = bs.activeGuardian                    // get the currently active Guardian
                                                                 // get random active ability
             val abilitySlot = guardian.abilityGraph.getRandomActiveAbilitySlot()
-            val aID: Ability.aID = guardian.abilityGraph.getActiveAbility(abilitySlot)
+            val aID: Ability.aID? = guardian.abilityGraph.activeAbilities[abilitySlot]
+            checkNotNull(aID)
             val ability = GuardiansServiceLocator.abilities.getAbility(aID)
 
             assertEquals("Active Monster is in Hero's team", true, heroTeam.isMember(guardian))
@@ -933,7 +934,7 @@ class ModuleGuardiansJUnitTest
                     val targets = Array<AGuardian>()
                     for(h in oppTeam.values())
                     {
-                        if(h.individualStatistics.isFit)
+                        if(h.stats.isFit)
                         {
                             targets.add(h)
                         }

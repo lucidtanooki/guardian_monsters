@@ -36,9 +36,9 @@ class AbilityMenuWidget
         // for every active ability, activate a button
         for (i in 0..6)
         {
-            if (guardian.abilityGraph.activeAbilities.containsKey(i))
+            val abilityID = guardian.abilityGraph.activeAbilities[i]
+            if(abilityID != null)
             {
-                val abilityID = guardian.abilityGraph.getActiveAbility(i)
                 val ability = GuardiansServiceLocator.abilities[abilityID]
                 setButtonStyle(i, ability.element)
                 setButtonText(i, Services.I18N().getLocalizedAbilityName(ability.name))

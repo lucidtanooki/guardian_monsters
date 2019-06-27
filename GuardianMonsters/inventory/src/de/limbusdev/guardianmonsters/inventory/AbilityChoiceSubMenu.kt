@@ -104,9 +104,10 @@ class AbilityChoiceSubMenu
         for(i in 0..6) { abilitySlotButtons.setButtonText(i, "") }
         for(ability in guardian.abilityGraph.activeAbilities)
         {
-            if(ability.value != null)
+            val aID = ability.value
+            if(aID != null)
             {
-                abilitySlotButtons.setButtonText(ability.key, GuardiansServiceLocator.abilities[ability.value])
+                abilitySlotButtons.setButtonText(ability.key, GuardiansServiceLocator.abilities[aID])
             }
         }
     }

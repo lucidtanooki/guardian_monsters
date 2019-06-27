@@ -770,7 +770,8 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD()
 
             battleSystem.setChosenAttack(buttonID)
 
-            val abilityID         = activeGuardian.abilityGraph.getActiveAbility(buttonID)
+            val abilityID         = activeGuardian.abilityGraph.activeAbilities[buttonID]
+            checkNotNull(abilityID)
             val appliesAreaDamage = GuardiansServiceLocator.abilities.getAbility(abilityID).areaDamage
 
             if(appliesAreaDamage) { stateMachine.to(State.TARGET_AREA_CHOICE) }
@@ -782,7 +783,8 @@ class BattleHUD(private val inventory: Inventory) : ABattleHUD()
         onAbilityInfoMenuButton = { buttonID ->
 
             logDebug(TAG) { "onAbilityInfoMenuButton" }
-            val abilityID = battleSystem.activeGuardian.abilityGraph.getActiveAbility(buttonID)
+            val abilityID = battleSystem.activeGuardian.abilityGraph.activeAbilities[buttonID]
+            checkNotNull(abilityID)
             stateMachine.to(State.ABILITY_DETAIL, aID = abilityID)
         }
 

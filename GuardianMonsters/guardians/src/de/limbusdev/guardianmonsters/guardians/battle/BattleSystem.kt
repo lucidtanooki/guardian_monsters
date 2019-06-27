@@ -502,7 +502,7 @@ class BattleSystem
             val guardian = activeGuardian
 
             val abilitySlot = guardian.abilityGraph.getRandomActiveAbilitySlot()
-            val aID: Ability.aID? = guardian.abilityGraph.activeAbilities[abilitySlot]
+            val aID: Ability.aID = guardian.abilityGraph.getRandomActiveAbility()
             checkNotNull(aID) { "The chosen Ability's slot returns null. This should not happen." }
             val chosenAbility = GuardiansServiceLocator.abilities.getAbility(aID)
 

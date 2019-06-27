@@ -108,11 +108,15 @@ class AbilityGraph : IAbilityGraph
             metamorphosisNodes.add(key)
         }
 
-        var counter = 0
         for(slot in 0..6) { activeAbilities[slot] = null }
-        learntAbilities.values().forEach { a -> activeAbilities[counter] = a; counter++ }
-
         activateNode(0)
+        for(slot in 0..6)
+        {
+            if(learntAbilities.containsKey(slot))
+            {
+                activeAbilities[slot] = learntAbilities[slot]
+            }
+        }
     }
 
 
@@ -215,13 +219,17 @@ class AbilityGraph : IAbilityGraph
         val slot = getRandomActiveAbilitySlot()
         val ability = activeAbilities[slot]
 
-        checkNotNull(ability) { "Random ability is null. The must always be at least one active ability." }
+        checkNotNull(ability) { "Random ability is null. There must always be at least one active ability." }
         return ability
     }
 
     override fun getRandomActiveAbilitySlot() : Int
     {
-        return MathUtils.random(0, activeAbilities.size - 1)
+        for(slot in 0..6)
+        {
+            if(activeAbilities[slot] != null) { return slot }
+        }
+        checkNotNull(null) { "All active ability slots are null. This should never happen." }
     }
 
 

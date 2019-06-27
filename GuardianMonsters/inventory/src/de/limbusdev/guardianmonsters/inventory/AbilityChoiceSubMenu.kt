@@ -12,7 +12,6 @@ import java.util.Observable
 import java.util.Observer
 
 import de.limbusdev.guardianmonsters.guardians.GuardiansServiceLocator
-import de.limbusdev.guardianmonsters.guardians.abilities.Ability
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian
 import de.limbusdev.guardianmonsters.guardians.monsters.Team
 import de.limbusdev.guardianmonsters.inventory.ui.widgets.abilities.AbilityDetailWidget
@@ -79,7 +78,7 @@ class AbilityChoiceSubMenu
 
         switcher.init(guardian, teamPosition)
 
-        refreshAbilitySlotButtons()
+        refreshLearntAbilityListButtons()
 
         if (guardian.abilityGraph.learntAbilities.size > 0)
         {
@@ -160,10 +159,10 @@ class AbilityChoiceSubMenu
     override fun onLearn(nodeID: Int)
     {
         addActor(abilitySlotChoice)
-        refreshAbilitySlotButtons()
+        refreshLearntAbilityListButtons()
     }
 
-    private fun refreshAbilitySlotButtons()
+    private fun refreshLearntAbilityListButtons()
     {
         logInfo(TAG) { "Refresh Buttons" }
 
@@ -203,7 +202,7 @@ class AbilityChoiceSubMenu
     {
         val guardian = team[switcher.currentlyChosen]
         guardian.abilityGraph.setActiveAbility(buttonID, currentlyChosenAbility)
-        refreshAbilitySlotButtons()
+        refreshLearntAbilityListButtons()
     }
 
     override fun syncSelectedGuardian(teamPosition: Int)
@@ -214,6 +213,7 @@ class AbilityChoiceSubMenu
     override fun update(observable: Observable, o: Any?)
     {
         refresh()
-        refreshAbilitySlotButtons()
+        refreshLearntAbilityListButtons()
+        reloadHoneyCombWidget(team[switcher.currentlyChosen])
     }
 }

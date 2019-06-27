@@ -109,6 +109,7 @@ class AbilityGraph : IAbilityGraph
         }
 
         var counter = 0
+        for(slot in 0..6) { activeAbilities[slot] = null }
         learntAbilities.values().forEach { a -> activeAbilities[counter] = a; counter++ }
 
         activateNode(0)
@@ -158,18 +159,22 @@ class AbilityGraph : IAbilityGraph
         // Check if chosen ability already occupies a slot, -1 if not present
         val oldSlotOfNewAbility = activeAbilities.indexOfValue(newActiveAbility, false)
 
-        // Replace active ability with the new one
+        // If Ability has already been active, clear the previous slot
+        if(oldSlotOfNewAbility != -1) { activeAbilities[oldSlotOfNewAbility] = null }
+
+        // Get ability that is currently in this slot
         val oldActiveAbility = activeAbilities[slot]
+
+        // If slot was preoccupied, reset it
+        if(oldActiveAbility != null) { activeAbilities[slot] = null }
+
+        // Put new ability into the slot
         activeAbilities[slot] = newActiveAbility
 
-        // Swap ability slots, if possible
-        if(oldActiveAbility != null && oldSlotOfNewAbility != -1)
+        // If the new slot was already occupied and the new ability has been active, swap slots
+        if(oldSlotOfNewAbility != -1 && oldActiveAbility != null)
         {
             activeAbilities[oldSlotOfNewAbility] = oldActiveAbility
-        }
-        else
-        {
-            activeAbilities[oldSlotOfNewAbility] == null
         }
 
         core.setAbilitiesChanged()

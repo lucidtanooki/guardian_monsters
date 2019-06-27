@@ -132,6 +132,21 @@ fun Image.setup(layout: ImgLayout, parent: Group? = null)
     parent?.addActor(this)
 }
 
+fun Actor.setPosition(x: Int = 0, y: Int = 0, align: Int = Align.bottomLeft)
+{
+    this.setPosition(x.toFloat(), y.toFloat(), align)
+}
+
+fun Actor.setPosition(x: Float = 0f, y: Int = 0, align: Int = Align.bottomLeft)
+{
+    this.setPosition(x, y.toFloat(), align)
+}
+
+fun Actor.setPosition(x: Int = 0, y: Float = 0f, align: Int = Align.bottomLeft)
+{
+    this.setPosition(x.toFloat(), y, align)
+}
+
 class Position2D(val x: Float = 0f, val y: Float = 0f, val align: Int? = Align.center)
 
 open class Layout2D(val width: Float, val height: Float, val x: Float, val y: Float, val align: Int?)

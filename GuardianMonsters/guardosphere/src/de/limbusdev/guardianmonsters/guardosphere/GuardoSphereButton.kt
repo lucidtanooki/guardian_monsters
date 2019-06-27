@@ -4,6 +4,7 @@
 
 package de.limbusdev.guardianmonsters.guardosphere
 
+import com.badlogic.gdx.graphics.g2d.TextureRegion
 import com.badlogic.gdx.scenes.scene2d.ui.Image
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton
 import com.badlogic.gdx.scenes.scene2d.ui.Skin
@@ -13,6 +14,7 @@ import com.badlogic.gdx.utils.Align
 import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian
 import de.limbusdev.guardianmonsters.scene2d.SubImageImageButton
 import de.limbusdev.guardianmonsters.services.Services
+import ktx.style.get
 
 /**
  * GuardoSphereButton
@@ -31,18 +33,10 @@ class GuardoSphereButton
     {
         private fun construct(skin: Skin, guardian: AGuardian?): Image
         {
-            val drawable: TextureRegionDrawable
-            val media = Services.Media();
-
-            if(guardian == null)
+            val drawable = when(guardian == null)
             {
-                drawable = TextureRegionDrawable(skin.getRegion("transparent"))
-            }
-            else
-            {
-                val form = guardian.abilityGraph.currentForm
-                val id = guardian.speciesDescription.ID
-                drawable = TextureRegionDrawable(media.getMonsterMiniSprite(id, form))
+                true  -> TextureRegionDrawable(skin.get<TextureRegion>("transparent"))
+                false -> TextureRegionDrawable(Services.Media().getMonsterMiniSprite(guardian.speciesID, guardian.currentForm))
             }
 
             return Image(drawable)

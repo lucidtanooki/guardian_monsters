@@ -12,11 +12,11 @@ import de.limbusdev.guardianmonsters.scene2d.makeLabel
 import ktx.style.get
 
 /** Guardo Sphere Factory Methods */
-object GSFactory
+internal object GSFactory
 {
-    // --------------------------------------------------------------------------------------------- Layout Information
+    // --------------------------------------------------------------------------------------------- BLUEPRINTS
     // ............................................................ Guardian Detail Widget Blueprint
-    object GuardianDetailWidgetBP
+    internal object GuardianDetailWidgetBP
     {
         const val WIDTH = 152f
         const val HEIGHT = 180f

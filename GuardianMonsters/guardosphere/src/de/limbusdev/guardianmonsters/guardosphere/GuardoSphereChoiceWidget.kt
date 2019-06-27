@@ -14,6 +14,7 @@ import com.badlogic.gdx.utils.Align
 import com.badlogic.gdx.utils.ArrayMap
 import de.limbusdev.guardianmonsters.guardians.monsters.GuardoSphere
 import de.limbusdev.guardianmonsters.guardians.monsters.Team
+import de.limbusdev.guardianmonsters.scene2d.replaceOnButtonClick
 import de.limbusdev.utils.extensions.set
 import de.limbusdev.utils.geometry.IntVec2
 import ktx.actors.plus
@@ -29,9 +30,9 @@ import kotlin.Exception
  */
 class GuardoSphereChoiceWidget
 (
-        private val skin: Skin,
-        private val sphere: GuardoSphere,
-        private val team: Team
+        private val skin    : Skin,
+        private val sphere  : GuardoSphere,
+        private val team    : Team
 )
     : Group()
 {
@@ -46,8 +47,8 @@ class GuardoSphereChoiceWidget
     var currentPage = 0
         private set
 
-    var sphereCallback: (Int) -> Unit
-    var teamCallback:   (Int) -> Unit
+    var sphereCallback  : (Int) -> Unit
+    var teamCallback    : (Int) -> Unit
 
     init
     {
@@ -59,35 +60,14 @@ class GuardoSphereChoiceWidget
         teamCallback   = { println("$TAG: dummy team callback")   }
 
         // Setup Layout
-        setSize(WIDTH, HEIGHT)
+        setSize(GSFactory.GuardoSphereChoiceWidgetBP.WIDGET_WIDTH,
+                GSFactory.GuardoSphereChoiceWidgetBP.WIDGET_HEIGHT)
 
-        val background = Image(skin.getDrawable("guardosphere-frame"))
-        background.setSize(WIDTH, 180f)
-        background.setPosition(0f, HEIGHT, Align.topLeft)
+        GSFactory.GuardoSphereChoiceWidgetBP.createSphereBackgroundImg(skin, this)
+        GSFactory.GuardoSphereChoiceWidgetBP.createTeamBackgroundImg(skin, this)
 
-        val backgroundTeam = Image(skin.getDrawable("guardosphere-frame"))
-        backgroundTeam.setSize(WIDTH, 32f+16f)
-        backgroundTeam.setPosition(0f,0f, Align.bottomLeft)
-
-        slotButtonTable = table {
-
-            setSize(7*32f, 5*32f + 16f + 32f)
-            setPosition(14f, 10f)
-            align(Align.bottomLeft)
-        }
-
-        slotImageTable = table {
-
-            setSize(7*32f, 5*32f + 16f + 32f)
-            setPosition(14f, 10f)
-            align(Align.bottomLeft)
-        }
-
-        // Setup Hierarchy
-        this+=background
-        this+=backgroundTeam
-        this+=slotImageTable
-        this+=slotButtonTable
+        slotImageTable  = GSFactory.GuardoSphereChoiceWidgetBP.createGuardoSphereGrid(this)
+        slotButtonTable = GSFactory.GuardoSphereChoiceWidgetBP.createGuardoSphereGrid(this)
 
         refresh(0)
     }
@@ -130,7 +110,7 @@ class GuardoSphereChoiceWidget
 
                     slotButton.addListener(GestureListener(this, slot, slotButton, page, IntVec2(col, row), Area.GUARDOSPHERE))
 
-                    if(slot == activeSlot && activeArea == Area.GUARDOSPHERE) slotButton.isChecked = true
+                    if(slot == activeSlot && activeArea == Area.GUARDOSPHERE) { slotButton.isChecked = true }
 
                     slot++
                 }
@@ -223,9 +203,12 @@ class GuardoSphereChoiceWidget
 
         private fun getArea(cell: IntVec2) : Area
         {
-            if(cell.y == 5 && cell.x in (0..6))      return Area.TEAM
-            if(cell.y in (0..4) && cell.x in (0..6)) return Area.GUARDOSPHERE
-            return                                   Area.ILLEGAL
+            return when
+            {
+                cell.y == 5      && cell.x in (0..6) -> Area.TEAM
+                cell.y in (0..4) && cell.x in (0..6) -> Area.GUARDOSPHERE
+                else                                 -> Area.ILLEGAL
+            }
         }
     }
 
@@ -250,8 +233,8 @@ class GuardoSphereChoiceWidget
             // show guardian details
             when(area)
             {
-                Area.TEAM         -> choiceWidget.teamCallback.invoke(slot)
-                Area.GUARDOSPHERE -> choiceWidget.sphereCallback.invoke(slot)
+                Area.TEAM         -> choiceWidget.teamCallback(slot)
+                Area.GUARDOSPHERE -> choiceWidget.sphereCallback(slot)
                 Area.ILLEGAL      -> {}// Do Nothing
             }
         }
@@ -325,7 +308,7 @@ class GuardoSphereChoiceWidget
                 choiceWidget.activeArea = dropArea
             }
 
-            if(page >= 0) choiceWidget.refresh(page)
+            if(page >= 0) { choiceWidget.refresh(page) }
             else choiceWidget.refresh()
         }
     }

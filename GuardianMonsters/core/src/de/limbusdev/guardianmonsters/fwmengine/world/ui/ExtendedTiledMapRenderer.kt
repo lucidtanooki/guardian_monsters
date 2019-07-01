@@ -5,19 +5,24 @@ import com.badlogic.gdx.graphics.g2d.Animation
 import com.badlogic.gdx.graphics.g2d.TextureRegion
 import com.badlogic.gdx.maps.MapLayer
 import com.badlogic.gdx.maps.MapObject
+import com.badlogic.gdx.maps.MapProperties
 import com.badlogic.gdx.maps.objects.RectangleMapObject
 import com.badlogic.gdx.maps.tiled.TiledMap
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer
 import com.badlogic.gdx.math.MathUtils
+import com.badlogic.gdx.scenes.scene2d.ui.Skin
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ArrayMap
+import com.badlogic.gdx.utils.GdxRuntimeException
 import com.badlogic.gdx.utils.Sort
 
 import de.limbusdev.guardianmonsters.media.IMediaManager
+import de.limbusdev.guardianmonsters.scene2d.SpriteZComparator
 import de.limbusdev.guardianmonsters.services.Services
 import de.limbusdev.utils.logDebug
 import de.limbusdev.utils.logError
+import ktx.style.defaultStyle
 
 /**
  * Renderer for *.tmx files. This renderer renders map files of the FWM-Engine.
@@ -111,11 +116,12 @@ class ExtendedTiledMapRenderer(map: TiledMap) : OrthogonalTiledMapRenderer(map, 
             renderAnimatedObject(mapObject)
         }
 
-        val objType = mapObject.properties.get("type", String::class.java)
-        if (objType != null && objType == "animatedTile")
+        if(mapObject.properties.containsKey("type"))
         {
-            renderAnimatedTile(mapObject)
+            val objType = mapObject.properties["type", "unknown"]
+            if (objType == "animatedTile") { renderAnimatedTile(mapObject) }
         }
+
     }
 
     // ........................................................................... Getters & Setters
@@ -133,14 +139,14 @@ class ExtendedTiledMapRenderer(map: TiledMap) : OrthogonalTiledMapRenderer(map, 
 
             for (mo in mapLayer.objects)
             {
-                val index = mo.properties.get("index", String::class.java)
-                val id = Integer.parseInt(index)
+                val index = mo.properties["index", "0"]
+                val id = index.toInt()
                 if (!tileAnimations.containsKey(id))
                 {
                     val a = Services.Media().getTileAnimation(id)
                     if (mo.properties.containsKey("frameDuration"))
                     {
-                        val frmDur = mo.properties.get("frameDuration", String::class.java)
+                        val frmDur = mo.properties["frameDuration", "0.01"]
                         a.frameDuration = frmDur.toFloat()
                     }
                     tileAnimations.put(id, a)
@@ -166,13 +172,13 @@ class ExtendedTiledMapRenderer(map: TiledMap) : OrthogonalTiledMapRenderer(map, 
 
             mapLayer.objects.forEach { mapObject ->
 
-                val id = mapObject.properties.get("index", String::class.java)
+                val id = mapObject.properties["index", "0"]
                 if (!objectAnimations.containsKey(id))
                 {
                     val a = Services.Media().getObjectAnimation(id)
                     if (mapObject.properties.containsKey("frameDuration"))
                     {
-                        val frmDur = mapObject.properties.get("frameDuration", String::class.java)
+                        val frmDur = mapObject.properties["frameDuration", "0.01"]
                         a.frameDuration = frmDur.toFloat()
                     }
                     objectAnimations.put(id, a)
@@ -191,7 +197,7 @@ class ExtendedTiledMapRenderer(map: TiledMap) : OrthogonalTiledMapRenderer(map, 
     private fun renderAnimatedTile(o: MapObject)
     {
         val r = o as RectangleMapObject
-        val index = Integer.parseInt(o.getProperties().get("index", String::class.java))
+        val index = o.getProperties()["index", "0"].toInt()
         val a = tileAnimations.get(index)
 
         // Render multiple tiles
@@ -217,9 +223,10 @@ class ExtendedTiledMapRenderer(map: TiledMap) : OrthogonalTiledMapRenderer(map, 
 
     private fun renderAnimatedObject(o: MapObject)
     {
-        val r = o as RectangleMapObject
-        val a = objectAnimations.get(o.getProperties().get("index", String::class.java))
-        renderAnimation(a, r.rectangle.getX(), r.rectangle.getY())
+        o as RectangleMapObject
+
+        val a = objectAnimations[o.properties["index", "0"]]
+        renderAnimation(a, o.rectangle.getX(), o.rectangle.getY())
     }
 
     /**
@@ -244,6 +251,11 @@ class ExtendedTiledMapRenderer(map: TiledMap) : OrthogonalTiledMapRenderer(map, 
     /** Sorts sprites, so people in the background are drawn behind those in the front */
     private fun sortSpritesByDepth()
     {
-        Sort.instance().sort(sprites, de.limbusdev.guardianmonsters.scene2d.SpriteZComparator())
+        Sort.instance().sort(sprites, SpriteZComparator())
     }
+}
+
+inline operator fun <reified Resource : Any> MapProperties.get(key: String, default: Resource): Resource
+{
+    return this.get(key, Resource::class.java) ?: default
 }

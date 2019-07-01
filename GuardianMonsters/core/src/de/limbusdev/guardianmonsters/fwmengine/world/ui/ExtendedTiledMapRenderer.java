@@ -90,7 +90,7 @@ public class ExtendedTiledMapRenderer extends OrthogonalTiledMapRenderer {
                 if(layer.getName().contains("people")) {
                     // Draw entity sprites if visible
                     for(AnimatedPersonSprite es : sprites) {
-                        if (es.visible) {
+                        if (es.getVisible()) {
                             es.update(elapsedTime);
                             es.draw(this.batch);
                         }

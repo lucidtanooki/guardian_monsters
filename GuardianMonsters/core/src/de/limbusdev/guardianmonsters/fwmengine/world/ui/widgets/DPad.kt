@@ -1,4 +1,4 @@
-package de.limbusdev.guardianmonsters.fwmengine.world.ui
+package de.limbusdev.guardianmonsters.fwmengine.world.ui.widgets
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion
 import com.badlogic.gdx.math.Rectangle

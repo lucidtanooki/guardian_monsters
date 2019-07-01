@@ -8,7 +8,6 @@ import com.badlogic.gdx.InputAdapter
 import com.badlogic.gdx.InputProcessor
 import com.badlogic.gdx.math.Interpolation
 import com.badlogic.gdx.math.Vector2
-import com.badlogic.gdx.scenes.scene2d.Group
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.actions.Actions.*
 import com.badlogic.gdx.scenes.scene2d.ui.*
@@ -29,13 +28,14 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PositionComp
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.entities.EntityFamilies
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.entities.HeroEntity
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.GameArea
+import de.limbusdev.guardianmonsters.fwmengine.world.ui.widgets.ConversationWidget
+import de.limbusdev.guardianmonsters.fwmengine.world.ui.widgets.DPad
 import de.limbusdev.guardianmonsters.inventory.InventoryScreen
 import de.limbusdev.guardianmonsters.services.Services
 import de.limbusdev.utils.extensions.f
 import de.limbusdev.utils.geometry.IntVec2
 import de.limbusdev.utils.logDebug
 import ktx.actors.then
-import ktx.actors.txt
 
 
 /**
@@ -57,14 +57,14 @@ class HUD
     // --------------------------------------------------------------------------------------------- PROPERTIES
     companion object{ const val TAG = "HUD" }
 
-    var stage: Stage
-
-    private lateinit var conversationWidget: ConversationWidget
+    private val stage: Stage
+    private val conversationWidget: ConversationWidget
+    private val blackCurtain: Image
 
     private lateinit var mainMenuButton : Button
     private lateinit var menuButtons: VerticalGroup
-    var blackCourtain: Image
-    private var openHUDELement: HUDElements?
+
+    private var currentlyShownHUDWidget: HUDWidgets?
 
     private val dPad = DPad()
 
@@ -72,7 +72,7 @@ class HUD
     // --------------------------------------------------------------------------------------------- CONSTRUCTORS
     init
     {
-        openHUDELement = HUDElements.NONE
+        currentlyShownHUDWidget = HUDWidgets.NONE
 
         // Scene2D
         val fit = FitViewport(Constant.WIDTHf, Constant.HEIGHTf)
@@ -85,9 +85,9 @@ class HUD
         setUpTopLevelButtons()
         stage.addActor(dPad)
 
-        blackCourtain = GMWorldFactory.HUDBP.createBlackCurtainImg()
+        blackCurtain = GMWorldFactory.HUDBP.createBlackCurtainImg()
 
-        stage.addActor(blackCourtain)
+        stage.addActor(blackCurtain)
 
         this.stage.isDebugAll = Constant.DEBUGGING_ON
     }
@@ -106,7 +106,7 @@ class HUD
         mainMenuButton = GMWorldFactory.HUDBP.createHUDMenuButton({ onMainMenuButton() })
 
         // Group containing buttons: Save, Quit, Monsters
-        this.menuButtons = GMWorldFactory.HUDBP.createHUDMainMenu(
+        menuButtons = GMWorldFactory.HUDBP.createHUDMainMenu(
 
                 saveButtonCB = { saveGameManager.saveGame() },
                 quitButtonCB = { onQuitGameButton() },
@@ -124,15 +124,15 @@ class HUD
         val bButton = GMWorldFactory.HUDBP.createBButton {
 
             logDebug(TAG) { "B Button clicked." }
-            when(openHUDELement)
+            when(currentlyShownHUDWidget)
             {
-                HUDElements.CONVERSATION -> closeConversation()
-                HUDElements.SIGN         -> closeConversation()
+                HUDWidgets.CONVERSATION -> closeConversation()
+                HUDWidgets.SIGN         -> closeConversation()
                 else                     -> {}
             }
         }
 
-        this.menuButtons.isVisible = false
+        menuButtons.isVisible = false
 
         stage.addActor(aButton)
         stage.addActor(bButton)
@@ -237,12 +237,12 @@ class HUD
 
     fun show()
     {
-        blackCourtain.addAction(fadeOut(1f) then hideActor())
+        blackCurtain.addAction(fadeOut(1f) then hideActor())
     }
 
     fun hide()
     {
-        blackCourtain.addAction(showActor() then fadeIn(1f))
+        blackCurtain.addAction(showActor() then fadeIn(1f))
     }
 
     fun checkForNearInteractiveObjects(hero: Entity): Entity?
@@ -312,7 +312,7 @@ class HUD
                         Components.conversation.get(touchedEntity).name,
                         gameArea.getAreaID()
                 )
-                openHUDELement = HUDElements.CONVERSATION
+                currentlyShownHUDWidget = HUDWidgets.CONVERSATION
             }
 
             // Sign Entity
@@ -326,7 +326,7 @@ class HUD
                         Components.conversation.get(touchedEntity).text,
                         gameArea.getAreaID()
                 )
-                openHUDELement = HUDElements.SIGN
+                currentlyShownHUDWidget = HUDWidgets.SIGN
             }
         }
         if (touchedSpeaker || touchedSign) { Components.getInputComponent(hero).talking = true }
@@ -336,7 +336,7 @@ class HUD
     // --------------------------------------------------------------------------------------------- CALLBACKS
     private fun onQuitGameButton()
     {
-        blackCourtain.addAction(alpha(0f) then showActor() then fadeIn(2f) then runThis{ Gdx.app.exit() })
+        blackCurtain.addAction(alpha(0f) then showActor() then fadeIn(2f) then runThis{ Gdx.app.exit() })
     }
 
     private fun onShowInventoryButton()

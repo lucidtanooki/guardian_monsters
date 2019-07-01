@@ -35,8 +35,8 @@ class ExtendedTiledMapRenderer(map: TiledMap) : OrthogonalTiledMapRenderer(map, 
     companion object { const val TAG = "ExtendedTiledMapRenderer" }
 
     private val sprites = Array<AnimatedPersonSprite>()
-    private val objectAnimations = ArrayMap<String, Animation<*>>()
-    private val tileAnimations = ArrayMap<Int, Animation<*>>()
+    private val objectAnimations = ArrayMap<String, Animation<TextureRegion>>()
+    private val tileAnimations = ArrayMap<Int, Animation<TextureRegion>>()
     private var elapsedTime: Float = 0.toFloat()
     private val weatherAnimator: WeatherAnimator
 
@@ -192,7 +192,7 @@ class ExtendedTiledMapRenderer(map: TiledMap) : OrthogonalTiledMapRenderer(map, 
     {
         val r = o as RectangleMapObject
         val index = Integer.parseInt(o.getProperties().get("index", String::class.java))
-        val a = tileAnimations.get(index) as Animation<TextureRegion>
+        val a = tileAnimations.get(index)
 
         // Render multiple tiles
         val cols: Int
@@ -218,7 +218,7 @@ class ExtendedTiledMapRenderer(map: TiledMap) : OrthogonalTiledMapRenderer(map, 
     private fun renderAnimatedObject(o: MapObject)
     {
         val r = o as RectangleMapObject
-        val a = objectAnimations.get(o.getProperties().get("index", String::class.java)) as Animation<TextureRegion>
+        val a = objectAnimations.get(o.getProperties().get("index", String::class.java))
         renderAnimation(a, r.rectangle.getX(), r.rectangle.getY())
     }
 

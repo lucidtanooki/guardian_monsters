@@ -57,14 +57,15 @@ class HUD
     // --------------------------------------------------------------------------------------------- PROPERTIES
     companion object{ const val TAG = "HUD" }
 
-    private val stage: Stage
-    private val conversationWidget: ConversationWidget
-    private val blackCurtain: Image
+    val stage               : Stage
+
+    private val conversationWidget  : ConversationWidget
+    private val blackCurtain        : Image
 
     private lateinit var mainMenuButton : Button
-    private lateinit var menuButtons: VerticalGroup
+    private lateinit var menuButtons    : VerticalGroup
 
-    private var currentlyShownHUDWidget: HUDWidgets?
+    private var currentlyShownHUDWidget : HUDWidgets?
 
     private val dPad = DPad()
 
@@ -77,7 +78,6 @@ class HUD
         // Scene2D
         val fit = FitViewport(Constant.WIDTHf, Constant.HEIGHTf)
         stage = Stage(fit)
-        val skin = Services.UI().defaultSkin
 
         conversationWidget = ConversationWidget()
         stage.addActor(conversationWidget)

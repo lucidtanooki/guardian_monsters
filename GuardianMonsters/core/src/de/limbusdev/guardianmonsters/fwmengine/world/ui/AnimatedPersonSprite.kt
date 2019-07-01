@@ -11,14 +11,18 @@ import de.limbusdev.guardianmonsters.services.Services
 import de.limbusdev.utils.extensions.f
 
 /**
+ * Animates walking people. For every pixel a person moves, a new sprite is drawn.
+ *
  * @author Georg Eckert 2017-02-07
  */
 
 class AnimatedPersonSprite : Sprite
 {
+    // TODO synchronize animation with movement by pixel
+
     // --------------------------------------------------------------------------------------------- PROPERTIES
-    private lateinit var animations: ArrayMap<SkyDirection, Animation<TextureRegion>> // characters animations (N,S,W,E)
-    private lateinit var currentAnimation: Animation<TextureRegion> // current animation
+    private lateinit var animations: ArrayMap<SkyDirection, Animation<TextureRegion>>   // character's animations (N,S,W,E)
+    private lateinit var currentAnimation: Animation<TextureRegion>                     // current animation
     var visible: Boolean = false
 
 
@@ -58,6 +62,4 @@ class AnimatedPersonSprite : Sprite
         val keyFrame = currentAnimation.getKeyFrame(elapsedTime)
         setRegion(keyFrame, 0, 0, keyFrame.regionWidth, keyFrame.regionHeight)
     }
-
-
 }

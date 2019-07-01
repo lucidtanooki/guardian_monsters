@@ -59,11 +59,8 @@ class HUD
 
     var stage: Stage
 
-    var touchPos = Vector2()
+    private lateinit var conversationWidget: ConversationWidget
 
-    private lateinit var conversationLabel: Label
-    private lateinit var titleLabel: Label
-    private lateinit var conversationWidget: Group
     private lateinit var mainMenuButton : Button
     private lateinit var menuButtons: VerticalGroup
     var blackCourtain: Image
@@ -82,7 +79,9 @@ class HUD
         stage = Stage(fit)
         val skin = Services.UI().defaultSkin
 
-        setUpConversation()
+        conversationWidget = ConversationWidget()
+        stage.addActor(conversationWidget)
+
         setUpTopLevelButtons()
         stage.addActor(dPad)
 
@@ -96,8 +95,7 @@ class HUD
 
     // --------------------------------------------------------------------------------------------- METHODS
     // ............................................................................. Input Processor
-    val inputProcessor: InputProcessor
-        get() = this.stage
+    val inputProcessor: InputProcessor get() = this.stage
 
 
     // ......................................................................... Constructor Helpers
@@ -184,7 +182,7 @@ class HUD
 
     override fun touchDragged(screenX: Int, screenY: Int, pointer: Int): Boolean
     {
-        touchPos = stage.viewport.unproject(Vector2(screenX.f(), screenY.f()))
+        val touchPos = stage.viewport.unproject(Vector2(screenX.f(), screenY.f()))
         val input = Components.input.get(hero)
 
         val (dPadValid, dPadDirection) = dPad.touchDown(touchPos)
@@ -220,10 +218,10 @@ class HUD
         mainMenuButton.isVisible = false
         menuButtons.isVisible = false
 
-        conversationLabel.txt = Services.I18N().i18nMap(mapID).get(text)
-        val nm = if (name.isNotEmpty()) { Services.I18N().i18nMap(mapID).get(name) } else { "" }
-        this.titleLabel.txt = nm
-        this.titleLabel.isVisible = true
+        val conversationText = Services.I18N().i18nMap(mapID).get(text)
+        val conversationTitle = if (name.isNotEmpty()) { Services.I18N().i18nMap(mapID).get(name) } else { "" }
+        conversationWidget.setContent(conversationText, conversationTitle)
+
         this.conversationWidget.isVisible = true
         conversationWidget.addAction(moveTo(0f, 0f, .5f, Interpolation.exp10Out))
     }
@@ -245,17 +243,6 @@ class HUD
     fun hide()
     {
         blackCourtain.addAction(showActor() then fadeIn(1f))
-    }
-
-    private fun setUpConversation()
-    {
-        val (widget, conversation, title) = GMWorldFactory.HUDBP.createConversationWidget()
-        widget.isVisible = false
-        stage.addActor(widget)
-
-        conversationWidget = widget
-        conversationLabel = conversation
-        titleLabel = title
     }
 
     fun checkForNearInteractiveObjects(hero: Entity): Entity?

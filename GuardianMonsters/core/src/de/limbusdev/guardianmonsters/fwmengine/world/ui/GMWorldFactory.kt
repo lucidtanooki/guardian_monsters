@@ -91,33 +91,5 @@ internal object GMWorldFactory
             bButton.replaceOnButtonClick(onBButton)
             return bButton
         }
-
-        data class ConversationWidget(val widget: Group, val conversation: Label, val title: Label)
-
-        fun createConversationWidget() : ConversationWidget
-        {
-            val widget = Group()
-            makeImage(skin["dialog_bg2"],      Scene2DLayout(192f, 48f, SCREEN_WIDTH/2,       0f, Align.bottom),     widget)
-            makeImage(skin["dialog_name_bg2"], Scene2DLayout( 89f, 18f, SCREEN_WIDTH/2 - 80, 46f, Align.bottomLeft), widget)
-            widget.setPosition(0f, -56f)
-
-            val conversation = makeLabel(
-
-                    style  = skin["default"],
-                    text   = "Test Label",
-                    layout = LabelLayout(186f, 40f, SCREEN_WIDTH/2-90, 44f, Align.topLeft, Align.topLeft, true),
-                    parent = widget
-            )
-
-            val title = makeLabel(
-
-                    style  = skin["default"],
-                    text   = "",
-                    layout = LabelLayout(84f, 16f, SCREEN_WIDTH/2-78, 48f, Align.bottomLeft, Align.left),
-                    parent = widget
-            )
-
-            return ConversationWidget(widget, conversation, title)
-        }
     }
 }

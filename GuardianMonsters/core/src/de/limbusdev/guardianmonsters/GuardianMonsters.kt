@@ -18,8 +18,8 @@ import ktx.log.info
 
 class GuardianMonsters : Game()
 {
-    override fun create() {
-
+    override fun create()
+    {
         // TODO Enable Kotlin Co-routines for async tasks
 
         // Inject Dependencies: MediaManager, AudioManager, ScreenManager, SaveGameManager, ...

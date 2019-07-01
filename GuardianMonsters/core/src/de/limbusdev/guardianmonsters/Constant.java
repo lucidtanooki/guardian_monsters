@@ -17,6 +17,8 @@ public interface Constant
     int RES_Y = 240;
     int WIDTH = 428;
     int HEIGHT = 240;
+    float WIDTHf = 428f;
+    float HEIGHTf = 240f;
     int COL = 8;
     int ROW = 8;
     int ONE_STEPDURATION_MS = 5;
@@ -25,7 +27,7 @@ public interface Constant
 
     // ............................................................................................. DEBUGGING
     boolean DEBUGGING_ON = true;
-    DebugMode DEBUG_MODE = DebugMode.GUARDOSPHERE;
+    DebugMode DEBUG_MODE = DebugMode.WORLD;
     int startMap = 25;
     int startX = 1, startY = 1;
 }

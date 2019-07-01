@@ -43,11 +43,13 @@ import de.limbusdev.utils.geometry.IntVec2;
 
 
 /**
- * @author Georg Eckert 2017
- * This Class creates a HUD which is displayed on top of the level screen, when not in battle.
+ * HUD creates a UI which is displayed on top of the level screen, when not in battle.
  * It includes the main menu (save, quit, monsters, ...), controls (dpad, A, B) and text display.
+ *
+ * @author Georg Eckert 2017
  */
-public class HUD extends InputAdapter {
+public class HUD extends InputAdapter
+{
     /* ............................................................................ ATTRIBUTES .. */
     public Stage stage;
 

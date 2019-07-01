@@ -34,6 +34,7 @@ public interface L18N {
     String Battle(String key);
     String Battle(String key, Object... args);
     String Inventory(String key);
+    String General(String key);
 
     /**
      * Returns the nickname of the given Guardian, if it has one. Otherwise the localized species

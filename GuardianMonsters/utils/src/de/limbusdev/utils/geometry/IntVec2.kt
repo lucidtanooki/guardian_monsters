@@ -9,4 +9,10 @@ open class IntVec2(var x: Int, var y: Int)
     {
         return "IntVec2(x=$x, y=$y)"
     }
+
+    operator fun plusAssign(other: IntVec2)
+    {
+        x += other.x
+        y += other.y
+    }
 }

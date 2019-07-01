@@ -120,6 +120,9 @@ public class LocalizationManager implements L18N
     public String Inventory(String key) { return Inventory().get(key); }
 
     @Override
+    public String General(String key) { return General().get(key); }
+
+    @Override
     public String getGuardianNicknameIfAvailable(AGuardian guardian)
     {
         if(!guardian.getNickname().isEmpty()) {

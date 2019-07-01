@@ -137,7 +137,7 @@ public class EntityComponentSystem {
         engine.addSystem(pathSystem);
 
         // GameSaveManager
-        this.saveGameManager = hud.saveGameManager;
+        this.saveGameManager = hud.getSaveGameManager();
         this.saveGameManager.addedToEngine(engine);
         engine.addSystem(this.saveGameManager);
 
@@ -186,7 +186,7 @@ public class EntityComponentSystem {
      * Render Heads Up Display
      */
     public void draw() {
-        hud.stage.getViewport().apply();
+        hud.getStage().getViewport().apply();
         hud.draw();
     }
     /* ..................................................................... GETTERS & SETTERS .. */

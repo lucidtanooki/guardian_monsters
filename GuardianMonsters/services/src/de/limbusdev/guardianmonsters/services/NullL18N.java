@@ -64,6 +64,9 @@ public class NullL18N implements L18N
     public String Inventory(String key) { return ""; }
 
     @Override
+    public String General(String key) { return ""; }
+
+    @Override
     public String getGuardianNicknameIfAvailable(AGuardian guardian)
     {
         return "NullL18N-Dummy";

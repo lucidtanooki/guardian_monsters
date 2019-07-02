@@ -31,7 +31,9 @@ import de.limbusdev.guardianmonsters.services.Services;
 
 
 /**
- * Created by georg on 21.11.15.
+ * EntityComponentSystem
+ *
+ * @author Georg Eckert 2015-11-21
  */
 public class EntityComponentSystem {
     /* ............................................................................ ATTRIBUTES .. */

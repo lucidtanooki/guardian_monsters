@@ -1,6 +1,7 @@
 package de.limbusdev.guardianmonsters.fwmengine.world.ui.widgets
 
 import com.badlogic.gdx.scenes.scene2d.Group
+import com.badlogic.gdx.scenes.scene2d.ui.Image
 import com.badlogic.gdx.scenes.scene2d.ui.Label
 import com.badlogic.gdx.scenes.scene2d.ui.Skin
 import com.badlogic.gdx.utils.Align
@@ -20,11 +21,13 @@ class ConversationWidget(skin: Skin = Services.UI().defaultSkin) : Group()
     private var wholeText = ""
     private lateinit var textSections : List<String>
     private var currentSection = -1
+    private val nameBGImg               : Image
+    private val conversationBGImg       : Image
 
     init
     {
-        makeImage(skin["label-bg-paper-sand"], Scene2DLayout(200f, 60f, Constant.WIDTHf/2-90f,  2f), this)
-        makeImage(skin["label-bg-paper-sand"], Scene2DLayout(120f, 22f, Constant.WIDTHf/2-90f, 64f), this)
+        conversationBGImg = makeImage(skin["label-bg-paper-sand"], Scene2DLayout(200f, 60f, Constant.WIDTHf/2-90f,  2f), this)
+        nameBGImg         = makeImage(skin["label-bg-paper-sand"], Scene2DLayout(120f, 22f, Constant.WIDTHf/2-90f, 64f), this)
         setPosition(0f, -86f)
 
         conversationTextLabel = makeLabel(
@@ -46,10 +49,22 @@ class ConversationWidget(skin: Skin = Services.UI().defaultSkin) : Group()
 
     fun setContent(mainText: String = "", title: String = "")
     {
+        currentSection = -1
         wholeText = mainText
         conversationTitleLabel.txt = title
         textSections = mainText.split("|")
         nextSection()
+
+        if(title.isEmpty())
+        {
+            conversationTitleLabel.remove()
+            nameBGImg.remove()
+        }
+        else
+        {
+            addActor(nameBGImg)
+            addActor(conversationTitleLabel)
+        }
     }
 
     /** @return false if the last section is already shown */

@@ -1,179 +1,179 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="25" height="15" tilewidth="16" tileheight="16" nextobjectid="93">
+<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-down" width="25" height="15" tilewidth="16" tileheight="16" infinite="0" nextlayerid="14" nextobjectid="93">
  <properties>
   <property name="musicIndex" value="2"/>
   <property name="musicType" value="town"/>
  </properties>
- <tileset firstgid="1" name="limbusdev_world2" tilewidth="16" tileheight="16" tilecount="4096">
+ <tileset firstgid="1" name="limbusdev_world2" tilewidth="16" tileheight="16" tilecount="4096" columns="64">
   <image source="../spritesheets/limbusdev_world2.png" width="1024" height="1024"/>
  </tileset>
- <layer name="ground1" width="25" height="15">
+ <layer id="1" name="ground1" width="25" height="15">
   <data encoding="base64" compression="zlib">
    eJy7w8HAcBeI79CQhrFVWSEYWQ4mdpcMdcPZjlRWCEaWg4ndJUMdNjvoEeejdozaMWrHwNgBAGsDOXA=
   </data>
  </layer>
- <layer name="walls1" width="25" height="15">
+ <layer id="2" name="walls1" width="25" height="15">
   <data encoding="base64" compression="zlib">
    eJy9kTEOwjAMRd0hIHMDmEEg9USwVwzlSpygHKlsIDgGthqLJMQUasqXnux8JfnDB/iPLhOAK3Ej7sTK2bwQ0XJKZ2JNbHg6m5fL4P2AHbzLPYuXZlS0n7Cj8vesniAqMZ579+qzJ2fNC9+mqjGeJeb9GvU3fdL+GpKxKADOAaIGv5uaxzoWcc4Y4gxm6xGlnfdNzXuX8cs+Ps1ojBk7ovWItP6GdD6fPf9vR+o8pwfFg1Mg
   </data>
  </layer>
- <layer name="objects1" width="25" height="15">
+ <layer id="3" name="objects1" width="25" height="15">
   <data encoding="base64" compression="zlib">
    eJxjYBgF+IAOJ+3tyKGDHWvoYMdwAm9YaW+Hzqgdg8qOdDrYQU8AABnNA4E=
   </data>
  </layer>
- <objectgroup name="animatedObjects1"/>
- <objectgroup name="people1" visible="0">
+ <objectgroup id="4" name="animatedObjects1"/>
+ <objectgroup id="5" name="people1">
   <object id="29" name="person" type="person" x="352" y="160" width="16" height="16">
    <properties>
-    <property name="male" value="true"/>
-    <property name="name" value="person_253_1_name"/>
+    <property name="male" type="bool" value="true"/>
     <property name="path" value="WSTOP,WSTOP,WSTOP,NSTOP,N,W,WSTOP,SSTOP,SSTOP,S,S,SSTOP,ESTOP,ESTOP,ESTOP,E,S,N,N,ESTOP,ESTOP,ESTOP"/>
-    <property name="spriteIndex" value="8"/>
-    <property name="static" value="false"/>
+    <property name="personName" value="person_253_1_name"/>
+    <property name="spriteIndex" type="int" value="8"/>
+    <property name="static" type="bool" value="false"/>
     <property name="text" value="person_253_1_text"/>
     <property name="trigger" value="sequence_253_1"/>
    </properties>
   </object>
   <object id="80" name="person" type="person" x="256" y="112" width="16" height="16">
    <properties>
-    <property name="male" value="false"/>
+    <property name="male" type="bool" value="false"/>
     <property name="path" value="ESTOP"/>
-    <property name="spriteIndex" value="0"/>
-    <property name="static" value="true"/>
+    <property name="spriteIndex" type="int" value="0"/>
+    <property name="static" type="bool" value="true"/>
     <property name="text" value="person_253_4_text"/>
    </properties>
   </object>
   <object id="81" name="person" type="person" x="256" y="96" width="16" height="16">
    <properties>
-    <property name="male" value="true"/>
+    <property name="male" type="bool" value="true"/>
     <property name="path" value="ESTOP"/>
-    <property name="spriteIndex" value="6"/>
-    <property name="static" value="true"/>
+    <property name="spriteIndex" type="int" value="6"/>
+    <property name="static" type="bool" value="true"/>
     <property name="text" value="person_253_5_text"/>
    </properties>
   </object>
   <object id="82" name="person" type="person" x="256" y="176" width="16" height="16">
    <properties>
-    <property name="male" value="true"/>
+    <property name="male" type="bool" value="true"/>
     <property name="path" value="ESTOP"/>
-    <property name="spriteIndex" value="6"/>
-    <property name="static" value="true"/>
+    <property name="spriteIndex" type="int" value="6"/>
+    <property name="static" type="bool" value="true"/>
     <property name="text" value="person_253_3_text"/>
    </properties>
   </object>
   <object id="83" name="person" type="person" x="256" y="192" width="16" height="16">
    <properties>
-    <property name="male" value="true"/>
+    <property name="male" type="bool" value="true"/>
     <property name="path" value="ESTOP"/>
-    <property name="spriteIndex" value="1"/>
-    <property name="static" value="true"/>
+    <property name="spriteIndex" type="int" value="1"/>
+    <property name="static" type="bool" value="true"/>
     <property name="text" value="person_253_2_text"/>
    </properties>
   </object>
   <object id="84" name="person" type="person" x="224" y="96" width="16" height="16">
    <properties>
-    <property name="male" value="true"/>
+    <property name="male" type="bool" value="true"/>
     <property name="path" value="ESTOP"/>
-    <property name="spriteIndex" value="3"/>
-    <property name="static" value="true"/>
+    <property name="spriteIndex" type="int" value="3"/>
+    <property name="static" type="bool" value="true"/>
     <property name="text" value="person_253_6_text"/>
    </properties>
   </object>
   <object id="85" name="person" type="person" x="224" y="192" width="16" height="16">
    <properties>
-    <property name="male" value="true"/>
+    <property name="male" type="bool" value="true"/>
     <property name="path" value="ESTOP"/>
-    <property name="spriteIndex" value="7"/>
-    <property name="static" value="true"/>
+    <property name="spriteIndex" type="int" value="7"/>
+    <property name="static" type="bool" value="true"/>
     <property name="text" value="person_253_7_text"/>
    </properties>
   </object>
   <object id="86" name="person" type="person" x="176" y="96" width="16" height="16">
    <properties>
-    <property name="male" value="true"/>
+    <property name="male" type="bool" value="true"/>
     <property name="path" value="ESTOP"/>
-    <property name="spriteIndex" value="5"/>
-    <property name="static" value="true"/>
+    <property name="spriteIndex" type="int" value="5"/>
+    <property name="static" type="bool" value="true"/>
     <property name="text" value="person_253_9_text"/>
    </properties>
   </object>
   <object id="87" name="person" type="person" x="176" y="112" width="16" height="16">
    <properties>
-    <property name="male" value="true"/>
+    <property name="male" type="bool" value="true"/>
     <property name="path" value="ESTOP"/>
-    <property name="spriteIndex" value="7"/>
-    <property name="static" value="true"/>
+    <property name="spriteIndex" type="int" value="7"/>
+    <property name="static" type="bool" value="true"/>
     <property name="text" value="person_253_8_text"/>
    </properties>
   </object>
   <object id="88" name="person" type="person" x="144" y="176" width="16" height="16">
    <properties>
-    <property name="male" value="true"/>
+    <property name="male" type="bool" value="true"/>
     <property name="name" value="person_253_1_name"/>
     <property name="path" value="ESTOP"/>
-    <property name="spriteIndex" value="7"/>
-    <property name="static" value="true"/>
+    <property name="spriteIndex" type="int" value="7"/>
+    <property name="static" type="bool" value="true"/>
     <property name="text" value="person_253_1_text"/>
    </properties>
   </object>
   <object id="89" name="person" type="person" x="144" y="96" width="16" height="16">
    <properties>
-    <property name="male" value="true"/>
+    <property name="male" type="bool" value="true"/>
     <property name="name" value="person_253_1_name"/>
     <property name="path" value="ESTOP"/>
-    <property name="spriteIndex" value="2"/>
-    <property name="static" value="true"/>
+    <property name="spriteIndex" type="int" value="2"/>
+    <property name="static" type="bool" value="true"/>
     <property name="text" value="person_253_1_text"/>
    </properties>
   </object>
   <object id="90" name="person" type="person" x="144" y="112" width="16" height="16">
    <properties>
-    <property name="male" value="true"/>
+    <property name="male" type="bool" value="true"/>
     <property name="name" value="person_253_1_name"/>
     <property name="path" value="ESTOP"/>
-    <property name="spriteIndex" value="1"/>
-    <property name="static" value="true"/>
+    <property name="spriteIndex" type="int" value="1"/>
+    <property name="static" type="bool" value="true"/>
     <property name="text" value="person_253_1_text"/>
    </properties>
   </object>
   <object id="91" name="person" type="person" x="112" y="192" width="16" height="16">
    <properties>
-    <property name="male" value="true"/>
+    <property name="male" type="bool" value="true"/>
     <property name="name" value="person_253_1_name"/>
     <property name="path" value="ESTOP"/>
-    <property name="spriteIndex" value="4"/>
-    <property name="static" value="true"/>
+    <property name="spriteIndex" type="int" value="4"/>
+    <property name="static" type="bool" value="true"/>
     <property name="text" value="person_253_1_text"/>
    </properties>
   </object>
   <object id="92" name="person" type="person" x="80" y="112" width="16" height="16">
    <properties>
-    <property name="male" value="true"/>
+    <property name="male" type="bool" value="true"/>
     <property name="name" value="person_253_1_name"/>
     <property name="path" value="ESTOP"/>
-    <property name="spriteIndex" value="6"/>
-    <property name="static" value="true"/>
+    <property name="spriteIndex" type="int" value="6"/>
+    <property name="static" type="bool" value="true"/>
     <property name="text" value="person_253_1_text"/>
    </properties>
   </object>
  </objectgroup>
- <layer name="shadows1" width="25" height="15">
+ <layer id="6" name="shadows1" width="25" height="15">
   <data encoding="base64" compression="zlib">
    eJybyMTAMHEUj+JRPIpH8bDCALGm11Y=
   </data>
  </layer>
- <layer name="shadows2" width="25" height="15">
+ <layer id="7" name="shadows2" width="25" height="15">
   <data encoding="base64" compression="zlib">
    eJxjYBgFo2AUDFegzkd7O1TpYMcoIB0AAMA0AGk=
   </data>
  </layer>
- <layer name="lights1" width="25" height="15">
+ <layer id="8" name="lights1" width="25" height="15">
   <data encoding="base64" compression="zlib">
    eJxjYBheQIcTgqkphg5yOCGYmmLoYA0nBFNTbCDAa04IpqYYOtDmgmBqitEavATa8YrG9jwHmv9i1A6igCY3A4MWN6rYG04IxiemBmSrQ7EGJ2G95IA0oL50KM4gwQwA3bMn9Q==
   </data>
  </layer>
- <objectgroup name="animatedObjects2" visible="0">
+ <objectgroup id="9" name="animatedObjects2" visible="0">
   <object id="42" name="animatedObject" x="48" y="160" width="16" height="16">
    <properties>
     <property name="frameDuration" value="0.2"/>
@@ -340,12 +340,12 @@
    </properties>
   </object>
  </objectgroup>
- <layer name="tops1" width="25" height="15">
+ <layer id="10" name="tops1" width="25" height="15">
   <data encoding="base64" compression="zlib">
    eJyTYWJguIOGk6goJgvEc4AYHTymothcHHZQE4zaMWrHqB0j147FVBQD2REDxHfRsDIOMWkk/VJ41CHzY4EYAGmWNyQ=
   </data>
  </layer>
- <objectgroup name="colliderWalls1" visible="0">
+ <objectgroup id="11" name="colliderWalls1" visible="0">
   <object id="1" x="0" y="64" width="400" height="16"/>
   <object id="2" x="384" y="80" width="16" height="160"/>
   <object id="3" x="0" y="80" width="16" height="160"/>
@@ -375,7 +375,7 @@
   <object id="27" x="256" y="160" width="16" height="64"/>
   <object id="28" x="368" y="128" width="16" height="80"/>
  </objectgroup>
- <objectgroup name="triggers1" visible="0">
+ <objectgroup id="12" name="triggers1" visible="0">
   <object id="30" name="warpField" x="192" y="224" width="16" height="16">
    <properties>
     <property name="targetID" value="25"/>
@@ -399,5 +399,5 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="descriptions1"/>
+ <objectgroup id="13" name="descriptions1"/>
 </map>

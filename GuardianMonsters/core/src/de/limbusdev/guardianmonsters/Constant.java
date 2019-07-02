@@ -28,6 +28,6 @@ public interface Constant
     // ............................................................................................. DEBUGGING
     boolean DEBUGGING_ON = true;
     DebugMode DEBUG_MODE = DebugMode.WORLD;
-    int startMap = 1;
+    int startMap = 25;
     int startX = 1, startY = 1;
 }

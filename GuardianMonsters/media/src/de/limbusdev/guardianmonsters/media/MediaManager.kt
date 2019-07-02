@@ -69,6 +69,7 @@ class MediaManager : IMediaManager
         val animations = AssetPath.Spritesheet.ANIMATIONS
 
         val tileTypes = arrayOf(
+
                 "water",
                 "waterine",
                 "waterinw",
@@ -81,7 +82,8 @@ class MediaManager : IMediaManager
                 "waterse",
                 "watersw",
                 "watere",
-                "waterw")
+                "waterw"
+        )
 
         for(tileType in tileTypes)
         {

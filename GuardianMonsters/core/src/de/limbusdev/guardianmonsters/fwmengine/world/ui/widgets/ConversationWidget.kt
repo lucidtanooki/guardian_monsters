@@ -22,7 +22,7 @@ class ConversationWidget(skin: Skin = Services.UI().defaultSkin) : Group()
     {
         makeImage(skin["dialog_bg2"],      Scene2DLayout(192f, 48f, Constant.WIDTHf /2,       0f, Align.bottom),     this)
         makeImage(skin["dialog_name_bg2"], Scene2DLayout( 89f, 18f, Constant.WIDTHf /2 - 80, 46f, Align.bottomLeft), this)
-        setPosition(0f, -56f)
+        setPosition(0f, -64f)
 
         conversationTextLabel = makeLabel(
 

@@ -12,6 +12,7 @@ public interface Constant
     boolean RIGHT = false;
 
     int TILE_SIZE = 16;
+    float TILE_SIZEf = 16f;
     int PIXELS_PER_METER = 1;
     int RES_X = 428;
     int RES_Y = 240;

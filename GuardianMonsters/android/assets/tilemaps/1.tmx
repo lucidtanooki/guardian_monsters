@@ -205,10 +205,11 @@
  <objectgroup id="6" name="people1" visible="0">
   <object id="51" name="person" type="person" x="64" y="336" width="16" height="16">
    <properties>
-    <property name="male" value="true"/>
+    <property name="male" type="bool" value="true"/>
     <property name="path" value="SSTOP"/>
-    <property name="spriteIndex" value="2"/>
-    <property name="static" value="true"/>
+    <property name="personName" value="person_name_1_1"/>
+    <property name="spriteIndex" type="int" value="2"/>
+    <property name="static" type="bool" value="true"/>
     <property name="text" value="person_1_1"/>
    </properties>
   </object>

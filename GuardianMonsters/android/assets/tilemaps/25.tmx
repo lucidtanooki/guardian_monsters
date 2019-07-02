@@ -550,7 +550,7 @@
   </object>
   <object id="324" name="sign" type="objectDescription" x="880" y="208" width="16" height="16">
    <properties>
-    <property name="text" value="object_25_1_text"/>
+    <property name="text" value="object_25_3_text"/>
     <property name="title" value="object_25_3_title"/>
    </properties>
   </object>

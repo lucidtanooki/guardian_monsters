@@ -120,7 +120,11 @@ class HUD
         val aButton = GMWorldFactory.HUDBP.createAButton {
 
             logDebug(TAG) { "A Button clicked." }
-            touchEntity()
+            when(currentlyShownHUDWidget)
+            {
+                HUDWidgets.CONVERSATION, HUDWidgets.SIGN -> proceedConversation()
+                else -> touchEntity()
+            }
         }
 
         val bButton = GMWorldFactory.HUDBP.createBButton {
@@ -215,6 +219,11 @@ class HUD
 
     fun update(delta: Float) = stage.act(delta)
 
+    fun proceedConversation()
+    {
+        if(!conversationWidget.nextSection()) { closeConversation() }
+    }
+
     fun openConversation(text: String, name: String, mapID: Int)
     {
         mainMenuButton.isVisible = false
@@ -226,6 +235,7 @@ class HUD
 
         this.conversationWidget.isVisible = true
         conversationWidget.addAction(moveTo(0f, 0f, .5f, Interpolation.exp10Out))
+        currentlyShownHUDWidget = HUDWidgets.CONVERSATION
     }
 
     fun closeConversation()
@@ -233,6 +243,7 @@ class HUD
         mainMenuButton.isVisible = true
         conversationWidget.addAction(moveTo(0f, -50f, .5f, Interpolation.exp10In) then hideActor())
         Components.getInputComponent(hero).talking = false
+        currentlyShownHUDWidget = HUDWidgets.NONE
     }
 
     fun openSign(title: String, text: String, mapID: Int) = openConversation(text, title, mapID)

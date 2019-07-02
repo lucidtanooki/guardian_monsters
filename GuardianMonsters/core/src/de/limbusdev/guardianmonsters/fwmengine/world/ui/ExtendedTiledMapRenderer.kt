@@ -197,27 +197,24 @@ class ExtendedTiledMapRenderer(map: TiledMap) : OrthogonalTiledMapRenderer(map, 
     // .............................................................................. RENDER METHODS
     private fun renderAnimatedTile(o: MapObject)
     {
-        val r = o as RectangleMapObject
+        o as RectangleMapObject
+
         val index: Int = o.getProperties()["index", 0]
         val a = tileAnimations.get(index)
 
         // Render multiple tiles
-        val cols: Int
-        val rows: Int
-        val objWidth: Int
-        val objHeight: Int
-        objWidth = MathUtils.round(r.rectangle.getWidth())
-        objHeight = MathUtils.round(r.rectangle.getHeight())
-        cols = objWidth / 16
-        rows = objHeight / 16
+        val objWidth  : Int = MathUtils.round(o.rectangle.getWidth())
+        val objHeight : Int = MathUtils.round(o.rectangle.getHeight())
+        val cols: Int = objWidth / 16
+        val rows: Int = objHeight / 16
 
-        for (i in 0 until rows)
+        for (row in 0 until rows)
         {
-            for (j in 0 until cols)
+            for (col in 0 until cols)
             {
-                val x = r.rectangle.getX() + j * 16
-                val y = r.rectangle.getY() + i * 16
-                if(a != null)renderAnimation(a, x, y)
+                val x = o.rectangle.getX() + col * 16
+                val y = o.rectangle.getY() + row * 16
+                renderAnimation(a, x, y)
             }
         }
     }

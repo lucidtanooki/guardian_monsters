@@ -17,18 +17,21 @@ class ConversationWidget(skin: Skin = Services.UI().defaultSkin) : Group()
 {
     private val conversationTextLabel  : Label
     private val conversationTitleLabel : Label
+    private var wholeText = ""
+    private lateinit var textSections : List<String>
+    private var currentSection = -1
 
     init
     {
-        makeImage(skin["dialog_bg2"],      Scene2DLayout(192f, 48f, Constant.WIDTHf /2,       0f, Align.bottom),     this)
-        makeImage(skin["dialog_name_bg2"], Scene2DLayout( 89f, 18f, Constant.WIDTHf /2 - 80, 46f, Align.bottomLeft), this)
-        setPosition(0f, -64f)
+        makeImage(skin["label-bg-paper-sand"], Scene2DLayout(200f, 60f, Constant.WIDTHf/2-90f,  2f), this)
+        makeImage(skin["label-bg-paper-sand"], Scene2DLayout(120f, 22f, Constant.WIDTHf/2-90f, 64f), this)
+        setPosition(0f, -86f)
 
         conversationTextLabel = makeLabel(
 
                 style  = skin["default"],
                 text   = "Test Label",
-                layout = LabelLayout(186f, 40f, Constant.WIDTHf/2-90, 44f, Align.topLeft, Align.topLeft, true),
+                layout = LabelLayout(192f, 52f, Constant.WIDTHf/2-86f, 58f, Align.topLeft, Align.topLeft, true),
                 parent = this
         )
 
@@ -36,14 +39,29 @@ class ConversationWidget(skin: Skin = Services.UI().defaultSkin) : Group()
 
                 style  = skin["default"],
                 text   = "",
-                layout = LabelLayout(84f, 16f, Constant.WIDTHf/2-78, 48f, Align.bottomLeft, Align.left),
+                layout = LabelLayout(112f, 16f, Constant.WIDTHf/2-86f, 82f, Align.topLeft, Align.topLeft),
                 parent = this
         )
     }
 
     fun setContent(mainText: String = "", title: String = "")
     {
-        conversationTextLabel.txt = mainText
+        wholeText = mainText
         conversationTitleLabel.txt = title
+        textSections = mainText.split("|")
+        nextSection()
+    }
+
+    /** @return false if the last section is already shown */
+    fun nextSection() : Boolean
+    {
+        when(currentSection)
+        {
+            -1                      -> currentSection = 0
+            textSections.size - 1   -> { currentSection = -1; return false }
+            else                    -> currentSection++
+        }
+        conversationTextLabel.txt = textSections[currentSection]
+        return true
     }
 }

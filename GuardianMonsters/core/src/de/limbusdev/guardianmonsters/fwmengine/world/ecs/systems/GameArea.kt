@@ -47,7 +47,7 @@ class GameArea(val areaID: Int, startPosID: Int)
     private var bgMusic: String? = null
 
     val colliders       = ArrayMap<Int, Array<IntRect>>()
-    val movingColliders = ArrayMap<Int, Array<IntRect>>()
+    val dynamicColliders = ArrayMap<Int, Array<IntRect>>()
     val warpPoints      = ArrayMap<Int, Array<WarpPoint>>()
     val healFields      = ArrayMap<Int, Array<Rectangle>>()
     val mapPeople       = ArrayMap<Int, Array<MapPersonInformation>>()
@@ -277,20 +277,20 @@ class GameArea(val areaID: Int, startPosID: Int)
         Services.Audio().stopMusic(bgMusic)
     }
 
-    fun addMovingCollider(collider: IntRect, layer: Int)
+    fun addDynamicCollider(collider: IntRect, layer: Int)
     {
-        if (!movingColliders.containsKey(layer))
+        if (!dynamicColliders.containsKey(layer))
         {
-            movingColliders.put(layer, Array())
+            dynamicColliders.put(layer, Array())
         }
-        movingColliders.get(layer).add(collider)
+        dynamicColliders.get(layer).add(collider)
     }
 
-    fun removeMovingCollider(collider: IntRect, layer: Int)
+    fun removeDynamicCollider(collider: IntRect, layer: Int)
     {
-        if (movingColliders.containsKey(layer))
+        if (dynamicColliders.containsKey(layer))
         {
-            movingColliders.get(layer).removeValue(collider, false)
+            dynamicColliders.get(layer).removeValue(collider, false)
         }
     }
 }

@@ -145,7 +145,7 @@ public class MovementSystem extends EntitySystem {
                 nextPos.setY(position.nextY + Constant.TILE_SIZE / 2);
                 if (r.contains(nextPos)) return;
             }
-            for(IntRect r : ecs.getGameArea().getMovingColliders().get(position.layer)) {
+            for(IntRect r : ecs.getGameArea().getDynamicColliders().get(position.layer)) {
                 nextPos.setX(position.nextX + Constant.TILE_SIZE / 2);
                 nextPos.setY(position.nextY + Constant.TILE_SIZE / 2);
                 if (!collider.equals(r) && r.contains(nextPos)) return;

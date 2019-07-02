@@ -1,39 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="64" height="32" tilewidth="16" tileheight="16" nextobjectid="393">
+<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-down" width="64" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="16" nextobjectid="412">
  <properties>
   <property name="musicIndex" value="2"/>
   <property name="musicType" value="town"/>
   <property name="weather" value="rain"/>
  </properties>
- <tileset firstgid="1" name="limbusdev_world2" tilewidth="16" tileheight="16" tilecount="4096">
+ <tileset firstgid="1" name="limbusdev_world2" tilewidth="16" tileheight="16" tilecount="4096" columns="64">
   <image source="../spritesheets/limbusdev_world2.png" width="1024" height="1024"/>
  </tileset>
- <layer name="ground1" width="64" height="32">
+ <layer id="1" name="ground1" width="64" height="32">
   <data encoding="base64" compression="zlib">
    eJztmFEOgyAMQHF4MvFkcyfTHWyS2Kxr6CzSKMF+vCwi075SqtF3zvkKGJxzo/s9Dht0HB+3gvmbv/mbv/nf139Yf8PG2H396Xir/kGI+Z8XD9wrMPek81rxlzpK/ffmHfXXyj/mEa+FgF4U+5AXnutJPBBn6hr4OpF5Zdl4J/xTfRKPYWgc2rXIQT2x3z+i+yuxviVx5OZAwz+X6D0R98iTqYEccvfGmf6cN6YX1o6knmrzp2sTErGW+B/pixo1pxVf7MXS3qHlDzmYEFw+ZjKPg/s/9G2uR5XWotZzkeYDkO6tPQ+aB3gGl6x9ai9dhXRPQR6oN34nWBJey875GoAayukt4J3bw2um5nd98z/Hn3vHp+Ot+t/9W5f5m7/5m7/5X+v/AV2Czeo=
   </data>
  </layer>
- <layer name="ground2" width="64" height="32">
+ <layer id="2" name="ground2" width="64" height="32">
   <data encoding="base64" compression="zlib">
    eJzt1LEJwDAMBEC19gZJJk+ybNyosMED2LmDhwfV+ggAAABWcpeIp+Utfc9b9l0dNeJsuWrf85YddjT7/3ELdjX7/3ELAAAA/uoDv3QNOA==
   </data>
  </layer>
- <layer name="shadows1" width="64" height="32">
+ <layer id="3" name="shadows1" width="64" height="32">
   <data encoding="base64" compression="zlib">
    eJzt10kKgDAQRUH1/huvJngfyVoQhU8mq9bB7idBcFkA4J19y5wZ1Wj96V2S/TXek/76z5u5P+nv/cDdsbbegJbKN/t0BwDoRE//dV8lduq5v8x8mqs/MyN5LqlGPzCPC6EXF3w=
   </data>
  </layer>
- <layer name="walls1" width="64" height="32">
+ <layer id="4" name="walls1" width="64" height="32">
   <data encoding="base64" compression="zlib">
    eJztmVtO20AUhicmkLzAKvpQWjUEwkM3wGUXtBJSS6Peu4WW7IJWqtq+lOsiYCERKiByow997D+KozjH45kz9gx2EL/0yYk9nON/fsdiNBtlIdbBRk7HKsiizzneu4vjZkb/a47u5QvYzeHYhocHwdjPw0Dt81cQH3ce5m/bk3o/BU3UuizdPtL/dsTXS3xuK+bgTxAfd57inqXPMzIHldnh+UfBJFRHM0LUy/FxWXkc6bVIviedX0zZS/qszk7m3wrzfxWMUUn6F2RcZ06ILuiBPhiAm7nJMSaakX7buJcXincCPb9DavyrxFH2EvF35mbo36RR/oPI/dbQZwnUwTJYAY1K/G+T5onqO+r/VPhPOi/rqryPoJI+6TuzxfQ/0nH4HLxG/TfgLXgH3oMP4CP4RHpz58lWOu+qOTDl/3tmmLOOkX+pfdQ/AIfgCByDE9LTZp5sJOs+rQ65qQyhnyXRHqb8Vf73wQE4JP6vUbcDuqAH+mAQ9v5LfHHmKY1kXRNRmfK/hrc+oQO6oBd+H4T+n2Bua2AJ1MEyWAENsFod97SZJxsl1dX1cPH7txV3nlzV1fXI8v6/C8oj/zTaxTPbcvB+oJqW/E/h/cyT/2nI35eKmH/0Wd+aF+IZeD7vp1cR848+63vw/RV88+i/aPkn6ccC/udfcFuziPnfpqYpfx+6z5+XP3e9zh3nUqaeuuvc/LnrdV/rep1MPXXXOflz1+u+1vU6mXqarnPz567Xfa3rdTL11F3n5M9dr/ta1+tk6mm6zsmfu163Xde3Rba9Dk5P0/Wk/C9KqeKwkvSfZa/Dha5K6vzT7icUea8jqb9qz5TuJ/jCxV5H1v6qPdA8ZLvX4ULrxPt/M4fUsA==
   </data>
  </layer>
- <layer name="objects1" width="64" height="32">
+ <layer id="5" name="objects1" width="64" height="32">
   <data encoding="base64" compression="zlib">
    eJztmD0OgjAUgOvPwoKnEBxYvIIJ6kmMg4sX8Ri6uHgjcHHRO9jG10gIwuuTWorvSxraQn/eX1sqBMMwTDOPoesZuGc+cj0Ddyj77w3lP4ztzMUVFwv2XyD6PIZCnEKzNlSSoDpfLC8H9sZ3zS6ozleV68DqiGJLm/Y/g4yb8J0vv0tBtuukvq+m998wC5u/MaWo13LMUcDIvyWMUWd/NSZF72mPYxqLzbiySSR9aCrTTaYcbJ/BU9XHMq09lQ1DDLLH4Pt5wf8jqF8h/NtX+zPt4Kv9Vaxn4PfltSC3uAd3BS2n0oFeC1TSesn+QAfMb+BzEg7974/ZdzG01Y8LlM/0+fz1Cd9kxsa2yb0WrxcM8+JOuOugtOkqCeEcSmnDMBieAYovig==
   </data>
  </layer>
- <objectgroup name="animatedObjects1">
+ <objectgroup id="6" name="animatedObjects1">
   <object id="334" name="animatedObject" x="448" y="352" width="16" height="16">
    <properties>
     <property name="index" value="flower2"/>
@@ -74,7 +74,7 @@
     <property name="index" value="flower2"/>
    </properties>
   </object>
-  <object id="342" name="animatedObject" x="528" y="96" width="16" height="16">
+  <object id="342" name="animatedObject" x="528" y="64" width="16" height="16">
    <properties>
     <property name="index" value="flag1"/>
    </properties>
@@ -127,7 +127,8 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="people1">
+ <objectgroup id="15" name="animatedTiles1"/>
+ <objectgroup id="7" name="people1">
   <object id="51" name="person" type="person" x="208" y="176" width="16" height="16">
    <properties>
     <property name="male" value="true"/>
@@ -246,22 +247,22 @@
    </properties>
   </object>
  </objectgroup>
- <layer name="shadows2" width="64" height="32">
+ <layer id="8" name="shadows2" width="64" height="32">
   <data encoding="base64" compression="zlib">
    eJztmdEKgCAMRctf7KXfivq0+p/oQZAgvaurm7EDPZRj27EotGFwHHssoX3NFax59cbu757vKb+kbuxT4iXJy6SGf4xH54Dtv49Yvosp5M9L13Og/Wr5S+bpLUx/NNb9sVzuj9d9C9sfeQ8dP/Zngs7TF5D7peVvBffX7kAXa/5z436s+bf4LqRY829Nz/5bYZ23AWuWXv2j29NaNx3PgYwja2npvgODJWBHKQdahxXHpFST9fyz46zg/jpxVnB/nTgraPn3Nk9fqbXX3wupV+6b/Vf/mv86HBknDLVOQA==
   </data>
  </layer>
- <layer name="tops1" width="64" height="32">
+ <layer id="9" name="tops1" width="64" height="32">
   <data encoding="base64" compression="zlib">
    eJztmctOwkAUhqcXbDfwCmqi0Q0bow+gCcqLqCs3Bh5AVz6IN2xMxGBYa+LlRYwBtrBw52/shCl22mE6Ywfpl/yZKUw6558zLS2HkHxp2YTcMGpZaDkKrOjYwP7bWKvOT7vhqDtnDx76jHrw2OdoYEXHDhT6T1p3qiP4bkPHTvpYUVFW4WUNWofOoQvoMtQVdA2t2ONxlGnnC6zf3s/ccX8T3rY4qob+Veafsg9Ph4yvdybOD4s/ToaSGz2uM8cNeGtyxOZ/lqm5/O+S/OvMvyk0sDZNjvLM/0EF+76SPm7kZZunA58PHLUNzPudF9U90+9KrMUQPkccTXKbcP5OxjzI8unH9/NEZp1O8PlpyhrGnbcb5p72k+YQQeSa08EjYn6SiJu9/rPeC/LEwt61Ddm/uonb69vwvqPYv2/g/fsb2b3+X5invR4Hu9cXy4QsQcvlfGMqyB/RZ96CgoIC0zH1+Usn8+h51hF9X5/2vV5FrSNtThP/k6GYUuuIQ6T+MWu1DtH6B4WXC1WiyNY6VMbA8op79Iujt33L+DvwrDimSRZcQjxXX+sn1FxEKCmMJY5dfL7n6mvrnHlFqSmMheULGuMUYg==
   </data>
  </layer>
- <layer name="tops2" width="64" height="32">
+ <layer id="10" name="tops2" width="64" height="32">
   <data encoding="base64" compression="zlib">
    eJztmdlOwzAQRS1RlvIf8FagEPgjeAOawm91oS38VcvSwDMnD6gmuOMJsYUAX+lIlaPOvZNN8sQYvbINY07hbOPrsfGmMXebNYr9Qs1axtzDQ+vz+iN9P8EzvHjOwXiH87QTPltZ9769IoZHQd+v8Gb1f7BlzCEcQReO4WTL/f9HMj3BM7wEzPdR97W9IrSHS5f0eQXX0IMc+nADt5VzcECmQziCLhzDSftrzT3O7X5Lv27XtfuXPJqoaz37A3ocwgjGcAcTmMLM6v+SDFdwDT3IoQ83cFvJd06PF44+XevVunb/kkcT5Vb/c3pclNefZ74HOfRhyVph9T/AfwgjGJfPJkxgCrMG2ap1T3dXhPKQ1NnGn35H1jtvwu8pZNurtTn+i/I68Tz2IIc+LFkrGmSr1rUVykP0p8+F432/ZK2w1jtcjyFZRlbGCb+nkO1+399V11YID9F/zXu+VGYdm5Nh4ci4ZK1o8I5eVzekRwh1hPsva3BvSnVDeSQlJSUlJf1Haecasfb1TTybzmS0c41Y+3oxm8ezzkzGJe1cQ7uvDymfZ52ZjEvauUadfX0o+TzrzGTWSTvXiLWvF7N5PLXZJWnnGrH29WI2j6c2uyTtXCPWvl7M5vHUZpeknWvE2teL2Tye2uyStHONWPt6ST5PbfakpJ9W3W8df011vnUkJcXQO1GR5Tw=
   </data>
  </layer>
- <objectgroup name="colliderWalls1" visible="0">
+ <objectgroup id="11" name="colliderWalls1" visible="0">
   <object id="203" x="64" y="144" width="96" height="32"/>
   <object id="205" x="176" y="144" width="48" height="32"/>
   <object id="206" x="64" y="96" width="160" height="48"/>
@@ -349,7 +350,7 @@
   <object id="375" x="48" y="464" width="384" height="48"/>
   <object id="378" x="560" y="288" width="16" height="16"/>
  </objectgroup>
- <objectgroup name="triggers1">
+ <objectgroup id="12" name="triggers1">
   <object id="32" name="startField" x="432" y="192" width="16" height="16">
    <properties>
     <property name="fieldID" value="1"/>
@@ -431,7 +432,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="descriptions1">
+ <objectgroup id="13" name="descriptions1">
   <object id="53" name="sign" type="objectDescription" x="112" y="176" width="16" height="16">
    <properties>
     <property name="text" value="sign_25_2_text"/>
@@ -607,5 +608,5 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="animatedObjects2"/>
+ <objectgroup id="14" name="animatedObjects2"/>
 </map>

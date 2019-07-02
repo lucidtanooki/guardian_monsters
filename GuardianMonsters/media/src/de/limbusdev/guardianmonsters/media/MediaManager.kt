@@ -73,6 +73,7 @@ class MediaManager : IMediaManager
                 "waterine",
                 "waterinw",
                 "waterise",
+                "waterisw",
                 "watern",
                 "waterne",
                 "waternw",

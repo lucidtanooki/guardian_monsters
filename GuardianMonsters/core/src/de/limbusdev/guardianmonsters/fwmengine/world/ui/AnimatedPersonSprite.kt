@@ -1,9 +1,6 @@
 package de.limbusdev.guardianmonsters.fwmengine.world.ui
 
-import com.badlogic.gdx.graphics.g2d.Animation
-import com.badlogic.gdx.graphics.g2d.Sprite
-import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion
-import com.badlogic.gdx.graphics.g2d.TextureRegion
+import com.badlogic.gdx.graphics.g2d.*
 import com.badlogic.gdx.utils.ArrayMap
 
 import de.limbusdev.guardianmonsters.enums.SkyDirection
@@ -61,5 +58,14 @@ class AnimatedPersonSprite : Sprite
     {
         val keyFrame = currentAnimation.getKeyFrame(elapsedTime)
         setRegion(keyFrame, 0, 0, keyFrame.regionWidth, keyFrame.regionHeight)
+    }
+
+    fun updateAndDrawIfVisible(elapsedTime: Float, batch: Batch)
+    {
+        if (visible)
+        {
+            update(elapsedTime)
+            draw(batch)
+        }
     }
 }

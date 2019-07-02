@@ -20,8 +20,12 @@ import com.badlogic.gdx.utils.Sort
 import de.limbusdev.guardianmonsters.media.IMediaManager
 import de.limbusdev.guardianmonsters.scene2d.SpriteZComparator
 import de.limbusdev.guardianmonsters.services.Services
+import de.limbusdev.utils.extensions.removeLast
+import de.limbusdev.utils.extensions.set
+import de.limbusdev.utils.log
 import de.limbusdev.utils.logDebug
 import de.limbusdev.utils.logError
+import ktx.ashley.mapperFor
 import ktx.style.defaultStyle
 
 /**
@@ -33,6 +37,11 @@ import ktx.style.defaultStyle
  *
  * Orthogonal Tiled Map Renderer for tiled maps with entities and other objects. For structure
  * description see Documents/TiledMapStructure.md
+ *
+ *
+ * ## Layer Names
+ *
+ * Layer names follow the pattern: `<layerType><ID>`, for example `people1`
  */
 class ExtendedTiledMapRenderer(map: TiledMap) : OrthogonalTiledMapRenderer(map, 1f)
 {
@@ -54,13 +63,10 @@ class ExtendedTiledMapRenderer(map: TiledMap) : OrthogonalTiledMapRenderer(map, 
 
         for (layer in map.layers)
         {
-            if (layer.name.contains("animatedObjects"))
+            when(layer.name.removeLast(0))
             {
-                setUpObjectAnimations(layer)
-            }
-            if (layer.name.contains("animatedTiles"))
-            {
-                setUpTileAnimations(layer)
+                "animatedObjects" -> setUpObjectAnimations(layer)
+                "animatedTiles"   -> setUpTileAnimations(layer)
             }
         }
     }
@@ -86,16 +92,11 @@ class ExtendedTiledMapRenderer(map: TiledMap) : OrthogonalTiledMapRenderer(map, 
                     // Handle object layer
                     layer.objects.forEach { renderObject(it) }
 
-                    if (layer.name.contains("people"))
+                    when(layer.name.removeLast(0))
                     {
-                        // Draw entity sprites if visible
-                        sprites.forEach { sprite ->
 
-                            if (sprite.visible) {
-                                sprite.update(elapsedTime)
-                                sprite.draw(batch)
-                            }
-                        }
+                        "people" -> renderPeople()
+                        else -> {}
                     }
                 }
             }
@@ -107,21 +108,26 @@ class ExtendedTiledMapRenderer(map: TiledMap) : OrthogonalTiledMapRenderer(map, 
         endRender()
     }
 
+    private fun renderPeople()
+    {
+        // Draw entity sprites if visible
+        sprites.forEach { it.updateAndDrawIfVisible(elapsedTime, batch) }
+    }
+
     override fun renderObject(mapObject: MapObject)
     {
-        val objName = mapObject.name
-        // Don't render objects with empty nameID
-        if (objName != null && objName == "animatedObject")
+        when(mapObject.name)
         {
-            renderAnimatedObject(mapObject)
+            "animatedObject" -> renderAnimatedObject(mapObject)
+            null             -> {} // Don't render objects with empty nameID
+            else             -> {}
         }
 
-        if(mapObject.properties.containsKey("type"))
+        when(mapObject.properties["type", "unknown"])
         {
-            val objType = mapObject.properties["type", "unknown"]
-            if (objType == "animatedTile") { renderAnimatedTile(mapObject) }
+            "animatedTile" -> renderAnimatedTile(mapObject)
+            else           -> {}
         }
-
     }
 
     // ........................................................................... Getters & Setters
@@ -131,25 +137,22 @@ class ExtendedTiledMapRenderer(map: TiledMap) : OrthogonalTiledMapRenderer(map, 
      * Handles layers containing "animatedTiles" in their nameID and loads the needed animations
      * @param mapLayer  animatedTiles at number layer
      */
-    fun setUpTileAnimations(mapLayer: MapLayer)
+    private fun setUpTileAnimations(mapLayer: MapLayer)
     {
         try
         {
             logDebug(TAG) { "Setting up tile animation for layer: ${mapLayer.name}" }
 
-            for (mo in mapLayer.objects)
+            for (mapObject in mapLayer.objects)
             {
-                val index = mo.properties["index", "0"]
-                val id = index.toInt()
-                if (!tileAnimations.containsKey(id))
+                val index: Int = mapObject.properties["index", 0]
+
+                // If this tile animation is not setup already
+                if (!tileAnimations.containsKey(index))
                 {
-                    val a = Services.Media().getTileAnimation(id)
-                    if (mo.properties.containsKey("frameDuration"))
-                    {
-                        val frmDur = mo.properties["frameDuration", "0.01"]
-                        a.frameDuration = frmDur.toFloat()
-                    }
-                    tileAnimations.put(id, a)
+                    val a = Services.Media().getTileAnimation(index)
+                    a.frameDuration = mapObject.properties["frameDuration", "1.0"].toFloat()
+                    tileAnimations[index] = a
                 }
             }
         }
@@ -164,7 +167,7 @@ class ExtendedTiledMapRenderer(map: TiledMap) : OrthogonalTiledMapRenderer(map, 
      * Handles layers containing "animatedObjects" in their nameID and loads the needed animations
      * @param mapLayer  animatedObjects at number layer
      */
-    fun setUpObjectAnimations(mapLayer: MapLayer)
+    private fun setUpObjectAnimations(mapLayer: MapLayer)
     {
         try
         {
@@ -173,15 +176,13 @@ class ExtendedTiledMapRenderer(map: TiledMap) : OrthogonalTiledMapRenderer(map, 
             mapLayer.objects.forEach { mapObject ->
 
                 val id = mapObject.properties["index", "0"]
+
+                // If this object animation is not setup already
                 if (!objectAnimations.containsKey(id))
                 {
                     val a = Services.Media().getObjectAnimation(id)
-                    if (mapObject.properties.containsKey("frameDuration"))
-                    {
-                        val frmDur = mapObject.properties["frameDuration", "0.01"]
-                        a.frameDuration = frmDur.toFloat()
-                    }
-                    objectAnimations.put(id, a)
+                    a.frameDuration = mapObject.properties["frameDuration", "1.0"].toFloat()
+                    objectAnimations[id] = a
                 }
             }
 
@@ -197,7 +198,7 @@ class ExtendedTiledMapRenderer(map: TiledMap) : OrthogonalTiledMapRenderer(map, 
     private fun renderAnimatedTile(o: MapObject)
     {
         val r = o as RectangleMapObject
-        val index = o.getProperties()["index", "0"].toInt()
+        val index: Int = o.getProperties()["index", 0]
         val a = tileAnimations.get(index)
 
         // Render multiple tiles
@@ -216,7 +217,7 @@ class ExtendedTiledMapRenderer(map: TiledMap) : OrthogonalTiledMapRenderer(map, 
             {
                 val x = r.rectangle.getX() + j * 16
                 val y = r.rectangle.getY() + i * 16
-                renderAnimation(a, x, y)
+                if(a != null)renderAnimation(a, x, y)
             }
         }
     }
@@ -245,7 +246,6 @@ class ExtendedTiledMapRenderer(map: TiledMap) : OrthogonalTiledMapRenderer(map, 
         {
             e.printStackTrace()
         }
-
     }
 
     /** Sorts sprites, so people in the background are drawn behind those in the front */

@@ -29,3 +29,6 @@ val Float.sin : Float get() = MathUtils.sinDeg(this)
 
 /** Returns this floats sine with it interpreted as radians. */
 val Float.sinr : Float get() = MathUtils.sin(this)
+
+/** Removes the character with the given index, looking from the string's end (0 is last character) */
+fun String.removeLast(indexFromEnd: Int): String = this.substring(0,this.length-(indexFromEnd+1))

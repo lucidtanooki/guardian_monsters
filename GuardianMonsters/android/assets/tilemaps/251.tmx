@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="16" height="16" tilewidth="16" tileheight="16" nextobjectid="80">
+<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-down" width="16" height="16" tilewidth="16" tileheight="16" infinite="0" nextlayerid="15" nextobjectid="80">
  <properties>
   <property name="musicIndex" value="2"/>
   <property name="musicType" value="town"/>
  </properties>
- <tileset firstgid="1" name="limbusdev_world" tilewidth="16" tileheight="16" tilecount="4096">
+ <tileset firstgid="1" name="limbusdev_world" tilewidth="16" tileheight="16" tilecount="4096" columns="64">
   <image source="../spritesheets/limbusdev_world.png" width="1024" height="1024"/>
  </tileset>
- <tileset firstgid="4097" name="limbusdev_world2" tilewidth="16" tileheight="16" tilecount="4096">
+ <tileset firstgid="4097" name="limbusdev_world2" tilewidth="16" tileheight="16" tilecount="4096" columns="64">
   <image source="../spritesheets/limbusdev_world2.png" width="1024" height="1024"/>
  </tileset>
- <layer name="ground1" width="16" height="16">
+ <layer id="1" name="ground1" width="16" height="16">
   <data encoding="base64" compression="zlib">
    eJxjYKAM3KIQ35FkYLgriZ2+IwHBd2FYEoHx6cOnnxh91NI/FGh8cUOM/jhguMRLYKeJ0T8PqG6+BCodKQDB5NpPin5s9sPogfI/Pe0HAGDOz+E=
   </data>
  </layer>
- <layer name="shadow1" width="16" height="16">
+ <layer id="2" name="shadow1" width="16" height="16">
   <data encoding="base64" compression="zlib">
    eJxjYBi84J4Egn0fyo4RxVQ3U5KBYRYSni2JXf9MNHkYuAnk30LCt6HyMUD6oQQExwLZklIMDFJALC1FnH5iAcxcKRzmDxWALW6GKrgvgVtuohAE4xPDp58YM0nVjw6I1Q8AJWYf/g==
   </data>
  </layer>
- <layer name="walls1" width="16" height="16">
+ <layer id="3" name="walls1" width="16" height="16">
   <data encoding="base64" compression="zlib">
    eJxjYKAMzGWkDN8lEafKofIJgf/8QEKAQk8OYzAXSxgSG7bIakFYSR5/3KxGE8NmNwjISDIwyEpiir/Gkh6wgRig3lgglhJFFZcWxa4eF4gCqo+D6kkA0tEk6h9sIF4MUwwAVO8p8g==
   </data>
  </layer>
- <layer name="objects1" width="16" height="16">
+ <layer id="4" name="objects1" width="16" height="16">
   <data encoding="base64" compression="zlib">
    eJxjYKAOqOJnYKgG4hp+CH+VJISuB/Ib+BHqYOItvKj6dwHV7AbiPVC1K6Hq9gP5B5D0r8Sh/xdQzW8g/sPPgBcslcPUv1gOvx5C4DGa/kdkmKcE1KMMxCoUumUgwQN5oB/kSdf3SB6Ck4A4GYgTgDgRjzl1/BCMCywA6l2IR/8+fggmF/zjh2AY+A5k7wDinfwQNqkApOcHEP8kUz8lAACQdCYi
   </data>
  </layer>
- <objectgroup name="animatedObjects1" visible="0">
+ <objectgroup id="5" name="animatedObjects1" visible="0">
   <object id="43" name="animatedObject" x="64" y="144" width="16" height="16">
    <properties>
     <property name="index" value="pan1"/>
@@ -55,51 +55,51 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="people1" visible="0">
+ <objectgroup id="6" name="people1" visible="0">
   <object id="19" name="dad" type="person" x="112" y="80" width="16" height="16">
    <properties>
-    <property name="male" value="true"/>
-    <property name="moving" value="true"/>
+    <property name="male" type="bool" value="true"/>
     <property name="name" value="person_251_1_name"/>
     <property name="path" value="E,E,E,E,E,W,W,W,W,W"/>
-    <property name="spriteIndex" value="6"/>
+    <property name="spriteIndex" type="int" value="6"/>
     <property name="startDir" value="S"/>
+    <property name="static" type="bool" value="false"/>
     <property name="text" value="person_251_1"/>
    </properties>
   </object>
   <object id="45" name="mum" type="person" x="192" y="48" width="16" height="16">
    <properties>
-    <property name="male" value="false"/>
-    <property name="moving" value="false"/>
-    <property name="name" value="person_251_2_name"/>
+    <property name="male" type="bool" value="false"/>
     <property name="path" value="SSTOP"/>
-    <property name="spriteIndex" value="1"/>
+    <property name="personName" value="person_251_2_name"/>
+    <property name="spriteIndex" type="int" value="1"/>
     <property name="startDir" value="S"/>
+    <property name="static" type="bool" value="true"/>
     <property name="text" value="person_251_2"/>
    </properties>
   </object>
  </objectgroup>
- <layer name="objects2" width="16" height="16">
+ <layer id="7" name="objects2" width="16" height="16">
   <data encoding="base64" compression="zlib">
    eJxjYBjeYI0cA8NauYF2xcgCCvIMDIry5OtPAOpNpED/AqDehRToH0kAAOuyBJM=
   </data>
  </layer>
- <layer name="lights1" width="16" height="16">
+ <layer id="8" name="lights1" width="16" height="16">
   <data encoding="base64" compression="zlib">
    eJxjYBieQEuSNHFKQBYZZmbSwB0jFQyX8NdEc5MakK8OxBqS+NXhAmlAdelAnIFHPQAkHAVV
   </data>
  </layer>
- <layer name="tops1" width="16" height="16">
+ <layer id="9" name="tops1" width="16" height="16">
   <data encoding="base64" compression="zlib">
    eJyTZWRgiCcTywGxPBCTA6KZGBgUKNAfg6Q/WY48M3DZn0SkeZS4n1r6nwNxJg6sRMBsmP1zcWA9NP2KaOYvw+F+BXmgWiDORdcvhmo+If/PFmVgmAfEMSB9QHqOKHb34wNyQD3yQKwgiimHrL+Cn4Ghkh+/Wfj0PycjDZIa/4ux+D8WiBNw4NkiEHWzRCD8KDFU+TggBgAZ6SPq
   </data>
  </layer>
- <layer name="objects3" width="16" height="16">
+ <layer id="10" name="objects3" width="16" height="16">
   <data encoding="base64" compression="zlib">
    eJxjYBgFowACFskzMCyWH2hXjAJ6AgD0tAGE
   </data>
  </layer>
- <objectgroup name="colliderWalls1" visible="0">
+ <objectgroup id="11" name="colliderWalls1" visible="0">
   <object id="1" x="0" y="0" width="224" height="48"/>
   <object id="2" x="224" y="0" width="32" height="16"/>
   <object id="3" x="240" y="16" width="16" height="240"/>
@@ -123,7 +123,7 @@
   <object id="67" x="176" y="240" width="16" height="16"/>
   <object id="79" x="16" y="48" width="16" height="48"/>
  </objectgroup>
- <objectgroup name="triggers1">
+ <objectgroup id="12" name="triggers1">
   <object id="15" name="warpField" x="128" y="240" width="16" height="16">
    <properties>
     <property name="targetID" value="25"/>
@@ -147,7 +147,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="descriptions1" visible="0">
+ <objectgroup id="13" name="descriptions1" visible="0">
   <object id="20" name="sign" type="objectDescription" x="128" y="48" width="16" height="16">
    <properties>
     <property name="text" value="sign_4_1_text"/>
@@ -209,7 +209,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="animatedObjects2" visible="0">
+ <objectgroup id="14" name="animatedObjects2" visible="0">
   <object id="71" name="animatedObject" x="32" y="48" width="48" height="48">
    <properties>
     <property name="frameDuration" value="0.2"/>

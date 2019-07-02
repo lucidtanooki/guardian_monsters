@@ -22,14 +22,16 @@ public class PositionSynchroSystem extends EntitySystem {
     /* ........................................................................... CONSTRUCTOR .. */
     public PositionSynchroSystem() {};
     /* ............................................................................... METHODS .. */
-    public void addedToEngine(Engine engine) {
+    public void addedToEngine(Engine engine)
+    {
         entities = engine.getEntitiesFor(Family.all(
                 PositionComponent.class,
                 CharacterSpriteComponent.class
         ).get());
     }
 
-    public void update(float deltaTime) {
+    public void update(float deltaTime)
+    {
         for (Entity entity : entities) {
             PositionComponent position = Components.position.get(entity);
 

@@ -31,6 +31,18 @@ import de.limbusdev.guardianmonsters.services.Services
 
 
 /**
+ * TODO Quest System
+ *
+ * Easy start:
+ *
+ * + people and objects can have a trigger ID
+ * + this trigger ID is then entered into the quest system
+ * + trigger dependent stuff can check the quest system if a trigger ID is already achieved
+ * + after interaction with a triggering object, the map can be reloaded to apply changes
+ */
+
+
+/**
  * EntityComponentSystem
  *
  * @author Georg Eckert 2015-11-21

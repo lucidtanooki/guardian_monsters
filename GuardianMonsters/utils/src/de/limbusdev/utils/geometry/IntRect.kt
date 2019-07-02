@@ -16,6 +16,9 @@ open class IntRect : IntVec2
     var height: Int = 0
     var ID: Int = 0
 
+    val widthf  get() = width.toFloat()
+    val heightf get() = height.toFloat()
+
     // .................................................... static
     companion object
     {

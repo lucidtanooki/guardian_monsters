@@ -68,7 +68,7 @@ public class SaveGameManager extends EntitySystem
 
         savableEntities = engine.getEntitiesFor(saveGameComps);
         gameState = Components.saveGame.get(savableEntities.first()).gameState;
-        gameState.map = this.gameArea.areaID;
+        gameState.map = this.gameArea.getAreaID();
         gameState.team = Components.team.get(savableEntities.first()).team.copy();
         System.out.println(savableEntities);
         System.out.println(savableEntities.first());

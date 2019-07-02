@@ -1,41 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="16" tileheight="16" nextobjectid="77">
+<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="77">
  <properties>
-  <property name="musicIndex" value="2"/>
+  <property name="musicIndex" type="int" value="2"/>
   <property name="musicType" value="town"/>
  </properties>
- <tileset firstgid="1" name="limbusdev_world" tilewidth="16" tileheight="16" tilecount="4096">
+ <tileset firstgid="1" name="limbusdev_world" tilewidth="16" tileheight="16" tilecount="4096" columns="64">
   <image source="../spritesheets/limbusdev_world.png" width="1024" height="1024"/>
  </tileset>
- <tileset firstgid="4097" name="limbusdev_world2" tilewidth="16" tileheight="16" tilecount="4096">
+ <tileset firstgid="4097" name="limbusdev_world2" tilewidth="16" tileheight="16" tilecount="4096" columns="64">
   <image source="../spritesheets/limbusdev_world2.png" width="1024" height="1024"/>
  </tileset>
- <layer name="ground1" width="32" height="32">
+ <layer id="1" name="ground1" width="32" height="32">
   <data encoding="base64" compression="zlib">
    eJzt1U0KgCAQhuFBaas3qqA6WXitCvJc1XeAIrOfyZrFuxLmARX1hshLn69TRD0aFI8/wZ0R6X/6OdwClUy+lFaVJWosn9/CduKLf3JO7D2+yo+d85Rf2/UypDfWjrQ3x3PHdL+ldyf/H78f8v7cdUZjwNvhDP8epe4vi3olXA==
   </data>
  </layer>
- <layer name="shadow1" width="32" height="32">
+ <layer id="2" name="shadow1" width="32" height="32">
   <data encoding="base64" compression="zlib">
    eJztxUkNADAQw8DQ2E8PYj34k2hQNB+PZFkCAAAA/hklzcp9uR18cz34427wAHIehu0sQQ==
   </data>
  </layer>
- <layer name="walls1" width="32" height="32">
+ <layer id="3" name="walls1" width="32" height="32">
   <data encoding="base64" compression="zlib">
    eJztl9lOwzAQRR2TNoj4AYkvSoC2bBK/lFASVolfSln6yidxLTTCsex6SQMP9EpHE0Wd3IzszjhNzlgLGiWuQCIY4yDBNc/9YwFKj9gdwAd84Hqd96P0LUAp/J9HsQK1R6T3ncIjE/0ofStQC//nUfQV1T+Dx1z0o/QdW1R/A69W9ONviOqXxOoVuW+R+VQ/19ZsqsSpdk/XHnJTjzU3vaep/oTjeQYysM/dPjaZ3tNUfwGPEhyDE3AKZmAOFtxeS4xM9VfwqMENWIJb0IAW3HF7LTGyrb9NK9sm8JSeH7r/eTbMX88Prd/H/yxl7BNcgXNwAS7BdfqTvzj6jqH1lx7+9/A5nDD2jPgAHsETeEk3199hbdYKifLbznAvRrq/qX6aeWOI/MnDtP6VY/b49AeXP3nQvC4d+0/tN67+sGkd9f1D89o1s7fVb3ba6T/rXZ71t3BuiNVEnvUN/2Pqv2P2XpvkDKD+6+q9Y0jOgCHn76FS6/8LUf00i7uA84gqPT8kmr6hffPVOkK+0dX4BdVHf64=
   </data>
  </layer>
- <layer name="objects1" width="32" height="32">
+ <layer id="4" name="objects1" width="32" height="32">
   <data encoding="base64" compression="zlib">
    eJxjYBh84CA3A8Mh7oGzn5GHgYGJhzy9x4QYGI4LQWgYm12QgeG+PASjg0NcmGKOQLudiLQfZDayXcewYJAaXIAJSzg3Au1uIsF+ZDdgsxuf/SAAU0sJgNmDC9PafnQ3kAKoZT+5YKTbPwqoB2YzYWJ6gvtyCAzj0xPIyyMwjD8KBjc4REJdT4raUTAKRsHIBrjaxdRo77DwMjCw8g6c/cSAgbZ/FOAHAPc1O98=
   </data>
  </layer>
- <layer name="tops1" width="32" height="32">
+ <layer id="5" name="tops1" width="32" height="32">
   <data encoding="base64" compression="zlib">
    eJzt1OlugkAUhuEZWcTlX6+Itd4Wq94WKshl9SVKBIs6uJEmPckTpnTgY5AzQpzLhnMa65oQhiY+Wk2+C49sH8EH80NEiJGQnSJjvL4yX5vznuavy8+xxQ57sguUjA+oeua7ZHsK+arPKaUQE2jQdX5/mIynsOTv+TH3TBTuq/qcNhkOXHjwEeAbKzlsLY88Z8h6I2xbaz0wXnNuow9byyOV19nY6edzJeMDqtO5Zi31n8bF9TYnHLjw4CPA6nLilZLMm0BrzTcZT2EZF/0JX3T7M2ROhBgJUmTYKObfq05/IhXd/szJ2WKHPQqUqF6U3+lPFKLbn9Lk/UGDDgMmLPM1+Z3+hCG7/WmT48CFBx8BVq186+vx/Hv9GZITIUaCFBk2iuvPF7zfxfX/h2REiJEgRVb3JzY9+9PQDLnk/S6759r7TS6Pe8MOexQo5XGPqBTz+zJuVXu/kROuhQYdBkxMYU3U7zmkVPfO/7pd/oxemY2Xn5KdjZhfkF2OmG/wDZsjfsc+2cGI+SnZWU++0+xtd/bed5RNdtTsbQP3xVdU+OTvsed5iw8/8zuq/h3q76A5Pnu96rGp8PQdNMdnr1c9Xqtnr/9L9QPP1W0K
   </data>
  </layer>
- <objectgroup name="colliderWalls1" visible="0">
+ <objectgroup id="6" name="colliderWalls1" visible="0">
   <object id="1" x="480" y="48" width="32" height="240"/>
   <object id="2" x="496" y="288" width="16" height="16"/>
   <object id="3" x="0" y="48" width="16" height="256"/>
@@ -78,7 +78,7 @@
   <object id="40" x="448" y="192" width="16" height="16"/>
   <object id="41" x="416" y="32" width="32" height="16"/>
  </objectgroup>
- <objectgroup name="livingEntities">
+ <objectgroup id="7" name="livingEntities">
   <object id="42" name="person" x="96" y="224" width="16" height="16">
    <properties>
     <property name="male" value="true"/>
@@ -99,7 +99,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="sensors" visible="0">
+ <objectgroup id="8" name="sensors" visible="0">
   <object id="44" name="warpField" x="240" y="496" width="16" height="16">
    <properties>
     <property name="targetID" value="2"/>
@@ -238,7 +238,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="objects">
+ <objectgroup id="9" name="objects">
   <object id="68" name="sign" x="240" y="432" width="16" height="16">
    <properties>
     <property name="text" value="sign_3_1_text"/>

@@ -22,6 +22,8 @@ public interface Constant
     float HEIGHTf = 240f;
     int COL = 8;
     int ROW = 8;
+    float COLf = 8f;
+    float ROWf = 8f;
     int ONE_STEPDURATION_MS = 5;
     int ONE_STEP_DURATION_PERSON = 20;
     int zoom = 1;

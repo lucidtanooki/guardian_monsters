@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-down" width="25" height="15" tilewidth="16" tileheight="16" infinite="0" nextlayerid="14" nextobjectid="93">
  <properties>
-  <property name="musicIndex" value="2"/>
+  <property name="musicIndex" type="int" value="2"/>
   <property name="musicType" value="town"/>
  </properties>
  <tileset firstgid="1" name="limbusdev_world2" tilewidth="16" tileheight="16" tilecount="4096" columns="64">
@@ -378,24 +378,24 @@
  <objectgroup id="12" name="triggers1" visible="0">
   <object id="30" name="warpField" x="192" y="224" width="16" height="16">
    <properties>
-    <property name="targetID" value="25"/>
-    <property name="targetWarpPointID" value="5"/>
+    <property name="targetID" type="int" value="25"/>
+    <property name="targetWarpPointID" type="int" value="5"/>
    </properties>
   </object>
   <object id="31" name="warpField" x="208" y="224" width="16" height="16">
    <properties>
-    <property name="targetID" value="25"/>
-    <property name="targetWarpPointID" value="5"/>
+    <property name="targetID" type="int" value="25"/>
+    <property name="targetWarpPointID" type="int" value="5"/>
    </properties>
   </object>
   <object id="32" name="startField" x="192" y="208" width="16" height="16">
    <properties>
-    <property name="fieldID" value="1"/>
+    <property name="fieldID" type="int" value="1"/>
    </properties>
   </object>
   <object id="33" name="startField" x="208" y="208" width="16" height="16">
    <properties>
-    <property name="fieldID" value="1"/>
+    <property name="fieldID" type="int" value="1"/>
    </properties>
   </object>
  </objectgroup>

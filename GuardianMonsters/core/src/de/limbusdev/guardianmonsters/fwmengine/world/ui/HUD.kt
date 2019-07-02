@@ -323,7 +323,7 @@ class HUD
 
                         Components.conversation.get(touchedEntity).text,
                         Components.conversation.get(touchedEntity).name,
-                        gameArea.getAreaID()
+                        gameArea.areaID
                 )
                 currentlyShownHUDWidget = HUDWidgets.CONVERSATION
             }
@@ -337,7 +337,7 @@ class HUD
 
                         Components.title.get(touchedEntity).text,
                         Components.conversation.get(touchedEntity).text,
-                        gameArea.getAreaID()
+                        gameArea.areaID
                 )
                 currentlyShownHUDWidget = HUDWidgets.SIGN
             }

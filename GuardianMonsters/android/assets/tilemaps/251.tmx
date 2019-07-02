@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-down" width="16" height="16" tilewidth="16" tileheight="16" infinite="0" nextlayerid="15" nextobjectid="80">
  <properties>
-  <property name="musicIndex" value="2"/>
+  <property name="musicIndex" type="int" value="2"/>
   <property name="musicType" value="town"/>
  </properties>
  <tileset firstgid="1" name="limbusdev_world" tilewidth="16" tileheight="16" tilecount="4096" columns="64">
@@ -30,7 +30,7 @@
    eJxjYKAOqOJnYKgG4hp+CH+VJISuB/Ib+BHqYOItvKj6dwHV7AbiPVC1K6Hq9gP5B5D0r8Sh/xdQzW8g/sPPgBcslcPUv1gOvx5C4DGa/kdkmKcE1KMMxCoUumUgwQN5oB/kSdf3SB6Ck4A4GYgTgDgRjzl1/BCMCywA6l2IR/8+fggmF/zjh2AY+A5k7wDinfwQNqkApOcHEP8kUz8lAACQdCYi
   </data>
  </layer>
- <objectgroup id="5" name="animatedObjects1" visible="0">
+ <objectgroup id="5" name="animatedObjects1">
   <object id="43" name="animatedObject" x="64" y="144" width="16" height="16">
    <properties>
     <property name="index" value="pan1"/>
@@ -59,8 +59,8 @@
   <object id="19" name="dad" type="person" x="112" y="80" width="16" height="16">
    <properties>
     <property name="male" type="bool" value="true"/>
-    <property name="name" value="person_251_1_name"/>
     <property name="path" value="E,E,E,E,E,W,W,W,W,W"/>
+    <property name="personName" value="person_251_1_name"/>
     <property name="spriteIndex" type="int" value="6"/>
     <property name="startDir" value="S"/>
     <property name="static" type="bool" value="false"/>
@@ -126,24 +126,24 @@
  <objectgroup id="12" name="triggers1">
   <object id="15" name="warpField" x="128" y="240" width="16" height="16">
    <properties>
-    <property name="targetID" value="25"/>
-    <property name="targetWarpPointID" value="1"/>
+    <property name="targetID" type="int" value="25"/>
+    <property name="targetWarpPointID" type="int" value="1"/>
    </properties>
   </object>
   <object id="16" name="startField" x="128" y="224" width="16" height="16">
    <properties>
-    <property name="fieldID" value="1"/>
+    <property name="fieldID" type="int" value="1"/>
    </properties>
   </object>
   <object id="17" name="warpField" x="224" y="16" width="16" height="16">
    <properties>
-    <property name="targetID" value="252"/>
-    <property name="targetWarpPointID" value="1"/>
+    <property name="targetID" type="int" value="252"/>
+    <property name="targetWarpPointID" type="int" value="1"/>
    </properties>
   </object>
   <object id="18" name="startField" x="224" y="32" width="16" height="16">
    <properties>
-    <property name="fieldID" value="2"/>
+    <property name="fieldID" type="int" value="2"/>
    </properties>
   </object>
  </objectgroup>
@@ -209,7 +209,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup id="14" name="animatedObjects2" visible="0">
+ <objectgroup id="14" name="animatedObjects2">
   <object id="71" name="animatedObject" x="32" y="48" width="48" height="48">
    <properties>
     <property name="frameDuration" value="0.2"/>

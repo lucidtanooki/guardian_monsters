@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="76">
  <properties>
-  <property name="musicIndex" value="2"/>
+  <property name="musicIndex" type="int" value="2"/>
   <property name="musicType" value="town"/>
   <property name="weather" value="clouds"/>
  </properties>
@@ -148,204 +148,204 @@
  <objectgroup id="8" name="triggers1">
   <object id="30" name="startField" x="256" y="16" width="16" height="16">
    <properties>
-    <property name="fieldID" value="1"/>
+    <property name="fieldID" type="int" value="1"/>
    </properties>
   </object>
   <object id="31" name="startField" x="272" y="16" width="16" height="16">
    <properties>
-    <property name="fieldID" value="2"/>
+    <property name="fieldID" type="int" value="2"/>
    </properties>
   </object>
   <object id="32" name="warpField" x="256" y="0" width="16" height="16">
    <properties>
-    <property name="targetID" value="25"/>
-    <property name="targetWarpPointID" value="3"/>
+    <property name="targetID" type="int" value="25"/>
+    <property name="targetWarpPointID" type="int" value="3"/>
    </properties>
   </object>
   <object id="33" name="warpField" x="272" y="0" width="16" height="16">
    <properties>
-    <property name="targetID" value="25"/>
-    <property name="targetWarpPointID" value="4"/>
+    <property name="targetID" type="int" value="25"/>
+    <property name="targetWarpPointID" type="int" value="4"/>
    </properties>
   </object>
   <object id="34" name="startField" x="256" y="480" width="16" height="16">
    <properties>
-    <property name="fieldID" value="3"/>
+    <property name="fieldID" type="int" value="3"/>
    </properties>
   </object>
   <object id="35" name="warpField" x="256" y="496" width="16" height="16">
    <properties>
-    <property name="targetID" value="1"/>
-    <property name="targetWarpPointID" value="1"/>
+    <property name="targetID" type="int" value="1"/>
+    <property name="targetWarpPointID" type="int" value="1"/>
    </properties>
   </object>
   <object id="36" name="startField" x="272" y="480" width="16" height="16">
    <properties>
-    <property name="fieldID" value="4"/>
+    <property name="fieldID" type="int" value="4"/>
    </properties>
   </object>
   <object id="37" name="warpField" x="272" y="496" width="16" height="16">
    <properties>
-    <property name="targetID" value="1"/>
-    <property name="targetWarpPointID" value="2"/>
+    <property name="targetID" type="int" value="1"/>
+    <property name="targetWarpPointID" type="int" value="2"/>
    </properties>
   </object>
   <object id="38" name="monsterArea" x="32" y="96" width="160" height="48">
    <properties>
     <property name="monsters" value="28;0.90;13;0.05;32;0.05"/>
-    <property name="probability" value="0.05"/>
-    <property name="probability2" value="0.02"/>
-    <property name="probability3" value="0.01"/>
+    <property name="probability" type="float" value="0.05"/>
+    <property name="probability2" type="float" value="0.02"/>
+    <property name="probability3" type="float" value="0.01"/>
    </properties>
   </object>
   <object id="39" name="monsterArea" x="32" y="144" width="32" height="16">
    <properties>
     <property name="monsters" value="28;0.90;13;0.05;32;0.05"/>
-    <property name="probability" value="0.05"/>
-    <property name="probability2" value="0.02"/>
-    <property name="probability3" value="0.01"/>
+    <property name="probability" type="float" value="0.05"/>
+    <property name="probability2" type="float" value="0.02"/>
+    <property name="probability3" type="float" value="0.01"/>
    </properties>
   </object>
   <object id="40" name="monsterArea" x="32" y="256" width="64" height="32">
    <properties>
     <property name="monsters" value="28;0.90;13;0.05;32;0.05"/>
-    <property name="probability" value="0.05"/>
-    <property name="probability2" value="0.2"/>
-    <property name="probability3" value="0.1"/>
+    <property name="probability" type="float" value="0.05"/>
+    <property name="probability2" type="float" value="0.02"/>
+    <property name="probability3" type="float" value="0.01"/>
    </properties>
   </object>
   <object id="41" name="monsterArea" x="176" y="208" width="48" height="80">
    <properties>
     <property name="monsters" value="28;0.90;13;0.05;32;0.05"/>
-    <property name="probability" value="0.05"/>
-    <property name="probability2" value="0.02"/>
-    <property name="probability3" value="0.01"/>
+    <property name="probability" type="float" value="0.05"/>
+    <property name="probability2" type="float" value="0.02"/>
+    <property name="probability3" type="float" value="0.01"/>
    </properties>
   </object>
   <object id="42" name="monsterArea" x="224" y="256" width="32" height="32">
    <properties>
     <property name="monsters" value="28;0.90;13;0.05;32;0.05"/>
-    <property name="probability" value="0.05"/>
-    <property name="probability2" value="0.02"/>
-    <property name="probability3" value="0.01"/>
+    <property name="probability" type="float" value="0.05"/>
+    <property name="probability2" type="float" value="0.02"/>
+    <property name="probability3" type="float" value="0.01"/>
    </properties>
   </object>
   <object id="43" name="monsterArea" x="288" y="96" width="128" height="96">
    <properties>
     <property name="monsters" value="28;0.90;13;0.05;32;0.05"/>
-    <property name="probability" value="0.05"/>
-    <property name="probability2" value="0.02"/>
-    <property name="probability3" value="0.01"/>
+    <property name="probability" type="float" value="0.05"/>
+    <property name="probability2" type="float" value="0.02"/>
+    <property name="probability3" type="float" value="0.01"/>
    </properties>
   </object>
   <object id="45" name="monsterArea" x="448" y="128" width="32" height="96">
    <properties>
     <property name="monsters" value="28;0.90;13;0.05;32;0.05"/>
-    <property name="probability" value="0.05"/>
-    <property name="probability2" value="0.02"/>
-    <property name="probability3" value="0.01"/>
+    <property name="probability" type="float" value="0.05"/>
+    <property name="probability2" type="float" value="0.02"/>
+    <property name="probability3" type="float" value="0.01"/>
    </properties>
   </object>
   <object id="46" name="monsterArea" x="336" y="336" width="144" height="96">
    <properties>
     <property name="monsters" value="28;0.90;13;0.05;32;0.05"/>
-    <property name="probability" value="0.05"/>
-    <property name="probability2" value="0.3"/>
-    <property name="probability3" value="0.1"/>
+    <property name="probability" type="float" value="0.05"/>
+    <property name="probability2" type="float" value="0.02"/>
+    <property name="probability3" type="float" value="0.01"/>
    </properties>
   </object>
   <object id="47" name="monsterArea" x="160" y="304" width="64" height="32">
    <properties>
     <property name="monsters" value="28;0.90;13;0.05;32;0.05"/>
-    <property name="probability" value="0.05"/>
-    <property name="probability2" value="0.02"/>
-    <property name="probability3" value="0.01"/>
+    <property name="probability" type="float" value="0.05"/>
+    <property name="probability2" type="float" value="0.02"/>
+    <property name="probability3" type="float" value="0.01"/>
    </properties>
   </object>
   <object id="48" name="monsterArea" x="160" y="368" width="16" height="32">
    <properties>
     <property name="monsters" value="28;0.90;13;0.05;32;0.05"/>
-    <property name="probability" value="0.05"/>
-    <property name="probability2" value="0.02"/>
-    <property name="probability3" value="0.01"/>
+    <property name="probability" type="float" value="0.05"/>
+    <property name="probability2" type="float" value="0.02"/>
+    <property name="probability3" type="float" value="0.01"/>
    </properties>
   </object>
   <object id="49" name="startField" x="480" y="256" width="16" height="16">
    <properties>
-    <property name="fieldID" value="5"/>
+    <property name="fieldID" type="int" value="5"/>
    </properties>
   </object>
   <object id="50" name="warpField" x="496" y="256" width="16" height="16">
    <properties>
-    <property name="targetID" value="11"/>
-    <property name="targetWarpPointID" value="1"/>
+    <property name="targetID" type="int" value="11"/>
+    <property name="targetWarpPointID" type="int" value="1"/>
    </properties>
   </object>
   <object id="51" name="startField" x="480" y="272" width="16" height="16">
    <properties>
-    <property name="fieldID" value="5"/>
+    <property name="fieldID" type="int" value="5"/>
    </properties>
   </object>
   <object id="52" name="warpField" x="496" y="272" width="16" height="16">
    <properties>
-    <property name="targetID" value="11"/>
-    <property name="targetWarpPointID" value="1"/>
+    <property name="targetID" type="int" value="11"/>
+    <property name="targetWarpPointID" type="int" value="1"/>
    </properties>
   </object>
   <object id="53" name="monsterArea" x="176" y="336" width="48" height="80">
    <properties>
     <property name="monsters" value="28;0.90;13;0.05;32;0.05"/>
-    <property name="probability" value="0.05"/>
-    <property name="probability2" value="0.02"/>
-    <property name="probability3" value="0.01"/>
+    <property name="probability" type="float" value="0.05"/>
+    <property name="probability2" type="float" value="0.02"/>
+    <property name="probability3" type="float" value="0.01"/>
    </properties>
   </object>
   <object id="54" name="monsterArea" x="160" y="416" width="64" height="48">
    <properties>
     <property name="monsters" value="28;0.90;13;0.05;32;0.05"/>
-    <property name="probability" value="0.05"/>
-    <property name="probability2" value="0.02"/>
-    <property name="probability3" value="0.01"/>
+    <property name="probability" type="float" value="0.05"/>
+    <property name="probability2" type="float" value="0.02"/>
+    <property name="probability3" type="float" value="0.01"/>
    </properties>
   </object>
   <object id="55" name="monsterArea" x="144" y="448" width="16" height="16">
    <properties>
     <property name="monsters" value="28;0.90;13;0.05;32;0.05"/>
-    <property name="probability" value="0.05"/>
-    <property name="probability2" value="0.02"/>
-    <property name="probability3" value="0.01"/>
+    <property name="probability" type="float" value="0.05"/>
+    <property name="probability2" type="float" value="0.02"/>
+    <property name="probability3" type="float" value="0.01"/>
    </properties>
   </object>
   <object id="56" name="monsterArea" x="64" y="336" width="96" height="16">
    <properties>
     <property name="monsters" value="28;0.90;13;0.05;32;0.05"/>
-    <property name="probability" value="0.05"/>
-    <property name="probability2" value="0.02"/>
-    <property name="probability3" value="0.01"/>
+    <property name="probability" type="float" value="0.05"/>
+    <property name="probability2" type="float" value="0.02"/>
+    <property name="probability3" type="float" value="0.01"/>
    </properties>
   </object>
   <object id="57" name="monsterArea" x="32" y="352" width="48" height="32">
    <properties>
     <property name="monsters" value="28;0.90;13;0.05;32;0.05"/>
-    <property name="probability" value="0.05"/>
-    <property name="probability2" value="0.02"/>
-    <property name="probability3" value="0.01"/>
+    <property name="probability" type="float" value="0.05"/>
+    <property name="probability2" type="float" value="0.02"/>
+    <property name="probability3" type="float" value="0.01"/>
    </properties>
   </object>
   <object id="58" name="monsterArea" x="32" y="400" width="16" height="64">
    <properties>
     <property name="monsters" value="28;0.90;13;0.05;32;0.05"/>
-    <property name="probability" value="0.05"/>
-    <property name="probability2" value="0.02"/>
-    <property name="probability3" value="0.01"/>
+    <property name="probability" type="float" value="0.05"/>
+    <property name="probability2" type="float" value="0.02"/>
+    <property name="probability3" type="float" value="0.01"/>
    </properties>
   </object>
   <object id="59" name="monsterArea" x="48" y="448" width="16" height="16">
    <properties>
     <property name="monsters" value="28;0.90;13;0.05;32;0.05"/>
-    <property name="probability" value="0.05"/>
-    <property name="probability2" value="0.02"/>
-    <property name="probability3" value="0.01"/>
+    <property name="probability" type="float" value="0.05"/>
+    <property name="probability2" type="float" value="0.02"/>
+    <property name="probability3" type="float" value="0.01"/>
    </properties>
   </object>
   <object id="60" name="healing" x="112" y="384" width="16" height="16"/>

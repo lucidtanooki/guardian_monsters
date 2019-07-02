@@ -31,4 +31,14 @@ val Float.sin : Float get() = MathUtils.sinDeg(this)
 val Float.sinr : Float get() = MathUtils.sin(this)
 
 /** Removes the character with the given index, looking from the string's end (0 is last character) */
-fun String.removeLast(indexFromEnd: Int): String = this.substring(0,this.length-(indexFromEnd+1))
+fun String.removeLast(indexFromEnd: Int): String
+{
+    if(indexFromEnd >= this.length || indexFromEnd < 0) { return "" }
+    return this.substring(0,this.length-(indexFromEnd+1))
+}
+
+fun String.subStringFromEnd(indexFromEnd: Int): String
+{
+    if(indexFromEnd >= this.length || indexFromEnd < 0) { return "" }
+    return this.substring((this.length-1)-indexFromEnd)
+}

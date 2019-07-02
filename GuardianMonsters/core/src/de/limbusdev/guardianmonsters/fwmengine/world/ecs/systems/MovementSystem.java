@@ -140,12 +140,12 @@ public class MovementSystem extends EntitySystem {
 
             // Check whether movement is possible or blocked by a collider
             IntVec2 nextPos = new IntVec2(0,0);
-            for(IntRect r : ecs.gameArea.getColliders().get(position.layer)) {
+            for(IntRect r : ecs.getGameArea().getColliders().get(position.layer)) {
                 nextPos.setX(position.nextX + Constant.TILE_SIZE / 2);
                 nextPos.setY(position.nextY + Constant.TILE_SIZE / 2);
                 if (r.contains(nextPos)) return;
             }
-            for(IntRect r : ecs.gameArea.getMovingColliders().get(position.layer)) {
+            for(IntRect r : ecs.getGameArea().getMovingColliders().get(position.layer)) {
                 nextPos.setX(position.nextX + Constant.TILE_SIZE / 2);
                 nextPos.setY(position.nextY + Constant.TILE_SIZE / 2);
                 if (!collider.equals(r) && r.contains(nextPos)) return;
@@ -209,7 +209,7 @@ public class MovementSystem extends EntitySystem {
                 }
 
                 // Check whether hero can get attacked by monsters
-                for(MonsterArea ma : ecs.gameArea.getMonsterAreas().get(position.layer)) {
+                for(MonsterArea ma : ecs.getGameArea().getMonsterAreas().get(position.layer)) {
                     if (ma.contains(new IntVec2(
                             position.getX() + Constant.TILE_SIZE / 2,
                             position.getY() + Constant.TILE_SIZE / 2))
@@ -227,8 +227,8 @@ public class MovementSystem extends EntitySystem {
                         Team oppTeam = BattleFactory.INSTANCE.createOpponentTeam(
                             guardianProbabilities,ma.teamSizeProbabilities,1,1
                         );
-                        ecs.hud.getBattleScreen().initialize(Components.team.get(ecs.hero).team, oppTeam, Components.guardoSphere.get(ecs.hero).guardoSphere);
-                        Services.ScreenManager().pushScreen(ecs.hud.getBattleScreen());
+                        ecs.getHud().getBattleScreen().initialize(Components.team.get(ecs.getHero()).team, oppTeam, Components.guardoSphere.get(ecs.getHero()).guardoSphere);
+                        Services.ScreenManager().pushScreen(ecs.getHud().getBattleScreen());
                         //............................................................. START BATTLE
 
                         // Stop when in a battle

@@ -1,6 +1,7 @@
 package de.limbusdev.guardianmonsters.utils
 
 import com.badlogic.ashley.core.Component
+import com.badlogic.ashley.core.Entity
 import com.badlogic.ashley.core.Family
 import kotlin.reflect.KClass
 
@@ -23,4 +24,9 @@ fun FamilyExclude(vararg kComponentTypes: KClass<out Component>): Family.Builder
 {
     val componentTypes = Array(kComponentTypes.size) { kComponentTypes[it].java }
     return Family.exclude(*componentTypes)
+}
+
+inline fun <reified T : Component> Entity.getComponent() : T?
+{
+    return this.getComponent(T::class.java)
 }

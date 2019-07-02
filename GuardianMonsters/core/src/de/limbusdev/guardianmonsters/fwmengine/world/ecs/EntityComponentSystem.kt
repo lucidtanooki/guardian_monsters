@@ -39,11 +39,12 @@ import de.limbusdev.guardianmonsters.services.Services
 /**
  * Base Game Engine Component. The Entity-Component-System (ECS) updates every [Entity]
  * every single Update Cycle according to the present changes in the game world.
- * @param viewport      screen size
- * @param gameArea      active game level/map
- * @param fromSave      whether to initialize a new game or restore game state from save game
- * @param gameScreen    screen
- * @param sgm           the SaveGameManager
+ *
+ * @param viewport          screen size
+ * @param gameArea          active game level/map
+ * @param fromSave          whether to initialize a new game or restore game state from save game
+ * @param gameScreen        screen
+ * @param saveGameManager   the SaveGameManager
  */
 class EntityComponentSystem
 (
@@ -90,11 +91,11 @@ class EntityComponentSystem
     /** Bring people on active map to life */
     private fun setUpPeople()
     {
-        for (key in gameArea.mapPeople.keys())
+        for (layer in gameArea.mapPeople.keys())
         {
-            for (mpi in gameArea.mapPeople.get(key))
+            for (personInformation in gameArea.mapPeople.get(layer))
             {
-                entityFactory.createPerson(mpi, key)
+                entityFactory.createPerson(personInformation, layer)
             }
         }
     }
@@ -102,11 +103,11 @@ class EntityComponentSystem
     /** Set up objects with description on the map */
     private fun setUpSigns()
     {
-        for (key in gameArea.descriptions.keys())
+        for (layer in gameArea.descriptions.keys())
         {
-            for (mdi in gameArea.descriptions.get(key))
+            for (signInformation in gameArea.descriptions.get(layer))
             {
-                entityFactory.createSign(mdi, key)
+                entityFactory.createSign(signInformation, layer)
             }
         }
     }

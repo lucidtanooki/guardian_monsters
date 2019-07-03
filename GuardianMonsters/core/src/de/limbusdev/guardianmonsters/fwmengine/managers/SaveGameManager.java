@@ -74,8 +74,8 @@ public class SaveGameManager extends EntitySystem
         System.out.println(savableEntities.first());
         System.out.println(Components.guardoSphere.get(savableEntities.first()));
         gameState.guardoSphere = Components.guardoSphere.get(savableEntities.first()).getGuardoSphere().copy();
-        gameState.gridx = Components.position.get(savableEntities.first()).onGrid.getX();
-        gameState.gridy = Components.position.get(savableEntities.first()).onGrid.getY();
+        gameState.gridx = Components.position.get(savableEntities.first()).getOnGrid().getX();
+        gameState.gridy = Components.position.get(savableEntities.first()).getOnGrid().getY();
     }
 
     public static GameState getCurrentGameState()
@@ -96,8 +96,8 @@ public class SaveGameManager extends EntitySystem
         {
             PositionComponent position = Components.getPositionComponent(entity);
             SaveGameComponent saveGame = Components.saveGame.get(entity);
-            saveGame.gameState.gridx = position.onGrid.getX();
-            saveGame.gameState.gridy = position.onGrid.getY();
+            saveGame.gameState.gridx = position.getOnGrid().getX();
+            saveGame.gameState.gridy = position.getOnGrid().getY();
         }
     }
 

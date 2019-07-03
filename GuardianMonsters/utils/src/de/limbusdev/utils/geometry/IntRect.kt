@@ -61,6 +61,8 @@ open class IntRect : IntVec2
         return (point.x > x && point.x < x + width && point.y > y && point.y < y + height)
     }
 
+    fun contains(x: Int, y: Int) : Boolean = contains(IntVec2(x,y))
+
     fun equals(r: IntRect): Boolean
     {
         return (r.ID == this.ID)

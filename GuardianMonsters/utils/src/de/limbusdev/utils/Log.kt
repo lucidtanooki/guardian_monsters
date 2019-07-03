@@ -5,6 +5,8 @@ enum class LogLevel { OFF, ERROR, WARNING, INFO, VERBOSE, DEBUG }
 object Log
 {
     var logLevel = LogLevel.DEBUG
+
+    fun logDebug(TAG: String, message: String) = de.limbusdev.utils.logDebug(TAG) { message }
 }
 
 inline fun log(message: () -> String)

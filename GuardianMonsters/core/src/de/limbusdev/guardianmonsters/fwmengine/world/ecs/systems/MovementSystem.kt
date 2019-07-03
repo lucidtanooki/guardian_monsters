@@ -14,15 +14,11 @@ import de.limbusdev.guardianmonsters.Constant
 import de.limbusdev.guardianmonsters.enums.SkyDirection
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.EntityComponentSystem
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.*
-import de.limbusdev.guardianmonsters.fwmengine.world.model.MonsterArea
 import de.limbusdev.guardianmonsters.fwmengine.world.model.WarpPoint
 import de.limbusdev.guardianmonsters.guardians.battle.BattleFactory
-import de.limbusdev.guardianmonsters.guardians.monsters.AGuardian
-import de.limbusdev.guardianmonsters.guardians.monsters.Team
 import de.limbusdev.guardianmonsters.services.Services
 import de.limbusdev.guardianmonsters.utils.createRectangle
 import de.limbusdev.guardianmonsters.utils.getComponent
-import de.limbusdev.utils.geometry.IntRect
 import de.limbusdev.utils.geometry.IntVec2
 import de.limbusdev.utils.logDebug
 

@@ -29,7 +29,7 @@ open class IntRect : IntVec2
     constructor(x: Int, y: Int, width: Int, height: Int) : super(x, y)
     {
         this.ID = IDcount
-        IntRect.IDcount++
+        IDcount++
         this.width = width
         this.height = height
     }

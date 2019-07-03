@@ -159,7 +159,7 @@ class MovementSystem
                 nextPos.x = position.nextX + Constant.TILE_SIZE/2
                 nextPos.y = position.nextY + Constant.TILE_SIZE/2
 
-                if (collider != r && r.contains(nextPos)) { return }
+                if (collider.collider != r && r.contains(nextPos)) { return }
             }
 
             // Update Collider Position

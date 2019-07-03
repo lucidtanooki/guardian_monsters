@@ -23,9 +23,7 @@ import de.limbusdev.guardianmonsters.battle.BattleScreen
 import de.limbusdev.guardianmonsters.enums.Compass4
 import de.limbusdev.guardianmonsters.enums.SkyDirection
 import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager
-import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Components
-import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.InputComponent
-import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PositionComponent
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.*
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.entities.EntityFamilies
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.entities.HeroEntity
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.GameArea
@@ -33,6 +31,7 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ui.widgets.ConversationWidg
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.widgets.DPad
 import de.limbusdev.guardianmonsters.inventory.InventoryScreen
 import de.limbusdev.guardianmonsters.services.Services
+import de.limbusdev.guardianmonsters.utils.getComponent
 import de.limbusdev.utils.extensions.f
 import de.limbusdev.utils.geometry.IntVec2
 import de.limbusdev.utils.logDebug
@@ -182,14 +181,14 @@ class HUD
      */
     override fun touchDown(screenX: Int, screenY: Int, pointer: Int, button: Int): Boolean
     {
-        Components.input.get(hero).firstTip = TimeUtils.millis()
+        hero.getComponent<InputComponent>()!!.firstTip = TimeUtils.millis()
         return touchDragged(screenX, screenY, pointer)
     }
 
     override fun touchDragged(screenX: Int, screenY: Int, pointer: Int): Boolean
     {
         val touchPos = stage.viewport.unproject(Vector2(screenX.f(), screenY.f()))
-        val input = Components.input.get(hero)
+        val input = hero.getComponent<InputComponent>()!!
 
         val (dPadValid, dPadDirection) = dPad.touchDown(touchPos)
 
@@ -233,7 +232,7 @@ class HUD
         val conversationTitle = if (name.isNotEmpty()) { Services.I18N().i18nMap(mapID).get(name) } else { "" }
         conversationWidget.setContent(conversationText, conversationTitle)
 
-        this.conversationWidget.isVisible = true
+        conversationWidget.isVisible = true
         conversationWidget.addAction(moveTo(0f, 0f, .5f, Interpolation.exp10Out))
         currentlyShownHUDWidget = HUDWidgets.CONVERSATION
     }
@@ -242,7 +241,7 @@ class HUD
     {
         mainMenuButton.isVisible = true
         conversationWidget.addAction(moveTo(0f, -50f, .5f, Interpolation.exp10In) then hideActor())
-        Components.getInputComponent(hero).talking = false
+        hero.getComponent<InputComponent>()!!.talking = false
         currentlyShownHUDWidget = HUDWidgets.NONE
     }
 
@@ -260,8 +259,8 @@ class HUD
 
     fun checkForNearInteractiveObjects(hero: Entity): Entity?
     {
-        val pos = Components.position.get(hero)
-        val dir = Components.input.get(hero).skyDir
+        val pos = hero.getComponent<PositionComponent>()!!
+        val dir = hero.getComponent<InputComponent>()!!.skyDir
 
         var nearEntity: Entity? = null
         val checkGridCell = IntVec2(pos.onGrid.x, pos.onGrid.y)
@@ -281,14 +280,13 @@ class HUD
         for (e in engine.getEntitiesFor(Family.all(PositionComponent::class.java).get()))
         {
             // Only if interactive object is found and it's not the hero
-            if (Components.position.get(e) != null && e !is HeroEntity)
+            val posComp = e.getComponent<PositionComponent>()
+            if (posComp != null && e !is HeroEntity)
             {
-                val p = Components.position.get(e)
-
-                logDebug(TAG) { "Grid Cell of tested Entity: ${p.onGrid}" }
+                logDebug(TAG) { "Grid Cell of tested Entity: ${posComp.onGrid}" }
 
                 // Is there an entity?
-                if (p.onGrid.x == checkGridCell.x && p.onGrid.y == checkGridCell.y){ nearEntity = e }
+                if (posComp.onGrid == checkGridCell) { nearEntity = e }
             }
         }
 
@@ -309,8 +307,9 @@ class HUD
             {
                 logDebug(TAG) { "Touched speaker" }
                 touchedSpeaker = true
-                Components.path.get(touchedEntity).talking = true
-                Components.path.get(touchedEntity).talkDir = when(Components.input.get(hero).skyDir)
+                val pathComp = touchedEntity.getComponent<PathComponent>()!!
+                pathComp.talking = true
+                pathComp.talkDir = when(Components.input.get(hero).skyDir)
                 {
                     SkyDirection.N -> SkyDirection.SSTOP
                     SkyDirection.S -> SkyDirection.NSTOP
@@ -319,12 +318,9 @@ class HUD
                     else           -> SkyDirection.SSTOP
                 }
 
-                openConversation(
+                val conversationComp = touchedEntity.getComponent<ConversationComponent>()!!
+                openConversation(conversationComp.text, conversationComp.name, gameArea.areaID)
 
-                        Components.conversation.get(touchedEntity).text,
-                        Components.conversation.get(touchedEntity).name,
-                        gameArea.areaID
-                )
                 currentlyShownHUDWidget = HUDWidgets.CONVERSATION
             }
 
@@ -335,14 +331,14 @@ class HUD
                 touchedSign = true
                 openSign(
 
-                        Components.title.get(touchedEntity).text,
-                        Components.conversation.get(touchedEntity).text,
+                        touchedEntity.getComponent<TitleComponent>()!!.text,
+                        touchedEntity.getComponent<ConversationComponent>()!!.text,
                         gameArea.areaID
                 )
                 currentlyShownHUDWidget = HUDWidgets.SIGN
             }
         }
-        if (touchedSpeaker || touchedSign) { Components.getInputComponent(hero).talking = true }
+        if (touchedSpeaker || touchedSign) { hero.getComponent<InputComponent>()!!.talking = true }
     }
 
     // ............................................................................. SET UP CONTROLS
@@ -354,8 +350,8 @@ class HUD
 
     private fun onShowInventoryButton()
     {
-        val inventory = Components.inventory.get(hero).inventory
-        val team = Components.team.get(hero).team
+        val inventory = hero.getComponent<InventoryComponent>()!!.inventory
+        val team      = hero.getComponent<TeamComponent>()!!.team
         Services.ScreenManager().pushScreen(InventoryScreen(team, inventory))
     }
 

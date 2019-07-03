@@ -8,9 +8,10 @@ import de.limbusdev.utils.geometry.IntRect
 
 
 /**
+ * WarpPoint
  * Rectangle containing information about place change
  *
- * Created by Georg Eckert on 23.11.15.
+ * @author Georg Eckert 2015-11-23
  */
 class WarpPoint
 (

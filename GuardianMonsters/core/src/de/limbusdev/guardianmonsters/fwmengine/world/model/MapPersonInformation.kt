@@ -8,7 +8,9 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ui.get
 import de.limbusdev.utils.geometry.IntVec2
 
 /**
- * Created by georg on 01.12.15.
+ * MapPersonInformation
+ *
+ * @author Georg Eckert 2015-12-01
  */
 class MapPersonInformation
 {

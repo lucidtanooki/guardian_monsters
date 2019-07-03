@@ -12,6 +12,7 @@ import de.limbusdev.guardianmonsters.Constant
 import de.limbusdev.guardianmonsters.battle.BattleScreen
 import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Components
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.InventoryComponent
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PositionComponent
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.entities.HeroEntity
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.CameraSystem
@@ -28,6 +29,7 @@ import de.limbusdev.guardianmonsters.fwmengine.world.model.MapPersonInformation
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.HUD
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.WorldScreen
 import de.limbusdev.guardianmonsters.services.Services
+import de.limbusdev.guardianmonsters.utils.getComponent
 
 
 /**
@@ -80,7 +82,7 @@ class EntityComponentSystem
     init
     {
         hero = setupHero(fromSave)
-        val inventory = Components.inventory.get(hero).inventory
+        val inventory = hero.getComponent<InventoryComponent>()!!.inventory
         hud = HUD(BattleScreen(inventory), saveGameManager, hero, engine, gameArea)
         setUpPeople()
         setUpSigns()

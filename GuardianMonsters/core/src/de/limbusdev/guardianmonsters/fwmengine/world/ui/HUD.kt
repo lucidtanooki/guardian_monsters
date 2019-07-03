@@ -66,7 +66,7 @@ class HUD
     private lateinit var mainMenuButton : Button
     private lateinit var menuButtons    : VerticalGroup
 
-    private var currentlyShownHUDWidget : HUDWidgets?
+    private var currentlyShownHUDWidget = HUDWidgets.NONE
 
     private val dPad = DPad()
 
@@ -74,8 +74,6 @@ class HUD
     // --------------------------------------------------------------------------------------------- CONSTRUCTORS
     init
     {
-        currentlyShownHUDWidget = HUDWidgets.NONE
-
         // Scene2D
         val fit = FitViewport(Constant.WIDTHf, Constant.HEIGHTf)
         stage = Stage(fit)
@@ -295,49 +293,47 @@ class HUD
 
     fun touchEntity()
     {
-        val touchedEntity = checkForNearInteractiveObjects(hero)
+        val touchedEntity = checkForNearInteractiveObjects(hero) ?: return
+
         var touchedSpeaker = false
         var touchedSign = false
 
         // If there is an entity near enough
-        if (touchedEntity != null)
+        // Living Entity
+        if (EntityFamilies.living.matches(touchedEntity))
         {
-            // Living Entity
-            if (EntityFamilies.living.matches(touchedEntity))
+            logDebug(TAG) { "Touched speaker" }
+            touchedSpeaker = true
+            val pathComp = touchedEntity.getComponent<PathComponent>()!!
+            pathComp.talking = true
+            pathComp.talkDir = when(Components.input.get(hero).skyDir)
             {
-                logDebug(TAG) { "Touched speaker" }
-                touchedSpeaker = true
-                val pathComp = touchedEntity.getComponent<PathComponent>()!!
-                pathComp.talking = true
-                pathComp.talkDir = when(Components.input.get(hero).skyDir)
-                {
-                    SkyDirection.N -> SkyDirection.SSTOP
-                    SkyDirection.S -> SkyDirection.NSTOP
-                    SkyDirection.W -> SkyDirection.ESTOP
-                    SkyDirection.E -> SkyDirection.WSTOP
-                    else           -> SkyDirection.SSTOP
-                }
-
-                val conversationComp = touchedEntity.getComponent<ConversationComponent>()!!
-                openConversation(conversationComp.text, conversationComp.name, gameArea.areaID)
-
-                currentlyShownHUDWidget = HUDWidgets.CONVERSATION
+                SkyDirection.N -> SkyDirection.SSTOP
+                SkyDirection.S -> SkyDirection.NSTOP
+                SkyDirection.W -> SkyDirection.ESTOP
+                SkyDirection.E -> SkyDirection.WSTOP
+                else           -> SkyDirection.SSTOP
             }
 
-            // Sign Entity
-            if (EntityFamilies.signs.matches(touchedEntity))
-            {
-                logDebug(TAG) { "Touched sign" }
-                touchedSign = true
-                openSign(
+            val conversationComp = touchedEntity.getComponent<ConversationComponent>()!!
+            openConversation(conversationComp.text, conversationComp.name, gameArea.areaID)
 
-                        touchedEntity.getComponent<TitleComponent>()!!.text,
-                        touchedEntity.getComponent<ConversationComponent>()!!.text,
-                        gameArea.areaID
-                )
-                currentlyShownHUDWidget = HUDWidgets.SIGN
-            }
+            currentlyShownHUDWidget = HUDWidgets.CONVERSATION
         }
+
+        // Sign Entity
+        if (EntityFamilies.signs.matches(touchedEntity))
+        {
+            logDebug(TAG) { "Touched sign" }
+            touchedSign = true
+            openSign(
+                    touchedEntity.getComponent<TitleComponent>()!!.text,
+                    touchedEntity.getComponent<ConversationComponent>()!!.text,
+                    gameArea.areaID
+            )
+            currentlyShownHUDWidget = HUDWidgets.SIGN
+        }
+
         if (touchedSpeaker || touchedSign) { hero.getComponent<InputComponent>()!!.talking = true }
     }
 
@@ -358,7 +354,11 @@ class HUD
     private fun onMainMenuButton()
     {
         // Menu Button not working in conversation
-        if(conversationWidget.isVisible) { return }
+        when(currentlyShownHUDWidget)
+        {
+            HUDWidgets.CONVERSATION, HUDWidgets.SIGN -> return
+            else -> {}
+        }
 
         when(menuButtons.isVisible)
         {

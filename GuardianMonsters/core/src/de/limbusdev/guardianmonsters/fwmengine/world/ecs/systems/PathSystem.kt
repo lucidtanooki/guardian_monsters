@@ -15,6 +15,7 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PositionComp
 import de.limbusdev.guardianmonsters.utils.getComponent
 import de.limbusdev.utils.geometry.IntVec2
 import de.limbusdev.guardianmonsters.enums.SkyDirection
+import de.limbusdev.utils.geometry.IntRect
 
 
 /**
@@ -88,13 +89,16 @@ class PathSystem(private val gameArea: GameArea) : EntitySystem()
 
             // Check whether movement is possible or blocked by a collider
             val nextPos = IntVec2(0, 0)
-            for (r in gameArea.dynamicColliders.get(position.layer))
+            for (r : IntRect in gameArea.dynamicColliders.get(position.layer))
             {
-                nextPos.addOffset(Constant.TILE_SIZE/2)
+                nextPos.x = position.nextX + Constant.TILE_SIZE/2
+                nextPos.y = position.nextY + Constant.TILE_SIZE/2
+
                 if (!collider.collider.equals(r) && r.contains(nextPos)) { return }
             }
 
-            collider.collider += position
+            collider.collider.x = position.nextX
+            collider.collider.y = position.nextY
             position.lastPixelStep = TimeUtils.millis()
             path.moving = true
             path.startMoving = false

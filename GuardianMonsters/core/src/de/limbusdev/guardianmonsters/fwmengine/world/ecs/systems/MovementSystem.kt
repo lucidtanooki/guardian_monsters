@@ -148,16 +148,16 @@ class MovementSystem
 
             for (r in ecs.gameArea.colliders.get(position.layer))
             {
-                nextPos.x = position.nextX + Constant.TILE_SIZE / 2
-                nextPos.y = position.nextY + Constant.TILE_SIZE / 2
+                nextPos.x = position.nextX + Constant.TILE_SIZE/2
+                nextPos.y = position.nextY + Constant.TILE_SIZE/2
 
                 if (r.contains(nextPos)) { return }
             }
 
             for (r in ecs.gameArea.dynamicColliders.get(position.layer))
             {
-                nextPos.x = position.nextX + Constant.TILE_SIZE / 2
-                nextPos.y = position.nextY + Constant.TILE_SIZE / 2
+                nextPos.x = position.nextX + Constant.TILE_SIZE/2
+                nextPos.y = position.nextY + Constant.TILE_SIZE/2
 
                 if (collider != r && r.contains(nextPos)) { return }
             }

@@ -69,6 +69,7 @@ class EntityComponentSystem
         private val saveGameManager: SaveGameManager
 ) {
     // --------------------------------------------------------------------------------------------- PROPERTIES
+    
     private val engine          = Engine()
     private val entityFactory   = EntityFactory(engine, gameArea)
 

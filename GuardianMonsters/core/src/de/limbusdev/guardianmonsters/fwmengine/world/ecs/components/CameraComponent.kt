@@ -1,28 +1,25 @@
 package de.limbusdev.guardianmonsters.fwmengine.world.ecs.components
 
-import com.badlogic.ashley.core.Component
 import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.maps.tiled.TiledMap
 import com.badlogic.gdx.math.MathUtils
 import de.limbusdev.guardianmonsters.Constant
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.GdxBehaviour
-import de.limbusdev.guardianmonsters.fwmengine.world.ecs.World
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.get
 import de.limbusdev.utils.geometry.IntRect
+
 
 import de.limbusdev.utils.geometry.IntVec2
 
 /**
  * The camera system updates the cameras position according to the hero's position by keeping it
- * inside the lmaps bounds, unless a map is smaller than the Camera.
- * field of view
+ * inside the map's bounds, unless a map is smaller than the Camera's field of view.
  *
  * @author Georg Eckert 2015-11-25
  */
 
 /**
- * Simple [Component] to store the camera position. Only [com.badlogic.ashley.core.Entity]s which
- * should be followed by the camera should get one.
+ * Simple [GdxBehaviour] to store the camera position.
  *
  * @author Georg Eckert 2015-11-22
  */

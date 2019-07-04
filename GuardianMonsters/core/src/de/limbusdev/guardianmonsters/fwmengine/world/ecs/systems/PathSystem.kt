@@ -111,7 +111,7 @@ class PathSystem(private val gameArea: GameArea) : EntitySystem()
                 && TimeUtils.timeSinceMillis(position.lastPixelStep) > Constant.ONE_STEP_DURATION_PERSON
                 && !path.talking
         ) {
-            position += when (path.path.get(path.currentDir))
+            position.rectangle += when (path.path.get(path.currentDir))
             {
                 SkyDirection.N -> IntVec2(0,1)
                 SkyDirection.W -> IntVec2(-1,0)

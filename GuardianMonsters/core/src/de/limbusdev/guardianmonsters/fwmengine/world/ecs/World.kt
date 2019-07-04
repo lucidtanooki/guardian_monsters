@@ -1,16 +1,49 @@
 package de.limbusdev.guardianmonsters.fwmengine.world.ecs
 
-import com.badlogic.gdx.utils.Array
-
 object World
 {
-    private val gdxGameObjects = Array<GdxGameObject>()
+    val hero = GdxGameObject()
+
+    private val gameObjects = mutableListOf<GdxGameObject>()
+
+    private val gameObjectsToBeAdded = mutableListOf<GdxGameObject>()
+    private val gameObjectsToBeRemoved = mutableListOf<GdxGameObject>()
+
+    init
+    {
+        add(hero)
+    }
 
     fun update(deltaTime: Float)
     {
-        for(gameObject in gdxGameObjects)
+        for(gameObject in gameObjects)
         {
-            gameObject.update(deltaTime)
+            if(gameObject.enabled)
+            {
+                gameObject.update(deltaTime)
+            }
         }
+
+        for(go in gameObjectsToBeAdded)
+        {
+            if(!gameObjects.contains(go)) { gameObjects.add(go) }
+        }
+        gameObjectsToBeAdded.clear()
+
+        for(go in gameObjectsToBeRemoved)
+        {
+            if(gameObjects.contains(go)) { gameObjects.remove(go) }
+        }
+        gameObjectsToBeRemoved.clear()
+    }
+
+    fun add(gameObject: GdxGameObject)
+    {
+        gameObjectsToBeAdded.add(gameObject)
+    }
+
+    fun remove(gameObject: GdxGameObject)
+    {
+        gameObjectsToBeRemoved.add(gameObject)
     }
 }

@@ -47,7 +47,7 @@ class InputSystem
     // --------------------------------------------------------------------------------------------- METHODS
     override fun addedToEngine(engine: Engine)
     {
-        // Hero
+        // hero
         hero = engine.getEntitiesFor(Family.all(HeroComponent::class.java).get()).first()
 
         // Speaking: Signs, People and so on
@@ -119,14 +119,14 @@ class InputSystem
         return if (abs(targetY - (entY + tileCenter)) > abs(targetX - (entX + tileCenter)))
         {
             // Vertical Movement
-            if (targetY > entY + tileCenter) { SkyDirection.N }  // Hero moving north
-            else                             { SkyDirection.S }  // Hero moving south
+            if (targetY > entY + tileCenter) { SkyDirection.N }  // hero moving north
+            else                             { SkyDirection.S }  // hero moving south
         }
         else
         {
             // Horizontal Movement
-            if (targetX > entX + tileCenter) { SkyDirection.E }  // Hero moving east
-            else                             { SkyDirection.W }  // Hero moving west
+            if (targetX > entX + tileCenter) { SkyDirection.E }  // hero moving east
+            else                             { SkyDirection.W }  // hero moving west
         }
     }
 

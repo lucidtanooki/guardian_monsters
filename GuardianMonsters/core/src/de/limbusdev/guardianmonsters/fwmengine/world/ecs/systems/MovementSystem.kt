@@ -48,7 +48,7 @@ class MovementSystem
 
     override fun update(deltaTime: Float)
     {
-        // Update Hero
+        // Update hero
         checkWarp()
         updateHero()
     }
@@ -57,7 +57,7 @@ class MovementSystem
     private fun checkWarp()
     {
         val pos = hero.getComponent<PositionComponent>()!!
-        val heroArea = createRectangle(pos)
+        val heroArea = createRectangle(pos.rectangle)
 
         // Check whether hero enters warp area
         for (w in warpPoints.get(pos.layer))
@@ -73,7 +73,7 @@ class MovementSystem
     fun checkHeal()
     {
         val pos = hero.getComponent<PositionComponent>()!!
-        val heroArea = createRectangle(pos)
+        val heroArea = createRectangle(pos.rectangle)
 
         // Check whether hero enters warp area
         for (h in healFields.get(pos.layer))
@@ -115,7 +115,7 @@ class MovementSystem
             input: InputComponent,
             collider: ColliderComponent
     ) {
-        // Initialize Hero Movement
+        // Initialize hero Movement
         if (input.startMoving && TimeUtils.timeSinceMillis(input.firstTip) > 100 && input.touchDown)
         {
             // Define potential next position according to the input direction
@@ -197,7 +197,7 @@ class MovementSystem
                 checkHeal()
                 input.moving = false
 
-                // Update Grid Position of Hero
+                // Update Grid Position of hero
                 position.onGrid += when (input.skyDir)
                 {
                     SkyDirection.N  -> IntVec2(0,1)
@@ -223,7 +223,7 @@ class MovementSystem
                 // Check whether hero can get attacked by monsters
                 for (ma in ecs.gameArea.monsterAreas.get(position.layer))
                 {
-                    if(position.offset(Constant.TILE_SIZE/2) in ma && MathUtils.randomBoolean(ma.teamSizeProbabilities.get(0)))
+                    if(position.rectangle.offset(Constant.TILE_SIZE/2) in ma && MathUtils.randomBoolean(ma.teamSizeProbabilities.get(0)))
                     {
                         logDebug(TAG) { "Monster appeared!" }
 

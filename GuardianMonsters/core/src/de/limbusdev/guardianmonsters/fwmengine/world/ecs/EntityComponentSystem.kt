@@ -11,11 +11,10 @@ import com.badlogic.gdx.utils.viewport.Viewport
 import de.limbusdev.guardianmonsters.Constant
 import de.limbusdev.guardianmonsters.battle.BattleScreen
 import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.CameraComponent
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Components
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.InventoryComponent
-import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PositionComponent
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.entities.HeroEntity
-import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.CameraSystem
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.CharacterSpriteSystem
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.DebuggingSystem
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.GameArea
@@ -24,8 +23,6 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.MovementSystem
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.PathSystem
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.PositionSynchroSystem
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.SpriteSystem
-import de.limbusdev.guardianmonsters.fwmengine.world.model.MapDescriptionInfo
-import de.limbusdev.guardianmonsters.fwmengine.world.model.MapPersonInformation
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.HUD
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.WorldScreen
 import de.limbusdev.guardianmonsters.services.Services
@@ -69,7 +66,7 @@ class EntityComponentSystem
         private val saveGameManager: SaveGameManager
 ) {
     // --------------------------------------------------------------------------------------------- PROPERTIES
-    
+
     private val engine          = Engine()
     private val entityFactory   = EntityFactory(engine, gameArea)
 
@@ -156,9 +153,8 @@ class EntityComponentSystem
         engine.addSystem(movementSystem)
 
         // Camera System
-        val cameraSystem = CameraSystem(viewport.camera as OrthographicCamera, gameArea.tiledMap)
-        cameraSystem.addedToEngine(engine)
-        engine.addSystem(cameraSystem)
+        val cameraComponent = CameraComponent(viewport.camera as OrthographicCamera, gameArea.tiledMap)
+        World.hero.add(cameraComponent)
 
         // Path System
         val pathSystem = PathSystem(gameArea)
@@ -186,6 +182,7 @@ class EntityComponentSystem
      */
     fun update(delta: Float)
     {
+        World.update(delta)
         engine.update(delta)
         hud.update(delta)
         gameArea.update(delta)

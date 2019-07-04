@@ -1,12 +1,11 @@
 package de.limbusdev.guardianmonsters.fwmengine.world.ecs
 
-import com.badlogic.ashley.core.Component
-
 /**
- * GDXBehaviour is the base class from which every Component derives.
+ * GdxBehaviour is the base class from which every Component derives.
  */
-abstract class GDXBehaviour : Component
+abstract class GdxBehaviour
 {
+    var gameObject : GdxGameObject? = null
     var initialized: Boolean = false
         private set
     var enabled: Boolean = true
@@ -14,7 +13,8 @@ abstract class GDXBehaviour : Component
 
     /**
      * Start is called, when a component is enabled, just before the first time update(...) is
-     * called for the first time
+     * called for the first time.
+     * Always call super method first.
      */
     open fun initialize() { initialized = true }
 
@@ -27,4 +27,6 @@ abstract class GDXBehaviour : Component
     open fun onEnable() {}
 
     open fun onDisable() {}
+
+    open fun dispose() {}
 }

@@ -7,7 +7,6 @@ import com.badlogic.gdx.utils.Array
 import de.limbusdev.guardianmonsters.Constant
 import de.limbusdev.guardianmonsters.enums.SkyDirection
 import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager
-import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.CameraComponent
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.CharacterSpriteComponent
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.ColliderComponent
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.ConversationComponent
@@ -71,9 +70,6 @@ class EntityFactory(private val engine: Engine, private val area: GameArea)
         )
         hero.add(position)
 
-        // Camera Component
-        hero.add(CameraComponent())
-
         // Collider
         val collider = ColliderComponent(position.x, position.y, position.width, position.height)
         area.addDynamicCollider(collider.collider, startField.layer)
@@ -122,10 +118,12 @@ class EntityFactory(private val engine: Engine, private val area: GameArea)
         val inventoryComp = InventoryComponent(inventory)
         hero.add(inventoryComp)
 
-        // Mark as Hero
+        // Mark as hero
         hero.add(HeroComponent())
 
         engine.addEntity(hero)
+
+        World.hero.add(position)
 
         return hero
     }

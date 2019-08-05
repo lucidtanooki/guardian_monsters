@@ -15,18 +15,11 @@ import de.limbusdev.utils.geometry.IntVec2
  *
  * @author Georg Eckert 2015-11-22
  */
-class PositionComponent
-(
-        x           : Int,
-        y           : Int,
-        width       : Int,
-        height      : Int,
-        var layer   : Int
-)
-    : GdxBehaviour(), Component
+class PositionComponent(data: Data) : GdxBehaviour(), Component
 {
-    // --------------------------------------------------------------------------------------------- PROPERTIES
-    val rectangle = IntRect(x, y, width, height)
+    data class Data(val x: Int = 0, val y: Int = 0, val width: Int = 16, val height: Int = 16, val layer: Int = 0, var enabled: Boolean = true)
+
+    val rectangle: IntRect
 
     var x
         get() = rectangle.x
@@ -40,6 +33,22 @@ class PositionComponent
     var height
         get() = rectangle.height
         set(value) { rectangle.height = value }
+
+    var layer: Int
+
+    init
+    {
+        rectangle = IntRect(data.x, data.y, data.width, data.height)
+        x = data.x
+        y = data.y
+        width = data.width
+        height = data.height
+        layer = data.layer
+    }
+
+    // --------------------------------------------------------------------------------------------- PROPERTIES
+
+
     val xf get() = rectangle.xf
     val yf get() = rectangle.yf
     val widthf get() = rectangle.widthf

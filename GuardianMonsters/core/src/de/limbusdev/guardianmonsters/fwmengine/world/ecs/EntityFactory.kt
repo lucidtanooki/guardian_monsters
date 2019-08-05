@@ -52,14 +52,14 @@ class EntityFactory(private val engine: Engine, private val area: GameArea)
 
         // Input
         hero.add(InputComponent())
-        val position = PositionComponent(
+        val position = PositionComponent(PositionComponent.Data(
 
                 startField.x,
                 startField.y,
                 UnitConverter.tilesToPixels(1),
                 UnitConverter.tilesToPixels(1),
                 startField.layer
-        )
+        ))
 
         // Position
         position.onGrid = IntVec2(
@@ -71,7 +71,7 @@ class EntityFactory(private val engine: Engine, private val area: GameArea)
         hero.add(position)
 
         // Collider
-        val collider = ColliderComponent(position.x, position.y, position.width, position.height)
+        val collider = ColliderComponent(ColliderComponent.Data(true, position.x, position.y, position.width, position.height))
         area.addDynamicCollider(collider.collider, startField.layer)
         hero.add(collider)
 
@@ -139,8 +139,8 @@ class EntityFactory(private val engine: Engine, private val area: GameArea)
         val sign = Entity()
         sign.add(ConversationComponent(mapInfo.content))
         sign.add(TitleComponent(mapInfo.title))
-        sign.add(ColliderComponent(mapInfo.x, mapInfo.y, Constant.TILE_SIZE, Constant.TILE_SIZE))
-        sign.add(PositionComponent(mapInfo.x, mapInfo.y, Constant.TILE_SIZE, Constant.TILE_SIZE, layer))
+        sign.add(ColliderComponent(ColliderComponent.Data(true, mapInfo.x, mapInfo.y, Constant.TILE_SIZE, Constant.TILE_SIZE)))
+        sign.add(PositionComponent(PositionComponent.Data(mapInfo.x, mapInfo.y, Constant.TILE_SIZE, Constant.TILE_SIZE, layer)))
         engine.addEntity(sign)
         return sign
     }
@@ -159,7 +159,7 @@ class EntityFactory(private val engine: Engine, private val area: GameArea)
         // Use second Constructor
         return createPerson(
 
-                PositionComponent(pInfo.startPosition.x, pInfo.startPosition.y, Constant.TILE_SIZE, Constant.TILE_SIZE, layer),
+                PositionComponent(PositionComponent.Data(pInfo.startPosition.x, pInfo.startPosition.y, Constant.TILE_SIZE, Constant.TILE_SIZE, layer)),
                 path,
                 pInfo.moves,
                 pInfo.conversation,
@@ -200,19 +200,19 @@ class EntityFactory(private val engine: Engine, private val area: GameArea)
         person.add(CharacterSpriteComponent(AnimatedPersonSprite(male, spriteIndex)))
 
         // Position
-        val position = PositionComponent(
+        val position = PositionComponent(PositionComponent.Data(
 
                 startField.x,
                 startField.y,
                 UnitConverter.tilesToPixels(1),
                 UnitConverter.tilesToPixels(1),
                 startField.layer
-        )
+        ))
 
         person.add(position)
 
         // Collider
-        val collider = ColliderComponent(position.x, position.y, position.width, position.height)
+        val collider = ColliderComponent(ColliderComponent.Data(true, position.x, position.y, position.width, position.height))
         area.addDynamicCollider(collider.collider, startField.layer)
         person.add(collider)
 

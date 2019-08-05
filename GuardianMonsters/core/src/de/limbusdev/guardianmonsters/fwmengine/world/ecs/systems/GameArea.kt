@@ -10,9 +10,13 @@ import com.badlogic.gdx.math.MathUtils
 import com.badlogic.gdx.math.Rectangle
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ArrayMap
+import com.badlogic.gdx.utils.Json
 
 import de.limbusdev.guardianmonsters.Constant
 import de.limbusdev.guardianmonsters.assets.paths.AssetPath
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.GdxGameObject
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.CharacterSpriteComponent
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.ColliderComponent
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PositionComponent
 import de.limbusdev.guardianmonsters.fwmengine.world.model.MapDescriptionInfo
 import de.limbusdev.guardianmonsters.fwmengine.world.model.MapPersonInformation
@@ -28,6 +32,8 @@ import de.limbusdev.utils.extensions.subStringFromEnd
 import de.limbusdev.utils.geometry.IntRect
 import de.limbusdev.utils.geometry.IntVec2
 
+data class CharacterSpriteComponentData(var male: Boolean = true, var index: Int = 0)
+
 /**
  * Contains logic and information about one game world area like a forest or a path. One
  * OutDoorGameArea per Tiled Map.
@@ -41,7 +47,7 @@ class GameArea(val areaID: Int, startPosID: Int)
     val mapRenderer : ExtendedTiledMapRenderer
 
     var gridPosition    = IntVec2(0, 0)
-    var startPosition   = PositionComponent(0, 0, 0, 0, 0)
+    var startPosition   = PositionComponent(PositionComponent.Data(0, 0, 0, 0, 0))
 
 
     private var bgMusic: String? = null
@@ -107,6 +113,7 @@ class GameArea(val areaID: Int, startPosID: Int)
                 "colliderWalls" -> createColliders(layer)
                 "descriptions"  -> createDescriptions(layer)
                 "triggers"      -> createTriggers(layer, startFieldID)
+                else            -> createGameObjects(layer)
             }
         }
 
@@ -127,6 +134,40 @@ class GameArea(val areaID: Int, startPosID: Int)
 
 
     // ......................................................................... Map Object Creation
+    private fun createGameObjects(layer: MapLayer)
+    {
+        for(mapObject in layer.objects)
+        {
+            val gameObject = GdxGameObject(mapObject.name)
+            val json = Json()
+
+            for(key in mapObject.properties.keys)
+            {
+                when(key)
+                {
+                    "transformComponent" ->
+                    {
+                        val transformData = json.fromJson(PositionComponent.Data::class.java, mapObject.properties["transformComponent", """{"x": 0, "y": 0, "width": 16, "height": 16, "layer": 0}"""])
+                        val transform = PositionComponent(transformData)
+                        gameObject.add(transform)
+                    }
+                    "characterSpriteComponent" ->
+                    {
+                        val spriteData = json.fromJson(CharacterSpriteComponent.Data::class.java, mapObject.properties["characterSpriteComponent", """{"gender": "male", "index": 1}"""])
+                        val sprite = CharacterSpriteComponent(spriteData)
+                        gameObject.add(sprite)
+                    }
+                    "colliderComponent" ->
+                    {
+                        val data = json.fromJson(ColliderComponent.Data::class.java, mapObject.properties["colliderComponent", """{"enabled": true}"""])
+                        val collider = ColliderComponent(data)
+                        gameObject.add(collider)
+                    }
+                }
+            }
+        }
+    }
+
     private fun createTriggers(layer: MapLayer, startFieldID: Int)
     {
         val layerIndex = layer.name.subStringFromEnd(0).toInt()

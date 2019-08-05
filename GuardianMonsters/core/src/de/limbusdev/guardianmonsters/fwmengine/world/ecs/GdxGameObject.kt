@@ -1,6 +1,6 @@
 package de.limbusdev.guardianmonsters.fwmengine.world.ecs
 
-class GdxGameObject
+class GdxGameObject(var name: String = "")
 {
     val components = ArrayList<GdxBehaviour>()
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-down" width="64" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="16" nextobjectid="412">
+<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-down" width="64" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="17" nextobjectid="413">
  <properties>
   <property name="musicIndex" type="int" value="2"/>
   <property name="musicType" value="town"/>
@@ -124,6 +124,40 @@
    <properties>
     <property name="frameDuration" value="0.09"/>
     <property name="index" value="monster15"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="16" name="gameObjects">
+  <object id="412" name="person4" type="person" x="240" y="224" width="16" height="16">
+   <properties>
+    <property name="characterSpriteComponent">{
+  &quot;male&quot;: true,
+  &quot;index&quot;: 1
+}</property>
+    <property name="colliderComponent">{
+  &quot;enabled&quot;: true,
+  &quot;x&quot;: 240,
+  &quot;y&quot;: 224,
+  &quot;width&quot;: 16,
+  &quot;height&quot;: 16
+}</property>
+    <property name="conversationComponent">{
+  &quot;name&quot;: &quot;&quot;,
+  &quot;description&quot;: &quot;&quot;,
+  &quot;enabled&quot;: true
+}</property>
+    <property name="pathComponent">{
+  &quot;dynamic&quot;: false,
+  &quot;path&quot;: &quot;NSTOP&quot;
+}</property>
+    <property name="transformComponent">{
+  &quot;x&quot;: 240,
+  &quot;y&quot;: 224,
+  &quot;width&quot;: 16,
+  &quot;height&quot;: 16
+  &quot;enabled&quot;: true,
+  &quot;layer&quot;: 1
+}</property>
    </properties>
   </object>
  </objectgroup>

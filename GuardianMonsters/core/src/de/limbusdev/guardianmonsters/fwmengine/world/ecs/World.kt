@@ -1,5 +1,7 @@
 package de.limbusdev.guardianmonsters.fwmengine.world.ecs
 
+import kotlin.reflect.KClass
+
 object World
 {
     val hero = GdxGameObject()
@@ -14,16 +16,8 @@ object World
         add(hero)
     }
 
-    fun update(deltaTime: Float)
+    fun addAndRemoveObjectsNow()
     {
-        for(gameObject in gameObjects)
-        {
-            if(gameObject.enabled)
-            {
-                gameObject.update(deltaTime)
-            }
-        }
-
         for(go in gameObjectsToBeAdded)
         {
             if(!gameObjects.contains(go)) { gameObjects.add(go) }
@@ -37,6 +31,19 @@ object World
         gameObjectsToBeRemoved.clear()
     }
 
+    fun update(deltaTime: Float)
+    {
+        for(gameObject in gameObjects)
+        {
+            if(gameObject.enabled)
+            {
+                gameObject.update(deltaTime)
+            }
+        }
+
+        addAndRemoveObjectsNow()
+    }
+
     fun add(gameObject: GdxGameObject)
     {
         gameObjectsToBeAdded.add(gameObject)
@@ -45,5 +52,16 @@ object World
     fun remove(gameObject: GdxGameObject)
     {
         gameObjectsToBeRemoved.add(gameObject)
+    }
+
+    fun getAll(type: String) : List<GdxGameObject>
+    {
+        return gameObjects.filter { it.type == type }
+    }
+
+    fun getAllWith(signature: List<String>) : List<GdxGameObject>
+    {
+        val a = gameObjects
+        return gameObjects.filter { it.signature.containsAll(signature) && it.signature.size == signature.size }
     }
 }

@@ -14,7 +14,9 @@ import com.badlogic.gdx.utils.Json
 
 import de.limbusdev.guardianmonsters.Constant
 import de.limbusdev.guardianmonsters.assets.paths.AssetPath
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.GdxBehaviour
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.GdxGameObject
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.World
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.CharacterSpriteComponent
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.ColliderComponent
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PositionComponent
@@ -31,6 +33,7 @@ import de.limbusdev.utils.extensions.set
 import de.limbusdev.utils.extensions.subStringFromEnd
 import de.limbusdev.utils.geometry.IntRect
 import de.limbusdev.utils.geometry.IntVec2
+import kotlin.reflect.KClass
 
 data class CharacterSpriteComponentData(var male: Boolean = true, var index: Int = 0)
 
@@ -113,7 +116,7 @@ class GameArea(val areaID: Int, startPosID: Int)
                 "colliderWalls" -> createColliders(layer)
                 "descriptions"  -> createDescriptions(layer)
                 "triggers"      -> createTriggers(layer, startFieldID)
-                else            -> createGameObjects(layer)
+                "gameObject"   -> createGameObjects(layer)
             }
         }
 
@@ -147,7 +150,7 @@ class GameArea(val areaID: Int, startPosID: Int)
                 {
                     "transformComponent" ->
                     {
-                        val transformData = json.fromJson(PositionComponent.Data::class.java, mapObject.properties["transformComponent", """{"x": 0, "y": 0, "width": 16, "height": 16, "layer": 0}"""])
+                        val transformData = json.fromJson(PositionComponent.Data::class.java, mapObject.properties["transformComponent", """{"x": 0, "y": 0, "width": 16, "height": 16, "layer": 0, "enabled": true}"""])
                         val transform = PositionComponent(transformData)
                         gameObject.add(transform)
                     }
@@ -165,7 +168,16 @@ class GameArea(val areaID: Int, startPosID: Int)
                     }
                 }
             }
+
+            World.add(gameObject)
         }
+
+        World.addAndRemoveObjectsNow()
+
+        val obs = World.getAllWith(listOf(
+                PositionComponent::class.simpleName ?: "",
+                CharacterSpriteComponent::class.simpleName ?: "",
+                ColliderComponent::class.simpleName ?: ""))
     }
 
     private fun createTriggers(layer: MapLayer, startFieldID: Int)

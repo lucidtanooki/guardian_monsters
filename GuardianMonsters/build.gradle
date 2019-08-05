@@ -119,6 +119,9 @@ project(":core") {
         implementation project(":media")
         implementation project(":utils")
         implementation project(":guardosphere")
+        implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"
+        testImplementation "org.jetbrains.kotlin:kotlin-test:$kotlinVersion"
+        testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlinVersion"
         implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
         implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinCoroutinesVersion"
         implementation "com.badlogicgames.gdx:gdx:$gdxVersion"

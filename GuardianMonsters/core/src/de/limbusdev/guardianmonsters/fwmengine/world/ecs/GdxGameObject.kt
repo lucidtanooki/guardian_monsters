@@ -1,7 +1,9 @@
 package de.limbusdev.guardianmonsters.fwmengine.world.ecs
 
-class GdxGameObject(var name: String = "")
+class GdxGameObject(var name: String = "", val type: String = "general")
 {
+    val signature = mutableListOf<String>()
+
     val components = ArrayList<GdxBehaviour>()
 
     private val componentsToBeAdded = mutableListOf<GdxBehaviour>()
@@ -51,12 +53,14 @@ class GdxGameObject(var name: String = "")
 
     fun add(component: GdxBehaviour)
     {
+        signature.add(component::class.simpleName ?: "Anonymous")
         componentsToBeAdded.add(component)
         component.gameObject = this
     }
 
     fun remove(component: GdxBehaviour)
     {
+        signature.remove(component::class.simpleName ?: "Anonymous")
         componentsToBeRemoved.add(component)
         component.gameObject = null
     }
@@ -79,6 +83,16 @@ class GdxGameObject(var name: String = "")
         {
             it.remove()
             component.dispose()
+        }
+    }
+
+    companion object
+    {
+        val typeSignatures: MutableMap<String, List<String>> = mutableMapOf()
+
+        fun registerType(type: String, signature: List<String>)
+        {
+            typeSignatures[type] = signature
         }
     }
 }

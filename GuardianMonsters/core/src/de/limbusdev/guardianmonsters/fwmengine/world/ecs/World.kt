@@ -1,15 +1,13 @@
 package de.limbusdev.guardianmonsters.fwmengine.world.ecs
 
-import kotlin.reflect.KClass
-
 object World
 {
-    val hero = GdxGameObject()
+    val hero = LimbusGameObject()
 
-    private val gameObjects = mutableListOf<GdxGameObject>()
+    private val gameObjects = mutableListOf<LimbusGameObject>()
 
-    private val gameObjectsToBeAdded = mutableListOf<GdxGameObject>()
-    private val gameObjectsToBeRemoved = mutableListOf<GdxGameObject>()
+    private val gameObjectsToBeAdded = mutableListOf<LimbusGameObject>()
+    private val gameObjectsToBeRemoved = mutableListOf<LimbusGameObject>()
 
     init
     {
@@ -44,22 +42,22 @@ object World
         addAndRemoveObjectsNow()
     }
 
-    fun add(gameObject: GdxGameObject)
+    fun add(gameObject: LimbusGameObject)
     {
         gameObjectsToBeAdded.add(gameObject)
     }
 
-    fun remove(gameObject: GdxGameObject)
+    fun remove(gameObject: LimbusGameObject)
     {
         gameObjectsToBeRemoved.add(gameObject)
     }
 
-    fun getAll(type: String) : List<GdxGameObject>
+    fun getAll(type: String) : List<LimbusGameObject>
     {
         return gameObjects.filter { it.type == type }
     }
 
-    fun getAllWith(signature: List<String>) : List<GdxGameObject>
+    fun getAllWith(signature: List<String>) : List<LimbusGameObject>
     {
         val a = gameObjects
         return gameObjects.filter { it.signature.containsAll(signature) && it.signature.size == signature.size }

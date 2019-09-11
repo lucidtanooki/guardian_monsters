@@ -1,13 +1,13 @@
 package de.limbusdev.guardianmonsters.fwmengine.world.ecs
 
-class GdxGameObject(var name: String = "", val type: String = "general")
+class LimbusGameObject(var name: String = "", val type: String = "general")
 {
     val signature = mutableListOf<String>()
 
-    val components = ArrayList<GdxBehaviour>()
+    val components = ArrayList<LimbusBehaviour>()
 
-    private val componentsToBeAdded = mutableListOf<GdxBehaviour>()
-    private val componentsToBeRemoved = mutableListOf<GdxBehaviour>()
+    private val componentsToBeAdded = mutableListOf<LimbusBehaviour>()
+    private val componentsToBeRemoved = mutableListOf<LimbusBehaviour>()
 
     var enabled : Boolean = true
         private set
@@ -41,24 +41,24 @@ class GdxGameObject(var name: String = "", val type: String = "general")
         componentsToBeRemoved.clear()
     }
 
-    inline fun <reified T : GdxBehaviour> getComponents() : List<T>
+    inline fun <reified T : LimbusBehaviour> getComponents() : List<T>
     {
         return components.filterIsInstance<T>()
     }
 
-    inline fun <reified T : GdxBehaviour> get() : T?
+    inline fun <reified T : LimbusBehaviour> get() : T?
     {
         return components.filterIsInstance<T>().first()
     }
 
-    fun add(component: GdxBehaviour)
+    fun add(component: LimbusBehaviour)
     {
         signature.add(component::class.simpleName ?: "Anonymous")
         componentsToBeAdded.add(component)
         component.gameObject = this
     }
 
-    fun remove(component: GdxBehaviour)
+    fun remove(component: LimbusBehaviour)
     {
         signature.remove(component::class.simpleName ?: "Anonymous")
         componentsToBeRemoved.add(component)

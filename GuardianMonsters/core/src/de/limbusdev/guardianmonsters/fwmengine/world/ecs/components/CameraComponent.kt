@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.maps.tiled.TiledMap
 import com.badlogic.gdx.math.MathUtils
 import de.limbusdev.guardianmonsters.Constant
-import de.limbusdev.guardianmonsters.fwmengine.world.ecs.GdxBehaviour
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusBehaviour
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.get
 import de.limbusdev.utils.geometry.IntRect
 
@@ -19,12 +19,14 @@ import de.limbusdev.utils.geometry.IntVec2
  */
 
 /**
- * Simple [GdxBehaviour] to store the camera position.
+ * Simple [LimbusBehaviour] to store the camera position.
  *
  * @author Georg Eckert 2015-11-22
  */
-class CameraComponent(private val camera: OrthographicCamera, tiledMap: TiledMap) : GdxBehaviour()
+class CameraComponent(private val camera: OrthographicCamera, tiledMap: TiledMap) : LimbusBehaviour()
 {
+    override val defaultJson: String = ""
+
     // --------------------------------------------------------------------------------------------- PROPERTIES
     private val mapOutline: IntRect    // Bounds of map to be rendered
 
@@ -40,7 +42,7 @@ class CameraComponent(private val camera: OrthographicCamera, tiledMap: TiledMap
 
     override fun update(deltaTime: Float)
     {
-        val position = gameObject?.get<PositionComponent>()
+        val position = gameObject?.get<TransformComponent>()
         if(position != null)
         {
             if (mapOutline.width >= camera.viewportWidth && mapOutline.height >= camera.viewportHeight) {

@@ -19,6 +19,7 @@ import de.limbusdev.guardianmonsters.guardians.battle.BattleFactory
 import de.limbusdev.guardianmonsters.services.Services
 import de.limbusdev.guardianmonsters.utils.createRectangle
 import de.limbusdev.guardianmonsters.utils.getComponent
+import de.limbusdev.utils.geometry.IntRect
 import de.limbusdev.utils.geometry.IntVec2
 import de.limbusdev.utils.logDebug
 
@@ -56,8 +57,8 @@ class MovementSystem
     /** Check whether hero enters warp area */
     private fun checkWarp()
     {
-        val pos = hero.getComponent<PositionComponent>()!!
-        val heroArea = createRectangle(pos.rectangle)
+        val pos = hero.getComponent<TransformComponent>()!!
+        val heroArea = createRectangle(IntRect(pos.x, pos.y, pos.width, pos.height))
 
         // Check whether hero enters warp area
         for (w in warpPoints.get(pos.layer))
@@ -72,8 +73,8 @@ class MovementSystem
 
     fun checkHeal()
     {
-        val pos = hero.getComponent<PositionComponent>()!!
-        val heroArea = createRectangle(pos.rectangle)
+        val pos = hero.getComponent<TransformComponent>()!!
+        val heroArea = createRectangle(IntRect(pos.x, pos.y, pos.width, pos.height))
 
         // Check whether hero enters warp area
         for (h in healFields.get(pos.layer))
@@ -96,7 +97,7 @@ class MovementSystem
         {
             makeOneStep(
 
-                    hero.getComponent<PositionComponent>()!!,
+                    hero.getComponent<TransformComponent>()!!,
                     hero.getComponent<InputComponent>()!!,
                     hero.getComponent<ColliderComponent>()!!
             )
@@ -111,7 +112,7 @@ class MovementSystem
      */
     fun makeOneStep
     (
-            position: PositionComponent,
+            position: TransformComponent,
             input: InputComponent,
             collider: ColliderComponent
     ) {
@@ -151,7 +152,7 @@ class MovementSystem
                 nextPos.x = position.nextX + Constant.TILE_SIZE/2
                 nextPos.y = position.nextY + Constant.TILE_SIZE/2
 
-                if (r.contains(nextPos)) { return }
+                if (r.asRectangle.contains(nextPos)) { return }
             }
 
             for (r in ecs.gameArea.dynamicColliders.get(position.layer))
@@ -159,12 +160,12 @@ class MovementSystem
                 nextPos.x = position.nextX + Constant.TILE_SIZE/2
                 nextPos.y = position.nextY + Constant.TILE_SIZE/2
 
-                if (collider.collider != r && r.contains(nextPos)) { return }
+                if (collider.asRectangle != r.asRectangle && r.asRectangle.contains(nextPos)) { return }
             }
 
             // Update Collider Position
-            collider.collider.x = position.nextX
-            collider.collider.y = position.nextY
+            collider.x = position.nextX
+            collider.y = position.nextY
             position.lastPixelStep = TimeUtils.millis()    // remember time of this iteration
 
             input.moving = true        // entity is moving right now
@@ -223,7 +224,7 @@ class MovementSystem
                 // Check whether hero can get attacked by monsters
                 for (ma in ecs.gameArea.monsterAreas.get(position.layer))
                 {
-                    if(position.rectangle.offset(Constant.TILE_SIZE/2) in ma && MathUtils.randomBoolean(ma.teamSizeProbabilities.get(0)))
+                    if(position.asRectangle.offset(Constant.TILE_SIZE/2) in ma && MathUtils.randomBoolean(ma.teamSizeProbabilities.get(0)))
                     {
                         logDebug(TAG) { "Monster appeared!" }
 

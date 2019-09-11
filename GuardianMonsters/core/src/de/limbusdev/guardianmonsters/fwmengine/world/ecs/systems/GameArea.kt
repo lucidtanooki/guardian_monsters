@@ -14,12 +14,9 @@ import com.badlogic.gdx.utils.Json
 
 import de.limbusdev.guardianmonsters.Constant
 import de.limbusdev.guardianmonsters.assets.paths.AssetPath
-import de.limbusdev.guardianmonsters.fwmengine.world.ecs.GdxBehaviour
-import de.limbusdev.guardianmonsters.fwmengine.world.ecs.GdxGameObject
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusGameObject
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.World
-import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.CharacterSpriteComponent
-import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.ColliderComponent
-import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PositionComponent
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.*
 import de.limbusdev.guardianmonsters.fwmengine.world.model.MapDescriptionInfo
 import de.limbusdev.guardianmonsters.fwmengine.world.model.MapPersonInformation
 import de.limbusdev.guardianmonsters.fwmengine.world.model.MonsterArea
@@ -28,12 +25,12 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ui.ExtendedTiledMapRenderer
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.TmxDayTimeMapLoader
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.get
 import de.limbusdev.guardianmonsters.services.Services
+import de.limbusdev.utils.extensions.f
 import de.limbusdev.utils.extensions.removeLast
 import de.limbusdev.utils.extensions.set
 import de.limbusdev.utils.extensions.subStringFromEnd
 import de.limbusdev.utils.geometry.IntRect
 import de.limbusdev.utils.geometry.IntVec2
-import kotlin.reflect.KClass
 
 data class CharacterSpriteComponentData(var male: Boolean = true, var index: Int = 0)
 
@@ -50,18 +47,18 @@ class GameArea(val areaID: Int, startPosID: Int)
     val mapRenderer : ExtendedTiledMapRenderer
 
     var gridPosition    = IntVec2(0, 0)
-    var startPosition   = PositionComponent(PositionComponent.Data(0, 0, 0, 0, 0))
+    var startPosition   = TransformComponent()
 
 
     private var bgMusic: String? = null
 
-    val colliders       = ArrayMap<Int, Array<IntRect>>()
-    val dynamicColliders = ArrayMap<Int, Array<IntRect>>()
-    val warpPoints      = ArrayMap<Int, Array<WarpPoint>>()
-    val healFields      = ArrayMap<Int, Array<Rectangle>>()
-    val mapPeople       = ArrayMap<Int, Array<MapPersonInformation>>()
-    val descriptions    = ArrayMap<Int, Array<MapDescriptionInfo>>()
-    val monsterAreas    = ArrayMap<Int, Array<MonsterArea>>()
+    val colliders        = ArrayMap<Int, Array<ColliderComponent>>()
+    val dynamicColliders = ArrayMap<Int, Array<ColliderComponent>>()
+    val warpPoints       = ArrayMap<Int, Array<WarpPoint>>()
+    val healFields       = ArrayMap<Int, Array<Rectangle>>()
+    val mapPeople        = ArrayMap<Int, Array<MapPersonInformation>>()
+    val descriptions     = ArrayMap<Int, Array<MapDescriptionInfo>>()
+    val monsterAreas     = ArrayMap<Int, Array<MonsterArea>>()
 
 
     // --------------------------------------------------------------------------------------------- CONSTRUCTORS
@@ -97,7 +94,7 @@ class GameArea(val areaID: Int, startPosID: Int)
         {
             for (r in a)
             {
-                shape.rect(r.xf, r.yf, r.widthf, r.heightf)
+                shape.rect(r.x.f(), r.y.f(), r.width.f(), r.height.f())
             }
         }
 
@@ -116,11 +113,11 @@ class GameArea(val areaID: Int, startPosID: Int)
                 "colliderWalls" -> createColliders(layer)
                 "descriptions"  -> createDescriptions(layer)
                 "triggers"      -> createTriggers(layer, startFieldID)
-                "gameObject"   -> createGameObjects(layer)
+                "gameObject"    -> createGameObjects(layer)
             }
         }
 
-        createBorderColliders(tiledMap)
+        createBorderColliders(tiledMap) // TODO for each walkable layer
 
         // Set background music
         val musicType = tiledMap.properties["musicType", "town"]
@@ -137,33 +134,35 @@ class GameArea(val areaID: Int, startPosID: Int)
 
 
     // ......................................................................... Map Object Creation
+    /**
+     * Takes each MapObject from a layer and creates a proper LimbusGameObject from it.
+     * Only for layers with game objects composed of JSON-components.
+     */
     private fun createGameObjects(layer: MapLayer)
     {
         for(mapObject in layer.objects)
         {
-            val gameObject = GdxGameObject(mapObject.name)
+            val gameObject = LimbusGameObject(mapObject.name)
             val json = Json()
 
             for(key in mapObject.properties.keys)
             {
                 when(key)
                 {
-                    "transformComponent" ->
+                    "TransformComponent" ->
                     {
-                        val transformData = json.fromJson(PositionComponent.Data::class.java, mapObject.properties["transformComponent", """{"x": 0, "y": 0, "width": 16, "height": 16, "layer": 0, "enabled": true}"""])
-                        val transform = PositionComponent(transformData)
+                        val transform = json.fromJson(TransformComponent::class.java, mapObject.properties[key, TransformComponent().defaultJson])
                         gameObject.add(transform)
                     }
-                    "characterSpriteComponent" ->
+                    "CharacterSpriteComponent" ->
                     {
-                        val spriteData = json.fromJson(CharacterSpriteComponent.Data::class.java, mapObject.properties["characterSpriteComponent", """{"gender": "male", "index": 1}"""])
+                        val spriteData = json.fromJson(CharacterSpriteComponent.Data::class.java, mapObject.properties["CharacterSpriteComponent", """{"gender": "male", "index": 1}"""])
                         val sprite = CharacterSpriteComponent(spriteData)
                         gameObject.add(sprite)
                     }
-                    "colliderComponent" ->
+                    "ColliderComponent" ->
                     {
-                        val data = json.fromJson(ColliderComponent.Data::class.java, mapObject.properties["colliderComponent", """{"enabled": true}"""])
-                        val collider = ColliderComponent(data)
+                        val collider = json.fromJson(ColliderComponent::class.java, mapObject.properties[key, ColliderComponent().defaultJson])
                         gameObject.add(collider)
                     }
                 }
@@ -175,9 +174,9 @@ class GameArea(val areaID: Int, startPosID: Int)
         World.addAndRemoveObjectsNow()
 
         val obs = World.getAllWith(listOf(
-                PositionComponent::class.simpleName ?: "",
-                CharacterSpriteComponent::class.simpleName ?: "",
-                ColliderComponent::class.simpleName ?: ""))
+                TransformComponent::class.simpleName!!,
+                CharacterSpriteComponent::class.simpleName!!,
+                ColliderComponent::class.simpleName!!))
     }
 
     private fun createTriggers(layer: MapLayer, startFieldID: Int)
@@ -284,14 +283,14 @@ class GameArea(val areaID: Int, startPosID: Int)
      */
     private fun createColliders(layer: MapLayer)
     {
-        val colliderLayer = Array<IntRect>()
+        val colliderLayer = Array<ColliderComponent>()
         val layerIndex = layer.name.subStringFromEnd(0).toInt()
         colliders[layerIndex] = colliderLayer
 
         for (mo in layer.objects)
         {
             val r = (mo as RectangleMapObject).rectangle
-            colliderLayer.add(IntRect(r.x, r.y, r.width, r.height))
+            colliderLayer.add(ColliderComponent(true, MathUtils.round(r.x), MathUtils.round(r.y), MathUtils.round(r.width), MathUtils.round(r.height)))
         }
     }
 
@@ -308,10 +307,10 @@ class GameArea(val areaID: Int, startPosID: Int)
         for (i in colliders.keys())
         {
             val layerColliders = colliders[i]
-            layerColliders.add(IntRect(-1 * Constant.TILE_SIZE, -1 * Constant.TILE_SIZE, (mapWidth + 2) * Constant.TILE_SIZE, Constant.TILE_SIZE))
-            layerColliders.add(IntRect(-1 * Constant.TILE_SIZE, mapHeight * Constant.TILE_SIZE, (mapWidth + 2) * Constant.TILE_SIZE, Constant.TILE_SIZE))
-            layerColliders.add(IntRect(-1 * Constant.TILE_SIZE, 0, Constant.TILE_SIZE, mapHeight * Constant.TILE_SIZE))
-            layerColliders.add(IntRect(mapWidth * Constant.TILE_SIZE, 0, Constant.TILE_SIZE, mapHeight * Constant.TILE_SIZE))
+            layerColliders.add(ColliderComponent(true, -1 * Constant.TILE_SIZE, -1 * Constant.TILE_SIZE, (mapWidth + 2) * Constant.TILE_SIZE, Constant.TILE_SIZE))
+            layerColliders.add(ColliderComponent(true, -1 * Constant.TILE_SIZE, mapHeight * Constant.TILE_SIZE, (mapWidth + 2) * Constant.TILE_SIZE, Constant.TILE_SIZE))
+            layerColliders.add(ColliderComponent(true, -1 * Constant.TILE_SIZE, 0, Constant.TILE_SIZE, mapHeight * Constant.TILE_SIZE))
+            layerColliders.add(ColliderComponent(true, mapWidth * Constant.TILE_SIZE, 0, Constant.TILE_SIZE, mapHeight * Constant.TILE_SIZE))
         }
     }
 
@@ -330,7 +329,7 @@ class GameArea(val areaID: Int, startPosID: Int)
         Services.Audio().stopMusic(bgMusic)
     }
 
-    fun addDynamicCollider(collider: IntRect, layer: Int)
+    fun addDynamicCollider(collider: ColliderComponent, layer: Int)
     {
         if (!dynamicColliders.containsKey(layer))
         {
@@ -339,7 +338,7 @@ class GameArea(val areaID: Int, startPosID: Int)
         dynamicColliders.get(layer).add(collider)
     }
 
-    fun removeDynamicCollider(collider: IntRect, layer: Int)
+    fun removeDynamicCollider(collider: ColliderComponent, layer: Int)
     {
         if (dynamicColliders.containsKey(layer))
         {

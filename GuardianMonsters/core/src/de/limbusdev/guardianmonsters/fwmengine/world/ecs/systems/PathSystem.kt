@@ -11,7 +11,7 @@ import de.limbusdev.guardianmonsters.Constant
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.ColliderComponent
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.InputComponent
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PathComponent
-import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PositionComponent
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TransformComponent
 import de.limbusdev.guardianmonsters.utils.getComponent
 import de.limbusdev.utils.geometry.IntVec2
 import de.limbusdev.guardianmonsters.enums.SkyDirection
@@ -34,7 +34,7 @@ class PathSystem(private val gameArea: GameArea) : EntitySystem()
     override fun addedToEngine(engine: Engine)
     {
         entities = engine.getEntitiesFor(Family.all(
-                PositionComponent::class.java,
+                TransformComponent::class.java,
                 ColliderComponent::class.java,
                 PathComponent::class.java).exclude(
                 InputComponent::class.java
@@ -45,7 +45,7 @@ class PathSystem(private val gameArea: GameArea) : EntitySystem()
     {
         for (entity in entities)
         {
-            val position = entity.getComponent<PositionComponent>()
+            val position = entity.getComponent<TransformComponent>()
             val collider = entity.getComponent<ColliderComponent>()
             val path     = entity.getComponent<PathComponent>()
             makeOneStep(position!!, path!!, collider!!)
@@ -53,7 +53,7 @@ class PathSystem(private val gameArea: GameArea) : EntitySystem()
         }
     }
 
-    fun makeOneStep(position: PositionComponent, path: PathComponent, collider: ColliderComponent)
+    fun makeOneStep(position: TransformComponent, path: PathComponent, collider: ColliderComponent)
     {
         if (path.startMoving && !path.staticEntity)
         {
@@ -89,16 +89,16 @@ class PathSystem(private val gameArea: GameArea) : EntitySystem()
 
             // Check whether movement is possible or blocked by a collider
             val nextPos = IntVec2(0, 0)
-            for (r : IntRect in gameArea.dynamicColliders.get(position.layer))
+            for (r : ColliderComponent in gameArea.dynamicColliders.get(position.layer))
             {
                 nextPos.x = position.nextX + Constant.TILE_SIZE/2
                 nextPos.y = position.nextY + Constant.TILE_SIZE/2
 
-                if (!collider.collider.equals(r) && r.contains(nextPos)) { return }
+                if (!collider.asRectangle.equals(r) && r.asRectangle.contains(nextPos)) { return }
             }
 
-            collider.collider.x = position.nextX
-            collider.collider.y = position.nextY
+            collider.x = position.nextX
+            collider.y = position.nextY
             position.lastPixelStep = TimeUtils.millis()
             path.moving = true
             path.startMoving = false
@@ -111,13 +111,13 @@ class PathSystem(private val gameArea: GameArea) : EntitySystem()
                 && TimeUtils.timeSinceMillis(position.lastPixelStep) > Constant.ONE_STEP_DURATION_PERSON
                 && !path.talking
         ) {
-            position.rectangle += when (path.path.get(path.currentDir))
+            when (path.path.get(path.currentDir))
             {
-                SkyDirection.N -> IntVec2(0,1)
-                SkyDirection.W -> IntVec2(-1,0)
-                SkyDirection.E -> IntVec2(1,0)
-                SkyDirection.S -> IntVec2(0,-1)
-                else           -> { path.stop(); IntVec2() }
+                SkyDirection.N -> position.moveBy(0,1)
+                SkyDirection.W -> position.moveBy(-1,0)
+                SkyDirection.E -> position.moveBy(1,0)
+                SkyDirection.S -> position.moveBy(0,-1)
+                else           -> path.stop()
             }
 
             // if stopping, count up stopping time

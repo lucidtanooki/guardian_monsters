@@ -2,7 +2,7 @@ package de.limbusdev.guardianmonsters.fwmengine.world.ecs.components
 
 import com.badlogic.ashley.core.Component
 import com.badlogic.ashley.core.Entity
-import de.limbusdev.guardianmonsters.fwmengine.world.ecs.GdxBehaviour
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusBehaviour
 
 import de.limbusdev.utils.geometry.IntRect
 
@@ -12,15 +12,32 @@ import de.limbusdev.utils.geometry.IntRect
  *
  * @author Georg Eckert 2015-11-15
  */
-class ColliderComponent(data: Data) : GdxBehaviour(), Component
+class ColliderComponent() : LimbusBehaviour(), Component
 {
-    data class Data(var enabled: Boolean = true, var x: Int = 0, var y: Int = 0, var width: Int = 16, var height: Int = 16)
-
-    // --------------------------------------------------------------------------------------------- PROPERTIES
-    var collider: IntRect
-
-    init
+    constructor(enabled: Boolean, x: Int, y: Int, width: Int, height: Int) : this()
     {
-        collider = IntRect(data.x, data.y, data.width, data.height)
+        this.enabled = enabled
+        this.x = x
+        this.y = y
+        this.width = width
+        this.height = height
     }
+
+    override val defaultJson =
+            """
+                {
+                    "enabled": true,
+                    "x": 0,
+                    "y": 0,
+                    "width": 16,
+                    "height": 16
+                }
+            """.trimMargin()
+
+    var x = 0
+    var y = 0
+    var width = 16
+    var height = 16
+
+    var asRectangle = IntRect(x, y, width, height)
 }

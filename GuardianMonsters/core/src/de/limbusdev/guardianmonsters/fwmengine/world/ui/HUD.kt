@@ -11,7 +11,6 @@ import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.actions.Actions.*
 import com.badlogic.gdx.scenes.scene2d.ui.*
-import com.badlogic.gdx.scenes.scene2d.utils.Drawable
 import com.badlogic.gdx.scenes.scene2d.actions.Actions.run as runThis
 import com.badlogic.gdx.scenes.scene2d.actions.Actions.show as showActor
 import com.badlogic.gdx.scenes.scene2d.actions.Actions.hide as hideActor
@@ -36,7 +35,6 @@ import de.limbusdev.utils.extensions.f
 import de.limbusdev.utils.geometry.IntVec2
 import de.limbusdev.utils.logDebug
 import ktx.actors.then
-import ktx.style.get
 
 
 /**
@@ -257,7 +255,7 @@ class HUD
 
     fun checkForNearInteractiveObjects(hero: Entity): Entity?
     {
-        val pos = hero.getComponent<PositionComponent>()!!
+        val pos = hero.getComponent<TransformComponent>()!!
         val dir = hero.getComponent<InputComponent>()!!.skyDir
 
         var nearEntity: Entity? = null
@@ -275,10 +273,10 @@ class HUD
         logDebug(TAG) { "Grid cell to be checked: $checkGridCell" }
 
 
-        for (e in engine.getEntitiesFor(Family.all(PositionComponent::class.java).get()))
+        for (e in engine.getEntitiesFor(Family.all(TransformComponent::class.java).get()))
         {
             // Only if interactive object is found and it's not the hero
-            val posComp = e.getComponent<PositionComponent>()
+            val posComp = e.getComponent<TransformComponent>()
             if (posComp != null && e !is HeroEntity)
             {
                 logDebug(TAG) { "Grid Cell of tested Entity: ${posComp.onGrid}" }

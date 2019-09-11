@@ -1,15 +1,25 @@
 package de.limbusdev.guardianmonsters.fwmengine.world.ecs
 
 /**
- * GdxBehaviour is the base class from which every Component derives.
+ * LimbusBehaviour is the base class from which every Component derives.
  */
-abstract class GdxBehaviour
+abstract class LimbusBehaviour()
 {
-    var gameObject : GdxGameObject? = null
+    abstract val defaultJson : String
+
+    var gameObject : LimbusGameObject? = null
     var initialized: Boolean = false
         private set
     var enabled: Boolean = true
-        private set
+        set(value)
+        {
+            when(value)
+            {
+                true  -> onEnable()
+                false -> onDisable()
+            }
+            field = value
+        }
 
     /**
      * Start is called, when a component is enabled, just before the first time update(...) is
@@ -19,10 +29,6 @@ abstract class GdxBehaviour
     open fun initialize() { initialized = true }
 
     open fun update(deltaTime: Float) {}
-
-    fun enable()  { onEnable(); enabled = true }
-
-    fun disable() { onDisable(); enabled = false }
 
     open fun onEnable() {}
 

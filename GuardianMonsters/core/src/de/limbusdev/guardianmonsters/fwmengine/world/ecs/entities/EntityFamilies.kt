@@ -4,7 +4,7 @@ import com.badlogic.ashley.core.Family
 
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.ColliderComponent
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.ConversationComponent
-import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PositionComponent
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TransformComponent
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TitleComponent
 
 
@@ -18,9 +18,9 @@ object EntityFamilies
     val signs = Family.all(
             TitleComponent::class.java,
             ConversationComponent::class.java,
-            PositionComponent::class.java).get()!!
+            TransformComponent::class.java).get()!!
 
     val living = Family
-            .all(ConversationComponent::class.java, ColliderComponent::class.java, PositionComponent::class.java)
+            .all(ConversationComponent::class.java, ColliderComponent::class.java, TransformComponent::class.java)
             .exclude(TitleComponent::class.java).get()!!
 }

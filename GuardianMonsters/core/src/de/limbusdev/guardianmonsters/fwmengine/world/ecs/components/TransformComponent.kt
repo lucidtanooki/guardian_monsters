@@ -4,7 +4,8 @@ import com.badlogic.ashley.core.Component
 import com.badlogic.ashley.core.Entity
 
 import de.limbusdev.guardianmonsters.Constant
-import de.limbusdev.guardianmonsters.fwmengine.world.ecs.GdxBehaviour
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusBehaviour
+import de.limbusdev.utils.extensions.f
 import de.limbusdev.utils.geometry.IntRect
 import de.limbusdev.utils.geometry.IntVec2
 
@@ -15,44 +16,44 @@ import de.limbusdev.utils.geometry.IntVec2
  *
  * @author Georg Eckert 2015-11-22
  */
-class PositionComponent(data: Data) : GdxBehaviour(), Component
+class TransformComponent() : LimbusBehaviour(), Component
 {
-    data class Data(val x: Int = 0, val y: Int = 0, val width: Int = 16, val height: Int = 16, val layer: Int = 0, var enabled: Boolean = true)
-
-    val rectangle: IntRect
-
-    var x
-        get() = rectangle.x
-        set(value) { rectangle.x = value }
-    var y
-        get() = rectangle.y
-        set(value) { rectangle.y = value }
-    var width
-        get() = rectangle.width
-        set(value) { rectangle.width = value }
-    var height
-        get() = rectangle.height
-        set(value) { rectangle.height = value }
-
-    var layer: Int
-
-    init
+    constructor(enabled: Boolean, x: Int, y: Int, width: Int, height: Int, layer: Int) : this()
     {
-        rectangle = IntRect(data.x, data.y, data.width, data.height)
-        x = data.x
-        y = data.y
-        width = data.width
-        height = data.height
-        layer = data.layer
+        this.enabled = enabled
+        this.x = x
+        this.y = y
+        this.width = width
+        this.height = height
+        this.layer = layer
     }
+
+    override val defaultJson = """
+            {
+                "enabled": true,
+                "x": 0,
+                "y": 0,
+                "width": 16,
+                "height": 16,
+                "layer": 0
+            }
+        """.trimIndent()
+
+    var x = 0
+    var y = 0
+    var width = 16
+    var height = 16
+    var layer: Int = 0
+
+    var asRectangle = IntRect(x, y, width, height)
 
     // --------------------------------------------------------------------------------------------- PROPERTIES
 
 
-    val xf get() = rectangle.xf
-    val yf get() = rectangle.yf
-    val widthf get() = rectangle.widthf
-    val heightf get() = rectangle.heightf
+    val xf get() = x.f()
+    val yf get() = y.f()
+    val widthf get() = width.f()
+    val heightf get() = height.f()
 
 
     var nextX           : Int = 0
@@ -62,6 +63,12 @@ class PositionComponent(data: Data) : GdxBehaviour(), Component
 
 
     // --------------------------------------------------------------------------------------------- METHODS
+    fun moveBy(xDiff: Int, yDiff: Int)
+    {
+        x += xDiff
+        y += yDiff
+    }
+
     val center get() = IntVec2(
 
                 onGrid.x * Constant.TILE_SIZE + Constant.TILE_SIZE / 2,

@@ -130,27 +130,28 @@
  <objectgroup id="16" name="gameObjects">
   <object id="412" name="person4" type="person" x="240" y="224" width="16" height="16">
    <properties>
-    <property name="characterSpriteComponent">{
+    <property name="CharacterSpriteComponent">{
   &quot;male&quot;: true,
   &quot;index&quot;: 1
 }</property>
-    <property name="colliderComponent">{
+    <property name="ColliderComponent">{
   &quot;enabled&quot;: true,
   &quot;x&quot;: 240,
   &quot;y&quot;: 224,
   &quot;width&quot;: 16,
   &quot;height&quot;: 16
 }</property>
-    <property name="conversationComponent">{
+    <property name="ConversationComponent">{
   &quot;name&quot;: &quot;&quot;,
   &quot;description&quot;: &quot;&quot;,
   &quot;enabled&quot;: true
 }</property>
-    <property name="pathComponent">{
+    <property name="PathComponent">{
+  &quot;enabled&quot;: true,
   &quot;dynamic&quot;: false,
   &quot;path&quot;: &quot;NSTOP&quot;
 }</property>
-    <property name="transformComponent">{
+    <property name="TransformComponent">{
   &quot;x&quot;: 240,
   &quot;y&quot;: 224,
   &quot;width&quot;: 16,

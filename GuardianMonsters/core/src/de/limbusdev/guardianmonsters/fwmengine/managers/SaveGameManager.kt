@@ -6,34 +6,22 @@ import com.badlogic.ashley.core.EntitySystem
 import com.badlogic.ashley.core.Family
 import com.badlogic.ashley.utils.ImmutableArray
 import com.badlogic.gdx.Gdx
-import com.badlogic.gdx.files.FileHandle
-import com.badlogic.gdx.graphics.Color
-import com.badlogic.gdx.utils.Array
-import com.badlogic.gdx.utils.ArrayMap
-import com.badlogic.gdx.utils.FloatArray
-import com.badlogic.gdx.utils.IntArray
-import com.badlogic.gdx.utils.ObjectMap
 import com.esotericsoftware.kryo.Kryo
-import com.esotericsoftware.kryo.Serializer
 import com.esotericsoftware.kryo.io.Input
 import com.esotericsoftware.kryo.io.Output
 
 import de.limbusdev.guardianmonsters.Constant
-import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Components
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.GuardoSphereComponent
-import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PositionComponent
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TransformComponent
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.SaveGameComponent
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TeamComponent
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.GameArea
 import de.limbusdev.guardianmonsters.guardians.GuardiansServiceLocator
-import de.limbusdev.guardianmonsters.guardians.items.IItemService
 import de.limbusdev.guardianmonsters.guardians.items.Inventory
-import de.limbusdev.guardianmonsters.guardians.monsters.AGuardianFactory
 import de.limbusdev.guardianmonsters.guardians.monsters.GuardoSphere
 import de.limbusdev.guardianmonsters.model.gamestate.GameState
 import de.limbusdev.guardianmonsters.model.gamestate.SerializableGameState
 import de.limbusdev.guardianmonsters.utils.getComponent
-import de.limbusdev.utils.Log
 import de.limbusdev.utils.logDebug
 
 
@@ -64,7 +52,7 @@ class SaveGameManager : EntitySystem
     {
         val saveGameComps = Family.all(
                 SaveGameComponent::class.java,
-                PositionComponent::class.java,
+                TransformComponent::class.java,
                 TeamComponent::class.java).get()
 
         savableEntities = engine.getEntitiesFor(saveGameComps)
@@ -79,7 +67,7 @@ class SaveGameManager : EntitySystem
         logDebug(TAG) { savableEntities.first().toString() }
         logDebug(TAG) { getCurrentGameState().guardoSphere.toString() }
 
-        val posComp = firstEntity.getComponent<PositionComponent>()!!
+        val posComp = firstEntity.getComponent<TransformComponent>()!!
 
         getCurrentGameState().gridx = posComp.onGrid.x
         getCurrentGameState().gridy = posComp.onGrid.y
@@ -93,7 +81,7 @@ class SaveGameManager : EntitySystem
     {
         for (entity in savableEntities)
         {
-            val position = entity.getComponent<PositionComponent>()!!
+            val position = entity.getComponent<TransformComponent>()!!
             val saveGame = entity.getComponent<SaveGameComponent>()!!
             saveGame.gameState.gridx = position.onGrid.x
             saveGame.gameState.gridy = position.onGrid.y

@@ -74,7 +74,7 @@ class InputSystem
      * can interact with
      * @return
      */
-    fun checkForNearInteractiveObjects(pos: PositionComponent, dir: SkyDirection): Entity?
+    fun checkForNearInteractiveObjects(pos: TransformComponent, dir: SkyDirection): Entity?
     {
         val checkGridCell = IntVec2(pos.onGrid)
 
@@ -89,9 +89,9 @@ class InputSystem
 
         logDebug(TAG) { "Grid cell to be checked: $checkGridCell" }
 
-        for (e in engine.getEntitiesFor(Family.all(PositionComponent::class.java).get()))
+        for (e in engine.getEntitiesFor(Family.all(TransformComponent::class.java).get()))
         {
-            val positionComponent = e.getComponent<PositionComponent>()
+            val positionComponent = e.getComponent<TransformComponent>()
             if (positionComponent != null && e !is HeroEntity)
             {
                 logDebug(TAG) { "Grid Cell of tested Entity: ${positionComponent.onGrid}" }

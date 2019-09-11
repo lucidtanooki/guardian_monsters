@@ -15,7 +15,7 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.HeroComponen
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.InputComponent
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.InventoryComponent
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PathComponent
-import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PositionComponent
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TransformComponent
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.SaveGameComponent
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TeamComponent
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TitleComponent
@@ -43,7 +43,7 @@ class EntityFactory(private val engine: Engine, private val area: GameArea)
      * Creates a hero [Entity] and adds it to the [Engine].
      * @return
      */
-    fun createHero(startField: PositionComponent, restoreSave: Boolean): Entity
+    fun createHero(startField: TransformComponent, restoreSave: Boolean): Entity
     {
         val hero = HeroEntity()
 
@@ -52,14 +52,14 @@ class EntityFactory(private val engine: Engine, private val area: GameArea)
 
         // Input
         hero.add(InputComponent())
-        val position = PositionComponent(PositionComponent.Data(
-
+        val position = TransformComponent(
+                true,
                 startField.x,
                 startField.y,
                 UnitConverter.tilesToPixels(1),
                 UnitConverter.tilesToPixels(1),
                 startField.layer
-        ))
+        )
 
         // Position
         position.onGrid = IntVec2(
@@ -71,8 +71,8 @@ class EntityFactory(private val engine: Engine, private val area: GameArea)
         hero.add(position)
 
         // Collider
-        val collider = ColliderComponent(ColliderComponent.Data(true, position.x, position.y, position.width, position.height))
-        area.addDynamicCollider(collider.collider, startField.layer)
+        val collider = ColliderComponent(true, position.x, position.y, position.width, position.height)
+        area.addDynamicCollider(collider, startField.layer)
         hero.add(collider)
 
         // Game State
@@ -139,8 +139,8 @@ class EntityFactory(private val engine: Engine, private val area: GameArea)
         val sign = Entity()
         sign.add(ConversationComponent(mapInfo.content))
         sign.add(TitleComponent(mapInfo.title))
-        sign.add(ColliderComponent(ColliderComponent.Data(true, mapInfo.x, mapInfo.y, Constant.TILE_SIZE, Constant.TILE_SIZE)))
-        sign.add(PositionComponent(PositionComponent.Data(mapInfo.x, mapInfo.y, Constant.TILE_SIZE, Constant.TILE_SIZE, layer)))
+        sign.add(ColliderComponent(true, mapInfo.x, mapInfo.y, Constant.TILE_SIZE, Constant.TILE_SIZE))
+        sign.add(TransformComponent(true, mapInfo.x, mapInfo.y, Constant.TILE_SIZE, Constant.TILE_SIZE, layer))
         engine.addEntity(sign)
         return sign
     }
@@ -159,7 +159,7 @@ class EntityFactory(private val engine: Engine, private val area: GameArea)
         // Use second Constructor
         return createPerson(
 
-                PositionComponent(PositionComponent.Data(pInfo.startPosition.x, pInfo.startPosition.y, Constant.TILE_SIZE, Constant.TILE_SIZE, layer)),
+                TransformComponent(true, pInfo.startPosition.x, pInfo.startPosition.y, Constant.TILE_SIZE, Constant.TILE_SIZE, layer),
                 path,
                 pInfo.moves,
                 pInfo.conversation,
@@ -179,7 +179,7 @@ class EntityFactory(private val engine: Engine, private val area: GameArea)
      */
     private fun createPerson
     (
-            startField: PositionComponent,
+            startField: TransformComponent,
             path: Array<SkyDirection>,
             moves: Boolean,
             conversation: String,
@@ -200,20 +200,20 @@ class EntityFactory(private val engine: Engine, private val area: GameArea)
         person.add(CharacterSpriteComponent(AnimatedPersonSprite(male, spriteIndex)))
 
         // Position
-        val position = PositionComponent(PositionComponent.Data(
-
+        val position = TransformComponent(
+                true,
                 startField.x,
                 startField.y,
                 UnitConverter.tilesToPixels(1),
                 UnitConverter.tilesToPixels(1),
                 startField.layer
-        ))
+        )
 
         person.add(position)
 
         // Collider
-        val collider = ColliderComponent(ColliderComponent.Data(true, position.x, position.y, position.width, position.height))
-        area.addDynamicCollider(collider.collider, startField.layer)
+        val collider = ColliderComponent(true, position.x, position.y, position.width, position.height)
+        area.addDynamicCollider(collider, startField.layer)
         person.add(collider)
 
         // Conversation

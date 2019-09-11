@@ -18,7 +18,6 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ecs.entities.HeroEntity
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.CharacterSpriteSystem
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.DebuggingSystem
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.GameArea
-import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.InputSystem
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.MovementSystem
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.PathSystem
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.PositionSynchroSystem
@@ -132,10 +131,6 @@ class EntityComponentSystem
         spriteSystem.addedToEngine(engine)
         engine.addSystem(spriteSystem)
 
-        // Input System
-        val inputSystem = InputSystem(viewport, hud)
-        inputSystem.addedToEngine(engine)
-        engine.addSystem(inputSystem)
 
         // Position Synchronization
         val positionSynchroSystem = PositionSynchroSystem()

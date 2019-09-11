@@ -22,6 +22,8 @@ import de.limbusdev.guardianmonsters.battle.BattleScreen
 import de.limbusdev.guardianmonsters.enums.Compass4
 import de.limbusdev.guardianmonsters.enums.SkyDirection
 import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusGameObject
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.World
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.*
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.entities.EntityFamilies
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.entities.HeroEntity
@@ -253,13 +255,13 @@ class HUD
         blackCurtain.addAction(showActor() then fadeIn(1f))
     }
 
-    fun checkForNearInteractiveObjects(hero: Entity): Entity?
+    fun checkForNearInteractiveObjects(hero: Entity, signature: List<String>): LimbusGameObject?
     {
         val pos = hero.getComponent<TransformComponent>()!!
         val dir = hero.getComponent<InputComponent>()!!.skyDir
 
-        var nearEntity: Entity? = null
-        val checkGridCell = IntVec2(pos.onGrid.x, pos.onGrid.y)
+        var nearEntity: LimbusGameObject? = null
+        val checkGridCell = pos.onGrid
 
         checkGridCell += when (dir)
         {
@@ -282,7 +284,21 @@ class HUD
                 logDebug(TAG) { "Grid Cell of tested Entity: ${posComp.onGrid}" }
 
                 // Is there an entity?
-                if (posComp.onGrid == checkGridCell) { nearEntity = e }
+                //if (posComp.onGrid == checkGridCell) { nearEntity = e }
+            }
+        }
+
+        val interactiveObjects = World.getAllWith(signature)
+        for(interactiveObject in interactiveObjects)
+        {
+            val transform = interactiveObject.get<TransformComponent>()
+            if (transform != null)
+            {
+                logDebug(TAG) { "Grid Cell of tested Entity: ${transform.onGrid}" }
+
+                // Is there an entity?
+                val onGrid = transform.onGrid
+                if (onGrid == checkGridCell) { nearEntity = interactiveObject }
             }
         }
 
@@ -291,14 +307,16 @@ class HUD
 
     fun touchEntity()
     {
-        val touchedEntity = checkForNearInteractiveObjects(hero) ?: return
+        // TODO fix this for new component system
+
+        //val touchedEntity = checkForNearInteractiveObjects(hero) ?: return
 
         var touchedSpeaker = false
         var touchedSign = false
 
         // If there is an entity near enough
         // Living Entity
-        if (EntityFamilies.living.matches(touchedEntity))
+        /*if (EntityFamilies.living.matches(touchedEntity))
         {
             logDebug(TAG) { "Touched speaker" }
             touchedSpeaker = true
@@ -317,20 +335,28 @@ class HUD
             openConversation(conversationComp.text, conversationComp.name, gameArea.areaID)
 
             currentlyShownHUDWidget = HUDWidgets.CONVERSATION
-        }
+        }*/
 
         // Sign Entity
-        if (EntityFamilies.signs.matches(touchedEntity))
+        val signSignature = listOf(
+                TransformComponent::class.simpleName!!,
+                ConversationComponent::class.simpleName!!
+        )
+
+        val sign = checkForNearInteractiveObjects(hero, signSignature) ?: return
+
+        logDebug(TAG) { "Touched sign" }
+        val conversation = sign.get<ConversationComponent>()
+        openSign(conversation!!.name, conversation!!.text, gameArea.areaID)
+        currentlyShownHUDWidget = HUDWidgets.SIGN
+
+        touchedSign = true
+
+
+        /*if (EntityFamilies.signs.matches(touchedEntity))
         {
-            logDebug(TAG) { "Touched sign" }
-            touchedSign = true
-            openSign(
-                    touchedEntity.getComponent<TitleComponent>()!!.text,
-                    touchedEntity.getComponent<ConversationComponent>()!!.text,
-                    gameArea.areaID
-            )
-            currentlyShownHUDWidget = HUDWidgets.SIGN
-        }
+            //
+        }*/
 
         if (touchedSpeaker || touchedSign) { hero.getComponent<InputComponent>()!!.talking = true }
     }

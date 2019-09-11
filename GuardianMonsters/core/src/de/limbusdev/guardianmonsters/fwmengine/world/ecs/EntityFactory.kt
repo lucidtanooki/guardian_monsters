@@ -62,12 +62,6 @@ class EntityFactory(private val engine: Engine, private val area: GameArea)
         )
 
         // Position
-        position.onGrid = IntVec2(
-
-                position.x / Constant.TILE_SIZE,
-                position.y / Constant.TILE_SIZE
-
-        )
         hero.add(position)
 
         // Collider
@@ -82,7 +76,6 @@ class EntityFactory(private val engine: Engine, private val area: GameArea)
         {
             position.x = gameState.gridx * Constant.TILE_SIZE
             position.y = gameState.gridy * Constant.TILE_SIZE
-            position.onGrid = IntVec2(gameState.gridx, gameState.gridy)
         }
 
         // Add Team

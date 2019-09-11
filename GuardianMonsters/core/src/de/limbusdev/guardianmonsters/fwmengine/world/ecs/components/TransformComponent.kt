@@ -30,10 +30,6 @@ class TransformComponent() : LimbusBehaviour(), Component
 
     override val defaultJson = """
                 enabled: true,
-                x: 0,
-                y: 0,
-                width: 16,
-                height: 16,
                 layer: 0
         """.trimIndent()
 
@@ -57,7 +53,7 @@ class TransformComponent() : LimbusBehaviour(), Component
     var nextX           : Int = 0
     var nextY           : Int = 0
     var lastPixelStep   : Long = 0 // ms
-    var onGrid          : IntVec2 = IntVec2(x / Constant.TILE_SIZE, y / Constant.TILE_SIZE)
+    val onGrid : IntVec2 get() = IntVec2(x / Constant.TILE_SIZE, y / Constant.TILE_SIZE)
 
 
     // --------------------------------------------------------------------------------------------- METHODS
@@ -72,12 +68,6 @@ class TransformComponent() : LimbusBehaviour(), Component
                 onGrid.x * Constant.TILE_SIZE + Constant.TILE_SIZE / 2,
                 onGrid.y * Constant.TILE_SIZE + Constant.TILE_SIZE / 2
     )
-
-    fun updateGridPosition()
-    {
-        onGrid.x = x / Constant.TILE_SIZE
-        onGrid.y = y / Constant.TILE_SIZE
-    }
 
     override fun update(deltaTime: Float)
     {

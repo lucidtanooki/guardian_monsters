@@ -145,21 +145,35 @@ class GameArea(val areaID: Int, startPosID: Int)
             val gameObject = LimbusGameObject(mapObject.name)
             val json = Json()
 
+            // RectangleMapObjects have implicit TransformComponent
+            if(mapObject is RectangleMapObject)
+            {
+                // Must only contain useful values for enabled and layer in Tiled, since every Tiled
+                // RectangleMapObject has x, y, width and height
+                val jsonStringWithoutBrackets = mapObject.properties["TransformComponent", TransformComponent().defaultJson]
+                val transform = json.fromJson(TransformComponent::class.java, "{$jsonStringWithoutBrackets}")
+                // Necessary since libGDX inverts the Y axis of tiled map objects automatically.
+                // Here we count Y up from the bottom. Tiled does it the other way round.
+                transform.x = MathUtils.round(mapObject.rectangle.x)
+                transform.y = MathUtils.round(mapObject.rectangle.y)
+                gameObject.add(transform)
+            }
+
             for(key in mapObject.properties.keys)
             {
                 when(key)
                 {
-                    "TransformComponent" ->
-                    {
-                        val jsonStringWithoutBrackets = mapObject.properties[key, TransformComponent().defaultJson]
-                        val transform = json.fromJson(TransformComponent::class.java, "{$jsonStringWithoutBrackets}")
-                        gameObject.add(transform)
-                    }
                     "ColliderComponent" ->
                     {
                         val jsonStringWithoutBrackets = mapObject.properties[key, ColliderComponent().defaultJson]
                         val collider = json.fromJson(ColliderComponent::class.java, "{$jsonStringWithoutBrackets}")
                         gameObject.add(collider)
+                    }
+                    "ConversationComponent" ->
+                    {
+                        val jsonStringWithoutBrackets = mapObject.properties[key, ConversationComponent().defaultJson]
+                        val conversation = json.fromJson(ConversationComponent::class.java, "{$jsonStringWithoutBrackets}")
+                        gameObject.add(conversation)
                     }
                     "CharacterSpriteComponent" ->
                     {
@@ -177,10 +191,15 @@ class GameArea(val areaID: Int, startPosID: Int)
 
         World.addAndRemoveObjectsNow()
 
-        val obs = World.getAllWith(listOf(
+        val objects = World.getAllWith(listOf(
                 TransformComponent::class.simpleName!!,
                 CharacterSpriteComponent::class.simpleName!!,
                 ColliderComponent::class.simpleName!!))
+
+        val descriptions = World.getAllWith(listOf(
+                TransformComponent::class.simpleName!!,
+                ConversationComponent::class.simpleName!!
+        ))
     }
 
     private fun createTriggers(layer: MapLayer, startFieldID: Int)

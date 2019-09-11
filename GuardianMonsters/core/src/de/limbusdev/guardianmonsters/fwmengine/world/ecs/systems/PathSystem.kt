@@ -49,7 +49,6 @@ class PathSystem(private val gameArea: GameArea) : EntitySystem()
             val collider = entity.getComponent<ColliderComponent>()
             val path     = entity.getComponent<PathComponent>()
             makeOneStep(position!!, path!!, collider!!)
-            position.updateGridPosition()
         }
     }
 

@@ -45,7 +45,7 @@ class TransformComponent() : LimbusBehaviour(), Component
     var height = 16
     var layer: Int = 0
 
-    var asRectangle = IntRect(x, y, width, height)
+    val asRectangle get() = IntRect(x, y, width, height)
 
     // --------------------------------------------------------------------------------------------- PROPERTIES
 

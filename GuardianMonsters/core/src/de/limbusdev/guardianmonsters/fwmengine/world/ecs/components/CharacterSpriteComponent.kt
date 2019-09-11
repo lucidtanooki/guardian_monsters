@@ -17,6 +17,8 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ui.EntitySprite
  */
 class CharacterSpriteComponent : LimbusBehaviour, Component
 {
+    override val defaultJson: String = ""
+
     data class Data(var male: Boolean = true, var index: Int = 0)
 
     var sprite : AnimatedPersonSprite

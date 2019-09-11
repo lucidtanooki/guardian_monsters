@@ -94,7 +94,7 @@ class PathSystem(private val gameArea: GameArea) : EntitySystem()
                 nextPos.x = position.nextX + Constant.TILE_SIZE/2
                 nextPos.y = position.nextY + Constant.TILE_SIZE/2
 
-                if (!collider.asRectangle.equals(r) && r.asRectangle.contains(nextPos)) { return }
+                if (!collider.equals(r) && r.asRectangle.contains(nextPos)) { println("blocked"); return }
             }
 
             collider.x = position.nextX

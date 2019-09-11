@@ -39,5 +39,5 @@ class ColliderComponent() : LimbusBehaviour(), Component
     var width = 16
     var height = 16
 
-    var asRectangle = IntRect(x, y, width, height)
+    val asRectangle get() = IntRect(x, y, width, height)
 }

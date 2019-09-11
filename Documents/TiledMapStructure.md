@@ -1,7 +1,7 @@
 # TiledMapStructure
 
 FWM-Engine uses *.tmx files, which can be edited with the free software
-Tiled (www.tiled.org).
+Tiled (www.tiled.org Version 1.1*).
 
 ################################################################################
 ## MAP Properties
@@ -57,6 +57,26 @@ that layer.
 
 ################################################################################
 ## Objects
+
+The Guardian Monsters engine is switching to it's own entity-component-system,
+based on LimbusBehaviour and LimbusGameObject. A LimbusGameObject is any object
+defined in Tiled. And a LimbusBehaviour is a child of it, defined in Tiled in
+the properties.
+
+The property name always defines the class to use. The value is the components
+values as Json, without the outermost waved brackets. We can use libGDX's simple
+Json notation here. For example:
+
+TransformComponent | enabled:true, x:240, y:100, width:16, height:16, layer:1
+
+![](./componentJsonTiled.png)
+
+A tiled object implicitly has a TransformComponent. For now make sure to enter
+the same values for the object and TransformComponent.
+
+New components always must inherit from LimbusBehaviour and override the
+abstract val property "defaultJson". Have a look into ColliderProperty, to see
+how it's done.
 
 
 ### objects

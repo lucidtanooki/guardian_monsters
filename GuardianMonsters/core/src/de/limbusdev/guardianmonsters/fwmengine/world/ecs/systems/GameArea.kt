@@ -151,19 +151,23 @@ class GameArea(val areaID: Int, startPosID: Int)
                 {
                     "TransformComponent" ->
                     {
-                        val transform = json.fromJson(TransformComponent::class.java, mapObject.properties[key, TransformComponent().defaultJson])
+                        val jsonStringWithoutBrackets = mapObject.properties[key, TransformComponent().defaultJson]
+                        val transform = json.fromJson(TransformComponent::class.java, "{$jsonStringWithoutBrackets}")
                         gameObject.add(transform)
-                    }
-                    "CharacterSpriteComponent" ->
-                    {
-                        val spriteData = json.fromJson(CharacterSpriteComponent.Data::class.java, mapObject.properties["CharacterSpriteComponent", """{"gender": "male", "index": 1}"""])
-                        val sprite = CharacterSpriteComponent(spriteData)
-                        gameObject.add(sprite)
                     }
                     "ColliderComponent" ->
                     {
-                        val collider = json.fromJson(ColliderComponent::class.java, mapObject.properties[key, ColliderComponent().defaultJson])
+                        val jsonStringWithoutBrackets = mapObject.properties[key, ColliderComponent().defaultJson]
+                        val collider = json.fromJson(ColliderComponent::class.java, "{$jsonStringWithoutBrackets}")
                         gameObject.add(collider)
+                    }
+                    "CharacterSpriteComponent" ->
+                    {
+                        //val jsonStringWithoutBrackets = mapObject.properties[key, CharacterSpriteComponent().defaultJson]
+                        val jsonStringWithoutBrackets = mapObject.properties["CharacterSpriteComponent", "gender: male, index: 1"]
+                        val spriteData = json.fromJson(CharacterSpriteComponent.Data::class.java, "{$jsonStringWithoutBrackets}")
+                        val sprite = CharacterSpriteComponent(spriteData)
+                        gameObject.add(sprite)
                     }
                 }
             }

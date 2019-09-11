@@ -29,14 +29,12 @@ class TransformComponent() : LimbusBehaviour(), Component
     }
 
     override val defaultJson = """
-            {
-                "enabled": true,
-                "x": 0,
-                "y": 0,
-                "width": 16,
-                "height": 16,
-                "layer": 0
-            }
+                enabled: true,
+                x: 0,
+                y: 0,
+                width: 16,
+                height: 16,
+                layer: 0
         """.trimIndent()
 
     var x = 0

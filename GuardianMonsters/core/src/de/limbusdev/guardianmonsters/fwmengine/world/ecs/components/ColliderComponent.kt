@@ -25,13 +25,11 @@ class ColliderComponent() : LimbusBehaviour(), Component
 
     override val defaultJson =
             """
-                {
-                    "enabled": true,
-                    "x": 0,
-                    "y": 0,
-                    "width": 16,
-                    "height": 16
-                }
+                    enabled: true,
+                    x: 0,
+                    y: 0,
+                    width: 16,
+                    height: 16
             """.trimMargin()
 
     var x = 0

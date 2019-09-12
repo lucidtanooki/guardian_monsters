@@ -14,6 +14,7 @@ import com.badlogic.gdx.utils.Json
 
 import de.limbusdev.guardianmonsters.Constant
 import de.limbusdev.guardianmonsters.assets.paths.AssetPath
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusBehaviour
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusGameObject
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.World
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.*
@@ -31,6 +32,9 @@ import de.limbusdev.utils.extensions.set
 import de.limbusdev.utils.extensions.subStringFromEnd
 import de.limbusdev.utils.geometry.IntRect
 import de.limbusdev.utils.geometry.IntVec2
+import java.lang.Exception
+import kotlin.reflect.KClass
+import kotlin.reflect.jvm.internal.impl.load.kotlin.KotlinClassFinder
 
 data class CharacterSpriteComponentData(var male: Boolean = true, var index: Int = 0)
 
@@ -134,6 +138,15 @@ class GameArea(val areaID: Int, startPosID: Int)
 
 
     // ......................................................................... Map Object Creation
+    private fun parseColliderComponent(json: Json, mapObject: RectangleMapObject) : ColliderComponent
+    {
+
+        val jsonStringWithoutBrackets = mapObject.properties["ColliderComponent", ColliderComponent().defaultJson]
+        val collider = json.fromJson(ColliderComponent::class.java, "{$jsonStringWithoutBrackets}")
+
+        return collider
+    }
+
     /**
      * Takes each MapObject from a layer and creates a proper LimbusGameObject from it.
      * Only for layers with game objects composed of JSON-components.
@@ -145,43 +158,52 @@ class GameArea(val areaID: Int, startPosID: Int)
             val gameObject = LimbusGameObject(mapObject.name)
             val json = Json()
 
-            // RectangleMapObjects have implicit TransformComponent
-            if(mapObject is RectangleMapObject)
+            /*if(mapObject is RectangleMapObject)
             {
-                // Must only contain useful values for enabled and layer in Tiled, since every Tiled
-                // RectangleMapObject has x, y, width and height
-                val jsonStringWithoutBrackets = mapObject.properties["TransformComponent", TransformComponent().defaultJson]
-                val transform = json.fromJson(TransformComponent::class.java, "{$jsonStringWithoutBrackets}")
-                // Necessary since libGDX inverts the Y axis of tiled map objects automatically.
-                // Here we count Y up from the bottom. Tiled does it the other way round.
-                transform.x = MathUtils.round(mapObject.rectangle.x)
-                transform.y = MathUtils.round(mapObject.rectangle.y)
-                gameObject.add(transform)
-            }
+                val transform = World.componentParsers[TransformComponent::class]?.parseComponent(json, mapObject)
+                if(transform != null) { gameObject.add(transform) }
+            }*/
 
+            // .......................................................................... Components
             for(key in mapObject.properties.keys)
             {
-                when(key)
+                if(key.contains("Component", false))
                 {
-                    "ColliderComponent" ->
+                    try
                     {
-                        val jsonStringWithoutBrackets = mapObject.properties[key, ColliderComponent().defaultJson]
-                        val collider = json.fromJson(ColliderComponent::class.java, "{$jsonStringWithoutBrackets}")
-                        gameObject.add(collider)
+                        // Components that are part of the engine can be used with simple names
+                        // Custom components must use their full name, like: com.me.CustomComponent
+                        val componentClassBasePath = when(key.contains("."))
+                        {
+                            true -> ""
+                            false -> "de.limbusdev.guardianmonsters.fwmengine.world.ecs.components."
+                        }
+                        val kClass = Class.forName(componentClassBasePath + key).kotlin
+
+                        kClass as KClass<out LimbusBehaviour>
+
+                        val component = World.componentParsers[kClass]?.parseComponent(json, mapObject)
+
+                        if (component != null)
+                        {
+                            gameObject.add(component)
+                        }
                     }
-                    "ConversationComponent" ->
+                    catch (e: Exception)
                     {
-                        val jsonStringWithoutBrackets = mapObject.properties[key, ConversationComponent().defaultJson]
-                        val conversation = json.fromJson(ConversationComponent::class.java, "{$jsonStringWithoutBrackets}")
-                        gameObject.add(conversation)
+                        println("Cast not successful for $key.")
                     }
-                    "CharacterSpriteComponent" ->
+
+                    when(key)
                     {
-                        //val jsonStringWithoutBrackets = mapObject.properties[key, CharacterSpriteComponent().defaultJson]
-                        val jsonStringWithoutBrackets = mapObject.properties["CharacterSpriteComponent", "gender: male, index: 1"]
-                        val spriteData = json.fromJson(CharacterSpriteComponent.Data::class.java, "{$jsonStringWithoutBrackets}")
-                        val sprite = CharacterSpriteComponent(spriteData)
-                        gameObject.add(sprite)
+                        "CharacterSpriteComponent" ->
+                        {
+                            //val jsonStringWithoutBrackets = mapObject.properties[key, CharacterSpriteComponent().defaultJson]
+                            val jsonStringWithoutBrackets = mapObject.properties["CharacterSpriteComponent", "gender: male, index: 1"]
+                            val spriteData = json.fromJson(CharacterSpriteComponent.Data::class.java, "{$jsonStringWithoutBrackets}")
+                            val sprite = CharacterSpriteComponent(spriteData)
+                            gameObject.add(sprite)
+                        }
                     }
                 }
             }

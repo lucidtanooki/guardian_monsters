@@ -1,5 +1,7 @@
 package de.limbusdev.guardianmonsters.fwmengine.world.ecs
 
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.IComponentParser
+
 /**
  * LimbusBehaviour is the base class from which every Component derives.
  */

@@ -1,5 +1,8 @@
 package de.limbusdev.guardianmonsters.fwmengine.world.ecs
 
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.*
+import kotlin.reflect.KClass
+
 object World
 {
     val hero = LimbusGameObject()
@@ -9,8 +12,14 @@ object World
     private val gameObjectsToBeAdded = mutableListOf<LimbusGameObject>()
     private val gameObjectsToBeRemoved = mutableListOf<LimbusGameObject>()
 
+    val componentParsers = mutableMapOf<KClass<out LimbusBehaviour>, IComponentParser<out LimbusBehaviour>>()
+
     init
     {
+        componentParsers[TransformComponent::class] = TransformComponentParser
+        componentParsers[ColliderComponent::class] = ColliderComponentParser
+        componentParsers[ConversationComponent::class] = ConversationComponentParser
+
         add(hero)
     }
 

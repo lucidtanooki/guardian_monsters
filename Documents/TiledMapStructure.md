@@ -78,6 +78,17 @@ New components always must inherit from LimbusBehaviour and override the
 abstract val property "defaultJson". Have a look into ColliderProperty, to see
 how it's done.
 
+### Custom Components
+
+If using components from the Engine, like TransformComponent, ColliderComponent
+and so on, the simple class name is enough in Tiled. For your own components
+however you must enter the full right now. This might become better in a later
+version.
+
+To create custom components, you have to extend `LimbusBehaviour` and implement
+`IComponentParser`. Have a look into `ConversationComponentParser` to see how
+to implement such a parser.
+
 
 ### objects
 #### sign

@@ -50,8 +50,8 @@ class DebuggingSystem : EntitySystem()
             val collider = gameObject.get<ColliderComponent>()
             if(collider != null)
             {
-                val transform = gameObject.transform
-                shpr.rect(transform.xf, transform.yf, collider.width.f(), collider.height.f())
+                val transform = gameObject.transform.asRectangle
+                shpr.rect(transform.xf, transform.yf, transform.widthf, transform.heightf)
             }
         }
 

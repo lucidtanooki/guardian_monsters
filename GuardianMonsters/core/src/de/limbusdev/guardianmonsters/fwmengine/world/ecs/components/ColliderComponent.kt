@@ -39,5 +39,5 @@ class ColliderComponent
             """.trimMargin()
 
 
-    val asRectangle get() = IntRect(gameObject?.transform?.x ?: 0 + offsetX, gameObject?.transform?.y ?: 0 + offsetY, width, height)
+    val asRectangle get() = IntRect((gameObject?.transform?.x ?: 0) + offsetX, (gameObject?.transform?.y ?: 0) + offsetY, width, height)
 }

@@ -67,4 +67,9 @@ open class IntRect : IntVec2
     {
         return (r.ID == this.ID)
     }
+
+    override fun toString(): String
+    {
+        return "IntRect(x = $x y = $y width = $width height = $height)"
+    }
 }

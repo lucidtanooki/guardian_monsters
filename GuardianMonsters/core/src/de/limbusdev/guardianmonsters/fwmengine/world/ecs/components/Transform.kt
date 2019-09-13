@@ -39,7 +39,13 @@ class Transform(var gameObject: LimbusGameObject) : Component
     var nextX           : Int = 0
     var nextY           : Int = 0
     var lastPixelStep   : Long = 0 // ms
-    val onGrid : IntVec2 get() = IntVec2(x / Constant.TILE_SIZE, y / Constant.TILE_SIZE)
+    val onGrid : IntVec2 = IntVec2(0,0)
+
+    fun updateGridSlot()
+    {
+        onGrid.x = x / Constant.TILE_SIZE
+        onGrid.y = y / Constant.TILE_SIZE
+    }
 
 
     // --------------------------------------------------------------------------------------------- METHODS
@@ -57,6 +63,6 @@ class Transform(var gameObject: LimbusGameObject) : Component
 
     fun update(deltaTime: Float)
     {
-
+        //if(gameObject.name == "Hero") { println("$x|$y") }
     }
 }

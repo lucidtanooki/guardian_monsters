@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-down" width="64" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="18" nextobjectid="417">
+<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-down" width="64" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="18" nextobjectid="418">
  <properties>
   <property name="musicIndex" type="int" value="2"/>
   <property name="musicType" value="town"/>
@@ -33,7 +33,7 @@
    eJztmD0OgjAUgOvPwoKnEBxYvIIJ6kmMg4sX8Ri6uHgjcHHRO9jG10gIwuuTWorvSxraQn/eX1sqBMMwTDOPoesZuGc+cj0Ddyj77w3lP4ztzMUVFwv2XyD6PIZCnEKzNlSSoDpfLC8H9sZ3zS6ozleV68DqiGJLm/Y/g4yb8J0vv0tBtuukvq+m998wC5u/MaWo13LMUcDIvyWMUWd/NSZF72mPYxqLzbiySSR9aCrTTaYcbJ/BU9XHMq09lQ1DDLLH4Pt5wf8jqF8h/NtX+zPt4Kv9Vaxn4PfltSC3uAd3BS2n0oFeC1TSesn+QAfMb+BzEg7974/ZdzG01Y8LlM/0+fz1Cd9kxsa2yb0WrxcM8+JOuOugtOkqCeEcSmnDMBieAYovig==
   </data>
  </layer>
- <objectgroup id="6" name="animatedObjects1">
+ <objectgroup id="6" name="animatedObjects0">
   <object id="334" name="animatedObject" x="448" y="352" width="16" height="16">
    <properties>
     <property name="index" value="flower2"/>
@@ -127,7 +127,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup id="16" name="gameObjects1">
+ <objectgroup id="16" name="gameObjects0">
   <object id="412" name="person4" type="person" x="240" y="224" width="16" height="16">
    <properties>
     <property name="CharacterSpriteComponent">male: true,
@@ -164,8 +164,8 @@ path: NSTOP</property>
    </properties>
   </object>
  </objectgroup>
- <objectgroup id="15" name="animatedTiles1"/>
- <objectgroup id="7" name="people1">
+ <objectgroup id="15" name="animatedTiles0"/>
+ <objectgroup id="7" name="people0">
   <object id="51" name="person" type="person" x="208" y="176" width="16" height="16">
    <properties>
     <property name="male" type="bool" value="true"/>
@@ -315,7 +315,7 @@ path: SSTOP,E,E,E,E,ESTOP,NSTOP,NSTOP,WSTOP,SSTOP,S,S,S,ESTOP,SSTOP,W,W,W,W,SSTO
    eJztmdlOwzAQRS1RlvIf8FagEPgjeAOawm91oS38VcvSwDMnD6gmuOMJsYUAX+lIlaPOvZNN8sQYvbINY07hbOPrsfGmMXebNYr9Qs1axtzDQ+vz+iN9P8EzvHjOwXiH87QTPltZ9769IoZHQd+v8Gb1f7BlzCEcQReO4WTL/f9HMj3BM7wEzPdR97W9IrSHS5f0eQXX0IMc+nADt5VzcECmQziCLhzDSftrzT3O7X5Lv27XtfuXPJqoaz37A3ocwgjGcAcTmMLM6v+SDFdwDT3IoQ83cFvJd06PF44+XevVunb/kkcT5Vb/c3pclNefZ74HOfRhyVph9T/AfwgjGJfPJkxgCrMG2ap1T3dXhPKQ1NnGn35H1jtvwu8pZNurtTn+i/I68Tz2IIc+LFkrGmSr1rUVykP0p8+F432/ZK2w1jtcjyFZRlbGCb+nkO1+399V11YID9F/zXu+VGYdm5Nh4ci4ZK1o8I5eVzekRwh1hPsva3BvSnVDeSQlJSUlJf1Haecasfb1TTybzmS0c41Y+3oxm8ezzkzGJe1cQ7uvDymfZ52ZjEvauUadfX0o+TzrzGTWSTvXiLWvF7N5PLXZJWnnGrH29WI2j6c2uyTtXCPWvl7M5vHUZpeknWvE2teL2Tye2uyStHONWPt6ST5PbfakpJ9W3W8df011vnUkJcXQO1GR5Tw=
   </data>
  </layer>
- <objectgroup id="11" name="colliderWalls1">
+ <objectgroup id="11" name="colliderWalls0">
   <object id="203" x="64" y="144" width="96" height="32">
    <properties>
     <property name="ColliderComponent" value=""/>
@@ -742,7 +742,7 @@ path: SSTOP,E,E,E,E,ESTOP,NSTOP,NSTOP,WSTOP,SSTOP,S,S,S,ESTOP,SSTOP,W,W,W,W,SSTO
    </properties>
   </object>
  </objectgroup>
-<objectgroup id="12" name="triggers1">
+ <objectgroup id="12" name="triggers0">
   <object id="32" name="startField" x="432" y="192" width="16" height="16">
    <properties>
     <property name="fieldID" type="int" value="1"/>
@@ -824,7 +824,7 @@ path: SSTOP,E,E,E,E,ESTOP,NSTOP,NSTOP,WSTOP,SSTOP,S,S,S,ESTOP,SSTOP,W,W,W,W,SSTO
    </properties>
   </object>
  </objectgroup>
- <objectgroup id="13" name="descriptions1">
+ <objectgroup id="13" name="descriptions0">
   <object id="53" name="sign" type="objectDescription" x="112" y="176" width="16" height="16">
    <properties>
     <property name="text" value="sign_25_2_text"/>
@@ -988,5 +988,5 @@ path: SSTOP,E,E,E,E,ESTOP,NSTOP,NSTOP,WSTOP,SSTOP,S,S,S,ESTOP,SSTOP,W,W,W,W,SSTO
    </properties>
   </object>
  </objectgroup>
- <objectgroup id="14" name="animatedObjects2"/>
+ <objectgroup id="14" name="animatedObjects1"/>
 </map>

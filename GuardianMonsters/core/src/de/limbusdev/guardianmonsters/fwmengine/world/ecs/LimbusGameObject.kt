@@ -22,6 +22,8 @@ class LimbusGameObject(var name: String = "", val type: String = "general")
     {
         if(!enabled) { return }
 
+        transform.update(deltaTime)
+
         for(component in components)
         {
             if(!component.initialized)

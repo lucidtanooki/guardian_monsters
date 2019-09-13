@@ -40,13 +40,10 @@ class MovementSystem
     // --------------------------------------------------------------------------------------------- PROPERTIES
     companion object{ const val TAG = "MovementSystem" }
 
-    private lateinit var hero: LimbusGameObject
-
-
     // --------------------------------------------------------------------------------------------- METHODS
     override fun addedToEngine(engine: Engine)
     {
-        hero = World.hero
+
     }
 
     override fun update(deltaTime: Float)
@@ -76,6 +73,7 @@ class MovementSystem
 
     fun checkHeal()
     {
+        val hero = World.hero
         val heroArea = createRectangle(IntRect(hero.transform.x, hero.transform.y, hero.transform.width, hero.transform.height))
 
         // Check whether hero enters warp area
@@ -95,6 +93,7 @@ class MovementSystem
 
     fun updateHero()
     {
+        val hero = World.hero
         // Only move hero, when player is not speaking to an entity
         if (!hero.get<InputComponent>()!!.talking)
         {
@@ -158,6 +157,7 @@ class MovementSystem
 
                 if(staticCollider != null)
                 {
+
                     nextPos.x = transform.nextX + Constant.TILE_SIZE/2
                     nextPos.y = transform.nextY + Constant.TILE_SIZE/2
 
@@ -185,12 +185,14 @@ class MovementSystem
         // If entity is already moving, and last incremental step has completed (long enough ago)
         if (input.moving && TimeUtils.timeSinceMillis(transform.lastPixelStep) > Constant.ONE_STEPDURATION_MS)
         {
+            val hero = World.hero
+
             when (input.skyDir)
             {
-                SkyDirection.N  -> transform.y = transform.y + 1
-                SkyDirection.W  -> transform.x = transform.x - 1
-                SkyDirection.E  -> transform.x = transform.x + 1
-                else            -> transform.y = transform.y - 1
+                SkyDirection.N  -> transform.y += 1
+                SkyDirection.W  -> transform.x -= 1
+                SkyDirection.E  -> transform.x += 1
+                else            -> transform.y -= 1
             }
             transform.lastPixelStep = TimeUtils.millis()
 
@@ -207,15 +209,7 @@ class MovementSystem
                 checkHeal()
                 input.moving = false
 
-                // Update Grid Position of hero
-                transform.onGrid += when (input.skyDir)
-                {
-                    SkyDirection.N  -> IntVec2(0,1)
-                    SkyDirection.S  -> IntVec2(0,-1)
-                    SkyDirection.E  -> IntVec2(1,0)
-                    SkyDirection.W  -> IntVec2(-1,0)
-                    else            -> IntVec2()
-                }
+                transform.updateGridSlot()
 
                 logDebug(TAG) { "Position on Grid: ${transform.onGrid}" }
             }

@@ -128,7 +128,7 @@ class EntityFactory(private val engine: Engine, private val area: GameArea)
         val sign = Entity()
         sign.add(ConversationComponent(mapInfo.content))
         sign.add(TitleComponent(mapInfo.title))
-        sign.add(ColliderComponent(true, mapInfo.x, mapInfo.y, Constant.TILE_SIZE, Constant.TILE_SIZE))
+        sign.add(ColliderComponent())
         //TODO sign.add(Transform(true, mapInfo.x, mapInfo.y, Constant.TILE_SIZE, Constant.TILE_SIZE, layer))
         engine.addEntity(sign)
         return sign

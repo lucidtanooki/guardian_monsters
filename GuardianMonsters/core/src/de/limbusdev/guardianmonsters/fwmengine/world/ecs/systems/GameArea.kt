@@ -117,7 +117,7 @@ class GameArea(val areaID: Int, startPosID: Int)
 
         for (layer in tiledMap.layers)
         {
-            val layerID: Int = layer.name[layer.name.lastIndex].toInt()
+            val layerID: Int = layer.name[layer.name.lastIndex].toString().toInt()
             when(layer.name.removeLast(0))
             {
                 "people"        -> createGameObjects(layer, layerID)
@@ -313,25 +313,6 @@ class GameArea(val areaID: Int, startPosID: Int)
     }
 
     /**
-     * Only for layers containing "colliderWalls" in their nameID
-     * Creates rectangle objects for every collider in the given layer
-     *
-     * @param layer
-     */
-    private fun createColliders(layer: MapLayer)
-    {
-        val colliderLayer = Array<ColliderComponent>()
-        val layerIndex = layer.name.subStringFromEnd(0).toInt()
-        colliders[layerIndex] = colliderLayer
-
-        for (mo in layer.objects)
-        {
-            val r = (mo as RectangleMapObject).rectangle
-            colliderLayer.add(ColliderComponent(true, MathUtils.round(r.x), MathUtils.round(r.y), MathUtils.round(r.width), MathUtils.round(r.height)))
-        }
-    }
-
-    /**
      * Creates a wall of colliders right around the active map so character can't just walk out
      *
      * @param tiledMap
@@ -341,14 +322,31 @@ class GameArea(val areaID: Int, startPosID: Int)
         val mapWidth    = tiledMap.properties["width", 10]
         val mapHeight   = tiledMap.properties["height", 10]
 
-        for (i in colliders.keys())
-        {
-            val layerColliders = colliders[i]
-            layerColliders.add(ColliderComponent(true, -1 * Constant.TILE_SIZE, -1 * Constant.TILE_SIZE, (mapWidth + 2) * Constant.TILE_SIZE, Constant.TILE_SIZE))
-            layerColliders.add(ColliderComponent(true, -1 * Constant.TILE_SIZE, mapHeight * Constant.TILE_SIZE, (mapWidth + 2) * Constant.TILE_SIZE, Constant.TILE_SIZE))
-            layerColliders.add(ColliderComponent(true, -1 * Constant.TILE_SIZE, 0, Constant.TILE_SIZE, mapHeight * Constant.TILE_SIZE))
-            layerColliders.add(ColliderComponent(true, mapWidth * Constant.TILE_SIZE, 0, Constant.TILE_SIZE, mapHeight * Constant.TILE_SIZE))
-        }
+        // TODO for each layer
+
+        var borderGameObject = LimbusGameObject("BorderBottom")
+        borderGameObject.transform.x = -1 * Constant.TILE_SIZE
+        borderGameObject.transform.y = -1 * Constant.TILE_SIZE
+        borderGameObject.add(ColliderComponent(width = (mapWidth + 2) * Constant.TILE_SIZE, height = Constant.TILE_SIZE))
+        World.add(borderGameObject)
+
+        borderGameObject = LimbusGameObject("BorderTop")
+        borderGameObject.transform.x = -1 * Constant.TILE_SIZE
+        borderGameObject.transform.y = mapHeight * Constant.TILE_SIZE
+        borderGameObject.add(ColliderComponent(width = (mapWidth + 2) * Constant.TILE_SIZE, height = Constant.TILE_SIZE))
+        World.add(borderGameObject)
+
+        borderGameObject = LimbusGameObject("BorderLeft")
+        borderGameObject.transform.x = -1 * Constant.TILE_SIZE
+        borderGameObject.transform.y = 0
+        borderGameObject.add(ColliderComponent(width = Constant.TILE_SIZE, height = (mapHeight + 2) * Constant.TILE_SIZE))
+        World.add(borderGameObject)
+
+        borderGameObject = LimbusGameObject("BorderRight")
+        borderGameObject.transform.x = mapWidth * Constant.TILE_SIZE
+        borderGameObject.transform.y = 0
+        borderGameObject.add(ColliderComponent(width = Constant.TILE_SIZE, height = (mapHeight + 2) * Constant.TILE_SIZE))
+        World.add(borderGameObject)
     }
 
     fun dispose()

@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.maps.MapLayer
+import com.badlogic.gdx.maps.MapObject
 import com.badlogic.gdx.maps.objects.RectangleMapObject
 import com.badlogic.gdx.maps.tiled.TiledMap
 import com.badlogic.gdx.math.MathUtils
@@ -34,9 +35,6 @@ import de.limbusdev.utils.geometry.IntRect
 import de.limbusdev.utils.geometry.IntVec2
 import java.lang.Exception
 import kotlin.reflect.KClass
-import kotlin.reflect.jvm.internal.impl.load.kotlin.KotlinClassFinder
-
-data class CharacterSpriteComponentData(var male: Boolean = true, var index: Int = 0)
 
 /**
  * Contains logic and information about one game world area like a forest or a path. One
@@ -47,6 +45,11 @@ data class CharacterSpriteComponentData(var male: Boolean = true, var index: Int
 class GameArea(val areaID: Int, startPosID: Int)
 {
     // --------------------------------------------------------------------------------------------- PROPERTIES
+    companion object
+    {
+        val defaultComponentPackage = "de.limbusdev.guardianmonsters.fwmengine.world.ecs.components."
+    }
+
     val tiledMap    : TiledMap
     val mapRenderer : ExtendedTiledMapRenderer
 
@@ -138,15 +141,6 @@ class GameArea(val areaID: Int, startPosID: Int)
 
 
     // ......................................................................... Map Object Creation
-    private fun parseColliderComponent(json: Json, mapObject: RectangleMapObject) : ColliderComponent
-    {
-
-        val jsonStringWithoutBrackets = mapObject.properties["ColliderComponent", ColliderComponent().defaultJson]
-        val collider = json.fromJson(ColliderComponent::class.java, "{$jsonStringWithoutBrackets}")
-
-        return collider
-    }
-
     /**
      * Takes each MapObject from a layer and creates a proper LimbusGameObject from it.
      * Only for layers with game objects composed of JSON-components.
@@ -158,42 +152,13 @@ class GameArea(val areaID: Int, startPosID: Int)
             val gameObject = LimbusGameObject(mapObject.name)
             val json = Json()
 
-            /*if(mapObject is RectangleMapObject)
-            {
-                val transform = World.componentParsers[TransformComponent::class]?.parseComponent(json, mapObject)
-                if(transform != null) { gameObject.add(transform) }
-            }*/
-
             // .......................................................................... Components
             for(key in mapObject.properties.keys)
             {
-                if(key.contains("Component", false))
+                val component = generateComponent(mapObject, key, json)
+                if(component != null) { gameObject.add(component) }
+                /*else if(key.contains("Component", false))
                 {
-                    try
-                    {
-                        // Components that are part of the engine can be used with simple names
-                        // Custom components must use their full name, like: com.me.CustomComponent
-                        val componentClassBasePath = when(key.contains("."))
-                        {
-                            true -> ""
-                            false -> "de.limbusdev.guardianmonsters.fwmengine.world.ecs.components."
-                        }
-                        val kClass = Class.forName(componentClassBasePath + key).kotlin
-
-                        kClass as KClass<out LimbusBehaviour>
-
-                        val component = World.componentParsers[kClass]?.parseComponent(json, mapObject)
-
-                        if (component != null)
-                        {
-                            gameObject.add(component)
-                        }
-                    }
-                    catch (e: Exception)
-                    {
-                        println("Cast not successful for $key.")
-                    }
-
                     when(key)
                     {
                         "CharacterSpriteComponent" ->
@@ -205,7 +170,7 @@ class GameArea(val areaID: Int, startPosID: Int)
                             gameObject.add(sprite)
                         }
                     }
-                }
+                }*/
             }
 
             World.add(gameObject)
@@ -213,15 +178,44 @@ class GameArea(val areaID: Int, startPosID: Int)
 
         World.addAndRemoveObjectsNow()
 
-        val objects = World.getAllWith(listOf(
+        val objects = World.getAllWithExactly(listOf(
                 TransformComponent::class.simpleName!!,
                 CharacterSpriteComponent::class.simpleName!!,
                 ColliderComponent::class.simpleName!!))
 
-        val descriptions = World.getAllWith(listOf(
+        val descriptions = World.getAllWithExactly(listOf(
                 TransformComponent::class.simpleName!!,
                 ConversationComponent::class.simpleName!!
         ))
+    }
+
+    private fun generateComponent(mapObject: MapObject, componentName: String, json: Json) : LimbusBehaviour?
+    {
+        if(!componentName.contains("Component", false)) { return null }
+
+        var component: LimbusBehaviour? = null
+
+        try
+        {
+            // Components that are part of the engine can be used with simple names
+            // Custom components must use their full name, like: com.me.CustomComponent
+            val componentClassBasePath = when (componentName.contains("."))
+            {
+                true  -> ""
+                false -> defaultComponentPackage
+            }
+            val kClass = Class.forName(componentClassBasePath + componentName).kotlin
+
+            kClass as KClass<out LimbusBehaviour>
+
+            component = World.componentParsers[kClass]?.parseComponent(json, mapObject)
+        }
+        catch (e: Exception)
+        {
+            println("Cast not successful for $componentName.")
+        }
+
+        return component
     }
 
     private fun createTriggers(layer: MapLayer, startFieldID: Int)

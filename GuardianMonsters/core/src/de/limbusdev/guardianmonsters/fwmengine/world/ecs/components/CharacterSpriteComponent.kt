@@ -6,6 +6,7 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusBehaviour
 
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.AnimatedPersonSprite
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.EntitySprite
+import de.limbusdev.guardianmonsters.fwmengine.world.ui.ExtendedTiledMapRenderer
 
 
 /**
@@ -15,21 +16,16 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ui.EntitySprite
  *
  * @author Georg Eckert 2015-11-22
  */
-class CharacterSpriteComponent : LimbusBehaviour, Component
+class CharacterSpriteComponent
+(
+        var sprite: AnimatedPersonSprite = AnimatedPersonSprite(male = true, index = 0)
+)
+    : LimbusBehaviour(), Component
 {
-    override val defaultJson: String = ""
+    override val defaultJson: String = "enabled: true, male: true, index: 0"
 
-    data class Data(var male: Boolean = true, var index: Int = 0)
-
-    var sprite : AnimatedPersonSprite
-
-    constructor(data: Data) : super()
+    override fun update(deltaTime: Float)
     {
-        sprite = AnimatedPersonSprite(data.male, data.index)
-    }
-
-    constructor(sprite: AnimatedPersonSprite) : super()
-    {
-        this.sprite = sprite
+        super.update(deltaTime)
     }
 }

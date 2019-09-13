@@ -19,6 +19,7 @@ object World
         componentParsers[TransformComponent::class] = TransformComponentParser
         componentParsers[ColliderComponent::class] = ColliderComponentParser
         componentParsers[ConversationComponent::class] = ConversationComponentParser
+        componentParsers[CharacterSpriteComponent::class] = CharacterSpriteComponentParser
 
         add(hero)
     }
@@ -66,9 +67,14 @@ object World
         return gameObjects.filter { it.type == type }
     }
 
-    fun getAllWith(signature: List<String>) : List<LimbusGameObject>
+    fun getAllWithExactly(signature: List<String>) : List<LimbusGameObject>
     {
         val a = gameObjects
         return gameObjects.filter { it.signature.containsAll(signature) && it.signature.size == signature.size }
+    }
+
+    fun getAllWith(componentType: String) : List<LimbusGameObject>
+    {
+        return gameObjects.filter { it.signature.contains(componentType) }
     }
 }

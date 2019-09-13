@@ -25,7 +25,6 @@ import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusGameObject
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.World
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.*
-import de.limbusdev.guardianmonsters.fwmengine.world.ecs.entities.EntityFamilies
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.entities.HeroEntity
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.GameArea
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.widgets.ConversationWidget
@@ -288,7 +287,7 @@ class HUD
             }
         }
 
-        val interactiveObjects = World.getAllWith(signature)
+        val interactiveObjects = World.getAllWithExactly(signature)
         for(interactiveObject in interactiveObjects)
         {
             val transform = interactiveObject.get<TransformComponent>()

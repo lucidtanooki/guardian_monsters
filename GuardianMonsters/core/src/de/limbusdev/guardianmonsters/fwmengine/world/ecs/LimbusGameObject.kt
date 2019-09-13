@@ -1,5 +1,7 @@
 package de.limbusdev.guardianmonsters.fwmengine.world.ecs
 
+import kotlin.collections.ArrayList
+
 class LimbusGameObject(var name: String = "", val type: String = "general")
 {
     val signature = mutableListOf<String>()
@@ -48,6 +50,8 @@ class LimbusGameObject(var name: String = "", val type: String = "general")
 
     inline fun <reified T : LimbusBehaviour> get() : T?
     {
+        val components = getComponents<T>()
+        if(components.isEmpty()) { return null }
         return components.filterIsInstance<T>().first()
     }
 

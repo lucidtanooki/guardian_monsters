@@ -11,22 +11,20 @@ import com.badlogic.gdx.maps.tiled.TiledMap
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer
 import com.badlogic.gdx.math.MathUtils
-import com.badlogic.gdx.scenes.scene2d.ui.Skin
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ArrayMap
-import com.badlogic.gdx.utils.GdxRuntimeException
 import com.badlogic.gdx.utils.Sort
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.World
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.CharacterSpriteComponent
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.GameObjectZComparator
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TransformComponent
 
-import de.limbusdev.guardianmonsters.media.IMediaManager
 import de.limbusdev.guardianmonsters.scene2d.SpriteZComparator
 import de.limbusdev.guardianmonsters.services.Services
 import de.limbusdev.utils.extensions.removeLast
 import de.limbusdev.utils.extensions.set
-import de.limbusdev.utils.log
 import de.limbusdev.utils.logDebug
 import de.limbusdev.utils.logError
-import ktx.ashley.mapperFor
-import ktx.style.defaultStyle
 
 /**
  * Renderer for *.tmx files. This renderer renders map files of the FWM-Engine.
@@ -51,7 +49,7 @@ class ExtendedTiledMapRenderer(map: TiledMap) : OrthogonalTiledMapRenderer(map, 
     private val sprites = Array<AnimatedPersonSprite>()
     private val objectAnimations = ArrayMap<String, Animation<TextureRegion>>()
     private val tileAnimations = ArrayMap<Int, Animation<TextureRegion>>()
-    private var elapsedTime: Float = 0.toFloat()
+    private var elapsedTime: Float = 0f
     private val weatherAnimator: WeatherAnimator
 
 
@@ -110,6 +108,17 @@ class ExtendedTiledMapRenderer(map: TiledMap) : OrthogonalTiledMapRenderer(map, 
 
     private fun renderPeople()
     {
+        // Get all CharacterSpriteComponents
+        val gameObjects = World.getAllWith("CharacterSpriteComponent").toTypedArray()
+        Sort.instance().sort(gameObjects, GameObjectZComparator)
+
+        gameObjects.forEach {
+
+            val sprite = it.get<CharacterSpriteComponent>()?.sprite
+            val transform = it.get<TransformComponent>()
+            if(sprite != null && transform != null) { batch.draw(sprite, transform.xf, transform.yf) }
+        }
+
         // Draw entity sprites if visible
         sprites.forEach { it.updateAndDrawIfVisible(elapsedTime, batch) }
     }

@@ -119,6 +119,8 @@ class MovementSystem
             input: InputComponent,
             collider: ColliderComponent
     ) {
+        // TODO fix collision!
+
         // Initialize hero Movement
         if (input.startMoving && TimeUtils.timeSinceMillis(input.firstTip) > 100 && input.touchDown)
         {

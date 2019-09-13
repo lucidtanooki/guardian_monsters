@@ -256,7 +256,7 @@ class HUD
 
     fun checkForNearInteractiveObjects(hero: Entity, signature: List<String>): LimbusGameObject?
     {
-        val pos = hero.getComponent<TransformComponent>()!!
+        val pos = hero.getComponent<Transform>()!!
         val dir = hero.getComponent<InputComponent>()!!.skyDir
 
         var nearEntity: LimbusGameObject? = null
@@ -274,10 +274,10 @@ class HUD
         logDebug(TAG) { "Grid cell to be checked: $checkGridCell" }
 
 
-        for (e in engine.getEntitiesFor(Family.all(TransformComponent::class.java).get()))
+        for (e in engine.getEntitiesFor(Family.all(Transform::class.java).get()))
         {
             // Only if interactive object is found and it's not the hero
-            val posComp = e.getComponent<TransformComponent>()
+            val posComp = e.getComponent<Transform>()
             if (posComp != null && e !is HeroEntity)
             {
                 logDebug(TAG) { "Grid Cell of tested Entity: ${posComp.onGrid}" }
@@ -290,15 +290,11 @@ class HUD
         val interactiveObjects = World.getAllWithExactly(signature)
         for(interactiveObject in interactiveObjects)
         {
-            val transform = interactiveObject.get<TransformComponent>()
-            if (transform != null)
-            {
-                logDebug(TAG) { "Grid Cell of tested Entity: ${transform.onGrid}" }
+            logDebug(TAG) { "Grid Cell of tested Entity: ${interactiveObject.transform.onGrid}" }
 
-                // Is there an entity?
-                val onGrid = transform.onGrid
-                if (onGrid == checkGridCell) { nearEntity = interactiveObject }
-            }
+            // Is there an entity?
+            val onGrid = interactiveObject.transform.onGrid
+            if (onGrid == checkGridCell) { nearEntity = interactiveObject }
         }
 
         return nearEntity
@@ -338,7 +334,7 @@ class HUD
 
         // Sign Entity
         val signSignature = listOf(
-                TransformComponent::class.simpleName!!,
+                Transform::class.simpleName!!,
                 ConversationComponent::class.simpleName!!
         )
 

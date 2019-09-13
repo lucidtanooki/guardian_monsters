@@ -14,8 +14,8 @@ import com.badlogic.ashley.core.Entity;
 public abstract class Components
 {
     /* ............................................................................ ATTRIBUTES .. */
-    public static ComponentMapper<TransformComponent> position =
-            ComponentMapper.getFor(TransformComponent.class);
+    public static ComponentMapper<Transform> position =
+            ComponentMapper.getFor(Transform.class);
     public static ComponentMapper<ColliderComponent> collision =
             ComponentMapper.getFor(ColliderComponent.class);
     public static ComponentMapper<PathComponent> path =
@@ -43,15 +43,15 @@ public abstract class Components
     /* ............................................................................... METHODS .. */
 
     /**
-     * Retrieve {@link TransformComponent} from an {@link Entity} if it has one.
+     * Retrieve {@link Transform} from an {@link Entity} if it has one.
      * @param entity    which the wanted component belongs to
      * @return          the wanted component
      * @throws NullPointerException if the given entity does not contain such a component
      */
-    public static TransformComponent getPositionComponent(Entity entity) throws
+    public static Transform getPositionComponent(Entity entity) throws
             NullPointerException {
         if(position.has(entity)) return position.get(entity);
-        else throw new NullPointerException("Given entity does not contain a TransformComponent.");
+        else throw new NullPointerException("Given entity does not contain a Transform.");
     }
 
     /**

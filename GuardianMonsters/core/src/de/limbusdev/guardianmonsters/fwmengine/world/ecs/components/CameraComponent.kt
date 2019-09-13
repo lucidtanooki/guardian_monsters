@@ -42,7 +42,7 @@ class CameraComponent(private val camera: OrthographicCamera, tiledMap: TiledMap
 
     override fun update(deltaTime: Float)
     {
-        val position = gameObject?.get<TransformComponent>()
+        val position = gameObject?.transform
         if(position != null)
         {
             if (mapOutline.width >= camera.viewportWidth && mapOutline.height >= camera.viewportHeight) {

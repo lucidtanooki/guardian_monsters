@@ -9,7 +9,7 @@ object ColliderComponentParser : IComponentParser<ColliderComponent>
 {
     override fun parseComponent(json: Json, mapObject: MapObject): ColliderComponent?
     {
-        // RectangleMapObjects have implicit TransformComponent
+        // RectangleMapObjects have implicit Transform
         if(mapObject !is RectangleMapObject) { return null }
 
         // MapObject must contain proper component

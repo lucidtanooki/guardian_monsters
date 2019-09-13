@@ -17,7 +17,7 @@ import com.badlogic.gdx.utils.Sort
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.World
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.CharacterSpriteComponent
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.GameObjectZComparator
-import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TransformComponent
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Transform
 
 import de.limbusdev.guardianmonsters.scene2d.SpriteZComparator
 import de.limbusdev.guardianmonsters.services.Services
@@ -115,8 +115,7 @@ class ExtendedTiledMapRenderer(map: TiledMap) : OrthogonalTiledMapRenderer(map, 
         gameObjects.forEach {
 
             val sprite = it.get<CharacterSpriteComponent>()?.sprite
-            val transform = it.get<TransformComponent>()
-            if(sprite != null && transform != null) { batch.draw(sprite, transform.xf, transform.yf) }
+            if(sprite != null) { batch.draw(sprite, it.transform.xf, it.transform.yf) }
         }
 
         // Draw entity sprites if visible

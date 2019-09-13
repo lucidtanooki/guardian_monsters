@@ -11,11 +11,10 @@ import de.limbusdev.guardianmonsters.Constant
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.ColliderComponent
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.InputComponent
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PathComponent
-import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TransformComponent
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Transform
 import de.limbusdev.guardianmonsters.utils.getComponent
 import de.limbusdev.utils.geometry.IntVec2
 import de.limbusdev.guardianmonsters.enums.SkyDirection
-import de.limbusdev.utils.geometry.IntRect
 
 
 /**
@@ -34,7 +33,7 @@ class PathSystem(private val gameArea: GameArea) : EntitySystem()
     override fun addedToEngine(engine: Engine)
     {
         entities = engine.getEntitiesFor(Family.all(
-                TransformComponent::class.java,
+                Transform::class.java,
                 ColliderComponent::class.java,
                 PathComponent::class.java).exclude(
                 InputComponent::class.java
@@ -45,14 +44,14 @@ class PathSystem(private val gameArea: GameArea) : EntitySystem()
     {
         for (entity in entities)
         {
-            val position = entity.getComponent<TransformComponent>()
+            val position = entity.getComponent<Transform>()
             val collider = entity.getComponent<ColliderComponent>()
             val path     = entity.getComponent<PathComponent>()
             makeOneStep(position!!, path!!, collider!!)
         }
     }
 
-    fun makeOneStep(position: TransformComponent, path: PathComponent, collider: ColliderComponent)
+    fun makeOneStep(position: Transform, path: PathComponent, collider: ColliderComponent)
     {
         if (path.startMoving && !path.staticEntity)
         {
@@ -96,8 +95,9 @@ class PathSystem(private val gameArea: GameArea) : EntitySystem()
                 if (!collider.equals(r) && r.asRectangle.contains(nextPos)) { println("blocked"); return }
             }
 
-            collider.x = position.nextX
-            collider.y = position.nextY
+            // TODO update for new system
+            //collider.x = position.nextX
+            //collider.y = position.nextY
             position.lastPixelStep = TimeUtils.millis()
             path.moving = true
             path.startMoving = false

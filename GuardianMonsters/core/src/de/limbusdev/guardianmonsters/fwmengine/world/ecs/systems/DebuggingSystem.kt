@@ -9,7 +9,7 @@ import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Components
-import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TransformComponent
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Transform
 
 
 /**
@@ -25,7 +25,7 @@ class DebuggingSystem : EntitySystem()
     // --------------------------------------------------------------------------------------------- METHODS
     override fun addedToEngine(engine: Engine)
     {
-        entities = engine.getEntitiesFor(Family.all(TransformComponent::class.java).get())
+        entities = engine.getEntitiesFor(Family.all(Transform::class.java).get())
     }
 
     override fun update(deltaTime: Float)

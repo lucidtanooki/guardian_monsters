@@ -15,7 +15,7 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.HeroComponen
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.InputComponent
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.InventoryComponent
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PathComponent
-import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TransformComponent
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Transform
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.SaveGameComponent
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TeamComponent
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TitleComponent
@@ -43,7 +43,7 @@ class EntityFactory(private val engine: Engine, private val area: GameArea)
      * Creates a hero [Entity] and adds it to the [Engine].
      * @return
      */
-    fun createHero(startField: TransformComponent, restoreSave: Boolean): Entity
+    fun createHero(startField: IntVec2, startLayer: Int, restoreSave: Boolean): Entity
     {
         val hero = HeroEntity()
 
@@ -52,21 +52,20 @@ class EntityFactory(private val engine: Engine, private val area: GameArea)
 
         // Input
         hero.add(InputComponent())
-        val position = TransformComponent(
-                true,
-                startField.x,
-                startField.y,
-                UnitConverter.tilesToPixels(1),
-                UnitConverter.tilesToPixels(1),
-                startField.layer
-        )
+        // TODO
+        val transform = Transform(LimbusGameObject())
+        transform.x = startField.x
+        transform.y = startField.y
+        transform.width = UnitConverter.tilesToPixels(1)
+        transform.height = UnitConverter.tilesToPixels(1)
+        transform.layer = startLayer
 
         // Position
-        hero.add(position)
+        hero.add(transform)
 
         // Collider
-        val collider = ColliderComponent(true, position.x, position.y, position.width, position.height)
-        area.addDynamicCollider(collider, startField.layer)
+        val collider = ColliderComponent(true, transform.x, transform.y, transform.width, transform.height)
+        area.addDynamicCollider(collider, startLayer)
         hero.add(collider)
 
         // Game State
@@ -74,8 +73,8 @@ class EntityFactory(private val engine: Engine, private val area: GameArea)
         hero.add(SaveGameComponent(gameState))
         if (restoreSave)
         {
-            position.x = gameState.gridx * Constant.TILE_SIZE
-            position.y = gameState.gridy * Constant.TILE_SIZE
+            transform.x = gameState.gridx * Constant.TILE_SIZE
+            transform.y = gameState.gridy * Constant.TILE_SIZE
         }
 
         // Add Team
@@ -116,7 +115,7 @@ class EntityFactory(private val engine: Engine, private val area: GameArea)
 
         engine.addEntity(hero)
 
-        World.hero.add(position)
+        World.hero.transform = transform
 
         return hero
     }
@@ -133,7 +132,7 @@ class EntityFactory(private val engine: Engine, private val area: GameArea)
         sign.add(ConversationComponent(mapInfo.content))
         sign.add(TitleComponent(mapInfo.title))
         sign.add(ColliderComponent(true, mapInfo.x, mapInfo.y, Constant.TILE_SIZE, Constant.TILE_SIZE))
-        sign.add(TransformComponent(true, mapInfo.x, mapInfo.y, Constant.TILE_SIZE, Constant.TILE_SIZE, layer))
+        //TODO sign.add(Transform(true, mapInfo.x, mapInfo.y, Constant.TILE_SIZE, Constant.TILE_SIZE, layer))
         engine.addEntity(sign)
         return sign
     }
@@ -149,17 +148,20 @@ class EntityFactory(private val engine: Engine, private val area: GameArea)
             pathStr.forEach { path.add(SkyDirection.valueOf(it)) }
         }
 
+        // TODO
+        return Entity()
+/*
         // Use second Constructor
         return createPerson(
 
-                TransformComponent(true, pInfo.startPosition.x, pInfo.startPosition.y, Constant.TILE_SIZE, Constant.TILE_SIZE, layer),
+                Transform(true, pInfo.startPosition.x, pInfo.startPosition.y, Constant.TILE_SIZE, Constant.TILE_SIZE, layer),
                 path,
                 pInfo.moves,
                 pInfo.conversation,
                 pInfo.name,
                 pInfo.male,
                 pInfo.spriteIndex
-        )
+        )*/
     }
 
     /**
@@ -172,7 +174,7 @@ class EntityFactory(private val engine: Engine, private val area: GameArea)
      */
     private fun createPerson
     (
-            startField: TransformComponent,
+            startField: Transform,
             path: Array<SkyDirection>,
             moves: Boolean,
             conversation: String,
@@ -193,19 +195,18 @@ class EntityFactory(private val engine: Engine, private val area: GameArea)
         person.add(CharacterSpriteComponent(AnimatedPersonSprite(male, spriteIndex)))
 
         // Position
-        val position = TransformComponent(
-                true,
-                startField.x,
-                startField.y,
-                UnitConverter.tilesToPixels(1),
-                UnitConverter.tilesToPixels(1),
-                startField.layer
-        )
+        val transform = Transform(LimbusGameObject())
+        transform.x = startField.x
+        transform.y = startField.y
+        transform.width = UnitConverter.tilesToPixels(1)
+        transform.height = UnitConverter.tilesToPixels(1)
+        transform.layer = startField.layer
 
-        person.add(position)
+
+        person.add(transform)
 
         // Collider
-        val collider = ColliderComponent(true, position.x, position.y, position.width, position.height)
+        val collider = ColliderComponent(true, transform.x, transform.y, transform.width, transform.height)
         area.addDynamicCollider(collider, startField.layer)
         person.add(collider)
 

@@ -12,30 +12,30 @@ import de.limbusdev.utils.geometry.IntRect
  *
  * @author Georg Eckert 2015-11-15
  */
-class ColliderComponent() : LimbusBehaviour(), Component
+class ColliderComponent
+(
+        enabled: Boolean = true,
+        var offsetX: Int = 0,
+        var offsetY: Int = 0,
+        var width: Int = 16,
+        var height: Int = 16
+)
+    : LimbusBehaviour(), Component
 {
-    constructor(enabled: Boolean, x: Int, y: Int, width: Int, height: Int) : this()
+    init
     {
         this.enabled = enabled
-        this.x = x
-        this.y = y
-        this.width = width
-        this.height = height
     }
 
     override val defaultJson =
             """
                     enabled: true,
-                    x: 0,
-                    y: 0,
+                    offsetX: 0,
+                    offsetY: 0,
                     width: 16,
                     height: 16
             """.trimMargin()
 
-    var x = 0
-    var y = 0
-    var width = 16
-    var height = 16
 
-    val asRectangle get() = IntRect(x, y, width, height)
+    val asRectangle get() = IntRect(offsetX, offsetY, width, height)
 }

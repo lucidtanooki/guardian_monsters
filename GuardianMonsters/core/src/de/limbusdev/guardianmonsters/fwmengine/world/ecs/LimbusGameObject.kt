@@ -1,9 +1,13 @@
 package de.limbusdev.guardianmonsters.fwmengine.world.ecs
 
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Transform
 import kotlin.collections.ArrayList
 
 class LimbusGameObject(var name: String = "", val type: String = "general")
 {
+    // LimbusGameObjects must have a transform
+    var transform : Transform = Transform(this)
+
     val signature = mutableListOf<String>()
 
     val components = ArrayList<LimbusBehaviour>()

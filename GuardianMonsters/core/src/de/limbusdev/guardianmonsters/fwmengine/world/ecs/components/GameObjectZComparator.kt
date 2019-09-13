@@ -10,15 +10,12 @@ object GameObjectZComparator : Comparator<LimbusGameObject>
 
     override fun compare(object1: LimbusGameObject, object2: LimbusGameObject): Int
     {
-        val transform1 = object1.get<TransformComponent>()
-        val transform2 = object2.get<TransformComponent>()
-
-        if(transform1 == null || transform2 == null) { return EQUAL }
+        if(object1.transform == null || object2.transform == null) { return EQUAL }
 
         return when
         {
-            transform1.y > transform2.y -> SMALLER
-            transform1.y < transform2.y -> BIGGER
+            object1.transform.y > object2.transform.y -> SMALLER
+            object1.transform.y < object2.transform.y -> BIGGER
             else -> EQUAL
         }
     }

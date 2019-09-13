@@ -5,6 +5,7 @@ import com.badlogic.ashley.core.Entity
 
 import de.limbusdev.guardianmonsters.Constant
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusBehaviour
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusGameObject
 import de.limbusdev.utils.extensions.f
 import de.limbusdev.utils.geometry.IntRect
 import de.limbusdev.utils.geometry.IntVec2
@@ -16,23 +17,8 @@ import de.limbusdev.utils.geometry.IntVec2
  *
  * @author Georg Eckert 2015-11-22
  */
-class TransformComponent() : LimbusBehaviour(), Component
+class Transform(var gameObject: LimbusGameObject) : Component
 {
-    constructor(enabled: Boolean, x: Int, y: Int, width: Int, height: Int, layer: Int) : this()
-    {
-        this.enabled = enabled
-        this.x = x
-        this.y = y
-        this.width = width
-        this.height = height
-        this.layer = layer
-    }
-
-    override val defaultJson = """
-                enabled: true,
-                layer: 0
-        """.trimIndent()
-
     var x = 0
     var y = 0
     var width = 16
@@ -69,7 +55,7 @@ class TransformComponent() : LimbusBehaviour(), Component
                 onGrid.y * Constant.TILE_SIZE + Constant.TILE_SIZE / 2
     )
 
-    override fun update(deltaTime: Float)
+    fun update(deltaTime: Float)
     {
 
     }

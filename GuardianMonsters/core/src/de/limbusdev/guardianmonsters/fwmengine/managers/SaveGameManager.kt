@@ -12,7 +12,7 @@ import com.esotericsoftware.kryo.io.Output
 
 import de.limbusdev.guardianmonsters.Constant
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.GuardoSphereComponent
-import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TransformComponent
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Transform
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.SaveGameComponent
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TeamComponent
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.GameArea
@@ -52,7 +52,7 @@ class SaveGameManager : EntitySystem
     {
         val saveGameComps = Family.all(
                 SaveGameComponent::class.java,
-                TransformComponent::class.java,
+                Transform::class.java,
                 TeamComponent::class.java).get()
 
         savableEntities = engine.getEntitiesFor(saveGameComps)
@@ -67,7 +67,7 @@ class SaveGameManager : EntitySystem
         logDebug(TAG) { savableEntities.first().toString() }
         logDebug(TAG) { getCurrentGameState().guardoSphere.toString() }
 
-        val posComp = firstEntity.getComponent<TransformComponent>()!!
+        val posComp = firstEntity.getComponent<Transform>()!!
 
         getCurrentGameState().gridx = posComp.onGrid.x
         getCurrentGameState().gridy = posComp.onGrid.y
@@ -81,7 +81,7 @@ class SaveGameManager : EntitySystem
     {
         for (entity in savableEntities)
         {
-            val position = entity.getComponent<TransformComponent>()!!
+            val position = entity.getComponent<Transform>()!!
             val saveGame = entity.getComponent<SaveGameComponent>()!!
             saveGame.gameState.gridx = position.onGrid.x
             saveGame.gameState.gridy = position.onGrid.y

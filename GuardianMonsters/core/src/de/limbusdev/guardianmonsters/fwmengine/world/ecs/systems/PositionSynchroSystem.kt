@@ -8,7 +8,7 @@ import com.badlogic.ashley.utils.ImmutableArray
 
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.CharacterSpriteComponent
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Components
-import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TransformComponent
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Transform
 import de.limbusdev.guardianmonsters.utils.getComponent
 
 
@@ -27,7 +27,7 @@ class PositionSynchroSystem : EntitySystem()
     override fun addedToEngine(engine: Engine)
     {
         entities = engine.getEntitiesFor(Family.all(
-                TransformComponent::class.java,
+                Transform::class.java,
                 CharacterSpriteComponent::class.java
         ).get())
     }
@@ -38,7 +38,7 @@ class PositionSynchroSystem : EntitySystem()
         {
             val position = Components.position.get(entity)
 
-            // Synchronize CharacterSprite with TransformComponent
+            // Synchronize CharacterSprite with Transform
             val sprite = entity.getComponent<CharacterSpriteComponent>()
             sprite?.sprite?.setPosition(position.xf, position.yf)
         }

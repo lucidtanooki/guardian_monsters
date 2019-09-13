@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-down" width="64" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="17" nextobjectid="414">
+<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-down" width="64" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="17" nextobjectid="415">
  <properties>
   <property name="musicIndex" type="int" value="2"/>
   <property name="musicType" value="town"/>
@@ -138,22 +138,22 @@ height: 16</property>
     <property name="PathComponent">enabled: true,
 dynamic: false,
 path: NSTOP</property>
-    <property name="TransformComponent">enabled: true,
-layer: 1</property>
+    <property name="enabled" type="bool" value="true"/>
+    <property name="layer" type="int" value="0"/>
    </properties>
   </object>
   <object id="306" name="sign" type="objectDescription" x="624" y="288" width="16" height="16">
    <properties>
     <property name="ConversationComponent" value="enabled: true, name: sign_25_1_title, text: sign_25_1_text"/>
-    <property name="TransformComponent">enabled: true,
-layer: 1</property>
+    <property name="enabled" type="bool" value="true"/>
+    <property name="layer" type="int" value="0"/>
    </properties>
   </object>
-  <object id="413" name="sign" type="objectDescription" x="640" y="288" width="16" height="16">
+  <object id="414" name="sign" type="objectDescription" x="640" y="288" width="16" height="16">
    <properties>
     <property name="ConversationComponent" value="enabled: true, name: sign_25_1_title, text: sign_25_1_text"/>
-    <property name="TransformComponent">enabled: true,
-layer: 1</property>
+    <property name="enabled" type="bool" value="true"/>
+    <property name="layer" type="int" value="0"/>
    </properties>
   </object>
  </objectgroup>

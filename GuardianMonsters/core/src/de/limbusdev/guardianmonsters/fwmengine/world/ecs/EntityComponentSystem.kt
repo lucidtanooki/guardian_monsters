@@ -94,7 +94,7 @@ class EntityComponentSystem
      */
     private fun setupHero(fromSave: Boolean) : Entity
     {
-        val hero = entityFactory.createHero(gameArea.startPosition, fromSave)
+        val hero = entityFactory.createHero(gameArea.startPosition, gameArea.startLayer, fromSave)
         val heroPosition = Components.getPositionComponent(hero)
         return hero
     }

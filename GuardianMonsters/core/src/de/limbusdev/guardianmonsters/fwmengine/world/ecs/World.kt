@@ -16,7 +16,6 @@ object World
 
     init
     {
-        componentParsers[TransformComponent::class] = TransformComponentParser
         componentParsers[ColliderComponent::class] = ColliderComponentParser
         componentParsers[ConversationComponent::class] = ConversationComponentParser
         componentParsers[CharacterSpriteComponent::class] = CharacterSpriteComponentParser

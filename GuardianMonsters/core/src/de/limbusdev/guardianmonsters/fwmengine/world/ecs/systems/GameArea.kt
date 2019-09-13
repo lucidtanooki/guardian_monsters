@@ -54,7 +54,8 @@ class GameArea(val areaID: Int, startPosID: Int)
     val mapRenderer : ExtendedTiledMapRenderer
 
     var gridPosition    = IntVec2(0, 0)
-    var startPosition   = TransformComponent()
+    var startPosition   = IntVec2(0, 0)
+    var startLayer = 0
 
 
     private var bgMusic: String? = null
@@ -97,11 +98,13 @@ class GameArea(val areaID: Int, startPosID: Int)
         shape.begin(ShapeRenderer.ShapeType.Line)
         shape.color = Color.WHITE
 
-        for (a in colliders.values())
+        for(collidingObject in World.getAllWith("ColliderComponent"))
         {
-            for (r in a)
+            val collider = collidingObject.get<ColliderComponent>()
+
+            if (collider != null)
             {
-                shape.rect(r.x.f(), r.y.f(), r.width.f(), r.height.f())
+                shape.rect(collidingObject.transform.xf, collidingObject.transform.yf, collider.width.f(), collider.height.f())
             }
         }
 
@@ -149,42 +152,46 @@ class GameArea(val areaID: Int, startPosID: Int)
     {
         for(mapObject in layer.objects)
         {
-            val gameObject = LimbusGameObject(mapObject.name)
-            val json = Json()
-
-            // .......................................................................... Components
-            for(key in mapObject.properties.keys)
+            // Only Rectangle Map Objects are supported
+            if(mapObject is RectangleMapObject)
             {
-                val component = generateComponent(mapObject, key, json)
-                if(component != null) { gameObject.add(component) }
-                /*else if(key.contains("Component", false))
-                {
-                    when(key)
-                    {
-                        "CharacterSpriteComponent" ->
-                        {
-                            //val jsonStringWithoutBrackets = mapObject.properties[key, CharacterSpriteComponent().defaultJson]
-                            val jsonStringWithoutBrackets = mapObject.properties["CharacterSpriteComponent", "gender: male, index: 1"]
-                            val spriteData = json.fromJson(CharacterSpriteComponent.Data::class.java, "{$jsonStringWithoutBrackets}")
-                            val sprite = CharacterSpriteComponent(spriteData)
-                            gameObject.add(sprite)
-                        }
-                    }
-                }*/
-            }
+                val gameObject = LimbusGameObject(mapObject.name)
+                val json = Json()
 
-            World.add(gameObject)
+                when(mapObject.properties["enabled", true])
+                {
+                    true -> gameObject.enable()
+                    false -> gameObject.disable()
+                }
+
+                // Transform
+                gameObject.transform.x = MathUtils.round(mapObject.rectangle.x)
+                gameObject.transform.y = MathUtils.round(mapObject.rectangle.y)
+                gameObject.transform.width = MathUtils.round(mapObject.rectangle.width)
+                gameObject.transform.height = MathUtils.round(mapObject.rectangle.height)
+                gameObject.transform.layer = mapObject.properties["layer", 0]
+
+
+                // .......................................................................... Components
+                for (key in mapObject.properties.keys)
+                {
+                    val component = generateComponent(mapObject, key, json)
+                    if (component != null) { gameObject.add(component) }
+                }
+
+                World.add(gameObject)
+            }
         }
 
         World.addAndRemoveObjectsNow()
 
         val objects = World.getAllWithExactly(listOf(
-                TransformComponent::class.simpleName!!,
+                Transform::class.simpleName!!,
                 CharacterSpriteComponent::class.simpleName!!,
                 ColliderComponent::class.simpleName!!))
 
         val descriptions = World.getAllWithExactly(listOf(
-                TransformComponent::class.simpleName!!,
+                Transform::class.simpleName!!,
                 ConversationComponent::class.simpleName!!
         ))
     }
@@ -257,7 +264,7 @@ class GameArea(val areaID: Int, startPosID: Int)
                     {
                         startPosition.x = MathUtils.round(rect.x)
                         startPosition.y = MathUtils.round(rect.y)
-                        startPosition.layer = layerIndex
+                        startLayer = layerIndex
                     }
                 }
                 "monsterArea" ->

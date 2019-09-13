@@ -57,7 +57,7 @@ class MovementSystem
     /** Check whether hero enters warp area */
     private fun checkWarp()
     {
-        val pos = hero.getComponent<TransformComponent>()!!
+        val pos = hero.getComponent<Transform>()!!
         val heroArea = createRectangle(IntRect(pos.x, pos.y, pos.width, pos.height))
 
         // Check whether hero enters warp area
@@ -73,7 +73,7 @@ class MovementSystem
 
     fun checkHeal()
     {
-        val pos = hero.getComponent<TransformComponent>()!!
+        val pos = hero.getComponent<Transform>()!!
         val heroArea = createRectangle(IntRect(pos.x, pos.y, pos.width, pos.height))
 
         // Check whether hero enters warp area
@@ -97,7 +97,7 @@ class MovementSystem
         {
             makeOneStep(
 
-                    hero.getComponent<TransformComponent>()!!,
+                    hero.getComponent<Transform>()!!,
                     hero.getComponent<InputComponent>()!!,
                     hero.getComponent<ColliderComponent>()!!
             )
@@ -112,7 +112,7 @@ class MovementSystem
      */
     fun makeOneStep
     (
-            position: TransformComponent,
+            position: Transform,
             input: InputComponent,
             collider: ColliderComponent
     ) {
@@ -163,9 +163,10 @@ class MovementSystem
                 if (collider.asRectangle != r.asRectangle && r.asRectangle.contains(nextPos)) { return }
             }
 
+            // TODO update for new system
             // Update Collider Position
-            collider.x = position.nextX
-            collider.y = position.nextY
+            //collider.x = position.nextX
+            //collider.y = position.nextY
             position.lastPixelStep = TimeUtils.millis()    // remember time of this iteration
 
             input.moving = true        // entity is moving right now

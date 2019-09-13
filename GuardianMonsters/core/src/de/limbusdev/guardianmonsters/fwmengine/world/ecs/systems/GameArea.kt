@@ -120,11 +120,11 @@ class GameArea(val areaID: Int, startPosID: Int)
             val layerID: Int = layer.name[layer.name.lastIndex].toInt()
             when(layer.name.removeLast(0))
             {
-                "people"        -> createPeople(layer)
+                "people"        -> createGameObjects(layer, layerID)
                 "colliderWalls" -> createGameObjects(layer, layerID)
                 "descriptions"  -> createDescriptions(layer)
                 "triggers"      -> createTriggers(layer, startFieldID)
-                "gameObject"    -> createGameObjects(layer, layerID)
+                "gameObjects"   -> createGameObjects(layer, layerID)
             }
         }
 

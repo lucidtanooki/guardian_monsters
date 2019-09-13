@@ -34,6 +34,11 @@ class LimbusGameObject(var name: String = "", val type: String = "general")
             }
         }
 
+        addAndRemoveComponentsNow()
+    }
+
+    fun addAndRemoveComponentsNow()
+    {
         for(c in componentsToBeAdded)
         {
             if(!components.contains(c)) { components.add(c) }

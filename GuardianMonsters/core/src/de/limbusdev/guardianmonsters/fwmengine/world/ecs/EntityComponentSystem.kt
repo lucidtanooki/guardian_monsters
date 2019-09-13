@@ -69,7 +69,7 @@ class EntityComponentSystem
     private val engine          = Engine()
     private val entityFactory   = EntityFactory(engine, gameArea)
 
-    var hero    : Entity
+    var hero    : LimbusGameObject
     var hud     : HUD
 
     val inputProcessor: InputProcessor get() = hud
@@ -79,7 +79,7 @@ class EntityComponentSystem
     init
     {
         hero = setupHero(fromSave)
-        val inventory = hero.getComponent<InventoryComponent>()!!.inventory
+        val inventory = hero.get<InventoryComponent>()!!.inventory
         hud = HUD(BattleScreen(inventory), saveGameManager, hero, engine, gameArea)
         setUpPeople()
         setUpSigns()
@@ -92,11 +92,9 @@ class EntityComponentSystem
      * Creates the hero instance
      * @param fromSave  whether to create hero or reconstruct from game save
      */
-    private fun setupHero(fromSave: Boolean) : Entity
+    private fun setupHero(fromSave: Boolean) : LimbusGameObject
     {
-        val hero = entityFactory.createHero(gameArea.startPosition, gameArea.startLayer, fromSave)
-        val heroPosition = Components.getPositionComponent(hero)
-        return hero
+        return entityFactory.createHero(gameArea.startPosition, gameArea.startLayer, fromSave)
     }
 
     /** Bring people on active map to life */

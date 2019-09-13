@@ -117,13 +117,14 @@ class GameArea(val areaID: Int, startPosID: Int)
 
         for (layer in tiledMap.layers)
         {
+            val layerID: Int = layer.name[layer.name.lastIndex].toInt()
             when(layer.name.removeLast(0))
             {
                 "people"        -> createPeople(layer)
-                "colliderWalls" -> createColliders(layer)
+                "colliderWalls" -> createGameObjects(layer, layerID)
                 "descriptions"  -> createDescriptions(layer)
                 "triggers"      -> createTriggers(layer, startFieldID)
-                "gameObject"    -> createGameObjects(layer)
+                "gameObject"    -> createGameObjects(layer, layerID)
             }
         }
 
@@ -148,14 +149,14 @@ class GameArea(val areaID: Int, startPosID: Int)
      * Takes each MapObject from a layer and creates a proper LimbusGameObject from it.
      * Only for layers with game objects composed of JSON-components.
      */
-    private fun createGameObjects(layer: MapLayer)
+    private fun createGameObjects(layer: MapLayer, layerID: Int)
     {
         for(mapObject in layer.objects)
         {
             // Only Rectangle Map Objects are supported
             if(mapObject is RectangleMapObject)
             {
-                val gameObject = LimbusGameObject(mapObject.name)
+                val gameObject = LimbusGameObject(mapObject.name ?: "")
                 val json = Json()
 
                 when(mapObject.properties["enabled", true])
@@ -169,7 +170,7 @@ class GameArea(val areaID: Int, startPosID: Int)
                 gameObject.transform.y = MathUtils.round(mapObject.rectangle.y)
                 gameObject.transform.width = MathUtils.round(mapObject.rectangle.width)
                 gameObject.transform.height = MathUtils.round(mapObject.rectangle.height)
-                gameObject.transform.layer = mapObject.properties["layer", 0]
+                gameObject.transform.layer = layerID
 
 
                 // .......................................................................... Components
@@ -184,16 +185,6 @@ class GameArea(val areaID: Int, startPosID: Int)
         }
 
         World.addAndRemoveObjectsNow()
-
-        val objects = World.getAllWithExactly(listOf(
-                Transform::class.simpleName!!,
-                CharacterSpriteComponent::class.simpleName!!,
-                ColliderComponent::class.simpleName!!))
-
-        val descriptions = World.getAllWithExactly(listOf(
-                Transform::class.simpleName!!,
-                ConversationComponent::class.simpleName!!
-        ))
     }
 
     private fun generateComponent(mapObject: MapObject, componentName: String, json: Json) : LimbusBehaviour?

@@ -13,6 +13,8 @@ import com.badlogic.gdx.utils.TimeUtils
 import de.limbusdev.guardianmonsters.Constant
 import de.limbusdev.guardianmonsters.enums.SkyDirection
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.EntityComponentSystem
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusGameObject
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.World
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.*
 import de.limbusdev.guardianmonsters.fwmengine.world.model.WarpPoint
 import de.limbusdev.guardianmonsters.guardians.battle.BattleFactory
@@ -38,13 +40,13 @@ class MovementSystem
     // --------------------------------------------------------------------------------------------- PROPERTIES
     companion object{ const val TAG = "MovementSystem" }
 
-    private lateinit var hero: Entity
+    private lateinit var hero: LimbusGameObject
 
 
     // --------------------------------------------------------------------------------------------- METHODS
     override fun addedToEngine(engine: Engine)
     {
-        hero = engine.getEntitiesFor(Family.all(HeroComponent::class.java).get()).first()
+        hero = World.hero
     }
 
     override fun update(deltaTime: Float)
@@ -57,10 +59,11 @@ class MovementSystem
     /** Check whether hero enters warp area */
     private fun checkWarp()
     {
-        val pos = hero.getComponent<Transform>()!!
+        val pos = Transform(LimbusGameObject()) // TODO
         val heroArea = createRectangle(IntRect(pos.x, pos.y, pos.width, pos.height))
 
         // Check whether hero enters warp area
+        if(warpPoints.get(pos.layer) == null) { return }
         for (w in warpPoints.get(pos.layer))
         {
             if (heroArea.contains(w.xf, w.yf))
@@ -73,17 +76,17 @@ class MovementSystem
 
     fun checkHeal()
     {
-        val pos = hero.getComponent<Transform>()!!
-        val heroArea = createRectangle(IntRect(pos.x, pos.y, pos.width, pos.height))
+        val heroArea = createRectangle(IntRect(hero.transform.x, hero.transform.y, hero.transform.width, hero.transform.height))
 
         // Check whether hero enters warp area
-        for (h in healFields.get(pos.layer))
+        if(healFields.get(hero.transform.layer) == null) { return }
+        for (h in healFields.get(hero.transform.layer))
         {
             if (heroArea.contains(h.x + h.width / 2, h.y + h.height / 2))
             {
                 // Heal Team
                 logDebug(TAG) { "Entered Healing Area" }
-                val team = hero.getComponent<TeamComponent>()!!.team
+                val team = hero.get<TeamComponent>()!!.team
                 val teamHurt = false
                 team.values().forEach { guardian -> guardian.stats.healCompletely() }
             }
@@ -93,26 +96,26 @@ class MovementSystem
     fun updateHero()
     {
         // Only move hero, when player is not speaking to an entity
-        if (!hero.getComponent<InputComponent>()!!.talking)
+        if (!hero.get<InputComponent>()!!.talking)
         {
             makeOneStep(
 
-                    hero.getComponent<Transform>()!!,
-                    hero.getComponent<InputComponent>()!!,
-                    hero.getComponent<ColliderComponent>()!!
+                    hero.transform,
+                    hero.get<InputComponent>()!!,
+                    hero.get<ColliderComponent>()!!
             )
         }
     }
 
     /**
      * Moves the entity by 1 tile
-     * @param position
+     * @param transform
      * @param input
      * @param collider
      */
     fun makeOneStep
     (
-            position: Transform,
+            transform: Transform,
             input: InputComponent,
             collider: ColliderComponent
     ) {
@@ -124,50 +127,53 @@ class MovementSystem
             {
                 SkyDirection.N ->
                 {
-                    position.nextX = position.x
-                    position.nextY = position.y + Constant.TILE_SIZE
+                    transform.nextX = transform.x
+                    transform.nextY = transform.y + Constant.TILE_SIZE
                 }
                 SkyDirection.W ->
                 {
-                    position.nextX = position.x - Constant.TILE_SIZE
-                    position.nextY = position.y
+                    transform.nextX = transform.x - Constant.TILE_SIZE
+                    transform.nextY = transform.y
                 }
                 SkyDirection.E ->
                 {
-                    position.nextX = position.x + Constant.TILE_SIZE
-                    position.nextY = position.y
+                    transform.nextX = transform.x + Constant.TILE_SIZE
+                    transform.nextY = transform.y
                 }
                 else ->
                 {
-                    position.nextX = position.x
-                    position.nextY = position.y - Constant.TILE_SIZE
+                    transform.nextX = transform.x
+                    transform.nextY = transform.y - Constant.TILE_SIZE
                 }
             }
 
             // Check whether movement is possible or blocked by a collider
             val nextPos = IntVec2(0, 0)
 
-            for (r in ecs.gameArea.colliders.get(position.layer))
+            for (r in World.getAllWith("ColliderComponent", transform.layer))
             {
-                nextPos.x = position.nextX + Constant.TILE_SIZE/2
-                nextPos.y = position.nextY + Constant.TILE_SIZE/2
+                val staticCollider = r.get<ColliderComponent>()
 
-                if (r.asRectangle.contains(nextPos)) { return }
+                if(staticCollider != null)
+                {
+                    nextPos.x = transform.nextX + Constant.TILE_SIZE/2
+                    nextPos.y = transform.nextY + Constant.TILE_SIZE/2
+
+                    if (staticCollider.asRectangle.contains(nextPos)) { return }
+                }
             }
 
-            for (r in ecs.gameArea.dynamicColliders.get(position.layer))
+            for (r in ecs.gameArea.dynamicColliders.get(transform.layer))
             {
-                nextPos.x = position.nextX + Constant.TILE_SIZE/2
-                nextPos.y = position.nextY + Constant.TILE_SIZE/2
+                nextPos.x = transform.nextX + Constant.TILE_SIZE/2
+                nextPos.y = transform.nextY + Constant.TILE_SIZE/2
 
                 if (collider.asRectangle != r.asRectangle && r.asRectangle.contains(nextPos)) { return }
             }
 
             // TODO update for new system
             // Update Collider Position
-            //collider.x = position.nextX
-            //collider.y = position.nextY
-            position.lastPixelStep = TimeUtils.millis()    // remember time of this iteration
+            transform.lastPixelStep = TimeUtils.millis()    // remember time of this iteration
 
             input.moving = true        // entity is moving right now
             input.startMoving = false  // because entity now started moving
@@ -175,22 +181,22 @@ class MovementSystem
 
 
         // If entity is already moving, and last incremental step has completed (long enough ago)
-        if (input.moving && TimeUtils.timeSinceMillis(position.lastPixelStep) > Constant.ONE_STEPDURATION_MS)
+        if (input.moving && TimeUtils.timeSinceMillis(transform.lastPixelStep) > Constant.ONE_STEPDURATION_MS)
         {
             when (input.skyDir)
             {
-                SkyDirection.N  -> position.y = position.y + 1
-                SkyDirection.W  -> position.x = position.x - 1
-                SkyDirection.E  -> position.x = position.x + 1
-                else            -> position.y = position.y - 1
+                SkyDirection.N  -> transform.y = transform.y + 1
+                SkyDirection.W  -> transform.x = transform.x - 1
+                SkyDirection.E  -> transform.x = transform.x + 1
+                else            -> transform.y = transform.y - 1
             }
-            position.lastPixelStep = TimeUtils.millis()
+            transform.lastPixelStep = TimeUtils.millis()
 
             // Check if movement is complete
             val movementComplete = when (input.skyDir)
             {
-                SkyDirection.N, SkyDirection.S  -> position.y == position.nextY
-                SkyDirection.W, SkyDirection.E  -> position.x == position.nextX
+                SkyDirection.N, SkyDirection.S  -> transform.y == transform.nextY
+                SkyDirection.W, SkyDirection.E  -> transform.x == transform.nextX
                 else                            -> false
             }
 
@@ -200,7 +206,7 @@ class MovementSystem
                 input.moving = false
 
                 // Update Grid Position of hero
-                position.onGrid += when (input.skyDir)
+                transform.onGrid += when (input.skyDir)
                 {
                     SkyDirection.N  -> IntVec2(0,1)
                     SkyDirection.S  -> IntVec2(0,-1)
@@ -209,7 +215,7 @@ class MovementSystem
                     else            -> IntVec2()
                 }
 
-                logDebug(TAG) { "Position on Grid: ${position.onGrid}" }
+                logDebug(TAG) { "Position on Grid: ${transform.onGrid}" }
             }
 
             // Movement completed
@@ -223,9 +229,10 @@ class MovementSystem
                 }
 
                 // Check whether hero can get attacked by monsters
-                for (ma in ecs.gameArea.monsterAreas.get(position.layer))
+                return // TODO
+                for (ma in ecs.gameArea.monsterAreas.get(transform.layer))
                 {
-                    if(position.asRectangle.offset(Constant.TILE_SIZE/2) in ma && MathUtils.randomBoolean(ma.teamSizeProbabilities.get(0)))
+                    if(transform.asRectangle.offset(Constant.TILE_SIZE/2) in ma && MathUtils.randomBoolean(ma.teamSizeProbabilities.get(0)))
                     {
                         logDebug(TAG) { "Monster appeared!" }
 
@@ -242,9 +249,9 @@ class MovementSystem
 
                         ecs.hud.battleScreen.initialize(
 
-                                hero.getComponent<TeamComponent>()!!.team,
+                                hero.get<TeamComponent>()!!.team,
                                 oppTeam,
-                                hero.getComponent<GuardoSphereComponent>()!!.guardoSphere
+                                hero.get<GuardoSphereComponent>()!!.guardoSphere
                         )
 
                         Services.ScreenManager().pushScreen(ecs.hud.battleScreen)

@@ -1,6 +1,7 @@
 package de.limbusdev.guardianmonsters.fwmengine.world.ecs.components
 
 import com.badlogic.ashley.core.Component
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusBehaviour
 
 import de.limbusdev.guardianmonsters.guardians.monsters.Team
 
@@ -9,7 +10,7 @@ import de.limbusdev.guardianmonsters.guardians.monsters.Team
  *
  * @author Georg Eckert 2016
  */
-class TeamComponent : Component
+class TeamComponent(override val defaultJson: String = "") : LimbusBehaviour(), Component
 {
     // --------------------------------------------------------------------------------------------- PROPERTIES
     var team = Team(7, 1, 1)

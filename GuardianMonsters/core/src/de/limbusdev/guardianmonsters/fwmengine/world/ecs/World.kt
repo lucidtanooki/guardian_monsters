@@ -5,7 +5,7 @@ import kotlin.reflect.KClass
 
 object World
 {
-    val hero = LimbusGameObject()
+    val hero = LimbusGameObject("Hero")
 
     private val gameObjects = mutableListOf<LimbusGameObject>()
 
@@ -61,6 +61,8 @@ object World
         gameObjectsToBeRemoved.add(gameObject)
     }
 
+    fun getAll() = gameObjects
+
     fun getAll(type: String) : List<LimbusGameObject>
     {
         return gameObjects.filter { it.type == type }
@@ -75,5 +77,21 @@ object World
     fun getAllWith(componentType: String) : List<LimbusGameObject>
     {
         return gameObjects.filter { it.signature.contains(componentType) }
+    }
+
+    fun getAll(layer: Int) : List<LimbusGameObject>
+    {
+        return gameObjects.filter { it.transform.layer == layer }
+    }
+
+    fun getAllWithExactly(signature: List<String>, layer: Int) : List<LimbusGameObject>
+    {
+        val a = gameObjects
+        return gameObjects.filter { it.signature.containsAll(signature) && it.signature.size == signature.size && it.transform.layer == layer }
+    }
+
+    fun getAllWith(componentType: String, layer: Int) : List<LimbusGameObject>
+    {
+        return gameObjects.filter { it.signature.contains(componentType) && it.transform.layer == layer }
     }
 }

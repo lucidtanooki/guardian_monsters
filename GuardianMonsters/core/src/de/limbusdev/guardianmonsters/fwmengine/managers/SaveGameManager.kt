@@ -52,9 +52,9 @@ class SaveGameManager : EntitySystem
     {
         val saveGameComps = Family.all(
                 SaveGameComponent::class.java,
-                Transform::class.java,
                 TeamComponent::class.java).get()
 
+        return // TODO
         savableEntities = engine.getEntitiesFor(saveGameComps)
         val firstEntity = savableEntities.first()
 
@@ -79,6 +79,7 @@ class SaveGameManager : EntitySystem
      */
     override fun update(deltaTime: Float)
     {
+        return // TODO
         for (entity in savableEntities)
         {
             val position = entity.getComponent<Transform>()!!

@@ -48,7 +48,7 @@ class HUD
 (
         val battleScreen    : BattleScreen,
         val saveGameManager : SaveGameManager,
-        val hero            : Entity,
+        val hero            : LimbusGameObject,
         var engine          : Engine,
         private val gameArea: GameArea
 )
@@ -178,14 +178,14 @@ class HUD
      */
     override fun touchDown(screenX: Int, screenY: Int, pointer: Int, button: Int): Boolean
     {
-        hero.getComponent<InputComponent>()!!.firstTip = TimeUtils.millis()
+        hero.get<InputComponent>()!!.firstTip = TimeUtils.millis()
         return touchDragged(screenX, screenY, pointer)
     }
 
     override fun touchDragged(screenX: Int, screenY: Int, pointer: Int): Boolean
     {
         val touchPos = stage.viewport.unproject(Vector2(screenX.f(), screenY.f()))
-        val input = hero.getComponent<InputComponent>()!!
+        val input = hero.get<InputComponent>()!!
 
         val (dPadValid, dPadDirection) = dPad.touchDown(touchPos)
 
@@ -208,7 +208,7 @@ class HUD
 
     override fun touchUp(screenX: Int, screenY: Int, pointer: Int, button: Int): Boolean
     {
-        stop(Components.input.get(hero))
+        stop(hero.get<InputComponent>()!!)
         dPad.touchUp()
         return true
     }
@@ -238,7 +238,7 @@ class HUD
     {
         mainMenuButton.isVisible = true
         conversationWidget.addAction(moveTo(0f, -50f, .5f, Interpolation.exp10In) then hideActor())
-        hero.getComponent<InputComponent>()!!.talking = false
+        hero.get<InputComponent>()!!.talking = false
         currentlyShownHUDWidget = HUDWidgets.NONE
     }
 
@@ -254,13 +254,12 @@ class HUD
         blackCurtain.addAction(showActor() then fadeIn(1f))
     }
 
-    fun checkForNearInteractiveObjects(hero: Entity, signature: List<String>): LimbusGameObject?
+    fun checkForNearInteractiveObjects(hero: LimbusGameObject, signature: List<String>): LimbusGameObject?
     {
-        val pos = hero.getComponent<Transform>()!!
-        val dir = hero.getComponent<InputComponent>()!!.skyDir
+        val dir = hero.get<InputComponent>()!!.skyDir
 
         var nearEntity: LimbusGameObject? = null
-        val checkGridCell = pos.onGrid
+        val checkGridCell = hero.transform.onGrid
 
         checkGridCell += when (dir)
         {
@@ -333,10 +332,7 @@ class HUD
         }*/
 
         // Sign Entity
-        val signSignature = listOf(
-                Transform::class.simpleName!!,
-                ConversationComponent::class.simpleName!!
-        )
+        val signSignature = listOf(ConversationComponent::class.simpleName!!)
 
         val sign = checkForNearInteractiveObjects(hero, signSignature) ?: return
 
@@ -353,7 +349,7 @@ class HUD
             //
         }*/
 
-        if (touchedSpeaker || touchedSign) { hero.getComponent<InputComponent>()!!.talking = true }
+        if (touchedSpeaker || touchedSign) { hero.get<InputComponent>()!!.talking = true }
     }
 
     // ............................................................................. SET UP CONTROLS
@@ -365,8 +361,8 @@ class HUD
 
     private fun onShowInventoryButton()
     {
-        val inventory = hero.getComponent<InventoryComponent>()!!.inventory
-        val team      = hero.getComponent<TeamComponent>()!!.team
+        val inventory = hero.get<InventoryComponent>()!!.inventory
+        val team      = hero.get<TeamComponent>()!!.team
         Services.ScreenManager().pushScreen(InventoryScreen(team, inventory))
     }
 

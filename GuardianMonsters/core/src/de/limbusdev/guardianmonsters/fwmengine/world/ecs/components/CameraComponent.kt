@@ -3,6 +3,7 @@ package de.limbusdev.guardianmonsters.fwmengine.world.ecs.components
 import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.maps.tiled.TiledMap
 import com.badlogic.gdx.math.MathUtils
+import com.badlogic.gdx.math.Rectangle
 import de.limbusdev.guardianmonsters.Constant
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusBehaviour
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.get
@@ -30,8 +31,6 @@ class CameraComponent(private val camera: OrthographicCamera, tiledMap: TiledMap
     // --------------------------------------------------------------------------------------------- PROPERTIES
     private val mapOutline: IntRect    // Bounds of map to be rendered
 
-    var position = IntVec2(0,0)
-
     init
     {
         // Get the maps bounds
@@ -42,24 +41,25 @@ class CameraComponent(private val camera: OrthographicCamera, tiledMap: TiledMap
 
     override fun update(deltaTime: Float)
     {
-        val position = gameObject?.transform
-        if(position != null)
-        {
-            if (mapOutline.width >= camera.viewportWidth && mapOutline.height >= camera.viewportHeight) {
-                // If map is bigger than camera field
-                camera.position.x = MathUtils.clamp(
-                        position.xf,
-                        0 + camera.viewportWidth / 2,
-                        mapOutline.width - camera.viewportWidth / 2)
+        val transform = gameObject?.transform ?: return
 
-                camera.position.y = MathUtils.clamp(
-                        position.yf,
-                        0 + camera.viewportHeight / 2,
-                        mapOutline.height - camera.viewportHeight / 2)
-            } else {
-                // If camera field is bigger than map dimension
-                camera.position.set(position.xf, position.yf, 0f)
-            }
+        if (mapOutline.width >= camera.viewportWidth && mapOutline.height >= camera.viewportHeight)
+        {
+            // If map is bigger than camera field
+            camera.position.x = MathUtils.clamp(
+                    transform.xf,
+                    0 + camera.viewportWidth / 2,
+                    mapOutline.width - camera.viewportWidth / 2)
+
+            camera.position.y = MathUtils.clamp(
+                    transform.yf,
+                    0 + camera.viewportHeight / 2,
+                    mapOutline.height - camera.viewportHeight / 2)
+        }
+        else
+        {
+            // If camera field is bigger than map dimension
+            camera.position.set(transform.xf, transform.yf, 0f)
         }
     }
 }

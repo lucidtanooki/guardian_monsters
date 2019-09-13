@@ -17,7 +17,6 @@ import com.badlogic.gdx.utils.Sort
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.World
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.CharacterSpriteComponent
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.GameObjectZComparator
-import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Transform
 
 import de.limbusdev.guardianmonsters.scene2d.SpriteZComparator
 import de.limbusdev.guardianmonsters.services.Services

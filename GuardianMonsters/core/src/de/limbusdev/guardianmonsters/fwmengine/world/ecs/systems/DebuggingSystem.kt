@@ -7,9 +7,12 @@ import com.badlogic.ashley.core.Family
 import com.badlogic.ashley.utils.ImmutableArray
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.World
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.ColliderComponent
 
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Components
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Transform
+import de.limbusdev.utils.extensions.f
 
 
 /**
@@ -42,10 +45,14 @@ class DebuggingSystem : EntitySystem()
         shpr.begin(ShapeRenderer.ShapeType.Line)
         shpr.color = Color.WHITE
 
-        for (e in entities!!)
+        for(gameObject in World.getAllWith("ColliderComponent"))
         {
-            val p = Components.position.get(e)
-            shpr.rect(p.xf, p.yf, p.widthf, p.heightf)
+            val collider = gameObject.get<ColliderComponent>()
+            if(collider != null)
+            {
+                val transform = gameObject.transform
+                shpr.rect(transform.xf, transform.yf, collider.width.f(), collider.height.f())
+            }
         }
 
         shpr.end()

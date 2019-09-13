@@ -43,9 +43,9 @@ class EntityFactory(private val engine: Engine, private val area: GameArea)
      * Creates a hero [Entity] and adds it to the [Engine].
      * @return
      */
-    fun createHero(startField: IntVec2, startLayer: Int, restoreSave: Boolean): Entity
+    fun createHero(startField: IntVec2, startLayer: Int, restoreSave: Boolean): LimbusGameObject
     {
-        val hero = HeroEntity()
+        val hero = World.hero
 
         // Add Sprite
         hero.add(CharacterSpriteComponent(AnimatedPersonSprite("hero")))
@@ -53,15 +53,14 @@ class EntityFactory(private val engine: Engine, private val area: GameArea)
         // Input
         hero.add(InputComponent())
         // TODO
-        val transform = Transform(LimbusGameObject())
-        transform.x = startField.x
-        transform.y = startField.y
-        transform.width = UnitConverter.tilesToPixels(1)
-        transform.height = UnitConverter.tilesToPixels(1)
-        transform.layer = startLayer
+        hero.transform.x = startField.x
+        hero.transform.y = startField.y
+        hero.transform.width = UnitConverter.tilesToPixels(1)
+        hero.transform.height = UnitConverter.tilesToPixels(1)
+        hero.transform.layer = startLayer
 
-        // Position
-        hero.add(transform)
+        val transform = hero.transform
+
 
         // Collider
         val collider = ColliderComponent(true, transform.x, transform.y, transform.width, transform.height)
@@ -73,8 +72,8 @@ class EntityFactory(private val engine: Engine, private val area: GameArea)
         hero.add(SaveGameComponent(gameState))
         if (restoreSave)
         {
-            transform.x = gameState.gridx * Constant.TILE_SIZE
-            transform.y = gameState.gridy * Constant.TILE_SIZE
+            hero.transform.x = gameState.gridx * Constant.TILE_SIZE
+            hero.transform.y = gameState.gridy * Constant.TILE_SIZE
         }
 
         // Add Team
@@ -113,9 +112,7 @@ class EntityFactory(private val engine: Engine, private val area: GameArea)
         // Mark as hero
         hero.add(HeroComponent())
 
-        engine.addEntity(hero)
-
-        World.hero.transform = transform
+        hero.addAndRemoveComponentsNow()
 
         return hero
     }

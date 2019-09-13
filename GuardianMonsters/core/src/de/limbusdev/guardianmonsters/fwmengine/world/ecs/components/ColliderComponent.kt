@@ -18,7 +18,8 @@ class ColliderComponent
         var offsetX: Int = 0,
         var offsetY: Int = 0,
         var width: Int = 16,
-        var height: Int = 16
+        var height: Int = 16,
+        var inheritsExtent: Boolean = true
 )
     : LimbusBehaviour(), Component
 {
@@ -33,9 +34,10 @@ class ColliderComponent
                     offsetX: 0,
                     offsetY: 0,
                     width: 16,
-                    height: 16
+                    height: 16,
+                    inheritsExtent: true
             """.trimMargin()
 
 
-    val asRectangle get() = IntRect(offsetX, offsetY, width, height)
+    val asRectangle get() = IntRect(gameObject?.transform?.x ?: 0 + offsetX, gameObject?.transform?.y ?: 0 + offsetY, width, height)
 }

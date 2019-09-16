@@ -14,7 +14,6 @@ import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.CameraComponent
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.InventoryComponent
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.entities.HeroEntity
-import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.CharacterSpriteSystem
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.DebuggingSystem
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.GameArea
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.MovementSystem
@@ -126,11 +125,6 @@ class EntityComponentSystem
         val spriteSystem = SpriteSystem(gameArea.mapRenderer)
         spriteSystem.addedToEngine(engine)
         engine.addSystem(spriteSystem)
-
-        // Character Sprite System
-        val characterSpriteSystem = CharacterSpriteSystem()
-        characterSpriteSystem.addedToEngine(engine)
-        engine.addSystem(characterSpriteSystem)
 
         // Movement System
         val movementSystem = MovementSystem(this, gameArea.warpPoints, gameArea.healFields)

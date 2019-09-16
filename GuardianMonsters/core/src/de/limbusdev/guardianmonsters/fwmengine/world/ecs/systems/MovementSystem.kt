@@ -4,6 +4,7 @@ import com.badlogic.ashley.core.Engine
 import com.badlogic.ashley.core.Entity
 import com.badlogic.ashley.core.EntitySystem
 import com.badlogic.ashley.core.Family
+import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.math.MathUtils
 import com.badlogic.gdx.math.Rectangle
 import com.badlogic.gdx.utils.Array
@@ -40,6 +41,10 @@ class MovementSystem
     // --------------------------------------------------------------------------------------------- PROPERTIES
     companion object{ const val TAG = "MovementSystem" }
 
+    val newFrameEveryXPixels = 8
+    var stepsSinceLastFrameUpdate = 0
+    var elapsedTime = 0f
+
     // --------------------------------------------------------------------------------------------- METHODS
     override fun addedToEngine(engine: Engine)
     {
@@ -48,9 +53,13 @@ class MovementSystem
 
     override fun update(deltaTime: Float)
     {
+        elapsedTime+=deltaTime
+
         // Update hero
         checkWarp()
         updateHero()
+
+
     }
 
     /** Check whether hero enters warp area */
@@ -118,8 +127,6 @@ class MovementSystem
             input: InputComponent,
             collider: ColliderComponent
     ) {
-        // TODO fix collision!
-
         // Initialize hero Movement
         if (input.startMoving && TimeUtils.timeSinceMillis(input.firstTip) > 100 && input.touchDown)
         {
@@ -179,6 +186,8 @@ class MovementSystem
 
             input.moving = true        // entity is moving right now
             input.startMoving = false  // because entity now started moving
+
+            World.hero.get<CharacterSpriteComponent>()?.sprite?.changeState(input.skyDir)
         }
 
 
@@ -195,6 +204,15 @@ class MovementSystem
                 else            -> transform.y -= 1
             }
             transform.lastPixelStep = TimeUtils.millis()
+
+
+            //println(stepsSinceLastFrameUpdate)
+            if(stepsSinceLastFrameUpdate >= newFrameEveryXPixels)
+            {
+                stepsSinceLastFrameUpdate = 0
+                hero.get<CharacterSpriteComponent>()?.sprite?.toNextFrame()
+            }
+            stepsSinceLastFrameUpdate++
 
             // Check if movement is complete
             val movementComplete = when (input.skyDir)
@@ -223,6 +241,10 @@ class MovementSystem
                     input.startMoving = true
                     input.skyDir = input.nextInput
                 }
+                else
+                {
+                    World.hero.get<CharacterSpriteComponent>()?.sprite?.resetAnimation()
+                }
 
                 // Check whether hero can get attacked by monsters
                 return // TODO
@@ -245,9 +267,9 @@ class MovementSystem
 
                         ecs.hud.battleScreen.initialize(
 
-                                hero.get<TeamComponent>()!!.team,
+                                World.hero.get<TeamComponent>()!!.team,
                                 oppTeam,
-                                hero.get<GuardoSphereComponent>()!!.guardoSphere
+                                World.hero.get<GuardoSphereComponent>()!!.guardoSphere
                         )
 
                         Services.ScreenManager().pushScreen(ecs.hud.battleScreen)

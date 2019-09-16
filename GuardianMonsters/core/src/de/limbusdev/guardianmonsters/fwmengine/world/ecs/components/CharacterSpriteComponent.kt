@@ -25,12 +25,9 @@ class CharacterSpriteComponent
 {
     override val defaultJson: String = "enabled: true, male: true, index: 0"
 
-    private var elapsedTime = 0f
-
     override fun update(deltaTime: Float)
     {
         super.update(deltaTime)
-        elapsedTime += deltaTime
 
         var direction = SkyDirection.SSTOP
 
@@ -38,7 +35,11 @@ class CharacterSpriteComponent
         val inputComponent = gameObject?.get<InputComponent>()
         if(inputComponent != null)
         {
-            direction = inputComponent.skyDir.stop()
+            direction = when(inputComponent.moving)
+            {
+                true -> inputComponent.skyDir
+                else -> inputComponent.skyDir.stop()
+            }
         }
 
         // If parent GameObject hast PathComponent
@@ -50,10 +51,19 @@ class CharacterSpriteComponent
                 true -> pathComponent.talkDir
                 false -> pathComponent.path[pathComponent.currentDir]
             }
+
+            val moving = when(pathComponent.staticEntity)
+            {
+                true -> false
+                false -> pathComponent.moving
+            }
         }
 
-        sprite.changeState(direction)
-
-        sprite.update(elapsedTime)
+        //sprite.changeState(direction)
     }
+
+    /**
+     * Call this, when the next animation frame should be displayed.
+     */
+    fun updateAnimationFrame() = sprite.toNextFrame()
 }

@@ -41,7 +41,7 @@ class MovementSystem
     // --------------------------------------------------------------------------------------------- PROPERTIES
     companion object{ const val TAG = "MovementSystem" }
 
-    val newFrameEveryXPixels = 8
+    val newFrameEveryXPixels = 6
     var stepsSinceLastFrameUpdate = 0
     var elapsedTime = 0f
 
@@ -226,8 +226,6 @@ class MovementSystem
             {
                 checkHeal()
                 input.moving = false
-
-                transform.updateGridSlot()
 
                 logDebug(TAG) { "Position on Grid: ${transform.onGrid}" }
             }

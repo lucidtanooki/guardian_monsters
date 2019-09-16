@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.Rectangle
 import de.limbusdev.guardianmonsters.Constant
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusBehaviour
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.get
+import de.limbusdev.utils.extensions.f
 import de.limbusdev.utils.geometry.IntRect
 
 
@@ -55,10 +56,23 @@ class CameraComponent(private val camera: OrthographicCamera, tiledMap: TiledMap
                     transform.yf,
                     0 + camera.viewportHeight / 2,
                     mapOutline.height - camera.viewportHeight / 2)
+
+            // If camera field is bigger than map dimension
+            /*camera.position.set(
+                    MathUtils.lerp(camera.position.x, transform.xf, deltaTime*5),
+                    MathUtils.lerp(camera.position.y, transform.yf, deltaTime*5),
+                    0f
+            )*/
         }
         else
         {
+            // Soft Camera Movement with Interpolation
             // If camera field is bigger than map dimension
+//            camera.position.set(
+//                    MathUtils.lerp(camera.position.x, transform.nextX.f(), deltaTime),
+//                    MathUtils.lerp(camera.position.y, transform.nextY.f(), deltaTime),
+//                    0f
+//            )
             camera.position.set(transform.xf, transform.yf, 0f)
         }
     }

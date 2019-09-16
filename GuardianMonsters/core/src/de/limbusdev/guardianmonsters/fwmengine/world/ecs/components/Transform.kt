@@ -2,6 +2,7 @@ package de.limbusdev.guardianmonsters.fwmengine.world.ecs.components
 
 import com.badlogic.ashley.core.Component
 import com.badlogic.ashley.core.Entity
+import com.badlogic.gdx.math.MathUtils
 
 import de.limbusdev.guardianmonsters.Constant
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusBehaviour
@@ -39,13 +40,10 @@ class Transform(var gameObject: LimbusGameObject) : Component
     var nextX           : Int = 0
     var nextY           : Int = 0
     var lastPixelStep   : Long = 0 // ms
-    val onGrid : IntVec2 = IntVec2(0,0)
+    var onGrid : IntVec2
+        get() = IntVec2(x / Constant.TILE_SIZE, y / Constant.TILE_SIZE)
+        set(value) { x = value.x ; y = value.y }
 
-    fun updateGridSlot()
-    {
-        onGrid.x = x / Constant.TILE_SIZE
-        onGrid.y = y / Constant.TILE_SIZE
-    }
 
 
     // --------------------------------------------------------------------------------------------- METHODS

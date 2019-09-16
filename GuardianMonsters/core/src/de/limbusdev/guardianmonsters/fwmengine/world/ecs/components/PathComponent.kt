@@ -6,6 +6,8 @@ import com.badlogic.gdx.utils.Array
 import com.badlogic.ashley.core.Entity
 
 import de.limbusdev.guardianmonsters.enums.SkyDirection
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusBehaviour
+import ktx.collections.gdxArrayOf
 
 
 /**
@@ -31,8 +33,15 @@ import de.limbusdev.guardianmonsters.enums.SkyDirection
  *
  * PathComponent path = new PathComponent((new Array<SkyDirection>()).addAll(dirs));
  */
-class PathComponent(var path: Array<SkyDirection>, var staticEntity: Boolean) : Component
+class PathComponent
+(
+        var path: Array<SkyDirection> = gdxArrayOf(SkyDirection.SSTOP),
+        var staticEntity: Boolean = true
+)
+    : LimbusBehaviour(), Component
 {
+    override val defaultJson: String get() = "enabled: true, path: SSTOP, static: true"
+
     // --------------------------------------------------------------------------------------------- PROPERTIES
     var startMoving = true
     var moving      = false

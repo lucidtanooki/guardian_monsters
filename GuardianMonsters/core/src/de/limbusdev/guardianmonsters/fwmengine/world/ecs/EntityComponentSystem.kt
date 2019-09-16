@@ -12,7 +12,6 @@ import de.limbusdev.guardianmonsters.Constant
 import de.limbusdev.guardianmonsters.battle.BattleScreen
 import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.CameraComponent
-import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Components
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.InventoryComponent
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.entities.HeroEntity
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.CharacterSpriteSystem
@@ -20,7 +19,6 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.DebuggingSystem
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.GameArea
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.MovementSystem
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.PathSystem
-import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.PositionSynchroSystem
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.SpriteSystem
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.HUD
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.WorldScreen
@@ -128,12 +126,6 @@ class EntityComponentSystem
         val spriteSystem = SpriteSystem(gameArea.mapRenderer)
         spriteSystem.addedToEngine(engine)
         engine.addSystem(spriteSystem)
-
-
-        // Position Synchronization
-        val positionSynchroSystem = PositionSynchroSystem()
-        positionSynchroSystem.addedToEngine(engine)
-        engine.addSystem(positionSynchroSystem)
 
         // Character Sprite System
         val characterSpriteSystem = CharacterSpriteSystem()

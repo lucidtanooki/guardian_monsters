@@ -113,12 +113,16 @@ class ExtendedTiledMapRenderer(map: TiledMap) : OrthogonalTiledMapRenderer(map, 
 
         gameObjects.forEach {
 
-            val sprite = it.get<CharacterSpriteComponent>()?.sprite
-            if(sprite != null) { batch.draw(sprite, it.transform.xf, it.transform.yf) }
+            val spriteComponent = it.get<CharacterSpriteComponent>()
+            val sprite = spriteComponent?.sprite
+            if(it.enabled && sprite != null && spriteComponent.enabled)
+            {
+                batch.draw(sprite, it.transform.xf, it.transform.yf)
+            }
         }
 
         // Draw entity sprites if visible
-        sprites.forEach { it.updateAndDrawIfVisible(elapsedTime, batch) }
+        //gameObjects.forEach { it.get<CharacterSpriteComponent>()?.sprite?.updateAndDrawIfVisible(elapsedTime, batch) }
     }
 
     override fun renderObject(mapObject: MapObject)

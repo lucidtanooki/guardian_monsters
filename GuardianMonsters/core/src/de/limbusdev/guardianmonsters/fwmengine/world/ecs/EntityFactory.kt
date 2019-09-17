@@ -51,7 +51,10 @@ class EntityFactory(private val engine: Engine, private val area: GameArea)
         val transform = hero.transform
 
         // Movement
-        hero.add(TileWiseMovementComponent())
+        val movement = TileWiseMovementComponent()
+        hero.add(movement)
+        hero.add(HeroComponent(movement))
+
 
 
         // Collider
@@ -99,9 +102,6 @@ class EntityFactory(private val engine: Engine, private val area: GameArea)
 
         val inventoryComp = InventoryComponent(inventory)
         hero.add(inventoryComp)
-
-        // Mark as hero
-        hero.add(HeroComponent())
 
         hero.addAndRemoveComponentsNow()
 

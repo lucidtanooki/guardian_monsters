@@ -4,6 +4,7 @@ import com.badlogic.ashley.core.Component
 import com.badlogic.gdx.math.MathUtils
 import com.badlogic.gdx.utils.ArrayMap
 import de.limbusdev.guardianmonsters.Constant
+import de.limbusdev.guardianmonsters.CoreServiceLocator
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusBehaviour
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.World
 import de.limbusdev.guardianmonsters.guardians.battle.BattleFactory
@@ -64,7 +65,7 @@ class HeroComponent
         val transform = gameObject?.transform ?: return
         val inputComponent = gameObject?.get<InputComponent>() ?: return
 
-        for(battleArea in World.getAllWith("RandomBattleAreaComponent", transform.layer))
+        for(battleArea in CoreServiceLocator.world.getAllWith("RandomBattleAreaComponent", transform.layer))
         {
             val battleAreaRectangle = battleArea.get<ColliderComponent>()?.asRectangle
             val monsterArea = battleArea.get<MonsterAreaComponent>()
@@ -89,14 +90,14 @@ class HeroComponent
 
                 val oppTeam = BattleFactory.createOpponentTeam(guardianProbabilities, monsterArea.teamSizeProbabilities, 1, 1)
 
-                World.ecs.hud.battleScreen.initialize(
+                CoreServiceLocator.ecs.hud.battleScreen.initialize(
 
-                        World.hero.get<TeamComponent>()!!.team,
+                        CoreServiceLocator.world.hero.get<TeamComponent>()!!.team,
                         oppTeam,
-                        World.hero.get<GuardoSphereComponent>()!!.guardoSphere
+                        CoreServiceLocator.world.hero.get<GuardoSphereComponent>()!!.guardoSphere
                 )
 
-                Services.ScreenManager().pushScreen(World.ecs.hud.battleScreen)
+                Services.ScreenManager().pushScreen(CoreServiceLocator.ecs.hud.battleScreen)
                 //............................................................. START BATTLE
 
                 // Stop when in a battle
@@ -110,7 +111,7 @@ class HeroComponent
     {
         val transform = gameObject?.transform ?: return
 
-        val warpStartFields = World.getAllWith("WarpStartComponent", transform.layer)
+        val warpStartFields = CoreServiceLocator.world.getAllWith("WarpStartComponent", transform.layer)
 
         for(warpStart in warpStartFields)
         {
@@ -121,7 +122,8 @@ class HeroComponent
                 if(warpCollider.asRectangle.contains(transform.x+Constant.TILE_SIZE/2, transform.y+Constant.TILE_SIZE/2))
                 {
                     logDebug(TAG) { "Changing to Map ${warpComponent.targetMapID}" }
-                    World.ecs.changeGameArea(warpComponent.targetMapID, warpComponent.warpTargetID)
+                    CoreServiceLocator.world.stop()
+                    CoreServiceLocator.ecs.changeGameArea(warpComponent.targetMapID, warpComponent.warpTargetID)
                 }
             }
         }

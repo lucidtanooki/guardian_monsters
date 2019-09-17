@@ -3,11 +3,10 @@ package de.limbusdev.guardianmonsters.fwmengine.world.ecs
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.*
 import kotlin.reflect.KClass
 
-object World
+class World
 {
     var hero = LimbusGameObject("Hero")
         private set
-    lateinit var ecs : EntityComponentSystem
 
     private val gameObjects = mutableListOf<LimbusGameObject>()
 
@@ -25,21 +24,11 @@ object World
         componentParsers[CharacterSpriteComponent::class] = CharacterSpriteComponentParser
         componentParsers[WarpStartComponent::class] = WarpStartComponentParser
         componentParsers[WarpTargetComponent::class] = WarpTargetComponentParser
-
-        reset()
     }
 
     fun start() { isStopped = false }
 
-    fun reset()
-    {
-        isStopped = true
-        gameObjects.clear()
-        gameObjectsToBeAdded.clear()
-        gameObjectsToBeRemoved.clear()
-        hero = LimbusGameObject("Hero")
-        add(hero)
-    }
+    fun stop() { isStopped = true }
 
     fun addAndRemoveObjectsNow()
     {
@@ -58,7 +47,7 @@ object World
 
     fun update(deltaTime: Float)
     {
-        if(isStopped) { isStopped = false }
+        if(isStopped) { return }
 
         for(gameObject in gameObjects)
         {

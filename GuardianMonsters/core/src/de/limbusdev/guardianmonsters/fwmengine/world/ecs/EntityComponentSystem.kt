@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.utils.viewport.Viewport
 
 import de.limbusdev.guardianmonsters.Constant
+import de.limbusdev.guardianmonsters.CoreServiceLocator
 import de.limbusdev.guardianmonsters.battle.BattleScreen
 import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.CameraComponent
@@ -74,8 +75,8 @@ class EntityComponentSystem
     init
     {
         setupHero(fromSave)
-        val inventory = World.hero.get<InventoryComponent>()!!.inventory
-        hud = HUD(BattleScreen(inventory), saveGameManager, World.hero, engine, gameArea)
+        val inventory = CoreServiceLocator.world.hero.get<InventoryComponent>()!!.inventory
+        hud = HUD(BattleScreen(inventory), saveGameManager, CoreServiceLocator.world.hero, engine, gameArea)
         setUpPeople()
         setUpEntitySystems(gameArea, viewport, hud)
     }
@@ -114,7 +115,7 @@ class EntityComponentSystem
 
         // Camera System
         val cameraComponent = CameraComponent(viewport.camera as OrthographicCamera, gameArea.tiledMap)
-        World.hero.add(cameraComponent)
+        CoreServiceLocator.world.hero.add(cameraComponent)
 
         // Path System
         val pathSystem = PathSystem(gameArea)
@@ -142,7 +143,7 @@ class EntityComponentSystem
      */
     fun update(delta: Float)
     {
-        World.update(delta)
+        CoreServiceLocator.world.update(delta)
         engine.update(delta)
         hud.update(delta)
         gameArea.update(delta)

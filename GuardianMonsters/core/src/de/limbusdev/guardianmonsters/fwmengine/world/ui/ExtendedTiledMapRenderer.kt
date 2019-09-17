@@ -14,6 +14,7 @@ import com.badlogic.gdx.math.MathUtils
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ArrayMap
 import com.badlogic.gdx.utils.Sort
+import de.limbusdev.guardianmonsters.CoreServiceLocator
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.World
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.CharacterSpriteComponent
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.GameObjectZComparator
@@ -108,7 +109,7 @@ class ExtendedTiledMapRenderer(map: TiledMap) : OrthogonalTiledMapRenderer(map, 
     private fun renderPeople()
     {
         // Get all CharacterSpriteComponents
-        val gameObjects = World.getAllWith("CharacterSpriteComponent").toTypedArray()
+        val gameObjects = CoreServiceLocator.world.getAllWith("CharacterSpriteComponent").toTypedArray()
         Sort.instance().sort(gameObjects, GameObjectZComparator)
 
         gameObjects.forEach {

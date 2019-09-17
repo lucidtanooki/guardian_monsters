@@ -18,6 +18,7 @@ import com.badlogic.gdx.utils.TimeUtils
 import com.badlogic.gdx.utils.viewport.FitViewport
 
 import de.limbusdev.guardianmonsters.Constant
+import de.limbusdev.guardianmonsters.CoreServiceLocator
 import de.limbusdev.guardianmonsters.battle.BattleScreen
 import de.limbusdev.guardianmonsters.enums.Compass4
 import de.limbusdev.guardianmonsters.enums.SkyDirection
@@ -286,7 +287,7 @@ class HUD
             }
         }
 
-        val interactiveObjects = World.getAllWithExactly(signature)
+        val interactiveObjects = CoreServiceLocator.world.getAllWithExactly(signature)
         for(interactiveObject in interactiveObjects)
         {
             logDebug(TAG) { "Grid Cell of tested Entity: ${interactiveObject.transform.onGrid}" }

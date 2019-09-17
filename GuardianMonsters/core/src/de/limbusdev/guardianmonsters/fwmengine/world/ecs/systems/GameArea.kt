@@ -14,6 +14,7 @@ import com.badlogic.gdx.utils.ArrayMap
 import com.badlogic.gdx.utils.Json
 
 import de.limbusdev.guardianmonsters.Constant
+import de.limbusdev.guardianmonsters.CoreServiceLocator
 import de.limbusdev.guardianmonsters.assets.paths.AssetPath
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusBehaviour
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusGameObject
@@ -67,7 +68,7 @@ class GameArea(val areaID: Int, startPosID: Int)
     {
         tiledMap = setUpTiledMap(areaID, startPosID)
         mapRenderer = ExtendedTiledMapRenderer(tiledMap)
-        for(warpTargetField in World.getAllWith("WarpTargetComponent"))
+        for(warpTargetField in CoreServiceLocator.world.getAllWith("WarpTargetComponent"))
         {
             val warpTargetComponent = warpTargetField.get<WarpTargetComponent>()
             if(warpTargetComponent != null && warpTargetComponent.warpTargetID == startPosID)
@@ -105,7 +106,7 @@ class GameArea(val areaID: Int, startPosID: Int)
         shape.begin(ShapeRenderer.ShapeType.Line)
         shape.color = Color.WHITE
 
-        for(collidingObject in World.getAllWith("ColliderComponent"))
+        for(collidingObject in CoreServiceLocator.world.getAllWith("ColliderComponent"))
         {
             val collider = collidingObject.get<ColliderComponent>()
 
@@ -187,11 +188,11 @@ class GameArea(val areaID: Int, startPosID: Int)
                 }
 
                 gameObject.addAndRemoveComponentsNow()
-                World.add(gameObject)
+                CoreServiceLocator.world.add(gameObject)
             }
         }
 
-        World.addAndRemoveObjectsNow()
+        CoreServiceLocator.world.addAndRemoveObjectsNow()
     }
 
     private fun generateComponent(mapObject: MapObject, componentName: String, json: Json) : LimbusBehaviour?
@@ -213,7 +214,7 @@ class GameArea(val areaID: Int, startPosID: Int)
 
             kClass as KClass<out LimbusBehaviour>
 
-            component = World.componentParsers[kClass]?.parseComponent(json, mapObject)
+            component = CoreServiceLocator.world.componentParsers[kClass]?.parseComponent(json, mapObject)
         }
         catch (e: Exception)
         {
@@ -316,25 +317,25 @@ class GameArea(val areaID: Int, startPosID: Int)
         borderGameObject.transform.x = -1 * Constant.TILE_SIZE
         borderGameObject.transform.y = -1 * Constant.TILE_SIZE
         borderGameObject.add(ColliderComponent(width = (mapWidth + 2) * Constant.TILE_SIZE, height = Constant.TILE_SIZE))
-        World.add(borderGameObject)
+        CoreServiceLocator.world.add(borderGameObject)
 
         borderGameObject = LimbusGameObject("BorderTop")
         borderGameObject.transform.x = -1 * Constant.TILE_SIZE
         borderGameObject.transform.y = mapHeight * Constant.TILE_SIZE
         borderGameObject.add(ColliderComponent(width = (mapWidth + 2) * Constant.TILE_SIZE, height = Constant.TILE_SIZE))
-        World.add(borderGameObject)
+        CoreServiceLocator.world.add(borderGameObject)
 
         borderGameObject = LimbusGameObject("BorderLeft")
         borderGameObject.transform.x = -1 * Constant.TILE_SIZE
         borderGameObject.transform.y = 0
         borderGameObject.add(ColliderComponent(width = Constant.TILE_SIZE, height = (mapHeight + 2) * Constant.TILE_SIZE))
-        World.add(borderGameObject)
+        CoreServiceLocator.world.add(borderGameObject)
 
         borderGameObject = LimbusGameObject("BorderRight")
         borderGameObject.transform.x = mapWidth * Constant.TILE_SIZE
         borderGameObject.transform.y = 0
         borderGameObject.add(ColliderComponent(width = Constant.TILE_SIZE, height = (mapHeight + 2) * Constant.TILE_SIZE))
-        World.add(borderGameObject)
+        CoreServiceLocator.world.add(borderGameObject)
     }
 
     fun dispose()

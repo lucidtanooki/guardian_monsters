@@ -5,6 +5,7 @@ import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.utils.Array
 
 import de.limbusdev.guardianmonsters.Constant
+import de.limbusdev.guardianmonsters.CoreServiceLocator
 import de.limbusdev.guardianmonsters.enums.SkyDirection
 import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.*
@@ -34,7 +35,7 @@ class EntityFactory(private val engine: Engine, private val area: GameArea)
      */
     fun createHero(startField: IntVec2, startLayer: Int, restoreSave: Boolean): LimbusGameObject
     {
-        val hero = World.hero
+        val hero = CoreServiceLocator.world.hero
 
         // Add Sprite
         hero.add(CharacterSpriteComponent(AnimatedPersonSprite("hero")))

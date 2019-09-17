@@ -102,70 +102,70 @@ class TileWiseMovementComponent() : LimbusBehaviour()
         }
     }
 
-    private fun applyMovement(transform: Transform, inputComponent: InputComponent) : Boolean
-    {
+    private fun applyMovement(transform: Transform, inputComponent: InputComponent) : Boolean {
+        // Early Exits
+        if (!inputComponent.moving)
+        {
+            World.hero.get<CharacterSpriteComponent>()?.sprite?.resetAnimation()
+            return false
+        }
+        if (TimeUtils.timeSinceMillis(transform.lastPixelStep) < Constant.ONE_STEPDURATION_MS) { return false }
+
         // If entity is already moving, and last incremental step has completed (long enough ago)
-        if
-        (
-                inputComponent.moving &&
-                TimeUtils.timeSinceMillis(transform.lastPixelStep) > Constant.ONE_STEPDURATION_MS
-        ) {
-            val spriteComponent = gameObject?.get<CharacterSpriteComponent>() ?: return false
+        val spriteComponent = gameObject?.get<CharacterSpriteComponent>() ?: return false
 
-            when (inputComponent.skyDir)
-            {
-                SkyDirection.N  -> transform.y += 1
-                SkyDirection.W  -> transform.x -= 1
-                SkyDirection.E  -> transform.x += 1
-                else            -> transform.y -= 1
-            }
-            transform.lastPixelStep = TimeUtils.millis()
+        when (inputComponent.skyDir)
+        {
+            SkyDirection.N -> transform.y += 1
+            SkyDirection.W -> transform.x -= 1
+            SkyDirection.E -> transform.x += 1
+            else -> transform.y -= 1
+        }
+        transform.lastPixelStep = TimeUtils.millis()
 
-            if(stepsSinceLastFrameUpdate >= newFrameEveryXPixels)
-            {
-                stepsSinceLastFrameUpdate = 0
-                spriteComponent.sprite.toNextFrame()
-            }
-            stepsSinceLastFrameUpdate++
+        if (stepsSinceLastFrameUpdate >= newFrameEveryXPixels)
+        {
+            stepsSinceLastFrameUpdate = 0
+            spriteComponent.sprite.toNextFrame()
+        }
+        stepsSinceLastFrameUpdate++
 
-            // Check if movement is complete
-            val movementComplete = when (inputComponent.skyDir)
-            {
-                SkyDirection.N, SkyDirection.S  -> transform.y == transform.nextY
-                SkyDirection.W, SkyDirection.E  -> transform.x == transform.nextX
-                else                            -> false
-            }
-
-            if (movementComplete)
-            {
-                checkForHealingArea()
-                checkForRandomBattles(transform, inputComponent)
-                inputComponent.moving = false
-
-                logDebug("TileWiseMovementComponent") { "Position on Grid: ${transform.onGrid}" }
-            }
-
-            // Movement completed
-            if (!inputComponent.moving)
-            {
-                // Continue movement when button is pressed
-                if (inputComponent.touchDown)
-                {
-                    inputComponent.startMoving = true
-                    inputComponent.skyDir = inputComponent.nextInput
-                }
-                else
-                {
-                    World.hero.get<CharacterSpriteComponent>()?.sprite?.resetAnimation()
-                }
-            }
-
-            return true
+        // Check if movement is complete
+        val movementComplete = when (inputComponent.skyDir)
+        {
+            SkyDirection.N, SkyDirection.S -> transform.y == transform.nextY
+            SkyDirection.W, SkyDirection.E -> transform.x == transform.nextX
+            else -> false
         }
 
-        return false
+        if (movementComplete)
+        {
+            checkForHealingArea()
+            checkForRandomBattles(transform, inputComponent)
+            inputComponent.moving = false
+
+            logDebug("TileWiseMovementComponent") { "Position on Grid: ${transform.onGrid}" }
+        }
+
+        // Movement completed
+        if (!inputComponent.moving)
+        {
+            // Continue movement when button is pressed
+            if (inputComponent.touchDown)
+            {
+                inputComponent.startMoving = true
+                inputComponent.skyDir = inputComponent.nextInput
+            }
+        }
+
+        return true
     }
 
+
+    /**
+     * Turns character according to the touched direction and initializes movement, if touch is
+     * longer than 100 ms and nothing blocks the way.
+     */
     private fun initializeMovement(transform: Transform, inputComponent: InputComponent) : Boolean
     {
         // Initialize Movement
@@ -173,7 +173,7 @@ class TileWiseMovementComponent() : LimbusBehaviour()
 
         // Turn Character to the chosen direction
         World.hero.get<CharacterSpriteComponent>()?.sprite?.changeState(inputComponent.skyDir)
-        
+
         if(TimeUtils.timeSinceMillis(inputComponent.firstTip) > 100)
         {
             // Start movement in that direction
@@ -192,6 +192,7 @@ class TileWiseMovementComponent() : LimbusBehaviour()
         return false
     }
 
+    /** Returns whether the given slot is blocked by a collider. */
     private fun isNextPositionBlocked(nextPosition: IntVec2) : Boolean
     {
         val colliderComponent = gameObject?.get<ColliderComponent>() ?: return true
@@ -214,15 +215,6 @@ class TileWiseMovementComponent() : LimbusBehaviour()
         }
 
         return false
-
-        // TODO collision with people
-        /*for (r in ecs.gameArea.dynamicColliders.get(transform.layer))
-        {
-            nextPos.x = transform.nextX + Constant.TILE_SIZE/2
-            nextPos.y = transform.nextY + Constant.TILE_SIZE/2
-
-            if (collider.asRectangle != r.asRectangle && r.asRectangle.contains(nextPos)) { return }
-        }*/
     }
 
     private fun calculateNextPosition() : IntVec2

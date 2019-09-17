@@ -78,7 +78,6 @@ class EntityComponentSystem
         val inventory = hero.get<InventoryComponent>()!!.inventory
         hud = HUD(BattleScreen(inventory), saveGameManager, hero, engine, gameArea)
         setUpPeople()
-        setUpSigns()
         setUpEntitySystems(gameArea, viewport, hud)
 
         World.ecs = this
@@ -106,19 +105,6 @@ class EntityComponentSystem
             }
         }
     }
-
-    /** Set up objects with description on the map */
-    private fun setUpSigns()
-    {
-        for (layer in gameArea.descriptions.keys())
-        {
-            for (signInformation in gameArea.descriptions.get(layer))
-            {
-                entityFactory.createSign(signInformation, layer)
-            }
-        }
-    }
-
 
     fun setUpEntitySystems(gameArea: GameArea, viewport: Viewport, hud: HUD)
     {

@@ -86,14 +86,15 @@ class PathSystem(private val gameArea: GameArea) : EntitySystem()
             }
 
             // Check whether movement is possible or blocked by a collider
-            val nextPos = IntVec2(0, 0)
+            // TODO move to PathComponent
+            /*val nextPos = IntVec2(0, 0)
             for (r : ColliderComponent in gameArea.dynamicColliders.get(position.layer))
             {
                 nextPos.x = position.nextX + Constant.TILE_SIZE/2
                 nextPos.y = position.nextY + Constant.TILE_SIZE/2
 
                 if (!collider.equals(r) && r.asRectangle.contains(nextPos)) { println("blocked"); return }
-            }
+            }*/
 
             // TODO update for new system
             //collider.x = position.nextX

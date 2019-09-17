@@ -56,7 +56,6 @@ class EntityFactory(private val engine: Engine, private val area: GameArea)
 
         // Collider
         val collider = ColliderComponent(true, transform.x, transform.y, transform.width, transform.height)
-        area.addDynamicCollider(collider, startLayer)
         hero.add(collider)
 
         // Game State
@@ -196,7 +195,6 @@ class EntityFactory(private val engine: Engine, private val area: GameArea)
 
         // Collider
         val collider = ColliderComponent(true, transform.x, transform.y, transform.width, transform.height)
-        area.addDynamicCollider(collider, startField.layer)
         person.add(collider)
 
         // Conversation

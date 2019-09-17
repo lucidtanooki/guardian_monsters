@@ -19,7 +19,6 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusBehaviour
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusGameObject
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.World
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.*
-import de.limbusdev.guardianmonsters.fwmengine.world.model.MapDescriptionInfo
 import de.limbusdev.guardianmonsters.fwmengine.world.model.MapPersonInformation
 import de.limbusdev.guardianmonsters.fwmengine.world.model.WarpPoint
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.ExtendedTiledMapRenderer
@@ -59,12 +58,9 @@ class GameArea(val areaID: Int, startPosID: Int)
 
     private var bgMusic: String? = null
 
-    val colliders        = ArrayMap<Int, Array<ColliderComponent>>()
-    val dynamicColliders = ArrayMap<Int, Array<ColliderComponent>>()
     val warpPoints       = ArrayMap<Int, Array<WarpPoint>>()
     val healFields       = ArrayMap<Int, Array<Rectangle>>()
     val mapPeople        = ArrayMap<Int, Array<MapPersonInformation>>()
-    val descriptions     = ArrayMap<Int, Array<MapDescriptionInfo>>()
 
 
     // --------------------------------------------------------------------------------------------- CONSTRUCTORS
@@ -120,7 +116,6 @@ class GameArea(val areaID: Int, startPosID: Int)
             {
                 "people"        -> createGameObjects(layer, layerID)
                 "colliderWalls" -> createGameObjects(layer, layerID)
-                "descriptions"  -> createDescriptions(layer)
                 "triggers"      -> createTriggers(layer, startFieldID)
                 "gameObjects"   -> createGameObjects(layer, layerID)
             }
@@ -276,23 +271,6 @@ class GameArea(val areaID: Int, startPosID: Int)
         }
     }
 
-    private fun createDescriptions(layer: MapLayer)
-    {
-        val descriptionLayer = Array<MapDescriptionInfo>()
-        val layerIndex = layer.name.subStringFromEnd(0).toInt()
-        descriptions[layerIndex] = descriptionLayer
-
-        // get information about signs on map
-        for (mo in layer.objects)
-        {
-            when(mo.name)
-            {
-                "sign"  -> descriptionLayer.add(MapDescriptionInfo(mo))
-                else    -> {}
-            }
-        }
-    }
-
     /**
      * Only for Layers containing "people" in their nameID
      *
@@ -361,22 +339,5 @@ class GameArea(val areaID: Int, startPosID: Int)
     fun stopMusic()
     {
         Services.Audio().stopMusic(bgMusic)
-    }
-
-    fun addDynamicCollider(collider: ColliderComponent, layer: Int)
-    {
-        if (!dynamicColliders.containsKey(layer))
-        {
-            dynamicColliders.put(layer, Array())
-        }
-        dynamicColliders.get(layer).add(collider)
-    }
-
-    fun removeDynamicCollider(collider: ColliderComponent, layer: Int)
-    {
-        if (dynamicColliders.containsKey(layer))
-        {
-            dynamicColliders.get(layer).removeValue(collider, false)
-        }
     }
 }

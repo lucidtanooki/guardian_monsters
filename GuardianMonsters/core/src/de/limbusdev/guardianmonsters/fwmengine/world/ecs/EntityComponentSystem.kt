@@ -65,7 +65,6 @@ class EntityComponentSystem
     private val engine          = Engine()
     private val entityFactory   = EntityFactory(engine, gameArea)
 
-    var hero    : LimbusGameObject
     var hud     : HUD
 
     val inputProcessor: InputProcessor get() = hud
@@ -74,13 +73,11 @@ class EntityComponentSystem
     // --------------------------------------------------------------------------------------------- CONSTRUCTORS
     init
     {
-        hero = setupHero(fromSave)
-        val inventory = hero.get<InventoryComponent>()!!.inventory
-        hud = HUD(BattleScreen(inventory), saveGameManager, hero, engine, gameArea)
+        setupHero(fromSave)
+        val inventory = World.hero.get<InventoryComponent>()!!.inventory
+        hud = HUD(BattleScreen(inventory), saveGameManager, World.hero, engine, gameArea)
         setUpPeople()
         setUpEntitySystems(gameArea, viewport, hud)
-
-        World.ecs = this
     }
 
 

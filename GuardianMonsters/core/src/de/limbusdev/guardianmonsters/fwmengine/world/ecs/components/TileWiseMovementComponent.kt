@@ -11,6 +11,7 @@ import kotlin.properties.Delegates
 
 class TileWiseMovementComponent() : LimbusBehaviour()
 {
+    // --------------------------------------------------------------------------------------------- PROPERTIES
     companion object { const val TAG = "TileWiseMovementComponent" }
 
     override val defaultJson: String get() = ""
@@ -26,9 +27,11 @@ class TileWiseMovementComponent() : LimbusBehaviour()
         onGridSlotChanged.forEach { it.invoke(newSlot) }
     }}
 
-    // Register callback functions for changing gridSlot here
+    // Register callback functions for changing gridSlot here: Callback(newGridSlot)
     val onGridSlotChanged = mutableListOf<((IntVec2) -> Unit)>()
 
+
+    // --------------------------------------------------------------------------------------------- METHODS
     override fun update(deltaTime: Float)
     {
         super.update(deltaTime)
@@ -141,16 +144,16 @@ class TileWiseMovementComponent() : LimbusBehaviour()
         // Check whether movement is possible or blocked by a collider
         val nextPos = IntVec2(0, 0)
 
-        for (r in World.getAllWith("ColliderComponent", transform.layer))
+        for (collider in World.getAllWith("ColliderComponent", transform.layer))
         {
-            val staticCollider = r.get<ColliderComponent>()
+            val staticCollider = collider.get<ColliderComponent>()
 
             if(staticCollider != null)
             {
                 nextPos.x = nextPosition.x + Constant.TILE_SIZE/2
                 nextPos.y = nextPosition.y + Constant.TILE_SIZE/2
 
-                if (staticCollider.asRectangle.contains(nextPos)) { return true }
+                if (staticCollider.asRectangle.contains(nextPos) && !staticCollider.isTrigger) { return true }
             }
         }
 

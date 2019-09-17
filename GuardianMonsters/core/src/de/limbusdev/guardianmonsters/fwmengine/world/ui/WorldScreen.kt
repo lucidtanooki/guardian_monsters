@@ -18,6 +18,7 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ecs.EntityComponentSystem
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.GameArea
 import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager
 import de.limbusdev.guardianmonsters.Constant
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.World
 
 
 /**
@@ -37,17 +38,18 @@ class WorldScreen(mapID: Int, startPosID: Int, fromSave: Boolean) : Screen
     private lateinit var font       : BitmapFont
 
     private val gameArea            : GameArea
-    private val ECS                 : EntityComponentSystem
     private val inputMultiplexer    : InputMultiplexer
 
 
     // --------------------------------------------------------------------------------------------- CONSTRUCTORS
     init
     {
+        World.reset()
+
         setUpRendering()
         gameArea = GameArea(mapID, startPosID)
         val saveGameManager = SaveGameManager(this.gameArea)
-        ECS = EntityComponentSystem(viewport, gameArea, fromSave, this, saveGameManager)
+        World.ecs = EntityComponentSystem(viewport, gameArea, fromSave, this, saveGameManager)
 
         inputMultiplexer = InputMultiplexer()
         setUpInputProcessor()
@@ -62,7 +64,7 @@ class WorldScreen(mapID: Int, startPosID: Int, fromSave: Boolean) : Screen
         batch = SpriteBatch()
         setUpInputProcessor()
         gameArea.playMusic()
-        ECS.hud.show()
+        World.ecs.hud.show()
     }
 
     /** Called when the screen should render itself. */
@@ -79,14 +81,14 @@ class WorldScreen(mapID: Int, startPosID: Int, fromSave: Boolean) : Screen
         // ............................................................................... RENDERING
         // Tiled Map
         gameArea.render(camera)
-        ECS.render(batch, shpRend)
+        World.ecs.render(batch, shpRend)
         if (Constant.DEBUGGING_ON) gameArea.renderDebugging(shpRend)
 
-        ECS.draw()
+        World.ecs.draw()
 
         // ............................................................................... RENDERING
 
-        ECS.update(delta)
+        World.ecs.update(delta)
     }
 
     /**
@@ -97,7 +99,7 @@ class WorldScreen(mapID: Int, startPosID: Int, fromSave: Boolean) : Screen
     override fun resize(width: Int, height: Int)
     {
         viewport.update(width, height)
-        ECS.hud.stage.viewport.update(width, height, true)
+        World.ecs.hud.stage.viewport.update(width, height, true)
     }
 
     /** @see ApplicationListener.pause */
@@ -112,7 +114,7 @@ class WorldScreen(mapID: Int, startPosID: Int, fromSave: Boolean) : Screen
     /** Called when this screen is no longer the current screen for a [Game]. */
     override fun hide()
     {
-        ECS.hud.hide()
+        World.ecs.hud.hide()
     }
 
     /** Called when this screen should release all resources. */
@@ -148,8 +150,8 @@ class WorldScreen(mapID: Int, startPosID: Int, fromSave: Boolean) : Screen
 
     private fun setUpInputProcessor()
     {
-        inputMultiplexer.addProcessor(ECS.hud.inputProcessor)
-        inputMultiplexer.addProcessor(ECS.inputProcessor)
+        inputMultiplexer.addProcessor(World.ecs.hud.inputProcessor)
+        inputMultiplexer.addProcessor(World.ecs.inputProcessor)
         Gdx.input.inputProcessor = inputMultiplexer
     }
 }

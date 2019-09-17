@@ -19,7 +19,8 @@ class ColliderComponent
         var offsetY: Int = 0,
         var width: Int = 16,
         var height: Int = 16,
-        var inheritsExtent: Boolean = true
+        var inheritsExtent: Boolean = true,
+        var isTrigger: Boolean = false
 )
     : LimbusBehaviour(), Component
 {
@@ -35,7 +36,8 @@ class ColliderComponent
                     offsetY: 0,
                     width: 16,
                     height: 16,
-                    inheritsExtent: true
+                    inheritsExtent: true,
+                    isTrigger: false
             """.trimMargin()
 
 

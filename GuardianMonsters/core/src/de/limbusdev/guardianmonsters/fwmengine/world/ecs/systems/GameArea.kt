@@ -58,7 +58,6 @@ class GameArea(val areaID: Int, startPosID: Int)
 
     private var bgMusic: String? = null
 
-    val warpPoints       = ArrayMap<Int, Array<WarpPoint>>()
     val healFields       = ArrayMap<Int, Array<Rectangle>>()
     val mapPeople        = ArrayMap<Int, Array<MapPersonInformation>>()
 
@@ -68,6 +67,20 @@ class GameArea(val areaID: Int, startPosID: Int)
     {
         tiledMap = setUpTiledMap(areaID, startPosID)
         mapRenderer = ExtendedTiledMapRenderer(tiledMap)
+        for(warpTargetField in World.getAllWith("WarpTargetComponent"))
+        {
+            val warpTargetComponent = warpTargetField.get<WarpTargetComponent>()
+            if(warpTargetComponent != null && warpTargetComponent.warpTargetID == startPosID)
+            {
+                val transform = warpTargetComponent.gameObject?.transform
+                if(transform != null)
+                {
+                    startPosition.x = transform.x
+                    startPosition.y = transform.y
+                    startLayer = transform.layer
+                }
+            }
+        }
     }
 
 
@@ -116,7 +129,7 @@ class GameArea(val areaID: Int, startPosID: Int)
             {
                 "people"        -> createGameObjects(layer, layerID)
                 "colliderWalls" -> createGameObjects(layer, layerID)
-                "triggers"      -> createTriggers(layer, startFieldID)
+                "triggers"      -> createGameObjects(layer, layerID)
                 "gameObjects"   -> createGameObjects(layer, layerID)
             }
         }
@@ -173,6 +186,7 @@ class GameArea(val areaID: Int, startPosID: Int)
                     if (component != null) { gameObject.add(component) }
                 }
 
+                gameObject.addAndRemoveComponentsNow()
                 World.add(gameObject)
             }
         }
@@ -216,9 +230,6 @@ class GameArea(val areaID: Int, startPosID: Int)
         val healingTriggers = Array<Rectangle>()
         healFields.put(layerIndex, healingTriggers)
 
-        val warpTriggers = Array<WarpPoint>()
-        warpPoints.put(layerIndex, warpTriggers)
-
         // TODO
         //val battleTriggers = Array<MonsterArea>()
         //monsterAreas.put(layerIndex, battleTriggers)
@@ -236,13 +247,13 @@ class GameArea(val areaID: Int, startPosID: Int)
                             Constant.COLf,
                             Constant.ROWf))
                 }
-                "warpField" ->
+                /*"warpField" ->
                 {
                     warpTriggers.add(WarpPoint(
                             mo.properties["targetWarpPointID", 0],
                             rect,
                             mo.properties["targetID", 0]))
-                }
+                }*/
                 "startField" ->
                 {
                     if (mo.properties["fieldID", 0] == startFieldID)

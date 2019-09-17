@@ -5,7 +5,8 @@ import kotlin.reflect.KClass
 
 object World
 {
-    val hero = LimbusGameObject("Hero")
+    var hero = LimbusGameObject("Hero")
+        private set
     lateinit var ecs : EntityComponentSystem
 
     private val gameObjects = mutableListOf<LimbusGameObject>()
@@ -15,12 +16,28 @@ object World
 
     val componentParsers = mutableMapOf<KClass<out LimbusBehaviour>, IComponentParser<out LimbusBehaviour>>()
 
+    private var isStopped = true
+
     init
     {
         componentParsers[ColliderComponent::class] = ColliderComponentParser
         componentParsers[ConversationComponent::class] = ConversationComponentParser
         componentParsers[CharacterSpriteComponent::class] = CharacterSpriteComponentParser
+        componentParsers[WarpStartComponent::class] = WarpStartComponentParser
+        componentParsers[WarpTargetComponent::class] = WarpTargetComponentParser
 
+        reset()
+    }
+
+    fun start() { isStopped = false }
+
+    fun reset()
+    {
+        isStopped = true
+        gameObjects.clear()
+        gameObjectsToBeAdded.clear()
+        gameObjectsToBeRemoved.clear()
+        hero = LimbusGameObject("Hero")
         add(hero)
     }
 
@@ -41,12 +58,15 @@ object World
 
     fun update(deltaTime: Float)
     {
+        if(isStopped) { isStopped = false }
+
         for(gameObject in gameObjects)
         {
             if(gameObject.enabled)
             {
                 gameObject.update(deltaTime)
             }
+            if(isStopped) { return }
         }
 
         addAndRemoveObjectsNow()

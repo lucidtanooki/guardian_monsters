@@ -22,6 +22,8 @@ class HeroComponent
 )
     : LimbusBehaviour(), Component
 {
+    companion object { const val TAG = "TileWiseMovementComponent" }
+
     override val defaultJson: String = ""
 
     init
@@ -68,13 +70,13 @@ class HeroComponent
             val monsterArea = battleArea.get<MonsterAreaComponent>()
 
             if
-                    (
+            (
                     battleAreaRectangle != null &&
                     monsterArea != null &&
                     battleAreaRectangle.contains(transform.asRectangle.offset(Constant.TILE_SIZE/2))
                     && MathUtils.randomBoolean(monsterArea.teamSizeProbabilities.get(0))
             ) {
-                logDebug("TileWiseMovementComponent") { "Monster appeared!" }
+                logDebug(TAG) { "Monster appeared!" }
 
                 //............................................................. START BATTLE
                 // TODO change min and max levels
@@ -106,19 +108,22 @@ class HeroComponent
     /** Check whether hero enters warp area */
     private fun checkWarp(slot: IntVec2)
     {
-        // TODO
-        /*val pos = Transform(LimbusGameObject()) // TODO
-        val heroArea = createRectangle(IntRect(pos.x, pos.y, pos.width, pos.height))
+        val transform = gameObject?.transform ?: return
 
-        // Check whether hero enters warp area
-        if(warpPoints.get(pos.layer) == null) { return }
-        for (w in warpPoints.get(pos.layer))
+        val warpStartFields = World.getAllWith("WarpStartComponent", transform.layer)
+
+        for(warpStart in warpStartFields)
         {
-            if (heroArea.contains(w.xf, w.yf))
+            val warpComponent = warpStart.get<WarpStartComponent>()
+            val warpCollider = warpStart.get<ColliderComponent>()
+            if(warpCollider != null && warpCollider.isTrigger && warpComponent != null)
             {
-                logDebug(MovementSystem.TAG) { "Changing to Map ${w.targetID}" }
-                ecs.changeGameArea(w.targetID, w.targetWarpPointID)
+                if(warpCollider.asRectangle.contains(transform.x+Constant.TILE_SIZE/2, transform.y+Constant.TILE_SIZE/2))
+                {
+                    logDebug(TAG) { "Changing to Map ${warpComponent.targetMapID}" }
+                    World.ecs.changeGameArea(warpComponent.targetMapID, warpComponent.warpTargetID)
+                }
             }
-        }*/
+        }
     }
 }

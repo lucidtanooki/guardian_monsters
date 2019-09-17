@@ -745,7 +745,7 @@ path: SSTOP,E,E,E,E,ESTOP,NSTOP,NSTOP,WSTOP,SSTOP,S,S,S,ESTOP,SSTOP,W,W,W,W,SSTO
  <objectgroup id="12" name="triggers0">
   <object id="32" name="startField" x="432" y="192" width="16" height="16">
    <properties>
-    <property name="fieldID" type="int" value="1"/>
+    <property name="WarpTargetComponent" value="warpTargetID: 1"/>
    </properties>
   </object>
   <object id="35" name="warpField" x="432" y="176" width="16" height="16">
@@ -803,8 +803,8 @@ path: SSTOP,E,E,E,E,ESTOP,NSTOP,NSTOP,WSTOP,SSTOP,S,S,S,ESTOP,SSTOP,W,W,W,W,SSTO
   </object>
   <object id="389" name="warpField" x="464" y="496" width="16" height="16">
    <properties>
-    <property name="targetID" type="int" value="2"/>
-    <property name="targetWarpPointID" type="int" value="1"/>
+    <property name="ColliderComponent" value="isTrigger: true"/>
+    <property name="WarpStartComponent" value="targetMapID: 2, warpTargetID: 1"/>
    </properties>
   </object>
   <object id="390" name="warpField" x="480" y="496" width="16" height="16">

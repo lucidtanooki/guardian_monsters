@@ -9,8 +9,6 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusBehaviour
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.World
 import de.limbusdev.guardianmonsters.guardians.battle.BattleFactory
 import de.limbusdev.guardianmonsters.services.Services
-import de.limbusdev.guardianmonsters.utils.createRectangle
-import de.limbusdev.utils.geometry.IntRect
 import de.limbusdev.utils.geometry.IntVec2
 import de.limbusdev.utils.logDebug
 
@@ -18,8 +16,8 @@ class TileWiseMovementComponent() : LimbusBehaviour()
 {
     override val defaultJson: String get() = ""
 
-    val newFrameEveryXPixels = 6
-    var stepsSinceLastFrameUpdate = 0
+    private val newFrameEveryXPixels = 6
+    private var stepsSinceLastFrameUpdate = 0
 
     override fun update(deltaTime: Float)
     {
@@ -28,12 +26,16 @@ class TileWiseMovementComponent() : LimbusBehaviour()
         val transform = gameObject?.transform ?: return
         val inputComponent = gameObject?.get<InputComponent>() ?: return
 
+        // For every new tile-step, initialize the new movement
         initializeMovement(transform, inputComponent)
+
+        // after initializing, perform all the pixel-steps
         applyMovement(transform, inputComponent)
-
-
     }
 
+    /**
+     * Check, if there is a healing area at the current grid position
+     */
     private fun checkForHealingArea()
     {
         /*val hero = World.hero
@@ -54,6 +56,9 @@ class TileWiseMovementComponent() : LimbusBehaviour()
         }*/
     }
 
+    /**
+     * Check, if the current area can cause random battle encounters
+     */
     private fun checkForRandomBattles(transform: Transform, inputComponent: InputComponent)
     {
         for(battleArea in World.getAllWith("RandomBattleAreaComponent", transform.layer))
@@ -164,12 +169,14 @@ class TileWiseMovementComponent() : LimbusBehaviour()
     private fun initializeMovement(transform: Transform, inputComponent: InputComponent) : Boolean
     {
         // Initialize Movement
-        if
-        (
-                inputComponent.startMoving &&
-                TimeUtils.timeSinceMillis(inputComponent.firstTip) > 100 &&
-                inputComponent.touchDown
-        ){
+        if(!inputComponent.startMoving || !inputComponent.touchDown) { return false }
+
+        // Turn Character to the chosen direction
+        World.hero.get<CharacterSpriteComponent>()?.sprite?.changeState(inputComponent.skyDir)
+        
+        if(TimeUtils.timeSinceMillis(inputComponent.firstTip) > 100)
+        {
+            // Start movement in that direction
             val nextPosition = calculateNextPosition()
             val isBlocked = isNextPositionBlocked(nextPosition)
             if(isBlocked) { return false }
@@ -178,8 +185,6 @@ class TileWiseMovementComponent() : LimbusBehaviour()
 
             inputComponent.moving = true        // entity is moving right now
             inputComponent.startMoving = false  // because entity now started moving
-
-            World.hero.get<CharacterSpriteComponent>()?.sprite?.changeState(inputComponent.skyDir)
 
             return true
         }

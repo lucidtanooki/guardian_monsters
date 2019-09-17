@@ -1,15 +1,25 @@
 package de.limbusdev.guardianmonsters.fwmengine.world.ecs.components
 
+import com.badlogic.gdx.math.MathUtils
+import com.badlogic.gdx.utils.ArrayMap
 import com.badlogic.gdx.utils.TimeUtils
 import de.limbusdev.guardianmonsters.Constant
 import de.limbusdev.guardianmonsters.enums.SkyDirection
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusBehaviour
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.World
+import de.limbusdev.guardianmonsters.guardians.battle.BattleFactory
+import de.limbusdev.guardianmonsters.services.Services
+import de.limbusdev.guardianmonsters.utils.createRectangle
+import de.limbusdev.utils.geometry.IntRect
 import de.limbusdev.utils.geometry.IntVec2
+import de.limbusdev.utils.logDebug
 
 class TileWiseMovementComponent() : LimbusBehaviour()
 {
     override val defaultJson: String get() = ""
+
+    val newFrameEveryXPixels = 6
+    var stepsSinceLastFrameUpdate = 0
 
     override fun update(deltaTime: Float)
     {
@@ -24,6 +34,69 @@ class TileWiseMovementComponent() : LimbusBehaviour()
 
     }
 
+    private fun checkForHealingArea()
+    {
+        /*val hero = World.hero
+        val heroArea = createRectangle(IntRect(hero.transform.x, hero.transform.y, hero.transform.width, hero.transform.height))
+
+        // Check whether hero enters warp area
+        if(healFields.get(hero.transform.layer) == null) { return }
+        for (h in healFields.get(hero.transform.layer))
+        {
+            if (heroArea.contains(h.x + h.width / 2, h.y + h.height / 2))
+            {
+                // Heal Team
+                logDebug(MovementSystem.TAG) { "Entered Healing Area" }
+                val team = hero.get<TeamComponent>()!!.team
+                val teamHurt = false
+                team.values().forEach { guardian -> guardian.stats.healCompletely() }
+            }
+        }*/
+    }
+
+    private fun checkForRandomBattles(transform: Transform, inputComponent: InputComponent)
+    {
+        for(battleArea in World.getAllWith("RandomBattleAreaComponent", transform.layer))
+        {
+            val battleAreaRectangle = battleArea.get<ColliderComponent>()?.asRectangle
+            val monsterArea = battleArea.get<MonsterAreaComponent>()
+
+            if
+            (
+                    battleAreaRectangle != null &&
+                    monsterArea != null &&
+                    battleAreaRectangle.contains(transform.asRectangle.offset(Constant.TILE_SIZE/2))
+                    && MathUtils.randomBoolean(monsterArea.teamSizeProbabilities.get(0))
+            ) {
+                logDebug("TileWiseMovementComponent") { "Monster appeared!" }
+
+                //............................................................. START BATTLE
+                // TODO change min and max levels
+                inputComponent.inBattle = true
+                val guardianProbabilities = ArrayMap<Int, Float>()
+                for (i in 0 until monsterArea.monsters.size)
+                {
+                    guardianProbabilities.put(monsterArea.monsters.get(i), monsterArea.monsterProbabilities.get(i))
+                }
+
+                val oppTeam = BattleFactory.createOpponentTeam(guardianProbabilities, monsterArea.teamSizeProbabilities, 1, 1)
+
+                World.ecs.hud.battleScreen.initialize(
+
+                        World.hero.get<TeamComponent>()!!.team,
+                        oppTeam,
+                        World.hero.get<GuardoSphereComponent>()!!.guardoSphere
+                )
+
+                Services.ScreenManager().pushScreen(World.ecs.hud.battleScreen)
+                //............................................................. START BATTLE
+
+                // Stop when in a battle
+                if (inputComponent.touchDown) { inputComponent.startMoving = false }
+            }
+        }
+    }
+
     private fun applyMovement(transform: Transform, inputComponent: InputComponent) : Boolean
     {
         // If entity is already moving, and last incremental step has completed (long enough ago)
@@ -32,7 +105,56 @@ class TileWiseMovementComponent() : LimbusBehaviour()
                 inputComponent.moving &&
                 TimeUtils.timeSinceMillis(transform.lastPixelStep) > Constant.ONE_STEPDURATION_MS
         ) {
-            // TODO move from MovementSystem here
+            val spriteComponent = gameObject?.get<CharacterSpriteComponent>() ?: return false
+
+            when (inputComponent.skyDir)
+            {
+                SkyDirection.N  -> transform.y += 1
+                SkyDirection.W  -> transform.x -= 1
+                SkyDirection.E  -> transform.x += 1
+                else            -> transform.y -= 1
+            }
+            transform.lastPixelStep = TimeUtils.millis()
+
+            if(stepsSinceLastFrameUpdate >= newFrameEveryXPixels)
+            {
+                stepsSinceLastFrameUpdate = 0
+                spriteComponent.sprite.toNextFrame()
+            }
+            stepsSinceLastFrameUpdate++
+
+            // Check if movement is complete
+            val movementComplete = when (inputComponent.skyDir)
+            {
+                SkyDirection.N, SkyDirection.S  -> transform.y == transform.nextY
+                SkyDirection.W, SkyDirection.E  -> transform.x == transform.nextX
+                else                            -> false
+            }
+
+            if (movementComplete)
+            {
+                checkForHealingArea()
+                checkForRandomBattles(transform, inputComponent)
+                inputComponent.moving = false
+
+                logDebug("TileWiseMovementComponent") { "Position on Grid: ${transform.onGrid}" }
+            }
+
+            // Movement completed
+            if (!inputComponent.moving)
+            {
+                // Continue movement when button is pressed
+                if (inputComponent.touchDown)
+                {
+                    inputComponent.startMoving = true
+                    inputComponent.skyDir = inputComponent.nextInput
+                }
+                else
+                {
+                    World.hero.get<CharacterSpriteComponent>()?.sprite?.resetAnimation()
+                }
+            }
+
             return true
         }
 
@@ -43,7 +165,7 @@ class TileWiseMovementComponent() : LimbusBehaviour()
     {
         // Initialize Movement
         if
-                (
+        (
                 inputComponent.startMoving &&
                 TimeUtils.timeSinceMillis(inputComponent.firstTip) > 100 &&
                 inputComponent.touchDown
@@ -129,5 +251,24 @@ class TileWiseMovementComponent() : LimbusBehaviour()
         }
 
         return IntVec2(transform.nextX, transform.nextY)
+    }
+
+    /** Check whether hero enters warp area */
+    private fun checkWarp()
+    {
+        // TODO
+        /*val pos = Transform(LimbusGameObject()) // TODO
+        val heroArea = createRectangle(IntRect(pos.x, pos.y, pos.width, pos.height))
+
+        // Check whether hero enters warp area
+        if(warpPoints.get(pos.layer) == null) { return }
+        for (w in warpPoints.get(pos.layer))
+        {
+            if (heroArea.contains(w.xf, w.yf))
+            {
+                logDebug(MovementSystem.TAG) { "Changing to Map ${w.targetID}" }
+                ecs.changeGameArea(w.targetID, w.targetWarpPointID)
+            }
+        }*/
     }
 }

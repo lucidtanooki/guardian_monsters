@@ -21,7 +21,6 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ecs.World
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.*
 import de.limbusdev.guardianmonsters.fwmengine.world.model.MapDescriptionInfo
 import de.limbusdev.guardianmonsters.fwmengine.world.model.MapPersonInformation
-import de.limbusdev.guardianmonsters.fwmengine.world.model.MonsterArea
 import de.limbusdev.guardianmonsters.fwmengine.world.model.WarpPoint
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.ExtendedTiledMapRenderer
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.TmxDayTimeMapLoader
@@ -66,7 +65,6 @@ class GameArea(val areaID: Int, startPosID: Int)
     val healFields       = ArrayMap<Int, Array<Rectangle>>()
     val mapPeople        = ArrayMap<Int, Array<MapPersonInformation>>()
     val descriptions     = ArrayMap<Int, Array<MapDescriptionInfo>>()
-    val monsterAreas     = ArrayMap<Int, Array<MonsterArea>>()
 
 
     // --------------------------------------------------------------------------------------------- CONSTRUCTORS
@@ -226,8 +224,9 @@ class GameArea(val areaID: Int, startPosID: Int)
         val warpTriggers = Array<WarpPoint>()
         warpPoints.put(layerIndex, warpTriggers)
 
-        val battleTriggers = Array<MonsterArea>()
-        monsterAreas.put(layerIndex, battleTriggers)
+        // TODO
+        //val battleTriggers = Array<MonsterArea>()
+        //monsterAreas.put(layerIndex, battleTriggers)
 
         for (mo in layer.objects)
         {
@@ -265,12 +264,12 @@ class GameArea(val areaID: Int, startPosID: Int)
                     ap.add(mo.properties["probability",  .5f])
                     ap.add(mo.properties["probability2", .3f])
                     ap.add(mo.properties["probability3", .2f])
-                    battleTriggers.add(MonsterArea(
+                    /*battleTriggers.add(MonsterArea(
 
                             r.x, r.y, r.width, r.height,
                             mo.properties["monsters", "1;0.90;2;0.05;3;0.05"],
                             ap
-                    ))
+                    ))*/ // TODO
                 }
                 else -> {}
             }

@@ -6,6 +6,7 @@ import kotlin.reflect.KClass
 object World
 {
     val hero = LimbusGameObject("Hero")
+    lateinit var ecs : EntityComponentSystem
 
     private val gameObjects = mutableListOf<LimbusGameObject>()
 

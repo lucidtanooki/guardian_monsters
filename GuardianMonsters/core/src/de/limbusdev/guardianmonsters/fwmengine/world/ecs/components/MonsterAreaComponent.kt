@@ -1,6 +1,7 @@
-package de.limbusdev.guardianmonsters.fwmengine.world.model
+package de.limbusdev.guardianmonsters.fwmengine.world.ecs.components
 
 import com.badlogic.gdx.utils.Array
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusBehaviour
 
 import de.limbusdev.utils.geometry.IntRect
 
@@ -10,20 +11,18 @@ import de.limbusdev.utils.geometry.IntRect
  *
  * @author Georg Eckert 2015-12-17
  */
-class MonsterArea
-(
-        x: Int,
-        y: Int,
-        width: Int,
-        height: Int,
-        monsterProperties: String,
-        var teamSizeProbabilities: Array<Float> // for 1, 2 or 3 monsters
-)
-    : IntRect(x, y, width, height)
+class MonsterAreaComponent() : LimbusBehaviour()
 {
+    override val defaultJson: String get() = ""
+
     // --------------------------------------------------------------------------------------------- PROPERTIES
-    var monsters             = Array<Int>()     // IDs of the Guardians that appear in this area
-    var monsterProbabilities = Array<Float>()   // at which probability they appear
+    val monsters             = Array<Int>()     // IDs of the Guardians that appear in this area
+    val monsterProbabilities = Array<Float>()   // at which probability they appear
+    val teamSizeProbabilities = Array<Float>()  // for 1, 2 or 3 monsters
+
+    var monsterProperties = ""
+
+    // Inherits Extent from RectangleMapObject
 
 
     // --------------------------------------------------------------------------------------------- CONSTRUCTORS

@@ -16,7 +16,6 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.InventoryCom
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.entities.HeroEntity
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.DebuggingSystem
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.GameArea
-import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.MovementSystem
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.PathSystem
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.SpriteSystem
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.HUD
@@ -81,6 +80,8 @@ class EntityComponentSystem
         setUpPeople()
         setUpSigns()
         setUpEntitySystems(gameArea, viewport, hud)
+
+        World.ecs = this
     }
 
 
@@ -126,10 +127,7 @@ class EntityComponentSystem
         spriteSystem.addedToEngine(engine)
         engine.addSystem(spriteSystem)
 
-        // Movement System
-        val movementSystem = MovementSystem(this, gameArea.warpPoints, gameArea.healFields)
-        movementSystem.addedToEngine(engine)
-        engine.addSystem(movementSystem)
+        // TODO val movementSystem = MovementSystem(this, gameArea.warpPoints, gameArea.healFields)
 
         // Camera System
         val cameraComponent = CameraComponent(viewport.camera as OrthographicCamera, gameArea.tiledMap)

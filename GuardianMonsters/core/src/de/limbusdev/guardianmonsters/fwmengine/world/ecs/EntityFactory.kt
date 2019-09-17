@@ -7,18 +7,7 @@ import com.badlogic.gdx.utils.Array
 import de.limbusdev.guardianmonsters.Constant
 import de.limbusdev.guardianmonsters.enums.SkyDirection
 import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager
-import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.CharacterSpriteComponent
-import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.ColliderComponent
-import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.ConversationComponent
-import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.GuardoSphereComponent
-import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.HeroComponent
-import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.InputComponent
-import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.InventoryComponent
-import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PathComponent
-import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Transform
-import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.SaveGameComponent
-import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TeamComponent
-import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TitleComponent
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.*
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.entities.HeroEntity
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.GameArea
 import de.limbusdev.guardianmonsters.fwmengine.world.model.MapDescriptionInfo
@@ -60,6 +49,9 @@ class EntityFactory(private val engine: Engine, private val area: GameArea)
         hero.transform.layer = startLayer
 
         val transform = hero.transform
+
+        // Movement
+        hero.add(TileWiseMovementComponent())
 
 
         // Collider

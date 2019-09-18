@@ -29,6 +29,8 @@ enum class SkyDirection
             else -> S
         }
     }
+
+    fun isStop() = this == stop()
 }
 
 /** North, East, South, West */

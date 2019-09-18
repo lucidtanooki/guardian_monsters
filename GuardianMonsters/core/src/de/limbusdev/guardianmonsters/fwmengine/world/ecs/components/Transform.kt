@@ -36,10 +36,6 @@ class Transform(var gameObject: LimbusGameObject) : Component
     val widthf get() = width.f()
     val heightf get() = height.f()
 
-
-    var nextX           : Int = 0
-    var nextY           : Int = 0
-    var lastPixelStep   : Long = 0 // ms
     var onGrid : IntVec2
         get() = IntVec2(x / Constant.TILE_SIZE, y / Constant.TILE_SIZE)
         set(value) { x = value.x ; y = value.y }

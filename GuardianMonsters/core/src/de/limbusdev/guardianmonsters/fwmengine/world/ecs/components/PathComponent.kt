@@ -72,10 +72,10 @@ class PathComponent
     {
         super.update(deltaTime)
 
-        if(inputComponent.stop)
+        /*if(inputComponent.stop)
         {
             if(TimeUtils.timeSinceMillis(stoppedSince) > 1000) { newTileReachedCallback(IntVec2()) }
-        }
+        }*/
     }
 
     private fun initializeInputComponent()
@@ -100,7 +100,7 @@ class PathComponent
 
     private fun newTileReachedCallback(newSlot: IntVec2)
     {
-        next()
+        /*next()
 
         if(path[currentDir] == path[currentDir].stop())
         {
@@ -114,7 +114,7 @@ class PathComponent
             inputComponent.touchDown = true
             inputComponent.stop = false
         }
-        inputComponent.nextInput = path[currentDir].nostop()
+        inputComponent.nextInput = path[currentDir].nostop()*/
     }
 
     /**

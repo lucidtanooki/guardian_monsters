@@ -24,46 +24,4 @@ class CharacterSpriteComponent
     : LimbusBehaviour(), Component
 {
     override val defaultJson: String = "enabled: true, male: true, index: 0"
-
-    override fun update(deltaTime: Float)
-    {
-        super.update(deltaTime)
-
-        var direction = SkyDirection.SSTOP
-
-        // If parent GameObject has InputComponent
-        val inputComponent = gameObject?.get<InputComponent>()
-        if(inputComponent != null)
-        {
-            direction = when(inputComponent.moving)
-            {
-                true -> inputComponent.skyDir
-                else -> inputComponent.skyDir.stop()
-            }
-        }
-
-        // If parent GameObject hast PathComponent
-        val pathComponent = gameObject?.get<PathComponent>()
-        if(pathComponent != null)
-        {
-            direction = when(pathComponent.talking)
-            {
-                true -> pathComponent.talkDir
-                false -> pathComponent.path[pathComponent.currentDir]
-            }
-
-            val moving = when(pathComponent.staticEntity)
-            {
-                true -> false
-                false -> pathComponent.moving
-            }
-        }
-
-        //sprite.changeState(direction)
-    }
-
-    /**
-     * Call this, when the next animation frame should be displayed.
-     */
-    fun updateAnimationFrame() = sprite.toNextFrame()
 }

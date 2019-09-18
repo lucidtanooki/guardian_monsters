@@ -37,10 +37,12 @@ class EntityFactory(private val engine: Engine, private val area: GameArea)
         val hero = CoreSL.world.hero
 
         // Add Sprite
-        hero.add(CharacterSpriteComponent(AnimatedPersonSprite("hero")))
+        val spriteComponent = CharacterSpriteComponent(AnimatedPersonSprite("hero"))
+        hero.add(spriteComponent)
 
         // Input
-        hero.add(InputComponent())
+        val inputComponent = InputComponent()
+        hero.add(inputComponent)
         hero.transform.x = startField.x
         hero.transform.y = startField.y
         hero.transform.width = UnitConverter.tilesToPixels(1)

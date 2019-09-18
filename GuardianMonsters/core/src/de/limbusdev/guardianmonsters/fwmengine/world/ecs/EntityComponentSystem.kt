@@ -17,7 +17,6 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.InventoryCom
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.entities.HeroEntity
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.DebuggingSystem
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.GameArea
-import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.PathSystem
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.SpriteSystem
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.HUD
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.WorldScreen
@@ -113,11 +112,6 @@ class EntityComponentSystem
         // Camera System
         val cameraComponent = CameraComponent(viewport.camera as OrthographicCamera, gameArea.tiledMap)
         CoreSL.world.hero.add(cameraComponent)
-
-        // Path System
-        val pathSystem = PathSystem(gameArea)
-        pathSystem.addedToEngine(engine)
-        engine.addSystem(pathSystem)
 
         // GameSaveManager
         saveGameManager.addedToEngine(engine)

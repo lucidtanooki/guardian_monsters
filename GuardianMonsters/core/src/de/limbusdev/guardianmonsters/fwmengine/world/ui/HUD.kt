@@ -93,6 +93,22 @@ class HUD
 
 
     // --------------------------------------------------------------------------------------------- METHODS
+    fun update(delta: Float)
+    {
+        stage.act(delta)
+        val input = hero.get<InputComponent>()!!
+        if(dPad.isTouched && input.direction.isStop())
+        {
+            if(TimeUtils.timeSinceMillis(dpadTouchDownStart) > 100)
+            {
+                input.direction = input.direction.nostop()
+            }
+        }
+    }
+
+
+
+
     // ............................................................................. Input Processor
     val inputProcessor: InputProcessor get() = this.stage
 
@@ -143,31 +159,6 @@ class HUD
         stage.addActor(menuButtons)
     }
 
-    private fun walk(dir: SkyDirection, input: InputComponent): Boolean
-    {
-        when(input.moving)
-        {
-            true -> input.nextInput = dir
-            false ->
-            {
-                input.startMoving = true
-                input.skyDir = dir
-                input.nextInput = dir
-                input.touchDown = true
-            }
-        }
-
-        return !input.moving
-    }
-
-    private fun stop(input: InputComponent)
-    {
-        logDebug(TAG) { "stop()" }
-        input.touchDown = false
-        input.stop = true
-    }
-
-
     fun draw() = stage.draw()
 
     /**
@@ -191,19 +182,20 @@ class HUD
 
         val (dPadValid, dPadDirection) = dPad.touchDown(touchPos)
 
-        if(dPadValid)
+        if(!dPadValid) { return false }
+
+        val moving = hero.get<TileWiseMovementComponent>()?.moving ?: false
+        input.direction = when(dPadDirection)
         {
-            input.touchDown = true
-            when(dPadDirection)
-            {
-                Compass4.N -> walk(SkyDirection.N, input)
-                Compass4.E -> walk(SkyDirection.E, input)
-                Compass4.S -> walk(SkyDirection.S, input)
-                Compass4.W -> walk(SkyDirection.W, input)
-            }
+            Compass4.N -> SkyDirection.NSTOP
+            Compass4.E -> SkyDirection.ESTOP
+            Compass4.S -> SkyDirection.SSTOP
+            Compass4.W -> SkyDirection.WSTOP
+        }
 
-
-            if (!input.moving) { input.startMoving = true }
+        if(TimeUtils.timeSinceMillis(dpadTouchDownStart) > 100)
+        {
+            input.direction = input.direction.nostop()
         }
 
         return dPadValid
@@ -211,20 +203,16 @@ class HUD
 
     override fun touchUp(screenX: Int, screenY: Int, pointer: Int, button: Int): Boolean
     {
-        stop(hero.get<InputComponent>()!!)
+        val inputComponent = hero.get<InputComponent>()
+        if(inputComponent != null)
+        {
+            inputComponent.direction = inputComponent.direction.stop()
+        }
         dPad.touchUp()
         return true
     }
 
-    fun update(delta: Float)
-    {
-        stage.act(delta)
-        val input = hero.get<InputComponent>()!!
-        if(this.dPad.isTouched)
-        {
-            if(input.stop && TimeUtils.timeSinceMillis(dpadTouchDownStart) > 100) { input.stop = false }
-        }
-    }
+
 
     fun proceedConversation()
     {
@@ -267,7 +255,7 @@ class HUD
 
     fun checkForNearInteractiveObjects(hero: LimbusGameObject, signature: String): LimbusGameObject?
     {
-        val dir = hero.get<InputComponent>()!!.skyDir
+        val dir = hero.get<InputComponent>()!!.direction
 
         var nearEntity: LimbusGameObject? = null
         val checkGridCell = hero.transform.onGrid

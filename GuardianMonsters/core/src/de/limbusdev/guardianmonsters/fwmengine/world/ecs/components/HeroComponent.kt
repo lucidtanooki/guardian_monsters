@@ -100,7 +100,7 @@ class HeroComponent
                 //............................................................. START BATTLE
 
                 // Stop when in a battle
-                if (inputComponent.touchDown) { inputComponent.startMoving = false }
+                //TODO if (inputComponent.touchDown) { inputComponent.startMoving = false }
             }
         }
     }

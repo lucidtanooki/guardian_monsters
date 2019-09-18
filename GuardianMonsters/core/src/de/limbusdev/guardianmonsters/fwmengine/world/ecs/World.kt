@@ -25,6 +25,8 @@ class World
         componentParsers[WarpStartComponent::class] = WarpStartComponentParser
         componentParsers[WarpTargetComponent::class] = WarpTargetComponentParser
         componentParsers[PathComponent::class] = PathComponentParser
+        componentParsers[InputComponent::class] = InputComponentParser
+        componentParsers[TileWiseMovementComponent::class] = TileWiseMovementComponentParser
     }
 
     fun start() { isStopped = false }

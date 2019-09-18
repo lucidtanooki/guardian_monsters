@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-down" width="64" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="18" nextobjectid="418">
+<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-down" width="64" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="18" nextobjectid="419">
  <properties>
   <property name="musicIndex" type="int" value="2"/>
   <property name="musicType" value="town"/>
@@ -128,21 +128,6 @@
   </object>
  </objectgroup>
  <objectgroup id="16" name="gameObjects0">
-  <object id="412" name="person4" type="person" x="240" y="224" width="16" height="16">
-   <properties>
-    <property name="CharacterSpriteComponent">male: true,
-index: 1</property>
-    <property name="ColliderComponent">enabled: true,
-width: 16,
-height: 16</property>
-    <property name="ConversationComponent" value="enabled: true, name: sign_25_1_title, text: sign_25_1_text"/>
-    <property name="PathComponent">enabled: true,
-dynamic: false,
-path: NSTOP</property>
-    <property name="enabled" type="bool" value="true"/>
-    <property name="layer" type="int" value="0"/>
-   </properties>
-  </object>
   <object id="306" name="sign" type="objectDescription" x="624" y="288" width="16" height="16">
    <properties>
     <property name="ConversationComponent" value="enabled: true, name: sign_25_1_title, text: sign_25_1_text"/>
@@ -166,7 +151,7 @@ path: NSTOP</property>
  </objectgroup>
  <objectgroup id="15" name="animatedTiles0"/>
  <objectgroup id="7" name="people0">
-  <object id="51" name="person" type="person" x="208" y="176" width="16" height="16">
+  <object id="51" name="person" type="LimbusGameObject" x="208" y="176" width="16" height="16">
    <properties>
     <property name="male" type="bool" value="true"/>
     <property name="path" value="SSTOP"/>
@@ -176,19 +161,19 @@ path: NSTOP</property>
     <property name="text" value="person_25_7"/>
    </properties>
   </object>
-  <object id="202" name="person" type="person" x="352" y="224" width="16" height="16">
+  <object id="202" name="person" type="LimbusGameObject" x="352" y="224" width="16" height="16">
    <properties>
     <property name="CharacterSpriteComponent">male: true,
 index: 2</property>
     <property name="ColliderComponent" value=""/>
-    <property name="ConversationComponent" value="enabled: true, name: person_name_25_8, text: person_name_25_8"/>
+    <property name="ConversationComponent" value="enabled: true, name: person_name_25_8, text: person_25_8"/>
+    <property name="InputComponent" value=""/>
     <property name="PathComponent">enabled: true,
-path: SSTOP,E,E,E,E,ESTOP,NSTOP,NSTOP,WSTOP,SSTOP,S,S,S,ESTOP,SSTOP,W,W,W,W,SSTOP,WSTOP,SSTOP,SSTOP,SSTOP,SSTOP,WSTOP,NSTOP,N,N,N</property>
-    <property name="enabled" type="bool" value="true"/>
-    <property name="personName" value="person_name_25_8"/>
+path: &quot;SSTOP,E,E,E,E,ESTOP,NSTOP,NSTOP,WSTOP,SSTOP,S,S,S,ESTOP,SSTOP,W,W,W,W,SSTOP,WSTOP,SSTOP,SSTOP,SSTOP,SSTOP,WSTOP,NSTOP,N,N,N&quot;</property>
+    <property name="TileWiseMovementComponent" value=""/>
    </properties>
   </object>
-  <object id="291" name="person" type="person" x="208" y="416" width="16" height="16">
+  <object id="291" name="person" type="LimbusGameObject" x="208" y="416" width="16" height="16">
    <properties>
     <property name="male" type="bool" value="true"/>
     <property name="path" value="SSTOP,ESTOP,NSTOP,N,N,N,N,N,ESTOP,NSTOP,WSTOP,NSTOP,ESTOP,E,SSTOP,WSTOP,S,S,W,S,S,S,SSTOP,ESTOP,NSTOP"/>
@@ -198,7 +183,7 @@ path: SSTOP,E,E,E,E,ESTOP,NSTOP,NSTOP,WSTOP,SSTOP,S,S,S,ESTOP,SSTOP,W,W,W,W,SSTO
     <property name="text" value="person_25_11"/>
    </properties>
   </object>
-  <object id="292" name="person" type="person" x="544" y="288" width="16" height="16">
+  <object id="292" name="person" type="LimbusGameObject" x="544" y="288" width="16" height="16">
    <properties>
     <property name="male" type="bool" value="true"/>
     <property name="path" value="SSTOP"/>
@@ -208,7 +193,7 @@ path: SSTOP,E,E,E,E,ESTOP,NSTOP,NSTOP,WSTOP,SSTOP,S,S,S,ESTOP,SSTOP,W,W,W,W,SSTO
     <property name="text" value="person_25_9"/>
    </properties>
   </object>
-  <object id="293" name="person" type="person" x="592" y="112" width="16" height="16">
+  <object id="293" name="person" type="LimbusGameObject" x="592" y="112" width="16" height="16">
    <properties>
     <property name="male" type="bool" value="true"/>
     <property name="path" value="SSTOP"/>
@@ -218,7 +203,7 @@ path: SSTOP,E,E,E,E,ESTOP,NSTOP,NSTOP,WSTOP,SSTOP,S,S,S,ESTOP,SSTOP,W,W,W,W,SSTO
     <property name="text" value="person_25_12"/>
    </properties>
   </object>
-  <object id="294" name="person" type="person" x="480" y="320" width="16" height="16">
+  <object id="294" name="person" type="LimbusGameObject" x="480" y="320" width="16" height="16">
    <properties>
     <property name="male" type="bool" value="true"/>
     <property name="path" value="SSTOP,ESTOP,NSTOP,ESTOP,E,E,E,E,E,SSTOP,S,SSTOP,ESTOP,E,E,E,E,N,N,E,E,ESTOP,N,N,N,N,N,N,ESTOP,SSTOP,S,S,S,S,S,S,SSTOP,SSTOP,W,W,S,S,W,W,W,W,WSTOP,NSTOP,WSTOP,N,W,W,W,W,W,WSTOP,SSTOP"/>
@@ -228,7 +213,7 @@ path: SSTOP,E,E,E,E,ESTOP,NSTOP,NSTOP,WSTOP,SSTOP,S,S,S,ESTOP,SSTOP,W,W,W,W,SSTO
     <property name="text" value="person_25_10"/>
    </properties>
   </object>
-  <object id="295" name="person" type="person" x="720" y="272" width="16" height="16">
+  <object id="295" name="person" type="LimbusGameObject" x="720" y="272" width="16" height="16">
    <properties>
     <property name="male" type="bool" value="true"/>
     <property name="path" value="SSTOP,E,E,E,E,ESTOP,NSTOP,NSTOP,WSTOP,SSTOP,S,S,S,ESTOP,SSTOP,W,W,W,W,SSTOP,WSTOP,SSTOP,SSTOP,SSTOP,SSTOP,WSTOP,NSTOP,N,N,N"/>
@@ -238,7 +223,7 @@ path: SSTOP,E,E,E,E,ESTOP,NSTOP,NSTOP,WSTOP,SSTOP,S,S,S,ESTOP,SSTOP,W,W,W,W,SSTO
     <property name="text" value="person_25_13"/>
    </properties>
   </object>
-  <object id="296" name="person" type="person" x="864" y="192" width="16" height="16">
+  <object id="296" name="person" type="LimbusGameObject" x="864" y="192" width="16" height="16">
    <properties>
     <property name="male" type="bool" value="true"/>
     <property name="path" value="SSTOP"/>
@@ -248,7 +233,7 @@ path: SSTOP,E,E,E,E,ESTOP,NSTOP,NSTOP,WSTOP,SSTOP,S,S,S,ESTOP,SSTOP,W,W,W,W,SSTO
     <property name="text" value="person_25_2"/>
    </properties>
   </object>
-  <object id="297" name="person" type="person" x="912" y="192" width="16" height="16">
+  <object id="297" name="person" type="LimbusGameObject" x="912" y="192" width="16" height="16">
    <properties>
     <property name="male" type="bool" value="true"/>
     <property name="path" value="SSTOP"/>
@@ -258,7 +243,7 @@ path: SSTOP,E,E,E,E,ESTOP,NSTOP,NSTOP,WSTOP,SSTOP,S,S,S,ESTOP,SSTOP,W,W,W,W,SSTO
     <property name="text" value="person_25_3"/>
    </properties>
   </object>
-  <object id="298" name="person" type="person" x="816" y="192" width="16" height="16">
+  <object id="298" name="person" type="LimbusGameObject" x="816" y="192" width="16" height="16">
    <properties>
     <property name="male" type="bool" value="true"/>
     <property name="path" value="SSTOP"/>
@@ -268,7 +253,7 @@ path: SSTOP,E,E,E,E,ESTOP,NSTOP,NSTOP,WSTOP,SSTOP,S,S,S,ESTOP,SSTOP,W,W,W,W,SSTO
     <property name="text" value="person_25_1"/>
    </properties>
   </object>
-  <object id="299" name="person" type="person" x="816" y="304" width="16" height="16">
+  <object id="299" name="person" type="LimbusGameObject" x="816" y="304" width="16" height="16">
    <properties>
     <property name="male" type="bool" value="true"/>
     <property name="path" value="NSTOP"/>
@@ -278,7 +263,7 @@ path: SSTOP,E,E,E,E,ESTOP,NSTOP,NSTOP,WSTOP,SSTOP,S,S,S,ESTOP,SSTOP,W,W,W,W,SSTO
     <property name="text" value="person_25_6"/>
    </properties>
   </object>
-  <object id="300" name="person" type="person" x="848" y="304" width="16" height="16">
+  <object id="300" name="person" type="LimbusGameObject" x="848" y="304" width="16" height="16">
    <properties>
     <property name="male" type="bool" value="true"/>
     <property name="path" value="NSTOP"/>
@@ -288,7 +273,7 @@ path: SSTOP,E,E,E,E,ESTOP,NSTOP,NSTOP,WSTOP,SSTOP,S,S,S,ESTOP,SSTOP,W,W,W,W,SSTO
     <property name="text" value="person_25_5"/>
    </properties>
   </object>
-  <object id="301" name="person" type="person" x="928" y="304" width="16" height="16">
+  <object id="301" name="person" type="LimbusGameObject" x="928" y="304" width="16" height="16">
    <properties>
     <property name="male" type="bool" value="true"/>
     <property name="path" value="NSTOP"/>
@@ -314,7 +299,7 @@ path: SSTOP,E,E,E,E,ESTOP,NSTOP,NSTOP,WSTOP,SSTOP,S,S,S,ESTOP,SSTOP,W,W,W,W,SSTO
    eJztmdlOwzAQRS1RlvIf8FagEPgjeAOawm91oS38VcvSwDMnD6gmuOMJsYUAX+lIlaPOvZNN8sQYvbINY07hbOPrsfGmMXebNYr9Qs1axtzDQ+vz+iN9P8EzvHjOwXiH87QTPltZ9769IoZHQd+v8Gb1f7BlzCEcQReO4WTL/f9HMj3BM7wEzPdR97W9IrSHS5f0eQXX0IMc+nADt5VzcECmQziCLhzDSftrzT3O7X5Lv27XtfuXPJqoaz37A3ocwgjGcAcTmMLM6v+SDFdwDT3IoQ83cFvJd06PF44+XevVunb/kkcT5Vb/c3pclNefZ74HOfRhyVph9T/AfwgjGJfPJkxgCrMG2ap1T3dXhPKQ1NnGn35H1jtvwu8pZNurtTn+i/I68Tz2IIc+LFkrGmSr1rUVykP0p8+F432/ZK2w1jtcjyFZRlbGCb+nkO1+399V11YID9F/zXu+VGYdm5Nh4ci4ZK1o8I5eVzekRwh1hPsva3BvSnVDeSQlJSUlJf1Haecasfb1TTybzmS0c41Y+3oxm8ezzkzGJe1cQ7uvDymfZ52ZjEvauUadfX0o+TzrzGTWSTvXiLWvF7N5PLXZJWnnGrH29WI2j6c2uyTtXCPWvl7M5vHUZpeknWvE2teL2Tye2uyStHONWPt6ST5PbfakpJ9W3W8df011vnUkJcXQO1GR5Tw=
   </data>
  </layer>
- <objectgroup id="11" name="colliderWalls0">
+ <objectgroup id="11" name="colliderWalls0" visible="0">
   <object id="203" x="64" y="144" width="96" height="32">
    <properties>
     <property name="ColliderComponent" value=""/>

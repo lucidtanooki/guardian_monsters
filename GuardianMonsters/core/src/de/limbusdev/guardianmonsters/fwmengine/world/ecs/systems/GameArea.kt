@@ -156,13 +156,13 @@ class GameArea(val areaID: Int, startPosID: Int)
      */
     private fun createGameObjects(layer: MapLayer, layerID: Int)
     {
+        val json = Json()
         for(mapObject in layer.objects)
         {
             // Only Rectangle Map Objects are supported
             if(mapObject is RectangleMapObject)
             {
                 val gameObject = LimbusGameObject(mapObject.name ?: "")
-                val json = Json()
 
                 when(mapObject.properties["enabled", true])
                 {

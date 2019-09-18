@@ -4,9 +4,11 @@ import com.badlogic.ashley.core.Component
 import com.badlogic.gdx.utils.Array
 
 import com.badlogic.ashley.core.Entity
+import com.badlogic.gdx.utils.TimeUtils
 
 import de.limbusdev.guardianmonsters.enums.SkyDirection
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusBehaviour
+import de.limbusdev.utils.geometry.IntVec2
 import ktx.collections.gdxArrayOf
 
 
@@ -42,7 +44,10 @@ class PathComponent
 {
     companion object { const val TAG = "PathComponent" }
 
-    override val defaultJson: String get() = "enabled: true, path: SSTOP, dynamic: false"
+    override val defaultJson: String get() = "enabled: true, path: SSTOP"
+
+    private var inputComponent : InputComponent? = null
+    private var tileWiseMovementComponent : TileWiseMovementComponent? = null
 
     // --------------------------------------------------------------------------------------------- PROPERTIES
     var startMoving = true
@@ -51,9 +56,68 @@ class PathComponent
     var stopCounter = 0
     var talking     = false
     var talkDir     = SkyDirection.S
+    var stoppedSince : Long = 0
 
 
     // --------------------------------------------------------------------------------------------- METHODS
+    override fun update(deltaTime: Float)
+    {
+        super.update(deltaTime)
+
+        if(inputComponent == null)
+        {
+            initializeInputComponent()
+        }
+
+        if(tileWiseMovementComponent == null && inputComponent != null)
+        {
+            initializeTileWiseMovement()
+        }
+
+        if(!moving && TimeUtils.timeSinceMillis(stoppedSince) > 300)
+        {
+            moving = true
+            newTileReachedCallback(IntVec2())
+        }
+    }
+
+    private fun initializeInputComponent()
+    {
+        inputComponent = gameObject?.get()
+        inputComponent?.startMoving = false
+        inputComponent?.touchDown = false
+        inputComponent?.skyDir = SkyDirection.S
+        inputComponent?.firstTip = TimeUtils.millis()
+    }
+
+    private fun initializeTileWiseMovement()
+    {
+        tileWiseMovementComponent = gameObject?.get()
+        tileWiseMovementComponent?.onGridSlotChanged?.add { slot -> newTileReachedCallback(slot) }
+        inputComponent?.startMoving = true
+        inputComponent?.touchDown = true
+        newTileReachedCallback(IntVec2())
+    }
+
+    private fun newTileReachedCallback(newSlot: IntVec2)
+    {
+        next()
+        if(path[currentDir] == path[currentDir].stop())
+        {
+            inputComponent?.touchDown = false
+            inputComponent?.skyDir = path[currentDir].nostop()
+            stoppedSince = TimeUtils.millis()
+            moving = false
+        }
+        else
+        {
+            inputComponent?.startMoving = true
+            moving = true
+            inputComponent?.touchDown = true
+        }
+        inputComponent?.nextInput = path[currentDir].nostop()
+    }
+
     /**
      * Moves on to the next direction in the contained path. If it reaches the end of the path it
      * will start from the beginning.
@@ -62,20 +126,5 @@ class PathComponent
     {
         currentDir++
         if (currentDir >= path.size) { currentDir = 0 }
-    }
-
-    /**
-     * Counts the duration of being in the stop status. When it reaches 32 the counter gets reset
-     * @return  whether the path is still in stop mode
-     */
-    fun stop(): Boolean
-    {
-        stopCounter++
-
-        return when(stopCounter)
-        {
-            32   -> { stopCounter = 0; false }
-            else -> true
-        }
     }
 }

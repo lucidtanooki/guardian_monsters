@@ -111,13 +111,13 @@ class PathSystem(private val gameArea: GameArea) : EntitySystem()
                 && TimeUtils.timeSinceMillis(position.lastPixelStep) > Constant.ONE_STEP_DURATION_PERSON
                 && !path.talking
         ) {
-            when (path.path.get(path.currentDir))
+            /*when (path.path.get(path.currentDir))
             {
                 SkyDirection.N -> position.moveBy(0,1)
                 SkyDirection.W -> position.moveBy(-1,0)
                 SkyDirection.E -> position.moveBy(1,0)
                 SkyDirection.S -> position.moveBy(0,-1)
-                else           -> path.stop()
+                else           -> println() /*path.stop()*/
             }
 
             // if stopping, count up stopping time
@@ -137,7 +137,7 @@ class PathSystem(private val gameArea: GameArea) : EntitySystem()
             {
                 path.next()
                 path.startMoving = true
-            }
+            }*/
         }
     }
 }

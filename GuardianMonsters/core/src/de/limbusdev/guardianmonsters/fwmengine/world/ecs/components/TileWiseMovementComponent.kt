@@ -22,8 +22,6 @@ class TileWiseMovementComponent() : LimbusBehaviour()
     private var gridSlot : IntVec2 by Delegates.observable(IntVec2())
     {
         _, _, newSlot -> run {
-
-        logDebug(TAG) { "Hero at $newSlot" }
         onGridSlotChanged.forEach { it.invoke(newSlot) }
     }}
 
@@ -51,7 +49,7 @@ class TileWiseMovementComponent() : LimbusBehaviour()
         // Early Exits
         if (!inputComponent.moving)
         {
-            CoreSL.world.hero.get<CharacterSpriteComponent>()?.sprite?.resetAnimation()
+            gameObject?.get<CharacterSpriteComponent>()?.sprite?.resetAnimation()
             return false
         }
         if (TimeUtils.timeSinceMillis(transform.lastPixelStep) < Constant.ONE_STEPDURATION_MS) { return false }
@@ -115,7 +113,7 @@ class TileWiseMovementComponent() : LimbusBehaviour()
         if(!inputComponent.startMoving || !inputComponent.touchDown) { return false }
 
         // Turn Character to the chosen direction
-        CoreSL.world.hero.get<CharacterSpriteComponent>()?.sprite?.changeState(inputComponent.skyDir)
+        gameObject?.get<CharacterSpriteComponent>()?.sprite?.changeState(inputComponent.skyDir)
 
         if(TimeUtils.timeSinceMillis(inputComponent.firstTip) > 100)
         {

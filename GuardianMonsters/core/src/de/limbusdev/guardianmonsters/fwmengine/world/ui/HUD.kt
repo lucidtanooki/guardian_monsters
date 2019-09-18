@@ -253,7 +253,7 @@ class HUD
         blackCurtain.addAction(showActor() then fadeIn(1f))
     }
 
-    fun checkForNearInteractiveObjects(hero: LimbusGameObject, signature: List<String>): LimbusGameObject?
+    fun checkForNearInteractiveObjects(hero: LimbusGameObject, signature: String): LimbusGameObject?
     {
         val dir = hero.get<InputComponent>()!!.skyDir
 
@@ -285,7 +285,7 @@ class HUD
             }
         }
 
-        val interactiveObjects = CoreSL.world.getAllWithExactly(signature)
+        val interactiveObjects = CoreSL.world.getAllWith(signature)
         for(interactiveObject in interactiveObjects)
         {
             logDebug(TAG) { "Grid Cell of tested Entity: ${interactiveObject.transform.onGrid}" }
@@ -331,9 +331,8 @@ class HUD
         }*/
 
         // Sign Entity
-        val signSignature = listOf(ConversationComponent::class.simpleName!!)
 
-        val sign = checkForNearInteractiveObjects(hero, signSignature) ?: return
+        val sign = checkForNearInteractiveObjects(hero, ConversationComponent::class.simpleName!!) ?: return
 
         logDebug(TAG) { "Touched sign" }
         val conversation = sign.get<ConversationComponent>()

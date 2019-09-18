@@ -6,7 +6,7 @@ import com.badlogic.gdx.utils.Json
 import de.limbusdev.guardianmonsters.enums.SkyDirection
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.get
 
-object PathComponentParser  : IComponentParser<PathComponent>
+object PathComponentParser : IComponentParser<PathComponent>
 {
     private data class Data(var enabled: Boolean = true, var path: String = "SSTOP")
 
@@ -31,5 +31,4 @@ object PathComponentParser  : IComponentParser<PathComponent>
 
         return pathComponent
     }
-
 }

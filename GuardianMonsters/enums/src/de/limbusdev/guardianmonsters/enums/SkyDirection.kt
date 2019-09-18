@@ -17,6 +17,18 @@ enum class SkyDirection
             W, WSTOP -> { WSTOP }
         }
     }
+
+    fun nostop() : SkyDirection
+    {
+        return when(this)
+        {
+            N,NSTOP -> N
+            S,SSTOP -> S
+            E,ESTOP -> E
+            W,WSTOP -> W
+            else -> S
+        }
+    }
 }
 
 /** North, East, South, West */

@@ -110,28 +110,23 @@ class TileWiseMovementComponent() : LimbusBehaviour()
      */
     private fun initializeMovement(transform: Transform, inputComponent: InputComponent) : Boolean
     {
-        // Initialize Movement
-        if(!inputComponent.startMoving || !inputComponent.touchDown) { return false }
-
         // Turn Character to the chosen direction
         gameObject?.get<CharacterSpriteComponent>()?.sprite?.changeState(inputComponent.skyDir)
 
-        if(TimeUtils.timeSinceMillis(inputComponent.firstTip) > 100)
-        {
-            // Start movement in that direction
-            val nextPosition = calculateNextPosition()
-            val isBlocked = isNextPositionBlocked(nextPosition)
-            if(isBlocked) { return false }
+        // Initialize Movement
+        if(!inputComponent.startMoving || !inputComponent.touchDown || inputComponent.stop) { return false }
 
-            transform.lastPixelStep = TimeUtils.millis()    // remember time of this iteration
+        // Start movement in that direction
+        val nextPosition = calculateNextPosition()
+        val isBlocked = isNextPositionBlocked(nextPosition)
+        if(isBlocked) { return false }
 
-            inputComponent.moving = true        // entity is moving right now
-            inputComponent.startMoving = false  // because entity now started moving
+        transform.lastPixelStep = TimeUtils.millis()    // remember time of this iteration
 
-            return true
-        }
+        inputComponent.moving = true        // entity is moving right now
+        inputComponent.startMoving = false  // because entity now started moving
 
-        return false
+        return true
     }
 
     /** Returns whether the given slot is blocked by a collider. */

@@ -53,7 +53,7 @@ class PathSystem(private val gameArea: GameArea) : EntitySystem()
 
     fun makeOneStep(position: Transform, path: PathComponent, collider: ColliderComponent)
     {
-        if (path.startMoving && !path.staticEntity)
+        if (/*path.startMoving &&*/ !path.staticEntity)
         {
             // Define direction of movement
             when (path.path.get(path.currentDir))
@@ -100,17 +100,17 @@ class PathSystem(private val gameArea: GameArea) : EntitySystem()
             //collider.x = position.nextX
             //collider.y = position.nextY
             position.lastPixelStep = TimeUtils.millis()
-            path.moving = true
-            path.startMoving = false
+            //path.moving = true
+            //path.startMoving = false
         }
 
         // If moving, check whether next pixel step should take place
-        if (
+        /*if (
                 !path.staticEntity
                 && path.moving
                 && TimeUtils.timeSinceMillis(position.lastPixelStep) > Constant.ONE_STEP_DURATION_PERSON
                 && !path.talking
-        ) {
+        ) {*/
             /*when (path.path.get(path.currentDir))
             {
                 SkyDirection.N -> position.moveBy(0,1)
@@ -138,6 +138,6 @@ class PathSystem(private val gameArea: GameArea) : EntitySystem()
                 path.next()
                 path.startMoving = true
             }*/
-        }
+        //}
     }
 }

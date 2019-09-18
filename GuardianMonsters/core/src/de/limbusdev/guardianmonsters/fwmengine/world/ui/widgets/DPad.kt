@@ -22,6 +22,8 @@ class DPad(skin: Skin = Services.UI().defaultSkin) : Image(skin.get<Drawable>("d
     private val dPadArea: Rectangle
     private val dPadCenter: Vector2
     private val dPadCenterDist: Vector2
+    var isTouched = false
+        private set
 
     init
     {
@@ -72,6 +74,7 @@ class DPad(skin: Skin = Services.UI().defaultSkin) : Image(skin.get<Drawable>("d
 
             drawable = TextureRegionDrawable(region)
 
+            isTouched = true
             return TouchResult(true, compass)
         }
 
@@ -81,6 +84,7 @@ class DPad(skin: Skin = Services.UI().defaultSkin) : Image(skin.get<Drawable>("d
     fun touchUp()
     {
         drawable = TextureRegionDrawable(dPadImgs[MoveDirection.NONE])
+        isTouched = false
     }
 
     fun isValidTouch(touchPosition: Vector2) = dPadArea.contains(touchPosition)

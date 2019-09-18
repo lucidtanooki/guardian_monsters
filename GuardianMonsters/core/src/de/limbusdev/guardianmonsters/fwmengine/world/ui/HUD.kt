@@ -64,6 +64,8 @@ class HUD
     private lateinit var mainMenuButton : Button
     private lateinit var menuButtons    : VerticalGroup
 
+    private var dpadTouchDownStart : Long = 0
+
     private var currentlyShownHUDWidget = HUDWidgets.NONE
 
     private val dPad = DPad()
@@ -162,6 +164,7 @@ class HUD
     {
         logDebug(TAG) { "stop()" }
         input.touchDown = false
+        input.stop = true
     }
 
 
@@ -177,7 +180,7 @@ class HUD
      */
     override fun touchDown(screenX: Int, screenY: Int, pointer: Int, button: Int): Boolean
     {
-        hero.get<InputComponent>()!!.firstTip = TimeUtils.millis()
+        dpadTouchDownStart = TimeUtils.millis()
         return touchDragged(screenX, screenY, pointer)
     }
 
@@ -199,6 +202,7 @@ class HUD
                 Compass4.W -> walk(SkyDirection.W, input)
             }
 
+
             if (!input.moving) { input.startMoving = true }
         }
 
@@ -212,7 +216,15 @@ class HUD
         return true
     }
 
-    fun update(delta: Float) = stage.act(delta)
+    fun update(delta: Float)
+    {
+        stage.act(delta)
+        val input = hero.get<InputComponent>()!!
+        if(this.dPad.isTouched)
+        {
+            if(input.stop && TimeUtils.timeSinceMillis(dpadTouchDownStart) > 100) { input.stop = false }
+        }
+    }
 
     fun proceedConversation()
     {

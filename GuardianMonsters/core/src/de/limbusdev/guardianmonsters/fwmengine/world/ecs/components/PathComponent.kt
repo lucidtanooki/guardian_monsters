@@ -10,6 +10,7 @@ import de.limbusdev.guardianmonsters.Constant
 import de.limbusdev.guardianmonsters.enums.SkyDirection
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusBehaviour
 import de.limbusdev.utils.geometry.IntVec2
+import de.limbusdev.utils.logError
 import ktx.collections.gdxArrayOf
 
 
@@ -47,82 +48,73 @@ class PathComponent
 
     override val defaultJson: String get() = "enabled: true, path: SSTOP"
 
-    private var inputComponent : InputComponent? = null
-    private var tileWiseMovementComponent : TileWiseMovementComponent? = null
+    private lateinit var inputComponent : InputComponent
+    private lateinit var tileWiseMovementComponent : TileWiseMovementComponent
 
     // --------------------------------------------------------------------------------------------- PROPERTIES
-    var startMoving = true
     var moving      = false
-    var currentDir  = 0
-    var stopCounter = 0
+    var currentDir  = -1
     var talking     = false
     var talkDir     = SkyDirection.S
-    var stoppedSince : Long = 0
+    private var stoppedSince : Long = 0
 
 
     // --------------------------------------------------------------------------------------------- METHODS
+    override fun initialize()
+    {
+        super.initialize()
+
+        initializeInputComponent()
+        initializeTileWiseMovement()
+    }
+
     override fun update(deltaTime: Float)
     {
         super.update(deltaTime)
 
-        if(inputComponent == null)
+        if(inputComponent.stop)
         {
-            initializeInputComponent()
-        }
-
-        if(tileWiseMovementComponent == null && inputComponent != null)
-        {
-            initializeTileWiseMovement()
-        }
-
-        if(!moving && TimeUtils.timeSinceMillis(stoppedSince) > 1000)
-        {
-            moving = true
-            newTileReachedCallback(IntVec2())
-        }
-        if(!moving && TimeUtils.timeSinceMillis(stoppedSince) <= 1000)
-        {
-            inputComponent?.firstTip = TimeUtils.millis()
+            if(TimeUtils.timeSinceMillis(stoppedSince) > 1000) { newTileReachedCallback(IntVec2()) }
         }
     }
 
     private fun initializeInputComponent()
     {
-        inputComponent = gameObject?.get()
-        inputComponent?.startMoving = false
-        inputComponent?.touchDown = false
-        inputComponent?.skyDir = SkyDirection.S
-        inputComponent?.firstTip = TimeUtils.millis()
+        if(gameObject == null) { logError(TAG) { "PathComponent needs a parent LimbusGameObject" } }
+        if(gameObject?.get<InputComponent>() == null) { logError(TAG) { "PathComponent needs an InputComponent" } }
+
+        inputComponent = gameObject?.get()!!
     }
 
     private fun initializeTileWiseMovement()
     {
-        tileWiseMovementComponent = gameObject?.get()
-        tileWiseMovementComponent?.speed = Constant.ONE_STEP_DURATION_PERSON
-        tileWiseMovementComponent?.onGridSlotChanged?.add { slot -> newTileReachedCallback(slot) }
-        inputComponent?.startMoving = true
-        inputComponent?.touchDown = true
+        if(gameObject == null) { logError(TAG) { "PathComponent needs a parent LimbusGameObject" } }
+        if(gameObject?.get<TileWiseMovementComponent>() == null) { logError(TAG) { "PathComponent needs an TileWiseMovementComponent" } }
+
+        tileWiseMovementComponent = gameObject?.get()!!
+        tileWiseMovementComponent.speed = Constant.ONE_STEP_DURATION_PERSON
+        tileWiseMovementComponent.onGridSlotChanged.add { slot -> newTileReachedCallback(slot) }
+
         newTileReachedCallback(IntVec2())
     }
 
     private fun newTileReachedCallback(newSlot: IntVec2)
     {
         next()
+
         if(path[currentDir] == path[currentDir].stop())
         {
-            inputComponent?.touchDown = true
-            inputComponent?.firstTip = TimeUtils.millis()
-            inputComponent?.skyDir = path[currentDir].nostop()
+            inputComponent.skyDir = path[currentDir].nostop()
             stoppedSince = TimeUtils.millis()
-            moving = false
+            inputComponent.stop = true
         }
         else
         {
-            inputComponent?.startMoving = true
-            moving = true
-            inputComponent?.touchDown = true
+            if (!inputComponent.moving) { inputComponent.startMoving = true }
+            inputComponent.touchDown = true
+            inputComponent.stop = false
         }
-        inputComponent?.nextInput = path[currentDir].nostop()
+        inputComponent.nextInput = path[currentDir].nostop()
     }
 
     /**

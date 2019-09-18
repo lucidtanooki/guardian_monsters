@@ -156,7 +156,6 @@ class EntityFactory(private val engine: Engine, private val area: GameArea)
 
         // Path
         val pathComp = PathComponent(path, moves)
-        pathComp.moving = moves
         person.add(pathComp)
 
         // Sprite

@@ -5,6 +5,7 @@ import com.badlogic.ashley.core.Entity
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusBehaviour
 
 import de.limbusdev.utils.geometry.IntRect
+import de.limbusdev.utils.geometry.IntVec2
 
 
 /**
@@ -42,4 +43,12 @@ class ColliderComponent
 
 
     val asRectangle get() = IntRect((gameObject?.transform?.x ?: 0) + offsetX, (gameObject?.transform?.y ?: 0) + offsetY, width, height)
+
+    /** Returns whether the given position is blocked by this collider */
+    fun blocks(position : IntVec2) : Boolean
+    {
+        if(isTrigger) { return false }
+
+        return asRectangle.contains(position)
+    }
 }

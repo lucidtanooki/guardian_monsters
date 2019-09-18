@@ -7,7 +7,6 @@ import de.limbusdev.guardianmonsters.enums.SkyDirection
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusBehaviour
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusGameObject
 import de.limbusdev.utils.geometry.IntVec2
-import de.limbusdev.utils.logDebug
 import kotlin.properties.Delegates
 
 class TileWiseMovementComponent() : LimbusBehaviour()
@@ -147,22 +146,16 @@ class TileWiseMovementComponent() : LimbusBehaviour()
     /** Returns whether the given slot is blocked by a collider. */
     private fun isNextPositionBlocked(nextPosition: IntVec2) : Boolean
     {
-        val colliderComponent = gameObject?.get<ColliderComponent>() ?: return true
+        if(gameObject?.has<ColliderComponent>() == false) { return false }
+        if(gameObject?.get<ColliderComponent>()?.isTrigger == true) { return false }
 
         // Check whether movement is possible or blocked by a collider
-        val nextPos = IntVec2(0, 0)
-
-        for (collider in CoreSL.world.getAllWith("ColliderComponent", transform.layer))
+        for (otherGameObject in CoreSL.world.getAllWith("ColliderComponent", transform.layer))
         {
-            val staticCollider = collider.get<ColliderComponent>()
+            val otherCollider = otherGameObject.get<ColliderComponent>()
 
-            if(staticCollider != null)
-            {
-                nextPos.x = nextPosition.x + Constant.TILE_SIZE/2
-                nextPos.y = nextPosition.y + Constant.TILE_SIZE/2
-
-                if (staticCollider.asRectangle.contains(nextPos) && !staticCollider.isTrigger) { return true }
-            }
+            val nextPos = nextPosition.offset(Constant.TILE_SIZE/2)
+            if(otherCollider?.blocks(nextPos) == true) { return true }
         }
 
         return false

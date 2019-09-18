@@ -67,6 +67,11 @@ class LimbusGameObject(var name: String = "", val type: String = "general")
         return components.filterIsInstance<T>().first()
     }
 
+    inline fun <reified T : LimbusBehaviour> has() : Boolean
+    {
+        return components.filterIsInstance<T>().isNotEmpty()
+    }
+
     fun add(component: LimbusBehaviour)
     {
         signature.add(component::class.simpleName ?: "Anonymous")

@@ -18,23 +18,13 @@ import de.limbusdev.utils.geometry.IntVec2
  *
  * @author Georg Eckert 2015-11-22
  */
-class Transform(var gameObject: LimbusGameObject) : Component
+class Transform(var gameObject: LimbusGameObject) : Component, IntRect(0,0,16,16)
 {
-    var x = 0
-    var y = 0
-    var width = 16
-    var height = 16
     var layer: Int = 0
 
     val asRectangle get() = IntRect(x, y, width, height)
 
     // --------------------------------------------------------------------------------------------- PROPERTIES
-
-
-    val xf get() = x.f()
-    val yf get() = y.f()
-    val widthf get() = width.f()
-    val heightf get() = height.f()
 
     var onGrid : IntVec2
         get() = IntVec2(x / Constant.TILE_SIZE, y / Constant.TILE_SIZE)

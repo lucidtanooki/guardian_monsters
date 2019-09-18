@@ -14,14 +14,12 @@ import com.badlogic.gdx.utils.ArrayMap
 import com.badlogic.gdx.utils.Json
 
 import de.limbusdev.guardianmonsters.Constant
-import de.limbusdev.guardianmonsters.CoreServiceLocator
+import de.limbusdev.guardianmonsters.CoreSL
 import de.limbusdev.guardianmonsters.assets.paths.AssetPath
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusBehaviour
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusGameObject
-import de.limbusdev.guardianmonsters.fwmengine.world.ecs.World
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.*
 import de.limbusdev.guardianmonsters.fwmengine.world.model.MapPersonInformation
-import de.limbusdev.guardianmonsters.fwmengine.world.model.WarpPoint
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.ExtendedTiledMapRenderer
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.TmxDayTimeMapLoader
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.get
@@ -68,7 +66,7 @@ class GameArea(val areaID: Int, startPosID: Int)
     {
         tiledMap = setUpTiledMap(areaID, startPosID)
         mapRenderer = ExtendedTiledMapRenderer(tiledMap)
-        for(warpTargetField in CoreServiceLocator.world.getAllWith("WarpTargetComponent"))
+        for(warpTargetField in CoreSL.world.getAllWith("WarpTargetComponent"))
         {
             val warpTargetComponent = warpTargetField.get<WarpTargetComponent>()
             if(warpTargetComponent != null && warpTargetComponent.warpTargetID == startPosID)
@@ -106,7 +104,7 @@ class GameArea(val areaID: Int, startPosID: Int)
         shape.begin(ShapeRenderer.ShapeType.Line)
         shape.color = Color.WHITE
 
-        for(collidingObject in CoreServiceLocator.world.getAllWith("ColliderComponent"))
+        for(collidingObject in CoreSL.world.getAllWith("ColliderComponent"))
         {
             val collider = collidingObject.get<ColliderComponent>()
 
@@ -188,11 +186,11 @@ class GameArea(val areaID: Int, startPosID: Int)
                 }
 
                 gameObject.addAndRemoveComponentsNow()
-                CoreServiceLocator.world.add(gameObject)
+                CoreSL.world.add(gameObject)
             }
         }
 
-        CoreServiceLocator.world.addAndRemoveObjectsNow()
+        CoreSL.world.addAndRemoveObjectsNow()
     }
 
     private fun generateComponent(mapObject: MapObject, componentName: String, json: Json) : LimbusBehaviour?
@@ -214,7 +212,7 @@ class GameArea(val areaID: Int, startPosID: Int)
 
             kClass as KClass<out LimbusBehaviour>
 
-            component = CoreServiceLocator.world.componentParsers[kClass]?.parseComponent(json, mapObject)
+            component = CoreSL.world.componentParsers[kClass]?.parseComponent(json, mapObject)
         }
         catch (e: Exception)
         {
@@ -317,25 +315,25 @@ class GameArea(val areaID: Int, startPosID: Int)
         borderGameObject.transform.x = -1 * Constant.TILE_SIZE
         borderGameObject.transform.y = -1 * Constant.TILE_SIZE
         borderGameObject.add(ColliderComponent(width = (mapWidth + 2) * Constant.TILE_SIZE, height = Constant.TILE_SIZE))
-        CoreServiceLocator.world.add(borderGameObject)
+        CoreSL.world.add(borderGameObject)
 
         borderGameObject = LimbusGameObject("BorderTop")
         borderGameObject.transform.x = -1 * Constant.TILE_SIZE
         borderGameObject.transform.y = mapHeight * Constant.TILE_SIZE
         borderGameObject.add(ColliderComponent(width = (mapWidth + 2) * Constant.TILE_SIZE, height = Constant.TILE_SIZE))
-        CoreServiceLocator.world.add(borderGameObject)
+        CoreSL.world.add(borderGameObject)
 
         borderGameObject = LimbusGameObject("BorderLeft")
         borderGameObject.transform.x = -1 * Constant.TILE_SIZE
         borderGameObject.transform.y = 0
         borderGameObject.add(ColliderComponent(width = Constant.TILE_SIZE, height = (mapHeight + 2) * Constant.TILE_SIZE))
-        CoreServiceLocator.world.add(borderGameObject)
+        CoreSL.world.add(borderGameObject)
 
         borderGameObject = LimbusGameObject("BorderRight")
         borderGameObject.transform.x = mapWidth * Constant.TILE_SIZE
         borderGameObject.transform.y = 0
         borderGameObject.add(ColliderComponent(width = Constant.TILE_SIZE, height = (mapHeight + 2) * Constant.TILE_SIZE))
-        CoreServiceLocator.world.add(borderGameObject)
+        CoreSL.world.add(borderGameObject)
     }
 
     fun dispose()

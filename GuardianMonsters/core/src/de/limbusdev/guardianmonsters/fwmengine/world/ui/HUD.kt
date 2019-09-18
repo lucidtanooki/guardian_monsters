@@ -1,7 +1,6 @@
 package de.limbusdev.guardianmonsters.fwmengine.world.ui
 
 import com.badlogic.ashley.core.Engine
-import com.badlogic.ashley.core.Entity
 import com.badlogic.ashley.core.Family
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.InputAdapter
@@ -18,13 +17,12 @@ import com.badlogic.gdx.utils.TimeUtils
 import com.badlogic.gdx.utils.viewport.FitViewport
 
 import de.limbusdev.guardianmonsters.Constant
-import de.limbusdev.guardianmonsters.CoreServiceLocator
+import de.limbusdev.guardianmonsters.CoreSL
 import de.limbusdev.guardianmonsters.battle.BattleScreen
 import de.limbusdev.guardianmonsters.enums.Compass4
 import de.limbusdev.guardianmonsters.enums.SkyDirection
 import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusGameObject
-import de.limbusdev.guardianmonsters.fwmengine.world.ecs.World
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.*
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.entities.HeroEntity
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.GameArea
@@ -287,7 +285,7 @@ class HUD
             }
         }
 
-        val interactiveObjects = CoreServiceLocator.world.getAllWithExactly(signature)
+        val interactiveObjects = CoreSL.world.getAllWithExactly(signature)
         for(interactiveObject in interactiveObjects)
         {
             logDebug(TAG) { "Grid Cell of tested Entity: ${interactiveObject.transform.onGrid}" }

@@ -18,7 +18,7 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ecs.EntityComponentSystem
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.GameArea
 import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager
 import de.limbusdev.guardianmonsters.Constant
-import de.limbusdev.guardianmonsters.CoreServiceLocator
+import de.limbusdev.guardianmonsters.CoreSL
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.World
 
 
@@ -45,17 +45,17 @@ class WorldScreen(mapID: Int, startPosID: Int, fromSave: Boolean) : Screen
     // --------------------------------------------------------------------------------------------- CONSTRUCTORS
     init
     {
-        CoreServiceLocator.provide(World())
+        CoreSL.provide(World())
 
         setUpRendering()
         gameArea = GameArea(mapID, startPosID)
         val saveGameManager = SaveGameManager(this.gameArea)
-        CoreServiceLocator.provide(EntityComponentSystem(viewport, gameArea, fromSave, this, saveGameManager))
+        CoreSL.provide(EntityComponentSystem(viewport, gameArea, fromSave, this, saveGameManager))
 
         inputMultiplexer = InputMultiplexer()
         setUpInputProcessor()
 
-        CoreServiceLocator.world.start()
+        CoreSL.world.start()
     }
 
 
@@ -67,7 +67,7 @@ class WorldScreen(mapID: Int, startPosID: Int, fromSave: Boolean) : Screen
         batch = SpriteBatch()
         setUpInputProcessor()
         gameArea.playMusic()
-        CoreServiceLocator.ecs.hud.show()
+        CoreSL.ecs.hud.show()
     }
 
     /** Called when the screen should render itself. */
@@ -84,14 +84,14 @@ class WorldScreen(mapID: Int, startPosID: Int, fromSave: Boolean) : Screen
         // ............................................................................... RENDERING
         // Tiled Map
         gameArea.render(camera)
-        CoreServiceLocator.ecs.render(batch, shpRend)
+        CoreSL.ecs.render(batch, shpRend)
         if (Constant.DEBUGGING_ON) gameArea.renderDebugging(shpRend)
 
-        CoreServiceLocator.ecs.draw()
+        CoreSL.ecs.draw()
 
         // ............................................................................... RENDERING
 
-        CoreServiceLocator.ecs.update(delta)
+        CoreSL.ecs.update(delta)
     }
 
     /**
@@ -102,7 +102,7 @@ class WorldScreen(mapID: Int, startPosID: Int, fromSave: Boolean) : Screen
     override fun resize(width: Int, height: Int)
     {
         viewport.update(width, height)
-        CoreServiceLocator.ecs.hud.stage.viewport.update(width, height, true)
+        CoreSL.ecs.hud.stage.viewport.update(width, height, true)
     }
 
     /** @see ApplicationListener.pause */
@@ -117,7 +117,7 @@ class WorldScreen(mapID: Int, startPosID: Int, fromSave: Boolean) : Screen
     /** Called when this screen is no longer the current screen for a [Game]. */
     override fun hide()
     {
-        CoreServiceLocator.ecs.hud.hide()
+        CoreSL.ecs.hud.hide()
     }
 
     /** Called when this screen should release all resources. */
@@ -153,8 +153,8 @@ class WorldScreen(mapID: Int, startPosID: Int, fromSave: Boolean) : Screen
 
     private fun setUpInputProcessor()
     {
-        inputMultiplexer.addProcessor(CoreServiceLocator.ecs.hud.inputProcessor)
-        inputMultiplexer.addProcessor(CoreServiceLocator.ecs.inputProcessor)
+        inputMultiplexer.addProcessor(CoreSL.ecs.hud.inputProcessor)
+        inputMultiplexer.addProcessor(CoreSL.ecs.inputProcessor)
         Gdx.input.inputProcessor = inputMultiplexer
     }
 }

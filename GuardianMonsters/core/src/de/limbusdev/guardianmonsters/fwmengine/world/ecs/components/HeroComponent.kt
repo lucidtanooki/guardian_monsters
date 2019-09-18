@@ -4,9 +4,8 @@ import com.badlogic.ashley.core.Component
 import com.badlogic.gdx.math.MathUtils
 import com.badlogic.gdx.utils.ArrayMap
 import de.limbusdev.guardianmonsters.Constant
-import de.limbusdev.guardianmonsters.CoreServiceLocator
+import de.limbusdev.guardianmonsters.CoreSL
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusBehaviour
-import de.limbusdev.guardianmonsters.fwmengine.world.ecs.World
 import de.limbusdev.guardianmonsters.guardians.battle.BattleFactory
 import de.limbusdev.guardianmonsters.services.Services
 import de.limbusdev.utils.geometry.IntVec2
@@ -65,7 +64,7 @@ class HeroComponent
         val transform = gameObject?.transform ?: return
         val inputComponent = gameObject?.get<InputComponent>() ?: return
 
-        for(battleArea in CoreServiceLocator.world.getAllWith("RandomBattleAreaComponent", transform.layer))
+        for(battleArea in CoreSL.world.getAllWith("RandomBattleAreaComponent", transform.layer))
         {
             val battleAreaRectangle = battleArea.get<ColliderComponent>()?.asRectangle
             val monsterArea = battleArea.get<MonsterAreaComponent>()
@@ -90,14 +89,14 @@ class HeroComponent
 
                 val oppTeam = BattleFactory.createOpponentTeam(guardianProbabilities, monsterArea.teamSizeProbabilities, 1, 1)
 
-                CoreServiceLocator.ecs.hud.battleScreen.initialize(
+                CoreSL.ecs.hud.battleScreen.initialize(
 
-                        CoreServiceLocator.world.hero.get<TeamComponent>()!!.team,
+                        CoreSL.world.hero.get<TeamComponent>()!!.team,
                         oppTeam,
-                        CoreServiceLocator.world.hero.get<GuardoSphereComponent>()!!.guardoSphere
+                        CoreSL.world.hero.get<GuardoSphereComponent>()!!.guardoSphere
                 )
 
-                Services.ScreenManager().pushScreen(CoreServiceLocator.ecs.hud.battleScreen)
+                Services.ScreenManager().pushScreen(CoreSL.ecs.hud.battleScreen)
                 //............................................................. START BATTLE
 
                 // Stop when in a battle
@@ -111,7 +110,7 @@ class HeroComponent
     {
         val transform = gameObject?.transform ?: return
 
-        val warpStartFields = CoreServiceLocator.world.getAllWith("WarpStartComponent", transform.layer)
+        val warpStartFields = CoreSL.world.getAllWith("WarpStartComponent", transform.layer)
 
         for(warpStart in warpStartFields)
         {
@@ -122,8 +121,8 @@ class HeroComponent
                 if(warpCollider.asRectangle.contains(transform.x+Constant.TILE_SIZE/2, transform.y+Constant.TILE_SIZE/2))
                 {
                     logDebug(TAG) { "Changing to Map ${warpComponent.targetMapID}" }
-                    CoreServiceLocator.world.stop()
-                    CoreServiceLocator.ecs.changeGameArea(warpComponent.targetMapID, warpComponent.warpTargetID)
+                    CoreSL.world.stop()
+                    CoreSL.ecs.changeGameArea(warpComponent.targetMapID, warpComponent.warpTargetID)
                 }
             }
         }

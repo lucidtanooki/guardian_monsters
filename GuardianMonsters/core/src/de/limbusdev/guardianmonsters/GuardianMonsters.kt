@@ -12,8 +12,6 @@ import de.limbusdev.guardianmonsters.scene2d.ConcreteScreenManager
 import de.limbusdev.guardianmonsters.services.*
 import de.limbusdev.guardianmonsters.utils.GameStateDebugger
 import de.limbusdev.utils.logInfo
-import ktx.inject.Context
-import ktx.log.info
 
 
 class GuardianMonsters : Game()
@@ -41,7 +39,7 @@ class GuardianMonsters : Game()
         Services.Audio().dispose()
         Services.I18N().dispose()
         Services.ScreenManager().dispose()
-        CoreServiceLocator.destroy()
+        CoreSL.destroy()
         super.dispose()
 
         // Dispose of Modules
@@ -67,7 +65,7 @@ class GuardianMonsters : Game()
         // ....................................................................... module: guardians
         ModuleGuardians.initModule()
 
-        CoreServiceLocator.provide(GameStateService(SaveGameManager()))
+        CoreSL.provide(GameStateService(SaveGameManager()))
     }
 
     companion object { const val TAG = "GuardianMonsters" }

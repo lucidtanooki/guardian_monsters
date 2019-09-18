@@ -1,6 +1,6 @@
 package de.limbusdev.guardianmonsters.fwmengine.world.ecs
 
-import de.limbusdev.guardianmonsters.CoreServiceLocator
+import de.limbusdev.guardianmonsters.CoreSL
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Transform
 import kotlin.collections.ArrayList
 
@@ -93,7 +93,7 @@ class LimbusGameObject(var name: String = "", val type: String = "general")
 
     fun dispose()
     {
-        CoreServiceLocator.world.remove(this)
+        CoreSL.world.remove(this)
         val it = components.iterator()
         for(component in it)
         {

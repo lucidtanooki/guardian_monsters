@@ -6,8 +6,11 @@ import de.limbusdev.guardianmonsters.services.IGameStateService
 import de.limbusdev.guardianmonsters.services.NullGameStateService
 import java.lang.IllegalStateException
 
-object CoreServiceLocator {
-
+/**
+ * Service Locator of the Core Module
+ */
+object CoreSL
+{
     private var gameState: IGameStateService? = null
     lateinit var world: World
         private set

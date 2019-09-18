@@ -9,7 +9,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.utils.viewport.Viewport
 
 import de.limbusdev.guardianmonsters.Constant
-import de.limbusdev.guardianmonsters.CoreServiceLocator
+import de.limbusdev.guardianmonsters.CoreSL
 import de.limbusdev.guardianmonsters.battle.BattleScreen
 import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.CameraComponent
@@ -22,7 +22,6 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.SpriteSystem
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.HUD
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.WorldScreen
 import de.limbusdev.guardianmonsters.services.Services
-import de.limbusdev.guardianmonsters.utils.getComponent
 
 
 /**
@@ -74,9 +73,9 @@ class EntityComponentSystem
     // --------------------------------------------------------------------------------------------- CONSTRUCTORS
     init
     {
-        setupHero(fromSave)
-        val inventory = CoreServiceLocator.world.hero.get<InventoryComponent>()!!.inventory
-        hud = HUD(BattleScreen(inventory), saveGameManager, CoreServiceLocator.world.hero, engine, gameArea)
+        CoreSL.world.add(setupHero(fromSave))
+        val inventory = CoreSL.world.hero.get<InventoryComponent>()!!.inventory
+        hud = HUD(BattleScreen(inventory), saveGameManager, CoreSL.world.hero, engine, gameArea)
         setUpPeople()
         setUpEntitySystems(gameArea, viewport, hud)
     }
@@ -111,11 +110,9 @@ class EntityComponentSystem
         spriteSystem.addedToEngine(engine)
         engine.addSystem(spriteSystem)
 
-        // TODO val movementSystem = MovementSystem(this, gameArea.warpPoints, gameArea.healFields)
-
         // Camera System
         val cameraComponent = CameraComponent(viewport.camera as OrthographicCamera, gameArea.tiledMap)
-        CoreServiceLocator.world.hero.add(cameraComponent)
+        CoreSL.world.hero.add(cameraComponent)
 
         // Path System
         val pathSystem = PathSystem(gameArea)
@@ -143,7 +140,7 @@ class EntityComponentSystem
      */
     fun update(delta: Float)
     {
-        CoreServiceLocator.world.update(delta)
+        CoreSL.world.update(delta)
         engine.update(delta)
         hud.update(delta)
         gameArea.update(delta)

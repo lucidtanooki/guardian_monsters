@@ -5,11 +5,10 @@ import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.utils.Array
 
 import de.limbusdev.guardianmonsters.Constant
-import de.limbusdev.guardianmonsters.CoreServiceLocator
+import de.limbusdev.guardianmonsters.CoreSL
 import de.limbusdev.guardianmonsters.enums.SkyDirection
 import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.*
-import de.limbusdev.guardianmonsters.fwmengine.world.ecs.entities.HeroEntity
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.GameArea
 import de.limbusdev.guardianmonsters.fwmengine.world.model.MapDescriptionInfo
 import de.limbusdev.guardianmonsters.fwmengine.world.model.MapPersonInformation
@@ -35,14 +34,13 @@ class EntityFactory(private val engine: Engine, private val area: GameArea)
      */
     fun createHero(startField: IntVec2, startLayer: Int, restoreSave: Boolean): LimbusGameObject
     {
-        val hero = CoreServiceLocator.world.hero
+        val hero = CoreSL.world.hero
 
         // Add Sprite
         hero.add(CharacterSpriteComponent(AnimatedPersonSprite("hero")))
 
         // Input
         hero.add(InputComponent())
-        // TODO
         hero.transform.x = startField.x
         hero.transform.y = startField.y
         hero.transform.width = UnitConverter.tilesToPixels(1)
@@ -55,8 +53,6 @@ class EntityFactory(private val engine: Engine, private val area: GameArea)
         val movement = TileWiseMovementComponent()
         hero.add(movement)
         hero.add(HeroComponent(movement))
-
-
 
         // Collider
         val collider = ColliderComponent(true, transform.x, transform.y, transform.width, transform.height)

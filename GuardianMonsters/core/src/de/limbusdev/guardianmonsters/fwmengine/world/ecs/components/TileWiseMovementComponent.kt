@@ -2,10 +2,9 @@ package de.limbusdev.guardianmonsters.fwmengine.world.ecs.components
 
 import com.badlogic.gdx.utils.TimeUtils
 import de.limbusdev.guardianmonsters.Constant
-import de.limbusdev.guardianmonsters.CoreServiceLocator
+import de.limbusdev.guardianmonsters.CoreSL
 import de.limbusdev.guardianmonsters.enums.SkyDirection
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusBehaviour
-import de.limbusdev.guardianmonsters.fwmengine.world.ecs.World
 import de.limbusdev.utils.geometry.IntVec2
 import de.limbusdev.utils.logDebug
 import kotlin.properties.Delegates
@@ -52,7 +51,7 @@ class TileWiseMovementComponent() : LimbusBehaviour()
         // Early Exits
         if (!inputComponent.moving)
         {
-            CoreServiceLocator.world.hero.get<CharacterSpriteComponent>()?.sprite?.resetAnimation()
+            CoreSL.world.hero.get<CharacterSpriteComponent>()?.sprite?.resetAnimation()
             return false
         }
         if (TimeUtils.timeSinceMillis(transform.lastPixelStep) < Constant.ONE_STEPDURATION_MS) { return false }
@@ -116,7 +115,7 @@ class TileWiseMovementComponent() : LimbusBehaviour()
         if(!inputComponent.startMoving || !inputComponent.touchDown) { return false }
 
         // Turn Character to the chosen direction
-        CoreServiceLocator.world.hero.get<CharacterSpriteComponent>()?.sprite?.changeState(inputComponent.skyDir)
+        CoreSL.world.hero.get<CharacterSpriteComponent>()?.sprite?.changeState(inputComponent.skyDir)
 
         if(TimeUtils.timeSinceMillis(inputComponent.firstTip) > 100)
         {
@@ -145,7 +144,7 @@ class TileWiseMovementComponent() : LimbusBehaviour()
         // Check whether movement is possible or blocked by a collider
         val nextPos = IntVec2(0, 0)
 
-        for (collider in CoreServiceLocator.world.getAllWith("ColliderComponent", transform.layer))
+        for (collider in CoreSL.world.getAllWith("ColliderComponent", transform.layer))
         {
             val staticCollider = collider.get<ColliderComponent>()
 

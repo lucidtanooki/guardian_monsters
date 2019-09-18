@@ -8,7 +8,7 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ui.get
 
 object PathComponentParser  : IComponentParser<PathComponent>
 {
-    private data class Data(var enabled: Boolean = true, var dynamic: Boolean = false, var path: String = "SSTOP")
+    private data class Data(var enabled: Boolean = true, var path: String = "SSTOP")
 
     override fun parseComponent(json: Json, mapObject: MapObject): PathComponent?
     {
@@ -26,7 +26,7 @@ object PathComponentParser  : IComponentParser<PathComponent>
             pathString.forEach { path.add(SkyDirection.valueOf(it)) }
         }
 
-        val pathComponent = PathComponent(path, data.dynamic)
+        val pathComponent = PathComponent(path, path.size == 1)
         pathComponent.enabled = data.enabled
 
         return pathComponent

@@ -246,13 +246,6 @@ class GameArea(val areaID: Int, startPosID: Int)
                             Constant.COLf,
                             Constant.ROWf))
                 }
-                /*"warpField" ->
-                {
-                    warpTriggers.add(WarpPoint(
-                            mo.properties["targetWarpPointID", 0],
-                            rect,
-                            mo.properties["targetID", 0]))
-                }*/
                 "startField" ->
                 {
                     if (mo.properties["fieldID", 0] == startFieldID)

@@ -105,23 +105,6 @@ class EntityFactory(private val engine: Engine, private val area: GameArea)
         return hero
     }
 
-    /**
-     * Creates an entity with text content for objects which are readable by the player (signs,
-     * book shelves, and so on)
-     * @param mapInfo
-     * @return
-     */
-    fun createSign(mapInfo: MapDescriptionInfo, layer: Int): Entity
-    {
-        val sign = Entity()
-        sign.add(ConversationComponent(mapInfo.content))
-        sign.add(TitleComponent(mapInfo.title))
-        sign.add(ColliderComponent())
-        //TODO sign.add(Transform(true, mapInfo.x, mapInfo.y, Constant.TILE_SIZE, Constant.TILE_SIZE, layer))
-        engine.addEntity(sign)
-        return sign
-    }
-
     fun createPerson(pInfo: MapPersonInformation, layer: Int): Entity
     {
         // Set up path component

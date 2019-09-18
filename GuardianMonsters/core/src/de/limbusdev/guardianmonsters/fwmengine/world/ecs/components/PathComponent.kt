@@ -40,7 +40,9 @@ class PathComponent
 )
     : LimbusBehaviour(), Component
 {
-    override val defaultJson: String get() = "enabled: true, path: SSTOP, static: true"
+    companion object { const val TAG = "PathComponent" }
+
+    override val defaultJson: String get() = "enabled: true, path: SSTOP, dynamic: false"
 
     // --------------------------------------------------------------------------------------------- PROPERTIES
     var startMoving = true

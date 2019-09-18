@@ -24,6 +24,7 @@ class World
         componentParsers[CharacterSpriteComponent::class] = CharacterSpriteComponentParser
         componentParsers[WarpStartComponent::class] = WarpStartComponentParser
         componentParsers[WarpTargetComponent::class] = WarpTargetComponentParser
+        componentParsers[PathComponent::class] = PathComponentParser
     }
 
     fun start() { isStopped = false }

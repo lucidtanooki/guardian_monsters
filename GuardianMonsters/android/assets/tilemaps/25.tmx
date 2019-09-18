@@ -181,7 +181,7 @@ path: NSTOP</property>
     <property name="CharacterSpriteComponent">male: true,
 index: 2</property>
     <property name="ColliderComponent" value=""/>
-    <property name="ConversationComponent" value="enabled: true, name: sign_25_8_title, text: sign_25_8"/>
+    <property name="ConversationComponent" value="enabled: true, name: person_name_25_8, text: person_name_25_8"/>
     <property name="PathComponent">enabled: true,
 dynamic: false,
 path: SSTOP,E,E,E,E,ESTOP,NSTOP,NSTOP,WSTOP,SSTOP,S,S,S,ESTOP,SSTOP,W,W,W,W,SSTOP,WSTOP,SSTOP,SSTOP,SSTOP,SSTOP,WSTOP,NSTOP,N,N,N</property>

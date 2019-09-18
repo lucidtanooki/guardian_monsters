@@ -19,7 +19,6 @@ import de.limbusdev.guardianmonsters.assets.paths.AssetPath
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusBehaviour
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusGameObject
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.*
-import de.limbusdev.guardianmonsters.fwmengine.world.model.MapPersonInformation
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.ExtendedTiledMapRenderer
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.TmxDayTimeMapLoader
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.get
@@ -56,9 +55,6 @@ class GameArea(val areaID: Int, startPosID: Int)
 
 
     private var bgMusic: String? = null
-
-    val healFields       = ArrayMap<Int, Array<Rectangle>>()
-    val mapPeople        = ArrayMap<Int, Array<MapPersonInformation>>()
 
 
     // --------------------------------------------------------------------------------------------- CONSTRUCTORS
@@ -226,9 +222,6 @@ class GameArea(val areaID: Int, startPosID: Int)
     {
         val layerIndex = layer.name.subStringFromEnd(0).toInt()
 
-        val healingTriggers = Array<Rectangle>()
-        healFields.put(layerIndex, healingTriggers)
-
         // TODO
         //val battleTriggers = Array<MonsterArea>()
         //monsterAreas.put(layerIndex, battleTriggers)
@@ -238,23 +231,6 @@ class GameArea(val areaID: Int, startPosID: Int)
             val rect = (mo as RectangleMapObject).rectangle
             when(mo.name)
             {
-                "healing" ->
-                {
-                    healingTriggers.add(Rectangle(
-                            rect.x,
-                            rect.y,
-                            Constant.COLf,
-                            Constant.ROWf))
-                }
-                "startField" ->
-                {
-                    if (mo.properties["fieldID", 0] == startFieldID)
-                    {
-                        startPosition.x = MathUtils.round(rect.x)
-                        startPosition.y = MathUtils.round(rect.y)
-                        startLayer = layerIndex
-                    }
-                }
                 "monsterArea" ->
                 {
                     val r = IntRect(rect)
@@ -271,24 +247,6 @@ class GameArea(val areaID: Int, startPosID: Int)
                 }
                 else -> {}
             }
-        }
-    }
-
-    /**
-     * Only for Layers containing "people" in their nameID
-     *
-     * @param layer
-     */
-    private fun createPeople(layer: MapLayer)
-    {
-        val peopleLayer = Array<MapPersonInformation>()
-        val layerIndex = layer.name.subStringFromEnd(0).toInt()
-        mapPeople[layerIndex] = peopleLayer
-
-        // get information about people on map
-        for (mo in layer.objects)
-        {
-            peopleLayer.add(MapPersonInformation(mo))
         }
     }
 

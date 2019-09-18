@@ -75,7 +75,6 @@ class EntityComponentSystem
         CoreSL.world.add(setupHero(fromSave))
         val inventory = CoreSL.world.hero.get<InventoryComponent>()!!.inventory
         hud = HUD(BattleScreen(inventory), saveGameManager, CoreSL.world.hero, engine, gameArea)
-        setUpPeople()
         setUpEntitySystems(gameArea, viewport, hud)
     }
 
@@ -88,18 +87,6 @@ class EntityComponentSystem
     private fun setupHero(fromSave: Boolean) : LimbusGameObject
     {
         return entityFactory.createHero(gameArea.startPosition, gameArea.startLayer, fromSave)
-    }
-
-    /** Bring people on active map to life */
-    private fun setUpPeople()
-    {
-        for (layer in gameArea.mapPeople.keys())
-        {
-            for (personInformation in gameArea.mapPeople.get(layer))
-            {
-                entityFactory.createPerson(personInformation, layer)
-            }
-        }
     }
 
     fun setUpEntitySystems(gameArea: GameArea, viewport: Viewport, hud: HUD)

@@ -10,8 +10,6 @@ import de.limbusdev.guardianmonsters.enums.SkyDirection
 import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.*
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.GameArea
-import de.limbusdev.guardianmonsters.fwmengine.world.model.MapDescriptionInfo
-import de.limbusdev.guardianmonsters.fwmengine.world.model.MapPersonInformation
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.AnimatedPersonSprite
 import de.limbusdev.guardianmonsters.guardians.GuardiansServiceLocator
 import de.limbusdev.guardianmonsters.guardians.items.Inventory
@@ -105,33 +103,6 @@ class EntityFactory(private val engine: Engine, private val area: GameArea)
         hero.addAndRemoveComponentsNow()
 
         return hero
-    }
-
-    fun createPerson(pInfo: MapPersonInformation, layer: Int): Entity
-    {
-        // Set up path component
-        val path = Array<SkyDirection>()
-        if (!(pInfo.path == null || pInfo.path.isEmpty()))
-        {
-            val pathStr = pInfo.path.split("\\s*,\\s*".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
-
-            pathStr.forEach { path.add(SkyDirection.valueOf(it)) }
-        }
-
-        // TODO
-        return Entity()
-/*
-        // Use second Constructor
-        return createPerson(
-
-                Transform(true, pInfo.startPosition.x, pInfo.startPosition.y, Constant.TILE_SIZE, Constant.TILE_SIZE, layer),
-                path,
-                pInfo.moves,
-                pInfo.conversation,
-                pInfo.name,
-                pInfo.male,
-                pInfo.spriteIndex
-        )*/
     }
 
     /**

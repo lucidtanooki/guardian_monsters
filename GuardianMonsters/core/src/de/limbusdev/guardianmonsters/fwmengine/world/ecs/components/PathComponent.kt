@@ -5,6 +5,7 @@ import com.badlogic.gdx.utils.Array
 
 import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.utils.TimeUtils
+import de.limbusdev.guardianmonsters.Constant
 
 import de.limbusdev.guardianmonsters.enums.SkyDirection
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusBehaviour
@@ -74,10 +75,14 @@ class PathComponent
             initializeTileWiseMovement()
         }
 
-        if(!moving && TimeUtils.timeSinceMillis(stoppedSince) > 300)
+        if(!moving && TimeUtils.timeSinceMillis(stoppedSince) > 1000)
         {
             moving = true
             newTileReachedCallback(IntVec2())
+        }
+        if(!moving && TimeUtils.timeSinceMillis(stoppedSince) <= 1000)
+        {
+            inputComponent?.firstTip = TimeUtils.millis()
         }
     }
 
@@ -93,6 +98,7 @@ class PathComponent
     private fun initializeTileWiseMovement()
     {
         tileWiseMovementComponent = gameObject?.get()
+        tileWiseMovementComponent?.speed = Constant.ONE_STEP_DURATION_PERSON
         tileWiseMovementComponent?.onGridSlotChanged?.add { slot -> newTileReachedCallback(slot) }
         inputComponent?.startMoving = true
         inputComponent?.touchDown = true
@@ -104,7 +110,8 @@ class PathComponent
         next()
         if(path[currentDir] == path[currentDir].stop())
         {
-            inputComponent?.touchDown = false
+            inputComponent?.touchDown = true
+            inputComponent?.firstTip = TimeUtils.millis()
             inputComponent?.skyDir = path[currentDir].nostop()
             stoppedSince = TimeUtils.millis()
             moving = false

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+ <object name="person" type="LimbusGameObject" width="16" height="16">
+  <properties>
+   <property name="CharacterSpriteComponent">male: true,
+index: 2</property>
+   <property name="ColliderComponent" value=""/>
+   <property name="ConversationComponent">enabled: true, 
+name: person_name_MAPID_PERSONID, 
+text: person_MAPID_PERSONID</property>
+   <property name="PathComponent">enabled: true,
+path: E, E, S, S, SSTOP, WSTOP, ESTOP, W, W, N, N</property>
+  </properties>
+ </object>
+</template>

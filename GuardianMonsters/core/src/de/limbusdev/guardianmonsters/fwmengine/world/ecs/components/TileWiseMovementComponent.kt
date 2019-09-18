@@ -18,6 +18,7 @@ class TileWiseMovementComponent() : LimbusBehaviour()
 
     private val newFrameEveryXPixels = 6
     private var stepsSinceLastFrameUpdate = 0
+    var speed = Constant.ONE_STEPDURATION_MS
 
     private var gridSlot : IntVec2 by Delegates.observable(IntVec2())
     {
@@ -52,7 +53,7 @@ class TileWiseMovementComponent() : LimbusBehaviour()
             gameObject?.get<CharacterSpriteComponent>()?.sprite?.resetAnimation()
             return false
         }
-        if (TimeUtils.timeSinceMillis(transform.lastPixelStep) < Constant.ONE_STEPDURATION_MS) { return false }
+        if (TimeUtils.timeSinceMillis(transform.lastPixelStep) < speed) { return false }
 
         // If entity is already moving, and last incremental step has completed (long enough ago)
         val spriteComponent = gameObject?.get<CharacterSpriteComponent>() ?: return false

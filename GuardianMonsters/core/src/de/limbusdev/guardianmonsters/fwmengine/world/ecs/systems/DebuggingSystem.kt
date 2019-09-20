@@ -20,20 +20,6 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Transform
  */
 class DebuggingSystem : EntitySystem()
 {
-    // --------------------------------------------------------------------------------------------- PROPERTIES
-    private var entities: ImmutableArray<Entity>? = null
-
-    // --------------------------------------------------------------------------------------------- METHODS
-    override fun addedToEngine(engine: Engine)
-    {
-        entities = engine.getEntitiesFor(Family.all(Transform::class.java).get())
-    }
-
-    override fun update(deltaTime: Float)
-    {
-        // TODO
-    }
-
     /**
      * Render all components with a position component
      * @param shpr

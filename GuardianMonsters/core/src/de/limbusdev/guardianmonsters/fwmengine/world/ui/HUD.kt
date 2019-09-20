@@ -260,12 +260,12 @@ class HUD
         var nearEntity: LimbusGameObject? = null
         val checkGridCell = hero.transform.onGrid
 
-        checkGridCell += when (dir)
+        checkGridCell += when (dir.stop())
         {
-            SkyDirection.N -> IntVec2( 0, +1)
-            SkyDirection.S -> IntVec2( 0, -1)
-            SkyDirection.E -> IntVec2(+1,  0)
-            SkyDirection.W -> IntVec2(-1,  0)
+            SkyDirection.NSTOP -> IntVec2( 0, +1)
+            SkyDirection.SSTOP -> IntVec2( 0, -1)
+            SkyDirection.ESTOP -> IntVec2(+1,  0)
+            SkyDirection.WSTOP -> IntVec2(-1,  0)
             else           -> IntVec2( 0,  0)
         }
 

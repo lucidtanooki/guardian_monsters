@@ -8,9 +8,7 @@ import com.badlogic.gdx.maps.MapObject
 import com.badlogic.gdx.maps.objects.RectangleMapObject
 import com.badlogic.gdx.maps.tiled.TiledMap
 import com.badlogic.gdx.math.MathUtils
-import com.badlogic.gdx.math.Rectangle
 import com.badlogic.gdx.utils.Array
-import com.badlogic.gdx.utils.ArrayMap
 import com.badlogic.gdx.utils.Json
 
 import de.limbusdev.guardianmonsters.Constant
@@ -25,7 +23,6 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ui.get
 import de.limbusdev.guardianmonsters.services.Services
 import de.limbusdev.utils.extensions.f
 import de.limbusdev.utils.extensions.removeLast
-import de.limbusdev.utils.extensions.set
 import de.limbusdev.utils.extensions.subStringFromEnd
 import de.limbusdev.utils.geometry.IntRect
 import de.limbusdev.utils.geometry.IntVec2

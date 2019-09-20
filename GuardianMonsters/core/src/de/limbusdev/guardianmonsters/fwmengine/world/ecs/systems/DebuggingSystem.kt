@@ -43,12 +43,13 @@ class DebuggingSystem : EntitySystem()
         shpr.begin(ShapeRenderer.ShapeType.Line)
         shpr.color = Color.WHITE
 
-        for(gameObject in CoreSL.world.getAllWith("ColliderComponent"))
+        val collidableObjects = CoreSL.world.getAllWith("ColliderComponent")
+        for(gameObject in collidableObjects)
         {
             val collider = gameObject.get<ColliderComponent>()
             if(collider != null)
             {
-                val transform = gameObject.transform.asRectangle
+                val transform = collider.asRectangle
                 shpr.rect(transform.xf, transform.yf, transform.widthf, transform.heightf)
             }
         }

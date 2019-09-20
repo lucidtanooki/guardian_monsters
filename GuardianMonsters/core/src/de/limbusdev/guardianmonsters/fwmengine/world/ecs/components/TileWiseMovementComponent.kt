@@ -39,8 +39,7 @@ class TileWiseMovementComponent() : LimbusBehaviour()
     private var framesPerStep : Int = 1
 
 
-    var currentMovement = SkyDirection.SSTOP
-        private set
+    private var currentMovement = SkyDirection.SSTOP
 
     var moving = false
         private set
@@ -109,7 +108,27 @@ class TileWiseMovementComponent() : LimbusBehaviour()
         currentMovement = inputComponent.direction  // set movement direction
         moving = true                               // entity is moving right now
 
+        // Move Collider to next position
+        val directionVector = getDirectionVector()
+        val collider = gameObject!!.get<ColliderComponent>()!!
+        collider.offsetX = directionVector.x * Constant.TILE_SIZE
+        collider.offsetY = directionVector.y * Constant.TILE_SIZE
+
         return true
+    }
+
+    private fun getDirectionVector() : IntVec2
+    {
+        val dirVec = IntVec2()
+        when (currentMovement)
+        {
+            SkyDirection.N -> dirVec.y = 1
+            SkyDirection.W -> dirVec.x = -1
+            SkyDirection.E -> dirVec.x = 1
+            else -> dirVec.y = -1
+        }
+
+        return dirVec
     }
 
     private fun applyMovement() : Boolean
@@ -119,13 +138,13 @@ class TileWiseMovementComponent() : LimbusBehaviour()
         if (framesSinceLastPixelStep < framesPerStep) { return false }
 
         // Set transform to new position
-        when (currentMovement)
-        {
-            SkyDirection.N -> transform.y += 1
-            SkyDirection.W -> transform.x -= 1
-            SkyDirection.E -> transform.x += 1
-            else -> transform.y -= 1
-        }
+        val directionVector = getDirectionVector()
+
+        transform += directionVector
+
+        val collider = gameObject!!.get<ColliderComponent>()!!
+        collider.offsetX -= directionVector.x
+        collider.offsetY -= directionVector.y
 
 
         // Update animation, every X pixel steps
@@ -165,10 +184,16 @@ class TileWiseMovementComponent() : LimbusBehaviour()
         // Check whether movement is possible or blocked by a collider
         for (otherGameObject in CoreSL.world.getAllWith("ColliderComponent", transform.layer))
         {
-            val otherCollider = otherGameObject.get<ColliderComponent>()
+            if(otherGameObject != gameObject)
+            {
+                val otherCollider = otherGameObject.get<ColliderComponent>()
 
-            val nextPos = nextPosition.offset(Constant.TILE_SIZE/2)
-            if(otherCollider?.blocks(nextPos) == true) { return true }
+                val nextPos = nextPosition.offset(Constant.TILE_SIZE / 2)
+                if (otherCollider?.blocks(nextPos) == true)
+                {
+                    return true
+                }
+            }
         }
 
         return false

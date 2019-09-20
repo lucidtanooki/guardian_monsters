@@ -119,7 +119,7 @@ class PathComponent
      * Moves on to the next direction in the contained path. If it reaches the end of the path it
      * will start from the beginning.
      */
-    operator fun next()
+    fun next()
     {
         currentDir = (currentDir+1) % path.size
     }

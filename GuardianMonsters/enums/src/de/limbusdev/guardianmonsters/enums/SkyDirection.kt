@@ -31,6 +31,22 @@ enum class SkyDirection
     }
 
     fun isStop() = this == stop()
+
+    val x : Int get() = when(this)
+    {
+        N, NSTOP -> 0
+        NE, E, ESTOP, SE -> 1
+        S, SSTOP -> 0
+        SW, W, WSTOP, NW -> -1
+    }
+
+    val y : Int get() = when(this)
+    {
+        NW, N, NSTOP, NE -> 1
+        E, ESTOP -> 0
+        SE, S, SSTOP, SW -> -1
+        W, WSTOP -> 0
+    }
 }
 
 /** North, East, South, West */

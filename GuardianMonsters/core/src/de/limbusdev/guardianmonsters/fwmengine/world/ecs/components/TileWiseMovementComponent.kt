@@ -109,26 +109,11 @@ class TileWiseMovementComponent() : LimbusBehaviour()
         moving = true                               // entity is moving right now
 
         // Move Collider to next position
-        val directionVector = getDirectionVector()
         val collider = gameObject!!.get<ColliderComponent>()!!
-        collider.offsetX = directionVector.x * Constant.TILE_SIZE
-        collider.offsetY = directionVector.y * Constant.TILE_SIZE
+        collider.offsetX = currentMovement.x * Constant.TILE_SIZE
+        collider.offsetY = currentMovement.y * Constant.TILE_SIZE
 
         return true
-    }
-
-    private fun getDirectionVector() : IntVec2
-    {
-        val dirVec = IntVec2()
-        when (currentMovement)
-        {
-            SkyDirection.N -> dirVec.y = 1
-            SkyDirection.W -> dirVec.x = -1
-            SkyDirection.E -> dirVec.x = 1
-            else -> dirVec.y = -1
-        }
-
-        return dirVec
     }
 
     private fun applyMovement() : Boolean
@@ -138,13 +123,12 @@ class TileWiseMovementComponent() : LimbusBehaviour()
         if (framesSinceLastPixelStep < framesPerStep) { return false }
 
         // Set transform to new position
-        val directionVector = getDirectionVector()
-
-        transform += directionVector
+        transform.x += currentMovement.x
+        transform.y += currentMovement.y
 
         val collider = gameObject!!.get<ColliderComponent>()!!
-        collider.offsetX -= directionVector.x
-        collider.offsetY -= directionVector.y
+        collider.offsetX -= currentMovement.x
+        collider.offsetY -= currentMovement.y
 
 
         // Update animation, every X pixel steps

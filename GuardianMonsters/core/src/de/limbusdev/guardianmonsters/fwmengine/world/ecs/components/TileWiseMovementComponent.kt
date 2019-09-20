@@ -1,6 +1,5 @@
 package de.limbusdev.guardianmonsters.fwmengine.world.ecs.components
 
-import com.badlogic.gdx.utils.TimeUtils
 import de.limbusdev.guardianmonsters.Constant
 import de.limbusdev.guardianmonsters.CoreSL
 import de.limbusdev.guardianmonsters.enums.SkyDirection
@@ -25,7 +24,13 @@ class TileWiseMovementComponent() : LimbusBehaviour()
 
     private val newFrameEveryXPixels = 6
     private var stepsSinceLastFrameUpdate = 0
-    var speed = Constant.ONE_STEPDURATION_MS
+    var speed = Constant.WALKING_SPEED_PLAYER
+    private val framesPerStep = when
+    {
+        speed > 9 -> 1
+        speed <= 0 -> 9
+        else -> 10 - speed
+    }
 
     var currentMovement = SkyDirection.SSTOP
         private set
@@ -33,7 +38,7 @@ class TileWiseMovementComponent() : LimbusBehaviour()
     var moving = false
         private set
 
-    private var lastPixelStep   : Long = 0 // ms
+    private var framesSinceLastPixelStep = 0
 
     private var gridSlot : IntVec2 by Delegates.observable(IntVec2())
     {
@@ -61,6 +66,11 @@ class TileWiseMovementComponent() : LimbusBehaviour()
     override fun update(deltaTime: Float)
     {
         super.update(deltaTime)
+    }
+
+    override fun update60fps()
+    {
+        super.update60fps()
 
         if(!moving)
         {
@@ -93,7 +103,7 @@ class TileWiseMovementComponent() : LimbusBehaviour()
         if(isBlocked) { return false }
 
         // Start Movement
-        lastPixelStep = TimeUtils.millis()          // remember time of this iteration
+        framesSinceLastPixelStep = 0
         currentMovement = inputComponent.direction  // set movement direction
         moving = true                               // entity is moving right now
 
@@ -103,7 +113,8 @@ class TileWiseMovementComponent() : LimbusBehaviour()
     private fun applyMovement() : Boolean
     {
         // Move to next pixel only when step duration has passed
-        if (TimeUtils.timeSinceMillis(lastPixelStep) < speed) { return false }
+        framesSinceLastPixelStep++
+        if (framesSinceLastPixelStep < framesPerStep) { return false }
 
         // Set transform to new position
         when (currentMovement)
@@ -114,8 +125,6 @@ class TileWiseMovementComponent() : LimbusBehaviour()
             else -> transform.y -= 1
         }
 
-        // Remember time of this iterative movement
-        lastPixelStep = TimeUtils.millis()
 
         // Update animation, every X pixel steps
         if (stepsSinceLastFrameUpdate >= newFrameEveryXPixels)
@@ -139,6 +148,8 @@ class TileWiseMovementComponent() : LimbusBehaviour()
             gridSlot = transform.onGrid
             moving = false
         }
+
+        framesSinceLastPixelStep = 0
 
         return true
     }

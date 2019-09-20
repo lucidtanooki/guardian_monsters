@@ -49,4 +49,10 @@ class Transform(var gameObject: LimbusGameObject) : Component, IntRect(0,0,16,16
     {
         //if(gameObject.name == "Hero") { println("$x|$y") }
     }
+
+    /** Runs every 1/60 s */
+    fun update60fps()
+    {
+
+    }
 }

@@ -40,6 +40,20 @@ class LimbusGameObject(var name: String = "", val type: String = "general")
         addAndRemoveComponentsNow()
     }
 
+    fun update60fps()
+    {
+        if(!enabled) { return }
+
+        transform.update60fps()
+        for(component in components)
+        {
+            if(component.initialized && component.enabled)
+            {
+                component.update60fps()
+            }
+        }
+    }
+
     fun addAndRemoveComponentsNow()
     {
         for(c in componentsToBeAdded)

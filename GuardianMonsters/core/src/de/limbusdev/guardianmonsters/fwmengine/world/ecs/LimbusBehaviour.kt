@@ -28,7 +28,11 @@ abstract class LimbusBehaviour()
      */
     open fun initialize() { initialized = true }
 
+    /** Runs as often as possible */
     open fun update(deltaTime: Float) {}
+
+    /** Runs every 1/60 s */
+    open fun update60fps() {}
 
     open fun onEnable() {}
 

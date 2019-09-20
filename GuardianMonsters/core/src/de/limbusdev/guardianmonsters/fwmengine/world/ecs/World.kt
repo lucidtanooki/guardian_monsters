@@ -17,6 +17,11 @@ class World
 
     private var isStopped = true
 
+    private var accumulator60fps = 0f
+
+    val physicsFPS = 60f            // Frames per Second
+    val physicsCPS = 1f/physicsFPS  // Cycles per Second
+
     init
     {
         componentParsers[ColliderComponent::class] = ColliderComponentParser
@@ -52,6 +57,13 @@ class World
     {
         if(isStopped) { return }
 
+        accumulator60fps += deltaTime
+        while(accumulator60fps > physicsCPS)
+        {
+            update60fps()
+            accumulator60fps -= physicsCPS
+        }
+
         for(gameObject in gameObjects)
         {
             if(gameObject.enabled)
@@ -62,6 +74,18 @@ class World
         }
 
         addAndRemoveObjectsNow()
+    }
+
+    /** Is called every 1/60 s */
+    fun update60fps()
+    {
+        for(gameObject in gameObjects)
+        {
+            if(gameObject.enabled)
+            {
+                gameObject.update60fps()
+            }
+        }
     }
 
     fun add(gameObject: LimbusGameObject)

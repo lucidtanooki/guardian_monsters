@@ -24,8 +24,8 @@ public interface Constant
     int ROW = 8;
     float COLf = 8f;
     float ROWf = 8f;
-    int ONE_STEPDURATION_MS = 5;
-    int ONE_STEP_DURATION_PERSON = 20;
+    int WALKING_SPEED_PLAYER = 9;
+    int WALKING_SPEED_AI = 8;
     int zoom = 1;
 
     // ............................................................................................. DEBUGGING

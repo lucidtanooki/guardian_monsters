@@ -92,7 +92,7 @@ class PathComponent
         if(gameObject?.get<TileWiseMovementComponent>() == null) { logError(TAG) { "PathComponent needs an TileWiseMovementComponent" } }
 
         tileWiseMovementComponent = gameObject?.get()!!
-        tileWiseMovementComponent.speed = Constant.ONE_STEP_DURATION_PERSON
+        tileWiseMovementComponent.speed = Constant.WALKING_SPEED_AI
         tileWiseMovementComponent.onGridSlotChanged.add { slot -> newTileReachedCallback(slot) }
 
         newTileReachedCallback(IntVec2())

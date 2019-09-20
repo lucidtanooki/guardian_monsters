@@ -52,7 +52,7 @@ class PathComponent
     private lateinit var tileWiseMovementComponent : TileWiseMovementComponent
 
     // --------------------------------------------------------------------------------------------- PROPERTIES
-    var moving      = false
+    var moving      = true
     var currentDir  = -1
     var talking     = false
     var talkDir     = SkyDirection.S
@@ -60,22 +60,28 @@ class PathComponent
 
 
     // --------------------------------------------------------------------------------------------- METHODS
+    override fun update60fps()
+    {
+        super.update60fps()
+
+        if(!moving)
+        {
+            stoppedSince++
+            if(stoppedSince > 60)
+            {
+                stoppedSince = 0
+                moving = true
+                newTileReachedCallback(IntVec2())
+            }
+        }
+    }
+
     override fun initialize()
     {
         super.initialize()
 
         initializeInputComponent()
         initializeTileWiseMovement()
-    }
-
-    override fun update(deltaTime: Float)
-    {
-        super.update(deltaTime)
-
-        /*if(inputComponent.stop)
-        {
-            if(TimeUtils.timeSinceMillis(stoppedSince) > 1000) { newTileReachedCallback(IntVec2()) }
-        }*/
     }
 
     private fun initializeInputComponent()
@@ -100,21 +106,13 @@ class PathComponent
 
     private fun newTileReachedCallback(newSlot: IntVec2)
     {
-        /*next()
-
-        if(path[currentDir] == path[currentDir].stop())
+        if(!moving) { return }
+        next()
+        inputComponent.direction = path[currentDir]
+        if(inputComponent.direction.isStop())
         {
-            inputComponent.skyDir = path[currentDir].nostop()
-            stoppedSince = TimeUtils.millis()
-            inputComponent.stop = true
+            moving = false
         }
-        else
-        {
-            if (!inputComponent.moving) { inputComponent.startMoving = true }
-            inputComponent.touchDown = true
-            inputComponent.stop = false
-        }
-        inputComponent.nextInput = path[currentDir].nostop()*/
     }
 
     /**
@@ -123,7 +121,6 @@ class PathComponent
      */
     operator fun next()
     {
-        currentDir++
-        if (currentDir >= path.size) { currentDir = 0 }
+        currentDir = (currentDir+1) % path.size
     }
 }

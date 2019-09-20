@@ -22,15 +22,22 @@ class TileWiseMovementComponent() : LimbusBehaviour()
     private var nextX = 0
     private var nextY = 0
 
+    var speed : Int = Constant.WALKING_SPEED_PLAYER
+        set(value)
+        {
+            field = value
+            framesPerStep = when
+            {
+                speed > 9 -> 1
+                speed <= 0 -> 9
+                else -> 10 - speed
+            }
+        }
+
     private val newFrameEveryXPixels = 6
     private var stepsSinceLastFrameUpdate = 0
-    var speed = Constant.WALKING_SPEED_PLAYER
-    private val framesPerStep = when
-    {
-        speed > 9 -> 1
-        speed <= 0 -> 9
-        else -> 10 - speed
-    }
+    private var framesPerStep : Int = 1
+
 
     var currentMovement = SkyDirection.SSTOP
         private set
@@ -61,11 +68,6 @@ class TileWiseMovementComponent() : LimbusBehaviour()
         if(inputComponent != null) { this.inputComponent = inputComponent }
         val characterSpriteComponent = gameObject?.get<CharacterSpriteComponent>()
         if(characterSpriteComponent != null) { this.characterSpriteComponent = characterSpriteComponent }
-    }
-
-    override fun update(deltaTime: Float)
-    {
-        super.update(deltaTime)
     }
 
     override fun update60fps()

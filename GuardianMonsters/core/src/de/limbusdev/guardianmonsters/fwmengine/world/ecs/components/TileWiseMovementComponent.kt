@@ -76,6 +76,7 @@ class TileWiseMovementComponent() : LimbusBehaviour()
         if(!moving)
         {
             // For every new tile-step, initialize the new movement
+            if(inputComponent.talking) { return }
             initializeMovement()
         }
         else

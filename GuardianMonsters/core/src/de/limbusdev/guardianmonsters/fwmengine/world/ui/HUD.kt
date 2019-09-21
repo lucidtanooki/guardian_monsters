@@ -70,6 +70,8 @@ class HUD
 
     private val dPad = DPad()
 
+    private var interactionGameObject : LimbusGameObject? = null
+
 
     // --------------------------------------------------------------------------------------------- CONSTRUCTORS
     init
@@ -239,6 +241,9 @@ class HUD
         conversationWidget.addAction(moveTo(0f, -50f, .5f, Interpolation.exp10In) then hideActor())
         hero.get<InputComponent>()!!.talking = false
         currentlyShownHUDWidget = HUDWidgets.NONE
+
+        val otherInputComponent = interactionGameObject?.get<InputComponent>() ?: return
+        otherInputComponent.talking = false
     }
 
     fun openSign(title: String, text: String, mapID: Int) = openConversation(text, title, mapID)
@@ -260,14 +265,7 @@ class HUD
         var nearEntity: LimbusGameObject? = null
         val checkGridCell = hero.transform.onGrid
 
-        checkGridCell += when (dir.stop())
-        {
-            SkyDirection.NSTOP -> IntVec2( 0, +1)
-            SkyDirection.SSTOP -> IntVec2( 0, -1)
-            SkyDirection.ESTOP -> IntVec2(+1,  0)
-            SkyDirection.WSTOP -> IntVec2(-1,  0)
-            else           -> IntVec2( 0,  0)
-        }
+        checkGridCell += IntVec2(dir.x, dir.y)
 
         logDebug(TAG) { "Grid cell to be checked: $checkGridCell" }
 
@@ -295,6 +293,7 @@ class HUD
             if (onGrid == checkGridCell) { nearEntity = interactiveObject }
         }
 
+        interactionGameObject = nearEntity
         return nearEntity
     }
 
@@ -336,7 +335,7 @@ class HUD
 
         logDebug(TAG) { "Touched sign" }
         val conversation = sign.get<ConversationComponent>()
-        openSign(conversation!!.name, conversation!!.text, gameArea.areaID)
+        openSign(conversation!!.name, conversation.text, gameArea.areaID)
         currentlyShownHUDWidget = HUDWidgets.SIGN
 
         touchedSign = true
@@ -347,7 +346,11 @@ class HUD
             //
         }*/
 
-        if (touchedSpeaker || touchedSign) { hero.get<InputComponent>()!!.talking = true }
+        if (touchedSpeaker || touchedSign)
+        {
+            hero.get<InputComponent>()!!.talking = true
+            sign.get<InputComponent>()!!.talking = true
+        }
     }
 
     // ............................................................................. SET UP CONTROLS

@@ -97,6 +97,10 @@ class TileWiseMovementComponent() : LimbusBehaviour()
         characterSpriteComponent.sprite.changeState(inputComponent.direction)
 
         // Initialize Movement - don't go further if stopped
+        if(inputComponent.talking)
+        {
+            characterSpriteComponent.sprite.changeState(inputComponent.talkDirection)
+        }
         if(inputComponent.direction.isStop()) { return false }
 
         // Check if next tile is empty
@@ -153,6 +157,11 @@ class TileWiseMovementComponent() : LimbusBehaviour()
         {
             gridSlot = transform.onGrid
             moving = false
+
+            if(inputComponent.talking)
+            {
+                characterSpriteComponent.sprite.changeState(inputComponent.talkDirection.nostop())
+            }
         }
 
         framesSinceLastPixelStep = 0

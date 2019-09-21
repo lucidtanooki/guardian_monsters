@@ -32,6 +32,21 @@ enum class SkyDirection
 
     fun isStop() = this == stop()
 
+    fun invert() : SkyDirection
+    {
+        return when(this)
+        {
+            N, NSTOP -> S
+            E, ESTOP -> W
+            S, SSTOP -> N
+            W, WSTOP -> E
+            NE -> SW
+            SE -> NW
+            SW -> NE
+            NW -> SE
+        }
+    }
+
     val x : Int get() = when(this)
     {
         N, NSTOP -> 0

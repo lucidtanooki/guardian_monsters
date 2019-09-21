@@ -233,6 +233,13 @@ class HUD
         conversationWidget.isVisible = true
         conversationWidget.addAction(moveTo(0f, 0f, .5f, Interpolation.exp10Out))
         currentlyShownHUDWidget = HUDWidgets.CONVERSATION
+
+        val heroInputComponent = hero.get<InputComponent>()
+        val otherInputComponent = interactionGameObject?.get<InputComponent>()
+        if(otherInputComponent == null || heroInputComponent == null) { return }
+        otherInputComponent.talking = true
+        otherInputComponent.talkDirection = heroInputComponent.direction.invert()
+        heroInputComponent.talkDirection = heroInputComponent.direction
     }
 
     fun closeConversation()

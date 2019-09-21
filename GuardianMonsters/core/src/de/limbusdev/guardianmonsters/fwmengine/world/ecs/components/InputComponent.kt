@@ -19,4 +19,5 @@ class InputComponent(override val defaultJson: String = "") : LimbusBehaviour(),
     var inBattle    : Boolean = false
 
     var direction = SkyDirection.SSTOP
+    var talkDirection = SkyDirection.SSTOP
 }

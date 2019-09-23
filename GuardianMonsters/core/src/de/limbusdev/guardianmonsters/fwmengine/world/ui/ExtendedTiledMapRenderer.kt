@@ -83,6 +83,7 @@ class ExtendedTiledMapRenderer(map: TiledMap) : OrthogonalTiledMapRenderer(map, 
 
         for (layer in map.layers)
         {
+            val layerID: Int = layer.name[layer.name.lastIndex].toString().toInt()
             when(layer)
             {
                 is TiledMapTileLayer -> renderTileLayer(layer) // Render graphical layer
@@ -94,7 +95,7 @@ class ExtendedTiledMapRenderer(map: TiledMap) : OrthogonalTiledMapRenderer(map, 
                     when(layer.name.removeLast(0))
                     {
 
-                        "people" -> renderPeople()
+                        "people" -> renderPeople(layerID)
                         else -> {}
                     }
                 }
@@ -125,7 +126,7 @@ class ExtendedTiledMapRenderer(map: TiledMap) : OrthogonalTiledMapRenderer(map, 
         }
     }
 
-    private fun renderPeople()
+    private fun renderPeople(layerID: Int)
     {
         // Get all CharacterSpriteComponents
         val gameObjects = CoreSL.world.getAllWith("CharacterSpriteComponent").toTypedArray()
@@ -135,7 +136,7 @@ class ExtendedTiledMapRenderer(map: TiledMap) : OrthogonalTiledMapRenderer(map, 
 
             val spriteComponent = it.get<CharacterSpriteComponent>()
             val sprite = spriteComponent?.sprite
-            if(it.enabled && sprite != null && spriteComponent.enabled)
+            if(it.enabled && sprite != null && spriteComponent.enabled && it.transform.layer == layerID)
             {
                 batch.draw(sprite, it.transform.xf, it.transform.yf)
             }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-down" width="64" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="19" nextobjectid="474">
+<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-down" width="64" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="20" nextobjectid="474">
  <properties>
   <property name="musicIndex" type="int" value="2"/>
   <property name="musicType" value="town"/>
@@ -768,13 +768,6 @@ path: NSTOP</property>
    </properties>
   </object>
  </objectgroup>
- <objectgroup id="18" name="colliderWalls1">
-  <object id="469" x="176" y="240" width="16" height="32"/>
-  <object id="470" x="256" y="240" width="16" height="32"/>
-  <object id="471" x="176" y="224" width="96" height="16"/>
-  <object id="472" x="176" y="272" width="32" height="16"/>
-  <object id="473" x="224" y="272" width="48" height="16"/>
- </objectgroup>
  <objectgroup id="12" name="triggers0">
   <object id="32" name="startField" x="432" y="192" width="16" height="16">
    <properties>
@@ -1076,6 +1069,14 @@ path: NSTOP</property>
     <property name="SpriteComponent" value=""/>
    </properties>
   </object>
+ </objectgroup>
+ <objectgroup id="19" name="people1"/>
+ <objectgroup id="18" name="colliderWalls1">
+  <object id="469" x="176" y="240" width="16" height="32"/>
+  <object id="470" x="256" y="240" width="16" height="32"/>
+  <object id="471" x="176" y="224" width="96" height="16"/>
+  <object id="472" x="176" y="272" width="32" height="16"/>
+  <object id="473" x="224" y="272" width="48" height="16"/>
  </objectgroup>
  <objectgroup id="14" name="animatedObjects1"/>
 </map>

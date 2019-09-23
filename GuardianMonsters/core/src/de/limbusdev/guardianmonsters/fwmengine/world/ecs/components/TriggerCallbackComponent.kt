@@ -1,5 +1,7 @@
 package de.limbusdev.guardianmonsters.fwmengine.world.ecs.components
 
+import de.limbusdev.guardianmonsters.enums.Compass4
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusBehaviour
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusGameObject
 
 /**
@@ -8,7 +10,9 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusGameObject
  * if that switch is a trigger and the door's trigger callback component has subscribed to that
  * switches trigger events.
  */
-class TriggerCallbackComponent
+abstract class TriggerCallbackComponent : LimbusBehaviour()
 {
-    // TODO
+    override val defaultJson: String get() = "enabled: true, triggerID: 0"
+
+    abstract fun onTriggerEntered(gameObject: LimbusGameObject?, fromDirection: Compass4?);
 }

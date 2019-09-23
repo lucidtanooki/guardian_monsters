@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-down" width="64" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="18" nextobjectid="445">
+<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-down" width="64" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="18" nextobjectid="467">
  <properties>
   <property name="musicIndex" type="int" value="2"/>
   <property name="musicType" value="town"/>
@@ -30,7 +30,7 @@
  </layer>
  <layer id="5" name="objects1" width="64" height="32">
   <data encoding="base64" compression="zlib">
-   eJztmEsOgjAQhquu2NRTCC7YeAUTHycxLtx4Kd248Ubgxo3ewU4cIiEIw2gphfmShhZoyz+PtkEpQRCEep5j11/gnsXE9Re4A/x/HLB+4GpB/5Iw5kkrddbN+nCJg/J6vr0e2ZvfNYegvF7WroJqI44vbfr/ghp3+lMvPluhttu0eqy6578w1/XvNCVv12LOcaDo3zPmqPI/zMmx+6rHOU3FZl7ZJDQxNDPlbkqKvk/wCvcjU7aeaqMQofYIYz/NxX+I9zeE+PbV/8J/8NX/kOsJxn1xLUgt7sFdIdMJNsjWAiiZXZIB2EBoBzknNYOy77Y5jgsgZvp8/vqGb5pt5LasF4Lw5sH418Hp01VixjmU00cQKLwABVYt1A==
+   eJztmL0OgjAQx1EnlvICrgYHFl/BBPUhnI2Diy+li4tvBC4u+g5yscSGVNoeqUflfkmTg9KP/31AQxQxDMOYeY6pd0DPYkK9Azog/scB6weuHvQvLeY8iSg6C7cxWLJYb6vXq5G/9ak5xHpbd92GrY8wsfQZ/4vUuBMfu9mXS223pH0uU38X5sL8jCuqX5s1h8FG/x6xRlv8YU2M3/M/rmlbfNaVb2ZVHt2rVsrYF0oOpNX9TcDaXIDcLzX5v7bI75Djz3THFP9porepgVovNHlffqkFLNtEb1NT6wQfpPI9CK32S9GjvTJhw+ckN2y+u7+chwLImaGcv1RC0+yjtvl9wTBvHoh/HZgxfSVDnEMxYxjGhhc7bStz
   </data>
  </layer>
  <objectgroup id="6" name="animatedObjects0">
@@ -640,17 +640,7 @@ path: NSTOP</property>
     <property name="ColliderComponent" value=""/>
    </properties>
   </object>
-  <object id="302" x="800" y="208" width="96" height="32">
-   <properties>
-    <property name="ColliderComponent" value=""/>
-   </properties>
-  </object>
-  <object id="303" x="912" y="208" width="32" height="32">
-   <properties>
-    <property name="ColliderComponent" value=""/>
-   </properties>
-  </object>
-  <object id="304" x="800" y="272" width="144" height="32">
+  <object id="304" x="800" y="272" width="48" height="32">
    <properties>
     <property name="ColliderComponent" value=""/>
    </properties>
@@ -753,6 +743,28 @@ path: NSTOP</property>
   <object id="427" x="192" y="256" width="64" height="32">
    <properties>
     <property name="ColliderComponent" value=""/>
+   </properties>
+  </object>
+  <object id="458" x="896" y="272" width="48" height="32">
+   <properties>
+    <property name="ColliderComponent" value=""/>
+   </properties>
+  </object>
+  <object id="464" x="192" y="288" width="16" height="16">
+   <properties>
+    <property name="ColliderComponent" value=""/>
+   </properties>
+  </object>
+  <object id="465" x="240" y="288" width="16" height="16">
+   <properties>
+    <property name="ColliderComponent" value=""/>
+   </properties>
+  </object>
+  <object id="466" x="208" y="288" width="32" height="16">
+   <properties>
+    <property name="BoxTrigger2DComponent" value="triggerID: 0"/>
+    <property name="ChangeLayerTriggerCallbackComponent" value="triggerID: 0, fromNorth: -1, fromSouth: 1"/>
+    <property name="ColliderComponent" value="isTrigger: true"/>
    </properties>
   </object>
  </objectgroup>
@@ -879,59 +891,9 @@ path: NSTOP</property>
     <property name="ConversationComponent" value="enabled: true, name: sign_25_2_title, text: sign_25_2_text"/>
    </properties>
   </object>
-  <object id="308" name="object" type="objectDescription" x="800" y="224" width="16" height="16">
-   <properties>
-    <property name="ConversationComponent" value="enabled: true, name: object_25_1_title, text: object_25_1_text"/>
-   </properties>
-  </object>
-  <object id="309" name="object" type="objectDescription" x="800" y="208" width="16" height="16">
-   <properties>
-    <property name="ConversationComponent" value="enabled: true, name: object_25_1_title, text: object_25_1_text"/>
-   </properties>
-  </object>
-  <object id="310" name="object" type="objectDescription" x="816" y="224" width="16" height="16">
-   <properties>
-    <property name="ConversationComponent" value="enabled: true, name: object_25_1_title, text: object_25_1_text"/>
-   </properties>
-  </object>
-  <object id="311" name="object" type="objectDescription" x="832" y="224" width="16" height="16">
-   <properties>
-    <property name="ConversationComponent" value="enabled: true, name: object_25_1_title, text: object_25_2_text"/>
-   </properties>
-  </object>
   <object id="312" name="object" type="objectDescription" x="848" y="224" width="16" height="16">
    <properties>
     <property name="ConversationComponent" value="enabled: true, name: object_25_3_title, text: object_25_4_text"/>
-   </properties>
-  </object>
-  <object id="316" name="object" type="objectDescription" x="912" y="208" width="16" height="16">
-   <properties>
-    <property name="ConversationComponent" value="enabled: true, name: object_25_1_title, text: object_25_1_text"/>
-   </properties>
-  </object>
-  <object id="317" name="object" type="objectDescription" x="912" y="224" width="16" height="16">
-   <properties>
-    <property name="ConversationComponent" value="enabled: true, name: object_25_1_title, text: object_25_1_text"/>
-   </properties>
-  </object>
-  <object id="318" name="object" type="objectDescription" x="928" y="224" width="16" height="16">
-   <properties>
-    <property name="ConversationComponent" value="enabled: true, name: object_25_1_title, text: object_25_2_text"/>
-   </properties>
-  </object>
-  <object id="319" name="object" type="objectDescription" x="848" y="272" width="16" height="16">
-   <properties>
-    <property name="ConversationComponent" value="enabled: true, name: object_25_1_title, text: object_25_1_text"/>
-   </properties>
-  </object>
-  <object id="320" name="object" type="objectDescription" x="864" y="272" width="16" height="16">
-   <properties>
-    <property name="ConversationComponent" value="enabled: true, name: object_25_1_title, text: object_25_1_text"/>
-   </properties>
-  </object>
-  <object id="321" name="object" type="objectDescription" x="880" y="272" width="16" height="16">
-   <properties>
-    <property name="ConversationComponent" value="enabled: true, name: object_25_1_title, text: object_25_1_text"/>
    </properties>
   </object>
   <object id="322" name="object" type="objectDescription" x="864" y="224" width="16" height="16">
@@ -941,6 +903,7 @@ path: NSTOP</property>
   </object>
   <object id="323" name="object" type="objectDescription" x="880" y="224" width="16" height="16">
    <properties>
+    <property name="ColliderComponent" value=""/>
     <property name="ConversationComponent" value="enabled: true, name: object_25_3_title, text: object_25_3_text"/>
    </properties>
   </object>
@@ -1034,6 +997,76 @@ path: NSTOP</property>
   <object id="426" name="object" type="objectDescription" x="576" y="256" width="16" height="16">
    <properties>
     <property name="ConversationComponent" value="enabled: true, name: object_25_7_title, text: object_25_7_text"/>
+   </properties>
+  </object>
+  <object id="445" name="blueBook" gid="3622" x="800" y="224" width="16" height="16">
+   <properties>
+    <property name="ColliderComponent" value=""/>
+    <property name="ConversationComponent" value="enabled: true, name: object_25_1_title, text: object_25_1_text"/>
+    <property name="SpriteComponent" value=""/>
+   </properties>
+  </object>
+  <object id="452" name="redBook" gid="3623" x="832" y="240" width="16" height="16">
+   <properties>
+    <property name="ColliderComponent" value=""/>
+    <property name="ConversationComponent" value="enabled: true, name: object_25_1_title, text: object_25_1_text"/>
+    <property name="SpriteComponent" value=""/>
+   </properties>
+  </object>
+  <object id="453" name="greenBook" gid="3815" x="816" y="240" width="16" height="16">
+   <properties>
+    <property name="ColliderComponent" value=""/>
+    <property name="ConversationComponent" value="enabled: true, name: object_25_1_title, text: object_25_1_text"/>
+    <property name="SpriteComponent" value=""/>
+   </properties>
+  </object>
+  <object id="454" name="yelloBook" gid="3621" x="800" y="240" width="16" height="16">
+   <properties>
+    <property name="ColliderComponent" value=""/>
+    <property name="ConversationComponent" value="enabled: true, name: object_25_1_title, text: object_25_1_text"/>
+    <property name="SpriteComponent" value=""/>
+   </properties>
+  </object>
+  <object id="455" name="yelloBook" gid="3621" x="912" y="224" width="16" height="16">
+   <properties>
+    <property name="ColliderComponent" value=""/>
+    <property name="ConversationComponent" value="enabled: true, name: object_25_1_title, text: object_25_1_text"/>
+    <property name="SpriteComponent" value=""/>
+   </properties>
+  </object>
+  <object id="456" name="blueBook" gid="3622" x="912" y="240" width="16" height="16">
+   <properties>
+    <property name="ColliderComponent" value=""/>
+    <property name="ConversationComponent" value="enabled: true, name: object_25_1_title, text: object_25_1_text"/>
+    <property name="SpriteComponent" value=""/>
+   </properties>
+  </object>
+  <object id="457" name="openBook" gid="3879" x="928" y="240" width="16" height="16">
+   <properties>
+    <property name="ColliderComponent" value=""/>
+    <property name="ConversationComponent" value="enabled: true, name: object_25_1_title, text: object_25_2_text"/>
+    <property name="SpriteComponent" value=""/>
+   </properties>
+  </object>
+  <object id="459" name="blueBook" gid="3622" x="848" y="288" width="16" height="16">
+   <properties>
+    <property name="ColliderComponent" value=""/>
+    <property name="ConversationComponent" value="enabled: true, name: object_25_1_title, text: object_25_1_text"/>
+    <property name="SpriteComponent" value=""/>
+   </properties>
+  </object>
+  <object id="460" name="yelloBook" gid="3621" x="864" y="288" width="16" height="16">
+   <properties>
+    <property name="ColliderComponent" value=""/>
+    <property name="ConversationComponent" value="enabled: true, name: object_25_1_title, text: object_25_1_text"/>
+    <property name="SpriteComponent" value=""/>
+   </properties>
+  </object>
+  <object id="461" name="greenBook" gid="3815" x="880" y="288" width="16" height="16">
+   <properties>
+    <property name="ColliderComponent" value=""/>
+    <property name="ConversationComponent" value="enabled: true, name: object_25_1_title, text: object_25_1_text"/>
+    <property name="SpriteComponent" value=""/>
    </properties>
   </object>
  </objectgroup>

@@ -23,7 +23,6 @@ class TileWiseMovementComponent() : LimbusBehaviour()
     private var nextX = 0
     private var nextY = 0
 
-    private var defaultSpeed = Constant.WALKING_SPEED_PLAYER
     var speed : Int = Constant.WALKING_SPEED_PLAYER
         set(value)
         {
@@ -35,6 +34,7 @@ class TileWiseMovementComponent() : LimbusBehaviour()
                 else -> 10 - speed
             }
         }
+    private var defaultSpeed = speed
 
     private val newFrameEveryXPixels = 6
     private var stepsSinceLastFrameUpdate = 0
@@ -200,6 +200,7 @@ class TileWiseMovementComponent() : LimbusBehaviour()
                         {
                             val slidingComponent = otherGameObject.get<SlidingComponent>()
                             slidingComponent?.push(Compass4.translate(inputComponent.direction))
+                            defaultSpeed = speed
                             speed = otherMovementComponent.speed
                         }
                     }

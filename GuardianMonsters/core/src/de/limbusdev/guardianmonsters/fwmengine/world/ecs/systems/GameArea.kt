@@ -99,11 +99,16 @@ class GameArea(val areaID: Int, startPosID: Int)
 
         for(collidingObject in CoreSL.world.getAllWith("ColliderComponent"))
         {
-            val collider = collidingObject.get<ColliderComponent>()
+            val transform = collidingObject.transform
+            shape.color = Color.ORANGE
+            shape.rect(transform.xf, transform.yf, transform.widthf, transform.heightf)
+
+            shape.color = Color.WHITE
+            val collider = collidingObject.get<ColliderComponent>()?.asRectangle
 
             if (collider != null)
             {
-                shape.rect(collidingObject.transform.xf, collidingObject.transform.yf, collider.width.f(), collider.height.f())
+                shape.rect(collider.xf, collider.yf, collider.widthf, collider.heightf)
             }
         }
 

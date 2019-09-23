@@ -4,18 +4,14 @@ import com.badlogic.ashley.core.Engine
 import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.InputProcessor
 import com.badlogic.gdx.graphics.OrthographicCamera
-import com.badlogic.gdx.graphics.g2d.Batch
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.utils.viewport.Viewport
 
-import de.limbusdev.guardianmonsters.Constant
 import de.limbusdev.guardianmonsters.CoreSL
 import de.limbusdev.guardianmonsters.battle.BattleScreen
 import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.CameraComponent
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.InventoryComponent
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.entities.HeroEntity
-import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.DebuggingSystem
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.GameArea
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.SpriteSystem
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.HUD
@@ -103,11 +99,6 @@ class EntityComponentSystem
         // GameSaveManager
         saveGameManager.addedToEngine(engine)
         engine.addSystem(saveGameManager)
-
-        // Debugging
-        val debuggingSystem = DebuggingSystem()
-        debuggingSystem.addedToEngine(engine)
-        engine.addSystem(debuggingSystem)
     }
 
     fun deleteGameAreasEntities()
@@ -125,16 +116,6 @@ class EntityComponentSystem
         engine.update(delta)
         hud.update(delta)
         gameArea.update(delta)
-    }
-
-    /**
-     * Render ECS stuff like debugger and so on
-     * @param batch
-     * @param shape
-     */
-    fun render(batch: Batch, shape: ShapeRenderer)
-    {
-        if (Constant.DEBUGGING_ON) engine.getSystem(DebuggingSystem::class.java).render(shape)
     }
 
     /**

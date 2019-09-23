@@ -84,7 +84,6 @@ class WorldScreen(mapID: Int, startPosID: Int, fromSave: Boolean) : Screen
         // ............................................................................... RENDERING
         // Tiled Map
         gameArea.render(camera)
-        CoreSL.ecs.render(batch, shpRend)
         if (Constant.DEBUGGING_ON) gameArea.renderDebugging(shpRend)
 
         CoreSL.ecs.draw()

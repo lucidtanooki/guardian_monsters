@@ -1,6 +1,5 @@
 package de.limbusdev.guardianmonsters.fwmengine.world.ui
 
-import com.badlogic.ashley.core.Engine
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.InputAdapter
 import com.badlogic.gdx.InputProcessor
@@ -35,8 +34,8 @@ import ktx.actors.then
 
 
 /**
- * HUD creates a UI which is displayed on top of the level screen, when not in battle.
- * It includes the main menu (save, quit, monsters, ...), controls (dpad, A, B) and text display.
+ * HUD creates a UI which is displayed on top of the world screen, when not in battle.
+ * It includes the main menu (save, quit, inventory, ...), controls (dpad, A, B) and text display.
  *
  * @author Georg Eckert 2017
  */
@@ -58,11 +57,9 @@ class HUD
     private val blackCurtain            : Image
     private var mainMenuButton          : Button
     private var menuButtons             : VerticalGroup
-
     val         inputProcessor          : InputProcessor get() = stage
 
     private var dpadTouchDownStart      : Long = 0
-
     private var currentlyShownHUDWidget = HUDWidgets.NONE
 
     private var interactionGameObject   : LimbusGameObject? = null
@@ -112,6 +109,8 @@ class HUD
         blackCurtain.addAction(showActor() then fadeIn(1f))
     }
 
+    fun draw() = stage.draw()
+
     // ......................................................................... Constructor Helpers
     /** Creates main menu buttons and the dpad */
     private fun setUpTopLevelButtons() : VerticalGroup
@@ -154,8 +153,6 @@ class HUD
 
         return menuButtons
     }
-
-    fun draw() = stage.draw()
 
 
     // --------------------------------------------------------------------------------------------- Interaction

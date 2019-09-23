@@ -17,6 +17,7 @@ import com.badlogic.gdx.utils.Sort
 import de.limbusdev.guardianmonsters.CoreSL
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.CharacterSpriteComponent
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.GameObjectZComparator
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.SpriteComponent
 
 import de.limbusdev.guardianmonsters.scene2d.SpriteZComparator
 import de.limbusdev.guardianmonsters.services.Services
@@ -99,10 +100,28 @@ class ExtendedTiledMapRenderer(map: TiledMap) : OrthogonalTiledMapRenderer(map, 
             }
         }
 
+        renderSprites()
+
         // Render Weather Effects
         weatherAnimator.render(batch, elapsedTime)
 
         endRender()
+    }
+
+    private fun renderSprites()
+    {
+        // Get all CharacterSpriteComponents
+        val gameObjects = CoreSL.world.getAllWith("SpriteComponent").toTypedArray()
+        Sort.instance().sort(gameObjects, GameObjectZComparator)
+
+        gameObjects.forEach {
+
+            val spriteComponent = it.get<SpriteComponent>() ?: return
+            if(it.enabled && spriteComponent.enabled)
+            {
+                batch.draw(spriteComponent.sprite, it.transform.xf, it.transform.yf)
+            }
+        }
     }
 
     private fun renderPeople()

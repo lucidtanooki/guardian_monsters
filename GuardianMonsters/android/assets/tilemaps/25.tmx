@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-down" width="64" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="20" nextobjectid="474">
+<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-down" width="64" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="20" nextobjectid="479">
  <properties>
   <property name="musicIndex" type="int" value="2"/>
   <property name="musicType" value="town"/>
@@ -20,17 +20,17 @@
  </layer>
  <layer id="3" name="shadows1" width="64" height="32">
   <data encoding="base64" compression="zlib">
-   eJzt11EKgCAQRVHLTbatVhaE7SeG6DeK3oij94D0oUzzBKVSAgDgnXXWrIkqWn51L8r8NfaJ/PXr9ZxfafT8QGSL09naJ5+6aiVInyp2l275eto4nPJ71v7L8gMAxtLSf91Xip5azn9/kzzNK96hXKdEfv/8APpxAuX7HN4=
+   eJzt10EKgCAQhWG1S3atThZE3SckgtxEwRvR8f8gZqGM81pEhgAAwDdL0uzpVW/51bMo89d4T+Sv389zfqXR8wM9m1NZVbao7Wdlj2X1Ln9L1+mqz+cQ57foqZLzAwDG0tK97i/FTC3nv/9F3tYVZyj3KZHfPj8AP07EXB8z
   </data>
  </layer>
  <layer id="4" name="walls1" width="64" height="32">
   <data encoding="base64" compression="zlib">
-   eJztmVtu1DAYhT3pZUaVyip4oFS005YHNkDbXVCkSgXKHbYAnV0AEqK80BuLaBcyqriocysS8Maxkmgyfxz7d2w3U9QjfUom8fj38UkiWV6bFGIVrFV0bAAXvalw7D6O647+73oay1uwU8GxDQ/Xo6GfG5Ha5+co3+40yd+2JvV+DLbR14/axSP9b2Z8PcB5WzEH36J8u9MSY5Y+T8gc1Kfi6zejUagOJ4RoTubbuTKfqTVHfhddnytZS/psTI3m30ryfxQNUUn6F6RdZ1qILuiBPhiA8+nRNia2M/U2MZYtxTeBXn9I+vhTz6OsJfLfzPXEv0lp/oPMeBdQZxE0wRJYBiv1/H+L5onqI/rfVfgvui77VXlPoZI+6TezxfSf6ih5Dp6g/6fgGXgOXoCX4BV4TWpz58lWOu+qOTDl/2UizllH6l9qD/3vgwNwCI7AV1LTZp5sJPu904g5r8fQc0m2hil/lf89sA8OiP8z9NsBXdADfTBIav8ivjjzVEayXxNZmfI/g7c+oQO6oJf8HiT+b2FuF8AiaIIlsAxWwO3GsKbNPNmoqF9dDR/vv6248+SrX10Nl+///6Aq8i+jHTyzLQ/fB6rLkv8xvJ8E8n8Z8g+lccw/+6zfmxViA9yfDVPLNf+/M0I8vhaf/57xM6bss/4Ovt+DDwH9u+af+g+tT6iz67nW1fs/fu//Reoqf17+3PU6t51PmWrq7nPz567XQ63rdTLV1N3n5M9dr4da1+tkqmm6z82fu14Pta7XyVRTd5+TP3e9Hmpdr5Oppuk+J3/uet12Xd8WbnsdnJqm+0X5f6+VisNK0r/LXocP/ayp8y+7nzDOex1F9VV7pnQ/IRQ+9jpc66v2QKuQ7V6HD60S7/8ApYDXqA==
+   eJztmVtOGzEYhZ3hkqgSrKIPhaoQblI3UGAXpRJSKdB7t1DILtpKVelLuXURsJAItUXkBg/0rcfKRJn847F/j20mVBzpU5Kx4zPH/4wlyyujQiyDlYI+K8BFHwu8dx+fq475n3i6lx2wW8BnHRnuR/08DyJ1zu9Rut9ZXH9bT5r9BGxhrD+lm0fmX0/k2sD3umIOfkXpfmc57lnmPCVzUB7rXp+OBqE6GhGiOpru58rDhNcU+Z11fSqnl8xZGRusfy2u/2bURyWZX5B+jXEhmqAF2qADLscH+5jYSvit416eK9YEev0FGeO6nEbpJdJr5mqc36Re/TuJ+52BzyyogjkwDxbK6f9mzRPVV4y/p8ifdV2Oq8reg0rmpGtmjZm/p+P4OXiJ8V+B1+ANeAvegffgA/HmzpOtdNlVc2Cq/4+Rbp119PJL7WP8A3AIjsAx+Ek8bebJRnLcx5Uul+Uu9Lsk6WGqvyr/PjgAhyT/BcZtgCZogTboxN5XJBdnnvJIjmsiKVP9L5CtTWiAJmjFvztx/keY2xkwC6pgDsyDBbBY6XvazJONssbVefh4/23FnSdf4+o8XNb//0FF1D+PdvHM1jysD1S3pf4nyH4aKP9tqH8oDWP9k8/60wkh1sCziTBervX/e0+I7cnBa0sOa7hU8ln/hNyfwZeA+V3rT/OH0jf47Hn2unv/h+/9v0nd1Z9Xf+5+ndvPp0yeunZu/bn79VD7ep1Mnrp2Tv25+/VQ+3qdTJ6mdm79ufv1UPt6nUyeunZO/bn79VD7ep1MnqZ2Tv25+3XbfX1duJ11cDxN7Vn1/13KVQ4ryfwuZx0+dF5S1z/vecIwn3Vk+avOTOl5Qih8nHW4+qvOQIuQ7VmHDy2T7P8AVOXW5A==
   </data>
  </layer>
  <layer id="5" name="objects1" width="64" height="32">
   <data encoding="base64" compression="zlib">
-   eJztmLsOgjAUhqtOLOUFWA0OLL6CiZeHYDYOLr6ULi6+Ebi46DvIiSU0pNL2kFoq50ualksv/7mUBsYIgiD0vKa+V+Cf5cz3CvwB/j+NWD9wc6B/ZTDmmTN24XZ9sGSRui1fbybu5vfNMVK3VdddmNoI40uX/r8KjXvetNvP1kLbPe4eS/e8Dwuuf8cW2a7tnMNgov+AmKPL/zAnxu7rP85pU1zmlWvmVRw9qlIK3xdSDKTV/V3A2myA2C8V8b81iO+Q/U/0R+f/JG7qxOG3zRbI9UIR9+WXXMCSx02dD0h/rRNskIp9EEptl2JAayXChs5Jdph8d385jg8gZsZy/pIJTbOL3Kb9giA+PBH/OjB9hkqGOIdi+hCECW959ywJ
+   eJztmD0OgjAUx1EnlnIBV4MDi1cwQT2Es3Fw8VK6uHgjcHHRO8iLJRZSaftIbSvvlzS0QD/+76M0RBFBEISa59j1CtyzmLhegTvA/8cB6weuFvQvNcY8sSg6M7M+WLJYXhfbq5G9+V1ziOV1WbsLXRthfGnT/xeuccc+9faznGu7Jd1jqZ73Yc7U75gi2rWdcxh09O8Rc3T5H+bE2D3/45zWxWZe2WZWxdG9KiX3fSHEQFrd3wSszQSI/VIS/2uN+A7Z/0R/VP6fJs2rL0CuF5K4L7/kApZt0rz6Qq0TbJDyfRBKbZfCs/US4ULnJDN0vru/HMcFEDNDOX+JhKbZRm7TfkEQbx6Ifx2YPr6SIc6hmD4EocMLPcUrcw==
   </data>
  </layer>
  <objectgroup id="6" name="animatedObjects0">
@@ -331,7 +331,7 @@ path: NSTOP</property>
  </layer>
  <layer id="9" name="tops1" width="64" height="32">
   <data encoding="base64" compression="zlib">
-   eJztmbtOwzAYhZ1LSZd2hwWQQLB0QfAAIBX6IsDEgtoHgImHYORWKiSKijqDxOUVKDNCbVc6sHFQY9UpceImNnEgn3RkJ7Xs//h3bjUhyVI3CblkVDdQctQwvG0b5u/GWrKG5Yolr88uPPQYdeGxx1Hf8LbtS/QfNO9Ue/DdhPat8LaioizCyxK0DJ1Ap9CZq3PoAlowR+0ok47XMH56P7JH9VV4W+Oo5PqXmX/KNjztMr7emDjfDX67KORs73GFOa7CW40jNv9ppmzzfwvyrzL/ulDF3NQ4SjL/O0Ws+2J4u4ETb5wWfN5y1NQw79eOVzdMvR1hLj7gc8DROFcB/bdi5iEqn3n/epJEmacDnD8MmUO/fttu7mk9aAwRRK45Fdwh5vsIcbPXf9x7QZIYWLumJutXNX5rfR3eNyT7z2t4//4m6lr/K6Rprb8gT8euOpJyxq712QIhc9B8QU7fsplGnK/OUDMpyVlaEX3nzcjIyNAdXd+/VPIfPacd0e/1Sb/rZex1hI2p438yFF32OvwQ2f9I216H6P4HhZcLWaJE3euQGQPLE+7Rj5ba8jnmc+BBckzjTNmEOLa6Mh+w5yJCTmIsfmzi/JatrqxwxhWlLDEWli/1dxlw
+   eJztmbtOwzAUhp1LSZd2hwWQQLB0QfAAIBX6IsDEgtoHgIlXQGLkViokioo6g8TlFQozQm1XOrDxI2LVKXHiJjZxIJ/0y05rxef3cdKkh5BkqZuEXDCqG2g5ahjesQ3zd2MtWd/tkiXvnF146DHqwmOPo77hHduX6D9o3al24LsJ7VrhY0VFmYeXBWgROoZOoFNXZ9A5NGcOx1HGna9h/PR+YA/7y/C2wlHJ9S8z/5RNeNpmfL0ycb4Z/HFRyNne4wpzXIW3Gkds/tNM2eZ/F+RfZf51oYq1qXGUZP63itj3xfBxAyfePC34vOGoqWHerxyvrpl+O8JavMPngKNRLgPO34qZh6h85P37SRJlnfbw+X7IGvqdt+3mnvaD5hBB5JpTwS1ivosQN3v9x70XJImBvWtqsn9V47fXV+F9TbL/vIb37y+i7vW/Qpr2egd5OnJ16Oo5Zu7YvT5dIGQGmi3Ej1UFk4jzxfFqKiW5Sxuiz7wZGRkZuqPr85dK/qPntCP6vj7ue72MWkfYnDr+J0PRpdbhh0j9I221DtH6B4WXC1miRK11yIyB5RH36AdLbfsU83fgXnJMo0zYhDi2ujYfUHMRIScxFj/W8fmGra6tcOYVpSwxFpZPtSocdA==
   </data>
  </layer>
  <layer id="10" name="tops2" width="64" height="32">
@@ -740,7 +740,7 @@ path: NSTOP</property>
     <property name="ColliderComponent" value=""/>
    </properties>
   </object>
-  <object id="427" x="192" y="256" width="64" height="32">
+  <object id="427" x="192" y="256" width="16" height="32">
    <properties>
     <property name="ColliderComponent" value=""/>
    </properties>
@@ -755,7 +755,7 @@ path: NSTOP</property>
     <property name="ColliderComponent" value=""/>
    </properties>
   </object>
-  <object id="465" x="224" y="288" width="32" height="16">
+  <object id="465" x="224" y="288" width="16" height="16">
    <properties>
     <property name="ColliderComponent" value=""/>
    </properties>
@@ -765,6 +765,21 @@ path: NSTOP</property>
     <property name="BoxTrigger2DComponent" value="triggerID: 0"/>
     <property name="ChangeLayerTriggerCallbackComponent" value="triggerID: 0, fromNorth: -1, fromSouth: 1, fromWest: 0, fromEast: 0"/>
     <property name="ColliderComponent" value="isTrigger: true"/>
+   </properties>
+  </object>
+  <object id="474" x="208" y="256" width="16" height="16">
+   <properties>
+    <property name="ColliderComponent" value=""/>
+   </properties>
+  </object>
+  <object id="475" x="224" y="256" width="16" height="32">
+   <properties>
+    <property name="ColliderComponent" value=""/>
+   </properties>
+  </object>
+  <object id="476" x="272" y="256" width="16" height="32">
+   <properties>
+    <property name="ColliderComponent" value=""/>
    </properties>
   </object>
  </objectgroup>
@@ -1072,11 +1087,41 @@ path: NSTOP</property>
  </objectgroup>
  <objectgroup id="19" name="people1"/>
  <objectgroup id="18" name="colliderWalls1">
-  <object id="469" x="176" y="240" width="16" height="32"/>
-  <object id="470" x="256" y="240" width="16" height="32"/>
-  <object id="471" x="176" y="224" width="96" height="16"/>
-  <object id="472" x="176" y="272" width="32" height="16"/>
-  <object id="473" x="224" y="272" width="48" height="16"/>
+  <object id="469" x="176" y="240" width="16" height="32">
+   <properties>
+    <property name="ColliderComponent" value=""/>
+   </properties>
+  </object>
+  <object id="470" x="288" y="240" width="16" height="32">
+   <properties>
+    <property name="ColliderComponent" value=""/>
+   </properties>
+  </object>
+  <object id="471" x="176" y="224" width="128" height="16">
+   <properties>
+    <property name="ColliderComponent" value=""/>
+   </properties>
+  </object>
+  <object id="472" x="176" y="272" width="32" height="16">
+   <properties>
+    <property name="ColliderComponent" value=""/>
+   </properties>
+  </object>
+  <object id="473" x="224" y="272" width="80" height="16">
+   <properties>
+    <property name="ColliderComponent" value=""/>
+   </properties>
+  </object>
+  <object id="477" x="192" y="288" width="16" height="16">
+   <properties>
+    <property name="ColliderComponent" value=""/>
+   </properties>
+  </object>
+  <object id="478" x="224" y="288" width="16" height="16">
+   <properties>
+    <property name="ColliderComponent" value=""/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup id="14" name="animatedObjects1"/>
 </map>

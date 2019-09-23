@@ -31,6 +31,8 @@ class SlidingComponent : LimbusBehaviour()
 
     fun push(direction: Compass4)
     {
+        // TODO when pushing against blocked way, character speed is not reset correctly
+
         inputComponent.direction = direction.toSkyDirection()
     }
 

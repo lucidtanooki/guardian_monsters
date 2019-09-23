@@ -154,7 +154,7 @@
     <property name="ConversationComponent" value="enabled: true, name: sign_25_4_title, text: sign_25_4_text"/>
    </properties>
   </object>
-  <object id="444" name="rock" gid="1166" x="48" y="336" width="16" height="16">
+  <object id="444" name="rock" gid="1166" x="400" y="320" width="16" height="16">
    <properties>
     <property name="ColliderComponent" value=""/>
     <property name="ConversationComponent" value="enabled: true, name: object_25_8_title, text: object_25_8_text"/>

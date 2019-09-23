@@ -2,6 +2,7 @@ package de.limbusdev.guardianmonsters.fwmengine.world.ecs.components
 
 import de.limbusdev.guardianmonsters.Constant
 import de.limbusdev.guardianmonsters.CoreSL
+import de.limbusdev.guardianmonsters.enums.Compass4
 import de.limbusdev.guardianmonsters.enums.SkyDirection
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusBehaviour
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusGameObject
@@ -22,6 +23,7 @@ class TileWiseMovementComponent() : LimbusBehaviour()
     private var nextX = 0
     private var nextY = 0
 
+    private var defaultSpeed = Constant.WALKING_SPEED_PLAYER
     var speed : Int = Constant.WALKING_SPEED_PLAYER
         set(value)
         {
@@ -68,6 +70,8 @@ class TileWiseMovementComponent() : LimbusBehaviour()
         if(inputComponent != null) { this.inputComponent = inputComponent }
         val characterSpriteComponent = gameObject?.get<CharacterSpriteComponent>()
         if(characterSpriteComponent != null) { this.characterSpriteComponent = characterSpriteComponent }
+
+        defaultSpeed = speed
     }
 
     override fun update60fps()
@@ -105,7 +109,7 @@ class TileWiseMovementComponent() : LimbusBehaviour()
         if(inputComponent.direction.isStop()) { return false }
 
         // Check if next tile is empty
-        val nextPosition = calculateNextPosition(inputComponent.direction)
+        val nextPosition = calculateAndSetNextPosition(inputComponent.direction)
         val isBlocked = isNextPositionBlocked(nextPosition)
         if(isBlocked) { return false }
 
@@ -163,6 +167,9 @@ class TileWiseMovementComponent() : LimbusBehaviour()
             {
                 characterSpriteComponent.sprite.changeState(inputComponent.talkDirection.nostop())
             }
+
+            // Reset Speed, if it was changed by anything
+            speed = defaultSpeed
         }
 
         framesSinceLastPixelStep = 0
@@ -186,6 +193,17 @@ class TileWiseMovementComponent() : LimbusBehaviour()
                 val nextPos = nextPosition.offset(Constant.TILE_SIZE / 2)
                 if (otherCollider?.blocks(nextPos) == true)
                 {
+                    if(otherGameObject.has<SlidingComponent>() && otherGameObject.has<TileWiseMovementComponent>())
+                    {
+                        val otherMovementComponent= otherGameObject.get<TileWiseMovementComponent>()
+                        if(otherMovementComponent?.moving == false)
+                        {
+                            val slidingComponent = otherGameObject.get<SlidingComponent>()
+                            slidingComponent?.push(Compass4.translate(inputComponent.direction))
+                            speed = otherMovementComponent.speed
+                        }
+                    }
+
                     return true
                 }
             }
@@ -194,7 +212,7 @@ class TileWiseMovementComponent() : LimbusBehaviour()
         return false
     }
 
-    private fun calculateNextPosition(direction: SkyDirection) : IntVec2
+    private fun calculateAndSetNextPosition(direction: SkyDirection) : IntVec2
     {
         // Define potential next position according to the input direction
         when (direction)

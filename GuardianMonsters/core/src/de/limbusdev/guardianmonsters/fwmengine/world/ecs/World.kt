@@ -33,6 +33,7 @@ class World
         componentParsers[InputComponent::class] = InputComponentParser
         componentParsers[TileWiseMovementComponent::class] = TileWiseMovementComponentParser
         componentParsers[SpriteComponent::class] = SpriteComponentParser
+        componentParsers[SlidingComponent::class] = SlidingComponent.Parser
     }
 
     fun start() { isStopped = false }

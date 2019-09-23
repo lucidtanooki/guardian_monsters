@@ -14,6 +14,7 @@ import com.badlogic.gdx.math.MathUtils
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ArrayMap
 import com.badlogic.gdx.utils.Sort
+import de.limbusdev.guardianmonsters.Constant
 import de.limbusdev.guardianmonsters.CoreSL
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.CharacterSpriteComponent
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.GameObjectZComparator

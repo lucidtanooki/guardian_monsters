@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="76">
+<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="101">
  <properties>
   <property name="musicIndex" type="int" value="2"/>
   <property name="musicType" value="town"/>
@@ -18,7 +18,7 @@
  </layer>
  <layer id="2" name="walls1" width="32" height="32">
   <data encoding="base64" compression="zlib">
-   eJztV+FOwjAYrOLGgCkmPBEg0/hWoBv+UOMrKdvwsbxFLmk+nGu/LRmJXnI5mtJer/vapPuJMSW4d9BPcDk05gZcgQlIFB7z2DqMjQljN43AB3g+gimYWf4p5srAraf6rPeU8wce89h6CyaOegfu4JmDBVha/iuPeSp9HxvzAW7xO4vd9KnKHyE/mIJZZH3/hvFn2OvzyXGb63DF8uBdrSGJmv9PSB+2uQ5X1OVvgvT5z/97/jlqZFHVO/pysABLcAfPHCzA0sN/Dq+F5d+Ufw3vDThA3wUYgCE4GKENBmA4cvdfY+ymg+9PcF+00H5/gvuiRdv8rA8tWA/a/KwPLVgP2vxdQZu/K/SVX9Y/60neO77nTN5XUtkv65/1JO+dunNWt2/yvpLK/rbnv27c+NJv/E85rmff+nzQt9nx+Lr8rv6nnP9F5H39Y/mvRN6pR/77nvP7jtfef23vzb7z8w3GdWiV0L7/mEOrhPb99wXhBc5U
+   eJzlV1FOwkAQHYWWQouacKJWwcRbgbTlQ41XUtriCfQ6PqIT67TLdreFmviSl0dZZmffdnbC7nyiAtxpdAMy3qdEH1OqQH4fN5h3FBC5gV7f/Go+HXLEpGByQHXrK6sp0g79l3U9quZyLObZ6y24MNSsJv/ccJ6XCdErmOJzEjTTDXjvEUVjohBMvJ/8sSb+DHt97lefeR3HhszDz7yOY0PmsfV/jT2/AefgwtP/ntGV//37X4Ox9/v962DqP0SNROAWYxmYgwW4Rc4MzMHCIH+IXFEpv87/ErlX4ABjQ9ABXXCAuh+CDuiOm+dfInbVwftn8L7Yom39877Yoq1/rg9bcD3Y+uf6sAXXw6n6nwqn6n8q9OVf1j/Xk+w7pudM9iupPC7rn+tJ9h3VOVPtm+xXUnm87flXxU1q/pceiq/zcTX70odvfZ5V41X+m+b/y/4fhd+nf+b/Qvi9NPB/17N/03jb/te2b/btn+9gvA5bZeQG98iysg9bZdje/z4BHbi4UA==
   </data>
  </layer>
  <layer id="3" name="objects1" width="32" height="32">
@@ -26,7 +26,7 @@
    eJxjYBgFo2AUOPETh8nVP2o/qjpc+skF1LCfEkCp/ZSCgbYfBNiA5rJjwRxUsp+U9EzIjIGynxJAS/uJyefklCtDxf7BDgj5mw0tn9HbfkrBMSEGhnMiDAztQthxnwjx9pNTjyHbhe4ubObSyv5jQphyMHla2g8KX3TwSJJ+9qOHOyFzaWH/ObQw6BdGlceVRqhhPyzeQfFwiAe7+9qR8gi1AT5/YcuPo2B4AAA1JlrI
   </data>
  </layer>
- <objectgroup id="4" name="animatedObjects1" visible="0">
+ <objectgroup id="4" name="animatedObjects1">
   <object id="63" name="animatedObject" x="416" y="192" width="16" height="16">
    <properties>
     <property name="frameDuration" value="0.2"/>
@@ -110,62 +110,185 @@
  </objectgroup>
  <layer id="6" name="tops1" width="32" height="32">
   <data encoding="base64" compression="zlib">
-   eJztld1qwkAUhE+1MfEHLxQfKLZJb2rbV1Kb9LkUjKUX2kfqQDKwHC3ZRN0g+sEwmJ89u5s9o0izeL7Io2/nRP++U59VX2TdL38u6orE3fp1wonIdHJ4/WEg0hqUv5+gdgq1A3x/yIM6Qf35VGWD2tkJ669Lu4f1Qh7U6bmry3PxhJrPUATFDuvzXCxR8xNKoNSoz31pCu5LU3BfTLKhyPaIvofnr2+bG5eiLDeYV9pdwbzS7grmlXZb2F9V+0znlXbeD6GpMS7Pk86dqn2m80o778+hhTEuz5POnWN9Zs6XZEWf6bzS/t94VbH933TNzxnm9DvK/XWc+8f49DGviZla79uNrX9XfP/3Yt37UXNzuRWYx7auiZCFMfRi6Rrmsa1rEoyZQl+WfifnDwReTqE=
+   eJztl+lOwkAUhS+ySSH8gPBALK1/3F7JpfW51FiIP9RH8pL2pJNjzUxDOw2BL7k5hEnvMswcUpF26Q9FekO77rkai0Qa74PyXFiH1s2L5kzGWU/dQPsKirVwVKxDmyTWesno8Dyv2uebQ6/7+SKj3od+TivUXy5EVou/33cmIhcT+/OYt3up+67R170fBPbn6gLzhlozCgptGpwzzOurPs7FWmtsPM4LcC6etOazRqyRGPX5/vkG+9IW2BeTdCqyLYndtP76rr7RFDbfgF+x+gJ+xeoL+BWrK7hfVe8Z+xUr1pcaKyMvzhP7TtV7xn7FivUHjUcjL84T+07ZPTP7BWl+z9ivWP/LVxXX/03ffNbQ088s0+t5pvfzw3MeEzc07+2Jzf+V//53+dzfs/Z6ORXgx67KhPTuZVMGfuyqTEzvXjY9k/ELesBaSA==
   </data>
  </layer>
- <objectgroup id="7" name="colliderWalls1" visible="0">
-  <object id="1" x="0" y="0" width="256" height="96"/>
-  <object id="2" x="288" y="0" width="224" height="96"/>
-  <object id="3" x="192" y="96" width="64" height="64"/>
-  <object id="4" x="96" y="160" width="160" height="32"/>
-  <object id="5" x="224" y="192" width="32" height="64"/>
-  <object id="6" x="304" y="192" width="112" height="16"/>
-  <object id="7" x="416" y="96" width="32" height="96"/>
-  <object id="8" x="288" y="304" width="32" height="16"/>
-  <object id="9" x="32" y="304" width="128" height="32"/>
-  <object id="10" x="320" y="304" width="160" height="32"/>
-  <object id="11" x="320" y="336" width="16" height="96"/>
-  <object id="12" x="224" y="320" width="32" height="160"/>
-  <object id="13" x="288" y="480" width="224" height="32"/>
-  <object id="14" x="0" y="480" width="256" height="32"/>
-  <object id="15" x="0" y="96" width="32" height="384"/>
-  <object id="16" x="480" y="96" width="32" height="160"/>
-  <object id="17" x="480" y="288" width="32" height="192"/>
-  <object id="18" x="80" y="352" width="16" height="16"/>
-  <object id="19" x="112" y="352" width="16" height="16"/>
-  <object id="20" x="144" y="352" width="16" height="16"/>
-  <object id="21" x="160" y="336" width="16" height="16"/>
-  <object id="22" x="80" y="384" width="16" height="16"/>
-  <object id="23" x="32" y="384" width="16" height="16"/>
-  <object id="24" x="64" y="432" width="16" height="16"/>
-  <object id="25" x="80" y="416" width="16" height="16"/>
-  <object id="26" x="112" y="416" width="16" height="16"/>
-  <object id="27" x="144" y="416" width="16" height="16"/>
-  <object id="28" x="144" y="384" width="16" height="16"/>
-  <object id="29" x="80" y="432" width="16" height="16"/>
-  <object id="66" x="416" y="192" width="32" height="16"/>
+ <layer id="10" name="tops2" width="32" height="32">
+  <data encoding="base64" compression="zlib">
+   eJzt0rEJgEAQRNHRQHCtSsHrSwP70sC6HAMLOBAW8T+YcPnJSnXGkKaoPHrR4vbqlT6nv7t9eFtSvxmk1juT+o8u8QduJbE/x7/7AAAAAL7pAiAjBqo=
+  </data>
+ </layer>
+ <objectgroup id="7" name="colliderWalls0" visible="0">
+  <object id="1" x="0" y="0" width="176" height="96">
+   <properties>
+    <property name="ColliderComponent" value=""/>
+   </properties>
+  </object>
+  <object id="2" x="368" y="0" width="144" height="96">
+   <properties>
+    <property name="ColliderComponent" value=""/>
+   </properties>
+  </object>
+  <object id="3" x="192" y="128" width="64" height="32">
+   <properties>
+    <property name="ColliderComponent" value=""/>
+   </properties>
+  </object>
+  <object id="4" x="96" y="160" width="160" height="32">
+   <properties>
+    <property name="ColliderComponent" value=""/>
+   </properties>
+  </object>
+  <object id="5" x="224" y="192" width="32" height="64">
+   <properties>
+    <property name="ColliderComponent" value=""/>
+   </properties>
+  </object>
+  <object id="6" x="304" y="192" width="112" height="16">
+   <properties>
+    <property name="ColliderComponent" value=""/>
+   </properties>
+  </object>
+  <object id="7" x="416" y="96" width="32" height="96">
+   <properties>
+    <property name="ColliderComponent" value=""/>
+   </properties>
+  </object>
+  <object id="8" x="288" y="304" width="32" height="16">
+   <properties>
+    <property name="ColliderComponent" value=""/>
+   </properties>
+  </object>
+  <object id="9" x="32" y="304" width="128" height="32">
+   <properties>
+    <property name="ColliderComponent" value=""/>
+   </properties>
+  </object>
+  <object id="10" x="320" y="304" width="160" height="32">
+   <properties>
+    <property name="ColliderComponent" value=""/>
+   </properties>
+  </object>
+  <object id="11" x="320" y="336" width="16" height="96">
+   <properties>
+    <property name="ColliderComponent" value=""/>
+   </properties>
+  </object>
+  <object id="12" x="224" y="320" width="32" height="160">
+   <properties>
+    <property name="ColliderComponent" value=""/>
+   </properties>
+  </object>
+  <object id="13" x="288" y="480" width="224" height="32">
+   <properties>
+    <property name="ColliderComponent" value=""/>
+   </properties>
+  </object>
+  <object id="14" x="0" y="480" width="256" height="32">
+   <properties>
+    <property name="ColliderComponent" value=""/>
+   </properties>
+  </object>
+  <object id="15" x="0" y="96" width="32" height="384">
+   <properties>
+    <property name="ColliderComponent" value=""/>
+   </properties>
+  </object>
+  <object id="16" x="480" y="96" width="32" height="160">
+   <properties>
+    <property name="ColliderComponent" value=""/>
+   </properties>
+  </object>
+  <object id="17" x="480" y="288" width="32" height="192">
+   <properties>
+    <property name="ColliderComponent" value=""/>
+   </properties>
+  </object>
+  <object id="18" x="80" y="352" width="16" height="16">
+   <properties>
+    <property name="ColliderComponent" value=""/>
+   </properties>
+  </object>
+  <object id="19" x="112" y="352" width="16" height="16">
+   <properties>
+    <property name="ColliderComponent" value=""/>
+   </properties>
+  </object>
+  <object id="20" x="144" y="352" width="16" height="16">
+   <properties>
+    <property name="ColliderComponent" value=""/>
+   </properties>
+  </object>
+  <object id="21" x="160" y="336" width="16" height="16">
+   <properties>
+    <property name="ColliderComponent" value=""/>
+   </properties>
+  </object>
+  <object id="22" x="80" y="384" width="16" height="16">
+   <properties>
+    <property name="ColliderComponent" value=""/>
+   </properties>
+  </object>
+  <object id="23" x="32" y="384" width="16" height="16">
+   <properties>
+    <property name="ColliderComponent" value=""/>
+   </properties>
+  </object>
+  <object id="24" x="64" y="432" width="16" height="16">
+   <properties>
+    <property name="ColliderComponent" value=""/>
+   </properties>
+  </object>
+  <object id="25" x="80" y="416" width="16" height="16">
+   <properties>
+    <property name="ColliderComponent" value=""/>
+   </properties>
+  </object>
+  <object id="26" x="112" y="416" width="16" height="16">
+   <properties>
+    <property name="ColliderComponent" value=""/>
+   </properties>
+  </object>
+  <object id="27" x="144" y="416" width="16" height="16">
+   <properties>
+    <property name="ColliderComponent" value=""/>
+   </properties>
+  </object>
+  <object id="28" x="144" y="384" width="16" height="16">
+   <properties>
+    <property name="ColliderComponent" value=""/>
+   </properties>
+  </object>
+  <object id="29" x="80" y="432" width="16" height="16">
+   <properties>
+    <property name="ColliderComponent" value=""/>
+   </properties>
+  </object>
+  <object id="66" x="416" y="192" width="32" height="16">
+   <properties>
+    <property name="ColliderComponent" value=""/>
+   </properties>
+  </object>
+  <object id="78" x="176" y="48" width="80" height="48">
+   <properties>
+    <property name="ColliderComponent" value=""/>
+   </properties>
+  </object>
+  <object id="79" x="288" y="48" width="80" height="48">
+   <properties>
+    <property name="ColliderComponent" value=""/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup id="8" name="triggers1">
-  <object id="30" name="startField" x="256" y="16" width="16" height="16">
+  <object id="30" name="warpTarget" x="256" y="16" width="16" height="16">
    <properties>
-    <property name="fieldID" type="int" value="1"/>
+    <property name="WarpTargetComponent" value="warpTargetID: 103"/>
    </properties>
   </object>
   <object id="31" name="startField" x="272" y="16" width="16" height="16">
    <properties>
-    <property name="fieldID" type="int" value="2"/>
-   </properties>
-  </object>
-  <object id="32" name="warpField" x="256" y="0" width="16" height="16">
-   <properties>
-    <property name="targetID" type="int" value="25"/>
-    <property name="targetWarpPointID" type="int" value="3"/>
-   </properties>
-  </object>
-  <object id="33" name="warpField" x="272" y="0" width="16" height="16">
-   <properties>
-    <property name="targetID" type="int" value="25"/>
-    <property name="targetWarpPointID" type="int" value="4"/>
+    <property name="WarpTargetComponent" value="warpTargetID: 104"/>
    </properties>
   </object>
   <object id="34" name="startField" x="256" y="480" width="16" height="16">
@@ -349,6 +472,84 @@
    </properties>
   </object>
   <object id="60" name="healing" x="112" y="384" width="16" height="16"/>
+  <object id="76" name="warpStart" x="256" y="0" width="16" height="16">
+   <properties>
+    <property name="ColliderComponent" value="isTrigger: true"/>
+    <property name="WarpStartComponent" value="targetMapID: 25, warpTargetID: 103"/>
+   </properties>
+  </object>
+  <object id="77" name="warpStart" x="272" y="0" width="16" height="16">
+   <properties>
+    <property name="ColliderComponent" value="isTrigger: true"/>
+    <property name="WarpStartComponent" value="targetMapID: 25, warpTargetID: 104"/>
+   </properties>
+  </object>
+  <object id="81" name="warpTarget" x="176" y="16" width="16" height="16">
+   <properties>
+    <property name="WarpTargetComponent" value="warpTargetID: 100"/>
+   </properties>
+  </object>
+  <object id="82" name="warpTarget" x="192" y="16" width="16" height="16">
+   <properties>
+    <property name="WarpTargetComponent" value="warpTargetID: 101"/>
+   </properties>
+  </object>
+  <object id="85" name="warpTarget" x="240" y="16" width="16" height="16">
+   <properties>
+    <property name="WarpTargetComponent" value="warpTargetID: 102"/>
+   </properties>
+  </object>
+  <object id="86" name="startField" x="288" y="16" width="16" height="16">
+   <properties>
+    <property name="WarpTargetComponent" value="warpTargetID: 105"/>
+   </properties>
+  </object>
+  <object id="89" name="startField" x="336" y="16" width="16" height="16">
+   <properties>
+    <property name="WarpTargetComponent" value="warpTargetID: 106"/>
+   </properties>
+  </object>
+  <object id="90" name="startField" x="352" y="16" width="16" height="16">
+   <properties>
+    <property name="WarpTargetComponent" value="warpTargetID: 107"/>
+   </properties>
+  </object>
+  <object id="91" name="warpStart" x="176" y="0" width="16" height="16">
+   <properties>
+    <property name="ColliderComponent" value="isTrigger: true"/>
+    <property name="WarpStartComponent" value="targetMapID: 25, warpTargetID: 100"/>
+   </properties>
+  </object>
+  <object id="92" name="warpStart" x="192" y="0" width="16" height="16">
+   <properties>
+    <property name="ColliderComponent" value="isTrigger: true"/>
+    <property name="WarpStartComponent" value="targetMapID: 25, warpTargetID: 101"/>
+   </properties>
+  </object>
+  <object id="95" name="warpStart" x="240" y="0" width="16" height="16">
+   <properties>
+    <property name="ColliderComponent" value="isTrigger: true"/>
+    <property name="WarpStartComponent" value="targetMapID: 25, warpTargetID: 102"/>
+   </properties>
+  </object>
+  <object id="96" name="warpStart" x="288" y="0" width="16" height="16">
+   <properties>
+    <property name="ColliderComponent" value="isTrigger: true"/>
+    <property name="WarpStartComponent" value="targetMapID: 25, warpTargetID: 105"/>
+   </properties>
+  </object>
+  <object id="99" name="warpStart" x="336" y="0" width="16" height="16">
+   <properties>
+    <property name="ColliderComponent" value="isTrigger: true"/>
+    <property name="WarpStartComponent" value="targetMapID: 25, warpTargetID: 106"/>
+   </properties>
+  </object>
+  <object id="100" name="warpStart" x="352" y="0" width="16" height="16">
+   <properties>
+    <property name="ColliderComponent" value="isTrigger: true"/>
+    <property name="WarpStartComponent" value="targetMapID: 25, warpTargetID: 107"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup id="9" name="descriptions1" visible="0">
   <object id="62" name="sign" type="objectDescription" x="80" y="432" width="16" height="16">

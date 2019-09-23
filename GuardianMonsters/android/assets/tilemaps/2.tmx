@@ -88,23 +88,29 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup id="5" name="people1">
+ <objectgroup id="5" name="people0">
   <object id="61" name="person" type="person" x="32" y="160" width="16" height="16">
    <properties>
-    <property name="male" type="bool" value="true"/>
-    <property name="path" value="ESTOP"/>
-    <property name="spriteIndex" type="int" value="1"/>
-    <property name="static" type="bool" value="true"/>
-    <property name="text" value="person_2_1"/>
+    <property name="CharacterSpriteComponent">male: true,
+index: 1</property>
+    <property name="ColliderComponent" value=""/>
+    <property name="ConversationComponent" value="enabled: true, name: person_name_2_1, text: person_2_1"/>
+    <property name="InputComponent" value=""/>
+    <property name="PathComponent">enabled: true,
+path: ESTOP</property>
+    <property name="TileWiseMovementComponent" value=""/>
    </properties>
   </object>
   <object id="69" name="person" type="person" x="304" y="320" width="16" height="16">
    <properties>
-    <property name="male" type="bool" value="true"/>
-    <property name="path" value="SSTOP"/>
-    <property name="spriteIndex" type="int" value="4"/>
-    <property name="static" type="bool" value="true"/>
-    <property name="text" value="person_2_2"/>
+    <property name="CharacterSpriteComponent">male: true,
+index: 4</property>
+    <property name="ColliderComponent" value=""/>
+    <property name="ConversationComponent" value="enabled: true, name: person_name_2_2, text: person_2_2"/>
+    <property name="InputComponent" value=""/>
+    <property name="PathComponent">enabled: true,
+path: SSTOP</property>
+    <property name="TileWiseMovementComponent" value=""/>
    </properties>
   </object>
  </objectgroup>
@@ -280,7 +286,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup id="8" name="triggers1">
+ <objectgroup id="8" name="triggers0">
   <object id="30" name="warpTarget" x="256" y="16" width="16" height="16">
    <properties>
     <property name="WarpTargetComponent" value="warpTargetID: 103"/>
@@ -551,11 +557,10 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup id="9" name="descriptions1" visible="0">
+ <objectgroup id="9" name="descriptions0">
   <object id="62" name="sign" type="objectDescription" x="80" y="432" width="16" height="16">
    <properties>
-    <property name="text" value="sign_2_1_text"/>
-    <property name="title" value="sign_2_1_title"/>
+    <property name="ConversationComponent" value="enabled: true, name: sign_2_1_title, text: sign_2_1_text"/>
    </properties>
   </object>
  </objectgroup>

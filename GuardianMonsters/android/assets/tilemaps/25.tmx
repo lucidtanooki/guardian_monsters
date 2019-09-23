@@ -153,12 +153,14 @@
  <objectgroup id="7" name="people0">
   <object id="51" name="person" type="LimbusGameObject" x="208" y="176" width="16" height="16">
    <properties>
-    <property name="male" type="bool" value="true"/>
-    <property name="path" value="SSTOP"/>
-    <property name="personName" value="person_name_25_7"/>
-    <property name="spriteIndex" type="int" value="3"/>
-    <property name="static" type="bool" value="true"/>
-    <property name="text" value="person_25_7"/>
+    <property name="CharacterSpriteComponent">male: true,
+index: 3</property>
+    <property name="ColliderComponent" value=""/>
+    <property name="ConversationComponent" value="enabled: true, name: person_name_25_7, text: person_25_7"/>
+    <property name="InputComponent" value=""/>
+    <property name="PathComponent">enabled: true,
+path: SSTOP</property>
+    <property name="TileWiseMovementComponent" value=""/>
    </properties>
   </object>
   <object id="202" name="person" type="LimbusGameObject" x="352" y="224" width="16" height="16">
@@ -175,112 +177,134 @@ path: &quot;SSTOP,E,E,E,E,ESTOP,NSTOP,NSTOP,WSTOP,SSTOP,S,S,S,ESTOP,SSTOP,W,W,W,
   </object>
   <object id="291" name="person" type="LimbusGameObject" x="208" y="416" width="16" height="16">
    <properties>
-    <property name="male" type="bool" value="true"/>
-    <property name="path" value="SSTOP,ESTOP,NSTOP,N,N,N,N,N,ESTOP,NSTOP,WSTOP,NSTOP,ESTOP,E,SSTOP,WSTOP,S,S,W,S,S,S,SSTOP,ESTOP,NSTOP"/>
-    <property name="personName" value="person_name_25_11"/>
-    <property name="spriteIndex" type="int" value="2"/>
-    <property name="static" type="bool" value="false"/>
-    <property name="text" value="person_25_11"/>
+    <property name="CharacterSpriteComponent">male: true,
+index: 2</property>
+    <property name="ColliderComponent" value=""/>
+    <property name="ConversationComponent" value="enabled: true, name: person_name_25_11, text: person_25_11"/>
+    <property name="InputComponent" value=""/>
+    <property name="PathComponent">enabled: true,
+path: &quot;SSTOP,ESTOP,NSTOP,N,N,N,N,N,ESTOP,NSTOP,WSTOP,NSTOP,ESTOP,E,SSTOP,WSTOP,S,S,W,S,S,S,SSTOP,ESTOP,NSTOP&quot;</property>
+    <property name="TileWiseMovementComponent" value=""/>
    </properties>
   </object>
   <object id="292" name="person" type="LimbusGameObject" x="544" y="288" width="16" height="16">
    <properties>
-    <property name="male" type="bool" value="true"/>
-    <property name="path" value="SSTOP"/>
-    <property name="personName" value="person_name_25_9"/>
-    <property name="spriteIndex" type="int" value="1"/>
-    <property name="static" type="bool" value="true"/>
-    <property name="text" value="person_25_9"/>
+    <property name="CharacterSpriteComponent">male: true,
+index: 1</property>
+    <property name="ColliderComponent" value=""/>
+    <property name="ConversationComponent" value="enabled: true, name: person_name_25_9, text: person_25_9"/>
+    <property name="InputComponent" value=""/>
+    <property name="PathComponent">enabled: true,
+path: SSTOP</property>
+    <property name="TileWiseMovementComponent" value=""/>
    </properties>
   </object>
   <object id="293" name="person" type="LimbusGameObject" x="592" y="112" width="16" height="16">
    <properties>
-    <property name="male" type="bool" value="true"/>
-    <property name="path" value="SSTOP"/>
-    <property name="personName" value="person_name_25_12"/>
-    <property name="spriteIndex" type="int" value="2"/>
-    <property name="static" type="bool" value="true"/>
-    <property name="text" value="person_25_12"/>
+    <property name="CharacterSpriteComponent">male: true,
+index: 2</property>
+    <property name="ColliderComponent" value=""/>
+    <property name="ConversationComponent" value="enabled: true, name: person_name_25_12, text: person_25_12"/>
+    <property name="InputComponent" value=""/>
+    <property name="PathComponent">enabled: true,
+path: SSTOP</property>
+    <property name="TileWiseMovementComponent" value=""/>
    </properties>
   </object>
   <object id="294" name="person" type="LimbusGameObject" x="480" y="320" width="16" height="16">
    <properties>
-    <property name="male" type="bool" value="true"/>
-    <property name="path" value="SSTOP,ESTOP,NSTOP,ESTOP,E,E,E,E,E,SSTOP,S,SSTOP,ESTOP,E,E,E,E,N,N,E,E,ESTOP,N,N,N,N,N,N,ESTOP,SSTOP,S,S,S,S,S,S,SSTOP,SSTOP,W,W,S,S,W,W,W,W,WSTOP,NSTOP,WSTOP,N,W,W,W,W,W,WSTOP,SSTOP"/>
-    <property name="personName" value="person_name_25_10"/>
-    <property name="spriteIndex" type="int" value="2"/>
-    <property name="static" type="bool" value="false"/>
-    <property name="text" value="person_25_10"/>
+    <property name="CharacterSpriteComponent">male: true,
+index: 2</property>
+    <property name="ColliderComponent" value=""/>
+    <property name="ConversationComponent" value="enabled: true, name: person_name_25_10, text: person_25_10"/>
+    <property name="InputComponent" value=""/>
+    <property name="PathComponent">enabled: true,
+path: &quot;SSTOP,ESTOP,NSTOP,ESTOP,E,E,E,E,E,SSTOP,S,SSTOP,ESTOP,E,E,E,E,N,N,E,E,ESTOP,N,N,N,N,N,N,ESTOP,SSTOP,S,S,S,S,S,S,SSTOP,SSTOP,W,W,S,S,W,W,W,W,WSTOP,NSTOP,WSTOP,N,W,W,W,W,W,WSTOP,SSTOP&quot;</property>
+    <property name="TileWiseMovementComponent" value=""/>
    </properties>
   </object>
   <object id="295" name="person" type="LimbusGameObject" x="720" y="272" width="16" height="16">
    <properties>
-    <property name="male" type="bool" value="true"/>
-    <property name="path" value="SSTOP,E,E,E,E,ESTOP,NSTOP,NSTOP,WSTOP,SSTOP,S,S,S,ESTOP,SSTOP,W,W,W,W,SSTOP,WSTOP,SSTOP,SSTOP,SSTOP,SSTOP,WSTOP,NSTOP,N,N,N"/>
-    <property name="personName" value="person_name_25_13"/>
-    <property name="spriteIndex" type="int" value="4"/>
-    <property name="static" type="bool" value="false"/>
-    <property name="text" value="person_25_13"/>
+    <property name="CharacterSpriteComponent">male: true,
+index: 4</property>
+    <property name="ColliderComponent" value=""/>
+    <property name="ConversationComponent" value="enabled: true, name: person_name_25_13, text: person_25_13"/>
+    <property name="InputComponent" value=""/>
+    <property name="PathComponent">enabled: true,
+path: &quot;SSTOP,E,E,E,E,ESTOP,NSTOP,NSTOP,WSTOP,SSTOP,S,S,S,ESTOP,SSTOP,W,W,W,W,SSTOP,WSTOP,SSTOP,SSTOP,SSTOP,SSTOP,WSTOP,NSTOP,N,N,N&quot;</property>
+    <property name="TileWiseMovementComponent" value=""/>
    </properties>
   </object>
   <object id="296" name="person" type="LimbusGameObject" x="864" y="192" width="16" height="16">
    <properties>
-    <property name="male" type="bool" value="true"/>
-    <property name="path" value="SSTOP"/>
-    <property name="personName" value="person_name_25_2"/>
-    <property name="spriteIndex" type="int" value="3"/>
-    <property name="static" type="bool" value="true"/>
-    <property name="text" value="person_25_2"/>
+    <property name="CharacterSpriteComponent">male: true,
+index: 3</property>
+    <property name="ColliderComponent" value=""/>
+    <property name="ConversationComponent" value="enabled: true, name: person_name_25_2, text: person_25_2"/>
+    <property name="InputComponent" value=""/>
+    <property name="PathComponent">enabled: true,
+path: SSTOP</property>
+    <property name="TileWiseMovementComponent" value=""/>
    </properties>
   </object>
   <object id="297" name="person" type="LimbusGameObject" x="912" y="192" width="16" height="16">
    <properties>
-    <property name="male" type="bool" value="true"/>
-    <property name="path" value="SSTOP"/>
-    <property name="personName" value="person_name_25_3"/>
-    <property name="spriteIndex" type="int" value="2"/>
-    <property name="static" type="bool" value="true"/>
-    <property name="text" value="person_25_3"/>
+    <property name="CharacterSpriteComponent">male: true,
+index: 2</property>
+    <property name="ColliderComponent" value=""/>
+    <property name="ConversationComponent" value="enabled: true, name: person_name_25_3, text: person_25_3"/>
+    <property name="InputComponent" value=""/>
+    <property name="PathComponent">enabled: true,
+path: SSTOP</property>
+    <property name="TileWiseMovementComponent" value=""/>
    </properties>
   </object>
   <object id="298" name="person" type="LimbusGameObject" x="816" y="192" width="16" height="16">
    <properties>
-    <property name="male" type="bool" value="true"/>
-    <property name="path" value="SSTOP"/>
-    <property name="personName" value="person_name_25_1"/>
-    <property name="spriteIndex" type="int" value="1"/>
-    <property name="static" type="bool" value="true"/>
-    <property name="text" value="person_25_1"/>
+    <property name="CharacterSpriteComponent">male: true,
+index: 1</property>
+    <property name="ColliderComponent" value=""/>
+    <property name="ConversationComponent" value="enabled: true, name: person_name_25_1, text: person_25_1"/>
+    <property name="InputComponent" value=""/>
+    <property name="PathComponent">enabled: true,
+path: SSTOP</property>
+    <property name="TileWiseMovementComponent" value=""/>
    </properties>
   </object>
   <object id="299" name="person" type="LimbusGameObject" x="816" y="304" width="16" height="16">
    <properties>
-    <property name="male" type="bool" value="true"/>
-    <property name="path" value="NSTOP"/>
-    <property name="personName" value="person_name_25_6"/>
-    <property name="spriteIndex" type="int" value="2"/>
-    <property name="static" type="bool" value="true"/>
-    <property name="text" value="person_25_6"/>
+    <property name="CharacterSpriteComponent">male: true,
+index: 2</property>
+    <property name="ColliderComponent" value=""/>
+    <property name="ConversationComponent" value="enabled: true, name: person_name_25_6, text: person_25_6"/>
+    <property name="InputComponent" value=""/>
+    <property name="PathComponent">enabled: true,
+path: NSTOP</property>
+    <property name="TileWiseMovementComponent" value=""/>
    </properties>
   </object>
   <object id="300" name="person" type="LimbusGameObject" x="848" y="304" width="16" height="16">
    <properties>
-    <property name="male" type="bool" value="true"/>
-    <property name="path" value="NSTOP"/>
-    <property name="personName" value="person_name_25_5"/>
-    <property name="spriteIndex" type="int" value="2"/>
-    <property name="static" type="bool" value="true"/>
-    <property name="text" value="person_25_5"/>
+    <property name="CharacterSpriteComponent">male: true,
+index: 2</property>
+    <property name="ColliderComponent" value=""/>
+    <property name="ConversationComponent" value="enabled: true, name: person_name_25_5, text: person_25_5"/>
+    <property name="InputComponent" value=""/>
+    <property name="PathComponent">enabled: true,
+path: NSTOP</property>
+    <property name="TileWiseMovementComponent" value=""/>
    </properties>
   </object>
   <object id="301" name="person" type="LimbusGameObject" x="928" y="304" width="16" height="16">
    <properties>
-    <property name="male" type="bool" value="true"/>
-    <property name="path" value="NSTOP"/>
-    <property name="personName" value="person_name_25_4"/>
-    <property name="spriteIndex" type="int" value="1"/>
-    <property name="static" type="bool" value="true"/>
-    <property name="text" value="person_25_4"/>
+    <property name="CharacterSpriteComponent">male: true,
+index: 1</property>
+    <property name="ColliderComponent" value=""/>
+    <property name="ConversationComponent" value="enabled: true, name: person_name_25_4, text: person_25_4"/>
+    <property name="InputComponent" value=""/>
+    <property name="PathComponent">enabled: true,
+path: NSTOP</property>
+    <property name="TileWiseMovementComponent" value=""/>
    </properties>
   </object>
  </objectgroup>

@@ -85,7 +85,7 @@ class EntityComponentSystem
         return entityFactory.createHero(gameArea.startPosition, gameArea.startLayer, fromSave)
     }
 
-    fun setUpEntitySystems(gameArea: GameArea, viewport: Viewport, hud: HUD)
+    private fun setUpEntitySystems(gameArea: GameArea, viewport: Viewport, hud: HUD)
     {
         // Sprite System
         val spriteSystem = SpriteSystem(gameArea.mapRenderer)
@@ -99,11 +99,6 @@ class EntityComponentSystem
         // GameSaveManager
         saveGameManager.addedToEngine(engine)
         engine.addSystem(saveGameManager)
-    }
-
-    fun deleteGameAreasEntities()
-    {
-        engine.entities.forEach { if(it !is HeroEntity) { engine.removeEntity(it) } }
     }
 
     /**

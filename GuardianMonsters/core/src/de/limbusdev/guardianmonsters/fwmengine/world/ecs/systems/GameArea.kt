@@ -124,6 +124,7 @@ class GameArea(val areaID: Int, startPosID: Int)
             val layerID: Int = layer.name[layer.name.lastIndex].toString().toInt()
             when(layer.name.removeLast(0))
             {
+                "descriptions"  -> createGameObjects(layer, layerID)
                 "people"        -> createGameObjects(layer, layerID)
                 "colliderWalls" -> createGameObjects(layer, layerID)
                 "triggers"      -> createGameObjects(layer, layerID)

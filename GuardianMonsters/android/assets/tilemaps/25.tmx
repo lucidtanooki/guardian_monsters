@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-down" width="64" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="18" nextobjectid="419">
+<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-down" width="64" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="18" nextobjectid="427">
  <properties>
   <property name="musicIndex" type="int" value="2"/>
   <property name="musicType" value="town"/>
@@ -131,21 +131,27 @@
   <object id="306" name="sign" type="objectDescription" x="624" y="288" width="16" height="16">
    <properties>
     <property name="ConversationComponent" value="enabled: true, name: sign_25_1_title, text: sign_25_1_text"/>
-    <property name="enabled" type="bool" value="true"/>
-    <property name="layer" type="int" value="0"/>
    </properties>
   </object>
   <object id="414" name="sign" type="objectDescription" x="640" y="288" width="16" height="16">
    <properties>
     <property name="ConversationComponent" value="enabled: true, name: sign_25_1_title, text: sign_25_1_text"/>
-    <property name="enabled" type="bool" value="true"/>
-    <property name="layer" type="int" value="0"/>
    </properties>
   </object>
   <object id="237" name="collider" x="528" y="256" width="32" height="32">
    <properties>
     <property name="ColliderComponent" value=""/>
     <property name="layer" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="419" name="sign" type="objectDescription" x="672" y="112" width="16" height="16">
+   <properties>
+    <property name="ConversationComponent" value="enabled: true, name: sign_25_4_title, text: sign_25_4_text"/>
+   </properties>
+  </object>
+  <object id="420" name="sign" type="objectDescription" x="688" y="112" width="16" height="16">
+   <properties>
+    <property name="ConversationComponent" value="enabled: true, name: sign_25_4_title, text: sign_25_4_text"/>
    </properties>
   </object>
  </objectgroup>
@@ -835,164 +841,169 @@ path: NSTOP</property>
  <objectgroup id="13" name="descriptions0">
   <object id="53" name="sign" type="objectDescription" x="112" y="176" width="16" height="16">
    <properties>
-    <property name="text" value="sign_25_2_text"/>
-    <property name="title" value="sign_25_2_title"/>
+    <property name="ConversationComponent" value="enabled: true, name: sign_25_2_title, text: sign_25_2_text"/>
    </properties>
   </object>
   <object id="199" name="sign" type="objectDescription" x="128" y="176" width="16" height="16">
    <properties>
-    <property name="text" value="sign_25_2_text"/>
-    <property name="title" value="sign_25_2_title"/>
+    <property name="ConversationComponent" value="enabled: true, name: sign_25_2_title, text: sign_25_2_text"/>
    </properties>
   </object>
-  <object id="308" name="sign" type="objectDescription" x="800" y="224" width="16" height="16">
+  <object id="308" name="object" type="objectDescription" x="800" y="224" width="16" height="16">
    <properties>
-    <property name="text" value="object_25_1_text"/>
-    <property name="title" value="object_25_1_title"/>
+    <property name="ConversationComponent" value="enabled: true, name: object_25_1_title, text: object_25_1_text"/>
    </properties>
   </object>
-  <object id="309" name="sign" type="objectDescription" x="800" y="208" width="16" height="16">
+  <object id="309" name="object" type="objectDescription" x="800" y="208" width="16" height="16">
    <properties>
-    <property name="text" value="object_25_1_text"/>
-    <property name="title" value="object_25_1_title"/>
+    <property name="ConversationComponent" value="enabled: true, name: object_25_1_title, text: object_25_1_text"/>
    </properties>
   </object>
-  <object id="310" name="sign" type="objectDescription" x="816" y="224" width="16" height="16">
+  <object id="310" name="object" type="objectDescription" x="816" y="224" width="16" height="16">
    <properties>
-    <property name="text" value="object_25_1_text"/>
-    <property name="title" value="object_25_1_title"/>
+    <property name="ConversationComponent" value="enabled: true, name: object_25_1_title, text: object_25_1_text"/>
    </properties>
   </object>
-  <object id="311" name="sign" type="objectDescription" x="832" y="224" width="16" height="16">
+  <object id="311" name="object" type="objectDescription" x="832" y="224" width="16" height="16">
    <properties>
-    <property name="text" value="object_25_2_text"/>
-    <property name="title" value="object_25_1_title"/>
+    <property name="ConversationComponent" value="enabled: true, name: object_25_1_title, text: object_25_2_text"/>
    </properties>
   </object>
-  <object id="312" name="sign" type="objectDescription" x="848" y="224" width="16" height="16">
+  <object id="312" name="object" type="objectDescription" x="848" y="224" width="16" height="16">
    <properties>
-    <property name="text" value="object_25_4_text"/>
-    <property name="title" value="object_25_3_title"/>
+    <property name="ConversationComponent" value="enabled: true, name: object_25_3_title, text: object_25_4_text"/>
    </properties>
   </object>
-  <object id="316" name="sign" type="objectDescription" x="912" y="208" width="16" height="16">
+  <object id="316" name="object" type="objectDescription" x="912" y="208" width="16" height="16">
    <properties>
-    <property name="text" value="object_25_1_text"/>
-    <property name="title" value="object_25_1_title"/>
+    <property name="ConversationComponent" value="enabled: true, name: object_25_1_title, text: object_25_1_text"/>
    </properties>
   </object>
-  <object id="317" name="sign" type="objectDescription" x="912" y="224" width="16" height="16">
+  <object id="317" name="object" type="objectDescription" x="912" y="224" width="16" height="16">
    <properties>
-    <property name="text" value="object_25_1_text"/>
-    <property name="title" value="object_25_1_title"/>
+    <property name="ConversationComponent" value="enabled: true, name: object_25_1_title, text: object_25_1_text"/>
    </properties>
   </object>
-  <object id="318" name="sign" type="objectDescription" x="928" y="224" width="16" height="16">
+  <object id="318" name="object" type="objectDescription" x="928" y="224" width="16" height="16">
    <properties>
-    <property name="text" value="object_25_1_text"/>
-    <property name="title" value="object_25_1_title"/>
+    <property name="ConversationComponent" value="enabled: true, name: object_25_1_title, text: object_25_2_text"/>
    </properties>
   </object>
-  <object id="319" name="sign" type="objectDescription" x="848" y="272" width="16" height="16">
+  <object id="319" name="object" type="objectDescription" x="848" y="272" width="16" height="16">
    <properties>
-    <property name="text" value="object_25_1_text"/>
-    <property name="title" value="object_25_1_title"/>
+    <property name="ConversationComponent" value="enabled: true, name: object_25_1_title, text: object_25_1_text"/>
    </properties>
   </object>
-  <object id="320" name="sign" type="objectDescription" x="864" y="272" width="16" height="16">
+  <object id="320" name="object" type="objectDescription" x="864" y="272" width="16" height="16">
    <properties>
-    <property name="text" value="object_25_1_text"/>
-    <property name="title" value="object_25_1_title"/>
+    <property name="ConversationComponent" value="enabled: true, name: object_25_1_title, text: object_25_1_text"/>
    </properties>
   </object>
-  <object id="321" name="sign" type="objectDescription" x="880" y="272" width="16" height="16">
+  <object id="321" name="object" type="objectDescription" x="880" y="272" width="16" height="16">
    <properties>
-    <property name="text" value="object_25_1_text"/>
-    <property name="title" value="object_25_1_title"/>
+    <property name="ConversationComponent" value="enabled: true, name: object_25_1_title, text: object_25_1_text"/>
    </properties>
   </object>
-  <object id="322" name="sign" type="objectDescription" x="864" y="224" width="16" height="16">
+  <object id="322" name="object" type="objectDescription" x="864" y="224" width="16" height="16">
    <properties>
-    <property name="text" value="object_25_5_text"/>
-    <property name="title" value="object_25_3_title"/>
+    <property name="ConversationComponent" value="enabled: true, name: object_25_3_title, text: object_25_5_text"/>
    </properties>
   </object>
-  <object id="323" name="sign" type="objectDescription" x="880" y="224" width="16" height="16">
+  <object id="323" name="object" type="objectDescription" x="880" y="224" width="16" height="16">
    <properties>
-    <property name="text" value="object_25_3_text"/>
-    <property name="title" value="object_25_3_title"/>
+    <property name="ConversationComponent" value="enabled: true, name: object_25_3_title, text: object_25_3_text"/>
    </properties>
   </object>
-  <object id="324" name="sign" type="objectDescription" x="880" y="208" width="16" height="16">
+  <object id="324" name="object" type="objectDescription" x="880" y="208" width="16" height="16">
    <properties>
-    <property name="text" value="object_25_3_text"/>
-    <property name="title" value="object_25_3_title"/>
+    <property name="ConversationComponent" value="enabled: true, name: object_25_3_title, text: object_25_3_text"/>
    </properties>
   </object>
-  <object id="325" name="sign" type="objectDescription" x="928" y="272" width="16" height="16">
+  <object id="325" name="object" type="objectDescription" x="928" y="272" width="16" height="16">
    <properties>
-    <property name="text" value="object_25_3_text"/>
-    <property name="title" value="object_25_3_title"/>
+    <property name="ConversationComponent" value="enabled: true, name: object_25_3_title, text: object_25_3_text"/>
    </properties>
   </object>
-  <object id="326" name="sign" type="objectDescription" x="912" y="272" width="16" height="16">
+  <object id="326" name="object" type="objectDescription" x="912" y="272" width="16" height="16">
    <properties>
-    <property name="text" value="object_25_5_text"/>
-    <property name="title" value="object_25_3_title"/>
+    <property name="ConversationComponent" value="enabled: true, name: object_25_3_title, text: object_25_4_text"/>
    </properties>
   </object>
-  <object id="327" name="sign" type="objectDescription" x="896" y="272" width="16" height="16">
+  <object id="327" name="object" type="objectDescription" x="896" y="272" width="16" height="16">
    <properties>
-    <property name="text" value="object_25_4_text"/>
-    <property name="title" value="object_25_3_title"/>
+    <property name="ConversationComponent" value="enabled: true, name: object_25_3_title, text: object_25_4_text"/>
    </properties>
   </object>
-  <object id="328" name="sign" type="objectDescription" x="832" y="272" width="16" height="16">
+  <object id="328" name="object" type="objectDescription" x="832" y="272" width="16" height="16">
    <properties>
-    <property name="text" value="object_25_4_text"/>
-    <property name="title" value="object_25_3_title"/>
+    <property name="ConversationComponent" value="enabled: true, name: object_25_3_title, text: object_25_4_text"/>
    </properties>
   </object>
-  <object id="329" name="sign" type="objectDescription" x="816" y="272" width="16" height="16">
+  <object id="329" name="object" type="objectDescription" x="816" y="272" width="16" height="16">
    <properties>
-    <property name="text" value="object_25_4_text"/>
-    <property name="title" value="object_25_3_title"/>
+    <property name="ConversationComponent" value="enabled: true, name: object_25_3_title, text: object_25_4_text"/>
    </properties>
   </object>
-  <object id="330" name="sign" type="objectDescription" x="800" y="272" width="16" height="16">
+  <object id="330" name="object" type="objectDescription" x="800" y="272" width="16" height="16">
    <properties>
-    <property name="text" value="object_25_4_text"/>
-    <property name="title" value="object_25_3_title"/>
+    <property name="ConversationComponent" value="enabled: true, name: object_25_3_title, text: object_25_4_text"/>
    </properties>
   </object>
-  <object id="331" name="sign" type="objectDescription" x="800" y="288" width="16" height="16">
+  <object id="331" name="object" type="objectDescription" x="800" y="288" width="16" height="16">
    <properties>
-    <property name="text" value="object_25_4_text"/>
-    <property name="title" value="object_25_3_title"/>
+    <property name="ConversationComponent" value="enabled: true, name: object_25_3_title, text: object_25_4_text"/>
    </properties>
   </object>
-  <object id="332" name="sign" type="objectDescription" x="832" y="288" width="16" height="16">
+  <object id="332" name="object" type="objectDescription" x="832" y="288" width="16" height="16">
    <properties>
-    <property name="text" value="object_25_4_text"/>
-    <property name="title" value="object_25_3_title"/>
+    <property name="ConversationComponent" value="enabled: true, name: object_25_3_title, text: object_25_4_text"/>
    </properties>
   </object>
-  <object id="352" name="sign" type="objectDescription" x="192" y="176" width="16" height="16">
+  <object id="352" name="object" type="objectDescription" x="192" y="176" width="16" height="16">
    <properties>
     <property name="text" value="object_25_6_text"/>
     <property name="title" value="object_25_6_title"/>
    </properties>
   </object>
-  <object id="376" name="sign" type="objectDescription" x="528" y="176" width="16" height="16">
+  <object id="376" name="object" type="objectDescription" x="528" y="176" width="16" height="16">
    <properties>
-    <property name="text" value="sign_25_3_text"/>
-    <property name="title" value="sign_25_3_title"/>
+    <property name="ConversationComponent" value="enabled: true, name: sign_25_3_title, text: sign_25_3_text"/>
    </properties>
   </object>
-  <object id="379" name="sign" type="objectDescription" x="560" y="288" width="16" height="16">
+  <object id="379" name="object" type="objectDescription" x="560" y="288" width="16" height="16">
    <properties>
     <property name="text" value="guardian_25_1_text"/>
     <property name="title" value="guardian_25_1_title"/>
+   </properties>
+  </object>
+  <object id="421" name="object" type="objectDescription" x="576" y="272" width="16" height="16">
+   <properties>
+    <property name="ConversationComponent" value="enabled: true, name: object_25_7_title, text: object_25_7_text"/>
+   </properties>
+  </object>
+  <object id="422" name="object" type="objectDescription" x="592" y="272" width="16" height="16">
+   <properties>
+    <property name="ConversationComponent" value="enabled: true, name: object_25_7_title, text: object_25_7_text"/>
+   </properties>
+  </object>
+  <object id="423" name="object" type="objectDescription" x="608" y="272" width="16" height="16">
+   <properties>
+    <property name="ConversationComponent" value="enabled: true, name: object_25_7_title, text: object_25_7_text"/>
+   </properties>
+  </object>
+  <object id="424" name="object" type="objectDescription" x="608" y="256" width="16" height="16">
+   <properties>
+    <property name="ConversationComponent" value="enabled: true, name: object_25_7_title, text: object_25_7_text"/>
+   </properties>
+  </object>
+  <object id="425" name="object" type="objectDescription" x="592" y="256" width="16" height="16">
+   <properties>
+    <property name="ConversationComponent" value="enabled: true, name: object_25_7_title, text: object_25_7_text"/>
+   </properties>
+  </object>
+  <object id="426" name="object" type="objectDescription" x="576" y="256" width="16" height="16">
+   <properties>
+    <property name="ConversationComponent" value="enabled: true, name: object_25_7_title, text: object_25_7_text"/>
    </properties>
   </object>
  </objectgroup>

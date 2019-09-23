@@ -1,7 +1,6 @@
 package de.limbusdev.guardianmonsters.fwmengine.world.ui
 
 import com.badlogic.ashley.core.Engine
-import com.badlogic.ashley.core.Family
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.InputAdapter
 import com.badlogic.gdx.InputProcessor
@@ -24,13 +23,11 @@ import de.limbusdev.guardianmonsters.enums.SkyDirection
 import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusGameObject
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.*
-import de.limbusdev.guardianmonsters.fwmengine.world.ecs.entities.HeroEntity
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.GameArea
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.widgets.ConversationWidget
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.widgets.DPad
 import de.limbusdev.guardianmonsters.inventory.InventoryScreen
 import de.limbusdev.guardianmonsters.services.Services
-import de.limbusdev.guardianmonsters.utils.getComponent
 import de.limbusdev.utils.extensions.f
 import de.limbusdev.utils.geometry.IntVec2
 import de.limbusdev.utils.logDebug
@@ -56,41 +53,35 @@ class HUD
     // --------------------------------------------------------------------------------------------- PROPERTIES
     companion object{ const val TAG = "HUD" }
 
-    val stage               : Stage
+    val         stage                   = Stage(FitViewport(Constant.WIDTHf, Constant.HEIGHTf))
+    private val conversationWidget      = ConversationWidget()
+    private val dPad                    = DPad()
+    private val blackCurtain            : Image
+    private var mainMenuButton          : Button
+    private var menuButtons             : VerticalGroup
 
-    private val conversationWidget  : ConversationWidget
-    private val blackCurtain        : Image
+    val         inputProcessor          : InputProcessor get() = stage
 
-    private lateinit var mainMenuButton : Button
-    private lateinit var menuButtons    : VerticalGroup
-
-    private var dpadTouchDownStart : Long = 0
+    private var dpadTouchDownStart      : Long = 0
 
     private var currentlyShownHUDWidget = HUDWidgets.NONE
 
-    private val dPad = DPad()
-
-    private var interactionGameObject : LimbusGameObject? = null
+    private var interactionGameObject   : LimbusGameObject? = null
 
 
     // --------------------------------------------------------------------------------------------- CONSTRUCTORS
     init
     {
-        // Scene2D
-        val fit = FitViewport(Constant.WIDTHf, Constant.HEIGHTf)
-        stage = Stage(fit)
-
-        conversationWidget = ConversationWidget()
         stage.addActor(conversationWidget)
 
-        setUpTopLevelButtons()
+        mainMenuButton = GMWorldFactory.HUDBP.createHUDMenuButton({ onMainMenuButton() })
+        menuButtons = setUpTopLevelButtons()
         stage.addActor(dPad)
 
         blackCurtain = GMWorldFactory.HUDBP.createBlackCurtainImg()
-
         stage.addActor(blackCurtain)
 
-        this.stage.isDebugAll = Constant.DEBUGGING_ON
+        stage.isDebugAll = Constant.DEBUGGING_ON
     }
 
 
@@ -98,7 +89,7 @@ class HUD
     fun update(delta: Float)
     {
         stage.act(delta)
-        val input = hero.get<InputComponent>()!!
+        val input = hero.get<InputComponent>() ?: return
         if(dPad.isTouched && input.direction.isStop())
         {
             if(TimeUtils.timeSinceMillis(dpadTouchDownStart) > 100)
@@ -108,37 +99,35 @@ class HUD
         }
     }
 
+    fun show()
+    {
+        blackCurtain.addAction(fadeOut(1f) then hideActor())
+    }
 
-
-
-    // ............................................................................. Input Processor
-    val inputProcessor: InputProcessor get() = this.stage
-
+    fun hide()
+    {
+        blackCurtain.addAction(showActor() then fadeIn(1f))
+    }
 
     // ......................................................................... Constructor Helpers
     /** Creates main menu buttons and the dpad */
-    private fun setUpTopLevelButtons()
+    private fun setUpTopLevelButtons() : VerticalGroup
     {
-        // Menu Button
-        mainMenuButton = GMWorldFactory.HUDBP.createHUDMenuButton({ onMainMenuButton() })
-
         // Group containing buttons: Save, Quit, Monsters
-        menuButtons = GMWorldFactory.HUDBP.createHUDMainMenu(
+        val menuButtons = GMWorldFactory.HUDBP.createHUDMainMenu(
 
                 saveButtonCB = { saveGameManager.saveGame() },
                 quitButtonCB = { onQuitGameButton() },
                 teamButtonCB = { onShowInventoryButton() }
         )
 
-
-        // ................................................................................ CONTROLS
         val aButton = GMWorldFactory.HUDBP.createAButton {
 
             logDebug(TAG) { "A Button clicked." }
             when(currentlyShownHUDWidget)
             {
                 HUDWidgets.CONVERSATION, HUDWidgets.SIGN -> proceedConversation()
-                else -> touchEntity()
+                else -> interactWithProximity()
             }
         }
 
@@ -159,10 +148,118 @@ class HUD
         stage.addActor(bButton)
         stage.addActor(mainMenuButton)
         stage.addActor(menuButtons)
+
+        return menuButtons
     }
 
     fun draw() = stage.draw()
 
+
+    // --------------------------------------------------------------------------------------------- Interaction
+    private fun interactWithProximity()
+    {
+        val interactiveObject = findAdjacentObject(hero, ConversationComponent::class.simpleName!!) ?: return
+        val conversation = interactiveObject.get<ConversationComponent>() ?: return
+        openConversation(conversation.text, conversation.name, gameArea.areaID)
+        currentlyShownHUDWidget = HUDWidgets.SIGN
+    }
+
+    /** Finds a LimbusGameObject on the next cell in looking direction, if there is one. */
+    private fun findAdjacentObject(hero: LimbusGameObject, signature: String): LimbusGameObject?
+    {
+        val dir = hero.get<InputComponent>()?.direction ?: return null
+
+        val adjacentGridSlot = hero.transform.onGrid + IntVec2(dir.x, dir.y)
+
+        logDebug(TAG) { "Grid cell to be checked: $adjacentGridSlot" }
+
+        val interactiveObjects = CoreSL.world.getAllWith(signature)
+        for(interactiveObject in interactiveObjects)
+        {
+            logDebug(TAG) { "Grid Cell of tested Entity: ${interactiveObject.transform.onGrid}" }
+
+            if (adjacentGridSlot == interactiveObject.transform.onGrid) { return interactiveObject }
+        }
+
+        return null
+    }
+
+    private fun openConversation(text: String, name: String, mapID: Int)
+    {
+        // Hide Menus
+        mainMenuButton.isVisible = false
+        menuButtons.isVisible = false
+
+        // Retrieve and set conversation content
+        val conversationText = Services.I18N().i18nMap(mapID).get(text)
+        val conversationTitle = Services.I18N().i18nMap(mapID).get(name)
+        conversationWidget.setContent(conversationText, conversationTitle)
+
+        // Show conversation
+        conversationWidget.isVisible = true
+        conversationWidget.addAction(moveTo(0f, 0f, .5f, Interpolation.exp10Out))
+        currentlyShownHUDWidget = HUDWidgets.CONVERSATION
+
+        // Stop player movement
+        val heroInputComponent = hero.get<InputComponent>() ?: return
+        heroInputComponent.talking = true
+
+        // If other object has input component, stop it too
+        val otherInputComponent = interactionGameObject?.get<InputComponent>() ?: return
+        otherInputComponent.talking = true
+        otherInputComponent.talkDirection = heroInputComponent.direction.invert()
+        heroInputComponent.talkDirection = heroInputComponent.direction
+    }
+
+    private fun proceedConversation()
+    {
+        if(!conversationWidget.nextSection()) { closeConversation() }
+    }
+
+    private fun closeConversation()
+    {
+        mainMenuButton.isVisible = true
+        conversationWidget.addAction(moveTo(0f, -50f, .5f, Interpolation.exp10In) then hideActor())
+        hero.get<InputComponent>()!!.talking = false
+        currentlyShownHUDWidget = HUDWidgets.NONE
+
+        val otherInputComponent = interactionGameObject?.get<InputComponent>() ?: return
+        otherInputComponent.talking = false
+    }
+
+
+    // ............................................................................. SET UP CONTROLS
+    // --------------------------------------------------------------------------------------------- CALLBACKS
+    private fun onQuitGameButton()
+    {
+        blackCurtain.addAction(alpha(0f) then showActor() then fadeIn(2f) then runThis{ Gdx.app.exit() })
+    }
+
+    private fun onShowInventoryButton()
+    {
+        val inventory = hero.get<InventoryComponent>()?.inventory ?: return
+        val team      = hero.get<TeamComponent>()?.team ?: return
+        Services.ScreenManager().pushScreen(InventoryScreen(team, inventory))
+    }
+
+    private fun onMainMenuButton()
+    {
+        // Menu Button not working in conversation
+        when(currentlyShownHUDWidget)
+        {
+            HUDWidgets.CONVERSATION, HUDWidgets.SIGN -> return
+            else -> {}
+        }
+
+        when(menuButtons.isVisible)
+        {
+            true  -> menuButtons.addAction(moveBy(120f, 0f, .5f, Interpolation.pow2In) then hideActor())
+            false -> menuButtons.addAction(showActor() then moveBy(-120f, 0f, .5f, Interpolation.pow2In))
+        }
+    }
+
+
+    // --------------------------------------------------------------------------------------------- InputAdapter
     /**
      * Handles touch down events, especially for the digital steering pad
      * @param screenX
@@ -205,188 +302,9 @@ class HUD
 
     override fun touchUp(screenX: Int, screenY: Int, pointer: Int, button: Int): Boolean
     {
-        val inputComponent = hero.get<InputComponent>()
-        if(inputComponent != null)
-        {
-            inputComponent.direction = inputComponent.direction.stop()
-        }
         dPad.touchUp()
+        val inputComponent = hero.get<InputComponent>() ?: return false
+        inputComponent.direction = inputComponent.direction.stop()
         return true
-    }
-
-
-
-    fun proceedConversation()
-    {
-        if(!conversationWidget.nextSection()) { closeConversation() }
-    }
-
-    fun openConversation(text: String, name: String, mapID: Int)
-    {
-        mainMenuButton.isVisible = false
-        menuButtons.isVisible = false
-
-        val conversationText = Services.I18N().i18nMap(mapID).get(text)
-        val conversationTitle = if (name.isNotEmpty()) { Services.I18N().i18nMap(mapID).get(name) } else { "" }
-        conversationWidget.setContent(conversationText, conversationTitle)
-
-        conversationWidget.isVisible = true
-        conversationWidget.addAction(moveTo(0f, 0f, .5f, Interpolation.exp10Out))
-        currentlyShownHUDWidget = HUDWidgets.CONVERSATION
-
-        val heroInputComponent = hero.get<InputComponent>()
-        val otherInputComponent = interactionGameObject?.get<InputComponent>()
-        if(otherInputComponent == null || heroInputComponent == null) { return }
-        otherInputComponent.talking = true
-        otherInputComponent.talkDirection = heroInputComponent.direction.invert()
-        heroInputComponent.talkDirection = heroInputComponent.direction
-    }
-
-    fun closeConversation()
-    {
-        mainMenuButton.isVisible = true
-        conversationWidget.addAction(moveTo(0f, -50f, .5f, Interpolation.exp10In) then hideActor())
-        hero.get<InputComponent>()!!.talking = false
-        currentlyShownHUDWidget = HUDWidgets.NONE
-
-        val otherInputComponent = interactionGameObject?.get<InputComponent>() ?: return
-        otherInputComponent.talking = false
-    }
-
-    fun openSign(title: String, text: String, mapID: Int) = openConversation(text, title, mapID)
-
-    fun show()
-    {
-        blackCurtain.addAction(fadeOut(1f) then hideActor())
-    }
-
-    fun hide()
-    {
-        blackCurtain.addAction(showActor() then fadeIn(1f))
-    }
-
-    fun checkForNearInteractiveObjects(hero: LimbusGameObject, signature: String): LimbusGameObject?
-    {
-        val dir = hero.get<InputComponent>()!!.direction
-
-        var nearEntity: LimbusGameObject? = null
-        val checkGridCell = hero.transform.onGrid
-
-        checkGridCell += IntVec2(dir.x, dir.y)
-
-        logDebug(TAG) { "Grid cell to be checked: $checkGridCell" }
-
-
-        for (e in engine.getEntitiesFor(Family.all(Transform::class.java).get()))
-        {
-            // Only if interactive object is found and it's not the hero
-            val posComp = e.getComponent<Transform>()
-            if (posComp != null && e !is HeroEntity)
-            {
-                logDebug(TAG) { "Grid Cell of tested Entity: ${posComp.onGrid}" }
-
-                // Is there an entity?
-                //if (posComp.onGrid == checkGridCell) { nearEntity = e }
-            }
-        }
-
-        val interactiveObjects = CoreSL.world.getAllWith(signature)
-        for(interactiveObject in interactiveObjects)
-        {
-            logDebug(TAG) { "Grid Cell of tested Entity: ${interactiveObject.transform.onGrid}" }
-
-            // Is there an entity?
-            val onGrid = interactiveObject.transform.onGrid
-            if (onGrid == checkGridCell) { nearEntity = interactiveObject }
-        }
-
-        interactionGameObject = nearEntity
-        return nearEntity
-    }
-
-    fun touchEntity()
-    {
-        // TODO fix this for new component system
-
-        //val touchedEntity = checkForNearInteractiveObjects(hero) ?: return
-
-        var touchedSpeaker = false
-        var touchedSign = false
-
-        // If there is an entity near enough
-        // Living Entity
-        /*if (EntityFamilies.living.matches(touchedEntity))
-        {
-            logDebug(TAG) { "Touched speaker" }
-            touchedSpeaker = true
-            val pathComp = touchedEntity.getComponent<PathComponent>()!!
-            pathComp.talking = true
-            pathComp.talkDir = when(Components.input.get(hero).skyDir)
-            {
-                SkyDirection.N -> SkyDirection.SSTOP
-                SkyDirection.S -> SkyDirection.NSTOP
-                SkyDirection.W -> SkyDirection.ESTOP
-                SkyDirection.E -> SkyDirection.WSTOP
-                else           -> SkyDirection.SSTOP
-            }
-
-            val conversationComp = touchedEntity.getComponent<ConversationComponent>()!!
-            openConversation(conversationComp.text, conversationComp.name, gameArea.areaID)
-
-            currentlyShownHUDWidget = HUDWidgets.CONVERSATION
-        }*/
-
-        // Sign Entity
-
-        val sign = checkForNearInteractiveObjects(hero, ConversationComponent::class.simpleName!!) ?: return
-
-        logDebug(TAG) { "Touched sign" }
-        val conversation = sign.get<ConversationComponent>()
-        openSign(conversation!!.name, conversation.text, gameArea.areaID)
-        currentlyShownHUDWidget = HUDWidgets.SIGN
-
-        touchedSign = true
-
-
-        /*if (EntityFamilies.signs.matches(touchedEntity))
-        {
-            //
-        }*/
-
-        if (touchedSpeaker || touchedSign)
-        {
-            hero.get<InputComponent>()!!.talking = true
-            sign.get<InputComponent>()!!.talking = true
-        }
-    }
-
-    // ............................................................................. SET UP CONTROLS
-    // --------------------------------------------------------------------------------------------- CALLBACKS
-    private fun onQuitGameButton()
-    {
-        blackCurtain.addAction(alpha(0f) then showActor() then fadeIn(2f) then runThis{ Gdx.app.exit() })
-    }
-
-    private fun onShowInventoryButton()
-    {
-        val inventory = hero.get<InventoryComponent>()!!.inventory
-        val team      = hero.get<TeamComponent>()!!.team
-        Services.ScreenManager().pushScreen(InventoryScreen(team, inventory))
-    }
-
-    private fun onMainMenuButton()
-    {
-        // Menu Button not working in conversation
-        when(currentlyShownHUDWidget)
-        {
-            HUDWidgets.CONVERSATION, HUDWidgets.SIGN -> return
-            else -> {}
-        }
-
-        when(menuButtons.isVisible)
-        {
-            true  -> menuButtons.addAction(moveBy(120f, 0f, .5f, Interpolation.pow2In) then hideActor())
-            false -> menuButtons.addAction(showActor() then moveBy(-120f, 0f, .5f, Interpolation.pow2In))
-        }
     }
 }

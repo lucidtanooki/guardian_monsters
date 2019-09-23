@@ -55,4 +55,7 @@ open class IntVec2()
     }
 
     override fun hashCode(): Int = 31 * x + y
+
+    operator fun plus(other: IntVec2) = IntVec2(x+other.x, y+other.y)
+    operator fun minus(other: IntVec2) = IntVec2(x-other.x, y-other.y)
 }

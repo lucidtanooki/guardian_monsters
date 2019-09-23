@@ -61,6 +61,7 @@ class TileWiseMovementComponent() : LimbusBehaviour()
     {
         super.initialize()
 
+        // Get all obligatory components
         val transform = gameObject?.transform
         if(transform != null) { this.transform = transform }
         val inputComponent = gameObject?.get<InputComponent>()
@@ -76,7 +77,6 @@ class TileWiseMovementComponent() : LimbusBehaviour()
         if(!moving)
         {
             // For every new tile-step, initialize the new movement
-            if(inputComponent.talking) { return }
             initializeMovement()
         }
         else
@@ -100,6 +100,7 @@ class TileWiseMovementComponent() : LimbusBehaviour()
         if(inputComponent.talking)
         {
             characterSpriteComponent.sprite.changeState(inputComponent.talkDirection)
+            return false
         }
         if(inputComponent.direction.isStop()) { return false }
 

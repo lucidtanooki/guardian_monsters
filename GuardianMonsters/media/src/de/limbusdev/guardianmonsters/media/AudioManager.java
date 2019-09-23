@@ -38,20 +38,21 @@ public class AudioManager implements IAudioManager
     @Override
     public void playMusic(String path)
     {
-        Music music = assets.get(path,Music.class);
-
-        // If there is music playing, check, whether it is the same, like the requested
-        if(currentlyPlayingBGMusic != null && !path.equals(currentlyPlayingBGMusic)) {
-            Music currentMusic = assets.get(currentlyPlayingBGMusic,Music.class);
-            currentMusic.stop();
-        }
-
-        // Prevents Music from starting again, if it is already playing
-        if(!music.isPlaying())
-            music.play();
-
-        // Store path of currently playing music
-        currentlyPlayingBGMusic = path;
+        // TODO
+//        Music music = assets.get(path,Music.class);
+//
+//        // If there is music playing, check, whether it is the same, like the requested
+//        if(currentlyPlayingBGMusic != null && !path.equals(currentlyPlayingBGMusic)) {
+//            Music currentMusic = assets.get(currentlyPlayingBGMusic,Music.class);
+//            currentMusic.stop();
+//        }
+//
+//        // Prevents Music from starting again, if it is already playing
+//        if(!music.isPlaying())
+//            music.play();
+//
+//        // Store path of currently playing music
+//        currentlyPlayingBGMusic = path;
 
     }
 

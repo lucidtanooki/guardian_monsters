@@ -68,6 +68,12 @@ class HUD
 
     private var interactionGameObject   : LimbusGameObject? = null
 
+    // Hero
+    private val heroInput = hero.get<InputComponent>()!!
+    private val heroInventory = hero.get<InventoryComponent>()!!.inventory
+    private val heroTeam = hero.get<TeamComponent>()!!.team
+    private val heroTileWiseMovement = hero.get<TileWiseMovementComponent>()!!
+
 
     // --------------------------------------------------------------------------------------------- CONSTRUCTORS
     init
@@ -89,12 +95,11 @@ class HUD
     fun update(delta: Float)
     {
         stage.act(delta)
-        val input = hero.get<InputComponent>() ?: return
-        if(dPad.isTouched && input.direction.isStop())
+        if(dPad.isTouched && heroInput.direction.isStop())
         {
             if(TimeUtils.timeSinceMillis(dpadTouchDownStart) > 100)
             {
-                input.direction = input.direction.nostop()
+                heroInput.direction = heroInput.direction.nostop()
             }
         }
     }
@@ -158,8 +163,8 @@ class HUD
     // --------------------------------------------------------------------------------------------- Interaction
     private fun interactWithProximity()
     {
-        val interactiveObject = findAdjacentObject(hero, ConversationComponent::class.simpleName!!) ?: return
-        val conversation = interactiveObject.get<ConversationComponent>() ?: return
+        interactionGameObject = findAdjacentObject(hero, ConversationComponent::class.simpleName!!) ?: return
+        val conversation = interactionGameObject?.get<ConversationComponent>() ?: return
         openConversation(conversation.text, conversation.name, gameArea.areaID)
         currentlyShownHUDWidget = HUDWidgets.SIGN
     }
@@ -167,9 +172,7 @@ class HUD
     /** Finds a LimbusGameObject on the next cell in looking direction, if there is one. */
     private fun findAdjacentObject(hero: LimbusGameObject, signature: String): LimbusGameObject?
     {
-        val dir = hero.get<InputComponent>()?.direction ?: return null
-
-        val adjacentGridSlot = hero.transform.onGrid + IntVec2(dir.x, dir.y)
+        val adjacentGridSlot = hero.transform.onGrid + IntVec2(heroInput.direction.x, heroInput.direction.y)
 
         logDebug(TAG) { "Grid cell to be checked: $adjacentGridSlot" }
 
@@ -201,18 +204,18 @@ class HUD
         currentlyShownHUDWidget = HUDWidgets.CONVERSATION
 
         // Stop player movement
-        val heroInputComponent = hero.get<InputComponent>() ?: return
-        heroInputComponent.talking = true
+        heroInput.talking = true
+        heroInput.talkDirection = heroInput.direction
 
         // If other object has input component, stop it too
         val otherInputComponent = interactionGameObject?.get<InputComponent>() ?: return
         otherInputComponent.talking = true
-        otherInputComponent.talkDirection = heroInputComponent.direction.invert()
-        heroInputComponent.talkDirection = heroInputComponent.direction
+        otherInputComponent.talkDirection = heroInput.direction.invert()
     }
 
     private fun proceedConversation()
     {
+        // If there are no more text sections to display, end conversation
         if(!conversationWidget.nextSection()) { closeConversation() }
     }
 
@@ -220,7 +223,7 @@ class HUD
     {
         mainMenuButton.isVisible = true
         conversationWidget.addAction(moveTo(0f, -50f, .5f, Interpolation.exp10In) then hideActor())
-        hero.get<InputComponent>()!!.talking = false
+        heroInput.talking = false
         currentlyShownHUDWidget = HUDWidgets.NONE
 
         val otherInputComponent = interactionGameObject?.get<InputComponent>() ?: return
@@ -237,9 +240,7 @@ class HUD
 
     private fun onShowInventoryButton()
     {
-        val inventory = hero.get<InventoryComponent>()?.inventory ?: return
-        val team      = hero.get<TeamComponent>()?.team ?: return
-        Services.ScreenManager().pushScreen(InventoryScreen(team, inventory))
+        Services.ScreenManager().pushScreen(InventoryScreen(heroTeam, heroInventory))
     }
 
     private fun onMainMenuButton()
@@ -277,14 +278,12 @@ class HUD
     override fun touchDragged(screenX: Int, screenY: Int, pointer: Int): Boolean
     {
         val touchPos = stage.viewport.unproject(Vector2(screenX.f(), screenY.f()))
-        val input = hero.get<InputComponent>()!!
 
         val (dPadValid, dPadDirection) = dPad.touchDown(touchPos)
 
         if(!dPadValid) { return false }
 
-        val moving = hero.get<TileWiseMovementComponent>()?.moving ?: false
-        input.direction = when(dPadDirection)
+        heroInput.direction = when(dPadDirection)
         {
             Compass4.N -> SkyDirection.NSTOP
             Compass4.E -> SkyDirection.ESTOP
@@ -294,7 +293,7 @@ class HUD
 
         if(TimeUtils.timeSinceMillis(dpadTouchDownStart) > 100)
         {
-            input.direction = input.direction.nostop()
+            heroInput.direction = heroInput.direction.nostop()
         }
 
         return dPadValid
@@ -303,8 +302,7 @@ class HUD
     override fun touchUp(screenX: Int, screenY: Int, pointer: Int, button: Int): Boolean
     {
         dPad.touchUp()
-        val inputComponent = hero.get<InputComponent>() ?: return false
-        inputComponent.direction = inputComponent.direction.stop()
+        heroInput.direction = heroInput.direction.stop()
         return true
     }
 }

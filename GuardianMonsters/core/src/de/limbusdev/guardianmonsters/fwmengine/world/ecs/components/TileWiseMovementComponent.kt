@@ -41,7 +41,8 @@ class TileWiseMovementComponent() : LimbusBehaviour()
     private var framesPerStep : Int = 1
 
 
-    private var currentMovement = SkyDirection.SSTOP
+    var currentMovement = SkyDirection.SSTOP
+        private set
 
     var moving = false
         private set

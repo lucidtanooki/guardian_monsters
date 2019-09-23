@@ -34,6 +34,8 @@ class World
         componentParsers[TileWiseMovementComponent::class] = TileWiseMovementComponentParser
         componentParsers[SpriteComponent::class] = SpriteComponentParser
         componentParsers[SlidingComponent::class] = SlidingComponent.Parser
+        componentParsers[BoxTrigger2DComponent::class] = BoxTrigger2DComponent.Parser
+        componentParsers[ChangeLayerTriggerCallbackComponent::class] = ChangeLayerTriggerCallbackComponent.Parser
     }
 
     fun start() { isStopped = false }

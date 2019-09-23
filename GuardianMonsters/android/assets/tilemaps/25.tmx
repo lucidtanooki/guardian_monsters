@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-down" width="64" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="18" nextobjectid="467">
+<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-down" width="64" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="19" nextobjectid="474">
  <properties>
   <property name="musicIndex" type="int" value="2"/>
   <property name="musicType" value="town"/>
@@ -20,17 +20,17 @@
  </layer>
  <layer id="3" name="shadows1" width="64" height="32">
   <data encoding="base64" compression="zlib">
-   eJzt10EKgDAMRNGql/RankwQvY8EcSuKk9C0/4HgIiSZQgVLAQDgnWXU1GSVLb96F2X+iHMif3y/lvMr9Z4fyGx2ulvb4NNXbU+yp4p9S9fpeuz9cMrv2fuvOz8AoB81/dd9pdip5vw282ku+TUzlHVKEfkBtOME2CAd7w==
+   eJzt11EKgCAQRVHLTbatVhaE7SeG6DeK3oij94D0oUzzBKVSAgDgnXXWrIkqWn51L8r8NfaJ/PXr9ZxfafT8QGSL09naJ5+6aiVInyp2l275eto4nPJ71v7L8gMAxtLSf91Xip5azn9/kzzNK96hXKdEfv/8APpxAuX7HN4=
   </data>
  </layer>
  <layer id="4" name="walls1" width="64" height="32">
   <data encoding="base64" compression="zlib">
-   eJztmVtuEzEYhZ3pJVGlsgoeKBVt2vLABmi7C4pUqUC5wxag2QUgIcoLvbGIdiFRxUXNrUjAG8eaGWXyj8f+PbY7KeqRPiUZOz4+/mdGsrw2KcQqWKvoswFc9KbCufv4XHfMf9fTXN6CnQo+28hwPRrmuRGpc36O8v1Ok/rbetLsx2AbY/2oXTwy/2Ym1wN8byvW4FuU73daYs4y5wlZg/pUfP1mNArV4YQQzcl8P1fmM15z5HfR9bmSXjJnY2q0/q2k/o+iISrJ/IL060wL0QU90AcDcD492sfEdsZvE3PZUrwT6PWHZIw/9TxKL5F/Z64n+U1K6z/IzHcBPougCZbAMlip5/9btE5UHzH+riJ/0XU5rip7CpXMSd+ZLWb+VEfJffAE4z8Fz8Bz8AK8BK/Aa+LNXSdb6bKr1sBU/y8TcZ11pPml9jD+PjgAh+AIfCWeNutkIznunUbMeT2GfpdkPUz1V+XfA/vggOQ/w7gd0AU90AeDxPsXycVZpzKS45rIylT/M2TrEzqgC3rJ70GS/xbWdgEsgiZYAstgBdxuDD1t1slGRePqPHw8/7birpOvcXUeLu///0FV1L+MdnDPtjy8H6guS/2Pkf0kUP7LUP9QGsf6Z+/1e7NCbID7s2G8XOv/d0aIx9difs/4mVP2Xn+H3O/Bh4D5Xeuf5g+tT/DY9exz9fyP3/N/kbqqP6/+3P06t59PmTx17dz6c/frofb1Opk8de2c+nP366H29TqZPE3t3Ppz9+uh9vU6mTx17Zz6c/frofb1Opk8Te2c+nP367b7+rZwO+vgeJrai+r/vVaqHFaS+V3OOnzoZ01d/7LnCeN81lHkrzozpecJofBx1uHqrzoDrUK2Zx0+tEqy/wNC1tic
+   eJztmVtu1DAYhT3pZUaVyip4oFS005YHNkDbXVCkSgXKHbYAnV0AEqK80BuLaBcyqriocysS8Maxkmgyfxz7d2w3U9QjfUom8fj38UkiWV6bFGIVrFV0bAAXvalw7D6O647+73oay1uwU8GxDQ/Xo6GfG5Ha5+co3+40yd+2JvV+DLbR14/axSP9b2Z8PcB5WzEH36J8u9MSY5Y+T8gc1Kfi6zejUagOJ4RoTubbuTKfqTVHfhddnytZS/psTI3m30ryfxQNUUn6F6RdZ1qILuiBPhiA8+nRNia2M/U2MZYtxTeBXn9I+vhTz6OsJfLfzPXEv0lp/oPMeBdQZxE0wRJYBiv1/H+L5onqI/rfVfgvui77VXlPoZI+6TezxfSf6ih5Dp6g/6fgGXgOXoCX4BV4TWpz58lWOu+qOTDl/2UizllH6l9qD/3vgwNwCI7AV1LTZp5sJPu904g5r8fQc0m2hil/lf89sA8OiP8z9NsBXdADfTBIav8ivjjzVEayXxNZmfI/g7c+oQO6oJf8HiT+b2FuF8AiaIIlsAxWwO3GsKbNPNmoqF9dDR/vv6248+SrX10Nl+///6Aq8i+jHTyzLQ/fB6rLkv8xvJ8E8n8Z8g+lccw/+6zfmxViA9yfDVPLNf+/M0I8vhaf/57xM6bss/4Ovt+DDwH9u+af+g+tT6iz67nW1fs/fu//Reoqf17+3PU6t51PmWrq7nPz567XQ63rdTLV1N3n5M9dr4da1+tkqmm6z82fu14Pta7XyVRTd5+TP3e9Hmpdr5Oppuk+J3/uet12Xd8WbnsdnJqm+0X5f6+VisNK0r/LXocP/ayp8y+7nzDOex1F9VV7pnQ/IRQ+9jpc66v2QKuQ7V6HD60S7/8ApYDXqA==
   </data>
  </layer>
  <layer id="5" name="objects1" width="64" height="32">
   <data encoding="base64" compression="zlib">
-   eJztmL0OgjAQx1EnlvICrgYHFl/BBPUhnI2Diy+li4tvBC4u+g5yscSGVNoeqUflfkmTg9KP/31AQxQxDMOYeY6pd0DPYkK9Azog/scB6weuHvQvLeY8iSg6C7cxWLJYb6vXq5G/9ak5xHpbd92GrY8wsfQZ/4vUuBMfu9mXS223pH0uU38X5sL8jCuqX5s1h8FG/x6xRlv8YU2M3/M/rmlbfNaVb2ZVHt2rVsrYF0oOpNX9TcDaXIDcLzX5v7bI75Djz3THFP9porepgVovNHlffqkFLNtEb1NT6wQfpPI9CK32S9GjvTJhw+ckN2y+u7+chwLImaGcv1RC0+yjtvl9wTBvHoh/HZgxfSVDnEMxYxjGhhc7bStz
+   eJztmLsOgjAUhqtOLOUFWA0OLL6CiZeHYDYOLr6ULi6+Ebi46DvIiSU0pNL2kFoq50ualksv/7mUBsYIgiD0vKa+V+Cf5cz3CvwB/j+NWD9wc6B/ZTDmmTN24XZ9sGSRui1fbybu5vfNMVK3VdddmNoI40uX/r8KjXvetNvP1kLbPe4eS/e8Dwuuf8cW2a7tnMNgov+AmKPL/zAnxu7rP85pU1zmlWvmVRw9qlIK3xdSDKTV/V3A2myA2C8V8b81iO+Q/U/0R+f/JG7qxOG3zRbI9UIR9+WXXMCSx02dD0h/rRNskIp9EEptl2JAayXChs5Jdph8d385jg8gZsZy/pIJTbOL3Kb9giA+PBH/OjB9hkqGOIdi+hCECW959ywJ
   </data>
  </layer>
  <objectgroup id="6" name="animatedObjects0">
@@ -339,7 +339,7 @@ path: NSTOP</property>
    eJztmdlOwzAQRS1RlvIf8FagEPgjeAOawm91oS38VcvSwDMnD6gmuOMJsYUAX+lIlaPOvZNN8sQYvbINY07hbOPrsfGmMXebNYr9Qs1axtzDQ+vz+iN9P8EzvHjOwXiH87QTPltZ9769IoZHQd+v8Gb1f7BlzCEcQReO4WTL/f9HMj3BM7wEzPdR97W9IrSHS5f0eQXX0IMc+nADt5VzcECmQziCLhzDSftrzT3O7X5Lv27XtfuXPJqoaz37A3ocwgjGcAcTmMLM6v+SDFdwDT3IoQ83cFvJd06PF44+XevVunb/kkcT5Vb/c3pclNefZ74HOfRhyVph9T/AfwgjGJfPJkxgCrMG2ap1T3dXhPKQ1NnGn35H1jtvwu8pZNurtTn+i/I68Tz2IIc+LFkrGmSr1rUVykP0p8+F432/ZK2w1jtcjyFZRlbGCb+nkO1+399V11YID9F/zXu+VGYdm5Nh4ci4ZK1o8I5eVzekRwh1hPsva3BvSnVDeSQlJSUlJf1Haecasfb1TTybzmS0c41Y+3oxm8ezzkzGJe1cQ7uvDymfZ52ZjEvauUadfX0o+TzrzGTWSTvXiLWvF7N5PLXZJWnnGrH29WI2j6c2uyTtXCPWvl7M5vHUZpeknWvE2teL2Tye2uyStHONWPt6ST5PbfakpJ9W3W8df011vnUkJcXQO1GR5Tw=
   </data>
  </layer>
- <objectgroup id="11" name="colliderWalls0">
+ <objectgroup id="11" name="colliderWalls0" visible="0">
   <object id="203" x="64" y="144" width="96" height="32">
    <properties>
     <property name="ColliderComponent" value=""/>
@@ -755,18 +755,25 @@ path: NSTOP</property>
     <property name="ColliderComponent" value=""/>
    </properties>
   </object>
-  <object id="465" x="240" y="288" width="16" height="16">
+  <object id="465" x="224" y="288" width="32" height="16">
    <properties>
     <property name="ColliderComponent" value=""/>
    </properties>
   </object>
-  <object id="466" x="208" y="288" width="32" height="16">
+  <object id="468" name="layerTrigger" x="208" y="288" width="16" height="16">
    <properties>
     <property name="BoxTrigger2DComponent" value="triggerID: 0"/>
-    <property name="ChangeLayerTriggerCallbackComponent" value="triggerID: 0, fromNorth: -1, fromSouth: 1"/>
+    <property name="ChangeLayerTriggerCallbackComponent" value="triggerID: 0, fromNorth: -1, fromSouth: 1, fromWest: 0, fromEast: 0"/>
     <property name="ColliderComponent" value="isTrigger: true"/>
    </properties>
   </object>
+ </objectgroup>
+ <objectgroup id="18" name="colliderWalls1">
+  <object id="469" x="176" y="240" width="16" height="32"/>
+  <object id="470" x="256" y="240" width="16" height="32"/>
+  <object id="471" x="176" y="224" width="96" height="16"/>
+  <object id="472" x="176" y="272" width="32" height="16"/>
+  <object id="473" x="224" y="272" width="48" height="16"/>
  </objectgroup>
  <objectgroup id="12" name="triggers0">
   <object id="32" name="startField" x="432" y="192" width="16" height="16">

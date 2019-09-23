@@ -43,9 +43,8 @@ import ktx.actors.then
 class HUD
 (
         val battleScreen    : BattleScreen,
-        val saveGameManager : SaveGameManager,
-        val hero            : LimbusGameObject,
-        var engine          : Engine,
+        private val saveGameManager : SaveGameManager,
+        private val hero            : LimbusGameObject,
         private val gameArea: GameArea
 )
     : InputAdapter()
@@ -72,7 +71,6 @@ class HUD
     private val heroInput = hero.get<InputComponent>()!!
     private val heroInventory = hero.get<InventoryComponent>()!!.inventory
     private val heroTeam = hero.get<TeamComponent>()!!.team
-    private val heroTileWiseMovement = hero.get<TileWiseMovementComponent>()!!
 
 
     // --------------------------------------------------------------------------------------------- CONSTRUCTORS
@@ -231,7 +229,6 @@ class HUD
     }
 
 
-    // ............................................................................. SET UP CONTROLS
     // --------------------------------------------------------------------------------------------- CALLBACKS
     private fun onQuitGameButton()
     {

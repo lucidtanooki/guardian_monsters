@@ -74,7 +74,7 @@ class EntityComponentSystem
     {
         CoreSL.world.add(setupHero(fromSave))
         val inventory = CoreSL.world.hero.get<InventoryComponent>()!!.inventory
-        hud = HUD(BattleScreen(inventory), saveGameManager, CoreSL.world.hero, engine, gameArea)
+        hud = HUD(BattleScreen(inventory), saveGameManager, CoreSL.world.hero, gameArea)
         setUpEntitySystems(gameArea, viewport, hud)
     }
 

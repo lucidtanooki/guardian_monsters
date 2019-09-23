@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.maps.MapLayer
 import com.badlogic.gdx.maps.MapObject
 import com.badlogic.gdx.maps.objects.RectangleMapObject
+import com.badlogic.gdx.maps.objects.TextureMapObject
 import com.badlogic.gdx.maps.tiled.TiledMap
 import com.badlogic.gdx.math.MathUtils
 import com.badlogic.gdx.utils.Array
@@ -159,7 +160,7 @@ class GameArea(val areaID: Int, startPosID: Int)
         for(mapObject in layer.objects)
         {
             // Only Rectangle Map Objects are supported
-            if(mapObject is RectangleMapObject)
+            if(mapObject is RectangleMapObject || mapObject is TextureMapObject)
             {
                 val gameObject = LimbusGameObject(mapObject.name ?: "")
 
@@ -170,10 +171,23 @@ class GameArea(val areaID: Int, startPosID: Int)
                 }
 
                 // Transform
-                gameObject.transform.x = MathUtils.round(mapObject.rectangle.x)
-                gameObject.transform.y = MathUtils.round(mapObject.rectangle.y)
-                gameObject.transform.width = MathUtils.round(mapObject.rectangle.width)
-                gameObject.transform.height = MathUtils.round(mapObject.rectangle.height)
+                when (mapObject)
+                {
+                    is RectangleMapObject ->
+                    {
+                        gameObject.transform.x = MathUtils.round(mapObject.rectangle.x)
+                        gameObject.transform.y = MathUtils.round(mapObject.rectangle.y)
+                        gameObject.transform.width = MathUtils.round(mapObject.rectangle.width)
+                        gameObject.transform.height = MathUtils.round(mapObject.rectangle.height)
+                    }
+                    is TextureMapObject ->
+                    {
+                        gameObject.transform.x = MathUtils.round(mapObject.x)
+                        gameObject.transform.y = MathUtils.round(mapObject.y)
+                        gameObject.transform.width = mapObject.textureRegion.regionWidth
+                        gameObject.transform.height = mapObject.textureRegion.regionHeight
+                    }
+                }
                 gameObject.transform.layer = layerID
 
 

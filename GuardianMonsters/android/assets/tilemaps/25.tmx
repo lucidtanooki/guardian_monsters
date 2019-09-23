@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-down" width="64" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="18" nextobjectid="442">
+<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-down" width="64" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="18" nextobjectid="445">
  <properties>
   <property name="musicIndex" type="int" value="2"/>
   <property name="musicType" value="town"/>
@@ -30,7 +30,7 @@
  </layer>
  <layer id="5" name="objects1" width="64" height="32">
   <data encoding="base64" compression="zlib">
-   eJztmD0OgjAUgOvPwoKnEBxYvIIJ6kmMg4sX8Ri6uHgjcHHRO9jG10gIwuuTWorvSxraQn/eX1sqBMMwTDOPoesZuGc+cj0Ddyj77w3lP4ztzMUVFwv2XyD6PIZCnEKzNlSSoDpfLC8H9sZ3zS6ozleV68DqiGJLm/Y/g4yb8J0vv0tBtuukvq+m998wC5u/MaWo13LMUcDIvyWMUWd/NSZF72mPYxqLzbiySSR9aCrTTaYcbJ/BU9XHMq09lQ1DDLLH4Pt5wf8jqF8h/NtX+zPt4Kv9Vaxn4PfltSC3uAd3BS2n0oFeC1TSesn+QAfMb+BzEg7974/ZdzG01Y8LlM/0+fz1Cd9kxsa2yb0WrxcM8+JOuOugtOkqCeEcSmnDMBieAYovig==
+   eJztmEsOgjAQhquu2NRTCC7YeAUTHycxLtx4Kd248Ubgxo3ewU4cIiEIw2gphfmShhZoyz+PtkEpQRCEep5j11/gnsXE9Re4A/x/HLB+4GpB/5Iw5kkrddbN+nCJg/J6vr0e2ZvfNYegvF7WroJqI44vbfr/ghp3+lMvPluhttu0eqy6578w1/XvNCVv12LOcaDo3zPmqPI/zMmx+6rHOU3FZl7ZJDQxNDPlbkqKvk/wCvcjU7aeaqMQofYIYz/NxX+I9zeE+PbV/8J/8NX/kOsJxn1xLUgt7sFdIdMJNsjWAiiZXZIB2EBoBzknNYOy77Y5jgsgZvp8/vqGb5pt5LasF4Lw5sH418Hp01VixjmU00cQKLwABVYt1A==
   </data>
  </layer>
  <objectgroup id="6" name="animatedObjects0">
@@ -152,6 +152,16 @@
   <object id="420" name="sign" type="objectDescription" x="688" y="112" width="16" height="16">
    <properties>
     <property name="ConversationComponent" value="enabled: true, name: sign_25_4_title, text: sign_25_4_text"/>
+   </properties>
+  </object>
+  <object id="444" name="rock" gid="1166" x="48" y="336" width="16" height="16">
+   <properties>
+    <property name="ColliderComponent" value=""/>
+    <property name="ConversationComponent" value="enabled: true, name: object_25_8_title, text: object_25_8_text"/>
+    <property name="InputComponent" value=""/>
+    <property name="SlidingComponent" value=""/>
+    <property name="SpriteComponent" value=""/>
+    <property name="TileWiseMovementComponent" value=""/>
    </properties>
   </object>
  </objectgroup>
@@ -329,7 +339,7 @@ path: NSTOP</property>
    eJztmdlOwzAQRS1RlvIf8FagEPgjeAOawm91oS38VcvSwDMnD6gmuOMJsYUAX+lIlaPOvZNN8sQYvbINY07hbOPrsfGmMXebNYr9Qs1axtzDQ+vz+iN9P8EzvHjOwXiH87QTPltZ9769IoZHQd+v8Gb1f7BlzCEcQReO4WTL/f9HMj3BM7wEzPdR97W9IrSHS5f0eQXX0IMc+nADt5VzcECmQziCLhzDSftrzT3O7X5Lv27XtfuXPJqoaz37A3ocwgjGcAcTmMLM6v+SDFdwDT3IoQ83cFvJd06PF44+XevVunb/kkcT5Vb/c3pclNefZ74HOfRhyVph9T/AfwgjGJfPJkxgCrMG2ap1T3dXhPKQ1NnGn35H1jtvwu8pZNurtTn+i/I68Tz2IIc+LFkrGmSr1rUVykP0p8+F432/ZK2w1jtcjyFZRlbGCb+nkO1+399V11YID9F/zXu+VGYdm5Nh4ci4ZK1o8I5eVzekRwh1hPsva3BvSnVDeSQlJSUlJf1Haecasfb1TTybzmS0c41Y+3oxm8ezzkzGJe1cQ7uvDymfZ52ZjEvauUadfX0o+TzrzGTWSTvXiLWvF7N5PLXZJWnnGrH29WI2j6c2uyTtXCPWvl7M5vHUZpeknWvE2teL2Tye2uyStHONWPt6ST5PbfakpJ9W3W8df011vnUkJcXQO1GR5Tw=
   </data>
  </layer>
- <objectgroup id="11" name="colliderWalls0" visible="0">
+ <objectgroup id="11" name="colliderWalls0">
   <object id="203" x="64" y="144" width="96" height="32">
    <properties>
     <property name="ColliderComponent" value=""/>
@@ -390,11 +400,6 @@ path: NSTOP</property>
     <property name="ColliderComponent" value=""/>
    </properties>
   </object>
-  <object id="218" x="384" y="96" width="16" height="16">
-   <properties>
-    <property name="ColliderComponent" value=""/>
-   </properties>
-  </object>
   <object id="219" x="112" y="176" width="32" height="16">
    <properties>
     <property name="ColliderComponent" value=""/>
@@ -416,16 +421,6 @@ path: NSTOP</property>
    </properties>
   </object>
   <object id="223" x="64" y="272" width="16" height="16">
-   <properties>
-    <property name="ColliderComponent" value=""/>
-   </properties>
-  </object>
-  <object id="224" x="224" y="400" width="16" height="16">
-   <properties>
-    <property name="ColliderComponent" value=""/>
-   </properties>
-  </object>
-  <object id="225" x="368" y="352" width="16" height="16">
    <properties>
     <property name="ColliderComponent" value=""/>
    </properties>

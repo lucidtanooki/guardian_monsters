@@ -277,13 +277,7 @@ class HUD
 
         if(!dPadValid) { return false }
 
-        heroInput.direction = when(dPadDirection)
-        {
-            Compass4.N -> SkyDirection.NSTOP
-            Compass4.E -> SkyDirection.ESTOP
-            Compass4.S -> SkyDirection.SSTOP
-            Compass4.W -> SkyDirection.WSTOP
-        }
+        heroInput.direction = dPadDirection.toSkyDirection().stop()
 
         if(TimeUtils.timeSinceMillis(dpadTouchDownStart) > 100)
         {

@@ -65,7 +65,35 @@ enum class SkyDirection
 }
 
 /** North, East, South, West */
-enum class Compass4 { N, E, S, W }
+enum class Compass4
+{
+    N, E, S, W;
+
+    fun toSkyDirection() : SkyDirection
+    {
+        return when(this)
+        {
+            N -> SkyDirection.N
+            E -> SkyDirection.E
+            S -> SkyDirection.S
+            W -> SkyDirection.W
+        }
+    }
+
+    companion object
+    {
+        fun translate(skyDirection: SkyDirection) : Compass4
+        {
+            return when(skyDirection)
+            {
+                SkyDirection.NW, SkyDirection.N, SkyDirection.NE, SkyDirection.NSTOP -> N
+                SkyDirection.E, SkyDirection.ESTOP -> E
+                SkyDirection.SE, SkyDirection.S, SkyDirection.SW, SkyDirection.SSTOP -> S
+                SkyDirection.W, SkyDirection.WSTOP -> W
+            }
+        }
+    }
+}
 
 /** North, North-East, East, South-East, South, South-West, West, North-West */
 enum class Compass8 { N, NE, E, SE, S, SW, W, NW }

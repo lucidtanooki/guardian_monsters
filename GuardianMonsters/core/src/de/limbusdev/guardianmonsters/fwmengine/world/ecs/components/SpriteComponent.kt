@@ -1,6 +1,9 @@
 package de.limbusdev.guardianmonsters.fwmengine.world.ecs.components
 
 import com.badlogic.ashley.core.Component
+import com.badlogic.gdx.graphics.g2d.Sprite
+import com.badlogic.gdx.graphics.g2d.TextureRegion
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusBehaviour
 
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.AnimatedPersonSprite
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.EntitySprite
@@ -11,16 +14,10 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ui.EntitySprite
  *
  * @author Georg Eckert 2015-11-21
  */
-class SpriteComponent(male: Boolean, index: Int) : Component
+open class SpriteComponent(region: TextureRegion) : LimbusBehaviour(), Component
 {
+    override val defaultJson: String get() = ""
+
     // --------------------------------------------------------------------------------------------- PROPERTIES
-    var sprite: AnimatedPersonSprite
-
-
-    // --------------------------------------------------------------------------------------------- CONSTRUCTORS
-    init
-    {
-        sprite = AnimatedPersonSprite(male, index)
-        sprite.setSize(1f, 1f)
-    }
+    var sprite = Sprite(region)
 }

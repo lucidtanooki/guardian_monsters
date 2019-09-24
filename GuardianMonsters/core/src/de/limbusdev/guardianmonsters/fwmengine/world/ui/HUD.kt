@@ -20,6 +20,7 @@ import de.limbusdev.guardianmonsters.battle.BattleScreen
 import de.limbusdev.guardianmonsters.enums.Compass4
 import de.limbusdev.guardianmonsters.enums.SkyDirection
 import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusBehaviour
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusGameObject
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.*
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.GameArea
@@ -31,6 +32,7 @@ import de.limbusdev.utils.extensions.f
 import de.limbusdev.utils.geometry.IntVec2
 import de.limbusdev.utils.logDebug
 import ktx.actors.then
+import kotlin.reflect.KClass
 
 
 /**
@@ -158,14 +160,14 @@ class HUD
     // --------------------------------------------------------------------------------------------- Interaction
     private fun interactWithProximity()
     {
-        interactionGameObject = findAdjacentObject(hero, ConversationComponent::class.simpleName!!) ?: return
+        interactionGameObject = findAdjacentObject(hero, ConversationComponent::class) ?: return
         val conversation = interactionGameObject?.get<ConversationComponent>() ?: return
         openConversation(conversation.text, conversation.name, gameArea.areaID)
         currentlyShownHUDWidget = HUDWidgets.SIGN
     }
 
     /** Finds a LimbusGameObject on the next cell in looking direction, if there is one. */
-    private fun findAdjacentObject(hero: LimbusGameObject, signature: String): LimbusGameObject?
+    private fun findAdjacentObject(hero: LimbusGameObject, signature: KClass<out LimbusBehaviour>): LimbusGameObject?
     {
         val adjacentGridSlot = hero.transform.onGrid + IntVec2(heroInput.direction.x, heroInput.direction.y)
 

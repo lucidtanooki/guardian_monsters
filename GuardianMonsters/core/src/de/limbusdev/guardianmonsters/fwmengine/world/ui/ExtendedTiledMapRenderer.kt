@@ -113,7 +113,7 @@ class ExtendedTiledMapRenderer(map: TiledMap) : OrthogonalTiledMapRenderer(map, 
     private fun renderSprites()
     {
         // Get all CharacterSpriteComponents
-        val gameObjects = CoreSL.world.getAllWith("SpriteComponent").toTypedArray()
+        val gameObjects = CoreSL.world.getAllWith(SpriteComponent::class).toTypedArray()
         Sort.instance().sort(gameObjects, GameObjectZComparator)
 
         gameObjects.forEach {
@@ -129,7 +129,7 @@ class ExtendedTiledMapRenderer(map: TiledMap) : OrthogonalTiledMapRenderer(map, 
     private fun renderPeople(layerID: Int)
     {
         // Get all CharacterSpriteComponents
-        val gameObjects = CoreSL.world.getAllWith("CharacterSpriteComponent").toTypedArray()
+        val gameObjects = CoreSL.world.getAllWith(CharacterSpriteComponent::class).toTypedArray()
         Sort.instance().sort(gameObjects, GameObjectZComparator)
 
         gameObjects.forEach {

@@ -25,6 +25,7 @@ class CharacterSpriteComponent
 {
     companion object
     {
+        const val className ="CharacterSpriteComponent"
         const val defaultJson : String = "enabled: true, male: true, index: 0"
     }
 }

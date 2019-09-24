@@ -10,5 +10,10 @@ import de.limbusdev.guardianmonsters.guardians.monsters.GuardoSphere
  */
 class GuardoSphereComponent : LimbusBehaviour(),  Component
 {
+    companion object
+    {
+        const val className ="GuardoSphereComponent"
+    }
+
     var guardoSphere = GuardoSphere()
 }

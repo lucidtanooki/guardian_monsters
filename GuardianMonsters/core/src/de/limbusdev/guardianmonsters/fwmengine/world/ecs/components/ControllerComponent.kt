@@ -6,6 +6,7 @@ class ControllerComponent() : LimbusBehaviour()
 {
     companion object
     {
+        const val className ="ControllerComponent"
         val defaultJson: String get() = "enabled: true"
     }
 }

@@ -19,6 +19,7 @@ class ChangeLayerTriggerCallbackComponent
 {
     companion object
     {
+        const val className = "ChangeLayerTriggerCallbackComponent"
         val defaultJson: String get() = "${TriggerCallbackComponent.defaultJson}, fromNorth: -1, fromSouth: 1, fromEast: -1, fromWest: 1"
     }
 
@@ -26,7 +27,7 @@ class ChangeLayerTriggerCallbackComponent
     {
         super.initialize()
 
-        for(trigger in CoreSL.world.getAllWith("BoxTrigger2DComponent"))
+        for(trigger in CoreSL.world.getAllWith(BoxTrigger2DComponent::class))
         {
             val triggerComponent = trigger.get<BoxTrigger2DComponent>()
             if(triggerComponent != null && triggerComponent.triggerID == triggerID)
@@ -56,12 +57,10 @@ class ChangeLayerTriggerCallbackComponent
         override fun parseComponent(json: Json, mapObject: MapObject): ChangeLayerTriggerCallbackComponent?
         {
             // MapObject must contain proper component
-            if (!mapObject.properties.containsKey("ChangeLayerTriggerCallbackComponent")) { return null }
+            if (!mapObject.properties.containsKey(className)) { return null }
 
-            val jsonStringWithoutBrackets = mapObject.properties["ChangeLayerTriggerCallbackComponent", ChangeLayerTriggerCallbackComponent.defaultJson]
-            val callback = json.fromJson(ChangeLayerTriggerCallbackComponent::class.java, "{$jsonStringWithoutBrackets}")
-
-            return callback
+            val jsonStringWithoutBrackets = mapObject.properties[className, defaultJson]
+            return json.fromJson(ChangeLayerTriggerCallbackComponent::class.java, "{$jsonStringWithoutBrackets}")
         }
     }
 }

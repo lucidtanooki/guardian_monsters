@@ -10,7 +10,7 @@ object TileWiseMovementComponentParser : IComponentParser<TileWiseMovementCompon
     override fun parseComponent(json: Json, mapObject: MapObject): TileWiseMovementComponent?
     {
         // MapObject must contain proper component
-        if(!mapObject.properties.containsKey("TileWiseMovementComponent")) { return null }
+        if(!mapObject.properties.containsKey(TileWiseMovementComponent.className)) { return null }
 
         return TileWiseMovementComponent()
     }

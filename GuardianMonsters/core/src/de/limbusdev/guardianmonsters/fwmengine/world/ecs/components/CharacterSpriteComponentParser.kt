@@ -15,9 +15,9 @@ object CharacterSpriteComponentParser : IComponentParser<CharacterSpriteComponen
     override fun parseComponent(json: Json, mapObject: MapObject): CharacterSpriteComponent?
     {
         // MapObject must contain proper component
-        if(!mapObject.properties.containsKey("CharacterSpriteComponent")) { return null }
+        if(!mapObject.properties.containsKey(CharacterSpriteComponent.className)) { return null }
 
-        val jsonStringWithoutBrackets = mapObject.properties["CharacterSpriteComponent", CharacterSpriteComponent.defaultJson]
+        val jsonStringWithoutBrackets = mapObject.properties[CharacterSpriteComponent.className, CharacterSpriteComponent.defaultJson]
 
         val data = json.fromJson(Data::class.java, "{$jsonStringWithoutBrackets}")
 

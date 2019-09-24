@@ -11,15 +11,15 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusGameObject
  */
 class PusherComponent : LimbusBehaviour()
 {
-    private var tileWiseMovementComponent = TileWiseMovementComponent()
-    private var inputComponent = InputComponent()
+    private lateinit var tileWiseMovementComponent : TileWiseMovementComponent
+    private lateinit var inputComponent : InputComponent
 
     override fun initialize()
     {
         super.initialize()
 
-        inputComponent = gameObject?.get() ?: return
-        tileWiseMovementComponent = gameObject?.get() ?: return
+        inputComponent = gameObject.getOrCreate()
+        tileWiseMovementComponent = gameObject.getOrCreate()
         tileWiseMovementComponent.onMovementImpossible.add { blocker -> push(blocker) }
     }
 

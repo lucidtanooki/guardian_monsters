@@ -14,6 +14,11 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusBehaviour
  */
 class InputComponent : LimbusBehaviour(), Component
 {
+    companion object
+    {
+        const val className ="InputComponent"
+    }
+
     // --------------------------------------------------------------------------------------------- PROPERTIES
     var talking     : Boolean = false
     var inBattle    : Boolean = false

@@ -11,9 +11,9 @@ object WarpTargetComponentParser : IComponentParser<WarpTargetComponent>
     override fun parseComponent(json: Json, mapObject: MapObject): WarpTargetComponent?
     {
         // MapObject must contain proper component
-        if(!mapObject.properties.containsKey("WarpTargetComponent")) { return null }
+        if(!mapObject.properties.containsKey(WarpTargetComponent.className)) { return null }
 
-        val jsonStringWithoutBrackets = mapObject.properties["WarpTargetComponent", WarpTargetComponent.defaultJson]
+        val jsonStringWithoutBrackets = mapObject.properties[WarpTargetComponent.className, WarpTargetComponent.defaultJson]
         val warpTarget = json.fromJson(WarpTargetComponent::class.java, "{$jsonStringWithoutBrackets}")
 
         return warpTarget

@@ -14,8 +14,8 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusGameObject
  */
 class SlidingComponent : LimbusBehaviour()
 {
-    private var tileWiseMovementComponent = TileWiseMovementComponent()
-    private var inputComponent = InputComponent()
+    private lateinit var tileWiseMovementComponent : TileWiseMovementComponent
+    private lateinit var inputComponent : InputComponent
 
     private var pusher : LimbusGameObject? = null
 
@@ -23,8 +23,8 @@ class SlidingComponent : LimbusBehaviour()
     {
         super.initialize()
 
-        tileWiseMovementComponent = gameObject?.get() ?: return
-        inputComponent = gameObject?.get() ?: return
+        tileWiseMovementComponent = gameObject.getOrCreate()
+        inputComponent = gameObject.getOrCreate()
 
         tileWiseMovementComponent.speed = 4
         tileWiseMovementComponent.onGridSlotChanged.add { stopPushing() }
@@ -51,7 +51,7 @@ class SlidingComponent : LimbusBehaviour()
     object Parser : IComponentParser<SlidingComponent>
     {
         override fun createComponent() = SlidingComponent()
-        
+
         override fun parseComponent(json: Json, mapObject: MapObject): SlidingComponent?
         {
             return if(mapObject.properties.containsKey("SlidingComponent")) SlidingComponent() else null

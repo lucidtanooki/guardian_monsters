@@ -16,6 +16,11 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ui.EntitySprite
  */
 open class SpriteComponent(region: TextureRegion) : LimbusBehaviour(), Component
 {
+    companion object
+    {
+        const val className = "SpriteComponent"
+    }
+
     // --------------------------------------------------------------------------------------------- PROPERTIES
     var sprite = Sprite(region)
 }

@@ -6,6 +6,7 @@ class WarpStartComponent() : LimbusBehaviour()
 {
     companion object
     {
+        const val className = "WarpStartComponent"
         const val defaultJson = "targetMapID: 0, warpTargetID: 0"
     }
 

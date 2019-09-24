@@ -47,6 +47,7 @@ class PathComponent
     companion object
     {
         const val TAG = "PathComponent"
+        const val className = "PathComponent"
         const val defaultJson = "enabled: true, path: SSTOP"
     }
 
@@ -82,24 +83,14 @@ class PathComponent
     {
         super.initialize()
 
-        initializeInputComponent()
+        inputComponent = gameObject.getOrCreate()
+        tileWiseMovementComponent = gameObject.getOrCreate()
+
         initializeTileWiseMovement()
-    }
-
-    private fun initializeInputComponent()
-    {
-        if(gameObject == null) { logError(TAG) { "PathComponent needs a parent LimbusGameObject" } }
-        if(gameObject?.get<InputComponent>() == null) { logError(TAG) { "PathComponent needs an InputComponent" } }
-
-        inputComponent = gameObject?.get()!!
     }
 
     private fun initializeTileWiseMovement()
     {
-        if(gameObject == null) { logError(TAG) { "PathComponent needs a parent LimbusGameObject" } }
-        if(gameObject?.get<TileWiseMovementComponent>() == null) { logError(TAG) { "PathComponent needs an TileWiseMovementComponent" } }
-
-        tileWiseMovementComponent = gameObject?.get()!!
         tileWiseMovementComponent.speed = Constant.WALKING_SPEED_AI
         tileWiseMovementComponent.onGridSlotChanged.add { slot -> newTileReachedCallback(slot) }
 

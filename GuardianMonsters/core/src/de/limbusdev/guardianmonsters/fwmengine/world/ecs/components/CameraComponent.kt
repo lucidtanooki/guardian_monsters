@@ -23,6 +23,10 @@ import de.limbusdev.utils.geometry.IntRect
  */
 class CameraComponent(private val camera: OrthographicCamera, tiledMap: TiledMap) : LimbusBehaviour()
 {
+    companion object
+    {
+        const val className = "CameraComponent"
+    }
     // --------------------------------------------------------------------------------------------- PROPERTIES
     private val mapOutline: IntRect    // Bounds of map to be rendered
 
@@ -36,8 +40,6 @@ class CameraComponent(private val camera: OrthographicCamera, tiledMap: TiledMap
 
     override fun update(deltaTime: Float)
     {
-        val transform = gameObject?.transform ?: return
-
         if (mapOutline.width >= camera.viewportWidth && mapOutline.height >= camera.viewportHeight)
         {
             // If map is bigger than camera field

@@ -13,9 +13,9 @@ object ColliderComponentParser : IComponentParser<ColliderComponent>
     override fun parseComponent(json: Json, mapObject: MapObject): ColliderComponent?
     {
         // MapObject must contain proper component
-        if(!mapObject.properties.containsKey("ColliderComponent")) { return null }
+        if(!mapObject.properties.containsKey(ColliderComponent.className)) { return null }
 
-        val jsonStringWithoutBrackets = mapObject.properties["ColliderComponent", ColliderComponent.defaultJson]
+        val jsonStringWithoutBrackets = mapObject.properties[ColliderComponent.className, ColliderComponent.defaultJson]
         val collider = json.fromJson(ColliderComponent::class.java, "{$jsonStringWithoutBrackets}")
 
         // If MapObject is RectangularMapObject and inheritsExtent is true, use transform values

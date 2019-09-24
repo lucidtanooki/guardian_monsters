@@ -11,7 +11,7 @@ object SpriteComponentParser : IComponentParser<SpriteComponent>
 
     override fun parseComponent(json: Json, mapObject: MapObject): SpriteComponent?
     {
-        if(!mapObject.properties.containsKey("SpriteComponent")) { return null }
+        if(!mapObject.properties.containsKey(SpriteComponent.className)) { return null }
         if(mapObject !is TextureMapObject) { return null }
 
         return SpriteComponent(mapObject.textureRegion)

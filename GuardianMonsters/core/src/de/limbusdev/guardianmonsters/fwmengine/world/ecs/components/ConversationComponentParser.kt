@@ -12,11 +12,9 @@ object ConversationComponentParser : IComponentParser<ConversationComponent>
     override fun parseComponent(json: Json, mapObject: MapObject): ConversationComponent?
     {
         // MapObject must contain proper component
-        if(!mapObject.properties.containsKey("ConversationComponent")) { return null }
+        if(!mapObject.properties.containsKey(ConversationComponent.className)) { return null }
 
-        val jsonStringWithoutBrackets = mapObject.properties["ConversationComponent", ConversationComponent.defaultJson]
-        val conversation = json.fromJson(ConversationComponent::class.java, "{$jsonStringWithoutBrackets}")
-
-        return conversation
+        val jsonStringWithoutBrackets = mapObject.properties[ConversationComponent.className, ConversationComponent.defaultJson]
+        return json.fromJson(ConversationComponent::class.java, "{$jsonStringWithoutBrackets}")
     }
 }

@@ -22,7 +22,11 @@ class HeroComponent
 )
     : LimbusBehaviour(), Component
 {
-    companion object { const val TAG = "TileWiseMovementComponent" }
+    companion object
+    {
+        const val TAG = "TileWiseMovementComponent"
+        const val className = "TileWiseMovementComponent"
+    }
 
     init
     {
@@ -62,7 +66,7 @@ class HeroComponent
         val transform = gameObject?.transform ?: return
         val inputComponent = gameObject?.get<InputComponent>() ?: return
 
-        for(battleArea in CoreSL.world.getAllWith("RandomBattleAreaComponent", transform.layer))
+        /*for(battleArea in CoreSL.world.getAllWith(RandomBattleAreaComponent::class, transform.layer))
         {
             val battleAreaRectangle = battleArea.get<ColliderComponent>()?.asRectangle
             val monsterArea = battleArea.get<MonsterAreaComponent>()
@@ -100,15 +104,13 @@ class HeroComponent
                 // Stop when in a battle
                 //TODO if (inputComponent.touchDown) { inputComponent.startMoving = false }
             }
-        }
+        }*/
     }
 
     /** Check whether hero enters warp area */
     private fun checkWarp(slot: IntVec2)
     {
-        val transform = gameObject?.transform ?: return
-
-        val warpStartFields = CoreSL.world.getAllWith("WarpStartComponent", transform.layer)
+        val warpStartFields = CoreSL.world.getAllWith(WarpStartComponent::class, transform.layer)
 
         for(warpStart in warpStartFields)
         {

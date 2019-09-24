@@ -13,30 +13,12 @@ class World
     private val gameObjectsToBeAdded = mutableListOf<LimbusGameObject>()
     private val gameObjectsToBeRemoved = mutableListOf<LimbusGameObject>()
 
-    val componentParsers = mutableMapOf<KClass<out LimbusBehaviour>, IComponentParser<out LimbusBehaviour>>()
-
     private var isStopped = true
 
     private var accumulator60fps = 0f
 
     val physicsFPS = 60f            // Frames per Second
     val physicsCPS = 1f/physicsFPS  // Cycles per Second
-
-    init
-    {
-        componentParsers[ColliderComponent::class] = ColliderComponentParser
-        componentParsers[ConversationComponent::class] = ConversationComponentParser
-        componentParsers[CharacterSpriteComponent::class] = CharacterSpriteComponentParser
-        componentParsers[WarpStartComponent::class] = WarpStartComponentParser
-        componentParsers[WarpTargetComponent::class] = WarpTargetComponentParser
-        componentParsers[PathComponent::class] = PathComponentParser
-        componentParsers[InputComponent::class] = InputComponentParser
-        componentParsers[TileWiseMovementComponent::class] = TileWiseMovementComponentParser
-        componentParsers[SpriteComponent::class] = SpriteComponentParser
-        componentParsers[SlidingComponent::class] = SlidingComponent.Parser
-        componentParsers[BoxTrigger2DComponent::class] = BoxTrigger2DComponent.Parser
-        componentParsers[ChangeLayerTriggerCallbackComponent::class] = ChangeLayerTriggerCallbackComponent.Parser
-    }
 
     fun start() { isStopped = false }
 
@@ -109,13 +91,13 @@ class World
         return gameObjects.filter { it.type == type }
     }
 
-    fun getAllWithExactly(signature: List<String>) : List<LimbusGameObject>
+    fun getAllWithExactly(signature: List<KClass<out LimbusBehaviour>>) : List<LimbusGameObject>
     {
         val a = gameObjects
         return gameObjects.filter { it.signature.containsAll(signature) && it.signature.size == signature.size }
     }
 
-    fun getAllWith(componentType: String) : List<LimbusGameObject>
+    fun getAllWith(componentType: KClass<out LimbusBehaviour>) : List<LimbusGameObject>
     {
         return gameObjects.filter { it.signature.contains(componentType) }
     }
@@ -125,13 +107,13 @@ class World
         return gameObjects.filter { it.transform.layer == layer }
     }
 
-    fun getAllWithExactly(signature: List<String>, layer: Int) : List<LimbusGameObject>
+    fun getAllWithExactly(signature: List<KClass<out LimbusBehaviour>>, layer: Int) : List<LimbusGameObject>
     {
         val a = gameObjects
         return gameObjects.filter { it.signature.containsAll(signature) && it.signature.size == signature.size && it.transform.layer == layer }
     }
 
-    fun getAllWith(componentType: String, layer: Int) : List<LimbusGameObject>
+    fun getAllWith(componentType: KClass<out LimbusBehaviour>, layer: Int) : List<LimbusGameObject>
     {
         return gameObjects.filter { it.signature.contains(componentType) && it.transform.layer == layer }
     }

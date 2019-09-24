@@ -15,9 +15,9 @@ object PathComponentParser : IComponentParser<PathComponent>
     override fun parseComponent(json: Json, mapObject: MapObject): PathComponent?
     {
         // MapObject must contain proper component
-        if(!mapObject.properties.containsKey("PathComponent")) { return null }
+        if(!mapObject.properties.containsKey(PathComponent.className)) { return null }
 
-        val jsonStringWithoutBrackets = mapObject.properties["PathComponent", PathComponent.defaultJson]
+        val jsonStringWithoutBrackets = mapObject.properties[PathComponent.className, PathComponent.defaultJson]
 
         val data = json.fromJson(Data::class.java, "{$jsonStringWithoutBrackets}")
 

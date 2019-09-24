@@ -14,6 +14,7 @@ class BoxTrigger2DComponent(var triggerID : Int = 0) : LimbusBehaviour()
 {
     companion object
     {
+        const val className = "BoxTrigger2DComponent"
         val defaultJson: String get() = "enabled: true, triggerID: 0"
     }
 
@@ -34,27 +35,14 @@ class BoxTrigger2DComponent(var triggerID : Int = 0) : LimbusBehaviour()
     {
         println("Check entering: ${CoreSL.world.hero.get<TileWiseMovementComponent>()?.currentMovement ?: SkyDirection.S}")
 
-        if(gameObject == null) { return }
-
-        println("OnGrid = ${gameObject?.transform?.onGrid} position = $position")
-
-        if(gameObject?.transform?.onGrid == position)
-        {
-            println("add")
-        }
-
-        if(gameObject?.transform?.onGrid != position)
-        {
-            println("remove")
-        }
-
+        println("OnGrid = ${transform.onGrid} position = $position")
 
         if(currentlyOverlappingGameObjects.contains(CoreSL.world.hero))
         {
-            gameObject?.transform?.onGrid == position
+            transform.onGrid == position
         }
 
-        if(gameObject?.transform?.onGrid == position)
+        if(transform.onGrid == position)
         {
             currentlyOverlappingGameObjects.add(CoreSL.world.hero)
             val direction = CoreSL.world.hero.get<TileWiseMovementComponent>()?.currentMovement ?: SkyDirection.S
@@ -68,12 +56,10 @@ class BoxTrigger2DComponent(var triggerID : Int = 0) : LimbusBehaviour()
 
         override fun parseComponent(json: Json, mapObject: MapObject): BoxTrigger2DComponent?
         {
-            if(!mapObject.properties.containsKey("BoxTrigger2DComponent")) { return null }
+            if(!mapObject.properties.containsKey(className)) { return null }
 
-            val jsonStringWithoutBrackets = mapObject.properties[BoxTrigger2DComponent::class.java.simpleName, defaultJson]
-            val trigger = json.fromJson(BoxTrigger2DComponent::class.java, "{$jsonStringWithoutBrackets}")
-
-            return trigger
+            val jsonStringWithoutBrackets = mapObject.properties[className, defaultJson]
+            return  json.fromJson(BoxTrigger2DComponent::class.java, "{$jsonStringWithoutBrackets}")
         }
 
     }

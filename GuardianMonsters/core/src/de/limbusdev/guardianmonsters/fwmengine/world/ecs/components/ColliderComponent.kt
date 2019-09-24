@@ -27,6 +27,7 @@ class ColliderComponent
 {
     companion object
     {
+        const val className ="ColliderComponent"
         val defaultJson = """
                     enabled: true,
                     offsetX: 0,

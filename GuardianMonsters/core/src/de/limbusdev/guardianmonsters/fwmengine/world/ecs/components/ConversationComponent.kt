@@ -13,6 +13,7 @@ class ConversationComponent(var name : String = "", var text : String = "")
 {
     companion object
     {
+        const val className ="ConversationComponent"
         val defaultJson =
                 """
                     enabled: true,

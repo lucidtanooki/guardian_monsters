@@ -6,6 +6,7 @@ class WarpTargetComponent() : LimbusBehaviour()
 {
     companion object
     {
+        const val className = "WarpTargetComponent"
         const val defaultJson = "warpTargetID: 0"
     }
 

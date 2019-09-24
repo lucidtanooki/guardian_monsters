@@ -1,15 +1,17 @@
 package de.limbusdev.guardianmonsters.fwmengine.world.ecs
 
 import de.limbusdev.guardianmonsters.CoreSL
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Behaviours
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Transform
 import kotlin.collections.ArrayList
+import kotlin.reflect.KClass
 
 class LimbusGameObject(var name: String = "", val type: String = "general")
 {
     // LimbusGameObjects must have a transform
     var transform : Transform = Transform(this)
 
-    val signature = mutableListOf<String>()
+    val signature = mutableListOf<KClass<out LimbusBehaviour>>()
 
     val components = ArrayList<LimbusBehaviour>()
 
@@ -62,6 +64,7 @@ class LimbusGameObject(var name: String = "", val type: String = "general")
             {
                 components.add(c)
                 c.gameObject = this
+                signature.add(c::class)
             }
         }
         componentsToBeAdded.clear()
@@ -72,6 +75,7 @@ class LimbusGameObject(var name: String = "", val type: String = "general")
             {
                 components.remove(c)
                 c.gameObject = LimbusGameObject()
+                signature.remove(c::class)
             }
         }
         componentsToBeRemoved.clear()
@@ -103,7 +107,7 @@ class LimbusGameObject(var name: String = "", val type: String = "general")
         }
         else
         {
-            component = CoreSL.world.componentParsers[T::class]!!.createComponent() as T
+            component = Behaviours.parsers[T::class]!!.createComponent() as T
             add(component)
         }
 
@@ -117,13 +121,11 @@ class LimbusGameObject(var name: String = "", val type: String = "general")
 
     fun add(component: LimbusBehaviour)
     {
-        signature.add(component::class.java.simpleName)
         componentsToBeAdded.add(component)
     }
 
     fun remove(component: LimbusBehaviour)
     {
-        signature.remove(component::class.java.simpleName)
         componentsToBeRemoved.add(component)
     }
 

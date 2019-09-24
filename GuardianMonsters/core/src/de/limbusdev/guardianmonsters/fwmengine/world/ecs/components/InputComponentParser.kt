@@ -11,9 +11,7 @@ object InputComponentParser : IComponentParser<InputComponent>
     override fun parseComponent(json: Json, mapObject: MapObject): InputComponent?
     {
         // MapObject must contain proper component
-        if(!mapObject.properties.containsKey("InputComponent")) { return null }
-
-        val inputComponent = InputComponent()
+        if(!mapObject.properties.containsKey(InputComponent.className)) { return null }
 
         return InputComponent()
     }

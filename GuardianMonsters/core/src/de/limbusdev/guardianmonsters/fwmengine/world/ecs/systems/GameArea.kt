@@ -60,7 +60,7 @@ class GameArea(val areaID: Int, startPosID: Int)
     {
         tiledMap = setUpTiledMap(areaID, startPosID)
         mapRenderer = ExtendedTiledMapRenderer(tiledMap)
-        for(warpTargetField in CoreSL.world.getAllWith("WarpTargetComponent"))
+        for(warpTargetField in CoreSL.world.getAllWith(WarpTargetComponent::class))
         {
             val warpTargetComponent = warpTargetField.get<WarpTargetComponent>()
             if(warpTargetComponent != null && warpTargetComponent.warpTargetID == startPosID)
@@ -98,7 +98,7 @@ class GameArea(val areaID: Int, startPosID: Int)
         shape.begin(ShapeRenderer.ShapeType.Line)
         shape.color = Color.WHITE
 
-        for(collidingObject in CoreSL.world.getAllWith("ColliderComponent"))
+        for(collidingObject in CoreSL.world.getAllWith(ColliderComponent::class))
         {
             val transform = collidingObject.transform
             shape.color = Color.ORANGE
@@ -225,7 +225,7 @@ class GameArea(val areaID: Int, startPosID: Int)
 
             kClass as KClass<out LimbusBehaviour>
 
-            component = CoreSL.world.componentParsers[kClass]?.parseComponent(json, mapObject)
+            component = Behaviours.parsers[kClass]?.parseComponent(json, mapObject)
         }
         catch (e: Exception)
         {

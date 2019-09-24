@@ -11,7 +11,11 @@ import kotlin.properties.Delegates
 class TileWiseMovementComponent : LimbusBehaviour()
 {
     // --------------------------------------------------------------------------------------------- PROPERTIES
-    companion object { const val TAG = "TileWiseMovementComponent" }
+    companion object
+    {
+        const val className = "TileWiseMovementComponent"
+        val TAG : String get() = className
+    }
 
     private lateinit var inputComponent : InputComponent
     private var characterSpriteComponent : CharacterSpriteComponent? = null
@@ -193,7 +197,7 @@ class TileWiseMovementComponent : LimbusBehaviour()
         if(colliderComponent?.isTrigger == true) { return false }
 
             // Check whether movement is possible or blocked by a collider
-        for (otherGameObject in CoreSL.world.getAllWith(ColliderComponent::class.simpleName!!, transform.layer))
+        for (otherGameObject in CoreSL.world.getAllWith(ColliderComponent::class, transform.layer))
         {
             if (otherGameObject != gameObject)
             {

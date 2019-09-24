@@ -2,6 +2,7 @@ package de.limbusdev.guardianmonsters.fwmengine.world.ecs
 
 import de.limbusdev.guardianmonsters.CoreSL
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Components
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.RenderingLimbusBehaviour
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Transform
 import kotlin.collections.ArrayList
 import kotlin.reflect.KClass
@@ -20,6 +21,20 @@ class LimbusGameObject(var name: String = "", val type: String = "general")
 
     var enabled : Boolean = true
         private set
+
+    fun render()
+    {
+        if(!enabled) { return }
+
+        for(component in components)
+        {
+            if(!component.initialized) { component.initialize() }
+            if(component.enabled && component is RenderingLimbusBehaviour)
+            {
+                component.render()
+            }
+        }
+    }
 
     fun update(deltaTime: Float)
     {

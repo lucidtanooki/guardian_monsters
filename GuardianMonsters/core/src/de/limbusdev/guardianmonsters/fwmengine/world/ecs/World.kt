@@ -1,10 +1,11 @@
 package de.limbusdev.guardianmonsters.fwmengine.world.ecs
 
-import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.*
+import com.badlogic.gdx.graphics.OrthographicCamera
 import kotlin.reflect.KClass
 
 class World
 {
+    var mainCamera = OrthographicCamera()
     var hero = LimbusGameObject("Hero")
         private set
 
@@ -37,6 +38,16 @@ class World
             if(gameObjects.contains(go)) { gameObjects.remove(go) }
         }
         gameObjectsToBeRemoved.clear()
+    }
+
+    fun render()
+    {
+        if(isStopped) { return }
+
+        for(gameObject in gameObjects)
+        {
+            gameObject.render()
+        }
     }
 
     fun update(deltaTime: Float)

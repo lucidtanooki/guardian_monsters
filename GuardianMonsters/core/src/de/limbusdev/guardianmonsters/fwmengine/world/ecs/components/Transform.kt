@@ -18,7 +18,7 @@ import de.limbusdev.utils.geometry.IntVec2
  *
  * @author Georg Eckert 2015-11-22
  */
-class Transform(var gameObject: LimbusGameObject) : Component, IntRect(0,0,16,16)
+class Transform(var gameObject: LimbusGameObject) : IntRect(0,0,16,16)
 {
     var layer: Int = 0
 

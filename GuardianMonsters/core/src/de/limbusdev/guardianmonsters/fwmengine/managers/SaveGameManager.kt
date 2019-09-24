@@ -28,7 +28,7 @@ import de.limbusdev.utils.logDebug
 /**
  * @author Georg Eckert 2017
  */
-class SaveGameManager : EntitySystem
+class SaveGameManager
 {
     // --------------------------------------------------------------------------------------------- PROPERTIES
     private lateinit var savableEntities: ImmutableArray<Entity>
@@ -48,45 +48,47 @@ class SaveGameManager : EntitySystem
 
 
     // --------------------------------------------------------------------------------------------- METHODS
-    override fun addedToEngine(engine: Engine)
+    fun addedToEngine(engine: Engine)
     {
-        val saveGameComps = Family.all(
-                SaveGameComponent::class.java,
-                TeamComponent::class.java).get()
-
-        return // TODO
-        savableEntities = engine.getEntitiesFor(saveGameComps)
-        val firstEntity = savableEntities.first()
-
-        gameState = firstEntity.getComponent<SaveGameComponent>()!!.gameState
-        getCurrentGameState().map = gameArea.areaID
-        getCurrentGameState().team = firstEntity.getComponent<TeamComponent>()!!.team.copy()
-        getCurrentGameState().guardoSphere = firstEntity.getComponent<GuardoSphereComponent>()!!.guardoSphere.copy()
-
-        logDebug(TAG) { savableEntities.toString() }
-        logDebug(TAG) { savableEntities.first().toString() }
-        logDebug(TAG) { getCurrentGameState().guardoSphere.toString() }
-
-        val posComp = firstEntity.getComponent<Transform>()!!
-
-        getCurrentGameState().gridx = posComp.onGrid.x
-        getCurrentGameState().gridy = posComp.onGrid.y
+        // TODO
+//        val saveGameComps = Family.all(
+//                SaveGameComponent::class.java,
+//                TeamComponent::class.java).get()
+//
+//        return // TODO
+//        savableEntities = engine.getEntitiesFor(saveGameComps)
+//        val firstEntity = savableEntities.first()
+//
+//        gameState = firstEntity.getComponent<SaveGameComponent>()!!.gameState
+//        getCurrentGameState().map = gameArea.areaID
+//        getCurrentGameState().team = firstEntity.getComponent<TeamComponent>()!!.team.copy()
+//        getCurrentGameState().guardoSphere = firstEntity.getComponent<GuardoSphereComponent>()!!.guardoSphere.copy()
+//
+//        logDebug(TAG) { savableEntities.toString() }
+//        logDebug(TAG) { savableEntities.first().toString() }
+//        logDebug(TAG) { getCurrentGameState().guardoSphere.toString() }
+//
+//        val posComp = firstEntity.getComponent<Transform>()!!
+//
+//        getCurrentGameState().gridx = posComp.onGrid.x
+//        getCurrentGameState().gridy = posComp.onGrid.y
     }
 
     /**
      * Updates the savable data
      * @param deltaTime
      */
-    override fun update(deltaTime: Float)
+    fun update(deltaTime: Float)
     {
-        return // TODO
-        for (entity in savableEntities)
-        {
-            val position = entity.getComponent<Transform>()!!
-            val saveGame = entity.getComponent<SaveGameComponent>()!!
-            saveGame.gameState.gridx = position.onGrid.x
-            saveGame.gameState.gridy = position.onGrid.y
-        }
+        // TODO
+//        return // TODO
+//        for (entity in savableEntities)
+//        {
+//            val position = entity.getComponent<Transform>()!!
+//            val saveGame = entity.getComponent<SaveGameComponent>()!!
+//            saveGame.gameState.gridx = position.onGrid.x
+//            saveGame.gameState.gridy = position.onGrid.y
+//        }
     }
 
     /**

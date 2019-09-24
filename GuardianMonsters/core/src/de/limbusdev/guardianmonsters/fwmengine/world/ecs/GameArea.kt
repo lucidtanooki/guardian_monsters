@@ -35,7 +35,7 @@ import kotlin.reflect.KClass
  *
  * @author Georg Eckert 2015-11-21
  */
-class GameArea(val areaID: Int, startPosID: Int)
+class GameArea(val areaID: Int, startPosID: Int) : RenderingLimbusBehaviour()
 {
     // --------------------------------------------------------------------------------------------- PROPERTIES
     companion object
@@ -44,12 +44,11 @@ class GameArea(val areaID: Int, startPosID: Int)
     }
 
     val tiledMap    : TiledMap
-    val mapRenderer : ExtendedTiledMapRenderer
+    private val mapRenderer : ExtendedTiledMapRenderer
+    private val shape = ShapeRenderer()
 
-    var gridPosition    = IntVec2(0, 0)
     var startPosition   = IntVec2(0, 0)
     var startLayer = 0
-
 
     private var bgMusic: String? = null
 
@@ -64,35 +63,33 @@ class GameArea(val areaID: Int, startPosID: Int)
             val warpTargetComponent = warpTargetField.get<WarpTargetComponent>()
             if(warpTargetComponent != null && warpTargetComponent.warpTargetID == startPosID)
             {
-                val transform = warpTargetComponent.gameObject?.transform
-                if(transform != null)
-                {
-                    startPosition.x = transform.x
-                    startPosition.y = transform.y
-                    startLayer = transform.layer
-                }
+                val transform = warpTargetComponent.gameObject.transform
+                startPosition.x = transform.x
+                startPosition.y = transform.y
+                startLayer = transform.layer
             }
         }
     }
 
 
     // --------------------------------------------------------------------------------------------- METHODS
-    fun render(camera: OrthographicCamera)
+    override fun render()
     {
-        mapRenderer.setView(camera)
+        shape.projectionMatrix = CoreSL.world.mainCamera.combined
+
+        mapRenderer.setView(CoreSL.world.mainCamera)
         mapRenderer.render()
+        if (Constant.DEBUGGING_ON) renderDebugging()
     }
 
-    fun update(delta: Float)
+
+    override fun update(deltaTime: Float)
     {
-        // TODO
+
     }
 
-    /**
-     * Renders all colliders as white shapes
-     * @param shape
-     */
-    fun renderDebugging(shape: ShapeRenderer)
+    /** Renders all colliders as white shapes */
+    private fun renderDebugging()
     {
         shape.begin(ShapeRenderer.ShapeType.Line)
         shape.color = Color.WHITE
@@ -104,18 +101,16 @@ class GameArea(val areaID: Int, startPosID: Int)
             shape.rect(transform.xf, transform.yf, transform.widthf, transform.heightf)
 
             shape.color = Color.WHITE
-            val collider = collidingObject.get<ColliderComponent>()?.asRectangle
+            collidingObject.get<ColliderComponent>()?.asRectangle?.let {
 
-            if (collider != null)
-            {
-                shape.rect(collider.xf, collider.yf, collider.widthf, collider.heightf)
+                shape.rect(it.xf, it.yf, it.widthf, it.heightf)
             }
         }
 
         shape.end()
     }
 
-    fun setUpTiledMap(areaID: Int, startFieldID: Int): TiledMap
+    private fun setUpTiledMap(areaID: Int, startFieldID: Int): TiledMap
     {
         val tiledMap = TmxDayTimeMapLoader().load("tilemaps/$areaID.tmx")
 
@@ -126,13 +121,15 @@ class GameArea(val areaID: Int, startPosID: Int)
             {
                 "descriptions"  -> createGameObjects(layer, layerID)
                 "people"        -> createGameObjects(layer, layerID)
-                "colliderWalls" -> createGameObjects(layer, layerID)
+                "colliderWalls" ->
+                {
+                    createGameObjects(layer, layerID)
+                    createBorderColliders(tiledMap, layerID)
+                }
                 "triggers"      -> createGameObjects(layer, layerID)
                 "gameObjects"   -> createGameObjects(layer, layerID)
             }
         }
-
-        createBorderColliders(tiledMap) // TODO for each walkable layer
 
         // Set background music
         val musicType = tiledMap.properties["musicType", "town"]
@@ -170,24 +167,25 @@ class GameArea(val areaID: Int, startPosID: Int)
                 }
 
                 // Transform
+                val transform = gameObject.transform
                 when (mapObject)
                 {
                     is RectangleMapObject ->
                     {
-                        gameObject.transform.x = MathUtils.round(mapObject.rectangle.x)
-                        gameObject.transform.y = MathUtils.round(mapObject.rectangle.y)
-                        gameObject.transform.width = MathUtils.round(mapObject.rectangle.width)
-                        gameObject.transform.height = MathUtils.round(mapObject.rectangle.height)
+                        transform.x = MathUtils.round(mapObject.rectangle.x)
+                        transform.y = MathUtils.round(mapObject.rectangle.y)
+                        transform.width = MathUtils.round(mapObject.rectangle.width)
+                        transform.height = MathUtils.round(mapObject.rectangle.height)
                     }
                     is TextureMapObject ->
                     {
-                        gameObject.transform.x = MathUtils.round(mapObject.x)
-                        gameObject.transform.y = MathUtils.round(mapObject.y)
-                        gameObject.transform.width = mapObject.textureRegion.regionWidth
-                        gameObject.transform.height = mapObject.textureRegion.regionHeight
+                        transform.x = MathUtils.round(mapObject.x)
+                        transform.y = MathUtils.round(mapObject.y)
+                        transform.width = mapObject.textureRegion.regionWidth
+                        transform.height = mapObject.textureRegion.regionHeight
                     }
                 }
-                gameObject.transform.layer = layerID
+                transform.layer = layerID
 
 
                 // .......................................................................... Components
@@ -234,76 +232,46 @@ class GameArea(val areaID: Int, startPosID: Int)
         return component
     }
 
-    private fun createTriggers(layer: MapLayer, startFieldID: Int)
-    {
-        val layerIndex = layer.name.subStringFromEnd(0).toInt()
-
-        // TODO
-        //val battleTriggers = Array<MonsterArea>()
-        //monsterAreas.put(layerIndex, battleTriggers)
-
-        for (mo in layer.objects)
-        {
-            val rect = (mo as RectangleMapObject).rectangle
-            when(mo.name)
-            {
-                "monsterArea" ->
-                {
-                    val r = IntRect(rect)
-                    val ap = Array<Float>()
-                    ap.add(mo.properties["probability",  .5f])
-                    ap.add(mo.properties["probability2", .3f])
-                    ap.add(mo.properties["probability3", .2f])
-                    /*battleTriggers.add(MonsterArea(
-
-                            r.x, r.y, r.width, r.height,
-                            mo.properties["monsters", "1;0.90;2;0.05;3;0.05"],
-                            ap
-                    ))*/ // TODO
-                }
-                else -> {}
-            }
-        }
-    }
-
     /**
      * Creates a wall of colliders right around the active map so character can't just walk out
      *
      * @param tiledMap
      */
-    private fun createBorderColliders(tiledMap: TiledMap)
+    private fun createBorderColliders(tiledMap: TiledMap, layerID: Int)
     {
         val mapWidth    = tiledMap.properties["width", 10]
         val mapHeight   = tiledMap.properties["height", 10]
-
-        // TODO for each layer
 
         var borderGameObject = LimbusGameObject("BorderBottom")
         borderGameObject.transform.x = -1 * Constant.TILE_SIZE
         borderGameObject.transform.y = -1 * Constant.TILE_SIZE
         borderGameObject.add(ColliderComponent(width = (mapWidth + 2) * Constant.TILE_SIZE, height = Constant.TILE_SIZE))
+        borderGameObject.transform.layer = layerID
         CoreSL.world.add(borderGameObject)
 
         borderGameObject = LimbusGameObject("BorderTop")
         borderGameObject.transform.x = -1 * Constant.TILE_SIZE
         borderGameObject.transform.y = mapHeight * Constant.TILE_SIZE
         borderGameObject.add(ColliderComponent(width = (mapWidth + 2) * Constant.TILE_SIZE, height = Constant.TILE_SIZE))
+        borderGameObject.transform.layer = layerID
         CoreSL.world.add(borderGameObject)
 
         borderGameObject = LimbusGameObject("BorderLeft")
         borderGameObject.transform.x = -1 * Constant.TILE_SIZE
         borderGameObject.transform.y = 0
         borderGameObject.add(ColliderComponent(width = Constant.TILE_SIZE, height = (mapHeight + 2) * Constant.TILE_SIZE))
+        borderGameObject.transform.layer = layerID
         CoreSL.world.add(borderGameObject)
 
         borderGameObject = LimbusGameObject("BorderRight")
         borderGameObject.transform.x = mapWidth * Constant.TILE_SIZE
         borderGameObject.transform.y = 0
         borderGameObject.add(ColliderComponent(width = Constant.TILE_SIZE, height = (mapHeight + 2) * Constant.TILE_SIZE))
+        borderGameObject.transform.layer = layerID
         CoreSL.world.add(borderGameObject)
     }
 
-    fun dispose()
+    override fun dispose()
     {
         // TODO
     }

@@ -23,7 +23,7 @@ class ColliderComponent
         var inheritsExtent: Boolean = true,
         var isTrigger: Boolean = false
 )
-    : LimbusBehaviour(), Component
+    : LimbusBehaviour()
 {
     companion object
     {
@@ -44,7 +44,7 @@ class ColliderComponent
         this.enabled = enabled
     }
 
-    val asRectangle get() = IntRect((gameObject.transform.x ?: 0) + offsetX, (gameObject.transform.y ?: 0) + offsetY, width, height)
+    val asRectangle get() = IntRect((transform.x) + offsetX, (transform.y) + offsetY, width, height)
 
     /** Returns whether the given position is blocked by this collider */
     fun blocks(position : IntVec2) : Boolean

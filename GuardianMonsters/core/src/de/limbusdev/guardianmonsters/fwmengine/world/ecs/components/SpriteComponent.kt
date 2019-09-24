@@ -14,7 +14,7 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ui.EntitySprite
  *
  * @author Georg Eckert 2015-11-21
  */
-open class SpriteComponent(region: TextureRegion) : LimbusBehaviour(), Component
+open class SpriteComponent(region: TextureRegion) : LimbusBehaviour()
 {
     companion object
     {

@@ -21,7 +21,7 @@ class CharacterSpriteComponent
 (
         var sprite: AnimatedPersonSprite = AnimatedPersonSprite(male = true, index = 0)
 )
-    : LimbusBehaviour(), Component
+    : LimbusBehaviour()
 {
     companion object
     {

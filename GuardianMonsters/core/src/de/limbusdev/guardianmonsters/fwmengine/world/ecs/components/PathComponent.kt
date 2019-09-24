@@ -42,7 +42,7 @@ class PathComponent
         var path: Array<SkyDirection> = gdxArrayOf(SkyDirection.SSTOP),
         var staticEntity: Boolean = true
 )
-    : LimbusBehaviour(), Component
+    : LimbusBehaviour()
 {
     companion object
     {

@@ -20,7 +20,7 @@ class HeroComponent
 (
         movementComponent: TileWiseMovementComponent
 )
-    : LimbusBehaviour(), Component
+    : LimbusBehaviour()
 {
     companion object
     {
@@ -63,8 +63,7 @@ class HeroComponent
      */
     private fun checkForRandomBattleArea(slot: IntVec2)
     {
-        val transform = gameObject?.transform ?: return
-        val inputComponent = gameObject?.get<InputComponent>() ?: return
+        val inputComponent = gameObject.get<InputComponent>() ?: return
 
         /*for(battleArea in CoreSL.world.getAllWith(RandomBattleAreaComponent::class, transform.layer))
         {

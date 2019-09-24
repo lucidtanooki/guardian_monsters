@@ -10,7 +10,7 @@ import de.limbusdev.guardianmonsters.guardians.monsters.Team
  *
  * @author Georg Eckert 2016
  */
-class TeamComponent : LimbusBehaviour(), Component
+class TeamComponent : LimbusBehaviour()
 {
     // --------------------------------------------------------------------------------------------- PROPERTIES
     var team = Team(7, 1, 1)

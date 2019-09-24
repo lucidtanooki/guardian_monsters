@@ -54,8 +54,7 @@ class EntityComponentSystem
 ) {
     // --------------------------------------------------------------------------------------------- PROPERTIES
 
-    private val engine          = Engine()
-    private val entityFactory   = EntityFactory(engine, gameArea)
+    private val entityFactory   = EntityFactory(gameArea)
 
     var hud     : HUD
 
@@ -65,44 +64,29 @@ class EntityComponentSystem
     // --------------------------------------------------------------------------------------------- CONSTRUCTORS
     init
     {
-        CoreSL.world.add(setupHero(fromSave))
+        CoreSL.world.add(entityFactory.createHero(gameArea.startPosition, gameArea.startLayer, fromSave))
+        CoreSL.world.add(gameArea.gameObject)
         val inventory = CoreSL.world.hero.get<InventoryComponent>()!!.inventory
         hud = HUD(BattleScreen(inventory), saveGameManager, CoreSL.world.hero, gameArea)
-        setUpEntitySystems(gameArea, viewport, hud)
+
+
+        // Camera System
+        val cameraComponent = CameraComponent(gameArea.tiledMap)
+        CoreSL.world.hero.add(cameraComponent)
+
+        // GameSaveManager
+        // TODO saveGameManager.addedToEngine(engine)
     }
 
 
     // --------------------------------------------------------------------------------------------- METHODS
-    /**
-     * Creates the hero instance
-     * @param fromSave  whether to create hero or reconstruct from game save
-     */
-    private fun setupHero(fromSave: Boolean) : LimbusGameObject
-    {
-        return entityFactory.createHero(gameArea.startPosition, gameArea.startLayer, fromSave)
-    }
-
-    private fun setUpEntitySystems(gameArea: GameArea, viewport: Viewport, hud: HUD)
-    {
-        // Camera System
-        val cameraComponent = CameraComponent(viewport.camera as OrthographicCamera, gameArea.tiledMap)
-        CoreSL.world.hero.add(cameraComponent)
-
-        // GameSaveManager
-        saveGameManager.addedToEngine(engine)
-        engine.addSystem(saveGameManager)
-    }
-
     /**
      * Update game world every single game render iteration
      * @param delta time since last update
      */
     fun update(delta: Float)
     {
-        CoreSL.world.update(delta)
-        engine.update(delta)
         hud.update(delta)
-        gameArea.update(delta)
     }
 
     /**
@@ -118,7 +102,7 @@ class EntityComponentSystem
     /**
      * Render Heads Up Display
      */
-    fun draw()
+    fun render()
     {
         hud.stage.viewport.apply()
         hud.draw()

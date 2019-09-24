@@ -19,6 +19,7 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ecs.GameArea
 import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager
 import de.limbusdev.guardianmonsters.Constant
 import de.limbusdev.guardianmonsters.CoreSL
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusGameObject
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.World
 
 
@@ -30,15 +31,12 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ecs.World
 class WorldScreen(mapID: Int, startPosID: Int, fromSave: Boolean) : Screen
 {
     // --------------------------------------------------------------------------------------------- PROPERTIES
-    // Renderers and Cameras
-    lateinit var camera: OrthographicCamera
-
     private lateinit var viewport   : Viewport
     private lateinit var batch      : SpriteBatch
-    private lateinit var shpRend    : ShapeRenderer
     private lateinit var font       : BitmapFont
 
-    private val gameArea            : GameArea
+    private val gameAreaComponent : GameArea
+
     private val inputMultiplexer    : InputMultiplexer
 
 
@@ -48,9 +46,12 @@ class WorldScreen(mapID: Int, startPosID: Int, fromSave: Boolean) : Screen
         CoreSL.provide(World())
 
         setUpRendering()
-        gameArea = GameArea(mapID, startPosID)
-        val saveGameManager = SaveGameManager(this.gameArea)
-        CoreSL.provide(EntityComponentSystem(viewport, gameArea, fromSave, this, saveGameManager))
+        val gameArea = LimbusGameObject("GameArea")
+        gameAreaComponent = GameArea(mapID, startPosID)
+        gameArea.add(gameAreaComponent)
+        CoreSL.world.add(gameArea)
+        val saveGameManager = SaveGameManager(gameAreaComponent)
+        CoreSL.provide(EntityComponentSystem(viewport, gameAreaComponent, fromSave, this, saveGameManager))
 
         inputMultiplexer = InputMultiplexer()
         setUpInputProcessor()
@@ -66,7 +67,7 @@ class WorldScreen(mapID: Int, startPosID: Int, fromSave: Boolean) : Screen
     {
         batch = SpriteBatch()
         setUpInputProcessor()
-        gameArea.playMusic()
+        gameAreaComponent.playMusic()
         CoreSL.ecs.hud.show()
     }
 
@@ -82,15 +83,12 @@ class WorldScreen(mapID: Int, startPosID: Int, fromSave: Boolean) : Screen
         updateCamera()
 
         // ............................................................................... RENDERING
-        // Tiled Map
-        gameArea.render(camera)
-        if (Constant.DEBUGGING_ON) gameArea.renderDebugging(shpRend)
+        CoreSL.world.render()
+        CoreSL.ecs.render()
 
-        CoreSL.ecs.draw()
-
-        // ............................................................................... RENDERING
-
+        CoreSL.world.update(delta)
         CoreSL.ecs.update(delta)
+        // ............................................................................... RENDERING
     }
 
     /**
@@ -124,20 +122,19 @@ class WorldScreen(mapID: Int, startPosID: Int, fromSave: Boolean) : Screen
     {
         batch.dispose()
         font.dispose()
-        gameArea.dispose()
     }
 
 
     // ..................................................................................... Helpers
     private fun setUpRendering()
     {
-        camera = OrthographicCamera()    // set up the camera and viewport
+        CoreSL.world.mainCamera = OrthographicCamera()    // set up the camera and viewport
+        val camera = CoreSL.world.mainCamera
         viewport = FitViewport(Constant.WIDTHf, Constant.HEIGHTf, camera)
         viewport.apply()
         camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0f) // center camera
 
         batch = SpriteBatch()
-        shpRend = ShapeRenderer()
         font = BitmapFont()
         font.color = Color.WHITE
     }
@@ -145,9 +142,8 @@ class WorldScreen(mapID: Int, startPosID: Int, fromSave: Boolean) : Screen
     private fun updateCamera()
     {
         // project to camera
-        batch.projectionMatrix = camera.combined
-        shpRend.projectionMatrix = camera.combined
-        camera.update()
+        batch.projectionMatrix = CoreSL.world.mainCamera.combined
+        CoreSL.world.mainCamera.update()
     }
 
     private fun setUpInputProcessor()

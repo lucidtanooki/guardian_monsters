@@ -21,7 +21,7 @@ import de.limbusdev.utils.geometry.IntVec2
  *
  * @author Georg Eckert 2015-11-23
  */
-class EntityFactory(private val engine: Engine, private val area: GameArea)
+class EntityFactory(private val area: GameArea)
 {
     // --------------------------------------------------------------------------------------------- METHODS
     // ............................................................................. Factory Methods
@@ -104,56 +104,5 @@ class EntityFactory(private val engine: Engine, private val area: GameArea)
         hero.addAndRemoveComponentsNow()
 
         return hero
-    }
-
-    /**
-     * Creates a walking person entity
-     * @param startField
-     * @param path
-     * @param moves
-     * @param conversation
-     * @return
-     */
-    private fun createPerson
-    (
-            startField: Transform,
-            path: Array<SkyDirection>,
-            moves: Boolean,
-            conversation: String,
-            name: String,
-            male: Boolean,
-            spriteIndex: Int
-    )
-            : Entity
-    {
-        val person = Entity()
-
-        // Path
-        val pathComp = PathComponent(path, moves)
-        person.add(pathComp)
-
-        // Sprite
-        person.add(CharacterSpriteComponent(AnimatedPersonSprite(male, spriteIndex)))
-
-        // Position
-        val transform = Transform(LimbusGameObject())
-        transform.x = startField.x
-        transform.y = startField.y
-        transform.width = UnitConverter.tilesToPixels(1)
-        transform.height = UnitConverter.tilesToPixels(1)
-        transform.layer = startField.layer
-
-
-        person.add(transform)
-
-        // Collider
-        val collider = ColliderComponent(true, transform.x, transform.y, transform.width, transform.height)
-        person.add(collider)
-
-        // Conversation
-        person.add(ConversationComponent(conversation, name))
-        engine.addEntity(person)
-
-        return person
     }
 }

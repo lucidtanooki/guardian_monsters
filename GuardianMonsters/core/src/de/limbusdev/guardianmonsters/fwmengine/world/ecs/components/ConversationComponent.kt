@@ -8,8 +8,7 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusBehaviour
  *
  * @author Georg Eckert 2015-12-02
  */
-class ConversationComponent(var name : String = "", var text : String = "")
-    : LimbusBehaviour(), Component
+class ConversationComponent(var name : String = "", var text : String = "") : LimbusBehaviour()
 {
     companion object
     {

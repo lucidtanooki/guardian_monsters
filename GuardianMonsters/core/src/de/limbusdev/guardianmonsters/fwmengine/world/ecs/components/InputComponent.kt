@@ -12,7 +12,7 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusBehaviour
  *
  * @author Georg Eckert 2015-11-22
  */
-class InputComponent : LimbusBehaviour(), Component
+class InputComponent : LimbusBehaviour()
 {
     companion object
     {

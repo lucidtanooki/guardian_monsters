@@ -2,7 +2,6 @@ package de.limbusdev.guardianmonsters.fwmengine.world.ecs.components
 
 import de.limbusdev.guardianmonsters.Constant
 import de.limbusdev.guardianmonsters.CoreSL
-import de.limbusdev.guardianmonsters.enums.Compass4
 import de.limbusdev.guardianmonsters.enums.SkyDirection
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusBehaviour
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusGameObject
@@ -58,7 +57,7 @@ class TileWiseMovementComponent() : LimbusBehaviour()
     // Register callback functions for changing gridSlot here: Callback(newGridSlot)
     val onGridSlotChanged = mutableListOf<((IntVec2) -> Unit)>()
 
-    val onMovementImpossible = mutableListOf<(() -> Unit)>()
+    val onMovementImpossible = mutableListOf<((LimbusGameObject) -> Unit)>()
 
 
     // --------------------------------------------------------------------------------------------- METHODS
@@ -196,19 +195,8 @@ class TileWiseMovementComponent() : LimbusBehaviour()
                 val nextPos = nextPosition.offset(Constant.TILE_SIZE / 2)
                 if (otherCollider?.blocks(nextPos) == true)
                 {
-                    if(otherGameObject.has<SlidingComponent>() && otherGameObject.has<TileWiseMovementComponent>())
-                    {
-                        val otherMovementComponent= otherGameObject.get<TileWiseMovementComponent>()
-                        if(otherMovementComponent?.moving == false)
-                        {
-                            val slidingComponent = otherGameObject.get<SlidingComponent>()
-                            slidingComponent?.push(Compass4.translate(inputComponent.direction), this.gameObject)
-                            speed = otherMovementComponent.speed
-                        }
-                    }
-
                     // Movement Impossible, tell subscribers.
-                    onMovementImpossible.forEach { it.invoke() }
+                    onMovementImpossible.forEach { it.invoke(otherGameObject) }
                     return true
                 }
             }

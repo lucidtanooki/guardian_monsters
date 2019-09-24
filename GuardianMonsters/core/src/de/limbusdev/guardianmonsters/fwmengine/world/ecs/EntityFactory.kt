@@ -58,6 +58,8 @@ class EntityFactory(private val engine: Engine, private val area: GameArea)
         val collider = ColliderComponent(true, transform.x, transform.y, transform.width, transform.height)
         hero.add(collider)
 
+        hero.add(PusherComponent())
+
         // Game State
         val gameState = SaveGameManager.getCurrentGameState()
         hero.add(SaveGameComponent(gameState))

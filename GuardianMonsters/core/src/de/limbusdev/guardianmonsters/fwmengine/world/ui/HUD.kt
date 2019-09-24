@@ -17,13 +17,11 @@ import com.badlogic.gdx.utils.viewport.FitViewport
 import de.limbusdev.guardianmonsters.Constant
 import de.limbusdev.guardianmonsters.CoreSL
 import de.limbusdev.guardianmonsters.battle.BattleScreen
-import de.limbusdev.guardianmonsters.enums.Compass4
-import de.limbusdev.guardianmonsters.enums.SkyDirection
 import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusBehaviour
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusGameObject
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.*
-import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.GameArea
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.GameArea
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.widgets.ConversationWidget
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.widgets.DPad
 import de.limbusdev.guardianmonsters.inventory.InventoryScreen

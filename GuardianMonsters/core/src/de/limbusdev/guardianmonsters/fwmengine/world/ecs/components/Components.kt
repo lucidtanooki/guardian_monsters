@@ -3,7 +3,7 @@ package de.limbusdev.guardianmonsters.fwmengine.world.ecs.components
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusBehaviour
 import kotlin.reflect.KClass
 
-object Behaviours
+object Components
 {
     val parsers = mutableMapOf<KClass<out LimbusBehaviour>, IComponentParser<out LimbusBehaviour>>()
 

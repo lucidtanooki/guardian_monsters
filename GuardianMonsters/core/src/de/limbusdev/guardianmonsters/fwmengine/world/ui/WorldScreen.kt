@@ -15,7 +15,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport
 import com.badlogic.gdx.utils.viewport.Viewport
 
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.EntityComponentSystem
-import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.GameArea
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.GameArea
 import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager
 import de.limbusdev.guardianmonsters.Constant
 import de.limbusdev.guardianmonsters.CoreSL

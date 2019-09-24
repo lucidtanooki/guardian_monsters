@@ -9,7 +9,6 @@ import de.limbusdev.guardianmonsters.CoreSL
 import de.limbusdev.guardianmonsters.enums.SkyDirection
 import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.*
-import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.GameArea
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.AnimatedPersonSprite
 import de.limbusdev.guardianmonsters.guardians.GuardiansServiceLocator
 import de.limbusdev.guardianmonsters.guardians.items.Inventory

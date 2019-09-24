@@ -14,8 +14,6 @@ object WarpStartComponentParser : IComponentParser<WarpStartComponent>
         if(!mapObject.properties.containsKey(WarpStartComponent.className)) { return null }
 
         val jsonStringWithoutBrackets = mapObject.properties[WarpStartComponent.className, WarpStartComponent.defaultJson]
-        val warpStart = json.fromJson(WarpStartComponent::class.java, "{$jsonStringWithoutBrackets}")
-
-        return warpStart
+        return json.fromJson(WarpStartComponent::class.java, "{$jsonStringWithoutBrackets}")
     }
 }

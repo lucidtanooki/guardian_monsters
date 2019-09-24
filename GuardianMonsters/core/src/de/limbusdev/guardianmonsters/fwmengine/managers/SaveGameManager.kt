@@ -11,11 +11,11 @@ import com.esotericsoftware.kryo.io.Input
 import com.esotericsoftware.kryo.io.Output
 
 import de.limbusdev.guardianmonsters.Constant
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.GameArea
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.GuardoSphereComponent
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Transform
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.SaveGameComponent
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TeamComponent
-import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.GameArea
 import de.limbusdev.guardianmonsters.guardians.GuardiansServiceLocator
 import de.limbusdev.guardianmonsters.guardians.items.Inventory
 import de.limbusdev.guardianmonsters.guardians.monsters.GuardoSphere

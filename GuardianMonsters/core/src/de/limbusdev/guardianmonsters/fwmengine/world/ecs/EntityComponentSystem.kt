@@ -11,9 +11,6 @@ import de.limbusdev.guardianmonsters.battle.BattleScreen
 import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.CameraComponent
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.InventoryComponent
-import de.limbusdev.guardianmonsters.fwmengine.world.ecs.entities.HeroEntity
-import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.GameArea
-import de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems.SpriteSystem
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.HUD
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.WorldScreen
 import de.limbusdev.guardianmonsters.services.Services
@@ -87,11 +84,6 @@ class EntityComponentSystem
 
     private fun setUpEntitySystems(gameArea: GameArea, viewport: Viewport, hud: HUD)
     {
-        // Sprite System
-        val spriteSystem = SpriteSystem(gameArea.mapRenderer)
-        spriteSystem.addedToEngine(engine)
-        engine.addSystem(spriteSystem)
-
         // Camera System
         val cameraComponent = CameraComponent(viewport.camera as OrthographicCamera, gameArea.tiledMap)
         CoreSL.world.hero.add(cameraComponent)

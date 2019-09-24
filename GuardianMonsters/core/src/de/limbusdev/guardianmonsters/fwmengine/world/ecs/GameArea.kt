@@ -1,4 +1,4 @@
-package de.limbusdev.guardianmonsters.fwmengine.world.ecs.systems
+package de.limbusdev.guardianmonsters.fwmengine.world.ecs
 
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.OrthographicCamera
@@ -22,7 +22,6 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ui.ExtendedTiledMapRenderer
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.TmxDayTimeMapLoader
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.get
 import de.limbusdev.guardianmonsters.services.Services
-import de.limbusdev.utils.extensions.f
 import de.limbusdev.utils.extensions.removeLast
 import de.limbusdev.utils.extensions.subStringFromEnd
 import de.limbusdev.utils.geometry.IntRect
@@ -41,7 +40,7 @@ class GameArea(val areaID: Int, startPosID: Int)
     // --------------------------------------------------------------------------------------------- PROPERTIES
     companion object
     {
-        val defaultComponentPackage = "de.limbusdev.guardianmonsters.fwmengine.world.ecs.components."
+        const val defaultComponentPackage = "de.limbusdev.guardianmonsters.fwmengine.world.ecs.components."
     }
 
     val tiledMap    : TiledMap
@@ -225,7 +224,7 @@ class GameArea(val areaID: Int, startPosID: Int)
 
             kClass as KClass<out LimbusBehaviour>
 
-            component = Behaviours.parsers[kClass]?.parseComponent(json, mapObject)
+            component = Components.parsers[kClass]?.parseComponent(json, mapObject)
         }
         catch (e: Exception)
         {

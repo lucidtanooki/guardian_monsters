@@ -1,7 +1,7 @@
 package de.limbusdev.guardianmonsters.fwmengine.world.ecs
 
 import de.limbusdev.guardianmonsters.CoreSL
-import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Behaviours
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Components
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Transform
 import kotlin.collections.ArrayList
 import kotlin.reflect.KClass
@@ -107,7 +107,7 @@ class LimbusGameObject(var name: String = "", val type: String = "general")
         }
         else
         {
-            component = Behaviours.parsers[T::class]!!.createComponent() as T
+            component = Components.parsers[T::class]!!.createComponent() as T
             add(component)
         }
 

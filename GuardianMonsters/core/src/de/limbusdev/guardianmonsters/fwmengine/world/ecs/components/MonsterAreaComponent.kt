@@ -13,8 +13,6 @@ import de.limbusdev.utils.geometry.IntRect
  */
 class MonsterAreaComponent() : LimbusBehaviour()
 {
-    override val defaultJson: String get() = ""
-
     // --------------------------------------------------------------------------------------------- PROPERTIES
     val monsters             = Array<Int>()     // IDs of the Guardians that appear in this area
     val monsterProbabilities = Array<Float>()   // at which probability they appear

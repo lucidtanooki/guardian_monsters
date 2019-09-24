@@ -23,5 +23,8 @@ class CharacterSpriteComponent
 )
     : LimbusBehaviour(), Component
 {
-    override val defaultJson: String = "enabled: true, male: true, index: 0"
+    companion object
+    {
+        const val defaultJson : String = "enabled: true, male: true, index: 0"
+    }
 }

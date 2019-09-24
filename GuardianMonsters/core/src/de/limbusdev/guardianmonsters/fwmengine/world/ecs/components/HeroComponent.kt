@@ -24,8 +24,6 @@ class HeroComponent
 {
     companion object { const val TAG = "TileWiseMovementComponent" }
 
-    override val defaultJson: String = ""
-
     init
     {
         movementComponent.onGridSlotChanged.add { slot -> checkWarp(slot) }

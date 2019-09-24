@@ -1,13 +1,15 @@
 package de.limbusdev.guardianmonsters.fwmengine.world.ecs
 
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Transform
+
 /**
  * LimbusBehaviour is the base class from which every Component derives.
  */
 abstract class LimbusBehaviour()
 {
-    abstract val defaultJson : String
+    var gameObject = LimbusGameObject()
+    val transform : Transform get() = gameObject.transform
 
-    var gameObject : LimbusGameObject? = null
     var initialized: Boolean = false
         private set
     var enabled: Boolean = true

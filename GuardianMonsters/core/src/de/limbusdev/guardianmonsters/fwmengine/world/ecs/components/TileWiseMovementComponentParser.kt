@@ -5,6 +5,8 @@ import com.badlogic.gdx.utils.Json
 
 object TileWiseMovementComponentParser : IComponentParser<TileWiseMovementComponent>
 {
+    override fun createComponent() = TileWiseMovementComponent()
+
     override fun parseComponent(json: Json, mapObject: MapObject): TileWiseMovementComponent?
     {
         // MapObject must contain proper component

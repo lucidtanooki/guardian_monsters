@@ -11,10 +11,14 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusBehaviour
 class ConversationComponent(var name : String = "", var text : String = "")
     : LimbusBehaviour(), Component
 {
-    override val defaultJson =
-            """
+    companion object
+    {
+        val defaultJson =
+                """
                     enabled: true,
                     name: "",
                     text: ""
             """.trimMargin()
+    }
+
 }

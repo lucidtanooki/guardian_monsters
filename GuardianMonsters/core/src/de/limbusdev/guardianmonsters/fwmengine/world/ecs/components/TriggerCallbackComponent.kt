@@ -12,7 +12,10 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusGameObject
  */
 abstract class TriggerCallbackComponent : LimbusBehaviour()
 {
-    override val defaultJson: String get() = "enabled: true, triggerID: 0"
+    companion object
+    {
+        val defaultJson: String get() = "enabled: true, triggerID: 0"
+    }
 
     abstract fun onTriggerEntered(gameObject: LimbusGameObject?, fromDirection: Compass4?);
 }

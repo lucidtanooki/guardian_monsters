@@ -8,7 +8,7 @@ import de.limbusdev.guardianmonsters.guardians.monsters.GuardoSphere
 /**
  * @author Georg Eckert 2019-07-03
  */
-class GuardoSphereComponent(override val defaultJson: String = "") : LimbusBehaviour(),  Component
+class GuardoSphereComponent : LimbusBehaviour(),  Component
 {
     var guardoSphere = GuardoSphere()
 }

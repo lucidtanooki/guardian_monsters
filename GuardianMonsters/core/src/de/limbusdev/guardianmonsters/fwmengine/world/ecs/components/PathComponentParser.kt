@@ -10,12 +10,14 @@ object PathComponentParser : IComponentParser<PathComponent>
 {
     private data class Data(var enabled: Boolean = true, var path: String = "SSTOP")
 
+    override fun createComponent() = PathComponent()
+
     override fun parseComponent(json: Json, mapObject: MapObject): PathComponent?
     {
         // MapObject must contain proper component
         if(!mapObject.properties.containsKey("PathComponent")) { return null }
 
-        val jsonStringWithoutBrackets = mapObject.properties["PathComponent", PathComponent().defaultJson]
+        val jsonStringWithoutBrackets = mapObject.properties["PathComponent", PathComponent.defaultJson]
 
         val data = json.fromJson(Data::class.java, "{$jsonStringWithoutBrackets}")
 

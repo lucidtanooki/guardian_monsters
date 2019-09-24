@@ -16,8 +16,6 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ui.EntitySprite
  */
 open class SpriteComponent(region: TextureRegion) : LimbusBehaviour(), Component
 {
-    override val defaultJson: String get() = ""
-
     // --------------------------------------------------------------------------------------------- PROPERTIES
     var sprite = Sprite(region)
 }

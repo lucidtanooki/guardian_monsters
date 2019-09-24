@@ -12,7 +12,10 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ui.get
 
 class BoxTrigger2DComponent(var triggerID : Int = 0) : LimbusBehaviour()
 {
-    override val defaultJson: String get() = "enabled: true, triggerID: 0"
+    companion object
+    {
+        val defaultJson: String get() = "enabled: true, triggerID: 0"
+    }
 
     val onTriggerEntered = mutableListOf<((LimbusGameObject?, Compass4?) -> Unit)>()
     val currentlyOverlappingGameObjects = mutableListOf<LimbusGameObject>()
@@ -61,11 +64,13 @@ class BoxTrigger2DComponent(var triggerID : Int = 0) : LimbusBehaviour()
 
     object Parser : IComponentParser<BoxTrigger2DComponent>
     {
+        override fun createComponent() = BoxTrigger2DComponent()
+
         override fun parseComponent(json: Json, mapObject: MapObject): BoxTrigger2DComponent?
         {
             if(!mapObject.properties.containsKey("BoxTrigger2DComponent")) { return null }
 
-            val jsonStringWithoutBrackets = mapObject.properties["BoxTrigger2DComponent", BoxTrigger2DComponent(0).defaultJson]
+            val jsonStringWithoutBrackets = mapObject.properties[BoxTrigger2DComponent::class.java.simpleName, defaultJson]
             val trigger = json.fromJson(BoxTrigger2DComponent::class.java, "{$jsonStringWithoutBrackets}")
 
             return trigger

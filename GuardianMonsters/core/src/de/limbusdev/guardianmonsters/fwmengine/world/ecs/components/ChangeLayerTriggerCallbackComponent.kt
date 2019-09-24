@@ -17,7 +17,10 @@ class ChangeLayerTriggerCallbackComponent
 )
     : TriggerCallbackComponent()
 {
-    override val defaultJson: String get() = "${super.defaultJson}, fromNorth: -1, fromSouth: 1, fromEast: -1, fromWest: 1"
+    companion object
+    {
+        val defaultJson: String get() = "${TriggerCallbackComponent.defaultJson}, fromNorth: -1, fromSouth: 1, fromEast: -1, fromWest: 1"
+    }
 
     override fun initialize()
     {
@@ -48,12 +51,14 @@ class ChangeLayerTriggerCallbackComponent
 
     object Parser : IComponentParser<ChangeLayerTriggerCallbackComponent>
     {
+        override fun createComponent() = ChangeLayerTriggerCallbackComponent()
+
         override fun parseComponent(json: Json, mapObject: MapObject): ChangeLayerTriggerCallbackComponent?
         {
             // MapObject must contain proper component
             if (!mapObject.properties.containsKey("ChangeLayerTriggerCallbackComponent")) { return null }
 
-            val jsonStringWithoutBrackets = mapObject.properties["ChangeLayerTriggerCallbackComponent", ChangeLayerTriggerCallbackComponent().defaultJson]
+            val jsonStringWithoutBrackets = mapObject.properties["ChangeLayerTriggerCallbackComponent", ChangeLayerTriggerCallbackComponent.defaultJson]
             val callback = json.fromJson(ChangeLayerTriggerCallbackComponent::class.java, "{$jsonStringWithoutBrackets}")
 
             return callback

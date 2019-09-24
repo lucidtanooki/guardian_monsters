@@ -4,10 +4,13 @@ import de.limbusdev.guardianmonsters.enums.Compass4
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusBehaviour
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusGameObject
 
+/**
+ * [LimbusGameObject]s with a PusherComponent are enabled to move around other [LimbusGameObject]s
+ * with a [SlidingComponent]. To work, the parent game object also needs a [TileWiseMovementComponent]
+ * and an [InputComponent].
+ */
 class PusherComponent : LimbusBehaviour()
 {
-    override val defaultJson: String get() = ""
-
     private var tileWiseMovementComponent = TileWiseMovementComponent()
     private var inputComponent = InputComponent()
 

@@ -11,4 +11,4 @@ import de.limbusdev.guardianmonsters.guardians.items.Inventory
  * @author Georg Eckert 2017-02-17
  */
 
-class InventoryComponent(var inventory: Inventory, override val defaultJson: String = "") : LimbusBehaviour(), Component
+class InventoryComponent(var inventory: Inventory) : LimbusBehaviour(), Component

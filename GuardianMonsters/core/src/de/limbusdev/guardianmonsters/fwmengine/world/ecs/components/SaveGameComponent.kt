@@ -11,4 +11,4 @@ import de.limbusdev.guardianmonsters.model.gamestate.GameState
  *
  * @author Georg Eckert 2015-12-03
  */
-class SaveGameComponent(var gameState: GameState, override val defaultJson: String = "") : LimbusBehaviour(), Component
+class SaveGameComponent(var gameState: GameState) : LimbusBehaviour(), Component

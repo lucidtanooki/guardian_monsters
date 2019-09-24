@@ -3,15 +3,11 @@ package de.limbusdev.guardianmonsters.fwmengine.world.ecs.components
 import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.maps.tiled.TiledMap
 import com.badlogic.gdx.math.MathUtils
-import com.badlogic.gdx.math.Rectangle
 import de.limbusdev.guardianmonsters.Constant
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusBehaviour
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.get
-import de.limbusdev.utils.extensions.f
 import de.limbusdev.utils.geometry.IntRect
 
-
-import de.limbusdev.utils.geometry.IntVec2
 
 /**
  * The camera system updates the cameras position according to the hero's position by keeping it
@@ -27,8 +23,6 @@ import de.limbusdev.utils.geometry.IntVec2
  */
 class CameraComponent(private val camera: OrthographicCamera, tiledMap: TiledMap) : LimbusBehaviour()
 {
-    override val defaultJson: String = ""
-
     // --------------------------------------------------------------------------------------------- PROPERTIES
     private val mapOutline: IntRect    // Bounds of map to be rendered
 

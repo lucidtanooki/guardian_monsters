@@ -44,9 +44,11 @@ class PathComponent
 )
     : LimbusBehaviour(), Component
 {
-    companion object { const val TAG = "PathComponent" }
-
-    override val defaultJson: String get() = "enabled: true, path: SSTOP"
+    companion object
+    {
+        const val TAG = "PathComponent"
+        const val defaultJson = "enabled: true, path: SSTOP"
+    }
 
     private lateinit var inputComponent : InputComponent
     private lateinit var tileWiseMovementComponent : TileWiseMovementComponent

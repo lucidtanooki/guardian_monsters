@@ -194,7 +194,7 @@ class GameArea(val areaID: Int, startPosID: Int)
                 // .......................................................................... Components
                 for (key in mapObject.properties.keys)
                 {
-                    val component = generateComponent(mapObject, key, json)
+                    val component = generateComponent(mapObject, key, json, gameObject)
                     if (component != null) { gameObject.add(component) }
                 }
 
@@ -206,7 +206,7 @@ class GameArea(val areaID: Int, startPosID: Int)
         CoreSL.world.addAndRemoveObjectsNow()
     }
 
-    private fun generateComponent(mapObject: MapObject, componentName: String, json: Json) : LimbusBehaviour?
+    private fun generateComponent(mapObject: MapObject, componentName: String, json: Json, core: LimbusGameObject) : LimbusBehaviour?
     {
         if(!componentName.contains("Component", false)) { return null }
 

@@ -25,13 +25,9 @@ class ColliderComponent
 )
     : LimbusBehaviour(), Component
 {
-    init
+    companion object
     {
-        this.enabled = enabled
-    }
-
-    override val defaultJson =
-            """
+        val defaultJson = """
                     enabled: true,
                     offsetX: 0,
                     offsetY: 0,
@@ -40,9 +36,14 @@ class ColliderComponent
                     inheritsExtent: true,
                     isTrigger: false
             """.trimMargin()
+    }
 
+    init
+    {
+        this.enabled = enabled
+    }
 
-    val asRectangle get() = IntRect((gameObject?.transform?.x ?: 0) + offsetX, (gameObject?.transform?.y ?: 0) + offsetY, width, height)
+    val asRectangle get() = IntRect((gameObject.transform.x ?: 0) + offsetX, (gameObject.transform.y ?: 0) + offsetY, width, height)
 
     /** Returns whether the given position is blocked by this collider */
     fun blocks(position : IntVec2) : Boolean

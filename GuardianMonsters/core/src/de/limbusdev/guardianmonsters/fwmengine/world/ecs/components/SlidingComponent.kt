@@ -7,14 +7,13 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusBehaviour
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusGameObject
 
 /**
- * [LimbusGameObject]s with a SlidingComponent can be pushed around by the player.
+ * [LimbusGameObject]s with a SlidingComponent can be pushed around by other [LimbusGameObject]s,
+ * if they have a [PusherComponent].
  * To work, the same object  a [ColliderComponent], a [TileWiseMovementComponent], an
  * [InputComponent] and a [RigidBodyComponent].
  */
 class SlidingComponent : LimbusBehaviour()
 {
-    override val defaultJson: String get() = ""
-
     private var tileWiseMovementComponent = TileWiseMovementComponent()
     private var inputComponent = InputComponent()
 
@@ -51,6 +50,8 @@ class SlidingComponent : LimbusBehaviour()
     // --------------------------------------------------------------------------------------------- Component Parser
     object Parser : IComponentParser<SlidingComponent>
     {
+        override fun createComponent() = SlidingComponent()
+        
         override fun parseComponent(json: Json, mapObject: MapObject): SlidingComponent?
         {
             return if(mapObject.properties.containsKey("SlidingComponent")) SlidingComponent() else null

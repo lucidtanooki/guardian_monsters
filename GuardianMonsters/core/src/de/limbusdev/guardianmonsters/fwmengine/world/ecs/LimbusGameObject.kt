@@ -58,13 +58,21 @@ class LimbusGameObject(var name: String = "", val type: String = "general")
     {
         for(c in componentsToBeAdded)
         {
-            if(!components.contains(c)) { components.add(c) }
+            if(!components.contains(c))
+            {
+                components.add(c)
+                c.gameObject = this
+            }
         }
         componentsToBeAdded.clear()
 
         for(c in componentsToBeRemoved)
         {
-            if(components.contains(c)) { components.remove(c) }
+            if(components.contains(c))
+            {
+                components.remove(c)
+                c.gameObject = LimbusGameObject()
+            }
         }
         componentsToBeRemoved.clear()
     }
@@ -74,11 +82,32 @@ class LimbusGameObject(var name: String = "", val type: String = "general")
         return components.filterIsInstance<T>()
     }
 
+    /** Returns a component of the given type if this [LimbusGameObject] has one or else null. */
     inline fun <reified T : LimbusBehaviour> get() : T?
     {
         val components = getComponents<T>()
         if(components.isEmpty()) { return null }
         return components.filterIsInstance<T>().first()
+    }
+
+    /**
+     * Returns an already existing component of the given type or creates a new one and adds it to
+     * the [LimbusGameObject] and returns that one.
+     */
+    inline fun <reified T : LimbusBehaviour> getOrCreate() : T
+    {
+        var component = get<T>()
+        if(component != null)
+        {
+            return component
+        }
+        else
+        {
+            component = CoreSL.world.componentParsers[T::class]!!.createComponent() as T
+            add(component)
+        }
+
+        return component
     }
 
     inline fun <reified T : LimbusBehaviour> has() : Boolean
@@ -88,16 +117,14 @@ class LimbusGameObject(var name: String = "", val type: String = "general")
 
     fun add(component: LimbusBehaviour)
     {
-        signature.add(component::class.simpleName ?: "Anonymous")
+        signature.add(component::class.java.simpleName)
         componentsToBeAdded.add(component)
-        component.gameObject = this
     }
 
     fun remove(component: LimbusBehaviour)
     {
-        signature.remove(component::class.simpleName ?: "Anonymous")
+        signature.remove(component::class.java.simpleName)
         componentsToBeRemoved.add(component)
-        component.gameObject = null
     }
 
     fun enable()
@@ -123,7 +150,7 @@ class LimbusGameObject(var name: String = "", val type: String = "general")
 
     companion object
     {
-        val typeSignatures: MutableMap<String, List<String>> = mutableMapOf()
+        private val typeSignatures: MutableMap<String, List<String>> = mutableMapOf()
 
         fun registerType(type: String, signature: List<String>)
         {

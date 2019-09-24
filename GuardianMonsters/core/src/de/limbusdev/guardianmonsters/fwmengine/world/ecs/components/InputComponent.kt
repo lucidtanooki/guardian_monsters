@@ -12,7 +12,7 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusBehaviour
  *
  * @author Georg Eckert 2015-11-22
  */
-class InputComponent(override val defaultJson: String = "") : LimbusBehaviour(), Component
+class InputComponent : LimbusBehaviour(), Component
 {
     // --------------------------------------------------------------------------------------------- PROPERTIES
     var talking     : Boolean = false

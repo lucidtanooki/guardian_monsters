@@ -8,16 +8,14 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusGameObject
 import de.limbusdev.utils.geometry.IntVec2
 import kotlin.properties.Delegates
 
-class TileWiseMovementComponent() : LimbusBehaviour()
+class TileWiseMovementComponent : LimbusBehaviour()
 {
     // --------------------------------------------------------------------------------------------- PROPERTIES
     companion object { const val TAG = "TileWiseMovementComponent" }
 
-    override val defaultJson: String get() = ""
-
-    private var inputComponent = InputComponent()
-    private var characterSpriteComponent = CharacterSpriteComponent()
-    private var transform = Transform(LimbusGameObject())
+    private lateinit var inputComponent : InputComponent
+    private var characterSpriteComponent : CharacterSpriteComponent? = null
+    private var colliderComponent : ColliderComponent? = null
 
     private var nextX = 0
     private var nextY = 0
@@ -65,13 +63,12 @@ class TileWiseMovementComponent() : LimbusBehaviour()
     {
         super.initialize()
 
-        // Get all obligatory components
-        val transform = gameObject?.transform
-        if(transform != null) { this.transform = transform }
-        val inputComponent = gameObject?.get<InputComponent>()
-        if(inputComponent != null) { this.inputComponent = inputComponent }
-        val characterSpriteComponent = gameObject?.get<CharacterSpriteComponent>()
-        if(characterSpriteComponent != null) { this.characterSpriteComponent = characterSpriteComponent }
+        // Get obligatory component
+        inputComponent = gameObject.getOrCreate()
+
+        // Get optional components
+        characterSpriteComponent = gameObject.get()
+        colliderComponent = gameObject.get()
 
         defaultSpeed = speed
     }
@@ -99,33 +96,42 @@ class TileWiseMovementComponent() : LimbusBehaviour()
      */
     private fun initializeMovement() : Boolean
     {
-        // Turn Character to the chosen direction
-        characterSpriteComponent.sprite.changeState(inputComponent.direction)
 
-        // Initialize Movement - don't go further if stopped
-        if(inputComponent.talking)
-        {
-            characterSpriteComponent.sprite.changeState(inputComponent.talkDirection)
-            return false
-        }
-        if(inputComponent.direction.isStop()) { return false }
+            characterSpriteComponent?.sprite?.let { safeSprite ->
 
-        // Check if next tile is empty
-        val nextPosition = calculateAndSetNextPosition(inputComponent.direction)
-        val isBlocked = isNextPositionBlocked(nextPosition)
-        if(isBlocked) { return false }
+                if (inputComponent.talking)
+                {
+                    // Initialize Movement - don't go further if stopped
+                    safeSprite.changeState(inputComponent.talkDirection)
+                    return false
+                }
+                else
+                {
+                    // Turn Character to the chosen direction
+                    safeSprite.changeState(inputComponent.direction)
+                }
+            }
 
-        // Start Movement
-        framesSinceLastPixelStep = 0
-        currentMovement = inputComponent.direction  // set movement direction
-        moving = true                               // entity is moving right now
+            if (inputComponent.direction.isStop()) { return false }
 
-        // Move Collider to next position
-        val collider = gameObject!!.get<ColliderComponent>()!!
-        collider.offsetX = currentMovement.x * Constant.TILE_SIZE
-        collider.offsetY = currentMovement.y * Constant.TILE_SIZE
+            // Check if next tile is empty
+            val nextPosition = calculateAndSetNextPosition(inputComponent.direction)
+            val isBlocked = isNextPositionBlocked(nextPosition)
+            if (isBlocked) { return false }
 
-        return true
+            // Start Movement
+            framesSinceLastPixelStep = 0
+            currentMovement = inputComponent.direction  // set movement direction
+            moving = true                               // entity is moving right now
+
+            // Move Collider to next position
+            colliderComponent?.let { collider ->
+
+                collider.offsetX = currentMovement.x * Constant.TILE_SIZE
+                collider.offsetY = currentMovement.y * Constant.TILE_SIZE
+            }
+
+            return true
     }
 
     private fun applyMovement() : Boolean
@@ -138,16 +144,17 @@ class TileWiseMovementComponent() : LimbusBehaviour()
         transform.x += currentMovement.x
         transform.y += currentMovement.y
 
-        val collider = gameObject!!.get<ColliderComponent>()!!
-        collider.offsetX -= currentMovement.x
-        collider.offsetY -= currentMovement.y
+        colliderComponent?.let {
 
+            it.offsetX -= currentMovement.x
+            it.offsetY -= currentMovement.y
+        }
 
         // Update animation, every X pixel steps
         if (stepsSinceLastFrameUpdate >= newFrameEveryXPixels)
         {
             stepsSinceLastFrameUpdate = 0
-            characterSpriteComponent.sprite.toNextFrame()
+            characterSpriteComponent?.sprite?.toNextFrame()
         }
         stepsSinceLastFrameUpdate++
 
@@ -159,15 +166,15 @@ class TileWiseMovementComponent() : LimbusBehaviour()
             else -> false
         }
 
-        // Update grid slot after moving to new tile
+            // Update grid slot after moving to new tile
         if (movementComplete)
         {
             gridSlot = transform.onGrid
             moving = false
 
-            if(inputComponent.talking)
+            if (inputComponent.talking)
             {
-                characterSpriteComponent.sprite.changeState(inputComponent.talkDirection.nostop())
+                characterSpriteComponent?.sprite?.changeState(inputComponent.talkDirection.nostop())
             }
 
             // Reset Speed, if it was changed by anything
@@ -182,13 +189,13 @@ class TileWiseMovementComponent() : LimbusBehaviour()
     /** Returns whether the given slot is blocked by a collider. */
     private fun isNextPositionBlocked(nextPosition: IntVec2) : Boolean
     {
-        if(gameObject?.has<ColliderComponent>() == false) { return false }
-        if(gameObject?.get<ColliderComponent>()?.isTrigger == true) { return false }
+        if(colliderComponent == null) { return false }
+        if(colliderComponent?.isTrigger == true) { return false }
 
-        // Check whether movement is possible or blocked by a collider
-        for (otherGameObject in CoreSL.world.getAllWith("ColliderComponent", transform.layer))
+            // Check whether movement is possible or blocked by a collider
+        for (otherGameObject in CoreSL.world.getAllWith(ColliderComponent::class.simpleName!!, transform.layer))
         {
-            if(otherGameObject != gameObject)
+            if (otherGameObject != gameObject)
             {
                 val otherCollider = otherGameObject.get<ColliderComponent>()
 
@@ -201,6 +208,7 @@ class TileWiseMovementComponent() : LimbusBehaviour()
                 }
             }
         }
+
         return false
     }
 

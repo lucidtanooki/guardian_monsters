@@ -10,7 +10,7 @@ import de.limbusdev.guardianmonsters.guardians.monsters.Team
  *
  * @author Georg Eckert 2016
  */
-class TeamComponent(override val defaultJson: String = "") : LimbusBehaviour(), Component
+class TeamComponent : LimbusBehaviour(), Component
 {
     // --------------------------------------------------------------------------------------------- PROPERTIES
     var team = Team(7, 1, 1)

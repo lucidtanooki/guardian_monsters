@@ -18,6 +18,8 @@ class SlidingComponent : LimbusBehaviour()
     private var tileWiseMovementComponent = TileWiseMovementComponent()
     private var inputComponent = InputComponent()
 
+    private var pusher : LimbusGameObject? = null
+
     override fun initialize()
     {
         super.initialize()
@@ -27,18 +29,22 @@ class SlidingComponent : LimbusBehaviour()
 
         tileWiseMovementComponent.speed = 4
         tileWiseMovementComponent.onGridSlotChanged.add { stopPushing() }
+        tileWiseMovementComponent.onMovementImpossible.add { stopPushing() }
     }
 
-    fun push(direction: Compass4)
+    fun push(direction: Compass4, pusher: LimbusGameObject?)
     {
-        // TODO when pushing against blocked way, character speed is not reset correctly
-
+        this.pusher = pusher
+        pusher?.get<TileWiseMovementComponent>()?.speed = tileWiseMovementComponent.speed
         inputComponent.direction = direction.toSkyDirection()
     }
 
     private fun stopPushing()
     {
         inputComponent.direction = inputComponent.direction.stop()
+
+        val pushersMovement = pusher?.get<TileWiseMovementComponent>() ?: return
+        pushersMovement.speed = pushersMovement.defaultSpeed
     }
 
 

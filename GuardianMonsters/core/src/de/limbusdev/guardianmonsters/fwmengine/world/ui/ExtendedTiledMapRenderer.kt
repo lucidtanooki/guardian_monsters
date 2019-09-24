@@ -57,8 +57,8 @@ class ExtendedTiledMapRenderer(map: TiledMap) : OrthogonalTiledMapRenderer(map, 
     // --------------------------------------------------------------------------------------------- CONSTRUCTORS
     init
     {
-        this.elapsedTime = 0f
-        this.weatherAnimator = WeatherAnimator(map)
+        elapsedTime = 0f
+        weatherAnimator = WeatherAnimator(map)
 
         for (layer in map.layers)
         {

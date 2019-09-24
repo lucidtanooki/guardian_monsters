@@ -34,7 +34,7 @@ class TileWiseMovementComponent() : LimbusBehaviour()
                 else -> 10 - speed
             }
         }
-    private var defaultSpeed = speed
+    var defaultSpeed = speed; private set
 
     private val newFrameEveryXPixels = 6
     private var stepsSinceLastFrameUpdate = 0
@@ -57,6 +57,8 @@ class TileWiseMovementComponent() : LimbusBehaviour()
 
     // Register callback functions for changing gridSlot here: Callback(newGridSlot)
     val onGridSlotChanged = mutableListOf<((IntVec2) -> Unit)>()
+
+    val onMovementImpossible = mutableListOf<(() -> Unit)>()
 
 
     // --------------------------------------------------------------------------------------------- METHODS
@@ -200,17 +202,17 @@ class TileWiseMovementComponent() : LimbusBehaviour()
                         if(otherMovementComponent?.moving == false)
                         {
                             val slidingComponent = otherGameObject.get<SlidingComponent>()
-                            slidingComponent?.push(Compass4.translate(inputComponent.direction))
-                            defaultSpeed = speed
+                            slidingComponent?.push(Compass4.translate(inputComponent.direction), this.gameObject)
                             speed = otherMovementComponent.speed
                         }
                     }
 
+                    // Movement Impossible, tell subscribers.
+                    onMovementImpossible.forEach { it.invoke() }
                     return true
                 }
             }
         }
-
         return false
     }
 

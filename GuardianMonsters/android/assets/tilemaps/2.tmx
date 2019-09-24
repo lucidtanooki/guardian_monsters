@@ -345,10 +345,10 @@ path: SSTOP</property>
   </object>
   <object id="41" name="monsterArea" x="176" y="208" width="48" height="80">
    <properties>
-    <property name="monsters" value="28;0.90;13;0.05;32;0.05"/>
-    <property name="probability" type="float" value="0.05"/>
-    <property name="probability2" type="float" value="0.02"/>
-    <property name="probability3" type="float" value="0.01"/>
+    <property name="MonsterAreaComponent">monsters: 28;0.9;13;0.05;32;0.05
+probability: 0.05
+probability2: 0.02
+probability3: 0.01</property>
    </properties>
   </object>
   <object id="42" name="monsterArea" x="224" y="256" width="32" height="32">

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-down" width="64" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="20" nextobjectid="483">
+<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-down" width="64" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="20" nextobjectid="489">
  <properties>
   <property name="musicIndex" type="int" value="2"/>
   <property name="musicType" value="town"/>
@@ -217,30 +217,6 @@ path: &quot;SSTOP,ESTOP,NSTOP,N,N,N,N,N,ESTOP,NSTOP,WSTOP,NSTOP,ESTOP,E,SSTOP,WS
     <property name="TileWiseMovementComponent" value=""/>
    </properties>
   </object>
-  <object id="292" name="person" type="LimbusGameObject" x="544" y="288" width="16" height="16">
-   <properties>
-    <property name="CharacterSpriteComponent">male: true,
-index: 1</property>
-    <property name="ColliderComponent" value=""/>
-    <property name="ConversationComponent" value="enabled: true, name: person_name_25_9, text: person_25_9"/>
-    <property name="InputComponent" value=""/>
-    <property name="PathComponent">enabled: true,
-path: SSTOP</property>
-    <property name="TileWiseMovementComponent" value=""/>
-   </properties>
-  </object>
-  <object id="293" name="person" type="LimbusGameObject" x="592" y="112" width="16" height="16">
-   <properties>
-    <property name="CharacterSpriteComponent">male: true,
-index: 2</property>
-    <property name="ColliderComponent" value=""/>
-    <property name="ConversationComponent" value="enabled: true, name: person_name_25_12, text: person_25_12"/>
-    <property name="InputComponent" value=""/>
-    <property name="PathComponent">enabled: true,
-path: SSTOP</property>
-    <property name="TileWiseMovementComponent" value=""/>
-   </properties>
-  </object>
   <object id="294" name="person" type="LimbusGameObject" x="480" y="320" width="16" height="16">
    <properties>
     <property name="CharacterSpriteComponent">male: true,
@@ -262,42 +238,6 @@ index: 4</property>
     <property name="InputComponent" value=""/>
     <property name="PathComponent">enabled: true,
 path: &quot;SSTOP,E,E,E,E,ESTOP,NSTOP,NSTOP,WSTOP,SSTOP,S,S,S,ESTOP,SSTOP,W,W,W,W,SSTOP,WSTOP,SSTOP,SSTOP,SSTOP,SSTOP,WSTOP,NSTOP,N,N,N&quot;</property>
-    <property name="TileWiseMovementComponent" value=""/>
-   </properties>
-  </object>
-  <object id="296" name="person" type="LimbusGameObject" x="864" y="192" width="16" height="16">
-   <properties>
-    <property name="CharacterSpriteComponent">male: true,
-index: 3</property>
-    <property name="ColliderComponent" value=""/>
-    <property name="ConversationComponent" value="enabled: true, name: person_name_25_2, text: person_25_2"/>
-    <property name="InputComponent" value=""/>
-    <property name="PathComponent">enabled: true,
-path: SSTOP</property>
-    <property name="TileWiseMovementComponent" value=""/>
-   </properties>
-  </object>
-  <object id="297" name="person" type="LimbusGameObject" x="912" y="192" width="16" height="16">
-   <properties>
-    <property name="CharacterSpriteComponent">male: true,
-index: 2</property>
-    <property name="ColliderComponent" value=""/>
-    <property name="ConversationComponent" value="enabled: true, name: person_name_25_3, text: person_25_3"/>
-    <property name="InputComponent" value=""/>
-    <property name="PathComponent">enabled: true,
-path: SSTOP</property>
-    <property name="TileWiseMovementComponent" value=""/>
-   </properties>
-  </object>
-  <object id="298" name="person" type="LimbusGameObject" x="816" y="192" width="16" height="16">
-   <properties>
-    <property name="CharacterSpriteComponent">male: true,
-index: 1</property>
-    <property name="ColliderComponent" value=""/>
-    <property name="ConversationComponent" value="enabled: true, name: person_name_25_1, text: person_25_1"/>
-    <property name="InputComponent" value=""/>
-    <property name="PathComponent">enabled: true,
-path: SSTOP</property>
     <property name="TileWiseMovementComponent" value=""/>
    </properties>
   </object>
@@ -343,6 +283,78 @@ path: NSTOP</property>
 index: 1</property>
     <property name="ColliderComponent" value=""/>
     <property name="ConversationComponent" value="enabled: true, name: person_name_25_14, text: person_25_14"/>
+    <property name="InputComponent" value=""/>
+    <property name="PathComponent">enabled: true,
+path: SSTOP</property>
+    <property name="TileWiseMovementComponent" value=""/>
+   </properties>
+  </object>
+  <object id="483" name="person" gid="4033" x="80" y="192" width="16" height="16">
+   <properties>
+    <property name="CharacterSpriteComponent">male: true,
+index: 1</property>
+    <property name="ColliderComponent" value=""/>
+    <property name="ConversationComponent" value="enabled: true, name: person_name_25_14, text: person_25_14"/>
+    <property name="InputComponent" value=""/>
+    <property name="PathComponent">enabled: true,
+path: SSTOP</property>
+    <property name="TileWiseMovementComponent" value=""/>
+   </properties>
+  </object>
+  <object id="484" name="person" gid="4033" x="816" y="208" width="16" height="16">
+   <properties>
+    <property name="CharacterSpriteComponent">male: true,
+index: 1</property>
+    <property name="ColliderComponent" value=""/>
+    <property name="ConversationComponent" value="enabled: true, name: person_name_25_1, text: person_25_1"/>
+    <property name="InputComponent" value=""/>
+    <property name="PathComponent">enabled: true,
+path: SSTOP</property>
+    <property name="TileWiseMovementComponent" value=""/>
+   </properties>
+  </object>
+  <object id="485" name="person" gid="4033" x="864" y="208" width="16" height="16">
+   <properties>
+    <property name="CharacterSpriteComponent">male: true,
+index: 3</property>
+    <property name="ColliderComponent" value=""/>
+    <property name="ConversationComponent" value="enabled: true, name: person_name_25_2, text: person_25_2"/>
+    <property name="InputComponent" value=""/>
+    <property name="PathComponent">enabled: true,
+path: SSTOP</property>
+    <property name="TileWiseMovementComponent" value=""/>
+   </properties>
+  </object>
+  <object id="486" name="person" gid="4033" x="912" y="208" width="16" height="16">
+   <properties>
+    <property name="CharacterSpriteComponent">male: true,
+index: 2</property>
+    <property name="ColliderComponent" value=""/>
+    <property name="ConversationComponent" value="enabled: true, name: person_name_25_3, text: person_25_3"/>
+    <property name="InputComponent" value=""/>
+    <property name="PathComponent">enabled: true,
+path: SSTOP</property>
+    <property name="TileWiseMovementComponent" value=""/>
+   </properties>
+  </object>
+  <object id="487" name="person" gid="4033" x="592" y="128" width="16" height="16">
+   <properties>
+    <property name="CharacterSpriteComponent">male: true,
+index: 2</property>
+    <property name="ColliderComponent" value=""/>
+    <property name="ConversationComponent" value="enabled: true, name: person_name_25_12, text: person_25_12"/>
+    <property name="InputComponent" value=""/>
+    <property name="PathComponent">enabled: true,
+path: SSTOP</property>
+    <property name="TileWiseMovementComponent" value=""/>
+   </properties>
+  </object>
+  <object id="488" name="person" gid="4033" x="544" y="304" width="16" height="16">
+   <properties>
+    <property name="CharacterSpriteComponent">male: true,
+index: 1</property>
+    <property name="ColliderComponent" value=""/>
+    <property name="ConversationComponent" value="enabled: true, name: person_name_25_9, text: person_25_9"/>
     <property name="InputComponent" value=""/>
     <property name="PathComponent">enabled: true,
 path: SSTOP</property>

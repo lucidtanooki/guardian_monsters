@@ -11,6 +11,7 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusBehaviour
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.get
 import de.limbusdev.guardianmonsters.guardians.battle.BattleFactory
 import de.limbusdev.guardianmonsters.services.Services
+import de.limbusdev.utils.geometry.IntVec2
 import de.limbusdev.utils.logDebug
 
 
@@ -36,7 +37,7 @@ class RandomBattleAreaComponent() : LimbusBehaviour()
     val monsters             = Array<Int>()     // IDs of the Guardians that appear in this area
     val monsterProbabilities = Array<Float>()   // at which probability they appear
     val teamSizeProbabilities = Array<Float>()  // for 1, 2 or 3 monsters
-    val triggerCallback = { initializeBattle() }
+    private val triggerCallback : (IntVec2) -> Unit = { initializeBattle() }
 
 
     override fun initialize()
@@ -44,43 +45,39 @@ class RandomBattleAreaComponent() : LimbusBehaviour()
         super.initialize()
 
         val trigger = gameObject.getOrCreate<BoxTrigger2DComponent>()
-        trigger.whileInsideTrigger.add { triggerCallback }
+        trigger.onTriggerEntered.add { go -> go?.get<TileWiseMovementComponent>()?.onGridSlotChanged?.add(triggerCallback) }
+        trigger.onTriggerLeft.add { go -> go?.get<TileWiseMovementComponent>()?.onGridSlotChanged?.remove(triggerCallback) }
     }
 
     private fun initializeBattle()
     {
-//        if
-//                (
-//                battleAreaRectangle != null &&
-//                monsterArea != null &&
-//                battleAreaRectangle.contains(transform.asRectangle.offset(Constant.TILE_SIZE/2))
-//                && MathUtils.randomBoolean(monsterArea.teamSizeProbabilities.get(0))
-//        ) {
-//            logDebug(HeroComponent.TAG) { "Monster appeared!" }
-//
-//            //............................................................. START BATTLE
-//            // TODO change min and max levels
-//            inputComponent.inBattle = true
-//            val guardianProbabilities = ArrayMap<Int, Float>()
-//            for (i in 0 until monsterArea.monsters.size)
-//            {
-//                guardianProbabilities.put(monsterArea.monsters.get(i), monsterArea.monsterProbabilities.get(i))
-//            }
-//
-//            val oppTeam = BattleFactory.createOpponentTeam(guardianProbabilities, monsterArea.teamSizeProbabilities, 1, 1)
-//
-//            CoreSL.ecs.hud.battleScreen.initialize(
-//
-//                    CoreSL.world.hero.get<TeamComponent>()!!.team,
-//                    oppTeam,
-//                    CoreSL.world.hero.get<GuardoSphereComponent>()!!.guardoSphere
-//            )
-//
-//            Services.ScreenManager().pushScreen(CoreSL.ecs.hud.battleScreen)
-//            //............................................................. START BATTLE
-//
-//            // Stop when in a battle
-//            //TODO if (inputComponent.touchDown) { inputComponent.startMoving = false }
+        if(MathUtils.randomBoolean(teamSizeProbabilities.get(0)))
+        {
+            logDebug(HeroComponent.TAG) { "Monster appeared!" }
+
+            //............................................................. START BATTLE
+            // TODO change min and max levels
+            CoreSL.world.hero.get<InputComponent>()!!.inBattle = true
+            val guardianProbabilities = ArrayMap<Int, Float>()
+            for (i in 0 until monsters.size) {
+                guardianProbabilities.put(monsters.get(i), monsterProbabilities.get(i))
+            }
+
+            val oppTeam = BattleFactory.createOpponentTeam(guardianProbabilities, teamSizeProbabilities, 1, 1)
+
+            CoreSL.ecs.hud.battleScreen.initialize(
+
+                    CoreSL.world.hero.get<TeamComponent>()!!.team,
+                    oppTeam,
+                    CoreSL.world.hero.get<GuardoSphereComponent>()!!.guardoSphere
+            )
+
+            Services.ScreenManager().pushScreen(CoreSL.ecs.hud.battleScreen)
+            //............................................................. START BATTLE
+
+            // Stop when in a battle
+            //TODO if (inputComponent.touchDown) { inputComponent.startMoving = false }
+        }
     }
 
     // --------------------------------------------------------------------------------------------- Parser
@@ -89,10 +86,10 @@ class RandomBattleAreaComponent() : LimbusBehaviour()
         private data class Data
         (
                 var enabled: Boolean = true,
-                var monsters: String,
-                var probability: Float,
-                var probability2: Float,
-                var probability3: Float
+                var monsters: String = "",
+                var probability: Float = 0.05f,
+                var probability2: Float = 0.2f,
+                var probability3: Float = 0.01f
         )
 
         override fun createComponent() = RandomBattleAreaComponent()

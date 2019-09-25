@@ -1,6 +1,5 @@
 package de.limbusdev.guardianmonsters.fwmengine.world.ecs.components
 
-import de.limbusdev.guardianmonsters.enums.Compass4
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusBehaviour
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusGameObject
 

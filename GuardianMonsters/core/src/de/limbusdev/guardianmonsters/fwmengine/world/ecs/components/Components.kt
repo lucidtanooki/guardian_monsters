@@ -21,5 +21,6 @@ object Components
         parsers[SlidingComponent::class] = SlidingComponent.Parser
         parsers[BoxTrigger2DComponent::class] = BoxTrigger2DComponent.Parser
         parsers[ChangeLayerTriggerCallbackComponent::class] = ChangeLayerTriggerCallbackComponent.Parser
+        parsers[RandomBattleAreaComponent::class] = RandomBattleAreaComponent.Parser
     }
 }

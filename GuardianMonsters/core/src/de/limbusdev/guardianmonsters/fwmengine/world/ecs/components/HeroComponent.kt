@@ -32,7 +32,6 @@ class HeroComponent
     {
         movementComponent.onGridSlotChanged.add { slot -> checkWarp(slot) }
         movementComponent.onGridSlotChanged.add { slot -> checkForHealingArea(slot) }
-        movementComponent.onGridSlotChanged.add { slot -> checkForRandomBattleArea(slot) }
     }
 
     /**
@@ -56,54 +55,6 @@ class HeroComponent
                 team.values().forEach { guardian -> guardian.stats.healCompletely() }
             }
         }*/
-    }
-
-    /**
-     * Check, if the current area can cause random battle encounters
-     */
-    private fun checkForRandomBattleArea(slot: IntVec2)
-    {
-        val inputComponent = gameObject.get<InputComponent>() ?: return
-
-        for(battleArea in CoreSL.world.getAllWith(RandomBattleAreaComponent::class, transform.layer))
-        {
-            val battleAreaRectangle = battleArea.get<ColliderComponent>()?.asRectangle
-            val monsterArea = battleArea.get<RandomBattleAreaComponent>()
-
-            if
-            (
-                    battleAreaRectangle != null &&
-                    monsterArea != null &&
-                    battleAreaRectangle.contains(transform.asRectangle.offset(Constant.TILE_SIZE/2))
-                    && MathUtils.randomBoolean(monsterArea.teamSizeProbabilities.get(0))
-            ) {
-                logDebug(TAG) { "Monster appeared!" }
-
-                //............................................................. START BATTLE
-                // TODO change min and max levels
-                inputComponent.inBattle = true
-                val guardianProbabilities = ArrayMap<Int, Float>()
-                for (i in 0 until monsterArea.monsters.size)
-                {
-                    guardianProbabilities.put(monsterArea.monsters.get(i), monsterArea.monsterProbabilities.get(i))
-                }
-
-                val oppTeam = BattleFactory.createOpponentTeam(guardianProbabilities, monsterArea.teamSizeProbabilities, 1, 1)
-
-                CoreSL.ecs.hud.battleScreen.initialize(
-
-                        CoreSL.world.hero.get<TeamComponent>()!!.team,
-                        oppTeam,
-                        CoreSL.world.hero.get<GuardoSphereComponent>()!!.guardoSphere
-                )
-
-                Services.ScreenManager().pushScreen(CoreSL.ecs.hud.battleScreen)
-                //............................................................. START BATTLE
-
-                // Stop when in a battle
-                //TODO if (inputComponent.touchDown) { inputComponent.startMoving = false }
-            }
-        }
     }
 
     /** Check whether hero enters warp area */

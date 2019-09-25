@@ -349,7 +349,7 @@ probability3: 0.01</property>
     <property name="BoxTrigger2DComponent" value="triggerID: 0"/>
     <property name="ColliderComponent">enabled: true
 isTrigger: true</property>
-    <property name="RandomBattleAreaComponent">monsters: 28;0.9;13;0.05;32;0.05
+    <property name="RandomBattleAreaComponent">monsters: 1;0.9;2;0.05;3;0.05
 probability: 0.05
 probability2: 0.02
 probability3: 0.01</property>

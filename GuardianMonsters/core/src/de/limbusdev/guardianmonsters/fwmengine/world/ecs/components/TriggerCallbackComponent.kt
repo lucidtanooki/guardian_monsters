@@ -17,5 +17,5 @@ abstract class TriggerCallbackComponent : LimbusBehaviour()
         val defaultJson: String get() = "enabled: true, triggerID: 0"
     }
 
-    abstract fun onTriggerEntered(gameObject: LimbusGameObject?, fromDirection: Compass4?);
+    abstract fun onTriggerEntered(enteringGameObject: LimbusGameObject?);
 }

@@ -13,7 +13,7 @@
  </tileset>
  <layer id="1" name="ground1" width="32" height="32">
   <data encoding="base64" compression="zlib">
-   eJztwwEJAAAMA6AleP9AC7YeR8FeUlVVVfX1AfIpSC4=
+   eJzt0LENACAMxMCfACmZCpg7BTAVYgSqpHBxtSVHkwIAAHxZJh3L63eXptf4sBNfvA+jyAsAAKq7gJZGAw==
   </data>
  </layer>
  <layer id="2" name="walls1" width="32" height="32">
@@ -23,7 +23,7 @@
  </layer>
  <layer id="3" name="objects1" width="32" height="32">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUOPETh8nVP2o/qjpc+skF1LCfEkCp/ZSCgbYfBNiA5rJjwRxUsp+U9EzIjIGynxJAS/uJyefklCtDxf7BDgj5mw0tn9HbfkrBMSEGhnMiDAztQthxnwjx9pNTjyHbhe4ubObSyv5jQphyMHla2g8KX3TwSJJ+9qOHOyFzaWH/ObQw6BdGlceVRqhhPyzeQfFwiAe7+9qR8gi1AT5/YcuPo2B4AAA1JlrI
+   eJxjYBgFo2AUOPETh8nVP2o/qjpc+skF1LCfEkCp/ZSCgbYfBNiA5rJjwRxUsp+U9EzIjIGynxJAS/uJyefklCtDxf7BDgj5mw0tn9HbfkrBMSEGhnMiDAztQtgxuhtIcSsx6QbdLmR3YTOXVvYfE8KUg8nT0n5s4JEk/exHD3dC5tLCflD6Qwb9wqjyuNIINexHjvdDPNjd146UR6gN8PkLV34cBUMfAADFalji
   </data>
  </layer>
  <objectgroup id="4" name="animatedObjects1">
@@ -116,15 +116,15 @@ path: SSTOP</property>
  </objectgroup>
  <layer id="6" name="tops1" width="32" height="32">
   <data encoding="base64" compression="zlib">
-   eJztl+lOwkAUhS+ySSH8gPBALK1/3F7JpfW51FiIP9RH8pL2pJNjzUxDOw2BL7k5hEnvMswcUpF26Q9FekO77rkai0Qa74PyXFiH1s2L5kzGWU/dQPsKirVwVKxDmyTWesno8Dyv2uebQ6/7+SKj3od+TivUXy5EVou/33cmIhcT+/OYt3up+67R170fBPbn6gLzhlozCgptGpwzzOurPs7FWmtsPM4LcC6etOazRqyRGPX5/vkG+9IW2BeTdCqyLYndtP76rr7RFDbfgF+x+gJ+xeoL+BWrK7hfVe8Z+xUr1pcaKyMvzhP7TtV7xn7FivUHjUcjL84T+07ZPTP7BWl+z9ivWP/LVxXX/03ffNbQ088s0+t5pvfzw3MeEzc07+2Jzf+V//53+dzfs/Z6ORXgx67KhPTuZVMGfuyqTEzvXjY9k/ELesBaSA==
+   eJztl9tOwkAQhkcRkEK4gPBAHFpvPL0SYutzaaQaL9RHckj7p5tfyO5Cu8Tgl0x+YLNzWHamqYg/r509Nu2g3RW56Np1w1VfJOlX3xmsQ+vmSX1maguN34o0j6hai3vVOrRJUo2X9Q7386x5vjjkuqkvMeKt9XPuEX86EZlNfv9+NhA5H9j3o97WpZ67WlvPvhPZ99UF6o01ZhJV2jS4Z6g3VHzci7nGWASsF+BerDTmo1qqlhnxuf9Cg3M5FjgXk3wo8rbF3of1x3edG01hmxuYV6yhwLxiDQXmFasr6C/fPuN5xYr1qdrM8Iv7xHPHt894XrFifan2YPjFfeK5s63PzHxBXvYZzyvWXf58cX1uhuajhpy+R4Vejwu9Hx/u8y9xQ/Xenlj9n+X/f1fW/TU6Xi6nAuaxqzIxvXvZlME8dlUmpXcvm/5T8AM7yFqT
   </data>
  </layer>
  <layer id="10" name="tops2" width="32" height="32">
   <data encoding="base64" compression="zlib">
-   eJzt0rEJgEAQRNHRQHCtSsHrSwP70sC6HAMLOBAW8T+YcPnJSnXGkKaoPHrR4vbqlT6nv7t9eFtSvxmk1juT+o8u8QduJbE/x7/7AAAAAL7pAiAjBqo=
+   eJxjYCANOHKRqIHKoBFqvxvnwNh/EGp/2wDZz8jNwMAExMcGyH4YYBvgdOA2gPa7co1s+0fBKBgFo2AUjIJRMApGwSgYBUMTAABGGgUG
   </data>
  </layer>
- <objectgroup id="7" name="colliderWalls0" visible="0">
+ <objectgroup id="7" name="colliderWalls0">
   <object id="1" x="0" y="0" width="176" height="96">
    <properties>
     <property name="ColliderComponent" value=""/>
@@ -225,22 +225,7 @@ path: SSTOP</property>
     <property name="ColliderComponent" value=""/>
    </properties>
   </object>
-  <object id="21" x="160" y="336" width="16" height="16">
-   <properties>
-    <property name="ColliderComponent" value=""/>
-   </properties>
-  </object>
   <object id="22" x="80" y="384" width="16" height="16">
-   <properties>
-    <property name="ColliderComponent" value=""/>
-   </properties>
-  </object>
-  <object id="23" x="32" y="384" width="16" height="16">
-   <properties>
-    <property name="ColliderComponent" value=""/>
-   </properties>
-  </object>
-  <object id="24" x="64" y="432" width="16" height="16">
    <properties>
     <property name="ColliderComponent" value=""/>
    </properties>
@@ -345,7 +330,7 @@ path: SSTOP</property>
   </object>
   <object id="41" name="monsterArea" x="176" y="208" width="48" height="80">
    <properties>
-    <property name="MonsterAreaComponent">monsters: 28;0.9;13;0.05;32;0.05
+    <property name="RandomBattleAreaComponent">monsters: 28;0.9;13;0.05;32;0.05
 probability: 0.05
 probability2: 0.02
 probability3: 0.01</property>
@@ -361,10 +346,13 @@ probability3: 0.01</property>
   </object>
   <object id="43" name="monsterArea" x="288" y="96" width="128" height="96">
    <properties>
-    <property name="monsters" value="28;0.90;13;0.05;32;0.05"/>
-    <property name="probability" type="float" value="0.05"/>
-    <property name="probability2" type="float" value="0.02"/>
-    <property name="probability3" type="float" value="0.01"/>
+    <property name="BoxTrigger2DComponent" value="triggerID: 0"/>
+    <property name="ColliderComponent">enabled: true
+isTrigger: true</property>
+    <property name="RandomBattleAreaComponent">monsters: 28;0.9;13;0.05;32;0.05
+probability: 0.05
+probability2: 0.02
+probability3: 0.01</property>
    </properties>
   </object>
   <object id="45" name="monsterArea" x="448" y="128" width="32" height="96">

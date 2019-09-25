@@ -65,10 +65,10 @@ class HeroComponent
     {
         val inputComponent = gameObject.get<InputComponent>() ?: return
 
-        /*for(battleArea in CoreSL.world.getAllWith(RandomBattleAreaComponent::class, transform.layer))
+        for(battleArea in CoreSL.world.getAllWith(RandomBattleAreaComponent::class, transform.layer))
         {
             val battleAreaRectangle = battleArea.get<ColliderComponent>()?.asRectangle
-            val monsterArea = battleArea.get<MonsterAreaComponent>()
+            val monsterArea = battleArea.get<RandomBattleAreaComponent>()
 
             if
             (
@@ -103,7 +103,7 @@ class HeroComponent
                 // Stop when in a battle
                 //TODO if (inputComponent.touchDown) { inputComponent.startMoving = false }
             }
-        }*/
+        }
     }
 
     /** Check whether hero enters warp area */

@@ -4,6 +4,7 @@ import com.badlogic.gdx.maps.MapObject
 import com.badlogic.gdx.utils.Json
 import de.limbusdev.guardianmonsters.CoreSL
 import de.limbusdev.guardianmonsters.enums.Compass4
+import de.limbusdev.guardianmonsters.enums.SkyDirection
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusGameObject
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.get
 
@@ -32,16 +33,17 @@ class ChangeLayerTriggerCallbackComponent
             val triggerComponent = trigger.get<BoxTrigger2DComponent>()
             if(triggerComponent != null && triggerComponent.triggerID == triggerID)
             {
-                triggerComponent.onTriggerEntered.add { go, dir -> onTriggerEntered(go, dir) }
+                triggerComponent.onTriggerEntered.add { go -> onTriggerEntered(go) }
             }
         }
     }
 
-    override fun onTriggerEntered(gameObject: LimbusGameObject?, fromDirection: Compass4?)
+    override fun onTriggerEntered(enteringGameObject: LimbusGameObject?)
     {
-        if(gameObject == null) { return }
-        if(fromDirection == null) { return }
-        gameObject.transform.layer += when(fromDirection)
+        if(enteringGameObject == null) { return }
+        val fromDirection = Compass4.translate(enteringGameObject.get<TileWiseMovementComponent>()?.currentMovement?.invert() ?: SkyDirection.S)
+
+        enteringGameObject.transform.layer += when(fromDirection)
         {
             Compass4.N -> fromNorth
             Compass4.E -> fromEast

@@ -760,13 +760,6 @@ path: NSTOP</property>
     <property name="ColliderComponent" value=""/>
    </properties>
   </object>
-  <object id="468" name="layerTrigger" x="208" y="288" width="16" height="16">
-   <properties>
-    <property name="BoxTrigger2DComponent" value="triggerID: 0"/>
-    <property name="ChangeLayerTriggerCallbackComponent" value="triggerID: 0, fromNorth: -1, fromSouth: 1, fromWest: 0, fromEast: 0"/>
-    <property name="ColliderComponent" value="isTrigger: true"/>
-   </properties>
-  </object>
   <object id="474" x="208" y="256" width="16" height="16">
    <properties>
     <property name="ColliderComponent" value=""/>
@@ -892,6 +885,13 @@ path: NSTOP</property>
   <object id="441" name="warpTarget" x="640" y="480" width="16" height="16">
    <properties>
     <property name="WarpTargetComponent" value="warpTargetID: 107"/>
+   </properties>
+  </object>
+  <object id="468" name="layerTrigger" x="208" y="288" width="16" height="16">
+   <properties>
+    <property name="BoxTrigger2DComponent" value="triggerID: 0"/>
+    <property name="ChangeLayerTriggerCallbackComponent" value="triggerID: 0, fromNorth: -1, fromSouth: 1, fromWest: 0, fromEast: 0"/>
+    <property name="ColliderComponent" value="isTrigger: true"/>
    </properties>
   </object>
  </objectgroup>
@@ -1086,7 +1086,7 @@ path: NSTOP</property>
   </object>
  </objectgroup>
  <objectgroup id="19" name="people1"/>
- <objectgroup id="18" name="colliderWalls1">
+ <objectgroup id="18" name="colliderWalls1" visible="0">
   <object id="469" x="176" y="240" width="16" height="32">
    <properties>
     <property name="ColliderComponent" value=""/>

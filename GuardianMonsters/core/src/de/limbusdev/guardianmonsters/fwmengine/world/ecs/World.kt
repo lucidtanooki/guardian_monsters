@@ -102,10 +102,16 @@ class World
         return gameObjects.filter { it.type == type }
     }
 
-    fun getAllWithExactly(signature: List<KClass<out LimbusBehaviour>>) : List<LimbusGameObject>
+    fun getAllWithExactly(signature: Set<KClass<out LimbusBehaviour>>) : List<LimbusGameObject>
     {
         val a = gameObjects
         return gameObjects.filter { it.signature.containsAll(signature) && it.signature.size == signature.size }
+    }
+
+    fun getAllWith(signature: Set<KClass<out LimbusBehaviour>>) : List<LimbusGameObject>
+    {
+        val a = gameObjects
+        return gameObjects.filter { it.signature.containsAll(signature) }
     }
 
     fun getAllWith(componentType: KClass<out LimbusBehaviour>) : List<LimbusGameObject>
@@ -118,10 +124,16 @@ class World
         return gameObjects.filter { it.transform.layer == layer }
     }
 
-    fun getAllWithExactly(signature: List<KClass<out LimbusBehaviour>>, layer: Int) : List<LimbusGameObject>
+    fun getAllWithExactly(signature: Set<KClass<out LimbusBehaviour>>, layer: Int) : List<LimbusGameObject>
     {
         val a = gameObjects
         return gameObjects.filter { it.signature.containsAll(signature) && it.signature.size == signature.size && it.transform.layer == layer }
+    }
+
+    fun getAllWith(signature: Set<KClass<out LimbusBehaviour>>, layer: Int) : List<LimbusGameObject>
+    {
+        val a = gameObjects
+        return gameObjects.filter { it.signature.containsAll(signature) && it.transform.layer == layer }
     }
 
     fun getAllWith(componentType: KClass<out LimbusBehaviour>, layer: Int) : List<LimbusGameObject>

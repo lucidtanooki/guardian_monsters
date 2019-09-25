@@ -16,6 +16,11 @@ open class IntRect : IntVec2
     var height: Int = 0
     var ID: Int = 0
 
+    val xMax get() = x + width - 1
+    val xMin get() = x
+    val yMax get() = y + height - 1
+    val yMin get() = y
+
     val widthf  get() = width.toFloat()
     val heightf get() = height.toFloat()
 
@@ -58,10 +63,18 @@ open class IntRect : IntVec2
     // ............................................................................................. METHODS
     operator fun contains(point: IntVec2): Boolean
     {
-        return (point.x > x && point.x < x + width && point.y > y && point.y < y + height)
+        return (point.x in xMin..xMax && point.y in yMin..yMax)
     }
 
     fun contains(x: Int, y: Int) : Boolean = contains(IntVec2(x,y))
+
+    fun overlaps(other: IntRect) : Boolean
+    {
+        return  (other.xMin in xMin..xMax && other.yMin in yMin..yMax) ||
+                (other.xMax in xMin..xMax && other.yMin in yMin..yMax) ||
+                (other.xMax in xMin..xMax && other.yMax in yMin..yMax) ||
+                (other.xMin in xMin..xMax && other.yMax in yMin..yMax)
+    }
 
     fun equals(r: IntRect): Boolean
     {

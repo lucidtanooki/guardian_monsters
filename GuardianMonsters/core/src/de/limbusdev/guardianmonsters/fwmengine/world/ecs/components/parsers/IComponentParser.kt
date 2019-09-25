@@ -1,9 +1,8 @@
-package de.limbusdev.guardianmonsters.fwmengine.world.ecs.components
+package de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.parsers
 
 import com.badlogic.gdx.maps.MapObject
 import com.badlogic.gdx.utils.Json
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusBehaviour
-import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusGameObject
 
 /**
  * For every new component a ComponentParser must be implemented, to tell the Engine how to

@@ -1,6 +1,7 @@
 package de.limbusdev.guardianmonsters.fwmengine.world.ecs.components
 
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusBehaviour
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.parsers.*
 import kotlin.reflect.KClass
 
 object Components

@@ -1,9 +1,10 @@
-package de.limbusdev.guardianmonsters.fwmengine.world.ecs.components
+package de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.parsers
 
 import com.badlogic.gdx.maps.MapObject
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.Json
 import de.limbusdev.guardianmonsters.enums.SkyDirection
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.PathComponent
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.get
 
 object PathComponentParser : IComponentParser<PathComponent>
@@ -19,7 +20,7 @@ object PathComponentParser : IComponentParser<PathComponent>
 
         val jsonStringWithoutBrackets = mapObject.properties[PathComponent.className, PathComponent.defaultJson]
 
-        val data = json.fromJson(Data::class.java, "{$jsonStringWithoutBrackets}")
+        val data = json.fromJson(PathComponentParser.Data::class.java, "{$jsonStringWithoutBrackets}")
 
         val path = Array<SkyDirection>()
         if(data.path.isNotEmpty())

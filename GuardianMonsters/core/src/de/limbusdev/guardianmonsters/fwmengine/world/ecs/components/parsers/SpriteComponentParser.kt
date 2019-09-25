@@ -1,9 +1,10 @@
-package de.limbusdev.guardianmonsters.fwmengine.world.ecs.components
+package de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.parsers
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion
 import com.badlogic.gdx.maps.MapObject
 import com.badlogic.gdx.maps.objects.TextureMapObject
 import com.badlogic.gdx.utils.Json
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.SpriteComponent
 
 object SpriteComponentParser : IComponentParser<SpriteComponent>
 {

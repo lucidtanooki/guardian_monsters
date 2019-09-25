@@ -6,6 +6,7 @@ import de.limbusdev.guardianmonsters.CoreSL
 import de.limbusdev.guardianmonsters.enums.Compass4
 import de.limbusdev.guardianmonsters.enums.SkyDirection
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusGameObject
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.parsers.IComponentParser
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.get
 
 class ChangeLayerTriggerCallbackComponent

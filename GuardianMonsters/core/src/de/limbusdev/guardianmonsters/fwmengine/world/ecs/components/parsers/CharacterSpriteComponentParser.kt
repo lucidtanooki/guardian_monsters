@@ -1,8 +1,8 @@
-package de.limbusdev.guardianmonsters.fwmengine.world.ecs.components
+package de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.parsers
 
 import com.badlogic.gdx.maps.MapObject
 import com.badlogic.gdx.utils.Json
-import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusGameObject
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.CharacterSpriteComponent
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.AnimatedPersonSprite
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.get
 
@@ -19,7 +19,7 @@ object CharacterSpriteComponentParser : IComponentParser<CharacterSpriteComponen
 
         val jsonStringWithoutBrackets = mapObject.properties[CharacterSpriteComponent.className, CharacterSpriteComponent.defaultJson]
 
-        val data = json.fromJson(Data::class.java, "{$jsonStringWithoutBrackets}")
+        val data = json.fromJson(CharacterSpriteComponentParser.Data::class.java, "{$jsonStringWithoutBrackets}")
 
         val animatedSprite = CharacterSpriteComponent(AnimatedPersonSprite(data.male, data.index))
         animatedSprite.enabled = data.enabled

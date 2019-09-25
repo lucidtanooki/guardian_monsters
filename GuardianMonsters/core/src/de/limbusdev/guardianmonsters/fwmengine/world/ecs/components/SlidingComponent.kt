@@ -5,6 +5,7 @@ import com.badlogic.gdx.utils.Json
 import de.limbusdev.guardianmonsters.enums.Compass4
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusBehaviour
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusGameObject
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.parsers.IComponentParser
 
 /**
  * [LimbusGameObject]s with a SlidingComponent can be pushed around by other [LimbusGameObject]s,

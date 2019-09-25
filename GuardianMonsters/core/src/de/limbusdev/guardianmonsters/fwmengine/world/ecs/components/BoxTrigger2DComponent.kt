@@ -4,6 +4,7 @@ import com.badlogic.gdx.maps.MapObject
 import com.badlogic.gdx.utils.Json
 import de.limbusdev.guardianmonsters.CoreSL
 import de.limbusdev.guardianmonsters.enums.SkyDirection
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.parsers.IComponentParser
 import de.limbusdev.utils.geometry.IntVec2
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.get
 

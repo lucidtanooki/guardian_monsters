@@ -1,9 +1,10 @@
-package de.limbusdev.guardianmonsters.fwmengine.world.ecs.components
+package de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.parsers
 
 import com.badlogic.gdx.maps.MapObject
 import com.badlogic.gdx.maps.objects.RectangleMapObject
 import com.badlogic.gdx.math.MathUtils
 import com.badlogic.gdx.utils.Json
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.ColliderComponent
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.get
 
 object ColliderComponentParser : IComponentParser<ColliderComponent>

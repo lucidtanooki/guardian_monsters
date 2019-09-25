@@ -5,9 +5,9 @@ import com.badlogic.gdx.math.MathUtils
 import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.ArrayMap
 import com.badlogic.gdx.utils.Json
-import de.limbusdev.guardianmonsters.Constant
 import de.limbusdev.guardianmonsters.CoreSL
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusBehaviour
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.parsers.IComponentParser
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.get
 import de.limbusdev.guardianmonsters.guardians.battle.BattleFactory
 import de.limbusdev.guardianmonsters.services.Services

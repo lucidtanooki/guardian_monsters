@@ -199,7 +199,7 @@ class TileWiseMovementComponent : LimbusBehaviour()
             // Check whether movement is possible or blocked by a collider
         for (otherGameObject in CoreSL.world.getAllWith(ColliderComponent::class, transform.layer))
         {
-            if (otherGameObject != gameObject)
+            if (otherGameObject != gameObject && otherGameObject.enabled)
             {
                 val otherCollider = otherGameObject.get<ColliderComponent>()
 

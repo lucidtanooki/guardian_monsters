@@ -23,5 +23,7 @@ object Components
         parsers[BoxTrigger2DComponent::class] = BoxTrigger2DComponent.Parser
         parsers[ChangeLayerTriggerCallbackComponent::class] = ChangeLayerTriggerCallbackComponent.Parser
         parsers[RandomBattleAreaComponent::class] = RandomBattleAreaComponent.Parser
+        parsers[StepOnButtonComponent::class] = StepOnButtonComponent.Parser
+        parsers[DisableGameObjectTriggerCallbackComponent::class] = DisableGameObjectTriggerCallbackComponent.Parser
     }
 }

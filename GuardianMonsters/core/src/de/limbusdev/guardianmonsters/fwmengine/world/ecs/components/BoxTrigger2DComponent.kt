@@ -29,25 +29,6 @@ class BoxTrigger2DComponent(var triggerID : Int = 0) : TriggerComponent()
         return triggerCollider.asRectangle.overlaps(otherCollider.asRectangle)
     }
 
-    private fun checkForEnteringColliders(position: IntVec2)
-    {
-        println("Check entering: ${CoreSL.world.hero.get<TileWiseMovementComponent>()?.currentMovement ?: SkyDirection.S}")
-
-        println("OnGrid = ${transform.onGrid} position = $position")
-
-        if(currentlyOverlappingGameObjects.contains(CoreSL.world.hero))
-        {
-            transform.onGrid == position
-        }
-
-        if(transform.onGrid == position)
-        {
-            currentlyOverlappingGameObjects.add(CoreSL.world.hero)
-            val direction = CoreSL.world.hero.get<TileWiseMovementComponent>()?.currentMovement ?: SkyDirection.S
-            onTriggerEntered.forEach { it.invoke(CoreSL.world.hero) }
-        }
-    }
-
 
     // --------------------------------------------------------------------------------------------- PARSER
     object Parser : IComponentParser<BoxTrigger2DComponent>

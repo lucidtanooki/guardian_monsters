@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-down" width="64" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="20" nextobjectid="479">
+<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-down" width="64" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="20" nextobjectid="483">
  <properties>
   <property name="musicIndex" type="int" value="2"/>
   <property name="musicType" value="town"/>
@@ -30,7 +30,7 @@
  </layer>
  <layer id="5" name="objects1" width="64" height="32">
   <data encoding="base64" compression="zlib">
-   eJztmD0OgjAUx1EnlnIBV4MDi1cwQT2Es3Fw8VK6uHgjcHHRO8iLJRZSaftIbSvvlzS0QD/+76M0RBFBEISa59j1CtyzmLhegTvA/8cB6weuFvQvNcY8sSg6M7M+WLJYXhfbq5G9+V1ziOV1WbsLXRthfGnT/xeuccc+9faznGu7Jd1jqZ73Yc7U75gi2rWdcxh09O8Rc3T5H+bE2D3/45zWxWZe2WZWxdG9KiX3fSHEQFrd3wSszQSI/VIS/2uN+A7Z/0R/VP6fJs2rL0CuF5K4L7/kApZt0rz6Qq0TbJDyfRBKbZfCs/US4ULnJDN0vru/HMcFEDNDOX+JhKbZRm7TfkEQbx6Ifx2YPr6SIc6hmD4EocMLPcUrcw==
+   eJztlj0OgjAUx6tOLPUUBgcWr2CCeghn4+DifZx1cfE+DuDConeQF0sspNL2YS3I+yVNW6Af//dRyhhBEISex9D3DvwzG/negT/A//se6wcuDvTPDeY8csZO3G4MlihQt+X+YuBufd/sAnVb1a/D1EYYX7r0/1lo3PB3u/ouFtpu4/q5dO+bMOX6b2yR7VrNOQwm+reINer8D2ti7B7/cU6b4jKvXDPJ4yjLSyp8n0gxEObPVx3WZgPEfqqI/6VBfHfZ/0RzdP5f83LdFiDXE0Xcpx9yAcuBl+u2UOgEG4TiHIRS2CX5kg2uvFwT/YPuSXaY/Hd/OY8PIGb6cv+S6ZpmF7lN5wVBvLgj7k2YMW0lQtxDMWMIwoQnt5guQw==
   </data>
  </layer>
  <objectgroup id="6" name="animatedObjects0">
@@ -162,6 +162,20 @@
     <property name="SlidingComponent" value=""/>
     <property name="SpriteComponent" value=""/>
     <property name="TileWiseMovementComponent" value=""/>
+   </properties>
+  </object>
+  <object id="479" name="switch" gid="3556" x="64" y="208" width="16" height="16">
+   <properties>
+    <property name="BoxTrigger2DComponent" value="triggerID: 1"/>
+    <property name="SpriteComponent" value=""/>
+    <property name="StepOnButtonComponent" value=""/>
+   </properties>
+  </object>
+  <object id="481" name="box" gid="3554" x="208" y="320" width="16" height="16">
+   <properties>
+    <property name="ColliderComponent" value=""/>
+    <property name="DisableGameObjectTriggerCallbackComponent" value="triggerID: 1"/>
+    <property name="SpriteComponent" value=""/>
    </properties>
   </object>
  </objectgroup>
@@ -320,6 +334,18 @@ index: 1</property>
     <property name="InputComponent" value=""/>
     <property name="PathComponent">enabled: true,
 path: NSTOP</property>
+    <property name="TileWiseMovementComponent" value=""/>
+   </properties>
+  </object>
+  <object id="480" name="person" gid="4033" x="80" y="192" width="16" height="16">
+   <properties>
+    <property name="CharacterSpriteComponent">male: true,
+index: 1</property>
+    <property name="ColliderComponent" value=""/>
+    <property name="ConversationComponent" value="enabled: true, name: person_name_25_14, text: person_25_14"/>
+    <property name="InputComponent" value=""/>
+    <property name="PathComponent">enabled: true,
+path: SSTOP</property>
     <property name="TileWiseMovementComponent" value=""/>
    </properties>
   </object>

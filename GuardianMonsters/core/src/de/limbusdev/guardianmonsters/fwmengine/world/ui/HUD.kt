@@ -72,6 +72,8 @@ class HUD
     private val heroInventory = hero.get<InventoryComponent>()!!.inventory
     private val heroTeam = hero.get<TeamComponent>()!!.team
 
+    private var foundCutSceneObjects = false
+
 
     // --------------------------------------------------------------------------------------------- CONSTRUCTORS
     init
@@ -92,6 +94,22 @@ class HUD
     // --------------------------------------------------------------------------------------------- METHODS
     fun update(delta: Float)
     {
+        if(!foundCutSceneObjects)
+        {
+            val cutSceneObjects = CoreSL.world.getAllWith(CutSceneComponent::class)
+            println(cutSceneObjects.size)
+            if(cutSceneObjects.isNotEmpty())
+            {
+                cutSceneObjects.forEach {
+
+                    it.get<CutSceneComponent>()?.onConversationScene?.add{
+                        scene, name, text -> displayCutSceneConversation(scene, name, text)
+                    }
+                }
+                foundCutSceneObjects = true
+            }
+        }
+
         stage.act(delta)
         if(dPad.isTouched && heroInput.direction.isStop())
         {
@@ -259,6 +277,13 @@ class HUD
             true  -> menuButtons.addAction(moveBy(120f, 0f, .5f, Interpolation.pow2In) then hideActor())
             false -> menuButtons.addAction(showActor() then moveBy(-120f, 0f, .5f, Interpolation.pow2In))
         }
+    }
+
+    fun displayCutSceneConversation(cutScene: CutSceneComponent, name: String, text: String)
+    {
+        interactionGameObject = cutScene.gameObject
+        openConversation(text, name, gameArea.areaID)
+        println("displaying cut scene conversation")
     }
 
 

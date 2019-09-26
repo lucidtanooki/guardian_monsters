@@ -1,16 +1,13 @@
 package de.limbusdev.guardianmonsters.fwmengine.world.ecs.components
 
-import com.badlogic.ashley.core.Component
 import com.badlogic.gdx.utils.Array
 
 import com.badlogic.ashley.core.Entity
-import com.badlogic.gdx.utils.TimeUtils
 import de.limbusdev.guardianmonsters.Constant
 
 import de.limbusdev.guardianmonsters.enums.SkyDirection
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusBehaviour
 import de.limbusdev.utils.geometry.IntVec2
-import de.limbusdev.utils.logError
 import ktx.collections.gdxArrayOf
 
 
@@ -40,7 +37,8 @@ import ktx.collections.gdxArrayOf
 class PathComponent
 (
         var path: Array<SkyDirection> = gdxArrayOf(SkyDirection.SSTOP),
-        var staticEntity: Boolean = true
+        var staticEntity: Boolean = true,
+        var repeat : Boolean = true
 )
     : LimbusBehaviour()
 {
@@ -81,6 +79,14 @@ class PathComponent
         }
     }
 
+    fun reset()
+    {
+        currentDir = 0
+        moving = true
+        stoppedSince = 0
+        newTileReachedCallback(IntVec2())
+    }
+
     override fun initialize()
     {
         super.initialize()
@@ -102,6 +108,15 @@ class PathComponent
     private fun newTileReachedCallback(newSlot: IntVec2)
     {
         if(!moving) { return }
+        if(currentDir == path.size -1)
+        {
+            onPathComplete.forEach { it.invoke() }
+        }
+        if(currentDir == path.size - 1 && !repeat)
+        {
+            inputComponent.direction = inputComponent.direction.stop()
+            return
+        }
         next()
         inputComponent.direction = path[currentDir]
         if(inputComponent.direction.isStop())
@@ -117,8 +132,5 @@ class PathComponent
     fun next()
     {
         currentDir = (currentDir+1) % path.size
-
-        // If path has been completed, run callbacks.
-        if(currentDir == 0) { onPathComplete.forEach { it.invoke() } }
     }
 }

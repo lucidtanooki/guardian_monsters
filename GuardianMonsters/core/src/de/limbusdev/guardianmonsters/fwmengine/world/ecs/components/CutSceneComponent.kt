@@ -4,6 +4,7 @@ import com.badlogic.gdx.maps.MapObject
 import com.badlogic.gdx.utils.Json
 import de.limbusdev.guardianmonsters.enums.SkyDirection
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusBehaviour
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusGameObject
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.parsers.IComponentParser
 
 import ktx.collections.gdxArrayOf
@@ -41,62 +42,56 @@ class CutSceneComponent : LimbusBehaviour()
     private fun nextElement()
     {
         if(!elementIterator.hasNext()) { return }
-        when(elementIterator.next())
-        {
-            is PathScene ->
-            {
-                val pathComponent = gameObject.getOrCreate<PathComponent>()
-                val path = gdxArrayOf(SkyDirection.SSTOP, SkyDirection.S, SkyDirection.S, SkyDirection.ESTOP, SkyDirection.WSTOP, SkyDirection.SSTOP)
-
-                pathComponent.path = path
-                pathComponent.reset()
-                pathComponent.repeat = false
-                pathComponent.onPathComplete.add { println("Path Scene complete."); nextElement() }
-            }
-            is ConversationScene ->
-            {
-                println("Conversation started.")
-                val conversationComponent = gameObject.getOrCreate<ConversationComponent>()
-                conversationComponent.name = "person_name_25_15"
-                conversationComponent.text = "person_25_15"
-                conversationComponent.onConversationFinished.add { println("that works"); nextElement() }
-
-                onConversationScene.forEach { it.invoke(this, "person_name_25_15", "person_25_15") }
-            }
-            is EnableDisableScene ->
-            {
-
-            }
-            is PossessCameraScene ->
-            {
-
-            }
-        }
+        elementIterator.next().act(this, gameObject)
     }
 
     private interface ICutSceneElement
     {
-
+        fun act(scene: CutSceneComponent, gameObject: LimbusGameObject)
     }
 
     private class PathScene : ICutSceneElement
     {
+        override fun act(scene: CutSceneComponent, gameObject: LimbusGameObject)
+        {
+            val pathComponent = gameObject.getOrCreate<PathComponent>()
+            val path = gdxArrayOf(SkyDirection.SSTOP, SkyDirection.S, SkyDirection.S, SkyDirection.ESTOP, SkyDirection.WSTOP, SkyDirection.SSTOP)
 
+            pathComponent.path = path
+            pathComponent.reset()
+            pathComponent.repeat = false
+            pathComponent.onPathComplete.add { println("Path Scene complete."); scene.nextElement() }
+        }
     }
 
     private class ConversationScene : ICutSceneElement
     {
+        override fun act(scene: CutSceneComponent, gameObject: LimbusGameObject)
+        {
+            println("Conversation started.")
+            val conversationComponent = gameObject.getOrCreate<ConversationComponent>()
+            conversationComponent.name = "person_name_25_15"
+            conversationComponent.text = "person_25_15"
+            conversationComponent.onConversationFinished.add { println("that works"); scene.nextElement() }
 
+            scene.onConversationScene.forEach { it.invoke(scene, "person_name_25_15", "person_25_15") }
+        }
     }
 
     private class EnableDisableScene : ICutSceneElement
     {
+        override fun act(scene: CutSceneComponent, gameObject: LimbusGameObject)
+        {
 
+        }
     }
 
     private class PossessCameraScene : ICutSceneElement
     {
+        override fun act(scene: CutSceneComponent, gameObject: LimbusGameObject)
+        {
 
+        }
     }
 
     object Parser : IComponentParser<CutSceneComponent>

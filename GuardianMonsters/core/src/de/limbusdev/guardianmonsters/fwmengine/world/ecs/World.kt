@@ -97,11 +97,6 @@ class World
 
     fun getAll() = gameObjects
 
-    fun getAll(type: String) : List<LimbusGameObject>
-    {
-        return gameObjects.filter { it.type == type }
-    }
-
     fun getAllWithExactly(signature: Set<KClass<out LimbusBehaviour>>) : List<LimbusGameObject>
     {
         val a = gameObjects

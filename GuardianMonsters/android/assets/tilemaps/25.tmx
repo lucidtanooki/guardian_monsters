@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-down" width="64" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="20" nextobjectid="489">
+<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-down" width="64" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="20" nextobjectid="492">
  <properties>
   <property name="musicIndex" type="int" value="2"/>
   <property name="musicType" value="town"/>
@@ -25,12 +25,12 @@
  </layer>
  <layer id="4" name="walls1" width="64" height="32">
   <data encoding="base64" compression="zlib">
-   eJztmVtOGzEYhZ3hkqgSrKIPhaoQblI3UGAXpRJSKdB7t1DILtpKVelLuXURsJAItUXkBg/0rcfKRJn847F/j20mVBzpU5Kx4zPH/4wlyyujQiyDlYI+K8BFHwu8dx+fq475n3i6lx2wW8BnHRnuR/08DyJ1zu9Rut9ZXH9bT5r9BGxhrD+lm0fmX0/k2sD3umIOfkXpfmc57lnmPCVzUB7rXp+OBqE6GhGiOpru58rDhNcU+Z11fSqnl8xZGRusfy2u/2bURyWZX5B+jXEhmqAF2qADLscH+5jYSvit416eK9YEev0FGeO6nEbpJdJr5mqc36Re/TuJ+52BzyyogjkwDxbK6f9mzRPVV4y/p8ifdV2Oq8reg0rmpGtmjZm/p+P4OXiJ8V+B1+ANeAvegffgA/HmzpOtdNlVc2Cq/4+Rbp119PJL7WP8A3AIjsAx+Ek8bebJRnLcx5Uul+Uu9Lsk6WGqvyr/PjgAhyT/BcZtgCZogTboxN5XJBdnnvJIjmsiKVP9L5CtTWiAJmjFvztx/keY2xkwC6pgDsyDBbBY6XvazJONssbVefh4/23FnSdf4+o8XNb//0FF1D+PdvHM1jysD1S3pf4nyH4aKP9tqH8oDWP9k8/60wkh1sCziTBervX/e0+I7cnBa0sOa7hU8ln/hNyfwZeA+V3rT/OH0jf47Hn2unv/h+/9v0nd1Z9Xf+5+ndvPp0yeunZu/bn79VD7ep1Mnrp2Tv25+/VQ+3qdTJ6mdm79ufv1UPt6nUyeunZO/bn79VD7ep1MnqZ2Tv25+3XbfX1duJ11cDxN7Vn1/13KVQ4ryfwuZx0+dF5S1z/vecIwn3Vk+avOTOl5Qih8nHW4+qvOQIuQ7VmHDy2T7P8AVOXW5A==
+   eJztmdtOE0EcxqfLoY0JvIFeeQEaoYAmvoDAW4gJCQKe9RWUvoWaGPFGTj4EvAReNUQ09IQXeuc32W26/e/szH8O29aEL/ll291hvvnmvx0ymZVxIZbBypCuFeCjt0Mce4jrqmf+B4HG8g7sDOFaR4abUS/PTKTO+SXKtjtL6m/rSbMfg2309bM0eGT+9VSux/hcV8zBjyjb7sxhzDLnCZmD8kR8/1bUD9XhmBDV8Ww7X26nvGbJ97z7s45eMmdlor/+taT+W1EPlWR+Qdo1JoVoghZogw64nOxvY2I75beOsWwo1gR6f5P08aecReklsmvmapLfpG79O6nxzsFnHlTBAlgES+Xs3+bNE9Un9L+ryJ93X/aryt6FSuaka2aNmb+ro+Q9eIr+n4Hn4AV4CV6B1+AN8ebOk6102VVzYKr/17G4zjq6+aX20P8+OACH4Ah8I54282Qj2e/9SsxlOYZ+lqQ9TPVX5d8D++CA5L9Avw3QBC3QBp3E+zfJxZknF8l+TaRlqv8FsrUJDdAEreR7J8l/B3M7B+ZBFSyARbAE7lZ6njbzZKO8fnUeLr//06n4+n3KbZzceQrVr87DZf2/Ph1fb0y7j3VUFGL9H4R28M7WAqwPVD7//wepY2Q/KSj//1D/ojSK9U+/6w+xxq6BR45rrUm+9f97TYgnZB2857GGS6Xf9ffI/QF8LDC/b/1p/qL0GT67gb2ufv+j9/sfpK7qz6s/d7/ObRdSJk/dc279ufv1ovb1Opk8dc859efu14va1+tk8jQ959afu18val+vk8lT95xTf+5+vah9vU4mT9NzTv25+3XbfX1d+J11cDxNz/Pqf15yKoeVZH6fs44Q+lVS19/1PGGUzzry/FVnpvQ8oShCnHX4+qvOQIch27OOEFom2f8BRWrZEA==
   </data>
  </layer>
  <layer id="5" name="objects1" width="64" height="32">
   <data encoding="base64" compression="zlib">
-   eJztlj0OgjAUx6tOLPUUBgcWr2CCeghn4+DifZx1cfE+DuDConeQF0sspNL2YS3I+yVNW6Af//dRyhhBEISex9D3DvwzG/negT/A//se6wcuDvTPDeY8csZO3G4MlihQt+X+YuBufd/sAnVb1a/D1EYYX7r0/1lo3PB3u/ouFtpu4/q5dO+bMOX6b2yR7VrNOQwm+reINer8D2ti7B7/cU6b4jKvXDPJ4yjLSyp8n0gxEObPVx3WZgPEfqqI/6VBfHfZ/0RzdP5f83LdFiDXE0Xcpx9yAcuBl+u2UOgEG4TiHIRS2CX5kg2uvFwT/YPuSXaY/Hd/OY8PIGb6cv+S6ZpmF7lN5wVBvLgj7k2YMW0lQtxDMWMIwoQnt5guQw==
+   eJztlj0OgjAUx1EnBuopDA4sXsHEj0Ooo3Fw8T7Ourh4HwdwcdE7yAslFlNp+7AW5P2Spi3Qj//7KPU8giAINY+u6x24Z9RzvQN3gP93LdYPnC3oH2vMeWCed2RmY7BEvrwt9qcde+u7ZuvL27J+Gbo2wvjSpv9PXOOaZe1lkPVXwevdhGu79svnUr2vwpCpvzFFtOt7zmHQ0b9BrFHmf1gTY/fJH+e0LjbzyjaDNI5uaUm472MhBsL0+bzB2kyA2E8k8T/TiO8m+5+ojsr/C1as6wLkeiyJ++RDLmDZs2JdF3KdYIOQn4NQcrvEX7LBhRVron3QPckMnf/uL+dxAcRMW+5fIk3TbCO36bwgiIw74t6EGVNXIsQ9FDOGIHR4AuVALxg=
   </data>
  </layer>
  <objectgroup id="6" name="animatedObjects0">
@@ -277,7 +277,7 @@ path: NSTOP</property>
     <property name="TileWiseMovementComponent" value=""/>
    </properties>
   </object>
-  <object id="480" name="person" gid="4033" x="80" y="192" width="16" height="16">
+  <object id="483" name="person" gid="4033" x="48" y="224" width="16" height="16">
    <properties>
     <property name="CharacterSpriteComponent">male: true,
 index: 1</property>
@@ -285,19 +285,7 @@ index: 1</property>
     <property name="ConversationComponent" value="enabled: true, name: person_name_25_14, text: person_25_14"/>
     <property name="InputComponent" value=""/>
     <property name="PathComponent">enabled: true,
-path: SSTOP</property>
-    <property name="TileWiseMovementComponent" value=""/>
-   </properties>
-  </object>
-  <object id="483" name="person" gid="4033" x="80" y="192" width="16" height="16">
-   <properties>
-    <property name="CharacterSpriteComponent">male: true,
-index: 1</property>
-    <property name="ColliderComponent" value=""/>
-    <property name="ConversationComponent" value="enabled: true, name: person_name_25_14, text: person_25_14"/>
-    <property name="InputComponent" value=""/>
-    <property name="PathComponent">enabled: true,
-path: SSTOP</property>
+path: ESTOP</property>
     <property name="TileWiseMovementComponent" value=""/>
    </properties>
   </object>
@@ -361,6 +349,18 @@ path: SSTOP</property>
     <property name="TileWiseMovementComponent" value=""/>
    </properties>
   </object>
+  <object id="489" name="person" gid="4033" x="160" y="208" width="16" height="16">
+   <properties>
+    <property name="CharacterSpriteComponent">male: true,
+index: 4</property>
+    <property name="ColliderComponent" value=""/>
+    <property name="ConversationComponent" value="enabled: true, name: person_name_25_15, text: person_25_15"/>
+    <property name="InputComponent" value=""/>
+    <property name="PathComponent">enabled: true,
+path: SSTOP</property>
+    <property name="TileWiseMovementComponent" value=""/>
+   </properties>
+  </object>
  </objectgroup>
  <layer id="8" name="shadows2" width="64" height="32">
   <data encoding="base64" compression="zlib">
@@ -377,7 +377,7 @@ path: SSTOP</property>
    eJztmdlOwzAQRS1RlvIf8FagEPgjeAOawm91oS38VcvSwDMnD6gmuOMJsYUAX+lIlaPOvZNN8sQYvbINY07hbOPrsfGmMXebNYr9Qs1axtzDQ+vz+iN9P8EzvHjOwXiH87QTPltZ9769IoZHQd+v8Gb1f7BlzCEcQReO4WTL/f9HMj3BM7wEzPdR97W9IrSHS5f0eQXX0IMc+nADt5VzcECmQziCLhzDSftrzT3O7X5Lv27XtfuXPJqoaz37A3ocwgjGcAcTmMLM6v+SDFdwDT3IoQ83cFvJd06PF44+XevVunb/kkcT5Vb/c3pclNefZ74HOfRhyVph9T/AfwgjGJfPJkxgCrMG2ap1T3dXhPKQ1NnGn35H1jtvwu8pZNurtTn+i/I68Tz2IIc+LFkrGmSr1rUVykP0p8+F432/ZK2w1jtcjyFZRlbGCb+nkO1+399V11YID9F/zXu+VGYdm5Nh4ci4ZK1o8I5eVzekRwh1hPsva3BvSnVDeSQlJSUlJf1Haecasfb1TTybzmS0c41Y+3oxm8ezzkzGJe1cQ7uvDymfZ52ZjEvauUadfX0o+TzrzGTWSTvXiLWvF7N5PLXZJWnnGrH29WI2j6c2uyTtXCPWvl7M5vHUZpeknWvE2teL2Tye2uyStHONWPt6ST5PbfakpJ9W3W8df011vnUkJcXQO1GR5Tw=
   </data>
  </layer>
- <objectgroup id="11" name="colliderWalls0" visible="0">
+ <objectgroup id="11" name="colliderWalls0">
   <object id="203" x="64" y="144" width="96" height="32">
    <properties>
     <property name="ColliderComponent" value=""/>
@@ -809,6 +809,16 @@ path: SSTOP</property>
    </properties>
   </object>
   <object id="476" x="272" y="256" width="16" height="32">
+   <properties>
+    <property name="ColliderComponent" value=""/>
+   </properties>
+  </object>
+  <object id="490" x="144" y="176" width="16" height="16">
+   <properties>
+    <property name="ColliderComponent" value=""/>
+   </properties>
+  </object>
+  <object id="491" x="176" y="176" width="16" height="16">
    <properties>
     <property name="ColliderComponent" value=""/>
    </properties>

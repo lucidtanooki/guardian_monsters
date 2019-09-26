@@ -4,11 +4,43 @@ import de.limbusdev.guardianmonsters.CoreSL
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Components
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.RenderingLimbusBehaviour
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Transform
+import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.reflect.KClass
 
-class LimbusGameObject(var name: String = "", val type: String = "general")
+class LimbusGameObject
 {
+    companion object
+    {
+        val objectByID = mutableMapOf<UUID,LimbusGameObject>()
+        val tiledIDtoObjectID = mutableMapOf<Int,UUID>()
+
+        private val typeSignatures: MutableMap<String, List<String>> = mutableMapOf()
+
+        fun registerType(type: String, signature: List<String>)
+        {
+            typeSignatures[type] = signature
+        }
+    }
+
+    constructor(name: String = "")
+    {
+        UUID = java.util.UUID.randomUUID()
+        this.name = name
+        objectByID[UUID] = this
+    }
+
+    constructor(ID: Int, name: String = "")
+    {
+        UUID = java.util.UUID.randomUUID()
+        this.name = name
+        objectByID[UUID] = this
+        tiledIDtoObjectID[ID] = UUID
+    }
+
+    val UUID: UUID
+    var name: String
+
     // LimbusGameObjects must have a transform
     var transform : Transform = Transform(this)
 
@@ -157,21 +189,12 @@ class LimbusGameObject(var name: String = "", val type: String = "general")
     fun dispose()
     {
         CoreSL.world.remove(this)
+        objectByID.remove(UUID)
         val it = components.iterator()
         for(component in it)
         {
             it.remove()
             component.dispose()
-        }
-    }
-
-    companion object
-    {
-        private val typeSignatures: MutableMap<String, List<String>> = mutableMapOf()
-
-        fun registerType(type: String, signature: List<String>)
-        {
-            typeSignatures[type] = signature
         }
     }
 }

@@ -153,7 +153,20 @@ class GameArea(val areaID: Int, startPosID: Int) : RenderingLimbusBehaviour()
             // Only Rectangle Map Objects are supported
             if(mapObject is RectangleMapObject || mapObject is TextureMapObject)
             {
-                val gameObject = LimbusGameObject(mapObject.name ?: "")
+                var ID : Int? = null
+                if(mapObject.properties.containsKey("id"))
+                {
+                    ID = mapObject.properties["id"].toString().toIntOrNull()
+                }
+                val gameObject = if(ID == null)
+                {
+                    LimbusGameObject(mapObject.name ?: "")
+                }
+                else
+                {
+                    LimbusGameObject(ID, mapObject.name ?: "")
+                }
+
 
                 when(mapObject.properties["enabled", true])
                 {

@@ -1,6 +1,5 @@
 package de.limbusdev.guardianmonsters.fwmengine.world.ecs.components
 
-import com.badlogic.ashley.core.Component
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusBehaviour
 
 /**
@@ -21,4 +20,11 @@ class ConversationComponent(var name : String = "", var text : String = "") : Li
             """.trimMargin()
     }
 
+    /** Callbacks. Run when the whole conversation is complete. */
+    val onConversationFinished = mutableSetOf<(() -> Unit)>()
+
+    fun closeConversation()
+    {
+        onConversationFinished.forEach { it.invoke() }
+    }
 }

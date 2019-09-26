@@ -59,6 +59,9 @@ class HUD
     private var menuButtons             : VerticalGroup
     val         inputProcessor          : InputProcessor get() = stage
 
+    private lateinit var aButton        : Button
+    private lateinit var bButton        : Button
+
     private var dpadTouchDownStart      : Long = 0
     private var currentlyShownHUDWidget = HUDWidgets.NONE
 
@@ -123,7 +126,7 @@ class HUD
                 teamButtonCB = { onShowInventoryButton() }
         )
 
-        val aButton = GMWorldFactory.HUDBP.createAButton {
+        aButton = GMWorldFactory.HUDBP.createAButton {
 
             logDebug(TAG) { "A Button clicked." }
             when(currentlyShownHUDWidget)
@@ -133,7 +136,7 @@ class HUD
             }
         }
 
-        val bButton = GMWorldFactory.HUDBP.createBButton {
+        bButton = GMWorldFactory.HUDBP.createBButton {
 
             logDebug(TAG) { "B Button clicked." }
             when(currentlyShownHUDWidget)
@@ -187,6 +190,7 @@ class HUD
         // Hide Menus
         mainMenuButton.isVisible = false
         menuButtons.isVisible = false
+        bButton.isVisible = false
 
         // Retrieve and set conversation content
         val conversationText = Services.I18N().i18nMap(mapID).get(text)
@@ -223,6 +227,10 @@ class HUD
 
         val otherInputComponent = interactionGameObject?.get<InputComponent>() ?: return
         otherInputComponent.talking = false
+
+        bButton.isVisible = true
+
+        interactionGameObject?.get<ConversationComponent>()?.closeConversation()
     }
 
 

@@ -61,6 +61,8 @@ class PathComponent
     var talkDir     = SkyDirection.S
     private var stoppedSince : Long = 0
 
+    val onPathComplete = mutableSetOf<(() -> Unit)>()
+
 
     // --------------------------------------------------------------------------------------------- METHODS
     override fun update60fps()
@@ -115,5 +117,8 @@ class PathComponent
     fun next()
     {
         currentDir = (currentDir+1) % path.size
+
+        // If path has been completed, run callbacks.
+        if(currentDir == 0) { onPathComplete.forEach { it.invoke() } }
     }
 }

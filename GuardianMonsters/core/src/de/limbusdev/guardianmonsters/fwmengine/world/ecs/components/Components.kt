@@ -26,6 +26,7 @@ object Components
         parsers[RandomBattleAreaComponent::class] = RandomBattleAreaComponent.Parser
         parsers[StepOnButtonComponent::class] = StepOnButtonComponent.Parser
         parsers[DisableGameObjectTriggerCallbackComponent::class] = DisableGameObjectTriggerCallbackComponent.Parser
+        parsers[PersonComponent::class] = PersonComponent.Parser
     }
 
 

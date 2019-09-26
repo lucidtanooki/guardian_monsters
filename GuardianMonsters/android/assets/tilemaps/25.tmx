@@ -174,7 +174,7 @@
   <object id="481" name="box" gid="3554" x="208" y="320" width="16" height="16">
    <properties>
     <property name="ColliderComponent" value=""/>
-    <property name="DisableGameObjectTriggerCallbackComponent" value="triggerID: 1"/>
+    <property name="DisableGameObjectTriggerCallbackComponent" value="triggerID: 479"/>
     <property name="SpriteComponent" value=""/>
    </properties>
   </object>
@@ -327,14 +327,10 @@ path: SSTOP</property>
   </object>
   <object id="487" name="person" gid="4033" x="592" y="128" width="16" height="16">
    <properties>
-    <property name="CharacterSpriteComponent">male: true,
-index: 2</property>
-    <property name="ColliderComponent" value=""/>
-    <property name="ConversationComponent" value="enabled: true, name: person_name_25_12, text: person_25_12"/>
-    <property name="InputComponent" value=""/>
-    <property name="PathComponent">enabled: true,
+    <property name="PersonComponent">male: true,
+sprite: 2,
+name: 25_12,
 path: SSTOP</property>
-    <property name="TileWiseMovementComponent" value=""/>
    </properties>
   </object>
   <object id="488" name="person" gid="4033" x="544" y="304" width="16" height="16">
@@ -937,8 +933,8 @@ path: SSTOP</property>
   </object>
   <object id="468" name="layerTrigger" x="208" y="288" width="16" height="16">
    <properties>
-    <property name="BoxTrigger2DComponent" value="triggerID: 0, channel: TileWiseMovementComponent"/>
-    <property name="ChangeLayerTriggerCallbackComponent" value="triggerID: 0, fromNorth: -1, fromSouth: 1, fromWest: 0, fromEast: 0"/>
+    <property name="BoxTrigger2DComponent" value="triggerID: 468, channel: TileWiseMovementComponent"/>
+    <property name="ChangeLayerTriggerCallbackComponent" value="triggerID: 468, fromNorth: -1, fromSouth: 1, fromWest: 0, fromEast: 0"/>
     <property name="ColliderComponent" value="isTrigger: true"/>
    </properties>
   </object>

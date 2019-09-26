@@ -14,6 +14,12 @@ class LimbusGameObject
     {
         val objectByID = mutableMapOf<UUID,LimbusGameObject>()
         val tiledIDtoObjectID = mutableMapOf<Int,UUID>()
+        fun objectByTiledID(ID: Int) : LimbusGameObject?
+        {
+            if(!tiledIDtoObjectID.containsKey(ID)) { return null }
+            if(!objectByID.containsKey(tiledIDtoObjectID[ID])) { return null }
+            return objectByID[tiledIDtoObjectID[ID]]
+        }
 
         private val typeSignatures: MutableMap<String, List<String>> = mutableMapOf()
 
@@ -138,7 +144,7 @@ class LimbusGameObject
     {
         val components = getComponents<T>()
         if(components.isEmpty()) { return null }
-        return components.filterIsInstance<T>().first()
+        return components.first()
     }
 
     /**

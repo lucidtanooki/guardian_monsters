@@ -21,9 +21,14 @@ object CharacterSpriteComponentParser : IComponentParser<CharacterSpriteComponen
 
         val data = json.fromJson(CharacterSpriteComponentParser.Data::class.java, "{$jsonStringWithoutBrackets}")
 
-        val animatedSprite = CharacterSpriteComponent(AnimatedPersonSprite(data.male, data.index))
+        val animatedSprite = parse(data.male, data.index)
         animatedSprite.enabled = data.enabled
 
         return animatedSprite
+    }
+
+    fun parse(male: Boolean, index: Int) : CharacterSpriteComponent
+    {
+        return CharacterSpriteComponent(AnimatedPersonSprite(male, index))
     }
 }

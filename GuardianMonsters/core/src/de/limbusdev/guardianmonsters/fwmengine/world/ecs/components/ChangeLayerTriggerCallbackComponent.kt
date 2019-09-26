@@ -29,14 +29,9 @@ class ChangeLayerTriggerCallbackComponent
     {
         super.initialize()
 
-        for(trigger in CoreSL.world.getAllWith(BoxTrigger2DComponent::class))
-        {
-            val triggerComponent = trigger.get<BoxTrigger2DComponent>()
-            if(triggerComponent != null && triggerComponent.triggerID == triggerID)
-            {
-                triggerComponent.onTriggerEntered.add { go -> onTriggerEntered(go) }
-            }
-        }
+        val trigger = LimbusGameObject.objectByTiledID(triggerID) ?: return
+
+        trigger.get<BoxTrigger2DComponent>()?.onTriggerEntered?.add { go -> onTriggerEntered(go) }
     }
 
     override fun onTriggerEntered(enteringGameObject: LimbusGameObject?)

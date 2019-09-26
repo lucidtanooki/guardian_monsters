@@ -20,7 +20,6 @@ class BoxTrigger2DComponent(var triggerID : Int = 0) : TriggerComponent()
 
     init
     {
-        triggerChannel.add(HeroComponent::class)
         triggerChannel.add(TileWiseMovementComponent::class)
     }
 

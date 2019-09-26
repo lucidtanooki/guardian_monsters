@@ -6,12 +6,16 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusBehaviour
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.parsers.IComponentParser
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.get
 
-class StepOnButtonComponent : LimbusBehaviour()
+class StepOnButtonComponent
+(
+        var needsPermanentPressure : Boolean = false
+)
+    : LimbusBehaviour()
 {
     companion object
     {
         const val className = "StepOnButtonComponent"
-        const val defaultJson = "enabled: true"
+        const val defaultJson = "enabled: true, needsPermanentPressure: false"
     }
 
     private lateinit var collider   : ColliderComponent
@@ -37,13 +41,13 @@ class StepOnButtonComponent : LimbusBehaviour()
 
     private fun buttonUp()
     {
+        if(!needsPermanentPressure) { return }
         sprite.sprite.regionX = defaultRegionX
         sprite.sprite.regionWidth = 16
     }
 
     private fun buttonDown()
     {
-        println("button down")
         sprite.sprite.regionX = defaultRegionX-16
         sprite.sprite.regionWidth = 16
     }

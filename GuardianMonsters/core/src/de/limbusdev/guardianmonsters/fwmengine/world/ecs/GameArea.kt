@@ -38,11 +38,6 @@ import kotlin.reflect.KClass
 class GameArea(val areaID: Int, startPosID: Int) : RenderingLimbusBehaviour()
 {
     // --------------------------------------------------------------------------------------------- PROPERTIES
-    companion object
-    {
-        const val defaultComponentPackage = "de.limbusdev.guardianmonsters.fwmengine.world.ecs.components."
-    }
-
     val tiledMap    : TiledMap
     private val mapRenderer : ExtendedTiledMapRenderer
     private val shape = ShapeRenderer()
@@ -207,29 +202,9 @@ class GameArea(val areaID: Int, startPosID: Int) : RenderingLimbusBehaviour()
     {
         if(!componentName.contains("Component", false)) { return null }
 
-        var component: LimbusBehaviour? = null
+        val kClass = Components.componentNameToClass(componentName) ?: return null
 
-        try
-        {
-            // Components that are part of the engine can be used with simple names
-            // Custom components must use their full name, like: com.me.CustomComponent
-            val componentClassBasePath = when (componentName.contains("."))
-            {
-                true  -> ""
-                false -> defaultComponentPackage
-            }
-            val kClass = Class.forName(componentClassBasePath + componentName).kotlin
-
-            kClass as KClass<out LimbusBehaviour>
-
-            component = Components.parsers[kClass]?.parseComponent(json, mapObject)
-        }
-        catch (e: Exception)
-        {
-            println("Cast not successful for $componentName.")
-        }
-
-        return component
+        return Components.parsers[kClass]?.parseComponent(json, mapObject)
     }
 
     /**

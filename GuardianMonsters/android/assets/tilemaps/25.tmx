@@ -166,7 +166,7 @@
   </object>
   <object id="479" name="switch" gid="3556" x="64" y="208" width="16" height="16">
    <properties>
-    <property name="BoxTrigger2DComponent" value="triggerID: 1"/>
+    <property name="BoxTrigger2DComponent" value="triggerID: 1, channel: TileWiseMovementComponent"/>
     <property name="SpriteComponent" value=""/>
     <property name="StepOnButtonComponent" value="needsPermanentPressure: true"/>
    </properties>
@@ -927,7 +927,7 @@ path: SSTOP</property>
   </object>
   <object id="468" name="layerTrigger" x="208" y="288" width="16" height="16">
    <properties>
-    <property name="BoxTrigger2DComponent" value="triggerID: 0"/>
+    <property name="BoxTrigger2DComponent" value="triggerID: 0, channel: TileWiseMovementComponent"/>
     <property name="ChangeLayerTriggerCallbackComponent" value="triggerID: 0, fromNorth: -1, fromSouth: 1, fromWest: 0, fromEast: 0"/>
     <property name="ColliderComponent" value="isTrigger: true"/>
    </properties>

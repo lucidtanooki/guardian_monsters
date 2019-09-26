@@ -1,8 +1,12 @@
 package de.limbusdev.guardianmonsters.fwmengine.world.ecs.components
 
+import com.badlogic.gdx.utils.Array
 import de.limbusdev.guardianmonsters.CoreSL
+import de.limbusdev.guardianmonsters.enums.SkyDirection
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.GameArea
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusBehaviour
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusGameObject
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.parsers.IComponentParser
 import de.limbusdev.utils.logDebug
 import kotlin.reflect.KClass
 
@@ -16,7 +20,7 @@ abstract class TriggerComponent : LimbusBehaviour()
     val gameObjectsToBeRemoved = mutableSetOf<LimbusGameObject>()
     val currentlyOverlappingGameObjects = mutableSetOf<LimbusGameObject>()
 
-    val triggerChannel = mutableSetOf< KClass<out LimbusBehaviour>>()
+    val triggerChannel = mutableSetOf<KClass<out LimbusBehaviour>>()
 
     private lateinit var collider : ColliderComponent
 
@@ -88,5 +92,34 @@ abstract class TriggerComponent : LimbusBehaviour()
         super.update60fps()
 
         checkCollisions()
+    }
+
+    abstract class ITriggerParser<T : LimbusBehaviour> : IComponentParser<T>
+    {
+        open class TriggerData(var channel: String)
+
+        /**
+         * Takes a string list of component names and returns a list of class types. List should
+         * look like that:
+         *      "channel: "HeroComponent, TileWiseMovementComponent, ..."
+         */
+        fun parseCollisionChannel(channel: String) : Set<KClass<out LimbusBehaviour>>
+        {
+            val list = mutableSetOf<KClass<out LimbusBehaviour>>()
+            if(channel.isEmpty()) { return list }
+
+            channel.trim()              // removes start and end white space
+            channel.replace("\\s+", "") // removes all white space
+            channel.replace("\\n+", "") // removes all line breaks
+
+            val channelArray = channel.split("\\s*,\\s*".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
+            channelArray.forEach {
+
+                val compType = Components.componentNameToClass(it)
+                if(compType != null) { list.add(compType) }
+            }
+
+            return list
+        }
     }
 }

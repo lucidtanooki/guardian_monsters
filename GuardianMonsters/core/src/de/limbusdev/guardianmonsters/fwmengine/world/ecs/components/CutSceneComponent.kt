@@ -32,11 +32,12 @@ class CutSceneComponent : LimbusBehaviour()
     {
         super.initialize()
 
+        // TODO create cut scene elements from tiled object data
         cutSceneElements.add(PathScene())
         cutSceneElements.add(ConversationScene())
         cutSceneElements.add(PathScene())
         elementIterator = cutSceneElements.iterator()
-        nextElement()
+        nextElement()   // TODO this should be initiated by a trigger
     }
 
     private fun nextElement()
@@ -52,6 +53,7 @@ class CutSceneComponent : LimbusBehaviour()
 
     private class PathScene : ICutSceneElement
     {
+        // TODO hold real path data from a tiled map object
         override fun act(scene: CutSceneComponent, gameObject: LimbusGameObject)
         {
             val pathComponent = gameObject.getOrCreate<PathComponent>()

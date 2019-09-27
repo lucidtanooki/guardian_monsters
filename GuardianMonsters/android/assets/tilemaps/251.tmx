@@ -99,29 +99,117 @@
    eJxjYBgFowACFskzMCyWH2hXjAJ6AgD0tAGE
   </data>
  </layer>
- <objectgroup id="11" name="colliderWalls1" visible="0">
-  <object id="1" x="0" y="0" width="224" height="48"/>
-  <object id="2" x="224" y="0" width="32" height="16"/>
-  <object id="3" x="240" y="16" width="16" height="240"/>
-  <object id="4" x="0" y="48" width="16" height="208"/>
-  <object id="7" x="16" y="144" width="112" height="16"/>
-  <object id="8" x="112" y="160" width="16" height="48"/>
-  <object id="9" x="176" y="160" width="16" height="48"/>
-  <object id="10" x="192" y="160" width="48" height="16"/>
-  <object id="11" x="208" y="176" width="32" height="16"/>
-  <object id="12" x="32" y="208" width="32" height="32"/>
-  <object id="13" x="128" y="48" width="32" height="16"/>
-  <object id="14" x="32" y="48" width="48" height="16"/>
-  <object id="46" x="192" y="48" width="16" height="16"/>
-  <object id="47" x="80" y="80" width="16" height="16"/>
-  <object id="50" x="32" y="96" width="48" height="16"/>
-  <object id="51" x="208" y="192" width="32" height="16"/>
-  <object id="52" x="16" y="160" width="32" height="16"/>
-  <object id="64" x="80" y="160" width="32" height="32"/>
-  <object id="65" x="128" y="192" width="16" height="16"/>
-  <object id="66" x="160" y="192" width="16" height="16"/>
-  <object id="67" x="176" y="240" width="16" height="16"/>
-  <object id="79" x="16" y="48" width="16" height="48"/>
+ <objectgroup id="11" name="colliderWalls1">
+  <object id="1" x="0" y="0" width="224" height="48">
+   <properties>
+    <property name="ColliderComponent" value=""/>
+   </properties>
+  </object>
+  <object id="2" x="224" y="0" width="32" height="16">
+   <properties>
+    <property name="ColliderComponent" value=""/>
+   </properties>
+  </object>
+  <object id="3" x="240" y="16" width="16" height="240">
+   <properties>
+    <property name="ColliderComponent" value=""/>
+   </properties>
+  </object>
+  <object id="4" x="0" y="48" width="16" height="208">
+   <properties>
+    <property name="ColliderComponent" value=""/>
+   </properties>
+  </object>
+  <object id="7" x="16" y="144" width="112" height="16">
+   <properties>
+    <property name="ColliderComponent" value=""/>
+   </properties>
+  </object>
+  <object id="8" x="112" y="160" width="16" height="48">
+   <properties>
+    <property name="ColliderComponent" value=""/>
+   </properties>
+  </object>
+  <object id="9" x="176" y="160" width="16" height="48">
+   <properties>
+    <property name="ColliderComponent" value=""/>
+   </properties>
+  </object>
+  <object id="10" x="192" y="160" width="48" height="16">
+   <properties>
+    <property name="ColliderComponent" value=""/>
+   </properties>
+  </object>
+  <object id="11" x="208" y="176" width="32" height="16">
+   <properties>
+    <property name="ColliderComponent" value=""/>
+   </properties>
+  </object>
+  <object id="12" x="32" y="208" width="32" height="32">
+   <properties>
+    <property name="ColliderComponent" value=""/>
+   </properties>
+  </object>
+  <object id="13" x="128" y="48" width="32" height="16">
+   <properties>
+    <property name="ColliderComponent" value=""/>
+   </properties>
+  </object>
+  <object id="14" x="32" y="48" width="48" height="16">
+   <properties>
+    <property name="ColliderComponent" value=""/>
+   </properties>
+  </object>
+  <object id="46" x="192" y="48" width="16" height="16">
+   <properties>
+    <property name="ColliderComponent" value=""/>
+   </properties>
+  </object>
+  <object id="47" x="80" y="80" width="16" height="16">
+   <properties>
+    <property name="ColliderComponent" value=""/>
+   </properties>
+  </object>
+  <object id="50" x="32" y="96" width="48" height="16">
+   <properties>
+    <property name="ColliderComponent" value=""/>
+   </properties>
+  </object>
+  <object id="51" x="208" y="192" width="32" height="16">
+   <properties>
+    <property name="ColliderComponent" value=""/>
+   </properties>
+  </object>
+  <object id="52" x="16" y="160" width="32" height="16">
+   <properties>
+    <property name="ColliderComponent" value=""/>
+   </properties>
+  </object>
+  <object id="64" x="80" y="160" width="32" height="32">
+   <properties>
+    <property name="ColliderComponent" value=""/>
+   </properties>
+  </object>
+  <object id="65" x="128" y="192" width="16" height="16">
+   <properties>
+    <property name="ColliderComponent" value=""/>
+   </properties>
+  </object>
+  <object id="66" x="160" y="192" width="16" height="16">
+   <properties>
+    <property name="ColliderComponent" value=""/>
+   </properties>
+  </object>
+  <object id="67" x="176" y="240" width="16" height="16">
+   <properties>
+    <property name="ColliderComponent" value=""/>
+   </properties>
+  </object>
+  <object id="79" x="16" y="48" width="16" height="48">
+   <properties>
+    <property name="ColliderComponent" value=""/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup id="12" name="triggers1">
   <object id="15" name="warpField" x="128" y="240" width="16" height="16">

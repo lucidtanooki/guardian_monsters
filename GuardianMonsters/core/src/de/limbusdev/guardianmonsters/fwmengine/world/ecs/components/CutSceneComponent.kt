@@ -1,5 +1,6 @@
 package de.limbusdev.guardianmonsters.fwmengine.world.ecs.components
 
+import com.badlogic.gdx.utils.Array
 import de.limbusdev.guardianmonsters.CoreSL
 import de.limbusdev.guardianmonsters.enums.SkyDirection
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusGameObject
@@ -17,6 +18,9 @@ import ktx.collections.gdxArrayOf
  * + gather needed objects and components
  * + move people, objects and the camera
  * + open conversations
+ *
+ * // TODO currently it is impossible to add two ConversationScene without anything else in
+ * // TODO in between. Simply add a PathScene with SSTOP or something like that between them.
  */
 class CutSceneComponent(triggerID : Int = 0) : IDBasedTriggerCallbackComponent(triggerID)
 {
@@ -62,8 +66,9 @@ class CutSceneComponent(triggerID : Int = 0) : IDBasedTriggerCallbackComponent(t
         CoreSL.world.add(personB)
 
         cutSceneElements.add(Pair(personA, ConversationScene()))
+        cutSceneElements.add(Pair(personA, PathScene(gdxArrayOf(SkyDirection.ESTOP))))
         cutSceneElements.add(Pair(personB, ConversationScene()))
-        cutSceneElements.add(Pair(personA, PathScene()))
+        cutSceneElements.add(Pair(personA, PathScene(gdxArrayOf(SkyDirection.W, SkyDirection.W, SkyDirection.W))))
 
         elementIterator = cutSceneElements.iterator()
     }
@@ -82,14 +87,11 @@ class CutSceneComponent(triggerID : Int = 0) : IDBasedTriggerCallbackComponent(t
         fun act(scene: CutSceneComponent, gameObject: LimbusGameObject)
     }
 
-    private class PathScene : ICutSceneElement
+    private class PathScene(val path: Array<SkyDirection>) : ICutSceneElement
     {
-        // TODO hold real path data from a tiled map object
         override fun act(scene: CutSceneComponent, gameObject: LimbusGameObject)
         {
             val pathComponent = gameObject.getOrCreate<PathComponent>()
-            val path = gdxArrayOf(SkyDirection.SSTOP, SkyDirection.S, SkyDirection.S, SkyDirection.ESTOP, SkyDirection.WSTOP, SkyDirection.SSTOP)
-
             pathComponent.path = path
             pathComponent.reset()
             pathComponent.repeat = false

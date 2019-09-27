@@ -4,6 +4,8 @@ import com.badlogic.gdx.utils.Array
 import de.limbusdev.guardianmonsters.CoreSL
 import de.limbusdev.guardianmonsters.enums.SkyDirection
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusGameObject
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.parsers.CutSceneComponentParser
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.parsers.PathComponentParser
 import de.limbusdev.utils.geometry.IntVec2
 
 import ktx.collections.gdxArrayOf
@@ -22,23 +24,32 @@ import ktx.collections.gdxArrayOf
  * // TODO currently it is impossible to add two ConversationScene without anything else in
  * // TODO in between. Simply add a PathScene with SSTOP or something like that between them.
  */
-class CutSceneComponent(triggerID : Int = 0) : IDBasedTriggerCallbackComponent(triggerID)
+class CutSceneComponent
+(
+        triggerID : Int = 0,
+        val actors : List<CutSceneComponentParser.Person> = listOf(),
+        val actions : List<CutSceneComponentParser.Action> = listOf()
+)
+    : IDBasedTriggerCallbackComponent(triggerID)
 {
     companion object
     {
         const val className = "CutSceneComponent"
         val defaultJson = """
-            ${IDBasedTriggerCallbackComponent.defaultJson}
-            triggerID: 494,
-            people: [A,B]
-            scenes:
-            [
-            "A,say(25_16_0)",
-            "A,walk(ESTOP)",
-            "B,say(25_17_0)",
-            "A,walk(W,W,W,W)"
-            ]
-            """.trimIndent()
+${IDBasedTriggerCallbackComponent.defaultJson},
+people:
+[
+"A, true, 1, -1, 0",
+"B, true, 2, 1, 0"
+]
+scenes:
+[
+"A,say(25_16_0)",
+"A,walk(ESTOP)",
+"B,say(25_17_0)",
+"A,walk(W,W,W,W)"
+]
+""".trimIndent()
     }
 
     override fun onTriggerEntered(enteringGameObject: LimbusGameObject?)
@@ -56,35 +67,36 @@ class CutSceneComponent(triggerID : Int = 0) : IDBasedTriggerCallbackComponent(t
     {
         super.initialize()
 
-        // TODO create cut scene elements from tiled object data
-//        cutSceneElements.add(PathScene())
-//        cutSceneElements.add(ConversationScene())
-//        cutSceneElements.add(PathScene())
-//        elementIterator = cutSceneElements.iterator()
+        val people = mutableMapOf<String, LimbusGameObject>()
+        for(actor in actors)
+        {
+            val person = LimbusGameObject("Person ${actor.ID}")
+            people[actor.ID] = person
+            person.add(PersonComponent(actor.male, actor.index, actor.ID, "SSTOP"))
+            person.transform.onGrid = transform.onGrid + IntVec2(actor.offX, actor.offY)
+        }
 
-        // Create People to act in this cut scene
-        val personA = LimbusGameObject("Person A")
-        val personB = LimbusGameObject("Person B")
+        for(action in actions)
+        {
+            people[action.person]?.let{ person ->
 
-        personA.add(PersonComponent(true, 0, "25_16", "ESTOP"))
-        personB.add(PersonComponent(true, 1, "25_17", "WSTOP"))
+                when(action.action)
+                {
+                    "say" ->
+                    {
+                        cutSceneElements.add(Pair(person, ConversationScene(action.value)))
+                    }
+                    "walk" ->
+                    {
+                        val path = PathComponentParser.parse(action.value)
+                        cutSceneElements.add(Pair(person, PathScene(path)))
+                    }
+                    else -> {}
+                }
+            }
+        }
 
-        // Setup their positions
-        personA.transform.onGrid = transform.onGrid + IntVec2(-1,0)
-        personB.transform.onGrid = transform.onGrid + IntVec2(1,0)
-
-        CoreSL.world.add(personA)
-        CoreSL.world.add(personB)
-
-        cutSceneElements.add(Pair(personA, ConversationScene("25_16")))
-        cutSceneElements.add(Pair(personA, PathScene(gdxArrayOf(SkyDirection.ESTOP))))
-        cutSceneElements.add(Pair(personB, ConversationScene("25_17")))
-        cutSceneElements.add(Pair(personA, PathScene(gdxArrayOf(
-                SkyDirection.W,
-                SkyDirection.W,
-                SkyDirection.W,
-                SkyDirection.W,
-                SkyDirection.W))))
+        people.forEach { CoreSL.world.add(it.value) }
 
         elementIterator = cutSceneElements.iterator()
     }

@@ -22,13 +22,14 @@ object PathComponentParser : IComponentParser<PathComponent>
 
         val data = json.fromJson(PathComponentParser.Data::class.java, "{$jsonStringWithoutBrackets}")
 
-        val pathComponent = parse(data.path)
+        val path = parse(data.path)
+        val pathComponent = PathComponent(path, path.size == 1)
         pathComponent.enabled = data.enabled
 
         return pathComponent
     }
 
-    fun parse(pathString: String) : PathComponent
+    fun parse(pathString: String) : Array<SkyDirection>
     {
         val path = Array<SkyDirection>()
         if(pathString.isNotEmpty())
@@ -41,6 +42,6 @@ object PathComponentParser : IComponentParser<PathComponent>
             path.add(SkyDirection.SSTOP)
         }
 
-        return PathComponent(path, path.size == 1)
+        return path
     }
 }

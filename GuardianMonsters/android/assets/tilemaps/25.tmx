@@ -355,8 +355,12 @@ path: SSTOP</property>
   <object id="493" name="CutScene" gid="4034" x="480" y="224" width="16" height="16">
    <properties>
     <property name="CutSceneComponent">triggerID: 494,
-people: [A,B]
-scenes:
+people: 
+[
+&quot;A, true, 1, -1, 0&quot;,
+&quot;B, true, 2, 1, 0&quot;
+]
+actions:
 [
 &quot;A,say(25_16_0)&quot;,
 &quot;A,walk(ESTOP)&quot;,

@@ -32,7 +32,8 @@ class PersonComponent
         gameObject.add(CharacterSpriteComponentParser.parse(male, sprite))
         gameObject.add(ColliderComponent())
         gameObject.add(TileWiseMovementComponent())
-        gameObject.add(PathComponentParser.parse(path))
+        val pathArray = PathComponentParser.parse(path)
+        gameObject.add(PathComponent(pathArray))
 
         val conversation = ConversationComponent()
         conversation.name = "person_name_$name"
@@ -52,6 +53,5 @@ class PersonComponent
 
             return json.fromJson(PersonComponent::class.java, "{$jsonStringNoBrackets}")
         }
-
     }
 }

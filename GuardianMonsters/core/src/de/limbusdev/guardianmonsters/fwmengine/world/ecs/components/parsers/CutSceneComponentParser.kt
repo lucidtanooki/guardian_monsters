@@ -11,15 +11,15 @@ import ktx.collections.gdxArrayOf
 
 object CutSceneComponentParser : IComponentParser<CutSceneComponent>
 {
-    private data class Data(var triggerID: Int = 0, var people: ArrayList<String> = ArrayList(), var scenes: ArrayList<String> = ArrayList())
-    private data class Action(var person: String, var action: String, var value: String)
+    private data class Data(var triggerID: Int = 0, var people: ArrayList<String> = ArrayList(), var actions: ArrayList<String> = ArrayList())
+    data class Action(var person: String, var action: String, var value: String)
+    data class Person(var ID: String, var male: Boolean, var index: Int, var offX: Int, var offY : Int)
 
     override fun createComponent() = CutSceneComponent()
 
     override fun parseComponent(json: Json, mapObject: MapObject): CutSceneComponent?
     {
         val json = Json()
-        json.setElementType(Data::class.java, "people", String::class.java)
 
         // MapObject must contain proper component
         if(!mapObject.properties.containsKey(CutSceneComponent.className)) { return null }
@@ -27,8 +27,18 @@ object CutSceneComponentParser : IComponentParser<CutSceneComponent>
         val jsonStringWithoutBrackets = mapObject.properties[CutSceneComponent.className, CutSceneComponent.defaultJson]
         val data = json.fromJson(Data::class.java, "{$jsonStringWithoutBrackets}")
 
+        val people = mutableListOf<Person>()
+        for(person in data.people)
+        {
+            var p = person.trim()              // removes start and end white space
+            p = p.replace("\\s".toRegex(), "") // removes all white space
+            p = p.replace("\\n*", "") // removes all line breaks
+            val details = p.split(",")
+            people.add(Person(details[0], details[1].toBoolean(), details[2].toInt(), details[3].toInt(), details[4].toInt()))
+        }
+
         val actions = mutableListOf<Action>()
-        for(scene in data.scenes)
+        for(scene in data.actions)
         {
             val person = scene.substringBefore(",")
             val action = scene.substringAfter(",").substringBefore("(")
@@ -36,7 +46,7 @@ object CutSceneComponentParser : IComponentParser<CutSceneComponent>
             actions.add(Action(person, action, value))
         }
 
-        val cutScene = CutSceneComponent()
+        val cutScene = CutSceneComponent(data.triggerID, people, actions)
         return cutScene
     }
 }

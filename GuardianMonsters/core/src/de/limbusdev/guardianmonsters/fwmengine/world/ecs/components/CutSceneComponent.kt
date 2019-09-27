@@ -27,7 +27,18 @@ class CutSceneComponent(triggerID : Int = 0) : IDBasedTriggerCallbackComponent(t
     companion object
     {
         const val className = "CutSceneComponent"
-        val defaultJson = "${IDBasedTriggerCallbackComponent.defaultJson}"
+        val defaultJson = """
+            ${IDBasedTriggerCallbackComponent.defaultJson}
+            triggerID: 494,
+            people: [A,B]
+            scenes:
+            [
+            "A,say(25_16_0)",
+            "A,walk(ESTOP)",
+            "B,say(25_17_0)",
+            "A,walk(W,W,W,W)"
+            ]
+            """.trimIndent()
     }
 
     override fun onTriggerEntered(enteringGameObject: LimbusGameObject?)
@@ -36,7 +47,7 @@ class CutSceneComponent(triggerID : Int = 0) : IDBasedTriggerCallbackComponent(t
     }
 
     /** Used to give note, when a conversation scene starts. */
-    val onConversationScene = mutableSetOf<((ConversationComponent, String, String) -> Unit)>()
+    val onConversationScene = mutableSetOf<((ConversationComponent) -> Unit)>()
 
     private val cutSceneElements = mutableSetOf<Pair<LimbusGameObject, ICutSceneElement>>()
     private var elementIterator = cutSceneElements.iterator()
@@ -65,10 +76,15 @@ class CutSceneComponent(triggerID : Int = 0) : IDBasedTriggerCallbackComponent(t
         CoreSL.world.add(personA)
         CoreSL.world.add(personB)
 
-        cutSceneElements.add(Pair(personA, ConversationScene()))
+        cutSceneElements.add(Pair(personA, ConversationScene("25_16")))
         cutSceneElements.add(Pair(personA, PathScene(gdxArrayOf(SkyDirection.ESTOP))))
-        cutSceneElements.add(Pair(personB, ConversationScene()))
-        cutSceneElements.add(Pair(personA, PathScene(gdxArrayOf(SkyDirection.W, SkyDirection.W, SkyDirection.W))))
+        cutSceneElements.add(Pair(personB, ConversationScene("25_17")))
+        cutSceneElements.add(Pair(personA, PathScene(gdxArrayOf(
+                SkyDirection.W,
+                SkyDirection.W,
+                SkyDirection.W,
+                SkyDirection.W,
+                SkyDirection.W))))
 
         elementIterator = cutSceneElements.iterator()
     }
@@ -99,19 +115,17 @@ class CutSceneComponent(triggerID : Int = 0) : IDBasedTriggerCallbackComponent(t
         }
     }
 
-    private class ConversationScene : ICutSceneElement
+    private class ConversationScene(val personID: String) : ICutSceneElement
     {
         override fun act(scene: CutSceneComponent, gameObject: LimbusGameObject)
         {
             println("Conversation started.")
             val conversationComponent = gameObject.getOrCreate<ConversationComponent>()
-            conversationComponent.name = "person_name_25_15"
-            conversationComponent.text = "person_25_15"
+            conversationComponent.name = "person_name_$personID"
+            conversationComponent.text = "person_$personID"
             conversationComponent.onConversationFinished.add { println("that works"); scene.nextElement() }
 
-            scene.onConversationScene.forEach {
-                it.invoke(conversationComponent, "person_name_25_15", "person_25_15")
-            }
+            scene.onConversationScene.forEach { it.invoke(conversationComponent) }
         }
     }
 

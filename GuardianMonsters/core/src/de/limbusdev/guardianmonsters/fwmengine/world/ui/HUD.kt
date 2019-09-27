@@ -103,7 +103,7 @@ class HUD
                 cutSceneObjects.forEach {
 
                     it.get<CutSceneComponent>()?.onConversationScene?.add{
-                        scene, name, text -> displayCutSceneConversation(scene, name, text)
+                        conversation -> displayCutSceneConversation(conversation)
                     }
                 }
                 foundCutSceneObjects = true
@@ -279,10 +279,10 @@ class HUD
         }
     }
 
-    fun displayCutSceneConversation(conversation: ConversationComponent, name: String, text: String)
+    fun displayCutSceneConversation(conversation: ConversationComponent)
     {
         interactionGameObject = conversation.gameObject
-        openConversation(text, name, gameArea.areaID)
+        openConversation(conversation.text, conversation.name, gameArea.areaID)
         println("displaying cut scene conversation")
     }
 

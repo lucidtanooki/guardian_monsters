@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-down" width="64" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="20" nextobjectid="495">
+<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-down" width="64" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="20" nextobjectid="498">
  <properties>
   <property name="musicIndex" type="int" value="2"/>
   <property name="musicType" value="town"/>
@@ -33,7 +33,7 @@
    eJztlj0OgjAUx1EnBuopDA4sXsHEj0Ooo3Fw8T7Ourh4HwdwcdE7yAslFlNp+7AW5P2Spi3Qj//7KPU8giAINY+u6x24Z9RzvQN3gP93LdYPnC3oH2vMeWCed2RmY7BEvrwt9qcde+u7ZuvL27J+Gbo2wvjSpv9PXOOaZe1lkPVXwevdhGu79svnUr2vwpCpvzFFtOt7zmHQ0b9BrFHmf1gTY/fJH+e0LjbzyjaDNI5uaUm472MhBsL0+bzB2kyA2E8k8T/TiO8m+5+ojsr/C1as6wLkeiyJ++RDLmDZs2JdF3KdYIOQn4NQcrvEX7LBhRVron3QPckMnf/uL+dxAcRMW+5fIk3TbCO36bwgiIw74t6EGVNXIsQ9FDOGIHR4AuVALxg=
   </data>
  </layer>
- <objectgroup id="6" name="animatedObjects0">
+ <objectgroup id="6" name="animatedObjects0" visible="0">
   <object id="334" name="animatedObject" x="448" y="352" width="16" height="16">
    <properties>
     <property name="index" value="flower2"/>
@@ -188,18 +188,6 @@
  </objectgroup>
  <objectgroup id="15" name="animatedTiles0"/>
  <objectgroup id="7" name="people0">
-  <object id="51" name="person" type="LimbusGameObject" x="208" y="176" width="16" height="16">
-   <properties>
-    <property name="CharacterSpriteComponent">male: true,
-index: 3</property>
-    <property name="ColliderComponent" value=""/>
-    <property name="ConversationComponent" value="enabled: true, name: person_name_25_7, text: person_25_7"/>
-    <property name="InputComponent" value=""/>
-    <property name="PathComponent">enabled: true,
-path: SSTOP</property>
-    <property name="TileWiseMovementComponent" value=""/>
-   </properties>
-  </object>
   <object id="202" name="person" type="LimbusGameObject" x="352" y="224" width="16" height="16">
    <properties>
     <property name="CharacterSpriteComponent">male: true,
@@ -284,7 +272,7 @@ path: NSTOP</property>
     <property name="TileWiseMovementComponent" value=""/>
    </properties>
   </object>
-  <object id="483" name="person" gid="4033" x="48" y="224" width="16" height="16">
+  <object id="483" name="person" gid="4033" x="48" y="240" width="16" height="16">
    <properties>
     <property name="CharacterSpriteComponent">male: true,
 index: 1</property>
@@ -366,7 +354,27 @@ path: SSTOP</property>
   </object>
   <object id="493" name="CutScene" gid="4034" x="480" y="224" width="16" height="16">
    <properties>
-    <property name="CutSceneComponent" value="triggerID: 494"/>
+    <property name="CutSceneComponent">triggerID: 494,
+people: [A,B]
+scenes:
+[
+&quot;A,say(25_16_0)&quot;,
+&quot;A,walk(ESTOP)&quot;,
+&quot;B,say(25_17_0)&quot;,
+&quot;A,walk(W,W,W,W)&quot;
+]</property>
+   </properties>
+  </object>
+  <object id="496" name="person" gid="4033" x="208" y="192" width="16" height="16">
+   <properties>
+    <property name="CharacterSpriteComponent">male: true,
+index: 3</property>
+    <property name="ColliderComponent" value=""/>
+    <property name="ConversationComponent" value="enabled: true, name: person_name_25_7, text: person_25_7"/>
+    <property name="InputComponent" value=""/>
+    <property name="PathComponent">enabled: true,
+path: SSTOP</property>
+    <property name="TileWiseMovementComponent" value=""/>
    </properties>
   </object>
  </objectgroup>
@@ -1023,21 +1031,9 @@ path: SSTOP</property>
     <property name="ConversationComponent" value="enabled: true, name: object_25_3_title, text: object_25_4_text"/>
    </properties>
   </object>
-  <object id="352" name="object" type="objectDescription" x="192" y="176" width="16" height="16">
-   <properties>
-    <property name="text" value="object_25_6_text"/>
-    <property name="title" value="object_25_6_title"/>
-   </properties>
-  </object>
   <object id="376" name="object" type="objectDescription" x="528" y="176" width="16" height="16">
    <properties>
     <property name="ConversationComponent" value="enabled: true, name: sign_25_3_title, text: sign_25_3_text"/>
-   </properties>
-  </object>
-  <object id="379" name="object" type="objectDescription" x="560" y="288" width="16" height="16">
-   <properties>
-    <property name="text" value="guardian_25_1_text"/>
-    <property name="title" value="guardian_25_1_title"/>
    </properties>
   </object>
   <object id="421" name="object" type="objectDescription" x="576" y="272" width="16" height="16">
@@ -1138,6 +1134,16 @@ path: SSTOP</property>
     <property name="ColliderComponent" value=""/>
     <property name="ConversationComponent" value="enabled: true, name: object_25_1_title, text: object_25_1_text"/>
     <property name="SpriteComponent" value=""/>
+   </properties>
+  </object>
+  <object id="495" gid="3969" x="192" y="192" width="16" height="16">
+   <properties>
+    <property name="ConversationComponent" value="text: object_25_6_text, name: object_25_6_title"/>
+   </properties>
+  </object>
+  <object id="497" gid="3969" x="560" y="304" width="16" height="16">
+   <properties>
+    <property name="ConversationComponent" value="text: guardian_25_1_text, name: guardian_25_1_title"/>
    </properties>
   </object>
  </objectgroup>

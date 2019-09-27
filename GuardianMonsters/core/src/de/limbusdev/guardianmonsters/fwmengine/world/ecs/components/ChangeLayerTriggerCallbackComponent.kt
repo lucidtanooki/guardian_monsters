@@ -14,8 +14,7 @@ class ChangeLayerTriggerCallbackComponent
         private val fromNorth : Int = -1,
         private val fromEast  : Int = -1,
         private val fromSouth : Int = 1,
-        private val fromWest  : Int = -1,
-        private val triggerID : Int = 0
+        private val fromWest  : Int = -1
 )
     : TriggerCallbackComponent()
 {
@@ -29,22 +28,20 @@ class ChangeLayerTriggerCallbackComponent
     {
         super.initialize()
 
-        val trigger = LimbusGameObject.objectByTiledID(triggerID) ?: return
-
-        trigger.get<BoxTrigger2DComponent>()?.onTriggerEntered?.add { go -> onTriggerEntered(go) }
+        gameObject.getOrCreate<BoxTrigger2DComponent>().onTriggerEntered.add { go -> onTriggerEntered(go) }
     }
 
     override fun onTriggerEntered(enteringGameObject: LimbusGameObject?)
     {
         if(enteringGameObject == null) { return }
-        val fromDirection = Compass4.translate(enteringGameObject.get<TileWiseMovementComponent>()?.currentMovement?.invert() ?: SkyDirection.S)
+        val fromDirection = Compass4.translate(enteringGameObject.get<TileWiseMovementComponent>()?.currentMovement ?: SkyDirection.S)
 
         enteringGameObject.transform.layer += when(fromDirection)
         {
-            Compass4.N -> fromNorth
-            Compass4.E -> fromEast
-            Compass4.S -> fromSouth
-            Compass4.W -> fromWest
+            Compass4.S -> fromNorth
+            Compass4.W -> fromEast
+            Compass4.N -> fromSouth
+            Compass4.E -> fromWest
         }
     }
 

@@ -7,7 +7,7 @@ import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusGameObject
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.parsers.IComponentParser
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.get
 
-class DisableGameObjectTriggerCallbackComponent(private val triggerID : Int = 0) : TriggerCallbackComponent()
+class DisableGameObjectTriggerCallbackComponent(triggerID : Int = 0) : IDBasedTriggerCallbackComponent(triggerID)
 {
     companion object
     {

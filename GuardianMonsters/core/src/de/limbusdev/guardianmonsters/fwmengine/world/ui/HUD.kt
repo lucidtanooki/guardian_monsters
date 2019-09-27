@@ -279,9 +279,9 @@ class HUD
         }
     }
 
-    fun displayCutSceneConversation(cutScene: CutSceneComponent, name: String, text: String)
+    fun displayCutSceneConversation(conversation: ConversationComponent, name: String, text: String)
     {
-        interactionGameObject = cutScene.gameObject
+        interactionGameObject = conversation.gameObject
         openConversation(text, name, gameArea.areaID)
         println("displaying cut scene conversation")
     }

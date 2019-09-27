@@ -38,8 +38,6 @@ class PersonComponent
         conversation.name = "person_name_$name"
         conversation.text = "person_$name"
         gameObject.add(conversation)
-
-        gameObject.add(CutSceneComponent())
     }
 
     object Parser : IComponentParser<PersonComponent>

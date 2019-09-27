@@ -27,6 +27,7 @@ object Components
         parsers[StepOnButtonComponent::class] = StepOnButtonComponent.Parser
         parsers[DisableGameObjectTriggerCallbackComponent::class] = DisableGameObjectTriggerCallbackComponent.Parser
         parsers[PersonComponent::class] = PersonComponent.Parser
+        parsers[CutSceneComponent::class] = CutSceneComponentParser
     }
 
 

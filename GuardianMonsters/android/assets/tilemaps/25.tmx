@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-down" width="64" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="20" nextobjectid="492">
+<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-down" width="64" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="20" nextobjectid="495">
  <properties>
   <property name="musicIndex" type="int" value="2"/>
   <property name="musicType" value="town"/>
@@ -176,6 +176,13 @@
     <property name="ColliderComponent" value=""/>
     <property name="DisableGameObjectTriggerCallbackComponent" value="triggerID: 479"/>
     <property name="SpriteComponent" value=""/>
+   </properties>
+  </object>
+  <object id="494" name="switch" gid="3556" x="480" y="288" width="16" height="16">
+   <properties>
+    <property name="BoxTrigger2DComponent" value="triggerID: 1, channel: HeroComponent"/>
+    <property name="SpriteComponent" value=""/>
+    <property name="StepOnButtonComponent" value="needsPermanentPressure: false"/>
    </properties>
   </object>
  </objectgroup>
@@ -357,6 +364,11 @@ path: SSTOP</property>
     <property name="TileWiseMovementComponent" value=""/>
    </properties>
   </object>
+  <object id="493" name="CutScene" gid="4034" x="480" y="224" width="16" height="16">
+   <properties>
+    <property name="CutSceneComponent" value="triggerID: 494"/>
+   </properties>
+  </object>
  </objectgroup>
  <layer id="8" name="shadows2" width="64" height="32">
   <data encoding="base64" compression="zlib">
@@ -373,7 +385,7 @@ path: SSTOP</property>
    eJztmdlOwzAQRS1RlvIf8FagEPgjeAOawm91oS38VcvSwDMnD6gmuOMJsYUAX+lIlaPOvZNN8sQYvbINY07hbOPrsfGmMXebNYr9Qs1axtzDQ+vz+iN9P8EzvHjOwXiH87QTPltZ9769IoZHQd+v8Gb1f7BlzCEcQReO4WTL/f9HMj3BM7wEzPdR97W9IrSHS5f0eQXX0IMc+nADt5VzcECmQziCLhzDSftrzT3O7X5Lv27XtfuXPJqoaz37A3ocwgjGcAcTmMLM6v+SDFdwDT3IoQ83cFvJd06PF44+XevVunb/kkcT5Vb/c3pclNefZ74HOfRhyVph9T/AfwgjGJfPJkxgCrMG2ap1T3dXhPKQ1NnGn35H1jtvwu8pZNurtTn+i/I68Tz2IIc+LFkrGmSr1rUVykP0p8+F432/ZK2w1jtcjyFZRlbGCb+nkO1+399V11YID9F/zXu+VGYdm5Nh4ci4ZK1o8I5eVzekRwh1hPsva3BvSnVDeSQlJSUlJf1Haecasfb1TTybzmS0c41Y+3oxm8ezzkzGJe1cQ7uvDymfZ52ZjEvauUadfX0o+TzrzGTWSTvXiLWvF7N5PLXZJWnnGrH29WI2j6c2uyTtXCPWvl7M5vHUZpeknWvE2teL2Tye2uyStHONWPt6ST5PbfakpJ9W3W8df011vnUkJcXQO1GR5Tw=
   </data>
  </layer>
- <objectgroup id="11" name="colliderWalls0">
+ <objectgroup id="11" name="colliderWalls0" visible="0">
   <object id="203" x="64" y="144" width="96" height="32">
    <properties>
     <property name="ColliderComponent" value=""/>
@@ -933,8 +945,8 @@ path: SSTOP</property>
   </object>
   <object id="468" name="layerTrigger" x="208" y="288" width="16" height="16">
    <properties>
-    <property name="BoxTrigger2DComponent" value="triggerID: 468, channel: TileWiseMovementComponent"/>
-    <property name="ChangeLayerTriggerCallbackComponent" value="triggerID: 468, fromNorth: -1, fromSouth: 1, fromWest: 0, fromEast: 0"/>
+    <property name="BoxTrigger2DComponent" value="channel: TileWiseMovementComponent"/>
+    <property name="ChangeLayerTriggerCallbackComponent" value="fromNorth: -1, fromSouth: 1, fromWest: 0, fromEast: 0"/>
     <property name="ColliderComponent" value="isTrigger: true"/>
    </properties>
   </object>

@@ -28,7 +28,7 @@ class Transform(var gameObject: LimbusGameObject) : IntRect(0,0,16,16)
 
     var onGrid : IntVec2
         get() = IntVec2(x / Constant.TILE_SIZE, y / Constant.TILE_SIZE)
-        set(value) { x = value.x ; y = value.y }
+        set(value) { x = value.x * Constant.TILE_SIZE; y = value.y * Constant.TILE_SIZE }
 
 
 

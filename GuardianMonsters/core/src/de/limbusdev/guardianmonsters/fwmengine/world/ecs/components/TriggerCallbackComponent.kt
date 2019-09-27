@@ -13,7 +13,7 @@ abstract class TriggerCallbackComponent : LimbusBehaviour()
 {
     companion object
     {
-        val defaultJson: String get() = "enabled: true, triggerID: 0"
+        val defaultJson: String get() = "enabled: true"
     }
 
     abstract fun onTriggerEntered(enteringGameObject: LimbusGameObject?);

@@ -1,11 +1,9 @@
 package de.limbusdev.guardianmonsters.fwmengine.world.ecs.components
 
-import com.badlogic.gdx.maps.MapObject
-import com.badlogic.gdx.utils.Json
+import de.limbusdev.guardianmonsters.CoreSL
 import de.limbusdev.guardianmonsters.enums.SkyDirection
-import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusBehaviour
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusGameObject
-import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.parsers.IComponentParser
+import de.limbusdev.utils.geometry.IntVec2
 
 import ktx.collections.gdxArrayOf
 
@@ -20,12 +18,23 @@ import ktx.collections.gdxArrayOf
  * + move people, objects and the camera
  * + open conversations
  */
-class CutSceneComponent : LimbusBehaviour()
+class CutSceneComponent(triggerID : Int = 0) : IDBasedTriggerCallbackComponent(triggerID)
 {
-    /** Used to give note, when a conversation scene starts. */
-    val onConversationScene = mutableSetOf<((CutSceneComponent, String, String) -> Unit)>()
+    companion object
+    {
+        const val className = "CutSceneComponent"
+        val defaultJson = "${IDBasedTriggerCallbackComponent.defaultJson}"
+    }
 
-    private val cutSceneElements = mutableListOf<ICutSceneElement>()
+    override fun onTriggerEntered(enteringGameObject: LimbusGameObject?)
+    {
+        nextElement()
+    }
+
+    /** Used to give note, when a conversation scene starts. */
+    val onConversationScene = mutableSetOf<((ConversationComponent, String, String) -> Unit)>()
+
+    private val cutSceneElements = mutableSetOf<Pair<LimbusGameObject, ICutSceneElement>>()
     private var elementIterator = cutSceneElements.iterator()
 
     override fun initialize()
@@ -33,17 +42,39 @@ class CutSceneComponent : LimbusBehaviour()
         super.initialize()
 
         // TODO create cut scene elements from tiled object data
-        cutSceneElements.add(PathScene())
-        cutSceneElements.add(ConversationScene())
-        cutSceneElements.add(PathScene())
+//        cutSceneElements.add(PathScene())
+//        cutSceneElements.add(ConversationScene())
+//        cutSceneElements.add(PathScene())
+//        elementIterator = cutSceneElements.iterator()
+
+        // Create People to act in this cut scene
+        val personA = LimbusGameObject("Person A")
+        val personB = LimbusGameObject("Person B")
+
+        personA.add(PersonComponent(true, 0, "25_16", "ESTOP"))
+        personB.add(PersonComponent(true, 1, "25_17", "WSTOP"))
+
+        // Setup their positions
+        personA.transform.onGrid = transform.onGrid + IntVec2(-1,0)
+        personB.transform.onGrid = transform.onGrid + IntVec2(1,0)
+
+        CoreSL.world.add(personA)
+        CoreSL.world.add(personB)
+
+        cutSceneElements.add(Pair(personA, ConversationScene()))
+        cutSceneElements.add(Pair(personB, ConversationScene()))
+        cutSceneElements.add(Pair(personA, PathScene()))
+
         elementIterator = cutSceneElements.iterator()
-        nextElement()   // TODO this should be initiated by a trigger
     }
 
-    private fun nextElement()
+    fun nextElement()
     {
         if(!elementIterator.hasNext()) { return }
-        elementIterator.next().act(this, gameObject)
+        val next = elementIterator.next()
+        val nextObject = next.first
+        val nextScene = next.second
+        nextScene.act(this, nextObject)
     }
 
     private interface ICutSceneElement
@@ -76,7 +107,9 @@ class CutSceneComponent : LimbusBehaviour()
             conversationComponent.text = "person_25_15"
             conversationComponent.onConversationFinished.add { println("that works"); scene.nextElement() }
 
-            scene.onConversationScene.forEach { it.invoke(scene, "person_name_25_15", "person_25_15") }
+            scene.onConversationScene.forEach {
+                it.invoke(conversationComponent, "person_name_25_15", "person_25_15")
+            }
         }
     }
 
@@ -93,16 +126,6 @@ class CutSceneComponent : LimbusBehaviour()
         override fun act(scene: CutSceneComponent, gameObject: LimbusGameObject)
         {
 
-        }
-    }
-
-    object Parser : IComponentParser<CutSceneComponent>
-    {
-        override fun createComponent() = CutSceneComponent()
-
-        override fun parseComponent(json: Json, mapObject: MapObject): CutSceneComponent?
-        {
-            return CutSceneComponent()
         }
     }
 }

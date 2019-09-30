@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-down" width="16" height="16" tilewidth="16" tileheight="16" infinite="0" nextlayerid="15" nextobjectid="80">
+<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-down" width="16" height="16" tilewidth="16" tileheight="16" infinite="0" nextlayerid="15" nextobjectid="86">
  <properties>
   <property name="musicIndex" type="int" value="2"/>
   <property name="musicType" value="town"/>
@@ -30,7 +30,7 @@
    eJxjYKAOqOJnYKgG4hp+CH+VJISuB/Ib+BHqYOItvKj6dwHV7AbiPVC1K6Hq9gP5B5D0r8Sh/xdQzW8g/sPPgBcslcPUv1gOvx5C4DGa/kdkmKcE1KMMxCoUumUgwQN5oB/kSdf3SB6Ck4A4GYgTgDgRjzl1/BCMCywA6l2IR/8+fggmF/zjh2AY+A5k7wDinfwQNqkApOcHEP8kUz8lAACQdCYi
   </data>
  </layer>
- <objectgroup id="5" name="animatedObjects1">
+ <objectgroup id="5" name="animatedObjects1" visible="0">
   <object id="43" name="animatedObject" x="64" y="144" width="16" height="16">
    <properties>
     <property name="index" value="pan1"/>
@@ -55,27 +55,21 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup id="6" name="people1" visible="0">
-  <object id="19" name="dad" type="person" x="112" y="80" width="16" height="16">
+ <objectgroup id="6" name="people1">
+  <object id="84" name="mum" gid="8129" x="192" y="64" width="16" height="16">
    <properties>
-    <property name="male" type="bool" value="true"/>
-    <property name="path" value="E,E,E,E,E,W,W,W,W,W"/>
-    <property name="personName" value="person_251_1_name"/>
-    <property name="spriteIndex" type="int" value="6"/>
-    <property name="startDir" value="S"/>
-    <property name="static" type="bool" value="false"/>
-    <property name="text" value="person_251_1"/>
+    <property name="PersonComponent">male: false,
+sprite: 1,
+name: 251_2,
+path: SSTOP</property>
    </properties>
   </object>
-  <object id="45" name="mum" type="person" x="192" y="48" width="16" height="16">
+  <object id="85" name="dad" gid="8129" x="112" y="96" width="16" height="16">
    <properties>
-    <property name="male" type="bool" value="false"/>
-    <property name="path" value="SSTOP"/>
-    <property name="personName" value="person_251_2_name"/>
-    <property name="spriteIndex" type="int" value="1"/>
-    <property name="startDir" value="S"/>
-    <property name="static" type="bool" value="true"/>
-    <property name="text" value="person_251_2"/>
+    <property name="PersonComponent">male: true,
+sprite: 6,
+name: 251_1,
+path: &quot;E,E,E,E,E,W,W,W,W,W&quot;</property>
    </properties>
   </object>
  </objectgroup>
@@ -99,7 +93,7 @@
    eJxjYBgFowACFskzMCyWH2hXjAJ6AgD0tAGE
   </data>
  </layer>
- <objectgroup id="11" name="colliderWalls1">
+ <objectgroup id="11" name="colliderWalls1" visible="0">
   <object id="1" x="0" y="0" width="224" height="48">
    <properties>
     <property name="ColliderComponent" value=""/>
@@ -211,93 +205,68 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup id="12" name="triggers1">
-  <object id="15" name="warpField" x="128" y="240" width="16" height="16">
+ <objectgroup id="12" name="triggers1" visible="0">
+  <object id="80" name="warpStart" x="128" y="240" width="16" height="16">
    <properties>
-    <property name="targetID" type="int" value="25"/>
-    <property name="targetWarpPointID" type="int" value="1"/>
+    <property name="ColliderComponent" value="isTrigger: true"/>
+    <property name="WarpStartComponent" value="targetMapID: 25, warpTargetID: 1"/>
    </properties>
   </object>
-  <object id="16" name="startField" x="128" y="224" width="16" height="16">
+  <object id="81" name="warpTarget" x="128" y="224" width="16" height="16">
    <properties>
-    <property name="fieldID" type="int" value="1"/>
+    <property name="WarpTargetComponent" value="warpTargetID: 1"/>
    </properties>
   </object>
-  <object id="17" name="warpField" x="224" y="16" width="16" height="16">
+  <object id="82" name="warpStart" x="224" y="16" width="16" height="16">
    <properties>
-    <property name="targetID" type="int" value="252"/>
-    <property name="targetWarpPointID" type="int" value="1"/>
+    <property name="ColliderComponent" value="isTrigger: true"/>
+    <property name="WarpStartComponent" value="targetMapID: 252, warpTargetID: 1"/>
    </properties>
   </object>
-  <object id="18" name="startField" x="224" y="32" width="16" height="16">
+  <object id="83" name="warpTarget" x="224" y="32" width="16" height="16">
    <properties>
-    <property name="fieldID" type="int" value="2"/>
-   </properties>
-  </object>
- </objectgroup>
- <objectgroup id="13" name="descriptions1" visible="0">
-  <object id="20" name="sign" type="objectDescription" x="128" y="48" width="16" height="16">
-   <properties>
-    <property name="text" value="sign_4_1_text"/>
-    <property name="title" value="sign_4_1_title"/>
-   </properties>
-  </object>
-  <object id="24" name="sign" type="objectDescription" x="32" y="48" width="16" height="16">
-   <properties>
-    <property name="text" value="sign_4_2_text"/>
-    <property name="title" value="sign_4_2_title"/>
-   </properties>
-  </object>
-  <object id="35" name="sign" type="objectDescription" x="144" y="48" width="16" height="16">
-   <properties>
-    <property name="text" value="sign_4_1_text"/>
-    <property name="title" value="sign_4_1_title"/>
-   </properties>
-  </object>
-  <object id="36" name="sign" type="objectDescription" x="144" y="32" width="16" height="16">
-   <properties>
-    <property name="text" value="sign_4_1_text"/>
-    <property name="title" value="sign_4_1_title"/>
-   </properties>
-  </object>
-  <object id="37" name="sign" type="objectDescription" x="128" y="32" width="16" height="16">
-   <properties>
-    <property name="text" value="sign_4_1_text"/>
-    <property name="title" value="sign_4_1_title"/>
-   </properties>
-  </object>
-  <object id="38" name="sign" type="objectDescription" x="48" y="48" width="16" height="16">
-   <properties>
-    <property name="text" value="sign_4_2_text"/>
-    <property name="title" value="sign_4_2_title"/>
-   </properties>
-  </object>
-  <object id="39" name="sign" type="objectDescription" x="64" y="48" width="16" height="16">
-   <properties>
-    <property name="text" value="sign_4_2_text"/>
-    <property name="title" value="sign_4_2_title"/>
-   </properties>
-  </object>
-  <object id="40" name="sign" type="objectDescription" x="64" y="32" width="16" height="16">
-   <properties>
-    <property name="text" value="sign_4_2_text"/>
-    <property name="title" value="sign_4_2_title"/>
-   </properties>
-  </object>
-  <object id="41" name="sign" type="objectDescription" x="32" y="32" width="16" height="16">
-   <properties>
-    <property name="text" value="sign_4_2_text"/>
-    <property name="title" value="sign_4_2_title"/>
-   </properties>
-  </object>
-  <object id="42" name="sign" type="objectDescription" x="48" y="32" width="16" height="16">
-   <properties>
-    <property name="text" value="sign_4_2_text"/>
-    <property name="title" value="sign_4_2_title"/>
+    <property name="WarpTargetComponent" value="warpTargetID: 2"/>
    </properties>
   </object>
  </objectgroup>
- <objectgroup id="14" name="animatedObjects2">
+ <objectgroup id="13" name="descriptions1">
+  <object id="20" name="description" type="objectDescription" x="128" y="48" width="16" height="16">
+   <properties>
+    <property name="ConversationComponent">enabled: true, 
+name: object_fireplace,
+text: object_fireplace_desc</property>
+   </properties>
+  </object>
+  <object id="24" name="description" type="objectDescription" x="32" y="48" width="16" height="16">
+   <properties>
+    <property name="ConversationComponent">enabled: true, 
+name: object_book,
+text: object_book_desc</property>
+   </properties>
+  </object>
+  <object id="35" name="description" type="objectDescription" x="144" y="48" width="16" height="16">
+   <properties>
+    <property name="ConversationComponent">enabled: true, 
+name: object_fireplace,
+text: object_fireplace_desc</property>
+   </properties>
+  </object>
+  <object id="38" name="description" type="objectDescription" x="48" y="48" width="16" height="16">
+   <properties>
+    <property name="ConversationComponent">enabled: true, 
+name: object_book,
+text: object_book_desc</property>
+   </properties>
+  </object>
+  <object id="39" name="description" type="objectDescription" x="64" y="48" width="16" height="16">
+   <properties>
+    <property name="ConversationComponent">enabled: true, 
+name: object_book,
+text: object_book_desc</property>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="14" name="animatedObjects2" visible="0">
   <object id="71" name="animatedObject" x="32" y="48" width="48" height="48">
    <properties>
     <property name="frameDuration" value="0.2"/>

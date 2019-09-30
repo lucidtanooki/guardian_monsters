@@ -3,7 +3,6 @@ package de.limbusdev.guardianmonsters.fwmengine.world.ecs.components
 import com.badlogic.gdx.maps.MapObject
 import com.badlogic.gdx.utils.Json
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusGameObject
-import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.parsers.CutSceneComponentParser
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.parsers.IComponentParser
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.get
 

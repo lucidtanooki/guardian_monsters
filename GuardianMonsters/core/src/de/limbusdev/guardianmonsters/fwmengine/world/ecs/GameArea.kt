@@ -231,29 +231,29 @@ class GameArea(val areaID: Int, startPosID: Int) : RenderingLimbusBehaviour()
         val mapHeight   = tiledMap.properties["height", 10]
 
         var borderGameObject = LimbusGameObject("BorderBottom")
-        borderGameObject.transform.x = -1 * Constant.TILE_SIZE
+        borderGameObject.transform.x = 0
         borderGameObject.transform.y = -1 * Constant.TILE_SIZE
-        borderGameObject.add(ColliderComponent(width = (mapWidth + 2) * Constant.TILE_SIZE, height = Constant.TILE_SIZE))
+        borderGameObject.add(ColliderComponent(width = mapWidth * Constant.TILE_SIZE, height = Constant.TILE_SIZE))
         borderGameObject.transform.layer = layerID
         CoreSL.world.add(borderGameObject)
 
         borderGameObject = LimbusGameObject("BorderTop")
-        borderGameObject.transform.x = -1 * Constant.TILE_SIZE
+        borderGameObject.transform.x = 0
         borderGameObject.transform.y = mapHeight * Constant.TILE_SIZE
-        borderGameObject.add(ColliderComponent(width = (mapWidth + 2) * Constant.TILE_SIZE, height = Constant.TILE_SIZE))
+        borderGameObject.add(ColliderComponent(width = mapWidth * Constant.TILE_SIZE, height = Constant.TILE_SIZE))
         borderGameObject.transform.layer = layerID
         CoreSL.world.add(borderGameObject)
 
         borderGameObject = LimbusGameObject("BorderLeft")
         borderGameObject.transform.x = -1 * Constant.TILE_SIZE
-        borderGameObject.transform.y = 0
+        borderGameObject.transform.y = -1 * Constant.TILE_SIZE
         borderGameObject.add(ColliderComponent(width = Constant.TILE_SIZE, height = (mapHeight + 2) * Constant.TILE_SIZE))
         borderGameObject.transform.layer = layerID
         CoreSL.world.add(borderGameObject)
 
         borderGameObject = LimbusGameObject("BorderRight")
         borderGameObject.transform.x = mapWidth * Constant.TILE_SIZE
-        borderGameObject.transform.y = 0
+        borderGameObject.transform.y = -1 * Constant.TILE_SIZE
         borderGameObject.add(ColliderComponent(width = Constant.TILE_SIZE, height = (mapHeight + 2) * Constant.TILE_SIZE))
         borderGameObject.transform.layer = layerID
         CoreSL.world.add(borderGameObject)

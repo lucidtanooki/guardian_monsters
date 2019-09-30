@@ -209,7 +209,7 @@ path: &quot;E,E,E,E,E,W,W,W,W,W&quot;</property>
    </properties>
   </object>
  </objectgroup>
- <objectgroup id="12" name="triggers1" visible="0">
+ <objectgroup id="12" name="triggers1">
   <object id="80" name="warpStart" x="128" y="240" width="16" height="16">
    <properties>
     <property name="ColliderComponent" value="isTrigger: true"/>

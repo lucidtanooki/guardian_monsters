@@ -13,11 +13,14 @@ abstract class CheckPointDependencyComponent(val checkPointIDs: Set<Int>) : Limb
     {
         super.initialize()
 
-        // TODO
-//        if(CoreSL.world.hero.get<HeroComponent>()?.checklist.containsAll(checkPointIDs))
-//        {
-//            doIfAllCheckPointsAreAchieved()
-//        }
+        val saveGame = CoreSL.world.hero.get<SaveGameComponent>()
+        if(saveGame != null)
+        {
+            if(checkPointIDs.all { it -> saveGame.isCheckPointEnabled(it) })
+            {
+                doIfAllCheckPointsAreAchieved()
+            }
+        }
     }
 
     abstract fun doIfAllCheckPointsAreAchieved()

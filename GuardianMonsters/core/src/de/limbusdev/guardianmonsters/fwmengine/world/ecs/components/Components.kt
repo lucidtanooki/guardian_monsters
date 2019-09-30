@@ -11,23 +11,25 @@ object Components
 
     init
     {
-        parsers[ColliderComponent::class] = ColliderComponentParser
-        parsers[ConversationComponent::class] = ConversationComponentParser
-        parsers[CharacterSpriteComponent::class] = CharacterSpriteComponentParser
-        parsers[WarpStartComponent::class] = WarpStartComponentParser
-        parsers[WarpTargetComponent::class] = WarpTargetComponentParser
-        parsers[PathComponent::class] = PathComponentParser
-        parsers[InputComponent::class] = InputComponentParser
-        parsers[TileWiseMovementComponent::class] = TileWiseMovementComponentParser
-        parsers[SpriteComponent::class] = SpriteComponentParser
-        parsers[SlidingComponent::class] = SlidingComponent.Parser
-        parsers[BoxTrigger2DComponent::class] = BoxTrigger2DComponent.Parser
+        parsers[ColliderComponent::class]           = ColliderComponentParser
+        parsers[ConversationComponent::class]       = ConversationComponentParser
+        parsers[CharacterSpriteComponent::class]    = CharacterSpriteComponentParser
+        parsers[WarpStartComponent::class]          = WarpStartComponentParser
+        parsers[WarpTargetComponent::class]         = WarpTargetComponentParser
+        parsers[PathComponent::class]               = PathComponentParser
+        parsers[InputComponent::class]              = InputComponentParser
+        parsers[TileWiseMovementComponent::class]   = TileWiseMovementComponentParser
+        parsers[SpriteComponent::class]             = SpriteComponentParser
+        parsers[SlidingComponent::class]            = SlidingComponent.Parser
+        parsers[BoxTrigger2DComponent::class]       = BoxTrigger2DComponent.Parser
         parsers[ChangeLayerTriggerCallbackComponent::class] = ChangeLayerTriggerCallbackComponent.Parser
-        parsers[RandomBattleAreaComponent::class] = RandomBattleAreaComponent.Parser
-        parsers[StepOnButtonComponent::class] = StepOnButtonComponent.Parser
+        parsers[RandomBattleAreaComponent::class]   = RandomBattleAreaComponent.Parser
+        parsers[StepOnButtonComponent::class]       = StepOnButtonComponent.Parser
         parsers[DisableGameObjectTriggerCallbackComponent::class] = DisableGameObjectTriggerCallbackComponent.Parser
-        parsers[PersonComponent::class] = PersonComponent.Parser
-        parsers[CutSceneComponent::class] = CutSceneComponentParser
+        parsers[PersonComponent::class]             = PersonComponent.Parser
+        parsers[CutSceneComponent::class]           = CutSceneComponentParser
+        parsers[CheckPointComponent::class]         = CheckPointComponent.Parser
+        parsers[CheckPointDependentDisableComponent::class] = CheckPointDependentDisableComponent.Parser
     }
 
 

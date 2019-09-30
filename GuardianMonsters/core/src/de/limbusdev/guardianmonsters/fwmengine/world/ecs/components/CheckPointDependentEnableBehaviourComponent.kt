@@ -1,7 +1,6 @@
-package de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.parsers
+package de.limbusdev.guardianmonsters.fwmengine.world.ecs.components
 
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusBehaviour
-import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.CheckPointDependencyComponent
 
 /**
  * Enables a component of the same game object if all check points are achieved.

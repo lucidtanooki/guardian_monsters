@@ -29,6 +29,7 @@ import de.limbusdev.guardianmonsters.services.Services
 import de.limbusdev.utils.extensions.f
 import de.limbusdev.utils.geometry.IntVec2
 import de.limbusdev.utils.logDebug
+import de.limbusdev.utils.logInfo
 import ktx.actors.then
 import kotlin.reflect.KClass
 
@@ -97,12 +98,12 @@ class HUD
         if(!foundCutSceneObjects)
         {
             val cutSceneObjects = CoreSL.world.getAllWith(CutSceneComponent::class)
-            println(cutSceneObjects.size)
             if(cutSceneObjects.isNotEmpty())
             {
                 cutSceneObjects.forEach {
 
                     it.get<CutSceneComponent>()?.onConversationScene?.add{
+
                         conversation -> displayCutSceneConversation(conversation)
                     }
                 }
@@ -180,6 +181,17 @@ class HUD
     private fun interactWithProximity()
     {
         interactionGameObject = findAdjacentObject(hero, ConversationComponent::class) ?: return
+
+        // Enable Checkpoint, if there is one
+        val checkPoint = interactionGameObject?.get<CheckPointComponent>()
+        if(checkPoint != null)
+        {
+            logInfo { "Checkpoint ${checkPoint.checkPointID} enabled." }
+            hero.get<SaveGameComponent>()?.enableCheckPoint(checkPoint.checkPointID)
+        }
+
+
+        // Open Conversation, if there is one
         val conversation = interactionGameObject?.get<ConversationComponent>() ?: return
         openConversation(conversation.text, conversation.name, gameArea.areaID)
         currentlyShownHUDWidget = HUDWidgets.SIGN
@@ -283,7 +295,7 @@ class HUD
     {
         interactionGameObject = conversation.gameObject
         openConversation(conversation.text, conversation.name, gameArea.areaID)
-        println("displaying cut scene conversation")
+        logInfo { "displaying cut scene conversation" }
     }
 
 

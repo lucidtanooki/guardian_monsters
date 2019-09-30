@@ -344,6 +344,7 @@ path: SSTOP</property>
    <properties>
     <property name="CharacterSpriteComponent">male: true,
 index: 4</property>
+    <property name="CheckPointDependentDisableComponent" value="checkPointIDs: [1,2]"/>
     <property name="ColliderComponent" value=""/>
     <property name="ConversationComponent" value="enabled: true, name: person_name_25_15, text: person_25_15"/>
     <property name="InputComponent" value=""/>

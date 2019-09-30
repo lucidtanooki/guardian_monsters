@@ -61,7 +61,9 @@ class EntityFactory(private val area: GameArea)
 
         // Game State
         val gameState = SaveGameManager.getCurrentGameState()
-        hero.add(SaveGameComponent(gameState))
+        hero.add(SaveGameComponent)
+        SaveGameComponent.gameState = gameState
+        SaveGameComponent.gameObject = hero
         if (restoreSave)
         {
             hero.transform.x = gameState.gridx * Constant.TILE_SIZE

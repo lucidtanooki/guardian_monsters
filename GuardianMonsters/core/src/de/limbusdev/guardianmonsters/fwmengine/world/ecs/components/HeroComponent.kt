@@ -1,13 +1,8 @@
 package de.limbusdev.guardianmonsters.fwmengine.world.ecs.components
 
-import com.badlogic.ashley.core.Component
-import com.badlogic.gdx.math.MathUtils
-import com.badlogic.gdx.utils.ArrayMap
 import de.limbusdev.guardianmonsters.Constant
 import de.limbusdev.guardianmonsters.CoreSL
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.LimbusBehaviour
-import de.limbusdev.guardianmonsters.guardians.battle.BattleFactory
-import de.limbusdev.guardianmonsters.services.Services
 import de.limbusdev.utils.geometry.IntVec2
 import de.limbusdev.utils.logDebug
 
@@ -28,11 +23,21 @@ class HeroComponent
         const val className = "TileWiseMovementComponent"
     }
 
+
+    // --------------------------------------------------------------------------------------------- Properties
+
+
+
     init
     {
         movementComponent.onGridSlotChanged.add { slot -> checkWarp(slot) }
         movementComponent.onGridSlotChanged.add { slot -> checkForHealingArea(slot) }
     }
+
+
+    // --------------------------------------------------------------------------------------------- Methods
+
+
 
     /**
      * Check, if there is a healing area at the current grid position

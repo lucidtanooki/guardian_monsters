@@ -1,13 +1,9 @@
 package de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.parsers
 
 import com.badlogic.gdx.maps.MapObject
-import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.Json
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.CutSceneComponent
-import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.DisableGameObjectTriggerCallbackComponent
-import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.TriggerCallbackComponent
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.get
-import ktx.collections.gdxArrayOf
 
 object CutSceneComponentParser : IComponentParser<CutSceneComponent>
 {

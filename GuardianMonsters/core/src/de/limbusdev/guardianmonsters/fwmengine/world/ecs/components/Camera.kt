@@ -1,6 +1,5 @@
 package de.limbusdev.guardianmonsters.fwmengine.world.ecs.components
 
-import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.maps.tiled.TiledMap
 import com.badlogic.gdx.math.MathUtils
 import de.limbusdev.guardianmonsters.Constant
@@ -22,28 +21,24 @@ import de.limbusdev.utils.geometry.IntRect
  *
  * @author Georg Eckert 2015-11-22
  */
-class CameraComponent(tiledMap: TiledMap) : LimbusBehaviour()
-{
-    companion object
-    {
-        const val className = "CameraComponent"
+class Camera(tiledMap: TiledMap) : LimbusBehaviour() {
+    companion object {
+        const val className = "Camera"
     }
+
     // --------------------------------------------------------------------------------------------- PROPERTIES
     private val mapOutline: IntRect    // Bounds of map to be rendered
 
-    init
-    {
+    init {
         // Get the maps bounds
-        val width = tiledMap.properties["width",  10] * Constant.TILE_SIZE
+        val width = tiledMap.properties["width", 10] * Constant.TILE_SIZE
         val height = tiledMap.properties["height", 10] * Constant.TILE_SIZE
         mapOutline = IntRect(0, 0, width, height)
     }
 
-    override fun update(deltaTime: Float)
-    {
+    override fun update(deltaTime: Float) {
         val camera = CoreSL.world.mainCamera
-        if (mapOutline.width >= camera.viewportWidth && mapOutline.height >= camera.viewportHeight)
-        {
+        if (mapOutline.width >= camera.viewportWidth && mapOutline.height >= camera.viewportHeight) {
             // If map is bigger than camera field
             camera.position.x = MathUtils.clamp(
                     transform.xf,
@@ -55,22 +50,7 @@ class CameraComponent(tiledMap: TiledMap) : LimbusBehaviour()
                     0 + camera.viewportHeight / 2,
                     mapOutline.height - camera.viewportHeight / 2)
 
-            // If camera field is bigger than map dimension
-            /*camera.position.set(
-                    MathUtils.lerp(camera.position.x, transform.xf, deltaTime*5),
-                    MathUtils.lerp(camera.position.y, transform.yf, deltaTime*5),
-                    0f
-            )*/
-        }
-        else
-        {
-            // Soft Camera Movement with Interpolation
-            // If camera field is bigger than map dimension
-//            camera.position.set(
-//                    MathUtils.lerp(camera.position.x, transform.nextX.f(), deltaTime),
-//                    MathUtils.lerp(camera.position.y, transform.nextY.f(), deltaTime),
-//                    0f
-//            )
+        } else {
             camera.position.set(transform.xf, transform.yf, 0f)
         }
     }

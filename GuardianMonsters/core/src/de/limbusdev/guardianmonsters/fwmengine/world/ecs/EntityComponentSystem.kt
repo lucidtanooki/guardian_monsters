@@ -1,15 +1,13 @@
 package de.limbusdev.guardianmonsters.fwmengine.world.ecs
 
-import com.badlogic.ashley.core.Engine
 import com.badlogic.ashley.core.Entity
 import com.badlogic.gdx.InputProcessor
-import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.utils.viewport.Viewport
 
 import de.limbusdev.guardianmonsters.CoreSL
 import de.limbusdev.guardianmonsters.battle.BattleScreen
 import de.limbusdev.guardianmonsters.fwmengine.managers.SaveGameManager
-import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.CameraComponent
+import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.Camera
 import de.limbusdev.guardianmonsters.fwmengine.world.ecs.components.InventoryComponent
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.HUD
 import de.limbusdev.guardianmonsters.fwmengine.world.ui.WorldScreen
@@ -71,7 +69,7 @@ class EntityComponentSystem
 
 
         // Camera System
-        val cameraComponent = CameraComponent(gameArea.tiledMap)
+        val cameraComponent = Camera(gameArea.tiledMap)
         CoreSL.world.hero.add(cameraComponent)
 
         // GameSaveManager

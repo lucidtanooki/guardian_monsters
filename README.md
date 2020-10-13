@@ -1,4 +1,4 @@
-![alt text](./GM_logo_space_2048.png "Logo")
+![alt text](./GM_logo_space_black_borders_2048.png "Logo")
 
 # Welcome
 

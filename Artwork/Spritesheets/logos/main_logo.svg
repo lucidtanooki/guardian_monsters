@@ -741,9 +741,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1"
-     inkscape:cx="-58.983979"
-     inkscape:cy="118.25537"
+     inkscape:zoom="2.8284271"
+     inkscape:cx="90.317974"
+     inkscape:cy="60.108778"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -1107,5 +1107,19 @@
          id="path2078"
          sodipodi:nodetypes="ccccc" />
     </g>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:3.62399px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0905995"
+       x="195.6956"
+       y="942.93549"
+       id="text1026"
+       inkscape:export-filename="C:\Users\Georg Eckert\Entwicklung\GuardianMonsters\GM_logo_hires.png"
+       inkscape:export-xdpi="764.32001"
+       inkscape:export-ydpi="764.32001"><tspan
+         sodipodi:role="line"
+         id="tspan1024"
+         x="195.6956"
+         y="942.93549"
+         style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-family:'Segoe UI';-inkscape-font-specification:'Segoe UI Light';stroke-width:0.0905995">BY GEORG ECKERT</tspan></text>
   </g>
 </svg>

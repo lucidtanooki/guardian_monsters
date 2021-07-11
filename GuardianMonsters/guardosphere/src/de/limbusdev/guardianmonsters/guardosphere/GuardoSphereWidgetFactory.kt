@@ -10,8 +10,8 @@ import de.limbusdev.guardianmonsters.scene2d.LabelLayout
 import de.limbusdev.guardianmonsters.scene2d.Scene2DLayout
 import de.limbusdev.guardianmonsters.scene2d.makeImage
 import de.limbusdev.guardianmonsters.scene2d.makeLabel
-import ktx.scene2d.table
 import ktx.style.get
+import ktx.scene2d.*
 
 /** Guardo Sphere Factory Methods */
 internal object GSFactory
@@ -47,7 +47,7 @@ internal object GSFactory
 
         fun createGuardoSphereGrid(parent: Group? = null) : Table
         {
-            val tbl = table {
+            val tbl = scene2d.table {
 
                 setSize(7*32f, 5*32f + 16f + 32f)
                 setPosition(14f, 10f)

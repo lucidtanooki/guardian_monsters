@@ -1,20 +1,15 @@
 package de.limbusdev.guardianmonsters.fwmengine.world.ui
 
 import com.badlogic.gdx.assets.loaders.FileHandleResolver
-import com.badlogic.gdx.files.FileHandle
 import com.badlogic.gdx.graphics.Texture
-import com.badlogic.gdx.maps.ImageResolver
+import com.badlogic.gdx.maps.ImageResolver.DirectImageResolver
 import com.badlogic.gdx.maps.tiled.TiledMap
 import com.badlogic.gdx.maps.tiled.TmxMapLoader
-import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.GdxRuntimeException
 import com.badlogic.gdx.utils.ObjectMap
-import com.badlogic.gdx.utils.TimeUtils
 import com.badlogic.gdx.utils.XmlReader
-
 import java.io.IOException
-import java.util.Calendar
-import java.util.Date
+import java.util.*
 
 /**
  * @author Georg Eckert 2017-02-12
@@ -34,15 +29,12 @@ class TmxDayTimeMapLoader : TmxMapLoader()
     {
         try
         {
-            convertObjectToTileSpace = parameters.convertObjectToTileSpace
-            flipY = parameters.flipY
             val tmxFile = resolve(fileName)
-            root = xml.parse(tmxFile)
-            root = manipulateSpritesheetPaths(root)
-            val textures = ObjectMap<String, Texture>()
-            val textureFiles = loadTilesets(root, tmxFile)
-            textureFiles.addAll(loadImages(root, tmxFile))
+            root = xml.parse( tmxFile )
+            root = manipulateSpriteSheetPaths(root)
 
+            val textures = ObjectMap<String, Texture>()
+            val textureFiles = getDependencyFileHandles(tmxFile)
             for (textureFile in textureFiles)
             {
                 val texture = Texture(textureFile, parameters.generateMipMaps)
@@ -50,8 +42,7 @@ class TmxDayTimeMapLoader : TmxMapLoader()
                 textures.put(textureFile.path(), texture)
             }
 
-            val imageResolver = ImageResolver.DirectImageResolver(textures)
-            val map = loadTilemap(root, tmxFile, imageResolver)
+            val map = loadTiledMap(tmxFile, parameters, DirectImageResolver(textures))
             map.setOwnedResources(textures.values().toArray())
             return map
         }
@@ -63,7 +54,7 @@ class TmxDayTimeMapLoader : TmxMapLoader()
 
 
     @Throws(IOException::class)
-    private fun manipulateSpritesheetPaths(root: XmlReader.Element): XmlReader.Element
+    private fun manipulateSpriteSheetPaths(root: XmlReader.Element): XmlReader.Element
     {
         for (tileset: XmlReader.Element in root.getChildrenByName("tileset"))
         {

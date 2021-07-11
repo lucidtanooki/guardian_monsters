@@ -18,7 +18,7 @@ public class AudioManager implements IAudioManager
 
     private String currentlyPlayingBGMusic;
 
-    private AnnotationAssetManager assets;
+    private final AnnotationAssetManager assets;
 
     public AudioManager()
     {
@@ -87,8 +87,8 @@ public class AudioManager implements IAudioManager
     @Override
     public Action createMuteAction(String musicPath)
     {
-        final Music muteable = assets.get(musicPath, Music.class);
-        Action muteAction = Actions.sequence(
+        final Music mutable = assets.get(musicPath, Music.class);
+        return Actions.sequence(
             Actions.delay(.005f),
             Actions.repeat(100,Actions.run(new Runnable() {
             private int vol = 100;
@@ -96,14 +96,13 @@ public class AudioManager implements IAudioManager
             public void run() {
                 if(vol > 0) {
                     --vol;
-                    muteable.setVolume(vol/100f);
+                    mutable.setVolume(vol/100f);
                 } else {
-                    muteable.stop();
-                    muteable.setVolume(1);
+                    mutable.stop();
+                    mutable.setVolume(1);
                 }
             }
         })));
-        return muteAction;
     }
 
     @Override

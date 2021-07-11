@@ -1,7 +1,7 @@
 buildscript {
     ext {
-        kotlinVersion = '1.3.31'
-        kotlinCoroutinesVersion = '1.2.1'
+        kotlinVersion = '1.4.32'
+        kotlinCoroutinesVersion = '1.4.3'
     }
     repositories {
         mavenLocal()
@@ -25,18 +25,11 @@ allprojects {
     version = '1.0'
     ext {
         appName = "Guardian Monsters"
-        gdxVersion = '1.9.9'
-        roboVMVersion = '2.3.5'
-        box2DLightsVersion = '1.4'
-        ashleyVersion = '1.7.0'
-        aiVersion = '1.8.0'
-        gdxUtilsVersion = '0.13.4'
-        autumnVersion = '1.9'
-        lmlVersion = '1.9.1.9.6'
+        gdxVersion = '1.10.0'
+        ashleyVersion = '1.7.4'
         gdxDialogsVersion = '1.2.1'
         kryoVersion = '4.0.0'
-        ktxVersion = '1.9.9-b2'
-        ktxVersionOld = '1.9.8-b5'
+        ktxVersion = '1.10.0-b1'
     }
 
     repositories {
@@ -60,11 +53,7 @@ project(":desktop") {
         implementation "com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-desktop"
         implementation "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-desktop"
         implementation "com.badlogicgames.gdx:gdx-tools:$gdxVersion"
-        implementation "com.badlogicgames.gdx:gdx-controllers-desktop:$gdxVersion"
-        implementation "com.badlogicgames.gdx:gdx-controllers-platform:$gdxVersion:natives-desktop"
         implementation "de.tomgrill.gdxdialogs:gdx-dialogs-desktop:$gdxDialogsVersion"
-        implementation "net.dermetfan.libgdx-utils:libgdx-utils:$gdxUtilsVersion"
-        implementation "net.dermetfan.libgdx-utils:libgdx-utils-box2d:$gdxUtilsVersion" // Box2D module (optional)
     }
 }
 
@@ -94,13 +83,8 @@ project(":android") {
         natives "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-arm64-v8a"
         natives "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-x86"
         natives "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-x86_64"
-        implementation "com.badlogicgames.gdx:gdx-controllers:$gdxVersion"
-        implementation "com.badlogicgames.gdx:gdx-controllers-android:$gdxVersion"
-        implementation "com.badlogicgames.box2dlights:box2dlights:$box2DLightsVersion"
         implementation "com.badlogicgames.ashley:ashley:$ashleyVersion"
         implementation "de.tomgrill.gdxdialogs:gdx-dialogs-android:$gdxDialogsVersion"
-        implementation "net.dermetfan.libgdx-utils:libgdx-utils:$gdxUtilsVersion"
-        implementation "net.dermetfan.libgdx-utils:libgdx-utils-box2d:$gdxUtilsVersion" // Box2D module (optional)
     }
 }
 
@@ -127,7 +111,6 @@ project(":core") {
         implementation "com.badlogicgames.gdx:gdx:$gdxVersion"
         implementation "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
         implementation "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
-        implementation "com.badlogicgames.gdx:gdx-controllers:$gdxVersion"
         implementation "io.github.libktx:ktx-actors:$ktxVersion"
         implementation "io.github.libktx:ktx-app:$ktxVersion"
         implementation "io.github.libktx:ktx-ashley:$ktxVersion"
@@ -136,7 +119,7 @@ project(":core") {
         implementation "io.github.libktx:ktx-box2d:$ktxVersion"
         implementation "io.github.libktx:ktx-collections:$ktxVersion"
         implementation "io.github.libktx:ktx-freetype:$ktxVersion"
-        implementation "io.github.libktx:ktx-freetype-async:$ktxVersionOld"
+        implementation "io.github.libktx:ktx-freetype-async:$ktxVersion"
         implementation "io.github.libktx:ktx-graphics:$ktxVersion"
         implementation "io.github.libktx:ktx-i18n:$ktxVersion"
         implementation "io.github.libktx:ktx-inject:$ktxVersion"
@@ -147,17 +130,9 @@ project(":core") {
         implementation "io.github.libktx:ktx-vis:$ktxVersion"
         implementation "io.github.libktx:ktx-vis-style:$ktxVersion"
 
-        implementation "com.badlogicgames.box2dlights:box2dlights:$box2DLightsVersion"
         implementation "com.badlogicgames.ashley:ashley:$ashleyVersion"
-        implementation "com.underwaterapps.overlap2druntime:overlap2d-runtime-libgdx:0.1.0"
-        implementation "net.dermetfan.libgdx-utils:libgdx-utils:$gdxUtilsVersion"
-        implementation "net.dermetfan.libgdx-utils:libgdx-utils-box2d:$gdxUtilsVersion"
         implementation "de.tomgrill.gdxdialogs:gdx-dialogs-core:$gdxDialogsVersion"
         implementation "com.esotericsoftware:kryo:$kryoVersion"
-        implementation "net.dermetfan.libgdx-utils:libgdx-utils:$gdxUtilsVersion"
-        implementation "net.dermetfan.libgdx-utils:libgdx-utils-box2d:$gdxUtilsVersion" // Box2D module (optional)
-        implementation "com.github.czyzby:gdx-lml:$lmlVersion"
-        implementation "com.github.czyzby:gdx-lml-vis:$lmlVersion"
     }
 }
 
@@ -214,14 +189,9 @@ project(":ui") {
         implementation "io.github.libktx:ktx-scene2d:$ktxVersion"
         implementation "io.github.libktx:ktx-style:$ktxVersion"
         implementation "com.badlogicgames.gdx:gdx:$gdxVersion"
-        implementation "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
-        implementation "com.badlogicgames.box2dlights:box2dlights:$box2DLightsVersion"
         implementation "com.badlogicgames.ashley:ashley:$ashleyVersion"
         implementation "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
-        implementation "com.badlogicgames.gdx:gdx-controllers:$gdxVersion"
         implementation "com.esotericsoftware:kryo:$kryoVersion"
-        implementation "com.github.czyzby:gdx-lml:$lmlVersion"
-        implementation "com.github.czyzby:gdx-lml-vis:$lmlVersion"
     }
 }
 
@@ -236,11 +206,8 @@ project(":services") {
         implementation project(":assets")
         implementation project(":media")
         implementation "com.badlogicgames.gdx:gdx:$gdxVersion"
-        implementation "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
-        implementation "com.badlogicgames.box2dlights:box2dlights:$box2DLightsVersion"
         implementation "com.badlogicgames.ashley:ashley:$ashleyVersion"
         implementation "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
-        implementation "com.badlogicgames.gdx:gdx-controllers:$gdxVersion"
         implementation "com.esotericsoftware:kryo:$kryoVersion"
     }
 }
@@ -265,11 +232,8 @@ project(":battle") {
         implementation "io.github.libktx:ktx-scene2d:$ktxVersion"
         implementation "io.github.libktx:ktx-style:$ktxVersion"
         implementation "com.badlogicgames.gdx:gdx:$gdxVersion"
-        implementation "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
-        implementation "com.badlogicgames.box2dlights:box2dlights:$box2DLightsVersion"
         implementation "com.badlogicgames.ashley:ashley:$ashleyVersion"
         implementation "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
-        implementation "com.badlogicgames.gdx:gdx-controllers:$gdxVersion"
         implementation "com.esotericsoftware:kryo:$kryoVersion"
         testCompile "junit:junit:+"
     }
@@ -294,13 +258,8 @@ project(":inventory") {
         implementation "io.github.libktx:ktx-scene2d:$ktxVersion"
         implementation "io.github.libktx:ktx-style:$ktxVersion"
         implementation "com.badlogicgames.gdx:gdx:$gdxVersion"
-        implementation "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
-        implementation "com.badlogicgames.box2dlights:box2dlights:$box2DLightsVersion"
         implementation "com.badlogicgames.ashley:ashley:$ashleyVersion"
         implementation "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
-        implementation "com.badlogicgames.gdx:gdx-controllers:$gdxVersion"
-        implementation "com.github.czyzby:gdx-lml:$lmlVersion"
-        implementation "com.github.czyzby:gdx-lml-vis:$lmlVersion"
     }
 }
 
@@ -338,8 +297,6 @@ project(":media") {
         implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
         implementation "com.badlogicgames.gdx:gdx:$gdxVersion"
         implementation "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
-        implementation "net.dermetfan.libgdx-utils:libgdx-utils:$gdxUtilsVersion"
-        implementation "net.dermetfan.libgdx-utils:libgdx-utils-box2d:$gdxUtilsVersion" // Box2D module (optional)
     }
 }
 
@@ -351,8 +308,9 @@ project(":assets") {
         implementation project(":guardians")
         implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
         implementation "com.badlogicgames.gdx:gdx:$gdxVersion"
-        implementation "net.dermetfan.libgdx-utils:libgdx-utils:$gdxUtilsVersion"
-        implementation "net.dermetfan.libgdx-utils:libgdx-utils-box2d:$gdxUtilsVersion" // Box2D module (optional)
+        implementation "io.github.libktx:ktx-assets:$ktxVersion"
+        implementation "io.github.libktx:ktx-assets-async:$ktxVersion"
+        api "com.github.tommyettinger:libgdx-utils:0.13.7"
     }
 }
 

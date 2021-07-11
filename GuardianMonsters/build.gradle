@@ -1,19 +1,13 @@
 buildscript {
-    ext {
-        kotlinVersion = '1.4.32'
-        kotlinCoroutinesVersion = '1.4.3'
-    }
     repositories {
         mavenLocal()
         mavenCentral()
-        maven { url "https://plugins.gradle.org/m2/" }
-        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
         google()
-        jcenter()
-        google()
+        gradlePluginPortal()
+        maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.1.2'
+        classpath "com.android.tools.build:gradle:$androidPluginVersion"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
     }
 }
@@ -23,14 +17,6 @@ allprojects {
     apply plugin: "idea"
 
     version = '1.0'
-    ext {
-        appName = "Guardian Monsters"
-        gdxVersion = '1.10.0'
-        ashleyVersion = '1.7.4'
-        gdxDialogsVersion = '1.2.1'
-        kryoVersion = '4.0.0'
-        ktxVersion = '1.10.0-b1'
-    }
 
     repositories {
         mavenLocal()
@@ -43,7 +29,6 @@ allprojects {
 
 project(":desktop") {
     apply plugin: "kotlin"
-
 
     dependencies {
         implementation project(":core")
